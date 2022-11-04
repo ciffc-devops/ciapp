@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Wildfire ICS Assist")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("ICS Canada www.icscanada.ca")]
 [assembly: AssemblyProduct("Wildfire ICS Assist")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
+[assembly: AssemblyCopyright("2022 © Canadian Interagency Forest Fire Centre")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

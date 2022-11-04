@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class Form1 : Form
+    public partial class IncidentDetailsForm : Form
     {
-        public Form1()
+        public IncidentDetailsForm()
         {
             InitializeComponent();
         }
