@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>WFICSAssist_Class_Library</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wildfire ICS Assist\Wildfire ICS Assist.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EventHandling\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetworkCommsDotNet" Version="3.0.3" />
+  </ItemGroup>
+
+</Project>
