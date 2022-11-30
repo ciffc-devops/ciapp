@@ -54,30 +54,7 @@ namespace WFICSAssist_Class_Library.Utilities
                 if (!members.Any(o => o.PersonID == member.PersonID) && !listAlreadyContainsMember(members, member)) { members.Add(member); }
             }
 
-            foreach (Assignment a in task.allAssignments)
-            {
-                foreach (TeamMember tm in a.teamMembers)
-                {
-
-                    //could filter for members with the same email address
-                    //&& !members.Where(o=>o.Email.Equals(tm.Email, StringComparison.InvariantCultureIgnoreCase)).Any()
-                    //however no idea what implication that will have on things like org charts and assignments where the ID is used as the index.
-                    //Need to build some sort of equivalency table? ugh!
-                    if (!members.Any(o => o.PersonID == tm.PersonID) && !listAlreadyContainsMember(members, tm)) { members.Add(tm); }
-                    /*
-                    if (tm != null && !members.Contains(tm) && !string.IsNullOrEmpty(tm.Name))
-                    {
-                        if (!string.IsNullOrEmpty(tm.Email) && !members.Where(o => o.Email.Equals(tm.Email, StringComparison.InvariantCultureIgnoreCase)).Any())
-                        {
-                            members.Add(tm);
-                        }
-                        else
-                        {
-                            members.Add(tm);
-                        }
-                    }*/
-                }
-            }
+           
             foreach (OrganizationChart orgchart in task.allOrgCharts)
             {
                 foreach (ICSRole role in orgchart.AllRoles)
@@ -201,21 +178,7 @@ namespace WFICSAssist_Class_Library.Utilities
                     }
                 }
             }
-            if (task.allAssignments.Any(o => o.OpPeriod == opPeriod && o.currentStatus.Active && o.teamMembers != null && o.teamMembers.Any(t => t.PersonID != Guid.Empty)))
-            {
-                foreach (Assignment assignment in task.allAssignments.Where(o => o.OpPeriod == opPeriod && o.currentStatus.Active && o.teamMembers != null && o.teamMembers.Any(t => t.PersonID != Guid.Empty)))
-                {
-                    foreach (TeamMember member in assignment.teamMembers.Where(o => o.PersonID != Guid.Empty))
-                    {
-                        if (!members.Any(o => o.PersonID == member.PersonID && !string.IsNullOrEmpty(member.Name)))
-                        {
-                            members.Add(member);
-                        }
-                    }
-                }
-            }
-
-
+         
             foreach (TeamMember member in members)
             {
                 int signInCount = task.AllSignInRecords.Where(o => o.IsSignIn && o.teamMember.PersonID == member.PersonID && o.OpPeriod == opPeriod).Count();
@@ -278,24 +241,11 @@ namespace WFICSAssist_Class_Library.Utilities
 
 
 
-            List<Assignment> memberAssignments = task.allAssignments.Where(o => o.OpPeriod == opPeriod && o.hasTeamMember(member.PersonID) && o.currentStatus.StatusID != 7).ToList();
 
             DateTime lastDate = DateTime.MinValue;
-            foreach (Assignment assignment in memberAssignments)
-            {
-                CommsLogEntry entry = task.GetLastCommsEntry(assignment.AssignmentID, end_date);
-                if (entry.LogDate > lastDate) //entry.status != null && 
-                {
-                    lastDate = entry.LogDate;
-                    status.currentAssignment = assignment;
-                }
-            }
-            if (status.AssignmentID == Guid.Empty && memberAssignments.Count > 0)
-            {
-                status.currentAssignment = memberAssignments.OrderBy(o => o.AssignmentNumber).First();
-            }
 
             DateTime today = DateTime.Now;
+            /*
             if (status.SignOutTime < DateTime.MaxValue && status.SignOutTime > status.SignInTime && status.SignOutTime <= today)
             {
                 Assignment signedout = new Assignment();
@@ -317,7 +267,7 @@ namespace WFICSAssist_Class_Library.Utilities
                 unassigned.currentStatus = new TeamStatus(99, "", false);
                 status.currentAssignment = unassigned;
             }
-
+            */
             //ics roles
             if (task.allOrgCharts.Where(o => o.OpPeriod == opPeriod).Count() > 0)
             {

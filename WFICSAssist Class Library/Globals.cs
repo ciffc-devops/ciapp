@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WFICSAssist_Class_Library.Interfaces;
 
 namespace WFICSAssist_Class_Library
 {

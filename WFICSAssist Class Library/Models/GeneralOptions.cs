@@ -1,9 +1,11 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using WFICSAssist_Class_Library.Networking;
 
 namespace WFICSAssist_Class_Library.Models
 {
@@ -24,8 +26,8 @@ namespace WFICSAssist_Class_Library.Models
         [ProtoMember(12)] private bool b_autoSave = true;
         [ProtoMember(13)] private bool b_includeSafetyWithIAP = true;
         [ProtoMember(14)] private string s_defaultSaveLocation = null;
-        [ProtoMember(15)] private User u_sync_user = new User();
-        [ProtoMember(16)] private Guid g_sync_id = Guid.Empty;
+        // [ProtoMember(15)] private User u_sync_user = new User();
+        // [ProtoMember(16)] private Guid g_sync_id = Guid.Empty;
         [ProtoMember(17)] private int i_checkinInterval = 60;
         [ProtoMember(18)] private int i_eccCheckinInterval = 120;
         [ProtoMember(19)] private string s_lastServerIP = null;
@@ -46,8 +48,8 @@ namespace WFICSAssist_Class_Library.Models
         [ProtoMember(34)] private bool _includeExecutionIn204Briefings;
         [ProtoMember(35)] private bool _includeOtherContactsWithIAP;
         [ProtoMember(36)] private bool _promptForInitialSave;
-        [ProtoMember(37)] private List<PresetTeamAssignment> l_allPresetTeamAssignments = new List<PresetTeamAssignment>();
-        [ProtoMember(38)] private List<PresetSafetyPlan> l_allPresetSafetyPlans = new List<PresetSafetyPlan>();
+        // [ProtoMember(37)] private List<PresetTeamAssignment> l_allPresetTeamAssignments = new List<PresetTeamAssignment>();
+        // [ProtoMember(38)] private List<PresetSafetyPlan> l_allPresetSafetyPlans = new List<PresetSafetyPlan>();
         [ProtoMember(39)] private Briefing b_briefingTemplate = new Briefing(false);
         [ProtoMember(40)] private List<IncidentObjective> l_allPresetObjectives = new List<IncidentObjective>();
         [ProtoMember(41)] private List<Hospital> l_allHospitals = new List<Hospital>();
@@ -59,9 +61,9 @@ namespace WFICSAssist_Class_Library.Models
         [ProtoMember(47)] private List<Contact> l_AllContacts = new List<Contact>();
         [ProtoMember(48)] private List<Vehicle> l_AllVehicles = new List<Vehicle>();
         [ProtoMember(49)] private List<string> l_recentFilePaths = new List<string>();
-        [ProtoMember(50)] private List<EquipmentCategory> _AllEquipmentCategories = new List<EquipmentCategory>();
-        [ProtoMember(51)] private List<Equipment> _AllEquipment = new List<Equipment>();
-        [ProtoMember(52)] private List<EquipmentSet> _AllEquipmentSets = new List<EquipmentSet>();
+        // [ProtoMember(50)] private List<EquipmentCategory> _AllEquipmentCategories = new List<EquipmentCategory>();
+        // [ProtoMember(51)] private List<Equipment> _AllEquipment = new List<Equipment>();
+        // [ProtoMember(52)] private List<EquipmentSet> _AllEquipmentSets = new List<EquipmentSet>();
         [ProtoMember(53)] private ICSRole _defaultICSRole = new ICSRole();
         [ProtoMember(54)] private bool _debriefPOD;
         [ProtoMember(55)] private bool _useOldTeamAssignmentScreen;
@@ -94,8 +96,8 @@ namespace WFICSAssist_Class_Library.Models
         public string DefaultSaveLocation { get { return s_defaultSaveLocation; } set { s_defaultSaveLocation = value; appSettingsChanged = true; } }
         public string DefaultBackupLocation { get { return _DefaultBackupFolder; } set { _DefaultBackupFolder = value; appSettingsChanged = true; } }
 
-        public User SyncUser { get { return u_sync_user; } set { u_sync_user = value; appSettingsChanged = true; } }
-        public Guid SyncID { get { return g_sync_id; } set { g_sync_id = value; appSettingsChanged = true; } }
+        //  public User SyncUser { get { return u_sync_user; } set { u_sync_user = value; appSettingsChanged = true; } }
+        //  public Guid SyncID { get { return g_sync_id; } set { g_sync_id = value; appSettingsChanged = true; } }
         public int CheckinInterval { get { return i_checkinInterval; } set { i_checkinInterval = value; appSettingsChanged = true; } }
         public int ECCCheckinInterval { get { return i_eccCheckinInterval; } set { i_eccCheckinInterval = value; appSettingsChanged = true; } }
         public string LastServerIP { get { return s_lastServerIP; } set { s_lastServerIP = value; appSettingsChanged = true; } }
@@ -111,11 +113,11 @@ namespace WFICSAssist_Class_Library.Models
         public Guid OrganizationID { get => _OrganizationID; set { _OrganizationID = value; appSettingsChanged = true; } }
 
         public DateTime LastUpdateCheck { get { return d_lastUpdateCheck; } set { d_lastUpdateCheck = value; appSettingsChanged = true; } }
-        public List<PresetTeamAssignment> allPresetTeamAssignments { get { return l_allPresetTeamAssignments; } set { l_allPresetTeamAssignments = value; appSettingsChanged = true; } }
-        public List<PresetTeamAssignment> sortedAllPresetTeamAssignments { get { return l_allPresetTeamAssignments.OrderBy(o => o.AssignmentName).ToList(); } }
+        //   public List<PresetTeamAssignment> allPresetTeamAssignments { get { return l_allPresetTeamAssignments; } set { l_allPresetTeamAssignments = value; appSettingsChanged = true; } }
+        //   public List<PresetTeamAssignment> sortedAllPresetTeamAssignments { get { return l_allPresetTeamAssignments.OrderBy(o => o.AssignmentName).ToList(); } }
         public List<Hospital> AllHospitals { get { return l_allHospitals; } set { l_allHospitals = value; appSettingsChanged = true; } }
         public List<AmbulanceService> AllAmbulanceServices { get { return l_allAmbulanceServices; } set { l_allAmbulanceServices = value; appSettingsChanged = true; } }
-        public List<PresetSafetyPlan> allPresetSafetyPlans { get { return l_allPresetSafetyPlans; } set { l_allPresetSafetyPlans = value; appSettingsChanged = true; } }
+        //    public List<PresetSafetyPlan> allPresetSafetyPlans { get { return l_allPresetSafetyPlans; } set { l_allPresetSafetyPlans = value; appSettingsChanged = true; } }
         public Briefing BriefingTemplate { get { return b_briefingTemplate; } set { b_briefingTemplate = value; appSettingsChanged = true; } }
         public List<IncidentObjective> allPresetObjectives { get { return l_allPresetObjectives; } set { l_allPresetObjectives = value; appSettingsChanged = true; } }
         public List<CommsPlanItem> allCommsPlanItems { get { return l_allCommsPlanItems; } set { l_allCommsPlanItems = value; appSettingsChanged = true; } }
@@ -125,9 +127,9 @@ namespace WFICSAssist_Class_Library.Models
         public List<CannedCommsLogEntry> AllCannedCommsLogEntries { get => l_AllCannedCommsEntries; set => l_AllCannedCommsEntries = value; }
         public List<Contact> AllContacts { get => l_AllContacts; set => l_AllContacts = value; }
         public List<Vehicle> AllVehicles { get => l_AllVehicles; set => l_AllVehicles = value; }
-        public List<EquipmentCategory> AllEquipmentCategories { get => _AllEquipmentCategories; set => _AllEquipmentCategories = value; }
-        public List<Equipment> AllEquipment { get => _AllEquipment; set => _AllEquipment = value; }
-        public List<EquipmentSet> AllEquipmentSets { get => _AllEquipmentSets; set => _AllEquipmentSets = value; }
+        //   public List<EquipmentCategory> AllEquipmentCategories { get => _AllEquipmentCategories; set => _AllEquipmentCategories = value; }
+        //   public List<Equipment> AllEquipment { get => _AllEquipment; set => _AllEquipment = value; }
+        //   public List<EquipmentSet> AllEquipmentSets { get => _AllEquipmentSets; set => _AllEquipmentSets = value; }
 
 
         public bool ECCReminderThisDevice { get => _ECCReminderThisDevice; set { _ECCReminderThisDevice = value; appSettingsChanged = true; } }
@@ -214,115 +216,5 @@ namespace WFICSAssist_Class_Library.Models
         }
     }
 
-    public class ReflexTaskData
-    {
-        private string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SAR ICS Form Helper");
 
-        private bool settingsChanged;
-        private List<ReflexTask> l_allTasks = new List<ReflexTask>();
-
-        public void setSettingsChanged() { settingsChanged = true; }
-
-
-        public List<ReflexTask> allTasks { get { return l_allTasks; } set { l_allTasks = value; settingsChanged = true; } }
-        public List<SubjectCategory> getAllSubjectCategories()
-        {
-
-            List<SubjectCategory> allCategories = new List<SubjectCategory>();
-            foreach (ReflexTask task in allTasks)
-            {
-                foreach (string s in task.applicableCategories)
-                {
-                    if (allCategories.Where(o => o.CategoryName.ToLower() == s.ToLower()).Count() <= 0)
-                    {
-                        allCategories.Add(new SubjectCategory(s));
-                    }
-                }
-            }
-            return allCategories;
-        }
-
-
-
-
-        // Serializes the class to the config file
-        // if any of the settings have changed.
-        public bool SaveAppSettings()
-        {
-            System.IO.Directory.CreateDirectory(path);
-
-            if (this.settingsChanged)
-            {
-                StreamWriter myWriter = null;
-                XmlSerializer mySerializer = null;
-                try
-                {
-                    // Create an XmlSerializer for the 
-                    // ApplicationSettings type.
-                    mySerializer = new XmlSerializer(
-                      typeof(ReflexTaskData));
-                    myWriter =
-                      new StreamWriter(Path.Combine(path, "reflaxtasking.xml"), false);
-                    // Serialize this instance of the ApplicationSettings 
-                    // class to the config file.
-                    mySerializer.Serialize(myWriter, this);
-                }
-                catch (Exception)
-                {
-                    //MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    // If the FileStream is open, close it.
-                    if (myWriter != null)
-                    {
-                        myWriter.Close();
-                    }
-                }
-            }
-            return settingsChanged;
-        }
-
-        // Deserializes the class from the config file.
-        public bool LoadAppSettings()
-        {
-            XmlSerializer mySerializer = null;
-            FileStream myFileStream = null;
-            bool fileExists = false;
-            System.IO.Directory.CreateDirectory(path);
-            try
-            {
-                // Create an XmlSerializer for the ApplicationSettings type.
-                mySerializer = new XmlSerializer(typeof(ReflexTaskData));
-                FileInfo fi = new FileInfo(Path.Combine(path, "reflaxtasking.xml"));
-                // If the config file exists, open it.
-                if (fi.Exists)
-                {
-                    myFileStream = fi.OpenRead();
-                    // Create a new instance of the ApplicationSettings by
-                    // deserializing the config file.
-                    ReflexTaskData myAppSettings =
-                      (ReflexTaskData)mySerializer.Deserialize(myFileStream);
-                    // Assign the property values to this instance of 
-                    // the ApplicationSettings class.
-                    this.l_allTasks = myAppSettings.allTasks;
-                    fileExists = true;
-                }
-            }
-            catch (Exception)
-            {
-                //MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                // If the FileStream is open, close it.
-                if (myFileStream != null)
-                {
-                    myFileStream.Close();
-                }
-            }
-
-            return fileExists;
-        }
-    }
 }
