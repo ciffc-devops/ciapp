@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WFICSAssist_Class_Library.Interfaces;
+using WF_ICS_ClassLibrary.Interfaces;
 
-namespace WFICSAssist_Class_Library
+namespace WF_ICS_ClassLibrary
 {
     public static class Globals
     {

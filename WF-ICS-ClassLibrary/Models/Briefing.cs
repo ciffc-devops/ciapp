@@ -6,7 +6,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WFICSAssist_Class_Library.Models
+namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]

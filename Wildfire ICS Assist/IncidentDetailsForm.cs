@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary;
 
 namespace Wildfire_ICS_Assist
 {
@@ -15,6 +16,19 @@ namespace Wildfire_ICS_Assist
         public IncidentDetailsForm()
         {
             InitializeComponent();
+        }
+
+        private void llProgramURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string target = Globals.ProgramURL;
+            if (null != target)
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            else
+            {
+                MessageBox.Show("Item clicked: " + target);
+            }
         }
     }
 }

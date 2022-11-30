@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{72934FFD-ADD6-4050-884A-CA77FB3D3262}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>Wildfire_ICS_Assist</RootNamespace>
-    <AssemblyName>Wildfire ICS Assist</AssemblyName>
+    <ProjectGuid>{D475AFBF-741A-4897-B9DD-284EC0DA210F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WF_ICS_ClassLibrary</RootNamespace>
+    <AssemblyName>WF-ICS-ClassLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,15 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>Wildfire_ICS_Assist.Program</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="NetworkCommsDotNet, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
       <HintPath>..\packages\NetworkCommsDotNet.3.0.3\lib\NetworkCommsDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <HintPath>..\packages\protobuf-net.3.1.25\lib\net462\protobuf-net.dll</HintPath>
@@ -70,56 +62,56 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IncidentDetailsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="IncidentDetailsForm.Designer.cs">
-      <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Interfaces\IEquipmentService.cs" />
+    <Compile Include="Interfaces\IGeneralOptionsService.cs" />
+    <Compile Include="Models\Briefing.cs" />
+    <Compile Include="Models\CommsPlan.cs" />
+    <Compile Include="Models\CommunicationsLog.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\GeneralOptions.cs" />
+    <Compile Include="Models\HelpInfo.cs" />
+    <Compile Include="Models\Hospital.cs" />
+    <Compile Include="Models\IncidentObjective.cs" />
+    <Compile Include="Models\MedicalPlan.cs" />
+    <Compile Include="Models\MedivacService.cs" />
+    <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\OperationalPeriod.cs" />
+    <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\OrganizationalChart.cs" />
+    <Compile Include="Models\PositionLog.cs" />
+    <Compile Include="Models\SafetyPlan.cs" />
+    <Compile Include="Models\ShortcutButtonOption.cs" />
+    <Compile Include="Models\SoftwareUpdate.cs" />
+    <Compile Include="Models\TaskBasics.cs" />
+    <Compile Include="Models\TaskUpdate.cs" />
+    <Compile Include="Models\TeamMember.cs" />
+    <Compile Include="Models\Timeline.cs" />
+    <Compile Include="Models\Vehicle.cs" />
+    <Compile Include="Models\WFIncident.cs" />
+    <Compile Include="Networking\DeviceInformation.cs" />
+    <Compile Include="Networking\NetworkOptionsRequest.cs" />
+    <Compile Include="Networking\NetworkSendLog.cs" />
+    <Compile Include="Networking\NetworkSendObject.cs" />
+    <Compile Include="Networking\NetworkTaskRequest.cs" />
+    <Compile Include="Networking\PingTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="IncidentDetailsForm.resx">
-      <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <Compile Include="Utilities\EncryptionTools.cs" />
+    <Compile Include="Utilities\ExcelColumns.cs" />
+    <Compile Include="Utilities\IncidentTools.cs" />
+    <Compile Include="Utilities\StringExt.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ics-canada-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WF-ICS-ClassLibrary\WF-ICS-ClassLibrary.csproj">
-      <Project>{d475afbf-741a-4897-b9dd-284ec0da210f}</Project>
-      <Name>WF-ICS-ClassLibrary</Name>
-    </ProjectReference>
+    <Folder Include="EventHandling\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

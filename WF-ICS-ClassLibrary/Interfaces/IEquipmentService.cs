@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WFICSAssist_Class_Library.Models;
+using WF_ICS_ClassLibrary.Models;
 
-namespace WFICSAssist_Class_Library.Interfaces
+namespace WF_ICS_ClassLibrary.Interfaces
 {
     public interface IEquipmentService
     {

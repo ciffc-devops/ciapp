@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WFICSAssist_Class_Library.Networking
+namespace WF_ICS_ClassLibrary.Networking
 {
     [ProtoContract]
     public class DeviceInformation

@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wildfire ICS Assist\Wildfire ICS Assist.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="EventHandling\" />
     <Folder Include="Resources\" />
   </ItemGroup>

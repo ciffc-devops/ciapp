@@ -6,9 +6,9 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-using WFICSAssist_Class_Library.Utilities;
+using WF_ICS_ClassLibrary.Utilities;
 
-namespace WFICSAssist_Class_Library.Models
+namespace WF_ICS_ClassLibrary.Models
 {
     [Serializable]
     [ProtoContract]

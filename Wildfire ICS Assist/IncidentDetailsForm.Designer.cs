@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlOpsPeriod = new System.Windows.Forms.Panel();
             this.btnCloseOpPeriod = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
@@ -137,6 +137,13 @@
             this.lblNetworkSyncStatus = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.networkInternetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlIAP = new System.Windows.Forms.Panel();
             this.lblIAP = new System.Windows.Forms.Label();
             this.btnTransportPlan = new System.Windows.Forms.Button();
@@ -182,14 +189,8 @@
             this.btnMattson = new System.Windows.Forms.Button();
             this.btnExpandPlanning = new System.Windows.Forms.Button();
             this.lblPlanningTitle = new System.Windows.Forms.Label();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.planningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.networkInternetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.llProgramURL = new System.Windows.Forms.LinkLabel();
             this.pnlOpsPeriod.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).BeginInit();
             this.pnlTaskInfo.SuspendLayout();
@@ -712,7 +713,7 @@
             this.tpAssignmentList.Location = new System.Drawing.Point(4, 44);
             this.tpAssignmentList.Name = "tpAssignmentList";
             this.tpAssignmentList.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAssignmentList.Size = new System.Drawing.Size(1064, 177);
+            this.tpAssignmentList.Size = new System.Drawing.Size(1087, 246);
             this.tpAssignmentList.TabIndex = 0;
             this.tpAssignmentList.Text = "Assignments";
             this.tpAssignmentList.UseVisualStyleBackColor = true;
@@ -735,8 +736,8 @@
             this.splitContainer3.Panel2.Controls.Add(this.btnAssignmentsTabPlanningDash);
             this.splitContainer3.Panel2.Controls.Add(this.btnAssignmentsTabOpsDash);
             this.splitContainer3.Panel2.Controls.Add(this.btnAssignmentsTabAssignments);
-            this.splitContainer3.Size = new System.Drawing.Size(1058, 171);
-            this.splitContainer3.SplitterDistance = 120;
+            this.splitContainer3.Size = new System.Drawing.Size(1081, 240);
+            this.splitContainer3.SplitterDistance = 189;
             this.splitContainer3.TabIndex = 39;
             // 
             // dgvTeamAssignments
@@ -759,7 +760,7 @@
             this.dgvTeamAssignments.Name = "dgvTeamAssignments";
             this.dgvTeamAssignments.RowHeadersVisible = false;
             this.dgvTeamAssignments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTeamAssignments.Size = new System.Drawing.Size(1058, 120);
+            this.dgvTeamAssignments.Size = new System.Drawing.Size(1081, 189);
             this.dgvTeamAssignments.TabIndex = 1;
             // 
             // colPriority
@@ -802,9 +803,9 @@
             // 
             this.colArea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colArea.DataPropertyName = "AreaOfAssignment";
-            dataGridViewCellStyle21.Format = "N2";
-            dataGridViewCellStyle21.NullValue = "0";
-            this.colArea.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = "0";
+            this.colArea.DefaultCellStyle = dataGridViewCellStyle1;
             this.colArea.HeaderText = "Area (KM²)";
             this.colArea.Name = "colArea";
             this.colArea.ReadOnly = true;
@@ -866,7 +867,7 @@
             this.tpTeamStatus.Location = new System.Drawing.Point(4, 44);
             this.tpTeamStatus.Name = "tpTeamStatus";
             this.tpTeamStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTeamStatus.Size = new System.Drawing.Size(1064, 177);
+            this.tpTeamStatus.Size = new System.Drawing.Size(1087, 246);
             this.tpTeamStatus.TabIndex = 1;
             this.tpTeamStatus.Text = "Team Status";
             this.tpTeamStatus.UseVisualStyleBackColor = true;
@@ -888,8 +889,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnViewTeamStatusInNewWindow);
             this.splitContainer1.Panel2.Controls.Add(this.chkIncludeInactiveInStatusList);
-            this.splitContainer1.Size = new System.Drawing.Size(1058, 171);
-            this.splitContainer1.SplitterDistance = 118;
+            this.splitContainer1.Size = new System.Drawing.Size(1081, 240);
+            this.splitContainer1.SplitterDistance = 187;
             this.splitContainer1.TabIndex = 36;
             // 
             // dgvTeamStatus
@@ -909,7 +910,7 @@
             this.dgvTeamStatus.ReadOnly = true;
             this.dgvTeamStatus.RowHeadersVisible = false;
             this.dgvTeamStatus.RowTemplate.Height = 28;
-            this.dgvTeamStatus.Size = new System.Drawing.Size(1058, 118);
+            this.dgvTeamStatus.Size = new System.Drawing.Size(1081, 187);
             this.dgvTeamStatus.TabIndex = 3;
             // 
             // colAssignmentName
@@ -925,8 +926,8 @@
             // 
             this.colLastCheckin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colLastCheckin.DataPropertyName = "LastRadioLogTime";
-            dataGridViewCellStyle22.Format = "HH:mm:ss";
-            this.colLastCheckin.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle2.Format = "HH:mm:ss";
+            this.colLastCheckin.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLastCheckin.HeaderText = "Last Comms";
             this.colLastCheckin.Name = "colLastCheckin";
             this.colLastCheckin.ReadOnly = true;
@@ -980,7 +981,7 @@
             this.tpMembersOnTask.Location = new System.Drawing.Point(4, 44);
             this.tpMembersOnTask.Name = "tpMembersOnTask";
             this.tpMembersOnTask.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMembersOnTask.Size = new System.Drawing.Size(1064, 177);
+            this.tpMembersOnTask.Size = new System.Drawing.Size(1087, 246);
             this.tpMembersOnTask.TabIndex = 5;
             this.tpMembersOnTask.Text = "Members";
             this.tpMembersOnTask.UseVisualStyleBackColor = true;
@@ -1003,8 +1004,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.btnAddAMember);
             this.splitContainer4.Panel2.Controls.Add(this.btnBulkSignIn);
             this.splitContainer4.Panel2.Controls.Add(this.btnMembersOnTaskNewWindow);
-            this.splitContainer4.Size = new System.Drawing.Size(1058, 171);
-            this.splitContainer4.SplitterDistance = 121;
+            this.splitContainer4.Size = new System.Drawing.Size(1081, 240);
+            this.splitContainer4.SplitterDistance = 190;
             this.splitContainer4.TabIndex = 40;
             // 
             // dgvMembersOnTask
@@ -1025,7 +1026,7 @@
             this.dgvMembersOnTask.RowHeadersVisible = false;
             this.dgvMembersOnTask.RowTemplate.Height = 30;
             this.dgvMembersOnTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMembersOnTask.Size = new System.Drawing.Size(1058, 121);
+            this.dgvMembersOnTask.Size = new System.Drawing.Size(1081, 190);
             this.dgvMembersOnTask.TabIndex = 0;
             // 
             // colMemberName
@@ -1050,9 +1051,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle23.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle23.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle3.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle3;
             this.colSignInTime.HeaderText = "Sign In";
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1118,7 +1119,7 @@
             this.tpEquipment.ImageIndex = 6;
             this.tpEquipment.Location = new System.Drawing.Point(4, 44);
             this.tpEquipment.Name = "tpEquipment";
-            this.tpEquipment.Size = new System.Drawing.Size(1064, 177);
+            this.tpEquipment.Size = new System.Drawing.Size(1087, 246);
             this.tpEquipment.TabIndex = 6;
             this.tpEquipment.Text = "Equipment";
             this.tpEquipment.UseVisualStyleBackColor = true;
@@ -1141,8 +1142,8 @@
             this.splitContainer5.Panel2.Controls.Add(this.btnAssignEquipment);
             this.splitContainer5.Panel2.Controls.Add(this.btnViewEquipment);
             this.splitContainer5.Panel2.Controls.Add(this.btnReturnEquipment);
-            this.splitContainer5.Size = new System.Drawing.Size(1064, 177);
-            this.splitContainer5.SplitterDistance = 127;
+            this.splitContainer5.Size = new System.Drawing.Size(1087, 246);
+            this.splitContainer5.SplitterDistance = 196;
             this.splitContainer5.TabIndex = 39;
             // 
             // dgvTaskEquipment
@@ -1165,7 +1166,7 @@
             this.dgvTaskEquipment.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvTaskEquipment.RowTemplate.Height = 30;
             this.dgvTaskEquipment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTaskEquipment.Size = new System.Drawing.Size(1064, 127);
+            this.dgvTaskEquipment.Size = new System.Drawing.Size(1087, 196);
             this.dgvTaskEquipment.TabIndex = 1;
             // 
             // colCategory
@@ -1264,7 +1265,7 @@
             this.tpWhiteBoard.Location = new System.Drawing.Point(4, 44);
             this.tpWhiteBoard.Name = "tpWhiteBoard";
             this.tpWhiteBoard.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWhiteBoard.Size = new System.Drawing.Size(1064, 177);
+            this.tpWhiteBoard.Size = new System.Drawing.Size(1087, 246);
             this.tpWhiteBoard.TabIndex = 4;
             this.tpWhiteBoard.Text = "Whiteboard";
             this.tpWhiteBoard.UseVisualStyleBackColor = true;
@@ -1287,8 +1288,8 @@
             this.splitContainer6.Panel2.Controls.Add(this.txtNewWhiteboard);
             this.splitContainer6.Panel2.Controls.Add(this.btnOpenWhiteboard);
             this.splitContainer6.Panel2.Controls.Add(this.btnAddWhiteboard);
-            this.splitContainer6.Size = new System.Drawing.Size(1058, 171);
-            this.splitContainer6.SplitterDistance = 121;
+            this.splitContainer6.Size = new System.Drawing.Size(1081, 240);
+            this.splitContainer6.SplitterDistance = 190;
             this.splitContainer6.TabIndex = 37;
             // 
             // dgvWhiteboard
@@ -1306,7 +1307,7 @@
             this.dgvWhiteboard.Name = "dgvWhiteboard";
             this.dgvWhiteboard.RowHeadersVisible = false;
             this.dgvWhiteboard.RowTemplate.Height = 30;
-            this.dgvWhiteboard.Size = new System.Drawing.Size(1058, 121);
+            this.dgvWhiteboard.Size = new System.Drawing.Size(1081, 190);
             this.dgvWhiteboard.TabIndex = 0;
             // 
             // colOutstanding
@@ -1329,9 +1330,9 @@
             // 
             this.colDateAdded.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDateAdded.DataPropertyName = "DateAdded";
-            dataGridViewCellStyle24.Format = "d";
-            dataGridViewCellStyle24.NullValue = null;
-            this.colDateAdded.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colDateAdded.DefaultCellStyle = dataGridViewCellStyle4;
             this.colDateAdded.HeaderText = "Added";
             this.colDateAdded.Name = "colDateAdded";
             this.colDateAdded.ReadOnly = true;
@@ -1342,7 +1343,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNewWhiteboard.Location = new System.Drawing.Point(7, 6);
             this.txtNewWhiteboard.Name = "txtNewWhiteboard";
-            this.txtNewWhiteboard.Size = new System.Drawing.Size(650, 32);
+            this.txtNewWhiteboard.Size = new System.Drawing.Size(673, 32);
             this.txtNewWhiteboard.TabIndex = 1;
             // 
             // btnOpenWhiteboard
@@ -1350,7 +1351,7 @@
             this.btnOpenWhiteboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenWhiteboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenWhiteboard.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenWhiteboard.Image")));
-            this.btnOpenWhiteboard.Location = new System.Drawing.Point(825, 4);
+            this.btnOpenWhiteboard.Location = new System.Drawing.Point(848, 4);
             this.btnOpenWhiteboard.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.btnOpenWhiteboard.Name = "btnOpenWhiteboard";
             this.btnOpenWhiteboard.Size = new System.Drawing.Size(227, 38);
@@ -1363,7 +1364,7 @@
             // 
             this.btnAddWhiteboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddWhiteboard.Image = ((System.Drawing.Image)(resources.GetObject("btnAddWhiteboard.Image")));
-            this.btnAddWhiteboard.Location = new System.Drawing.Point(694, 4);
+            this.btnAddWhiteboard.Location = new System.Drawing.Point(717, 4);
             this.btnAddWhiteboard.Name = "btnAddWhiteboard";
             this.btnAddWhiteboard.Size = new System.Drawing.Size(122, 38);
             this.btnAddWhiteboard.TabIndex = 2;
@@ -1378,7 +1379,7 @@
             this.tpNetworkLog.Location = new System.Drawing.Point(4, 44);
             this.tpNetworkLog.Name = "tpNetworkLog";
             this.tpNetworkLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tpNetworkLog.Size = new System.Drawing.Size(1064, 177);
+            this.tpNetworkLog.Size = new System.Drawing.Size(1087, 246);
             this.tpNetworkLog.TabIndex = 3;
             this.tpNetworkLog.Text = "Network Log";
             this.tpNetworkLog.UseVisualStyleBackColor = true;
@@ -1554,6 +1555,48 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 29);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(56, 29);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // iAPToolStripMenuItem
+            // 
+            this.iAPToolStripMenuItem.Name = "iAPToolStripMenuItem";
+            this.iAPToolStripMenuItem.Size = new System.Drawing.Size(52, 29);
+            this.iAPToolStripMenuItem.Text = "IAP";
+            // 
+            // operationsToolStripMenuItem
+            // 
+            this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
+            this.operationsToolStripMenuItem.Size = new System.Drawing.Size(117, 29);
+            this.operationsToolStripMenuItem.Text = "Operations";
+            // 
+            // logisticsToolStripMenuItem
+            // 
+            this.logisticsToolStripMenuItem.Name = "logisticsToolStripMenuItem";
+            this.logisticsToolStripMenuItem.Size = new System.Drawing.Size(96, 29);
+            this.logisticsToolStripMenuItem.Text = "Logistics";
+            // 
+            // planningToolStripMenuItem
+            // 
+            this.planningToolStripMenuItem.Name = "planningToolStripMenuItem";
+            this.planningToolStripMenuItem.Size = new System.Drawing.Size(99, 29);
+            this.planningToolStripMenuItem.Text = "Planning";
+            // 
+            // networkInternetToolStripMenuItem
+            // 
+            this.networkInternetToolStripMenuItem.Name = "networkInternetToolStripMenuItem";
+            this.networkInternetToolStripMenuItem.Size = new System.Drawing.Size(178, 29);
+            this.networkInternetToolStripMenuItem.Text = "Network / Internet";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(63, 29);
+            this.helpToolStripMenuItem.Text = "Help";
             // 
             // pnlIAP
             // 
@@ -2185,48 +2228,6 @@
             this.lblPlanningTitle.Text = "Planning";
             this.lblPlanningTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(56, 29);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // iAPToolStripMenuItem
-            // 
-            this.iAPToolStripMenuItem.Name = "iAPToolStripMenuItem";
-            this.iAPToolStripMenuItem.Size = new System.Drawing.Size(52, 29);
-            this.iAPToolStripMenuItem.Text = "IAP";
-            // 
-            // operationsToolStripMenuItem
-            // 
-            this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
-            this.operationsToolStripMenuItem.Size = new System.Drawing.Size(117, 29);
-            this.operationsToolStripMenuItem.Text = "Operations";
-            // 
-            // logisticsToolStripMenuItem
-            // 
-            this.logisticsToolStripMenuItem.Name = "logisticsToolStripMenuItem";
-            this.logisticsToolStripMenuItem.Size = new System.Drawing.Size(96, 29);
-            this.logisticsToolStripMenuItem.Text = "Logistics";
-            // 
-            // planningToolStripMenuItem
-            // 
-            this.planningToolStripMenuItem.Name = "planningToolStripMenuItem";
-            this.planningToolStripMenuItem.Size = new System.Drawing.Size(99, 29);
-            this.planningToolStripMenuItem.Text = "Planning";
-            // 
-            // networkInternetToolStripMenuItem
-            // 
-            this.networkInternetToolStripMenuItem.Name = "networkInternetToolStripMenuItem";
-            this.networkInternetToolStripMenuItem.Size = new System.Drawing.Size(178, 29);
-            this.networkInternetToolStripMenuItem.Text = "Network / Internet";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(63, 29);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Wildfire_ICS_Assist.Properties.Resources.ics_canada_logo;
@@ -2237,12 +2238,25 @@
             this.pictureBox1.TabIndex = 54;
             this.pictureBox1.TabStop = false;
             // 
+            // llProgramURL
+            // 
+            this.llProgramURL.AutoSize = true;
+            this.llProgramURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llProgramURL.Location = new System.Drawing.Point(12, 141);
+            this.llProgramURL.Name = "llProgramURL";
+            this.llProgramURL.Size = new System.Drawing.Size(139, 20);
+            this.llProgramURL.TabIndex = 55;
+            this.llProgramURL.TabStop = true;
+            this.llProgramURL.Text = "www.icscanada.ca";
+            this.llProgramURL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llProgramURL_LinkClicked);
+            // 
             // IncidentDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1095, 711);
+            this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pnlIAP);
             this.Controls.Add(this.pnlTeamStatus);
@@ -2258,7 +2272,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "IncidentDetailsForm";
             this.Text = "Wildfire ICS Assist - Incident Details";
             this.pnlOpsPeriod.ResumeLayout(false);
@@ -2481,6 +2495,7 @@
         private System.Windows.Forms.ToolStripMenuItem networkInternetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.LinkLabel llProgramURL;
     }
 }
 
