@@ -50,7 +50,7 @@ namespace WF_ICS_ClassLibrary.Models
             OperationalPeriodID = Guid.NewGuid();
         }
 
-        public OperationalPeriod? Clone()
+        public OperationalPeriod Clone()
         {
             return this.MemberwiseClone() as OperationalPeriod;
         }

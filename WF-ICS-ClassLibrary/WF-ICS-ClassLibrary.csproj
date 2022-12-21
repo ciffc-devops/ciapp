@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="NetworkCommsDotNet, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
       <HintPath>..\packages\NetworkCommsDotNet.3.0.3\lib\NetworkCommsDotNet.dll</HintPath>
     </Reference>
@@ -66,17 +67,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="EventHandling\BriefingEventHandler.cs" />
+    <Compile Include="EventHandling\CommsEventHandler.cs" />
+    <Compile Include="EventHandling\CommsPlanItemEventHandler.cs" />
+    <Compile Include="EventHandling\ContactEventHandler.cs" />
+    <Compile Include="EventHandling\EquipmentEventHandling.cs" />
+    <Compile Include="EventHandling\HospitalEventHandler.cs" />
+    <Compile Include="EventHandling\IncidentObjectiveEventHandling.cs" />
+    <Compile Include="EventHandling\MedicalPlanEventHandler.cs" />
+    <Compile Include="EventHandling\MemberEventHandler.cs" />
+    <Compile Include="EventHandling\NoteEventHandler.cs" />
+    <Compile Include="EventHandling\OperationalPeriodEventHandler.cs" />
+    <Compile Include="EventHandling\OrganizationalChartEventHandler.cs" />
+    <Compile Include="EventHandling\PositionLogEventHandler.cs" />
+    <Compile Include="EventHandling\SafetyPlanEventHandler.cs" />
+    <Compile Include="EventHandling\ShortcutEventHandler.cs" />
+    <Compile Include="EventHandling\TaskBasicsEventHandler.cs" />
+    <Compile Include="EventHandling\TaskUpdateEventHandler.cs" />
+    <Compile Include="EventHandling\TimelineEventHandler.cs" />
+    <Compile Include="EventHandling\VehicleEventHandler.cs" />
+    <Compile Include="EventHandling\WFIncidentEventHandler.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Interfaces\IEquipmentService.cs" />
+    <Compile Include="Interfaces\IFileAccessServices.cs" />
     <Compile Include="Interfaces\IGeneralOptionsService.cs" />
+    <Compile Include="Interfaces\IPDFExportService.cs" />
+    <Compile Include="Interfaces\ITaskUpdateService.cs" />
+    <Compile Include="Interfaces\IWFIncidentService.cs" />
     <Compile Include="Models\Briefing.cs" />
     <Compile Include="Models\CommsPlan.cs" />
     <Compile Include="Models\CommunicationsLog.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\GeneralOptions.cs" />
     <Compile Include="Models\HelpInfo.cs" />
     <Compile Include="Models\Hospital.cs" />
+    <Compile Include="Models\ICSFormElement.cs" />
     <Compile Include="Models\IncidentObjective.cs" />
     <Compile Include="Models\MedicalPlan.cs" />
     <Compile Include="Models\MedivacService.cs" />
@@ -110,7 +136,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="EventHandling\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

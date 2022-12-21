@@ -80,7 +80,7 @@ namespace WildfireICSDesktopServices
             if (string.IsNullOrEmpty(path))
             {
                 path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                path = Path.Combine(path, "SAR ICS Form Helper");
+                path = Path.Combine(path, "CIAPPO");
                 System.IO.Directory.CreateDirectory(path);
                 path = System.IO.Path.Combine(path, "Task " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName);
                 System.IO.Directory.CreateDirectory(path);

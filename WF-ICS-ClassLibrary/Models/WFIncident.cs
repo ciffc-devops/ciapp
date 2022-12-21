@@ -59,7 +59,7 @@ namespace WF_ICS_ClassLibrary.Models
            
             allBriefings = new List<Briefing>();
             DocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            DocumentPath = System.IO.Path.Combine(DocumentPath, "SAR ICS Form Helper");
+            DocumentPath = System.IO.Path.Combine(DocumentPath, "CIAPPO");
             allOrgCharts = new List<OrganizationChart>();
            
             allMedicalPlans = new List<MedicalPlan>();
@@ -122,10 +122,11 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(41)] private Timeline _taskTimeline;
         [ProtoMember(42)] private List<Note> _allNotes = new List<Note>();
         [ProtoMember(43)] private List<Vehicle> _allVehicles = new List<Vehicle>();
-        /*
-        [ProtoMember(44)] private List<ShiftBriefing> _allShiftBriefings = new List<ShiftBriefing>();
         [ProtoMember(45)] private List<TaskEquipment> _allEquipment = new List<TaskEquipment>();
         [ProtoMember(46)] private List<EquipmentIssue> _allEquipmentIssues = new List<EquipmentIssue>();
+
+        /*
+        [ProtoMember(44)] private List<ShiftBriefing> _allShiftBriefings = new List<ShiftBriefing>();
         [ProtoMember(47)] private List<LogisticalNeed> _allLogisticalNeeds = new List<LogisticalNeed>();
         [ProtoMember(48)] private List<LogisticalNeedsList> _allLogisticalNeedsLists = new List<LogisticalNeedsList>();
         */
@@ -162,6 +163,8 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
         public string ICPCallSign { get => _ICPCallsign; set => _ICPCallsign = value; }
+        public List<TaskEquipment> allEquipment { get => _allEquipment; set => _allEquipment = value; }
+        public List<EquipmentIssue> allEquipmentIssues { get => _allEquipmentIssues; set => _allEquipmentIssues = value; }
 
 
         /*
@@ -177,8 +180,6 @@ namespace WF_ICS_ClassLibrary.Models
         public List<MapSegment> allMapSegments { get => _allMapSegments; set => _allMapSegments = value; }
         public List<MattsonEvaluation> allMattsonEvaluations { get => _allMattsonEvaluations; set => _allMattsonEvaluations = value; }
         public List<ShiftBriefing> allShiftBriefings { get => _allShiftBriefings; set => _allShiftBriefings = value; }
-        public List<TaskEquipment> allEquipment { get => _allEquipment; set => _allEquipment = value; }
-        public List<EquipmentIssue> allEquipmentIssues { get => _allEquipmentIssues; set => _allEquipmentIssues = value; }
         public List<LogisticalNeed> allLogisticalNeeds { get => _allLogisticalNeeds; set => _allLogisticalNeeds = value; }
         public List<LogisticalNeedsList> allLogisticalNeedsLists { get => _allLogisticalNeedsLists; set => _allLogisticalNeedsLists = value; }
         public List<WhiteboardItem> whiteboardItems { get { return _whiteboardItems; } set { _whiteboardItems = value; } }

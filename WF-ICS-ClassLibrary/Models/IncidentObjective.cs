@@ -12,7 +12,7 @@ namespace WF_ICS_ClassLibrary.Models
     public class IncidentObjective : ICloneable
     {
         [ProtoMember(1)] private Guid _ObjectiveID;
-        [ProtoMember(2)] private string? _Objective;
+        [ProtoMember(2)] private string _Objective;
         [ProtoMember(3)] private int _Priority;
         [ProtoMember(4)] private int _OpPeriod;
         [ProtoMember(5)] private bool _isUniversal;

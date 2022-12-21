@@ -61,9 +61,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(47)] private List<Contact> l_AllContacts = new List<Contact>();
         [ProtoMember(48)] private List<Vehicle> l_AllVehicles = new List<Vehicle>();
         [ProtoMember(49)] private List<string> l_recentFilePaths = new List<string>();
-        // [ProtoMember(50)] private List<EquipmentCategory> _AllEquipmentCategories = new List<EquipmentCategory>();
-        // [ProtoMember(51)] private List<Equipment> _AllEquipment = new List<Equipment>();
-        // [ProtoMember(52)] private List<EquipmentSet> _AllEquipmentSets = new List<EquipmentSet>();
+         [ProtoMember(50)] private List<EquipmentCategory> _AllEquipmentCategories = new List<EquipmentCategory>();
+         [ProtoMember(51)] private List<Equipment> _AllEquipment = new List<Equipment>();
+         [ProtoMember(52)] private List<EquipmentSet> _AllEquipmentSets = new List<EquipmentSet>();
         [ProtoMember(53)] private ICSRole _defaultICSRole = new ICSRole();
         [ProtoMember(54)] private bool _debriefPOD;
         [ProtoMember(55)] private bool _useOldTeamAssignmentScreen;
@@ -74,6 +74,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(60)] private string _LastIpUsedWhenMachineIsServer;
         [ProtoMember(61)] private List<string> _AutomaticSubFolders = new List<string>();
         [ProtoMember(62)] private string _DefaultBackupFolder;
+        [ProtoMember(63)] private Guid _ParentOrganizationID;
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
         public Guid PrimaryChannelID { get { return g_primaryChannel; } set { g_primaryChannel = value; appSettingsChanged = true; } }
@@ -127,9 +128,9 @@ namespace WF_ICS_ClassLibrary.Models
         public List<CannedCommsLogEntry> AllCannedCommsLogEntries { get => l_AllCannedCommsEntries; set => l_AllCannedCommsEntries = value; }
         public List<Contact> AllContacts { get => l_AllContacts; set => l_AllContacts = value; }
         public List<Vehicle> AllVehicles { get => l_AllVehicles; set => l_AllVehicles = value; }
-        //   public List<EquipmentCategory> AllEquipmentCategories { get => _AllEquipmentCategories; set => _AllEquipmentCategories = value; }
-        //   public List<Equipment> AllEquipment { get => _AllEquipment; set => _AllEquipment = value; }
-        //   public List<EquipmentSet> AllEquipmentSets { get => _AllEquipmentSets; set => _AllEquipmentSets = value; }
+           public List<EquipmentCategory> AllEquipmentCategories { get => _AllEquipmentCategories; set => _AllEquipmentCategories = value; }
+           public List<Equipment> AllEquipment { get => _AllEquipment; set => _AllEquipment = value; }
+           public List<EquipmentSet> AllEquipmentSets { get => _AllEquipmentSets; set => _AllEquipmentSets = value; }
 
 
         public bool ECCReminderThisDevice { get => _ECCReminderThisDevice; set { _ECCReminderThisDevice = value; appSettingsChanged = true; } }
@@ -155,7 +156,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string LastIpUsedWhenMachineIsServer { get => _LastIpUsedWhenMachineIsServer; set => _LastIpUsedWhenMachineIsServer = value; }
         public List<string> AutomaticSubFolders { get => _AutomaticSubFolders; set => _AutomaticSubFolders = value; }
         public string AutomaticSubFoldersCSV { get { StringBuilder sb = new StringBuilder(); foreach (string s in AutomaticSubFolders) { if (sb.Length > 0) { sb.Append(", "); } sb.Append(s); } return sb.ToString(); } }
-
+        public Guid ParentOrganizationID { get => _ParentOrganizationID; set => _ParentOrganizationID = value; }
 
         public void addDefaultOptions()
         {
@@ -192,27 +193,7 @@ namespace WF_ICS_ClassLibrary.Models
 
             LastUpdateCheck = DateTime.Now;
 
-            AmbulanceService bcehs = new AmbulanceService();
-            bcehs.Organization = "BC Emergency Health Services";
-            bcehs.Phone = "911";
-            bcehs.RadioFrequency = "PEPCORD 148.655";
-            AllAmbulanceServices.Add(bcehs);
-
-            CommsPlanItem pepsar1 = new CommsPlanItem();
-            pepsar1.ChannelID = "PEP SAR 1";
-            pepsar1.CommsSystem = "Radio";
-            pepsar1.Active = true;
-            //pepsar1.Frequency = "149.495";
-            allCommsPlanItems.Add(pepsar1);
-
-            CommsPlanItem pepcord = new CommsPlanItem();
-            pepcord.ChannelID = "PEP CORD";
-            pepcord.CommsSystem = "Radio";
-            pepcord.Active = true;
-            pepcord.Comments = "Shared by BCEHS, RCMP, SAR, etc.";
-            pepcord.ItemID = new Guid("801D1B5E-BBCB-42B0-A140-786D68FE0035");
-            //pepcord.Frequency = "148.655";
-            allCommsPlanItems.Add(pepcord);
+         
         }
     }
 

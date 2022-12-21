@@ -13,21 +13,21 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(1)] private Guid _VehicleID;
         [ProtoMember(2)] private Guid _TaskID;
         [ProtoMember(3)] private int _OpPeriod;
-        [ProtoMember(4)] private string? _OrderRequestNo;
-        [ProtoMember(5)] private string? _IncidentIDNo;
-        [ProtoMember(6)] private string? _Classification;
-        [ProtoMember(7)] private string? _Make;
-        [ProtoMember(8)] private string? _CategoryKindCapacity;
-        [ProtoMember(9)] private string? _Features;
-        [ProtoMember(10)] private string? _AgencyOrOwner;
-        [ProtoMember(11)] private string? _OperatorName;
-        [ProtoMember(12)] private string? _LicenseOrID;
-        [ProtoMember(13)] private string? _IncidentAssignment;
+        [ProtoMember(4)] private string _OrderRequestNo;
+        [ProtoMember(5)] private string _IncidentIDNo;
+        [ProtoMember(6)] private string _Classification;
+        [ProtoMember(7)] private string _Make;
+        [ProtoMember(8)] private string _CategoryKindCapacity;
+        [ProtoMember(9)] private string _Features;
+        [ProtoMember(10)] private string _AgencyOrOwner;
+        [ProtoMember(11)] private string _OperatorName;
+        [ProtoMember(12)] private string _LicenseOrID;
+        [ProtoMember(13)] private string _IncidentAssignment;
         [ProtoMember(14)] private DateTime _StartTime;
         [ProtoMember(15)] private DateTime _MustBeOutTime;
-        [ProtoMember(16)] private string? _Notes;
+        [ProtoMember(16)] private string _Notes;
         [ProtoMember(17)] private bool _Active;
-        [ProtoMember(18)] private string? _ASE;
+        [ProtoMember(18)] private string _ASE;
         [ProtoMember(19)] private DateTime _LastUpdatedUTC;
         public Vehicle()
         {

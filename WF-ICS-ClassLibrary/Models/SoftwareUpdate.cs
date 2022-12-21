@@ -12,10 +12,10 @@ namespace WF_ICS_ClassLibrary.Models
     {
         private DateTime _UpdateDate;
         private int _UpdateID;
-        private string? _Description;
+        private string _Description;
         private decimal _Version;
-        private string? _DownloadURL;
-        private string? _ProjectName;
+        private string _DownloadURL;
+        private string _ProjectName;
         private bool _Visible;
         public DateTime UpdateDate { get => _UpdateDate; set => _UpdateDate = value; }
         public int UpdateID { get => _UpdateID; set => _UpdateID = value; }

@@ -37,7 +37,7 @@ namespace WF_ICS_ClassLibrary.Models
         public AmbulanceService() { AmbulanceID = System.Guid.NewGuid(); }
         public AmbulanceService(string organization) { Organization = organization; AmbulanceID = Guid.Empty; }
 
-        public AmbulanceService? Clone()
+        public AmbulanceService Clone()
         {
             return this.MemberwiseClone() as AmbulanceService;
         }
