@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary;
+using Wildfire_ICS_Assist.OptionsForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -30,6 +31,17 @@ namespace Wildfire_ICS_Assist
         {
             SetVersionNumber();
          
+        }
+
+        //These hold a reference to the various forms so that only one of each can be open at a time.
+        List<Form> ActiveForms = new List<Form>();
+        HospitalsForm hospitalsForm = null;
+
+
+
+        private void RemoveActiveForm(Form form)
+        {
+            if (form != null) { ActiveForms = ActiveForms.Where(o => o.GetType() != form.GetType()).ToList(); }
         }
 
         private void SetVersionNumber()
@@ -60,6 +72,26 @@ namespace Wildfire_ICS_Assist
         {
             UtilityForms.AboutProgramForm aboutForm = new UtilityForms.AboutProgramForm();
             aboutForm.ShowDialog();
+        }
+
+        private void hospitalsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(null == hospitalsForm)
+            {
+                hospitalsForm = new HospitalsForm();
+                hospitalsForm.FormClosed += HospitalsForm_Closed;
+                hospitalsForm.Show(this);
+                ActiveForms.Add(hospitalsForm);
+            }
+
+            hospitalsForm.BringToFront();
+        }
+
+        void HospitalsForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(hospitalsForm);
+            hospitalsForm = null;
+
         }
     }
 }

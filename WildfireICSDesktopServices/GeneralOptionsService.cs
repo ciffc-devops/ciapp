@@ -274,6 +274,10 @@ namespace WildfireICSDesktopServices
                     return _options.LastIpUsedWhenMachineIsServer;
                 case "AutomaticSubFolders":
                     return _options.AutomaticSubFolders;
+                case "Hospitals":
+                    return _options.AllHospitals;
+                case "CoordinateFormat":
+                    return _options.PositionFormat;
                 default:
                     return null;
             }
@@ -356,6 +360,11 @@ namespace WildfireICSDesktopServices
                     Contact c = (Contact)newValue;
                     _options.AllContacts = _options.AllContacts.Where(o => o.ContactID != c.ContactID).ToList();
                     _options.AllContacts.Add(c);
+                    break;
+                case "Hospital":
+                    Hospital hospital = (Hospital)newValue;
+                    _options.AllHospitals = _options.AllHospitals.Where(o=>o.HospitalID != hospital.HospitalID).ToList();
+                    _options.AllHospitals.Add(hospital);
                     break;
                 case "Equipment":
                     Equipment eq = (Equipment)newValue;

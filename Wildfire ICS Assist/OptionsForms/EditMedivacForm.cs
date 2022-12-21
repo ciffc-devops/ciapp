@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class OptionsForm : Form
+    public partial class EditMedivacForm : Form
     {
-        public OptionsForm()
+        public EditMedivacForm()
         {
             InitializeComponent();
-        }
-
-        private void OptionsForm_Load(object sender, EventArgs e)
-        {
-            
         }
     }
 }

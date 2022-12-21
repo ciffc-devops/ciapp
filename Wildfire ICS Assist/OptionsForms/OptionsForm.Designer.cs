@@ -30,27 +30,11 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbGeneral = new System.Windows.Forms.TabPage();
-            this.tbComms = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.tbNetworking = new System.Windows.Forms.TabPage();
-            this.tbFileManagement = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cboPositionFormat = new System.Windows.Forms.ComboBox();
             this.label28 = new System.Windows.Forms.Label();
             this.cboDefaultICSRole = new System.Windows.Forms.ComboBox();
-            this.txtICPCallSign = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.cboRepeater = new System.Windows.Forms.ComboBox();
-            this.cboEmergencyChannel = new System.Windows.Forms.ComboBox();
-            this.cboSecondaryChannel = new System.Windows.Forms.ComboBox();
-            this.cboPrimaryChannel = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cboPositionFormat = new System.Windows.Forms.ComboBox();
+            this.tbFileManagement = new System.Windows.Forms.TabPage();
             this.btnBrowseBackupLocation = new System.Windows.Forms.Button();
             this.txtBackupLocation = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
@@ -70,14 +54,30 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chkAutoSave = new System.Windows.Forms.CheckBox();
+            this.tbComms = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.cboRepeater = new System.Windows.Forms.ComboBox();
+            this.cboEmergencyChannel = new System.Windows.Forms.ComboBox();
+            this.cboSecondaryChannel = new System.Windows.Forms.ComboBox();
+            this.cboPrimaryChannel = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtICPCallSign = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbNetworking = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
+            this.tbFileManagement.SuspendLayout();
             this.tbComms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tbFileManagement.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -105,140 +105,9 @@
             this.tbGeneral.Location = new System.Drawing.Point(4, 33);
             this.tbGeneral.Name = "tbGeneral";
             this.tbGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tbGeneral.Size = new System.Drawing.Size(624, 556);
+            this.tbGeneral.Size = new System.Drawing.Size(738, 549);
             this.tbGeneral.TabIndex = 0;
             this.tbGeneral.Text = "General";
-            // 
-            // tbComms
-            // 
-            this.tbComms.Controls.Add(this.label16);
-            this.tbComms.Controls.Add(this.cboRepeater);
-            this.tbComms.Controls.Add(this.cboEmergencyChannel);
-            this.tbComms.Controls.Add(this.cboSecondaryChannel);
-            this.tbComms.Controls.Add(this.cboPrimaryChannel);
-            this.tbComms.Controls.Add(this.label10);
-            this.tbComms.Controls.Add(this.label11);
-            this.tbComms.Controls.Add(this.label13);
-            this.tbComms.Controls.Add(this.label14);
-            this.tbComms.Controls.Add(this.txtICPCallSign);
-            this.tbComms.Controls.Add(this.label15);
-            this.tbComms.Location = new System.Drawing.Point(4, 33);
-            this.tbComms.Name = "tbComms";
-            this.tbComms.Padding = new System.Windows.Forms.Padding(3);
-            this.tbComms.Size = new System.Drawing.Size(624, 556);
-            this.tbComms.TabIndex = 1;
-            this.tbComms.Text = "Communications";
-            this.tbComms.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(746, 656);
-            this.splitContainer1.SplitterDistance = 586;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(612, 4);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(122, 51);
-            this.btnSave.TabIndex = 26;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(14, 4);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(5);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(123, 51);
-            this.btnCancel.TabIndex = 27;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // tbNetworking
-            // 
-            this.tbNetworking.Location = new System.Drawing.Point(4, 33);
-            this.tbNetworking.Name = "tbNetworking";
-            this.tbNetworking.Size = new System.Drawing.Size(675, 533);
-            this.tbNetworking.TabIndex = 2;
-            this.tbNetworking.Text = "Networking";
-            this.tbNetworking.UseVisualStyleBackColor = true;
-            // 
-            // tbFileManagement
-            // 
-            this.tbFileManagement.Controls.Add(this.btnBrowseBackupLocation);
-            this.tbFileManagement.Controls.Add(this.txtBackupLocation);
-            this.tbFileManagement.Controls.Add(this.label34);
-            this.tbFileManagement.Controls.Add(this.label6);
-            this.tbFileManagement.Controls.Add(this.btnAutomaticSubFoldersHelp);
-            this.tbFileManagement.Controls.Add(this.txtAutomaticSubFolders);
-            this.tbFileManagement.Controls.Add(this.label5);
-            this.tbFileManagement.Controls.Add(this.label32);
-            this.tbFileManagement.Controls.Add(this.cboAutoBackupFrequency);
-            this.tbFileManagement.Controls.Add(this.btnAutoBackupHelp);
-            this.tbFileManagement.Controls.Add(this.label31);
-            this.tbFileManagement.Controls.Add(this.chkAutomaticBackups);
-            this.tbFileManagement.Controls.Add(this.label27);
-            this.tbFileManagement.Controls.Add(this.chkPromptForInitialSave);
-            this.tbFileManagement.Controls.Add(this.btnBrowseDefaultSaveLocation);
-            this.tbFileManagement.Controls.Add(this.txtSaveLocation);
-            this.tbFileManagement.Controls.Add(this.label4);
-            this.tbFileManagement.Controls.Add(this.label2);
-            this.tbFileManagement.Controls.Add(this.chkAutoSave);
-            this.tbFileManagement.Location = new System.Drawing.Point(4, 33);
-            this.tbFileManagement.Name = "tbFileManagement";
-            this.tbFileManagement.Size = new System.Drawing.Size(738, 549);
-            this.tbFileManagement.TabIndex = 3;
-            this.tbFileManagement.Text = "File Management";
-            this.tbFileManagement.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(140, 24);
-            this.label3.TabIndex = 99;
-            this.label3.Text = "Position Format";
-            // 
-            // cboPositionFormat
-            // 
-            this.cboPositionFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboPositionFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPositionFormat.FormattingEnabled = true;
-            this.cboPositionFormat.Items.AddRange(new object[] {
-            "UTM",
-            "Decimal Degrees",
-            "Degrees Decimal Minutes",
-            "Degrees Minutes Seconds",
-            "MGRS"});
-            this.cboPositionFormat.Location = new System.Drawing.Point(209, 6);
-            this.cboPositionFormat.Name = "cboPositionFormat";
-            this.cboPositionFormat.Size = new System.Drawing.Size(407, 32);
-            this.cboPositionFormat.TabIndex = 100;
             // 
             // label28
             // 
@@ -263,143 +132,62 @@
             "MGRS"});
             this.cboDefaultICSRole.Location = new System.Drawing.Point(209, 44);
             this.cboDefaultICSRole.Name = "cboDefaultICSRole";
-            this.cboDefaultICSRole.Size = new System.Drawing.Size(407, 32);
+            this.cboDefaultICSRole.Size = new System.Drawing.Size(521, 32);
             this.cboDefaultICSRole.TabIndex = 114;
             // 
-            // txtICPCallSign
+            // label3
             // 
-            this.txtICPCallSign.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(140, 24);
+            this.label3.TabIndex = 99;
+            this.label3.Text = "Position Format";
+            // 
+            // cboPositionFormat
+            // 
+            this.cboPositionFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtICPCallSign.Location = new System.Drawing.Point(139, 208);
-            this.txtICPCallSign.Margin = new System.Windows.Forms.Padding(5);
-            this.txtICPCallSign.Name = "txtICPCallSign";
-            this.txtICPCallSign.Size = new System.Drawing.Size(477, 29);
-            this.txtICPCallSign.TabIndex = 95;
-            this.txtICPCallSign.Text = "BASE";
+            this.cboPositionFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPositionFormat.FormattingEnabled = true;
+            this.cboPositionFormat.Items.AddRange(new object[] {
+            "UTM",
+            "Decimal Degrees",
+            "Degrees Decimal Minutes",
+            "Degrees Minutes Seconds",
+            "MGRS"});
+            this.cboPositionFormat.Location = new System.Drawing.Point(209, 6);
+            this.cboPositionFormat.Name = "cboPositionFormat";
+            this.cboPositionFormat.Size = new System.Drawing.Size(521, 32);
+            this.cboPositionFormat.TabIndex = 100;
             // 
-            // label15
+            // tbFileManagement
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(11, 212);
-            this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(118, 24);
-            this.label15.TabIndex = 94;
-            this.label15.Text = "ICP Call Sign";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(8, 13);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(295, 29);
-            this.label16.TabIndex = 114;
-            this.label16.Text = "Default Communications";
-            // 
-            // cboRepeater
-            // 
-            this.cboRepeater.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboRepeater.BackColor = System.Drawing.Color.White;
-            this.cboRepeater.DisplayMember = "SystemWithID";
-            this.cboRepeater.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboRepeater.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboRepeater.FormattingEnabled = true;
-            this.cboRepeater.Location = new System.Drawing.Point(139, 168);
-            this.cboRepeater.Name = "cboRepeater";
-            this.cboRepeater.Size = new System.Drawing.Size(477, 32);
-            this.cboRepeater.TabIndex = 109;
-            this.cboRepeater.ValueMember = "ItemID";
-            // 
-            // cboEmergencyChannel
-            // 
-            this.cboEmergencyChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboEmergencyChannel.BackColor = System.Drawing.Color.White;
-            this.cboEmergencyChannel.DisplayMember = "SystemWithID";
-            this.cboEmergencyChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEmergencyChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboEmergencyChannel.FormattingEnabled = true;
-            this.cboEmergencyChannel.Location = new System.Drawing.Point(139, 130);
-            this.cboEmergencyChannel.Name = "cboEmergencyChannel";
-            this.cboEmergencyChannel.Size = new System.Drawing.Size(477, 32);
-            this.cboEmergencyChannel.TabIndex = 108;
-            this.cboEmergencyChannel.ValueMember = "ItemID";
-            // 
-            // cboSecondaryChannel
-            // 
-            this.cboSecondaryChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboSecondaryChannel.BackColor = System.Drawing.Color.White;
-            this.cboSecondaryChannel.DisplayMember = "SystemWithID";
-            this.cboSecondaryChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSecondaryChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboSecondaryChannel.FormattingEnabled = true;
-            this.cboSecondaryChannel.Location = new System.Drawing.Point(139, 92);
-            this.cboSecondaryChannel.Name = "cboSecondaryChannel";
-            this.cboSecondaryChannel.Size = new System.Drawing.Size(477, 32);
-            this.cboSecondaryChannel.TabIndex = 107;
-            this.cboSecondaryChannel.ValueMember = "ItemID";
-            // 
-            // cboPrimaryChannel
-            // 
-            this.cboPrimaryChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboPrimaryChannel.BackColor = System.Drawing.Color.White;
-            this.cboPrimaryChannel.DisplayMember = "SystemWithID";
-            this.cboPrimaryChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPrimaryChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboPrimaryChannel.FormattingEnabled = true;
-            this.cboPrimaryChannel.Location = new System.Drawing.Point(139, 54);
-            this.cboPrimaryChannel.Name = "cboPrimaryChannel";
-            this.cboPrimaryChannel.Size = new System.Drawing.Size(477, 32);
-            this.cboPrimaryChannel.TabIndex = 106;
-            this.cboPrimaryChannel.ValueMember = "ItemID";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(9, 171);
-            this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(108, 24);
-            this.label10.TabIndex = 113;
-            this.label10.Text = "Repeater(s)";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(9, 133);
-            this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(108, 24);
-            this.label11.TabIndex = 112;
-            this.label11.Text = "Emergency";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(9, 97);
-            this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(101, 24);
-            this.label13.TabIndex = 111;
-            this.label13.Text = "Secondary";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(9, 57);
-            this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(107, 24);
-            this.label14.TabIndex = 110;
-            this.label14.Text = "Primary Ch.";
+            this.tbFileManagement.Controls.Add(this.btnBrowseBackupLocation);
+            this.tbFileManagement.Controls.Add(this.txtBackupLocation);
+            this.tbFileManagement.Controls.Add(this.label34);
+            this.tbFileManagement.Controls.Add(this.label6);
+            this.tbFileManagement.Controls.Add(this.btnAutomaticSubFoldersHelp);
+            this.tbFileManagement.Controls.Add(this.txtAutomaticSubFolders);
+            this.tbFileManagement.Controls.Add(this.label5);
+            this.tbFileManagement.Controls.Add(this.label32);
+            this.tbFileManagement.Controls.Add(this.cboAutoBackupFrequency);
+            this.tbFileManagement.Controls.Add(this.btnAutoBackupHelp);
+            this.tbFileManagement.Controls.Add(this.label31);
+            this.tbFileManagement.Controls.Add(this.chkAutomaticBackups);
+            this.tbFileManagement.Controls.Add(this.label27);
+            this.tbFileManagement.Controls.Add(this.chkPromptForInitialSave);
+            this.tbFileManagement.Controls.Add(this.btnBrowseDefaultSaveLocation);
+            this.tbFileManagement.Controls.Add(this.txtSaveLocation);
+            this.tbFileManagement.Controls.Add(this.label4);
+            this.tbFileManagement.Controls.Add(this.label2);
+            this.tbFileManagement.Controls.Add(this.chkAutoSave);
+            this.tbFileManagement.Location = new System.Drawing.Point(4, 22);
+            this.tbFileManagement.Name = "tbFileManagement";
+            this.tbFileManagement.Size = new System.Drawing.Size(738, 560);
+            this.tbFileManagement.TabIndex = 3;
+            this.tbFileManagement.Text = "File Management";
+            this.tbFileManagement.UseVisualStyleBackColor = true;
             // 
             // btnBrowseBackupLocation
             // 
@@ -589,6 +377,218 @@
             this.chkAutoSave.Text = "Yes, auto save on changes";
             this.chkAutoSave.UseVisualStyleBackColor = true;
             // 
+            // tbComms
+            // 
+            this.tbComms.Controls.Add(this.label16);
+            this.tbComms.Controls.Add(this.cboRepeater);
+            this.tbComms.Controls.Add(this.cboEmergencyChannel);
+            this.tbComms.Controls.Add(this.cboSecondaryChannel);
+            this.tbComms.Controls.Add(this.cboPrimaryChannel);
+            this.tbComms.Controls.Add(this.label10);
+            this.tbComms.Controls.Add(this.label11);
+            this.tbComms.Controls.Add(this.label13);
+            this.tbComms.Controls.Add(this.label14);
+            this.tbComms.Controls.Add(this.txtICPCallSign);
+            this.tbComms.Controls.Add(this.label15);
+            this.tbComms.Location = new System.Drawing.Point(4, 22);
+            this.tbComms.Name = "tbComms";
+            this.tbComms.Padding = new System.Windows.Forms.Padding(3);
+            this.tbComms.Size = new System.Drawing.Size(738, 560);
+            this.tbComms.TabIndex = 1;
+            this.tbComms.Text = "Communications";
+            this.tbComms.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(8, 13);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(295, 29);
+            this.label16.TabIndex = 114;
+            this.label16.Text = "Default Communications";
+            // 
+            // cboRepeater
+            // 
+            this.cboRepeater.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboRepeater.BackColor = System.Drawing.Color.White;
+            this.cboRepeater.DisplayMember = "SystemWithID";
+            this.cboRepeater.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRepeater.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboRepeater.FormattingEnabled = true;
+            this.cboRepeater.Location = new System.Drawing.Point(139, 168);
+            this.cboRepeater.Name = "cboRepeater";
+            this.cboRepeater.Size = new System.Drawing.Size(591, 32);
+            this.cboRepeater.TabIndex = 109;
+            this.cboRepeater.ValueMember = "ItemID";
+            // 
+            // cboEmergencyChannel
+            // 
+            this.cboEmergencyChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboEmergencyChannel.BackColor = System.Drawing.Color.White;
+            this.cboEmergencyChannel.DisplayMember = "SystemWithID";
+            this.cboEmergencyChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEmergencyChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboEmergencyChannel.FormattingEnabled = true;
+            this.cboEmergencyChannel.Location = new System.Drawing.Point(139, 130);
+            this.cboEmergencyChannel.Name = "cboEmergencyChannel";
+            this.cboEmergencyChannel.Size = new System.Drawing.Size(591, 32);
+            this.cboEmergencyChannel.TabIndex = 108;
+            this.cboEmergencyChannel.ValueMember = "ItemID";
+            // 
+            // cboSecondaryChannel
+            // 
+            this.cboSecondaryChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboSecondaryChannel.BackColor = System.Drawing.Color.White;
+            this.cboSecondaryChannel.DisplayMember = "SystemWithID";
+            this.cboSecondaryChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSecondaryChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboSecondaryChannel.FormattingEnabled = true;
+            this.cboSecondaryChannel.Location = new System.Drawing.Point(139, 92);
+            this.cboSecondaryChannel.Name = "cboSecondaryChannel";
+            this.cboSecondaryChannel.Size = new System.Drawing.Size(591, 32);
+            this.cboSecondaryChannel.TabIndex = 107;
+            this.cboSecondaryChannel.ValueMember = "ItemID";
+            // 
+            // cboPrimaryChannel
+            // 
+            this.cboPrimaryChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboPrimaryChannel.BackColor = System.Drawing.Color.White;
+            this.cboPrimaryChannel.DisplayMember = "SystemWithID";
+            this.cboPrimaryChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPrimaryChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboPrimaryChannel.FormattingEnabled = true;
+            this.cboPrimaryChannel.Location = new System.Drawing.Point(139, 54);
+            this.cboPrimaryChannel.Name = "cboPrimaryChannel";
+            this.cboPrimaryChannel.Size = new System.Drawing.Size(591, 32);
+            this.cboPrimaryChannel.TabIndex = 106;
+            this.cboPrimaryChannel.ValueMember = "ItemID";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(9, 171);
+            this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(108, 24);
+            this.label10.TabIndex = 113;
+            this.label10.Text = "Repeater(s)";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(9, 133);
+            this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(108, 24);
+            this.label11.TabIndex = 112;
+            this.label11.Text = "Emergency";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(9, 97);
+            this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(101, 24);
+            this.label13.TabIndex = 111;
+            this.label13.Text = "Secondary";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(9, 57);
+            this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(107, 24);
+            this.label14.TabIndex = 110;
+            this.label14.Text = "Primary Ch.";
+            // 
+            // txtICPCallSign
+            // 
+            this.txtICPCallSign.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtICPCallSign.Location = new System.Drawing.Point(139, 208);
+            this.txtICPCallSign.Margin = new System.Windows.Forms.Padding(5);
+            this.txtICPCallSign.Name = "txtICPCallSign";
+            this.txtICPCallSign.Size = new System.Drawing.Size(591, 29);
+            this.txtICPCallSign.TabIndex = 95;
+            this.txtICPCallSign.Text = "BASE";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(11, 212);
+            this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(118, 24);
+            this.label15.TabIndex = 94;
+            this.label15.Text = "ICP Call Sign";
+            // 
+            // tbNetworking
+            // 
+            this.tbNetworking.Location = new System.Drawing.Point(4, 22);
+            this.tbNetworking.Name = "tbNetworking";
+            this.tbNetworking.Size = new System.Drawing.Size(738, 560);
+            this.tbNetworking.TabIndex = 2;
+            this.tbNetworking.Text = "Networking";
+            this.tbNetworking.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
+            this.splitContainer1.Panel2.Controls.Add(this.btnSave);
+            this.splitContainer1.Size = new System.Drawing.Size(746, 656);
+            this.splitContainer1.SplitterDistance = 586;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnCancel.Location = new System.Drawing.Point(14, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(5);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(123, 51);
+            this.btnCancel.TabIndex = 27;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
+            this.btnSave.Location = new System.Drawing.Point(612, 4);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(122, 51);
+            this.btnSave.TabIndex = 26;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -600,17 +600,18 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "OptionsForm";
             this.Text = "Options";
+            this.Load += new System.EventHandler(this.OptionsForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tbGeneral.ResumeLayout(false);
             this.tbGeneral.PerformLayout();
+            this.tbFileManagement.ResumeLayout(false);
+            this.tbFileManagement.PerformLayout();
             this.tbComms.ResumeLayout(false);
             this.tbComms.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tbFileManagement.ResumeLayout(false);
-            this.tbFileManagement.PerformLayout();
             this.ResumeLayout(false);
 
         }

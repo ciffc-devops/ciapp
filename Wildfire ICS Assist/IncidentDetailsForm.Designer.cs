@@ -80,6 +80,7 @@
             this.tpEquipment = new System.Windows.Forms.TabPage();
             this.tpNetworkLog = new System.Windows.Forms.TabPage();
             this.txtNetworkLog = new System.Windows.Forms.TextBox();
+            this.imglTabIcons = new System.Windows.Forms.ImageList(this.components);
             this.pnlInternetSyncStart = new System.Windows.Forms.Panel();
             this.btnCancelInternetSync = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
@@ -173,7 +174,6 @@
             this.lblPlanningTitle = new System.Windows.Forms.Label();
             this.llProgramURL = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.imglTabIcons = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -599,6 +599,14 @@
             this.txtNetworkLog.Name = "txtNetworkLog";
             this.txtNetworkLog.ReadOnly = true;
             // 
+            // imglTabIcons
+            // 
+            this.imglTabIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglTabIcons.ImageStream")));
+            this.imglTabIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imglTabIcons.Images.SetKeyName(0, "glyphicons-basic-532-user-family.png");
+            this.imglTabIcons.Images.SetKeyName(1, "glyphicons-basic-849-computer-network.png");
+            this.imglTabIcons.Images.SetKeyName(2, "glyphicons-basic-876-palette-package.png");
+            // 
             // pnlInternetSyncStart
             // 
             this.pnlInternetSyncStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
@@ -788,6 +796,7 @@
             // 
             this.hospitalsToolStripMenuItem.Name = "hospitalsToolStripMenuItem";
             resources.ApplyResources(this.hospitalsToolStripMenuItem, "hospitalsToolStripMenuItem");
+            this.hospitalsToolStripMenuItem.Click += new System.EventHandler(this.hospitalsToolStripMenuItem_Click);
             // 
             // contactsToolStripMenuItem
             // 
@@ -1219,14 +1228,6 @@
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
-            // 
-            // imglTabIcons
-            // 
-            this.imglTabIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglTabIcons.ImageStream")));
-            this.imglTabIcons.TransparentColor = System.Drawing.Color.Transparent;
-            this.imglTabIcons.Images.SetKeyName(0, "glyphicons-basic-532-user-family.png");
-            this.imglTabIcons.Images.SetKeyName(1, "glyphicons-basic-849-computer-network.png");
-            this.imglTabIcons.Images.SetKeyName(2, "glyphicons-basic-876-palette-package.png");
             // 
             // IncidentDetailsForm
             // 

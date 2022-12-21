@@ -101,6 +101,18 @@
     <Compile Include="IncidentDetailsForm.Designer.cs">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\EditHosptalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditHosptalForm.Designer.cs">
+      <DependentUpon>EditHosptalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\HospitalsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\HospitalsForm.Designer.cs">
+      <DependentUpon>HospitalsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +141,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentDetailsForm.resx">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditHosptalForm.resx">
+      <DependentUpon>EditHosptalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\HospitalsForm.resx">
+      <DependentUpon>HospitalsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>

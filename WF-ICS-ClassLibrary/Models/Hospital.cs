@@ -16,15 +16,15 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(3)] private string _Location;
         [ProtoMember(4)] private decimal _TravelTimeAir;
         [ProtoMember(5)] private decimal _TravelTimeGround;
-        [ProtoMember(6)] private string _Phone;
-        [ProtoMember(7)] private bool _TraumaUnit;
+        [ProtoMember(6)] private string _Phone; //Contact may be phone or frequency
+        [ProtoMember(7)] private bool _TraumaUnit; //not used
         [ProtoMember(8)] private bool _BurnUnit;
-        [ProtoMember(9)] private bool _Hypothermia;
+        [ProtoMember(9)] private bool _Hypothermia; //Not used
         [ProtoMember(10)] private bool _Helipad;
         [ProtoMember(11)] private bool _IsUniversal;
         [ProtoMember(12)] private DateTime _LastUpatedUTC;
-        [ProtoMember(13)] private decimal _Latitude;
-        [ProtoMember(14)] private decimal _Longitude;
+        [ProtoMember(13)] private double _Latitude;
+        [ProtoMember(14)] private double _Longitude;
         [ProtoMember(15)] private bool _active;
         [ProtoMember(16)] private Guid _OrganizationID;
 
@@ -41,8 +41,8 @@ namespace WF_ICS_ClassLibrary.Models
         public bool helipad { get => _Helipad; set => _Helipad = value; }
         public bool isUniversal { get => _IsUniversal; set => _IsUniversal = value; }
         public DateTime LastUpdatedUTC { get => _LastUpatedUTC; set => _LastUpatedUTC = value; }
-        public decimal Latitude { get => _Latitude; set => _Latitude = value; }
-        public decimal Longitude { get => _Longitude; set => _Longitude = value; }
+        public double Latitude { get => _Latitude; set => _Latitude = value; }
+        public double Longitude { get => _Longitude; set => _Longitude = value; }
         public bool Active { get { return _active; } set { _active = value; } } //hospitals used once but not "saved for later" will be marked inactive, as will "deleted" hospitals
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
 
