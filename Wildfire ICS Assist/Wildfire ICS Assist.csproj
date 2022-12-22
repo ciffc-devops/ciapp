@@ -125,6 +125,12 @@
     <Compile Include="OptionsForms\EditMedivacForm.Designer.cs">
       <DependentUpon>EditMedivacForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\EditSavedVehicleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedVehicleForm.Designer.cs">
+      <DependentUpon>EditSavedVehicleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\HospitalsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +160,12 @@
     </Compile>
     <Compile Include="OptionsForms\SavedContactsForm.Designer.cs">
       <DependentUpon>SavedContactsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedVehiclesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedVehiclesForm.Designer.cs">
+      <DependentUpon>SavedVehiclesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -190,6 +202,9 @@
     <EmbeddedResource Include="OptionsForms\EditMedivacForm.resx">
       <DependentUpon>EditMedivacForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedVehicleForm.resx">
+      <DependentUpon>EditSavedVehicleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\HospitalsForm.resx">
       <DependentUpon>HospitalsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedContactsForm.resx">
       <DependentUpon>SavedContactsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedVehiclesForm.resx">
+      <DependentUpon>SavedVehiclesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
