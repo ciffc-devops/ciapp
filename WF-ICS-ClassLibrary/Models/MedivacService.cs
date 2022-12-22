@@ -44,9 +44,17 @@ namespace WF_ICS_ClassLibrary.Models
         public double Latitude { get => _Latitude; set => _Latitude = value; }  
         public double Longitude { get => _Longitude;set => _Longitude = value; }
 
+        public string ParamedicsAvailable
+        {
+            get
+            {
+                if (IsALS) { return "ALS"; }
+                else { return "BLS"; }
+            }
+        }
 
-        public AmbulanceService() { AmbulanceID = System.Guid.NewGuid(); }
-        public AmbulanceService(string organization) { Organization = organization; AmbulanceID = Guid.Empty; }
+        public AmbulanceService() { AmbulanceID = System.Guid.NewGuid(); Active = true; }
+        public AmbulanceService(string organization) { Organization = organization; AmbulanceID = Guid.Empty; Active = true; }
 
         public AmbulanceService Clone()
         {

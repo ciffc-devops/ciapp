@@ -39,7 +39,6 @@ namespace Wildfire_ICS_Assist.OptionsForms
             chkHelipad.Checked = selectedHospital.helipad;
             lblCoordinateStatus.Text = string.Empty;
 
-            StringBuilder coordText = new StringBuilder();
 
             Coordinate coord = new Coordinate();
             coord.Latitude = selectedHospital.Latitude;

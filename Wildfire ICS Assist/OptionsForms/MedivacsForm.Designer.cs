@@ -36,7 +36,7 @@
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colContact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colParamedics = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colParamedics = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,6 +77,7 @@
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -89,6 +90,7 @@
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnNew
             // 
@@ -101,6 +103,7 @@
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // dgvMedivac
             // 
@@ -121,6 +124,8 @@
             this.dgvMedivac.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMedivac.Size = new System.Drawing.Size(1032, 567);
             this.dgvMedivac.TabIndex = 1;
+            this.dgvMedivac.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMedivac_CellMouseDoubleClick);
+            this.dgvMedivac.SelectionChanged += new System.EventHandler(this.dgvMedivac_SelectionChanged);
             // 
             // colName
             // 
@@ -155,6 +160,8 @@
             this.colParamedics.HeaderText = "Paramedics";
             this.colParamedics.Name = "colParamedics";
             this.colParamedics.ReadOnly = true;
+            this.colParamedics.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colParamedics.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colParamedics.Width = 115;
             // 
             // MedivacsForm
@@ -168,7 +175,8 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "MedivacsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MedivacsForm";
+            this.Text = "Saved Medivacs";
+            this.Load += new System.EventHandler(this.MedivacsForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -188,6 +196,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colParamedics;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colParamedics;
     }
 }

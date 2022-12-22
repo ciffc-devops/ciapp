@@ -184,7 +184,7 @@
     <value>0, 0</value>
   </data>
   <data name="dgvMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1081, 190</value>
+    <value>1081, 25</value>
   </data>
   <data name="dgvMembersOnTask.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -353,7 +353,7 @@
     <value>1081, 29</value>
   </data>
   <data name="splitContainer4.SplitterDistance" type="System.Int32, mscorlib">
-    <value>190</value>
+    <value>25</value>
   </data>
   <data name="splitContainer4.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -440,7 +440,7 @@
     <value>0, 0</value>
   </data>
   <data name="dgvTaskEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1087, 196</value>
+    <value>1087, 25</value>
   </data>
   <data name="dgvTaskEquipment.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -606,7 +606,7 @@
     <value>1087, 35</value>
   </data>
   <data name="splitContainer5.SplitterDistance" type="System.Int32, mscorlib">
-    <value>196</value>
+    <value>25</value>
   </data>
   <data name="splitContainer5.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -1549,7 +1549,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAARgBAAEYAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAASgBAAEoAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2014,6 +2014,12 @@
   </data>
   <data name="hospitalsToolStripMenuItem.Text" xml:space="preserve">
     <value>Hospitals</value>
+  </data>
+  <data name="medivacServicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 30</value>
+  </data>
+  <data name="medivacServicesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Medivac Services</value>
   </data>
   <data name="contactsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 30</value>
@@ -11961,6 +11967,12 @@
     <value>hospitalsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;hospitalsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;medivacServicesToolStripMenuItem.Name" xml:space="preserve">
+    <value>medivacServicesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;medivacServicesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;contactsToolStripMenuItem.Name" xml:space="preserve">

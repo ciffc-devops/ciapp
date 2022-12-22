@@ -108,6 +108,7 @@
             this.savedValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationsSystemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hospitalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medivacServicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teamMembersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -760,6 +761,7 @@
             this.savedValuesToolStripMenuItem,
             this.communicationsSystemsToolStripMenuItem,
             this.hospitalsToolStripMenuItem,
+            this.medivacServicesToolStripMenuItem,
             this.contactsToolStripMenuItem,
             this.equipmentToolStripMenuItem,
             this.teamMembersToolStripMenuItem,
@@ -798,10 +800,17 @@
             resources.ApplyResources(this.hospitalsToolStripMenuItem, "hospitalsToolStripMenuItem");
             this.hospitalsToolStripMenuItem.Click += new System.EventHandler(this.hospitalsToolStripMenuItem_Click);
             // 
+            // medivacServicesToolStripMenuItem
+            // 
+            this.medivacServicesToolStripMenuItem.Name = "medivacServicesToolStripMenuItem";
+            resources.ApplyResources(this.medivacServicesToolStripMenuItem, "medivacServicesToolStripMenuItem");
+            this.medivacServicesToolStripMenuItem.Click += new System.EventHandler(this.medivacServicesToolStripMenuItem_Click);
+            // 
             // contactsToolStripMenuItem
             // 
             this.contactsToolStripMenuItem.Name = "contactsToolStripMenuItem";
             resources.ApplyResources(this.contactsToolStripMenuItem, "contactsToolStripMenuItem");
+            this.contactsToolStripMenuItem.Click += new System.EventHandler(this.contactsToolStripMenuItem_Click);
             // 
             // equipmentToolStripMenuItem
             // 
@@ -1430,6 +1439,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
         private System.Windows.Forms.ImageList imglTabIcons;
+        private System.Windows.Forms.ToolStripMenuItem medivacServicesToolStripMenuItem;
     }
 }
 

@@ -30,13 +30,14 @@ namespace Wildfire_ICS_Assist
         private void IncidentDetailsForm_Load(object sender, EventArgs e)
         {
             SetVersionNumber();
-         
+
         }
 
         //These hold a reference to the various forms so that only one of each can be open at a time.
         List<Form> ActiveForms = new List<Form>();
         HospitalsForm hospitalsForm = null;
-
+        MedivacsForm medivacsForm = null;
+        SavedContactsForm savedContactsForm = null;
 
 
         private void RemoveActiveForm(Form form)
@@ -76,7 +77,7 @@ namespace Wildfire_ICS_Assist
 
         private void hospitalsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(null == hospitalsForm)
+            if (null == hospitalsForm)
             {
                 hospitalsForm = new HospitalsForm();
                 hospitalsForm.FormClosed += HospitalsForm_Closed;
@@ -91,6 +92,47 @@ namespace Wildfire_ICS_Assist
         {
             RemoveActiveForm(hospitalsForm);
             hospitalsForm = null;
+
+        }
+
+        private void medivacServicesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (null == medivacsForm)
+            {
+                medivacsForm = new MedivacsForm();
+                medivacsForm.FormClosed += MedivacsForm_Closed;
+                medivacsForm.Show(this);
+                ActiveForms.Add(medivacsForm);
+            }
+
+            medivacsForm.BringToFront();
+        }
+
+        void MedivacsForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(medivacsForm);
+            medivacsForm = null;
+
+        }
+
+        private void contactsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (null == savedContactsForm)
+            {
+                savedContactsForm = new SavedContactsForm();
+                savedContactsForm.FormClosed += SavedContactsForm_Closed;
+                savedContactsForm.Show(this);
+                ActiveForms.Add(savedContactsForm);
+            }
+
+            savedContactsForm.BringToFront();
+        }
+
+        void SavedContactsForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(savedContactsForm);
+            savedContactsForm = null;
 
         }
     }

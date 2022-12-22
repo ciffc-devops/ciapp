@@ -101,11 +101,23 @@
     <Compile Include="IncidentDetailsForm.Designer.cs">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\EditContact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditContact.Designer.cs">
+      <DependentUpon>EditContact.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\EditHosptalForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OptionsForms\EditHosptalForm.Designer.cs">
       <DependentUpon>EditHosptalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditMedivacForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditMedivacForm.Designer.cs">
+      <DependentUpon>EditMedivacForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\HospitalsForm.cs">
       <SubType>Form</SubType>
@@ -113,11 +125,23 @@
     <Compile Include="OptionsForms\HospitalsForm.Designer.cs">
       <DependentUpon>HospitalsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\MedivacsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\MedivacsForm.Designer.cs">
+      <DependentUpon>MedivacsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OptionsForms\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedContactsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedContactsForm.Designer.cs">
+      <DependentUpon>SavedContactsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,14 +166,26 @@
     <EmbeddedResource Include="IncidentDetailsForm.resx">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditContact.resx">
+      <DependentUpon>EditContact.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditHosptalForm.resx">
       <DependentUpon>EditHosptalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditMedivacForm.resx">
+      <DependentUpon>EditMedivacForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\HospitalsForm.resx">
       <DependentUpon>HospitalsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\MedivacsForm.resx">
+      <DependentUpon>MedivacsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedContactsForm.resx">
+      <DependentUpon>SavedContactsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

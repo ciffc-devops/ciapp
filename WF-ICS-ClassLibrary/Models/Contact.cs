@@ -11,27 +11,19 @@ namespace WF_ICS_ClassLibrary.Models
     [Serializable]
     public class Contact : ICloneable
     {
-        public Contact() { ContactID = Guid.NewGuid(); }
+        public Contact() { ContactID = Guid.NewGuid(); Active = true; }
 
-        [ProtoMember(1)]
-        private Guid _ContactID;
-        [ProtoMember(2)]
-        private string _ContactName;
-        [ProtoMember(3)]
-        private string _Title;
-        [ProtoMember(4)]
-        private string _Organization;
-        [ProtoMember(5)]
-        private string _Phone;
-        [ProtoMember(6)]
-        private string _Email;
-        [ProtoMember(7)]
-        private string _Callsign;
-        [ProtoMember(8)]
-        private string _RadioChannel;
-        [ProtoMember(9)]
-        private string _Notes;
+        [ProtoMember(1)]        private Guid _ContactID;
+        [ProtoMember(2)]        private string _ContactName;
+        [ProtoMember(3)]        private string _Title;
+        [ProtoMember(4)]        private string _Organization;
+        [ProtoMember(5)]        private string _Phone;
+        [ProtoMember(6)]        private string _Email;
+        [ProtoMember(7)]        private string _Callsign;
+        [ProtoMember(8)]        private string _RadioChannel;
+        [ProtoMember(9)]        private string _Notes;
         [ProtoMember(10)] private DateTime _lastUpdatedUTC = DateTime.UtcNow;
+        [ProtoMember(11)] private bool _Active;
 
         public Guid ContactID { get => _ContactID; set => _ContactID = value; }
         public string ContactName { get => _ContactName; set => _ContactName = value; }
@@ -43,6 +35,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string RadioChannel { get => _RadioChannel; set => _RadioChannel = value; }
         public string Notes { get => _Notes; set => _Notes = value; }
         public DateTime LastUpdatedUTC { get => _lastUpdatedUTC; set => _lastUpdatedUTC = value; }
+        public bool Active { get => _Active; set => _Active = value; }
 
         public string NameAndOrg { get { if (!string.IsNullOrEmpty(Organization)) { return ContactName + " (" + Organization + ")"; } else { return ContactName; } } }
 

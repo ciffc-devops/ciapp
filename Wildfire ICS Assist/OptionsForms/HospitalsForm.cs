@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             dgvHospitals.DataSource = null;
             List<Hospital> hospitals = (List<Hospital>)Program.generalOptionsService.GetOptionsValue("Hospitals");
-            hospitals = hospitals.Where(o => o.Active).ToList();
+            hospitals = hospitals.Where(o => o.Active).OrderBy(o=>o.name).ToList();
             dgvHospitals.DataSource = hospitals;
 
         }

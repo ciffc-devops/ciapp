@@ -276,6 +276,8 @@ namespace WildfireICSDesktopServices
                     return _options.AutomaticSubFolders;
                 case "Hospitals":
                     return _options.AllHospitals;
+                case "Ambulances":
+                    return _options.AllAmbulanceServices;
                 case "CoordinateFormat":
                     return _options.PositionFormat;
                 default:
@@ -366,6 +368,12 @@ namespace WildfireICSDesktopServices
                     _options.AllHospitals = _options.AllHospitals.Where(o=>o.HospitalID != hospital.HospitalID).ToList();
                     _options.AllHospitals.Add(hospital);
                     break;
+                case "Ambulance":
+                    AmbulanceService amb = (AmbulanceService)newValue;  
+                    _options.AllAmbulanceServices = _options.AllAmbulanceServices.Where(o=> o.AmbulanceID != amb.AmbulanceID).ToList();
+                    _options.AllAmbulanceServices.Add(amb);
+                    break;
+               
                 case "Equipment":
                     Equipment eq = (Equipment)newValue;
                     _options.AllEquipment = _options.AllEquipment.Where(o => o.EquipmentID != eq.EquipmentID).ToList();
