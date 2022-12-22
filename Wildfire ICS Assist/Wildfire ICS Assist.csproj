@@ -101,11 +101,17 @@
     <Compile Include="IncidentDetailsForm.Designer.cs">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OptionsForms\EditContact.cs">
+    <Compile Include="OptionsForms\EditCommsItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OptionsForms\EditContact.Designer.cs">
-      <DependentUpon>EditContact.cs</DependentUpon>
+    <Compile Include="OptionsForms\EditCommsItemForm.Designer.cs">
+      <DependentUpon>EditCommsItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditContactForm.Designer.cs">
+      <DependentUpon>EditContactForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\EditHosptalForm.cs">
       <SubType>Form</SubType>
@@ -137,6 +143,12 @@
     <Compile Include="OptionsForms\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\SavedCommsItemsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedCommsItemsForm.Designer.cs">
+      <DependentUpon>SavedCommsItemsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\SavedContactsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,8 +178,11 @@
     <EmbeddedResource Include="IncidentDetailsForm.resx">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForms\EditContact.resx">
-      <DependentUpon>EditContact.cs</DependentUpon>
+    <EmbeddedResource Include="OptionsForms\EditCommsItemForm.resx">
+      <DependentUpon>EditCommsItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditContactForm.resx">
+      <DependentUpon>EditContactForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditHosptalForm.resx">
       <DependentUpon>EditHosptalForm.cs</DependentUpon>
@@ -183,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedCommsItemsForm.resx">
+      <DependentUpon>SavedCommsItemsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedContactsForm.resx">
       <DependentUpon>SavedContactsForm.cs</DependentUpon>

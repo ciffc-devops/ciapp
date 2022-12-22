@@ -11,12 +11,12 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditContact : Form
+    public partial class EditContactForm : Form
     {
         private Contact _contact = new Contact();
         public Contact contact { get => _contact; private set => _contact = value; }
 
-        public EditContact(Contact contactToEdit)
+        public EditContactForm(Contact contactToEdit)
         {
             this.Icon = Program.programIcon;
             InitializeComponent();

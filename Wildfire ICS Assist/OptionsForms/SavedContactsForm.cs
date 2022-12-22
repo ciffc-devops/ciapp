@@ -36,7 +36,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Contact newContact = new Contact();
-            using (EditContact contactListEditContact = new EditContact(newContact))
+            using (EditContactForm contactListEditContact = new EditContactForm(newContact))
             {
                 DialogResult dr = contactListEditContact.ShowDialog();
                 if (dr == DialogResult.OK)
@@ -51,7 +51,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void btnEdit_Click(object sender, EventArgs e)
         {
             Contact c = (Contact)dgvContacts.SelectedRows[0].DataBoundItem;
-            using (EditContact contactListEditContact = new EditContact(c))
+            using (EditContactForm contactListEditContact = new EditContactForm(c))
             {
                 DialogResult dr = contactListEditContact.ShowDialog();
                 if (dr == DialogResult.OK)
@@ -93,7 +93,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             if (e.RowIndex >= 0)
             {
                 Contact c = (Contact)dgvContacts.Rows[e.RowIndex].DataBoundItem;
-                using (EditContact contactListEditContact = new EditContact(c))
+                using (EditContactForm contactListEditContact = new EditContactForm(c))
                 {
                     DialogResult dr = contactListEditContact.ShowDialog();
                     if (dr == DialogResult.OK)

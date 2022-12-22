@@ -20,7 +20,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(6)] private List<CommsPlanItemLink> _allItemLinks;
         [ProtoMember(7)] private Guid _ID;
         [ProtoMember(8)] private DateTime _lastUpdatedUTC;
-
+        [ProtoMember(9)] private string _PreparedByPosition;
         public int OpsPeriod { get => _OpsPeriod; set => _OpsPeriod = value; }
 
         public int TaskNumber { get => _TaskNumber; set => _TaskNumber = value; }
@@ -31,6 +31,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid ID { get => _ID; set => _ID = value; }
         public DateTime LastUpdatedUTC { get => _lastUpdatedUTC; set => _lastUpdatedUTC = value; }
 
+        public string PreparedByPosition { get => _PreparedByPosition; set => _PreparedByPosition = value; }
 
         public CommsPlan() { ID = Guid.NewGuid(); allCommsItems = new List<CommsPlanItem>(); allItemLinks = new List<CommsPlanItemLink>(); LastUpdatedUTC = DateTime.UtcNow; }
         public CommsPlan(bool generateBlankItems) { ID = Guid.NewGuid(); allCommsItems = new List<CommsPlanItem>(); allItemLinks = new List<CommsPlanItemLink>(); if (generateBlankItems) { buildInitialText(); } LastUpdatedUTC = DateTime.UtcNow; }
@@ -39,12 +40,14 @@ namespace WF_ICS_ClassLibrary.Models
         private void buildInitialText()
         {
             List<string> templateFunctions = new List<string>();
-            templateFunctions.Add("COMMAND NET");
-            templateFunctions.Add("OPERATIONS");
-            templateFunctions.Add("SUPPORT NET");
+            templateFunctions.Add("COMMAND");
             templateFunctions.Add("TACTICAL");
-            templateFunctions.Add("AIR NET");
-            templateFunctions.Add("EMERGENCY CHANNEL");
+            templateFunctions.Add("GROUND-TO-AIR");
+            templateFunctions.Add("AIR-TO-AIR");
+            templateFunctions.Add("SUPPORT");
+            templateFunctions.Add("DISPATCH");
+
+            templateFunctions.Add("EMERGENCY");
 
 
 
@@ -69,14 +72,6 @@ namespace WF_ICS_ClassLibrary.Models
                 }
             }
 
-            /*
-            if (allCommsItems.Where(o => o.CommsFunction == "COMMAND NET").Count() <= 0) { allCommsItems.Add(new CommsPlanItem("COMMAND NET", new Guid("a0663432-2644-4716-b469-72ef1aaecab6"))); }
-            if (allCommsItems.Where(o => o.CommsFunction == "OPERATIONS").Count() <= 0) { allCommsItems.Add(new CommsPlanItem("OPERATIONS", new Guid("74aff6c5-d300-4e92-bb92-08b9782c2d47"))); }
-            if (allCommsItems.Where(o => o.CommsFunction == "SUPPORT NET").Count() <= 0) { allCommsItems.Add(new CommsPlanItem("SUPPORT NET", new Guid("aa39d773-8f7a-4a2e-8cf2-29d9bce94309"))); }
-            if (allCommsItems.Where(o => o.CommsFunction == "TACTICAL").Count() <= 0) { allCommsItems.Add(new CommsPlanItem("TACTICAL", new Guid("a57c8372-f231-42f0-bd53-b99799122435"))); }
-            if (allCommsItems.Where(o => o.CommsFunction == "AIR NET").Count() <= 0) { allCommsItems.Add(new CommsPlanItem("AIR NET", new Guid("603def75-f48e-42f2-b810-904b85082f30"))); }
-            if (allCommsItems.Where(o => o.CommsFunction == "EMERGENCY CHANNEL").Count() <= 0) { allCommsItems.Add(new CommsPlanItem("EMERGENCY CHANNEL", new Guid("5a326469-6572-4236-8b68-f3ba596ff980"))); }
-            */
         }
 
         public CommsPlanItem getItemByFunction(string function)
@@ -91,11 +86,6 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return new CommsPlanItem(); }
             }
             else { return new CommsPlanItem(); }
-            /*
-            if (allCommsItems.Where(o => o.CommsFunction.Equals(function, StringComparison.InvariantCultureIgnoreCase)).Count() == 1) { return allCommsItems.Where(o => o.CommsFunction.Equals(function, StringComparison.InvariantCultureIgnoreCase)).First(); }
-            else if (function == "REPEATER" && allCommsItems.Where(o=>o.IsRepeater).Any()) { return allCommsItems.Where(o => o.IsRepeater).First(); }
-            else { return new CommsPlanItem(); }
-            */
         }
 
         public CommsPlan CopyToNewPlan(int newOpsPeriod)
@@ -106,6 +96,7 @@ namespace WF_ICS_ClassLibrary.Models
             newPlan.TaskNumber = TaskNumber;
             newPlan.DatePrepared = DateTime.Now;
             newPlan.PreparedBy = PreparedBy;
+            newPlan.PreparedByPosition = PreparedByPosition;
             newPlan.allCommsItems.AddRange(allCommsItems);
             newPlan.allItemLinks.AddRange(allItemLinks);
             newPlan._lastUpdatedUTC = DateTime.UtcNow;
@@ -160,6 +151,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(12)] private bool _Active;
         [ProtoMember(13)] private Guid _OrganizationID;
         [ProtoMember(14)] private int _OpsPeriod;
+        [ProtoMember(15)] private string _Tone;
+        [ProtoMember(16)] private string _Aassignment;
 
         public Guid ItemID { get => _ItemID; set => _ItemID = value; }
         public string CommsSystem { get => _CommsSystem; set => _CommsSystem = value; }
@@ -175,15 +168,8 @@ namespace WF_ICS_ClassLibrary.Models
         public bool Active { get => _Active; set => _Active = value; }
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
         public int OpsPeriod { get => _OpsPeriod; set => _OpsPeriod = value; }
-
-        /*[ProtoMember(13)]
-        private Guid _userID;
-        public Guid UserID { get { return _userID; } set { _userID = value; } }*/
-
-
-
-
-
+        public string Tone { get => _Tone; set => _Tone = value; }
+        public string Assignment { get => _Aassignment; set => _Aassignment = value; }
 
         public string IDWithFrequency { get { return ChannelID + " " + Frequency; } }
         public string SystemWithID
@@ -223,14 +209,16 @@ namespace WF_ICS_ClassLibrary.Models
         {
             bool isEqual = true;
 
-            if (this.ItemID != other.ItemID) { isEqual = false; }
-            if (isEqual && this.Active != other.Active) { isEqual = false; }
-            if (isEqual && !this.CommsSystem.EqualsWithNull(other.CommsSystem)) { isEqual = false; }
-            if (isEqual && !this.CallSign.EqualsWithNull(other.CallSign)) { isEqual = false; }
-            if (isEqual && !this.ChannelID.EqualsWithNull(other.ChannelID)) { isEqual = false; }
-            if (isEqual && !this.ChannelNumber.EqualsWithNull(other.ChannelNumber)) { isEqual = false; }
-            if (isEqual && !this.Frequency.EqualsWithNull(other.Frequency)) { isEqual = false; }
-            if (isEqual && this.IsRepeater != other.IsRepeater) { isEqual = false; }
+            if (this.ItemID != other.ItemID) { return false; }
+            if (isEqual && this.Active != other.Active) { return false; }
+            if (isEqual && !this.CommsSystem.EqualsWithNull(other.CommsSystem)) { return false; }
+            if (isEqual && !this.CallSign.EqualsWithNull(other.CallSign)) { return false; }
+            if (isEqual && !this.ChannelID.EqualsWithNull(other.ChannelID)) { return false; }
+            if (isEqual && !this.ChannelNumber.EqualsWithNull(other.ChannelNumber)) { return false; }
+            if (isEqual && !this.Frequency.EqualsWithNull(other.Frequency)) { return false; }
+            if (isEqual && this.IsRepeater != other.IsRepeater) { return false; }
+            if(isEqual && !this.Tone.EqualsWithNull(other.Tone)) { return false; }
+            if(isEqual && !this.Assignment.EqualsWithNull(other.Assignment)) { return false; }
             return isEqual;
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace Wildfire_ICS_Assist.OptionsForms
 {
-    partial class EditContact
+    partial class EditContactForm
     {
         /// <summary>
         /// Required designer variable.

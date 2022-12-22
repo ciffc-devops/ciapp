@@ -261,7 +261,8 @@ namespace WildfireICSDesktopServices
                         categories.AddRange(_options.AllEquipmentCategories.Where(o => o.ParentCategoryID == parent.CategoryID).OrderBy(o => o.CategoryName).ToList());
                     }
                     return categories;
-
+                case "CommsItems":
+                    return _options.allCommsPlanItems.OrderBy(o => o.ChannelID).ToList();
                 case "EquipmentSets":
                     return _options.AllEquipmentSets;
                 case "DebriefPOD":
@@ -362,6 +363,11 @@ namespace WildfireICSDesktopServices
                     Contact c = (Contact)newValue;
                     _options.AllContacts = _options.AllContacts.Where(o => o.ContactID != c.ContactID).ToList();
                     _options.AllContacts.Add(c);
+                    break;
+                case "CommsItem":
+                    CommsPlanItem comms = (CommsPlanItem)newValue;  
+                    _options.allCommsPlanItems = _options.allCommsPlanItems.Where(o=>o.ItemID!= comms.ItemID).ToList();
+                    _options.allCommsPlanItems.Add(comms);
                     break;
                 case "Hospital":
                     Hospital hospital = (Hospital)newValue;

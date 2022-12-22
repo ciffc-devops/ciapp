@@ -793,6 +793,7 @@
             // 
             this.communicationsSystemsToolStripMenuItem.Name = "communicationsSystemsToolStripMenuItem";
             resources.ApplyResources(this.communicationsSystemsToolStripMenuItem, "communicationsSystemsToolStripMenuItem");
+            this.communicationsSystemsToolStripMenuItem.Click += new System.EventHandler(this.communicationsSystemsToolStripMenuItem_Click);
             // 
             // hospitalsToolStripMenuItem
             // 

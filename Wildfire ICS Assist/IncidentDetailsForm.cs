@@ -38,7 +38,7 @@ namespace Wildfire_ICS_Assist
         HospitalsForm hospitalsForm = null;
         MedivacsForm medivacsForm = null;
         SavedContactsForm savedContactsForm = null;
-
+        SavedCommsItemsForm savedCommsItemsForm= null;
 
         private void RemoveActiveForm(Form form)
         {
@@ -133,6 +133,26 @@ namespace Wildfire_ICS_Assist
         {
             RemoveActiveForm(savedContactsForm);
             savedContactsForm = null;
+
+        }
+
+        private void communicationsSystemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (null == savedCommsItemsForm)
+            {
+                savedCommsItemsForm = new SavedCommsItemsForm();
+                savedCommsItemsForm.FormClosed += SavedCommsPlanItemsForm_Closed;
+                savedCommsItemsForm.Show(this);
+                ActiveForms.Add(savedCommsItemsForm);
+            }
+
+            savedCommsItemsForm.BringToFront();
+        }
+
+        void SavedCommsPlanItemsForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(savedCommsItemsForm);
+            savedCommsItemsForm = null;
 
         }
     }
