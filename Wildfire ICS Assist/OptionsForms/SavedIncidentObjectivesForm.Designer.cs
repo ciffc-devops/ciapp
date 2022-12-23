@@ -1,6 +1,6 @@
 ﻿namespace Wildfire_ICS_Assist.OptionsForms
 {
-    partial class SavedVehiclesForm
+    partial class SavedIncidentObjectivesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,8 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dgvVehicles = new System.Windows.Forms.DataGridView();
-            this.colIncidentIDNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClassification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMake = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvObjectives = new System.Windows.Forms.DataGridView();
+            this.colObjectiveText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
@@ -41,7 +38,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVehicles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -56,75 +53,46 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dgvVehicles);
+            this.splitContainer1.Panel1.Controls.Add(this.dgvObjectives);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
-            this.splitContainer1.Size = new System.Drawing.Size(987, 591);
-            this.splitContainer1.SplitterDistance = 525;
+            this.splitContainer1.Size = new System.Drawing.Size(1467, 831);
+            this.splitContainer1.SplitterDistance = 762;
             this.splitContainer1.SplitterWidth = 7;
-            this.splitContainer1.TabIndex = 1;
+            this.splitContainer1.TabIndex = 2;
             // 
-            // dgvVehicles
+            // dgvObjectives
             // 
-            this.dgvVehicles.AllowUserToAddRows = false;
-            this.dgvVehicles.AllowUserToDeleteRows = false;
-            this.dgvVehicles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.dgvVehicles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVehicles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colIncidentIDNo,
-            this.colClassification,
-            this.colMake,
-            this.colAgency});
-            this.dgvVehicles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvVehicles.Location = new System.Drawing.Point(0, 0);
-            this.dgvVehicles.Margin = new System.Windows.Forms.Padding(6);
-            this.dgvVehicles.Name = "dgvVehicles";
-            this.dgvVehicles.ReadOnly = true;
-            this.dgvVehicles.RowHeadersVisible = false;
-            this.dgvVehicles.RowTemplate.Height = 35;
-            this.dgvVehicles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVehicles.Size = new System.Drawing.Size(987, 525);
-            this.dgvVehicles.TabIndex = 1;
-            this.dgvVehicles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehicles_CellDoubleClick);
-            this.dgvVehicles.SelectionChanged += new System.EventHandler(this.dgvVehicles_SelectionChanged);
+            this.dgvObjectives.AllowUserToAddRows = false;
+            this.dgvObjectives.AllowUserToDeleteRows = false;
+            this.dgvObjectives.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.dgvObjectives.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvObjectives.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colObjectiveText});
+            this.dgvObjectives.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvObjectives.Location = new System.Drawing.Point(0, 0);
+            this.dgvObjectives.Margin = new System.Windows.Forms.Padding(6);
+            this.dgvObjectives.Name = "dgvObjectives";
+            this.dgvObjectives.ReadOnly = true;
+            this.dgvObjectives.RowHeadersVisible = false;
+            this.dgvObjectives.RowTemplate.Height = 35;
+            this.dgvObjectives.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvObjectives.Size = new System.Drawing.Size(1467, 762);
+            this.dgvObjectives.TabIndex = 1;
+            this.dgvObjectives.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvObjectives_CellDoubleClick);
+            this.dgvObjectives.SelectionChanged += new System.EventHandler(this.dgvObjectives_SelectionChanged);
             // 
-            // colIncidentIDNo
+            // colObjectiveText
             // 
-            this.colIncidentIDNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colIncidentIDNo.DataPropertyName = "IncidentIDNo";
-            this.colIncidentIDNo.HeaderText = "Typical ID";
-            this.colIncidentIDNo.Name = "colIncidentIDNo";
-            this.colIncidentIDNo.ReadOnly = true;
-            this.colIncidentIDNo.Width = 117;
-            // 
-            // colClassification
-            // 
-            this.colClassification.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colClassification.DataPropertyName = "Classification";
-            this.colClassification.HeaderText = "Class";
-            this.colClassification.Name = "colClassification";
-            this.colClassification.ReadOnly = true;
-            // 
-            // colMake
-            // 
-            this.colMake.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMake.DataPropertyName = "Make";
-            this.colMake.HeaderText = "Make";
-            this.colMake.Name = "colMake";
-            this.colMake.ReadOnly = true;
-            // 
-            // colAgency
-            // 
-            this.colAgency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colAgency.DataPropertyName = "AgencyOrOwner";
-            this.colAgency.HeaderText = "Agency/Owner";
-            this.colAgency.Name = "colAgency";
-            this.colAgency.ReadOnly = true;
-            this.colAgency.Width = 162;
+            this.colObjectiveText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colObjectiveText.DataPropertyName = "Objective";
+            this.colObjectiveText.HeaderText = "Objective";
+            this.colObjectiveText.Name = "colObjectiveText";
+            this.colObjectiveText.ReadOnly = true;
             // 
             // btnDelete
             // 
@@ -165,24 +133,24 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // SavedVehiclesForm
+            // SavedIncidentObjectivesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(987, 591);
+            this.ClientSize = new System.Drawing.Size(1467, 831);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "SavedVehiclesForm";
+            this.Name = "SavedIncidentObjectivesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Saved Vehicles";
-            this.Load += new System.EventHandler(this.SavedVehiclesForm_Load);
+            this.Text = "Saved Incident Objectives";
+            this.Load += new System.EventHandler(this.SavedIncidentObjectivesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVehicles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -190,13 +158,10 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dgvVehicles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIncidentIDNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClassification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMake;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAgency;
+        private System.Windows.Forms.DataGridView dgvObjectives;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colObjectiveText;
     }
 }

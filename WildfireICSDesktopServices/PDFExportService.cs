@@ -278,32 +278,6 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("PRECAUTIONS", plan.Precautions);
                         stamper.AcroFields.SetField("SPECIAL INSTRUCTIONS", plan.SpecialInstructions);
 
-
-                        foreach (string s in plan.checkedFieldNames)
-                        {
-                            stamper = stamper.SetPDFCheckbox(s);
-                        }
-                        List<SafetyPlanCheckbox> allCheckboxes = new SafetyPlanCheckbox().getCheckboxes();
-
-                        List<SafetyPlanCheckbox> checkboxesWithTextFields = allCheckboxes.Where(o => o.FreeTextFieldName != null && o.FreeTextFieldName != "").ToList();
-
-                        int x = 0;
-                        foreach (SafetyPlanCheckbox spc in checkboxesWithTextFields)
-                        {
-                            string s = plan.additionalPPE[x];
-                            stamper.AcroFields.SetField(spc.FreeTextFieldName, s);
-                            x += 1;
-                        }
-
-                        //Rename fields so we can conocate multiple safety plans into one document
-                        foreach (SafetyPlanCheckbox check in allCheckboxes)
-                        {
-                            stamper.AcroFields.RenameField(check.FieldName, plan.PlanID + check.FieldName);
-                            if (check.FreeTextFieldName != null && check.FreeTextFieldName != "")
-                            {
-                                stamper.AcroFields.RenameField(check.FreeTextFieldName, plan.PlanID + check.FreeTextFieldName);
-                            }
-                        }
                         stamper.AcroFields.RenameField("TASK", plan.PlanID + "TASK");
                         stamper.AcroFields.RenameField("DATE  TIME PREPARED", plan.PlanID + "DATE  TIME PREPARED");
                         stamper.AcroFields.RenameField("FOR OP PERIOD", plan.PlanID + "FOR OP PERIOD");

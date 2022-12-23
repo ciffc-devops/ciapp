@@ -39,6 +39,11 @@ namespace Wildfire_ICS_Assist
         MedivacsForm medivacsForm = null;
         SavedContactsForm savedContactsForm = null;
         SavedCommsItemsForm savedCommsItemsForm= null;
+        SavedVehiclesForm savedVehiclesForm= null;
+        SavedIncidentObjectivesForm savedObjectivesForm = null;
+        SavedSafetyNotesForm savedSafetyNotesForm = null;
+        SavedTeamMembersForm savedTeamMembersForm = null;
+
 
         private void RemoveActiveForm(Form form)
         {
@@ -153,6 +158,86 @@ namespace Wildfire_ICS_Assist
         {
             RemoveActiveForm(savedCommsItemsForm);
             savedCommsItemsForm = null;
+
+        }
+
+        private void vehiclesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (null == savedVehiclesForm)
+            {
+                savedVehiclesForm = new SavedVehiclesForm();
+                savedVehiclesForm.FormClosed += SavedVehiclesForm_Closed;
+                savedVehiclesForm.Show(this);
+                ActiveForms.Add(savedVehiclesForm);
+            }
+
+            savedVehiclesForm.BringToFront();
+        }
+
+        void SavedVehiclesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(savedVehiclesForm);
+            savedVehiclesForm = null;
+
+        }
+
+        private void teamMembersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (null == savedTeamMembersForm)
+            {
+                savedTeamMembersForm = new SavedTeamMembersForm();
+                savedTeamMembersForm.FormClosed += SavedTeamMembersForm_Closed;
+                savedTeamMembersForm.Show(this);
+                ActiveForms.Add(savedTeamMembersForm);
+            }
+
+            savedTeamMembersForm.BringToFront();
+        }
+
+        void SavedTeamMembersForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(savedTeamMembersForm);
+            savedTeamMembersForm = null;
+
+        }
+
+        private void incidentObjectivesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (null == savedObjectivesForm)
+            {
+                savedObjectivesForm = new SavedIncidentObjectivesForm();
+                savedObjectivesForm.FormClosed += SavedObjectivesForm_Closed;
+                savedObjectivesForm.Show(this);
+                ActiveForms.Add(savedObjectivesForm);
+            }
+
+            savedObjectivesForm.BringToFront();
+        }
+
+        void SavedObjectivesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(savedObjectivesForm);
+            savedObjectivesForm = null;
+
+        }
+
+        private void safetyNotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (null == savedSafetyNotesForm)
+            {
+                savedSafetyNotesForm = new SavedSafetyNotesForm();
+                savedSafetyNotesForm.FormClosed += SavedSafetyNotesForm_Closed;
+                savedSafetyNotesForm.Show(this);
+                ActiveForms.Add(savedSafetyNotesForm);
+            }
+
+            savedSafetyNotesForm.BringToFront();
+        }
+
+        void SavedSafetyNotesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(savedSafetyNotesForm);
+            savedSafetyNotesForm = null;
 
         }
     }

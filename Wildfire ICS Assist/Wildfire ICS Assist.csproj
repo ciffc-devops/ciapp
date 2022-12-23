@@ -125,6 +125,24 @@
     <Compile Include="OptionsForms\EditMedivacForm.Designer.cs">
       <DependentUpon>EditMedivacForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\EditSavedIncidentObjectiveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedIncidentObjectiveForm.Designer.cs">
+      <DependentUpon>EditSavedIncidentObjectiveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedSafetyNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedSafetyNoteForm.Designer.cs">
+      <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedTeamMemberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedTeamMemberForm.Designer.cs">
+      <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\EditSavedVehicleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +154,12 @@
     </Compile>
     <Compile Include="OptionsForms\HospitalsForm.Designer.cs">
       <DependentUpon>HospitalsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\ImportSavedTeamMembersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\ImportSavedTeamMembersForm.Designer.cs">
+      <DependentUpon>ImportSavedTeamMembersForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\MedivacsForm.cs">
       <SubType>Form</SubType>
@@ -160,6 +184,24 @@
     </Compile>
     <Compile Include="OptionsForms\SavedContactsForm.Designer.cs">
       <DependentUpon>SavedContactsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedIncidentObjectivesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedIncidentObjectivesForm.Designer.cs">
+      <DependentUpon>SavedIncidentObjectivesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedSafetyNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedSafetyNotesForm.Designer.cs">
+      <DependentUpon>SavedSafetyNotesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedTeamMembersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedTeamMembersForm.Designer.cs">
+      <DependentUpon>SavedTeamMembersForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\SavedVehiclesForm.cs">
       <SubType>Form</SubType>
@@ -202,6 +244,9 @@
     <EmbeddedResource Include="OptionsForms\EditMedivacForm.resx">
       <DependentUpon>EditMedivacForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedIncidentObjectiveForm.resx">
+      <DependentUpon>EditSavedIncidentObjectiveForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedVehicleForm.resx">
       <DependentUpon>EditSavedVehicleForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,6 +264,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedContactsForm.resx">
       <DependentUpon>SavedContactsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedIncidentObjectivesForm.resx">
+      <DependentUpon>SavedIncidentObjectivesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedSafetyNotesForm.resx">
+      <DependentUpon>SavedSafetyNotesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedTeamMembersForm.resx">
+      <DependentUpon>SavedTeamMembersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedVehiclesForm.resx">
       <DependentUpon>SavedVehiclesForm.cs</DependentUpon>
@@ -268,6 +322,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-399-import.png" />
     <None Include="Resources\glyphicons-basic-849-computer-network.png" />
     <None Include="Resources\glyphicons-filetypes-9-file-spreadsheet.png" />
     <None Include="Resources\glyphicons-calculate-and-output.png" />

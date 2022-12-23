@@ -135,48 +135,18 @@
   <metadata name="colMemberName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colMemberName.HeaderText" xml:space="preserve">
-    <value>Member Name</value>
-  </data>
-  <data name="colMemberName.MinimumWidth" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
   <metadata name="colMemberSARGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colMemberSARGroup.HeaderText" xml:space="preserve">
-    <value>SAR Team</value>
-  </data>
-  <data name="colMemberSARGroup.Width" type="System.Int32, mscorlib">
-    <value>132</value>
-  </data>
   <metadata name="colSignInTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colSignInTime.HeaderText" xml:space="preserve">
-    <value>Sign In</value>
-  </data>
-  <data name="colSignInTime.Width" type="System.Int32, mscorlib">
-    <value>97</value>
-  </data>
   <metadata name="colAssignmentNumber.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colAssignmentNumber.HeaderText" xml:space="preserve">
-    <value>Assignment</value>
-  </data>
-  <data name="colAssignmentNumber.Width" type="System.Int32, mscorlib">
-    <value>152</value>
-  </data>
   <metadata name="colMemberAssignmentStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colMemberAssignmentStatus.HeaderText" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="colMemberAssignmentStatus.Width" type="System.Int32, mscorlib">
-    <value>99</value>
-  </data>
   <data name="dgvMembersOnTask.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -370,6 +340,51 @@
   <data name="&gt;&gt;splitContainer4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="colMemberName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colMemberName.HeaderText" xml:space="preserve">
+    <value>Member Name</value>
+  </data>
+  <data name="colMemberName.MinimumWidth" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <metadata name="colMemberSARGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colMemberSARGroup.HeaderText" xml:space="preserve">
+    <value>SAR Team</value>
+  </data>
+  <data name="colMemberSARGroup.Width" type="System.Int32, mscorlib">
+    <value>132</value>
+  </data>
+  <metadata name="colSignInTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colSignInTime.HeaderText" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="colSignInTime.Width" type="System.Int32, mscorlib">
+    <value>97</value>
+  </data>
+  <metadata name="colAssignmentNumber.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colAssignmentNumber.HeaderText" xml:space="preserve">
+    <value>Assignment</value>
+  </data>
+  <data name="colAssignmentNumber.Width" type="System.Int32, mscorlib">
+    <value>152</value>
+  </data>
+  <metadata name="colMemberAssignmentStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colMemberAssignmentStatus.HeaderText" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="colMemberAssignmentStatus.Width" type="System.Int32, mscorlib">
+    <value>99</value>
+  </data>
   <data name="splitContainer5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -385,54 +400,21 @@
   <metadata name="colCategory.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colCategory.HeaderText" xml:space="preserve">
-    <value>Category</value>
-  </data>
-  <data name="colCategory.Width" type="System.Int32, mscorlib">
-    <value>110</value>
-  </data>
   <metadata name="colSubCategory.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colSubCategory.HeaderText" xml:space="preserve">
-    <value>Sub-Category</value>
-  </data>
-  <data name="colSubCategory.Width" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
   <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colName.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="colName.Width" type="System.Int32, mscorlib">
-    <value>86</value>
-  </data>
   <metadata name="colReferenceID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colReferenceID.HeaderText" xml:space="preserve">
-    <value>Reference ID</value>
-  </data>
-  <data name="colReferenceID.Width" type="System.Int32, mscorlib">
-    <value>145</value>
-  </data>
   <metadata name="colEquipmentStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colEquipmentStatus.HeaderText" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="colEquipmentStatus.Width" type="System.Int32, mscorlib">
-    <value>85</value>
-  </data>
   <metadata name="colAssignee.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="colAssignee.HeaderText" xml:space="preserve">
-    <value>Assignee</value>
-  </data>
   <data name="dgvTaskEquipment.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -623,8 +605,164 @@
   <data name="&gt;&gt;splitContainer5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="colCategory.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colCategory.HeaderText" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="colCategory.Width" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
+  <metadata name="colSubCategory.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colSubCategory.HeaderText" xml:space="preserve">
+    <value>Sub-Category</value>
+  </data>
+  <data name="colSubCategory.Width" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colName.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="colName.Width" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <metadata name="colReferenceID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colReferenceID.HeaderText" xml:space="preserve">
+    <value>Reference ID</value>
+  </data>
+  <data name="colReferenceID.Width" type="System.Int32, mscorlib">
+    <value>145</value>
+  </data>
+  <metadata name="colEquipmentStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colEquipmentStatus.HeaderText" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="colEquipmentStatus.Width" type="System.Int32, mscorlib">
+    <value>85</value>
+  </data>
+  <metadata name="colAssignee.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colAssignee.HeaderText" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
   <data name="pnlOpsPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;btnCloseOpPeriod.Name" xml:space="preserve">
+    <value>btnCloseOpPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnCloseOpPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCloseOpPeriod.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnCloseOpPeriod.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label18.Name" xml:space="preserve">
+    <value>label18</value>
+  </data>
+  <data name="&gt;&gt;label18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label18.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;datOpsEnd.Name" xml:space="preserve">
+    <value>datOpsEnd</value>
+  </data>
+  <data name="&gt;&gt;datOpsEnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;datOpsEnd.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;datOpsEnd.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;datOpsStart.Name" xml:space="preserve">
+    <value>datOpsStart</value>
+  </data>
+  <data name="&gt;&gt;datOpsStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;datOpsStart.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;datOpsStart.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;numOpPeriod.Name" xml:space="preserve">
+    <value>numOpPeriod</value>
+  </data>
+  <data name="&gt;&gt;numOpPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numOpPeriod.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;numOpPeriod.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="pnlOpsPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>823, 36</value>
+  </data>
+  <data name="pnlOpsPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 213</value>
+  </data>
+  <data name="pnlOpsPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;pnlOpsPeriod.Name" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;pnlOpsPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlOpsPeriod.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlOpsPeriod.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="btnCloseOpPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -851,29 +989,173 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="pnlOpsPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>823, 36</value>
-  </data>
-  <data name="pnlOpsPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 213</value>
-  </data>
-  <data name="pnlOpsPeriod.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="&gt;&gt;pnlOpsPeriod.Name" xml:space="preserve">
-    <value>pnlOpsPeriod</value>
-  </data>
-  <data name="&gt;&gt;pnlOpsPeriod.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlOpsPeriod.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlOpsPeriod.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="pnlTaskInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;btnOutstandingLogItems.Name" xml:space="preserve">
+    <value>btnOutstandingLogItems</value>
+  </data>
+  <data name="&gt;&gt;btnOutstandingLogItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOutstandingLogItems.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;btnOutstandingLogItems.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label19.Name" xml:space="preserve">
+    <value>label19</value>
+  </data>
+  <data name="&gt;&gt;label19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label19.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnViewPositionLog.Name" xml:space="preserve">
+    <value>btnViewPositionLog</value>
+  </data>
+  <data name="&gt;&gt;btnViewPositionLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnViewPositionLog.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;btnViewPositionLog.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnAddToPositionLog.Name" xml:space="preserve">
+    <value>btnAddToPositionLog</value>
+  </data>
+  <data name="&gt;&gt;btnAddToPositionLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnAddToPositionLog.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;btnAddToPositionLog.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtTaskNumber.Name" xml:space="preserve">
+    <value>txtTaskNumber</value>
+  </data>
+  <data name="&gt;&gt;txtTaskNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtTaskNumber.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;txtTaskNumber.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnICSRoleHelp.Name" xml:space="preserve">
+    <value>btnICSRoleHelp</value>
+  </data>
+  <data name="&gt;&gt;btnICSRoleHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnICSRoleHelp.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;btnICSRoleHelp.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cboICSRole.Name" xml:space="preserve">
+    <value>cboICSRole</value>
+  </data>
+  <data name="&gt;&gt;cboICSRole.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboICSRole.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;cboICSRole.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;label17.Name" xml:space="preserve">
+    <value>label17</value>
+  </data>
+  <data name="&gt;&gt;label17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label17.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;label16.Name" xml:space="preserve">
+    <value>label16</value>
+  </data>
+  <data name="&gt;&gt;label16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label16.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;txtTaskName.Name" xml:space="preserve">
+    <value>txtTaskName</value>
+  </data>
+  <data name="&gt;&gt;txtTaskName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtTaskName.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;txtTaskName.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;lblTaskName.Name" xml:space="preserve">
+    <value>lblTaskName</value>
+  </data>
+  <data name="&gt;&gt;lblTaskName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTaskName.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;lblTaskName.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblTaskNumber.Name" xml:space="preserve">
+    <value>lblTaskNumber</value>
+  </data>
+  <data name="&gt;&gt;lblTaskNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTaskNumber.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;lblTaskNumber.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="pnlTaskInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 36</value>
+  </data>
+  <data name="pnlTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>655, 213</value>
+  </data>
+  <data name="pnlTaskInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="&gt;&gt;pnlTaskInfo.Name" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;pnlTaskInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlTaskInfo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlTaskInfo.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="btnOutstandingLogItems.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -1325,27 +1607,6 @@
   <data name="&gt;&gt;lblTaskNumber.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="pnlTaskInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 36</value>
-  </data>
-  <data name="pnlTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>655, 213</value>
-  </data>
-  <data name="pnlTaskInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <data name="&gt;&gt;pnlTaskInfo.Name" xml:space="preserve">
-    <value>pnlTaskInfo</value>
-  </data>
-  <data name="&gt;&gt;pnlTaskInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlTaskInfo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlTaskInfo.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="lblServerStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -1478,24 +1739,6 @@
   <data name="&gt;&gt;tpEquipment.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="txtNetworkLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="txtNetworkLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="txtNetworkLog.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="txtNetworkLog.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="txtNetworkLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1062, 0</value>
-  </data>
-  <data name="txtNetworkLog.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;txtNetworkLog.Name" xml:space="preserve">
     <value>txtNetworkLog</value>
   </data>
@@ -1549,7 +1792,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAATABAAEwAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAATgBAAE4AQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1609,6 +1852,108 @@
   </data>
   <data name="&gt;&gt;tcStatus.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="txtNetworkLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="txtNetworkLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="txtNetworkLog.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtNetworkLog.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="txtNetworkLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1062, 0</value>
+  </data>
+  <data name="txtNetworkLog.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtNetworkLog.Name" xml:space="preserve">
+    <value>txtNetworkLog</value>
+  </data>
+  <data name="&gt;&gt;txtNetworkLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtNetworkLog.Parent" xml:space="preserve">
+    <value>tpNetworkLog</value>
+  </data>
+  <data name="&gt;&gt;txtNetworkLog.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnCancelInternetSync.Name" xml:space="preserve">
+    <value>btnCancelInternetSync</value>
+  </data>
+  <data name="&gt;&gt;btnCancelInternetSync.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancelInternetSync.Parent" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;btnCancelInternetSync.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label22.Name" xml:space="preserve">
+    <value>label22</value>
+  </data>
+  <data name="&gt;&gt;label22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label21.Name" xml:space="preserve">
+    <value>label21</value>
+  </data>
+  <data name="&gt;&gt;label21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
+    <value>progressBar1</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="pnlInternetSyncStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>952, 595</value>
+  </data>
+  <data name="pnlInternetSyncStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 27</value>
+  </data>
+  <data name="pnlInternetSyncStart.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="pnlInternetSyncStart.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;pnlInternetSyncStart.Name" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;pnlInternetSyncStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlInternetSyncStart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="btnCancelInternetSync.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1730,29 +2075,89 @@
   <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="pnlInternetSyncStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>952, 595</value>
+  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Name" xml:space="preserve">
+    <value>lblNetworkShareMoreInfoMsg</value>
   </data>
-  <data name="pnlInternetSyncStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 27</value>
+  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pnlInternetSyncStart.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
+  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
   </data>
-  <data name="pnlInternetSyncStart.Visible" type="System.Boolean, mscorlib">
+  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnNetworkSyncDone.Name" xml:space="preserve">
+    <value>btnNetworkSyncDone</value>
+  </data>
+  <data name="&gt;&gt;btnNetworkSyncDone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNetworkSyncDone.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;btnNetworkSyncDone.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pbNetworkSyncInProgress.Name" xml:space="preserve">
+    <value>pbNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;pbNetworkSyncInProgress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pbNetworkSyncInProgress.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;pbNetworkSyncInProgress.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Name" xml:space="preserve">
+    <value>btnCloseNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkSyncStatus.Name" xml:space="preserve">
+    <value>lblNetworkSyncStatus</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkSyncStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkSyncStatus.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkSyncStatus.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>952, 564</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 25</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;pnlInternetSyncStart.Name" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
+  <data name="&gt;&gt;pnlNetworkSyncInProgress.Name" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
   </data>
-  <data name="&gt;&gt;pnlInternetSyncStart.Type" xml:space="preserve">
+  <data name="&gt;&gt;pnlNetworkSyncInProgress.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pnlInternetSyncStart.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pnlNetworkSyncInProgress.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="lblNetworkShareMoreInfoMsg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1904,80 +2309,11 @@
   <data name="&gt;&gt;lblNetworkSyncStatus.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="pnlNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>952, 564</value>
-  </data>
-  <data name="pnlNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 25</value>
-  </data>
-  <data name="pnlNetworkSyncInProgress.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="pnlNetworkSyncInProgress.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;pnlNetworkSyncInProgress.Name" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;pnlNetworkSyncInProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlNetworkSyncInProgress.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="menuStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14pt</value>
-  </data>
-  <data name="newIncidentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 30</value>
-  </data>
-  <data name="newIncidentToolStripMenuItem.Text" xml:space="preserve">
-    <value>New Incident</value>
-  </data>
-  <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 30</value>
-  </data>
-  <data name="openToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open...</value>
-  </data>
-  <data name="recentIncidentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 30</value>
-  </data>
-  <data name="recentIncidentsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Recent Incidents</value>
-  </data>
-  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 30</value>
-  </data>
-  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="saveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 30</value>
-  </data>
-  <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save As...</value>
-  </data>
-  <data name="browseToIncidentFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 30</value>
-  </data>
-  <data name="browseToIncidentFolderToolStripMenuItem.Text" xml:space="preserve">
-    <value>Browse to Incident Folder</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 6</value>
-  </data>
-  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 30</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exit</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 29</value>
@@ -2105,33 +2441,6 @@
   <data name="networkInternetToolStripMenuItem.Text" xml:space="preserve">
     <value>Network / Internet</value>
   </data>
-  <data name="checkForTemplateUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 30</value>
-  </data>
-  <data name="checkForTemplateUpdatesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check for Template Updates</value>
-  </data>
-  <data name="checkForAppUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 30</value>
-  </data>
-  <data name="checkForAppUpdatesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check for app updates</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 6</value>
-  </data>
-  <data name="supportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 30</value>
-  </data>
-  <data name="supportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Support</value>
-  </data>
-  <data name="aboutCIAPPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 30</value>
-  </data>
-  <data name="aboutCIAPPToolStripMenuItem.Text" xml:space="preserve">
-    <value>About CIAPP</value>
-  </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 29</value>
   </data>
@@ -2161,6 +2470,243 @@
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>13</value>
+  </data>
+  <data name="newIncidentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 30</value>
+  </data>
+  <data name="newIncidentToolStripMenuItem.Text" xml:space="preserve">
+    <value>New Incident</value>
+  </data>
+  <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 30</value>
+  </data>
+  <data name="openToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open...</value>
+  </data>
+  <data name="recentIncidentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 30</value>
+  </data>
+  <data name="recentIncidentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Recent Incidents</value>
+  </data>
+  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 30</value>
+  </data>
+  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="saveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 30</value>
+  </data>
+  <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save As...</value>
+  </data>
+  <data name="browseToIncidentFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 30</value>
+  </data>
+  <data name="browseToIncidentFolderToolStripMenuItem.Text" xml:space="preserve">
+    <value>Browse to Incident Folder</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 6</value>
+  </data>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 30</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="checkForTemplateUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 30</value>
+  </data>
+  <data name="checkForTemplateUpdatesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Check for Template Updates</value>
+  </data>
+  <data name="checkForAppUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 30</value>
+  </data>
+  <data name="checkForAppUpdatesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Check for app updates</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>316, 6</value>
+  </data>
+  <data name="supportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 30</value>
+  </data>
+  <data name="supportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="aboutCIAPPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 30</value>
+  </data>
+  <data name="aboutCIAPPToolStripMenuItem.Text" xml:space="preserve">
+    <value>About CIAPP</value>
+  </data>
+  <data name="&gt;&gt;lblIAP.Name" xml:space="preserve">
+    <value>lblIAP</value>
+  </data>
+  <data name="&gt;&gt;lblIAP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblIAP.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;lblIAP.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnTransportPlan.Name" xml:space="preserve">
+    <value>btnTransportPlan</value>
+  </data>
+  <data name="&gt;&gt;btnTransportPlan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTransportPlan.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnTransportPlan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnBriefings2.Name" xml:space="preserve">
+    <value>btnBriefings2</value>
+  </data>
+  <data name="&gt;&gt;btnBriefings2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBriefings2.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnBriefings2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnExpandIAP.Name" xml:space="preserve">
+    <value>btnExpandIAP</value>
+  </data>
+  <data name="&gt;&gt;btnExpandIAP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExpandIAP.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnExpandIAP.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnSafetyPlans.Name" xml:space="preserve">
+    <value>btnSafetyPlans</value>
+  </data>
+  <data name="&gt;&gt;btnSafetyPlans.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSafetyPlans.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnSafetyPlans.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnMedicalPlan.Name" xml:space="preserve">
+    <value>btnMedicalPlan</value>
+  </data>
+  <data name="&gt;&gt;btnMedicalPlan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMedicalPlan.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnMedicalPlan.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;btnPrintOrgChart.Name" xml:space="preserve">
+    <value>btnPrintOrgChart</value>
+  </data>
+  <data name="&gt;&gt;btnPrintOrgChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnPrintOrgChart.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnPrintOrgChart.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;btnCommsPlan.Name" xml:space="preserve">
+    <value>btnCommsPlan</value>
+  </data>
+  <data name="&gt;&gt;btnCommsPlan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCommsPlan.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnCommsPlan.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;btnSubjectProfile.Name" xml:space="preserve">
+    <value>btnSubjectProfile</value>
+  </data>
+  <data name="&gt;&gt;btnSubjectProfile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSubjectProfile.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnSubjectProfile.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnPrintIAP.Name" xml:space="preserve">
+    <value>btnPrintIAP</value>
+  </data>
+  <data name="&gt;&gt;btnPrintIAP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnPrintIAP.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnPrintIAP.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;btnIncidentObjectives.Name" xml:space="preserve">
+    <value>btnIncidentObjectives</value>
+  </data>
+  <data name="&gt;&gt;btnIncidentObjectives.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnIncidentObjectives.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnIncidentObjectives.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;btnOpsPlan.Name" xml:space="preserve">
+    <value>btnOpsPlan</value>
+  </data>
+  <data name="&gt;&gt;btnOpsPlan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOpsPlan.Parent" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;btnOpsPlan.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="pnlIAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 255</value>
+  </data>
+  <data name="pnlIAP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>927, 336</value>
+  </data>
+  <data name="pnlIAP.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;pnlIAP.Name" xml:space="preserve">
+    <value>pnlIAP</value>
+  </data>
+  <data name="&gt;&gt;pnlIAP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlIAP.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlIAP.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="lblIAP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -3074,29 +3620,113 @@
   <data name="&gt;&gt;btnOpsPlan.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="pnlIAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 255</value>
-  </data>
-  <data name="pnlIAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>927, 336</value>
-  </data>
-  <data name="pnlIAP.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="&gt;&gt;pnlIAP.Name" xml:space="preserve">
-    <value>pnlIAP</value>
-  </data>
-  <data name="&gt;&gt;pnlIAP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlIAP.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlIAP.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="pnlTeamStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;btnOpsAssignments.Name" xml:space="preserve">
+    <value>btnOpsAssignments</value>
+  </data>
+  <data name="&gt;&gt;btnOpsAssignments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOpsAssignments.Parent" xml:space="preserve">
+    <value>pnlTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnOpsAssignments.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnOpsMemberStatus.Name" xml:space="preserve">
+    <value>btnOpsMemberStatus</value>
+  </data>
+  <data name="&gt;&gt;btnOpsMemberStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOpsMemberStatus.Parent" xml:space="preserve">
+    <value>pnlTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnOpsMemberStatus.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnOpsDashboard.Name" xml:space="preserve">
+    <value>btnOpsDashboard</value>
+  </data>
+  <data name="&gt;&gt;btnOpsDashboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOpsDashboard.Parent" xml:space="preserve">
+    <value>pnlTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnOpsDashboard.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnTeamStatus.Name" xml:space="preserve">
+    <value>btnTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnTeamStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTeamStatus.Parent" xml:space="preserve">
+    <value>pnlTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnTeamStatus.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnExpandTeamStatus.Name" xml:space="preserve">
+    <value>btnExpandTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnExpandTeamStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExpandTeamStatus.Parent" xml:space="preserve">
+    <value>pnlTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnExpandTeamStatus.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnCommsLog.Name" xml:space="preserve">
+    <value>btnCommsLog</value>
+  </data>
+  <data name="&gt;&gt;btnCommsLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCommsLog.Parent" xml:space="preserve">
+    <value>pnlTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnCommsLog.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label14.Name" xml:space="preserve">
+    <value>label14</value>
+  </data>
+  <data name="&gt;&gt;label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
+    <value>pnlTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="pnlTeamStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>528, 255</value>
+  </data>
+  <data name="pnlTeamStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 36</value>
+  </data>
+  <data name="pnlTeamStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;pnlTeamStatus.Name" xml:space="preserve">
+    <value>pnlTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;pnlTeamStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlTeamStatus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlTeamStatus.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="btnOpsAssignments.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -3433,29 +4063,149 @@
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="pnlTeamStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>528, 255</value>
-  </data>
-  <data name="pnlTeamStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 36</value>
-  </data>
-  <data name="pnlTeamStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="&gt;&gt;pnlTeamStatus.Name" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;pnlTeamStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlTeamStatus.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlTeamStatus.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="pnlLogistics.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsBulkSignIn.Name" xml:space="preserve">
+    <value>btnLogisticsBulkSignIn</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsBulkSignIn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsBulkSignIn.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsBulkSignIn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsSignIn.Name" xml:space="preserve">
+    <value>btnLogisticsSignIn</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsSignIn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsSignIn.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsSignIn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsMemberStatus.Name" xml:space="preserve">
+    <value>btnLogisticsMemberStatus</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsMemberStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsMemberStatus.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsMemberStatus.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnAdditionalContacts.Name" xml:space="preserve">
+    <value>btnAdditionalContacts</value>
+  </data>
+  <data name="&gt;&gt;btnAdditionalContacts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnAdditionalContacts.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnAdditionalContacts.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnMemberNeeds.Name" xml:space="preserve">
+    <value>btnMemberNeeds</value>
+  </data>
+  <data name="&gt;&gt;btnMemberNeeds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMemberNeeds.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnMemberNeeds.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnEquipment.Name" xml:space="preserve">
+    <value>btnEquipment</value>
+  </data>
+  <data name="&gt;&gt;btnEquipment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnEquipment.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnEquipment.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;btnVehicles.Name" xml:space="preserve">
+    <value>btnVehicles</value>
+  </data>
+  <data name="&gt;&gt;btnVehicles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnVehicles.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnVehicles.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsDashboard.Name" xml:space="preserve">
+    <value>btnLogisticsDashboard</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsDashboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsDashboard.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsDashboard.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;btnExpandLogistics.Name" xml:space="preserve">
+    <value>btnExpandLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnExpandLogistics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExpandLogistics.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnExpandLogistics.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblLogisticsTitle.Name" xml:space="preserve">
+    <value>lblLogisticsTitle</value>
+  </data>
+  <data name="&gt;&gt;lblLogisticsTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLogisticsTitle.Parent" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;lblLogisticsTitle.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="pnlLogistics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>528, 297</value>
+  </data>
+  <data name="pnlLogistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 36</value>
+  </data>
+  <data name="pnlLogistics.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="&gt;&gt;pnlLogistics.Name" xml:space="preserve">
+    <value>pnlLogistics</value>
+  </data>
+  <data name="&gt;&gt;pnlLogistics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlLogistics.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlLogistics.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="btnLogisticsBulkSignIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3910,29 +4660,173 @@
   <data name="&gt;&gt;lblLogisticsTitle.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="pnlLogistics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>528, 297</value>
-  </data>
-  <data name="pnlLogistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 36</value>
-  </data>
-  <data name="pnlLogistics.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <data name="&gt;&gt;pnlLogistics.Name" xml:space="preserve">
-    <value>pnlLogistics</value>
-  </data>
-  <data name="&gt;&gt;pnlLogistics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlLogistics.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlLogistics.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="pnlPlanning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;btnPlanningAddAssignment.Name" xml:space="preserve">
+    <value>btnPlanningAddAssignment</value>
+  </data>
+  <data name="&gt;&gt;btnPlanningAddAssignment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnPlanningAddAssignment.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnPlanningAddAssignment.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnTeamAssignments.Name" xml:space="preserve">
+    <value>btnTeamAssignments</value>
+  </data>
+  <data name="&gt;&gt;btnTeamAssignments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTeamAssignments.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnTeamAssignments.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnReflexTasking.Name" xml:space="preserve">
+    <value>btnReflexTasking</value>
+  </data>
+  <data name="&gt;&gt;btnReflexTasking.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnReflexTasking.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnReflexTasking.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnTimeline.Name" xml:space="preserve">
+    <value>btnTimeline</value>
+  </data>
+  <data name="&gt;&gt;btnTimeline.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTimeline.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnTimeline.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnNotes.Name" xml:space="preserve">
+    <value>btnNotes</value>
+  </data>
+  <data name="&gt;&gt;btnNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNotes.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnNotes.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnSegmentation.Name" xml:space="preserve">
+    <value>btnSegmentation</value>
+  </data>
+  <data name="&gt;&gt;btnSegmentation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSegmentation.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnSegmentation.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;btnPlanningDashboard.Name" xml:space="preserve">
+    <value>btnPlanningDashboard</value>
+  </data>
+  <data name="&gt;&gt;btnPlanningDashboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnPlanningDashboard.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnPlanningDashboard.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;btnAssignmentStats.Name" xml:space="preserve">
+    <value>btnAssignmentStats</value>
+  </data>
+  <data name="&gt;&gt;btnAssignmentStats.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnAssignmentStats.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnAssignmentStats.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;btnClues.Name" xml:space="preserve">
+    <value>btnClues</value>
+  </data>
+  <data name="&gt;&gt;btnClues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnClues.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnClues.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnMattson.Name" xml:space="preserve">
+    <value>btnMattson</value>
+  </data>
+  <data name="&gt;&gt;btnMattson.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMattson.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnMattson.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;btnExpandPlanning.Name" xml:space="preserve">
+    <value>btnExpandPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnExpandPlanning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExpandPlanning.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;btnExpandPlanning.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblPlanningTitle.Name" xml:space="preserve">
+    <value>lblPlanningTitle</value>
+  </data>
+  <data name="&gt;&gt;lblPlanningTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPlanningTitle.Parent" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;lblPlanningTitle.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="pnlPlanning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>528, 339</value>
+  </data>
+  <data name="pnlPlanning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 36</value>
+  </data>
+  <data name="pnlPlanning.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="&gt;&gt;pnlPlanning.Name" xml:space="preserve">
+    <value>pnlPlanning</value>
+  </data>
+  <data name="&gt;&gt;pnlPlanning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlPlanning.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlPlanning.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="btnPlanningAddAssignment.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -4504,27 +5398,6 @@
   </data>
   <data name="&gt;&gt;lblPlanningTitle.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="pnlPlanning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>528, 339</value>
-  </data>
-  <data name="pnlPlanning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 36</value>
-  </data>
-  <data name="pnlPlanning.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <data name="&gt;&gt;pnlPlanning.Name" xml:space="preserve">
-    <value>pnlPlanning</value>
-  </data>
-  <data name="&gt;&gt;pnlPlanning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlPlanning.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlPlanning.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="llProgramURL.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

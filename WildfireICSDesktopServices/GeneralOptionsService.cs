@@ -213,9 +213,54 @@ namespace WildfireICSDesktopServices
         {
             switch (ValueName)
             {
+
+                case "Ambulances":
+                    return _options.AllAmbulanceServices;
+                case "AutoBackupInterval":
+                    return _options.AutoBackupIntervalMinutes;
+                case "AutomaticSubFolders":
+                    return _options.AutomaticSubFolders;
+                case "CannedCommsItems":
+                    return _options.AllCannedCommsLogEntries;
+                case "CommsItems":
+                    return _options.allCommsPlanItems.OrderBy(o => o.ChannelID).ToList();
+                case "Contacts":
+                    return _options.AllContacts;
+                case "CoordinateFormat":
+                    return _options.PositionFormat;
                 case "DefaultICSRole":
                     if (_options.DefaultICSRole != null) { return _options.DefaultICSRole; }
                     else { return new ICSRole().GetRoleByName("SAR Manager"); }
+                case "DefaultPort":
+                    return _options.DefaultPortNumber;
+                case "Equipment":
+                    return _options.AllEquipment.OrderBy(o => o.Category.CategoryName).ThenBy(o => o.EquipmentName).ToList();
+                case "EquipmentCategories":
+                    return _options.AllEquipmentCategories.OrderBy(o => o.CategoryName).ToList();
+                case "EquipmentCategoriesHierarchy":
+                    List<EquipmentCategory> categories = new List<EquipmentCategory>();
+
+                    foreach (EquipmentCategory parent in _options.AllEquipmentCategories.Where(o => o.ParentCategoryID == Guid.Empty).OrderBy(o => o.CategoryName).ToList())
+                    {
+                        categories.Add(parent);
+                        categories.AddRange(_options.AllEquipmentCategories.Where(o => o.ParentCategoryID == parent.CategoryID).OrderBy(o => o.CategoryName).ToList());
+                    }
+                    return categories;
+
+                case "EquipmentSets":
+                    return _options.AllEquipmentSets;
+
+                case "EquipmentWithBarcodes":
+                    return _options.AllEquipment.Where(o => !string.IsNullOrEmpty(o.EquipmentBarcodeID)).OrderBy(o => o.Category.CategoryName).ThenBy(o => o.EquipmentName).ToList();
+                case "Hospitals":
+                    return _options.AllHospitals;
+                case "LastIpUsedWhenMachineIsServer":
+                    return _options.LastIpUsedWhenMachineIsServer;
+                case "Objectives":
+                    return _options.allPresetObjectives;
+                case "Position Format":
+                    return _options.PositionFormat;
+
                 case "SARGroup":
                     if (_options.OrganizationID != Guid.Empty)
                     {
@@ -234,53 +279,12 @@ namespace WildfireICSDesktopServices
                         */
                     }
                     return new Organization();
-                case "DefaultPort":
-                    return _options.DefaultPortNumber;
-                case "TeamMembers":
-                    return _options.AllTeamMembers;
-                case "CannedCommsItems":
-                    return _options.AllCannedCommsLogEntries;
-                case "IncludeExecutionIn204Briefings":
-                    return _options.IncludeExecutionIn204Briefings;
-                case "Contacts":
-                    return _options.AllContacts;
-                case "Position Format":
-                    return _options.PositionFormat;
-                case "Equipment":
-                    return _options.AllEquipment.OrderBy(o => o.Category.CategoryName).ThenBy(o => o.EquipmentName).ToList();
-                case "EquipmentWithBarcodes":
-                    return _options.AllEquipment.Where(o => !string.IsNullOrEmpty(o.EquipmentBarcodeID)).OrderBy(o => o.Category.CategoryName).ThenBy(o => o.EquipmentName).ToList();
-                case "EquipmentCategories":
-                    return _options.AllEquipmentCategories.OrderBy(o => o.CategoryName).ToList();
-                case "EquipmentCategoriesHierarchy":
-                    List<EquipmentCategory> categories = new List<EquipmentCategory>();
-
-                    foreach (EquipmentCategory parent in _options.AllEquipmentCategories.Where(o => o.ParentCategoryID == Guid.Empty).OrderBy(o => o.CategoryName).ToList())
-                    {
-                        categories.Add(parent);
-                        categories.AddRange(_options.AllEquipmentCategories.Where(o => o.ParentCategoryID == parent.CategoryID).OrderBy(o => o.CategoryName).ToList());
-                    }
-                    return categories;
-                case "CommsItems":
-                    return _options.allCommsPlanItems.OrderBy(o => o.ChannelID).ToList();
-                case "EquipmentSets":
-                    return _options.AllEquipmentSets;
-                case "DebriefPOD":
-                    return _options.DebriefPOD;
                 case "ShortcutButtons":
                     return _options.ShortcutButtons;
-                case "AutoBackupInterval":
-                    return _options.AutoBackupIntervalMinutes;
-                case "LastIpUsedWhenMachineIsServer":
-                    return _options.LastIpUsedWhenMachineIsServer;
-                case "AutomaticSubFolders":
-                    return _options.AutomaticSubFolders;
-                case "Hospitals":
-                    return _options.AllHospitals;
-                case "Ambulances":
-                    return _options.AllAmbulanceServices;
-                case "CoordinateFormat":
-                    return _options.PositionFormat;
+                case "TeamMembers":
+                    return _options.AllTeamMembers;
+                case "Vehicles":
+                    return _options.AllVehicles;
                 default:
                     return null;
             }
@@ -364,6 +368,11 @@ namespace WildfireICSDesktopServices
                     _options.AllContacts = _options.AllContacts.Where(o => o.ContactID != c.ContactID).ToList();
                     _options.AllContacts.Add(c);
                     break;
+                case "Vehicle":
+                    Vehicle v = (Vehicle)newValue;
+                    _options.AllVehicles = _options.AllVehicles.Where(o => o.VehicleID != v.VehicleID).ToList();
+                    _options.AllVehicles.Add(v);
+                    break;
                 case "CommsItem":
                     CommsPlanItem comms = (CommsPlanItem)newValue;  
                     _options.allCommsPlanItems = _options.allCommsPlanItems.Where(o=>o.ItemID!= comms.ItemID).ToList();
@@ -412,6 +421,11 @@ namespace WildfireICSDesktopServices
                     break;
                 case "LastIpUsedWhenMachineIsServer":
                     _options.LastIpUsedWhenMachineIsServer = newValue.ToString();
+                    break;
+                case "Objective":
+                    IncidentObjective obj = (IncidentObjective)newValue;
+                    _options.allPresetObjectives = _options.allPresetObjectives.Where(o => o.ObjectiveID != obj.ObjectiveID).ToList();
+                    _options.allPresetObjectives.Add(obj);
                     break;
             }
             SaveGeneralOptions();

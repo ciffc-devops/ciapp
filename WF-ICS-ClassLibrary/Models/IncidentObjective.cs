@@ -78,4 +78,35 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
     }
+
+    public class IncidentObjectives
+    {
+        private Guid _FormID;
+        private DateTime _DatePrepared;
+        private int _OpPeriod;
+        private string _FireSize;
+        private string _FireStatus;
+        private string _WeatherForcast;
+        private string _GeneralSafety;
+        private string _PreparedBy;
+        private string _PreparedByRole;
+        private string _ApprovedBy;
+        private string _ApprovedByRole;
+        private List<IncidentObjective> _Objectives;
+
+        public IncidentObjectives() { _FormID = Guid.NewGuid(); _Objectives = new List<IncidentObjective>(); }
+
+        public Guid FormID { get => _FormID; set { _FormID = value; } }
+        public DateTime DatePrepared { get => _DatePrepared; set => _DatePrepared = value; }
+        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
+        public string FireSize { get => _FireSize; set => _FireSize = value; }
+        public string FireStatus { get => _FireStatus; set => _FireStatus = value; }
+        public string WeatherForcast { get => _WeatherForcast; set => _WeatherForcast = value; }
+        public string GeneralSafety { get => _GeneralSafety; set => _GeneralSafety = value; }
+        public string PreparedBy { get => _PreparedBy; set => _PreparedBy = value; }
+        public string PreparedByRole { get => _PreparedByRole; set => _PreparedByRole = value; }
+        public string ApprovedBy { get => _ApprovedBy; set => _ApprovedBy = value; }
+        public string ApprovedByRole { get => _ApprovedByRole; set => _ApprovedByRole = value; }
+        public List<IncidentObjective> Objectives { get => _Objectives; set => _Objectives = value; }
+    }
 }
