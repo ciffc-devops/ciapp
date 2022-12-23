@@ -22,5 +22,30 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
 
         }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvVehicles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvVehicles_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

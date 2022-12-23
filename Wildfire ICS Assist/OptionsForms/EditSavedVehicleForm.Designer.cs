@@ -60,6 +60,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -91,8 +93,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(906, 685);
-            this.splitContainer1.SplitterDistance = 613;
+            this.splitContainer1.Size = new System.Drawing.Size(812, 460);
+            this.splitContainer1.SplitterDistance = 393;
             this.splitContainer1.TabIndex = 0;
             // 
             // txtOrderRequestNo
@@ -102,7 +104,7 @@
             this.txtOrderRequestNo.Location = new System.Drawing.Point(209, 14);
             this.txtOrderRequestNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOrderRequestNo.Name = "txtOrderRequestNo";
-            this.txtOrderRequestNo.Size = new System.Drawing.Size(682, 29);
+            this.txtOrderRequestNo.Size = new System.Drawing.Size(588, 29);
             this.txtOrderRequestNo.TabIndex = 105;
             this.txtOrderRequestNo.TextChanged += new System.EventHandler(this.txtOrderRequestNo_TextChanged);
             // 
@@ -122,14 +124,14 @@
             this.txtIncidentIDNo.Location = new System.Drawing.Point(209, 53);
             this.txtIncidentIDNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtIncidentIDNo.Name = "txtIncidentIDNo";
-            this.txtIncidentIDNo.Size = new System.Drawing.Size(682, 29);
+            this.txtIncidentIDNo.Size = new System.Drawing.Size(588, 29);
             this.txtIncidentIDNo.TabIndex = 106;
             this.txtIncidentIDNo.TextChanged += new System.EventHandler(this.txtIncidentIDNo_TextChanged);
             // 
             // label13
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.Location = new System.Drawing.Point(541, 95);
+            this.label13.Location = new System.Drawing.Point(447, 95);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(66, 24);
             this.label13.TabIndex = 130;
@@ -142,13 +144,13 @@
             this.lblCallsign.Name = "lblCallsign";
             this.lblCallsign.Size = new System.Drawing.Size(190, 24);
             this.lblCallsign.TabIndex = 119;
-            this.lblCallsign.Text = "Typical Callsign";
+            this.lblCallsign.Text = "Typical Callsign*";
             this.lblCallsign.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtMake
             // 
             this.txtMake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMake.Location = new System.Drawing.Point(621, 92);
+            this.txtMake.Location = new System.Drawing.Point(527, 92);
             this.txtMake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtMake.Name = "txtMake";
             this.txtMake.Size = new System.Drawing.Size(270, 29);
@@ -162,7 +164,7 @@
             this.txtClassification.Location = new System.Drawing.Point(209, 92);
             this.txtClassification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtClassification.Name = "txtClassification";
-            this.txtClassification.Size = new System.Drawing.Size(327, 29);
+            this.txtClassification.Size = new System.Drawing.Size(233, 29);
             this.txtClassification.TabIndex = 107;
             this.txtClassification.TextChanged += new System.EventHandler(this.txtClassification_TextChanged);
             // 
@@ -184,7 +186,7 @@
             this.txtCategoryKindCapacity.Multiline = true;
             this.txtCategoryKindCapacity.Name = "txtCategoryKindCapacity";
             this.txtCategoryKindCapacity.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCategoryKindCapacity.Size = new System.Drawing.Size(682, 60);
+            this.txtCategoryKindCapacity.Size = new System.Drawing.Size(588, 60);
             this.txtCategoryKindCapacity.TabIndex = 109;
             this.txtCategoryKindCapacity.TextChanged += new System.EventHandler(this.txtCategoryKindCapacity_TextChanged);
             // 
@@ -208,14 +210,15 @@
             // 
             // txtNotes
             // 
-            this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNotes.Location = new System.Drawing.Point(209, 337);
             this.txtNotes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNotes.Size = new System.Drawing.Size(682, 259);
+            this.txtNotes.Size = new System.Drawing.Size(588, 51);
             this.txtNotes.TabIndex = 117;
             this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
             // 
@@ -228,7 +231,7 @@
             this.txtFeatures.Multiline = true;
             this.txtFeatures.Name = "txtFeatures";
             this.txtFeatures.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtFeatures.Size = new System.Drawing.Size(682, 48);
+            this.txtFeatures.Size = new System.Drawing.Size(588, 48);
             this.txtFeatures.TabIndex = 110;
             this.txtFeatures.TextChanged += new System.EventHandler(this.txtFeatures_TextChanged);
             // 
@@ -248,7 +251,7 @@
             this.txtAgencyOrOwner.Location = new System.Drawing.Point(209, 259);
             this.txtAgencyOrOwner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAgencyOrOwner.Name = "txtAgencyOrOwner";
-            this.txtAgencyOrOwner.Size = new System.Drawing.Size(271, 29);
+            this.txtAgencyOrOwner.Size = new System.Drawing.Size(177, 29);
             this.txtAgencyOrOwner.TabIndex = 111;
             this.txtAgencyOrOwner.TextChanged += new System.EventHandler(this.txtAgencyOrOwner_TextChanged);
             // 
@@ -264,7 +267,7 @@
             // txtOperatorName
             // 
             this.txtOperatorName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOperatorName.Location = new System.Drawing.Point(678, 259);
+            this.txtOperatorName.Location = new System.Drawing.Point(584, 259);
             this.txtOperatorName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOperatorName.Name = "txtOperatorName";
             this.txtOperatorName.Size = new System.Drawing.Size(213, 29);
@@ -283,7 +286,7 @@
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.Location = new System.Drawing.Point(487, 262);
+            this.label7.Location = new System.Drawing.Point(393, 262);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(184, 24);
             this.label7.TabIndex = 124;
@@ -297,7 +300,7 @@
             this.txtLicenseOrID.Location = new System.Drawing.Point(209, 298);
             this.txtLicenseOrID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLicenseOrID.Name = "txtLicenseOrID";
-            this.txtLicenseOrID.Size = new System.Drawing.Size(682, 29);
+            this.txtLicenseOrID.Size = new System.Drawing.Size(588, 29);
             this.txtLicenseOrID.TabIndex = 113;
             this.txtLicenseOrID.TextChanged += new System.EventHandler(this.txtLicenseOrID_TextChanged);
             // 
@@ -306,7 +309,7 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(785, 6);
+            this.btnSave.Location = new System.Drawing.Point(691, 6);
             this.btnSave.Margin = new System.Windows.Forms.Padding(6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(106, 51);
@@ -336,13 +339,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(906, 685);
+            this.ClientSize = new System.Drawing.Size(812, 460);
+            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(828, 499);
             this.Name = "EditSavedVehicleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Saved Vehicle";
+            this.Load += new System.EventHandler(this.EditSavedVehicleForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
