@@ -49,7 +49,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(35)] private bool _includeOtherContactsWithIAP;
         [ProtoMember(36)] private bool _promptForInitialSave;
         // [ProtoMember(37)] private List<PresetTeamAssignment> l_allPresetTeamAssignments = new List<PresetTeamAssignment>();
-        // [ProtoMember(38)] private List<PresetSafetyPlan> l_allPresetSafetyPlans = new List<PresetSafetyPlan>();
+        [ProtoMember(38)] private List<SafetyPlan> l_allPresetSafetyPlans = new List<SafetyPlan>();
         [ProtoMember(39)] private Briefing b_briefingTemplate = new Briefing(false);
         [ProtoMember(40)] private List<IncidentObjective> l_allPresetObjectives = new List<IncidentObjective>();
         [ProtoMember(41)] private List<Hospital> l_allHospitals = new List<Hospital>();
@@ -118,7 +118,7 @@ namespace WF_ICS_ClassLibrary.Models
         //   public List<PresetTeamAssignment> sortedAllPresetTeamAssignments { get { return l_allPresetTeamAssignments.OrderBy(o => o.AssignmentName).ToList(); } }
         public List<Hospital> AllHospitals { get { return l_allHospitals; } set { l_allHospitals = value; appSettingsChanged = true; } }
         public List<AmbulanceService> AllAmbulanceServices { get { return l_allAmbulanceServices; } set { l_allAmbulanceServices = value; appSettingsChanged = true; } }
-        //    public List<PresetSafetyPlan> allPresetSafetyPlans { get { return l_allPresetSafetyPlans; } set { l_allPresetSafetyPlans = value; appSettingsChanged = true; } }
+            public List<SafetyPlan> allPresetSafetyPlans { get { return l_allPresetSafetyPlans; } set { l_allPresetSafetyPlans = value; appSettingsChanged = true; } }
         public Briefing BriefingTemplate { get { return b_briefingTemplate; } set { b_briefingTemplate = value; appSettingsChanged = true; } }
         public List<IncidentObjective> allPresetObjectives { get { return l_allPresetObjectives; } set { l_allPresetObjectives = value; appSettingsChanged = true; } }
         public List<CommsPlanItem> allCommsPlanItems { get { return l_allCommsPlanItems; } set { l_allCommsPlanItems = value; appSettingsChanged = true; } }

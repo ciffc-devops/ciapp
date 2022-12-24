@@ -9,7 +9,7 @@ namespace WildfireICSDesktopServices
     public interface IWFIncidentService
     {
         List<TaskUpdate> allTaskUpdates { get; set; }
-        WFIncident CurrentTask { get; set; }
+        WFIncident CurrentIncident { get; set; }
         Guid MachineID { get; set; }
 
         event AmbulanceServiceEventHandler AmbulanceServiceChanged;

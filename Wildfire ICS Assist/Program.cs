@@ -26,7 +26,7 @@ namespace Wildfire_ICS_Assist
 
              equipmentService = new EquipmentService();
              ICAClassLibrary.Globals._equipmentService = equipmentService;
-             networkService = new NetworkService();
+             
              positionLogService = new PositionLogService();
              networkSendLog = new NetworkSendLog();
             */
@@ -35,7 +35,7 @@ namespace Wildfire_ICS_Assist
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
             pdfExportService = new PDFExportService();
             wfIncidentService = new WFIncidentService();
-
+            networkService = new NetworkService();
 
             CurrentTask = new WFIncident();
             CurrentOpPeriod = 1;
@@ -59,7 +59,6 @@ namespace Wildfire_ICS_Assist
        
         private static PositionLogService _positionLogService = null;
         private static EquipmentService _equipmentService = null;
-        private static NetworkService _networkService = null;
       
         */
         private static IGeneralOptionsService _generalOptionsService = null;
@@ -72,24 +71,28 @@ namespace Wildfire_ICS_Assist
         private static bool _InternetSyncEnabled;
         private static Guid _MachineID;
         private static CultureInfo _cultureInfo;
+        private static NetworkService _networkService = null;
 
         public static IGeneralOptionsService generalOptionsService { get => _generalOptionsService; private set => _generalOptionsService = value; }
 
         public static IPDFExportService pdfExportService { get => _pdfExportService; private set => _pdfExportService = value; }
         public static IWFIncidentService wfIncidentService { get => _wfIncidentService; private set => _wfIncidentService = value; }
 
+
+        public static WFIncident CurrentIncident { get => wfIncidentService.CurrentIncident; set => wfIncidentService.CurrentIncident = value; }
         /*
         public static EquipmentService equipmentService { get => _equipmentService; private set => _equipmentService = value; }
-        public static NetworkService networkService { get => _networkService; private set => _networkService = value; }
         public static PositionLogService positionLogService { get => _positionLogService; private set => _positionLogService = value; }
         public static NetworkSendLog networkSendLog { get => _networkSendLog; set => _networkSendLog = value; }
         */
         public static Icon programIcon { get => _programIcon; private set => _programIcon = value; }
-        public static WFIncident CurrentTask { get => wfIncidentService.CurrentTask; set { wfIncidentService.CurrentTask = value; } }
+        public static WFIncident CurrentTask { get => wfIncidentService.CurrentIncident; set { wfIncidentService.CurrentIncident = value; } }
         public static ICSRole CurrentRole { get => _CurrentRole; set => _CurrentRole = value; }
         public static int CurrentOpPeriod { get => _CurrentOpPeriod; set => _CurrentOpPeriod = value; }
         public static bool InternetSyncEnabled { get => _InternetSyncEnabled; set => _InternetSyncEnabled = value; }
         public static Guid MachineID { get => _MachineID; set { _MachineID = value; wfIncidentService.MachineID = value; } }
+        public static NetworkService networkService { get => _networkService; private set => _networkService = value; }
+
         public static CultureInfo cultureInfo
         {
             get => _cultureInfo; set

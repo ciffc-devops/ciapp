@@ -213,7 +213,8 @@ namespace WildfireICSDesktopServices
         {
             switch (ValueName)
             {
-
+                case "AllowStringTaskNumber":
+                    return _options.AllowStringTaskNumber;
                 case "Ambulances":
                     return _options.AllAmbulanceServices;
                 case "AutoBackupInterval":
@@ -233,6 +234,8 @@ namespace WildfireICSDesktopServices
                     else { return new ICSRole().GetRoleByName("SAR Manager"); }
                 case "DefaultPort":
                     return _options.DefaultPortNumber;
+                case "DefaultSaveLocation":
+                    return _options.DefaultSaveLocation;
                 case "Equipment":
                     return _options.AllEquipment.OrderBy(o => o.Category.CategoryName).ThenBy(o => o.EquipmentName).ToList();
                 case "EquipmentCategories":
@@ -260,7 +263,10 @@ namespace WildfireICSDesktopServices
                     return _options.allPresetObjectives;
                 case "Position Format":
                     return _options.PositionFormat;
-
+                case "RecentFiles":
+                    return _options.RecentFilePaths;
+                case "SafetyPlans":
+                    return _options.allPresetSafetyPlans;
                 case "SARGroup":
                     if (_options.OrganizationID != Guid.Empty)
                     {
@@ -294,26 +300,27 @@ namespace WildfireICSDesktopServices
         {
             switch (ValueName)
             {
-                case "IncludeExecutionIn204Briefings":
-                    return _options.IncludeExecutionIn204Briefings;
-                case "DebriefPOD":
-                    return _options.DebriefPOD;
-                case "Color204ByType":
-                    return _options.Color204ByType;
-                case "IncludeProfileIn204":
-                    return _options.IncludeSubjectProfile;
-                case "IncludeTwoCopiesPage1":
-                    return _options.TwoCopiesOf204;
-            
-                case "IncludeBriefingIn204":
-                    return _options.IncludeSMEAC;
-
-                case "UseOldTeamAssignmentScreen":
-                    return _options.UseOldTeamAssignmentScreen;
+                case "AllowStringTaskNumber":
+                    return _options.AllowStringTaskNumber;
+                case "AutoSave":
+                    return _options.AutoSave;
                 case "AutoBackup":
                     return _options.AutomaticBackups;
                 default:
                     return false;
+            }
+        }
+
+     
+        public string GetStringOptionValue(string ValueName)
+        {
+            switch (ValueName)
+            {
+                case "DefaultSaveLocation":
+                    return _options.DefaultSaveLocation;
+
+                default:
+                    return null;
             }
         }
 
@@ -427,6 +434,17 @@ namespace WildfireICSDesktopServices
                     _options.allPresetObjectives = _options.allPresetObjectives.Where(o => o.ObjectiveID != obj.ObjectiveID).ToList();
                     _options.allPresetObjectives.Add(obj);
                     break;
+                case "SafetyPlan":
+                    SafetyPlan sp = (SafetyPlan)newValue;
+                    _options.allPresetSafetyPlans = _options.allPresetSafetyPlans.Where(o => o.SafetyPlanTemplateID != sp.SafetyPlanTemplateID).ToList();
+                    _options.allPresetSafetyPlans.Add(sp);
+                    break;
+                case "RecentFileName":
+                    string recentFileName = newValue.ToString();
+                    _options.RecentFilePaths = _options.RecentFilePaths.Where(o=> !o.Equals(recentFileName)).ToList();
+                    _options.RecentFilePaths.Insert(0, recentFileName);
+                    if(_options.RecentFilePaths.Count > 5) { _options.RecentFilePaths = _options.RecentFilePaths.Take(5).ToList(); }
+                    break;
             }
             SaveGeneralOptions();
         }
@@ -482,5 +500,7 @@ namespace WildfireICSDesktopServices
             SaveGeneralOptions();
 
         }
+
+        
     }
 }

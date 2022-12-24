@@ -40,16 +40,16 @@ namespace WildfireICSDesktopServices
         public event TaskUpdateEventHandler TaskUpdateChanged;
         public event TaskBasicsEventHandler TaskBasicsChanged;
 
-        private WFIncident _currentTask;
-        public WFIncident CurrentTask { get => _currentTask; set => _currentTask = value; }
-        public List<TaskUpdate> allTaskUpdates { get => _currentTask.allTaskUpdates; set => _currentTask.allTaskUpdates = value; }
+        private WFIncident _currentIncident;
+        public WFIncident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
+        public List<TaskUpdate> allTaskUpdates { get => _currentIncident.allTaskUpdates; set => _currentIncident.allTaskUpdates = value; }
         private Guid _MachineID;
         public Guid MachineID { get => _MachineID; set => _MachineID = value; }
 
 
         public WFIncidentService(WFIncident currentTask)
         {
-            _currentTask = currentTask;
+            _currentIncident = currentTask;
             allTaskUpdates = new List<TaskUpdate>();
         }
         public WFIncidentService()
@@ -60,12 +60,12 @@ namespace WildfireICSDesktopServices
         public TaskUpdate UpsertTaskUpdate(object obj, string command, bool processed_locally, bool uploaded)
         {
             TaskUpdate update = new TaskUpdate();
-            update.TaskID = _currentTask.TaskID;
+            update.TaskID = _currentIncident.TaskID;
             update.LastUpdatedUTC = DateTime.UtcNow;
             update.CommandName = command;
             update.Data = obj;
             update.DataEnc = update.Data.XmlSerializeToString();
-            update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentTask.TaskEncryptionKey);
+            update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
             update.ProcessedLocally = processed_locally;
             update.MachineID = MachineID;
             update.UploadedSuccessfully = uploaded;
@@ -135,7 +135,7 @@ namespace WildfireICSDesktopServices
                 if (update.Data == null && !string.IsNullOrEmpty(update.DataEnc))
                 {
 
-                    update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, CurrentTask.TaskEncryptionKey);
+                    update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, CurrentIncident.TaskEncryptionKey);
 
                 }
                 ApplyTaskUpdate(update);
@@ -150,7 +150,7 @@ namespace WildfireICSDesktopServices
         {
             if (update.Data == null && !string.IsNullOrEmpty(update.DataEnc))
             {
-                update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, CurrentTask.TaskEncryptionKey);
+                update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, CurrentIncident.TaskEncryptionKey);
             }
 
             if (!update.ProcessedLocally && update.Data != null)
@@ -171,11 +171,11 @@ namespace WildfireICSDesktopServices
                 {
                     TaskBasics basics = update.Data as TaskBasics;
 
-                    if (update.TaskID != CurrentTask.TaskID)
+                    if (update.TaskID != CurrentIncident.TaskID)
                     {
-                        _currentTask = new WFIncident();
+                        _currentIncident = new WFIncident();
 
-                        _currentTask.TaskID = basics.TaskID;
+                        _currentIncident.TaskID = basics.TaskID;
                         update.ProcessedLocally = true;
                         UpdateTaskBasics(basics, "internet");
 
@@ -207,7 +207,7 @@ namespace WildfireICSDesktopServices
             //This sends the "Initial" record, and all updates saved locally to this point.
             //It also means we need to save those updates persistently from now on
 
-            TaskBasics basics = new TaskBasics(CurrentTask);
+            TaskBasics basics = new TaskBasics(CurrentIncident);
             TaskUpdate update = UpsertTaskUpdate(basics, "INITIAL", true, false);
             _ = uploadTaskUpdateToServer(update);
 
@@ -240,13 +240,13 @@ namespace WildfireICSDesktopServices
             if (updates.Any(o => o.CommandName.Equals("INITIAL")))
             {
                 ApplyTaskUpdate(updates.First(o => o.CommandName.Equals("INITIAL")));
-                CurrentTask.TaskEncryptionKey = EncryptionKey;
+                CurrentIncident.TaskEncryptionKey = EncryptionKey;
             }
             foreach (TaskUpdate update in updates)
             {
                 ProcessTaskUpdate(update);
             }
-            OnWFIncidentChanged(new WFIncidentEventArgs(_currentTask));
+            OnWFIncidentChanged(new WFIncidentEventArgs(_currentIncident));
         }
 
         public async void ConnectToServerTask(Guid TaskID, string EncryptionKey)
@@ -276,7 +276,7 @@ namespace WildfireICSDesktopServices
                 }
 
             }
-            OnWFIncidentChanged(new WFIncidentEventArgs(_currentTask));
+            OnWFIncidentChanged(new WFIncidentEventArgs(_currentIncident));
         }
 
         public void UpsertObject(object obj, string source)
@@ -451,7 +451,7 @@ namespace WildfireICSDesktopServices
             GeneralOptions options = service.GetGeneralOptions();
             _CommsSystemsAvailable.AddRange(options.allCommsPlanItems.Where(o => o.Active));
 
-            List<CommsPlanItem> usedItems = _currentTask.getCommsPlanItemsUsedToDate();
+            List<CommsPlanItem> usedItems = _currentIncident.getCommsPlanItemsUsedToDate();
             foreach (CommsPlanItem item in usedItems.Where(o => o.Active))
             {
                 if (!string.IsNullOrEmpty(item.ChannelID) && !_CommsSystemsAvailable.Where(o => o.ItemID == item.ItemID || o.ChannelID == item.ChannelID).Any()) { _CommsSystemsAvailable.Add(item); }
@@ -475,11 +475,11 @@ namespace WildfireICSDesktopServices
         public void UpsertBriefing(Briefing record, string source = "local")
         {
             record.DateUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allBriefings.Any(o => o.BriefingID == record.BriefingID))
+            if (_currentIncident.allBriefings.Any(o => o.BriefingID == record.BriefingID))
             {
-                _currentTask.allBriefings = _currentTask.allBriefings.Where(o => o.BriefingID != record.BriefingID).ToList();
+                _currentIncident.allBriefings = _currentIncident.allBriefings.Where(o => o.BriefingID != record.BriefingID).ToList();
             }
-            _currentTask.allBriefings.Add(record);
+            _currentIncident.allBriefings.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -501,11 +501,11 @@ namespace WildfireICSDesktopServices
         public void UpsertCommsPlan(CommsPlan record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allCommsPlans.Any(o => o.ID == record.ID || o.OpsPeriod == record.OpsPeriod))
+            if (_currentIncident.allCommsPlans.Any(o => o.ID == record.ID || o.OpsPeriod == record.OpsPeriod))
             {
-                _currentTask.allCommsPlans = _currentTask.allCommsPlans.Where(o => o.ID != record.ID && o.OpsPeriod != record.OpsPeriod).ToList();
+                _currentIncident.allCommsPlans = _currentIncident.allCommsPlans.Where(o => o.ID != record.ID && o.OpsPeriod != record.OpsPeriod).ToList();
             }
-            _currentTask.allCommsPlans.Add(record);
+            _currentIncident.allCommsPlans.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -533,16 +533,16 @@ namespace WildfireICSDesktopServices
         public void UpsertCommsPlanItem(CommsPlanItem item, string function = null, string source = "local")
         {
             if (string.IsNullOrEmpty(function)) { function = item.CommsFunction; }
-            if (!_currentTask.allCommsPlans.Any(o => o.OpsPeriod == item.OpsPeriod))
+            if (!_currentIncident.allCommsPlans.Any(o => o.OpsPeriod == item.OpsPeriod))
             {
-                _currentTask.createCommsPlanAsNeeded(item.OpsPeriod);
+                _currentIncident.createCommsPlanAsNeeded(item.OpsPeriod);
                 if (source.Equals("local") || source.Equals("networkNoInternet"))
                 {
-                    UpsertTaskUpdate(_currentTask.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod), "UPSERT", true, false);
+                    UpsertTaskUpdate(_currentIncident.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod), "UPSERT", true, false);
                 }
-                OnCommsPlanChanged(new CommsPlanEventArgs(_currentTask.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod)));
+                OnCommsPlanChanged(new CommsPlanEventArgs(_currentIncident.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod)));
             }
-            CommsPlan thisPlan = _currentTask.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod);
+            CommsPlan thisPlan = _currentIncident.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod);
             if (!thisPlan.allCommsItems.Any(o => o.ItemID == item.ItemID)) //its new!
             {
                 thisPlan.allCommsItems.Add(item);
@@ -598,9 +598,9 @@ namespace WildfireICSDesktopServices
         }
         public void UpsertCommsPlanItemLink(CommsPlanItemLink link, string source = "local")
         {
-            if (_currentTask.allCommsPlans.Any(o => o.OpsPeriod == link.OpsPeriod))
+            if (_currentIncident.allCommsPlans.Any(o => o.OpsPeriod == link.OpsPeriod))
             {
-                CommsPlan thisPlan = _currentTask.allCommsPlans.First(o => o.OpsPeriod == link.OpsPeriod);
+                CommsPlan thisPlan = _currentIncident.allCommsPlans.First(o => o.OpsPeriod == link.OpsPeriod);
                 if (thisPlan.allItemLinks.Where(o => o.CommsFunction.Equals(link.CommsFunction, StringComparison.InvariantCultureIgnoreCase)).Any())
                 {
                     thisPlan.allItemLinks = thisPlan.allItemLinks.Where(o => !o.CommsFunction.Equals(link.CommsFunction, StringComparison.InvariantCultureIgnoreCase)).ToList();
@@ -629,12 +629,12 @@ namespace WildfireICSDesktopServices
         public void UpsertContact(Contact record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allContacts.Any(o => o.ContactID == record.ContactID))
+            if (_currentIncident.allContacts.Any(o => o.ContactID == record.ContactID))
             {
-                _currentTask.allContacts = _currentTask.allContacts.Where(o => o.ContactID != record.ContactID).ToList();
+                _currentIncident.allContacts = _currentIncident.allContacts.Where(o => o.ContactID != record.ContactID).ToList();
             }
-            _currentTask.allContacts.Add(record);
-            _currentTask.allContacts = CurrentTask.allContacts.OrderBy(o => o.ContactName).ToList();
+            _currentIncident.allContacts.Add(record);
+            _currentIncident.allContacts = CurrentIncident.allContacts.OrderBy(o => o.ContactName).ToList();
 
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
@@ -644,9 +644,9 @@ namespace WildfireICSDesktopServices
         }
         public void DeleteContact(Contact contact, string source = "local")
         {
-            if (_currentTask.allContacts.Any(o => o.ContactID == contact.ContactID))
+            if (_currentIncident.allContacts.Any(o => o.ContactID == contact.ContactID))
             {
-                _currentTask.allContacts = _currentTask.allContacts.Where(o => o.ContactID != contact.ContactID).ToList();
+                _currentIncident.allContacts = _currentIncident.allContacts.Where(o => o.ContactID != contact.ContactID).ToList();
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(contact, "DELETE", true, false); }
                 OnContactChanged(new ContactEventArgs(contact));
             }
@@ -654,9 +654,9 @@ namespace WildfireICSDesktopServices
         }
         public void DeleteContact(Guid contactID, string source = "local")
         {
-            if (_currentTask.allContacts.Any(o => o.ContactID == contactID))
+            if (_currentIncident.allContacts.Any(o => o.ContactID == contactID))
             {
-                Contact contactToDelete = _currentTask.allContacts.FirstOrDefault(o => o.ContactID == contactID);
+                Contact contactToDelete = _currentIncident.allContacts.FirstOrDefault(o => o.ContactID == contactID);
                 DeleteContact(contactToDelete, source);
                 //_currentTask.allContacts = _currentTask.allContacts.Where(o => o.ContactID != contactID).ToList();
                 //OnContactChanged(new ContactEventArgs(contactToDelete));
@@ -676,11 +676,11 @@ namespace WildfireICSDesktopServices
         public void UpsertIncidentObjective(IncidentObjective record, string source = "local")
         {
             record.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allObjectives.Any(o => o.IncidentObjectiveID == record.IncidentObjectiveID))
+            if (_currentIncident.allObjectives.Any(o => o.IncidentObjectiveID == record.IncidentObjectiveID))
             {
-                _currentTask.allObjectives = _currentTask.allObjectives.Where(o => o.IncidentObjectiveID != record.IncidentObjectiveID).ToList();
+                _currentIncident.allObjectives = _currentIncident.allObjectives.Where(o => o.IncidentObjectiveID != record.IncidentObjectiveID).ToList();
             }
-            _currentTask.allObjectives.Add(record.Clone());
+            _currentIncident.allObjectives.Add(record.Clone());
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -690,11 +690,11 @@ namespace WildfireICSDesktopServices
         public void DeleteIncidentObjective(IncidentObjective record, string source = "local")
         {
             record.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allObjectives.Any(o => o.IncidentObjectiveID == record.IncidentObjectiveID))
+            if (_currentIncident.allObjectives.Any(o => o.IncidentObjectiveID == record.IncidentObjectiveID))
             {
-                _currentTask.allObjectives = _currentTask.allObjectives.Where(o => o.IncidentObjectiveID != record.IncidentObjectiveID).ToList();
+                _currentIncident.allObjectives = _currentIncident.allObjectives.Where(o => o.IncidentObjectiveID != record.IncidentObjectiveID).ToList();
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "DELETE", true, false); }
-                _currentTask.renumberObjectives(record.OpPeriod);
+                _currentIncident.renumberObjectives(record.OpPeriod);
                 OnIncidentObjectiveChanged(new IncidentObjectiveEventArgs(record));
             }
 
@@ -702,9 +702,9 @@ namespace WildfireICSDesktopServices
         public void DeleteIncidentObjective(Guid IncidentObjectiveID, string source = "local")
         {
 
-            if (_currentTask.allObjectives.Any(o => o.IncidentObjectiveID == IncidentObjectiveID))
+            if (_currentIncident.allObjectives.Any(o => o.IncidentObjectiveID == IncidentObjectiveID))
             {
-                IncidentObjective toDelete = _currentTask.allObjectives.First(o => o.IncidentObjectiveID == IncidentObjectiveID);
+                IncidentObjective toDelete = _currentIncident.allObjectives.First(o => o.IncidentObjectiveID == IncidentObjectiveID);
                 DeleteIncidentObjective(toDelete, source);
                 /*
                 _currentTask.allObjectives = _currentTask.allObjectives.Where(o => o.IncidentObjectiveID != IncidentObjectiveID).ToList();
@@ -733,11 +733,11 @@ namespace WildfireICSDesktopServices
         public void UpsertMedicalPlan(MedicalPlan record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allMedicalPlans.Any(o => o.ID == record.ID || o.OpPeriod == record.OpPeriod))
+            if (_currentIncident.allMedicalPlans.Any(o => o.ID == record.ID || o.OpPeriod == record.OpPeriod))
             {
-                _currentTask.allMedicalPlans = _currentTask.allMedicalPlans.Where(o => o.ID != record.ID && o.OpPeriod != record.OpPeriod).ToList();
+                _currentIncident.allMedicalPlans = _currentIncident.allMedicalPlans.Where(o => o.ID != record.ID && o.OpPeriod != record.OpPeriod).ToList();
             }
-            _currentTask.allMedicalPlans.Add(record);
+            _currentIncident.allMedicalPlans.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -758,11 +758,11 @@ namespace WildfireICSDesktopServices
         {
 
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.AllOperationalPeriods.Any(o => o.OperationalPeriodID == record.OperationalPeriodID || o.PeriodNumber == record.PeriodNumber))
+            if (_currentIncident.AllOperationalPeriods.Any(o => o.OperationalPeriodID == record.OperationalPeriodID || o.PeriodNumber == record.PeriodNumber))
             {
-                _currentTask.AllOperationalPeriods = _currentTask.AllOperationalPeriods.Where(o => o.OperationalPeriodID != record.OperationalPeriodID && o.PeriodNumber != record.PeriodNumber).ToList();
+                _currentIncident.AllOperationalPeriods = _currentIncident.AllOperationalPeriods.Where(o => o.OperationalPeriodID != record.OperationalPeriodID && o.PeriodNumber != record.PeriodNumber).ToList();
             }
-            _currentTask.AllOperationalPeriods.Add(record);
+            _currentIncident.AllOperationalPeriods.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -782,11 +782,11 @@ namespace WildfireICSDesktopServices
         public void UpsertOrganizationalChart(OrganizationChart record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allOrgCharts.Any(o => o.OrganizationalChartID == record.OrganizationalChartID || o.OpPeriod == record.OpPeriod))
+            if (_currentIncident.allOrgCharts.Any(o => o.OrganizationalChartID == record.OrganizationalChartID || o.OpPeriod == record.OpPeriod))
             {
-                _currentTask.allOrgCharts = _currentTask.allOrgCharts.Where(o => o.OrganizationalChartID != record.OrganizationalChartID && o.OpPeriod != record.OpPeriod).ToList();
+                _currentIncident.allOrgCharts = _currentIncident.allOrgCharts.Where(o => o.OrganizationalChartID != record.OrganizationalChartID && o.OpPeriod != record.OpPeriod).ToList();
             }
-            _currentTask.allOrgCharts.Add(record);
+            _currentIncident.allOrgCharts.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -809,11 +809,11 @@ namespace WildfireICSDesktopServices
         public void UpsertPositionLogEntry(PositionLogEntry record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allPositionLogEntries.Any(o => o.LogID == record.LogID))
+            if (_currentIncident.allPositionLogEntries.Any(o => o.LogID == record.LogID))
             {
-                _currentTask.allPositionLogEntries = _currentTask.allPositionLogEntries.Where(o => o.LogID != record.LogID).ToList();
+                _currentIncident.allPositionLogEntries = _currentIncident.allPositionLogEntries.Where(o => o.LogID != record.LogID).ToList();
             }
-            _currentTask.allPositionLogEntries.Add(record);
+            _currentIncident.allPositionLogEntries.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -859,22 +859,22 @@ namespace WildfireICSDesktopServices
         public void UpsertICSRole(ICSRole record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (!_currentTask.allOrgCharts.Where(o => o.OpPeriod == record.OpPeriod).Any())
+            if (!_currentIncident.allOrgCharts.Where(o => o.OpPeriod == record.OpPeriod).Any())
             {
-                _currentTask.createOrgChartAsNeeded(record.OpPeriod);
-                OrganizationChart chart = _currentTask.allOrgCharts.Where(o => o.OpPeriod == record.OpPeriod).First();
+                _currentIncident.createOrgChartAsNeeded(record.OpPeriod);
+                OrganizationChart chart = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == record.OpPeriod).First();
                 UpsertOrganizationalChart(chart);
             }
-            else if (!_currentTask.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any())
+            else if (!_currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any())
             {
-                _currentTask.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).loadRoles();
-                UpsertOrganizationalChart(_currentTask.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).Clone());
+                _currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).loadRoles();
+                UpsertOrganizationalChart(_currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).Clone());
             }
 
-            if (_currentTask.allOrgCharts.Any(o => o.OrganizationalChartID == record.OrganizationalChartID))
+            if (_currentIncident.allOrgCharts.Any(o => o.OrganizationalChartID == record.OrganizationalChartID))
             {
-                OrganizationChart chart = _currentTask.allOrgCharts.First(o => o.OrganizationalChartID == record.OrganizationalChartID);
-                if (_currentTask.allOrgCharts.First(o => o.OrganizationalChartID == record.OrganizationalChartID).AllRoles.Any(o => o.RoleID == record.RoleID))
+                OrganizationChart chart = _currentIncident.allOrgCharts.First(o => o.OrganizationalChartID == record.OrganizationalChartID);
+                if (_currentIncident.allOrgCharts.First(o => o.OrganizationalChartID == record.OrganizationalChartID).AllRoles.Any(o => o.RoleID == record.RoleID))
                 {
 
                     chart.AllRoles = chart.AllRoles.Where(o => o.RoleID != record.RoleID).ToList();
@@ -890,7 +890,7 @@ namespace WildfireICSDesktopServices
 
                 if (record.teamMember != null && record.teamMember.PersonID != Guid.Empty)
                 {
-                    record.teamMember.CurrentStatus = _currentTask.getMemberStatus(record.teamMember, record.OpPeriod, DateTime.Now);
+                    record.teamMember.CurrentStatus = _currentIncident.getMemberStatus(record.teamMember, record.OpPeriod, DateTime.Now);
                     UpsertMemberStatus(record.teamMember);
                 }
                 //OnOrganizationalChartChanged(new OrganizationChartEventArgs(chart));
@@ -902,22 +902,22 @@ namespace WildfireICSDesktopServices
         public void UpsertICSRole(string roleName, int opsPeriod, TeamMember member, string source = "local")
         {
 
-            if (!_currentTask.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).Any())
+            if (!_currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).Any())
             {
-                _currentTask.createOrgChartAsNeeded(opsPeriod);
-                OrganizationChart chart = _currentTask.allOrgCharts.First(o => o.OpPeriod == opsPeriod);
+                _currentIncident.createOrgChartAsNeeded(opsPeriod);
+                OrganizationChart chart = _currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod);
                 UpsertOrganizationalChart(chart);
             }
-            else if (_currentTask.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().AllRoles.Count <= 0)
+            else if (_currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().AllRoles.Count <= 0)
             {
-                _currentTask.allOrgCharts.First(o => o.OpPeriod == opsPeriod).loadRoles();
-                UpsertOrganizationalChart(_currentTask.allOrgCharts.First(o => o.OpPeriod == opsPeriod));
+                _currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod).loadRoles();
+                UpsertOrganizationalChart(_currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod));
             }
 
-            ICSRole role = _currentTask.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().getRoleByName(roleName).Clone();
+            ICSRole role = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().getRoleByName(roleName).Clone();
             role.teamMember = member;
             role.OpPeriod = opsPeriod;
-            role.OrganizationalChartID = _currentTask.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().OrganizationalChartID;
+            role.OrganizationalChartID = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().OrganizationalChartID;
             UpsertICSRole(role);
 
             /*
@@ -942,11 +942,11 @@ namespace WildfireICSDesktopServices
         public void UpsertSafetyPlan(SafetyPlan record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allSafetyPlans.Any(o => o.PlanID == record.PlanID))
+            if (_currentIncident.allSafetyPlans.Any(o => o.PlanID == record.PlanID))
             {
-                _currentTask.allSafetyPlans = _currentTask.allSafetyPlans.Where(o => o.PlanID != record.PlanID).ToList();
+                _currentIncident.allSafetyPlans = _currentIncident.allSafetyPlans.Where(o => o.PlanID != record.PlanID).ToList();
             }
-            _currentTask.allSafetyPlans.Add(record);
+            _currentIncident.allSafetyPlans.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -957,9 +957,9 @@ namespace WildfireICSDesktopServices
 
         public void DeleteSafetyPlan(SafetyPlan record, string source = "local")
         {
-            if (_currentTask.allSafetyPlans.Any(o => o.PlanID == record.PlanID))
+            if (_currentIncident.allSafetyPlans.Any(o => o.PlanID == record.PlanID))
             {
-                _currentTask.allSafetyPlans = _currentTask.allSafetyPlans.Where(o => o.PlanID != record.PlanID).ToList();
+                _currentIncident.allSafetyPlans = _currentIncident.allSafetyPlans.Where(o => o.PlanID != record.PlanID).ToList();
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "DELETE", true, false); }
                 OnSafetyPlanChanged(new SafetyPlanEventArgs(record));
             }
@@ -969,9 +969,9 @@ namespace WildfireICSDesktopServices
 
         public void DeleteSafetyPlan(Guid PlanID, string source = "local")
         {
-            if (_currentTask.allSafetyPlans.Any(o => o.PlanID == PlanID))
+            if (_currentIncident.allSafetyPlans.Any(o => o.PlanID == PlanID))
             {
-                SafetyPlan toDelete = _currentTask.allSafetyPlans.First(o => o.PlanID == PlanID);
+                SafetyPlan toDelete = _currentIncident.allSafetyPlans.First(o => o.PlanID == PlanID);
                 // _currentTask.allSafetyPlans = _currentTask.allSafetyPlans.Where(o => o.PlanID != toDelete.PlanID).ToList();
                 // OnSafetyPlanChanged(new SafetyPlanEventArgs(toDelete));
                 DeleteSafetyPlan(toDelete, source);
@@ -994,10 +994,10 @@ namespace WildfireICSDesktopServices
         }
         public void UpdateTaskBasics(TaskBasics basics, string source)
         {
-            _currentTask.TaskName = basics.TaskName;
-            _currentTask.TaskNumber = basics.TaskNumber;
-            _currentTask.AgencyFileNumber = basics.AgencyFileNumber;
-            _currentTask.ICPCallSign = basics.ICPCallSign;
+            _currentIncident.TaskName = basics.TaskName;
+            _currentIncident.TaskNumber = basics.TaskNumber;
+            _currentIncident.AgencyFileNumber = basics.AgencyFileNumber;
+            _currentIncident.ICPCallSign = basics.ICPCallSign;
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(basics, "UPSERT", true, false);
@@ -1012,10 +1012,10 @@ namespace WildfireICSDesktopServices
         // Timeline
         public void RefreshAutomatedTimelineEvents()
         {
-            List<TimelineEvent> autoEvents = _currentTask.GetAutomatedTimelineEvents();
-            foreach (TimelineEvent ev in _currentTask.taskTimeline.AllTimelineEvents.Where(o => o.IsAuto)) { DeleteTimelineEvent(ev); }
+            List<TimelineEvent> autoEvents = _currentIncident.GetAutomatedTimelineEvents();
+            foreach (TimelineEvent ev in _currentIncident.taskTimeline.AllTimelineEvents.Where(o => o.IsAuto)) { DeleteTimelineEvent(ev); }
             foreach (TimelineEvent ev in autoEvents) { UpsertTimelineEvent(ev); }
-            _currentTask.taskTimeline.AllTimelineEvents = _currentTask.taskTimeline.AllTimelineEvents.OrderBy(o => o.EventDateTime).ToList();
+            _currentIncident.taskTimeline.AllTimelineEvents = _currentIncident.taskTimeline.AllTimelineEvents.OrderBy(o => o.EventDateTime).ToList();
 
         }
 
@@ -1030,7 +1030,7 @@ namespace WildfireICSDesktopServices
         public void UpsertTimeline(Timeline record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            _currentTask.taskTimeline = record;
+            _currentIncident.taskTimeline = record;
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -1052,12 +1052,12 @@ namespace WildfireICSDesktopServices
         public void UpsertTimelineEvent(TimelineEvent record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.taskTimeline == null) { _currentTask.taskTimeline = new Timeline(); }
-            if (_currentTask.taskTimeline.AllTimelineEvents.Any(o => o.TimelineEventID == record.TimelineEventID))
+            if (_currentIncident.taskTimeline == null) { _currentIncident.taskTimeline = new Timeline(); }
+            if (_currentIncident.taskTimeline.AllTimelineEvents.Any(o => o.TimelineEventID == record.TimelineEventID))
             {
-                _currentTask.taskTimeline.AllTimelineEvents = _currentTask.taskTimeline.AllTimelineEvents.Where(o => o.TimelineEventID != record.TimelineEventID).ToList();
+                _currentIncident.taskTimeline.AllTimelineEvents = _currentIncident.taskTimeline.AllTimelineEvents.Where(o => o.TimelineEventID != record.TimelineEventID).ToList();
             }
-            _currentTask.taskTimeline.AllTimelineEvents.Add(record);
+            _currentIncident.taskTimeline.AllTimelineEvents.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -1067,9 +1067,9 @@ namespace WildfireICSDesktopServices
         public void DeleteTimelineEvent(TimelineEvent record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.taskTimeline.AllTimelineEvents.Any(o => o.TimelineEventID == record.TimelineEventID))
+            if (_currentIncident.taskTimeline.AllTimelineEvents.Any(o => o.TimelineEventID == record.TimelineEventID))
             {
-                _currentTask.taskTimeline.AllTimelineEvents = _currentTask.taskTimeline.AllTimelineEvents.Where(o => o.TimelineEventID != record.TimelineEventID).ToList();
+                _currentIncident.taskTimeline.AllTimelineEvents = _currentIncident.taskTimeline.AllTimelineEvents.Where(o => o.TimelineEventID != record.TimelineEventID).ToList();
 
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "DELETE", true, false); }
                 OnTimelineEventChanged(new TimelineEventEventArgs(record));
@@ -1078,9 +1078,9 @@ namespace WildfireICSDesktopServices
         }
         public void DeleteTimelineEvent(Guid RecordID, string source = "local")
         {
-            if (_currentTask.taskTimeline.AllTimelineEvents.Any(o => o.TimelineEventID == RecordID))
+            if (_currentIncident.taskTimeline.AllTimelineEvents.Any(o => o.TimelineEventID == RecordID))
             {
-                TimelineEvent toDelete = _currentTask.taskTimeline.AllTimelineEvents.First(o => o.TimelineEventID == RecordID);
+                TimelineEvent toDelete = _currentIncident.taskTimeline.AllTimelineEvents.First(o => o.TimelineEventID == RecordID);
                 //_currentTask.taskTimeline.AllTimelineEvents = _currentTask.taskTimeline.AllTimelineEvents.Where(o => o.TimelineEventID != RecordID).ToList();
                 //OnTimelineEventChanged(new TimelineEventEventArgs(toDelete));
                 DeleteTimelineEvent(toDelete, source);
@@ -1107,11 +1107,11 @@ namespace WildfireICSDesktopServices
         public void UpsertVehicle(Vehicle record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allVehicles.Any(o => o.VehicleID == record.VehicleID))
+            if (_currentIncident.allVehicles.Any(o => o.VehicleID == record.VehicleID))
             {
-                _currentTask.allVehicles = _currentTask.allVehicles.Where(o => o.VehicleID != record.VehicleID).ToList();
+                _currentIncident.allVehicles = _currentIncident.allVehicles.Where(o => o.VehicleID != record.VehicleID).ToList();
             }
-            _currentTask.allVehicles.Add(record);
+            _currentIncident.allVehicles.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -1121,9 +1121,9 @@ namespace WildfireICSDesktopServices
         public void DeleteVehicle(Vehicle record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allVehicles.Any(o => o.VehicleID == record.VehicleID))
+            if (_currentIncident.allVehicles.Any(o => o.VehicleID == record.VehicleID))
             {
-                _currentTask.allVehicles = _currentTask.allVehicles.Where(o => o.VehicleID != record.VehicleID).ToList();
+                _currentIncident.allVehicles = _currentIncident.allVehicles.Where(o => o.VehicleID != record.VehicleID).ToList();
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "DELETE", true, false); }
                 OnVehicleChanged(new VehicleEventArgs(record));
             }
@@ -1133,9 +1133,9 @@ namespace WildfireICSDesktopServices
         public void DeleteVehicle(Guid RecordID, string source = "local")
         {
 
-            if (_currentTask.allVehicles.Any(o => o.VehicleID == RecordID))
+            if (_currentIncident.allVehicles.Any(o => o.VehicleID == RecordID))
             {
-                Vehicle toDelete = _currentTask.allVehicles.First(o => o.VehicleID == RecordID);
+                Vehicle toDelete = _currentIncident.allVehicles.First(o => o.VehicleID == RecordID);
                 DeleteVehicle(toDelete, source);
                 /*
                 _currentTask.allVehicles = _currentTask.allVehicles.Where(o => o.VehicleID != RecordID).ToList();
@@ -1149,11 +1149,11 @@ namespace WildfireICSDesktopServices
         //Member Status
         public void UpsertMemberStatus(SignInRecord signIn, string source = "local")
         {
-            if (_currentTask.AllSignInRecords.Any(o => o.SignInRecordID == signIn.SignInRecordID))
+            if (_currentIncident.AllSignInRecords.Any(o => o.SignInRecordID == signIn.SignInRecordID))
             {
-                _currentTask.AllSignInRecords = _currentTask.AllSignInRecords.Where(o => o.SignInRecordID != signIn.SignInRecordID).ToList();
+                _currentIncident.AllSignInRecords = _currentIncident.AllSignInRecords.Where(o => o.SignInRecordID != signIn.SignInRecordID).ToList();
             }
-            _currentTask.AllSignInRecords.Add(signIn);
+            _currentIncident.AllSignInRecords.Add(signIn);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(signIn, "UPSERT", true, false); }
             OnMemberSignInChanged(new MemberEventArgs(signIn));
         }
@@ -1161,7 +1161,7 @@ namespace WildfireICSDesktopServices
         {
             if (member != null)
             {
-                _currentTask.UpsertTaskTeamMember(member);
+                _currentIncident.UpsertTaskTeamMember(member);
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(member, "UPSERT", true, false); }
             }
             OnMemberSignInChanged(new MemberEventArgs(member));
@@ -1183,13 +1183,13 @@ namespace WildfireICSDesktopServices
 
             note.DateUpdated = DateTime.Now;
             if (note.DateCreated == DateTime.MinValue) { note.DateCreated = note.DateUpdated; }
-            if (note.TaskID == Guid.Empty) { note.TaskID = CurrentTask.TaskID; }
+            if (note.TaskID == Guid.Empty) { note.TaskID = CurrentIncident.TaskID; }
 
-            if (CurrentTask.allNotes.Any(o => o.NoteID == note.NoteID))
+            if (CurrentIncident.allNotes.Any(o => o.NoteID == note.NoteID))
             {
-                CurrentTask.allNotes = CurrentTask.allNotes.Where(o => o.NoteID != note.NoteID).ToList();
+                CurrentIncident.allNotes = CurrentIncident.allNotes.Where(o => o.NoteID != note.NoteID).ToList();
             }
-            CurrentTask.allNotes.Add(note);
+            CurrentIncident.allNotes.Add(note);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(note, "UPSERT", true, false); }
             OnNoteChanged(new NoteEventArgs(note));
         }
@@ -1212,11 +1212,11 @@ namespace WildfireICSDesktopServices
         {
 
             te.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allEquipment.Any(o => o.EquipmentID == te.EquipmentID && o.OpPeriod == te.OpPeriod))
+            if (_currentIncident.allEquipment.Any(o => o.EquipmentID == te.EquipmentID && o.OpPeriod == te.OpPeriod))
             {
-                _currentTask.allEquipment = _currentTask.allEquipment.Where(o => o.EquipmentID != te.EquipmentID || o.OpPeriod != te.OpPeriod).ToList();
+                _currentIncident.allEquipment = _currentIncident.allEquipment.Where(o => o.EquipmentID != te.EquipmentID || o.OpPeriod != te.OpPeriod).ToList();
             }
-            _currentTask.allEquipment.Add(te);
+            _currentIncident.allEquipment.Add(te);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(te, "UPSERT", true, false); }
             OnTaskEquipmentChanged(new TaskEquipmentEventArgs(te));
         }
@@ -1224,9 +1224,9 @@ namespace WildfireICSDesktopServices
         {
 
             te.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allEquipment.Any(o => o.EquipmentID == te.EquipmentID && o.OpPeriod == te.OpPeriod))
+            if (_currentIncident.allEquipment.Any(o => o.EquipmentID == te.EquipmentID && o.OpPeriod == te.OpPeriod))
             {
-                _currentTask.allEquipment = _currentTask.allEquipment.Where(o => o.EquipmentID != te.EquipmentID || o.OpPeriod != te.OpPeriod).ToList();
+                _currentIncident.allEquipment = _currentIncident.allEquipment.Where(o => o.EquipmentID != te.EquipmentID || o.OpPeriod != te.OpPeriod).ToList();
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(te, "DELETE", true, false); }
                 OnTaskEquipmentChanged(new TaskEquipmentEventArgs(te));
             }
@@ -1246,11 +1246,11 @@ namespace WildfireICSDesktopServices
         {
 
             issue.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allEquipmentIssues.Any(o => o.IssueID != issue.IssueID))
+            if (_currentIncident.allEquipmentIssues.Any(o => o.IssueID != issue.IssueID))
             {
-                _currentTask.allEquipmentIssues = _currentTask.allEquipmentIssues.Where(o => o.IssueID != issue.IssueID).ToList();
+                _currentIncident.allEquipmentIssues = _currentIncident.allEquipmentIssues.Where(o => o.IssueID != issue.IssueID).ToList();
             }
-            _currentTask.allEquipmentIssues.Add(issue);
+            _currentIncident.allEquipmentIssues.Add(issue);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(issue, "UPSERT", true, false); }
             OnEquipmentIssueChanged(new EquipmentIssueEventArgs(issue));
         }
@@ -1278,17 +1278,17 @@ namespace WildfireICSDesktopServices
         public void UpsertComms(CommsLogEntry entry, string source = "local")
         {
             entry.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentTask.allCommsLogEntries.Any(o => o.EntryID == entry.EntryID)) { _currentTask.allCommsLogEntries = _currentTask.allCommsLogEntries.Where(o => o.EntryID != entry.EntryID).ToList(); }
-            _currentTask.allCommsLogEntries.Add(entry);
+            if (_currentIncident.allCommsLogEntries.Any(o => o.EntryID == entry.EntryID)) { _currentIncident.allCommsLogEntries = _currentIncident.allCommsLogEntries.Where(o => o.EntryID != entry.EntryID).ToList(); }
+            _currentIncident.allCommsLogEntries.Add(entry);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(entry, "UPSERT", true, false); }
             OnCommsChanged(new CommsEventArgs(entry));
 
         }
         public void DeleteCommsLogEntry(Guid EntryID, string source = "local")
         {
-            if (_currentTask.allCommsLogEntries.Any(o => o.EntryID == EntryID))
+            if (_currentIncident.allCommsLogEntries.Any(o => o.EntryID == EntryID))
             {
-                CommsLogEntry toDelete = _currentTask.allCommsLogEntries.First(o => o.EntryID == EntryID);
+                CommsLogEntry toDelete = _currentIncident.allCommsLogEntries.First(o => o.EntryID == EntryID);
                 DeleteCommsLogEntry(toDelete, source);
                 /*
                 _currentTask.allCommsLogEntries = _currentTask.allCommsLogEntries.Where(o => o.EntryID != EntryID).ToList();
@@ -1300,10 +1300,10 @@ namespace WildfireICSDesktopServices
         }
         public void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local")
         {
-            if (_currentTask.allCommsLogEntries.Any(o => o.EntryID == toDelete.EntryID))
+            if (_currentIncident.allCommsLogEntries.Any(o => o.EntryID == toDelete.EntryID))
             {
 
-                _currentTask.allCommsLogEntries = _currentTask.allCommsLogEntries.Where(o => o.EntryID != toDelete.EntryID).ToList();
+                _currentIncident.allCommsLogEntries = _currentIncident.allCommsLogEntries.Where(o => o.EntryID != toDelete.EntryID).ToList();
                 toDelete.LastUpdatedUTC = DateTime.UtcNow;
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(toDelete, "DELETE", true, false); }
                 OnCommsChanged(new CommsEventArgs(toDelete));
