@@ -306,6 +306,10 @@ namespace WildfireICSDesktopServices
                     return _options.AutoSave;
                 case "AutoBackup":
                     return _options.AutomaticBackups;
+                case "AddIMTToContacts":
+                    return _options.AddIMTToContacts;
+                case "PromptForInitialSave":
+                    return _options.PromptForInitialSave;
                 default:
                     return false;
             }
@@ -356,6 +360,8 @@ namespace WildfireICSDesktopServices
 
             switch (property_name)
             {
+                case "AddIMTToContacts":
+                    _options.AddIMTToContacts = Convert.ToBoolean(newValue); break;
                 case "ShortcutButtons":
                     _options.ShortcutButtons = (ShortcutButtonOption[])newValue;
                     break;

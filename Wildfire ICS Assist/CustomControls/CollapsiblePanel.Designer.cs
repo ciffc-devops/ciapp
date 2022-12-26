@@ -42,7 +42,7 @@
             this.lblTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblTitle.Location = new System.Drawing.Point(39, 3);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(1013, 30);
+            this.lblTitle.Size = new System.Drawing.Size(282, 30);
             this.lblTitle.TabIndex = 32;
             this.lblTitle.Text = "Incident Action Plan";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -74,9 +74,9 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnExpandCollapse);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CollapsiblePanel";
-            this.Size = new System.Drawing.Size(1055, 36);
+            this.Size = new System.Drawing.Size(324, 40);
             this.ResumeLayout(false);
 
         }

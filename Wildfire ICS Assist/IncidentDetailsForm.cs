@@ -82,6 +82,7 @@ namespace Wildfire_ICS_Assist
         SavedSafetyNotesForm savedSafetyNotesForm = null;
         SavedTeamMembersForm savedTeamMembersForm = null;
 
+        CommunicationsListForm communicationsList = null;
 
 
         /* Event Handlers!*/
@@ -502,13 +503,16 @@ namespace Wildfire_ICS_Assist
 
         private bool initialDetailsSet(bool checkOpPeriod = true, bool promptOnerror = true)
         {
-            bool set = true;
+            bool set = false;
             List<string> errors = new List<string>();
-            if (string.IsNullOrEmpty(txtTaskName.Text)) { set = false; errors.Add("You must assign an incident name"); txtTaskName.BackColor = Color.LightCoral; }
-            else { txtTaskName.BackColor = Color.LightGreen; ; }
+            if (!string.IsNullOrEmpty(txtTaskName.Text) || !string.IsNullOrEmpty(txtTaskNumber.Text)) { set = true; }
+            else { set = false;  errors.Add("You must set either an incident name or number to begin."); }
+            
+            if (string.IsNullOrEmpty(txtTaskName.Text)) {  txtTaskName.BackColor = Color.LightCoral; }
+            else { txtTaskName.BackColor = Color.LightSkyBlue; ; }
 
-            if (string.IsNullOrEmpty(txtTaskNumber.Text)) { set = false; errors.Add("You must set an incident number"); txtTaskNumber.BackColor = Color.LightCoral; }
-            else { txtTaskNumber.BackColor = Color.LightGreen; ; }
+            if (string.IsNullOrEmpty(txtTaskNumber.Text)) {  txtTaskNumber.BackColor = Color.LightCoral; }
+            else { txtTaskNumber.BackColor = Color.LightSkyBlue; ; }
 
 
             if (!set)
@@ -807,6 +811,77 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void txtTaskName_Leave(object sender, EventArgs e)
+        {
+            initialDetailsSet(true, false);
 
+        }
+
+        private void txtTaskNumber_Leave(object sender, EventArgs e)
+        {
+            validateTaskNumber();
+            initialDetailsSet(true, false);
+        }
+
+        private void txtTaskNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Program.generalOptionsService.GetOptionsBoolValue("AllowStringTaskNumber"))
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) //&&        (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void txtTaskNumber_Validating(object sender, CancelEventArgs e)
+        {
+            if(initialDetailsSet(false, false) && !askedForInitialSave && !ThisMachineIsClient && Program.generalOptionsService.GetOptionsBoolValue("PromptForInitialSave"))
+            {
+                askedForInitialSave = true;
+                DialogResult result = MessageBox.Show("Would you like to save this task now? (you can always select File > Save As... in the future)", "Save Task", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    saveFile();
+                }
+
+            }
+            /*
+            if (string.IsNullOrEmpty(txtTaskNumber.Text)) { txtTaskNumber.BackColor = Color.LightCoral; }
+            else if (!validateTaskNumber()) { txtTaskNumber.BackColor = Color.LightCoral; }
+            else { txtTaskNumber.BackColor = Color.LightGreen; }
+            */
+        }
+
+        private void communicationsListICS205AToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openCommunicationsList();
+        }
+
+        private void openCommunicationsList()
+        {
+            if (initialDetailsSet())
+            {
+                if (null == communicationsList)
+                {
+                    communicationsList = new CommunicationsListForm();
+                    communicationsList.FormClosed += CommunicationsListForm_Closed;
+                    communicationsList.Show(this);
+                    ActiveForms.Add(communicationsList);
+                }
+
+                communicationsList.BringToFront();
+            }
+
+           
+        
+        }
+        void CommunicationsListForm_Closed(object sender, FormClosedEventArgs e)
+        {
+           
+            RemoveActiveForm(communicationsList);
+            communicationsList = null;
+
+        }
     }
 }

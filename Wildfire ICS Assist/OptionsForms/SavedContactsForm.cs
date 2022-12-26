@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
@@ -101,6 +103,41 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         Program.generalOptionsService.UpserOptionValue(contactListEditContact.contact, "Contact");
                         buildDataList();
                     }
+                }
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            svdExport.FileName = "Saved Contacts from CIAPP.csv";
+            DialogResult result = svdExport.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
+            {
+                string exportPath = svdExport.FileName;
+                string delimiter = ",";
+
+                
+
+                List<Contact> contacts = ((List<Contact>)Program.generalOptionsService.GetOptionsValue("Contacts"));
+                contacts = contacts.Where(o => o.Active).OrderBy(o => o.ContactName).ToList();
+
+                string csv = ContactTools.ContactsToCSV(contacts, delimiter);
+
+
+                try
+                {
+                    System.IO.File.WriteAllText(exportPath, csv);
+
+                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    if (openNow == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(exportPath);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }

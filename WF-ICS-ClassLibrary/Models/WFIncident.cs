@@ -9,18 +9,18 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace WF_ICS_ClassLibrary.Models
 {
-    [ProtoContract, 
-        /*
-        ProtoInclude(101, typeof(Assignment)), 
-        ProtoInclude(102, typeof(AssignmentDebrief)), ProtoInclude(104, typeof(Clue)), ProtoInclude(110, typeof(TaskEquipment)),
- ProtoInclude(111, typeof(EquipmentIssue)),
-         ProtoInclude(113, typeof(MattsonEvaluation)),
- ProtoInclude(114, typeof(MattsonScore)),
- ProtoInclude(115, typeof(MapSegment)),
-         ProtoInclude(126, typeof(ShiftBriefing)),
- ProtoInclude(127, typeof(SubjectProfile)),
-         ProtoInclude(131, typeof(UrgencyCalculation)),
-         ProtoInclude(133, typeof(WhiteboardItem))*/
+    [ProtoContract,
+    /*
+    ProtoInclude(101, typeof(Assignment)), 
+    ProtoInclude(102, typeof(AssignmentDebrief)), ProtoInclude(104, typeof(Clue)), ProtoInclude(110, typeof(TaskEquipment)),
+ProtoInclude(111, typeof(EquipmentIssue)),
+     ProtoInclude(113, typeof(MattsonEvaluation)),
+ProtoInclude(114, typeof(MattsonScore)),
+ProtoInclude(115, typeof(MapSegment)),
+     ProtoInclude(126, typeof(ShiftBriefing)),
+ProtoInclude(127, typeof(SubjectProfile)),
+     ProtoInclude(131, typeof(UrgencyCalculation)),
+     ProtoInclude(133, typeof(WhiteboardItem))*/
 
 
     ProtoInclude(103, typeof(Briefing)),
@@ -54,26 +54,26 @@ namespace WF_ICS_ClassLibrary.Models
             TaskID = System.Guid.NewGuid();
             allSafetyPlans = new List<SafetyPlan>();
             allObjectives = new List<IncidentObjective>();
-           
 
-           
+
+
             allBriefings = new List<Briefing>();
             DocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             DocumentPath = System.IO.Path.Combine(DocumentPath, "CIAPPO");
             allOrgCharts = new List<OrganizationChart>();
-           
+
             allMedicalPlans = new List<MedicalPlan>();
             allCommsPlans = new List<CommsPlan>();
             additionalCommsItems = new List<CommsPlanItem>();
-           
+
             allCommsLogEntries = new List<CommsLogEntry>();
             AllOperationalPeriods = new List<OperationalPeriod>();
-           
-           
+
+
             taskTimeline = new Timeline();
-           // allEquipment = new List<TaskEquipment>();
-           // allLogisticalNeeds = new List<LogisticalNeed>();
-           // allLogisticalNeedsLists = new List<LogisticalNeedsList>();
+            // allEquipment = new List<TaskEquipment>();
+            // allLogisticalNeeds = new List<LogisticalNeed>();
+            // allLogisticalNeedsLists = new List<LogisticalNeedsList>();
             allVehicles = new List<Vehicle>();
             allTaskUpdates = new List<TaskUpdate>();
             TaskEncryptionKey = Utilities.RandomPasswordGenerator.GeneratePassword();
@@ -85,39 +85,39 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(4)] private string _AgencyFileNumber;
         [ProtoMember(5)] private string _FileName;
         [ProtoMember(6)] private string _ICPCallsign;
-       //[ProtoMember(7)] private string _SubjectCategory;
-      //  [ProtoMember(8)] public Mattson _Mattson;
-      //  [ProtoMember(9)] private double _subjectVisibility;
-      //  [ProtoMember(10)] private double _generalRangeOfDetection;
+        //[ProtoMember(7)] private string _SubjectCategory;
+        //  [ProtoMember(8)] public Mattson _Mattson;
+        //  [ProtoMember(9)] private double _subjectVisibility;
+        //  [ProtoMember(10)] private double _generalRangeOfDetection;
         [ProtoMember(11)] private string _currentFilePath;
-       // [ProtoMember(12)] private List<Assignment> _allAssignments;
+        // [ProtoMember(12)] private List<Assignment> _allAssignments;
         [ProtoMember(13)] private List<SafetyPlan> _allSafetyPlans;
         [ProtoMember(14)] private List<Briefing> _allBriefings;
         [ProtoMember(15)] private List<IncidentObjective> _allObjectives;
         [ProtoMember(16)] private List<OrganizationChart> _allOrgCharts;
-      //  [ProtoMember(17)] private List<UrgencyCalculation> _allUrgencyCalculations;
+        //  [ProtoMember(17)] private List<UrgencyCalculation> _allUrgencyCalculations;
         [ProtoMember(18)] private List<MedicalPlan> _allMedicalPlans;
         [ProtoMember(19)] private List<CommsPlan> _allCommsPlans;
         [ProtoMember(20)] private List<CommsPlanItem> _additionalCommsItems;
-      //  [ProtoMember(21)] private List<SubjectProfile> _allSubjectProfiles;
+        //  [ProtoMember(21)] private List<SubjectProfile> _allSubjectProfiles;
         [ProtoMember(22)] private List<CommsLogEntry> _allCommsLogEntries;
         [ProtoMember(23)] private string _DocumentPath;
         [ProtoMember(24)] private string _sourceIdentifier;
         [ProtoMember(25)] private int _RelayCount;
         [ProtoMember(26)] private Guid _RequestID;
-      //  [ProtoMember(27)] private List<WhiteboardItem> _whiteboardItems = new List<WhiteboardItem>();
+        //  [ProtoMember(27)] private List<WhiteboardItem> _whiteboardItems = new List<WhiteboardItem>();
         [ProtoMember(28)] private List<SignInRecord> _signInRecords = new List<SignInRecord>();
         [ProtoMember(29)] private List<TeamMember> _taskTeamMembers = new List<TeamMember>();
         [ProtoMember(30)] private Organization _taskOrganization = new Organization();
         [ProtoMember(31)] private DateTime _DateCreatedUTC;
         [ProtoMember(32)] private DateTime _DateUpdatedUTC;
-       // [ProtoMember(33)] private List<TaskUserAccess> _taskUsers;
+        // [ProtoMember(33)] private List<TaskUserAccess> _taskUsers;
         [ProtoMember(34)] private List<OperationalPeriod> _AllOperationalPeriods;
         [ProtoMember(35)] private bool _IsTraining;
-       // [ProtoMember(36)] private List<AssignmentDebrief> _allAssignmentDebriefs = new List<AssignmentDebrief>();
-       // [ProtoMember(37)] private List<Clue> _allClues = new List<Clue>();
-       // [ProtoMember(38)] private List<MapSegment> _allMapSegments = new List<MapSegment>();
-       // [ProtoMember(39)] private List<MattsonEvaluation> _allMattsonEvaluations = new List<MattsonEvaluation>();
+        // [ProtoMember(36)] private List<AssignmentDebrief> _allAssignmentDebriefs = new List<AssignmentDebrief>();
+        // [ProtoMember(37)] private List<Clue> _allClues = new List<Clue>();
+        // [ProtoMember(38)] private List<MapSegment> _allMapSegments = new List<MapSegment>();
+        // [ProtoMember(39)] private List<MattsonEvaluation> _allMattsonEvaluations = new List<MattsonEvaluation>();
         [ProtoMember(40)] private List<Contact> _allContacts = new List<Contact>();
         [ProtoMember(41)] private Timeline _taskTimeline;
         [ProtoMember(42)] private List<Note> _allNotes = new List<Note>();
@@ -138,6 +138,24 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public string TaskName { get => _TaskName; set { if (!string.IsNullOrEmpty(value)) { _TaskName = value.Trim(); } else { _TaskName = null; } } }
         public string TaskNumber { get => _TaskNumber; set => _TaskNumber = value; }
+
+        public string IncidentIdentifier
+        {
+            get
+            {
+                StringBuilder id = new StringBuilder();
+
+                if (!string.IsNullOrEmpty(TaskNumber))
+                {
+                    id.Append(TaskNumber);
+                    if (!string.IsNullOrEmpty(TaskName)) { id.Append(" - "); }
+                }
+                if (!string.IsNullOrEmpty(TaskName)) { id.Append(TaskName); }
+
+                return id.ToString();
+            }
+        }
+
         public string AgencyFileNumber { get => _AgencyFileNumber; set => _AgencyFileNumber = value; }
         public string FileName { get => _FileName; set => _FileName = value; }
         public CommsPlanItem PrimaryChannel(int Ops)
@@ -265,10 +283,10 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 return
                     //allAssignmentDebriefs.Count + allAssignments.Count + allClues.Count + 
-                    allSafetyPlans.Count + allBriefings.Count + allObjectives.Count + allOrgCharts.Count 
+                    allSafetyPlans.Count + allBriefings.Count + allObjectives.Count + allOrgCharts.Count
                     // + allUrgencyCalculations.Count 
-                    + allMedicalPlans.Count + allCommsPlans.Count 
-                   // + allSubjectProfiles.Count 
+                    + allMedicalPlans.Count + allCommsPlans.Count
+                    // + allSubjectProfiles.Count 
                     + allCommsLogEntries.Count + AllSignInRecords.Count;
             }
         }
@@ -287,7 +305,7 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime DateCreatedLocal { get { return DateCreatedUTC.ToLocalTime(); } }
         public DateTime DateUpdatedLocal { get { return DateUpdatedUTC.ToLocalTime(); } }
 
-       // public List<TaskUserAccess> TaskUsers { get => _taskUsers; set => _taskUsers = value; }
+        // public List<TaskUserAccess> TaskUsers { get => _taskUsers; set => _taskUsers = value; }
         private DateTime _lastCheckDBUTC;
         public DateTime LastCheckDBUTC { get => _lastCheckDBUTC; set => _lastCheckDBUTC = value; }
         public bool IsTraining { get => _IsTraining; set => _IsTraining = value; }
@@ -369,7 +387,7 @@ namespace WF_ICS_ClassLibrary.Models
             //else if (allSubjectProfiles.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allCommsLogEntries.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (AllSignInRecords.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
-          //  else if (whiteboardItems.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
+            //  else if (whiteboardItems.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             // else if (hasMeangfulCommsPlan(opPeriod)) { hasContent = true; }
             else if (hasMeaningfulMedicalPlan(opPeriod)) { hasContent = true; }
             else if (hasMeaningfulOrgChart(opPeriod)) { hasContent = true; }
@@ -463,7 +481,7 @@ namespace WF_ICS_ClassLibrary.Models
             else { return false; }
         }
         public bool hasMeaningfulObjectives(int ops) { return (allObjectives.Where(o => o.OpPeriod == ops).Count() > 0); }
-       // public bool hasAnyAssignments(int ops) { return allAssignments.Where(o => o.OpPeriod == ops).Count() > 0; }
+        // public bool hasAnyAssignments(int ops) { return allAssignments.Where(o => o.OpPeriod == ops).Count() > 0; }
         public bool hasAnySafetyPlans(int ops) { return allSafetyPlans.Where(o => o.OpPeriod == ops).Count() > 0; }
         // public bool hasAnySubjectProfiles(int ops) { return allSubjectProfiles.Where(o => o.OpPeriod == ops).Count() > 0; }
 
@@ -520,5 +538,5 @@ namespace WF_ICS_ClassLibrary.Models
 
     }
 
-    
+
 }

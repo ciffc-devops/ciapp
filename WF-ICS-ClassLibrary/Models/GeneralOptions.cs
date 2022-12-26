@@ -75,6 +75,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(61)] private List<string> _AutomaticSubFolders = new List<string>();
         [ProtoMember(62)] private string _DefaultBackupFolder;
         [ProtoMember(63)] private Guid _ParentOrganizationID;
+        [ProtoMember(64)] private bool _AddIMTToContacts;
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
         public Guid PrimaryChannelID { get { return g_primaryChannel; } set { g_primaryChannel = value; appSettingsChanged = true; } }
@@ -157,6 +158,7 @@ namespace WF_ICS_ClassLibrary.Models
         public List<string> AutomaticSubFolders { get => _AutomaticSubFolders; set => _AutomaticSubFolders = value; }
         public string AutomaticSubFoldersCSV { get { StringBuilder sb = new StringBuilder(); foreach (string s in AutomaticSubFolders) { if (sb.Length > 0) { sb.Append(", "); } sb.Append(s); } return sb.ToString(); } }
         public Guid ParentOrganizationID { get => _ParentOrganizationID; set => _ParentOrganizationID = value; }
+        public bool AddIMTToContacts { get => _AddIMTToContacts; set => _AddIMTToContacts = value; }
 
         public void addDefaultOptions()
         {
@@ -181,6 +183,7 @@ namespace WF_ICS_ClassLibrary.Models
             AutomaticBackups = true;
             AutoBackupIntervalMinutes = 120;
             IncludeOtherContactsWithIAP = true;
+            AddIMTToContacts = true;
             DefaultICSRole = new ICSRole().GetRoleByName("SAR Manager");
             AutomaticSubFolders.Add("GPS Track Backup");
             AutomaticSubFolders.Add("Maps");

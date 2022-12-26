@@ -23,7 +23,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private bool _CurrentlyCollapsed = true;
 
         [Description("Text displayed at the top of the panel"), Category("Appearance")]
-        public new string Text { get => lblTitle.Text; set => lblTitle.Text = value; }
+        public string TitleText { get => lblTitle.Text; set => lblTitle.Text = value; }
 
         [Description("If true, the panel will collapsed towards the left. if false, towards the right"), Category("Appearance")]
         public bool CollapseLeft { get => _CollapseLeft; set => _CollapseLeft = value; }
