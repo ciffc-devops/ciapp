@@ -68,6 +68,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 this.Location = new Point(collapsedX, currentY);
             }
 
+            lblTitle.Width = this.Width - 10 - lblTitle.Location.X;
 
 
             this.SendToBack();
@@ -94,6 +95,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 collapsedX = currentX - (ExpandedWidth - CollapsedWidth);
                 this.Location = new Point(collapsedX, currentY);
             }
+            lblTitle.Width = this.Width - 10 - lblTitle.Location.X;
 
             this.BringToFront();
             _CurrentlyCollapsed = false;

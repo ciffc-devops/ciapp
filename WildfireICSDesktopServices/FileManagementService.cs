@@ -55,9 +55,9 @@ namespace WildfireICSDesktopServices
                 try { System.IO.Directory.CreateDirectory(path); }
                 catch (IOException) { }
 
-                if (!path.Contains(CurrentTask.TaskNumber))
+                if (!path.Contains(CurrentTask.IncidentIdentifier))
                 {
-                    path = System.IO.Path.Combine(path, "Task " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName);
+                    path = System.IO.Path.Combine(path, "Task " + CurrentTask.IncidentIdentifier);
                     System.IO.Directory.CreateDirectory(path);
                 }
 

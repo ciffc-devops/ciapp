@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -180,19 +180,16 @@
             this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
             this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.btnTransportPlan = new System.Windows.Forms.Button();
             this.btnBriefings2 = new System.Windows.Forms.Button();
-            this.btnOpsPlan = new System.Windows.Forms.Button();
             this.btnSafetyPlans = new System.Windows.Forms.Button();
             this.btnIncidentObjectives = new System.Windows.Forms.Button();
             this.btnMedicalPlan = new System.Windows.Forms.Button();
             this.btnPrintIAP = new System.Windows.Forms.Button();
             this.btnPrintOrgChart = new System.Windows.Forms.Button();
-            this.btnSubjectProfile = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
-            this.cpOperations = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.cpLogistics = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cpPlanning = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.cpLogistics = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.cpOperations = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -274,9 +271,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle6.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1272,15 +1269,12 @@
             this.cpIncidentActionPlan.CollapsedHeight = 40;
             this.cpIncidentActionPlan.CollapsedWidth = 485;
             this.cpIncidentActionPlan.CollapseLeft = true;
-            this.cpIncidentActionPlan.Controls.Add(this.btnTransportPlan);
             this.cpIncidentActionPlan.Controls.Add(this.btnBriefings2);
-            this.cpIncidentActionPlan.Controls.Add(this.btnOpsPlan);
             this.cpIncidentActionPlan.Controls.Add(this.btnSafetyPlans);
             this.cpIncidentActionPlan.Controls.Add(this.btnIncidentObjectives);
             this.cpIncidentActionPlan.Controls.Add(this.btnMedicalPlan);
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
-            this.cpIncidentActionPlan.Controls.Add(this.btnSubjectProfile);
             this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
             this.cpIncidentActionPlan.CurrentlyCollapsed = true;
             this.cpIncidentActionPlan.ExpandedHeight = 250;
@@ -1289,23 +1283,11 @@
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
             // 
-            // btnTransportPlan
-            // 
-            resources.ApplyResources(this.btnTransportPlan, "btnTransportPlan");
-            this.btnTransportPlan.Name = "btnTransportPlan";
-            this.btnTransportPlan.UseVisualStyleBackColor = true;
-            // 
             // btnBriefings2
             // 
             resources.ApplyResources(this.btnBriefings2, "btnBriefings2");
             this.btnBriefings2.Name = "btnBriefings2";
             this.btnBriefings2.UseVisualStyleBackColor = true;
-            // 
-            // btnOpsPlan
-            // 
-            resources.ApplyResources(this.btnOpsPlan, "btnOpsPlan");
-            this.btnOpsPlan.Name = "btnOpsPlan";
-            this.btnOpsPlan.UseVisualStyleBackColor = true;
             // 
             // btnSafetyPlans
             // 
@@ -1338,45 +1320,11 @@
             this.btnPrintOrgChart.Name = "btnPrintOrgChart";
             this.btnPrintOrgChart.UseVisualStyleBackColor = true;
             // 
-            // btnSubjectProfile
-            // 
-            resources.ApplyResources(this.btnSubjectProfile, "btnSubjectProfile");
-            this.btnSubjectProfile.Name = "btnSubjectProfile";
-            this.btnSubjectProfile.UseVisualStyleBackColor = true;
-            // 
             // btnCommsPlan
             // 
             resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
             this.btnCommsPlan.Name = "btnCommsPlan";
             this.btnCommsPlan.UseVisualStyleBackColor = true;
-            // 
-            // cpOperations
-            // 
-            resources.ApplyResources(this.cpOperations, "cpOperations");
-            this.cpOperations.BackColor = System.Drawing.Color.White;
-            this.cpOperations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpOperations.CollapsedHeight = 40;
-            this.cpOperations.CollapsedWidth = 485;
-            this.cpOperations.CollapseLeft = false;
-            this.cpOperations.CurrentlyCollapsed = true;
-            this.cpOperations.ExpandedHeight = 300;
-            this.cpOperations.ExpandedWidth = 485;
-            this.cpOperations.Name = "cpOperations";
-            this.cpOperations.TitleText = "OPERATIONS";
-            // 
-            // cpLogistics
-            // 
-            resources.ApplyResources(this.cpLogistics, "cpLogistics");
-            this.cpLogistics.BackColor = System.Drawing.Color.White;
-            this.cpLogistics.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpLogistics.CollapsedHeight = 40;
-            this.cpLogistics.CollapsedWidth = 485;
-            this.cpLogistics.CollapseLeft = false;
-            this.cpLogistics.CurrentlyCollapsed = true;
-            this.cpLogistics.ExpandedHeight = 300;
-            this.cpLogistics.ExpandedWidth = 485;
-            this.cpLogistics.Name = "cpLogistics";
-            this.cpLogistics.TitleText = "LOGISTICS";
             // 
             // cpPlanning
             // 
@@ -1392,15 +1340,43 @@
             this.cpPlanning.Name = "cpPlanning";
             this.cpPlanning.TitleText = "PLANNING";
             // 
+            // cpLogistics
+            // 
+            resources.ApplyResources(this.cpLogistics, "cpLogistics");
+            this.cpLogistics.BackColor = System.Drawing.Color.White;
+            this.cpLogistics.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpLogistics.CollapsedHeight = 40;
+            this.cpLogistics.CollapsedWidth = 485;
+            this.cpLogistics.CollapseLeft = false;
+            this.cpLogistics.CurrentlyCollapsed = true;
+            this.cpLogistics.ExpandedHeight = 300;
+            this.cpLogistics.ExpandedWidth = 485;
+            this.cpLogistics.Name = "cpLogistics";
+            this.cpLogistics.TitleText = "LOGISTICS";
+            // 
+            // cpOperations
+            // 
+            resources.ApplyResources(this.cpOperations, "cpOperations");
+            this.cpOperations.BackColor = System.Drawing.Color.White;
+            this.cpOperations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpOperations.CollapsedHeight = 40;
+            this.cpOperations.CollapsedWidth = 485;
+            this.cpOperations.CollapseLeft = false;
+            this.cpOperations.CurrentlyCollapsed = true;
+            this.cpOperations.ExpandedHeight = 300;
+            this.cpOperations.ExpandedWidth = 485;
+            this.cpOperations.Name = "cpOperations";
+            this.cpOperations.TitleText = "OPERATIONS";
+            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.cpPlanning);
             this.Controls.Add(this.cpLogistics);
             this.Controls.Add(this.cpOperations);
-            this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pnlTeamStatus);
@@ -1517,16 +1493,13 @@
         private System.Windows.Forms.Label lblNetworkSyncStatus;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.Button btnTransportPlan;
         private System.Windows.Forms.Button btnBriefings2;
         private System.Windows.Forms.Button btnSafetyPlans;
         private System.Windows.Forms.Button btnMedicalPlan;
         private System.Windows.Forms.Button btnPrintOrgChart;
         private System.Windows.Forms.Button btnCommsPlan;
-        private System.Windows.Forms.Button btnSubjectProfile;
         private System.Windows.Forms.Button btnPrintIAP;
         private System.Windows.Forms.Button btnIncidentObjectives;
-        private System.Windows.Forms.Button btnOpsPlan;
         private System.Windows.Forms.Panel pnlTeamStatus;
         private System.Windows.Forms.Button btnOpsAssignments;
         private System.Windows.Forms.Button btnOpsMemberStatus;

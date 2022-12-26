@@ -20,6 +20,7 @@ namespace WF_ICS_ClassLibrary.Models
         private int _FieldType; //0 = string, 1 = checkbox
 
         public ICSFormElement() { }
+        public ICSFormElement(string name, string pdfname) { FieldName = name; PDFFieldName = pdfname;  FieldType = 0; }
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string FieldName { get => _FieldName; set => _FieldName = value; }
@@ -31,13 +32,14 @@ namespace WF_ICS_ClassLibrary.Models
     {
         private Guid _ID;
         private string _FormName;
-        private int _FormNumber;
+        private string _FormNumber;
         private List<ICSFormElement> _elements;
 
-        public ICSForm() { _elements = new List<ICSFormElement>(); }
+        public ICSForm() { _elements = new List<ICSFormElement>(); ID = Guid.NewGuid(); }
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string FormName { get => _FormName; set => _FormName = value; }
-        public int FormNumber { get => _FormNumber; set => _FormNumber = value; }
+        public string FormNumber { get => _FormNumber; set => _FormNumber = value; }
+        public List<ICSFormElement> elements { get => _elements; set => _elements = value; }
     }
 }

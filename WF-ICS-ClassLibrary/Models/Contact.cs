@@ -14,15 +14,15 @@ namespace WF_ICS_ClassLibrary.Models
     {
         public Contact() { ContactID = Guid.NewGuid(); Active = true; }
 
-        [ProtoMember(1)]        private Guid _ContactID;
-        [ProtoMember(2)]        private string _ContactName;
-        [ProtoMember(3)]        private string _Title;
-        [ProtoMember(4)]        private string _Organization;
-        [ProtoMember(5)]        private string _Phone;
-        [ProtoMember(6)]        private string _Email;
-        [ProtoMember(7)]        private string _Callsign;
-        [ProtoMember(8)]        private string _RadioChannel;
-        [ProtoMember(9)]        private string _Notes;
+        [ProtoMember(1)] private Guid _ContactID;
+        [ProtoMember(2)] private string _ContactName;
+        [ProtoMember(3)] private string _Title;
+        [ProtoMember(4)] private string _Organization;
+        [ProtoMember(5)] private string _Phone;
+        [ProtoMember(6)] private string _Email;
+        [ProtoMember(7)] private string _Callsign;
+        [ProtoMember(8)] private string _RadioChannel;
+        [ProtoMember(9)] private string _Notes;
         [ProtoMember(10)] private DateTime _lastUpdatedUTC = DateTime.UtcNow;
         [ProtoMember(11)] private bool _Active;
 
@@ -129,19 +129,45 @@ namespace WF_ICS_ClassLibrary.Models
             {
 
                 //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
-                csv.Append("\"");  csv.Append(contact.ContactID.ToString()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\"");  csv.Append(contact.ContactName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\"");  csv.Append(contact.Title.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\"");  csv.Append(contact.Organization.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\"");  csv.Append(contact.Phone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\"");  csv.Append(contact.Email.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\"");  csv.Append(contact.Callsign.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\"");  csv.Append(contact.RadioChannel.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\"");  csv.Append(contact.Notes.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.ContactID.ToString()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.ContactName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.Title.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.Organization.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.Phone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.Email.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.Callsign.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.RadioChannel.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(contact.Notes.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
 
                 csv.Append(Environment.NewLine);
             }
             return csv.ToString();
+        }
+
+        public static ICSForm GetContactPDFForm()
+        {
+            ICSForm form = new ICSForm();
+            form.FormNumber = "205A";
+            form.FormName = "Communications List";
+
+            form.elements.Add(new ICSFormElement("Incident Name", "1 Incident Name"));
+            form.elements.Add(new ICSFormElement("Date From", "Text44"));
+            form.elements.Add(new ICSFormElement("Date To", "Text45"));
+            form.elements.Add(new ICSFormElement("Basic Local Info", "3 Basic Local Communications Information"));
+            form.elements.Add(new ICSFormElement("Prepared By Name", "Name"));
+            form.elements.Add(new ICSFormElement("Prepared By Title", "Text46"));
+            form.elements.Add(new ICSFormElement("Prepared Date", "Text48"));
+            form.elements.Add(new ICSFormElement("IAP Page Number", "Text49"));
+
+            for (int x = 1; x<= 34; x++)
+            {
+                //Incident Assigned PositionRow1
+                form.elements.Add(new ICSFormElement("Assigned Position " + x, "Incident Assigned PositionRow" + x));
+                form.elements.Add(new ICSFormElement("Contac Name " + x, "ContactName" + x));
+                form.elements.Add(new ICSFormElement("Method " + x, "Methods of Contact phone pager cell etcRow" + x));
+            }
+
+            return form;
         }
     }
 }

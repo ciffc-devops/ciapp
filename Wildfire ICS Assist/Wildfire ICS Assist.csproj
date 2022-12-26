@@ -95,6 +95,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunicationsListEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsListEntryForm.Designer.cs">
+      <DependentUpon>CommunicationsListEntryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommunicationsListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +241,9 @@
     <Compile Include="UtilityForms\HelpInfoForm.Designer.cs">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CommunicationsListEntryForm.resx">
+      <DependentUpon>CommunicationsListEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommunicationsListForm.resx">
       <DependentUpon>CommunicationsListForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,7 +320,9 @@
     <EmbeddedResource Include="UtilityForms\HelpInfoForm.resx">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="BlankForms\ICS205A-CommunicationsList.pdf" />
+    <None Include="BlankForms\ICS205A-CommunicationsList.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -20,11 +20,11 @@ namespace WildfireICSDesktopServices
                 path = FileAccessClasses.getWritablePath(task);
             }
 
-            string outputFileName = "ICS 205A - Task " + task.TaskNumber + " - Communications List " + OpPeriod.ToString() + ".pdf";
+            string outputFileName = "ICS 205A - Task " + task.IncidentIdentifier + " - Communications List " + OpPeriod.ToString() + ".pdf";
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "ICSForms/ICS Form 205A.pdf";
+            string fileToUse = "BlankForms/ICS205A-CommunicationsList.pdf";
             try
             {
 
@@ -52,10 +52,11 @@ namespace WildfireICSDesktopServices
         {
             OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpsPeriod).First();
 
-            stamper.AcroFields.SetField("1 Incident Name", task.TaskNumber + " - " + task.TaskName);
+            stamper.AcroFields.SetField("1 Incident Name", task.IncidentIdentifier);
 
 
             stamper.AcroFields.SetField("Text44", string.Format("{0:yyyy-MMM-dd HH:mm}", currentPeriod.PeriodStart));
+            stamper.AcroFields.SetField("Text45", string.Format("{0:yyyy-MMM-dd HH:mm}", currentPeriod.PeriodEnd));
             stamper.AcroFields.SetField("Text48", string.Format("{0:yyyy-MMM-dd HH:mm}", DateTime.Now));
             stamper.AcroFields.SetField("Name", createdBy);
             stamper.AcroFields.SetField("Text46", createdByTitle);

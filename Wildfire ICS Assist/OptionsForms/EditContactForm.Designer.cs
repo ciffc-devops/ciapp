@@ -46,6 +46,7 @@
             this.txtContactName = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label8
@@ -201,6 +202,7 @@
             this.txtContactName.Name = "txtContactName";
             this.txtContactName.Size = new System.Drawing.Size(306, 29);
             this.txtContactName.TabIndex = 98;
+            this.txtContactName.TextChanged += new System.EventHandler(this.txtContactName_TextChanged);
             // 
             // btnSave
             // 
@@ -233,12 +235,25 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // EditContact
+            // chkSaveForLater
+            // 
+            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSaveForLater.AutoSize = true;
+            this.chkSaveForLater.Location = new System.Drawing.Point(213, 407);
+            this.chkSaveForLater.Name = "chkSaveForLater";
+            this.chkSaveForLater.Size = new System.Drawing.Size(137, 28);
+            this.chkSaveForLater.TabIndex = 114;
+            this.chkSaveForLater.Text = "Save for later";
+            this.chkSaveForLater.UseVisualStyleBackColor = true;
+            this.chkSaveForLater.Visible = false;
+            // 
+            // EditContactForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(478, 455);
+            this.Controls.Add(this.chkSaveForLater);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.label7);
@@ -260,7 +275,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(494, 494);
-            this.Name = "EditContact";
+            this.Name = "EditContactForm";
             this.Text = "Edit Contact";
             this.Load += new System.EventHandler(this.EditContact_Load);
             this.ResumeLayout(false);
@@ -288,5 +303,6 @@
         private System.Windows.Forms.TextBox txtContactName;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.CheckBox chkSaveForLater;
     }
 }

@@ -196,19 +196,7 @@ namespace WildfireICSDesktopServices
             return saveSuccessful;
         }
 
-        public Guid GetGuidOptionValue(string ValueName)
-        {
-            switch (ValueName)
-            {
-                case "ParentOrganizationID":
-                    return _options.ParentOrganizationID;
-                case "OrganizationID":
-                    return _options.OrganizationID;
-
-            }
-            return Guid.Empty;
-        }
-
+   
         public object GetOptionsValue(string ValueName)
         {
             switch (ValueName)
@@ -295,6 +283,20 @@ namespace WildfireICSDesktopServices
                     return null;
             }
         }
+
+        public Guid GetGuidOptionValue(string ValueName)
+        {
+            switch (ValueName)
+            {
+                case "ParentOrganizationID":
+                    return _options.ParentOrganizationID;
+                case "OrganizationID":
+                    return _options.OrganizationID;
+
+            }
+            return Guid.Empty;
+        }
+
 
         public bool GetOptionsBoolValue(string ValueName)
         {

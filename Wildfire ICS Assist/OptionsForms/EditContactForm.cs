@@ -15,6 +15,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
     {
         private Contact _contact = new Contact();
         public Contact contact { get => _contact; private set => _contact = value; }
+        public bool SaveForLater { get => chkSaveForLater.Checked;  }
+        public bool ShowSaveForLater { get => chkSaveForLater.Visible; set => chkSaveForLater.Visible = value; }
 
         public EditContactForm(Contact contactToEdit)
         {
@@ -70,8 +72,13 @@ namespace Wildfire_ICS_Assist.OptionsForms
             }
             else
             {
-                MessageBox.Show("You must enter a name for the contact, even a generic one is fine.");
+                MessageBox.Show(Properties.Resources.EditContactValidationError);
             }
+        }
+
+        private void txtContactName_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

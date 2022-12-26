@@ -61,6 +61,15 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a name for the contact before saving..
+        /// </summary>
+        internal static string EditContactValidationError {
+            get {
+                return ResourceManager.GetString("EditContactValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_137_cogwheel {
@@ -827,6 +836,15 @@ namespace Wildfire_ICS_Assist.Properties {
             get {
                 object obj = ResourceManager.GetObject("ics-canada-logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -Select a saved contact-.
+        /// </summary>
+        internal static string SelectSavedContact {
+            get {
+                return ResourceManager.GetString("SelectSavedContact", resourceCulture);
             }
         }
     }

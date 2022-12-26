@@ -45,6 +45,7 @@ namespace Wildfire_ICS_Assist
         {
             SetVersionNumber();
             collapseAllPanels();
+            CreateNewTask();
         }
 
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
@@ -323,7 +324,7 @@ namespace Wildfire_ICS_Assist
 
         private void newIncidentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CreateNewTask();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -526,7 +527,7 @@ namespace Wildfire_ICS_Assist
                 if (promptOnerror) { MessageBox.Show(err.ToString(), "Errors"); }
             }
             /*
-            else if (checkOpPeriod && !incorrectOpAcknowledged &&CurrentIncident.allAssignments.Count > 0 && CurrentOpPeriod < CurrentTask.allAssignments.OrderByDescending(o => o.OpPeriod).First().OpPeriod)
+            else if (checkOpPeriod && !incorrectOpAcknowledged &&CurrentIncident.allAssignments.Count > 0 && CurrentOpPeriod < CurrentIncident.allAssignments.OrderByDescending(o => o.OpPeriod).First().OpPeriod)
             {
                 DialogResult dr = MessageBox.Show("This op period is ealier than that used on some assignments, are you sure it is correct?", "Confirm Op Period", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.No)
@@ -558,6 +559,29 @@ namespace Wildfire_ICS_Assist
                 return !string.IsNullOrEmpty(txtTaskNumber.Text);
             }
         }
+
+        private void CreateNewTask()
+        {
+            browseToIncidentFolderToolStripMenuItem.Enabled = false;
+            CurrentIncident = new WFIncident();
+            OperationalPeriod period = CurrentIncident.GenerateFirstOpPeriod();
+            if (period != null) { Program.wfIncidentService.UpsertOperationalPeriod(period); }
+
+            if (Program.generalOptionsService.GetGuidOptionValue("OrganizationID") != Guid.Empty) { CurrentIncident.OrganizationID = Program.generalOptionsService.GetGuidOptionValue("OrganizationID"); }
+            CurrentIncident.ICPCallSign = txtICPCallsign.Text;
+
+            CurrentIncident.DocumentPath = Program.generalOptionsService.GetStringOptionValue("DefaultSaveLocation");
+            checkForSave = false;
+            //setSavedFlag(false);
+            LastAutoBackup = DateTime.Now;
+
+            //AddDefaultEquipment(CurrentOpPeriod);
+
+            PauseNetworkSend = true;
+            PauseNetworkSend = false;
+
+        }
+
 
         private void openTask(string filename = null)
         {
@@ -813,14 +837,36 @@ namespace Wildfire_ICS_Assist
 
         private void txtTaskName_Leave(object sender, EventArgs e)
         {
+            if (!PauseNetworkSend)
+            {
+                bool changed = (string.IsNullOrEmpty(CurrentIncident.TaskName) || !CurrentIncident.TaskName.Equals(((TextBox)sender).Text));
+                CurrentIncident.TaskName = txtTaskName.Text;
+                checkForSave = true;
+                if (changed)
+                {
+                    TaskBasics basics = new TaskBasics(CurrentIncident);
+                    Program.wfIncidentService.UpdateTaskBasics(basics, "local");
+                }
+            }
+
             initialDetailsSet(true, false);
 
         }
 
         private void txtTaskNumber_Leave(object sender, EventArgs e)
         {
-            validateTaskNumber();
-            initialDetailsSet(true, false);
+            if (!PauseNetworkSend)
+            {
+                bool changed = (string.IsNullOrEmpty(CurrentIncident.TaskNumber) || !CurrentIncident.TaskNumber.Equals(((TextBox)sender).Text));
+                CurrentIncident.TaskNumber = ((TextBox)sender).Text;
+                checkForSave = true;
+                if (changed)
+                {
+                    TaskBasics basics = new TaskBasics(CurrentIncident);
+                    Program.wfIncidentService.UpdateTaskBasics(basics, "local");
+                }
+            }
+
         }
 
         private void txtTaskNumber_KeyPress(object sender, KeyPressEventArgs e)
