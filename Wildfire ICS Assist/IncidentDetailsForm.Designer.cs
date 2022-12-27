@@ -578,6 +578,7 @@
             resources.ApplyResources(this.txtTaskName, "txtTaskName");
             this.txtTaskName.Name = "txtTaskName";
             this.txtTaskName.Leave += new System.EventHandler(this.txtTaskName_Leave);
+            this.txtTaskName.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskName_Validating);
             // 
             // lblTaskName
             // 

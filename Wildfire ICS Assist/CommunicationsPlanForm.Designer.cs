@@ -1,6 +1,6 @@
 ﻿namespace Wildfire_ICS_Assist
 {
-    partial class CommunicationsListForm
+    partial class CommunicationsPlanForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,26 +29,24 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dgvContacts = new System.Windows.Forms.DataGridView();
-            this.colContactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRadio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnView = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.dgvCommsItems = new System.Windows.Forms.DataGridView();
+            this.colCommsSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChannelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCommsItems)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -62,7 +60,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dgvContacts);
+            this.splitContainer1.Panel1.Controls.Add(this.dgvCommsItems);
             // 
             // splitContainer1.Panel2
             // 
@@ -72,98 +70,9 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
-            this.splitContainer1.Size = new System.Drawing.Size(717, 401);
-            this.splitContainer1.SplitterDistance = 347;
-            this.splitContainer1.TabIndex = 2;
-            // 
-            // dgvContacts
-            // 
-            this.dgvContacts.AllowUserToAddRows = false;
-            this.dgvContacts.AllowUserToDeleteRows = false;
-            this.dgvContacts.AllowUserToOrderColumns = true;
-            this.dgvContacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colContactName,
-            this.colOrganization,
-            this.colTitle,
-            this.colPhone,
-            this.colEmail,
-            this.colRadio,
-            this.colNotes});
-            this.dgvContacts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvContacts.Location = new System.Drawing.Point(0, 0);
-            this.dgvContacts.Name = "dgvContacts";
-            this.dgvContacts.ReadOnly = true;
-            this.dgvContacts.RowHeadersVisible = false;
-            this.dgvContacts.RowTemplate.Height = 30;
-            this.dgvContacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContacts.Size = new System.Drawing.Size(717, 347);
-            this.dgvContacts.TabIndex = 0;
-            this.dgvContacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContacts_CellDoubleClick);
-            this.dgvContacts.SelectionChanged += new System.EventHandler(this.dgvContacts_SelectionChanged);
-            // 
-            // colContactName
-            // 
-            this.colContactName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colContactName.DataPropertyName = "ContactName";
-            this.colContactName.HeaderText = "Name";
-            this.colContactName.Name = "colContactName";
-            this.colContactName.ReadOnly = true;
-            this.colContactName.Width = 86;
-            // 
-            // colOrganization
-            // 
-            this.colOrganization.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colOrganization.DataPropertyName = "Organization";
-            this.colOrganization.HeaderText = "Organization";
-            this.colOrganization.Name = "colOrganization";
-            this.colOrganization.ReadOnly = true;
-            this.colOrganization.Width = 141;
-            // 
-            // colTitle
-            // 
-            this.colTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTitle.DataPropertyName = "Title";
-            this.colTitle.HeaderText = "Title";
-            this.colTitle.Name = "colTitle";
-            this.colTitle.ReadOnly = true;
-            this.colTitle.Width = 70;
-            // 
-            // colPhone
-            // 
-            this.colPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colPhone.DataPropertyName = "Phone";
-            this.colPhone.HeaderText = "Phone";
-            this.colPhone.Name = "colPhone";
-            this.colPhone.ReadOnly = true;
-            this.colPhone.Width = 91;
-            // 
-            // colEmail
-            // 
-            this.colEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colEmail.DataPropertyName = "Email";
-            this.colEmail.HeaderText = "Email";
-            this.colEmail.Name = "colEmail";
-            this.colEmail.ReadOnly = true;
-            this.colEmail.Width = 82;
-            // 
-            // colRadio
-            // 
-            this.colRadio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colRadio.DataPropertyName = "FullRadio";
-            this.colRadio.HeaderText = "Radio";
-            this.colRadio.Name = "colRadio";
-            this.colRadio.ReadOnly = true;
-            this.colRadio.Width = 84;
-            // 
-            // colNotes
-            // 
-            this.colNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colNotes.DataPropertyName = "Notes";
-            this.colNotes.HeaderText = "Notes";
-            this.colNotes.MinimumWidth = 200;
-            this.colNotes.Name = "colNotes";
-            this.colNotes.ReadOnly = true;
+            this.splitContainer1.Size = new System.Drawing.Size(776, 366);
+            this.splitContainer1.SplitterDistance = 312;
+            this.splitContainer1.TabIndex = 3;
             // 
             // btnView
             // 
@@ -175,14 +84,13 @@
             this.btnView.Text = "View";
             this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnView.UseVisualStyleBackColor = true;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.Enabled = false;
             this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
-            this.btnExport.Location = new System.Drawing.Point(470, 3);
+            this.btnExport.Location = new System.Drawing.Point(529, 3);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(125, 42);
             this.btnExport.TabIndex = 48;
@@ -190,21 +98,19 @@
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Enabled = false;
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(601, 3);
+            this.btnPrint.Location = new System.Drawing.Point(660, 3);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(113, 42);
             this.btnPrint.TabIndex = 47;
             this.btnPrint.Text = "Print";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnDelete
             // 
@@ -217,7 +123,6 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -230,7 +135,6 @@
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -242,32 +146,101 @@
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // svdExport
+            // dgvCommsItems
             // 
-            this.svdExport.DefaultExt = "csv";
-            this.svdExport.Filter = "Comma-separated values|*.csv";
+            this.dgvCommsItems.AllowUserToAddRows = false;
+            this.dgvCommsItems.AllowUserToDeleteRows = false;
+            this.dgvCommsItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCommsItems.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.dgvCommsItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCommsItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCommsSystem,
+            this.colChannelID,
+            this.colFunction,
+            this.colFrequency,
+            this.colTone,
+            this.colComments});
+            this.dgvCommsItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCommsItems.Location = new System.Drawing.Point(0, 0);
+            this.dgvCommsItems.MultiSelect = false;
+            this.dgvCommsItems.Name = "dgvCommsItems";
+            this.dgvCommsItems.ReadOnly = true;
+            this.dgvCommsItems.RowHeadersVisible = false;
+            this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCommsItems.Size = new System.Drawing.Size(776, 312);
+            this.dgvCommsItems.TabIndex = 3;
             // 
-            // CommunicationsListForm
+            // colCommsSystem
+            // 
+            this.colCommsSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCommsSystem.DataPropertyName = "CommsSystem";
+            this.colCommsSystem.HeaderText = "Comms System";
+            this.colCommsSystem.Name = "colCommsSystem";
+            this.colCommsSystem.ReadOnly = true;
+            this.colCommsSystem.Width = 166;
+            // 
+            // colChannelID
+            // 
+            this.colChannelID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colChannelID.DataPropertyName = "ChannelID";
+            this.colChannelID.HeaderText = "Channel";
+            this.colChannelID.Name = "colChannelID";
+            this.colChannelID.ReadOnly = true;
+            this.colChannelID.Width = 106;
+            // 
+            // colFunction
+            // 
+            this.colFunction.DataPropertyName = "Function";
+            this.colFunction.HeaderText = "Function";
+            this.colFunction.Name = "colFunction";
+            this.colFunction.ReadOnly = true;
+            this.colFunction.Width = 109;
+            // 
+            // colFrequency
+            // 
+            this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colFrequency.DataPropertyName = "Frequency";
+            this.colFrequency.HeaderText = "Frequency";
+            this.colFrequency.Name = "colFrequency";
+            this.colFrequency.ReadOnly = true;
+            this.colFrequency.Width = 127;
+            // 
+            // colTone
+            // 
+            this.colTone.DataPropertyName = "Tone";
+            this.colTone.HeaderText = "Tone";
+            this.colTone.Name = "colTone";
+            this.colTone.ReadOnly = true;
+            this.colTone.Width = 80;
+            // 
+            // colComments
+            // 
+            this.colComments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colComments.DataPropertyName = "Comments";
+            this.colComments.HeaderText = "Comments";
+            this.colComments.MinimumWidth = 100;
+            this.colComments.Name = "colComments";
+            this.colComments.ReadOnly = true;
+            // 
+            // CommunicationsPlanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(717, 401);
+            this.ClientSize = new System.Drawing.Size(776, 366);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.MinimumSize = new System.Drawing.Size(733, 440);
-            this.Name = "CommunicationsListForm";
+            this.MinimumSize = new System.Drawing.Size(792, 405);
+            this.Name = "CommunicationsPlanForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Communications List";
-            this.Load += new System.EventHandler(this.CommunicationsListForm_Load);
+            this.Text = "Communications Plan (ICS-205)";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCommsItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -275,20 +248,18 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dgvContacts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContactName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrganization;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRadio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNotes;
+        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.SaveFileDialog svdExport;
-        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.DataGridView dgvCommsItems;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommsSystem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colChannelID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFunction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFrequency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComments;
     }
 }

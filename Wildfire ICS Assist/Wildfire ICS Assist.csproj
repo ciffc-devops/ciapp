@@ -107,6 +107,24 @@
     <Compile Include="CommunicationsListForm.Designer.cs">
       <DependentUpon>CommunicationsListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommunicationsListViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsListViewForm.Designer.cs">
+      <DependentUpon>CommunicationsListViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanEntryForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\CollapsiblePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,6 +265,15 @@
     <EmbeddedResource Include="CommunicationsListForm.resx">
       <DependentUpon>CommunicationsListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsListViewForm.resx">
+      <DependentUpon>CommunicationsListViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanEntryForm.resx">
+      <DependentUpon>CommunicationsPlanEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanForm.resx">
+      <DependentUpon>CommunicationsPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\CollapsiblePanel.resx">
       <DependentUpon>CollapsiblePanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -323,6 +350,9 @@
     <None Include="BlankForms\ICS205A-CommunicationsList.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\ICS205WF-Communications-Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -352,6 +382,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-52-eye.png" />
     <None Include="Resources\glyphicons-basic-399-import.png" />
     <None Include="Resources\glyphicons-basic-849-computer-network.png" />
     <None Include="Resources\glyphicons-filetypes-9-file-spreadsheet.png" />

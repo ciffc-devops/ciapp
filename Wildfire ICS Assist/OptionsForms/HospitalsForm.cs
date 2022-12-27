@@ -77,7 +77,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
             if (dgvHospitals.SelectedRows.Count > 0)
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to delete the selected hospital(s)?", "Delete?", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dgvHospitals.SelectedRows)

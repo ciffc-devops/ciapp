@@ -82,7 +82,7 @@ namespace WildfireICSDesktopServices
                 path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 path = Path.Combine(path, "CIAPPO");
                 System.IO.Directory.CreateDirectory(path);
-                path = System.IO.Path.Combine(path, "Task " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName);
+                path = System.IO.Path.Combine(path, "Task " + CurrentTask.IncidentIdentifier);
                 System.IO.Directory.CreateDirectory(path);
 
 

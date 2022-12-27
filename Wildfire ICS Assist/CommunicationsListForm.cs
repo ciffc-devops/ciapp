@@ -96,10 +96,10 @@ namespace Wildfire_ICS_Assist
 
         private void dgvContacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
                 Contact c = (Contact)dgvContacts.Rows[e.RowIndex].DataBoundItem;
-                OpenContactForEdit(c);
+                OpenForView(c);
             }
         }
 
@@ -121,14 +121,14 @@ namespace Wildfire_ICS_Assist
             using (CommunicationsListEntryForm entryForm = new CommunicationsListEntryForm())
             {
                 DialogResult dr = entryForm.ShowDialog();
-                if(dr == DialogResult.OK)
+                if (dr == DialogResult.OK)
                 {
                     Contact c = entryForm.selected;
-                    if(null != c)
+                    if (null != c)
                     {
                         Program.wfIncidentService.UpsertContact(c);
 
-                        if(entryForm.IsNewContact && entryForm.SaveForLater)
+                        if (entryForm.IsNewContact && entryForm.SaveForLater)
                         {
                             Program.generalOptionsService.UpserOptionValue(entryForm.selected, "Contact");
 
@@ -174,7 +174,36 @@ namespace Wildfire_ICS_Assist
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (dgvContacts.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                List<Contact> toDelete = new List<Contact>();
 
+                foreach (DataGridViewRow row in dgvContacts.SelectedRows)
+                {
+                    toDelete.Add((Contact)row.DataBoundItem);
+                }
+
+                foreach (Contact c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertContact(c); }
+            }
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            if (dgvContacts.SelectedRows.Count == 1)
+            {
+                Contact item = (Contact)dgvContacts.SelectedRows[0].DataBoundItem;
+                OpenForView(item);
+            }
+
+        }
+
+        private void OpenForView(Contact c)
+        {
+            using (CommunicationsListViewForm viewForm = new CommunicationsListViewForm())
+            {
+                viewForm.contact = c;
+                viewForm.ShowDialog();
+            }
         }
     }
 }

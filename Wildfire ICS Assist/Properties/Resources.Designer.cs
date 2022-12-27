@@ -472,6 +472,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_52_eye {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-52-eye", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_532_user_family {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_532_user_family", resourceCulture);
@@ -845,6 +855,24 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static string SelectSavedContact {
             get {
                 return ResourceManager.GetString("SelectSavedContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected item(s)?.
+        /// </summary>
+        internal static string SureDelete {
+            get {
+                return ResourceManager.GetString("SureDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete items?.
+        /// </summary>
+        internal static string SureDeleteTitle {
+            get {
+                return ResourceManager.GetString("SureDeleteTitle", resourceCulture);
             }
         }
     }

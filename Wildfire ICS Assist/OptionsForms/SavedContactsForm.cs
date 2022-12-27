@@ -66,11 +66,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            string msg = "Are you sure you want to deleted the selected contact";
-            if (dgvContacts.SelectedRows.Count > 1) { msg += "s"; }
-            msg += "?";
+            string msg = Properties.Resources.SureDelete;
 
-            DialogResult conf = MessageBox.Show(msg, "Are you sure", MessageBoxButtons.YesNo);
+            DialogResult conf = MessageBox.Show(msg, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
             if (conf == DialogResult.Yes)
             {
                 foreach (DataGridViewRow row in dgvContacts.SelectedRows)

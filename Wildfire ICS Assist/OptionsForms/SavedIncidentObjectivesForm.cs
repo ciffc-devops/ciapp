@@ -71,7 +71,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             if (dgvObjectives.SelectedRows.Count > 0)
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to delete the selected objective(s)?", "Delete?", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dgvObjectives.SelectedRows)

@@ -507,13 +507,30 @@ namespace Wildfire_ICS_Assist
             bool set = false;
             List<string> errors = new List<string>();
             if (!string.IsNullOrEmpty(txtTaskName.Text) || !string.IsNullOrEmpty(txtTaskNumber.Text)) { set = true; }
-            else { set = false;  errors.Add("You must set either an incident name or number to begin."); }
-            
-            if (string.IsNullOrEmpty(txtTaskName.Text)) {  txtTaskName.BackColor = Color.LightCoral; }
+            else { set = false; errors.Add("You must set either an incident name or number to begin."); }
+
+            if (string.IsNullOrEmpty(txtTaskName.Text)) { txtTaskName.BackColor = Color.LightCoral; }
             else { txtTaskName.BackColor = Color.LightSkyBlue; ; }
 
-            if (string.IsNullOrEmpty(txtTaskNumber.Text)) {  txtTaskNumber.BackColor = Color.LightCoral; }
+            if (string.IsNullOrEmpty(txtTaskNumber.Text)) { txtTaskNumber.BackColor = Color.LightCoral; }
             else { txtTaskNumber.BackColor = Color.LightSkyBlue; ; }
+
+
+            bool tasknamechanged = (string.IsNullOrEmpty(CurrentIncident.TaskName) || !CurrentIncident.TaskName.Equals(txtTaskName.Text));
+            if (tasknamechanged) { CurrentIncident.TaskName = txtTaskName.Text; }
+
+            bool tasknumberchanged = (string.IsNullOrEmpty(CurrentIncident.TaskNumber) || !CurrentIncident.TaskNumber.Equals(txtTaskNumber.Text));
+            if (tasknumberchanged && validateTaskNumber()) { CurrentIncident.TaskNumber = txtTaskNumber.Text; }
+
+            if (tasknamechanged || tasknumberchanged)
+            {
+                TaskBasics basics = new TaskBasics(CurrentIncident);
+                Program.wfIncidentService.UpdateTaskBasics(basics, "local");
+            }
+
+
+
+
 
 
             if (!set)
@@ -837,6 +854,7 @@ namespace Wildfire_ICS_Assist
 
         private void txtTaskName_Leave(object sender, EventArgs e)
         {
+            /*
             if (!PauseNetworkSend)
             {
                 bool changed = (string.IsNullOrEmpty(CurrentIncident.TaskName) || !CurrentIncident.TaskName.Equals(((TextBox)sender).Text));
@@ -848,15 +866,17 @@ namespace Wildfire_ICS_Assist
                     Program.wfIncidentService.UpdateTaskBasics(basics, "local");
                 }
             }
-
+            */
             initialDetailsSet(true, false);
 
         }
 
         private void txtTaskNumber_Leave(object sender, EventArgs e)
         {
+            /*
             if (!PauseNetworkSend)
             {
+                
                 bool changed = (string.IsNullOrEmpty(CurrentIncident.TaskNumber) || !CurrentIncident.TaskNumber.Equals(((TextBox)sender).Text));
                 CurrentIncident.TaskNumber = ((TextBox)sender).Text;
                 checkForSave = true;
@@ -865,7 +885,8 @@ namespace Wildfire_ICS_Assist
                     TaskBasics basics = new TaskBasics(CurrentIncident);
                     Program.wfIncidentService.UpdateTaskBasics(basics, "local");
                 }
-            }
+            }*/
+            initialDetailsSet(true, false);
 
         }
 
@@ -927,6 +948,11 @@ namespace Wildfire_ICS_Assist
            
             RemoveActiveForm(communicationsList);
             communicationsList = null;
+
+        }
+
+        private void txtTaskName_Validating(object sender, CancelEventArgs e)
+        {
 
         }
     }
