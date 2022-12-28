@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnView = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.dgvCommsItems = new System.Windows.Forms.DataGridView();
             this.colCommsSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChannelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +36,12 @@
             this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -73,79 +73,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(776, 366);
             this.splitContainer1.SplitterDistance = 312;
             this.splitContainer1.TabIndex = 3;
-            // 
-            // btnView
-            // 
-            this.btnView.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
-            this.btnView.Location = new System.Drawing.Point(120, 3);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(102, 42);
-            this.btnView.TabIndex = 49;
-            this.btnView.Text = "View";
-            this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnView.UseVisualStyleBackColor = true;
-            // 
-            // btnExport
-            // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Enabled = false;
-            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
-            this.btnExport.Location = new System.Drawing.Point(529, 3);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(125, 42);
-            this.btnExport.TabIndex = 48;
-            this.btnExport.Text = "Export";
-            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExport.UseVisualStyleBackColor = true;
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Enabled = false;
-            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(660, 3);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(113, 42);
-            this.btnPrint.TabIndex = 47;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDelete.Location = new System.Drawing.Point(347, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(113, 42);
-            this.btnDelete.TabIndex = 46;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEdit.Location = new System.Drawing.Point(228, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(113, 42);
-            this.btnEdit.TabIndex = 45;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAdd.Location = new System.Drawing.Point(12, 3);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(102, 42);
-            this.btnAdd.TabIndex = 44;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAdd.UseVisualStyleBackColor = true;
             // 
             // dgvCommsItems
             // 
@@ -222,6 +149,80 @@
             this.colComments.MinimumWidth = 100;
             this.colComments.Name = "colComments";
             this.colComments.ReadOnly = true;
+            // 
+            // btnView
+            // 
+            this.btnView.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
+            this.btnView.Location = new System.Drawing.Point(120, 3);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(102, 42);
+            this.btnView.TabIndex = 49;
+            this.btnView.Text = "View";
+            this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnView.UseVisualStyleBackColor = true;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Enabled = false;
+            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
+            this.btnExport.Location = new System.Drawing.Point(529, 3);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(125, 42);
+            this.btnExport.TabIndex = 48;
+            this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExport.UseVisualStyleBackColor = true;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Enabled = false;
+            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrint.Location = new System.Drawing.Point(660, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(113, 42);
+            this.btnPrint.TabIndex = 47;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
+            this.btnDelete.Location = new System.Drawing.Point(347, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(113, 42);
+            this.btnDelete.TabIndex = 46;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Enabled = false;
+            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEdit.Location = new System.Drawing.Point(228, 3);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(113, 42);
+            this.btnEdit.TabIndex = 45;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAdd.Location = new System.Drawing.Point(12, 3);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(102, 42);
+            this.btnAdd.TabIndex = 44;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // CommunicationsPlanForm
             // 

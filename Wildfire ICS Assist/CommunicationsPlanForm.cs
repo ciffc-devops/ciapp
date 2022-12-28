@@ -16,5 +16,23 @@ namespace Wildfire_ICS_Assist
         {
             InitializeComponent();
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            using (CommunicationsPlanEntryForm entryForm = new CommunicationsPlanEntryForm())
+            {
+               DialogResult dr = entryForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+
+
+
+                    if (entryForm.SaveForLater)
+                    {
+                        Program.generalOptionsService.UpserOptionValue(entryForm.SelectedItem, "CommsItem");
+                    }
+                }
+            }
+        }
     }
 }

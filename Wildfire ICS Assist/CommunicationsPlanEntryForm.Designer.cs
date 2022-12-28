@@ -29,15 +29,20 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtSavedAssignment = new System.Windows.Forms.TextBox();
+            this.txtSavedFunction = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnAddSaved = new System.Windows.Forms.Button();
+            this.cboSavedComms = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnAddNew = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAddSaved = new System.Windows.Forms.Button();
-            this.cboSavedContacts = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtAssignment = new System.Windows.Forms.TextBox();
+            this.txtFunction = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTone = new System.Windows.Forms.TextBox();
             this.txtChannelID = new System.Windows.Forms.TextBox();
@@ -48,20 +53,15 @@
             this.txtComments = new System.Windows.Forms.TextBox();
             this.txtFrequency = new System.Windows.Forms.TextBox();
             this.txtCommsSystem = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnAddNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -85,17 +85,116 @@
             this.splitContainer1.SplitterDistance = 137;
             this.splitContainer1.TabIndex = 0;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.txtSavedAssignment);
+            this.panel1.Controls.Add(this.txtSavedFunction);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.btnAddSaved);
+            this.panel1.Controls.Add(this.cboSavedComms);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(6, 7);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(751, 124);
+            this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.Location = new System.Drawing.Point(307, 77);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(115, 29);
+            this.label11.TabIndex = 131;
+            this.label11.Text = "Assignment";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtSavedAssignment
+            // 
+            this.txtSavedAssignment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSavedAssignment.Location = new System.Drawing.Point(429, 77);
+            this.txtSavedAssignment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSavedAssignment.Name = "txtSavedAssignment";
+            this.txtSavedAssignment.Size = new System.Drawing.Size(181, 29);
+            this.txtSavedAssignment.TabIndex = 3;
+            // 
+            // txtSavedFunction
+            // 
+            this.txtSavedFunction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSavedFunction.Location = new System.Drawing.Point(103, 77);
+            this.txtSavedFunction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSavedFunction.Name = "txtSavedFunction";
+            this.txtSavedFunction.Size = new System.Drawing.Size(194, 29);
+            this.txtSavedFunction.TabIndex = 2;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(5, 77);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(91, 29);
+            this.label9.TabIndex = 129;
+            this.label9.Text = "Function*";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnAddSaved
+            // 
+            this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAddSaved.Location = new System.Drawing.Point(620, 26);
+            this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAddSaved.Name = "btnAddSaved";
+            this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
+            this.btnAddSaved.TabIndex = 4;
+            this.btnAddSaved.Text = "Add to Incident";
+            this.btnAddSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddSaved.UseVisualStyleBackColor = true;
+            this.btnAddSaved.Click += new System.EventHandler(this.btnAddSaved_Click);
+            // 
+            // cboSavedComms
+            // 
+            this.cboSavedComms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboSavedComms.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboSavedComms.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboSavedComms.DisplayMember = "IDWithFrequency";
+            this.cboSavedComms.FormattingEnabled = true;
+            this.cboSavedComms.Location = new System.Drawing.Point(8, 36);
+            this.cboSavedComms.Name = "cboSavedComms";
+            this.cboSavedComms.Size = new System.Drawing.Size(603, 32);
+            this.cboSavedComms.TabIndex = 1;
+            this.cboSavedComms.ValueMember = "ItemID";
+            this.cboSavedComms.SelectedIndexChanged += new System.EventHandler(this.cboSavedContacts_SelectedIndexChanged);
+            this.cboSavedComms.Leave += new System.EventHandler(this.cboSavedComms_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(347, 29);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Saved Communications Tool";
+            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(15, 424);
+            this.btnCancel.Location = new System.Drawing.Point(6, 424);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 99;
+            this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -109,8 +208,8 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.txtAssignment);
+            this.panel2.Controls.Add(this.txtFunction);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.txtTone);
@@ -130,99 +229,44 @@
             this.panel2.Size = new System.Drawing.Size(751, 412);
             this.panel2.TabIndex = 98;
             // 
-            // chkSaveForLater
+            // label8
             // 
-            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(393, 367);
-            this.chkSaveForLater.Name = "chkSaveForLater";
-            this.chkSaveForLater.Size = new System.Drawing.Size(137, 28);
-            this.chkSaveForLater.TabIndex = 115;
-            this.chkSaveForLater.Text = "Save for later";
-            this.chkSaveForLater.UseVisualStyleBackColor = true;
+            this.label8.Location = new System.Drawing.Point(19, 246);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(143, 29);
+            this.label8.TabIndex = 129;
+            this.label8.Text = "Assignment";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label10
+            // txtAssignment
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 8);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(222, 29);
-            this.label10.TabIndex = 99;
-            this.label10.Text = "New Comms Tool";
-            // 
-            // btnAddNew
-            // 
-            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(539, 356);
-            this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
-            this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(204, 48);
-            this.btnAddNew.TabIndex = 99;
-            this.btnAddNew.Text = "Add to Incident";
-            this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddNew.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtAssignment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.btnAddSaved);
-            this.panel1.Controls.Add(this.cboSavedContacts);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(6, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(751, 124);
-            this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.txtAssignment.Location = new System.Drawing.Point(169, 247);
+            this.txtAssignment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtAssignment.Name = "txtAssignment";
+            this.txtAssignment.Size = new System.Drawing.Size(572, 29);
+            this.txtAssignment.TabIndex = 10;
             // 
-            // btnAddSaved
+            // txtFunction
             // 
-            this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddSaved.Location = new System.Drawing.Point(620, 26);
-            this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
-            this.btnAddSaved.Name = "btnAddSaved";
-            this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
-            this.btnAddSaved.TabIndex = 98;
-            this.btnAddSaved.Text = "Add to Incident";
-            this.btnAddSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddSaved.UseVisualStyleBackColor = true;
-            // 
-            // cboSavedContacts
-            // 
-            this.cboSavedContacts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtFunction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboSavedContacts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboSavedContacts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboSavedContacts.DisplayMember = "NameAndOrg";
-            this.cboSavedContacts.FormattingEnabled = true;
-            this.cboSavedContacts.Location = new System.Drawing.Point(8, 36);
-            this.cboSavedContacts.Name = "cboSavedContacts";
-            this.cboSavedContacts.Size = new System.Drawing.Size(603, 32);
-            this.cboSavedContacts.TabIndex = 1;
-            this.cboSavedContacts.ValueMember = "ContactID";
-            this.cboSavedContacts.SelectedIndexChanged += new System.EventHandler(this.cboSavedContacts_SelectedIndexChanged);
+            this.txtFunction.Location = new System.Drawing.Point(169, 130);
+            this.txtFunction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtFunction.Name = "txtFunction";
+            this.txtFunction.Size = new System.Drawing.Size(572, 29);
+            this.txtFunction.TabIndex = 7;
+            this.txtFunction.Leave += new System.EventHandler(this.txtFunction_Leave);
             // 
-            // label1
+            // label7
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(347, 29);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Saved Communications Tool";
+            this.label7.Location = new System.Drawing.Point(19, 129);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(143, 29);
+            this.label7.TabIndex = 127;
+            this.label7.Text = "Function*";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
             // 
@@ -241,7 +285,7 @@
             this.txtTone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTone.Name = "txtTone";
             this.txtTone.Size = new System.Drawing.Size(572, 29);
-            this.txtTone.TabIndex = 119;
+            this.txtTone.TabIndex = 9;
             // 
             // txtChannelID
             // 
@@ -251,7 +295,8 @@
             this.txtChannelID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtChannelID.Name = "txtChannelID";
             this.txtChannelID.Size = new System.Drawing.Size(572, 29);
-            this.txtChannelID.TabIndex = 117;
+            this.txtChannelID.TabIndex = 6;
+            this.txtChannelID.Leave += new System.EventHandler(this.txtChannelID_Leave);
             // 
             // label6
             // 
@@ -286,7 +331,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(143, 29);
             this.label4.TabIndex = 121;
-            this.label4.Text = "Comms System";
+            this.label4.Text = "System/Type";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtComments
@@ -299,7 +344,7 @@
             this.txtComments.Multiline = true;
             this.txtComments.Name = "txtComments";
             this.txtComments.Size = new System.Drawing.Size(572, 59);
-            this.txtComments.TabIndex = 120;
+            this.txtComments.TabIndex = 11;
             // 
             // txtFrequency
             // 
@@ -309,7 +354,7 @@
             this.txtFrequency.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFrequency.Name = "txtFrequency";
             this.txtFrequency.Size = new System.Drawing.Size(572, 29);
-            this.txtFrequency.TabIndex = 118;
+            this.txtFrequency.TabIndex = 8;
             // 
             // txtCommsSystem
             // 
@@ -319,83 +364,43 @@
             this.txtCommsSystem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCommsSystem.Name = "txtCommsSystem";
             this.txtCommsSystem.Size = new System.Drawing.Size(572, 29);
-            this.txtCommsSystem.TabIndex = 116;
+            this.txtCommsSystem.TabIndex = 5;
             // 
-            // textBox1
+            // chkSaveForLater
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(169, 130);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(572, 29);
-            this.textBox1.TabIndex = 126;
+            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSaveForLater.AutoSize = true;
+            this.chkSaveForLater.Location = new System.Drawing.Point(393, 367);
+            this.chkSaveForLater.Name = "chkSaveForLater";
+            this.chkSaveForLater.Size = new System.Drawing.Size(137, 28);
+            this.chkSaveForLater.TabIndex = 12;
+            this.chkSaveForLater.Text = "Save for later";
+            this.chkSaveForLater.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // label10
             // 
-            this.label7.Location = new System.Drawing.Point(19, 129);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(143, 29);
-            this.label7.TabIndex = 127;
-            this.label7.Text = "Function*";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(3, 8);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(222, 29);
+            this.label10.TabIndex = 99;
+            this.label10.Text = "New Comms Tool";
             // 
-            // label8
+            // btnAddNew
             // 
-            this.label8.Location = new System.Drawing.Point(19, 246);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(143, 29);
-            this.label8.TabIndex = 129;
-            this.label8.Text = "Assignment";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(169, 247);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(572, 29);
-            this.textBox2.TabIndex = 128;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(113, 77);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(184, 29);
-            this.textBox3.TabIndex = 128;
-            // 
-            // label9
-            // 
-            this.label9.Location = new System.Drawing.Point(5, 77);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(101, 29);
-            this.label9.TabIndex = 129;
-            this.label9.Text = "Function*";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.Location = new System.Drawing.Point(307, 77);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(115, 29);
-            this.label11.TabIndex = 131;
-            this.label11.Text = "Assignment";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.Location = new System.Drawing.Point(429, 77);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(181, 29);
-            this.textBox4.TabIndex = 130;
+            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAddNew.Location = new System.Drawing.Point(539, 356);
+            this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(204, 48);
+            this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.Text = "Add to Incident";
+            this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // CommunicationsPlanEntryForm
             // 
@@ -410,14 +415,15 @@
             this.Name = "CommunicationsPlanEntryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CommunicationsPlanEntryForm";
+            this.Load += new System.EventHandler(this.CommunicationsPlanEntryForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -432,15 +438,15 @@
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnAddSaved;
-        private System.Windows.Forms.ComboBox cboSavedContacts;
+        private System.Windows.Forms.ComboBox cboSavedComms;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtSavedAssignment;
+        private System.Windows.Forms.TextBox txtSavedFunction;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAssignment;
+        private System.Windows.Forms.TextBox txtFunction;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTone;
