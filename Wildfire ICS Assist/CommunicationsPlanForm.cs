@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
@@ -17,6 +19,18 @@ namespace Wildfire_ICS_Assist
             InitializeComponent();
         }
 
+
+        private void BuildDataList()
+        {
+            if(!Program.CurrentIncident.allCommsPlans.Any(o => o.OpsPeriod == Program.CurrentOpPeriod))
+            {
+                Program.CurrentIncident.createCommsPlanAsNeeded(Program.CurrentOpPeriod);
+                Program.wfIncidentService.UpsertCommsPlan(Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == Program.CurrentOpPeriod));
+            }
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == Program.CurrentOpPeriod);
+            List<CommsPlanItem> items = 
+
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             using (CommunicationsPlanEntryForm entryForm = new CommunicationsPlanEntryForm())
