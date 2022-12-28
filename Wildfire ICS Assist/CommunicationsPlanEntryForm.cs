@@ -146,5 +146,10 @@ namespace Wildfire_ICS_Assist
             SavedCommsPlanItems = (List<CommsPlanItem>)Program.generalOptionsService.GetOptionsValue("CommsItems");
             cboSavedComms.DataSource = SavedCommsPlanItems;
         }
+
+        private void cboSavedComms_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

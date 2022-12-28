@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@
             this.txtOrganization = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtContactName = new System.Windows.Forms.TextBox();
-            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -79,7 +79,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(701, 524);
+            this.splitContainer1.Size = new System.Drawing.Size(701, 547);
             this.splitContainer1.SplitterDistance = 94;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -126,6 +126,7 @@
             this.cboSavedContacts.Size = new System.Drawing.Size(469, 32);
             this.cboSavedContacts.TabIndex = 1;
             this.cboSavedContacts.ValueMember = "ContactID";
+            this.cboSavedContacts.SelectedIndexChanged += new System.EventHandler(this.cboSavedContacts_SelectedIndexChanged);
             this.cboSavedContacts.Leave += new System.EventHandler(this.cboSavedContacts_Leave);
             // 
             // label1
@@ -144,7 +145,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(8, 369);
+            this.btnCancel.Location = new System.Drawing.Point(8, 392);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
@@ -182,8 +183,19 @@
             this.panel2.Controls.Add(this.txtContactName);
             this.panel2.Location = new System.Drawing.Point(8, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(681, 357);
+            this.panel2.Size = new System.Drawing.Size(681, 380);
             this.panel2.TabIndex = 0;
+            // 
+            // chkSaveForLater
+            // 
+            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSaveForLater.AutoSize = true;
+            this.chkSaveForLater.Location = new System.Drawing.Point(534, 266);
+            this.chkSaveForLater.Name = "chkSaveForLater";
+            this.chkSaveForLater.Size = new System.Drawing.Size(137, 28);
+            this.chkSaveForLater.TabIndex = 115;
+            this.chkSaveForLater.Text = "Save for later";
+            this.chkSaveForLater.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
@@ -200,7 +212,7 @@
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(537, 280);
+            this.btnAddNew.Location = new System.Drawing.Point(537, 303);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(136, 69);
@@ -228,7 +240,7 @@
             this.txtNotes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(247, 72);
+            this.txtNotes.Size = new System.Drawing.Size(247, 95);
             this.txtNotes.TabIndex = 128;
             // 
             // label7
@@ -364,23 +376,12 @@
             this.txtContactName.Size = new System.Drawing.Size(247, 29);
             this.txtContactName.TabIndex = 114;
             // 
-            // chkSaveForLater
-            // 
-            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(534, 243);
-            this.chkSaveForLater.Name = "chkSaveForLater";
-            this.chkSaveForLater.Size = new System.Drawing.Size(137, 28);
-            this.chkSaveForLater.TabIndex = 115;
-            this.chkSaveForLater.Text = "Save for later";
-            this.chkSaveForLater.UseVisualStyleBackColor = true;
-            // 
             // CommunicationsListEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(701, 524);
+            this.ClientSize = new System.Drawing.Size(701, 547);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

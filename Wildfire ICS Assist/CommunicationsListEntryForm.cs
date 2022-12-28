@@ -116,5 +116,10 @@ namespace Wildfire_ICS_Assist
             }
             else { _selected = (Contact)cboSavedContacts.SelectedItem; }
         }
+
+        private void cboSavedContacts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
