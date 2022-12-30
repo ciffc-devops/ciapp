@@ -31,9 +31,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeOrgChart = new System.Windows.Forms.TreeView();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAssignRole = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEditRole = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,9 +55,9 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.button1);
+            this.splitContainer1.Panel2.Controls.Add(this.btnEditRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
-            this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
+            this.splitContainer1.Panel2.Controls.Add(this.btnAssignRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
             this.splitContainer1.Size = new System.Drawing.Size(930, 641);
             this.splitContainer1.SplitterDistance = 586;
@@ -85,17 +85,17 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
             // 
-            // btnEdit
+            // btnAssignRole
             // 
-            this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
-            this.btnEdit.Location = new System.Drawing.Point(167, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(167, 42);
-            this.btnEdit.TabIndex = 49;
-            this.btnEdit.Text = "Assign Role";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnAssignRole.Enabled = false;
+            this.btnAssignRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
+            this.btnAssignRole.Location = new System.Drawing.Point(167, 3);
+            this.btnAssignRole.Name = "btnAssignRole";
+            this.btnAssignRole.Size = new System.Drawing.Size(167, 42);
+            this.btnAssignRole.TabIndex = 49;
+            this.btnAssignRole.Text = "Assign Role";
+            this.btnAssignRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAssignRole.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
@@ -108,18 +108,18 @@
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnEditRole
             // 
-            this.button1.Enabled = false;
-            this.button1.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.button1.Location = new System.Drawing.Point(340, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 42);
-            this.button1.TabIndex = 51;
-            this.button1.Text = "Edit Role";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEditRole.Enabled = false;
+            this.btnEditRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEditRole.Location = new System.Drawing.Point(340, 3);
+            this.btnEditRole.Name = "btnEditRole";
+            this.btnEditRole.Size = new System.Drawing.Size(147, 42);
+            this.btnEditRole.TabIndex = 51;
+            this.btnEditRole.Text = "Edit Role";
+            this.btnEditRole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEditRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEditRole.UseVisualStyleBackColor = true;
             // 
             // OrganizationalChartForm
             // 
@@ -146,8 +146,8 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeOrgChart;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnAssignRole;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEditRole;
     }
 }
