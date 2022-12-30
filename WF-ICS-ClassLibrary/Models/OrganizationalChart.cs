@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace WF_ICS_ClassLibrary.Models
 {
+    
+
     [ProtoContract]
     [Serializable]
     public class OrganizationChart : ICloneable
@@ -16,13 +20,6 @@ namespace WF_ICS_ClassLibrary.Models
             OrganizationalChartID = Guid.NewGuid();
             AllRoles = new List<ICSRole>();
         }
-        public OrganizationChart(bool addBlankRoles = false)
-        {
-            OrganizationalChartID = Guid.NewGuid();
-            AllRoles = new List<ICSRole>();
-            if (addBlankRoles && AllRoles.Count <= 0) { loadRoles(); }
-        }
-
 
         [ProtoMember(1)] public int OpPeriod { get; set; }
         [ProtoMember(2)] private DateTime _DatePreparedUTC;
@@ -33,25 +30,20 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private Guid _PreparedByUserID;
         [ProtoMember(8)] private bool _Active;
         [ProtoMember(9)] private Guid _TaskID;
+        [ProtoMember(10)] private string _PreparedByRole;
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public bool Active { get => _Active; set => _Active = value; }
         public Guid PreparedByUserID { get => _PreparedByUserID; set => _PreparedByUserID = value; }
+        public string PreparedByRole { get => _PreparedByRole; set => _PreparedByRole= value; }
         public Guid OrganizationalChartID { get => _OrganizationalChartID; set => _OrganizationalChartID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public DateTime DatePrepared { get => _DatePreparedUTC.ToLocalTime(); set => _DatePreparedUTC = value.ToUniversalTime(); }
         public DateTime DatePreparedUTC { get => _DatePreparedUTC; set => _DatePreparedUTC = value; }
-
-
-        public ICSRole getRoleByName(string name)
-        {
-            name = name.ToLower();
-            if (AllRoles.Where(o => o.RoleName.ToLower() == name).Count() > 0) { return AllRoles.Where(o => o.RoleName.ToLower() == name).First(); }
-            else { return new ICSRole(); }
-        }
+      
         public string getNameByRoleName(string rolename, bool defaultUpChain = true)
         {
-            ICSRole role = getRoleByName(rolename);
+            ICSRole role = this.GetRoleByName(rolename);
             string name = role.IndividualName;
             if (defaultUpChain && (name == null || name == ""))
             {
@@ -62,7 +54,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
         public TeamMember getTeamMemberByRoleName(string rolename, bool defaultUpChain = true)
         {
-            ICSRole role = getRoleByName(rolename);
+            ICSRole role = this.GetRoleByName(rolename);
             TeamMember member = role.teamMember;
             if (defaultUpChain && string.IsNullOrEmpty(member.Name))
             {
@@ -75,10 +67,10 @@ namespace WF_ICS_ClassLibrary.Models
 
         public string getNameByRoleID(Guid id, bool defaultUpChain = true)
         {
-            if (AllRoles.Where(o => o.RoleID == id).Count() > 0)
+            if (AllRoles.Any(o => o.RoleID == id))
             {
-                string name = AllRoles.Where(o => o.RoleID == id).First().IndividualName;
-                if (defaultUpChain && (name == null || name == "") && AllRoles.Where(o => o.RoleID == id).First().ReportsTo != Guid.Empty)
+                string name = AllRoles.First(o => o.RoleID == id).IndividualName;
+                if (defaultUpChain && string.IsNullOrEmpty(name) && AllRoles.First(o => o.RoleID == id).ReportsTo != Guid.Empty)
                 {
                     name = getNameByRoleID(AllRoles.Where(o => o.RoleID == id).First().ReportsTo);
                 }
@@ -89,10 +81,10 @@ namespace WF_ICS_ClassLibrary.Models
 
         public TeamMember getTeamMemberByRoleID(Guid id, bool defaultUpChain = true)
         {
-            if (AllRoles.Where(o => o.RoleID == id).Count() > 0)
+            if (AllRoles.Any(o => o.RoleID == id))
             {
-                TeamMember member = AllRoles.Where(o => o.RoleID == id).First().teamMember;
-                if (defaultUpChain && string.IsNullOrEmpty(member.Name) && AllRoles.Where(o => o.RoleID == id).First().ReportsTo != Guid.Empty)
+                TeamMember member = AllRoles.First(o => o.RoleID == id).teamMember;
+                if (defaultUpChain && string.IsNullOrEmpty(member.Name) && AllRoles.First(o => o.RoleID == id).ReportsTo != Guid.Empty)
                 {
                     member = getTeamMemberByRoleID(AllRoles.Where(o => o.RoleID == id).First().ReportsTo);
                 }
@@ -101,11 +93,7 @@ namespace WF_ICS_ClassLibrary.Models
             else { return null; }
         }
 
-        public void loadRoles()
-        {
-            AllRoles = new ICSRole().getAllRoles();
-            if (OpPeriod > 0) { foreach (ICSRole role in AllRoles) { role.OpPeriod = OpPeriod; } }
-        }
+    
 
         public OrganizationChart Clone()
         {
@@ -136,6 +124,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private TeamMember _teamMember;
         [ProtoMember(8)] private DateTime _LastUpdatedUTC;
         [ProtoMember(9)] private int _OpPeriod;
+        [ProtoMember(10)] private Guid _BranchID;
+        [ProtoMember(11)] private string _ReportsToRoleName;
 
         public Guid RoleID { get => _RoleID; set => _RoleID = value; }
         public string RoleName { get => _RoleName; set => _RoleName = value; }
@@ -144,52 +134,35 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 StringBuilder name = new StringBuilder();
-                if (ReportsTo != Guid.Empty)
+                if (!string.IsNullOrEmpty(ReportsToRoleName))
                 {
-                    name.Append("... ");
-                    ICSRole parent = new ICSRole();
-                    parent.loadByID(ReportsTo);
-                    if (parent.ReportsTo != Guid.Empty)
+                    if(ReportsTo != Globals.IncidentCommanderID)
                     {
                         name.Append("... ");
-                        ICSRole grand = new ICSRole();
-                        grand.loadByID(parent.ReportsTo);
-                        if (grand.ReportsTo != Guid.Empty)
-                        {
-                            name.Append("... ");
-                        }
                     }
+
+                    //name.Append(ReportsToRoleName);
+                    name.Append("... ");
                 }
                 name.Append(RoleName);
                 return name.ToString();
             }
         }
-        public Guid BranchID
-        {
-            get
-            {
-                ICSRole command = new ICSRole(); command.loadByName("SAR Manager");
-
-                if (ReportsTo == Guid.Empty || RoleName.Contains("Chief")) { return RoleID; }
-                ICSRole parent = new ICSRole();
-                parent.loadByID(ReportsTo);
-                if (parent.ReportsTo == Guid.Empty || parent.RoleName.Contains("Chief")) { return parent.RoleID; }
-                else
-                {
-                    ICSRole grand = new ICSRole();
-                    grand.loadByID(parent.ReportsTo);
-                    if (grand.ReportsTo == Guid.Empty || grand.RoleName.Contains("Chief")) { return grand.RoleID; }
-                    else { return grand.ReportsTo; }
-                }
-
-            }
-        }
+        public Guid BranchID { get => _BranchID; set => _BranchID = value; }
 
 
 
         public Guid ReportsTo { get => _ReportsTo; set => _ReportsTo = value; }
         public string PDFFieldName { get => _PDFFieldName; set => _PDFFieldName = value; }
         public string IndividualName { get { if (teamMember != null) { return teamMember.Name; } else { return null; } } set => teamMember.Name = value; }
+        public string RoleNameWithIndividual
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(IndividualName)) { return RoleName + " - " + IndividualName; }
+                else { return RoleName + " - unassigned"; }
+            }
+        }
         public Guid IndividualID
         {
             get
@@ -212,6 +185,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public Guid OrgChartRoleID { get => _OrgChartRoleID; set => _OrgChartRoleID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+        public string ReportsToRoleName { get => _ReportsToRoleName; set => _ReportsToRoleName = value; }
 
         public TeamMember teamMember
         {
@@ -238,112 +212,18 @@ namespace WF_ICS_ClassLibrary.Models
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; IndividualName = person_name; IndividualID = person_id;
         }*/
-        public ICSRole(Guid id, string name, Guid reports, string pdfname, TeamMember member)
+        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, TeamMember member)
         {
-            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; _OrgChartRoleID = System.Guid.NewGuid();
+            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; BranchID = Branch; _OrgChartRoleID = System.Guid.NewGuid();
         }
 
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
 
 
 
-        public bool loadByID(Guid id)
-        {
-            bool loadSuccessful = false;
-            List<ICSRole> AllRoles = getAllRoles();
+       
 
-
-            if (AllRoles.Where(o => o.RoleID == id).Count() > 0)
-            {
-                ICSRole toload = AllRoles.Where(o => o.RoleID == id).First();
-                RoleID = toload.RoleID;
-                RoleName = toload.RoleName;
-                ReportsTo = toload.ReportsTo;
-                PDFFieldName = toload.PDFFieldName;
-                loadSuccessful = true;
-            }
-            return loadSuccessful;
-        }
-        public bool loadByName(string name)
-        {
-            bool loadSuccessful = false;
-            List<ICSRole> AllRoles = getAllRoles();
-
-
-            if (AllRoles.Where(o => o.RoleName == name).Count() > 0)
-            {
-                ICSRole toload = AllRoles.Where(o => o.RoleName == name).First();
-                RoleID = toload.RoleID;
-                RoleName = toload.RoleName;
-                ReportsTo = toload.ReportsTo;
-                PDFFieldName = toload.PDFFieldName;
-                loadSuccessful = true;
-            }
-            return loadSuccessful;
-        }
-
-        public ICSRole GetRoleByName(string name)
-        {
-            List<ICSRole> roles = getAllRoles();
-            if (roles.Any(o => o.RoleName.Equals(name, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return roles.Where(o => o.RoleName.Equals(name, StringComparison.InvariantCultureIgnoreCase)).First();
-            }
-            else { return null; }
-        }
-
-        public List<ICSRole> getAllRoles()
-        {
-            TeamMember blankMember = new TeamMember();
-            blankMember.PersonID = Guid.Empty;
-
-            List<ICSRole> AllRoles = new List<ICSRole>();
-            AllRoles.Add(new ICSRole(new Guid("98649093-2C0D-4D23-9EC1-2AF16ED83B2A"), "SAR Commander", Guid.Empty, "Text1", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "SAR Manager", Guid.Empty, "Text2", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("450EA00E-636A-4F44-9B6D-50A8EC03F4EA"), "Deputy SAR Manager", new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "Text3", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("CE7166AF-9432-4F7A-B942-1250AF0B7C31"), "Safety Officer", new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "Text4", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("ECAEA544-95E6-4177-B954-F2A8D4027642"), "Liaison Officer", new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "Text5", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("91C6C1B6-92F2-4959-8A01-198240340571"), "Information Officer", new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "Text6", blankMember));
-
-            AllRoles.Add(new ICSRole(new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC"), "Operations Section Chief", new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "Text7", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("D2695CFD-944E-412C-B5F0-0F189B7A5D9B"), "Comms Op.", new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC"), "Text11", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("3A79ED80-9B06-4923-95F7-BE1B8B554FFD"), "Staging Area(s)", new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC"), "Text12", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("D0962ADF-DA00-4F4B-B498-3D8233442D8A"), "Ground Director", new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC"), "Text13", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("F07862BD-35B1-4A03-9BCB-615C04239D69"), "Water Director", new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC"), "Text20", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("C3F2C873-FEE8-42E1-A5C6-16B91D1D835B"), "Air Director", new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC"), "Text25", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("C465E7D7-DB66-4BB3-94DB-7F7F6D25B73A"), "Search", new Guid("D0962ADF-DA00-4F4B-B498-3D8233442D8A"), "Text14", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("95A08C74-354E-462A-A1B7-7E58E996BD26"), "Rescue Team Leader", new Guid("D0962ADF-DA00-4F4B-B498-3D8233442D8A"), "Text15", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("E4CA3D52-51DA-402E-B06A-18BAB3EF8E6C"), "Heli Coordinator", new Guid("C3F2C873-FEE8-42E1-A5C6-16B91D1D835B"), "Text26", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("554DCD16-7180-4D17-9CA2-392D828DDA79"), "Heli Base Manager", new Guid("C3F2C873-FEE8-42E1-A5C6-16B91D1D835B"), "Text27", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("E9697D42-29EB-42E6-94AA-33C7AA8E1FE1"), "Fixed Wing Coord.", new Guid("C3F2C873-FEE8-42E1-A5C6-16B91D1D835B"), "Text28", blankMember));
-
-            AllRoles.Add(new ICSRole(new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B"), "Planning Section Chief", new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "Text8", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("CAC8C2F6-E769-427B-BCFE-1B5636C90C4B"), "Interview & Investigate", new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B"), "Text29", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("A3891929-6FA4-4A21-BE33-F37DE24B779E"), "Incident Status", new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B"), "Text30", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("A7C2F2FB-3C96-4E60-83A1-3E97A6FE8BAA"), "Resource Status", new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B"), "Text31", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("F548CC74-4264-48EE-BA1A-80B53BDEE245"), "Brief/Debrief", new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B"), "Text32", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("3CB459EC-2C6B-40F8-9C5A-E59A393BA632"), "Demobilization", new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B"), "Text33", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("B87A1F9C-FDE8-4671-BF06-4E275C62099F"), "Documentation", new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B"), "Text34", blankMember));
-
-            AllRoles.Add(new ICSRole(new Guid("B641C5D6-91FE-41DA-962E-9FEB7A7300A2"), "Logistics Section Chief", new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "Text9", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), "Service Director", new Guid("B641C5D6-91FE-41DA-962E-9FEB7A7300A2"), "Text35", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), "Support Director", new Guid("B641C5D6-91FE-41DA-962E-9FEB7A7300A2"), "Text40", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("BDCCD9DD-6912-4031-A453-8E3EDA98B253"), "Check-in/out", new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), "Text36", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("04FB00EB-97BA-4744-AB00-54D4D224ABAD"), "Communications", new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), "Text37", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("F214D2B3-9268-432F-84BF-848E80C53635"), "Medical", new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), "Text38", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("83BB316B-42A7-4238-A647-1B9C94EA6B5A"), "Food & Shelter", new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), "Text39", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("9ABA549D-BA86-46D3-9C62-EC2F3FEC36F8"), "Facilities", new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), "Text41", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("CC4CC189-B92B-4DD6-87CC-5CD3200F600D"), "Supplies", new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), "Text42", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("EDF0C322-76EE-448A-8D58-0820AAB9791B"), "Transport", new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), "Text43", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("E6273DAF-4F91-45A7-A6E8-59DDFDE06C72"), "Security", new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), "Text44", blankMember));
-
-            AllRoles.Add(new ICSRole(new Guid("33805F34-CD3A-49AF-94FA-DA4058577B9B"), "Admin/Finance Section Chief", new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7"), "Text10", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("2AD6BDAC-1AE2-47EF-AEE5-B8820B674C90"), "Procurement", new Guid("33805F34-CD3A-49AF-94FA-DA4058577B9B"), "Text45", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("E2B66759-A290-459A-B96F-3B8FE7B3D883"), "Task Claims", new Guid("33805F34-CD3A-49AF-94FA-DA4058577B9B"), "Text46", blankMember));
-            AllRoles.Add(new ICSRole(new Guid("9277DB39-D6E3-4E6C-8932-D810F7313AC9"), "Operation Expenses", new Guid("33805F34-CD3A-49AF-94FA-DA4058577B9B"), "Text47", blankMember));
-            return AllRoles;
-        }
-
+        
         public ICSRole Clone()
         {
             ICSRole cloneTo = this.MemberwiseClone() as ICSRole;
@@ -468,6 +348,113 @@ namespace WF_ICS_ClassLibrary.Models
             }
 
             return responsibility;
+        }
+    }
+
+    public static class OrgChartTools
+    {
+        public static List<ICSRole> GetBlankRolesBasedOnThisChart(OrganizationChart ogOrgChart, int newOpPeriod)
+        {
+            TeamMember blankMember = new TeamMember();
+            blankMember.PersonID = Guid.Empty;
+
+            List<ICSRole> AllRoles = new List<ICSRole>();
+
+            foreach(ICSRole role in ogOrgChart.AllRoles)
+            {
+                ICSRole newRole = role.Clone();
+                newRole.teamMember = blankMember;
+                newRole.OpPeriod = newOpPeriod;
+                AllRoles.Add(newRole);
+            }
+            return AllRoles;
+        }
+
+        public static ICSRole GetGenericRoleByID(Guid id)
+        {
+            List<ICSRole> roles = GetBlankPrimaryRoles();
+            if (roles.Any(o => o.RoleID == id)) { return roles.First(o => o.RoleID == id); }
+            else { return null; }
+        }
+
+        public static List<ICSRole> GetBlankPrimaryRoles()
+        {
+            TeamMember blankMember = new TeamMember();
+            blankMember.PersonID = Guid.Empty;
+
+            List<ICSRole> AllRoles = new List<ICSRole>();
+            //AllRoles.Add(new ICSRole(new Guid("98649093-2C0D-4D23-9EC1-2AF16ED83B2A"), "SAR Commander", Guid.Empty, "Text1", blankMember));
+            AllRoles.Add(new ICSRole(Globals.IncidentCommanderID, "Incident Commander", Guid.Empty, Globals.IncidentCommanderID, "Text2", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("450EA00E-636A-4F44-9B6D-50A8EC03F4EA"), "Deputy Incident Commander", Globals.IncidentCommanderID, Globals.IncidentCommanderID,"Text3", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("CE7166AF-9432-4F7A-B942-1250AF0B7C31"), "Safety Officer", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "Text4", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("ECAEA544-95E6-4177-B954-F2A8D4027642"), "Liaison Officer", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "Text5", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("91C6C1B6-92F2-4959-8A01-198240340571"), "Information Officer", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "Text6", blankMember));
+
+            //Ops
+            AllRoles.Add(new ICSRole(Globals.OpsChiefID, "Operations Section Chief", Globals.IncidentCommanderID, Globals.OpsChiefID, "Text7", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("3A79ED80-9B06-4923-95F7-BE1B8B554FFD"), "Staging Area Manager", Globals.OpsChiefID, Globals.OpsChiefID, "Text12", blankMember));
+
+
+            //Planning
+            AllRoles.Add(new ICSRole(Globals.PlanningChiefID, "Planning Section Chief", Globals.IncidentCommanderID, Globals.PlanningChiefID, "Text8", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("A3891929-6FA4-4A21-BE33-F37DE24B779E"), "Situation Unit", Globals.PlanningChiefID, Globals.PlanningChiefID, "Text30", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("A7C2F2FB-3C96-4E60-83A1-3E97A6FE8BAA"), "Resources Unit", Globals.PlanningChiefID, Globals.PlanningChiefID, "Text31", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("3CB459EC-2C6B-40F8-9C5A-E59A393BA632"), "Demobilization Unit", Globals.PlanningChiefID, Globals.PlanningChiefID, "Text33", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("B87A1F9C-FDE8-4671-BF06-4E275C62099F"), "Documentation Unit", Globals.PlanningChiefID, Globals.PlanningChiefID, "Text34", blankMember));
+
+            //Logistics
+            AllRoles.Add(new ICSRole(Globals.LogisticsChiefID, "Logistics Section Chief", Globals.IncidentCommanderID, Globals.LogisticsChiefID, "Text9", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), "Service Branch Director", Globals.LogisticsChiefID, Globals.LogisticsChiefID, "Text35", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("04FB00EB-97BA-4744-AB00-54D4D224ABAD"), "Communications Unit Leader", new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), Globals.LogisticsChiefID, "Text37", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("F214D2B3-9268-432F-84BF-848E80C53635"), "Medical Unit Leader", new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), Globals.LogisticsChiefID, "Text38", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("83BB316B-42A7-4238-A647-1B9C94EA6B5A"), "Food Unit Leader", new Guid("C2056D86-8E28-4D7B-B773-8560BAA1E772"), Globals.LogisticsChiefID, "Text39", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), "Support Branch Director", Globals.LogisticsChiefID, Globals.LogisticsChiefID, "Text40", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("9ABA549D-BA86-46D3-9C62-EC2F3FEC36F8"), "Facilities Unit Leader", new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), Globals.LogisticsChiefID, "Text41", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("CC4CC189-B92B-4DD6-87CC-5CD3200F600D"), "Supply Unit Leader", new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), Globals.LogisticsChiefID, "Text42", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("EDF0C322-76EE-448A-8D58-0820AAB9791B"), "Gr. Support Unit Leader", new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), Globals.LogisticsChiefID, "Text43", blankMember));
+
+            //Admin
+            AllRoles.Add(new ICSRole(Globals.AdminChiefID, "Admin/Finance Section Chief", Globals.IncidentCommanderID, Globals.AdminChiefID, "Text10", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("2AD6BDAC-1AE2-47EF-AEE5-B8820B674C90"), "Procurement Unit", Globals.AdminChiefID, Globals.AdminChiefID, "Text45", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("E2B66759-A290-459A-B96F-3B8FE7B3D883"), "Time Unit", Globals.AdminChiefID, Globals.AdminChiefID, "Text46", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("9277DB39-D6E3-4E6C-8932-D810F7313AC9"), "Cost Unit", Globals.AdminChiefID, Globals.AdminChiefID, "Text47", blankMember));
+            AllRoles.Add(new ICSRole(new Guid("9277DB39-D6E3-4E6C-8932-D810F7313AC9"), "Compensation / Claims Unit", Globals.AdminChiefID, Globals.AdminChiefID, "Text47", blankMember));
+
+            foreach(ICSRole role in AllRoles)
+            {
+                if(AllRoles.Any(o=>o.RoleID == role.ReportsTo))
+                {
+                    role.ReportsToRoleName = AllRoles.First(o => o.RoleID == role.ReportsTo).RoleName;
+                }
+            }
+
+            return AllRoles;
+        }
+
+
+
+        public static ICSRole GetRoleByID(this OrganizationChart orgChart, Guid id)
+        {
+            if (orgChart.AllRoles.Any(o => o.RoleID == id))
+            {
+                return orgChart.GetAllRoles().First(o => o.RoleID == id);
+            }
+            return null;
+        }
+
+        public static ICSRole GetRoleByName(this OrganizationChart orgChart, string name)
+        {
+            List<ICSRole> roles = orgChart.AllRoles;
+            if (roles.Any(o => o.RoleName.Equals(name, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return roles.First(o => o.RoleName.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            }
+            else { return null; }
+        }
+
+        public static List<ICSRole> GetAllRoles(this OrganizationChart orgChart)
+        {
+            return orgChart.AllRoles;
         }
     }
 }

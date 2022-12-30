@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
@@ -115,11 +116,34 @@ namespace Wildfire_ICS_Assist
 
             }
             else { _selected = (Contact)cboSavedContacts.SelectedItem; }
+            
+            if (null != ((ComboBox)sender).SelectedItem)
+            {
+                _selected = (Contact)((ComboBox)sender).SelectedItem;
+            }
+            else
+            {
+                ((ComboBox)sender).SelectedIndex = 0;
+                _selected = null;
+                System.Media.SystemSounds.Exclamation.Play();
+                ((ComboBox)sender).Focus();
+
+            }
         }
 
         private void cboSavedContacts_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cboSavedContacts_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void cboSavedContacts_KeyDown(object sender, KeyEventArgs e)
+        {
+         
         }
     }
 }

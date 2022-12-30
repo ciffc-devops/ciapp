@@ -120,13 +120,14 @@
             this.cboSavedContacts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboSavedContacts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboSavedContacts.DisplayMember = "NameAndOrg";
-            this.cboSavedContacts.FormattingEnabled = true;
             this.cboSavedContacts.Location = new System.Drawing.Point(7, 36);
             this.cboSavedContacts.Name = "cboSavedContacts";
             this.cboSavedContacts.Size = new System.Drawing.Size(469, 32);
             this.cboSavedContacts.TabIndex = 1;
             this.cboSavedContacts.ValueMember = "ContactID";
             this.cboSavedContacts.SelectedIndexChanged += new System.EventHandler(this.cboSavedContacts_SelectedIndexChanged);
+            this.cboSavedContacts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboSavedContacts_KeyDown);
+            this.cboSavedContacts.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboSavedContacts_KeyPress);
             this.cboSavedContacts.Leave += new System.EventHandler(this.cboSavedContacts_Leave);
             // 
             // label1

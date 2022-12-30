@@ -10,6 +10,7 @@ using WF_ICS_ClassLibrary.Networking;
 using System.Globalization;
 using System.Threading;
 using WildfireICSDesktopServices;
+using WF_ICS_ClassLibrary;
 
 namespace Wildfire_ICS_Assist
 {
@@ -33,13 +34,16 @@ namespace Wildfire_ICS_Assist
 
             generalOptionsService = new GeneralOptionsService(true);
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
+            
             pdfExportService = new PDFExportService();
             wfIncidentService = new WFIncidentService();
+            WF_ICS_ClassLibrary.Globals.incidentService = wfIncidentService;
+
             networkService = new NetworkService();
 
             CurrentTask = new WFIncident();
             CurrentOpPeriod = 1;
-            CurrentRole = new ICSRole().GetRoleByName("SAR Manager");
+            CurrentRole = OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID);
            
 
             MachineID = Properties.Settings.Default.MachineID;

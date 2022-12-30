@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\GeneralTools.cs" />
     <Compile Include="CommunicationsListEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +113,12 @@
     </Compile>
     <Compile Include="CommunicationsListViewForm.Designer.cs">
       <DependentUpon>CommunicationsListViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanEditForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CommunicationsPlanEntryForm.cs">
       <SubType>Form</SubType>
@@ -245,6 +252,18 @@
     <Compile Include="OptionsForms\SavedVehiclesForm.Designer.cs">
       <DependentUpon>SavedVehiclesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OrganizationalChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrganizationalChartForm.Designer.cs">
+      <DependentUpon>OrganizationalChartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationChartAddRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrganizationChartAddRole.Designer.cs">
+      <DependentUpon>OrganizationChartAddRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilityForms\AboutProgramForm.cs">
@@ -267,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommunicationsListViewForm.resx">
       <DependentUpon>CommunicationsListViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanEditForm.resx">
+      <DependentUpon>CommunicationsPlanEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommunicationsPlanEntryForm.resx">
       <DependentUpon>CommunicationsPlanEntryForm.cs</DependentUpon>
@@ -330,6 +352,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedVehiclesForm.resx">
       <DependentUpon>SavedVehiclesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrganizationalChartForm.resx">
+      <DependentUpon>OrganizationalChartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrganizationChartAddRole.resx">
+      <DependentUpon>OrganizationChartAddRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -473,8 +501,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

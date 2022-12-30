@@ -28,7 +28,7 @@ namespace Wildfire_ICS_Assist
                 Program.wfIncidentService.UpsertCommsPlan(Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == Program.CurrentOpPeriod));
             }
             CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == Program.CurrentOpPeriod);
-            List<CommsPlanItem> items = 
+           
 
         }
         private void btnAdd_Click(object sender, EventArgs e)
@@ -47,6 +47,41 @@ namespace Wildfire_ICS_Assist
                     }
                 }
             }
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCommsItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvCommsItems_SelectionChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

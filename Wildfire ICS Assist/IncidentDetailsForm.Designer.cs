@@ -190,6 +190,7 @@
             this.cpPlanning = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cpLogistics = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cpOperations = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.organizationChartICS207ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -559,9 +560,12 @@
             // cboICSRole
             // 
             resources.ApplyResources(this.cboICSRole, "cboICSRole");
+            this.cboICSRole.DisplayMember = "RoleNameForDropdown";
             this.cboICSRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboICSRole.FormattingEnabled = true;
             this.cboICSRole.Name = "cboICSRole";
+            this.cboICSRole.ValueMember = "RoleID";
+            this.cboICSRole.SelectedIndexChanged += new System.EventHandler(this.cboICSRole_SelectedIndexChanged);
             // 
             // label17
             // 
@@ -905,6 +909,7 @@
             this.incidentObjectivesICS202ToolStripMenuItem,
             this.communicationsPlanICS205ToolStripMenuItem,
             this.medicalPlanICS206ToolStripMenuItem,
+            this.organizationChartICS207ToolStripMenuItem,
             this.toolStripSeparator5,
             this.additionalDocumentsToolStripMenuItem,
             this.communicationsListICS205AToolStripMenuItem});
@@ -1369,6 +1374,12 @@
             this.cpOperations.Name = "cpOperations";
             this.cpOperations.TitleText = "OPERATIONS";
             // 
+            // organizationChartICS207ToolStripMenuItem
+            // 
+            this.organizationChartICS207ToolStripMenuItem.Name = "organizationChartICS207ToolStripMenuItem";
+            resources.ApplyResources(this.organizationChartICS207ToolStripMenuItem, "organizationChartICS207ToolStripMenuItem");
+            this.organizationChartICS207ToolStripMenuItem.Click += new System.EventHandler(this.organizationChartICS207ToolStripMenuItem_Click);
+            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1591,6 +1602,7 @@
         private CustomControls.CollapsiblePanel cpOperations;
         private CustomControls.CollapsiblePanel cpLogistics;
         private CustomControls.CollapsiblePanel cpPlanning;
+        private System.Windows.Forms.ToolStripMenuItem organizationChartICS207ToolStripMenuItem;
     }
 }
 

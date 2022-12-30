@@ -45,11 +45,14 @@ namespace Wildfire_ICS_Assist
         {
             SetVersionNumber();
             collapseAllPanels();
-            CreateNewTask();
+            CreateNewIncident();
+            displayIncidentDetails();
         }
 
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
+        private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == Program.CurrentOpPeriod); }
+
         public bool ThisMachineStandAlone { get { return Program.networkService.ThisMachineIsStandAlone; } set { Program.networkService.ThisMachineIsStandAlone = value; } }
         public bool ThisMachineIsServer { get { return Program.networkService.ThisMachineIsServer; } set { Program.networkService.ThisMachineIsServer = value; } }
         public bool ThisMachineIsClient { get { return Program.networkService.ThisMachineIsClient; } set { Program.networkService.ThisMachineIsClient = value; } }
@@ -84,7 +87,7 @@ namespace Wildfire_ICS_Assist
         SavedTeamMembersForm savedTeamMembersForm = null;
 
         CommunicationsListForm communicationsList = null;
-
+        OrganizationalChartForm orgChartForm = null;
 
         /* Event Handlers!*/
 
@@ -324,7 +327,7 @@ namespace Wildfire_ICS_Assist
 
         private void newIncidentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateNewTask();
+            CreateNewIncident();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -407,11 +410,19 @@ namespace Wildfire_ICS_Assist
 
         private void displayIncidentDetails()
         {
+            cboICSRole.Items.Clear();
+            CurrentIncident.createOrgChartAsNeeded(CurrentOpPeriod);
+            cboICSRole.DataSource = CurrentOrgChart.AllRoles;
+
+
             if (!string.IsNullOrEmpty(CurrentIncident.ICPCallSign)) { txtICPCallsign.Text = CurrentIncident.ICPCallSign; }
             else { txtICPCallsign.Text = "BASE"; CurrentIncident.ICPCallSign = txtICPCallsign.Text; }
             txtTaskName.Text = CurrentIncident.TaskName;
             txtTaskNumber.Text = CurrentIncident.TaskNumber;
-            cboICSRole.SelectedValue = Program.CurrentRole.RoleID; DisplayCurrentICSRole();
+            if (CurrentOrgChart.AllRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID))
+            {
+                cboICSRole.SelectedValue = Program.CurrentRole.RoleID; DisplayCurrentICSRole();
+            } else { cboICSRole.SelectedIndex = 0; }
 
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { this.Text = Globals.ProgramName + " - " + CurrentIncident.FileName; }
             else { this.Text = Globals.ProgramName; }
@@ -430,17 +441,16 @@ namespace Wildfire_ICS_Assist
         {
             if (Program.CurrentRole != null)
             {
-                ICSRole command = new ICSRole(); command.loadByName("SAR Manager");
-                ICSRole ops = new ICSRole(); ops.loadByName("Operations Section Chief");
-                ICSRole plans = new ICSRole(); plans.loadByName("Planning Section Chief");
-                ICSRole logistics = new ICSRole(); logistics.loadByName("Logistics Section Chief");
-                ICSRole admin = new ICSRole(); admin.loadByName("Admin/Finance Section Chief");
+                List<Guid> ChiefIDs = new List<Guid>();
+                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.AdminChiefID);ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
 
 
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                CommandStaffRoles.Add(new Guid("CE7166AF-9432-4F7A-B942-1250AF0B7C31"));
-                CommandStaffRoles.Add(new Guid("ECAEA544-95E6-4177-B954-F2A8D4027642"));
-                CommandStaffRoles.Add(new Guid("91C6C1B6-92F2-4959-8A01-198240340571"));
+                foreach(ICSRole role in CurrentOrgChart.AllRoles.Where(o=>o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
+                {
+                    CommandStaffRoles.Add(role.RoleID);
+                }
+                
 
                 pnlTeamStatus.BackColor = Color.White;
                 //pnlTeamAssignments.BackColor = Color.White;
@@ -455,18 +465,18 @@ namespace Wildfire_ICS_Assist
                     pnlTaskInfo.BackColor = Color.IndianRed;
                     cpIncidentActionPlan.Expand();
                 }
-                else if (Program.CurrentRole.BranchID == command.RoleID)
+                else if (Program.CurrentRole.BranchID == Globals.IncidentCommanderID)
                 {
                     pnlTaskInfo.BackColor = Color.LimeGreen;
                 //    pnlCommandTeam.BackColor = Color.LimeGreen;
                 }
-                else if (Program.CurrentRole.BranchID == ops.RoleID)
+                else if (Program.CurrentRole.BranchID == Globals.OpsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Orange;
                     pnlTeamStatus.BackColor = Color.Orange;
                     //resizeGroup("Ops", false, true);
                 }
-                else if (Program.CurrentRole.BranchID == plans.RoleID)
+                else if (Program.CurrentRole.BranchID == Globals.PlanningChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.CornflowerBlue;
 /*
@@ -477,7 +487,7 @@ namespace Wildfire_ICS_Assist
                     resizeGroup("Planning", false, true);*/
 
                 }
-                else if (Program.CurrentRole.BranchID == logistics.RoleID)
+                else if (Program.CurrentRole.BranchID == Globals.LogisticsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Khaki;
                     /*
@@ -488,7 +498,7 @@ namespace Wildfire_ICS_Assist
                     resizeGroup("Logistics", false, true);
                     */
                 }
-                else if (Program.CurrentRole.BranchID == admin.RoleID)
+                else if (Program.CurrentRole.BranchID == Globals.AdminChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.LightGray;
                 }
@@ -577,12 +587,15 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private void CreateNewTask()
+        private void CreateNewIncident()
         {
             browseToIncidentFolderToolStripMenuItem.Enabled = false;
             CurrentIncident = new WFIncident();
             OperationalPeriod period = CurrentIncident.GenerateFirstOpPeriod();
             if (period != null) { Program.wfIncidentService.UpsertOperationalPeriod(period); }
+
+            CurrentIncident.createOrgChartAsNeeded(period.PeriodNumber);
+            
 
             if (Program.generalOptionsService.GetGuidOptionValue("OrganizationID") != Guid.Empty) { CurrentIncident.OrganizationID = Program.generalOptionsService.GetGuidOptionValue("OrganizationID"); }
             CurrentIncident.ICPCallSign = txtICPCallsign.Text;
@@ -953,6 +966,47 @@ namespace Wildfire_ICS_Assist
 
         private void txtTaskName_Validating(object sender, CancelEventArgs e)
         {
+
+        }
+
+        private void cboICSRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cboICSRole.SelectedItem != null)
+            {
+                Program.CurrentRole = (ICSRole)cboICSRole.SelectedItem;
+                DisplayCurrentICSRole();
+            }
+            
+        }
+
+        private void organizationChartICS207ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openOrganizationChart();
+        }
+
+        private void openOrganizationChart()
+        {
+            if (initialDetailsSet())
+            {
+                if (null == orgChartForm)
+                {
+                    orgChartForm = new OrganizationalChartForm();
+                    orgChartForm.FormClosed += OrganizationChartForm_Closed;
+                    orgChartForm.Show(this);
+                    ActiveForms.Add(orgChartForm);
+                }
+
+                orgChartForm.BringToFront();
+            }
+
+
+
+        }
+        void OrganizationChartForm_Closed(object sender, FormClosedEventArgs e)
+        {
+
+            RemoveActiveForm(orgChartForm);
+            orgChartForm = null;
 
         }
     }

@@ -779,7 +779,13 @@ namespace WildfireICSDesktopServices
                 handler(e);
             }
         }
-        public void UpsertOrganizationalChart(OrganizationChart record, string source = "local")
+
+        public void UpsertOrganizationalChart(OrganizationChart record,  string source = "local")
+        {
+            UpsertOrganizationalChart(record, true, source);
+        }
+
+        public void UpsertOrganizationalChart(OrganizationChart record, bool UpsertRoles, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
             if (_currentIncident.allOrgCharts.Any(o => o.OrganizationalChartID == record.OrganizationalChartID || o.OpPeriod == record.OpPeriod))
@@ -787,10 +793,18 @@ namespace WildfireICSDesktopServices
                 _currentIncident.allOrgCharts = _currentIncident.allOrgCharts.Where(o => o.OrganizationalChartID != record.OrganizationalChartID && o.OpPeriod != record.OpPeriod).ToList();
             }
             _currentIncident.allOrgCharts.Add(record);
+            
+
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
+
+            if (UpsertRoles)
+            {
+                foreach(ICSRole role in record.AllRoles) { UpsertICSRole(role); }
+            }
+
             OnOrganizationalChartChanged(new OrganizationChartEventArgs(record));
         }
 
@@ -859,7 +873,7 @@ namespace WildfireICSDesktopServices
         public void UpsertICSRole(ICSRole record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (!_currentIncident.allOrgCharts.Where(o => o.OpPeriod == record.OpPeriod).Any())
+            if (!_currentIncident.allOrgCharts.Any(o => o.OpPeriod == record.OpPeriod))
             {
                 _currentIncident.createOrgChartAsNeeded(record.OpPeriod);
                 OrganizationChart chart = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == record.OpPeriod).First();
@@ -867,7 +881,7 @@ namespace WildfireICSDesktopServices
             }
             else if (!_currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any())
             {
-                _currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).loadRoles();
+                _currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles = OrgChartTools.GetBlankPrimaryRoles();
                 UpsertOrganizationalChart(_currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).Clone());
             }
 
@@ -902,19 +916,19 @@ namespace WildfireICSDesktopServices
         public void UpsertICSRole(string roleName, int opsPeriod, TeamMember member, string source = "local")
         {
 
-            if (!_currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).Any())
+            if (!_currentIncident.allOrgCharts.Any(o => o.OpPeriod == opsPeriod))
             {
                 _currentIncident.createOrgChartAsNeeded(opsPeriod);
                 OrganizationChart chart = _currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod);
                 UpsertOrganizationalChart(chart);
             }
-            else if (_currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().AllRoles.Count <= 0)
+            else if (_currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().AllRoles.Any())
             {
-                _currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod).loadRoles();
+                _currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod).AllRoles = OrgChartTools.GetBlankPrimaryRoles();
                 UpsertOrganizationalChart(_currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod));
             }
 
-            ICSRole role = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().getRoleByName(roleName).Clone();
+            ICSRole role = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().GetRoleByName(roleName).Clone();
             role.teamMember = member;
             role.OpPeriod = opsPeriod;
             role.OrganizationalChartID = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().OrganizationalChartID;

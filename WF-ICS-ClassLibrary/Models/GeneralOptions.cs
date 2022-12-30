@@ -184,7 +184,7 @@ namespace WF_ICS_ClassLibrary.Models
             AutoBackupIntervalMinutes = 120;
             IncludeOtherContactsWithIAP = true;
             AddIMTToContacts = true;
-            DefaultICSRole = new ICSRole().GetRoleByName("SAR Manager");
+            DefaultICSRole = OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID);
             AutomaticSubFolders.Add("GPS Track Backup");
             AutomaticSubFolders.Add("Maps");
             AutomaticSubFolders.Add("Other Images");

@@ -80,6 +80,7 @@ namespace WildfireICSDesktopServices
         void UpsertObject(object obj, string source);
         void UpsertOperationalPeriod(OperationalPeriod record, string source = "local");
         void UpsertOrganizationalChart(OrganizationChart record, string source = "local");
+        void UpsertOrganizationalChart(OrganizationChart record, bool UpsertRoles, string source = "local");
         void UpsertPositionLogEntry(PositionLogEntry record, string source = "local");
         void UpsertSafetyPlan(SafetyPlan record, string source = "local");
         void UpsertTaskEquipment(TaskEquipment te, string source = "local");

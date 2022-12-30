@@ -693,7 +693,7 @@ namespace WildfireICSDesktopServices
             {
 
 
-                if (!task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).Any())
+                if (!task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod))
                 {
                     task.createOrgChartAsNeeded(OpsPeriod);
                 }

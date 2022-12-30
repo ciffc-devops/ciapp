@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
 
@@ -219,7 +220,7 @@ namespace WildfireICSDesktopServices
                     return _options.PositionFormat;
                 case "DefaultICSRole":
                     if (_options.DefaultICSRole != null) { return _options.DefaultICSRole; }
-                    else { return new ICSRole().GetRoleByName("SAR Manager"); }
+                    else { return OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID); }
                 case "DefaultPort":
                     return _options.DefaultPortNumber;
                 case "DefaultSaveLocation":

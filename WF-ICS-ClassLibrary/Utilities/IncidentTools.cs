@@ -398,11 +398,23 @@ namespace WF_ICS_ClassLibrary.Utilities
         }
         public static void createOrgChartAsNeeded(this WFIncident task, int ops)
         {
-            if (!task.allOrgCharts.Where(o => o.OpPeriod == ops).Any())
+            if (!task.allOrgCharts.Any(o => o.OpPeriod == ops))
             {
                 OrganizationChart chart = new OrganizationChart();
                 chart.OpPeriod = ops;
-                chart.loadRoles();
+
+                if (task.allOrgCharts.Any())
+                {
+                    OrganizationChart lastOrg = task.allOrgCharts.OrderByDescending(o => o.OpPeriod).FirstOrDefault();
+                    chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, ops);
+                }
+                else
+                {
+                    chart.AllRoles = OrgChartTools.GetBlankPrimaryRoles();
+                    foreach(ICSRole role in chart.AllRoles) { role.OpPeriod = ops; }
+                }
+
+
                 //chart.DatePrepared = DateTime.Now;
 
 
@@ -416,7 +428,8 @@ namespace WF_ICS_ClassLibrary.Utilities
                 }
 
 
-                task.allOrgCharts.Add(chart);
+                //task.allOrgCharts.Add(chart);
+                Globals.incidentService.UpsertOrganizationalChart(chart);
             }
         }
 
