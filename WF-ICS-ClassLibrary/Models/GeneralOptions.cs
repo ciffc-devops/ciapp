@@ -76,6 +76,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(62)] private string _DefaultBackupFolder;
         [ProtoMember(63)] private Guid _ParentOrganizationID;
         [ProtoMember(64)] private bool _AddIMTToContacts;
+        [ProtoMember(65)] private Province _DefaultProvince;
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
         public Guid PrimaryChannelID { get { return g_primaryChannel; } set { g_primaryChannel = value; appSettingsChanged = true; } }
@@ -159,6 +160,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string AutomaticSubFoldersCSV { get { StringBuilder sb = new StringBuilder(); foreach (string s in AutomaticSubFolders) { if (sb.Length > 0) { sb.Append(", "); } sb.Append(s); } return sb.ToString(); } }
         public Guid ParentOrganizationID { get => _ParentOrganizationID; set => _ParentOrganizationID = value; }
         public bool AddIMTToContacts { get => _AddIMTToContacts; set => _AddIMTToContacts = value; }
+        public Province DefaultProvince { get => _DefaultProvince; set => _DefaultProvince = value; }
 
         public void addDefaultOptions()
         {
@@ -189,7 +191,7 @@ namespace WF_ICS_ClassLibrary.Models
             AutomaticSubFolders.Add("Maps");
             AutomaticSubFolders.Add("Other Images");
             AutomaticSubFolders.Add("Clue Photos");
-
+            DefaultProvince = new Province(4);
 
 
             //options.PrimaryChannel = "PEPSAR1 149.495";

@@ -116,6 +116,7 @@
     <Compile Include="Models\Organization.cs" />
     <Compile Include="Models\OrganizationalChart.cs" />
     <Compile Include="Models\PositionLog.cs" />
+    <Compile Include="Models\Province.cs" />
     <Compile Include="Models\SafetyPlan.cs" />
     <Compile Include="Models\ShortcutButtonOption.cs" />
     <Compile Include="Models\SoftwareUpdate.cs" />

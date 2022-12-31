@@ -250,6 +250,8 @@ namespace WildfireICSDesktopServices
                     return _options.LastIpUsedWhenMachineIsServer;
                 case "Objectives":
                     return _options.allPresetObjectives;
+                case "Province":
+                    return _options.DefaultProvince;
                 case "Position Format":
                     return _options.PositionFormat;
                 case "RecentFiles":

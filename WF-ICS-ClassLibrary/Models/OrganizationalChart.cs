@@ -206,7 +206,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public ICSRole() { teamMember = new TeamMember(); _OrgChartRoleID = System.Guid.NewGuid(); }
+        public ICSRole() { teamMember = new TeamMember(); OrgChartRoleID = System.Guid.NewGuid(); RoleID = System.Guid.NewGuid(); }
         /*
         public ICSRole(Guid id, string name, Guid reports, string pdfname, string person_name = "", Guid person_id = new Guid())
         {
@@ -353,6 +353,22 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class OrgChartTools
     {
+        public static List<Guid> ProtectedRoleIDs
+        {
+            get
+            {
+                List<Guid> ids = new List<Guid>();
+                ids.Add(Globals.IncidentCommanderID);
+                ids.Add(Globals.DeputyIncidentCommanderID);
+                ids.Add(Globals.OpsChiefID);
+                ids.Add(Globals.PlanningChiefID);
+                ids.Add(Globals.LogisticsChiefID);
+                ids.Add(Globals.AdminChiefID);
+
+                return ids;
+            }
+        }
+
         public static List<ICSRole> GetBlankRolesBasedOnThisChart(OrganizationChart ogOrgChart, int newOpPeriod)
         {
             TeamMember blankMember = new TeamMember();

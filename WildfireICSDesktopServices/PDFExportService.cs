@@ -1382,7 +1382,6 @@ namespace WildfireICSDesktopServices
 
                 stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
                 stamper.AcroFields.SetField("Address" + (x + 1).ToString(), member.AddressWithPhone);
-                stamper.AcroFields.SetField("NOK" + (x + 1).ToString(), member.NOKOneLine);
 
 
                 string timein = string.Format("{0:HH:mm}", status.SignInTime);
@@ -1487,13 +1486,6 @@ namespace WildfireICSDesktopServices
                         }
                         stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
                         stamper.AcroFields.SetField("Address" + (x + 1).ToString(), member.AddressWithPhone);
-                        stamper.AcroFields.SetField("NOK" + (x + 1).ToString(), member.NOKOneLine);
-
-                        if (member.GSTL) { stamper.SetPDFCheckbox("GSTL" + (x + 1).ToString()); }
-                        if (member.SARM) { stamper.SetPDFCheckbox("SARM" + (x + 1).ToString()); }
-                        if (member.Tracker) { stamper.SetPDFCheckbox("TK" + (x + 1).ToString()); }
-                        if (member.RopeRescue) { stamper.SetPDFCheckbox("RRTM" + (x + 1).ToString()); }
-                        if (member.MountainRescue) { stamper.SetPDFCheckbox("MR" + (x + 1).ToString()); }
 
 
 

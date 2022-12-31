@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -21,6 +22,7 @@ namespace Wildfire_ICS_Assist
 
         public OrganizationalChartForm()
         {
+            this.Icon = Program.programIcon;
             InitializeComponent();
         }
 
@@ -28,13 +30,22 @@ namespace Wildfire_ICS_Assist
         private void OrganizationalChartForm_Load(object sender, EventArgs e)
         {
             PopulateTree();
-            if (treeOrgChart.Nodes.Count > 0)
+          
+
+            Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
+            Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
+        }
+
+        private void Program_OrgChartChanged(OrganizationChartEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
-                treeOrgChart.Nodes[0].ExpandAll();
-                treeOrgChart.SelectedNode = treeOrgChart.Nodes[0];
-                if (treeOrgChart.SelectedNode != null) treeOrgChart.SelectedNode.EnsureVisible();
-                
+                PopulateTree();
             }
+        }
+        private void Program_ICSRoleChanged(ICSRoleEventArgs e)
+        {
+            PopulateTree();
         }
 
 
@@ -44,10 +55,17 @@ namespace Wildfire_ICS_Assist
             {
                 Program.CurrentIncident.createOrgChartAsNeeded(Program.CurrentOpPeriod);
             }
-
+            treeOrgChart.Nodes.Clear();
             // call recursive function
             AddCurrentChild(Guid.Empty, treeOrgChart.Nodes);
 
+            if (treeOrgChart.Nodes.Count > 0)
+            {
+                treeOrgChart.Nodes[0].ExpandAll();
+                treeOrgChart.SelectedNode = treeOrgChart.Nodes[0];
+                if (treeOrgChart.SelectedNode != null) treeOrgChart.SelectedNode.EnsureVisible();
+
+            }
         }
 
         private void AddCurrentChild(Guid parentId, TreeNodeCollection nodes)
@@ -85,8 +103,45 @@ namespace Wildfire_ICS_Assist
         {
             if(treeOrgChart.SelectedNode != null)
             {
-               
+               ICSRole role =  (ICSRole)treeOrgChart.SelectedNode.Tag;
+                if (OrgChartTools.ProtectedRoleIDs.Contains(role.RoleID))
+                {
+                    btnEditRole.Enabled = false;
+                    btnDeleteRole.Enabled = false;
+                }
+                else
+                {
+                    btnEditRole.Enabled = true;
+                    btnDeleteRole.Enabled = true;
+                }
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ICSRole role = new ICSRole();
+            role.OrganizationalChartID = CurrentOrgChart.OrganizationalChartID;
+            role.OpPeriod = CurrentOrgChart.OpPeriod;
+            openRoleForEdit(role);
+        }
+
+        private void openRoleForEdit(ICSRole role)
+        {
+            using (OrganizationChartAddRole addRoleForm = new OrganizationChartAddRole())
+            {
+                addRoleForm.selectedRole = role;
+                DialogResult dr = addRoleForm.ShowDialog();
+                if(dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertICSRole(addRoleForm.selectedRole);
+                }
+            }
+        }
+
+        private void btnEditRole_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
+            openRoleForEdit(role);
         }
     }
 }

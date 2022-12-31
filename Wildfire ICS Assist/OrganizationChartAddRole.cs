@@ -21,8 +21,7 @@ namespace Wildfire_ICS_Assist
         public OrganizationChartAddRole()
         {
             InitializeComponent();
-            cboReportsTo.Items.Clear();
-            cboReportsTo.DataSource = CurrentOrgChart.AllRoles.Where(o=>o.RoleID != selectedRole.RoleID).ToList();
+            
 
            
         }
@@ -33,6 +32,8 @@ namespace Wildfire_ICS_Assist
 
         private void DisplayRole()
         {
+            cboReportsTo.Items.Clear();
+            cboReportsTo.DataSource = CurrentOrgChart.AllRoles.Where(o => o.RoleID != selectedRole.RoleID).ToList();
             txtRoleName.Text = selectedRole.RoleName;
             if(selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.AllRoles.Any(o=>o.RoleID == selectedRole.ReportsTo))
             {
@@ -86,28 +87,28 @@ namespace Wildfire_ICS_Assist
 
 
                 splitContainer1.Panel1.BackColor = Color.White;
-                if (CommandStaffRoles.Contains(Program.CurrentRole.RoleID))
+                if (CommandStaffRoles.Contains(parentRole.RoleID))
                 {
                     splitContainer1.Panel1.BackColor = Color.IndianRed;
                 }
-                else if (Program.CurrentRole.BranchID == Globals.IncidentCommanderID)
+                else if (parentRole.BranchID == Globals.IncidentCommanderID)
                 {
                     splitContainer1.Panel1.BackColor = Color.LimeGreen;
                     //    pnlCommandTeam.BackColor = Color.LimeGreen;
                 }
-                else if (Program.CurrentRole.BranchID == Globals.OpsChiefID)
+                else if (parentRole.BranchID == Globals.OpsChiefID)
                 {
                     splitContainer1.Panel1.BackColor = Color.Orange;
                 }
-                else if (Program.CurrentRole.BranchID == Globals.PlanningChiefID)
+                else if (parentRole.BranchID == Globals.PlanningChiefID)
                 {
                     splitContainer1.Panel1.BackColor = Color.CornflowerBlue;
                 }
-                else if (Program.CurrentRole.BranchID == Globals.LogisticsChiefID)
+                else if (parentRole.BranchID == Globals.LogisticsChiefID)
                 {
                     splitContainer1.Panel1.BackColor = Color.Khaki;
                 }
-                else if (Program.CurrentRole.BranchID == Globals.AdminChiefID)
+                else if (parentRole.BranchID == Globals.AdminChiefID)
                 {
                     splitContainer1.Panel1.BackColor = Color.LightGray;
                 }
@@ -127,20 +128,20 @@ namespace Wildfire_ICS_Assist
                     if (CurrentOrgChart.AllRoles.Any(o => o.RoleName.Equals(((ComboBox)sender).Text, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         ((ComboBox)sender).SelectedValue = CurrentOrgChart.AllRoles.Where(o => o.RoleName.Equals(((ComboBox)sender).Text, StringComparison.InvariantCultureIgnoreCase)).First().RoleID;
-                        selectedRole = (ICSRole)((ComboBox)sender).SelectedItem;
+                        //selectedRole.rep = (ICSRole)((ComboBox)sender).SelectedItem;
                         //displaySelectedTeamMember();
                     }
                     else if (CurrentOrgChart.AllRoles.Any(o => o.RoleNameForDropdown.Equals(((ComboBox)sender).Text, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         ((ComboBox)sender).SelectedValue = CurrentOrgChart.AllRoles.Where(o => o.RoleNameForDropdown.Equals(((ComboBox)sender).Text, StringComparison.InvariantCultureIgnoreCase)).First().RoleID;
-                        selectedRole = (ICSRole)((ComboBox)sender).SelectedItem;
+                        //selectedRole = (ICSRole)((ComboBox)sender).SelectedItem;
 
 
                     }
                     else
                     {
                         ((ComboBox)sender).SelectedIndex = 0;
-                        selectedRole = null;
+                        //selectedRole = null;
                         System.Media.SystemSounds.Exclamation.Play();
                         ((ComboBox)sender).Focus();
                     }
@@ -148,23 +149,23 @@ namespace Wildfire_ICS_Assist
                 else
                 {
                     ((ComboBox)sender).SelectedIndex = 0;
-                    selectedRole = null;
+                    //selectedRole = null;
                     //System.Media.SystemSounds.Exclamation.Play();
                     //((ComboBox)sender).Focus();
                 }
 
 
             }
-            else { selectedRole = (ICSRole)((ComboBox)sender).SelectedItem; }
+            //else { selectedRole = (ICSRole)((ComboBox)sender).SelectedItem; }
 
             if (null != ((ComboBox)sender).SelectedItem)
             {
-                selectedRole = (ICSRole)((ComboBox)sender).SelectedItem;
+                //selectedRole = (ICSRole)((ComboBox)sender).SelectedItem;
             }
             else
             {
                 ((ComboBox)sender).SelectedIndex = 0;
-                selectedRole = null;
+                //selectedRole = null;
                 System.Media.SystemSounds.Exclamation.Play();
                 ((ComboBox)sender).Focus();
 

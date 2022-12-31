@@ -83,5 +83,10 @@ namespace Wildfire_ICS_Assist
         {
 
         }
+
+        private void CommunicationsPlanForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
