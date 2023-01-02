@@ -452,7 +452,6 @@ namespace Wildfire_ICS_Assist
                 }
                 
 
-                pnlTeamStatus.BackColor = Color.White;
                 //pnlTeamAssignments.BackColor = Color.White;
                 pnlPlanning.BackColor = Color.White;
                 pnlLogistics.BackColor = Color.White;
@@ -473,7 +472,6 @@ namespace Wildfire_ICS_Assist
                 else if (Program.CurrentRole.BranchID == Globals.OpsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Orange;
-                    pnlTeamStatus.BackColor = Color.Orange;
                     //resizeGroup("Ops", false, true);
                 }
                 else if (Program.CurrentRole.BranchID == Globals.PlanningChiefID)
@@ -1007,6 +1005,12 @@ namespace Wildfire_ICS_Assist
 
             RemoveActiveForm(orgChartForm);
             orgChartForm = null;
+
+        }
+
+        private void btnPrintOrgChart_Click(object sender, EventArgs e)
+        {
+            openOrganizationChart();
 
         }
     }

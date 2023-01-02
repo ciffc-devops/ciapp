@@ -72,6 +72,7 @@ namespace WildfireICSDesktopServices
         void UpsertEquipmentIssue(EquipmentIssue issue, string source = "local");
         void UpsertICSRole(ICSRole record, string source = "local");
         void UpsertICSRole(string roleName, int opsPeriod, TeamMember member, string source = "local");
+        void DeleteICSRole(ICSRole roleToDelete, int opsPeriod, string source = "local");
         void UpsertIncidentObjective(IncidentObjective record, string source = "local");
         void UpsertMedicalPlan(MedicalPlan record, string source = "local");
         void UpsertMemberStatus(SignInRecord signIn, string source = "local");

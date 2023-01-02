@@ -184,7 +184,7 @@
     <value>0, 0</value>
   </data>
   <data name="dgvMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1080, 101</value>
+    <value>1080, 57</value>
   </data>
   <data name="dgvMembersOnTask.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -359,10 +359,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1080, 130</value>
+    <value>1080, 51</value>
   </data>
   <data name="splitContainer4.SplitterDistance" type="System.Int32, mscorlib">
-    <value>101</value>
+    <value>57</value>
   </data>
   <data name="splitContainer4.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -900,7 +900,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlOpsPeriod.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="pnlTaskInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1488,7 +1488,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlTaskInfo.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="lblServerStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1500,7 +1500,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblServerStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 983</value>
+    <value>444, 904</value>
   </data>
   <data name="lblServerStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>640, 20</value>
@@ -1524,7 +1524,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblServerStatus.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="lblVersionNumber.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1536,7 +1536,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVersionNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 983</value>
+    <value>8, 904</value>
   </data>
   <data name="lblVersionNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 20</value>
@@ -1560,7 +1560,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVersionNumber.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="tcStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1575,7 +1575,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1086, 136</value>
+    <value>1086, 57</value>
   </data>
   <data name="tpMembersOnTask.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1690,7 +1690,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAATABAQEwAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAATgBAQE4AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1734,7 +1734,7 @@
     <value>0, 796</value>
   </data>
   <data name="tcStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1094, 184</value>
+    <value>1094, 105</value>
   </data>
   <data name="tcStatus.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -1749,7 +1749,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tcStatus.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="pnlInternetSyncStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1887,7 +1887,7 @@
     <value>3</value>
   </data>
   <data name="pnlInternetSyncStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>465, 964</value>
+    <value>465, 885</value>
   </data>
   <data name="pnlInternetSyncStart.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 27</value>
@@ -1908,7 +1908,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2079,7 +2079,7 @@
     <value>4</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 968</value>
+    <value>376, 889</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 25</value>
@@ -2100,7 +2100,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -2400,387 +2400,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="pnlTeamStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnOpsAssignments.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnOpsAssignments.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAhhJREFUWEfFlg15AjEMhicBCZOABCQgAQmTgAQkIGESJgEJkzAH7Huzppe2ORg/
-        u+V53ofr1zZp2vSOl/P5/K+k4pKk4rOR7cR72peJz6QE50HNpD8T55BtxVF84rADjb5tN+dL2JioO4OQ
-        IduILOgcjN2UuX0f1OMYgvXIDmEinMResKgIGn1xLDsS286u+o/BemTRAc4tq0swRsztFsdRg9v42IjI
-        YuYsZFV0iupDeJ+DZs5lLMJ1gq6j70gutg6ORXsV/RZnMMYLrwaXvcYYziCYOG0hzlaC4LWahWUr/Pyz
-        XYnB7eb0caxvEH6umjvxSo6ZN2foyNYiyxzd5zZX1PoHYSq8U2nXFwnPRWORsdDIPgtu2y7zBOw4I03D
-        hMnxvrR9az9KO+5QT7/tPocrysNwDE3DhMlZ/yLx7GN9vJVnxwPWIs7akaZhQhkomEQBzrXZieo4wJg/
-        WQDF1C+ANtvrWywX/DxpAV07OwIWAV5kdsay5gsou2kBjxShXTNZP+emIrznGvLswbPxN13DmOGvX0RA
-        XxjnCdTtF9dfRCZO2RGYQrv0KqY4efZtB8Yyh7lNfQyxUrFd9T0fI38D+nFC+ikfBEf2yOeYzGPwQ/Qd
-        SUWnc0JmaRYRxpSxPm8ovEgqRmSP/CWbzdxJxR4ZAeK1uwZjr+4WpOIcMq4ox5ItBo2+4apdIhWXJBWX
-        JBWXJBWX4/zyDRRkFv/ULKZkAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnOpsAssignments.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnOpsAssignments.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnOpsAssignments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 105</value>
-  </data>
-  <data name="btnOpsAssignments.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnOpsAssignments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 59</value>
-  </data>
-  <data name="btnOpsAssignments.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="btnOpsAssignments.Text" xml:space="preserve">
-    <value>Team Assignments</value>
-  </data>
-  <data name="btnOpsAssignments.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnOpsAssignments.Name" xml:space="preserve">
-    <value>btnOpsAssignments</value>
-  </data>
-  <data name="&gt;&gt;btnOpsAssignments.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnOpsAssignments.Parent" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;btnOpsAssignments.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnOpsMemberStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnOpsMemberStatus.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAf5JREFUWEfFlgGRAjEMRZGABCScBCQgAQlIQAISkICEk4CEk4CDJb/ND2k3bRdu
-        ZsnMu9tN0jSbpi2baZq+Sqhck1C5JqFyTULlfxDZCmfHLvIjobKFCIP/CVAQvEMPO7gL3n6J4oFQGSES
-        Ba6BnUk8VOdBoj9FXP9iSimbgAAYsFfdVWCgHteBP+JubS4+eET84IPqoi+KeKj/welqjjYXH3QQSldn
-        vheg97ouGgvjZjblbHPag6yNMPtKtX2SQG/ML3ySnz2I0jkYzj6ztVgwpkxABE3nHchtYG+R9r7Izek8
-        9zqB1nqltRI5Od0STjoOZ0NtS8CefNRxlEDrS1qwcs0EhLQVRwmkUon0OjqCZ0fv4Mrbe8EE7y7DsPxK
-        PrAWBmdT1foZ6re0aXdMoHdqAVYh3KqOtL1ERl9PtikBHYRlaB23bKqL00WkW09k1LSwv3qAiLQmWNqM
-        veY7CsVNmHyLl3wc+0EAZX/dXjlQXSm8vy6YfAwzicJWM1eUE/BqRUArWwvY1c8Sdjb0BeLGvwdEMLHd
-        Uk6PqviS4rbERCkQ/uu7v0XhbxOJ+OYtkqCDX1sbjP8Cq/EuNpFI3ROw5a2tDvX2YjONtt0IbsvonOHy
-        ho2Xz+m5/m00TvjbgAn4jiU8+T4tP+HPs+hkzDb8+Sahck1C5ZqEyvWYNk832CVO3bd70wAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
-  <data name="btnOpsMemberStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnOpsMemberStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 172</value>
-  </data>
-  <data name="btnOpsMemberStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnOpsMemberStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 59</value>
-  </data>
-  <data name="btnOpsMemberStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="btnOpsMemberStatus.Text" xml:space="preserve">
-    <value>Member Status</value>
-  </data>
-  <data name="btnOpsMemberStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnOpsMemberStatus.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnOpsMemberStatus.Name" xml:space="preserve">
-    <value>btnOpsMemberStatus</value>
-  </data>
-  <data name="&gt;&gt;btnOpsMemberStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnOpsMemberStatus.Parent" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;btnOpsMemberStatus.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="btnOpsDashboard.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnOpsDashboard.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAb1JREFUWEfFlQFxwzAMRQuhEAZhEAqhEAahEAqhEAphUAahEMog0/OsTpa/uyy3
-        83T3rs33l+I4srNbluVfkeJMpDgTKc5EijOR4giLo3E1bgZCBI2xo8odIcWMxaHeIN7wGXgPqlZGihGL
-        Sy26hYuqGZGiY8GSxoLA0zEpVsU1/qOpVbqq2o4UwSI/+d04JU8ZS9rJwOt5MFwJLbZP51D0NflYoeYJ
-        8Rh5AiB7ohOK2C4lxbwgv3uV4ySv/4eb9HfC11bzJGBJ41N9cJ3znOrBSw65Xge6LdpcFKFtvMesLfYG
-        N+eCG7zFvOR7rJJFXM2uIZuLIrQJTfNY5Pf7bvz0SmIzd6+huSjCtxm6xrF4C+PAhF+yz7FoGrob74Rg
-        DuROz+dDsz0HnkLn64SUUMkT4D3HV3WO49XzJxOgi/X+tWWv4+eRBxgzHjW78U540oRboEaot6oJ5Tbc
-        CjVCvVXb8OlBlP0ZPNW77SAqYjtrivnevyt/JHrDf1h3FBcxNU6FYsMj2MFTvTl//ccILGLzrLq5g7fm
-        eP7vPseOBSsBw5NuBDkGW1R+MxwpzkSKM5HiTKQ4EynORIrzWHafV8p+7P+cAvYAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnOpsDashboard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnOpsDashboard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 38</value>
-  </data>
-  <data name="btnOpsDashboard.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnOpsDashboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>543, 59</value>
-  </data>
-  <data name="btnOpsDashboard.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="btnOpsDashboard.Text" xml:space="preserve">
-    <value>Operations Dashboard</value>
-  </data>
-  <data name="btnOpsDashboard.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnOpsDashboard.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnOpsDashboard.Name" xml:space="preserve">
-    <value>btnOpsDashboard</value>
-  </data>
-  <data name="&gt;&gt;btnOpsDashboard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnOpsDashboard.Parent" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;btnOpsDashboard.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btnTeamStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnTeamStatus.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAaVJREFUWEfFluF1wjAMhBmFEToCIzBKR2EERmIERugG6Z2RUsk+p5hSR+99PzhL
-        lqzIIYdlWXZFijOR4kykOBMp9oCdwRXcAYUINa6dVWwPKdbATpYgJtyCvie1V40UI7CLbfoKF7VnRIoO
-        jC2NGxKejkWxKxFqqktXtbcjRQKrT/4FPpVvhD7mG2O7ndDi40RxA274oXwV9LWYuIeciUYoYm7l08lh
-        R1ASMQbEIu61f/FrhMdV8yCy2XYYk7LtN+AxXgR110hzRdOPIuTB01XrpJFj8I3dbAYy/ShCDmiGB8bk
-        9fON3Cr/OMzNgdKPIvw4k2ZwYHVba9Ijg6WBjmtlvRGCM1AFrG0PmvuTtf229r4CYGz/uh5011L7be2t
-        BQy132KGC+gOIaw39YSDmdpvMcNDKK8hLLU/wKLYmSa5xQ1fQ/kigsVWbiZ1zMdjyO8voiLmqtdXMYxF
-        bCZ1GAPGX8VFrAYHrEU8A30tJu7RXOniq0QC2+/v2IHt90HiwOpOjPC3TzIHxhOq0/Wgr3zmNVLsAdvn
-        s/w/keJMpDgTKc5jOXwDPsDya0nJDecAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnTeamStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnTeamStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 105</value>
-  </data>
-  <data name="btnTeamStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnTeamStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 59</value>
-  </data>
-  <data name="btnTeamStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="btnTeamStatus.Text" xml:space="preserve">
-    <value>Team Status</value>
-  </data>
-  <data name="btnTeamStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnTeamStatus.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnTeamStatus.Name" xml:space="preserve">
-    <value>btnTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;btnTeamStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnTeamStatus.Parent" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;btnTeamStatus.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btnExpandTeamStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnExpandTeamStatus.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAh
-        NQAAITUBTKZc8wAAA4tJREFUeF7t0YFt20AUA9CM0BEyQkboqB0hI2SEjtINXLGggd8D60q6L94X8A08
-        oGVsicd7ezwebSEZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8Z
-        Nh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZNh8ZZtk+75vv9E19pyJ0Db3f1XeyyDDD9vnY/Nrg
-        P/BzU/4S0JFdn71xhg/13QwynIXCLP48xFPpS0A3dhx7X3YJMpyBoiwcDxCVvAR0Yrex79MllyDDs1CQ
-        RWNxpdQloAs7jT1H6ZcgwzNQjAVj4VdKXAI6sMvY719SL0GGR6EQi8Wieyy9BLybHcZe/5N2CTI8AkVY
-        KBY8Yskl4J1899hnr5RLkOFeKMAisdgZ1kvAu/jOscdR05cgw722zxeLZLBcAt7Bd43vP+tLvWcvGe6F
-        l4ciGS69BDyb7xjfO2PpBXyGIlkuuQQ8k88e3zfrU71vLxnutX2uOlTqJeBZfOb4nlnTPWV4BAqwSCyW
-        IeUS8Aw+a3z+rJx+KjwKRVgoFswwdUj8ls8YnzsrZXyQ4RkoxGKxaIZTh8Vv+NvxebPSxgcZnoViLBgL
-        Zzh0aHyXvxmfMyt1fJDhDBRk0Vg8w67D4zv87vj7WenjgwxnoSgLxwNkeDkC/sbvjL+bdcn4IMMMKMzi
-        8SAZ5BjI+Lfx+7MuGx9kmAXFeYB4oAx/jYJ/Mxu/N+vS8UGGmXAAHiQeLMOfceiW44MMs+EgPFA8YAY8
-        87bjgwyvgAPxYPGgFdnGBxleBQfjAeOBK7GODzK8Eg7Ig8aDV2AfH2R4NRyUB44DrLRkfJChAw7Mg8ch
-        Vlg2PsjQBQfnAHEQp6XjgwydMACHiMM4LB8fZOiGIThIHOhKJcYHGa6AQThMHOoKZcYHGa6CYThQHCxT
-        qfFBhithIA4Vh8tQbnyQ4WoYioPFAWeUHB9kWAEG43BxyDPKjg8yrALDccA46BGlxwcZVoIBOWQcdo/y
-        44MMq8GQHDQO/MotxgcZVoRBOWwcWrnN+CDDqjAsB46DR7caH2RYGQbm0HF4uN34IMPqMPTmx+Y5Pv59
-        u/FBhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1Hhs1H
-        hs1Hhs1Hhs1Hhs1Hhs1Hhs3l8fYbHRddXe2izS0AAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnExpandTeamStatus.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="btnExpandTeamStatus.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="btnExpandTeamStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="btnExpandTeamStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnExpandTeamStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 4</value>
-  </data>
-  <data name="btnExpandTeamStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
-  </data>
-  <data name="btnExpandTeamStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="btnExpandTeamStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;btnExpandTeamStatus.Name" xml:space="preserve">
-    <value>btnExpandTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;btnExpandTeamStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnExpandTeamStatus.Parent" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;btnExpandTeamStatus.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="btnCommsLog.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnCommsLog.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAWlJREFUWEftlmERwjAMRicBCUhAAlKQgAQkIAEJSEACEpCAg5EvJJA2H2UHXPeH
-        3L07+pKM0nYbwziOs0JlT6jsCZU9odKR2Ao7YcXyLdBjvVuWd6gEaBTwAZxYTQv0hP6Xk+DyPntvBkdW
-        1wI9oR/QVUxCZTn7q7BgdS3QY71+HbqKWeRfvza/sTEuuiR9S8thsDG3trGTVqEYqBiGfWg4m8PF3QGd
-        VNVXf5lOUuIc3D71JUEOj8QhOLolcJbzuoP55mEuBiqexUCXTOISnC8vbjF3O3O+TeBirthSuEgxUEGK
-        oxPwS0F0WitReNbv7pFLghRHJ/SbgDDLFsx+CGe/DSc9iIRYh8+/eRCpLLfh1ZKnM1Dl6y2Z9ihWmVch
-        vYwk4iTz3n7zMgIS7cPzzCkknw4zg0oHjQL9QyLhF1dIHqv4+R+Sd0g8vhzU+alQOYX/BP4TkIjvB33u
-        fwKVPaGyJ1T2hMp+jMMNrUdfGlMmM9QAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnCommsLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnCommsLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 172</value>
-  </data>
-  <data name="btnCommsLog.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnCommsLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 59</value>
-  </data>
-  <data name="btnCommsLog.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="btnCommsLog.Text" xml:space="preserve">
-    <value>Comms Log</value>
-  </data>
-  <data name="btnCommsLog.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnCommsLog.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnCommsLog.Name" xml:space="preserve">
-    <value>btnCommsLog</value>
-  </data>
-  <data name="&gt;&gt;btnCommsLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCommsLog.Parent" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;btnCommsLog.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="label14.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 17pt, style=Bold</value>
-  </data>
-  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 2</value>
-  </data>
-  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>515, 29</value>
-  </data>
-  <data name="label14.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label14.Text" xml:space="preserve">
-    <value>OPERATIONS</value>
-  </data>
-  <data name="&gt;&gt;label14.Name" xml:space="preserve">
-    <value>label14</value>
-  </data>
-  <data name="&gt;&gt;label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="pnlTeamStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 326</value>
-  </data>
-  <data name="pnlTeamStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 36</value>
-  </data>
-  <data name="pnlTeamStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="&gt;&gt;pnlTeamStatus.Name" xml:space="preserve">
-    <value>pnlTeamStatus</value>
-  </data>
-  <data name="&gt;&gt;pnlTeamStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlTeamStatus.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlTeamStatus.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>14</value>
   </data>
   <data name="pnlLogistics.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3287,7 +2907,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlLogistics.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="pnlPlanning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3918,7 +3538,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlPlanning.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="llProgramURL.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3951,7 +3571,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;llProgramURL.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3978,7 +3598,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <metadata name="svdTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1738, 17</value>
@@ -4599,7 +4219,7 @@
     <value>6, 6, 6, 6</value>
   </data>
   <data name="cpIncidentActionPlan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 262</value>
+    <value>975, 352</value>
   </data>
   <data name="cpIncidentActionPlan.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
@@ -4623,7 +4243,7 @@
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
   <data name="cpPlanning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>523, 563</value>
+    <value>523, 457</value>
   </data>
   <data name="cpPlanning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -4653,7 +4273,7 @@
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
   <data name="cpLogistics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>523, 509</value>
+    <value>523, 507</value>
   </data>
   <data name="cpLogistics.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -4679,11 +4299,274 @@
   <data name="cpOperations.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="btnOpsAssignments.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="btnOpsAssignments.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAhhJREFUWEfFlg15AjEMhicBCZOABCQgAQmTgAQkIGESJgEJkzAH7Huzppe2ORg/
+        u+V53ofr1zZp2vSOl/P5/K+k4pKk4rOR7cR72peJz6QE50HNpD8T55BtxVF84rADjb5tN+dL2JioO4OQ
+        IduILOgcjN2UuX0f1OMYgvXIDmEinMResKgIGn1xLDsS286u+o/BemTRAc4tq0swRsztFsdRg9v42IjI
+        YuYsZFV0iupDeJ+DZs5lLMJ1gq6j70gutg6ORXsV/RZnMMYLrwaXvcYYziCYOG0hzlaC4LWahWUr/Pyz
+        XYnB7eb0caxvEH6umjvxSo6ZN2foyNYiyxzd5zZX1PoHYSq8U2nXFwnPRWORsdDIPgtu2y7zBOw4I03D
+        hMnxvrR9az9KO+5QT7/tPocrysNwDE3DhMlZ/yLx7GN9vJVnxwPWIs7akaZhQhkomEQBzrXZieo4wJg/
+        WQDF1C+ANtvrWywX/DxpAV07OwIWAV5kdsay5gsou2kBjxShXTNZP+emIrznGvLswbPxN13DmOGvX0RA
+        XxjnCdTtF9dfRCZO2RGYQrv0KqY4efZtB8Yyh7lNfQyxUrFd9T0fI38D+nFC+ikfBEf2yOeYzGPwQ/Qd
+        SUWnc0JmaRYRxpSxPm8ovEgqRmSP/CWbzdxJxR4ZAeK1uwZjr+4WpOIcMq4ox5ItBo2+4apdIhWXJBWX
+        JBWXJBWX4/zyDRRkFv/ULKZkAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnOpsAssignments.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="btnOpsAssignments.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnOpsAssignments.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 118</value>
+  </data>
+  <data name="btnOpsAssignments.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 4, 6, 4</value>
+  </data>
+  <data name="btnOpsAssignments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 59</value>
+  </data>
+  <data name="btnOpsAssignments.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="btnOpsAssignments.Text" xml:space="preserve">
+    <value>Team Assignments</value>
+  </data>
+  <data name="btnOpsAssignments.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnOpsAssignments.Name" xml:space="preserve">
+    <value>btnOpsAssignments</value>
+  </data>
+  <data name="&gt;&gt;btnOpsAssignments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOpsAssignments.Parent" xml:space="preserve">
+    <value>cpOperations</value>
+  </data>
+  <data name="&gt;&gt;btnOpsAssignments.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnOpsMemberStatus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="btnOpsMemberStatus.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAf5JREFUWEfFlgGRAjEMRZGABCScBCQgAQlIQAISkICEk4CEk4CDJb/ND2k3bRdu
+        ZsnMu9tN0jSbpi2baZq+Sqhck1C5JqFyTULlfxDZCmfHLvIjobKFCIP/CVAQvEMPO7gL3n6J4oFQGSES
+        Ba6BnUk8VOdBoj9FXP9iSimbgAAYsFfdVWCgHteBP+JubS4+eET84IPqoi+KeKj/welqjjYXH3QQSldn
+        vheg97ouGgvjZjblbHPag6yNMPtKtX2SQG/ML3ySnz2I0jkYzj6ztVgwpkxABE3nHchtYG+R9r7Izek8
+        9zqB1nqltRI5Od0STjoOZ0NtS8CefNRxlEDrS1qwcs0EhLQVRwmkUon0OjqCZ0fv4Mrbe8EE7y7DsPxK
+        PrAWBmdT1foZ6re0aXdMoHdqAVYh3KqOtL1ERl9PtikBHYRlaB23bKqL00WkW09k1LSwv3qAiLQmWNqM
+        veY7CsVNmHyLl3wc+0EAZX/dXjlQXSm8vy6YfAwzicJWM1eUE/BqRUArWwvY1c8Sdjb0BeLGvwdEMLHd
+        Uk6PqviS4rbERCkQ/uu7v0XhbxOJ+OYtkqCDX1sbjP8Cq/EuNpFI3ROw5a2tDvX2YjONtt0IbsvonOHy
+        ho2Xz+m5/m00TvjbgAn4jiU8+T4tP+HPs+hkzDb8+Sahck1C5ZqEyvWYNk832CVO3bd70wAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="btnOpsMemberStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnOpsMemberStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 185</value>
+  </data>
+  <data name="btnOpsMemberStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 4, 6, 4</value>
+  </data>
+  <data name="btnOpsMemberStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 59</value>
+  </data>
+  <data name="btnOpsMemberStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="btnOpsMemberStatus.Text" xml:space="preserve">
+    <value>Member Status</value>
+  </data>
+  <data name="btnOpsMemberStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="btnOpsMemberStatus.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnOpsMemberStatus.Name" xml:space="preserve">
+    <value>btnOpsMemberStatus</value>
+  </data>
+  <data name="&gt;&gt;btnOpsMemberStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOpsMemberStatus.Parent" xml:space="preserve">
+    <value>cpOperations</value>
+  </data>
+  <data name="&gt;&gt;btnOpsMemberStatus.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnOpsDashboard.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="btnOpsDashboard.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAb1JREFUWEfFlQFxwzAMRQuhEAZhEAqhEAahEAqhEAphUAahEMog0/OsTpa/uyy3
+        83T3rs33l+I4srNbluVfkeJMpDgTKc5EijOR4giLo3E1bgZCBI2xo8odIcWMxaHeIN7wGXgPqlZGihGL
+        Sy26hYuqGZGiY8GSxoLA0zEpVsU1/qOpVbqq2o4UwSI/+d04JU8ZS9rJwOt5MFwJLbZP51D0NflYoeYJ
+        8Rh5AiB7ohOK2C4lxbwgv3uV4ySv/4eb9HfC11bzJGBJ41N9cJ3znOrBSw65Xge6LdpcFKFtvMesLfYG
+        N+eCG7zFvOR7rJJFXM2uIZuLIrQJTfNY5Pf7bvz0SmIzd6+huSjCtxm6xrF4C+PAhF+yz7FoGrob74Rg
+        DuROz+dDsz0HnkLn64SUUMkT4D3HV3WO49XzJxOgi/X+tWWv4+eRBxgzHjW78U540oRboEaot6oJ5Tbc
+        CjVCvVXb8OlBlP0ZPNW77SAqYjtrivnevyt/JHrDf1h3FBcxNU6FYsMj2MFTvTl//ccILGLzrLq5g7fm
+        eP7vPseOBSsBw5NuBDkGW1R+MxwpzkSKM5HiTKQ4EynORIrzWHafV8p+7P+cAvYAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnOpsDashboard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnOpsDashboard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 51</value>
+  </data>
+  <data name="btnOpsDashboard.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 4, 6, 4</value>
+  </data>
+  <data name="btnOpsDashboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>543, 59</value>
+  </data>
+  <data name="btnOpsDashboard.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="btnOpsDashboard.Text" xml:space="preserve">
+    <value>Operations Dashboard</value>
+  </data>
+  <data name="btnOpsDashboard.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="btnOpsDashboard.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnOpsDashboard.Name" xml:space="preserve">
+    <value>btnOpsDashboard</value>
+  </data>
+  <data name="&gt;&gt;btnOpsDashboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOpsDashboard.Parent" xml:space="preserve">
+    <value>cpOperations</value>
+  </data>
+  <data name="&gt;&gt;btnOpsDashboard.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnTeamStatus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="btnTeamStatus.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAaVJREFUWEfFluF1wjAMhBmFEToCIzBKR2EERmIERugG6Z2RUsk+p5hSR+99PzhL
+        lqzIIYdlWXZFijOR4kykOBMp9oCdwRXcAYUINa6dVWwPKdbATpYgJtyCvie1V40UI7CLbfoKF7VnRIoO
+        jC2NGxKejkWxKxFqqktXtbcjRQKrT/4FPpVvhD7mG2O7ndDi40RxA274oXwV9LWYuIeciUYoYm7l08lh
+        R1ASMQbEIu61f/FrhMdV8yCy2XYYk7LtN+AxXgR110hzRdOPIuTB01XrpJFj8I3dbAYy/ShCDmiGB8bk
+        9fON3Cr/OMzNgdKPIvw4k2ZwYHVba9Ijg6WBjmtlvRGCM1AFrG0PmvuTtf229r4CYGz/uh5011L7be2t
+        BQy132KGC+gOIaw39YSDmdpvMcNDKK8hLLU/wKLYmSa5xQ1fQ/kigsVWbiZ1zMdjyO8voiLmqtdXMYxF
+        bCZ1GAPGX8VFrAYHrEU8A30tJu7RXOniq0QC2+/v2IHt90HiwOpOjPC3TzIHxhOq0/Wgr3zmNVLsAdvn
+        s/w/keJMpDgTKc5jOXwDPsDya0nJDecAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnTeamStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnTeamStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 118</value>
+  </data>
+  <data name="btnTeamStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 4, 6, 4</value>
+  </data>
+  <data name="btnTeamStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 59</value>
+  </data>
+  <data name="btnTeamStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="btnTeamStatus.Text" xml:space="preserve">
+    <value>Team Status</value>
+  </data>
+  <data name="btnTeamStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="btnTeamStatus.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnTeamStatus.Name" xml:space="preserve">
+    <value>btnTeamStatus</value>
+  </data>
+  <data name="&gt;&gt;btnTeamStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTeamStatus.Parent" xml:space="preserve">
+    <value>cpOperations</value>
+  </data>
+  <data name="&gt;&gt;btnTeamStatus.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnCommsLog.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="btnCommsLog.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAWlJREFUWEftlmERwjAMRicBCUhAAlKQgAQkIAEJSEACEpCAg5EvJJA2H2UHXPeH
+        3L07+pKM0nYbwziOs0JlT6jsCZU9odKR2Ao7YcXyLdBjvVuWd6gEaBTwAZxYTQv0hP6Xk+DyPntvBkdW
+        1wI9oR/QVUxCZTn7q7BgdS3QY71+HbqKWeRfvza/sTEuuiR9S8thsDG3trGTVqEYqBiGfWg4m8PF3QGd
+        VNVXf5lOUuIc3D71JUEOj8QhOLolcJbzuoP55mEuBiqexUCXTOISnC8vbjF3O3O+TeBirthSuEgxUEGK
+        oxPwS0F0WitReNbv7pFLghRHJ/SbgDDLFsx+CGe/DSc9iIRYh8+/eRCpLLfh1ZKnM1Dl6y2Z9ihWmVch
+        vYwk4iTz3n7zMgIS7cPzzCkknw4zg0oHjQL9QyLhF1dIHqv4+R+Sd0g8vhzU+alQOYX/BP4TkIjvB33u
+        fwKVPaGyJ1T2hMp+jMMNrUdfGlMmM9QAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnCommsLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnCommsLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 185</value>
+  </data>
+  <data name="btnCommsLog.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 4, 6, 4</value>
+  </data>
+  <data name="btnCommsLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 59</value>
+  </data>
+  <data name="btnCommsLog.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="btnCommsLog.Text" xml:space="preserve">
+    <value>Comms Log</value>
+  </data>
+  <data name="btnCommsLog.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="btnCommsLog.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnCommsLog.Name" xml:space="preserve">
+    <value>btnCommsLog</value>
+  </data>
+  <data name="&gt;&gt;btnCommsLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCommsLog.Parent" xml:space="preserve">
+    <value>cpOperations</value>
+  </data>
+  <data name="&gt;&gt;btnCommsLog.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="cpOperations.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
   <data name="cpOperations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>523, 455</value>
+    <value>599, 319</value>
   </data>
   <data name="cpOperations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -4704,7 +4587,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpOperations.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>15</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -4713,7 +4596,7 @@
     <value>11, 24</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1094, 1012</value>
+    <value>1094, 933</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -12179,6 +12062,12 @@
   <data name="&gt;&gt;medicalPlanICS206ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;organizationChartICS207ToolStripMenuItem.Name" xml:space="preserve">
+    <value>organizationChartICS207ToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;organizationChartICS207ToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
     <value>toolStripSeparator5</value>
   </data>
@@ -12298,12 +12187,6 @@
   </data>
   <data name="&gt;&gt;tmrNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;organizationChartICS207ToolStripMenuItem.Name" xml:space="preserve">
-    <value>organizationChartICS207ToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;organizationChartICS207ToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>IncidentDetailsForm</value>

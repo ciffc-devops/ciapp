@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditTeamMemberControl));
             this.txtName = new System.Windows.Forms.TextBox();
             this.cboProvince = new System.Windows.Forms.ComboBox();
+            this.bsProvAndTerr = new System.Windows.Forms.BindingSource(this.components);
             this.cboAgency = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,13 +53,12 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.bsProvAndTerr = new System.Windows.Forms.BindingSource(this.components);
+            this.txtDietary = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.txtDietary = new System.Windows.Forms.TextBox();
             this.chkVegetarian = new System.Windows.Forms.CheckBox();
-            this.chkNoGluten = new System.Windows.Forms.CheckBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.chkNoGluten = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,7 +108,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 29);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Full Name";
+            this.label1.Text = "Full Name*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -318,6 +318,18 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
+            // txtDietary
+            // 
+            this.txtDietary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDietary.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDietary.Location = new System.Drawing.Point(275, 315);
+            this.txtDietary.Name = "txtDietary";
+            this.txtDietary.Size = new System.Drawing.Size(197, 26);
+            this.txtDietary.TabIndex = 102;
+            this.toolTip1.SetToolTip(this.txtDietary, "Ideally, your EMBC ID#");
+            this.txtDietary.TextChanged += new System.EventHandler(this.txtDietary_TextChanged);
+            // 
             // label12
             // 
             this.label12.Location = new System.Drawing.Point(208, 315);
@@ -336,18 +348,6 @@
             this.label13.Text = "Dietary Requirements";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtDietary
-            // 
-            this.txtDietary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDietary.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDietary.Location = new System.Drawing.Point(275, 315);
-            this.txtDietary.Name = "txtDietary";
-            this.txtDietary.Size = new System.Drawing.Size(197, 26);
-            this.txtDietary.TabIndex = 102;
-            this.toolTip1.SetToolTip(this.txtDietary, "Ideally, your EMBC ID#");
-            this.txtDietary.TextChanged += new System.EventHandler(this.txtDietary_TextChanged);
-            // 
             // chkVegetarian
             // 
             this.chkVegetarian.Appearance = System.Windows.Forms.Appearance.Button;
@@ -365,6 +365,13 @@
             this.chkVegetarian.UseVisualStyleBackColor = true;
             this.chkVegetarian.CheckedChanged += new System.EventHandler(this.chkVegetarian_CheckedChanged);
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "check-box-unchecked.png");
+            this.imageList1.Images.SetKeyName(1, "check-box-checked.png");
+            // 
             // chkNoGluten
             // 
             this.chkNoGluten.Appearance = System.Windows.Forms.Appearance.Button;
@@ -381,13 +388,6 @@
             this.chkNoGluten.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.chkNoGluten.UseVisualStyleBackColor = true;
             this.chkNoGluten.CheckedChanged += new System.EventHandler(this.chkNoGluten_CheckedChanged);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "check-box-unchecked.png");
-            this.imageList1.Images.SetKeyName(1, "check-box-checked.png");
             // 
             // EditTeamMemberControl
             // 

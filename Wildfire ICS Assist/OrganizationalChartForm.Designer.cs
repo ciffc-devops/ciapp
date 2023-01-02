@@ -30,11 +30,11 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeOrgChart = new System.Windows.Forms.TreeView();
+            this.btnDeleteRole = new System.Windows.Forms.Button();
             this.btnEditRole = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnAssignRole = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnDeleteRole = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +74,20 @@
             this.treeOrgChart.TabIndex = 0;
             this.treeOrgChart.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeOrgChart_AfterSelect);
             // 
+            // btnDeleteRole
+            // 
+            this.btnDeleteRole.Enabled = false;
+            this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
+            this.btnDeleteRole.Location = new System.Drawing.Point(493, 3);
+            this.btnDeleteRole.Name = "btnDeleteRole";
+            this.btnDeleteRole.Size = new System.Drawing.Size(177, 42);
+            this.btnDeleteRole.TabIndex = 52;
+            this.btnDeleteRole.Text = "Remove Role";
+            this.btnDeleteRole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDeleteRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDeleteRole.UseVisualStyleBackColor = true;
+            this.btnDeleteRole.Click += new System.EventHandler(this.btnDeleteRole_Click);
+            // 
             // btnEditRole
             // 
             this.btnEditRole.Enabled = false;
@@ -91,7 +105,6 @@
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Enabled = false;
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint.Location = new System.Drawing.Point(674, 3);
             this.btnPrint.Name = "btnPrint";
@@ -104,7 +117,6 @@
             // 
             // btnAssignRole
             // 
-            this.btnAssignRole.Enabled = false;
             this.btnAssignRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
             this.btnAssignRole.Location = new System.Drawing.Point(167, 3);
             this.btnAssignRole.Name = "btnAssignRole";
@@ -113,6 +125,7 @@
             this.btnAssignRole.Text = "Assign Role";
             this.btnAssignRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAssignRole.UseVisualStyleBackColor = true;
+            this.btnAssignRole.Click += new System.EventHandler(this.btnAssignRole_Click);
             // 
             // btnAdd
             // 
@@ -125,19 +138,6 @@
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnDeleteRole
-            // 
-            this.btnDeleteRole.Enabled = false;
-            this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteRole.Location = new System.Drawing.Point(493, 3);
-            this.btnDeleteRole.Name = "btnDeleteRole";
-            this.btnDeleteRole.Size = new System.Drawing.Size(177, 42);
-            this.btnDeleteRole.TabIndex = 52;
-            this.btnDeleteRole.Text = "Remove Role";
-            this.btnDeleteRole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDeleteRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDeleteRole.UseVisualStyleBackColor = true;
             // 
             // OrganizationalChartForm
             // 

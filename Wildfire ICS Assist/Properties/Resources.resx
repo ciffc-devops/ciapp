@@ -364,4 +364,7 @@
   <data name="glyphicons-basic-52-eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-52-eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MissingInformationValidationError" xml:space="preserve">
+    <value>You must complete all required fields in order to proceed.  Required fields are marked with a *.</value>
+  </data>
 </root>

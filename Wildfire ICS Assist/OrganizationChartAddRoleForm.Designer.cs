@@ -1,6 +1,6 @@
 ﻿namespace Wildfire_ICS_Assist
 {
-    partial class OrganizationChartAddRole
+    partial class OrganizationChartAddRoleForm
     {
         /// <summary>
         /// Required designer variable.

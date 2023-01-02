@@ -30,7 +30,7 @@ namespace Wildfire_ICS_Assist
         private void OrganizationalChartForm_Load(object sender, EventArgs e)
         {
             PopulateTree();
-          
+
 
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
@@ -92,18 +92,19 @@ namespace Wildfire_ICS_Assist
             {
                 System.Drawing.Font MyFont = new System.Drawing.Font(this.Font.FontFamily, 16, FontStyle.Italic, GraphicsUnit.Pixel);
                 return MyFont;
-            } else
+            }
+            else
             {
-                System.Drawing.Font MyFont = new System.Drawing.Font(this.Font.FontFamily, 16,  GraphicsUnit.Pixel);
+                System.Drawing.Font MyFont = new System.Drawing.Font(this.Font.FontFamily, 16, FontStyle.Bold, GraphicsUnit.Pixel);
                 return MyFont;
             }
         }
 
         private void treeOrgChart_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if(treeOrgChart.SelectedNode != null)
+            if (treeOrgChart.SelectedNode != null)
             {
-               ICSRole role =  (ICSRole)treeOrgChart.SelectedNode.Tag;
+                ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
                 if (OrgChartTools.ProtectedRoleIDs.Contains(role.RoleID))
                 {
                     btnEditRole.Enabled = false;
@@ -127,11 +128,11 @@ namespace Wildfire_ICS_Assist
 
         private void openRoleForEdit(ICSRole role)
         {
-            using (OrganizationChartAddRole addRoleForm = new OrganizationChartAddRole())
+            using (OrganizationChartAddRoleForm addRoleForm = new OrganizationChartAddRoleForm())
             {
                 addRoleForm.selectedRole = role;
                 DialogResult dr = addRoleForm.ShowDialog();
-                if(dr == DialogResult.OK)
+                if (dr == DialogResult.OK)
                 {
                     Program.wfIncidentService.UpsertICSRole(addRoleForm.selectedRole);
                 }
@@ -142,6 +143,36 @@ namespace Wildfire_ICS_Assist
         {
             ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
             openRoleForEdit(role);
+        }
+
+        private void btnAssignRole_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
+            using (OrganizationChartAssignRoleForm assignRoleForm = new OrganizationChartAssignRoleForm())
+            {
+                assignRoleForm.selectedRole = role.Clone();
+
+                DialogResult dr = assignRoleForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertICSRole(assignRoleForm.selectedRole);
+                }
+
+            }
+        }
+
+        private void btnDeleteRole_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
+            if (!OrgChartTools.ProtectedRoleIDs.Contains(role.RoleID))
+            {
+                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                if(dr == DialogResult.Yes)
+                {
+                    Program.wfIncidentService.DeleteICSRole(role, Program.CurrentOpPeriod);
+                }
+            }
+
         }
     }
 }

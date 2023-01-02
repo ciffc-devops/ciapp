@@ -870,6 +870,8 @@ namespace WildfireICSDesktopServices
                 handler(e);
             }
         }
+
+
         public void UpsertICSRole(ICSRole record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
@@ -894,6 +896,7 @@ namespace WildfireICSDesktopServices
                     chart.AllRoles = chart.AllRoles.Where(o => o.RoleID != record.RoleID).ToList();
                 }
                 chart.AllRoles.Add(record);
+                chart.AllRoles = chart.AllRoles.OrderBy(o=>o.MaualSortOrder).ThenBy(o=>o.RoleName).ToList();
 
                 if (source.Equals("local") || source.Equals("networkNoInternet"))
                 {
@@ -940,6 +943,40 @@ namespace WildfireICSDesktopServices
                 role.saveOrgChartRoleToDB();
             }
             */
+        }
+
+        public void DeleteICSRole(ICSRole roleToDelete, int opsPeriod, string source = "local")
+        {
+            if(_currentIncident.allOrgCharts.Any(o=>o.OpPeriod == opsPeriod))
+            {
+                OrganizationChart org = _currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod);
+                if(org.AllRoles.Any(o=>o.RoleID == roleToDelete.RoleID))
+                {
+                    org.AllRoles = org.AllRoles.Where(o => o.RoleID != roleToDelete.RoleID).ToList();
+
+                    if (roleToDelete.teamMember != null && roleToDelete.teamMember.PersonID != Guid.Empty)
+                    {
+                        roleToDelete.teamMember.CurrentStatus = _currentIncident.getMemberStatus(roleToDelete.teamMember, opsPeriod, DateTime.Now);
+                        UpsertMemberStatus(roleToDelete.teamMember);
+                    }
+                    OnICSRoleChanged(new ICSRoleEventArgs(roleToDelete));
+                    if (source.Equals("local") || source.Equals("networkNoInternet"))
+                    {
+                        UpsertTaskUpdate(roleToDelete, "DELETE", true, false);
+                    }
+
+                }
+                if (org.AllRoles.Any(o=>o.ReportsTo == roleToDelete.RoleID))
+                {
+                    foreach(ICSRole role in org.AllRoles.Where(o => o.ReportsTo == roleToDelete.RoleID))
+                    {
+                        role.ReportsTo = roleToDelete.ReportsTo;
+                        role.ReportsToRoleName = roleToDelete.ReportsToRoleName;
+                        UpsertICSRole(role);
+
+                    }
+                }
+            }
         }
 
 

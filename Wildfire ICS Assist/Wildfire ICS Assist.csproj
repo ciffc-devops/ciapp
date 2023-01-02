@@ -264,17 +264,17 @@
     <Compile Include="OrganizationalChartForm.Designer.cs">
       <DependentUpon>OrganizationalChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrganizationChartAddRole.cs">
+    <Compile Include="OrganizationChartAddRoleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrganizationChartAddRole.Designer.cs">
-      <DependentUpon>OrganizationChartAddRole.cs</DependentUpon>
+    <Compile Include="OrganizationChartAddRoleForm.Designer.cs">
+      <DependentUpon>OrganizationChartAddRoleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrganizationChartAssignRole.cs">
+    <Compile Include="OrganizationChartAssignRoleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrganizationChartAssignRole.Designer.cs">
-      <DependentUpon>OrganizationChartAssignRole.cs</DependentUpon>
+    <Compile Include="OrganizationChartAssignRoleForm.Designer.cs">
+      <DependentUpon>OrganizationChartAssignRoleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -371,11 +371,11 @@
     <EmbeddedResource Include="OrganizationalChartForm.resx">
       <DependentUpon>OrganizationalChartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrganizationChartAddRole.resx">
-      <DependentUpon>OrganizationChartAddRole.cs</DependentUpon>
+    <EmbeddedResource Include="OrganizationChartAddRoleForm.resx">
+      <DependentUpon>OrganizationChartAddRoleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrganizationChartAssignRole.resx">
-      <DependentUpon>OrganizationChartAssignRole.cs</DependentUpon>
+    <EmbeddedResource Include="OrganizationChartAssignRoleForm.resx">
+      <DependentUpon>OrganizationChartAssignRoleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

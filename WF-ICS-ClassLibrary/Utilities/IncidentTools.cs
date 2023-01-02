@@ -406,12 +406,12 @@ namespace WF_ICS_ClassLibrary.Utilities
                 if (task.allOrgCharts.Any())
                 {
                     OrganizationChart lastOrg = task.allOrgCharts.OrderByDescending(o => o.OpPeriod).FirstOrDefault();
-                    chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, ops);
+                    chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, ops, chart.OrganizationalChartID );
                 }
                 else
                 {
                     chart.AllRoles = OrgChartTools.GetBlankPrimaryRoles();
-                    foreach(ICSRole role in chart.AllRoles) { role.OpPeriod = ops; }
+                    foreach(ICSRole role in chart.AllRoles) { role.OpPeriod = ops; role.OrganizationalChartID = chart.OrganizationalChartID; }
                 }
 
 

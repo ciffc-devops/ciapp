@@ -850,6 +850,15 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must complete all required fields in order to proceed.  Required fields are marked with a *..
+        /// </summary>
+        internal static string MissingInformationValidationError {
+            get {
+                return ResourceManager.GetString("MissingInformationValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -Select a saved contact-.
         /// </summary>
         internal static string SelectSavedContact {

@@ -13,24 +13,27 @@ namespace Wildfire_ICS_Assist.CustomControls
 {
     public partial class EditTeamMemberControl : UserControl
     {
-        private TeamMember _teamMember = null;
+        private TeamMember _teamMember = new TeamMember();
         public TeamMember teamMember { get => _teamMember; set { _teamMember = value; displayTeamMember(); } }
 
 
         private void displayTeamMember()
         {
-            txtName.Text = teamMember.Name;
-            txtEmail.Text = teamMember.Email;   
-            txtPhone.Text = teamMember.Phone;
-            txtQualifications.Text = teamMember.SpecialSkills;
-            txtDietary.Text = teamMember.Dietary;
+            if (_teamMember != null)
+            {
+                txtName.Text = teamMember.Name;
+                txtEmail.Text = teamMember.Email;
+                txtPhone.Text = teamMember.Phone;
+                txtQualifications.Text = teamMember.SpecialSkills;
+                txtDietary.Text = teamMember.Dietary;
 
-            cboProvince.SelectedValue = teamMember.ProvinceID;
-            cboAgency.Text = teamMember.Agency;
-            cboHomeAgency.Text = teamMember.HomeAgency;
+                if (teamMember.ProvinceID != Guid.Empty) { cboProvince.SelectedValue = teamMember.ProvinceID; }
+                if (!string.IsNullOrEmpty(teamMember.Agency)) { cboAgency.Text = teamMember.Agency; }
+                if (!string.IsNullOrEmpty(teamMember.HomeAgency)) { cboHomeAgency.Text = teamMember.HomeAgency; }
 
-            chkNoGluten.Checked = teamMember.NoGluten;
-            chkVegetarian.Checked = teamMember.Vegetarian;
+                chkNoGluten.Checked = teamMember.NoGluten;
+                chkVegetarian.Checked = teamMember.Vegetarian;
+            }
         }
         public EditTeamMemberControl()
         {
@@ -52,11 +55,20 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void txtName_TextChanged(object sender, EventArgs e)
         {
             teamMember.Name  = ((TextBox)sender).Text;
+            if (string.IsNullOrEmpty(((TextBox)sender).Text))
+            {
+                txtName.BackColor = Color.LightCoral;
+            }
+else { txtName.BackColor = Color.LightSkyBlue; }
         }
 
         private void cboProvince_SelectedIndexChanged(object sender, EventArgs e)
         {
-            teamMember.ProvinceID = new Guid(cboProvince.SelectedValue.ToString());
+            if(cboProvince.SelectedItem != null && cboProvince.SelectedValue != null && teamMember != null)
+            {
+                teamMember.ProvinceID = new Guid(cboProvince.SelectedValue.ToString());
+
+            }
         }
 
         private void cboAgency_SelectedIndexChanged(object sender, EventArgs e)

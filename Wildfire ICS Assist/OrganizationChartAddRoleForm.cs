@@ -12,13 +12,13 @@ using WF_ICS_ClassLibrary;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class OrganizationChartAddRole : Form
+    public partial class OrganizationChartAddRoleForm : Form
     {
         private ICSRole _selectedRole = null;
         public ICSRole selectedRole { get => _selectedRole; set { _selectedRole = value;  } }
         private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
 
-        public OrganizationChartAddRole()
+        public OrganizationChartAddRoleForm()
         {
             InitializeComponent();
             
@@ -27,6 +27,7 @@ namespace Wildfire_ICS_Assist
         }
         private void OrganizationChartAddRole_Load(object sender, EventArgs e)
         {
+            
             DisplayRole();
         }
 
