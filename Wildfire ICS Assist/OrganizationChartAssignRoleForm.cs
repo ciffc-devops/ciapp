@@ -102,5 +102,18 @@ namespace Wildfire_ICS_Assist
 
             return true;
         }
+
+        private void btnClearAssignment_Click(object sender, EventArgs e)
+        {
+            TeamMember blankMember = new TeamMember();
+            blankMember.PersonID = Guid.Empty;
+
+            selectedRole.IndividualID = Guid.Empty;
+            selectedRole.teamMember = blankMember;
+            selectedRole.IndividualName = null;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+
+        }
     }
 }

@@ -40,6 +40,7 @@
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAssignNew = new System.Windows.Forms.Button();
+            this.btnClearAssignment = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -63,6 +64,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnClearAssignment);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
@@ -215,6 +217,22 @@
             this.btnAssignNew.UseVisualStyleBackColor = true;
             this.btnAssignNew.Click += new System.EventHandler(this.btnAssignNew_Click);
             // 
+            // btnClearAssignment
+            // 
+            this.btnClearAssignment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClearAssignment.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClearAssignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearAssignment.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_250_eraser;
+            this.btnClearAssignment.Location = new System.Drawing.Point(142, 473);
+            this.btnClearAssignment.Margin = new System.Windows.Forms.Padding(6);
+            this.btnClearAssignment.Name = "btnClearAssignment";
+            this.btnClearAssignment.Size = new System.Drawing.Size(217, 51);
+            this.btnClearAssignment.TabIndex = 99;
+            this.btnClearAssignment.Text = "Clear Assignment";
+            this.btnClearAssignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClearAssignment.UseVisualStyleBackColor = true;
+            this.btnClearAssignment.Click += new System.EventHandler(this.btnClearAssignment_Click);
+            // 
             // OrganizationChartAssignRoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -256,5 +274,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnAssignNew;
         private CustomControls.EditTeamMemberControl editTeamMemberControl1;
+        private System.Windows.Forms.Button btnClearAssignment;
     }
 }
