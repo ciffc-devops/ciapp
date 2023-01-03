@@ -18,12 +18,12 @@ namespace Wildfire_ICS_Assist
     {
         private ICSRole _selectedRole = null;
         public ICSRole selectedRole { get => _selectedRole; set { _selectedRole = value; DisplayRole(); } }
-
+        List<TeamMember> members = null;
 
         private void DisplayRole()
         {
             List<TeamMember> savedMembers = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
-            List<TeamMember> members = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
+            members = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
 
             cboSavedMembers.DataSource = members;
 
@@ -53,7 +53,49 @@ namespace Wildfire_ICS_Assist
 
         private void cboSavedMembers_Leave(object sender, EventArgs e)
         {
+            if (cboSavedMembers.SelectedItem == null)
+            {
+                if (!string.IsNullOrEmpty(cboSavedMembers.Text))
+                {
+                    if (members.Any(o => o.Name.Equals(cboSavedMembers.Text, StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        cboSavedMembers.SelectedValue = members.Where(o => o.Name.Equals(cboSavedMembers.Text, StringComparison.InvariantCultureIgnoreCase)).First().PersonID;
+                        _selected = (Contact)cboSavedMembers.SelectedItem;
+                        //displaySelectedTeamMember();
+                    }
+                  
+                    else
+                    {
+                        cboSavedMembers.SelectedIndex = 0;
+                        _selected = null;
+                        System.Media.SystemSounds.Exclamation.Play();
+                        cboSavedMembers.Focus();
+                    }
+                }
+                else
+                {
+                    cboSavedMembers.SelectedIndex = 0;
+                    _selected = null;
+                    //System.Media.SystemSounds.Exclamation.Play();
+                    //cboSavedMembers.Focus();
+                }
 
+
+            }
+            else { _selected = (Contact)cboSavedMembers.SelectedItem; }
+
+            if (null != ((ComboBox)sender).SelectedItem)
+            {
+                _selected = (Contact)((ComboBox)sender).SelectedItem;
+            }
+            else
+            {
+                ((ComboBox)sender).SelectedIndex = 0;
+                _selected = null;
+                System.Media.SystemSounds.Exclamation.Play();
+                ((ComboBox)sender).Focus();
+
+            }
         }
 
         private void btnAssignSaved_Click(object sender, EventArgs e)
