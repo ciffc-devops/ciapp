@@ -393,6 +393,12 @@
     <EmbeddedResource Include="UtilityForms\HelpInfoForm.resx">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-207-WF-Organization-Chart.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS205A-CommunicationsList.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

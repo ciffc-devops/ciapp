@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -269,9 +269,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -563,6 +563,7 @@
             this.cboICSRole.Name = "cboICSRole";
             this.cboICSRole.ValueMember = "RoleID";
             this.cboICSRole.SelectedIndexChanged += new System.EventHandler(this.cboICSRole_SelectedIndexChanged);
+            this.cboICSRole.Leave += new System.EventHandler(this.cboICSRole_Leave);
             // 
             // label17
             // 
@@ -1229,7 +1230,7 @@
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
             this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
-            this.cpIncidentActionPlan.CurrentlyCollapsed = true;
+            this.cpIncidentActionPlan.CurrentlyCollapsed = false;
             this.cpIncidentActionPlan.ExpandedHeight = 250;
             this.cpIncidentActionPlan.ExpandedWidth = 700;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");

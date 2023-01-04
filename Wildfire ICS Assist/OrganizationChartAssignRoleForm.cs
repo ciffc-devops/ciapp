@@ -60,14 +60,14 @@ namespace Wildfire_ICS_Assist
                     if (members.Any(o => o.Name.Equals(cboSavedMembers.Text, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         cboSavedMembers.SelectedValue = members.Where(o => o.Name.Equals(cboSavedMembers.Text, StringComparison.InvariantCultureIgnoreCase)).First().PersonID;
-                        _selected = (Contact)cboSavedMembers.SelectedItem;
+                        
                         //displaySelectedTeamMember();
                     }
                   
                     else
                     {
                         cboSavedMembers.SelectedIndex = 0;
-                        _selected = null;
+                        
                         System.Media.SystemSounds.Exclamation.Play();
                         cboSavedMembers.Focus();
                     }
@@ -75,27 +75,16 @@ namespace Wildfire_ICS_Assist
                 else
                 {
                     cboSavedMembers.SelectedIndex = 0;
-                    _selected = null;
+                    
                     //System.Media.SystemSounds.Exclamation.Play();
                     //cboSavedMembers.Focus();
                 }
 
 
             }
-            else { _selected = (Contact)cboSavedMembers.SelectedItem; }
+            
 
-            if (null != ((ComboBox)sender).SelectedItem)
-            {
-                _selected = (Contact)((ComboBox)sender).SelectedItem;
-            }
-            else
-            {
-                ((ComboBox)sender).SelectedIndex = 0;
-                _selected = null;
-                System.Media.SystemSounds.Exclamation.Play();
-                ((ComboBox)sender).Focus();
-
-            }
+            
         }
 
         private void btnAssignSaved_Click(object sender, EventArgs e)

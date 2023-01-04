@@ -884,6 +884,7 @@ namespace WildfireICSDesktopServices
             else if (!_currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any())
             {
                 _currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles = OrgChartTools.GetBlankPrimaryRoles();
+                _currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).SortRoles();
                 UpsertOrganizationalChart(_currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).Clone());
             }
 
@@ -896,7 +897,9 @@ namespace WildfireICSDesktopServices
                     chart.AllRoles = chart.AllRoles.Where(o => o.RoleID != record.RoleID).ToList();
                 }
                 chart.AllRoles.Add(record);
-                chart.AllRoles = chart.AllRoles.OrderBy(o=>o.MaualSortOrder).ThenBy(o=>o.RoleName).ToList();
+                //chart.AllRoles = chart.AllRoles.OrderBy(o=>o.MaualSortOrder).ThenBy(o=>o.RoleName).ToList();
+                chart.SortRoles();
+                //UpsertOrganizationalChart(chart.Clone());
 
                 if (source.Equals("local") || source.Equals("networkNoInternet"))
                 {

@@ -315,6 +315,8 @@ namespace WildfireICSDesktopServices
                     return _options.AddIMTToContacts;
                 case "PromptForInitialSave":
                     return _options.PromptForInitialSave;
+                case "IncludeOrgContactsInIAP":
+                    return _options.IncludeOrgContactsInIAP;
                 default:
                     return false;
             }

@@ -44,9 +44,17 @@ namespace Wildfire_ICS_Assist
         private void IncidentDetailsForm_Load(object sender, EventArgs e)
         {
             SetVersionNumber();
+            setRecentFiles();
+
             collapseAllPanels();
+
+            //debug
+            cpIncidentActionPlan.CurrentlyCollapsed = false;
+
             CreateNewIncident();
             displayIncidentDetails();
+
+            WireWFIncidentServiceEvents();
         }
 
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
@@ -97,6 +105,12 @@ namespace Wildfire_ICS_Assist
 
         List<CollapsiblePanel> collapsiblePanels= new List<CollapsiblePanel>();
 
+
+        private void WireWFIncidentServiceEvents()
+        {
+            Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
+            Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
+        }
 
         private void CloseActiveForms()
         {
@@ -410,7 +424,7 @@ namespace Wildfire_ICS_Assist
 
         private void displayIncidentDetails()
         {
-            cboICSRole.Items.Clear();
+            //cboICSRole.Items.Clear();
             CurrentIncident.createOrgChartAsNeeded(CurrentOpPeriod);
             cboICSRole.DataSource = CurrentOrgChart.AllRoles;
 
@@ -509,6 +523,33 @@ namespace Wildfire_ICS_Assist
                 CheckForPositionLogReminders();
             }
         }
+
+        private void Program_OrgChartChanged(OrganizationChartEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                cboICSRole.DataSource = null;
+                cboICSRole.DataSource = CurrentOrgChart.AllRoles;
+                cboICSRole.DisplayMember = "RoleNameForDropdown";
+                cboICSRole.ValueMember = "RoleID";
+                if (CurrentOrgChart.AllRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID)) { cboICSRole.SelectedValue = Program.CurrentRole.RoleID; }
+            }
+        }
+        private void Program_ICSRoleChanged(ICSRoleEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+
+                cboICSRole.DataSource = null;
+                cboICSRole.DataSource = CurrentOrgChart.AllRoles;
+                cboICSRole.DisplayMember = "RoleNameForDropdown";
+                cboICSRole.ValueMember = "RoleID";
+                if (CurrentOrgChart.AllRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID)) { cboICSRole.SelectedValue = Program.CurrentRole.RoleID; }
+
+            }
+        }
+
+
 
         private bool initialDetailsSet(bool checkOpPeriod = true, bool promptOnerror = true)
         {
@@ -971,8 +1012,8 @@ namespace Wildfire_ICS_Assist
         {
             if(cboICSRole.SelectedItem != null)
             {
-                Program.CurrentRole = (ICSRole)cboICSRole.SelectedItem;
-                DisplayCurrentICSRole();
+                //Program.CurrentRole = (ICSRole)cboICSRole.SelectedItem;
+                
             }
             
         }
@@ -1012,6 +1053,15 @@ namespace Wildfire_ICS_Assist
         {
             openOrganizationChart();
 
+        }
+
+        private void cboICSRole_Leave(object sender, EventArgs e)
+        {
+            if(cboICSRole.SelectedValue != null)
+            {
+                Program.CurrentRole = (ICSRole)(cboICSRole.SelectedItem);
+                DisplayCurrentICSRole();
+            }
         }
     }
 }

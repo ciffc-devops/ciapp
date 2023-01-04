@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iTextSharp.text.pdf.parser;
 
 namespace WildfireICSDesktopServices
 {
@@ -21,7 +22,7 @@ namespace WildfireICSDesktopServices
             return stamper;
         }
 
-        public static bool MergePDFs(IEnumerable<string> fileNames, string targetPdf)
+        public static bool MergePDFs(IEnumerable<string> fileNames, string targetPdf, bool flattenPDF = false)
         {
             bool merged = true;
             using (FileStream stream = new FileStream(targetPdf, FileMode.Create))
@@ -35,6 +36,14 @@ namespace WildfireICSDesktopServices
                     foreach (string file in fileNames)
                     {
                         reader = new PdfReader(file);
+
+
+
+                        if (reader.AcroForm != null && flattenPDF)
+                            reader = new PdfReader(FlattenPdfFormToBytes(reader));
+
+
+
                         pdf.AddDocument(reader);
                         reader.Close();
                     }
@@ -51,11 +60,21 @@ namespace WildfireICSDesktopServices
                 {
                     if (document != null)
                     {
+
                         document.Close();
                     }
                 }
             }
+
             return merged;
+        }
+
+        private static byte[] FlattenPdfFormToBytes(PdfReader reader)
+        {
+            var memStream = new MemoryStream();
+            var stamper = new PdfStamper(reader, memStream) { FormFlattening = true };
+            stamper.Close();
+            return memStream.ToArray();
         }
     }
 

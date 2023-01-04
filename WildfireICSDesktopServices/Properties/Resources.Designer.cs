@@ -59,15 +59,5 @@ namespace WildfireICSDesktopServices.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] ICS205A_CommunicationsList {
-            get {
-                object obj = ResourceManager.GetObject("ICS205A_CommunicationsList", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

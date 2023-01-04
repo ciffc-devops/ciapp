@@ -1,10 +1,13 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary;
@@ -674,21 +677,18 @@ namespace WildfireICSDesktopServices
 
         public string createOrgChartPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
-            string path = FileAccessClasses.getWritablePath(task);
-            if (!tempFileName)
-            {
+            List<string> paths = new List<string>();
+            string finalPath = FileAccessClasses.getWritablePath(task);
+            string path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
 
 
-                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                string outputFileName = "ICS 207 - Task " + task.TaskNumber + " - Op " + OpsPeriod + " - Org Chart";
-                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+            OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == OpsPeriod);
 
-                // path = System.IO.Path.Combine(path, outputFileName);
-            }
-            else
-            {
-                path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
-            }
+            int ThisPageNumber = 1;
+
+
+            paths.Add(path);
+
             try
             {
 
@@ -700,46 +700,111 @@ namespace WildfireICSDesktopServices
 
 
 
-                string fileToUse = "ICSForms/ICS 207 - Org Chart.pdf";
+                string fileToUse = "BlankForms/ICS-207-WF-Organization-Chart.pdf";
 
 
                 using (PdfReader rdr = new PdfReader(fileToUse))
                 {
-                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
-
-                    OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
-
-
-                    stamper.AcroFields.SetField("207TASK", task.TaskNumber);
-                    stamper.AcroFields.SetField("207TASK NAME", task.TaskName);
-
-                    stamper.AcroFields.SetField("207FOR OPERATIONAL PERIOD", OpsPeriod.ToString());
-                    stamper.AcroFields.SetField("207DATE  TIME PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", currentChart.DatePrepared));
-                    stamper.AcroFields.SetField("207PREPARED BY PLANNING", currentChart.getNameByRoleName("Planning Section Chief"));
-                    stamper.AcroFields.SetField("207APPROVED BY SAR MGR", currentChart.getNameByRoleName("SAR Manager"));
-
-                    if (task.AllOperationalPeriods.Any(o => o.PeriodNumber == OpsPeriod))
+                    using (FileStream stream = new System.IO.FileStream(path, FileMode.Create))
                     {
-                        OperationalPeriod currentOp = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpsPeriod).First();
-                        stamper.AcroFields.SetField("FROM  DATE  TIME", string.Format("{0:yyyy-MMM-dd HH:mm}", currentOp.PeriodStart));
-                        stamper.AcroFields.SetField("TO  DATE  TIME", string.Format("{0:yyyy-MMM-dd HH:mm}", currentOp.PeriodEnd));
+                        using (PdfStamper stamper = new PdfStamper(rdr, stream))
+                        {
+
+                            OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
+                            int TotalPages = currentChart.CalculateOrgChartPageCount();
+
+                            stamper.AcroFields.SetField("1 INCIDENT NAME AND NUMBERRow1", task.IncidentIdentifier);
+
+                            stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
+                            stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                            stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                            stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+                            ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                            if (null != PreparedBy)
+                            {
+                                stamper.AcroFields.SetField("PreparedByPosition", PreparedBy.RoleName);
+                                stamper.AcroFields.SetField("PreparedByName", PreparedBy.IndividualName);
+                            }
+                            stamper.AcroFields.SetField("PAGE", "1");
+
+
+                            foreach (ICSRole role in currentChart.AllRoles.Where(o => !string.IsNullOrEmpty(o.PDFFieldName)))
+                            {
+                                if (!string.IsNullOrEmpty(role.PDFTitleName))
+                                {
+                                    stamper.AcroFields.SetField(role.PDFTitleName, role.RoleName);
+                                }
+
+                                List<ICSRole> childRoles = currentChart.GetChildRoles(role.RoleID, false);
+
+                                if (!childRoles.Any(o => string.IsNullOrEmpty(o.PDFFieldName)))
+                                {
+                                    stamper.AcroFields.SetField(role.PDFFieldName, role.IndividualName);
+
+                                }
+                                else if (childRoles.Any())
+                                {
+                                    // Otherwise, we need to start generating extra pages
+                                    List<string> extraPaths = createOrgChartExtensionPDF(task, currentChart, role, paths.Count + 1, TotalPages);
+                                    if (!string.IsNullOrEmpty(role.PDFFieldName))
+                                    {
+                                        string seeMore = "See page " + (paths.Count + 1) + " for details";
+                                        if (extraPaths.Count > 1) { seeMore = "See pages " + (paths.Count + 1) + " - " + (paths.Count + extraPaths.Count) + " for details"; }
+
+                                        stamper.AcroFields.SetField(role.PDFFieldName, seeMore);
+                                    }
+                                    paths.AddRange(extraPaths);
+
+                                }
+
+                            }
+
+                            if (TotalPages != paths.Count)
+                            {
+
+                            }
+                            stamper.AcroFields.SetField("OF", paths.Count.ToString());
+
+
+                            //Rename the fields
+                            AcroFields af = stamper.AcroFields;
+                            List<string> fieldNames = new List<string>();
+                            foreach (var field in af.Fields)
+                            {
+                                fieldNames.Add(field.Key);
+                            }
+                            foreach (string s in fieldNames)
+                            {
+                                stamper.AcroFields.RenameField(s, s + "-207-" + ThisPageNumber);
+                            }
+
+
+
+
+
+                            stamper.Close();//Close a PDFStamper Object
+                            stamper.Dispose();
+                            //rdr.Close();    //Close a PDFReader Object
+                        }
                     }
 
-                    foreach (ICSRole role in currentChart.AllRoles)
-                    {
-                        stamper.AcroFields.SetField(role.PDFFieldName, role.IndividualName);
-                    }
-
-                    if (flattenPDF)
-                    {
-                        stamper.FormFlattening = true;
-                    }
-
-
-                    stamper.Close();//Close a PDFStamper Object
-                    stamper.Dispose();
-                    //rdr.Close();    //Close a PDFReader Object
                 }
+
+                //Final file
+
+                if (!tempFileName)
+                {
+                    if (task.DocumentPath == null && finalPath != null) { task.DocumentPath = finalPath; }
+                    string outputFileName = "ICS 207 - Task " + task.IncidentIdentifier + " - Op " + OpsPeriod + " - Org Chart";
+                    finalPath = FileAccessClasses.getUniqueFileName(outputFileName, finalPath);
+                }
+                else { finalPath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf"; }
+
+
+
+
+                _ = PDFExtraTools.MergePDFs(paths, finalPath, flattenPDF);
 
 
             }
@@ -751,12 +816,200 @@ namespace WildfireICSDesktopServices
             {
 
             }
-            return path;
+            return finalPath;
         }
 
+   
+
+
+        private string getOrgChartPositionFieldName(int childNumber, int grandChildNumber)
+        {
+            string positionFieldName = "";
+
+            switch (childNumber)
+            {
+                case 0:
+                    positionFieldName = "PositionA";
+                    break;
+                case 1:
+                    positionFieldName = "PositionB";
+                    break;
+                case 2:
+                    positionFieldName = "PositionC";
+                    break;
+                case 3:
+                    positionFieldName = "PositionD";
+                    break;
+
+            }
+
+            positionFieldName = positionFieldName + (grandChildNumber + 1);
+            return positionFieldName;
+        }
+        private string getOrgChartNameFieldName(int childNumber, int grandChildNumber)
+        {
+            string nameFieldName = "";
+
+            switch (childNumber)
+            {
+                case 0:
+                    nameFieldName = "NameA";
+                    break;
+                case 1:
+                    nameFieldName = "NameB";
+                    break;
+                case 2:
+                    nameFieldName = "NameC";
+                    break;
+                case 3:
+                    nameFieldName = "NameD";
+                    break;
+
+            }
+
+            nameFieldName = nameFieldName + (grandChildNumber + 1);
+            return nameFieldName;
+        }
+
+        
+
+        public List<string> createOrgChartExtensionPDF(WFIncident task, OrganizationChart currentChart, ICSRole parentRole, int ThisPageNumber, int totalPages, int startOnChild = 0, bool flattenPDF = false)
+        {
+            List<string> paths = new List<string>();
+
+
+            string path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+            OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == currentChart.OpPeriod);
+            paths.Add(path);
+
+            try
+            {
+                string fileToUse = "BlankForms/ICS-207-WF-Organization-Chart-Extension.pdf";
+
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    using (FileStream stream = new System.IO.FileStream(path, FileMode.Create))
+                    {
+                        using (PdfStamper stamper = new PdfStamper(rdr, stream))
+                        {
 
 
 
+                            stamper.AcroFields.SetField("1 INCIDENT NAME AND NUMBERRow1", task.IncidentIdentifier);
+
+                            stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
+                            stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                            stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                            stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+                            ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                            if (null != PreparedBy)
+                            {
+                                stamper.AcroFields.SetField("PreparedByPosition", PreparedBy.RoleName);
+                                stamper.AcroFields.SetField("PreparedByName", PreparedBy.IndividualName);
+                            }
+                            stamper.AcroFields.SetField("PAGE", ThisPageNumber.ToString());
+                            stamper.AcroFields.SetField("OF", totalPages.ToString());
+
+                            //Parent Role
+                            stamper.AcroFields.SetField("Position1", parentRole.RoleName);
+                            stamper.AcroFields.SetField("Name1", parentRole.IndividualName);
+
+                            List<ICSRole> childRoles = currentChart.GetChildRoles(parentRole.RoleID, false);
+
+                            for (int r = startOnChild; r < childRoles.Count && r < (startOnChild + 4); r++)
+                            {
+                                ICSRole child = childRoles[r];
+                                string positionFieldName = getOrgChartPositionFieldName(r, 0);
+                                string nameFieldName = getOrgChartNameFieldName(r, 0);
+
+
+                                stamper.AcroFields.SetField(positionFieldName, child.RoleName);
+                                stamper.AcroFields.SetField(nameFieldName, child.IndividualName);
+
+                                List<ICSRole> grandChildren = currentChart.GetChildRoles(child.RoleID, false);
+
+
+                                for (int g = 0; g < grandChildren.Count && g < 5; g++)
+                                {
+                                    ICSRole grandchild = grandChildren[g];
+                                    string gcpositionFieldName = getOrgChartPositionFieldName(r, g + 1);
+                                    string gcnameFieldName = getOrgChartNameFieldName(r, g + 1); ;
+
+                                    //If it has grand kits, this starts over again...
+                                    List<ICSRole> greatGrandChildren = currentChart.GetChildRoles(grandchild.RoleID, false);
+                                    if (greatGrandChildren.Count > 0)
+                                    {
+                                        stamper.AcroFields.SetField(gcpositionFieldName, grandchild.RoleName);
+                                        stamper.AcroFields.SetField(gcnameFieldName, "See Page " + (ThisPageNumber + 1) + " for details");
+                                        List<string> childPaths = createOrgChartExtensionPDF(task, currentChart, grandchild, ThisPageNumber + 1, totalPages,0, flattenPDF);
+                                        paths.AddRange(childPaths);
+                                    }
+                                    else
+                                    {
+                                        stamper.AcroFields.SetField(gcpositionFieldName, grandchild.RoleName);
+                                        stamper.AcroFields.SetField(gcnameFieldName, grandchild.IndividualName);
+                                    }
+
+
+
+                                }
+
+
+
+
+
+                            }
+
+                            if(childRoles.Count > startOnChild + 4)
+                            {
+                                for(int x = startOnChild + 4; x < childRoles.Count; x = x + 4)
+                                {
+                                    List<string> childPaths = createOrgChartExtensionPDF(task, currentChart, parentRole, ThisPageNumber + paths.Count, x, totalPages, flattenPDF);
+                                    paths.AddRange(childPaths);
+                                }
+                            }
+
+
+
+
+
+
+                            //Rename the fields
+                            AcroFields af = stamper.AcroFields;
+                            List<string> fieldNames = new List<string>();
+                            foreach (var field in af.Fields)
+                            {
+                                fieldNames.Add(field.Key);
+                            }
+                            foreach (string s in fieldNames)
+                            {
+                                 stamper.AcroFields.RenameField(s, s + "-207-" + ThisPageNumber); 
+                            }
+
+
+
+
+
+                            stamper.Close();//Close a PDFStamper Object
+                            stamper.Dispose();
+                        }
+                        //rdr.Close();    //Close a PDFReader Object
+                    }
+                }
+
+            }
+            catch (IOException ex)
+            {
+
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+
+            }
+            return paths;
+        }
 
 
 

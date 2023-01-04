@@ -34,6 +34,8 @@ namespace Wildfire_ICS_Assist
         private void DisplayRole()
         {
             cboReportsTo.Items.Clear();
+            CurrentOrgChart.SortRoles();
+
             cboReportsTo.DataSource = CurrentOrgChart.AllRoles.Where(o => o.RoleID != selectedRole.RoleID).ToList();
             txtRoleName.Text = selectedRole.RoleName;
             if(selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.AllRoles.Any(o=>o.RoleID == selectedRole.ReportsTo))

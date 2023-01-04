@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using WildfireICSDesktopServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Wildfire_ICS_Assist
@@ -78,7 +80,7 @@ namespace Wildfire_ICS_Assist
                 string name = row.RoleNameWithIndividual;
 
                 var node = nodes.Add(roleID.ToString(), name);
-                if (row.IndividualID == Guid.Empty) { node.NodeFont = GetNodeFont(true); }
+                if (row.IndividualID == Guid.Empty || string.IsNullOrEmpty(row.IndividualName)) { node.NodeFont = GetNodeFont(true); }
                 else { node.NodeFont = GetNodeFont(false); }
                 node.Tag = row; // if you need to keep a row reference on the node
                 AddCurrentChild(row.RoleID, node.Nodes);
@@ -172,6 +174,69 @@ namespace Wildfire_ICS_Assist
                     Program.wfIncidentService.DeleteICSRole(role, Program.CurrentOpPeriod);
                 }
             }
+
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            bool IncludeContacts = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
+
+            if (IncludeContacts)
+            {
+                string orgChart = Program.pdfExportService.createOrgChartPDF(CurrentIncident, CurrentOpPeriod, false, true, false);
+                string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
+
+                List<byte[]> allPDFs = new List<byte[]>();
+
+
+                using (FileStream stream = File.OpenRead(orgChart))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+                if (!string.IsNullOrEmpty(contactList))
+                {
+                    using (FileStream stream = File.OpenRead(contactList))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        allPDFs.Add(fileBytes);
+                    }
+                }
+
+                string fullFilepath = "";
+                //int end = CurrentTask.FileName.LastIndexOf("\\");
+                fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
+
+                string fullOutputFilename = "ICS 207 - Task " + CurrentIncident.IncidentIdentifier + " - Op " + CurrentOpPeriod + " - Org Chart";
+                //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
+                fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+                try
+                {
+                    File.WriteAllBytes(fullFilepath, fullFile);
+
+                    System.Diagnostics.Process.Start(fullFilepath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                }
+
+            }
+            else
+            {
+                string path = Program.pdfExportService.createOrgChartPDF(CurrentIncident, CurrentOpPeriod, true);
+                try { System.Diagnostics.Process.Start(path); }
+                catch { }
+            }
+
 
         }
     }
