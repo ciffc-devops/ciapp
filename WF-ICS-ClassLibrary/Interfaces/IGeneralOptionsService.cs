@@ -11,7 +11,7 @@ namespace WF_ICS_ClassLibrary.Interfaces
     {
         GeneralOptions GetGeneralOptions(Guid OrganizationID);
         GeneralOptions GetGeneralOptions(string fileName);
-        bool SaveGeneralOptions(GeneralOptions options, string filename);
+        bool SaveGeneralOptions(GeneralOptions options, string filename = null);
         bool SaveGeneralOptions();
         bool DeleteGeneralOptions(GeneralOptions options);
 

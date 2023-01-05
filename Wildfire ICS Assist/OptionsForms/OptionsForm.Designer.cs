@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbGeneral = new System.Windows.Forms.TabPage();
             this.label28 = new System.Windows.Forms.Label();
@@ -56,11 +57,9 @@
             this.chkAutoSave = new System.Windows.Forms.CheckBox();
             this.tbComms = new System.Windows.Forms.TabPage();
             this.label16 = new System.Windows.Forms.Label();
-            this.cboRepeater = new System.Windows.Forms.ComboBox();
             this.cboEmergencyChannel = new System.Windows.Forms.ComboBox();
             this.cboSecondaryChannel = new System.Windows.Forms.ComboBox();
             this.cboPrimaryChannel = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -70,14 +69,27 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnHelpDefaultPort = new System.Windows.Forms.Button();
+            this.btnHelpDefaultToServer = new System.Windows.Forms.Button();
+            this.numDefaultPortNumber = new System.Windows.Forms.NumericUpDown();
+            this.label26 = new System.Windows.Forms.Label();
+            this.chkDefaultToServer = new System.Windows.Forms.CheckBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnTrustedDevicesHelp = new System.Windows.Forms.Button();
+            this.btnRemoveTrustedDevice = new System.Windows.Forms.Button();
+            this.lbTrustedDevices = new System.Windows.Forms.ListBox();
+            this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             this.tbFileManagement.SuspendLayout();
             this.tbComms.SuspendLayout();
+            this.tbNetworking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -91,7 +103,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(746, 586);
+            this.tabControl1.Size = new System.Drawing.Size(746, 441);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 0;
             // 
@@ -105,7 +117,7 @@
             this.tbGeneral.Location = new System.Drawing.Point(4, 33);
             this.tbGeneral.Name = "tbGeneral";
             this.tbGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tbGeneral.Size = new System.Drawing.Size(738, 549);
+            this.tbGeneral.Size = new System.Drawing.Size(738, 404);
             this.tbGeneral.TabIndex = 0;
             this.tbGeneral.Text = "General";
             // 
@@ -122,6 +134,7 @@
             // 
             this.cboDefaultICSRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboDefaultICSRole.DisplayMember = "RoleNameForDropdown";
             this.cboDefaultICSRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDefaultICSRole.FormattingEnabled = true;
             this.cboDefaultICSRole.Items.AddRange(new object[] {
@@ -182,9 +195,9 @@
             this.tbFileManagement.Controls.Add(this.label4);
             this.tbFileManagement.Controls.Add(this.label2);
             this.tbFileManagement.Controls.Add(this.chkAutoSave);
-            this.tbFileManagement.Location = new System.Drawing.Point(4, 22);
+            this.tbFileManagement.Location = new System.Drawing.Point(4, 33);
             this.tbFileManagement.Name = "tbFileManagement";
-            this.tbFileManagement.Size = new System.Drawing.Size(738, 560);
+            this.tbFileManagement.Size = new System.Drawing.Size(738, 404);
             this.tbFileManagement.TabIndex = 3;
             this.tbFileManagement.Text = "File Management";
             this.tbFileManagement.UseVisualStyleBackColor = true;
@@ -198,6 +211,7 @@
             this.btnBrowseBackupLocation.TabIndex = 158;
             this.btnBrowseBackupLocation.Text = "Browse...";
             this.btnBrowseBackupLocation.UseVisualStyleBackColor = true;
+            this.btnBrowseBackupLocation.Click += new System.EventHandler(this.btnBrowseBackupLocation_Click);
             // 
             // txtBackupLocation
             // 
@@ -231,13 +245,14 @@
             // 
             this.btnAutomaticSubFoldersHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAutomaticSubFoldersHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAutomaticSubFoldersHelp.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_635_circle_question;
+            this.btnAutomaticSubFoldersHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnAutomaticSubFoldersHelp.Image")));
             this.btnAutomaticSubFoldersHelp.Location = new System.Drawing.Point(694, 287);
             this.btnAutomaticSubFoldersHelp.Name = "btnAutomaticSubFoldersHelp";
             this.btnAutomaticSubFoldersHelp.Size = new System.Drawing.Size(36, 36);
             this.btnAutomaticSubFoldersHelp.TabIndex = 154;
             this.btnAutomaticSubFoldersHelp.TabStop = false;
             this.btnAutomaticSubFoldersHelp.UseVisualStyleBackColor = true;
+            this.btnAutomaticSubFoldersHelp.Click += new System.EventHandler(this.btnAutomaticSubFoldersHelp_Click);
             // 
             // txtAutomaticSubFolders
             // 
@@ -284,13 +299,14 @@
             // btnAutoBackupHelp
             // 
             this.btnAutoBackupHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAutoBackupHelp.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_635_circle_question;
+            this.btnAutoBackupHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnAutoBackupHelp.Image")));
             this.btnAutoBackupHelp.Location = new System.Drawing.Point(554, 137);
             this.btnAutoBackupHelp.Name = "btnAutoBackupHelp";
             this.btnAutoBackupHelp.Size = new System.Drawing.Size(36, 36);
             this.btnAutoBackupHelp.TabIndex = 149;
             this.btnAutoBackupHelp.TabStop = false;
             this.btnAutoBackupHelp.UseVisualStyleBackColor = true;
+            this.btnAutoBackupHelp.Click += new System.EventHandler(this.btnAutoBackupHelp_Click);
             // 
             // label31
             // 
@@ -338,6 +354,7 @@
             this.btnBrowseDefaultSaveLocation.TabIndex = 144;
             this.btnBrowseDefaultSaveLocation.Text = "Browse...";
             this.btnBrowseDefaultSaveLocation.UseVisualStyleBackColor = true;
+            this.btnBrowseDefaultSaveLocation.Click += new System.EventHandler(this.btnBrowseDefaultSaveLocation_Click);
             // 
             // txtSaveLocation
             // 
@@ -380,20 +397,18 @@
             // tbComms
             // 
             this.tbComms.Controls.Add(this.label16);
-            this.tbComms.Controls.Add(this.cboRepeater);
             this.tbComms.Controls.Add(this.cboEmergencyChannel);
             this.tbComms.Controls.Add(this.cboSecondaryChannel);
             this.tbComms.Controls.Add(this.cboPrimaryChannel);
-            this.tbComms.Controls.Add(this.label10);
             this.tbComms.Controls.Add(this.label11);
             this.tbComms.Controls.Add(this.label13);
             this.tbComms.Controls.Add(this.label14);
             this.tbComms.Controls.Add(this.txtICPCallSign);
             this.tbComms.Controls.Add(this.label15);
-            this.tbComms.Location = new System.Drawing.Point(4, 22);
+            this.tbComms.Location = new System.Drawing.Point(4, 33);
             this.tbComms.Name = "tbComms";
             this.tbComms.Padding = new System.Windows.Forms.Padding(3);
-            this.tbComms.Size = new System.Drawing.Size(738, 560);
+            this.tbComms.Size = new System.Drawing.Size(738, 404);
             this.tbComms.TabIndex = 1;
             this.tbComms.Text = "Communications";
             this.tbComms.UseVisualStyleBackColor = true;
@@ -407,21 +422,6 @@
             this.label16.Size = new System.Drawing.Size(295, 29);
             this.label16.TabIndex = 114;
             this.label16.Text = "Default Communications";
-            // 
-            // cboRepeater
-            // 
-            this.cboRepeater.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboRepeater.BackColor = System.Drawing.Color.White;
-            this.cboRepeater.DisplayMember = "SystemWithID";
-            this.cboRepeater.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboRepeater.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboRepeater.FormattingEnabled = true;
-            this.cboRepeater.Location = new System.Drawing.Point(139, 168);
-            this.cboRepeater.Name = "cboRepeater";
-            this.cboRepeater.Size = new System.Drawing.Size(591, 32);
-            this.cboRepeater.TabIndex = 109;
-            this.cboRepeater.ValueMember = "ItemID";
             // 
             // cboEmergencyChannel
             // 
@@ -468,17 +468,6 @@
             this.cboPrimaryChannel.TabIndex = 106;
             this.cboPrimaryChannel.ValueMember = "ItemID";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(9, 171);
-            this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(108, 24);
-            this.label10.TabIndex = 113;
-            this.label10.Text = "Repeater(s)";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -516,7 +505,7 @@
             // 
             this.txtICPCallSign.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtICPCallSign.Location = new System.Drawing.Point(139, 208);
+            this.txtICPCallSign.Location = new System.Drawing.Point(139, 170);
             this.txtICPCallSign.Margin = new System.Windows.Forms.Padding(5);
             this.txtICPCallSign.Name = "txtICPCallSign";
             this.txtICPCallSign.Size = new System.Drawing.Size(591, 29);
@@ -526,7 +515,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(11, 212);
+            this.label15.Location = new System.Drawing.Point(11, 174);
             this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(118, 24);
@@ -535,9 +524,19 @@
             // 
             // tbNetworking
             // 
-            this.tbNetworking.Location = new System.Drawing.Point(4, 22);
+            this.tbNetworking.Controls.Add(this.btnHelpDefaultPort);
+            this.tbNetworking.Controls.Add(this.btnHelpDefaultToServer);
+            this.tbNetworking.Controls.Add(this.numDefaultPortNumber);
+            this.tbNetworking.Controls.Add(this.label26);
+            this.tbNetworking.Controls.Add(this.chkDefaultToServer);
+            this.tbNetworking.Controls.Add(this.label25);
+            this.tbNetworking.Controls.Add(this.label24);
+            this.tbNetworking.Controls.Add(this.btnTrustedDevicesHelp);
+            this.tbNetworking.Controls.Add(this.btnRemoveTrustedDevice);
+            this.tbNetworking.Controls.Add(this.lbTrustedDevices);
+            this.tbNetworking.Location = new System.Drawing.Point(4, 33);
             this.tbNetworking.Name = "tbNetworking";
-            this.tbNetworking.Size = new System.Drawing.Size(738, 560);
+            this.tbNetworking.Size = new System.Drawing.Size(738, 404);
             this.tbNetworking.TabIndex = 2;
             this.tbNetworking.Text = "Networking";
             this.tbNetworking.UseVisualStyleBackColor = true;
@@ -559,8 +558,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(746, 656);
-            this.splitContainer1.SplitterDistance = 586;
+            this.splitContainer1.Size = new System.Drawing.Size(746, 511);
+            this.splitContainer1.SplitterDistance = 441;
             this.splitContainer1.TabIndex = 1;
             // 
             // btnCancel
@@ -576,6 +575,7 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -588,13 +588,138 @@
             this.btnSave.Text = "Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnHelpDefaultPort
+            // 
+            this.btnHelpDefaultPort.BackColor = System.Drawing.Color.Transparent;
+            this.btnHelpDefaultPort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnHelpDefaultPort.Image = ((System.Drawing.Image)(resources.GetObject("btnHelpDefaultPort.Image")));
+            this.btnHelpDefaultPort.Location = new System.Drawing.Point(255, 73);
+            this.btnHelpDefaultPort.Name = "btnHelpDefaultPort";
+            this.btnHelpDefaultPort.Size = new System.Drawing.Size(31, 32);
+            this.btnHelpDefaultPort.TabIndex = 123;
+            this.btnHelpDefaultPort.TabStop = false;
+            this.btnHelpDefaultPort.UseVisualStyleBackColor = false;
+            this.btnHelpDefaultPort.Click += new System.EventHandler(this.btnHelpDefaultPort_Click);
+            // 
+            // btnHelpDefaultToServer
+            // 
+            this.btnHelpDefaultToServer.BackColor = System.Drawing.Color.Transparent;
+            this.btnHelpDefaultToServer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnHelpDefaultToServer.Image = ((System.Drawing.Image)(resources.GetObject("btnHelpDefaultToServer.Image")));
+            this.btnHelpDefaultToServer.Location = new System.Drawing.Point(283, 38);
+            this.btnHelpDefaultToServer.Name = "btnHelpDefaultToServer";
+            this.btnHelpDefaultToServer.Size = new System.Drawing.Size(31, 32);
+            this.btnHelpDefaultToServer.TabIndex = 122;
+            this.btnHelpDefaultToServer.TabStop = false;
+            this.btnHelpDefaultToServer.UseVisualStyleBackColor = false;
+            this.btnHelpDefaultToServer.Click += new System.EventHandler(this.btnHelpDefaultToServer_Click);
+            // 
+            // numDefaultPortNumber
+            // 
+            this.numDefaultPortNumber.Location = new System.Drawing.Point(129, 75);
+            this.numDefaultPortNumber.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numDefaultPortNumber.Name = "numDefaultPortNumber";
+            this.numDefaultPortNumber.Size = new System.Drawing.Size(120, 29);
+            this.numDefaultPortNumber.TabIndex = 121;
+            this.numDefaultPortNumber.Value = new decimal(new int[] {
+            42999,
+            0,
+            0,
+            0});
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(24, 77);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(99, 24);
+            this.label26.TabIndex = 120;
+            this.label26.Text = "Port to use";
+            // 
+            // chkDefaultToServer
+            // 
+            this.chkDefaultToServer.AutoSize = true;
+            this.chkDefaultToServer.Location = new System.Drawing.Point(28, 41);
+            this.chkDefaultToServer.Name = "chkDefaultToServer";
+            this.chkDefaultToServer.Size = new System.Drawing.Size(249, 28);
+            this.chkDefaultToServer.TabIndex = 119;
+            this.chkDefaultToServer.Text = "Always start up as a server";
+            this.chkDefaultToServer.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(8, 9);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(212, 29);
+            this.label25.TabIndex = 118;
+            this.label25.Text = "Network Settings";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(9, 129);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(203, 29);
+            this.label24.TabIndex = 117;
+            this.label24.Text = "Trusted Devices";
+            // 
+            // btnTrustedDevicesHelp
+            // 
+            this.btnTrustedDevicesHelp.BackColor = System.Drawing.Color.Transparent;
+            this.btnTrustedDevicesHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTrustedDevicesHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnTrustedDevicesHelp.Image")));
+            this.btnTrustedDevicesHelp.Location = new System.Drawing.Point(218, 129);
+            this.btnTrustedDevicesHelp.Name = "btnTrustedDevicesHelp";
+            this.btnTrustedDevicesHelp.Size = new System.Drawing.Size(31, 32);
+            this.btnTrustedDevicesHelp.TabIndex = 116;
+            this.btnTrustedDevicesHelp.TabStop = false;
+            this.btnTrustedDevicesHelp.UseVisualStyleBackColor = false;
+            this.btnTrustedDevicesHelp.Click += new System.EventHandler(this.btnTrustedDevicesHelp_Click);
+            // 
+            // btnRemoveTrustedDevice
+            // 
+            this.btnRemoveTrustedDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveTrustedDevice.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_193_circle_empty_remove;
+            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 346);
+            this.btnRemoveTrustedDevice.Name = "btnRemoveTrustedDevice";
+            this.btnRemoveTrustedDevice.Size = new System.Drawing.Size(290, 42);
+            this.btnRemoveTrustedDevice.TabIndex = 115;
+            this.btnRemoveTrustedDevice.Text = "Remove Selected Device(s)";
+            this.btnRemoveTrustedDevice.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRemoveTrustedDevice.UseVisualStyleBackColor = true;
+            this.btnRemoveTrustedDevice.Click += new System.EventHandler(this.btnRemoveTrustedDevice_Click);
+            // 
+            // lbTrustedDevices
+            // 
+            this.lbTrustedDevices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbTrustedDevices.DisplayMember = "DeviceNameAndIP";
+            this.lbTrustedDevices.FormattingEnabled = true;
+            this.lbTrustedDevices.ItemHeight = 24;
+            this.lbTrustedDevices.Location = new System.Drawing.Point(6, 167);
+            this.lbTrustedDevices.Name = "lbTrustedDevices";
+            this.lbTrustedDevices.ScrollAlwaysVisible = true;
+            this.lbTrustedDevices.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 148);
+            this.lbTrustedDevices.TabIndex = 114;
+            this.lbTrustedDevices.ValueMember = "DeviceID";
             // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(746, 656);
+            this.ClientSize = new System.Drawing.Size(746, 511);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -608,10 +733,13 @@
             this.tbFileManagement.PerformLayout();
             this.tbComms.ResumeLayout(false);
             this.tbComms.PerformLayout();
+            this.tbNetworking.ResumeLayout(false);
+            this.tbNetworking.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -650,15 +778,24 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkAutoSave;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox cboRepeater;
         private System.Windows.Forms.ComboBox cboEmergencyChannel;
         private System.Windows.Forms.ComboBox cboSecondaryChannel;
         private System.Windows.Forms.ComboBox cboPrimaryChannel;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtICPCallSign;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnHelpDefaultPort;
+        private System.Windows.Forms.Button btnHelpDefaultToServer;
+        private System.Windows.Forms.NumericUpDown numDefaultPortNumber;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.CheckBox chkDefaultToServer;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button btnTrustedDevicesHelp;
+        private System.Windows.Forms.Button btnRemoveTrustedDevice;
+        private System.Windows.Forms.ListBox lbTrustedDevices;
+        private System.Windows.Forms.FolderBrowserDialog fbdDefaultSave;
     }
 }

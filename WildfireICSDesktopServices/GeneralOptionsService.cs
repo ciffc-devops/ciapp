@@ -94,12 +94,18 @@ namespace WildfireICSDesktopServices
                         Guid BCSARA = new Guid("CC3A9DC9-01A3-4D39-B806-2128B51120BC");
                         _options.ParentOrganizationID = BCSARA;
                     }
+                } else
+                {
+                    _options = new GeneralOptions();
+                    _options.addDefaultOptions();
+                    _options.OptionsLoadedSuccessfully = false;
                 }
             }
             catch (Exception)
             {
                 //MessageBox.Show(ex.Message);
                 _options = new GeneralOptions();
+                _options.addDefaultOptions();
                 _options.OptionsLoadedSuccessfully = false;
                 throw new Exception();
             }
