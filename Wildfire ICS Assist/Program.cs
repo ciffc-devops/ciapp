@@ -28,7 +28,7 @@ namespace Wildfire_ICS_Assist
              equipmentService = new EquipmentService();
              ICAClassLibrary.Globals._equipmentService = equipmentService;
              
-             positionLogService = new PositionLogService();
+             
              networkSendLog = new NetworkSendLog();
             */
 
@@ -38,7 +38,7 @@ namespace Wildfire_ICS_Assist
             pdfExportService = new PDFExportService();
             wfIncidentService = new WFIncidentService();
             WF_ICS_ClassLibrary.Globals.incidentService = wfIncidentService;
-
+            positionLogService = new PositionLogService();
             networkService = new NetworkService();
 
             CurrentTask = new WFIncident();
@@ -68,6 +68,7 @@ namespace Wildfire_ICS_Assist
         private static IGeneralOptionsService _generalOptionsService = null;
         private static IPDFExportService _pdfExportService = null;
         private static IWFIncidentService _wfIncidentService = null;
+        private static IPositionLogService _positionLogService= null;
         private static Icon _programIcon = Properties.Resources.ics_ca_sq_white;
         private static ICSRole _CurrentRole;
         private static int _CurrentOpPeriod;
@@ -86,9 +87,10 @@ namespace Wildfire_ICS_Assist
         public static WFIncident CurrentIncident { get => wfIncidentService.CurrentIncident; set => wfIncidentService.CurrentIncident = value; }
         /*
         public static EquipmentService equipmentService { get => _equipmentService; private set => _equipmentService = value; }
-        public static PositionLogService positionLogService { get => _positionLogService; private set => _positionLogService = value; }
+        
         public static NetworkSendLog networkSendLog { get => _networkSendLog; set => _networkSendLog = value; }
         */
+        public static IPositionLogService positionLogService { get => _positionLogService; private set => _positionLogService = value; }
         public static Icon programIcon { get => _programIcon; private set => _programIcon = value; }
         public static WFIncident CurrentTask { get => wfIncidentService.CurrentIncident; set { wfIncidentService.CurrentIncident = value; } }
         public static ICSRole CurrentRole { get => _CurrentRole; set => _CurrentRole = value; }

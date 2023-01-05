@@ -96,6 +96,7 @@
     <Compile Include="Interfaces\IFileAccessServices.cs" />
     <Compile Include="Interfaces\IGeneralOptionsService.cs" />
     <Compile Include="Interfaces\IPDFExportService.cs" />
+    <Compile Include="Interfaces\IPositionLogService.cs" />
     <Compile Include="Interfaces\ITaskUpdateService.cs" />
     <Compile Include="Interfaces\IWFIncidentService.cs" />
     <Compile Include="Models\Briefing.cs" />

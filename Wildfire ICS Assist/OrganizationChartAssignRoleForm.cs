@@ -66,15 +66,14 @@ namespace Wildfire_ICS_Assist
                   
                     else
                     {
-                        cboSavedMembers.SelectedIndex = 0;
-                        
+                        cboSavedMembers.SelectedIndex = -1;
                         System.Media.SystemSounds.Exclamation.Play();
                         cboSavedMembers.Focus();
                     }
                 }
                 else
                 {
-                    cboSavedMembers.SelectedIndex = 0;
+                    cboSavedMembers.SelectedIndex = -1;
                     
                     //System.Media.SystemSounds.Exclamation.Play();
                     //cboSavedMembers.Focus();

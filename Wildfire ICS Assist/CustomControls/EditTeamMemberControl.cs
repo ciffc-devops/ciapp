@@ -113,7 +113,7 @@ else { txtName.BackColor = Color.LightSkyBlue; }
 
         private void txtPhone_Leave(object sender, EventArgs e)
         {
-            teamMember.Phone= ((TextBox)sender).Text;
+            teamMember.Phone= ((MaskedTextBox)sender).Text;
         }
     }
 }

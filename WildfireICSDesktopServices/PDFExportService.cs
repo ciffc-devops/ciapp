@@ -1061,7 +1061,7 @@ namespace WildfireICSDesktopServices
 
 
 
-                            document.AddAuthor(chart.getNameByRoleName("SAR Manager"));
+                            document.AddAuthor(chart.GetRoleByID(Globals.IncidentCommanderID).IndividualName);
 
                             TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
                             writer.PageEvent = PageEventHandler;

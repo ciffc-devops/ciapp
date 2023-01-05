@@ -57,7 +57,7 @@ namespace WildfireICSDesktopServices
 
                 if (!path.Contains(CurrentTask.IncidentIdentifier))
                 {
-                    path = System.IO.Path.Combine(path, "Task " + CurrentTask.IncidentIdentifier);
+                    path = System.IO.Path.Combine(path, "Incident " + CurrentTask.IncidentIdentifier);
                     System.IO.Directory.CreateDirectory(path);
                 }
 
@@ -82,7 +82,7 @@ namespace WildfireICSDesktopServices
                 path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 path = Path.Combine(path, "CIAPPO");
                 System.IO.Directory.CreateDirectory(path);
-                path = System.IO.Path.Combine(path, "Task " + CurrentTask.IncidentIdentifier);
+                path = System.IO.Path.Combine(path, "Incident " + CurrentTask.IncidentIdentifier);
                 System.IO.Directory.CreateDirectory(path);
 
 

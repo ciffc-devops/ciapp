@@ -55,6 +55,10 @@ namespace Wildfire_ICS_Assist
             displayIncidentDetails();
 
             WireWFIncidentServiceEvents();
+
+            ICSRole defaultRole = (ICSRole)Program.generalOptionsService.GetOptionsValue("DefaultICSRole");
+            if (defaultRole != null && defaultRole.RoleID != Guid.Empty) { cboICSRole.SelectedValue = defaultRole.RoleID; }
+
         }
 
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
@@ -81,6 +85,7 @@ namespace Wildfire_ICS_Assist
         bool incorrectOpAcknowledged = false;
         bool lastSaveSuccessful = true;
         private DateTime lastSuccessfulSaveTime = DateTime.MinValue;
+        bool saveAsPromptShown = false;
 
 
         //These hold a reference to the various forms so that only one of each can be open at a time.
@@ -95,7 +100,10 @@ namespace Wildfire_ICS_Assist
         SavedTeamMembersForm savedTeamMembersForm = null;
 
         CommunicationsListForm communicationsList = null;
+        CommunicationsPlanForm commsPlanForm = null;
         OrganizationalChartForm orgChartForm = null;
+        PositionLogForm _positionLogForm = null;
+        PositionLogAllOutstandingForm _positionLogAllOutstandingForm = null;
 
         /* Event Handlers!*/
 
@@ -110,6 +118,8 @@ namespace Wildfire_ICS_Assist
         {
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
+            Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
+
         }
 
         private void CloseActiveForms()
@@ -122,6 +132,34 @@ namespace Wildfire_ICS_Assist
         private void RemoveActiveForm(Form form)
         {
             if (form != null) { ActiveForms = ActiveForms.Where(o => o.GetType() != form.GetType()).ToList(); }
+        }
+
+        private void setButtonCheckboxes()
+        {
+
+            if (CurrentIncident.hasMeangfulCommsPlan(CurrentOpPeriod)) { btnCommsPlan.Image = Properties.Resources.glyphicons_basic_739_check; communicationsPlanICS205ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            else { btnCommsPlan.Image = null; communicationsPlanICS205ToolStripMenuItem.Image = null; }
+
+            if (CurrentIncident.hasMeaningfulOrgChart(CurrentOpPeriod)) { btnPrintOrgChart.Image = Properties.Resources.glyphicons_basic_739_check; organizationChartICS207ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            else { btnPrintOrgChart.Image = null; organizationChartICS207ToolStripMenuItem.Image = null; }
+
+            if (CurrentIncident.hasMeaningfulMedicalPlan(CurrentOpPeriod)) { btnMedicalPlan.Image = Properties.Resources.glyphicons_basic_739_check; medicalPlanICS206ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            else { btnMedicalPlan.Image = null; medicalPlanICS206ToolStripMenuItem.Image = null; }
+
+
+            if (CurrentIncident.hasMeaningfulObjectives(CurrentOpPeriod)) { btnIncidentObjectives.Image = Properties.Resources.glyphicons_basic_739_check; incidentObjectivesICS202ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            else { btnIncidentObjectives.Image = null; incidentObjectivesICS202ToolStripMenuItem.Image = null; }
+
+
+            
+            if (CurrentIncident.hasAnySafetyPlans(CurrentOpPeriod)) { btnSafetyPlans.Image = Properties.Resources.glyphicons_basic_739_check; safetyMessageICS208ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            else { btnSafetyPlans.Image = null; safetyMessageICS208ToolStripMenuItem.Image = null; }
+
+
+
+
+            //                    
+
         }
 
         private void SetVersionNumber()
@@ -138,6 +176,9 @@ namespace Wildfire_ICS_Assist
         {
             collapsiblePanels.Clear();
             collapsiblePanels.Add(cpIncidentActionPlan);
+            collapsiblePanels.Add(cpPlanning);
+            collapsiblePanels.Add(cpOperations);
+            collapsiblePanels.Add(cpLogistics);
         }
 
         private void collapseAllPanels()
@@ -422,11 +463,23 @@ namespace Wildfire_ICS_Assist
             if (!proceed) { e.Cancel = true; }
         }
 
+        private void buildICSRoleDropdown()
+        {
+            ICSRole role = Program.CurrentRole.Clone();
+
+            cboICSRole.DataSource = null;
+            cboICSRole.DataSource = CurrentOrgChart.AllRoles;
+            cboICSRole.DisplayMember = "RoleNameForDropdown";
+            cboICSRole.ValueMember = "RoleID";
+            if (role != null && CurrentOrgChart.AllRoles.Any(o=>o.RoleID == role.RoleID)) { cboICSRole.SelectedValue = role.RoleID; }
+
+        }
+
         private void displayIncidentDetails()
         {
             //cboICSRole.Items.Clear();
             CurrentIncident.createOrgChartAsNeeded(CurrentOpPeriod);
-            cboICSRole.DataSource = CurrentOrgChart.AllRoles;
+            buildICSRoleDropdown();
 
 
             if (!string.IsNullOrEmpty(CurrentIncident.ICPCallSign)) { txtICPCallsign.Text = CurrentIncident.ICPCallSign; }
@@ -448,6 +501,7 @@ namespace Wildfire_ICS_Assist
 
 
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { tmrAutoSave.Enabled = Program.generalOptionsService.GetOptionsBoolValue("AutoSave"); }
+            setButtonCheckboxes();
 
         }
 
@@ -464,12 +518,8 @@ namespace Wildfire_ICS_Assist
                 {
                     CommandStaffRoles.Add(role.RoleID);
                 }
-                
 
-                //pnlTeamAssignments.BackColor = Color.White;
-                pnlPlanning.BackColor = Color.White;
-                pnlLogistics.BackColor = Color.White;
-
+                foreach (CollapsiblePanel panel in collapsiblePanels) { panel.BackColor = Color.White; }
                 collapseAllPanels();
                 //resizeGroup("Assignments", false, true);
 
@@ -481,16 +531,19 @@ namespace Wildfire_ICS_Assist
                 else if (Program.CurrentRole.BranchID == Globals.IncidentCommanderID)
                 {
                     pnlTaskInfo.BackColor = Color.LimeGreen;
-                //    pnlCommandTeam.BackColor = Color.LimeGreen;
+                    cpIncidentActionPlan.Expand();
+                    //    pnlCommandTeam.BackColor = Color.LimeGreen;
                 }
                 else if (Program.CurrentRole.BranchID == Globals.OpsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Orange;
+                    cpOperations.Expand();
                     //resizeGroup("Ops", false, true);
                 }
                 else if (Program.CurrentRole.BranchID == Globals.PlanningChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.CornflowerBlue;
+                    cpPlanning.Expand();
 /*
                     pnlIAP.BackColor = Color.CornflowerBlue;
                     pnlCommandTeam.BackColor = Color.CornflowerBlue;
@@ -502,6 +555,7 @@ namespace Wildfire_ICS_Assist
                 else if (Program.CurrentRole.BranchID == Globals.LogisticsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Khaki;
+                    cpLogistics.Expand();
                     /*
                     pnlCommsPlan.BackColor = Color.Khaki;
                     pnlIAP.BackColor = Color.Khaki;
@@ -524,31 +578,52 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void TriggerAutoSave()
+        {
+            if (!saveAsPromptShown)
+            {
+                if (Program.generalOptionsService.GetOptionsBoolValue("AutoSave") && lastSaveSuccessful) { if (initialDetailsSet(false, false)) { if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { saveFile(false, false); } } }
+            }
+
+        }
+
         private void Program_OrgChartChanged(OrganizationChartEventArgs e)
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
-                cboICSRole.DataSource = null;
-                cboICSRole.DataSource = CurrentOrgChart.AllRoles;
-                cboICSRole.DisplayMember = "RoleNameForDropdown";
-                cboICSRole.ValueMember = "RoleID";
-                if (CurrentOrgChart.AllRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID)) { cboICSRole.SelectedValue = Program.CurrentRole.RoleID; }
+                buildICSRoleDropdown();
+                setButtonCheckboxes();
+
             }
+            TriggerAutoSave();
+
         }
         private void Program_ICSRoleChanged(ICSRoleEventArgs e)
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
+                buildICSRoleDropdown();
+                setButtonCheckboxes();
 
-                cboICSRole.DataSource = null;
-                cboICSRole.DataSource = CurrentOrgChart.AllRoles;
-                cboICSRole.DisplayMember = "RoleNameForDropdown";
-                cboICSRole.ValueMember = "RoleID";
-                if (CurrentOrgChart.AllRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID)) { cboICSRole.SelectedValue = Program.CurrentRole.RoleID; }
 
             }
-        }
+            TriggerAutoSave();
 
+        }
+        private void Program_PositionLogChanged(PositionLogEventArgs e)
+        {
+            if (!PauseNetworkSend && CurrentIncident.allPositionLogEntries.Any(o => o.LogID == e.item.LogID) && (ThisMachineIsServer || ThisMachineIsClient))
+            {
+                //don't send it again if we just received it
+                /*
+                if (!Program.networkSendLog.ObjectAlreadySent(e.item))
+                {
+                    SendNetworkObject(e.item);
+                }
+                */
+            }
+            TriggerAutoSave();
+        }
 
 
         private bool initialDetailsSet(bool checkOpPeriod = true, bool promptOnerror = true)
@@ -1010,12 +1085,12 @@ namespace Wildfire_ICS_Assist
 
         private void cboICSRole_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cboICSRole.SelectedItem != null)
+            if (cboICSRole.SelectedItem != null)
             {
-                //Program.CurrentRole = (ICSRole)cboICSRole.SelectedItem;
-                
+                Program.CurrentRole = (ICSRole)(cboICSRole.SelectedItem);
+                DisplayCurrentICSRole();
             }
-            
+
         }
 
         private void organizationChartICS207ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1055,13 +1130,149 @@ namespace Wildfire_ICS_Assist
 
         }
 
+
+        private void openCommsPlan()
+        {
+            if (initialDetailsSet())
+            {
+                if (null == commsPlanForm)
+                {
+                    commsPlanForm = new CommunicationsPlanForm();
+                    commsPlanForm.FormClosed += CommunicationsPlanForm_Closed;
+                    commsPlanForm.Show(this);
+                    ActiveForms.Add(commsPlanForm);
+                }
+
+                commsPlanForm.BringToFront();
+            }
+
+
+
+        }
+        void CommunicationsPlanForm_Closed(object sender, FormClosedEventArgs e)
+        {
+
+            RemoveActiveForm(commsPlanForm);
+            commsPlanForm = null;
+
+        }
+
         private void cboICSRole_Leave(object sender, EventArgs e)
         {
+            /*
             if(cboICSRole.SelectedValue != null)
             {
                 Program.CurrentRole = (ICSRole)(cboICSRole.SelectedItem);
                 DisplayCurrentICSRole();
+            }*/
+        }
+
+        private void btnAddToPositionLog_Click(object sender, EventArgs e)
+        {
+            if (initialDetailsSet())
+            {
+                PositionLogEntry entry = new PositionLogEntry();
+                entry.DateCreated = DateTime.Now;
+                entry.TimeDue = CurrentIncident.getOpPeriodEnd(CurrentOpPeriod);
+                entry.ReminderTime = entry.TimeDue;
+                entry.IsInfoOnly = true;
+                entry.Role = Program.CurrentRole;
+                entry.OpPeriod = CurrentOpPeriod;
+
+                PositionLogAddForm _positionLogAddForm = new PositionLogAddForm();
+                _positionLogAddForm.thisEntry = entry;
+                DialogResult dr = _positionLogAddForm.ShowDialog(this);
+                if (dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertPositionLogEntry(entry);
+
+
+                }
             }
+        }
+
+
+        private void OpenPositionLog()
+        {
+            if (initialDetailsSet())
+            {
+                if (_positionLogForm == null)
+                {
+                    _positionLogForm = new PositionLogForm();
+                    _positionLogForm.FormClosed += new FormClosedEventHandler(PositionLogForm_Closed);
+                    ActiveForms.Add(_positionLogForm);
+                    _positionLogForm.Show(this);
+                }
+
+                _positionLogForm.BringToFront();
+            }
+        }
+        private void btnViewPositionLog_Click(object sender, EventArgs e)
+        {
+            OpenPositionLog();
+        }
+        void PositionLogForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_positionLogForm);
+            _positionLogForm = null;
+
+
+        }
+        private void btnOutstandingLogItems_Click(object sender, EventArgs e)
+        {
+            if (initialDetailsSet())
+            {
+                if (_positionLogAllOutstandingForm == null)
+                {
+                    _positionLogAllOutstandingForm = new PositionLogAllOutstandingForm();
+                    _positionLogAllOutstandingForm.FormClosed += new FormClosedEventHandler(PositionLogOutstandingForm_Closed);
+                    ActiveForms.Add(_positionLogAllOutstandingForm);
+                    _positionLogAllOutstandingForm.Show(this);
+                }
+                _positionLogAllOutstandingForm.BringToFront();
+            }
+        }
+
+        void PositionLogOutstandingForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_positionLogAllOutstandingForm);
+            _positionLogAllOutstandingForm = null;
+
+
+        }
+
+        private void positionLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPositionLog();
+        }
+
+        private void positionLogToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenPositionLog();
+        }
+
+        private void positionLogToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            OpenPositionLog();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OptionsForm editOptions = new OptionsForm())
+            {
+                DialogResult result = editOptions.ShowDialog();
+                
+            }
+        }
+
+        private void communicationsPlanICS205ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openCommsPlan();
+        }
+
+        private void btnCommsPlan_Click(object sender, EventArgs e)
+        {
+            openCommsPlan();
         }
     }
 }

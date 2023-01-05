@@ -16,6 +16,7 @@ namespace Wildfire_ICS_Assist
     {
         public CommunicationsPlanForm()
         {
+            this.Icon = Program.programIcon;
             InitializeComponent();
         }
 

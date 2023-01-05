@@ -276,6 +276,36 @@
     <Compile Include="OrganizationChartAssignRoleForm.Designer.cs">
       <DependentUpon>OrganizationChartAssignRoleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PositionLogAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogAddForm.Designer.cs">
+      <DependentUpon>PositionLogAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogAllOutstandingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogAllOutstandingForm.Designer.cs">
+      <DependentUpon>PositionLogAllOutstandingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogForm.Designer.cs">
+      <DependentUpon>PositionLogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogReminderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogReminderForm.Designer.cs">
+      <DependentUpon>PositionLogReminderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogViewDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogViewDetailsForm.Designer.cs">
+      <DependentUpon>PositionLogViewDetailsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilityForms\AboutProgramForm.cs">
@@ -377,6 +407,21 @@
     <EmbeddedResource Include="OrganizationChartAssignRoleForm.resx">
       <DependentUpon>OrganizationChartAssignRoleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogAddForm.resx">
+      <DependentUpon>PositionLogAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogAllOutstandingForm.resx">
+      <DependentUpon>PositionLogAllOutstandingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogForm.resx">
+      <DependentUpon>PositionLogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogReminderForm.resx">
+      <DependentUpon>PositionLogReminderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogViewDetailsForm.resx">
+      <DependentUpon>PositionLogViewDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -397,6 +442,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-207-WF-Organization-Chart.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-214-WF-Activity-Log-Supplemental.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-214-WF-Activity-Log.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS205A-CommunicationsList.pdf">
