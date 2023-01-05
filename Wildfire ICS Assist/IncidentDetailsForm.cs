@@ -818,7 +818,7 @@ namespace Wildfire_ICS_Assist
                         path = Path.Combine(path, "CIAPPO");
 
                     }
-                    path = Path.Combine(path, "Incident " + CurrentIncident.TaskNumber + " - " + CurrentIncident.TaskName);
+                    path = Path.Combine(path, "Incident " + CurrentIncident.IncidentIdentifier);
                     try
                     {
                         System.IO.Directory.CreateDirectory(path);
@@ -834,7 +834,7 @@ namespace Wildfire_ICS_Assist
                     {
                         svdTaskFile.InitialDirectory = path;
                         svdTaskFile.DefaultExt = "xml";
-                        svdTaskFile.FileName = "ICS Forms - Incident " + CurrentIncident.TaskNumber + " - " + CurrentIncident.TaskName + ".xml";
+                        svdTaskFile.FileName = "ICS Forms - Incident " + CurrentIncident.IncidentIdentifier + ".xml";
                         svdTaskFile.Filter = "Extensible Markup Language|*.xml";
                         svdTaskFile.Title = "Save Incident Information";
                         DialogResult sv = svdTaskFile.ShowDialog();
@@ -1273,6 +1273,11 @@ namespace Wildfire_ICS_Assist
         private void btnCommsPlan_Click(object sender, EventArgs e)
         {
             openCommsPlan();
+        }
+
+        private void incidentObjectivesICS202ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

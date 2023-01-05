@@ -59,8 +59,9 @@ namespace Wildfire_ICS_Assist.CustomControls
             this.Height = CollapsedHeight;
             this.Width = CollapsedWidth;
 
+            this.BackColor = Color.FromArgb(219, 218, 204);
+            btnExpandCollapse.BackColor = Color.White;
 
-            
             if (!CollapseLeft && !CurrentlyCollapsed)
             {
                 int collapsedX = currentX;
@@ -87,7 +88,10 @@ namespace Wildfire_ICS_Assist.CustomControls
 
             this.Height = ExpandedHeight;
             this.Width = ExpandedWidth;
+            this.BackColor = Color.White;
+
             btnExpandCollapse.BackgroundImage = Properties.Resources.glyphicons_basic_222_chevron_up_3x;
+            btnExpandCollapse.BackColor = Color.FromArgb(219, 218, 204); 
 
             if (!CollapseLeft && CurrentlyCollapsed)
             {

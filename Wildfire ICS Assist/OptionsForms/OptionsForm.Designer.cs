@@ -80,6 +80,9 @@
             this.btnRemoveTrustedDevice = new System.Windows.Forms.Button();
             this.lbTrustedDevices = new System.Windows.Forms.ListBox();
             this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
+            this.rbNumbersOrLetters = new System.Windows.Forms.RadioButton();
+            this.rbNumbersOnly = new System.Windows.Forms.RadioButton();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             this.tbFileManagement.SuspendLayout();
@@ -110,6 +113,9 @@
             // tbGeneral
             // 
             this.tbGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.tbGeneral.Controls.Add(this.rbNumbersOrLetters);
+            this.tbGeneral.Controls.Add(this.rbNumbersOnly);
+            this.tbGeneral.Controls.Add(this.label19);
             this.tbGeneral.Controls.Add(this.label28);
             this.tbGeneral.Controls.Add(this.cboDefaultICSRole);
             this.tbGeneral.Controls.Add(this.label3);
@@ -120,15 +126,17 @@
             this.tbGeneral.Size = new System.Drawing.Size(738, 404);
             this.tbGeneral.TabIndex = 0;
             this.tbGeneral.Text = "General";
+            this.tbGeneral.Click += new System.EventHandler(this.tbGeneral_Click);
             // 
             // label28
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(13, 47);
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(19, 63);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(145, 24);
+            this.label28.Size = new System.Drawing.Size(242, 32);
             this.label28.TabIndex = 113;
             this.label28.Text = "Default ICS Role";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cboDefaultICSRole
             // 
@@ -143,19 +151,20 @@
             "Degrees Decimal Minutes",
             "Degrees Minutes Seconds",
             "MGRS"});
-            this.cboDefaultICSRole.Location = new System.Drawing.Point(209, 44);
+            this.cboDefaultICSRole.Location = new System.Drawing.Point(267, 63);
             this.cboDefaultICSRole.Name = "cboDefaultICSRole";
-            this.cboDefaultICSRole.Size = new System.Drawing.Size(521, 32);
+            this.cboDefaultICSRole.Size = new System.Drawing.Size(463, 32);
             this.cboDefaultICSRole.TabIndex = 114;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 12);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(19, 25);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(140, 24);
+            this.label3.Size = new System.Drawing.Size(242, 32);
             this.label3.TabIndex = 99;
             this.label3.Text = "Position Format";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cboPositionFormat
             // 
@@ -169,9 +178,9 @@
             "Degrees Decimal Minutes",
             "Degrees Minutes Seconds",
             "MGRS"});
-            this.cboPositionFormat.Location = new System.Drawing.Point(209, 6);
+            this.cboPositionFormat.Location = new System.Drawing.Point(267, 25);
             this.cboPositionFormat.Name = "cboPositionFormat";
-            this.cboPositionFormat.Size = new System.Drawing.Size(521, 32);
+            this.cboPositionFormat.Size = new System.Drawing.Size(463, 32);
             this.cboPositionFormat.TabIndex = 100;
             // 
             // tbFileManagement
@@ -217,29 +226,31 @@
             // 
             this.txtBackupLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBackupLocation.Location = new System.Drawing.Point(212, 214);
+            this.txtBackupLocation.Location = new System.Drawing.Point(228, 214);
             this.txtBackupLocation.Name = "txtBackupLocation";
             this.txtBackupLocation.ReadOnly = true;
-            this.txtBackupLocation.Size = new System.Drawing.Size(408, 29);
+            this.txtBackupLocation.Size = new System.Drawing.Size(392, 29);
             this.txtBackupLocation.TabIndex = 157;
             // 
             // label34
             // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(12, 217);
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(7, 217);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(149, 24);
+            this.label34.Size = new System.Drawing.Size(215, 24);
             this.label34.TabIndex = 156;
             this.label34.Text = "Backup Location";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(14, 314);
+            this.label6.Location = new System.Drawing.Point(7, 314);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(194, 80);
             this.label6.TabIndex = 155;
             this.label6.Text = "Separate each folder name with a comma\r\ne.g. GPX, Maps, Photos";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnAutomaticSubFoldersHelp
             // 
@@ -258,25 +269,26 @@
             // 
             this.txtAutomaticSubFolders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAutomaticSubFolders.Location = new System.Drawing.Point(212, 287);
+            this.txtAutomaticSubFolders.Location = new System.Drawing.Point(228, 287);
             this.txtAutomaticSubFolders.Multiline = true;
             this.txtAutomaticSubFolders.Name = "txtAutomaticSubFolders";
-            this.txtAutomaticSubFolders.Size = new System.Drawing.Size(476, 80);
+            this.txtAutomaticSubFolders.Size = new System.Drawing.Size(460, 80);
             this.txtAutomaticSubFolders.TabIndex = 153;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 290);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(7, 290);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(194, 24);
+            this.label5.Size = new System.Drawing.Size(215, 24);
             this.label5.TabIndex = 152;
             this.label5.Text = "Automatic Sub-folders";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(235, 179);
+            this.label32.Location = new System.Drawing.Point(251, 179);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(102, 24);
             this.label32.TabIndex = 151;
@@ -291,7 +303,7 @@
             "1 hour",
             "2 hour",
             "4 hour"});
-            this.cboAutoBackupFrequency.Location = new System.Drawing.Point(343, 176);
+            this.cboAutoBackupFrequency.Location = new System.Drawing.Point(359, 176);
             this.cboAutoBackupFrequency.Name = "cboAutoBackupFrequency";
             this.cboAutoBackupFrequency.Size = new System.Drawing.Size(121, 32);
             this.cboAutoBackupFrequency.TabIndex = 150;
@@ -300,7 +312,7 @@
             // 
             this.btnAutoBackupHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAutoBackupHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnAutoBackupHelp.Image")));
-            this.btnAutoBackupHelp.Location = new System.Drawing.Point(554, 137);
+            this.btnAutoBackupHelp.Location = new System.Drawing.Point(570, 137);
             this.btnAutoBackupHelp.Name = "btnAutoBackupHelp";
             this.btnAutoBackupHelp.Size = new System.Drawing.Size(36, 36);
             this.btnAutoBackupHelp.TabIndex = 149;
@@ -310,17 +322,18 @@
             // 
             // label31
             // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(12, 140);
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(7, 140);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(170, 24);
+            this.label31.Size = new System.Drawing.Size(215, 24);
             this.label31.TabIndex = 147;
             this.label31.Text = "Automatic Backups";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // chkAutomaticBackups
             // 
             this.chkAutomaticBackups.AutoSize = true;
-            this.chkAutomaticBackups.Location = new System.Drawing.Point(208, 142);
+            this.chkAutomaticBackups.Location = new System.Drawing.Point(228, 142);
             this.chkAutomaticBackups.Name = "chkAutomaticBackups";
             this.chkAutomaticBackups.Size = new System.Drawing.Size(342, 28);
             this.chkAutomaticBackups.TabIndex = 148;
@@ -329,16 +342,17 @@
             // 
             // label27
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(12, 97);
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(7, 97);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(186, 24);
+            this.label27.Size = new System.Drawing.Size(215, 24);
             this.label27.TabIndex = 145;
             this.label27.Text = "Prompt for initial save";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // chkPromptForInitialSave
             // 
-            this.chkPromptForInitialSave.Location = new System.Drawing.Point(212, 84);
+            this.chkPromptForInitialSave.Location = new System.Drawing.Point(228, 84);
             this.chkPromptForInitialSave.Name = "chkPromptForInitialSave";
             this.chkPromptForInitialSave.Size = new System.Drawing.Size(410, 52);
             this.chkPromptForInitialSave.TabIndex = 146;
@@ -348,7 +362,7 @@
             // btnBrowseDefaultSaveLocation
             // 
             this.btnBrowseDefaultSaveLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseDefaultSaveLocation.Location = new System.Drawing.Point(521, 46);
+            this.btnBrowseDefaultSaveLocation.Location = new System.Drawing.Point(537, 46);
             this.btnBrowseDefaultSaveLocation.Name = "btnBrowseDefaultSaveLocation";
             this.btnBrowseDefaultSaveLocation.Size = new System.Drawing.Size(99, 36);
             this.btnBrowseDefaultSaveLocation.TabIndex = 144;
@@ -360,7 +374,7 @@
             // 
             this.txtSaveLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSaveLocation.Location = new System.Drawing.Point(212, 49);
+            this.txtSaveLocation.Location = new System.Drawing.Point(228, 49);
             this.txtSaveLocation.Name = "txtSaveLocation";
             this.txtSaveLocation.ReadOnly = true;
             this.txtSaveLocation.Size = new System.Drawing.Size(303, 29);
@@ -368,26 +382,28 @@
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 52);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(7, 52);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(190, 24);
+            this.label4.Size = new System.Drawing.Size(215, 24);
             this.label4.TabIndex = 141;
             this.label4.Text = "Default Save Location";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 13);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(7, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 24);
+            this.label2.Size = new System.Drawing.Size(215, 24);
             this.label2.TabIndex = 140;
             this.label2.Text = "Autosave";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // chkAutoSave
             // 
             this.chkAutoSave.AutoSize = true;
-            this.chkAutoSave.Location = new System.Drawing.Point(208, 15);
+            this.chkAutoSave.Location = new System.Drawing.Point(228, 15);
             this.chkAutoSave.Name = "chkAutoSave";
             this.chkAutoSave.Size = new System.Drawing.Size(256, 28);
             this.chkAutoSave.TabIndex = 143;
@@ -432,9 +448,9 @@
             this.cboEmergencyChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEmergencyChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboEmergencyChannel.FormattingEnabled = true;
-            this.cboEmergencyChannel.Location = new System.Drawing.Point(139, 130);
+            this.cboEmergencyChannel.Location = new System.Drawing.Point(166, 130);
             this.cboEmergencyChannel.Name = "cboEmergencyChannel";
-            this.cboEmergencyChannel.Size = new System.Drawing.Size(591, 32);
+            this.cboEmergencyChannel.Size = new System.Drawing.Size(564, 32);
             this.cboEmergencyChannel.TabIndex = 108;
             this.cboEmergencyChannel.ValueMember = "ItemID";
             // 
@@ -447,9 +463,9 @@
             this.cboSecondaryChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSecondaryChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboSecondaryChannel.FormattingEnabled = true;
-            this.cboSecondaryChannel.Location = new System.Drawing.Point(139, 92);
+            this.cboSecondaryChannel.Location = new System.Drawing.Point(166, 92);
             this.cboSecondaryChannel.Name = "cboSecondaryChannel";
-            this.cboSecondaryChannel.Size = new System.Drawing.Size(591, 32);
+            this.cboSecondaryChannel.Size = new System.Drawing.Size(564, 32);
             this.cboSecondaryChannel.TabIndex = 107;
             this.cboSecondaryChannel.ValueMember = "ItemID";
             // 
@@ -462,65 +478,66 @@
             this.cboPrimaryChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPrimaryChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboPrimaryChannel.FormattingEnabled = true;
-            this.cboPrimaryChannel.Location = new System.Drawing.Point(139, 54);
+            this.cboPrimaryChannel.Location = new System.Drawing.Point(166, 54);
             this.cboPrimaryChannel.Name = "cboPrimaryChannel";
-            this.cboPrimaryChannel.Size = new System.Drawing.Size(591, 32);
+            this.cboPrimaryChannel.Size = new System.Drawing.Size(564, 32);
             this.cboPrimaryChannel.TabIndex = 106;
             this.cboPrimaryChannel.ValueMember = "ItemID";
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(9, 133);
             this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(108, 24);
+            this.label11.Size = new System.Drawing.Size(149, 24);
             this.label11.TabIndex = 112;
             this.label11.Text = "Emergency";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(9, 97);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(101, 24);
+            this.label13.Size = new System.Drawing.Size(149, 24);
             this.label13.TabIndex = 111;
             this.label13.Text = "Secondary";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(9, 57);
             this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(107, 24);
+            this.label14.Size = new System.Drawing.Size(149, 24);
             this.label14.TabIndex = 110;
             this.label14.Text = "Primary Ch.";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtICPCallSign
             // 
             this.txtICPCallSign.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtICPCallSign.Location = new System.Drawing.Point(139, 170);
+            this.txtICPCallSign.Location = new System.Drawing.Point(166, 170);
             this.txtICPCallSign.Margin = new System.Windows.Forms.Padding(5);
             this.txtICPCallSign.Name = "txtICPCallSign";
-            this.txtICPCallSign.Size = new System.Drawing.Size(591, 29);
+            this.txtICPCallSign.Size = new System.Drawing.Size(564, 29);
             this.txtICPCallSign.TabIndex = 95;
             this.txtICPCallSign.Text = "BASE";
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(11, 174);
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(9, 174);
             this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(118, 24);
+            this.label15.Size = new System.Drawing.Size(149, 24);
             this.label15.TabIndex = 94;
             this.label15.Text = "ICP Call Sign";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbNetworking
             // 
@@ -595,7 +612,7 @@
             this.btnHelpDefaultPort.BackColor = System.Drawing.Color.Transparent;
             this.btnHelpDefaultPort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnHelpDefaultPort.Image = ((System.Drawing.Image)(resources.GetObject("btnHelpDefaultPort.Image")));
-            this.btnHelpDefaultPort.Location = new System.Drawing.Point(255, 73);
+            this.btnHelpDefaultPort.Location = new System.Drawing.Point(264, 73);
             this.btnHelpDefaultPort.Name = "btnHelpDefaultPort";
             this.btnHelpDefaultPort.Size = new System.Drawing.Size(31, 32);
             this.btnHelpDefaultPort.TabIndex = 123;
@@ -618,7 +635,7 @@
             // 
             // numDefaultPortNumber
             // 
-            this.numDefaultPortNumber.Location = new System.Drawing.Point(129, 75);
+            this.numDefaultPortNumber.Location = new System.Drawing.Point(138, 75);
             this.numDefaultPortNumber.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -636,9 +653,10 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(24, 77);
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(22, 77);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(99, 24);
+            this.label26.Size = new System.Drawing.Size(110, 24);
             this.label26.TabIndex = 120;
             this.label26.Text = "Port to use";
             // 
@@ -665,10 +683,10 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(9, 129);
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(9, 137);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(203, 29);
+            this.label24.Size = new System.Drawing.Size(161, 24);
             this.label24.TabIndex = 117;
             this.label24.Text = "Trusted Devices";
             // 
@@ -677,7 +695,7 @@
             this.btnTrustedDevicesHelp.BackColor = System.Drawing.Color.Transparent;
             this.btnTrustedDevicesHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnTrustedDevicesHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnTrustedDevicesHelp.Image")));
-            this.btnTrustedDevicesHelp.Location = new System.Drawing.Point(218, 129);
+            this.btnTrustedDevicesHelp.Location = new System.Drawing.Point(176, 133);
             this.btnTrustedDevicesHelp.Name = "btnTrustedDevicesHelp";
             this.btnTrustedDevicesHelp.Size = new System.Drawing.Size(31, 32);
             this.btnTrustedDevicesHelp.TabIndex = 116;
@@ -710,9 +728,41 @@
             this.lbTrustedDevices.Name = "lbTrustedDevices";
             this.lbTrustedDevices.ScrollAlwaysVisible = true;
             this.lbTrustedDevices.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 148);
+            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 172);
             this.lbTrustedDevices.TabIndex = 114;
             this.lbTrustedDevices.ValueMember = "DeviceID";
+            // 
+            // rbNumbersOrLetters
+            // 
+            this.rbNumbersOrLetters.AutoSize = true;
+            this.rbNumbersOrLetters.Location = new System.Drawing.Point(468, 108);
+            this.rbNumbersOrLetters.Name = "rbNumbersOrLetters";
+            this.rbNumbersOrLetters.Size = new System.Drawing.Size(195, 28);
+            this.rbNumbersOrLetters.TabIndex = 117;
+            this.rbNumbersOrLetters.Text = "Allow All Characters";
+            this.rbNumbersOrLetters.UseVisualStyleBackColor = true;
+            // 
+            // rbNumbersOnly
+            // 
+            this.rbNumbersOnly.AutoSize = true;
+            this.rbNumbersOnly.Checked = true;
+            this.rbNumbersOnly.Location = new System.Drawing.Point(267, 108);
+            this.rbNumbersOnly.Name = "rbNumbersOnly";
+            this.rbNumbersOnly.Size = new System.Drawing.Size(195, 28);
+            this.rbNumbersOnly.TabIndex = 116;
+            this.rbNumbersOnly.TabStop = true;
+            this.rbNumbersOnly.Text = "Only allow numbers";
+            this.rbNumbersOnly.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(19, 104);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(242, 32);
+            this.label19.TabIndex = 115;
+            this.label19.Text = "Incident Number Format";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // OptionsForm
             // 
@@ -797,5 +847,8 @@
         private System.Windows.Forms.Button btnRemoveTrustedDevice;
         private System.Windows.Forms.ListBox lbTrustedDevices;
         private System.Windows.Forms.FolderBrowserDialog fbdDefaultSave;
+        private System.Windows.Forms.RadioButton rbNumbersOrLetters;
+        private System.Windows.Forms.RadioButton rbNumbersOnly;
+        private System.Windows.Forms.Label label19;
     }
 }

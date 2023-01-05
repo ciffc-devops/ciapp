@@ -60,6 +60,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 cboDefaultICSRole.SelectedValue = options.DefaultICSRole.RoleID;
             }
             else { cboDefaultICSRole.SelectedIndex = 0; }
+            rbNumbersOnly.Checked = !options.AllowStringTaskNumber; rbNumbersOrLetters.Checked = !rbNumbersOnly.Checked;
 
             //File Management
             chkAutoSave.Checked = options.AutoSave;
@@ -133,6 +134,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     //general
                     if (cboPositionFormat.SelectedItem != null) { options.PositionFormat = cboPositionFormat.SelectedItem.ToString(); }
                     options.DefaultICSRole = (ICSRole)cboDefaultICSRole.SelectedItem;
+                    options.AllowStringTaskNumber = !rbNumbersOnly.Checked;
 
                     //File Management
                     options.AutoSave = chkAutoSave.Checked;
@@ -303,6 +305,11 @@ namespace Wildfire_ICS_Assist.OptionsForms
             {
                 txtBackupLocation.Text = fbdDefaultSave.SelectedPath;
             }
+
+        }
+
+        private void tbGeneral_Click(object sender, EventArgs e)
+        {
 
         }
     }
