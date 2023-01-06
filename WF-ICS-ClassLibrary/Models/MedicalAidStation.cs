@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
-    public class MedicalAidStation
+    public class MedicalAidStation : ICloneable
     {
         [ProtoMember(1)] private Guid _AidStationID;
         [ProtoMember(2)] private string _Name;
         [ProtoMember(3)] private string _Location;
         [ProtoMember(4)] private string _ContactNumber;
         [ProtoMember(5)] private bool _ParamedicsAvailable;
+        //not currently used
         [ProtoMember(6)] private bool _OFA1;
         [ProtoMember(7)] private bool _OFA2;
         [ProtoMember(8)] private bool _OFA3;
@@ -38,6 +39,13 @@ namespace WF_ICS_ClassLibrary.Models
         public bool OFA3 { get => _OFA3; set => _OFA3 = value; }
         public bool ALS { get => _ALS; set => _ALS = value; }
         public bool FirstResponder { get => _FirstResponder; set => _FirstResponder = value; }
-
+        public MedicalAidStation Clone()
+        {
+            return this.MemberwiseClone() as MedicalAidStation;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
     }
 }

@@ -115,6 +115,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         // [ProtoMember(33)] private List<TaskUserAccess> _taskUsers;
         [ProtoMember(34)] private List<OperationalPeriod> _AllOperationalPeriods;
         [ProtoMember(35)] private bool _IsTraining;
+        [ProtoMember(36)] private List<GeneralMessage> _AllGeneralMessages;
         // [ProtoMember(36)] private List<AssignmentDebrief> _allAssignmentDebriefs = new List<AssignmentDebrief>();
         // [ProtoMember(37)] private List<Clue> _allClues = new List<Clue>();
         // [ProtoMember(38)] private List<MapSegment> _allMapSegments = new List<MapSegment>();
@@ -209,7 +210,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public string currentFilePath { get => _currentFilePath; set => _currentFilePath = value; }
 
 
-        public string SARManager(int Ops) { return this.getNameByRoleName(Ops, "SAR Manager"); }
+        public string IncidentCommander(int Ops) { return this.getNameByRoleID(Ops, Globals.IncidentCommanderID); }
         public string PlansChief(int Ops) { return this.getNameByRoleName(Ops, "Planning Section Chief"); }
         public string OpsChief(int Ops) { return this.getNameByRoleName(Ops, "Operations Section Chief"); }
         public string LogisticsChief(int Ops) { return this.getNameByRoleName(Ops, "Logistics Section Chief"); }
@@ -232,6 +233,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<CommsLogEntry> allCommsLogEntries { get => _allCommsLogEntries; set => _allCommsLogEntries = value; }
         public string DocumentPath { get => _DocumentPath; set => _DocumentPath = value; }
         public List<Contact> allContacts { get => _allContacts; set => _allContacts = value; }
+        public List<GeneralMessage> AllGeneralMessages { get => _AllGeneralMessages; set => _AllGeneralMessages = value; }
+        public List<GeneralMessage> ActiveGeneralMessages { get => _AllGeneralMessages.Where(o=>o.Active).ToList(); }
         public Timeline taskTimeline { get => _taskTimeline; set => _taskTimeline = value; }
         public List<Note> allNotes { get => _allNotes; set => _allNotes = value; }
         public List<Vehicle> allVehicles { get { if (_allVehicles == null) { _allVehicles = new List<Vehicle>(); } return _allVehicles; } set => _allVehicles = value; }
@@ -469,7 +472,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public bool hasMeaningfulMedicalPlan(int ops)
         {
             if (allMedicalPlans.Where(o => o.OpPeriod == ops).Count() <= 0) { return false; }
-            else if (allMedicalPlans.First(o => o.OpPeriod == ops).ambulanceServices.Any() || allMedicalPlans.First(o => o.OpPeriod == ops).hospitals.Any()) { return true; }
+            else if (allMedicalPlans.First(o => o.OpPeriod == ops).Ambulances.Any() || allMedicalPlans.First(o => o.OpPeriod == ops).Hospitals.Any()) { return true; }
             else { return false; }
         }
         public bool hasMeaningfulObjectives(int ops) { return (allIncidentObjectives.Any(o => o.OpPeriod == ops && o.Objectives.Any())); }

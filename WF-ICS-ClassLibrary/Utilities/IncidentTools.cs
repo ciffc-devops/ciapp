@@ -381,8 +381,8 @@ namespace WF_ICS_ClassLibrary.Utilities
                 if (task.allMedicalPlans.Count > 0)
                 {
                     MedicalPlan old = task.allMedicalPlans.OrderByDescending(o => o.OpPeriod).First();
-                    plan.ambulanceServices.AddRange(old.ambulanceServices);
-                    plan.hospitals.AddRange(old.hospitals);
+                    plan.Ambulances.AddRange(old.Ambulances);
+                    plan.Hospitals.AddRange(old.Hospitals);
                 }
 
 

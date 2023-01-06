@@ -104,6 +104,7 @@
     <Compile Include="Models\CommunicationsLog.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Equipment.cs" />
+    <Compile Include="Models\GeneralMessage.cs" />
     <Compile Include="Models\GeneralOptions.cs" />
     <Compile Include="Models\HelpInfo.cs" />
     <Compile Include="Models\Hospital.cs" />

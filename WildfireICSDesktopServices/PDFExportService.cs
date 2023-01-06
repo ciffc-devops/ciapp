@@ -368,7 +368,7 @@ namespace WildfireICSDesktopServices
                 stamper.AcroFields.SetField("206DATE  TIME PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", plan.DatePrepared));
 
                 int ambulanceIndex = 1;
-                foreach (AmbulanceService ambulance in plan.ambulanceServices)
+                foreach (AmbulanceService ambulance in plan.Ambulances)
                 {
                     stamper.AcroFields.SetField("ORGANIZATIONRow" + ambulanceIndex, ambulance.Organization);
                     stamper.AcroFields.SetField("CONTACTRow" + ambulanceIndex, ambulance.Contact);
@@ -382,7 +382,7 @@ namespace WildfireICSDesktopServices
                 }
 
                 int hospitalIndex = 1;
-                foreach (Hospital hospital in plan.hospitals)
+                foreach (Hospital hospital in plan.Hospitals)
                 {
                     if (hospitalIndex >= 4)
                     {
