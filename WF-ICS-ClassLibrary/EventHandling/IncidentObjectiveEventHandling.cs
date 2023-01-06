@@ -19,4 +19,17 @@ namespace WF_ICS_ClassLibrary.EventHandling
 
         public IncidentObjectiveEventArgs(IncidentObjective _item) { item = _item; }
     }
+
+    internal class IncidentObjectivesSheetEventHandling
+    {
+    }
+
+    public delegate void IncidentObjectivesSheetEventHandler(IncidentObjectivesSheetEventArgs e);
+
+    public class IncidentObjectivesSheetEventArgs
+    {
+        public IncidentObjectivesSheet item { get; set; }
+
+        public IncidentObjectivesSheetEventArgs(IncidentObjectivesSheet _item) { item = _item; }
+    }
 }

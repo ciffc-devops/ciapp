@@ -602,7 +602,7 @@ namespace WildfireICSDesktopServices
 
 
                     if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string outputFileName = "ICS 202 - Task " + task.TaskNumber + " - Op Period " + OpsPeriod.ToString();
+                    string outputFileName = "ICS 202 - Task " + task.IncidentIdentifier + " - Op Period " + OpsPeriod.ToString();
                     //path = System.IO.Path.Combine(path, outputFileName);
                     path = FileAccessClasses.getUniqueFileName(outputFileName, path);
                 }
@@ -613,39 +613,44 @@ namespace WildfireICSDesktopServices
                 }
                 try
                 {
-                    string fileToUse = "ICSForms/ICS 202 - Incident Objectives.pdf";
+                    string fileToUse = "BlankForms/ICS-202-WF-Incident-Objectives.pdf";
                     PdfReader rdr = new PdfReader(fileToUse);
                     PdfStamper stamper = new PdfStamper(rdr, new FileStream(path, FileMode.Create));
 
+                    task.createObjectivesSheetAsNeeded(OpsPeriod);
+
+                    IncidentObjectivesSheet currentSheet = task.allIncidentObjectives.First(o=>o.OpPeriod== OpsPeriod);
 
                     //Op Plan
-                    DateTime today = task.getOpPeriodStart(OpsPeriod);
-
+                    OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
+                    OrganizationChart currentChart = task.allOrgCharts.First(o=>o.OpPeriod == OpsPeriod);   
 
                     //Top Section
-                    stamper.AcroFields.SetField("202TASK", task.TaskNumber);
-                    stamper.AcroFields.SetField("202TASK NAME", task.TaskName);
-                    stamper.AcroFields.SetField("POLICEBCAS FILE", task.AgencyFileNumber);
-                    stamper.AcroFields.SetField("202PREPARED BY PLANNING", task.PlansChief(OpsPeriod));
-                    stamper.AcroFields.SetField("202APPROVED BY SAR MGR", task.SARManager(OpsPeriod));
+                    stamper.AcroFields.SetField("1A INCIDENT NAME", task.TaskName);
+                    stamper.AcroFields.SetField("1B INCIDENT NUMBER", task.TaskNumber);
+                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", currentSheet.DatePrepared));
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
-                    stamper.AcroFields.SetField("202OPERATIONAL PERIOD", OpsPeriod.ToString());
-                    stamper.AcroFields.SetField("202DATE  TIME PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", today));
-
-                    if (task.AllOperationalPeriods.Any(o => o.PeriodNumber == OpsPeriod))
+                    ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                    if (null != PreparedBy)
                     {
-                        OperationalPeriod currentOp = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpsPeriod).First();
-                        stamper.AcroFields.SetField("FROM DATE  TIME", string.Format("{0:yyyy-MMM-dd HH:mm}", currentOp.PeriodStart));
-                        stamper.AcroFields.SetField("TO DATE  TIME", string.Format("{0:yyyy-MMM-dd HH:mm}", currentOp.PeriodEnd));
+                        stamper.AcroFields.SetField("9 PREPARED BY Planning Section Chief", PreparedBy.IndividualName);
+                    }
+                    ICSRole IC = currentChart.GetRoleByID(Globals.IncidentCommanderID, true);
+                    if (null != IC)
+                    {
+                        stamper.AcroFields.SetField("10 APPROVED BY Incident Commander", IC.IndividualName);
                     }
 
-                    List<IncidentObjective> opObjectives = task.allObjectives.Where(o => o.OpPeriod == OpsPeriod).OrderBy(o => o.Priority).ToList();
-                    foreach (IncidentObjective objective in opObjectives)
-                    {
-                        stamper.AcroFields.SetField("PRIORITYRow" + objective.Priority, objective.Priority.ToString());
-                        stamper.AcroFields.SetField("OVERALL OBJECTIVES SEE OPERATIONS PLAN ICS215 FOR SPECIFIC ASSIGNMENTSRow" + objective.Priority, objective.Objective);
+                    stamper.AcroFields.SetField("3A FIRE SIZE", currentSheet.FireSize);
+                    stamper.AcroFields.SetField("3B FIRE STATUS", currentSheet.FireStatus);
+                    stamper.AcroFields.SetField("6 WEATHER FORCASTRow1", currentSheet.WeatherForcast);
+                    stamper.AcroFields.SetField("7 GENERAL SAFETY MESSAGERow1", currentSheet.GeneralSafety);
 
-                    }
+                    stamper.AcroFields.SetField("5 GENERAL CONTROL OBJECTIVES FOR THE INCIDENT include alternativesRow1", currentSheet.ActiveObjectivesAsString);
 
 
 
@@ -1613,7 +1618,7 @@ namespace WildfireICSDesktopServices
             if (statuses.Count > 0)
             {
                 stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:yyyy-MMM-dd HH:mm}", statuses.OrderBy(o => o.SignInTime).First().SignInTime));
-                if (statuses.Where(o => o.SignOutTime < DateTime.MaxValue).Count() > 0)
+                if (statuses.Any(o => o.SignOutTime < DateTime.MaxValue))
                 {
                     stamper.AcroFields.SetField("PeriodTo", string.Format("{0:yyyy-MMM-dd HH:mm}", statuses.Where(o => o.SignOutTime < DateTime.MaxValue).OrderByDescending(o => o.SignOutTime).First().SignOutTime));
                 }
@@ -1631,7 +1636,7 @@ namespace WildfireICSDesktopServices
             {
                 MemberStatus status = statuses[x];
                 TeamMember member = new TeamMember();
-                if (status.MemberID != Guid.Empty && task.TaskTeamMembers.Where(o => o.PersonID == status.MemberID).Any()) { member = task.TaskTeamMembers.Where(o => o.PersonID == status.MemberID).First(); }
+                if (status.MemberID != Guid.Empty && task.TaskTeamMembers.Any(o => o.PersonID == status.MemberID)) { member = task.TaskTeamMembers.First(o => o.PersonID == status.MemberID); }
 
                 stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
                 stamper.AcroFields.SetField("Address" + (x + 1).ToString(), member.AddressWithPhone);

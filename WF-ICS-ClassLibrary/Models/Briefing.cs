@@ -48,9 +48,9 @@ namespace WF_ICS_ClassLibrary.Models
 
             foreach (BriefingSection section in AllSections)
             {
-                if (section.allItems.Where(o => o.itemName.ToLower() == name).Count() > 0)
+                if (section.allItems.Any(o => o.itemName.ToLower() == name))
                 {
-                    bi = section.allItems.Where(o => o.itemName.ToLower() == name).First();
+                    bi = section.allItems.First(o => o.itemName.ToLower() == name);
                 }
             }
 

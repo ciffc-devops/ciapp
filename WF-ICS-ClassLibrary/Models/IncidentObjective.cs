@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace WF_ICS_ClassLibrary.Models
 {
@@ -79,24 +80,28 @@ namespace WF_ICS_ClassLibrary.Models
 
     }
 
-    public class IncidentObjectives
+    [ProtoContract]
+    [Serializable]
+    public class IncidentObjectivesSheet : ICloneable
     {
-        private Guid _FormID;
-        private DateTime _DatePrepared;
-        private int _OpPeriod;
-        private string _FireSize;
-        private string _FireStatus;
-        private string _WeatherForcast;
-        private string _GeneralSafety;
-        private string _PreparedBy;
-        private string _PreparedByRole;
-        private string _ApprovedBy;
-        private string _ApprovedByRole;
-        private List<IncidentObjective> _Objectives;
+        [ProtoMember(1)] private Guid _SheetID;
+        [ProtoMember(2)] private DateTime _DatePrepared;
+        [ProtoMember(3)] private int _OpPeriod;
+        [ProtoMember(4)] private string _FireSize;
+        [ProtoMember(5)] private string _FireStatus;
+        [ProtoMember(6)] private string _WeatherForcast;
+        [ProtoMember(7)] private string _GeneralSafety;
+        [ProtoMember(8)] private string _PreparedBy;
+        [ProtoMember(9)] private string _PreparedByRole;
+        [ProtoMember(10)] private string _ApprovedBy;
+        [ProtoMember(11)] private string _ApprovedByRole;
+        [ProtoMember(12)] private List<IncidentObjective> _Objectives;
+        [ProtoMember(13)] private Guid _TaskID;
+        [ProtoMember(14)] private DateTime _LastUpdatedUTC;
 
-        public IncidentObjectives() { _FormID = Guid.NewGuid(); _Objectives = new List<IncidentObjective>(); }
+        public IncidentObjectivesSheet() { _SheetID = Guid.NewGuid(); _Objectives = new List<IncidentObjective>(); }
 
-        public Guid FormID { get => _FormID; set { _FormID = value; } }
+        public Guid SheetID { get => _SheetID; set { _SheetID = value; } }
         public DateTime DatePrepared { get => _DatePrepared; set => _DatePrepared = value; }
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public string FireSize { get => _FireSize; set => _FireSize = value; }
@@ -108,5 +113,65 @@ namespace WF_ICS_ClassLibrary.Models
         public string ApprovedBy { get => _ApprovedBy; set => _ApprovedBy = value; }
         public string ApprovedByRole { get => _ApprovedByRole; set => _ApprovedByRole = value; }
         public List<IncidentObjective> Objectives { get => _Objectives; set => _Objectives = value; }
+        public List<IncidentObjective> ActiveObjectives { get => _Objectives.Where(o=>o.Active).ToList(); }
+
+        public string ActiveObjectivesAsString
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+
+                
+                foreach (IncidentObjective obj in ActiveObjectives)
+                {
+                    sb.Append(obj.Priority); sb.Append(") ");
+                    sb.Append(obj.Objective);
+                    sb.Append(Environment.NewLine);
+                }
+
+                return sb.ToString();
+            }
+        }
+
+        public Guid TaskID { get => _TaskID; set => _TaskID = value; }
+        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
+
+        public IncidentObjectivesSheet Clone()
+        {
+            IncidentObjectivesSheet newSheet = this.MemberwiseClone() as IncidentObjectivesSheet;
+            newSheet.Objectives = new List<IncidentObjective>();
+            newSheet.LastUpdatedUTC = DateTime.UtcNow;
+            foreach (IncidentObjective objective in Objectives) { newSheet.Objectives.Add(objective.Clone()); }
+            return newSheet;
+        }
+    }
+
+    public static class IncidentObjectiveTools
+    {
+        public static void RenumberObjectives(this IncidentObjectivesSheet sheet)
+        {
+            int priority = 1;
+            
+
+            foreach (IncidentObjective objective in sheet.ActiveObjectives.OrderBy(o => o.Priority))
+            {
+                objective.Priority = priority;
+                priority += 1;
+            }
+
+        }
+
+        public static int GetNextPriorityNumber(this IncidentObjectivesSheet sheet)
+        {
+            if (sheet.ActiveObjectives.Any())
+            {
+                return sheet.ActiveObjectives.Max(o => o.Priority) + 1;
+            } else { return 1; }
+        }
     }
 }

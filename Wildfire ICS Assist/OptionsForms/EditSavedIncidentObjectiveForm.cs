@@ -47,5 +47,10 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 MessageBox.Show("You must include text for the objective.");
             }
         }
+
+        private void EditSavedIncidentObjectiveForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

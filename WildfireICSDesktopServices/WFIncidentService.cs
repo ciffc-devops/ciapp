@@ -23,6 +23,7 @@ namespace WildfireICSDesktopServices
         public event HospitalEventHandler HospitalChanged;
         public event AmbulanceServiceEventHandler AmbulanceServiceChanged;
         public event IncidentObjectiveEventHandler IncidentObjectiveChanged;
+        public event IncidentObjectivesSheetEventHandler IncidentObjectivesSheetChanged;
         public event MedicalPlanEventHandler MedicalPlanChanged;
         public event NoteEventHandler NoteChanged;
         public event OperationalPeriodEventHandler OperationalPeriodChanged;
@@ -665,6 +666,40 @@ namespace WildfireICSDesktopServices
         }
 
         // Incident Objectives
+        protected virtual void OnIncidentObjectivesSheetChanged(IncidentObjectivesSheetEventArgs e)
+        {
+            IncidentObjectivesSheetEventHandler handler = this.IncidentObjectivesSheetChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+
+        public void UpsertIncidentObjectivesSheet(IncidentObjectivesSheet record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.allIncidentObjectives.Any(o => o.SheetID == record.SheetID))
+            {
+                _currentIncident.allIncidentObjectives = _currentIncident.allIncidentObjectives.Where(o => o.SheetID != record.SheetID).ToList();
+            }
+            record.RenumberObjectives();
+            _currentIncident.allIncidentObjectives.Add(record.Clone());
+         
+
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnIncidentObjectivesSheetChanged(new IncidentObjectivesSheetEventArgs(record));
+        }
+
+
+
+
+
+
+
+
         protected virtual void OnIncidentObjectiveChanged(IncidentObjectiveEventArgs e)
         {
             IncidentObjectiveEventHandler handler = this.IncidentObjectiveChanged;
@@ -673,26 +708,52 @@ namespace WildfireICSDesktopServices
                 handler(e);
             }
         }
+
         public void UpsertIncidentObjective(IncidentObjective record, string source = "local")
         {
             record.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allObjectives.Any(o => o.IncidentObjectiveID == record.IncidentObjectiveID))
+            IncidentObjectivesSheet sheet = null;
+
+            if(!_currentIncident.allIncidentObjectives.Any(o=>o.OpPeriod == record.OpPeriod))
             {
-                _currentIncident.allObjectives = _currentIncident.allObjectives.Where(o => o.IncidentObjectiveID != record.IncidentObjectiveID).ToList();
+                _currentIncident.createObjectivesSheetAsNeeded(record.OpPeriod);
+                sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod);
+                UpsertIncidentObjectivesSheet(sheet);
+            } else { sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod); }
+
+
+
+            if (sheet.Objectives.Any(o => o.IncidentObjectiveID == record.IncidentObjectiveID))
+            {
+                sheet.Objectives = sheet.Objectives.Where(o => o.IncidentObjectiveID != record.IncidentObjectiveID).ToList();
             }
-            _currentIncident.allObjectives.Add(record.Clone());
+            sheet.Objectives.Add(record.Clone());
+            sheet.RenumberObjectives();
+
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
             OnIncidentObjectiveChanged(new IncidentObjectiveEventArgs(record));
         }
+
         public void DeleteIncidentObjective(IncidentObjective record, string source = "local")
         {
-            record.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allObjectives.Any(o => o.IncidentObjectiveID == record.IncidentObjectiveID))
+            IncidentObjectivesSheet sheet = null;
+
+            if (!_currentIncident.allIncidentObjectives.Any(o => o.OpPeriod == record.OpPeriod))
             {
-                _currentIncident.allObjectives = _currentIncident.allObjectives.Where(o => o.IncidentObjectiveID != record.IncidentObjectiveID).ToList();
+                _currentIncident.createObjectivesSheetAsNeeded(record.OpPeriod);
+                sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod);
+                UpsertIncidentObjectivesSheet(sheet);
+            }
+            else { sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod); }
+
+            record.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
+            
+            if (sheet.Objectives.Any(o => o.IncidentObjectiveID == record.IncidentObjectiveID))
+            {
+                sheet.Objectives = sheet.Objectives.Where(o => o.IncidentObjectiveID != record.IncidentObjectiveID).ToList();
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "DELETE", true, false); }
                 _currentIncident.renumberObjectives(record.OpPeriod);
                 OnIncidentObjectiveChanged(new IncidentObjectiveEventArgs(record));
@@ -701,17 +762,18 @@ namespace WildfireICSDesktopServices
         }
         public void DeleteIncidentObjective(Guid IncidentObjectiveID, string source = "local")
         {
-
-            if (_currentIncident.allObjectives.Any(o => o.IncidentObjectiveID == IncidentObjectiveID))
+            IncidentObjectivesSheet sheet = null;
+            if(_currentIncident.allIncidentObjectives.Any(o=>o.Objectives.Any(i => i.IncidentObjectiveID == IncidentObjectiveID)))
             {
-                IncidentObjective toDelete = _currentIncident.allObjectives.First(o => o.IncidentObjectiveID == IncidentObjectiveID);
+                sheet = _currentIncident.allIncidentObjectives.First(o => o.Objectives.Any(i => i.IncidentObjectiveID == IncidentObjectiveID));
+
+                IncidentObjective toDelete = sheet.Objectives.First(o => o.IncidentObjectiveID == IncidentObjectiveID);
                 DeleteIncidentObjective(toDelete, source);
-                /*
-                _currentTask.allObjectives = _currentTask.allObjectives.Where(o => o.IncidentObjectiveID != IncidentObjectiveID).ToList();
-                _currentTask.renumberObjectives(toDelete.OpPeriod);
-                OnIncidentObjectiveChanged(new IncidentObjectiveEventArgs(toDelete));
-                */
+
             }
+
+
+
         }
 
 

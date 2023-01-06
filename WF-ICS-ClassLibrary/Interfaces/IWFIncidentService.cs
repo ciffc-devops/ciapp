@@ -24,6 +24,8 @@ namespace WildfireICSDesktopServices
         event HospitalEventHandler HospitalChanged;
         event ICSRoleEventHandler ICSRoleChanged;
         event IncidentObjectiveEventHandler IncidentObjectiveChanged;
+        event IncidentObjectivesSheetEventHandler IncidentObjectivesSheetChanged;
+
         event MedicalPlanEventHandler MedicalPlanChanged;
         event MemberEventHandler MemberSignInChanged;
         event NoteEventHandler NoteChanged;
@@ -73,6 +75,7 @@ namespace WildfireICSDesktopServices
         void UpsertICSRole(ICSRole record, string source = "local");
         void UpsertICSRole(string roleName, int opsPeriod, TeamMember member, string source = "local");
         void DeleteICSRole(ICSRole roleToDelete, int opsPeriod, string source = "local");
+        void UpsertIncidentObjectivesSheet(IncidentObjectivesSheet record, string source = "local");
         void UpsertIncidentObjective(IncidentObjective record, string source = "local");
         void UpsertMedicalPlan(MedicalPlan record, string source = "local");
         void UpsertMemberStatus(SignInRecord signIn, string source = "local");

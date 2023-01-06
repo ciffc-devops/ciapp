@@ -13,9 +13,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             string name = null;
             OrganizationChart chart = new OrganizationChart();
-            if (task.allOrgCharts.Where(o => o.OpPeriod == Ops).Count() > 0)
+            if (task.allOrgCharts.Any(o => o.OpPeriod == Ops))
             {
-                chart = task.allOrgCharts.Where(o => o.OpPeriod == Ops).First();
+                chart = task.allOrgCharts.First(o => o.OpPeriod == Ops);
             }
             name = chart.getNameByRoleName(roleName, defaultUpChain);
             return name;
@@ -25,9 +25,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             string name = null;
             OrganizationChart chart = new OrganizationChart();
-            if (task.allOrgCharts.Where(o => o.OpPeriod == Ops).Count() > 0)
+            if (task.allOrgCharts.Any(o => o.OpPeriod == Ops))
             {
-                chart = task.allOrgCharts.Where(o => o.OpPeriod == Ops).First();
+                chart = task.allOrgCharts.First(o => o.OpPeriod == Ops);
             }
             name = chart.getNameByRoleID(RoleID, defaultUpChain);
             return name;
@@ -36,9 +36,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             TeamMember member = new TeamMember();
             OrganizationChart chart = new OrganizationChart();
-            if (task.allOrgCharts.Where(o => o.OpPeriod == Ops).Count() > 0)
+            if (task.allOrgCharts.Any(o => o.OpPeriod == Ops))
             {
-                chart = task.allOrgCharts.Where(o => o.OpPeriod == Ops).First();
+                chart = task.allOrgCharts.First(o => o.OpPeriod == Ops);
             }
             member = chart.getTeamMemberByRoleName(roleName, defaultUpChain);
             return member;
@@ -269,9 +269,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
             */
             //ics roles
-            if (task.allOrgCharts.Where(o => o.OpPeriod == opPeriod).Count() > 0)
+            if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod))
             {
-                foreach (ICSRole role in task.allOrgCharts.Where(o => o.OpPeriod == opPeriod).First().AllRoles)
+                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).AllRoles)
                 {
                     if (role.IndividualID == member.PersonID)
                     {
@@ -316,7 +316,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static void renumberObjectives(this WFIncident task, int currentOpPeriod)
         {
             int priority = 1;
-            foreach (IncidentObjective objective in task.allObjectives.Where(o => o.OpPeriod == currentOpPeriod).OrderBy(o => o.Priority))
+            IncidentObjectivesSheet incidentObjectives = task.allIncidentObjectives.First(o => o.OpPeriod == currentOpPeriod);
+
+            foreach (IncidentObjective objective in incidentObjectives.Objectives.OrderBy(o => o.Priority))
             {
                 objective.Priority = priority;
                 priority += 1;
@@ -366,13 +368,13 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         public static void createMedicalPlanAsNeeded(this WFIncident task, int ops)
         {
-            if (task.allMedicalPlans.Where(o => o.OpPeriod == ops).Count() <= 0)
+            if (!task.allMedicalPlans.Any(o => o.OpPeriod == ops))
             {
                 MedicalPlan plan = new MedicalPlan();
                 plan.OpPeriod = ops;
-                if (task.allOrgCharts.Where(o => o.OpPeriod == ops).Count() > 0)
+                if (task.allOrgCharts.Any(o => o.OpPeriod == ops))
                 {
-                    OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == ops).First();
+                    OrganizationChart currentChart = task.allOrgCharts.First(o => o.OpPeriod == ops);
                     plan.PreparedBy = currentChart.getNameByRoleName("Logistics Section Chief");
                 }
 
@@ -396,6 +398,27 @@ namespace WF_ICS_ClassLibrary.Utilities
                 task.allMedicalPlans.Add(plan);
             }
         }
+
+        public static void createObjectivesSheetAsNeeded(this WFIncident incident, int ops)
+        {
+            if (!incident.allIncidentObjectives.Any(o => o.OpPeriod == ops))
+            {
+                IncidentObjectivesSheet sheet = new IncidentObjectivesSheet();
+                sheet.OpPeriod = ops;
+                sheet.TaskID = incident.TaskID;
+                DateTime today = DateTime.Now;
+                sheet.DatePrepared = today;
+                if (incident.getOpPeriodStart(ops).DayOfYear != today.DayOfYear)
+                {
+                    DateTime opStart = incident.getOpPeriodStart(ops);
+                    DateTime newDate = new DateTime(opStart.Year, opStart.Month, opStart.Day, today.Hour, today.Minute, today.Second);
+                    sheet.DatePrepared = newDate;
+                }
+
+                Globals.incidentService.UpsertIncidentObjectivesSheet(sheet);
+            }
+        }
+
         public static void createOrgChartAsNeeded(this WFIncident task, int ops)
         {
             if (!task.allOrgCharts.Any(o => o.OpPeriod == ops))
@@ -436,13 +459,11 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         public static int getNextObjectivePriority(this WFIncident task, int thisOpPeriod)
         {
-            int priority = 1;
-            if (task.allObjectives.Where(o => o.OpPeriod == thisOpPeriod).Count() > 0)
+            if(task.allIncidentObjectives.First(o=>o.OpPeriod == thisOpPeriod).Objectives.Any())
             {
-                priority = task.allObjectives.Where(o => o.OpPeriod == thisOpPeriod).Max(o => o.Priority) + 1;
+                return task.allIncidentObjectives.First(o => o.OpPeriod == thisOpPeriod).Objectives.Max(o => o.Priority) + 1;
             }
-
-            return priority;
+            return 1;
         }
 
         /*

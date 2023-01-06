@@ -150,6 +150,18 @@
     <Compile Include="IncidentDetailsForm.Designer.cs">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IncidentObjectiveEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentObjectiveEntryForm.Designer.cs">
+      <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentObjectivesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentObjectivesForm.Designer.cs">
+      <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\EditCommsItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -353,6 +365,12 @@
     <EmbeddedResource Include="IncidentDetailsForm.resx">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IncidentObjectiveEntryForm.resx">
+      <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncidentObjectivesForm.resx">
+      <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditCommsItemForm.resx">
       <DependentUpon>EditCommsItemForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -438,6 +456,9 @@
     <EmbeddedResource Include="UtilityForms\HelpInfoForm.resx">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="BlankForms\ICS-202-WF-Incident-Objectives.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -81,6 +81,7 @@
             this.dgvContacts.AllowUserToAddRows = false;
             this.dgvContacts.AllowUserToDeleteRows = false;
             this.dgvContacts.AllowUserToOrderColumns = true;
+            this.dgvContacts.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.dgvContacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvContacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colContactName,

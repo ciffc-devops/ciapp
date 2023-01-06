@@ -25,6 +25,22 @@ namespace WF_ICS_ClassLibrary.Models
             ID = id;
             switch (id)
             {
+                /* newly added for WF */
+                case "IncidentObjectives":
+                    Title = "Incident Objectives";
+                    bt.Append("Enter clear, concise statements of the objectives for managing the response. Ideally, these objectives will be listed in priority order. These objectives are for the incident response for this operational period as well as for the duration of the incident."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    bt.Append("Include alternative and/or specific tactical objectives as applicable. Objectives should follow the SMART model or a similar approach:"); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+
+                    bt.Append("S pecific - Is the wording precise and unambiguous?"); bt.Append(Environment.NewLine); 
+                    bt.Append("M easurable - How will achievements be measured?"); bt.Append(Environment.NewLine); 
+                    bt.Append("A ction-oriented - Is an action verb used to describe expected accomplishments?"); bt.Append(Environment.NewLine); 
+                    bt.Append("R ealistic - Is the outcome achievable with given available resources?"); bt.Append(Environment.NewLine); 
+                    bt.Append("T ime-sensitive - What is the timeframe?"); bt.Append(Environment.NewLine); 
+
+
+                    Body = bt.ToString();
+                    return true;
+
                 /* SAR Sign-In Assist Items */
                 case "SignInAssist-Activity":
                     Title = "Current Activity";

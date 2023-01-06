@@ -368,12 +368,12 @@
   </data>
   <data name="btnPrintVerbose.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxEAAAsRAX9kX5EAAADtSURBVFhHxZYBCoQwDAT7JJ/oU/xpr4p6vd0NiVyIwoBO
-        3Y0IUlvv/VWkrETKSqSsREpkHNtgP3nCproQKREoDoM9CikRLI6CPQopESyOgj0KKREsjoI9CikrkbIS
-        Fq2t82tMZqV5JDiUCs0jAYE/Wc7O5XLzrGONxDecwesPQNA8EhDIhuaRgEA2NI8EBLKheSQgkA3NIwGB
-        QWhfV+zZqeeA7iHhBJ7i9f1cHMIIoPewcpe/10kYAfQeVu7y9zoJ2Iwmf7sIRs7fjCygyAXzFlIqcIAH
-        5i2kVIzjya95+NOVshIpK5GyEinr6O0DFM/UI8YW2lEAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAAO1JREFUWEfFlgEKhDAMBPskn+hT/Gmvinq93Q2JXIjCgE7djQhSW+/9VaSsRMpK
+        pKxESmQc22A/ecKmuhApESgOgz0KKREsjoI9CikRLI6CPQopESyOgj0KKSuRshIWra3za0xmpXkkOJQK
+        zSMBgT9Zzs7lcvOsY43EN5zB6w9A0DwSEMiG5pGAQDY0jwQEsqF5JCCQDc0jAYFBaF9X7Nmp54DuIeEE
+        nuL1/Vwcwgig97Byl7/XSRgB9B5W7vL3OgnYjCZ/uwhGzt+MLKDIBfMWUipwgAfmLaRUjOPJr3n405Wy
+        EikrkbISKevo7QMUz9QjxhbaUQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnPrintVerbose.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
@@ -411,12 +411,12 @@
   </data>
   <data name="btnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxEAAAsRAX9kX5EAAADtSURBVFhHxZYBCoQwDAT7JJ/oU/xpr4p6vd0NiVyIwoBO
-        3Y0IUlvv/VWkrETKSqSsREpkHNtgP3nCproQKREoDoM9CikRLI6CPQopESyOgj0KKREsjoI9CikrkbIS
-        Fq2t82tMZqV5JDiUCs0jAYE/Wc7O5XLzrGONxDecwesPQNA8EhDIhuaRgEA2NI8EBLKheSQgkA3NIwGB
-        QWhfV+zZqeeA7iHhBJ7i9f1cHMIIoPewcpe/10kYAfQeVu7y9zoJ2Iwmf7sIRs7fjCygyAXzFlIqcIAH
-        5i2kVIzjya95+NOVshIpK5GyEinr6O0DFM/UI8YW2lEAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAAO1JREFUWEfFlgEKhDAMBPskn+hT/Gmvinq93Q2JXIjCgE7djQhSW+/9VaSsRMpK
+        pKxESmQc22A/ecKmuhApESgOgz0KKREsjoI9CikRLI6CPQopESyOgj0KKSuRshIWra3za0xmpXkkOJQK
+        zSMBgT9Zzs7lcvOsY43EN5zB6w9A0DwSEMiG5pGAQDY0jwQEsqF5JCCQDc0jAYFBaF9X7Nmp54DuIeEE
+        nuL1/Vwcwgig97Byl7/XSRgB9B5W7vL3OgnYjCZ/uwhGzt+MLKDIBfMWUipwgAfmLaRUjOPJr3n405Wy
+        EikrkbISKevo7QMUz9QjxhbaUQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnPrint.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">

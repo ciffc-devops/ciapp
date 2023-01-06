@@ -104,7 +104,7 @@ namespace Wildfire_ICS_Assist
         OrganizationalChartForm orgChartForm = null;
         PositionLogForm _positionLogForm = null;
         PositionLogAllOutstandingForm _positionLogAllOutstandingForm = null;
-
+        IncidentObjectivesForm objectivesForm = null;
         /* Event Handlers!*/
 
         public event ShortcutEventHandler ShortcutButtonClicked;
@@ -119,8 +119,10 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
-
+            Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
+            Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
         }
+
 
         private void CloseActiveForms()
         {
@@ -1277,7 +1279,53 @@ namespace Wildfire_ICS_Assist
 
         private void incidentObjectivesICS202ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenIncidentObjectivesForm();
+        }
+
+        private void OpenIncidentObjectivesForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (objectivesForm == null)
+                {
+                    objectivesForm = new IncidentObjectivesForm();
+                    objectivesForm.FormClosed += new FormClosedEventHandler(IncidentObjectivesForm_Closed);
+                    ActiveForms.Add(objectivesForm);
+                    objectivesForm.Show(this);
+                }
+
+                objectivesForm.BringToFront();
+            }
+        }
+        void IncidentObjectivesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(objectivesForm);
+            objectivesForm = null;
+
 
         }
+
+        private void btnIncidentObjectives_Click(object sender, EventArgs e)
+        {
+            OpenIncidentObjectivesForm();
+        }
+
+        private void Program_IncidentObjectivesSheetChanged(IncidentObjectivesSheetEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                setButtonCheckboxes();
+            }
+            TriggerAutoSave();
+        }
+        private void Program_IncidentObjectiveChanged(IncidentObjectiveEventArgs e)
+        {
+            if (e.item.OpPeriod == CurrentOpPeriod)
+            {
+                setButtonCheckboxes();
+            }
+            TriggerAutoSave();
+        }
+
     }
 }
