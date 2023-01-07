@@ -61,7 +61,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             if (string.IsNullOrEmpty(txtIncidentIDNo.Text))
             {
                 lblCallsign.ForeColor = Color.Red;
-                txtIncidentIDNo.BackColor = Color.LightCoral;
+                txtIncidentIDNo.BackColor = Program.ErrorColor;
 
 
             }

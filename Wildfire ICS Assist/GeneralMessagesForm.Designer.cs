@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralMessagesForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.rbOutstandingMessages = new System.Windows.Forms.RadioButton();
@@ -46,6 +46,12 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.rbThisOpOnly = new System.Windows.Forms.RadioButton();
+            this.rbAllOps = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,6 +61,8 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -68,8 +76,8 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.rbOutstandingMessages);
-            this.splitContainer1.Panel1.Controls.Add(this.rbAllMessages);
+            this.splitContainer1.Panel1.Controls.Add(this.panel2);
+            this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.btnFormInfo);
             this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
@@ -83,24 +91,26 @@
             // rbOutstandingMessages
             // 
             this.rbOutstandingMessages.AutoSize = true;
-            this.rbOutstandingMessages.Location = new System.Drawing.Point(154, 15);
+            this.rbOutstandingMessages.Location = new System.Drawing.Point(327, 10);
             this.rbOutstandingMessages.Name = "rbOutstandingMessages";
             this.rbOutstandingMessages.Size = new System.Drawing.Size(224, 28);
             this.rbOutstandingMessages.TabIndex = 11;
             this.rbOutstandingMessages.Text = "Messages without reply";
             this.rbOutstandingMessages.UseVisualStyleBackColor = true;
+            this.rbOutstandingMessages.CheckedChanged += new System.EventHandler(this.rbOutstandingMessages_CheckedChanged);
             // 
             // rbAllMessages
             // 
             this.rbAllMessages.AutoSize = true;
             this.rbAllMessages.Checked = true;
-            this.rbAllMessages.Location = new System.Drawing.Point(8, 15);
+            this.rbAllMessages.Location = new System.Drawing.Point(181, 10);
             this.rbAllMessages.Name = "rbAllMessages";
             this.rbAllMessages.Size = new System.Drawing.Size(140, 28);
             this.rbAllMessages.TabIndex = 10;
             this.rbAllMessages.TabStop = true;
             this.rbAllMessages.Text = "All Messages";
             this.rbAllMessages.UseVisualStyleBackColor = true;
+            this.rbAllMessages.CheckedChanged += new System.EventHandler(this.rbAllMessages_CheckedChanged);
             // 
             // btnFormInfo
             // 
@@ -118,6 +128,7 @@
             this.btnFormInfo.Text = "Form Info";
             this.btnFormInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFormInfo.UseVisualStyleBackColor = false;
+            this.btnFormInfo.Click += new System.EventHandler(this.btnFormInfo_Click);
             // 
             // splitContainer2
             // 
@@ -165,14 +176,16 @@
             this.dgvLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLog.Size = new System.Drawing.Size(1467, 700);
             this.dgvLog.TabIndex = 0;
+            this.dgvLog.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLog_CellDoubleClick);
+            this.dgvLog.SelectionChanged += new System.EventHandler(this.dgvLog_SelectionChanged);
             // 
             // colDateSent
             // 
             this.colDateSent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDateSent.DataPropertyName = "DateSent";
-            dataGridViewCellStyle1.Format = "yyyy-MMM-dd HH:mm";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colDateSent.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "yyyy-MMM-dd HH:mm";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colDateSent.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDateSent.HeaderText = "Date/Time";
             this.colDateSent.Name = "colDateSent";
             this.colDateSent.ReadOnly = true;
@@ -224,9 +237,10 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(209, 52);
             this.btnPrint.TabIndex = 91;
-            this.btnPrint.Text = "Print (ICS 213)";
+            this.btnPrint.Text = "Print Selected";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnViewDetails
             // 
@@ -242,6 +256,7 @@
             this.btnViewDetails.Text = "View Entry Details";
             this.btnViewDetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnViewDetails.UseVisualStyleBackColor = true;
+            this.btnViewDetails.Click += new System.EventHandler(this.btnViewDetails_Click);
             // 
             // btnDelete
             // 
@@ -255,6 +270,7 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -268,6 +284,7 @@
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -283,6 +300,71 @@
             this.btnAdd.Text = "Add Message";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.rbOutstandingMessages);
+            this.panel1.Controls.Add(this.rbAllMessages);
+            this.panel1.Location = new System.Drawing.Point(8, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(554, 50);
+            this.panel1.TabIndex = 92;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.rbThisOpOnly);
+            this.panel2.Controls.Add(this.rbAllOps);
+            this.panel2.Location = new System.Drawing.Point(582, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(506, 50);
+            this.panel2.TabIndex = 93;
+            // 
+            // rbThisOpOnly
+            // 
+            this.rbThisOpOnly.AutoSize = true;
+            this.rbThisOpOnly.Checked = true;
+            this.rbThisOpOnly.Location = new System.Drawing.Point(304, 10);
+            this.rbThisOpOnly.Name = "rbThisOpOnly";
+            this.rbThisOpOnly.Size = new System.Drawing.Size(199, 28);
+            this.rbThisOpOnly.TabIndex = 11;
+            this.rbThisOpOnly.TabStop = true;
+            this.rbThisOpOnly.Text = "This Op Period Only";
+            this.rbThisOpOnly.UseVisualStyleBackColor = true;
+            this.rbThisOpOnly.CheckedChanged += new System.EventHandler(this.rbThisOpOnly_CheckedChanged);
+            // 
+            // rbAllOps
+            // 
+            this.rbAllOps.AutoSize = true;
+            this.rbAllOps.Location = new System.Drawing.Point(149, 10);
+            this.rbAllOps.Name = "rbAllOps";
+            this.rbAllOps.Size = new System.Drawing.Size(149, 28);
+            this.rbAllOps.TabIndex = 10;
+            this.rbAllOps.Text = "All Op Periods";
+            this.rbAllOps.UseVisualStyleBackColor = true;
+            this.rbAllOps.CheckedChanged += new System.EventHandler(this.rbAllOps_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(4, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(161, 24);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "REPLY STATUS";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(121, 24);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "OP PERIOD";
             // 
             // GeneralMessagesForm
             // 
@@ -297,7 +379,6 @@
             this.Text = "General Messages";
             this.Load += new System.EventHandler(this.GeneralMessagesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -306,6 +387,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -328,5 +413,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSubject;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colReply;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton rbThisOpOnly;
+        private System.Windows.Forms.RadioButton rbAllOps;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }

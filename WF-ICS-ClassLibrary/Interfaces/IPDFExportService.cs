@@ -30,5 +30,8 @@ namespace WildfireICSDesktopServices
         List<byte[]> exportTimelineToPDF(WFIncident task);
         List<byte[]> getBlankSignInSheetPDFs(WFIncident task, List<GroupSignInPrintRequest> groups, int OpsPeriod, bool flattenPDF);
         List<byte[]> getSignInSheetPDFs(WFIncident task, int OpsPeriod, bool flattenPDF);
+        List<byte[]> exportGeneralMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
+        List<byte[]> exportGeneralMessagesToPDF(WFIncident task, List<GeneralMessage> items, bool flattenPDF);
+        string createGeneralMessagePDF(WFIncident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false);
     }
 }

@@ -1690,7 +1690,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAaABAQGgAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAagBAQGoAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2320,6 +2320,12 @@
   </data>
   <data name="communicationsListICS205AToolStripMenuItem.Text" xml:space="preserve">
     <value>Communications List (ICS 205A)</value>
+  </data>
+  <data name="generalMessageICS213ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="generalMessageICS213ToolStripMenuItem.Text" xml:space="preserve">
+    <value>General Message (ICS 213)</value>
   </data>
   <data name="iAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 29</value>
@@ -11720,6 +11726,12 @@
   </data>
   <data name="&gt;&gt;tmrNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;generalMessageICS213ToolStripMenuItem.Name" xml:space="preserve">
+    <value>generalMessageICS213ToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;generalMessageICS213ToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>IncidentDetailsForm</value>

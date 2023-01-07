@@ -64,12 +64,12 @@ namespace Wildfire_ICS_Assist
         {
             if (string.IsNullOrEmpty(txtNewObjective.Text))
             {
-                txtNewObjective.BackColor = Color.LightCoral;
+                txtNewObjective.BackColor = Program.ErrorColor;
                 return false;
             }
             else
             {
-                txtNewObjective.BackColor = Color.LightSkyBlue;
+                txtNewObjective.BackColor = Program.GoodColor;
                 return true;
             }
         }

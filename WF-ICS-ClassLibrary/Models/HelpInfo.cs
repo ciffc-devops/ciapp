@@ -40,7 +40,20 @@ namespace WF_ICS_ClassLibrary.Models
 
                     Body = bt.ToString();
                     return true;
+                case "GeneralMessage":
+                    Title = "General Message";
+                    bt.Append("Purpose. The General Message (ICS 213) is used by the incident dispatchers to record incoming messages that cannot be orally transmitted to the intended recipients. The ICS 213 is also used by the Incident Command Post and other incident personnel to transmit messages (e.g., resource order, incident name change, other ICS coordination issues, etc.) to the Incident Communications Center for transmission via radio or telephone to the addressee. This form is used to send any message or notification to incident personnel that requires hard-copy delivery."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
 
+                    bt.Append("Preparation. The ICS 213 may be initiated by incident dispatchers and any other personnel on an incident."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+
+                    bt.Append("Distribution. Upon completion, the ICS 213 may be delivered to the addressee and/or delivered to the Incident Communication Center for transmission."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+
+                    bt.Append("Notes:"); bt.Append(Environment.NewLine);
+                    bt.Append("• The ICS 213 is a three-part form, typically using carbon paper or can be created in booklets using carbon-less paper. The sender will complete Part 1 of the form and send Parts 2 and 3 to the recipient. The recipient will complete Part 2 and return Part 3 to the sender."); bt.Append(Environment.NewLine);
+                    bt.Append("• A copy of the ICS 213 should be sent to and maintained within the Documentation Unit."); bt.Append(Environment.NewLine);
+                    bt.Append("• Contact information for the sender and receiver can be added for communications purposes to confirm resource orders."); bt.Append(Environment.NewLine);
+                    Body = bt.ToString();
+                    return true;
                 /* SAR Sign-In Assist Items */
                 case "SignInAssist-Activity":
                     Title = "Current Activity";

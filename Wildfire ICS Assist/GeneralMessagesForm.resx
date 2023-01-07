@@ -136,11 +136,26 @@
   <data name="btnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAO1JREFUWEfFlgEKhDAMBPskn+hT/Gmvinq93Q2JXIjCgE7djQhSW+/9VaSsRMpK
+        DAAACwwBP0AiyAAAAO1JREFUWEfFlgEKhDAMBPskn+hT/Gmvinq93Q2JXIjCgE7djQhSW+/9VaSsRMpK
         pKxESmQc22A/ecKmuhApESgOgz0KKREsjoI9CikRLI6CPQopESyOgj0KKSuRshIWra3za0xmpXkkOJQK
         zSMBgT9Zzs7lcvOsY43EN5zB6w9A0DwSEMiG5pGAQDY0jwQEsqF5JCCQDc0jAYFBaF9X7Nmp54DuIeEE
         nuL1/Vwcwgig97Byl7/XSRgB9B5W7vL3OgnYjCZ/uwhGzt+MLKDIBfMWUipwgAfmLaRUjOPJr3n405Wy
         EikrkbISKevo7QMUz9QjxhbaUQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="colDateSent.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colFrom.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colTo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colSubject.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colReply.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

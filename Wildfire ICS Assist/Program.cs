@@ -111,5 +111,9 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        public static Color ErrorColor { get => Color.LightCoral; }
+        public static Color GoodColor { get => Color.LightSkyBlue; }
+        public static Color StandardControLColor { get => System.Drawing.SystemColors.Window; }
+
     }
 }

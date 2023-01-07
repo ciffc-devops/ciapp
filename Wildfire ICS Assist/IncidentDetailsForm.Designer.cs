@@ -183,6 +183,7 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
+            this.generalMessageICS213ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -910,7 +911,8 @@
             this.safetyMessageICS208ToolStripMenuItem,
             this.toolStripSeparator5,
             this.additionalDocumentsToolStripMenuItem,
-            this.communicationsListICS205AToolStripMenuItem});
+            this.communicationsListICS205AToolStripMenuItem,
+            this.generalMessageICS213ToolStripMenuItem});
             this.iAPToolStripMenuItem.Name = "iAPToolStripMenuItem";
             resources.ApplyResources(this.iAPToolStripMenuItem, "iAPToolStripMenuItem");
             // 
@@ -1325,6 +1327,12 @@
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
             // 
+            // generalMessageICS213ToolStripMenuItem
+            // 
+            this.generalMessageICS213ToolStripMenuItem.Name = "generalMessageICS213ToolStripMenuItem";
+            resources.ApplyResources(this.generalMessageICS213ToolStripMenuItem, "generalMessageICS213ToolStripMenuItem");
+            this.generalMessageICS213ToolStripMenuItem.Click += new System.EventHandler(this.generalMessageICS213ToolStripMenuItem_Click);
+            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1537,6 +1545,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem safetyMessageICS208ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generalMessageICS213ToolStripMenuItem;
     }
 }
 

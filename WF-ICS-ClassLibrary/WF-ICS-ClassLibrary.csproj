@@ -76,6 +76,7 @@
     <Compile Include="EventHandling\CommsPlanItemEventHandler.cs" />
     <Compile Include="EventHandling\ContactEventHandler.cs" />
     <Compile Include="EventHandling\EquipmentEventHandling.cs" />
+    <Compile Include="EventHandling\GeneralMessageEventHandler.cs" />
     <Compile Include="EventHandling\HospitalEventHandler.cs" />
     <Compile Include="EventHandling\IncidentObjectiveEventHandling.cs" />
     <Compile Include="EventHandling\MedicalPlanEventHandler.cs" />

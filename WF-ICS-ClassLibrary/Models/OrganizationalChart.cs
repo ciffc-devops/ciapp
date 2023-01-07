@@ -167,6 +167,16 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return RoleName + " - unassigned"; }
             }
         }
+        public string RoleNameWithIndividualAndDepth
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(IndividualName)) { return RoleNameForDropdown + " - " + IndividualName; }
+                else { return RoleNameForDropdown + " - unassigned"; }
+            }
+        }
+
+
         public Guid IndividualID
         {
             get

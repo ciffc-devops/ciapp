@@ -28,7 +28,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(15)] private string _Message;
         [ProtoMember(16)] private string _Reply;
         [ProtoMember(17)] private bool _Active;
-
+        [ProtoMember(18)] private DateTime _ReplyDate;
+        [ProtoMember(19)] private Guid _FromRoleID;
+        [ProtoMember(20)] private Guid _ApprovedByRoleID;
         public GeneralMessage() { MessageID = Guid.NewGuid(); }
 
 
@@ -52,7 +54,9 @@ namespace WF_ICS_ClassLibrary.Models
         public string Reply { get => _Reply; set => _Reply = value; }
         public bool HasReply { get => !string.IsNullOrEmpty(Reply); }
         public bool Active { get => _Active; set => _Active = value; }
-
+        public DateTime ReplyDate { get => _ReplyDate; set => _ReplyDate = value; }
+        public Guid FromRoleID { get => _FromRoleID; set => _FromRoleID = value; }
+        public Guid ApprovedByRoleID { get => _ApprovedByRoleID; set => _ApprovedByRoleID = value; }
 
     }
 }

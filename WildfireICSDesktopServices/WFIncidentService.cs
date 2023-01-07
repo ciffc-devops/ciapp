@@ -40,6 +40,7 @@ namespace WildfireICSDesktopServices
         public event WFIncidentEventHandler WfIncidentChanged;
         public event TaskUpdateEventHandler TaskUpdateChanged;
         public event TaskBasicsEventHandler TaskBasicsChanged;
+        public event GeneralMessageEventHandler GeneralMessageChanged;
 
         private WFIncident _currentIncident;
         public WFIncident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
@@ -1206,7 +1207,29 @@ namespace WildfireICSDesktopServices
 
 
 
-
+        // General Message
+        protected virtual void OnGeneralMessageChanged(GeneralMessageEventArgs e)
+        {
+            GeneralMessageEventHandler handler = this.GeneralMessageChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertGeneralMessage(GeneralMessage record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.AllGeneralMessages.Any(o => o.MessageID == record.MessageID))
+            {
+                _currentIncident.AllGeneralMessages = _currentIncident.AllGeneralMessages.Where(o => o.MessageID != record.MessageID).ToList();
+            }
+            _currentIncident.AllGeneralMessages.Add(record);
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnGeneralMessageChanged(new GeneralMessageEventArgs(record));
+        }
 
 
 

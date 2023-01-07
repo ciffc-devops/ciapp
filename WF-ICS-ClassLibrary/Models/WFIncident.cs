@@ -69,7 +69,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
             allCommsLogEntries = new List<CommsLogEntry>();
             AllOperationalPeriods = new List<OperationalPeriod>();
-
+            AllGeneralMessages = new List<GeneralMessage>();
 
             taskTimeline = new Timeline();
             // allEquipment = new List<TaskEquipment>();
@@ -234,7 +234,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public string DocumentPath { get => _DocumentPath; set => _DocumentPath = value; }
         public List<Contact> allContacts { get => _allContacts; set => _allContacts = value; }
         public List<GeneralMessage> AllGeneralMessages { get => _AllGeneralMessages; set => _AllGeneralMessages = value; }
-        public List<GeneralMessage> ActiveGeneralMessages { get => _AllGeneralMessages.Where(o=>o.Active).ToList(); }
+        public List<GeneralMessage> ActiveGeneralMessages { get { if (_AllGeneralMessages.Any()) { return _AllGeneralMessages.Where(o => o.Active).ToList(); } else { return new List<GeneralMessage>(); } } }
         public Timeline taskTimeline { get => _taskTimeline; set => _taskTimeline = value; }
         public List<Note> allNotes { get => _allNotes; set => _allNotes = value; }
         public List<Vehicle> allVehicles { get { if (_allVehicles == null) { _allVehicles = new List<Vehicle>(); } return _allVehicles; } set => _allVehicles = value; }

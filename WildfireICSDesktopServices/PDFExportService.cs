@@ -209,6 +209,163 @@ namespace WildfireICSDesktopServices
 
         }
 
+       
+
+        public List<byte[]> exportGeneralMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            List<GeneralMessage> items = task.ActiveGeneralMessages.Where(o => o.OpPeriod == OpPeriodToExport).ToList();
+            foreach (GeneralMessage sp in items)
+            {
+                string path = createGeneralMessagePDF(task, sp,  true, flattenPDF);
+                if (path != null)
+                {
+                    using (FileStream stream = File.OpenRead(path))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        allPDFs.Add(fileBytes);
+                    }
+                }
+            }
+            return allPDFs;
+        }
+
+        public List<byte[]> exportGeneralMessagesToPDF(WFIncident task, List<GeneralMessage> items, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            foreach (GeneralMessage sp in items)
+            {
+                string path = createGeneralMessagePDF(task, sp,  true, flattenPDF);
+                if (path != null)
+                {
+                    using (FileStream stream = File.OpenRead(path))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        allPDFs.Add(fileBytes);
+                    }
+                }
+            }
+            return allPDFs;
+        }
+
+        public string createGeneralMessagePDF(WFIncident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false)
+        {
+            string path = FileAccessClasses.getWritablePath(task);
+            if (task != null && item != null)
+            {
+                if (!tempFileName)
+                {
+
+
+                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+                    string filename = "ICS 213 - " + task.IncidentIdentifier + " - " + item.Subject.Sanitize() + ".pdf";
+                    if (filename.Length > 100)
+                    {
+                        filename = "ICS 213 - " + task.IncidentIdentifier + " - " + item.Subject.Sanitize().Substring(0, 20) + ".pdf";
+                    }
+                    path = FileAccessClasses.getUniqueFileName(filename, path);
+
+                    //path = System.IO.Path.Combine(path, filename);
+
+                }
+                else
+                {
+                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+                }
+
+                try
+                {
+
+
+
+
+                    string fileToUse = "BlankForms/ICS-213-WF-General-Message.pdf";
+                    PdfReader rdr = new PdfReader(fileToUse);
+
+                    using (FileStream stream = new System.IO.FileStream(path, System.IO.FileMode.Create))
+                    {
+                        PdfStamper stamper = new PdfStamper(rdr, stream);
+                        stamper.AcroFields.SetField("1A INCIDENT NAME Optional", task.TaskName);
+                        stamper.AcroFields.SetField("1B INCIDENT NUMBER", task.TaskNumber);
+                        stamper.AcroFields.SetField("4 SUBJECT", item.Subject);
+                        stamper.AcroFields.SetField("7 MESSAGE", item.Message);
+                        string date = string.Format("{0:yyyy-MMM-dd}", item.DateSent);
+                        stamper.AcroFields.SetField("5 DATE", string.Format("{0:yyyy-MMM-dd}", item.DateSent));
+                        stamper.AcroFields.SetField("6 TIME", string.Format("{0:HH:mm}", item.DateSent));
+                        stamper.AcroFields.SetField("2 TO Name and Position", item.To);
+                        stamper.AcroFields.SetField("3 FROM Name and Position", item.From);
+
+                        //approved by
+                        if (!string.IsNullOrEmpty(item.ApprovedByPosition)) { stamper.AcroFields.SetField("Position", item.ApprovedByPosition); }
+                        if (!string.IsNullOrEmpty(item.ApprovedByName)) { stamper.AcroFields.SetField("Name", item.ApprovedByName); }
+                        //reply
+                        if (!string.IsNullOrEmpty(item.Reply)) { stamper.AcroFields.SetField("9 REPLY", item.Reply); }
+                        if (!string.IsNullOrEmpty(item.ReplyByPosition)) { stamper.AcroFields.SetField("ReplyPosition", item.ReplyByPosition); }
+                        if (!string.IsNullOrEmpty(item.ReplyByName)) { stamper.AcroFields.SetField("ReplyName", item.ReplyByName); }
+                        stamper.AcroFields.SetField("ReplyDate", string.Format("{0:yyyy-MMM-dd HH:mm}", item.ReplyDate));
+
+
+
+
+
+                        if (flattenPDF)
+                        {
+                            stamper.FormFlattening = true;
+                        }
+
+
+                        //Rename the fields
+                        AcroFields af = stamper.AcroFields;
+                        List<string> fieldNames = new List<string>();
+                        foreach (var field in af.Fields)
+                        {
+                            fieldNames.Add(field.Key);
+                        }
+                        foreach (string s in fieldNames)
+                        {
+                            stamper.AcroFields.RenameField(s, s + item.MessageID.ToString());
+                        }
+
+
+
+
+                        stamper.Close();//Close a PDFStamper Object
+                        stamper.Dispose();
+                        rdr.Close();    //Close a PDFReader Object
+
+
+                    }
+
+                }
+                catch (IOException ex)
+                {
+                }
+                catch (System.UnauthorizedAccessException)
+                {
+
+                }
+            }
+            return path;
+        }
+
+
+
+
+
+
+
+
+
+
         public List<byte[]> exportSafetyPlansToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();

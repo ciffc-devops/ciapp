@@ -501,6 +501,9 @@
     <None Include="BlankForms\ICS-207-WF-Organization-Chart.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\ICS-213-WF-General-Message.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS-214-WF-Activity-Log-Supplemental.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -105,6 +105,8 @@ namespace Wildfire_ICS_Assist
         PositionLogForm _positionLogForm = null;
         PositionLogAllOutstandingForm _positionLogAllOutstandingForm = null;
         IncidentObjectivesForm objectivesForm = null;
+        GeneralMessagesForm generalMessagesForm = null;
+
         /* Event Handlers!*/
 
         public event ShortcutEventHandler ShortcutButtonClicked;
@@ -121,6 +123,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
             Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
             Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
+            Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
         }
 
 
@@ -632,21 +635,21 @@ namespace Wildfire_ICS_Assist
         {
             bool set = false;
             List<string> errors = new List<string>();
-            if (!string.IsNullOrEmpty(txtTaskName.Text) || !string.IsNullOrEmpty(txtTaskNumber.Text)) { set = true; }
+            if (!string.IsNullOrEmpty(txtTaskName.Text.Trim()) || !string.IsNullOrEmpty(txtTaskNumber.Text.Trim())) { set = true; }
             else { set = false; errors.Add("You must set either an incident name or number to begin."); }
 
-            if (string.IsNullOrEmpty(txtTaskName.Text)) { txtTaskName.BackColor = Color.LightCoral; }
-            else { txtTaskName.BackColor = Color.LightSkyBlue; ; }
+            if (string.IsNullOrEmpty(txtTaskName.Text.Trim())) { txtTaskName.BackColor = Program.ErrorColor; }
+            else { txtTaskName.BackColor = Program.GoodColor; ; }
 
-            if (string.IsNullOrEmpty(txtTaskNumber.Text)) { txtTaskNumber.BackColor = Color.LightCoral; }
-            else { txtTaskNumber.BackColor = Color.LightSkyBlue; ; }
+            if (string.IsNullOrEmpty(txtTaskNumber.Text.Trim())) { txtTaskNumber.BackColor = Program.ErrorColor; }
+            else { txtTaskNumber.BackColor = Program.GoodColor; ; }
 
 
-            bool tasknamechanged = (string.IsNullOrEmpty(CurrentIncident.TaskName) || !CurrentIncident.TaskName.Equals(txtTaskName.Text));
-            if (tasknamechanged) { CurrentIncident.TaskName = txtTaskName.Text; }
+            bool tasknamechanged = (string.IsNullOrEmpty(CurrentIncident.TaskName) || !CurrentIncident.TaskName.Equals(txtTaskName.Text.Trim()));
+            if (tasknamechanged) { CurrentIncident.TaskName = txtTaskName.Text.Trim(); }
 
-            bool tasknumberchanged = (string.IsNullOrEmpty(CurrentIncident.TaskNumber) || !CurrentIncident.TaskNumber.Equals(txtTaskNumber.Text));
-            if (tasknumberchanged && validateTaskNumber()) { CurrentIncident.TaskNumber = txtTaskNumber.Text; }
+            bool tasknumberchanged = (string.IsNullOrEmpty(CurrentIncident.TaskNumber) || !CurrentIncident.TaskNumber.Equals(txtTaskNumber.Text.Trim()));
+            if (tasknumberchanged && validateTaskNumber()) { CurrentIncident.TaskNumber = txtTaskNumber.Text.Trim(); }
 
             if (tasknamechanged || tasknumberchanged)
             {
@@ -1043,8 +1046,8 @@ namespace Wildfire_ICS_Assist
 
             }
             /*
-            if (string.IsNullOrEmpty(txtTaskNumber.Text)) { txtTaskNumber.BackColor = Color.LightCoral; }
-            else if (!validateTaskNumber()) { txtTaskNumber.BackColor = Color.LightCoral; }
+            if (string.IsNullOrEmpty(txtTaskNumber.Text)) { txtTaskNumber.BackColor = Program.ErrorColor; }
+            else if (!validateTaskNumber()) { txtTaskNumber.BackColor = Program.ErrorColor; }
             else { txtTaskNumber.BackColor = Color.LightGreen; }
             */
         }
@@ -1318,6 +1321,12 @@ namespace Wildfire_ICS_Assist
             }
             TriggerAutoSave();
         }
+
+        private void Program_GeneralMessageChanged(GeneralMessageEventArgs e)
+        {
+            TriggerAutoSave();
+        }
+
         private void Program_IncidentObjectiveChanged(IncidentObjectiveEventArgs e)
         {
             if (e.item.OpPeriod == CurrentOpPeriod)
@@ -1327,5 +1336,33 @@ namespace Wildfire_ICS_Assist
             TriggerAutoSave();
         }
 
+        private void generalMessageICS213ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenGeneralMessagesForm();
+
+        }
+
+        private void OpenGeneralMessagesForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (generalMessagesForm == null)
+                {
+                    generalMessagesForm = new GeneralMessagesForm();
+                    generalMessagesForm.FormClosed += new FormClosedEventHandler(GeneralMessagesForm_Closed);
+                    ActiveForms.Add(generalMessagesForm);
+                    generalMessagesForm.Show(this);
+                }
+
+                generalMessagesForm.BringToFront();
+            }
+        }
+        void GeneralMessagesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(generalMessagesForm);
+            generalMessagesForm = null;
+
+
+        }
     }
 }

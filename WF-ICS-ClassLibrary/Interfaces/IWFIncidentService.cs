@@ -40,6 +40,7 @@ namespace WildfireICSDesktopServices
         event TimelineEventEventHandler TimelineEventChanged;
         event VehicleEventHandler VehicleChanged;
         event WFIncidentEventHandler WfIncidentChanged;
+        event GeneralMessageEventHandler GeneralMessageChanged;
 
         void ApplyTaskUpdate(TaskUpdate update, bool applyAllSubsequent = false);
         void ConnectToServerTask(Guid TaskID, string EncryptionKey);
@@ -93,5 +94,6 @@ namespace WildfireICSDesktopServices
         void UpsertTimeline(Timeline record, string source = "local");
         void UpsertTimelineEvent(TimelineEvent record, string source = "local");
         void UpsertVehicle(Vehicle record, string source = "local");
+        void UpsertGeneralMessage(GeneralMessage record, string source = "local");
     }
 }

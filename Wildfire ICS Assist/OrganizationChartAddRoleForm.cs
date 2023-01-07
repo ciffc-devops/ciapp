@@ -67,8 +67,8 @@ namespace Wildfire_ICS_Assist
 
         private bool ValidateForm()
         {
-            if (string.IsNullOrEmpty(txtRoleName.Text)) { txtRoleName.BackColor = Color.LightCoral; return false; } else { txtRoleName.BackColor = Color.LightSkyBlue; }
-            if (cboReportsTo.SelectedItem == null) { cboReportsTo.BackColor = Color.LightCoral; return false; } else { cboReportsTo.BackColor = Color.LightSkyBlue; }
+            if (string.IsNullOrEmpty(txtRoleName.Text)) { txtRoleName.BackColor = Program.ErrorColor; return false; } else { txtRoleName.BackColor = Program.GoodColor; }
+            if (cboReportsTo.SelectedItem == null) { cboReportsTo.BackColor = Program.ErrorColor; return false; } else { cboReportsTo.BackColor = Program.GoodColor; }
             return true;
         }
 

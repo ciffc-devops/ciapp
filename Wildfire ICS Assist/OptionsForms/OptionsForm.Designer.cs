@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbGeneral = new System.Windows.Forms.TabPage();
+            this.rbNumbersOrLetters = new System.Windows.Forms.RadioButton();
+            this.rbNumbersOnly = new System.Windows.Forms.RadioButton();
+            this.label19 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.cboDefaultICSRole = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,9 +69,6 @@
             this.txtICPCallSign = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.tbNetworking = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btnHelpDefaultPort = new System.Windows.Forms.Button();
             this.btnHelpDefaultToServer = new System.Windows.Forms.Button();
             this.numDefaultPortNumber = new System.Windows.Forms.NumericUpDown();
@@ -79,20 +79,20 @@
             this.btnTrustedDevicesHelp = new System.Windows.Forms.Button();
             this.btnRemoveTrustedDevice = new System.Windows.Forms.Button();
             this.lbTrustedDevices = new System.Windows.Forms.ListBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
-            this.rbNumbersOrLetters = new System.Windows.Forms.RadioButton();
-            this.rbNumbersOnly = new System.Windows.Forms.RadioButton();
-            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             this.tbFileManagement.SuspendLayout();
             this.tbComms.SuspendLayout();
             this.tbNetworking.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -127,6 +127,38 @@
             this.tbGeneral.TabIndex = 0;
             this.tbGeneral.Text = "General";
             this.tbGeneral.Click += new System.EventHandler(this.tbGeneral_Click);
+            // 
+            // rbNumbersOrLetters
+            // 
+            this.rbNumbersOrLetters.AutoSize = true;
+            this.rbNumbersOrLetters.Location = new System.Drawing.Point(468, 108);
+            this.rbNumbersOrLetters.Name = "rbNumbersOrLetters";
+            this.rbNumbersOrLetters.Size = new System.Drawing.Size(195, 28);
+            this.rbNumbersOrLetters.TabIndex = 117;
+            this.rbNumbersOrLetters.Text = "Allow All Characters";
+            this.rbNumbersOrLetters.UseVisualStyleBackColor = true;
+            // 
+            // rbNumbersOnly
+            // 
+            this.rbNumbersOnly.AutoSize = true;
+            this.rbNumbersOnly.Checked = true;
+            this.rbNumbersOnly.Location = new System.Drawing.Point(267, 108);
+            this.rbNumbersOnly.Name = "rbNumbersOnly";
+            this.rbNumbersOnly.Size = new System.Drawing.Size(195, 28);
+            this.rbNumbersOnly.TabIndex = 116;
+            this.rbNumbersOnly.TabStop = true;
+            this.rbNumbersOnly.Text = "Only allow numbers";
+            this.rbNumbersOnly.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(19, 104);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(242, 32);
+            this.label19.TabIndex = 115;
+            this.label19.Text = "Incident Number Format";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label28
             // 
@@ -256,6 +288,7 @@
             // 
             this.btnAutomaticSubFoldersHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAutomaticSubFoldersHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAutomaticSubFoldersHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnAutomaticSubFoldersHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnAutomaticSubFoldersHelp.Image")));
             this.btnAutomaticSubFoldersHelp.Location = new System.Drawing.Point(694, 287);
             this.btnAutomaticSubFoldersHelp.Name = "btnAutomaticSubFoldersHelp";
@@ -311,6 +344,7 @@
             // btnAutoBackupHelp
             // 
             this.btnAutoBackupHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAutoBackupHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnAutoBackupHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnAutoBackupHelp.Image")));
             this.btnAutoBackupHelp.Location = new System.Drawing.Point(570, 137);
             this.btnAutoBackupHelp.Name = "btnAutoBackupHelp";
@@ -421,10 +455,10 @@
             this.tbComms.Controls.Add(this.label14);
             this.tbComms.Controls.Add(this.txtICPCallSign);
             this.tbComms.Controls.Add(this.label15);
-            this.tbComms.Location = new System.Drawing.Point(4, 33);
+            this.tbComms.Location = new System.Drawing.Point(4, 22);
             this.tbComms.Name = "tbComms";
             this.tbComms.Padding = new System.Windows.Forms.Padding(3);
-            this.tbComms.Size = new System.Drawing.Size(738, 404);
+            this.tbComms.Size = new System.Drawing.Size(738, 415);
             this.tbComms.TabIndex = 1;
             this.tbComms.Text = "Communications";
             this.tbComms.UseVisualStyleBackColor = true;
@@ -551,61 +585,12 @@
             this.tbNetworking.Controls.Add(this.btnTrustedDevicesHelp);
             this.tbNetworking.Controls.Add(this.btnRemoveTrustedDevice);
             this.tbNetworking.Controls.Add(this.lbTrustedDevices);
-            this.tbNetworking.Location = new System.Drawing.Point(4, 33);
+            this.tbNetworking.Location = new System.Drawing.Point(4, 22);
             this.tbNetworking.Name = "tbNetworking";
-            this.tbNetworking.Size = new System.Drawing.Size(738, 404);
+            this.tbNetworking.Size = new System.Drawing.Size(738, 415);
             this.tbNetworking.TabIndex = 2;
             this.tbNetworking.Text = "Networking";
             this.tbNetworking.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(746, 511);
-            this.splitContainer1.SplitterDistance = 441;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(14, 4);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(5);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(123, 51);
-            this.btnCancel.TabIndex = 27;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(612, 4);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(122, 51);
-            this.btnSave.TabIndex = 26;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnHelpDefaultPort
             // 
@@ -707,7 +692,7 @@
             // 
             this.btnRemoveTrustedDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveTrustedDevice.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_193_circle_empty_remove;
-            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 346);
+            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 357);
             this.btnRemoveTrustedDevice.Name = "btnRemoveTrustedDevice";
             this.btnRemoveTrustedDevice.Size = new System.Drawing.Size(290, 42);
             this.btnRemoveTrustedDevice.TabIndex = 115;
@@ -732,37 +717,54 @@
             this.lbTrustedDevices.TabIndex = 114;
             this.lbTrustedDevices.ValueMember = "DeviceID";
             // 
-            // rbNumbersOrLetters
+            // splitContainer1
             // 
-            this.rbNumbersOrLetters.AutoSize = true;
-            this.rbNumbersOrLetters.Location = new System.Drawing.Point(468, 108);
-            this.rbNumbersOrLetters.Name = "rbNumbersOrLetters";
-            this.rbNumbersOrLetters.Size = new System.Drawing.Size(195, 28);
-            this.rbNumbersOrLetters.TabIndex = 117;
-            this.rbNumbersOrLetters.Text = "Allow All Characters";
-            this.rbNumbersOrLetters.UseVisualStyleBackColor = true;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // rbNumbersOnly
+            // splitContainer1.Panel1
             // 
-            this.rbNumbersOnly.AutoSize = true;
-            this.rbNumbersOnly.Checked = true;
-            this.rbNumbersOnly.Location = new System.Drawing.Point(267, 108);
-            this.rbNumbersOnly.Name = "rbNumbersOnly";
-            this.rbNumbersOnly.Size = new System.Drawing.Size(195, 28);
-            this.rbNumbersOnly.TabIndex = 116;
-            this.rbNumbersOnly.TabStop = true;
-            this.rbNumbersOnly.Text = "Only allow numbers";
-            this.rbNumbersOnly.UseVisualStyleBackColor = true;
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
             // 
-            // label19
+            // splitContainer1.Panel2
             // 
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(19, 104);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(242, 32);
-            this.label19.TabIndex = 115;
-            this.label19.Text = "Incident Number Format";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
+            this.splitContainer1.Panel2.Controls.Add(this.btnSave);
+            this.splitContainer1.Size = new System.Drawing.Size(746, 511);
+            this.splitContainer1.SplitterDistance = 441;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnCancel.Location = new System.Drawing.Point(14, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(5);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(123, 51);
+            this.btnCancel.TabIndex = 27;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
+            this.btnSave.Location = new System.Drawing.Point(612, 4);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(122, 51);
+            this.btnSave.TabIndex = 26;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // OptionsForm
             // 
@@ -785,11 +787,11 @@
             this.tbComms.PerformLayout();
             this.tbNetworking.ResumeLayout(false);
             this.tbNetworking.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).EndInit();
             this.ResumeLayout(false);
 
         }

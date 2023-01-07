@@ -30,8 +30,8 @@ namespace Wildfire_ICS_Assist
 
         private bool ValidateNew()
         {
-            if (string.IsNullOrEmpty(txtChannelID.Text)) { txtChannelID.BackColor = Color.LightCoral; return false; } else { txtChannelID.BackColor = Color.LightSkyBlue; }
-            if (string.IsNullOrEmpty(txtFunction.Text)) { txtFunction.BackColor = Color.LightCoral; return false; } else { txtFunction.BackColor = Color.LightSkyBlue; }
+            if (string.IsNullOrEmpty(txtChannelID.Text)) { txtChannelID.BackColor = Program.ErrorColor; return false; } else { txtChannelID.BackColor = Program.GoodColor; }
+            if (string.IsNullOrEmpty(txtFunction.Text)) { txtFunction.BackColor = Program.ErrorColor; return false; } else { txtFunction.BackColor = Program.GoodColor; }
 
             return true;
         }

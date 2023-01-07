@@ -57,9 +57,9 @@ namespace Wildfire_ICS_Assist.CustomControls
             teamMember.Name  = ((TextBox)sender).Text;
             if (string.IsNullOrEmpty(((TextBox)sender).Text))
             {
-                txtName.BackColor = Color.LightCoral;
+                txtName.BackColor = Program.ErrorColor;
             }
-else { txtName.BackColor = Color.LightSkyBlue; }
+else { txtName.BackColor = Program.GoodColor; }
         }
 
         private void cboProvince_SelectedIndexChanged(object sender, EventArgs e)

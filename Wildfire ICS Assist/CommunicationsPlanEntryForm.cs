@@ -78,15 +78,15 @@ namespace Wildfire_ICS_Assist
         {
 
 
-            if (string.IsNullOrEmpty(txtSavedFunction.Text)) { txtSavedFunction.BackColor = Color.LightCoral; return false; } else { txtSavedFunction.BackColor = Color.LightSkyBlue; }
-            if(cboSavedComms.SelectedItem == null) { cboSavedComms.BackColor = Color.LightCoral;  return false; } else { cboSavedComms.BackColor = Color.LightSkyBlue; }
+            if (string.IsNullOrEmpty(txtSavedFunction.Text)) { txtSavedFunction.BackColor = Program.ErrorColor; return false; } else { txtSavedFunction.BackColor = Program.GoodColor; }
+            if(cboSavedComms.SelectedItem == null) { cboSavedComms.BackColor = Program.ErrorColor;  return false; } else { cboSavedComms.BackColor = Program.GoodColor; }
             return true;
         }
 
         private bool ValidateNew()
         {
-            if (string.IsNullOrEmpty(txtChannelID.Text)) { txtChannelID.BackColor = Color.LightCoral; return false; } else { txtChannelID.BackColor = Color.LightSkyBlue; }
-            if (string.IsNullOrEmpty(txtFunction.Text)) { txtFunction.BackColor = Color.LightCoral; return false; } else { txtFunction.BackColor = Color.LightSkyBlue; }
+            if (string.IsNullOrEmpty(txtChannelID.Text)) { txtChannelID.BackColor = Program.ErrorColor; return false; } else { txtChannelID.BackColor = Program.GoodColor; }
+            if (string.IsNullOrEmpty(txtFunction.Text)) { txtFunction.BackColor = Program.ErrorColor; return false; } else { txtFunction.BackColor = Program.GoodColor; }
 
             return true;
         }
