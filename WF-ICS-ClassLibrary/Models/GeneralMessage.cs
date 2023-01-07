@@ -47,8 +47,11 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public string ApprovedByName { get => _ApprovedByName; set => _ApprovedByName = value; }
         public string ApprovedByPosition { get => _ApprovedByPosition; set => _ApprovedByPosition = value; }
+        public string ApprovedBy { get { StringBuilder from = new StringBuilder(); if (!string.IsNullOrEmpty(ApprovedByName)) { from.Append(ApprovedByName); if (!string.IsNullOrEmpty(ApprovedByPosition)) { from.Append(" - "); from.Append(ApprovedByPosition); } } else if (!string.IsNullOrEmpty(ApprovedByPosition)) { from.Append(ApprovedByPosition); } return from.ToString(); } }
         public string ReplyByPosition { get => _ReplyByPosition; set => _ReplyByPosition = value; }
         public string ReplyByName { get => _ReplyByName; set => _ReplyByName = value; }
+        public string ReplyBy { get { StringBuilder from = new StringBuilder(); if (!string.IsNullOrEmpty(ReplyByName)) { from.Append(ReplyByName); if (!string.IsNullOrEmpty(ReplyByPosition)) { from.Append(" - "); from.Append(ReplyByPosition); } } else if (!string.IsNullOrEmpty(ReplyByPosition)) { from.Append(ReplyByPosition); } return from.ToString(); } }
+
         public string Subject { get => _Subject; set => _Subject = value; }
         public string Message { get => _Message; set => _Message = value; }
         public string Reply { get => _Reply; set => _Reply = value; }

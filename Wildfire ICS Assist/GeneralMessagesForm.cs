@@ -71,6 +71,15 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void OpenForView(GeneralMessage msg)
+        {
+            using (GeneralMessageViewForm viewForm = new GeneralMessageViewForm())
+            {
+                viewForm.generalMessage = msg;
+                viewForm.ShowDialog();
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             GeneralMessage gm = new GeneralMessage();
@@ -101,7 +110,11 @@ namespace Wildfire_ICS_Assist
 
         private void btnViewDetails_Click(object sender, EventArgs e)
         {
-
+            if(dgvLog.SelectedRows.Count == 1)
+            {
+                GeneralMessage gm = (GeneralMessage)dgvLog.SelectedRows[0].DataBoundItem;
+                OpenForView(gm);
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -190,7 +203,7 @@ namespace Wildfire_ICS_Assist
             if (e.RowIndex >= 0)
             {
                 GeneralMessage gm = (GeneralMessage)dgvLog.Rows[e.RowIndex].DataBoundItem;
-                OpenForEdit(gm);
+                OpenForView(gm);
             }
         }
 
