@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary;
+using System.CodeDom;
 
 namespace Wildfire_ICS_Assist
 {
@@ -29,6 +30,7 @@ namespace Wildfire_ICS_Assist
         {
             
             DisplayRole();
+            txtRoleName.Focus();
         }
 
         private void DisplayRole()
@@ -36,13 +38,16 @@ namespace Wildfire_ICS_Assist
             cboReportsTo.Items.Clear();
             CurrentOrgChart.SortRoles();
 
-            cboReportsTo.DataSource = CurrentOrgChart.AllRoles.Where(o => o.RoleID != selectedRole.RoleID).ToList();
+            cboReportsTo.DataSource = CurrentOrgChart.AllRoles;
             txtRoleName.Text = selectedRole.RoleName;
             if(selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.AllRoles.Any(o=>o.RoleID == selectedRole.ReportsTo))
             {
                 cboReportsTo.SelectedValue = selectedRole.ReportsTo;
             }
 
+            if (string.IsNullOrEmpty(selectedRole.RoleName)) { lblTitle.Text = Properties.Resources.AddOrgChartRole; }
+            else {  lblTitle.Text = "Edit " + selectedRole.RoleName; }
+            txtRoleName.Focus();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -69,6 +74,19 @@ namespace Wildfire_ICS_Assist
         {
             if (string.IsNullOrEmpty(txtRoleName.Text)) { txtRoleName.BackColor = Program.ErrorColor; return false; } else { txtRoleName.BackColor = Program.GoodColor; }
             if (cboReportsTo.SelectedItem == null) { cboReportsTo.BackColor = Program.ErrorColor; return false; } else { cboReportsTo.BackColor = Program.GoodColor; }
+            if(((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor; MessageBox.Show(Properties.Resources.CantReportToSelf); return false; }
+
+            //When editing an existing role, don't let it make its own subordinate its parent
+            if (CurrentOrgChart.AllRoles.Any(o=>o.RoleID == selectedRole.RoleID)) {
+                List<ICSRole> childRoles = CurrentOrgChart.GetChildRoles(selectedRole.RoleID, true);
+                ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;
+                if(childRoles.Any(o=>o.RoleID == rep.RoleID))
+                {
+                    MessageBox.Show(Properties.Resources.InvalidReportsToRole);
+                    cboReportsTo.BackColor = Program.ErrorColor;
+                    return false;
+                }
+            }
             return true;
         }
 

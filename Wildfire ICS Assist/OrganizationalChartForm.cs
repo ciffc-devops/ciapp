@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -47,11 +48,12 @@ namespace Wildfire_ICS_Assist
         }
         private void Program_ICSRoleChanged(ICSRoleEventArgs e)
         {
-            PopulateTree();
+            if (e.item != null && CurrentOrgChart.AllRoles.Any(o => o.RoleID == e.item.RoleID)) { PopulateTree(e.item); }
+            else { PopulateTree(); }
         }
 
 
-        private void PopulateTree()
+        private void PopulateTree(ICSRole selectedRole = null)
         {
             if (!Program.CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
             {
@@ -64,10 +66,46 @@ namespace Wildfire_ICS_Assist
             if (treeOrgChart.Nodes.Count > 0)
             {
                 treeOrgChart.Nodes[0].ExpandAll();
-                treeOrgChart.SelectedNode = treeOrgChart.Nodes[0];
+                if (selectedRole == null)
+                {
+                    treeOrgChart.SelectedNode = treeOrgChart.Nodes[0];
+                }
+                else
+                {
+                    TreeNode selectedNode = GetSelectedByRoleID(selectedRole.RoleID);
+                    if (selectedNode != null)
+                    {
+                        treeOrgChart.SelectedNode = selectedNode;
+                    }
+                    else { treeOrgChart.SelectedNode = treeOrgChart.Nodes[0]; }
+                }
                 if (treeOrgChart.SelectedNode != null) treeOrgChart.SelectedNode.EnsureVisible();
 
             }
+            treeOrgChart.Focus();
+        }
+
+        private TreeNode GetSelectedByRoleID(Guid roleid)
+        {
+            TreeNode itemNode = null;
+            foreach (TreeNode node in treeOrgChart.Nodes)
+            {
+                itemNode = FromID(roleid, node);
+                if (itemNode != null) break;
+            }
+
+            return itemNode;
+        }
+
+        private TreeNode FromID(Guid itemId, TreeNode rootNode)
+        {
+            foreach (TreeNode node in rootNode.Nodes)
+            {
+                if (((ICSRole) node.Tag).RoleID == itemId) return node;
+                TreeNode next = FromID(itemId, node);
+                if (next != null) return next;
+            }
+            return null;
         }
 
         private void AddCurrentChild(Guid parentId, TreeNodeCollection nodes)
@@ -104,21 +142,10 @@ namespace Wildfire_ICS_Assist
 
         private void treeOrgChart_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (treeOrgChart.SelectedNode != null)
-            {
-                ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
-                if (OrgChartTools.ProtectedRoleIDs.Contains(role.RoleID))
-                {
-                    btnEditRole.Enabled = false;
-                    btnDeleteRole.Enabled = false;
-                }
-                else
-                {
-                    btnEditRole.Enabled = true;
-                    btnDeleteRole.Enabled = true;
-                }
-            }
+            
         }
+
+        
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -130,15 +157,18 @@ namespace Wildfire_ICS_Assist
 
         private void openRoleForEdit(ICSRole role)
         {
-            using (OrganizationChartAddRoleForm addRoleForm = new OrganizationChartAddRoleForm())
+            if (!OrgChartTools.ProtectedRoleIDs.Contains(role.RoleID))
             {
-                addRoleForm.selectedRole = role;
-                DialogResult dr = addRoleForm.ShowDialog();
-                if (dr == DialogResult.OK)
+                using (OrganizationChartAddRoleForm addRoleForm = new OrganizationChartAddRoleForm())
                 {
-                    Program.wfIncidentService.UpsertICSRole(addRoleForm.selectedRole);
+                    addRoleForm.selectedRole = role;
+                    DialogResult dr = addRoleForm.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        Program.wfIncidentService.UpsertICSRole(addRoleForm.selectedRole);
+                    }
                 }
-            }
+            } else { MessageBox.Show(Properties.Resources.ProtectedRole); }
         }
 
         private void btnEditRole_Click(object sender, EventArgs e)
@@ -173,7 +203,7 @@ namespace Wildfire_ICS_Assist
                 {
                     Program.wfIncidentService.DeleteICSRole(role, Program.CurrentOpPeriod);
                 }
-            }
+            } else { MessageBox.Show(Properties.Resources.ProtectedRole); }
 
         }
 

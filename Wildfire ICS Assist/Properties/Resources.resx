@@ -367,4 +367,16 @@
   <data name="MissingInformationValidationError" xml:space="preserve">
     <value>You must complete all required fields in order to proceed.  Required fields are marked with a *.</value>
   </data>
+  <data name="AddOrgChartRole" xml:space="preserve">
+    <value>Add new organization chart role</value>
+  </data>
+  <data name="CantReportToSelf" xml:space="preserve">
+    <value>Roles cannot be set to report to themselves.</value>
+  </data>
+  <data name="InvalidReportsToRole" xml:space="preserve">
+    <value>Sorry, you have made an invalid choice for who this role reports to.  The role you have selected is further down the org chart under the current role.</value>
+  </data>
+  <data name="ProtectedRole" xml:space="preserve">
+    <value>Sorry, this role cannot be edited or removed as it is essential to ICS organizational structure</value>
+  </data>
 </root>

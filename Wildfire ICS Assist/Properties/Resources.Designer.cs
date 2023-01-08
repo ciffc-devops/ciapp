@@ -61,6 +61,24 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new organization chart role.
+        /// </summary>
+        internal static string AddOrgChartRole {
+            get {
+                return ResourceManager.GetString("AddOrgChartRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Roles cannot be set to report to themselves..
+        /// </summary>
+        internal static string CantReportToSelf {
+            get {
+                return ResourceManager.GetString("CantReportToSelf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter a name for the contact before saving..
         /// </summary>
         internal static string EditContactValidationError {
@@ -850,11 +868,29 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry, you have made an invalid choice for who this role reports to.  The role you have selected is further down the org chart under the current role..
+        /// </summary>
+        internal static string InvalidReportsToRole {
+            get {
+                return ResourceManager.GetString("InvalidReportsToRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must complete all required fields in order to proceed.  Required fields are marked with a *..
         /// </summary>
         internal static string MissingInformationValidationError {
             get {
                 return ResourceManager.GetString("MissingInformationValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, this role cannot be edited or removed as it is essential to ICS organizational structure.
+        /// </summary>
+        internal static string ProtectedRole {
+            get {
+                return ResourceManager.GetString("ProtectedRole", resourceCulture);
             }
         }
         
