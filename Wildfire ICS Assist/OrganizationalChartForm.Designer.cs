@@ -76,7 +76,6 @@
             // 
             // btnDeleteRole
             // 
-            this.btnDeleteRole.Enabled = false;
             this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDeleteRole.Location = new System.Drawing.Point(493, 3);
             this.btnDeleteRole.Name = "btnDeleteRole";
@@ -90,7 +89,6 @@
             // 
             // btnEditRole
             // 
-            this.btnEditRole.Enabled = false;
             this.btnEditRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditRole.Location = new System.Drawing.Point(340, 3);
             this.btnEditRole.Name = "btnEditRole";

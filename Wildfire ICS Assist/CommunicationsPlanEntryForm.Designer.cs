@@ -370,11 +370,11 @@
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(393, 362);
+            this.chkSaveForLater.Location = new System.Drawing.Point(301, 362);
             this.chkSaveForLater.Name = "chkSaveForLater";
-            this.chkSaveForLater.Size = new System.Drawing.Size(137, 28);
+            this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSaveForLater.TabIndex = 12;
-            this.chkSaveForLater.Text = "Save for later";
+            this.chkSaveForLater.Text = "Save for future incidents";
             this.chkSaveForLater.UseVisualStyleBackColor = true;
             // 
             // label10

@@ -46,7 +46,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtQualifications = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnNameHelp = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -215,22 +214,6 @@
             this.txtQualifications.Size = new System.Drawing.Size(260, 29);
             this.txtQualifications.TabIndex = 20;
             this.txtQualifications.TextChanged += new System.EventHandler(this.txtQualifications_TextChanged);
-            // 
-            // btnNameHelp
-            // 
-            this.btnNameHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNameHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNameHelp.BackgroundImage")));
-            this.btnNameHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnNameHelp.Location = new System.Drawing.Point(478, 8);
-            this.btnNameHelp.Name = "btnNameHelp";
-            this.btnNameHelp.Size = new System.Drawing.Size(26, 26);
-            this.btnNameHelp.TabIndex = 91;
-            this.btnNameHelp.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnNameHelp, "Use this field to describe the owner of the radio system (if multi systems are us" +
-        "ed on same incident. I.e., DNR, DOT, DFO, and \"Type\" examples are: Cellular, Sat" +
-        "ellite, UHF, VHF, etc.");
-            this.btnNameHelp.UseVisualStyleBackColor = true;
-            this.btnNameHelp.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
             // button1
             // 
@@ -404,7 +387,6 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnNameHelp);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtQualifications);
             this.Controls.Add(this.label7);
@@ -446,7 +428,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtQualifications;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button btnNameHelp;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
