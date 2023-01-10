@@ -911,9 +911,10 @@ namespace WildfireICSDesktopServices
                                     List<string> extraPaths = createOrgChartExtensionPDF(task, currentChart, role, paths.Count + 1, TotalPages);
                                     if (!string.IsNullOrEmpty(role.PDFFieldName))
                                     {
-                                        string seeMore = "See page " + (paths.Count + 1) + " for details";
-                                        if (extraPaths.Count > 1) { seeMore = "See pages " + (paths.Count + 1) + " - " + (paths.Count + extraPaths.Count) + " for details"; }
-
+                                        string seeMore = null;
+                                        if (!string.IsNullOrEmpty(role.IndividualName)) { seeMore = role.IndividualName + " / "; }
+                                        seeMore += "See page " + (paths.Count + 1);
+                                        if (extraPaths.Count > 1) { seeMore += " - " + (paths.Count + extraPaths.Count); }
                                         stamper.AcroFields.SetField(role.PDFFieldName, seeMore);
                                     }
                                     paths.AddRange(extraPaths);
@@ -1079,6 +1080,7 @@ namespace WildfireICSDesktopServices
                             stamper.AcroFields.SetField("Name1", parentRole.IndividualName);
 
                             List<ICSRole> childRoles = currentChart.GetChildRoles(parentRole.RoleID, false);
+                            childRoles = childRoles.Where(o => string.IsNullOrEmpty(o.PDFFieldName)).ToList();
 
                             for (int r = startOnChild; r < childRoles.Count && r < (startOnChild + 4); r++)
                             {
@@ -1091,7 +1093,7 @@ namespace WildfireICSDesktopServices
                                 stamper.AcroFields.SetField(nameFieldName, child.IndividualName);
 
                                 List<ICSRole> grandChildren = currentChart.GetChildRoles(child.RoleID, false);
-
+                                grandChildren = grandChildren.Where(o => string.IsNullOrEmpty(o.PDFFieldName)).ToList();
 
                                 for (int g = 0; g < grandChildren.Count && g < 5; g++)
                                 {
@@ -1101,10 +1103,18 @@ namespace WildfireICSDesktopServices
 
                                     //If it has grand kits, this starts over again...
                                     List<ICSRole> greatGrandChildren = currentChart.GetChildRoles(grandchild.RoleID, false);
+                                    greatGrandChildren = greatGrandChildren.Where(o => string.IsNullOrEmpty(o.PDFFieldName)).ToList();
+
                                     if (greatGrandChildren.Count > 0)
                                     {
                                         stamper.AcroFields.SetField(gcpositionFieldName, grandchild.RoleName);
-                                        stamper.AcroFields.SetField(gcnameFieldName, "See Page " + (ThisPageNumber + 1) + " for details");
+                                        string seeMore = null;
+                                        if (!string.IsNullOrEmpty(grandchild.IndividualName)) { seeMore = grandchild.IndividualName + " / "; }
+                                        seeMore += "See page " + (ThisPageNumber + 1);
+                                        
+
+                                        stamper.AcroFields.SetField(gcnameFieldName, seeMore);
+
                                         List<string> childPaths = createOrgChartExtensionPDF(task, currentChart, grandchild, ThisPageNumber + 1, totalPages,0, flattenPDF);
                                         paths.AddRange(childPaths);
                                     }
@@ -1262,6 +1272,8 @@ namespace WildfireICSDesktopServices
                             if (chart.AllRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).Count() <= 5)
                             {
                                 PdfPTable table = new PdfPTable(3);
+                                table.WidthPercentage= 100;
+
                                 Paragraph p = new Paragraph();
                                 p.SpacingAfter = 10;
                                 p.Font = sectionfont;

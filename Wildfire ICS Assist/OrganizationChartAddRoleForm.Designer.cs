@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtRoleName = new System.Windows.Forms.TextBox();
             this.cboReportsTo = new System.Windows.Forms.ComboBox();
@@ -36,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -65,7 +67,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Size = new System.Drawing.Size(448, 201);
-            this.splitContainer1.SplitterDistance = 122;
+            this.splitContainer1.SplitterDistance = 119;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -186,5 +188,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

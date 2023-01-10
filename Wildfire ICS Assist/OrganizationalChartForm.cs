@@ -26,7 +26,7 @@ namespace Wildfire_ICS_Assist
         public OrganizationalChartForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
 
@@ -157,7 +157,7 @@ namespace Wildfire_ICS_Assist
 
         private void openRoleForEdit(ICSRole role)
         {
-            if (!OrgChartTools.ProtectedRoleIDs.Contains(role.RoleID))
+            if (role.AllowEditName)
             {
                 using (OrganizationChartAddRoleForm addRoleForm = new OrganizationChartAddRoleForm())
                 {
@@ -196,7 +196,7 @@ namespace Wildfire_ICS_Assist
         private void btnDeleteRole_Click(object sender, EventArgs e)
         {
             ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
-            if (!OrgChartTools.ProtectedRoleIDs.Contains(role.RoleID))
+            if (role.AllowDelete)
             {
                 DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if(dr == DialogResult.Yes)

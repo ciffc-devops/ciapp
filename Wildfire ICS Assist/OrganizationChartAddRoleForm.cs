@@ -21,7 +21,7 @@ namespace Wildfire_ICS_Assist
 
         public OrganizationChartAddRoleForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
             
 
            
@@ -40,13 +40,18 @@ namespace Wildfire_ICS_Assist
 
             cboReportsTo.DataSource = CurrentOrgChart.AllRoles;
             txtRoleName.Text = selectedRole.RoleName;
-            if(selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.AllRoles.Any(o=>o.RoleID == selectedRole.ReportsTo))
+            if (selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == selectedRole.ReportsTo))
             {
                 cboReportsTo.SelectedValue = selectedRole.ReportsTo;
             }
 
             if (string.IsNullOrEmpty(selectedRole.RoleName)) { lblTitle.Text = Properties.Resources.AddOrgChartRole; }
-            else {  lblTitle.Text = "Edit " + selectedRole.RoleName; }
+            else { lblTitle.Text = "Edit " + selectedRole.RoleName; }
+            cboReportsTo.Enabled = selectedRole.AllowEditReportsTo;
+            if (!selectedRole.AllowEditReportsTo)
+            {
+                toolTip1.SetToolTip(cboReportsTo, Properties.Resources.ProtectedRole);
+            }
             txtRoleName.Focus();
         }
 
