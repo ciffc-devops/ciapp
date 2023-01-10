@@ -217,8 +217,8 @@ namespace WF_ICS_ClassLibrary.Models
             if (isEqual && !this.ChannelNumber.EqualsWithNull(other.ChannelNumber)) { return false; }
             if (isEqual && !this.Frequency.EqualsWithNull(other.Frequency)) { return false; }
             if (isEqual && this.IsRepeater != other.IsRepeater) { return false; }
-            if(isEqual && !this.Tone.EqualsWithNull(other.Tone)) { return false; }
-            if(isEqual && !this.Assignment.EqualsWithNull(other.Assignment)) { return false; }
+            if (isEqual && !this.Tone.EqualsWithNull(other.Tone)) { return false; }
+            if (isEqual && !this.Assignment.EqualsWithNull(other.Assignment)) { return false; }
             return isEqual;
         }
 
