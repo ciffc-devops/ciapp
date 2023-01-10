@@ -21,7 +21,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public EditContactForm(Contact contactToEdit)
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
             contact = contactToEdit;
 
         }

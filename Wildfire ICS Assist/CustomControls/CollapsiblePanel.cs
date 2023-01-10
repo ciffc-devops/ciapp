@@ -48,7 +48,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public CollapsiblePanel()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         public void Collapse()

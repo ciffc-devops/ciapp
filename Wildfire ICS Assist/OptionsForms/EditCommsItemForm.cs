@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public EditCommsItemForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void displayItem()

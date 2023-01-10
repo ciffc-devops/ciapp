@@ -20,7 +20,7 @@ namespace Wildfire_ICS_Assist
         public GeneralMessagesForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)

@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public EditHosptalForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void EditHosptalForm_Load(object sender, EventArgs e)

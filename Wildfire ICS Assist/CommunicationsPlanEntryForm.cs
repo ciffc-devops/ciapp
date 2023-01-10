@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist
 
         public CommunicationsPlanEntryForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

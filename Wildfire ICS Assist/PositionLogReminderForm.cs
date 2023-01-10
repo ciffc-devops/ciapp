@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist
         {
             this.Icon = Program.programIcon;
 
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
         private void loadEntry()
         {

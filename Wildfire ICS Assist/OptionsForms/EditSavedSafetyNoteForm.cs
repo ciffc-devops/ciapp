@@ -14,7 +14,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
     {
         public EditSavedSafetyNoteForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
     }
 }

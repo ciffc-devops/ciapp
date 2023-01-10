@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
         public CommunicationsListForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void Program_ContactChanged(ContactEventArgs e)

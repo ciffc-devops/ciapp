@@ -20,7 +20,7 @@ namespace Wildfire_ICS_Assist
 
         public PositionLogAddForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
             this.Icon = Program.programIcon;
 
         }

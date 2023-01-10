@@ -14,7 +14,7 @@ namespace Wildfire_ICS_Assist
     {
         public MedicalPlanForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
     }
 }

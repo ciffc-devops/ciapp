@@ -14,7 +14,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
     {
         public SavedTeamMembersForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
     }
 }

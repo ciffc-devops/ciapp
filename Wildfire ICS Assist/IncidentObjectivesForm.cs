@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
         public IncidentObjectivesForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void IncidentObjectivesForm_Load(object sender, EventArgs e)

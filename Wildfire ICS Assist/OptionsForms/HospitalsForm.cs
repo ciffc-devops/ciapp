@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public HospitalsForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
 
         }
 

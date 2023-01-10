@@ -37,7 +37,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         }
         public EditTeamMemberControl()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
             bsProvAndTerr.DataSource = ProvinceTools.GetProvinces();
             cboProvince.DisplayMember = "ProvinceName";
             cboProvince.ValueMember = "ProvinceGUID";

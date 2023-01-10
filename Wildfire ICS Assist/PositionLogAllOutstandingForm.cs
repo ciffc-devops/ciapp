@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
         public PositionLogAllOutstandingForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
         private void buildPositionLog()
         {

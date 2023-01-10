@@ -21,7 +21,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public OptionsForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void LoadICSRoles()

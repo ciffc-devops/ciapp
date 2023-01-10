@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public SavedContactsForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void SavedContactsForm_Load(object sender, EventArgs e)

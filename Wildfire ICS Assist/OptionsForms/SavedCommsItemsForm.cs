@@ -16,7 +16,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public SavedCommsItemsForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void SavedCommsItems_Load(object sender, EventArgs e)

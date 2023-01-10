@@ -16,7 +16,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public MedivacsForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void MedivacsForm_Load(object sender, EventArgs e)

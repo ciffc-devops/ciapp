@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
         public PositionLogForm()
         {
             this.Icon = Program.programIcon;
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)

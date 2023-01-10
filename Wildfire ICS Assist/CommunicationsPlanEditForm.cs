@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
 
         public CommunicationsPlanEditForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

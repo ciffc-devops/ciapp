@@ -100,6 +100,7 @@
     <Compile Include="Interfaces\IPositionLogService.cs" />
     <Compile Include="Interfaces\ITaskUpdateService.cs" />
     <Compile Include="Interfaces\IWFIncidentService.cs" />
+    <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\Briefing.cs" />
     <Compile Include="Models\CommsPlan.cs" />
     <Compile Include="Models\CommunicationsLog.cs" />

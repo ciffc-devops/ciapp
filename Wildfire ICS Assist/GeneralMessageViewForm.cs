@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
 
         public GeneralMessageViewForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void DisplayMessage()

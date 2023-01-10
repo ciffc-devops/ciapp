@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public IncidentObjective objective { get => _objective; set { _objective = value; displayObjective(); } }
         public EditSavedIncidentObjectiveForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void displayObjective()

@@ -38,7 +38,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
         public HelpInfoForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
             this.Icon = Program.programIcon;
 
         }

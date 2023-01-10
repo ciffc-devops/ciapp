@@ -18,14 +18,17 @@ namespace Wildfire_ICS_Assist
         public IncidentObjective Objective { get => _objective; set => _objective = value; }
         public IncidentObjectiveEntryForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
         private void loadSavedObjectives()
         {
             List<IncidentObjective> items = (List<IncidentObjective>)Program.generalOptionsService.GetOptionsValue("Objectives");
             items = items.Where(o => o.Active).OrderBy(o => o.Objective).ToList();
+           
             cboSavedObjectives.DataSource = items;
+            cboSavedObjectives.ValueMember = "ObjectiveID";
+            cboSavedObjectives.DisplayMember = "Objective";
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
