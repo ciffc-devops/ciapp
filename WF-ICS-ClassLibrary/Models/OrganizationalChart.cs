@@ -241,7 +241,17 @@ namespace WF_ICS_ClassLibrary.Models
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public int Depth { get => _Depth; set => _Depth = value; }
 
+        public bool AllowEditName
+        {
+            get
+            {
+                if(!string.IsNullOrEmpty(PDFTitleName)) { return true; }
 
+                return AllowEditReportsTo;
+            }
+        }
+        public bool AllowEditReportsTo { get => string.IsNullOrEmpty(PDFFieldName); }
+        public bool AllowDelete { get => string.IsNullOrEmpty(PDFFieldName); }
         
         public ICSRole Clone()
         {
