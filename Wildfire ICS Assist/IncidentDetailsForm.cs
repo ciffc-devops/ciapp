@@ -1366,5 +1366,16 @@ namespace Wildfire_ICS_Assist
 
 
         }
+
+        private void pnlTaskInfo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void positionLogToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            OpenPositionLog();
+
+        }
     }
 }

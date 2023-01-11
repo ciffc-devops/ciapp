@@ -115,7 +115,6 @@ namespace Wildfire_ICS_Assist
         //Colours used throughout the program
         public static Color FormBackground { get => Color.FromArgb(246, 245, 229); }
         public static Color FormAccent { get => Color.FromArgb(219, 218, 204); }
-
         public static Color ErrorColor { get => Color.LightCoral; }
         public static Color GoodColor { get => Color.LightSkyBlue; }
         public static Color StandardControLColor { get => System.Drawing.SystemColors.Window; }

@@ -82,5 +82,34 @@ namespace WF_ICS_ClassLibrary.Models
 
     }
 
-    
+
+    [ProtoContract]
+    [Serializable]
+    public class SafetyMessage
+    {
+        [ProtoMember(1)] private Guid _ID;
+        [ProtoMember(2)] private Guid _TaskID;
+        [ProtoMember(3)] private int _OpPeriod;
+        [ProtoMember(4)] private string _Message;
+        [ProtoMember(5)] private bool _SitePlanRequired;
+        [ProtoMember(6)] private string _SitePlanLocation;
+        [ProtoMember(7)] private string _ApprovedByName;
+        [ProtoMember(8)] private string _ApprovedByRoleName;
+        [ProtoMember(9)] private Guid _ApprovedByRoleID;
+        [ProtoMember(10)] private Guid _SafetyTemplateID; 
+
+        public SafetyMessage() { ID = Guid.NewGuid(); }
+
+
+        public Guid ID { get => _ID; set => _ID = value; }
+        public Guid TaskID { get => _TaskID; set => _TaskID = value; }
+        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
+        public string Message { get => _Message; set => _Message = value; }
+        public bool SitePlanRequired { get => _SitePlanRequired; set => _SitePlanRequired = value; }
+        public string SitePlanLocation { get => _SitePlanLocation; set => _SitePlanLocation = value; }
+        public string ApprovedByName { get => _ApprovedByName; set => _ApprovedByName = value; }
+        public string ApprovedByRoleName { get => _ApprovedByRoleName; set => _ApprovedByRoleName = value; }
+        public Guid ApprovedByRoleID { get => _ApprovedByRoleID; set => _ApprovedByRoleID = value; }
+        public Guid SafetyTemplateID { get => _SafetyTemplateID; set => _SafetyTemplateID = value; }
+    }
 }

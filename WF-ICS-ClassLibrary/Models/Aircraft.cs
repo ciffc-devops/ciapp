@@ -11,18 +11,19 @@ namespace WF_ICS_ClassLibrary.Models
     [ProtoContract]
     public class AirOperationsSummary
     {
-        private Guid _ID;
-        private string _Remarks;
-        private DateTime _Sunrise;
-        private DateTime _Sunset;
-        private string _MedivacAircraft;
-        private NOTAM _notam;
-        private List<ICSRole> _personnel;
-        private List<CommsPlanItem> _Frequencies;
-        private List<Aircraft> _aircrafts;
-        private string _PreparedByName;
-        private string _PreparedByPosition;
-        private Guid _PreparedByPositionID;
+        [ProtoMember(1)] private Guid _ID;
+        [ProtoMember(2)] private string _Remarks;
+        [ProtoMember(3)] private DateTime _Sunrise;
+        [ProtoMember(4)] private DateTime _Sunset;
+        [ProtoMember(5)] private string _MedivacAircraft;
+        [ProtoMember(6)] private NOTAM _notam;
+        [ProtoMember(7)] private List<ICSRole> _personnel;
+        [ProtoMember(8)] private List<CommsPlanItem> _Frequencies;
+        [ProtoMember(9)] private List<Aircraft> _aircrafts;
+        [ProtoMember(10)] private string _PreparedByName;
+        [ProtoMember(11)] private string _PreparedByPosition;
+        [ProtoMember(12)] private Guid _PreparedByPositionID;
+
 
         public AirOperationsSummary()
         {
@@ -52,15 +53,16 @@ namespace WF_ICS_ClassLibrary.Models
     [ProtoContract]
     public class Aircraft
     {
-        private Guid _ID;
-        private string _Registration;
-        private string _MakeModel;
-        private string _Base;
-        private DateTime _StartTime;
-        private DateTime _EndTime;
-        private string _Remarks;
-        private string _Pilot;
-        private string _ContactNumber;
+        [ProtoMember(1)] private Guid _ID;
+        [ProtoMember(2)] private string _Registration;
+        [ProtoMember(3)] private string _MakeModel;
+        [ProtoMember(4)] private string _Base;
+        [ProtoMember(5)] private DateTime _StartTime;
+        [ProtoMember(6)] private DateTime _EndTime;
+        [ProtoMember(7)] private string _Remarks;
+        [ProtoMember(8)] private string _Pilot;
+        [ProtoMember(9)] private string _ContactNumber;
+
 
         public Aircraft() { ID = Guid.NewGuid(); }
 
@@ -80,12 +82,13 @@ namespace WF_ICS_ClassLibrary.Models
     [ProtoContract]
     public class NOTAM
     {
-        private Guid _ID;
-        private double _Latitude;
-        private double _Longitude;
-        private double _RadiusNM;
-        private double _AltitudeASL;
-        private string _CenterPoint;
+        [ProtoMember(1)] private Guid _ID;
+        [ProtoMember(2)] private double _Latitude;
+        [ProtoMember(3)] private double _Longitude;
+        [ProtoMember(4)] private double _RadiusNM;
+        [ProtoMember(5)] private double _AltitudeASL;
+        [ProtoMember(6)] private string _CenterPoint;
+
 
         public NOTAM() { _ID = Guid.NewGuid(); }
 

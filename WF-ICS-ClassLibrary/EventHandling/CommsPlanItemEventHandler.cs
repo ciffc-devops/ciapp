@@ -28,13 +28,6 @@ namespace WF_ICS_ClassLibrary.EventHandling
 
 
 
-    public delegate void CommsPlanItemLinkEventHandler(CommsPlanItemLinkEventArgs e);
-
-    public class CommsPlanItemLinkEventArgs
-    {
-        public CommsPlanItemLink item { get; set; }
-        public CommsPlanItemLinkEventArgs(CommsPlanItemLink _item) { item = _item; }
-    }
 
 
 

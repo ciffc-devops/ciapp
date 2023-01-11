@@ -27,7 +27,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
  ProtoInclude(105, typeof(CommsLogEntry)),
  ProtoInclude(106, typeof(CommsPlan)),
  ProtoInclude(107, typeof(CommsPlanItem)),
- ProtoInclude(108, typeof(CommsPlanItemLink)),
  ProtoInclude(109, typeof(Contact)),
  ProtoInclude(112, typeof(IncidentObjective)),
  ProtoInclude(116, typeof(MedicalPlan)),
@@ -77,6 +76,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             // allLogisticalNeedsLists = new List<LogisticalNeedsList>();
             allVehicles = new List<Vehicle>();
             allTaskUpdates = new List<TaskUpdate>();
+            _allSafetyMessages = new List<SafetyMessage>();
             TaskEncryptionKey = Utilities.RandomPasswordGenerator.GeneratePassword();
         }
 
@@ -101,6 +101,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(19)] private List<CommsPlan> _allCommsPlans;
         [ProtoMember(20)] private List<CommsPlanItem> _additionalCommsItems;
         //  [ProtoMember(21)] private List<SubjectProfile> _allSubjectProfiles;
+        [ProtoMember(21)] private List<SafetyMessage> _allSafetyMessages;
         [ProtoMember(22)] private List<CommsLogEntry> _allCommsLogEntries;
         [ProtoMember(23)] private string _DocumentPath;
         [ProtoMember(24)] private string _sourceIdentifier;
@@ -231,6 +232,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<CommsPlan> allCommsPlans { get => _allCommsPlans; set => _allCommsPlans = value; }
         public List<CommsPlanItem> additionalCommsItems { get => _additionalCommsItems; set => _additionalCommsItems = value; }
         public List<CommsLogEntry> allCommsLogEntries { get => _allCommsLogEntries; set => _allCommsLogEntries = value; }
+        public List<SafetyMessage> allSafetyMessages { get => _allSafetyMessages; set => _allSafetyMessages = value; }
         public string DocumentPath { get => _DocumentPath; set => _DocumentPath = value; }
         public List<Contact> allContacts { get => _allContacts; set => _allContacts = value; }
         public List<GeneralMessage> AllGeneralMessages { get => _AllGeneralMessages; set => _AllGeneralMessages = value; }

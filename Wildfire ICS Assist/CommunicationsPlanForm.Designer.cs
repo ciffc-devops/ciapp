@@ -90,7 +90,6 @@
             this.colComments});
             this.dgvCommsItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCommsItems.Location = new System.Drawing.Point(0, 0);
-            this.dgvCommsItems.MultiSelect = false;
             this.dgvCommsItems.Name = "dgvCommsItems";
             this.dgvCommsItems.ReadOnly = true;
             this.dgvCommsItems.RowHeadersVisible = false;

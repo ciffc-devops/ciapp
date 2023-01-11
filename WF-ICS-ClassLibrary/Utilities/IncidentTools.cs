@@ -350,7 +350,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             if (task.allCommsPlans.Where(o => o.OpsPeriod == Ops).Count() <= 0)
             {
-                CommsPlan cp = new CommsPlan(true);
+                CommsPlan cp = new CommsPlan();
                 cp.OpsPeriod = Ops;
 
 
@@ -362,7 +362,10 @@ namespace WF_ICS_ClassLibrary.Utilities
                     DateTime newDate = new DateTime(opStart.Year, opStart.Month, opStart.Day, today.Hour, today.Minute, today.Second);
                     cp.DatePrepared = newDate;
                 }
-                task.allCommsPlans.Add(cp);
+
+                //task.allCommsPlans.Add(cp);
+                Globals.incidentService.UpsertCommsPlan(cp);
+
             }
         }
 
@@ -395,7 +398,9 @@ namespace WF_ICS_ClassLibrary.Utilities
                     plan.DatePrepared = newDate;
                 }
 
-                task.allMedicalPlans.Add(plan);
+                //task.allMedicalPlans.Add(plan);
+                Globals.incidentService.UpsertMedicalPlan(plan);
+
             }
         }
 

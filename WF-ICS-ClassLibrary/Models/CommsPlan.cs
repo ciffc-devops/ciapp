@@ -17,7 +17,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(3)] private DateTime _DatePrepared;
         [ProtoMember(4)] private string _PreparedBy;
         [ProtoMember(5)] private List<CommsPlanItem> _allCommsItems;
-        [ProtoMember(6)] private List<CommsPlanItemLink> _allItemLinks;
+       // [ProtoMember(6)] private List<CommsPlanItemLink> _allItemLinks;
         [ProtoMember(7)] private Guid _ID;
         [ProtoMember(8)] private DateTime _lastUpdatedUTC;
         [ProtoMember(9)] private string _PreparedByPosition;
@@ -27,65 +27,25 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime DatePrepared { get => _DatePrepared; set => _DatePrepared = value; }
         public string PreparedBy { get => _PreparedBy; set => _PreparedBy = value; }
         public List<CommsPlanItem> allCommsItems { get => _allCommsItems; set => _allCommsItems = value; }
-        public List<CommsPlanItemLink> allItemLinks { get => _allItemLinks; set => _allItemLinks = value; }
+        public List<CommsPlanItem> ActiveCommsItems { get => _allCommsItems.Where(o=>o.Active).ToList(); }
+        //public List<CommsPlanItemLink> allItemLinks { get => _allItemLinks; set => _allItemLinks = value; }
         public Guid ID { get => _ID; set => _ID = value; }
         public DateTime LastUpdatedUTC { get => _lastUpdatedUTC; set => _lastUpdatedUTC = value; }
 
         public string PreparedByPosition { get => _PreparedByPosition; set => _PreparedByPosition = value; }
 
-        public CommsPlan() { ID = Guid.NewGuid(); allCommsItems = new List<CommsPlanItem>(); allItemLinks = new List<CommsPlanItemLink>(); LastUpdatedUTC = DateTime.UtcNow; }
-        public CommsPlan(bool generateBlankItems) { ID = Guid.NewGuid(); allCommsItems = new List<CommsPlanItem>(); allItemLinks = new List<CommsPlanItemLink>(); if (generateBlankItems) { buildInitialText(); } LastUpdatedUTC = DateTime.UtcNow; }
+        public CommsPlan() { ID = Guid.NewGuid(); allCommsItems = new List<CommsPlanItem>(); LastUpdatedUTC = DateTime.UtcNow; }
 
 
-        private void buildInitialText()
-        {
-            List<string> templateFunctions = new List<string>();
-            templateFunctions.Add("COMMAND");
-            templateFunctions.Add("TACTICAL");
-            templateFunctions.Add("GROUND-TO-AIR");
-            templateFunctions.Add("AIR-TO-AIR");
-            templateFunctions.Add("SUPPORT");
-            templateFunctions.Add("DISPATCH");
-
-            templateFunctions.Add("EMERGENCY");
-
-
-
-            if (!allItemLinks.Any())
-            {
-                CommsPlanItem blankItem = new CommsPlanItem();
-                if (allCommsItems.Where(o => o.ItemID == Guid.Empty).Any())
-                {
-                    blankItem = allCommsItems.Where(o => o.ItemID == Guid.Empty).First();
-                }
-                else
-                {
-                    blankItem = new CommsPlanItem();
-                    blankItem.ItemID = Guid.Empty;
-                    blankItem.Active = true;
-                    allCommsItems.Add(blankItem);
-                }
-
-                foreach (string s in templateFunctions)
-                {
-                    allItemLinks.Add(new CommsPlanItemLink(blankItem.ItemID, s, 0));
-                }
-            }
-
-        }
+      
 
         public CommsPlanItem getItemByFunction(string function)
         {
-            if (allItemLinks.Any(o => o.CommsFunction.Equals(function, StringComparison.InvariantCultureIgnoreCase)))
+            if (allCommsItems.Any(o => o.CommsFunction.Equals(function, StringComparison.InvariantCultureIgnoreCase)))
             {
-                CommsPlanItemLink link = allItemLinks.First(o => o.CommsFunction.Equals(function, StringComparison.InvariantCultureIgnoreCase));
-                if (allCommsItems.Any(o => o.ItemID == link.ItemID))
-                {
-                    return allCommsItems.First(o => o.ItemID == link.ItemID);
-                }
-                else { return new CommsPlanItem(); }
+                return allCommsItems.First(o => o.CommsFunction.Equals(function, StringComparison.InvariantCultureIgnoreCase));
             }
-            else { return new CommsPlanItem(); }
+            else { return null; }
         }
 
         public CommsPlan CopyToNewPlan(int newOpsPeriod)
@@ -98,7 +58,7 @@ namespace WF_ICS_ClassLibrary.Models
             newPlan.PreparedBy = PreparedBy;
             newPlan.PreparedByPosition = PreparedByPosition;
             newPlan.allCommsItems.AddRange(allCommsItems);
-            newPlan.allItemLinks.AddRange(allItemLinks);
+            //newPlan.allItemLinks.AddRange(allItemLinks);
             newPlan._lastUpdatedUTC = DateTime.UtcNow;
             return newPlan;
         }
@@ -112,11 +72,13 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 cloneto.allCommsItems.Add(item.Clone());
             }
+            /*
             cloneto.allItemLinks = new List<CommsPlanItemLink>();
             foreach (CommsPlanItemLink item in this.allItemLinks)
             {
                 cloneto.allItemLinks.Add(item.Clone());
             }
+            */
             return cloneto;
         }
         object ICloneable.Clone()
@@ -129,15 +91,17 @@ namespace WF_ICS_ClassLibrary.Models
     [Serializable]
     public class CommsPlanItem : ICloneable, IEquatable<CommsPlanItem>
     {
-        public CommsPlanItem() { ItemID = System.Guid.NewGuid(); }
+        public CommsPlanItem() { ItemID = System.Guid.NewGuid(); TemplateItemID = Guid.NewGuid(); Active = true; }
         public CommsPlanItem(string function, Guid id = new Guid())
         {
             if (id == Guid.Empty) { ItemID = System.Guid.NewGuid(); } else { ItemID = id; }
             CommsFunction = function;
+            TemplateItemID = Guid.NewGuid();
+            Active = true;
         }
 
 
-        [ProtoMember(1)] private Guid _ItemID;
+        [ProtoMember(1)] private Guid _ItemID; //This is a unique identifier for each instance of an item in a specific comms plan
         [ProtoMember(2)] private string _CommsSystem;
         [ProtoMember(3)] private string _CallSign;
         [ProtoMember(4)] private string _CommsFunction;
@@ -153,6 +117,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(14)] private int _OpsPeriod;
         [ProtoMember(15)] private string _Tone;
         [ProtoMember(16)] private string _Aassignment;
+        [ProtoMember(17)] private Guid _TemplateItemID; //This is a unique identifier for the item as saved in Options.
+
 
         public Guid ItemID { get => _ItemID; set => _ItemID = value; }
         public string CommsSystem { get => _CommsSystem; set => _CommsSystem = value; }
@@ -193,6 +159,7 @@ namespace WF_ICS_ClassLibrary.Models
                 return sb.ToString();
             }
         }
+        public Guid TemplateItemID { get => _TemplateItemID; set => _TemplateItemID = value; }
 
 
         public CommsPlanItem Clone()
@@ -219,6 +186,7 @@ namespace WF_ICS_ClassLibrary.Models
             if (isEqual && this.IsRepeater != other.IsRepeater) { return false; }
             if (isEqual && !this.Tone.EqualsWithNull(other.Tone)) { return false; }
             if (isEqual && !this.Assignment.EqualsWithNull(other.Assignment)) { return false; }
+            if(isEqual && this.TemplateItemID != other.TemplateItemID) { return false; }
             return isEqual;
         }
 
@@ -228,6 +196,7 @@ namespace WF_ICS_ClassLibrary.Models
 
     }
 
+    /*
     [ProtoContract]
     [Serializable]
     public class CommsPlanItemLink : ICloneable
@@ -254,5 +223,5 @@ namespace WF_ICS_ClassLibrary.Models
             return this.Clone();
         }
 
-    }
+    }*/
 }

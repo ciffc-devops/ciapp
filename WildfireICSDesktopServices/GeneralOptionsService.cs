@@ -401,7 +401,7 @@ namespace WildfireICSDesktopServices
                     break;
                 case "CommsItem":
                     CommsPlanItem comms = (CommsPlanItem)newValue;  
-                    _options.allCommsPlanItems = _options.allCommsPlanItems.Where(o=>o.ItemID!= comms.ItemID).ToList();
+                    _options.allCommsPlanItems = _options.allCommsPlanItems.Where(o=>o.TemplateItemID!= comms.TemplateItemID).ToList();
                     _options.allCommsPlanItems.Add(comms);
                     break;
                 case "Hospital":

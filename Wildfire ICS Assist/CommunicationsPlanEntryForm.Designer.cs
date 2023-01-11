@@ -170,7 +170,7 @@
             this.cboSavedComms.Name = "cboSavedComms";
             this.cboSavedComms.Size = new System.Drawing.Size(603, 32);
             this.cboSavedComms.TabIndex = 1;
-            this.cboSavedComms.ValueMember = "ItemID";
+            this.cboSavedComms.ValueMember = "TemplateItemID";
             this.cboSavedComms.SelectedIndexChanged += new System.EventHandler(this.cboSavedComms_SelectedIndexChanged_1);
             this.cboSavedComms.Leave += new System.EventHandler(this.cboSavedComms_Leave);
             // 

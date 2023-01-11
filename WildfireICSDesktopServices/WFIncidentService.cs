@@ -18,7 +18,7 @@ namespace WildfireICSDesktopServices
         public event BriefingEventHandler BriefingChanged;
         public event CommsPlanEventHandler CommsPlanChanged;
         public event CommsPlanItemEventHandler CommsPlanItemChanged;
-        public event CommsPlanItemLinkEventHandler CommsPlanItemLinkChanged;
+        //public event CommsPlanItemLinkEventHandler CommsPlanItemLinkChanged;
         public event ContactEventHandler ContactChanged;
         public event HospitalEventHandler HospitalChanged;
         public event AmbulanceServiceEventHandler AmbulanceServiceChanged;
@@ -534,62 +534,25 @@ namespace WildfireICSDesktopServices
         }
         public void UpsertCommsPlanItem(CommsPlanItem item, string function = null, string source = "local")
         {
-            if (string.IsNullOrEmpty(function)) { function = item.CommsFunction; }
-            if (!_currentIncident.allCommsPlans.Any(o => o.OpsPeriod == item.OpsPeriod))
+            CurrentIncident.createCommsPlanAsNeeded(item.OpsPeriod);
+            CommsPlan plan = CurrentIncident.allCommsPlans.FirstOrDefault(o=>o.OpsPeriod == item.OpsPeriod);
+            if(plan != null)
             {
-                _currentIncident.createCommsPlanAsNeeded(item.OpsPeriod);
-                if (source.Equals("local") || source.Equals("networkNoInternet"))
-                {
-                    UpsertTaskUpdate(_currentIncident.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod), "UPSERT", true, false);
-                }
-                OnCommsPlanChanged(new CommsPlanEventArgs(_currentIncident.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod)));
-            }
-            CommsPlan thisPlan = _currentIncident.allCommsPlans.First(o => o.OpsPeriod == item.OpsPeriod);
-            if (!thisPlan.allCommsItems.Any(o => o.ItemID == item.ItemID)) //its new!
-            {
-                thisPlan.allCommsItems.Add(item);
+                if (string.IsNullOrEmpty(function)) { function = item.CommsFunction; }
 
-                if (source.Equals("local") || source.Equals("networkNoInternet"))
-                {
-                    UpsertTaskUpdate(item, "UPSERT", true, false);
-                }
-                OnCommsPlanItemListChanged(new CommsPlanItemEventArgs(item));
-                OnCommsPlanItemChanged(new CommsPlanItemEventArgs(item));
-            }
-            else if (thisPlan.allCommsItems.Any(o => o.ItemID == item.ItemID && !o.Equals(item)))
-            {
-                CommsPlanItem oldItem = thisPlan.allCommsItems.First(o => o.ItemID == item.ItemID);
-                bool isEqual = oldItem.Equals(item);
-                thisPlan.allCommsItems = thisPlan.allCommsItems.Where(o => o.ItemID != item.ItemID).ToList();
-                thisPlan.allCommsItems.Add(item);
-
-                if (source.Equals("local") || source.Equals("networkNoInternet"))
-                {
-                    UpsertTaskUpdate(item, "UPSERT", true, false);
-                }
-                OnCommsPlanItemListChanged(new CommsPlanItemEventArgs(item));
-                OnCommsPlanItemChanged(new CommsPlanItemEventArgs(item));
-            }
-            else
-            {
-                thisPlan.allCommsItems = thisPlan.allCommsItems.Where(o => o.ItemID != item.ItemID).ToList();
-                thisPlan.allCommsItems.Add(item);
-
+                plan.allCommsItems = plan.allCommsItems.Where(o => o.ItemID != item.ItemID).ToList();
+                plan.allCommsItems.Add(item);
                 if (source.Equals("local") || source.Equals("networkNoInternet"))
                 {
                     UpsertTaskUpdate(item, "UPSERT", true, false);
                 }
                 OnCommsPlanItemChanged(new CommsPlanItemEventArgs(item));
-            }
 
-            if (!string.IsNullOrEmpty(function))
-            {
-                UpsertCommsPlanItemLink(new CommsPlanItemLink(item.ItemID, function, item.OpsPeriod), source);
             }
-
         }
 
 
+        /*
         protected virtual void OnCommsPlanItemLinkChanged(CommsPlanItemLinkEventArgs e)
         {
             CommsPlanItemLinkEventHandler handler = this.CommsPlanItemLinkChanged;
@@ -616,7 +579,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-
+        */
 
 
         // Contact

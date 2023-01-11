@@ -18,7 +18,6 @@ namespace WF_ICS_ClassLibrary.Models
        ProtoInclude(105, typeof(CommsLogEntry)),
        ProtoInclude(106, typeof(CommsPlan)),
        ProtoInclude(107, typeof(CommsPlanItem)),
-       ProtoInclude(108, typeof(CommsPlanItemLink)),
        ProtoInclude(109, typeof(Contact)),
        //ProtoInclude(110, typeof(TaskEquipment)),
        //ProtoInclude(111, typeof(EquipmentIssue)),
@@ -54,7 +53,6 @@ namespace WF_ICS_ClassLibrary.Models
     [XmlInclude(typeof(CommsLogEntry))]
     [XmlInclude(typeof(CommsPlan))]
     [XmlInclude(typeof(CommsPlanItem))]
-    [XmlInclude(typeof(CommsPlanItemLink))]
     [XmlInclude(typeof(Contact))]
    // [XmlInclude(typeof(TaskEquipment))]
    // [XmlInclude(typeof(EquipmentIssue))]
@@ -204,10 +202,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 objDecrypted = xmlData.XmlDeserializeFromString<CommsPlanItem>();
             }
-            else if (ObjectType.Equals(new CommsPlanItemLink().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<CommsPlanItemLink>();
-            }
+           
             else if (ObjectType.Equals(new CommsPlan().GetType().Name))
             {
                 objDecrypted = xmlData.XmlDeserializeFromString<CommsPlan>();

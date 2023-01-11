@@ -17,7 +17,7 @@ namespace WildfireICSDesktopServices
         event CommsEventHandler CommsChanged;
         event CommsPlanEventHandler CommsPlanChanged;
         event CommsPlanItemEventHandler CommsPlanItemChanged;
-        event CommsPlanItemLinkEventHandler CommsPlanItemLinkChanged;
+        //event CommsPlanItemLinkEventHandler CommsPlanItemLinkChanged;
         event CommsPlanItemListEventHandler CommsPlanItemListChanged;
         event ContactEventHandler ContactChanged;
         event EquipmentIssueEventHandler EquipmentIssueChanged;
@@ -70,7 +70,7 @@ namespace WildfireICSDesktopServices
         void UpsertComms(CommsLogEntry entry, string source = "local");
         void UpsertCommsPlan(CommsPlan record, string source = "local");
         void UpsertCommsPlanItem(CommsPlanItem item, string function = null, string source = "local");
-        void UpsertCommsPlanItemLink(CommsPlanItemLink link, string source = "local");
+       // void UpsertCommsPlanItemLink(CommsPlanItemLink link, string source = "local");
         void UpsertContact(Contact record, string source = "local");
         void UpsertEquipmentIssue(EquipmentIssue issue, string source = "local");
         void UpsertICSRole(ICSRole record, string source = "local");

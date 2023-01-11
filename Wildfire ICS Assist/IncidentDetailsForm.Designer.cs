@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,6 +130,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.additionalDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationsListICS205AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generalMessageICS213ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -183,7 +184,28 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
-            this.generalMessageICS213ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.printThisOperationalPeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printThisIncidentToDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.memberStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkInMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bulkCheckInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkInsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.vehiclesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.equipmentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamAssignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.incidentTimelineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localNetworkSharingSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.requestIncidentFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.internetSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.requestOptionsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminFinanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.positionLogToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -265,9 +287,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -492,6 +514,7 @@
             this.pnlTaskInfo.Controls.Add(this.lblTaskName);
             this.pnlTaskInfo.Controls.Add(this.lblTaskNumber);
             this.pnlTaskInfo.Name = "pnlTaskInfo";
+            this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
             // 
             // panel1
             // 
@@ -735,6 +758,7 @@
             this.operationsToolStripMenuItem,
             this.logisticsToolStripMenuItem,
             this.planningToolStripMenuItem,
+            this.adminFinanceToolStripMenuItem,
             this.networkInternetToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
@@ -912,7 +936,10 @@
             this.toolStripSeparator5,
             this.additionalDocumentsToolStripMenuItem,
             this.communicationsListICS205AToolStripMenuItem,
-            this.generalMessageICS213ToolStripMenuItem});
+            this.generalMessageICS213ToolStripMenuItem,
+            this.toolStripSeparator9,
+            this.printThisOperationalPeriodToolStripMenuItem,
+            this.printThisIncidentToDateToolStripMenuItem});
             this.iAPToolStripMenuItem.Name = "iAPToolStripMenuItem";
             resources.ApplyResources(this.iAPToolStripMenuItem, "iAPToolStripMenuItem");
             // 
@@ -965,6 +992,12 @@
             resources.ApplyResources(this.communicationsListICS205AToolStripMenuItem, "communicationsListICS205AToolStripMenuItem");
             this.communicationsListICS205AToolStripMenuItem.Click += new System.EventHandler(this.communicationsListICS205AToolStripMenuItem_Click);
             // 
+            // generalMessageICS213ToolStripMenuItem
+            // 
+            this.generalMessageICS213ToolStripMenuItem.Name = "generalMessageICS213ToolStripMenuItem";
+            resources.ApplyResources(this.generalMessageICS213ToolStripMenuItem, "generalMessageICS213ToolStripMenuItem");
+            this.generalMessageICS213ToolStripMenuItem.Click += new System.EventHandler(this.generalMessageICS213ToolStripMenuItem_Click);
+            // 
             // operationsToolStripMenuItem
             // 
             this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -988,7 +1021,15 @@
             // 
             this.logisticsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.positionLogToolStripMenuItem1,
-            this.toolStripSeparator7});
+            this.toolStripSeparator7,
+            this.checkInsToolStripMenuItem,
+            this.memberStatusToolStripMenuItem,
+            this.checkInMemberToolStripMenuItem,
+            this.bulkCheckInToolStripMenuItem,
+            this.toolStripSeparator10,
+            this.vehiclesToolStripMenuItem1,
+            this.equipmentToolStripMenuItem1,
+            this.additionalContactsToolStripMenuItem});
             this.logisticsToolStripMenuItem.Name = "logisticsToolStripMenuItem";
             resources.ApplyResources(this.logisticsToolStripMenuItem, "logisticsToolStripMenuItem");
             // 
@@ -1007,7 +1048,10 @@
             // 
             this.planningToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.positionLogToolStripMenuItem2,
-            this.toolStripSeparator6});
+            this.toolStripSeparator6,
+            this.teamAssignmentsToolStripMenuItem,
+            this.incidentTimelineToolStripMenuItem,
+            this.notesToolStripMenuItem});
             this.planningToolStripMenuItem.Name = "planningToolStripMenuItem";
             resources.ApplyResources(this.planningToolStripMenuItem, "planningToolStripMenuItem");
             // 
@@ -1024,6 +1068,13 @@
             // 
             // networkInternetToolStripMenuItem
             // 
+            this.networkInternetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.localNetworkSharingSyncToolStripMenuItem,
+            this.requestIncidentFromServerToolStripMenuItem,
+            this.toolStripSeparator11,
+            this.internetSyncToolStripMenuItem,
+            this.toolStripSeparator12,
+            this.requestOptionsFromServerToolStripMenuItem});
             this.networkInternetToolStripMenuItem.Name = "networkInternetToolStripMenuItem";
             resources.ApplyResources(this.networkInternetToolStripMenuItem, "networkInternetToolStripMenuItem");
             // 
@@ -1327,11 +1378,118 @@
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
             // 
-            // generalMessageICS213ToolStripMenuItem
+            // toolStripSeparator9
             // 
-            this.generalMessageICS213ToolStripMenuItem.Name = "generalMessageICS213ToolStripMenuItem";
-            resources.ApplyResources(this.generalMessageICS213ToolStripMenuItem, "generalMessageICS213ToolStripMenuItem");
-            this.generalMessageICS213ToolStripMenuItem.Click += new System.EventHandler(this.generalMessageICS213ToolStripMenuItem_Click);
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // printThisOperationalPeriodToolStripMenuItem
+            // 
+            this.printThisOperationalPeriodToolStripMenuItem.Name = "printThisOperationalPeriodToolStripMenuItem";
+            resources.ApplyResources(this.printThisOperationalPeriodToolStripMenuItem, "printThisOperationalPeriodToolStripMenuItem");
+            // 
+            // printThisIncidentToDateToolStripMenuItem
+            // 
+            this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
+            resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
+            // 
+            // memberStatusToolStripMenuItem
+            // 
+            this.memberStatusToolStripMenuItem.Name = "memberStatusToolStripMenuItem";
+            resources.ApplyResources(this.memberStatusToolStripMenuItem, "memberStatusToolStripMenuItem");
+            // 
+            // checkInMemberToolStripMenuItem
+            // 
+            this.checkInMemberToolStripMenuItem.Name = "checkInMemberToolStripMenuItem";
+            resources.ApplyResources(this.checkInMemberToolStripMenuItem, "checkInMemberToolStripMenuItem");
+            // 
+            // bulkCheckInToolStripMenuItem
+            // 
+            this.bulkCheckInToolStripMenuItem.Name = "bulkCheckInToolStripMenuItem";
+            resources.ApplyResources(this.bulkCheckInToolStripMenuItem, "bulkCheckInToolStripMenuItem");
+            // 
+            // checkInsToolStripMenuItem
+            // 
+            resources.ApplyResources(this.checkInsToolStripMenuItem, "checkInsToolStripMenuItem");
+            this.checkInsToolStripMenuItem.Name = "checkInsToolStripMenuItem";
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            // 
+            // vehiclesToolStripMenuItem1
+            // 
+            this.vehiclesToolStripMenuItem1.Name = "vehiclesToolStripMenuItem1";
+            resources.ApplyResources(this.vehiclesToolStripMenuItem1, "vehiclesToolStripMenuItem1");
+            // 
+            // equipmentToolStripMenuItem1
+            // 
+            this.equipmentToolStripMenuItem1.Name = "equipmentToolStripMenuItem1";
+            resources.ApplyResources(this.equipmentToolStripMenuItem1, "equipmentToolStripMenuItem1");
+            // 
+            // additionalContactsToolStripMenuItem
+            // 
+            this.additionalContactsToolStripMenuItem.Name = "additionalContactsToolStripMenuItem";
+            resources.ApplyResources(this.additionalContactsToolStripMenuItem, "additionalContactsToolStripMenuItem");
+            // 
+            // teamAssignmentsToolStripMenuItem
+            // 
+            this.teamAssignmentsToolStripMenuItem.Name = "teamAssignmentsToolStripMenuItem";
+            resources.ApplyResources(this.teamAssignmentsToolStripMenuItem, "teamAssignmentsToolStripMenuItem");
+            // 
+            // incidentTimelineToolStripMenuItem
+            // 
+            this.incidentTimelineToolStripMenuItem.Name = "incidentTimelineToolStripMenuItem";
+            resources.ApplyResources(this.incidentTimelineToolStripMenuItem, "incidentTimelineToolStripMenuItem");
+            // 
+            // notesToolStripMenuItem
+            // 
+            this.notesToolStripMenuItem.Name = "notesToolStripMenuItem";
+            resources.ApplyResources(this.notesToolStripMenuItem, "notesToolStripMenuItem");
+            // 
+            // localNetworkSharingSyncToolStripMenuItem
+            // 
+            this.localNetworkSharingSyncToolStripMenuItem.Name = "localNetworkSharingSyncToolStripMenuItem";
+            resources.ApplyResources(this.localNetworkSharingSyncToolStripMenuItem, "localNetworkSharingSyncToolStripMenuItem");
+            // 
+            // requestIncidentFromServerToolStripMenuItem
+            // 
+            this.requestIncidentFromServerToolStripMenuItem.Name = "requestIncidentFromServerToolStripMenuItem";
+            resources.ApplyResources(this.requestIncidentFromServerToolStripMenuItem, "requestIncidentFromServerToolStripMenuItem");
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            // 
+            // internetSyncToolStripMenuItem
+            // 
+            this.internetSyncToolStripMenuItem.Name = "internetSyncToolStripMenuItem";
+            resources.ApplyResources(this.internetSyncToolStripMenuItem, "internetSyncToolStripMenuItem");
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
+            // 
+            // requestOptionsFromServerToolStripMenuItem
+            // 
+            this.requestOptionsFromServerToolStripMenuItem.Name = "requestOptionsFromServerToolStripMenuItem";
+            resources.ApplyResources(this.requestOptionsFromServerToolStripMenuItem, "requestOptionsFromServerToolStripMenuItem");
+            // 
+            // adminFinanceToolStripMenuItem
+            // 
+            this.adminFinanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.positionLogToolStripMenuItem3});
+            this.adminFinanceToolStripMenuItem.Name = "adminFinanceToolStripMenuItem";
+            resources.ApplyResources(this.adminFinanceToolStripMenuItem, "adminFinanceToolStripMenuItem");
+            // 
+            // positionLogToolStripMenuItem3
+            // 
+            this.positionLogToolStripMenuItem3.Name = "positionLogToolStripMenuItem3";
+            resources.ApplyResources(this.positionLogToolStripMenuItem3, "positionLogToolStripMenuItem3");
+            this.positionLogToolStripMenuItem3.Click += new System.EventHandler(this.positionLogToolStripMenuItem3_Click);
             // 
             // IncidentDetailsForm
             // 
@@ -1546,6 +1704,28 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem safetyMessageICS208ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generalMessageICS213ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem printThisOperationalPeriodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printThisIncidentToDateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkInsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem memberStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkInMemberToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bulkCheckInToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem vehiclesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem equipmentToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem additionalContactsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teamAssignmentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem incidentTimelineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem notesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adminFinanceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem localNetworkSharingSyncToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem requestIncidentFromServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem internetSyncToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripMenuItem requestOptionsFromServerToolStripMenuItem;
     }
 }
 

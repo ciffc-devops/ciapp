@@ -53,6 +53,8 @@ namespace Wildfire_ICS_Assist
                 _SelectedItem = ((CommsPlanItem)cboSavedComms.SelectedItem).Clone();
                 _SelectedItem.CommsFunction = txtSavedFunction.Text;
                 _SelectedItem.Assignment = txtSavedAssignment.Text;
+                _SelectedItem.Active = true;
+                _SelectedItem.ItemID = Guid.NewGuid();
                 this.DialogResult = DialogResult.OK; this.Close();
             }
         }
@@ -143,7 +145,7 @@ namespace Wildfire_ICS_Assist
 
         private void CommunicationsPlanEntryForm_Load(object sender, EventArgs e)
         {
-            SavedCommsPlanItems.Clear();
+
             SavedCommsPlanItems = (List<CommsPlanItem>)Program.generalOptionsService.GetOptionsValue("CommsItems");
             cboSavedComms.DataSource = SavedCommsPlanItems;
         }

@@ -68,7 +68,7 @@ namespace WF_ICS_ClassLibrary.Networking
         //[ProtoMember(39)] private MattsonScore _mattsonScore;
         [ProtoMember(40)] private TimelineEvent _timelineEvent;
         [ProtoMember(41)] private ICSRole _icsRole;
-        [ProtoMember(42)] private CommsPlanItemLink _commsPlanItemLink;
+//        [ProtoMember(42)] private CommsPlanItemLink _commsPlanItemLink;
         [ProtoMember(43)] private TaskUpdate _taskUpdate;
         [ProtoMember(44)] private bool _UploadedToInternet;
 
@@ -101,7 +101,7 @@ namespace WF_ICS_ClassLibrary.Networking
         public OperationalPeriod operationalPeriod { get => _opsPeriod; set => _opsPeriod = value; }
         public TimelineEvent timelineEvent { get => _timelineEvent; set => _timelineEvent = value; }
         public ICSRole icsRole { get => _icsRole; set => _icsRole = value; }
-        public CommsPlanItemLink commsPlanItemLink { get => _commsPlanItemLink; set => _commsPlanItemLink = value; }
+        //public CommsPlanItemLink commsPlanItemLink { get => _commsPlanItemLink; set => _commsPlanItemLink = value; }
         public TaskUpdate taskUpdate { get => _taskUpdate; set => _taskUpdate = value; }
 
 

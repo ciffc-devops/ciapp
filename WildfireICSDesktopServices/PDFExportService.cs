@@ -618,110 +618,42 @@ namespace WildfireICSDesktopServices
             try
             {
 
-                string fileToUse = "ICSForms/ICS 205 - Communications Plan.pdf";
+                string fileToUse = "BlankForms/ICS205WF-Communications-Plan.pdf";
                 PdfReader rdr = new PdfReader(fileToUse);
                 PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
 
-
+                OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == plan.OpsPeriod);
 
                 //Op Plan
                 DateTime today = DateTime.Now;
                 //Top Section
-                stamper.AcroFields.SetField("205TASK", task.TaskNumber);
-                stamper.AcroFields.SetField("205TASK NAME", task.TaskName);
+                stamper.AcroFields.SetField("1 INCIDENT NAME AND NUMBERRow1", task.IncidentIdentifier);
+                stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
-                if ((string.IsNullOrEmpty(plan.PreparedBy)) && task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).Any())
+
+                stamper.AcroFields.SetField("Name", plan.PreparedBy);
+                stamper.AcroFields.SetField("Position", plan.PreparedByPosition);
+
+                for (int row = 0; row < plan.ActiveCommsItems.Count && row < 26; row++)
                 {
-                    OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
-                    plan.PreparedBy = currentChart.getNameByRoleName("Logistics Section Chief");
+                    CommsPlanItem item = plan.ActiveCommsItems[row];
+                    stamper.AcroFields.SetField("System  TypeRow" + (row + 1), item.CommsSystem);
+                    stamper.AcroFields.SetField("ChannelRow" + (row + 1), item.ChannelID);
+                    stamper.AcroFields.SetField("FunctionRow" + (row + 1), item.CommsFunction);
+                    stamper.AcroFields.SetField("RxTx FrequencyRow" + (row + 1), item.Frequency);
+                    stamper.AcroFields.SetField("ToneRow" + (row + 1), item.Tone);
+                    stamper.AcroFields.SetField("AssignmentRow" + (row + 1), item.Assignment);
+                    stamper.AcroFields.SetField("RemarksRow" + (row + 1), item.Comments);
+
                 }
-                stamper.AcroFields.SetField("205PREPARED BY LOGISTICS", plan.PreparedBy);
 
 
-                stamper.AcroFields.SetField("205FOR OPERATIONAL PERIOD", OpsPeriod.ToString());
-                stamper.AcroFields.SetField("205DATE  TIME PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", plan.DatePrepared));
 
-                int firstBlankRow = 7;
 
-                foreach (CommsPlanItemLink link in plan.allItemLinks)
-                {
-                    if (plan.allCommsItems.Where(o => o.ItemID == link.ItemID).Any())
-                    {
-                        CommsPlanItem item = plan.allCommsItems.Where(o => o.ItemID == link.ItemID).First();
 
-                        switch (link.CommsFunction)
-                        {
-                            case "COMMAND NET":
-                                stamper.AcroFields.SetField("COMMS SYSTEMRow1", item.CommsSystem);
-                                stamper.AcroFields.SetField("CALL SIGNRow1", item.CallSign);
-                                stamper.AcroFields.SetField("CHANNEL IDCOMMAND NET", item.ChannelID);
-                                stamper.AcroFields.SetField("Row1", item.ChannelNumber);
-                                stamper.AcroFields.SetField("FREQUENCY", item.Frequency);
-                                stamper.AcroFields.SetField("COMMENTS", item.Comments);
-                                break;
-                            case "OPERATIONS":
-                                stamper.AcroFields.SetField("COMMS SYSTEMRow2", item.CommsSystem);
-                                stamper.AcroFields.SetField("CALL SIGNRow2", item.CallSign);
-                                stamper.AcroFields.SetField("CHANNEL IDOPERATIONS", item.ChannelID);
-                                stamper.AcroFields.SetField("Row2", item.ChannelNumber);
-                                stamper.AcroFields.SetField("FREQUENCY_2", item.Frequency);
-                                stamper.AcroFields.SetField("COMMENTS_2", item.Comments);
-                                break;
-                            case "SUPPORT NET":
-                                stamper.AcroFields.SetField("COMMS SYSTEMRow3", item.CommsSystem);
-                                stamper.AcroFields.SetField("CALL SIGNRow3", item.CallSign);
-                                stamper.AcroFields.SetField("CHANNEL IDSUPPORT NET", item.ChannelID);
-                                stamper.AcroFields.SetField("Row3", item.ChannelNumber);
-                                stamper.AcroFields.SetField("FREQUENCY_3", item.Frequency);
-                                stamper.AcroFields.SetField("COMMENTS_3", item.Comments);
-                                break;
-                            case "TACTICAL":
-                                stamper.AcroFields.SetField("COMMS SYSTEMRow4", item.CommsSystem);
-                                stamper.AcroFields.SetField("CALL SIGNRow4", item.CallSign);
-                                stamper.AcroFields.SetField("CHANNEL IDTACTICAL", item.ChannelID);
-                                stamper.AcroFields.SetField("Row4", item.ChannelNumber);
-                                stamper.AcroFields.SetField("FREQUENCY_4", item.Frequency);
-                                stamper.AcroFields.SetField("COMMENTS_4", item.Comments);
-                                break;
-                            case "AIR NET":
-                                stamper.AcroFields.SetField("COMMS SYSTEMRow5", item.CommsSystem);
-                                stamper.AcroFields.SetField("CALL SIGNRow5", item.CallSign);
-                                stamper.AcroFields.SetField("CHANNEL IDAIR NET", item.ChannelID);
-                                stamper.AcroFields.SetField("Row5", item.ChannelNumber);
-                                stamper.AcroFields.SetField("FREQUENCY_5", item.Frequency);
-                                stamper.AcroFields.SetField("COMMENTS_5", item.Comments);
-                                break;
-                            case "EMERGENCY CHANNEL":
-                                stamper.AcroFields.SetField("COMMS SYSTEMRow6", item.CommsSystem);
-                                stamper.AcroFields.SetField("CALL SIGNRow6", item.CallSign);
-                                stamper.AcroFields.SetField("CHANNEL IDEMERGENCY CHANNEL", item.ChannelID);
-                                stamper.AcroFields.SetField("Row6", item.ChannelNumber);
-                                stamper.AcroFields.SetField("FREQUENCY_6", item.Frequency);
-                                stamper.AcroFields.SetField("COMMENTS_6", item.Comments);
-                                break;
-                            case "REPEATER":
-                                stamper.AcroFields.SetField("CALL SIGNREPEATERS", item.CallSign);
-                                stamper.AcroFields.SetField("CHANNEL IDREPEATERS", item.ChannelID);
-                                stamper.AcroFields.SetField("EMERGENCY CHANNELREPEATERS", item.CommsFunction);
-                                stamper.AcroFields.SetField("Row9", item.ChannelNumber);
-                                stamper.AcroFields.SetField("FREQUENCY_9", item.Frequency);
-                                stamper.AcroFields.SetField("COMMENTS_9", item.Comments);
-                                break;
-                            default:
-                                stamper.AcroFields.SetField("COMMS SYSTEMRow" + firstBlankRow, item.CommsSystem);
-                                stamper.AcroFields.SetField("CALL SIGNRow" + firstBlankRow, item.CallSign);
-                                stamper.AcroFields.SetField("EMERGENCY CHANNELRow" + firstBlankRow, link.CommsFunction);
-                                stamper.AcroFields.SetField("CHANNEL IDRow" + firstBlankRow, item.ChannelID);
-                                stamper.AcroFields.SetField("Row" + firstBlankRow, item.ChannelNumber);
-                                stamper.AcroFields.SetField("FREQUENCY_" + firstBlankRow, item.Frequency);
-                                stamper.AcroFields.SetField("COMMENTS_" + firstBlankRow, item.Comments);
-                                firstBlankRow += 1;
-                                if (firstBlankRow == 9) { firstBlankRow += 1; }
-                                break;
-                        }
-
-                    }
-                }
 
                 if (flattenPDF)
                 {
