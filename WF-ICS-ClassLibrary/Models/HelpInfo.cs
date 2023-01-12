@@ -54,6 +54,14 @@ namespace WF_ICS_ClassLibrary.Models
                     bt.Append("• Contact information for the sender and receiver can be added for communications purposes to confirm resource orders."); bt.Append(Environment.NewLine);
                     Body = bt.ToString();
                     return true;
+
+                case "CommsForAir":
+                    Title = "Used for Aircraft";
+                    bt.Append("If this box is checked, this item will be included in the '7. FREQUENCIES' section of ICS-220 Air Ops Summary."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    Body = bt.ToString();
+                    return true;
+
+
                 /* SAR Sign-In Assist Items */
                 case "SignInAssist-Activity":
                     Title = "Current Activity";

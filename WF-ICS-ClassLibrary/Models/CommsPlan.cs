@@ -27,7 +27,7 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime DatePrepared { get => _DatePrepared; set => _DatePrepared = value; }
         public string PreparedBy { get => _PreparedBy; set => _PreparedBy = value; }
         public List<CommsPlanItem> allCommsItems { get => _allCommsItems; set => _allCommsItems = value; }
-        public List<CommsPlanItem> ActiveCommsItems { get => _allCommsItems.Where(o=>o.Active).ToList(); }
+        public List<CommsPlanItem> ActiveCommsItems { get => _allCommsItems.Where(o=>o.Active).OrderBy(o=>o.ChannelID).ThenBy(o=>o.CommsFunction).ToList(); }
         //public List<CommsPlanItemLink> allItemLinks { get => _allItemLinks; set => _allItemLinks = value; }
         public Guid ID { get => _ID; set => _ID = value; }
         public DateTime LastUpdatedUTC { get => _lastUpdatedUTC; set => _lastUpdatedUTC = value; }
@@ -118,7 +118,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(15)] private string _Tone;
         [ProtoMember(16)] private string _Aassignment;
         [ProtoMember(17)] private Guid _TemplateItemID; //This is a unique identifier for the item as saved in Options.
-
+        [ProtoMember(12)] private bool _Aircraft;
 
         public Guid ItemID { get => _ItemID; set => _ItemID = value; }
         public string CommsSystem { get => _CommsSystem; set => _CommsSystem = value; }
@@ -136,6 +136,7 @@ namespace WF_ICS_ClassLibrary.Models
         public int OpsPeriod { get => _OpsPeriod; set => _OpsPeriod = value; }
         public string Tone { get => _Tone; set => _Tone = value; }
         public string Assignment { get => _Aassignment; set => _Aassignment = value; }
+        public bool UsedForAircraft { get => _Aircraft; set => _Aircraft = value; }
 
         public string IDWithFrequency { get { return ChannelID + " " + Frequency; } }
         public string SystemWithID
@@ -224,4 +225,36 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
     }*/
-}
+    public static class CommsPlanTools
+    {
+        public static string PlanToCSV(List<CommsPlanItem> items, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            csv.Append("System/Type"); csv.Append(delimiter);
+            csv.Append("Channel"); csv.Append(delimiter);
+            csv.Append("Function"); csv.Append(delimiter);
+            csv.Append("(Rx/Tx) Frequency"); csv.Append(delimiter);
+            csv.Append("Tone"); csv.Append(delimiter);
+            csv.Append("Assignment"); csv.Append(delimiter);
+            csv.Append("Remarks"); csv.Append(delimiter);
+             csv.Append(Environment.NewLine);
+
+            foreach (CommsPlanItem item in items)
+            {
+
+                //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
+
+                csv.Append("\""); csv.Append(item.CommsSystem.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.ChannelID.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.CommsFunction.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Frequency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Tone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Assignment.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Comments.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
+        }
+    }
+    }

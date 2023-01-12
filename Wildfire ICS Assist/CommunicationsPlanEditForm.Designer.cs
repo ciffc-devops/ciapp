@@ -45,6 +45,9 @@
             this.txtCommsSystem = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnAirHelp = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.chkUsedForAir = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -62,6 +65,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnAirHelp);
+            this.splitContainer1.Panel1.Controls.Add(this.label12);
+            this.splitContainer1.Panel1.Controls.Add(this.chkUsedForAir);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.txtAssignment);
             this.splitContainer1.Panel1.Controls.Add(this.txtFunction);
@@ -81,8 +87,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(508, 373);
-            this.splitContainer1.SplitterDistance = 310;
+            this.splitContainer1.Size = new System.Drawing.Size(508, 434);
+            this.splitContainer1.SplitterDistance = 371;
             this.splitContainer1.TabIndex = 0;
             // 
             // label8
@@ -154,7 +160,7 @@
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(34, 247);
+            this.label6.Location = new System.Drawing.Point(34, 284);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(143, 29);
             this.label6.TabIndex = 140;
@@ -193,11 +199,11 @@
             this.txtComments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtComments.Location = new System.Drawing.Point(184, 248);
+            this.txtComments.Location = new System.Drawing.Point(184, 284);
             this.txtComments.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtComments.Multiline = true;
             this.txtComments.Name = "txtComments";
-            this.txtComments.Size = new System.Drawing.Size(311, 57);
+            this.txtComments.Size = new System.Drawing.Size(311, 82);
             this.txtComments.TabIndex = 136;
             // 
             // txtFrequency
@@ -250,18 +256,53 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnAirHelp
+            // 
+            this.btnAirHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAirHelp.BackColor = System.Drawing.Color.White;
+            this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAirHelp.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
+            this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAirHelp.Location = new System.Drawing.Point(445, 246);
+            this.btnAirHelp.Name = "btnAirHelp";
+            this.btnAirHelp.Size = new System.Drawing.Size(34, 29);
+            this.btnAirHelp.TabIndex = 144;
+            this.btnAirHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAirHelp.UseVisualStyleBackColor = false;
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(34, 246);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(143, 29);
+            this.label12.TabIndex = 146;
+            this.label12.Text = "Used for Air";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkUsedForAir
+            // 
+            this.chkUsedForAir.AutoSize = true;
+            this.chkUsedForAir.Location = new System.Drawing.Point(184, 246);
+            this.chkUsedForAir.Name = "chkUsedForAir";
+            this.chkUsedForAir.Size = new System.Drawing.Size(255, 28);
+            this.chkUsedForAir.TabIndex = 145;
+            this.chkUsedForAir.Text = "Yes, this item is used for air";
+            this.chkUsedForAir.UseVisualStyleBackColor = true;
+            // 
             // CommunicationsPlanEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(508, 373);
+            this.ClientSize = new System.Drawing.Size(508, 434);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CommunicationsPlanEditForm";
             this.Text = "Edit Comms System";
+            this.Load += new System.EventHandler(this.CommunicationsPlanEditForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -290,5 +331,8 @@
         private System.Windows.Forms.TextBox txtCommsSystem;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnAirHelp;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox chkUsedForAir;
     }
 }

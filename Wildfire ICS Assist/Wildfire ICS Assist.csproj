@@ -132,6 +132,12 @@
     <Compile Include="CommunicationsPlanForm.Designer.cs">
       <DependentUpon>CommunicationsPlanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommunicationsPlanViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanViewForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\CollapsiblePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -385,6 +391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommunicationsPlanForm.resx">
       <DependentUpon>CommunicationsPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanViewForm.resx">
+      <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\CollapsiblePanel.resx">
       <DependentUpon>CollapsiblePanel.cs</DependentUpon>

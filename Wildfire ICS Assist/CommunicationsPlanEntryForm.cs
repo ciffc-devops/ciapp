@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -53,7 +54,10 @@ namespace Wildfire_ICS_Assist
                 _SelectedItem = ((CommsPlanItem)cboSavedComms.SelectedItem).Clone();
                 _SelectedItem.CommsFunction = txtSavedFunction.Text;
                 _SelectedItem.Assignment = txtSavedAssignment.Text;
+                _SelectedItem.OpsPeriod = Program.CurrentOpPeriod;
                 _SelectedItem.Active = true;
+                _SelectedItem.UsedForAircraft = chkSavedUsedForAir.Checked;
+                
                 _SelectedItem.ItemID = Guid.NewGuid();
                 this.DialogResult = DialogResult.OK; this.Close();
             }
@@ -67,10 +71,13 @@ namespace Wildfire_ICS_Assist
                 _SelectedItem.CommsSystem = txtCommsSystem.Text;
                 _SelectedItem.ChannelID = txtChannelID.Text;
                 _SelectedItem.Frequency = txtFrequency.Text;
+                _SelectedItem.OpsPeriod = Program.CurrentOpPeriod;
+
                 _SelectedItem.CommsFunction = txtFunction.Text;
                 _SelectedItem.Tone = txtTone.Text;
                 _SelectedItem.Assignment = txtAssignment.Text;
                 _SelectedItem.Comments = txtComments.Text;
+                _SelectedItem.UsedForAircraft = chkUsedForAir.Checked;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -153,6 +160,21 @@ namespace Wildfire_ICS_Assist
         private void cboSavedComms_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAirHelp_Click(object sender, EventArgs e)
+        {
+            HelpInfo info = new HelpInfo();
+            if (info.loadByTopic("CommsForAir"))
+            {
+
+                using (HelpInfoForm help = new HelpInfoForm())
+                {
+                    help.Title = info.Title;
+                    help.Body = info.Body;
+                    help.ShowDialog();
+                }
+            }
         }
     }
 }

@@ -14,12 +14,24 @@ namespace Wildfire_ICS_Assist
     public partial class CommunicationsPlanEditForm : Form
     {
         private CommsPlanItem _SelectedItem = null;
-        public CommsPlanItem SelectedItem { get => _SelectedItem; }
+        public CommsPlanItem SelectedItem { get => _SelectedItem; set { _SelectedItem = value; loadSelectedCommsPlanItem(); } }
 
 
         public CommunicationsPlanEditForm()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground;
+        }
+
+        private void loadSelectedCommsPlanItem()
+        {
+            txtCommsSystem.Text = SelectedItem.CommsSystem;
+            txtChannelID.Text = SelectedItem.ChannelID;
+            txtFrequency.Text = SelectedItem.Frequency;
+            txtFunction.Text = SelectedItem.CommsFunction;
+            txtTone.Text = SelectedItem.Tone;
+            txtAssignment.Text = SelectedItem.Assignment;
+            txtComments.Text = SelectedItem.Comments;
+            chkUsedForAir.Checked = SelectedItem.UsedForAircraft;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -40,7 +52,7 @@ namespace Wildfire_ICS_Assist
         {
             if (ValidateNew())
             {
-                _SelectedItem = new CommsPlanItem();
+                //_SelectedItem = new CommsPlanItem();
                 _SelectedItem.CommsSystem = txtCommsSystem.Text;
                 _SelectedItem.ChannelID = txtChannelID.Text;
                 _SelectedItem.Frequency = txtFrequency.Text;
@@ -48,9 +60,15 @@ namespace Wildfire_ICS_Assist
                 _SelectedItem.Tone = txtTone.Text;
                 _SelectedItem.Assignment = txtAssignment.Text;
                 _SelectedItem.Comments = txtComments.Text;
+                _SelectedItem.UsedForAircraft = chkUsedForAir.Checked;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private void CommunicationsPlanEditForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
