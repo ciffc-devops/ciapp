@@ -210,6 +210,24 @@
     <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotesForm.Designer.cs">
+      <DependentUpon>NotesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotesListEditNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotesListEditNoteForm.Designer.cs">
+      <DependentUpon>NotesListEditNoteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotesListViewNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotesListViewNoteForm.Designer.cs">
+      <DependentUpon>NotesListViewNoteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\EditCommsItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -455,6 +473,15 @@
     <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NotesForm.resx">
+      <DependentUpon>NotesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotesListEditNoteForm.resx">
+      <DependentUpon>NotesListEditNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotesListViewNoteForm.resx">
+      <DependentUpon>NotesListViewNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditCommsItemForm.resx">
       <DependentUpon>EditCommsItemForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -602,6 +629,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <Content Include="Resources\check-box-checked.png" />
+    <Content Include="Resources\check-box-unchecked.png" />
     <None Include="Resources\glyphicons-basic-52-eye.png" />
     <None Include="Resources\glyphicons-basic-399-import.png" />
     <None Include="Resources\glyphicons-basic-849-computer-network.png" />

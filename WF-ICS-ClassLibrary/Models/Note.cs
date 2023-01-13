@@ -66,24 +66,23 @@ namespace WF_ICS_ClassLibrary.Models
             CategoryName = category_name;
         }
 
-
         public Guid CategoryID { get => _CategoryID; set => _CategoryID = value; }
         public string CategoryName { get => _CategoryName; set => _CategoryName = value; }
+    }
 
-        public List<NoteCategory> NoteCategories
+    public static class NoteTools {
+
+        public static List<NoteCategory> NoteCategories
         {
             get
             {
                 List<NoteCategory> categories = new List<NoteCategory>();
-                categories.Add(new NoteCategory(new Guid("c735237b-f252-431b-81c9-c1c650c068c4"), "Interview Note"));
                 categories.Add(new NoteCategory(new Guid("14b17ad2-4f35-440e-9e5e-ac2fd667c536"), "Food and Shelter Note"));
-                categories.Add(new NoteCategory(new Guid("14b17ad2-4f35-440e-9e5e-ac2fd667c536"), "Note from Tasking Agency"));
-                categories.Add(new NoteCategory(new Guid("14b17ad2-4f35-440e-9e5e-ac2fd667c536"), "Note from EMBC/ECC"));
+                categories.Add(new NoteCategory(new Guid("14b17ad2-4f35-440e-9e5e-ac2fd667c536"), "Note from AHJ"));
+                categories.Add(new NoteCategory(new Guid("14b17ad2-4f35-440e-9e5e-ac2fd667c536"), "Note from SME"));
                 categories.Add(new NoteCategory(new Guid("dfc44802-5107-4238-b438-36c172afb78f"), "Other"));
                 return categories;
             }
         }
-
-
     }
 }

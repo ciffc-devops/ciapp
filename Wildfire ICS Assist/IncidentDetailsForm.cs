@@ -109,7 +109,7 @@ namespace Wildfire_ICS_Assist
         IncidentObjectivesForm objectivesForm = null;
         GeneralMessagesForm generalMessagesForm = null;
         MedicalPlanForm medicalPlanForm = null;
-
+        NotesForm notesForm = null;
         /* Event Handlers!*/
 
         public event ShortcutEventHandler ShortcutButtonClicked;
@@ -1423,5 +1423,32 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        private void notesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenNotesForm();
+        }
+
+        private void OpenNotesForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (notesForm == null)
+                {
+                    notesForm = new NotesForm();
+                    notesForm.FormClosed += new FormClosedEventHandler(NotesForm_Closed);
+                    ActiveForms.Add(notesForm);
+                    notesForm.Show(this);
+                }
+
+                notesForm.BringToFront();
+            }
+        }
+        void NotesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(notesForm);
+            notesForm = null;
+
+
+        }
     }
 }
