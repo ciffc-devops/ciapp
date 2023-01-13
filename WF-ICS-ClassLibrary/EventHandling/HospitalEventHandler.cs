@@ -24,4 +24,13 @@ namespace WF_ICS_ClassLibrary.EventHandling
 
         public AmbulanceServiceEventArgs(AmbulanceService _item) { item = _item; }
     }
+
+    public delegate void MedicalAidStationEventHandler(MedicalAidStationEventArgs e);
+
+    public class MedicalAidStationEventArgs
+    {
+        public MedicalAidStation item { get; set; }
+
+        public MedicalAidStationEventArgs(MedicalAidStation _item) { item = _item; }
+    }
 }

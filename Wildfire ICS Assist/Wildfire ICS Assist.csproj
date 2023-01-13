@@ -186,11 +186,29 @@
     <Compile Include="IncidentObjectivesForm.Designer.cs">
       <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MedicalPlanEditAidStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalPlanEditAidStation.Designer.cs">
+      <DependentUpon>MedicalPlanEditAidStation.cs</DependentUpon>
+    </Compile>
     <Compile Include="MedicalPlanForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MedicalPlanForm.Designer.cs">
       <DependentUpon>MedicalPlanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalPlanHospitalEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalPlanHospitalEntryForm.Designer.cs">
+      <DependentUpon>MedicalPlanHospitalEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalPlanMedivacEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
+      <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\EditCommsItemForm.cs">
       <SubType>Form</SubType>
@@ -425,8 +443,17 @@
     <EmbeddedResource Include="IncidentObjectivesForm.resx">
       <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MedicalPlanEditAidStation.resx">
+      <DependentUpon>MedicalPlanEditAidStation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MedicalPlanForm.resx">
       <DependentUpon>MedicalPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalPlanHospitalEntryForm.resx">
+      <DependentUpon>MedicalPlanHospitalEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
+      <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditCommsItemForm.resx">
       <DependentUpon>EditCommsItemForm.cs</DependentUpon>
@@ -520,6 +547,9 @@
       <DependentUpon>VehiclesForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="BlankForms\ICS-202-WF-Incident-Objectives.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-206-WF-Medical-Plan.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">

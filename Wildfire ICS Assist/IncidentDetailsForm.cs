@@ -108,6 +108,7 @@ namespace Wildfire_ICS_Assist
         PositionLogAllOutstandingForm _positionLogAllOutstandingForm = null;
         IncidentObjectivesForm objectivesForm = null;
         GeneralMessagesForm generalMessagesForm = null;
+        MedicalPlanForm medicalPlanForm = null;
 
         /* Event Handlers!*/
 
@@ -126,6 +127,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
             Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
             Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
+            Program.wfIncidentService.MedicalPlanChanged += Program_MedicalPlanChanged;
         }
 
 
@@ -1324,6 +1326,15 @@ namespace Wildfire_ICS_Assist
             TriggerAutoSave();
         }
 
+        private void Program_MedicalPlanChanged(MedicalPlanEventArgs e)
+        {
+            if(e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                setButtonCheckboxes();
+            }
+            TriggerAutoSave();
+        }
+
         private void Program_GeneralMessageChanged(GeneralMessageEventArgs e)
         {
             TriggerAutoSave();
@@ -1377,5 +1388,40 @@ namespace Wildfire_ICS_Assist
             OpenPositionLog();
 
         }
+
+        private void btnMedicalPlan_Click(object sender, EventArgs e)
+        {
+            OpenMedicalPlanForm();
+        }
+
+        private void medicalPlanICS206ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenMedicalPlanForm();
+        }
+
+
+        private void OpenMedicalPlanForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (medicalPlanForm == null)
+                {
+                    medicalPlanForm = new MedicalPlanForm();
+                    medicalPlanForm.FormClosed += new FormClosedEventHandler(MedicalPlanForm_Closed);
+                    ActiveForms.Add(medicalPlanForm);
+                    medicalPlanForm.Show(this);
+                }
+
+                medicalPlanForm.BringToFront();
+            }
+        }
+        void MedicalPlanForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(medicalPlanForm);
+            medicalPlanForm = null;
+
+
+        }
+
     }
 }

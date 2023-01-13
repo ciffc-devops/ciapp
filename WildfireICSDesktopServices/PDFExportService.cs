@@ -477,11 +477,14 @@ namespace WildfireICSDesktopServices
 
         public string createMedicalPlanPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
-            if (!task.allMedicalPlans.Where(o => o.OpPeriod == OpsPeriod).Any())
-            {
-                task.createMedicalPlanAsNeeded(OpsPeriod);
-            }
+            if (!task.allMedicalPlans.Any(o => o.OpPeriod == OpsPeriod)) { task.createMedicalPlanAsNeeded(OpsPeriod); }
             MedicalPlan plan = task.allMedicalPlans.Where(o => o.OpPeriod == OpsPeriod).First();
+
+            if(!task.allOrgCharts.Any(o=>o.OpPeriod == OpsPeriod)) { task.createOrgChartAsNeeded(OpsPeriod); }
+            OrganizationChart currentChart = task.allOrgCharts.First(o => o.OpPeriod == OpsPeriod);
+
+            OperationalPeriod currentOp = task.AllOperationalPeriods.First(o=>o.PeriodNumber== OpsPeriod);
+
 
             string path = FileAccessClasses.getWritablePath(task);
 
@@ -504,7 +507,7 @@ namespace WildfireICSDesktopServices
             try
             {
 
-                string fileToUse = "ICSForms/ICS 206 - Medical Plan.pdf";
+                string fileToUse = "BlankForms/ICS-206-WF-Medical-Plan.pdf";
 
 
 
@@ -516,46 +519,95 @@ namespace WildfireICSDesktopServices
                 //Op Plan
                 DateTime today = DateTime.Now;
                 //Top Section
-                stamper.AcroFields.SetField("206TASK", task.TaskNumber);
-                stamper.AcroFields.SetField("206TASK NAME", task.TaskName);
-                stamper.AcroFields.SetField("206PREPARED BY LOGISTICS", plan.PreparedBy);
+                stamper.AcroFields.SetField("1B INCIDENT NUMBER", task.TaskNumber);
+                stamper.AcroFields.SetField("1A INCIDENT NAME", task.TaskName);
 
 
-                stamper.AcroFields.SetField("206FOR OP PERIOD", OpsPeriod.ToString());
-                stamper.AcroFields.SetField("206DATE  TIME PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", plan.DatePrepared));
+                stamper.AcroFields.SetField("1B INCIDENT NUMBERDate From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                stamper.AcroFields.SetField("1B INCIDENT NUMBERTime From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
-                int ambulanceIndex = 1;
-                foreach (AmbulanceService ambulance in plan.Ambulances)
+
+
+
+                //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
+                if (plan.PreparedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.PreparedBy) && currentChart.AllRoles.Any(o => o.RoleID == plan.PreparedByRoleID))
                 {
-                    stamper.AcroFields.SetField("ORGANIZATIONRow" + ambulanceIndex, ambulance.Organization);
-                    stamper.AcroFields.SetField("CONTACTRow" + ambulanceIndex, ambulance.Contact);
-                    stamper.AcroFields.SetField("PHONERow" + ambulanceIndex, ambulance.Phone);
-                    stamper.AcroFields.SetField("RADIORow" + ambulanceIndex, ambulance.RadioFrequency);
-                    ambulanceIndex += 1;
-                    if (ambulanceIndex >= 3)
-                    {
-                        break;
-                    }
+                    ICSRole role = currentChart.AllRoles.First(o => o.RoleID == plan.PreparedByRoleID);
+                    plan.PreparedBy = role.IndividualName;
+                }
+                stamper.AcroFields.SetField("Name", plan.PreparedBy);
+                stamper.AcroFields.SetField("Position", plan.PreparedByPosition);
+
+                //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
+                if (plan.ApprovedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.ApprovedBy) && currentChart.AllRoles.Any(o => o.RoleID == plan.ApprovedByRoleID))
+                {
+                    ICSRole role = currentChart.AllRoles.First(o => o.RoleID == plan.ApprovedByRoleID);
+                    plan.ApprovedBy = role.IndividualName;
+                }
+                stamper.AcroFields.SetField("Name_2", plan.ApprovedBy);
+                stamper.AcroFields.SetField("Position_2", plan.ApprovedByPosition);
+
+                stamper.AcroFields.SetField("6 MEDICAL EMERGENCY PROCEDURESRow1", plan.EmergencyProcedures);
+
+
+                for (int aid = 0; aid < plan.ActiveAidStations.Count && aid < 5; aid++)
+                {
+                    MedicalAidStation aidStation = plan.ActiveAidStations[aid];
+                    stamper.AcroFields.SetField("Medical Aid StationsRow" + (aid + 1), aidStation.Name);
+                    stamper.AcroFields.SetField("LocationRow" + (aid + 1) , aidStation.Location);
+                    stamper.AcroFields.SetField("Contact number or frequencyRow" + (aid + 1), aidStation.ContactNumber);
+
+
+                    if (aidStation.ParamedicsAvailable) { PDFExtraTools.SetPDFCheckbox(stamper, "AidParamedicY" + (aid + 1)); }
+                    else { PDFExtraTools.SetPDFCheckbox(stamper, "AidParamedicN" + (aid + 1)); }
+
+
                 }
 
-                int hospitalIndex = 1;
-                foreach (Hospital hospital in plan.Hospitals)
+
+
+                for (int a = 0; a < plan.ActiveAmbulances.Count && a < 5; a++)
                 {
-                    if (hospitalIndex >= 4)
+                    AmbulanceService ambulance = plan.ActiveAmbulances[a];
+                    stamper.AcroFields.SetField("Medivac ServicesRow" + (a + 1), ambulance.Organization);
+                    stamper.AcroFields.SetField("LocationRow" + (a + 1) + "_2", ambulance.Location);
+                    stamper.AcroFields.SetField("Contact number or frequencyRow" + (a + 1) + "_2", ambulance.Contact);
+
+
+                    if (ambulance.IsALS) { PDFExtraTools.SetPDFCheckbox(stamper, "MedivacALS" + (a + 1)); }
+                    else { PDFExtraTools.SetPDFCheckbox(stamper, "MedivacBLS" + (a + 1)); }
+
+                }
+
+
+                for (int a = 0; a < plan.ActiveHospitals.Count && a < 5; a++)
+                {
+                    Hospital hospital = plan.ActiveHospitals[a];
+                    stamper.AcroFields.SetField("Hospital NameRow" + (a + 1), hospital.name);
+                    if (hospital.Latitude != 0 && hospital.Longitude != 0 && hospital.helipad)
                     {
-                        break;
+                        Coordinate coord = new Coordinate();
+                        coord.Latitude = hospital.Latitude;
+                        coord.Longitude = hospital.Longitude;
+                        GeneralOptionsService service = new GeneralOptionsService();
+                        stamper.AcroFields.SetField("Address Lat And Long if HelipadRow" + (a + 1), coord.CoordinateOutput(service.GetOptionsValue("CoordinateFormat").ToString()));
                     }
-                    stamper.AcroFields.SetField("NAMERow" + hospitalIndex, hospital.name);
-                    stamper.AcroFields.SetField("LOCATIONRow" + hospitalIndex + "_2", hospital.location);
-                    stamper.AcroFields.SetField("PHONERow" + hospitalIndex + "_2", hospital.phone);
+                    else
+                    {
+                        stamper.AcroFields.SetField("Address Lat And Long if HelipadRow" + (a + 1), hospital.location);
+                    }
+                    stamper.AcroFields.SetField("AirRow" + (a + 1), hospital.travelTimeAir.ToString());
+                    stamper.AcroFields.SetField("GrndRow" + (a + 1) , hospital.travelTimeGround.ToString());
+                    stamper.AcroFields.SetField("Contact number or frequencyRow" + (a + 1) + "_3", hospital.phone);
 
-                    if (hospital.traumaUnit) { PDFExtraTools.SetPDFCheckbox(stamper, "TRAUMA" + hospitalIndex); }
-                    if (hospital.burnUnit) { PDFExtraTools.SetPDFCheckbox(stamper, "BURN" + hospitalIndex); }
-                    if (hospital.hypothermia) { PDFExtraTools.SetPDFCheckbox(stamper, "HYPOTHERMIA" + hospitalIndex); }
-                    if (hospital.helipad) { PDFExtraTools.SetPDFCheckbox(stamper, "HELIPAD" + hospitalIndex); }
 
-                    hospitalIndex += 1;
+                    if (hospital.helipad) { PDFExtraTools.SetPDFCheckbox(stamper, "HelipadY" + (a + 1)); }
+                    else { PDFExtraTools.SetPDFCheckbox(stamper, "HelipadN" + (a + 1)); }
 
+                    if (hospital.burnUnit) { PDFExtraTools.SetPDFCheckbox(stamper, "BurnY" + (a + 1)); }
+                    else { PDFExtraTools.SetPDFCheckbox(stamper, "BurnN" + (a + 1)); }
                 }
 
 

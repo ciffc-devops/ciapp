@@ -22,6 +22,8 @@ namespace WildfireICSDesktopServices
         public event ContactEventHandler ContactChanged;
         public event HospitalEventHandler HospitalChanged;
         public event AmbulanceServiceEventHandler AmbulanceServiceChanged;
+        public event MedicalAidStationEventHandler MedicalAidStationChanged;
+
         public event IncidentObjectiveEventHandler IncidentObjectiveChanged;
         public event IncidentObjectivesSheetEventHandler IncidentObjectivesSheetChanged;
         public event MedicalPlanEventHandler MedicalPlanChanged;
@@ -770,6 +772,84 @@ namespace WildfireICSDesktopServices
             }
             OnMedicalPlanChanged(new MedicalPlanEventArgs(record));
         }
+
+
+        // Ambulance
+        protected virtual void OnAmbulanceChanged(AmbulanceServiceEventArgs e)
+        {
+            AmbulanceServiceEventHandler handler = this.AmbulanceServiceChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertAmbulance(AmbulanceService record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            _currentIncident.createMedicalPlanAsNeeded(record.OpPeriod);
+            MedicalPlan plan = _currentIncident.allMedicalPlans.FirstOrDefault(o => o.OpPeriod == record.OpPeriod);
+            plan.Ambulances = plan.Ambulances.Where(o=>o.AmbulanceID != record.AmbulanceID).ToList();
+            plan.Ambulances.Add(record);
+
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnAmbulanceChanged(new AmbulanceServiceEventArgs(record));
+        }
+        // Aid Station
+        protected virtual void OnMedicalAidStationChanged(MedicalAidStationEventArgs e)
+        {
+            MedicalAidStationEventHandler handler = this.MedicalAidStationChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertMedicalAidStation(MedicalAidStation record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            _currentIncident.createMedicalPlanAsNeeded(record.OpPeriod);
+            MedicalPlan plan = _currentIncident.allMedicalPlans.FirstOrDefault(o => o.OpPeriod == record.OpPeriod);
+            plan.MedicalAidStations = plan.MedicalAidStations.Where(o => o.AidStationID != record.AidStationID).ToList();
+            plan.MedicalAidStations.Add(record);
+
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnMedicalAidStationChanged(new MedicalAidStationEventArgs(record));
+        }
+        // Hospital
+        protected virtual void OnHospitalChanged(HospitalEventArgs e)
+        {
+            HospitalEventHandler handler = this.HospitalChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertHospital(Hospital record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            _currentIncident.createMedicalPlanAsNeeded(record.OpPeriod);
+            MedicalPlan plan = _currentIncident.allMedicalPlans.FirstOrDefault(o => o.OpPeriod == record.OpPeriod);
+            plan.Hospitals = plan.Hospitals.Where(o => o.HospitalID != record.HospitalID).ToList();
+            plan.Hospitals.Add(record);
+
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnHospitalChanged(new HospitalEventArgs(record));
+        }
+
+
+
+
+
+
+
 
         // Operational Period
         protected virtual void OnOperationalPeriodChanged(OperationalPeriodEventArgs e)

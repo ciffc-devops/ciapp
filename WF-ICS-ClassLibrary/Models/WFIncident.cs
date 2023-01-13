@@ -69,7 +69,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             allCommsLogEntries = new List<CommsLogEntry>();
             AllOperationalPeriods = new List<OperationalPeriod>();
             AllGeneralMessages = new List<GeneralMessage>();
-
+            
             taskTimeline = new Timeline();
             // allEquipment = new List<TaskEquipment>();
             // allLogisticalNeeds = new List<LogisticalNeed>();
@@ -473,8 +473,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         }
         public bool hasMeaningfulMedicalPlan(int ops)
         {
-            if (allMedicalPlans.Where(o => o.OpPeriod == ops).Count() <= 0) { return false; }
-            else if (allMedicalPlans.First(o => o.OpPeriod == ops).Ambulances.Any() || allMedicalPlans.First(o => o.OpPeriod == ops).Hospitals.Any()) { return true; }
+            if (!allMedicalPlans.Any(o => o.OpPeriod == ops)) { return false; }
+            else if (allMedicalPlans.First(o => o.OpPeriod == ops).ActiveAmbulances.Any() || allMedicalPlans.First(o => o.OpPeriod == ops).ActiveHospitals.Any() || allMedicalPlans.First(o => o.OpPeriod == ops).ActiveAidStations.Any()) { return true; }
             else { return false; }
         }
         public bool hasMeaningfulObjectives(int ops) { return (allIncidentObjectives.Any(o => o.OpPeriod == ops && o.Objectives.Any())); }

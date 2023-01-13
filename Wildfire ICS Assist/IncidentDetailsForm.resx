@@ -1969,7 +1969,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAbABAQGwAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAbgBAQG4AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2537,6 +2537,90 @@
   <data name="editToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="incidentActionPlanToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="incidentActionPlanToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Italic</value>
+  </data>
+  <data name="incidentActionPlanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="incidentActionPlanToolStripMenuItem.Text" xml:space="preserve">
+    <value>Incident Action Plan</value>
+  </data>
+  <data name="incidentObjectivesICS202ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="incidentObjectivesICS202ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Incident Objectives (ICS 202)</value>
+  </data>
+  <data name="communicationsPlanICS205ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="communicationsPlanICS205ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Communications Plan (ICS 205)</value>
+  </data>
+  <data name="medicalPlanICS206ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="medicalPlanICS206ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Medical Plan (ICS 206)</value>
+  </data>
+  <data name="organizationChartICS207ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="organizationChartICS207ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Organization Chart (ICS 207)</value>
+  </data>
+  <data name="safetyMessageICS208ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="safetyMessageICS208ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Safety Message (ICS 208)</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 6</value>
+  </data>
+  <data name="additionalDocumentsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="additionalDocumentsToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Italic</value>
+  </data>
+  <data name="additionalDocumentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="additionalDocumentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Additional Documents</value>
+  </data>
+  <data name="communicationsListICS205AToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="communicationsListICS205AToolStripMenuItem.Text" xml:space="preserve">
+    <value>Communications List (ICS 205A)</value>
+  </data>
+  <data name="generalMessageICS213ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="generalMessageICS213ToolStripMenuItem.Text" xml:space="preserve">
+    <value>General Message (ICS 213)</value>
+  </data>
+  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 6</value>
+  </data>
+  <data name="printThisOperationalPeriodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="printThisOperationalPeriodToolStripMenuItem.Text" xml:space="preserve">
+    <value>Print this Operational Period</value>
+  </data>
+  <data name="printThisIncidentToDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="printThisIncidentToDateToolStripMenuItem.Text" xml:space="preserve">
+    <value>Print this Incident to date</value>
+  </data>
   <data name="iAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 29</value>
   </data>
@@ -2560,12 +2644,6 @@
   </data>
   <data name="planningToolStripMenuItem.Text" xml:space="preserve">
     <value>Planning</value>
-  </data>
-  <data name="positionLogToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 30</value>
-  </data>
-  <data name="positionLogToolStripMenuItem3.Text" xml:space="preserve">
-    <value>Position Log</value>
   </data>
   <data name="adminFinanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 29</value>
@@ -2747,75 +2825,6 @@
   <data name="safetyNotesToolStripMenuItem.Text" xml:space="preserve">
     <value>Safety Notes</value>
   </data>
-  <data name="incidentActionPlanToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="incidentActionPlanToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Italic</value>
-  </data>
-  <data name="incidentActionPlanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="incidentActionPlanToolStripMenuItem.Text" xml:space="preserve">
-    <value>Incident Action Plan</value>
-  </data>
-  <data name="incidentObjectivesICS202ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="incidentObjectivesICS202ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Incident Objectives (ICS 202)</value>
-  </data>
-  <data name="communicationsPlanICS205ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="communicationsPlanICS205ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Communications Plan (ICS 205)</value>
-  </data>
-  <data name="medicalPlanICS206ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="medicalPlanICS206ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Medical Plan (ICS 206)</value>
-  </data>
-  <data name="organizationChartICS207ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="organizationChartICS207ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Organization Chart (ICS 207)</value>
-  </data>
-  <data name="safetyMessageICS208ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="safetyMessageICS208ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Safety Message (ICS 208)</value>
-  </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 6</value>
-  </data>
-  <data name="additionalDocumentsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="additionalDocumentsToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Italic</value>
-  </data>
-  <data name="additionalDocumentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="additionalDocumentsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Additional Documents</value>
-  </data>
-  <data name="communicationsListICS205AToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="communicationsListICS205AToolStripMenuItem.Text" xml:space="preserve">
-    <value>Communications List (ICS 205A)</value>
-  </data>
-  <data name="generalMessageICS213ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="generalMessageICS213ToolStripMenuItem.Text" xml:space="preserve">
-    <value>General Message (ICS 213)</value>
-  </data>
   <data name="positionLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 30</value>
   </data>
@@ -2834,6 +2843,57 @@
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 6</value>
   </data>
+  <data name="checkInsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="checkInsToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Italic</value>
+  </data>
+  <data name="checkInsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 30</value>
+  </data>
+  <data name="checkInsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Check-Ins</value>
+  </data>
+  <data name="memberStatusToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 30</value>
+  </data>
+  <data name="memberStatusToolStripMenuItem.Text" xml:space="preserve">
+    <value>Member Status</value>
+  </data>
+  <data name="checkInMemberToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 30</value>
+  </data>
+  <data name="checkInMemberToolStripMenuItem.Text" xml:space="preserve">
+    <value>Check-In Member</value>
+  </data>
+  <data name="bulkCheckInToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 30</value>
+  </data>
+  <data name="bulkCheckInToolStripMenuItem.Text" xml:space="preserve">
+    <value>Bulk Check-In</value>
+  </data>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 6</value>
+  </data>
+  <data name="vehiclesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 30</value>
+  </data>
+  <data name="vehiclesToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Vehicles</value>
+  </data>
+  <data name="equipmentToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 30</value>
+  </data>
+  <data name="equipmentToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Equipment</value>
+  </data>
+  <data name="additionalContactsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 30</value>
+  </data>
+  <data name="additionalContactsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Additional Contacts</value>
+  </data>
   <data name="positionLogToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 30</value>
   </data>
@@ -2842,6 +2902,60 @@
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>236, 6</value>
+  </data>
+  <data name="teamAssignmentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 30</value>
+  </data>
+  <data name="teamAssignmentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Team Assignments</value>
+  </data>
+  <data name="incidentTimelineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 30</value>
+  </data>
+  <data name="incidentTimelineToolStripMenuItem.Text" xml:space="preserve">
+    <value>Incident Timeline</value>
+  </data>
+  <data name="notesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 30</value>
+  </data>
+  <data name="notesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="positionLogToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 30</value>
+  </data>
+  <data name="positionLogToolStripMenuItem3.Text" xml:space="preserve">
+    <value>Position Log</value>
+  </data>
+  <data name="localNetworkSharingSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="localNetworkSharingSyncToolStripMenuItem.Text" xml:space="preserve">
+    <value>Local Network Sharing / Sync</value>
+  </data>
+  <data name="requestIncidentFromServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="requestIncidentFromServerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Request Incident from server</value>
+  </data>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 6</value>
+  </data>
+  <data name="internetSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="internetSyncToolStripMenuItem.Text" xml:space="preserve">
+    <value>Internet Sync</value>
+  </data>
+  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 6</value>
+  </data>
+  <data name="requestOptionsFromServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="requestOptionsFromServerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Request Options from server</value>
   </data>
   <data name="checkForTemplateUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>319, 30</value>
@@ -4670,120 +4784,6 @@
   </data>
   <data name="&gt;&gt;btnCommsLog.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 6</value>
-  </data>
-  <data name="printThisOperationalPeriodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="printThisOperationalPeriodToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print this Operational Period</value>
-  </data>
-  <data name="printThisIncidentToDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="printThisIncidentToDateToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print this Incident to date</value>
-  </data>
-  <data name="memberStatusToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 30</value>
-  </data>
-  <data name="memberStatusToolStripMenuItem.Text" xml:space="preserve">
-    <value>Member Status</value>
-  </data>
-  <data name="checkInMemberToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 30</value>
-  </data>
-  <data name="checkInMemberToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check-In Member</value>
-  </data>
-  <data name="bulkCheckInToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 30</value>
-  </data>
-  <data name="bulkCheckInToolStripMenuItem.Text" xml:space="preserve">
-    <value>Bulk Check-In</value>
-  </data>
-  <data name="checkInsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkInsToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Italic</value>
-  </data>
-  <data name="checkInsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 30</value>
-  </data>
-  <data name="checkInsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check-Ins</value>
-  </data>
-  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 6</value>
-  </data>
-  <data name="vehiclesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 30</value>
-  </data>
-  <data name="vehiclesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Vehicles</value>
-  </data>
-  <data name="equipmentToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 30</value>
-  </data>
-  <data name="equipmentToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Equipment</value>
-  </data>
-  <data name="additionalContactsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 30</value>
-  </data>
-  <data name="additionalContactsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Additional Contacts</value>
-  </data>
-  <data name="teamAssignmentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 30</value>
-  </data>
-  <data name="teamAssignmentsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Team Assignments</value>
-  </data>
-  <data name="incidentTimelineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 30</value>
-  </data>
-  <data name="incidentTimelineToolStripMenuItem.Text" xml:space="preserve">
-    <value>Incident Timeline</value>
-  </data>
-  <data name="notesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 30</value>
-  </data>
-  <data name="notesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Notes</value>
-  </data>
-  <data name="localNetworkSharingSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="localNetworkSharingSyncToolStripMenuItem.Text" xml:space="preserve">
-    <value>Local Network Sharing / Sync</value>
-  </data>
-  <data name="requestIncidentFromServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="requestIncidentFromServerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Request Incident from server</value>
-  </data>
-  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 6</value>
-  </data>
-  <data name="internetSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="internetSyncToolStripMenuItem.Text" xml:space="preserve">
-    <value>Internet Sync</value>
-  </data>
-  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 6</value>
-  </data>
-  <data name="requestOptionsFromServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="requestOptionsFromServerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Request Options from server</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -12294,6 +12294,24 @@
   <data name="&gt;&gt;generalMessageICS213ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
+    <value>toolStripSeparator9</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;printThisOperationalPeriodToolStripMenuItem.Name" xml:space="preserve">
+    <value>printThisOperationalPeriodToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;printThisOperationalPeriodToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;printThisIncidentToDateToolStripMenuItem.Name" xml:space="preserve">
+    <value>printThisIncidentToDateToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;printThisIncidentToDateToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;operationsToolStripMenuItem.Name" xml:space="preserve">
     <value>operationsToolStripMenuItem</value>
   </data>
@@ -12330,6 +12348,54 @@
   <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;checkInsToolStripMenuItem.Name" xml:space="preserve">
+    <value>checkInsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;checkInsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;memberStatusToolStripMenuItem.Name" xml:space="preserve">
+    <value>memberStatusToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;memberStatusToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkInMemberToolStripMenuItem.Name" xml:space="preserve">
+    <value>checkInMemberToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;checkInMemberToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bulkCheckInToolStripMenuItem.Name" xml:space="preserve">
+    <value>bulkCheckInToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;bulkCheckInToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
+    <value>toolStripSeparator10</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;vehiclesToolStripMenuItem1.Name" xml:space="preserve">
+    <value>vehiclesToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;vehiclesToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;equipmentToolStripMenuItem1.Name" xml:space="preserve">
+    <value>equipmentToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;equipmentToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;additionalContactsToolStripMenuItem.Name" xml:space="preserve">
+    <value>additionalContactsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;additionalContactsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;planningToolStripMenuItem.Name" xml:space="preserve">
     <value>planningToolStripMenuItem</value>
   </data>
@@ -12348,10 +12414,76 @@
   <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;teamAssignmentsToolStripMenuItem.Name" xml:space="preserve">
+    <value>teamAssignmentsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;teamAssignmentsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;incidentTimelineToolStripMenuItem.Name" xml:space="preserve">
+    <value>incidentTimelineToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;incidentTimelineToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notesToolStripMenuItem.Name" xml:space="preserve">
+    <value>notesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;notesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;adminFinanceToolStripMenuItem.Name" xml:space="preserve">
+    <value>adminFinanceToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;adminFinanceToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;positionLogToolStripMenuItem3.Name" xml:space="preserve">
+    <value>positionLogToolStripMenuItem3</value>
+  </data>
+  <data name="&gt;&gt;positionLogToolStripMenuItem3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;networkInternetToolStripMenuItem.Name" xml:space="preserve">
     <value>networkInternetToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;networkInternetToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;localNetworkSharingSyncToolStripMenuItem.Name" xml:space="preserve">
+    <value>localNetworkSharingSyncToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;localNetworkSharingSyncToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;requestIncidentFromServerToolStripMenuItem.Name" xml:space="preserve">
+    <value>requestIncidentFromServerToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;requestIncidentFromServerToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
+    <value>toolStripSeparator11</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;internetSyncToolStripMenuItem.Name" xml:space="preserve">
+    <value>internetSyncToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;internetSyncToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
+    <value>toolStripSeparator12</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;requestOptionsFromServerToolStripMenuItem.Name" xml:space="preserve">
+    <value>requestOptionsFromServerToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;requestOptionsFromServerToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
@@ -12431,138 +12563,6 @@
   </data>
   <data name="&gt;&gt;tmrNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
-    <value>toolStripSeparator9</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;printThisOperationalPeriodToolStripMenuItem.Name" xml:space="preserve">
-    <value>printThisOperationalPeriodToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;printThisOperationalPeriodToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;printThisIncidentToDateToolStripMenuItem.Name" xml:space="preserve">
-    <value>printThisIncidentToDateToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;printThisIncidentToDateToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;memberStatusToolStripMenuItem.Name" xml:space="preserve">
-    <value>memberStatusToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;memberStatusToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkInMemberToolStripMenuItem.Name" xml:space="preserve">
-    <value>checkInMemberToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;checkInMemberToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bulkCheckInToolStripMenuItem.Name" xml:space="preserve">
-    <value>bulkCheckInToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;bulkCheckInToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkInsToolStripMenuItem.Name" xml:space="preserve">
-    <value>checkInsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;checkInsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
-    <value>toolStripSeparator10</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;vehiclesToolStripMenuItem1.Name" xml:space="preserve">
-    <value>vehiclesToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;vehiclesToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;equipmentToolStripMenuItem1.Name" xml:space="preserve">
-    <value>equipmentToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;equipmentToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;additionalContactsToolStripMenuItem.Name" xml:space="preserve">
-    <value>additionalContactsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;additionalContactsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;teamAssignmentsToolStripMenuItem.Name" xml:space="preserve">
-    <value>teamAssignmentsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;teamAssignmentsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;incidentTimelineToolStripMenuItem.Name" xml:space="preserve">
-    <value>incidentTimelineToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;incidentTimelineToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;notesToolStripMenuItem.Name" xml:space="preserve">
-    <value>notesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;notesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;localNetworkSharingSyncToolStripMenuItem.Name" xml:space="preserve">
-    <value>localNetworkSharingSyncToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;localNetworkSharingSyncToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;requestIncidentFromServerToolStripMenuItem.Name" xml:space="preserve">
-    <value>requestIncidentFromServerToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;requestIncidentFromServerToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
-    <value>toolStripSeparator11</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;internetSyncToolStripMenuItem.Name" xml:space="preserve">
-    <value>internetSyncToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;internetSyncToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
-    <value>toolStripSeparator12</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;requestOptionsFromServerToolStripMenuItem.Name" xml:space="preserve">
-    <value>requestOptionsFromServerToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;requestOptionsFromServerToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;adminFinanceToolStripMenuItem.Name" xml:space="preserve">
-    <value>adminFinanceToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;adminFinanceToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem3.Name" xml:space="preserve">
-    <value>positionLogToolStripMenuItem3</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>IncidentDetailsForm</value>

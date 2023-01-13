@@ -25,6 +25,7 @@ namespace WildfireICSDesktopServices
         event ICSRoleEventHandler ICSRoleChanged;
         event IncidentObjectiveEventHandler IncidentObjectiveChanged;
         event IncidentObjectivesSheetEventHandler IncidentObjectivesSheetChanged;
+        event MedicalAidStationEventHandler MedicalAidStationChanged;
 
         event MedicalPlanEventHandler MedicalPlanChanged;
         event MemberEventHandler MemberSignInChanged;
@@ -70,7 +71,7 @@ namespace WildfireICSDesktopServices
         void UpsertComms(CommsLogEntry entry, string source = "local");
         void UpsertCommsPlan(CommsPlan record, string source = "local");
         void UpsertCommsPlanItem(CommsPlanItem item, string function = null, string source = "local");
-       // void UpsertCommsPlanItemLink(CommsPlanItemLink link, string source = "local");
+        // void UpsertCommsPlanItemLink(CommsPlanItemLink link, string source = "local");
         void UpsertContact(Contact record, string source = "local");
         void UpsertEquipmentIssue(EquipmentIssue issue, string source = "local");
         void UpsertICSRole(ICSRole record, string source = "local");
@@ -79,6 +80,10 @@ namespace WildfireICSDesktopServices
         void UpsertIncidentObjectivesSheet(IncidentObjectivesSheet record, string source = "local");
         void UpsertIncidentObjective(IncidentObjective record, string source = "local");
         void UpsertMedicalPlan(MedicalPlan record, string source = "local");
+        void UpsertMedicalAidStation(MedicalAidStation record, string source = "local");
+        void UpsertHospital(Hospital record, string source = "local");
+        void UpsertAmbulance(AmbulanceService record, string source = "local");
+
         void UpsertMemberStatus(SignInRecord signIn, string source = "local");
         void UpsertMemberStatus(TeamMember member, string source = "local");
         void UpsertNote(Note note, string source = "local");

@@ -172,6 +172,7 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 if (!string.IsNullOrEmpty(IndividualName)) { return RoleNameForDropdown + " - " + IndividualName; }
+                if (string.IsNullOrEmpty(IndividualName) && string.IsNullOrEmpty(RoleName)) { return string.Empty; }
                 else { return RoleNameForDropdown + " - unassigned"; }
             }
         }

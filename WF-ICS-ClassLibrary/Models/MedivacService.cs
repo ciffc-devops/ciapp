@@ -28,6 +28,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(12)] private string _Location;
         [ProtoMember(13)] private double _Latitude;
         [ProtoMember(14)] private double _Longitude;
+        [ProtoMember(15)] private int _OpPeriod;
 
         public Guid AmbulanceID { get => _AmbulanceID; set => _AmbulanceID = value; }
         public string Organization { get => _Organization; set => _Organization = value; }
@@ -43,6 +44,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Location { get => _Location; set => _Location = value; }
         public double Latitude { get => _Latitude; set => _Latitude = value; }  
         public double Longitude { get => _Longitude;set => _Longitude = value; }
+        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
 
         public string ParamedicsAvailable
         {

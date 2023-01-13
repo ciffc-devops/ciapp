@@ -27,6 +27,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(14)] private double _Longitude;
         [ProtoMember(15)] private bool _active;
         [ProtoMember(16)] private Guid _OrganizationID;
+        [ProtoMember(17)] private int _OpPeriod;
 
         public Guid HospitalID { get => _HospitalID; set => _HospitalID = value; }
         public string name { get => _HospitalName; set => _HospitalName = value; }
@@ -45,7 +46,7 @@ namespace WF_ICS_ClassLibrary.Models
         public double Longitude { get => _Longitude; set => _Longitude = value; }
         public bool Active { get { return _active; } set { _active = value; } } //hospitals used once but not "saved for later" will be marked inactive, as will "deleted" hospitals
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
-
+        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; } 
 
 
         public Hospital() { HospitalID = System.Guid.NewGuid(); Active = true; }

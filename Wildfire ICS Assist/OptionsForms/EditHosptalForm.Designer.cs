@@ -29,32 +29,32 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.lblCoordinateStatus = new System.Windows.Forms.Label();
+            this.grpTravelTime = new System.Windows.Forms.GroupBox();
+            this.numTravelGround = new System.Windows.Forms.NumericUpDown();
+            this.numTravelAir = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtHospitalName = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.chkHelipad = new System.Windows.Forms.CheckBox();
             this.chkBurnUnit = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.grpTravelTime = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.numTravelAir = new System.Windows.Forms.NumericUpDown();
-            this.numTravelGround = new System.Windows.Forms.NumericUpDown();
             this.txtLatitude = new System.Windows.Forms.TextBox();
-            this.lblCoordinateStatus = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.grpTravelTime.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTravelAir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTravelGround)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTravelAir)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -86,36 +86,132 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(495, 439);
-            this.splitContainer1.SplitterDistance = 363;
+            this.splitContainer1.Size = new System.Drawing.Size(495, 462);
+            this.splitContainer1.SplitterDistance = 386;
             this.splitContainer1.TabIndex = 0;
             // 
-            // btnCancel
+            // lblCoordinateStatus
             // 
-            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(12, 13);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(125, 51);
-            this.btnCancel.TabIndex = 28;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.lblCoordinateStatus.AutoSize = true;
+            this.lblCoordinateStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCoordinateStatus.Location = new System.Drawing.Point(168, 213);
+            this.lblCoordinateStatus.Name = "lblCoordinateStatus";
+            this.lblCoordinateStatus.Size = new System.Drawing.Size(101, 15);
+            this.lblCoordinateStatus.TabIndex = 14;
+            this.lblCoordinateStatus.Text = "Coordinates okay";
             // 
-            // btnSave
+            // grpTravelTime
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(358, 13);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(125, 51);
-            this.btnSave.TabIndex = 29;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.grpTravelTime.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.grpTravelTime.Controls.Add(this.numTravelGround);
+            this.grpTravelTime.Controls.Add(this.numTravelAir);
+            this.grpTravelTime.Controls.Add(this.label8);
+            this.grpTravelTime.Controls.Add(this.label7);
+            this.grpTravelTime.Location = new System.Drawing.Point(72, 271);
+            this.grpTravelTime.Name = "grpTravelTime";
+            this.grpTravelTime.Size = new System.Drawing.Size(347, 86);
+            this.grpTravelTime.TabIndex = 1;
+            this.grpTravelTime.TabStop = false;
+            this.grpTravelTime.Text = "Travel Time (Minutes)";
+            // 
+            // numTravelGround
+            // 
+            this.numTravelGround.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numTravelGround.Location = new System.Drawing.Point(252, 38);
+            this.numTravelGround.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numTravelGround.Name = "numTravelGround";
+            this.numTravelGround.Size = new System.Drawing.Size(84, 29);
+            this.numTravelGround.TabIndex = 3;
+            this.numTravelGround.ValueChanged += new System.EventHandler(this.numTravelGround_ValueChanged);
+            // 
+            // numTravelAir
+            // 
+            this.numTravelAir.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numTravelAir.Location = new System.Drawing.Point(66, 38);
+            this.numTravelAir.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numTravelAir.Name = "numTravelAir";
+            this.numTravelAir.Size = new System.Drawing.Size(84, 29);
+            this.numTravelAir.TabIndex = 2;
+            this.numTravelAir.ValueChanged += new System.EventHandler(this.numTravelAir_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(172, 40);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 24);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Ground";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(27, 40);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 24);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Air";
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(12, 181);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(153, 53);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Coordinates (Lat/Lng, UTM)";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(12, 113);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(153, 26);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Capabilities";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(12, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(153, 26);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Contact # or Frq.";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(12, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(153, 26);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Address";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(153, 26);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Hospital Name";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtHospitalName
             // 
@@ -169,118 +265,6 @@
             this.chkBurnUnit.UseVisualStyleBackColor = true;
             this.chkBurnUnit.CheckedChanged += new System.EventHandler(this.chkBurnUnit_CheckedChanged);
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 26);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Hospital Name";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(12, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(153, 26);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Address";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(12, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(153, 26);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Contact # or Frq.";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(12, 113);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(153, 26);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Capabilities";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(12, 181);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(153, 53);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Coordinates (Lat/Lng, UTM)";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // grpTravelTime
-            // 
-            this.grpTravelTime.Controls.Add(this.numTravelGround);
-            this.grpTravelTime.Controls.Add(this.numTravelAir);
-            this.grpTravelTime.Controls.Add(this.label8);
-            this.grpTravelTime.Controls.Add(this.label7);
-            this.grpTravelTime.Location = new System.Drawing.Point(141, 251);
-            this.grpTravelTime.Name = "grpTravelTime";
-            this.grpTravelTime.Size = new System.Drawing.Size(342, 86);
-            this.grpTravelTime.TabIndex = 1;
-            this.grpTravelTime.TabStop = false;
-            this.grpTravelTime.Text = "Travel Time (Minutes)";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(27, 40);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 24);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Air";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(172, 40);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 24);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Ground";
-            // 
-            // numTravelAir
-            // 
-            this.numTravelAir.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numTravelAir.Location = new System.Drawing.Point(66, 38);
-            this.numTravelAir.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numTravelAir.Name = "numTravelAir";
-            this.numTravelAir.Size = new System.Drawing.Size(84, 29);
-            this.numTravelAir.TabIndex = 2;
-            this.numTravelAir.ValueChanged += new System.EventHandler(this.numTravelAir_ValueChanged);
-            // 
-            // numTravelGround
-            // 
-            this.numTravelGround.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numTravelGround.Location = new System.Drawing.Point(252, 38);
-            this.numTravelGround.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numTravelGround.Name = "numTravelGround";
-            this.numTravelGround.Size = new System.Drawing.Size(84, 29);
-            this.numTravelGround.TabIndex = 3;
-            this.numTravelGround.ValueChanged += new System.EventHandler(this.numTravelGround_ValueChanged);
-            // 
             // txtLatitude
             // 
             this.txtLatitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -291,22 +275,39 @@
             this.txtLatitude.TabIndex = 6;
             this.txtLatitude.Leave += new System.EventHandler(this.txtLatitude_Leave);
             // 
-            // lblCoordinateStatus
+            // btnSave
             // 
-            this.lblCoordinateStatus.AutoSize = true;
-            this.lblCoordinateStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCoordinateStatus.Location = new System.Drawing.Point(168, 213);
-            this.lblCoordinateStatus.Name = "lblCoordinateStatus";
-            this.lblCoordinateStatus.Size = new System.Drawing.Size(101, 15);
-            this.lblCoordinateStatus.TabIndex = 14;
-            this.lblCoordinateStatus.Text = "Coordinates okay";
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
+            this.btnSave.Location = new System.Drawing.Point(358, 13);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(125, 51);
+            this.btnSave.TabIndex = 29;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnCancel.Location = new System.Drawing.Point(12, 13);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(125, 51);
+            this.btnCancel.TabIndex = 28;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // EditHosptalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(495, 439);
+            this.ClientSize = new System.Drawing.Size(495, 462);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -323,8 +324,8 @@
             this.splitContainer1.ResumeLayout(false);
             this.grpTravelTime.ResumeLayout(false);
             this.grpTravelTime.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTravelAir)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTravelGround)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTravelAir)).EndInit();
             this.ResumeLayout(false);
 
         }

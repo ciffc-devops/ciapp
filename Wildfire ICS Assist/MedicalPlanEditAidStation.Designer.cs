@@ -1,6 +1,6 @@
-﻿namespace Wildfire_ICS_Assist.OptionsForms
+﻿namespace Wildfire_ICS_Assist
 {
-    partial class EditMedivacForm
+    partial class MedicalPlanEditAidStation
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.chkParamedics = new System.Windows.Forms.CheckBox();
             this.lblCoordinateStatus = new System.Windows.Forms.Label();
-            this.rbBLS = new System.Windows.Forms.RadioButton();
-            this.rbALS = new System.Windows.Forms.RadioButton();
             this.txtContact = new System.Windows.Forms.TextBox();
             this.txtCoordinates = new System.Windows.Forms.TextBox();
             this.txtLocation = new System.Windows.Forms.TextBox();
-            this.txtOrganization = new System.Windows.Forms.TextBox();
+            this.txtAidStation = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -60,13 +59,12 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.chkParamedics);
             this.splitContainer1.Panel1.Controls.Add(this.lblCoordinateStatus);
-            this.splitContainer1.Panel1.Controls.Add(this.rbBLS);
-            this.splitContainer1.Panel1.Controls.Add(this.rbALS);
             this.splitContainer1.Panel1.Controls.Add(this.txtContact);
             this.splitContainer1.Panel1.Controls.Add(this.txtCoordinates);
             this.splitContainer1.Panel1.Controls.Add(this.txtLocation);
-            this.splitContainer1.Panel1.Controls.Add(this.txtOrganization);
+            this.splitContainer1.Panel1.Controls.Add(this.txtAidStation);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
@@ -77,9 +75,19 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(500, 326);
-            this.splitContainer1.SplitterDistance = 255;
-            this.splitContainer1.TabIndex = 1;
+            this.splitContainer1.Size = new System.Drawing.Size(595, 302);
+            this.splitContainer1.SplitterDistance = 231;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // chkParamedics
+            // 
+            this.chkParamedics.AutoSize = true;
+            this.chkParamedics.Location = new System.Drawing.Point(209, 172);
+            this.chkParamedics.Name = "chkParamedics";
+            this.chkParamedics.Size = new System.Drawing.Size(323, 28);
+            this.chkParamedics.TabIndex = 16;
+            this.chkParamedics.Text = "Yes, paramedics are available here";
+            this.chkParamedics.UseVisualStyleBackColor = true;
             // 
             // lblCoordinateStatus
             // 
@@ -91,39 +99,14 @@
             this.lblCoordinateStatus.TabIndex = 15;
             this.lblCoordinateStatus.Text = "Coordinates okay";
             // 
-            // rbBLS
-            // 
-            this.rbBLS.AutoSize = true;
-            this.rbBLS.Location = new System.Drawing.Point(209, 172);
-            this.rbBLS.Name = "rbBLS";
-            this.rbBLS.Size = new System.Drawing.Size(229, 28);
-            this.rbBLS.TabIndex = 10;
-            this.rbBLS.TabStop = true;
-            this.rbBLS.Text = "Basic Life Support (BLS)";
-            this.rbBLS.UseVisualStyleBackColor = true;
-            this.rbBLS.CheckedChanged += new System.EventHandler(this.rbBLS_CheckedChanged);
-            // 
-            // rbALS
-            // 
-            this.rbALS.AutoSize = true;
-            this.rbALS.Location = new System.Drawing.Point(209, 206);
-            this.rbALS.Name = "rbALS";
-            this.rbALS.Size = new System.Drawing.Size(271, 28);
-            this.rbALS.TabIndex = 9;
-            this.rbALS.TabStop = true;
-            this.rbALS.Text = "Advanced Life Support (ALS)";
-            this.rbALS.UseVisualStyleBackColor = true;
-            this.rbALS.CheckedChanged += new System.EventHandler(this.rbALS_CheckedChanged);
-            // 
             // txtContact
             // 
             this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtContact.Location = new System.Drawing.Point(209, 136);
             this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(271, 29);
+            this.txtContact.Size = new System.Drawing.Size(366, 29);
             this.txtContact.TabIndex = 8;
-            this.txtContact.TextChanged += new System.EventHandler(this.txtContact_TextChanged);
             // 
             // txtCoordinates
             // 
@@ -131,7 +114,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCoordinates.Location = new System.Drawing.Point(209, 79);
             this.txtCoordinates.Name = "txtCoordinates";
-            this.txtCoordinates.Size = new System.Drawing.Size(271, 29);
+            this.txtCoordinates.Size = new System.Drawing.Size(366, 29);
             this.txtCoordinates.TabIndex = 7;
             this.txtCoordinates.Leave += new System.EventHandler(this.txtCoordinates_Leave);
             // 
@@ -141,19 +124,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLocation.Location = new System.Drawing.Point(209, 44);
             this.txtLocation.Name = "txtLocation";
-            this.txtLocation.Size = new System.Drawing.Size(271, 29);
+            this.txtLocation.Size = new System.Drawing.Size(366, 29);
             this.txtLocation.TabIndex = 6;
-            this.txtLocation.TextChanged += new System.EventHandler(this.txtLocation_TextChanged);
             // 
-            // txtOrganization
+            // txtAidStation
             // 
-            this.txtOrganization.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtAidStation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOrganization.Location = new System.Drawing.Point(209, 9);
-            this.txtOrganization.Name = "txtOrganization";
-            this.txtOrganization.Size = new System.Drawing.Size(271, 29);
-            this.txtOrganization.TabIndex = 5;
-            this.txtOrganization.TextChanged += new System.EventHandler(this.txtOrganization_TextChanged);
+            this.txtAidStation.Location = new System.Drawing.Point(209, 9);
+            this.txtAidStation.Name = "txtAidStation";
+            this.txtAidStation.Size = new System.Drawing.Size(366, 29);
+            this.txtAidStation.TabIndex = 5;
             // 
             // label5
             // 
@@ -161,7 +142,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(191, 29);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Level of Service";
+            this.label5.Text = "Paramedics";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
@@ -197,14 +178,14 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Medivac Service";
+            this.label1.Text = "Medical Aid Station";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(363, 7);
+            this.btnSave.Location = new System.Drawing.Point(458, 7);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 51);
             this.btnSave.TabIndex = 31;
@@ -216,6 +197,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(8, 7);
             this.btnCancel.Name = "btnCancel";
@@ -227,21 +209,20 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // EditMedivacForm
+            // MedicalPlanEditAidStation
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(500, 326);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(595, 302);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.MinimumSize = new System.Drawing.Size(516, 365);
-            this.Name = "EditMedivacForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Medivac Service";
-            this.Load += new System.EventHandler(this.EditMedivacForm_Load);
+            this.Name = "MedicalPlanEditAidStation";
+            this.Text = "Add/Edit Aid Station";
+            this.Load += new System.EventHandler(this.MedicalPlanEditAidStation_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -254,19 +235,18 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.RadioButton rbBLS;
-        private System.Windows.Forms.RadioButton rbALS;
+        private System.Windows.Forms.Label lblCoordinateStatus;
         private System.Windows.Forms.TextBox txtContact;
         private System.Windows.Forms.TextBox txtCoordinates;
         private System.Windows.Forms.TextBox txtLocation;
-        private System.Windows.Forms.TextBox txtOrganization;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtAidStation;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblCoordinateStatus;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.CheckBox chkParamedics;
+        private System.Windows.Forms.Label label5;
     }
 }

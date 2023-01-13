@@ -131,16 +131,38 @@
             this.additionalDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationsListICS205AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalMessageICS213ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.printThisOperationalPeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printThisIncidentToDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkInsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.memberStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkInMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bulkCheckInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.vehiclesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.equipmentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.teamAssignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.incidentTimelineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminFinanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.positionLogToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.networkInternetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localNetworkSharingSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.requestIncidentFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.internetSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.requestOptionsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForTemplateUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForAppUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -184,28 +206,6 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.printThisOperationalPeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printThisIncidentToDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.memberStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkInMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bulkCheckInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkInsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.vehiclesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.equipmentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.teamAssignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.incidentTimelineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.localNetworkSharingSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.requestIncidentFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.internetSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.requestOptionsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminFinanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -964,6 +964,7 @@
             // 
             this.medicalPlanICS206ToolStripMenuItem.Name = "medicalPlanICS206ToolStripMenuItem";
             resources.ApplyResources(this.medicalPlanICS206ToolStripMenuItem, "medicalPlanICS206ToolStripMenuItem");
+            this.medicalPlanICS206ToolStripMenuItem.Click += new System.EventHandler(this.medicalPlanICS206ToolStripMenuItem_Click);
             // 
             // organizationChartICS207ToolStripMenuItem
             // 
@@ -997,6 +998,21 @@
             this.generalMessageICS213ToolStripMenuItem.Name = "generalMessageICS213ToolStripMenuItem";
             resources.ApplyResources(this.generalMessageICS213ToolStripMenuItem, "generalMessageICS213ToolStripMenuItem");
             this.generalMessageICS213ToolStripMenuItem.Click += new System.EventHandler(this.generalMessageICS213ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // printThisOperationalPeriodToolStripMenuItem
+            // 
+            this.printThisOperationalPeriodToolStripMenuItem.Name = "printThisOperationalPeriodToolStripMenuItem";
+            resources.ApplyResources(this.printThisOperationalPeriodToolStripMenuItem, "printThisOperationalPeriodToolStripMenuItem");
+            // 
+            // printThisIncidentToDateToolStripMenuItem
+            // 
+            this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
+            resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
             // 
             // operationsToolStripMenuItem
             // 
@@ -1044,6 +1060,46 @@
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
             // 
+            // checkInsToolStripMenuItem
+            // 
+            resources.ApplyResources(this.checkInsToolStripMenuItem, "checkInsToolStripMenuItem");
+            this.checkInsToolStripMenuItem.Name = "checkInsToolStripMenuItem";
+            // 
+            // memberStatusToolStripMenuItem
+            // 
+            this.memberStatusToolStripMenuItem.Name = "memberStatusToolStripMenuItem";
+            resources.ApplyResources(this.memberStatusToolStripMenuItem, "memberStatusToolStripMenuItem");
+            // 
+            // checkInMemberToolStripMenuItem
+            // 
+            this.checkInMemberToolStripMenuItem.Name = "checkInMemberToolStripMenuItem";
+            resources.ApplyResources(this.checkInMemberToolStripMenuItem, "checkInMemberToolStripMenuItem");
+            // 
+            // bulkCheckInToolStripMenuItem
+            // 
+            this.bulkCheckInToolStripMenuItem.Name = "bulkCheckInToolStripMenuItem";
+            resources.ApplyResources(this.bulkCheckInToolStripMenuItem, "bulkCheckInToolStripMenuItem");
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            // 
+            // vehiclesToolStripMenuItem1
+            // 
+            this.vehiclesToolStripMenuItem1.Name = "vehiclesToolStripMenuItem1";
+            resources.ApplyResources(this.vehiclesToolStripMenuItem1, "vehiclesToolStripMenuItem1");
+            // 
+            // equipmentToolStripMenuItem1
+            // 
+            this.equipmentToolStripMenuItem1.Name = "equipmentToolStripMenuItem1";
+            resources.ApplyResources(this.equipmentToolStripMenuItem1, "equipmentToolStripMenuItem1");
+            // 
+            // additionalContactsToolStripMenuItem
+            // 
+            this.additionalContactsToolStripMenuItem.Name = "additionalContactsToolStripMenuItem";
+            resources.ApplyResources(this.additionalContactsToolStripMenuItem, "additionalContactsToolStripMenuItem");
+            // 
             // planningToolStripMenuItem
             // 
             this.planningToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1066,6 +1122,34 @@
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             // 
+            // teamAssignmentsToolStripMenuItem
+            // 
+            this.teamAssignmentsToolStripMenuItem.Name = "teamAssignmentsToolStripMenuItem";
+            resources.ApplyResources(this.teamAssignmentsToolStripMenuItem, "teamAssignmentsToolStripMenuItem");
+            // 
+            // incidentTimelineToolStripMenuItem
+            // 
+            this.incidentTimelineToolStripMenuItem.Name = "incidentTimelineToolStripMenuItem";
+            resources.ApplyResources(this.incidentTimelineToolStripMenuItem, "incidentTimelineToolStripMenuItem");
+            // 
+            // notesToolStripMenuItem
+            // 
+            this.notesToolStripMenuItem.Name = "notesToolStripMenuItem";
+            resources.ApplyResources(this.notesToolStripMenuItem, "notesToolStripMenuItem");
+            // 
+            // adminFinanceToolStripMenuItem
+            // 
+            this.adminFinanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.positionLogToolStripMenuItem3});
+            this.adminFinanceToolStripMenuItem.Name = "adminFinanceToolStripMenuItem";
+            resources.ApplyResources(this.adminFinanceToolStripMenuItem, "adminFinanceToolStripMenuItem");
+            // 
+            // positionLogToolStripMenuItem3
+            // 
+            this.positionLogToolStripMenuItem3.Name = "positionLogToolStripMenuItem3";
+            resources.ApplyResources(this.positionLogToolStripMenuItem3, "positionLogToolStripMenuItem3");
+            this.positionLogToolStripMenuItem3.Click += new System.EventHandler(this.positionLogToolStripMenuItem3_Click);
+            // 
             // networkInternetToolStripMenuItem
             // 
             this.networkInternetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1077,6 +1161,36 @@
             this.requestOptionsFromServerToolStripMenuItem});
             this.networkInternetToolStripMenuItem.Name = "networkInternetToolStripMenuItem";
             resources.ApplyResources(this.networkInternetToolStripMenuItem, "networkInternetToolStripMenuItem");
+            // 
+            // localNetworkSharingSyncToolStripMenuItem
+            // 
+            this.localNetworkSharingSyncToolStripMenuItem.Name = "localNetworkSharingSyncToolStripMenuItem";
+            resources.ApplyResources(this.localNetworkSharingSyncToolStripMenuItem, "localNetworkSharingSyncToolStripMenuItem");
+            // 
+            // requestIncidentFromServerToolStripMenuItem
+            // 
+            this.requestIncidentFromServerToolStripMenuItem.Name = "requestIncidentFromServerToolStripMenuItem";
+            resources.ApplyResources(this.requestIncidentFromServerToolStripMenuItem, "requestIncidentFromServerToolStripMenuItem");
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            // 
+            // internetSyncToolStripMenuItem
+            // 
+            this.internetSyncToolStripMenuItem.Name = "internetSyncToolStripMenuItem";
+            resources.ApplyResources(this.internetSyncToolStripMenuItem, "internetSyncToolStripMenuItem");
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
+            // 
+            // requestOptionsFromServerToolStripMenuItem
+            // 
+            this.requestOptionsFromServerToolStripMenuItem.Name = "requestOptionsFromServerToolStripMenuItem";
+            resources.ApplyResources(this.requestOptionsFromServerToolStripMenuItem, "requestOptionsFromServerToolStripMenuItem");
             // 
             // helpToolStripMenuItem
             // 
@@ -1195,6 +1309,7 @@
             resources.ApplyResources(this.btnMedicalPlan, "btnMedicalPlan");
             this.btnMedicalPlan.Name = "btnMedicalPlan";
             this.btnMedicalPlan.UseVisualStyleBackColor = true;
+            this.btnMedicalPlan.Click += new System.EventHandler(this.btnMedicalPlan_Click);
             // 
             // btnPrintIAP
             // 
@@ -1377,119 +1492,6 @@
             resources.ApplyResources(this.btnCommsLog, "btnCommsLog");
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
-            // 
-            // printThisOperationalPeriodToolStripMenuItem
-            // 
-            this.printThisOperationalPeriodToolStripMenuItem.Name = "printThisOperationalPeriodToolStripMenuItem";
-            resources.ApplyResources(this.printThisOperationalPeriodToolStripMenuItem, "printThisOperationalPeriodToolStripMenuItem");
-            // 
-            // printThisIncidentToDateToolStripMenuItem
-            // 
-            this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
-            resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
-            // 
-            // memberStatusToolStripMenuItem
-            // 
-            this.memberStatusToolStripMenuItem.Name = "memberStatusToolStripMenuItem";
-            resources.ApplyResources(this.memberStatusToolStripMenuItem, "memberStatusToolStripMenuItem");
-            // 
-            // checkInMemberToolStripMenuItem
-            // 
-            this.checkInMemberToolStripMenuItem.Name = "checkInMemberToolStripMenuItem";
-            resources.ApplyResources(this.checkInMemberToolStripMenuItem, "checkInMemberToolStripMenuItem");
-            // 
-            // bulkCheckInToolStripMenuItem
-            // 
-            this.bulkCheckInToolStripMenuItem.Name = "bulkCheckInToolStripMenuItem";
-            resources.ApplyResources(this.bulkCheckInToolStripMenuItem, "bulkCheckInToolStripMenuItem");
-            // 
-            // checkInsToolStripMenuItem
-            // 
-            resources.ApplyResources(this.checkInsToolStripMenuItem, "checkInsToolStripMenuItem");
-            this.checkInsToolStripMenuItem.Name = "checkInsToolStripMenuItem";
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
-            // 
-            // vehiclesToolStripMenuItem1
-            // 
-            this.vehiclesToolStripMenuItem1.Name = "vehiclesToolStripMenuItem1";
-            resources.ApplyResources(this.vehiclesToolStripMenuItem1, "vehiclesToolStripMenuItem1");
-            // 
-            // equipmentToolStripMenuItem1
-            // 
-            this.equipmentToolStripMenuItem1.Name = "equipmentToolStripMenuItem1";
-            resources.ApplyResources(this.equipmentToolStripMenuItem1, "equipmentToolStripMenuItem1");
-            // 
-            // additionalContactsToolStripMenuItem
-            // 
-            this.additionalContactsToolStripMenuItem.Name = "additionalContactsToolStripMenuItem";
-            resources.ApplyResources(this.additionalContactsToolStripMenuItem, "additionalContactsToolStripMenuItem");
-            // 
-            // teamAssignmentsToolStripMenuItem
-            // 
-            this.teamAssignmentsToolStripMenuItem.Name = "teamAssignmentsToolStripMenuItem";
-            resources.ApplyResources(this.teamAssignmentsToolStripMenuItem, "teamAssignmentsToolStripMenuItem");
-            // 
-            // incidentTimelineToolStripMenuItem
-            // 
-            this.incidentTimelineToolStripMenuItem.Name = "incidentTimelineToolStripMenuItem";
-            resources.ApplyResources(this.incidentTimelineToolStripMenuItem, "incidentTimelineToolStripMenuItem");
-            // 
-            // notesToolStripMenuItem
-            // 
-            this.notesToolStripMenuItem.Name = "notesToolStripMenuItem";
-            resources.ApplyResources(this.notesToolStripMenuItem, "notesToolStripMenuItem");
-            // 
-            // localNetworkSharingSyncToolStripMenuItem
-            // 
-            this.localNetworkSharingSyncToolStripMenuItem.Name = "localNetworkSharingSyncToolStripMenuItem";
-            resources.ApplyResources(this.localNetworkSharingSyncToolStripMenuItem, "localNetworkSharingSyncToolStripMenuItem");
-            // 
-            // requestIncidentFromServerToolStripMenuItem
-            // 
-            this.requestIncidentFromServerToolStripMenuItem.Name = "requestIncidentFromServerToolStripMenuItem";
-            resources.ApplyResources(this.requestIncidentFromServerToolStripMenuItem, "requestIncidentFromServerToolStripMenuItem");
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
-            // 
-            // internetSyncToolStripMenuItem
-            // 
-            this.internetSyncToolStripMenuItem.Name = "internetSyncToolStripMenuItem";
-            resources.ApplyResources(this.internetSyncToolStripMenuItem, "internetSyncToolStripMenuItem");
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
-            // 
-            // requestOptionsFromServerToolStripMenuItem
-            // 
-            this.requestOptionsFromServerToolStripMenuItem.Name = "requestOptionsFromServerToolStripMenuItem";
-            resources.ApplyResources(this.requestOptionsFromServerToolStripMenuItem, "requestOptionsFromServerToolStripMenuItem");
-            // 
-            // adminFinanceToolStripMenuItem
-            // 
-            this.adminFinanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem3});
-            this.adminFinanceToolStripMenuItem.Name = "adminFinanceToolStripMenuItem";
-            resources.ApplyResources(this.adminFinanceToolStripMenuItem, "adminFinanceToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem3
-            // 
-            this.positionLogToolStripMenuItem3.Name = "positionLogToolStripMenuItem3";
-            resources.ApplyResources(this.positionLogToolStripMenuItem3, "positionLogToolStripMenuItem3");
-            this.positionLogToolStripMenuItem3.Click += new System.EventHandler(this.positionLogToolStripMenuItem3_Click);
             // 
             // IncidentDetailsForm
             // 
