@@ -62,5 +62,10 @@ namespace Wildfire_ICS_Assist.UtilityForms
             this.Close();
 
         }
+
+        private void HelpInfoForm_Load(object sender, EventArgs e)
+        {
+            btnOK.Focus();
+        }
     }
 }

@@ -46,7 +46,7 @@
             this.btnMoreInfo.Location = new System.Drawing.Point(8, 3);
             this.btnMoreInfo.Name = "btnMoreInfo";
             this.btnMoreInfo.Size = new System.Drawing.Size(288, 51);
-            this.btnMoreInfo.TabIndex = 33;
+            this.btnMoreInfo.TabIndex = 0;
             this.btnMoreInfo.Text = "More Info";
             this.btnMoreInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMoreInfo.UseVisualStyleBackColor = true;
@@ -61,13 +61,15 @@
             this.txtHelpText.BackColor = System.Drawing.Color.White;
             this.txtHelpText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtHelpText.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtHelpText.Location = new System.Drawing.Point(3, 50);
+            this.txtHelpText.HideSelection = false;
+            this.txtHelpText.Location = new System.Drawing.Point(8, 50);
             this.txtHelpText.Multiline = true;
             this.txtHelpText.Name = "txtHelpText";
             this.txtHelpText.ReadOnly = true;
             this.txtHelpText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtHelpText.Size = new System.Drawing.Size(509, 367);
-            this.txtHelpText.TabIndex = 32;
+            this.txtHelpText.Size = new System.Drawing.Size(495, 367);
+            this.txtHelpText.TabIndex = 2;
+            this.txtHelpText.TabStop = false;
             // 
             // lblTitle
             // 
@@ -88,7 +90,7 @@
             this.btnOK.Location = new System.Drawing.Point(306, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(197, 51);
-            this.btnOK.TabIndex = 30;
+            this.btnOK.TabIndex = 1;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -131,6 +133,7 @@
             this.Name = "HelpInfoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "HelpInfoForm";
+            this.Load += new System.EventHandler(this.HelpInfoForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
