@@ -21,6 +21,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void SavedIncidentObjectivesForm_Load(object sender, EventArgs e)
         {
             dgvObjectives.AutoGenerateColumns = false;
+            buildList();
         }
 
         private void buildList()

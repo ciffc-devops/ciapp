@@ -52,25 +52,25 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cboDefaultProvince = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.cboDefaultAgency = new System.Windows.Forms.ComboBox();
+            this.chkUpdateWhenPossible = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.chkUpdateWhenPossible = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.cboDefaultAgency = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.cboDefaultProvince = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -343,9 +343,145 @@
             this.splitContainer1.SplitterDistance = 704;
             this.splitContainer1.TabIndex = 140;
             // 
-            // openFileDialog1
+            // button5
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button5.Location = new System.Drawing.Point(521, 650);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(26, 26);
+            this.button5.TabIndex = 156;
+            this.button5.TabStop = false;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button4.Location = new System.Drawing.Point(520, 612);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(26, 26);
+            this.button4.TabIndex = 155;
+            this.button4.TabStop = false;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button3.Location = new System.Drawing.Point(521, 576);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(26, 26);
+            this.button3.TabIndex = 154;
+            this.button3.TabStop = false;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.Location = new System.Drawing.Point(521, 105);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(26, 26);
+            this.button2.TabIndex = 153;
+            this.button2.TabStop = false;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(379, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(26, 26);
+            this.button1.TabIndex = 152;
+            this.button1.TabStop = false;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.Location = new System.Drawing.Point(75, 647);
+            this.label18.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(187, 32);
+            this.label18.TabIndex = 150;
+            this.label18.Text = "Default Prov/Terr.";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cboDefaultProvince
+            // 
+            this.cboDefaultProvince.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDefaultProvince.FormattingEnabled = true;
+            this.cboDefaultProvince.Location = new System.Drawing.Point(268, 647);
+            this.cboDefaultProvince.Name = "cboDefaultProvince";
+            this.cboDefaultProvince.Size = new System.Drawing.Size(246, 32);
+            this.cboDefaultProvince.TabIndex = 151;
+            // 
+            // label17
+            // 
+            this.label17.Location = new System.Drawing.Point(75, 609);
+            this.label17.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(187, 32);
+            this.label17.TabIndex = 148;
+            this.label17.Text = "Default Agency";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cboDefaultAgency
+            // 
+            this.cboDefaultAgency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDefaultAgency.FormattingEnabled = true;
+            this.cboDefaultAgency.Location = new System.Drawing.Point(268, 609);
+            this.cboDefaultAgency.Name = "cboDefaultAgency";
+            this.cboDefaultAgency.Size = new System.Drawing.Size(246, 32);
+            this.cboDefaultAgency.TabIndex = 149;
+            // 
+            // chkUpdateWhenPossible
+            // 
+            this.chkUpdateWhenPossible.AutoSize = true;
+            this.chkUpdateWhenPossible.Checked = true;
+            this.chkUpdateWhenPossible.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUpdateWhenPossible.Location = new System.Drawing.Point(268, 575);
+            this.chkUpdateWhenPossible.Name = "chkUpdateWhenPossible";
+            this.chkUpdateWhenPossible.Size = new System.Drawing.Size(243, 28);
+            this.chkUpdateWhenPossible.TabIndex = 147;
+            this.chkUpdateWhenPossible.Text = "Update existing members";
+            this.chkUpdateWhenPossible.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(12, 565);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(49, 39);
+            this.label16.TabIndex = 146;
+            this.label16.Text = "3)";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(12, 92);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(49, 39);
+            this.label15.TabIndex = 145;
+            this.label15.Text = "2)";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(12, 13);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(49, 39);
+            this.label14.TabIndex = 144;
+            this.label14.Text = "1)";
             // 
             // label10
             // 
@@ -373,48 +509,6 @@
             this.btnBrowse.Text = "Browse...";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(12, 13);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(49, 39);
-            this.label14.TabIndex = 144;
-            this.label14.Text = "1)";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(12, 92);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(49, 39);
-            this.label15.TabIndex = 145;
-            this.label15.Text = "2)";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(12, 565);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(49, 39);
-            this.label16.TabIndex = 146;
-            this.label16.Text = "3)";
-            // 
-            // chkUpdateWhenPossible
-            // 
-            this.chkUpdateWhenPossible.AutoSize = true;
-            this.chkUpdateWhenPossible.Checked = true;
-            this.chkUpdateWhenPossible.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUpdateWhenPossible.Location = new System.Drawing.Point(268, 575);
-            this.chkUpdateWhenPossible.Name = "chkUpdateWhenPossible";
-            this.chkUpdateWhenPossible.Size = new System.Drawing.Size(243, 28);
-            this.chkUpdateWhenPossible.TabIndex = 147;
-            this.chkUpdateWhenPossible.Text = "Update existing members";
-            this.chkUpdateWhenPossible.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
@@ -447,103 +541,9 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label17
+            // openFileDialog1
             // 
-            this.label17.Location = new System.Drawing.Point(75, 609);
-            this.label17.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(187, 32);
-            this.label17.TabIndex = 148;
-            this.label17.Text = "Default Agency";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cboDefaultAgency
-            // 
-            this.cboDefaultAgency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDefaultAgency.FormattingEnabled = true;
-            this.cboDefaultAgency.Location = new System.Drawing.Point(268, 609);
-            this.cboDefaultAgency.Name = "cboDefaultAgency";
-            this.cboDefaultAgency.Size = new System.Drawing.Size(246, 32);
-            this.cboDefaultAgency.TabIndex = 149;
-            // 
-            // label18
-            // 
-            this.label18.Location = new System.Drawing.Point(75, 647);
-            this.label18.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(187, 32);
-            this.label18.TabIndex = 150;
-            this.label18.Text = "Default Prov/Terr.";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cboDefaultProvince
-            // 
-            this.cboDefaultProvince.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDefaultProvince.FormattingEnabled = true;
-            this.cboDefaultProvince.Location = new System.Drawing.Point(268, 647);
-            this.cboDefaultProvince.Name = "cboDefaultProvince";
-            this.cboDefaultProvince.Size = new System.Drawing.Size(246, 32);
-            this.cboDefaultProvince.TabIndex = 151;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(379, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(26, 26);
-            this.button1.TabIndex = 152;
-            this.button1.TabStop = false;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Location = new System.Drawing.Point(521, 105);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(26, 26);
-            this.button2.TabIndex = 153;
-            this.button2.TabStop = false;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Location = new System.Drawing.Point(521, 576);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(26, 26);
-            this.button3.TabIndex = 154;
-            this.button3.TabStop = false;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.Location = new System.Drawing.Point(520, 612);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(26, 26);
-            this.button4.TabIndex = 155;
-            this.button4.TabStop = false;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.Location = new System.Drawing.Point(521, 650);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(26, 26);
-            this.button5.TabIndex = 156;
-            this.button5.TabStop = false;
-            this.button5.UseVisualStyleBackColor = true;
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // ImportSavedTeamMembersForm
             // 

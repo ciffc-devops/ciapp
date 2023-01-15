@@ -877,11 +877,29 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have successfully imported [IMPORT] new members, and updated [UPDATE] existing members..
+        /// </summary>
+        internal static string MembersImported {
+            get {
+                return ResourceManager.GetString("MembersImported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must complete all required fields in order to proceed.  Required fields are marked with a *..
         /// </summary>
         internal static string MissingInformationValidationError {
             get {
                 return ResourceManager.GetString("MissingInformationValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No members were imported or updated.  Please ensure you have configured the options here correctly, and selected the correct spreadsheet file..
+        /// </summary>
+        internal static string NoMembersImported {
+            get {
+                return ResourceManager.GetString("NoMembersImported", resourceCulture);
             }
         }
         

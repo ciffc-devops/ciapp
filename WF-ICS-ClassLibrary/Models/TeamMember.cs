@@ -68,10 +68,10 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return Name; }
             }
         }
-       
+
 
         public string Callsign { get => _Callsign; set => _Callsign = value; }
-        public string Phone { get => _Phone; set => _Phone = value; }
+        public string Phone { get => _Phone.FormatPhone(); set => _Phone = value; }
         public string SpecialSkills { get => _SpecialSkills; set => _SpecialSkills = value; }
         public bool isAssignmentTeamLeader { get => _isAssignmentTeamLeader; set => _isAssignmentTeamLeader = value; }
         public string Barcode { get { return _barcode; } set { _barcode = value; } }
@@ -104,6 +104,23 @@ namespace WF_ICS_ClassLibrary.Models
         public bool NoGluten { get => _NoGluten; set => _NoGluten = value; }
 
         public Guid ProvinceID { get => _ProvinceID; set => _ProvinceID = value; }
+        public string ProvinceName
+        {
+            get
+            {
+                if (ProvinceID != Guid.Empty) { Province p = new Province(ProvinceID); return p.ProvinceName; }
+                else { return string.Empty; }
+            }
+        }
+        public string ProvinceNameShort
+        {
+            get
+            {
+                if (ProvinceID != Guid.Empty) { Province p = new Province(ProvinceID); return p.ProvinceShort; }
+                else { return string.Empty; }
+            }
+        }
+
 
         public string Agency { get => _Agency; set => _Agency = value; }
         public string HomeAgency { get => _HomeAgency; set => _HomeAgency = value; }

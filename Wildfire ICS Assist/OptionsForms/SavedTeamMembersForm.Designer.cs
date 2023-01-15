@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvTeamMembers = new System.Windows.Forms.DataGridView();
             this.btnExport = new System.Windows.Forms.Button();
@@ -35,10 +36,11 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.colProvince = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,7 +70,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
             this.splitContainer1.Size = new System.Drawing.Size(844, 468);
-            this.splitContainer1.SplitterDistance = 404;
+            this.splitContainer1.SplitterDistance = 401;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -79,8 +81,9 @@
             this.dgvTeamMembers.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.dgvTeamMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTeamMembers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colName,
+            this.colProvince,
             this.colAgency,
+            this.colName,
             this.colPhone});
             this.dgvTeamMembers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTeamMembers.Location = new System.Drawing.Point(0, 0);
@@ -90,7 +93,7 @@
             this.dgvTeamMembers.RowHeadersVisible = false;
             this.dgvTeamMembers.RowTemplate.Height = 35;
             this.dgvTeamMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTeamMembers.Size = new System.Drawing.Size(844, 404);
+            this.dgvTeamMembers.Size = new System.Drawing.Size(844, 401);
             this.dgvTeamMembers.TabIndex = 1;
             this.dgvTeamMembers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTeamMembers_CellDoubleClick);
             // 
@@ -161,14 +164,19 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // colName
+            // svdExport
             // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "Name";
-            this.colName.HeaderText = "Name";
-            this.colName.MinimumWidth = 150;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
+            this.svdExport.DefaultExt = "csv";
+            this.svdExport.Filter = "Comma-separated values|*.csv";
+            // 
+            // colProvince
+            // 
+            this.colProvince.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colProvince.DataPropertyName = "ProvinceNameShort";
+            this.colProvince.HeaderText = "Prov./Terr.";
+            this.colProvince.Name = "colProvince";
+            this.colProvince.ReadOnly = true;
+            this.colProvince.Width = 123;
             // 
             // colAgency
             // 
@@ -178,19 +186,26 @@
             this.colAgency.Name = "colAgency";
             this.colAgency.ReadOnly = true;
             // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "Name";
+            this.colName.HeaderText = "Name";
+            this.colName.MinimumWidth = 150;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
             // colPhone
             // 
             this.colPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colPhone.DataPropertyName = "Phone";
+            dataGridViewCellStyle1.Format = "###-###-####";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colPhone.DefaultCellStyle = dataGridViewCellStyle1;
             this.colPhone.HeaderText = "Phone";
             this.colPhone.Name = "colPhone";
             this.colPhone.ReadOnly = true;
             this.colPhone.Width = 91;
-            // 
-            // svdExport
-            // 
-            this.svdExport.DefaultExt = "csv";
-            this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
             // SavedTeamMembersForm
             // 
@@ -223,9 +238,10 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAgency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
         private System.Windows.Forms.SaveFileDialog svdExport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProvince;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAgency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
     }
 }

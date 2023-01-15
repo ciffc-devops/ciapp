@@ -30,7 +30,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             dgvTeamMembers.AutoGenerateColumns = false;
             dgvTeamMembers.DataSource = null;
             List<TeamMember> members = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
-            members = members.Where(o=>o.MemberActive).OrderBy(o=>o.Agency).ThenBy(o=>o.Name).ToList();
+            members = members.Where(o=>o.MemberActive).OrderBy(o=>o.ProvinceName).ThenBy(o=>o.Agency).ThenBy(o=>o.Name).ToList();
             dgvTeamMembers.DataSource = members;
         }
 
@@ -76,7 +76,25 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (dgvTeamMembers.SelectedRows.Count > 0)
+                {
+                    List<TeamMember> toDelete = new List<TeamMember>();
+                    foreach (DataGridViewRow row in dgvTeamMembers.SelectedRows)
+                    {
+                        toDelete.Add(row.DataBoundItem as TeamMember);
+                    }
+                    foreach (TeamMember mem in toDelete)
+                    {
+                        mem.MemberActive = false;
+                        Program.generalOptionsService.UpserOptionValue(mem, "TeamMember");
 
+                    }
+                    LoadData();
+
+                }
+            }
         }
 
         private void btnImport_Click(object sender, EventArgs e)

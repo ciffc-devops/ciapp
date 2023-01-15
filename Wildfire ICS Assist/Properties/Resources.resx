@@ -379,4 +379,10 @@
   <data name="ProtectedRole" xml:space="preserve">
     <value>Sorry, this role cannot be edited or removed as it is essential to ICS organizational structure</value>
   </data>
+  <data name="MembersImported" xml:space="preserve">
+    <value>You have successfully imported [IMPORT] new members, and updated [UPDATE] existing members.</value>
+  </data>
+  <data name="NoMembersImported" xml:space="preserve">
+    <value>No members were imported or updated.  Please ensure you have configured the options here correctly, and selected the correct spreadsheet file.</value>
+  </data>
 </root>
