@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WF_ICS_ClassLibrary.Utilities
 {
-    public static class ExcelColumns
+    public static class ExcelColumns 
     {
         public static List<string> getExcelColumns(bool includeBlank = false)
         {

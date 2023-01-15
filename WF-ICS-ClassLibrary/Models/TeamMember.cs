@@ -583,6 +583,43 @@ namespace WF_ICS_ClassLibrary.Models
             else { return null; }
         }
 
+        public static string ToCSV(this List<TeamMember> members, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            csv.Append("Name"); csv.Append(delimiter);
+            csv.Append("Province or Territory"); csv.Append(delimiter);
+            csv.Append("Agency"); csv.Append(delimiter);
+            csv.Append("Phone"); csv.Append(delimiter);
+            csv.Append("Email"); csv.Append(delimiter);
+            csv.Append("Home Unit / Agency"); csv.Append(delimiter);
+            csv.Append("Other Qualifications"); csv.Append(delimiter);
+            csv.Append("Vegetarian"); csv.Append(delimiter);
+            csv.Append("No Gluten"); csv.Append(delimiter);
+            csv.Append("Other Dietary"); csv.Append(delimiter);
+            csv.Append(Environment.NewLine);
+
+            foreach (TeamMember item in members)
+            {
+
+                //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
+
+                csv.Append("\""); csv.Append(item.Name.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                if(item.ProvinceID != Guid.Empty) { Province p = new Province(item.ProvinceID); csv.Append("\""); csv.Append(p.ProvinceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter); }
+                else { csv.Append("\"");  csv.Append("\""); csv.Append(delimiter); }
+                
+                csv.Append("\""); csv.Append(item.Agency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Phone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Email.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.HomeAgency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.SpecialSkills.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                if (item.Vegetarian) { csv.Append("\"YES\""); csv.Append(delimiter); } else { csv.Append("\"NO\""); csv.Append(delimiter); }
+                if (item.NoGluten) { csv.Append("\"YES\""); csv.Append(delimiter); } else { csv.Append("\"NO\""); csv.Append(delimiter); }
+                csv.Append("\""); csv.Append(item.Dietary.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
+        }
+
     }
 
     public class TeamTotal

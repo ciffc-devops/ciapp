@@ -208,6 +208,14 @@ namespace WildfireICSDesktopServices
         {
             switch (ValueName)
             {
+                case "Agencies":
+                    List<string> agencies = new List<string>();
+                    if (_options.AllTeamMembers != null)
+                    {
+                        agencies.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList());
+                        agencies.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeAgency)).GroupBy(o => o.HomeAgency).Select(o => o.First().HomeAgency).ToList());
+                    }
+                    return agencies.Distinct().ToList();
                 case "AllowStringTaskNumber":
                     return _options.AllowStringTaskNumber;
                 case "Ambulances":
@@ -301,7 +309,8 @@ namespace WildfireICSDesktopServices
                     return _options.ParentOrganizationID;
                 case "OrganizationID":
                     return _options.OrganizationID;
-
+                case "DefaultProvinceID":
+                    return _options.DefaultProvince.ProvinceGUID;
             }
             return Guid.Empty;
         }

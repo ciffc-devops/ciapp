@@ -99,6 +99,7 @@
             this.cboAgency.Size = new System.Drawing.Size(260, 32);
             this.cboAgency.TabIndex = 2;
             this.cboAgency.SelectedIndexChanged += new System.EventHandler(this.cboAgency_SelectedIndexChanged);
+            this.cboAgency.Leave += new System.EventHandler(this.cboAgency_Leave);
             // 
             // label1
             // 
@@ -184,6 +185,7 @@
             this.cboHomeAgency.Size = new System.Drawing.Size(260, 32);
             this.cboHomeAgency.TabIndex = 12;
             this.cboHomeAgency.SelectedIndexChanged += new System.EventHandler(this.cboHomeAgency_SelectedIndexChanged);
+            this.cboHomeAgency.Leave += new System.EventHandler(this.cboHomeAgency_Leave);
             // 
             // label7
             // 
@@ -363,7 +365,7 @@
             this.chkNoGluten.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.chkNoGluten.ImageIndex = 0;
             this.chkNoGluten.ImageList = this.imageList1;
-            this.chkNoGluten.Location = new System.Drawing.Point(351, 277);
+            this.chkNoGluten.Location = new System.Drawing.Point(351, 275);
             this.chkNoGluten.Name = "chkNoGluten";
             this.chkNoGluten.Size = new System.Drawing.Size(121, 34);
             this.chkNoGluten.TabIndex = 104;

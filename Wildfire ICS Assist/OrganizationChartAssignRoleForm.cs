@@ -101,7 +101,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnAssignNew_Click(object sender, EventArgs e)
         {
-            if (ValidateNewMember())
+            if (editTeamMemberControl1.FormValid)
             {
                 TeamMember member = editTeamMemberControl1.teamMember;
 
@@ -124,14 +124,7 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private bool ValidateNewMember()
-        {
-            TeamMember newMember = editTeamMemberControl1.teamMember;
-            if (newMember == null) { return false; }
-            if(string.IsNullOrEmpty(newMember.Name)) { return false; }  
-
-            return true;
-        }
+        
 
         private void btnClearAssignment_Click(object sender, EventArgs e)
         {

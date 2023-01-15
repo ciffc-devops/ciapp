@@ -19,6 +19,20 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void displayTeamMember()
         {
+            
+            if (Program.generalOptionsService != null && Program.generalOptionsService.GetOptionsValue("Agencies") != null)
+            {
+                List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
+                List<string> incidentAgencies = Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList();
+                incidentAgencies.AddRange(Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeAgency)).GroupBy(o => o.HomeAgency).Select(o => o.First().HomeAgency));
+                agencies.AddRange(incidentAgencies.Distinct());
+                agencies = agencies.OrderBy(o => o).ToList();
+                agencies.Insert(0, string.Empty);
+
+                cboAgency.DataSource = agencies;
+                cboHomeAgency.DataSource = new List<string>(agencies);
+            }
+            
             if (_teamMember != null)
             {
                 txtName.Text = teamMember.Name;
@@ -28,6 +42,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtDietary.Text = teamMember.Dietary;
 
                 if (teamMember.ProvinceID != Guid.Empty) { cboProvince.SelectedValue = teamMember.ProvinceID; }
+                else if (Program.generalOptionsService != null && Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID") != Guid.Empty) { cboProvince.SelectedValue = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); _teamMember.ProvinceID = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); ; }
                 if (!string.IsNullOrEmpty(teamMember.Agency)) { cboAgency.Text = teamMember.Agency; }
                 if (!string.IsNullOrEmpty(teamMember.HomeAgency)) { cboHomeAgency.Text = teamMember.HomeAgency; }
 
@@ -44,6 +59,18 @@ namespace Wildfire_ICS_Assist.CustomControls
         }
 
 
+        public bool FormValid
+        {
+            get
+            {
+                
+                if (teamMember == null) { return false; }
+                if (string.IsNullOrEmpty(teamMember.Name.Trim())) { return false; }
+
+                return true;
+            }
+        }
+
         private void btnShowHelp_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -54,17 +81,17 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
-            teamMember.Name  = ((TextBox)sender).Text;
+            teamMember.Name = ((TextBox)sender).Text;
             if (string.IsNullOrEmpty(((TextBox)sender).Text))
             {
                 txtName.BackColor = Program.ErrorColor;
             }
-else { txtName.BackColor = Program.GoodColor; }
+            else { txtName.BackColor = Program.GoodColor; }
         }
 
         private void cboProvince_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cboProvince.SelectedItem != null && cboProvince.SelectedValue != null && teamMember != null)
+            if (cboProvince.SelectedItem != null && cboProvince.SelectedValue != null && teamMember != null)
             {
                 teamMember.ProvinceID = new Guid(cboProvince.SelectedValue.ToString());
 
@@ -73,7 +100,6 @@ else { txtName.BackColor = Program.GoodColor; }
 
         private void cboAgency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            teamMember.Agency= ((TextBox)sender).Text;
         }
 
         private void txtPhone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
@@ -83,37 +109,60 @@ else { txtName.BackColor = Program.GoodColor; }
 
         private void txtEmail_TextChanged(object sender, EventArgs e)
         {
-            teamMember.Email= ((TextBox)sender).Text;
+            teamMember.Email = ((TextBox)sender).Text;
         }
 
         private void cboHomeAgency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            teamMember.HomeAgency= ((TextBox)sender).Text;
         }
 
         private void txtQualifications_TextChanged(object sender, EventArgs e)
         {
-            teamMember.SpecialSkills= ((TextBox)sender).Text;
+            teamMember.SpecialSkills = ((TextBox)sender).Text;
         }
 
         private void chkVegetarian_CheckedChanged(object sender, EventArgs e)
         {
-            teamMember.Vegetarian= chkVegetarian.Checked;
+            if (sender != null)
+            {
+                CheckBox chk = (CheckBox)sender;
+                if (chk.Checked) { chk.ImageIndex = 1; }
+                else { chk.ImageIndex = 0; }
+
+                teamMember.Vegetarian = chkVegetarian.Checked;
+            }
         }
 
         private void chkNoGluten_CheckedChanged(object sender, EventArgs e)
         {
-            teamMember.NoGluten = chkNoGluten.Checked;
+            if (sender != null)
+            {
+                CheckBox chk = (CheckBox)sender;
+                if (chk.Checked) { chk.ImageIndex = 1; }
+                else { chk.ImageIndex = 0; }
+
+                teamMember.NoGluten = chkNoGluten.Checked;
+            }
         }
 
         private void txtDietary_TextChanged(object sender, EventArgs e)
         {
-            teamMember.Dietary= ((TextBox)sender).Text;
+            teamMember.Dietary = ((TextBox)sender).Text;
         }
 
         private void txtPhone_Leave(object sender, EventArgs e)
         {
-            teamMember.Phone= ((MaskedTextBox)sender).Text;
+            teamMember.Phone = ((MaskedTextBox)sender).Text;
+        }
+
+        private void cboAgency_Leave(object sender, EventArgs e)
+        {
+            teamMember.Agency = cboAgency.Text;
+        }
+
+        private void cboHomeAgency_Leave(object sender, EventArgs e)
+        {
+            teamMember.HomeAgency = cboHomeAgency.Text;
         }
     }
 }

@@ -54,6 +54,7 @@
     <ApplicationIcon>ics-ca-sq-white.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="NetworkCommsDotNet, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
       <HintPath>..\packages\NetworkCommsDotNet.3.0.3\lib\NetworkCommsDotNet.dll</HintPath>
     </Reference>
@@ -518,11 +519,17 @@
     <EmbeddedResource Include="OptionsForms\EditSavedSafetyNoteForm.resx">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedTeamMemberForm.resx">
+      <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedVehicleForm.resx">
       <DependentUpon>EditSavedVehicleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\HospitalsForm.resx">
       <DependentUpon>HospitalsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\ImportSavedTeamMembersForm.resx">
+      <DependentUpon>ImportSavedTeamMembersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\MedivacsForm.resx">
       <DependentUpon>MedivacsForm.cs</DependentUpon>

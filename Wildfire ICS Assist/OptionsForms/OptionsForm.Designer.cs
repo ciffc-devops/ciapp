@@ -83,6 +83,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cboDefaultProvince = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             this.tbFileManagement.SuspendLayout();
@@ -113,6 +115,8 @@
             // tbGeneral
             // 
             this.tbGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.tbGeneral.Controls.Add(this.label1);
+            this.tbGeneral.Controls.Add(this.cboDefaultProvince);
             this.tbGeneral.Controls.Add(this.rbNumbersOrLetters);
             this.tbGeneral.Controls.Add(this.rbNumbersOnly);
             this.tbGeneral.Controls.Add(this.label19);
@@ -236,9 +240,9 @@
             this.tbFileManagement.Controls.Add(this.label4);
             this.tbFileManagement.Controls.Add(this.label2);
             this.tbFileManagement.Controls.Add(this.chkAutoSave);
-            this.tbFileManagement.Location = new System.Drawing.Point(4, 33);
+            this.tbFileManagement.Location = new System.Drawing.Point(4, 22);
             this.tbFileManagement.Name = "tbFileManagement";
-            this.tbFileManagement.Size = new System.Drawing.Size(738, 404);
+            this.tbFileManagement.Size = new System.Drawing.Size(738, 415);
             this.tbFileManagement.TabIndex = 3;
             this.tbFileManagement.Text = "File Management";
             this.tbFileManagement.UseVisualStyleBackColor = true;
@@ -766,6 +770,34 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(19, 142);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(242, 32);
+            this.label1.TabIndex = 118;
+            this.label1.Text = "Default Prov/Terr.";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cboDefaultProvince
+            // 
+            this.cboDefaultProvince.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboDefaultProvince.DisplayMember = "RoleNameForDropdown";
+            this.cboDefaultProvince.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDefaultProvince.FormattingEnabled = true;
+            this.cboDefaultProvince.Items.AddRange(new object[] {
+            "UTM",
+            "Decimal Degrees",
+            "Degrees Decimal Minutes",
+            "Degrees Minutes Seconds",
+            "MGRS"});
+            this.cboDefaultProvince.Location = new System.Drawing.Point(267, 142);
+            this.cboDefaultProvince.Name = "cboDefaultProvince";
+            this.cboDefaultProvince.Size = new System.Drawing.Size(463, 32);
+            this.cboDefaultProvince.TabIndex = 119;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -852,5 +884,7 @@
         private System.Windows.Forms.RadioButton rbNumbersOrLetters;
         private System.Windows.Forms.RadioButton rbNumbersOnly;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cboDefaultProvince;
     }
 }

@@ -32,6 +32,13 @@ namespace Wildfire_ICS_Assist.OptionsForms
             cboDefaultICSRole.ValueMember = "RoleID";
 
         }
+
+        private void LoadProvinces()
+        {
+            cboDefaultProvince.DataSource = ProvinceTools.GetProvinces();
+            cboDefaultProvince.DisplayMember = "ProvinceName";
+            cboDefaultProvince.ValueMember = "ProvinceGUID";
+        }
         private void LoadCommsSystems()
         {
             LoadCommsSystems(cboPrimaryChannel);
@@ -61,6 +68,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
             }
             else { cboDefaultICSRole.SelectedIndex = 0; }
             rbNumbersOnly.Checked = !options.AllowStringTaskNumber; rbNumbersOrLetters.Checked = !rbNumbersOnly.Checked;
+            if(options.DefaultProvince != null && options.DefaultProvince.ProvinceGUID != Guid.Empty) { cboDefaultProvince.SelectedValue = options.DefaultProvince.ProvinceGUID; }
+
 
             //File Management
             chkAutoSave.Checked = options.AutoSave;
@@ -114,6 +123,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             LoadICSRoles();
             LoadCommsSystems();
+            LoadProvinces();
             LoadSavedValues();
         }
 
@@ -135,6 +145,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     if (cboPositionFormat.SelectedItem != null) { options.PositionFormat = cboPositionFormat.SelectedItem.ToString(); }
                     options.DefaultICSRole = (ICSRole)cboDefaultICSRole.SelectedItem;
                     options.AllowStringTaskNumber = !rbNumbersOnly.Checked;
+                    Province p = new Province(new Guid(cboDefaultProvince.SelectedValue.ToString())); ;
+                    options.DefaultProvince = p;
+
 
                     //File Management
                     options.AutoSave = chkAutoSave.Checked;
