@@ -15,7 +15,7 @@ namespace WildfireICSDesktopServices
         string createOrgChartContactList(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
         string createOrgChartPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         string createRadioLogPDF(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
-        string createSafetyPlanPDF(WFIncident task, SafetyPlan plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
+        string createSafetyMessagePDF(WFIncident task, SafetyMessage plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         string createSignInPDF(WFIncident task, int opsPeriod, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> createSinglePageBlankSignInSheetAsBytes(WFIncident task, GroupSignInPrintRequest group, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false);
         List<byte[]> createSinglePageSignInSheetAsBytes(WFIncident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false);
@@ -25,7 +25,8 @@ namespace WildfireICSDesktopServices
         List<byte[]> exportIAPToPDF(WFIncident task, int OpPeriodToExport, bool includeBriefing = true, bool includeSafety = true, bool includeLPQ = true, bool flattenPDF = false);
         List<byte[]> exportNotesToPDF(WFIncident task, int CurrentOpPeriod);
         List<byte[]> exportRadioLogToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF = false);
-        List<byte[]> exportSafetyPlansToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
+        List<byte[]> exportSafetyMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
+        List<byte[]> exportSafetyMessagesToPDF(WFIncident task, List<SafetyMessage> messagesToPrint, bool flattenPDF);
         string exportSinglePageSignInSheetAsPDF(WFIncident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod);
         List<byte[]> exportTimelineToPDF(WFIncident task);
         List<byte[]> getBlankSignInSheetPDFs(WFIncident task, List<GroupSignInPrintRequest> groups, int OpsPeriod, bool flattenPDF);

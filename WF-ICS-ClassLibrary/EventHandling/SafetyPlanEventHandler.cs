@@ -7,12 +7,12 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace WF_ICS_ClassLibrary.EventHandling
 {
-    public delegate void SafetyPlanEventHandler(SafetyPlanEventArgs e);
+    public delegate void SafetyMessageEventHandler(SafetyMessageEventArgs e);
 
-    public class SafetyPlanEventArgs
+    public class SafetyMessageEventArgs
     {
-        public SafetyPlan item { get; set; }
+        public SafetyMessage item { get; set; }
 
-        public SafetyPlanEventArgs(SafetyPlan _item) { item = _item; }
+        public SafetyMessageEventArgs(SafetyMessage _item) { item = _item; }
     }
 }

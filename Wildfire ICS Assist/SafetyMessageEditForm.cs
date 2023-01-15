@@ -5,14 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 
-namespace Wildfire_ICS_Assist.OptionsForms
+namespace Wildfire_ICS_Assist
 {
-    public partial class EditSavedSafetyNoteForm : Form
+    public partial class SafetyMessageEditForm : Form
     {
         private SafetyMessage _selectedMessage = null;
         public SafetyMessage selectedMessage { get => _selectedMessage; set { _selectedMessage = value; LoadMessage(); } }
@@ -22,10 +21,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
             txtSummaryLine.Text = selectedMessage.SummaryLine;
             if (!string.IsNullOrEmpty(selectedMessage.Message)) { txtMessage.Text = selectedMessage.Message.Replace("\n", Environment.NewLine); }
             else { txtMessage.Text = string.Empty; }
+            txtNewSitePlanLocation.Text = selectedMessage.SitePlanLocation;
+            chkNewSitePlanRequired.Checked = selectedMessage.SitePlanRequired;
+
         }
-        public EditSavedSafetyNoteForm()
+        public SafetyMessageEditForm()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground;
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -41,6 +44,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 selectedMessage.SummaryLine = txtSummaryLine.Text;
 
                 selectedMessage.Message = txtMessage.Text;
+
+                selectedMessage.SitePlanLocation = txtNewSitePlanLocation.Text;
+                selectedMessage.SitePlanRequired= chkNewSitePlanRequired.Checked;   
                 //selectedMessage.Message = Regex.Replace(selectedMessage.Message, "(?<!\r)\n", "\r\n");
 
                 this.DialogResult = DialogResult.OK;
@@ -72,7 +78,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         }
 
-        private void EditSavedSafetyNoteForm_Load(object sender, EventArgs e)
+        private void SafetyMessageEditForm_Load(object sender, EventArgs e)
         {
 
         }

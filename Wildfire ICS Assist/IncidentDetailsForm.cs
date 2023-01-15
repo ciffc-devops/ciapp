@@ -110,6 +110,8 @@ namespace Wildfire_ICS_Assist
         GeneralMessagesForm generalMessagesForm = null;
         MedicalPlanForm medicalPlanForm = null;
         NotesForm notesForm = null;
+        SafetyMessagesForm safetyMessagesForm = null;
+
         /* Event Handlers!*/
 
         public event ShortcutEventHandler ShortcutButtonClicked;
@@ -128,6 +130,8 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
             Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
             Program.wfIncidentService.MedicalPlanChanged += Program_MedicalPlanChanged;
+            Program.wfIncidentService.NoteChanged += Program_NoteChanged;
+            Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
         }
 
 
@@ -161,7 +165,7 @@ namespace Wildfire_ICS_Assist
 
 
             
-            if (CurrentIncident.hasAnySafetyPlans(CurrentOpPeriod)) { btnSafetyPlans.Image = Properties.Resources.glyphicons_basic_739_check; safetyMessageICS208ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            if (CurrentIncident.hasAnySafetyMessages(CurrentOpPeriod)) { btnSafetyPlans.Image = Properties.Resources.glyphicons_basic_739_check; safetyMessageICS208ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnSafetyPlans.Image = null; safetyMessageICS208ToolStripMenuItem.Image = null; }
 
 
@@ -1335,6 +1339,20 @@ namespace Wildfire_ICS_Assist
             TriggerAutoSave();
         }
 
+        private void Program_SafetyMessageChanged(SafetyMessageEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                setButtonCheckboxes();
+            }
+            TriggerAutoSave();
+        }
+
+        private void Program_NoteChanged(NoteEventArgs e)
+        {
+            TriggerAutoSave();
+        }
+
         private void Program_GeneralMessageChanged(GeneralMessageEventArgs e)
         {
             TriggerAutoSave();
@@ -1447,6 +1465,39 @@ namespace Wildfire_ICS_Assist
         {
             RemoveActiveForm(notesForm);
             notesForm = null;
+
+
+        }
+
+        private void safetyMessageICS208ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSafetyMessageForm();
+        }
+
+        private void btnSafetyPlans_Click(object sender, EventArgs e)
+        {
+            OpenSafetyMessageForm();
+        }
+
+        private void OpenSafetyMessageForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (safetyMessagesForm == null)
+                {
+                    safetyMessagesForm = new SafetyMessagesForm();
+                    safetyMessagesForm.FormClosed += new FormClosedEventHandler(SafetyMessagesForm_Closed);
+                    ActiveForms.Add(safetyMessagesForm);
+                    safetyMessagesForm.Show(this);
+                }
+
+                safetyMessagesForm.BringToFront();
+            }
+        }
+        void SafetyMessagesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(safetyMessagesForm);
+            safetyMessagesForm = null;
 
 
         }

@@ -85,7 +85,7 @@ namespace WF_ICS_ClassLibrary.Models
 
     [ProtoContract]
     [Serializable]
-    public class SafetyMessage
+    public class SafetyMessage : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private Guid _TaskID;
@@ -96,9 +96,11 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private string _ApprovedByName;
         [ProtoMember(8)] private string _ApprovedByRoleName;
         [ProtoMember(9)] private Guid _ApprovedByRoleID;
-        [ProtoMember(10)] private Guid _SafetyTemplateID; 
-
-        public SafetyMessage() { ID = Guid.NewGuid(); }
+        [ProtoMember(10)] private Guid _SafetyTemplateID;
+        [ProtoMember(11)] private string _SummaryLine;
+        [ProtoMember(12)] private DateTime _LastUpdatedUTC;
+        [ProtoMember(13)] private bool _Active;
+        public SafetyMessage() { ID = Guid.NewGuid(); Active = true; }
 
 
         public Guid ID { get => _ID; set => _ID = value; }
@@ -111,5 +113,17 @@ namespace WF_ICS_ClassLibrary.Models
         public string ApprovedByRoleName { get => _ApprovedByRoleName; set => _ApprovedByRoleName = value; }
         public Guid ApprovedByRoleID { get => _ApprovedByRoleID; set => _ApprovedByRoleID = value; }
         public Guid SafetyTemplateID { get => _SafetyTemplateID; set => _SafetyTemplateID = value; }
+        public string SummaryLine { get => _SummaryLine; set => _SummaryLine = value; }
+        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+        public bool Active { get => _Active; set => _Active = value; }
+
+        public SafetyMessage Clone()
+        {
+            return this.MemberwiseClone() as SafetyMessage;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
     }
 }

@@ -38,7 +38,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
  ProtoInclude(122, typeof(OrganizationChart)),
  ProtoInclude(123, typeof(ICSRole)),
  ProtoInclude(124, typeof(PositionLogEntry)),
- ProtoInclude(125, typeof(SafetyPlan)),
+ ProtoInclude(125, typeof(SafetyMessage)),
  ProtoInclude(128, typeof(TaskBasics)),
  ProtoInclude(129, typeof(Timeline)),
  ProtoInclude(130, typeof(TimelineEvent)),
@@ -51,7 +51,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public WFIncident()
         {
             TaskID = System.Guid.NewGuid();
-            allSafetyPlans = new List<SafetyPlan>();
+            
             //allObjectives = new List<IncidentObjective>();
             allIncidentObjectives = new List<IncidentObjectivesSheet>();
 
@@ -76,7 +76,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             // allLogisticalNeedsLists = new List<LogisticalNeedsList>();
             allVehicles = new List<Vehicle>();
             allTaskUpdates = new List<TaskUpdate>();
-            _allSafetyMessages = new List<SafetyMessage>();
+            allSafetyMessages = new List<SafetyMessage>();
             TaskEncryptionKey = Utilities.RandomPasswordGenerator.GeneratePassword();
         }
 
@@ -92,7 +92,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         //  [ProtoMember(10)] private double _generalRangeOfDetection;
         [ProtoMember(11)] private string _currentFilePath;
         // [ProtoMember(12)] private List<Assignment> _allAssignments;
-        [ProtoMember(13)] private List<SafetyPlan> _allSafetyPlans;
+        [ProtoMember(13)] private List<SafetyMessage> _allSafetyMessages;
         [ProtoMember(14)] private List<Briefing> _allBriefings;
         //[ProtoMember(15)] private List<IncidentObjective> _allObjectives;
         [ProtoMember(16)] private List<OrganizationChart> _allOrgCharts;
@@ -101,7 +101,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(19)] private List<CommsPlan> _allCommsPlans;
         [ProtoMember(20)] private List<CommsPlanItem> _additionalCommsItems;
         //  [ProtoMember(21)] private List<SubjectProfile> _allSubjectProfiles;
-        [ProtoMember(21)] private List<SafetyMessage> _allSafetyMessages;
+        
         [ProtoMember(22)] private List<CommsLogEntry> _allCommsLogEntries;
         [ProtoMember(23)] private string _DocumentPath;
         [ProtoMember(24)] private string _sourceIdentifier;
@@ -221,7 +221,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
 
-        public List<SafetyPlan> allSafetyPlans { get => _allSafetyPlans; set => _allSafetyPlans = value; }
         public List<Briefing> allBriefings { get => _allBriefings; set => _allBriefings = value; }
         //public List<IncidentObjective> allObjectives { get => _allObjectives; set => _allObjectives = value; }
         public List<IncidentObjectivesSheet> allIncidentObjectives { get => _allIncidentObjectives; set => _allIncidentObjectives = value; }
@@ -341,7 +340,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 int ops = 0;
                 if (allOrgCharts.Count > 0) { int orgOps = allOrgCharts.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (orgOps > ops) { ops = orgOps; } }
                 //if (allAssignments.Count > 0) { int asigOps = allAssignments.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (asigOps > ops) { ops = asigOps; } }
-                if (allSafetyPlans.Count > 0) { int safeOps = allSafetyPlans.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (safeOps > ops) { ops = safeOps; } }
+                if (allSafetyMessages.Count > 0) { int safeOps = allSafetyMessages.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (safeOps > ops) { ops = safeOps; } }
                 if (allBriefings.Count > 0) { int briefOps = allBriefings.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (briefOps > ops) { ops = briefOps; } }
                 if (allIncidentObjectives.Count > 0) { int objOps = allIncidentObjectives.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (objOps > ops) { ops = objOps; } }
                 if (allMedicalPlans.Count > 0) { int objOps = allMedicalPlans.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (objOps > ops) { ops = objOps; } }
@@ -361,7 +360,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 int ops = 1000;
                 if (allOrgCharts.Count > 0) { int orgOps = allOrgCharts.OrderBy(o => o.OpPeriod).First().OpPeriod; if (orgOps < ops) { ops = orgOps; } }
                 //if (allAssignments.Count > 0) { int asigOps = allAssignments.OrderBy(o => o.OpPeriod).First().OpPeriod; if (asigOps < ops) { ops = asigOps; } }
-                if (allSafetyPlans.Count > 0) { int safeOps = allSafetyPlans.OrderBy(o => o.OpPeriod).First().OpPeriod; if (safeOps < ops) { ops = safeOps; } }
+                if (allSafetyMessages.Count > 0) { int safeOps = allSafetyMessages.OrderBy(o => o.OpPeriod).First().OpPeriod; if (safeOps < ops) { ops = safeOps; } }
                 if (allBriefings.Count > 0) { int briefOps = allBriefings.OrderBy(o => o.OpPeriod).First().OpPeriod; if (briefOps < ops) { ops = briefOps; } }
                 if (allIncidentObjectives.Count > 0) { int objOps = allIncidentObjectives.OrderBy(o => o.OpPeriod).First().OpPeriod; if (objOps < ops) { ops = objOps; } }
                 if (allMedicalPlans.Count > 0) { int objOps = allMedicalPlans.OrderBy(o => o.OpPeriod).First().OpPeriod; if (objOps < ops) { ops = objOps; } }
@@ -378,7 +377,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         {
             bool hasContent = false;
             //if (allAssignments.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
-            if (allSafetyPlans.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
+            if (allSafetyMessages.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allBriefings.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allIncidentObjectives.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             //else if (allSubjectProfiles.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
@@ -422,17 +421,17 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
             //safety plans
-            if (allSafetyPlans.Where(o => o.OpPeriod == opPeriod).Any())
+            if (allSafetyMessages.Any(o => o.OpPeriod == opPeriod))
             {
 
-                thisStart = allSafetyPlans.Where(o => o.OpPeriod == opPeriod).Min(o => o.DatePrepared);
-                thisEnd = allSafetyPlans.Where(o => o.OpPeriod == opPeriod).Max(o => o.DatePrepared);
+                thisStart = allSafetyMessages.Where(o => o.OpPeriod == opPeriod).Min(o => o.LastUpdatedUTC.ToLocalTime());
+                thisEnd = allSafetyMessages.Where(o => o.OpPeriod == opPeriod).Max(o => o.LastUpdatedUTC.ToLocalTime());
                 if (thisStart < start || (start == DateTime.MinValue && thisStart > DateTime.MinValue)) { start = thisStart; }
                 if (thisEnd > end) { end = thisEnd; }
             }
 
             //comms log
-            if (allCommsLogEntries.Where(o => o.OpPeriod == opPeriod).Any())
+            if (allCommsLogEntries.Any(o => o.OpPeriod == opPeriod))
             {
                 thisStart = allCommsLogEntries.Where(o => o.OpPeriod == opPeriod).Min(o => o.LogDate);
                 thisEnd = allCommsLogEntries.Where(o => o.OpPeriod == opPeriod).Max(o => o.LogDate);
@@ -442,7 +441,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
             //Sign in
-            if (AllSignInRecords.Where(o => o.OpPeriod == opPeriod).Any())
+            if (AllSignInRecords.Any(o => o.OpPeriod == opPeriod))
             {
                 thisStart = AllSignInRecords.Where(o => o.OpPeriod == opPeriod).Min(o => o.SignInTime);
                 thisEnd = AllSignInRecords.Where(o => o.OpPeriod == opPeriod).Max(o => o.SignOutTime);
@@ -478,7 +477,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             else { return false; }
         }
         public bool hasMeaningfulObjectives(int ops) { return (allIncidentObjectives.Any(o => o.OpPeriod == ops && o.Objectives.Any())); }
-        public bool hasAnySafetyPlans(int ops) { return allSafetyPlans.Any(o => o.OpPeriod == ops); }
+        public bool hasAnySafetyMessages(int ops) { return allSafetyMessages.Any(o => o.OpPeriod == ops); }
 
 
 

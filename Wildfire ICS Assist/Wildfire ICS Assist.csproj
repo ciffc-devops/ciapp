@@ -386,6 +386,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SafetyMessageEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SafetyMessageEditForm.Designer.cs">
+      <DependentUpon>SafetyMessageEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SafetyMessageEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SafetyMessageEntryForm.Designer.cs">
+      <DependentUpon>SafetyMessageEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SafetyMessagesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SafetyMessagesForm.Designer.cs">
+      <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\AboutProgramForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -497,6 +515,9 @@
     <EmbeddedResource Include="OptionsForms\EditSavedIncidentObjectiveForm.resx">
       <DependentUpon>EditSavedIncidentObjectiveForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedSafetyNoteForm.resx">
+      <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedVehicleForm.resx">
       <DependentUpon>EditSavedVehicleForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -561,6 +582,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SafetyMessageEditForm.resx">
+      <DependentUpon>SafetyMessageEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SafetyMessageEntryForm.resx">
+      <DependentUpon>SafetyMessageEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SafetyMessagesForm.resx">
+      <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\AboutProgramForm.resx">
       <DependentUpon>AboutProgramForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -583,6 +613,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-207-WF-Organization-Chart.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-208-WF-Safety-Message.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-213-WF-General-Message.pdf">

@@ -31,7 +31,7 @@ namespace WildfireICSDesktopServices
         public event OperationalPeriodEventHandler OperationalPeriodChanged;
         public event OrganizationalChartEventHandler OrganizationalChartChanged;
         public event ICSRoleEventHandler ICSRoleChanged;
-        public event SafetyPlanEventHandler SafetyPlanChanged;
+        public event SafetyMessageEventHandler SafetyMessageChanged;
         public event TimelineEventHandler TimelineChanged;
         public event TimelineEventEventHandler TimelineEventChanged;
         public event VehicleEventHandler VehicleChanged;
@@ -350,9 +350,9 @@ namespace WildfireICSDesktopServices
             {
                 UpsertPositionLogEntry(((PositionLogEntry)obj).Clone(), source);
             }
-            else if (dataClassName.Equals(new SafetyPlan().GetType().Name))
+            else if (dataClassName.Equals(new SafetyMessage().GetType().Name))
             {
-                UpsertSafetyPlan(((SafetyPlan)obj).Clone(), source);
+                UpsertSafetyMessage(((SafetyMessage)obj).Clone(), source);
             }
             else if (dataClassName.Equals(new TaskBasics().GetType().Name))
             {
@@ -402,10 +402,7 @@ namespace WildfireICSDesktopServices
             {
                 DeleteIncidentObjective(((IncidentObjective)obj).Clone(), source);
             }
-            else if (dataClassName.Equals(new SafetyPlan().GetType().Name))
-            {
-                DeleteSafetyPlan(((SafetyPlan)obj).Clone(), source);
-            }
+           
             else if (dataClassName.Equals(new TimelineEvent().GetType().Name))
             {
                 DeleteTimelineEvent(((TimelineEvent)obj).Clone(), source);
@@ -1091,57 +1088,28 @@ namespace WildfireICSDesktopServices
 
 
         // Safety Plan
-        protected virtual void OnSafetyPlanChanged(SafetyPlanEventArgs e)
+        protected virtual void OnSafetyMessageChanged(SafetyMessageEventArgs e)
         {
-            SafetyPlanEventHandler handler = this.SafetyPlanChanged;
+            SafetyMessageEventHandler handler = this.SafetyMessageChanged;
             if (handler != null)
             {
                 handler(e);
             }
         }
-        public void UpsertSafetyPlan(SafetyPlan record, string source = "local")
+        public void UpsertSafetyMessage(SafetyMessage record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allSafetyPlans.Any(o => o.PlanID == record.PlanID))
+            if (_currentIncident.allSafetyMessages.Any(o => o.ID == record.ID))
             {
-                _currentIncident.allSafetyPlans = _currentIncident.allSafetyPlans.Where(o => o.PlanID != record.PlanID).ToList();
+                _currentIncident.allSafetyMessages = _currentIncident.allSafetyMessages.Where(o => o.ID != record.ID).ToList();
             }
-            _currentIncident.allSafetyPlans.Add(record);
+            _currentIncident.allSafetyMessages.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
-            OnSafetyPlanChanged(new SafetyPlanEventArgs(record));
+            OnSafetyMessageChanged(new SafetyMessageEventArgs(record));
         }
-
-
-        public void DeleteSafetyPlan(SafetyPlan record, string source = "local")
-        {
-            if (_currentIncident.allSafetyPlans.Any(o => o.PlanID == record.PlanID))
-            {
-                _currentIncident.allSafetyPlans = _currentIncident.allSafetyPlans.Where(o => o.PlanID != record.PlanID).ToList();
-                if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "DELETE", true, false); }
-                OnSafetyPlanChanged(new SafetyPlanEventArgs(record));
-            }
-
-
-        }
-
-        public void DeleteSafetyPlan(Guid PlanID, string source = "local")
-        {
-            if (_currentIncident.allSafetyPlans.Any(o => o.PlanID == PlanID))
-            {
-                SafetyPlan toDelete = _currentIncident.allSafetyPlans.First(o => o.PlanID == PlanID);
-                // _currentTask.allSafetyPlans = _currentTask.allSafetyPlans.Where(o => o.PlanID != toDelete.PlanID).ToList();
-                // OnSafetyPlanChanged(new SafetyPlanEventArgs(toDelete));
-                DeleteSafetyPlan(toDelete, source);
-            }
-
-
-        }
-
-
-
 
         // Task Basics
         protected virtual void OnTaskBasicsChanged(TaskBasicsEventArgs e)

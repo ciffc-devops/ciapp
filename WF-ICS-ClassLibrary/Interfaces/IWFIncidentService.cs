@@ -33,7 +33,7 @@ namespace WildfireICSDesktopServices
         event OperationalPeriodEventHandler OperationalPeriodChanged;
         event OrganizationalChartEventHandler OrganizationalChartChanged;
         event PositionLogEventHandler PositionLogChanged;
-        event SafetyPlanEventHandler SafetyPlanChanged;
+        event SafetyMessageEventHandler SafetyMessageChanged;
         event TaskBasicsEventHandler TaskBasicsChanged;
         event TaskEquipmentEventHandler TaskEquipmentChanged;
         event TaskUpdateEventHandler TaskUpdateChanged;
@@ -52,8 +52,6 @@ namespace WildfireICSDesktopServices
         void DeleteIncidentObjective(Guid IncidentObjectiveID, string source = "local");
         void DeleteIncidentObjective(IncidentObjective record, string source = "local");
         void DeleteObject(object obj, string source);
-        void DeleteSafetyPlan(Guid PlanID, string source = "local");
-        void DeleteSafetyPlan(SafetyPlan record, string source = "local");
         void DeleteTaskEquipment(TaskEquipment te, string source = "local");
         void DeleteTimelineEvent(Guid RecordID, string source = "local");
         void DeleteTimelineEvent(TimelineEvent record, string source = "local");
@@ -92,7 +90,7 @@ namespace WildfireICSDesktopServices
         void UpsertOrganizationalChart(OrganizationChart record, string source = "local");
         void UpsertOrganizationalChart(OrganizationChart record, bool UpsertRoles, string source = "local");
         void UpsertPositionLogEntry(PositionLogEntry record, string source = "local");
-        void UpsertSafetyPlan(SafetyPlan record, string source = "local");
+        void UpsertSafetyMessage(SafetyMessage record, string source = "local");
         void UpsertTaskEquipment(TaskEquipment te, string source = "local");
         TaskUpdate UpsertTaskUpdate(object obj, string command, bool processed_locally, bool uploaded);
         TaskUpdate UpsertTaskUpdate(TaskUpdate update);

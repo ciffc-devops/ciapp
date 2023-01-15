@@ -49,7 +49,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(35)] private bool _includeOtherContactsWithIAP;
         [ProtoMember(36)] private bool _promptForInitialSave;
         // [ProtoMember(37)] private List<PresetTeamAssignment> l_allPresetTeamAssignments = new List<PresetTeamAssignment>();
-        [ProtoMember(38)] private List<SafetyPlan> l_allPresetSafetyPlans = new List<SafetyPlan>();
+        //[ProtoMember(38)] private List<SafetyPlan> l_allPresetSafetyPlans = new List<SafetyPlan>();
+        [ProtoMember(38)] private List<SafetyMessage> _safetyMessages;
         [ProtoMember(39)] private Briefing b_briefingTemplate = new Briefing(false);
         [ProtoMember(40)] private List<IncidentObjective> l_allPresetObjectives = new List<IncidentObjective>();
         [ProtoMember(41)] private List<Hospital> l_allHospitals = new List<Hospital>();
@@ -61,9 +62,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(47)] private List<Contact> l_AllContacts = new List<Contact>();
         [ProtoMember(48)] private List<Vehicle> l_AllVehicles = new List<Vehicle>();
         [ProtoMember(49)] private List<string> l_recentFilePaths = new List<string>();
-         [ProtoMember(50)] private List<EquipmentCategory> _AllEquipmentCategories = new List<EquipmentCategory>();
-         [ProtoMember(51)] private List<Equipment> _AllEquipment = new List<Equipment>();
-         [ProtoMember(52)] private List<EquipmentSet> _AllEquipmentSets = new List<EquipmentSet>();
+        [ProtoMember(50)] private List<EquipmentCategory> _AllEquipmentCategories = new List<EquipmentCategory>();
+        [ProtoMember(51)] private List<Equipment> _AllEquipment = new List<Equipment>();
+        [ProtoMember(52)] private List<EquipmentSet> _AllEquipmentSets = new List<EquipmentSet>();
         [ProtoMember(53)] private ICSRole _defaultICSRole = new ICSRole();
         [ProtoMember(54)] private bool _debriefPOD;
         [ProtoMember(55)] private bool _useOldTeamAssignmentScreen;
@@ -120,7 +121,8 @@ namespace WF_ICS_ClassLibrary.Models
         //   public List<PresetTeamAssignment> sortedAllPresetTeamAssignments { get { return l_allPresetTeamAssignments.OrderBy(o => o.AssignmentName).ToList(); } }
         public List<Hospital> AllHospitals { get { return l_allHospitals; } set { l_allHospitals = value; appSettingsChanged = true; } }
         public List<AmbulanceService> AllAmbulanceServices { get { return l_allAmbulanceServices; } set { l_allAmbulanceServices = value; appSettingsChanged = true; } }
-            public List<SafetyPlan> allPresetSafetyPlans { get { return l_allPresetSafetyPlans; } set { l_allPresetSafetyPlans = value; appSettingsChanged = true; } }
+        //public List<SafetyPlan> allPresetSafetyPlans { get { return l_allPresetSafetyPlans; } set { l_allPresetSafetyPlans = value; appSettingsChanged = true; } }
+        public List<SafetyMessage> safetyMessages { get => _safetyMessages; set { _safetyMessages = value; appSettingsChanged = true; } }
         public Briefing BriefingTemplate { get { return b_briefingTemplate; } set { b_briefingTemplate = value; appSettingsChanged = true; } }
         public List<IncidentObjective> allPresetObjectives { get { return l_allPresetObjectives; } set { l_allPresetObjectives = value; appSettingsChanged = true; } }
         public List<CommsPlanItem> allCommsPlanItems { get { return l_allCommsPlanItems; } set { l_allCommsPlanItems = value; appSettingsChanged = true; } }
@@ -130,9 +132,9 @@ namespace WF_ICS_ClassLibrary.Models
         public List<CannedCommsLogEntry> AllCannedCommsLogEntries { get => l_AllCannedCommsEntries; set => l_AllCannedCommsEntries = value; }
         public List<Contact> AllContacts { get => l_AllContacts; set => l_AllContacts = value; }
         public List<Vehicle> AllVehicles { get => l_AllVehicles; set => l_AllVehicles = value; }
-           public List<EquipmentCategory> AllEquipmentCategories { get => _AllEquipmentCategories; set => _AllEquipmentCategories = value; }
-           public List<Equipment> AllEquipment { get => _AllEquipment; set => _AllEquipment = value; }
-           public List<EquipmentSet> AllEquipmentSets { get => _AllEquipmentSets; set => _AllEquipmentSets = value; }
+        public List<EquipmentCategory> AllEquipmentCategories { get => _AllEquipmentCategories; set => _AllEquipmentCategories = value; }
+        public List<Equipment> AllEquipment { get => _AllEquipment; set => _AllEquipment = value; }
+        public List<EquipmentSet> AllEquipmentSets { get => _AllEquipmentSets; set => _AllEquipmentSets = value; }
 
 
         public bool ECCReminderThisDevice { get => _ECCReminderThisDevice; set { _ECCReminderThisDevice = value; appSettingsChanged = true; } }
@@ -170,7 +172,7 @@ namespace WF_ICS_ClassLibrary.Models
             TwoCopiesOf204 = true;
             IncludeSMEAC = true;
             IncludeSubjectProfile = true;
-            PositionFormat = "UTM";
+            PositionFormat = "Decimal Degrees";
             IncludeLostPersonQuestionnaire = false;
             b_includeSafetyWithIAP = true;
             CheckinInterval = 60;
@@ -190,7 +192,6 @@ namespace WF_ICS_ClassLibrary.Models
             AutomaticSubFolders.Add("GPS Track Backup");
             AutomaticSubFolders.Add("Maps");
             AutomaticSubFolders.Add("Other Images");
-            AutomaticSubFolders.Add("Clue Photos");
             DefaultProvince = new Province(4);
 
 
@@ -198,7 +199,7 @@ namespace WF_ICS_ClassLibrary.Models
 
             LastUpdateCheck = DateTime.Now;
 
-         
+
         }
     }
 

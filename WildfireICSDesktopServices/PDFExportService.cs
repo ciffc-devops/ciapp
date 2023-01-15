@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary;
@@ -200,9 +201,9 @@ namespace WildfireICSDesktopServices
             }
 
 
-            if (includeSafety && task.allSafetyPlans.Where(o => o.OpPeriod == OpPeriodToExport).Any())
+            if (includeSafety && task.allSafetyMessages.Where(o => o.OpPeriod == OpPeriodToExport).Any())
             {
-                allPDFs.AddRange(exportSafetyPlansToPDF(task, OpPeriodToExport, flattenPDF));
+                allPDFs.AddRange(exportSafetyMessagesToPDF(task, OpPeriodToExport, flattenPDF));
             }
 
             return allPDFs;
@@ -366,14 +367,14 @@ namespace WildfireICSDesktopServices
 
 
 
-        public List<byte[]> exportSafetyPlansToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportSafetyMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
-            List<SafetyPlan> safetyPlans = task.allSafetyPlans.Where(o => o.OpPeriod == OpPeriodToExport).ToList();
-            foreach (SafetyPlan sp in safetyPlans)
+            List<SafetyMessage> safetyPlans = task.allSafetyMessages.Where(o => o.OpPeriod == OpPeriodToExport).ToList();
+            foreach (SafetyMessage sp in safetyPlans)
             {
-                string path = createSafetyPlanPDF(task, sp, false, true, flattenPDF);
+                string path = createSafetyMessagePDF(task, sp, false, true, flattenPDF);
                 if (path != null)
                 {
                     using (FileStream stream = File.OpenRead(path))
@@ -389,7 +390,31 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public string createSafetyPlanPDF(WFIncident task, SafetyPlan plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        public List<byte[]> exportSafetyMessagesToPDF(WFIncident task, List<SafetyMessage> messagesToPrint, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            foreach (SafetyMessage sp in messagesToPrint)
+            {
+                string path = createSafetyMessagePDF(task, sp, false, true, flattenPDF);
+                if (path != null)
+                {
+                    using (FileStream stream = File.OpenRead(path))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        allPDFs.Add(fileBytes);
+                    }
+                }
+            }
+            return allPDFs;
+        }
+
+
+
+        public string createSafetyMessagePDF(WFIncident task, SafetyMessage plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
             string path = FileAccessClasses.getWritablePath(task);
             if (task != null && plan != null)
@@ -399,10 +424,10 @@ namespace WildfireICSDesktopServices
 
 
                     if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string filename = "ICS 305 - Task " + plan.TaskNumber + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " + plan.HazardNumber.ToString(Globals.cultureInfo) + " - " + plan.HazardName.Sanitize() + ".pdf";
+                    string filename = "ICS 208 - Task " + task.IncidentIdentifier + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " +  plan.SummaryLine.Sanitize() + ".pdf";
                     if (filename.Length > 100)
                     {
-                        filename = "ICS 305 - Task " + plan.TaskNumber + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " + plan.HazardNumber.ToString(Globals.cultureInfo) + " - " + plan.HazardName.Sanitize().Substring(0, 20) + ".pdf";
+                        filename = "ICS 208 - Task " + task.IncidentIdentifier + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " + plan.SummaryLine.Sanitize().Substring(0, 20) + ".pdf";
                     }
                     path = FileAccessClasses.getUniqueFileName(filename, path);
 
@@ -418,43 +443,61 @@ namespace WildfireICSDesktopServices
                 try
                 {
 
+                    OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == plan.OpPeriod);
 
 
 
-                    string fileToUse = "ICSForms/ICS 305 - Safety Plan.pdf";
+                    string fileToUse = "BlankForms/ICS-208-WF-Safety-Message.pdf";
                     PdfReader rdr = new PdfReader(fileToUse);
 
                     using (FileStream stream = new System.IO.FileStream(path, System.IO.FileMode.Create))
                     {
                         PdfStamper stamper = new PdfStamper(rdr, stream);
-                        stamper.AcroFields.SetField("TASK", plan.TaskNumber);
-                        stamper.AcroFields.SetField("DATE  TIME PREPARED", string.Format("{0:yyyy-MMM-dd HH:MM}", plan.DatePrepared));
-                        stamper.AcroFields.SetField("FOR OP PERIOD", plan.OpPeriod.ToString());
-                        stamper.AcroFields.SetField("TASK NAME", plan.TaskName);
-                        stamper.AcroFields.SetField("PREPARED BY LOGISTICS", plan.PreparedBy);
-                        stamper.AcroFields.SetField("IDENTIFIED HAZARD", plan.HazardNumber.ToString());
-                        stamper.AcroFields.SetField("HAZARD NAME", plan.HazardName);
-                        stamper.AcroFields.SetField("DESCRIPTION", plan.Description);
-                        stamper.AcroFields.SetField("PRECAUTIONS", plan.Precautions);
-                        stamper.AcroFields.SetField("SPECIAL INSTRUCTIONS", plan.SpecialInstructions);
+                        stamper.AcroFields.SetField("1 INCIDENT NAME OR NUMBER 2 OPERATIONAL Date From Date To", task.IncidentIdentifier);
 
-                        stamper.AcroFields.RenameField("TASK", plan.PlanID + "TASK");
-                        stamper.AcroFields.RenameField("DATE  TIME PREPARED", plan.PlanID + "DATE  TIME PREPARED");
-                        stamper.AcroFields.RenameField("FOR OP PERIOD", plan.PlanID + "FOR OP PERIOD");
-                        stamper.AcroFields.RenameField("TASK NAME", plan.PlanID + "TASK NAME");
-                        stamper.AcroFields.RenameField("PREPARED BY LOGISTICS", plan.PlanID + "PREPARED BY LOGISTICS");
-                        stamper.AcroFields.RenameField("IDENTIFIED HAZARD", plan.PlanID + "IDENTIFIED HAZARD");
-                        stamper.AcroFields.RenameField("HAZARD NAME", plan.PlanID + "HAZARD NAME");
-                        stamper.AcroFields.RenameField("DESCRIPTION", plan.PlanID + "DESCRIPTION");
-                        stamper.AcroFields.RenameField("PRECAUTIONS", plan.PlanID + "PRECAUTIONS");
-                        stamper.AcroFields.RenameField("SPECIAL INSTRUCTIONS", plan.PlanID + "SPECIAL INSTRUCTIONS");
+                        stamper.AcroFields.SetField("SafetyMessage", plan.Message);
+                        stamper.AcroFields.SetField("Approved Site Safety Plans Located at I", plan.SitePlanLocation);
 
+                        stamper.AcroFields.SetField("PreparedByPosition", plan.ApprovedByRoleName);
+                        stamper.AcroFields.SetField("5 PREPARED BY I Position I Name I", plan.ApprovedByName);
+
+
+                        if (plan.SitePlanRequired) { PDFExtraTools.SetPDFCheckbox(stamper, "SitePlanRequiredYes"); }
+                        else { PDFExtraTools.SetPDFCheckbox(stamper, "SitePlanRequiredNo"); }
+
+
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Text1", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+
+
+
+
+
+                        //Rename the fields
+                        AcroFields af = stamper.AcroFields;
+                        List<string> fieldNames = new List<string>();
+                        foreach (var field in af.Fields)
+                        {
+                            fieldNames.Add(field.Key);
+                        }
+                        
+                        foreach (string s in fieldNames)
+                        {
+                            stamper.AcroFields.RenameField(s, s + "-208-" + plan.ID.ToString());
+                        }
 
 
                         if (flattenPDF)
                         {
                             stamper.FormFlattening = true;
                         }
+
+
+
+
 
                         stamper.Close();//Close a PDFStamper Object
                         stamper.Dispose();

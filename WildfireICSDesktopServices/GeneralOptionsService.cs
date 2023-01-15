@@ -262,8 +262,8 @@ namespace WildfireICSDesktopServices
                     return _options.PositionFormat;
                 case "RecentFiles":
                     return _options.RecentFilePaths;
-                case "SafetyPlans":
-                    return _options.allPresetSafetyPlans;
+                case "SafetyMessages":
+                    return _options.safetyMessages;
                 case "SARGroup":
                     if (_options.OrganizationID != Guid.Empty)
                     {
@@ -453,10 +453,10 @@ namespace WildfireICSDesktopServices
                     _options.allPresetObjectives = _options.allPresetObjectives.Where(o => o.ObjectiveID != obj.ObjectiveID).ToList();
                     _options.allPresetObjectives.Add(obj);
                     break;
-                case "SafetyPlan":
-                    SafetyPlan sp = (SafetyPlan)newValue;
-                    _options.allPresetSafetyPlans = _options.allPresetSafetyPlans.Where(o => o.SafetyPlanTemplateID != sp.SafetyPlanTemplateID).ToList();
-                    _options.allPresetSafetyPlans.Add(sp);
+                case "SafetyMessage":
+                    SafetyMessage sp = (SafetyMessage)newValue;
+                    _options.safetyMessages = _options.safetyMessages.Where(o => o.SafetyTemplateID != sp.SafetyTemplateID).ToList();
+                    _options.safetyMessages.Add(sp);
                     break;
                 case "RecentFileName":
                     string recentFileName = newValue.ToString();

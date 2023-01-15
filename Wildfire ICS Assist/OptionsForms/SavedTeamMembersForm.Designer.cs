@@ -68,7 +68,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
             this.splitContainer1.Size = new System.Drawing.Size(1467, 831);
-            this.splitContainer1.SplitterDistance = 765;
+            this.splitContainer1.SplitterDistance = 759;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -91,7 +91,7 @@
             this.dgvTeamMembers.RowHeadersVisible = false;
             this.dgvTeamMembers.RowTemplate.Height = 35;
             this.dgvTeamMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTeamMembers.Size = new System.Drawing.Size(1467, 765);
+            this.dgvTeamMembers.Size = new System.Drawing.Size(1467, 759);
             this.dgvTeamMembers.TabIndex = 1;
             // 
             // colIncidentIDNo
@@ -199,7 +199,8 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SavedTeamMembersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SavedTeamMembersForm";
+            this.Text = "Saved Team Members";
+            this.Load += new System.EventHandler(this.SavedTeamMembersForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

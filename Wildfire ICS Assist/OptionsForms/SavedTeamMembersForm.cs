@@ -14,7 +14,12 @@ namespace Wildfire_ICS_Assist.OptionsForms
     {
         public SavedTeamMembersForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+        }
+
+        private void SavedTeamMembersForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
