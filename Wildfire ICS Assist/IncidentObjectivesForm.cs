@@ -34,16 +34,31 @@ namespace Wildfire_ICS_Assist
             LoadSheet();
             Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
             Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
+            Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessagesChanged;
         }
 
         private void LoadSheet()
         {
+            BuildSafetyMessageList();
             LoadObjectives();
             txtFireSize.Text = objectivesSheet.FireSize;
-            txtWeatherForcast.Text = objectivesSheet.WeatherForcast;
-            txtGeneralSafetyMessage.Text = objectivesSheet.GeneralSafety;
+            if (!string.IsNullOrEmpty(objectivesSheet.WeatherForcast)) { txtWeatherForcast.Text = objectivesSheet.WeatherForcast.Replace("\n", Environment.NewLine); ; }
+            if (!string.IsNullOrEmpty(objectivesSheet.GeneralSafety)) { txtGeneralSafetyMessage.Text = objectivesSheet.GeneralSafety.Replace("\n", Environment.NewLine); ; }
             cboFireStatus.Text = objectivesSheet.FireStatus;
         }
+
+        private void BuildSafetyMessageList()
+        {
+            cboSafetyMessages.DataSource = null;
+            List<SafetyMessage> safetyMessages = Program.CurrentIncident.allSafetyMessages.Where(o => o.OpPeriod == Program.CurrentOpPeriod && o.Active).ToList();
+            cboSafetyMessages.DataSource = safetyMessages;
+            btnFillSafetyFrom208.Enabled = safetyMessages.Any();
+            cboSafetyMessages.Enabled = safetyMessages.Any();
+            cboSafetyMessages.DisplayMember = "SummaryLine";
+            cboSafetyMessages.ValueMember = "ID";
+        }
+
+
 
         private void LoadObjectives()
         {
@@ -70,6 +85,13 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void Program_SafetyMessagesChanged(SafetyMessageEventArgs e)
+        {
+            if(e.item.OpPeriod == CurrentOpPeriod)
+            {
+                BuildSafetyMessageList();
+            }
+        }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
@@ -245,6 +267,15 @@ namespace Wildfire_ICS_Assist
         {
             btnEdit.Enabled = dgvObjectives.SelectedRows.Count == 1;
             btnDelete.Enabled = dgvObjectives.SelectedRows.Count > 0;
+        }
+
+        private void btnFillSafetyFrom208_Click(object sender, EventArgs e)
+        {
+            if(cboSafetyMessages.SelectedItem != null)
+            {
+                SafetyMessage msg = cboSafetyMessages.SelectedItem as SafetyMessage;
+                txtGeneralSafetyMessage.Text = msg.Message.Replace("\n", Environment.NewLine); ;
+            }
         }
     }
 }
