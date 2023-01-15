@@ -158,6 +158,16 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 return id.ToString();
             }
         }
+        public string IncidentNameOrNumber
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(TaskNumber)) { return TaskNumber; }
+                else { return TaskName; }
+
+            }
+        }
+
 
         public string AgencyFileNumber { get => _AgencyFileNumber; set => _AgencyFileNumber = value; }
         public string FileName { get => _FileName; set => _FileName = value; }

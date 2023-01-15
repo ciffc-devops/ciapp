@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,7 +34,7 @@ namespace Wildfire_ICS_Assist
         private void OrganizationalChartForm_Load(object sender, EventArgs e)
         {
             PopulateTree();
-
+            rbUnifiedCommand.Checked = CurrentOrgChart.IsUnifiedCommand;
 
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
@@ -59,6 +60,8 @@ namespace Wildfire_ICS_Assist
             {
                 Program.CurrentIncident.createOrgChartAsNeeded(Program.CurrentOpPeriod);
             }
+
+
             treeOrgChart.Nodes.Clear();
             // call recursive function
             AddCurrentChild(Guid.Empty, treeOrgChart.Nodes);
@@ -142,7 +145,16 @@ namespace Wildfire_ICS_Assist
 
         private void treeOrgChart_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            
+            if (treeOrgChart.SelectedNode != null)
+            {
+                ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
+                if (role.RoleID == WF_ICS_ClassLibrary.Globals.IncidentCommanderID && CurrentOrgChart.IsUnifiedCommand) { btnAssignRole.Enabled = false; }
+                else { btnAssignRole.Enabled = true; }
+            }
+            else
+            {
+                btnAssignRole.Enabled = false;
+            }
         }
 
         
@@ -188,6 +200,15 @@ namespace Wildfire_ICS_Assist
                 if (dr == DialogResult.OK)
                 {
                     Program.wfIncidentService.UpsertICSRole(assignRoleForm.selectedRole);
+
+                    if ( CurrentOrgChart.PreparedByRoleID == Guid.Empty)
+                    {
+                        CurrentOrgChart.PreparedByRole = Program.CurrentRole.RoleName;
+                        CurrentOrgChart.PreparedBy = Program.CurrentRole.IndividualName;
+                        CurrentOrgChart.PreparedByRoleID = Program.CurrentRole.RoleID;
+                        CurrentOrgChart.PreparedByUserID = Program.CurrentRole.IndividualID;
+                        Program.wfIncidentService.UpsertOrganizationalChart(CurrentOrgChart, false);
+                    }
                 }
 
             }
@@ -267,6 +288,27 @@ namespace Wildfire_ICS_Assist
                 catch { }
             }
 
+
+        }
+
+        private void rbIncidentCommander_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbIncidentCommander.Checked) { CurrentOrgChart.SwitchToSingleIC(); }
+        }
+
+        private void rbUnifiedCommand_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbUnifiedCommand.Checked) { CurrentOrgChart.SwitchToUnifiedCommand(); }
+
+        }
+
+        private void rbIncidentCommander_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbUnifiedCommand_Leave(object sender, EventArgs e)
+        {
 
         }
     }

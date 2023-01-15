@@ -887,10 +887,10 @@ namespace WildfireICSDesktopServices
                     task.createOrgChartAsNeeded(OpsPeriod);
                 }
 
-
+                OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
 
                 string fileToUse = "BlankForms/ICS-207-WF-Organization-Chart.pdf";
-
+                if (currentChart.IsUnifiedCommand) { fileToUse = "BlankForms/ICS-207-WF Incident Organization Chart Unified.pdf"; }
 
                 using (PdfReader rdr = new PdfReader(fileToUse))
                 {
@@ -899,17 +899,28 @@ namespace WildfireICSDesktopServices
                         using (PdfStamper stamper = new PdfStamper(rdr, stream))
                         {
 
-                            OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
+                            
                             int TotalPages = currentChart.CalculateOrgChartPageCount();
 
-                            stamper.AcroFields.SetField("1 INCIDENT NAME AND NUMBERRow1", task.IncidentIdentifier);
+                            stamper.AcroFields.SetField("1 INCIDENT NAME AND NUMBERRow1", task.IncidentNameOrNumber);
 
                             stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
                             stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
                             stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                             stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
-                            ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                            ICSRole PreparedBy = new ICSRole();
+                            if(currentChart.PreparedByUserID != Guid.Empty)
+                            {
+                                PreparedBy.teamMember = new TeamMember(currentChart.PreparedByUserID);
+                                PreparedBy.teamMember.Name = currentChart.PreparedBy;
+                                PreparedBy.RoleName = currentChart.PreparedByRole;
+                            }
+                            else
+                            {
+                                PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                            }
+                            
                             if (null != PreparedBy)
                             {
                                 stamper.AcroFields.SetField("PreparedByPosition", PreparedBy.RoleName);
@@ -1259,9 +1270,10 @@ namespace WildfireICSDesktopServices
                             PdfWriter writer = PdfWriter.GetInstance(document, fs);
 
 
-
-                            document.AddAuthor(chart.GetRoleByID(Globals.IncidentCommanderID).IndividualName);
-
+                            if (chart.GetRoleByID(Globals.IncidentCommanderID).teamMember != null)
+                            {
+                                document.AddAuthor(chart.GetRoleByID(Globals.IncidentCommanderID).IndividualName);
+                            }
                             TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
                             writer.PageEvent = PageEventHandler;
                             // Define the page header

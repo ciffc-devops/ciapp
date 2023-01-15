@@ -20,6 +20,12 @@ namespace WF_ICS_ClassLibrary.Models
             MemberActive = true;
             CurrentStatus = null;
         }
+        public TeamMember(Guid id)
+        {
+            PersonID = id;
+            MemberActive = true;
+            CurrentStatus = null;
+        }
 
         [ProtoMember(1)] private Guid _PersonID;
         [ProtoMember(2)] private string _Name;

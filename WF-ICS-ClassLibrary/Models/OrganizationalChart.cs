@@ -33,17 +33,20 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(8)] private bool _Active;
         [ProtoMember(9)] private Guid _TaskID;
         [ProtoMember(10)] private string _PreparedByRole;
+        [ProtoMember(11)] private bool _IsUnifiedCommand;
+        [ProtoMember(12)] private Guid _PreparedByRoleID;
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public bool Active { get => _Active; set => _Active = value; }
         public Guid PreparedByUserID { get => _PreparedByUserID; set => _PreparedByUserID = value; }
+        public Guid PreparedByRoleID { get => _PreparedByRoleID; set => _PreparedByRoleID = value; }
         public string PreparedByRole { get => _PreparedByRole; set => _PreparedByRole= value; }
         public Guid OrganizationalChartID { get => _OrganizationalChartID; set => _OrganizationalChartID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public DateTime DatePrepared { get => _DatePreparedUTC.ToLocalTime(); set => _DatePreparedUTC = value.ToUniversalTime(); }
         public DateTime DatePreparedUTC { get => _DatePreparedUTC; set => _DatePreparedUTC = value; }
       
-
+        public bool IsUnifiedCommand { get => _IsUnifiedCommand; set => _IsUnifiedCommand = value; }
         
         public string getNameByRoleName(string rolename, bool defaultUpChain = true)
         {
@@ -97,6 +100,7 @@ namespace WF_ICS_ClassLibrary.Models
             else { return null; }
         }
 
+       
     
 
         public OrganizationChart Clone()
@@ -164,6 +168,7 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 if (!string.IsNullOrEmpty(IndividualName)) { return RoleName + " - " + IndividualName; }
+                else if (RoleID == Globals.IncidentCommanderID && !RoleName.Equals("Incident Commander")) { return RoleName; }
                 else { return RoleName + " - unassigned"; }
             }
         }
@@ -173,6 +178,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (!string.IsNullOrEmpty(IndividualName)) { return RoleNameForDropdown + " - " + IndividualName; }
                 if (string.IsNullOrEmpty(IndividualName) && string.IsNullOrEmpty(RoleName)) { return string.Empty; }
+                else if (RoleID == Globals.IncidentCommanderID && !RoleName.Equals("Incident Commander")) { return RoleNameForDropdown; }
                 else { return RoleNameForDropdown + " - unassigned"; }
             }
         }
@@ -383,21 +389,57 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class OrgChartTools
     {
-        public static List<Guid> ProtectedRoleIDs
+        public static void SwitchToUnifiedCommand(this OrganizationChart org)
         {
-            get
+            if (!org.IsUnifiedCommand)
             {
-                List<Guid> ids = new List<Guid>();
-                ids.Add(Globals.IncidentCommanderID);
-                ids.Add(Globals.DeputyIncidentCommanderID);
-                ids.Add(Globals.OpsChiefID);
-                ids.Add(Globals.PlanningChiefID);
-                ids.Add(Globals.LogisticsChiefID);
-                ids.Add(Globals.AdminChiefID);
-                ids.Add(Globals.SafetyOfficerID);
-                return ids;
+                _ = org.AllRoles.AddUnifiedCommandRoles(true);
+                org.SortRoles();
+
+                ICSRole ic = org.AllRoles.First(o => o.RoleID == Globals.IncidentCommanderID);
+                ICSRole uc1 = org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand1ID);
+                if (ic.teamMember != null && ic.teamMember.PersonID != Guid.Empty && (uc1.teamMember == null || uc1.teamMember.PersonID == Guid.Empty))
+                {
+                    uc1.teamMember = org.AllRoles.First(o => o.RoleID == Globals.IncidentCommanderID).teamMember.Clone();
+                   
+                    ic.teamMember = new TeamMember(Guid.Empty);
+                    
+                }
+                ic.RoleName = "Unified Command";
+                Globals.incidentService.UpsertICSRole(org.AllRoles.First(o => o.RoleID == Globals.IncidentCommanderID));
+                uc1.RoleName = "Incident Commander";
+                Globals.incidentService.UpsertICSRole(org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand1ID));
+
+
+                org.IsUnifiedCommand = true;
             }
         }
+
+        public static void SwitchToSingleIC(this OrganizationChart org)
+        {
+            if (org.IsUnifiedCommand)
+            {
+                ICSRole ic = org.AllRoles.First(o => o.RoleID == Globals.IncidentCommanderID);
+                ICSRole uc1 = org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand1ID);
+                if(uc1.teamMember == null && org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand2ID).teamMember != null) { uc1 = org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand2ID); }
+                if (uc1.teamMember == null && org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand3ID).teamMember != null) { uc1 = org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand3ID); }
+
+                ic.RoleName = "Incident Commander";
+                if (uc1.teamMember != null)
+                {
+                    ic.teamMember = uc1.teamMember.Clone();
+                    uc1.teamMember = null;
+                }
+
+
+
+
+
+                org.IsUnifiedCommand = false;
+            }
+        }
+
+   
 
         public static List<ICSRole> GetBlankRolesBasedOnThisChart(OrganizationChart ogOrgChart, int newOpPeriod, Guid newChartID)
         {
@@ -440,7 +482,56 @@ namespace WF_ICS_ClassLibrary.Models
             return roles;
         }
 
-        public static List<ICSRole> GetBlankPrimaryRoles()
+        public static List<ICSRole> AddUnifiedCommandRoles(this List<ICSRole> list, bool upsertToIncident = false)
+        {
+            TeamMember blankMember = new TeamMember();
+            blankMember.PersonID = Guid.Empty;
+
+
+            if (upsertToIncident)
+            {
+                if (!list.Any(o => o.RoleID == Globals.UnifiedCommand1ID))
+                {
+                    ICSRole uc1 = new ICSRole(Globals.UnifiedCommand1ID, "Unified Command 1", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "UCName1", "UCTitle1", blankMember, 0, 0);
+                    uc1.OpPeriod = list[0].OpPeriod;
+                    uc1.OrganizationalChartID = list[0].OrganizationalChartID;
+                    Globals.incidentService.UpsertICSRole(uc1);
+                }
+                if (!list.Any(o => o.RoleID == Globals.UnifiedCommand2ID))
+                {
+                    ICSRole uc2 = new ICSRole(Globals.UnifiedCommand2ID, "Unified Command 2", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "UCName2", "UCTitle2", blankMember, 0, 0);
+                    uc2.OpPeriod = list[0].OpPeriod;
+                    uc2.OrganizationalChartID = list[0].OrganizationalChartID;
+                    Globals.incidentService.UpsertICSRole(uc2);
+                }
+                if (!list.Any(o => o.RoleID == Globals.UnifiedCommand3ID))
+                {
+                    ICSRole uc3 = new ICSRole(Globals.UnifiedCommand3ID, "Unified Command 3", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "UCName3", "UCTitle3", blankMember, 0, 0);
+                    uc3.OpPeriod = list[0].OpPeriod;
+                    uc3.OrganizationalChartID = list[0].OrganizationalChartID;
+                    Globals.incidentService.UpsertICSRole(uc3);
+                }
+            }
+            else
+            {
+                if (!list.Any(o => o.RoleID == Globals.UnifiedCommand1ID)) { list.Add(new ICSRole(Globals.UnifiedCommand1ID, "Unified Command 1", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "UCName1", "UCTitle1", blankMember, 0, 0)); }
+                if (!list.Any(o => o.RoleID == Globals.UnifiedCommand2ID)) { list.Add(new ICSRole(Globals.UnifiedCommand2ID, "Unified Command 2", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "UCName2", "UCTitle2", blankMember, 0, 0)); }
+                if (!list.Any(o => o.RoleID == Globals.UnifiedCommand3ID)) { list.Add(new ICSRole(Globals.UnifiedCommand3ID, "Unified Command 3", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "UCName3", "UCTitle3", blankMember, 0, 0)); }
+
+            }
+
+            return list;
+        }
+
+        public static bool RoleIsEmpty(this ICSRole role)
+        {
+            if (role.teamMember == null) { return true; }
+            if (role.teamMember.PersonID == Guid.Empty) { return true; }
+            else { return false; }
+        }
+
+
+        public static List<ICSRole> GetBlankPrimaryRoles(bool UnifiedCommand = false)
         {
             TeamMember blankMember = new TeamMember();
             blankMember.PersonID = Guid.Empty;
@@ -448,6 +539,11 @@ namespace WF_ICS_ClassLibrary.Models
             List<ICSRole> AllRoles = new List<ICSRole>();
             //AllRoles.Add(new ICSRole(new Guid("98649093-2C0D-4D23-9EC1-2AF16ED83B2A"), "SAR Commander", Guid.Empty, "Text1", blankMember));
             AllRoles.Add(new ICSRole(Globals.IncidentCommanderID, "Incident Commander", Guid.Empty, Globals.IncidentCommanderID, "IncidentCommander", blankMember, 0, 0));
+            if (UnifiedCommand)
+            {
+                AllRoles = AllRoles.AddUnifiedCommandRoles();
+            }
+
             AllRoles.Add(new ICSRole(new Guid("450EA00E-636A-4F44-9B6D-50A8EC03F4EA"), "Deputy Incident Commander", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "DeputyIC", blankMember, 1, 1));
             AllRoles.Add(new ICSRole(Globals.SafetyOfficerID, "Safety Officer", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "SafetyOfficer", blankMember, 2, 1));
             AllRoles.Add(new ICSRole(new Guid("ECAEA544-95E6-4177-B954-F2A8D4027642"), "Liaison Officer", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "LiaisonOfficer", blankMember, 3, 1));
@@ -497,12 +593,13 @@ namespace WF_ICS_ClassLibrary.Models
             return AllRoles;
         }
 
+     
         public static ICSRole GetRoleByName (this OrganizationChart orgChart, string rolename, bool defaultUpChain = true)
         {
             ICSRole role = orgChart.GetRoleByName(rolename);
             TeamMember member = role.teamMember;
 
-            if (defaultUpChain && string.IsNullOrEmpty(member.Name))
+            if (defaultUpChain && string.IsNullOrEmpty(member.Name) && role.ReportsTo != Guid.Empty)
             {
                 role = orgChart.GetRoleByID(role.ReportsTo, true);
 
@@ -517,7 +614,7 @@ namespace WF_ICS_ClassLibrary.Models
             if (orgChart.AllRoles.Any(o => o.RoleID == id))
             {
                 ICSRole role = orgChart.GetAllRoles().First(o => o.RoleID == id);
-                if(defaultUpChain && (role.teamMember == null || string.IsNullOrEmpty(role.teamMember.Name)))
+                if(defaultUpChain && (role.teamMember == null || string.IsNullOrEmpty(role.teamMember.Name)) && role.ReportsTo != Guid.Empty)
                 {
                     role = orgChart.GetRoleByID(role.ReportsTo, true);
                 }
