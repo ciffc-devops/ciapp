@@ -33,6 +33,10 @@ namespace WF_ICS_ClassLibrary
 
         //Key ICS roles
         public static Guid IncidentCommanderID { get;  } = new Guid("1096905E-A726-41D8-A8BC-2EAD61CCB2F7");
+        public static Guid UnifiedCommand1ID { get; } = new Guid("e3667668-4d58-459e-9fb5-5205296994e7");
+        public static Guid UnifiedCommand2ID { get; } = new Guid("32a04cd8-5d24-46da-9a09-1a5e8685b39e");
+        public static Guid UnifiedCommand3ID { get; } = new Guid("2d94c4a4-c7f2-4893-a3ec-cc4cd3dfc78a");
+
         public static Guid DeputyIncidentCommanderID { get; } = new Guid("450EA00E-636A-4F44-9B6D-50A8EC03F4EA");
         public static Guid PlanningChiefID { get; } = new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B");
         public static Guid OpsChiefID { get; } = new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC");

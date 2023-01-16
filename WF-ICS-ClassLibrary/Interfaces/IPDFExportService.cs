@@ -8,12 +8,17 @@ namespace WildfireICSDesktopServices
         string createBlankSignInPDF(WFIncident task, List<GroupSignInPrintRequest> groups, int opsPeriod, bool tempFileName = false, bool flattenPDF = false);
         string createBriefingPDF(WFIncident task, Briefing briefing, bool automaticallyOpen = true, bool tempFileName = false);
         string createCommsPlanPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
+        List<byte[]> exportCommsPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
         string createMedicalPlanPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
+        List<byte[]> exportMedicalPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
         string createNotePDF(WFIncident task, Note note, bool automaticallyOpen = true, bool tempFileName = false);
         string createObjectivesPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
+        List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
         List<byte[]> createOpPeriodContentsList(WFIncident task, List<string> items, int OpPeriod);
         string createOrgChartContactList(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
+        List<byte[]> exportOrgChartContactsToPDF(WFIncident task, int OpPeriodToExport);
         string createOrgChartPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
+        List<byte[]> exportOrgChartToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
         string createRadioLogPDF(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
         string createSafetyMessagePDF(WFIncident task, SafetyMessage plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         string createSignInPDF(WFIncident task, int opsPeriod, bool tempFileName = false, bool flattenPDF = false);

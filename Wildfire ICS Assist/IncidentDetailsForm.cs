@@ -111,6 +111,9 @@ namespace Wildfire_ICS_Assist
         MedicalPlanForm medicalPlanForm = null;
         NotesForm notesForm = null;
         SafetyMessagesForm safetyMessagesForm = null;
+        VehiclesForm vehiclesForm = null;
+        PrintIncidentActionPlanForm printIAPForm = null;
+
 
         /* Event Handlers!*/
 
@@ -132,6 +135,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.MedicalPlanChanged += Program_MedicalPlanChanged;
             Program.wfIncidentService.NoteChanged += Program_NoteChanged;
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
+            Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
         }
 
 
@@ -524,7 +528,8 @@ namespace Wildfire_ICS_Assist
             {
                 List<Guid> ChiefIDs = new List<Guid>();
                 ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.AdminChiefID);ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
-
+                List<Guid> ICRoles = new List<Guid>();
+                ICRoles.Add(Globals.IncidentCommanderID); ICRoles.Add(Globals.DeputyIncidentCommanderID); ICRoles.Add(Globals.UnifiedCommand1ID); ICRoles.Add(Globals.UnifiedCommand2ID); ICRoles.Add(Globals.UnifiedCommand3ID);
 
                 List<Guid> CommandStaffRoles = new List<Guid>();
                 foreach(ICSRole role in CurrentOrgChart.AllRoles.Where(o=>o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
@@ -535,17 +540,16 @@ namespace Wildfire_ICS_Assist
                 foreach (CollapsiblePanel panel in collapsiblePanels) { panel.BackColor = Color.White; }
                 collapseAllPanels();
                 //resizeGroup("Assignments", false, true);
-
-                if (CommandStaffRoles.Contains(Program.CurrentRole.RoleID))
-                {
-                    pnlTaskInfo.BackColor = Color.IndianRed;
-                    cpIncidentActionPlan.Expand();
-                }
-                else if (Program.CurrentRole.BranchID == Globals.IncidentCommanderID)
+                if (ICRoles.Contains(Program.CurrentRole.RoleID))
                 {
                     pnlTaskInfo.BackColor = Color.LimeGreen;
                     cpIncidentActionPlan.Expand();
                     //    pnlCommandTeam.BackColor = Color.LimeGreen;
+                }
+                else if (CommandStaffRoles.Contains(Program.CurrentRole.RoleID))
+                {
+                    pnlTaskInfo.BackColor = Color.IndianRed;
+                    cpIncidentActionPlan.Expand();
                 }
                 else if (Program.CurrentRole.BranchID == Globals.OpsChiefID)
                 {
@@ -1348,6 +1352,11 @@ namespace Wildfire_ICS_Assist
             TriggerAutoSave();
         }
 
+        private void Program_VehicleChanged(VehicleEventArgs e)
+        {
+            TriggerAutoSave();
+        }
+
         private void Program_NoteChanged(NoteEventArgs e)
         {
             TriggerAutoSave();
@@ -1501,5 +1510,62 @@ namespace Wildfire_ICS_Assist
 
 
         }
+
+        private void vehiclesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenVehiclesForm();
+        }
+
+        private void OpenVehiclesForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (vehiclesForm == null)
+                {
+                    vehiclesForm = new VehiclesForm();
+                    vehiclesForm.FormClosed += new FormClosedEventHandler(VehiclesForm_Closed);
+                    ActiveForms.Add(vehiclesForm);
+                    vehiclesForm.Show(this);
+                }
+
+                vehiclesForm.BringToFront();
+            }
+        }
+        void VehiclesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(vehiclesForm);
+            vehiclesForm = null;
+
+
+        }
+
+        private void btnPrintIAP_Click(object sender, EventArgs e)
+        {
+            OpenPrintIAPForm();
+        }
+
+        private void OpenPrintIAPForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (printIAPForm == null)
+                {
+                    printIAPForm = new PrintIncidentActionPlanForm();
+                    printIAPForm.FormClosed += new FormClosedEventHandler(PrintIAPForm_Closed);
+                    ActiveForms.Add(printIAPForm);
+                    printIAPForm.Show(this);
+                }
+
+                printIAPForm.BringToFront();
+            }
+        }
+        void PrintIAPForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(printIAPForm);
+            printIAPForm = null;
+
+
+        }
+
     }
 }

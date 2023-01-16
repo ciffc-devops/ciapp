@@ -179,7 +179,10 @@
             this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
             this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.btnBriefings2 = new System.Windows.Forms.Button();
+            this.btnIncidentSummary = new System.Windows.Forms.Button();
+            this.btnAssignmentList = new System.Windows.Forms.Button();
+            this.btnOrgAssignmentList = new System.Windows.Forms.Button();
+            this.btnAirOpsSummary = new System.Windows.Forms.Button();
             this.btnSafetyPlans = new System.Windows.Forms.Button();
             this.btnIncidentObjectives = new System.Windows.Forms.Button();
             this.btnMedicalPlan = new System.Windows.Forms.Button();
@@ -1090,6 +1093,7 @@
             // 
             this.vehiclesToolStripMenuItem1.Name = "vehiclesToolStripMenuItem1";
             resources.ApplyResources(this.vehiclesToolStripMenuItem1, "vehiclesToolStripMenuItem1");
+            this.vehiclesToolStripMenuItem1.Click += new System.EventHandler(this.vehiclesToolStripMenuItem1_Click);
             // 
             // equipmentToolStripMenuItem1
             // 
@@ -1273,7 +1277,10 @@
             this.cpIncidentActionPlan.CollapsedHeight = 40;
             this.cpIncidentActionPlan.CollapsedWidth = 485;
             this.cpIncidentActionPlan.CollapseLeft = true;
-            this.cpIncidentActionPlan.Controls.Add(this.btnBriefings2);
+            this.cpIncidentActionPlan.Controls.Add(this.btnIncidentSummary);
+            this.cpIncidentActionPlan.Controls.Add(this.btnAssignmentList);
+            this.cpIncidentActionPlan.Controls.Add(this.btnOrgAssignmentList);
+            this.cpIncidentActionPlan.Controls.Add(this.btnAirOpsSummary);
             this.cpIncidentActionPlan.Controls.Add(this.btnSafetyPlans);
             this.cpIncidentActionPlan.Controls.Add(this.btnIncidentObjectives);
             this.cpIncidentActionPlan.Controls.Add(this.btnMedicalPlan);
@@ -1281,17 +1288,35 @@
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
             this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
             this.cpIncidentActionPlan.CurrentlyCollapsed = false;
-            this.cpIncidentActionPlan.ExpandedHeight = 262;
-            this.cpIncidentActionPlan.ExpandedWidth = 710;
+            this.cpIncidentActionPlan.ExpandedHeight = 331;
+            this.cpIncidentActionPlan.ExpandedWidth = 722;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
             // 
-            // btnBriefings2
+            // btnIncidentSummary
             // 
-            resources.ApplyResources(this.btnBriefings2, "btnBriefings2");
-            this.btnBriefings2.Name = "btnBriefings2";
-            this.btnBriefings2.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.btnIncidentSummary, "btnIncidentSummary");
+            this.btnIncidentSummary.Name = "btnIncidentSummary";
+            this.btnIncidentSummary.UseVisualStyleBackColor = true;
+            // 
+            // btnAssignmentList
+            // 
+            resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
+            this.btnAssignmentList.Name = "btnAssignmentList";
+            this.btnAssignmentList.UseVisualStyleBackColor = true;
+            // 
+            // btnOrgAssignmentList
+            // 
+            resources.ApplyResources(this.btnOrgAssignmentList, "btnOrgAssignmentList");
+            this.btnOrgAssignmentList.Name = "btnOrgAssignmentList";
+            this.btnOrgAssignmentList.UseVisualStyleBackColor = true;
+            // 
+            // btnAirOpsSummary
+            // 
+            resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
+            this.btnAirOpsSummary.Name = "btnAirOpsSummary";
+            this.btnAirOpsSummary.UseVisualStyleBackColor = true;
             // 
             // btnSafetyPlans
             // 
@@ -1320,6 +1345,7 @@
             this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrintIAP.Name = "btnPrintIAP";
             this.btnPrintIAP.UseVisualStyleBackColor = true;
+            this.btnPrintIAP.Click += new System.EventHandler(this.btnPrintIAP_Click);
             // 
             // btnPrintOrgChart
             // 
@@ -1618,7 +1644,6 @@
         private System.Windows.Forms.Label lblNetworkSyncStatus;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.Button btnBriefings2;
         private System.Windows.Forms.Button btnSafetyPlans;
         private System.Windows.Forms.Button btnMedicalPlan;
         private System.Windows.Forms.Button btnPrintOrgChart;
@@ -1731,6 +1756,10 @@
         private System.Windows.Forms.ToolStripMenuItem internetSyncToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripMenuItem requestOptionsFromServerToolStripMenuItem;
+        private System.Windows.Forms.Button btnIncidentSummary;
+        private System.Windows.Forms.Button btnAssignmentList;
+        private System.Windows.Forms.Button btnOrgAssignmentList;
+        private System.Windows.Forms.Button btnAirOpsSummary;
     }
 }
 

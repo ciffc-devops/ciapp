@@ -516,6 +516,25 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
+        public List<byte[]> exportMedicalPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createMedicalPlanPDF(task, OpPeriodToExport, false, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
 
 
         public string createMedicalPlanPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
@@ -678,6 +697,26 @@ namespace WildfireICSDesktopServices
         }
 
 
+        public List<byte[]> exportCommsPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createCommsPlanPDF(task, OpPeriodToExport, false, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
 
         public string createCommsPlanPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
@@ -773,7 +812,25 @@ namespace WildfireICSDesktopServices
         }
 
 
+        public List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
 
+            string path = createObjectivesPDF(task, OpPeriodToExport, false, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
 
         public string createObjectivesPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
@@ -862,6 +919,27 @@ namespace WildfireICSDesktopServices
             else { return null; }
         }
 
+
+
+        public List<byte[]> exportOrgChartToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createOrgChartPDF(task, OpPeriodToExport, false, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
 
 
         public string createOrgChartPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
@@ -1223,7 +1301,25 @@ namespace WildfireICSDesktopServices
 
 
 
+        public List<byte[]> exportOrgChartContactsToPDF(WFIncident task, int OpPeriodToExport)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
 
+            string path = createOrgChartContactList(task, OpPeriodToExport, false, true);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
 
 
         public string createOrgChartContactList(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false)
@@ -2439,9 +2535,9 @@ namespace WildfireICSDesktopServices
 
                 if (OpPeriod > 0)
                 {
-                    document.AddTitle("Task Number " + task.TaskNumber + " - " + task.TaskName + " Op Period " + OpPeriod.ToString(Globals.cultureInfo));
+                    document.AddTitle("Incident:  " + task.IncidentIdentifier + " Op Period " + OpPeriod.ToString(Globals.cultureInfo));
                 }
-                else { document.AddTitle("Task Number " + task.TaskNumber + " - " + task.TaskName); }
+                else { document.AddTitle("Incident: " + task.IncidentIdentifier); }
                 // Open the document to enable you to write to the document
 
                 document.Open();
@@ -2453,7 +2549,7 @@ namespace WildfireICSDesktopServices
 
                 // Add a simple and wellknown phrase to the document in a flow layout manner
                 //Chapter chapter1 = new Chapter(new Paragraph("Briefing"), 1);
-                Anchor briefingTarget = new Anchor("Task Number " + task.TaskNumber + " - " + task.TaskName, titlefont);
+                Anchor briefingTarget = new Anchor("Incident: " + task.IncidentIdentifier , titlefont);
                 briefingTarget.Name = "Index";
                 Paragraph tp = new Paragraph();
                 tp.Add(briefingTarget);
@@ -2461,10 +2557,6 @@ namespace WildfireICSDesktopServices
 
                 document.Add(tp);
 
-                if (!string.IsNullOrEmpty(task.AgencyFileNumber))
-                {
-                    document.Add(new Paragraph("Agency File #" + task.AgencyFileNumber, subsectionfont));
-                }
                 if (OpPeriod > 0)
                 {
                     document.Add(new Paragraph("Operational Period #" + OpPeriod.ToString(Globals.cultureInfo), subsectionfont));
@@ -2475,18 +2567,8 @@ namespace WildfireICSDesktopServices
                 }
                 document.Add(new Paragraph(" "));
 
-                string logoPath = null;
-                GeneralOptionsService generalOptionsService = new GeneralOptionsService(true);
-
-                Organization org = (Organization)generalOptionsService.GetOptionsValue("SARGroup");
-                if (org != null && org.OrganizationID != Guid.Empty && !string.IsNullOrEmpty(org.LogoFileName))
-                {
-                    logoPath = "SARGroupLogos/" + org.LogoFileName;
-                }
-                else
-                {
-                    logoPath = "SARGroupLogos/BCSARA-Logo-960.png";
-                }
+                string logoPath = "Resources/ics-canada-logo.png";
+                
 
                 //Picture
                 if (!string.IsNullOrEmpty(logoPath))
@@ -2498,9 +2580,9 @@ namespace WildfireICSDesktopServices
                         {
                             iTextSharp.text.Image tif = iTextSharp.text.Image.GetInstance(logoPath);
 
-                            tif.ScaleToFit(315, 220);
-                            float x = ((315 - tif.ScaledWidth) / 2) + 263;
-                            tif.SetAbsolutePosition(x, 400);
+                            tif.ScaleToFit(200, 200);
+                            float x = ((200 - tif.ScaledWidth) / 2) + 350;
+                            tif.SetAbsolutePosition(x, 450);
 
                             document.Add(tif);
                         }

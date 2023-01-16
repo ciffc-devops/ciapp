@@ -52,11 +52,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnDefaultHelp = new System.Windows.Forms.Button();
+            this.btnUpdateExistingHelp = new System.Windows.Forms.Button();
+            this.btnColumnHelp = new System.Windows.Forms.Button();
+            this.btnCSVHelp = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.cboDefaultProvince = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -280,7 +279,7 @@
             // 
             this.label9.Location = new System.Drawing.Point(67, 92);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(480, 55);
+            this.label9.Size = new System.Drawing.Size(448, 55);
             this.label9.TabIndex = 139;
             this.label9.Text = "Use the section below to identify the column (if any) where the data is stored in" +
     " your spreadsheet";
@@ -296,11 +295,10 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.button5);
-            this.splitContainer1.Panel1.Controls.Add(this.button4);
-            this.splitContainer1.Panel1.Controls.Add(this.button3);
-            this.splitContainer1.Panel1.Controls.Add(this.button2);
-            this.splitContainer1.Panel1.Controls.Add(this.button1);
+            this.splitContainer1.Panel1.Controls.Add(this.btnDefaultHelp);
+            this.splitContainer1.Panel1.Controls.Add(this.btnUpdateExistingHelp);
+            this.splitContainer1.Panel1.Controls.Add(this.btnColumnHelp);
+            this.splitContainer1.Panel1.Controls.Add(this.btnCSVHelp);
             this.splitContainer1.Panel1.Controls.Add(this.label18);
             this.splitContainer1.Panel1.Controls.Add(this.cboDefaultProvince);
             this.splitContainer1.Panel1.Controls.Add(this.label17);
@@ -343,65 +341,57 @@
             this.splitContainer1.SplitterDistance = 704;
             this.splitContainer1.TabIndex = 140;
             // 
-            // button5
+            // btnDefaultHelp
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.Location = new System.Drawing.Point(521, 650);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(26, 26);
-            this.button5.TabIndex = 156;
-            this.button5.TabStop = false;
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnDefaultHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDefaultHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDefaultHelp.BackgroundImage")));
+            this.btnDefaultHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDefaultHelp.Location = new System.Drawing.Point(520, 630);
+            this.btnDefaultHelp.Name = "btnDefaultHelp";
+            this.btnDefaultHelp.Size = new System.Drawing.Size(26, 26);
+            this.btnDefaultHelp.TabIndex = 155;
+            this.btnDefaultHelp.TabStop = false;
+            this.btnDefaultHelp.UseVisualStyleBackColor = true;
+            this.btnDefaultHelp.Click += new System.EventHandler(this.btnDefaultHelp_Click);
             // 
-            // button4
+            // btnUpdateExistingHelp
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.Location = new System.Drawing.Point(520, 612);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(26, 26);
-            this.button4.TabIndex = 155;
-            this.button4.TabStop = false;
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnUpdateExistingHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateExistingHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUpdateExistingHelp.BackgroundImage")));
+            this.btnUpdateExistingHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnUpdateExistingHelp.Location = new System.Drawing.Point(521, 576);
+            this.btnUpdateExistingHelp.Name = "btnUpdateExistingHelp";
+            this.btnUpdateExistingHelp.Size = new System.Drawing.Size(26, 26);
+            this.btnUpdateExistingHelp.TabIndex = 154;
+            this.btnUpdateExistingHelp.TabStop = false;
+            this.btnUpdateExistingHelp.UseVisualStyleBackColor = true;
+            this.btnUpdateExistingHelp.Click += new System.EventHandler(this.btnUpdateExistingHelp_Click);
             // 
-            // button3
+            // btnColumnHelp
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Location = new System.Drawing.Point(521, 576);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(26, 26);
-            this.button3.TabIndex = 154;
-            this.button3.TabStop = false;
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnColumnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnColumnHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnColumnHelp.BackgroundImage")));
+            this.btnColumnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnColumnHelp.Location = new System.Drawing.Point(521, 105);
+            this.btnColumnHelp.Name = "btnColumnHelp";
+            this.btnColumnHelp.Size = new System.Drawing.Size(26, 26);
+            this.btnColumnHelp.TabIndex = 153;
+            this.btnColumnHelp.TabStop = false;
+            this.btnColumnHelp.UseVisualStyleBackColor = true;
+            this.btnColumnHelp.Click += new System.EventHandler(this.btnColumnHelp_Click);
             // 
-            // button2
+            // btnCSVHelp
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Location = new System.Drawing.Point(521, 105);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(26, 26);
-            this.button2.TabIndex = 153;
-            this.button2.TabStop = false;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(379, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(26, 26);
-            this.button1.TabIndex = 152;
-            this.button1.TabStop = false;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCSVHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCSVHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCSVHelp.BackgroundImage")));
+            this.btnCSVHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCSVHelp.Location = new System.Drawing.Point(379, 11);
+            this.btnCSVHelp.Name = "btnCSVHelp";
+            this.btnCSVHelp.Size = new System.Drawing.Size(26, 26);
+            this.btnCSVHelp.TabIndex = 152;
+            this.btnCSVHelp.TabStop = false;
+            this.btnCSVHelp.UseVisualStyleBackColor = true;
+            this.btnCSVHelp.Click += new System.EventHandler(this.btnCSVHelp_Click);
             // 
             // label18
             // 
@@ -543,7 +533,9 @@
             // 
             // openFileDialog1
             // 
+            this.openFileDialog1.DefaultExt = "csv";
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Comma Separated Values|*.csv";
             // 
             // ImportSavedTeamMembersForm
             // 
@@ -608,10 +600,9 @@
         private System.Windows.Forms.ComboBox cboDefaultAgency;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDefaultHelp;
+        private System.Windows.Forms.Button btnUpdateExistingHelp;
+        private System.Windows.Forms.Button btnColumnHelp;
+        private System.Windows.Forms.Button btnCSVHelp;
     }
 }

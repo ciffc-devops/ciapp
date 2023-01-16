@@ -184,13 +184,14 @@ namespace WildfireICSDesktopServices
             float len = bf.GetWidthPoint(text, 8);
             iTextSharp.text.Rectangle pageSize = document.PageSize;
             cb.SetRGBColorFill(100, 100, 100);
+           /*
             cb.BeginText();
             cb.SetFontAndSize(bf, 8);
             cb.SetTextMatrix(pageSize.GetLeft(40), pageSize.GetBottom(getBottomAmount));
             cb.ShowText(text);
             cb.EndText();
             cb.AddTemplate(template, pageSize.GetLeft(40) + len, pageSize.GetBottom(getBottomAmount));
-
+           */
             cb.BeginText();
             cb.SetFontAndSize(bf, 8);
             cb.ShowTextAligned(PdfContentByte.ALIGN_RIGHT,

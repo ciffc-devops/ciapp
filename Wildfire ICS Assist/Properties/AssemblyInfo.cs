@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Canadian Incident Action Plan Producer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This program is designed to assist wildfire incident command staff with completing the required paperwork.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ICS Canada www.icscanada.ca")]
 [assembly: AssemblyProduct("Canadian Incident Action Plan Producer")]
-[assembly: AssemblyCopyright("2022 © Canadian Interagency Forest Fire Centre")]
+[assembly: AssemblyCopyright("© Canadian Interagency Forest Fire Centre")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

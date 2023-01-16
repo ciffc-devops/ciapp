@@ -61,6 +61,34 @@ namespace WF_ICS_ClassLibrary.Models
                     Body = bt.ToString();
                     return true;
 
+                /* Member import */
+                case "CSV":
+                    Title = "Comma Separated Values required";
+                    bt.Append("You must select a Comma Separated Values file (.csv), which is a very simple form of spreadsheet. It should be available as an option when saving files in Excel or other spreadsheet programs. ");
+                    Body = bt.ToString();
+                    return true;
+                case "MemberImportColumns":
+                    Title = "Import Columns";
+                    bt.Append("Use the dropdown boxes to select the appropriate column in your file where each piece of information is found.  If there is a piece of information not covered in your file, select a column that you know will be blank.  For example, if your file has no “Phone Number” column, select an unused column such as “AA”."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    bt.Append("For the “Vegetarian” and “No Gluten” items, your spreadsheet should have “Yes”, “Y”, or “1” to indicate a positive.  For example, someone who is vegetarian and gluten intolerant would have “y” and “y” in those two columns for their row.");
+                    
+                    Body = bt.ToString();
+                    return true;
+                case "UpdateExisting":
+                    Title = "Update Existing Members";
+                    bt.Append("If you select “Update existing members”, the system will try to update someone already in your list rather than adding a new person.  If an individual in your spreadsheet has the same name as someone already in your system, and their phone number, email address, or agency match, the system will assume they’re the same individual.");
+                    Body= bt.ToString();
+                    return true;
+                case "DefaultProvAgency":
+                    Title = "Default Agency and Province/Territory";
+                    bt.Append("The default Agency and Province/Territory specified here will be used when importing members from a spreadsheet when no agency or province/territory is found in the sheet.");
+                    Body = bt.ToString();
+                    return true;
+
+
+
+
+
 
                 /* SAR Sign-In Assist Items */
                 case "SignInAssist-Activity":

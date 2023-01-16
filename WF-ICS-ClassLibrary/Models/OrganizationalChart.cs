@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace WF_ICS_ClassLibrary.Models
 {
-    
+
 
     [ProtoContract]
     [Serializable]
@@ -26,7 +26,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(1)] public int OpPeriod { get; set; }
         [ProtoMember(2)] private DateTime _DatePreparedUTC;
         [ProtoMember(3)] public string PreparedBy { get; set; }
-        [ProtoMember(4)] public List<ICSRole> AllRoles { get; set; }
+        [ProtoMember(4)] private List<ICSRole> _AllRoles;
         [ProtoMember(5)] private DateTime _LastUpdatedUTC;
         [ProtoMember(6)] private Guid _OrganizationalChartID;
         [ProtoMember(7)] private Guid _PreparedByUserID;
@@ -40,14 +40,15 @@ namespace WF_ICS_ClassLibrary.Models
         public bool Active { get => _Active; set => _Active = value; }
         public Guid PreparedByUserID { get => _PreparedByUserID; set => _PreparedByUserID = value; }
         public Guid PreparedByRoleID { get => _PreparedByRoleID; set => _PreparedByRoleID = value; }
-        public string PreparedByRole { get => _PreparedByRole; set => _PreparedByRole= value; }
+        public string PreparedByRole { get => _PreparedByRole; set => _PreparedByRole = value; }
         public Guid OrganizationalChartID { get => _OrganizationalChartID; set => _OrganizationalChartID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public DateTime DatePrepared { get => _DatePreparedUTC.ToLocalTime(); set => _DatePreparedUTC = value.ToUniversalTime(); }
         public DateTime DatePreparedUTC { get => _DatePreparedUTC; set => _DatePreparedUTC = value; }
-      
+        public List<ICSRole> AllRoles { get => _AllRoles; set => _AllRoles = value; }
+        public List<ICSRole> FilledRoles { get { return AllRoles.Where(o => o.teamMember != null && o.teamMember.PersonID != Guid.Empty).ToList(); } }
         public bool IsUnifiedCommand { get => _IsUnifiedCommand; set => _IsUnifiedCommand = value; }
-        
+
         public string getNameByRoleName(string rolename, bool defaultUpChain = true)
         {
             ICSRole role = this.GetRoleByName(rolename);
@@ -100,8 +101,8 @@ namespace WF_ICS_ClassLibrary.Models
             else { return null; }
         }
 
-       
-    
+
+
 
         public OrganizationChart Clone()
         {

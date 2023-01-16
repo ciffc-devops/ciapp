@@ -385,6 +385,12 @@
     <Compile Include="PositionLogViewDetailsForm.Designer.cs">
       <DependentUpon>PositionLogViewDetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintIncidentActionPlanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintIncidentActionPlanForm.Designer.cs">
+      <DependentUpon>PrintIncidentActionPlanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SafetyMessageEditForm.cs">
@@ -579,6 +585,9 @@
     <EmbeddedResource Include="PositionLogViewDetailsForm.resx">
       <DependentUpon>PositionLogViewDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintIncidentActionPlanForm.resx">
+      <DependentUpon>PrintIncidentActionPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -614,6 +623,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-206-WF-Medical-Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-207-WF Incident Organization Chart Unified.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
@@ -655,7 +667,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ics-canada-logo.png" />
+    <None Include="Resources\ics-canada-logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WF-ICS-ClassLibrary\WF-ICS-ClassLibrary.csproj">

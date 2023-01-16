@@ -21,5 +21,10 @@ namespace Wildfire_ICS_Assist
         {
 
         }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

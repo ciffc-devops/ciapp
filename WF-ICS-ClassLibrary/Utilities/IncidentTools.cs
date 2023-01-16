@@ -9,6 +9,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class IncidentTools
     {
+      
         public static string getNameByRoleName(this WFIncident task, int Ops, string roleName, bool defaultUpChain = true)
         {
             string name = null;

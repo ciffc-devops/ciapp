@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
@@ -254,7 +255,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             {
                 if (chkUpdateWhenPossible.Checked)
                 {
-                    List<TeamMember> possibleDuplicates = savedMembers.Where(o => (!string.IsNullOrEmpty(member.Email) && !string.IsNullOrEmpty(o.Email) && o.Email.Equals(member.Email, StringComparison.InvariantCultureIgnoreCase)) || (!string.IsNullOrEmpty(member.Phone) && !string.IsNullOrEmpty(o.Phone) && o.Phone.Equals(member.Phone, StringComparison.InvariantCultureIgnoreCase)) || (((o.Agency == null && member.Agency == null) || (!string.IsNullOrEmpty(member.Agency) && !string.IsNullOrEmpty(o.Agency) && o.Agency.Equals(member.Agency, StringComparison.InvariantCultureIgnoreCase))) && o.Name.Equals(member.Name, StringComparison.InvariantCultureIgnoreCase))).ToList();
+                    List<TeamMember> possibleDuplicates = savedMembers.Where(o => ((!string.IsNullOrEmpty(member.Email) && !string.IsNullOrEmpty(o.Email) && o.Email.Equals(member.Email, StringComparison.InvariantCultureIgnoreCase)) || (!string.IsNullOrEmpty(member.Phone) && !string.IsNullOrEmpty(o.Phone) && o.Phone.Equals(member.Phone, StringComparison.InvariantCultureIgnoreCase)) || ((o.Agency == null && member.Agency == null) || (!string.IsNullOrEmpty(member.Agency) && !string.IsNullOrEmpty(o.Agency) && o.Agency.Equals(member.Agency, StringComparison.InvariantCultureIgnoreCase)))) && (o.Name.Equals(member.Name, StringComparison.InvariantCultureIgnoreCase))).ToList();
                     //If there is more than one duplicate, best to just import this as new rather than trying to decide which one to replace
                     if (possibleDuplicates.Count == 1 || possibleDuplicates.Where(o=>o.MemberActive).Count() == 1)
                     {
@@ -293,6 +294,67 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
             if(ImportedCount + UpdatedCount > 0) { return true; }
             else { return false; }
+        }
+
+        private void btnCSVHelp_Click(object sender, EventArgs e)
+        {
+            HelpInfo info = new HelpInfo();
+            if (info.loadByTopic("CSV"))
+            {
+
+                using (HelpInfoForm help = new HelpInfoForm())
+                {
+                    help.Title = info.Title;
+                    help.Body = info.Body;
+                    help.ShowDialog();
+                }
+            }
+        }
+
+        private void btnColumnHelp_Click(object sender, EventArgs e)
+        {
+            HelpInfo info = new HelpInfo();
+            if (info.loadByTopic("MemberImportColumns"))
+            {
+
+                using (HelpInfoForm help = new HelpInfoForm())
+                {
+                    help.Title = info.Title;
+                    help.Body = info.Body;
+                    help.ShowDialog();
+                }
+            }
+
+        }
+
+        private void btnUpdateExistingHelp_Click(object sender, EventArgs e)
+        {
+            HelpInfo info = new HelpInfo();
+            if (info.loadByTopic("UpdateExisting"))
+            {
+
+                using (HelpInfoForm help = new HelpInfoForm())
+                {
+                    help.Title = info.Title;
+                    help.Body = info.Body;
+                    help.ShowDialog();
+                }
+            }
+        }
+
+        private void btnDefaultHelp_Click(object sender, EventArgs e)
+        {
+            HelpInfo info = new HelpInfo();
+            if (info.loadByTopic("DefaultProvAgency"))
+            {
+
+                using (HelpInfoForm help = new HelpInfoForm())
+                {
+                    help.Title = info.Title;
+                    help.Body = info.Body;
+                    help.ShowDialog();
+                }
+            }
         }
     }
 }

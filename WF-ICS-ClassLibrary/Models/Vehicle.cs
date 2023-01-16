@@ -29,6 +29,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(17)] private bool _Active;
         [ProtoMember(18)] private string _ASE;
         [ProtoMember(19)] private DateTime _LastUpdatedUTC;
+
         public Vehicle()
         {
             VehicleID = Guid.NewGuid();
