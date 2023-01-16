@@ -1012,11 +1012,13 @@
             // 
             this.printThisOperationalPeriodToolStripMenuItem.Name = "printThisOperationalPeriodToolStripMenuItem";
             resources.ApplyResources(this.printThisOperationalPeriodToolStripMenuItem, "printThisOperationalPeriodToolStripMenuItem");
+            this.printThisOperationalPeriodToolStripMenuItem.Click += new System.EventHandler(this.printThisOperationalPeriodToolStripMenuItem_Click);
             // 
             // printThisIncidentToDateToolStripMenuItem
             // 
             this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
             resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
+            this.printThisIncidentToDateToolStripMenuItem.Click += new System.EventHandler(this.printThisIncidentToDateToolStripMenuItem_Click);
             // 
             // operationsToolStripMenuItem
             // 
@@ -1104,6 +1106,7 @@
             // 
             this.additionalContactsToolStripMenuItem.Name = "additionalContactsToolStripMenuItem";
             resources.ApplyResources(this.additionalContactsToolStripMenuItem, "additionalContactsToolStripMenuItem");
+            this.additionalContactsToolStripMenuItem.Click += new System.EventHandler(this.additionalContactsToolStripMenuItem_Click);
             // 
             // planningToolStripMenuItem
             // 

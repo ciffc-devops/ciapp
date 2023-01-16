@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
     {
         private WFIncident CurrentIncident { get => Program.CurrentIncident; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
-        public bool PrintTaskToDate { get; set; } = false;
+        public bool PrintIncidentToDate { get; set; } = false;
 
         public PrintIncidentActionPlanForm()
         {
@@ -34,7 +34,7 @@ namespace Wildfire_ICS_Assist
 
         private void PrintIncidentActionPlanForm_Load(object sender, EventArgs e)
         {
-            if (PrintTaskToDate)
+            if (PrintIncidentToDate)
             {
                 this.Text = "Print Incident " + CurrentIncident.IncidentIdentifier;
                 lblOpPeriodTitle.Text = "Print Incident " + CurrentIncident.IncidentIdentifier;
@@ -125,14 +125,14 @@ namespace Wildfire_ICS_Assist
             fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
 
             string fullOutputFilename = "Task " + CurrentIncident.IncidentIdentifier + " Op " + CurrentOpPeriod;    // + ".pdf";
-            if (PrintTaskToDate) { fullOutputFilename = "Task " + CurrentIncident.IncidentIdentifier + " as of Op " + CurrentOpPeriod; }
+            if (PrintIncidentToDate) { fullOutputFilename = "Task " + CurrentIncident.IncidentIdentifier + " as of Op " + CurrentOpPeriod; }
 
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
             allPDFs.AddRange(buildContentsList());
 
             List<int> OpsToPrint = new List<int>();
-            if (!PrintTaskToDate) { OpsToPrint.Add(CurrentOpPeriod); }
+            if (!PrintIncidentToDate) { OpsToPrint.Add(CurrentOpPeriod); }
             else
             {
                 foreach (OperationalPeriod op in CurrentIncident.AllOperationalPeriods.Where(o => o.PeriodNumber <= CurrentOpPeriod)) { OpsToPrint.Add(op.PeriodNumber); }
@@ -228,7 +228,7 @@ namespace Wildfire_ICS_Assist
         private List<byte[]> buildContentsList()
         {
             List<string> contents = new List<string>();
-            if (PrintTaskToDate)
+            if (PrintIncidentToDate)
             {
                 StringBuilder opNames = new StringBuilder();
 
@@ -314,7 +314,7 @@ namespace Wildfire_ICS_Assist
                 contents.Add("•  Note(s)");
             }
           
-            if (PrintTaskToDate)
+            if (PrintIncidentToDate)
             {
                 return Program.pdfExportService.createOpPeriodContentsList(CurrentIncident, contents, 0);
             }

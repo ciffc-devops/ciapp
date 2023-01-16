@@ -1544,13 +1544,14 @@ namespace Wildfire_ICS_Assist
             OpenPrintIAPForm();
         }
 
-        private void OpenPrintIAPForm()
+        private void OpenPrintIAPForm(bool PrintCompleteIncident = false)
         {
             if (initialDetailsSet())
             {
                 if (printIAPForm == null)
                 {
                     printIAPForm = new PrintIncidentActionPlanForm();
+                    printIAPForm.PrintIncidentToDate = PrintCompleteIncident;
                     printIAPForm.FormClosed += new FormClosedEventHandler(PrintIAPForm_Closed);
                     ActiveForms.Add(printIAPForm);
                     printIAPForm.Show(this);
@@ -1567,5 +1568,19 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        private void additionalContactsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openCommunicationsList();
+        }
+
+        private void printThisOperationalPeriodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPrintIAPForm();
+        }
+
+        private void printThisIncidentToDateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPrintIAPForm(true);
+        }
     }
 }
