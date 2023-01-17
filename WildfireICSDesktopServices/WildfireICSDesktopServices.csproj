@@ -73,7 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactListServices.cs" />
     <Compile Include="FileManagementService.cs" />
     <Compile Include="GeneralOptionsService.cs" />
     <Compile Include="NetworkService.cs" />

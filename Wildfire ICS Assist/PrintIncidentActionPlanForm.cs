@@ -15,13 +15,13 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PrintIncidentActionPlanForm : Form
+    public partial class PrintIncidentForm : Form
     {
         private WFIncident CurrentIncident { get => Program.CurrentIncident; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
         public bool PrintIncidentToDate { get; set; } = false;
-
-        public PrintIncidentActionPlanForm()
+        public bool PrintIAPByDefault { get; set; } = false;
+        public PrintIncidentForm()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
         }
@@ -32,22 +32,54 @@ namespace Wildfire_ICS_Assist
             this.Close();
         }
 
-        private void PrintIncidentActionPlanForm_Load(object sender, EventArgs e)
+        private void PrintIncidentForm_Load(object sender, EventArgs e)
         {
             if (PrintIncidentToDate)
             {
                 this.Text = "Print Incident " + CurrentIncident.IncidentIdentifier;
                 lblOpPeriodTitle.Text = "Print Incident " + CurrentIncident.IncidentIdentifier;
-                setCheckboxStatusIncident();
+                if (PrintIAPByDefault) { setCheckboxStatusIncidentIAP(); }
+                else { setCheckboxStatusIncident(); }
             }
             else
             {
                 this.Text = "Print Operational Period";
                 lblOpPeriodTitle.Text = "Print Operational Period #" + CurrentOpPeriod;
-                setCheckboxStatusOpPeriod();
+                if (PrintIAPByDefault) { setCheckboxeStatusIAP(); }
+                else { setCheckboxStatusOpPeriod(); }
             }
         }
 
+        private void setCheckboxeStatusIAP()
+        {
+            chkIncidentObjectives.Enabled = CurrentIncident.hasMeaningfulObjectives(CurrentOpPeriod);
+            chkIncidentObjectives.Checked = chkIncidentObjectives.Enabled;
+
+            chkCommsPlan.Enabled = CurrentIncident.hasMeangfulCommsPlan(CurrentOpPeriod);
+            chkCommsPlan.Checked = chkCommsPlan.Enabled;
+
+            chkMedPlan.Enabled = CurrentIncident.hasMeaningfulMedicalPlan(CurrentOpPeriod);
+            chkMedPlan.Checked = chkMedPlan.Enabled;
+
+            chkOrgChart.Enabled = CurrentIncident.hasMeaningfulOrgChart(CurrentOpPeriod);
+
+            //additional contacts
+            chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
+
+
+            chkSafetyMessage.Enabled = CurrentIncident.allSafetyMessages.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
+            chkSafetyMessage.Checked = chkSafetyMessage.Enabled;
+
+            chkGeneralMessages.Enabled = CurrentIncident.AllGeneralMessages.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
+
+            chkNotes.Enabled = CurrentIncident.allNotes.Any(o => o.Active && o.OpPeriod == CurrentOpPeriod);
+
+            chkActivityLog.Enabled = CurrentIncident.allPositionLogEntries.Any(o => o.OpPeriod == CurrentOpPeriod);
+            chkActivityLog.Checked = chkActivityLog.Enabled;
+            chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
+
+            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
+        }
         private void setCheckboxStatusOpPeriod()
         {
             chkIncidentObjectives.Enabled = CurrentIncident.hasMeaningfulObjectives(CurrentOpPeriod);
@@ -62,7 +94,10 @@ namespace Wildfire_ICS_Assist
             chkOrgChart.Enabled = CurrentIncident.hasMeaningfulOrgChart(CurrentOpPeriod);
             chkOrgChart.Checked = chkOrgChart.Enabled;
 
-            chkSafetyMessage.Enabled = CurrentIncident.allSafetyMessages.Any(o=>o.OpPeriod == CurrentOpPeriod && o.Active);
+            chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
+            chkContacts.Checked = chkContacts.Enabled;
+
+            chkSafetyMessage.Enabled = CurrentIncident.allSafetyMessages.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
             chkSafetyMessage.Checked = chkSafetyMessage.Enabled;
 
             chkGeneralMessages.Enabled = CurrentIncident.AllGeneralMessages.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
@@ -76,7 +111,8 @@ namespace Wildfire_ICS_Assist
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
             chkVerboseActivityLog.Checked = chkVerboseActivityLog.Enabled;
 
-
+            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
+            chkSupportVehicles.Checked = chkSupportVehicles.Enabled;
 
 
 
@@ -90,19 +126,23 @@ namespace Wildfire_ICS_Assist
             chkCommsPlan.Enabled = CurrentIncident.allCommsPlans.Any(o => o.ActiveCommsItems.Any());
             chkCommsPlan.Checked = chkCommsPlan.Enabled;
 
-            chkMedPlan.Enabled = CurrentIncident.allMedicalPlans.Any(o=>o.ActiveAmbulances.Any() || o.ActiveAidStations.Any() || o.ActiveHospitals.Any());
+            chkMedPlan.Enabled = CurrentIncident.allMedicalPlans.Any(o => o.ActiveAmbulances.Any() || o.ActiveAidStations.Any() || o.ActiveHospitals.Any());
             chkMedPlan.Checked = chkMedPlan.Enabled;
 
-            chkOrgChart.Enabled = CurrentIncident.allOrgCharts.Any(o=>o.FilledRoles.Any());
+            chkOrgChart.Enabled = CurrentIncident.allOrgCharts.Any(o => o.FilledRoles.Any());
             chkOrgChart.Checked = chkOrgChart.Enabled;
 
-            chkSafetyMessage.Enabled = CurrentIncident.allSafetyMessages.Any(o =>  o.Active);
+            chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
+            chkContacts.Checked = chkContacts.Enabled;
+
+
+            chkSafetyMessage.Enabled = CurrentIncident.allSafetyMessages.Any(o => o.Active);
             chkSafetyMessage.Checked = chkSafetyMessage.Enabled;
 
             chkGeneralMessages.Enabled = CurrentIncident.AllGeneralMessages.Any(o => o.Active);
             chkGeneralMessages.Checked = chkGeneralMessages.Enabled;
 
-            chkNotes.Enabled = CurrentIncident.allNotes.Any(o => o.Active );
+            chkNotes.Enabled = CurrentIncident.allNotes.Any(o => o.Active);
             chkNotes.Checked = chkNotes.Enabled;
 
             chkActivityLog.Enabled = CurrentIncident.allPositionLogEntries.Any();
@@ -110,7 +150,39 @@ namespace Wildfire_ICS_Assist
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
             chkVerboseActivityLog.Checked = chkVerboseActivityLog.Enabled;
 
+            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o =>  o.Active);
+            chkSupportVehicles.Checked = chkSupportVehicles.Enabled;
 
+
+        }
+        private void setCheckboxStatusIncidentIAP()
+        {
+            chkIncidentObjectives.Enabled = CurrentIncident.allIncidentObjectives.Any(o => o.Objectives.Any(i => i.Active));
+            chkIncidentObjectives.Checked = chkIncidentObjectives.Enabled;
+
+            chkCommsPlan.Enabled = CurrentIncident.allCommsPlans.Any(o => o.ActiveCommsItems.Any());
+            chkCommsPlan.Checked = chkCommsPlan.Enabled;
+
+            chkMedPlan.Enabled = CurrentIncident.allMedicalPlans.Any(o => o.ActiveAmbulances.Any() || o.ActiveAidStations.Any() || o.ActiveHospitals.Any());
+            chkMedPlan.Checked = chkMedPlan.Enabled;
+
+            chkOrgChart.Enabled = CurrentIncident.allOrgCharts.Any(o => o.FilledRoles.Any());
+
+            chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
+
+
+            chkSafetyMessage.Enabled = CurrentIncident.allSafetyMessages.Any(o => o.Active);
+            chkSafetyMessage.Checked = chkSafetyMessage.Enabled;
+
+            chkGeneralMessages.Enabled = CurrentIncident.AllGeneralMessages.Any(o => o.Active);
+
+            chkNotes.Enabled = CurrentIncident.allNotes.Any(o => o.Active);
+
+            chkActivityLog.Enabled = CurrentIncident.allPositionLogEntries.Any();
+            chkActivityLog.Checked = chkActivityLog.Enabled;
+            chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
+
+            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.Active);
 
 
         }
@@ -175,6 +247,13 @@ namespace Wildfire_ICS_Assist
                     allPDFs.AddRange(Program.pdfExportService.exportSafetyMessagesToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked));
                 }
 
+                //Contacts
+                if (chkContacts.Checked)
+                {
+                    allPDFs.AddRange(Program.pdfExportService.exportContactsToPDF(CurrentIncident, CurrentOpPeriod, null, null, chkFlattenPDF.Checked));
+                }
+
+
                 //general msg
                 if (chkGeneralMessages.Checked)
                 {
@@ -203,6 +282,13 @@ namespace Wildfire_ICS_Assist
                         }
                     }
                 }
+
+                if (chkSupportVehicles.Checked)
+                {
+                    allPDFs.AddRange(Program.pdfExportService.exportVehiclesToPDF(CurrentIncident, CurrentOpPeriod, null, null, chkFlattenPDF.Checked));
+
+                }
+
 
                 if (chkNotes.Checked)
                 {
@@ -246,21 +332,12 @@ namespace Wildfire_ICS_Assist
             }
 
 
-            if (chkIncidentObjectives.Checked)
-            {
-                contents.Add("• ICS-202 WF Incident Objectives");
-            }
+            if (chkIncidentObjectives.Checked) { contents.Add("• ICS-202 WF Incident Objectives"); }
 
 
-            if (chkCommsPlan.Checked)
-            {
-                contents.Add("• ICS-205 WF Communications Plan");
-            }
+            if (chkCommsPlan.Checked) { contents.Add("• ICS-205 WF Communications Plan"); }
             //medical
-            if (chkMedPlan.Checked)
-            {
-                contents.Add("• ICS-206 WF Medical Plan");
-            }
+            if (chkMedPlan.Checked) { contents.Add("• ICS-206 WF Medical Plan"); }
             //org
             if (chkOrgAssignments.Checked)
             {
@@ -272,16 +349,14 @@ namespace Wildfire_ICS_Assist
 
             }
             //safety
-            if (chkSafetyMessage.Checked)
-            {
-                contents.Add("• ICS-208 WF Safety Message/Plan(s)");
-            }
+            if (chkSafetyMessage.Checked) { contents.Add("• ICS-208 WF Safety Message/Plan(s)"); }
+
+
+
+            if (chkContacts.Checked) { contents.Add("• ICS-205A Communications List"); }
 
             //general msg
-            if (chkGeneralMessages.Checked)
-            {
-                contents.Add("• ICS-213 WF General Message(s)");
-            }
+            if (chkGeneralMessages.Checked) { contents.Add("• ICS-213 WF General Message(s)"); }
 
 
 
@@ -308,12 +383,9 @@ namespace Wildfire_ICS_Assist
 
             }
 
-          
-            if (chkNotes.Checked)
-            {
-                contents.Add("•  Note(s)");
-            }
-          
+            if (chkSupportVehicles.Checked) { contents.Add("•  ICS-218 Support Vehicle(s)"); }
+            if (chkNotes.Checked) { contents.Add("•  Note(s)"); }
+
             if (PrintIncidentToDate)
             {
                 return Program.pdfExportService.createOpPeriodContentsList(CurrentIncident, contents, 0);

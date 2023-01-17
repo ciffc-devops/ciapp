@@ -112,7 +112,7 @@ namespace Wildfire_ICS_Assist
         NotesForm notesForm = null;
         SafetyMessagesForm safetyMessagesForm = null;
         VehiclesForm vehiclesForm = null;
-        PrintIncidentActionPlanForm printIAPForm = null;
+        PrintIncidentForm printIAPForm = null;
 
 
         /* Event Handlers!*/
@@ -1541,16 +1541,17 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrintIAP_Click(object sender, EventArgs e)
         {
-            OpenPrintIAPForm();
+            OpenPrintIAPForm(false, true);
         }
 
-        private void OpenPrintIAPForm(bool PrintCompleteIncident = false)
+        private void OpenPrintIAPForm(bool PrintCompleteIncident = false, bool DefaultJustIAP = false)
         {
             if (initialDetailsSet())
             {
                 if (printIAPForm == null)
                 {
-                    printIAPForm = new PrintIncidentActionPlanForm();
+                    printIAPForm = new PrintIncidentForm();
+                    printIAPForm.PrintIAPByDefault = DefaultJustIAP;
                     printIAPForm.PrintIncidentToDate = PrintCompleteIncident;
                     printIAPForm.FormClosed += new FormClosedEventHandler(PrintIAPForm_Closed);
                     ActiveForms.Add(printIAPForm);
@@ -1575,12 +1576,12 @@ namespace Wildfire_ICS_Assist
 
         private void printThisOperationalPeriodToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenPrintIAPForm();
+            OpenPrintIAPForm(false, false);
         }
 
         private void printThisIncidentToDateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenPrintIAPForm(true);
+            OpenPrintIAPForm(true, false);
         }
     }
 }

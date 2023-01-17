@@ -151,7 +151,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-            string path = ContactListServices.createContactsPDF(Program.CurrentIncident, Program.CurrentOpPeriod, preparedByName, preparedByTitle, false, false);
+            string path = Program.pdfExportService.createContactsPDF(Program.CurrentIncident, Program.CurrentOpPeriod, preparedByName, preparedByTitle, false, false);
             if (!string.IsNullOrEmpty(path))
             {
                 try { System.Diagnostics.Process.Start(path); }
