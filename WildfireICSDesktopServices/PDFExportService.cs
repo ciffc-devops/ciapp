@@ -73,20 +73,7 @@ namespace WildfireICSDesktopServices
 
             //fullFilepath = System.IO.Path.Combine(fullFilepath, fullOutputFilename);
 
-            //Lost Person Questionnaire
-            if (includeLPQ)
-            {
-                string lostpath = createLostPersonQuestionnairePDF(task, true, OpPeriodToExport);
-                using (FileStream stream = File.OpenRead(lostpath))
-                {
-                    byte[] fileBytes = new byte[stream.Length];
-
-                    stream.Read(fileBytes, 0, fileBytes.Length);
-                    stream.Close();
-                    allPDFs.Add(fileBytes);
-                }
-            }
-
+          
 
 
 
@@ -170,7 +157,7 @@ namespace WildfireICSDesktopServices
                     preparedByTitle = "Logistics Section Chief";
                 }
 
-                string contactsPath = ContactListServices.createContactsPDF(task, OpPeriodToExport, preparedByName, preparedByTitle, false, false);
+                string contactsPath = createContactsPDF(task, OpPeriodToExport, preparedByName, preparedByTitle, false, false);
                 if (!string.IsNullOrEmpty(contactsPath))
                 {
                     using (FileStream stream = File.OpenRead(contactsPath))
@@ -1517,85 +1504,183 @@ namespace WildfireICSDesktopServices
 
 
 
-        private string createLostPersonQuestionnairePDF(WFIncident task, bool tempFileName = false, int OpPeriodToExport = 0)
+        public List<byte[]> exportContactsToPDF(WFIncident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
         {
+            List<byte[]> allPDFs = new List<byte[]>();
 
-            string path = FileAccessClasses.getWritablePath(task);
-            if (!tempFileName)
+            string path = createContactsPDF(task, OpPeriodToExport, PreparedByName, PreparedByRoleName, true, flattenPDF);
+            if (path != null)
             {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
 
-
-                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-
-                string outputFileName = "ICS 302 - Task " + task.TaskNumber + " - Op " + OpPeriodToExport + " - Lost Person Questionnaire";
-                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
-
-                //path = System.IO.Path.Combine(path, outputFileName);
-            }
-            else
-            {
-                path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
             }
 
+            return allPDFs;
+        }
+
+        public  string createContactsPDF(WFIncident task, int OpPeriod, string createdBy, string createdByTitle, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+            string outputFileName = "ICS 205A - Task " + task.IncidentIdentifier + " - Communications List " + OpPeriod.ToString() + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = "BlankForms/ICS205A-CommunicationsList.pdf";
             try
             {
 
-
-                OrganizationChart currentChart = new OrganizationChart();
-                if (task.allOrgCharts.Where(o => o.OpPeriod == OpPeriodToExport).Any())
+                using (PdfReader rdr = new PdfReader(fileToUse))
                 {
-                    currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpPeriodToExport).First();
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+
+
+                    OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
+
+                    stamper.AcroFields.SetField("1 Incident Name", task.IncidentIdentifier);
+
+
+                    stamper.AcroFields.SetField("Text44", string.Format("{0:yyyy-MMM-dd HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Text45", string.Format("{0:yyyy-MMM-dd HH:mm}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Text48", string.Format("{0:yyyy-MMM-dd HH:mm}", DateTime.Now));
+                    stamper.AcroFields.SetField("Name", createdBy);
+                    stamper.AcroFields.SetField("Text46", createdByTitle);
+
+                    for (int x = 0; x < task.allContacts.Count && x < 34; x++)
+                    {
+                        //
+                        stamper.AcroFields.SetField("Incident Assigned PositionRow" + (x + 1), task.allContacts[x].OrgAndTitle);
+                        stamper.AcroFields.SetField("ContactName" + (x + 1), task.allContacts[x].ContactName);
+                        stamper.AcroFields.SetField("Methods of Contact phone pager cell etcRow" + (x + 1), task.allContacts[x].AllContactMethods);
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
                 }
-
-
-                string fileToUse = "ICSForms/ICS 302 - Lost Person Questionaire.pdf";
-
-
-                PdfReader rdr = new PdfReader(fileToUse);
-                PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
-
-
-                //Op Plan
-
-                //Top Section
-                stamper.AcroFields.SetField("302TASK", task.TaskNumber);
-                stamper.AcroFields.SetField("302TASK NAME", task.TaskName);
-
-                stamper.AcroFields.SetField("302DATE  TIME PREPARED", string.Format(Globals.cultureInfo, "{0:yyyy-MMM-dd HH:mm}", DateTime.Now));
-                stamper.AcroFields.SetField("INTERVIEWED BY PLANNING", currentChart.getNameByRoleName("Planning Section Chief"));
-                stamper.AcroFields.SetField("302POLICEBCAS FILE", task.AgencyFileNumber);
-
-
-                AcroFields af = stamper.AcroFields;
-
-                List<string> fieldNames = new List<string>();
-                foreach (var field in af.Fields)
-                {
-                    fieldNames.Add(field.Key);
-                }
-                foreach (string s in fieldNames)
-                {
-                    stamper.AcroFields.RenameField(s, s + "-302");
-                }
-
-
-                stamper.Close();//Close a PDFStamper Object
-                rdr.Close();    //Close a PDFReader Object
-
-
-
             }
-            catch (IOException ex)
+            catch (Exception)
             {
-
-            }
-            catch (System.UnauthorizedAccessException)
-            {
-
+                path = null;
             }
             return path;
         }
 
+
+
+        public List<byte[]> exportVehiclesToPDF(WFIncident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName,  bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createVehiclePDF(task, OpPeriodToExport, PreparedByName, PreparedByRoleName, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
+        public string createVehiclePDF(WFIncident task, int OpPeriod, string PreparedByName, string PreparedByRoleName, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+            string outputFileName = "ICS 218 - Task " + task.TaskNumber + " - Support Vehicle Equipment Inventory " + OpPeriod.ToString() + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = "BlankForms/ICS 218 - Support Vehicle Equipment Inventory.pdf";
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+
+
+                    stamper = buildVehiclePDFContents(stamper, task, OpPeriod, PreparedByName, PreparedByRoleName, flattenPDF);
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+            return path;
+        }
+
+        private PdfStamper buildVehiclePDFContents(PdfStamper stamper, WFIncident task, int OpsPeriod, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
+        {
+            OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpsPeriod).First();
+
+            stamper.AcroFields.SetField("1 INCIDENT NAME", task.TaskName);
+            stamper.AcroFields.SetField("2 INCIDENT NUMBER", task.TaskNumber);
+
+
+            stamper.AcroFields.SetField("3. DATE/TIME PREPARED Date", string.Format("{0:yyyy-MMM-dd}", DateTime.Now));
+            stamper.AcroFields.SetField("3. DATE/TIME PREPARED Time", string.Format("{0:HH:mm}", DateTime.Now));
+            stamper.AcroFields.SetField("6. PREPARED BY Name", PreparedByName + " - " + PreparedByRoleName);
+
+
+            for (int x = 0; x < task.allVehicles.Where(o => o.OpPeriod == OpsPeriod).Count() && x < 13; x++)
+            {
+                //
+                stamper.AcroFields.SetField("Order Request NoRow" + (x + 1), task.allVehicles[x].OrderRequestNo);
+                stamper.AcroFields.SetField("Incident ID NoRow" + (x + 1), task.allVehicles[x].IncidentIDNo);
+                stamper.AcroFields.SetField("Vehicle or Equipment ClassificationRow" + (x + 1), task.allVehicles[x].Classification);
+                stamper.AcroFields.SetField("Vehicle or Equipment MakeRow" + (x + 1), task.allVehicles[x].Make);
+                stamper.AcroFields.SetField("Category KindType Capacity or SizeRow" + (x + 1), task.allVehicles[x].CategoryKindCapacity);
+                stamper.AcroFields.SetField("Vehicle or Equipment Features Row" + (x + 1), task.allVehicles[x].Features);
+                stamper.AcroFields.SetField("Agency or OwnerRow" + (x + 1), task.allVehicles[x].AgencyOrOwner);
+                stamper.AcroFields.SetField("Operator Name or ContactRow" + (x + 1), task.allVehicles[x].OperatorName);
+                stamper.AcroFields.SetField("Vehicle License or ID NoRow" + (x + 1), task.allVehicles[x].LicenseOrID);
+                stamper.AcroFields.SetField("Incident AssignmentRow" + (x + 1), task.allVehicles[x].IncidentAssignment);
+                stamper.AcroFields.SetField("Incident Start Date and TimeRow" + (x + 1), task.allVehicles[x].StartTime.ToString("yyyy-MMM-dd HH:mm"));
+                stamper.AcroFields.SetField("Incident Release Date and TimeRow" + (x + 1), task.allVehicles[x].MustBeOutTime.ToString("yyyy-MMM-dd HH:mm"));
+
+            }
+
+
+            if (flattenPDF)
+            {
+                stamper.FormFlattening = true;
+            }
+
+            return stamper;
+        }
 
 
         public List<byte[]> exportBriefingToBytes(int OpPeriodToExport, WFIncident task)
