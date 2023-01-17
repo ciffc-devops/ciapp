@@ -136,6 +136,8 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.NoteChanged += Program_NoteChanged;
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
+            Program.wfIncidentService.CommsPlanChanged+= Program_CommsPlanChanged;
+            Program.wfIncidentService.CommsPlanItemChanged+= Program_CommsPlanItemChanged;
         }
 
 
@@ -601,6 +603,19 @@ namespace Wildfire_ICS_Assist
             {
                 if (Program.generalOptionsService.GetOptionsBoolValue("AutoSave") && lastSaveSuccessful) { if (initialDetailsSet(false, false)) { if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { saveFile(false, false); } } }
             }
+
+        }
+
+        private void Program_CommsPlanChanged(CommsPlanEventArgs e)
+        {
+            if(e.item.OpsPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            TriggerAutoSave();
+        }
+
+        private void Program_CommsPlanItemChanged(CommsPlanItemEventArgs e)
+        {
+            if (e.item.OpsPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            TriggerAutoSave();
 
         }
 
@@ -1582,6 +1597,21 @@ namespace Wildfire_ICS_Assist
         private void printThisIncidentToDateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenPrintIAPForm(true, false);
+        }
+
+        private void btnVehicles_Click(object sender, EventArgs e)
+        {
+            OpenVehiclesForm();
+        }
+
+        private void btnAdditionalContacts_Click(object sender, EventArgs e)
+        {
+            openCommunicationsList();
+        }
+
+        private void btnNotes_Click(object sender, EventArgs e)
+        {
+            OpenNotesForm();
         }
     }
 }

@@ -780,7 +780,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlOpsPeriod.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="btnCloseOpPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1221,7 +1221,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlTaskInfo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1821,7 +1821,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblServerStatus.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblVersionNumber.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1857,7 +1857,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVersionNumber.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="tcStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1969,7 +1969,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAATgBAgE4AQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAWgBAgFoAQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2018,6 +2018,9 @@
   <data name="tcStatus.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
+  <data name="tcStatus.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;tcStatus.Name" xml:space="preserve">
     <value>tcStatus</value>
   </data>
@@ -2028,7 +2031,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tcStatus.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="txtNetworkLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2133,7 +2136,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btnCancelInternetSync.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2352,7 +2355,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblNetworkShareMoreInfoMsg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2525,144 +2528,6 @@
   <data name="menuStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14pt</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 29</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 29</value>
-  </data>
-  <data name="editToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="incidentActionPlanToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="incidentActionPlanToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Italic</value>
-  </data>
-  <data name="incidentActionPlanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="incidentActionPlanToolStripMenuItem.Text" xml:space="preserve">
-    <value>Incident Action Plan</value>
-  </data>
-  <data name="incidentObjectivesICS202ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="incidentObjectivesICS202ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Incident Objectives (ICS 202)</value>
-  </data>
-  <data name="communicationsPlanICS205ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="communicationsPlanICS205ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Communications Plan (ICS 205)</value>
-  </data>
-  <data name="medicalPlanICS206ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="medicalPlanICS206ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Medical Plan (ICS 206)</value>
-  </data>
-  <data name="organizationChartICS207ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="organizationChartICS207ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Organization Chart (ICS 207)</value>
-  </data>
-  <data name="safetyMessageICS208ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="safetyMessageICS208ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Safety Message (ICS 208)</value>
-  </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 6</value>
-  </data>
-  <data name="additionalDocumentsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="additionalDocumentsToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Italic</value>
-  </data>
-  <data name="additionalDocumentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="additionalDocumentsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Additional Documents</value>
-  </data>
-  <data name="communicationsListICS205AToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="communicationsListICS205AToolStripMenuItem.Text" xml:space="preserve">
-    <value>Communications List (ICS 205A)</value>
-  </data>
-  <data name="generalMessageICS213ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="generalMessageICS213ToolStripMenuItem.Text" xml:space="preserve">
-    <value>General Message (ICS 213)</value>
-  </data>
-  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 6</value>
-  </data>
-  <data name="printThisOperationalPeriodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="printThisOperationalPeriodToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print this Operational Period</value>
-  </data>
-  <data name="printThisIncidentToDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 30</value>
-  </data>
-  <data name="printThisIncidentToDateToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print this Incident to date</value>
-  </data>
-  <data name="iAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 29</value>
-  </data>
-  <data name="iAPToolStripMenuItem.Text" xml:space="preserve">
-    <value>IAP</value>
-  </data>
-  <data name="operationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 29</value>
-  </data>
-  <data name="operationsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Operations</value>
-  </data>
-  <data name="logisticsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 29</value>
-  </data>
-  <data name="logisticsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Logistics</value>
-  </data>
-  <data name="planningToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 29</value>
-  </data>
-  <data name="planningToolStripMenuItem.Text" xml:space="preserve">
-    <value>Planning</value>
-  </data>
-  <data name="adminFinanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 29</value>
-  </data>
-  <data name="adminFinanceToolStripMenuItem.Text" xml:space="preserve">
-    <value>Admin / Finance</value>
-  </data>
-  <data name="networkInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 29</value>
-  </data>
-  <data name="networkInternetToolStripMenuItem.Text" xml:space="preserve">
-    <value>Network / Internet</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 29</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -2685,7 +2550,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 29</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="newIncidentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>298, 30</value>
@@ -2734,6 +2605,12 @@
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
+  </data>
+  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 29</value>
+  </data>
+  <data name="editToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 30</value>
@@ -2825,6 +2702,102 @@
   <data name="safetyNotesToolStripMenuItem.Text" xml:space="preserve">
     <value>Safety Notes</value>
   </data>
+  <data name="iAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 29</value>
+  </data>
+  <data name="iAPToolStripMenuItem.Text" xml:space="preserve">
+    <value>IAP</value>
+  </data>
+  <data name="incidentActionPlanToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="incidentActionPlanToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Italic</value>
+  </data>
+  <data name="incidentActionPlanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="incidentActionPlanToolStripMenuItem.Text" xml:space="preserve">
+    <value>Incident Action Plan</value>
+  </data>
+  <data name="incidentObjectivesICS202ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="incidentObjectivesICS202ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Incident Objectives (ICS 202)</value>
+  </data>
+  <data name="communicationsPlanICS205ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="communicationsPlanICS205ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Communications Plan (ICS 205)</value>
+  </data>
+  <data name="medicalPlanICS206ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="medicalPlanICS206ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Medical Plan (ICS 206)</value>
+  </data>
+  <data name="organizationChartICS207ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="organizationChartICS207ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Organization Chart (ICS 207)</value>
+  </data>
+  <data name="safetyMessageICS208ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="safetyMessageICS208ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Safety Message (ICS 208)</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 6</value>
+  </data>
+  <data name="additionalDocumentsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="additionalDocumentsToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Italic</value>
+  </data>
+  <data name="additionalDocumentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="additionalDocumentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Additional Documents</value>
+  </data>
+  <data name="communicationsListICS205AToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="communicationsListICS205AToolStripMenuItem.Text" xml:space="preserve">
+    <value>Communications List (ICS 205A)</value>
+  </data>
+  <data name="generalMessageICS213ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="generalMessageICS213ToolStripMenuItem.Text" xml:space="preserve">
+    <value>General Message (ICS 213)</value>
+  </data>
+  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 6</value>
+  </data>
+  <data name="printThisOperationalPeriodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="printThisOperationalPeriodToolStripMenuItem.Text" xml:space="preserve">
+    <value>Print this Operational Period</value>
+  </data>
+  <data name="printThisIncidentToDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 30</value>
+  </data>
+  <data name="printThisIncidentToDateToolStripMenuItem.Text" xml:space="preserve">
+    <value>Print this Incident to date</value>
+  </data>
+  <data name="operationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 29</value>
+  </data>
+  <data name="operationsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Operations</value>
+  </data>
   <data name="positionLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 30</value>
   </data>
@@ -2833,6 +2806,12 @@
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 6</value>
+  </data>
+  <data name="logisticsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 29</value>
+  </data>
+  <data name="logisticsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Logistics</value>
   </data>
   <data name="positionLogToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 30</value>
@@ -2894,6 +2873,12 @@
   <data name="additionalContactsToolStripMenuItem.Text" xml:space="preserve">
     <value>Communications List</value>
   </data>
+  <data name="planningToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 29</value>
+  </data>
+  <data name="planningToolStripMenuItem.Text" xml:space="preserve">
+    <value>Planning</value>
+  </data>
   <data name="positionLogToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 30</value>
   </data>
@@ -2921,11 +2906,23 @@
   <data name="notesToolStripMenuItem.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
+  <data name="adminFinanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 29</value>
+  </data>
+  <data name="adminFinanceToolStripMenuItem.Text" xml:space="preserve">
+    <value>Admin / Finance</value>
+  </data>
   <data name="positionLogToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 30</value>
   </data>
   <data name="positionLogToolStripMenuItem3.Text" xml:space="preserve">
     <value>Activity Log</value>
+  </data>
+  <data name="networkInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 29</value>
+  </data>
+  <data name="networkInternetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Network / Internet</value>
   </data>
   <data name="localNetworkSharingSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>329, 30</value>
@@ -2956,6 +2953,12 @@
   </data>
   <data name="requestOptionsFromServerToolStripMenuItem.Text" xml:space="preserve">
     <value>Request Options from server</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 29</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="checkForTemplateUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>319, 30</value>
@@ -3015,7 +3018,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;llProgramURL.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3042,7 +3045,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="svdTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1738, 17</value>
@@ -3213,7 +3216,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpIncidentActionPlan.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btnIncidentSummary.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -4623,45 +4626,6 @@
   <data name="cpPlanning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;btnNotes.Name" xml:space="preserve">
-    <value>btnNotes</value>
-  </data>
-  <data name="&gt;&gt;btnNotes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnNotes.Parent" xml:space="preserve">
-    <value>cpPlanning</value>
-  </data>
-  <data name="&gt;&gt;btnNotes.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cpPlanning.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="cpPlanning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>602, 386</value>
-  </data>
-  <data name="cpPlanning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="cpPlanning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 40</value>
-  </data>
-  <data name="cpPlanning.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="&gt;&gt;cpPlanning.Name" xml:space="preserve">
-    <value>cpPlanning</value>
-  </data>
-  <data name="&gt;&gt;cpPlanning.Type" xml:space="preserve">
-    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Producer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cpPlanning.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cpPlanning.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="btnNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
@@ -4711,6 +4675,33 @@
   <data name="&gt;&gt;btnNotes.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="cpPlanning.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="cpPlanning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 386</value>
+  </data>
+  <data name="cpPlanning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
+  <data name="cpPlanning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 270</value>
+  </data>
+  <data name="cpPlanning.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;cpPlanning.Name" xml:space="preserve">
+    <value>cpPlanning</value>
+  </data>
+  <data name="&gt;&gt;cpPlanning.Type" xml:space="preserve">
+    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Producer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cpPlanning.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cpPlanning.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="cpLogistics.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -4739,7 +4730,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpLogistics.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="cpOperations.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4829,7 +4820,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpOperations.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="btnOpsAssignments.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>

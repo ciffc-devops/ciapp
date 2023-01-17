@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -290,9 +290,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1387,6 +1387,7 @@
             resources.ApplyResources(this.btnAdditionalContacts, "btnAdditionalContacts");
             this.btnAdditionalContacts.Name = "btnAdditionalContacts";
             this.btnAdditionalContacts.UseVisualStyleBackColor = true;
+            this.btnAdditionalContacts.Click += new System.EventHandler(this.btnAdditionalContacts_Click);
             // 
             // btnEquipment
             // 
@@ -1399,6 +1400,7 @@
             resources.ApplyResources(this.btnVehicles, "btnVehicles");
             this.btnVehicles.Name = "btnVehicles";
             this.btnVehicles.UseVisualStyleBackColor = true;
+            this.btnVehicles.Click += new System.EventHandler(this.btnVehicles_Click);
             // 
             // btnLogisticsDashboard
             // 
@@ -1433,7 +1435,7 @@
             // cpPlanning
             // 
             resources.ApplyResources(this.cpPlanning, "cpPlanning");
-            this.cpPlanning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpPlanning.BackColor = System.Drawing.Color.White;
             this.cpPlanning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpPlanning.CollapsedHeight = 40;
             this.cpPlanning.CollapsedWidth = 485;
@@ -1443,7 +1445,7 @@
             this.cpPlanning.Controls.Add(this.btnTeamAssignments);
             this.cpPlanning.Controls.Add(this.btnPlanningDashboard);
             this.cpPlanning.Controls.Add(this.btnTimeline);
-            this.cpPlanning.CurrentlyCollapsed = true;
+            this.cpPlanning.CurrentlyCollapsed = false;
             this.cpPlanning.ExpandedHeight = 270;
             this.cpPlanning.ExpandedWidth = 485;
             this.cpPlanning.Name = "cpPlanning";
@@ -1454,6 +1456,7 @@
             resources.ApplyResources(this.btnNotes, "btnNotes");
             this.btnNotes.Name = "btnNotes";
             this.btnNotes.UseVisualStyleBackColor = true;
+            this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
             // 
             // cpLogistics
             // 
@@ -1530,6 +1533,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            this.Controls.Add(this.cpPlanning);
             this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
@@ -1541,9 +1545,8 @@
             this.Controls.Add(this.lblVersionNumber);
             this.Controls.Add(this.tcStatus);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.cpLogistics);
-            this.Controls.Add(this.cpPlanning);
             this.Controls.Add(this.cpOperations);
+            this.Controls.Add(this.cpLogistics);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
