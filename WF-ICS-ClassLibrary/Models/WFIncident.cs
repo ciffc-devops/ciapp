@@ -77,6 +77,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             allVehicles = new List<Vehicle>();
             allTaskUpdates = new List<TaskUpdate>();
             allSafetyMessages = new List<SafetyMessage>();
+            allAirOperationsSummaries = new List<AirOperationsSummary>();
             TaskEncryptionKey = Utilities.RandomPasswordGenerator.GeneratePassword();
         }
 
@@ -100,7 +101,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(18)] private List<MedicalPlan> _allMedicalPlans;
         [ProtoMember(19)] private List<CommsPlan> _allCommsPlans;
         [ProtoMember(20)] private List<CommsPlanItem> _additionalCommsItems;
-        //  [ProtoMember(21)] private List<SubjectProfile> _allSubjectProfiles;
+        [ProtoMember(21)] private List<AirOperationsSummary> _allAirOperationsSummaries;
+        
         
         [ProtoMember(22)] private List<CommsLogEntry> _allCommsLogEntries;
         [ProtoMember(23)] private string _DocumentPath;
@@ -251,7 +253,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<Vehicle> allVehicles { get { if (_allVehicles == null) { _allVehicles = new List<Vehicle>(); } return _allVehicles; } set => _allVehicles = value; }
         public List<PositionLogEntry> allPositionLogEntries { get => _allPositionLogEntries; set => _allPositionLogEntries = value; }
         public List<TaskUpdate> allTaskUpdates { get => _allTaskUpdates; set => _allTaskUpdates = value; }
-
+        public List<AirOperationsSummary> allAirOperationsSummaries { get => _allAirOperationsSummaries; set => _allAirOperationsSummaries = value; }
 
 
 
@@ -467,6 +469,13 @@ ProtoInclude(127, typeof(SubjectProfile)),
         }
 
 
+        public bool hasMeaningfulAirOps(int ops)
+        {
+            if(!allAirOperationsSummaries.Any(o=>o.OpPeriod == ops && o.Active)) { return false; }
+            AirOperationsSummary sum = allAirOperationsSummaries.First(o => o.OpPeriod == ops && o.Active);
+            if (sum.aircrafts.Any()) { return true; } 
+            return false; 
+        }
 
         public bool hasMeaningfulOrgChart(int ops)
         {

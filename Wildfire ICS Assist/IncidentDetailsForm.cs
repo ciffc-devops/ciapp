@@ -100,6 +100,8 @@ namespace Wildfire_ICS_Assist
         SavedIncidentObjectivesForm savedObjectivesForm = null;
         SavedSafetyNotesForm savedSafetyNotesForm = null;
         SavedTeamMembersForm savedTeamMembersForm = null;
+        SavedAircraftsForm savedAircraftForm = null;
+
 
         CommunicationsListForm communicationsList = null;
         CommunicationsPlanForm commsPlanForm = null;
@@ -113,7 +115,7 @@ namespace Wildfire_ICS_Assist
         SafetyMessagesForm safetyMessagesForm = null;
         VehiclesForm vehiclesForm = null;
         PrintIncidentForm printIAPForm = null;
-
+        AirOperationsForm airOperationsForm = null;
 
         /* Event Handlers!*/
 
@@ -138,6 +140,8 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
             Program.wfIncidentService.CommsPlanChanged+= Program_CommsPlanChanged;
             Program.wfIncidentService.CommsPlanItemChanged+= Program_CommsPlanItemChanged;
+            Program.wfIncidentService.AircraftChanged+= Program_AircraftChanged;
+            Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
         }
 
 
@@ -174,7 +178,11 @@ namespace Wildfire_ICS_Assist
             if (CurrentIncident.hasAnySafetyMessages(CurrentOpPeriod)) { btnSafetyPlans.Image = Properties.Resources.glyphicons_basic_739_check; safetyMessageICS208ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnSafetyPlans.Image = null; safetyMessageICS208ToolStripMenuItem.Image = null; }
 
-
+            if (CurrentIncident.hasMeaningfulAirOps(CurrentOpPeriod))
+            {
+                btnAirOpsSummary.Image = Properties.Resources.glyphicons_basic_739_check; airOperationsSummaryICS220ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check;
+            }
+            else { btnAirOpsSummary.Image = null; airOperationsSummaryICS220ToolStripMenuItem.Image = null; }
 
 
             //                    
@@ -605,6 +613,22 @@ namespace Wildfire_ICS_Assist
             }
 
         }
+
+        private void Program_AircraftChanged(AircraftEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            TriggerAutoSave();
+
+        }
+
+        private void Program_AirOpsSummaryChanged(AirOperationsSummaryEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            TriggerAutoSave();
+
+        }
+
+
 
         private void Program_CommsPlanChanged(CommsPlanEventArgs e)
         {
@@ -1584,6 +1608,29 @@ namespace Wildfire_ICS_Assist
 
         }
 
+
+            private void OpenSavedAircraftForm()
+        {
+           
+                if (savedAircraftForm == null)
+                {
+                    savedAircraftForm = new SavedAircraftsForm();
+                    savedAircraftForm.FormClosed += new FormClosedEventHandler(SavedAircraftForm_Closed);
+                    ActiveForms.Add(savedAircraftForm);
+                    savedAircraftForm.Show(this);
+                }
+
+                savedAircraftForm.BringToFront();
+            
+        }
+        void SavedAircraftForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(savedAircraftForm);
+            savedAircraftForm = null;
+
+
+        }
+
         private void additionalContactsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openCommunicationsList();
@@ -1612,6 +1659,45 @@ namespace Wildfire_ICS_Assist
         private void btnNotes_Click(object sender, EventArgs e)
         {
             OpenNotesForm();
+        }
+
+        private void aircraftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSavedAircraftForm();
+        }
+
+
+        private void OpenAirOpsForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (airOperationsForm == null)
+                {
+                    airOperationsForm = new AirOperationsForm();
+                    airOperationsForm.FormClosed += new FormClosedEventHandler(AirOpsSummaryForm_Closed);
+                    ActiveForms.Add(airOperationsForm);
+                    airOperationsForm.Show(this);
+                }
+
+                airOperationsForm.BringToFront();
+            }
+        }
+        void AirOpsSummaryForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(airOperationsForm);
+            airOperationsForm = null;
+
+
+        }
+
+        private void airOperationsSummaryICS220ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenAirOpsForm();
+        }
+
+        private void btnAirOpsSummary_Click(object sender, EventArgs e)
+        {
+            OpenAirOpsForm();
         }
     }
 }

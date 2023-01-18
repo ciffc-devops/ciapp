@@ -139,7 +139,6 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private string _PDFTitleName;
         [ProtoMember(14)] private int _Depth;
 
-
         public Guid RoleID { get => _RoleID; set => _RoleID = value; }
         public string RoleName { get => _RoleName; set => _RoleName = value; }
         public string RoleNameForDropdown
@@ -552,10 +551,18 @@ namespace WF_ICS_ClassLibrary.Models
 
             //Ops
             AllRoles.Add(new ICSRole(Globals.OpsChiefID, "Operations Section Chief", Globals.IncidentCommanderID, Globals.OpsChiefID, "Text3", blankMember, 5, 1));
-            AllRoles.Add(new ICSRole(new Guid("3A79ED80-9B06-4923-95F7-BE1B8B554FFD"), "Staging Area Manager", Globals.OpsChiefID, Globals.OpsChiefID, "Text4", blankMember, 99, 2));
+            AllRoles.Add(new ICSRole(new Guid("3A79ED80-9B06-4923-95F7-BE1B8B554FFD"), "Staging Area Manager", Globals.OpsChiefID, Globals.OpsChiefID, "Text4", blankMember, 97, 2));
             AllRoles.Add(new ICSRole(new Guid("b01ea351-0578-4eb0-b8ca-d319efa74b7c"), "Branch/Division/Group1", Globals.OpsChiefID, Globals.OpsChiefID, "Text5", "Title5", blankMember, 99, 2));
             AllRoles.Add(new ICSRole(new Guid("9727f016-aed9-4f34-99db-910a06b97f2e"), "Branch/Division/Group2", Globals.OpsChiefID, Globals.OpsChiefID, "Text6", "Title6", blankMember, 99, 2));
             AllRoles.Add(new ICSRole(new Guid("9e75f813-cab4-4a6c-87b7-0fc141f06df9"), "Branch/Division/Group3", Globals.OpsChiefID, Globals.OpsChiefID, "Text7", "Title7", blankMember, 99, 2));
+            AllRoles.Add(new ICSRole(Globals.AirOpsDirector, "Air Ops Branch Director", Globals.OpsChiefID, Globals.OpsChiefID, "AirOpsDirector", blankMember, 98, 2));
+            
+            AllRoles.Add(new ICSRole(new Guid("0da445fe-99d5-4cfe-b746-cbe46b20e314"), "Air Support Group Supervisor", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3));
+            AllRoles.Add(new ICSRole(new Guid("f16d6d47-a334-4c88-9bbc-8034ee9c2a32"), "Air Tactical Group Supervisor", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3));
+            AllRoles.Add(new ICSRole(new Guid("b1fd775b-7311-4d9d-a1bf-a7d32c4d7ed2"), "Helicopter Coordinator", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3));
+            AllRoles.Add(new ICSRole(new Guid("803955a6-973f-470e-a8a4-bd86197700c0"), "Helibase Manager", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3));
+
+
 
 
             //Planning

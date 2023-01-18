@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,9 +49,10 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(34)] private bool _includeExecutionIn204Briefings;
         [ProtoMember(35)] private bool _includeOtherContactsWithIAP;
         [ProtoMember(36)] private bool _promptForInitialSave;
+        [ProtoMember(37)] private List<Aircraft> _AircraftList = new List<Aircraft>();
         // [ProtoMember(37)] private List<PresetTeamAssignment> l_allPresetTeamAssignments = new List<PresetTeamAssignment>();
         //[ProtoMember(38)] private List<SafetyPlan> l_allPresetSafetyPlans = new List<SafetyPlan>();
-        [ProtoMember(38)] private List<SafetyMessage> _safetyMessages;
+        [ProtoMember(38)] private List<SafetyMessage> _safetyMessages = new List<SafetyMessage>();
         [ProtoMember(39)] private Briefing b_briefingTemplate = new Briefing(false);
         [ProtoMember(40)] private List<IncidentObjective> l_allPresetObjectives = new List<IncidentObjective>();
         [ProtoMember(41)] private List<Hospital> l_allHospitals = new List<Hospital>();
@@ -135,7 +137,7 @@ namespace WF_ICS_ClassLibrary.Models
         public List<EquipmentCategory> AllEquipmentCategories { get => _AllEquipmentCategories; set => _AllEquipmentCategories = value; }
         public List<Equipment> AllEquipment { get => _AllEquipment; set => _AllEquipment = value; }
         public List<EquipmentSet> AllEquipmentSets { get => _AllEquipmentSets; set => _AllEquipmentSets = value; }
-
+        public List<Aircraft> AircraftList { get => _AircraftList; set => _AircraftList = value; }
 
         public bool ECCReminderThisDevice { get => _ECCReminderThisDevice; set { _ECCReminderThisDevice = value; appSettingsChanged = true; } }
         public bool AllowStringTaskNumber { get => _AllowStringTaskNumber; set { _AllowStringTaskNumber = value; appSettingsChanged = true; } }

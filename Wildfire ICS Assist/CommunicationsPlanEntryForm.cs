@@ -17,6 +17,7 @@ namespace Wildfire_ICS_Assist
         private CommsPlanItem _SelectedItem = null;
         public CommsPlanItem SelectedItem { get => _SelectedItem; }
         public bool SaveForLater { get => chkSaveForLater.Checked; }
+        public bool DefaultAircraft { get; set; } = false;
 
         List<CommsPlanItem> SavedCommsPlanItems { get;  set; }
 
@@ -155,6 +156,8 @@ namespace Wildfire_ICS_Assist
 
             SavedCommsPlanItems = (List<CommsPlanItem>)Program.generalOptionsService.GetOptionsValue("CommsItems");
             cboSavedComms.DataSource = SavedCommsPlanItems;
+            chkUsedForAir.Checked = DefaultAircraft;
+            chkSavedUsedForAir.Checked = DefaultAircraft;
         }
 
         private void cboSavedComms_SelectedIndexChanged_1(object sender, EventArgs e)

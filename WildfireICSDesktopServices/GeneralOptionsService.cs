@@ -216,6 +216,8 @@ namespace WildfireICSDesktopServices
                         agencies.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeAgency)).GroupBy(o => o.HomeAgency).Select(o => o.First().HomeAgency).ToList());
                     }
                     return agencies.Distinct().ToList();
+                case "Aircrafts":
+                    return _options.AircraftList;
                 case "AllowStringTaskNumber":
                     return _options.AllowStringTaskNumber;
                 case "Ambulances":
@@ -382,6 +384,12 @@ namespace WildfireICSDesktopServices
 
             switch (property_name)
             {
+                case "Aircraft":
+                    Aircraft air = (Aircraft)newValue;
+                    _options.AircraftList = _options.AircraftList.Where(o => o.ID != air.ID).ToList();
+                    _options.AircraftList.Add(air);
+                    _options.AircraftList = _options.AircraftList.OrderBy(o => o.Registration).ToList();
+                    break;
                 case "AddIMTToContacts":
                     _options.AddIMTToContacts = Convert.ToBoolean(newValue); break;
                 case "ShortcutButtons":

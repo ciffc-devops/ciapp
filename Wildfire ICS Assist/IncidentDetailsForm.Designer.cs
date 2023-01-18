@@ -109,13 +109,14 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.savedValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aircraftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationsSystemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hospitalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.medivacServicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.teamMembersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hospitalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medivacServicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vehiclesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamMembersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.templatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentObjectivesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -209,6 +210,7 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
+            this.airOperationsSummaryICS220ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -833,13 +835,14 @@
             this.optionsToolStripMenuItem,
             this.toolStripSeparator3,
             this.savedValuesToolStripMenuItem,
+            this.aircraftToolStripMenuItem,
             this.communicationsSystemsToolStripMenuItem,
-            this.hospitalsToolStripMenuItem,
-            this.medivacServicesToolStripMenuItem,
             this.contactsToolStripMenuItem,
             this.equipmentToolStripMenuItem,
-            this.teamMembersToolStripMenuItem,
+            this.hospitalsToolStripMenuItem,
+            this.medivacServicesToolStripMenuItem,
             this.vehiclesToolStripMenuItem,
+            this.teamMembersToolStripMenuItem,
             this.toolStripSeparator4,
             this.templatesToolStripMenuItem,
             this.incidentObjectivesToolStripMenuItem,
@@ -864,11 +867,28 @@
             resources.ApplyResources(this.savedValuesToolStripMenuItem, "savedValuesToolStripMenuItem");
             this.savedValuesToolStripMenuItem.Name = "savedValuesToolStripMenuItem";
             // 
+            // aircraftToolStripMenuItem
+            // 
+            this.aircraftToolStripMenuItem.Name = "aircraftToolStripMenuItem";
+            resources.ApplyResources(this.aircraftToolStripMenuItem, "aircraftToolStripMenuItem");
+            this.aircraftToolStripMenuItem.Click += new System.EventHandler(this.aircraftToolStripMenuItem_Click);
+            // 
             // communicationsSystemsToolStripMenuItem
             // 
             this.communicationsSystemsToolStripMenuItem.Name = "communicationsSystemsToolStripMenuItem";
             resources.ApplyResources(this.communicationsSystemsToolStripMenuItem, "communicationsSystemsToolStripMenuItem");
             this.communicationsSystemsToolStripMenuItem.Click += new System.EventHandler(this.communicationsSystemsToolStripMenuItem_Click);
+            // 
+            // contactsToolStripMenuItem
+            // 
+            this.contactsToolStripMenuItem.Name = "contactsToolStripMenuItem";
+            resources.ApplyResources(this.contactsToolStripMenuItem, "contactsToolStripMenuItem");
+            this.contactsToolStripMenuItem.Click += new System.EventHandler(this.contactsToolStripMenuItem_Click);
+            // 
+            // equipmentToolStripMenuItem
+            // 
+            this.equipmentToolStripMenuItem.Name = "equipmentToolStripMenuItem";
+            resources.ApplyResources(this.equipmentToolStripMenuItem, "equipmentToolStripMenuItem");
             // 
             // hospitalsToolStripMenuItem
             // 
@@ -882,28 +902,17 @@
             resources.ApplyResources(this.medivacServicesToolStripMenuItem, "medivacServicesToolStripMenuItem");
             this.medivacServicesToolStripMenuItem.Click += new System.EventHandler(this.medivacServicesToolStripMenuItem_Click);
             // 
-            // contactsToolStripMenuItem
+            // vehiclesToolStripMenuItem
             // 
-            this.contactsToolStripMenuItem.Name = "contactsToolStripMenuItem";
-            resources.ApplyResources(this.contactsToolStripMenuItem, "contactsToolStripMenuItem");
-            this.contactsToolStripMenuItem.Click += new System.EventHandler(this.contactsToolStripMenuItem_Click);
-            // 
-            // equipmentToolStripMenuItem
-            // 
-            this.equipmentToolStripMenuItem.Name = "equipmentToolStripMenuItem";
-            resources.ApplyResources(this.equipmentToolStripMenuItem, "equipmentToolStripMenuItem");
+            this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
+            resources.ApplyResources(this.vehiclesToolStripMenuItem, "vehiclesToolStripMenuItem");
+            this.vehiclesToolStripMenuItem.Click += new System.EventHandler(this.vehiclesToolStripMenuItem_Click);
             // 
             // teamMembersToolStripMenuItem
             // 
             this.teamMembersToolStripMenuItem.Name = "teamMembersToolStripMenuItem";
             resources.ApplyResources(this.teamMembersToolStripMenuItem, "teamMembersToolStripMenuItem");
             this.teamMembersToolStripMenuItem.Click += new System.EventHandler(this.teamMembersToolStripMenuItem_Click);
-            // 
-            // vehiclesToolStripMenuItem
-            // 
-            this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
-            resources.ApplyResources(this.vehiclesToolStripMenuItem, "vehiclesToolStripMenuItem");
-            this.vehiclesToolStripMenuItem.Click += new System.EventHandler(this.vehiclesToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -936,6 +945,7 @@
             this.medicalPlanICS206ToolStripMenuItem,
             this.organizationChartICS207ToolStripMenuItem,
             this.safetyMessageICS208ToolStripMenuItem,
+            this.airOperationsSummaryICS220ToolStripMenuItem,
             this.toolStripSeparator5,
             this.additionalDocumentsToolStripMenuItem,
             this.communicationsListICS205AToolStripMenuItem,
@@ -1320,6 +1330,7 @@
             resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
             this.btnAirOpsSummary.Name = "btnAirOpsSummary";
             this.btnAirOpsSummary.UseVisualStyleBackColor = true;
+            this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
             // 
             // btnSafetyPlans
             // 
@@ -1527,6 +1538,12 @@
             resources.ApplyResources(this.btnCommsLog, "btnCommsLog");
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
+            // 
+            // airOperationsSummaryICS220ToolStripMenuItem
+            // 
+            this.airOperationsSummaryICS220ToolStripMenuItem.Name = "airOperationsSummaryICS220ToolStripMenuItem";
+            resources.ApplyResources(this.airOperationsSummaryICS220ToolStripMenuItem, "airOperationsSummaryICS220ToolStripMenuItem");
+            this.airOperationsSummaryICS220ToolStripMenuItem.Click += new System.EventHandler(this.airOperationsSummaryICS220ToolStripMenuItem_Click);
             // 
             // IncidentDetailsForm
             // 
@@ -1766,6 +1783,8 @@
         private System.Windows.Forms.Button btnAssignmentList;
         private System.Windows.Forms.Button btnOrgAssignmentList;
         private System.Windows.Forms.Button btnAirOpsSummary;
+        private System.Windows.Forms.ToolStripMenuItem aircraftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem airOperationsSummaryICS220ToolStripMenuItem;
     }
 }
 

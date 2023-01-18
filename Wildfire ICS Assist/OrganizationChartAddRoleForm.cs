@@ -18,6 +18,7 @@ namespace Wildfire_ICS_Assist
         private ICSRole _selectedRole = null;
         public ICSRole selectedRole { get => _selectedRole; set { _selectedRole = value;  } }
         private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
+        public bool RestrictToAirOps { get; set; } = false;
 
         public OrganizationChartAddRoleForm()
         {
@@ -38,7 +39,17 @@ namespace Wildfire_ICS_Assist
             cboReportsTo.Items.Clear();
             CurrentOrgChart.SortRoles();
 
-            cboReportsTo.DataSource = CurrentOrgChart.AllRoles;
+            List<ICSRole> reportsToRoles = new List<ICSRole>();
+            if (RestrictToAirOps)
+            {
+                reportsToRoles.Add(CurrentOrgChart.AllRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
+                reportsToRoles.AddRange(CurrentOrgChart.GetChildRoles(Globals.AirOpsDirector, true));
+            }
+            else { reportsToRoles.AddRange(CurrentOrgChart.AllRoles); }
+            cboReportsTo.DataSource = reportsToRoles;
+
+
+
             txtRoleName.Text = selectedRole.RoleName;
             if (selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == selectedRole.ReportsTo))
             {

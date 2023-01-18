@@ -425,6 +425,16 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
+        public static void createAirOpsSummaryAsNeeded(this WFIncident incident, int ops)
+        {
+            if(!incident.allAirOperationsSummaries.Any(o=>o.OpPeriod == ops))
+            {
+                AirOperationsSummary summary = new AirOperationsSummary();
+                summary.OpPeriod = ops;
+                Globals.incidentService.UpsertAirOperationsSummary(summary);
+            }
+        }
+
         public static void createOrgChartAsNeeded(this WFIncident task, int ops)
         {
             if (!task.allOrgCharts.Any(o => o.OpPeriod == ops))

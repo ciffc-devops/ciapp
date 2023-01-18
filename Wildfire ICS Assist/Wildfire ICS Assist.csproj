@@ -96,6 +96,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirOperationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AirOperationsForm.Designer.cs">
+      <DependentUpon>AirOperationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\GeneralTools.cs" />
     <Compile Include="CommunicationsListEntryForm.cs">
       <SubType>Form</SubType>
@@ -144,6 +150,12 @@
     </Compile>
     <Compile Include="CustomControls\CollapsiblePanel.Designer.cs">
       <DependentUpon>CollapsiblePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\EditAircraftControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\EditAircraftControl.Designer.cs">
+      <DependentUpon>EditAircraftControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\EditTeamMemberControl.cs">
       <SubType>UserControl</SubType>
@@ -253,6 +265,12 @@
     <Compile Include="OptionsForms\EditMedivacForm.Designer.cs">
       <DependentUpon>EditMedivacForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\EditSavedAircraftForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedAircraftForm.Designer.cs">
+      <DependentUpon>EditSavedAircraftForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\EditSavedIncidentObjectiveForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +318,12 @@
     </Compile>
     <Compile Include="OptionsForms\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedAircraftsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedAircraftsForm.Designer.cs">
+      <DependentUpon>SavedAircraftsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\SavedCommsItemsForm.cs">
       <SubType>Form</SubType>
@@ -441,6 +465,9 @@
     <Compile Include="VehiclesForm.Designer.cs">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AirOperationsForm.resx">
+      <DependentUpon>AirOperationsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommunicationsListEntryForm.resx">
       <DependentUpon>CommunicationsListEntryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -464,6 +491,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\CollapsiblePanel.resx">
       <DependentUpon>CollapsiblePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\EditAircraftControl.resx">
+      <DependentUpon>EditAircraftControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditTeamMemberControl.resx">
       <DependentUpon>EditTeamMemberControl.cs</DependentUpon>
@@ -525,6 +555,9 @@
     <EmbeddedResource Include="OptionsForms\EditMedivacForm.resx">
       <DependentUpon>EditMedivacForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedAircraftForm.resx">
+      <DependentUpon>EditSavedAircraftForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedIncidentObjectiveForm.resx">
       <DependentUpon>EditSavedIncidentObjectiveForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -548,6 +581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedAircraftsForm.resx">
+      <DependentUpon>SavedAircraftsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedCommsItemsForm.resx">
       <DependentUpon>SavedCommsItemsForm.cs</DependentUpon>

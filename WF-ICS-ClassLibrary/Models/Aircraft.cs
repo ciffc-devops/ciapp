@@ -23,6 +23,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(10)] private string _PreparedByName;
         [ProtoMember(11)] private string _PreparedByPosition;
         [ProtoMember(12)] private Guid _PreparedByPositionID;
+        [ProtoMember(13)] private bool _Active;
+        [ProtoMember(14)] private int _OpPeriod;
+        [ProtoMember(15)] private DateTime _LastUpatedUTC;
 
 
         public AirOperationsSummary()
@@ -46,6 +49,10 @@ namespace WF_ICS_ClassLibrary.Models
         public string PreparedByName { get => _PreparedByName; set => _PreparedByName = value; }
         public string PreparedByPosition { get => _PreparedByPosition; set => _PreparedByPosition = value; }
         public Guid PreparedByPositionID { get => _PreparedByPositionID; set => _PreparedByPositionID = value; }
+        public bool Active { get => _Active; set => _Active = value; }
+        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
+        public DateTime LastUpdatedUTC { get => _LastUpatedUTC; set => _LastUpatedUTC = value; }
+
     }
 
 
@@ -62,9 +69,12 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private string _Remarks;
         [ProtoMember(8)] private string _Pilot;
         [ProtoMember(9)] private string _ContactNumber;
+        [ProtoMember(10)] private bool _Active;
+        [ProtoMember(11)] private int _OpPeriod;
+        [ProtoMember(12)] private DateTime _LastUpatedUTC;
 
 
-        public Aircraft() { ID = Guid.NewGuid(); }
+        public Aircraft() { ID = Guid.NewGuid(); Active = true; }
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string Registration { get => _Registration; set => _Registration = value; }
@@ -75,6 +85,9 @@ namespace WF_ICS_ClassLibrary.Models
         public string Remarks { get => _Remarks; set => _Remarks = value; }
         public string Pilot { get => _Pilot; set => _Pilot = value; }
         public string ContactNumber { get => _ContactNumber; set => _ContactNumber = value; }
+        public bool Active { get => _Active; set => _Active = value; }
+        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
+        public DateTime LastUpdatedUTC { get => _LastUpatedUTC; set => _LastUpatedUTC = value; }
 
     }
 
@@ -98,6 +111,16 @@ namespace WF_ICS_ClassLibrary.Models
         public double RadiusNM { get => _RadiusNM; set => _RadiusNM= value; }
         public double AltitudeASL { get => _AltitudeASL; set => _AltitudeASL= value; }  
         public string CenterPoint { get => _CenterPoint; set => _CenterPoint = value; }
-
+        public bool AnyContent
+        {
+            get
+            {
+                if(Latitude != 0 || Longitude != 0) { return true; }
+                if(RadiusNM!= 0) { return true; }
+                if(AltitudeASL!= 0) { return true; }
+                if(!string.IsNullOrEmpty(CenterPoint)) { return true; }
+                return false;
+            }
+        }
     }
 }

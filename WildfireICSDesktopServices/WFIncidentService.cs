@@ -43,6 +43,9 @@ namespace WildfireICSDesktopServices
         public event TaskUpdateEventHandler TaskUpdateChanged;
         public event TaskBasicsEventHandler TaskBasicsChanged;
         public event GeneralMessageEventHandler GeneralMessageChanged;
+        public event AircraftEventHandler AircraftChanged;
+        public event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
+
 
         private WFIncident _currentIncident;
         public WFIncident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
@@ -1240,6 +1243,61 @@ namespace WildfireICSDesktopServices
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
             OnGeneralMessageChanged(new GeneralMessageEventArgs(record));
+        }
+
+
+        //Aircraft
+        protected virtual void OnAircrafteChanged(AircraftEventArgs e)
+        {
+            AircraftEventHandler handler = this.AircraftChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertAircraft(Aircraft record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            _currentIncident.createAirOpsSummaryAsNeeded(record.OpPeriod);
+            AirOperationsSummary sum = _currentIncident.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == record.OpPeriod);
+            if (sum != null)
+            {
+                if (sum.aircrafts.Any(o => o.ID == record.ID))
+                {
+                    sum.aircrafts = sum.aircrafts.Where(o => o.ID != record.ID).ToList();
+                }
+                sum.aircrafts.Add(record);
+                if (source.Equals("local") || source.Equals("networkNoInternet"))
+                {
+                    UpsertTaskUpdate(record, "UPSERT", true, false);
+                }
+                OnAircrafteChanged(new AircraftEventArgs(record));
+
+            }
+
+        }
+
+        protected virtual void OnAirOperationsSummaryChanged(AirOperationsSummaryEventArgs e)
+        {
+            AircraftsOperationsSummaryEventHandler handler = this.AircraftsOperationsSummaryChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertAirOperationsSummary(AirOperationsSummary record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.allAirOperationsSummaries.Any(o => o.ID == record.ID))
+            {
+                _currentIncident.allAirOperationsSummaries = _currentIncident.allAirOperationsSummaries.Where(o => o.ID != record.ID).ToList();
+            }
+            _currentIncident.allAirOperationsSummaries.Add(record);
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnAirOperationsSummaryChanged(new AirOperationsSummaryEventArgs(record));
         }
 
 

@@ -28,6 +28,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string PreparedBy { get => _PreparedBy; set => _PreparedBy = value; }
         public List<CommsPlanItem> allCommsItems { get => _allCommsItems; set => _allCommsItems = value; }
         public List<CommsPlanItem> ActiveCommsItems { get => _allCommsItems.Where(o=>o.Active).OrderBy(o=>o.ChannelID).ThenBy(o=>o.CommsFunction).ToList(); }
+        public List<CommsPlanItem> ActiveAirCommsItems { get => _allCommsItems.Where(o => o.Active && o.UsedForAircraft).OrderBy(o => o.ChannelID).ThenBy(o => o.CommsFunction).ToList(); }
         //public List<CommsPlanItemLink> allItemLinks { get => _allItemLinks; set => _allItemLinks = value; }
         public Guid ID { get => _ID; set => _ID = value; }
         public DateTime LastUpdatedUTC { get => _lastUpdatedUTC; set => _lastUpdatedUTC = value; }
