@@ -52,12 +52,13 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.txtDietary = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.chkVegetarian = new System.Windows.Forms.CheckBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.chkNoGluten = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtNOKPhone = new System.Windows.Forms.TextBox();
+            this.txtNOKRelationship = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtNOKName = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             this.txtName.Location = new System.Drawing.Point(212, 6);
             this.txtName.Margin = new System.Windows.Forms.Padding(6);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(260, 29);
+            this.txtName.Size = new System.Drawing.Size(233, 29);
             this.txtName.TabIndex = 0;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
@@ -82,7 +83,7 @@
             this.cboProvince.Location = new System.Drawing.Point(212, 44);
             this.cboProvince.Margin = new System.Windows.Forms.Padding(6);
             this.cboProvince.Name = "cboProvince";
-            this.cboProvince.Size = new System.Drawing.Size(260, 32);
+            this.cboProvince.Size = new System.Drawing.Size(233, 32);
             this.cboProvince.TabIndex = 1;
             this.cboProvince.SelectedIndexChanged += new System.EventHandler(this.cboProvince_SelectedIndexChanged);
             // 
@@ -96,7 +97,7 @@
             this.cboAgency.Location = new System.Drawing.Point(212, 85);
             this.cboAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboAgency.Name = "cboAgency";
-            this.cboAgency.Size = new System.Drawing.Size(260, 32);
+            this.cboAgency.Size = new System.Drawing.Size(233, 32);
             this.cboAgency.TabIndex = 2;
             this.cboAgency.SelectedIndexChanged += new System.EventHandler(this.cboAgency_SelectedIndexChanged);
             this.cboAgency.Leave += new System.EventHandler(this.cboAgency_Leave);
@@ -138,7 +139,7 @@
             this.txtPhone.Location = new System.Drawing.Point(212, 126);
             this.txtPhone.Mask = "(999) 000-0000";
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(260, 29);
+            this.txtPhone.Size = new System.Drawing.Size(233, 29);
             this.txtPhone.TabIndex = 8;
             this.txtPhone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtPhone_MaskInputRejected);
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
@@ -159,7 +160,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEmail.Location = new System.Drawing.Point(212, 164);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(260, 29);
+            this.txtEmail.Size = new System.Drawing.Size(233, 29);
             this.txtEmail.TabIndex = 10;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
@@ -182,7 +183,7 @@
             this.cboHomeAgency.FormattingEnabled = true;
             this.cboHomeAgency.Location = new System.Drawing.Point(212, 199);
             this.cboHomeAgency.Name = "cboHomeAgency";
-            this.cboHomeAgency.Size = new System.Drawing.Size(260, 32);
+            this.cboHomeAgency.Size = new System.Drawing.Size(233, 32);
             this.cboHomeAgency.TabIndex = 12;
             this.cboHomeAgency.SelectedIndexChanged += new System.EventHandler(this.cboHomeAgency_SelectedIndexChanged);
             this.cboHomeAgency.Leave += new System.EventHandler(this.cboHomeAgency_Leave);
@@ -194,7 +195,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(187, 29);
             this.label7.TabIndex = 16;
-            this.label7.Text = "Home Unit/Agency";
+            this.label7.Text = "Home Base";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label11
@@ -213,7 +214,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtQualifications.Location = new System.Drawing.Point(212, 237);
             this.txtQualifications.Name = "txtQualifications";
-            this.txtQualifications.Size = new System.Drawing.Size(260, 29);
+            this.txtQualifications.Size = new System.Drawing.Size(233, 29);
             this.txtQualifications.TabIndex = 20;
             this.txtQualifications.TextChanged += new System.EventHandler(this.txtQualifications_TextChanged);
             // 
@@ -222,7 +223,7 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(478, 48);
+            this.button1.Location = new System.Drawing.Point(451, 48);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 92;
@@ -236,7 +237,7 @@
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Location = new System.Drawing.Point(478, 87);
+            this.button2.Location = new System.Drawing.Point(451, 87);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 26);
             this.button2.TabIndex = 93;
@@ -251,7 +252,7 @@
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.Location = new System.Drawing.Point(478, 129);
+            this.button4.Location = new System.Drawing.Point(451, 129);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(26, 26);
             this.button4.TabIndex = 95;
@@ -265,7 +266,7 @@
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.Location = new System.Drawing.Point(478, 166);
+            this.button5.Location = new System.Drawing.Point(451, 166);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(26, 26);
             this.button5.TabIndex = 96;
@@ -279,7 +280,7 @@
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button6.Location = new System.Drawing.Point(478, 203);
+            this.button6.Location = new System.Drawing.Point(451, 203);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 26);
             this.button6.TabIndex = 97;
@@ -294,7 +295,7 @@
             this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
             this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button10.Location = new System.Drawing.Point(478, 239);
+            this.button10.Location = new System.Drawing.Point(451, 239);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(26, 26);
             this.button10.TabIndex = 101;
@@ -303,53 +304,6 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
-            // txtDietary
-            // 
-            this.txtDietary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDietary.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDietary.Location = new System.Drawing.Point(275, 315);
-            this.txtDietary.Name = "txtDietary";
-            this.txtDietary.Size = new System.Drawing.Size(197, 26);
-            this.txtDietary.TabIndex = 102;
-            this.toolTip1.SetToolTip(this.txtDietary, "Ideally, your EMBC ID#");
-            this.txtDietary.TextChanged += new System.EventHandler(this.txtDietary_TextChanged);
-            // 
-            // label12
-            // 
-            this.label12.Location = new System.Drawing.Point(208, 315);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(61, 27);
-            this.label12.TabIndex = 106;
-            this.label12.Text = "Other";
-            // 
-            // label13
-            // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(2, 280);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(201, 27);
-            this.label13.TabIndex = 105;
-            this.label13.Text = "Dietary Requirements";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // chkVegetarian
-            // 
-            this.chkVegetarian.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkVegetarian.FlatAppearance.BorderSize = 0;
-            this.chkVegetarian.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkVegetarian.ImageIndex = 0;
-            this.chkVegetarian.ImageList = this.imageList1;
-            this.chkVegetarian.Location = new System.Drawing.Point(212, 275);
-            this.chkVegetarian.Margin = new System.Windows.Forms.Padding(6);
-            this.chkVegetarian.Name = "chkVegetarian";
-            this.chkVegetarian.Size = new System.Drawing.Size(130, 34);
-            this.chkVegetarian.TabIndex = 103;
-            this.chkVegetarian.Text = "Vegetarian";
-            this.chkVegetarian.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.chkVegetarian.UseVisualStyleBackColor = true;
-            this.chkVegetarian.CheckedChanged += new System.EventHandler(this.chkVegetarian_CheckedChanged);
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -357,32 +311,80 @@
             this.imageList1.Images.SetKeyName(0, "check-box-unchecked.png");
             this.imageList1.Images.SetKeyName(1, "check-box-checked.png");
             // 
-            // chkNoGluten
+            // label15
             // 
-            this.chkNoGluten.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkNoGluten.FlatAppearance.BorderSize = 0;
-            this.chkNoGluten.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkNoGluten.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.chkNoGluten.ImageIndex = 0;
-            this.chkNoGluten.ImageList = this.imageList1;
-            this.chkNoGluten.Location = new System.Drawing.Point(351, 275);
-            this.chkNoGluten.Name = "chkNoGluten";
-            this.chkNoGluten.Size = new System.Drawing.Size(121, 34);
-            this.chkNoGluten.TabIndex = 104;
-            this.chkNoGluten.Text = "No Gluten";
-            this.chkNoGluten.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.chkNoGluten.UseVisualStyleBackColor = true;
-            this.chkNoGluten.CheckedChanged += new System.EventHandler(this.chkNoGluten_CheckedChanged);
+            this.label15.Location = new System.Drawing.Point(16, 336);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(187, 29);
+            this.label15.TabIndex = 107;
+            this.label15.Text = "EM Contact Phone";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtNOKPhone
+            // 
+            this.txtNOKPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNOKPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNOKPhone.Location = new System.Drawing.Point(212, 337);
+            this.txtNOKPhone.Margin = new System.Windows.Forms.Padding(6);
+            this.txtNOKPhone.Name = "txtNOKPhone";
+            this.txtNOKPhone.Size = new System.Drawing.Size(233, 26);
+            this.txtNOKPhone.TabIndex = 106;
+            this.txtNOKPhone.TextChanged += new System.EventHandler(this.txtNOKPhone_TextChanged);
+            // 
+            // txtNOKRelationship
+            // 
+            this.txtNOKRelationship.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNOKRelationship.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNOKRelationship.Location = new System.Drawing.Point(212, 304);
+            this.txtNOKRelationship.Name = "txtNOKRelationship";
+            this.txtNOKRelationship.Size = new System.Drawing.Size(233, 26);
+            this.txtNOKRelationship.TabIndex = 105;
+            this.toolTip1.SetToolTip(this.txtNOKRelationship, "Ideally, your EMBC ID#");
+            this.txtNOKRelationship.TextChanged += new System.EventHandler(this.txtNOKRelationship_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.Location = new System.Drawing.Point(16, 303);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(187, 29);
+            this.label14.TabIndex = 103;
+            this.label14.Text = "Relationship";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtNOKName
+            // 
+            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNOKName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNOKName.Location = new System.Drawing.Point(212, 272);
+            this.txtNOKName.Name = "txtNOKName";
+            this.txtNOKName.Size = new System.Drawing.Size(233, 26);
+            this.txtNOKName.TabIndex = 104;
+            this.toolTip1.SetToolTip(this.txtNOKName, "Ideally, your EMBC ID#");
+            this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged);
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(16, 271);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(187, 29);
+            this.label13.TabIndex = 102;
+            this.label13.Text = "Emergency Contact";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // EditTeamMemberControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label12);
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.txtNOKPhone);
+            this.Controls.Add(this.txtNOKRelationship);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.txtNOKName);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.txtDietary);
-            this.Controls.Add(this.chkVegetarian);
-            this.Controls.Add(this.chkNoGluten);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -406,7 +408,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "EditTeamMemberControl";
-            this.Size = new System.Drawing.Size(512, 354);
+            this.Size = new System.Drawing.Size(485, 376);
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -437,11 +439,12 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.BindingSource bsProvAndTerr;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtDietary;
-        private System.Windows.Forms.CheckBox chkVegetarian;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.CheckBox chkNoGluten;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtNOKPhone;
+        private System.Windows.Forms.TextBox txtNOKRelationship;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtNOKName;
+        private System.Windows.Forms.Label label13;
     }
 }

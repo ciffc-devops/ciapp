@@ -694,6 +694,9 @@
     <None Include="BlankForms\ICS-214-WF-Activity-Log.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\ICS-220-WF Air Operations Summary.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS205A-CommunicationsList.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

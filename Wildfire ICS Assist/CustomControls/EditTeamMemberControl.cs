@@ -24,13 +24,20 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
                 List<string> incidentAgencies = Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList();
-                incidentAgencies.AddRange(Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeAgency)).GroupBy(o => o.HomeAgency).Select(o => o.First().HomeAgency));
+               
                 agencies.AddRange(incidentAgencies.Distinct());
                 agencies = agencies.OrderBy(o => o).ToList();
                 agencies.Insert(0, string.Empty);
 
                 cboAgency.DataSource = agencies;
-                cboHomeAgency.DataSource = new List<string>(agencies);
+
+                List<string> homebases = (List<string>)Program.generalOptionsService.GetOptionsValue("HomeBases");
+                List<string> incidentBases = Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeBase)).GroupBy(o => o.HomeBase).Select(o => o.First().HomeBase).ToList();
+                homebases.AddRange(incidentBases.Distinct());
+                homebases = homebases.OrderBy(o => o).ToList();
+                homebases.Insert(0, string.Empty);
+
+                cboHomeAgency.DataSource = homebases;
             }
             
             if (_teamMember != null)
@@ -39,15 +46,15 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtEmail.Text = teamMember.Email;
                 txtPhone.Text = teamMember.Phone;
                 txtQualifications.Text = teamMember.SpecialSkills;
-                txtDietary.Text = teamMember.Dietary;
+                //txtDietary.Text = teamMember.Dietary;
 
                 if (teamMember.ProvinceID != Guid.Empty) { cboProvince.SelectedValue = teamMember.ProvinceID; }
                 else if (Program.generalOptionsService != null && Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID") != Guid.Empty) { cboProvince.SelectedValue = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); _teamMember.ProvinceID = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); ; }
                 if (!string.IsNullOrEmpty(teamMember.Agency)) { cboAgency.Text = teamMember.Agency; }
-                if (!string.IsNullOrEmpty(teamMember.HomeAgency)) { cboHomeAgency.Text = teamMember.HomeAgency; }
+                if (!string.IsNullOrEmpty(teamMember.HomeBase)) { cboHomeAgency.Text = teamMember.HomeBase; }
 
-                chkNoGluten.Checked = teamMember.NoGluten;
-                chkVegetarian.Checked = teamMember.Vegetarian;
+                //chkNoGluten.Checked = teamMember.NoGluten;
+                //chkVegetarian.Checked = teamMember.Vegetarian;
             }
         }
         public EditTeamMemberControl()
@@ -123,6 +130,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void chkVegetarian_CheckedChanged(object sender, EventArgs e)
         {
+            /*
             if (sender != null)
             {
                 CheckBox chk = (CheckBox)sender;
@@ -130,11 +138,12 @@ namespace Wildfire_ICS_Assist.CustomControls
                 else { chk.ImageIndex = 0; }
 
                 teamMember.Vegetarian = chkVegetarian.Checked;
-            }
+            }*/
         }
 
         private void chkNoGluten_CheckedChanged(object sender, EventArgs e)
         {
+            /*
             if (sender != null)
             {
                 CheckBox chk = (CheckBox)sender;
@@ -142,12 +151,12 @@ namespace Wildfire_ICS_Assist.CustomControls
                 else { chk.ImageIndex = 0; }
 
                 teamMember.NoGluten = chkNoGluten.Checked;
-            }
+            }*/
         }
 
         private void txtDietary_TextChanged(object sender, EventArgs e)
         {
-            teamMember.Dietary = ((TextBox)sender).Text;
+         //   teamMember.Dietary = ((TextBox)sender).Text;
         }
 
         private void txtPhone_Leave(object sender, EventArgs e)
@@ -162,7 +171,25 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboHomeAgency_Leave(object sender, EventArgs e)
         {
-            teamMember.HomeAgency = cboHomeAgency.Text;
+            teamMember.HomeBase = cboHomeAgency.Text;
+        }
+
+        private void txtNOKName_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.NOKName = ((TextBox)sender).Text;
+
+        }
+
+        private void txtNOKRelationship_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.NOKRelation = ((TextBox)sender).Text;
+
+        }
+
+        private void txtNOKPhone_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.NOKPhone = ((TextBox)sender).Text;
+
         }
     }
 }

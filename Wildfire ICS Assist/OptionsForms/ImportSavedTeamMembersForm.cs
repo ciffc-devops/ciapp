@@ -46,7 +46,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
             List<string> incidentAgencies = Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList();
-            incidentAgencies.AddRange(Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeAgency)).GroupBy(o => o.HomeAgency).Select(o => o.First().HomeAgency));
+            incidentAgencies.AddRange(Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeBase)).GroupBy(o => o.HomeBase).Select(o => o.First().HomeBase));
             agencies.AddRange(incidentAgencies.Distinct());
             agencies = agencies.OrderBy(o => o).ToList();
             agencies.Insert(0, string.Empty);
@@ -223,12 +223,12 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         else { member.Agency = xlAgency; }
                     }
                     string xlHome = fields[homeCol];
-                    if (string.IsNullOrEmpty(xlHome)) { member.HomeAgency = cboDefaultAgency.SelectedValue.ToString(); }
+                    if (string.IsNullOrEmpty(xlHome)) { member.HomeBase = cboDefaultAgency.SelectedValue.ToString(); }
                     else
                     {
                         //this will use an existing agency if there's a case-insensitive match. that way we don't have duplciates with different capitalization.
-                        if (agencies.Any(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase))) { member.HomeAgency = agencies.First(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase)); }
-                        else { member.HomeAgency = xlHome; }
+                        if (agencies.Any(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase))) { member.HomeBase = agencies.First(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase)); }
+                        else { member.HomeBase = xlHome; }
                     }
 
 
@@ -270,7 +270,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         dup.SpecialSkills = member.SpecialSkills;
                         dup.Dietary = member.Dietary;
                         dup.Agency = member.Agency;
-                        dup.HomeAgency = member.HomeAgency;
+                        dup.HomeBase = member.HomeBase;
                         dup.ProvinceID = member.ProvinceID;
                         dup.Vegetarian = member.Vegetarian;
                         dup.NoGluten = member.NoGluten;

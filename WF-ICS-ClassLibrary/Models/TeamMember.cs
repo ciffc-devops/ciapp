@@ -41,7 +41,7 @@ namespace WF_ICS_ClassLibrary.Models
 
 
         [ProtoMember(13)] private string _Agency;
-        [ProtoMember(14)] private string _HomeAgency;
+        [ProtoMember(14)] private string _HomeBase;
 
 
 
@@ -54,6 +54,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(21)] private string _Email;
         [ProtoMember(22)] private Guid _CreatedByOrgID;
         [ProtoMember(23)] private string _Address;
+        [ProtoMember(24)] private string _NOKName;
+        [ProtoMember(25)] private string _NOKRelation;
+        [ProtoMember(26)] private string _NOKPhone;
 
         [ProtoMember(28)] private MemberStatus _currentStatus;
 
@@ -129,7 +132,22 @@ namespace WF_ICS_ClassLibrary.Models
 
 
         public string Agency { get => _Agency; set => _Agency = value; }
-        public string HomeAgency { get => _HomeAgency; set => _HomeAgency = value; }
+        public string HomeBase { get => _HomeBase; set => _HomeBase = value; }
+
+        public string NOKName { get => _NOKName; set => _NOKName = value; }
+        public string NOKRelation { get => _NOKRelation; set => _NOKRelation = value; }
+        public string NOKPhone { get => _NOKPhone; set => _NOKPhone = value; }
+        public string NOKOneLine
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                if (!string.IsNullOrEmpty(NOKName)) { sb.Append(NOKName); sb.Append(" "); }
+                if (!string.IsNullOrEmpty(NOKRelation)) { sb.Append("("); sb.Append(NOKRelation); sb.Append(") "); }
+                if (!string.IsNullOrEmpty(NOKPhone)) { sb.Append(NOKPhone); }
+                return sb.ToString();
+            }
+        }
 
 
         public void removeTildeFromRecord()
@@ -633,7 +651,7 @@ namespace WF_ICS_ClassLibrary.Models
                 csv.Append("\""); csv.Append(item.Agency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Phone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Email.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.HomeAgency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.HomeBase.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.SpecialSkills.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 if (item.Vegetarian) { csv.Append("\"YES\""); csv.Append(delimiter); } else { csv.Append("\"NO\""); csv.Append(delimiter); }
                 if (item.NoGluten) { csv.Append("\"YES\""); csv.Append(delimiter); } else { csv.Append("\"NO\""); csv.Append(delimiter); }

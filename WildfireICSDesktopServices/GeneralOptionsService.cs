@@ -213,9 +213,17 @@ namespace WildfireICSDesktopServices
                     if (_options.AllTeamMembers != null)
                     {
                         agencies.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList());
-                        agencies.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeAgency)).GroupBy(o => o.HomeAgency).Select(o => o.First().HomeAgency).ToList());
                     }
                     return agencies.Distinct().ToList();
+                case "HomeBases":
+                    List<string> bases = new List<string>();
+                    if (_options.AllTeamMembers != null)
+                    {
+                        
+                        bases.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeBase)).GroupBy(o => o.HomeBase).Select(o => o.First().HomeBase).ToList());
+                    }
+                    return bases.Distinct().ToList();
+
                 case "Aircrafts":
                     return _options.AircraftList;
                 case "AllowStringTaskNumber":
