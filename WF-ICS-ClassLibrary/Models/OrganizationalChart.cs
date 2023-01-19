@@ -407,8 +407,7 @@ namespace WF_ICS_ClassLibrary.Models
                 }
                 ic.RoleName = "Unified Command";
                 Globals.incidentService.UpsertICSRole(org.AllRoles.First(o => o.RoleID == Globals.IncidentCommanderID));
-                uc1.RoleName = "Incident Commander";
-                Globals.incidentService.UpsertICSRole(org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand1ID));
+                
 
 
                 org.IsUnifiedCommand = true;
@@ -421,14 +420,27 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 ICSRole ic = org.AllRoles.First(o => o.RoleID == Globals.IncidentCommanderID);
                 ICSRole uc1 = org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand1ID);
-                if(uc1.teamMember == null && org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand2ID).teamMember != null) { uc1 = org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand2ID); }
+                if (uc1.teamMember == null && org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand2ID).teamMember != null) { uc1 = org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand2ID); }
                 if (uc1.teamMember == null && org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand3ID).teamMember != null) { uc1 = org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand3ID); }
 
                 ic.RoleName = "Incident Commander";
+
                 if (uc1.teamMember != null)
                 {
                     ic.teamMember = uc1.teamMember.Clone();
                     uc1.teamMember = null;
+
+
+                }
+                Globals.incidentService.UpsertICSRole(ic);
+                if (org.AllRoles.Any(o => o.RoleID == Globals.UnifiedCommand1ID)) { Globals.incidentService.DeleteICSRole(org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand1ID), org.OpPeriod); }
+                if (org.AllRoles.Any(o => o.RoleID == Globals.UnifiedCommand2ID))
+                {
+                    Globals.incidentService.DeleteICSRole(org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand2ID), org.OpPeriod);
+                }
+                if (org.AllRoles.Any(o => o.RoleID == Globals.UnifiedCommand3ID))
+                {
+                    Globals.incidentService.DeleteICSRole(org.AllRoles.First(o => o.RoleID == Globals.UnifiedCommand3ID), org.OpPeriod);
                 }
 
 
