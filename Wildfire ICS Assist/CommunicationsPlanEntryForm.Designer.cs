@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommunicationsPlanEntryForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnSavedUsedForAir = new System.Windows.Forms.Button();
+            this.chkSavedUsedForAir = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtSavedAssignment = new System.Windows.Forms.TextBox();
             this.txtSavedFunction = new System.Windows.Forms.TextBox();
@@ -39,6 +43,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnAirHelp = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.chkUsedForAir = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtAssignment = new System.Windows.Forms.TextBox();
             this.txtFunction = new System.Windows.Forms.TextBox();
@@ -56,12 +63,6 @@
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
-            this.chkUsedForAir = new System.Windows.Forms.CheckBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btnAirHelp = new System.Windows.Forms.Button();
-            this.btnSavedUsedForAir = new System.Windows.Forms.Button();
-            this.chkSavedUsedForAir = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -114,6 +115,42 @@
             this.panel1.Size = new System.Drawing.Size(751, 158);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(5, 118);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(143, 29);
+            this.label13.TabIndex = 134;
+            this.label13.Text = "Used for Air";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnSavedUsedForAir
+            // 
+            this.btnSavedUsedForAir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSavedUsedForAir.BackColor = System.Drawing.Color.White;
+            this.btnSavedUsedForAir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSavedUsedForAir.BackgroundImage")));
+            this.btnSavedUsedForAir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSavedUsedForAir.Cursor = System.Windows.Forms.Cursors.Help;
+            this.btnSavedUsedForAir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSavedUsedForAir.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSavedUsedForAir.Location = new System.Drawing.Point(449, 119);
+            this.btnSavedUsedForAir.Name = "btnSavedUsedForAir";
+            this.btnSavedUsedForAir.Size = new System.Drawing.Size(25, 25);
+            this.btnSavedUsedForAir.TabIndex = 132;
+            this.btnSavedUsedForAir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSavedUsedForAir.UseVisualStyleBackColor = false;
+            this.btnSavedUsedForAir.Click += new System.EventHandler(this.btnAirHelp_Click);
+            // 
+            // chkSavedUsedForAir
+            // 
+            this.chkSavedUsedForAir.AutoSize = true;
+            this.chkSavedUsedForAir.Location = new System.Drawing.Point(154, 119);
+            this.chkSavedUsedForAir.Name = "chkSavedUsedForAir";
+            this.chkSavedUsedForAir.Size = new System.Drawing.Size(289, 28);
+            this.chkSavedUsedForAir.TabIndex = 133;
+            this.chkSavedUsedForAir.Text = "Yes, this item is used for aircraft";
+            this.chkSavedUsedForAir.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -241,6 +278,42 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(751, 477);
             this.panel2.TabIndex = 98;
+            // 
+            // btnAirHelp
+            // 
+            this.btnAirHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAirHelp.BackColor = System.Drawing.Color.White;
+            this.btnAirHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAirHelp.BackgroundImage")));
+            this.btnAirHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAirHelp.Location = new System.Drawing.Point(464, 290);
+            this.btnAirHelp.Name = "btnAirHelp";
+            this.btnAirHelp.Size = new System.Drawing.Size(25, 25);
+            this.btnAirHelp.TabIndex = 99;
+            this.btnAirHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAirHelp.UseVisualStyleBackColor = false;
+            this.btnAirHelp.Click += new System.EventHandler(this.btnAirHelp_Click);
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(19, 290);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(143, 29);
+            this.label12.TabIndex = 131;
+            this.label12.Text = "Used for Air";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkUsedForAir
+            // 
+            this.chkUsedForAir.AutoSize = true;
+            this.chkUsedForAir.Location = new System.Drawing.Point(169, 290);
+            this.chkUsedForAir.Name = "chkUsedForAir";
+            this.chkUsedForAir.Size = new System.Drawing.Size(289, 28);
+            this.chkUsedForAir.TabIndex = 130;
+            this.chkUsedForAir.Text = "Yes, this item is used for aircraft";
+            this.chkUsedForAir.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -414,76 +487,6 @@
             this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
-            // 
-            // chkUsedForAir
-            // 
-            this.chkUsedForAir.AutoSize = true;
-            this.chkUsedForAir.Location = new System.Drawing.Point(169, 290);
-            this.chkUsedForAir.Name = "chkUsedForAir";
-            this.chkUsedForAir.Size = new System.Drawing.Size(289, 28);
-            this.chkUsedForAir.TabIndex = 130;
-            this.chkUsedForAir.Text = "Yes, this item is used for aircraft";
-            this.chkUsedForAir.UseVisualStyleBackColor = true;
-            // 
-            // label12
-            // 
-            this.label12.Location = new System.Drawing.Point(19, 290);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(143, 29);
-            this.label12.TabIndex = 131;
-            this.label12.Text = "Used for Air";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnAirHelp
-            // 
-            this.btnAirHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAirHelp.BackColor = System.Drawing.Color.White;
-            this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAirHelp.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
-            this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAirHelp.Location = new System.Drawing.Point(480, 284);
-            this.btnAirHelp.Name = "btnAirHelp";
-            this.btnAirHelp.Size = new System.Drawing.Size(50, 40);
-            this.btnAirHelp.TabIndex = 99;
-            this.btnAirHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAirHelp.UseVisualStyleBackColor = false;
-            this.btnAirHelp.Click += new System.EventHandler(this.btnAirHelp_Click);
-            // 
-            // btnSavedUsedForAir
-            // 
-            this.btnSavedUsedForAir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSavedUsedForAir.BackColor = System.Drawing.Color.White;
-            this.btnSavedUsedForAir.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnSavedUsedForAir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSavedUsedForAir.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
-            this.btnSavedUsedForAir.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSavedUsedForAir.Location = new System.Drawing.Point(465, 113);
-            this.btnSavedUsedForAir.Name = "btnSavedUsedForAir";
-            this.btnSavedUsedForAir.Size = new System.Drawing.Size(50, 40);
-            this.btnSavedUsedForAir.TabIndex = 132;
-            this.btnSavedUsedForAir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSavedUsedForAir.UseVisualStyleBackColor = false;
-            this.btnSavedUsedForAir.Click += new System.EventHandler(this.btnAirHelp_Click);
-            // 
-            // chkSavedUsedForAir
-            // 
-            this.chkSavedUsedForAir.AutoSize = true;
-            this.chkSavedUsedForAir.Location = new System.Drawing.Point(154, 119);
-            this.chkSavedUsedForAir.Name = "chkSavedUsedForAir";
-            this.chkSavedUsedForAir.Size = new System.Drawing.Size(289, 28);
-            this.chkSavedUsedForAir.TabIndex = 133;
-            this.chkSavedUsedForAir.Text = "Yes, this item is used for aircraft";
-            this.chkSavedUsedForAir.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(5, 118);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(143, 29);
-            this.label13.TabIndex = 134;
-            this.label13.Text = "Used for Air";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // CommunicationsPlanEntryForm
             // 

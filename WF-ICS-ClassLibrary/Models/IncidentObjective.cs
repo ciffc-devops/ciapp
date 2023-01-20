@@ -122,7 +122,7 @@ namespace WF_ICS_ClassLibrary.Models
                 StringBuilder sb = new StringBuilder();
 
                 
-                foreach (IncidentObjective obj in ActiveObjectives)
+                foreach (IncidentObjective obj in ActiveObjectives.OrderBy(o=>o.Priority))
                 {
                     sb.Append(obj.Priority); sb.Append(") ");
                     sb.Append(obj.Objective);

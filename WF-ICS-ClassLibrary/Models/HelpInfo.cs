@@ -61,6 +61,10 @@ namespace WF_ICS_ClassLibrary.Models
                     Body = bt.ToString();
                     return true;
 
+                case "AircraftIsMedivac":
+                    Title = "Aircraft used for medivac";
+                    Body = "If checked, this aircraft's information will be summarized in the Medivac field (4) on the Air Operations Summary form.";
+                    return true;
                 /* Member import */
                 case "CSV":
                     Title = "Comma Separated Values required";

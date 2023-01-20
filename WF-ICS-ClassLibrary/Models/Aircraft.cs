@@ -9,16 +9,17 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [Serializable]
     [ProtoContract]
-    public class AirOperationsSummary
+    public class AirOperationsSummary : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private string _Remarks;
         [ProtoMember(3)] private DateTime _Sunrise;
         [ProtoMember(4)] private DateTime _Sunset;
-        [ProtoMember(5)] private string _MedivacAircraft;
+        [ProtoMember(5)] private string _MedivacAircraftText;
         [ProtoMember(6)] private NOTAM _notam;
-        [ProtoMember(7)] private List<ICSRole> _personnel;
-        [ProtoMember(8)] private List<CommsPlanItem> _Frequencies;
+        
+        //[ProtoMember(7)] private List<ICSRole> _personnel;
+        //[ProtoMember(8)] private List<CommsPlanItem> _Frequencies;
         [ProtoMember(9)] private List<Aircraft> _aircrafts;
         [ProtoMember(10)] private string _PreparedByName;
         [ProtoMember(11)] private string _PreparedByPosition;
@@ -32,8 +33,8 @@ namespace WF_ICS_ClassLibrary.Models
         {
             _ID = Guid.NewGuid();
             _notam = new NOTAM();
-            _personnel = new List<ICSRole>();
-            _Frequencies = new List<CommsPlanItem>();
+           // _personnel = new List<ICSRole>();
+           // _Frequencies = new List<CommsPlanItem>();
             _aircrafts = new List<Aircraft>();
         }
 
@@ -41,11 +42,29 @@ namespace WF_ICS_ClassLibrary.Models
         public string Remarks { get => _Remarks; set => _Remarks = value; }
         public DateTime Sunrise { get => _Sunrise; set => _Sunrise = value; }
         public DateTime Sunset { get => _Sunset; set => _Sunset = value; }
-        public string MedivacAircraft { get => _MedivacAircraft; set => _MedivacAircraft = value; }
+        public string MedivacAircraftText { get => _MedivacAircraftText; set => _MedivacAircraftText = value; }
         public NOTAM notam { get => _notam; set => _notam = value; }
-        public List<ICSRole> personnel { get => _personnel; set => _personnel = value; }
-        public List<CommsPlanItem> Frequencies { get => _Frequencies; set => _Frequencies = value; }
+        //public List<ICSRole> personnel { get => _personnel; set => _personnel = value; }
+        //public List<CommsPlanItem> Frequencies { get => _Frequencies; set => _Frequencies = value; }
         public List<Aircraft> aircrafts { get => _aircrafts; set => _aircrafts = value; }
+        public List<Aircraft> activeAircraft { get => _aircrafts.Where(o => o.Active).OrderBy(o => o.Registration).ToList(); }
+        public List<Aircraft> medivacAircraftList { get => activeAircraft.Where(o => o.IsMedivac).OrderBy(o => o.Registration).ToList(); }
+        public string MedivacTextBlock
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach(Aircraft a in medivacAircraftList)
+                {
+                    sb.Append(a.Registration); sb.Append(" | "); sb.Append(a.MakeModel); 
+                    if (!string.IsNullOrEmpty(a.Pilot)) { sb.Append(" | "); sb.Append(a.Pilot); }
+                    sb.Append(Environment.NewLine);
+                }
+                sb.Append(Environment.NewLine);
+                sb.Append(MedivacAircraftText); 
+                return sb.ToString();
+            }
+        }
         public string PreparedByName { get => _PreparedByName; set => _PreparedByName = value; }
         public string PreparedByPosition { get => _PreparedByPosition; set => _PreparedByPosition = value; }
         public Guid PreparedByPositionID { get => _PreparedByPositionID; set => _PreparedByPositionID = value; }
@@ -53,12 +72,25 @@ namespace WF_ICS_ClassLibrary.Models
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public DateTime LastUpdatedUTC { get => _LastUpatedUTC; set => _LastUpatedUTC = value; }
 
+        public AirOperationsSummary Clone()
+        {
+            AirOperationsSummary cloneTo = this.MemberwiseClone() as AirOperationsSummary;
+            cloneTo.aircrafts = new List<Aircraft>();
+            foreach(Aircraft a in aircrafts) { cloneTo.aircrafts.Add(a.Clone()); }
+            cloneTo.notam = this.notam.Clone();
+            return cloneTo;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
+
     }
 
 
     [Serializable]
     [ProtoContract]
-    public class Aircraft
+    public class Aircraft : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private string _Registration;
@@ -72,13 +104,18 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(10)] private bool _Active;
         [ProtoMember(11)] private int _OpPeriod;
         [ProtoMember(12)] private DateTime _LastUpatedUTC;
-
+        [ProtoMember(13)] private bool _IsMedivac;
 
         public Aircraft() { ID = Guid.NewGuid(); Active = true; }
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string Registration { get => _Registration; set => _Registration = value; }
         public string MakeModel { get => _MakeModel; set => _MakeModel = value; }
+        public string RegAndMakeModel { get
+            {
+                if (!string.IsNullOrEmpty(MakeModel)) return Registration + " " + MakeModel;
+                else { return Registration; }
+            } }
         public string Base { get => _Base; set => _Base = value; }
         public DateTime StartTime { get => _StartTime; set => _StartTime = value; }
         public DateTime EndTime { get => _EndTime; set => _EndTime = value; }
@@ -88,12 +125,21 @@ namespace WF_ICS_ClassLibrary.Models
         public bool Active { get => _Active; set => _Active = value; }
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public DateTime LastUpdatedUTC { get => _LastUpatedUTC; set => _LastUpatedUTC = value; }
+        public bool IsMedivac { get => _IsMedivac; set => _IsMedivac = value; }
 
+        public Aircraft Clone()
+        {
+            return this.MemberwiseClone() as Aircraft;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
     }
 
     [Serializable]
     [ProtoContract]
-    public class NOTAM
+    public class NOTAM : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private double _Latitude;
@@ -121,6 +167,15 @@ namespace WF_ICS_ClassLibrary.Models
                 if(!string.IsNullOrEmpty(CenterPoint)) { return true; }
                 return false;
             }
+        }
+
+        public NOTAM Clone()
+        {
+            return this.MemberwiseClone() as NOTAM;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
         }
     }
 }

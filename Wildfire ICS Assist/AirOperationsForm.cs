@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist
     public partial class AirOperationsForm : Form
     {
         private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
-        private AirOperationsSummary CurrentAirOpsSummary { get => Program.CurrentIncident.allAirOperationsSummaries.FirstOrDefault(o=>o.OpPeriod == Program.CurrentOpPeriod); }    
+        private AirOperationsSummary CurrentAirOpsSummary { get => Program.CurrentIncident.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
 
 
         public AirOperationsForm()
@@ -29,7 +29,8 @@ namespace Wildfire_ICS_Assist
         private void AirOperationsForm_Load(object sender, EventArgs e)
         {
             Program.CurrentIncident.createAirOpsSummaryAsNeeded(Program.CurrentOpPeriod);
-
+            LoadMainData();
+            PopulateAircraft();
             PopulateTree();
             PopulateCommsItems();
 
@@ -40,12 +41,23 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
 
             Program.wfIncidentService.CommsPlanChanged += Program_CommsPlanChanged;
-            Program.wfIncidentService.CommsPlanItemChanged+= Program_CommsPlanItemChanged;
+            Program.wfIncidentService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
+
+            Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
         }
 
+        private void LoadMainData()
+        {
+            if(CurrentAirOpsSummary.Sunrise > datSunrise.MinDate) { datSunrise.Value = CurrentAirOpsSummary.Sunrise; }
+            if (CurrentAirOpsSummary.Sunset > datSunset.MinDate) { datSunset.Value = CurrentAirOpsSummary.Sunset; }
+            txtRemarks.Text = CurrentAirOpsSummary.Remarks;
+            txtMedivacText.Text = CurrentAirOpsSummary.MedivacAircraftText;
+            
+
+        }
         private void Program_OrgChartChanged(OrganizationChartEventArgs e)
         {
-            if(e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree(); }
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree(); }
         }
         private void Program_ICSRoleChanged(ICSRoleEventArgs e)
         {
@@ -55,13 +67,24 @@ namespace Wildfire_ICS_Assist
 
         private void Program_CommsPlanChanged(CommsPlanEventArgs e)
         {
-            if(e.item.OpsPeriod == Program.CurrentOpPeriod) { PopulateCommsItems(); }
+            if (e.item.OpsPeriod == Program.CurrentOpPeriod) { PopulateCommsItems(); }
         }
         private void Program_CommsPlanItemChanged(CommsPlanItemEventArgs e)
         {
             if (e.item.OpsPeriod == Program.CurrentOpPeriod) { PopulateCommsItems(); }
         }
 
+        private void Program_AircraftChanged(AircraftEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateAircraft(); }
+        }
+
+        private void PopulateAircraft()
+        {
+            dgvAircraft.DataSource = null;
+            dgvAircraft.AutoGenerateColumns = false;
+            dgvAircraft.DataSource = CurrentAirOpsSummary.activeAircraft;
+        }
 
         private void PopulateCommsItems()
         {
@@ -296,8 +319,112 @@ namespace Wildfire_ICS_Assist
         private void SetNOTAMCheckbox()
         {
             if (CurrentAirOpsSummary.notam.AnyContent) { btnNOTAM.Image = Properties.Resources.glyphicons_basic_739_check; }
-            else { btnNOTAM.Image = null;  }
+            else { btnNOTAM.Image = null; }
 
+        }
+
+        private void btnAddAircraft_Click(object sender, EventArgs e)
+        {
+            using (AircraftEntryForm entryForm = new AircraftEntryForm())
+            {
+                Aircraft a = new Aircraft();
+                a.OpPeriod = Program.CurrentOpPeriod;
+                entryForm.selectedAircraft = a;
+                DialogResult dr = entryForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertAircraft(entryForm.selectedAircraft);
+                    if (entryForm.SaveForLater)
+                    {
+                        Aircraft save = entryForm.selectedAircraft.Clone();
+                        save.Pilot = string.Empty;
+                        save.StartTime = DateTime.MinValue;
+                        save.EndTime = DateTime.MinValue;
+                        save.IsMedivac = false;
+                        Program.generalOptionsService.UpserOptionValue(save, "Aircraft");
+
+                    }
+                }
+            }
+        }
+
+        private void OpenAircraftForEdit(Aircraft aircraft)
+        {
+            using (AircraftEditForm editForm = new AircraftEditForm())
+            {
+                editForm.selectedAircraft = aircraft.Clone();
+                DialogResult dr = editForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertAircraft(editForm.selectedAircraft);
+                }
+            }
+        }
+        private void btnEditAircraft_Click(object sender, EventArgs e)
+        {
+            if(dgvAircraft.SelectedRows.Count == 1)
+            {
+                Aircraft a = dgvAircraft.SelectedRows[0].DataBoundItem as Aircraft;
+                if (a != null) { OpenAircraftForEdit(a); }
+            }
+        }
+
+        private void dgvAircraft_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                Aircraft a = dgvAircraft.Rows[e.RowIndex].DataBoundItem as Aircraft;
+                if(a != null) { OpenAircraftForEdit(a); }
+            }
+        }
+
+        private void dgvAircraft_SelectionChanged(object sender, EventArgs e)
+        {
+            btnEditAircraft.Enabled = dgvAircraft.SelectedRows.Count == 1;
+            btnDeleteAircraft.Enabled = dgvAircraft.SelectedRows.Count > 0;
+        }
+
+        private void btnDeleteAircraft_Click(object sender, EventArgs e)
+        {
+            if(dgvAircraft.SelectedRows.Count > 0)
+            {
+                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(dr == DialogResult.Yes)
+                {
+                    List<Aircraft> toDelete = new List<Aircraft>();
+                    foreach(DataGridViewRow row in dgvAircraft.SelectedRows)
+                    {
+                        Aircraft a = (Aircraft)row.DataBoundItem;
+                        if(a != null) { toDelete.Add(a); }
+                    }
+                    foreach(Aircraft a in toDelete)
+                    {
+                        a.Active = false;
+                        Program.wfIncidentService.UpsertAircraft(a);
+                    }
+                }
+            }
+        }
+
+        private void txtMedivacText_TextChanged(object sender, EventArgs e)
+        {
+            CurrentAirOpsSummary.MedivacAircraftText= txtMedivacText.Text;
+        }
+
+        private void cboPreparedBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboPreparedBy_Leave(object sender, EventArgs e)
+        {
+            if(cboPreparedBy.SelectedItem != null)
+            {
+                ICSRole role = (ICSRole)cboPreparedBy.SelectedItem;
+                CurrentAirOpsSummary.PreparedByName = role.IndividualName;
+                CurrentAirOpsSummary.PreparedByPosition = role.RoleName;
+                CurrentAirOpsSummary.PreparedByPositionID= role.RoleID;
+            }
         }
     }
 }

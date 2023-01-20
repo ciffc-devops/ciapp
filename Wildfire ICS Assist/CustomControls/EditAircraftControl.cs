@@ -29,6 +29,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtBase.Text = selectedAircraft.Base;
                 txtMakeModel.Text = selectedAircraft.MakeModel;
                 txtRegistration.Text = selectedAircraft.Registration;
+                txtContactNumber.Text = selectedAircraft.ContactNumber;
                 if (!string.IsNullOrEmpty(selectedAircraft.Remarks)) { txtRemarks.Text = selectedAircraft.Remarks.Replace("\n", Environment.NewLine); }
             }
         }
@@ -61,6 +62,11 @@ namespace Wildfire_ICS_Assist.CustomControls
         private bool ValidateForm()
         {
             return !string.IsNullOrEmpty(txtRegistration.Text.Trim());
+        }
+
+        private void txtContactNumber_TextChanged(object sender, EventArgs e)
+        {
+            if(selectedAircraft != null) { selectedAircraft.ContactNumber = txtContactNumber.Text; }
         }
     }
 }
