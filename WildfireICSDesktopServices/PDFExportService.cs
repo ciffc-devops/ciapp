@@ -16,6 +16,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 
+
 namespace WildfireICSDesktopServices
 {
     public class PDFExportService : IPDFExportService
@@ -301,6 +302,8 @@ namespace WildfireICSDesktopServices
                         if (!string.IsNullOrEmpty(item.ReplyByPosition)) { stamper.AcroFields.SetField("ReplyPosition", item.ReplyByPosition); }
                         if (!string.IsNullOrEmpty(item.ReplyByName)) { stamper.AcroFields.SetField("ReplyName", item.ReplyByName); }
                         stamper.AcroFields.SetField("ReplyDate", string.Format("{0:yyyy-MMM-dd HH:mm}", item.ReplyDate));
+
+
 
 
 
@@ -2593,7 +2596,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public List<byte[]> createOpPeriodContentsList(WFIncident task, List<string> items, int OpPeriod)
+        public List<byte[]> createFreeformOpPeriodContentsList(WFIncident task, List<string> items, int OpPeriod)
         {
             List<byte[]> allPDFs = new List<byte[]>();
             string path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
@@ -2718,6 +2721,118 @@ namespace WildfireICSDesktopServices
 
             return allPDFs;
         }
+
+        public List<byte[]> exportOpTitlePageToPDF(WFIncident task, int OpPeriod, string contentsText,string titleImageBytes, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createOpTitlePagePDF(task, OpPeriod, contentsText, titleImageBytes, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+        public string createOpTitlePagePDF(WFIncident task, int OpPeriod, string contentsText, string titleImageBytes, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+            string outputFileName = "Task " + task.IncidentIdentifier + " - Title Page - OP " + OpPeriod.ToString() + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = "BlankForms/ICS-000 Title Page";
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+
+
+                    OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
+
+                    stamper.AcroFields.SetField("INCIDENT NAMERow1", task.TaskName);
+                    stamper.AcroFields.SetField("Incident NumberRow1", task.TaskNumber);
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+
+                    stamper.AcroFields.SetField("ContentsList", contentsText);
+
+                    if (!string.IsNullOrEmpty(titleImageBytes))
+                    {
+                        iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(titleImageBytes.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                        pic.ScaleToFit(315, 220);
+                        float x = ((315 - pic.ScaledWidth) / 2) + 263;
+                        pic.SetAbsolutePosition(x, 445);
+
+                        stamper.GetOverContent(1).AddImage(pic);
+                    }
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + "-titlepage");
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+
+                        //re-add the signature field
+                        int[] instancesOfInterest = { 1 };
+                        stamper = stamper.AddPDFField( "Signature", "Signature", 19, 187, "ReportSignature",  instancesOfInterest);
+
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+            return path;
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -342,7 +342,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-                contents.Add("Each of the following (when available) for operational periods: " + opNames.ToString());
+                //contents.Add("Each of the following (when available) for operational periods: " + opNames.ToString());
 
             }
 
@@ -406,11 +406,15 @@ namespace Wildfire_ICS_Assist
 
             if (PrintIncidentToDate)
             {
-                return Program.pdfExportService.createOpPeriodContentsList(CurrentIncident, contents, 0);
+                return Program.pdfExportService.createFreeformOpPeriodContentsList(CurrentIncident, contents, 0);
             }
             else
             {
-                return Program.pdfExportService.createOpPeriodContentsList(CurrentIncident, contents, CurrentOpPeriod);
+                StringBuilder sb = new StringBuilder();
+                foreach(string s in contents) { sb.Append(s); sb.Append(Environment.NewLine); }
+                byte[] img = null;
+                //CurrentIncident, CurrentOpPeriod, sb.ToString(), img, true, chkFlattenPDF.Checked)
+                return Program.pdfExportService.createOpTitlePagePDF(CurrentIncident, CurrentOpPeriod, sb.ToString(), img, true, chkFlattenPDF.Checked);
             }
         }
     }

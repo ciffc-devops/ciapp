@@ -694,6 +694,9 @@
     <None Include="BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\ICS-000 Title Page.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS-202-WF-Incident-Objectives.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

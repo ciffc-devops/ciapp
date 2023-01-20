@@ -14,7 +14,7 @@ namespace WildfireICSDesktopServices
         string createNotePDF(WFIncident task, Note note, bool automaticallyOpen = true, bool tempFileName = false);
         string createObjectivesPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
-        List<byte[]> createOpPeriodContentsList(WFIncident task, List<string> items, int OpPeriod);
+        List<byte[]> createFreeformOpPeriodContentsList(WFIncident task, List<string> items, int OpPeriod);
         string createOrgChartContactList(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
         List<byte[]> exportOrgChartContactsToPDF(WFIncident task, int OpPeriodToExport);
         string createOrgChartPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
@@ -43,7 +43,8 @@ namespace WildfireICSDesktopServices
         string createGeneralMessagePDF(WFIncident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false);
         string createContactsPDF(WFIncident task, int OpPeriod, string createdBy, string createdByTitle, bool useTempPath, bool flattenPDF);
         List<byte[]> exportContactsToPDF(WFIncident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName, bool flattenPDF);
-        string CreateAirOpsSummaryPDF(WFIncident task, int OpPeriod, bool useTempPath, bool flattenPDF);
-        List<byte[]> exportAirOpsSummaryToPDF(WFIncident incident, int OpPeriodToExport, bool flattenPDF = false);
+
+        string createOpTitlePagePDF(WFIncident task, int OpPeriod, string contentsText, byte[] titleImage, bool useTempPath, bool flattenPDF);
+        List<byte[]> exportOpTitlePageToPDF(WFIncident task, int OpPeriod, string contentsText, byte[] titleImage, bool flattenPDF);
     }
 }
