@@ -49,9 +49,10 @@
             this.editTeamMemberControl1.Location = new System.Drawing.Point(0, 0);
             this.editTeamMemberControl1.Margin = new System.Windows.Forms.Padding(6);
             this.editTeamMemberControl1.Name = "editTeamMemberControl1";
-            this.editTeamMemberControl1.Size = new System.Drawing.Size(506, 374);
+            this.editTeamMemberControl1.Size = new System.Drawing.Size(506, 397);
             this.editTeamMemberControl1.TabIndex = 0;
             this.editTeamMemberControl1.teamMember = ((WF_ICS_ClassLibrary.Models.TeamMember)(resources.GetObject("editTeamMemberControl1.teamMember")));
+            this.editTeamMemberControl1.Load += new System.EventHandler(this.editTeamMemberControl1_Load);
             // 
             // splitContainer1
             // 
@@ -70,8 +71,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(506, 443);
-            this.splitContainer1.SplitterDistance = 378;
+            this.splitContainer1.Size = new System.Drawing.Size(506, 466);
+            this.splitContainer1.SplitterDistance = 401;
             this.splitContainer1.TabIndex = 1;
             // 
             // btnSave
@@ -108,7 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 443);
+            this.ClientSize = new System.Drawing.Size(506, 466);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

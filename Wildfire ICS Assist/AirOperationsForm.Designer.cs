@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AirOperationsForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -64,6 +64,9 @@
             this.btnEditComms = new System.Windows.Forms.Button();
             this.btnAddComms = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtMedivacText = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnNOTAM = new System.Windows.Forms.Button();
@@ -74,9 +77,6 @@
             this.datSunset = new System.Windows.Forms.DateTimePicker();
             this.datSunrise = new System.Windows.Forms.DateTimePicker();
             this.txtRemarks = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtMedivacText = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -123,7 +123,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.datSunrise);
             this.splitContainer1.Panel2.Controls.Add(this.txtRemarks);
             this.splitContainer1.Size = new System.Drawing.Size(1351, 582);
-            this.splitContainer1.SplitterDistance = 356;
+            this.splitContainer1.SplitterDistance = 353;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -144,7 +144,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1351, 356);
+            this.splitContainer2.Size = new System.Drawing.Size(1351, 353);
             this.splitContainer2.SplitterDistance = 449;
             this.splitContainer2.TabIndex = 2;
             // 
@@ -152,7 +152,7 @@
             // 
             this.btnDeleteAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteAircraft.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteAircraft.Location = new System.Drawing.Point(235, 280);
+            this.btnDeleteAircraft.Location = new System.Drawing.Point(235, 277);
             this.btnDeleteAircraft.Name = "btnDeleteAircraft";
             this.btnDeleteAircraft.Size = new System.Drawing.Size(113, 73);
             this.btnDeleteAircraft.TabIndex = 53;
@@ -165,7 +165,7 @@
             // 
             this.btnEditAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditAircraft.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditAircraft.Location = new System.Drawing.Point(116, 280);
+            this.btnEditAircraft.Location = new System.Drawing.Point(116, 277);
             this.btnEditAircraft.Name = "btnEditAircraft";
             this.btnEditAircraft.Size = new System.Drawing.Size(113, 73);
             this.btnEditAircraft.TabIndex = 52;
@@ -178,7 +178,7 @@
             // 
             this.btnAddAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddAircraft.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddAircraft.Location = new System.Drawing.Point(8, 280);
+            this.btnAddAircraft.Location = new System.Drawing.Point(8, 277);
             this.btnAddAircraft.Name = "btnAddAircraft";
             this.btnAddAircraft.Size = new System.Drawing.Size(102, 73);
             this.btnAddAircraft.TabIndex = 51;
@@ -222,7 +222,7 @@
             this.dgvAircraft.RowHeadersVisible = false;
             this.dgvAircraft.RowTemplate.Height = 35;
             this.dgvAircraft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAircraft.Size = new System.Drawing.Size(435, 230);
+            this.dgvAircraft.Size = new System.Drawing.Size(435, 227);
             this.dgvAircraft.TabIndex = 1;
             this.dgvAircraft.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAircraft_CellDoubleClick);
             this.dgvAircraft.SelectionChanged += new System.EventHandler(this.dgvAircraft_SelectionChanged);
@@ -276,8 +276,8 @@
             // 
             this.colStart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colStart.DataPropertyName = "StartTime";
-            dataGridViewCellStyle3.Format = "MMM-dd HH:mm";
-            this.colStart.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Format = "MMM-dd HH:mm";
+            this.colStart.DefaultCellStyle = dataGridViewCellStyle9;
             this.colStart.HeaderText = "Start";
             this.colStart.Name = "colStart";
             this.colStart.ReadOnly = true;
@@ -286,9 +286,9 @@
             // colEnd
             // 
             this.colEnd.DataPropertyName = "EndTime";
-            dataGridViewCellStyle4.Format = "MMM-dd HH:mm";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colEnd.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Format = "MMM-dd HH:mm";
+            dataGridViewCellStyle10.NullValue = null;
+            this.colEnd.DefaultCellStyle = dataGridViewCellStyle10;
             this.colEnd.HeaderText = "End";
             this.colEnd.Name = "colEnd";
             this.colEnd.ReadOnly = true;
@@ -324,7 +324,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.btnEditComms);
             this.splitContainer3.Panel2.Controls.Add(this.btnAddComms);
             this.splitContainer3.Panel2.Controls.Add(this.label2);
-            this.splitContainer3.Size = new System.Drawing.Size(898, 356);
+            this.splitContainer3.Size = new System.Drawing.Size(898, 353);
             this.splitContainer3.SplitterDistance = 448;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -336,14 +336,14 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(8, 41);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(437, 233);
+            this.treeOrgChart.Size = new System.Drawing.Size(437, 230);
             this.treeOrgChart.TabIndex = 56;
             // 
             // btnDeleteRole
             // 
             this.btnDeleteRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteRole.Location = new System.Drawing.Point(314, 280);
+            this.btnDeleteRole.Location = new System.Drawing.Point(314, 277);
             this.btnDeleteRole.Name = "btnDeleteRole";
             this.btnDeleteRole.Size = new System.Drawing.Size(123, 73);
             this.btnDeleteRole.TabIndex = 60;
@@ -357,7 +357,7 @@
             // 
             this.btnEditRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditRole.Location = new System.Drawing.Point(219, 280);
+            this.btnEditRole.Location = new System.Drawing.Point(219, 277);
             this.btnEditRole.Name = "btnEditRole";
             this.btnEditRole.Size = new System.Drawing.Size(89, 73);
             this.btnEditRole.TabIndex = 59;
@@ -371,7 +371,7 @@
             // 
             this.btnAssignRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAssignRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
-            this.btnAssignRole.Location = new System.Drawing.Point(101, 280);
+            this.btnAssignRole.Location = new System.Drawing.Point(101, 277);
             this.btnAssignRole.Name = "btnAssignRole";
             this.btnAssignRole.Size = new System.Drawing.Size(112, 73);
             this.btnAssignRole.TabIndex = 58;
@@ -384,7 +384,7 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAdd.Location = new System.Drawing.Point(3, 280);
+            this.btnAdd.Location = new System.Drawing.Point(3, 277);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(92, 73);
             this.btnAdd.TabIndex = 57;
@@ -426,7 +426,7 @@
             this.dgvCommsItems.RowHeadersVisible = false;
             this.dgvCommsItems.RowTemplate.Height = 30;
             this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommsItems.Size = new System.Drawing.Size(421, 233);
+            this.dgvCommsItems.Size = new System.Drawing.Size(421, 230);
             this.dgvCommsItems.TabIndex = 59;
             // 
             // colCommsSystem
@@ -485,7 +485,7 @@
             // 
             this.btnDeleteComms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteComms.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteComms.Location = new System.Drawing.Point(240, 280);
+            this.btnDeleteComms.Location = new System.Drawing.Point(240, 277);
             this.btnDeleteComms.Name = "btnDeleteComms";
             this.btnDeleteComms.Size = new System.Drawing.Size(113, 73);
             this.btnDeleteComms.TabIndex = 58;
@@ -498,7 +498,7 @@
             // 
             this.btnEditComms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditComms.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditComms.Location = new System.Drawing.Point(121, 280);
+            this.btnEditComms.Location = new System.Drawing.Point(121, 277);
             this.btnEditComms.Name = "btnEditComms";
             this.btnEditComms.Size = new System.Drawing.Size(113, 73);
             this.btnEditComms.TabIndex = 57;
@@ -511,7 +511,7 @@
             // 
             this.btnAddComms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddComms.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddComms.Location = new System.Drawing.Point(13, 280);
+            this.btnAddComms.Location = new System.Drawing.Point(13, 277);
             this.btnAddComms.Name = "btnAddComms";
             this.btnAddComms.Size = new System.Drawing.Size(102, 73);
             this.btnAddComms.TabIndex = 56;
@@ -530,11 +530,43 @@
             this.label2.TabIndex = 55;
             this.label2.Text = "Frequencies";
             // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(697, 165);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(299, 54);
+            this.label9.TabIndex = 68;
+            this.label9.Text = "*Note: info for any aircraft identified above as Medivac will be automatically in" +
+    "cluded here when printed.";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(692, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(199, 29);
+            this.label3.TabIndex = 67;
+            this.label3.Text = "Medivac Aircraft";
+            // 
+            // txtMedivacText
+            // 
+            this.txtMedivacText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMedivacText.Location = new System.Drawing.Point(697, 38);
+            this.txtMedivacText.Multiline = true;
+            this.txtMedivacText.Name = "txtMedivacText";
+            this.txtMedivacText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMedivacText.Size = new System.Drawing.Size(299, 124);
+            this.txtMedivacText.TabIndex = 66;
+            this.txtMedivacText.TextChanged += new System.EventHandler(this.txtMedivacText_TextChanged);
+            // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1176, 81);
+            this.label8.Location = new System.Drawing.Point(185, 174);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 24);
             this.label8.TabIndex = 65;
@@ -542,9 +574,8 @@
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1002, 81);
+            this.label7.Location = new System.Drawing.Point(13, 174);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(74, 24);
             this.label7.TabIndex = 64;
@@ -556,14 +587,15 @@
             this.btnNOTAM.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.btnNOTAM.Image = ((System.Drawing.Image)(resources.GetObject("btnNOTAM.Image")));
             this.btnNOTAM.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNOTAM.Location = new System.Drawing.Point(1140, 11);
+            this.btnNOTAM.Location = new System.Drawing.Point(1005, 38);
             this.btnNOTAM.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.btnNOTAM.Name = "btnNOTAM";
             this.btnNOTAM.Size = new System.Drawing.Size(199, 61);
             this.btnNOTAM.TabIndex = 63;
-            this.btnNOTAM.Text = "NOTAM";
+            this.btnNOTAM.Text = "Notice to Airmen";
             this.btnNOTAM.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnNOTAM.UseVisualStyleBackColor = true;
+            this.btnNOTAM.Click += new System.EventHandler(this.btnNOTAM_Click);
             // 
             // label6
             // 
@@ -578,7 +610,7 @@
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Location = new System.Drawing.Point(1002, 116);
+            this.label5.Location = new System.Drawing.Point(1001, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 32);
             this.label5.TabIndex = 60;
@@ -590,18 +622,18 @@
             this.cboPreparedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboPreparedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPreparedBy.FormattingEnabled = true;
-            this.cboPreparedBy.Location = new System.Drawing.Point(1140, 116);
+            this.cboPreparedBy.Location = new System.Drawing.Point(1005, 130);
             this.cboPreparedBy.Name = "cboPreparedBy";
-            this.cboPreparedBy.Size = new System.Drawing.Size(199, 32);
+            this.cboPreparedBy.Size = new System.Drawing.Size(334, 32);
             this.cboPreparedBy.TabIndex = 59;
             this.cboPreparedBy.SelectedIndexChanged += new System.EventHandler(this.cboPreparedBy_SelectedIndexChanged);
             this.cboPreparedBy.Leave += new System.EventHandler(this.cboPreparedBy_Leave);
             // 
             // btnPrint
             // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(1226, 159);
+            this.btnPrint.Location = new System.Drawing.Point(1226, 168);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(113, 42);
             this.btnPrint.TabIndex = 57;
@@ -609,26 +641,27 @@
             this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // datSunset
             // 
-            this.datSunset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.datSunset.CustomFormat = "HH:mm";
             this.datSunset.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datSunset.Location = new System.Drawing.Point(1251, 79);
+            this.datSunset.Location = new System.Drawing.Point(260, 172);
             this.datSunset.Name = "datSunset";
             this.datSunset.Size = new System.Drawing.Size(88, 29);
             this.datSunset.TabIndex = 2;
+            this.datSunset.ValueChanged += new System.EventHandler(this.datSunset_ValueChanged);
             // 
             // datSunrise
             // 
-            this.datSunrise.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.datSunrise.CustomFormat = "HH:mm";
             this.datSunrise.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datSunrise.Location = new System.Drawing.Point(1082, 79);
+            this.datSunrise.Location = new System.Drawing.Point(93, 172);
             this.datSunrise.Name = "datSunrise";
             this.datSunrise.Size = new System.Drawing.Size(88, 29);
             this.datSunrise.TabIndex = 1;
+            this.datSunrise.ValueChanged += new System.EventHandler(this.datSunrise_ValueChanged);
             // 
             // txtRemarks
             // 
@@ -639,42 +672,9 @@
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtRemarks.Size = new System.Drawing.Size(679, 163);
+            this.txtRemarks.Size = new System.Drawing.Size(679, 124);
             this.txtRemarks.TabIndex = 0;
             this.txtRemarks.TextChanged += new System.EventHandler(this.txtRemarks_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(692, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(199, 29);
-            this.label3.TabIndex = 67;
-            this.label3.Text = "Medivac Aircraft";
-            // 
-            // txtMedivacText
-            // 
-            this.txtMedivacText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMedivacText.Location = new System.Drawing.Point(697, 95);
-            this.txtMedivacText.Multiline = true;
-            this.txtMedivacText.Name = "txtMedivacText";
-            this.txtMedivacText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMedivacText.Size = new System.Drawing.Size(299, 106);
-            this.txtMedivacText.TabIndex = 66;
-            this.txtMedivacText.TextChanged += new System.EventHandler(this.txtMedivacText_TextChanged);
-            // 
-            // label9
-            // 
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(697, 38);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(299, 54);
-            this.label9.TabIndex = 68;
-            this.label9.Text = "*Note: info for any aircraft identified above as Medivac will be automatically in" +
-    "cluded here when printed.";
             // 
             // AirOperationsForm
             // 
@@ -688,6 +688,7 @@
             this.Name = "AirOperationsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Air Operations Summary";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AirOperationsForm_FormClosing);
             this.Load += new System.EventHandler(this.AirOperationsForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

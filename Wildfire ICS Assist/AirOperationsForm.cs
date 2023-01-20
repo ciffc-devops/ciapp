@@ -33,7 +33,7 @@ namespace Wildfire_ICS_Assist
             PopulateAircraft();
             PopulateTree();
             PopulateCommsItems();
-
+            LoadPreparedBy();
 
             SetNOTAMCheckbox();
 
@@ -46,6 +46,14 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
         }
 
+        private void LoadPreparedBy()
+        {
+            cboPreparedBy.DataSource = null;
+            cboPreparedBy.DataSource = CurrentOrgChart.Clone().AllRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
+            if (CurrentAirOpsSummary.PreparedByPositionID != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByPositionID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByPositionID; }
+
+        }
+
         private void LoadMainData()
         {
             if(CurrentAirOpsSummary.Sunrise > datSunrise.MinDate) { datSunrise.Value = CurrentAirOpsSummary.Sunrise; }
@@ -55,13 +63,24 @@ namespace Wildfire_ICS_Assist
             
 
         }
+
+        private void Program_AirOpsSummaryChanged (AirOperationsSummaryEventArgs e)
+        {
+            if(e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                SetNOTAMCheckbox();
+                LoadMainData();
+                LoadPreparedBy();
+            }
+        }
+
         private void Program_OrgChartChanged(OrganizationChartEventArgs e)
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree(); }
         }
         private void Program_ICSRoleChanged(ICSRoleEventArgs e)
         {
-            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree(); }
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree(); LoadPreparedBy(); }
         }
 
 
@@ -425,6 +444,67 @@ namespace Wildfire_ICS_Assist
                 CurrentAirOpsSummary.PreparedByPosition = role.RoleName;
                 CurrentAirOpsSummary.PreparedByPositionID= role.RoleID;
             }
+        }
+
+        private void btnNOTAM_Click(object sender, EventArgs e)
+        {
+            using (AirNOTAMEditForm editForm = new AirNOTAMEditForm())
+            {
+                editForm.selectedNOTAM = CurrentAirOpsSummary.notam.Clone();
+                DialogResult dr = editForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    CurrentAirOpsSummary.notam = editForm.selectedNOTAM;
+                    if(CurrentAirOpsSummary.notam.Latitude != 0 && CurrentAirOpsSummary.notam.Longitude != 0)
+                    {
+                        DateTime opTime = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
+
+                        Coordinate c = new Coordinate();
+                        c.Latitude = CurrentAirOpsSummary.notam.Latitude; c.Longitude = CurrentAirOpsSummary.notam.Longitude;
+
+                        datSunrise.Value = GISTools.GetSunrise(c, opTime);
+                        datSunset.Value = GISTools.GetSunset(c, opTime);
+                    }
+
+                    SetNOTAMCheckbox();
+                }
+            }
+        }
+
+        private void datSunrise_ValueChanged(object sender, EventArgs e)
+        {
+            CurrentAirOpsSummary.Sunrise= datSunrise.Value;
+        }
+
+        private void datSunset_ValueChanged(object sender, EventArgs e)
+        {
+            CurrentAirOpsSummary.Sunset= datSunset.Value;
+        }
+
+        private void AirOperationsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
+
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            //catch any changes that have been made and make sure they're saved.
+            Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
+
+
+            string path = Program.pdfExportService.CreateAirOpsSummaryPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false, false);
+            if (!string.IsNullOrEmpty(path))
+            {
+                try { System.Diagnostics.Process.Start(path); }
+                catch { MessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
+            }
+            else
+            {
+                MessageBox.Show("Sorry, there was an error generating the contact list.");
+            }
+
+            
         }
     }
 }

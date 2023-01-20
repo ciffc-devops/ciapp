@@ -40,5 +40,10 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
 
         }
+
+        private void editTeamMemberControl1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

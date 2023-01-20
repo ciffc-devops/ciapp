@@ -17,7 +17,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(4)] private DateTime _Sunset;
         [ProtoMember(5)] private string _MedivacAircraftText;
         [ProtoMember(6)] private NOTAM _notam;
-        
+
         //[ProtoMember(7)] private List<ICSRole> _personnel;
         //[ProtoMember(8)] private List<CommsPlanItem> _Frequencies;
         [ProtoMember(9)] private List<Aircraft> _aircrafts;
@@ -33,9 +33,10 @@ namespace WF_ICS_ClassLibrary.Models
         {
             _ID = Guid.NewGuid();
             _notam = new NOTAM();
-           // _personnel = new List<ICSRole>();
-           // _Frequencies = new List<CommsPlanItem>();
+            // _personnel = new List<ICSRole>();
+            // _Frequencies = new List<CommsPlanItem>();
             _aircrafts = new List<Aircraft>();
+            Active = true;
         }
 
         public Guid ID { get => _ID; set => _ID = value; }
@@ -54,14 +55,14 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 StringBuilder sb = new StringBuilder();
-                foreach(Aircraft a in medivacAircraftList)
+                foreach (Aircraft a in medivacAircraftList)
                 {
-                    sb.Append(a.Registration); sb.Append(" | "); sb.Append(a.MakeModel); 
+                    sb.Append(a.Registration); sb.Append(" | "); sb.Append(a.MakeModel);
                     if (!string.IsNullOrEmpty(a.Pilot)) { sb.Append(" | "); sb.Append(a.Pilot); }
                     sb.Append(Environment.NewLine);
                 }
                 sb.Append(Environment.NewLine);
-                sb.Append(MedivacAircraftText); 
+                sb.Append(MedivacAircraftText);
                 return sb.ToString();
             }
         }
@@ -76,13 +77,25 @@ namespace WF_ICS_ClassLibrary.Models
         {
             AirOperationsSummary cloneTo = this.MemberwiseClone() as AirOperationsSummary;
             cloneTo.aircrafts = new List<Aircraft>();
-            foreach(Aircraft a in aircrafts) { cloneTo.aircrafts.Add(a.Clone()); }
+            foreach (Aircraft a in aircrafts) { cloneTo.aircrafts.Add(a.Clone()); }
             cloneTo.notam = this.notam.Clone();
             return cloneTo;
         }
         object ICloneable.Clone()
         {
             return this.Clone();
+        }
+
+        public bool HasContent
+        {
+            get
+            {
+                if (activeAircraft.Any()) { return true; }
+                if(!string.IsNullOrEmpty(MedivacAircraftText)) { return true; }
+                if (!string.IsNullOrEmpty(Remarks)) { return true; }
+                if (notam.AnyContent) { return true; }
+                return false;
+            }
         }
 
     }
@@ -111,11 +124,14 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid ID { get => _ID; set => _ID = value; }
         public string Registration { get => _Registration; set => _Registration = value; }
         public string MakeModel { get => _MakeModel; set => _MakeModel = value; }
-        public string RegAndMakeModel { get
+        public string RegAndMakeModel
+        {
+            get
             {
                 if (!string.IsNullOrEmpty(MakeModel)) return Registration + " " + MakeModel;
                 else { return Registration; }
-            } }
+            }
+        }
         public string Base { get => _Base; set => _Base = value; }
         public DateTime StartTime { get => _StartTime; set => _StartTime = value; }
         public DateTime EndTime { get => _EndTime; set => _EndTime = value; }
@@ -135,6 +151,8 @@ namespace WF_ICS_ClassLibrary.Models
         {
             return this.Clone();
         }
+
+        
     }
 
     [Serializable]
@@ -144,27 +162,27 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private double _Latitude;
         [ProtoMember(3)] private double _Longitude;
-        [ProtoMember(4)] private double _RadiusNM;
-        [ProtoMember(5)] private double _AltitudeASL;
+        [ProtoMember(4)] private decimal _RadiusNM;
+        [ProtoMember(5)] private decimal _AltitudeASL;
         [ProtoMember(6)] private string _CenterPoint;
 
 
         public NOTAM() { _ID = Guid.NewGuid(); }
 
         public Guid ID { get => _ID; set => _ID = value; }
-        public double Latitude { get => _Latitude; set => _Latitude= value; }
-        public double Longitude { get => _Longitude; set => _Longitude= value; }
-        public double RadiusNM { get => _RadiusNM; set => _RadiusNM= value; }
-        public double AltitudeASL { get => _AltitudeASL; set => _AltitudeASL= value; }  
+        public double Latitude { get => _Latitude; set => _Latitude = value; }
+        public double Longitude { get => _Longitude; set => _Longitude = value; }
+        public decimal RadiusNM { get => _RadiusNM; set => _RadiusNM = value; }
+        public decimal AltitudeASL { get => _AltitudeASL; set => _AltitudeASL = value; }
         public string CenterPoint { get => _CenterPoint; set => _CenterPoint = value; }
         public bool AnyContent
         {
             get
             {
-                if(Latitude != 0 || Longitude != 0) { return true; }
-                if(RadiusNM!= 0) { return true; }
-                if(AltitudeASL!= 0) { return true; }
-                if(!string.IsNullOrEmpty(CenterPoint)) { return true; }
+                if (Latitude != 0 || Longitude != 0) { return true; }
+                if (RadiusNM != 0) { return true; }
+                if (AltitudeASL != 0) { return true; }
+                if (!string.IsNullOrEmpty(CenterPoint)) { return true; }
                 return false;
             }
         }

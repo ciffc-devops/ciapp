@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -2996,6 +2997,243 @@ namespace WildfireICSDesktopServices
             }
             return path;
         }
+
+
+
+
+
+
+        public string CreateAirOpsSummaryPDF(WFIncident task, int OpPeriod, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+
+
+            string outputFileName = "ICS 220 - Task " + task.IncidentIdentifier + " - OP " + OpPeriod.ToString() + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+
+
+            List<byte[]> allPDFs = exportAirOpsSummaryToPDF(task, OpPeriod,  flattenPDF);
+
+            //path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(path, fullFile);
+
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+
+            return path;
+        }
+
+
+        public List<byte[]> exportAirOpsSummaryToPDF(WFIncident incident, int OpPeriodToExport, bool flattenPDF = false)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            AirOperationsSummary summary = incident.allAirOperationsSummaries.FirstOrDefault(o=>o.OpPeriod == OpPeriodToExport);
+
+
+            
+            int totalPages = getAirOpsSummaryPageCount(incident, summary);
+
+
+            List<string> pdfFileNames = new List<string>();
+
+
+            List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == summary.OpPeriod).ActiveAirCommsItems;
+            List<ICSRole> roles = new List<ICSRole>();
+            roles.Add(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).AllRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
+            roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).GetChildRoles(Globals.AirOpsDirector, true));
+
+
+
+            for (int x = 0; x < totalPages; x++)
+            {
+                List<Aircraft> pageair = new List<Aircraft>();
+                List<CommsPlanItem> pagecomms = new List<CommsPlanItem>();
+                List<ICSRole> pageroles = new List<ICSRole>();
+
+                pageair =  summary.activeAircraft.Skip(15 * (x)).Take(15).ToList();
+                pagecomms = comms.Skip(10 * (x )).Take(10).ToList();
+                pageroles = roles.Skip(10 * (x)).Take(10).ToList();
+
+
+                allPDFs.AddRange(buildSingleAirOpsSummaryPage(incident, OpPeriodToExport, pageair, pageroles, pagecomms, x + 1, totalPages, flattenPDF));
+            }
+            return allPDFs;
+
+        }
+
+        private int getAirOpsSummaryPageCount(WFIncident incident, AirOperationsSummary sum)
+        {
+            int AirPP = 15;
+            int RolePP = 10;
+            int CommsPP = 10;
+
+            List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == sum.OpPeriod).ActiveAirCommsItems;
+            List<ICSRole> roles = new List<ICSRole>();
+            roles.Add(incident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == sum.OpPeriod).AllRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
+            roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).GetChildRoles(Globals.AirOpsDirector, true));
+
+
+            int totalPages = 0;
+            if(sum.activeAircraft.Count < AirPP && comms.Count < CommsPP && roles.Count < RolePP)
+            {
+                return 1;
+            }
+            else
+            {
+                int pagesAir = Convert.ToInt32(Math.Floor(Convert.ToDecimal(sum.activeAircraft.Count) / 15m));
+                if ((sum.activeAircraft.Count) % 15 > 0) { pagesAir += 1; }
+                totalPages = pagesAir;
+
+                int pagesComms = Convert.ToInt32(Math.Floor(Convert.ToDecimal(comms.Count) / 10m));
+                if ((comms.Count) % 10 > 0) { pagesComms += 1; }
+                totalPages = Math.Max(totalPages, pagesComms);
+
+                int pagesRoles = Convert.ToInt32(Math.Floor(Convert.ToDecimal(roles.Count) / 10m));
+                if ((roles.Count) % 10 > 0) { pagesRoles += 1; }
+                totalPages = Math.Max(totalPages, pagesRoles);
+
+
+            }
+
+
+            if (totalPages == 0) { totalPages = 1; }
+            return totalPages;
+        }
+
+
+        private static List<byte[]> buildSingleAirOpsSummaryPage(WFIncident task, int OpsPeriod, List<Aircraft> aircraft, List<ICSRole> roles, List<CommsPlanItem> comms, int pageNumber, int pageCount, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempFileName();
+            string fileToUse = "BlankForms/ICS-220-WF Air Operations Summary.pdf";
+
+            OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
+            AirOperationsSummary summary = task.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
+
+
+            using (PdfReader rdr = new PdfReader(fileToUse))
+            {
+                using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
+                {
+                    stamper.AcroFields.SetField("1 INCIDENT NAME OR NUMBERRow1", task.IncidentNameOrNumber);
+
+                    stamper.AcroFields.SetField("Contact Name", summary.PreparedByName);
+                    stamper.AcroFields.SetField("Position", summary.PreparedByPosition);
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+                    stamper.AcroFields.SetField("3 REMARKS safety notes hazards etcRow1", summary.Remarks);
+                    stamper.AcroFields.SetField("4 MEDIVAC AIRCRAFTRow1", summary.MedivacTextBlock);
+                    stamper.AcroFields.SetField("Sunrise", string.Format("{0:HH:mm}", summary.Sunrise));
+                    stamper.AcroFields.SetField("Sunset", string.Format("{0:HH:mm}", summary.Sunset));
+
+
+                    stamper.AcroFields.SetField("Radius nm", summary.notam.RadiusNM.ToString());
+                    stamper.AcroFields.SetField("Altitude ASL", summary.notam.AltitudeASL.ToString());
+                    stamper.AcroFields.SetField("Center Point", summary.notam.CenterPoint);
+                    Coordinate coord = new Coordinate();
+                    coord.Latitude = summary.notam.Latitude;
+                    coord.Longitude = summary.notam.Longitude;
+                    if (coord.Latitude != 0 || coord.Longitude != 0)
+                    {
+                        string[] parts = coord.DegreesDecimalMinutesSep;
+                        stamper.AcroFields.SetField("Latitude", parts[0].ToString());
+                        stamper.AcroFields.SetField("Longitude", parts[1].ToString());
+
+                    }
+
+                    stamper.AcroFields.SetField("Radius nm", summary.Remarks);
+                    stamper.AcroFields.SetField("Radius nm", summary.Remarks);
+
+
+                    stamper.AcroFields.SetField("9 PAGE", pageNumber.ToString());
+                    stamper.AcroFields.SetField("OF", pageCount.ToString());
+
+                    for (int x = 0; x < roles.Count && x < 10; x++)
+                    {
+                        stamper.AcroFields.SetField("NameRow" + (x + 1), roles[x].IndividualName);
+                        stamper.AcroFields.SetField("PositionRow" + (x + 1), roles[x].RoleName);
+                        if (roles[x].teamMember != null) { stamper.AcroFields.SetField("Phone Row" + (x + 1), roles[x].teamMember.Phone); }
+                    }
+
+
+                    for (int x = 0; x<aircraft.Count && x<15; x++)
+                    {
+                        stamper.AcroFields.SetField("RegRow" + (x + 1), aircraft[x].Registration);
+                        stamper.AcroFields.SetField("MakeModelRow" + (x + 1), aircraft[x].MakeModel);
+                        stamper.AcroFields.SetField("BaseRow" + (x + 1), aircraft[x].Base);
+                        stamper.AcroFields.SetField("StartRow" + (x + 1), string.Format("{0:HH:mm}", aircraft[x].StartTime));
+                        stamper.AcroFields.SetField("RemarksRow" + (x + 1), aircraft[x].Remarks);
+                        stamper.AcroFields.SetField("PilotRow" + (x + 1), aircraft[x].Pilot);
+                        stamper.AcroFields.SetField("Contact Row" + (x + 1), aircraft[x].ContactNumber);
+                    }
+
+                    for(int x= 0; x<comms.Count && x < 10; x++)
+                    {
+                        stamper.AcroFields.SetField("FrequencyRow" + (x + 1), comms[x].Frequency);
+                    }
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + "-220-" + pageNumber.ToString());
+                    }
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+                }
+            }
+
+
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            using (FileStream stream = File.OpenRead(path))
+            {
+                byte[] fileBytes = new byte[stream.Length];
+
+                stream.Read(fileBytes, 0, fileBytes.Length);
+                stream.Close();
+                allPDFs.Add(fileBytes);
+            }
+
+            return allPDFs;
+        }
+
+
+
+       
+
 
     }
 }

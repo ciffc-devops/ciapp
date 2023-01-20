@@ -433,14 +433,8 @@ namespace WF_ICS_ClassLibrary.Utilities
                 AirOperationsSummary summary = new AirOperationsSummary();
                 summary.OpPeriod = ops;
 
-                DateTime opTime = incident.AllOperationalPeriods.First(o => o.PeriodNumber == ops).PeriodStart;
+               
 
-                /* this code will estimate the sunrise and sunset times based on a location and date. Output is in UTC.  */
-
-                Celestial cel = Celestial.CalculateCelestialTimes(50.161660, -125.250770, opTime);
-                //Console.WriteLine(cel.SunRise.Value.ToString());
-                summary.Sunrise = cel.SunRise.Value.ToLocalTime();
-                summary.Sunset = cel.SunSet.Value.ToLocalTime();
 
                 Globals.incidentService.UpsertAirOperationsSummary(summary);
             }

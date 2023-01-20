@@ -79,6 +79,9 @@ namespace Wildfire_ICS_Assist
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
 
             chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
+
+            chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps(CurrentOpPeriod);
+            chkAirOps.Checked = chkAirOps.Enabled;
         }
         private void setCheckboxStatusOpPeriod()
         {
@@ -113,7 +116,8 @@ namespace Wildfire_ICS_Assist
 
             chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
             chkSupportVehicles.Checked = chkSupportVehicles.Enabled;
-
+            chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps(CurrentOpPeriod);
+            chkAirOps.Checked = chkAirOps.Enabled;
 
 
         }
@@ -153,7 +157,8 @@ namespace Wildfire_ICS_Assist
             chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o =>  o.Active);
             chkSupportVehicles.Checked = chkSupportVehicles.Enabled;
 
-
+            chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps();
+            chkAirOps.Checked = chkAirOps.Enabled;
         }
         private void setCheckboxStatusIncidentIAP()
         {
@@ -183,7 +188,8 @@ namespace Wildfire_ICS_Assist
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
 
             chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.Active);
-
+            chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps();
+            chkAirOps.Checked = chkAirOps.Enabled;
 
         }
 
@@ -246,6 +252,15 @@ namespace Wildfire_ICS_Assist
                 {
                     allPDFs.AddRange(Program.pdfExportService.exportSafetyMessagesToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked));
                 }
+
+                if (chkAirOps.Checked)
+                {
+                    allPDFs.AddRange(Program.pdfExportService.exportAirOpsSummaryToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked));
+                }
+
+
+
+
 
                 //Contacts
                 if (chkContacts.Checked)
@@ -350,6 +365,9 @@ namespace Wildfire_ICS_Assist
             }
             //safety
             if (chkSafetyMessage.Checked) { contents.Add("• ICS-208 WF Safety Message/Plan(s)"); }
+
+            //Air Ops
+            if (chkAirOps.Checked) { contents.Add("• ICS-220 WF Air Operations Summary"); }
 
 
 

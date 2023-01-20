@@ -469,12 +469,16 @@ ProtoInclude(127, typeof(SubjectProfile)),
         }
 
 
-        public bool hasMeaningfulAirOps(int ops)
+        public bool hasMeaningfulAirOps(int ops = 0)
         {
-            if(!allAirOperationsSummaries.Any(o=>o.OpPeriod == ops && o.Active)) { return false; }
-            AirOperationsSummary sum = allAirOperationsSummaries.First(o => o.OpPeriod == ops && o.Active);
-            if (sum.aircrafts.Any()) { return true; } 
-            return false; 
+            if (ops > 0)
+            {
+                return allAirOperationsSummaries.Any(o => o.OpPeriod == ops && o.Active && o.HasContent);
+            } 
+            else
+            {
+                return allAirOperationsSummaries.Any(o => o.Active && o.HasContent);
+            }
         }
 
         public bool hasMeaningfulOrgChart(int ops)

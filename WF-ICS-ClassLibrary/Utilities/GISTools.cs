@@ -3,6 +3,7 @@ using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,8 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class GISTools
     {
+
+
 
         const double PIx = 3.141592653589793;
         const double RADIO = 6371;
@@ -21,7 +24,18 @@ namespace WF_ICS_ClassLibrary.Utilities
             return input * Math.PI / 180;
         }
 
-        
+
+        public static DateTime GetSunrise(Coordinate c, DateTime OpDate)
+        {
+            Celestial cel = Celestial.CalculateCelestialTimes(c.Latitude, c.Longitude, OpDate);
+            return cel.SunRise.Value.ToLocalTime();
+        }
+        public static DateTime GetSunset(Coordinate c, DateTime OpDate)
+        {
+            Celestial cel = Celestial.CalculateCelestialTimes(c.Latitude, c.Longitude, OpDate);
+            return cel.SunSet.Value.ToLocalTime();
+        }
+
 
         public static double DistanceBetweenPlaces(double lon1, double lat1, double lon2, double lat2)
         {
@@ -209,6 +223,8 @@ namespace WF_ICS_ClassLibrary.Utilities
             return false;
         }
 
+      
+
         public string CoordinateOutput(string format)
         {
             StringBuilder coordText = new StringBuilder();
@@ -258,6 +274,25 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
 
         }
+
+        public string[] DegreesDecimalMinutesSep
+        {
+            get
+            {
+                string[] parts = new string[2];
+                CoordinateSharp.Coordinate coordinate = new CoordinateSharp.Coordinate();
+                coordinate.Latitude = new CoordinatePart(Latitude, CoordinateType.Lat);
+                coordinate.Longitude = new CoordinatePart(Longitude, CoordinateType.Long);
+                parts[0] = coordinate.Latitude.Degrees + "°" + coordinate.Latitude.DecimalMinute + ", ";
+                //if(coordinate.Longitude.)
+                
+                if (coordinate.Longitude.DecimalDegree < 0) { parts[1] += "-"; }
+                parts[1] += coordinate.Longitude.Degrees + "°" + coordinate.Longitude.DecimalMinute;
+
+                return parts;
+            }
+        }
+
         public string UTM
         {
             get
