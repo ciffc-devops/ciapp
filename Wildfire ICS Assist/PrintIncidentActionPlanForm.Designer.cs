@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.chkContacts = new System.Windows.Forms.CheckBox();
+            this.chkSupportVehicles = new System.Windows.Forms.CheckBox();
             this.chkNotes = new System.Windows.Forms.CheckBox();
             this.chkVerboseActivityLog = new System.Windows.Forms.CheckBox();
             this.chkActivityLog = new System.Windows.Forms.CheckBox();
@@ -47,8 +49,7 @@
             this.lblOpPeriodTitle = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
-            this.chkSupportVehicles = new System.Windows.Forms.CheckBox();
-            this.chkContacts = new System.Windows.Forms.CheckBox();
+            this.chkAssignmentDetails = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.chkAssignmentDetails);
             this.splitContainer1.Panel1.Controls.Add(this.chkContacts);
             this.splitContainer1.Panel1.Controls.Add(this.chkSupportVehicles);
             this.splitContainer1.Panel1.Controls.Add(this.chkNotes);
@@ -89,14 +91,34 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveAsPDF);
-            this.splitContainer1.Size = new System.Drawing.Size(658, 501);
-            this.splitContainer1.SplitterDistance = 439;
+            this.splitContainer1.Size = new System.Drawing.Size(658, 531);
+            this.splitContainer1.SplitterDistance = 469;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // chkContacts
+            // 
+            this.chkContacts.AutoSize = true;
+            this.chkContacts.Location = new System.Drawing.Point(359, 154);
+            this.chkContacts.Name = "chkContacts";
+            this.chkContacts.Size = new System.Drawing.Size(261, 28);
+            this.chkContacts.TabIndex = 32;
+            this.chkContacts.Text = "205A - Communications List";
+            this.chkContacts.UseVisualStyleBackColor = true;
+            // 
+            // chkSupportVehicles
+            // 
+            this.chkSupportVehicles.AutoSize = true;
+            this.chkSupportVehicles.Location = new System.Drawing.Point(359, 290);
+            this.chkSupportVehicles.Name = "chkSupportVehicles";
+            this.chkSupportVehicles.Size = new System.Drawing.Size(219, 28);
+            this.chkSupportVehicles.TabIndex = 31;
+            this.chkSupportVehicles.Text = "218 - Support Vehicles";
+            this.chkSupportVehicles.UseVisualStyleBackColor = true;
             // 
             // chkNotes
             // 
             this.chkNotes.AutoSize = true;
-            this.chkNotes.Location = new System.Drawing.Point(362, 290);
+            this.chkNotes.Location = new System.Drawing.Point(359, 324);
             this.chkNotes.Name = "chkNotes";
             this.chkNotes.Size = new System.Drawing.Size(166, 28);
             this.chkNotes.TabIndex = 30;
@@ -106,7 +128,7 @@
             // chkVerboseActivityLog
             // 
             this.chkVerboseActivityLog.AutoSize = true;
-            this.chkVerboseActivityLog.Location = new System.Drawing.Point(362, 222);
+            this.chkVerboseActivityLog.Location = new System.Drawing.Point(359, 256);
             this.chkVerboseActivityLog.Name = "chkVerboseActivityLog";
             this.chkVerboseActivityLog.Size = new System.Drawing.Size(209, 28);
             this.chkVerboseActivityLog.TabIndex = 29;
@@ -116,7 +138,7 @@
             // chkActivityLog
             // 
             this.chkActivityLog.AutoSize = true;
-            this.chkActivityLog.Location = new System.Drawing.Point(362, 188);
+            this.chkActivityLog.Location = new System.Drawing.Point(359, 222);
             this.chkActivityLog.Name = "chkActivityLog";
             this.chkActivityLog.Size = new System.Drawing.Size(190, 28);
             this.chkActivityLog.TabIndex = 28;
@@ -126,7 +148,7 @@
             // chkGeneralMessages
             // 
             this.chkGeneralMessages.AutoSize = true;
-            this.chkGeneralMessages.Location = new System.Drawing.Point(362, 154);
+            this.chkGeneralMessages.Location = new System.Drawing.Point(359, 188);
             this.chkGeneralMessages.Name = "chkGeneralMessages";
             this.chkGeneralMessages.Size = new System.Drawing.Size(245, 28);
             this.chkGeneralMessages.TabIndex = 27;
@@ -279,31 +301,21 @@
             this.btnSaveAsPDF.UseVisualStyleBackColor = true;
             this.btnSaveAsPDF.Click += new System.EventHandler(this.btnSaveAsPDF_Click);
             // 
-            // chkSupportVehicles
+            // chkAssignmentDetails
             // 
-            this.chkSupportVehicles.AutoSize = true;
-            this.chkSupportVehicles.Location = new System.Drawing.Point(362, 256);
-            this.chkSupportVehicles.Name = "chkSupportVehicles";
-            this.chkSupportVehicles.Size = new System.Drawing.Size(219, 28);
-            this.chkSupportVehicles.TabIndex = 31;
-            this.chkSupportVehicles.Text = "218 - Support Vehicles";
-            this.chkSupportVehicles.UseVisualStyleBackColor = true;
-            // 
-            // chkContacts
-            // 
-            this.chkContacts.AutoSize = true;
-            this.chkContacts.Location = new System.Drawing.Point(362, 120);
-            this.chkContacts.Name = "chkContacts";
-            this.chkContacts.Size = new System.Drawing.Size(261, 28);
-            this.chkContacts.TabIndex = 32;
-            this.chkContacts.Text = "205A - Communications List";
-            this.chkContacts.UseVisualStyleBackColor = true;
+            this.chkAssignmentDetails.AutoSize = true;
+            this.chkAssignmentDetails.Location = new System.Drawing.Point(359, 120);
+            this.chkAssignmentDetails.Name = "chkAssignmentDetails";
+            this.chkAssignmentDetails.Size = new System.Drawing.Size(247, 28);
+            this.chkAssignmentDetails.TabIndex = 33;
+            this.chkAssignmentDetails.Text = "204A - Assignment Details";
+            this.chkAssignmentDetails.UseVisualStyleBackColor = true;
             // 
             // PrintIncidentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(658, 501);
+            this.ClientSize = new System.Drawing.Size(658, 531);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -344,5 +356,6 @@
         private System.Windows.Forms.CheckBox chkGeneralMessages;
         private System.Windows.Forms.CheckBox chkSupportVehicles;
         private System.Windows.Forms.CheckBox chkContacts;
+        private System.Windows.Forms.CheckBox chkAssignmentDetails;
     }
 }
