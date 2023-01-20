@@ -40,13 +40,26 @@ namespace Wildfire_ICS_Assist
                 lblOpPeriodTitle.Text = "Print Incident " + CurrentIncident.IncidentIdentifier;
                 if (PrintIAPByDefault) { setCheckboxStatusIncidentIAP(); }
                 else { setCheckboxStatusIncident(); }
+                if (!string.IsNullOrEmpty(CurrentIncident.IncidentTitleImageBytes))
+                {
+                    Image img = CurrentIncident.IncidentTitleImageBytes.getImageFromBytes();
+                    if (img != null) { picTitleImage.Image = img; }
+                }
             }
             else
             {
+                OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
+
                 this.Text = "Print Operational Period";
                 lblOpPeriodTitle.Text = "Print Operational Period #" + CurrentOpPeriod;
                 if (PrintIAPByDefault) { setCheckboxeStatusIAP(); }
                 else { setCheckboxStatusOpPeriod(); }
+
+                if (!string.IsNullOrEmpty(period.TitleImageBytes))
+                {
+                    Image img = period.TitleImageBytes.getImageFromBytes();
+                    if (img != null) { picTitleImage.Image = img; }
+                }
             }
         }
 
@@ -154,7 +167,7 @@ namespace Wildfire_ICS_Assist
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
             chkVerboseActivityLog.Checked = chkVerboseActivityLog.Enabled;
 
-            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o =>  o.Active);
+            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.Active);
             chkSupportVehicles.Checked = chkSupportVehicles.Enabled;
 
             chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps();
@@ -406,16 +419,122 @@ namespace Wildfire_ICS_Assist
 
             if (PrintIncidentToDate)
             {
-                return Program.pdfExportService.createFreeformOpPeriodContentsList(CurrentIncident, contents, 0);
+                //return Program.pdfExportService.createFreeformOpPeriodContentsList(CurrentIncident, contents, 0);
+                StringBuilder sb = new StringBuilder();
+                foreach (string s in contents) { sb.Append(s); sb.Append(Environment.NewLine); }
+
+
+                //CurrentIncident, CurrentOpPeriod, sb.ToString(), img, true, chkFlattenPDF.Checked)
+                return Program.pdfExportService.exportOpTitlePageToPDF(CurrentIncident, 0, sb.ToString(), CurrentIncident.IncidentTitleImageBytes, chkFlattenPDF.Checked);
             }
             else
             {
                 StringBuilder sb = new StringBuilder();
-                foreach(string s in contents) { sb.Append(s); sb.Append(Environment.NewLine); }
-                byte[] img = null;
+                foreach (string s in contents) { sb.Append(s); sb.Append(Environment.NewLine); }
+                OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
+
+
                 //CurrentIncident, CurrentOpPeriod, sb.ToString(), img, true, chkFlattenPDF.Checked)
-                return Program.pdfExportService.createOpTitlePagePDF(CurrentIncident, CurrentOpPeriod, sb.ToString(), img, true, chkFlattenPDF.Checked);
+                return Program.pdfExportService.exportOpTitlePageToPDF(CurrentIncident, CurrentOpPeriod, sb.ToString(), period.TitleImageBytes, chkFlattenPDF.Checked);
             }
         }
+
+        private void btnSelectImage_Click(object sender, EventArgs e)
+        {
+            selectPhoto();
+        }
+
+        private void btnRemoveImage_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(Properties.Resources.SureRemoveImage, Properties.Resources.SureRemoveImageTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (PrintIncidentToDate)
+                {
+                    CurrentIncident.IncidentTitleImageBytes = string.Empty;
+                    TaskBasics basics = new TaskBasics(CurrentIncident);
+                    Program.wfIncidentService.UpdateTaskBasics(basics, "local");
+
+                }
+                else
+                {
+                    OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
+                    period.TitleImageBytes = string.Empty;
+                    Program.wfIncidentService.UpsertOperationalPeriod(period);
+
+                }
+            }
+        }
+
+        private void selectPhoto()
+        {
+            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            openFileDialog1.ShowDialog();
+
+            if (!string.IsNullOrEmpty(openFileDialog1.FileName))
+            {
+                //they've chosen a file, try to open it.
+                try
+                {
+                    FileInfo file = new FileInfo(openFileDialog1.FileName);
+
+                    string newFileName = CurrentIncident.IncidentIdentifier;
+                    if (PrintIncidentToDate) { newFileName += "-TitleImage"; }
+                    else { newFileName += "-Op" + CurrentOpPeriod + "TitleImage"; }
+                    
+
+                    string newFilePath = CurrentIncident.FileName;
+                    newFilePath = Path.Combine(FileAccessClasses.getWritablePath(CurrentIncident), newFileName);
+
+                    int uniqueNumber = 0;
+                    while (File.Exists(newFilePath + file.Extension))
+                    {
+                        uniqueNumber += 1;
+                        newFileName = CurrentIncident.IncidentIdentifier;
+                        if (PrintIncidentToDate) { newFileName += "-TitleImage"; }
+                        else { newFileName += "-Op" + CurrentOpPeriod + "TitleImage"; }
+                        newFileName += "-" +  uniqueNumber;
+                        newFilePath = Path.Combine(FileAccessClasses.getWritablePath(CurrentIncident), newFileName);
+                    }
+
+                    System.Drawing.Image image = System.Drawing.Image.FromFile(file.FullName);
+                    Bitmap newImage = new Bitmap(image);
+                    long maxFileSize = 200000;
+                    if (file.Length > maxFileSize)
+                    {
+                        long factor = (file.Length + (maxFileSize - 1)) / maxFileSize;
+
+                        int newh = image.Height / (int)factor;
+                        int neww = image.Width / (int)factor;
+                        newImage = image.ResizeImage(neww, newh);
+                        newImage.Save(newFilePath);
+                    }
+                    else
+                    {
+                        file.CopyTo(newFilePath);
+                    }
+
+
+                    image.Dispose();
+                    if (PrintIncidentToDate) {
+                        CurrentIncident.IncidentTitleImageBytes = newImage.BytesStringFromImage();
+                        TaskBasics basics = new TaskBasics(CurrentIncident);
+                        Program.wfIncidentService.UpdateTaskBasics(basics, "local");
+
+                    }
+                    else {
+                        OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
+                        period.TitleImageBytes = newImage.BytesStringFromImage();
+                        Program.wfIncidentService.UpsertOperationalPeriod(period);
+                    }
+                    picTitleImage.Image = newImage;
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
+                }
+            }
+        }
+
     }
 }

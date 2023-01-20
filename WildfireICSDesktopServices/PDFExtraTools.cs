@@ -13,13 +13,12 @@ namespace WildfireICSDesktopServices
     public static class PDFExtraTools
     {
 
-        public static PdfStamper AddPDFField(this PdfStamper stamper, string fileName, string adjacentText, string fieldType, int height, int width, string fieldName, int[] instancesOfInterest)
+        public static PdfStamper AddPDFField(this PdfStamper stamper, string originalFilePath, string adjacentText, string fieldType, int height, int width, string fieldName, int[] instancesOfInterest)
         {
             var t = new MyLocationTextExtractionStrategy(adjacentText);
             StringBuilder sb = new StringBuilder();
-
             //Parse page 1 of the document above
-            using (var r = new PdfReader(fileName))
+            using (var r = new PdfReader(originalFilePath))
             {
                 var ex = PdfTextExtractor.GetTextFromPage(r, 1, t);
             }

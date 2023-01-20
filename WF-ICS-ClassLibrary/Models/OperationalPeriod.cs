@@ -17,6 +17,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(4)] private Guid _TaskID;
         [ProtoMember(5)] private Guid _OperationalPeriodID;
         [ProtoMember(6)] private DateTime _LastUpdatedUTC;
+        [ProtoMember(7)] private string _titleImageBytes;
         private static DateTime minDate = Convert.ToDateTime("1753-01-01");
 
 
@@ -45,6 +46,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public Guid OperationalPeriodID { get => _OperationalPeriodID; set => _OperationalPeriodID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+        public string TitleImageBytes { get => _titleImageBytes; set => _titleImageBytes = value; }
         public OperationalPeriod()
         {
             OperationalPeriodID = Guid.NewGuid();

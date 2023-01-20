@@ -385,4 +385,10 @@
   <data name="NoMembersImported" xml:space="preserve">
     <value>No members were imported or updated.  Please ensure you have configured the options here correctly, and selected the correct spreadsheet file.</value>
   </data>
+  <data name="SureRemoveImage" xml:space="preserve">
+    <value>Are you sure you want to remove the selected image?</value>
+  </data>
+  <data name="SureRemoveImageTitle" xml:space="preserve">
+    <value>Remove Image?</value>
+  </data>
 </root>

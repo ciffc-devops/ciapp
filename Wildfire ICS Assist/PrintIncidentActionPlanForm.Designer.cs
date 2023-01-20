@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
+            this.picTitleImage = new System.Windows.Forms.PictureBox();
+            this.btnSelectImage = new System.Windows.Forms.Button();
+            this.btnRemoveImage = new System.Windows.Forms.Button();
+            this.chkAssignmentDetails = new System.Windows.Forms.CheckBox();
             this.chkContacts = new System.Windows.Forms.CheckBox();
             this.chkSupportVehicles = new System.Windows.Forms.CheckBox();
             this.chkNotes = new System.Windows.Forms.CheckBox();
@@ -49,11 +54,12 @@
             this.lblOpPeriodTitle = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
-            this.chkAssignmentDetails = new System.Windows.Forms.CheckBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picTitleImage)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -67,6 +73,10 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.picTitleImage);
+            this.splitContainer1.Panel1.Controls.Add(this.btnSelectImage);
+            this.splitContainer1.Panel1.Controls.Add(this.btnRemoveImage);
             this.splitContainer1.Panel1.Controls.Add(this.chkAssignmentDetails);
             this.splitContainer1.Panel1.Controls.Add(this.chkContacts);
             this.splitContainer1.Panel1.Controls.Add(this.chkSupportVehicles);
@@ -91,9 +101,60 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveAsPDF);
-            this.splitContainer1.Size = new System.Drawing.Size(658, 531);
-            this.splitContainer1.SplitterDistance = 469;
+            this.splitContainer1.Size = new System.Drawing.Size(658, 624);
+            this.splitContainer1.SplitterDistance = 562;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 436);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(167, 24);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Title Page Image";
+            // 
+            // picTitleImage
+            // 
+            this.picTitleImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picTitleImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picTitleImage.Location = new System.Drawing.Point(44, 463);
+            this.picTitleImage.Name = "picTitleImage";
+            this.picTitleImage.Size = new System.Drawing.Size(123, 89);
+            this.picTitleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTitleImage.TabIndex = 3;
+            this.picTitleImage.TabStop = false;
+            // 
+            // btnSelectImage
+            // 
+            this.btnSelectImage.Location = new System.Drawing.Point(175, 463);
+            this.btnSelectImage.Name = "btnSelectImage";
+            this.btnSelectImage.Size = new System.Drawing.Size(112, 36);
+            this.btnSelectImage.TabIndex = 4;
+            this.btnSelectImage.Text = "Select...";
+            this.btnSelectImage.UseVisualStyleBackColor = true;
+            this.btnSelectImage.Click += new System.EventHandler(this.btnSelectImage_Click);
+            // 
+            // btnRemoveImage
+            // 
+            this.btnRemoveImage.Location = new System.Drawing.Point(175, 505);
+            this.btnRemoveImage.Name = "btnRemoveImage";
+            this.btnRemoveImage.Size = new System.Drawing.Size(112, 36);
+            this.btnRemoveImage.TabIndex = 5;
+            this.btnRemoveImage.Text = "Remove";
+            this.btnRemoveImage.UseVisualStyleBackColor = true;
+            this.btnRemoveImage.Click += new System.EventHandler(this.btnRemoveImage_Click);
+            // 
+            // chkAssignmentDetails
+            // 
+            this.chkAssignmentDetails.AutoSize = true;
+            this.chkAssignmentDetails.Location = new System.Drawing.Point(359, 120);
+            this.chkAssignmentDetails.Name = "chkAssignmentDetails";
+            this.chkAssignmentDetails.Size = new System.Drawing.Size(247, 28);
+            this.chkAssignmentDetails.TabIndex = 33;
+            this.chkAssignmentDetails.Text = "204A - Assignment Details";
+            this.chkAssignmentDetails.UseVisualStyleBackColor = true;
             // 
             // chkContacts
             // 
@@ -250,9 +311,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 93);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 24);
+            this.label2.Size = new System.Drawing.Size(97, 24);
             this.label2.TabIndex = 17;
             this.label2.Text = "Include...";
             // 
@@ -301,21 +363,16 @@
             this.btnSaveAsPDF.UseVisualStyleBackColor = true;
             this.btnSaveAsPDF.Click += new System.EventHandler(this.btnSaveAsPDF_Click);
             // 
-            // chkAssignmentDetails
+            // openFileDialog1
             // 
-            this.chkAssignmentDetails.AutoSize = true;
-            this.chkAssignmentDetails.Location = new System.Drawing.Point(359, 120);
-            this.chkAssignmentDetails.Name = "chkAssignmentDetails";
-            this.chkAssignmentDetails.Size = new System.Drawing.Size(247, 28);
-            this.chkAssignmentDetails.TabIndex = 33;
-            this.chkAssignmentDetails.Text = "204A - Assignment Details";
-            this.chkAssignmentDetails.UseVisualStyleBackColor = true;
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Images|*.jpg;*.jpeg;*.png;,*.gif,*.bmp";
             // 
             // PrintIncidentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(658, 531);
+            this.ClientSize = new System.Drawing.Size(658, 624);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -329,6 +386,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picTitleImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -357,5 +415,10 @@
         private System.Windows.Forms.CheckBox chkSupportVehicles;
         private System.Windows.Forms.CheckBox chkContacts;
         private System.Windows.Forms.CheckBox chkAssignmentDetails;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox picTitleImage;
+        private System.Windows.Forms.Button btnSelectImage;
+        private System.Windows.Forms.Button btnRemoveImage;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

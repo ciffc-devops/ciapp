@@ -2754,7 +2754,7 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "BlankForms/ICS-000 Title Page";
+            string fileToUse = "BlankForms/ICS-000 Title Page.pdf";
             try
             {
 
@@ -2763,16 +2763,34 @@ namespace WildfireICSDesktopServices
                     PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
 
 
+                    if (OpPeriod > 0)
+                    {
+                        OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodStart));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodEnd));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                        stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "OPERATIONAL PERIOD");
 
-                    OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
+                    }
+                    else
+                    {
+                        DateTime incidentStart = task.GetIncidentStart();
+                        DateTime incidentEnd = task.GetIncidentEnd();
+                        if(incidentEnd > DateTime.Now) { incidentEnd = DateTime.Now; }
+
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", incidentStart));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", incidentStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", incidentEnd));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", incidentEnd));
+                        stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "INCIDENT TO DATE");
+                    }
+
 
                     stamper.AcroFields.SetField("INCIDENT NAMERow1", task.TaskName);
                     stamper.AcroFields.SetField("Incident NumberRow1", task.TaskNumber);
 
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodStart));
-                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodEnd));
-                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                   
 
                     stamper.AcroFields.SetField("ContentsList", contentsText);
 
@@ -2780,9 +2798,9 @@ namespace WildfireICSDesktopServices
                     {
                         iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(titleImageBytes.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                        pic.ScaleToFit(315, 220);
-                        float x = ((315 - pic.ScaledWidth) / 2) + 263;
-                        pic.SetAbsolutePosition(x, 445);
+                        pic.ScaleToFit(250, 250);
+                        float x = ((250 - pic.ScaledWidth) / 2) + 315;
+                        pic.SetAbsolutePosition(x, 425);
 
                         stamper.GetOverContent(1).AddImage(pic);
                     }
@@ -2806,10 +2824,10 @@ namespace WildfireICSDesktopServices
                     {
                         stamper.FormFlattening = true;
 
-                        //re-add the signature field
-                        int[] instancesOfInterest = { 1 };
-                        stamper = stamper.AddPDFField( "Signature", "Signature", 19, 187, "ReportSignature",  instancesOfInterest);
-
+                        //re-add the signature field if we flattened it away
+                        int[] instancesOfInterest = { 0 };
+                        stamper = stamper.AddPDFField( fileToUse, "Signature", "Signature", 60, 240, "ReportSignature",  instancesOfInterest);
+                        stamper = stamper.AddPDFField(fileToUse, "Print Name", "TextField", 60, 185, "PrintName", instancesOfInterest);
                     }
 
                     stamper.Close();//Close a PDFStamper Object

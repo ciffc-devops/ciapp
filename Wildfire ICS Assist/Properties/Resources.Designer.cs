@@ -938,5 +938,23 @@ namespace Wildfire_ICS_Assist.Properties {
                 return ResourceManager.GetString("SureDeleteTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove the selected image?.
+        /// </summary>
+        internal static string SureRemoveImage {
+            get {
+                return ResourceManager.GetString("SureRemoveImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Image?.
+        /// </summary>
+        internal static string SureRemoveImageTitle {
+            get {
+                return ResourceManager.GetString("SureRemoveImageTitle", resourceCulture);
+            }
+        }
     }
 }

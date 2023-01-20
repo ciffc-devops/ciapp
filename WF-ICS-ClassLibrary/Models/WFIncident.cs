@@ -87,6 +87,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(4)] private string _AgencyFileNumber;
         [ProtoMember(5)] private string _FileName;
         [ProtoMember(6)] private string _ICPCallsign;
+        [ProtoMember(7)] private string _IncidentTitleImageBytes;
         //[ProtoMember(7)] private string _SubjectCategory;
         //  [ProtoMember(8)] public Mattson _Mattson;
         //  [ProtoMember(9)] private double _subjectVisibility;
@@ -196,6 +197,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         }
 
         public string ICPCallSign { get => _ICPCallsign; set => _ICPCallsign = value; }
+        public string IncidentTitleImageBytes { get => _IncidentTitleImageBytes; set => _IncidentTitleImageBytes = value; }
         public List<TaskEquipment> allEquipment { get => _allEquipment; set => _allEquipment = value; }
         public List<EquipmentIssue> allEquipmentIssues { get => _allEquipmentIssues; set => _allEquipmentIssues = value; }
 
@@ -293,6 +295,14 @@ ProtoInclude(127, typeof(SubjectProfile)),
             else { return DateTime.MaxValue; }
         }
 
+        public DateTime GetIncidentStart()
+        {
+            return AllOperationalPeriods.Min(o => o.PeriodStart);
+        }
+        public DateTime GetIncidentEnd()
+        {
+            return AllOperationalPeriods.Max(o => o.PeriodEnd);
+        }
 
         public List<SignInRecord> AllSignInRecords { get { return _signInRecords; } set { _signInRecords = value; } }
 

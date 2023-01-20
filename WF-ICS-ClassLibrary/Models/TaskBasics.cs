@@ -20,6 +20,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(9)] private double _subjectVisibility;
         [ProtoMember(10)] private double _generalRangeOfDetection;
         [ProtoMember(11)] private DateTime _LastUpdatedUTC;
+        [ProtoMember(12)] private string _IncidentTitleImageBytes;
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public string TaskName { get => _TaskName; set { if (!string.IsNullOrEmpty(value)) { _TaskName = value.Trim(); } else { _TaskName = null; } } }
@@ -31,6 +32,8 @@ namespace WF_ICS_ClassLibrary.Models
         public double SubjectVisibility { get => _subjectVisibility; set => _subjectVisibility = value; } //used for calculating POD / Spacing
         public double GeneralRangeOfDetection { get => _generalRangeOfDetection; set => _generalRangeOfDetection = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+        public string IncidentTitleImageBytes { get => _IncidentTitleImageBytes; set => _IncidentTitleImageBytes = value; }
+
 
         public TaskBasics() { LastUpdatedUTC = DateTime.UtcNow; }
         public TaskBasics(WFIncident task)
@@ -40,6 +43,7 @@ namespace WF_ICS_ClassLibrary.Models
             TaskNumber = task.TaskNumber;
             AgencyFileNumber = task.AgencyFileNumber;
             ICPCallSign = task.ICPCallSign;
+            IncidentTitleImageBytes = task.IncidentTitleImageBytes;
            // SubjectCategory = task.SubjectCategory;
            // SubjectVisibility = task.SubjectVisibility;
            // GeneralRangeOfDetection = task.GeneralRangeOfDetection;
