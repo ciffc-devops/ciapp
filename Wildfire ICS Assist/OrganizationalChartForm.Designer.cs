@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
+            this.rbUnifiedCommand = new System.Windows.Forms.RadioButton();
+            this.rbIncidentCommander = new System.Windows.Forms.RadioButton();
             this.treeOrgChart = new System.Windows.Forms.TreeView();
             this.btnDeleteRole = new System.Windows.Forms.Button();
             this.btnEditRole = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnAssignRole = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.rbIncidentCommander = new System.Windows.Forms.RadioButton();
-            this.rbUnifiedCommand = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.svdExport = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -64,6 +66,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnExport);
             this.splitContainer1.Panel2.Controls.Add(this.btnDeleteRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnEditRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
@@ -72,6 +75,64 @@
             this.splitContainer1.Size = new System.Drawing.Size(1209, 651);
             this.splitContainer1.SplitterDistance = 596;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.IsSplitterFixed = true;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.label1);
+            this.splitContainer2.Panel1.Controls.Add(this.rbUnifiedCommand);
+            this.splitContainer2.Panel1.Controls.Add(this.rbIncidentCommander);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.treeOrgChart);
+            this.splitContainer2.Size = new System.Drawing.Size(1209, 596);
+            this.splitContainer2.SplitterDistance = 40;
+            this.splitContainer2.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(183, 24);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Command Structure:";
+            // 
+            // rbUnifiedCommand
+            // 
+            this.rbUnifiedCommand.AutoSize = true;
+            this.rbUnifiedCommand.Location = new System.Drawing.Point(430, 5);
+            this.rbUnifiedCommand.Name = "rbUnifiedCommand";
+            this.rbUnifiedCommand.Size = new System.Drawing.Size(179, 28);
+            this.rbUnifiedCommand.TabIndex = 1;
+            this.rbUnifiedCommand.TabStop = true;
+            this.rbUnifiedCommand.Text = "Unified Command";
+            this.rbUnifiedCommand.UseVisualStyleBackColor = true;
+            this.rbUnifiedCommand.CheckedChanged += new System.EventHandler(this.rbUnifiedCommand_CheckedChanged);
+            this.rbUnifiedCommand.Leave += new System.EventHandler(this.rbUnifiedCommand_Leave);
+            // 
+            // rbIncidentCommander
+            // 
+            this.rbIncidentCommander.AutoSize = true;
+            this.rbIncidentCommander.Checked = true;
+            this.rbIncidentCommander.Location = new System.Drawing.Point(220, 5);
+            this.rbIncidentCommander.Name = "rbIncidentCommander";
+            this.rbIncidentCommander.Size = new System.Drawing.Size(204, 28);
+            this.rbIncidentCommander.TabIndex = 0;
+            this.rbIncidentCommander.TabStop = true;
+            this.rbIncidentCommander.Text = "Incident Commander";
+            this.rbIncidentCommander.UseVisualStyleBackColor = true;
+            this.rbIncidentCommander.CheckedChanged += new System.EventHandler(this.rbIncidentCommander_CheckedChanged);
+            this.rbIncidentCommander.Leave += new System.EventHandler(this.rbIncidentCommander_Leave);
             // 
             // treeOrgChart
             // 
@@ -146,63 +207,24 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // splitContainer2
+            // btnExport
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
+            this.btnExport.Location = new System.Drawing.Point(953, 2);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(125, 42);
+            this.btnExport.TabIndex = 49;
+            this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // splitContainer2.Panel1
+            // svdExport
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.label1);
-            this.splitContainer2.Panel1.Controls.Add(this.rbUnifiedCommand);
-            this.splitContainer2.Panel1.Controls.Add(this.rbIncidentCommander);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.treeOrgChart);
-            this.splitContainer2.Size = new System.Drawing.Size(1209, 596);
-            this.splitContainer2.SplitterDistance = 40;
-            this.splitContainer2.TabIndex = 1;
-            // 
-            // rbIncidentCommander
-            // 
-            this.rbIncidentCommander.AutoSize = true;
-            this.rbIncidentCommander.Checked = true;
-            this.rbIncidentCommander.Location = new System.Drawing.Point(220, 5);
-            this.rbIncidentCommander.Name = "rbIncidentCommander";
-            this.rbIncidentCommander.Size = new System.Drawing.Size(204, 28);
-            this.rbIncidentCommander.TabIndex = 0;
-            this.rbIncidentCommander.TabStop = true;
-            this.rbIncidentCommander.Text = "Incident Commander";
-            this.rbIncidentCommander.UseVisualStyleBackColor = true;
-            this.rbIncidentCommander.CheckedChanged += new System.EventHandler(this.rbIncidentCommander_CheckedChanged);
-            this.rbIncidentCommander.Leave += new System.EventHandler(this.rbIncidentCommander_Leave);
-            // 
-            // rbUnifiedCommand
-            // 
-            this.rbUnifiedCommand.AutoSize = true;
-            this.rbUnifiedCommand.Location = new System.Drawing.Point(430, 5);
-            this.rbUnifiedCommand.Name = "rbUnifiedCommand";
-            this.rbUnifiedCommand.Size = new System.Drawing.Size(179, 28);
-            this.rbUnifiedCommand.TabIndex = 1;
-            this.rbUnifiedCommand.TabStop = true;
-            this.rbUnifiedCommand.Text = "Unified Command";
-            this.rbUnifiedCommand.UseVisualStyleBackColor = true;
-            this.rbUnifiedCommand.CheckedChanged += new System.EventHandler(this.rbUnifiedCommand_CheckedChanged);
-            this.rbUnifiedCommand.Leave += new System.EventHandler(this.rbUnifiedCommand_Leave);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 24);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Command Structure:";
+            this.svdExport.DefaultExt = "csv";
+            this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
             // OrganizationalChartForm
             // 
@@ -244,5 +266,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rbUnifiedCommand;
         private System.Windows.Forms.RadioButton rbIncidentCommander;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.SaveFileDialog svdExport;
     }
 }

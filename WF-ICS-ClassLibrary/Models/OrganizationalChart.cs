@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace WF_ICS_ClassLibrary.Models
 {
@@ -913,6 +914,43 @@ namespace WF_ICS_ClassLibrary.Models
 
 
             return pageCount;
+        }
+
+        public static string GetBranchNameFromID (Guid id)
+        {
+            if(id == Globals.OpsChiefID) { return "Operations"; }
+            if (id == Globals.PlanningChiefID) { return "Planning"; }
+            if (id == Globals.LogisticsChiefID) { return "Logistics"; }
+            if (id == Globals.AdminChiefID) { return "Finance/Admin"; }
+
+            return "Command"; 
+
+        }
+
+        public static string OrgChartToCSV(List<ICSRole> roles, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            csv.Append("Branch"); csv.Append(delimiter);
+            csv.Append("Role Name"); csv.Append(delimiter);
+            csv.Append("Reports To"); csv.Append(delimiter);
+            csv.Append("Individual Name"); csv.Append(delimiter);
+            csv.Append("Phone"); csv.Append(delimiter);
+            csv.Append(Environment.NewLine);
+
+            foreach (ICSRole item in roles)
+            {
+
+                //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
+                string branch = GetBranchNameFromID(item.BranchID);
+                csv.Append("\""); csv.Append(branch.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.RoleName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.ReportsToRoleName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.IndividualName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); if (item.teamMember != null) { csv.Append(item.teamMember.Phone.EscapeQuotes()); }                csv.Append("\""); csv.Append(delimiter);
+
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
         }
     }
 }
