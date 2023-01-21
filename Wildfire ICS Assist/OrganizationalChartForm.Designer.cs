@@ -34,13 +34,15 @@
             this.rbUnifiedCommand = new System.Windows.Forms.RadioButton();
             this.rbIncidentCommander = new System.Windows.Forms.RadioButton();
             this.treeOrgChart = new System.Windows.Forms.TreeView();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnDeleteRole = new System.Windows.Forms.Button();
             this.btnEditRole = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnPrint207 = new System.Windows.Forms.Button();
             this.btnAssignRole = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.btnPrint203 = new System.Windows.Forms.Button();
+            this.chkIncludeContacts = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,10 +68,11 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnPrint203);
             this.splitContainer1.Panel2.Controls.Add(this.btnExport);
             this.splitContainer1.Panel2.Controls.Add(this.btnDeleteRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnEditRole);
-            this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
+            this.splitContainer1.Panel2.Controls.Add(this.btnPrint207);
             this.splitContainer1.Panel2.Controls.Add(this.btnAssignRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
             this.splitContainer1.Size = new System.Drawing.Size(1209, 651);
@@ -87,6 +90,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.chkIncludeContacts);
             this.splitContainer2.Panel1.Controls.Add(this.label1);
             this.splitContainer2.Panel1.Controls.Add(this.rbUnifiedCommand);
             this.splitContainer2.Panel1.Controls.Add(this.rbIncidentCommander);
@@ -143,6 +147,20 @@
             this.treeOrgChart.TabIndex = 0;
             this.treeOrgChart.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeOrgChart_AfterSelect);
             // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
+            this.btnExport.Location = new System.Drawing.Point(734, 2);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(125, 42);
+            this.btnExport.TabIndex = 49;
+            this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // btnDeleteRole
             // 
             this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
@@ -169,19 +187,19 @@
             this.btnEditRole.UseVisualStyleBackColor = true;
             this.btnEditRole.Click += new System.EventHandler(this.btnEditRole_Click);
             // 
-            // btnPrint
+            // btnPrint207
             // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(1084, 3);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(113, 42);
-            this.btnPrint.TabIndex = 50;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnPrint207.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint207.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrint207.Location = new System.Drawing.Point(1031, 3);
+            this.btnPrint207.Name = "btnPrint207";
+            this.btnPrint207.Size = new System.Drawing.Size(166, 42);
+            this.btnPrint207.TabIndex = 50;
+            this.btnPrint207.Text = "Print ICS-207";
+            this.btnPrint207.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint207.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint207.UseVisualStyleBackColor = true;
+            this.btnPrint207.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnAssignRole
             // 
@@ -207,24 +225,34 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnExport
-            // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
-            this.btnExport.Location = new System.Drawing.Point(953, 2);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(125, 42);
-            this.btnExport.TabIndex = 49;
-            this.btnExport.Text = "Export";
-            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
             // svdExport
             // 
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
+            // 
+            // btnPrint203
+            // 
+            this.btnPrint203.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint203.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrint203.Location = new System.Drawing.Point(865, 3);
+            this.btnPrint203.Name = "btnPrint203";
+            this.btnPrint203.Size = new System.Drawing.Size(160, 42);
+            this.btnPrint203.TabIndex = 53;
+            this.btnPrint203.Text = "Print ICS-203";
+            this.btnPrint203.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint203.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint203.UseVisualStyleBackColor = true;
+            this.btnPrint203.Click += new System.EventHandler(this.btnPrint203_Click);
+            // 
+            // chkIncludeContacts
+            // 
+            this.chkIncludeContacts.AutoSize = true;
+            this.chkIncludeContacts.Location = new System.Drawing.Point(896, 7);
+            this.chkIncludeContacts.Name = "chkIncludeContacts";
+            this.chkIncludeContacts.Size = new System.Drawing.Size(301, 28);
+            this.chkIncludeContacts.TabIndex = 3;
+            this.chkIncludeContacts.Text = "Include contact list when printing";
+            this.chkIncludeContacts.UseVisualStyleBackColor = true;
             // 
             // OrganizationalChartForm
             // 
@@ -257,7 +285,7 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeOrgChart;
-        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnPrint207;
         private System.Windows.Forms.Button btnAssignRole;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEditRole;
@@ -268,5 +296,7 @@
         private System.Windows.Forms.RadioButton rbIncidentCommander;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.SaveFileDialog svdExport;
+        private System.Windows.Forms.Button btnPrint203;
+        private System.Windows.Forms.CheckBox chkIncludeContacts;
     }
 }

@@ -540,7 +540,7 @@ namespace Wildfire_ICS_Assist
             if (Program.CurrentRole != null)
             {
                 List<Guid> ChiefIDs = new List<Guid>();
-                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.AdminChiefID);ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
+                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID);ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
                 List<Guid> ICRoles = new List<Guid>();
                 ICRoles.Add(Globals.IncidentCommanderID); ICRoles.Add(Globals.DeputyIncidentCommanderID); ICRoles.Add(Globals.UnifiedCommand1ID); ICRoles.Add(Globals.UnifiedCommand2ID); ICRoles.Add(Globals.UnifiedCommand3ID);
 
@@ -594,7 +594,7 @@ namespace Wildfire_ICS_Assist
                     resizeGroup("Logistics", false, true);
                     */
                 }
-                else if (Program.CurrentRole.BranchID == Globals.AdminChiefID)
+                else if (Program.CurrentRole.BranchID == Globals.FinanceChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.LightGray;
                 }

@@ -41,7 +41,7 @@ namespace WF_ICS_ClassLibrary
         public static Guid PlanningChiefID { get; } = new Guid("A0B226FA-33FA-45C7-91AE-7D4F498FD31B");
         public static Guid OpsChiefID { get; } = new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC");
         public static Guid LogisticsChiefID { get; } = new Guid("B641C5D6-91FE-41DA-962E-9FEB7A7300A2");
-        public static Guid AdminChiefID { get; } = new Guid("33805F34-CD3A-49AF-94FA-DA4058577B9B");
+        public static Guid FinanceChiefID { get; } = new Guid("33805F34-CD3A-49AF-94FA-DA4058577B9B");
         public static Guid SafetyOfficerID { get; } = new Guid("CE7166AF-9432-4F7A-B942-1250AF0B7C31");
         public static Guid AirOpsDirector { get; } = new Guid("b97d020e-608e-4ea0-9df7-63b2b7680f0e");
 

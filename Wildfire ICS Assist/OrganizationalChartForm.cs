@@ -38,6 +38,8 @@ namespace Wildfire_ICS_Assist
 
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
+
+            chkIncludeContacts.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
         }
 
         private void Program_OrgChartChanged(OrganizationChartEventArgs e)
@@ -230,9 +232,9 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            bool IncludeContacts = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
+           
 
-            if (IncludeContacts)
+            if (chkIncludeContacts.Checked)
             {
                 string orgChart = Program.pdfExportService.createOrgChartPDF(CurrentIncident, CurrentOpPeriod, false, true, false);
                 string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
@@ -342,6 +344,65 @@ namespace Wildfire_ICS_Assist
                 {
                     MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
+            }
+        }
+
+        private void btnPrint203_Click(object sender, EventArgs e)
+        {
+            if (chkIncludeContacts.Checked)
+            {
+                string orgChart = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, true, false);
+                string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
+
+                List<byte[]> allPDFs = new List<byte[]>();
+
+
+                using (FileStream stream = File.OpenRead(orgChart))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+                if (!string.IsNullOrEmpty(contactList))
+                {
+                    using (FileStream stream = File.OpenRead(contactList))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        allPDFs.Add(fileBytes);
+                    }
+                }
+
+                string fullFilepath = "";
+                //int end = CurrentTask.FileName.LastIndexOf("\\");
+                fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
+
+                string fullOutputFilename = "ICS 203 - Task " + CurrentIncident.IncidentIdentifier + " - Op " + CurrentOpPeriod + " - Org Assignments List";
+                //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
+                fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+                try
+                {
+                    File.WriteAllBytes(fullFilepath, fullFile);
+
+                    System.Diagnostics.Process.Start(fullFilepath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                }
+
+            }
+            else
+            {
+                string path = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, false, false);
+                try { System.Diagnostics.Process.Start(path); }
+                catch { }
             }
         }
     }

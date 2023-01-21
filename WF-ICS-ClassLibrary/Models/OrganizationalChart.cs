@@ -436,6 +436,28 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
+        public static List<ICSRole> GetRolesForAssignmentList(this OrganizationChart org, Guid BranchID, int maxDepth = 0, int MaxCount = 0)
+        {
+
+            List<ICSRole> roles = new List<ICSRole>(); 
+            roles.Add( org.AllRoles.FirstOrDefault(o => o.RoleID == BranchID));
+            foreach(ICSRole role in org.AllRoles.Where(o=>o.ReportsTo == BranchID && o.BranchID == BranchID))
+            {
+                roles.Add(role);
+                List<ICSRole> childRoles = org.GetChildRoles(role.RoleID, true, true);
+                if(maxDepth > 0) { childRoles = childRoles.Where(o => o.Depth <= maxDepth).ToList(); }
+                roles.AddRange(childRoles);
+            }
+
+            if(MaxCount > 0 && roles.Count > MaxCount && (maxDepth != 1))
+            {
+                roles = org.GetRolesForAssignmentList(BranchID, roles.Max(o => o.Depth) - 1, MaxCount);
+            }
+
+
+            return roles;
+        }
+
         public static void SwitchToUnifiedCommand(this OrganizationChart org)
         {
             if (!org.IsUnifiedCommand)
@@ -525,16 +547,17 @@ namespace WF_ICS_ClassLibrary.Models
             else { return null; }
         }
 
-        public static List<ICSRole> GetChildRoles(this OrganizationChart orgChart, Guid ParentRoleID, bool getAllDecendants = true)
+        public static List<ICSRole> GetChildRoles(this OrganizationChart orgChart, Guid ParentRoleID, bool getAllDecendants = true, bool ExcludeAgencyReps = true)
         {
             List<ICSRole> roles = new List<ICSRole>();
             roles.AddRange(orgChart.AllRoles.Where(o => o.ReportsTo == ParentRoleID).ToList());
+            if (ExcludeAgencyReps) { roles = roles.Where(o => !o.RoleName.Equals("Agency Representative")).ToList(); }
             if (getAllDecendants)
             {
                 List<ICSRole> directChildren = new List<ICSRole>();
                 foreach (ICSRole role in roles)
                 {
-                    directChildren.AddRange(orgChart.GetChildRoles(role.RoleID));
+                    directChildren.AddRange(orgChart.GetChildRoles(role.RoleID, getAllDecendants, ExcludeAgencyReps));
                 }
                 roles.AddRange(directChildren);
             }
@@ -652,11 +675,11 @@ namespace WF_ICS_ClassLibrary.Models
             AllRoles.Add(new ICSRole(new Guid("EDF0C322-76EE-448A-8D58-0820AAB9791B"), "Ground Support Unit Leader", new Guid("90334664-BFFF-463A-9F60-8683E2C07AA9"), Globals.LogisticsChiefID, "NameLogistics8", "TitleLogistics8", blankMember, 99, 3));
 
             //Admin
-            AllRoles.Add(new ICSRole(Globals.AdminChiefID, "Finance/Administration Section Chief", Globals.IncidentCommanderID, Globals.AdminChiefID, "Text10", blankMember, 8, 1));
-            AllRoles.Add(new ICSRole(new Guid("2AD6BDAC-1AE2-47EF-AEE5-B8820B674C90"), "Procurement Unit Leader", Globals.AdminChiefID, Globals.AdminChiefID, "NameFinance1", "TitleFinance1", blankMember, 99, 2));
-            AllRoles.Add(new ICSRole(new Guid("E2B66759-A290-459A-B96F-3B8FE7B3D883"), "Time Unit Leader", Globals.AdminChiefID, Globals.AdminChiefID, "NameFinance2", "TitleFinance2", blankMember, 99, 2));
-            AllRoles.Add(new ICSRole(new Guid("9277DB39-D6E3-4E6C-8932-D810F7313AC9"), "Cost Unit Leader", Globals.AdminChiefID, Globals.AdminChiefID, "NameFinance3", "TitleFinance3", blankMember, 99, 2));
-            AllRoles.Add(new ICSRole(new Guid("9277DB39-D6E3-4E6C-8932-D810F7313AC9"), "Compensation/Claims Unit Leader", Globals.AdminChiefID, Globals.AdminChiefID, "NameFinance4", "TitleFinance4", blankMember, 99, 2));
+            AllRoles.Add(new ICSRole(Globals.FinanceChiefID, "Finance/Administration Section Chief", Globals.IncidentCommanderID, Globals.FinanceChiefID, "Text10", blankMember, 8, 1));
+            AllRoles.Add(new ICSRole(new Guid("2AD6BDAC-1AE2-47EF-AEE5-B8820B674C90"), "Procurement Unit Leader", Globals.FinanceChiefID, Globals.FinanceChiefID, "NameFinance1", "TitleFinance1", blankMember, 99, 2));
+            AllRoles.Add(new ICSRole(new Guid("E2B66759-A290-459A-B96F-3B8FE7B3D883"), "Time Unit Leader", Globals.FinanceChiefID, Globals.FinanceChiefID, "NameFinance2", "TitleFinance2", blankMember, 99, 2));
+            AllRoles.Add(new ICSRole(new Guid("9277DB39-D6E3-4E6C-8932-D810F7313AC9"), "Cost Unit Leader", Globals.FinanceChiefID, Globals.FinanceChiefID, "NameFinance3", "TitleFinance3", blankMember, 99, 2));
+            AllRoles.Add(new ICSRole(new Guid("9277DB39-D6E3-4E6C-8932-D810F7313AC9"), "Compensation/Claims Unit Leader", Globals.FinanceChiefID, Globals.FinanceChiefID, "NameFinance4", "TitleFinance4", blankMember, 99, 2));
 
             foreach(ICSRole role in AllRoles)
             {
@@ -682,12 +705,12 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Air Support Group Supervisor", Globals.OpsChiefID, "ASGS", "The person responsible for planning and oversight of incident aircraft support functions (helibase, helispot and Fixed Wing Air Bases)."));
             allRoles.Add(new ICSRole("Air Tactical Group Supervisor", Globals.OpsChiefID, "ATGS", "The person primarily responsible for the coordination of all tactical missions of fixed and/or rotary wing aircraft operating in incident airspace."));
             allRoles.Add(new ICSRole("Base/Camp Manager", Globals.LogisticsChiefID, "BCMG", "The person responsible for appropriate sanitation and facility management services in the assigned Base or Camp."));
-            allRoles.Add(new ICSRole("Claims Specialist", Globals.AdminChiefID, "CLMS", "The person who is responsible to manage all claims related activities (other than injury) for an incident"));
+            allRoles.Add(new ICSRole("Claims Specialist", Globals.FinanceChiefID, "CLMS", "The person who is responsible to manage all claims related activities (other than injury) for an incident"));
             allRoles.Add(new ICSRole("Clerk", Guid.Empty, "CLRK", "The person who is responsible to provide administrative support to any Section as assigned."));
             allRoles.Add(new ICSRole("Communications Unit Leader", Globals.LogisticsChiefID, "COML", "The person responsible for developing plans for the effective use of incident communications equipment and facilities; installing and testing communications equipment; supervising the Incident Communications Center; distributing communications equipment to incident personnel; and maintaining and repairing communications equipment."));
-            allRoles.Add(new ICSRole("Compensation/Claims Unit Leader", Globals.AdminChiefID, "COMP", "The person responsible for the overall management and direction of all administrative matters pertaining to compensation-for-injury and claims-related activities related to an incident."));
+            allRoles.Add(new ICSRole("Compensation/Claims Unit Leader", Globals.FinanceChiefID, "COMP", "The person responsible for the overall management and direction of all administrative matters pertaining to compensation-for-injury and claims-related activities related to an incident."));
             allRoles.Add(new ICSRole("Communications Technician", Globals.LogisticsChiefID, "COMT", "The person responsible for installing, maintaining, and tracking communications equipment."));
-            allRoles.Add(new ICSRole("Cost Unit Leader", Globals.AdminChiefID, "COST", "The person responsible for collecting all cost data, performing cost-effectiveness analyses, and providing cost estimates and cost-saving recommendations."));
+            allRoles.Add(new ICSRole("Cost Unit Leader", Globals.FinanceChiefID, "COST", "The person responsible for collecting all cost data, performing cost-effectiveness analyses, and providing cost estimates and cost-saving recommendations."));
             allRoles.Add(new ICSRole("Crew Leader 1 ", Globals.OpsChiefID, "CRL1", "The person who is the primary supervisor in command of usually 2 to 20 crew members and responsible for their performance, safety, and welfare while maintaining the span of control of a specified type of wildfire crew."));
             allRoles.Add(new ICSRole("Crew Leader 2", Globals.OpsChiefID, "CRL2", "The person who is the primary supervisor in command of usually 2 to 20 crew members and responsible for their performance, safety, and welfare while maintaining the span of control of a specified type of wildfire crew."));
             allRoles.Add(new ICSRole("Crew Leader 3", Globals.OpsChiefID, "CRL3", "The person who is the primary supervisor in command of usually 2 to 20 crew members and responsible for their performance, safety, and welfare while maintaining the span of control of a specified type of wildfire crew."));
@@ -697,7 +720,7 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Crew - Type 1", Globals.OpsChiefID, "CRW1", "The primary fire response force consisting of 3 to 21 persons and meet all requirements of the Interagency Exchange Standards. Defined as Initial Attack Crews (IAC) or Sustained Action Crews (SAC)."));
             allRoles.Add(new ICSRole("Crew - Type 2", Globals.OpsChiefID, "CRW2", "Crews intended for utilization on low to moderate complexity sustained action operations and meet all requirements of the Interagency Exchange Standards."));
             allRoles.Add(new ICSRole("Crew - Type 3", Globals.OpsChiefID, "CRW3", "Generally made up of temporary firefighter forces used for mop up situations that have received some type of basic agency firefighting training."));
-            allRoles.Add(new ICSRole("Commissary Manager", Globals.AdminChiefID, "CMSY", "The person responsible for commissary operations."));
+            allRoles.Add(new ICSRole("Commissary Manager", Globals.FinanceChiefID, "CMSY", "The person responsible for commissary operations."));
             allRoles.Add(new ICSRole("Dispatcher", Globals.LogisticsChiefID, "DISP", "The person responsible for notifying resources to assigned incidents."));
             allRoles.Add(new ICSRole("Division Supervisor", Globals.OpsChiefID, "DIVS", "The person responsible for supervising equipment and personnel assigned to a division. Reports to a Branch Director or Operations Section Chief."));
             allRoles.Add(new ICSRole("Demobilization Unit Leader", Globals.PlanningChiefID, "DMOB", "The person is responsible for preparing the Demobilization Plan and schedule ensuring an orderly, safe, and efficient movement of personnel and equipment from the incident."));
@@ -705,7 +728,7 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Dozer Boss", Globals.OpsChiefID, "DOZB", "The person responsible to lead a single bulldozer and attached personnel and is responsible for their safety on wildland and prescribed fire incidents."));
             allRoles.Add(new ICSRole("Engine Boss", Globals.OpsChiefID, "ENGB", "The person that leads a single fire engine and attached personnel and is responsible for their safety on wildland and prescribed fire incidents."));
             allRoles.Add(new ICSRole("Engine Operator", Globals.OpsChiefID, "ENOP", "The person responsible for the safe and efficient use of a wildland fire engine on an incident."));
-            allRoles.Add(new ICSRole("Equipment time recorder", Globals.AdminChiefID, "EQTR", "The Equipment Time Recorder is responsible for tracking and posting equipment time on an incident"));
+            allRoles.Add(new ICSRole("Equipment time recorder", Globals.FinanceChiefID, "EQTR", "The Equipment Time Recorder is responsible for tracking and posting equipment time on an incident"));
             allRoles.Add(new ICSRole("Facilities Unit Leader", Globals.LogisticsChiefID, "FACL", "The person responsible for laying out and operating incident facilities (Base, Camp(s), and ICP) and managing Base and Camp(s) operations."));
             allRoles.Add(new ICSRole("Faller", Globals.OpsChiefID, "FALL", "A person who is qualified under workplace regulations to fall non danger trees on an incident."));
             allRoles.Add(new ICSRole("Fire Behaviour Analyst", Globals.PlanningChiefID, "FBAN", "A specialist position under the plans function of a fire incident management team responsible for making predictions of probable fire behaviour based on an analysis of the current and forecasted state of the fire environment."));
@@ -714,9 +737,9 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Fire Investigator", Globals.PlanningChiefID, "FINV", "The person responsible to determine the origin, cause, and development of a wildland fire."));
             allRoles.Add(new ICSRole("Firing Boss", Globals.OpsChiefID, "FIRB", "The person responsible for ground and/or aerial ignition operations and coordinates with resources on wildland and prescribed fire incidents."));
             allRoles.Add(new ICSRole("Field Observer", Globals.OpsChiefID, "FOBS", "The person responsible for collecting incident status information from personal observations at the incident and providing this information to the activated function, or other resources."));
-            allRoles.Add(new ICSRole("Finance/Administration Section Chief", Globals.AdminChiefID, "FSC", "The person responsible for all financial, administrative, and cost analysis aspects of the incident and for supervising members of the Finance/Administration Section"));
-            allRoles.Add(new ICSRole("Finance/Administration Section Chief 1", Globals.AdminChiefID, "FSC1", "The person responsible for all financial, administrative, and cost analysis aspects of the incident and for supervising members of the Finance/Administration Section"));
-            allRoles.Add(new ICSRole("Finance/Administration Section Chief 2", Globals.AdminChiefID, "FSC2", "The person responsible for all financial, administrative, and cost analysis aspects of the incident and for supervising members of the Finance/Administration Section"));
+            allRoles.Add(new ICSRole("Finance/Administration Section Chief", Globals.FinanceChiefID, "FSC", "The person responsible for all financial, administrative, and cost analysis aspects of the incident and for supervising members of the Finance/Administration Section"));
+            allRoles.Add(new ICSRole("Finance/Administration Section Chief 1", Globals.FinanceChiefID, "FSC1", "The person responsible for all financial, administrative, and cost analysis aspects of the incident and for supervising members of the Finance/Administration Section"));
+            allRoles.Add(new ICSRole("Finance/Administration Section Chief 2", Globals.FinanceChiefID, "FSC2", "The person responsible for all financial, administrative, and cost analysis aspects of the incident and for supervising members of the Finance/Administration Section"));
             allRoles.Add(new ICSRole("Fixed Wing Base Manager", Globals.OpsChiefID, "FWBM", "The person responsible for supervision and coordination at a fixed-wing base."));
             allRoles.Add(new ICSRole("Geographic Information System Specialist", Globals.PlanningChiefID, "GISS", "The person responsible for providing timely and accurate spatial information to be used by all facets of the IMT."));
             allRoles.Add(new ICSRole("Ground Support Unit Leader", Globals.LogisticsChiefID, "GSUL", "The person responsible for the fueling, maintaining, and repairing of vehicles, and the transportation of personnel and supplies."));
@@ -756,11 +779,11 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Operations Section Chief 2", Globals.OpsChiefID, "OSC2", "The person responsible for supervising the Operations Section who reports to the Incident Commander and is a member of the General Staff. This position may have one or more deputies assigned."));
             allRoles.Add(new ICSRole("Prescribed Fire Specialist", Globals.OpsChiefID, "PBSP", "The person responsible for creating burn plans for prescribed fire, to ensure the best ecological results in the safest procedure."));
             allRoles.Add(new ICSRole("Plastic Sphere Dispenser Operator", Globals.OpsChiefID, "PLDO", "The person responsible to utilize the Plastic Sphere Dispenser for aerial ignition operations."));
-            allRoles.Add(new ICSRole("Procurement Unit Leader", Globals.AdminChiefID, "PROC", "The person responsible for administering all financial matters pertaining to vendor contracts, leases, and fiscal agreements."));
+            allRoles.Add(new ICSRole("Procurement Unit Leader", Globals.FinanceChiefID, "PROC", "The person responsible for administering all financial matters pertaining to vendor contracts, leases, and fiscal agreements."));
             allRoles.Add(new ICSRole("Planning Section Chief", Globals.PlanningChiefID, "PSC", "The person responsible for supervising the Planning Section. Reports to the Incident Commander and is a member of the General Staff. This position may have one or more deputies assigned."));
             allRoles.Add(new ICSRole("Planning Section Chief 1", Globals.PlanningChiefID, "PSC1", "The person responsible for supervising the Planning Section. Reports to the Incident Commander and is a member of the General Staff. This position may have one or more deputies assigned."));
             allRoles.Add(new ICSRole("Planning Section Chief 2", Globals.PlanningChiefID, "PSC2", "The person responsible for supervising the Planning Section. Reports to the Incident Commander and is a member of the General Staff. This position may have one or more deputies assigned."));
-            allRoles.Add(new ICSRole("Personnel Time Recorder", Globals.AdminChiefID, "PTRC", "The person responsible for overseeing the recording of time for all personnel assigned to an incident."));
+            allRoles.Add(new ICSRole("Personnel Time Recorder", Globals.FinanceChiefID, "PTRC", "The person responsible for overseeing the recording of time for all personnel assigned to an incident."));
             allRoles.Add(new ICSRole("Radio Operator", Globals.LogisticsChiefID, "RADO", "The person responsible for passing accurate and timely information via incident radio communications. May also be required to document all communications and ensure regular check-ins by resources are completed."));
             allRoles.Add(new ICSRole("Receiving/Distribution Manager", Globals.LogisticsChiefID, "RCDM", "The person responsible for receiving and distributing all supplies and equipment (other than primary resources) and the service and repair of tools and equipment."));
             allRoles.Add(new ICSRole("Resource Clerk", Globals.PlanningChiefID, "RESC", "The person responsible for support to the Resource Unit."));
@@ -782,7 +805,7 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Service Branch Director", Globals.LogisticsChiefID, "SVBD", "The person responsible for managing all service activities at the incident. The Service Branch Director supervises the operations of the Communications, Medical, and Food Unit Leaders."));
             allRoles.Add(new ICSRole("Task Force Leader", Globals.OpsChiefID, "TFLD", "The individual responsible for supervising a task force. Reports to a Division/Group Supervisor or Operations Section Chief."));
             allRoles.Add(new ICSRole("Technical Specialist", Guid.Empty, "THSP", "Personnel with special skills that can be used anywhere within the Incident Command System organization."));
-            allRoles.Add(new ICSRole("Time Unit Leader", Globals.AdminChiefID, "TIME", "The person responsible for recording personnel time."));
+            allRoles.Add(new ICSRole("Time Unit Leader", Globals.FinanceChiefID, "TIME", "The person responsible for recording personnel time."));
 
 
             return allRoles;
@@ -921,7 +944,7 @@ namespace WF_ICS_ClassLibrary.Models
             if(id == Globals.OpsChiefID) { return "Operations"; }
             if (id == Globals.PlanningChiefID) { return "Planning"; }
             if (id == Globals.LogisticsChiefID) { return "Logistics"; }
-            if (id == Globals.AdminChiefID) { return "Finance/Admin"; }
+            if (id == Globals.FinanceChiefID) { return "Finance/Admin"; }
 
             return "Command"; 
 

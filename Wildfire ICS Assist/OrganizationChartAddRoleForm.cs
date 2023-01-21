@@ -139,7 +139,7 @@ namespace Wildfire_ICS_Assist
 
                 /* beleive it or not, this is all for colouring */
                 List<Guid> ChiefIDs = new List<Guid>();
-                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.AdminChiefID); ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
+                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID); ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
                 List<Guid> CommandStaffRoles = new List<Guid>();
                 foreach (ICSRole role in CurrentOrgChart.AllRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))                {                    CommandStaffRoles.Add(role.RoleID);                }
                 splitContainer1.Panel1.BackColor = Color.White;
@@ -148,7 +148,7 @@ namespace Wildfire_ICS_Assist
                 else if (parentRole.BranchID == Globals.OpsChiefID) { splitContainer1.Panel1.BackColor = Color.Orange; }
                 else if (parentRole.BranchID == Globals.PlanningChiefID) { splitContainer1.Panel1.BackColor = Color.CornflowerBlue; }
                 else if (parentRole.BranchID == Globals.LogisticsChiefID) { splitContainer1.Panel1.BackColor = Color.Khaki; }
-                else if (parentRole.BranchID == Globals.AdminChiefID) { splitContainer1.Panel1.BackColor = Color.LightGray; }
+                else if (parentRole.BranchID == Globals.FinanceChiefID) { splitContainer1.Panel1.BackColor = Color.LightGray; }
                 else { splitContainer1.Panel1.BackColor = Color.White; }
             }
         }

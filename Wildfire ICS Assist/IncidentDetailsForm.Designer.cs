@@ -189,7 +189,6 @@
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnIncidentSummary = new System.Windows.Forms.Button();
             this.btnAssignmentList = new System.Windows.Forms.Button();
-            this.btnOrgAssignmentList = new System.Windows.Forms.Button();
             this.btnAirOpsSummary = new System.Windows.Forms.Button();
             this.btnSafetyPlans = new System.Windows.Forms.Button();
             this.btnIncidentObjectives = new System.Windows.Forms.Button();
@@ -211,6 +210,7 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
+            this.printingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -944,9 +944,9 @@
             this.iAPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.incidentActionPlanToolStripMenuItem,
             this.incidentObjectivesICS202ToolStripMenuItem,
+            this.organizationChartICS207ToolStripMenuItem,
             this.communicationsPlanICS205ToolStripMenuItem,
             this.medicalPlanICS206ToolStripMenuItem,
-            this.organizationChartICS207ToolStripMenuItem,
             this.safetyMessageICS208ToolStripMenuItem,
             this.airOperationsSummaryICS220ToolStripMenuItem,
             this.toolStripSeparator5,
@@ -954,6 +954,7 @@
             this.communicationsListICS205AToolStripMenuItem,
             this.generalMessageICS213ToolStripMenuItem,
             this.toolStripSeparator9,
+            this.printingToolStripMenuItem,
             this.printThisOperationalPeriodToolStripMenuItem,
             this.printThisIncidentToDateToolStripMenuItem});
             this.iAPToolStripMenuItem.Name = "iAPToolStripMenuItem";
@@ -1295,7 +1296,7 @@
             // cpPlanning
             // 
             resources.ApplyResources(this.cpPlanning, "cpPlanning");
-            this.cpPlanning.BackColor = System.Drawing.Color.White;
+            this.cpPlanning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpPlanning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpPlanning.CollapsedHeight = 40;
             this.cpPlanning.CollapsedWidth = 485;
@@ -1305,7 +1306,7 @@
             this.cpPlanning.Controls.Add(this.btnTeamAssignments);
             this.cpPlanning.Controls.Add(this.btnPlanningDashboard);
             this.cpPlanning.Controls.Add(this.btnTimeline);
-            this.cpPlanning.CurrentlyCollapsed = false;
+            this.cpPlanning.CurrentlyCollapsed = true;
             this.cpPlanning.ExpandedHeight = 270;
             this.cpPlanning.ExpandedWidth = 485;
             this.cpPlanning.Name = "cpPlanning";
@@ -1351,7 +1352,6 @@
             this.cpIncidentActionPlan.CollapseLeft = true;
             this.cpIncidentActionPlan.Controls.Add(this.btnIncidentSummary);
             this.cpIncidentActionPlan.Controls.Add(this.btnAssignmentList);
-            this.cpIncidentActionPlan.Controls.Add(this.btnOrgAssignmentList);
             this.cpIncidentActionPlan.Controls.Add(this.btnAirOpsSummary);
             this.cpIncidentActionPlan.Controls.Add(this.btnSafetyPlans);
             this.cpIncidentActionPlan.Controls.Add(this.btnIncidentObjectives);
@@ -1377,12 +1377,6 @@
             resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
             this.btnAssignmentList.Name = "btnAssignmentList";
             this.btnAssignmentList.UseVisualStyleBackColor = true;
-            // 
-            // btnOrgAssignmentList
-            // 
-            resources.ApplyResources(this.btnOrgAssignmentList, "btnOrgAssignmentList");
-            this.btnOrgAssignmentList.Name = "btnOrgAssignmentList";
-            this.btnOrgAssignmentList.UseVisualStyleBackColor = true;
             // 
             // btnAirOpsSummary
             // 
@@ -1548,12 +1542,16 @@
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
             // 
+            // printingToolStripMenuItem
+            // 
+            resources.ApplyResources(this.printingToolStripMenuItem, "printingToolStripMenuItem");
+            this.printingToolStripMenuItem.Name = "printingToolStripMenuItem";
+            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.Controls.Add(this.cpPlanning);
             this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
@@ -1567,6 +1565,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.cpOperations);
             this.Controls.Add(this.cpLogistics);
+            this.Controls.Add(this.cpPlanning);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
@@ -1784,10 +1783,10 @@
         private System.Windows.Forms.ToolStripMenuItem requestOptionsFromServerToolStripMenuItem;
         private System.Windows.Forms.Button btnIncidentSummary;
         private System.Windows.Forms.Button btnAssignmentList;
-        private System.Windows.Forms.Button btnOrgAssignmentList;
         private System.Windows.Forms.Button btnAirOpsSummary;
         private System.Windows.Forms.ToolStripMenuItem aircraftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem airOperationsSummaryICS220ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printingToolStripMenuItem;
     }
 }
 

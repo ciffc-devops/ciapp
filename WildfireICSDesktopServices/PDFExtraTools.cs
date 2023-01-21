@@ -13,6 +13,20 @@ namespace WildfireICSDesktopServices
     public static class PDFExtraTools
     {
 
+        public static void SetFieldFontBold(this PdfStamper stamper, string fieldName)
+        {
+            BaseFont family = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, false);
+            stamper.AcroFields.SetFieldProperty(fieldName, "textfont", family, null);
+        }
+        public static float GetFontSizeForField(AcroFields acroFields, string fieldName)
+        {
+            AcroFields.Item fieldItem = acroFields.GetFieldItem(fieldName);
+            PdfDictionary mergedFieldAttributes = fieldItem.GetMerged(0);
+            TextField tmp = new TextField(null, null, null);
+            acroFields.DecodeGenericDictionary(mergedFieldAttributes, tmp);
+            return tmp.FontSize;
+        }
+
         public static PdfStamper AddPDFField(this PdfStamper stamper, string originalFilePath, string adjacentText, string fieldType, int height, int width, string fieldName, int[] instancesOfInterest)
         {
             var t = new MyLocationTextExtractionStrategy(adjacentText);
