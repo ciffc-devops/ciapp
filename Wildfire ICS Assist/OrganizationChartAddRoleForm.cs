@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary;
 using System.CodeDom;
+using System.Globalization;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace Wildfire_ICS_Assist
 {
@@ -31,7 +33,7 @@ namespace Wildfire_ICS_Assist
         {
             
             DisplayRole();
-            txtRoleName.Focus();
+            cboNewRoleName.Focus();
         }
 
         private void DisplayRole()
@@ -50,7 +52,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-            txtRoleName.Text = selectedRole.RoleName;
+            
             if (selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == selectedRole.ReportsTo))
             {
                 cboReportsTo.SelectedValue = selectedRole.ReportsTo;
@@ -63,7 +65,18 @@ namespace Wildfire_ICS_Assist
             {
                 toolTip1.SetToolTip(cboReportsTo, Properties.Resources.ProtectedRole);
             }
-            txtRoleName.Focus();
+
+            if (!string.IsNullOrEmpty(selectedRole.RoleName))
+            {
+                ICSRole reportsTo = (ICSRole)cboReportsTo.SelectedItem; if (reportsTo != null)
+                {
+                    List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o => o.BranchID == reportsTo.BranchID || o.BranchID == Guid.Empty).OrderBy(o => o.RoleName).ToList();
+                    if(branchRoles.Any(o=>o.RoleName.Equals(selectedRole.RoleName, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        cboNewRoleName.SelectedValue = branchRoles.First(o => o.RoleName.Equals(selectedRole.RoleName, StringComparison.OrdinalIgnoreCase)).RoleID;
+                    }
+                }
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -75,7 +88,11 @@ namespace Wildfire_ICS_Assist
         {
             if (ValidateForm())
             {
-                selectedRole.RoleName = txtRoleName.Text.Trim();
+                ICSRole selectedName = (ICSRole)cboNewRoleName.SelectedItem;
+
+                selectedRole.RoleName = selectedName.RoleName;
+                selectedRole.Mnemonic = selectedName.Mnemonic;
+                selectedRole.RoleDescription = selectedName.RoleDescription;
                 ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;
                 selectedRole.ReportsTo = rep.RoleID;
                 selectedRole.ReportsToRoleName = rep.RoleName;
@@ -88,7 +105,7 @@ namespace Wildfire_ICS_Assist
 
         private bool ValidateForm()
         {
-            if (string.IsNullOrEmpty(txtRoleName.Text)) { txtRoleName.BackColor = Program.ErrorColor; return false; } else { txtRoleName.BackColor = Program.GoodColor; }
+            if (cboNewRoleName.SelectedItem == null) { cboNewRoleName.BackColor = Program.ErrorColor; return false; } else { cboNewRoleName.BackColor = Program.GoodColor; }
             if (cboReportsTo.SelectedItem == null) { cboReportsTo.BackColor = Program.ErrorColor; return false; } else { cboReportsTo.BackColor = Program.GoodColor; }
             if(((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor; MessageBox.Show(Properties.Resources.CantReportToSelf); return false; }
 
@@ -112,99 +129,43 @@ namespace Wildfire_ICS_Assist
 
             if (parentRole != null)
             {
+                //update the list of role names based on the currently selected branch.
+                Guid BranchID = parentRole.BranchID;
+                List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o=>o.BranchID == BranchID || o.BranchID == Guid.Empty).OrderBy(o=>o.RoleName).ToList();
+                cboNewRoleName.DataSource = null;
+                cboNewRoleName.DataSource = branchRoles;
+                cboNewRoleName.DisplayMember = "RoleName";
+                cboNewRoleName.ValueMember = "RoleID";
+
+                /* beleive it or not, this is all for colouring */
                 List<Guid> ChiefIDs = new List<Guid>();
                 ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.AdminChiefID); ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
-
-
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                foreach (ICSRole role in CurrentOrgChart.AllRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
-                {
-                    CommandStaffRoles.Add(role.RoleID);
-                }
-
-
+                foreach (ICSRole role in CurrentOrgChart.AllRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))                {                    CommandStaffRoles.Add(role.RoleID);                }
                 splitContainer1.Panel1.BackColor = Color.White;
-                if (CommandStaffRoles.Contains(parentRole.RoleID))
-                {
-                    splitContainer1.Panel1.BackColor = Color.IndianRed;
-                }
-                else if (parentRole.BranchID == Globals.IncidentCommanderID)
-                {
-                    splitContainer1.Panel1.BackColor = Color.LimeGreen;
-                    //    pnlCommandTeam.BackColor = Color.LimeGreen;
-                }
-                else if (parentRole.BranchID == Globals.OpsChiefID)
-                {
-                    splitContainer1.Panel1.BackColor = Color.Orange;
-                }
-                else if (parentRole.BranchID == Globals.PlanningChiefID)
-                {
-                    splitContainer1.Panel1.BackColor = Color.CornflowerBlue;
-                }
-                else if (parentRole.BranchID == Globals.LogisticsChiefID)
-                {
-                    splitContainer1.Panel1.BackColor = Color.Khaki;
-                }
-                else if (parentRole.BranchID == Globals.AdminChiefID)
-                {
-                    splitContainer1.Panel1.BackColor = Color.LightGray;
-                }
-                else
-                {
-                    splitContainer1.Panel1.BackColor = Color.White;
-                }
+                if (CommandStaffRoles.Contains(parentRole.RoleID)) { splitContainer1.Panel1.BackColor = Color.IndianRed; }
+                else if (parentRole.BranchID == Globals.IncidentCommanderID) { splitContainer1.Panel1.BackColor = Color.LimeGreen; }
+                else if (parentRole.BranchID == Globals.OpsChiefID) { splitContainer1.Panel1.BackColor = Color.Orange; }
+                else if (parentRole.BranchID == Globals.PlanningChiefID) { splitContainer1.Panel1.BackColor = Color.CornflowerBlue; }
+                else if (parentRole.BranchID == Globals.LogisticsChiefID) { splitContainer1.Panel1.BackColor = Color.Khaki; }
+                else if (parentRole.BranchID == Globals.AdminChiefID) { splitContainer1.Panel1.BackColor = Color.LightGray; }
+                else { splitContainer1.Panel1.BackColor = Color.White; }
             }
         }
 
         private void cboReportsTo_Leave(object sender, EventArgs e)
         {
-            if (((ComboBox)sender).SelectedItem == null)
+           
+        }
+
+        private void cboNewRoleName_Leave(object sender, EventArgs e)
+        {
+            if (cboNewRoleName.SelectedItem == null)
             {
-                if (!string.IsNullOrEmpty(((ComboBox)sender).Text))
-                {
-                    if (CurrentOrgChart.AllRoles.Any(o => o.RoleName.Equals(((ComboBox)sender).Text, StringComparison.InvariantCultureIgnoreCase)))
-                    {
-                        ((ComboBox)sender).SelectedValue = CurrentOrgChart.AllRoles.Where(o => o.RoleName.Equals(((ComboBox)sender).Text, StringComparison.InvariantCultureIgnoreCase)).First().RoleID;
-                        //selectedRole.rep = (ICSRole)((ComboBox)sender).SelectedItem;
-                        //displaySelectedTeamMember();
-                    }
-                    else if (CurrentOrgChart.AllRoles.Any(o => o.RoleNameForDropdown.Equals(((ComboBox)sender).Text, StringComparison.InvariantCultureIgnoreCase)))
-                    {
-                        ((ComboBox)sender).SelectedValue = CurrentOrgChart.AllRoles.Where(o => o.RoleNameForDropdown.Equals(((ComboBox)sender).Text, StringComparison.InvariantCultureIgnoreCase)).First().RoleID;
-                        //selectedRole = (ICSRole)((ComboBox)sender).SelectedItem;
-
-
-                    }
-                    else
-                    {
-                        ((ComboBox)sender).SelectedIndex = 0;
-                        //selectedRole = null;
-                        System.Media.SystemSounds.Exclamation.Play();
-                        ((ComboBox)sender).Focus();
-                    }
-                }
-                else
-                {
-                    ((ComboBox)sender).SelectedIndex = 0;
-                    //selectedRole = null;
-                    //System.Media.SystemSounds.Exclamation.Play();
-                    //((ComboBox)sender).Focus();
-                }
-
-
-            }
-            //else { selectedRole = (ICSRole)((ComboBox)sender).SelectedItem; }
-
-            if (null != ((ComboBox)sender).SelectedItem)
-            {
-                //selectedRole = (ICSRole)((ComboBox)sender).SelectedItem;
-            }
-            else
-            {
-                ((ComboBox)sender).SelectedIndex = 0;
-                //selectedRole = null;
+                cboNewRoleName.SelectedIndex = -1;
+                cboNewRoleName.Text = string.Empty;
+                cboNewRoleName.Focus();
                 System.Media.SystemSounds.Exclamation.Play();
-                ((ComboBox)sender).Focus();
 
             }
         }

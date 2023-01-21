@@ -14,6 +14,9 @@ namespace WF_ICS_ClassLibrary.Models
         private string _moreInfoURL;
         private string _moreInfoButtonText;
 
+        public HelpInfo() { }
+        public HelpInfo(string title, string body) { Title = title; Body = body; }
+
         public string ID { get => _ID; set => _ID = value; }
         public string Title { get => _Title; set => _Title = value; }
         public string Body { get => _Body; set => _Body = value; }
@@ -60,6 +63,7 @@ namespace WF_ICS_ClassLibrary.Models
                     bt.Append("If this box is checked, this item will be included in the '7. FREQUENCIES' section of ICS-220 Air Ops Summary."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
                     Body = bt.ToString();
                     return true;
+
 
                 case "AircraftIsMedivac":
                     Title = "Aircraft used for medivac";
@@ -367,5 +371,7 @@ namespace WF_ICS_ClassLibrary.Models
 
 
         }
+
+
     }
 }

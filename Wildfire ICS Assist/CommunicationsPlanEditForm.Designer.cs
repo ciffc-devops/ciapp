@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnAirHelp = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.chkUsedForAir = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtAssignment = new System.Windows.Forms.TextBox();
             this.txtFunction = new System.Windows.Forms.TextBox();
@@ -45,9 +48,6 @@
             this.txtCommsSystem = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAirHelp = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.chkUsedForAir = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -90,6 +90,41 @@
             this.splitContainer1.Size = new System.Drawing.Size(508, 434);
             this.splitContainer1.SplitterDistance = 371;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // btnAirHelp
+            // 
+            this.btnAirHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAirHelp.BackColor = System.Drawing.Color.White;
+            this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAirHelp.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
+            this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAirHelp.Location = new System.Drawing.Point(445, 246);
+            this.btnAirHelp.Name = "btnAirHelp";
+            this.btnAirHelp.Size = new System.Drawing.Size(34, 29);
+            this.btnAirHelp.TabIndex = 144;
+            this.btnAirHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAirHelp.UseVisualStyleBackColor = false;
+            this.btnAirHelp.Click += new System.EventHandler(this.btnAirHelp_Click);
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(34, 246);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(143, 29);
+            this.label12.TabIndex = 146;
+            this.label12.Text = "Used for Air";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkUsedForAir
+            // 
+            this.chkUsedForAir.AutoSize = true;
+            this.chkUsedForAir.Location = new System.Drawing.Point(184, 246);
+            this.chkUsedForAir.Name = "chkUsedForAir";
+            this.chkUsedForAir.Size = new System.Drawing.Size(255, 28);
+            this.chkUsedForAir.TabIndex = 145;
+            this.chkUsedForAir.Text = "Yes, this item is used for air";
+            this.chkUsedForAir.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -255,40 +290,6 @@
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnAirHelp
-            // 
-            this.btnAirHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAirHelp.BackColor = System.Drawing.Color.White;
-            this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAirHelp.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
-            this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAirHelp.Location = new System.Drawing.Point(445, 246);
-            this.btnAirHelp.Name = "btnAirHelp";
-            this.btnAirHelp.Size = new System.Drawing.Size(34, 29);
-            this.btnAirHelp.TabIndex = 144;
-            this.btnAirHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAirHelp.UseVisualStyleBackColor = false;
-            // 
-            // label12
-            // 
-            this.label12.Location = new System.Drawing.Point(34, 246);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(143, 29);
-            this.label12.TabIndex = 146;
-            this.label12.Text = "Used for Air";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // chkUsedForAir
-            // 
-            this.chkUsedForAir.AutoSize = true;
-            this.chkUsedForAir.Location = new System.Drawing.Point(184, 246);
-            this.chkUsedForAir.Name = "chkUsedForAir";
-            this.chkUsedForAir.Size = new System.Drawing.Size(255, 28);
-            this.chkUsedForAir.TabIndex = 145;
-            this.chkUsedForAir.Text = "Yes, this item is used for air";
-            this.chkUsedForAir.UseVisualStyleBackColor = true;
             // 
             // CommunicationsPlanEditForm
             // 

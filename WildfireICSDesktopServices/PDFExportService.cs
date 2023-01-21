@@ -958,7 +958,7 @@ namespace WildfireICSDesktopServices
 
                 OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
 
-                string fileToUse = "BlankForms/ICS-207-WF-Organization-Chart.pdf";
+                string fileToUse = "BlankForms/ICS-207-WF Incident Organization Chart.pdf";
                 if (currentChart.IsUnifiedCommand) { fileToUse = "BlankForms/ICS-207-WF Incident Organization Chart Unified.pdf"; }
 
                 using (PdfReader rdr = new PdfReader(fileToUse))

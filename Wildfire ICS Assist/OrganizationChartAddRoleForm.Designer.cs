@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtRoleName = new System.Windows.Forms.TextBox();
             this.cboReportsTo = new System.Windows.Forms.ComboBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,6 +37,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cboNewRoleName = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -56,7 +56,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.txtRoleName);
+            this.splitContainer1.Panel1.Controls.Add(this.cboNewRoleName);
             this.splitContainer1.Panel1.Controls.Add(this.cboReportsTo);
             this.splitContainer1.Panel1.Controls.Add(this.lblTitle);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
@@ -67,18 +67,9 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Size = new System.Drawing.Size(448, 201);
-            this.splitContainer1.SplitterDistance = 119;
+            this.splitContainer1.SplitterDistance = 128;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // txtRoleName
-            // 
-            this.txtRoleName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRoleName.Location = new System.Drawing.Point(125, 79);
-            this.txtRoleName.Name = "txtRoleName";
-            this.txtRoleName.Size = new System.Drawing.Size(311, 29);
-            this.txtRoleName.TabIndex = 5;
             // 
             // cboReportsTo
             // 
@@ -154,6 +145,19 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // cboNewRoleName
+            // 
+            this.cboNewRoleName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboNewRoleName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboNewRoleName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboNewRoleName.FormattingEnabled = true;
+            this.cboNewRoleName.Location = new System.Drawing.Point(126, 80);
+            this.cboNewRoleName.Name = "cboNewRoleName";
+            this.cboNewRoleName.Size = new System.Drawing.Size(310, 32);
+            this.cboNewRoleName.TabIndex = 5;
+            this.cboNewRoleName.Leave += new System.EventHandler(this.cboNewRoleName_Leave);
+            // 
             // OrganizationChartAddRoleForm
             // 
             this.AcceptButton = this.btnSave;
@@ -166,7 +170,10 @@
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximumSize = new System.Drawing.Size(464, 240);
+            this.MinimumSize = new System.Drawing.Size(464, 240);
             this.Name = "OrganizationChartAddRoleForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add new Org Chart Role";
             this.Load += new System.EventHandler(this.OrganizationChartAddRole_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -183,11 +190,11 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.TextBox txtRoleName;
         private System.Windows.Forms.ComboBox cboReportsTo;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ComboBox cboNewRoleName;
     }
 }

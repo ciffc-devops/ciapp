@@ -21,6 +21,7 @@ using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.CustomControls;
 using Wildfire_ICS_Assist.OptionsForms;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -142,6 +143,8 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.CommsPlanItemChanged+= Program_CommsPlanItemChanged;
             Program.wfIncidentService.AircraftChanged+= Program_AircraftChanged;
             Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
+            Program.wfIncidentService.TaskBasicsChanged += Program_TaskBasicsChanged;
+            Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
         }
 
 
@@ -529,7 +532,7 @@ namespace Wildfire_ICS_Assist
 
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { tmrAutoSave.Enabled = Program.generalOptionsService.GetOptionsBoolValue("AutoSave"); }
             setButtonCheckboxes();
-
+            browseToIncidentFolderToolStripMenuItem.Enabled = true;
         }
 
         private void DisplayCurrentICSRole()
@@ -629,6 +632,25 @@ namespace Wildfire_ICS_Assist
         }
 
 
+        private void Program_OperationalPeriodChanged(OperationalPeriodEventArgs e)
+        {
+            if(e.item.PeriodNumber == Program.CurrentOpPeriod)
+            {
+                datOpsStart.Value = e.item.PeriodStart;
+                datOpsEnd.Value = e.item.PeriodEnd;
+            }
+            TriggerAutoSave();
+        }
+
+        private void Program_TaskBasicsChanged(TaskBasicsEventArgs e)
+        {
+            txtTaskName.Text = e.item.TaskName;
+            txtTaskNumber.Text = e.item.TaskNumber;
+            txtICPCallsign.Text = e.item.ICPCallSign;
+
+
+            TriggerAutoSave();
+        }
 
         private void Program_CommsPlanChanged(CommsPlanEventArgs e)
         {
@@ -696,10 +718,10 @@ namespace Wildfire_ICS_Assist
             else { txtTaskNumber.BackColor = Program.GoodColor; ; }
 
 
-            bool tasknamechanged = (string.IsNullOrEmpty(CurrentIncident.TaskName) || !CurrentIncident.TaskName.Equals(txtTaskName.Text.Trim()));
+            bool tasknamechanged = !CurrentIncident.TaskName.EqualsWithNull(txtTaskName.Text.Trim());
             if (tasknamechanged) { CurrentIncident.TaskName = txtTaskName.Text.Trim(); }
 
-            bool tasknumberchanged = (string.IsNullOrEmpty(CurrentIncident.TaskNumber) || !CurrentIncident.TaskNumber.Equals(txtTaskNumber.Text.Trim()));
+            bool tasknumberchanged = !CurrentIncident.TaskNumber.EqualsWithNull(txtTaskNumber.Text.Trim());
             if (tasknumberchanged && validateTaskNumber()) { CurrentIncident.TaskNumber = txtTaskNumber.Text.Trim(); }
 
             if (tasknamechanged || tasknumberchanged)
@@ -946,7 +968,6 @@ namespace Wildfire_ICS_Assist
                         Program.generalOptionsService.UpserOptionValue(fileName, "RecentFileName");
 
 
-                        
                         setRecentFiles();
                         //setSavedFlag(true);
                         //tmrAutoSave.Enabled = options.AutoSave;
@@ -1698,6 +1719,41 @@ namespace Wildfire_ICS_Assist
         private void btnAirOpsSummary_Click(object sender, EventArgs e)
         {
             OpenAirOpsForm();
+        }
+
+        private void btnICSRoleHelp_Click(object sender, EventArgs e)
+        {
+
+            HelpInfo info = new HelpInfo(Program.CurrentRole.RoleName, Program.CurrentRole.RoleDescription);
+
+            using (HelpInfoForm help = new HelpInfoForm())
+            {
+                help.Title = info.Title;
+                help.Body = info.Body;
+                help.ShowDialog();
+            }
+
+        }
+
+        private void datOpsStart_Leave(object sender, EventArgs e)
+        {
+            OperationalPeriod per = Program.CurrentIncident.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == Program.CurrentOpPeriod);
+            if (per != null)
+            {
+                per.PeriodStart = datOpsStart.Value;
+                Program.wfIncidentService.UpsertOperationalPeriod(per);
+            }
+        }
+
+        private void datOpsEnd_Leave(object sender, EventArgs e)
+        {
+            OperationalPeriod per = Program.CurrentIncident.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == Program.CurrentOpPeriod);
+            if (per != null)
+            {
+                per.PeriodEnd = datOpsEnd.Value;
+                Program.wfIncidentService.UpsertOperationalPeriod(per);
+            }
+
         }
     }
 }

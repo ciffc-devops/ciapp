@@ -706,10 +706,10 @@
     <None Include="BlankForms\ICS-207-WF Incident Organization Chart Unified.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
+    <None Include="BlankForms\ICS-207-WF Incident Organization Chart.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-207-WF-Organization-Chart.pdf">
+    <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-208-WF-Safety-Message.pdf">

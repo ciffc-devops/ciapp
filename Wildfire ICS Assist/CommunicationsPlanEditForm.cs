@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -69,6 +70,21 @@ namespace Wildfire_ICS_Assist
         private void CommunicationsPlanEditForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAirHelp_Click(object sender, EventArgs e)
+        {
+            HelpInfo info = new HelpInfo();
+            if (info.loadByTopic("CommsForAir"))
+            {
+
+                using (HelpInfoForm help = new HelpInfoForm())
+                {
+                    help.Title = info.Title;
+                    help.Body = info.Body;
+                    help.ShowDialog();
+                }
+            }
         }
     }
 }
