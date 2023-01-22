@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1.Crmf;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Xml.Serialization;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace WildfireICSDesktopServices
 {
@@ -111,6 +113,25 @@ namespace WildfireICSDesktopServices
             }
 
             return _options;
+        }
+
+        public List<string> GetTeamAssignmentTypes()
+        {
+            List<string> types = new List<string>();
+
+            List<TeamAssignment> templates = GetOptionsValue("TeamAssignments") as List<TeamAssignment>;
+            templates = templates.Where(o => !string.IsNullOrEmpty(o.AssignmentType)).ToList();
+            foreach (TeamAssignment t in templates)
+            {
+                if (!types.Contains(t.AssignmentType.Trim(), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    types.Add(t.AssignmentType.Trim());
+                }
+            }
+
+
+            return types;
+
         }
 
         public ShortcutButtonOption[] GetDefaultShortcuts()
@@ -302,6 +323,8 @@ namespace WildfireICSDesktopServices
                     return new Organization();
                 case "ShortcutButtons":
                     return _options.ShortcutButtons;
+                case "TeamAssignments":
+                    return _options.AllTeamAssignmentTemplates;
                 case "TeamMembers":
                     return _options.AllTeamMembers;
                 case "Vehicles":
@@ -489,6 +512,12 @@ namespace WildfireICSDesktopServices
                     _options.RecentFilePaths.Insert(0, recentFileName);
                     if(_options.RecentFilePaths.Count > 5) { _options.RecentFilePaths = _options.RecentFilePaths.Take(5).ToList(); }
                     break;
+                case "TeamAssignment":
+                    TeamAssignment ta = (TeamAssignment)newValue;
+                    _options.AllTeamAssignmentTemplates = _options.AllTeamAssignmentTemplates.Where(o => o.ID != ta.ID).ToList();
+                    _options.AllTeamAssignmentTemplates.Add(ta);
+                    break;
+
             }
             SaveGeneralOptions();
         }

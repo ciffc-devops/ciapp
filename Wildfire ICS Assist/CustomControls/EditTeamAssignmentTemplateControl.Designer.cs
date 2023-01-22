@@ -113,6 +113,8 @@
             // 
             this.cboAssignmentType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboAssignmentType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboAssignmentType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboAssignmentType.FormattingEnabled = true;
             this.cboAssignmentType.Location = new System.Drawing.Point(198, 37);
             this.cboAssignmentType.Name = "cboAssignmentType";

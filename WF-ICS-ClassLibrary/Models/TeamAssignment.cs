@@ -31,7 +31,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(19)] private DateTime _LastUpatedUTC;
         [ProtoMember(20)] private int _OpPeriod;
         [ProtoMember(21)] private bool _Active;
-
+        [ProtoMember(22)] private Guid _IncidentID;
 
 
 
@@ -69,7 +69,7 @@ namespace WF_ICS_ClassLibrary.Models
         
         public string FullResourceID { get => ResourceIDNumber + " " + ResourceName; }
         public bool Active { get => _Active; set => _Active = value; }
-
+        public Guid IncidentID { get => _IncidentID; set => _IncidentID = value; }  
 
 
         public TeamAssignment Clone()

@@ -23,5 +23,6 @@ namespace WF_ICS_ClassLibrary.Interfaces
         void RemoveOptionValue(object removeValue, string property_name);
 
 
+        List<string> GetTeamAssignmentTypes();
     }
 }

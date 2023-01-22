@@ -50,8 +50,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(35)] private bool _includeOtherContactsWithIAP;
         [ProtoMember(36)] private bool _promptForInitialSave;
         [ProtoMember(37)] private List<Aircraft> _AircraftList = new List<Aircraft>();
-        // [ProtoMember(37)] private List<PresetTeamAssignment> l_allPresetTeamAssignments = new List<PresetTeamAssignment>();
-        //[ProtoMember(38)] private List<SafetyPlan> l_allPresetSafetyPlans = new List<SafetyPlan>();
+        
         [ProtoMember(38)] private List<SafetyMessage> _safetyMessages = new List<SafetyMessage>();
         [ProtoMember(39)] private Briefing b_briefingTemplate = new Briefing(false);
         [ProtoMember(40)] private List<IncidentObjective> l_allPresetObjectives = new List<IncidentObjective>();
@@ -80,6 +79,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(63)] private Guid _ParentOrganizationID;
         [ProtoMember(64)] private bool _AddIMTToContacts;
         [ProtoMember(65)] private Province _DefaultProvince;
+        [ProtoMember(66)] private List<TeamAssignment> _AllTeamAssignmentTemplates = new List<TeamAssignment>();
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
         public Guid PrimaryChannelID { get { return g_primaryChannel; } set { g_primaryChannel = value; appSettingsChanged = true; } }
@@ -138,7 +138,7 @@ namespace WF_ICS_ClassLibrary.Models
         public List<Equipment> AllEquipment { get => _AllEquipment; set => _AllEquipment = value; }
         public List<EquipmentSet> AllEquipmentSets { get => _AllEquipmentSets; set => _AllEquipmentSets = value; }
         public List<Aircraft> AircraftList { get => _AircraftList; set => _AircraftList = value; }
-
+        public List<TeamAssignment> AllTeamAssignmentTemplates { get => _AllTeamAssignmentTemplates; set => _AllTeamAssignmentTemplates = value; }
         public bool ECCReminderThisDevice { get => _ECCReminderThisDevice; set { _ECCReminderThisDevice = value; appSettingsChanged = true; } }
         public bool AllowStringTaskNumber { get => _AllowStringTaskNumber; set { _AllowStringTaskNumber = value; appSettingsChanged = true; } }
         public string TeamNameFormat { get => _TeamNameFormat; set { _TeamNameFormat = value; appSettingsChanged = true; } }

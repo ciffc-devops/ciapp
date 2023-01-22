@@ -59,6 +59,7 @@ namespace Wildfire_ICS_Assist
         {
             TeamAssignment assignment = new TeamAssignment();
             assignment.OpPeriod = Program.CurrentOpPeriod;
+            assignment.IncidentID = Program.CurrentIncident.TaskID;
             assignment.ResourceIDNumber = Program.CurrentIncident.GetNextAssignmentNumber(Program.CurrentOpPeriod);
             OpenAssignmentForEdit(assignment);
         }

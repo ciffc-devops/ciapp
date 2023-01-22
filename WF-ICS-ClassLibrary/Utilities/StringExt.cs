@@ -10,7 +10,14 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class StringExt
     {
-
+        public static bool Contains(this List<string> source, string toCheck, StringComparison comp)
+        {
+            return source.Any(o=>o.Contains(toCheck, comp));
+        }
+        public static bool Contains(this string source, string toCheck, StringComparison comp)
+        {
+            return source?.IndexOf(toCheck, comp) >= 0;
+        }
         public static bool EqualsWithNull(this string str1, string str2)
         {
             if (string.IsNullOrEmpty(str1) && string.IsNullOrEmpty(str2)) { return true; }
