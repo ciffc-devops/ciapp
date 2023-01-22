@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using WF_ICS_ClassLibrary.Utilities;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace WF_ICS_ClassLibrary.Models
 {
@@ -92,6 +95,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(9)] private string _ObjcetType;
         [ProtoMember(10)] private string _DataEnc;
         [ProtoMember(5)] private string _DataAsXMLString;
+        [ProtoMember(11)] private string _DataAsJSONString;
 
         public TaskUpdate() { UpdateID = System.Guid.NewGuid(); }
 
@@ -104,7 +108,16 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 if (_Data != null) { return _Data; }
-                if (!string.IsNullOrEmpty(_DataAsXMLString))
+                if (!string.IsNullOrEmpty(_DataAsJSONString))
+                {
+                    try
+                    {
+
+                        _Data = ObjectFromJSONData(_DataAsJSONString, ObjectType);
+                    }
+                    catch (Exception) { _Data = null; }
+                }
+                else if (!string.IsNullOrEmpty(_DataAsXMLString))
                 {
                     try
                     {
@@ -117,7 +130,14 @@ namespace WF_ICS_ClassLibrary.Models
                 return _Data;
             }
 
-            set { _Data = value; if (value != null) { _DataAsXMLString = value.XmlSerializeToString(); } }
+            set
+            {
+                _Data = value; if (value != null)
+                {
+                    //_DataAsXMLString = value.XmlSerializeToString();
+                    _DataAsJSONString = JsonSerializer.Serialize(value);
+                }
+            }
         }
         public bool ProcessedLocally { get => _ProcessedLocally; set => _ProcessedLocally = value; }
         public bool UploadedSuccessfully { get => _UploadedSuccessfully; set => _UploadedSuccessfully = value; }
@@ -134,62 +154,121 @@ namespace WF_ICS_ClassLibrary.Models
             return this.Clone();
         }
 
+
+      
+
+
+        public object ObjectFromJSONData(string jsonData, string ObjectType)
+        {
+            object objDecrypted = null;
+
+            if (ObjectType.Equals(new Contact().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<Contact>(jsonData);
+
+            }
+           else if (ObjectType.Equals(new Briefing().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<Briefing>(jsonData);
+            }
+            else if (ObjectType.Equals(new CommsLogEntry().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<CommsLogEntry>(jsonData);
+            }
+            else if (ObjectType.Equals(new CommsPlanItem().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<CommsPlanItem>(jsonData);
+            }
+
+            else if (ObjectType.Equals(new CommsPlan().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<CommsPlan>(jsonData);
+            }
+            else if (ObjectType.Equals(new Hospital().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<Hospital>(jsonData);
+            }
+            else if (ObjectType.Equals(new AmbulanceService().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<AmbulanceService>(jsonData);
+            }
+            else if (ObjectType.Equals(new IncidentObjective().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<IncidentObjective>(jsonData);
+            }
+
+            else if (ObjectType.Equals(new MedicalPlan().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<MedicalPlan>(jsonData);
+            }
+            else if (ObjectType.Equals(new Note().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<Note>(jsonData);
+            }
+            else if (ObjectType.Equals(new OperationalPeriod().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<OperationalPeriod>(jsonData);
+            }
+            else if (ObjectType.Equals(new OrganizationChart().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<OrganizationChart>(jsonData);
+            }
+            else if (ObjectType.Equals(new ICSRole().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<ICSRole>(jsonData);
+            }
+            else if (ObjectType.Equals(new PositionLogEntry().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<PositionLogEntry>(jsonData);
+            }
+            else if (ObjectType.Equals(new SafetyPlan().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<SafetyPlan>(jsonData);
+            }
+
+            else if (ObjectType.Equals(new TaskBasics().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<TaskBasics>(jsonData);
+            }
+            else if (ObjectType.Equals(new Timeline().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<Timeline>(jsonData);
+            }
+            else if (ObjectType.Equals(new TimelineEvent().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<TimelineEvent>(jsonData);
+            }
+
+            else if (ObjectType.Equals(new Vehicle().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<Vehicle>(jsonData);
+            }
+
+
+            else if (ObjectType.Equals(new SignInRecord().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<SignInRecord>(jsonData);
+            }
+            else if (ObjectType.Equals(new TeamMember().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<TeamMember>(jsonData);
+            }
+            else if (ObjectType.Equals(new WFIncident().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<WFIncident>(jsonData);
+            }
+
+
+
+            return objDecrypted;
+        }
+
+
         public object ObjectFromXMLData(string xmlData, string ObjectType)
         {
             object objDecrypted = null;
 
-            /* if (ObjectType.Equals(new Assignment().GetType().Name))
-             {
-                 objDecrypted = xmlData.XmlDeserializeFromString<Assignment>();
-                 string desc = ((Assignment)objDecrypted).Description;
-                 desc = desc.Replace("\r\n", Environment.NewLine);
-                 ((Assignment)objDecrypted).Description = desc.Replace("\n", Environment.NewLine);
-             }
-             else if (ObjectType.Equals(new AssignmentDebrief().GetType().Name))
-             {
-                 objDecrypted = xmlData.XmlDeserializeFromString<AssignmentDebrief>();
-             }
-               else if (ObjectType.Equals(new Clue().GetType().Name))
-             {
-                 objDecrypted = xmlData.XmlDeserializeFromString<Clue>();
-             }
-              else if (ObjectType.Equals(new TaskEquipment().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<TaskEquipment>();
-            }
-            else if (ObjectType.Equals(new EquipmentIssue().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<EquipmentIssue>();
-            }
-             else if (ObjectType.Equals(new MapSegment().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<MapSegment>();
-            }
-            else if (ObjectType.Equals(new MattsonEvaluation().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<MattsonEvaluation>();
-            }
-            else if (ObjectType.Equals(new MattsonScore().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<MattsonScore>();
-            }
-            else if (ObjectType.Equals(new ShiftBriefing().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<ShiftBriefing>();
-            }
-            else if (ObjectType.Equals(new SubjectProfile().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<SubjectProfile>();
-            }
-                  else if (ObjectType.Equals(new WhiteboardItem().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<WhiteboardItem>();
-            }
-            else if (ObjectType.Equals(new UrgencyCalculation().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<UrgencyCalculation>();
-            }
-            */
+         
             if (ObjectType.Equals(new Briefing().GetType().Name))
             {
                 objDecrypted = xmlData.XmlDeserializeFromString<Briefing>();
