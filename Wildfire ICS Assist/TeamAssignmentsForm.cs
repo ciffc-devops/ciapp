@@ -60,28 +60,58 @@ namespace Wildfire_ICS_Assist
             TeamAssignment assignment = new TeamAssignment();
             assignment.OpPeriod = Program.CurrentOpPeriod;
             assignment.IncidentID = Program.CurrentIncident.TaskID;
+            assignment.NumberOfPersons = 11;
             assignment.ResourceIDNumber = Program.CurrentIncident.GetNextAssignmentNumber(Program.CurrentOpPeriod);
+            assignment.PreparedByRoleID = Program.CurrentRole.RoleID;
+            assignment.PreparedByRoleName = Program.CurrentRole.RoleName;
+            assignment.PreparedByIndividualName = Program.CurrentRole.IndividualName;
             OpenAssignmentForEdit(assignment);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-
+            if(dgvAssignments.SelectedRows.Count == 1)
+            {
+                TeamAssignment ta = dgvAssignments.SelectedRows[0].DataBoundItem as TeamAssignment;
+                OpenAssignmentForEdit(ta);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if(dgvAssignments.SelectedRows.Count > 0)
+            {
+                if(MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    List<TeamAssignment> assignments = new List<TeamAssignment>();
+                    foreach(DataGridViewRow row in dgvAssignments.SelectedRows)
+                    {
+                        assignments.Add(row.DataBoundItem as TeamAssignment);
+                    }
 
+                    foreach(TeamAssignment assignment in assignments)
+                    {
+                        assignment.Active = false;
+                        Program.wfIncidentService.UpsertTeamAssignment(assignment);
+                    }
+                }
+            }
         }
 
-        private void dgvVehicles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvAssignments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if(e.RowIndex >= 0)
+            {
+                TeamAssignment ta = (TeamAssignment)dgvAssignments.Rows[e.RowIndex].DataBoundItem;
+                OpenAssignmentForEdit(ta);
+            }
         }
 
-        private void dgvVehicles_SelectionChanged(object sender, EventArgs e)
+        private void dgvAssignments_SelectionChanged(object sender, EventArgs e)
         {
-
+            btnEdit.Enabled = dgvAssignments.SelectedRows.Count == 1;
+            btnDelete.Enabled = dgvAssignments.SelectedRows.Count > 0;
+            btnPrintSelected.Enabled = btnDelete.Enabled;
         }
     }
 }

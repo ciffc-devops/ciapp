@@ -32,7 +32,11 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(20)] private int _OpPeriod;
         [ProtoMember(21)] private bool _Active;
         [ProtoMember(22)] private Guid _IncidentID;
-
+        [ProtoMember(23)] private Guid _PreparedByRoleID;
+        [ProtoMember(24)] private string _PreparedByRoleName;
+        [ProtoMember(25)] private string _PreparedByIndividualName;
+        [ProtoMember(26)] private string _BranchName;
+        [ProtoMember(27)] private string _DivisionName;
 
 
         public TeamAssignment() { 
@@ -69,7 +73,14 @@ namespace WF_ICS_ClassLibrary.Models
         
         public string FullResourceID { get => ResourceIDNumber + " " + ResourceName; }
         public bool Active { get => _Active; set => _Active = value; }
-        public Guid IncidentID { get => _IncidentID; set => _IncidentID = value; }  
+        public Guid IncidentID { get => _IncidentID; set => _IncidentID = value; }
+        public Guid PreparedByRoleID { get => _PreparedByRoleID; set => _PreparedByRoleID = value; }
+        public string PreparedByRoleName { get => _PreparedByRoleName; set => _PreparedByRoleName = value; }
+        public string PreparedByIndividualName { get => _PreparedByIndividualName; set => _PreparedByIndividualName = value; }
+        public string BranchName { get => _BranchName; set => _BranchName = value; }
+        public string DivisionName { get => _DivisionName; set => _DivisionName = value; }
+
+
 
 
         public TeamAssignment Clone()

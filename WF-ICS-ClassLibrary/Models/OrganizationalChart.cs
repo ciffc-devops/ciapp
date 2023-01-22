@@ -550,17 +550,16 @@ namespace WF_ICS_ClassLibrary.Models
         public static List<ICSRole> GetChildRoles(this OrganizationChart orgChart, Guid ParentRoleID, bool getAllDecendants = true, bool ExcludeAgencyReps = true)
         {
             List<ICSRole> roles = new List<ICSRole>();
-            roles.AddRange(orgChart.AllRoles.Where(o => o.ReportsTo == ParentRoleID).ToList());
-            if (ExcludeAgencyReps) { roles = roles.Where(o => !o.RoleName.Equals("Agency Representative")).ToList(); }
-            if (getAllDecendants)
+            foreach(ICSRole ro in orgChart.AllRoles.Where(o => o.ReportsTo == ParentRoleID))
             {
-                List<ICSRole> directChildren = new List<ICSRole>();
-                foreach (ICSRole role in roles)
+                roles.Add(ro);
+                if (getAllDecendants)
                 {
-                    directChildren.AddRange(orgChart.GetChildRoles(role.RoleID, getAllDecendants, ExcludeAgencyReps));
+                    roles.AddRange(orgChart.GetChildRoles(ro.RoleID, getAllDecendants, ExcludeAgencyReps));
                 }
-                roles.AddRange(directChildren);
             }
+
+            if (ExcludeAgencyReps) { roles = roles.Where(o => !o.RoleName.Equals("Agency Representative")).ToList(); }
             return roles;
         }
 

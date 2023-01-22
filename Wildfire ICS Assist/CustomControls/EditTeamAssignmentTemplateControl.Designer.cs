@@ -47,6 +47,7 @@
             this.txtAssignmentName.Name = "txtAssignmentName";
             this.txtAssignmentName.Size = new System.Drawing.Size(187, 29);
             this.txtAssignmentName.TabIndex = 0;
+            this.txtAssignmentName.TextChanged += new System.EventHandler(this.txtAssignmentName_TextChanged);
             // 
             // txtTacticalAssignment
             // 
@@ -59,6 +60,7 @@
             this.txtTacticalAssignment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtTacticalAssignment.Size = new System.Drawing.Size(187, 147);
             this.txtTacticalAssignment.TabIndex = 2;
+            this.txtTacticalAssignment.TextChanged += new System.EventHandler(this.txtTacticalAssignment_TextChanged);
             // 
             // txtSpecialInstructions
             // 
@@ -72,6 +74,7 @@
             this.txtSpecialInstructions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtSpecialInstructions.Size = new System.Drawing.Size(187, 120);
             this.txtSpecialInstructions.TabIndex = 3;
+            this.txtSpecialInstructions.TextChanged += new System.EventHandler(this.txtSpecialInstructions_TextChanged);
             // 
             // label1
             // 
@@ -79,7 +82,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(181, 29);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Assignment Name";
+            this.label1.Text = "Assignment Name*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -120,6 +123,8 @@
             this.cboAssignmentType.Name = "cboAssignmentType";
             this.cboAssignmentType.Size = new System.Drawing.Size(187, 32);
             this.cboAssignmentType.TabIndex = 8;
+            this.cboAssignmentType.SelectedIndexChanged += new System.EventHandler(this.cboAssignmentType_SelectedIndexChanged);
+            this.cboAssignmentType.Leave += new System.EventHandler(this.cboAssignmentType_Leave);
             // 
             // EditTeamAssignmentTemplateControl
             // 

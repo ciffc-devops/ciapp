@@ -28,6 +28,11 @@ namespace WF_ICS_ClassLibrary.Models
             ID = id;
             switch (id)
             {
+                case "TeamAssignmentTemplate":
+                    Title = "Use Assignment Template";
+                    Body = "This tool allows you to use a pre-written assignment template. Clicking on the Use Template button will overwrite the assignment name, tactical assignment, and special instructions with pre-written information.  You will have a chance to edit this after applying the template as needed.";
+                    return true;
+
                 /* newly added for WF */
                 case "IncidentObjectives":
                     Title = "Incident Objectives";

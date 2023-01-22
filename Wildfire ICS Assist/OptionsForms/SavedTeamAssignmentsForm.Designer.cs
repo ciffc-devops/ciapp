@@ -1,6 +1,6 @@
-﻿namespace Wildfire_ICS_Assist
+﻿namespace Wildfire_ICS_Assist.OptionsForms
 {
-    partial class TeamAssignmentsForm
+    partial class SavedTeamAssignmentsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,16 +30,11 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvAssignments = new System.Windows.Forms.DataGridView();
-            this.btnPrintSummary = new System.Windows.Forms.Button();
-            this.btnPrintSelected = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.colBranch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDivision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMembers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignmentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -62,14 +57,12 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnPrintSummary);
-            this.splitContainer1.Panel2.Controls.Add(this.btnPrintSelected);
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
-            this.splitContainer1.Size = new System.Drawing.Size(859, 519);
-            this.splitContainer1.SplitterDistance = 463;
-            this.splitContainer1.TabIndex = 2;
+            this.splitContainer1.Size = new System.Drawing.Size(1467, 831);
+            this.splitContainer1.SplitterDistance = 775;
+            this.splitContainer1.TabIndex = 3;
             // 
             // dgvAssignments
             // 
@@ -77,11 +70,8 @@
             this.dgvAssignments.AllowUserToDeleteRows = false;
             this.dgvAssignments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAssignments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colBranch,
-            this.colDivision,
             this.colAssignmentName,
-            this.colLeader,
-            this.colMembers});
+            this.colAssignmentType});
             this.dgvAssignments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAssignments.Location = new System.Drawing.Point(0, 0);
             this.dgvAssignments.Name = "dgvAssignments";
@@ -89,36 +79,8 @@
             this.dgvAssignments.RowHeadersVisible = false;
             this.dgvAssignments.RowTemplate.Height = 35;
             this.dgvAssignments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAssignments.Size = new System.Drawing.Size(859, 463);
+            this.dgvAssignments.Size = new System.Drawing.Size(1467, 775);
             this.dgvAssignments.TabIndex = 0;
-            this.dgvAssignments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAssignments_CellDoubleClick);
-            this.dgvAssignments.SelectionChanged += new System.EventHandler(this.dgvAssignments_SelectionChanged);
-            // 
-            // btnPrintSummary
-            // 
-            this.btnPrintSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintSummary.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrintSummary.Location = new System.Drawing.Point(382, 3);
-            this.btnPrintSummary.Name = "btnPrintSummary";
-            this.btnPrintSummary.Size = new System.Drawing.Size(214, 42);
-            this.btnPrintSummary.TabIndex = 49;
-            this.btnPrintSummary.Text = "Print 204 Summary";
-            this.btnPrintSummary.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrintSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrintSummary.UseVisualStyleBackColor = true;
-            // 
-            // btnPrintSelected
-            // 
-            this.btnPrintSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintSelected.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrintSelected.Location = new System.Drawing.Point(602, 3);
-            this.btnPrintSelected.Name = "btnPrintSelected";
-            this.btnPrintSelected.Size = new System.Drawing.Size(245, 42);
-            this.btnPrintSelected.TabIndex = 48;
-            this.btnPrintSelected.Text = "Print Selected 204As";
-            this.btnPrintSelected.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrintSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrintSelected.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
@@ -131,7 +93,6 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -144,7 +105,6 @@
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -156,25 +116,6 @@
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // colBranch
-            // 
-            this.colBranch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colBranch.DataPropertyName = "BranchName";
-            this.colBranch.HeaderText = "Branch";
-            this.colBranch.Name = "colBranch";
-            this.colBranch.ReadOnly = true;
-            this.colBranch.Width = 95;
-            // 
-            // colDivision
-            // 
-            this.colDivision.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDivision.DataPropertyName = "DivisionName";
-            this.colDivision.HeaderText = "Division/Group/Staging";
-            this.colDivision.Name = "colDivision";
-            this.colDivision.ReadOnly = true;
-            this.colDivision.Width = 226;
             // 
             // colAssignmentName
             // 
@@ -185,36 +126,27 @@
             this.colAssignmentName.Name = "colAssignmentName";
             this.colAssignmentName.ReadOnly = true;
             // 
-            // colLeader
+            // colAssignmentType
             // 
-            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colLeader.DataPropertyName = "LeaderName";
-            this.colLeader.HeaderText = "Leader";
-            this.colLeader.Name = "colLeader";
-            this.colLeader.ReadOnly = true;
-            this.colLeader.Width = 94;
+            this.colAssignmentType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colAssignmentType.DataPropertyName = "AssignmentType";
+            this.colAssignmentType.HeaderText = "Assignment Type";
+            this.colAssignmentType.Name = "colAssignmentType";
+            this.colAssignmentType.ReadOnly = true;
+            this.colAssignmentType.Width = 166;
             // 
-            // colMembers
-            // 
-            this.colMembers.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colMembers.DataPropertyName = "NumberOfPersons";
-            this.colMembers.HeaderText = "No. of Persons";
-            this.colMembers.Name = "colMembers";
-            this.colMembers.ReadOnly = true;
-            this.colMembers.Width = 159;
-            // 
-            // TeamAssignmentsForm
+            // SavedTeamAssignmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(859, 519);
+            this.ClientSize = new System.Drawing.Size(1467, 831);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "TeamAssignmentsForm";
+            this.Name = "SavedTeamAssignmentsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Team Assignments";
-            this.Load += new System.EventHandler(this.TeamAssignmentsForm_Load);
+            this.Text = "Team Assignment Templates";
+            this.Load += new System.EventHandler(this.SavedTeamAssignmentsForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -228,15 +160,10 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dgvAssignments;
-        private System.Windows.Forms.Button btnPrintSummary;
-        private System.Windows.Forms.Button btnPrintSelected;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBranch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDivision;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignmentName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLeader;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMembers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignmentType;
     }
 }

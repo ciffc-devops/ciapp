@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Threading;
 using WildfireICSDesktopServices;
 using WF_ICS_ClassLibrary;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
@@ -85,6 +86,17 @@ namespace Wildfire_ICS_Assist
 
 
         public static WFIncident CurrentIncident { get => wfIncidentService.CurrentIncident; set => wfIncidentService.CurrentIncident = value; }
+        public static OrganizationChart CurrentOrgChart
+        {
+            get
+            {
+                if(CurrentIncident != null)
+                {
+                    CurrentIncident.createOrgChartAsNeeded(CurrentOpPeriod);
+                }
+                return CurrentIncident.allOrgCharts.First(o=>o.OpPeriod== CurrentOpPeriod);
+            }
+        }
         /*
         public static EquipmentService equipmentService { get => _equipmentService; private set => _equipmentService = value; }
         

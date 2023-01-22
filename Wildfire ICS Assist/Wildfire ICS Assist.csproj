@@ -307,6 +307,12 @@
     <Compile Include="OptionsForms\EditSavedSafetyNoteForm.Designer.cs">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\EditSavedTeamAssignmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedTeamAssignmentsForm.Designer.cs">
+      <DependentUpon>EditSavedTeamAssignmentsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForms\EditSavedTeamMemberForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,6 +378,12 @@
     </Compile>
     <Compile Include="OptionsForms\SavedSafetyNotesForm.Designer.cs">
       <DependentUpon>SavedSafetyNotesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedTeamAssignmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedTeamAssignmentsForm.Designer.cs">
+      <DependentUpon>SavedTeamAssignmentsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\SavedTeamMembersForm.cs">
       <SubType>Form</SubType>
@@ -606,6 +618,9 @@
     <EmbeddedResource Include="OptionsForms\EditSavedSafetyNoteForm.resx">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedTeamAssignmentsForm.resx">
+      <DependentUpon>EditSavedTeamAssignmentsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedTeamMemberForm.resx">
       <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -638,6 +653,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedSafetyNotesForm.resx">
       <DependentUpon>SavedSafetyNotesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedTeamAssignmentsForm.resx">
+      <DependentUpon>SavedTeamAssignmentsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedTeamMembersForm.resx">
       <DependentUpon>SavedTeamMembersForm.cs</DependentUpon>
