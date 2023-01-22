@@ -1315,9 +1315,9 @@ namespace WildfireICSDesktopServices
         public void UpsertVehicle(Vehicle record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allVehicles.Any(o => o.VehicleID == record.VehicleID))
+            if (_currentIncident.allVehicles.Any(o => o.ID == record.ID))
             {
-                _currentIncident.allVehicles = _currentIncident.allVehicles.Where(o => o.VehicleID != record.VehicleID).ToList();
+                _currentIncident.allVehicles = _currentIncident.allVehicles.Where(o => o.ID != record.ID).ToList();
             }
             _currentIncident.allVehicles.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
@@ -1329,9 +1329,9 @@ namespace WildfireICSDesktopServices
         public void DeleteVehicle(Vehicle record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allVehicles.Any(o => o.VehicleID == record.VehicleID))
+            if (_currentIncident.allVehicles.Any(o => o.ID == record.ID))
             {
-                _currentIncident.allVehicles = _currentIncident.allVehicles.Where(o => o.VehicleID != record.VehicleID).ToList();
+                _currentIncident.allVehicles = _currentIncident.allVehicles.Where(o => o.ID != record.ID).ToList();
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "DELETE", true, false); }
                 OnVehicleChanged(new VehicleEventArgs(record));
             }
@@ -1341,9 +1341,9 @@ namespace WildfireICSDesktopServices
         public void DeleteVehicle(Guid RecordID, string source = "local")
         {
 
-            if (_currentIncident.allVehicles.Any(o => o.VehicleID == RecordID))
+            if (_currentIncident.allVehicles.Any(o => o.ID == RecordID))
             {
-                Vehicle toDelete = _currentIncident.allVehicles.First(o => o.VehicleID == RecordID);
+                Vehicle toDelete = _currentIncident.allVehicles.First(o => o.ID == RecordID);
                 DeleteVehicle(toDelete, source);
                 /*
                 _currentTask.allVehicles = _currentTask.allVehicles.Where(o => o.VehicleID != RecordID).ToList();

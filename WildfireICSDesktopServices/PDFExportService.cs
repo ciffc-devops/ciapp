@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -66,139 +67,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public List<byte[]> exportIAPToPDF(WFIncident task, int OpPeriodToExport, bool includeBriefing = true, bool includeSafety = true, bool includeLPQ = true, bool flattenPDF = false)
-        {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-            GeneralOptionsService service = new GeneralOptionsService();
-            GeneralOptions options = service.GetGeneralOptions();
-
-            //fullFilepath = System.IO.Path.Combine(fullFilepath, fullOutputFilename);
-
-          
-
-
-
-
-
-
-            //org chart
-
-            string orgpath = createOrgChartPDF(task, OpPeriodToExport, false, true, flattenPDF);
-            using (FileStream stream = File.OpenRead(orgpath))
-            {
-                byte[] fileBytes = new byte[stream.Length];
-
-                stream.Read(fileBytes, 0, fileBytes.Length);
-                stream.Close();
-                allPDFs.Add(fileBytes);
-            }
-            if (options.IncludeOrgContactsInIAP)
-            {
-                string orgContacts = createOrgChartContactList(task, OpPeriodToExport, false, true);
-                if (!string.IsNullOrEmpty(orgContacts))
-                {
-                    using (FileStream stream = File.OpenRead(orgContacts))
-                    {
-                        byte[] fileBytes = new byte[stream.Length];
-
-                        stream.Read(fileBytes, 0, fileBytes.Length);
-                        stream.Close();
-                        allPDFs.Add(fileBytes);
-                    }
-                }
-            }
-
-
-
-            if (includeBriefing)
-            {
-                if (task.allBriefings.Any(o => o.OpPeriod == OpPeriodToExport))
-                {
-
-                    allPDFs.AddRange(exportBriefingToBytes(OpPeriodToExport, task));
-
-                }
-            }
-
-            string objectivesPath = createObjectivesPDF(task, OpPeriodToExport, false, true, flattenPDF);
-            using (FileStream stream = File.OpenRead(objectivesPath))
-            {
-                byte[] fileBytes = new byte[stream.Length];
-
-                stream.Read(fileBytes, 0, fileBytes.Length);
-                stream.Close();
-                allPDFs.Add(fileBytes);
-            }
-
-
-
-            string comPath = createCommsPlanPDF(task, OpPeriodToExport, false, true, flattenPDF);
-            if (!string.IsNullOrEmpty(comPath))
-            {
-                using (FileStream stream = File.OpenRead(comPath))
-                {
-                    byte[] fileBytes = new byte[stream.Length];
-
-                    stream.Read(fileBytes, 0, fileBytes.Length);
-                    stream.Close();
-                    allPDFs.Add(fileBytes);
-                }
-
-            }
-
-            if (options.IncludeOtherContactsWithIAP && task.allContacts.Any())
-            {
-                //ContactListServices contactListServices = new ContactListServices();
-                string preparedByName = null; string preparedByTitle = null;
-
-                if (task.allOrgCharts.Where(o => o.OpPeriod == OpPeriodToExport).Any())
-                {
-                    OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpPeriodToExport).First();
-                    preparedByName = currentChart.getNameByRoleName("Logistics Section Chief");
-                    preparedByTitle = "Logistics Section Chief";
-                }
-
-                string contactsPath = createContactsPDF(task, OpPeriodToExport, preparedByName, preparedByTitle, false, false);
-                if (!string.IsNullOrEmpty(contactsPath))
-                {
-                    using (FileStream stream = File.OpenRead(contactsPath))
-                    {
-                        byte[] fileBytes = new byte[stream.Length];
-
-                        stream.Read(fileBytes, 0, fileBytes.Length);
-                        stream.Close();
-                        allPDFs.Add(fileBytes);
-                    }
-
-                }
-            }
-
-            //Medical Plan
-
-            string medPath = createMedicalPlanPDF(task, OpPeriodToExport, false, true, flattenPDF);
-            if (medPath != null)
-            {
-                using (FileStream stream = File.OpenRead(medPath))
-                {
-                    byte[] fileBytes = new byte[stream.Length];
-
-                    stream.Read(fileBytes, 0, fileBytes.Length);
-                    stream.Close();
-                    allPDFs.Add(fileBytes);
-                }
-            }
-
-
-            if (includeSafety && task.allSafetyMessages.Where(o => o.OpPeriod == OpPeriodToExport).Any())
-            {
-                allPDFs.AddRange(exportSafetyMessagesToPDF(task, OpPeriodToExport, flattenPDF));
-            }
-
-            return allPDFs;
-
-        }
-
+       
        
 
         public List<byte[]> exportGeneralMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
@@ -803,11 +672,11 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool IncludeAttachments, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
-            string path = createObjectivesPDF(task, OpPeriodToExport, false, true, flattenPDF);
+            string path = createObjectivesPDF(task, OpPeriodToExport, IncludeAttachments, true, flattenPDF);
             if (path != null)
             {
                 using (FileStream stream = File.OpenRead(path))
@@ -823,7 +692,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public string createObjectivesPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        public string createObjectivesPDF(WFIncident task, int OpsPeriod, bool includeAttachments = false, bool tempFileName = false, bool flattenPDF = false)
         {
             if (task != null)
             {
@@ -884,6 +753,20 @@ namespace WildfireICSDesktopServices
 
                     stamper.AcroFields.SetField("5 GENERAL CONTROL OBJECTIVES FOR THE INCIDENT include alternativesRow1", currentSheet.ActiveObjectivesAsString);
 
+                    if (includeAttachments)
+                    {
+                        //checkboxes
+                        bool Has203 = task.hasMeaningfulOrgChart(currentSheet.OpPeriod);
+                        bool Has204 = false;
+                        bool Has205 = task.hasMeangfulCommsPlan(currentSheet.OpPeriod);
+                        bool Has206 = task.hasMeaningfulMedicalPlan(currentSheet.OpPeriod);
+
+                        if (Has203) { PDFExtraTools.SetPDFCheckbox(stamper, "CBOrgList"); }
+                        if (Has204) { PDFExtraTools.SetPDFCheckbox(stamper, "Check Box2"); }
+                        if (Has205) { PDFExtraTools.SetPDFCheckbox(stamper, "CBComms"); }
+                        if (Has206) { PDFExtraTools.SetPDFCheckbox(stamper, "Check Box2"); }
+
+                    }
 
 
                     if (flattenPDF)

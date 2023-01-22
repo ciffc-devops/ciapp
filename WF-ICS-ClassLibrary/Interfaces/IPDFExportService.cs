@@ -12,8 +12,8 @@ namespace WildfireICSDesktopServices
         string createMedicalPlanPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportMedicalPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
         string createNotePDF(WFIncident task, Note note, bool automaticallyOpen = true, bool tempFileName = false);
-        string createObjectivesPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
-        List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
+        string createObjectivesPDF(WFIncident task, int OpsPeriod, bool IncludeAttachments = true, bool tempFileName = false, bool flattenPDF = false);
+        List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool IncludeObjectives, bool flattenPDF);
         List<byte[]> createFreeformOpPeriodContentsList(WFIncident task, List<string> items, int OpPeriod);
         string createOrgChartContactList(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
         List<byte[]> exportOrgChartContactsToPDF(WFIncident task, int OpPeriodToExport);
@@ -27,7 +27,6 @@ namespace WildfireICSDesktopServices
         string createTimelinePDF(WFIncident task, bool IncludeSAR, bool IncludeSubject, bool automaticallyOpen = true, bool tempFileName = false);
         List<byte[]> exportBriefingToBytes(int OpPeriodToExport, WFIncident task);
         string exportBriefingToPDF(Briefing briefing, WFIncident task, bool includeExecution, bool includeMapQRImage = false);
-        List<byte[]> exportIAPToPDF(WFIncident task, int OpPeriodToExport, bool includeBriefing = true, bool includeSafety = true, bool includeLPQ = true, bool flattenPDF = false);
         List<byte[]> exportNotesToPDF(WFIncident task, int CurrentOpPeriod);
         List<byte[]> exportRadioLogToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF = false);
         List<byte[]> exportSafetyMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);

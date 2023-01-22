@@ -114,6 +114,7 @@
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\ICSFormElement.cs" />
     <Compile Include="Models\IncidentObjective.cs" />
+    <Compile Include="Models\IncidentTool.cs" />
     <Compile Include="Models\MedicalAidStation.cs" />
     <Compile Include="Models\MedicalPlan.cs" />
     <Compile Include="Models\MedivacService.cs" />

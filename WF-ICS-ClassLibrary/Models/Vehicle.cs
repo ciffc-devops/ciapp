@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
-    public class Vehicle : ICloneable
+    public class Vehicle : IncidentTool,  ICloneable
     {
-        [ProtoMember(1)] private Guid _VehicleID;
         [ProtoMember(2)] private Guid _TaskID;
-        [ProtoMember(3)] private int _OpPeriod;
         [ProtoMember(4)] private string _OrderRequestNo;
         [ProtoMember(5)] private string _IncidentIDNo;
         [ProtoMember(6)] private string _Classification;
@@ -26,19 +24,15 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(14)] private DateTime _StartTime;
         [ProtoMember(15)] private DateTime _MustBeOutTime;
         [ProtoMember(16)] private string _Notes;
-        [ProtoMember(17)] private bool _Active;
         [ProtoMember(18)] private string _ASE;
-        [ProtoMember(19)] private DateTime _LastUpdatedUTC;
 
         public Vehicle()
         {
-            VehicleID = Guid.NewGuid();
+            ID = Guid.NewGuid();
             Active = true;
         }
 
-        public Guid VehicleID { get => _VehicleID; set => _VehicleID = value; }
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public string OrderRequestNo { get => _OrderRequestNo; set => _OrderRequestNo = value; }
         public string IncidentIDNo { get => _IncidentIDNo; set => _IncidentIDNo = value; }
         public string Classification { get => _Classification; set => _Classification = value; }
@@ -52,9 +46,7 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime StartTime { get => _StartTime; set => _StartTime = value; }
         public DateTime MustBeOutTime { get => _MustBeOutTime; set => _MustBeOutTime = value; }
         public string Notes { get => _Notes; set => _Notes = value; }
-        public bool Active { get => _Active; set => _Active = value; }
         public string ASE { get => _ASE; set => _ASE = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
 
         public string IDWithMakeOwner
         {

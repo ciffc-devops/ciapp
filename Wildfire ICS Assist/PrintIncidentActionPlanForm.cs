@@ -75,6 +75,8 @@ namespace Wildfire_ICS_Assist
             chkMedPlan.Checked = chkMedPlan.Enabled;
 
             chkOrgChart.Enabled = CurrentIncident.hasMeaningfulOrgChart(CurrentOpPeriod);
+            chkOrgAssignments.Enabled = chkOrgChart.Enabled;
+            chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
 
             //additional contacts
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
@@ -109,6 +111,9 @@ namespace Wildfire_ICS_Assist
 
             chkOrgChart.Enabled = CurrentIncident.hasMeaningfulOrgChart(CurrentOpPeriod);
             chkOrgChart.Checked = chkOrgChart.Enabled;
+            chkOrgAssignments.Enabled = chkOrgChart.Enabled;
+            chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
+
 
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
             chkContacts.Checked = chkContacts.Enabled;
@@ -148,6 +153,9 @@ namespace Wildfire_ICS_Assist
 
             chkOrgChart.Enabled = CurrentIncident.allOrgCharts.Any(o => o.FilledRoles.Any());
             chkOrgChart.Checked = chkOrgChart.Enabled;
+            chkOrgAssignments.Enabled = chkOrgChart.Enabled;
+            chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
+
 
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
             chkContacts.Checked = chkContacts.Enabled;
@@ -185,6 +193,8 @@ namespace Wildfire_ICS_Assist
             chkMedPlan.Checked = chkMedPlan.Enabled;
 
             chkOrgChart.Enabled = CurrentIncident.allOrgCharts.Any(o => o.FilledRoles.Any());
+            chkOrgAssignments.Enabled = chkOrgChart.Enabled;
+            chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
 
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
 
@@ -235,9 +245,13 @@ namespace Wildfire_ICS_Assist
             {
                 if (chkIncidentObjectives.Checked)
                 {
-                    allPDFs.AddRange(Program.pdfExportService.exportIncidentObjectivesToPDF(CurrentIncident, op, chkFlattenPDF.Checked));
+                    allPDFs.AddRange(Program.pdfExportService.exportIncidentObjectivesToPDF(CurrentIncident, op, true, chkFlattenPDF.Checked));
                 }
+                if (chkOrgAssignments.Checked)
+                {
+                    allPDFs.AddRange(Program.pdfExportService.exportOrgAssignmentListToPDF(CurrentIncident, op, chkFlattenPDF.Checked));
 
+                }
 
                 if (chkCommsPlan.Checked)
                 {
@@ -249,7 +263,7 @@ namespace Wildfire_ICS_Assist
                     allPDFs.AddRange(Program.pdfExportService.exportMedicalPlanToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked));
                 }
                 //org
-                if (chkOrgAssignments.Checked)
+                if (chkOrgChart.Checked)
                 {
                     bool IncludeContacts = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
                     allPDFs.AddRange(Program.pdfExportService.exportOrgChartToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked));
@@ -361,13 +375,14 @@ namespace Wildfire_ICS_Assist
 
 
             if (chkIncidentObjectives.Checked) { contents.Add("• ICS-202 WF Incident Objectives"); }
+            if (chkOrgAssignments.Checked) { contents.Add("• ICS-203 WF Organization Assignment List"); }
 
 
             if (chkCommsPlan.Checked) { contents.Add("• ICS-205 WF Communications Plan"); }
             //medical
             if (chkMedPlan.Checked) { contents.Add("• ICS-206 WF Medical Plan"); }
             //org
-            if (chkOrgAssignments.Checked)
+            if (chkOrgChart.Checked)
             {
                 bool IncludeContacts = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
                 contents.Add("• ICS-207 WF Organization Chart"); if (IncludeContacts)

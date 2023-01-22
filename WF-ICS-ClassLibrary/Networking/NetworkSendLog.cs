@@ -105,8 +105,8 @@ namespace WF_ICS_ClassLibrary.Networking
                         else if (objectsReceived.Any(o => o.sendObject.timelineEvent != null && o.sendObject.timelineEvent.TimelineEventID == cle.TimelineEventID && o.sendObject.timelineEvent.LastUpdatedUTC == cle.LastUpdatedUTC)) { return true; }
                         return false;
                     case Vehicle cle:
-                        if (objectsSent.Any(o => o.sendObject.vehicle != null && o.sendObject.vehicle.VehicleID == cle.VehicleID && o.sendObject.vehicle.LastUpdatedUTC == cle.LastUpdatedUTC)) { return true; }
-                        else if (objectsReceived.Any(o => o.sendObject.vehicle != null && o.sendObject.vehicle.VehicleID == cle.VehicleID && o.sendObject.vehicle.LastUpdatedUTC == cle.LastUpdatedUTC)) { return true; }
+                        if (objectsSent.Any(o => o.sendObject.vehicle != null && o.sendObject.vehicle.ID == cle.ID && o.sendObject.vehicle.LastUpdatedUTC == cle.LastUpdatedUTC)) { return true; }
+                        else if (objectsReceived.Any(o => o.sendObject.vehicle != null && o.sendObject.vehicle.ID == cle.ID && o.sendObject.vehicle.LastUpdatedUTC == cle.LastUpdatedUTC)) { return true; }
                         return false;
                     case TaskBasics cle:
                         if (objectsSent.Any(o => o.sendObject.taskBasics != null && o.sendObject.taskBasics.LastUpdatedUTC == cle.LastUpdatedUTC)) { return true; }

@@ -52,7 +52,7 @@ namespace Wildfire_ICS_Assist
             
             Vehicle blankVehicle = new Vehicle();
             blankVehicle.IncidentIDNo = "-Select a saved vehicle-";
-            blankVehicle.VehicleID = Guid.Empty;
+            blankVehicle.ID = Guid.Empty;
             List<Vehicle> savedVehicles = new List<Vehicle>(); 
             savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("Vehicles"));
             savedVehicles.Insert(0, blankVehicle);

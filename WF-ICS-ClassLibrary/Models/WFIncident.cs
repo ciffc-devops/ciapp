@@ -78,6 +78,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             allTaskUpdates = new List<TaskUpdate>();
             allSafetyMessages = new List<SafetyMessage>();
             allAirOperationsSummaries = new List<AirOperationsSummary>();
+            AllAssignments = new List<TeamAssignment>();
             TaskEncryptionKey = Utilities.RandomPasswordGenerator.GeneratePassword();
         }
 
@@ -93,7 +94,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         //  [ProtoMember(9)] private double _subjectVisibility;
         //  [ProtoMember(10)] private double _generalRangeOfDetection;
         [ProtoMember(11)] private string _currentFilePath;
-        // [ProtoMember(12)] private List<Assignment> _allAssignments;
+         [ProtoMember(12)] private List<TeamAssignment> _AllAssignments;
         [ProtoMember(13)] private List<SafetyMessage> _allSafetyMessages;
         [ProtoMember(14)] private List<Briefing> _allBriefings;
         //[ProtoMember(15)] private List<IncidentObjective> _allObjectives;
@@ -256,7 +257,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<PositionLogEntry> allPositionLogEntries { get => _allPositionLogEntries; set => _allPositionLogEntries = value; }
         public List<TaskUpdate> allTaskUpdates { get => _allTaskUpdates; set => _allTaskUpdates = value; }
         public List<AirOperationsSummary> allAirOperationsSummaries { get => _allAirOperationsSummaries; set => _allAirOperationsSummaries = value; }
-
+        public List<TeamAssignment> AllAssignments { get => _AllAssignments; set => _AllAssignments = value; }
 
 
 
@@ -361,7 +362,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             {
                 int ops = 0;
                 if (allOrgCharts.Count > 0) { int orgOps = allOrgCharts.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (orgOps > ops) { ops = orgOps; } }
-                //if (allAssignments.Count > 0) { int asigOps = allAssignments.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (asigOps > ops) { ops = asigOps; } }
+                if (_AllAssignments.Count > 0) { int asigOps = _AllAssignments.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (asigOps > ops) { ops = asigOps; } }
                 if (allSafetyMessages.Count > 0) { int safeOps = allSafetyMessages.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (safeOps > ops) { ops = safeOps; } }
                 if (allBriefings.Count > 0) { int briefOps = allBriefings.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (briefOps > ops) { ops = briefOps; } }
                 if (allIncidentObjectives.Count > 0) { int objOps = allIncidentObjectives.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (objOps > ops) { ops = objOps; } }
@@ -381,7 +382,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             {
                 int ops = 1000;
                 if (allOrgCharts.Count > 0) { int orgOps = allOrgCharts.OrderBy(o => o.OpPeriod).First().OpPeriod; if (orgOps < ops) { ops = orgOps; } }
-                //if (allAssignments.Count > 0) { int asigOps = allAssignments.OrderBy(o => o.OpPeriod).First().OpPeriod; if (asigOps < ops) { ops = asigOps; } }
+                if (_AllAssignments.Count > 0) { int asigOps = _AllAssignments.OrderBy(o => o.OpPeriod).First().OpPeriod; if (asigOps < ops) { ops = asigOps; } }
                 if (allSafetyMessages.Count > 0) { int safeOps = allSafetyMessages.OrderBy(o => o.OpPeriod).First().OpPeriod; if (safeOps < ops) { ops = safeOps; } }
                 if (allBriefings.Count > 0) { int briefOps = allBriefings.OrderBy(o => o.OpPeriod).First().OpPeriod; if (briefOps < ops) { ops = briefOps; } }
                 if (allIncidentObjectives.Count > 0) { int objOps = allIncidentObjectives.OrderBy(o => o.OpPeriod).First().OpPeriod; if (objOps < ops) { ops = objOps; } }
@@ -398,7 +399,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public bool OpPeriodHasContent(int opPeriod)
         {
             bool hasContent = false;
-            //if (allAssignments.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
+            if (_AllAssignments.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             if (allSafetyMessages.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allBriefings.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allIncidentObjectives.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }

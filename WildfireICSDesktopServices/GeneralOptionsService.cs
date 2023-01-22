@@ -421,7 +421,7 @@ namespace WildfireICSDesktopServices
                     break;
                 case "Vehicle":
                     Vehicle v = (Vehicle)newValue;
-                    _options.AllVehicles = _options.AllVehicles.Where(o => o.VehicleID != v.VehicleID).ToList();
+                    _options.AllVehicles = _options.AllVehicles.Where(o => o.ID != v.ID).ToList();
                     _options.AllVehicles.Add(v);
                     break;
                 case "CommsItem":

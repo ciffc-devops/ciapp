@@ -70,67 +70,7 @@ namespace WF_ICS_ClassLibrary.Models
 
     }
 
-    [ProtoContract]
-    [Serializable]
-    public class TeamStatus : ICloneable
-    {
-
-        [ProtoMember(1)] private int _StatusID;
-        [ProtoMember(2)] private string _StatusName;
-        [ProtoMember(3)] private bool _Active;
-
-        public int StatusID { get => _StatusID; set => _StatusID = value; }
-        public string StatusName { get => _StatusName; set => _StatusName = value; }
-        public bool Active { get => _Active; set => _Active = value; }
-
-
-        public TeamStatus() { }
-        public TeamStatus(int id, string name, bool active) { StatusID = id; StatusName = name; Active = active; }
-
-        public List<TeamStatus> getAllTeamStatuses()
-        {
-            List<TeamStatus> statuses = new List<TeamStatus>();
-            statuses.Add(new TeamStatus(0, "Planned", false));
-            statuses.Add(new TeamStatus(1, "Pre-mission prep", true));
-            statuses.Add(new TeamStatus(2, "Travel to assignment", true));
-            statuses.Add(new TeamStatus(3, "Execution", true));
-            statuses.Add(new TeamStatus(4, "Returning from assignment", true));
-            statuses.Add(new TeamStatus(5, "Post-mission procedures", true));
-            statuses.Add(new TeamStatus(6, "Needs Transport", true));
-            statuses.Add(new TeamStatus(8, "Needs Attention", true));
-            statuses.Add(new TeamStatus(7, "Complete", false));
-
-            return statuses;
-        }
-
-        public List<TeamStatus> MemberAvailableStatuses()
-        {
-            List<TeamStatus> statuses = new List<TeamStatus>();
-            statuses.Add(new TeamStatus(7, "Complete", false));
-            statuses.Add(new TeamStatus(4, "Returning from assignment", true));
-            statuses.Add(new TeamStatus(5, "Post-mission procedures", true));
-            return statuses;
-        }
-
-        public TeamStatus getStatusByID(int id)
-        {
-            List<TeamStatus> allStatuses = getAllTeamStatuses();
-            if (allStatuses.Where(o => o.StatusID == id).Any())
-            {
-                return allStatuses.Where(o => o.StatusID == id).First();
-            }
-            else { return new TeamStatus(); }
-        }
-
-        public TeamStatus Clone()
-        {
-            return this.MemberwiseClone() as TeamStatus;
-        }
-        object ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-    }
+   
 
 
 
@@ -171,7 +111,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (DefaultStatusID >= 0)
                 {
-                    List<TeamStatus> statuses = new TeamStatus().getAllTeamStatuses();
+                    List<TeamStatus> statuses = TeamAssignmentTools.GetAllTeamStatuses();
                     if (statuses.Any(o => o.StatusID == DefaultStatusID)) { return statuses.Where(o => o.StatusID == DefaultStatusID).First().StatusName; }
                     else { return "No default status"; ; }
                 }

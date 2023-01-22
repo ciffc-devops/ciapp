@@ -453,6 +453,12 @@
     <Compile Include="SafetyMessagesForm.Designer.cs">
       <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TeamAssignmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeamAssignmentsForm.Designer.cs">
+      <DependentUpon>TeamAssignmentsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\AboutProgramForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -675,6 +681,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SafetyMessagesForm.resx">
       <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeamAssignmentsForm.resx">
+      <DependentUpon>TeamAssignmentsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\AboutProgramForm.resx">
       <DependentUpon>AboutProgramForm.cs</DependentUpon>

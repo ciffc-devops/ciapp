@@ -103,9 +103,8 @@ namespace WF_ICS_ClassLibrary.Models
 
     [Serializable]
     [ProtoContract]
-    public class Aircraft : ICloneable
+    public class Aircraft : IncidentTool, ICloneable
     {
-        [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private string _Registration;
         [ProtoMember(3)] private string _MakeModel;
         [ProtoMember(4)] private string _Base;
@@ -114,14 +113,10 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private string _Remarks;
         [ProtoMember(8)] private string _Pilot;
         [ProtoMember(9)] private string _ContactNumber;
-        [ProtoMember(10)] private bool _Active;
-        [ProtoMember(11)] private int _OpPeriod;
-        [ProtoMember(12)] private DateTime _LastUpatedUTC;
         [ProtoMember(13)] private bool _IsMedivac;
 
         public Aircraft() { ID = Guid.NewGuid(); Active = true; }
 
-        public Guid ID { get => _ID; set => _ID = value; }
         public string Registration { get => _Registration; set => _Registration = value; }
         public string MakeModel { get => _MakeModel; set => _MakeModel = value; }
         public string RegAndMakeModel
@@ -138,9 +133,6 @@ namespace WF_ICS_ClassLibrary.Models
         public string Remarks { get => _Remarks; set => _Remarks = value; }
         public string Pilot { get => _Pilot; set => _Pilot = value; }
         public string ContactNumber { get => _ContactNumber; set => _ContactNumber = value; }
-        public bool Active { get => _Active; set => _Active = value; }
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpatedUTC; set => _LastUpatedUTC = value; }
         public bool IsMedivac { get => _IsMedivac; set => _IsMedivac = value; }
 
         public Aircraft Clone()

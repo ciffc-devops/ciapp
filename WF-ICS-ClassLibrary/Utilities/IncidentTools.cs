@@ -10,7 +10,34 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class IncidentTools
     {
-      
+        public static int GetNextAssignmentNumber(this WFIncident incident, int Ops)
+        {
+            if (incident.AllAssignments.Any(o => o.OpPeriod == Ops))
+            {
+                int next = 1000 * Ops + 1;
+                while(incident.AllAssignments.Any(o=>o.ResourceIDNumber == next))
+                {
+                    next++;
+                }
+                return next;
+                //return incident.AllAssignments.Where(o => o.OpPeriod == Ops).Max(o => o.ResourceIDNumber) + 1;
+            }
+            else
+            {
+                return 1000 * Ops + 1;
+            }
+        }
+
+        public static bool AssignmentNumberUniqueAndValid(this WFIncident incident, int Ops, int ProposedNumber, Guid AssignmentID)
+        {
+            if(incident.AllAssignments.Any(o=>o.ResourceIDNumber == ProposedNumber && o.ID != AssignmentID)) { return false; } //duplicate number, different ID
+            int incidentMin = 1000 * Ops + 1;
+            int incidentMax = 1000 * (Ops + 1) - 1;
+            if(ProposedNumber > incidentMax) { return false; }
+            if(ProposedNumber < incidentMin) { return false; }
+            return true;
+        }
+
         public static string getNameByRoleName(this WFIncident task, int Ops, string roleName, bool defaultUpChain = true)
         {
             string name = null;
@@ -531,7 +558,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 foreach (Vehicle vehicle in task.allVehicles.Where(o => o.OpPeriod == ops))
                 {
-                    commsRecipients.Add(new CommsRecipient(vehicle.VehicleID, vehicle.IncidentIDNo));
+                    commsRecipients.Add(new CommsRecipient(vehicle.ID, vehicle.IncidentIDNo));
 
                 }
             }
