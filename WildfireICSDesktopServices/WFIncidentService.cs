@@ -45,7 +45,7 @@ namespace WildfireICSDesktopServices
         public event GeneralMessageEventHandler GeneralMessageChanged;
         public event AircraftEventHandler AircraftChanged;
         public event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
-
+        public event TeamAssignmentEventHandler TeamAssignmentChanged;
 
         private WFIncident _currentIncident;
         public WFIncident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
@@ -1528,6 +1528,30 @@ namespace WildfireICSDesktopServices
         }
 
 
+
+        // Team Assignment
+        public void UpsertTeamAssignment(TeamAssignment item, string source = "local")
+        {
+
+            item.LastUpdatedUTC = DateTime.UtcNow;
+
+            
+            if (CurrentIncident.AllAssignments.Any(o => o.ID == item.ID))
+            {
+                CurrentIncident.AllAssignments = CurrentIncident.AllAssignments.Where(o => o.ID != item.ID).ToList();
+            }
+            CurrentIncident.AllAssignments.Add(item);
+            if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(item, "UPSERT", true, false); }
+            OnTeamAssignmentChanged(new TeamAssignmentEventArgs(item));
+        }
+        protected virtual void OnTeamAssignmentChanged(TeamAssignmentEventArgs e)
+        {
+            TeamAssignmentEventHandler handler = this.TeamAssignmentChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
 
 
 

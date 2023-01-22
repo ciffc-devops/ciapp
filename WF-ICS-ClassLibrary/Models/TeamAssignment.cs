@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WF_ICS_ClassLibrary.Models
 {
-    public class TeamAssignment
+    public class TeamAssignment : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private string _ResourceName;
@@ -30,12 +30,19 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(18)] private string _AssignmentType;
         [ProtoMember(19)] private DateTime _LastUpatedUTC;
         [ProtoMember(20)] private int _OpPeriod;
+        [ProtoMember(21)] private bool _Active;
 
 
-        public TeamAssignment() { ID = Guid.NewGuid(); 
+
+
+        public TeamAssignment() { 
+            ID = Guid.NewGuid();
+            Active = true;
+            currentStatus = TeamAssignmentTools.GetStatusByID(0);
             AssignedMemberIDs= new List<Guid>();
             _CommsPlanItemIDs = new List<Guid>();
             _AssignedToolIDs = new List<Guid>();
+
         }
 
         public Guid ID { get => _ID; set => _ID = value; }
@@ -61,7 +68,20 @@ namespace WF_ICS_ClassLibrary.Models
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         
         public string FullResourceID { get => ResourceIDNumber + " " + ResourceName; }
+        public bool Active { get => _Active; set => _Active = value; }
 
+
+
+        public TeamAssignment Clone()
+        {
+            TeamAssignment cloneTo = this.MemberwiseClone() as TeamAssignment;
+            cloneTo.currentStatus = currentStatus.Clone();
+            return cloneTo;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
 
     }
 
@@ -83,15 +103,7 @@ namespace WF_ICS_ClassLibrary.Models
         public TeamStatus(int id, string name, bool active) { StatusID = id; StatusName = name; Active = active; }
 
 
-        public TeamStatus getStatusByID(int id)
-        {
-            List<TeamStatus> allStatuses = TeamAssignmentTools.GetAllTeamStatuses();
-            if (allStatuses.Where(o => o.StatusID == id).Any())
-            {
-                return allStatuses.Where(o => o.StatusID == id).First();
-            }
-            else { return new TeamStatus(); }
-        }
+       
 
         public TeamStatus Clone()
         {
@@ -107,6 +119,16 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class TeamAssignmentTools
     {
+        public static TeamStatus GetStatusByID(int id)
+        {
+            List<TeamStatus> allStatuses = GetAllTeamStatuses();
+            if (allStatuses.Where(o => o.StatusID == id).Any())
+            {
+                return allStatuses.Where(o => o.StatusID == id).First();
+            }
+            else { return new TeamStatus(); }
+        }
+
         public static List<TeamStatus> GetAllTeamStatuses()
         {
             List<TeamStatus> statuses = new List<TeamStatus>();

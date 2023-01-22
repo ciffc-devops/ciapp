@@ -161,6 +161,21 @@ namespace WF_ICS_ClassLibrary.Models
                 return sb.ToString();
             }
         }
+        public string SystemIDChannelFunction
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(ChannelID);
+                sb.Append(" ");
+                if (!string.IsNullOrEmpty(ChannelNumber)) { sb.Append("#"); sb.Append(ChannelNumber); sb.Append(" "); }
+                if (!string.IsNullOrEmpty(CommsSystem)) { sb.Append("("); sb.Append(CommsSystem); sb.Append(")"); }
+                if (!string.IsNullOrEmpty(CommsFunction)) { sb.Append(" - "); sb.Append(CommsFunction); }
+                return sb.ToString();
+            }
+        }
+
+
         public Guid TemplateItemID { get => _TemplateItemID; set => _TemplateItemID = value; }
 
 

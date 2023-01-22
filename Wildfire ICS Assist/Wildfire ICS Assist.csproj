@@ -62,28 +62,28 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.3.1.25\lib\net462\protobuf-net.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.3.1.26\lib\net462\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.Core.3.1.25\lib\net462\protobuf-net.Core.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.Core.3.1.26\lib\net462\protobuf-net.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -174,6 +174,12 @@
     </Compile>
     <Compile Include="CustomControls\EditAircraftControl.Designer.cs">
       <DependentUpon>EditAircraftControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\EditTeamAssignmentTemplateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\EditTeamAssignmentTemplateControl.Designer.cs">
+      <DependentUpon>EditTeamAssignmentTemplateControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\EditTeamMemberControl.cs">
       <SubType>UserControl</SubType>
@@ -453,6 +459,12 @@
     <Compile Include="SafetyMessagesForm.Designer.cs">
       <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TeamAssignmentEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeamAssignmentEditForm.Designer.cs">
+      <DependentUpon>TeamAssignmentEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TeamAssignmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -476,12 +488,6 @@
     </Compile>
     <Compile Include="VehicleEditForm.Designer.cs">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VehicleEntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VehicleEntryForm.Designer.cs">
-      <DependentUpon>VehicleEntryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="VehiclesForm.cs">
       <SubType>Form</SubType>
@@ -527,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditAircraftControl.resx">
       <DependentUpon>EditAircraftControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\EditTeamAssignmentTemplateControl.resx">
+      <DependentUpon>EditTeamAssignmentTemplateControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditTeamMemberControl.resx">
       <DependentUpon>EditTeamMemberControl.cs</DependentUpon>
@@ -682,6 +691,9 @@
     <EmbeddedResource Include="SafetyMessagesForm.resx">
       <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TeamAssignmentEditForm.resx">
+      <DependentUpon>TeamAssignmentEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TeamAssignmentsForm.resx">
       <DependentUpon>TeamAssignmentsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -693,9 +705,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VehicleEditForm.resx">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VehicleEntryForm.resx">
-      <DependentUpon>VehicleEntryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VehiclesForm.resx">
       <DependentUpon>VehiclesForm.cs</DependentUpon>
@@ -778,6 +787,7 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-613-paste.png" />
     <None Include="Resources\glyphicons-basic-52-eye.png" />
     <None Include="Resources\glyphicons-basic-399-import.png" />
     <None Include="Resources\glyphicons-basic-849-computer-network.png" />

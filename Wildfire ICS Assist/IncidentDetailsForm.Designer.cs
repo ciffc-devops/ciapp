@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -124,9 +124,9 @@
             this.iAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentActionPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentObjectivesICS202ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.organizationChartICS207ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationsPlanICS205ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicalPlanICS206ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.organizationChartICS207ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.safetyMessageICS208ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.airOperationsSummaryICS220ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -134,6 +134,7 @@
             this.communicationsListICS205AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalMessageICS213ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.printingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printThisOperationalPeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printThisIncidentToDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -210,7 +211,6 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
-            this.printingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -292,9 +292,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -971,6 +971,12 @@
             resources.ApplyResources(this.incidentObjectivesICS202ToolStripMenuItem, "incidentObjectivesICS202ToolStripMenuItem");
             this.incidentObjectivesICS202ToolStripMenuItem.Click += new System.EventHandler(this.incidentObjectivesICS202ToolStripMenuItem_Click);
             // 
+            // organizationChartICS207ToolStripMenuItem
+            // 
+            this.organizationChartICS207ToolStripMenuItem.Name = "organizationChartICS207ToolStripMenuItem";
+            resources.ApplyResources(this.organizationChartICS207ToolStripMenuItem, "organizationChartICS207ToolStripMenuItem");
+            this.organizationChartICS207ToolStripMenuItem.Click += new System.EventHandler(this.organizationChartICS207ToolStripMenuItem_Click);
+            // 
             // communicationsPlanICS205ToolStripMenuItem
             // 
             this.communicationsPlanICS205ToolStripMenuItem.Name = "communicationsPlanICS205ToolStripMenuItem";
@@ -982,12 +988,6 @@
             this.medicalPlanICS206ToolStripMenuItem.Name = "medicalPlanICS206ToolStripMenuItem";
             resources.ApplyResources(this.medicalPlanICS206ToolStripMenuItem, "medicalPlanICS206ToolStripMenuItem");
             this.medicalPlanICS206ToolStripMenuItem.Click += new System.EventHandler(this.medicalPlanICS206ToolStripMenuItem_Click);
-            // 
-            // organizationChartICS207ToolStripMenuItem
-            // 
-            this.organizationChartICS207ToolStripMenuItem.Name = "organizationChartICS207ToolStripMenuItem";
-            resources.ApplyResources(this.organizationChartICS207ToolStripMenuItem, "organizationChartICS207ToolStripMenuItem");
-            this.organizationChartICS207ToolStripMenuItem.Click += new System.EventHandler(this.organizationChartICS207ToolStripMenuItem_Click);
             // 
             // safetyMessageICS208ToolStripMenuItem
             // 
@@ -1027,6 +1027,11 @@
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // printingToolStripMenuItem
+            // 
+            resources.ApplyResources(this.printingToolStripMenuItem, "printingToolStripMenuItem");
+            this.printingToolStripMenuItem.Name = "printingToolStripMenuItem";
             // 
             // printThisOperationalPeriodToolStripMenuItem
             // 
@@ -1330,6 +1335,7 @@
             resources.ApplyResources(this.btnTeamAssignments, "btnTeamAssignments");
             this.btnTeamAssignments.Name = "btnTeamAssignments";
             this.btnTeamAssignments.UseVisualStyleBackColor = true;
+            this.btnTeamAssignments.Click += new System.EventHandler(this.btnTeamAssignments_Click);
             // 
             // btnPlanningDashboard
             // 
@@ -1345,7 +1351,7 @@
             // 
             // cpIncidentActionPlan
             // 
-            this.cpIncidentActionPlan.BackColor = System.Drawing.Color.White;
+            this.cpIncidentActionPlan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpIncidentActionPlan.CollapsedHeight = 40;
             this.cpIncidentActionPlan.CollapsedWidth = 485;
@@ -1359,7 +1365,7 @@
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
             this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
-            this.cpIncidentActionPlan.CurrentlyCollapsed = false;
+            this.cpIncidentActionPlan.CurrentlyCollapsed = true;
             this.cpIncidentActionPlan.ExpandedHeight = 331;
             this.cpIncidentActionPlan.ExpandedWidth = 722;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
@@ -1377,6 +1383,7 @@
             resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
             this.btnAssignmentList.Name = "btnAssignmentList";
             this.btnAssignmentList.UseVisualStyleBackColor = true;
+            this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
             // 
             // btnAirOpsSummary
             // 
@@ -1517,6 +1524,7 @@
             resources.ApplyResources(this.btnOpsAssignments, "btnOpsAssignments");
             this.btnOpsAssignments.Name = "btnOpsAssignments";
             this.btnOpsAssignments.UseVisualStyleBackColor = true;
+            this.btnOpsAssignments.Click += new System.EventHandler(this.btnOpsAssignments_Click);
             // 
             // btnOpsMemberStatus
             // 
@@ -1542,17 +1550,11 @@
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
             // 
-            // printingToolStripMenuItem
-            // 
-            resources.ApplyResources(this.printingToolStripMenuItem, "printingToolStripMenuItem");
-            this.printingToolStripMenuItem.Name = "printingToolStripMenuItem";
-            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pnlInternetSyncStart);
@@ -1563,6 +1565,7 @@
             this.Controls.Add(this.lblVersionNumber);
             this.Controls.Add(this.tcStatus);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.cpOperations);
             this.Controls.Add(this.cpLogistics);
             this.Controls.Add(this.cpPlanning);

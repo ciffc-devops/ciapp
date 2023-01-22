@@ -30,8 +30,8 @@ namespace Wildfire_ICS_Assist
 
         public GeneralMessageEditForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
         }
 
         List<Control> requiredFields = new List<Control>();

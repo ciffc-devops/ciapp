@@ -117,7 +117,7 @@ namespace Wildfire_ICS_Assist
         VehiclesForm vehiclesForm = null;
         PrintIncidentForm printIAPForm = null;
         AirOperationsForm airOperationsForm = null;
-
+        TeamAssignmentsForm teamAssignmentsForm = null;
         /* Event Handlers!*/
 
         public event ShortcutEventHandler ShortcutButtonClicked;
@@ -136,6 +136,9 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
             Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
             Program.wfIncidentService.MedicalPlanChanged += Program_MedicalPlanChanged;
+            Program.wfIncidentService.MedicalAidStationChanged += Program_AidStationChanged;
+            Program.wfIncidentService.AmbulanceServiceChanged += Program_MedivacChanged;
+            Program.wfIncidentService.HospitalChanged += Program_HospitalChanged;
             Program.wfIncidentService.NoteChanged += Program_NoteChanged;
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
@@ -145,6 +148,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
             Program.wfIncidentService.TaskBasicsChanged += Program_TaskBasicsChanged;
             Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
+            Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
         }
 
 
@@ -162,6 +166,8 @@ namespace Wildfire_ICS_Assist
 
         private void setButtonCheckboxes()
         {
+            if(CurrentIncident.ActiveAssignments.Any(o=>o.OpPeriod == Program.CurrentOpPeriod)) { btnAssignmentList.Image = Properties.Resources.glyphicons_basic_739_check; teamMembersToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            else { btnAssignmentList.Image = null; teamMembersToolStripMenuItem.Image = null; }
 
             if (CurrentIncident.hasMeangfulCommsPlan(CurrentOpPeriod)) { btnCommsPlan.Image = Properties.Resources.glyphicons_basic_739_check; communicationsPlanICS205ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnCommsPlan.Image = null; communicationsPlanICS205ToolStripMenuItem.Image = null; }
@@ -1402,6 +1408,41 @@ namespace Wildfire_ICS_Assist
             }
             TriggerAutoSave();
         }
+        private void Program_AidStationChanged(MedicalAidStationEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                setButtonCheckboxes();
+            }
+            TriggerAutoSave();
+        }
+        private void Program_MedivacChanged(AmbulanceServiceEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                setButtonCheckboxes();
+            }
+            TriggerAutoSave();
+        }
+        private void Program_HospitalChanged(HospitalEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                setButtonCheckboxes();
+            }
+            TriggerAutoSave();
+        }
+
+        private void Program_TeamAssignmentChanged(TeamAssignmentEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
+            {
+                setButtonCheckboxes();
+            }
+            TriggerAutoSave();
+        }
+
+
 
         private void Program_SafetyMessageChanged(SafetyMessageEventArgs e)
         {
@@ -1754,6 +1795,44 @@ namespace Wildfire_ICS_Assist
                 Program.wfIncidentService.UpsertOperationalPeriod(per);
             }
 
+        }
+
+        private void btnAssignmentList_Click(object sender, EventArgs e)
+        {
+            OpenTeamAssignmentsForm();
+        }
+
+        private void OpenTeamAssignmentsForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (teamAssignmentsForm == null)
+                {
+                    teamAssignmentsForm = new TeamAssignmentsForm();
+                    teamAssignmentsForm.FormClosed += new FormClosedEventHandler(TeamAssignmentsForm_Closed);
+                    ActiveForms.Add(teamAssignmentsForm);
+                    teamAssignmentsForm.Show(this);
+                }
+
+                teamAssignmentsForm.BringToFront();
+            }
+        }
+        void TeamAssignmentsForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(teamAssignmentsForm);
+            teamAssignmentsForm = null;
+
+
+        }
+
+        private void btnOpsAssignments_Click(object sender, EventArgs e)
+        {
+            OpenTeamAssignmentsForm();
+        }
+
+        private void btnTeamAssignments_Click(object sender, EventArgs e)
+        {
+            OpenTeamAssignmentsForm();
         }
     }
 }

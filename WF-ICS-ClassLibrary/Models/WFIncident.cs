@@ -258,7 +258,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<TaskUpdate> allTaskUpdates { get => _allTaskUpdates; set => _allTaskUpdates = value; }
         public List<AirOperationsSummary> allAirOperationsSummaries { get => _allAirOperationsSummaries; set => _allAirOperationsSummaries = value; }
         public List<TeamAssignment> AllAssignments { get => _AllAssignments; set => _AllAssignments = value; }
-
+        public List<TeamAssignment> ActiveAssignments { get => _AllAssignments.Where(o => o.Active).ToList(); }
 
 
         //for network reasons
