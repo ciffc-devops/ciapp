@@ -33,6 +33,8 @@ namespace Wildfire_ICS_Assist
         private void LoadAssignment()
         {
             numAssignmentNumber.Value = selectedAssignment.ResourceIDNumber;
+            txtBriefSummary.Text = selectedAssignment.BriefSummary;
+            txtContact.Text = selectedAssignment.Contact;
             numPersonnelRequired.Value = selectedAssignment.NumberOfPersons;
             editTeamAssignmentTemplateControl1.selectedAssignment = selectedAssignment;
             if(selectedAssignment.ReportsToRoleID != Guid.Empty && OpsRoles.Any(o=>o.RoleID == selectedAssignment.ReportsToRoleID))
@@ -51,7 +53,16 @@ namespace Wildfire_ICS_Assist
 
         private void TeamAssignmentEditForm_Load(object sender, EventArgs e)
         {
-            
+            LoadTemplateList();
+        }
+
+        private void LoadTemplateList()
+        {
+            List<TeamAssignment> assignments = (List<TeamAssignment>)Program.generalOptionsService.GetOptionsValue("TeamAssignments");
+            assignments = assignments.Where(o => o.Active).OrderBy(o => o.ResourceName).ToList();
+            cboAssignmentTemplates.DataSource = assignments;
+            cboAssignmentTemplates.DisplayMember = "ResourceNameWithType";
+            cboAssignmentTemplates.ValueMember = "ID";
         }
 
         private void PopulateReportsTo()
@@ -148,9 +159,10 @@ namespace Wildfire_ICS_Assist
 
             selectedAssignment.ReportsToRoleID = reportsTo.RoleID;
             selectedAssignment.DivisionName = reportsTo.RoleName;
-            selectedAssignment.BranchName = Program.CurrentOrgChart.GetRoleByID(reportsTo.ReportsTo, false).RoleName;
-
-
+            if (reportsTo.RoleID != Globals.OpsChiefID) { selectedAssignment.BranchName = Program.CurrentOrgChart.GetRoleByID(reportsTo.ReportsTo, false).RoleName; }
+            else { selectedAssignment.BranchName = "Operations"; }
+            selectedAssignment.Contact = txtContact.Text;
+            selectedAssignment.BriefSummary = txtBriefSummary.Text;
             selectedAssignment.ResourceIDNumber = Convert.ToInt32(numAssignmentNumber.Value);
             selectedAssignment.AssignmentType = editTeamAssignmentTemplateControl1.selectedAssignment.AssignmentType;
             selectedAssignment.ResourceName = editTeamAssignmentTemplateControl1.selectedAssignment.ResourceName;
@@ -187,6 +199,8 @@ namespace Wildfire_ICS_Assist
                isValid = false; 
             }
             if (string.IsNullOrEmpty(editTeamAssignmentTemplateControl1.selectedAssignment.ResourceName)) { isValid = false; }
+           // if (string.IsNullOrEmpty(txtBriefSummary.Text.Trim())) { isValid = false; }
+
 
 
             return isValid;
@@ -228,6 +242,29 @@ namespace Wildfire_ICS_Assist
                     help.ShowDialog();
                 }
             }
+        }
+
+        private void btnApplyTemplate_Click(object sender, EventArgs e)
+        {
+            if(cboAssignmentTemplates.SelectedItem != null)
+            {
+                TeamAssignment template = (TeamAssignment)cboAssignmentTemplates.SelectedItem;
+                editTeamAssignmentTemplateControl1.selectedAssignment.ResourceName = template.ResourceName;
+                editTeamAssignmentTemplateControl1.selectedAssignment.AssignmentType = template.AssignmentType;
+                editTeamAssignmentTemplateControl1.selectedAssignment.TacticalAssignment = template.TacticalAssignment;
+                editTeamAssignmentTemplateControl1.selectedAssignment.SpecialInstructions = template.SpecialInstructions;
+                editTeamAssignmentTemplateControl1.selectedAssignment = editTeamAssignmentTemplateControl1.selectedAssignment;
+                editTeamAssignmentTemplateControl1.Focus();
+
+            }
+        }
+
+        private void txtBriefSummary_TextChanged(object sender, EventArgs e)
+        {
+            /*
+            if (string.IsNullOrEmpty(txtBriefSummary.Text)) { txtBriefSummary.BackColor = Program.ErrorColor; }
+            else { txtBriefSummary.BackColor = Program.GoodColor; }
+            */
         }
     }
 }

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -211,6 +211,7 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
+            this.teamAssignmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -292,9 +293,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle4.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -849,7 +850,8 @@
             this.toolStripSeparator4,
             this.templatesToolStripMenuItem,
             this.incidentObjectivesToolStripMenuItem,
-            this.safetyNotesToolStripMenuItem});
+            this.safetyNotesToolStripMenuItem,
+            this.teamAssignmentsToolStripMenuItem1});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
             // 
@@ -1550,6 +1552,12 @@
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
             // 
+            // teamAssignmentsToolStripMenuItem1
+            // 
+            this.teamAssignmentsToolStripMenuItem1.Name = "teamAssignmentsToolStripMenuItem1";
+            resources.ApplyResources(this.teamAssignmentsToolStripMenuItem1, "teamAssignmentsToolStripMenuItem1");
+            this.teamAssignmentsToolStripMenuItem1.Click += new System.EventHandler(this.teamAssignmentsToolStripMenuItem1_Click);
+            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1790,6 +1798,7 @@
         private System.Windows.Forms.ToolStripMenuItem aircraftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem airOperationsSummaryICS220ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teamAssignmentsToolStripMenuItem1;
     }
 }
 

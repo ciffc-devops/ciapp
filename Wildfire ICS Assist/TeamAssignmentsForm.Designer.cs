@@ -106,6 +106,7 @@
             this.btnPrintSummary.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrintSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrintSummary.UseVisualStyleBackColor = true;
+            this.btnPrintSummary.Click += new System.EventHandler(this.btnPrintSummary_Click);
             // 
             // btnPrintSelected
             // 
@@ -180,7 +181,7 @@
             // 
             this.colAssignmentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colAssignmentName.DataPropertyName = "FullResourceID";
-            this.colAssignmentName.HeaderText = "Assignment Name";
+            this.colAssignmentName.HeaderText = "Resource ID";
             this.colAssignmentName.MinimumWidth = 150;
             this.colAssignmentName.Name = "colAssignmentName";
             this.colAssignmentName.ReadOnly = true;

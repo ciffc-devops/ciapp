@@ -102,6 +102,7 @@ namespace Wildfire_ICS_Assist
         SavedSafetyNotesForm savedSafetyNotesForm = null;
         SavedTeamMembersForm savedTeamMembersForm = null;
         SavedAircraftsForm savedAircraftForm = null;
+        SavedTeamAssignmentsForm savedTeamAssignmentsForm = null;
 
 
         CommunicationsListForm communicationsList = null;
@@ -1833,6 +1834,34 @@ namespace Wildfire_ICS_Assist
         private void btnTeamAssignments_Click(object sender, EventArgs e)
         {
             OpenTeamAssignmentsForm();
+        }
+
+        private void teamAssignmentsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenSavedTeamAssignmentsForm();
+        }
+
+
+        private void OpenSavedTeamAssignmentsForm()
+        {
+          
+                if (savedTeamAssignmentsForm == null)
+                {
+                    savedTeamAssignmentsForm = new SavedTeamAssignmentsForm();
+                    savedTeamAssignmentsForm.FormClosed += new FormClosedEventHandler(SavedTeamAssignmentsForm_Closed);
+                    ActiveForms.Add(savedTeamAssignmentsForm);
+                    savedTeamAssignmentsForm.Show(this);
+                }
+
+                savedTeamAssignmentsForm.BringToFront();
+            
+        }
+        void SavedTeamAssignmentsForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(savedTeamAssignmentsForm);
+            savedTeamAssignmentsForm = null;
+
+
         }
     }
 }

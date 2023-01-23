@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
@@ -60,7 +62,7 @@ namespace Wildfire_ICS_Assist
             TeamAssignment assignment = new TeamAssignment();
             assignment.OpPeriod = Program.CurrentOpPeriod;
             assignment.IncidentID = Program.CurrentIncident.TaskID;
-            assignment.NumberOfPersons = 11;
+            assignment.NumberOfPersons = 2;
             assignment.ResourceIDNumber = Program.CurrentIncident.GetNextAssignmentNumber(Program.CurrentOpPeriod);
             assignment.PreparedByRoleID = Program.CurrentRole.RoleID;
             assignment.PreparedByRoleName = Program.CurrentRole.RoleName;
@@ -112,6 +114,45 @@ namespace Wildfire_ICS_Assist
             btnEdit.Enabled = dgvAssignments.SelectedRows.Count == 1;
             btnDelete.Enabled = dgvAssignments.SelectedRows.Count > 0;
             btnPrintSelected.Enabled = btnDelete.Enabled;
+        }
+
+        private void btnPrintSummary_Click(object sender, EventArgs e)
+        {
+            List<Guid> DivisionIDs = new List<Guid>();
+            List<TeamAssignment> assignments = Program.CurrentIncident.ActiveAssignments.Where(o=>o.OpPeriod == Program.CurrentOpPeriod).OrderBy(o=>o.DivisionName).ThenBy(o=>o.ResourceIDNumber).ToList();
+            foreach(TeamAssignment ta in assignments)
+            {
+                if (!DivisionIDs.Contains(ta.ReportsToRoleID)) { DivisionIDs.Add(ta.ReportsToRoleID);}
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+            foreach(Guid g in DivisionIDs)
+            {
+                allPDFs.AddRange(Program.pdfExportService.exportAssignmentListToPDF(Program.CurrentTask, Program.CurrentOpPeriod, g, null, null, false));
+            }
+
+
+
+
+            string fullFilepath = "";
+            //int end = CurrentTask.FileName.LastIndexOf("\\");
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "ICS 204 - Task " + Program.CurrentIncident.IncidentIdentifier + " - Op - " + Program.CurrentOpPeriod + " Assignments";
+            //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+            }
         }
     }
 }

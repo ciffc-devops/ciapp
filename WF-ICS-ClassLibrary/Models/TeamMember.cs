@@ -77,7 +77,13 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return Name; }
             }
         }
-
+        public string NameAndContact { get
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Name);
+                if (!string.IsNullOrEmpty(Phone)) { sb.Append(" "); sb.Append(Phone.FormatPhone()); }
+                return sb.ToString();
+            } }
 
         public string Callsign { get => _Callsign; set => _Callsign = value; }
         public string Phone { get => _Phone.FormatPhone(); set => _Phone = value; }

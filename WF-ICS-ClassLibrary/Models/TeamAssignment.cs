@@ -37,7 +37,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(25)] private string _PreparedByIndividualName;
         [ProtoMember(26)] private string _BranchName;
         [ProtoMember(27)] private string _DivisionName;
-
+        [ProtoMember(28)] private string _BriefSummary;
 
         public TeamAssignment() { 
             ID = Guid.NewGuid();
@@ -70,7 +70,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string AssignmentType { get => _AssignmentType; set => _AssignmentType = value; }
         public DateTime LastUpdatedUTC { get => _LastUpatedUTC; set => _LastUpatedUTC = value; }
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
-        
+        public string BriefSummary { get => _BriefSummary; set => _BriefSummary = value; }
         public string FullResourceID { get => ResourceIDNumber + " " + ResourceName; }
         public bool Active { get => _Active; set => _Active = value; }
         public Guid IncidentID { get => _IncidentID; set => _IncidentID = value; }
@@ -79,7 +79,12 @@ namespace WF_ICS_ClassLibrary.Models
         public string PreparedByIndividualName { get => _PreparedByIndividualName; set => _PreparedByIndividualName = value; }
         public string BranchName { get => _BranchName; set => _BranchName = value; }
         public string DivisionName { get => _DivisionName; set => _DivisionName = value; }
-
+        public string ResourceNameWithType { get
+            {
+                StringBuilder sb = new StringBuilder();
+                if (!string.IsNullOrEmpty(AssignmentType)) { sb.Append(AssignmentType); sb.Append(" > "); }
+                sb.Append(ResourceName); return sb.ToString();
+            } }
 
 
 
@@ -126,7 +131,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
     }
 
-
+    
 
     public static class TeamAssignmentTools
     {

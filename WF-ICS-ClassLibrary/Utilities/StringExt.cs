@@ -186,4 +186,12 @@ namespace WF_ICS_ClassLibrary.Utilities
             else { return g; }
         }
     }
+
+    public class GuidStringPair
+    {
+        public Guid guid { get; set; }
+        public string str { get; set; }
+        public GuidStringPair() { }
+        public GuidStringPair(Guid id, string s) { guid = id; str = s; }
+    }
 }

@@ -120,7 +120,7 @@ namespace WildfireICSDesktopServices
             List<string> types = new List<string>();
 
             List<TeamAssignment> templates = GetOptionsValue("TeamAssignments") as List<TeamAssignment>;
-            templates = templates.Where(o => !string.IsNullOrEmpty(o.AssignmentType)).ToList();
+            templates = templates.Where(o => !string.IsNullOrEmpty(o.AssignmentType) && o.Active).ToList();
             foreach (TeamAssignment t in templates)
             {
                 if (!types.Contains(t.AssignmentType.Trim(), StringComparison.InvariantCultureIgnoreCase))

@@ -30,18 +30,21 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnTemplateHelp = new System.Windows.Forms.Button();
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.cboAssignmentTemplates = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.txtContact = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtBriefSummary = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnSetToNextAssignmentNumber = new System.Windows.Forms.Button();
+            this.editTeamAssignmentTemplateControl1 = new Wildfire_ICS_Assist.CustomControls.EditTeamAssignmentTemplateControl();
             this.label2 = new System.Windows.Forms.Label();
             this.numAssignmentNumber = new System.Windows.Forms.NumericUpDown();
             this.cboReportsTo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnSaveAndPrint = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.editTeamAssignmentTemplateControl1 = new Wildfire_ICS_Assist.CustomControls.EditTeamAssignmentTemplateControl();
             this.cpEquipment = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cpComms = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cboComms4 = new System.Windows.Forms.ComboBox();
@@ -65,7 +68,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cboPerson1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnTemplateHelp = new System.Windows.Forms.Button();
+            this.btnSaveAndPrint = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -100,8 +105,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveAndPrint);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(1175, 614);
-            this.splitContainer1.SplitterDistance = 551;
+            this.splitContainer1.Size = new System.Drawing.Size(1175, 690);
+            this.splitContainer1.SplitterDistance = 627;
             this.splitContainer1.TabIndex = 2;
             // 
             // splitContainer2
@@ -124,6 +129,11 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.txtContact);
+            this.splitContainer2.Panel2.Controls.Add(this.label9);
+            this.splitContainer2.Panel2.Controls.Add(this.label8);
+            this.splitContainer2.Panel2.Controls.Add(this.txtBriefSummary);
+            this.splitContainer2.Panel2.Controls.Add(this.label7);
             this.splitContainer2.Panel2.Controls.Add(this.btnSetToNextAssignmentNumber);
             this.splitContainer2.Panel2.Controls.Add(this.editTeamAssignmentTemplateControl1);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
@@ -133,9 +143,27 @@
             this.splitContainer2.Panel2.Controls.Add(this.cpEquipment);
             this.splitContainer2.Panel2.Controls.Add(this.cpComms);
             this.splitContainer2.Panel2.Controls.Add(this.cpPersonnel);
-            this.splitContainer2.Size = new System.Drawing.Size(1175, 551);
+            this.splitContainer2.Size = new System.Drawing.Size(1175, 627);
             this.splitContainer2.SplitterDistance = 55;
             this.splitContainer2.TabIndex = 105;
+            // 
+            // btnTemplateHelp
+            // 
+            this.btnTemplateHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTemplateHelp.BackColor = System.Drawing.Color.White;
+            this.btnTemplateHelp.BackgroundImage = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_3x;
+            this.btnTemplateHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTemplateHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.btnTemplateHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTemplateHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTemplateHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnTemplateHelp.Location = new System.Drawing.Point(1126, 7);
+            this.btnTemplateHelp.Name = "btnTemplateHelp";
+            this.btnTemplateHelp.Size = new System.Drawing.Size(40, 40);
+            this.btnTemplateHelp.TabIndex = 108;
+            this.btnTemplateHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTemplateHelp.UseVisualStyleBackColor = false;
+            this.btnTemplateHelp.Click += new System.EventHandler(this.btnTemplateHelp_Click);
             // 
             // btnApplyTemplate
             // 
@@ -151,6 +179,7 @@
             this.btnApplyTemplate.Text = "Apply Template";
             this.btnApplyTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnApplyTemplate.UseVisualStyleBackColor = true;
+            this.btnApplyTemplate.Click += new System.EventHandler(this.btnApplyTemplate_Click);
             // 
             // cboAssignmentTemplates
             // 
@@ -173,6 +202,53 @@
             this.label14.TabIndex = 0;
             this.label14.Text = "Assignment Templates";
             // 
+            // txtContact
+            // 
+            this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContact.Location = new System.Drawing.Point(236, 153);
+            this.txtContact.Name = "txtContact";
+            this.txtContact.Size = new System.Drawing.Size(514, 29);
+            this.txtContact.TabIndex = 82;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(4, 151);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(218, 24);
+            this.label9.TabIndex = 81;
+            this.label9.Text = "Contact";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(232, 125);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(512, 17);
+            this.label8.TabIndex = 80;
+            this.label8.Text = "Brief summary may include: Reporting location, special equipment, remarks, etc.";
+            // 
+            // txtBriefSummary
+            // 
+            this.txtBriefSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBriefSummary.Location = new System.Drawing.Point(235, 89);
+            this.txtBriefSummary.Name = "txtBriefSummary";
+            this.txtBriefSummary.Size = new System.Drawing.Size(514, 29);
+            this.txtBriefSummary.TabIndex = 79;
+            this.txtBriefSummary.TextChanged += new System.EventHandler(this.txtBriefSummary_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(3, 87);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(218, 24);
+            this.label7.TabIndex = 78;
+            this.label7.Text = "Brief Summary";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // btnSetToNextAssignmentNumber
             // 
             this.btnSetToNextAssignmentNumber.Location = new System.Drawing.Point(362, 43);
@@ -182,6 +258,20 @@
             this.btnSetToNextAssignmentNumber.Text = "Set to next available";
             this.btnSetToNextAssignmentNumber.UseVisualStyleBackColor = true;
             this.btnSetToNextAssignmentNumber.Click += new System.EventHandler(this.btnSetToNextAssignmentNumber_Click);
+            // 
+            // editTeamAssignmentTemplateControl1
+            // 
+            this.editTeamAssignmentTemplateControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editTeamAssignmentTemplateControl1.BackColor = System.Drawing.Color.Transparent;
+            this.editTeamAssignmentTemplateControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editTeamAssignmentTemplateControl1.Location = new System.Drawing.Point(37, 191);
+            this.editTeamAssignmentTemplateControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.editTeamAssignmentTemplateControl1.Name = "editTeamAssignmentTemplateControl1";
+            this.editTeamAssignmentTemplateControl1.selectedAssignment = null;
+            this.editTeamAssignmentTemplateControl1.Size = new System.Drawing.Size(712, 356);
+            this.editTeamAssignmentTemplateControl1.TabIndex = 76;
             // 
             // label2
             // 
@@ -234,68 +324,6 @@
             this.label1.TabIndex = 65;
             this.label1.Text = "Reports To";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnSaveAndPrint
-            // 
-            this.btnSaveAndPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveAndPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveAndPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnSaveAndPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSaveAndPrint.Location = new System.Drawing.Point(859, 5);
-            this.btnSaveAndPrint.Margin = new System.Windows.Forms.Padding(6);
-            this.btnSaveAndPrint.Name = "btnSaveAndPrint";
-            this.btnSaveAndPrint.Size = new System.Drawing.Size(179, 48);
-            this.btnSaveAndPrint.TabIndex = 108;
-            this.btnSaveAndPrint.Text = "Save and Print";
-            this.btnSaveAndPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSaveAndPrint.UseVisualStyleBackColor = true;
-            this.btnSaveAndPrint.Click += new System.EventHandler(this.btnSaveAndPrint_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(1050, 5);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(6);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(117, 48);
-            this.btnSave.TabIndex = 107;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(5, 5);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 14;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // editTeamAssignmentTemplateControl1
-            // 
-            this.editTeamAssignmentTemplateControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.editTeamAssignmentTemplateControl1.BackColor = System.Drawing.Color.Transparent;
-            this.editTeamAssignmentTemplateControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editTeamAssignmentTemplateControl1.Location = new System.Drawing.Point(37, 85);
-            this.editTeamAssignmentTemplateControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.editTeamAssignmentTemplateControl1.Name = "editTeamAssignmentTemplateControl1";
-            this.editTeamAssignmentTemplateControl1.selectedAssignment = null;
-            this.editTeamAssignmentTemplateControl1.Size = new System.Drawing.Size(712, 386);
-            this.editTeamAssignmentTemplateControl1.TabIndex = 76;
             // 
             // cpEquipment
             // 
@@ -557,29 +585,59 @@
             this.label4.Text = "Set the personnel assigned to this team below.  To add additional people, use the" +
     " Check-In tool in the program.";
             // 
-            // btnTemplateHelp
+            // btnSaveAndPrint
             // 
-            this.btnTemplateHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTemplateHelp.BackColor = System.Drawing.Color.White;
-            this.btnTemplateHelp.BackgroundImage = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_3x;
-            this.btnTemplateHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnTemplateHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnTemplateHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTemplateHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTemplateHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTemplateHelp.Location = new System.Drawing.Point(1126, 7);
-            this.btnTemplateHelp.Name = "btnTemplateHelp";
-            this.btnTemplateHelp.Size = new System.Drawing.Size(40, 40);
-            this.btnTemplateHelp.TabIndex = 108;
-            this.btnTemplateHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTemplateHelp.UseVisualStyleBackColor = false;
-            this.btnTemplateHelp.Click += new System.EventHandler(this.btnTemplateHelp_Click);
+            this.btnSaveAndPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveAndPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveAndPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnSaveAndPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSaveAndPrint.Location = new System.Drawing.Point(859, 5);
+            this.btnSaveAndPrint.Margin = new System.Windows.Forms.Padding(6);
+            this.btnSaveAndPrint.Name = "btnSaveAndPrint";
+            this.btnSaveAndPrint.Size = new System.Drawing.Size(179, 48);
+            this.btnSaveAndPrint.TabIndex = 108;
+            this.btnSaveAndPrint.Text = "Save and Print";
+            this.btnSaveAndPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSaveAndPrint.UseVisualStyleBackColor = true;
+            this.btnSaveAndPrint.Click += new System.EventHandler(this.btnSaveAndPrint_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.Location = new System.Drawing.Point(1050, 5);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(6);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(117, 48);
+            this.btnSave.TabIndex = 107;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancel.Location = new System.Drawing.Point(5, 5);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(124, 51);
+            this.btnCancel.TabIndex = 14;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // TeamAssignmentEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1175, 614);
+            this.ClientSize = new System.Drawing.Size(1175, 690);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -595,6 +653,7 @@
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numAssignmentNumber)).EndInit();
@@ -646,5 +705,10 @@
         private System.Windows.Forms.ComboBox cboPerson1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnTemplateHelp;
+        private System.Windows.Forms.TextBox txtBriefSummary;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtContact;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }

@@ -82,7 +82,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(181, 29);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Assignment Name*";
+            this.label1.Text = "Resource Name*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -122,7 +122,7 @@
             this.cboAssignmentType.Location = new System.Drawing.Point(198, 37);
             this.cboAssignmentType.Name = "cboAssignmentType";
             this.cboAssignmentType.Size = new System.Drawing.Size(187, 32);
-            this.cboAssignmentType.TabIndex = 8;
+            this.cboAssignmentType.TabIndex = 1;
             this.cboAssignmentType.SelectedIndexChanged += new System.EventHandler(this.cboAssignmentType_SelectedIndexChanged);
             this.cboAssignmentType.Leave += new System.EventHandler(this.cboAssignmentType_Leave);
             // 
