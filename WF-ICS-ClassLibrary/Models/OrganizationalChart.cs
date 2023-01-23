@@ -806,6 +806,10 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Technical Specialist", Guid.Empty, "THSP", "Personnel with special skills that can be used anywhere within the Incident Command System organization."));
             allRoles.Add(new ICSRole("Time Unit Leader", Globals.FinanceChiefID, "TIME", "The person responsible for recording personnel time."));
 
+            allRoles.Add(new ICSRole("Deputy", Guid.Empty, "", ""));
+            allRoles.Add(new ICSRole("Trainee", Guid.Empty, "", ""));
+            allRoles.Add(new ICSRole("Assistant", Guid.Empty, "", ""));
+
 
             return allRoles;
         }
