@@ -141,7 +141,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(14)] private int _Depth;
         [ProtoMember(15)] private string _RoleDescription;
         [ProtoMember(16)] private string _Mnemonic;
-
+        [ProtoMember(17)] private bool _IncludeReportsToInName;
+        [ProtoMember(18)] private string _BaseRoleName;
 
         public Guid RoleID { get => _RoleID; set => _RoleID = value; }
         public string RoleName { get => _RoleName; set => _RoleName = value; }
@@ -212,20 +213,15 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public string ReportsToRoleName { get => _ReportsToRoleName; set => _ReportsToRoleName = value; }
         public int MaualSortOrder { get => _ManualSortOrder; set => _ManualSortOrder = value; }
+        public bool IncludeReportsToInName { get => _IncludeReportsToInName; set => _IncludeReportsToInName = value; }
+        public string BaseRoleName { get => _BaseRoleName; set => _BaseRoleName = value; }
         public TeamMember teamMember
         {
             get => _teamMember;
             set
             {
-                if (value != null && value.PersonID == Guid.Empty)
-                {
-                    _teamMember = new TeamMember();
-                    _teamMember.PersonID = Guid.Empty;
-                }
-                else
-                {
-                    _teamMember = value;
-                }
+                if (value != null && value.PersonID == Guid.Empty) { _teamMember = new TeamMember(); _teamMember.PersonID = Guid.Empty; }
+                else { _teamMember = value; }
 
             }
         }
@@ -237,40 +233,43 @@ namespace WF_ICS_ClassLibrary.Models
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; IndividualName = person_name; IndividualID = person_id;
         }*/
-        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, TeamMember member, int maualSortOrder = 99, int initial_depth = 0)
+        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, TeamMember member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; BranchID = Branch; _OrgChartRoleID = System.Guid.NewGuid();
             MaualSortOrder = maualSortOrder; Depth = initial_depth;
-            if (OrgChartTools.staticRoles.Any(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                ICSRole staticRole = OrgChartTools.staticRoles.FirstOrDefault(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase));
-                Mnemonic = staticRole.Mnemonic;
-                RoleDescription = staticRole.RoleDescription;
-            }
-            else { string huh = "huh"; }
+            _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
+            FillInfoFromStaticRole();
         }
-        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, string pdftitle, TeamMember member, int maualSortOrder = 99, int initial_depth = 0)
+        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, string pdftitle, TeamMember member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; BranchID = Branch; _OrgChartRoleID = System.Guid.NewGuid();
             PDFTitleName = pdftitle;
+            _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
             MaualSortOrder = maualSortOrder; Depth = initial_depth;
-            if (OrgChartTools.staticRoles.Any(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                ICSRole staticRole = OrgChartTools.staticRoles.FirstOrDefault(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase));
-                Mnemonic = staticRole.Mnemonic;
-                RoleDescription = staticRole.RoleDescription;
-            } 
-            else { string huh = "huh"; }
+            FillInfoFromStaticRole();
+            
         }
 
-        public ICSRole(string name, Guid Branch, string mnemonic, string description)
+        private void FillInfoFromStaticRole()
+        {
+            if (OrgChartTools.staticRoles.Any(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase) || o.BaseRoleName.Equals(BaseRoleName, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                ICSRole staticRole = OrgChartTools.staticRoles.FirstOrDefault(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase) || o.BaseRoleName.Equals(BaseRoleName, StringComparison.InvariantCultureIgnoreCase));
+                Mnemonic = staticRole.Mnemonic;
+                RoleDescription = staticRole.RoleDescription;
+                _IncludeReportsToInName = staticRole.IncludeReportsToInName;
+            }
+        }
+
+        public ICSRole(string name, Guid Branch, string mnemonic, string description, bool includeReportsToInName = false)
         {
             RoleID = Guid.NewGuid();
-            RoleName = name; 
+            RoleName = name;
+            _BaseRoleName = name;
             BranchID = Branch;
             RoleDescription = description;
             Mnemonic = mnemonic;
-
+            _IncludeReportsToInName = includeReportsToInName;
         }
 
 
@@ -309,6 +308,8 @@ namespace WF_ICS_ClassLibrary.Models
 
 
     }
+
+    /*
 
     [Serializable]
     public class ICSResponsibility
@@ -422,7 +423,7 @@ namespace WF_ICS_ClassLibrary.Models
             return responsibility;
         }
     }
-
+    */
     public static class OrgChartTools
     {
         private static List<ICSRole> _staticRoles = null;
@@ -432,6 +433,41 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (_staticRoles == null) { _staticRoles = GetAllRoles(); }
                 return _staticRoles;
+            }
+        }
+
+        public static void UpdateRoleNames(this OrganizationChart chart, int OpPeriod)
+        {
+            foreach(ICSRole role in chart.AllRoles.Where(o => o.IncludeReportsToInName && o.OpPeriod == OpPeriod))
+            {
+                chart.UpdateRoleName(role, true);
+            }
+        }
+
+        public static void UpdateRoleName(this OrganizationChart chart, ICSRole role, bool sendUpsertCommand)
+        {
+            string oldName = role.RoleName;
+            string newName = role.BaseRoleName;
+            if (role.ReportsTo != Guid.Empty && chart.AllRoles.Any(o => o.RoleID == role.ReportsTo))
+            {
+                newName += " " + chart.AllRoles.First(o => o.RoleID == role.ReportsTo).RoleName;
+            }
+            if (!oldName.Equals(newName))
+            {
+                role.RoleName = newName;
+                if (sendUpsertCommand)
+                {
+                    Globals.incidentService.UpsertICSRole(role);
+                }
+            }
+        }
+
+        public static void UpdateRoleName(this OrganizationChart chart, Guid roleID, bool sendUpsertCommand)
+        {
+            if(chart.AllRoles.Any(o=>o.RoleID == roleID))
+            {
+                ICSRole role = chart.AllRoles.First(o => o.RoleID == roleID);
+                chart.UpdateRoleName(role, sendUpsertCommand);
             }
         }
 
@@ -625,7 +661,9 @@ namespace WF_ICS_ClassLibrary.Models
                 AllRoles = AllRoles.AddUnifiedCommandRoles();
             }
 
-            AllRoles.Add(new ICSRole(new Guid("450EA00E-636A-4F44-9B6D-50A8EC03F4EA"), "Deputy Incident Commander", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "DeputyIC", blankMember, 1, 1));
+            AllRoles.Add(new ICSRole(new Guid("450EA00E-636A-4F44-9B6D-50A8EC03F4EA"), "Deputy", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "DeputyIC", "TitleDeputyIC", blankMember, 1, 1, true));
+            AllRoles.FirstOrDefault(o => o.RoleID == new Guid("450EA00E-636A-4F44-9B6D-50A8EC03F4EA")).RoleName = "Deputy Incident Commander";
+
             AllRoles.Add(new ICSRole(Globals.SafetyOfficerID, "Safety Officer", Globals.IncidentCommanderID, Globals.IncidentCommanderID, "SafetyOfficer", blankMember, 2, 1));
             AllRoles.Add(new ICSRole(new Guid("8428ed1e-80de-4b5d-a7ab-ae48ad5f1bce"), "Clerk", Globals.SafetyOfficerID, Globals.IncidentCommanderID, "NameSafety1", "TitleSafety1", blankMember, 2, 1));
 
@@ -806,9 +844,9 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Technical Specialist", Guid.Empty, "THSP", "Personnel with special skills that can be used anywhere within the Incident Command System organization."));
             allRoles.Add(new ICSRole("Time Unit Leader", Globals.FinanceChiefID, "TIME", "The person responsible for recording personnel time."));
 
-            allRoles.Add(new ICSRole("Deputy", Guid.Empty, "", ""));
-            allRoles.Add(new ICSRole("Trainee", Guid.Empty, "", ""));
-            allRoles.Add(new ICSRole("Assistant", Guid.Empty, "", ""));
+            allRoles.Add(new ICSRole("Deputy", Guid.Empty, "", "", true));
+            allRoles.Add(new ICSRole("Trainee", Guid.Empty, "", "", true));
+            allRoles.Add(new ICSRole("Assistant", Guid.Empty, "", "", true));
 
 
             return allRoles;

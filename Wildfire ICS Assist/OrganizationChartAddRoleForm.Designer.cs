@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.cboNewRoleName = new System.Windows.Forms.ComboBox();
             this.cboReportsTo = new System.Windows.Forms.ComboBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,7 +38,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cboNewRoleName = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -67,9 +67,22 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Size = new System.Drawing.Size(448, 201);
-            this.splitContainer1.SplitterDistance = 128;
+            this.splitContainer1.SplitterDistance = 125;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // cboNewRoleName
+            // 
+            this.cboNewRoleName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboNewRoleName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboNewRoleName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboNewRoleName.FormattingEnabled = true;
+            this.cboNewRoleName.Location = new System.Drawing.Point(126, 80);
+            this.cboNewRoleName.Name = "cboNewRoleName";
+            this.cboNewRoleName.Size = new System.Drawing.Size(310, 32);
+            this.cboNewRoleName.TabIndex = 5;
+            this.cboNewRoleName.Leave += new System.EventHandler(this.cboNewRoleName_Leave);
             // 
             // cboReportsTo
             // 
@@ -144,19 +157,6 @@
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // cboNewRoleName
-            // 
-            this.cboNewRoleName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboNewRoleName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboNewRoleName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboNewRoleName.FormattingEnabled = true;
-            this.cboNewRoleName.Location = new System.Drawing.Point(126, 80);
-            this.cboNewRoleName.Name = "cboNewRoleName";
-            this.cboNewRoleName.Size = new System.Drawing.Size(310, 32);
-            this.cboNewRoleName.TabIndex = 5;
-            this.cboNewRoleName.Leave += new System.EventHandler(this.cboNewRoleName_Leave);
             // 
             // OrganizationChartAddRoleForm
             // 

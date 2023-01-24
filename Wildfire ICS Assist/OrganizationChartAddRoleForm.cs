@@ -91,6 +91,8 @@ namespace Wildfire_ICS_Assist
                 ICSRole selectedName = (ICSRole)cboNewRoleName.SelectedItem;
 
                 selectedRole.RoleName = selectedName.RoleName;
+                selectedRole.BaseRoleName= selectedName.BaseRoleName;
+                selectedRole.IncludeReportsToInName= selectedName.IncludeReportsToInName;
                 selectedRole.Mnemonic = selectedName.Mnemonic;
                 selectedRole.RoleDescription = selectedName.RoleDescription;
                 ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;

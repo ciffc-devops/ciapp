@@ -163,9 +163,13 @@ namespace Wildfire_ICS_Assist
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            ICSRole parentRole = (ICSRole)treeOrgChart.SelectedNode.Tag;
+
+
             ICSRole role = new ICSRole();
             role.OrganizationalChartID = CurrentOrgChart.OrganizationalChartID;
             role.OpPeriod = CurrentOrgChart.OpPeriod;
+            role.ReportsTo = parentRole.RoleID;
             openRoleForEdit(role);
         }
 

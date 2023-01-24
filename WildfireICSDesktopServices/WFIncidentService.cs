@@ -1003,6 +1003,12 @@ namespace WildfireICSDesktopServices
                     chart.AllRoles = chart.AllRoles.Where(o => o.RoleID != record.RoleID).ToList();
                 }
                 chart.AllRoles.Add(record);
+                if (record.IncludeReportsToInName)
+                {
+                    chart.UpdateRoleName(record, false);
+                }
+
+
                 //chart.AllRoles = chart.AllRoles.OrderBy(o=>o.MaualSortOrder).ThenBy(o=>o.RoleName).ToList();
                 chart.SortRoles();
                 //UpsertOrganizationalChart(chart.Clone());
