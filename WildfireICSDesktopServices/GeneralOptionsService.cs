@@ -365,6 +365,8 @@ namespace WildfireICSDesktopServices
                     return _options.PromptForInitialSave;
                 case "IncludeOrgContactsInIAP":
                     return _options.IncludeOrgContactsInIAP;
+                case "DefaultToNetworkServer":
+                    return _options.DefaultToServer;
                 default:
                     return false;
             }
@@ -429,6 +431,8 @@ namespace WildfireICSDesktopServices
                 case "DefaultICSRole":
                     _options.DefaultICSRole = (ICSRole)newValue;
                     break;
+                case "DefaultPortNumber":
+                    _options.DefaultPortNumber = Convert.ToInt32(newValue); break;
                 case "TeamMember":
                     TeamMember member = (TeamMember)newValue;
                     _options.AllTeamMembers = _options.AllTeamMembers.Where(o => o.PersonID != member.PersonID).ToList();

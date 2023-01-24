@@ -247,6 +247,12 @@
     <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NetworkSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NetworkSettingsForm.Designer.cs">
+      <DependentUpon>NetworkSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NotesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -587,6 +593,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NetworkSettingsForm.resx">
+      <DependentUpon>NetworkSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NotesForm.resx">
       <DependentUpon>NotesForm.cs</DependentUpon>

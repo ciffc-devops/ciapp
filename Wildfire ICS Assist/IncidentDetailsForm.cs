@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NetworkCommsDotNet.Tools;
+using NetworkCommsDotNet;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,11 +20,14 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.CustomControls;
 using Wildfire_ICS_Assist.OptionsForms;
 using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
+using NetworkCommsDotNet.Connections;
+using NetworkCommsDotNet.DPSBase;
 
 namespace Wildfire_ICS_Assist
 {
@@ -61,6 +66,28 @@ namespace Wildfire_ICS_Assist
 
             ICSRole defaultRole = (ICSRole)Program.generalOptionsService.GetOptionsValue("DefaultICSRole");
             if (defaultRole != null && defaultRole.RoleID != Guid.Empty) { cboICSRole.SelectedValue = defaultRole.RoleID; }
+
+            //Default status for networking
+            if (Program.generalOptionsService.GetOptionsBoolValue("DefaultToNetworkServer"))
+            {
+                using (NetworkSettingsForm settings = new NetworkSettingsForm())
+                {
+                    int defaultPortNumber = 42999;
+                    if(Program.generalOptionsService.GetOptionsValue("DefaultPort") != null) { defaultPortNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("DefaultPort")); }
+                    settings.parent = this;
+                    bool firewallEnabled = Program.networkService.GetIsFirewallEnabled();
+                    bool portAvailable = Program.networkService.GetIsPortAvailable(defaultPortNumber);
+                    if (firewallEnabled && !portAvailable)
+                    {
+                        MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
+                    }
+                    else if (settings.startAsServer(defaultPortNumber, true))
+                    {
+
+                    }
+                }
+            }
+            setServerStatusDisplay();
 
         }
 
@@ -119,9 +146,20 @@ namespace Wildfire_ICS_Assist
         PrintIncidentForm printIAPForm = null;
         AirOperationsForm airOperationsForm = null;
         TeamAssignmentsForm teamAssignmentsForm = null;
-        /* Event Handlers!*/
+        PositionLogReminderForm _positionLogReminderForm = null;
+
 
         public event ShortcutEventHandler ShortcutButtonClicked;
+
+
+        //Network Stuff
+        Guid NetworkTestGuidValue = Guid.Empty;
+        bool silentNetworkTest = true;
+        bool initialConnectionTest = false;
+        private bool lostConnectionShowing = false;
+        private bool networkTaskRequested = false;
+        private bool networkOptionsRequested = false;
+
 
 
 
@@ -1861,6 +1899,320 @@ namespace Wildfire_ICS_Assist
             RemoveActiveForm(savedTeamAssignmentsForm);
             savedTeamAssignmentsForm = null;
 
+
+        }
+
+        private void tmrAutoSave_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tmrPositionLogReminders_Tick(object sender, EventArgs e)
+        {
+            List<PositionLogEntry> Reminders = Program.CurrentTask.allPositionLogEntries.Where(o => o != null && o.Role.RoleID == Program.CurrentRole.RoleID && o.OpPeriod == CurrentOpPeriod && !o.IsInfoOnly && !o.IsComplete && o.ReminderTime > DateTime.MinValue && o.ReminderTime < DateTime.MaxValue).ToList();
+            if (Reminders.Any())
+            {
+                DateTime now = DateTime.Now;
+                Reminders = Reminders.Where(o => o.ReminderTime < now).ToList();
+                if (Reminders.Any())
+                {
+                    ShowPositionLogReminder(Reminders[0]);
+                    tmrPositionLogReminders.Enabled = false;
+                }
+            }
+
+        }
+
+        private void ShowPositionLogReminder(PositionLogEntry entry)
+        {
+
+            if (_positionLogReminderForm == null)
+            {
+                _positionLogReminderForm = new PositionLogReminderForm();
+                _positionLogReminderForm.Entry = entry;
+                _positionLogReminderForm.FormClosed += new FormClosedEventHandler(PositionLogReminderForm_Closed);
+                ActiveForms.Add(_positionLogReminderForm);
+                _positionLogReminderForm.ShowDialog(this);
+            }
+
+            // _positionLogReminderForm.BringToFront();
+
+        }
+
+        void PositionLogReminderForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_positionLogReminderForm);
+            _positionLogReminderForm = null;
+            CheckForPositionLogReminders();
+
+
+        }
+
+        private async void tmrInternetSync_Tick(object sender, EventArgs e)
+        {
+            if (PingTool.TestPing())
+            {
+                tmrInternetSync.Enabled = false;
+                var send = SendPendingInternetUpdates();
+                var get = GetPendingInternetUpdates();
+
+                await Task.WhenAll(send, get);
+                tmrInternetSync.Enabled = true;
+            }
+        }
+
+        private async Task<bool> SendPendingInternetUpdates()
+        {
+            List<TaskUpdate> pendingUpdates = CurrentIncident.allTaskUpdates.Where(o => !o.UploadedSuccessfully).ToList();
+            foreach (TaskUpdate update in pendingUpdates)
+            {
+                update.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(update);
+
+                addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Uploaded a pending change to a(n) " + update.ObjectType + Environment.NewLine);
+
+
+            }
+            return true;
+        }
+
+        private async Task<bool> GetPendingInternetUpdates()
+        {
+            TaskUpdateService service = new TaskUpdateService();
+            Task<List<TaskUpdate>> internetUpdates = service.DownloadTaskUpdateDetails(CurrentIncident.TaskID, Program.MachineID, DateTime.MinValue);
+            List<TaskUpdate> updates = await internetUpdates;
+
+            foreach (TaskUpdate update in updates)
+            {
+                update.UploadedSuccessfully = true;
+                //Program.sarTaskService.ProcessTaskUpdate(update);
+                Program.wfIncidentService.InsertIfUniqueTaskUpdate(update);
+
+            }
+
+            while (CurrentIncident.allTaskUpdates.Any(o => !o.ProcessedLocally))
+            {
+
+                TaskUpdate firstUnprocessed = CurrentIncident.allTaskUpdates.First(o => !o.ProcessedLocally);
+                addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Received a change to a(n) " + firstUnprocessed.ObjectType + Environment.NewLine);
+                Program.wfIncidentService.ApplyTaskUpdate(firstUnprocessed, true);
+            }
+
+
+            return true;
+
+        }
+
+
+
+        private void setServerStatusDisplay()
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                StringBuilder serverStatusText = new StringBuilder();
+
+                if (Program.InternetSyncEnabled)
+                {
+                    serverStatusText.Append("Internet Sync Enabled | ");
+                    tmrInternetSync.Enabled = true;
+                }
+
+                if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && ThisMachineIsServer)
+                {
+                    serverStatusText.Append("This computer is acting as a local network server. IP: "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
+                    requestIncidentFromServerToolStripMenuItem.Enabled = false;
+                    //downloadMembersFromServerToolStripMenuItem.Enabled = false;
+                    requestOptionsFromServerToolStripMenuItem.Enabled = false;
+                    networkTestToolStripMenuItem.Enabled = false;
+                    
+                }
+                else if (ThisMachineIsClient)
+                {
+                    serverStatusText.Append("Connected to "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
+                    requestIncidentFromServerToolStripMenuItem.Enabled = true;
+                    ///downloadMembersFromServerToolStripMenuItem.Enabled = true;
+                    requestOptionsFromServerToolStripMenuItem.Enabled = true;
+                    networkTestToolStripMenuItem.Enabled = true;
+                    
+                }
+                else
+                {
+                    serverStatusText.Append("Not connected to another local computer");
+                    requestIncidentFromServerToolStripMenuItem.Enabled = false;
+                    networkTestToolStripMenuItem.Enabled = false;
+                    requestOptionsFromServerToolStripMenuItem.Enabled = false;
+                    // downloadMembersFromServerToolStripMenuItem.Enabled = false;
+                    
+                }
+
+                lblServerStatus.Text = serverStatusText.ToString();
+            });
+        }
+        public void addToNetworkLog(string item)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                txtNetworkLog.AppendText(item);
+            });
+        }
+
+
+        private void HandleConnectionClosed(Connection connection)
+        {
+            if (ThisMachineIsClient && !formIsClosing)
+            {
+                DateTime today = DateTime.Now;
+                tmrNetwork.Enabled = false;
+
+                addToNetworkLog(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " - handling a closed connection" + "\r\n");
+                if (!lostConnectionShowing && !initialConnectionTest)
+                {
+                    lostConnectionShowing = true;
+                    DialogResult dr = MessageBox.Show("You have lost your connection to the server.  Would you like to try to reconnect?", "Connection Lost", MessageBoxButtons.YesNo);
+
+                    if (dr == DialogResult.Yes)
+                    {
+                        RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, encryptionKey);
+                        if (!NetworkComms.DefaultSendReceiveOptions.DataProcessors.Contains(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()))
+                        {
+                            NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
+                        }
+                        initialConnectionTest = false;
+                        silentNetworkTest = false;
+                        lostConnectionShowing = false;
+                        sendTestConnection();
+                    }
+                    else
+                    {
+                        ThisMachineIsClient = false;
+                        ThisMachineIsServer = false;
+                        ThisMachineStandAlone = true;
+                        lostConnectionShowing = false;
+                        setServerStatusDisplay();
+                    }
+                }
+            }
+        }
+        private void tmrNetwork_Tick(object sender, EventArgs e)
+        {
+            if (initialConnectionTest)
+            {
+                lblNetworkSyncStatus.Text = "FAILED - could not make a connection.  Please verify the IP and port and try again.";
+                lblNetworkShareMoreInfoMsg.Text = "If it still isn't working, please investigate any firewalls that may be blocking the connection.";
+                lblNetworkShareMoreInfoMsg.Visible = true;
+                btnNetworkSyncDone.Visible = true;
+                btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
+                ThisMachineIsClient = false;
+                ThisMachineIsServer = false;
+                ThisMachineStandAlone = true;
+                lostConnectionShowing = false;
+                setServerStatusDisplay();
+            }
+        }
+
+
+        public void sendTestConnection(string ip = null, string port = null)
+        {
+            NetworkTestGuidValue = Guid.NewGuid();
+            silentNetworkTest = false;
+            pnlNetworkSyncInProgress.Visible = true;
+            pnlNetworkSyncInProgress.BringToFront();
+            btnNetworkSyncDone.Visible = false;
+            btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
+            /*
+            pnlNetworkSyncInProgress.Location = new Point(0, 0);
+            pnlNetworkSyncInProgress.Height = this.Height;
+            pnlNetworkSyncInProgress.Width = this.Width;
+            */
+
+
+            pnlNetworkSyncInProgress.Dock = DockStyle.Fill;
+            pnlNetworkSyncInProgress.BringToFront();
+            lblNetworkSyncStatus.Text = "Beginning Network Status Check";
+            lblNetworkShareMoreInfoMsg.Visible = false;
+            pbNetworkSyncInProgress.Value = 1;
+            Program.networkService.sendTestConnection(CurrentIncident.TaskID, ip, port);
+
+            if (initialConnectionTest)
+            {
+                tmrNetwork.Enabled = true;
+            }
+        }
+
+
+
+
+        private void replyToTestConnection(NetworkSendObject incomingMessage)
+        {
+            if (ThisMachineIsServer)
+            {
+                //MessageBox.Show("Test connection from " + incomingMessage.SourceIdentifier + " received, sending reply");
+                Program.networkService.SendNetworkObject(incomingMessage.GuidValue, CurrentIncident.TaskID, "success");
+            }
+        }
+
+        private void receiveTestConnectionResult(NetworkSendObject incomingMessage)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+
+
+                if (incomingMessage.GuidValue == NetworkTestGuidValue && NetworkTestGuidValue != Guid.Empty)
+                {
+                    if (initialConnectionTest)
+                    {
+                        tmrNetwork.Enabled = false;
+                    }
+
+                    lblNetworkSyncStatus.Text = "Network Satus Check Successful, Requesting Task";
+                    lblNetworkShareMoreInfoMsg.Text = "Someone on the main computer may need to press \"Yes\" to share the task. If this takes too long, go ask them.";
+                    lblNetworkShareMoreInfoMsg.Visible = true;
+                    pbNetworkSyncInProgress.Value = 2;
+
+                    if (!silentNetworkTest && !initialConnectionTest) { MessageBox.Show("Connected successfully to host"); }
+                    else if (initialConnectionTest)
+                    {
+                        //if (MessageBox.Show("Connected successfully!\r\n\r\nWould you like to download the current task from the server? This will replace whatever you have open now.", "Download server task?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        // {
+                        networkTaskRequested = true;
+                        NetworkSARTaskRequest request = new NetworkSARTaskRequest();
+                        request.RequestDate = DateTime.Now;
+                        request.SourceName = HostInfo.HostName;
+                        request.SourceIdentifier = NetworkComms.NetworkIdentifier;
+                        request.RequestIP = Program.networkService.GetLocalIPAddress();
+                        SendNetworkSarTaskRequest(request);
+
+                        //  }
+                        /*
+                          else
+                          {
+                              MessageBox.Show("You can request the current server task from the Network menu later.");
+                          }*/
+                    }
+                    silentNetworkTest = true;
+                    NetworkTestGuidValue = Guid.Empty;
+                    initialConnectionTest = false;
+                }
+            });
+        }
+
+        private void networkTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCloseNetworkSyncInProgress_Click(object sender, EventArgs e)
+        {
+            pnlNetworkSyncInProgress.Visible = false;
+            ThisMachineIsClient = false;
+            ThisMachineIsServer = false;
+            ThisMachineStandAlone = true;
+            lostConnectionShowing = false;
+            setServerStatusDisplay();
+        }
+
+        private void btnNetworkSyncDone_Click(object sender, EventArgs e)
+        {
+            pnlNetworkSyncInProgress.Visible = false;
 
         }
     }

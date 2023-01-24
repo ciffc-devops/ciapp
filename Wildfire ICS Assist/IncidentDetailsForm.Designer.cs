@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -121,6 +121,7 @@
             this.templatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentObjectivesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.safetyNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamAssignmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.iAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentActionPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentObjectivesICS202ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -211,7 +212,7 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
-            this.teamAssignmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.networkTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -293,9 +294,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle8.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -736,6 +737,7 @@
             resources.ApplyResources(this.btnNetworkSyncDone, "btnNetworkSyncDone");
             this.btnNetworkSyncDone.Name = "btnNetworkSyncDone";
             this.btnNetworkSyncDone.UseVisualStyleBackColor = true;
+            this.btnNetworkSyncDone.Click += new System.EventHandler(this.btnNetworkSyncDone_Click);
             // 
             // pbNetworkSyncInProgress
             // 
@@ -749,6 +751,7 @@
             resources.ApplyResources(this.btnCloseNetworkSyncInProgress, "btnCloseNetworkSyncInProgress");
             this.btnCloseNetworkSyncInProgress.Name = "btnCloseNetworkSyncInProgress";
             this.btnCloseNetworkSyncInProgress.UseVisualStyleBackColor = true;
+            this.btnCloseNetworkSyncInProgress.Click += new System.EventHandler(this.btnCloseNetworkSyncInProgress_Click);
             // 
             // lblNetworkSyncStatus
             // 
@@ -940,6 +943,12 @@
             this.safetyNotesToolStripMenuItem.Name = "safetyNotesToolStripMenuItem";
             resources.ApplyResources(this.safetyNotesToolStripMenuItem, "safetyNotesToolStripMenuItem");
             this.safetyNotesToolStripMenuItem.Click += new System.EventHandler(this.safetyNotesToolStripMenuItem_Click);
+            // 
+            // teamAssignmentsToolStripMenuItem1
+            // 
+            this.teamAssignmentsToolStripMenuItem1.Name = "teamAssignmentsToolStripMenuItem1";
+            resources.ApplyResources(this.teamAssignmentsToolStripMenuItem1, "teamAssignmentsToolStripMenuItem1");
+            this.teamAssignmentsToolStripMenuItem1.Click += new System.EventHandler(this.teamAssignmentsToolStripMenuItem1_Click);
             // 
             // iAPToolStripMenuItem
             // 
@@ -1194,7 +1203,8 @@
             this.toolStripSeparator11,
             this.internetSyncToolStripMenuItem,
             this.toolStripSeparator12,
-            this.requestOptionsFromServerToolStripMenuItem});
+            this.requestOptionsFromServerToolStripMenuItem,
+            this.networkTestToolStripMenuItem});
             this.networkInternetToolStripMenuItem.Name = "networkInternetToolStripMenuItem";
             resources.ApplyResources(this.networkInternetToolStripMenuItem, "networkInternetToolStripMenuItem");
             // 
@@ -1287,18 +1297,22 @@
             // tmrAutoSave
             // 
             this.tmrAutoSave.Interval = 60000;
+            this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
             // 
             // tmrPositionLogReminders
             // 
             this.tmrPositionLogReminders.Interval = 60000;
+            this.tmrPositionLogReminders.Tick += new System.EventHandler(this.tmrPositionLogReminders_Tick);
             // 
             // tmrInternetSync
             // 
             this.tmrInternetSync.Interval = 2000;
+            this.tmrInternetSync.Tick += new System.EventHandler(this.tmrInternetSync_Tick);
             // 
             // tmrNetwork
             // 
             this.tmrNetwork.Interval = 10000;
+            this.tmrNetwork.Tick += new System.EventHandler(this.tmrNetwork_Tick);
             // 
             // cpPlanning
             // 
@@ -1552,11 +1566,11 @@
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
             // 
-            // teamAssignmentsToolStripMenuItem1
+            // networkTestToolStripMenuItem
             // 
-            this.teamAssignmentsToolStripMenuItem1.Name = "teamAssignmentsToolStripMenuItem1";
-            resources.ApplyResources(this.teamAssignmentsToolStripMenuItem1, "teamAssignmentsToolStripMenuItem1");
-            this.teamAssignmentsToolStripMenuItem1.Click += new System.EventHandler(this.teamAssignmentsToolStripMenuItem1_Click);
+            this.networkTestToolStripMenuItem.Name = "networkTestToolStripMenuItem";
+            resources.ApplyResources(this.networkTestToolStripMenuItem, "networkTestToolStripMenuItem");
+            this.networkTestToolStripMenuItem.Click += new System.EventHandler(this.networkTestToolStripMenuItem_Click);
             // 
             // IncidentDetailsForm
             // 
@@ -1799,6 +1813,7 @@
         private System.Windows.Forms.ToolStripMenuItem airOperationsSummaryICS220ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamAssignmentsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem networkTestToolStripMenuItem;
     }
 }
 
