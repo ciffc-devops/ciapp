@@ -760,11 +760,16 @@ namespace WildfireICSDesktopServices
                         bool Has204 = false;
                         bool Has205 = task.hasMeangfulCommsPlan(currentSheet.OpPeriod);
                         bool Has206 = task.hasMeaningfulMedicalPlan(currentSheet.OpPeriod);
+                        bool Has208 = task.hasAnySafetyMessages(currentSheet.OpPeriod);
+                        bool Has220 = task.hasMeaningfulAirOps(currentSheet.OpPeriod);
 
                         if (Has203) { PDFExtraTools.SetPDFCheckbox(stamper, "CBOrgList"); }
-                        if (Has204) { PDFExtraTools.SetPDFCheckbox(stamper, "Check Box2"); }
+                        if (Has204) { PDFExtraTools.SetPDFCheckbox(stamper, "CBAssignmentList"); }
                         if (Has205) { PDFExtraTools.SetPDFCheckbox(stamper, "CBComms"); }
-                        if (Has206) { PDFExtraTools.SetPDFCheckbox(stamper, "Check Box2"); }
+                        if (Has206) { PDFExtraTools.SetPDFCheckbox(stamper, "CBMedicalPlan"); }
+                        if (Has203) { PDFExtraTools.SetPDFCheckbox(stamper, "CBOrgChart"); }
+                        if (Has208) { PDFExtraTools.SetPDFCheckbox(stamper, "CBSafetyPlan"); }
+                        if (Has220) { PDFExtraTools.SetPDFCheckbox(stamper, "CBAirOps"); }
 
                     }
 
