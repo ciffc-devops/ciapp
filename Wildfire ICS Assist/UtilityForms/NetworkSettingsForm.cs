@@ -187,6 +187,7 @@ namespace Wildfire_ICS_Assist
 
         private void SetIPAsNeeded()
         {
+
             List<string> allIPs = Program.networkService.GetAllIPs(false);
             if (allIPs.Count == 0)
             {
@@ -201,14 +202,17 @@ namespace Wildfire_ICS_Assist
             }
             else if (allIPs.Count > 1)
             {
-
-
-                using (NetworkSelectIPForm selectIPForm = new NetworkSelectIPForm())
+                string LastIP = Program.generalOptionsService.GetStringOptionValue("LastIpUsedWhenMachineIsServer");
+                if (allIPs.Contains(LastIP)) { tempServerIP = LastIP; }
+                else
                 {
-                    selectIPForm.ipAddresses = allIPs;
-                    DialogResult dr = selectIPForm.ShowDialog();
-                    tempServerIP = selectIPForm.SelectedAddress;
-                    Program.generalOptionsService.UpserOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
+                    using (NetworkSelectIPForm selectIPForm = new NetworkSelectIPForm())
+                    {
+                        selectIPForm.ipAddresses = allIPs;
+                        DialogResult dr = selectIPForm.ShowDialog();
+                        tempServerIP = selectIPForm.SelectedAddress;
+                        Program.generalOptionsService.UpserOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
+                    }
                 }
             }
         }

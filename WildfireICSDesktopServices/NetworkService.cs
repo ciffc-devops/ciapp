@@ -460,9 +460,10 @@ namespace WildfireICSDesktopServices
                    
                   
                     case TaskUpdate taskUpdate:
-                        networkSendObject.taskUpdate.Source = "Network";
                         networkSendObject.taskUpdate = taskUpdate.Clone();
                         networkSendObject.taskUpdate.ProcessedLocally = false;
+                        networkSendObject.taskUpdate.Source = "Network";
+
                         break;
                     case null:
                         break;

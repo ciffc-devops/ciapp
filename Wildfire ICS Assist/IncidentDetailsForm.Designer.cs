@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -167,6 +167,7 @@
             this.internetSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.requestOptionsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.networkTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForTemplateUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForAppUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -212,7 +213,6 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
-            this.networkTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -294,9 +294,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle8.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle8.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1212,6 +1212,7 @@
             // 
             this.localNetworkSharingSyncToolStripMenuItem.Name = "localNetworkSharingSyncToolStripMenuItem";
             resources.ApplyResources(this.localNetworkSharingSyncToolStripMenuItem, "localNetworkSharingSyncToolStripMenuItem");
+            this.localNetworkSharingSyncToolStripMenuItem.Click += new System.EventHandler(this.localNetworkSharingSyncToolStripMenuItem_Click);
             // 
             // requestIncidentFromServerToolStripMenuItem
             // 
@@ -1237,6 +1238,12 @@
             // 
             this.requestOptionsFromServerToolStripMenuItem.Name = "requestOptionsFromServerToolStripMenuItem";
             resources.ApplyResources(this.requestOptionsFromServerToolStripMenuItem, "requestOptionsFromServerToolStripMenuItem");
+            // 
+            // networkTestToolStripMenuItem
+            // 
+            this.networkTestToolStripMenuItem.Name = "networkTestToolStripMenuItem";
+            resources.ApplyResources(this.networkTestToolStripMenuItem, "networkTestToolStripMenuItem");
+            this.networkTestToolStripMenuItem.Click += new System.EventHandler(this.networkTestToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1565,12 +1572,6 @@
             resources.ApplyResources(this.btnCommsLog, "btnCommsLog");
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
-            // 
-            // networkTestToolStripMenuItem
-            // 
-            this.networkTestToolStripMenuItem.Name = "networkTestToolStripMenuItem";
-            resources.ApplyResources(this.networkTestToolStripMenuItem, "networkTestToolStripMenuItem");
-            this.networkTestToolStripMenuItem.Click += new System.EventHandler(this.networkTestToolStripMenuItem_Click);
             // 
             // IncidentDetailsForm
             // 

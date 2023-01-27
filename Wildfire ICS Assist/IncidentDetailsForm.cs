@@ -30,6 +30,7 @@ using NetworkCommsDotNet.Connections;
 using NetworkCommsDotNet.DPSBase;
 using Wildfire_ICS_Assist.Properties;
 
+
 namespace Wildfire_ICS_Assist
 {
     public partial class IncidentDetailsForm : Form
@@ -234,6 +235,7 @@ namespace Wildfire_ICS_Assist
             Program.networkService.localNetworkClosedEvent += Program_LocalConnectionClosed;
             Program.networkService.localNetworkIncomingIncidentEvent += replaceCurrentIncidentWithNetworkIncident;
             Program.networkService.localNetworkIncomingObjectEvent += Program_HandleIncomingNetworkObject;
+            Program.wfIncidentService.TaskUpdateChanged += Program_TaskUpdateChanged;
         }
 
 
@@ -1994,6 +1996,28 @@ namespace Wildfire_ICS_Assist
 
         }
 
+
+        private async void Program_TaskUpdateChanged(TaskUpdateEventArgs e)
+        {
+            Program.wfIncidentService.ProcessTaskUpdate(e.item);
+            if (Program.InternetSyncEnabled && !e.item.UploadedSuccessfully)
+            {
+                
+                e.item.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(e.item);
+               
+            }
+            if (Program.networkService.ThisMachineIsServer || Program.networkService.ThisMachineIsClient)
+            {
+                if (!e.item.Source.EqualsWithNull("Network"))
+                {
+                    Program.networkService.SendNetworkObject(e.item, CurrentIncident.TaskID);
+                }
+            
+            }
+        }
+
+
+
         private async void tmrInternetSync_Tick(object sender, EventArgs e)
         {
             if (PingTool.TestPing())
@@ -2448,6 +2472,24 @@ namespace Wildfire_ICS_Assist
                 });
             }
 
+        }
+
+        private void localNetworkSharingSyncToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (NetworkSettingsForm settings = new NetworkSettingsForm())
+            {
+                if (settings.ShowDialog(this) == DialogResult.OK)
+                {
+                    if (ThisMachineIsClient)
+                    {
+                        initialConnectionTest = true;
+                        silentNetworkTest = false;
+                        sendTestConnection();
+                    }
+
+                    setServerStatusDisplay();
+                }
+            }
         }
     }
 }

@@ -64,6 +64,8 @@ namespace WildfireICSDesktopServices
 
         }
 
+       
+
         public TaskUpdate UpsertTaskUpdate(object obj, string command, bool processed_locally, bool uploaded)
         {
             TaskUpdate update = new TaskUpdate();
@@ -417,6 +419,7 @@ namespace WildfireICSDesktopServices
         */
 
 
+    
         protected virtual void OnWFIncidentChanged(WFIncidentEventArgs e)
         {
             WFIncidentEventHandler handler = this.WfIncidentChanged;
