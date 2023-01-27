@@ -13,74 +13,7 @@ using System.Text.Json.Serialization;
 namespace WF_ICS_ClassLibrary.Models
 {
     [Serializable]
-    [ProtoContract,
-      // ProtoInclude(101, typeof(Assignment)),
-      // ProtoInclude(102, typeof(AssignmentDebrief)),
-       ProtoInclude(103, typeof(Briefing)),
-      // ProtoInclude(104, typeof(Clue)),
-       ProtoInclude(105, typeof(CommsLogEntry)),
-       ProtoInclude(106, typeof(CommsPlan)),
-       ProtoInclude(107, typeof(CommsPlanItem)),
-       ProtoInclude(109, typeof(Contact)),
-       //ProtoInclude(110, typeof(TaskEquipment)),
-       //ProtoInclude(111, typeof(EquipmentIssue)),
-       ProtoInclude(112, typeof(IncidentObjective)),
-       //ProtoInclude(113, typeof(MattsonEvaluation)),
-       //ProtoInclude(114, typeof(MattsonScore)),
-       //ProtoInclude(115, typeof(MapSegment)),
-       ProtoInclude(116, typeof(MedicalPlan)),
-       ProtoInclude(117, typeof(TeamMember)),
-       ProtoInclude(118, typeof(MemberStatus)),
-       ProtoInclude(119, typeof(SignInRecord)),
-       ProtoInclude(120, typeof(Note)),
-       ProtoInclude(121, typeof(OperationalPeriod)),
-       ProtoInclude(122, typeof(OrganizationChart)),
-       ProtoInclude(123, typeof(ICSRole)),
-       ProtoInclude(124, typeof(PositionLogEntry)),
-       ProtoInclude(125, typeof(SafetyPlan)),
-       //ProtoInclude(126, typeof(ShiftBriefing)),
-       //ProtoInclude(127, typeof(SubjectProfile)),
-       ProtoInclude(128, typeof(TaskBasics)),
-       ProtoInclude(129, typeof(Timeline)),
-       ProtoInclude(130, typeof(TimelineEvent)),
-       //ProtoInclude(131, typeof(UrgencyCalculation)),
-       ProtoInclude(132, typeof(Vehicle)),
-       //ProtoInclude(133, typeof(WhiteboardItem))
-       ]
-
-
-  //[XmlInclude(typeof(Assignment))]
-    //[XmlInclude(typeof(AssignmentDebrief))]
-    [XmlInclude(typeof(Briefing))]
-    //[XmlInclude(typeof(Clue))]
-    [XmlInclude(typeof(CommsLogEntry))]
-    [XmlInclude(typeof(CommsPlan))]
-    [XmlInclude(typeof(CommsPlanItem))]
-    [XmlInclude(typeof(Contact))]
-   // [XmlInclude(typeof(TaskEquipment))]
-   // [XmlInclude(typeof(EquipmentIssue))]
-    [XmlInclude(typeof(IncidentObjective))]
-   // [XmlInclude(typeof(MattsonEvaluation))]
-   // [XmlInclude(typeof(MattsonScore))]
-   // [XmlInclude(typeof(MapSegment))]
-    [XmlInclude(typeof(MedicalPlan))]
-    [XmlInclude(typeof(TeamMember))]
-    [XmlInclude(typeof(MemberStatus))]
-    [XmlInclude(typeof(SignInRecord))]
-    [XmlInclude(typeof(Note))]
-    [XmlInclude(typeof(OperationalPeriod))]
-    [XmlInclude(typeof(OrganizationChart))]
-    [XmlInclude(typeof(ICSRole))]
-    [XmlInclude(typeof(PositionLogEntry))]
-    [XmlInclude(typeof(SafetyPlan))]
-  //  [XmlInclude(typeof(ShiftBriefing))]
-   // [XmlInclude(typeof(SubjectProfile))]
-    [XmlInclude(typeof(TaskBasics))]
-    [XmlInclude(typeof(Timeline))]
-    [XmlInclude(typeof(TimelineEvent))]
-   // [XmlInclude(typeof(UrgencyCalculation))]
-    [XmlInclude(typeof(Vehicle))]
-  //  [XmlInclude(typeof(WhiteboardItem))]
+    [ProtoContract]
 
     public class TaskUpdate : ICloneable
     {
