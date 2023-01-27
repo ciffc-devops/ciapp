@@ -175,11 +175,5 @@
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\OneDrive\Documents\GitHub\NetworkComms.Net\ProtobufSerializer\ProtobufSerializer.csproj">
-      <Project>{f27e4076-1ddc-485f-9a75-915a74d7958d}</Project>
-      <Name>ProtobufSerializer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
