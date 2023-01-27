@@ -71,7 +71,6 @@ namespace WildfireICSDesktopServices
         Dictionary<ShortGuid, NetworkSARTaskRequest> lastPeerNetworkSarTaskRequestDict = new Dictionary<ShortGuid, NetworkSARTaskRequest>();
         Dictionary<ShortGuid, NetworkOptionsRequest> lastPeerNetworkOptionsRequestDict = new Dictionary<ShortGuid, NetworkOptionsRequest>();
         //Dictionary<ShortGuid, NetworkMemberRequest> lastPeerNetworkMemberRequestDict = new Dictionary<ShortGuid, NetworkMemberRequest>();
-        Dictionary<ShortGuid, NetworkDeleteOrder> lastPeerNetworkDeleteOrderDict = new Dictionary<ShortGuid, NetworkDeleteOrder>();
 
 
         public void SetUpEvents()
@@ -717,48 +716,7 @@ namespace WildfireICSDesktopServices
             return result;
         }
 
-        public List<string> SendNetworkDeleteOrder(NetworkDeleteOrder order)
-        {
-            List<string> errors = new List<string>();
-
-            //We may or may not have entered some server connection information
-            ConnectionInfo serverConnectionInfo = null;
-            if (ServerIP != "")
-            {
-                try { serverConnectionInfo = new ConnectionInfo(ServerIP, ServerPort); }
-                catch (Exception)
-                {
-                    errors.Add("Failed to parse the server IP and port. Please ensure it is correct and try again");
-                }
-            }
-
-            //If we provided server information we send to the server first
-            if (serverConnectionInfo != null)
-            {
-                //We perform the send within a try catch to ensure the application continues to run if there is a problem.
-                try
-                {
-                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("NetworkDeleteOrder", order);
-                    DateTime today = DateTime.Now;
-                    //errors.Add(string.Format("{0:HH:mm:ss}", today) + " - sent delete order for" + order.objectType + "\r\n");
-                }
-                catch (CommsException) { errors.Add("A CommsException occurred while trying to send a delete message to " + serverConnectionInfo); }
-            }
-
-            //If we have any other connections we now send the message to those as well
-            //This ensures that if we are the server everyone who is connected to us gets our message
-            var otherConnectionInfos = (from current in NetworkComms.AllConnectionInfo() where current != serverConnectionInfo select current).ToArray();
-            foreach (ConnectionInfo info in otherConnectionInfos)
-            {
-                //We perform the send within a try catch to ensure the application continues to run if there is a problem.
-                try { TCPConnection.GetConnection(info).SendObject("NetworkDeleteOrder", order); }
-                catch (CommsException) { errors.Add("A CommsException occurred while trying to send message to " + info); }
-                catch (Exception ex) { errors.Add("A CommsException occurred while trying to send a delete message to " + ex.ToString()); }
-            }
-
-            return errors;
-
-        }
+     
 
         protected virtual void OnLocalNetworkClosed(Connection connection)
         {
