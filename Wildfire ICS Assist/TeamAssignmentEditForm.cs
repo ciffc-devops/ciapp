@@ -69,7 +69,7 @@ namespace Wildfire_ICS_Assist
         {
             OpsRoles.Clear();
             
-            OpsRoles.Add(Program.CurrentOrgChart.AllRoles.FirstOrDefault(o => o.RoleID == WF_ICS_ClassLibrary.Globals.OpsChiefID));
+            OpsRoles.Add(Program.CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == WF_ICS_ClassLibrary.Globals.OpsChiefID));
             OpsRoles.AddRange(Program.CurrentOrgChart.GetChildRoles(Globals.OpsChiefID, true, true));
             cboReportsTo.DataSource = OpsRoles;
             cboReportsTo.DisplayMember = "RoleNameForDropdown";

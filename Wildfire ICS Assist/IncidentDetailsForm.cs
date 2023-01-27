@@ -28,6 +28,7 @@ using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 using NetworkCommsDotNet.Connections;
 using NetworkCommsDotNet.DPSBase;
+using Wildfire_ICS_Assist.Properties;
 
 namespace Wildfire_ICS_Assist
 {
@@ -70,25 +71,61 @@ namespace Wildfire_ICS_Assist
             //Default status for networking
             if (Program.generalOptionsService.GetOptionsBoolValue("DefaultToNetworkServer"))
             {
-                using (NetworkSettingsForm settings = new NetworkSettingsForm())
-                {
-                    int defaultPortNumber = 42999;
-                    if(Program.generalOptionsService.GetOptionsValue("DefaultPort") != null) { defaultPortNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("DefaultPort")); }
-                    settings.parent = this;
-                    bool firewallEnabled = Program.networkService.GetIsFirewallEnabled();
-                    bool portAvailable = Program.networkService.GetIsPortAvailable(defaultPortNumber);
-                    if (firewallEnabled && !portAvailable)
-                    {
-                        MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
-                    }
-                    else if (settings.startAsServer(defaultPortNumber, true))
-                    {
 
-                    }
-                }
+                StartAsServer();
+              
             }
             setServerStatusDisplay();
 
+        }
+
+        private void StartAsServer()
+        {
+            int defaultPortNumber = 42999;
+            if (Program.generalOptionsService.GetOptionsValue("DefaultPort") != null) { defaultPortNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("DefaultPort")); }
+
+            string tempServerIP = null;
+
+            List<string> allIPs = Program.networkService.GetAllIPs(false);
+            if (allIPs.Count == 0)
+            {
+                //no dnsable ips were found, broaden the search
+                allIPs = Program.networkService.GetAllIPs(true);
+            }
+
+
+            if (allIPs.Count == 1)
+            {
+                tempServerIP = allIPs[0];
+            }
+            else if (allIPs.Count > 1)
+            {
+
+
+                using (NetworkSelectIPForm selectIPForm = new NetworkSelectIPForm())
+                {
+                    selectIPForm.ipAddresses = allIPs;
+                    DialogResult dr = selectIPForm.ShowDialog();
+                    tempServerIP = selectIPForm.SelectedAddress;
+                    Program.generalOptionsService.UpserOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
+                }
+            }
+
+            bool firewallEnabled = Program.networkService.GetIsFirewallEnabled();
+            bool portAvailable = Program.networkService.GetIsPortAvailable(defaultPortNumber);
+            if (firewallEnabled && !portAvailable)
+            {
+                MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
+            }
+            else if (Program.networkService.StartAsServer(defaultPortNumber, tempServerIP))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
+
+            }
         }
 
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
@@ -149,6 +186,8 @@ namespace Wildfire_ICS_Assist
         PositionLogReminderForm _positionLogReminderForm = null;
 
 
+        
+
         public event ShortcutEventHandler ShortcutButtonClicked;
 
 
@@ -188,6 +227,13 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.TaskBasicsChanged += Program_TaskBasicsChanged;
             Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
             Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
+
+
+            //network stuff
+            Program.networkService.localNetworkIncidentRequestEvent += answerRequestForNetworkSARTask;
+            Program.networkService.localNetworkClosedEvent += Program_LocalConnectionClosed;
+            Program.networkService.localNetworkIncomingIncidentEvent += replaceCurrentIncidentWithNetworkIncident;
+            Program.networkService.localNetworkIncomingObjectEvent += Program_HandleIncomingNetworkObject;
         }
 
 
@@ -543,10 +589,10 @@ namespace Wildfire_ICS_Assist
             ICSRole role = Program.CurrentRole.Clone();
 
             cboICSRole.DataSource = null;
-            cboICSRole.DataSource = CurrentOrgChart.AllRoles;
+            cboICSRole.DataSource = CurrentOrgChart.ActiveRoles;
             cboICSRole.DisplayMember = "RoleNameForDropdown";
             cboICSRole.ValueMember = "RoleID";
-            if (role != null && CurrentOrgChart.AllRoles.Any(o=>o.RoleID == role.RoleID)) { cboICSRole.SelectedValue = role.RoleID; }
+            if (role != null && CurrentOrgChart.ActiveRoles.Any(o=>o.RoleID == role.RoleID)) { cboICSRole.SelectedValue = role.RoleID; }
 
         }
 
@@ -561,7 +607,7 @@ namespace Wildfire_ICS_Assist
             else { txtICPCallsign.Text = "BASE"; CurrentIncident.ICPCallSign = txtICPCallsign.Text; }
             txtTaskName.Text = CurrentIncident.TaskName;
             txtTaskNumber.Text = CurrentIncident.TaskNumber;
-            if (CurrentOrgChart.AllRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID))
+            if (CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID))
             {
                 cboICSRole.SelectedValue = Program.CurrentRole.RoleID; DisplayCurrentICSRole();
             } else { cboICSRole.SelectedIndex = 0; }
@@ -590,7 +636,7 @@ namespace Wildfire_ICS_Assist
                 ICRoles.Add(Globals.IncidentCommanderID); ICRoles.Add(Globals.DeputyIncidentCommanderID); ICRoles.Add(Globals.UnifiedCommand1ID); ICRoles.Add(Globals.UnifiedCommand2ID); ICRoles.Add(Globals.UnifiedCommand3ID);
 
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                foreach(ICSRole role in CurrentOrgChart.AllRoles.Where(o=>o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
+                foreach(ICSRole role in CurrentOrgChart.ActiveRoles.Where(o=>o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
                 {
                     CommandStaffRoles.Add(role.RoleID);
                 }
@@ -1966,6 +2012,7 @@ namespace Wildfire_ICS_Assist
             List<TaskUpdate> pendingUpdates = CurrentIncident.allTaskUpdates.Where(o => !o.UploadedSuccessfully).ToList();
             foreach (TaskUpdate update in pendingUpdates)
             {
+                
                 update.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(update);
 
                 addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Uploaded a pending change to a(n) " + update.ObjectType + Environment.NewLine);
@@ -1984,6 +2031,7 @@ namespace Wildfire_ICS_Assist
             foreach (TaskUpdate update in updates)
             {
                 update.UploadedSuccessfully = true;
+                update.Source = "Internet";
                 //Program.sarTaskService.ProcessTaskUpdate(update);
                 Program.wfIncidentService.InsertIfUniqueTaskUpdate(update);
 
@@ -1995,6 +2043,10 @@ namespace Wildfire_ICS_Assist
                 TaskUpdate firstUnprocessed = CurrentIncident.allTaskUpdates.First(o => !o.ProcessedLocally);
                 addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Received a change to a(n) " + firstUnprocessed.ObjectType + Environment.NewLine);
                 Program.wfIncidentService.ApplyTaskUpdate(firstUnprocessed, true);
+                if(Program.networkService.ThisMachineIsClient || Program.networkService.ThisMachineIsServer)
+                {
+                    Program.networkService.SendNetworkObject(firstUnprocessed,CurrentIncident.TaskID, null, null, null, true);
+                }
             }
 
 
@@ -2056,42 +2108,7 @@ namespace Wildfire_ICS_Assist
         }
 
 
-        private void HandleConnectionClosed(Connection connection)
-        {
-            if (ThisMachineIsClient && !formIsClosing)
-            {
-                DateTime today = DateTime.Now;
-                tmrNetwork.Enabled = false;
-
-                addToNetworkLog(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " - handling a closed connection" + "\r\n");
-                if (!lostConnectionShowing && !initialConnectionTest)
-                {
-                    lostConnectionShowing = true;
-                    DialogResult dr = MessageBox.Show("You have lost your connection to the server.  Would you like to try to reconnect?", "Connection Lost", MessageBoxButtons.YesNo);
-
-                    if (dr == DialogResult.Yes)
-                    {
-                        RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, encryptionKey);
-                        if (!NetworkComms.DefaultSendReceiveOptions.DataProcessors.Contains(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()))
-                        {
-                            NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
-                        }
-                        initialConnectionTest = false;
-                        silentNetworkTest = false;
-                        lostConnectionShowing = false;
-                        sendTestConnection();
-                    }
-                    else
-                    {
-                        ThisMachineIsClient = false;
-                        ThisMachineIsServer = false;
-                        ThisMachineStandAlone = true;
-                        lostConnectionShowing = false;
-                        setServerStatusDisplay();
-                    }
-                }
-            }
-        }
+      
         private void tmrNetwork_Tick(object sender, EventArgs e)
         {
             if (initialConnectionTest)
@@ -2150,6 +2167,86 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+      
+
+        private void networkTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCloseNetworkSyncInProgress_Click(object sender, EventArgs e)
+        {
+            pnlNetworkSyncInProgress.Visible = false;
+            ThisMachineIsClient = false;
+            ThisMachineIsServer = false;
+            ThisMachineStandAlone = true;
+            lostConnectionShowing = false;
+            setServerStatusDisplay();
+        }
+
+        private void btnNetworkSyncDone_Click(object sender, EventArgs e)
+        {
+            pnlNetworkSyncInProgress.Visible = false;
+
+        }
+
+        private void Program_HandleIncomingNetworkObject(NetworkSendObject incomingMessage)
+        {
+            if (incomingMessage.objectType == new TaskUpdate().GetType().ToString() )
+            {
+                Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
+            }
+
+            else if (incomingMessage.objectType == new GeneralOptions().GetType().ToString())
+            {
+                replaceOptionsFromNetwork(incomingMessage.generalOptions);
+            }
+            else if (incomingMessage.objectType == Guid.Empty.GetType().ToString())
+            {
+                if (incomingMessage.comment == "test" && ThisMachineIsServer)
+                {
+                    replyToTestConnection(incomingMessage);
+                }
+                else if (incomingMessage.comment == "success" && NetworkTestGuidValue != Guid.Empty)
+                {
+                 receiveTestConnectionResult(incomingMessage);
+                }
+            }
+        }
+
+        private void replaceOptionsFromNetwork(GeneralOptions options)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                if (networkOptionsRequested)
+                {
+                    networkOptionsRequested = false;
+                    GeneralOptions currentOptions = Program.generalOptionsService.GetGeneralOptions();
+                    string baseFileName = "myCIAPPOptions" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm");
+                    int i = 0;
+                    string backupFileName = baseFileName + ".xml";
+                    string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPPO");
+                    while (File.Exists(Path.Combine(path, backupFileName)))
+                    {
+                        i += 1;
+                        backupFileName = baseFileName + " (" + i + ").xml";
+                    }
+
+                    Program.generalOptionsService.SaveGeneralOptions(currentOptions, backupFileName);
+                    //maintain some of the options from the current system.
+                    options.DefaultToServer = false;
+                    options.LastServerIP = currentOptions.LastServerIP;
+                    options.RecentFilePaths = currentOptions.RecentFilePaths;
+                    options.DefaultSaveLocation = currentOptions.DefaultSaveLocation;
+                    options.DefaultICSRole = currentOptions.DefaultICSRole;
+
+                    Program.generalOptionsService.SaveGeneralOptions(options);
+                    MessageBox.Show("Your options have been replaced with the options from the server.  A backup copy of your previous options has been saved as " + backupFileName);
+
+                }
+            });
+        }
+
         private void receiveTestConnectionResult(NetworkSendObject incomingMessage)
         {
             this.BeginInvoke((Action)delegate ()
@@ -2179,7 +2276,7 @@ namespace Wildfire_ICS_Assist
                         request.SourceName = HostInfo.HostName;
                         request.SourceIdentifier = NetworkComms.NetworkIdentifier;
                         request.RequestIP = Program.networkService.GetLocalIPAddress();
-                        SendNetworkSarTaskRequest(request);
+                        Program.networkService.SendNetworkSarTaskRequest(request);
 
                         //  }
                         /*
@@ -2195,24 +2292,161 @@ namespace Wildfire_ICS_Assist
             });
         }
 
-        private void networkTestToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Program_LocalConnectionClosed(Connection connection)
         {
+            if (ThisMachineIsClient && !formIsClosing)
+            {
+                DateTime today = DateTime.Now;
+                tmrNetwork.Enabled = false;
 
+                addToNetworkLog(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " - handling a closed connection" + "\r\n");
+                if (!lostConnectionShowing && !initialConnectionTest)
+                {
+                    lostConnectionShowing = true;
+                    DialogResult dr = MessageBox.Show("You have lost your connection to the server.  Would you like to try to reconnect?", "Connection Lost", MessageBoxButtons.YesNo);
+
+                    if (dr == DialogResult.Yes)
+                    {
+                        RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, encryptionKey);
+                        if (!NetworkComms.DefaultSendReceiveOptions.DataProcessors.Contains(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()))
+                        {
+                            NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
+                        }
+                        initialConnectionTest = false;
+                        silentNetworkTest = false;
+                        lostConnectionShowing = false;
+                        sendTestConnection();
+                    }
+                    else
+                    {
+                        ThisMachineIsClient = false;
+                        ThisMachineIsServer = false;
+                        ThisMachineStandAlone = true;
+                        lostConnectionShowing = false;
+                        setServerStatusDisplay();
+                    }
+                }
+            }
         }
 
-        private void btnCloseNetworkSyncInProgress_Click(object sender, EventArgs e)
+        private void replaceCurrentIncidentWithNetworkIncident(WFIncident task)
         {
-            pnlNetworkSyncInProgress.Visible = false;
-            ThisMachineIsClient = false;
-            ThisMachineIsServer = false;
-            ThisMachineStandAlone = true;
-            lostConnectionShowing = false;
-            setServerStatusDisplay();
+            if (networkTaskRequested)
+            {
+                this.BeginInvoke((Action)delegate ()
+                {
+                    PauseNetworkSend = true;
+
+                    lblNetworkSyncStatus.Text = "Incoming SAR Task Received, loading now";
+                    lblNetworkShareMoreInfoMsg.Visible = false;
+
+                    pbNetworkSyncInProgress.Value = 3;
+
+                    if (CurrentIncident.TaskID != task.TaskID)
+                    {
+                        task.FileName = string.Empty;
+                    }
+                    else
+                    {
+                        task.FileName = CurrentIncident.FileName;
+                    }
+                    CloseActiveForms();
+                    CurrentIncident = task;
+                    displayIncidentDetails(); 
+                    networkTaskRequested = false;
+                    DateTime today = DateTime.Now;
+                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received full sar task #" + task.TaskNumber + "\r\n");
+
+                    if (pnlNetworkSyncInProgress.Visible)
+                    {
+                        lblNetworkSyncStatus.Text = "SAR Task loaded successfully from the network!";
+                        pbNetworkSyncInProgress.Value = 4;
+
+                        btnNetworkSyncDone.Visible = true;
+                        btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
+                    }
+                    else { MessageBox.Show("Netowrk task downloaded successfully!"); }
+                    //pnlNetworkSyncInProgress.Visible = false;
+                    PauseNetworkSend = false;
+                    //MessageBox.Show("Task loaded from server");
+                });
+
+            }
         }
 
-        private void btnNetworkSyncDone_Click(object sender, EventArgs e)
+
+
+        private void answerRequestForNetworkSARTask(NetworkSARTaskRequest incomingMessage)
         {
-            pnlNetworkSyncInProgress.Visible = false;
+            if (ThisMachineIsServer)
+            {
+                this.BeginInvoke((Action)delegate ()
+                {
+                    //MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+
+
+                    DateTime today = DateTime.Now;
+                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received a request for the current sar task" + "\r\n");
+                    DeviceInformation requester = new DeviceInformation();
+                    requester.DeviceIP = incomingMessage.RequestIP;
+                    requester.DeviceName = incomingMessage.SourceName;
+                    List<DeviceInformation> savedNetworkDevices = (List<DeviceInformation>)Program.generalOptionsService.GetOptionsValue("SavedNetworkDeviceList");
+
+                    //if the device appears in the list of trusted devices, send automatically
+                    if (!string.IsNullOrEmpty(requester.DeviceIP) && !string.IsNullOrEmpty(requester.DeviceName) && savedNetworkDevices.Where(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && o.TrustDevice).Any())
+                    {
+                        
+                       Program.networkService.SendTaskData(CurrentIncident);
+                        today = DateTime.Now;
+                        addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current sar task to trusted device " + requester.DeviceIP + "\r\n");
+                    }
+                    else
+                    {
+                        //otherwise prompt the user
+
+
+                        using (AuthorizeNetworkIncidentRequestForm handleRequest = new AuthorizeNetworkIncidentRequestForm())
+                        {
+                            //handleRequest.parent = this;
+                            handleRequest.Owner = this;
+                            handleRequest.StartPosition = FormStartPosition.CenterParent;
+                            handleRequest.incomingMessage = incomingMessage;
+
+                            //MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+
+                            handleRequest.Activate();
+
+                            DialogResult result = handleRequest.ShowDialog();
+
+                            if (result == DialogResult.Yes)
+                            {
+                                if (handleRequest.TrustDevice)
+                                {
+                                    
+                                    if (savedNetworkDevices.Any(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && !o.TrustDevice))
+                                    {
+                                        DeviceInformation info = savedNetworkDevices.First(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && !o.TrustDevice);
+                                        info.TrustDevice = true;
+                                        Program.generalOptionsService.UpserOptionValue(info, "NetworkDevice");
+
+                                    }
+                                    else
+                                    {
+                                        requester.TrustDevice = true;
+                                        Program.generalOptionsService.UpserOptionValue(requester, "NetworkDevice");
+                                        
+                                    }
+                                }
+
+                                Program.networkService.SendTaskData(CurrentIncident);
+                                today = DateTime.Now;
+                                addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current sar task" + "\r\n");
+                            }
+
+                        }
+                    }
+                });
+            }
 
         }
     }

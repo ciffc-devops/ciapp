@@ -49,8 +49,8 @@ namespace Wildfire_ICS_Assist
         private void LoadPreparedBy()
         {
             cboPreparedBy.DataSource = null;
-            cboPreparedBy.DataSource = CurrentOrgChart.Clone().AllRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
-            if (CurrentAirOpsSummary.PreparedByPositionID != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByPositionID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByPositionID; }
+            cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
+            if (CurrentAirOpsSummary.PreparedByPositionID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByPositionID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByPositionID; }
 
         }
 
@@ -180,7 +180,7 @@ namespace Wildfire_ICS_Assist
 
         private void AddCurrentChild(Guid parentId, TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.AllRoles.Where(o => o.ReportsTo == parentId).ToList();
+            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == parentId).ToList();
 
             foreach (var row in rows)
             {
@@ -196,7 +196,7 @@ namespace Wildfire_ICS_Assist
         }
         private void AddFirstChild(TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.AllRoles.Where(o => o.RoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirector).ToList();
+            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.RoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirector).ToList();
 
             foreach (var row in rows)
             {

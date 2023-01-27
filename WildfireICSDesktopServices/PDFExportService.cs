@@ -454,18 +454,18 @@ namespace WildfireICSDesktopServices
 
 
                 //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
-                if (plan.PreparedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.PreparedBy) && currentChart.AllRoles.Any(o => o.RoleID == plan.PreparedByRoleID))
+                if (plan.PreparedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.PreparedBy) && currentChart.ActiveRoles.Any(o => o.RoleID == plan.PreparedByRoleID))
                 {
-                    ICSRole role = currentChart.AllRoles.First(o => o.RoleID == plan.PreparedByRoleID);
+                    ICSRole role = currentChart.ActiveRoles.First(o => o.RoleID == plan.PreparedByRoleID);
                     plan.PreparedBy = role.IndividualName;
                 }
                 stamper.AcroFields.SetField("Name", plan.PreparedBy);
                 stamper.AcroFields.SetField("Position", plan.PreparedByPosition);
 
                 //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
-                if (plan.ApprovedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.ApprovedBy) && currentChart.AllRoles.Any(o => o.RoleID == plan.ApprovedByRoleID))
+                if (plan.ApprovedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.ApprovedBy) && currentChart.ActiveRoles.Any(o => o.RoleID == plan.ApprovedByRoleID))
                 {
-                    ICSRole role = currentChart.AllRoles.First(o => o.RoleID == plan.ApprovedByRoleID);
+                    ICSRole role = currentChart.ActiveRoles.First(o => o.RoleID == plan.ApprovedByRoleID);
                     plan.ApprovedBy = role.IndividualName;
                 }
                 stamper.AcroFields.SetField("Name_2", plan.ApprovedBy);
@@ -894,7 +894,7 @@ namespace WildfireICSDesktopServices
                                 stamper.AcroFields.SetField("4 INCIDENT AND COMMAND STAFFRow" + (x + 1) + "_2", icRoles[x].IndividualName);
                             }
                             //agency reps
-                            List<ICSRole> repRoles = currentChart.AllRoles.Where(o => o.BranchID == Globals.IncidentCommanderID && o.RoleName.Equals("Agency Representative")).OrderBy(o => o.Depth).ThenBy(o => o.MaualSortOrder).ThenBy(o => o.RoleName).ToList();
+                            List<ICSRole> repRoles = currentChart.ActiveRoles.Where(o => o.BranchID == Globals.IncidentCommanderID && o.RoleName.Equals("Agency Representative")).OrderBy(o => o.Depth).ThenBy(o => o.MaualSortOrder).ThenBy(o => o.RoleName).ToList();
                             for (int x = 0; x < 8 && x < repRoles.Count; x++)
                             {
 
@@ -1099,7 +1099,7 @@ namespace WildfireICSDesktopServices
                             stamper.AcroFields.SetField("PAGE", "1");
 
 
-                            foreach (ICSRole role in currentChart.AllRoles.Where(o => !string.IsNullOrEmpty(o.PDFFieldName)))
+                            foreach (ICSRole role in currentChart.ActiveRoles.Where(o => !string.IsNullOrEmpty(o.PDFFieldName)))
                             {
                                 if (!string.IsNullOrEmpty(role.PDFTitleName))
                                 {
@@ -1426,7 +1426,7 @@ namespace WildfireICSDesktopServices
                     chart = task.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First();
                 }
 
-                if (chart.AllRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).Any())
+                if (chart.ActiveRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).Any())
                 {
                     path = FileAccessClasses.getWritablePath(task);
                     if (!tempFileName)
@@ -1496,7 +1496,7 @@ namespace WildfireICSDesktopServices
                             document.Add(spacer);
 
                             //for a small operation, keep it easy
-                            if (chart.AllRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).Count() <= 5)
+                            if (chart.ActiveRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).Count() <= 5)
                             {
                                 PdfPTable table = new PdfPTable(3);
                                 table.WidthPercentage= 100;
@@ -1511,7 +1511,7 @@ namespace WildfireICSDesktopServices
                                 cell.Padding = 10;
                                 cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
                                 table.AddCell(cell);
-                                foreach (ICSRole role in chart.AllRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)))
+                                foreach (ICSRole role in chart.ActiveRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)))
                                 {
                                     table.AddCell(role.RoleName);
                                     table.AddCell(role.IndividualName);
@@ -1530,7 +1530,7 @@ namespace WildfireICSDesktopServices
                             else //large compelx org chart, break it down by section
                             {
                                 List<Guid> branches = new List<Guid>();
-                                foreach (ICSRole role in chart.AllRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)))
+                                foreach (ICSRole role in chart.ActiveRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)))
                                 {
                                     Guid branchid = role.BranchID;
                                     if (!branches.Contains(branchid)) { branches.Add(branchid); }
@@ -1538,7 +1538,7 @@ namespace WildfireICSDesktopServices
 
                                 foreach (Guid branch in branches)
                                 {
-                                    string branchName = chart.AllRoles.Where(o => o.RoleID == branch).First().RoleName;
+                                    string branchName = chart.ActiveRoles.Where(o => o.RoleID == branch).First().RoleName;
                                     branchName = branchName.Replace(" Chief", "");
 
                                     PdfPTable table = new PdfPTable(3);
@@ -1552,7 +1552,7 @@ namespace WildfireICSDesktopServices
                                     cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
                                     cell.Padding = 10;
                                     table.AddCell(cell);
-                                    foreach (ICSRole role in chart.AllRoles.Where(o => o.BranchID == branch && !string.IsNullOrEmpty(o.IndividualName)))
+                                    foreach (ICSRole role in chart.ActiveRoles.Where(o => o.BranchID == branch && !string.IsNullOrEmpty(o.IndividualName)))
                                     {
                                         iTextSharp.text.Font fonttoUse = normalfont;
                                         if (role.RoleID == branch) { fonttoUse = subsectionfont; }
@@ -3289,7 +3289,7 @@ namespace WildfireICSDesktopServices
 
             List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == summary.OpPeriod).ActiveAirCommsItems;
             List<ICSRole> roles = new List<ICSRole>();
-            roles.Add(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).AllRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
+            roles.Add(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
             roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).GetChildRoles(Globals.AirOpsDirector, true));
 
 
@@ -3319,7 +3319,7 @@ namespace WildfireICSDesktopServices
 
             List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == sum.OpPeriod).ActiveAirCommsItems;
             List<ICSRole> roles = new List<ICSRole>();
-            roles.Add(incident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == sum.OpPeriod).AllRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
+            roles.Add(incident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == sum.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
             roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).GetChildRoles(Globals.AirOpsDirector, true));
 
 

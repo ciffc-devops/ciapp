@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary.Utilities;
 
 namespace WildfireICSDesktopServices
@@ -293,6 +294,12 @@ namespace WildfireICSDesktopServices
                     return _options.AllHospitals;
                 case "LastIpUsedWhenMachineIsServer":
                     return _options.LastIpUsedWhenMachineIsServer;
+
+                case "LastPort":
+                    return _options.LastPort;
+                case "LastServerIP":
+                    return _options.LastServerIP;
+
                 case "Objectives":
                     return _options.allPresetObjectives;
                 case "Province":
@@ -321,6 +328,8 @@ namespace WildfireICSDesktopServices
                         */
                     }
                     return new Organization();
+                case "SavedNetworkDeviceList":
+                    return _options.SavedNetworkDeviceList;
                 case "ShortcutButtons":
                     return _options.ShortcutButtons;
                 case "TeamAssignments":
@@ -521,7 +530,17 @@ namespace WildfireICSDesktopServices
                     _options.AllTeamAssignmentTemplates = _options.AllTeamAssignmentTemplates.Where(o => o.ID != ta.ID).ToList();
                     _options.AllTeamAssignmentTemplates.Add(ta);
                     break;
-
+                case "NetworkDevice":
+                    DeviceInformation info = (DeviceInformation)newValue;
+                    _options.SavedNetworkDeviceList = _options.SavedNetworkDeviceList.Where(o => o.DeviceID != info.DeviceID).ToList();
+                    _options.SavedNetworkDeviceList.Add(info);
+                    break;
+                case "LastServerIP":
+                    _options.LastServerIP= newValue.ToString();
+                    break;
+                case "LastPort":
+                    _options.LastPort = newValue.ToString();
+                    break;
             }
             SaveGeneralOptions();
         }

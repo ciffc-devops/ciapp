@@ -19,6 +19,8 @@ using static iTextSharp.text.TabStop;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary;
+using WF_ICS_ClassLibrary.EventHandling;
+using WF_ICS_ClassLibrary.Interfaces;
 
 namespace WildfireICSDesktopServices
 {
@@ -31,9 +33,18 @@ namespace WildfireICSDesktopServices
         private static string _ServerIP;
         private static string _ServerPortStr;
         private static List<string> _allIPs;
+        public Guid CurrentIncidentID { get; set; } = Guid.Empty;
+        private NetworkSendLog networkSendLog;
 
-        public NetworkService() { }
-        public NetworkService(string serverIP, string portToUse, bool IsClient, bool IsHost) { ServerIP = serverIP; ServerPortStr = portToUse; ThisMachineIsClient = IsClient; ThisMachineIsServer = IsHost; }
+        public event LocalNetworkEventHandler localNetworkEvent;
+        public event LocalNetworkClosedEventHandler localNetworkClosedEvent;
+        public event LocalNetworkIncidentRequestHandler localNetworkIncidentRequestEvent;
+        public event LocalNetworkIncomingIncidentEventHandler localNetworkIncomingIncidentEvent;
+        public event LocalNetworkIncomingSendObjectEventHandler localNetworkIncomingObjectEvent;
+
+
+        public NetworkService() { networkSendLog = new NetworkSendLog(); }
+        public NetworkService(string serverIP, string portToUse, bool IsClient, bool IsHost) { ServerIP = serverIP; ServerPortStr = portToUse; ThisMachineIsClient = IsClient; ThisMachineIsServer = IsHost; networkSendLog = new NetworkSendLog(); }
 
         public string EncryptionKey { get => _encryptionKey; set => _encryptionKey = value; }
         public bool ThisMachineIsStandAlone { get => _thisMachineIsStandAlone; set => _thisMachineIsStandAlone = value; }
@@ -46,10 +57,247 @@ namespace WildfireICSDesktopServices
         public int ServerPort { get { int port = -1; if (!string.IsNullOrEmpty(ServerPortStr) && int.TryParse(ServerPortStr, out port)) { return port; } else return 0; } }
         public List<string> AllIPs { get => _allIPs; set => _allIPs = value; }
 
+        /// <summary>
+        /// The maximum number of times a chat message will be relayed
+        /// </summary>
+        int relayMaximum = 3;
+        private bool PauseNetworkSend = false;
 
 
 
         public Dictionary<ShortGuid, NetworkSendObject> lastPeerSendObjectDict = new Dictionary<ShortGuid, NetworkSendObject>();
+        public Dictionary<ShortGuid, CommsLogEntry> lastPeerCommsMessageDict = new Dictionary<ShortGuid, CommsLogEntry>();
+        Dictionary<ShortGuid, WFIncident> lastPeerSarTaskDict = new Dictionary<ShortGuid, WFIncident>();
+        Dictionary<ShortGuid, NetworkSARTaskRequest> lastPeerNetworkSarTaskRequestDict = new Dictionary<ShortGuid, NetworkSARTaskRequest>();
+        Dictionary<ShortGuid, NetworkOptionsRequest> lastPeerNetworkOptionsRequestDict = new Dictionary<ShortGuid, NetworkOptionsRequest>();
+        //Dictionary<ShortGuid, NetworkMemberRequest> lastPeerNetworkMemberRequestDict = new Dictionary<ShortGuid, NetworkMemberRequest>();
+        Dictionary<ShortGuid, NetworkDeleteOrder> lastPeerNetworkDeleteOrderDict = new Dictionary<ShortGuid, NetworkDeleteOrder>();
+
+
+        public void SetUpEvents()
+        {
+            NetworkComms.AppendGlobalConnectionCloseHandler(HandleConnectionClosed);
+            NetworkComms.AppendGlobalIncomingPacketHandler<NetworkSARTaskRequest>("NetworkSARTaskRequest", HandleIncomingNetworkSarTaskRequest);
+            NetworkComms.AppendGlobalIncomingPacketHandler<NetworkOptionsRequest>("NetworkOptionsRequest", HandleIncomingNetworkOptionsRequest);
+            NetworkComms.AppendGlobalIncomingPacketHandler<WFIncident>("WFIncident", HandleIncomingIncident);
+            NetworkComms.AppendGlobalIncomingPacketHandler<NetworkSendObject>("NetworkSendObject", HandleIncomingInformation);
+            //NetworkComms.AppendGlobalIncomingPacketHandler<NetworkDeleteOrder>("NetworkDeleteOrder", HandleIncomingNetworkDeleteorder);
+
+        }
+
+
+        private void HandleIncomingInformation(PacketHeader header, Connection connection, NetworkSendObject incomingMessage)
+        {
+            lock (lastPeerSendObjectDict)
+            {
+                bool acceptInfo = false;
+                if (lastPeerSendObjectDict.ContainsKey(incomingMessage.SourceIdentifier))
+                {
+                    if (lastPeerSendObjectDict[incomingMessage.SourceIdentifier].RequestID != incomingMessage.RequestID)
+                    {
+                        acceptInfo = true;
+                        lastPeerSendObjectDict[incomingMessage.SourceIdentifier] = incomingMessage;
+                    }
+                }
+                else if (incomingMessage.SourceIdentifier != NetworkComms.NetworkIdentifier)
+                {
+                    lastPeerSendObjectDict.Add(incomingMessage.SourceIdentifier, incomingMessage);
+                    acceptInfo = true;
+                }
+
+                //Reject network send objects from a different task.  This should mitigate issues of multiple tasks running on the same network.
+                if (acceptInfo && incomingMessage.TaskID != Guid.Empty && incomingMessage.TaskID != CurrentIncidentID) { acceptInfo = false; }
+
+                if (acceptInfo)
+                {
+                    DateTime today = DateTime.Now;
+                    //addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received incoming item: " + incomingMessage.objectType + "\r\n");
+
+                    if (!networkSendLog.ObjectAlreadySentOrReceived(incomingMessage))
+                    {
+                        PauseNetworkSend = true;
+
+                        networkSendLog.AddToReceived(incomingMessage, DateTime.UtcNow, true);
+
+                        string source = "network";
+                        if (!incomingMessage.UploadedToInternet) { source = "networkNoInternet"; }
+
+                        OnLocalNetworkIncomingObject(incomingMessage);
+
+                        PauseNetworkSend = false;
+
+                    }
+                }
+
+                if (incomingMessage.RelayCount < relayMaximum)
+                {
+                    var allRelayConnections = (from current in NetworkComms.GetExistingConnection() where current != connection select current).ToArray();
+                    incomingMessage.RelayCount += 1;
+                    foreach (var relayConnection in allRelayConnections)
+                    {
+                        try { relayConnection.SendObject("NetworkSendObject", incomingMessage); }
+                        catch (CommsException) { /* Catch the comms exception, ignore and continue */ }
+                    }
+                }
+            }
+        }
+        protected virtual void OnLocalNetworkIncomingObject(NetworkSendObject sendObject)
+        {
+            LocalNetworkIncomingSendObjectEventHandler handler = localNetworkIncomingObjectEvent;
+            if (handler != null)
+            {
+                handler(sendObject);
+            }
+        }
+
+
+        /// <summary>
+        /// Performs whatever functions we might so desire when we receive an incoming ChatMessage
+        /// </summary>
+        /// <param name="header">The PacketHeader corresponding with the received object</param>
+        /// <param name="connection">The Connection from which this object was received</param>
+        /// <param name="incomingMessage">The incoming ChatMessage we are after</param>
+        private void HandleIncomingIncident(PacketHeader header, Connection connection, WFIncident incomingMessage)
+        {
+
+            lock (lastPeerSarTaskDict)
+            {
+                if (lastPeerSarTaskDict.ContainsKey(incomingMessage.SourceIdentifier))
+                {
+                    if (lastPeerSarTaskDict[incomingMessage.SourceIdentifier].RequestID != incomingMessage.RequestID)
+                    {
+                        //If this message index is greater than the last seen from this source we can safely
+                        //write the message to the txtChat
+                        //replaceCurrentTaskWithNetworkTask(incomingMessage);
+                        OnLocalNetworkIncomingIncident(incomingMessage);
+
+
+                        //We now replace the last received message with the current one
+                        lastPeerSarTaskDict[incomingMessage.SourceIdentifier] = incomingMessage;
+                    }
+                }
+                else
+                {
+                    //If we have never had a message from this source before then it has to be new
+                    //by definition
+                    lastPeerSarTaskDict.Add(incomingMessage.SourceIdentifier, incomingMessage);
+                    OnLocalNetworkIncomingIncident(incomingMessage);
+                    //replaceCurrentTaskWithNetworkTask(incomingMessage);
+                    //AppendLineTotxtChat(incomingMessage.SourceName + " - " + incomingMessage.Message);
+                }
+            }
+
+
+            //Once we have written to the txtChat we refresh the txtConnectedUsersWindow
+            //RefreshtxtConnectedUsersBox();
+
+            //This last section of the method is the relay function
+            //We start by checking to see if this message has already been relayed
+            //the maximum number of times
+            if (incomingMessage.RelayCount < relayMaximum)
+            {
+                //If we are going to relay this message we need an array of
+                //all other known connections
+                var allRelayConnections = (from current in NetworkComms.GetExistingConnection() where current != connection select current).ToArray();
+
+                //We increment the relay count before we send
+                incomingMessage.RelayCount += 1;
+
+                //We will now send the message to every other connection
+                foreach (var relayConnection in allRelayConnections)
+                {
+                    //We ensure we perform the send within a try catch
+                    //To ensure a single failed send will not prevent the
+                    //relay to all working connections.
+                    try { relayConnection.SendObject("SARTask", incomingMessage); }
+                    catch (CommsException) { /* Catch the comms exception, ignore and continue */ }
+                }
+            }
+        }
+
+        protected virtual void OnLocalNetworkIncomingIncident(WFIncident incident)
+        {
+            LocalNetworkIncomingIncidentEventHandler handler = localNetworkIncomingIncidentEvent;
+            if (handler != null)
+            {
+                handler(incident);
+            }
+        }
+
+
+
+        private void HandleIncomingNetworkOptionsRequest(PacketHeader header, Connection connection, NetworkOptionsRequest incomingMessage)
+        {
+            //We only want to write a message once to the chat window
+            //Because we allow relaying and may receive the same message twice
+            //we use our history and message indexes to ensure we have a new message
+
+            lock (lastPeerNetworkSarTaskRequestDict)
+            {
+                if (lastPeerNetworkOptionsRequestDict.ContainsKey(incomingMessage.SourceIdentifier))
+                {
+                    if (lastPeerNetworkOptionsRequestDict[incomingMessage.SourceIdentifier].RequestID != incomingMessage.RequestID)
+                    {
+                        //If this message index is greater than the last seen from this source we can safely
+                        //write the message to the txtChat
+                        answerRequestForNetworkOptions(incomingMessage);
+
+                        //We now replace the last received message with the current one
+                        lastPeerNetworkOptionsRequestDict[incomingMessage.SourceIdentifier] = incomingMessage;
+                    }
+                }
+                else
+                {
+                    //If we have never had a message from this source before then it has to be new
+                    //by definition
+                    lastPeerNetworkOptionsRequestDict.Add(incomingMessage.SourceIdentifier, incomingMessage);
+                    answerRequestForNetworkOptions(incomingMessage);
+                    //AppendLineTotxtChat(incomingMessage.SourceName + " - " + incomingMessage.Message);
+                }
+            }
+
+
+
+
+            //Once we have written to the txtChat we refresh the txtConnectedUsersWindow
+            //RefreshtxtConnectedUsersBox();
+
+            //This last section of the method is the relay function
+            //We start by checking to see if this message has already been relayed
+            //the maximum number of times
+            if (incomingMessage.RelayCount < relayMaximum)
+            {
+                //If we are going to relay this message we need an array of
+                //all other known connections
+                var allRelayConnections = (from current in NetworkComms.GetExistingConnection() where current != connection select current).ToArray();
+
+                //We increment the relay count before we send
+                incomingMessage.RelayCount += 1;
+
+
+                //We will now send the message to every other connection
+                foreach (var relayConnection in allRelayConnections)
+                {
+                    //We ensure we perform the send within a try catch
+                    //To ensure a single failed send will not prevent the
+                    //relay to all working connections.
+                    try { relayConnection.SendObject("NetworkOptionsRequest", incomingMessage); }
+                    catch (CommsException) { /* Catch the comms exception, ignore and continue */ }
+                }
+            }
+        }
+
+        private void answerRequestForNetworkOptions(NetworkOptionsRequest incomingMessage)
+        {
+            if (ThisMachineIsServer)
+            {
+                GeneralOptionsService service = new GeneralOptionsService(true);
+                GeneralOptions options = service.GetGeneralOptions();
+                SendNetworkObject(options, Guid.Empty);
+            }
+
+        }
+
 
         public bool CheckIP(string ip)
         {
@@ -181,6 +429,10 @@ namespace WildfireICSDesktopServices
             return log;
         }
 
+
+
+        
+
         public NetworkSendResults SendNetworkObject(object objToSend, Guid TaskID, string comment = null, string ip = null, string port = null, bool sentByInternet = false)
         {
             NetworkSendResults results = new NetworkSendResults();
@@ -200,22 +452,15 @@ namespace WildfireICSDesktopServices
                         networkSendObject.TaskID = Guid.Empty;
                         break;
                    
-                    case List<TeamMember> memberList:
-                        List<TeamMember> toAdd = new List<TeamMember>();
-                        foreach (TeamMember member in memberList) { toAdd.Add(member.Clone()); }
-                        networkSendObject.memberList = toAdd;
-                        break;
                    
                     case GeneralOptions options:
                         networkSendObject.generalOptions = options;
                         networkSendObject.TaskID = Guid.Empty;
                         break;
                    
-                    case TaskBasics taskBasics:
-                        networkSendObject.taskBasics = taskBasics;
-                        break;
-                   
+                  
                     case TaskUpdate taskUpdate:
+                        networkSendObject.taskUpdate.Source = "Network";
                         networkSendObject.taskUpdate = taskUpdate.Clone();
                         networkSendObject.taskUpdate.ProcessedLocally = false;
                         break;
@@ -280,13 +525,10 @@ namespace WildfireICSDesktopServices
                     {
 
                         results.Errors.Add(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " Error - " + ce.ToString() + "\r\n\r\n");
-                        //MessageBox.Show("A CommsException occurred while trying to send a " + networkSendObject.GetType() + " to " + serverConnectionInfo + "\r\n\r\n" + ce.ToString(), "Network Comms Exception", MessageBoxButtons.OK);
-                        //MessageBox.Show("A CommsException occurred while trying to send message to " + serverConnectionInfo, "CommsException", MessageBoxButtons.OK);
                     }
                     catch (Exception ex)
                     {
                         results.Errors.Add(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " Error - " + ex.ToString() + "\r\n\r\n");
-                        // MessageBox.Show("A CommsException occurred while trying to send a " + networkSendObject.GetType() + " to " + ex.ToString(), "CommsException", MessageBoxButtons.OK);
                     }
 
                 }
@@ -303,15 +545,11 @@ namespace WildfireICSDesktopServices
                         if (ThisMachineIsClient || ThisMachineIsServer)
                         {
                             results.Errors.Add(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " Error -  CommsException occurred while trying to send message to " + info + "\r\n\r\n");
-
-                            //MessageBox.Show("A CommsException occurred while trying to send message to " + info + "\r\n\r\n" + ce.ToString(), "Network Comms Exception", MessageBoxButtons.OK);
                         }
                     }
                     catch (Exception ex)
                     {
                         results.Errors.Add(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " A CommsException occurred while trying to send message to " + ex.ToString() + "\r\n\r\n");
-                        //MessageBox.Show("A CommsException occurred while trying to send message to " + ex.ToString(), "CommsException", MessageBoxButtons.OK);
-
                     }
                 }
             }
@@ -406,6 +644,37 @@ namespace WildfireICSDesktopServices
             SendNetworkObject(NetworkTestGuidValue, IncidentID,  "test", ip, port);
         }
 
+      
+
+        public bool StartAsServer(int Port, string ip)
+        {
+            try
+            {
+
+                startListening(Port, ip);
+                DateTime today = DateTime.Now;
+                ThisMachineIsServer = true;
+                ThisMachineIsClient = false;
+                ServerIP = ip;
+                ServerPortStr = Port.ToString();
+                return true;
+            }
+            catch (Exception)
+            {
+                ThisMachineIsServer = false;
+                ThisMachineIsClient = false;
+                
+
+                ServerIP = null;
+                ServerPortStr = null;
+
+
+                return false;
+            }
+        }
+
+
+
         public NetworkListenResult startListening(int port, string selectedIP)
         {
             NetworkListenResult result = new NetworkListenResult();
@@ -426,9 +695,7 @@ namespace WildfireICSDesktopServices
                     {
                         if (listenEndPoint.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && listenEndPoint.Address.ToString() != "127.0.0.1")
                         {
-                            //server.Append("IP Address: "); server.Append(listenEndPoint.Address); server.Append("\r\nPort Number: "); server.Append(listenEndPoint.Port);
                             result.TempServerIP = listenEndPoint.Address.ToString();
-                            // ips.Add(listenEndPoint.Address.ToString());
                             result.TempPort = listenEndPoint.Port.ToString();
                         }
                     }
@@ -439,15 +706,7 @@ namespace WildfireICSDesktopServices
                         NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
                     }
                 }
-                /*
-                if (ips.Count > 1)
-                {
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("Warning: your computer may be connected in more than one way to a network.  The following IP addresses were detected."); sb.Append(Environment.NewLine);
-                    foreach (string s in ips) { sb.Append(s); sb.Append(Environment.NewLine); }
-                    sb.Append("If the first one displayed doesn't work when connecting from another computer, try the other(s).");
-                    result.Message = sb.ToString();
-                }*/
+              
             }
             catch (CommsSetupShutdownException SdEx)
             {
@@ -498,6 +757,144 @@ namespace WildfireICSDesktopServices
 
             return errors;
 
+        }
+
+        protected virtual void OnLocalNetworkClosed(Connection connection)
+        {
+            LocalNetworkClosedEventHandler handler = this.localNetworkClosedEvent;
+            if (handler != null)
+            {
+                handler(connection);
+            }
+        }
+
+        private void HandleConnectionClosed(Connection connection)
+        {
+            OnLocalNetworkClosed(connection);
+        }
+
+
+
+
+        protected virtual void OnLocalNetworkIncidentRequest(NetworkSARTaskRequest request)
+        {
+            LocalNetworkIncidentRequestHandler handler = localNetworkIncidentRequestEvent;
+            if(handler != null)
+            {
+                handler(request);
+            }
+        }
+
+
+        private void HandleIncomingNetworkSarTaskRequest(PacketHeader header, Connection connection, NetworkSARTaskRequest incomingMessage)
+        {
+            //We only want to write a message once to the chat window
+            //Because we allow relaying and may receive the same message twice
+            //we use our history and message indexes to ensure we have a new message
+
+            lock (lastPeerNetworkSarTaskRequestDict)
+            {
+                if (lastPeerNetworkSarTaskRequestDict.ContainsKey(incomingMessage.SourceIdentifier))
+                {
+                    if (lastPeerNetworkSarTaskRequestDict[incomingMessage.SourceIdentifier].RequestID != incomingMessage.RequestID)
+                    {
+                        //If this message index is greater than the last seen from this source we can safely
+                        //write the message to the txtChat
+                        OnLocalNetworkIncidentRequest(incomingMessage);
+                        
+
+                        //We now replace the last received message with the current one
+                        lastPeerNetworkSarTaskRequestDict[incomingMessage.SourceIdentifier] = incomingMessage;
+                    }
+                }
+                else
+                {
+                    //If we have never had a message from this source before then it has to be new
+                    //by definition
+                    lastPeerNetworkSarTaskRequestDict.Add(incomingMessage.SourceIdentifier, incomingMessage);
+                    OnLocalNetworkIncidentRequest(incomingMessage);
+                    //AppendLineTotxtChat(incomingMessage.SourceName + " - " + incomingMessage.Message);
+                }
+            }
+
+
+            //Once we have written to the txtChat we refresh the txtConnectedUsersWindow
+            //RefreshtxtConnectedUsersBox();
+
+            //This last section of the method is the relay function
+            //We start by checking to see if this message has already been relayed
+            //the maximum number of times
+            if (incomingMessage.RelayCount < relayMaximum)
+            {
+                //If we are going to relay this message we need an array of
+                //all other known connections
+                var allRelayConnections = (from current in NetworkComms.GetExistingConnection() where current != connection select current).ToArray();
+
+                //We increment the relay count before we send
+                incomingMessage.RelayCount += 1;
+
+                string localip = GetLocalIPAddress();
+                //We will now send the message to every other connection
+                foreach (var relayConnection in allRelayConnections)
+                {
+                    if (!relayConnection.ConnectionInfo.LocalEndPoint.ToString().Contains(incomingMessage.RequestIP)
+                        && !relayConnection.ConnectionInfo.LocalEndPoint.ToString().Contains(localip))
+                    {
+                        //We ensure we perform the send within a try catch
+                        //To ensure a single failed send will not prevent the
+                        //relay to all working connections.
+                        try { relayConnection.SendObject("NetworkSARTaskRequest", incomingMessage); }
+                        catch (CommsException) { /* Catch the comms exception, ignore and continue */ }
+                    }
+                }
+            }
+        }
+
+
+        public LocalNetworkEventArgs SendTaskData(WFIncident task)
+        {
+            LocalNetworkEventArgs args = new LocalNetworkEventArgs();
+            //We may or may not have entered some server connection information
+            ConnectionInfo serverConnectionInfo = null;
+            if (!string.IsNullOrEmpty(ServerIP))
+            {
+                try { serverConnectionInfo = new ConnectionInfo(ServerIP, ServerPort); }
+                catch (Exception)
+                {
+                    args.message = "Failed to parse the server IP and port. Please ensure it is correct and try again";
+                    args.Successful = false;
+                    
+                    return args;
+                }
+            }
+
+            //If we provided server information we send to the server first
+            if (serverConnectionInfo != null)
+            {
+                lock (lastPeerSarTaskDict) lastPeerSarTaskDict[NetworkComms.NetworkIdentifier] = task;
+
+                task.RequestID = Guid.NewGuid();
+                //We perform the send within a try catch to ensure the application continues to run if there is a problem.
+                try
+                {
+                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("SARTask", task);
+                    DateTime today = DateTime.Now;
+                    args.message += string.Format("{0:HH:mm:ss}", today) + " - sent full task" + "\r\n";
+                    args.Successful = true;
+                }
+                catch (CommsException)
+                {
+                    args.message = "A Network CommsException occurred while trying to send task data (001) to " + serverConnectionInfo;
+                    args.Successful = false;
+                }
+                catch (Exception ex)
+                {
+                    args.message = "There was an error: " + ex.ToString();
+                    args.Successful = false;
+                }
+            }
+
+            return args;
         }
 
 

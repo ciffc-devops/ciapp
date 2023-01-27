@@ -109,7 +109,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
 
             //Network
-            foreach (DeviceInformation info in options.AllDeviceInformation.Where(o => o.TrustDevice))
+            foreach (DeviceInformation info in options.SavedNetworkDeviceList.Where(o => o.TrustDevice))
             {
                 allDevices.Add(info);
             }
@@ -192,7 +192,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
 
                     //Network
-                    options.AllDeviceInformation = allDevices;
+                    options.SavedNetworkDeviceList = allDevices;
 
                     options.DefaultToServer = chkDefaultToServer.Checked;
                     options.DefaultPortNumber = Convert.ToInt32(numDefaultPortNumber.Value);

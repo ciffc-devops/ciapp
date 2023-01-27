@@ -44,16 +44,16 @@ namespace Wildfire_ICS_Assist
             List<ICSRole> reportsToRoles = new List<ICSRole>();
             if (RestrictToAirOps)
             {
-                reportsToRoles.Add(CurrentOrgChart.AllRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
+                reportsToRoles.Add(CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
                 reportsToRoles.AddRange(CurrentOrgChart.GetChildRoles(Globals.AirOpsDirector, true));
             }
-            else { reportsToRoles.AddRange(CurrentOrgChart.AllRoles); }
+            else { reportsToRoles.AddRange(CurrentOrgChart.ActiveRoles); }
             cboReportsTo.DataSource = reportsToRoles;
 
 
 
             
-            if (selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == selectedRole.ReportsTo))
+            if (selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == selectedRole.ReportsTo))
             {
                 cboReportsTo.SelectedValue = selectedRole.ReportsTo;
             }
@@ -112,7 +112,7 @@ namespace Wildfire_ICS_Assist
             if(((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor; MessageBox.Show(Properties.Resources.CantReportToSelf); return false; }
 
             //When editing an existing role, don't let it make its own subordinate its parent
-            if (CurrentOrgChart.AllRoles.Any(o=>o.RoleID == selectedRole.RoleID)) {
+            if (CurrentOrgChart.ActiveRoles.Any(o=>o.RoleID == selectedRole.RoleID)) {
                 List<ICSRole> childRoles = CurrentOrgChart.GetChildRoles(selectedRole.RoleID, true);
                 ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;
                 if(childRoles.Any(o=>o.RoleID == rep.RoleID))
@@ -143,7 +143,7 @@ namespace Wildfire_ICS_Assist
                 List<Guid> ChiefIDs = new List<Guid>();
                 ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID); ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                foreach (ICSRole role in CurrentOrgChart.AllRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))                {                    CommandStaffRoles.Add(role.RoleID);                }
+                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))                {                    CommandStaffRoles.Add(role.RoleID);                }
                 splitContainer1.Panel1.BackColor = Color.White;
                 if (CommandStaffRoles.Contains(parentRole.RoleID)) { splitContainer1.Panel1.BackColor = Color.IndianRed; }
                 else if (parentRole.BranchID == Globals.IncidentCommanderID) { splitContainer1.Panel1.BackColor = Color.LimeGreen; }

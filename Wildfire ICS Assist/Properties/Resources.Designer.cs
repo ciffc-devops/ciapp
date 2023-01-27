@@ -650,6 +650,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_639_octagon_remove_empty_red {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-639-octagon-remove-empty-red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_670_dashboard {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_670_dashboard", resourceCulture);
@@ -663,6 +673,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_739_check {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_739_check", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_739_check_green {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-739-check-green", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -80,6 +80,7 @@
             this.btnSave.Text = "Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -93,6 +94,7 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // rbStandalone
             // 
@@ -105,6 +107,7 @@
             this.rbStandalone.TabStop = true;
             this.rbStandalone.Text = "Run on this computer only";
             this.rbStandalone.UseVisualStyleBackColor = true;
+            this.rbStandalone.CheckedChanged += new System.EventHandler(this.rbStandalone_CheckedChanged);
             // 
             // pnlClientSettings
             // 
@@ -168,6 +171,7 @@
             this.btnImportCoordinatesHelp.Size = new System.Drawing.Size(38, 38);
             this.btnImportCoordinatesHelp.TabIndex = 57;
             this.btnImportCoordinatesHelp.UseVisualStyleBackColor = true;
+            this.btnImportCoordinatesHelp.Click += new System.EventHandler(this.btnImportCoordinatesHelp_Click);
             // 
             // rbClient
             // 
@@ -179,6 +183,7 @@
             this.rbClient.TabIndex = 56;
             this.rbClient.Text = "This computer will connect to another computer";
             this.rbClient.UseVisualStyleBackColor = true;
+            this.rbClient.CheckedChanged += new System.EventHandler(this.rbClient_CheckedChanged);
             // 
             // rbServer
             // 
@@ -189,6 +194,7 @@
             this.rbServer.TabIndex = 55;
             this.rbServer.Text = "This computer will be the server";
             this.rbServer.UseVisualStyleBackColor = true;
+            this.rbServer.CheckedChanged += new System.EventHandler(this.rbServer_CheckedChanged);
             // 
             // label1
             // 

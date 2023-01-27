@@ -34,6 +34,10 @@ namespace WF_ICS_ClassLibrary.Networking
         [ProtoMember(5)] public string objectType { get; set; }
         [ProtoMember(6)] private Guid _guidValue = Guid.Empty;
         [ProtoMember(7)] public string comment { get; set; }
+        [ProtoMember(33)] private Guid _TaskID;
+        [ProtoMember(32)] private GeneralOptions _generalOptions;
+
+        /*
         //[ProtoMember(8)] private Assignment _assignment = new Assignment();
         [ProtoMember(9)] private Briefing _briefing = new Briefing(false);
         [ProtoMember(10)] private IncidentObjective _objective = new IncidentObjective();
@@ -58,8 +62,6 @@ namespace WF_ICS_ClassLibrary.Networking
         [ProtoMember(29)] private Note _note;
         [ProtoMember(30)] private Vehicle _vehicle;
         //[ProtoMember(31)] private ShiftBriefing _shiftBriefing;
-        [ProtoMember(32)] private GeneralOptions _generalOptions;
-        [ProtoMember(33)] private Guid _TaskID;
         //[ProtoMember(34)] private TaskEquipment _taskEquipment;
         //[ProtoMember(35)] private EquipmentIssue _equipmentIssue;
         [ProtoMember(36)] private PositionLogEntry _positionLogEntry;
@@ -69,16 +71,19 @@ namespace WF_ICS_ClassLibrary.Networking
         [ProtoMember(40)] private TimelineEvent _timelineEvent;
         [ProtoMember(41)] private ICSRole _icsRole;
 //        [ProtoMember(42)] private CommsPlanItemLink _commsPlanItemLink;
+        */
         [ProtoMember(43)] private TaskUpdate _taskUpdate;
         [ProtoMember(44)] private bool _UploadedToInternet;
 
         public Guid GuidValue { get { return _guidValue; } set { _guidValue = value; } }
         public bool UploadedToInternet { get => _UploadedToInternet; set => _UploadedToInternet = value; }
-        
 
 
 
+        public Guid TaskID { get => _TaskID; set => _TaskID = value; }
+        public GeneralOptions generalOptions { get => _generalOptions; set => _generalOptions = value; }
 
+        /*
         public Briefing briefing { get { return _briefing; } set { _briefing = value; } }
         public IncidentObjective objective { get { return _objective; } set { _objective = value; } }
         public SafetyPlan safetyPlan { get { return _safetyPlan; } set { _safetyPlan = value; } }
@@ -94,14 +99,13 @@ namespace WF_ICS_ClassLibrary.Networking
         public Timeline timeline { get => _timeline; set => _timeline = value; }
         public Note note { get => _note; set => _note = value; }
         public Vehicle vehicle { get => _vehicle; set => _vehicle = value; }
-        public GeneralOptions generalOptions { get => _generalOptions; set => _generalOptions = value; }
-        public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public PositionLogEntry positionLogEntry { get => _positionLogEntry; set => _positionLogEntry = value; }
         public TaskBasics taskBasics { get => _taskBasics; set => _taskBasics = value; }
         public OperationalPeriod operationalPeriod { get => _opsPeriod; set => _opsPeriod = value; }
         public TimelineEvent timelineEvent { get => _timelineEvent; set => _timelineEvent = value; }
         public ICSRole icsRole { get => _icsRole; set => _icsRole = value; }
         //public CommsPlanItemLink commsPlanItemLink { get => _commsPlanItemLink; set => _commsPlanItemLink = value; }
+        */
         public TaskUpdate taskUpdate { get => _taskUpdate; set => _taskUpdate = value; }
 
 

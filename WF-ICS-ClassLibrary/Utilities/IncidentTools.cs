@@ -86,7 +86,7 @@ namespace WF_ICS_ClassLibrary.Utilities
            
             foreach (OrganizationChart orgchart in task.allOrgCharts)
             {
-                foreach (ICSRole role in orgchart.AllRoles)
+                foreach (ICSRole role in orgchart.ActiveRoles)
                 {
                     if (role.teamMember != null && !members.Any(o => o.PersonID == role.teamMember.PersonID) && !listAlreadyContainsMember(members, role.teamMember)) { members.Add(role.teamMember); }
                 }
@@ -197,9 +197,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             List<MemberStatus> statuses = new List<MemberStatus>();
             List<TeamMember> members = task.MembersSignedIn(opPeriod);
             //Add members who are on teams or in ICS roles currently
-            if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).AllRoles.Any(o => o.teamMember != null))
+            if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Any(o => o.teamMember != null))
             {
-                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).AllRoles.Where(o => o.teamMember != null))
+                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Where(o => o.teamMember != null))
                 {
                     if (role.teamMember.PersonID != Guid.Empty && !string.IsNullOrEmpty(role.teamMember.Name) && !members.Any(o => o.PersonID == role.teamMember.PersonID))
                     {
@@ -300,7 +300,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             //ics roles
             if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod))
             {
-                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).AllRoles)
+                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles)
                 {
                     if (role.IndividualID == member.PersonID)
                     {

@@ -54,16 +54,16 @@ namespace Wildfire_ICS_Assist
 
         private void buildRoleDropdowns()
         {
-            List<ICSRole> rolesForApproval = CurrentOrgChart.Clone().AllRoles;
+            List<ICSRole> rolesForApproval = CurrentOrgChart.Clone().ActiveRoles;
             ICSRole blank = new ICSRole(); blank.RoleID = Guid.Empty; blank.RoleName = ""; blank.ReportsTo = Guid.Empty; blank.MaualSortOrder = -1;
             rolesForApproval.Insert(0, blank);
             cboApprovedBy.DataSource = rolesForApproval; cboApprovedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboApprovedBy.ValueMember = "RoleID";
-            if (CurrentPlan.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == CurrentPlan.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = CurrentPlan.ApprovedByRoleID; }
+            if (CurrentPlan.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentPlan.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = CurrentPlan.ApprovedByRoleID; }
             
             
             
-            cboPreparedBy.DataSource = CurrentOrgChart.Clone().AllRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
-            if (CurrentPlan.PreparedByRoleID != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == CurrentPlan.PreparedByRoleID)) { cboPreparedBy.SelectedValue = CurrentPlan.PreparedByRoleID; }
+            cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
+            if (CurrentPlan.PreparedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentPlan.PreparedByRoleID)) { cboPreparedBy.SelectedValue = CurrentPlan.PreparedByRoleID; }
 
         }
 

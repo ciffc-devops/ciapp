@@ -45,7 +45,11 @@ namespace WF_ICS_ClassLibrary.Networking
             {
                 switch (objToCheck)
                 {
-                    
+                    case TaskUpdate tu:
+                        if (objectsSent.Any(o => o.sendObject.taskUpdate.UpdateID == tu.UpdateID)) { return true; }
+                        if (objectsReceived.Any(o => o.sendObject.taskUpdate.UpdateID == tu.UpdateID)) { return true; }
+                        return false;
+                        /*
                     case TeamMember tm:
                         if (objectsSent.Any(o => o.sendObject.teamMember != null && o.sendObject.teamMember.PersonID == tm.PersonID && o.sendObject.teamMember.LastUpdatedUTC == tm.LastUpdatedUTC)) { return true; }
                         else if (objectsReceived.Any(o => o.sendObject.teamMember != null && o.sendObject.teamMember.PersonID == tm.PersonID && o.sendObject.teamMember.LastUpdatedUTC == tm.LastUpdatedUTC)) { return true; }
@@ -124,7 +128,7 @@ namespace WF_ICS_ClassLibrary.Networking
                         if (objectsSent.Any(o => o.sendObject.icsRole != null && o.sendObject.icsRole.OrgChartRoleID == cle.OrgChartRoleID && o.sendObject.icsRole.LastUpdatedUTC == cle.LastUpdatedUTC)) { return true; }
                         else if (objectsReceived.Any(o => o.sendObject.icsRole != null && o.sendObject.icsRole.OrgChartRoleID == cle.OrgChartRoleID && o.sendObject.icsRole.LastUpdatedUTC == cle.LastUpdatedUTC)) { return true; }
                         return false;
-
+                        */
                         /*
                     case Assignment a:
                         if (objectsSent.Any(o => o.sendObject.assignment != null && o.sendObject.assignment.AssignmentID == a.AssignmentID && o.sendObject.assignment.LastUpdated == a.LastUpdated)) { return true; }

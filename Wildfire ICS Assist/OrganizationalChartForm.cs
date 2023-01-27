@@ -51,7 +51,7 @@ namespace Wildfire_ICS_Assist
         }
         private void Program_ICSRoleChanged(ICSRoleEventArgs e)
         {
-            if (e.item != null && CurrentOrgChart.AllRoles.Any(o => o.RoleID == e.item.RoleID)) { PopulateTree(e.item); }
+            if (e.item != null && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == e.item.RoleID)) { PopulateTree(e.item); }
             else { PopulateTree(); }
         }
 
@@ -115,7 +115,7 @@ namespace Wildfire_ICS_Assist
 
         private void AddCurrentChild(Guid parentId, TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.AllRoles.Where(o => o.ReportsTo == parentId).ToList();
+            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == parentId).ToList();
 
             foreach (var row in rows)
             {
@@ -332,7 +332,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-                string csv = OrgChartTools.OrgChartToCSV(CurrentOrgChart.AllRoles, delimiter);
+                string csv = OrgChartTools.OrgChartToCSV(CurrentOrgChart.ActiveRoles, delimiter);
                 try
                 {
                     System.IO.File.WriteAllText(exportPath, csv);

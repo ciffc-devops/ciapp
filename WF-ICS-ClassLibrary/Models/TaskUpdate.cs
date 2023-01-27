@@ -96,6 +96,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(10)] private string _DataEnc;
         [ProtoMember(5)] private string _DataAsXMLString;
         [ProtoMember(11)] private string _DataAsJSONString;
+        [ProtoMember(12)] private string _Source;
 
         public TaskUpdate() { UpdateID = System.Guid.NewGuid(); }
 
@@ -144,6 +145,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid MachineID { get => _MachineID; set => _MachineID = value; }
         public string ObjectType { get => _ObjcetType; set => _ObjcetType = value; }
         public string DataEnc { get => _DataEnc; set => _DataEnc = value; }
+        public string Source { get => _Source; set => _Source = value; }
 
         public TaskUpdate Clone()
         {

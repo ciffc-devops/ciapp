@@ -162,18 +162,14 @@ namespace WildfireICSDesktopServices
 
             if (!update.ProcessedLocally && update.Data != null)
             {
-                string source = "internet";
-
+                string source = update.Source;
+                
                 if (update.CommandName.Equals("UPSERT"))
                 {
                     update.ProcessedLocally = true;
                     UpsertObject(update.Data, source);
                 }
-                else if (update.CommandName.Equals("DELETE"))
-                {
-                    update.ProcessedLocally = true;
-                    DeleteObject(update.Data, source);
-                }
+               
                 else if (update.CommandName.Equals("INITIAL"))
                 {
                     TaskBasics basics = update.Data as TaskBasics;
@@ -184,13 +180,13 @@ namespace WildfireICSDesktopServices
 
                         _currentIncident.TaskID = basics.TaskID;
                         update.ProcessedLocally = true;
-                        UpdateTaskBasics(basics, "internet");
+                        UpdateTaskBasics(basics, source);
 
                     }
                     else
                     {
                         update.ProcessedLocally = true;
-                        UpdateTaskBasics(basics, "internet");
+                        UpdateTaskBasics(basics, source);
                     }
                 }
 
@@ -361,14 +357,15 @@ namespace WildfireICSDesktopServices
             {
                 UpdateTaskBasics(((TaskBasics)obj), source);
             }
-            else if (dataClassName.Equals(new Timeline().GetType().Name))
+          
+            /*else if (dataClassName.Equals(new Timeline().GetType().Name))
             {
                 UpsertTimeline(((Timeline)obj).Clone(), source);
             }
             else if (dataClassName.Equals(new TimelineEvent().GetType().Name))
             {
                 UpsertTimelineEvent(((TimelineEvent)obj).Clone(), source);
-            }
+            }*/
             else if (dataClassName.Equals(new Vehicle().GetType().Name))
             {
                 UpsertVehicle(((Vehicle)obj).Clone(), source);
@@ -383,6 +380,8 @@ namespace WildfireICSDesktopServices
             }
         }
 
+
+        /*
         public void DeleteObject(object obj, string source)
         {
             string dataClassName = obj.GetType().Name;
@@ -415,7 +414,7 @@ namespace WildfireICSDesktopServices
                 DeleteVehicle(((Vehicle)obj).Clone(), source);
             }
         }
-
+        */
 
 
         protected virtual void OnWFIncidentChanged(WFIncidentEventArgs e)
@@ -609,6 +608,8 @@ namespace WildfireICSDesktopServices
             }
             OnContactChanged(new ContactEventArgs(record));
         }
+
+        /*
         public void DeleteContact(Contact contact, string source = "local")
         {
             if (_currentIncident.allContacts.Any(o => o.ContactID == contact.ContactID))
@@ -630,7 +631,7 @@ namespace WildfireICSDesktopServices
             }
 
         }
-
+        */
         // Incident Objectives
         protected virtual void OnIncidentObjectivesSheetChanged(IncidentObjectivesSheetEventArgs e)
         {
@@ -703,6 +704,7 @@ namespace WildfireICSDesktopServices
             OnIncidentObjectiveChanged(new IncidentObjectiveEventArgs(record));
         }
 
+        /*
         public void DeleteIncidentObjective(IncidentObjective record, string source = "local")
         {
             IncidentObjectivesSheet sheet = null;
@@ -741,7 +743,7 @@ namespace WildfireICSDesktopServices
 
 
         }
-
+        */
 
 
 
@@ -1062,6 +1064,9 @@ namespace WildfireICSDesktopServices
 
         public void DeleteICSRole(ICSRole roleToDelete, int opsPeriod, string source = "local")
         {
+            roleToDelete.Active = false;
+            UpsertICSRole(roleToDelete, source);
+            /*
             if(_currentIncident.allOrgCharts.Any(o=>o.OpPeriod == opsPeriod))
             {
                 OrganizationChart org = _currentIncident.allOrgCharts.First(o => o.OpPeriod == opsPeriod);
@@ -1091,7 +1096,7 @@ namespace WildfireICSDesktopServices
 
                     }
                 }
-            }
+            }*/
         }
 
 
@@ -1145,7 +1150,7 @@ namespace WildfireICSDesktopServices
 
 
 
-
+        /*
         // Timeline
         public void RefreshAutomatedTimelineEvents()
         {
@@ -1224,7 +1229,7 @@ namespace WildfireICSDesktopServices
 
             }
         }
-
+        */
 
 
         // General Message
@@ -1332,6 +1337,8 @@ namespace WildfireICSDesktopServices
             }
             OnVehicleChanged(new VehicleEventArgs(record));
         }
+
+        /*
         public void DeleteVehicle(Vehicle record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
@@ -1351,14 +1358,11 @@ namespace WildfireICSDesktopServices
             {
                 Vehicle toDelete = _currentIncident.allVehicles.First(o => o.ID == RecordID);
                 DeleteVehicle(toDelete, source);
-                /*
-                _currentTask.allVehicles = _currentTask.allVehicles.Where(o => o.VehicleID != RecordID).ToList();
-                toDelete.LastUpdatedUTC = DateTime.UtcNow;
-                OnVehicleChanged(new VehicleEventArgs(toDelete));*/
+
             }
 
         }
-
+*/
 
         //Member Status
         public void UpsertMemberStatus(SignInRecord signIn, string source = "local")
@@ -1434,6 +1438,7 @@ namespace WildfireICSDesktopServices
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(te, "UPSERT", true, false); }
             OnTaskEquipmentChanged(new TaskEquipmentEventArgs(te));
         }
+        /*
         public void DeleteTaskEquipment(TaskEquipment te, string source = "local")
         {
 
@@ -1445,7 +1450,7 @@ namespace WildfireICSDesktopServices
                 OnTaskEquipmentChanged(new TaskEquipmentEventArgs(te));
             }
 
-        }
+        }*/
 
         protected virtual void OnTaskEquipmentChanged(TaskEquipmentEventArgs e)
         {
@@ -1498,18 +1503,14 @@ namespace WildfireICSDesktopServices
             OnCommsChanged(new CommsEventArgs(entry));
 
         }
+        /*
         public void DeleteCommsLogEntry(Guid EntryID, string source = "local")
         {
             if (_currentIncident.allCommsLogEntries.Any(o => o.EntryID == EntryID))
             {
                 CommsLogEntry toDelete = _currentIncident.allCommsLogEntries.First(o => o.EntryID == EntryID);
                 DeleteCommsLogEntry(toDelete, source);
-                /*
-                _currentTask.allCommsLogEntries = _currentTask.allCommsLogEntries.Where(o => o.EntryID != EntryID).ToList();
-                toDelete.LastUpdatedUTC = DateTime.UtcNow;
-                if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(toDelete, "DELETE", true, false); }
-                OnCommsChanged(new CommsEventArgs(toDelete));
-                */
+               
             }
         }
         public void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local")
@@ -1522,7 +1523,7 @@ namespace WildfireICSDesktopServices
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(toDelete, "DELETE", true, false); }
                 OnCommsChanged(new CommsEventArgs(toDelete));
             }
-        }
+        }*/
 
         protected virtual void OnCommsChanged(CommsEventArgs e)
         {
@@ -1559,11 +1560,80 @@ namespace WildfireICSDesktopServices
             }
         }
 
+        public void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
 
+        public void DeleteCommsLogEntry(Guid EntryID, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
 
+        public void DeleteContact(Contact contact, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
 
+        public void DeleteContact(Guid contactID, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
 
+        public void DeleteIncidentObjective(Guid IncidentObjectiveID, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
 
+        public void DeleteIncidentObjective(IncidentObjective record, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteObject(object obj, string source)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteTaskEquipment(TaskEquipment te, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteTimelineEvent(Guid RecordID, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteTimelineEvent(TimelineEvent record, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteVehicle(Guid RecordID, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteVehicle(Vehicle record, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RefreshAutomatedTimelineEvents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpsertTimeline(Timeline record, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpsertTimelineEvent(TimelineEvent record, string source = "local")
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

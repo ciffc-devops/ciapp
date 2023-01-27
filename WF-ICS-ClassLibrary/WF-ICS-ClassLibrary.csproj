@@ -101,6 +101,7 @@
     <Compile Include="EventHandling\IncidentObjectiveEventHandling.cs" />
     <Compile Include="EventHandling\MedicalPlanEventHandler.cs" />
     <Compile Include="EventHandling\MemberEventHandler.cs" />
+    <Compile Include="EventHandling\NetworkEventHandlers.cs" />
     <Compile Include="EventHandling\NoteEventHandler.cs" />
     <Compile Include="EventHandling\OperationalPeriodEventHandler.cs" />
     <Compile Include="EventHandling\OrganizationalChartEventHandler.cs" />

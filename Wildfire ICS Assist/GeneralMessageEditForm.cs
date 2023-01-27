@@ -52,15 +52,15 @@ namespace Wildfire_ICS_Assist
             else { datMessageSent.Value = DateTime.Now; }
             if (generalMessage.ReplyDate != DateTime.MinValue) { datReplyReceived.Value = generalMessage.ReplyDate; }
             else { datMessageSent.Value = DateTime.Now; }
-            if (generalMessage.FromRoleID != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == generalMessage.FromRoleID)) { cboFrom.SelectedValue = generalMessage.FromRoleID; }
-            if (generalMessage.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == generalMessage.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = generalMessage.ApprovedByRoleID; }
+            if (generalMessage.FromRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == generalMessage.FromRoleID)) { cboFrom.SelectedValue = generalMessage.FromRoleID; }
+            if (generalMessage.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == generalMessage.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = generalMessage.ApprovedByRoleID; }
 
         }
 
         private void PopulateComboBox(ComboBox cbo)
         {
 
-            List<ICSRole> roles = CurrentOrgChart.Clone().AllRoles;
+            List<ICSRole> roles = CurrentOrgChart.Clone().ActiveRoles;
             ICSRole blank = new ICSRole();
             blank.RoleID = Guid.Empty;
             blank.RoleName = "-None-";
