@@ -1,4 +1,5 @@
-﻿using NetworkCommsDotNet.Tools;
+﻿using NetworkCommsDotNet.DPSBase;
+using NetworkCommsDotNet.Tools;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace WF_ICS_ClassLibrary.Networking
 {
     [ProtoContract]
     [Serializable]
-    public class NetworkSendObject
+    public class NetworkSendObject 
     {
         public NetworkSendObject()
         {
@@ -38,7 +39,7 @@ namespace WF_ICS_ClassLibrary.Networking
         [ProtoMember(32)] private GeneralOptions _generalOptions;
 
 
-        [ProtoIgnore] private TaskUpdate _taskUpdate; //[ProtoMember(43)] private TaskUpdate _taskUpdate;
+        [ProtoMember(43)] private TaskUpdate _taskUpdate; //[ProtoMember(43)] private TaskUpdate _taskUpdate;
         [ProtoMember(44)] private bool _UploadedToInternet;
 
         public Guid GuidValue { get { return _guidValue; } set { _guidValue = value; } }
