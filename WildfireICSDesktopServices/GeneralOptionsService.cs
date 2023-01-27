@@ -390,6 +390,10 @@ namespace WildfireICSDesktopServices
                     return _options.DefaultSaveLocation;
                 case "LastIpUsedWhenMachineIsServer":
                     return _options.LastIpUsedWhenMachineIsServer;
+                case "LastServerIP":
+                    return _options.LastServerIP;
+                case "LastPort":
+                    return _options.LastPort;
                 default:
                     return null;
             }

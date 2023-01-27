@@ -118,8 +118,8 @@ namespace Wildfire_ICS_Assist
             pnlServerInfo.Enabled = false; pnlServerInfo.BackColor = SystemColors.Control;
             lblServerInfo.Text = "--";
 
-            string lastIP = Program.generalOptionsService.GetStringOptionValue("LastServerIP").ToString();
-            string lastPort = Program.generalOptionsService.GetStringOptionValue("LastPort").ToString();
+            string lastIP = Program.generalOptionsService.GetStringOptionValue("LastServerIP");
+            string lastPort = Program.generalOptionsService.GetStringOptionValue("LastPort");
             txtServerIP.Text = lastIP;
             txtServerPort.Text = lastPort;
             txtServerIP.Focus();
