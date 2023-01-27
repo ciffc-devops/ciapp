@@ -38,7 +38,7 @@ namespace WF_ICS_ClassLibrary.Networking
         [ProtoMember(32)] private GeneralOptions _generalOptions;
 
 
-        [ProtoMember(43)] private TaskUpdate _taskUpdate;
+        [ProtoIgnore] private TaskUpdate _taskUpdate; //[ProtoMember(43)] private TaskUpdate _taskUpdate;
         [ProtoMember(44)] private bool _UploadedToInternet;
 
         public Guid GuidValue { get { return _guidValue; } set { _guidValue = value; } }
