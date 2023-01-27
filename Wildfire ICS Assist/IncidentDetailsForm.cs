@@ -86,6 +86,7 @@ namespace Wildfire_ICS_Assist
             if (Program.generalOptionsService.GetOptionsValue("DefaultPort") != null) { defaultPortNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("DefaultPort")); }
 
             string tempServerIP = null;
+            if (Program.generalOptionsService.GetStringOptionValue("LastIpUsedWhenMachineIsServer") != null) { tempServerIP = Program.generalOptionsService.GetStringOptionValue("LastIpUsedWhenMachineIsServer"); }
 
             List<string> allIPs = Program.networkService.GetAllIPs(false);
             if (allIPs.Count == 0)
@@ -99,7 +100,7 @@ namespace Wildfire_ICS_Assist
             {
                 tempServerIP = allIPs[0];
             }
-            else if (allIPs.Count > 1)
+            else if (allIPs.Count > 1 && !allIPs.Contains(tempServerIP))
             {
 
 
