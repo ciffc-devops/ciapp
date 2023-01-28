@@ -638,10 +638,11 @@ namespace WildfireICSDesktopServices
 
         Guid NetworkTestGuidValue = Guid.Empty;
         
-        public void sendTestConnection(Guid IncidentID, string ip = null, string port = null)
+        public Guid sendTestConnection(Guid IncidentID, string ip = null, string port = null)
         {
             NetworkTestGuidValue = Guid.NewGuid();
             SendNetworkObject(NetworkTestGuidValue, IncidentID,  "test", ip, port);
+            return NetworkTestGuidValue;
         }
 
       

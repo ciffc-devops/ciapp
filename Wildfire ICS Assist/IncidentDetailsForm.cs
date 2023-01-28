@@ -2154,7 +2154,7 @@ namespace Wildfire_ICS_Assist
 
         public void sendTestConnection(string ip = null, string port = null)
         {
-            NetworkTestGuidValue = Guid.NewGuid();
+           
             silentNetworkTest = false;
             pnlNetworkSyncInProgress.Visible = true;
             pnlNetworkSyncInProgress.BringToFront();
@@ -2172,7 +2172,7 @@ namespace Wildfire_ICS_Assist
             lblNetworkSyncStatus.Text = "Beginning Network Status Check";
             lblNetworkShareMoreInfoMsg.Visible = false;
             pbNetworkSyncInProgress.Value = 1;
-            Program.networkService.sendTestConnection(CurrentIncident.TaskID, ip, port);
+            NetworkTestGuidValue = Program.networkService.sendTestConnection(CurrentIncident.TaskID, ip, port);
 
             if (initialConnectionTest)
             {
