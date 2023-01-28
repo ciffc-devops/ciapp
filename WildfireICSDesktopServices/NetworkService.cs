@@ -43,8 +43,8 @@ namespace WildfireICSDesktopServices
         public event LocalNetworkIncomingSendObjectEventHandler localNetworkIncomingObjectEvent;
 
 
-        public NetworkService() { networkSendLog = new NetworkSendLog(); }
-        public NetworkService(string serverIP, string portToUse, bool IsClient, bool IsHost) { ServerIP = serverIP; ServerPortStr = portToUse; ThisMachineIsClient = IsClient; ThisMachineIsServer = IsHost; networkSendLog = new NetworkSendLog(); }
+        public NetworkService() { networkSendLog = new NetworkSendLog(); SetUpEvents()}
+        public NetworkService(string serverIP, string portToUse, bool IsClient, bool IsHost) { ServerIP = serverIP; ServerPortStr = portToUse; ThisMachineIsClient = IsClient; ThisMachineIsServer = IsHost; networkSendLog = new NetworkSendLog(); SetUpEvents() }
 
         public string EncryptionKey { get => _encryptionKey; set => _encryptionKey = value; }
         public bool ThisMachineIsStandAlone { get => _thisMachineIsStandAlone; set => _thisMachineIsStandAlone = value; }
