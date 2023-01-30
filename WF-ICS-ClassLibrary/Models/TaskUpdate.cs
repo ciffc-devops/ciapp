@@ -156,11 +156,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 objDecrypted = JsonSerializer.Deserialize<PositionLogEntry>(jsonData);
             }
-            else if (ObjectType.Equals(new SafetyPlan().GetType().Name))
-            {
-                objDecrypted = JsonSerializer.Deserialize<SafetyPlan>(jsonData);
-            }
-
+       
             else if (ObjectType.Equals(new TaskBasics().GetType().Name))
             {
                 objDecrypted = JsonSerializer.Deserialize<TaskBasics>(jsonData);
@@ -264,10 +260,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 objDecrypted = xmlData.XmlDeserializeFromString<PositionLogEntry>();
             }
-            else if (ObjectType.Equals(new SafetyPlan().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<SafetyPlan>();
-            }
+       
             
             else if (ObjectType.Equals(new TaskBasics().GetType().Name))
             {

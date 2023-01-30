@@ -50,7 +50,7 @@ namespace WildfireICSDesktopServices
             try
             {
                 string dataDecrypt = StringCipher.Decrypt(update.DataEnc, encryptKey);
-                objDecrypted = update.ObjectFromXMLData(dataDecrypt, update.ObjectType);
+                objDecrypted = update.ObjectFromJSONData(dataDecrypt, update.ObjectType);
 
             }
             catch (Exception)

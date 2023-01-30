@@ -782,6 +782,9 @@
     <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\ICS-208-WF-Safety-Message-with-image.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS-208-WF-Safety-Message.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -840,6 +843,7 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-38-picture.png" />
     <None Include="Resources\glyphicons-basic-639-octagon-remove-empty-red.png" />
     <None Include="Resources\glyphicons-basic-739-check-green.png" />
     <None Include="Resources\glyphicons-basic-613-paste.png" />

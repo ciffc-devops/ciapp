@@ -308,6 +308,11 @@ namespace WildfireICSDesktopServices
 
 
                     string fileToUse = "BlankForms/ICS-208-WF-Safety-Message.pdf";
+                    if(!string.IsNullOrEmpty(plan.ImageBytes))
+                    {
+                        fileToUse = "BlankForms/ICS-208-WF-Safety-Message-with-image.pdf";
+                    }
+
                     PdfReader rdr = new PdfReader(fileToUse);
 
                     using (FileStream stream = new System.IO.FileStream(path, System.IO.FileMode.Create))
@@ -332,7 +337,17 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("Text1", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
 
+                        if (!string.IsNullOrEmpty(plan.ImageBytes))
+                        {
+                            iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(plan.ImageBytes.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
 
+                            pic.ScaleToFit(530, 220);
+                            float x = 50; //((250 - pic.ScaledWidth) / 2) + 315;
+                            float y = 100;
+                            pic.SetAbsolutePosition(x, y);
+
+                            stamper.GetOverContent(1).AddImage(pic);
+                        }
 
 
 
