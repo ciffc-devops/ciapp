@@ -200,6 +200,46 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_217_lock {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-217-lock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_217_lock_2x {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-217-lock@2x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_218_lock_open {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-218-lock-open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_218_lock_open_2x {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-218-lock-open@2x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_221_chevron_down_3x {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_221_chevron_down_3x", resourceCulture);

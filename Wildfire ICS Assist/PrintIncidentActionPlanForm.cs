@@ -551,5 +551,28 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void chkFlattenPDF_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+            if (chk.Checked) { chk.ImageIndex = 1; chk.Text = "All PDF fields will be locked"; }
+            else { chk.ImageIndex = 0; chk.Text = "All PDF fields will be editable"; }
+        }
+
+        private void txtCriticalMessage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCriticalMessage_Leave(object sender, EventArgs e)
+        {
+            OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
+            if(period.CriticalMessage == null || !period.CriticalMessage.Equals(txtCriticalMessage.Text))
+            {
+                period.CriticalMessage = txtCriticalMessage.Text;
+                Program.wfIncidentService.UpsertOperationalPeriod(period);
+
+            }
+
+        }
     }
 }
