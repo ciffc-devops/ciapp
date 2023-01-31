@@ -487,7 +487,7 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 if (_signInTime > DateTime.MinValue) { return _signInTime.ToString("HH:mm yyyy-MMM-dd"); }
-                else { return "Not signed in"; }
+                else { return "Not checked in"; }
             }
         }
         public DateTime SignOutTime { get { return _signOutTime; } set { _signOutTime = value; } }
@@ -497,7 +497,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (_signOutTime < DateTime.MaxValue)
                 {
-                    return string.Format("{0:HH:mm}", _signOutTime);
+                    return string.Format("{0:yyyy-MMM-dd HH:mm}", _signOutTime);
                 }
                 else
                 {
@@ -537,6 +537,16 @@ namespace WF_ICS_ClassLibrary.Models
 
         //public string ICSRoleName { get { return currentICSRole.RoleName; } }
         public string getCurrentActivityName { get { if (ICSRoleID != Guid.Empty && AssignmentNameWthNumber != "Signed Out") { return ICSRoleName; } else { return AssignmentNameWthNumber; } } }
+        public bool IsAssigned
+        {
+            get
+            {
+                if (ICSRoleID != Guid.Empty) { return true; }
+                if(AssignmentID != Guid.Empty) { return true; }
+                return false;
+            }
+        }
+
         public decimal KMs { get => _kms; set => _kms = value; }
 
         public string MemberName { get => _MemberName; set => _MemberName = value; }
@@ -580,7 +590,56 @@ namespace WF_ICS_ClassLibrary.Models
 
    public static class TeamMemberTools
     {
-        public static List<AgencyPersonnelCount> GetAgencyPersonnelCount(this WFIncident incident, int OpPeriod)
+        public static string ExportSignInRecordsToCSV(this WFIncident incident, List<MemberStatus> records, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            //header row
+            csv.Append("NAME"); csv.Append(delimiter);
+            csv.Append("PROVINCE OR TERRITORY"); csv.Append(delimiter);
+            csv.Append("AGENCY"); csv.Append(delimiter);
+            
+            csv.Append("CHECK IN"); csv.Append(delimiter);
+            csv.Append("LDW"); csv.Append(delimiter);
+            csv.Append("DEPARTURE POINT"); csv.Append(delimiter);
+            csv.Append("METHOD OF TRAVEL"); csv.Append(delimiter);
+            csv.Append("CHECK OUT"); csv.Append(delimiter);
+           
+
+            csv.Append(Environment.NewLine);
+            foreach (MemberStatus status in records.OrderBy(o => o.MemberName))
+            {
+                SignInRecord rec  = new SignInRecord();
+                if (incident.AllSignInRecords.Any(o => o.MemberID == status.MemberID))
+                {
+                   rec = incident.AllSignInRecords.Where(o => o.MemberID == status.MemberID).First();
+                }
+
+
+                csv.Append(status.MemberName.EscapeQuotes());
+                csv.Append(delimiter);
+                if (rec != null) { csv.Append(rec.teamMember.ProvinceNameShort.EscapeQuotes()); }
+                csv.Append(delimiter);
+                csv.Append(status.OrganizationName.EscapeQuotes());
+                csv.Append(delimiter);
+               
+                csv.Append(status.SignInTime.ToString("yyyy-MMM-dd HH:mm"));
+                csv.Append(delimiter);
+                csv.Append(status.LastDayWorked.ToString("yyyy-MMM-dd HH:mm"));
+                csv.Append(delimiter);
+                if (rec != null) { csv.Append(rec.DeparturePoint.EscapeQuotes()); }
+                csv.Append(delimiter);
+                if (rec != null) { csv.Append(rec.MethodOfTravel.EscapeQuotes()); }
+                csv.Append(delimiter);
+
+
+                csv.Append(status.SignOutTimeOrBlank);
+               
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
+        }
+
+           public static List<AgencyPersonnelCount> GetAgencyPersonnelCount(this WFIncident incident, int OpPeriod)
         {
             List<AgencyPersonnelCount> counts = new List<AgencyPersonnelCount>();
 

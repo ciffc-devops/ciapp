@@ -42,7 +42,7 @@
             this.cboMethodOfTravel = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblLastDayWorking = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDeparturePoint = new System.Windows.Forms.TextBox();
             this.datLDW = new System.Windows.Forms.DateTimePicker();
@@ -175,7 +175,7 @@
             this.pnlCheckInInfo.Controls.Add(this.cboMethodOfTravel);
             this.pnlCheckInInfo.Controls.Add(this.label8);
             this.pnlCheckInInfo.Controls.Add(this.label7);
-            this.pnlCheckInInfo.Controls.Add(this.label5);
+            this.pnlCheckInInfo.Controls.Add(this.lblLastDayWorking);
             this.pnlCheckInInfo.Controls.Add(this.label4);
             this.pnlCheckInInfo.Controls.Add(this.txtDeparturePoint);
             this.pnlCheckInInfo.Controls.Add(this.datLDW);
@@ -241,15 +241,15 @@
             this.label7.Text = "Departure Point";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label5
+            // lblLastDayWorking
             // 
-            this.label5.Location = new System.Drawing.Point(6, 115);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(187, 29);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Last Day Working*";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblLastDayWorking.Location = new System.Drawing.Point(6, 115);
+            this.lblLastDayWorking.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblLastDayWorking.Name = "lblLastDayWorking";
+            this.lblLastDayWorking.Size = new System.Drawing.Size(187, 29);
+            this.lblLastDayWorking.TabIndex = 20;
+            this.lblLastDayWorking.Text = "Last Day Working*";
+            this.lblLastDayWorking.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
@@ -280,6 +280,7 @@
             this.datLDW.Name = "datLDW";
             this.datLDW.Size = new System.Drawing.Size(225, 29);
             this.datLDW.TabIndex = 16;
+            this.datLDW.ValueChanged += new System.EventHandler(this.datLDW_ValueChanged);
             // 
             // datCheckInTime
             // 
@@ -291,6 +292,7 @@
             this.datCheckInTime.Name = "datCheckInTime";
             this.datCheckInTime.Size = new System.Drawing.Size(225, 29);
             this.datCheckInTime.TabIndex = 15;
+            this.datCheckInTime.ValueChanged += new System.EventHandler(this.datCheckInTime_ValueChanged);
             // 
             // label3
             // 
@@ -417,7 +419,7 @@
         private System.Windows.Forms.ComboBox cboMethodOfTravel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblLastDayWorking;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtDeparturePoint;
         private System.Windows.Forms.DateTimePicker datLDW;

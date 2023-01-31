@@ -2520,5 +2520,70 @@ namespace Wildfire_ICS_Assist
 
 
         }
+
+        private void btnLogisticsMemberStatus_Click(object sender, EventArgs e)
+        {
+            OpenPersonnelListForm();
+        }
+
+        private void btnLogisticsSignIn_Click(object sender, EventArgs e)
+        {
+            using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+            {
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    SignInRecord record = signInForm.signInRecord;
+                    record.IsSignIn = true;
+                    Program.wfIncidentService.UpsertMemberStatus(record);
+                }
+            }
+        }
+
+        private void btnLogisticsBulkSignIn_Click(object sender, EventArgs e)
+        {
+            using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
+            {
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    foreach (SignInRecord record in signInForm.records)
+                    {
+                        record.IsSignIn = true;
+                        Program.wfIncidentService.UpsertMemberStatus(record);
+                    }
+                }
+            }
+        }
+
+        private void bulkCheckInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
+            {
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    foreach (SignInRecord record in signInForm.records)
+                    {
+                        record.IsSignIn = true;
+                        Program.wfIncidentService.UpsertMemberStatus(record);
+                    }
+                }
+            }
+        }
+
+        private void checkInMemberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+            {
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    SignInRecord record = signInForm.signInRecord;
+                    record.IsSignIn = true;
+                    Program.wfIncidentService.UpsertMemberStatus(record);
+                }
+            }
+        }
     }
 }
