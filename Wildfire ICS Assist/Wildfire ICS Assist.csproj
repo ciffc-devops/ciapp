@@ -861,6 +861,8 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-89-book-address.png" />
+    <None Include="Resources\glyphicons-basic-89-book-address1.png" />
     <None Include="Resources\glyphicons-basic-965-layers-plus1.png" />
     <None Include="Resources\glyphicons-basic-218-lock-open%402x.png" />
     <None Include="Resources\glyphicons-basic-217-lock%402x.png" />
@@ -931,7 +933,6 @@
     <None Include="Resources\glyphicons-basic-151-square-edit.png" />
     <None Include="Resources\glyphicons-basic-145-folder-open.png" />
     <None Include="Resources\glyphicons-basic-137-cogwheel.png" />
-    <None Include="Resources\glyphicons-basic-89-book-address.png" />
     <None Include="Resources\glyphicons-basic-82-refresh.png" />
     <None Include="Resources\glyphicons-basic-61-compass.png" />
     <None Include="Resources\glyphicons-basic-58-history.png" />

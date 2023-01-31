@@ -810,16 +810,6 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap glyphicons_basic_89_book_address {
-            get {
-                object obj = ResourceManager.GetObject("glyphicons_basic_89_book_address", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_931_speech_bubble_question_2x {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_931_speech_bubble_question_2x", resourceCulture);
@@ -843,6 +833,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_931_speech_bubble_question_sm {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_931_speech_bubble_question_sm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_965_layers_plus1 {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons_basic_965_layers_plus1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

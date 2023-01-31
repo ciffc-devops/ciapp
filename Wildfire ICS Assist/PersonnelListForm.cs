@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
@@ -24,6 +25,7 @@ namespace Wildfire_ICS_Assist
         private void PersonnelListForm_Load(object sender, EventArgs e)
         {
             BuildDataLists();
+            Program.wfIncidentService.MemberSignInChanged += Program_TeamMembersUpdated;
         }
 
         private void Program_TeamMembersUpdated(MemberEventArgs e)
@@ -34,9 +36,12 @@ namespace Wildfire_ICS_Assist
 
         private void BuildDataLists()
         {
+            dgvPersonnel.DataSource = null;
+            List<MemberStatus> memberStatuses = Program.CurrentIncident.getAllMemberStatus(Program.CurrentOpPeriod);
+            dgvPersonnel.AutoGenerateColumns = false;
+            dgvPersonnel.DataSource = memberStatuses;
 
-
-
+            dgvTotalByAgency.AutoGenerateColumns = false;
             dgvTotalByAgency.DataSource = null;
             List<AgencyPersonnelCount> agencyCounts = Program.CurrentIncident.GetAgencyPersonnelCount(Program.CurrentOpPeriod);
             dgvTotalByAgency.DataSource = agencyCounts;
@@ -52,6 +57,7 @@ namespace Wildfire_ICS_Assist
                 if(dr == DialogResult.OK)
                 {
                     SignInRecord record = signInForm.signInRecord;
+                    record.IsSignIn = true;
                     Program.wfIncidentService.UpsertMemberStatus(record);
                 }
             }

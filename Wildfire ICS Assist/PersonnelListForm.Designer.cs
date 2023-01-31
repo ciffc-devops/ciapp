@@ -31,8 +31,11 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvPersonnel = new System.Windows.Forms.DataGridView();
-            this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.dgvTotalByAgency = new System.Windows.Forms.DataGridView();
+            this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLDW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlSignIn = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.btnBulkSignIn = new System.Windows.Forms.Button();
@@ -50,6 +53,10 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnViewAssignment = new System.Windows.Forms.Button();
             this.btnSignOut = new System.Windows.Forms.Button();
+            this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.dgvTotalByAgency = new System.Windows.Forms.DataGridView();
+            this.colTotalsAgencyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalsCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,11 +66,11 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).BeginInit();
-            this.collapsiblePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTotalByAgency)).BeginInit();
             this.pnlSignIn.SuspendLayout();
             this.pnlBulkOps.SuspendLayout();
             this.pnlSelectedMember.SuspendLayout();
+            this.collapsiblePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTotalByAgency)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -109,40 +116,68 @@
             // 
             this.dgvPersonnel.AllowUserToAddRows = false;
             this.dgvPersonnel.AllowUserToDeleteRows = false;
+            this.dgvPersonnel.AllowUserToResizeColumns = false;
+            this.dgvPersonnel.AllowUserToResizeRows = false;
             this.dgvPersonnel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPersonnel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colAgency,
+            this.colName,
+            this.colCheckIn,
+            this.colLDW,
+            this.colAssignment});
             this.dgvPersonnel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPersonnel.Location = new System.Drawing.Point(0, 0);
             this.dgvPersonnel.Name = "dgvPersonnel";
             this.dgvPersonnel.ReadOnly = true;
+            this.dgvPersonnel.RowHeadersVisible = false;
+            this.dgvPersonnel.RowTemplate.Height = 30;
+            this.dgvPersonnel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonnel.Size = new System.Drawing.Size(1067, 595);
             this.dgvPersonnel.TabIndex = 0;
             // 
-            // collapsiblePanel1
+            // colAgency
             // 
-            this.collapsiblePanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.collapsiblePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.collapsiblePanel1.CollapsedHeight = 40;
-            this.collapsiblePanel1.CollapsedWidth = 264;
-            this.collapsiblePanel1.CollapseLeft = true;
-            this.collapsiblePanel1.Controls.Add(this.dgvTotalByAgency);
-            this.collapsiblePanel1.CurrentlyCollapsed = true;
-            this.collapsiblePanel1.ExpandedHeight = 300;
-            this.collapsiblePanel1.ExpandedWidth = 264;
-            this.collapsiblePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collapsiblePanel1.Location = new System.Drawing.Point(6, 15);
-            this.collapsiblePanel1.Margin = new System.Windows.Forms.Padding(6);
-            this.collapsiblePanel1.Name = "collapsiblePanel1";
-            this.collapsiblePanel1.Size = new System.Drawing.Size(264, 40);
-            this.collapsiblePanel1.TabIndex = 0;
-            this.collapsiblePanel1.TitleText = "Total by Agency";
+            this.colAgency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colAgency.DataPropertyName = "OrganizationName";
+            this.colAgency.HeaderText = "Agency";
+            this.colAgency.Name = "colAgency";
+            this.colAgency.ReadOnly = true;
             // 
-            // dgvTotalByAgency
+            // colName
             // 
-            this.dgvTotalByAgency.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTotalByAgency.Location = new System.Drawing.Point(3, 47);
-            this.dgvTotalByAgency.Name = "dgvTotalByAgency";
-            this.dgvTotalByAgency.Size = new System.Drawing.Size(256, 248);
-            this.dgvTotalByAgency.TabIndex = 33;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "MemberName";
+            this.colName.HeaderText = "Name";
+            this.colName.MinimumWidth = 150;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colCheckIn
+            // 
+            this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCheckIn.DataPropertyName = "SignInTimeAsText";
+            this.colCheckIn.HeaderText = "Check-In";
+            this.colCheckIn.Name = "colCheckIn";
+            this.colCheckIn.ReadOnly = true;
+            this.colCheckIn.Width = 110;
+            // 
+            // colLDW
+            // 
+            this.colLDW.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colLDW.DataPropertyName = "LastDayWorkedAsStr";
+            this.colLDW.HeaderText = "LDW";
+            this.colLDW.Name = "colLDW";
+            this.colLDW.ReadOnly = true;
+            this.colLDW.Width = 76;
+            // 
+            // colAssignment
+            // 
+            this.colAssignment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colAssignment.DataPropertyName = "getCurrentActivityName";
+            this.colAssignment.HeaderText = "Assignment";
+            this.colAssignment.Name = "colAssignment";
+            this.colAssignment.ReadOnly = true;
+            this.colAssignment.Width = 134;
             // 
             // pnlSignIn
             // 
@@ -169,6 +204,7 @@
             // 
             // btnBulkSignIn
             // 
+            this.btnBulkSignIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_431_log_in;
             this.btnBulkSignIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBulkSignIn.Location = new System.Drawing.Point(11, 104);
             this.btnBulkSignIn.Name = "btnBulkSignIn";
@@ -351,6 +387,61 @@
             this.btnSignOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSignOut.UseVisualStyleBackColor = true;
             // 
+            // collapsiblePanel1
+            // 
+            this.collapsiblePanel1.BackColor = System.Drawing.Color.White;
+            this.collapsiblePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.collapsiblePanel1.CollapsedHeight = 40;
+            this.collapsiblePanel1.CollapsedWidth = 265;
+            this.collapsiblePanel1.CollapseLeft = true;
+            this.collapsiblePanel1.Controls.Add(this.dgvTotalByAgency);
+            this.collapsiblePanel1.CurrentlyCollapsed = false;
+            this.collapsiblePanel1.ExpandedHeight = 300;
+            this.collapsiblePanel1.ExpandedWidth = 265;
+            this.collapsiblePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.collapsiblePanel1.Location = new System.Drawing.Point(5, 6);
+            this.collapsiblePanel1.Margin = new System.Windows.Forms.Padding(6);
+            this.collapsiblePanel1.Name = "collapsiblePanel1";
+            this.collapsiblePanel1.Size = new System.Drawing.Size(265, 300);
+            this.collapsiblePanel1.TabIndex = 34;
+            this.collapsiblePanel1.TitleText = "Agency Totals";
+            // 
+            // dgvTotalByAgency
+            // 
+            this.dgvTotalByAgency.AllowUserToAddRows = false;
+            this.dgvTotalByAgency.AllowUserToDeleteRows = false;
+            this.dgvTotalByAgency.AllowUserToResizeColumns = false;
+            this.dgvTotalByAgency.AllowUserToResizeRows = false;
+            this.dgvTotalByAgency.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTotalByAgency.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colTotalsAgencyName,
+            this.colTotalsCount});
+            this.dgvTotalByAgency.Location = new System.Drawing.Point(4, 47);
+            this.dgvTotalByAgency.Name = "dgvTotalByAgency";
+            this.dgvTotalByAgency.ReadOnly = true;
+            this.dgvTotalByAgency.RowHeadersVisible = false;
+            this.dgvTotalByAgency.RowTemplate.Height = 30;
+            this.dgvTotalByAgency.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTotalByAgency.Size = new System.Drawing.Size(256, 248);
+            this.dgvTotalByAgency.TabIndex = 33;
+            // 
+            // colTotalsAgencyName
+            // 
+            this.colTotalsAgencyName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTotalsAgencyName.DataPropertyName = "AgencyName";
+            this.colTotalsAgencyName.HeaderText = "Agency";
+            this.colTotalsAgencyName.Name = "colTotalsAgencyName";
+            this.colTotalsAgencyName.ReadOnly = true;
+            // 
+            // colTotalsCount
+            // 
+            this.colTotalsCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colTotalsCount.DataPropertyName = "Count";
+            this.colTotalsCount.HeaderText = "#";
+            this.colTotalsCount.Name = "colTotalsCount";
+            this.colTotalsCount.ReadOnly = true;
+            this.colTotalsCount.Width = 45;
+            // 
             // PersonnelListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -373,11 +464,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).EndInit();
-            this.collapsiblePanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTotalByAgency)).EndInit();
             this.pnlSignIn.ResumeLayout(false);
             this.pnlBulkOps.ResumeLayout(false);
             this.pnlSelectedMember.ResumeLayout(false);
+            this.collapsiblePanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTotalByAgency)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -404,7 +495,14 @@
         private System.Windows.Forms.Button btnSignOut;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.DataGridView dgvPersonnel;
-        private CustomControls.CollapsiblePanel collapsiblePanel1;
         private System.Windows.Forms.DataGridView dgvTotalByAgency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAgency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLDW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignment;
+        private CustomControls.CollapsiblePanel collapsiblePanel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalsAgencyName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalsCount;
     }
 }

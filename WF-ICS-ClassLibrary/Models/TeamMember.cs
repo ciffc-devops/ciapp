@@ -475,7 +475,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         [ProtoMember(13)] private string _ICSRoleName;
         [ProtoMember(14)] private Guid _ICSRoleID;
-        [ProtoMember(15)] private DateTime _TimeOutRequest;
+        [ProtoMember(15)] private DateTime _LastDayWorked;
         [ProtoMember(16)] private string _Callsign;
 
       
@@ -543,12 +543,12 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid MemberID { get => _MemberID; set => _MemberID = value; }
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
         public string OrganizationName { get => _OrganizationName; set => _OrganizationName = value; }
-        public DateTime TimeOutRequest { get => _TimeOutRequest; set => _TimeOutRequest = value; }
-        public string TimeOutRequestAsStr
+        public DateTime LastDayWorked { get => _LastDayWorked; set => _LastDayWorked = value; }
+        public string LastDayWorkedAsStr
         {
             get
             {
-                if (TimeOutRequest > DateTime.MinValue) { return TimeOutRequest.ToString("HH:mm"); }
+                if (LastDayWorked > DateTime.MinValue) { return LastDayWorked.ToString("yyyy-MMM-dd"); }
                 else { return null; }
             }
         }
@@ -558,7 +558,7 @@ namespace WF_ICS_ClassLibrary.Models
             MemberName = member.Name;
             MemberID = member.PersonID;
             OrganizationID = member.OrganizationID;
-            _OrganizationName = member.Group;
+            _OrganizationName = member.Agency;
             Callsign = member.Callsign;
         }
         public MemberStatus Clone()

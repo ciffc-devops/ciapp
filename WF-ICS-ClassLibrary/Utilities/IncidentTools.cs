@@ -250,7 +250,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                     signIn = task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn).OrderByDescending(o => o.StatusChangeTime).First();
 
                     status.SignInTime = signIn.StatusChangeTime;
-                    if (signIn.TimeOutRequest > DateTime.MinValue) { status.TimeOutRequest = signIn.TimeOutRequest; }
+                    if (signIn.LastDayWorked > DateTime.MinValue) { status.LastDayWorked = signIn.LastDayWorked; }
                     status.KMs = signIn.KMs;
                 }
                 else { status.SignInTime = DateTime.MinValue; }
