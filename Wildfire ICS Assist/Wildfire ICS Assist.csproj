@@ -247,6 +247,18 @@
     <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PersonnelListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelListForm.Designer.cs">
+      <DependentUpon>PersonnelListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelSignInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelSignInForm.Designer.cs">
+      <DependentUpon>PersonnelSignInForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -606,6 +618,12 @@
     <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelListForm.resx">
+      <DependentUpon>PersonnelListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelSignInForm.resx">
+      <DependentUpon>PersonnelSignInForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\NetworkSelectIPForm.resx">
       <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -843,6 +861,7 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-965-layers-plus1.png" />
     <None Include="Resources\glyphicons-basic-218-lock-open%402x.png" />
     <None Include="Resources\glyphicons-basic-217-lock%402x.png" />
     <None Include="Resources\glyphicons-basic-218-lock-open.png" />

@@ -438,9 +438,9 @@
             this.chkUpdateWhenPossible.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkUpdateWhenPossible.Location = new System.Drawing.Point(268, 575);
             this.chkUpdateWhenPossible.Name = "chkUpdateWhenPossible";
-            this.chkUpdateWhenPossible.Size = new System.Drawing.Size(243, 28);
+            this.chkUpdateWhenPossible.Size = new System.Drawing.Size(248, 28);
             this.chkUpdateWhenPossible.TabIndex = 147;
-            this.chkUpdateWhenPossible.Text = "Update existing members";
+            this.chkUpdateWhenPossible.Text = "Update existing personnel";
             this.chkUpdateWhenPossible.UseVisualStyleBackColor = true;
             // 
             // label16
@@ -550,7 +550,7 @@
             this.MinimumSize = new System.Drawing.Size(586, 813);
             this.Name = "ImportSavedTeamMembersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Import members from CSV";
+            this.Text = "Import Personnel from CSV";
             this.Load += new System.EventHandler(this.ImportSavedTeamMembersForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

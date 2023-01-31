@@ -69,6 +69,16 @@ namespace WF_ICS_ClassLibrary.Models
         public string Name { get => _Name; set => _Name = value; }
 
         public string Group { get => _Group; set => _Group = value; } //Use OrganizationName for this value
+        public string NameWithAgency { get
+            {
+                StringBuilder sb = new StringBuilder();
+                if (!string.IsNullOrEmpty(Agency)) {  sb.Append(Agency); sb.Append(" > "); }
+                sb.Append(Name);
+                
+                return sb.ToString();
+
+            }
+        }
         public string NameWithGroup
         {
             get
@@ -561,9 +571,33 @@ namespace WF_ICS_ClassLibrary.Models
         }
     }
 
+    public class AgencyPersonnelCount
+    {
+        public int Count { get; set; }
+        public string AgencyName { get; set; }
+    }
+
 
    public static class TeamMemberTools
     {
+        public static List<AgencyPersonnelCount> GetAgencyPersonnelCount(this WFIncident incident, int OpPeriod)
+        {
+            List<AgencyPersonnelCount> counts = new List<AgencyPersonnelCount>();
+
+            foreach (SignInRecord record in incident.AllSignInRecords.Where(o => o.OpPeriod == OpPeriod))
+            {
+                if (!counts.Any(o => o.AgencyName.Equals(record.teamMember.Agency)))
+                {
+                    AgencyPersonnelCount c = new AgencyPersonnelCount();
+                    c.AgencyName = record.teamMember.Agency;
+                    c.Count = 0;
+                    counts.Add(c);
+                }
+                counts.First(o => o.AgencyName.Equals(record.teamMember.Agency)).Count++;
+            }
+            return counts;
+        }
+
         public static TeamMember getMemberFromQR(string qr)
         {
             TeamMember member = new TeamMember();

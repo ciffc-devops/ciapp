@@ -10,13 +10,14 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
-
+using Rectangle = iTextSharp.text.Rectangle;
 
 namespace WildfireICSDesktopServices
 {
@@ -2887,7 +2888,7 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodEnd));
                         stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
                         stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "OPERATIONAL PERIOD");
-
+                        stamper.AcroFields.SetField("CriticalMessage", "Critical Message for this Operational Period: " + Environment.NewLine +  currentPeriod.CriticalMessage);
                     }
                     else
                     {
@@ -2906,17 +2907,21 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("INCIDENT NAMERow1", task.TaskName);
                     stamper.AcroFields.SetField("Incident NumberRow1", task.TaskNumber);
 
-                   
+                    
 
-                    stamper.AcroFields.SetField("ContentsList", contentsText);
+
+
+                    //stamper.AcroFields.SetField("ContentsList", contentsText);
 
                     if (!string.IsNullOrEmpty(titleImageBytes))
                     {
                         iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(titleImageBytes.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+                        Rectangle mediabox = rdr.GetPageSize(1);
 
-                        pic.ScaleToFit(250, 250);
-                        float x = ((250 - pic.ScaledWidth) / 2) + 315;
-                        pic.SetAbsolutePosition(x, 425);
+                        pic.ScaleToFit(536, 340);
+                        float x = (mediabox.Width / 2) - (pic.ScaledWidth / 2);
+                        float y = 325;
+                        pic.SetAbsolutePosition(x, y);
 
                         stamper.GetOverContent(1).AddImage(pic);
                     }
@@ -2941,9 +2946,12 @@ namespace WildfireICSDesktopServices
                         stamper.FormFlattening = true;
 
                         //re-add the signature field if we flattened it away
-                        int[] instancesOfInterest = { 0 };
-                        stamper = stamper.AddPDFField( fileToUse, "Signature", "Signature", 60, 240, "ReportSignature",  instancesOfInterest);
-                        stamper = stamper.AddPDFField(fileToUse, "Print Name", "TextField", 60, 185, "PrintName", instancesOfInterest);
+                        int[] instancesOfInterest = { 0, 1,2 };
+                        stamper = stamper.AddPDFField( fileToUse, "Signature", "Signature", 38, 222, "ReportSignature",  instancesOfInterest);
+                        stamper = stamper.AddPDFField(fileToUse, "Print Name", "TextField", 38, 200, "PrintName", instancesOfInterest);
+
+                     
+
                     }
 
                     stamper.Close();//Close a PDFStamper Object

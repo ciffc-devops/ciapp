@@ -70,9 +70,14 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             get
             {
-                
+
                 if (teamMember == null) { return false; }
-                if (string.IsNullOrEmpty(teamMember.Name.Trim())) { return false; }
+                if (string.IsNullOrEmpty(teamMember.Name) || string.IsNullOrEmpty(teamMember.Name.Trim()))
+                {
+                    txtName.BackColor = Program.ErrorColor;
+                    return false;
+
+                }
 
                 return true;
             }

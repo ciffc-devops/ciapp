@@ -60,6 +60,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.chkCheckInLists = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,6 +79,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.chkCheckInLists);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.txtCriticalMessage);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
@@ -200,7 +202,7 @@
             // chkSupportVehicles
             // 
             this.chkSupportVehicles.AutoSize = true;
-            this.chkSupportVehicles.Location = new System.Drawing.Point(360, 291);
+            this.chkSupportVehicles.Location = new System.Drawing.Point(360, 325);
             this.chkSupportVehicles.Name = "chkSupportVehicles";
             this.chkSupportVehicles.Size = new System.Drawing.Size(219, 28);
             this.chkSupportVehicles.TabIndex = 31;
@@ -210,7 +212,7 @@
             // chkNotes
             // 
             this.chkNotes.AutoSize = true;
-            this.chkNotes.Location = new System.Drawing.Point(360, 325);
+            this.chkNotes.Location = new System.Drawing.Point(360, 359);
             this.chkNotes.Name = "chkNotes";
             this.chkNotes.Size = new System.Drawing.Size(166, 28);
             this.chkNotes.TabIndex = 30;
@@ -220,7 +222,7 @@
             // chkVerboseActivityLog
             // 
             this.chkVerboseActivityLog.AutoSize = true;
-            this.chkVerboseActivityLog.Location = new System.Drawing.Point(360, 257);
+            this.chkVerboseActivityLog.Location = new System.Drawing.Point(360, 291);
             this.chkVerboseActivityLog.Name = "chkVerboseActivityLog";
             this.chkVerboseActivityLog.Size = new System.Drawing.Size(209, 28);
             this.chkVerboseActivityLog.TabIndex = 29;
@@ -230,7 +232,7 @@
             // chkActivityLog
             // 
             this.chkActivityLog.AutoSize = true;
-            this.chkActivityLog.Location = new System.Drawing.Point(360, 223);
+            this.chkActivityLog.Location = new System.Drawing.Point(360, 257);
             this.chkActivityLog.Name = "chkActivityLog";
             this.chkActivityLog.Size = new System.Drawing.Size(190, 28);
             this.chkActivityLog.TabIndex = 28;
@@ -240,7 +242,7 @@
             // chkGeneralMessages
             // 
             this.chkGeneralMessages.AutoSize = true;
-            this.chkGeneralMessages.Location = new System.Drawing.Point(360, 189);
+            this.chkGeneralMessages.Location = new System.Drawing.Point(360, 223);
             this.chkGeneralMessages.Name = "chkGeneralMessages";
             this.chkGeneralMessages.Size = new System.Drawing.Size(245, 28);
             this.chkGeneralMessages.TabIndex = 27;
@@ -415,6 +417,16 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Images|*.jpg;*.jpeg;*.png;,*.gif,*.bmp";
             // 
+            // chkCheckInLists
+            // 
+            this.chkCheckInLists.AutoSize = true;
+            this.chkCheckInLists.Location = new System.Drawing.Point(360, 189);
+            this.chkCheckInLists.Name = "chkCheckInLists";
+            this.chkCheckInLists.Size = new System.Drawing.Size(190, 28);
+            this.chkCheckInLists.TabIndex = 37;
+            this.chkCheckInLists.Text = "211 - Check In Lists";
+            this.chkCheckInLists.UseVisualStyleBackColor = true;
+            // 
             // PrintIncidentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -471,5 +483,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCriticalMessage;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.CheckBox chkCheckInLists;
     }
 }

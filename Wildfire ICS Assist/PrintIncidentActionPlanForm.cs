@@ -38,6 +38,7 @@ namespace Wildfire_ICS_Assist
             {
                 this.Text = "Print Incident " + CurrentIncident.IncidentIdentifier;
                 lblOpPeriodTitle.Text = "Print Incident " + CurrentIncident.IncidentIdentifier;
+
                 if (PrintIAPByDefault) { setCheckboxStatusIncidentIAP(); }
                 else { setCheckboxStatusIncident(); }
                 if (!string.IsNullOrEmpty(CurrentIncident.IncidentTitleImageBytes))
@@ -54,7 +55,7 @@ namespace Wildfire_ICS_Assist
                 lblOpPeriodTitle.Text = "Print Operational Period #" + CurrentOpPeriod;
                 if (PrintIAPByDefault) { setCheckboxeStatusIAP(); }
                 else { setCheckboxStatusOpPeriod(); }
-
+                txtCriticalMessage.Text = period.CriticalMessage;
                 if (!string.IsNullOrEmpty(period.TitleImageBytes))
                 {
                     Image img = period.TitleImageBytes.getImageFromBytes();

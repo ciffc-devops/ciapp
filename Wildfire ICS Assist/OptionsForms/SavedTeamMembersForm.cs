@@ -111,7 +111,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "Team Members" + string.Format("{0:yyyy-MMM-dd}",DateTime.Now) +".csv";
+            svdExport.FileName = "Personnel-" + string.Format("{0:yyyy-MMM-dd}",DateTime.Now) +".csv";
             DialogResult result = svdExport.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
             {

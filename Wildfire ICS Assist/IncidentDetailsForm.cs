@@ -171,22 +171,22 @@ namespace Wildfire_ICS_Assist
         SavedTeamAssignmentsForm savedTeamAssignmentsForm = null;
 
 
-        CommunicationsListForm communicationsList = null;
-        CommunicationsPlanForm commsPlanForm = null;
-        OrganizationalChartForm orgChartForm = null;
+        CommunicationsListForm _communicationsListForm = null;
+        CommunicationsPlanForm _commsPlanForm = null;
+        OrganizationalChartForm _orgChartForm = null;
         PositionLogForm _positionLogForm = null;
         PositionLogAllOutstandingForm _positionLogAllOutstandingForm = null;
-        IncidentObjectivesForm objectivesForm = null;
-        GeneralMessagesForm generalMessagesForm = null;
-        MedicalPlanForm medicalPlanForm = null;
-        NotesForm notesForm = null;
-        SafetyMessagesForm safetyMessagesForm = null;
-        VehiclesForm vehiclesForm = null;
-        PrintIncidentForm printIAPForm = null;
-        AirOperationsForm airOperationsForm = null;
-        TeamAssignmentsForm teamAssignmentsForm = null;
+        IncidentObjectivesForm _objectivesForm = null;
+        GeneralMessagesForm _generalMessagesForm = null;
+        MedicalPlanForm _medicalPlanForm = null;
+        NotesForm _notesForm = null;
+        SafetyMessagesForm _safetyMessagesForm = null;
+        VehiclesForm _vehiclesForm = null;
+        PrintIncidentForm _printIAPForm = null;
+        AirOperationsForm _airOperationsForm = null;
+        TeamAssignmentsForm _teamAssignmentsForm = null;
         PositionLogReminderForm _positionLogReminderForm = null;
-
+        PersonnelListForm _personnelListForm = null;
 
         
 
@@ -1227,15 +1227,15 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (null == communicationsList)
+                if (null == _communicationsListForm)
                 {
-                    communicationsList = new CommunicationsListForm();
-                    communicationsList.FormClosed += CommunicationsListForm_Closed;
-                    communicationsList.Show(this);
-                    ActiveForms.Add(communicationsList);
+                    _communicationsListForm = new CommunicationsListForm();
+                    _communicationsListForm.FormClosed += CommunicationsListForm_Closed;
+                    _communicationsListForm.Show(this);
+                    ActiveForms.Add(_communicationsListForm);
                 }
 
-                communicationsList.BringToFront();
+                _communicationsListForm.BringToFront();
             }
 
            
@@ -1244,8 +1244,8 @@ namespace Wildfire_ICS_Assist
         void CommunicationsListForm_Closed(object sender, FormClosedEventArgs e)
         {
            
-            RemoveActiveForm(communicationsList);
-            communicationsList = null;
+            RemoveActiveForm(_communicationsListForm);
+            _communicationsListForm = null;
 
         }
 
@@ -1273,15 +1273,15 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (null == orgChartForm)
+                if (null == _orgChartForm)
                 {
-                    orgChartForm = new OrganizationalChartForm();
-                    orgChartForm.FormClosed += OrganizationChartForm_Closed;
-                    orgChartForm.Show(this);
-                    ActiveForms.Add(orgChartForm);
+                    _orgChartForm = new OrganizationalChartForm();
+                    _orgChartForm.FormClosed += OrganizationChartForm_Closed;
+                    _orgChartForm.Show(this);
+                    ActiveForms.Add(_orgChartForm);
                 }
 
-                orgChartForm.BringToFront();
+                _orgChartForm.BringToFront();
             }
 
 
@@ -1290,8 +1290,8 @@ namespace Wildfire_ICS_Assist
         void OrganizationChartForm_Closed(object sender, FormClosedEventArgs e)
         {
 
-            RemoveActiveForm(orgChartForm);
-            orgChartForm = null;
+            RemoveActiveForm(_orgChartForm);
+            _orgChartForm = null;
 
         }
 
@@ -1306,15 +1306,15 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (null == commsPlanForm)
+                if (null == _commsPlanForm)
                 {
-                    commsPlanForm = new CommunicationsPlanForm();
-                    commsPlanForm.FormClosed += CommunicationsPlanForm_Closed;
-                    commsPlanForm.Show(this);
-                    ActiveForms.Add(commsPlanForm);
+                    _commsPlanForm = new CommunicationsPlanForm();
+                    _commsPlanForm.FormClosed += CommunicationsPlanForm_Closed;
+                    _commsPlanForm.Show(this);
+                    ActiveForms.Add(_commsPlanForm);
                 }
 
-                commsPlanForm.BringToFront();
+                _commsPlanForm.BringToFront();
             }
 
 
@@ -1323,8 +1323,8 @@ namespace Wildfire_ICS_Assist
         void CommunicationsPlanForm_Closed(object sender, FormClosedEventArgs e)
         {
 
-            RemoveActiveForm(commsPlanForm);
-            commsPlanForm = null;
+            RemoveActiveForm(_commsPlanForm);
+            _commsPlanForm = null;
 
         }
 
@@ -1455,21 +1455,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (objectivesForm == null)
+                if (_objectivesForm == null)
                 {
-                    objectivesForm = new IncidentObjectivesForm();
-                    objectivesForm.FormClosed += new FormClosedEventHandler(IncidentObjectivesForm_Closed);
-                    ActiveForms.Add(objectivesForm);
-                    objectivesForm.Show(this);
+                    _objectivesForm = new IncidentObjectivesForm();
+                    _objectivesForm.FormClosed += new FormClosedEventHandler(IncidentObjectivesForm_Closed);
+                    ActiveForms.Add(_objectivesForm);
+                    _objectivesForm.Show(this);
                 }
 
-                objectivesForm.BringToFront();
+                _objectivesForm.BringToFront();
             }
         }
         void IncidentObjectivesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(objectivesForm);
-            objectivesForm = null;
+            RemoveActiveForm(_objectivesForm);
+            _objectivesForm = null;
 
 
         }
@@ -1575,21 +1575,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (generalMessagesForm == null)
+                if (_generalMessagesForm == null)
                 {
-                    generalMessagesForm = new GeneralMessagesForm();
-                    generalMessagesForm.FormClosed += new FormClosedEventHandler(GeneralMessagesForm_Closed);
-                    ActiveForms.Add(generalMessagesForm);
-                    generalMessagesForm.Show(this);
+                    _generalMessagesForm = new GeneralMessagesForm();
+                    _generalMessagesForm.FormClosed += new FormClosedEventHandler(GeneralMessagesForm_Closed);
+                    ActiveForms.Add(_generalMessagesForm);
+                    _generalMessagesForm.Show(this);
                 }
 
-                generalMessagesForm.BringToFront();
+                _generalMessagesForm.BringToFront();
             }
         }
         void GeneralMessagesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(generalMessagesForm);
-            generalMessagesForm = null;
+            RemoveActiveForm(_generalMessagesForm);
+            _generalMessagesForm = null;
 
 
         }
@@ -1620,21 +1620,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (medicalPlanForm == null)
+                if (_medicalPlanForm == null)
                 {
-                    medicalPlanForm = new MedicalPlanForm();
-                    medicalPlanForm.FormClosed += new FormClosedEventHandler(MedicalPlanForm_Closed);
-                    ActiveForms.Add(medicalPlanForm);
-                    medicalPlanForm.Show(this);
+                    _medicalPlanForm = new MedicalPlanForm();
+                    _medicalPlanForm.FormClosed += new FormClosedEventHandler(MedicalPlanForm_Closed);
+                    ActiveForms.Add(_medicalPlanForm);
+                    _medicalPlanForm.Show(this);
                 }
 
-                medicalPlanForm.BringToFront();
+                _medicalPlanForm.BringToFront();
             }
         }
         void MedicalPlanForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(medicalPlanForm);
-            medicalPlanForm = null;
+            RemoveActiveForm(_medicalPlanForm);
+            _medicalPlanForm = null;
 
 
         }
@@ -1648,21 +1648,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (notesForm == null)
+                if (_notesForm == null)
                 {
-                    notesForm = new NotesForm();
-                    notesForm.FormClosed += new FormClosedEventHandler(NotesForm_Closed);
-                    ActiveForms.Add(notesForm);
-                    notesForm.Show(this);
+                    _notesForm = new NotesForm();
+                    _notesForm.FormClosed += new FormClosedEventHandler(NotesForm_Closed);
+                    ActiveForms.Add(_notesForm);
+                    _notesForm.Show(this);
                 }
 
-                notesForm.BringToFront();
+                _notesForm.BringToFront();
             }
         }
         void NotesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(notesForm);
-            notesForm = null;
+            RemoveActiveForm(_notesForm);
+            _notesForm = null;
 
 
         }
@@ -1681,21 +1681,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (safetyMessagesForm == null)
+                if (_safetyMessagesForm == null)
                 {
-                    safetyMessagesForm = new SafetyMessagesForm();
-                    safetyMessagesForm.FormClosed += new FormClosedEventHandler(SafetyMessagesForm_Closed);
-                    ActiveForms.Add(safetyMessagesForm);
-                    safetyMessagesForm.Show(this);
+                    _safetyMessagesForm = new SafetyMessagesForm();
+                    _safetyMessagesForm.FormClosed += new FormClosedEventHandler(SafetyMessagesForm_Closed);
+                    ActiveForms.Add(_safetyMessagesForm);
+                    _safetyMessagesForm.Show(this);
                 }
 
-                safetyMessagesForm.BringToFront();
+                _safetyMessagesForm.BringToFront();
             }
         }
         void SafetyMessagesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(safetyMessagesForm);
-            safetyMessagesForm = null;
+            RemoveActiveForm(_safetyMessagesForm);
+            _safetyMessagesForm = null;
 
 
         }
@@ -1709,21 +1709,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (vehiclesForm == null)
+                if (_vehiclesForm == null)
                 {
-                    vehiclesForm = new VehiclesForm();
-                    vehiclesForm.FormClosed += new FormClosedEventHandler(VehiclesForm_Closed);
-                    ActiveForms.Add(vehiclesForm);
-                    vehiclesForm.Show(this);
+                    _vehiclesForm = new VehiclesForm();
+                    _vehiclesForm.FormClosed += new FormClosedEventHandler(VehiclesForm_Closed);
+                    ActiveForms.Add(_vehiclesForm);
+                    _vehiclesForm.Show(this);
                 }
 
-                vehiclesForm.BringToFront();
+                _vehiclesForm.BringToFront();
             }
         }
         void VehiclesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(vehiclesForm);
-            vehiclesForm = null;
+            RemoveActiveForm(_vehiclesForm);
+            _vehiclesForm = null;
 
 
         }
@@ -1737,23 +1737,23 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (printIAPForm == null)
+                if (_printIAPForm == null)
                 {
-                    printIAPForm = new PrintIncidentForm();
-                    printIAPForm.PrintIAPByDefault = DefaultJustIAP;
-                    printIAPForm.PrintIncidentToDate = PrintCompleteIncident;
-                    printIAPForm.FormClosed += new FormClosedEventHandler(PrintIAPForm_Closed);
-                    ActiveForms.Add(printIAPForm);
-                    printIAPForm.Show(this);
+                    _printIAPForm = new PrintIncidentForm();
+                    _printIAPForm.PrintIAPByDefault = DefaultJustIAP;
+                    _printIAPForm.PrintIncidentToDate = PrintCompleteIncident;
+                    _printIAPForm.FormClosed += new FormClosedEventHandler(PrintIAPForm_Closed);
+                    ActiveForms.Add(_printIAPForm);
+                    _printIAPForm.Show(this);
                 }
 
-                printIAPForm.BringToFront();
+                _printIAPForm.BringToFront();
             }
         }
         void PrintIAPForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(printIAPForm);
-            printIAPForm = null;
+            RemoveActiveForm(_printIAPForm);
+            _printIAPForm = null;
 
 
         }
@@ -1821,21 +1821,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (airOperationsForm == null)
+                if (_airOperationsForm == null)
                 {
-                    airOperationsForm = new AirOperationsForm();
-                    airOperationsForm.FormClosed += new FormClosedEventHandler(AirOpsSummaryForm_Closed);
-                    ActiveForms.Add(airOperationsForm);
-                    airOperationsForm.Show(this);
+                    _airOperationsForm = new AirOperationsForm();
+                    _airOperationsForm.FormClosed += new FormClosedEventHandler(AirOpsSummaryForm_Closed);
+                    ActiveForms.Add(_airOperationsForm);
+                    _airOperationsForm.Show(this);
                 }
 
-                airOperationsForm.BringToFront();
+                _airOperationsForm.BringToFront();
             }
         }
         void AirOpsSummaryForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(airOperationsForm);
-            airOperationsForm = null;
+            RemoveActiveForm(_airOperationsForm);
+            _airOperationsForm = null;
 
 
         }
@@ -1894,21 +1894,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (teamAssignmentsForm == null)
+                if (_teamAssignmentsForm == null)
                 {
-                    teamAssignmentsForm = new TeamAssignmentsForm();
-                    teamAssignmentsForm.FormClosed += new FormClosedEventHandler(TeamAssignmentsForm_Closed);
-                    ActiveForms.Add(teamAssignmentsForm);
-                    teamAssignmentsForm.Show(this);
+                    _teamAssignmentsForm = new TeamAssignmentsForm();
+                    _teamAssignmentsForm.FormClosed += new FormClosedEventHandler(TeamAssignmentsForm_Closed);
+                    ActiveForms.Add(_teamAssignmentsForm);
+                    _teamAssignmentsForm.Show(this);
                 }
 
-                teamAssignmentsForm.BringToFront();
+                _teamAssignmentsForm.BringToFront();
             }
         }
         void TeamAssignmentsForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(teamAssignmentsForm);
-            teamAssignmentsForm = null;
+            RemoveActiveForm(_teamAssignmentsForm);
+            _teamAssignmentsForm = null;
 
 
         }
@@ -2491,6 +2491,34 @@ namespace Wildfire_ICS_Assist
                     setServerStatusDisplay();
                 }
             }
+        }
+
+        private void memberStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPersonnelListForm();
+        }
+
+        private void OpenPersonnelListForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (_personnelListForm == null)
+                {
+                    _personnelListForm = new PersonnelListForm();
+                    _personnelListForm.FormClosed += new FormClosedEventHandler(PersonnelListForm_Closed);
+                    ActiveForms.Add(_personnelListForm);
+                    _personnelListForm.Show(this);
+                }
+
+                _personnelListForm.BringToFront();
+            }
+        }
+        void PersonnelListForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_personnelListForm);
+            _personnelListForm = null;
+
+
         }
     }
 }
