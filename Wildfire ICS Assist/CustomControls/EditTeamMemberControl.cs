@@ -53,6 +53,10 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (!string.IsNullOrEmpty(teamMember.Agency)) { cboAgency.Text = teamMember.Agency; }
                 if (!string.IsNullOrEmpty(teamMember.HomeBase)) { cboHomeAgency.Text = teamMember.HomeBase; }
 
+                txtNOKName.Text = teamMember.NOKName;
+                txtNOKPhone.Text = teamMember.NOKPhone;
+                txtNOKRelationship.Text = teamMember.NOKRelation;
+
                 //chkNoGluten.Checked = teamMember.NoGluten;
                 //chkVegetarian.Checked = teamMember.Vegetarian;
             }

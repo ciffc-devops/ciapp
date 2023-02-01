@@ -245,22 +245,23 @@ namespace WF_ICS_ClassLibrary.Utilities
             status.setTeamMember(member);
             if (signIn == null)
             {
-                if (task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn).Any())
+                if (task.AllSignInRecords.Any(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn))
                 {
-                    signIn = task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn).OrderByDescending(o => o.StatusChangeTime).First();
-
+                    signIn = task.AllSignInRecords.OrderByDescending(o => o.StatusChangeTime).First(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn);
+                    status.CheckInRecordID = signIn.SignInRecordID;
                     status.SignInTime = signIn.StatusChangeTime;
                     if (signIn.LastDayWorked > DateTime.MinValue) { status.LastDayWorked = signIn.LastDayWorked; }
                     status.KMs = signIn.KMs;
                 }
                 else { status.SignInTime = DateTime.MinValue; }
             }
-            else { status.SignInTime = signIn.StatusChangeTime; status.KMs = signIn.KMs; }
+            else { status.SignInTime = signIn.StatusChangeTime; status.KMs = signIn.KMs; status.CheckInRecordID = signIn.SignInRecordID; }
 
             if (task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).Any())
             {
                 SignInRecord signOut = task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).OrderBy(o => o.StatusChangeTime).First();
                 status.SignOutTime = signOut.StatusChangeTime;
+                status.CheckOutRecordID = signOut.SignInRecordID;
                 if (status.KMs <= 0m)
                 {
                     status.KMs = signOut.KMs;

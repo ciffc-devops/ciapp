@@ -477,8 +477,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(14)] private Guid _ICSRoleID;
         [ProtoMember(15)] private DateTime _LastDayWorked;
         [ProtoMember(16)] private string _Callsign;
+        [ProtoMember(17)] private Guid _CheckInRecordID;
+        [ProtoMember(18)] private Guid _CheckOutRecordID;
 
-      
         public Guid AssignmentID { get => _AssignmentID; set => _AssignmentID = value; }
 
         public DateTime SignInTime { get { return _signInTime; } set { _signInTime = value; } }
@@ -562,6 +563,11 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return null; }
             }
         }
+
+        public Guid CheckInRecordID { get => _CheckInRecordID; set => _CheckInRecordID = value; }
+
+        public Guid CheckOutRecordID { get => _CheckOutRecordID; set => _CheckOutRecordID = value; }
+
         public string Callsign { get => _Callsign; set => _Callsign = value; }
         public void setTeamMember(TeamMember member)
         {

@@ -38,13 +38,17 @@ namespace Wildfire_ICS_Assist
 
         private void BuildDataLists()
         {
+            DateTime endOfOp = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodEnd;
+
+
             dgvPersonnel.DataSource = null;
             List<MemberStatus> memberStatuses = Program.CurrentIncident.getAllMemberStatus(Program.CurrentOpPeriod);
-            if(chkNotSignedInOnly.Checked)
-            {
-                memberStatuses = memberStatuses.Where(o => o.SignInTime <= DateTime.MinValue).ToList();
-            }
+            if (chkNotSignedInOnly.Checked) { memberStatuses = memberStatuses.Where(o => o.SignInTime <= DateTime.MinValue).ToList(); }
             if (chkUnassignedOnly.Checked) { memberStatuses = memberStatuses.Where(o => !o.IsAssigned).ToList(); }
+            if (chkLDWSoon.Checked) {
+                
+                memberStatuses = memberStatuses.Where(o => (o.LastDayWorked - endOfOp).TotalHours < 36).ToList();
+            }
 
             dgvPersonnel.AutoGenerateColumns = false;
             dgvPersonnel.DataSource = memberStatuses;
@@ -54,6 +58,10 @@ namespace Wildfire_ICS_Assist
             List<AgencyPersonnelCount> agencyCounts = Program.CurrentIncident.GetAgencyPersonnelCount(Program.CurrentOpPeriod);
             dgvTotalByAgency.DataSource = agencyCounts;
 
+            int LessThan24 = Program.CurrentIncident.AllSignInRecords.Count(o=>(o.LastDayWorked - endOfOp).TotalHours <= 24);
+            int LessThan48 = Program.CurrentIncident.AllSignInRecords.Count(o => (o.LastDayWorked - endOfOp).TotalHours <= 48);
+            lblLDWLessThan24.Text = "LDW < 24 Hours: " + LessThan24;
+            lblLDWLessThan48.Text = "LDW < 48 Hours: " + LessThan48;
 
         }
 
@@ -96,26 +104,19 @@ namespace Wildfire_ICS_Assist
 
             if (dgvPersonnel.SelectedRows.Count == 1)
             {
-                btnEdit.Enabled = true;
+                btnViewDetails.Enabled = true;
                 MemberStatus status = statuses[0]; //(MemberStatus)dgvMembersOnTask.SelectedRows[0].DataBoundItem;
-                btnViewEquipment.Enabled = Program.CurrentIncident.allEquipmentIssues.Any(o => o.OpPeriod == Program.CurrentOpPeriod && (o.ReturnDate == DateTime.MaxValue || o.ReturnDate == DateTime.MinValue) && (o.MemberID == status.MemberID || (status.AssignmentID != Guid.Empty && o.MemberID == status.AssignmentID)));
+//                btnViewEquipment.Enabled = Program.CurrentIncident.allEquipmentIssues.Any(o => o.OpPeriod == Program.CurrentOpPeriod && (o.ReturnDate == DateTime.MaxValue || o.ReturnDate == DateTime.MinValue) && (o.MemberID == status.MemberID || (status.AssignmentID != Guid.Empty && o.MemberID == status.AssignmentID)));
 
 
-                if (status.AssignmentName != "Unassigned")
-                {
-                    btnViewAssignment.Enabled = true;
-                }
-                else
-                {
-                    btnViewAssignment.Enabled = false;
-                }
+              
                 // btnSignOut.Enabled = true;
             }
             else
             {
-                btnEdit.Enabled = false;
-                btnViewEquipment.Enabled = false;
-                btnViewAssignment.Enabled = false;
+                btnViewDetails.Enabled = false;
+              //  btnViewEquipment.Enabled = false;
+              //  btnViewAssignment.Enabled = false;
             }
         }
 
@@ -177,6 +178,171 @@ namespace Wildfire_ICS_Assist
                     MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
+        }
+
+        private void btnViewDetails_Click(object sender, EventArgs e)
+        {
+            if (dgvPersonnel.SelectedRows.Count == 1)
+            {
+                MemberStatus status = (MemberStatus)dgvPersonnel.SelectedRows[0].DataBoundItem;
+                SignInRecord record = getRecordFromStatus(status);
+                OpenForView(record);
+            }
+        }
+
+        private SignInRecord getRecordFromStatus(MemberStatus status)
+        {
+            SignInRecord record = null;
+            if (status.CheckInRecordID != Guid.Empty && Program.CurrentIncident.AllSignInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
+            {
+                record = Program.CurrentIncident.AllSignInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
+            }
+            else
+            {
+                record = new SignInRecord();
+                record.OpPeriod = Program.CurrentOpPeriod;
+                record.SignInTime = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
+                record.LastDayWorked = record.SignInTime.AddDays(14);
+                record.IsSignIn = true;
+                if (Program.CurrentIncident.TaskTeamMembers.Any(o => o.PersonID == status.MemberID))
+                {
+                    record.teamMember = Program.CurrentIncident.TaskTeamMembers.First(o => o.PersonID == status.MemberID);
+                }
+
+            }
+
+            return record;
+        }
+
+        private void OpenForView(SignInRecord record)
+        {
+            using (PersonnelViewCheckinForm viewForm = new PersonnelViewCheckinForm())
+            {
+                viewForm.record = record;
+                viewForm.ShowDialog();
+            }
+        }
+        private void dgvPersonnel_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                MemberStatus status = (MemberStatus)dgvPersonnel.Rows[e.RowIndex].DataBoundItem;
+                SignInRecord record = getRecordFromStatus(status);
+                OpenForView(record);
+            }
+
+        }
+
+        private void btnUpdateTimes_Click(object sender, EventArgs e)
+        {
+            List<MemberStatus> statuses = new List<MemberStatus>();
+            foreach(DataGridViewRow row in dgvPersonnel.SelectedRows)
+            {
+                statuses.Add(row.DataBoundItem as MemberStatus);
+            }
+
+            List<SignInRecord> records = new List<SignInRecord>();
+            foreach(MemberStatus status in statuses)
+            {
+               records.Add(getRecordFromStatus(status));
+            }
+
+            if (records.Any())
+            {
+                using (PersonnelEditCheckInOutForm editForm = new PersonnelEditCheckInOutForm())
+                {
+                    editForm.records = records;
+                    editForm.ShowDialog();
+                }
+            }
+        }
+
+        private void dgvPersonnel_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvPersonnel.Rows.Count > 0 && e.RowIndex <= dgvPersonnel.Rows.Count && dgvPersonnel.Rows[e.RowIndex] != null)
+            {
+                
+
+                DataGridViewRow row = dgvPersonnel.Rows[e.RowIndex];
+
+                int AssignmentColumnIndex = row.Cells["colAssignment"].ColumnIndex;
+                int LDWColumnIndex = row.Cells["colLDW"].ColumnIndex;
+                int CheckInColumnIndex = row.Cells["colCheckIn"].ColumnIndex;
+
+
+                MemberStatus status = (MemberStatus)row.DataBoundItem;
+
+
+                if (status.getCurrentActivityName == "Signed Out") 
+                {
+                    foreach (DataGridViewCell c in row.Cells)
+                    {
+                        c.Style.BackColor = Color.LightGray;
+                        c.Style.ForeColor = Color.DarkGray;
+                    }
+
+                }
+                else if (!status.IsAssigned)
+                {
+                    row.Cells[AssignmentColumnIndex].Style.BackColor = Program.GoodColor;
+                }
+                else
+                {
+                    row.Cells[AssignmentColumnIndex].Style.BackColor = Color.White;
+                }
+
+
+                if (status.SignInTime == DateTime.MinValue)
+                {
+                    row.Cells[CheckInColumnIndex].Style.BackColor = Color.Yellow;
+                }
+
+                if (Program.CurrentIncident.AllSignInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
+                {
+                   SignInRecord rec = Program.CurrentIncident.AllSignInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
+                    TimeSpan ts = rec.LastDayWorked - Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodEnd;
+                    if(ts.TotalHours <= 36)
+                    {
+                        row.Cells[LDWColumnIndex].Style.BackColor = Color.LightCoral;
+
+                    }
+                }
+
+                
+            }
+        }
+
+        private void btnSignInSelected_Click(object sender, EventArgs e)
+        {
+            List<MemberStatus> statuses = new List<MemberStatus>();
+            foreach (DataGridViewRow row in dgvPersonnel.SelectedRows)
+            {
+                statuses.Add(row.DataBoundItem as MemberStatus);
+            }
+
+            List<SignInRecord> records = new List<SignInRecord>();
+            foreach (MemberStatus status in statuses)
+            {
+                if(status.CheckInRecordID == Guid.Empty)
+                {
+                    SignInRecord record = getRecordFromStatus(status);
+                    records.Add(record);
+                }
+            }
+
+            if (records.Any())
+            {
+                using (PersonnelEditCheckInOutForm editForm = new PersonnelEditCheckInOutForm())
+                {
+                    editForm.records = records;
+                    editForm.ShowDialog();
+                }
+            }
+        }
+
+        private void chkLDWSoon_CheckedChanged(object sender, EventArgs e)
+        {
+            BuildDataLists();
         }
     }
 }

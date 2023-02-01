@@ -16,7 +16,7 @@ namespace Wildfire_ICS_Assist.CustomControls
     public partial class CollapsiblePanel : UserControl
     {
         private int _CollapsedWidth = 485; 
-        private int _CollapsedHeight = 40            ;
+        private int _CollapsedHeight = 40;
         private int _ExpandedWidth = 485; 
         private int _ExpandedHeight = 300;
         private bool _CollapseLeft = true;
