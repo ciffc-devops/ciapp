@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
 
         public GeneralMessageViewForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void DisplayMessage()
@@ -32,9 +32,9 @@ namespace Wildfire_ICS_Assist
             txtMessage.Text = generalMessage.Message;
             txtReply.Text = generalMessage.Reply;
             lblReplyBy.Text = generalMessage.ReplyBy;
-            if (generalMessage.DateSent != DateTime.MinValue) { lblDateSent.Text = string.Format("{0:yyyy-MMM-dd HH:mm}", generalMessage.DateSent); }
+            if (generalMessage.DateSent != DateTime.MinValue) { lblDateSent.Text = string.Format("{0:" + Program.DateFormat + " HH:mm}", generalMessage.DateSent); }
             else { lblDateSent.Text = string.Empty; }
-            if (generalMessage.ReplyDate != DateTime.MinValue) { lblReplyReceived.Text = string.Format("{0:yyyy-MMM-dd HH:mm}", generalMessage.ReplyDate); }
+            if (generalMessage.ReplyDate != DateTime.MinValue) { lblReplyReceived.Text = string.Format("{0:" + Program.DateFormat + " HH:mm}", generalMessage.ReplyDate); }
             else { lblReplyReceived.Text = string.Empty; }
             
 

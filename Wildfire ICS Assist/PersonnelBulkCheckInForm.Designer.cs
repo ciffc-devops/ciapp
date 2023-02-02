@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnCheckIn = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cboMethodOfTravel = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblLastDayWorking = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtDeparturePoint = new System.Windows.Forms.TextBox();
-            this.datLDW = new System.Windows.Forms.DateTimePicker();
             this.datCheckInTime = new System.Windows.Forms.DateTimePicker();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.datLDW = new System.Windows.Forms.DateTimePicker();
+            this.txtDeparturePoint = new System.Windows.Forms.TextBox();
+            this.lblLastDayWorking = new System.Windows.Forms.Label();
             this.dgvSavedPersonnel = new System.Windows.Forms.DataGridView();
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colProvince = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCheckIn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -76,35 +76,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(837, 389);
             this.splitContainer1.SplitterDistance = 319;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // btnCheckIn
-            // 
-            this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_431_log_in;
-            this.btnCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCheckIn.Location = new System.Drawing.Point(701, 6);
-            this.btnCheckIn.Name = "btnCheckIn";
-            this.btnCheckIn.Size = new System.Drawing.Size(124, 51);
-            this.btnCheckIn.TabIndex = 149;
-            this.btnCheckIn.Text = "Check In";
-            this.btnCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCheckIn.UseVisualStyleBackColor = true;
-            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 6);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 150;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // splitContainer2
             // 
@@ -150,6 +121,16 @@
             this.cboMethodOfTravel.Size = new System.Drawing.Size(241, 32);
             this.cboMethodOfTravel.TabIndex = 23;
             // 
+            // datCheckInTime
+            // 
+            this.datCheckInTime.CustomFormat = "yyyy-MMM-dd HH:mm";
+            this.datCheckInTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datCheckInTime.Location = new System.Drawing.Point(207, 3);
+            this.datCheckInTime.Name = "datCheckInTime";
+            this.datCheckInTime.Size = new System.Drawing.Size(205, 29);
+            this.datCheckInTime.TabIndex = 24;
+            this.datCheckInTime.ValueChanged += new System.EventHandler(this.datCheckInTime_ValueChanged);
+            // 
             // label8
             // 
             this.label8.Location = new System.Drawing.Point(421, 40);
@@ -159,26 +140,6 @@
             this.label8.TabIndex = 30;
             this.label8.Text = "Method of Travel";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(421, 3);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(154, 29);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Departure Point";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblLastDayWorking
-            // 
-            this.lblLastDayWorking.Location = new System.Drawing.Point(13, 40);
-            this.lblLastDayWorking.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblLastDayWorking.Name = "lblLastDayWorking";
-            this.lblLastDayWorking.Size = new System.Drawing.Size(187, 29);
-            this.lblLastDayWorking.TabIndex = 28;
-            this.lblLastDayWorking.Text = "Last Day Working*";
-            this.lblLastDayWorking.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
@@ -190,14 +151,15 @@
             this.label4.Text = "Check-In Date/Time";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtDeparturePoint
+            // label7
             // 
-            this.txtDeparturePoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDeparturePoint.Location = new System.Drawing.Point(584, 3);
-            this.txtDeparturePoint.Name = "txtDeparturePoint";
-            this.txtDeparturePoint.Size = new System.Drawing.Size(241, 29);
-            this.txtDeparturePoint.TabIndex = 26;
+            this.label7.Location = new System.Drawing.Point(421, 3);
+            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(154, 29);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Departure Point";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // datLDW
             // 
@@ -209,15 +171,24 @@
             this.datLDW.TabIndex = 25;
             this.datLDW.ValueChanged += new System.EventHandler(this.datLDW_ValueChanged);
             // 
-            // datCheckInTime
+            // txtDeparturePoint
             // 
-            this.datCheckInTime.CustomFormat = "yyyy-MMM-dd HH:mm";
-            this.datCheckInTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datCheckInTime.Location = new System.Drawing.Point(207, 3);
-            this.datCheckInTime.Name = "datCheckInTime";
-            this.datCheckInTime.Size = new System.Drawing.Size(205, 29);
-            this.datCheckInTime.TabIndex = 24;
-            this.datCheckInTime.ValueChanged += new System.EventHandler(this.datCheckInTime_ValueChanged);
+            this.txtDeparturePoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDeparturePoint.Location = new System.Drawing.Point(584, 3);
+            this.txtDeparturePoint.Name = "txtDeparturePoint";
+            this.txtDeparturePoint.Size = new System.Drawing.Size(241, 29);
+            this.txtDeparturePoint.TabIndex = 26;
+            // 
+            // lblLastDayWorking
+            // 
+            this.lblLastDayWorking.Location = new System.Drawing.Point(13, 40);
+            this.lblLastDayWorking.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblLastDayWorking.Name = "lblLastDayWorking";
+            this.lblLastDayWorking.Size = new System.Drawing.Size(187, 29);
+            this.lblLastDayWorking.TabIndex = 28;
+            this.lblLastDayWorking.Text = "Last Day Working*";
+            this.lblLastDayWorking.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dgvSavedPersonnel
             // 
@@ -275,15 +246,45 @@
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnCancel.Location = new System.Drawing.Point(6, 6);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(124, 51);
+            this.btnCancel.TabIndex = 150;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnCheckIn
+            // 
+            this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_431_log_in;
+            this.btnCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCheckIn.Location = new System.Drawing.Point(701, 6);
+            this.btnCheckIn.Name = "btnCheckIn";
+            this.btnCheckIn.Size = new System.Drawing.Size(124, 51);
+            this.btnCheckIn.TabIndex = 149;
+            this.btnCheckIn.Text = "Check In";
+            this.btnCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCheckIn.UseVisualStyleBackColor = true;
+            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
+            // 
             // PersonnelBulkCheckInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 389);
-            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(760, 367);
             this.Name = "PersonnelBulkCheckInForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

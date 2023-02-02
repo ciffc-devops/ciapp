@@ -24,10 +24,9 @@ namespace Wildfire_ICS_Assist
 
         public OrganizationChartAddRoleForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
-            
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
 
-           
+
         }
         private void OrganizationChartAddRole_Load(object sender, EventArgs e)
         {

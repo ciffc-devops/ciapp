@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist
         public NOTAM selectedNOTAM { get => _selectedNOTAM; set { _selectedNOTAM = value;  loadNOTAM(); } }
         public AirNOTAMEditForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void loadNOTAM()

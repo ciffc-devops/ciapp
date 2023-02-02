@@ -378,7 +378,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1104, 612);
-            this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
@@ -387,6 +386,8 @@
             this.Controls.Add(this.pnlSavedPersonnel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1069, 589);
             this.Name = "PersonnelSignInForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

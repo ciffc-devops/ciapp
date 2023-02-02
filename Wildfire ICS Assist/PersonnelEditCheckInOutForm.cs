@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
@@ -19,7 +20,8 @@ namespace Wildfire_ICS_Assist
 
         public PersonnelEditCheckInOutForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            GeneralTools.SetDateFormat(this);
         }
 
         private void LoadValues()

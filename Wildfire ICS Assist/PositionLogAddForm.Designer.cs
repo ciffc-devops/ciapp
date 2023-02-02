@@ -169,7 +169,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.CancelButton = this.btnCancel;
-            this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
@@ -181,6 +180,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtEntryText);
             this.Controls.Add(this.lblEntryText);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PositionLogAddForm";
             this.Load += new System.EventHandler(this.PositionLogAddForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

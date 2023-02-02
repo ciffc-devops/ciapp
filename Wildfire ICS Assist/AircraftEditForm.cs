@@ -16,7 +16,10 @@ namespace Wildfire_ICS_Assist
         public Aircraft selectedAircraft { get => editAircraftControl1.selectedAircraft; set { editAircraftControl1.selectedAircraft = value; LoadAircraft(); } }
         public AircraftEditForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            datNewStart.CustomFormat = Program.DateFormat + " HH:mm";
+            datNewEnd.CustomFormat = Program.DateFormat + " HH:mm";
+
         }
 
         private void LoadAircraft()

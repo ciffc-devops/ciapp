@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public EditSavedAircraftForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -29,6 +29,11 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (editAircraftControl1.IsValid) { this.DialogResult = DialogResult.OK; this.Close(); }
+        }
+
+        private void EditSavedAircraftForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

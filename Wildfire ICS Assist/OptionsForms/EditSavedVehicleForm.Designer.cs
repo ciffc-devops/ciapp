@@ -93,8 +93,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(812, 460);
-            this.splitContainer1.SplitterDistance = 393;
+            this.splitContainer1.Size = new System.Drawing.Size(812, 483);
+            this.splitContainer1.SplitterDistance = 416;
             this.splitContainer1.TabIndex = 0;
             // 
             // txtOrderRequestNo
@@ -218,7 +218,7 @@
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNotes.Size = new System.Drawing.Size(588, 51);
+            this.txtNotes.Size = new System.Drawing.Size(588, 74);
             this.txtNotes.TabIndex = 117;
             this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
             // 
@@ -339,11 +339,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(812, 460);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(812, 483);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(828, 499);
             this.Name = "EditSavedVehicleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

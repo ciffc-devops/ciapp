@@ -37,6 +37,8 @@ namespace Wildfire_ICS_Assist
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
             
             pdfExportService = new PDFExportService();
+            pdfExportService.SetDateFormat(generalOptionsService.GetStringOptionValue("DateFormat"));
+            WF_ICS_ClassLibrary.Globals.DateFormat = generalOptionsService.GetStringOptionValue("DateFormat");
             wfIncidentService = new WFIncidentService();
             WF_ICS_ClassLibrary.Globals.incidentService = wfIncidentService;
             positionLogService = new PositionLogService();
@@ -107,10 +109,11 @@ namespace Wildfire_ICS_Assist
         public static WFIncident CurrentTask { get => wfIncidentService.CurrentIncident; set { wfIncidentService.CurrentIncident = value; } }
         public static ICSRole CurrentRole { get => _CurrentRole; set => _CurrentRole = value; }
         public static int CurrentOpPeriod { get => _CurrentOpPeriod; set => _CurrentOpPeriod = value; }
+        public static OperationalPeriod CurrentOpPeriodDetails { get { if (CurrentIncident != null && CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == CurrentOpPeriod)) { return CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod); } else { return null; } } }
         public static bool InternetSyncEnabled { get => _InternetSyncEnabled; set => _InternetSyncEnabled = value; }
         public static Guid MachineID { get => _MachineID; set { _MachineID = value; wfIncidentService.MachineID = value; } }
         public static NetworkService networkService { get => _networkService; private set => _networkService = value; }
-
+        public static string DateFormat { get { return generalOptionsService.GetStringOptionValue("DateFormat"); } }
         public static CultureInfo cultureInfo
         {
             get => _cultureInfo; set

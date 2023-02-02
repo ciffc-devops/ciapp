@@ -11,6 +11,28 @@ namespace Wildfire_ICS_Assist.Classes
 {
     public static class GeneralTools
     {
-       
+        public static void SetDateFormat(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (c.GetType() == typeof(DateTimePicker))
+                {
+                    string currentFormat = (c as DateTimePicker).CustomFormat;
+                    if (currentFormat.Contains("y"))
+                    {
+                        if (currentFormat.Contains("H"))
+                        {
+                            (c as DateTimePicker).CustomFormat = Program.DateFormat + " HH:mm";
+                        } else
+                        {
+                            (c as DateTimePicker).CustomFormat = Program.DateFormat;
+                        }
+                    }
+                } else
+                {
+                    SetDateFormat(c);
+                }
+            }
+        }
     }
 }

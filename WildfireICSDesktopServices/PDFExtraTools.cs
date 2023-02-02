@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using iTextSharp.text.pdf.parser;
+using WF_ICS_ClassLibrary;
 
 namespace WildfireICSDesktopServices
 {
@@ -350,7 +351,7 @@ namespace WildfireICSDesktopServices
             cb.BeginText();
             cb.SetFontAndSize(bf, 8);
             cb.ShowTextAligned(PdfContentByte.ALIGN_RIGHT,
-            "Printed On " + string.Format("{0:yyyy-MMM-dd HH:mm}", PrintTime),
+            "Printed On " + string.Format("{0:" + Globals.DateFormat + " HH:mm}", PrintTime),
             pageSize.GetRight(40),
             pageSize.GetBottom(getBottomAmount), 0);
             cb.EndText();

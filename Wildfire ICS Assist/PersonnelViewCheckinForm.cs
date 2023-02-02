@@ -21,7 +21,7 @@ namespace Wildfire_ICS_Assist
 
         public PersonnelViewCheckinForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void Program_StatusChanged(MemberEventArgs e)
@@ -87,12 +87,12 @@ namespace Wildfire_ICS_Assist
                 else { lblAssignmentOrRole.Text = "Unassigned"; btnViewAssignmentOrRole.Enabled = false; }
 
                 //checkin
-                if (record.SignInTime > DateTime.MinValue) { lblCheckInTime.Text = string.Format("{0:yyyy-MMM-dd HH:mm}", record.SignInTime); }
+                if (record.SignInTime > DateTime.MinValue) { lblCheckInTime.Text = string.Format("{0:" + Program.DateFormat + " HH:mm}", record.SignInTime); }
                 else { lblCheckInTime.Text = "TBD"; }
 
                 if (record.LastDayWorked > DateTime.MinValue)
                 {
-                    lblLDW.Text = string.Format("{0:yyyy-MMM-dd}", record.LastDayWorked);
+                    lblLDW.Text = string.Format("{0:" + Program.DateFormat + "}", record.LastDayWorked);
                     DateTime opDate = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodEnd;
                     if (opDate != DateTime.MinValue)
                     {

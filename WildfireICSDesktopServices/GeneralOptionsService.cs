@@ -394,6 +394,8 @@ namespace WildfireICSDesktopServices
                     return _options.LastServerIP;
                 case "LastPort":
                     return _options.LastPort;
+                case "DateFormat":
+                    return _options.DateFormat;
                 default:
                     return null;
             }

@@ -16,7 +16,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public TeamAssignment selectedAssignment { get => editTeamAssignmentTemplateControl1.selectedAssignment; set => editTeamAssignmentTemplateControl1.selectedAssignment = value; }
         public EditSavedTeamAssignmentsForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void EditSavedTeamAssignmentsForm_Load(object sender, EventArgs e)

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
@@ -32,6 +33,7 @@ namespace Wildfire_ICS_Assist
         {
             
             InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            GeneralTools.SetDateFormat(this);
         }
 
         List<Control> requiredFields = new List<Control>();

@@ -85,8 +85,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(412, 520);
-            this.splitContainer1.SplitterDistance = 449;
+            this.splitContainer1.Size = new System.Drawing.Size(412, 522);
+            this.splitContainer1.SplitterDistance = 451;
             this.splitContainer1.TabIndex = 0;
             // 
             // lblNotes
@@ -96,7 +96,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNotes.Location = new System.Drawing.Point(35, 369);
             this.lblNotes.Name = "lblNotes";
-            this.lblNotes.Size = new System.Drawing.Size(365, 69);
+            this.lblNotes.Size = new System.Drawing.Size(365, 71);
             this.lblNotes.TabIndex = 153;
             this.lblNotes.Text = "label16";
             // 
@@ -287,11 +287,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(412, 520);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(412, 522);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(386, 538);
             this.Name = "CommunicationsListViewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

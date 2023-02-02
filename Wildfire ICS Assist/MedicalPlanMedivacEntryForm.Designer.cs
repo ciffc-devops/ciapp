@@ -35,9 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnAddNew = new System.Windows.Forms.Button();
             this.lblCoordinateStatus = new System.Windows.Forms.Label();
             this.rbBLS = new System.Windows.Forms.RadioButton();
             this.rbALS = new System.Windows.Forms.RadioButton();
@@ -50,6 +47,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnAddNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -180,42 +180,6 @@
             this.panel2.Size = new System.Drawing.Size(716, 331);
             this.panel2.TabIndex = 98;
             // 
-            // chkSaveForLater
-            // 
-            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(266, 286);
-            this.chkSaveForLater.Name = "chkSaveForLater";
-            this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
-            this.chkSaveForLater.TabIndex = 12;
-            this.chkSaveForLater.Text = "Save for future incidents";
-            this.chkSaveForLater.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 8);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(265, 29);
-            this.label10.TabIndex = 99;
-            this.label10.Text = "New Medivac Service";
-            // 
-            // btnAddNew
-            // 
-            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(504, 275);
-            this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
-            this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(204, 48);
-            this.btnAddNew.TabIndex = 13;
-            this.btnAddNew.Text = "Add to Incident";
-            this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddNew.UseVisualStyleBackColor = true;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
-            // 
             // lblCoordinateStatus
             // 
             this.lblCoordinateStatus.AutoSize = true;
@@ -330,15 +294,52 @@
             this.label6.Text = "Medivac Service";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // chkSaveForLater
+            // 
+            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSaveForLater.AutoSize = true;
+            this.chkSaveForLater.Location = new System.Drawing.Point(266, 286);
+            this.chkSaveForLater.Name = "chkSaveForLater";
+            this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
+            this.chkSaveForLater.TabIndex = 12;
+            this.chkSaveForLater.Text = "Save for future incidents";
+            this.chkSaveForLater.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(3, 8);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(265, 29);
+            this.label10.TabIndex = 99;
+            this.label10.Text = "New Medivac Service";
+            // 
+            // btnAddNew
+            // 
+            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAddNew.Location = new System.Drawing.Point(504, 275);
+            this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(204, 48);
+            this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.Text = "Add to Incident";
+            this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            // 
             // MedicalPlanMedivacEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 504);
-            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MedicalPlanMedivacEntryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add a Medivac Service";

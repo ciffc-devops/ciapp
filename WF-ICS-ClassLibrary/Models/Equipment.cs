@@ -326,7 +326,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (ReturnDate < DateTime.MaxValue && ReturnDate > DateTime.MinValue) { return ReturnDate.ToString("yyyy-MMM-dd HH:mm"); }
+                if (ReturnDate < DateTime.MaxValue && ReturnDate > DateTime.MinValue) { return ReturnDate.ToString(Globals.DateFormat + " HH:mm"); }
                 else { return null; }
             }
         }

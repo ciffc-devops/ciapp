@@ -20,7 +20,7 @@ namespace WF_ICS_ClassLibrary
         public static IGeneralOptionsService _generalOptionsService { get; set; }
         public static IEquipmentService _equipmentService { get; set; }
         public static IWFIncidentService incidentService { get; set; }
-
+        public static string DateFormat { get; set; }
 
         static Globals()
         {

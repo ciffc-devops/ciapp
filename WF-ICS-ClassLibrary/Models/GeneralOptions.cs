@@ -80,6 +80,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(64)] private bool _AddIMTToContacts;
         [ProtoMember(65)] private Province _DefaultProvince;
         [ProtoMember(66)] private List<TeamAssignment> _AllTeamAssignmentTemplates = new List<TeamAssignment>();
+        [ProtoMember(67)] private string _DateFormat;
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
         public Guid PrimaryChannelID { get { return g_primaryChannel; } set { g_primaryChannel = value; appSettingsChanged = true; } }
@@ -165,7 +166,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid ParentOrganizationID { get => _ParentOrganizationID; set => _ParentOrganizationID = value; }
         public bool AddIMTToContacts { get => _AddIMTToContacts; set => _AddIMTToContacts = value; }
         public Province DefaultProvince { get => _DefaultProvince; set => _DefaultProvince = value; }
-
+        public string DateFormat { get => _DateFormat; set => _DateFormat = value; }
         public void addDefaultOptions()
         {
             ICPCallSign = "BASE";
@@ -195,7 +196,7 @@ namespace WF_ICS_ClassLibrary.Models
             AutomaticSubFolders.Add("Maps");
             AutomaticSubFolders.Add("Other Images");
             DefaultProvince = new Province(4);
-
+            DateFormat = "MMM-dd-yyyy";
 
             //options.PrimaryChannel = "PEPSAR1 149.495";
 

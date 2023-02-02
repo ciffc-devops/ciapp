@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
@@ -75,7 +76,7 @@ namespace Wildfire_ICS_Assist
                 foreach (DataGridViewRow row in dgvLog.SelectedRows)
                 {
                     PositionLogEntry entry = (PositionLogEntry)row.DataBoundItem;
-                    entry.UpdateLogText("-Deleted " + DateTime.Now.ToString("yyyy-MMM-dd HH:mm") + "-", currentUserName);
+                    entry.UpdateLogText("-Deleted " + DateTime.Now.ToString(Globals.DateFormat + " HH:mm") + "-", currentUserName);
                     entry.IsInfoOnly = true;
                     Program.wfIncidentService.UpsertPositionLogEntry(entry);
 

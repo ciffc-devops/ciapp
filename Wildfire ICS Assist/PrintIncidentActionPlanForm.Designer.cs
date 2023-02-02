@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintIncidentForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.chkCheckInLists = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtCriticalMessage = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,7 +61,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.chkCheckInLists = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -113,6 +113,16 @@
             this.splitContainer1.Size = new System.Drawing.Size(650, 649);
             this.splitContainer1.SplitterDistance = 587;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // chkCheckInLists
+            // 
+            this.chkCheckInLists.AutoSize = true;
+            this.chkCheckInLists.Location = new System.Drawing.Point(360, 189);
+            this.chkCheckInLists.Name = "chkCheckInLists";
+            this.chkCheckInLists.Size = new System.Drawing.Size(190, 28);
+            this.chkCheckInLists.TabIndex = 37;
+            this.chkCheckInLists.Text = "211 - Check In Lists";
+            this.chkCheckInLists.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -417,25 +427,16 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Images|*.jpg;*.jpeg;*.png;,*.gif,*.bmp";
             // 
-            // chkCheckInLists
-            // 
-            this.chkCheckInLists.AutoSize = true;
-            this.chkCheckInLists.Location = new System.Drawing.Point(360, 189);
-            this.chkCheckInLists.Name = "chkCheckInLists";
-            this.chkCheckInLists.Size = new System.Drawing.Size(190, 28);
-            this.chkCheckInLists.TabIndex = 37;
-            this.chkCheckInLists.Text = "211 - Check In Lists";
-            this.chkCheckInLists.UseVisualStyleBackColor = true;
-            // 
             // PrintIncidentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(650, 649);
-            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(666, 665);
             this.Name = "PrintIncidentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

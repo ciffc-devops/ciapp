@@ -79,7 +79,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(847, 659);
+            this.splitContainer1.Size = new System.Drawing.Size(847, 682);
             this.splitContainer1.SplitterDistance = 160;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -174,7 +174,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_38_picture;
-            this.pictureBox1.Location = new System.Drawing.Point(257, 448);
+            this.pictureBox1.Location = new System.Drawing.Point(257, 471);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(39, 35);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -186,7 +186,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Firebrick;
-            this.label5.Location = new System.Drawing.Point(302, 453);
+            this.label5.Location = new System.Drawing.Point(302, 476);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(524, 24);
             this.label5.TabIndex = 99;
@@ -198,7 +198,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 438);
+            this.btnCancel.Location = new System.Drawing.Point(6, 461);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
@@ -227,14 +227,14 @@
             this.panel2.Controls.Add(this.btnAddNew);
             this.panel2.Location = new System.Drawing.Point(6, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(829, 426);
+            this.panel2.Size = new System.Drawing.Size(829, 449);
             this.panel2.TabIndex = 98;
             // 
             // txtNewSitePlanLocation
             // 
             this.txtNewSitePlanLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewSitePlanLocation.Location = new System.Drawing.Point(365, 321);
+            this.txtNewSitePlanLocation.Location = new System.Drawing.Point(365, 344);
             this.txtNewSitePlanLocation.Name = "txtNewSitePlanLocation";
             this.txtNewSitePlanLocation.Size = new System.Drawing.Size(454, 29);
             this.txtNewSitePlanLocation.TabIndex = 8;
@@ -243,7 +243,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 324);
+            this.label4.Location = new System.Drawing.Point(16, 347);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(343, 24);
             this.label4.TabIndex = 124;
@@ -253,7 +253,7 @@
             // 
             this.chkNewSitePlanRequired.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkNewSitePlanRequired.AutoSize = true;
-            this.chkNewSitePlanRequired.Location = new System.Drawing.Point(20, 293);
+            this.chkNewSitePlanRequired.Location = new System.Drawing.Point(20, 316);
             this.chkNewSitePlanRequired.Name = "chkNewSitePlanRequired";
             this.chkNewSitePlanRequired.Size = new System.Drawing.Size(250, 28);
             this.chkNewSitePlanRequired.TabIndex = 7;
@@ -297,7 +297,7 @@
             this.txtNewMessage.Multiline = true;
             this.txtNewMessage.Name = "txtNewMessage";
             this.txtNewMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNewMessage.Size = new System.Drawing.Size(811, 164);
+            this.txtNewMessage.Size = new System.Drawing.Size(811, 187);
             this.txtNewMessage.TabIndex = 6;
             this.txtNewMessage.TextChanged += new System.EventHandler(this.txtNewMessage_TextChanged);
             // 
@@ -305,7 +305,7 @@
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(379, 381);
+            this.chkSaveForLater.Location = new System.Drawing.Point(379, 404);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSaveForLater.TabIndex = 9;
@@ -327,7 +327,7 @@
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(617, 370);
+            this.btnAddNew.Location = new System.Drawing.Point(617, 393);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
@@ -341,11 +341,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 659);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(847, 682);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(863, 698);
             this.Name = "SafetyMessageEntryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

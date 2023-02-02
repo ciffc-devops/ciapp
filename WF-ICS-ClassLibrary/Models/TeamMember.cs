@@ -487,7 +487,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (_signInTime > DateTime.MinValue) { return _signInTime.ToString("HH:mm yyyy-MMM-dd"); }
+                if (_signInTime > DateTime.MinValue) { return _signInTime.ToString(Globals.DateFormat + " HH:mm"); }
                 else { return "Not checked in"; }
             }
         }
@@ -498,7 +498,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (_signOutTime < DateTime.MaxValue)
                 {
-                    return string.Format("{0:yyyy-MMM-dd HH:mm}", _signOutTime);
+                    return string.Format("{0:" + Globals.DateFormat + " HH:mm}", _signOutTime);
                 }
                 else
                 {
@@ -559,7 +559,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (LastDayWorked > DateTime.MinValue) { return LastDayWorked.ToString("yyyy-MMM-dd"); }
+                if (LastDayWorked > DateTime.MinValue) { return LastDayWorked.ToString(Globals.DateFormat); }
                 else { return null; }
             }
         }
@@ -628,9 +628,9 @@ namespace WF_ICS_ClassLibrary.Models
                 csv.Append(status.OrganizationName.EscapeQuotes());
                 csv.Append(delimiter);
                
-                csv.Append(status.SignInTime.ToString("yyyy-MMM-dd HH:mm"));
+                csv.Append(status.SignInTime.ToString(Globals.DateFormat + " HH:mm"));
                 csv.Append(delimiter);
-                csv.Append(status.LastDayWorked.ToString("yyyy-MMM-dd HH:mm"));
+                csv.Append(status.LastDayWorked.ToString(Globals.DateFormat + " HH:mm"));
                 csv.Append(delimiter);
                 if (rec != null) { csv.Append(rec.DeparturePoint.EscapeQuotes()); }
                 csv.Append(delimiter);

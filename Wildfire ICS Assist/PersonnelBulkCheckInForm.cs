@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
@@ -23,6 +24,8 @@ namespace Wildfire_ICS_Assist
         {
             InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
             dgvSavedPersonnel.BackgroundColor = Program.FormAccent;
+            GeneralTools.SetDateFormat(this);
+
         }
 
         private void datCheckInTime_ValueChanged(object sender, EventArgs e)

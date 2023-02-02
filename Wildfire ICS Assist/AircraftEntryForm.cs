@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
@@ -22,6 +23,7 @@ namespace Wildfire_ICS_Assist
         public AircraftEntryForm()
         {
             InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            GeneralTools.SetDateFormat(this);
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

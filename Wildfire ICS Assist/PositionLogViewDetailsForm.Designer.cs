@@ -71,12 +71,13 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ControlBox = false;
             this.Controls.Add(this.txtHistory);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtCurrentLog);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PositionLogViewDetailsForm";
             this.ResumeLayout(false);
             this.PerformLayout();

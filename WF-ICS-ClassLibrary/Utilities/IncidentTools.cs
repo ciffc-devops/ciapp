@@ -654,7 +654,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 if (entry.Starred) { csv.Append("TRUE"); } else { csv.Append("FALSE"); }
                 csv.Append(delimiter);
-                csv.Append(entry.LogDate.ToString("HH:mm yyyy-MMM-dd")); csv.Append(delimiter);
+                csv.Append(entry.LogDate.ToString("HH:mm " + Globals.DateFormat)); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(entry.ToName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(entry.FromName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(entry.Message.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);

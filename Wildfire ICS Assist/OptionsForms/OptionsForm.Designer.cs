@@ -31,6 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbGeneral = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cboDateFormat = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cboDefaultProvince = new System.Windows.Forms.ComboBox();
             this.rbNumbersOrLetters = new System.Windows.Forms.RadioButton();
             this.rbNumbersOnly = new System.Windows.Forms.RadioButton();
             this.label19 = new System.Windows.Forms.Label();
@@ -83,8 +87,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cboDefaultProvince = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             this.tbFileManagement.SuspendLayout();
@@ -115,6 +117,8 @@
             // tbGeneral
             // 
             this.tbGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.tbGeneral.Controls.Add(this.label7);
+            this.tbGeneral.Controls.Add(this.cboDateFormat);
             this.tbGeneral.Controls.Add(this.label1);
             this.tbGeneral.Controls.Add(this.cboDefaultProvince);
             this.tbGeneral.Controls.Add(this.rbNumbersOrLetters);
@@ -131,6 +135,55 @@
             this.tbGeneral.TabIndex = 0;
             this.tbGeneral.Text = "General";
             this.tbGeneral.Click += new System.EventHandler(this.tbGeneral_Click);
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(19, 180);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(242, 32);
+            this.label7.TabIndex = 120;
+            this.label7.Text = "Date Format for PDFs";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cboDateFormat
+            // 
+            this.cboDateFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboDateFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDateFormat.FormattingEnabled = true;
+            this.cboDateFormat.Location = new System.Drawing.Point(267, 180);
+            this.cboDateFormat.Name = "cboDateFormat";
+            this.cboDateFormat.Size = new System.Drawing.Size(463, 32);
+            this.cboDateFormat.TabIndex = 121;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(19, 142);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(242, 32);
+            this.label1.TabIndex = 118;
+            this.label1.Text = "Default Prov/Terr.";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cboDefaultProvince
+            // 
+            this.cboDefaultProvince.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboDefaultProvince.DisplayMember = "RoleNameForDropdown";
+            this.cboDefaultProvince.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDefaultProvince.FormattingEnabled = true;
+            this.cboDefaultProvince.Items.AddRange(new object[] {
+            "UTM",
+            "Decimal Degrees",
+            "Degrees Decimal Minutes",
+            "Degrees Minutes Seconds",
+            "MGRS"});
+            this.cboDefaultProvince.Location = new System.Drawing.Point(267, 142);
+            this.cboDefaultProvince.Name = "cboDefaultProvince";
+            this.cboDefaultProvince.Size = new System.Drawing.Size(463, 32);
+            this.cboDefaultProvince.TabIndex = 119;
             // 
             // rbNumbersOrLetters
             // 
@@ -240,9 +293,9 @@
             this.tbFileManagement.Controls.Add(this.label4);
             this.tbFileManagement.Controls.Add(this.label2);
             this.tbFileManagement.Controls.Add(this.chkAutoSave);
-            this.tbFileManagement.Location = new System.Drawing.Point(4, 22);
+            this.tbFileManagement.Location = new System.Drawing.Point(4, 33);
             this.tbFileManagement.Name = "tbFileManagement";
-            this.tbFileManagement.Size = new System.Drawing.Size(738, 415);
+            this.tbFileManagement.Size = new System.Drawing.Size(738, 404);
             this.tbFileManagement.TabIndex = 3;
             this.tbFileManagement.Text = "File Management";
             this.tbFileManagement.UseVisualStyleBackColor = true;
@@ -459,10 +512,10 @@
             this.tbComms.Controls.Add(this.label14);
             this.tbComms.Controls.Add(this.txtICPCallSign);
             this.tbComms.Controls.Add(this.label15);
-            this.tbComms.Location = new System.Drawing.Point(4, 22);
+            this.tbComms.Location = new System.Drawing.Point(4, 33);
             this.tbComms.Name = "tbComms";
             this.tbComms.Padding = new System.Windows.Forms.Padding(3);
-            this.tbComms.Size = new System.Drawing.Size(738, 415);
+            this.tbComms.Size = new System.Drawing.Size(738, 404);
             this.tbComms.TabIndex = 1;
             this.tbComms.Text = "Communications";
             this.tbComms.UseVisualStyleBackColor = true;
@@ -589,9 +642,9 @@
             this.tbNetworking.Controls.Add(this.btnTrustedDevicesHelp);
             this.tbNetworking.Controls.Add(this.btnRemoveTrustedDevice);
             this.tbNetworking.Controls.Add(this.lbTrustedDevices);
-            this.tbNetworking.Location = new System.Drawing.Point(4, 22);
+            this.tbNetworking.Location = new System.Drawing.Point(4, 33);
             this.tbNetworking.Name = "tbNetworking";
-            this.tbNetworking.Size = new System.Drawing.Size(738, 415);
+            this.tbNetworking.Size = new System.Drawing.Size(738, 404);
             this.tbNetworking.TabIndex = 2;
             this.tbNetworking.Text = "Networking";
             this.tbNetworking.UseVisualStyleBackColor = true;
@@ -696,7 +749,7 @@
             // 
             this.btnRemoveTrustedDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveTrustedDevice.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_193_circle_empty_remove;
-            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 357);
+            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 346);
             this.btnRemoveTrustedDevice.Name = "btnRemoveTrustedDevice";
             this.btnRemoveTrustedDevice.Size = new System.Drawing.Size(290, 42);
             this.btnRemoveTrustedDevice.TabIndex = 115;
@@ -717,7 +770,7 @@
             this.lbTrustedDevices.Name = "lbTrustedDevices";
             this.lbTrustedDevices.ScrollAlwaysVisible = true;
             this.lbTrustedDevices.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 172);
+            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 148);
             this.lbTrustedDevices.TabIndex = 114;
             this.lbTrustedDevices.ValueMember = "DeviceID";
             // 
@@ -769,34 +822,6 @@
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(19, 142);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(242, 32);
-            this.label1.TabIndex = 118;
-            this.label1.Text = "Default Prov/Terr.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cboDefaultProvince
-            // 
-            this.cboDefaultProvince.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboDefaultProvince.DisplayMember = "RoleNameForDropdown";
-            this.cboDefaultProvince.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDefaultProvince.FormattingEnabled = true;
-            this.cboDefaultProvince.Items.AddRange(new object[] {
-            "UTM",
-            "Decimal Degrees",
-            "Degrees Decimal Minutes",
-            "Degrees Minutes Seconds",
-            "MGRS"});
-            this.cboDefaultProvince.Location = new System.Drawing.Point(267, 142);
-            this.cboDefaultProvince.Name = "cboDefaultProvince";
-            this.cboDefaultProvince.Size = new System.Drawing.Size(463, 32);
-            this.cboDefaultProvince.TabIndex = 119;
             // 
             // OptionsForm
             // 
@@ -886,5 +911,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboDefaultProvince;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cboDateFormat;
     }
 }

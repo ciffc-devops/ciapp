@@ -78,6 +78,8 @@ namespace Wildfire_ICS_Assist
             }
             setServerStatusDisplay();
 
+            datOpsEnd.CustomFormat = Program.DateFormat + " HH:mm";
+            datOpsStart.CustomFormat = Program.DateFormat + " HH:mm";
         }
 
         private void StartAsServer()

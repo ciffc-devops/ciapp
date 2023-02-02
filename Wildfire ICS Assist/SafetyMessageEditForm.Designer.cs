@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label3 = new System.Windows.Forms.Label();
+            this.picTitleImage = new System.Windows.Forms.PictureBox();
+            this.btnSelectImage = new System.Windows.Forms.Button();
+            this.btnRemoveImage = new System.Windows.Forms.Button();
             this.txtNewSitePlanLocation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.chkNewSitePlanRequired = new System.Windows.Forms.CheckBox();
@@ -38,10 +42,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.picTitleImage = new System.Windows.Forms.PictureBox();
-            this.btnSelectImage = new System.Windows.Forms.Button();
-            this.btnRemoveImage = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -80,6 +80,51 @@
             this.splitContainer1.Size = new System.Drawing.Size(1010, 632);
             this.splitContainer1.SplitterDistance = 565;
             this.splitContainer1.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(9, 446);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(313, 24);
+            this.label3.TabIndex = 128;
+            this.label3.Text = "Safety Message Image (optional)";
+            // 
+            // picTitleImage
+            // 
+            this.picTitleImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.picTitleImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picTitleImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picTitleImage.Location = new System.Drawing.Point(41, 473);
+            this.picTitleImage.Name = "picTitleImage";
+            this.picTitleImage.Size = new System.Drawing.Size(123, 89);
+            this.picTitleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTitleImage.TabIndex = 129;
+            this.picTitleImage.TabStop = false;
+            // 
+            // btnSelectImage
+            // 
+            this.btnSelectImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSelectImage.Location = new System.Drawing.Point(172, 473);
+            this.btnSelectImage.Name = "btnSelectImage";
+            this.btnSelectImage.Size = new System.Drawing.Size(112, 36);
+            this.btnSelectImage.TabIndex = 130;
+            this.btnSelectImage.Text = "Select...";
+            this.btnSelectImage.UseVisualStyleBackColor = true;
+            this.btnSelectImage.Click += new System.EventHandler(this.btnSelectImage_Click);
+            // 
+            // btnRemoveImage
+            // 
+            this.btnRemoveImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemoveImage.Location = new System.Drawing.Point(172, 515);
+            this.btnRemoveImage.Name = "btnRemoveImage";
+            this.btnRemoveImage.Size = new System.Drawing.Size(112, 36);
+            this.btnRemoveImage.TabIndex = 131;
+            this.btnRemoveImage.Text = "Remove";
+            this.btnRemoveImage.UseVisualStyleBackColor = true;
+            this.btnRemoveImage.Click += new System.EventHandler(this.btnRemoveImage_Click);
             // 
             // txtNewSitePlanLocation
             // 
@@ -182,51 +227,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 446);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(313, 24);
-            this.label3.TabIndex = 128;
-            this.label3.Text = "Safety Message Image (optional)";
-            // 
-            // picTitleImage
-            // 
-            this.picTitleImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.picTitleImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picTitleImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picTitleImage.Location = new System.Drawing.Point(41, 473);
-            this.picTitleImage.Name = "picTitleImage";
-            this.picTitleImage.Size = new System.Drawing.Size(123, 89);
-            this.picTitleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picTitleImage.TabIndex = 129;
-            this.picTitleImage.TabStop = false;
-            // 
-            // btnSelectImage
-            // 
-            this.btnSelectImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelectImage.Location = new System.Drawing.Point(172, 473);
-            this.btnSelectImage.Name = "btnSelectImage";
-            this.btnSelectImage.Size = new System.Drawing.Size(112, 36);
-            this.btnSelectImage.TabIndex = 130;
-            this.btnSelectImage.Text = "Select...";
-            this.btnSelectImage.UseVisualStyleBackColor = true;
-            this.btnSelectImage.Click += new System.EventHandler(this.btnSelectImage_Click);
-            // 
-            // btnRemoveImage
-            // 
-            this.btnRemoveImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveImage.Location = new System.Drawing.Point(172, 515);
-            this.btnRemoveImage.Name = "btnRemoveImage";
-            this.btnRemoveImage.Size = new System.Drawing.Size(112, 36);
-            this.btnRemoveImage.TabIndex = 131;
-            this.btnRemoveImage.Text = "Remove";
-            this.btnRemoveImage.UseVisualStyleBackColor = true;
-            this.btnRemoveImage.Click += new System.EventHandler(this.btnRemoveImage_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -237,10 +237,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 632);
-            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(771, 575);
             this.Name = "SafetyMessageEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

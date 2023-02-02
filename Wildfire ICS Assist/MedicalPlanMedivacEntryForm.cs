@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
         public bool SaveForLater { get => chkSaveForLater.Checked; }
         public MedicalPlanMedivacEntryForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

@@ -23,9 +23,13 @@ namespace WildfireICSDesktopServices
 {
     public class PDFExportService : IPDFExportService
     {
+        private static string DateFormat { get; set; } = "MMM-dd-yyyy";
 
-
-
+        public void SetDateFormat(string str)
+        {
+            if (!string.IsNullOrEmpty(str)) { DateFormat = str; }
+            else { DateFormat = "MMM-dd-yyyy"; }
+        }
 
 
         public List<byte[]> exportTimelineToPDF(WFIncident task)
@@ -158,8 +162,8 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("1B INCIDENT NUMBER", task.TaskNumber);
                         stamper.AcroFields.SetField("4 SUBJECT", item.Subject);
                         stamper.AcroFields.SetField("7 MESSAGE", item.Message);
-                        string date = string.Format("{0:yyyy-MMM-dd}", item.DateSent);
-                        stamper.AcroFields.SetField("5 DATE", string.Format("{0:yyyy-MMM-dd}", item.DateSent));
+                        string date = string.Format("{0:" + DateFormat + "}", item.DateSent);
+                        stamper.AcroFields.SetField("5 DATE", string.Format("{0:" + DateFormat + "}", item.DateSent));
                         stamper.AcroFields.SetField("6 TIME", string.Format("{0:HH:mm}", item.DateSent));
                         stamper.AcroFields.SetField("2 TO Name and Position", item.To);
                         stamper.AcroFields.SetField("3 FROM Name and Position", item.From);
@@ -171,7 +175,7 @@ namespace WildfireICSDesktopServices
                         if (!string.IsNullOrEmpty(item.Reply)) { stamper.AcroFields.SetField("9 REPLY", item.Reply); }
                         if (!string.IsNullOrEmpty(item.ReplyByPosition)) { stamper.AcroFields.SetField("ReplyPosition", item.ReplyByPosition); }
                         if (!string.IsNullOrEmpty(item.ReplyByName)) { stamper.AcroFields.SetField("ReplyName", item.ReplyByName); }
-                        stamper.AcroFields.SetField("ReplyDate", string.Format("{0:yyyy-MMM-dd HH:mm}", item.ReplyDate));
+                        if (item.ReplyDate > DateTime.MinValue) { stamper.AcroFields.SetField("ReplyDate", string.Format("{0:" + DateFormat + " HH:mm}", item.ReplyDate)); }
 
 
 
@@ -332,8 +336,8 @@ namespace WildfireICSDesktopServices
                         else { PDFExtraTools.SetPDFCheckbox(stamper, "SitePlanRequiredNo"); }
 
 
-                        stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                        stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                         stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                         stamper.AcroFields.SetField("Text1", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -461,8 +465,8 @@ namespace WildfireICSDesktopServices
                 stamper.AcroFields.SetField("1A INCIDENT NAME", task.TaskName);
 
 
-                stamper.AcroFields.SetField("1B INCIDENT NUMBERDate From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                stamper.AcroFields.SetField("1B INCIDENT NUMBERDate From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                 stamper.AcroFields.SetField("1B INCIDENT NUMBERTime From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                 stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -638,8 +642,8 @@ namespace WildfireICSDesktopServices
                 DateTime today = DateTime.Now;
                 //Top Section
                 stamper.AcroFields.SetField("1 INCIDENT NAME AND NUMBERRow1", task.IncidentIdentifier);
-                stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                 stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                 stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -745,9 +749,9 @@ namespace WildfireICSDesktopServices
                     //Top Section
                     stamper.AcroFields.SetField("1A INCIDENT NAME", task.TaskName);
                     stamper.AcroFields.SetField("1B INCIDENT NUMBER", task.TaskNumber);
-                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", currentSheet.DatePrepared));
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + DateFormat + " HH:mm}", currentSheet.DatePrepared));
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -875,9 +879,9 @@ namespace WildfireICSDesktopServices
 
 
                             stamper.AcroFields.SetField("1 INCIDENT NAME OR NUMBER", task.IncidentNameOrNumber);
-                            stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:yyyy-MMM-dd}", DateTime.Now));
-                            stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                            stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                            stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + DateFormat + "}", DateTime.Now));
+                            stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                            stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                             stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                             stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -1090,8 +1094,8 @@ namespace WildfireICSDesktopServices
 
                             stamper.AcroFields.SetField("1 INCIDENT NAME AND NUMBERRow1", task.IncidentNameOrNumber);
 
-                            stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                            stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                            stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                            stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                             stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                             stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -1285,8 +1289,8 @@ namespace WildfireICSDesktopServices
 
                             stamper.AcroFields.SetField("1 INCIDENT NAME AND NUMBERRow1", task.IncidentIdentifier);
 
-                            stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                            stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                            stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                            stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                             stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                             stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -1672,9 +1676,9 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("1 Incident Name", task.IncidentIdentifier);
 
 
-                    stamper.AcroFields.SetField("Text44", string.Format("{0:yyyy-MMM-dd HH:mm}", currentPeriod.PeriodStart));
-                    stamper.AcroFields.SetField("Text45", string.Format("{0:yyyy-MMM-dd HH:mm}", currentPeriod.PeriodEnd));
-                    stamper.AcroFields.SetField("Text48", string.Format("{0:yyyy-MMM-dd HH:mm}", DateTime.Now));
+                    stamper.AcroFields.SetField("Text44", string.Format("{0:" + DateFormat + " HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Text45", string.Format("{0:" + DateFormat + " HH:mm}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Text48", string.Format("{0:" + DateFormat + " HH:mm}", DateTime.Now));
                     stamper.AcroFields.SetField("Name", createdBy);
                     stamper.AcroFields.SetField("Text46", createdByTitle);
 
@@ -1771,7 +1775,7 @@ namespace WildfireICSDesktopServices
             stamper.AcroFields.SetField("2 INCIDENT NUMBER", task.TaskNumber);
 
 
-            stamper.AcroFields.SetField("3. DATE/TIME PREPARED Date", string.Format("{0:yyyy-MMM-dd}", DateTime.Now));
+            stamper.AcroFields.SetField("3. DATE/TIME PREPARED Date", string.Format("{0:" + DateFormat + "}", DateTime.Now));
             stamper.AcroFields.SetField("3. DATE/TIME PREPARED Time", string.Format("{0:HH:mm}", DateTime.Now));
             stamper.AcroFields.SetField("6. PREPARED BY Name", PreparedByName + " - " + PreparedByRoleName);
 
@@ -1789,8 +1793,8 @@ namespace WildfireICSDesktopServices
                 stamper.AcroFields.SetField("Operator Name or ContactRow" + (x + 1), task.allVehicles[x].OperatorName);
                 stamper.AcroFields.SetField("Vehicle License or ID NoRow" + (x + 1), task.allVehicles[x].LicenseOrID);
                 stamper.AcroFields.SetField("Incident AssignmentRow" + (x + 1), task.allVehicles[x].IncidentAssignment);
-                stamper.AcroFields.SetField("Incident Start Date and TimeRow" + (x + 1), task.allVehicles[x].StartTime.ToString("yyyy-MMM-dd HH:mm"));
-                stamper.AcroFields.SetField("Incident Release Date and TimeRow" + (x + 1), task.allVehicles[x].MustBeOutTime.ToString("yyyy-MMM-dd HH:mm"));
+                stamper.AcroFields.SetField("Incident Start Date and TimeRow" + (x + 1), task.allVehicles[x].StartTime.ToString(DateFormat + " HH:mm"));
+                stamper.AcroFields.SetField("Incident Release Date and TimeRow" + (x + 1), task.allVehicles[x].MustBeOutTime.ToString(DateFormat + " HH:mm"));
 
             }
 
@@ -2127,10 +2131,10 @@ namespace WildfireICSDesktopServices
             stamper.AcroFields.SetField("FOR OP PERIOD", OpsPeriod.ToString());
             if (statuses.Count > 0)
             {
-                stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:yyyy-MMM-dd HH:mm}", statuses.OrderBy(o => o.SignInTime).First().SignInTime));
+                stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:" + DateFormat + " HH:mm}", statuses.OrderBy(o => o.SignInTime).First().SignInTime));
                 if (statuses.Any(o => o.SignOutTime < DateTime.MaxValue))
                 {
-                    stamper.AcroFields.SetField("PeriodTo", string.Format("{0:yyyy-MMM-dd HH:mm}", statuses.Where(o => o.SignOutTime < DateTime.MaxValue).OrderByDescending(o => o.SignOutTime).First().SignOutTime));
+                    stamper.AcroFields.SetField("PeriodTo", string.Format("{0:" + DateFormat + " HH:mm}", statuses.Where(o => o.SignOutTime < DateTime.MaxValue).OrderByDescending(o => o.SignOutTime).First().SignOutTime));
                 }
                 stamper.AcroFields.SetField("GROUP NAME", statuses[0].OrganizationName);
             }
@@ -2227,10 +2231,10 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("FOR OP PERIOD", OpsPeriod.ToString());
                     if (statuses.Count > 0)
                     {
-                        stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:yyyy-MMM-dd HH:mm}", statuses.OrderBy(o => o.SignInTime).First().SignInTime));
+                        stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:" + DateFormat + " HH:mm}", statuses.OrderBy(o => o.SignInTime).First().SignInTime));
                         if (statuses.Any(o => o.SignOutTime < DateTime.MaxValue))
                         {
-                            stamper.AcroFields.SetField("PeriodTo", string.Format("{0:yyyy-MMM-dd HH:mm}", statuses.Where(o => o.SignOutTime < DateTime.MaxValue).OrderByDescending(o => o.SignOutTime).First().SignOutTime));
+                            stamper.AcroFields.SetField("PeriodTo", string.Format("{0:" + DateFormat + " HH:mm}", statuses.Where(o => o.SignOutTime < DateTime.MaxValue).OrderByDescending(o => o.SignOutTime).First().SignOutTime));
                         }
                         stamper.AcroFields.SetField("GROUP NAME", statuses[0].OrganizationName);
                     }
@@ -2415,7 +2419,7 @@ namespace WildfireICSDesktopServices
 
                             if (eventsIncluded.Any(o => o.EventDateTime.Year == date.Year && o.EventDateTime.Month == date.Month && o.EventDateTime.Day == date.Day))
                             {
-                                document.Add(new Paragraph(date.ToString("yyyy-MMM-dd", Globals.cultureInfo), subsectionfont));
+                                document.Add(new Paragraph(date.ToString(DateFormat, Globals.cultureInfo), subsectionfont));
 
                                 foreach (TimelineEvent ev in eventsIncluded.Where(o => o.EventDateTime.Year == date.Year && o.EventDateTime.Month == date.Month && o.EventDateTime.Day == date.Day))
                                 {
@@ -2426,7 +2430,7 @@ namespace WildfireICSDesktopServices
                             }
                             else if (x < totalDays)
                             {
-                                document.Add(new Paragraph(date.ToString("yyyy-MMM-dd", Globals.cultureInfo), subsectionfont));
+                                document.Add(new Paragraph(date.ToString(DateFormat, Globals.cultureInfo), subsectionfont));
                                 Paragraph p1 = new Paragraph("No events for this day", normalfont);
                                 p1.IndentationLeft = 10;
                                 document.Add(p1);
@@ -2769,7 +2773,7 @@ namespace WildfireICSDesktopServices
                 }
                 else
                 {
-                    document.Add(new Paragraph("As of " + DateTime.Now.ToString("yyyy-MMM-dd"), subsectionfont));
+                    document.Add(new Paragraph("As of " + DateTime.Now.ToString(DateFormat), subsectionfont));
                 }
                 document.Add(new Paragraph(" "));
 
@@ -2883,9 +2887,9 @@ namespace WildfireICSDesktopServices
                     if (OpPeriod > 0)
                     {
                         OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
-                        stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodStart));
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
                         stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
-                        stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodEnd));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
                         stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
                         stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "OPERATIONAL PERIOD");
                         stamper.AcroFields.SetField("CriticalMessage", "Critical Message for this Operational Period: " + Environment.NewLine +  currentPeriod.CriticalMessage);
@@ -2896,9 +2900,9 @@ namespace WildfireICSDesktopServices
                         DateTime incidentEnd = task.GetIncidentEnd();
                         if(incidentEnd > DateTime.Now) { incidentEnd = DateTime.Now; }
 
-                        stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", incidentStart));
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", incidentStart));
                         stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", incidentStart));
-                        stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", incidentEnd));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", incidentEnd));
                         stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", incidentEnd));
                         stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "INCIDENT TO DATE");
                     }
@@ -3233,8 +3237,8 @@ namespace WildfireICSDesktopServices
 
 
 
-                        document.Add(new Paragraph("Created: " + note.DateCreated.ToString("yyyy-MMM-dd HH:mm", Globals.cultureInfo), subsectionfont));
-                        document.Add(new Paragraph("Updated: " + note.DateUpdated.ToString("yyyy-MMM-dd HH:mm", Globals.cultureInfo), subsectionfont));
+                        document.Add(new Paragraph("Created: " + note.DateCreated.ToString(DateFormat + " HH:mm", Globals.cultureInfo), subsectionfont));
+                        document.Add(new Paragraph("Updated: " + note.DateUpdated.ToString(DateFormat + " HH:mm", Globals.cultureInfo), subsectionfont));
 
                         document.Add(new Paragraph(" ", normalfont));
                         document.Add(new Paragraph(note.NoteText, normalfont));
@@ -3392,8 +3396,8 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("Contact Name", summary.PreparedByName);
                     stamper.AcroFields.SetField("Position", summary.PreparedByPosition);
 
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -3542,9 +3546,9 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("3 INCIDENT NAME OR NUMBERRow1", task.IncidentNameOrNumber);
 
 
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
                     
                     stamper.AcroFields.SetField("Name", createdBy);

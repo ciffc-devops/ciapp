@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Interfaces;
+using WF_ICS_ClassLibrary;
 
 namespace WildfireICSDesktopServices
 {
@@ -120,15 +121,15 @@ namespace WildfireICSDesktopServices
                 {
                     stamper.AcroFields.SetField("1 INCIDENT NAME", task.TaskName);
                    
-                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", DateTime.Now));
+                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + Globals.DateFormat + " HH:mm}", DateTime.Now));
                     stamper.AcroFields.SetField("OP", OpsPeriod.ToString());
                     stamper.AcroFields.SetField("4 NAME", RoleWithName.IndividualName);
                     stamper.AcroFields.SetField("5 ICS POSITION", role.RoleName);
                     stamper.AcroFields.SetField("Name", RoleWithName.IndividualName);
                     stamper.AcroFields.SetField("Position", role.RoleName);
 
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodEnd));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -223,15 +224,15 @@ namespace WildfireICSDesktopServices
                 {
                     stamper.AcroFields.SetField("1 INCIDENT NAMERow1", task.TaskName);
 
-                    stamper.AcroFields.SetField("DATE  TIME PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", DateTime.Now));
+                    stamper.AcroFields.SetField("DATE  TIME PREPARED", string.Format("{0:" + Globals.DateFormat + " HH:mm}", DateTime.Now));
                     stamper.AcroFields.SetField("OP", OpsPeriod.ToString());
                     stamper.AcroFields.SetField("3 NAME", role.IndividualName);
                     stamper.AcroFields.SetField("4 ICS POSITION", role.RoleName);
                     stamper.AcroFields.SetField("Name", role.IndividualName);
                     stamper.AcroFields.SetField("Position", role.RoleName);
 
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:y" + Globals.DateFormat + "}", currentOp.PeriodEnd));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 

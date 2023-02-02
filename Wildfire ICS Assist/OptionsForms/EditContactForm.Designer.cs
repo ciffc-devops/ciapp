@@ -274,6 +274,8 @@
             this.Controls.Add(this.btnCancel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(494, 494);
             this.Name = "EditContactForm";
             this.Text = "Edit Contact";
