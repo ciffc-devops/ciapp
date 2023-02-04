@@ -97,7 +97,7 @@ namespace Wildfire_ICS_Assist
                     if (opDate != DateTime.MinValue)
                     {
                         TimeSpan ts = record.LastDayWorked - opDate;
-                        lblLDW.Text += " (" + ts.TotalDays + " from end of op period)";
+                        lblDaysToLDW.Text = "(" + ts.TotalDays + " days from end of op period)";
                     }
                 } else { lblLDW.Text = "TBD"; }
                 lblDeparturePoint.Text = record.DeparturePoint;

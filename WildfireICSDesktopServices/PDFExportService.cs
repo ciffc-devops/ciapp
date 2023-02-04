@@ -3421,10 +3421,6 @@ namespace WildfireICSDesktopServices
 
                     }
 
-                    stamper.AcroFields.SetField("Radius nm", summary.Remarks);
-                    stamper.AcroFields.SetField("Radius nm", summary.Remarks);
-
-
                     stamper.AcroFields.SetField("9 PAGE", pageNumber.ToString());
                     stamper.AcroFields.SetField("OF", pageCount.ToString());
 

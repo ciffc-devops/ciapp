@@ -116,9 +116,9 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(297, 52);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 15);
+            this.label6.Size = new System.Drawing.Size(91, 15);
             this.label6.TabIndex = 134;
-            this.label6.Text = "Above seal level";
+            this.label6.Text = "Above sea level";
             // 
             // label3
             // 

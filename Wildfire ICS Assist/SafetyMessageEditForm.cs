@@ -100,7 +100,7 @@ namespace Wildfire_ICS_Assist
             {
 
                 selectedMessage.ImageBytes = string.Empty;
-
+                picTitleImage.Image = null;
 
             }
         }
@@ -136,6 +136,7 @@ namespace Wildfire_ICS_Assist
                         newFileName += "-" + uniqueNumber;
                         newFilePath = Path.Combine(FileAccessClasses.getWritablePath(Program.CurrentIncident), newFileName);
                     }
+                    newFilePath = newFilePath + file.Extension;
 
                     System.Drawing.Image image = System.Drawing.Image.FromFile(file.FullName);
                     Bitmap newImage = new Bitmap(image);

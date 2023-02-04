@@ -79,6 +79,24 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Unified Command roles?.
+        /// </summary>
+        internal static string ClearUnifiedCommandRolesTitle {
+            get {
+                return ResourceManager.GetString("ClearUnifiedCommandRolesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must first remove or reassign any roles that report to this one before removing it..
+        /// </summary>
+        internal static string DeleteSubordinateRoles {
+            get {
+                return ResourceManager.GetString("DeleteSubordinateRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter a name for the contact before saving..
         /// </summary>
         internal static string EditContactValidationError {
@@ -994,11 +1012,38 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry, you cannot switch from Unified Command to a single Incident Commander while the Unified Command roles are filled, or have filled subordinate roles.  Would you like to clear all Unified Command roles automatically?.
+        /// </summary>
+        internal static string NoSwitchToICWithUCRolesFilled {
+            get {
+                return ResourceManager.GetString("NoSwitchToICWithUCRolesFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, this role cannot be edited or removed as it is essential to ICS organizational structure.
         /// </summary>
         internal static string ProtectedRole {
             get {
                 return ResourceManager.GetString("ProtectedRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, you cannot delete this role, but you can rename it as needed.  Would you like to rename this role now?.
+        /// </summary>
+        internal static string RenameInsteadOfDeleteRole {
+            get {
+                return ResourceManager.GetString("RenameInsteadOfDeleteRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename?.
+        /// </summary>
+        internal static string RenameTitle {
+            get {
+                return ResourceManager.GetString("RenameTitle", resourceCulture);
             }
         }
         
@@ -1044,6 +1089,15 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static string SureRemoveImageTitle {
             get {
                 return ResourceManager.GetString("SureRemoveImageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter valid coordinates, or leave the coordinate field blank in order to proceed..
+        /// </summary>
+        internal static string ValidCoordinatesRequired {
+            get {
+                return ResourceManager.GetString("ValidCoordinatesRequired", resourceCulture);
             }
         }
     }

@@ -49,6 +49,7 @@ namespace WF_ICS_ClassLibrary.Models
         public List<ICSRole> AllRoles { get => _AllRoles; set => _AllRoles = value; }
         public List<ICSRole> ActiveRoles { get => _AllRoles.Where(o => o.Active).ToList(); }
         public List<ICSRole> FilledRoles { get { return AllRoles.Where(o => o.teamMember != null && o.teamMember.PersonID != Guid.Empty).ToList(); } }
+        public List<ICSRole> FilledActiveRoles { get { return ActiveRoles.Where(o => o.teamMember != null && o.teamMember.PersonID != Guid.Empty).ToList(); } }
         public bool IsUnifiedCommand { get => _IsUnifiedCommand; set => _IsUnifiedCommand = value; }
 
         public string getNameByRoleName(string rolename, bool defaultUpChain = true)
@@ -103,7 +104,17 @@ namespace WF_ICS_ClassLibrary.Models
             else { return null; }
         }
 
-
+        public bool HasFilledUnifiedCommandRoles
+        {
+            get
+            {
+                ICSRole uc2 = ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2ID);
+                if (uc2 != null && this.FilledOrHasFilledChildRoles(uc2)) { return true; }
+                ICSRole uc3 = ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand3ID);
+                if (uc3 != null && this.FilledOrHasFilledChildRoles(uc3)) { return true; }
+                return false;
+            }
+        }
 
 
         public OrganizationChart Clone()
@@ -437,6 +448,35 @@ namespace WF_ICS_ClassLibrary.Models
                 return _staticRoles;
             }
         }
+
+        public static void UnassignThisAndSubordinateRoles(this OrganizationChart chart, ICSRole roleToClear, bool sendUpsertCommands = true)
+        {
+            TeamMember blankMember = new TeamMember();
+            blankMember.PersonID = Guid.Empty;
+
+            roleToClear.IndividualID = Guid.Empty;
+            roleToClear.teamMember = blankMember;
+            roleToClear.IndividualName = null;
+            if (sendUpsertCommands) { Globals.incidentService.UpsertICSRole(roleToClear); }
+            foreach (ICSRole role in chart.FilledActiveRoles.Where(o => o.ReportsTo == roleToClear.RoleID))
+            {
+                chart.UnassignThisAndSubordinateRoles(role, sendUpsertCommands);
+            }
+        }
+
+        public static bool FilledOrHasFilledChildRoles(this OrganizationChart chart, ICSRole role)
+        {
+            if (role.IndividualID != Guid.Empty) { return true; }
+            foreach(ICSRole childRole in chart.ActiveRoles.Where(o=>o.ReportsTo == role.RoleID))
+            {
+                if (chart.FilledOrHasFilledChildRoles(role))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         public static void UpdateRoleNames(this OrganizationChart chart, int OpPeriod)
         {

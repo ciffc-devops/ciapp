@@ -1002,7 +1002,7 @@ namespace WildfireICSDesktopServices
             if (_currentIncident.allOrgCharts.Any(o => o.OrganizationalChartID == record.OrganizationalChartID))
             {
                 OrganizationChart chart = _currentIncident.allOrgCharts.First(o => o.OrganizationalChartID == record.OrganizationalChartID);
-                if (_currentIncident.allOrgCharts.First(o => o.OrganizationalChartID == record.OrganizationalChartID).AllRoles.Any(o => o.RoleID == record.RoleID))
+                if (chart.AllRoles.Any(o => o.RoleID == record.RoleID))
                 {
 
                     chart.AllRoles = chart.AllRoles.Where(o => o.RoleID != record.RoleID).ToList();
@@ -1012,7 +1012,10 @@ namespace WildfireICSDesktopServices
                 {
                     chart.UpdateRoleName(record, false);
                 }
-
+                foreach(ICSRole role in chart.AllRoles.Where(o=>o.ReportsTo == record.RoleID && o.IncludeReportsToInName))
+                {
+                    chart.UpdateRoleName(role, true);
+                }
 
                 //chart.AllRoles = chart.AllRoles.OrderBy(o=>o.MaualSortOrder).ThenBy(o=>o.RoleName).ToList();
                 chart.SortRoles();

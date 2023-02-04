@@ -16,6 +16,7 @@ namespace Wildfire_ICS_Assist
     {
         private NOTAM _selectedNOTAM = null;
         public NOTAM selectedNOTAM { get => _selectedNOTAM; set { _selectedNOTAM = value;  loadNOTAM(); } }
+        bool coordinatesAreGoodOrBlank = true;
         public AirNOTAMEditForm()
         {
             InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
@@ -53,24 +54,43 @@ namespace Wildfire_ICS_Assist
         private void txtCoordinates_Leave(object sender, EventArgs e)
         {
             Coordinate temp = new Coordinate();
-            if (temp.TryParseCoordinate(txtCoordinates.Text, out temp))
+            if (!string.IsNullOrEmpty(txtCoordinates.Text))
             {
-                lblCoordinateStatus.Text = "Coordinate OK";
-                lblCoordinateStatus.ForeColor = label1.ForeColor;
-                selectedNOTAM.Latitude = temp.Latitude;
-                selectedNOTAM.Longitude = temp.Longitude;
+                if (temp.TryParseCoordinate(txtCoordinates.Text, out temp))
+                {
+                    lblCoordinateStatus.Text = "Coordinate OK";
+                    lblCoordinateStatus.ForeColor = label1.ForeColor;
+                    selectedNOTAM.Latitude = temp.Latitude;
+                    selectedNOTAM.Longitude = temp.Longitude;
+                    coordinatesAreGoodOrBlank = true;
+                }
+                else
+                {
+                    lblCoordinateStatus.Text = "Coordinate Error!";
+                    lblCoordinateStatus.ForeColor = Color.Red;
+                    coordinatesAreGoodOrBlank = false;
+                }
             }
             else
             {
-                lblCoordinateStatus.Text = "Coordinate Error!";
+                lblCoordinateStatus.Text = "";
                 lblCoordinateStatus.ForeColor = Color.Red;
+                coordinatesAreGoodOrBlank = true;
+
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if (!coordinatesAreGoodOrBlank)
+            {
+                MessageBox.Show(Properties.Resources.ValidCoordinatesRequired);
+            }
+            else
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void txtCenterPoint_TextChanged(object sender, EventArgs e)

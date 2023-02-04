@@ -259,7 +259,7 @@ namespace WildfireICSDesktopServices
                 case "CannedCommsItems":
                     return _options.AllCannedCommsLogEntries;
                 case "CommsItems":
-                    return _options.allCommsPlanItems.OrderBy(o => o.ChannelID).ToList();
+                    return _options.allCommsPlanItems.Where(o=>o.Active).OrderBy(o => o.ChannelID).ToList();
                 case "Contacts":
                     return _options.AllContacts;
                 case "CoordinateFormat":
@@ -352,7 +352,8 @@ namespace WildfireICSDesktopServices
                 case "OrganizationID":
                     return _options.OrganizationID;
                 case "DefaultProvinceID":
-                    return _options.DefaultProvince.ProvinceGUID;
+                    if (_options.DefaultProvince != null) { return _options.DefaultProvince.ProvinceGUID; }
+                    else { return ProvinceTools.GetProvinces(false).First().ProvinceGUID; }
             }
             return Guid.Empty;
         }

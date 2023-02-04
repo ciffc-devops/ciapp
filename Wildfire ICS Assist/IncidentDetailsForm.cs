@@ -2587,5 +2587,15 @@ namespace Wildfire_ICS_Assist
                 }
             }
         }
+
+        private void teamAssignmentsICS204ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenTeamAssignmentsForm();
+        }
+
+        private void teamAssignmentsICS204ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenTeamAssignmentsForm();
+        }
     }
 }

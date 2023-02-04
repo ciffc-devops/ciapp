@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSaved = new System.Windows.Forms.Panel();
             this.txtSavedSitePlanLocation = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.chkSavedSitePlanRequired = new System.Windows.Forms.CheckBox();
@@ -54,7 +54,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlSaved.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +70,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            this.splitContainer1.Panel1.Controls.Add(this.pnlSaved);
             // 
             // splitContainer1.Panel2
             // 
@@ -83,23 +83,23 @@
             this.splitContainer1.SplitterDistance = 160;
             this.splitContainer1.TabIndex = 2;
             // 
-            // panel1
+            // pnlSaved
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.txtSavedSitePlanLocation);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.chkSavedSitePlanRequired);
-            this.panel1.Controls.Add(this.btnAddSaved);
-            this.panel1.Controls.Add(this.cboSaved);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(6, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(829, 147);
-            this.panel1.TabIndex = 1;
+            this.pnlSaved.BackColor = System.Drawing.Color.White;
+            this.pnlSaved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSaved.Controls.Add(this.txtSavedSitePlanLocation);
+            this.pnlSaved.Controls.Add(this.label7);
+            this.pnlSaved.Controls.Add(this.chkSavedSitePlanRequired);
+            this.pnlSaved.Controls.Add(this.btnAddSaved);
+            this.pnlSaved.Controls.Add(this.cboSaved);
+            this.pnlSaved.Controls.Add(this.label1);
+            this.pnlSaved.Location = new System.Drawing.Point(6, 7);
+            this.pnlSaved.Name = "pnlSaved";
+            this.pnlSaved.Size = new System.Drawing.Size(829, 147);
+            this.pnlSaved.TabIndex = 1;
             // 
             // txtSavedSitePlanLocation
             // 
@@ -357,8 +357,8 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlSaved.ResumeLayout(false);
+            this.pnlSaved.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -369,7 +369,7 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlSaved;
         private System.Windows.Forms.Button btnAddSaved;
         private System.Windows.Forms.ComboBox cboSaved;
         private System.Windows.Forms.Label label1;

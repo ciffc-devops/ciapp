@@ -56,11 +56,14 @@ namespace Wildfire_ICS_Assist
 
         private void LoadMainData()
         {
-            if(CurrentAirOpsSummary.Sunrise > datSunrise.MinDate) { datSunrise.Value = CurrentAirOpsSummary.Sunrise; }
+            if (CurrentAirOpsSummary.Sunrise > datSunrise.MinDate) { datSunrise.Value = CurrentAirOpsSummary.Sunrise; }
+            else { CurrentAirOpsSummary.Sunrise = datSunrise.Value; }
+
             if (CurrentAirOpsSummary.Sunset > datSunset.MinDate) { datSunset.Value = CurrentAirOpsSummary.Sunset; }
+            else { CurrentAirOpsSummary.Sunset = datSunset.Value; }
             txtRemarks.Text = CurrentAirOpsSummary.Remarks;
             txtMedivacText.Text = CurrentAirOpsSummary.MedivacAircraftText;
-            
+
 
         }
 
@@ -326,12 +329,40 @@ namespace Wildfire_ICS_Assist
 
         private void btnEditComms_Click(object sender, EventArgs e)
         {
+            if (dgvCommsItems.SelectedRows.Count == 1)
+            {
+                CommsPlanItem item = (CommsPlanItem)dgvCommsItems.SelectedRows[0].DataBoundItem;
+                OpenForEdit(item);
+            }
+        }
 
+        private void OpenForEdit(CommsPlanItem item)
+        {
+            using (CommunicationsPlanEditForm editForm = new CommunicationsPlanEditForm())
+            {
+                editForm.SelectedItem = item;
+                DialogResult dr = editForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
+
+                }
+            }
         }
 
         private void btnDeleteComms_Click(object sender, EventArgs e)
         {
+            if (dgvCommsItems.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                List<CommsPlanItem> toDelete = new List<CommsPlanItem>();
 
+                foreach (DataGridViewRow row in dgvCommsItems.SelectedRows)
+                {
+                    toDelete.Add((CommsPlanItem)row.DataBoundItem);
+                }
+
+                foreach (CommsPlanItem c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertCommsPlanItem(c); }
+            }
         }
 
 

@@ -54,6 +54,13 @@ namespace Wildfire_ICS_Assist
                     entryForm.selectedMessage.ApprovedByRoleID = Program.CurrentRole.RoleID; 
                     entryForm.selectedMessage.ApprovedByRoleName = Program.CurrentRole.RoleName;
                     Program.wfIncidentService.UpsertSafetyMessage(entryForm.selectedMessage);
+
+                    if (entryForm.SaveForLater)
+                    {
+                        SafetyMessage msg = entryForm.selectedMessage.Clone();
+                        msg.SafetyTemplateID = Guid.NewGuid();
+                        Program.generalOptionsService.UpserOptionValue(msg, "SafetyMessage");
+                    }
                 }
             }
         }

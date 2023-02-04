@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
@@ -225,12 +226,29 @@ namespace Wildfire_ICS_Assist
             ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
             if (role.AllowDelete)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                //check if there are subordinate roles
+                if (Program.CurrentOrgChart.ActiveRoles.Any(o => o.ReportsTo == role.RoleID))
+                {
+                    MessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
+                }
+                else
+                {
+                    DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                    if (dr == DialogResult.Yes)
+                    {
+                        Program.wfIncidentService.DeleteICSRole(role, Program.CurrentOpPeriod);
+                    }
+                }
+            }
+            else if (role.AllowEditName)
+            {
+                DialogResult dr = MessageBox.Show(Properties.Resources.RenameInsteadOfDeleteRole, Properties.Resources.RenameTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if(dr == DialogResult.Yes)
                 {
-                    Program.wfIncidentService.DeleteICSRole(role, Program.CurrentOpPeriod);
+                    openRoleForEdit(role);
                 }
-            } else { MessageBox.Show(Properties.Resources.ProtectedRole); }
+            }
+            else { MessageBox.Show(Properties.Resources.ProtectedRole); }
 
         }
 
@@ -299,7 +317,33 @@ namespace Wildfire_ICS_Assist
 
         private void rbIncidentCommander_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbIncidentCommander.Checked) { CurrentOrgChart.SwitchToSingleIC(); }
+            if (rbIncidentCommander.Checked)
+            {
+                if (CurrentOrgChart.HasFilledUnifiedCommandRoles)
+                {
+                    DialogResult dr = MessageBox.Show(Properties.Resources.NoSwitchToICWithUCRolesFilled, Properties.Resources.ClearUnifiedCommandRolesTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        ICSRole uc2 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2ID);
+                        if (uc2 != null)
+                        {
+                            CurrentOrgChart.UnassignThisAndSubordinateRoles(uc2);
+                        }
+
+                        ICSRole uc3 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand3ID);
+                        if (uc3 != null)
+                        {
+                            CurrentOrgChart.UnassignThisAndSubordinateRoles(uc2);
+                        }
+                        CurrentOrgChart.SwitchToSingleIC();
+                    }
+                    else
+                    {
+                        rbUnifiedCommand.Checked = true;
+                    }
+                }
+                else { CurrentOrgChart.SwitchToSingleIC(); }
+            }
         }
 
         private void rbUnifiedCommand_CheckedChanged(object sender, EventArgs e)

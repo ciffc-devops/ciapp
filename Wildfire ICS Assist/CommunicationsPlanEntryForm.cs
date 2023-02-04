@@ -156,6 +156,7 @@ namespace Wildfire_ICS_Assist
 
             SavedCommsPlanItems = (List<CommsPlanItem>)Program.generalOptionsService.GetOptionsValue("CommsItems");
             cboSavedComms.DataSource = SavedCommsPlanItems;
+            if (SavedCommsPlanItems.Count <= 0) { pnlSavedComms.Enabled = false; }
             chkUsedForAir.Checked = DefaultAircraft;
             chkSavedUsedForAir.Checked = DefaultAircraft;
         }

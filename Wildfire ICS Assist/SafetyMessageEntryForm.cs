@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist
 
         private SafetyMessage _selectedMessage = new SafetyMessage();
         public SafetyMessage selectedMessage { get => _selectedMessage; set => _selectedMessage = value; }
-
+        public bool SaveForLater { get => chkSaveForLater.Checked; }
         public SafetyMessageEntryForm()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
@@ -43,8 +43,9 @@ namespace Wildfire_ICS_Assist
         {
             cboSaved.DataSource = null;
             List<SafetyMessage> list = (List<SafetyMessage>)Program.generalOptionsService.GetOptionsValue("SafetyMessages");
-            list = list.Where(o => o.Active && !Program.CurrentIncident.allSafetyMessages.Any(m=>m.OpPeriod == Program.CurrentOpPeriod && m.SafetyTemplateID == o.SafetyTemplateID)).OrderBy(o => o.SummaryLine).ToList();
+            list = list.Where(o => o.Active && !Program.CurrentIncident.allSafetyMessages.Any(m=>m.OpPeriod == Program.CurrentOpPeriod && m.SafetyTemplateID == o.SafetyTemplateID && m.Active)).OrderBy(o => o.SummaryLine).ToList();
             cboSaved.DataSource = list;
+            if(list.Count <= 0) { pnlSaved.Enabled = false; }
         }
 
         private bool ValidateNew()
@@ -77,6 +78,7 @@ namespace Wildfire_ICS_Assist
         {
             if (ValidateNew())
             {
+                
                 selectedMessage.Message = txtNewMessage.Text;
                 selectedMessage.SummaryLine = txtSummaryLine.Text;
                 selectedMessage.SitePlanRequired = chkNewSitePlanRequired.Checked;

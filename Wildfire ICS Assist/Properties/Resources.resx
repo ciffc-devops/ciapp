@@ -424,4 +424,22 @@
   <data name="glyphicons_basic_965_layers_plus1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-965-layers-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ClearUnifiedCommandRolesTitle" xml:space="preserve">
+    <value>Clear Unified Command roles?</value>
+  </data>
+  <data name="DeleteSubordinateRoles" xml:space="preserve">
+    <value>You must first remove or reassign any roles that report to this one before removing it.</value>
+  </data>
+  <data name="NoSwitchToICWithUCRolesFilled" xml:space="preserve">
+    <value>Sorry, you cannot switch from Unified Command to a single Incident Commander while the Unified Command roles are filled, or have filled subordinate roles.  Would you like to clear all Unified Command roles automatically?</value>
+  </data>
+  <data name="RenameInsteadOfDeleteRole" xml:space="preserve">
+    <value>Sorry, you cannot delete this role, but you can rename it as needed.  Would you like to rename this role now?</value>
+  </data>
+  <data name="RenameTitle" xml:space="preserve">
+    <value>Rename?</value>
+  </data>
+  <data name="ValidCoordinatesRequired" xml:space="preserve">
+    <value>You must enter valid coordinates, or leave the coordinate field blank in order to proceed.</value>
+  </data>
 </root>

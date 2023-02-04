@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommunicationsPlanEntryForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSavedComms = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.btnSavedUsedForAir = new System.Windows.Forms.Button();
             this.chkSavedUsedForAir = new System.Windows.Forms.CheckBox();
@@ -67,7 +67,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlSavedComms.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +82,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            this.splitContainer1.Panel1.Controls.Add(this.pnlSavedComms);
             // 
             // splitContainer1.Panel2
             // 
@@ -93,28 +93,28 @@
             this.splitContainer1.SplitterDistance = 171;
             this.splitContainer1.TabIndex = 0;
             // 
-            // panel1
+            // pnlSavedComms
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlSavedComms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.btnSavedUsedForAir);
-            this.panel1.Controls.Add(this.chkSavedUsedForAir);
-            this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.txtSavedAssignment);
-            this.panel1.Controls.Add(this.txtSavedFunction);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.btnAddSaved);
-            this.panel1.Controls.Add(this.cboSavedComms);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(6, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(751, 158);
-            this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.pnlSavedComms.BackColor = System.Drawing.Color.White;
+            this.pnlSavedComms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSavedComms.Controls.Add(this.label13);
+            this.pnlSavedComms.Controls.Add(this.btnSavedUsedForAir);
+            this.pnlSavedComms.Controls.Add(this.chkSavedUsedForAir);
+            this.pnlSavedComms.Controls.Add(this.label11);
+            this.pnlSavedComms.Controls.Add(this.txtSavedAssignment);
+            this.pnlSavedComms.Controls.Add(this.txtSavedFunction);
+            this.pnlSavedComms.Controls.Add(this.label9);
+            this.pnlSavedComms.Controls.Add(this.btnAddSaved);
+            this.pnlSavedComms.Controls.Add(this.cboSavedComms);
+            this.pnlSavedComms.Controls.Add(this.label1);
+            this.pnlSavedComms.Location = new System.Drawing.Point(6, 7);
+            this.pnlSavedComms.Name = "pnlSavedComms";
+            this.pnlSavedComms.Size = new System.Drawing.Size(751, 158);
+            this.pnlSavedComms.TabIndex = 1;
+            this.pnlSavedComms.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label13
             // 
@@ -469,9 +469,9 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(3, 8);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(222, 29);
+            this.label10.Size = new System.Drawing.Size(334, 29);
             this.label10.TabIndex = 99;
-            this.label10.Text = "New Comms Tool";
+            this.label10.Text = "New  Communications Tool";
             // 
             // btnAddNew
             // 
@@ -501,14 +501,14 @@
             this.MinimizeBox = false;
             this.Name = "CommunicationsPlanEntryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CommunicationsPlanEntryForm";
+            this.Text = "Add a Communications Tool to the Incident";
             this.Load += new System.EventHandler(this.CommunicationsPlanEntryForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlSavedComms.ResumeLayout(false);
+            this.pnlSavedComms.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -523,7 +523,7 @@
         private System.Windows.Forms.CheckBox chkSaveForLater;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnAddNew;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlSavedComms;
         private System.Windows.Forms.Button btnAddSaved;
         private System.Windows.Forms.ComboBox cboSavedComms;
         private System.Windows.Forms.Label label1;

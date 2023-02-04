@@ -469,13 +469,14 @@ namespace Wildfire_ICS_Assist
                     CurrentIncident.IncidentTitleImageBytes = string.Empty;
                     TaskBasics basics = new TaskBasics(CurrentIncident);
                     Program.wfIncidentService.UpdateTaskBasics(basics, "local");
-
+                    picTitleImage.Image = null;
                 }
                 else
                 {
                     OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
                     period.TitleImageBytes = string.Empty;
                     Program.wfIncidentService.UpsertOperationalPeriod(period);
+                    picTitleImage.Image = null;
 
                 }
             }
