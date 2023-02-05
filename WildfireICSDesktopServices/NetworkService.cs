@@ -208,7 +208,7 @@ namespace WildfireICSDesktopServices
                     //We ensure we perform the send within a try catch
                     //To ensure a single failed send will not prevent the
                     //relay to all working connections.
-                    try { relayConnection.SendObject("SARTask", incomingMessage); }
+                    try { relayConnection.SendObject("WFIncident", incomingMessage); }
                     catch (CommsException) { /* Catch the comms exception, ignore and continue */ }
                 }
             }
