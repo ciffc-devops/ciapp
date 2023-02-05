@@ -2392,6 +2392,7 @@ namespace Wildfire_ICS_Assist
                     }
                     CloseActiveForms();
                     CurrentIncident = task;
+
                     displayIncidentDetails();
                     networkTaskRequested = false;
                     DateTime today = DateTime.Now;
