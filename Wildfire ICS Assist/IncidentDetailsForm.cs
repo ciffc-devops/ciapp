@@ -80,6 +80,9 @@ namespace Wildfire_ICS_Assist
 
             datOpsEnd.CustomFormat = Program.DateFormat + " HH:mm";
             datOpsStart.CustomFormat = Program.DateFormat + " HH:mm";
+
+            NetworkComms.AppendGlobalIncomingPacketHandler<WFIncident>("WFIncident", Program.networkService.HandleIncomingIncident);
+
         }
 
         private void StartAsServer()

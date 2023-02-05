@@ -156,7 +156,7 @@ namespace WildfireICSDesktopServices
         /// <param name="header">The PacketHeader corresponding with the received object</param>
         /// <param name="connection">The Connection from which this object was received</param>
         /// <param name="incomingMessage">The incoming ChatMessage we are after</param>
-        private void HandleIncomingIncident(PacketHeader header, Connection connection, WFIncident incomingMessage)
+        public void HandleIncomingIncident(PacketHeader header, Connection connection, WFIncident incomingMessage)
         {
 
             lock (lastPeerSarTaskDict)
@@ -837,8 +837,11 @@ namespace WildfireICSDesktopServices
                 //We perform the send within a try catch to ensure the application continues to run if there is a problem.
                 try
                 {
+
+                    
                     TCPConnection.GetConnection(serverConnectionInfo).SendObject("WFIncident", task);
                     DateTime today = DateTime.Now;
+                    
                     args.message += string.Format("{0:HH:mm:ss}", today) + " - sent full task" + "\r\n";
                     args.Successful = true;
                 }
