@@ -2232,7 +2232,8 @@ namespace Wildfire_ICS_Assist
 
         private void Program_HandleIncomingNetworkObject(NetworkSendObject incomingMessage)
         {
-            if (incomingMessage.objectType == new TaskUpdate().GetType().ToString())
+            string taskUpdateName = new TaskUpdate().GetType().ToString();
+            if (incomingMessage.objectType == taskUpdateName)
             {
                 Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
             }
