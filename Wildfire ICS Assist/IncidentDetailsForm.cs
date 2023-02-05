@@ -2255,7 +2255,7 @@ namespace Wildfire_ICS_Assist
                         receiveTestConnectionResult(incomingMessage);
                     }
                 }
-            }
+            });
         }
 
         private void replaceOptionsFromNetwork(GeneralOptions options)
