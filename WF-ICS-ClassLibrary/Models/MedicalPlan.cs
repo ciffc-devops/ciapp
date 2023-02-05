@@ -24,7 +24,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(11)] private string _ApprovedByPosition;
         [ProtoMember(12)] private string _ApprovedBy;
         [ProtoMember(13)] private Guid _PreparedByRoleID;
-        [ProtoMember(13)] private Guid _ApprovedByRoleID;
+        [ProtoMember(14)] private Guid _ApprovedByRoleID;
 
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public string PreparedBy { get => _PreparedBy; set => _PreparedBy = value; }
