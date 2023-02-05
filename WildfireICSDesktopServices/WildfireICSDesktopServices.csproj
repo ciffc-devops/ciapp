@@ -85,7 +85,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TaskUpdateTools.cs" />
+    <Compile Include="TaskUpdateWebServiceTools.cs" />
     <Compile Include="WFIncidentService.cs" />
   </ItemGroup>
   <ItemGroup>

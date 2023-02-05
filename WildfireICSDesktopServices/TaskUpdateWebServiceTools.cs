@@ -8,7 +8,7 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace WildfireICSDesktopServices
 {
-    public static class TaskUpdateTools
+    public static class TaskUpdateWebServiceTools
     {
         /*
         public static TaskUpdate taskUpdateFromWebServiceItem(this ca.sarassist.TaskUpdate webItem)
