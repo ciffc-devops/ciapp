@@ -837,7 +837,7 @@ namespace WildfireICSDesktopServices
                 //We perform the send within a try catch to ensure the application continues to run if there is a problem.
                 try
                 {
-                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("SARTask", task);
+                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("WFIncident", task);
                     DateTime today = DateTime.Now;
                     args.message += string.Format("{0:HH:mm:ss}", today) + " - sent full task" + "\r\n";
                     args.Successful = true;
