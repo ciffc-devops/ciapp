@@ -2159,30 +2159,35 @@ namespace Wildfire_ICS_Assist
 
         public void sendTestConnection(string ip = null, string port = null)
         {
-           
-            silentNetworkTest = false;
-            pnlNetworkSyncInProgress.Visible = true;
-            pnlNetworkSyncInProgress.BringToFront();
-            btnNetworkSyncDone.Visible = false;
-            btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
-            /*
-            pnlNetworkSyncInProgress.Location = new Point(0, 0);
-            pnlNetworkSyncInProgress.Height = this.Height;
-            pnlNetworkSyncInProgress.Width = this.Width;
-            */
-
-
-            pnlNetworkSyncInProgress.Dock = DockStyle.Fill;
-            pnlNetworkSyncInProgress.BringToFront();
-            lblNetworkSyncStatus.Text = "Beginning Network Status Check";
-            lblNetworkShareMoreInfoMsg.Visible = false;
-            pbNetworkSyncInProgress.Value = 1;
-            NetworkTestGuidValue = Program.networkService.sendTestConnection(CurrentIncident.TaskID, ip, port);
-
-            if (initialConnectionTest)
+            this.BeginInvoke((Action)delegate ()
             {
-                tmrNetwork.Enabled = true;
-            }
+                silentNetworkTest = false;
+                pnlNetworkSyncInProgress.Visible = true;
+                pnlNetworkSyncInProgress.BringToFront();
+                btnNetworkSyncDone.Visible = false;
+                btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
+
+
+
+                /*
+                pnlNetworkSyncInProgress.Location = new Point(0, 0);
+                pnlNetworkSyncInProgress.Height = this.Height;
+                pnlNetworkSyncInProgress.Width = this.Width;
+                */
+
+
+                pnlNetworkSyncInProgress.Dock = DockStyle.Fill;
+                pnlNetworkSyncInProgress.BringToFront();
+                lblNetworkSyncStatus.Text = "Beginning Network Status Check";
+                lblNetworkShareMoreInfoMsg.Visible = false;
+                pbNetworkSyncInProgress.Value = 1;
+                NetworkTestGuidValue = Program.networkService.sendTestConnection(CurrentIncident.TaskID, ip, port);
+
+                if (initialConnectionTest)
+                {
+                    tmrNetwork.Enabled = true;
+                }
+            });
         }
 
 
@@ -2367,7 +2372,7 @@ namespace Wildfire_ICS_Assist
                 {
                     PauseNetworkSend = true;
 
-                    lblNetworkSyncStatus.Text = "Incoming SAR Task Received, loading now";
+                    lblNetworkSyncStatus.Text = "Incoming Incident received, loading now";
                     lblNetworkShareMoreInfoMsg.Visible = false;
 
                     pbNetworkSyncInProgress.Value = 3;
@@ -2385,17 +2390,18 @@ namespace Wildfire_ICS_Assist
                     displayIncidentDetails(); 
                     networkTaskRequested = false;
                     DateTime today = DateTime.Now;
-                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received full sar task #" + task.TaskNumber + "\r\n");
+                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received full incident " + task.IncidentIdentifier + "\r\n");
 
                     if (pnlNetworkSyncInProgress.Visible)
                     {
-                        lblNetworkSyncStatus.Text = "SAR Task loaded successfully from the network!";
+                        pnlNetworkSyncInProgress.BringToFront();
+                        lblNetworkSyncStatus.Text = "Incident loaded successfully from the network!";
                         pbNetworkSyncInProgress.Value = 4;
 
                         btnNetworkSyncDone.Visible = true;
                         btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
                     }
-                    else { MessageBox.Show("Netowrk task downloaded successfully!"); }
+                    else { pnlNetworkSyncInProgress.BringToFront(); MessageBox.Show("Netowrk incident downloaded successfully!"); }
                     //pnlNetworkSyncInProgress.Visible = false;
                     PauseNetworkSend = false;
                     //MessageBox.Show("Task loaded from server");
@@ -2416,7 +2422,7 @@ namespace Wildfire_ICS_Assist
 
 
                     DateTime today = DateTime.Now;
-                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received a request for the current sar task" + "\r\n");
+                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received a request for the current incident" + "\r\n");
                     DeviceInformation requester = new DeviceInformation();
                     requester.DeviceIP = incomingMessage.RequestIP;
                     requester.DeviceName = incomingMessage.SourceName;
@@ -2428,7 +2434,7 @@ namespace Wildfire_ICS_Assist
                         
                        Program.networkService.SendTaskData(CurrentIncident);
                         today = DateTime.Now;
-                        addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current sar task to trusted device " + requester.DeviceIP + "\r\n");
+                        addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current incident to trusted device " + requester.DeviceIP + "\r\n");
                     }
                     else
                     {
@@ -2470,7 +2476,7 @@ namespace Wildfire_ICS_Assist
 
                                 Program.networkService.SendTaskData(CurrentIncident);
                                 today = DateTime.Now;
-                                addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current sar task" + "\r\n");
+                                addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current incident" + "\r\n");
                             }
 
                         }
