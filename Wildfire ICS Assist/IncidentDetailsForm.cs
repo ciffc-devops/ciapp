@@ -2232,25 +2232,28 @@ namespace Wildfire_ICS_Assist
 
         private void Program_HandleIncomingNetworkObject(NetworkSendObject incomingMessage)
         {
-            string taskUpdateName = new TaskUpdate().GetType().ToString();
-            if (incomingMessage.objectType == taskUpdateName)
+            this.BeginInvoke((Action)delegate ()
             {
-                Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
-            }
-
-            else if (incomingMessage.objectType == new GeneralOptions().GetType().ToString())
-            {
-                replaceOptionsFromNetwork(incomingMessage.generalOptions);
-            }
-            else if (incomingMessage.objectType == Guid.Empty.GetType().ToString())
-            {
-                if (incomingMessage.comment == "test" && ThisMachineIsServer)
+                string taskUpdateName = new TaskUpdate().GetType().ToString();
+                if (incomingMessage.objectType == taskUpdateName)
                 {
-                    replyToTestConnection(incomingMessage);
+                    Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
                 }
-                else if (incomingMessage.comment == "success" && NetworkTestGuidValue != Guid.Empty)
+
+                else if (incomingMessage.objectType == new GeneralOptions().GetType().ToString())
                 {
-                    receiveTestConnectionResult(incomingMessage);
+                    replaceOptionsFromNetwork(incomingMessage.generalOptions);
+                }
+                else if (incomingMessage.objectType == Guid.Empty.GetType().ToString())
+                {
+                    if (incomingMessage.comment == "test" && ThisMachineIsServer)
+                    {
+                        replyToTestConnection(incomingMessage);
+                    }
+                    else if (incomingMessage.comment == "success" && NetworkTestGuidValue != Guid.Empty)
+                    {
+                        receiveTestConnectionResult(incomingMessage);
+                    }
                 }
             }
         }
