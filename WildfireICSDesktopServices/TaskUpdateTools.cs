@@ -43,22 +43,7 @@ namespace WildfireICSDesktopServices
         */
 
 
-        public static object DecryptTaskUpdateData(TaskUpdate update, string encryptKey)
-        {
-            object objDecrypted = null;
-
-            try
-            {
-                string dataDecrypt = StringCipher.Decrypt(update.DataEnc, encryptKey);
-                objDecrypted = update.ObjectFromJSONData(dataDecrypt, update.ObjectType);
-
-            }
-            catch (Exception)
-            {
-
-            }
-            return objDecrypted;
-        }
+       
 
     }
 

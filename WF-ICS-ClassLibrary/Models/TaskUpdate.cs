@@ -27,7 +27,6 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(8)] private Guid _MachineID;
         [ProtoMember(9)] private string _ObjcetType;
         [ProtoMember(10)] private string _DataEnc;
-        [ProtoMember(5)] private string _DataAsXMLString;
         [ProtoMember(11)] private string _DataAsJSONString;
         [ProtoMember(12)] private string _Source;
 
@@ -47,20 +46,11 @@ namespace WF_ICS_ClassLibrary.Models
                     try
                     {
 
-                        _Data = ObjectFromJSONData(_DataAsJSONString, ObjectType);
+                        _Data = _DataAsJSONString.ObjectFromJSONData(ObjectType);
                     }
                     catch (Exception) { _Data = null; }
                 }
-                else if (!string.IsNullOrEmpty(_DataAsXMLString))
-                {
-                    try
-                    {
-
-                        _Data = ObjectFromXMLData(_DataAsXMLString, ObjectType);
-                    }
-                    catch (Exception) { _Data = null; }
-
-                }
+               
                 return _Data;
             }
 
@@ -90,10 +80,37 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-      
 
 
-        public object ObjectFromJSONData(string jsonData, string ObjectType)
+
+        
+
+
+        
+    }
+
+    public static class TaskUpdateTools
+    {
+
+        public static object DecryptTaskUpdateData(TaskUpdate update, string encryptKey)
+        {
+            object objDecrypted = null;
+
+            try
+            {
+                string dataDecrypt = StringCipher.Decrypt(update.DataEnc, encryptKey);
+                objDecrypted = dataDecrypt.ObjectFromJSONData(update.ObjectType);
+
+            }
+            catch (Exception)
+            {
+
+            }
+            return objDecrypted;
+        }
+
+
+        public static object ObjectFromJSONData(this string jsonData, string ObjectType)
         {
             object objDecrypted = null;
 
@@ -102,7 +119,7 @@ namespace WF_ICS_ClassLibrary.Models
                 objDecrypted = JsonSerializer.Deserialize<Contact>(jsonData);
 
             }
-           else if (ObjectType.Equals(new Briefing().GetType().Name))
+            else if (ObjectType.Equals(new Briefing().GetType().Name))
             {
                 objDecrypted = JsonSerializer.Deserialize<Briefing>(jsonData);
             }
@@ -156,7 +173,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 objDecrypted = JsonSerializer.Deserialize<PositionLogEntry>(jsonData);
             }
-       
+
             else if (ObjectType.Equals(new TaskBasics().GetType().Name))
             {
                 objDecrypted = JsonSerializer.Deserialize<TaskBasics>(jsonData);
@@ -188,111 +205,42 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 objDecrypted = JsonSerializer.Deserialize<WFIncident>(jsonData);
             }
+            else if (ObjectType.Equals(new AirOperationsSummary().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<AirOperationsSummary>(jsonData);
+            }
+            else if (ObjectType.Equals(new Aircraft().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<Aircraft>(jsonData);
+            }
+            else if (ObjectType.Equals(new NOTAM().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<NOTAM>(jsonData);
+            }
+            else if (ObjectType.Equals(new GeneralMessage().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<GeneralMessage>(jsonData);
+            }
+            else if (ObjectType.Equals(new IncidentObjectivesSheet().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<IncidentObjectivesSheet>(jsonData);
+            }
+            else if (ObjectType.Equals(new MedicalAidStation().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<MedicalAidStation>(jsonData);
+            }
+            else if (ObjectType.Equals(new SafetyMessage().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<SafetyMessage>(jsonData);
+            }
+
+            else if (ObjectType.Equals(new TeamAssignment().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<TeamAssignment>(jsonData);
+            }
 
 
 
-            return objDecrypted;
-        }
-
-
-        public object ObjectFromXMLData(string xmlData, string ObjectType)
-        {
-            object objDecrypted = null;
-
-         
-            if (ObjectType.Equals(new Briefing().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<Briefing>();
-            }
-            else if (ObjectType.Equals(new CommsLogEntry().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<CommsLogEntry>();
-            }
-            else if (ObjectType.Equals(new CommsPlanItem().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<CommsPlanItem>();
-            }
-           
-            else if (ObjectType.Equals(new CommsPlan().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<CommsPlan>();
-            }
-         
-            else if (ObjectType.Equals(new Contact().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<Contact>();
-            }
-          
-            else if (ObjectType.Equals(new Hospital().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<Hospital>();
-            }
-            else if (ObjectType.Equals(new AmbulanceService().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<AmbulanceService>();
-            }
-            else if (ObjectType.Equals(new IncidentObjective().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<IncidentObjective>();
-            }
-           
-            else if (ObjectType.Equals(new MedicalPlan().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<MedicalPlan>();
-            }
-            else if (ObjectType.Equals(new Note().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<Note>();
-            }
-            else if (ObjectType.Equals(new OperationalPeriod().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<OperationalPeriod>();
-            }
-            else if (ObjectType.Equals(new OrganizationChart().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<OrganizationChart>();
-            }
-            else if (ObjectType.Equals(new ICSRole().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<ICSRole>();
-            }
-            else if (ObjectType.Equals(new PositionLogEntry().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<PositionLogEntry>();
-            }
-       
-            
-            else if (ObjectType.Equals(new TaskBasics().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<TaskBasics>();
-            }
-            else if (ObjectType.Equals(new Timeline().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<Timeline>();
-            }
-            else if (ObjectType.Equals(new TimelineEvent().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<TimelineEvent>();
-            }
-            
-            else if (ObjectType.Equals(new Vehicle().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<Vehicle>();
-            }
-      
-
-            else if (ObjectType.Equals(new SignInRecord().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<SignInRecord>();
-            }
-            else if (ObjectType.Equals(new TeamMember().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<TeamMember>();
-            }
-            else if (ObjectType.Equals(new WFIncident().GetType().Name))
-            {
-                objDecrypted = xmlData.XmlDeserializeFromString<WFIncident>();
-            }
             return objDecrypted;
         }
     }
