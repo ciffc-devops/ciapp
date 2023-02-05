@@ -69,12 +69,13 @@ namespace Wildfire_ICS_Assist
             ICSRole defaultRole = (ICSRole)Program.generalOptionsService.GetOptionsValue("DefaultICSRole");
             if (defaultRole != null && defaultRole.RoleID != Guid.Empty) { cboICSRole.SelectedValue = defaultRole.RoleID; }
 
+            Program.networkService.CurrentIncidentID = Program.CurrentIncident.TaskID;
             //Default status for networking
             if (Program.generalOptionsService.GetOptionsBoolValue("DefaultToNetworkServer"))
             {
 
                 StartAsServer();
-              
+
             }
             setServerStatusDisplay();
 
@@ -137,7 +138,7 @@ namespace Wildfire_ICS_Assist
 
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
-        private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == Program.CurrentOpPeriod); }
+        private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
 
         public bool ThisMachineStandAlone { get { return Program.networkService.ThisMachineIsStandAlone; } set { Program.networkService.ThisMachineIsStandAlone = value; } }
         public bool ThisMachineIsServer { get { return Program.networkService.ThisMachineIsServer; } set { Program.networkService.ThisMachineIsServer = value; } }
@@ -167,8 +168,8 @@ namespace Wildfire_ICS_Assist
         HospitalsForm hospitalsForm = null;
         MedivacsForm medivacsForm = null;
         SavedContactsForm savedContactsForm = null;
-        SavedCommsItemsForm savedCommsItemsForm= null;
-        SavedVehiclesForm savedVehiclesForm= null;
+        SavedCommsItemsForm savedCommsItemsForm = null;
+        SavedVehiclesForm savedVehiclesForm = null;
         SavedIncidentObjectivesForm savedObjectivesForm = null;
         SavedSafetyNotesForm savedSafetyNotesForm = null;
         SavedTeamMembersForm savedTeamMembersForm = null;
@@ -193,7 +194,7 @@ namespace Wildfire_ICS_Assist
         PositionLogReminderForm _positionLogReminderForm = null;
         PersonnelListForm _personnelListForm = null;
 
-        
+
 
         public event ShortcutEventHandler ShortcutButtonClicked;
 
@@ -209,7 +210,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-        List<CollapsiblePanel> collapsiblePanels= new List<CollapsiblePanel>();
+        List<CollapsiblePanel> collapsiblePanels = new List<CollapsiblePanel>();
 
 
         private void WireWFIncidentServiceEvents()
@@ -218,7 +219,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
             Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
-            Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
+            Program.wfIncidentService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
             Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
             Program.wfIncidentService.MedicalPlanChanged += Program_MedicalPlanChanged;
             Program.wfIncidentService.MedicalAidStationChanged += Program_AidStationChanged;
@@ -227,9 +228,9 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.NoteChanged += Program_NoteChanged;
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
-            Program.wfIncidentService.CommsPlanChanged+= Program_CommsPlanChanged;
-            Program.wfIncidentService.CommsPlanItemChanged+= Program_CommsPlanItemChanged;
-            Program.wfIncidentService.AircraftChanged+= Program_AircraftChanged;
+            Program.wfIncidentService.CommsPlanChanged += Program_CommsPlanChanged;
+            Program.wfIncidentService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
+            Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
             Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
             Program.wfIncidentService.TaskBasicsChanged += Program_TaskBasicsChanged;
             Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
@@ -259,7 +260,7 @@ namespace Wildfire_ICS_Assist
 
         private void setButtonCheckboxes()
         {
-            if(CurrentIncident.ActiveAssignments.Any(o=>o.OpPeriod == Program.CurrentOpPeriod)) { btnAssignmentList.Image = Properties.Resources.glyphicons_basic_739_check; teamMembersToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            if (CurrentIncident.ActiveAssignments.Any(o => o.OpPeriod == Program.CurrentOpPeriod)) { btnAssignmentList.Image = Properties.Resources.glyphicons_basic_739_check; teamMembersToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnAssignmentList.Image = null; teamMembersToolStripMenuItem.Image = null; }
 
             if (CurrentIncident.hasMeangfulCommsPlan(CurrentOpPeriod)) { btnCommsPlan.Image = Properties.Resources.glyphicons_basic_739_check; communicationsPlanICS205ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
@@ -276,7 +277,7 @@ namespace Wildfire_ICS_Assist
             else { btnIncidentObjectives.Image = null; incidentObjectivesICS202ToolStripMenuItem.Image = null; }
 
 
-            
+
             if (CurrentIncident.hasAnySafetyMessages(CurrentOpPeriod)) { btnSafetyPlans.Image = Properties.Resources.glyphicons_basic_739_check; safetyMessageICS208ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnSafetyPlans.Image = null; safetyMessageICS208ToolStripMenuItem.Image = null; }
 
@@ -312,7 +313,7 @@ namespace Wildfire_ICS_Assist
 
         private void collapseAllPanels()
         {
-            foreach(CollapsiblePanel panel in collapsiblePanels) { panel.Collapse(); }
+            foreach (CollapsiblePanel panel in collapsiblePanels) { panel.Collapse(); }
         }
 
         private void llProgramURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -600,7 +601,7 @@ namespace Wildfire_ICS_Assist
             cboICSRole.DataSource = CurrentOrgChart.ActiveRoles;
             cboICSRole.DisplayMember = "RoleNameForDropdown";
             cboICSRole.ValueMember = "RoleID";
-            if (role != null && CurrentOrgChart.ActiveRoles.Any(o=>o.RoleID == role.RoleID)) { cboICSRole.SelectedValue = role.RoleID; }
+            if (role != null && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == role.RoleID)) { cboICSRole.SelectedValue = role.RoleID; }
 
         }
 
@@ -618,7 +619,8 @@ namespace Wildfire_ICS_Assist
             if (CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID))
             {
                 cboICSRole.SelectedValue = Program.CurrentRole.RoleID; DisplayCurrentICSRole();
-            } else { cboICSRole.SelectedIndex = 0; }
+            }
+            else { cboICSRole.SelectedIndex = 0; }
 
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { this.Text = Globals.ProgramName + " - " + CurrentIncident.FileName; }
             else { this.Text = Globals.ProgramName; }
@@ -639,12 +641,12 @@ namespace Wildfire_ICS_Assist
             if (Program.CurrentRole != null)
             {
                 List<Guid> ChiefIDs = new List<Guid>();
-                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID);ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
+                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID); ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
                 List<Guid> ICRoles = new List<Guid>();
                 ICRoles.Add(Globals.IncidentCommanderID); ICRoles.Add(Globals.DeputyIncidentCommanderID); ICRoles.Add(Globals.UnifiedCommand1ID); ICRoles.Add(Globals.UnifiedCommand2ID); ICRoles.Add(Globals.UnifiedCommand3ID);
 
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                foreach(ICSRole role in CurrentOrgChart.ActiveRoles.Where(o=>o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
+                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
                 {
                     CommandStaffRoles.Add(role.RoleID);
                 }
@@ -673,12 +675,12 @@ namespace Wildfire_ICS_Assist
                 {
                     pnlTaskInfo.BackColor = Color.CornflowerBlue;
                     cpPlanning.Expand();
-/*
-                    pnlIAP.BackColor = Color.CornflowerBlue;
-                    pnlCommandTeam.BackColor = Color.CornflowerBlue;
-                    pnlPlanning.BackColor = Color.CornflowerBlue;
-                    tcStatus.SelectedIndex = 1;
-                    resizeGroup("Planning", false, true);*/
+                    /*
+                                        pnlIAP.BackColor = Color.CornflowerBlue;
+                                        pnlCommandTeam.BackColor = Color.CornflowerBlue;
+                                        pnlPlanning.BackColor = Color.CornflowerBlue;
+                                        tcStatus.SelectedIndex = 1;
+                                        resizeGroup("Planning", false, true);*/
 
                 }
                 else if (Program.CurrentRole.BranchID == Globals.LogisticsChiefID)
@@ -733,7 +735,7 @@ namespace Wildfire_ICS_Assist
 
         private void Program_OperationalPeriodChanged(OperationalPeriodEventArgs e)
         {
-            if(e.item.PeriodNumber == Program.CurrentOpPeriod)
+            if (e.item.PeriodNumber == Program.CurrentOpPeriod)
             {
                 datOpsStart.Value = e.item.PeriodStart;
                 datOpsEnd.Value = e.item.PeriodEnd;
@@ -753,7 +755,7 @@ namespace Wildfire_ICS_Assist
 
         private void Program_CommsPlanChanged(CommsPlanEventArgs e)
         {
-            if(e.item.OpsPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            if (e.item.OpsPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
             TriggerAutoSave();
         }
 
@@ -886,7 +888,7 @@ namespace Wildfire_ICS_Assist
             if (period != null) { Program.wfIncidentService.UpsertOperationalPeriod(period); }
 
             CurrentIncident.createOrgChartAsNeeded(period.PeriodNumber);
-            
+
 
             if (Program.generalOptionsService.GetGuidOptionValue("OrganizationID") != Guid.Empty) { CurrentIncident.OrganizationID = Program.generalOptionsService.GetGuidOptionValue("OrganizationID"); }
             CurrentIncident.ICPCallSign = txtICPCallsign.Text;
@@ -950,6 +952,7 @@ namespace Wildfire_ICS_Assist
                         if (!CurrentIncident.AllOperationalPeriods.Any()) { CurrentIncident.AllOperationalPeriods = CurrentIncident.InferOperationalPeriods(); }
 
                         LastAutoBackup = DateTime.Now;
+                        Program.networkService.CurrentIncidentID = Program.CurrentIncident.TaskID;
                         displayIncidentDetails();
 
                         //setSavedFlag(true);
@@ -1206,7 +1209,7 @@ namespace Wildfire_ICS_Assist
 
         private void txtTaskNumber_Validating(object sender, CancelEventArgs e)
         {
-            if(initialDetailsSet(false, false) && !askedForInitialSave && !ThisMachineIsClient && Program.generalOptionsService.GetOptionsBoolValue("PromptForInitialSave"))
+            if (initialDetailsSet(false, false) && !askedForInitialSave && !ThisMachineIsClient && Program.generalOptionsService.GetOptionsBoolValue("PromptForInitialSave"))
             {
                 askedForInitialSave = true;
                 DialogResult result = MessageBox.Show("Would you like to save this task now? (you can always select File > Save As... in the future)", "Save Task", MessageBoxButtons.YesNo);
@@ -1243,12 +1246,12 @@ namespace Wildfire_ICS_Assist
                 _communicationsListForm.BringToFront();
             }
 
-           
-        
+
+
         }
         void CommunicationsListForm_Closed(object sender, FormClosedEventArgs e)
         {
-           
+
             RemoveActiveForm(_communicationsListForm);
             _communicationsListForm = null;
 
@@ -1437,7 +1440,7 @@ namespace Wildfire_ICS_Assist
             using (OptionsForm editOptions = new OptionsForm())
             {
                 DialogResult result = editOptions.ShowDialog();
-                
+
             }
         }
 
@@ -1495,7 +1498,7 @@ namespace Wildfire_ICS_Assist
 
         private void Program_MedicalPlanChanged(MedicalPlanEventArgs e)
         {
-            if(e.item.OpPeriod == Program.CurrentOpPeriod)
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
                 setButtonCheckboxes();
             }
@@ -1764,19 +1767,19 @@ namespace Wildfire_ICS_Assist
         }
 
 
-            private void OpenSavedAircraftForm()
+        private void OpenSavedAircraftForm()
         {
-           
-                if (savedAircraftForm == null)
-                {
-                    savedAircraftForm = new SavedAircraftsForm();
-                    savedAircraftForm.FormClosed += new FormClosedEventHandler(SavedAircraftForm_Closed);
-                    ActiveForms.Add(savedAircraftForm);
-                    savedAircraftForm.Show(this);
-                }
 
-                savedAircraftForm.BringToFront();
-            
+            if (savedAircraftForm == null)
+            {
+                savedAircraftForm = new SavedAircraftsForm();
+                savedAircraftForm.FormClosed += new FormClosedEventHandler(SavedAircraftForm_Closed);
+                ActiveForms.Add(savedAircraftForm);
+                savedAircraftForm.Show(this);
+            }
+
+            savedAircraftForm.BringToFront();
+
         }
         void SavedAircraftForm_Closed(object sender, FormClosedEventArgs e)
         {
@@ -1936,17 +1939,17 @@ namespace Wildfire_ICS_Assist
 
         private void OpenSavedTeamAssignmentsForm()
         {
-          
-                if (savedTeamAssignmentsForm == null)
-                {
-                    savedTeamAssignmentsForm = new SavedTeamAssignmentsForm();
-                    savedTeamAssignmentsForm.FormClosed += new FormClosedEventHandler(SavedTeamAssignmentsForm_Closed);
-                    ActiveForms.Add(savedTeamAssignmentsForm);
-                    savedTeamAssignmentsForm.Show(this);
-                }
 
-                savedTeamAssignmentsForm.BringToFront();
-            
+            if (savedTeamAssignmentsForm == null)
+            {
+                savedTeamAssignmentsForm = new SavedTeamAssignmentsForm();
+                savedTeamAssignmentsForm.FormClosed += new FormClosedEventHandler(SavedTeamAssignmentsForm_Closed);
+                ActiveForms.Add(savedTeamAssignmentsForm);
+                savedTeamAssignmentsForm.Show(this);
+            }
+
+            savedTeamAssignmentsForm.BringToFront();
+
         }
         void SavedTeamAssignmentsForm_Closed(object sender, FormClosedEventArgs e)
         {
@@ -2008,9 +2011,9 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.ProcessTaskUpdate(e.item);
             if (Program.InternetSyncEnabled && !e.item.UploadedSuccessfully)
             {
-                
+
                 e.item.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(e.item);
-               
+
             }
             if (Program.networkService.ThisMachineIsServer || Program.networkService.ThisMachineIsClient)
             {
@@ -2018,7 +2021,7 @@ namespace Wildfire_ICS_Assist
                 {
                     Program.networkService.SendNetworkObject(e.item, CurrentIncident.TaskID);
                 }
-            
+
             }
         }
 
@@ -2042,7 +2045,7 @@ namespace Wildfire_ICS_Assist
             List<TaskUpdate> pendingUpdates = CurrentIncident.allTaskUpdates.Where(o => !o.UploadedSuccessfully).ToList();
             foreach (TaskUpdate update in pendingUpdates)
             {
-                
+
                 update.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(update);
 
                 addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Uploaded a pending change to a(n) " + update.ObjectType + Environment.NewLine);
@@ -2073,9 +2076,9 @@ namespace Wildfire_ICS_Assist
                 TaskUpdate firstUnprocessed = CurrentIncident.allTaskUpdates.First(o => !o.ProcessedLocally);
                 addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Received a change to a(n) " + firstUnprocessed.ObjectType + Environment.NewLine);
                 Program.wfIncidentService.ApplyTaskUpdate(firstUnprocessed, true);
-                if(Program.networkService.ThisMachineIsClient || Program.networkService.ThisMachineIsServer)
+                if (Program.networkService.ThisMachineIsClient || Program.networkService.ThisMachineIsServer)
                 {
-                    Program.networkService.SendNetworkObject(firstUnprocessed,CurrentIncident.TaskID, null, null, null, true);
+                    Program.networkService.SendNetworkObject(firstUnprocessed, CurrentIncident.TaskID, null, null, null, true);
                 }
             }
 
@@ -2105,7 +2108,7 @@ namespace Wildfire_ICS_Assist
                     //downloadMembersFromServerToolStripMenuItem.Enabled = false;
                     requestOptionsFromServerToolStripMenuItem.Enabled = false;
                     networkTestToolStripMenuItem.Enabled = false;
-                    
+
                 }
                 else if (ThisMachineIsClient)
                 {
@@ -2114,7 +2117,7 @@ namespace Wildfire_ICS_Assist
                     ///downloadMembersFromServerToolStripMenuItem.Enabled = true;
                     requestOptionsFromServerToolStripMenuItem.Enabled = true;
                     networkTestToolStripMenuItem.Enabled = true;
-                    
+
                 }
                 else
                 {
@@ -2123,7 +2126,7 @@ namespace Wildfire_ICS_Assist
                     networkTestToolStripMenuItem.Enabled = false;
                     requestOptionsFromServerToolStripMenuItem.Enabled = false;
                     // downloadMembersFromServerToolStripMenuItem.Enabled = false;
-                    
+
                 }
 
                 lblServerStatus.Text = serverStatusText.ToString();
@@ -2138,7 +2141,7 @@ namespace Wildfire_ICS_Assist
         }
 
 
-      
+
         private void tmrNetwork_Tick(object sender, EventArgs e)
         {
             if (initialConnectionTest)
@@ -2202,11 +2205,13 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-      
+
 
         private void networkTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            initialConnectionTest = false;
+            silentNetworkTest = false;
+            sendTestConnection();
         }
 
         private void btnCloseNetworkSyncInProgress_Click(object sender, EventArgs e)
@@ -2227,7 +2232,7 @@ namespace Wildfire_ICS_Assist
 
         private void Program_HandleIncomingNetworkObject(NetworkSendObject incomingMessage)
         {
-            if (incomingMessage.objectType == new TaskUpdate().GetType().ToString() )
+            if (incomingMessage.objectType == new TaskUpdate().GetType().ToString())
             {
                 Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
             }
@@ -2244,7 +2249,7 @@ namespace Wildfire_ICS_Assist
                 }
                 else if (incomingMessage.comment == "success" && NetworkTestGuidValue != Guid.Empty)
                 {
-                 receiveTestConnectionResult(incomingMessage);
+                    receiveTestConnectionResult(incomingMessage);
                 }
             }
         }
@@ -2387,7 +2392,7 @@ namespace Wildfire_ICS_Assist
                     }
                     CloseActiveForms();
                     CurrentIncident = task;
-                    displayIncidentDetails(); 
+                    displayIncidentDetails();
                     networkTaskRequested = false;
                     DateTime today = DateTime.Now;
                     addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received full incident " + task.IncidentIdentifier + "\r\n");
@@ -2431,8 +2436,8 @@ namespace Wildfire_ICS_Assist
                     //if the device appears in the list of trusted devices, send automatically
                     if (!string.IsNullOrEmpty(requester.DeviceIP) && !string.IsNullOrEmpty(requester.DeviceName) && savedNetworkDevices.Where(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && o.TrustDevice).Any())
                     {
-                        
-                       Program.networkService.SendTaskData(CurrentIncident);
+
+                        Program.networkService.SendTaskData(CurrentIncident);
                         today = DateTime.Now;
                         addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current incident to trusted device " + requester.DeviceIP + "\r\n");
                     }
@@ -2458,7 +2463,7 @@ namespace Wildfire_ICS_Assist
                             {
                                 if (handleRequest.TrustDevice)
                                 {
-                                    
+
                                     if (savedNetworkDevices.Any(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && !o.TrustDevice))
                                     {
                                         DeviceInformation info = savedNetworkDevices.First(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && !o.TrustDevice);
@@ -2470,7 +2475,7 @@ namespace Wildfire_ICS_Assist
                                     {
                                         requester.TrustDevice = true;
                                         Program.generalOptionsService.UpserOptionValue(requester, "NetworkDevice");
-                                        
+
                                     }
                                 }
 
@@ -2606,5 +2611,46 @@ namespace Wildfire_ICS_Assist
         {
             OpenTeamAssignmentsForm();
         }
+
+        private void requestIncidentFromServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ThisMachineIsClient)
+            {
+                DialogResult result = MessageBox.Show("You are about to request the SAR task info currently in progress on the server.  This will overwrite the task currently in progress on this machine.  Proceed?", "Request SAR Task", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    networkTaskRequested = true;
+                    NetworkSARTaskRequest request = new NetworkSARTaskRequest();
+                    request.RequestDate = DateTime.Now;
+                    request.SourceName = HostInfo.HostName;
+                    request.RequestIP = Program.networkService.GetLocalIPAddress();
+                    request.SourceIdentifier = NetworkComms.NetworkIdentifier;
+                    Program.networkService.SendNetworkSarTaskRequest(request);
+
+                }
+
+            }
+            else { MessageBox.Show("This function only works when you have connected to a computer asking as the server. See Network Settings."); }
+        }
+
+        private void requestOptionsFromServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string warning = "Are you sure you want to request all of the options from the server?\r\n\r\nThese options will replace any already on this machine, including sar members, assignment templates, comms channels, and others.";
+            DialogResult dr = MessageBox.Show(warning, "Are you very very sure?", MessageBoxButtons.YesNo);
+            if (dr == DialogResult.Yes)
+            {
+                //send a request to the server for options
+                networkOptionsRequested = true;
+                NetworkOptionsRequest request = new NetworkOptionsRequest();
+                request.RequestDate = DateTime.Now;
+                request.SourceName = HostInfo.HostName;
+                request.RequestIP = Program.networkService.GetLocalIPAddress();
+                request.SourceIdentifier = NetworkComms.NetworkIdentifier;
+                Program.networkService.SendNetworkOptionsRequest(request);
+
+            }
+        }
+
+
     }
 }

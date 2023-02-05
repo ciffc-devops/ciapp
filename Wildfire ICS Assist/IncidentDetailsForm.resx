@@ -1968,42 +1968,42 @@
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAc
-        CAAAAk1TRnQBSQFMAgEBAwIAAQMBAAEDARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
-        AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
-        AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
-        AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm
-        AwABmQMAAcwCAAEzAwACMwIAATMBZgIAATMBmQIAATMBzAIAATMB/wIAAWYDAAFmATMCAAJmAgABZgGZ
-        AgABZgHMAgABZgH/AgABmQMAAZkBMwIAAZkBZgIAApkCAAGZAcwCAAGZAf8CAAHMAwABzAEzAgABzAFm
-        AgABzAGZAgACzAIAAcwB/wIAAf8BZgIAAf8BmQIAAf8BzAEAATMB/wIAAf8BAAEzAQABMwEAAWYBAAEz
-        AQABmQEAATMBAAHMAQABMwEAAf8BAAH/ATMCAAMzAQACMwFmAQACMwGZAQACMwHMAQACMwH/AQABMwFm
-        AgABMwFmATMBAAEzAmYBAAEzAWYBmQEAATMBZgHMAQABMwFmAf8BAAEzAZkCAAEzAZkBMwEAATMBmQFm
-        AQABMwKZAQABMwGZAcwBAAEzAZkB/wEAATMBzAIAATMBzAEzAQABMwHMAWYBAAEzAcwBmQEAATMCzAEA
-        ATMBzAH/AQABMwH/ATMBAAEzAf8BZgEAATMB/wGZAQABMwH/AcwBAAEzAv8BAAFmAwABZgEAATMBAAFm
-        AQABZgEAAWYBAAGZAQABZgEAAcwBAAFmAQAB/wEAAWYBMwIAAWYCMwEAAWYBMwFmAQABZgEzAZkBAAFm
-        ATMBzAEAAWYBMwH/AQACZgIAAmYBMwEAA2YBAAJmAZkBAAJmAcwBAAFmAZkCAAFmAZkBMwEAAWYBmQFm
-        AQABZgKZAQABZgGZAcwBAAFmAZkB/wEAAWYBzAIAAWYBzAEzAQABZgHMAZkBAAFmAswBAAFmAcwB/wEA
-        AWYB/wIAAWYB/wEzAQABZgH/AZkBAAFmAf8BzAEAAcwBAAH/AQAB/wEAAcwBAAKZAgABmQEzAZkBAAGZ
-        AQABmQEAAZkBAAHMAQABmQMAAZkCMwEAAZkBAAFmAQABmQEzAcwBAAGZAQAB/wEAAZkBZgIAAZkBZgEz
-        AQABmQEzAWYBAAGZAWYBmQEAAZkBZgHMAQABmQEzAf8BAAKZATMBAAKZAWYBAAOZAQACmQHMAQACmQH/
-        AQABmQHMAgABmQHMATMBAAFmAcwBZgEAAZkBzAGZAQABmQLMAQABmQHMAf8BAAGZAf8CAAGZAf8BMwEA
-        AZkBzAFmAQABmQH/AZkBAAGZAf8BzAEAAZkC/wEAAcwDAAGZAQABMwEAAcwBAAFmAQABzAEAAZkBAAHM
-        AQABzAEAAZkBMwIAAcwCMwEAAcwBMwFmAQABzAEzAZkBAAHMATMBzAEAAcwBMwH/AQABzAFmAgABzAFm
-        ATMBAAGZAmYBAAHMAWYBmQEAAcwBZgHMAQABmQFmAf8BAAHMAZkCAAHMAZkBMwEAAcwBmQFmAQABzAKZ
-        AQABzAGZAcwBAAHMAZkB/wEAAswCAALMATMBAALMAWYBAALMAZkBAAPMAQACzAH/AQABzAH/AgABzAH/
-        ATMBAAGZAf8BZgEAAcwB/wGZAQABzAH/AcwBAAHMAv8BAAHMAQABMwEAAf8BAAFmAQAB/wEAAZkBAAHM
-        ATMCAAH/AjMBAAH/ATMBZgEAAf8BMwGZAQAB/wEzAcwBAAH/ATMB/wEAAf8BZgIAAf8BZgEzAQABzAJm
-        AQAB/wFmAZkBAAH/AWYBzAEAAcwBZgH/AQAB/wGZAgAB/wGZATMBAAH/AZkBZgEAAf8CmQEAAf8BmQHM
-        AQAB/wGZAf8BAAH/AcwCAAH/AcwBMwEAAf8BzAFmAQAB/wHMAZkBAAH/AswBAAH/AcwB/wEAAv8BMwEA
-        AcwB/wFmAQAC/wGZAQAC/wHMAQACZgH/AQABZgH/AWYBAAFmAv8BAAH/AmYBAAH/AWYB/wEAAv8BZgEA
-        ASEBAAGlAQADXwEAA3cBAAOGAQADlgEAA8sBAAOyAQAD1wEAA90BAAPjAQAD6gEAA/EBAAP4AQAB8AH7
-        Af8BAAGkAqABAAOAAwAB/wIAAf8DAAL/AQAB/wMAAf8BAAH/AQAC/wIAA/+BAAHzQQABEwEAAQ8GAAEP
-        AwAB9DIAAfACAAHsBAAB7AIAAe8B8z4AAfAVAAEPAwABD1wAAe8BBwQAAQcB7wMAAe0/AAH/AgAB7QUA
-        Ae0KAAEPAwABD1kAAfMJAAH/OAAB8QEPBAABDwHxDQAB7SsAAf8EAAH/AQ8CAAHzOwAB/wHvAfQGAAHt
-        AwAB7agAAUIBTQE+BwABPgMAASgDAAFAAwABEAMAAQEBAAEBBQABgBcAA/8BAAb/AgAG/wIAARABCAH/
-        AQMBzgFzAgABkAEIAf8BAwHAAQMCAAHLAdkB8QG3Av8CAAHEASMB9wG3AeABhwIAAYQBIAH3AYcB4AGH
-        AgABgAEAAv8B4AGHAgABiAEQAcABfwHgAYcCAAGIAREBwAF3Av8CAAGIAQEB4AH3AfwBPwIAAeABAQHu
-        AYcB/AE/AgAB+AEBAe4B/wH8AT8CAAH/AccB4AP/AgAG/wIABv8CAAs=
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
+        CAAAAk1TRnQBSQFMAgEBAwEAAQgBAwEIAQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/4EAAfNBAAETAQABDwYA
+        AQ8DAAH0MgAB8AIAAewEAAHsAgAB7wHzPgAB8BUAAQ8DAAEPXAAB7wEHBAABBwHvAwAB7T8AAf8CAAHt
+        BQAB7QoAAQ8DAAEPWQAB8wkAAf84AAHxAQ8EAAEPAfENAAHtKwAB/wQAAf8BDwIAAfM7AAH/Ae8B9AYA
+        Ae0DAAHtqAABQgFNAT4HAAE+AwABKAMAAUADAAEQAwABAQEAAQEFAAGAFwAD/wEABv8CAAb/AgABEAEI
+        Af8BAwHOAXMCAAGQAQgB/wEDAcABAwIAAcsB2QHxAbcC/wIAAcQBIwH3AbcB4AGHAgABhAEgAfcBhwHg
+        AYcCAAGAAQAC/wHgAYcCAAGIARABwAF/AeABhwIAAYgBEQHAAXcC/wIAAYgBAQHgAfcB/AE/AgAB4AEB
+        Ae4BhwH8AT8CAAH4AQEB7gH/AfwBPwIAAf8BxwHgA/8CAAb/AgAG/wIACw==
 </value>
   </data>
   <data name="tcStatus.ItemSize" type="System.Drawing.Size, System.Drawing">
@@ -2546,21 +2546,6 @@
   <data name="iAPToolStripMenuItem.Text" xml:space="preserve">
     <value>IAP</value>
   </data>
-  <data name="positionLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 30</value>
-  </data>
-  <data name="positionLogToolStripMenuItem.Text" xml:space="preserve">
-    <value>Activity Log</value>
-  </data>
-  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 6</value>
-  </data>
-  <data name="teamAssignmentsICS204ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 30</value>
-  </data>
-  <data name="teamAssignmentsICS204ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Team Assignments (ICS-204)</value>
-  </data>
   <data name="operationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 29</value>
   </data>
@@ -2584,6 +2569,42 @@
   </data>
   <data name="adminFinanceToolStripMenuItem.Text" xml:space="preserve">
     <value>Admin / Finance</value>
+  </data>
+  <data name="localNetworkSharingSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="localNetworkSharingSyncToolStripMenuItem.Text" xml:space="preserve">
+    <value>Local Network Sharing / Sync</value>
+  </data>
+  <data name="requestIncidentFromServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="requestIncidentFromServerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Request Incident from server</value>
+  </data>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 6</value>
+  </data>
+  <data name="internetSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="internetSyncToolStripMenuItem.Text" xml:space="preserve">
+    <value>Internet Sync</value>
+  </data>
+  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 6</value>
+  </data>
+  <data name="requestOptionsFromServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="requestOptionsFromServerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Request Options from server</value>
+  </data>
+  <data name="networkTestToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 30</value>
+  </data>
+  <data name="networkTestToolStripMenuItem.Text" xml:space="preserve">
+    <value>Network Test</value>
   </data>
   <data name="networkInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 29</value>
@@ -2795,6 +2816,12 @@
   <data name="organizationChartICS207ToolStripMenuItem.Text" xml:space="preserve">
     <value>Org Assignments / Chart (ICS 203/207)</value>
   </data>
+  <data name="teamAssignmentsICS204ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>406, 30</value>
+  </data>
+  <data name="teamAssignmentsICS204ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Team Assignments (ICS 204)</value>
+  </data>
   <data name="communicationsPlanICS205ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 30</value>
   </data>
@@ -2872,6 +2899,21 @@
   </data>
   <data name="printThisIncidentToDateToolStripMenuItem.Text" xml:space="preserve">
     <value>Print this Incident to date</value>
+  </data>
+  <data name="positionLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 30</value>
+  </data>
+  <data name="positionLogToolStripMenuItem.Text" xml:space="preserve">
+    <value>Activity Log</value>
+  </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 6</value>
+  </data>
+  <data name="teamAssignmentsICS204ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 30</value>
+  </data>
+  <data name="teamAssignmentsICS204ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Team Assignments (ICS-204)</value>
   </data>
   <data name="positionLogToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 30</value>
@@ -2965,42 +3007,6 @@
   </data>
   <data name="positionLogToolStripMenuItem3.Text" xml:space="preserve">
     <value>Activity Log</value>
-  </data>
-  <data name="localNetworkSharingSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="localNetworkSharingSyncToolStripMenuItem.Text" xml:space="preserve">
-    <value>Local Network Sharing / Sync</value>
-  </data>
-  <data name="requestIncidentFromServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="requestIncidentFromServerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Request Incident from server</value>
-  </data>
-  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 6</value>
-  </data>
-  <data name="internetSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="internetSyncToolStripMenuItem.Text" xml:space="preserve">
-    <value>Internet Sync</value>
-  </data>
-  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 6</value>
-  </data>
-  <data name="requestOptionsFromServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="requestOptionsFromServerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Request Options from server</value>
-  </data>
-  <data name="networkTestToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 30</value>
-  </data>
-  <data name="networkTestToolStripMenuItem.Text" xml:space="preserve">
-    <value>Network Test</value>
   </data>
   <data name="checkForTemplateUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>319, 30</value>
@@ -5170,12 +5176,6 @@
   </data>
   <data name="&gt;&gt;btnCommsLog.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="teamAssignmentsICS204ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 30</value>
-  </data>
-  <data name="teamAssignmentsICS204ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Team Assignments (ICS 204)</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -12656,6 +12656,12 @@
   <data name="&gt;&gt;organizationChartICS207ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem.Name" xml:space="preserve">
+    <value>teamAssignmentsICS204ToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;communicationsPlanICS205ToolStripMenuItem.Name" xml:space="preserve">
     <value>communicationsPlanICS205ToolStripMenuItem</value>
   </data>
@@ -12745,6 +12751,12 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem1.Name" xml:space="preserve">
+    <value>teamAssignmentsICS204ToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logisticsToolStripMenuItem.Name" xml:space="preserve">
     <value>logisticsToolStripMenuItem</value>
@@ -12985,18 +12997,6 @@
   </data>
   <data name="&gt;&gt;tmrNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem.Name" xml:space="preserve">
-    <value>teamAssignmentsICS204ToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem1.Name" xml:space="preserve">
-    <value>teamAssignmentsICS204ToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>IncidentDetailsForm</value>

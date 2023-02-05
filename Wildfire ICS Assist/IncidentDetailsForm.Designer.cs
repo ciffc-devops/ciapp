@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -126,6 +126,7 @@
             this.incidentActionPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentObjectivesICS202ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizationChartICS207ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamAssignmentsICS204ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationsPlanICS205ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicalPlanICS206ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.safetyMessageICS208ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,6 +142,7 @@
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.teamAssignmentsICS204ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -213,8 +215,6 @@
             this.btnOpsDashboard = new System.Windows.Forms.Button();
             this.btnTeamStatus = new System.Windows.Forms.Button();
             this.btnCommsLog = new System.Windows.Forms.Button();
-            this.teamAssignmentsICS204ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.teamAssignmentsICS204ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -296,9 +296,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle3.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -991,6 +991,12 @@
             resources.ApplyResources(this.organizationChartICS207ToolStripMenuItem, "organizationChartICS207ToolStripMenuItem");
             this.organizationChartICS207ToolStripMenuItem.Click += new System.EventHandler(this.organizationChartICS207ToolStripMenuItem_Click);
             // 
+            // teamAssignmentsICS204ToolStripMenuItem
+            // 
+            this.teamAssignmentsICS204ToolStripMenuItem.Name = "teamAssignmentsICS204ToolStripMenuItem";
+            resources.ApplyResources(this.teamAssignmentsICS204ToolStripMenuItem, "teamAssignmentsICS204ToolStripMenuItem");
+            this.teamAssignmentsICS204ToolStripMenuItem.Click += new System.EventHandler(this.teamAssignmentsICS204ToolStripMenuItem_Click);
+            // 
             // communicationsPlanICS205ToolStripMenuItem
             // 
             this.communicationsPlanICS205ToolStripMenuItem.Name = "communicationsPlanICS205ToolStripMenuItem";
@@ -1078,6 +1084,12 @@
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+            // 
+            // teamAssignmentsICS204ToolStripMenuItem1
+            // 
+            this.teamAssignmentsICS204ToolStripMenuItem1.Name = "teamAssignmentsICS204ToolStripMenuItem1";
+            resources.ApplyResources(this.teamAssignmentsICS204ToolStripMenuItem1, "teamAssignmentsICS204ToolStripMenuItem1");
+            this.teamAssignmentsICS204ToolStripMenuItem1.Click += new System.EventHandler(this.teamAssignmentsICS204ToolStripMenuItem1_Click);
             // 
             // logisticsToolStripMenuItem
             // 
@@ -1225,6 +1237,7 @@
             // 
             this.requestIncidentFromServerToolStripMenuItem.Name = "requestIncidentFromServerToolStripMenuItem";
             resources.ApplyResources(this.requestIncidentFromServerToolStripMenuItem, "requestIncidentFromServerToolStripMenuItem");
+            this.requestIncidentFromServerToolStripMenuItem.Click += new System.EventHandler(this.requestIncidentFromServerToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
@@ -1245,6 +1258,7 @@
             // 
             this.requestOptionsFromServerToolStripMenuItem.Name = "requestOptionsFromServerToolStripMenuItem";
             resources.ApplyResources(this.requestOptionsFromServerToolStripMenuItem, "requestOptionsFromServerToolStripMenuItem");
+            this.requestOptionsFromServerToolStripMenuItem.Click += new System.EventHandler(this.requestOptionsFromServerToolStripMenuItem_Click);
             // 
             // networkTestToolStripMenuItem
             // 
@@ -1582,18 +1596,6 @@
             resources.ApplyResources(this.btnCommsLog, "btnCommsLog");
             this.btnCommsLog.Name = "btnCommsLog";
             this.btnCommsLog.UseVisualStyleBackColor = true;
-            // 
-            // teamAssignmentsICS204ToolStripMenuItem
-            // 
-            this.teamAssignmentsICS204ToolStripMenuItem.Name = "teamAssignmentsICS204ToolStripMenuItem";
-            resources.ApplyResources(this.teamAssignmentsICS204ToolStripMenuItem, "teamAssignmentsICS204ToolStripMenuItem");
-            this.teamAssignmentsICS204ToolStripMenuItem.Click += new System.EventHandler(this.teamAssignmentsICS204ToolStripMenuItem_Click);
-            // 
-            // teamAssignmentsICS204ToolStripMenuItem1
-            // 
-            this.teamAssignmentsICS204ToolStripMenuItem1.Name = "teamAssignmentsICS204ToolStripMenuItem1";
-            resources.ApplyResources(this.teamAssignmentsICS204ToolStripMenuItem1, "teamAssignmentsICS204ToolStripMenuItem1");
-            this.teamAssignmentsICS204ToolStripMenuItem1.Click += new System.EventHandler(this.teamAssignmentsICS204ToolStripMenuItem1_Click);
             // 
             // IncidentDetailsForm
             // 

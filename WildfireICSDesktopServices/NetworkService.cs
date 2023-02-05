@@ -860,6 +860,60 @@ namespace WildfireICSDesktopServices
             return args;
         }
 
+        public void SendNetworkOptionsRequest(NetworkOptionsRequest request)
+        {
+
+            //We may or may not have entered some server connection information
+            ConnectionInfo serverConnectionInfo = null;
+            if (!string.IsNullOrEmpty(ServerIP))
+            {
+                try { serverConnectionInfo = new ConnectionInfo(ServerIP, ServerPort); }
+                catch (Exception)
+                {
+                    //MessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
+                    return;
+                }
+            }
+
+            //If we provided server information we send to the server first
+            if (serverConnectionInfo != null)
+            {
+                //We perform the send within a try catch to ensure the application continues to run if there is a problem.
+                try
+                {
+                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("NetworkOptionsRequest", request);
+                    DateTime today = DateTime.Now;
+                    //addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent options request" + "\r\n");
+                }
+                catch (CommsException) 
+                { 
+                    //MessageBox.Show("A Network CommsException occurred while trying to send a task request (001) to " + serverConnectionInfo, "CommsException", MessageBoxButtons.OK);
+                    }
+            }
+
+            //If we have any other connections we now send the message to those as well
+            //This ensures that if we are the server everyone who is connected to us gets our message
+            var otherConnectionInfos = (from current in NetworkComms.AllConnectionInfo() where current != serverConnectionInfo select current).ToArray();
+            foreach (ConnectionInfo info in otherConnectionInfos)
+            {
+                //We perform the send within a try catch to ensure the application continues to run if there is a problem.
+                try { TCPConnection.GetConnection(info).SendObject("NetworkOptionsRequest", request); }
+                catch (CommsException) 
+                { 
+                }
+                catch (Exception) 
+                { 
+                }
+            }
+
+            /*
+            this.BeginInvoke((Action)delegate ()
+            {
+                MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+
+            });*/
+        }
+
 
     }
 
