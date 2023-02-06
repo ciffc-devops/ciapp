@@ -9,7 +9,7 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class GeneralMessage
+    public class GeneralMessage : ICloneable
     {
         [ProtoMember(1)] private Guid _MessageID;
         [ProtoMember(2)] private Guid _TaskID;
@@ -61,5 +61,15 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid FromRoleID { get => _FromRoleID; set => _FromRoleID = value; }
         public Guid ApprovedByRoleID { get => _ApprovedByRoleID; set => _ApprovedByRoleID = value; }
 
+
+        public GeneralMessage Clone()
+        {
+            return this.MemberwiseClone() as GeneralMessage;
+        }
+
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
     }
 }
