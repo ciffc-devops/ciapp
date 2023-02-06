@@ -2237,7 +2237,10 @@ namespace Wildfire_ICS_Assist
                 string taskUpdateName = new TaskUpdate().GetType().ToString();
                 if (incomingMessage.objectType == taskUpdateName)
                 {
-                    Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
+                    this.BeginInvoke((Action)delegate ()
+                    {
+                        Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
+                    });
                 }
 
                 else if (incomingMessage.objectType == new GeneralOptions().GetType().ToString())

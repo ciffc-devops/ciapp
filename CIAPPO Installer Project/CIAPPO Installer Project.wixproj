@@ -1,5 +1,7 @@
 ﻿<Project Sdk="WixToolset.Sdk/4.0.0-rc.2">
   <ItemGroup>
-    <ProjectReference Include="..\Wildfire ICS Assist\Wildfire ICS Assist.csproj" />
+    <ProjectReference Include="..\Wildfire ICS Assist\Wildfire ICS Assist.csproj">
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
 </Project>

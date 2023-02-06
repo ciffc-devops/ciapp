@@ -321,7 +321,7 @@ namespace WildfireICSDesktopServices
             }
             else if (dataClassName.Equals(new AmbulanceService().GetType().Name))
             {
-                //upsert(((AmbulanceService)obj).Clone(), source);
+                UpsertAmbulance(((AmbulanceService)obj).Clone(), source);
             }
             else if (dataClassName.Equals(new IncidentObjective().GetType().Name))
             {
@@ -380,6 +380,54 @@ namespace WildfireICSDesktopServices
             {
                 UpsertMemberStatus(((TeamMember)obj).Clone(), source);
             }
+
+
+
+            else if (dataClassName.Equals(new AirOperationsSummary().GetType().Name))
+            {
+                UpsertAirOperationsSummary(((AirOperationsSummary)obj).Clone(), source);
+            }
+            else if (dataClassName.Equals(new Aircraft().GetType().Name))
+            {
+                UpsertAircraft(((Aircraft)obj).Clone(), source);
+            }
+
+            else if (dataClassName.Equals(new IncidentObjectivesSheet().GetType().Name))
+            {
+                UpsertIncidentObjectivesSheet(((IncidentObjectivesSheet)obj).Clone(), source);
+            }
+            else if (dataClassName.Equals(new IncidentObjective().GetType().Name))
+            {
+                UpsertIncidentObjective(((IncidentObjective)obj).Clone(), source);
+            }
+
+
+            else if (dataClassName.Equals(new MedicalPlan().GetType().Name))
+            {
+                UpsertMedicalPlan(((MedicalPlan)obj).Clone(), source);
+            }
+
+            else if (dataClassName.Equals(new MedicalAidStation().GetType().Name))
+            {
+                UpsertMedicalAidStation(((MedicalAidStation)obj).Clone(), source);
+            }
+            else if (dataClassName.Equals(new Hospital().GetType().Name))
+            {
+                UpsertHospital(((Hospital)obj).Clone(), source);
+            }
+
+
+            else if (dataClassName.Equals(new TeamAssignment().GetType().Name))
+            {
+                UpsertTeamAssignment(((TeamAssignment)obj).Clone(), source);
+            }
+            else if (dataClassName.Equals(new GeneralMessage().GetType().Name))
+            {
+                UpsertGeneralMessage(((GeneralMessage)obj).Clone(), source);
+            }
+
+
+
         }
 
 
@@ -419,7 +467,7 @@ namespace WildfireICSDesktopServices
         */
 
 
-    
+
         protected virtual void OnWFIncidentChanged(WFIncidentEventArgs e)
         {
             WFIncidentEventHandler handler = this.WfIncidentChanged;
