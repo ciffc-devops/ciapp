@@ -323,10 +323,6 @@ namespace WildfireICSDesktopServices
             {
                 UpsertAmbulance(((AmbulanceService)obj).Clone(), source);
             }
-            else if (dataClassName.Equals(new IncidentObjective().GetType().Name))
-            {
-                UpsertIncidentObjective(((IncidentObjective)obj).Clone(), source);
-            }
             else if (dataClassName.Equals(new MedicalPlan().GetType().Name))
             {
                 UpsertMedicalPlan(((MedicalPlan)obj).Clone(), source);
@@ -343,6 +339,7 @@ namespace WildfireICSDesktopServices
             {
                 UpsertOrganizationalChart(((OrganizationChart)obj).Clone(), source);
             }
+
             else if (dataClassName.Equals(new ICSRole().GetType().Name))
             {
                 UpsertICSRole(((ICSRole)obj).Clone(), source);
