@@ -496,7 +496,7 @@ namespace Wildfire_ICS_Assist
                         datSunrise.Value = GISTools.GetSunrise(c, opTime);
                         datSunset.Value = GISTools.GetSunset(c, opTime);
                     }
-
+                    Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
                     SetNOTAMCheckbox();
                 }
             }
