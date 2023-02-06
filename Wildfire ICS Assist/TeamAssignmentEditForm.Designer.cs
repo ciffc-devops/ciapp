@@ -34,6 +34,22 @@
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.cboAssignmentTemplates = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.cpPersonnel = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numPersonnelRequired = new System.Windows.Forms.NumericUpDown();
+            this.cboPerson10 = new System.Windows.Forms.ComboBox();
+            this.cboPerson8 = new System.Windows.Forms.ComboBox();
+            this.cboPerson6 = new System.Windows.Forms.ComboBox();
+            this.cboPerson4 = new System.Windows.Forms.ComboBox();
+            this.cboPerson2 = new System.Windows.Forms.ComboBox();
+            this.cboPerson11 = new System.Windows.Forms.ComboBox();
+            this.cboPerson9 = new System.Windows.Forms.ComboBox();
+            this.cboPerson7 = new System.Windows.Forms.ComboBox();
+            this.cboPerson5 = new System.Windows.Forms.ComboBox();
+            this.cboPerson3 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboPerson1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtContact = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -52,22 +68,6 @@
             this.cboComms2 = new System.Windows.Forms.ComboBox();
             this.cboComms1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cpPersonnel = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.numPersonnelRequired = new System.Windows.Forms.NumericUpDown();
-            this.cboPerson10 = new System.Windows.Forms.ComboBox();
-            this.cboPerson8 = new System.Windows.Forms.ComboBox();
-            this.cboPerson6 = new System.Windows.Forms.ComboBox();
-            this.cboPerson4 = new System.Windows.Forms.ComboBox();
-            this.cboPerson2 = new System.Windows.Forms.ComboBox();
-            this.cboPerson11 = new System.Windows.Forms.ComboBox();
-            this.cboPerson9 = new System.Windows.Forms.ComboBox();
-            this.cboPerson7 = new System.Windows.Forms.ComboBox();
-            this.cboPerson5 = new System.Windows.Forms.ComboBox();
-            this.cboPerson3 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cboPerson1 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnSaveAndPrint = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -79,10 +79,10 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAssignmentNumber)).BeginInit();
-            this.cpComms.SuspendLayout();
             this.cpPersonnel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPersonnelRequired)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAssignmentNumber)).BeginInit();
+            this.cpComms.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -129,6 +129,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.cpPersonnel);
             this.splitContainer2.Panel2.Controls.Add(this.txtContact);
             this.splitContainer2.Panel2.Controls.Add(this.label9);
             this.splitContainer2.Panel2.Controls.Add(this.label8);
@@ -142,7 +143,6 @@
             this.splitContainer2.Panel2.Controls.Add(this.label1);
             this.splitContainer2.Panel2.Controls.Add(this.cpEquipment);
             this.splitContainer2.Panel2.Controls.Add(this.cpComms);
-            this.splitContainer2.Panel2.Controls.Add(this.cpPersonnel);
             this.splitContainer2.Size = new System.Drawing.Size(1175, 627);
             this.splitContainer2.SplitterDistance = 55;
             this.splitContainer2.TabIndex = 105;
@@ -201,6 +201,192 @@
             this.label14.Size = new System.Drawing.Size(202, 24);
             this.label14.TabIndex = 0;
             this.label14.Text = "Assignment Templates";
+            // 
+            // cpPersonnel
+            // 
+            this.cpPersonnel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cpPersonnel.BackColor = System.Drawing.Color.White;
+            this.cpPersonnel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpPersonnel.CollapsedHeight = 40;
+            this.cpPersonnel.CollapsedWidth = 400;
+            this.cpPersonnel.CollapseLeft = false;
+            this.cpPersonnel.Controls.Add(this.label6);
+            this.cpPersonnel.Controls.Add(this.numPersonnelRequired);
+            this.cpPersonnel.Controls.Add(this.cboPerson10);
+            this.cpPersonnel.Controls.Add(this.cboPerson8);
+            this.cpPersonnel.Controls.Add(this.cboPerson6);
+            this.cpPersonnel.Controls.Add(this.cboPerson4);
+            this.cpPersonnel.Controls.Add(this.cboPerson2);
+            this.cpPersonnel.Controls.Add(this.cboPerson11);
+            this.cpPersonnel.Controls.Add(this.cboPerson9);
+            this.cpPersonnel.Controls.Add(this.cboPerson7);
+            this.cpPersonnel.Controls.Add(this.cboPerson5);
+            this.cpPersonnel.Controls.Add(this.cboPerson3);
+            this.cpPersonnel.Controls.Add(this.label5);
+            this.cpPersonnel.Controls.Add(this.cboPerson1);
+            this.cpPersonnel.Controls.Add(this.label4);
+            this.cpPersonnel.CurrentlyCollapsed = false;
+            this.cpPersonnel.ExpandedHeight = 364;
+            this.cpPersonnel.ExpandedWidth = 872;
+            this.cpPersonnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpPersonnel.Location = new System.Drawing.Point(294, 5);
+            this.cpPersonnel.Margin = new System.Windows.Forms.Padding(6);
+            this.cpPersonnel.Name = "cpPersonnel";
+            this.cpPersonnel.Size = new System.Drawing.Size(872, 364);
+            this.cpPersonnel.TabIndex = 72;
+            this.cpPersonnel.TitleText = "Personnel";
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(231, 83);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(218, 24);
+            this.label6.TabIndex = 66;
+            this.label6.Text = "Personnel Required";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numPersonnelRequired
+            // 
+            this.numPersonnelRequired.Location = new System.Drawing.Point(455, 81);
+            this.numPersonnelRequired.Maximum = new decimal(new int[] {
+            11,
+            0,
+            0,
+            0});
+            this.numPersonnelRequired.Name = "numPersonnelRequired";
+            this.numPersonnelRequired.Size = new System.Drawing.Size(120, 29);
+            this.numPersonnelRequired.TabIndex = 47;
+            this.numPersonnelRequired.ValueChanged += new System.EventHandler(this.numPersonnelRequired_ValueChanged);
+            // 
+            // cboPerson10
+            // 
+            this.cboPerson10.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson10.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson10.FormattingEnabled = true;
+            this.cboPerson10.Location = new System.Drawing.Point(47, 316);
+            this.cboPerson10.Name = "cboPerson10";
+            this.cboPerson10.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson10.TabIndex = 46;
+            // 
+            // cboPerson8
+            // 
+            this.cboPerson8.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson8.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson8.FormattingEnabled = true;
+            this.cboPerson8.Location = new System.Drawing.Point(47, 278);
+            this.cboPerson8.Name = "cboPerson8";
+            this.cboPerson8.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson8.TabIndex = 45;
+            // 
+            // cboPerson6
+            // 
+            this.cboPerson6.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson6.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson6.FormattingEnabled = true;
+            this.cboPerson6.Location = new System.Drawing.Point(47, 240);
+            this.cboPerson6.Name = "cboPerson6";
+            this.cboPerson6.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson6.TabIndex = 44;
+            // 
+            // cboPerson4
+            // 
+            this.cboPerson4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson4.FormattingEnabled = true;
+            this.cboPerson4.Location = new System.Drawing.Point(47, 202);
+            this.cboPerson4.Name = "cboPerson4";
+            this.cboPerson4.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson4.TabIndex = 43;
+            // 
+            // cboPerson2
+            // 
+            this.cboPerson2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson2.FormattingEnabled = true;
+            this.cboPerson2.Location = new System.Drawing.Point(47, 164);
+            this.cboPerson2.Name = "cboPerson2";
+            this.cboPerson2.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson2.TabIndex = 42;
+            // 
+            // cboPerson11
+            // 
+            this.cboPerson11.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson11.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson11.FormattingEnabled = true;
+            this.cboPerson11.Location = new System.Drawing.Point(455, 316);
+            this.cboPerson11.Name = "cboPerson11";
+            this.cboPerson11.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson11.TabIndex = 41;
+            // 
+            // cboPerson9
+            // 
+            this.cboPerson9.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson9.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson9.FormattingEnabled = true;
+            this.cboPerson9.Location = new System.Drawing.Point(455, 278);
+            this.cboPerson9.Name = "cboPerson9";
+            this.cboPerson9.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson9.TabIndex = 40;
+            // 
+            // cboPerson7
+            // 
+            this.cboPerson7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson7.FormattingEnabled = true;
+            this.cboPerson7.Location = new System.Drawing.Point(455, 240);
+            this.cboPerson7.Name = "cboPerson7";
+            this.cboPerson7.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson7.TabIndex = 39;
+            // 
+            // cboPerson5
+            // 
+            this.cboPerson5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson5.FormattingEnabled = true;
+            this.cboPerson5.Location = new System.Drawing.Point(455, 202);
+            this.cboPerson5.Name = "cboPerson5";
+            this.cboPerson5.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson5.TabIndex = 38;
+            // 
+            // cboPerson3
+            // 
+            this.cboPerson3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson3.FormattingEnabled = true;
+            this.cboPerson3.Location = new System.Drawing.Point(455, 164);
+            this.cboPerson3.Name = "cboPerson3";
+            this.cboPerson3.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson3.TabIndex = 37;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(190, 129);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 24);
+            this.label5.TabIndex = 36;
+            this.label5.Text = "Ldr.";
+            // 
+            // cboPerson1
+            // 
+            this.cboPerson1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboPerson1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboPerson1.FormattingEnabled = true;
+            this.cboPerson1.Location = new System.Drawing.Point(235, 126);
+            this.cboPerson1.Name = "cboPerson1";
+            this.cboPerson1.Size = new System.Drawing.Size(401, 32);
+            this.cboPerson1.TabIndex = 35;
+            this.cboPerson1.Leave += new System.EventHandler(this.cboPerson1_Leave);
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(13, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(862, 42);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Set the personnel assigned to this team below.  To add additional people, use the" +
+    " Check-In tool in the program.";
             // 
             // txtContact
             // 
@@ -422,169 +608,6 @@
             this.label3.Text = "Set communications systems to be shown on the assignment form\r\nTo add more, use t" +
     "he Communications Plan tool";
             // 
-            // cpPersonnel
-            // 
-            this.cpPersonnel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cpPersonnel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpPersonnel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpPersonnel.CollapsedHeight = 40;
-            this.cpPersonnel.CollapsedWidth = 400;
-            this.cpPersonnel.CollapseLeft = false;
-            this.cpPersonnel.Controls.Add(this.label6);
-            this.cpPersonnel.Controls.Add(this.numPersonnelRequired);
-            this.cpPersonnel.Controls.Add(this.cboPerson10);
-            this.cpPersonnel.Controls.Add(this.cboPerson8);
-            this.cpPersonnel.Controls.Add(this.cboPerson6);
-            this.cpPersonnel.Controls.Add(this.cboPerson4);
-            this.cpPersonnel.Controls.Add(this.cboPerson2);
-            this.cpPersonnel.Controls.Add(this.cboPerson11);
-            this.cpPersonnel.Controls.Add(this.cboPerson9);
-            this.cpPersonnel.Controls.Add(this.cboPerson7);
-            this.cpPersonnel.Controls.Add(this.cboPerson5);
-            this.cpPersonnel.Controls.Add(this.cboPerson3);
-            this.cpPersonnel.Controls.Add(this.label5);
-            this.cpPersonnel.Controls.Add(this.cboPerson1);
-            this.cpPersonnel.Controls.Add(this.label4);
-            this.cpPersonnel.CurrentlyCollapsed = true;
-            this.cpPersonnel.ExpandedHeight = 364;
-            this.cpPersonnel.ExpandedWidth = 872;
-            this.cpPersonnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpPersonnel.Location = new System.Drawing.Point(766, 5);
-            this.cpPersonnel.Margin = new System.Windows.Forms.Padding(6);
-            this.cpPersonnel.Name = "cpPersonnel";
-            this.cpPersonnel.Size = new System.Drawing.Size(400, 40);
-            this.cpPersonnel.TabIndex = 72;
-            this.cpPersonnel.TitleText = "Personnel";
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(231, 83);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(218, 24);
-            this.label6.TabIndex = 66;
-            this.label6.Text = "Personnel Required";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numPersonnelRequired
-            // 
-            this.numPersonnelRequired.Location = new System.Drawing.Point(455, 81);
-            this.numPersonnelRequired.Maximum = new decimal(new int[] {
-            11,
-            0,
-            0,
-            0});
-            this.numPersonnelRequired.Name = "numPersonnelRequired";
-            this.numPersonnelRequired.Size = new System.Drawing.Size(120, 29);
-            this.numPersonnelRequired.TabIndex = 47;
-            this.numPersonnelRequired.ValueChanged += new System.EventHandler(this.numPersonnelRequired_ValueChanged);
-            // 
-            // cboPerson10
-            // 
-            this.cboPerson10.FormattingEnabled = true;
-            this.cboPerson10.Location = new System.Drawing.Point(455, 278);
-            this.cboPerson10.Name = "cboPerson10";
-            this.cboPerson10.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson10.TabIndex = 46;
-            // 
-            // cboPerson8
-            // 
-            this.cboPerson8.FormattingEnabled = true;
-            this.cboPerson8.Location = new System.Drawing.Point(456, 240);
-            this.cboPerson8.Name = "cboPerson8";
-            this.cboPerson8.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson8.TabIndex = 45;
-            // 
-            // cboPerson6
-            // 
-            this.cboPerson6.FormattingEnabled = true;
-            this.cboPerson6.Location = new System.Drawing.Point(456, 202);
-            this.cboPerson6.Name = "cboPerson6";
-            this.cboPerson6.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson6.TabIndex = 44;
-            // 
-            // cboPerson4
-            // 
-            this.cboPerson4.FormattingEnabled = true;
-            this.cboPerson4.Location = new System.Drawing.Point(455, 164);
-            this.cboPerson4.Name = "cboPerson4";
-            this.cboPerson4.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson4.TabIndex = 43;
-            // 
-            // cboPerson2
-            // 
-            this.cboPerson2.FormattingEnabled = true;
-            this.cboPerson2.Location = new System.Drawing.Point(456, 126);
-            this.cboPerson2.Name = "cboPerson2";
-            this.cboPerson2.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson2.TabIndex = 42;
-            // 
-            // cboPerson11
-            // 
-            this.cboPerson11.FormattingEnabled = true;
-            this.cboPerson11.Location = new System.Drawing.Point(48, 316);
-            this.cboPerson11.Name = "cboPerson11";
-            this.cboPerson11.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson11.TabIndex = 41;
-            // 
-            // cboPerson9
-            // 
-            this.cboPerson9.FormattingEnabled = true;
-            this.cboPerson9.Location = new System.Drawing.Point(47, 278);
-            this.cboPerson9.Name = "cboPerson9";
-            this.cboPerson9.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson9.TabIndex = 40;
-            // 
-            // cboPerson7
-            // 
-            this.cboPerson7.FormattingEnabled = true;
-            this.cboPerson7.Location = new System.Drawing.Point(48, 240);
-            this.cboPerson7.Name = "cboPerson7";
-            this.cboPerson7.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson7.TabIndex = 39;
-            // 
-            // cboPerson5
-            // 
-            this.cboPerson5.FormattingEnabled = true;
-            this.cboPerson5.Location = new System.Drawing.Point(48, 202);
-            this.cboPerson5.Name = "cboPerson5";
-            this.cboPerson5.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson5.TabIndex = 38;
-            // 
-            // cboPerson3
-            // 
-            this.cboPerson3.FormattingEnabled = true;
-            this.cboPerson3.Location = new System.Drawing.Point(47, 164);
-            this.cboPerson3.Name = "cboPerson3";
-            this.cboPerson3.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson3.TabIndex = 37;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 129);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 24);
-            this.label5.TabIndex = 36;
-            this.label5.Text = "Ldr.";
-            // 
-            // cboPerson1
-            // 
-            this.cboPerson1.FormattingEnabled = true;
-            this.cboPerson1.Location = new System.Drawing.Point(48, 126);
-            this.cboPerson1.Name = "cboPerson1";
-            this.cboPerson1.Size = new System.Drawing.Size(401, 32);
-            this.cboPerson1.TabIndex = 35;
-            // 
-            // label4
-            // 
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(13, 45);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(862, 42);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "Set the personnel assigned to this team below.  To add additional people, use the" +
-    " Check-In tool in the program.";
-            // 
             // btnSaveAndPrint
             // 
             this.btnSaveAndPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -658,11 +681,11 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numAssignmentNumber)).EndInit();
-            this.cpComms.ResumeLayout(false);
             this.cpPersonnel.ResumeLayout(false);
             this.cpPersonnel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPersonnelRequired)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAssignmentNumber)).EndInit();
+            this.cpComms.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

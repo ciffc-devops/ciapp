@@ -634,6 +634,9 @@ namespace Wildfire_ICS_Assist
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { tmrAutoSave.Enabled = Program.generalOptionsService.GetOptionsBoolValue("AutoSave"); }
             setButtonCheckboxes();
             browseToIncidentFolderToolStripMenuItem.Enabled = true;
+
+            List<TeamMember> savedMembers = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            Program.CurrentIncident.TaskTeamMembers = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
         }
 
         private void DisplayCurrentICSRole()

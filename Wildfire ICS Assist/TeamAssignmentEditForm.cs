@@ -49,6 +49,22 @@ namespace Wildfire_ICS_Assist
                 if(_AvailableCommsPlanItems.Any(o=>o.ItemID == g)) { CommsComboBoxes[nextFreeComms].SelectedValue = g; nextFreeComms += 1; }
                 if(nextFreeComms >= CommsComboBoxes.Count) { break; }
             }
+
+            List<TeamMember> members = Program.CurrentIncident.TaskTeamMembers;
+            if(selectedAssignment.LeaderPersonID != Guid.Empty && members.Any(o=>o.PersonID == selectedAssignment.LeaderPersonID))
+            {
+                PersonnelComboBoxes[0].SelectedValue = selectedAssignment.LeaderPersonID;
+            }
+            int memberIndex = 1;
+            foreach(Guid g in selectedAssignment.AssignedMemberIDs)
+            {
+                if (g != selectedAssignment.LeaderPersonID && members.Any(o=>o.PersonID == g))
+                {
+                    PersonnelComboBoxes[memberIndex].SelectedValue = g;
+                    memberIndex += 1;
+                }
+            }
+            
         }
 
         private void TeamAssignmentEditForm_Load(object sender, EventArgs e)
@@ -112,6 +128,18 @@ namespace Wildfire_ICS_Assist
             PersonnelComboBoxes.Add(cboPerson10);
             PersonnelComboBoxes.Add(cboPerson11);
 
+            List<TeamMember> members = Program.CurrentIncident.TaskTeamMembers.OrderBy(o=>o.Name).ToList();
+            TeamMember blank = new TeamMember(); blank.PersonID = Guid.Empty; members.Insert(0, blank);
+            foreach(ComboBox cbo in PersonnelComboBoxes)
+            {
+                List<TeamMember> mems = new List<TeamMember>();
+                mems.AddRange(members);
+                cbo.DataSource = mems;
+                cbo.ValueMember = "PersonID";
+                cbo.DisplayMember = "Name";
+
+                cbo.Leave += cboPerson1_Leave;
+            }
         }
 
         List<ComboBox> CommsComboBoxes = new List<ComboBox>();
@@ -265,6 +293,12 @@ namespace Wildfire_ICS_Assist
             if (string.IsNullOrEmpty(txtBriefSummary.Text)) { txtBriefSummary.BackColor = Program.ErrorColor; }
             else { txtBriefSummary.BackColor = Program.GoodColor; }
             */
+        }
+
+        private void cboPerson1_Leave(object sender, EventArgs e)
+        {
+            ComboBox cbo = sender as ComboBox;
+            if(cbo.SelectedItem == null) { cbo.Text = ""; }
         }
     }
 }
