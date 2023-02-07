@@ -44,6 +44,19 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
 
             Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
+        }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            Program.CurrentIncident.createAirOpsSummaryAsNeeded(Program.CurrentOpPeriod);
+            LoadMainData();
+            PopulateAircraft();
+            PopulateTree();
+            PopulateCommsItems();
+            LoadPreparedBy();
+
+            SetNOTAMCheckbox();
         }
 
         private void LoadPreparedBy()

@@ -34,9 +34,14 @@ namespace Wildfire_ICS_Assist
 
             UpdateVehicleList();
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
         }
 
         private void Program_VehicleChanged(VehicleEventArgs e)
+        {
+            UpdateVehicleList();
+        }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
             UpdateVehicleList();
         }

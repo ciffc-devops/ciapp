@@ -129,7 +129,6 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.cpPersonnel);
             this.splitContainer2.Panel2.Controls.Add(this.txtContact);
             this.splitContainer2.Panel2.Controls.Add(this.label9);
             this.splitContainer2.Panel2.Controls.Add(this.label8);
@@ -143,6 +142,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label1);
             this.splitContainer2.Panel2.Controls.Add(this.cpEquipment);
             this.splitContainer2.Panel2.Controls.Add(this.cpComms);
+            this.splitContainer2.Panel2.Controls.Add(this.cpPersonnel);
             this.splitContainer2.Size = new System.Drawing.Size(1175, 627);
             this.splitContainer2.SplitterDistance = 55;
             this.splitContainer2.TabIndex = 105;
@@ -205,7 +205,7 @@
             // cpPersonnel
             // 
             this.cpPersonnel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cpPersonnel.BackColor = System.Drawing.Color.White;
+            this.cpPersonnel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpPersonnel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpPersonnel.CollapsedHeight = 40;
             this.cpPersonnel.CollapsedWidth = 400;
@@ -225,14 +225,14 @@
             this.cpPersonnel.Controls.Add(this.label5);
             this.cpPersonnel.Controls.Add(this.cboPerson1);
             this.cpPersonnel.Controls.Add(this.label4);
-            this.cpPersonnel.CurrentlyCollapsed = false;
+            this.cpPersonnel.CurrentlyCollapsed = true;
             this.cpPersonnel.ExpandedHeight = 364;
             this.cpPersonnel.ExpandedWidth = 872;
             this.cpPersonnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpPersonnel.Location = new System.Drawing.Point(294, 5);
+            this.cpPersonnel.Location = new System.Drawing.Point(766, 5);
             this.cpPersonnel.Margin = new System.Windows.Forms.Padding(6);
             this.cpPersonnel.Name = "cpPersonnel";
-            this.cpPersonnel.Size = new System.Drawing.Size(872, 364);
+            this.cpPersonnel.Size = new System.Drawing.Size(400, 40);
             this.cpPersonnel.TabIndex = 72;
             this.cpPersonnel.TitleText = "Personnel";
             // 

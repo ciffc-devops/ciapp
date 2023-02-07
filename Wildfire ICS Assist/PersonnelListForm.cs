@@ -26,6 +26,8 @@ namespace Wildfire_ICS_Assist
         {
             BuildDataLists();
             Program.wfIncidentService.MemberSignInChanged += Program_TeamMembersUpdated;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
             cpnlAgencyTotals.CurrentlyCollapsed = true;
 
         }
@@ -35,6 +37,10 @@ namespace Wildfire_ICS_Assist
             BuildDataLists();
         }
 
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            BuildDataLists();
+        }
 
         private void BuildDataLists()
         {

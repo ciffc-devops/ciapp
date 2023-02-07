@@ -46,10 +46,15 @@ namespace Wildfire_ICS_Assist
         {
             buildPositionLog();
         }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            buildPositionLog();
+        }
 
         private void PositionLogForm_Load(object sender, EventArgs e)
         {
             Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
             lblPositionName.Text = CurrentRole.RoleName;
             dgvLog.AutoGenerateColumns = false;

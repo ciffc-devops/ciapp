@@ -99,6 +99,7 @@
     <Compile Include="EventHandling\GeneralMessageEventHandler.cs" />
     <Compile Include="EventHandling\HospitalEventHandler.cs" />
     <Compile Include="EventHandling\IncidentObjectiveEventHandling.cs" />
+    <Compile Include="EventHandling\IncidentOpPeriodEventHandler.cs" />
     <Compile Include="EventHandling\MedicalPlanEventHandler.cs" />
     <Compile Include="EventHandling\MemberEventHandler.cs" />
     <Compile Include="EventHandling\NetworkEventHandlers.cs" />

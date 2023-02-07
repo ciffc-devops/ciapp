@@ -47,6 +47,10 @@ namespace WildfireICSDesktopServices
         public event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
         public event TeamAssignmentEventHandler TeamAssignmentChanged;
 
+       
+
+        public event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
+
         private WFIncident _currentIncident;
         public WFIncident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
         public List<TaskUpdate> allTaskUpdates { get => _currentIncident.allTaskUpdates; set => _currentIncident.allTaskUpdates = value; }
@@ -1684,6 +1688,17 @@ namespace WildfireICSDesktopServices
         public void UpsertTimelineEvent(TimelineEvent record, string source = "local")
         {
             throw new NotImplementedException();
+        }
+
+
+        
+        public virtual void OnOpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            IncidenOpPeriodChangedEventHandler handler = this.OpPeriodChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
         }
     }
 

@@ -35,6 +35,13 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
             Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessagesChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
+        }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            CurrentIncident.createObjectivesSheetAsNeeded(CurrentOpPeriod);
+            LoadSheet();
         }
 
         private void LoadSheet()

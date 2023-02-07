@@ -243,6 +243,7 @@ namespace Wildfire_ICS_Assist
             Program.networkService.localNetworkIncomingIncidentEvent += replaceCurrentIncidentWithNetworkIncident;
             Program.networkService.localNetworkIncomingObjectEvent += Program_HandleIncomingNetworkObject;
             Program.wfIncidentService.TaskUpdateChanged += Program_TaskUpdateChanged;
+            Program.wfIncidentService.OpPeriodChanged += changeOpPeriod;
         }
 
 
@@ -2662,6 +2663,69 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void numOpPeriod_ValueChanged(object sender, EventArgs e)
+        {
+            int newOpNumber = Convert.ToInt32(numOpPeriod.Value);
+            if (newOpNumber != Program.CurrentOpPeriod)
+            {
+                IncidentOpPeriodChangedEventArgs args = new IncidentOpPeriodChangedEventArgs();
+                args.NewOpPeriod = newOpNumber;
 
+
+                if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == newOpNumber))
+                {
+                    OperationalPeriod prevOp = Program.CurrentIncident.AllOperationalPeriods.OrderByDescending(o => o.PeriodEnd).First();
+                    if (prevOp == null)
+                    {
+                        Program.CurrentIncident.GenerateFirstOpPeriod();
+                        prevOp = Program.CurrentIncident.AllOperationalPeriods.OrderByDescending(o => o.PeriodEnd).First();
+
+                    }
+                    OperationalPeriod period = new OperationalPeriod();
+                    period.TaskID = CurrentIncident.TaskID;
+                    period.PeriodNumber = newOpNumber;
+                    period.PeriodStart = prevOp.PeriodEnd.AddMinutes(1);
+                    period.PeriodEnd = period.PeriodStart.AddHours(12);
+                    Program.wfIncidentService.UpsertOperationalPeriod(period);
+
+                }
+                Program.CurrentOpPeriod = newOpNumber;
+                Program.wfIncidentService.OnOpPeriodChanged(args);
+
+            }
+        }
+
+
+        private void colorOpsPeriodPanel()
+        {
+            DateTime today = DateTime.Now;
+            DateTime OpsStart = Program.CurrentOpPeriodDetails.PeriodStart;
+            DateTime OpsEnd = Program.CurrentOpPeriodDetails.PeriodEnd;
+
+            if (today > OpsStart && today < OpsEnd)
+            {
+                pnlOpsPeriod.BackColor = Color.LightGoldenrodYellow;
+            }
+            else if (today > OpsEnd)
+            {
+                pnlOpsPeriod.BackColor = Color.LightGray;
+            }
+            else
+            {
+                pnlOpsPeriod.BackColor = Color.CornflowerBlue;
+            }
+        }
+
+        private void changeOpPeriod(IncidentOpPeriodChangedEventArgs e)
+        {
+
+            datOpsStart.Value = Program.CurrentOpPeriodDetails.PeriodStart;
+            datOpsEnd.Value = Program.CurrentOpPeriodDetails.PeriodEnd;
+            colorOpsPeriodPanel();
+            setButtonCheckboxes();
+
+        }
+
+      
     }
 }

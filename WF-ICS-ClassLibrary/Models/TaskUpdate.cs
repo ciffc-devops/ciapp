@@ -12,6 +12,41 @@ using System.Text.Json.Serialization;
 
 namespace WF_ICS_ClassLibrary.Models
 {
+
+    [XmlInclude(typeof(TeamAssignment))]
+    [XmlInclude(typeof(Briefing))]
+    [XmlInclude(typeof(CommsLogEntry))]
+    [XmlInclude(typeof(CommsPlan))]
+    [XmlInclude(typeof(CommsPlanItem))]
+    [XmlInclude(typeof(Contact))]
+    [XmlInclude(typeof(TaskEquipment))]
+    [XmlInclude(typeof(EquipmentIssue))]
+    [XmlInclude(typeof(IncidentObjective))]
+    [XmlInclude(typeof(MedicalPlan))]
+    [XmlInclude(typeof(TeamMember))]
+    [XmlInclude(typeof(MemberStatus))]
+    [XmlInclude(typeof(SignInRecord))]
+    [XmlInclude(typeof(Note))]
+    [XmlInclude(typeof(OperationalPeriod))]
+    [XmlInclude(typeof(OrganizationChart))]
+    [XmlInclude(typeof(ICSRole))]
+    [XmlInclude(typeof(PositionLogEntry))]
+    [XmlInclude(typeof(TaskBasics))]
+    [XmlInclude(typeof(Timeline))]
+    [XmlInclude(typeof(TimelineEvent))]
+    [XmlInclude(typeof(Vehicle))]
+
+    [XmlInclude(typeof(Aircraft))]
+    [XmlInclude(typeof(AirOperationsSummary))]
+    [XmlInclude(typeof(NOTAM))]
+    [XmlInclude(typeof(GeneralMessage))]
+    [XmlInclude(typeof(AmbulanceService))]
+    [XmlInclude(typeof(Hospital))]
+    [XmlInclude(typeof(MedicalPlan))]
+    [XmlInclude(typeof(MedicalAidStation))]
+    [XmlInclude(typeof(SafetyMessage))]
+    [XmlInclude(typeof(WFIncident))]
+
     [Serializable]
     [ProtoContract]
 

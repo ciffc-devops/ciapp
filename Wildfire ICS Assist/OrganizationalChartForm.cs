@@ -39,8 +39,14 @@ namespace Wildfire_ICS_Assist
 
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
 
             chkIncludeContacts.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
+        }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            PopulateTree();
         }
 
         private void Program_OrgChartChanged(OrganizationChartEventArgs e)

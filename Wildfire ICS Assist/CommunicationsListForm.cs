@@ -112,9 +112,15 @@ namespace Wildfire_ICS_Assist
         private void CommunicationsListForm_Load(object sender, EventArgs e)
         {
             Program.wfIncidentService.ContactChanged += Program_ContactChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
             BuildData();
         }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            BuildData();
+        }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {

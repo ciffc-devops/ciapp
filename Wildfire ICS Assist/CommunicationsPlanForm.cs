@@ -29,6 +29,13 @@ namespace Wildfire_ICS_Assist
             BuildDataList();
             Program.wfIncidentService.CommsPlanChanged += Program_OnCommsPlanChanged;
             Program.wfIncidentService.CommsPlanItemChanged += Program_OnCommsPlanItemChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
+        }
+
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            BuildDataList();
         }
 
 

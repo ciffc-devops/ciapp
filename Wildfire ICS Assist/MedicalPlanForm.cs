@@ -49,7 +49,19 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.AmbulanceServiceChanged += Program_AmbulanceChanged;
             Program.wfIncidentService.MedicalAidStationChanged += Program_AidStationChanged;
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
+        }
+
+
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            BuildAidStations();
+            BuildAmbulances();
+            BuildHospitals();
+            txtEmergencyProcedures.Text = CurrentPlan.EmergencyProcedures;
+
+            buildRoleDropdowns();
         }
 
         private void buildRoleDropdowns()

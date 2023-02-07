@@ -196,6 +196,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             List<MemberStatus> statuses = new List<MemberStatus>();
             List<TeamMember> members = task.MembersSignedIn(opPeriod);
+            List<TeamMember> savedMembers = Globals._generalOptionsService.GetOptionsValue("TeamMembers") as List<TeamMember>;
             //Add members who are on teams or in ICS roles currently
             if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Any(o => o.teamMember != null))
             {
@@ -208,6 +209,18 @@ namespace WF_ICS_ClassLibrary.Utilities
                 }
             }
          
+            foreach(TeamAssignment assignment in task.AllAssignments.Where(o=>o.OpPeriod == opPeriod && o.AssignedMemberIDs.Any()))
+            {
+                foreach(Guid g in assignment.AssignedMemberIDs)
+                {
+                    if(!members.Any(o=>o.PersonID == g) && savedMembers.Any(o=>o.PersonID == g))
+                    {
+                        members.Add(savedMembers.First(o => o.PersonID == g));
+                    }
+                }
+            }
+
+
             foreach (TeamMember member in members)
             {
                 int signInCount = task.AllSignInRecords.Where(o => o.IsSignIn && o.teamMember.PersonID == member.PersonID && o.OpPeriod == opPeriod).Count();
@@ -312,7 +325,13 @@ namespace WF_ICS_ClassLibrary.Utilities
                     }
                 }
             }
-
+            if(task.AllAssignments.Any(o=>o.OpPeriod == opPeriod && o.AssignedMemberIDs.Contains(member.PersonID)))
+            {
+                TeamAssignment assignment = task.AllAssignments.OrderByDescending(o=>o.currentStatus.Active).First(o => o.OpPeriod == opPeriod && o.AssignedMemberIDs.Contains(member.PersonID));
+                status.AssignmentID = assignment.ID;
+                status.AssignmentName = assignment.FullResourceID;
+                status.AssignmentStatus = assignment.currentStatusName;
+            }
             return status;
         }
 

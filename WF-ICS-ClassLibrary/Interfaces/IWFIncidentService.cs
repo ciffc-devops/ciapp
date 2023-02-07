@@ -45,6 +45,9 @@ namespace WildfireICSDesktopServices
         event AircraftEventHandler AircraftChanged;
         event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
         event TeamAssignmentEventHandler TeamAssignmentChanged;
+
+        event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
+
         void ApplyTaskUpdate(TaskUpdate update, bool applyAllSubsequent = false);
         void ConnectToServerTask(Guid TaskID, string EncryptionKey);
         void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local");
@@ -104,5 +107,6 @@ namespace WildfireICSDesktopServices
         void UpsertAircraft(Aircraft record, string source = "local");
         void UpsertAirOperationsSummary(AirOperationsSummary record, string source = "local");
         void UpsertTeamAssignment(TeamAssignment item, string source = "local");
+        void OnOpPeriodChanged(IncidentOpPeriodChangedEventArgs e);
     }
 }

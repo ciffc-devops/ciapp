@@ -37,6 +37,12 @@ namespace Wildfire_ICS_Assist
             dgvNotes.AutoGenerateColumns = false;
             buildNoteList();
             Program.wfIncidentService.NoteChanged += Program_NoteChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
+        }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            buildNoteList();
         }
 
         private void Program_NoteChanged(NoteEventArgs e)
