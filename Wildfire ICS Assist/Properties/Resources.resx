@@ -442,4 +442,13 @@
   <data name="ValidCoordinatesRequired" xml:space="preserve">
     <value>You must enter valid coordinates, or leave the coordinate field blank in order to proceed.</value>
   </data>
+  <data name="ProceedTitle" xml:space="preserve">
+    <value>Are you sure you want to proceed?</value>
+  </data>
+  <data name="RequestIncidentFromServer" xml:space="preserve">
+    <value>STOP! You are about to replace the incident currently on this machine with a current copy of the one on the server computer. You will lose any changes you’ve made here that are not already reflected there. There is no way to undo this. Are you very sure you want to proceed?</value>
+  </data>
+  <data name="RequestOptionsFromServer" xml:space="preserve">
+    <value>Are you sure you want to request all of the options from the server?\r\n\r\n*These options will replace any already on this machine, including personnel, templates, general options, saved communications channels, and so forth.</value>
+  </data>
 </root>

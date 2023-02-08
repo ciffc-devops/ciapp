@@ -2628,7 +2628,7 @@ namespace Wildfire_ICS_Assist
         {
             if (ThisMachineIsClient)
             {
-                DialogResult result = MessageBox.Show("You are about to request the SAR task info currently in progress on the server.  This will overwrite the task currently in progress on this machine.  Proceed?", "Request SAR Task", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show(Properties.Resources.RequestIncidentFromServer, Properties.Resources.ProceedTitle, MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     networkTaskRequested = true;
@@ -2647,8 +2647,8 @@ namespace Wildfire_ICS_Assist
 
         private void requestOptionsFromServerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string warning = "Are you sure you want to request all of the options from the server?\r\n\r\nThese options will replace any already on this machine, including sar members, assignment templates, comms channels, and others.";
-            DialogResult dr = MessageBox.Show(warning, "Are you very very sure?", MessageBoxButtons.YesNo);
+            string warning = Properties.Resources.RequestOptionsFromServer;
+            DialogResult dr = MessageBox.Show(warning, Properties.Resources.ProceedTitle, MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
             {
                 //send a request to the server for options

@@ -1021,6 +1021,15 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to proceed?.
+        /// </summary>
+        internal static string ProceedTitle {
+            get {
+                return ResourceManager.GetString("ProceedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, this role cannot be edited or removed as it is essential to ICS organizational structure.
         /// </summary>
         internal static string ProtectedRole {
@@ -1044,6 +1053,24 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static string RenameTitle {
             get {
                 return ResourceManager.GetString("RenameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to STOP! You are about to replace the incident currently on this machine with a current copy of the one on the server computer. You will lose any changes you’ve made here that are not already reflected there. There is no way to undo this. Are you very sure you want to proceed?.
+        /// </summary>
+        internal static string RequestIncidentFromServer {
+            get {
+                return ResourceManager.GetString("RequestIncidentFromServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to request all of the options from the server?\r\n\r\n*These options will replace any already on this machine, including personnel, templates, general options, saved communications channels, and so forth..
+        /// </summary>
+        internal static string RequestOptionsFromServer {
+            get {
+                return ResourceManager.GetString("RequestOptionsFromServer", resourceCulture);
             }
         }
         
