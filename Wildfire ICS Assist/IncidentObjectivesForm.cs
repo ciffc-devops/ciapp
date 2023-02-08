@@ -284,5 +284,10 @@ namespace Wildfire_ICS_Assist
                 txtGeneralSafetyMessage.Text = msg.Message.Replace("\n", Environment.NewLine); ;
             }
         }
+
+        private void IncidentObjectivesForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.wfIncidentService.UpsertIncidentObjectivesSheet(objectivesSheet);
+        }
     }
 }

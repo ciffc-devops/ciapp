@@ -29,6 +29,8 @@ namespace Wildfire_ICS_Assist
             cboSavedObjectives.DataSource = items;
             cboSavedObjectives.ValueMember = "ObjectiveID";
             cboSavedObjectives.DisplayMember = "Objective";
+
+            pnlSaved.Enabled = items.Any();
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
