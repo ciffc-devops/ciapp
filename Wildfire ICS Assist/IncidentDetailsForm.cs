@@ -2687,6 +2687,8 @@ namespace Wildfire_ICS_Assist
                     period.PeriodStart = prevOp.PeriodEnd.AddMinutes(1);
                     period.PeriodEnd = period.PeriodStart.AddHours(12);
                     Program.wfIncidentService.UpsertOperationalPeriod(period);
+                    Program.CurrentIncident.createOrgChartAsNeeded(newOpNumber);
+                    Program.CurrentIncident.createObjectivesSheetAsNeeded(newOpNumber);
 
                 }
                 Program.CurrentOpPeriod = newOpNumber;

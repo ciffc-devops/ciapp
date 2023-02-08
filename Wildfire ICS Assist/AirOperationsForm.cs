@@ -44,6 +44,8 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
 
             Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
+            Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
+
             Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
         }
