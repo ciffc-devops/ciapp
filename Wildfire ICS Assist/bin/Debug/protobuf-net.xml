@@ -704,9 +704,44 @@
             The runtime version for the generated assembly
             </summary>
         </member>
+        <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.AssemblyCompanyName">
+            <summary>
+            The company name to burn into the generated assembly
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.AssemblyCopyright">
+            <summary>
+            The copyright to burn into the generated assembly
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.AssemblyDescription">
+            <summary>
+            The description to burn into the generated assembly
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.AssemblyProductName">
+            <summary>
+            The product name to burn into the generated assembly
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.AssemblyTitle">
+            <summary>
+            The application title to burn into the generated assembly
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.AssemblyTrademark">
+            <summary>
+            The trademark notice to burn into the generated assembly
+            </summary>
+        </member>
         <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.AssemblyVersion">
             <summary>
-            The Version baked into the generated assembly.
+            The assembly version to burn into the generated assembly
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.AssemblyProductVersion">
+            <summary>
+            The assembly product version to burn into the generated assembly
             </summary>
         </member>
         <member name="P:ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions.Accessibility">

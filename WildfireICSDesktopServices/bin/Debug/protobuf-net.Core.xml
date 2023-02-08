@@ -2857,6 +2857,14 @@
             is bounded.
             </summary>
         </member>
+        <member name="M:ProtoBuf.ProtoReader.State.ReadBytes(System.Span{System.Byte},System.Int32@)">
+            <summary>
+            Tries to read a string-like type directly into a span; if successful, the span
+            returned indicates the available amount of data; if unsuccessful, an exception
+            is thrown; this should only be used when there is confidence that the length
+            is bounded.
+            </summary>
+        </member>
         <member name="M:ProtoBuf.ProtoReader.State.StartSubItem">
             <summary>
             Begins consuming a nested message in the stream; supported wire-types: StartGroup, String
@@ -3284,6 +3292,11 @@
             </summary>
         </member>
         <member name="M:ProtoBuf.ProtoWriter.State.WriteBytes(System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            Writes a binary chunk to the stream; supported wire-types: String
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.ProtoWriter.State.WriteBytes(System.ReadOnlySpan{System.Byte})">
             <summary>
             Writes a binary chunk to the stream; supported wire-types: String
             </summary>
