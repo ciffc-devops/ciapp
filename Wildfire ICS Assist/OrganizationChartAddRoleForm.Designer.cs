@@ -67,7 +67,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Size = new System.Drawing.Size(448, 201);
-            this.splitContainer1.SplitterDistance = 125;
+            this.splitContainer1.SplitterDistance = 119;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -166,11 +166,12 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(448, 201);
-            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(464, 240);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(464, 240);
             this.Name = "OrganizationChartAddRoleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

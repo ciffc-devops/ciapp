@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
@@ -23,6 +24,7 @@ namespace Wildfire_ICS_Assist
             this.Icon = Program.programIcon;
 
             InitializeComponent(); this.BackColor = Program.FormBackground;
+            GeneralTools.SetDateFormat(this);
         }
         private void loadEntry()
         {

@@ -25,7 +25,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         }
         public EditSavedSafetyNoteForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

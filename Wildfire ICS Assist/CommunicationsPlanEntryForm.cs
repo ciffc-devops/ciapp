@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
 
         public CommunicationsPlanEntryForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -156,6 +156,7 @@ namespace Wildfire_ICS_Assist
 
             SavedCommsPlanItems = (List<CommsPlanItem>)Program.generalOptionsService.GetOptionsValue("CommsItems");
             cboSavedComms.DataSource = SavedCommsPlanItems;
+            if (SavedCommsPlanItems.Count <= 0) { pnlSavedComms.Enabled = false; }
             chkUsedForAir.Checked = DefaultAircraft;
             chkSavedUsedForAir.Checked = DefaultAircraft;
         }

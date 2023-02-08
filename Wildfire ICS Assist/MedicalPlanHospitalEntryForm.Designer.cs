@@ -30,22 +30,20 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numSavedTravelGround = new System.Windows.Forms.NumericUpDown();
+            this.numSavedTravelAir = new System.Windows.Forms.NumericUpDown();
             this.btnAddSaved = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.cboSaved = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnAddNew = new System.Windows.Forms.Button();
-            this.numSavedTravelGround = new System.Windows.Forms.NumericUpDown();
-            this.numSavedTravelAir = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblCoordinateStatus = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.numTravelGround = new System.Windows.Forms.NumericUpDown();
             this.numTravelAir = new System.Windows.Forms.NumericUpDown();
+            this.lblCoordinateStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -59,15 +57,17 @@
             this.chkHelipad = new System.Windows.Forms.CheckBox();
             this.chkBurnUnit = new System.Windows.Forms.CheckBox();
             this.txtCoordinates = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnAddNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSavedTravelGround)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSavedTravelAir)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTravelGround)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTravelAir)).BeginInit();
             this.SuspendLayout();
@@ -90,7 +90,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(590, 607);
+            this.splitContainer1.Size = new System.Drawing.Size(590, 630);
             this.splitContainer1.SplitterDistance = 133;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -114,6 +114,49 @@
             this.panel1.Size = new System.Drawing.Size(572, 120);
             this.panel1.TabIndex = 1;
             // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(5, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 26);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Travel Time (Minutes)";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numSavedTravelGround
+            // 
+            this.numSavedTravelGround.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numSavedTravelGround.Location = new System.Drawing.Point(360, 74);
+            this.numSavedTravelGround.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numSavedTravelGround.Name = "numSavedTravelGround";
+            this.numSavedTravelGround.Size = new System.Drawing.Size(72, 29);
+            this.numSavedTravelGround.TabIndex = 3;
+            // 
+            // numSavedTravelAir
+            // 
+            this.numSavedTravelAir.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numSavedTravelAir.Location = new System.Drawing.Point(202, 74);
+            this.numSavedTravelAir.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numSavedTravelAir.Name = "numSavedTravelAir";
+            this.numSavedTravelAir.Size = new System.Drawing.Size(72, 29);
+            this.numSavedTravelAir.TabIndex = 2;
+            // 
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -129,6 +172,15 @@
             this.btnAddSaved.UseVisualStyleBackColor = true;
             this.btnAddSaved.Click += new System.EventHandler(this.btnAddSaved_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(280, 76);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 24);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Ground";
+            // 
             // cboSaved
             // 
             this.cboSaved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -142,6 +194,15 @@
             this.cboSaved.Size = new System.Drawing.Size(424, 32);
             this.cboSaved.TabIndex = 1;
             this.cboSaved.ValueMember = "HospitalID";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(163, 76);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 24);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Air";
             // 
             // label1
             // 
@@ -159,7 +220,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 413);
+            this.btnCancel.Location = new System.Drawing.Point(6, 436);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
@@ -198,115 +259,17 @@
             this.panel2.Controls.Add(this.btnAddNew);
             this.panel2.Location = new System.Drawing.Point(6, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(572, 401);
+            this.panel2.Size = new System.Drawing.Size(572, 424);
             this.panel2.TabIndex = 98;
             // 
-            // chkSaveForLater
+            // label13
             // 
-            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(122, 356);
-            this.chkSaveForLater.Name = "chkSaveForLater";
-            this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
-            this.chkSaveForLater.TabIndex = 12;
-            this.chkSaveForLater.Text = "Save for future incidents";
-            this.chkSaveForLater.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 8);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(169, 29);
-            this.label10.TabIndex = 99;
-            this.label10.Text = "New Hospital";
-            // 
-            // btnAddNew
-            // 
-            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(360, 345);
-            this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
-            this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(204, 48);
-            this.btnAddNew.TabIndex = 13;
-            this.btnAddNew.Text = "Add to Incident";
-            this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddNew.UseVisualStyleBackColor = true;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
-            // 
-            // numSavedTravelGround
-            // 
-            this.numSavedTravelGround.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numSavedTravelGround.Location = new System.Drawing.Point(360, 74);
-            this.numSavedTravelGround.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numSavedTravelGround.Name = "numSavedTravelGround";
-            this.numSavedTravelGround.Size = new System.Drawing.Size(72, 29);
-            this.numSavedTravelGround.TabIndex = 3;
-            // 
-            // numSavedTravelAir
-            // 
-            this.numSavedTravelAir.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numSavedTravelAir.Location = new System.Drawing.Point(202, 74);
-            this.numSavedTravelAir.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numSavedTravelAir.Name = "numSavedTravelAir";
-            this.numSavedTravelAir.Size = new System.Drawing.Size(72, 29);
-            this.numSavedTravelAir.TabIndex = 2;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(280, 76);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 24);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Ground";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(163, 76);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 24);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Air";
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(5, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 26);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Travel Time (Minutes)";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblCoordinateStatus
-            // 
-            this.lblCoordinateStatus.AutoSize = true;
-            this.lblCoordinateStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCoordinateStatus.Location = new System.Drawing.Point(201, 250);
-            this.lblCoordinateStatus.Name = "lblCoordinateStatus";
-            this.lblCoordinateStatus.Size = new System.Drawing.Size(101, 15);
-            this.lblCoordinateStatus.TabIndex = 112;
-            this.lblCoordinateStatus.Text = "Coordinates okay";
+            this.label13.Location = new System.Drawing.Point(36, 292);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(153, 26);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Travel Time (Minutes)";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // numTravelGround
             // 
@@ -341,6 +304,16 @@
             this.numTravelAir.Name = "numTravelAir";
             this.numTravelAir.Size = new System.Drawing.Size(84, 29);
             this.numTravelAir.TabIndex = 2;
+            // 
+            // lblCoordinateStatus
+            // 
+            this.lblCoordinateStatus.AutoSize = true;
+            this.lblCoordinateStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCoordinateStatus.Location = new System.Drawing.Point(201, 250);
+            this.lblCoordinateStatus.Name = "lblCoordinateStatus";
+            this.lblCoordinateStatus.Size = new System.Drawing.Size(101, 15);
+            this.lblCoordinateStatus.TabIndex = 112;
+            this.lblCoordinateStatus.Text = "Coordinates okay";
             // 
             // label3
             // 
@@ -462,24 +435,52 @@
             this.txtCoordinates.TabIndex = 106;
             this.txtCoordinates.Leave += new System.EventHandler(this.txtLatitude_Leave);
             // 
-            // label13
+            // chkSaveForLater
             // 
-            this.label13.Location = new System.Drawing.Point(36, 292);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(153, 26);
-            this.label13.TabIndex = 10;
-            this.label13.Text = "Travel Time (Minutes)";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSaveForLater.AutoSize = true;
+            this.chkSaveForLater.Location = new System.Drawing.Point(122, 379);
+            this.chkSaveForLater.Name = "chkSaveForLater";
+            this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
+            this.chkSaveForLater.TabIndex = 12;
+            this.chkSaveForLater.Text = "Save for future incidents";
+            this.chkSaveForLater.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(3, 8);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(169, 29);
+            this.label10.TabIndex = 99;
+            this.label10.Text = "New Hospital";
+            // 
+            // btnAddNew
+            // 
+            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAddNew.Location = new System.Drawing.Point(360, 368);
+            this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(204, 48);
+            this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.Text = "Add to Incident";
+            this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // MedicalPlanHospitalEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 607);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(590, 630);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(606, 646);
             this.Name = "MedicalPlanHospitalEntryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -491,10 +492,10 @@
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSavedTravelGround)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSavedTravelAir)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTravelGround)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTravelAir)).EndInit();
             this.ResumeLayout(false);

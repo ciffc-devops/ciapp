@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +8,13 @@ using System.Threading.Tasks;
 namespace WF_ICS_ClassLibrary.Models
 {
     [Serializable]
+    [ProtoContract]
     public class Province
     {
-        private int _ProvinceID;
-        private string _ProvinceName;
-        private string _ProvinceShort;
-        private Guid _ProvinceGUID;
+        [ProtoMember(1)] private int _ProvinceID;
+        [ProtoMember(2)] private string _ProvinceName;
+        [ProtoMember(3)] private string _ProvinceShort;
+        [ProtoMember(4)] private Guid _ProvinceGUID;
 
         public int ProvinceID { get => _ProvinceID; set => _ProvinceID = value; }
         public string ProvinceName { get => _ProvinceName; set => _ProvinceName = value; }

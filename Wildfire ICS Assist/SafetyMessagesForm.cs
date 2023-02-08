@@ -24,6 +24,7 @@ namespace Wildfire_ICS_Assist
         private void SafetyMessagesForm_Load(object sender, EventArgs e)
         {
             BuildDataList();
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
         }
@@ -35,6 +36,11 @@ namespace Wildfire_ICS_Assist
                 BuildDataList();
             }
         }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            BuildDataList();
+        }
+
 
         private void BuildDataList()
         {
@@ -54,6 +60,13 @@ namespace Wildfire_ICS_Assist
                     entryForm.selectedMessage.ApprovedByRoleID = Program.CurrentRole.RoleID; 
                     entryForm.selectedMessage.ApprovedByRoleName = Program.CurrentRole.RoleName;
                     Program.wfIncidentService.UpsertSafetyMessage(entryForm.selectedMessage);
+
+                    if (entryForm.SaveForLater)
+                    {
+                        SafetyMessage msg = entryForm.selectedMessage.Clone();
+                        msg.SafetyTemplateID = Guid.NewGuid();
+                        Program.generalOptionsService.UpserOptionValue(msg, "SafetyMessage");
+                    }
                 }
             }
         }

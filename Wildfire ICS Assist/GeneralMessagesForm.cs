@@ -38,7 +38,14 @@ namespace Wildfire_ICS_Assist
             dgvLog.AutoGenerateColumns = false;
             BuildMessageList();
             Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
         }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            BuildMessageList();
+        }
+
 
         private void BuildMessageList()
         {

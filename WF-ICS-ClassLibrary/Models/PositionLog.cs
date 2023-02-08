@@ -53,10 +53,10 @@ namespace WF_ICS_ClassLibrary.Models
             if (string.IsNullOrEmpty(individualName)) { individualName = "Unassigned"; }
             if (_DateCreated > DateTime.MinValue && value != DateCreated)
             {
-                AddToHistory("Updated date/time from " + _DateCreated.ToString("yyyy-MMM-dd HH:mm") + " to " + value.ToString("yyyy-MMM-dd HH:mm") + "  - by " + individualName);
+                AddToHistory("Updated date/time from " + _DateCreated.ToString(Globals.DateFormat + " HH:mm") + " to " + value.ToString(Globals.DateFormat + " HH:mm") + "  - by " + individualName);
                 DateUpdated = DateTime.Now;
             }
-            else if (value != DateCreated) { AddToHistory("Set entry date/time as " + value.ToString("yyyy-MMM-dd HH:mm") + "  - by " + individualName); DateUpdated = DateTime.Now; }
+            else if (value != DateCreated) { AddToHistory("Set entry date/time as " + value.ToString(Globals.DateFormat + " HH:mm") + "  - by " + individualName); DateUpdated = DateTime.Now; }
 
             DateCreated = value;
 
@@ -101,7 +101,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (IsInfoOnly) { return null; }
                 if (IsComplete) { return null; }
-                else { return TimeDue.ToString("yyyy-MMM-dd HH:mm"); }
+                else { return TimeDue.ToString(Globals.DateFormat + " HH:mm"); }
             }
         }
 
@@ -110,7 +110,7 @@ namespace WF_ICS_ClassLibrary.Models
             if (value != TimeDue)
             {
                 if (string.IsNullOrEmpty(individualName)) { individualName = "Unassigned"; }
-                AddToHistory("Updated Due Date to " + value.ToString("yyyy-MMM-dd HH:mm") + "  - by " + individualName);
+                AddToHistory("Updated Due Date to " + value.ToString(Globals.DateFormat + " HH:mm") + "  - by " + individualName);
                 _TimeDue = value;
                 DateUpdated = DateTime.Now;
             }
@@ -154,7 +154,7 @@ namespace WF_ICS_ClassLibrary.Models
         public void AddToHistory(string update)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(DateTime.Now.ToString("yyyy-MMM-dd HH:mm")); sb.Append(" - ");
+            sb.Append(DateTime.Now.ToString(Globals.DateFormat + " HH:mm")); sb.Append(" - ");
             sb.Append(update);
             sb.Append(Environment.NewLine);
             LogHistory.Add(sb.ToString());

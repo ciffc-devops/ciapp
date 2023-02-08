@@ -41,10 +41,10 @@
       <HintPath>..\packages\NetworkCommsDotNet.3.0.3\lib\NetworkCommsDotNet.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.3.1.26\lib\net462\protobuf-net.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.3.1.33\lib\net462\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.Core.3.1.26\lib\net462\protobuf-net.Core.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.Core.3.1.33\lib\net462\protobuf-net.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -85,7 +85,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TaskUpdateTools.cs" />
+    <Compile Include="TaskUpdateWebServiceTools.cs" />
     <Compile Include="WFIncidentService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProtobufSerializer\ProtobufSerializer.csproj">
+      <Project>{f27e4076-1ddc-485f-9a75-915a74d7958d}</Project>
+      <Name>ProtobufSerializer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WF-ICS-ClassLibrary\WF-ICS-ClassLibrary.csproj">
       <Project>{d475afbf-741a-4897-b9dd-284ec0da210f}</Project>
       <Name>WF-ICS-ClassLibrary</Name>

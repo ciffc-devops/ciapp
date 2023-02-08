@@ -23,8 +23,7 @@ namespace Wildfire_ICS_Assist
 
         public CommunicationsListEntryForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
-            this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

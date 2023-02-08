@@ -119,7 +119,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(15)] private string _Tone;
         [ProtoMember(16)] private string _Aassignment;
         [ProtoMember(17)] private Guid _TemplateItemID; //This is a unique identifier for the item as saved in Options.
-        [ProtoMember(12)] private bool _Aircraft;
+        [ProtoMember(18)] private bool _Aircraft;
 
         public Guid ItemID { get => _ItemID; set => _ItemID = value; }
         public string CommsSystem { get => _CommsSystem; set => _CommsSystem = value; }

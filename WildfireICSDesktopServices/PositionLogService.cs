@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Interfaces;
+using WF_ICS_ClassLibrary;
 
 namespace WildfireICSDesktopServices
 {
@@ -101,17 +102,17 @@ namespace WildfireICSDesktopServices
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
 
             ICSRole RoleWithName = null;
-            if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.AllRoles.Any(r => r.RoleID == role.RoleID)))
+            if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.RoleID)))
             {
-                RoleWithName = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().AllRoles.Where(o => o.RoleID == role.RoleID).First();
+                RoleWithName = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(o => o.RoleID == role.RoleID).First();
             }
             else { RoleWithName = role; }
 
             ICSRole branchRole = null;
             if (role.BranchID == role.RoleID) { branchRole = RoleWithName; }
-            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.AllRoles.Any(r => r.RoleID == role.BranchID)))
+            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.BranchID)))
             {
-                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().AllRoles.Where(r => r.RoleID == role.BranchID).First();
+                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(r => r.RoleID == role.BranchID).First();
             }
 
             using (PdfReader rdr = new PdfReader(fileToUse))
@@ -120,15 +121,15 @@ namespace WildfireICSDesktopServices
                 {
                     stamper.AcroFields.SetField("1 INCIDENT NAME", task.TaskName);
                    
-                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", DateTime.Now));
+                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + Globals.DateFormat + " HH:mm}", DateTime.Now));
                     stamper.AcroFields.SetField("OP", OpsPeriod.ToString());
                     stamper.AcroFields.SetField("4 NAME", RoleWithName.IndividualName);
                     stamper.AcroFields.SetField("5 ICS POSITION", role.RoleName);
                     stamper.AcroFields.SetField("Name", RoleWithName.IndividualName);
                     stamper.AcroFields.SetField("Position", role.RoleName);
 
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodEnd));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
@@ -140,7 +141,7 @@ namespace WildfireICSDesktopServices
                     List<ICSRole> UnitRoles = new List<ICSRole>();
                     if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod))
                     {
-                        UnitRoles = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().AllRoles.Where(o => o.BranchID == branchRole.RoleID).ToList();
+                        UnitRoles = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(o => o.BranchID == branchRole.RoleID).ToList();
                         UnitRoles = UnitRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).ToList();
                         for (int x = 0; x < UnitRoles.Count && x < 16; x++)
                         {
@@ -212,9 +213,9 @@ namespace WildfireICSDesktopServices
 
             ICSRole branchRole = null;
             if (role.BranchID == role.RoleID) { branchRole = role; }
-            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.AllRoles.Any(r => r.RoleID == role.BranchID)))
+            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.BranchID)))
             {
-                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().AllRoles.Where(r => r.RoleID == role.BranchID).First();
+                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(r => r.RoleID == role.BranchID).First();
             }
 
             using (PdfReader rdr = new PdfReader(fileToUse))
@@ -223,15 +224,15 @@ namespace WildfireICSDesktopServices
                 {
                     stamper.AcroFields.SetField("1 INCIDENT NAMERow1", task.TaskName);
 
-                    stamper.AcroFields.SetField("DATE  TIME PREPARED", string.Format("{0:yyyy-MMM-dd HH:mm}", DateTime.Now));
+                    stamper.AcroFields.SetField("DATE  TIME PREPARED", string.Format("{0:" + Globals.DateFormat + " HH:mm}", DateTime.Now));
                     stamper.AcroFields.SetField("OP", OpsPeriod.ToString());
                     stamper.AcroFields.SetField("3 NAME", role.IndividualName);
                     stamper.AcroFields.SetField("4 ICS POSITION", role.RoleName);
                     stamper.AcroFields.SetField("Name", role.IndividualName);
                     stamper.AcroFields.SetField("Position", role.RoleName);
 
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:yyyy-MMM-dd}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:y" + Globals.DateFormat + "}", currentOp.PeriodEnd));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 

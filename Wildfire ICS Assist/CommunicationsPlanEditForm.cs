@@ -20,7 +20,7 @@ namespace Wildfire_ICS_Assist
 
         public CommunicationsPlanEditForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void loadSelectedCommsPlanItem()

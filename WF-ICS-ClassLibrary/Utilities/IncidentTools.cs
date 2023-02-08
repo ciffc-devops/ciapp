@@ -86,7 +86,7 @@ namespace WF_ICS_ClassLibrary.Utilities
            
             foreach (OrganizationChart orgchart in task.allOrgCharts)
             {
-                foreach (ICSRole role in orgchart.AllRoles)
+                foreach (ICSRole role in orgchart.ActiveRoles)
                 {
                     if (role.teamMember != null && !members.Any(o => o.PersonID == role.teamMember.PersonID) && !listAlreadyContainsMember(members, role.teamMember)) { members.Add(role.teamMember); }
                 }
@@ -196,10 +196,11 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             List<MemberStatus> statuses = new List<MemberStatus>();
             List<TeamMember> members = task.MembersSignedIn(opPeriod);
+            List<TeamMember> savedMembers = Globals._generalOptionsService.GetOptionsValue("TeamMembers") as List<TeamMember>;
             //Add members who are on teams or in ICS roles currently
-            if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).AllRoles.Any(o => o.teamMember != null))
+            if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Any(o => o.teamMember != null))
             {
-                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).AllRoles.Where(o => o.teamMember != null))
+                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Where(o => o.teamMember != null))
                 {
                     if (role.teamMember.PersonID != Guid.Empty && !string.IsNullOrEmpty(role.teamMember.Name) && !members.Any(o => o.PersonID == role.teamMember.PersonID))
                     {
@@ -208,6 +209,18 @@ namespace WF_ICS_ClassLibrary.Utilities
                 }
             }
          
+            foreach(TeamAssignment assignment in task.AllAssignments.Where(o=>o.OpPeriod == opPeriod && o.AssignedMemberIDs.Any()))
+            {
+                foreach(Guid g in assignment.AssignedMemberIDs)
+                {
+                    if(!members.Any(o=>o.PersonID == g) && savedMembers.Any(o=>o.PersonID == g))
+                    {
+                        members.Add(savedMembers.First(o => o.PersonID == g));
+                    }
+                }
+            }
+
+
             foreach (TeamMember member in members)
             {
                 int signInCount = task.AllSignInRecords.Where(o => o.IsSignIn && o.teamMember.PersonID == member.PersonID && o.OpPeriod == opPeriod).Count();
@@ -245,22 +258,23 @@ namespace WF_ICS_ClassLibrary.Utilities
             status.setTeamMember(member);
             if (signIn == null)
             {
-                if (task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn).Any())
+                if (task.AllSignInRecords.Any(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn))
                 {
-                    signIn = task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn).OrderByDescending(o => o.StatusChangeTime).First();
-
+                    signIn = task.AllSignInRecords.OrderByDescending(o => o.StatusChangeTime).First(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn);
+                    status.CheckInRecordID = signIn.SignInRecordID;
                     status.SignInTime = signIn.StatusChangeTime;
-                    if (signIn.TimeOutRequest > DateTime.MinValue) { status.TimeOutRequest = signIn.TimeOutRequest; }
+                    if (signIn.LastDayWorked > DateTime.MinValue) { status.LastDayWorked = signIn.LastDayWorked; }
                     status.KMs = signIn.KMs;
                 }
                 else { status.SignInTime = DateTime.MinValue; }
             }
-            else { status.SignInTime = signIn.StatusChangeTime; status.KMs = signIn.KMs; }
+            else { status.SignInTime = signIn.StatusChangeTime; status.KMs = signIn.KMs; status.CheckInRecordID = signIn.SignInRecordID; }
 
             if (task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).Any())
             {
                 SignInRecord signOut = task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).OrderBy(o => o.StatusChangeTime).First();
                 status.SignOutTime = signOut.StatusChangeTime;
+                status.CheckOutRecordID = signOut.SignInRecordID;
                 if (status.KMs <= 0m)
                 {
                     status.KMs = signOut.KMs;
@@ -300,7 +314,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             //ics roles
             if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod))
             {
-                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).AllRoles)
+                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles)
                 {
                     if (role.IndividualID == member.PersonID)
                     {
@@ -311,7 +325,13 @@ namespace WF_ICS_ClassLibrary.Utilities
                     }
                 }
             }
-
+            if(task.AllAssignments.Any(o=>o.OpPeriod == opPeriod && o.AssignedMemberIDs.Contains(member.PersonID)))
+            {
+                TeamAssignment assignment = task.AllAssignments.OrderByDescending(o=>o.currentStatus.Active).First(o => o.OpPeriod == opPeriod && o.AssignedMemberIDs.Contains(member.PersonID));
+                status.AssignmentID = assignment.ID;
+                status.AssignmentName = assignment.FullResourceID;
+                status.AssignmentStatus = assignment.currentStatusName;
+            }
             return status;
         }
 
@@ -653,7 +673,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 if (entry.Starred) { csv.Append("TRUE"); } else { csv.Append("FALSE"); }
                 csv.Append(delimiter);
-                csv.Append(entry.LogDate.ToString("HH:mm yyyy-MMM-dd")); csv.Append(delimiter);
+                csv.Append(entry.LogDate.ToString("HH:mm " + Globals.DateFormat)); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(entry.ToName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(entry.FromName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(entry.Message.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);

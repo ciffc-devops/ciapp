@@ -44,23 +44,41 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
 
             Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
+            Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
+
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
+        }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            Program.CurrentIncident.createAirOpsSummaryAsNeeded(Program.CurrentOpPeriod);
+            LoadMainData();
+            PopulateAircraft();
+            PopulateTree();
+            PopulateCommsItems();
+            LoadPreparedBy();
+
+            SetNOTAMCheckbox();
         }
 
         private void LoadPreparedBy()
         {
             cboPreparedBy.DataSource = null;
-            cboPreparedBy.DataSource = CurrentOrgChart.Clone().AllRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
-            if (CurrentAirOpsSummary.PreparedByPositionID != Guid.Empty && CurrentOrgChart.AllRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByPositionID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByPositionID; }
+            cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
+            if (CurrentAirOpsSummary.PreparedByPositionID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByPositionID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByPositionID; }
 
         }
 
         private void LoadMainData()
         {
-            if(CurrentAirOpsSummary.Sunrise > datSunrise.MinDate) { datSunrise.Value = CurrentAirOpsSummary.Sunrise; }
+            if (CurrentAirOpsSummary.Sunrise > datSunrise.MinDate) { datSunrise.Value = CurrentAirOpsSummary.Sunrise; }
+            else { CurrentAirOpsSummary.Sunrise = datSunrise.Value; }
+
             if (CurrentAirOpsSummary.Sunset > datSunset.MinDate) { datSunset.Value = CurrentAirOpsSummary.Sunset; }
+            else { CurrentAirOpsSummary.Sunset = datSunset.Value; }
             txtRemarks.Text = CurrentAirOpsSummary.Remarks;
             txtMedivacText.Text = CurrentAirOpsSummary.MedivacAircraftText;
-            
+
 
         }
 
@@ -180,7 +198,7 @@ namespace Wildfire_ICS_Assist
 
         private void AddCurrentChild(Guid parentId, TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.AllRoles.Where(o => o.ReportsTo == parentId).ToList();
+            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == parentId).ToList();
 
             foreach (var row in rows)
             {
@@ -196,7 +214,7 @@ namespace Wildfire_ICS_Assist
         }
         private void AddFirstChild(TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.AllRoles.Where(o => o.RoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirector).ToList();
+            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.RoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirector).ToList();
 
             foreach (var row in rows)
             {
@@ -326,12 +344,40 @@ namespace Wildfire_ICS_Assist
 
         private void btnEditComms_Click(object sender, EventArgs e)
         {
+            if (dgvCommsItems.SelectedRows.Count == 1)
+            {
+                CommsPlanItem item = (CommsPlanItem)dgvCommsItems.SelectedRows[0].DataBoundItem;
+                OpenForEdit(item);
+            }
+        }
 
+        private void OpenForEdit(CommsPlanItem item)
+        {
+            using (CommunicationsPlanEditForm editForm = new CommunicationsPlanEditForm())
+            {
+                editForm.SelectedItem = item;
+                DialogResult dr = editForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
+
+                }
+            }
         }
 
         private void btnDeleteComms_Click(object sender, EventArgs e)
         {
+            if (dgvCommsItems.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                List<CommsPlanItem> toDelete = new List<CommsPlanItem>();
 
+                foreach (DataGridViewRow row in dgvCommsItems.SelectedRows)
+                {
+                    toDelete.Add((CommsPlanItem)row.DataBoundItem);
+                }
+
+                foreach (CommsPlanItem c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertCommsPlanItem(c); }
+            }
         }
 
 
@@ -465,7 +511,7 @@ namespace Wildfire_ICS_Assist
                         datSunrise.Value = GISTools.GetSunrise(c, opTime);
                         datSunset.Value = GISTools.GetSunset(c, opTime);
                     }
-
+                    Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
                     SetNOTAMCheckbox();
                 }
             }

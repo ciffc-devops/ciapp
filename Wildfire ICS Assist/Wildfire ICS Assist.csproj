@@ -62,10 +62,10 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.3.1.26\lib\net462\protobuf-net.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.3.1.33\lib\net462\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.Core.3.1.26\lib\net462\protobuf-net.Core.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.Core.3.1.33\lib\net462\protobuf-net.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -246,6 +246,48 @@
     </Compile>
     <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelBulkCheckInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelBulkCheckInForm.Designer.cs">
+      <DependentUpon>PersonnelBulkCheckInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelEditCheckInOutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelEditCheckInOutForm.Designer.cs">
+      <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelListForm.Designer.cs">
+      <DependentUpon>PersonnelListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelSignInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelSignInForm.Designer.cs">
+      <DependentUpon>PersonnelSignInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelViewCheckinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelViewCheckinForm.Designer.cs">
+      <DependentUpon>PersonnelViewCheckinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\NetworkSelectIPForm.Designer.cs">
+      <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\NetworkSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\NetworkSettingsForm.Designer.cs">
+      <DependentUpon>NetworkSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NotesForm.cs">
       <SubType>Form</SubType>
@@ -489,6 +531,12 @@
     <Compile Include="UtilityForms\AboutProgramForm.Designer.cs">
       <DependentUpon>AboutProgramForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\AuthorizeNetworkIncidentRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\AuthorizeNetworkIncidentRequestForm.Designer.cs">
+      <DependentUpon>AuthorizeNetworkIncidentRequestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\HelpInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -588,6 +636,27 @@
     <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelBulkCheckInForm.resx">
+      <DependentUpon>PersonnelBulkCheckInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelEditCheckInOutForm.resx">
+      <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelListForm.resx">
+      <DependentUpon>PersonnelListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelSignInForm.resx">
+      <DependentUpon>PersonnelSignInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelViewCheckinForm.resx">
+      <DependentUpon>PersonnelViewCheckinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\NetworkSelectIPForm.resx">
+      <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\NetworkSettingsForm.resx">
+      <DependentUpon>NetworkSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NotesForm.resx">
       <DependentUpon>NotesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -623,6 +692,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedTeamMemberForm.resx">
       <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedVehicleForm.resx">
       <DependentUpon>EditSavedVehicleForm.cs</DependentUpon>
@@ -718,6 +788,9 @@
     <EmbeddedResource Include="UtilityForms\AboutProgramForm.resx">
       <DependentUpon>AboutProgramForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\AuthorizeNetworkIncidentRequestForm.resx">
+      <DependentUpon>AuthorizeNetworkIncidentRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\HelpInfoForm.resx">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -752,6 +825,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-208-WF-Safety-Message-with-image.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-208-WF-Safety-Message.pdf">
@@ -795,6 +871,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProtobufSerializer\ProtobufSerializer.csproj">
+      <Project>{f27e4076-1ddc-485f-9a75-915a74d7958d}</Project>
+      <Name>ProtobufSerializer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WF-ICS-ClassLibrary\WF-ICS-ClassLibrary.csproj">
       <Project>{d475afbf-741a-4897-b9dd-284ec0da210f}</Project>
       <Name>WF-ICS-ClassLibrary</Name>
@@ -808,6 +888,16 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-89-book-address.png" />
+    <None Include="Resources\glyphicons-basic-89-book-address1.png" />
+    <None Include="Resources\glyphicons-basic-965-layers-plus1.png" />
+    <None Include="Resources\glyphicons-basic-218-lock-open%402x.png" />
+    <None Include="Resources\glyphicons-basic-217-lock%402x.png" />
+    <None Include="Resources\glyphicons-basic-218-lock-open.png" />
+    <None Include="Resources\glyphicons-basic-217-lock.png" />
+    <None Include="Resources\glyphicons-basic-38-picture.png" />
+    <None Include="Resources\glyphicons-basic-639-octagon-remove-empty-red.png" />
+    <None Include="Resources\glyphicons-basic-739-check-green.png" />
     <None Include="Resources\glyphicons-basic-613-paste.png" />
     <None Include="Resources\glyphicons-basic-52-eye.png" />
     <None Include="Resources\glyphicons-basic-399-import.png" />
@@ -870,7 +960,6 @@
     <None Include="Resources\glyphicons-basic-151-square-edit.png" />
     <None Include="Resources\glyphicons-basic-145-folder-open.png" />
     <None Include="Resources\glyphicons-basic-137-cogwheel.png" />
-    <None Include="Resources\glyphicons-basic-89-book-address.png" />
     <None Include="Resources\glyphicons-basic-82-refresh.png" />
     <None Include="Resources\glyphicons-basic-61-compass.png" />
     <None Include="Resources\glyphicons-basic-58-history.png" />

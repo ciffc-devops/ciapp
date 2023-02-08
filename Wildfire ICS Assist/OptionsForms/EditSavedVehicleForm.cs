@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public Vehicle vehicle { get => _vehicle; set { _vehicle= value; displayVehicle(); } }
         public EditSavedVehicleForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void displayVehicle()

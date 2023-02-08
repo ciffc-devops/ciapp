@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NetworkCommsDotNet.Tools;
+using NetworkCommsDotNet;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,11 +20,16 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.CustomControls;
 using Wildfire_ICS_Assist.OptionsForms;
 using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
+using NetworkCommsDotNet.Connections;
+using NetworkCommsDotNet.DPSBase;
+using Wildfire_ICS_Assist.Properties;
+
 
 namespace Wildfire_ICS_Assist
 {
@@ -62,11 +69,76 @@ namespace Wildfire_ICS_Assist
             ICSRole defaultRole = (ICSRole)Program.generalOptionsService.GetOptionsValue("DefaultICSRole");
             if (defaultRole != null && defaultRole.RoleID != Guid.Empty) { cboICSRole.SelectedValue = defaultRole.RoleID; }
 
+            Program.networkService.CurrentIncidentID = Program.CurrentIncident.TaskID;
+            //Default status for networking
+            if (Program.generalOptionsService.GetOptionsBoolValue("DefaultToNetworkServer"))
+            {
+
+                StartAsServer();
+
+            }
+            setServerStatusDisplay();
+
+            datOpsEnd.CustomFormat = Program.DateFormat + " HH:mm";
+            datOpsStart.CustomFormat = Program.DateFormat + " HH:mm";
+
+            NetworkComms.AppendGlobalIncomingPacketHandler<WFIncident>("WFIncident", Program.networkService.HandleIncomingIncident);
+
+        }
+
+        private void StartAsServer()
+        {
+            int defaultPortNumber = 42999;
+            if (Program.generalOptionsService.GetOptionsValue("DefaultPort") != null) { defaultPortNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("DefaultPort")); }
+
+            string tempServerIP = null;
+            if (Program.generalOptionsService.GetStringOptionValue("LastIpUsedWhenMachineIsServer") != null) { tempServerIP = Program.generalOptionsService.GetStringOptionValue("LastIpUsedWhenMachineIsServer"); }
+
+            List<string> allIPs = Program.networkService.GetAllIPs(false);
+            if (allIPs.Count == 0)
+            {
+                //no dnsable ips were found, broaden the search
+                allIPs = Program.networkService.GetAllIPs(true);
+            }
+
+
+            if (allIPs.Count == 1)
+            {
+                tempServerIP = allIPs[0];
+            }
+            else if (allIPs.Count > 1 && !allIPs.Contains(tempServerIP))
+            {
+
+
+                using (NetworkSelectIPForm selectIPForm = new NetworkSelectIPForm())
+                {
+                    selectIPForm.ipAddresses = allIPs;
+                    DialogResult dr = selectIPForm.ShowDialog();
+                    tempServerIP = selectIPForm.SelectedAddress;
+                    Program.generalOptionsService.UpserOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
+                }
+            }
+
+            bool firewallEnabled = Program.networkService.GetIsFirewallEnabled();
+            bool portAvailable = Program.networkService.GetIsPortAvailable(defaultPortNumber);
+            if (firewallEnabled && !portAvailable)
+            {
+                MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
+            }
+            else if (Program.networkService.StartAsServer(defaultPortNumber, tempServerIP))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
+
+            }
         }
 
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
-        private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == Program.CurrentOpPeriod); }
+        private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
 
         public bool ThisMachineStandAlone { get { return Program.networkService.ThisMachineIsStandAlone; } set { Program.networkService.ThisMachineIsStandAlone = value; } }
         public bool ThisMachineIsServer { get { return Program.networkService.ThisMachineIsServer; } set { Program.networkService.ThisMachineIsServer = value; } }
@@ -96,8 +168,8 @@ namespace Wildfire_ICS_Assist
         HospitalsForm hospitalsForm = null;
         MedivacsForm medivacsForm = null;
         SavedContactsForm savedContactsForm = null;
-        SavedCommsItemsForm savedCommsItemsForm= null;
-        SavedVehiclesForm savedVehiclesForm= null;
+        SavedCommsItemsForm savedCommsItemsForm = null;
+        SavedVehiclesForm savedVehiclesForm = null;
         SavedIncidentObjectivesForm savedObjectivesForm = null;
         SavedSafetyNotesForm savedSafetyNotesForm = null;
         SavedTeamMembersForm savedTeamMembersForm = null;
@@ -105,27 +177,40 @@ namespace Wildfire_ICS_Assist
         SavedTeamAssignmentsForm savedTeamAssignmentsForm = null;
 
 
-        CommunicationsListForm communicationsList = null;
-        CommunicationsPlanForm commsPlanForm = null;
-        OrganizationalChartForm orgChartForm = null;
+        CommunicationsListForm _communicationsListForm = null;
+        CommunicationsPlanForm _commsPlanForm = null;
+        OrganizationalChartForm _orgChartForm = null;
         PositionLogForm _positionLogForm = null;
         PositionLogAllOutstandingForm _positionLogAllOutstandingForm = null;
-        IncidentObjectivesForm objectivesForm = null;
-        GeneralMessagesForm generalMessagesForm = null;
-        MedicalPlanForm medicalPlanForm = null;
-        NotesForm notesForm = null;
-        SafetyMessagesForm safetyMessagesForm = null;
-        VehiclesForm vehiclesForm = null;
-        PrintIncidentForm printIAPForm = null;
-        AirOperationsForm airOperationsForm = null;
-        TeamAssignmentsForm teamAssignmentsForm = null;
-        /* Event Handlers!*/
+        IncidentObjectivesForm _objectivesForm = null;
+        GeneralMessagesForm _generalMessagesForm = null;
+        MedicalPlanForm _medicalPlanForm = null;
+        NotesForm _notesForm = null;
+        SafetyMessagesForm _safetyMessagesForm = null;
+        VehiclesForm _vehiclesForm = null;
+        PrintIncidentForm _printIAPForm = null;
+        AirOperationsForm _airOperationsForm = null;
+        TeamAssignmentsForm _teamAssignmentsForm = null;
+        PositionLogReminderForm _positionLogReminderForm = null;
+        PersonnelListForm _personnelListForm = null;
+
+
 
         public event ShortcutEventHandler ShortcutButtonClicked;
 
 
+        //Network Stuff
+        Guid NetworkTestGuidValue = Guid.Empty;
+        bool silentNetworkTest = true;
+        bool initialConnectionTest = false;
+        private bool lostConnectionShowing = false;
+        private bool networkTaskRequested = false;
+        private bool networkOptionsRequested = false;
 
-        List<CollapsiblePanel> collapsiblePanels= new List<CollapsiblePanel>();
+
+
+
+        List<CollapsiblePanel> collapsiblePanels = new List<CollapsiblePanel>();
 
 
         private void WireWFIncidentServiceEvents()
@@ -134,7 +219,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
             Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
-            Program.wfIncidentService.IncidentObjectivesSheetChanged+= Program_IncidentObjectivesSheetChanged;
+            Program.wfIncidentService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
             Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
             Program.wfIncidentService.MedicalPlanChanged += Program_MedicalPlanChanged;
             Program.wfIncidentService.MedicalAidStationChanged += Program_AidStationChanged;
@@ -143,13 +228,22 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.NoteChanged += Program_NoteChanged;
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
-            Program.wfIncidentService.CommsPlanChanged+= Program_CommsPlanChanged;
-            Program.wfIncidentService.CommsPlanItemChanged+= Program_CommsPlanItemChanged;
-            Program.wfIncidentService.AircraftChanged+= Program_AircraftChanged;
+            Program.wfIncidentService.CommsPlanChanged += Program_CommsPlanChanged;
+            Program.wfIncidentService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
+            Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
             Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
             Program.wfIncidentService.TaskBasicsChanged += Program_TaskBasicsChanged;
             Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
             Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
+
+
+            //network stuff
+            Program.networkService.localNetworkIncidentRequestEvent += answerRequestForNetworkSARTask;
+            Program.networkService.localNetworkClosedEvent += Program_LocalConnectionClosed;
+            Program.networkService.localNetworkIncomingIncidentEvent += replaceCurrentIncidentWithNetworkIncident;
+            Program.networkService.localNetworkIncomingObjectEvent += Program_HandleIncomingNetworkObject;
+            Program.wfIncidentService.TaskUpdateChanged += Program_TaskUpdateChanged;
+            Program.wfIncidentService.OpPeriodChanged += changeOpPeriod;
         }
 
 
@@ -167,7 +261,7 @@ namespace Wildfire_ICS_Assist
 
         private void setButtonCheckboxes()
         {
-            if(CurrentIncident.ActiveAssignments.Any(o=>o.OpPeriod == Program.CurrentOpPeriod)) { btnAssignmentList.Image = Properties.Resources.glyphicons_basic_739_check; teamMembersToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            if (CurrentIncident.ActiveAssignments.Any(o => o.OpPeriod == Program.CurrentOpPeriod)) { btnAssignmentList.Image = Properties.Resources.glyphicons_basic_739_check; teamMembersToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnAssignmentList.Image = null; teamMembersToolStripMenuItem.Image = null; }
 
             if (CurrentIncident.hasMeangfulCommsPlan(CurrentOpPeriod)) { btnCommsPlan.Image = Properties.Resources.glyphicons_basic_739_check; communicationsPlanICS205ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
@@ -184,7 +278,7 @@ namespace Wildfire_ICS_Assist
             else { btnIncidentObjectives.Image = null; incidentObjectivesICS202ToolStripMenuItem.Image = null; }
 
 
-            
+
             if (CurrentIncident.hasAnySafetyMessages(CurrentOpPeriod)) { btnSafetyPlans.Image = Properties.Resources.glyphicons_basic_739_check; safetyMessageICS208ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnSafetyPlans.Image = null; safetyMessageICS208ToolStripMenuItem.Image = null; }
 
@@ -220,7 +314,7 @@ namespace Wildfire_ICS_Assist
 
         private void collapseAllPanels()
         {
-            foreach(CollapsiblePanel panel in collapsiblePanels) { panel.Collapse(); }
+            foreach (CollapsiblePanel panel in collapsiblePanels) { panel.Collapse(); }
         }
 
         private void llProgramURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -505,10 +599,10 @@ namespace Wildfire_ICS_Assist
             ICSRole role = Program.CurrentRole.Clone();
 
             cboICSRole.DataSource = null;
-            cboICSRole.DataSource = CurrentOrgChart.AllRoles;
+            cboICSRole.DataSource = CurrentOrgChart.ActiveRoles;
             cboICSRole.DisplayMember = "RoleNameForDropdown";
             cboICSRole.ValueMember = "RoleID";
-            if (role != null && CurrentOrgChart.AllRoles.Any(o=>o.RoleID == role.RoleID)) { cboICSRole.SelectedValue = role.RoleID; }
+            if (role != null && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == role.RoleID)) { cboICSRole.SelectedValue = role.RoleID; }
 
         }
 
@@ -523,10 +617,11 @@ namespace Wildfire_ICS_Assist
             else { txtICPCallsign.Text = "BASE"; CurrentIncident.ICPCallSign = txtICPCallsign.Text; }
             txtTaskName.Text = CurrentIncident.TaskName;
             txtTaskNumber.Text = CurrentIncident.TaskNumber;
-            if (CurrentOrgChart.AllRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID))
+            if (CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID))
             {
                 cboICSRole.SelectedValue = Program.CurrentRole.RoleID; DisplayCurrentICSRole();
-            } else { cboICSRole.SelectedIndex = 0; }
+            }
+            else { cboICSRole.SelectedIndex = 0; }
 
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { this.Text = Globals.ProgramName + " - " + CurrentIncident.FileName; }
             else { this.Text = Globals.ProgramName; }
@@ -540,6 +635,9 @@ namespace Wildfire_ICS_Assist
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { tmrAutoSave.Enabled = Program.generalOptionsService.GetOptionsBoolValue("AutoSave"); }
             setButtonCheckboxes();
             browseToIncidentFolderToolStripMenuItem.Enabled = true;
+
+            List<TeamMember> savedMembers = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            Program.CurrentIncident.TaskTeamMembers = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
         }
 
         private void DisplayCurrentICSRole()
@@ -547,12 +645,12 @@ namespace Wildfire_ICS_Assist
             if (Program.CurrentRole != null)
             {
                 List<Guid> ChiefIDs = new List<Guid>();
-                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID);ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
+                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID); ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
                 List<Guid> ICRoles = new List<Guid>();
                 ICRoles.Add(Globals.IncidentCommanderID); ICRoles.Add(Globals.DeputyIncidentCommanderID); ICRoles.Add(Globals.UnifiedCommand1ID); ICRoles.Add(Globals.UnifiedCommand2ID); ICRoles.Add(Globals.UnifiedCommand3ID);
 
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                foreach(ICSRole role in CurrentOrgChart.AllRoles.Where(o=>o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
+                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
                 {
                     CommandStaffRoles.Add(role.RoleID);
                 }
@@ -581,12 +679,12 @@ namespace Wildfire_ICS_Assist
                 {
                     pnlTaskInfo.BackColor = Color.CornflowerBlue;
                     cpPlanning.Expand();
-/*
-                    pnlIAP.BackColor = Color.CornflowerBlue;
-                    pnlCommandTeam.BackColor = Color.CornflowerBlue;
-                    pnlPlanning.BackColor = Color.CornflowerBlue;
-                    tcStatus.SelectedIndex = 1;
-                    resizeGroup("Planning", false, true);*/
+                    /*
+                                        pnlIAP.BackColor = Color.CornflowerBlue;
+                                        pnlCommandTeam.BackColor = Color.CornflowerBlue;
+                                        pnlPlanning.BackColor = Color.CornflowerBlue;
+                                        tcStatus.SelectedIndex = 1;
+                                        resizeGroup("Planning", false, true);*/
 
                 }
                 else if (Program.CurrentRole.BranchID == Globals.LogisticsChiefID)
@@ -641,7 +739,7 @@ namespace Wildfire_ICS_Assist
 
         private void Program_OperationalPeriodChanged(OperationalPeriodEventArgs e)
         {
-            if(e.item.PeriodNumber == Program.CurrentOpPeriod)
+            if (e.item.PeriodNumber == Program.CurrentOpPeriod)
             {
                 datOpsStart.Value = e.item.PeriodStart;
                 datOpsEnd.Value = e.item.PeriodEnd;
@@ -661,7 +759,7 @@ namespace Wildfire_ICS_Assist
 
         private void Program_CommsPlanChanged(CommsPlanEventArgs e)
         {
-            if(e.item.OpsPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            if (e.item.OpsPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
             TriggerAutoSave();
         }
 
@@ -794,7 +892,7 @@ namespace Wildfire_ICS_Assist
             if (period != null) { Program.wfIncidentService.UpsertOperationalPeriod(period); }
 
             CurrentIncident.createOrgChartAsNeeded(period.PeriodNumber);
-            
+
 
             if (Program.generalOptionsService.GetGuidOptionValue("OrganizationID") != Guid.Empty) { CurrentIncident.OrganizationID = Program.generalOptionsService.GetGuidOptionValue("OrganizationID"); }
             CurrentIncident.ICPCallSign = txtICPCallsign.Text;
@@ -858,6 +956,7 @@ namespace Wildfire_ICS_Assist
                         if (!CurrentIncident.AllOperationalPeriods.Any()) { CurrentIncident.AllOperationalPeriods = CurrentIncident.InferOperationalPeriods(); }
 
                         LastAutoBackup = DateTime.Now;
+                        Program.networkService.CurrentIncidentID = Program.CurrentIncident.TaskID;
                         displayIncidentDetails();
 
                         //setSavedFlag(true);
@@ -1114,7 +1213,7 @@ namespace Wildfire_ICS_Assist
 
         private void txtTaskNumber_Validating(object sender, CancelEventArgs e)
         {
-            if(initialDetailsSet(false, false) && !askedForInitialSave && !ThisMachineIsClient && Program.generalOptionsService.GetOptionsBoolValue("PromptForInitialSave"))
+            if (initialDetailsSet(false, false) && !askedForInitialSave && !ThisMachineIsClient && Program.generalOptionsService.GetOptionsBoolValue("PromptForInitialSave"))
             {
                 askedForInitialSave = true;
                 DialogResult result = MessageBox.Show("Would you like to save this task now? (you can always select File > Save As... in the future)", "Save Task", MessageBoxButtons.YesNo);
@@ -1140,25 +1239,25 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (null == communicationsList)
+                if (null == _communicationsListForm)
                 {
-                    communicationsList = new CommunicationsListForm();
-                    communicationsList.FormClosed += CommunicationsListForm_Closed;
-                    communicationsList.Show(this);
-                    ActiveForms.Add(communicationsList);
+                    _communicationsListForm = new CommunicationsListForm();
+                    _communicationsListForm.FormClosed += CommunicationsListForm_Closed;
+                    _communicationsListForm.Show(this);
+                    ActiveForms.Add(_communicationsListForm);
                 }
 
-                communicationsList.BringToFront();
+                _communicationsListForm.BringToFront();
             }
 
-           
-        
+
+
         }
         void CommunicationsListForm_Closed(object sender, FormClosedEventArgs e)
         {
-           
-            RemoveActiveForm(communicationsList);
-            communicationsList = null;
+
+            RemoveActiveForm(_communicationsListForm);
+            _communicationsListForm = null;
 
         }
 
@@ -1186,15 +1285,15 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (null == orgChartForm)
+                if (null == _orgChartForm)
                 {
-                    orgChartForm = new OrganizationalChartForm();
-                    orgChartForm.FormClosed += OrganizationChartForm_Closed;
-                    orgChartForm.Show(this);
-                    ActiveForms.Add(orgChartForm);
+                    _orgChartForm = new OrganizationalChartForm();
+                    _orgChartForm.FormClosed += OrganizationChartForm_Closed;
+                    _orgChartForm.Show(this);
+                    ActiveForms.Add(_orgChartForm);
                 }
 
-                orgChartForm.BringToFront();
+                _orgChartForm.BringToFront();
             }
 
 
@@ -1203,8 +1302,8 @@ namespace Wildfire_ICS_Assist
         void OrganizationChartForm_Closed(object sender, FormClosedEventArgs e)
         {
 
-            RemoveActiveForm(orgChartForm);
-            orgChartForm = null;
+            RemoveActiveForm(_orgChartForm);
+            _orgChartForm = null;
 
         }
 
@@ -1219,15 +1318,15 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (null == commsPlanForm)
+                if (null == _commsPlanForm)
                 {
-                    commsPlanForm = new CommunicationsPlanForm();
-                    commsPlanForm.FormClosed += CommunicationsPlanForm_Closed;
-                    commsPlanForm.Show(this);
-                    ActiveForms.Add(commsPlanForm);
+                    _commsPlanForm = new CommunicationsPlanForm();
+                    _commsPlanForm.FormClosed += CommunicationsPlanForm_Closed;
+                    _commsPlanForm.Show(this);
+                    ActiveForms.Add(_commsPlanForm);
                 }
 
-                commsPlanForm.BringToFront();
+                _commsPlanForm.BringToFront();
             }
 
 
@@ -1236,8 +1335,8 @@ namespace Wildfire_ICS_Assist
         void CommunicationsPlanForm_Closed(object sender, FormClosedEventArgs e)
         {
 
-            RemoveActiveForm(commsPlanForm);
-            commsPlanForm = null;
+            RemoveActiveForm(_commsPlanForm);
+            _commsPlanForm = null;
 
         }
 
@@ -1345,7 +1444,7 @@ namespace Wildfire_ICS_Assist
             using (OptionsForm editOptions = new OptionsForm())
             {
                 DialogResult result = editOptions.ShowDialog();
-                
+
             }
         }
 
@@ -1368,21 +1467,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (objectivesForm == null)
+                if (_objectivesForm == null)
                 {
-                    objectivesForm = new IncidentObjectivesForm();
-                    objectivesForm.FormClosed += new FormClosedEventHandler(IncidentObjectivesForm_Closed);
-                    ActiveForms.Add(objectivesForm);
-                    objectivesForm.Show(this);
+                    _objectivesForm = new IncidentObjectivesForm();
+                    _objectivesForm.FormClosed += new FormClosedEventHandler(IncidentObjectivesForm_Closed);
+                    ActiveForms.Add(_objectivesForm);
+                    _objectivesForm.Show(this);
                 }
 
-                objectivesForm.BringToFront();
+                _objectivesForm.BringToFront();
             }
         }
         void IncidentObjectivesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(objectivesForm);
-            objectivesForm = null;
+            RemoveActiveForm(_objectivesForm);
+            _objectivesForm = null;
 
 
         }
@@ -1403,7 +1502,7 @@ namespace Wildfire_ICS_Assist
 
         private void Program_MedicalPlanChanged(MedicalPlanEventArgs e)
         {
-            if(e.item.OpPeriod == Program.CurrentOpPeriod)
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
                 setButtonCheckboxes();
             }
@@ -1488,21 +1587,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (generalMessagesForm == null)
+                if (_generalMessagesForm == null)
                 {
-                    generalMessagesForm = new GeneralMessagesForm();
-                    generalMessagesForm.FormClosed += new FormClosedEventHandler(GeneralMessagesForm_Closed);
-                    ActiveForms.Add(generalMessagesForm);
-                    generalMessagesForm.Show(this);
+                    _generalMessagesForm = new GeneralMessagesForm();
+                    _generalMessagesForm.FormClosed += new FormClosedEventHandler(GeneralMessagesForm_Closed);
+                    ActiveForms.Add(_generalMessagesForm);
+                    _generalMessagesForm.Show(this);
                 }
 
-                generalMessagesForm.BringToFront();
+                _generalMessagesForm.BringToFront();
             }
         }
         void GeneralMessagesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(generalMessagesForm);
-            generalMessagesForm = null;
+            RemoveActiveForm(_generalMessagesForm);
+            _generalMessagesForm = null;
 
 
         }
@@ -1533,21 +1632,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (medicalPlanForm == null)
+                if (_medicalPlanForm == null)
                 {
-                    medicalPlanForm = new MedicalPlanForm();
-                    medicalPlanForm.FormClosed += new FormClosedEventHandler(MedicalPlanForm_Closed);
-                    ActiveForms.Add(medicalPlanForm);
-                    medicalPlanForm.Show(this);
+                    _medicalPlanForm = new MedicalPlanForm();
+                    _medicalPlanForm.FormClosed += new FormClosedEventHandler(MedicalPlanForm_Closed);
+                    ActiveForms.Add(_medicalPlanForm);
+                    _medicalPlanForm.Show(this);
                 }
 
-                medicalPlanForm.BringToFront();
+                _medicalPlanForm.BringToFront();
             }
         }
         void MedicalPlanForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(medicalPlanForm);
-            medicalPlanForm = null;
+            RemoveActiveForm(_medicalPlanForm);
+            _medicalPlanForm = null;
 
 
         }
@@ -1561,21 +1660,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (notesForm == null)
+                if (_notesForm == null)
                 {
-                    notesForm = new NotesForm();
-                    notesForm.FormClosed += new FormClosedEventHandler(NotesForm_Closed);
-                    ActiveForms.Add(notesForm);
-                    notesForm.Show(this);
+                    _notesForm = new NotesForm();
+                    _notesForm.FormClosed += new FormClosedEventHandler(NotesForm_Closed);
+                    ActiveForms.Add(_notesForm);
+                    _notesForm.Show(this);
                 }
 
-                notesForm.BringToFront();
+                _notesForm.BringToFront();
             }
         }
         void NotesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(notesForm);
-            notesForm = null;
+            RemoveActiveForm(_notesForm);
+            _notesForm = null;
 
 
         }
@@ -1594,21 +1693,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (safetyMessagesForm == null)
+                if (_safetyMessagesForm == null)
                 {
-                    safetyMessagesForm = new SafetyMessagesForm();
-                    safetyMessagesForm.FormClosed += new FormClosedEventHandler(SafetyMessagesForm_Closed);
-                    ActiveForms.Add(safetyMessagesForm);
-                    safetyMessagesForm.Show(this);
+                    _safetyMessagesForm = new SafetyMessagesForm();
+                    _safetyMessagesForm.FormClosed += new FormClosedEventHandler(SafetyMessagesForm_Closed);
+                    ActiveForms.Add(_safetyMessagesForm);
+                    _safetyMessagesForm.Show(this);
                 }
 
-                safetyMessagesForm.BringToFront();
+                _safetyMessagesForm.BringToFront();
             }
         }
         void SafetyMessagesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(safetyMessagesForm);
-            safetyMessagesForm = null;
+            RemoveActiveForm(_safetyMessagesForm);
+            _safetyMessagesForm = null;
 
 
         }
@@ -1622,21 +1721,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (vehiclesForm == null)
+                if (_vehiclesForm == null)
                 {
-                    vehiclesForm = new VehiclesForm();
-                    vehiclesForm.FormClosed += new FormClosedEventHandler(VehiclesForm_Closed);
-                    ActiveForms.Add(vehiclesForm);
-                    vehiclesForm.Show(this);
+                    _vehiclesForm = new VehiclesForm();
+                    _vehiclesForm.FormClosed += new FormClosedEventHandler(VehiclesForm_Closed);
+                    ActiveForms.Add(_vehiclesForm);
+                    _vehiclesForm.Show(this);
                 }
 
-                vehiclesForm.BringToFront();
+                _vehiclesForm.BringToFront();
             }
         }
         void VehiclesForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(vehiclesForm);
-            vehiclesForm = null;
+            RemoveActiveForm(_vehiclesForm);
+            _vehiclesForm = null;
 
 
         }
@@ -1650,41 +1749,41 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (printIAPForm == null)
+                if (_printIAPForm == null)
                 {
-                    printIAPForm = new PrintIncidentForm();
-                    printIAPForm.PrintIAPByDefault = DefaultJustIAP;
-                    printIAPForm.PrintIncidentToDate = PrintCompleteIncident;
-                    printIAPForm.FormClosed += new FormClosedEventHandler(PrintIAPForm_Closed);
-                    ActiveForms.Add(printIAPForm);
-                    printIAPForm.Show(this);
+                    _printIAPForm = new PrintIncidentForm();
+                    _printIAPForm.PrintIAPByDefault = DefaultJustIAP;
+                    _printIAPForm.PrintIncidentToDate = PrintCompleteIncident;
+                    _printIAPForm.FormClosed += new FormClosedEventHandler(PrintIAPForm_Closed);
+                    ActiveForms.Add(_printIAPForm);
+                    _printIAPForm.Show(this);
                 }
 
-                printIAPForm.BringToFront();
+                _printIAPForm.BringToFront();
             }
         }
         void PrintIAPForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(printIAPForm);
-            printIAPForm = null;
+            RemoveActiveForm(_printIAPForm);
+            _printIAPForm = null;
 
 
         }
 
 
-            private void OpenSavedAircraftForm()
+        private void OpenSavedAircraftForm()
         {
-           
-                if (savedAircraftForm == null)
-                {
-                    savedAircraftForm = new SavedAircraftsForm();
-                    savedAircraftForm.FormClosed += new FormClosedEventHandler(SavedAircraftForm_Closed);
-                    ActiveForms.Add(savedAircraftForm);
-                    savedAircraftForm.Show(this);
-                }
 
-                savedAircraftForm.BringToFront();
-            
+            if (savedAircraftForm == null)
+            {
+                savedAircraftForm = new SavedAircraftsForm();
+                savedAircraftForm.FormClosed += new FormClosedEventHandler(SavedAircraftForm_Closed);
+                ActiveForms.Add(savedAircraftForm);
+                savedAircraftForm.Show(this);
+            }
+
+            savedAircraftForm.BringToFront();
+
         }
         void SavedAircraftForm_Closed(object sender, FormClosedEventArgs e)
         {
@@ -1734,21 +1833,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (airOperationsForm == null)
+                if (_airOperationsForm == null)
                 {
-                    airOperationsForm = new AirOperationsForm();
-                    airOperationsForm.FormClosed += new FormClosedEventHandler(AirOpsSummaryForm_Closed);
-                    ActiveForms.Add(airOperationsForm);
-                    airOperationsForm.Show(this);
+                    _airOperationsForm = new AirOperationsForm();
+                    _airOperationsForm.FormClosed += new FormClosedEventHandler(AirOpsSummaryForm_Closed);
+                    ActiveForms.Add(_airOperationsForm);
+                    _airOperationsForm.Show(this);
                 }
 
-                airOperationsForm.BringToFront();
+                _airOperationsForm.BringToFront();
             }
         }
         void AirOpsSummaryForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(airOperationsForm);
-            airOperationsForm = null;
+            RemoveActiveForm(_airOperationsForm);
+            _airOperationsForm = null;
 
 
         }
@@ -1807,21 +1906,21 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                if (teamAssignmentsForm == null)
+                if (_teamAssignmentsForm == null)
                 {
-                    teamAssignmentsForm = new TeamAssignmentsForm();
-                    teamAssignmentsForm.FormClosed += new FormClosedEventHandler(TeamAssignmentsForm_Closed);
-                    ActiveForms.Add(teamAssignmentsForm);
-                    teamAssignmentsForm.Show(this);
+                    _teamAssignmentsForm = new TeamAssignmentsForm();
+                    _teamAssignmentsForm.FormClosed += new FormClosedEventHandler(TeamAssignmentsForm_Closed);
+                    ActiveForms.Add(_teamAssignmentsForm);
+                    _teamAssignmentsForm.Show(this);
                 }
 
-                teamAssignmentsForm.BringToFront();
+                _teamAssignmentsForm.BringToFront();
             }
         }
         void TeamAssignmentsForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(teamAssignmentsForm);
-            teamAssignmentsForm = null;
+            RemoveActiveForm(_teamAssignmentsForm);
+            _teamAssignmentsForm = null;
 
 
         }
@@ -1844,17 +1943,17 @@ namespace Wildfire_ICS_Assist
 
         private void OpenSavedTeamAssignmentsForm()
         {
-          
-                if (savedTeamAssignmentsForm == null)
-                {
-                    savedTeamAssignmentsForm = new SavedTeamAssignmentsForm();
-                    savedTeamAssignmentsForm.FormClosed += new FormClosedEventHandler(SavedTeamAssignmentsForm_Closed);
-                    ActiveForms.Add(savedTeamAssignmentsForm);
-                    savedTeamAssignmentsForm.Show(this);
-                }
 
-                savedTeamAssignmentsForm.BringToFront();
-            
+            if (savedTeamAssignmentsForm == null)
+            {
+                savedTeamAssignmentsForm = new SavedTeamAssignmentsForm();
+                savedTeamAssignmentsForm.FormClosed += new FormClosedEventHandler(SavedTeamAssignmentsForm_Closed);
+                ActiveForms.Add(savedTeamAssignmentsForm);
+                savedTeamAssignmentsForm.Show(this);
+            }
+
+            savedTeamAssignmentsForm.BringToFront();
+
         }
         void SavedTeamAssignmentsForm_Closed(object sender, FormClosedEventArgs e)
         {
@@ -1863,5 +1962,772 @@ namespace Wildfire_ICS_Assist
 
 
         }
+
+        private void tmrAutoSave_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tmrPositionLogReminders_Tick(object sender, EventArgs e)
+        {
+            List<PositionLogEntry> Reminders = Program.CurrentTask.allPositionLogEntries.Where(o => o != null && o.Role.RoleID == Program.CurrentRole.RoleID && o.OpPeriod == CurrentOpPeriod && !o.IsInfoOnly && !o.IsComplete && o.ReminderTime > DateTime.MinValue && o.ReminderTime < DateTime.MaxValue).ToList();
+            if (Reminders.Any())
+            {
+                DateTime now = DateTime.Now;
+                Reminders = Reminders.Where(o => o.ReminderTime < now).ToList();
+                if (Reminders.Any())
+                {
+                    ShowPositionLogReminder(Reminders[0]);
+                    tmrPositionLogReminders.Enabled = false;
+                }
+            }
+
+        }
+
+        private void ShowPositionLogReminder(PositionLogEntry entry)
+        {
+
+            if (_positionLogReminderForm == null)
+            {
+                _positionLogReminderForm = new PositionLogReminderForm();
+                _positionLogReminderForm.Entry = entry;
+                _positionLogReminderForm.FormClosed += new FormClosedEventHandler(PositionLogReminderForm_Closed);
+                ActiveForms.Add(_positionLogReminderForm);
+                _positionLogReminderForm.ShowDialog(this);
+            }
+
+            // _positionLogReminderForm.BringToFront();
+
+        }
+
+        void PositionLogReminderForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_positionLogReminderForm);
+            _positionLogReminderForm = null;
+            CheckForPositionLogReminders();
+
+
+        }
+
+
+        private async void Program_TaskUpdateChanged(TaskUpdateEventArgs e)
+        {
+            Program.wfIncidentService.ProcessTaskUpdate(e.item);
+            if (Program.InternetSyncEnabled && !e.item.UploadedSuccessfully)
+            {
+
+                e.item.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(e.item);
+
+            }
+            if (Program.networkService.ThisMachineIsServer || Program.networkService.ThisMachineIsClient)
+            {
+                if (!e.item.Source.EqualsWithNull("Network"))
+                {
+                    Program.networkService.SendNetworkObject(e.item, CurrentIncident.TaskID);
+                }
+
+            }
+        }
+
+
+
+        private async void tmrInternetSync_Tick(object sender, EventArgs e)
+        {
+            if (PingTool.TestPing())
+            {
+                tmrInternetSync.Enabled = false;
+                var send = SendPendingInternetUpdates();
+                var get = GetPendingInternetUpdates();
+
+                await Task.WhenAll(send, get);
+                tmrInternetSync.Enabled = true;
+            }
+        }
+
+        private async Task<bool> SendPendingInternetUpdates()
+        {
+            List<TaskUpdate> pendingUpdates = CurrentIncident.allTaskUpdates.Where(o => !o.UploadedSuccessfully).ToList();
+            foreach (TaskUpdate update in pendingUpdates)
+            {
+
+                update.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(update);
+
+                addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Uploaded a pending change to a(n) " + update.ObjectType + Environment.NewLine);
+
+
+            }
+            return true;
+        }
+
+        private async Task<bool> GetPendingInternetUpdates()
+        {
+            TaskUpdateService service = new TaskUpdateService();
+            Task<List<TaskUpdate>> internetUpdates = service.DownloadTaskUpdateDetails(CurrentIncident.TaskID, Program.MachineID, DateTime.MinValue);
+            List<TaskUpdate> updates = await internetUpdates;
+
+            foreach (TaskUpdate update in updates)
+            {
+                update.UploadedSuccessfully = true;
+                update.Source = "Internet";
+                //Program.sarTaskService.ProcessTaskUpdate(update);
+                Program.wfIncidentService.InsertIfUniqueTaskUpdate(update);
+
+            }
+
+            while (CurrentIncident.allTaskUpdates.Any(o => !o.ProcessedLocally))
+            {
+
+                TaskUpdate firstUnprocessed = CurrentIncident.allTaskUpdates.First(o => !o.ProcessedLocally);
+                addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Received a change to a(n) " + firstUnprocessed.ObjectType + Environment.NewLine);
+                Program.wfIncidentService.ApplyTaskUpdate(firstUnprocessed, true);
+                if (Program.networkService.ThisMachineIsClient || Program.networkService.ThisMachineIsServer)
+                {
+                    Program.networkService.SendNetworkObject(firstUnprocessed, CurrentIncident.TaskID, null, null, null, true);
+                }
+            }
+
+
+            return true;
+
+        }
+
+
+
+        private void setServerStatusDisplay()
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                StringBuilder serverStatusText = new StringBuilder();
+
+                if (Program.InternetSyncEnabled)
+                {
+                    serverStatusText.Append("Internet Sync Enabled | ");
+                    tmrInternetSync.Enabled = true;
+                }
+
+                if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && ThisMachineIsServer)
+                {
+                    serverStatusText.Append("This computer is acting as a local network server. IP: "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
+                    requestIncidentFromServerToolStripMenuItem.Enabled = false;
+                    //downloadMembersFromServerToolStripMenuItem.Enabled = false;
+                    requestOptionsFromServerToolStripMenuItem.Enabled = false;
+                    networkTestToolStripMenuItem.Enabled = false;
+
+                }
+                else if (ThisMachineIsClient)
+                {
+                    serverStatusText.Append("Connected to "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
+                    requestIncidentFromServerToolStripMenuItem.Enabled = true;
+                    ///downloadMembersFromServerToolStripMenuItem.Enabled = true;
+                    requestOptionsFromServerToolStripMenuItem.Enabled = true;
+                    networkTestToolStripMenuItem.Enabled = true;
+
+                }
+                else
+                {
+                    serverStatusText.Append("Not connected to another local computer");
+                    requestIncidentFromServerToolStripMenuItem.Enabled = false;
+                    networkTestToolStripMenuItem.Enabled = false;
+                    requestOptionsFromServerToolStripMenuItem.Enabled = false;
+                    // downloadMembersFromServerToolStripMenuItem.Enabled = false;
+
+                }
+
+                lblServerStatus.Text = serverStatusText.ToString();
+            });
+        }
+        public void addToNetworkLog(string item)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                txtNetworkLog.AppendText(item);
+            });
+        }
+
+
+
+        private void tmrNetwork_Tick(object sender, EventArgs e)
+        {
+            if (initialConnectionTest)
+            {
+                lblNetworkSyncStatus.Text = "FAILED - could not make a connection.  Please verify the IP and port and try again.";
+                lblNetworkShareMoreInfoMsg.Text = "If it still isn't working, please investigate any firewalls that may be blocking the connection.";
+                lblNetworkShareMoreInfoMsg.Visible = true;
+                btnNetworkSyncDone.Visible = true;
+                btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
+                ThisMachineIsClient = false;
+                ThisMachineIsServer = false;
+                ThisMachineStandAlone = true;
+                lostConnectionShowing = false;
+                setServerStatusDisplay();
+            }
+        }
+
+
+        public void sendTestConnection(string ip = null, string port = null)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                silentNetworkTest = false;
+                pnlNetworkSyncInProgress.Visible = true;
+                pnlNetworkSyncInProgress.BringToFront();
+                btnNetworkSyncDone.Visible = false;
+                btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
+
+
+
+                /*
+                pnlNetworkSyncInProgress.Location = new Point(0, 0);
+                pnlNetworkSyncInProgress.Height = this.Height;
+                pnlNetworkSyncInProgress.Width = this.Width;
+                */
+
+
+                pnlNetworkSyncInProgress.Dock = DockStyle.Fill;
+                pnlNetworkSyncInProgress.BringToFront();
+                lblNetworkSyncStatus.Text = "Beginning Network Status Check";
+                lblNetworkShareMoreInfoMsg.Visible = false;
+                pbNetworkSyncInProgress.Value = 1;
+                NetworkTestGuidValue = Program.networkService.sendTestConnection(CurrentIncident.TaskID, ip, port);
+
+                if (initialConnectionTest)
+                {
+                    tmrNetwork.Enabled = true;
+                }
+            });
+        }
+
+
+
+
+        private void replyToTestConnection(NetworkSendObject incomingMessage)
+        {
+            if (ThisMachineIsServer)
+            {
+                //MessageBox.Show("Test connection from " + incomingMessage.SourceIdentifier + " received, sending reply");
+                Program.networkService.SendNetworkObject(incomingMessage.GuidValue, CurrentIncident.TaskID, "success");
+            }
+        }
+
+
+
+        private void networkTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            initialConnectionTest = false;
+            silentNetworkTest = false;
+            sendTestConnection();
+        }
+
+        private void btnCloseNetworkSyncInProgress_Click(object sender, EventArgs e)
+        {
+            pnlNetworkSyncInProgress.Visible = false;
+            ThisMachineIsClient = false;
+            ThisMachineIsServer = false;
+            ThisMachineStandAlone = true;
+            lostConnectionShowing = false;
+            setServerStatusDisplay();
+        }
+
+        private void btnNetworkSyncDone_Click(object sender, EventArgs e)
+        {
+            pnlNetworkSyncInProgress.Visible = false;
+
+        }
+
+        private void Program_HandleIncomingNetworkObject(NetworkSendObject incomingMessage)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                string taskUpdateName = new TaskUpdate().GetType().ToString();
+                if (incomingMessage.objectType == taskUpdateName)
+                {
+                    this.BeginInvoke((Action)delegate ()
+                    {
+                        Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
+                    });
+                }
+
+                else if (incomingMessage.objectType == new GeneralOptions().GetType().ToString())
+                {
+                    replaceOptionsFromNetwork(incomingMessage.generalOptions);
+                }
+                else if (incomingMessage.objectType == Guid.Empty.GetType().ToString())
+                {
+                    if (incomingMessage.comment == "test" && ThisMachineIsServer)
+                    {
+                        replyToTestConnection(incomingMessage);
+                    }
+                    else if (incomingMessage.comment == "success" && NetworkTestGuidValue != Guid.Empty)
+                    {
+                        receiveTestConnectionResult(incomingMessage);
+                    }
+                }
+            });
+        }
+
+        private void replaceOptionsFromNetwork(GeneralOptions options)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                if (networkOptionsRequested)
+                {
+                    networkOptionsRequested = false;
+                    GeneralOptions currentOptions = Program.generalOptionsService.GetGeneralOptions();
+                    string baseFileName = "myCIAPPOptions" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm");
+                    int i = 0;
+                    string backupFileName = baseFileName + ".xml";
+                    string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPPO");
+                    while (File.Exists(Path.Combine(path, backupFileName)))
+                    {
+                        i += 1;
+                        backupFileName = baseFileName + " (" + i + ").xml";
+                    }
+
+                    Program.generalOptionsService.SaveGeneralOptions(currentOptions, backupFileName);
+                    //maintain some of the options from the current system.
+                    options.DefaultToServer = false;
+                    options.LastServerIP = currentOptions.LastServerIP;
+                    options.RecentFilePaths = currentOptions.RecentFilePaths;
+                    options.DefaultSaveLocation = currentOptions.DefaultSaveLocation;
+                    options.DefaultICSRole = currentOptions.DefaultICSRole;
+
+                    Program.generalOptionsService.SaveGeneralOptions(options);
+                    MessageBox.Show("Your options have been replaced with the options from the server.  A backup copy of your previous options has been saved as " + backupFileName);
+
+                }
+            });
+        }
+
+        private void receiveTestConnectionResult(NetworkSendObject incomingMessage)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+
+
+                if (incomingMessage.GuidValue == NetworkTestGuidValue && NetworkTestGuidValue != Guid.Empty)
+                {
+                    if (initialConnectionTest)
+                    {
+                        tmrNetwork.Enabled = false;
+                    }
+
+                    lblNetworkSyncStatus.Text = "Network Satus Check Successful, Requesting Task";
+                    lblNetworkShareMoreInfoMsg.Text = "Someone on the main computer may need to press \"Yes\" to share the task. If this takes too long, go ask them.";
+                    lblNetworkShareMoreInfoMsg.Visible = true;
+                    pbNetworkSyncInProgress.Value = 2;
+
+                    if (!silentNetworkTest && !initialConnectionTest) { MessageBox.Show("Connected successfully to host"); }
+                    else if (initialConnectionTest)
+                    {
+                        //if (MessageBox.Show("Connected successfully!\r\n\r\nWould you like to download the current task from the server? This will replace whatever you have open now.", "Download server task?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        // {
+                        networkTaskRequested = true;
+                        NetworkSARTaskRequest request = new NetworkSARTaskRequest();
+                        request.RequestDate = DateTime.Now;
+                        request.SourceName = HostInfo.HostName;
+                        request.SourceIdentifier = NetworkComms.NetworkIdentifier;
+                        request.RequestIP = Program.networkService.GetLocalIPAddress();
+                        Program.networkService.SendNetworkSarTaskRequest(request);
+
+                        //  }
+                        /*
+                          else
+                          {
+                              MessageBox.Show("You can request the current server task from the Network menu later.");
+                          }*/
+                    }
+                    silentNetworkTest = true;
+                    NetworkTestGuidValue = Guid.Empty;
+                    initialConnectionTest = false;
+                }
+            });
+        }
+
+        private void Program_LocalConnectionClosed(Connection connection)
+        {
+            if (ThisMachineIsClient && !formIsClosing)
+            {
+                DateTime today = DateTime.Now;
+                tmrNetwork.Enabled = false;
+
+                addToNetworkLog(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " - handling a closed connection" + "\r\n");
+                if (!lostConnectionShowing && !initialConnectionTest)
+                {
+                    lostConnectionShowing = true;
+                    DialogResult dr = MessageBox.Show("You have lost your connection to the server.  Would you like to try to reconnect?", "Connection Lost", MessageBoxButtons.YesNo);
+
+                    if (dr == DialogResult.Yes)
+                    {
+                        RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, encryptionKey);
+                        if (!NetworkComms.DefaultSendReceiveOptions.DataProcessors.Contains(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()))
+                        {
+                            NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
+                        }
+                        initialConnectionTest = false;
+                        silentNetworkTest = false;
+                        lostConnectionShowing = false;
+                        sendTestConnection();
+                    }
+                    else
+                    {
+                        ThisMachineIsClient = false;
+                        ThisMachineIsServer = false;
+                        ThisMachineStandAlone = true;
+                        lostConnectionShowing = false;
+                        setServerStatusDisplay();
+                    }
+                }
+            }
+        }
+
+        private void replaceCurrentIncidentWithNetworkIncident(WFIncident task)
+        {
+            if (networkTaskRequested)
+            {
+                this.BeginInvoke((Action)delegate ()
+                {
+                    PauseNetworkSend = true;
+
+                    lblNetworkSyncStatus.Text = "Incoming Incident received, loading now";
+                    lblNetworkShareMoreInfoMsg.Visible = false;
+
+                    pbNetworkSyncInProgress.Value = 3;
+
+                    if (CurrentIncident.TaskID != task.TaskID)
+                    {
+                        task.FileName = string.Empty;
+                    }
+                    else
+                    {
+                        task.FileName = CurrentIncident.FileName;
+                    }
+                    CloseActiveForms();
+                    CurrentIncident = task;
+
+                    displayIncidentDetails();
+                    networkTaskRequested = false;
+                    DateTime today = DateTime.Now;
+                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received full incident " + task.IncidentIdentifier + "\r\n");
+
+                    if (pnlNetworkSyncInProgress.Visible)
+                    {
+                        pnlNetworkSyncInProgress.BringToFront();
+                        lblNetworkSyncStatus.Text = "Incident loaded successfully from the network!";
+                        pbNetworkSyncInProgress.Value = 4;
+
+                        btnNetworkSyncDone.Visible = true;
+                        btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
+                    }
+                    else { pnlNetworkSyncInProgress.BringToFront(); MessageBox.Show("Netowrk incident downloaded successfully!"); }
+                    //pnlNetworkSyncInProgress.Visible = false;
+                    PauseNetworkSend = false;
+                    //MessageBox.Show("Task loaded from server");
+                });
+
+            }
+        }
+
+
+
+        private void answerRequestForNetworkSARTask(NetworkSARTaskRequest incomingMessage)
+        {
+            if (ThisMachineIsServer)
+            {
+                this.BeginInvoke((Action)delegate ()
+                {
+                    //MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+
+
+                    DateTime today = DateTime.Now;
+                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received a request for the current incident" + "\r\n");
+                    DeviceInformation requester = new DeviceInformation();
+                    requester.DeviceIP = incomingMessage.RequestIP;
+                    requester.DeviceName = incomingMessage.SourceName;
+                    List<DeviceInformation> savedNetworkDevices = (List<DeviceInformation>)Program.generalOptionsService.GetOptionsValue("SavedNetworkDeviceList");
+
+                    //if the device appears in the list of trusted devices, send automatically
+                    if (!string.IsNullOrEmpty(requester.DeviceIP) && !string.IsNullOrEmpty(requester.DeviceName) && savedNetworkDevices.Where(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && o.TrustDevice).Any())
+                    {
+
+                        Program.networkService.SendTaskData(CurrentIncident);
+                        today = DateTime.Now;
+                        addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current incident to trusted device " + requester.DeviceIP + "\r\n");
+                    }
+                    else
+                    {
+                        //otherwise prompt the user
+
+
+                        using (AuthorizeNetworkIncidentRequestForm handleRequest = new AuthorizeNetworkIncidentRequestForm())
+                        {
+                            //handleRequest.parent = this;
+                            handleRequest.Owner = this;
+                            handleRequest.StartPosition = FormStartPosition.CenterParent;
+                            handleRequest.incomingMessage = incomingMessage;
+
+                            //MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+
+                            handleRequest.Activate();
+
+                            DialogResult result = handleRequest.ShowDialog();
+
+                            if (result == DialogResult.Yes)
+                            {
+                                if (handleRequest.TrustDevice)
+                                {
+
+                                    if (savedNetworkDevices.Any(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && !o.TrustDevice))
+                                    {
+                                        DeviceInformation info = savedNetworkDevices.First(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && !o.TrustDevice);
+                                        info.TrustDevice = true;
+                                        Program.generalOptionsService.UpserOptionValue(info, "NetworkDevice");
+
+                                    }
+                                    else
+                                    {
+                                        requester.TrustDevice = true;
+                                        Program.generalOptionsService.UpserOptionValue(requester, "NetworkDevice");
+
+                                    }
+                                }
+
+                                Program.networkService.SendTaskData(CurrentIncident);
+                                today = DateTime.Now;
+                                addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current incident" + "\r\n");
+                            }
+
+                        }
+                    }
+                });
+            }
+
+        }
+
+        private void localNetworkSharingSyncToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (NetworkSettingsForm settings = new NetworkSettingsForm())
+            {
+                if (settings.ShowDialog(this) == DialogResult.OK)
+                {
+                    if (ThisMachineIsClient)
+                    {
+                        initialConnectionTest = true;
+                        silentNetworkTest = false;
+                        sendTestConnection();
+                    }
+
+                    setServerStatusDisplay();
+                }
+            }
+        }
+
+        private void memberStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPersonnelListForm();
+        }
+
+        private void OpenPersonnelListForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (_personnelListForm == null)
+                {
+                    _personnelListForm = new PersonnelListForm();
+                    _personnelListForm.FormClosed += new FormClosedEventHandler(PersonnelListForm_Closed);
+                    ActiveForms.Add(_personnelListForm);
+                    _personnelListForm.Show(this);
+                }
+
+                _personnelListForm.BringToFront();
+            }
+        }
+        void PersonnelListForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_personnelListForm);
+            _personnelListForm = null;
+
+
+        }
+
+        private void btnLogisticsMemberStatus_Click(object sender, EventArgs e)
+        {
+            OpenPersonnelListForm();
+        }
+
+        private void btnLogisticsSignIn_Click(object sender, EventArgs e)
+        {
+            using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+            {
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    SignInRecord record = signInForm.signInRecord;
+                    record.IsSignIn = true;
+                    Program.wfIncidentService.UpsertMemberStatus(record);
+                }
+            }
+        }
+
+        private void btnLogisticsBulkSignIn_Click(object sender, EventArgs e)
+        {
+            using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
+            {
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    foreach (SignInRecord record in signInForm.records)
+                    {
+                        record.IsSignIn = true;
+                        Program.wfIncidentService.UpsertMemberStatus(record);
+                    }
+                }
+            }
+        }
+
+        private void bulkCheckInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
+            {
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    foreach (SignInRecord record in signInForm.records)
+                    {
+                        record.IsSignIn = true;
+                        Program.wfIncidentService.UpsertMemberStatus(record);
+                    }
+                }
+            }
+        }
+
+        private void checkInMemberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+            {
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    SignInRecord record = signInForm.signInRecord;
+                    record.IsSignIn = true;
+                    Program.wfIncidentService.UpsertMemberStatus(record);
+                }
+            }
+        }
+
+        private void teamAssignmentsICS204ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenTeamAssignmentsForm();
+        }
+
+        private void teamAssignmentsICS204ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenTeamAssignmentsForm();
+        }
+
+        private void requestIncidentFromServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ThisMachineIsClient)
+            {
+                DialogResult result = MessageBox.Show(Properties.Resources.RequestIncidentFromServer, Properties.Resources.ProceedTitle, MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    networkTaskRequested = true;
+                    NetworkSARTaskRequest request = new NetworkSARTaskRequest();
+                    request.RequestDate = DateTime.Now;
+                    request.SourceName = HostInfo.HostName;
+                    request.RequestIP = Program.networkService.GetLocalIPAddress();
+                    request.SourceIdentifier = NetworkComms.NetworkIdentifier;
+                    Program.networkService.SendNetworkSarTaskRequest(request);
+
+                }
+
+            }
+            else { MessageBox.Show("This function only works when you have connected to a computer asking as the server. See Network Settings."); }
+        }
+
+        private void requestOptionsFromServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string warning = Properties.Resources.RequestOptionsFromServer;
+            DialogResult dr = MessageBox.Show(warning, Properties.Resources.ProceedTitle, MessageBoxButtons.YesNo);
+            if (dr == DialogResult.Yes)
+            {
+                //send a request to the server for options
+                networkOptionsRequested = true;
+                NetworkOptionsRequest request = new NetworkOptionsRequest();
+                request.RequestDate = DateTime.Now;
+                request.SourceName = HostInfo.HostName;
+                request.RequestIP = Program.networkService.GetLocalIPAddress();
+                request.SourceIdentifier = NetworkComms.NetworkIdentifier;
+                Program.networkService.SendNetworkOptionsRequest(request);
+
+            }
+        }
+
+        private void numOpPeriod_ValueChanged(object sender, EventArgs e)
+        {
+            int newOpNumber = Convert.ToInt32(numOpPeriod.Value);
+            if (newOpNumber != Program.CurrentOpPeriod)
+            {
+                IncidentOpPeriodChangedEventArgs args = new IncidentOpPeriodChangedEventArgs();
+                args.NewOpPeriod = newOpNumber;
+
+
+                if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == newOpNumber))
+                {
+                    OperationalPeriod prevOp = Program.CurrentIncident.AllOperationalPeriods.OrderByDescending(o => o.PeriodEnd).First();
+                    if (prevOp == null)
+                    {
+                        Program.CurrentIncident.GenerateFirstOpPeriod();
+                        prevOp = Program.CurrentIncident.AllOperationalPeriods.OrderByDescending(o => o.PeriodEnd).First();
+
+                    }
+                    OperationalPeriod period = new OperationalPeriod();
+                    period.TaskID = CurrentIncident.TaskID;
+                    period.PeriodNumber = newOpNumber;
+                    period.PeriodStart = prevOp.PeriodEnd.AddMinutes(1);
+                    period.PeriodEnd = period.PeriodStart.AddHours(12);
+                    Program.wfIncidentService.UpsertOperationalPeriod(period);
+                    Program.CurrentIncident.createOrgChartAsNeeded(newOpNumber);
+                    Program.CurrentIncident.createObjectivesSheetAsNeeded(newOpNumber);
+
+                }
+                Program.CurrentOpPeriod = newOpNumber;
+                Program.wfIncidentService.OnOpPeriodChanged(args);
+
+            }
+        }
+
+
+        private void colorOpsPeriodPanel()
+        {
+            DateTime today = DateTime.Now;
+            DateTime OpsStart = Program.CurrentOpPeriodDetails.PeriodStart;
+            DateTime OpsEnd = Program.CurrentOpPeriodDetails.PeriodEnd;
+
+            if (today > OpsStart && today < OpsEnd)
+            {
+                pnlOpsPeriod.BackColor = Color.LightGoldenrodYellow;
+            }
+            else if (today > OpsEnd)
+            {
+                pnlOpsPeriod.BackColor = Color.LightGray;
+            }
+            else
+            {
+                pnlOpsPeriod.BackColor = Color.CornflowerBlue;
+            }
+        }
+
+        private void changeOpPeriod(IncidentOpPeriodChangedEventArgs e)
+        {
+
+            datOpsStart.Value = Program.CurrentOpPeriodDetails.PeriodStart;
+            datOpsEnd.Value = Program.CurrentOpPeriodDetails.PeriodEnd;
+            colorOpsPeriodPanel();
+            setButtonCheckboxes();
+
+        }
+
+      
     }
 }

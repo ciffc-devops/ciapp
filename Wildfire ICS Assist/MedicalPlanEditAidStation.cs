@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist
         }
         public MedicalPlanEditAidStation()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void MedicalPlanEditAidStation_Load(object sender, EventArgs e)

@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist
         public IncidentObjective Objective { get => _objective; set => _objective = value; }
         public IncidentObjectiveEntryForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void loadSavedObjectives()
@@ -29,6 +29,8 @@ namespace Wildfire_ICS_Assist
             cboSavedObjectives.DataSource = items;
             cboSavedObjectives.ValueMember = "ObjectiveID";
             cboSavedObjectives.DisplayMember = "Objective";
+
+            pnlSaved.Enabled = items.Any();
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

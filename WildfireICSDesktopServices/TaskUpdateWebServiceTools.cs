@@ -8,7 +8,7 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace WildfireICSDesktopServices
 {
-    public static class TaskUpdateTools
+    public static class TaskUpdateWebServiceTools
     {
         /*
         public static TaskUpdate taskUpdateFromWebServiceItem(this ca.sarassist.TaskUpdate webItem)
@@ -43,22 +43,7 @@ namespace WildfireICSDesktopServices
         */
 
 
-        public static object DecryptTaskUpdateData(TaskUpdate update, string encryptKey)
-        {
-            object objDecrypted = null;
-
-            try
-            {
-                string dataDecrypt = StringCipher.Decrypt(update.DataEnc, encryptKey);
-                objDecrypted = update.ObjectFromXMLData(dataDecrypt, update.ObjectType);
-
-            }
-            catch (Exception)
-            {
-
-            }
-            return objDecrypted;
-        }
+       
 
     }
 

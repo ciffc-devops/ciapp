@@ -46,10 +46,15 @@ namespace Wildfire_ICS_Assist
         {
             buildPositionLog();
         }
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            buildPositionLog();
+        }
 
         private void PositionLogForm_Load(object sender, EventArgs e)
         {
             Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
             lblPositionName.Text = CurrentRole.RoleName;
             dgvLog.AutoGenerateColumns = false;
@@ -129,7 +134,7 @@ namespace Wildfire_ICS_Assist
                 foreach (DataGridViewRow row in dgvLog.SelectedRows)
                 {
                     PositionLogEntry entry = (PositionLogEntry)row.DataBoundItem;
-                    entry.UpdateLogText("-Deleted " + DateTime.Now.ToString("yyyy-MMM-dd HH:mm") + "-", currentUserName);
+                    entry.UpdateLogText("-Deleted " + DateTime.Now.ToString(Program.DateFormat + " HH:mm") + "-", currentUserName);
                     entry.IsInfoOnly = true;
                     Program.wfIncidentService.UpsertPositionLogEntry(entry.Clone());
 

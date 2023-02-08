@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary.Utilities;
@@ -21,7 +22,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public OptionsForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
         }
 
         private void LoadICSRoles()
@@ -54,6 +55,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         }
 
+        private void LoadDateOptions()
+        {
+            List<DateFormatOption> options = DateTools.GetDateFormatOptions();
+            cboDateFormat.DataSource = options;
+            cboDateFormat.DisplayMember = "DisplayNameWithExample";
+            cboDateFormat.ValueMember = "Format";
+        }
+
         private void LoadSavedValues()
         {
 
@@ -69,7 +78,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             else { cboDefaultICSRole.SelectedIndex = 0; }
             rbNumbersOnly.Checked = !options.AllowStringTaskNumber; rbNumbersOrLetters.Checked = !rbNumbersOnly.Checked;
             if(options.DefaultProvince != null && options.DefaultProvince.ProvinceGUID != Guid.Empty) { cboDefaultProvince.SelectedValue = options.DefaultProvince.ProvinceGUID; }
-
+            if (!string.IsNullOrEmpty(options.DateFormat)) { cboDateFormat.SelectedValue = options.DateFormat; }
 
             //File Management
             chkAutoSave.Checked = options.AutoSave;
@@ -109,7 +118,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
 
             //Network
-            foreach (DeviceInformation info in options.AllDeviceInformation.Where(o => o.TrustDevice))
+            foreach (DeviceInformation info in options.SavedNetworkDeviceList.Where(o => o.TrustDevice))
             {
                 allDevices.Add(info);
             }
@@ -124,7 +133,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
             LoadICSRoles();
             LoadCommsSystems();
             LoadProvinces();
+            LoadDateOptions();
             LoadSavedValues();
+            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -147,6 +158,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     options.AllowStringTaskNumber = !rbNumbersOnly.Checked;
                     Province p = new Province(new Guid(cboDefaultProvince.SelectedValue.ToString())); ;
                     options.DefaultProvince = p;
+                    options.DateFormat = cboDateFormat.SelectedValue.ToString();
+                    Globals.DateFormat = options.DateFormat;
+                    
 
 
                     //File Management
@@ -192,7 +206,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
 
                     //Network
-                    options.AllDeviceInformation = allDevices;
+                    options.SavedNetworkDeviceList = allDevices;
 
                     options.DefaultToServer = chkDefaultToServer.Checked;
                     options.DefaultPortNumber = Convert.ToInt32(numDefaultPortNumber.Value);

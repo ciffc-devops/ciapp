@@ -58,7 +58,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(42)] private List<AmbulanceService> l_allAmbulanceServices = new List<AmbulanceService>();
         [ProtoMember(43)] private List<CommsPlanItem> l_allCommsPlanItems = new List<CommsPlanItem>();
         [ProtoMember(44)] private List<TeamMember> l_allTeamMembers = new List<TeamMember>();
-        [ProtoMember(45)] private List<DeviceInformation> l_AllDeviceInformation = new List<DeviceInformation>();
+        [ProtoMember(45)] private List<DeviceInformation> _SavedNetworkDeviceList = new List<DeviceInformation>();
         [ProtoMember(46)] private List<CannedCommsLogEntry> l_AllCannedCommsEntries = new List<CannedCommsLogEntry>();
         [ProtoMember(47)] private List<Contact> l_AllContacts = new List<Contact>();
         [ProtoMember(48)] private List<Vehicle> l_AllVehicles = new List<Vehicle>();
@@ -80,6 +80,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(64)] private bool _AddIMTToContacts;
         [ProtoMember(65)] private Province _DefaultProvince;
         [ProtoMember(66)] private List<TeamAssignment> _AllTeamAssignmentTemplates = new List<TeamAssignment>();
+        [ProtoMember(67)] private string _DateFormat;
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
         public Guid PrimaryChannelID { get { return g_primaryChannel; } set { g_primaryChannel = value; appSettingsChanged = true; } }
@@ -130,7 +131,7 @@ namespace WF_ICS_ClassLibrary.Models
         public List<CommsPlanItem> allCommsPlanItems { get { return l_allCommsPlanItems; } set { l_allCommsPlanItems = value; appSettingsChanged = true; } }
         public List<string> RecentFilePaths { get { return l_recentFilePaths; } set { l_recentFilePaths = value; appSettingsChanged = true; } }
         public List<TeamMember> AllTeamMembers { get { return l_allTeamMembers; } set { l_allTeamMembers = value; appSettingsChanged = true; } }
-        public List<DeviceInformation> AllDeviceInformation { get => l_AllDeviceInformation; set => l_AllDeviceInformation = value; }
+        public List<DeviceInformation> SavedNetworkDeviceList { get => _SavedNetworkDeviceList; set => _SavedNetworkDeviceList = value; }
         public List<CannedCommsLogEntry> AllCannedCommsLogEntries { get => l_AllCannedCommsEntries; set => l_AllCannedCommsEntries = value; }
         public List<Contact> AllContacts { get => l_AllContacts; set => l_AllContacts = value; }
         public List<Vehicle> AllVehicles { get => l_AllVehicles; set => l_AllVehicles = value; }
@@ -165,7 +166,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid ParentOrganizationID { get => _ParentOrganizationID; set => _ParentOrganizationID = value; }
         public bool AddIMTToContacts { get => _AddIMTToContacts; set => _AddIMTToContacts = value; }
         public Province DefaultProvince { get => _DefaultProvince; set => _DefaultProvince = value; }
-
+        public string DateFormat { get => _DateFormat; set => _DateFormat = value; }
         public void addDefaultOptions()
         {
             ICPCallSign = "BASE";
@@ -195,7 +196,7 @@ namespace WF_ICS_ClassLibrary.Models
             AutomaticSubFolders.Add("Maps");
             AutomaticSubFolders.Add("Other Images");
             DefaultProvince = new Province(4);
-
+            DateFormat = "MMM-dd-yyyy";
 
             //options.PrimaryChannel = "PEPSAR1 149.495";
 

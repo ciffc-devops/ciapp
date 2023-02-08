@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSaved = new System.Windows.Forms.Panel();
             this.txtSavedSitePlanLocation = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.chkSavedSitePlanRequired = new System.Windows.Forms.CheckBox();
             this.btnAddSaved = new System.Windows.Forms.Button();
             this.cboSaved = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtNewSitePlanLocation = new System.Windows.Forms.TextBox();
@@ -52,7 +54,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlSaved.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,10 +70,12 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            this.splitContainer1.Panel1.Controls.Add(this.pnlSaved);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
@@ -78,23 +83,23 @@
             this.splitContainer1.SplitterDistance = 160;
             this.splitContainer1.TabIndex = 2;
             // 
-            // panel1
+            // pnlSaved
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.txtSavedSitePlanLocation);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.chkSavedSitePlanRequired);
-            this.panel1.Controls.Add(this.btnAddSaved);
-            this.panel1.Controls.Add(this.cboSaved);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(6, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(829, 147);
-            this.panel1.TabIndex = 1;
+            this.pnlSaved.BackColor = System.Drawing.Color.White;
+            this.pnlSaved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSaved.Controls.Add(this.txtSavedSitePlanLocation);
+            this.pnlSaved.Controls.Add(this.label7);
+            this.pnlSaved.Controls.Add(this.chkSavedSitePlanRequired);
+            this.pnlSaved.Controls.Add(this.btnAddSaved);
+            this.pnlSaved.Controls.Add(this.cboSaved);
+            this.pnlSaved.Controls.Add(this.label1);
+            this.pnlSaved.Location = new System.Drawing.Point(6, 7);
+            this.pnlSaved.Name = "pnlSaved";
+            this.pnlSaved.Size = new System.Drawing.Size(829, 147);
+            this.pnlSaved.TabIndex = 1;
             // 
             // txtSavedSitePlanLocation
             // 
@@ -164,6 +169,28 @@
             this.label1.Size = new System.Drawing.Size(352, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Saved Safety Message / Plan";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_38_picture;
+            this.pictureBox1.Location = new System.Drawing.Point(257, 471);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(39, 35);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 100;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Firebrick;
+            this.label5.Location = new System.Drawing.Point(302, 476);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(524, 24);
+            this.label5.TabIndex = 99;
+            this.label5.Text = "*To add an image to the safety plan, Edit it after adding it here.";
             // 
             // btnCancel
             // 
@@ -315,10 +342,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 682);
-            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(863, 698);
             this.Name = "SafetyMessageEntryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -326,10 +354,12 @@
             this.Load += new System.EventHandler(this.SafetyMessageEntryForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlSaved.ResumeLayout(false);
+            this.pnlSaved.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -339,7 +369,7 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlSaved;
         private System.Windows.Forms.Button btnAddSaved;
         private System.Windows.Forms.ComboBox cboSaved;
         private System.Windows.Forms.Label label1;
@@ -358,5 +388,7 @@
         private System.Windows.Forms.TextBox txtSavedSitePlanLocation;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox chkSavedSitePlanRequired;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label5;
     }
 }

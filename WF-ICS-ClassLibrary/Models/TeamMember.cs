@@ -69,6 +69,16 @@ namespace WF_ICS_ClassLibrary.Models
         public string Name { get => _Name; set => _Name = value; }
 
         public string Group { get => _Group; set => _Group = value; } //Use OrganizationName for this value
+        public string NameWithAgency { get
+            {
+                StringBuilder sb = new StringBuilder();
+                if (!string.IsNullOrEmpty(Agency)) {  sb.Append(Agency); sb.Append(" > "); }
+                sb.Append(Name);
+                
+                return sb.ToString();
+
+            }
+        }
         public string NameWithGroup
         {
             get
@@ -465,10 +475,11 @@ namespace WF_ICS_ClassLibrary.Models
 
         [ProtoMember(13)] private string _ICSRoleName;
         [ProtoMember(14)] private Guid _ICSRoleID;
-        [ProtoMember(15)] private DateTime _TimeOutRequest;
+        [ProtoMember(15)] private DateTime _LastDayWorked;
         [ProtoMember(16)] private string _Callsign;
+        [ProtoMember(17)] private Guid _CheckInRecordID;
+        [ProtoMember(18)] private Guid _CheckOutRecordID;
 
-      
         public Guid AssignmentID { get => _AssignmentID; set => _AssignmentID = value; }
 
         public DateTime SignInTime { get { return _signInTime; } set { _signInTime = value; } }
@@ -476,8 +487,8 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (_signInTime > DateTime.MinValue) { return _signInTime.ToString("HH:mm yyyy-MMM-dd"); }
-                else { return "Not signed in"; }
+                if (_signInTime > DateTime.MinValue) { return _signInTime.ToString(Globals.DateFormat + " HH:mm"); }
+                else { return "Not checked in"; }
             }
         }
         public DateTime SignOutTime { get { return _signOutTime; } set { _signOutTime = value; } }
@@ -487,7 +498,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (_signOutTime < DateTime.MaxValue)
                 {
-                    return string.Format("{0:HH:mm}", _signOutTime);
+                    return string.Format("{0:" + Globals.DateFormat + " HH:mm}", _signOutTime);
                 }
                 else
                 {
@@ -527,28 +538,43 @@ namespace WF_ICS_ClassLibrary.Models
 
         //public string ICSRoleName { get { return currentICSRole.RoleName; } }
         public string getCurrentActivityName { get { if (ICSRoleID != Guid.Empty && AssignmentNameWthNumber != "Signed Out") { return ICSRoleName; } else { return AssignmentNameWthNumber; } } }
+        public bool IsAssigned
+        {
+            get
+            {
+                if (ICSRoleID != Guid.Empty) { return true; }
+                if(AssignmentID != Guid.Empty) { return true; }
+                return false;
+            }
+        }
+
         public decimal KMs { get => _kms; set => _kms = value; }
 
         public string MemberName { get => _MemberName; set => _MemberName = value; }
         public Guid MemberID { get => _MemberID; set => _MemberID = value; }
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
         public string OrganizationName { get => _OrganizationName; set => _OrganizationName = value; }
-        public DateTime TimeOutRequest { get => _TimeOutRequest; set => _TimeOutRequest = value; }
-        public string TimeOutRequestAsStr
+        public DateTime LastDayWorked { get => _LastDayWorked; set => _LastDayWorked = value; }
+        public string LastDayWorkedAsStr
         {
             get
             {
-                if (TimeOutRequest > DateTime.MinValue) { return TimeOutRequest.ToString("HH:mm"); }
+                if (LastDayWorked > DateTime.MinValue) { return LastDayWorked.ToString(Globals.DateFormat); }
                 else { return null; }
             }
         }
+
+        public Guid CheckInRecordID { get => _CheckInRecordID; set => _CheckInRecordID = value; }
+
+        public Guid CheckOutRecordID { get => _CheckOutRecordID; set => _CheckOutRecordID = value; }
+
         public string Callsign { get => _Callsign; set => _Callsign = value; }
         public void setTeamMember(TeamMember member)
         {
             MemberName = member.Name;
             MemberID = member.PersonID;
             OrganizationID = member.OrganizationID;
-            _OrganizationName = member.Group;
+            _OrganizationName = member.Agency;
             Callsign = member.Callsign;
         }
         public MemberStatus Clone()
@@ -561,9 +587,82 @@ namespace WF_ICS_ClassLibrary.Models
         }
     }
 
+    public class AgencyPersonnelCount
+    {
+        public int Count { get; set; }
+        public string AgencyName { get; set; }
+    }
+
 
    public static class TeamMemberTools
     {
+        public static string ExportSignInRecordsToCSV(this WFIncident incident, List<MemberStatus> records, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            //header row
+            csv.Append("NAME"); csv.Append(delimiter);
+            csv.Append("PROVINCE OR TERRITORY"); csv.Append(delimiter);
+            csv.Append("AGENCY"); csv.Append(delimiter);
+            
+            csv.Append("CHECK IN"); csv.Append(delimiter);
+            csv.Append("LDW"); csv.Append(delimiter);
+            csv.Append("DEPARTURE POINT"); csv.Append(delimiter);
+            csv.Append("METHOD OF TRAVEL"); csv.Append(delimiter);
+            csv.Append("CHECK OUT"); csv.Append(delimiter);
+           
+
+            csv.Append(Environment.NewLine);
+            foreach (MemberStatus status in records.OrderBy(o => o.MemberName))
+            {
+                SignInRecord rec  = new SignInRecord();
+                if (incident.AllSignInRecords.Any(o => o.MemberID == status.MemberID))
+                {
+                   rec = incident.AllSignInRecords.Where(o => o.MemberID == status.MemberID).First();
+                }
+
+
+                csv.Append(status.MemberName.EscapeQuotes());
+                csv.Append(delimiter);
+                if (rec != null) { csv.Append(rec.teamMember.ProvinceNameShort.EscapeQuotes()); }
+                csv.Append(delimiter);
+                csv.Append(status.OrganizationName.EscapeQuotes());
+                csv.Append(delimiter);
+               
+                csv.Append(status.SignInTime.ToString(Globals.DateFormat + " HH:mm"));
+                csv.Append(delimiter);
+                csv.Append(status.LastDayWorked.ToString(Globals.DateFormat + " HH:mm"));
+                csv.Append(delimiter);
+                if (rec != null) { csv.Append(rec.DeparturePoint.EscapeQuotes()); }
+                csv.Append(delimiter);
+                if (rec != null) { csv.Append(rec.MethodOfTravel.EscapeQuotes()); }
+                csv.Append(delimiter);
+
+
+                csv.Append(status.SignOutTimeOrBlank);
+               
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
+        }
+
+           public static List<AgencyPersonnelCount> GetAgencyPersonnelCount(this WFIncident incident, int OpPeriod)
+        {
+            List<AgencyPersonnelCount> counts = new List<AgencyPersonnelCount>();
+
+            foreach (SignInRecord record in incident.AllSignInRecords.Where(o => o.OpPeriod == OpPeriod))
+            {
+                if (!counts.Any(o => o.AgencyName.Equals(record.teamMember.Agency)))
+                {
+                    AgencyPersonnelCount c = new AgencyPersonnelCount();
+                    c.AgencyName = record.teamMember.Agency;
+                    c.Count = 0;
+                    counts.Add(c);
+                }
+                counts.First(o => o.AgencyName.Equals(record.teamMember.Agency)).Count++;
+            }
+            return counts;
+        }
+
         public static TeamMember getMemberFromQR(string qr)
         {
             TeamMember member = new TeamMember();

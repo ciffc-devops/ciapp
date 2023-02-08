@@ -17,4 +17,5 @@ namespace WF_ICS_ClassLibrary.EventHandling
 
         public WFIncidentEventArgs(WFIncident _item) { item = _item; }
     }
+
 }

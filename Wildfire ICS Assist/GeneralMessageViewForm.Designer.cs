@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblReplyReceived = new System.Windows.Forms.Label();
+            this.lblReplyBy = new System.Windows.Forms.Label();
+            this.lblApprovedBy = new System.Windows.Forms.Label();
+            this.lblDateSent = new System.Windows.Forms.Label();
+            this.lblSubject = new System.Windows.Forms.Label();
+            this.lblFrom = new System.Windows.Forms.Label();
+            this.lblTo = new System.Windows.Forms.Label();
+            this.txtMessage = new System.Windows.Forms.TextBox();
+            this.txtReply = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -39,17 +48,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.txtReply = new System.Windows.Forms.TextBox();
-            this.txtMessage = new System.Windows.Forms.TextBox();
-            this.lblTo = new System.Windows.Forms.Label();
-            this.lblFrom = new System.Windows.Forms.Label();
-            this.lblSubject = new System.Windows.Forms.Label();
-            this.lblDateSent = new System.Windows.Forms.Label();
-            this.lblApprovedBy = new System.Windows.Forms.Label();
-            this.lblReplyBy = new System.Windows.Forms.Label();
-            this.lblReplyReceived = new System.Windows.Forms.Label();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -94,6 +94,107 @@
             this.splitContainer1.Size = new System.Drawing.Size(847, 669);
             this.splitContainer1.SplitterDistance = 599;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // lblReplyReceived
+            // 
+            this.lblReplyReceived.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblReplyReceived.Location = new System.Drawing.Point(706, 570);
+            this.lblReplyReceived.Name = "lblReplyReceived";
+            this.lblReplyReceived.Size = new System.Drawing.Size(131, 29);
+            this.lblReplyReceived.TabIndex = 55;
+            this.lblReplyReceived.Text = "label16";
+            this.lblReplyReceived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblReplyBy
+            // 
+            this.lblReplyBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblReplyBy.Location = new System.Drawing.Point(214, 570);
+            this.lblReplyBy.Name = "lblReplyBy";
+            this.lblReplyBy.Size = new System.Drawing.Size(290, 29);
+            this.lblReplyBy.TabIndex = 54;
+            this.lblReplyBy.Text = "label15";
+            this.lblReplyBy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblApprovedBy
+            // 
+            this.lblApprovedBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblApprovedBy.Location = new System.Drawing.Point(221, 338);
+            this.lblApprovedBy.Name = "lblApprovedBy";
+            this.lblApprovedBy.Size = new System.Drawing.Size(616, 29);
+            this.lblApprovedBy.TabIndex = 53;
+            this.lblApprovedBy.Text = "label14";
+            this.lblApprovedBy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblDateSent
+            // 
+            this.lblDateSent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDateSent.Location = new System.Drawing.Point(221, 119);
+            this.lblDateSent.Name = "lblDateSent";
+            this.lblDateSent.Size = new System.Drawing.Size(616, 29);
+            this.lblDateSent.TabIndex = 52;
+            this.lblDateSent.Text = "label13";
+            this.lblDateSent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSubject
+            // 
+            this.lblSubject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSubject.Location = new System.Drawing.Point(221, 80);
+            this.lblSubject.Name = "lblSubject";
+            this.lblSubject.Size = new System.Drawing.Size(616, 29);
+            this.lblSubject.TabIndex = 51;
+            this.lblSubject.Text = "label12";
+            this.lblSubject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblFrom
+            // 
+            this.lblFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFrom.Location = new System.Drawing.Point(221, 45);
+            this.lblFrom.Name = "lblFrom";
+            this.lblFrom.Size = new System.Drawing.Size(616, 29);
+            this.lblFrom.TabIndex = 50;
+            this.lblFrom.Text = "label9";
+            this.lblFrom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTo
+            // 
+            this.lblTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTo.Location = new System.Drawing.Point(221, 8);
+            this.lblTo.Name = "lblTo";
+            this.lblTo.Size = new System.Drawing.Size(616, 29);
+            this.lblTo.TabIndex = 49;
+            this.lblTo.Text = "label1";
+            this.lblTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtMessage
+            // 
+            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMessage.Location = new System.Drawing.Point(220, 151);
+            this.txtMessage.Multiline = true;
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.ReadOnly = true;
+            this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMessage.Size = new System.Drawing.Size(617, 184);
+            this.txtMessage.TabIndex = 48;
+            // 
+            // txtReply
+            // 
+            this.txtReply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtReply.Location = new System.Drawing.Point(220, 402);
+            this.txtReply.Multiline = true;
+            this.txtReply.Name = "txtReply";
+            this.txtReply.ReadOnly = true;
+            this.txtReply.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtReply.Size = new System.Drawing.Size(617, 165);
+            this.txtReply.TabIndex = 47;
             // 
             // panel1
             // 
@@ -199,123 +300,6 @@
             this.label5.Text = "TO (Name)";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 6);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 17;
-            this.btnCancel.Text = "Done";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // txtReply
-            // 
-            this.txtReply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtReply.Location = new System.Drawing.Point(220, 402);
-            this.txtReply.Multiline = true;
-            this.txtReply.Name = "txtReply";
-            this.txtReply.ReadOnly = true;
-            this.txtReply.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtReply.Size = new System.Drawing.Size(617, 165);
-            this.txtReply.TabIndex = 47;
-            // 
-            // txtMessage
-            // 
-            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessage.Location = new System.Drawing.Point(220, 151);
-            this.txtMessage.Multiline = true;
-            this.txtMessage.Name = "txtMessage";
-            this.txtMessage.ReadOnly = true;
-            this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessage.Size = new System.Drawing.Size(617, 184);
-            this.txtMessage.TabIndex = 48;
-            // 
-            // lblTo
-            // 
-            this.lblTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTo.Location = new System.Drawing.Point(221, 8);
-            this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(616, 29);
-            this.lblTo.TabIndex = 49;
-            this.lblTo.Text = "label1";
-            this.lblTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblFrom
-            // 
-            this.lblFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFrom.Location = new System.Drawing.Point(221, 45);
-            this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(616, 29);
-            this.lblFrom.TabIndex = 50;
-            this.lblFrom.Text = "label9";
-            this.lblFrom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSubject
-            // 
-            this.lblSubject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSubject.Location = new System.Drawing.Point(221, 80);
-            this.lblSubject.Name = "lblSubject";
-            this.lblSubject.Size = new System.Drawing.Size(616, 29);
-            this.lblSubject.TabIndex = 51;
-            this.lblSubject.Text = "label12";
-            this.lblSubject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblDateSent
-            // 
-            this.lblDateSent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDateSent.Location = new System.Drawing.Point(221, 119);
-            this.lblDateSent.Name = "lblDateSent";
-            this.lblDateSent.Size = new System.Drawing.Size(616, 29);
-            this.lblDateSent.TabIndex = 52;
-            this.lblDateSent.Text = "label13";
-            this.lblDateSent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblApprovedBy
-            // 
-            this.lblApprovedBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblApprovedBy.Location = new System.Drawing.Point(221, 338);
-            this.lblApprovedBy.Name = "lblApprovedBy";
-            this.lblApprovedBy.Size = new System.Drawing.Size(616, 29);
-            this.lblApprovedBy.TabIndex = 53;
-            this.lblApprovedBy.Text = "label14";
-            this.lblApprovedBy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblReplyBy
-            // 
-            this.lblReplyBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblReplyBy.Location = new System.Drawing.Point(214, 570);
-            this.lblReplyBy.Name = "lblReplyBy";
-            this.lblReplyBy.Size = new System.Drawing.Size(290, 29);
-            this.lblReplyBy.TabIndex = 54;
-            this.lblReplyBy.Text = "label15";
-            this.lblReplyBy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblReplyReceived
-            // 
-            this.lblReplyReceived.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblReplyReceived.Location = new System.Drawing.Point(706, 570);
-            this.lblReplyReceived.Name = "lblReplyReceived";
-            this.lblReplyReceived.Size = new System.Drawing.Size(131, 29);
-            this.lblReplyReceived.TabIndex = 55;
-            this.lblReplyReceived.Text = "label16";
-            this.lblReplyReceived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -333,13 +317,28 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnCancel.Location = new System.Drawing.Point(6, 6);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(124, 51);
+            this.btnCancel.TabIndex = 17;
+            this.btnCancel.Text = "Done";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // GeneralMessageViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(847, 669);
-            this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);

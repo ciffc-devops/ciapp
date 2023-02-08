@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace WF_ICS_ClassLibrary.Models
 {
+    [Serializable]
+    [ProtoContract]
     public class TeamAssignment : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;

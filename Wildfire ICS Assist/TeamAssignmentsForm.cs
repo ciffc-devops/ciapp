@@ -26,6 +26,13 @@ namespace Wildfire_ICS_Assist
         private void TeamAssignmentsForm_Load(object sender, EventArgs e)
         {
             Program.wfIncidentService.TeamAssignmentChanged += Program_AssignmentChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+
+            BuildAssignmentList();
+        }
+
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
             BuildAssignmentList();
         }
 
@@ -43,6 +50,9 @@ namespace Wildfire_ICS_Assist
                 BuildAssignmentList();
             }
         }
+
+     
+
 
         private void OpenAssignmentForEdit(TeamAssignment assignment)
         {

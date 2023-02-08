@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.editTeamAssignmentTemplateControl1 = new Wildfire_ICS_Assist.CustomControls.EditTeamAssignmentTemplateControl();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.editTeamAssignmentTemplateControl1 = new Wildfire_ICS_Assist.CustomControls.EditTeamAssignmentTemplateControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,9 +55,23 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(700, 597);
-            this.splitContainer1.SplitterDistance = 530;
+            this.splitContainer1.Size = new System.Drawing.Size(700, 620);
+            this.splitContainer1.SplitterDistance = 553;
             this.splitContainer1.TabIndex = 3;
+            // 
+            // editTeamAssignmentTemplateControl1
+            // 
+            this.editTeamAssignmentTemplateControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editTeamAssignmentTemplateControl1.BackColor = System.Drawing.Color.Transparent;
+            this.editTeamAssignmentTemplateControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editTeamAssignmentTemplateControl1.Location = new System.Drawing.Point(9, 9);
+            this.editTeamAssignmentTemplateControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.editTeamAssignmentTemplateControl1.Name = "editTeamAssignmentTemplateControl1";
+            this.editTeamAssignmentTemplateControl1.selectedAssignment = null;
+            this.editTeamAssignmentTemplateControl1.Size = new System.Drawing.Size(682, 534);
+            this.editTeamAssignmentTemplateControl1.TabIndex = 0;
             // 
             // btnSave
             // 
@@ -89,29 +103,16 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // editTeamAssignmentTemplateControl1
-            // 
-            this.editTeamAssignmentTemplateControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.editTeamAssignmentTemplateControl1.BackColor = System.Drawing.Color.Transparent;
-            this.editTeamAssignmentTemplateControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editTeamAssignmentTemplateControl1.Location = new System.Drawing.Point(9, 9);
-            this.editTeamAssignmentTemplateControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.editTeamAssignmentTemplateControl1.Name = "editTeamAssignmentTemplateControl1";
-            this.editTeamAssignmentTemplateControl1.selectedAssignment = null;
-            this.editTeamAssignmentTemplateControl1.Size = new System.Drawing.Size(682, 511);
-            this.editTeamAssignmentTemplateControl1.TabIndex = 0;
-            // 
             // EditSavedTeamAssignmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 597);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(700, 620);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(716, 636);
             this.Name = "EditSavedTeamAssignmentsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

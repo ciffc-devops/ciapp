@@ -186,6 +186,8 @@ namespace WF_ICS_ClassLibrary.Utilities
     [ProtoContract]
     public class Coordinate
     {
+        [ProtoIgnore] private int decimalPlaces = 6;
+
         [ProtoMember(1)]
         public string Label { get; set; }
         [ProtoMember(2)] public string CardinalLabel { get; set; }
@@ -231,7 +233,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             switch (format)
             {
                 case "Decimal Degrees":
-                    coordText.Append(Latitude); coordText.Append(", "); coordText.Append(Longitude);
+                    coordText.Append(Math.Round(Latitude, decimalPlaces)); coordText.Append(", "); coordText.Append(Math.Round(Longitude, decimalPlaces));
                     break;
                 case "Degrees Decimal Minutes":
                     coordText.Append(DegreesDecimalMinutes);
@@ -266,10 +268,10 @@ namespace WF_ICS_ClassLibrary.Utilities
                 CoordinateSharp.Coordinate coordinate = new CoordinateSharp.Coordinate();
                 coordinate.Latitude = new CoordinatePart(Latitude, CoordinateType.Lat);
                 coordinate.Longitude = new CoordinatePart(Longitude, CoordinateType.Long);
-                string coord = coordinate.Latitude.Degrees + "°" + coordinate.Latitude.DecimalMinute + ", ";
+                string coord = coordinate.Latitude.Degrees + "°" + Math.Round( coordinate.Latitude.DecimalMinute, decimalPlaces) + ", ";
                 //if(coordinate.Longitude.)
                 if (coordinate.Longitude.DecimalDegree < 0) { coord += "-"; }
-                coord += coordinate.Longitude.Degrees + "°" + coordinate.Longitude.DecimalMinute;
+                coord += coordinate.Longitude.Degrees + "°" + Math.Round(coordinate.Longitude.DecimalMinute, decimalPlaces);
                 return coord;
             }
 
@@ -283,11 +285,11 @@ namespace WF_ICS_ClassLibrary.Utilities
                 CoordinateSharp.Coordinate coordinate = new CoordinateSharp.Coordinate();
                 coordinate.Latitude = new CoordinatePart(Latitude, CoordinateType.Lat);
                 coordinate.Longitude = new CoordinatePart(Longitude, CoordinateType.Long);
-                parts[0] = coordinate.Latitude.Degrees + "°" + coordinate.Latitude.DecimalMinute + ", ";
+                parts[0] = coordinate.Latitude.Degrees + "°" + Math.Round(coordinate.Latitude.DecimalMinute, decimalPlaces) + ", ";
                 //if(coordinate.Longitude.)
                 
                 if (coordinate.Longitude.DecimalDegree < 0) { parts[1] += "-"; }
-                parts[1] += coordinate.Longitude.Degrees + "°" + coordinate.Longitude.DecimalMinute;
+                parts[1] += coordinate.Longitude.Degrees + "°" + Math.Round(coordinate.Longitude.DecimalMinute, decimalPlaces);
 
                 return parts;
             }
