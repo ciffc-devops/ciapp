@@ -54,6 +54,7 @@ namespace WF_ICS_ClassLibrary.Models
             MedicalPlan cloneTo = this.MemberwiseClone() as MedicalPlan;
             cloneTo.Ambulances = new List<AmbulanceService>();
             cloneTo.Hospitals = new List<Hospital>();
+            cloneTo.MedicalAidStations = new List<MedicalAidStation>();
             foreach (AmbulanceService serv in this.Ambulances) { cloneTo.Ambulances.Add(serv.Clone()); }
             foreach (Hospital serv in this.Hospitals) { cloneTo.Hospitals.Add(serv.Clone()); }
             foreach (MedicalAidStation aid in this.MedicalAidStations) { cloneTo.MedicalAidStations.Add(aid.Clone()); }
