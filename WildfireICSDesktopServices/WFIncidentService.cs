@@ -960,11 +960,12 @@ namespace WildfireICSDesktopServices
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
 
+            /*
             if (UpsertRoles)
             {
                 foreach(ICSRole role in record.AllRoles) { UpsertICSRole(role); }
             }
-
+            */
             OnOrganizationalChartChanged(new OrganizationChartEventArgs(record));
         }
 

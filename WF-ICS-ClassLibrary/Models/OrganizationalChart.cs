@@ -22,6 +22,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             OrganizationalChartID = Guid.NewGuid();
             AllRoles = new List<ICSRole>();
+            Active = true;
         }
 
         [ProtoMember(1)] public int OpPeriod { get; set; }
