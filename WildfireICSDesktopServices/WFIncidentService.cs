@@ -321,7 +321,7 @@ namespace WildfireICSDesktopServices
             }
             else if (dataClassName.Equals(new Hospital().GetType().Name))
             {
-                //UpsertTaskEquipment(((Hospital)obj).Clone(), source);
+                UpsertHospital(((Hospital)obj).Clone(), source);
             }
             else if (dataClassName.Equals(new AmbulanceService().GetType().Name))
             {
