@@ -501,20 +501,31 @@ namespace Wildfire_ICS_Assist
                 if (dr == DialogResult.OK)
                 {
                     CurrentAirOpsSummary.notam = editForm.selectedNOTAM;
-                    if(CurrentAirOpsSummary.notam.Latitude != 0 && CurrentAirOpsSummary.notam.Longitude != 0)
+                    if (CurrentAirOpsSummary.notam.UseRadius && CurrentAirOpsSummary.notam.RadiusCentre != null) { SetSunTimesByCoordinate(CurrentAirOpsSummary.notam.RadiusCentre); }
+                    else if (!CurrentAirOpsSummary.notam.UseRadius && CurrentAirOpsSummary.notam.AnyCoordinates)
                     {
-                        DateTime opTime = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
-
-                        Coordinate c = new Coordinate();
-                        c.Latitude = CurrentAirOpsSummary.notam.Latitude; c.Longitude = CurrentAirOpsSummary.notam.Longitude;
-
-                        datSunrise.Value = GISTools.GetSunrise(c, opTime);
-                        datSunset.Value = GISTools.GetSunset(c, opTime);
+                        List<Coordinate> coordinates = new List<Coordinate>();
+                        if (CurrentAirOpsSummary.notam.PolygonNW != null) { coordinates.Add(CurrentAirOpsSummary.notam.PolygonNW); }
+                        if (CurrentAirOpsSummary.notam.PolygonNE != null) { coordinates.Add(CurrentAirOpsSummary.notam.PolygonNE); }
+                        if (CurrentAirOpsSummary.notam.PolygonSW != null) { coordinates.Add(CurrentAirOpsSummary.notam.PolygonSW); }
+                        if (CurrentAirOpsSummary.notam.PolygonSE != null) { coordinates.Add(CurrentAirOpsSummary.notam.PolygonSE); }
+                        if (coordinates.Any())
+                        {
+                            Coordinate centre = GISTools.FindCentroid(coordinates);
+                            if (centre != null) { SetSunTimesByCoordinate(centre); }
+                        }
                     }
                     Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
                     SetNOTAMCheckbox();
                 }
             }
+        }
+
+        private void SetSunTimesByCoordinate(Coordinate c)
+        {
+            DateTime opTime = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
+            datSunrise.Value = GISTools.GetSunrise(c, opTime);
+            datSunset.Value = GISTools.GetSunset(c, opTime);
         }
 
         private void datSunrise_ValueChanged(object sender, EventArgs e)

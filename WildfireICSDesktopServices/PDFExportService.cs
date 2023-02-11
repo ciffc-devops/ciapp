@@ -888,7 +888,7 @@ namespace WildfireICSDesktopServices
                             ICSRole PreparedBy = new ICSRole();
                             if (currentChart.PreparedByUserID != Guid.Empty)
                             {
-                                PreparedBy.teamMember = new TeamMember(currentChart.PreparedByUserID);
+                                PreparedBy.teamMember = new Personnel(currentChart.PreparedByUserID);
                                 PreparedBy.teamMember.Name = currentChart.PreparedBy;
                                 PreparedBy.RoleName = currentChart.PreparedByRole;
                             }
@@ -1102,7 +1102,7 @@ namespace WildfireICSDesktopServices
                             ICSRole PreparedBy = new ICSRole();
                             if(currentChart.PreparedByUserID != Guid.Empty)
                             {
-                                PreparedBy.teamMember = new TeamMember(currentChart.PreparedByUserID);
+                                PreparedBy.teamMember = new Personnel(currentChart.PreparedByUserID);
                                 PreparedBy.teamMember.Name = currentChart.PreparedBy;
                                 PreparedBy.RoleName = currentChart.PreparedByRole;
                             }
@@ -2149,7 +2149,7 @@ namespace WildfireICSDesktopServices
             for (int x = 0; x < statuses.Count; x++)
             {
                 MemberStatus status = statuses[x];
-                TeamMember member = new TeamMember();
+                Personnel member = new Personnel();
                 if (status.MemberID != Guid.Empty && task.TaskTeamMembers.Any(o => o.PersonID == status.MemberID)) { member = task.TaskTeamMembers.First(o => o.PersonID == status.MemberID); }
 
                 stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
@@ -2250,7 +2250,7 @@ namespace WildfireICSDesktopServices
                     for (int x = 0; x < statuses.Count; x++)
                     {
                         MemberStatus status = statuses[x];
-                        TeamMember member = new TeamMember();
+                        Personnel member = new Personnel();
                         if (status.MemberID != Guid.Empty && task.TaskTeamMembers.Where(o => o.PersonID == status.MemberID).Any()) { member = task.TaskTeamMembers.Where(o => o.PersonID == status.MemberID).First(); }
                         else if (status.MemberID != Guid.Empty && task.getTaskTeamMembers(options.AllTeamMembers, false, false, OpsPeriod).Where(o => o.PersonID == status.MemberID).Any())
                         {
@@ -3382,10 +3382,12 @@ namespace WildfireICSDesktopServices
         {
             string path = System.IO.Path.GetTempFileName();
             string fileToUse = "BlankForms/ICS-220-WF Air Operations Summary.pdf";
+            
 
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
             AirOperationsSummary summary = task.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
-
+            if (summary.notam.UseRadius) { fileToUse = "BlankForms/ICS-220-WF Air Operations Summary.pdf"; }
+            else { fileToUse = "BlankForms/ICS-220-WF Air Operations Summary Polygon.pdf"; }
 
             using (PdfReader rdr = new PdfReader(fileToUse))
             {
@@ -3407,19 +3409,55 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("Sunset", string.Format("{0:HH:mm}", summary.Sunset));
 
 
-                    stamper.AcroFields.SetField("Radius nm", summary.notam.RadiusNM.ToString());
-                    stamper.AcroFields.SetField("Altitude ASL", summary.notam.AltitudeASL.ToString() + " feet");
+                   
+                    stamper.AcroFields.SetField("Altitude ASL", summary.notam.AltitudeASL.ToString());
                     stamper.AcroFields.SetField("Center Point", summary.notam.CenterPoint);
-                    Coordinate coord = new Coordinate();
-                    coord.Latitude = summary.notam.Latitude;
-                    coord.Longitude = summary.notam.Longitude;
-                    if (coord.Latitude != 0 || coord.Longitude != 0)
-                    {
-                        string[] parts = coord.DegreesDecimalMinutesSep;
-                        stamper.AcroFields.SetField("Latitude", parts[0].ToString());
-                        stamper.AcroFields.SetField("Longitude", parts[1].ToString());
 
+                    if (summary.notam.UseRadius)
+                    {
+                        stamper.AcroFields.SetField("Radius nm", summary.notam.RadiusNM.ToString());
+                        if (summary.notam.RadiusCentre != null)
+                        {
+                            string[] parts = summary.notam.RadiusCentre.DegreesDecimalMinutesSep;
+                            stamper.AcroFields.SetField("Latitude", parts[0].ToString());
+                            stamper.AcroFields.SetField("Longitude", parts[1].ToString());
+                        }
                     }
+                    else
+                    {
+                        if (summary.notam.PolygonNW != null)
+                        {
+                            string[] parts = summary.notam.PolygonNW.DegreesDecimalMinutesSep;
+                            stamper.AcroFields.SetField("Northwest", parts[0].ToString());
+                            stamper.AcroFields.SetField("Northwest_2", parts[1].ToString());
+                        }
+
+                        if (summary.notam.PolygonNE != null)
+                        {
+                            string[] parts = summary.notam.PolygonNE.DegreesDecimalMinutesSep;
+                            stamper.AcroFields.SetField("Northeast", parts[0].ToString());
+                            stamper.AcroFields.SetField("Northeast_2", parts[1].ToString());
+                        }
+
+                        if (summary.notam.PolygonSW != null)
+                        {
+                            string[] parts = summary.notam.PolygonSW.DegreesDecimalMinutesSep;
+                            stamper.AcroFields.SetField("Southwest", parts[0].ToString());
+                            stamper.AcroFields.SetField("Southwest_2", parts[1].ToString());
+                        }
+
+                        if (summary.notam.PolygonSE != null)
+                        {
+                            string[] parts = summary.notam.PolygonSE.DegreesDecimalMinutesSep;
+                            stamper.AcroFields.SetField("Southeast", parts[0].ToString());
+                            stamper.AcroFields.SetField("Southeast_2", parts[1].ToString());
+                        }
+                    }
+                   
+                    /* TODO Replace this with code to fill the radius or polygon values
+                   
+                    */
+
 
                     stamper.AcroFields.SetField("9 PAGE", pageNumber.ToString());
                     stamper.AcroFields.SetField("OF", pageCount.ToString());

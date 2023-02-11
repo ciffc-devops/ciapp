@@ -285,7 +285,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 CoordinateSharp.Coordinate coordinate = new CoordinateSharp.Coordinate();
                 coordinate.Latitude = new CoordinatePart(Latitude, CoordinateType.Lat);
                 coordinate.Longitude = new CoordinatePart(Longitude, CoordinateType.Long);
-                parts[0] = coordinate.Latitude.Degrees + "°" + Math.Round(coordinate.Latitude.DecimalMinute, decimalPlaces) + ", ";
+                parts[0] = coordinate.Latitude.Degrees + "°" + Math.Round(coordinate.Latitude.DecimalMinute, decimalPlaces) ;
                 //if(coordinate.Longitude.)
                 
                 if (coordinate.Longitude.DecimalDegree < 0) { parts[1] += "-"; }
