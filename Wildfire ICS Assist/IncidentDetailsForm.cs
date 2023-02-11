@@ -612,9 +612,9 @@ namespace Wildfire_ICS_Assist
             CurrentIncident.createOrgChartAsNeeded(CurrentOpPeriod);
             buildICSRoleDropdown();
 
-
+            /*
             if (!string.IsNullOrEmpty(CurrentIncident.ICPCallSign)) { txtICPCallsign.Text = CurrentIncident.ICPCallSign; }
-            else { txtICPCallsign.Text = "BASE"; CurrentIncident.ICPCallSign = txtICPCallsign.Text; }
+            else { txtICPCallsign.Text = "BASE"; CurrentIncident.ICPCallSign = txtICPCallsign.Text; }*/
             txtTaskName.Text = CurrentIncident.TaskName;
             txtTaskNumber.Text = CurrentIncident.TaskNumber;
             if (CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID))
@@ -636,7 +636,7 @@ namespace Wildfire_ICS_Assist
             setButtonCheckboxes();
             browseToIncidentFolderToolStripMenuItem.Enabled = true;
 
-            List<TeamMember> savedMembers = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
             Program.CurrentIncident.TaskTeamMembers = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
         }
 
@@ -751,7 +751,7 @@ namespace Wildfire_ICS_Assist
         {
             txtTaskName.Text = e.item.TaskName;
             txtTaskNumber.Text = e.item.TaskNumber;
-            txtICPCallsign.Text = e.item.ICPCallSign;
+            //txtICPCallsign.Text = e.item.ICPCallSign;
 
 
             TriggerAutoSave();
@@ -895,7 +895,7 @@ namespace Wildfire_ICS_Assist
 
 
             if (Program.generalOptionsService.GetGuidOptionValue("OrganizationID") != Guid.Empty) { CurrentIncident.OrganizationID = Program.generalOptionsService.GetGuidOptionValue("OrganizationID"); }
-            CurrentIncident.ICPCallSign = txtICPCallsign.Text;
+          //  CurrentIncident.ICPCallSign = txtICPCallsign.Text;
 
             CurrentIncident.DocumentPath = Program.generalOptionsService.GetStringOptionValue("DefaultSaveLocation");
             checkForSave = false;
@@ -988,8 +988,8 @@ namespace Wildfire_ICS_Assist
 
                 //saveSelectedCommsPlanItems("Save File");
 
-                if (!string.IsNullOrEmpty(txtICPCallsign.Text)) { CurrentIncident.ICPCallSign = txtICPCallsign.Text; }
-                else { CurrentIncident.ICPCallSign = "BASE"; }
+               /* if (!string.IsNullOrEmpty(txtICPCallsign.Text)) { CurrentIncident.ICPCallSign = txtICPCallsign.Text; }
+                else { CurrentIncident.ICPCallSign = "BASE"; }*/
                 string fileName = CurrentIncident.FileName;
                 bool proceed = true;
                 if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName) || forceBrowseForFile)

@@ -79,6 +79,26 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CIAPP_LOGO_v3 {
+            get {
+                object obj = ResourceManager.GetObject("CIAPP-LOGO-v3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CIAPP_LOGO_v3_transparent {
+            get {
+                object obj = ResourceManager.GetObject("CIAPP-LOGO-v3-transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear Unified Command roles?.
         /// </summary>
         internal static string ClearUnifiedCommandRolesTitle {
@@ -1120,7 +1140,7 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must enter valid coordinates, or leave the coordinate field blank in order to proceed..
+        ///   Looks up a localized string similar to You must enter valid coordinates, or leave the coordinate field(s) blank in order to proceed. You may enter latitude and longitude, UTM, or MGRS..
         /// </summary>
         internal static string ValidCoordinatesRequired {
             get {

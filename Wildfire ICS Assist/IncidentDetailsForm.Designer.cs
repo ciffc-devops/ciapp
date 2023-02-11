@@ -62,8 +62,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtICPCallsign = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnOutstandingLogItems = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.btnViewPositionLog = new System.Windows.Forms.Button();
@@ -511,8 +509,6 @@
             this.pnlTaskInfo.BackColor = System.Drawing.Color.White;
             this.pnlTaskInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTaskInfo.Controls.Add(this.panel1);
-            this.pnlTaskInfo.Controls.Add(this.txtICPCallsign);
-            this.pnlTaskInfo.Controls.Add(this.label2);
             this.pnlTaskInfo.Controls.Add(this.btnOutstandingLogItems);
             this.pnlTaskInfo.Controls.Add(this.label19);
             this.pnlTaskInfo.Controls.Add(this.btnViewPositionLog);
@@ -533,16 +529,6 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.DimGray;
             this.panel1.Name = "panel1";
-            // 
-            // txtICPCallsign
-            // 
-            resources.ApplyResources(this.txtICPCallsign, "txtICPCallsign");
-            this.txtICPCallsign.Name = "txtICPCallsign";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
             // 
             // btnOutstandingLogItems
             // 
@@ -1313,7 +1299,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Wildfire_ICS_Assist.Properties.Resources.ics_canada_logo;
+            this.pictureBox1.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
@@ -1776,8 +1762,6 @@
         private System.Windows.Forms.ToolStripMenuItem medivacServicesToolStripMenuItem;
         private CustomControls.CollapsiblePanel cpIncidentActionPlan;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtICPCallsign;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.SaveFileDialog svdTaskFile;
         private System.Windows.Forms.OpenFileDialog ofdOpenTaskFile;
         private System.Windows.Forms.FolderBrowserDialog fbdSaveLocation;
