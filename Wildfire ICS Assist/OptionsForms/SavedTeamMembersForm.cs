@@ -29,12 +29,12 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             dgvTeamMembers.AutoGenerateColumns = false;
             dgvTeamMembers.DataSource = null;
-            List<TeamMember> members = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
             members = members.Where(o=>o.MemberActive).OrderBy(o=>o.ProvinceName).ThenBy(o=>o.Agency).ThenBy(o=>o.Name).ToList();
             dgvTeamMembers.DataSource = members;
         }
 
-        private void OpenForEdit(TeamMember member)
+        private void OpenForEdit(Personnel member)
         {
             using (EditSavedTeamMemberForm editForm = new EditSavedTeamMemberForm())
             {
@@ -51,7 +51,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            TeamMember member = new TeamMember();
+            Personnel member = new Personnel();
             member.MemberActive = true;
             OpenForEdit(member);
         }
@@ -60,7 +60,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             if(dgvTeamMembers.SelectedRows.Count == 1)
             {
-                TeamMember member = dgvTeamMembers.SelectedRows[0].DataBoundItem as TeamMember;
+                Personnel member = dgvTeamMembers.SelectedRows[0].DataBoundItem as Personnel;
                 OpenForEdit(member);
             }
         }
@@ -69,7 +69,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             if(e.RowIndex >= 0)
             {
-                TeamMember member = dgvTeamMembers.Rows[e.RowIndex].DataBoundItem as TeamMember;
+                Personnel member = dgvTeamMembers.Rows[e.RowIndex].DataBoundItem as Personnel;
                 OpenForEdit(member);
             }
         }
@@ -80,12 +80,12 @@ namespace Wildfire_ICS_Assist.OptionsForms
             {
                 if (dgvTeamMembers.SelectedRows.Count > 0)
                 {
-                    List<TeamMember> toDelete = new List<TeamMember>();
+                    List<Personnel> toDelete = new List<Personnel>();
                     foreach (DataGridViewRow row in dgvTeamMembers.SelectedRows)
                     {
-                        toDelete.Add(row.DataBoundItem as TeamMember);
+                        toDelete.Add(row.DataBoundItem as Personnel);
                     }
-                    foreach (TeamMember mem in toDelete)
+                    foreach (Personnel mem in toDelete)
                     {
                         mem.MemberActive = false;
                         Program.generalOptionsService.UpserOptionValue(mem, "TeamMember");
@@ -121,7 +121,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
 
 
-                List<TeamMember> members = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+                List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
                 members = members.Where(o => o.MemberActive).OrderBy(o => o.Agency).ThenBy(o => o.Name).ToList();
 
                 string csv = members.ToCSV(delimiter);

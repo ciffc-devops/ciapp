@@ -23,7 +23,7 @@ namespace WF_ICS_ClassLibrary.Models
     [XmlInclude(typeof(EquipmentIssue))]
     [XmlInclude(typeof(IncidentObjective))]
     [XmlInclude(typeof(MedicalPlan))]
-    [XmlInclude(typeof(TeamMember))]
+    [XmlInclude(typeof(Personnel))]
     [XmlInclude(typeof(MemberStatus))]
     [XmlInclude(typeof(SignInRecord))]
     [XmlInclude(typeof(Note))]
@@ -232,9 +232,9 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 objDecrypted = JsonSerializer.Deserialize<SignInRecord>(jsonData);
             }
-            else if (ObjectType.Equals(new TeamMember().GetType().Name))
+            else if (ObjectType.Equals(new Personnel().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<TeamMember>(jsonData);
+                objDecrypted = JsonSerializer.Deserialize<Personnel>(jsonData);
             }
             else if (ObjectType.Equals(new WFIncident().GetType().Name))
             {

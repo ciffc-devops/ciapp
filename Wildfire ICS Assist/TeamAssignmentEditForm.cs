@@ -50,7 +50,7 @@ namespace Wildfire_ICS_Assist
                 if(nextFreeComms >= CommsComboBoxes.Count) { break; }
             }
 
-            List<TeamMember> members = Program.CurrentIncident.TaskTeamMembers;
+            List<Personnel> members = Program.CurrentIncident.TaskTeamMembers;
             if(selectedAssignment.LeaderPersonID != Guid.Empty && members.Any(o=>o.PersonID == selectedAssignment.LeaderPersonID))
             {
                 PersonnelComboBoxes[0].SelectedValue = selectedAssignment.LeaderPersonID;
@@ -128,11 +128,11 @@ namespace Wildfire_ICS_Assist
             PersonnelComboBoxes.Add(cboPerson10);
             PersonnelComboBoxes.Add(cboPerson11);
 
-            List<TeamMember> members = Program.CurrentIncident.TaskTeamMembers.OrderBy(o=>o.Name).ToList();
-            TeamMember blank = new TeamMember(); blank.PersonID = Guid.Empty; members.Insert(0, blank);
+            List<Personnel> members = Program.CurrentIncident.TaskTeamMembers.OrderBy(o=>o.Name).ToList();
+            Personnel blank = new Personnel(); blank.PersonID = Guid.Empty; members.Insert(0, blank);
             foreach(ComboBox cbo in PersonnelComboBoxes)
             {
-                List<TeamMember> mems = new List<TeamMember>();
+                List<Personnel> mems = new List<Personnel>();
                 mems.AddRange(members);
                 cbo.DataSource = mems;
                 cbo.ValueMember = "PersonID";
@@ -206,12 +206,12 @@ namespace Wildfire_ICS_Assist
             selectedAssignment.AssignedMemberIDs.Clear();
             foreach (ComboBox cb in PersonnelComboBoxes)
             {
-                if (cb.SelectedItem != null && (cb.SelectedItem as TeamMember).PersonID != Guid.Empty) { selectedAssignment.AssignedMemberIDs.Add((cb.SelectedItem as TeamMember).PersonID); }
+                if (cb.SelectedItem != null && (cb.SelectedItem as Personnel).PersonID != Guid.Empty) { selectedAssignment.AssignedMemberIDs.Add((cb.SelectedItem as Personnel).PersonID); }
 
             }
             if (PersonnelComboBoxes[0].SelectedItem != null)
             {
-                TeamMember ld = PersonnelComboBoxes[0].SelectedItem as TeamMember;
+                Personnel ld = PersonnelComboBoxes[0].SelectedItem as Personnel;
                 selectedAssignment.LeaderName = ld.Name;
                 selectedAssignment.LeaderPersonID = ld.PersonID;
             }

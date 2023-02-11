@@ -451,7 +451,7 @@ namespace WildfireICSDesktopServices
                 case "DefaultPortNumber":
                     _options.DefaultPortNumber = Convert.ToInt32(newValue); break;
                 case "TeamMember":
-                    TeamMember member = (TeamMember)newValue;
+                    Personnel member = (Personnel)newValue;
                     _options.AllTeamMembers = _options.AllTeamMembers.Where(o => o.PersonID != member.PersonID).ToList();
                     _options.AllTeamMembers.Add(member);
                     break;

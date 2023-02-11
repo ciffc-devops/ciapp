@@ -151,7 +151,7 @@
     <Compile Include="Models\TaskBasics.cs" />
     <Compile Include="Models\TaskUpdate.cs" />
     <Compile Include="Models\TeamAssignment.cs" />
-    <Compile Include="Models\TeamMember.cs" />
+    <Compile Include="Models\Personnel.cs" />
     <Compile Include="Models\Timeline.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\WFIncident.cs" />

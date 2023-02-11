@@ -15,8 +15,8 @@ namespace Wildfire_ICS_Assist
 {
     public partial class PersonnelSignInForm : Form
     {
-        private TeamMember _selectedMember;
-        public TeamMember selectedMember { get => _selectedMember; set => _selectedMember = value; }
+        private Personnel _selectedMember;
+        public Personnel selectedMember { get => _selectedMember; set => _selectedMember = value; }
         private SignInRecord _signInRecord = new SignInRecord();
         public SignInRecord signInRecord { get => _signInRecord; set => _signInRecord = value; }
 
@@ -42,7 +42,7 @@ namespace Wildfire_ICS_Assist
             cboSavedPersonnel.DataSource = null;
             List<MemberStatus> statuses = Program.CurrentIncident.getAllMemberStatus(Program.CurrentOpPeriod);
 
-            List<TeamMember> members = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
             members = members.Where(o => o.MemberActive).OrderBy(o => o.ProvinceName).ThenBy(o => o.Agency).ThenBy(o => o.Name).ToList();
             members = members.Where(o => !statuses.Any(s => s.MemberID == o.PersonID)).ToList();
 
@@ -53,7 +53,7 @@ namespace Wildfire_ICS_Assist
         {
             if (cboSavedPersonnel.SelectedItem != null)
             {
-                selectedMember = (TeamMember)cboSavedPersonnel.SelectedItem;
+                selectedMember = (Personnel)cboSavedPersonnel.SelectedItem;
                 txtSelectedName.Text = selectedMember.Name;
                 pnlCheckInInfo.Enabled = true;
                 pnlCheckInInfo.BackColor = Color.White;

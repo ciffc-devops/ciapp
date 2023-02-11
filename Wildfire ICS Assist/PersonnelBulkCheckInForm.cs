@@ -54,9 +54,9 @@ namespace Wildfire_ICS_Assist
             dgvSavedPersonnel.DataSource = null;
             List<MemberStatus> statuses = Program.CurrentIncident.getAllMemberStatus(Program.CurrentOpPeriod);
 
-            List<TeamMember> members = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
             //add members from previous op periods
-            List<TeamMember> prevMembers = Program.CurrentIncident.TaskTeamMembers.Where(o=> !members.Any(m=>m.PersonID == o.PersonID)).ToList();
+            List<Personnel> prevMembers = Program.CurrentIncident.TaskTeamMembers.Where(o=> !members.Any(m=>m.PersonID == o.PersonID)).ToList();
             members.AddRange(prevMembers);
 
 
@@ -70,13 +70,13 @@ namespace Wildfire_ICS_Assist
         {
             if (ValidateCheckInInfo())
             {
-                List<TeamMember> membersToSignIn = new List<TeamMember>();
+                List<Personnel> membersToSignIn = new List<Personnel>();
                 int checkIndex = dgvSavedPersonnel.Columns["colCheck"].Index;
                 foreach (DataGridViewRow row in dgvSavedPersonnel.Rows)
                 {
                     if (row.Index >= 0)
                     {
-                        TeamMember member = (TeamMember)row.DataBoundItem;
+                        Personnel member = (Personnel)row.DataBoundItem;
                         DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)row.Cells[checkIndex];
                         if (cell.Value != null && cell.Value.ToString().Equals(cell.TrueValue.ToString(), StringComparison.InvariantCultureIgnoreCase))
                         {
@@ -85,7 +85,7 @@ namespace Wildfire_ICS_Assist
                     }
                 }
 
-                foreach (TeamMember member in membersToSignIn)
+                foreach (Personnel member in membersToSignIn)
                 {
                     SignInRecord record = new SignInRecord();
                     record.IsSignIn = true;

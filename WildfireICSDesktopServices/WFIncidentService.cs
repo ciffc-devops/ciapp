@@ -377,9 +377,9 @@ namespace WildfireICSDesktopServices
             {
                 UpsertMemberStatus(((SignInRecord)obj).Clone(), source);
             }
-            else if (dataClassName.Equals(new TeamMember().GetType().Name))
+            else if (dataClassName.Equals(new Personnel().GetType().Name))
             {
-                UpsertMemberStatus(((TeamMember)obj).Clone(), source);
+                UpsertMemberStatus(((Personnel)obj).Clone(), source);
             }
 
 
@@ -1089,7 +1089,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public void UpsertICSRole(string roleName, int opsPeriod, TeamMember member, string source = "local")
+        public void UpsertICSRole(string roleName, int opsPeriod, Personnel member, string source = "local")
         {
 
             if (!_currentIncident.allOrgCharts.Any(o => o.OpPeriod == opsPeriod))
@@ -1431,7 +1431,7 @@ namespace WildfireICSDesktopServices
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(signIn, "UPSERT", true, false); }
             OnMemberSignInChanged(new MemberEventArgs(signIn));
         }
-        public void UpsertMemberStatus(TeamMember member, string source = "local")
+        public void UpsertMemberStatus(Personnel member, string source = "local")
         {
             if (member != null)
             {

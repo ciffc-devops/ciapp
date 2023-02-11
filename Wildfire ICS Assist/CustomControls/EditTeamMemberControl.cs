@@ -13,8 +13,8 @@ namespace Wildfire_ICS_Assist.CustomControls
 {
     public partial class EditTeamMemberControl : UserControl
     {
-        private TeamMember _teamMember = new TeamMember();
-        public TeamMember teamMember { get => _teamMember; set { _teamMember = value; displayTeamMember(); } }
+        private Personnel _teamMember = new Personnel();
+        public Personnel teamMember { get => _teamMember; set { _teamMember = value; displayTeamMember(); } }
 
 
         private void displayTeamMember()

@@ -26,7 +26,7 @@ namespace Wildfire_ICS_Assist
 
         private void LoadValues()
         {
-            List<TeamMember> members = new List<TeamMember>();
+            List<Personnel> members = new List<Personnel>();
             foreach (SignInRecord record in _records) { if (!members.Any(o => o.PersonID == record.teamMember.PersonID)) { members.Add(record.teamMember); } }
 
             if (members.Count == 1)
@@ -36,7 +36,7 @@ namespace Wildfire_ICS_Assist
             else
             {
                 StringBuilder sb = new StringBuilder();
-                foreach (TeamMember member in members) { if (sb.Length > 0) { sb.Append(", "); } sb.Append(member.Name); }
+                foreach (Personnel member in members) { if (sb.Length > 0) { sb.Append(", "); } sb.Append(member.Name); }
                 lblNames.Text = sb.ToString();
             }
             DateTime CheckIn = DateTime.MaxValue;

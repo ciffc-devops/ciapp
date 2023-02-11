@@ -51,7 +51,7 @@
             this.editTeamMemberControl1.Name = "editTeamMemberControl1";
             this.editTeamMemberControl1.Size = new System.Drawing.Size(506, 397);
             this.editTeamMemberControl1.TabIndex = 0;
-            this.editTeamMemberControl1.teamMember = ((WF_ICS_ClassLibrary.Models.TeamMember)(resources.GetObject("editTeamMemberControl1.teamMember")));
+            this.editTeamMemberControl1.teamMember = ((WF_ICS_ClassLibrary.Models.Personnel)(resources.GetObject("editTeamMemberControl1.teamMember")));
             this.editTeamMemberControl1.Load += new System.EventHandler(this.editTeamMemberControl1_Load);
             // 
             // splitContainer1

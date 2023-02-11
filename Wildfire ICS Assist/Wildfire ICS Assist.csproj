@@ -647,6 +647,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PersonnelSignInForm.resx">
       <DependentUpon>PersonnelSignInForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonnelViewCheckinForm.resx">
       <DependentUpon>PersonnelViewCheckinForm.cs</DependentUpon>
@@ -842,6 +843,9 @@
     <None Include="BlankForms\ICS-214-WF-Activity-Log.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\ICS-220-WF Air Operations Summary Polygon.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS-220-WF Air Operations Summary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -888,6 +892,8 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\CIAPP-LOGO-v3-transparent.png" />
+    <None Include="Resources\CIAPP-LOGO-v3.png" />
     <None Include="Resources\glyphicons-basic-89-book-address.png" />
     <None Include="Resources\glyphicons-basic-89-book-address1.png" />
     <None Include="Resources\glyphicons-basic-965-layers-plus1.png" />

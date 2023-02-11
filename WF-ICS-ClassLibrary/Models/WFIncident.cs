@@ -30,7 +30,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
  ProtoInclude(109, typeof(Contact)),
  ProtoInclude(112, typeof(IncidentObjective)),
  ProtoInclude(116, typeof(MedicalPlan)),
- ProtoInclude(117, typeof(TeamMember)),
+ ProtoInclude(117, typeof(Personnel)),
  ProtoInclude(118, typeof(MemberStatus)),
  ProtoInclude(119, typeof(SignInRecord)),
  ProtoInclude(120, typeof(Note)),
@@ -113,7 +113,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(26)] private Guid _RequestID;
         //  [ProtoMember(27)] private List<WhiteboardItem> _whiteboardItems = new List<WhiteboardItem>();
         [ProtoMember(28)] private List<SignInRecord> _signInRecords = new List<SignInRecord>();
-        [ProtoMember(29)] private List<TeamMember> _taskTeamMembers = new List<TeamMember>();
+        [ProtoMember(29)] private List<Personnel> _taskTeamMembers = new List<Personnel>();
         [ProtoMember(30)] private Organization _taskOrganization = new Organization();
         [ProtoMember(31)] private DateTime _DateCreatedUTC;
         [ProtoMember(32)] private DateTime _DateUpdatedUTC;
@@ -312,7 +312,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
 
-        public List<TeamMember> TaskTeamMembers { get { return _taskTeamMembers; } set { _taskTeamMembers = value; } }
+        public List<Personnel> TaskTeamMembers { get { return _taskTeamMembers; } set { _taskTeamMembers = value; } }
         public Organization TaskOrganization { get => _taskOrganization; set => _taskOrganization = value; }
         public Guid OrganizationID { get => TaskOrganization.OrganizationID; set => TaskOrganization.OrganizationID = value; }
         public string OrganizationName { get => TaskOrganization.OrganizationName; set => TaskOrganization.OrganizationName = value; }

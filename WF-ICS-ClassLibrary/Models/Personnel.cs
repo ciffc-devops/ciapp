@@ -12,15 +12,15 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [Serializable]
     [ProtoContract]
-    public class TeamMember : IEquatable<TeamMember>, ICloneable
+    public class Personnel : IEquatable<Personnel>, ICloneable
     {
-        public TeamMember()
+        public Personnel()
         {
             PersonID = Guid.NewGuid();
             MemberActive = true;
             CurrentStatus = null;
         }
-        public TeamMember(Guid id)
+        public Personnel(Guid id)
         {
             PersonID = id;
             MemberActive = true;
@@ -238,9 +238,9 @@ namespace WF_ICS_ClassLibrary.Models
 
         
 
-        public TeamMember Clone()
+        public Personnel Clone()
         {
-            TeamMember cloneTo = this.MemberwiseClone() as TeamMember;
+            Personnel cloneTo = this.MemberwiseClone() as Personnel;
             if (this.CurrentStatus != null) { cloneTo.CurrentStatus = CurrentStatus.Clone(); }
             return cloneTo;
         }
@@ -249,7 +249,7 @@ namespace WF_ICS_ClassLibrary.Models
             return this.Clone();
         }
 
-        public void createClone(TeamMember teamMember)
+        public void createClone(Personnel teamMember)
         {
             PersonID = teamMember.PersonID;
             Name = teamMember.Name;
@@ -272,7 +272,7 @@ namespace WF_ICS_ClassLibrary.Models
             NoGluten = teamMember.NoGluten;
         }
 
-        public bool IsIdentical(TeamMember compareTo)
+        public bool IsIdentical(Personnel compareTo)
         {
             bool Identical = true;
 
@@ -294,7 +294,7 @@ namespace WF_ICS_ClassLibrary.Models
             return Identical;
         }
 
-        public bool Equals(TeamMember other)
+        public bool Equals(Personnel other)
         {
             // Would still want to check for null etc. first.
             return this.PersonID == other.PersonID;
@@ -303,9 +303,9 @@ namespace WF_ICS_ClassLibrary.Models
 
       
 
-        public List<TeamMember> getMembersFromCSV(string filename, int callsignColumn = -1)
+        public List<Personnel> getMembersFromCSV(string filename, int callsignColumn = -1)
         {
-            List<TeamMember> members = new List<TeamMember>();
+            List<Personnel> members = new List<Personnel>();
 
             int nameField = 0;
             int RefField = 2;
@@ -366,7 +366,7 @@ namespace WF_ICS_ClassLibrary.Models
                     }
                     else
                     {
-                        TeamMember member = new TeamMember();
+                        Personnel member = new Personnel();
                         member.Name = fields[nameField];
                         member.Phone = fields[phoneField];
                         member.MemberActive = true;
@@ -404,7 +404,7 @@ namespace WF_ICS_ClassLibrary.Models
         private Guid _memberID;*/
         [ProtoMember(4)] private int _opPeriod;
         [ProtoMember(5)] private Guid _signInRecordID;
-        [ProtoMember(6)] private TeamMember _teamMember;
+        [ProtoMember(6)] private Personnel _teamMember;
         [ProtoMember(7)] private bool _isSignIn;
         [ProtoMember(8)] private decimal _KMs;
         [ProtoMember(9)] private DateTime _TimeOutRequest;
@@ -419,12 +419,12 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid MemberID { get { return _teamMember.PersonID; } set { _teamMember.PersonID = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public int OpPeriod { get { return _opPeriod; } set { _opPeriod = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public Guid SignInRecordID { get { return _signInRecordID; } set { _signInRecordID = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public TeamMember teamMember { get => _teamMember; set { _teamMember = value; RecordUpdatedUTC = DateTime.UtcNow; } }
+        public Personnel teamMember { get => _teamMember; set { _teamMember = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public bool IsSignIn { get => _isSignIn; set { _isSignIn = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public decimal KMs { get => _KMs; set { _KMs = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public DateTime TimeOutRequest { get => _TimeOutRequest; set { _TimeOutRequest = value; RecordUpdatedUTC = DateTime.UtcNow; } }
 
-        public SignInRecord() { SignInRecordID = Guid.NewGuid(); _teamMember = new TeamMember(); }
+        public SignInRecord() { SignInRecordID = Guid.NewGuid(); _teamMember = new Personnel(); }
         public DateTime RecordUpdatedUTC { get => _RecordUpdatedUTC; set => _RecordUpdatedUTC = value; }
 
 
@@ -569,7 +569,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid CheckOutRecordID { get => _CheckOutRecordID; set => _CheckOutRecordID = value; }
 
         public string Callsign { get => _Callsign; set => _Callsign = value; }
-        public void setTeamMember(TeamMember member)
+        public void setTeamMember(Personnel member)
         {
             MemberName = member.Name;
             MemberID = member.PersonID;
@@ -621,20 +621,20 @@ namespace WF_ICS_ClassLibrary.Models
                 }
 
 
-                csv.Append(status.MemberName.EscapeQuotes());
+                csv.Append("\""); csv.Append(status.MemberName.EscapeQuotes()); csv.Append("\"");
                 csv.Append(delimiter);
                 if (rec != null) { csv.Append(rec.teamMember.ProvinceNameShort.EscapeQuotes()); }
                 csv.Append(delimiter);
-                csv.Append(status.OrganizationName.EscapeQuotes());
+                csv.Append("\""); csv.Append(status.OrganizationName.EscapeQuotes()); csv.Append("\"");
                 csv.Append(delimiter);
                
                 csv.Append(status.SignInTime.ToString(Globals.DateFormat + " HH:mm"));
                 csv.Append(delimiter);
                 csv.Append(status.LastDayWorked.ToString(Globals.DateFormat + " HH:mm"));
                 csv.Append(delimiter);
-                if (rec != null) { csv.Append(rec.DeparturePoint.EscapeQuotes()); }
+                if (rec != null) { csv.Append("\""); csv.Append(rec.DeparturePoint.EscapeQuotes()); csv.Append("\""); }
                 csv.Append(delimiter);
-                if (rec != null) { csv.Append(rec.MethodOfTravel.EscapeQuotes()); }
+                if (rec != null) { csv.Append("\""); csv.Append(rec.MethodOfTravel.EscapeQuotes()); csv.Append("\""); }
                 csv.Append(delimiter);
 
 
@@ -663,9 +663,9 @@ namespace WF_ICS_ClassLibrary.Models
             return counts;
         }
 
-        public static TeamMember getMemberFromQR(string qr)
+        public static Personnel getMemberFromQR(string qr)
         {
-            TeamMember member = new TeamMember();
+            Personnel member = new Personnel();
             string[] bits = qr.Split(';');
             if (bits.Length < 11)
             {
@@ -695,11 +695,11 @@ namespace WF_ICS_ClassLibrary.Models
             }
         }
 
-        public static TeamMember getMemberFromSimplifiedQR(string qr)
+        public static Personnel getMemberFromSimplifiedQR(string qr)
         {
             if (!string.IsNullOrEmpty(qr))
             {
-                TeamMember member = new TeamMember();
+                Personnel member = new Personnel();
                 string[] bits = qr.Split(';');
                 if (bits.Length > 0)
                 {
@@ -729,7 +729,7 @@ namespace WF_ICS_ClassLibrary.Models
             else { return null; }
         }
 
-        public static string ToCSV(this List<TeamMember> members, string delimiter = ",")
+        public static string ToCSV(this List<Personnel> members, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();
             csv.Append("Name"); csv.Append(delimiter);
@@ -744,7 +744,7 @@ namespace WF_ICS_ClassLibrary.Models
             csv.Append("Other Dietary"); csv.Append(delimiter);
             csv.Append(Environment.NewLine);
 
-            foreach (TeamMember item in members)
+            foreach (Personnel item in members)
             {
 
                 //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 

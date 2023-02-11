@@ -18,11 +18,11 @@ namespace Wildfire_ICS_Assist
     {
         private ICSRole _selectedRole = null;
         public ICSRole selectedRole { get => _selectedRole; set { _selectedRole = value; DisplayRole(); } }
-        List<TeamMember> members = null;
+        List<Personnel> members = null;
 
         private void DisplayRole()
         {
-            List<TeamMember> savedMembers = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
             members = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
 
             cboSavedMembers.DataSource = members;
@@ -42,7 +42,7 @@ namespace Wildfire_ICS_Assist
 
         private void OrganizationChartAssignRole_Load(object sender, EventArgs e)
         {
-            editTeamMemberControl1.teamMember = new TeamMember();
+            editTeamMemberControl1.teamMember = new Personnel();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace Wildfire_ICS_Assist
         {
             if(cboSavedMembers.SelectedItem!= null)
             {
-                TeamMember member =(TeamMember) cboSavedMembers.SelectedItem;
+                Personnel member =(Personnel) cboSavedMembers.SelectedItem;
                 selectedRole.IndividualID = member.PersonID;
                 selectedRole.teamMember = member.Clone();
                 selectedRole.IndividualName= member.Name;
@@ -103,7 +103,7 @@ namespace Wildfire_ICS_Assist
         {
             if (editTeamMemberControl1.FormValid)
             {
-                TeamMember member = editTeamMemberControl1.teamMember;
+                Personnel member = editTeamMemberControl1.teamMember;
 
                 selectedRole.IndividualID = member.PersonID;
                 selectedRole.teamMember = member.Clone();
@@ -128,7 +128,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnClearAssignment_Click(object sender, EventArgs e)
         {
-            TeamMember blankMember = new TeamMember();
+            Personnel blankMember = new Personnel();
             blankMember.PersonID = Guid.Empty;
 
             selectedRole.IndividualID = Guid.Empty;

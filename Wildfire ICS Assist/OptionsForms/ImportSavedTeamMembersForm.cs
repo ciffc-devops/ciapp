@@ -158,7 +158,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private bool ImportMemberFromFile(string path)
         {
-            List<TeamMember> importedMembers = new List<TeamMember>();
+            List<Personnel> importedMembers = new List<Personnel>();
             int nameCol = cboName.SelectedIndex;
             int agencyCol = cboAgency.SelectedIndex;
             int emailCol = cboEmail.SelectedIndex;
@@ -192,7 +192,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                     //Need a check for the header row
 
-                    TeamMember member = new TeamMember();
+                    Personnel member = new Personnel();
                     member.Name = fields[nameCol];
                     member.Phone = fields[phoneCol];
                     member.MemberActive = true;
@@ -249,17 +249,17 @@ namespace Wildfire_ICS_Assist.OptionsForms
             }//end of parser
 
 
-            List<TeamMember> savedMembers = (List<TeamMember>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
 
-            foreach (TeamMember member in importedMembers)
+            foreach (Personnel member in importedMembers)
             {
                 if (chkUpdateWhenPossible.Checked)
                 {
-                    List<TeamMember> possibleDuplicates = savedMembers.Where(o => ((!string.IsNullOrEmpty(member.Email) && !string.IsNullOrEmpty(o.Email) && o.Email.Equals(member.Email, StringComparison.InvariantCultureIgnoreCase)) || (!string.IsNullOrEmpty(member.Phone) && !string.IsNullOrEmpty(o.Phone) && o.Phone.Equals(member.Phone, StringComparison.InvariantCultureIgnoreCase)) || ((o.Agency == null && member.Agency == null) || (!string.IsNullOrEmpty(member.Agency) && !string.IsNullOrEmpty(o.Agency) && o.Agency.Equals(member.Agency, StringComparison.InvariantCultureIgnoreCase)))) && (o.Name.Equals(member.Name, StringComparison.InvariantCultureIgnoreCase))).ToList();
+                    List<Personnel> possibleDuplicates = savedMembers.Where(o => ((!string.IsNullOrEmpty(member.Email) && !string.IsNullOrEmpty(o.Email) && o.Email.Equals(member.Email, StringComparison.InvariantCultureIgnoreCase)) || (!string.IsNullOrEmpty(member.Phone) && !string.IsNullOrEmpty(o.Phone) && o.Phone.Equals(member.Phone, StringComparison.InvariantCultureIgnoreCase)) || ((o.Agency == null && member.Agency == null) || (!string.IsNullOrEmpty(member.Agency) && !string.IsNullOrEmpty(o.Agency) && o.Agency.Equals(member.Agency, StringComparison.InvariantCultureIgnoreCase)))) && (o.Name.Equals(member.Name, StringComparison.InvariantCultureIgnoreCase))).ToList();
                     //If there is more than one duplicate, best to just import this as new rather than trying to decide which one to replace
                     if (possibleDuplicates.Count == 1 || possibleDuplicates.Where(o=>o.MemberActive).Count() == 1)
                     {
-                        TeamMember dup = null;
+                        Personnel dup = null;
                         if (possibleDuplicates.Count == 1) { dup = possibleDuplicates[0]; }
                         else { dup = possibleDuplicates.First(o => o.MemberActive); }
                         dup.MemberActive = true;

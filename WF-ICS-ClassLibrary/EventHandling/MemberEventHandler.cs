@@ -13,10 +13,10 @@ namespace WF_ICS_ClassLibrary.EventHandling
     {
         public Guid MemberID { get; set; }
         public SignInRecord signInRecord { get; set; }
-        public TeamMember teamMember { get; set; }
+        public Personnel teamMember { get; set; }
 
         public MemberEventArgs(Guid _memberID) { MemberID = _memberID; }
         public MemberEventArgs(SignInRecord _record) { signInRecord = _record; if (_record != null) { MemberID = _record.MemberID; } }
-        public MemberEventArgs(TeamMember _member) { teamMember = _member; if (teamMember != null) { MemberID = teamMember.PersonID; } }
+        public MemberEventArgs(Personnel _member) { teamMember = _member; if (teamMember != null) { MemberID = teamMember.PersonID; } }
     }
 }

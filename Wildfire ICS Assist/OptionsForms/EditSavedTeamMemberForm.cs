@@ -13,7 +13,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 {
     public partial class EditSavedTeamMemberForm : Form
     {
-        public TeamMember selectedMember { get => editTeamMemberControl1.teamMember; set { editTeamMemberControl1.teamMember = value; } } 
+        public Personnel selectedMember { get => editTeamMemberControl1.teamMember; set { editTeamMemberControl1.teamMember = value; } } 
 
 
         public EditSavedTeamMemberForm()

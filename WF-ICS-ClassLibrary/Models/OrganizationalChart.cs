@@ -64,10 +64,10 @@ namespace WF_ICS_ClassLibrary.Models
 
             return name;
         }
-        public TeamMember getTeamMemberByRoleName(string rolename, bool defaultUpChain = true)
+        public Personnel getTeamMemberByRoleName(string rolename, bool defaultUpChain = true)
         {
             ICSRole role = this.GetRoleByName(rolename);
-            TeamMember member = role.teamMember;
+            Personnel member = role.teamMember;
             if (defaultUpChain && string.IsNullOrEmpty(member.Name))
             {
                 member = getTeamMemberByRoleID(role.ReportsTo);
@@ -91,11 +91,11 @@ namespace WF_ICS_ClassLibrary.Models
             else { return null; }
         }
 
-        public TeamMember getTeamMemberByRoleID(Guid id, bool defaultUpChain = true)
+        public Personnel getTeamMemberByRoleID(Guid id, bool defaultUpChain = true)
         {
             if (ActiveRoles.Any(o => o.RoleID == id))
             {
-                TeamMember member = ActiveRoles.First(o => o.RoleID == id).teamMember;
+                Personnel member = ActiveRoles.First(o => o.RoleID == id).teamMember;
                 if (defaultUpChain && string.IsNullOrEmpty(member.Name) && ActiveRoles.First(o => o.RoleID == id).ReportsTo != Guid.Empty)
                 {
                     member = getTeamMemberByRoleID(ActiveRoles.Where(o => o.RoleID == id).First().ReportsTo);
@@ -144,7 +144,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(4)] private string _PDFFieldName;
         [ProtoMember(5)] private Guid _OrganizationalChartID;
         [ProtoMember(6)] private Guid _OrgChartRoleID;
-        [ProtoMember(7)] private TeamMember _teamMember;
+        [ProtoMember(7)] private Personnel _teamMember;
         [ProtoMember(8)] private DateTime _LastUpdatedUTC;
         [ProtoMember(9)] private int _OpPeriod;
         [ProtoMember(10)] private Guid _BranchID;
@@ -206,14 +206,14 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (teamMember == null) { teamMember = new TeamMember(); }
+                if (teamMember == null) { teamMember = new Personnel(); }
                 return teamMember.PersonID;
             }
             set
             {
                 if (value == Guid.Empty)
                 {
-                    teamMember = new TeamMember(); teamMember.PersonID = Guid.Empty;
+                    teamMember = new Personnel(); teamMember.PersonID = Guid.Empty;
                 }
                 else { teamMember.PersonID = IndividualID; }
             }
@@ -229,32 +229,32 @@ namespace WF_ICS_ClassLibrary.Models
         public bool IncludeReportsToInName { get => _IncludeReportsToInName; set => _IncludeReportsToInName = value; }
         public string BaseRoleName { get => _BaseRoleName; set => _BaseRoleName = value; }
         public bool Active { get => _Active; set => _Active = value; }
-        public TeamMember teamMember
+        public Personnel teamMember
         {
             get => _teamMember;
             set
             {
-                if (value != null && value.PersonID == Guid.Empty) { _teamMember = new TeamMember(); _teamMember.PersonID = Guid.Empty; }
+                if (value != null && value.PersonID == Guid.Empty) { _teamMember = new Personnel(); _teamMember.PersonID = Guid.Empty; }
                 else { _teamMember = value; }
 
             }
         }
 
 
-        public ICSRole() { teamMember = new TeamMember(); OrgChartRoleID = System.Guid.NewGuid(); RoleID = System.Guid.NewGuid(); _ManualSortOrder = 99; Depth = 0; Active = true; }
+        public ICSRole() { teamMember = new Personnel(); OrgChartRoleID = System.Guid.NewGuid(); RoleID = System.Guid.NewGuid(); _ManualSortOrder = 99; Depth = 0; Active = true; }
         /*
         public ICSRole(Guid id, string name, Guid reports, string pdfname, string person_name = "", Guid person_id = new Guid())
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; IndividualName = person_name; IndividualID = person_id;
         }*/
-        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, TeamMember member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
+        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; BranchID = Branch; _OrgChartRoleID = System.Guid.NewGuid();
             MaualSortOrder = maualSortOrder; Depth = initial_depth; Active = true;
             _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
             FillInfoFromStaticRole();
         }
-        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, string pdftitle, TeamMember member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
+        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, string pdftitle, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; BranchID = Branch; _OrgChartRoleID = System.Guid.NewGuid();
             PDFTitleName = pdftitle; Active = true;
@@ -452,7 +452,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public static void UnassignThisAndSubordinateRoles(this OrganizationChart chart, ICSRole roleToClear, bool sendUpsertCommands = true)
         {
-            TeamMember blankMember = new TeamMember();
+            Personnel blankMember = new Personnel();
             blankMember.PersonID = Guid.Empty;
 
             roleToClear.IndividualID = Guid.Empty;
@@ -550,7 +550,7 @@ namespace WF_ICS_ClassLibrary.Models
                 {
                     uc1.teamMember = org.ActiveRoles.First(o => o.RoleID == Globals.IncidentCommanderID).teamMember.Clone();
                    
-                    ic.teamMember = new TeamMember(Guid.Empty);
+                    ic.teamMember = new Personnel(Guid.Empty);
                     
                 }
                 ic.RoleName = "Unified Command";
@@ -603,7 +603,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public static List<ICSRole> GetBlankRolesBasedOnThisChart(OrganizationChart ogOrgChart, int newOpPeriod, Guid newChartID)
         {
-            TeamMember blankMember = new TeamMember();
+            Personnel blankMember = new Personnel();
             blankMember.PersonID = Guid.Empty;
 
             List<ICSRole> AllRoles = new List<ICSRole>();
@@ -644,7 +644,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public static List<ICSRole> AddUnifiedCommandRoles(this List<ICSRole> list, bool upsertToIncident = false)
         {
-            TeamMember blankMember = new TeamMember();
+            Personnel blankMember = new Personnel();
             blankMember.PersonID = Guid.Empty;
 
 
@@ -693,7 +693,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public static List<ICSRole> GetBlankPrimaryRoles(bool UnifiedCommand = false)
         {
-            TeamMember blankMember = new TeamMember();
+            Personnel blankMember = new Personnel();
             blankMember.PersonID = Guid.Empty;
 
             List<ICSRole> AllRoles = new List<ICSRole>();
@@ -898,7 +898,7 @@ namespace WF_ICS_ClassLibrary.Models
         public static ICSRole GetRoleByName (this OrganizationChart orgChart, string rolename, bool defaultUpChain = true)
         {
             ICSRole role = orgChart.GetRoleByName(rolename);
-            TeamMember member = role.teamMember;
+            Personnel member = role.teamMember;
 
             if (defaultUpChain && string.IsNullOrEmpty(member.Name) && role.ReportsTo != Guid.Empty)
             {

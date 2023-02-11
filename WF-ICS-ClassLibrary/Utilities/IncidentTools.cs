@@ -61,9 +61,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             name = chart.getNameByRoleID(RoleID, defaultUpChain);
             return name;
         }
-        public static TeamMember getMemberByRoleName(this WFIncident task, int Ops, string roleName, bool defaultUpChain = true)
+        public static Personnel getMemberByRoleName(this WFIncident task, int Ops, string roleName, bool defaultUpChain = true)
         {
-            TeamMember member = new TeamMember();
+            Personnel member = new Personnel();
             OrganizationChart chart = new OrganizationChart();
             if (task.allOrgCharts.Any(o => o.OpPeriod == Ops))
             {
@@ -74,11 +74,11 @@ namespace WF_ICS_ClassLibrary.Utilities
         }
 
 
-        public static List<TeamMember> getTaskTeamMembers(this WFIncident task, List<TeamMember> orgMembers, bool useDatabase = true, bool includeBlank = false, int OpPeriod = 0)
+        public static List<Personnel> getTaskTeamMembers(this WFIncident task, List<Personnel> orgMembers, bool useDatabase = true, bool includeBlank = false, int OpPeriod = 0)
         {
-            List<TeamMember> members = new List<TeamMember>();
+            List<Personnel> members = new List<Personnel>();
 
-            foreach (TeamMember member in task.TaskTeamMembers)
+            foreach (Personnel member in task.TaskTeamMembers)
             {
                 if (!members.Any(o => o.PersonID == member.PersonID) && !listAlreadyContainsMember(members, member)) { members.Add(member); }
             }
@@ -100,7 +100,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 
 
 
-            foreach (TeamMember member in orgMembers)
+            foreach (Personnel member in orgMembers)
             {
                 if (member != null && !string.IsNullOrEmpty(member.Name) && !listAlreadyContainsMember(members, member)) { members.Add(member); }
             }
@@ -108,7 +108,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             //set signed in to task status
             if (OpPeriod > 0)
             {
-                foreach (TeamMember member in members)
+                foreach (Personnel member in members)
                 {
                     if (task.AllSignInRecords.Where(o => o.MemberID == member.PersonID && o.OpPeriod == OpPeriod).Any())
                     {
@@ -120,7 +120,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
 
             //update status
-            foreach (TeamMember member in members)
+            foreach (Personnel member in members)
             {
                 member.CurrentStatus = task.getMemberStatus(member, OpPeriod);
             }
@@ -129,7 +129,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 
             if (includeBlank)
             {
-                TeamMember blank = new TeamMember();
+                Personnel blank = new Personnel();
                 blank.PersonID = Guid.Empty;
                 blank.Name = "";
                 members.Insert(0, blank);
@@ -139,7 +139,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return members;
         }
 
-        private static bool listAlreadyContainsMember(List<TeamMember> members, TeamMember newMember)
+        private static bool listAlreadyContainsMember(List<Personnel> members, Personnel newMember)
         {
 
             if (newMember == null) { return false; }
@@ -156,7 +156,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static void UpsertTaskTeamMember(this WFIncident task, TeamMember member)
+        public static void UpsertTaskTeamMember(this WFIncident task, Personnel member)
         {
             if (member != null)
             {
@@ -168,9 +168,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static List<TeamMember> MembersSignedIn(this WFIncident task, int opPeriod)
+        public static List<Personnel> MembersSignedIn(this WFIncident task, int opPeriod)
         {
-            List<TeamMember> members = new List<TeamMember>();
+            List<Personnel> members = new List<Personnel>();
             foreach (SignInRecord record in task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod))
             {
                 if (!members.Where(o => o.PersonID == record.teamMember.PersonID).Any())
@@ -195,8 +195,8 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static List<MemberStatus> getAllMemberStatus(this WFIncident task, int opPeriod, DateTime date = new DateTime(), bool getMultipleLinesAsNeeded = false)
         {
             List<MemberStatus> statuses = new List<MemberStatus>();
-            List<TeamMember> members = task.MembersSignedIn(opPeriod);
-            List<TeamMember> savedMembers = Globals._generalOptionsService.GetOptionsValue("TeamMembers") as List<TeamMember>;
+            List<Personnel> members = task.MembersSignedIn(opPeriod);
+            List<Personnel> savedMembers = Globals._generalOptionsService.GetOptionsValue("TeamMembers") as List<Personnel>;
             //Add members who are on teams or in ICS roles currently
             if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Any(o => o.teamMember != null))
             {
@@ -221,7 +221,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
 
 
-            foreach (TeamMember member in members)
+            foreach (Personnel member in members)
             {
                 int signInCount = task.AllSignInRecords.Where(o => o.IsSignIn && o.teamMember.PersonID == member.PersonID && o.OpPeriod == opPeriod).Count();
                 if (signInCount == 1 || !getMultipleLinesAsNeeded)
@@ -252,7 +252,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return statuses;
         }
 
-        public static MemberStatus getMemberStatus(this WFIncident task, TeamMember member, int opPeriod, DateTime end_date = new DateTime(), SignInRecord signIn = null)
+        public static MemberStatus getMemberStatus(this WFIncident task, Personnel member, int opPeriod, DateTime end_date = new DateTime(), SignInRecord signIn = null)
         {
             MemberStatus status = new MemberStatus();
             status.setTeamMember(member);
