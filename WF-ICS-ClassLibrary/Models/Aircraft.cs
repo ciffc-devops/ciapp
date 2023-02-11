@@ -1,9 +1,11 @@
-﻿using ProtoBuf;
+﻿using NetworkCommsDotNet;
+using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace WF_ICS_ClassLibrary.Models
 {
@@ -152,26 +154,28 @@ namespace WF_ICS_ClassLibrary.Models
     public class NOTAM : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;
-        [ProtoMember(2)] private double _Latitude;
-        [ProtoMember(3)] private double _Longitude;
+        //[ProtoMember(2)] private double _Latitude;
+        //[ProtoMember(3)] private double _Longitude;
         [ProtoMember(4)] private decimal _RadiusNM;
         [ProtoMember(5)] private decimal _AltitudeASL;
         [ProtoMember(6)] private string _CenterPoint;
+        [ProtoMember(7)] private List<Coordinate> _coordinates;
 
-
-        public NOTAM() { _ID = Guid.NewGuid(); }
+        public NOTAM() { _ID = Guid.NewGuid(); _coordinates = new List<Coordinate>(); }
 
         public Guid ID { get => _ID; set => _ID = value; }
-        public double Latitude { get => _Latitude; set => _Latitude = value; }
-        public double Longitude { get => _Longitude; set => _Longitude = value; }
+       // public double Latitude { get => _Latitude; set => _Latitude = value; }
+        //public double Longitude { get => _Longitude; set => _Longitude = value; }
         public decimal RadiusNM { get => _RadiusNM; set => _RadiusNM = value; }
         public decimal AltitudeASL { get => _AltitudeASL; set => _AltitudeASL = value; }
         public string CenterPoint { get => _CenterPoint; set => _CenterPoint = value; }
+        public List<Coordinate> Coordinates { get => _coordinates; set => _coordinates = value; }
         public bool AnyContent
         {
             get
             {
-                if (Latitude != 0 || Longitude != 0) { return true; }
+                // if (Latitude != 0 || Longitude != 0) { return true; }
+                if (Coordinates.Any()) { return true; }
                 if (RadiusNM != 0) { return true; }
                 if (AltitudeASL != 0) { return true; }
                 if (!string.IsNullOrEmpty(CenterPoint)) { return true; }
@@ -181,7 +185,13 @@ namespace WF_ICS_ClassLibrary.Models
 
         public NOTAM Clone()
         {
-            return this.MemberwiseClone() as NOTAM;
+            NOTAM cloneTo = this.MemberwiseClone() as NOTAM;
+            cloneTo.Coordinates = new List<Coordinate>();
+            foreach(Coordinate c in this.Coordinates)
+            {
+                cloneTo.Coordinates.Add(c);
+            }
+            return cloneTo;
         }
         object ICloneable.Clone()
         {
