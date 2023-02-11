@@ -3408,7 +3408,7 @@ namespace WildfireICSDesktopServices
 
 
                     stamper.AcroFields.SetField("Radius nm", summary.notam.RadiusNM.ToString());
-                    stamper.AcroFields.SetField("Altitude ASL", summary.notam.AltitudeASL.ToString());
+                    stamper.AcroFields.SetField("Altitude ASL", summary.notam.AltitudeASL.ToString() + " feet");
                     stamper.AcroFields.SetField("Center Point", summary.notam.CenterPoint);
                     Coordinate coord = new Coordinate();
                     coord.Latitude = summary.notam.Latitude;
