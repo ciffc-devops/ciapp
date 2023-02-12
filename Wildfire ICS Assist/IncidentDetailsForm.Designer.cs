@@ -189,7 +189,6 @@
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnLogisticsMemberStatus = new System.Windows.Forms.Button();
             this.btnLogisticsDashboard = new System.Windows.Forms.Button();
-            this.btnEquipment = new System.Windows.Forms.Button();
             this.btnVehicles = new System.Windows.Forms.Button();
             this.cpPlanning = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnPlanningAddAssignment = new System.Windows.Forms.Button();
@@ -1332,7 +1331,7 @@
             // cpLogistics
             // 
             resources.ApplyResources(this.cpLogistics, "cpLogistics");
-            this.cpLogistics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpLogistics.BackColor = System.Drawing.Color.White;
             this.cpLogistics.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpLogistics.CollapsedHeight = 40;
             this.cpLogistics.CollapsedWidth = 485;
@@ -1342,9 +1341,8 @@
             this.cpLogistics.Controls.Add(this.btnAdditionalContacts);
             this.cpLogistics.Controls.Add(this.btnLogisticsMemberStatus);
             this.cpLogistics.Controls.Add(this.btnLogisticsDashboard);
-            this.cpLogistics.Controls.Add(this.btnEquipment);
             this.cpLogistics.Controls.Add(this.btnVehicles);
-            this.cpLogistics.CurrentlyCollapsed = true;
+            this.cpLogistics.CurrentlyCollapsed = false;
             this.cpLogistics.ExpandedHeight = 246;
             this.cpLogistics.ExpandedWidth = 530;
             this.cpLogistics.Name = "cpLogistics";
@@ -1383,12 +1381,6 @@
             resources.ApplyResources(this.btnLogisticsDashboard, "btnLogisticsDashboard");
             this.btnLogisticsDashboard.Name = "btnLogisticsDashboard";
             this.btnLogisticsDashboard.UseVisualStyleBackColor = true;
-            // 
-            // btnEquipment
-            // 
-            resources.ApplyResources(this.btnEquipment, "btnEquipment");
-            this.btnEquipment.Name = "btnEquipment";
-            this.btnEquipment.UseVisualStyleBackColor = true;
             // 
             // btnVehicles
             // 
@@ -1589,6 +1581,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            this.Controls.Add(this.cpLogistics);
             this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
@@ -1602,7 +1595,6 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.cpOperations);
             this.Controls.Add(this.cpPlanning);
-            this.Controls.Add(this.cpLogistics);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
@@ -1716,7 +1708,6 @@
         private System.Windows.Forms.Button btnLogisticsSignIn;
         private System.Windows.Forms.Button btnLogisticsMemberStatus;
         private System.Windows.Forms.Button btnAdditionalContacts;
-        private System.Windows.Forms.Button btnEquipment;
         private System.Windows.Forms.Button btnVehicles;
         private System.Windows.Forms.Button btnLogisticsDashboard;
         private System.Windows.Forms.Button btnPlanningAddAssignment;
