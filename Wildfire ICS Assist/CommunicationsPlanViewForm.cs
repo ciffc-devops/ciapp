@@ -20,9 +20,9 @@ namespace Wildfire_ICS_Assist
         {
             lblSystem.Text = SelectedItem.CommsSystem;
             lblChannelID.Text = SelectedItem.ChannelID;
-            lblFrequency.Text = SelectedItem.Frequency;
+            lblFrequency.Text = SelectedItem.FullFrequency;
             lblFunction.Text = SelectedItem.CommsFunction;
-            lblTone.Text = SelectedItem.Tone;
+            lblTone.Text = SelectedItem.FullTone;
             lblAssignment.Text = SelectedItem.Assignment;
             lblRemarks.Text = SelectedItem.Comments;
             this.Text = SelectedItem.IDWithFrequency;

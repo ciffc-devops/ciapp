@@ -13,23 +13,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
 {
     public partial class EditCommsItemForm : Form
     {
-        private CommsPlanItem _commsPlanItem = null;
-        public CommsPlanItem commsPlanItem { get => _commsPlanItem; set { _commsPlanItem = value; displayItem(); } }
+        public CommsPlanItem commsPlanItem { get => editCommsChannelControl1.selectedItem; set => editCommsChannelControl1.selectedItem = value; }
         public EditCommsItemForm()
         {
             this.Icon = Program.programIcon;
             InitializeComponent(); this.BackColor = Program.FormBackground;
         }
 
-        private void displayItem()
-        {
-            txtChannelID.Text = commsPlanItem.ChannelID;
-            txtComments.Text = commsPlanItem.Comments;
-            txtCommsSystem.Text  = commsPlanItem.CommsSystem;
-            txtFrequency.Text = commsPlanItem.Frequency;
-            txtTone.Text = commsPlanItem.Tone;
-
-        }
+      
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -40,7 +31,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtChannelID.Text)) { this.DialogResult = DialogResult.OK; this.Close(); }
+            if (editCommsChannelControl1.IsComplete) { this.DialogResult = DialogResult.OK; this.Close(); }
             else { MessageBox.Show("You must enter a name for this channel"); }
         }
 
@@ -50,45 +41,11 @@ namespace Wildfire_ICS_Assist.OptionsForms
             this.Close();
         }
 
-        private void txtCommsSystem_TextChanged(object sender, EventArgs e)
-        {
-            commsPlanItem.CommsSystem = ((TextBox)sender).Text;
-        }
-
-        private void txtChannelID_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(((TextBox)sender).Text)) { ((TextBox)sender).BackColor = Color.Salmon; }
-            else { ((TextBox)sender).BackColor = Color.LightGreen; }
-            commsPlanItem.ChannelID = ((TextBox)sender).Text;
-        }
-
-        private void txtFrequency_TextChanged(object sender, EventArgs e)
-        {
-            commsPlanItem.Frequency = ((TextBox)sender).Text;
-        }
-
-        private void txtTone_TextChanged(object sender, EventArgs e)
-        {
-            commsPlanItem.Tone = ((TextBox)sender).Text;
-
-        }
-
-        private void txtComments_TextChanged(object sender, EventArgs e)
-        {
-            commsPlanItem.Comments = ((TextBox)sender).Text;
-        }
-
-        private void btnCommsSystemHelp_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            int durationMilliseconds = 10000;
-            toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
-
-        }
-
         private void EditCommsItem_Load(object sender, EventArgs e)
         {
 
         }
+
+       
     }
 }

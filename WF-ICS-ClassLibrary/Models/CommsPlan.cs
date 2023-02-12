@@ -108,7 +108,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(4)] private string _CommsFunction;
         [ProtoMember(5)] private string _ChannelID;
         [ProtoMember(6)] private string _ChannelNumber;
-        [ProtoMember(7)] private string _Frequency;
+        [ProtoMember(7)] private string _RxFrequency;
         [ProtoMember(8)] private string _Comments;
         [ProtoMember(9)] private bool _IsRepeater;
         [ProtoMember(10)] private DateTime _LastUpdatedUTC;
@@ -116,10 +116,12 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(12)] private bool _Active;
         [ProtoMember(13)] private Guid _OrganizationID;
         [ProtoMember(14)] private int _OpsPeriod;
-        [ProtoMember(15)] private string _Tone;
+        [ProtoMember(15)] private string _RxTone;
         [ProtoMember(16)] private string _Aassignment;
         [ProtoMember(17)] private Guid _TemplateItemID; //This is a unique identifier for the item as saved in Options.
         [ProtoMember(18)] private bool _Aircraft;
+        [ProtoMember(19)] private string _TxFrequency;
+        [ProtoMember(20)] private string _TxTone;
 
         public Guid ItemID { get => _ItemID; set => _ItemID = value; }
         public string CommsSystem { get => _CommsSystem; set => _CommsSystem = value; }
@@ -127,7 +129,16 @@ namespace WF_ICS_ClassLibrary.Models
         public string CommsFunction { get => _CommsFunction; set => _CommsFunction = value; }
         public string ChannelID { get => _ChannelID; set => _ChannelID = value; }
         public string ChannelNumber { get => _ChannelNumber; set => _ChannelNumber = value; }
-        public string Frequency { get => _Frequency; set => _Frequency = value; }
+        public string RxFrequency { get => _RxFrequency; set => _RxFrequency = value; }
+        public string TxFrequency { get => _TxFrequency; set => _TxFrequency = value; }
+        public string FullFrequency
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(RxFrequency) && !string.IsNullOrEmpty(TxFrequency) && !RxFrequency.Equals(TxFrequency)) { return RxFrequency + "/" + TxFrequency; }
+                else { return RxFrequency; }
+            }
+        }
         public string Comments { get => _Comments; set => _Comments = value; }
         public bool IsRepeater { get => _IsRepeater; set => _IsRepeater = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
@@ -135,11 +146,20 @@ namespace WF_ICS_ClassLibrary.Models
         public bool Active { get => _Active; set => _Active = value; }
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
         public int OpsPeriod { get => _OpsPeriod; set => _OpsPeriod = value; }
-        public string Tone { get => _Tone; set => _Tone = value; }
+        public string RxTone { get => _RxTone; set => _RxTone = value; }
+        public string TxTone { get => _TxTone; set => _TxTone = value; }
+        public string FullTone
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(RxTone) && !string.IsNullOrEmpty(TxTone) && !RxTone.Equals(TxTone)) { return RxTone + "/" + TxTone; }
+                else { return RxTone; }
+            }
+        }
         public string Assignment { get => _Aassignment; set => _Aassignment = value; }
         public bool UsedForAircraft { get => _Aircraft; set => _Aircraft = value; }
 
-        public string IDWithFrequency { get { return ChannelID + " " + Frequency; } }
+        public string IDWithFrequency { get { return ChannelID + " " + RxFrequency; } }
         public string SystemWithID
         {
             get
@@ -199,10 +219,14 @@ namespace WF_ICS_ClassLibrary.Models
             if (isEqual && !this.CallSign.EqualsWithNull(other.CallSign)) { return false; }
             if (isEqual && !this.ChannelID.EqualsWithNull(other.ChannelID)) { return false; }
             if (isEqual && !this.ChannelNumber.EqualsWithNull(other.ChannelNumber)) { return false; }
-            if (isEqual && !this.Frequency.EqualsWithNull(other.Frequency)) { return false; }
+            if (isEqual && !this.RxFrequency.EqualsWithNull(other.RxFrequency)) { return false; }
+            if (isEqual && !this.TxFrequency.EqualsWithNull(other.TxFrequency)) { return false; }
+            if (isEqual && !this.RxTone.EqualsWithNull(other.RxTone)) { return false; }
+            if (isEqual && !this.TxTone.EqualsWithNull(other.TxTone)) { return false; }
             if (isEqual && this.IsRepeater != other.IsRepeater) { return false; }
-            if (isEqual && !this.Tone.EqualsWithNull(other.Tone)) { return false; }
+            if (isEqual && !this.RxTone.EqualsWithNull(other.RxTone)) { return false; }
             if (isEqual && !this.Assignment.EqualsWithNull(other.Assignment)) { return false; }
+
             if(isEqual && this.TemplateItemID != other.TemplateItemID) { return false; }
             return isEqual;
         }
@@ -249,8 +273,10 @@ namespace WF_ICS_ClassLibrary.Models
             csv.Append("System/Type"); csv.Append(delimiter);
             csv.Append("Channel"); csv.Append(delimiter);
             csv.Append("Function"); csv.Append(delimiter);
-            csv.Append("(Rx/Tx) Frequency"); csv.Append(delimiter);
-            csv.Append("Tone"); csv.Append(delimiter);
+            csv.Append("Rx Frequency"); csv.Append(delimiter);
+            csv.Append("Rx Tone"); csv.Append(delimiter);
+            csv.Append("Tx Frequency"); csv.Append(delimiter);
+            csv.Append("Tx Tone"); csv.Append(delimiter);
             csv.Append("Assignment"); csv.Append(delimiter);
             csv.Append("Remarks"); csv.Append(delimiter);
              csv.Append(Environment.NewLine);
@@ -263,8 +289,11 @@ namespace WF_ICS_ClassLibrary.Models
                 csv.Append("\""); csv.Append(item.CommsSystem.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.ChannelID.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.CommsFunction.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.Frequency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.Tone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.RxFrequency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.RxTone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.TxFrequency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.TxTone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
                 csv.Append("\""); csv.Append(item.Assignment.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Comments.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
 

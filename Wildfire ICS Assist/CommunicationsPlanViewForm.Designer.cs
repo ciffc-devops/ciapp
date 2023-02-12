@@ -183,7 +183,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 24);
             this.label5.TabIndex = 139;
-            this.label5.Text = "Tone";
+            this.label5.Text = "(Rx/Tx) Tone";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4

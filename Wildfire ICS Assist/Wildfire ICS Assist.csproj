@@ -175,6 +175,12 @@
     <Compile Include="CustomControls\EditAircraftControl.Designer.cs">
       <DependentUpon>EditAircraftControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\EditCommsChannelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\EditCommsChannelControl.Designer.cs">
+      <DependentUpon>EditCommsChannelControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\EditTeamAssignmentTemplateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -593,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditAircraftControl.resx">
       <DependentUpon>EditAircraftControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\EditCommsChannelControl.resx">
+      <DependentUpon>EditCommsChannelControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditTeamAssignmentTemplateControl.resx">
       <DependentUpon>EditTeamAssignmentTemplateControl.cs</DependentUpon>

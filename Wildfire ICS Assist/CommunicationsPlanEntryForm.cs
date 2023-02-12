@@ -68,16 +68,10 @@ namespace Wildfire_ICS_Assist
         {
             if (ValidateNew())
             {
-                _SelectedItem = new CommsPlanItem();
-                _SelectedItem.CommsSystem = txtCommsSystem.Text;
-                _SelectedItem.ChannelID = txtChannelID.Text;
-                _SelectedItem.Frequency = txtFrequency.Text;
+                _SelectedItem = editCommsChannelControl1.selectedItem;
                 _SelectedItem.OpsPeriod = Program.CurrentOpPeriod;
-
                 _SelectedItem.CommsFunction = txtFunction.Text;
-                _SelectedItem.Tone = txtTone.Text;
                 _SelectedItem.Assignment = txtAssignment.Text;
-                _SelectedItem.Comments = txtComments.Text;
                 _SelectedItem.UsedForAircraft = chkUsedForAir.Checked;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -95,7 +89,7 @@ namespace Wildfire_ICS_Assist
 
         private bool ValidateNew()
         {
-            if (string.IsNullOrEmpty(txtChannelID.Text)) { txtChannelID.BackColor = Program.ErrorColor; return false; } else { txtChannelID.BackColor = Program.GoodColor; }
+            if (!editCommsChannelControl1.IsComplete) {  return false; } 
             if (string.IsNullOrEmpty(txtFunction.Text)) { txtFunction.BackColor = Program.ErrorColor; return false; } else { txtFunction.BackColor = Program.GoodColor; }
 
             return true;
@@ -159,6 +153,7 @@ namespace Wildfire_ICS_Assist
             if (SavedCommsPlanItems.Count <= 0) { pnlSavedComms.Enabled = false; }
             chkUsedForAir.Checked = DefaultAircraft;
             chkSavedUsedForAir.Checked = DefaultAircraft;
+            editCommsChannelControl1.selectedItem = new CommsPlanItem();
         }
 
         private void cboSavedComms_SelectedIndexChanged_1(object sender, EventArgs e)

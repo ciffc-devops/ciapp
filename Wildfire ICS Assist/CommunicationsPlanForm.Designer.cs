@@ -36,13 +36,13 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.svdExport = new System.Windows.Forms.SaveFileDialog();
             this.colCommsSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChannelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.svdExport = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -176,6 +176,11 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // svdExport
+            // 
+            this.svdExport.DefaultExt = "csv";
+            this.svdExport.Filter = "Comma-separated values|*.csv";
+            // 
             // colCommsSystem
             // 
             this.colCommsSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -205,19 +210,19 @@
             // colFrequency
             // 
             this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colFrequency.DataPropertyName = "Frequency";
-            this.colFrequency.HeaderText = "Frequency";
+            this.colFrequency.DataPropertyName = "FullFrequency";
+            this.colFrequency.HeaderText = "Frequency (Rx/Tx)";
             this.colFrequency.Name = "colFrequency";
             this.colFrequency.ReadOnly = true;
-            this.colFrequency.Width = 127;
+            this.colFrequency.Width = 177;
             // 
             // colTone
             // 
-            this.colTone.DataPropertyName = "Tone";
-            this.colTone.HeaderText = "Tone";
+            this.colTone.DataPropertyName = "FullTone";
+            this.colTone.HeaderText = "Tone (Rx/Tx";
             this.colTone.Name = "colTone";
             this.colTone.ReadOnly = true;
-            this.colTone.Width = 80;
+            this.colTone.Width = 129;
             // 
             // colComments
             // 
@@ -227,11 +232,6 @@
             this.colComments.MinimumWidth = 100;
             this.colComments.Name = "colComments";
             this.colComments.ReadOnly = true;
-            // 
-            // svdExport
-            // 
-            this.svdExport.DefaultExt = "csv";
-            this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
             // CommunicationsPlanForm
             // 
@@ -266,12 +266,12 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView dgvCommsItems;
+        private System.Windows.Forms.SaveFileDialog svdExport;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommsSystem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colChannelID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFunction;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFrequency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComments;
-        private System.Windows.Forms.SaveFileDialog svdExport;
     }
 }

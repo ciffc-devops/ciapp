@@ -14,8 +14,7 @@ namespace Wildfire_ICS_Assist
 {
     public partial class CommunicationsPlanEditForm : Form
     {
-        private CommsPlanItem _SelectedItem = null;
-        public CommsPlanItem SelectedItem { get => _SelectedItem; set { _SelectedItem = value; loadSelectedCommsPlanItem(); } }
+        public CommsPlanItem SelectedItem { get => editCommsChannelControl1.selectedItem; set { editCommsChannelControl1.selectedItem = value; loadSelectedCommsPlanItem(); } }
 
 
         public CommunicationsPlanEditForm()
@@ -25,13 +24,8 @@ namespace Wildfire_ICS_Assist
 
         private void loadSelectedCommsPlanItem()
         {
-            txtCommsSystem.Text = SelectedItem.CommsSystem;
-            txtChannelID.Text = SelectedItem.ChannelID;
-            txtFrequency.Text = SelectedItem.Frequency;
             txtFunction.Text = SelectedItem.CommsFunction;
-            txtTone.Text = SelectedItem.Tone;
             txtAssignment.Text = SelectedItem.Assignment;
-            txtComments.Text = SelectedItem.Comments;
             chkUsedForAir.Checked = SelectedItem.UsedForAircraft;
         }
 
@@ -43,7 +37,7 @@ namespace Wildfire_ICS_Assist
 
         private bool ValidateNew()
         {
-            if (string.IsNullOrEmpty(txtChannelID.Text)) { txtChannelID.BackColor = Program.ErrorColor; return false; } else { txtChannelID.BackColor = Program.GoodColor; }
+            if (!editCommsChannelControl1.IsComplete) {  return false; } 
             if (string.IsNullOrEmpty(txtFunction.Text)) { txtFunction.BackColor = Program.ErrorColor; return false; } else { txtFunction.BackColor = Program.GoodColor; }
 
             return true;
@@ -54,14 +48,9 @@ namespace Wildfire_ICS_Assist
             if (ValidateNew())
             {
                 //_SelectedItem = new CommsPlanItem();
-                _SelectedItem.CommsSystem = txtCommsSystem.Text;
-                _SelectedItem.ChannelID = txtChannelID.Text;
-                _SelectedItem.Frequency = txtFrequency.Text;
-                _SelectedItem.CommsFunction = txtFunction.Text;
-                _SelectedItem.Tone = txtTone.Text;
-                _SelectedItem.Assignment = txtAssignment.Text;
-                _SelectedItem.Comments = txtComments.Text;
-                _SelectedItem.UsedForAircraft = chkUsedForAir.Checked;
+                editCommsChannelControl1.selectedItem.CommsFunction = txtFunction.Text;
+                editCommsChannelControl1.selectedItem.Assignment = txtAssignment.Text;
+                editCommsChannelControl1.selectedItem.UsedForAircraft = chkUsedForAir.Checked;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

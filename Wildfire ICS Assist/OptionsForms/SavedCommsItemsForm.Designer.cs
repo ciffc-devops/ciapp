@@ -151,19 +151,19 @@
             // colFrequency
             // 
             this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colFrequency.DataPropertyName = "Frequency";
-            this.colFrequency.HeaderText = "Frequency";
+            this.colFrequency.DataPropertyName = "FullFrequency";
+            this.colFrequency.HeaderText = "Frequency (Rx/Tx)";
             this.colFrequency.Name = "colFrequency";
             this.colFrequency.ReadOnly = true;
-            this.colFrequency.Width = 127;
+            this.colFrequency.Width = 177;
             // 
             // colTone
             // 
-            this.colTone.DataPropertyName = "Tone";
-            this.colTone.HeaderText = "Tone";
+            this.colTone.DataPropertyName = "FullTone";
+            this.colTone.HeaderText = "Tone (Rx/Tx)";
             this.colTone.Name = "colTone";
             this.colTone.ReadOnly = true;
-            this.colTone.Width = 80;
+            this.colTone.Width = 134;
             // 
             // colComments
             // 
@@ -174,7 +174,7 @@
             this.colComments.Name = "colComments";
             this.colComments.ReadOnly = true;
             // 
-            // SavedCommsItems
+            // SavedCommsItemsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -183,7 +183,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "SavedCommsItems";
+            this.Name = "SavedCommsItemsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Saved Comms Items";
             this.Load += new System.EventHandler(this.SavedCommsItems_Load);

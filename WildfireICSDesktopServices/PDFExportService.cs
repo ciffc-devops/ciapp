@@ -657,8 +657,8 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("System  TypeRow" + (row + 1), item.CommsSystem);
                     stamper.AcroFields.SetField("ChannelRow" + (row + 1), item.ChannelID);
                     stamper.AcroFields.SetField("FunctionRow" + (row + 1), item.CommsFunction);
-                    stamper.AcroFields.SetField("RxTx FrequencyRow" + (row + 1), item.Frequency);
-                    stamper.AcroFields.SetField("ToneRow" + (row + 1), item.Tone);
+                    stamper.AcroFields.SetField("RxTx FrequencyRow" + (row + 1), item.FullFrequency);
+                    stamper.AcroFields.SetField("ToneRow" + (row + 1), item.FullTone);
                     stamper.AcroFields.SetField("AssignmentRow" + (row + 1), item.Assignment);
                     stamper.AcroFields.SetField("RemarksRow" + (row + 1), item.Comments);
 
@@ -3483,7 +3483,7 @@ namespace WildfireICSDesktopServices
 
                     for(int x= 0; x<comms.Count && x < 10; x++)
                     {
-                        stamper.AcroFields.SetField("FrequencyRow" + (x + 1), comms[x].Frequency);
+                        stamper.AcroFields.SetField("FrequencyRow" + (x + 1), comms[x].RxFrequency);
                     }
 
 
@@ -3673,8 +3673,10 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("NameRow" + (x + 1), comms[x].SystemWithID);
                         stamper.AcroFields.SetField("ChannelRow" + (x + 1), comms[x].ChannelNumber);
                         stamper.AcroFields.SetField("FunctionRow" + (x + 1), comms[x].CommsFunction);
-                        stamper.AcroFields.SetField("Rx FrequencyRow" + (x + 1), comms[x].Frequency);
-                        stamper.AcroFields.SetField("Rx ToneRow" + (x + 1), comms[x].Tone);
+                        stamper.AcroFields.SetField("Rx FrequencyRow" + (x + 1), comms[x].RxFrequency);
+                        stamper.AcroFields.SetField("Rx ToneRow" + (x + 1), comms[x].RxTone);
+                        stamper.AcroFields.SetField("Tx FrequencyRow" + (x + 1), comms[x].TxFrequency);
+                        stamper.AcroFields.SetField("Tx ToneRow" + (x + 1), comms[x].TxTone);
                         stamper.AcroFields.SetField("RemarksRow1" + (x + 1), comms[x].Comments);
 
 
