@@ -1,5 +1,6 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Package Name="CIAPPO_Installer_Project" Manufacturer="TODO Manufacturer" Version="1.0.0.0" UpgradeCode="19bd6386-7e12-4ad5-9c70-2941fdd12cc0">
+	
+  <Package Name="Canadian Incident Action Plan Program" Manufacturer="CIFFC" Version="1.0.0.0" UpgradeCode="1C312140-B9EB-4F92-9E0F-8B46740C7BE2">
     <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
 
     <Feature Id="Main">
