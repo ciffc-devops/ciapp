@@ -52,13 +52,17 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.txtNOKRelationship = new System.Windows.Forms.TextBox();
+            this.txtNOKName = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label15 = new System.Windows.Forms.Label();
             this.txtNOKPhone = new System.Windows.Forms.TextBox();
-            this.txtNOKRelationship = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.txtNOKName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCallsign = new System.Windows.Forms.TextBox();
+            this.chkDietary = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,7 +144,7 @@
             this.txtPhone.Mask = "(999) 000-0000";
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(233, 29);
-            this.txtPhone.TabIndex = 8;
+            this.txtPhone.TabIndex = 3;
             this.txtPhone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtPhone_MaskInputRejected);
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
             // 
@@ -161,7 +165,7 @@
             this.txtEmail.Location = new System.Drawing.Point(212, 164);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(233, 29);
-            this.txtEmail.TabIndex = 10;
+            this.txtEmail.TabIndex = 4;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // label6
@@ -184,7 +188,7 @@
             this.cboHomeAgency.Location = new System.Drawing.Point(212, 199);
             this.cboHomeAgency.Name = "cboHomeAgency";
             this.cboHomeAgency.Size = new System.Drawing.Size(233, 32);
-            this.cboHomeAgency.TabIndex = 12;
+            this.cboHomeAgency.TabIndex = 5;
             this.cboHomeAgency.SelectedIndexChanged += new System.EventHandler(this.cboHomeAgency_SelectedIndexChanged);
             this.cboHomeAgency.Leave += new System.EventHandler(this.cboHomeAgency_Leave);
             // 
@@ -215,7 +219,7 @@
             this.txtQualifications.Location = new System.Drawing.Point(212, 237);
             this.txtQualifications.Name = "txtQualifications";
             this.txtQualifications.Size = new System.Drawing.Size(233, 29);
-            this.txtQualifications.TabIndex = 20;
+            this.txtQualifications.TabIndex = 6;
             this.txtQualifications.TextChanged += new System.EventHandler(this.txtQualifications_TextChanged);
             // 
             // button1
@@ -304,6 +308,30 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
+            // txtNOKRelationship
+            // 
+            this.txtNOKRelationship.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNOKRelationship.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNOKRelationship.Location = new System.Drawing.Point(212, 373);
+            this.txtNOKRelationship.Name = "txtNOKRelationship";
+            this.txtNOKRelationship.Size = new System.Drawing.Size(233, 26);
+            this.txtNOKRelationship.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.txtNOKRelationship, "Ideally, your EMBC ID#");
+            this.txtNOKRelationship.TextChanged += new System.EventHandler(this.txtNOKRelationship_TextChanged);
+            // 
+            // txtNOKName
+            // 
+            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNOKName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNOKName.Location = new System.Drawing.Point(212, 341);
+            this.txtNOKName.Name = "txtNOKName";
+            this.txtNOKName.Size = new System.Drawing.Size(233, 26);
+            this.txtNOKName.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.txtNOKName, "Ideally, your EMBC ID#");
+            this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -313,7 +341,7 @@
             // 
             // label15
             // 
-            this.label15.Location = new System.Drawing.Point(16, 336);
+            this.label15.Location = new System.Drawing.Point(16, 405);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(187, 29);
             this.label15.TabIndex = 107;
@@ -325,60 +353,81 @@
             this.txtNOKPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNOKPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNOKPhone.Location = new System.Drawing.Point(212, 337);
+            this.txtNOKPhone.Location = new System.Drawing.Point(212, 406);
             this.txtNOKPhone.Margin = new System.Windows.Forms.Padding(6);
             this.txtNOKPhone.Name = "txtNOKPhone";
             this.txtNOKPhone.Size = new System.Drawing.Size(233, 26);
-            this.txtNOKPhone.TabIndex = 106;
+            this.txtNOKPhone.TabIndex = 11;
             this.txtNOKPhone.TextChanged += new System.EventHandler(this.txtNOKPhone_TextChanged);
-            // 
-            // txtNOKRelationship
-            // 
-            this.txtNOKRelationship.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNOKRelationship.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNOKRelationship.Location = new System.Drawing.Point(212, 304);
-            this.txtNOKRelationship.Name = "txtNOKRelationship";
-            this.txtNOKRelationship.Size = new System.Drawing.Size(233, 26);
-            this.txtNOKRelationship.TabIndex = 105;
-            this.toolTip1.SetToolTip(this.txtNOKRelationship, "Ideally, your EMBC ID#");
-            this.txtNOKRelationship.TextChanged += new System.EventHandler(this.txtNOKRelationship_TextChanged);
             // 
             // label14
             // 
-            this.label14.Location = new System.Drawing.Point(16, 303);
+            this.label14.Location = new System.Drawing.Point(16, 372);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(187, 29);
             this.label14.TabIndex = 103;
             this.label14.Text = "Relationship";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtNOKName
-            // 
-            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNOKName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNOKName.Location = new System.Drawing.Point(212, 272);
-            this.txtNOKName.Name = "txtNOKName";
-            this.txtNOKName.Size = new System.Drawing.Size(233, 26);
-            this.txtNOKName.TabIndex = 104;
-            this.toolTip1.SetToolTip(this.txtNOKName, "Ideally, your EMBC ID#");
-            this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged);
-            // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(16, 271);
+            this.label13.Location = new System.Drawing.Point(16, 340);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(187, 29);
             this.label13.TabIndex = 102;
             this.label13.Text = "Emergency Contact";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(16, 273);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(187, 29);
+            this.label4.TabIndex = 109;
+            this.label4.Text = "Callsign";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtCallsign
+            // 
+            this.txtCallsign.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCallsign.Location = new System.Drawing.Point(212, 272);
+            this.txtCallsign.Name = "txtCallsign";
+            this.txtCallsign.Size = new System.Drawing.Size(233, 29);
+            this.txtCallsign.TabIndex = 7;
+            this.txtCallsign.TextChanged += new System.EventHandler(this.txtCallsign_TextChanged);
+            // 
+            // chkDietary
+            // 
+            this.chkDietary.AutoSize = true;
+            this.chkDietary.Location = new System.Drawing.Point(212, 307);
+            this.chkDietary.Name = "chkDietary";
+            this.chkDietary.Size = new System.Drawing.Size(220, 28);
+            this.chkDietary.TabIndex = 8;
+            this.chkDietary.Text = "Yes, dietary restrictions";
+            this.chkDietary.UseVisualStyleBackColor = true;
+            this.chkDietary.CheckedChanged += new System.EventHandler(this.chkDietary_CheckedChanged);
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(16, 307);
+            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(187, 29);
+            this.label8.TabIndex = 111;
+            this.label8.Text = "Dietary Restrictions";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // EditTeamMemberControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.chkDietary);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtCallsign);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.txtNOKPhone);
             this.Controls.Add(this.txtNOKRelationship);
@@ -408,7 +457,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "EditTeamMemberControl";
-            this.Size = new System.Drawing.Size(485, 376);
+            this.Size = new System.Drawing.Size(485, 437);
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -446,5 +495,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtNOKName;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtCallsign;
+        private System.Windows.Forms.CheckBox chkDietary;
+        private System.Windows.Forms.Label label8;
     }
 }

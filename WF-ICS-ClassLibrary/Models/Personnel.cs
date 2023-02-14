@@ -63,6 +63,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(32)] private string _Dietary;
         [ProtoMember(33)] private bool _Vegetarian;
         [ProtoMember(34)] private bool _NoGluten;
+        [ProtoMember(35)] private bool _AnyDietary;
 
         public Guid PersonID { get => _PersonID; set => _PersonID = value; }
 
@@ -127,6 +128,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Dietary { get => _Dietary; set => _Dietary = value; }
         public bool Vegetarian { get => _Vegetarian; set => _Vegetarian = value; }
         public bool NoGluten { get => _NoGluten; set => _NoGluten = value; }
+        public bool AnyDietary { get => _AnyDietary; set => _AnyDietary = value; }
 
         public Guid ProvinceID { get => _ProvinceID; set => _ProvinceID = value; }
         public string ProvinceName
@@ -249,28 +251,6 @@ namespace WF_ICS_ClassLibrary.Models
             return this.Clone();
         }
 
-        public void createClone(Personnel teamMember)
-        {
-            PersonID = teamMember.PersonID;
-            Name = teamMember.Name;
-            Group = teamMember.Group;
-            Callsign = teamMember.Callsign;
-            Phone = teamMember.Phone;
-            SpecialSkills = teamMember.SpecialSkills;
-            isAssignmentTeamLeader = teamMember.isAssignmentTeamLeader;
-            Barcode = teamMember.Barcode;
-            OrganizationID = teamMember.OrganizationID;
-            UserID = teamMember.UserID;
-            MemberActive = teamMember.MemberActive;
-            LastUpdatedUTC = teamMember.LastUpdatedUTC;
-            Email = teamMember.Email;
-            CreatedByOrgID = teamMember.CreatedByOrgID;
-            Address = teamMember.Address;
-            CurrentStatus = teamMember.CurrentStatus;
-            Dietary = teamMember.Dietary;
-            Vegetarian = teamMember.Vegetarian;
-            NoGluten = teamMember.NoGluten;
-        }
 
         public bool IsIdentical(Personnel compareTo)
         {

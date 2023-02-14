@@ -389,6 +389,8 @@ namespace WildfireICSDesktopServices
             {
                 case "DefaultSaveLocation":
                     return _options.DefaultSaveLocation;
+                case "DefaultBackupLocation":
+                    return _options.DefaultBackupLocation;
                 case "LastIpUsedWhenMachineIsServer":
                     return _options.LastIpUsedWhenMachineIsServer;
                 case "LastServerIP":

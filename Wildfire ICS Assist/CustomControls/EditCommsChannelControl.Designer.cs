@@ -81,7 +81,7 @@
             this.txtTxTone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTxTone.Name = "txtTxTone";
             this.txtTxTone.Size = new System.Drawing.Size(248, 29);
-            this.txtTxTone.TabIndex = 121;
+            this.txtTxTone.TabIndex = 6;
             this.txtTxTone.TextChanged += new System.EventHandler(this.txtTxTone_TextChanged);
             // 
             // button3
@@ -113,7 +113,7 @@
             this.txtTxFrequency.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTxFrequency.Name = "txtTxFrequency";
             this.txtTxFrequency.Size = new System.Drawing.Size(248, 29);
-            this.txtTxFrequency.TabIndex = 120;
+            this.txtTxFrequency.TabIndex = 5;
             this.txtTxFrequency.TextChanged += new System.EventHandler(this.txtTxFrequency_TextChanged);
             // 
             // btnToneHelp
@@ -145,7 +145,7 @@
             this.txtRxTone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtRxTone.Name = "txtRxTone";
             this.txtRxTone.Size = new System.Drawing.Size(248, 29);
-            this.txtRxTone.TabIndex = 108;
+            this.txtRxTone.TabIndex = 4;
             this.txtRxTone.TextChanged += new System.EventHandler(this.txtRxTone_TextChanged);
             // 
             // txtChannelID
@@ -156,7 +156,7 @@
             this.txtChannelID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtChannelID.Name = "txtChannelID";
             this.txtChannelID.Size = new System.Drawing.Size(248, 29);
-            this.txtChannelID.TabIndex = 106;
+            this.txtChannelID.TabIndex = 2;
             this.txtChannelID.TextChanged += new System.EventHandler(this.txtChannelID_TextChanged);
             // 
             // button5
@@ -253,7 +253,7 @@
             this.txtComments.Multiline = true;
             this.txtComments.Name = "txtComments";
             this.txtComments.Size = new System.Drawing.Size(248, 57);
-            this.txtComments.TabIndex = 109;
+            this.txtComments.TabIndex = 7;
             this.txtComments.TextChanged += new System.EventHandler(this.txtComments_TextChanged);
             // 
             // txtRxFrequency
@@ -264,7 +264,7 @@
             this.txtRxFrequency.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtRxFrequency.Name = "txtRxFrequency";
             this.txtRxFrequency.Size = new System.Drawing.Size(248, 29);
-            this.txtRxFrequency.TabIndex = 107;
+            this.txtRxFrequency.TabIndex = 3;
             this.txtRxFrequency.TextChanged += new System.EventHandler(this.txtRxFrequency_TextChanged);
             // 
             // txtCommsSystem
@@ -275,7 +275,7 @@
             this.txtCommsSystem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCommsSystem.Name = "txtCommsSystem";
             this.txtCommsSystem.Size = new System.Drawing.Size(248, 29);
-            this.txtCommsSystem.TabIndex = 105;
+            this.txtCommsSystem.TabIndex = 1;
             this.txtCommsSystem.TextChanged += new System.EventHandler(this.txtCommsSystem_TextChanged);
             // 
             // EditCommsChannelControl

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PersonnelSignInForm));
             this.pnlSavedPersonnel = new System.Windows.Forms.Panel();
             this.btnSelectSaved = new System.Windows.Forms.Button();
@@ -38,6 +39,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.editTeamMemberControl1 = new Wildfire_ICS_Assist.CustomControls.EditTeamMemberControl();
             this.pnlCheckInInfo = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.chkDinner = new System.Windows.Forms.CheckBox();
+            this.chkLunch = new System.Windows.Forms.CheckBox();
+            this.chkBreakfast = new System.Windows.Forms.CheckBox();
+            this.cboAccomodations = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cboICSRole = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.datLastDayTravel = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.datStartTravel = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.datLastDayOfRest = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnDeparturePointHelp = new System.Windows.Forms.Button();
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.cboMethodOfTravel = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -54,6 +71,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlSavedPersonnel.SuspendLayout();
             this.pnlNewPersonnel.SuspendLayout();
             this.pnlCheckInInfo.SuspendLayout();
@@ -82,7 +100,7 @@
             this.btnSelectSaved.Location = new System.Drawing.Point(406, 27);
             this.btnSelectSaved.Name = "btnSelectSaved";
             this.btnSelectSaved.Size = new System.Drawing.Size(130, 40);
-            this.btnSelectSaved.TabIndex = 10;
+            this.btnSelectSaved.TabIndex = 5;
             this.btnSelectSaved.Text = "Select";
             this.btnSelectSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnSelectSaved.UseVisualStyleBackColor = true;
@@ -99,7 +117,7 @@
             this.cboSavedPersonnel.Location = new System.Drawing.Point(8, 32);
             this.cboSavedPersonnel.Name = "cboSavedPersonnel";
             this.cboSavedPersonnel.Size = new System.Drawing.Size(392, 32);
-            this.cboSavedPersonnel.TabIndex = 9;
+            this.cboSavedPersonnel.TabIndex = 4;
             this.cboSavedPersonnel.ValueMember = "PersonID";
             this.cboSavedPersonnel.Leave += new System.EventHandler(this.cboSavedPersonnel_Leave);
             // 
@@ -125,7 +143,7 @@
             this.pnlNewPersonnel.Controls.Add(this.editTeamMemberControl1);
             this.pnlNewPersonnel.Location = new System.Drawing.Point(51, 98);
             this.pnlNewPersonnel.Name = "pnlNewPersonnel";
-            this.pnlNewPersonnel.Size = new System.Drawing.Size(547, 448);
+            this.pnlNewPersonnel.Size = new System.Drawing.Size(547, 527);
             this.pnlNewPersonnel.TabIndex = 2;
             // 
             // btnSelectNew
@@ -133,10 +151,10 @@
             this.btnSelectNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
             this.btnSelectNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelectNew.Location = new System.Drawing.Point(412, 403);
+            this.btnSelectNew.Location = new System.Drawing.Point(412, 482);
             this.btnSelectNew.Name = "btnSelectNew";
             this.btnSelectNew.Size = new System.Drawing.Size(130, 40);
-            this.btnSelectNew.TabIndex = 11;
+            this.btnSelectNew.TabIndex = 7;
             this.btnSelectNew.Text = "Select";
             this.btnSelectNew.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnSelectNew.UseVisualStyleBackColor = true;
@@ -162,15 +180,31 @@
             this.editTeamMemberControl1.Location = new System.Drawing.Point(6, 35);
             this.editTeamMemberControl1.Margin = new System.Windows.Forms.Padding(6);
             this.editTeamMemberControl1.Name = "editTeamMemberControl1";
-            this.editTeamMemberControl1.Size = new System.Drawing.Size(536, 364);
-            this.editTeamMemberControl1.TabIndex = 0;
-            this.editTeamMemberControl1.teamMember = ((WF_ICS_ClassLibrary.Models.Personnel)(resources.GetObject("editTeamMemberControl1.teamMember")));
+            this.editTeamMemberControl1.Size = new System.Drawing.Size(536, 438);
+            this.editTeamMemberControl1.TabIndex = 6;
+            this.editTeamMemberControl1.teamMember = null;
             // 
             // pnlCheckInInfo
             // 
             this.pnlCheckInInfo.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pnlCheckInInfo.BackColor = System.Drawing.Color.White;
             this.pnlCheckInInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCheckInInfo.Controls.Add(this.label13);
+            this.pnlCheckInInfo.Controls.Add(this.chkDinner);
+            this.pnlCheckInInfo.Controls.Add(this.chkLunch);
+            this.pnlCheckInInfo.Controls.Add(this.chkBreakfast);
+            this.pnlCheckInInfo.Controls.Add(this.cboAccomodations);
+            this.pnlCheckInInfo.Controls.Add(this.label12);
+            this.pnlCheckInInfo.Controls.Add(this.label11);
+            this.pnlCheckInInfo.Controls.Add(this.cboICSRole);
+            this.pnlCheckInInfo.Controls.Add(this.label10);
+            this.pnlCheckInInfo.Controls.Add(this.datLastDayTravel);
+            this.pnlCheckInInfo.Controls.Add(this.label9);
+            this.pnlCheckInInfo.Controls.Add(this.datStartTravel);
+            this.pnlCheckInInfo.Controls.Add(this.label5);
+            this.pnlCheckInInfo.Controls.Add(this.datLastDayOfRest);
+            this.pnlCheckInInfo.Controls.Add(this.button1);
+            this.pnlCheckInInfo.Controls.Add(this.btnDeparturePointHelp);
             this.pnlCheckInInfo.Controls.Add(this.btnCheckIn);
             this.pnlCheckInInfo.Controls.Add(this.cboMethodOfTravel);
             this.pnlCheckInInfo.Controls.Add(this.label8);
@@ -185,20 +219,209 @@
             this.pnlCheckInInfo.Controls.Add(this.pictureBox1);
             this.pnlCheckInInfo.Controls.Add(this.label2);
             this.pnlCheckInInfo.Enabled = false;
-            this.pnlCheckInInfo.Location = new System.Drawing.Point(662, 140);
+            this.pnlCheckInInfo.Location = new System.Drawing.Point(662, 12);
             this.pnlCheckInInfo.Name = "pnlCheckInInfo";
-            this.pnlCheckInInfo.Size = new System.Drawing.Size(433, 296);
+            this.pnlCheckInInfo.Size = new System.Drawing.Size(433, 571);
             this.pnlCheckInInfo.TabIndex = 3;
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(4, 402);
+            this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(187, 29);
+            this.label13.TabIndex = 108;
+            this.label13.Text = "Food";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkDinner
+            // 
+            this.chkDinner.AutoSize = true;
+            this.chkDinner.Location = new System.Drawing.Point(200, 470);
+            this.chkDinner.Name = "chkDinner";
+            this.chkDinner.Size = new System.Drawing.Size(85, 28);
+            this.chkDinner.TabIndex = 19;
+            this.chkDinner.Text = "Dinner";
+            this.chkDinner.UseVisualStyleBackColor = true;
+            // 
+            // chkLunch
+            // 
+            this.chkLunch.AutoSize = true;
+            this.chkLunch.Location = new System.Drawing.Point(200, 436);
+            this.chkLunch.Name = "chkLunch";
+            this.chkLunch.Size = new System.Drawing.Size(82, 28);
+            this.chkLunch.TabIndex = 18;
+            this.chkLunch.Text = "Lunch";
+            this.chkLunch.UseVisualStyleBackColor = true;
+            // 
+            // chkBreakfast
+            // 
+            this.chkBreakfast.AutoSize = true;
+            this.chkBreakfast.Location = new System.Drawing.Point(200, 402);
+            this.chkBreakfast.Name = "chkBreakfast";
+            this.chkBreakfast.Size = new System.Drawing.Size(104, 28);
+            this.chkBreakfast.TabIndex = 17;
+            this.chkBreakfast.Text = "Breakfast";
+            this.chkBreakfast.UseVisualStyleBackColor = true;
+            // 
+            // cboAccomodations
+            // 
+            this.cboAccomodations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboAccomodations.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboAccomodations.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboAccomodations.FormattingEnabled = true;
+            this.cboAccomodations.Items.AddRange(new object[] {
+            "Camp",
+            "Hotel",
+            "Private Dwelling",
+            "Other"});
+            this.cboAccomodations.Location = new System.Drawing.Point(200, 364);
+            this.cboAccomodations.Name = "cboAccomodations";
+            this.cboAccomodations.Size = new System.Drawing.Size(194, 32);
+            this.cboAccomodations.TabIndex = 16;
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(4, 367);
+            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(187, 29);
+            this.label12.TabIndex = 104;
+            this.label12.Text = "Accomodations";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(-1, 327);
+            this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(187, 29);
+            this.label11.TabIndex = 102;
+            this.label11.Text = "Initial Incident Role";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cboICSRole
+            // 
+            this.cboICSRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboICSRole.DisplayMember = "RoleNameForDropdown";
+            this.cboICSRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboICSRole.FormattingEnabled = true;
+            this.cboICSRole.Location = new System.Drawing.Point(200, 326);
+            this.cboICSRole.Name = "cboICSRole";
+            this.cboICSRole.Size = new System.Drawing.Size(194, 32);
+            this.cboICSRole.TabIndex = 15;
+            this.cboICSRole.ValueMember = "RoleID";
+            // 
+            // label10
+            // 
+            this.label10.Location = new System.Drawing.Point(4, 293);
+            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(187, 29);
+            this.label10.TabIndex = 100;
+            this.label10.Text = "Last day of Travel";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // datLastDayTravel
+            // 
+            this.datLastDayTravel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datLastDayTravel.Checked = false;
+            this.datLastDayTravel.CustomFormat = "yyyy-MMM-dd";
+            this.datLastDayTravel.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datLastDayTravel.Location = new System.Drawing.Point(200, 291);
+            this.datLastDayTravel.Name = "datLastDayTravel";
+            this.datLastDayTravel.ShowCheckBox = true;
+            this.datLastDayTravel.Size = new System.Drawing.Size(194, 29);
+            this.datLastDayTravel.TabIndex = 14;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(4, 188);
+            this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(187, 29);
+            this.label9.TabIndex = 98;
+            this.label9.Text = "Start of Travel";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // datStartTravel
+            // 
+            this.datStartTravel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datStartTravel.Checked = false;
+            this.datStartTravel.CustomFormat = "yyyy-MMM-dd";
+            this.datStartTravel.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datStartTravel.Location = new System.Drawing.Point(200, 186);
+            this.datStartTravel.Name = "datStartTravel";
+            this.datStartTravel.ShowCheckBox = true;
+            this.datStartTravel.Size = new System.Drawing.Size(194, 29);
+            this.datStartTravel.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(4, 153);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(187, 29);
+            this.label5.TabIndex = 96;
+            this.label5.Text = "Last Day of Rest";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // datLastDayOfRest
+            // 
+            this.datLastDayOfRest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datLastDayOfRest.Checked = false;
+            this.datLastDayOfRest.CustomFormat = "yyyy-MMM-dd";
+            this.datLastDayOfRest.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datLastDayOfRest.Location = new System.Drawing.Point(200, 151);
+            this.datLastDayOfRest.Name = "datLastDayOfRest";
+            this.datLastDayOfRest.ShowCheckBox = true;
+            this.datLastDayOfRest.Size = new System.Drawing.Size(194, 29);
+            this.datLastDayOfRest.TabIndex = 10;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(399, 117);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(26, 26);
+            this.button1.TabIndex = 94;
+            this.button1.TabStop = false;
+            this.toolTip1.SetToolTip(this.button1, "Enter the means of travel the individual used to bring themselves to the incident" +
+        " (e.g. bus, truck, engine, etc.)");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnShowHelp_Click);
+            // 
+            // btnDeparturePointHelp
+            // 
+            this.btnDeparturePointHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeparturePointHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDeparturePointHelp.BackgroundImage")));
+            this.btnDeparturePointHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDeparturePointHelp.Location = new System.Drawing.Point(399, 83);
+            this.btnDeparturePointHelp.Name = "btnDeparturePointHelp";
+            this.btnDeparturePointHelp.Size = new System.Drawing.Size(26, 26);
+            this.btnDeparturePointHelp.TabIndex = 93;
+            this.btnDeparturePointHelp.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnDeparturePointHelp, "Enter the location from which the resource or individual departed for this incide" +
+        "nt.");
+            this.btnDeparturePointHelp.UseVisualStyleBackColor = true;
+            this.btnDeparturePointHelp.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
             // btnCheckIn
             // 
-            this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_431_log_in;
             this.btnCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCheckIn.Location = new System.Drawing.Point(266, 221);
+            this.btnCheckIn.Location = new System.Drawing.Point(266, 503);
             this.btnCheckIn.Name = "btnCheckIn";
             this.btnCheckIn.Size = new System.Drawing.Size(159, 59);
-            this.btnCheckIn.TabIndex = 23;
+            this.btnCheckIn.TabIndex = 20;
             this.btnCheckIn.Text = "Check In";
             this.btnCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCheckIn.UseVisualStyleBackColor = true;
@@ -216,14 +439,14 @@
             "Rotary Wing",
             "Bus / Shuttle",
             "Personal Vehicle"});
-            this.cboMethodOfTravel.Location = new System.Drawing.Point(200, 183);
+            this.cboMethodOfTravel.Location = new System.Drawing.Point(200, 113);
             this.cboMethodOfTravel.Name = "cboMethodOfTravel";
-            this.cboMethodOfTravel.Size = new System.Drawing.Size(225, 32);
-            this.cboMethodOfTravel.TabIndex = 11;
+            this.cboMethodOfTravel.Size = new System.Drawing.Size(194, 32);
+            this.cboMethodOfTravel.TabIndex = 9;
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(4, 186);
+            this.label8.Location = new System.Drawing.Point(4, 116);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(187, 29);
@@ -233,7 +456,7 @@
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(-1, 150);
+            this.label7.Location = new System.Drawing.Point(-1, 80);
             this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(187, 29);
@@ -243,32 +466,32 @@
             // 
             // lblLastDayWorking
             // 
-            this.lblLastDayWorking.Location = new System.Drawing.Point(6, 115);
+            this.lblLastDayWorking.Location = new System.Drawing.Point(6, 256);
             this.lblLastDayWorking.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLastDayWorking.Name = "lblLastDayWorking";
             this.lblLastDayWorking.Size = new System.Drawing.Size(187, 29);
             this.lblLastDayWorking.TabIndex = 20;
-            this.lblLastDayWorking.Text = "Last Day Working*";
+            this.lblLastDayWorking.Text = "Last Day at Incident*";
             this.lblLastDayWorking.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(4, 82);
+            this.label4.Location = new System.Drawing.Point(4, 223);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(187, 29);
             this.label4.TabIndex = 19;
-            this.label4.Text = "Check-In Date/Time";
+            this.label4.Text = "Check-In at Incident";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtDeparturePoint
             // 
             this.txtDeparturePoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDeparturePoint.Location = new System.Drawing.Point(200, 150);
+            this.txtDeparturePoint.Location = new System.Drawing.Point(200, 80);
             this.txtDeparturePoint.Name = "txtDeparturePoint";
-            this.txtDeparturePoint.Size = new System.Drawing.Size(225, 29);
-            this.txtDeparturePoint.TabIndex = 17;
+            this.txtDeparturePoint.Size = new System.Drawing.Size(194, 29);
+            this.txtDeparturePoint.TabIndex = 8;
             // 
             // datLDW
             // 
@@ -276,10 +499,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.datLDW.CustomFormat = "yyyy-MMM-dd";
             this.datLDW.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datLDW.Location = new System.Drawing.Point(200, 115);
+            this.datLDW.Location = new System.Drawing.Point(200, 256);
             this.datLDW.Name = "datLDW";
-            this.datLDW.Size = new System.Drawing.Size(225, 29);
-            this.datLDW.TabIndex = 16;
+            this.datLDW.Size = new System.Drawing.Size(194, 29);
+            this.datLDW.TabIndex = 13;
             this.datLDW.ValueChanged += new System.EventHandler(this.datLDW_ValueChanged);
             // 
             // datCheckInTime
@@ -288,10 +511,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.datCheckInTime.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datCheckInTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datCheckInTime.Location = new System.Drawing.Point(200, 80);
+            this.datCheckInTime.Location = new System.Drawing.Point(200, 221);
             this.datCheckInTime.Name = "datCheckInTime";
-            this.datCheckInTime.Size = new System.Drawing.Size(225, 29);
-            this.datCheckInTime.TabIndex = 15;
+            this.datCheckInTime.Size = new System.Drawing.Size(194, 29);
+            this.datCheckInTime.TabIndex = 12;
             this.datCheckInTime.ValueChanged += new System.EventHandler(this.datCheckInTime_ValueChanged);
             // 
             // label3
@@ -314,6 +537,7 @@
             this.txtSelectedName.Name = "txtSelectedName";
             this.txtSelectedName.Size = new System.Drawing.Size(225, 29);
             this.txtSelectedName.TabIndex = 13;
+            this.txtSelectedName.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -341,7 +565,7 @@
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(607, 142);
+            this.label15.Location = new System.Drawing.Point(607, 13);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(49, 39);
             this.label15.TabIndex = 147;
@@ -363,11 +587,11 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(9, 556);
+            this.btnCancel.Location = new System.Drawing.Point(9, 635);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 148;
+            this.btnCancel.TabIndex = 21;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -377,7 +601,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1104, 612);
+            this.ClientSize = new System.Drawing.Size(1104, 691);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
@@ -430,5 +654,22 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnDeparturePointHelp;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker datLastDayTravel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker datStartTravel;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker datLastDayOfRest;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.CheckBox chkDinner;
+        private System.Windows.Forms.CheckBox chkLunch;
+        private System.Windows.Forms.CheckBox chkBreakfast;
+        private System.Windows.Forms.ComboBox cboAccomodations;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cboICSRole;
     }
 }

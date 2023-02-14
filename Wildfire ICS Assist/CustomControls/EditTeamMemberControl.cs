@@ -47,6 +47,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtPhone.Text = teamMember.Phone;
                 txtQualifications.Text = teamMember.SpecialSkills;
                 //txtDietary.Text = teamMember.Dietary;
+                chkDietary.Checked = teamMember.AnyDietary;
+                txtCallsign.Text = teamMember.Callsign;
 
                 if (teamMember.ProvinceID != Guid.Empty) { cboProvince.SelectedValue = teamMember.ProvinceID; }
                 else if (Program.generalOptionsService != null && Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID") != Guid.Empty) { cboProvince.SelectedValue = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); _teamMember.ProvinceID = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); ; }
@@ -199,6 +201,16 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             teamMember.NOKPhone = ((TextBox)sender).Text;
 
+        }
+
+        private void txtCallsign_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.Callsign = ((TextBox)sender).Text;
+        }
+
+        private void chkDietary_CheckedChanged(object sender, EventArgs e)
+        {
+            teamMember.AnyDietary = chkDietary.Checked;
         }
     }
 }

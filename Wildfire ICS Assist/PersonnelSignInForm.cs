@@ -31,10 +31,18 @@ namespace Wildfire_ICS_Assist
             LoadData();
             pnlCheckInInfo.BackColor = Program.FormAccent;
             pnlCheckInInfo.Enabled = false;
-
+            editTeamMemberControl1.teamMember = new Personnel();
             datCheckInTime.Value = DateTime.Now;
             datLDW.Value = DateTime.Now.AddDays(14);
             
+        }
+
+        private void btnShowHelp_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int durationMilliseconds = 10000;
+            toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
+
         }
 
         private void LoadData()
@@ -47,6 +55,10 @@ namespace Wildfire_ICS_Assist
             members = members.Where(o => !statuses.Any(s => s.MemberID == o.PersonID)).ToList();
 
             cboSavedPersonnel.DataSource = members;
+
+            List<ICSRole> roles = new List<ICSRole>(); roles.AddRange(OrgChartTools.staticRoles);
+            cboICSRole.DataSource = roles;
+
         }
 
         private void btnSelectSaved_Click(object sender, EventArgs e)
@@ -57,7 +69,7 @@ namespace Wildfire_ICS_Assist
                 txtSelectedName.Text = selectedMember.Name;
                 pnlCheckInInfo.Enabled = true;
                 pnlCheckInInfo.BackColor = Color.White;
-                datCheckInTime.Focus();
+                txtDeparturePoint.Focus();
             }
         }
 
@@ -69,7 +81,7 @@ namespace Wildfire_ICS_Assist
                 txtSelectedName.Text = selectedMember.Name;
                 pnlCheckInInfo.Enabled = true;
                 pnlCheckInInfo.BackColor = Color.White;
-                datCheckInTime.Focus();
+                txtDeparturePoint.Focus();
 
             }
         }

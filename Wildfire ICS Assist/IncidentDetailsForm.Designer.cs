@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -293,9 +293,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1310,7 +1310,7 @@
             // 
             // tmrAutoSave
             // 
-            this.tmrAutoSave.Interval = 60000;
+            this.tmrAutoSave.Interval = 10000;
             this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
             // 
             // tmrPositionLogReminders

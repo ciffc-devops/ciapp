@@ -805,6 +805,8 @@ namespace Wildfire_ICS_Assist
                 }
                 */
             }
+            CheckForPositionLogReminders();
+
             TriggerAutoSave();
         }
 
@@ -958,7 +960,7 @@ namespace Wildfire_ICS_Assist
                         LastAutoBackup = DateTime.Now;
                         Program.networkService.CurrentIncidentID = Program.CurrentIncident.TaskID;
                         displayIncidentDetails();
-
+                        tmrAutoSave.Enabled = true;
                         //setSavedFlag(true);
 
                         browseToIncidentFolderToolStripMenuItem.Enabled = true;
@@ -1080,6 +1082,8 @@ namespace Wildfire_ICS_Assist
 
                         browseToIncidentFolderToolStripMenuItem.Enabled = true;
                         CreateAutomaticSubFolders();
+
+                        tmrAutoSave.Enabled = true;
                     }
                     catch (IOException)
                     {
@@ -1444,7 +1448,10 @@ namespace Wildfire_ICS_Assist
             using (OptionsForm editOptions = new OptionsForm())
             {
                 DialogResult result = editOptions.ShowDialog();
-
+                if(result == DialogResult.OK)
+                {
+                    tmrAutoSave.Enabled = true;
+                }
             }
         }
 
@@ -1965,7 +1972,7 @@ namespace Wildfire_ICS_Assist
 
         private void tmrAutoSave_Tick(object sender, EventArgs e)
         {
-
+            CheckForAutoBackup();
         }
 
         private void tmrPositionLogReminders_Tick(object sender, EventArgs e)
@@ -1983,6 +1990,8 @@ namespace Wildfire_ICS_Assist
             }
 
         }
+
+
 
         private void ShowPositionLogReminder(PositionLogEntry entry)
         {
@@ -2006,6 +2015,98 @@ namespace Wildfire_ICS_Assist
             _positionLogReminderForm = null;
             CheckForPositionLogReminders();
 
+
+        }
+
+        private void CheckForAutoBackup(bool forceBackup = false)
+        {
+            if (Program.generalOptionsService.GetOptionsBoolValue("AutoBackup") && !string.IsNullOrEmpty(CurrentIncident.FileName))
+            {
+                TimeSpan ts = DateTime.Now - LastAutoBackup;
+                int AutomaticBackupIntervalMinutes = 120;
+                if (Program.generalOptionsService.GetOptionsValue("AutoBackupInterval") != null)
+                {
+                    AutomaticBackupIntervalMinutes = (int)Program.generalOptionsService.GetOptionsValue("AutoBackupInterval");
+                }
+
+                if (ts.TotalMinutes > AutomaticBackupIntervalMinutes || (forceBackup && ts.TotalMinutes > 1))
+                {
+
+                    if (PerformAutoBackup()) { LastAutoBackup = DateTime.Now; }
+                }
+            } else
+            {
+                tmrAutoSave.Enabled = false;
+            }
+        }
+
+        private bool PerformAutoBackup()
+        {
+            string path = "";
+            string defaultBackupLocation = Program.generalOptionsService.GetStringOptionValue("DefaultBackupLocation");
+            string defaultSaveLocation = Program.generalOptionsService.GetStringOptionValue("DefaultSaveLocation");
+
+            if (!string.IsNullOrEmpty(defaultBackupLocation)) { path = defaultBackupLocation; }
+            else if (!string.IsNullOrEmpty(defaultSaveLocation)) { path = defaultSaveLocation; }
+            else
+            {
+                path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                path = Path.Combine(path, "CIAPPO");
+
+
+
+            }
+            path = Path.Combine(path, "Incident " + CurrentIncident.IncidentIdentifier);
+
+            System.IO.Directory.CreateDirectory(path);
+
+
+            string fn = DateTime.Now.ToString("yyyy-MMM-dd HH-mm") + " - BACKUP Incident " + CurrentIncident.IncidentNameOrNumber + ".xml";
+            path = Path.Combine(path, fn);
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                try
+                {
+
+                    System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
+                    ws.NewLineHandling = System.Xml.NewLineHandling.Entitize;
+
+
+                    XmlSerializer ser = new XmlSerializer(typeof(WFIncident));
+                    using (System.Xml.XmlWriter wr = System.Xml.XmlWriter.Create(path, ws))
+                    {
+                        ser.Serialize(wr, CurrentIncident);
+                    }
+                    return true;
+                    //System.IO.FileStream file = System.IO.File.Create(path);
+
+                    //writer.Serialize(file, CurrentTask);
+                    //file.Close();
+
+
+
+                }
+                catch (IOException)
+                {
+                    lastSaveSuccessful = false;
+                    return false;
+                }
+                catch (System.UnauthorizedAccessException)
+                {
+                    lastSaveSuccessful = false;
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    lastSaveSuccessful = false;
+                    return false;
+
+                }
+               
+            }
+
+            return false;
 
         }
 
@@ -2556,29 +2657,35 @@ namespace Wildfire_ICS_Assist
 
         private void btnLogisticsSignIn_Click(object sender, EventArgs e)
         {
-            using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+            if (initialDetailsSet())
             {
-                DialogResult dr = signInForm.ShowDialog();
-                if (dr == DialogResult.OK)
+                using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
                 {
-                    SignInRecord record = signInForm.signInRecord;
-                    record.IsSignIn = true;
-                    Program.wfIncidentService.UpsertMemberStatus(record);
+                    DialogResult dr = signInForm.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        SignInRecord record = signInForm.signInRecord;
+                        record.IsSignIn = true;
+                        Program.wfIncidentService.UpsertMemberStatus(record);
+                    }
                 }
             }
         }
 
         private void btnLogisticsBulkSignIn_Click(object sender, EventArgs e)
         {
-            using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
+            if (initialDetailsSet())
             {
-                DialogResult dr = signInForm.ShowDialog();
-                if (dr == DialogResult.OK)
+                using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
                 {
-                    foreach (SignInRecord record in signInForm.records)
+                    DialogResult dr = signInForm.ShowDialog();
+                    if (dr == DialogResult.OK)
                     {
-                        record.IsSignIn = true;
-                        Program.wfIncidentService.UpsertMemberStatus(record);
+                        foreach (SignInRecord record in signInForm.records)
+                        {
+                            record.IsSignIn = true;
+                            Program.wfIncidentService.UpsertMemberStatus(record);
+                        }
                     }
                 }
             }
@@ -2586,15 +2693,18 @@ namespace Wildfire_ICS_Assist
 
         private void bulkCheckInToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
+            if (initialDetailsSet())
             {
-                DialogResult dr = signInForm.ShowDialog();
-                if (dr == DialogResult.OK)
+                using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
                 {
-                    foreach (SignInRecord record in signInForm.records)
+                    DialogResult dr = signInForm.ShowDialog();
+                    if (dr == DialogResult.OK)
                     {
-                        record.IsSignIn = true;
-                        Program.wfIncidentService.UpsertMemberStatus(record);
+                        foreach (SignInRecord record in signInForm.records)
+                        {
+                            record.IsSignIn = true;
+                            Program.wfIncidentService.UpsertMemberStatus(record);
+                        }
                     }
                 }
             }
@@ -2602,14 +2712,17 @@ namespace Wildfire_ICS_Assist
 
         private void checkInMemberToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+            if (initialDetailsSet())
             {
-                DialogResult dr = signInForm.ShowDialog();
-                if (dr == DialogResult.OK)
+                using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
                 {
-                    SignInRecord record = signInForm.signInRecord;
-                    record.IsSignIn = true;
-                    Program.wfIncidentService.UpsertMemberStatus(record);
+                    DialogResult dr = signInForm.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        SignInRecord record = signInForm.signInRecord;
+                        record.IsSignIn = true;
+                        Program.wfIncidentService.UpsertMemberStatus(record);
+                    }
                 }
             }
         }
