@@ -807,11 +807,12 @@ namespace WildfireICSDesktopServices
                 }
                 catch (IOException ex)
                 {
-
+                    path = null;
                 }
                 catch (System.UnauthorizedAccessException ex)
                 {
-
+                    path = null;
+                    
                 }
                 return path;
             }

@@ -163,7 +163,16 @@ namespace Wildfire_ICS_Assist
             string filename = Program.pdfExportService.createObjectivesPDF(CurrentIncident, CurrentOpPeriod, false, false, false);
             if(!string.IsNullOrEmpty(filename))
             {
-                System.Diagnostics.Process.Start(filename);
+                try
+                {
+                    System.Diagnostics.Process.Start(filename);
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error opening " + filename + Environment.NewLine + Environment.NewLine + ex.ToString());
+                }
+            } else
+            {
+                MessageBox.Show("Sorry, there was an issue creating the PDF.");
             }
         }
 

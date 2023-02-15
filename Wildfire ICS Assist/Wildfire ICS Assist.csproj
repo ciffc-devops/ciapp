@@ -7,7 +7,7 @@
     <ProjectGuid>{72934FFD-ADD6-4050-884A-CA77FB3D3262}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Wildfire_ICS_Assist</RootNamespace>
-    <AssemblyName>Canadian Incident Action Plan Producer</AssemblyName>
+    <AssemblyName>Canadian Incident Action Plan Program</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
