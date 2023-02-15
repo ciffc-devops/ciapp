@@ -367,3 +367,5 @@ FodyWeavers.xsd
 /WF-ICS-ClassLibrary/bin/Debug/WF-ICS-ClassLibrary.dll
 /WF-ICS-ClassLibrary/bin/Debug/ProtobufSerializer.dll
 /WildfireICSDesktopServices/bin/Debug/WF-ICS-ClassLibrary.dll
+/WF-ICS-ClassLibrary/bin/Debug/System.Text.Json.dll
+/Wildfire ICS Assist/bin/Debug/System.Text.Json.dll
