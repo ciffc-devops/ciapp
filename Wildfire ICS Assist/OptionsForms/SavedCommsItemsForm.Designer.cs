@@ -86,6 +86,7 @@
             this.dgvCommsItems.Name = "dgvCommsItems";
             this.dgvCommsItems.ReadOnly = true;
             this.dgvCommsItems.RowHeadersVisible = false;
+            this.dgvCommsItems.RowTemplate.Height = 30;
             this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCommsItems.Size = new System.Drawing.Size(1166, 645);
             this.dgvCommsItems.TabIndex = 2;
@@ -150,20 +151,21 @@
             // 
             // colFrequency
             // 
-            this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colFrequency.DataPropertyName = "FullFrequency";
-            this.colFrequency.HeaderText = "Frequency (Rx/Tx)";
+            this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colFrequency.DataPropertyName = "FullRx";
+            this.colFrequency.HeaderText = "Rx Freq / Tone";
             this.colFrequency.Name = "colFrequency";
             this.colFrequency.ReadOnly = true;
-            this.colFrequency.Width = 177;
+            this.colFrequency.Width = 163;
             // 
             // colTone
             // 
-            this.colTone.DataPropertyName = "FullTone";
-            this.colTone.HeaderText = "Tone (Rx/Tx)";
+            this.colTone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTone.DataPropertyName = "FullTx";
+            this.colTone.HeaderText = "Tx Freq/Tone";
             this.colTone.Name = "colTone";
             this.colTone.ReadOnly = true;
-            this.colTone.Width = 134;
+            this.colTone.Width = 152;
             // 
             // colComments
             // 

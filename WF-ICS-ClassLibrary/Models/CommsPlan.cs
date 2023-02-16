@@ -156,6 +156,23 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return RxTone; }
             }
         }
+
+        public string FullRx
+        {
+            get
+            {
+                return RxFrequency + " / " + RxTone;
+            }
+        }
+
+        public string FullTx
+        {
+            get
+            {
+                return TxFrequency + " / " + TxTone;
+            }
+        }
+
         public string Assignment { get => _Aassignment; set => _Aassignment = value; }
         public bool UsedForAircraft { get => _Aircraft; set => _Aircraft = value; }
 
