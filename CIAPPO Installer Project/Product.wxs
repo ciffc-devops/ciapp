@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="e9e9228b-8eb4-4595-a189-16e9ddc1d383" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.1.1" Manufacturer="CIFFC" UpgradeCode="44c53005-933a-4541-ac64-4788f846b458">
+	<Product Id="e9e9228b-8eb4-4595-a189-16e9ddc1d383" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.1.3" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
          Manufacturer='CIFFC' />
 
 		<MediaTemplate EmbedCab="yes" />
 		<UI Id="WixUI_Mondo">
-			<UIRef Id="WixUI_Minimal" />
+			<UIRef Id="WixUI_InstallDir" />
 			<UIRef Id="WixUI_ErrorProgressText"/>
 		</UI>
 
@@ -24,7 +24,6 @@
 				<ComponentGroupRef Id="ProductComponents" />
 				<ComponentGroupRef Id="BlankFormComponents" />
 				<ComponentRef Id='MainExecutable' />
-				<ComponentRef Id='ProgramMenuDir' />
 			</Feature>
 
 		
@@ -35,9 +34,22 @@
 		<Condition Message='This setup requires the .NET Framework 4.7 or later installed.'>
 			<![CDATA[Installed OR WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED]]>
 		</Condition>
-	
-
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+		
 		<Icon Id="CanadianIncidentActionPlanProgram.exe" SourceFile="ProgramOutput\Canadian Incident Action Plan Program.exe" />
+
+		<DirectoryRef Id="ApplicationProgramsFolder">
+			<Component Id="ApplicationShortcut" Guid="069951ea-679d-416d-accb-c1d0e6bdbe1c">
+				<Shortcut Id="ApplicationStartMenuShortcut"
+						  Name="Canadian Incident Action Plan Program"
+						  Description="Canadian Incident Action Plan Program"
+						  Target="[#Canadian_Incident_Action_Plan_ProgramExe]"
+						 
+						  WorkingDirectory="INSTALLDIR"/>
+				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+				<RegistryValue Root="HKCU" Key="Software\CIFFC\CanadianIncidentActionPlanProgram" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+			</Component>
+		</DirectoryRef>
 	</Product>
 
 	<Fragment>
@@ -51,13 +63,8 @@
 					</Directory>
 				</Directory>
 			</Directory>
-			<Directory Id="ProgramMenuFolder" Name="Programs">
-				<Directory Id="ProgramMenuDir" Name="Foobar 1.0">
-					<Component Id="ProgramMenuDir" Guid="34304044-f558-4552-97c6-53b4a6192c5e">
-						<RemoveFolder Id='ProgramMenuDir' On='uninstall' />
-						<RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
-					</Component>
-				</Directory>
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ApplicationProgramsFolder" Name="CIFFC"/>
 			</Directory>
 
 			<Directory Id="DesktopFolder" Name="Desktop" />
@@ -68,14 +75,13 @@
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 			<Component Id='MainExecutable' Guid='d42acf2c-6b70-43c0-bb0f-1f2768b548c0'>
 				<File Id='Canadian_Incident_Action_Plan_ProgramExe' Name='Canadian Incident Action Plan Program.exe' DiskId='1' Source='ProgramOutput\Canadian Incident Action Plan Program.exe' KeyPath='yes'>
-					<Shortcut Id="startmenuFoobar10" Directory="ProgramMenuDir" Name="Canadian_Incident_Action_Plan_Program"
-						WorkingDirectory='INSTALLDIR' Icon="CanadianIncidentActionPlanProgram.exe" IconIndex="0" Advertise="yes" />
-					<Shortcut Id="desktopFoobar10" Directory="DesktopFolder" Name="Canadian_Incident_Action_Plan_Program"
+					
+					<Shortcut Id="desktopFoobar10" Directory="DesktopFolder" Name="Canadian Incident Action Plan Program"
 						WorkingDirectory='INSTALLDIR' Icon="CanadianIncidentActionPlanProgram.exe" IconIndex="0" Advertise="yes" />
 				</File>
 			</Component>
-
-
+			<ComponentRef Id="ApplicationShortcut" />
+			
 			<Component Id='CoordinateSharp_dll' Guid ='27455d98-6929-479e-a3fc-8889758b2b2a'>
 				<File Id='CoordinateSharp_dll' Name='CoordinateSharp.dll' DiskId='1' Source='ProgramOutput\CoordinateSharp.dll' KeyPath='yes'></File>
 			</Component>

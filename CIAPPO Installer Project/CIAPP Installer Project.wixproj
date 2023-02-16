@@ -6,8 +6,9 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>eaeed868-41c0-4506-8660-0e83eb5d914d</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>CIAPPO_Installer_Project</OutputName>
+    <OutputName>CIAPP_Installer_Project</OutputName>
     <OutputType>Package</OutputType>
+    <Name>CIAPP Installer Project</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
