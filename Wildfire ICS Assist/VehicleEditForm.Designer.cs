@@ -144,7 +144,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label7);
             this.splitContainer2.Panel2.Controls.Add(this.txtLicenseOrID);
             this.splitContainer2.Size = new System.Drawing.Size(824, 612);
-            this.splitContainer2.SplitterDistance = 62;
+            this.splitContainer2.SplitterDistance = 67;
             this.splitContainer2.TabIndex = 105;
             // 
             // btnUseSaved
@@ -152,7 +152,7 @@
             this.btnUseSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUseSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnUseSaved.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUseSaved.Location = new System.Drawing.Point(622, 12);
+            this.btnUseSaved.Location = new System.Drawing.Point(621, 11);
             this.btnUseSaved.Name = "btnUseSaved";
             this.btnUseSaved.Size = new System.Drawing.Size(189, 45);
             this.btnUseSaved.TabIndex = 2;
@@ -168,7 +168,7 @@
             this.cboSavedVehicles.DisplayMember = "IDWithMakeOwner";
             this.cboSavedVehicles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSavedVehicles.FormattingEnabled = true;
-            this.cboSavedVehicles.Location = new System.Drawing.Point(159, 19);
+            this.cboSavedVehicles.Location = new System.Drawing.Point(158, 17);
             this.cboSavedVehicles.Name = "cboSavedVehicles";
             this.cboSavedVehicles.Size = new System.Drawing.Size(449, 32);
             this.cboSavedVehicles.TabIndex = 1;
@@ -176,18 +176,17 @@
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(12, 22);
+            this.label14.Location = new System.Drawing.Point(11, 8);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(141, 24);
+            this.label14.Size = new System.Drawing.Size(141, 50);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Saved Vehicles";
+            this.label14.Text = "Saved Vehicles and Equipment";
             // 
             // chkSaveForLater
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(374, 501);
+            this.chkSaveForLater.Location = new System.Drawing.Point(374, 496);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSaveForLater.TabIndex = 105;
@@ -200,7 +199,7 @@
             this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddNew.Location = new System.Drawing.Point(612, 490);
+            this.btnAddNew.Location = new System.Drawing.Point(612, 485);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
@@ -301,7 +300,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(218, 24);
             this.label3.TabIndex = 69;
-            this.label3.Text = "Vehicle /Equip. Class";
+            this.label3.Text = "Vehicle / Equip. Class";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCategoryKindCapacity
@@ -344,7 +343,7 @@
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNotes.Size = new System.Drawing.Size(583, 78);
+            this.txtNotes.Size = new System.Drawing.Size(583, 73);
             this.txtNotes.TabIndex = 13;
             // 
             // txtFeatures
@@ -506,14 +505,13 @@
             this.MinimizeBox = false;
             this.Name = "VehicleEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add / Enter a Vehicle";
+            this.Text = "Add / Enter a Vehicle/Equipment";
             this.Load += new System.EventHandler(this.VehicleEditForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();

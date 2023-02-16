@@ -174,7 +174,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(190, 24);
             this.label3.TabIndex = 120;
-            this.label3.Text = "Vehicle /Equip. Class";
+            this.label3.Text = "Vehicle / Equip. Class";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCategoryKindCapacity
@@ -348,7 +348,7 @@
             this.MinimumSize = new System.Drawing.Size(828, 499);
             this.Name = "EditSavedVehicleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Saved Vehicle";
+            this.Text = "Edit Saved Vehicle / Equipment";
             this.Load += new System.EventHandler(this.EditSavedVehicleForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

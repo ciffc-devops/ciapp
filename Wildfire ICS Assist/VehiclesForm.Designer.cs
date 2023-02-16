@@ -222,7 +222,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "VehiclesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Vehicles";
+            this.Text = "Vehicles and Equipment";
             this.Load += new System.EventHandler(this.VehiclesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

@@ -150,7 +150,6 @@
             this.bulkCheckInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.vehiclesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.equipmentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -188,7 +187,6 @@
             this.btnLogisticsSignIn = new System.Windows.Forms.Button();
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnLogisticsMemberStatus = new System.Windows.Forms.Button();
-            this.btnLogisticsDashboard = new System.Windows.Forms.Button();
             this.btnVehicles = new System.Windows.Forms.Button();
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnIncidentSummary = new System.Windows.Forms.Button();
@@ -204,14 +202,10 @@
             this.btnPlanningAddAssignment = new System.Windows.Forms.Button();
             this.btnNotes = new System.Windows.Forms.Button();
             this.btnTeamAssignments = new System.Windows.Forms.Button();
-            this.btnPlanningDashboard = new System.Windows.Forms.Button();
-            this.btnTimeline = new System.Windows.Forms.Button();
             this.cpOperations = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnOpsAssignments = new System.Windows.Forms.Button();
             this.btnOpsMemberStatus = new System.Windows.Forms.Button();
-            this.btnOpsDashboard = new System.Windows.Forms.Button();
-            this.btnTeamStatus = new System.Windows.Forms.Button();
-            this.btnCommsLog = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -1086,9 +1080,8 @@
             this.memberStatusToolStripMenuItem,
             this.checkInMemberToolStripMenuItem,
             this.bulkCheckInToolStripMenuItem,
-            this.toolStripSeparator10,
             this.vehiclesToolStripMenuItem1,
-            this.equipmentToolStripMenuItem1,
+            this.toolStripSeparator10,
             this.additionalContactsToolStripMenuItem});
             this.logisticsToolStripMenuItem.Name = "logisticsToolStripMenuItem";
             resources.ApplyResources(this.logisticsToolStripMenuItem, "logisticsToolStripMenuItem");
@@ -1137,11 +1130,6 @@
             this.vehiclesToolStripMenuItem1.Name = "vehiclesToolStripMenuItem1";
             resources.ApplyResources(this.vehiclesToolStripMenuItem1, "vehiclesToolStripMenuItem1");
             this.vehiclesToolStripMenuItem1.Click += new System.EventHandler(this.vehiclesToolStripMenuItem1_Click);
-            // 
-            // equipmentToolStripMenuItem1
-            // 
-            this.equipmentToolStripMenuItem1.Name = "equipmentToolStripMenuItem1";
-            resources.ApplyResources(this.equipmentToolStripMenuItem1, "equipmentToolStripMenuItem1");
             // 
             // additionalContactsToolStripMenuItem
             // 
@@ -1331,7 +1319,7 @@
             // cpLogistics
             // 
             resources.ApplyResources(this.cpLogistics, "cpLogistics");
-            this.cpLogistics.BackColor = System.Drawing.Color.White;
+            this.cpLogistics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpLogistics.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpLogistics.CollapsedHeight = 40;
             this.cpLogistics.CollapsedWidth = 485;
@@ -1340,10 +1328,9 @@
             this.cpLogistics.Controls.Add(this.btnLogisticsSignIn);
             this.cpLogistics.Controls.Add(this.btnAdditionalContacts);
             this.cpLogistics.Controls.Add(this.btnLogisticsMemberStatus);
-            this.cpLogistics.Controls.Add(this.btnLogisticsDashboard);
             this.cpLogistics.Controls.Add(this.btnVehicles);
-            this.cpLogistics.CurrentlyCollapsed = false;
-            this.cpLogistics.ExpandedHeight = 246;
+            this.cpLogistics.CurrentlyCollapsed = true;
+            this.cpLogistics.ExpandedHeight = 196;
             this.cpLogistics.ExpandedWidth = 530;
             this.cpLogistics.Name = "cpLogistics";
             this.cpLogistics.TitleText = "LOGISTICS";
@@ -1376,12 +1363,6 @@
             this.btnLogisticsMemberStatus.UseVisualStyleBackColor = true;
             this.btnLogisticsMemberStatus.Click += new System.EventHandler(this.btnLogisticsMemberStatus_Click);
             // 
-            // btnLogisticsDashboard
-            // 
-            resources.ApplyResources(this.btnLogisticsDashboard, "btnLogisticsDashboard");
-            this.btnLogisticsDashboard.Name = "btnLogisticsDashboard";
-            this.btnLogisticsDashboard.UseVisualStyleBackColor = true;
-            // 
             // btnVehicles
             // 
             resources.ApplyResources(this.btnVehicles, "btnVehicles");
@@ -1391,7 +1372,7 @@
             // 
             // cpIncidentActionPlan
             // 
-            this.cpIncidentActionPlan.BackColor = System.Drawing.Color.White;
+            this.cpIncidentActionPlan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpIncidentActionPlan.CollapsedHeight = 40;
             this.cpIncidentActionPlan.CollapsedWidth = 485;
@@ -1405,7 +1386,7 @@
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
             this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
-            this.cpIncidentActionPlan.CurrentlyCollapsed = false;
+            this.cpIncidentActionPlan.CurrentlyCollapsed = true;
             this.cpIncidentActionPlan.ExpandedHeight = 331;
             this.cpIncidentActionPlan.ExpandedWidth = 722;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
@@ -1417,6 +1398,7 @@
             resources.ApplyResources(this.btnIncidentSummary, "btnIncidentSummary");
             this.btnIncidentSummary.Name = "btnIncidentSummary";
             this.btnIncidentSummary.UseVisualStyleBackColor = true;
+            this.btnIncidentSummary.Click += new System.EventHandler(this.btnIncidentSummary_Click);
             // 
             // btnAssignmentList
             // 
@@ -1477,7 +1459,6 @@
             // 
             // cpPlanning
             // 
-            resources.ApplyResources(this.cpPlanning, "cpPlanning");
             this.cpPlanning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpPlanning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpPlanning.CollapsedHeight = 40;
@@ -1486,11 +1467,10 @@
             this.cpPlanning.Controls.Add(this.btnPlanningAddAssignment);
             this.cpPlanning.Controls.Add(this.btnNotes);
             this.cpPlanning.Controls.Add(this.btnTeamAssignments);
-            this.cpPlanning.Controls.Add(this.btnPlanningDashboard);
-            this.cpPlanning.Controls.Add(this.btnTimeline);
             this.cpPlanning.CurrentlyCollapsed = true;
-            this.cpPlanning.ExpandedHeight = 270;
+            this.cpPlanning.ExpandedHeight = 195;
             this.cpPlanning.ExpandedWidth = 485;
+            resources.ApplyResources(this.cpPlanning, "cpPlanning");
             this.cpPlanning.Name = "cpPlanning";
             this.cpPlanning.TitleText = "PLANNING";
             // 
@@ -1514,18 +1494,6 @@
             this.btnTeamAssignments.UseVisualStyleBackColor = true;
             this.btnTeamAssignments.Click += new System.EventHandler(this.btnTeamAssignments_Click);
             // 
-            // btnPlanningDashboard
-            // 
-            resources.ApplyResources(this.btnPlanningDashboard, "btnPlanningDashboard");
-            this.btnPlanningDashboard.Name = "btnPlanningDashboard";
-            this.btnPlanningDashboard.UseVisualStyleBackColor = true;
-            // 
-            // btnTimeline
-            // 
-            resources.ApplyResources(this.btnTimeline, "btnTimeline");
-            this.btnTimeline.Name = "btnTimeline";
-            this.btnTimeline.UseVisualStyleBackColor = true;
-            // 
             // cpOperations
             // 
             resources.ApplyResources(this.cpOperations, "cpOperations");
@@ -1534,13 +1502,11 @@
             this.cpOperations.CollapsedHeight = 40;
             this.cpOperations.CollapsedWidth = 485;
             this.cpOperations.CollapseLeft = false;
+            this.cpOperations.Controls.Add(this.button1);
             this.cpOperations.Controls.Add(this.btnOpsAssignments);
             this.cpOperations.Controls.Add(this.btnOpsMemberStatus);
-            this.cpOperations.Controls.Add(this.btnOpsDashboard);
-            this.cpOperations.Controls.Add(this.btnTeamStatus);
-            this.cpOperations.Controls.Add(this.btnCommsLog);
             this.cpOperations.CurrentlyCollapsed = true;
-            this.cpOperations.ExpandedHeight = 260;
+            this.cpOperations.ExpandedHeight = 188;
             this.cpOperations.ExpandedWidth = 485;
             this.cpOperations.Name = "cpOperations";
             this.cpOperations.TitleText = "OPERATIONS";
@@ -1558,31 +1524,17 @@
             this.btnOpsMemberStatus.Name = "btnOpsMemberStatus";
             this.btnOpsMemberStatus.UseVisualStyleBackColor = true;
             // 
-            // btnOpsDashboard
+            // button1
             // 
-            resources.ApplyResources(this.btnOpsDashboard, "btnOpsDashboard");
-            this.btnOpsDashboard.Name = "btnOpsDashboard";
-            this.btnOpsDashboard.UseVisualStyleBackColor = true;
-            // 
-            // btnTeamStatus
-            // 
-            resources.ApplyResources(this.btnTeamStatus, "btnTeamStatus");
-            this.btnTeamStatus.Name = "btnTeamStatus";
-            this.btnTeamStatus.UseVisualStyleBackColor = true;
-            // 
-            // btnCommsLog
-            // 
-            resources.ApplyResources(this.btnCommsLog, "btnCommsLog");
-            this.btnCommsLog.Name = "btnCommsLog";
-            this.btnCommsLog.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.Controls.Add(this.cpLogistics);
-            this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pnlInternetSyncStart);
@@ -1593,7 +1545,9 @@
             this.Controls.Add(this.lblVersionNumber);
             this.Controls.Add(this.tcStatus);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.cpOperations);
+            this.Controls.Add(this.cpLogistics);
             this.Controls.Add(this.cpPlanning);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
@@ -1709,11 +1663,8 @@
         private System.Windows.Forms.Button btnLogisticsMemberStatus;
         private System.Windows.Forms.Button btnAdditionalContacts;
         private System.Windows.Forms.Button btnVehicles;
-        private System.Windows.Forms.Button btnLogisticsDashboard;
         private System.Windows.Forms.Button btnPlanningAddAssignment;
         private System.Windows.Forms.Button btnTeamAssignments;
-        private System.Windows.Forms.Button btnTimeline;
-        private System.Windows.Forms.Button btnPlanningDashboard;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iAPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem operationsToolStripMenuItem;
@@ -1773,9 +1724,6 @@
         private System.Windows.Forms.ToolStripMenuItem organizationChartICS207ToolStripMenuItem;
         private System.Windows.Forms.Button btnOpsAssignments;
         private System.Windows.Forms.Button btnOpsMemberStatus;
-        private System.Windows.Forms.Button btnOpsDashboard;
-        private System.Windows.Forms.Button btnTeamStatus;
-        private System.Windows.Forms.Button btnCommsLog;
         private System.Windows.Forms.Button btnNotes;
         private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem1;
@@ -1794,7 +1742,6 @@
         private System.Windows.Forms.ToolStripMenuItem bulkCheckInToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem vehiclesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem equipmentToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem additionalContactsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamAssignmentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem incidentTimelineToolStripMenuItem;
@@ -1817,6 +1764,7 @@
         private System.Windows.Forms.ToolStripMenuItem networkTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamAssignmentsICS204ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamAssignmentsICS204ToolStripMenuItem1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -64,7 +64,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
             this.splitContainer1.Size = new System.Drawing.Size(987, 591);
-            this.splitContainer1.SplitterDistance = 525;
+            this.splitContainer1.SplitterDistance = 522;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -87,7 +87,7 @@
             this.dgvVehicles.RowHeadersVisible = false;
             this.dgvVehicles.RowTemplate.Height = 35;
             this.dgvVehicles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVehicles.Size = new System.Drawing.Size(987, 525);
+            this.dgvVehicles.Size = new System.Drawing.Size(987, 522);
             this.dgvVehicles.TabIndex = 1;
             this.dgvVehicles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehicles_CellDoubleClick);
             this.dgvVehicles.SelectionChanged += new System.EventHandler(this.dgvVehicles_SelectionChanged);
@@ -176,7 +176,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SavedVehiclesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Saved Vehicles";
+            this.Text = "Saved Vehicles and Equipment";
             this.Load += new System.EventHandler(this.SavedVehiclesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

@@ -292,7 +292,7 @@ namespace Wildfire_ICS_Assist
             }
             else { btnAirOpsSummary.Image = null; airOperationsSummaryICS220ToolStripMenuItem.Image = null; }
 
-
+            btnIncidentSummary.Image = null; 
             //                    
 
         }
@@ -2845,5 +2845,9 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        private void btnIncidentSummary_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This feature is not yet supported");
+        }
     }
 }

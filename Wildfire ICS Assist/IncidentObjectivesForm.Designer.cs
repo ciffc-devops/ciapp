@@ -39,12 +39,12 @@
             this.txtFireSize = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cpWeather = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.txtWeatherForcast = new System.Windows.Forms.TextBox();
             this.cpGeneralSafety = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cboSafetyMessages = new System.Windows.Forms.ComboBox();
             this.btnFillSafetyFrom208 = new System.Windows.Forms.Button();
             this.txtGeneralSafetyMessage = new System.Windows.Forms.TextBox();
+            this.cpWeather = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.txtWeatherForcast = new System.Windows.Forms.TextBox();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -59,8 +59,8 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).BeginInit();
             this.cpFireStatus.SuspendLayout();
-            this.cpWeather.SuspendLayout();
             this.cpGeneralSafety.SuspendLayout();
+            this.cpWeather.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -225,35 +225,6 @@
             this.label1.Text = "Fire Size ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // cpWeather
-            // 
-            this.cpWeather.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpWeather.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpWeather.CollapsedHeight = 40;
-            this.cpWeather.CollapsedWidth = 485;
-            this.cpWeather.CollapseLeft = true;
-            this.cpWeather.Controls.Add(this.txtWeatherForcast);
-            this.cpWeather.CurrentlyCollapsed = true;
-            this.cpWeather.ExpandedHeight = 260;
-            this.cpWeather.ExpandedWidth = 485;
-            this.cpWeather.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.cpWeather.Location = new System.Drawing.Point(7, 15);
-            this.cpWeather.Margin = new System.Windows.Forms.Padding(6);
-            this.cpWeather.Name = "cpWeather";
-            this.cpWeather.Size = new System.Drawing.Size(485, 40);
-            this.cpWeather.TabIndex = 58;
-            this.cpWeather.TitleText = "Weather Forcast";
-            // 
-            // txtWeatherForcast
-            // 
-            this.txtWeatherForcast.Location = new System.Drawing.Point(6, 49);
-            this.txtWeatherForcast.Multiline = true;
-            this.txtWeatherForcast.Name = "txtWeatherForcast";
-            this.txtWeatherForcast.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtWeatherForcast.Size = new System.Drawing.Size(474, 206);
-            this.txtWeatherForcast.TabIndex = 33;
-            this.txtWeatherForcast.Leave += new System.EventHandler(this.txtWeatherForcast_Leave);
-            // 
             // cpGeneralSafety
             // 
             this.cpGeneralSafety.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
@@ -308,6 +279,35 @@
             this.txtGeneralSafetyMessage.Size = new System.Drawing.Size(473, 194);
             this.txtGeneralSafetyMessage.TabIndex = 33;
             this.txtGeneralSafetyMessage.Leave += new System.EventHandler(this.txtGeneralSafetyMessage_Leave);
+            // 
+            // cpWeather
+            // 
+            this.cpWeather.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpWeather.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpWeather.CollapsedHeight = 40;
+            this.cpWeather.CollapsedWidth = 485;
+            this.cpWeather.CollapseLeft = true;
+            this.cpWeather.Controls.Add(this.txtWeatherForcast);
+            this.cpWeather.CurrentlyCollapsed = true;
+            this.cpWeather.ExpandedHeight = 260;
+            this.cpWeather.ExpandedWidth = 485;
+            this.cpWeather.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.cpWeather.Location = new System.Drawing.Point(7, 15);
+            this.cpWeather.Margin = new System.Windows.Forms.Padding(6);
+            this.cpWeather.Name = "cpWeather";
+            this.cpWeather.Size = new System.Drawing.Size(485, 40);
+            this.cpWeather.TabIndex = 58;
+            this.cpWeather.TitleText = "Weather Forcast";
+            // 
+            // txtWeatherForcast
+            // 
+            this.txtWeatherForcast.Location = new System.Drawing.Point(6, 49);
+            this.txtWeatherForcast.Multiline = true;
+            this.txtWeatherForcast.Name = "txtWeatherForcast";
+            this.txtWeatherForcast.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtWeatherForcast.Size = new System.Drawing.Size(474, 206);
+            this.txtWeatherForcast.TabIndex = 33;
+            this.txtWeatherForcast.Leave += new System.EventHandler(this.txtWeatherForcast_Leave);
             // 
             // btnPrint
             // 
@@ -387,10 +387,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).EndInit();
             this.cpFireStatus.ResumeLayout(false);
             this.cpFireStatus.PerformLayout();
-            this.cpWeather.ResumeLayout(false);
-            this.cpWeather.PerformLayout();
             this.cpGeneralSafety.ResumeLayout(false);
             this.cpGeneralSafety.PerformLayout();
+            this.cpWeather.ResumeLayout(false);
+            this.cpWeather.PerformLayout();
             this.ResumeLayout(false);
 
         }

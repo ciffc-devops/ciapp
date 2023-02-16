@@ -267,7 +267,7 @@
             this.MinimumSize = new System.Drawing.Size(815, 412);
             this.Name = "OrganizationalChartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Organizational Chart";
+            this.Text = "Organization Chart";
             this.Load += new System.EventHandler(this.OrganizationalChartForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

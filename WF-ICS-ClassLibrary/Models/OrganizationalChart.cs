@@ -470,7 +470,7 @@ namespace WF_ICS_ClassLibrary.Models
             if (role.IndividualID != Guid.Empty) { return true; }
             foreach(ICSRole childRole in chart.ActiveRoles.Where(o=>o.ReportsTo == role.RoleID))
             {
-                if (chart.FilledOrHasFilledChildRoles(role))
+                if (chart.FilledOrHasFilledChildRoles(childRole))
                 {
                     return true;
                 }

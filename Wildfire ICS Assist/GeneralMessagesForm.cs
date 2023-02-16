@@ -35,6 +35,8 @@ namespace Wildfire_ICS_Assist
 
         private void GeneralMessagesForm_Load(object sender, EventArgs e)
         {
+            if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
+
             dgvLog.AutoGenerateColumns = false;
             BuildMessageList();
             Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
