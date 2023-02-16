@@ -25,6 +25,8 @@
     <Folder Include="ProgramOutput\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CIAPPInstallerBg.jpg" />
+    <Content Include="CIAPPInstallHeader.jpg" />
     <Content Include="LicenseAgreement.rtf" />
     <Content Include="ProgramOutput\Canadian_Incident_Action_Plan_Program.exe" />
     <Content Include="ProgramOutput\CoordinateSharp.dll" />
@@ -46,9 +48,17 @@
     <Content Include="ProgramOutput\WF-ICS-ClassLibrary.dll" />
   </ItemGroup>
   <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
     <WixExtension Include="WixUIExtension">
-      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\WiX Toolset v3.14\bin\WixUIExtension.dll</HintPath>
       <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\WiX Toolset v3.14\bin\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
     </WixExtension>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />

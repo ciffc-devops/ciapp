@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 	<Product Id="e9e9228b-8eb4-4595-a189-16e9ddc1d383" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.1.1" Manufacturer="CIFFC" UpgradeCode="44c53005-933a-4541-ac64-4788f846b458">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
          Manufacturer='CIFFC' />
 
 		<MediaTemplate EmbedCab="yes" />
-		<UIRef Id="WixUI_Mondo" />
+		<UI Id="WixUI_Mondo">
+			<UIRef Id="WixUI_Minimal" />
+			<UIRef Id="WixUI_ErrorProgressText"/>
+		</UI>
+
+		
+		
 		<WixVariable Id="WixUILicenseRtf" Value="LicenseAgreement.rtf" />
 		
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		
 
+		<WixVariable Id="WixUIBannerBmp" Value="CIAPPInstallHeader.jpg" />
+		<WixVariable Id="WixUIDialogBmp" Value="CIAPPInstallerBg.jpg" />
 
 		<Feature Id='Complete' Title='Canadian Incident Action Plan Program' Description='The complete package.'    Display='expand' Level='1' ConfigurableDirectory='INSTALLFOLDER'>
 			<Feature Id='MainProgram' Title='Program' Description='The main executable.' Level='1'>
@@ -24,6 +31,10 @@
 		</Feature>
 		
 		
+		<PropertyRef Id="WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED"/>
+		<Condition Message='This setup requires the .NET Framework 4.7 or later installed.'>
+			<![CDATA[Installed OR WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED]]>
+		</Condition>
 	
 
 		<Icon Id="CanadianIncidentActionPlanProgram.exe" SourceFile="ProgramOutput\Canadian Incident Action Plan Program.exe" />
@@ -145,6 +156,9 @@
 			</Component>
 			<Component Id='WildfireICSDesktopServices_dll_config' Guid ='9f2bd738-140d-4b23-b71a-5c79444ba136'>
 				<File Id='WildfireICSDesktopServices_dll_config' Name='WildfireICSDesktopServices.dll.config' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.dll.config' KeyPath='yes'></File>
+			</Component>
+			<Component Id='BouncyCastle_Crypto_dll' Guid ='df9c1a1d-3d57-4645-986f-12b5905120fc'>
+				<File Id='BouncyCastle_Crypto_dll' Name='BouncyCastle.Crypto.dll' DiskId='1' Source='ProgramOutput\BouncyCastle.Crypto.dll' KeyPath='yes'></File>
 			</Component>
 
 
