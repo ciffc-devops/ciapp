@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.chkIsCheckedOut = new System.Windows.Forms.CheckBox();
+            this.chkMethod = new System.Windows.Forms.CheckBox();
+            this.chkDeparturePoint = new System.Windows.Forms.CheckBox();
+            this.chkLDW = new System.Windows.Forms.CheckBox();
+            this.chkCheckIn = new System.Windows.Forms.CheckBox();
+            this.lblNames = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.chkCheckoutDate = new System.Windows.Forms.CheckBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.cboMethodOfTravel = new System.Windows.Forms.ComboBox();
             this.txtDeparturePoint = new System.Windows.Forms.TextBox();
             this.datLDW = new System.Windows.Forms.DateTimePicker();
             this.datCheckInTime = new System.Windows.Forms.DateTimePicker();
-            this.lblNames = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.btnSaveChanges = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.chkCheckIn = new System.Windows.Forms.CheckBox();
-            this.chkLDW = new System.Windows.Forms.CheckBox();
-            this.chkDeparturePoint = new System.Windows.Forms.CheckBox();
-            this.chkMethod = new System.Windows.Forms.CheckBox();
-            this.chkIsCheckedOut = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,7 +61,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.chkIsCheckedOut);
             this.splitContainer1.Panel1.Controls.Add(this.chkMethod);
             this.splitContainer1.Panel1.Controls.Add(this.chkDeparturePoint);
             this.splitContainer1.Panel1.Controls.Add(this.chkLDW);
@@ -77,11 +76,85 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.chkIsCheckedOut);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveChanges);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Size = new System.Drawing.Size(566, 300);
             this.splitContainer1.SplitterDistance = 232;
             this.splitContainer1.TabIndex = 34;
+            // 
+            // chkIsCheckedOut
+            // 
+            this.chkIsCheckedOut.AutoSize = true;
+            this.chkIsCheckedOut.Location = new System.Drawing.Point(283, 22);
+            this.chkIsCheckedOut.Name = "chkIsCheckedOut";
+            this.chkIsCheckedOut.Size = new System.Drawing.Size(158, 28);
+            this.chkIsCheckedOut.TabIndex = 166;
+            this.chkIsCheckedOut.Text = "Is Checked Out";
+            this.chkIsCheckedOut.UseVisualStyleBackColor = true;
+            this.chkIsCheckedOut.Visible = false;
+            // 
+            // chkMethod
+            // 
+            this.chkMethod.AutoSize = true;
+            this.chkMethod.Location = new System.Drawing.Point(68, 188);
+            this.chkMethod.Name = "chkMethod";
+            this.chkMethod.Size = new System.Drawing.Size(170, 28);
+            this.chkMethod.TabIndex = 165;
+            this.chkMethod.Text = "Method of Travel";
+            this.chkMethod.UseVisualStyleBackColor = true;
+            // 
+            // chkDeparturePoint
+            // 
+            this.chkDeparturePoint.AutoSize = true;
+            this.chkDeparturePoint.Location = new System.Drawing.Point(79, 154);
+            this.chkDeparturePoint.Name = "chkDeparturePoint";
+            this.chkDeparturePoint.Size = new System.Drawing.Size(159, 28);
+            this.chkDeparturePoint.TabIndex = 164;
+            this.chkDeparturePoint.Text = "Departure Point";
+            this.chkDeparturePoint.UseVisualStyleBackColor = true;
+            // 
+            // chkLDW
+            // 
+            this.chkLDW.AutoSize = true;
+            this.chkLDW.Location = new System.Drawing.Point(64, 115);
+            this.chkLDW.Name = "chkLDW";
+            this.chkLDW.Size = new System.Drawing.Size(174, 28);
+            this.chkLDW.TabIndex = 163;
+            this.chkLDW.Text = "Last Day Working";
+            this.chkLDW.UseVisualStyleBackColor = true;
+            // 
+            // chkCheckIn
+            // 
+            this.chkCheckIn.AutoSize = true;
+            this.chkCheckIn.Location = new System.Drawing.Point(43, 81);
+            this.chkCheckIn.Name = "chkCheckIn";
+            this.chkCheckIn.Size = new System.Drawing.Size(195, 28);
+            this.chkCheckIn.TabIndex = 162;
+            this.chkCheckIn.Text = "Check-In Date/Time";
+            this.chkCheckIn.UseVisualStyleBackColor = true;
+            // 
+            // lblNames
+            // 
+            this.lblNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNames.Location = new System.Drawing.Point(12, 33);
+            this.lblNames.Name = "lblNames";
+            this.lblNames.Size = new System.Drawing.Size(542, 47);
+            this.lblNames.TabIndex = 161;
+            this.lblNames.Text = "label1";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(3, 9);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(328, 24);
+            this.label9.TabIndex = 160;
+            this.label9.Text = "Name(s)";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkCheckoutDate
             // 
@@ -162,28 +235,6 @@
             this.datCheckInTime.ValueChanged += new System.EventHandler(this.datCheckInTime_ValueChanged);
             this.datCheckInTime.Leave += new System.EventHandler(this.datCheckInTime_Leave);
             // 
-            // lblNames
-            // 
-            this.lblNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNames.Location = new System.Drawing.Point(12, 33);
-            this.lblNames.Name = "lblNames";
-            this.lblNames.Size = new System.Drawing.Size(542, 47);
-            this.lblNames.TabIndex = 161;
-            this.lblNames.Text = "label1";
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 9);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(328, 24);
-            this.label9.TabIndex = 160;
-            this.label9.Text = "Name(s)";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // btnSaveChanges
             // 
             this.btnSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -216,57 +267,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // chkCheckIn
-            // 
-            this.chkCheckIn.AutoSize = true;
-            this.chkCheckIn.Location = new System.Drawing.Point(43, 81);
-            this.chkCheckIn.Name = "chkCheckIn";
-            this.chkCheckIn.Size = new System.Drawing.Size(195, 28);
-            this.chkCheckIn.TabIndex = 162;
-            this.chkCheckIn.Text = "Check-In Date/Time";
-            this.chkCheckIn.UseVisualStyleBackColor = true;
-            // 
-            // chkLDW
-            // 
-            this.chkLDW.AutoSize = true;
-            this.chkLDW.Location = new System.Drawing.Point(64, 115);
-            this.chkLDW.Name = "chkLDW";
-            this.chkLDW.Size = new System.Drawing.Size(174, 28);
-            this.chkLDW.TabIndex = 163;
-            this.chkLDW.Text = "Last Day Working";
-            this.chkLDW.UseVisualStyleBackColor = true;
-            // 
-            // chkDeparturePoint
-            // 
-            this.chkDeparturePoint.AutoSize = true;
-            this.chkDeparturePoint.Location = new System.Drawing.Point(79, 154);
-            this.chkDeparturePoint.Name = "chkDeparturePoint";
-            this.chkDeparturePoint.Size = new System.Drawing.Size(159, 28);
-            this.chkDeparturePoint.TabIndex = 164;
-            this.chkDeparturePoint.Text = "Departure Point";
-            this.chkDeparturePoint.UseVisualStyleBackColor = true;
-            // 
-            // chkMethod
-            // 
-            this.chkMethod.AutoSize = true;
-            this.chkMethod.Location = new System.Drawing.Point(68, 188);
-            this.chkMethod.Name = "chkMethod";
-            this.chkMethod.Size = new System.Drawing.Size(170, 28);
-            this.chkMethod.TabIndex = 165;
-            this.chkMethod.Text = "Method of Travel";
-            this.chkMethod.UseVisualStyleBackColor = true;
-            // 
-            // chkIsCheckedOut
-            // 
-            this.chkIsCheckedOut.AutoSize = true;
-            this.chkIsCheckedOut.Location = new System.Drawing.Point(244, 224);
-            this.chkIsCheckedOut.Name = "chkIsCheckedOut";
-            this.chkIsCheckedOut.Size = new System.Drawing.Size(158, 28);
-            this.chkIsCheckedOut.TabIndex = 166;
-            this.chkIsCheckedOut.Text = "Is Checked Out";
-            this.chkIsCheckedOut.UseVisualStyleBackColor = true;
-            this.chkIsCheckedOut.Visible = false;
-            // 
             // PersonnelEditCheckInOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -285,6 +285,7 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);

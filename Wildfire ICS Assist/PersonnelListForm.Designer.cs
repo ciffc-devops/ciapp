@@ -37,6 +37,17 @@
             this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLDW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collapsiblePanel2 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.lblLDWLessThan48 = new System.Windows.Forms.Label();
+            this.lblLDWLessThan24 = new System.Windows.Forms.Label();
+            this.cpnlAgencyTotals = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.dgvTotalByAgency = new System.Windows.Forms.DataGridView();
+            this.colTotalsAgencyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalsCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.chkLDWSoon = new System.Windows.Forms.CheckBox();
+            this.chkNotSignedInOnly = new System.Windows.Forms.CheckBox();
+            this.chkUnassignedOnly = new System.Windows.Forms.CheckBox();
             this.pnlSignIn = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.btnBulkSignIn = new System.Windows.Forms.Button();
@@ -52,17 +63,6 @@
             this.btnViewDetails = new System.Windows.Forms.Button();
             this.btnSignOut = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
-            this.collapsiblePanel2 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.lblLDWLessThan48 = new System.Windows.Forms.Label();
-            this.lblLDWLessThan24 = new System.Windows.Forms.Label();
-            this.cpnlAgencyTotals = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.dgvTotalByAgency = new System.Windows.Forms.DataGridView();
-            this.colTotalsAgencyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalsCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.chkLDWSoon = new System.Windows.Forms.CheckBox();
-            this.chkNotSignedInOnly = new System.Windows.Forms.CheckBox();
-            this.chkUnassignedOnly = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -72,13 +72,13 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).BeginInit();
-            this.pnlSignIn.SuspendLayout();
-            this.pnlBulkOps.SuspendLayout();
-            this.pnlSelectedMember.SuspendLayout();
             this.collapsiblePanel2.SuspendLayout();
             this.cpnlAgencyTotals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotalByAgency)).BeginInit();
             this.collapsiblePanel1.SuspendLayout();
+            this.pnlSignIn.SuspendLayout();
+            this.pnlBulkOps.SuspendLayout();
+            this.pnlSelectedMember.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -99,7 +99,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.pnlSignIn);
             this.splitContainer1.Panel2.Controls.Add(this.pnlBulkOps);
             this.splitContainer1.Panel2.Controls.Add(this.pnlSelectedMember);
-            this.splitContainer1.Size = new System.Drawing.Size(924, 741);
+            this.splitContainer1.Size = new System.Drawing.Size(1443, 741);
             this.splitContainer1.SplitterDistance = 543;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -120,8 +120,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.collapsiblePanel2);
             this.splitContainer2.Panel2.Controls.Add(this.cpnlAgencyTotals);
             this.splitContainer2.Panel2.Controls.Add(this.collapsiblePanel1);
-            this.splitContainer2.Size = new System.Drawing.Size(924, 543);
-            this.splitContainer2.SplitterDistance = 642;
+            this.splitContainer2.Size = new System.Drawing.Size(1443, 543);
+            this.splitContainer2.SplitterDistance = 1161;
             this.splitContainer2.TabIndex = 0;
             // 
             // dgvPersonnel
@@ -144,7 +144,7 @@
             this.dgvPersonnel.RowHeadersVisible = false;
             this.dgvPersonnel.RowTemplate.Height = 30;
             this.dgvPersonnel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersonnel.Size = new System.Drawing.Size(642, 543);
+            this.dgvPersonnel.Size = new System.Drawing.Size(1161, 543);
             this.dgvPersonnel.TabIndex = 0;
             this.dgvPersonnel.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonnel_CellDoubleClick);
             this.dgvPersonnel.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPersonnel_CellFormatting);
@@ -193,6 +193,151 @@
             this.colAssignment.Name = "colAssignment";
             this.colAssignment.ReadOnly = true;
             this.colAssignment.Width = 134;
+            // 
+            // collapsiblePanel2
+            // 
+            this.collapsiblePanel2.BackColor = System.Drawing.Color.White;
+            this.collapsiblePanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.collapsiblePanel2.CollapsedHeight = 40;
+            this.collapsiblePanel2.CollapsedWidth = 265;
+            this.collapsiblePanel2.CollapseLeft = true;
+            this.collapsiblePanel2.Controls.Add(this.lblLDWLessThan48);
+            this.collapsiblePanel2.Controls.Add(this.lblLDWLessThan24);
+            this.collapsiblePanel2.CurrentlyCollapsed = false;
+            this.collapsiblePanel2.ExpandedHeight = 132;
+            this.collapsiblePanel2.ExpandedWidth = 265;
+            this.collapsiblePanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.collapsiblePanel2.Location = new System.Drawing.Point(5, 106);
+            this.collapsiblePanel2.Margin = new System.Windows.Forms.Padding(6);
+            this.collapsiblePanel2.Name = "collapsiblePanel2";
+            this.collapsiblePanel2.Size = new System.Drawing.Size(265, 132);
+            this.collapsiblePanel2.TabIndex = 36;
+            this.collapsiblePanel2.TitleText = "Summary Stats";
+            // 
+            // lblLDWLessThan48
+            // 
+            this.lblLDWLessThan48.Location = new System.Drawing.Point(0, 78);
+            this.lblLDWLessThan48.Name = "lblLDWLessThan48";
+            this.lblLDWLessThan48.Size = new System.Drawing.Size(257, 28);
+            this.lblLDWLessThan48.TabIndex = 34;
+            this.lblLDWLessThan48.Text = "label1";
+            // 
+            // lblLDWLessThan24
+            // 
+            this.lblLDWLessThan24.Location = new System.Drawing.Point(0, 50);
+            this.lblLDWLessThan24.Name = "lblLDWLessThan24";
+            this.lblLDWLessThan24.Size = new System.Drawing.Size(257, 28);
+            this.lblLDWLessThan24.TabIndex = 33;
+            this.lblLDWLessThan24.Text = "label1";
+            // 
+            // cpnlAgencyTotals
+            // 
+            this.cpnlAgencyTotals.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpnlAgencyTotals.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpnlAgencyTotals.CollapsedHeight = 40;
+            this.cpnlAgencyTotals.CollapsedWidth = 265;
+            this.cpnlAgencyTotals.CollapseLeft = true;
+            this.cpnlAgencyTotals.Controls.Add(this.dgvTotalByAgency);
+            this.cpnlAgencyTotals.CurrentlyCollapsed = true;
+            this.cpnlAgencyTotals.ExpandedHeight = 300;
+            this.cpnlAgencyTotals.ExpandedWidth = 265;
+            this.cpnlAgencyTotals.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpnlAgencyTotals.Location = new System.Drawing.Point(5, 58);
+            this.cpnlAgencyTotals.Margin = new System.Windows.Forms.Padding(6);
+            this.cpnlAgencyTotals.Name = "cpnlAgencyTotals";
+            this.cpnlAgencyTotals.Size = new System.Drawing.Size(265, 40);
+            this.cpnlAgencyTotals.TabIndex = 34;
+            this.cpnlAgencyTotals.TitleText = "Agency Totals";
+            // 
+            // dgvTotalByAgency
+            // 
+            this.dgvTotalByAgency.AllowUserToAddRows = false;
+            this.dgvTotalByAgency.AllowUserToDeleteRows = false;
+            this.dgvTotalByAgency.AllowUserToResizeColumns = false;
+            this.dgvTotalByAgency.AllowUserToResizeRows = false;
+            this.dgvTotalByAgency.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTotalByAgency.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colTotalsAgencyName,
+            this.colTotalsCount});
+            this.dgvTotalByAgency.Location = new System.Drawing.Point(4, 47);
+            this.dgvTotalByAgency.Name = "dgvTotalByAgency";
+            this.dgvTotalByAgency.ReadOnly = true;
+            this.dgvTotalByAgency.RowHeadersVisible = false;
+            this.dgvTotalByAgency.RowTemplate.Height = 30;
+            this.dgvTotalByAgency.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTotalByAgency.Size = new System.Drawing.Size(256, 248);
+            this.dgvTotalByAgency.TabIndex = 33;
+            // 
+            // colTotalsAgencyName
+            // 
+            this.colTotalsAgencyName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTotalsAgencyName.DataPropertyName = "AgencyName";
+            this.colTotalsAgencyName.HeaderText = "Agency";
+            this.colTotalsAgencyName.Name = "colTotalsAgencyName";
+            this.colTotalsAgencyName.ReadOnly = true;
+            // 
+            // colTotalsCount
+            // 
+            this.colTotalsCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colTotalsCount.DataPropertyName = "Count";
+            this.colTotalsCount.HeaderText = "#";
+            this.colTotalsCount.Name = "colTotalsCount";
+            this.colTotalsCount.ReadOnly = true;
+            this.colTotalsCount.Width = 45;
+            // 
+            // collapsiblePanel1
+            // 
+            this.collapsiblePanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.collapsiblePanel1.CollapsedHeight = 40;
+            this.collapsiblePanel1.CollapsedWidth = 265;
+            this.collapsiblePanel1.CollapseLeft = true;
+            this.collapsiblePanel1.Controls.Add(this.chkLDWSoon);
+            this.collapsiblePanel1.Controls.Add(this.chkNotSignedInOnly);
+            this.collapsiblePanel1.Controls.Add(this.chkUnassignedOnly);
+            this.collapsiblePanel1.CurrentlyCollapsed = true;
+            this.collapsiblePanel1.ExpandedHeight = 161;
+            this.collapsiblePanel1.ExpandedWidth = 265;
+            this.collapsiblePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.collapsiblePanel1.Location = new System.Drawing.Point(5, 6);
+            this.collapsiblePanel1.Margin = new System.Windows.Forms.Padding(6);
+            this.collapsiblePanel1.Name = "collapsiblePanel1";
+            this.collapsiblePanel1.Size = new System.Drawing.Size(265, 40);
+            this.collapsiblePanel1.TabIndex = 35;
+            this.collapsiblePanel1.TitleText = "List Filters";
+            // 
+            // chkLDWSoon
+            // 
+            this.chkLDWSoon.AutoSize = true;
+            this.chkLDWSoon.Location = new System.Drawing.Point(13, 119);
+            this.chkLDWSoon.Name = "chkLDWSoon";
+            this.chkLDWSoon.Size = new System.Drawing.Size(216, 28);
+            this.chkLDWSoon.TabIndex = 35;
+            this.chkLDWSoon.Text = "LDW is in the next 24h";
+            this.chkLDWSoon.UseVisualStyleBackColor = true;
+            this.chkLDWSoon.CheckedChanged += new System.EventHandler(this.chkLDWSoon_CheckedChanged);
+            // 
+            // chkNotSignedInOnly
+            // 
+            this.chkNotSignedInOnly.AutoSize = true;
+            this.chkNotSignedInOnly.Location = new System.Drawing.Point(13, 85);
+            this.chkNotSignedInOnly.Name = "chkNotSignedInOnly";
+            this.chkNotSignedInOnly.Size = new System.Drawing.Size(247, 28);
+            this.chkNotSignedInOnly.TabIndex = 34;
+            this.chkNotSignedInOnly.Text = "Show not checked-in only";
+            this.chkNotSignedInOnly.UseVisualStyleBackColor = true;
+            this.chkNotSignedInOnly.CheckedChanged += new System.EventHandler(this.chkNotSignedInOnly_CheckedChanged);
+            // 
+            // chkUnassignedOnly
+            // 
+            this.chkUnassignedOnly.AutoSize = true;
+            this.chkUnassignedOnly.Location = new System.Drawing.Point(13, 51);
+            this.chkUnassignedOnly.Name = "chkUnassignedOnly";
+            this.chkUnassignedOnly.Size = new System.Drawing.Size(220, 28);
+            this.chkUnassignedOnly.TabIndex = 33;
+            this.chkUnassignedOnly.Text = "Show unassigned only";
+            this.chkUnassignedOnly.UseVisualStyleBackColor = true;
+            this.chkUnassignedOnly.CheckedChanged += new System.EventHandler(this.chkUnassignedOnly_CheckedChanged);
             // 
             // pnlSignIn
             // 
@@ -374,156 +519,11 @@
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
-            // collapsiblePanel2
-            // 
-            this.collapsiblePanel2.BackColor = System.Drawing.Color.White;
-            this.collapsiblePanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.collapsiblePanel2.CollapsedHeight = 40;
-            this.collapsiblePanel2.CollapsedWidth = 265;
-            this.collapsiblePanel2.CollapseLeft = true;
-            this.collapsiblePanel2.Controls.Add(this.lblLDWLessThan48);
-            this.collapsiblePanel2.Controls.Add(this.lblLDWLessThan24);
-            this.collapsiblePanel2.CurrentlyCollapsed = false;
-            this.collapsiblePanel2.ExpandedHeight = 132;
-            this.collapsiblePanel2.ExpandedWidth = 265;
-            this.collapsiblePanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collapsiblePanel2.Location = new System.Drawing.Point(5, 106);
-            this.collapsiblePanel2.Margin = new System.Windows.Forms.Padding(6);
-            this.collapsiblePanel2.Name = "collapsiblePanel2";
-            this.collapsiblePanel2.Size = new System.Drawing.Size(265, 132);
-            this.collapsiblePanel2.TabIndex = 36;
-            this.collapsiblePanel2.TitleText = "Summary Stats";
-            // 
-            // lblLDWLessThan48
-            // 
-            this.lblLDWLessThan48.Location = new System.Drawing.Point(0, 78);
-            this.lblLDWLessThan48.Name = "lblLDWLessThan48";
-            this.lblLDWLessThan48.Size = new System.Drawing.Size(257, 28);
-            this.lblLDWLessThan48.TabIndex = 34;
-            this.lblLDWLessThan48.Text = "label1";
-            // 
-            // lblLDWLessThan24
-            // 
-            this.lblLDWLessThan24.Location = new System.Drawing.Point(0, 50);
-            this.lblLDWLessThan24.Name = "lblLDWLessThan24";
-            this.lblLDWLessThan24.Size = new System.Drawing.Size(257, 28);
-            this.lblLDWLessThan24.TabIndex = 33;
-            this.lblLDWLessThan24.Text = "label1";
-            // 
-            // cpnlAgencyTotals
-            // 
-            this.cpnlAgencyTotals.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpnlAgencyTotals.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpnlAgencyTotals.CollapsedHeight = 40;
-            this.cpnlAgencyTotals.CollapsedWidth = 265;
-            this.cpnlAgencyTotals.CollapseLeft = true;
-            this.cpnlAgencyTotals.Controls.Add(this.dgvTotalByAgency);
-            this.cpnlAgencyTotals.CurrentlyCollapsed = true;
-            this.cpnlAgencyTotals.ExpandedHeight = 300;
-            this.cpnlAgencyTotals.ExpandedWidth = 265;
-            this.cpnlAgencyTotals.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpnlAgencyTotals.Location = new System.Drawing.Point(5, 58);
-            this.cpnlAgencyTotals.Margin = new System.Windows.Forms.Padding(6);
-            this.cpnlAgencyTotals.Name = "cpnlAgencyTotals";
-            this.cpnlAgencyTotals.Size = new System.Drawing.Size(265, 40);
-            this.cpnlAgencyTotals.TabIndex = 34;
-            this.cpnlAgencyTotals.TitleText = "Agency Totals";
-            // 
-            // dgvTotalByAgency
-            // 
-            this.dgvTotalByAgency.AllowUserToAddRows = false;
-            this.dgvTotalByAgency.AllowUserToDeleteRows = false;
-            this.dgvTotalByAgency.AllowUserToResizeColumns = false;
-            this.dgvTotalByAgency.AllowUserToResizeRows = false;
-            this.dgvTotalByAgency.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTotalByAgency.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colTotalsAgencyName,
-            this.colTotalsCount});
-            this.dgvTotalByAgency.Location = new System.Drawing.Point(4, 47);
-            this.dgvTotalByAgency.Name = "dgvTotalByAgency";
-            this.dgvTotalByAgency.ReadOnly = true;
-            this.dgvTotalByAgency.RowHeadersVisible = false;
-            this.dgvTotalByAgency.RowTemplate.Height = 30;
-            this.dgvTotalByAgency.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTotalByAgency.Size = new System.Drawing.Size(256, 248);
-            this.dgvTotalByAgency.TabIndex = 33;
-            // 
-            // colTotalsAgencyName
-            // 
-            this.colTotalsAgencyName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTotalsAgencyName.DataPropertyName = "AgencyName";
-            this.colTotalsAgencyName.HeaderText = "Agency";
-            this.colTotalsAgencyName.Name = "colTotalsAgencyName";
-            this.colTotalsAgencyName.ReadOnly = true;
-            // 
-            // colTotalsCount
-            // 
-            this.colTotalsCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colTotalsCount.DataPropertyName = "Count";
-            this.colTotalsCount.HeaderText = "#";
-            this.colTotalsCount.Name = "colTotalsCount";
-            this.colTotalsCount.ReadOnly = true;
-            this.colTotalsCount.Width = 45;
-            // 
-            // collapsiblePanel1
-            // 
-            this.collapsiblePanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.collapsiblePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.collapsiblePanel1.CollapsedHeight = 40;
-            this.collapsiblePanel1.CollapsedWidth = 265;
-            this.collapsiblePanel1.CollapseLeft = true;
-            this.collapsiblePanel1.Controls.Add(this.chkLDWSoon);
-            this.collapsiblePanel1.Controls.Add(this.chkNotSignedInOnly);
-            this.collapsiblePanel1.Controls.Add(this.chkUnassignedOnly);
-            this.collapsiblePanel1.CurrentlyCollapsed = true;
-            this.collapsiblePanel1.ExpandedHeight = 161;
-            this.collapsiblePanel1.ExpandedWidth = 265;
-            this.collapsiblePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collapsiblePanel1.Location = new System.Drawing.Point(5, 6);
-            this.collapsiblePanel1.Margin = new System.Windows.Forms.Padding(6);
-            this.collapsiblePanel1.Name = "collapsiblePanel1";
-            this.collapsiblePanel1.Size = new System.Drawing.Size(265, 40);
-            this.collapsiblePanel1.TabIndex = 35;
-            this.collapsiblePanel1.TitleText = "List Filters";
-            // 
-            // chkLDWSoon
-            // 
-            this.chkLDWSoon.AutoSize = true;
-            this.chkLDWSoon.Location = new System.Drawing.Point(13, 119);
-            this.chkLDWSoon.Name = "chkLDWSoon";
-            this.chkLDWSoon.Size = new System.Drawing.Size(216, 28);
-            this.chkLDWSoon.TabIndex = 35;
-            this.chkLDWSoon.Text = "LDW is in the next 24h";
-            this.chkLDWSoon.UseVisualStyleBackColor = true;
-            this.chkLDWSoon.CheckedChanged += new System.EventHandler(this.chkLDWSoon_CheckedChanged);
-            // 
-            // chkNotSignedInOnly
-            // 
-            this.chkNotSignedInOnly.AutoSize = true;
-            this.chkNotSignedInOnly.Location = new System.Drawing.Point(13, 85);
-            this.chkNotSignedInOnly.Name = "chkNotSignedInOnly";
-            this.chkNotSignedInOnly.Size = new System.Drawing.Size(247, 28);
-            this.chkNotSignedInOnly.TabIndex = 34;
-            this.chkNotSignedInOnly.Text = "Show not checked-in only";
-            this.chkNotSignedInOnly.UseVisualStyleBackColor = true;
-            this.chkNotSignedInOnly.CheckedChanged += new System.EventHandler(this.chkNotSignedInOnly_CheckedChanged);
-            // 
-            // chkUnassignedOnly
-            // 
-            this.chkUnassignedOnly.AutoSize = true;
-            this.chkUnassignedOnly.Location = new System.Drawing.Point(13, 51);
-            this.chkUnassignedOnly.Name = "chkUnassignedOnly";
-            this.chkUnassignedOnly.Size = new System.Drawing.Size(220, 28);
-            this.chkUnassignedOnly.TabIndex = 33;
-            this.chkUnassignedOnly.Text = "Show unassigned only";
-            this.chkUnassignedOnly.UseVisualStyleBackColor = true;
-            this.chkUnassignedOnly.CheckedChanged += new System.EventHandler(this.chkUnassignedOnly_CheckedChanged);
-            // 
             // PersonnelListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 741);
+            this.ClientSize = new System.Drawing.Size(1443, 741);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -541,14 +541,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).EndInit();
-            this.pnlSignIn.ResumeLayout(false);
-            this.pnlBulkOps.ResumeLayout(false);
-            this.pnlSelectedMember.ResumeLayout(false);
             this.collapsiblePanel2.ResumeLayout(false);
             this.cpnlAgencyTotals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotalByAgency)).EndInit();
             this.collapsiblePanel1.ResumeLayout(false);
             this.collapsiblePanel1.PerformLayout();
+            this.pnlSignIn.ResumeLayout(false);
+            this.pnlBulkOps.ResumeLayout(false);
+            this.pnlSelectedMember.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

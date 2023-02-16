@@ -382,17 +382,34 @@ namespace WF_ICS_ClassLibrary.Models
         /*
         [ProtoMember(3)]
         private Guid _memberID;*/
-        [ProtoMember(4)] private int _opPeriod;
-        [ProtoMember(5)] private Guid _signInRecordID;
-        [ProtoMember(6)] private Personnel _teamMember;
-        [ProtoMember(7)] private bool _isSignIn;
-        [ProtoMember(8)] private decimal _KMs;
-        [ProtoMember(9)] private DateTime _TimeOutRequest;
-        [ProtoMember(10)] private DateTime _RecordUpdatedUTC;
-        [ProtoMember(11)] private DateTime _LastDayWorked;
-        [ProtoMember(12)] private string _DeparturePoint;
-        [ProtoMember(13)] private DateTime _DepartureTime;
-        [ProtoMember(14)] private string _MethodOfTravel;
+        [ProtoMember(2)] private int _opPeriod;
+        [ProtoMember(3)] private Guid _signInRecordID;
+        [ProtoMember(4)] private Personnel _teamMember;
+        [ProtoMember(5)] private bool _isSignIn;
+        
+        //[ProtoMember(9)] private DateTime _TimeOutRequest;
+        [ProtoMember(6)] private DateTime _RecordUpdatedUTC;
+        
+        [ProtoMember(7)] private string _DeparturePoint;
+        
+        [ProtoMember(8)] private string _MethodOfTravel;
+        [ProtoMember(9)] private string _Accomodations;
+        [ProtoMember(10)] private bool _Breakfast;
+        [ProtoMember(11)] private bool _Lunch;
+        [ProtoMember(12)] private bool _Dinner;
+
+
+
+        [ProtoMember(13)] private DateTime _LastDayOfRest;
+        [ProtoMember(14)] private DateTime _StartOfTravel;
+
+        [ProtoMember(15)] private DateTime _LastDayOnIncident;
+        [ProtoMember(16)] private DateTime _LastDayOfTravel;
+
+        [ProtoMember(17)] private Guid _InitialIncidentRoleID;
+
+
+        [ProtoMember(99)] private decimal _KMs;
 
         public DateTime StatusChangeTime { get { return _statusChangeTime; } set { _statusChangeTime = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         /*public DateTime SignOutTime { get { return _signOutTime; } set { _signOutTime = value; } }*/
@@ -402,7 +419,11 @@ namespace WF_ICS_ClassLibrary.Models
         public Personnel teamMember { get => _teamMember; set { _teamMember = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public bool IsSignIn { get => _isSignIn; set { _isSignIn = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public decimal KMs { get => _KMs; set { _KMs = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public DateTime TimeOutRequest { get => _TimeOutRequest; set { _TimeOutRequest = value; RecordUpdatedUTC = DateTime.UtcNow; } }
+
+        public string Accomodations { get => _Accomodations; set => _Accomodations = value; }
+        public bool Breakfast { get => _Breakfast; set => _Breakfast = value; }
+        public bool Lunch { get => _Lunch; set => _Lunch = value; }
+        public bool Dinner { get => _Dinner; set => _Dinner = value; }
 
         public SignInRecord() { SignInRecordID = Guid.NewGuid(); _teamMember = new Personnel(); }
         public DateTime RecordUpdatedUTC { get => _RecordUpdatedUTC; set => _RecordUpdatedUTC = value; }
@@ -411,12 +432,14 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime SignInTime { get => _statusChangeTime; set { _statusChangeTime = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public DateTime SignOutTime { get => _statusChangeTime; set { _statusChangeTime = value; RecordUpdatedUTC = DateTime.UtcNow; } }
         public string InOrOut { get { if (IsSignIn) { return "Sign In"; } else { return "Sign Out"; } } }
-
-
-        public DateTime LastDayWorked { get => _LastDayWorked; set => _LastDayWorked = value; }
         public string DeparturePoint { get => _DeparturePoint; set => _DeparturePoint = value; }
-        public DateTime DepartureTime { get => _DepartureTime; set => _DepartureTime = value; }
         public string MethodOfTravel { get => _MethodOfTravel; set => _MethodOfTravel = value; }
+        public Guid InitialIncidentRoleID { get => _InitialIncidentRoleID; set => _InitialIncidentRoleID = value; }
+
+        public DateTime LastDayOfRest { get => _LastDayOfRest; set => _LastDayOfRest = value; }
+        public DateTime StartOfTravel { get => _StartOfTravel; set => _StartOfTravel = value; }
+        public DateTime LastDayOnIncident { get => _LastDayOnIncident; set => _LastDayOnIncident = value; }
+        public DateTime LastDayOfTravel { get => _LastDayOfTravel; set => _LastDayOfTravel = value; }
 
         public SignInRecord Clone()
         {

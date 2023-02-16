@@ -263,7 +263,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                     signIn = task.AllSignInRecords.OrderByDescending(o => o.StatusChangeTime).First(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn);
                     status.CheckInRecordID = signIn.SignInRecordID;
                     status.SignInTime = signIn.StatusChangeTime;
-                    if (signIn.LastDayWorked > DateTime.MinValue) { status.LastDayWorked = signIn.LastDayWorked; }
+                    if (signIn.LastDayOnIncident > DateTime.MinValue) { status.LastDayWorked = signIn.LastDayOnIncident; }
                     status.KMs = signIn.KMs;
                 }
                 else { status.SignInTime = DateTime.MinValue; }

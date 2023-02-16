@@ -73,7 +73,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnCheckIn);
-            this.splitContainer1.Size = new System.Drawing.Size(837, 389);
+            this.splitContainer1.Size = new System.Drawing.Size(897, 389);
             this.splitContainer1.SplitterDistance = 319;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -100,7 +100,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dgvSavedPersonnel);
-            this.splitContainer2.Size = new System.Drawing.Size(837, 319);
+            this.splitContainer2.Size = new System.Drawing.Size(897, 319);
             this.splitContainer2.SplitterDistance = 78;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -116,16 +116,16 @@
             "Rotary Wing",
             "Bus / Shuttle",
             "Personal Vehicle"});
-            this.cboMethodOfTravel.Location = new System.Drawing.Point(584, 38);
+            this.cboMethodOfTravel.Location = new System.Drawing.Point(623, 38);
             this.cboMethodOfTravel.Name = "cboMethodOfTravel";
-            this.cboMethodOfTravel.Size = new System.Drawing.Size(241, 32);
+            this.cboMethodOfTravel.Size = new System.Drawing.Size(262, 32);
             this.cboMethodOfTravel.TabIndex = 23;
             // 
             // datCheckInTime
             // 
             this.datCheckInTime.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datCheckInTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datCheckInTime.Location = new System.Drawing.Point(207, 3);
+            this.datCheckInTime.Location = new System.Drawing.Point(246, 2);
             this.datCheckInTime.Name = "datCheckInTime";
             this.datCheckInTime.Size = new System.Drawing.Size(205, 29);
             this.datCheckInTime.TabIndex = 24;
@@ -133,7 +133,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(421, 40);
+            this.label8.Location = new System.Drawing.Point(460, 40);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(154, 29);
@@ -146,14 +146,14 @@
             this.label4.Location = new System.Drawing.Point(11, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(187, 29);
+            this.label4.Size = new System.Drawing.Size(226, 29);
             this.label4.TabIndex = 27;
             this.label4.Text = "Check-In Date/Time";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(421, 3);
+            this.label7.Location = new System.Drawing.Point(460, 3);
             this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(154, 29);
@@ -165,7 +165,7 @@
             // 
             this.datLDW.CustomFormat = "yyyy-MMM-dd";
             this.datLDW.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datLDW.Location = new System.Drawing.Point(207, 40);
+            this.datLDW.Location = new System.Drawing.Point(246, 39);
             this.datLDW.Name = "datLDW";
             this.datLDW.Size = new System.Drawing.Size(205, 29);
             this.datLDW.TabIndex = 25;
@@ -175,9 +175,9 @@
             // 
             this.txtDeparturePoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDeparturePoint.Location = new System.Drawing.Point(584, 3);
+            this.txtDeparturePoint.Location = new System.Drawing.Point(623, 3);
             this.txtDeparturePoint.Name = "txtDeparturePoint";
-            this.txtDeparturePoint.Size = new System.Drawing.Size(241, 29);
+            this.txtDeparturePoint.Size = new System.Drawing.Size(262, 29);
             this.txtDeparturePoint.TabIndex = 26;
             // 
             // lblLastDayWorking
@@ -185,9 +185,9 @@
             this.lblLastDayWorking.Location = new System.Drawing.Point(13, 40);
             this.lblLastDayWorking.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLastDayWorking.Name = "lblLastDayWorking";
-            this.lblLastDayWorking.Size = new System.Drawing.Size(187, 29);
+            this.lblLastDayWorking.Size = new System.Drawing.Size(226, 29);
             this.lblLastDayWorking.TabIndex = 28;
-            this.lblLastDayWorking.Text = "Last Day Working*";
+            this.lblLastDayWorking.Text = "Last Day On Incident*";
             this.lblLastDayWorking.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dgvSavedPersonnel
@@ -208,7 +208,7 @@
             this.dgvSavedPersonnel.Name = "dgvSavedPersonnel";
             this.dgvSavedPersonnel.RowHeadersVisible = false;
             this.dgvSavedPersonnel.RowTemplate.Height = 30;
-            this.dgvSavedPersonnel.Size = new System.Drawing.Size(837, 237);
+            this.dgvSavedPersonnel.Size = new System.Drawing.Size(897, 237);
             this.dgvSavedPersonnel.TabIndex = 0;
             // 
             // colCheck
@@ -266,7 +266,7 @@
             this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_431_log_in;
             this.btnCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCheckIn.Location = new System.Drawing.Point(701, 6);
+            this.btnCheckIn.Location = new System.Drawing.Point(761, 6);
             this.btnCheckIn.Name = "btnCheckIn";
             this.btnCheckIn.Size = new System.Drawing.Size(124, 51);
             this.btnCheckIn.TabIndex = 149;
@@ -279,7 +279,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 389);
+            this.ClientSize = new System.Drawing.Size(897, 389);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);

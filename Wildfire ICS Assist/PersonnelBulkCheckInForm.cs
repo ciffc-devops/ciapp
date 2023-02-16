@@ -92,7 +92,7 @@ namespace Wildfire_ICS_Assist
                     record.OpPeriod = Program.CurrentOpPeriod;
                     record.teamMember = member;
                     record.SignInTime = datCheckInTime.Value;
-                    record.LastDayWorked = datLDW.Value;
+                    record.LastDayOnIncident = datLDW.Value;
                     record.MethodOfTravel = cboMethodOfTravel.Text;
                     record.DeparturePoint = txtDeparturePoint.Text;
                     records.Add(record);

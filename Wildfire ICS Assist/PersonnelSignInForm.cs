@@ -118,10 +118,26 @@ namespace Wildfire_ICS_Assist
             {
                 signInRecord.teamMember = selectedMember;
                 signInRecord.OpPeriod = Program.CurrentOpPeriod;
+
+                if (datLastDayOfRest.Checked) { signInRecord.LastDayOfRest = datLastDayOfRest.Value; } else { signInRecord.LastDayOfRest = DateTime.MinValue; }
+                if (datStartTravel.Checked) { signInRecord.StartOfTravel = datStartTravel.Value; }                else { signInRecord.StartOfTravel = DateTime.MinValue; }
+
                 signInRecord.SignInTime = datCheckInTime.Value;
-                signInRecord.LastDayWorked = datLDW.Value;
+                signInRecord.LastDayOnIncident = datLDW.Value;
+                if (datLastDayTravel.Checked) { signInRecord.LastDayOfTravel = datLastDayTravel.Value; } else { signInRecord.LastDayOfTravel = DateTime.MinValue; }
+
                 signInRecord.DeparturePoint = txtDeparturePoint.Text;
                 signInRecord.MethodOfTravel = cboMethodOfTravel.Text;
+                signInRecord.Accomodations= cboAccomodations.Text;
+                signInRecord.Breakfast = chkBreakfast.Checked;
+                signInRecord.Lunch = chkLunch.Checked;
+                signInRecord.Dinner = chkDinner.Checked;
+
+                if(cboICSRole.SelectedItem != null)
+                {
+                    signInRecord.InitialIncidentRoleID = ((ICSRole)cboICSRole.SelectedValue).RoleID;
+                }
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -136,6 +152,11 @@ namespace Wildfire_ICS_Assist
         {
             if (datCheckInTime.Value > datLDW.Value) { lblLastDayWorking.ForeColor = Color.Red; }
             else { lblLastDayWorking.ForeColor = label1.ForeColor; }
+        }
+
+        private void txtDeparturePoint_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

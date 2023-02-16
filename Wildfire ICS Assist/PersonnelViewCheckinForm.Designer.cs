@@ -30,6 +30,7 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lblDaysToLDW = new System.Windows.Forms.Label();
             this.lblMethodOfTravel = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.btnEditCheckIn = new System.Windows.Forms.Button();
@@ -71,7 +72,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblDaysToLDW = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -122,8 +122,19 @@
             this.panel4.Controls.Add(this.label17);
             this.panel4.Location = new System.Drawing.Point(594, 13);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(310, 308);
+            this.panel4.Size = new System.Drawing.Size(310, 427);
             this.panel4.TabIndex = 172;
+            // 
+            // lblDaysToLDW
+            // 
+            this.lblDaysToLDW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDaysToLDW.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDaysToLDW.Location = new System.Drawing.Point(23, 127);
+            this.lblDaysToLDW.Name = "lblDaysToLDW";
+            this.lblDaysToLDW.Size = new System.Drawing.Size(279, 26);
+            this.lblDaysToLDW.TabIndex = 173;
+            this.lblDaysToLDW.Text = "label10";
             // 
             // lblMethodOfTravel
             // 
@@ -153,7 +164,7 @@
             this.btnEditCheckIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditCheckIn.Location = new System.Drawing.Point(213, 253);
+            this.btnEditCheckIn.Location = new System.Drawing.Point(213, 372);
             this.btnEditCheckIn.Margin = new System.Windows.Forms.Padding(6);
             this.btnEditCheckIn.Name = "btnEditCheckIn";
             this.btnEditCheckIn.Size = new System.Drawing.Size(89, 47);
@@ -247,9 +258,9 @@
             this.panel3.Controls.Add(this.btnViewAssignmentOrRole);
             this.panel3.Controls.Add(this.label10);
             this.panel3.Controls.Add(this.lblAssignmentOrRole);
-            this.panel3.Location = new System.Drawing.Point(594, 327);
+            this.panel3.Location = new System.Drawing.Point(303, 326);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(310, 114);
+            this.panel3.Size = new System.Drawing.Size(285, 114);
             this.panel3.TabIndex = 171;
             // 
             // btnViewAssignmentOrRole
@@ -258,7 +269,7 @@
             this.btnViewAssignmentOrRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnViewAssignmentOrRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
             this.btnViewAssignmentOrRole.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnViewAssignmentOrRole.Location = new System.Drawing.Point(192, 61);
+            this.btnViewAssignmentOrRole.Location = new System.Drawing.Point(167, 61);
             this.btnViewAssignmentOrRole.Margin = new System.Windows.Forms.Padding(6);
             this.btnViewAssignmentOrRole.Name = "btnViewAssignmentOrRole";
             this.btnViewAssignmentOrRole.Size = new System.Drawing.Size(110, 47);
@@ -275,7 +286,7 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(3, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(302, 29);
+            this.label10.Size = new System.Drawing.Size(277, 29);
             this.label10.TabIndex = 167;
             this.label10.Text = "Assignment / Role";
             // 
@@ -285,7 +296,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAssignmentOrRole.Location = new System.Drawing.Point(26, 34);
             this.lblAssignmentOrRole.Name = "lblAssignmentOrRole";
-            this.lblAssignmentOrRole.Size = new System.Drawing.Size(279, 24);
+            this.lblAssignmentOrRole.Size = new System.Drawing.Size(254, 24);
             this.lblAssignmentOrRole.TabIndex = 159;
             this.lblAssignmentOrRole.Text = "label1";
             // 
@@ -620,17 +631,6 @@
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // lblDaysToLDW
-            // 
-            this.lblDaysToLDW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDaysToLDW.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDaysToLDW.Location = new System.Drawing.Point(23, 127);
-            this.lblDaysToLDW.Name = "lblDaysToLDW";
-            this.lblDaysToLDW.Size = new System.Drawing.Size(279, 26);
-            this.lblDaysToLDW.TabIndex = 173;
-            this.lblDaysToLDW.Text = "label10";
             // 
             // PersonnelViewCheckinForm
             // 

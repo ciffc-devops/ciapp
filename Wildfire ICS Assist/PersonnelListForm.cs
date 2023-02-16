@@ -64,8 +64,8 @@ namespace Wildfire_ICS_Assist
             List<AgencyPersonnelCount> agencyCounts = Program.CurrentIncident.GetAgencyPersonnelCount(Program.CurrentOpPeriod);
             dgvTotalByAgency.DataSource = agencyCounts;
 
-            int LessThan24 = Program.CurrentIncident.AllSignInRecords.Count(o=>(o.LastDayWorked - endOfOp).TotalHours <= 24);
-            int LessThan48 = Program.CurrentIncident.AllSignInRecords.Count(o => (o.LastDayWorked - endOfOp).TotalHours <= 48);
+            int LessThan24 = Program.CurrentIncident.AllSignInRecords.Count(o=>(o.LastDayOnIncident - endOfOp).TotalHours <= 24);
+            int LessThan48 = Program.CurrentIncident.AllSignInRecords.Count(o => (o.LastDayOnIncident - endOfOp).TotalHours <= 48);
             lblLDWLessThan24.Text = "LDW < 24 Hours: " + LessThan24;
             lblLDWLessThan48.Text = "LDW < 48 Hours: " + LessThan48;
 
@@ -208,7 +208,7 @@ namespace Wildfire_ICS_Assist
                 record = new SignInRecord();
                 record.OpPeriod = Program.CurrentOpPeriod;
                 record.SignInTime = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
-                record.LastDayWorked = record.SignInTime.AddDays(14);
+                record.LastDayOnIncident = record.SignInTime.AddDays(14);
                 record.IsSignIn = true;
                 if (Program.CurrentIncident.TaskTeamMembers.Any(o => o.PersonID == status.MemberID))
                 {
@@ -306,7 +306,7 @@ namespace Wildfire_ICS_Assist
                 if (Program.CurrentIncident.AllSignInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
                 {
                    SignInRecord rec = Program.CurrentIncident.AllSignInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
-                    TimeSpan ts = rec.LastDayWorked - Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodEnd;
+                    TimeSpan ts = rec.LastDayOnIncident - Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodEnd;
                     if(ts.TotalHours <= 36)
                     {
                         row.Cells[LDWColumnIndex].Style.BackColor = Color.LightCoral;

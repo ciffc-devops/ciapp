@@ -54,8 +54,8 @@ namespace Wildfire_ICS_Assist
                     if (CheckIn == DateTime.MaxValue) { CheckIn = record.SignInTime; }
                     else if (CheckIn != record.SignInTime) { CheckIn = DateTime.MinValue; }
                 }
-                if (LDW == DateTime.MaxValue) { LDW = record.LastDayWorked; }
-                else if (LDW != record.LastDayWorked) { LDW = DateTime.MinValue; }
+                if (LDW == DateTime.MaxValue) { LDW = record.LastDayOnIncident; }
+                else if (LDW != record.LastDayOnIncident) { LDW = DateTime.MinValue; }
 
                 if (!record.IsSignIn)
                 {
@@ -134,7 +134,7 @@ namespace Wildfire_ICS_Assist
             foreach(SignInRecord record in records)
             {
                 if (chkCheckIn.Checked) { record.SignInTime = datCheckInTime.Value; }
-                if (chkLDW.Checked) { record.LastDayWorked = datLDW.Value; }
+                if (chkLDW.Checked) { record.LastDayOnIncident = datLDW.Value; }
                 if (chkMethod.Checked) { record.MethodOfTravel = cboMethodOfTravel.Text; }
                 if (chkDeparturePoint.Checked) { record.DeparturePoint = txtDeparturePoint.Text; }
 

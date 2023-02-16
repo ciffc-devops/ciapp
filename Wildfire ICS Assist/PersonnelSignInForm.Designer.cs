@@ -492,6 +492,7 @@
             this.txtDeparturePoint.Name = "txtDeparturePoint";
             this.txtDeparturePoint.Size = new System.Drawing.Size(194, 29);
             this.txtDeparturePoint.TabIndex = 8;
+            this.txtDeparturePoint.TextChanged += new System.EventHandler(this.txtDeparturePoint_TextChanged);
             // 
             // datLDW
             // 

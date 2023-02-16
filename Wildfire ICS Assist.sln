@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WildfireICSDesktopServices"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtobufSerializer", "ProtobufSerializer\ProtobufSerializer.csproj", "{F27E4076-1DDC-485F-9A75-915A74D7958D}"
 EndProject
-Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "CIAPPO Installer Project", "CIAPPO Installer Project\CIAPPO Installer Project.wixproj", "{EAEED868-41C0-4506-8660-0E83EB5D914D}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "CIAPP Installer Project", "CIAPPO Installer Project\CIAPP Installer Project.wixproj", "{EAEED868-41C0-4506-8660-0E83EB5D914D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
