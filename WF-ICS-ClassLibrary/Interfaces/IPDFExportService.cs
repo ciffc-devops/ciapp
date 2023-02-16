@@ -48,7 +48,7 @@ namespace WildfireICSDesktopServices
         List<byte[]> exportAirOpsSummaryToPDF(WFIncident incident, int OpPeriodToExport, bool flattenPDF = false);
         string createOpTitlePagePDF(WFIncident task, int OpPeriod, string contentsText, string titleImageBytes, bool useTempPath, bool flattenPDF);
         List<byte[]> exportOpTitlePageToPDF(WFIncident task, int OpPeriod, string contentsText, string titleImageBytes, bool flattenPDF);
-        string createOrgAssignmentListPDF(WFIncident task, int OpsPeriod, bool tempFileName = false, bool flattenPDF = false);
+        PDFCreationResults createOrgAssignmentListPDF(WFIncident task, int OpsPeriod, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportOrgAssignmentListToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF);
         List<byte[]> exportAssignmentListToPDF(WFIncident task, int OpPeriodToExport, Guid DivisionID, string PreparedByName, string PreparedByRoleName, bool flattenPDF);
         string createAssignmentSummaryPDF(WFIncident task, int OpPeriod, Guid DivisionID, string createdBy, string createdByTitle, bool useTempPath, bool flattenPDF);

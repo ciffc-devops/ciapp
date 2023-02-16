@@ -80,7 +80,7 @@ namespace WildfireICSDesktopServices
             if (string.IsNullOrEmpty(path))
             {
                 path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                path = Path.Combine(path, "CIAPPO");
+                path = Path.Combine(path, "CIAPP");
                 System.IO.Directory.CreateDirectory(path);
                 path = System.IO.Path.Combine(path, "Incident " + CurrentTask.IncidentIdentifier);
                 System.IO.Directory.CreateDirectory(path);
@@ -170,6 +170,30 @@ namespace WildfireICSDesktopServices
                     Path.Combine(
                         dirPath,
                         Path.GetRandomFileName()
+                    ),
+                    1,
+                    FileOptions.DeleteOnClose)
+                )
+                { }
+                return true;
+            }
+            catch
+            {
+                if (throwIfFails)
+                    throw;
+                else
+                    return false;
+            }
+        }
+
+        public static bool checkWriteAccessPDF(string dirPath, bool throwIfFails = false)
+        {
+            try
+            {
+                using (FileStream fs = File.Create(
+                    Path.Combine(
+                        dirPath,
+                        Guid.NewGuid().ToString() + ".pdf"
                     ),
                     1,
                     FileOptions.DeleteOnClose)

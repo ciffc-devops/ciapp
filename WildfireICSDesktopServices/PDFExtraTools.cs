@@ -234,6 +234,7 @@ namespace WildfireICSDesktopServices
         }
     }
 
+  
     public class TwoColumnHeaderFooter : PdfPageEventHelper
     {
         // This is the contentbyte object of the writer

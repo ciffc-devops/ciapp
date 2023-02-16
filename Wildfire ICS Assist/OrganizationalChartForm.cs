@@ -405,23 +405,20 @@ namespace Wildfire_ICS_Assist
         {
             if (chkIncludeContacts.Checked)
             {
-                string orgChart = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, true, false);
+                string fullFilepath = "";
+                fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
+               
+                PDFCreationResults orgChartResults = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, true, false);
+                string orgChart = orgChartResults.path;
+
                 string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
 
-                List<byte[]> allPDFs = new List<byte[]>();
-
-
-                using (FileStream stream = File.OpenRead(orgChart))
+                if (orgChartResults.Successful)
                 {
-                    byte[] fileBytes = new byte[stream.Length];
+                    List<byte[]> allPDFs = new List<byte[]>();
 
-                    stream.Read(fileBytes, 0, fileBytes.Length);
-                    stream.Close();
-                    allPDFs.Add(fileBytes);
-                }
-                if (!string.IsNullOrEmpty(contactList))
-                {
-                    using (FileStream stream = File.OpenRead(contactList))
+
+                    using (FileStream stream = File.OpenRead(orgChart))
                     {
                         byte[] fileBytes = new byte[stream.Length];
 
@@ -429,34 +426,49 @@ namespace Wildfire_ICS_Assist
                         stream.Close();
                         allPDFs.Add(fileBytes);
                     }
-                }
+                    if (!string.IsNullOrEmpty(contactList))
+                    {
+                        using (FileStream stream = File.OpenRead(contactList))
+                        {
+                            byte[] fileBytes = new byte[stream.Length];
 
-                string fullFilepath = "";
-                //int end = CurrentTask.FileName.LastIndexOf("\\");
-                fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
+                            stream.Read(fileBytes, 0, fileBytes.Length);
+                            stream.Close();
+                            allPDFs.Add(fileBytes);
+                        }
+                    }
 
-                string fullOutputFilename = "ICS 203 - Task " + CurrentIncident.IncidentIdentifier + " - Op " + CurrentOpPeriod + " - Org Assignments List";
-                //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
-                fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
-                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-                try
+
+                    string fullOutputFilename = "ICS 203 - Incident " + CurrentIncident.IncidentIdentifier + " - Op " + CurrentOpPeriod + " - Org Assignments List";
+                    //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
+                    fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+                    byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+                    try
+                    {
+                        File.WriteAllBytes(fullFilepath, fullFile);
+
+                        System.Diagnostics.Process.Start(fullFilepath);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                    }
+                } else
                 {
-                    File.WriteAllBytes(fullFilepath, fullFile);
-
-                    System.Diagnostics.Process.Start(fullFilepath);
+                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
-                }
-
             }
             else
             {
-                string path = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, false, false);
+                PDFCreationResults results = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, false, false);
+                string path = results.path;
                 try { System.Diagnostics.Process.Start(path); }
-                catch { }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                }
             }
         }
     }

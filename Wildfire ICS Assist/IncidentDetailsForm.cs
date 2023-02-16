@@ -29,6 +29,7 @@ using WildfireICSDesktopServices;
 using NetworkCommsDotNet.Connections;
 using NetworkCommsDotNet.DPSBase;
 using Wildfire_ICS_Assist.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Wildfire_ICS_Assist
@@ -83,6 +84,9 @@ namespace Wildfire_ICS_Assist
             datOpsStart.CustomFormat = Program.DateFormat + " HH:mm";
 
             NetworkComms.AppendGlobalIncomingPacketHandler<WFIncident>("WFIncident", Program.networkService.HandleIncomingIncident);
+
+
+
 
         }
 
@@ -923,7 +927,7 @@ namespace Wildfire_ICS_Assist
                 }
                 else
                 {
-                    folder = Path.Combine(folder, "CIAPPO");
+                    folder = Path.Combine(folder, "CIAPP");
                     System.IO.Directory.CreateDirectory(folder);
                 }
                 ofdOpenTaskFile.InitialDirectory = folder;
@@ -1001,7 +1005,7 @@ namespace Wildfire_ICS_Assist
                     else
                     {
                         path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                        path = Path.Combine(path, "CIAPPO");
+                        path = Path.Combine(path, "CIAPP");
 
                     }
                     path = Path.Combine(path, "Incident " + CurrentIncident.IncidentIdentifier);
@@ -2051,7 +2055,7 @@ namespace Wildfire_ICS_Assist
             else
             {
                 path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                path = Path.Combine(path, "CIAPPO");
+                path = Path.Combine(path, "CIAPP");
 
 
 
@@ -2374,10 +2378,10 @@ namespace Wildfire_ICS_Assist
                 {
                     networkOptionsRequested = false;
                     GeneralOptions currentOptions = Program.generalOptionsService.GetGeneralOptions();
-                    string baseFileName = "myCIAPPOptions" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm");
+                    string baseFileName = "myCIAPP_Options" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm");
                     int i = 0;
                     string backupFileName = baseFileName + ".xml";
-                    string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPPO");
+                    string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPP");
                     while (File.Exists(Path.Combine(path, backupFileName)))
                     {
                         i += 1;
@@ -2841,6 +2845,5 @@ namespace Wildfire_ICS_Assist
 
         }
 
-      
     }
 }

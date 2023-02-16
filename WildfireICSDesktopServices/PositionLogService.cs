@@ -14,7 +14,21 @@ namespace WildfireICSDesktopServices
 {
     public class PositionLogService : IPositionLogService
     {
+        private static string getBlankFormsFolder()
+        {
+            string dir = AppContext.BaseDirectory;
+            return System.IO.Path.Combine(dir, "BlankForms");
+        }
 
+        private static string getPDFFilePath(string fileToUse)
+        {
+            if (fileToUse.Contains("BlankForms/"))
+            {
+                fileToUse = fileToUse.Replace("BlankForms/", "");
+            }
+            string dir = getBlankFormsFolder();
+            return System.IO.Path.Combine(dir, fileToUse);
+        }
 
         public string CreateICSPDF(WFIncident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF)
         {
@@ -97,7 +111,7 @@ namespace WildfireICSDesktopServices
         private static List<byte[]> buildFirstPDFPage(List<PositionLogEntry> entries, WFIncident task, int OpsPeriod, ICSRole role, int pageNumber, int pageCount, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempFileName();
-            string fileToUse = "BlankForms/ICS-214-WF-Activity-Log.pdf";
+            string fileToUse = getPDFFilePath("ICS-214-WF-Activity-Log.pdf");
 
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
 
@@ -208,7 +222,8 @@ namespace WildfireICSDesktopServices
         private static List<byte[]> buildPDFPage(List<PositionLogEntry> entries, WFIncident task, int OpsPeriod, ICSRole role, int pageNumber, int pageCount, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempFileName();
-            string fileToUse = "BlankForms/ICS-214-WF-Activity-Log-Supplemental.pdf";
+            string fileToUse = getPDFFilePath("BlankForms/ICS-214-WF-Activity-Log-Supplemental.pdf");
+
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
 
             ICSRole branchRole = null;

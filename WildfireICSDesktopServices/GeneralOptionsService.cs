@@ -17,7 +17,7 @@ namespace WildfireICSDesktopServices
     public class GeneralOptionsService : IGeneralOptionsService
     {
         private GeneralOptions _options;
-        private string _SaveFileName = "myCIAPPOptions.xml";
+        private string _SaveFileName = "myCIAPP_Options.xml";
         private bool _LoadSettingsFromFile;
 
 
@@ -49,7 +49,7 @@ namespace WildfireICSDesktopServices
         public GeneralOptions GetGeneralOptions(string fileName = null)
         {
 
-            if (string.IsNullOrEmpty(fileName)) { fileName = "myCIAPPOptions.xml"; }
+            if (string.IsNullOrEmpty(fileName)) { fileName = "myCIAPP_Options.xml"; }
 
             _options = loadGeneralOptionsByFilename(fileName);
 
@@ -67,7 +67,7 @@ namespace WildfireICSDesktopServices
 
         private GeneralOptions loadGeneralOptionsByFilename(string fileName)
         {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPPO");
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPP");
 
 
 
@@ -148,7 +148,7 @@ namespace WildfireICSDesktopServices
         {
 
 
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPPO");
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPP");
             Directory.CreateDirectory(path);
             bool saveSuccessful = false;
 
@@ -187,9 +187,9 @@ namespace WildfireICSDesktopServices
 
         public bool SaveGeneralOptions(GeneralOptions options, string filename = null)
         {
-            if (string.IsNullOrEmpty(filename)) { filename = "myCIAPPOptions.xml"; }
+            if (string.IsNullOrEmpty(filename)) { filename = "myCIAPP_Options.xml"; }
 
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPPO");
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPP");
             Directory.CreateDirectory(path);
             bool saveSuccessful = false;
 

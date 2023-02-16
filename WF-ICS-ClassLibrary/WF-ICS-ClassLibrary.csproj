@@ -143,6 +143,7 @@
     <Compile Include="Models\OperationalPeriod.cs" />
     <Compile Include="Models\Organization.cs" />
     <Compile Include="Models\OrganizationalChart.cs" />
+    <Compile Include="Models\PDFCreationResults.cs" />
     <Compile Include="Models\PositionLog.cs" />
     <Compile Include="Models\Province.cs" />
     <Compile Include="Models\SafetyPlan.cs" />

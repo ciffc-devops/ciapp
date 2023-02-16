@@ -68,6 +68,19 @@ namespace WildfireICSDesktopServices
 
         }
 
+        public string TestWrite(string path)
+        {
+            if (string.IsNullOrEmpty(path)) { path = System.IO.Path.GetTempPath(); }
+
+            if (FileAccessClasses.checkWriteAccess(path, true))
+            {
+                return "Success: " + path;
+            }
+            else
+            {
+                return "NO Can't write to " + path;
+            }
+        }
        
 
         public TaskUpdate UpsertTaskUpdate(object obj, string command, bool processed_locally, bool uploaded)

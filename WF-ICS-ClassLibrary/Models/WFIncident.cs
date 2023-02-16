@@ -59,7 +59,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
             allBriefings = new List<Briefing>();
             DocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            DocumentPath = System.IO.Path.Combine(DocumentPath, "CIAPPO");
+            DocumentPath = System.IO.Path.Combine(DocumentPath, "CIAPP");
             allOrgCharts = new List<OrganizationChart>();
 
             allMedicalPlans = new List<MedicalPlan>();

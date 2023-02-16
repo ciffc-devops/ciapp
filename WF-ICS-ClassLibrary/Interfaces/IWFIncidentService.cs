@@ -12,6 +12,8 @@ namespace WildfireICSDesktopServices
         WFIncident CurrentIncident { get; set; }
         Guid MachineID { get; set; }
 
+        string TestWrite(string path);
+
         event AmbulanceServiceEventHandler AmbulanceServiceChanged;
         event BriefingEventHandler BriefingChanged;
         event CommsEventHandler CommsChanged;

@@ -528,9 +528,10 @@ namespace WF_ICS_ClassLibrary.Models
                 roles.AddRange(childRoles);
             }
 
-            if(MaxCount > 0 && roles.Count > MaxCount && (maxDepth != 1))
+            if(MaxCount > 0 && roles.Count > MaxCount && (maxDepth > 1))
             {
-                roles = org.GetRolesForAssignmentList(BranchID, roles.Max(o => o.Depth) - 1, MaxCount);
+                int newDepth = roles.Max(o => o.Depth) - 1;
+                roles = org.GetRolesForAssignmentList(BranchID, newDepth, MaxCount);
             }
 
 
