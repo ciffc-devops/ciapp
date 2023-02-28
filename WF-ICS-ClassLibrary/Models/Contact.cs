@@ -144,30 +144,6 @@ namespace WF_ICS_ClassLibrary.Models
             return csv.ToString();
         }
 
-        public static ICSForm GetContactPDFForm()
-        {
-            ICSForm form = new ICSForm();
-            form.FormNumber = "205A";
-            form.FormName = "Communications List";
-
-            form.elements.Add(new ICSFormElement("Incident Name", "1 Incident Name"));
-            form.elements.Add(new ICSFormElement("Date From", "Text44"));
-            form.elements.Add(new ICSFormElement("Date To", "Text45"));
-            form.elements.Add(new ICSFormElement("Basic Local Info", "3 Basic Local Communications Information"));
-            form.elements.Add(new ICSFormElement("Prepared By Name", "Name"));
-            form.elements.Add(new ICSFormElement("Prepared By Title", "Text46"));
-            form.elements.Add(new ICSFormElement("Prepared Date", "Text48"));
-            form.elements.Add(new ICSFormElement("IAP Page Number", "Text49"));
-
-            for (int x = 1; x<= 34; x++)
-            {
-                //Incident Assigned PositionRow1
-                form.elements.Add(new ICSFormElement("Assigned Position " + x, "Incident Assigned PositionRow" + x));
-                form.elements.Add(new ICSFormElement("Contac Name " + x, "ContactName" + x));
-                form.elements.Add(new ICSFormElement("Method " + x, "Methods of Contact phone pager cell etcRow" + x));
-            }
-
-            return form;
-        }
+     
     }
 }
