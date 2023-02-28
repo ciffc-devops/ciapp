@@ -50,6 +50,7 @@ namespace WildfireICSDesktopServices
        
 
         public event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
+        public event OperationalGroupEventHandler OperationalGroupChanged;
 
         private WFIncident _currentIncident;
         public WFIncident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
@@ -1713,6 +1714,11 @@ namespace WildfireICSDesktopServices
             {
                 handler(e);
             }
+        }
+
+        public void UpsertOperationalGroup(OperationalGroup record, string source = "local")
+        {
+            throw new NotImplementedException();
         }
     }
 

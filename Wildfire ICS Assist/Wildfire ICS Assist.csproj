@@ -262,6 +262,12 @@
     <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperationalGroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupsForm.Designer.cs">
+      <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PersonnelBulkCheckInForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -653,6 +659,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupsForm.resx">
+      <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonnelBulkCheckInForm.resx">
       <DependentUpon>PersonnelBulkCheckInForm.cs</DependentUpon>

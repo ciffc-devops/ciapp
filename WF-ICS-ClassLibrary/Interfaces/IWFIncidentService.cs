@@ -49,6 +49,7 @@ namespace WildfireICSDesktopServices
         event TeamAssignmentEventHandler TeamAssignmentChanged;
 
         event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
+        event OperationalGroupEventHandler OperationalGroupChanged;
 
         void ApplyTaskUpdate(TaskUpdate update, bool applyAllSubsequent = false);
         void ConnectToServerTask(Guid TaskID, string EncryptionKey);
@@ -110,5 +111,6 @@ namespace WildfireICSDesktopServices
         void UpsertAirOperationsSummary(AirOperationsSummary record, string source = "local");
         void UpsertTeamAssignment(TeamAssignment item, string source = "local");
         void OnOpPeriodChanged(IncidentOpPeriodChangedEventArgs e);
+        void UpsertOperationalGroup(OperationalGroup record, string source = "local");
     }
 }

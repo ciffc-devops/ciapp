@@ -42,6 +42,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
  ProtoInclude(128, typeof(TaskBasics)),
  ProtoInclude(129, typeof(Timeline)),
  ProtoInclude(130, typeof(TimelineEvent)),
+        ProtoInclude(131, typeof(OperationalGroup)),
  ProtoInclude(132, typeof(Vehicle))]
     [Serializable]
 
@@ -71,6 +72,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             AllGeneralMessages = new List<GeneralMessage>();
             
             taskTimeline = new Timeline();
+            _AllOperationalGroups = new List<OperationalGroup>();
             // allEquipment = new List<TaskEquipment>();
             // allLogisticalNeeds = new List<LogisticalNeed>();
             // allLogisticalNeedsLists = new List<LogisticalNeedsList>();
@@ -121,6 +123,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(34)] private List<OperationalPeriod> _AllOperationalPeriods;
         [ProtoMember(35)] private bool _IsTraining;
         [ProtoMember(36)] private List<GeneralMessage> _AllGeneralMessages;
+        [ProtoMember(37)] private List<OperationalGroup> _AllOperationalGroups;
         // [ProtoMember(36)] private List<AssignmentDebrief> _allAssignmentDebriefs = new List<AssignmentDebrief>();
         // [ProtoMember(37)] private List<Clue> _allClues = new List<Clue>();
         // [ProtoMember(38)] private List<MapSegment> _allMapSegments = new List<MapSegment>();
@@ -259,7 +262,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<AirOperationsSummary> allAirOperationsSummaries { get => _allAirOperationsSummaries; set => _allAirOperationsSummaries = value; }
         public List<TeamAssignment> AllAssignments { get => _AllAssignments; set => _AllAssignments = value; }
         public List<TeamAssignment> ActiveAssignments { get => _AllAssignments.Where(o => o.Active).ToList(); }
-
+        public List<OperationalGroup> AllOperationalGroups { get => _AllOperationalGroups; set => _AllOperationalGroups = value; }
+        public List<OperationalGroup> ActiveOperationalGroups { get => AllOperationalGroups.Where(o => o.Active).ToList(); }
 
         //for network reasons
 
