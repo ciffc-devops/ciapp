@@ -123,10 +123,10 @@ namespace WildfireICSDesktopServices
             else { RoleWithName = role; }
 
             ICSRole branchRole = null;
-            if (role.BranchID == role.RoleID) { branchRole = RoleWithName; }
-            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.BranchID)))
+            if (role.SectionID == role.RoleID) { branchRole = RoleWithName; }
+            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.SectionID)))
             {
-                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(r => r.RoleID == role.BranchID).First();
+                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(r => r.RoleID == role.SectionID).First();
             }
 
             using (PdfReader rdr = new PdfReader(fileToUse))
@@ -155,7 +155,7 @@ namespace WildfireICSDesktopServices
                     List<ICSRole> UnitRoles = new List<ICSRole>();
                     if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod))
                     {
-                        UnitRoles = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(o => o.BranchID == branchRole.RoleID).ToList();
+                        UnitRoles = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(o => o.SectionID == branchRole.RoleID).ToList();
                         UnitRoles = UnitRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).ToList();
                         for (int x = 0; x < UnitRoles.Count && x < 16; x++)
                         {
@@ -227,10 +227,10 @@ namespace WildfireICSDesktopServices
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
 
             ICSRole branchRole = null;
-            if (role.BranchID == role.RoleID) { branchRole = role; }
-            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.BranchID)))
+            if (role.SectionID == role.RoleID) { branchRole = role; }
+            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.SectionID)))
             {
-                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(r => r.RoleID == role.BranchID).First();
+                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(r => r.RoleID == role.SectionID).First();
             }
 
             using (PdfReader rdr = new PdfReader(fileToUse))

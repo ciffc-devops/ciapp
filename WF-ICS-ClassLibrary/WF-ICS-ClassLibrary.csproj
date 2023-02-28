@@ -133,7 +133,6 @@
     <Compile Include="Models\GeneralOptions.cs" />
     <Compile Include="Models\HelpInfo.cs" />
     <Compile Include="Models\Hospital.cs" />
-    <Compile Include="Models\ICSFormElement.cs" />
     <Compile Include="Models\IncidentObjective.cs" />
     <Compile Include="Models\IncidentTool.cs" />
     <Compile Include="Models\MedicalAidStation.cs" />
@@ -146,7 +145,7 @@
     <Compile Include="Models\PDFCreationResults.cs" />
     <Compile Include="Models\PositionLog.cs" />
     <Compile Include="Models\Province.cs" />
-    <Compile Include="Models\SafetyPlan.cs" />
+    <Compile Include="Models\SafetyMessage.cs" />
     <Compile Include="Models\ShortcutButtonOption.cs" />
     <Compile Include="Models\SoftwareUpdate.cs" />
     <Compile Include="Models\TaskBasics.cs" />

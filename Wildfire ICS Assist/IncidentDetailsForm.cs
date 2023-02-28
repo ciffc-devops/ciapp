@@ -673,13 +673,13 @@ namespace Wildfire_ICS_Assist
                     pnlTaskInfo.BackColor = Color.IndianRed;
                     cpIncidentActionPlan.Expand();
                 }
-                else if (Program.CurrentRole.BranchID == Globals.OpsChiefID)
+                else if (Program.CurrentRole.SectionID == Globals.OpsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Orange;
                     cpOperations.Expand();
                     //resizeGroup("Ops", false, true);
                 }
-                else if (Program.CurrentRole.BranchID == Globals.PlanningChiefID)
+                else if (Program.CurrentRole.SectionID == Globals.PlanningChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.CornflowerBlue;
                     cpPlanning.Expand();
@@ -691,7 +691,7 @@ namespace Wildfire_ICS_Assist
                                         resizeGroup("Planning", false, true);*/
 
                 }
-                else if (Program.CurrentRole.BranchID == Globals.LogisticsChiefID)
+                else if (Program.CurrentRole.SectionID == Globals.LogisticsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Khaki;
                     cpLogistics.Expand();
@@ -703,7 +703,7 @@ namespace Wildfire_ICS_Assist
                     resizeGroup("Logistics", false, true);
                     */
                 }
-                else if (Program.CurrentRole.BranchID == Globals.FinanceChiefID)
+                else if (Program.CurrentRole.SectionID == Globals.FinanceChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.LightGray;
                 }

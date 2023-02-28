@@ -37,6 +37,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(10)] private string _PreparedByRole;
         [ProtoMember(11)] private bool _IsUnifiedCommand;
         [ProtoMember(12)] private Guid _PreparedByRoleID;
+       
+
+
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public bool Active { get => _Active; set => _Active = value; }
@@ -147,7 +150,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private Personnel _teamMember;
         [ProtoMember(8)] private DateTime _LastUpdatedUTC;
         [ProtoMember(9)] private int _OpPeriod;
-        [ProtoMember(10)] private Guid _BranchID;
+        [ProtoMember(10)] private Guid _SectionID;
         [ProtoMember(11)] private string _ReportsToRoleName;
         [ProtoMember(12)] private int _ManualSortOrder;
         [ProtoMember(13)] private string _PDFTitleName;
@@ -157,6 +160,16 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(17)] private bool _IncludeReportsToInName;
         [ProtoMember(18)] private string _BaseRoleName;
         [ProtoMember(19)] private bool _Active;
+        [ProtoMember(20)] private bool _IsDivisionSup;
+        [ProtoMember(21)] private bool _IsBranchSup;
+        [ProtoMember(22)] private Guid _BranchID;
+        [ProtoMember(23)] private Guid _DivisionID;
+
+     
+
+
+
+
         public Guid RoleID { get => _RoleID; set => _RoleID = value; }
         public string RoleName { get => _RoleName; set => _RoleName = value; }
         public string RoleNameForDropdown
@@ -173,7 +186,7 @@ namespace WF_ICS_ClassLibrary.Models
                 return name.ToString();
             }
         }
-        public Guid BranchID { get => _BranchID; set => _BranchID = value; }
+        public Guid SectionID { get => _SectionID; set => _SectionID = value; }
 
 
 
@@ -247,16 +260,16 @@ namespace WF_ICS_ClassLibrary.Models
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; IndividualName = person_name; IndividualID = person_id;
         }*/
-        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
+        public ICSRole(Guid id, string name, Guid reports, Guid Section_ID, string pdfname, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
         {
-            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; BranchID = Branch; _OrgChartRoleID = System.Guid.NewGuid();
+            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; SectionID = Section_ID; _OrgChartRoleID = System.Guid.NewGuid();
             MaualSortOrder = maualSortOrder; Depth = initial_depth; Active = true;
             _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
             FillInfoFromStaticRole();
         }
-        public ICSRole(Guid id, string name, Guid reports, Guid Branch, string pdfname, string pdftitle, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
+        public ICSRole(Guid id, string name, Guid reports, Guid Section_ID, string pdfname, string pdftitle, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
         {
-            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; BranchID = Branch; _OrgChartRoleID = System.Guid.NewGuid();
+            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; SectionID = Section_ID; _OrgChartRoleID = System.Guid.NewGuid();
             PDFTitleName = pdftitle; Active = true;
             _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
             MaualSortOrder = maualSortOrder; Depth = initial_depth;
@@ -275,12 +288,12 @@ namespace WF_ICS_ClassLibrary.Models
             }
         }
 
-        public ICSRole(string name, Guid Branch, string mnemonic, string description, bool includeReportsToInName = false)
+        public ICSRole(string name, Guid Section, string mnemonic, string description, bool includeReportsToInName = false)
         {
             RoleID = Guid.NewGuid();
             RoleName = name;
             _BaseRoleName = name;
-            BranchID = Branch;
+            SectionID = Section;
             RoleDescription = description;
             Mnemonic = mnemonic;
             _IncludeReportsToInName = includeReportsToInName;
@@ -306,7 +319,11 @@ namespace WF_ICS_ClassLibrary.Models
         }
         public bool AllowEditReportsTo { get => string.IsNullOrEmpty(PDFFieldName); }
         public bool AllowDelete { get => string.IsNullOrEmpty(PDFFieldName); }
-        
+
+        public bool IsDivisionSup { get => _IsDivisionSup; set => _IsDivisionSup = value; }
+        public bool IsBranchSup { get => _IsBranchSup; set => _IsBranchSup = value; }
+        public Guid BranchID { get => _BranchID; set => _BranchID = value; }
+        public Guid DivisionID { get => _DivisionID; set => _DivisionID = value; }
 
 
         public ICSRole Clone()
@@ -520,7 +537,7 @@ namespace WF_ICS_ClassLibrary.Models
 
             List<ICSRole> roles = new List<ICSRole>(); 
             roles.Add( org.ActiveRoles.FirstOrDefault(o => o.RoleID == BranchID));
-            foreach(ICSRole role in org.ActiveRoles.Where(o=>o.ReportsTo == BranchID && o.BranchID == BranchID))
+            foreach(ICSRole role in org.ActiveRoles.Where(o=>o.ReportsTo == BranchID && o.SectionID == BranchID))
             {
                 roles.Add(role);
                 List<ICSRole> childRoles = org.GetChildRoles(role.RoleID, true, true);
@@ -803,7 +820,11 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Crew - Type 3", Globals.OpsChiefID, "CRW3", "Generally made up of temporary firefighter forces used for mop up situations that have received some type of basic agency firefighting training."));
             allRoles.Add(new ICSRole("Commissary Manager", Globals.FinanceChiefID, "CMSY", "The person responsible for commissary operations."));
             allRoles.Add(new ICSRole("Dispatcher", Globals.LogisticsChiefID, "DISP", "The person responsible for notifying resources to assigned incidents."));
+         
+            //these two roles need expanded features 
             allRoles.Add(new ICSRole("Division Supervisor", Globals.OpsChiefID, "DIVS", "The person responsible for supervising equipment and personnel assigned to a division. Reports to a Branch Director or Operations Section Chief."));
+            allRoles.Add(new ICSRole("Operations Branch Director", Globals.OpsChiefID, "OPBD", "The person responsible for implementing the portion of the Incident Action Plan applicable to the assigned Branch of the Operations Section."));
+
             allRoles.Add(new ICSRole("Demobilization Unit Leader", Globals.PlanningChiefID, "DMOB", "The person is responsible for preparing the Demobilization Plan and schedule ensuring an orderly, safe, and efficient movement of personnel and equipment from the incident."));
             allRoles.Add(new ICSRole("Documentation Unit Leader", Globals.PlanningChiefID, "DOCL", "The person responsible for maintaining accurate and complete incident files, providing duplication services to incident personnel, and packing and storing incident files."));
             allRoles.Add(new ICSRole("Dozer Boss", Globals.OpsChiefID, "DOZB", "The person responsible to lead a single bulldozer and attached personnel and is responsible for their safety on wildland and prescribed fire incidents."));
@@ -854,7 +875,7 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Line scout", Globals.OpsChiefID, "LSCT", "A person responsible to determine the location of a fire line."));
             allRoles.Add(new ICSRole("Medical Unit Leader", Globals.LogisticsChiefID, "MEDL", "The person primarily responsible for developing the Medical Plan, obtaining medical aid and transportation for injured or ill incident personnel, and preparing reports and records."));
             allRoles.Add(new ICSRole("Mixmaster", Globals.OpsChiefID, "MXMS", "The person in charge of fire retardant mixing operations, with responsibility for quantity and quality of retardant and for the loading of aircraft in land based operations."));
-            allRoles.Add(new ICSRole("Operations Branch Director", Globals.OpsChiefID, "OPBD", "The person responsible for implementing the portion of the Incident Action Plan applicable to the assigned Branch of the Operations Section."));
+            
             allRoles.Add(new ICSRole("Operations Section Chief", Globals.OpsChiefID, "OSC", "The person responsible for supervising the Operations Section who reports to the Incident Commander and is a member of the General Staff. This position may have one or more deputies assigned."));
             allRoles.Add(new ICSRole("Operations Section Chief 1", Globals.OpsChiefID, "OSC1", "The person responsible for supervising the Operations Section who reports to the Incident Commander and is a member of the General Staff. This position may have one or more deputies assigned."));
             allRoles.Add(new ICSRole("Operations Section Chief 2", Globals.OpsChiefID, "OSC2", "The person responsible for supervising the Operations Section who reports to the Incident Commander and is a member of the General Staff. This position may have one or more deputies assigned."));
@@ -887,6 +908,7 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Task Force Leader", Globals.OpsChiefID, "TFLD", "The individual responsible for supervising a task force. Reports to a Division/Group Supervisor or Operations Section Chief."));
             allRoles.Add(new ICSRole("Technical Specialist", Guid.Empty, "THSP", "Personnel with special skills that can be used anywhere within the Incident Command System organization."));
             allRoles.Add(new ICSRole("Time Unit Leader", Globals.FinanceChiefID, "TIME", "The person responsible for recording personnel time."));
+            allRoles.Add(new ICSRole("Ordering Manager", Globals.LogisticsChiefID, "", ""));
 
             allRoles.Add(new ICSRole("Deputy", Guid.Empty, "", "", true));
             allRoles.Add(new ICSRole("Trainee", Guid.Empty, "", "", true));
@@ -1049,7 +1071,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
 
                 //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
-                string branch = GetBranchNameFromID(item.BranchID);
+                string branch = GetBranchNameFromID(item.SectionID);
                 csv.Append("\""); csv.Append(branch.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.RoleName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.ReportsToRoleName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);

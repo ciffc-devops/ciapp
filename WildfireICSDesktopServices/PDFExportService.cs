@@ -953,7 +953,7 @@ namespace WildfireICSDesktopServices
                                     stamper.AcroFields.SetField("4 INCIDENT AND COMMAND STAFFRow" + (x + 1) + "_2", icRoles[x].IndividualName);
                                 }
                                 //agency reps
-                                List<ICSRole> repRoles = currentChart.ActiveRoles.Where(o => o.BranchID == Globals.IncidentCommanderID && o.RoleName.Equals("Agency Representative")).OrderBy(o => o.Depth).ThenBy(o => o.MaualSortOrder).ThenBy(o => o.RoleName).ToList();
+                                List<ICSRole> repRoles = currentChart.ActiveRoles.Where(o => o.SectionID == Globals.IncidentCommanderID && o.RoleName.Equals("Agency Representative")).OrderBy(o => o.Depth).ThenBy(o => o.MaualSortOrder).ThenBy(o => o.RoleName).ToList();
                                 for (int x = 0; x < 8 && x < repRoles.Count; x++)
                                 {
 
@@ -1604,7 +1604,7 @@ namespace WildfireICSDesktopServices
                                 List<Guid> branches = new List<Guid>();
                                 foreach (ICSRole role in chart.ActiveRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)))
                                 {
-                                    Guid branchid = role.BranchID;
+                                    Guid branchid = role.SectionID;
                                     if (!branches.Contains(branchid)) { branches.Add(branchid); }
                                 }
 
@@ -1624,7 +1624,7 @@ namespace WildfireICSDesktopServices
                                     cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
                                     cell.Padding = 10;
                                     table.AddCell(cell);
-                                    foreach (ICSRole role in chart.ActiveRoles.Where(o => o.BranchID == branch && !string.IsNullOrEmpty(o.IndividualName)))
+                                    foreach (ICSRole role in chart.ActiveRoles.Where(o => o.SectionID == branch && !string.IsNullOrEmpty(o.IndividualName)))
                                     {
                                         iTextSharp.text.Font fonttoUse = normalfont;
                                         if (role.RoleID == branch) { fonttoUse = subsectionfont; }

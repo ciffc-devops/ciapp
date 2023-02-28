@@ -69,7 +69,7 @@ namespace Wildfire_ICS_Assist
             {
                 ICSRole reportsTo = (ICSRole)cboReportsTo.SelectedItem; if (reportsTo != null)
                 {
-                    List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o => o.BranchID == reportsTo.BranchID || o.BranchID == Guid.Empty).OrderBy(o => o.RoleName).ToList();
+                    List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o => o.SectionID == reportsTo.SectionID || o.SectionID == Guid.Empty).OrderBy(o => o.RoleName).ToList();
                     if(branchRoles.Any(o=>o.RoleName.Equals(selectedRole.RoleName, StringComparison.OrdinalIgnoreCase)))
                     {
                         cboNewRoleName.SelectedValue = branchRoles.First(o => o.RoleName.Equals(selectedRole.RoleName, StringComparison.OrdinalIgnoreCase)).RoleID;
@@ -97,7 +97,7 @@ namespace Wildfire_ICS_Assist
                 ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;
                 selectedRole.ReportsTo = rep.RoleID;
                 selectedRole.ReportsToRoleName = rep.RoleName;
-                selectedRole.BranchID = rep.BranchID;
+                selectedRole.SectionID = rep.SectionID;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             } 
@@ -131,8 +131,8 @@ namespace Wildfire_ICS_Assist
             if (parentRole != null)
             {
                 //update the list of role names based on the currently selected branch.
-                Guid BranchID = parentRole.BranchID;
-                List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o=>o.BranchID == BranchID || o.BranchID == Guid.Empty).OrderBy(o=>o.RoleName).ToList();
+                Guid BranchID = parentRole.SectionID;
+                List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o=>o.SectionID == BranchID || o.SectionID == Guid.Empty).OrderBy(o=>o.RoleName).ToList();
                 cboNewRoleName.DataSource = null;
                 cboNewRoleName.DataSource = branchRoles;
                 cboNewRoleName.DisplayMember = "RoleName";
@@ -145,11 +145,11 @@ namespace Wildfire_ICS_Assist
                 foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))                {                    CommandStaffRoles.Add(role.RoleID);                }
                 splitContainer1.Panel1.BackColor = Color.White;
                 if (CommandStaffRoles.Contains(parentRole.RoleID)) { splitContainer1.Panel1.BackColor = Color.IndianRed; }
-                else if (parentRole.BranchID == Globals.IncidentCommanderID) { splitContainer1.Panel1.BackColor = Color.LimeGreen; }
-                else if (parentRole.BranchID == Globals.OpsChiefID) { splitContainer1.Panel1.BackColor = Color.Orange; }
-                else if (parentRole.BranchID == Globals.PlanningChiefID) { splitContainer1.Panel1.BackColor = Color.CornflowerBlue; }
-                else if (parentRole.BranchID == Globals.LogisticsChiefID) { splitContainer1.Panel1.BackColor = Color.Khaki; }
-                else if (parentRole.BranchID == Globals.FinanceChiefID) { splitContainer1.Panel1.BackColor = Color.LightGray; }
+                else if (parentRole.SectionID == Globals.IncidentCommanderID) { splitContainer1.Panel1.BackColor = Color.LimeGreen; }
+                else if (parentRole.SectionID == Globals.OpsChiefID) { splitContainer1.Panel1.BackColor = Color.Orange; }
+                else if (parentRole.SectionID == Globals.PlanningChiefID) { splitContainer1.Panel1.BackColor = Color.CornflowerBlue; }
+                else if (parentRole.SectionID == Globals.LogisticsChiefID) { splitContainer1.Panel1.BackColor = Color.Khaki; }
+                else if (parentRole.SectionID == Globals.FinanceChiefID) { splitContainer1.Panel1.BackColor = Color.LightGray; }
                 else { splitContainer1.Panel1.BackColor = Color.White; }
             }
         }
