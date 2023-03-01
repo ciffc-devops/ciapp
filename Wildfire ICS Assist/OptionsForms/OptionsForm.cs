@@ -40,21 +40,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
             cboDefaultProvince.DisplayMember = "ProvinceName";
             cboDefaultProvince.ValueMember = "ProvinceGUID";
         }
-        private void LoadCommsSystems()
-        {
-            LoadCommsSystems(cboPrimaryChannel);
-            LoadCommsSystems(cboSecondaryChannel);
-            LoadCommsSystems(cboEmergencyChannel);
-
-        }
-        private void LoadCommsSystems(ComboBox cbo)
-        {
-            List<CommsPlanItem> items = (List<CommsPlanItem>)Program.generalOptionsService.GetOptionsValue("CommsItems");
-            items = items.Where(o => o.Active).OrderBy(o => o.ChannelID).ToList();
-            cbo.DataSource = items;
-
-        }
-
+        
+      
         private void LoadDateOptions()
         {
             List<DateFormatOption> options = DateTools.GetDateFormatOptions();
@@ -110,12 +97,6 @@ namespace Wildfire_ICS_Assist.OptionsForms
             txtAutomaticSubFolders.Text = options.AutomaticSubFoldersCSV;
 
 
-            //Comms
-            txtICPCallSign.Text = options.ICPCallSign;
-            if (options.PrimaryChannelID != null && options.PrimaryChannelID != Guid.Empty) { cboPrimaryChannel.SelectedValue = options.PrimaryChannelID; }
-            if (options.EmergencyChannelID != null && options.EmergencyChannelID != Guid.Empty) { cboEmergencyChannel.SelectedValue = options.EmergencyChannelID; }
-            if (options.SecondaryChannelID != null && options.SecondaryChannelID != Guid.Empty) { cboSecondaryChannel.SelectedValue = options.SecondaryChannelID; }
-
 
             //Network
             foreach (DeviceInformation info in options.SavedNetworkDeviceList.Where(o => o.TrustDevice))
@@ -131,7 +112,6 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void OptionsForm_Load(object sender, EventArgs e)
         {
             LoadICSRoles();
-            LoadCommsSystems();
             LoadProvinces();
             LoadDateOptions();
             LoadSavedValues();
@@ -190,19 +170,6 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     options.AutomaticSubFolders = txtAutomaticSubFolders.Text.ListFromCSV();
 
 
-                    //Comms
-                    options.ICPCallSign = txtICPCallSign.Text;
-                    if (cboPrimaryChannel.SelectedValue != null) { options.PrimaryChannelID = ((CommsPlanItem)cboPrimaryChannel.SelectedItem).ItemID; } else { options.PrimaryChannelID = Guid.Empty; }
-                    if (cboSecondaryChannel.SelectedValue != null)
-                    {
-                        options.SecondaryChannelID = ((CommsPlanItem)cboSecondaryChannel.SelectedItem).ItemID;
-                    }
-                    else { options.SecondaryChannelID = Guid.Empty; }
-                    if (cboEmergencyChannel.SelectedValue != null)
-                    {
-                        options.EmergencyChannelID = ((CommsPlanItem)cboEmergencyChannel.SelectedItem).ItemID;
-                    }
-                    else { options.EmergencyChannelID = Guid.Empty; }
 
 
                     //Network

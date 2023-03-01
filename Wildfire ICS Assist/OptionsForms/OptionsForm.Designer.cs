@@ -62,16 +62,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chkAutoSave = new System.Windows.Forms.CheckBox();
-            this.tbComms = new System.Windows.Forms.TabPage();
-            this.label16 = new System.Windows.Forms.Label();
-            this.cboEmergencyChannel = new System.Windows.Forms.ComboBox();
-            this.cboSecondaryChannel = new System.Windows.Forms.ComboBox();
-            this.cboPrimaryChannel = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtICPCallSign = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.tbNetworking = new System.Windows.Forms.TabPage();
             this.btnHelpDefaultPort = new System.Windows.Forms.Button();
             this.btnHelpDefaultToServer = new System.Windows.Forms.Button();
@@ -90,7 +80,6 @@
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             this.tbFileManagement.SuspendLayout();
-            this.tbComms.SuspendLayout();
             this.tbNetworking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -103,7 +92,6 @@
             // 
             this.tabControl1.Controls.Add(this.tbGeneral);
             this.tabControl1.Controls.Add(this.tbFileManagement);
-            this.tabControl1.Controls.Add(this.tbComms);
             this.tabControl1.Controls.Add(this.tbNetworking);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -501,135 +489,6 @@
             this.chkAutoSave.Text = "Yes, auto save on changes";
             this.chkAutoSave.UseVisualStyleBackColor = true;
             // 
-            // tbComms
-            // 
-            this.tbComms.Controls.Add(this.label16);
-            this.tbComms.Controls.Add(this.cboEmergencyChannel);
-            this.tbComms.Controls.Add(this.cboSecondaryChannel);
-            this.tbComms.Controls.Add(this.cboPrimaryChannel);
-            this.tbComms.Controls.Add(this.label11);
-            this.tbComms.Controls.Add(this.label13);
-            this.tbComms.Controls.Add(this.label14);
-            this.tbComms.Controls.Add(this.txtICPCallSign);
-            this.tbComms.Controls.Add(this.label15);
-            this.tbComms.Location = new System.Drawing.Point(4, 33);
-            this.tbComms.Name = "tbComms";
-            this.tbComms.Padding = new System.Windows.Forms.Padding(3);
-            this.tbComms.Size = new System.Drawing.Size(738, 404);
-            this.tbComms.TabIndex = 1;
-            this.tbComms.Text = "Communications";
-            this.tbComms.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(8, 13);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(295, 29);
-            this.label16.TabIndex = 114;
-            this.label16.Text = "Default Communications";
-            // 
-            // cboEmergencyChannel
-            // 
-            this.cboEmergencyChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboEmergencyChannel.BackColor = System.Drawing.Color.White;
-            this.cboEmergencyChannel.DisplayMember = "SystemWithID";
-            this.cboEmergencyChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEmergencyChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboEmergencyChannel.FormattingEnabled = true;
-            this.cboEmergencyChannel.Location = new System.Drawing.Point(166, 130);
-            this.cboEmergencyChannel.Name = "cboEmergencyChannel";
-            this.cboEmergencyChannel.Size = new System.Drawing.Size(564, 32);
-            this.cboEmergencyChannel.TabIndex = 108;
-            this.cboEmergencyChannel.ValueMember = "ItemID";
-            // 
-            // cboSecondaryChannel
-            // 
-            this.cboSecondaryChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboSecondaryChannel.BackColor = System.Drawing.Color.White;
-            this.cboSecondaryChannel.DisplayMember = "SystemWithID";
-            this.cboSecondaryChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSecondaryChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboSecondaryChannel.FormattingEnabled = true;
-            this.cboSecondaryChannel.Location = new System.Drawing.Point(166, 92);
-            this.cboSecondaryChannel.Name = "cboSecondaryChannel";
-            this.cboSecondaryChannel.Size = new System.Drawing.Size(564, 32);
-            this.cboSecondaryChannel.TabIndex = 107;
-            this.cboSecondaryChannel.ValueMember = "ItemID";
-            // 
-            // cboPrimaryChannel
-            // 
-            this.cboPrimaryChannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboPrimaryChannel.BackColor = System.Drawing.Color.White;
-            this.cboPrimaryChannel.DisplayMember = "SystemWithID";
-            this.cboPrimaryChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPrimaryChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboPrimaryChannel.FormattingEnabled = true;
-            this.cboPrimaryChannel.Location = new System.Drawing.Point(166, 54);
-            this.cboPrimaryChannel.Name = "cboPrimaryChannel";
-            this.cboPrimaryChannel.Size = new System.Drawing.Size(564, 32);
-            this.cboPrimaryChannel.TabIndex = 106;
-            this.cboPrimaryChannel.ValueMember = "ItemID";
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(9, 133);
-            this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(149, 24);
-            this.label11.TabIndex = 112;
-            this.label11.Text = "Emergency";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label13
-            // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(9, 97);
-            this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(149, 24);
-            this.label13.TabIndex = 111;
-            this.label13.Text = "Secondary";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label14
-            // 
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(9, 57);
-            this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(149, 24);
-            this.label14.TabIndex = 110;
-            this.label14.Text = "Primary Ch.";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtICPCallSign
-            // 
-            this.txtICPCallSign.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtICPCallSign.Location = new System.Drawing.Point(166, 170);
-            this.txtICPCallSign.Margin = new System.Windows.Forms.Padding(5);
-            this.txtICPCallSign.Name = "txtICPCallSign";
-            this.txtICPCallSign.Size = new System.Drawing.Size(564, 29);
-            this.txtICPCallSign.TabIndex = 95;
-            this.txtICPCallSign.Text = "BASE";
-            // 
-            // label15
-            // 
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(9, 174);
-            this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(149, 24);
-            this.label15.TabIndex = 94;
-            this.label15.Text = "ICP Call Sign";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // tbNetworking
             // 
             this.tbNetworking.Controls.Add(this.btnHelpDefaultPort);
@@ -770,7 +629,7 @@
             this.lbTrustedDevices.Name = "lbTrustedDevices";
             this.lbTrustedDevices.ScrollAlwaysVisible = true;
             this.lbTrustedDevices.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 148);
+            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 124);
             this.lbTrustedDevices.TabIndex = 114;
             this.lbTrustedDevices.ValueMember = "DeviceID";
             // 
@@ -840,8 +699,6 @@
             this.tbGeneral.PerformLayout();
             this.tbFileManagement.ResumeLayout(false);
             this.tbFileManagement.PerformLayout();
-            this.tbComms.ResumeLayout(false);
-            this.tbComms.PerformLayout();
             this.tbNetworking.ResumeLayout(false);
             this.tbNetworking.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).EndInit();
@@ -857,7 +714,6 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tbGeneral;
-        private System.Windows.Forms.TabPage tbComms;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
@@ -886,15 +742,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkAutoSave;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox cboEmergencyChannel;
-        private System.Windows.Forms.ComboBox cboSecondaryChannel;
-        private System.Windows.Forms.ComboBox cboPrimaryChannel;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtICPCallSign;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btnHelpDefaultPort;
         private System.Windows.Forms.Button btnHelpDefaultToServer;
         private System.Windows.Forms.NumericUpDown numDefaultPortNumber;
