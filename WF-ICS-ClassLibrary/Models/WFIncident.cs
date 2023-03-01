@@ -32,7 +32,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
  ProtoInclude(116, typeof(MedicalPlan)),
  ProtoInclude(117, typeof(Personnel)),
  ProtoInclude(118, typeof(MemberStatus)),
- ProtoInclude(119, typeof(SignInRecord)),
+ ProtoInclude(119, typeof(CheckInRecord)),
  ProtoInclude(120, typeof(Note)),
  ProtoInclude(121, typeof(OperationalPeriod)),
  ProtoInclude(122, typeof(OrganizationChart)),
@@ -114,7 +114,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(25)] private int _RelayCount;
         [ProtoMember(26)] private Guid _RequestID;
         //  [ProtoMember(27)] private List<WhiteboardItem> _whiteboardItems = new List<WhiteboardItem>();
-        [ProtoMember(28)] private List<SignInRecord> _signInRecords = new List<SignInRecord>();
+        [ProtoMember(28)] private List<CheckInRecord> _signInRecords = new List<CheckInRecord>();
         [ProtoMember(29)] private List<Personnel> _taskTeamMembers = new List<Personnel>();
         [ProtoMember(30)] private Organization _taskOrganization = new Organization();
         [ProtoMember(31)] private DateTime _DateCreatedUTC;
@@ -309,7 +309,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             return AllOperationalPeriods.Max(o => o.PeriodEnd);
         }
 
-        public List<SignInRecord> AllSignInRecords { get { return _signInRecords; } set { _signInRecords = value; } }
+        public List<CheckInRecord> AllSignInRecords { get { return _signInRecords; } set { _signInRecords = value; } }
 
 
       

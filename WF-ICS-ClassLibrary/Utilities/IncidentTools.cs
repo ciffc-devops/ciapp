@@ -92,7 +92,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 }
             }
 
-            foreach (SignInRecord record in task.AllSignInRecords)
+            foreach (CheckInRecord record in task.AllSignInRecords)
             {
                 if (!members.Any(o => o.PersonID == record.teamMember.PersonID) && !listAlreadyContainsMember(members, record.teamMember)) { members.Add(record.teamMember); }
 
@@ -112,7 +112,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 {
                     if (task.AllSignInRecords.Where(o => o.MemberID == member.PersonID && o.OpPeriod == OpPeriod).Any())
                     {
-                        SignInRecord record = task.AllSignInRecords.Where(o => o.MemberID == member.PersonID && o.OpPeriod == OpPeriod).OrderByDescending(o => o.StatusChangeTime).First();
+                        CheckInRecord record = task.AllSignInRecords.Where(o => o.MemberID == member.PersonID && o.OpPeriod == OpPeriod).OrderByDescending(o => o.StatusChangeTime).First();
                         member.SignedInToTask = record.IsSignIn;
                     }
                     else { member.SignedInToTask = false; }
@@ -171,7 +171,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static List<Personnel> MembersSignedIn(this WFIncident task, int opPeriod)
         {
             List<Personnel> members = new List<Personnel>();
-            foreach (SignInRecord record in task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod))
+            foreach (CheckInRecord record in task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod))
             {
                 if (!members.Where(o => o.PersonID == record.teamMember.PersonID).Any())
                 {
@@ -240,7 +240,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 }
                 else
                 {
-                    foreach (SignInRecord record in task.AllSignInRecords.Where(o => o.IsSignIn && o.teamMember.PersonID == member.PersonID && o.OpPeriod == opPeriod))
+                    foreach (CheckInRecord record in task.AllSignInRecords.Where(o => o.IsSignIn && o.teamMember.PersonID == member.PersonID && o.OpPeriod == opPeriod))
                     {
 
                         MemberStatus status = task.getMemberStatus(member, opPeriod, date, record);
@@ -252,7 +252,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return statuses;
         }
 
-        public static MemberStatus getMemberStatus(this WFIncident task, Personnel member, int opPeriod, DateTime end_date = new DateTime(), SignInRecord signIn = null)
+        public static MemberStatus getMemberStatus(this WFIncident task, Personnel member, int opPeriod, DateTime end_date = new DateTime(), CheckInRecord signIn = null)
         {
             MemberStatus status = new MemberStatus();
             status.setTeamMember(member);
@@ -263,6 +263,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                     signIn = task.AllSignInRecords.OrderByDescending(o => o.StatusChangeTime).First(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn);
                     status.CheckInRecordID = signIn.SignInRecordID;
                     status.SignInTime = signIn.StatusChangeTime;
+                    status.InitialRoleName = signIn.InitialRoleName;
                     if (signIn.LastDayOnIncident > DateTime.MinValue) { status.LastDayWorked = signIn.LastDayOnIncident; }
                     status.KMs = signIn.KMs;
                 }
@@ -272,7 +273,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 
             if (task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).Any())
             {
-                SignInRecord signOut = task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).OrderBy(o => o.StatusChangeTime).First();
+                CheckInRecord signOut = task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).OrderBy(o => o.StatusChangeTime).First();
                 status.SignOutTime = signOut.StatusChangeTime;
                 status.CheckOutRecordID = signOut.SignInRecordID;
                 if (status.KMs <= 0m)

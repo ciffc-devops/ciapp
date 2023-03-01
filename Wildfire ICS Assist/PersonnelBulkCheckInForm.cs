@@ -16,8 +16,8 @@ namespace Wildfire_ICS_Assist
 {
     public partial class PersonnelBulkCheckInForm : Form
     {
-        private List<SignInRecord> _records = new List<SignInRecord>();
-        public List<SignInRecord> records { get => _records; set => _records = value; }
+        private List<CheckInRecord> _records = new List<CheckInRecord>();
+        public List<CheckInRecord> records { get => _records; set => _records = value; }
 
 
         public PersonnelBulkCheckInForm()
@@ -87,7 +87,7 @@ namespace Wildfire_ICS_Assist
 
                 foreach (Personnel member in membersToSignIn)
                 {
-                    SignInRecord record = new SignInRecord();
+                    CheckInRecord record = new CheckInRecord();
                     record.IsSignIn = true;
                     record.OpPeriod = Program.CurrentOpPeriod;
                     record.teamMember = member;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,14 +14,15 @@ using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PersonnelSignInForm : Form
+    public partial class PersonnelCheckInForm : Form
     {
         private Personnel _selectedMember;
         public Personnel selectedMember { get => _selectedMember; set => _selectedMember = value; }
-        private SignInRecord _signInRecord = new SignInRecord();
-        public SignInRecord signInRecord { get => _signInRecord; set => _signInRecord = value; }
+        private CheckInRecord _signInRecord = new CheckInRecord();
+        public CheckInRecord signInRecord { get => _signInRecord; set => _signInRecord = value; }
+        public bool AutoAssignToOrg { get => chkAssignOnOrgChart.Checked; }
 
-        public PersonnelSignInForm()
+        public PersonnelCheckInForm()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
             GeneralTools.SetDateFormat(this);
@@ -34,7 +36,21 @@ namespace Wildfire_ICS_Assist
             editTeamMemberControl1.teamMember = new Personnel();
             datCheckInTime.Value = DateTime.Now;
             datLDW.Value = DateTime.Now.AddDays(14);
-            
+            buildICSRoleDropdown();
+
+
+        }
+
+        private void buildICSRoleDropdown()
+        {
+            ICSRole role = Program.CurrentRole.Clone();
+            List<ICSRole> roles = OrgChartTools.GetAllRoles();
+            roles = roles.OrderByDescending(o=>o.SectionID == WF_ICS_ClassLibrary.Globals.IncidentCommanderID).ThenBy(o=>o.RoleNameWithSection).ToList();
+            cboICSRole.DataSource = null;
+            cboICSRole.DataSource = roles;
+            cboICSRole.DisplayMember = "RoleNameWithSection";
+            cboICSRole.ValueMember = "RoleID";
+
         }
 
         private void btnShowHelp_Click(object sender, EventArgs e)
@@ -125,7 +141,7 @@ namespace Wildfire_ICS_Assist
                 signInRecord.SignInTime = datCheckInTime.Value;
                 signInRecord.LastDayOnIncident = datLDW.Value;
                 if (datLastDayTravel.Checked) { signInRecord.LastDayOfTravel = datLastDayTravel.Value; } else { signInRecord.LastDayOfTravel = DateTime.MinValue; }
-
+                if (datFirstDayOnIncident.Checked) { signInRecord.FirstDayOnIncident = datFirstDayOnIncident.Value; } else { signInRecord.FirstDayOnIncident = DateTime.MinValue; }
                 signInRecord.DeparturePoint = txtDeparturePoint.Text;
                 signInRecord.MethodOfTravel = cboMethodOfTravel.Text;
                 signInRecord.Accomodations= cboAccomodations.Text;
@@ -135,7 +151,8 @@ namespace Wildfire_ICS_Assist
 
                 if(cboICSRole.SelectedItem != null)
                 {
-                    signInRecord.InitialIncidentRoleID = ((ICSRole)cboICSRole.SelectedValue).RoleID;
+                    signInRecord.InitialIncidentRoleID = ((ICSRole)cboICSRole.SelectedItem).RoleID;
+                    signInRecord.InitialRoleName = ((ICSRole)cboICSRole.SelectedItem).RoleName;
                 }
 
                 this.DialogResult = DialogResult.OK;
@@ -157,6 +174,23 @@ namespace Wildfire_ICS_Assist
         private void txtDeparturePoint_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cboICSRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cboICSRole.SelectedItem != null)
+            {
+                ICSRole role = (ICSRole)cboICSRole.SelectedItem;
+                chkAssignOnOrgChart.Enabled = RoleAvailableForAutoAssign(role);
+                chkAssignOnOrgChart.Checked = chkAssignOnOrgChart.Enabled;
+            } else { chkAssignOnOrgChart.Enabled = false; chkAssignOnOrgChart.Checked = false; }
+        }
+
+        private bool RoleAvailableForAutoAssign(ICSRole role)
+        {
+            List<ICSRole> roles = Program.CurrentOrgChart.ActiveRoles;
+            if (!roles.Any(o => o.RoleName.Equals(role.RoleName, StringComparison.OrdinalIgnoreCase) && o.IndividualID == Guid.Empty)) { return false; }
+            return true;
         }
     }
 }

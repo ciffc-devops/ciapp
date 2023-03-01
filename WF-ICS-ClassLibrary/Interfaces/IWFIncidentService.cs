@@ -90,7 +90,7 @@ namespace WildfireICSDesktopServices
         void UpsertHospital(Hospital record, string source = "local");
         void UpsertAmbulance(AmbulanceService record, string source = "local");
 
-        void UpsertMemberStatus(SignInRecord signIn, string source = "local");
+        void UpsertMemberStatus(CheckInRecord signIn, string source = "local");
         void UpsertMemberStatus(Personnel member, string source = "local");
         void UpsertNote(Note note, string source = "local");
         void UpsertObject(object obj, string source);

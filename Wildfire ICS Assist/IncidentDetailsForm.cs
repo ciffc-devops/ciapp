@@ -2663,12 +2663,12 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+                using (PersonnelCheckInForm signInForm = new PersonnelCheckInForm())
                 {
                     DialogResult dr = signInForm.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        SignInRecord record = signInForm.signInRecord;
+                        CheckInRecord record = signInForm.signInRecord;
                         record.IsSignIn = true;
                         Program.wfIncidentService.UpsertMemberStatus(record);
                     }
@@ -2685,7 +2685,7 @@ namespace Wildfire_ICS_Assist
                     DialogResult dr = signInForm.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        foreach (SignInRecord record in signInForm.records)
+                        foreach (CheckInRecord record in signInForm.records)
                         {
                             record.IsSignIn = true;
                             Program.wfIncidentService.UpsertMemberStatus(record);
@@ -2704,7 +2704,7 @@ namespace Wildfire_ICS_Assist
                     DialogResult dr = signInForm.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        foreach (SignInRecord record in signInForm.records)
+                        foreach (CheckInRecord record in signInForm.records)
                         {
                             record.IsSignIn = true;
                             Program.wfIncidentService.UpsertMemberStatus(record);
@@ -2718,12 +2718,12 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+                using (PersonnelCheckInForm signInForm = new PersonnelCheckInForm())
                 {
                     DialogResult dr = signInForm.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        SignInRecord record = signInForm.signInRecord;
+                        CheckInRecord record = signInForm.signInRecord;
                         record.IsSignIn = true;
                         Program.wfIncidentService.UpsertMemberStatus(record);
                     }

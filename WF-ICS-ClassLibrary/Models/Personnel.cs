@@ -374,7 +374,7 @@ namespace WF_ICS_ClassLibrary.Models
 
     [ProtoContract]
     [Serializable]
-    public class SignInRecord : ICloneable
+    public class CheckInRecord : ICloneable
     {
         [ProtoMember(1)] private DateTime _statusChangeTime = DateTime.MinValue;
         /*[ProtoMember(2)]
@@ -405,9 +405,9 @@ namespace WF_ICS_ClassLibrary.Models
 
         [ProtoMember(15)] private DateTime _LastDayOnIncident;
         [ProtoMember(16)] private DateTime _LastDayOfTravel;
-
-        [ProtoMember(17)] private Guid _InitialIncidentRoleID;
-
+        [ProtoMember(17)] private DateTime _FirstDayOnIncident;
+        [ProtoMember(18)] private Guid _InitialIncidentRoleID;
+        [ProtoMember(19)] private string _InitialRoleName;
 
         [ProtoMember(99)] private decimal _KMs;
 
@@ -425,7 +425,7 @@ namespace WF_ICS_ClassLibrary.Models
         public bool Lunch { get => _Lunch; set => _Lunch = value; }
         public bool Dinner { get => _Dinner; set => _Dinner = value; }
 
-        public SignInRecord() { SignInRecordID = Guid.NewGuid(); _teamMember = new Personnel(); }
+        public CheckInRecord() { SignInRecordID = Guid.NewGuid(); _teamMember = new Personnel(); }
         public DateTime RecordUpdatedUTC { get => _RecordUpdatedUTC; set => _RecordUpdatedUTC = value; }
 
 
@@ -435,15 +435,17 @@ namespace WF_ICS_ClassLibrary.Models
         public string DeparturePoint { get => _DeparturePoint; set => _DeparturePoint = value; }
         public string MethodOfTravel { get => _MethodOfTravel; set => _MethodOfTravel = value; }
         public Guid InitialIncidentRoleID { get => _InitialIncidentRoleID; set => _InitialIncidentRoleID = value; }
+        public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
 
         public DateTime LastDayOfRest { get => _LastDayOfRest; set => _LastDayOfRest = value; }
         public DateTime StartOfTravel { get => _StartOfTravel; set => _StartOfTravel = value; }
         public DateTime LastDayOnIncident { get => _LastDayOnIncident; set => _LastDayOnIncident = value; }
         public DateTime LastDayOfTravel { get => _LastDayOfTravel; set => _LastDayOfTravel = value; }
+        public DateTime FirstDayOnIncident { get => _FirstDayOnIncident; set => _FirstDayOnIncident = value; }
 
-        public SignInRecord Clone()
+        public CheckInRecord Clone()
         {
-            SignInRecord cloneTo = this.MemberwiseClone() as SignInRecord;
+            CheckInRecord cloneTo = this.MemberwiseClone() as CheckInRecord;
             cloneTo.teamMember = this.teamMember.Clone();
             return cloneTo;
         }
@@ -482,6 +484,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(16)] private string _Callsign;
         [ProtoMember(17)] private Guid _CheckInRecordID;
         [ProtoMember(18)] private Guid _CheckOutRecordID;
+        [ProtoMember(19)] private string _InitialRoleName;
 
         public Guid AssignmentID { get => _AssignmentID; set => _AssignmentID = value; }
 
@@ -572,6 +575,11 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid CheckOutRecordID { get => _CheckOutRecordID; set => _CheckOutRecordID = value; }
 
         public string Callsign { get => _Callsign; set => _Callsign = value; }
+
+        public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
+
+
+
         public void setTeamMember(Personnel member)
         {
             MemberName = member.Name;
@@ -579,6 +587,7 @@ namespace WF_ICS_ClassLibrary.Models
             OrganizationID = member.OrganizationID;
             _OrganizationName = member.Agency;
             Callsign = member.Callsign;
+
         }
         public MemberStatus Clone()
         {
@@ -597,7 +606,7 @@ namespace WF_ICS_ClassLibrary.Models
     }
 
 
-   public static class TeamMemberTools
+   public static class PersonnelTools
     {
         public static string ExportSignInRecordsToCSV(this WFIncident incident, List<MemberStatus> records, string delimiter = ",")
         {
@@ -617,7 +626,7 @@ namespace WF_ICS_ClassLibrary.Models
             csv.Append(Environment.NewLine);
             foreach (MemberStatus status in records.OrderBy(o => o.MemberName))
             {
-                SignInRecord rec  = new SignInRecord();
+                CheckInRecord rec  = new CheckInRecord();
                 if (incident.AllSignInRecords.Any(o => o.MemberID == status.MemberID))
                 {
                    rec = incident.AllSignInRecords.Where(o => o.MemberID == status.MemberID).First();
@@ -652,7 +661,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             List<AgencyPersonnelCount> counts = new List<AgencyPersonnelCount>();
 
-            foreach (SignInRecord record in incident.AllSignInRecords.Where(o => o.OpPeriod == OpPeriod))
+            foreach (CheckInRecord record in incident.AllSignInRecords.Where(o => o.OpPeriod == OpPeriod))
             {
                 if (!counts.Any(o => o.AgencyName.Equals(record.teamMember.Agency)))
                 {

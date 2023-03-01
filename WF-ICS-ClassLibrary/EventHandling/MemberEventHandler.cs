@@ -12,11 +12,11 @@ namespace WF_ICS_ClassLibrary.EventHandling
     public class MemberEventArgs
     {
         public Guid MemberID { get; set; }
-        public SignInRecord signInRecord { get; set; }
+        public CheckInRecord signInRecord { get; set; }
         public Personnel teamMember { get; set; }
 
         public MemberEventArgs(Guid _memberID) { MemberID = _memberID; }
-        public MemberEventArgs(SignInRecord _record) { signInRecord = _record; if (_record != null) { MemberID = _record.MemberID; } }
+        public MemberEventArgs(CheckInRecord _record) { signInRecord = _record; if (_record != null) { MemberID = _record.MemberID; } }
         public MemberEventArgs(Personnel _member) { teamMember = _member; if (teamMember != null) { MemberID = teamMember.PersonID; } }
     }
 }

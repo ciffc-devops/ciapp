@@ -25,7 +25,7 @@ namespace WF_ICS_ClassLibrary.Models
     [XmlInclude(typeof(MedicalPlan))]
     [XmlInclude(typeof(Personnel))]
     [XmlInclude(typeof(MemberStatus))]
-    [XmlInclude(typeof(SignInRecord))]
+    [XmlInclude(typeof(CheckInRecord))]
     [XmlInclude(typeof(Note))]
     [XmlInclude(typeof(OperationalPeriod))]
     [XmlInclude(typeof(OrganizationChart))]
@@ -228,9 +228,9 @@ namespace WF_ICS_ClassLibrary.Models
             }
 
 
-            else if (ObjectType.Equals(new SignInRecord().GetType().Name))
+            else if (ObjectType.Equals(new CheckInRecord().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<SignInRecord>(jsonData);
+                objDecrypted = JsonSerializer.Deserialize<CheckInRecord>(jsonData);
             }
             else if (ObjectType.Equals(new Personnel().GetType().Name))
             {

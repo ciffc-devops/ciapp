@@ -14,8 +14,8 @@ namespace Wildfire_ICS_Assist
 {
     public partial class PersonnelEditCheckInOutForm : Form
     {
-        private List<SignInRecord> _records = new List<SignInRecord>();
-        public List<SignInRecord> records { get => _records; set { _records = value; LoadValues(); } }
+        private List<CheckInRecord> _records = new List<CheckInRecord>();
+        public List<CheckInRecord> records { get => _records; set { _records = value; LoadValues(); } }
 
 
         public PersonnelEditCheckInOutForm()
@@ -27,7 +27,7 @@ namespace Wildfire_ICS_Assist
         private void LoadValues()
         {
             List<Personnel> members = new List<Personnel>();
-            foreach (SignInRecord record in _records) { if (!members.Any(o => o.PersonID == record.teamMember.PersonID)) { members.Add(record.teamMember); } }
+            foreach (CheckInRecord record in _records) { if (!members.Any(o => o.PersonID == record.teamMember.PersonID)) { members.Add(record.teamMember); } }
 
             if (members.Count == 1)
             {
@@ -47,7 +47,7 @@ namespace Wildfire_ICS_Assist
 
 
             //If the values for an item are all the same, use the value. otherwise leave it blank.
-            foreach(SignInRecord record in records)
+            foreach(CheckInRecord record in records)
             {
                 if (record.IsSignIn)
                 {
@@ -131,7 +131,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnSaveChanges_Click(object sender, EventArgs e)
         {
-            foreach(SignInRecord record in records)
+            foreach(CheckInRecord record in records)
             {
                 if (chkCheckIn.Checked) { record.SignInTime = datCheckInTime.Value; }
                 if (chkLDW.Checked) { record.LastDayOnIncident = datLDW.Value; }

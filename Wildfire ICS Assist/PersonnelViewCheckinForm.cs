@@ -16,8 +16,8 @@ namespace Wildfire_ICS_Assist
 {
     public partial class PersonnelViewCheckinForm : Form
     {
-        private SignInRecord _record = new SignInRecord();
-        public SignInRecord record { get => _record; set { _record = value; LoadInfo(); } } 
+        private CheckInRecord _record = new CheckInRecord();
+        public CheckInRecord record { get => _record; set { _record = value; LoadInfo(); } } 
 
         public PersonnelViewCheckinForm()
         {
@@ -163,7 +163,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnEditCheckIn_Click(object sender, EventArgs e)
         {
-            List<SignInRecord> records = new List<SignInRecord>();
+            List<CheckInRecord> records = new List<CheckInRecord>();
             records.Add(record);
             using (PersonnelEditCheckInOutForm editForm = new PersonnelEditCheckInOutForm())
             {

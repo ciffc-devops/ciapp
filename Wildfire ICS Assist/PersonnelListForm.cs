@@ -74,13 +74,26 @@ namespace Wildfire_ICS_Assist
 
         private void btnSignIn_Click(object sender, EventArgs e)
         {
-            using (PersonnelSignInForm signInForm = new PersonnelSignInForm())
+            using (PersonnelCheckInForm signInForm = new PersonnelCheckInForm())
             {
                 DialogResult dr = signInForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    SignInRecord record = signInForm.signInRecord;
+                    CheckInRecord record = signInForm.signInRecord;
                     record.IsSignIn = true;
+                    
+
+                    if (signInForm.AutoAssignToOrg)
+                    {
+                        ICSRole roleOnOrg = Program.CurrentOrgChart.GetRoleByName(record.InitialRoleName);
+                        if(roleOnOrg != null && roleOnOrg.IndividualID == Guid.Empty)
+                        {
+                            roleOnOrg.IndividualID = signInForm.selectedMember.PersonID;
+                            roleOnOrg.teamMember = signInForm.selectedMember.Clone();
+                            roleOnOrg.IndividualName = signInForm.selectedMember.Name;
+                            Program.wfIncidentService.UpsertICSRole(roleOnOrg);
+                        }
+                    }
                     Program.wfIncidentService.UpsertMemberStatus(record);
                 }
             }
@@ -144,7 +157,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = signInForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    foreach (SignInRecord record in signInForm.records)
+                    foreach (CheckInRecord record in signInForm.records)
                     {
                         record.IsSignIn = true;
                         Program.wfIncidentService.UpsertMemberStatus(record);
@@ -192,21 +205,21 @@ namespace Wildfire_ICS_Assist
             if (dgvPersonnel.SelectedRows.Count == 1)
             {
                 MemberStatus status = (MemberStatus)dgvPersonnel.SelectedRows[0].DataBoundItem;
-                SignInRecord record = getRecordFromStatus(status);
+                CheckInRecord record = getRecordFromStatus(status);
                 OpenForView(record);
             }
         }
 
-        private SignInRecord getRecordFromStatus(MemberStatus status)
+        private CheckInRecord getRecordFromStatus(MemberStatus status)
         {
-            SignInRecord record = null;
+            CheckInRecord record = null;
             if (status.CheckInRecordID != Guid.Empty && Program.CurrentIncident.AllSignInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
             {
                 record = Program.CurrentIncident.AllSignInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
             }
             else
             {
-                record = new SignInRecord();
+                record = new CheckInRecord();
                 record.OpPeriod = Program.CurrentOpPeriod;
                 record.SignInTime = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
                 record.LastDayOnIncident = record.SignInTime.AddDays(14);
@@ -221,7 +234,7 @@ namespace Wildfire_ICS_Assist
             return record;
         }
 
-        private void OpenForView(SignInRecord record)
+        private void OpenForView(CheckInRecord record)
         {
             using (PersonnelViewCheckinForm viewForm = new PersonnelViewCheckinForm())
             {
@@ -234,7 +247,7 @@ namespace Wildfire_ICS_Assist
             if (e.RowIndex >= 0)
             {
                 MemberStatus status = (MemberStatus)dgvPersonnel.Rows[e.RowIndex].DataBoundItem;
-                SignInRecord record = getRecordFromStatus(status);
+                CheckInRecord record = getRecordFromStatus(status);
                 OpenForView(record);
             }
 
@@ -248,7 +261,7 @@ namespace Wildfire_ICS_Assist
                 statuses.Add(row.DataBoundItem as MemberStatus);
             }
 
-            List<SignInRecord> records = new List<SignInRecord>();
+            List<CheckInRecord> records = new List<CheckInRecord>();
             foreach(MemberStatus status in statuses)
             {
                records.Add(getRecordFromStatus(status));
@@ -306,7 +319,7 @@ namespace Wildfire_ICS_Assist
 
                 if (Program.CurrentIncident.AllSignInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
                 {
-                   SignInRecord rec = Program.CurrentIncident.AllSignInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
+                   CheckInRecord rec = Program.CurrentIncident.AllSignInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
                     TimeSpan ts = rec.LastDayOnIncident - Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodEnd;
                     if(ts.TotalHours <= 36)
                     {
@@ -327,12 +340,12 @@ namespace Wildfire_ICS_Assist
                 statuses.Add(row.DataBoundItem as MemberStatus);
             }
 
-            List<SignInRecord> records = new List<SignInRecord>();
+            List<CheckInRecord> records = new List<CheckInRecord>();
             foreach (MemberStatus status in statuses)
             {
                 if(status.CheckInRecordID == Guid.Empty)
                 {
-                    SignInRecord record = getRecordFromStatus(status);
+                    CheckInRecord record = getRecordFromStatus(status);
                     records.Add(record);
                 }
             }

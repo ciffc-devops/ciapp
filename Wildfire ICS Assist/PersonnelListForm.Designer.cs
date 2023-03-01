@@ -32,11 +32,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvPersonnel = new System.Windows.Forms.DataGridView();
-            this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLDW = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collapsiblePanel2 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.lblLDWLessThan48 = new System.Windows.Forms.Label();
             this.lblLDWLessThan24 = new System.Windows.Forms.Label();
@@ -63,6 +58,12 @@
             this.btnViewDetails = new System.Windows.Forms.Button();
             this.btnSignOut = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLDW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInitialRoleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -136,6 +137,7 @@
             this.colName,
             this.colCheckIn,
             this.colLDW,
+            this.colInitialRoleName,
             this.colAssignment});
             this.dgvPersonnel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPersonnel.Location = new System.Drawing.Point(0, 0);
@@ -149,50 +151,6 @@
             this.dgvPersonnel.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonnel_CellDoubleClick);
             this.dgvPersonnel.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPersonnel_CellFormatting);
             this.dgvPersonnel.SelectionChanged += new System.EventHandler(this.dgvPersonnel_SelectionChanged);
-            // 
-            // colAgency
-            // 
-            this.colAgency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colAgency.DataPropertyName = "OrganizationName";
-            this.colAgency.HeaderText = "Agency";
-            this.colAgency.Name = "colAgency";
-            this.colAgency.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "MemberName";
-            this.colName.HeaderText = "Name";
-            this.colName.MinimumWidth = 150;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colCheckIn
-            // 
-            this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colCheckIn.DataPropertyName = "SignInTimeAsText";
-            this.colCheckIn.HeaderText = "Check-In";
-            this.colCheckIn.Name = "colCheckIn";
-            this.colCheckIn.ReadOnly = true;
-            this.colCheckIn.Width = 110;
-            // 
-            // colLDW
-            // 
-            this.colLDW.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colLDW.DataPropertyName = "LastDayWorkedAsStr";
-            this.colLDW.HeaderText = "LDW";
-            this.colLDW.Name = "colLDW";
-            this.colLDW.ReadOnly = true;
-            this.colLDW.Width = 76;
-            // 
-            // colAssignment
-            // 
-            this.colAssignment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colAssignment.DataPropertyName = "getCurrentActivityName";
-            this.colAssignment.HeaderText = "Assignment";
-            this.colAssignment.Name = "colAssignment";
-            this.colAssignment.ReadOnly = true;
-            this.colAssignment.Width = 134;
             // 
             // collapsiblePanel2
             // 
@@ -519,6 +477,59 @@
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
+            // colAgency
+            // 
+            this.colAgency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colAgency.DataPropertyName = "OrganizationName";
+            this.colAgency.HeaderText = "Agency";
+            this.colAgency.Name = "colAgency";
+            this.colAgency.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "MemberName";
+            this.colName.HeaderText = "Name";
+            this.colName.MinimumWidth = 150;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colCheckIn
+            // 
+            this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCheckIn.DataPropertyName = "SignInTimeAsText";
+            this.colCheckIn.HeaderText = "Check-In";
+            this.colCheckIn.Name = "colCheckIn";
+            this.colCheckIn.ReadOnly = true;
+            this.colCheckIn.Width = 110;
+            // 
+            // colLDW
+            // 
+            this.colLDW.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colLDW.DataPropertyName = "LastDayWorkedAsStr";
+            this.colLDW.HeaderText = "Last Day";
+            this.colLDW.Name = "colLDW";
+            this.colLDW.ReadOnly = true;
+            this.colLDW.Width = 105;
+            // 
+            // colInitialRoleName
+            // 
+            this.colInitialRoleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colInitialRoleName.DataPropertyName = "InitialRoleName";
+            this.colInitialRoleName.HeaderText = "Initial Role";
+            this.colInitialRoleName.Name = "colInitialRoleName";
+            this.colInitialRoleName.ReadOnly = true;
+            this.colInitialRoleName.Width = 120;
+            // 
+            // colAssignment
+            // 
+            this.colAssignment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colAssignment.DataPropertyName = "getCurrentActivityName";
+            this.colAssignment.HeaderText = "Assignment";
+            this.colAssignment.Name = "colAssignment";
+            this.colAssignment.ReadOnly = true;
+            this.colAssignment.Width = 134;
+            // 
             // PersonnelListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -573,11 +584,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.DataGridView dgvPersonnel;
         private System.Windows.Forms.DataGridView dgvTotalByAgency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAgency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckIn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLDW;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignment;
         private CustomControls.CollapsiblePanel cpnlAgencyTotals;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalsAgencyName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalsCount;
@@ -589,5 +595,11 @@
         private CustomControls.CollapsiblePanel collapsiblePanel2;
         private System.Windows.Forms.Label lblLDWLessThan48;
         private System.Windows.Forms.Label lblLDWLessThan24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAgency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLDW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInitialRoleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignment;
     }
 }

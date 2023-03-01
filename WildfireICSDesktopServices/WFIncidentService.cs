@@ -387,9 +387,9 @@ namespace WildfireICSDesktopServices
             {
                 UpsertVehicle(((Vehicle)obj).Clone(), source);
             }
-            else if (dataClassName.Equals(new SignInRecord().GetType().Name))
+            else if (dataClassName.Equals(new CheckInRecord().GetType().Name))
             {
-                UpsertMemberStatus(((SignInRecord)obj).Clone(), source);
+                UpsertMemberStatus(((CheckInRecord)obj).Clone(), source);
             }
             else if (dataClassName.Equals(new Personnel().GetType().Name))
             {
@@ -1435,7 +1435,7 @@ namespace WildfireICSDesktopServices
 */
 
         //Member Status
-        public void UpsertMemberStatus(SignInRecord signIn, string source = "local")
+        public void UpsertMemberStatus(CheckInRecord signIn, string source = "local")
         {
             if (_currentIncident.AllSignInRecords.Any(o => o.SignInRecordID == signIn.SignInRecordID))
             {
