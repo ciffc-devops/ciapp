@@ -46,6 +46,8 @@ namespace WF_ICS_ClassLibrary.Models
     [XmlInclude(typeof(MedicalAidStation))]
     [XmlInclude(typeof(SafetyMessage))]
     [XmlInclude(typeof(WFIncident))]
+    [XmlInclude(typeof(OperationalGroup))]
+    [XmlInclude(typeof(OperationalSubGroup))]
 
     [Serializable]
     [ProtoContract]
@@ -272,6 +274,16 @@ namespace WF_ICS_ClassLibrary.Models
             else if (ObjectType.Equals(new TeamAssignment().GetType().Name))
             {
                 objDecrypted = JsonSerializer.Deserialize<TeamAssignment>(jsonData);
+            }
+
+            else if (ObjectType.Equals(new OperationalGroup().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<OperationalGroup>(jsonData);
+            }
+
+            else if (ObjectType.Equals(new OperationalSubGroup().GetType().Name))
+            {
+                objDecrypted = JsonSerializer.Deserialize<OperationalSubGroup>(jsonData);
             }
 
 

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
-    public class Vehicle : IncidentTool,  ICloneable
+    public class Vehicle : IncidentResource,  ICloneable
     {
         [ProtoMember(2)] private Guid _TaskID;
         [ProtoMember(4)] private string _OrderRequestNo;
-        [ProtoMember(5)] private string _IncidentIDNo;
+        
         [ProtoMember(6)] private string _Classification;
         [ProtoMember(7)] private string _Make;
         [ProtoMember(8)] private string _CategoryKindCapacity;
@@ -34,7 +34,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public string OrderRequestNo { get => _OrderRequestNo; set => _OrderRequestNo = value; }
-        public string IncidentIDNo { get => _IncidentIDNo; set => _IncidentIDNo = value; }
+        public string IncidentIDNo { get => ResourceIdentifier; set => ResourceIdentifier = value; }
         public string Classification { get => _Classification; set => _Classification = value; }
         public string Make { get => _Make; set => _Make = value; }
         public string CategoryKindCapacity { get => _CategoryKindCapacity; set => _CategoryKindCapacity = value; }

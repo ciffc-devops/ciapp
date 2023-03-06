@@ -148,7 +148,8 @@ namespace Wildfire_ICS_Assist
                 signInRecord.Breakfast = chkBreakfast.Checked;
                 signInRecord.Lunch = chkLunch.Checked;
                 signInRecord.Dinner = chkDinner.Checked;
-
+                signInRecord.AdditionalInfo = txtOther.Text;
+                signInRecord.CheckInLocation = cboCheckInLocation.Text;
                 if(cboICSRole.SelectedItem != null)
                 {
                     signInRecord.InitialIncidentRoleID = ((ICSRole)cboICSRole.SelectedItem).RoleID;

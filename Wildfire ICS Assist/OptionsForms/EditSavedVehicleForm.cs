@@ -33,7 +33,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
             txtOperatorName.Text = vehicle.OperatorName;
             txtLicenseOrID.Text = vehicle.LicenseOrID;
             txtNotes.Text = vehicle.Notes;
-            
+            txtKind.Text = vehicle.Kind;
+            txtType.Text = vehicle.Type;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -122,6 +123,16 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void EditSavedVehicleForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtKind_TextChanged(object sender, EventArgs e)
+        {
+            vehicle.Kind = ((TextBox)sender).Text;
+        }
+
+        private void txtType_TextChanged(object sender, EventArgs e)
+        {
+            vehicle.Type = ((TextBox)sender).Text;
         }
     }
 }

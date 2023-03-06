@@ -184,6 +184,12 @@
     <Compile Include="CustomControls\EditAircraftControl.Designer.cs">
       <DependentUpon>EditAircraftControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\EditBranchControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\EditBranchControl.Designer.cs">
+      <DependentUpon>EditBranchControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\EditCommsChannelControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,6 +207,18 @@
     </Compile>
     <Compile Include="CustomControls\EditTeamMemberControl.Designer.cs">
       <DependentUpon>EditTeamMemberControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\OperationalGroupReportingResourcesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\OperationalGroupReportingResourcesControl.Designer.cs">
+      <DependentUpon>OperationalGroupReportingResourcesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\StrikeTeamTaskForceDetailsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\StrikeTeamTaskForceDetailsControl.Designer.cs">
+      <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneralMessageEditForm.cs">
       <SubType>Form</SubType>
@@ -262,11 +280,29 @@
     <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperationalGroupBranchEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupBranchEditForm.Designer.cs">
+      <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupEditResourceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupEditResourceForm.Designer.cs">
+      <DependentUpon>OperationalGroupEditResourceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperationalGroupsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OperationalGroupsForm.Designer.cs">
       <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupSTTFEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupSTTFEditForm.Designer.cs">
+      <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PersonnelBulkCheckInForm.cs">
       <SubType>Form</SubType>
@@ -615,6 +651,9 @@
     <EmbeddedResource Include="CustomControls\EditAircraftControl.resx">
       <DependentUpon>EditAircraftControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\EditBranchControl.resx">
+      <DependentUpon>EditBranchControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditCommsChannelControl.resx">
       <DependentUpon>EditCommsChannelControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -623,6 +662,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditTeamMemberControl.resx">
       <DependentUpon>EditTeamMemberControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\OperationalGroupReportingResourcesControl.resx">
+      <DependentUpon>OperationalGroupReportingResourcesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\StrikeTeamTaskForceDetailsControl.resx">
+      <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralMessageEditForm.resx">
       <DependentUpon>GeneralMessageEditForm.cs</DependentUpon>
@@ -660,8 +705,17 @@
     <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupBranchEditForm.resx">
+      <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupEditResourceForm.resx">
+      <DependentUpon>OperationalGroupEditResourceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperationalGroupsForm.resx">
       <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupSTTFEditForm.resx">
+      <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonnelBulkCheckInForm.resx">
       <DependentUpon>PersonnelBulkCheckInForm.cs</DependentUpon>

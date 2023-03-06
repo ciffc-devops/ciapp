@@ -15,4 +15,15 @@ namespace WF_ICS_ClassLibrary.EventHandling
 
         public OperationalGroupEventArgs(OperationalGroup _item) { item = _item; }
     }
+
+
+
+    public delegate void OperationalSubGroupEventHandler(OperationalSubGroupEventArgs e);
+
+    public class OperationalSubGroupEventArgs
+    {
+        public OperationalSubGroup item { get; set; }
+
+        public OperationalSubGroupEventArgs(OperationalSubGroup _item) { item = _item; }
+    }
 }

@@ -87,7 +87,11 @@ namespace Wildfire_ICS_Assist
         public static IWFIncidentService wfIncidentService { get => _wfIncidentService; private set => _wfIncidentService = value; }
 
 
-        public static WFIncident CurrentIncident { get => wfIncidentService.CurrentIncident; set { wfIncidentService.CurrentIncident = value; networkService.CurrentIncidentID = value.TaskID; } }
+        public static WFIncident CurrentIncident
+        {
+            get { if (wfIncidentService != null && wfIncidentService.CurrentIncident != null) { return wfIncidentService.CurrentIncident; } else { return new WFIncident(); } }
+            set { wfIncidentService.CurrentIncident = value; networkService.CurrentIncidentID = value.TaskID; }
+        }
         public static OrganizationChart CurrentOrgChart
         {
             get

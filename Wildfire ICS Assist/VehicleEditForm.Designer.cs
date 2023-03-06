@@ -33,6 +33,10 @@
             this.btnUseSaved = new System.Windows.Forms.Button();
             this.cboSavedVehicles = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.txtType = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtKind = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.txtOrderRequestNo = new System.Windows.Forms.TextBox();
@@ -92,8 +96,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(824, 682);
-            this.splitContainer1.SplitterDistance = 612;
+            this.splitContainer1.Size = new System.Drawing.Size(824, 717);
+            this.splitContainer1.SplitterDistance = 647;
             this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer2
@@ -115,6 +119,10 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.txtType);
+            this.splitContainer2.Panel2.Controls.Add(this.label15);
+            this.splitContainer2.Panel2.Controls.Add(this.txtKind);
+            this.splitContainer2.Panel2.Controls.Add(this.label2);
             this.splitContainer2.Panel2.Controls.Add(this.chkSaveForLater);
             this.splitContainer2.Panel2.Controls.Add(this.btnAddNew);
             this.splitContainer2.Panel2.Controls.Add(this.txtOrderRequestNo);
@@ -143,7 +151,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label8);
             this.splitContainer2.Panel2.Controls.Add(this.label7);
             this.splitContainer2.Panel2.Controls.Add(this.txtLicenseOrID);
-            this.splitContainer2.Size = new System.Drawing.Size(824, 612);
+            this.splitContainer2.Size = new System.Drawing.Size(824, 647);
             this.splitContainer2.SplitterDistance = 67;
             this.splitContainer2.TabIndex = 105;
             // 
@@ -182,14 +190,48 @@
             this.label14.TabIndex = 0;
             this.label14.Text = "Saved Vehicles and Equipment";
             // 
+            // txtType
+            // 
+            this.txtType.Location = new System.Drawing.Point(541, 195);
+            this.txtType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtType.Name = "txtType";
+            this.txtType.Size = new System.Drawing.Size(272, 29);
+            this.txtType.TabIndex = 7;
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(456, 198);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(78, 24);
+            this.label15.TabIndex = 110;
+            this.label15.Text = "Type";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtKind
+            // 
+            this.txtKind.Location = new System.Drawing.Point(228, 192);
+            this.txtKind.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtKind.Name = "txtKind";
+            this.txtKind.Size = new System.Drawing.Size(221, 29);
+            this.txtKind.TabIndex = 6;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(3, 195);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(218, 24);
+            this.label2.TabIndex = 108;
+            this.label2.Text = "Kind";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // chkSaveForLater
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(374, 496);
+            this.chkSaveForLater.Location = new System.Drawing.Point(374, 531);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
-            this.chkSaveForLater.TabIndex = 105;
+            this.chkSaveForLater.TabIndex = 16;
             this.chkSaveForLater.Text = "Save for future incidents";
             this.chkSaveForLater.UseVisualStyleBackColor = true;
             // 
@@ -199,7 +241,7 @@
             this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddNew.Location = new System.Drawing.Point(612, 485);
+            this.btnAddNew.Location = new System.Drawing.Point(612, 520);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
@@ -225,10 +267,10 @@
             this.datMustBeOutTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.datMustBeOutTime.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datMustBeOutTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datMustBeOutTime.Location = new System.Drawing.Point(614, 365);
+            this.datMustBeOutTime.Location = new System.Drawing.Point(614, 407);
             this.datMustBeOutTime.Name = "datMustBeOutTime";
             this.datMustBeOutTime.Size = new System.Drawing.Size(197, 29);
-            this.datMustBeOutTime.TabIndex = 12;
+            this.datMustBeOutTime.TabIndex = 14;
             // 
             // label1
             // 
@@ -243,10 +285,10 @@
             // 
             this.datStartTime.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datStartTime.Location = new System.Drawing.Point(228, 365);
+            this.datStartTime.Location = new System.Drawing.Point(228, 407);
             this.datStartTime.Name = "datStartTime";
             this.datStartTime.Size = new System.Drawing.Size(194, 29);
-            this.datStartTime.TabIndex = 11;
+            this.datStartTime.TabIndex = 13;
             // 
             // txtIncidentIDNo
             // 
@@ -314,10 +356,11 @@
             this.txtCategoryKindCapacity.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtCategoryKindCapacity.Size = new System.Drawing.Size(583, 60);
             this.txtCategoryKindCapacity.TabIndex = 5;
+            this.txtCategoryKindCapacity.TextChanged += new System.EventHandler(this.txtCategoryKindCapacity_TextChanged);
             // 
             // label12
             // 
-            this.label12.Location = new System.Drawing.Point(3, 405);
+            this.label12.Location = new System.Drawing.Point(3, 447);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(218, 24);
             this.label12.TabIndex = 87;
@@ -330,7 +373,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(218, 60);
             this.label4.TabIndex = 71;
-            this.label4.Text = "Category/Kind/Type, Capacity, or Size";
+            this.label4.Text = "Category, Capacity, Size";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtNotes
@@ -338,30 +381,30 @@
             this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNotes.Location = new System.Drawing.Point(228, 402);
+            this.txtNotes.Location = new System.Drawing.Point(228, 444);
             this.txtNotes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNotes.Size = new System.Drawing.Size(583, 73);
-            this.txtNotes.TabIndex = 13;
+            this.txtNotes.Size = new System.Drawing.Size(583, 65);
+            this.txtNotes.TabIndex = 15;
             // 
             // txtFeatures
             // 
             this.txtFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFeatures.Location = new System.Drawing.Point(228, 192);
+            this.txtFeatures.Location = new System.Drawing.Point(228, 234);
             this.txtFeatures.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFeatures.Multiline = true;
             this.txtFeatures.Name = "txtFeatures";
             this.txtFeatures.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtFeatures.Size = new System.Drawing.Size(583, 48);
-            this.txtFeatures.TabIndex = 6;
+            this.txtFeatures.TabIndex = 8;
             // 
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.Location = new System.Drawing.Point(412, 367);
+            this.label11.Location = new System.Drawing.Point(412, 409);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(196, 24);
             this.label11.TabIndex = 85;
@@ -370,7 +413,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(3, 192);
+            this.label5.Location = new System.Drawing.Point(3, 234);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(218, 24);
             this.label5.TabIndex = 73;
@@ -379,7 +422,7 @@
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(3, 367);
+            this.label10.Location = new System.Drawing.Point(3, 409);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(218, 24);
             this.label10.TabIndex = 83;
@@ -388,15 +431,15 @@
             // 
             // txtAgencyOrOwner
             // 
-            this.txtAgencyOrOwner.Location = new System.Drawing.Point(228, 250);
+            this.txtAgencyOrOwner.Location = new System.Drawing.Point(228, 292);
             this.txtAgencyOrOwner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAgencyOrOwner.Name = "txtAgencyOrOwner";
             this.txtAgencyOrOwner.Size = new System.Drawing.Size(194, 29);
-            this.txtAgencyOrOwner.TabIndex = 7;
+            this.txtAgencyOrOwner.TabIndex = 9;
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(3, 331);
+            this.label9.Location = new System.Drawing.Point(3, 373);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(218, 24);
             this.label9.TabIndex = 81;
@@ -405,7 +448,7 @@
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(3, 253);
+            this.label6.Location = new System.Drawing.Point(3, 295);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(218, 24);
             this.label6.TabIndex = 75;
@@ -416,24 +459,24 @@
             // 
             this.txtIncidentAssignment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtIncidentAssignment.Location = new System.Drawing.Point(228, 328);
+            this.txtIncidentAssignment.Location = new System.Drawing.Point(228, 370);
             this.txtIncidentAssignment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtIncidentAssignment.Name = "txtIncidentAssignment";
             this.txtIncidentAssignment.Size = new System.Drawing.Size(583, 29);
-            this.txtIncidentAssignment.TabIndex = 10;
+            this.txtIncidentAssignment.TabIndex = 12;
             // 
             // txtOperatorName
             // 
             this.txtOperatorName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOperatorName.Location = new System.Drawing.Point(622, 250);
+            this.txtOperatorName.Location = new System.Drawing.Point(622, 292);
             this.txtOperatorName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOperatorName.Name = "txtOperatorName";
             this.txtOperatorName.Size = new System.Drawing.Size(189, 29);
-            this.txtOperatorName.TabIndex = 8;
+            this.txtOperatorName.TabIndex = 10;
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(3, 292);
+            this.label8.Location = new System.Drawing.Point(3, 334);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(218, 24);
             this.label8.TabIndex = 79;
@@ -443,7 +486,7 @@
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.Location = new System.Drawing.Point(428, 253);
+            this.label7.Location = new System.Drawing.Point(428, 295);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(184, 24);
             this.label7.TabIndex = 77;
@@ -454,11 +497,11 @@
             // 
             this.txtLicenseOrID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLicenseOrID.Location = new System.Drawing.Point(228, 289);
+            this.txtLicenseOrID.Location = new System.Drawing.Point(228, 331);
             this.txtLicenseOrID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLicenseOrID.Name = "txtLicenseOrID";
             this.txtLicenseOrID.Size = new System.Drawing.Size(583, 29);
-            this.txtLicenseOrID.TabIndex = 9;
+            this.txtLicenseOrID.TabIndex = 11;
             // 
             // btnSave
             // 
@@ -497,7 +540,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 682);
+            this.ClientSize = new System.Drawing.Size(824, 717);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -557,5 +600,9 @@
         private System.Windows.Forms.CheckBox chkSaveForLater;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txtType;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtKind;
+        private System.Windows.Forms.Label label2;
     }
 }

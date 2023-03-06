@@ -98,6 +98,12 @@ namespace Wildfire_ICS_Assist
                 selectedRole.ReportsTo = rep.RoleID;
                 selectedRole.ReportsToRoleName = rep.RoleName;
                 selectedRole.SectionID = rep.SectionID;
+
+                if (selectedRole.Mnemonic.Equals("DIVS")) { selectedRole.IsOpGroupSup = true; }
+               else if (selectedRole.Mnemonic.Equals("OPBD")) { selectedRole.IsOpGroupSup = true; }
+                else if (selectedRole.Mnemonic.Equals("STLD")) { selectedRole.IsOpGroupSup = true; }
+                else if (selectedRole.Mnemonic.Equals("TFLD")) { selectedRole.IsOpGroupSup = true; }
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             } 

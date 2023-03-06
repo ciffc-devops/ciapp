@@ -43,7 +43,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
  ProtoInclude(129, typeof(Timeline)),
  ProtoInclude(130, typeof(TimelineEvent)),
         ProtoInclude(131, typeof(OperationalGroup)),
- ProtoInclude(132, typeof(Vehicle))]
+                ProtoInclude(132, typeof(OperationalSubGroup)),
+ ProtoInclude(133, typeof(Vehicle))]
     [Serializable]
 
 
@@ -73,6 +74,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             
             taskTimeline = new Timeline();
             _AllOperationalGroups = new List<OperationalGroup>();
+            _AllOperationalSubGroups = new List<OperationalSubGroup>();
             // allEquipment = new List<TaskEquipment>();
             // allLogisticalNeeds = new List<LogisticalNeed>();
             // allLogisticalNeedsLists = new List<LogisticalNeedsList>();
@@ -124,9 +126,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(35)] private bool _IsTraining;
         [ProtoMember(36)] private List<GeneralMessage> _AllGeneralMessages;
         [ProtoMember(37)] private List<OperationalGroup> _AllOperationalGroups;
-        // [ProtoMember(36)] private List<AssignmentDebrief> _allAssignmentDebriefs = new List<AssignmentDebrief>();
-        // [ProtoMember(37)] private List<Clue> _allClues = new List<Clue>();
-        // [ProtoMember(38)] private List<MapSegment> _allMapSegments = new List<MapSegment>();
+        [ProtoMember(38)] private List<OperationalSubGroup> _AllOperationalSubGroups;
+
         // [ProtoMember(39)] private List<MattsonEvaluation> _allMattsonEvaluations = new List<MattsonEvaluation>();
         [ProtoMember(40)] private List<Contact> _allContacts = new List<Contact>();
         [ProtoMember(41)] private Timeline _taskTimeline;
@@ -264,6 +265,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<TeamAssignment> ActiveAssignments { get => _AllAssignments.Where(o => o.Active).ToList(); }
         public List<OperationalGroup> AllOperationalGroups { get => _AllOperationalGroups; set => _AllOperationalGroups = value; }
         public List<OperationalGroup> ActiveOperationalGroups { get => AllOperationalGroups.Where(o => o.Active).ToList(); }
+        public List<OperationalSubGroup> AllOperationalSubGroups { get => _AllOperationalSubGroups; set => _AllOperationalSubGroups = value; }
+        public List<OperationalSubGroup> ActiveOperationalSubGroups { get => AllOperationalSubGroups.Where(o => o.Active).ToList(); }
 
         //for network reasons
 

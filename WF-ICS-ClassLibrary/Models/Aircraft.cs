@@ -105,9 +105,9 @@ namespace WF_ICS_ClassLibrary.Models
 
     [Serializable]
     [ProtoContract]
-    public class Aircraft : IncidentTool, ICloneable
+    public class Aircraft : IncidentResource, ICloneable
     {
-        [ProtoMember(2)] private string _Registration;
+        //[ProtoMember(2)] private string _Registration;
         [ProtoMember(3)] private string _MakeModel;
         [ProtoMember(4)] private string _Base;
         [ProtoMember(5)] private DateTime _StartTime;
@@ -119,7 +119,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public Aircraft() { ID = Guid.NewGuid(); Active = true; }
 
-        public string Registration { get => _Registration; set => _Registration = value; }
+        public string Registration { get => ResourceName; set => ResourceName = value; }
         public string MakeModel { get => _MakeModel; set => _MakeModel = value; }
         public string RegAndMakeModel
         {

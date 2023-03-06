@@ -160,13 +160,13 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(17)] private bool _IncludeReportsToInName;
         [ProtoMember(18)] private string _BaseRoleName;
         [ProtoMember(19)] private bool _Active;
-        [ProtoMember(20)] private bool _IsDivisionSup;
-        [ProtoMember(21)] private bool _IsBranchSup;
-        [ProtoMember(22)] private Guid _BranchID;
-        [ProtoMember(23)] private Guid _DivisionID;
+
+
+        [ProtoMember(22)] private Guid _OperationalGroupID;
+       // [ProtoMember(23)] private Guid _DivisionID;
         [ProtoMember(24)] private string _SectionName;
-
-
+        [ProtoMember(25)] private bool _IsOpGroupSup;
+        [ProtoMember(26)] private bool _IsPlaceholder;
 
 
 
@@ -207,6 +207,15 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return RoleName + " - unassigned"; }
             }
         }
+        public string RoleNameWithIndividualAssigned
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(IndividualName)) { return RoleName + " - " + IndividualName; }
+                else if (RoleID == Globals.IncidentCommanderID && !RoleName.Equals("Incident Commander")) { return RoleName; }
+                else { return RoleName; }
+            }
+        }
         public string RoleNameWithIndividualAndDepth
         {
             get
@@ -242,10 +251,17 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid OrgChartRoleID { get => _OrgChartRoleID; set => _OrgChartRoleID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public string ReportsToRoleName { get => _ReportsToRoleName; set => _ReportsToRoleName = value; }
-        public int MaualSortOrder { get => _ManualSortOrder; set => _ManualSortOrder = value; }
+        public int ManualSortOrder { get => _ManualSortOrder; set => _ManualSortOrder = value; }
         public bool IncludeReportsToInName { get => _IncludeReportsToInName; set => _IncludeReportsToInName = value; }
         public string BaseRoleName { get => _BaseRoleName; set => _BaseRoleName = value; }
         public bool Active { get => _Active; set => _Active = value; }
+        public bool IsPlaceholder { get => _IsPlaceholder; set => _IsPlaceholder = value; }
+        public bool IsTFST { get
+            {
+                if (string.IsNullOrEmpty(Mnemonic)) { return false; }
+                else if (Mnemonic.Equals("STLD") || Mnemonic.Equals("TFLD")) { return true; }
+                return false;
+            } }
         public Personnel teamMember
         {
             get => _teamMember;
@@ -267,7 +283,7 @@ namespace WF_ICS_ClassLibrary.Models
         public ICSRole(Guid id, string name, Guid reports, Guid Section_ID, string pdfname, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
         {
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; SectionID = Section_ID; _OrgChartRoleID = System.Guid.NewGuid();
-            MaualSortOrder = maualSortOrder; Depth = initial_depth; Active = true;
+            ManualSortOrder = maualSortOrder; Depth = initial_depth; Active = true;
             _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
             FillInfoFromStaticRole();
         }
@@ -276,7 +292,7 @@ namespace WF_ICS_ClassLibrary.Models
             RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; teamMember = member; SectionID = Section_ID; _OrgChartRoleID = System.Guid.NewGuid();
             PDFTitleName = pdftitle; Active = true;
             _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
-            MaualSortOrder = maualSortOrder; Depth = initial_depth;
+            ManualSortOrder = maualSortOrder; Depth = initial_depth;
 
             FillInfoFromStaticRole();
             
@@ -325,10 +341,10 @@ namespace WF_ICS_ClassLibrary.Models
         public bool AllowEditReportsTo { get => string.IsNullOrEmpty(PDFFieldName); }
         public bool AllowDelete { get => string.IsNullOrEmpty(PDFFieldName); }
 
-        public bool IsDivisionSup { get => _IsDivisionSup; set => _IsDivisionSup = value; }
-        public bool IsBranchSup { get => _IsBranchSup; set => _IsBranchSup = value; }
-        public Guid BranchID { get => _BranchID; set => _BranchID = value; }
-        public Guid DivisionID { get => _DivisionID; set => _DivisionID = value; }
+        public bool IsOpGroupSup { get => _IsOpGroupSup; set => _IsOpGroupSup = value; }
+
+        public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
+        //public Guid DivisionID { get => _DivisionID; set => _DivisionID = value; }
 
 
         public ICSRole Clone()
@@ -626,19 +642,24 @@ namespace WF_ICS_ClassLibrary.Models
             AllRoles.Add(new ICSRole(new Guid("f4975464-ed47-43ee-a229-47fd9997ebd9"), "Clerk", new Guid("91C6C1B6-92F2-4959-8A01-198240340571"), Globals.IncidentCommanderID, "NameInfo1", "TitleInfo1", blankMember, 4, 1));
 
             //Ops
-            AllRoles.Add(new ICSRole(Globals.OpsChiefID, "Operations Section Chief", Globals.IncidentCommanderID, Globals.OpsChiefID, "Text3", blankMember, 5, 1));
+            AllRoles.Add(new ICSRole(Globals.OpsChiefID, "Operations Section Chief", Globals.IncidentCommanderID, Globals.OpsChiefID, "Text3", blankMember, 5, 1)); AllRoles.Where(o => o.RoleID == Globals.OpsChiefID).First().IsOpGroupSup = true;
             AllRoles.Add(new ICSRole(Globals.AirOpsDirector, "Air Operations Branch Director", Globals.OpsChiefID, Globals.OpsChiefID, "AirOpsDirector", blankMember, 98, 2));
-            AllRoles.Add(new ICSRole(new Guid("0da445fe-99d5-4cfe-b746-cbe46b20e314"), "Air Support Group Supervisor", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3));
-            AllRoles.Add(new ICSRole(new Guid("f16d6d47-a334-4c88-9bbc-8034ee9c2a32"), "Air Tactical Group Supervisor", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3));
+            AllRoles.Where(o => o.RoleID == Globals.AirOpsDirector).First().IsOpGroupSup = true;
+
+            AllRoles.Add(new ICSRole(new Guid("0da445fe-99d5-4cfe-b746-cbe46b20e314"), "Air Support Group Supervisor", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3)); AllRoles.Where(o => o.RoleID == new Guid("0da445fe-99d5-4cfe-b746-cbe46b20e314")).First().IsOpGroupSup = true;
+            AllRoles.Add(new ICSRole(new Guid("f16d6d47-a334-4c88-9bbc-8034ee9c2a32"), "Air Tactical Group Supervisor", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3)); AllRoles.Where(o => o.RoleID == new Guid("f16d6d47-a334-4c88-9bbc-8034ee9c2a32")).First().IsOpGroupSup = true;
             AllRoles.Add(new ICSRole(new Guid("b1fd775b-7311-4d9d-a1bf-a7d32c4d7ed2"), "Helicopter Coordinator", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3));
             AllRoles.Add(new ICSRole(new Guid("803955a6-973f-470e-a8a4-bd86197700c0"), "Helibase Manager", Globals.AirOpsDirector, Globals.OpsChiefID, null, blankMember, 99, 3));
 
 
             AllRoles.Add(new ICSRole(new Guid("3A79ED80-9B06-4923-95F7-BE1B8B554FFD"), "Staging Area Manager", Globals.OpsChiefID, Globals.OpsChiefID, "NameOps1", "TitleOps1", blankMember, 97, 2));
-            AllRoles.Add(new ICSRole(new Guid("b01ea351-0578-4eb0-b8ca-d319efa74b7c"), "Branch/Division/Group1", Globals.OpsChiefID, Globals.OpsChiefID, "NameOps2", "TitleOps2", blankMember, 99, 2));
-            AllRoles.Add(new ICSRole(new Guid("9727f016-aed9-4f34-99db-910a06b97f2e"), "Branch/Division/Group2", Globals.OpsChiefID, Globals.OpsChiefID, "NameOps3", "TitleOps3", blankMember, 99, 2));
-            AllRoles.Add(new ICSRole(new Guid("9e75f813-cab4-4a6c-87b7-0fc141f06df9"), "Branch/Division/Group3", Globals.OpsChiefID, Globals.OpsChiefID, "NameOps4", "TitleOps4", blankMember, 99, 2));
-            
+            AllRoles.Add(new ICSRole(new Guid("b01ea351-0578-4eb0-b8ca-d319efa74b7c"), "Branch/Division/Group1", Globals.OpsChiefID, Globals.OpsChiefID, "NameOps2", "TitleOps2", blankMember, 99, 2)); 
+            AllRoles.Where(o => o.RoleID == new Guid("b01ea351-0578-4eb0-b8ca-d319efa74b7c")).First().IsPlaceholder = true;
+            AllRoles.Add(new ICSRole(new Guid("9727f016-aed9-4f34-99db-910a06b97f2e"), "Branch/Division/Group2", Globals.OpsChiefID, Globals.OpsChiefID, "NameOps3", "TitleOps3", blankMember, 99, 2)); 
+            AllRoles.Where(o => o.RoleID == new Guid("9727f016-aed9-4f34-99db-910a06b97f2e")).First().IsPlaceholder = true;
+            AllRoles.Add(new ICSRole(new Guid("9e75f813-cab4-4a6c-87b7-0fc141f06df9"), "Branch/Division/Group3", Globals.OpsChiefID, Globals.OpsChiefID, "NameOps4", "TitleOps4", blankMember, 99, 2)); 
+            AllRoles.Where(o => o.RoleID == new Guid("9e75f813-cab4-4a6c-87b7-0fc141f06df9")).First().IsPlaceholder = true;
+
 
 
 
@@ -693,6 +714,12 @@ namespace WF_ICS_ClassLibrary.Models
             return null;
         }
 
+        public static ICSRole getGenericRoleByName(string name)
+        {
+            List<ICSRole> roles = GetAllRoles();
+            if(roles.Any(o=>o.RoleName.Equals(name, StringComparison.OrdinalIgnoreCase))) { return roles.First(o => o.RoleName.Equals(name, StringComparison.OrdinalIgnoreCase)); }
+            return null;
+        }
 
         public static List<ICSRole> GetAllRoles()
         {
@@ -726,9 +753,13 @@ namespace WF_ICS_ClassLibrary.Models
          
             //these roles need expanded features 
             allRoles.Add(new ICSRole("Division Supervisor", Globals.OpsChiefID, "DIVS", "The person responsible for supervising equipment and personnel assigned to a division. Reports to a Branch Director or Operations Section Chief."));
-            allRoles.Where(o => o.Mnemonic.Equals("DIVS")).First().IsDivisionSup = true;
+            allRoles.Where(o => o.Mnemonic.Equals("DIVS")).First().IsOpGroupSup = true;
             allRoles.Add(new ICSRole("Operations Branch Director", Globals.OpsChiefID, "OPBD", "The person responsible for implementing the portion of the Incident Action Plan applicable to the assigned Branch of the Operations Section."));
-            allRoles.Where(o => o.Mnemonic.Equals("OPBD")).First().IsBranchSup = true;
+            allRoles.Where(o => o.Mnemonic.Equals("OPBD")).First().IsOpGroupSup = true;
+
+            allRoles.Add(new ICSRole("Strike Team Leader", Globals.OpsChiefID, "STLD", "The individual responsible for supervising a strike team (usually dozers, engines, or crews), and reports to a Division/Group Supervisor or Operations Section Chief."));
+            allRoles.Add(new ICSRole("Task Force Leader", Globals.OpsChiefID, "TFLD", "The individual responsible for supervising a task force. Reports to a Division/Group Supervisor or Operations Section Chief."));
+
 
             //Does this one need a group?
             allRoles.Add(new ICSRole("Heavy Equipment Group Supervisor", Globals.OpsChiefID, "HEGS", "The person responsible for supervising and directing operations of assigned heavy equipment, including heavy equipment strike teams/task forces or single resources."));
@@ -811,10 +842,8 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Supply Unit Leader", Globals.LogisticsChiefID, "SPUL", "The person responsible for ordering personnel, equipment, and supplies; receiving and storing all supplies for the incident; maintaining an inventory of supplies; and servicing nonexpendable supplies and equipment."));
             allRoles.Add(new ICSRole("Senior Agency Representative", Globals.IncidentCommanderID, "SREP", "The person representative of the Sending Participant based at a Receiving Participant’s Fire Centre, who has been delegated authority to make decisions on matters affecting the Sending Participant’s resources at an incident or within that jurisdiction."));
             allRoles.Add(new ICSRole("Staging Area Manager", Globals.OpsChiefID, "STAM", "The person responsible for managing all activities within a Staging Area."));
-            allRoles.Add(new ICSRole("Strike Team Leader", Globals.OpsChiefID, "STLD", "The individual responsible for supervising a strike team (usually dozers, engines, or crews), and reports to a Division/Group Supervisor or Operations Section Chief."));
             allRoles.Add(new ICSRole("Support Branch Director", Globals.LogisticsChiefID, "SUBD", "The person responsible for developing and implementing logistics plans in support of the Incident Action Plan. The Support Branch Director supervises the operations of the Supply, Facilities, and Ground Support Units."));
             allRoles.Add(new ICSRole("Service Branch Director", Globals.LogisticsChiefID, "SVBD", "The person responsible for managing all service activities at the incident. The Service Branch Director supervises the operations of the Communications, Medical, and Food Unit Leaders."));
-            allRoles.Add(new ICSRole("Task Force Leader", Globals.OpsChiefID, "TFLD", "The individual responsible for supervising a task force. Reports to a Division/Group Supervisor or Operations Section Chief."));
             allRoles.Add(new ICSRole("Technical Specialist", Guid.Empty, "THSP", "Personnel with special skills that can be used anywhere within the Incident Command System organization."));
             allRoles.Add(new ICSRole("Time Unit Leader", Globals.FinanceChiefID, "TIME", "The person responsible for recording personnel time."));
             allRoles.Add(new ICSRole("Ordering Manager", Globals.LogisticsChiefID, "", ""));
@@ -888,7 +917,7 @@ namespace WF_ICS_ClassLibrary.Models
         private static List<ICSRole> AddChildRoles(OrganizationChart sourceChart, List<ICSRole> baseList, ICSRole parentRole)
         {
             List<ICSRole> children = sourceChart.ActiveRoles.Where(o => o.ReportsTo == parentRole.RoleID).ToList();
-            children = children.OrderBy(o => o.MaualSortOrder).ThenBy(o => o.RoleName).ToList();
+            children = children.OrderBy(o => o.ManualSortOrder).ThenBy(o => o.RoleName).ToList();
             foreach(ICSRole child in children)
             {
                 child.Depth = parentRole.Depth + 1;

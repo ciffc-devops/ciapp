@@ -194,7 +194,8 @@ namespace Wildfire_ICS_Assist
         VehiclesForm _vehiclesForm = null;
         PrintIncidentForm _printIAPForm = null;
         AirOperationsForm _airOperationsForm = null;
-        TeamAssignmentsForm _teamAssignmentsForm = null;
+        //TeamAssignmentsForm _teamAssignmentsForm = null;
+        OperationalGroupsForm _operationalGroupsForm = null;
         PositionLogReminderForm _positionLogReminderForm = null;
         PersonnelListForm _personnelListForm = null;
 
@@ -1910,40 +1911,40 @@ namespace Wildfire_ICS_Assist
 
         private void btnAssignmentList_Click(object sender, EventArgs e)
         {
-            OpenTeamAssignmentsForm();
+            OpenOperationalGroupsForm();
         }
 
-        private void OpenTeamAssignmentsForm()
+        private void OpenOperationalGroupsForm()
         {
             if (initialDetailsSet())
             {
-                if (_teamAssignmentsForm == null)
+                if (_operationalGroupsForm == null)
                 {
-                    _teamAssignmentsForm = new TeamAssignmentsForm();
-                    _teamAssignmentsForm.FormClosed += new FormClosedEventHandler(TeamAssignmentsForm_Closed);
-                    ActiveForms.Add(_teamAssignmentsForm);
-                    _teamAssignmentsForm.Show(this);
+                    _operationalGroupsForm = new OperationalGroupsForm();
+                    _operationalGroupsForm.FormClosed += new FormClosedEventHandler(OperationalGroupsForm_Closed);
+                    ActiveForms.Add(_operationalGroupsForm);
+                    _operationalGroupsForm.Show(this);
                 }
 
-                _teamAssignmentsForm.BringToFront();
+                _operationalGroupsForm.BringToFront();
             }
         }
-        void TeamAssignmentsForm_Closed(object sender, FormClosedEventArgs e)
+        void OperationalGroupsForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(_teamAssignmentsForm);
-            _teamAssignmentsForm = null;
+            RemoveActiveForm(_operationalGroupsForm);
+            _operationalGroupsForm = null;
 
 
         }
 
         private void btnOpsAssignments_Click(object sender, EventArgs e)
         {
-            OpenTeamAssignmentsForm();
+            OpenOperationalGroupsForm();
         }
 
         private void btnTeamAssignments_Click(object sender, EventArgs e)
         {
-            OpenTeamAssignmentsForm();
+            OpenOperationalGroupsForm();
         }
 
         private void teamAssignmentsToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2733,12 +2734,12 @@ namespace Wildfire_ICS_Assist
 
         private void teamAssignmentsICS204ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenTeamAssignmentsForm();
+            OpenOperationalGroupsForm();
         }
 
         private void teamAssignmentsICS204ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            OpenTeamAssignmentsForm();
+            OpenOperationalGroupsForm();
         }
 
         private void requestIncidentFromServerToolStripMenuItem_Click(object sender, EventArgs e)

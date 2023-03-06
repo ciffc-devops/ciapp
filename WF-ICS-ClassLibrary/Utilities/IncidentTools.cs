@@ -1,9 +1,11 @@
 ﻿using CoordinateSharp;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using WF_ICS_ClassLibrary.Models;
 
 namespace WF_ICS_ClassLibrary.Utilities
@@ -83,12 +85,15 @@ namespace WF_ICS_ClassLibrary.Utilities
                 if (!members.Any(o => o.PersonID == member.PersonID) && !listAlreadyContainsMember(members, member)) { members.Add(member); }
             }
 
-           
+
             foreach (OrganizationChart orgchart in task.allOrgCharts)
             {
-                foreach (ICSRole role in orgchart.ActiveRoles)
+                foreach (ICSRole role in orgchart.ActiveRoles.Where(o=>o.teamMember != null && o.teamMember.PersonID != Guid.Empty))
                 {
-                    if (role.teamMember != null && !members.Any(o => o.PersonID == role.teamMember.PersonID) && !listAlreadyContainsMember(members, role.teamMember)) { members.Add(role.teamMember); }
+                    if (role.teamMember != null && !members.Any(o => o.PersonID == role.teamMember.PersonID) && !listAlreadyContainsMember(members, role.teamMember))
+                    {
+                        members.Add(role.teamMember);
+                    }
                 }
             }
 
@@ -158,7 +163,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         public static void UpsertTaskTeamMember(this WFIncident task, Personnel member)
         {
-            if (member != null)
+            if (member != null && member.PersonID != Guid.Empty && !string.IsNullOrEmpty(member.Name))
             {
                 if (task.TaskTeamMembers.Any(o => o.PersonID == member.PersonID))
                 {
@@ -504,6 +509,18 @@ namespace WF_ICS_ClassLibrary.Utilities
                 {
                     chart.AllRoles = OrgChartTools.GetBlankPrimaryRoles();
                     foreach(ICSRole role in chart.AllRoles) { role.OpPeriod = ops; role.OrganizationalChartID = chart.OrganizationalChartID; }
+
+
+                }
+
+                foreach(ICSRole role in chart.ActiveRoles.Where(o=> o.IsOpGroupSup && !o.IsPlaceholder))
+                {
+                    if(role.OperationalGroupID == Guid.Empty)
+                    {
+                        OperationalGroup group = task.createOperationalGroupFromRole(role);
+                        role.OperationalGroupID = group.ID;
+                        Globals.incidentService.UpsertOperationalGroup(group);
+                    }
                 }
 
 
@@ -523,6 +540,45 @@ namespace WF_ICS_ClassLibrary.Utilities
                 //task.allOrgCharts.Add(chart);
                 Globals.incidentService.UpsertOrganizationalChart(chart);
             }
+        }
+
+        public static OperationalGroup createOperationalGroupFromRole(this WFIncident incident, ICSRole role)
+        {
+            OperationalGroup group = new OperationalGroup();
+            group.OpPeriod = role.OpPeriod;
+            group.ParentID = role.ReportsTo;
+            group.ParentName = role.ReportsToRoleName;
+            group.LeaderICSRoleID = role.RoleID;
+            group.LeaderICSRoleName = role.RoleName;
+            if (role.IsOpGroupSup)
+            {
+                if (role.Mnemonic.Equals("OPBD") || role.RoleID == Globals.AirOpsDirector) { 
+                    group.GroupType = "Branch";
+                    group.Name = role.RoleName.Replace(" Director", "");
+                }
+                else if (role.Mnemonic.Equals("DIVS"))
+                {
+                    group.GroupType = "Division";
+                    group.Name = role.RoleName.Replace(" Supervisor", "");
+                }
+                else if (role.Mnemonic.Equals("STLD"))
+                {
+                    group.GroupType = "Strike Team";
+                    group.Name = role.RoleName.Replace(" Leader", "");
+                }
+                else if (role.Mnemonic.Equals("TFLD"))
+                {
+                    group.GroupType = "Task Force";
+                    group.Name = role.RoleName.Replace(" Leader", "");
+                }
+
+                else
+                {
+                    group.GroupType = "Group";
+                    group.Name = role.RoleName.Replace(" Supervisor", "");
+                }
+            }
+            return group;
         }
 
 

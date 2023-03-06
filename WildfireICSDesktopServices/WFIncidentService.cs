@@ -8,6 +8,10 @@ using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using static iTextSharp.text.pdf.AcroFields;
+using System.Text.Json;
+using System.Data;
+using WF_ICS_ClassLibrary;
 
 namespace WildfireICSDesktopServices
 {
@@ -51,6 +55,8 @@ namespace WildfireICSDesktopServices
 
         public event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
         public event OperationalGroupEventHandler OperationalGroupChanged;
+        public event OperationalSubGroupEventHandler OperationalSubGroupChanged;
+
 
         private WFIncident _currentIncident;
         public WFIncident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
@@ -91,7 +97,7 @@ namespace WildfireICSDesktopServices
             update.LastUpdatedUTC = DateTime.UtcNow;
             update.CommandName = command;
             update.Data = obj;
-            update.DataEnc = update.Data.XmlSerializeToString();
+            update.DataEnc = JsonSerializer.Serialize(update.Data);
             update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
             update.ProcessedLocally = processed_locally;
             update.MachineID = MachineID;
@@ -441,8 +447,14 @@ namespace WildfireICSDesktopServices
                 UpsertGeneralMessage(((GeneralMessage)obj).Clone(), source);
             }
 
-
-
+            else if (dataClassName.Equals(new OperationalGroup().GetType().Name))
+            {
+                UpsertOperationalGroup(((OperationalGroup)obj).Clone(), source);
+            }
+            else if (dataClassName.Equals(new OperationalSubGroup().GetType().Name))
+            {
+                UpsertOperationalSubGroup(((OperationalSubGroup)obj).Clone(), source);
+            }
         }
 
 
@@ -1630,6 +1642,154 @@ namespace WildfireICSDesktopServices
             }
         }
 
+
+
+        public void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if(CurrentIncident.AllOperationalSubGroups.Any(o=>o.ID == record.ID)) { CurrentIncident.AllOperationalSubGroups = CurrentIncident.AllOperationalSubGroups.Where(o=>o.ID != record.ID).ToList();}
+            CurrentIncident.AllOperationalSubGroups.Add(record);
+            if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "UPSERT", true, false); }
+            CurrentIncident.SetOpGroupDepths(record.OpPeriod);
+            OnOperationalSubGroupChanged(new OperationalSubGroupEventArgs(record));
+
+        }
+        protected virtual void OnOperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        {
+            OperationalSubGroupEventHandler handler = this.OperationalSubGroupChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+
+
+
+        public void UpsertOperationalGroup(OperationalGroup record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+
+
+            if (CurrentIncident.AllOperationalGroups.Any(o => o.ID == record.ID))
+            {
+                CurrentIncident.AllOperationalGroups = CurrentIncident.AllOperationalGroups.Where(o => o.ID != record.ID).ToList();
+            }
+            record.GetOpGroupDepth(CurrentIncident);
+            CurrentIncident.AllOperationalGroups.Add(record);
+
+
+            //Add new entries to the Org Chart if needed
+           // if (record.IsBranchOrDiv)
+           // {
+                if (CurrentIncident.allOrgCharts.Any(o=>o.OpPeriod == record.OpPeriod) && !CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any(o => o.OperationalGroupID == record.ID))
+                {
+                    OrganizationChart CurrentOrgChart = CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod);
+                    //are any of the generic branch thingies available?
+                    Guid potential1 = new Guid("b01ea351-0578-4eb0-b8ca-d319efa74b7c");
+                    Guid potential2 = new Guid("9727f016-aed9-4f34-99db-910a06b97f2e");
+                    Guid potential3 = new Guid("9e75f813-cab4-4a6c-87b7-0fc141f06df9");
+                    ICSRole NewRole = new ICSRole();
+
+
+                   
+                   if (record.GroupType.Equals("Branch"))
+                    {
+                        NewRole = OrgChartTools.getGenericRoleByName("Operations Branch Director");
+                    }
+                    else if (record.GroupType.Equals("Division"))
+                    {
+                        NewRole = OrgChartTools.getGenericRoleByName("Division Supervisor");
+                    }
+                    else if (record.GroupType.Equals("Strike Team"))
+                    {
+                        NewRole = OrgChartTools.getGenericRoleByName("Strike Team Leader");
+                    }
+                    else if (record.GroupType.Equals("Task Force"))
+                    {
+                        NewRole = OrgChartTools.getGenericRoleByName("Task Force Leader");
+                    }
+                    else
+                    {
+                        NewRole.BaseRoleName = "Group Supervisor";
+                        NewRole.RoleName = "Group Supervisor";
+                        NewRole.SectionID = Globals.OpsChiefID;
+
+                    }
+
+                    if (record.GroupType.Equals("Branch") && CurrentOrgChart.ActiveRoles.Any(o => (o.RoleID == potential1 || o.RoleID == potential2 || o.RoleID == potential3) && o.RoleName.Contains("Branch/Division/Group") && o.IndividualID == Guid.Empty))
+                    {
+                        ICSRole toReplace = CurrentOrgChart.ActiveRoles.First(o => (o.RoleID == potential1 || o.RoleID == potential2 || o.RoleID == potential3) && o.RoleName.Contains("Branch/Division/Group") && o.IndividualID == Guid.Empty);
+                        NewRole.RoleID = toReplace.RoleID;
+                        NewRole.PDFFieldName = toReplace.PDFFieldName;
+                        NewRole.PDFTitleName = toReplace.PDFTitleName;
+                        NewRole.ManualSortOrder = toReplace.ManualSortOrder;
+                        NewRole.IncludeReportsToInName = toReplace.IncludeReportsToInName;
+                    }
+
+
+                    NewRole.OperationalGroupID = record.ID;
+                    NewRole.OrganizationalChartID = CurrentOrgChart.OrganizationalChartID;
+                    NewRole.OpPeriod = CurrentOrgChart.OpPeriod;
+                    NewRole.Active = true;
+                    NewRole.ReportsTo = record.ParentID;
+                    NewRole.ReportsToRoleName = CurrentOrgChart.GetRoleByID(record.ParentID, false).RoleName;
+
+                    //if not, make a new one
+                    switch (record.GroupType)
+                    {
+                        case "Branch":
+                            NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
+                            NewRole.IsOpGroupSup = true;
+                            break;
+                        case "Division":
+                            NewRole.RoleName = NewRole.BaseRoleName.Replace("Division", record.ResourceName);
+                            NewRole.IsOpGroupSup = true;
+                            break;
+                        case "Task Force":
+                            NewRole.RoleName = NewRole.BaseRoleName.Replace("Task Force", record.ResourceName);
+                            NewRole.IsOpGroupSup = true;
+                            break;
+                        case "Strike Team":
+                            NewRole.RoleName = NewRole.BaseRoleName.Replace("Strike Team", record.ResourceName);
+                            NewRole.IsOpGroupSup = true;
+                            break;
+                        default:
+                            NewRole.RoleName = record.ResourceName + " Supervisor";
+                            break;
+                    }
+
+                    UpsertICSRole(NewRole);
+                    record.LeaderICSRoleID = NewRole.RoleID; record.LeaderICSRoleName = NewRole.RoleName;
+                }
+
+                if (CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == record.OpPeriod) &&  CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any(o => o.OperationalGroupID == record.ID) && CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.First(o => o.OperationalGroupID == record.ID).IndividualID != record.LeaderID)
+                {
+                    ICSRole role = CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.First(o => o.OperationalGroupID == record.ID);
+                    if (CurrentIncident.TaskTeamMembers.Any(o => o.PersonID == record.LeaderID))
+                    {
+                        Personnel per = CurrentIncident.TaskTeamMembers.First(o => o.PersonID == record.LeaderID);
+                        role.teamMember = per.Clone();
+                        role.IndividualID = record.LeaderID;
+                        role.IndividualName = record.LeaderName;
+                        UpsertICSRole(role);
+                    }
+                }
+           // }
+            CurrentIncident.SetOpGroupDepths(record.OpPeriod);
+
+            if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "UPSERT", true, false); }
+            OnOperationalGroupChanged(new OperationalGroupEventArgs(record));
+        }
+        protected virtual void OnOperationalGroupChanged(OperationalGroupEventArgs e)
+        {
+            OperationalGroupEventHandler handler = this.OperationalGroupChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+
+
         public void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local")
         {
             throw new NotImplementedException();
@@ -1716,10 +1876,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-        public void UpsertOperationalGroup(OperationalGroup record, string source = "local")
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 
 }

@@ -39,7 +39,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtCategoryKindCapacity = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.txtFeatures = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,6 +50,11 @@
             this.txtLicenseOrID = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.txtType = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtKind = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,6 +72,11 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtType);
+            this.splitContainer1.Panel1.Controls.Add(this.label15);
+            this.splitContainer1.Panel1.Controls.Add(this.txtKind);
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            this.splitContainer1.Panel1.Controls.Add(this.label9);
             this.splitContainer1.Panel1.Controls.Add(this.txtOrderRequestNo);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.txtIncidentIDNo);
@@ -78,7 +87,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.txtCategoryKindCapacity);
             this.splitContainer1.Panel1.Controls.Add(this.label12);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.txtNotes);
             this.splitContainer1.Panel1.Controls.Add(this.txtFeatures);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
@@ -93,15 +101,15 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(812, 483);
-            this.splitContainer1.SplitterDistance = 416;
+            this.splitContainer1.Size = new System.Drawing.Size(812, 536);
+            this.splitContainer1.SplitterDistance = 469;
             this.splitContainer1.TabIndex = 0;
             // 
             // txtOrderRequestNo
             // 
             this.txtOrderRequestNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOrderRequestNo.Location = new System.Drawing.Point(209, 14);
+            this.txtOrderRequestNo.Location = new System.Drawing.Point(212, 14);
             this.txtOrderRequestNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOrderRequestNo.Name = "txtOrderRequestNo";
             this.txtOrderRequestNo.Size = new System.Drawing.Size(588, 29);
@@ -121,7 +129,7 @@
             // 
             this.txtIncidentIDNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtIncidentIDNo.Location = new System.Drawing.Point(209, 53);
+            this.txtIncidentIDNo.Location = new System.Drawing.Point(212, 53);
             this.txtIncidentIDNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtIncidentIDNo.Name = "txtIncidentIDNo";
             this.txtIncidentIDNo.Size = new System.Drawing.Size(588, 29);
@@ -150,7 +158,7 @@
             // txtMake
             // 
             this.txtMake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMake.Location = new System.Drawing.Point(527, 92);
+            this.txtMake.Location = new System.Drawing.Point(530, 92);
             this.txtMake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtMake.Name = "txtMake";
             this.txtMake.Size = new System.Drawing.Size(270, 29);
@@ -161,7 +169,7 @@
             // 
             this.txtClassification.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtClassification.Location = new System.Drawing.Point(209, 92);
+            this.txtClassification.Location = new System.Drawing.Point(212, 92);
             this.txtClassification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtClassification.Name = "txtClassification";
             this.txtClassification.Size = new System.Drawing.Size(233, 29);
@@ -181,7 +189,7 @@
             // 
             this.txtCategoryKindCapacity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCategoryKindCapacity.Location = new System.Drawing.Point(209, 131);
+            this.txtCategoryKindCapacity.Location = new System.Drawing.Point(212, 131);
             this.txtCategoryKindCapacity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCategoryKindCapacity.Multiline = true;
             this.txtCategoryKindCapacity.Name = "txtCategoryKindCapacity";
@@ -192,33 +200,24 @@
             // 
             // label12
             // 
-            this.label12.Location = new System.Drawing.Point(12, 340);
+            this.label12.Location = new System.Drawing.Point(12, 379);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(190, 24);
             this.label12.TabIndex = 129;
             this.label12.Text = "Other Notes";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(12, 131);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(190, 60);
-            this.label4.TabIndex = 121;
-            this.label4.Text = "Category/Kind/Type, Capacity, or Size";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // txtNotes
             // 
             this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNotes.Location = new System.Drawing.Point(209, 337);
+            this.txtNotes.Location = new System.Drawing.Point(212, 376);
             this.txtNotes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNotes.Size = new System.Drawing.Size(588, 74);
+            this.txtNotes.Size = new System.Drawing.Size(588, 88);
             this.txtNotes.TabIndex = 117;
             this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
             // 
@@ -226,7 +225,7 @@
             // 
             this.txtFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFeatures.Location = new System.Drawing.Point(209, 201);
+            this.txtFeatures.Location = new System.Drawing.Point(212, 240);
             this.txtFeatures.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFeatures.Multiline = true;
             this.txtFeatures.Name = "txtFeatures";
@@ -237,7 +236,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(12, 201);
+            this.label5.Location = new System.Drawing.Point(12, 240);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(190, 24);
             this.label5.TabIndex = 122;
@@ -248,7 +247,7 @@
             // 
             this.txtAgencyOrOwner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAgencyOrOwner.Location = new System.Drawing.Point(209, 259);
+            this.txtAgencyOrOwner.Location = new System.Drawing.Point(212, 298);
             this.txtAgencyOrOwner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAgencyOrOwner.Name = "txtAgencyOrOwner";
             this.txtAgencyOrOwner.Size = new System.Drawing.Size(177, 29);
@@ -257,7 +256,7 @@
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(12, 262);
+            this.label6.Location = new System.Drawing.Point(12, 301);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(190, 24);
             this.label6.TabIndex = 123;
@@ -267,7 +266,7 @@
             // txtOperatorName
             // 
             this.txtOperatorName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOperatorName.Location = new System.Drawing.Point(584, 259);
+            this.txtOperatorName.Location = new System.Drawing.Point(587, 298);
             this.txtOperatorName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOperatorName.Name = "txtOperatorName";
             this.txtOperatorName.Size = new System.Drawing.Size(213, 29);
@@ -276,7 +275,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(12, 301);
+            this.label8.Location = new System.Drawing.Point(12, 340);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(190, 24);
             this.label8.TabIndex = 125;
@@ -286,7 +285,7 @@
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.Location = new System.Drawing.Point(393, 262);
+            this.label7.Location = new System.Drawing.Point(393, 301);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(184, 24);
             this.label7.TabIndex = 124;
@@ -297,7 +296,7 @@
             // 
             this.txtLicenseOrID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLicenseOrID.Location = new System.Drawing.Point(209, 298);
+            this.txtLicenseOrID.Location = new System.Drawing.Point(212, 337);
             this.txtLicenseOrID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLicenseOrID.Name = "txtLicenseOrID";
             this.txtLicenseOrID.Size = new System.Drawing.Size(588, 29);
@@ -334,12 +333,57 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // txtType
+            // 
+            this.txtType.Location = new System.Drawing.Point(528, 201);
+            this.txtType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtType.Name = "txtType";
+            this.txtType.Size = new System.Drawing.Size(272, 29);
+            this.txtType.TabIndex = 132;
+            this.txtType.TextChanged += new System.EventHandler(this.txtType_TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(440, 204);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(78, 24);
+            this.label15.TabIndex = 135;
+            this.label15.Text = "Type";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtKind
+            // 
+            this.txtKind.Location = new System.Drawing.Point(212, 198);
+            this.txtKind.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtKind.Name = "txtKind";
+            this.txtKind.Size = new System.Drawing.Size(221, 29);
+            this.txtKind.TabIndex = 131;
+            this.txtKind.TextChanged += new System.EventHandler(this.txtKind_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(-13, 201);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(218, 24);
+            this.label2.TabIndex = 134;
+            this.label2.Text = "Kind";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(-4, 131);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(218, 60);
+            this.label9.TabIndex = 133;
+            this.label9.Text = "Category, Capacity, Size";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // EditSavedVehicleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(812, 483);
+            this.ClientSize = new System.Drawing.Size(812, 536);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -372,7 +416,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCategoryKindCapacity;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.TextBox txtFeatures;
         private System.Windows.Forms.Label label5;
@@ -384,5 +427,10 @@
         private System.Windows.Forms.TextBox txtLicenseOrID;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtType;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtKind;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label9;
     }
 }

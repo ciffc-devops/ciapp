@@ -79,6 +79,8 @@ namespace Wildfire_ICS_Assist
                 txtLicenseOrID.Text = CurrentVehicle.LicenseOrID;
                 txtIncidentAssignment.Text = CurrentVehicle.IncidentAssignment;
                 txtNotes.Text = CurrentVehicle.Notes;
+                txtKind.Text = CurrentVehicle.Kind;
+                txtType.Text = CurrentVehicle.Type;
                 if (CurrentVehicle.StartTime >= datStartTime.MinDate) { datStartTime.Value = CurrentVehicle.StartTime; }
                 else { datStartTime.Value = datStartTime.MinDate; }
                 if (CurrentVehicle.MustBeOutTime >= datMustBeOutTime.MinDate) { datMustBeOutTime.Value = CurrentVehicle.MustBeOutTime; }
@@ -103,6 +105,8 @@ namespace Wildfire_ICS_Assist
             CurrentVehicle.Notes = txtNotes.Text;
             CurrentVehicle.StartTime = datStartTime.Value;
             CurrentVehicle.MustBeOutTime = datMustBeOutTime.Value;
+            CurrentVehicle.Kind = txtKind.Text; 
+            CurrentVehicle.Type = txtType.Text;
 
         }
 
@@ -164,6 +168,11 @@ namespace Wildfire_ICS_Assist
         }
 
         private void txtOrderRequestNo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCategoryKindCapacity_TextChanged(object sender, EventArgs e)
         {
 
         }

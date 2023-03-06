@@ -12,7 +12,7 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [Serializable]
     [ProtoContract]
-    public class Personnel : IEquatable<Personnel>, ICloneable
+    public class Personnel : IncidentResource, IEquatable<Personnel>, ICloneable
     {
         public Personnel()
         {
@@ -27,8 +27,6 @@ namespace WF_ICS_ClassLibrary.Models
             CurrentStatus = null;
         }
 
-        [ProtoMember(1)] private Guid _PersonID;
-        [ProtoMember(2)] private string _Name;
         [ProtoMember(3)] private string _Group;
         [ProtoMember(4)] private string _Callsign;
         [ProtoMember(5)] private string _Phone;
@@ -49,8 +47,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(16)] private bool _signedIn;
         [ProtoMember(17)] private Guid _organizationID;
         [ProtoMember(18)] private Guid _userID;
-        [ProtoMember(19)] private bool _memberActive;
-        [ProtoMember(20)] private DateTime _lastUpdatedUTC;
+
         [ProtoMember(21)] private string _Email;
         [ProtoMember(22)] private Guid _CreatedByOrgID;
         [ProtoMember(23)] private string _Address;
@@ -65,9 +62,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(34)] private bool _NoGluten;
         [ProtoMember(35)] private bool _AnyDietary;
 
-        public Guid PersonID { get => _PersonID; set => _PersonID = value; }
+        public Guid PersonID { get => ID; set => ID = value; }
 
-        public string Name { get => _Name; set => _Name = value; }
+        public string Name { get => ResourceName; set => ResourceName = value; }
 
         public string Group { get => _Group; set => _Group = value; } //Use OrganizationName for this value
         public string NameWithAgency { get
@@ -104,8 +101,7 @@ namespace WF_ICS_ClassLibrary.Models
         public bool SignedInToTask { get { return _signedIn; } set { _signedIn = value; } }
         public Guid OrganizationID { get => _organizationID; set => _organizationID = value; }
         public Guid UserID { get => _userID; set => _userID = value; }
-        public bool MemberActive { get => _memberActive; set => _memberActive = value; }
-        public DateTime LastUpdatedUTC { get => _lastUpdatedUTC; set => _lastUpdatedUTC = value; }
+        public bool MemberActive { get => Active; set => Active = value; }
         public string Email { get => _Email; set => _Email = value; }
         public Guid CreatedByOrgID { get => _CreatedByOrgID; set => _CreatedByOrgID = value; } //used when a team creates members from outside their group for a task.
         public string Address { get => _Address; set => _Address = value; }
@@ -408,6 +404,10 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(17)] private DateTime _FirstDayOnIncident;
         [ProtoMember(18)] private Guid _InitialIncidentRoleID;
         [ProtoMember(19)] private string _InitialRoleName;
+        [ProtoMember(20)] private string _CheckInLocation;
+        [ProtoMember(20)] private string _AdditionalInfo;
+        [ProtoMember(21)] private int _PersonalIncidentNumber;
+
 
         [ProtoMember(99)] private decimal _KMs;
 
@@ -442,6 +442,10 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime LastDayOnIncident { get => _LastDayOnIncident; set => _LastDayOnIncident = value; }
         public DateTime LastDayOfTravel { get => _LastDayOfTravel; set => _LastDayOfTravel = value; }
         public DateTime FirstDayOnIncident { get => _FirstDayOnIncident; set => _FirstDayOnIncident = value; }
+
+        public string CheckInLocation { get => _CheckInLocation; set => _CheckInLocation = value; }
+        public string AdditionalInfo { get => _AdditionalInfo; set => _AdditionalInfo = value; }
+        public int PersonalIncidentNumber { get => _PersonalIncidentNumber; set => _PersonalIncidentNumber = value; }
 
         public CheckInRecord Clone()
         {

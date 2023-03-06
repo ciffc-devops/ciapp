@@ -34,22 +34,6 @@
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.cboAssignmentTemplates = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.cpPersonnel = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.numPersonnelRequired = new System.Windows.Forms.NumericUpDown();
-            this.cboPerson10 = new System.Windows.Forms.ComboBox();
-            this.cboPerson8 = new System.Windows.Forms.ComboBox();
-            this.cboPerson6 = new System.Windows.Forms.ComboBox();
-            this.cboPerson4 = new System.Windows.Forms.ComboBox();
-            this.cboPerson2 = new System.Windows.Forms.ComboBox();
-            this.cboPerson11 = new System.Windows.Forms.ComboBox();
-            this.cboPerson9 = new System.Windows.Forms.ComboBox();
-            this.cboPerson7 = new System.Windows.Forms.ComboBox();
-            this.cboPerson5 = new System.Windows.Forms.ComboBox();
-            this.cboPerson3 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cboPerson1 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtContact = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -68,6 +52,22 @@
             this.cboComms2 = new System.Windows.Forms.ComboBox();
             this.cboComms1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cpPersonnel = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numPersonnelRequired = new System.Windows.Forms.NumericUpDown();
+            this.cboPerson10 = new System.Windows.Forms.ComboBox();
+            this.cboPerson8 = new System.Windows.Forms.ComboBox();
+            this.cboPerson6 = new System.Windows.Forms.ComboBox();
+            this.cboPerson4 = new System.Windows.Forms.ComboBox();
+            this.cboPerson2 = new System.Windows.Forms.ComboBox();
+            this.cboPerson11 = new System.Windows.Forms.ComboBox();
+            this.cboPerson9 = new System.Windows.Forms.ComboBox();
+            this.cboPerson7 = new System.Windows.Forms.ComboBox();
+            this.cboPerson5 = new System.Windows.Forms.ComboBox();
+            this.cboPerson3 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboPerson1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnSaveAndPrint = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -79,10 +79,10 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.cpPersonnel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPersonnelRequired)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAssignmentNumber)).BeginInit();
             this.cpComms.SuspendLayout();
+            this.cpPersonnel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPersonnelRequired)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -129,6 +129,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.cpComms);
             this.splitContainer2.Panel2.Controls.Add(this.txtContact);
             this.splitContainer2.Panel2.Controls.Add(this.label9);
             this.splitContainer2.Panel2.Controls.Add(this.label8);
@@ -141,7 +142,6 @@
             this.splitContainer2.Panel2.Controls.Add(this.cboReportsTo);
             this.splitContainer2.Panel2.Controls.Add(this.label1);
             this.splitContainer2.Panel2.Controls.Add(this.cpEquipment);
-            this.splitContainer2.Panel2.Controls.Add(this.cpComms);
             this.splitContainer2.Panel2.Controls.Add(this.cpPersonnel);
             this.splitContainer2.Size = new System.Drawing.Size(1175, 627);
             this.splitContainer2.SplitterDistance = 55;
@@ -201,6 +201,226 @@
             this.label14.Size = new System.Drawing.Size(202, 24);
             this.label14.TabIndex = 0;
             this.label14.Text = "Assignment Templates";
+            // 
+            // txtContact
+            // 
+            this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContact.Location = new System.Drawing.Point(236, 153);
+            this.txtContact.Name = "txtContact";
+            this.txtContact.Size = new System.Drawing.Size(514, 29);
+            this.txtContact.TabIndex = 82;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(4, 151);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(218, 24);
+            this.label9.TabIndex = 81;
+            this.label9.Text = "Contact";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(232, 125);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(512, 17);
+            this.label8.TabIndex = 80;
+            this.label8.Text = "Brief summary may include: Reporting location, special equipment, remarks, etc.";
+            // 
+            // txtBriefSummary
+            // 
+            this.txtBriefSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBriefSummary.Location = new System.Drawing.Point(235, 89);
+            this.txtBriefSummary.Name = "txtBriefSummary";
+            this.txtBriefSummary.Size = new System.Drawing.Size(514, 29);
+            this.txtBriefSummary.TabIndex = 79;
+            this.txtBriefSummary.TextChanged += new System.EventHandler(this.txtBriefSummary_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(3, 87);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(218, 24);
+            this.label7.TabIndex = 78;
+            this.label7.Text = "Brief Summary";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnSetToNextAssignmentNumber
+            // 
+            this.btnSetToNextAssignmentNumber.Location = new System.Drawing.Point(362, 43);
+            this.btnSetToNextAssignmentNumber.Name = "btnSetToNextAssignmentNumber";
+            this.btnSetToNextAssignmentNumber.Size = new System.Drawing.Size(192, 38);
+            this.btnSetToNextAssignmentNumber.TabIndex = 77;
+            this.btnSetToNextAssignmentNumber.Text = "Set to next available";
+            this.btnSetToNextAssignmentNumber.UseVisualStyleBackColor = true;
+            this.btnSetToNextAssignmentNumber.Click += new System.EventHandler(this.btnSetToNextAssignmentNumber_Click);
+            // 
+            // editTeamAssignmentTemplateControl1
+            // 
+            this.editTeamAssignmentTemplateControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editTeamAssignmentTemplateControl1.BackColor = System.Drawing.Color.Transparent;
+            this.editTeamAssignmentTemplateControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editTeamAssignmentTemplateControl1.Location = new System.Drawing.Point(37, 191);
+            this.editTeamAssignmentTemplateControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.editTeamAssignmentTemplateControl1.Name = "editTeamAssignmentTemplateControl1";
+            this.editTeamAssignmentTemplateControl1.selectedAssignment = null;
+            this.editTeamAssignmentTemplateControl1.Size = new System.Drawing.Size(712, 356);
+            this.editTeamAssignmentTemplateControl1.TabIndex = 76;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(3, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(218, 24);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "Assignment Number*";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numAssignmentNumber
+            // 
+            this.numAssignmentNumber.Location = new System.Drawing.Point(236, 48);
+            this.numAssignmentNumber.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numAssignmentNumber.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numAssignmentNumber.Name = "numAssignmentNumber";
+            this.numAssignmentNumber.Size = new System.Drawing.Size(120, 29);
+            this.numAssignmentNumber.TabIndex = 67;
+            this.numAssignmentNumber.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numAssignmentNumber.Leave += new System.EventHandler(this.numAssignmentNumber_Leave);
+            // 
+            // cboReportsTo
+            // 
+            this.cboReportsTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboReportsTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboReportsTo.FormattingEnabled = true;
+            this.cboReportsTo.Location = new System.Drawing.Point(235, 5);
+            this.cboReportsTo.Name = "cboReportsTo";
+            this.cboReportsTo.Size = new System.Drawing.Size(514, 32);
+            this.cboReportsTo.TabIndex = 66;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(11, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(218, 24);
+            this.label1.TabIndex = 65;
+            this.label1.Text = "Reports To";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cpEquipment
+            // 
+            this.cpEquipment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cpEquipment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpEquipment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpEquipment.CollapsedHeight = 40;
+            this.cpEquipment.CollapsedWidth = 400;
+            this.cpEquipment.CollapseLeft = false;
+            this.cpEquipment.CurrentlyCollapsed = true;
+            this.cpEquipment.ExpandedHeight = 300;
+            this.cpEquipment.ExpandedWidth = 485;
+            this.cpEquipment.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpEquipment.Location = new System.Drawing.Point(766, 57);
+            this.cpEquipment.Margin = new System.Windows.Forms.Padding(6);
+            this.cpEquipment.Name = "cpEquipment";
+            this.cpEquipment.Size = new System.Drawing.Size(400, 40);
+            this.cpEquipment.TabIndex = 73;
+            this.cpEquipment.TitleText = "Equipment & Vehicles";
+            // 
+            // cpComms
+            // 
+            this.cpComms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cpComms.BackColor = System.Drawing.Color.White;
+            this.cpComms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpComms.CollapsedHeight = 40;
+            this.cpComms.CollapsedWidth = 400;
+            this.cpComms.CollapseLeft = false;
+            this.cpComms.Controls.Add(this.cboComms4);
+            this.cpComms.Controls.Add(this.cboComms3);
+            this.cpComms.Controls.Add(this.cboComms2);
+            this.cpComms.Controls.Add(this.cboComms1);
+            this.cpComms.Controls.Add(this.label3);
+            this.cpComms.CurrentlyCollapsed = false;
+            this.cpComms.ExpandedHeight = 259;
+            this.cpComms.ExpandedWidth = 485;
+            this.cpComms.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpComms.Location = new System.Drawing.Point(681, 109);
+            this.cpComms.Margin = new System.Windows.Forms.Padding(6);
+            this.cpComms.Name = "cpComms";
+            this.cpComms.Size = new System.Drawing.Size(485, 259);
+            this.cpComms.TabIndex = 74;
+            this.cpComms.TitleText = "Communications Summary";
+            // 
+            // cboComms4
+            // 
+            this.cboComms4.DisplayMember = "SystemIDChannelFunction";
+            this.cboComms4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboComms4.FormattingEnabled = true;
+            this.cboComms4.Location = new System.Drawing.Point(15, 209);
+            this.cboComms4.Name = "cboComms4";
+            this.cboComms4.Size = new System.Drawing.Size(454, 32);
+            this.cboComms4.TabIndex = 37;
+            this.cboComms4.ValueMember = "ItemID";
+            // 
+            // cboComms3
+            // 
+            this.cboComms3.DisplayMember = "SystemIDChannelFunction";
+            this.cboComms3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboComms3.FormattingEnabled = true;
+            this.cboComms3.Location = new System.Drawing.Point(15, 171);
+            this.cboComms3.Name = "cboComms3";
+            this.cboComms3.Size = new System.Drawing.Size(454, 32);
+            this.cboComms3.TabIndex = 36;
+            this.cboComms3.ValueMember = "ItemID";
+            // 
+            // cboComms2
+            // 
+            this.cboComms2.DisplayMember = "SystemIDChannelFunction";
+            this.cboComms2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboComms2.FormattingEnabled = true;
+            this.cboComms2.Location = new System.Drawing.Point(15, 133);
+            this.cboComms2.Name = "cboComms2";
+            this.cboComms2.Size = new System.Drawing.Size(454, 32);
+            this.cboComms2.TabIndex = 35;
+            this.cboComms2.ValueMember = "ItemID";
+            // 
+            // cboComms1
+            // 
+            this.cboComms1.DisplayMember = "SystemIDChannelFunction";
+            this.cboComms1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboComms1.FormattingEnabled = true;
+            this.cboComms1.Location = new System.Drawing.Point(15, 95);
+            this.cboComms1.Name = "cboComms1";
+            this.cboComms1.Size = new System.Drawing.Size(454, 32);
+            this.cboComms1.TabIndex = 34;
+            this.cboComms1.ValueMember = "ItemID";
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(457, 42);
+            this.label3.TabIndex = 33;
+            this.label3.Text = "Set communications systems to be shown on the assignment form\r\nTo add more, use t" +
+    "he Communications Plan tool";
             // 
             // cpPersonnel
             // 
@@ -388,226 +608,6 @@
             this.label4.Text = "Set the personnel assigned to this team below.  To add additional people, use the" +
     " Check-In tool in the program.";
             // 
-            // txtContact
-            // 
-            this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContact.Location = new System.Drawing.Point(236, 153);
-            this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(514, 29);
-            this.txtContact.TabIndex = 82;
-            // 
-            // label9
-            // 
-            this.label9.Location = new System.Drawing.Point(4, 151);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(218, 24);
-            this.label9.TabIndex = 81;
-            this.label9.Text = "Contact";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(232, 125);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(512, 17);
-            this.label8.TabIndex = 80;
-            this.label8.Text = "Brief summary may include: Reporting location, special equipment, remarks, etc.";
-            // 
-            // txtBriefSummary
-            // 
-            this.txtBriefSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBriefSummary.Location = new System.Drawing.Point(235, 89);
-            this.txtBriefSummary.Name = "txtBriefSummary";
-            this.txtBriefSummary.Size = new System.Drawing.Size(514, 29);
-            this.txtBriefSummary.TabIndex = 79;
-            this.txtBriefSummary.TextChanged += new System.EventHandler(this.txtBriefSummary_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(3, 87);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(218, 24);
-            this.label7.TabIndex = 78;
-            this.label7.Text = "Brief Summary";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnSetToNextAssignmentNumber
-            // 
-            this.btnSetToNextAssignmentNumber.Location = new System.Drawing.Point(362, 43);
-            this.btnSetToNextAssignmentNumber.Name = "btnSetToNextAssignmentNumber";
-            this.btnSetToNextAssignmentNumber.Size = new System.Drawing.Size(192, 38);
-            this.btnSetToNextAssignmentNumber.TabIndex = 77;
-            this.btnSetToNextAssignmentNumber.Text = "Set to next available";
-            this.btnSetToNextAssignmentNumber.UseVisualStyleBackColor = true;
-            this.btnSetToNextAssignmentNumber.Click += new System.EventHandler(this.btnSetToNextAssignmentNumber_Click);
-            // 
-            // editTeamAssignmentTemplateControl1
-            // 
-            this.editTeamAssignmentTemplateControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.editTeamAssignmentTemplateControl1.BackColor = System.Drawing.Color.Transparent;
-            this.editTeamAssignmentTemplateControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editTeamAssignmentTemplateControl1.Location = new System.Drawing.Point(37, 191);
-            this.editTeamAssignmentTemplateControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.editTeamAssignmentTemplateControl1.Name = "editTeamAssignmentTemplateControl1";
-            this.editTeamAssignmentTemplateControl1.selectedAssignment = null;
-            this.editTeamAssignmentTemplateControl1.Size = new System.Drawing.Size(712, 356);
-            this.editTeamAssignmentTemplateControl1.TabIndex = 76;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(3, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(218, 24);
-            this.label2.TabIndex = 75;
-            this.label2.Text = "Assignment Number*";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numAssignmentNumber
-            // 
-            this.numAssignmentNumber.Location = new System.Drawing.Point(236, 48);
-            this.numAssignmentNumber.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numAssignmentNumber.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numAssignmentNumber.Name = "numAssignmentNumber";
-            this.numAssignmentNumber.Size = new System.Drawing.Size(120, 29);
-            this.numAssignmentNumber.TabIndex = 67;
-            this.numAssignmentNumber.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numAssignmentNumber.Leave += new System.EventHandler(this.numAssignmentNumber_Leave);
-            // 
-            // cboReportsTo
-            // 
-            this.cboReportsTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboReportsTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboReportsTo.FormattingEnabled = true;
-            this.cboReportsTo.Location = new System.Drawing.Point(235, 5);
-            this.cboReportsTo.Name = "cboReportsTo";
-            this.cboReportsTo.Size = new System.Drawing.Size(514, 32);
-            this.cboReportsTo.TabIndex = 66;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(11, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(218, 24);
-            this.label1.TabIndex = 65;
-            this.label1.Text = "Reports To";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cpEquipment
-            // 
-            this.cpEquipment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cpEquipment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpEquipment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpEquipment.CollapsedHeight = 40;
-            this.cpEquipment.CollapsedWidth = 400;
-            this.cpEquipment.CollapseLeft = false;
-            this.cpEquipment.CurrentlyCollapsed = true;
-            this.cpEquipment.ExpandedHeight = 300;
-            this.cpEquipment.ExpandedWidth = 485;
-            this.cpEquipment.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpEquipment.Location = new System.Drawing.Point(766, 57);
-            this.cpEquipment.Margin = new System.Windows.Forms.Padding(6);
-            this.cpEquipment.Name = "cpEquipment";
-            this.cpEquipment.Size = new System.Drawing.Size(400, 40);
-            this.cpEquipment.TabIndex = 73;
-            this.cpEquipment.TitleText = "Equipment & Vehicles";
-            // 
-            // cpComms
-            // 
-            this.cpComms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cpComms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpComms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpComms.CollapsedHeight = 40;
-            this.cpComms.CollapsedWidth = 400;
-            this.cpComms.CollapseLeft = false;
-            this.cpComms.Controls.Add(this.cboComms4);
-            this.cpComms.Controls.Add(this.cboComms3);
-            this.cpComms.Controls.Add(this.cboComms2);
-            this.cpComms.Controls.Add(this.cboComms1);
-            this.cpComms.Controls.Add(this.label3);
-            this.cpComms.CurrentlyCollapsed = true;
-            this.cpComms.ExpandedHeight = 259;
-            this.cpComms.ExpandedWidth = 485;
-            this.cpComms.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpComms.Location = new System.Drawing.Point(766, 109);
-            this.cpComms.Margin = new System.Windows.Forms.Padding(6);
-            this.cpComms.Name = "cpComms";
-            this.cpComms.Size = new System.Drawing.Size(400, 40);
-            this.cpComms.TabIndex = 74;
-            this.cpComms.TitleText = "Communications Summary";
-            // 
-            // cboComms4
-            // 
-            this.cboComms4.DisplayMember = "SystemIDChannelFunction";
-            this.cboComms4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboComms4.FormattingEnabled = true;
-            this.cboComms4.Location = new System.Drawing.Point(15, 209);
-            this.cboComms4.Name = "cboComms4";
-            this.cboComms4.Size = new System.Drawing.Size(454, 32);
-            this.cboComms4.TabIndex = 37;
-            this.cboComms4.ValueMember = "ItemID";
-            // 
-            // cboComms3
-            // 
-            this.cboComms3.DisplayMember = "SystemIDChannelFunction";
-            this.cboComms3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboComms3.FormattingEnabled = true;
-            this.cboComms3.Location = new System.Drawing.Point(15, 171);
-            this.cboComms3.Name = "cboComms3";
-            this.cboComms3.Size = new System.Drawing.Size(454, 32);
-            this.cboComms3.TabIndex = 36;
-            this.cboComms3.ValueMember = "ItemID";
-            // 
-            // cboComms2
-            // 
-            this.cboComms2.DisplayMember = "SystemIDChannelFunction";
-            this.cboComms2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboComms2.FormattingEnabled = true;
-            this.cboComms2.Location = new System.Drawing.Point(15, 133);
-            this.cboComms2.Name = "cboComms2";
-            this.cboComms2.Size = new System.Drawing.Size(454, 32);
-            this.cboComms2.TabIndex = 35;
-            this.cboComms2.ValueMember = "ItemID";
-            // 
-            // cboComms1
-            // 
-            this.cboComms1.DisplayMember = "SystemIDChannelFunction";
-            this.cboComms1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboComms1.FormattingEnabled = true;
-            this.cboComms1.Location = new System.Drawing.Point(15, 95);
-            this.cboComms1.Name = "cboComms1";
-            this.cboComms1.Size = new System.Drawing.Size(454, 32);
-            this.cboComms1.TabIndex = 34;
-            this.cboComms1.ValueMember = "ItemID";
-            // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(457, 42);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "Set communications systems to be shown on the assignment form\r\nTo add more, use t" +
-    "he Communications Plan tool";
-            // 
             // btnSaveAndPrint
             // 
             this.btnSaveAndPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -681,11 +681,11 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numAssignmentNumber)).EndInit();
+            this.cpComms.ResumeLayout(false);
             this.cpPersonnel.ResumeLayout(false);
             this.cpPersonnel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPersonnelRequired)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAssignmentNumber)).EndInit();
-            this.cpComms.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
