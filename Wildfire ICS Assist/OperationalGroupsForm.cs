@@ -37,7 +37,15 @@ namespace Wildfire_ICS_Assist
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
+                ICSRole selected = null;
+                if (treeOpsChart.SelectedNode != null)
+                {
+
+
+                    selected = (ICSRole)treeOpsChart.SelectedNode.Tag;
+                }
                 PopulateTree();
+                if(selected != null) { SetSelectedNode(selected); }
             }
         }
         private void Program_ICSRoleChangedChanged(ICSRoleEventArgs e)
@@ -45,18 +53,44 @@ namespace Wildfire_ICS_Assist
             if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
                 PopulateTree();
+                SetSelectedNode(e.item);
             }
         }
         private void Program_OrgChartChangedChanged(OrganizationChartEventArgs e)
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
+                ICSRole selected = null;
+                if (treeOpsChart.SelectedNode != null)
+                {
+
+
+                    selected = (ICSRole)treeOpsChart.SelectedNode.Tag;
+                }
                 PopulateTree();
+
+                if (selected != null) { SetSelectedNode(selected); }
             }
         }
 
 
-
+        private void SetSelectedNode(ICSRole selectedRole)
+        {
+            if (selectedRole == null)
+            {
+                treeOpsChart.SelectedNode = treeOpsChart.Nodes[0];
+            }
+            else
+            {
+                TreeNode selectedNode = GetSelectedByRoleID(selectedRole.RoleID);
+                if (selectedNode != null)
+                {
+                    treeOpsChart.SelectedNode = selectedNode;
+                }
+                else { treeOpsChart.SelectedNode = treeOpsChart.Nodes[0]; }
+            }
+            if (treeOpsChart.SelectedNode != null) treeOpsChart.SelectedNode.EnsureVisible();
+        }
 
 
         private void PopulateTree(ICSRole selectedRole = null)
@@ -115,7 +149,7 @@ namespace Wildfire_ICS_Assist
 
         private void AddCurrentChild(Guid parentId, TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == parentId && o.SectionID == Globals.OpsChiefID && o.IsOpGroupSup).ToList();
+            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == parentId && o.SectionID == Globals.OpsChiefID && o.IsOpGroupSup).OrderBy(o=>o.RoleName).ToList();
 
             foreach (var row in rows)
             {

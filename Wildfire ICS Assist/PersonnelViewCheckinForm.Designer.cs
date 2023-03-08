@@ -30,55 +30,47 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lblLastDayTravel = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.lblFirstDayOnIncident = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.lblStartOfTravel = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.lblLastDayOfRest = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.lblDaysToLDW = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblLDW = new System.Windows.Forms.Label();
+            this.lblCheckInTime = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lblIncidentID = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.lblOther = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.lblCheckInLocation = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.chkDinner = new System.Windows.Forms.CheckBox();
+            this.chkLunch = new System.Windows.Forms.CheckBox();
+            this.chkBreakfast = new System.Windows.Forms.CheckBox();
+            this.lblAccomodations = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
             this.lblMethodOfTravel = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.btnEditCheckIn = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
             this.lblDeparturePoint = new System.Windows.Forms.Label();
-            this.lblLDW = new System.Windows.Forms.Label();
-            this.lblCheckInTime = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnViewAssignmentOrRole = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblAssignmentOrRole = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnEditEmergencyContact = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblEmergencyRelationship = new System.Windows.Forms.Label();
-            this.lblEmergencyPhone = new System.Windows.Forms.Label();
-            this.lblEmergencyContact = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnEditIndividual = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblQualifications = new System.Windows.Forms.Label();
-            this.lblHomeBase = new System.Windows.Forms.Label();
-            this.lblEmail = new System.Windows.Forms.Label();
-            this.lblPhone = new System.Windows.Forms.Label();
-            this.lblAgency = new System.Windows.Forms.Label();
-            this.lblProvince = new System.Windows.Forms.Label();
-            this.lblName = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,55 +86,364 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.panel4);
-            this.splitContainer1.Panel1.Controls.Add(this.panel3);
-            this.splitContainer1.Panel1.Controls.Add(this.panel2);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(916, 519);
-            this.splitContainer1.SplitterDistance = 448;
+            this.splitContainer1.Size = new System.Drawing.Size(1443, 782);
+            this.splitContainer1.SplitterDistance = 711;
             this.splitContainer1.TabIndex = 2;
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.lblLastDayTravel);
+            this.panel4.Controls.Add(this.label28);
+            this.panel4.Controls.Add(this.lblFirstDayOnIncident);
+            this.panel4.Controls.Add(this.label26);
+            this.panel4.Controls.Add(this.lblStartOfTravel);
+            this.panel4.Controls.Add(this.label23);
+            this.panel4.Controls.Add(this.lblLastDayOfRest);
+            this.panel4.Controls.Add(this.label14);
             this.panel4.Controls.Add(this.lblDaysToLDW);
+            this.panel4.Controls.Add(this.label11);
+            this.panel4.Controls.Add(this.lblLDW);
+            this.panel4.Controls.Add(this.lblCheckInTime);
+            this.panel4.Controls.Add(this.label16);
+            this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.lblIncidentID);
+            this.panel4.Controls.Add(this.label38);
+            this.panel4.Controls.Add(this.lblOther);
+            this.panel4.Controls.Add(this.label34);
+            this.panel4.Controls.Add(this.lblCheckInLocation);
+            this.panel4.Controls.Add(this.label36);
+            this.panel4.Controls.Add(this.label32);
+            this.panel4.Controls.Add(this.chkDinner);
+            this.panel4.Controls.Add(this.chkLunch);
+            this.panel4.Controls.Add(this.chkBreakfast);
+            this.panel4.Controls.Add(this.lblAccomodations);
+            this.panel4.Controls.Add(this.label31);
+            this.panel4.Controls.Add(this.label29);
             this.panel4.Controls.Add(this.lblMethodOfTravel);
             this.panel4.Controls.Add(this.label25);
             this.panel4.Controls.Add(this.btnEditCheckIn);
-            this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.lblDeparturePoint);
-            this.panel4.Controls.Add(this.lblLDW);
-            this.panel4.Controls.Add(this.lblCheckInTime);
             this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.label16);
-            this.panel4.Controls.Add(this.label17);
-            this.panel4.Location = new System.Drawing.Point(594, 13);
+            this.panel4.Location = new System.Drawing.Point(877, 13);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(310, 427);
+            this.panel4.Size = new System.Drawing.Size(554, 692);
             this.panel4.TabIndex = 172;
+            // 
+            // lblLastDayTravel
+            // 
+            this.lblLastDayTravel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLastDayTravel.Location = new System.Drawing.Point(373, 321);
+            this.lblLastDayTravel.Name = "lblLastDayTravel";
+            this.lblLastDayTravel.Size = new System.Drawing.Size(174, 24);
+            this.lblLastDayTravel.TabIndex = 208;
+            this.lblLastDayTravel.Text = "label1";
+            // 
+            // label28
+            // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(362, 297);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(185, 24);
+            this.label28.TabIndex = 207;
+            this.label28.Text = "Last Day of Travel";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblFirstDayOnIncident
+            // 
+            this.lblFirstDayOnIncident.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFirstDayOnIncident.Location = new System.Drawing.Point(373, 153);
+            this.lblFirstDayOnIncident.Name = "lblFirstDayOnIncident";
+            this.lblFirstDayOnIncident.Size = new System.Drawing.Size(174, 24);
+            this.lblFirstDayOnIncident.TabIndex = 206;
+            this.lblFirstDayOnIncident.Text = "label1";
+            // 
+            // label26
+            // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(362, 129);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(185, 24);
+            this.label26.TabIndex = 205;
+            this.label26.Text = "First Day on Incident";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblStartOfTravel
+            // 
+            this.lblStartOfTravel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStartOfTravel.Location = new System.Drawing.Point(373, 105);
+            this.lblStartOfTravel.Name = "lblStartOfTravel";
+            this.lblStartOfTravel.Size = new System.Drawing.Size(174, 24);
+            this.lblStartOfTravel.TabIndex = 204;
+            this.lblStartOfTravel.Text = "label1";
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(362, 81);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(185, 24);
+            this.label23.TabIndex = 203;
+            this.label23.Text = "Start of Travel";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLastDayOfRest
+            // 
+            this.lblLastDayOfRest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLastDayOfRest.Location = new System.Drawing.Point(373, 57);
+            this.lblLastDayOfRest.Name = "lblLastDayOfRest";
+            this.lblLastDayOfRest.Size = new System.Drawing.Size(174, 24);
+            this.lblLastDayOfRest.TabIndex = 202;
+            this.lblLastDayOfRest.Text = "label1";
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(362, 33);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(185, 24);
+            this.label14.TabIndex = 201;
+            this.label14.Text = "Last Day of Rest";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblDaysToLDW
             // 
             this.lblDaysToLDW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDaysToLDW.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDaysToLDW.Location = new System.Drawing.Point(23, 127);
+            this.lblDaysToLDW.Location = new System.Drawing.Point(373, 275);
             this.lblDaysToLDW.Name = "lblDaysToLDW";
-            this.lblDaysToLDW.Size = new System.Drawing.Size(279, 26);
-            this.lblDaysToLDW.TabIndex = 173;
+            this.lblDaysToLDW.Size = new System.Drawing.Size(174, 26);
+            this.lblDaysToLDW.TabIndex = 200;
             this.lblDaysToLDW.Text = "label10";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(361, 2);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(149, 29);
+            this.label11.TabIndex = 199;
+            this.label11.Text = "Timeline";
+            // 
+            // lblLDW
+            // 
+            this.lblLDW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLDW.Location = new System.Drawing.Point(373, 249);
+            this.lblLDW.Name = "lblLDW";
+            this.lblLDW.Size = new System.Drawing.Size(174, 24);
+            this.lblLDW.TabIndex = 198;
+            this.lblLDW.Text = "label10";
+            // 
+            // lblCheckInTime
+            // 
+            this.lblCheckInTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheckInTime.Location = new System.Drawing.Point(373, 201);
+            this.lblCheckInTime.Name = "lblCheckInTime";
+            this.lblCheckInTime.Size = new System.Drawing.Size(174, 24);
+            this.lblCheckInTime.TabIndex = 197;
+            this.lblCheckInTime.Text = "label1";
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(362, 225);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(185, 24);
+            this.label16.TabIndex = 196;
+            this.label16.Text = "Last Day on Incident";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(362, 177);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(185, 24);
+            this.label17.TabIndex = 195;
+            this.label17.Text = "Check-In Date / Time";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblIncidentID
+            // 
+            this.lblIncidentID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblIncidentID.Location = new System.Drawing.Point(25, 55);
+            this.lblIncidentID.Name = "lblIncidentID";
+            this.lblIncidentID.Size = new System.Drawing.Size(116, 24);
+            this.lblIncidentID.TabIndex = 194;
+            this.lblIncidentID.Text = "label11";
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(2, 31);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(139, 24);
+            this.label38.TabIndex = 193;
+            this.label38.Text = "Incident ID #";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblOther
+            // 
+            this.lblOther.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOther.Location = new System.Drawing.Point(30, 360);
+            this.lblOther.Name = "lblOther";
+            this.lblOther.Size = new System.Drawing.Size(189, 103);
+            this.lblOther.TabIndex = 192;
+            this.lblOther.Text = "label11";
+            // 
+            // label34
+            // 
+            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(7, 336);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(139, 24);
+            this.label34.TabIndex = 191;
+            this.label34.Text = "Other";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblCheckInLocation
+            // 
+            this.lblCheckInLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheckInLocation.Location = new System.Drawing.Point(28, 312);
+            this.lblCheckInLocation.Name = "lblCheckInLocation";
+            this.lblCheckInLocation.Size = new System.Drawing.Size(116, 24);
+            this.lblCheckInLocation.TabIndex = 190;
+            this.lblCheckInLocation.Text = "label11";
+            // 
+            // label36
+            // 
+            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(5, 288);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(139, 24);
+            this.label36.TabIndex = 189;
+            this.label36.Text = "Check-In Location";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label32
+            // 
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(5, 229);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(139, 24);
+            this.label32.TabIndex = 188;
+            this.label32.Text = "Food";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // chkDinner
+            // 
+            this.chkDinner.AutoSize = true;
+            this.chkDinner.Enabled = false;
+            this.chkDinner.Location = new System.Drawing.Point(228, 257);
+            this.chkDinner.Name = "chkDinner";
+            this.chkDinner.Size = new System.Drawing.Size(85, 28);
+            this.chkDinner.TabIndex = 187;
+            this.chkDinner.Text = "Dinner";
+            this.chkDinner.UseVisualStyleBackColor = true;
+            // 
+            // chkLunch
+            // 
+            this.chkLunch.AutoSize = true;
+            this.chkLunch.Enabled = false;
+            this.chkLunch.Location = new System.Drawing.Point(140, 257);
+            this.chkLunch.Name = "chkLunch";
+            this.chkLunch.Size = new System.Drawing.Size(82, 28);
+            this.chkLunch.TabIndex = 186;
+            this.chkLunch.Text = "Lunch";
+            this.chkLunch.UseVisualStyleBackColor = true;
+            // 
+            // chkBreakfast
+            // 
+            this.chkBreakfast.AutoSize = true;
+            this.chkBreakfast.Enabled = false;
+            this.chkBreakfast.Location = new System.Drawing.Point(30, 257);
+            this.chkBreakfast.Name = "chkBreakfast";
+            this.chkBreakfast.Size = new System.Drawing.Size(104, 28);
+            this.chkBreakfast.TabIndex = 185;
+            this.chkBreakfast.Text = "Breakfast";
+            this.chkBreakfast.UseVisualStyleBackColor = true;
+            // 
+            // lblAccomodations
+            // 
+            this.lblAccomodations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAccomodations.Location = new System.Drawing.Point(28, 201);
+            this.lblAccomodations.Name = "lblAccomodations";
+            this.lblAccomodations.Size = new System.Drawing.Size(116, 24);
+            this.lblAccomodations.TabIndex = 184;
+            this.lblAccomodations.Text = "label11";
+            // 
+            // label31
+            // 
+            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(5, 177);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(139, 24);
+            this.label31.TabIndex = 183;
+            this.label31.Text = "Accomodations";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(3, 2);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(241, 29);
+            this.label29.TabIndex = 182;
+            this.label29.Text = "Other Check-In Details";
             // 
             // lblMethodOfTravel
             // 
             this.lblMethodOfTravel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMethodOfTravel.Location = new System.Drawing.Point(26, 225);
+            this.lblMethodOfTravel.Location = new System.Drawing.Point(26, 153);
             this.lblMethodOfTravel.Name = "lblMethodOfTravel";
-            this.lblMethodOfTravel.Size = new System.Drawing.Size(279, 24);
+            this.lblMethodOfTravel.Size = new System.Drawing.Size(116, 24);
             this.lblMethodOfTravel.TabIndex = 172;
             this.lblMethodOfTravel.Text = "label11";
             // 
@@ -151,9 +452,9 @@
             this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(3, 201);
+            this.label25.Location = new System.Drawing.Point(3, 129);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(302, 24);
+            this.label25.Size = new System.Drawing.Size(139, 24);
             this.label25.TabIndex = 171;
             this.label25.Text = "Method of Travel";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -164,7 +465,7 @@
             this.btnEditCheckIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditCheckIn.Location = new System.Drawing.Point(213, 372);
+            this.btnEditCheckIn.Location = new System.Drawing.Point(457, 637);
             this.btnEditCheckIn.Margin = new System.Windows.Forms.Padding(6);
             this.btnEditCheckIn.Name = "btnEditCheckIn";
             this.btnEditCheckIn.Size = new System.Drawing.Size(89, 47);
@@ -174,274 +475,48 @@
             this.btnEditCheckIn.UseVisualStyleBackColor = true;
             this.btnEditCheckIn.Click += new System.EventHandler(this.btnEditCheckIn_Click);
             // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(302, 29);
-            this.label11.TabIndex = 167;
-            this.label11.Text = "Check In Information";
-            // 
             // lblDeparturePoint
             // 
             this.lblDeparturePoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDeparturePoint.Location = new System.Drawing.Point(27, 175);
+            this.lblDeparturePoint.Location = new System.Drawing.Point(27, 103);
             this.lblDeparturePoint.Name = "lblDeparturePoint";
-            this.lblDeparturePoint.Size = new System.Drawing.Size(279, 24);
+            this.lblDeparturePoint.Size = new System.Drawing.Size(116, 24);
             this.lblDeparturePoint.TabIndex = 161;
             this.lblDeparturePoint.Text = "label11";
-            // 
-            // lblLDW
-            // 
-            this.lblLDW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLDW.Location = new System.Drawing.Point(27, 101);
-            this.lblLDW.Name = "lblLDW";
-            this.lblLDW.Size = new System.Drawing.Size(279, 24);
-            this.lblLDW.TabIndex = 160;
-            this.lblLDW.Text = "label10";
-            // 
-            // lblCheckInTime
-            // 
-            this.lblCheckInTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCheckInTime.Location = new System.Drawing.Point(27, 53);
-            this.lblCheckInTime.Name = "lblCheckInTime";
-            this.lblCheckInTime.Size = new System.Drawing.Size(279, 24);
-            this.lblCheckInTime.TabIndex = 159;
-            this.lblCheckInTime.Text = "label1";
             // 
             // label15
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(4, 151);
+            this.label15.Location = new System.Drawing.Point(4, 79);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(302, 24);
+            this.label15.Size = new System.Drawing.Size(139, 24);
             this.label15.TabIndex = 154;
             this.label15.Text = "Departure Point";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(4, 77);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(302, 24);
-            this.label16.TabIndex = 153;
-            this.label16.Text = "Last Day Working";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label17
-            // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(4, 29);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(302, 24);
-            this.label17.TabIndex = 152;
-            this.label17.Text = "Check-In Date / Time";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.btnViewAssignmentOrRole);
-            this.panel3.Controls.Add(this.label10);
-            this.panel3.Controls.Add(this.lblAssignmentOrRole);
-            this.panel3.Location = new System.Drawing.Point(303, 326);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(285, 114);
-            this.panel3.TabIndex = 171;
-            // 
-            // btnViewAssignmentOrRole
-            // 
-            this.btnViewAssignmentOrRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewAssignmentOrRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewAssignmentOrRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
-            this.btnViewAssignmentOrRole.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnViewAssignmentOrRole.Location = new System.Drawing.Point(167, 61);
-            this.btnViewAssignmentOrRole.Margin = new System.Windows.Forms.Padding(6);
-            this.btnViewAssignmentOrRole.Name = "btnViewAssignmentOrRole";
-            this.btnViewAssignmentOrRole.Size = new System.Drawing.Size(110, 47);
-            this.btnViewAssignmentOrRole.TabIndex = 170;
-            this.btnViewAssignmentOrRole.Text = "View";
-            this.btnViewAssignmentOrRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnViewAssignmentOrRole.UseVisualStyleBackColor = true;
-            this.btnViewAssignmentOrRole.Click += new System.EventHandler(this.btnViewAssignmentOrRole_Click);
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(277, 29);
-            this.label10.TabIndex = 167;
-            this.label10.Text = "Assignment / Role";
-            // 
-            // lblAssignmentOrRole
-            // 
-            this.lblAssignmentOrRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAssignmentOrRole.Location = new System.Drawing.Point(26, 34);
-            this.lblAssignmentOrRole.Name = "lblAssignmentOrRole";
-            this.lblAssignmentOrRole.Size = new System.Drawing.Size(254, 24);
-            this.lblAssignmentOrRole.TabIndex = 159;
-            this.lblAssignmentOrRole.Text = "label1";
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.RosyBrown;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.btnEditEmergencyContact);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.lblEmergencyRelationship);
-            this.panel2.Controls.Add(this.lblEmergencyPhone);
-            this.panel2.Controls.Add(this.lblEmergencyContact);
-            this.panel2.Controls.Add(this.label19);
-            this.panel2.Controls.Add(this.label20);
-            this.panel2.Controls.Add(this.label21);
-            this.panel2.Location = new System.Drawing.Point(303, 12);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(285, 225);
-            this.panel2.TabIndex = 166;
-            // 
-            // btnEditEmergencyContact
-            // 
-            this.btnEditEmergencyContact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditEmergencyContact.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditEmergencyContact.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditEmergencyContact.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditEmergencyContact.Location = new System.Drawing.Point(188, 170);
-            this.btnEditEmergencyContact.Margin = new System.Windows.Forms.Padding(6);
-            this.btnEditEmergencyContact.Name = "btnEditEmergencyContact";
-            this.btnEditEmergencyContact.Size = new System.Drawing.Size(89, 47);
-            this.btnEditEmergencyContact.TabIndex = 170;
-            this.btnEditEmergencyContact.Text = "Edit";
-            this.btnEditEmergencyContact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEditEmergencyContact.UseVisualStyleBackColor = true;
-            this.btnEditEmergencyContact.Click += new System.EventHandler(this.btnEditIndividual_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(277, 29);
-            this.label1.TabIndex = 167;
-            this.label1.Text = "Emergency Contact";
-            // 
-            // lblEmergencyRelationship
-            // 
-            this.lblEmergencyRelationship.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEmergencyRelationship.Location = new System.Drawing.Point(27, 149);
-            this.lblEmergencyRelationship.Name = "lblEmergencyRelationship";
-            this.lblEmergencyRelationship.Size = new System.Drawing.Size(254, 24);
-            this.lblEmergencyRelationship.TabIndex = 161;
-            this.lblEmergencyRelationship.Text = "label11";
-            // 
-            // lblEmergencyPhone
-            // 
-            this.lblEmergencyPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEmergencyPhone.Location = new System.Drawing.Point(27, 101);
-            this.lblEmergencyPhone.Name = "lblEmergencyPhone";
-            this.lblEmergencyPhone.Size = new System.Drawing.Size(254, 24);
-            this.lblEmergencyPhone.TabIndex = 160;
-            this.lblEmergencyPhone.Text = "label10";
-            // 
-            // lblEmergencyContact
-            // 
-            this.lblEmergencyContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEmergencyContact.Location = new System.Drawing.Point(27, 53);
-            this.lblEmergencyContact.Name = "lblEmergencyContact";
-            this.lblEmergencyContact.Size = new System.Drawing.Size(254, 24);
-            this.lblEmergencyContact.TabIndex = 159;
-            this.lblEmergencyContact.Text = "label1";
-            // 
-            // label19
-            // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(4, 125);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(277, 24);
-            this.label19.TabIndex = 154;
-            this.label19.Text = "Relationship";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label20
-            // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(4, 77);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(277, 24);
-            this.label20.TabIndex = 153;
-            this.label20.Text = "Contact Number";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label21
-            // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(4, 29);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(277, 24);
-            this.label21.TabIndex = 152;
-            this.label21.Text = "Emergency Contact";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnEditIndividual);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.lblQualifications);
-            this.panel1.Controls.Add(this.lblHomeBase);
-            this.panel1.Controls.Add(this.lblEmail);
-            this.panel1.Controls.Add(this.lblPhone);
-            this.panel1.Controls.Add(this.lblAgency);
-            this.panel1.Controls.Add(this.lblProvince);
-            this.panel1.Controls.Add(this.lblName);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label9);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(285, 428);
+            this.panel1.Size = new System.Drawing.Size(657, 693);
             this.panel1.TabIndex = 152;
             // 
             // btnEditIndividual
             // 
-            this.btnEditIndividual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditIndividual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditIndividual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditIndividual.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditIndividual.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditIndividual.Location = new System.Drawing.Point(188, 374);
+            this.btnEditIndividual.Location = new System.Drawing.Point(560, 638);
             this.btnEditIndividual.Margin = new System.Windows.Forms.Padding(6);
             this.btnEditIndividual.Name = "btnEditIndividual";
             this.btnEditIndividual.Size = new System.Drawing.Size(89, 47);
@@ -458,163 +533,9 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(3, 3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(277, 29);
+            this.label7.Size = new System.Drawing.Size(649, 29);
             this.label7.TabIndex = 168;
             this.label7.Text = "Individual";
-            // 
-            // lblQualifications
-            // 
-            this.lblQualifications.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblQualifications.Location = new System.Drawing.Point(26, 344);
-            this.lblQualifications.Name = "lblQualifications";
-            this.lblQualifications.Size = new System.Drawing.Size(254, 24);
-            this.lblQualifications.TabIndex = 165;
-            this.lblQualifications.Text = "label14";
-            // 
-            // lblHomeBase
-            // 
-            this.lblHomeBase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblHomeBase.Location = new System.Drawing.Point(26, 296);
-            this.lblHomeBase.Name = "lblHomeBase";
-            this.lblHomeBase.Size = new System.Drawing.Size(254, 24);
-            this.lblHomeBase.TabIndex = 164;
-            this.lblHomeBase.Text = "label14";
-            // 
-            // lblEmail
-            // 
-            this.lblEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEmail.Location = new System.Drawing.Point(26, 248);
-            this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(254, 24);
-            this.lblEmail.TabIndex = 163;
-            this.lblEmail.Text = "label13";
-            // 
-            // lblPhone
-            // 
-            this.lblPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPhone.Location = new System.Drawing.Point(26, 200);
-            this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(254, 24);
-            this.lblPhone.TabIndex = 162;
-            this.lblPhone.Text = "label12";
-            // 
-            // lblAgency
-            // 
-            this.lblAgency.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAgency.Location = new System.Drawing.Point(26, 152);
-            this.lblAgency.Name = "lblAgency";
-            this.lblAgency.Size = new System.Drawing.Size(254, 24);
-            this.lblAgency.TabIndex = 161;
-            this.lblAgency.Text = "label11";
-            // 
-            // lblProvince
-            // 
-            this.lblProvince.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblProvince.Location = new System.Drawing.Point(26, 104);
-            this.lblProvince.Name = "lblProvince";
-            this.lblProvince.Size = new System.Drawing.Size(254, 24);
-            this.lblProvince.TabIndex = 160;
-            this.lblProvince.Text = "label10";
-            // 
-            // lblName
-            // 
-            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblName.Location = new System.Drawing.Point(26, 56);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(254, 24);
-            this.lblName.TabIndex = 159;
-            this.lblName.Text = "label1";
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(3, 320);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(277, 24);
-            this.label8.TabIndex = 158;
-            this.label8.Text = "Other Qualifications";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 272);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(277, 24);
-            this.label6.TabIndex = 157;
-            this.label6.Text = "Home Base";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 224);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(277, 24);
-            this.label5.TabIndex = 156;
-            this.label5.Text = "Email";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 176);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(277, 24);
-            this.label4.TabIndex = 155;
-            this.label4.Text = "Phone";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 128);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(277, 24);
-            this.label3.TabIndex = 154;
-            this.label3.Text = "Agency";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(277, 24);
-            this.label2.TabIndex = 153;
-            this.label2.Text = "Province / Territory";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 32);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(277, 24);
-            this.label9.TabIndex = 152;
-            this.label9.Text = "Full Name";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCancel
             // 
@@ -636,7 +557,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(916, 519);
+            this.ClientSize = new System.Drawing.Size(1443, 782);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -652,8 +573,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -662,48 +582,42 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lblEmergencyRelationship;
-        private System.Windows.Forms.Label lblEmergencyPhone;
-        private System.Windows.Forms.Label lblEmergencyContact;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblQualifications;
-        private System.Windows.Forms.Label lblHomeBase;
-        private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.Label lblPhone;
-        private System.Windows.Forms.Label lblAgency;
-        private System.Windows.Forms.Label lblProvince;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnEditEmergencyContact;
         private System.Windows.Forms.Button btnEditIndividual;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnEditCheckIn;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblDeparturePoint;
-        private System.Windows.Forms.Label lblLDW;
-        private System.Windows.Forms.Label lblCheckInTime;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button btnViewAssignmentOrRole;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label lblAssignmentOrRole;
         private System.Windows.Forms.Label lblMethodOfTravel;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label lblAccomodations;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.CheckBox chkDinner;
+        private System.Windows.Forms.CheckBox chkLunch;
+        private System.Windows.Forms.CheckBox chkBreakfast;
+        private System.Windows.Forms.Label lblIncidentID;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label lblOther;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label lblCheckInLocation;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label lblLastDayTravel;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label lblFirstDayOnIncident;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label lblStartOfTravel;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lblLastDayOfRest;
+        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblDaysToLDW;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblLDW;
+        private System.Windows.Forms.Label lblCheckInTime;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
     }
 }

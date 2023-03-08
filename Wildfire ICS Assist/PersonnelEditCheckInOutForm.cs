@@ -27,7 +27,7 @@ namespace Wildfire_ICS_Assist
         private void LoadValues()
         {
             List<Personnel> members = new List<Personnel>();
-            foreach (CheckInRecord record in _records) { if (!members.Any(o => o.PersonID == record.teamMember.PersonID)) { members.Add(record.teamMember); } }
+            foreach (CheckInRecord record in _records) { if (!members.Any(o => o.PersonID == record.ResourceID) && Program.CurrentIncident.IncidentPersonnel.Any(o=>o.ID == record.ResourceID)) { members.Add(Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == record.ResourceID)); } }
 
             if (members.Count == 1)
             {
@@ -49,36 +49,26 @@ namespace Wildfire_ICS_Assist
             //If the values for an item are all the same, use the value. otherwise leave it blank.
             foreach(CheckInRecord record in records)
             {
-                if (record.IsSignIn)
+                if (record.CheckInDate > DateTime.MinValue)
                 {
-                    if (CheckIn == DateTime.MaxValue) { CheckIn = record.SignInTime; }
-                    else if (CheckIn != record.SignInTime) { CheckIn = DateTime.MinValue; }
+                    if (CheckIn == DateTime.MaxValue) { CheckIn = record.CheckInDate; }
+                    else if (CheckIn != record.CheckInDate) { CheckIn = DateTime.MinValue; }
                 }
                 if (LDW == DateTime.MaxValue) { LDW = record.LastDayOnIncident; }
                 else if (LDW != record.LastDayOnIncident) { LDW = DateTime.MinValue; }
 
-                if (!record.IsSignIn)
+                if (record.CheckOutDate < DateTime.MaxValue)
                 {
-                    if (CheckOut == DateTime.MaxValue) { CheckOut = record.SignInTime; }
-                    else if (CheckOut != record.SignInTime) { CheckOut = DateTime.MinValue; }
+                    if (CheckOut == DateTime.MaxValue) { CheckOut = record.CheckOutDate; }
+                    else if (CheckOut != record.CheckOutDate) { CheckOut = DateTime.MinValue; }
                 }
-
-                if (string.IsNullOrEmpty(depart)) { depart = record.DeparturePoint; }
-                else if (!depart.Equals(record.DeparturePoint)) { depart = "VARIED"; }
-
-                if (string.IsNullOrEmpty(method)) { method = record.MethodOfTravel; }
-                else if (!method.Equals(record.MethodOfTravel)) { method = "VARIED"; }
             }
 
             if(CheckIn > DateTime.MinValue && CheckIn < DateTime.MaxValue) { datCheckInTime.Value = CheckIn; }
             if (LDW > DateTime.MinValue && LDW < DateTime.MaxValue) { datLDW.Value = LDW; }
-            if (method != null && !method.Equals("VARIED")) { cboMethodOfTravel.Text = method; }
-            if (depart != null && !depart.Equals("VARIED")) { txtDeparturePoint.Text = depart; }
 
             chkCheckIn.Checked = false;
-            chkDeparturePoint.Checked = false;
             chkLDW.Checked = false;
-            chkMethod.Checked = false;
 
         }
 
@@ -98,29 +88,10 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        private void txtDeparturePoint_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboMethodOfTravel_Leave(object sender, EventArgs e)
-        {
-
-        }
 
         private void datLDW_ValueChanged(object sender, EventArgs e)
         {
             chkLDW.Checked = true;
-        }
-
-        private void txtDeparturePoint_TextChanged(object sender, EventArgs e)
-        {
-            chkDeparturePoint.Checked = true;
-        }
-
-        private void cboMethodOfTravel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            chkMethod.Checked = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -133,14 +104,12 @@ namespace Wildfire_ICS_Assist
         {
             foreach(CheckInRecord record in records)
             {
-                if (chkCheckIn.Checked) { record.SignInTime = datCheckInTime.Value; }
+                if (chkCheckIn.Checked) { record.CheckInDate = datCheckInTime.Value; }
                 if (chkLDW.Checked) { record.LastDayOnIncident = datLDW.Value; }
-                if (chkMethod.Checked) { record.MethodOfTravel = cboMethodOfTravel.Text; }
-                if (chkDeparturePoint.Checked) { record.DeparturePoint = txtDeparturePoint.Text; }
 
-                if(chkCheckIn.Checked || chkLDW.Checked || chkMethod.Checked || chkDeparturePoint.Checked)
+                if(chkCheckIn.Checked || chkLDW.Checked )
                 {
-                    Program.wfIncidentService.UpsertMemberStatus(record);
+                    Program.wfIncidentService.UpsertCheckInRecord(record);
                 }
             }
             this.DialogResult = DialogResult.OK;

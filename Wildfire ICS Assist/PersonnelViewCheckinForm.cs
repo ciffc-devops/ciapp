@@ -26,11 +26,11 @@ namespace Wildfire_ICS_Assist
 
         private void Program_StatusChanged(MemberEventArgs e)
         {
-            if(e.MemberID == record.MemberID)
+            if(e.MemberID == record.ResourceID)
             {
-                if(Program.CurrentIncident.AllSignInRecords.Any(o=>o.SignInRecordID == record.SignInRecordID))
+                if(Program.CurrentIncident.AllCheckInRecords.Any(o=>o.SignInRecordID == record.SignInRecordID))
                 {
-                    record = Program.CurrentIncident.AllSignInRecords.First(o=>o.SignInRecordID == record.SignInRecordID);
+                    record = Program.CurrentIncident.AllCheckInRecords.First(o=>o.SignInRecordID == record.SignInRecordID);
                 }
             }
         }
@@ -68,26 +68,10 @@ namespace Wildfire_ICS_Assist
             if(record != null)
             {
                 //individual
-                lblName.Text = record.teamMember.Name;
-                lblProvince.Text = record.teamMember.ProvinceName;
-                lblAgency.Text = record.teamMember.Agency;
-                lblPhone.Text = record.teamMember.Phone.FormatPhone();
-                lblEmail.Text = record.teamMember.Email;
-                lblHomeBase.Text = record.teamMember.HomeBase;
-                lblQualifications.Text = record.teamMember.SpecialSkills;
-
-                //em contact
-                lblEmergencyContact.Text = record.teamMember.NOKName;
-                lblEmergencyPhone.Text = record.teamMember.NOKPhone.FormatPhone();
-                lblEmergencyRelationship.Text = record.teamMember.NOKRelation;
-
-                //assignment
-                MemberStatus status = Program.CurrentIncident.getMemberStatus(record.teamMember, Program.CurrentOpPeriod);
-                if(status != null) { lblAssignmentOrRole.Text = status.getCurrentActivityName; btnViewAssignmentOrRole.Enabled = status.IsAssigned; }
-                else { lblAssignmentOrRole.Text = "Unassigned"; btnViewAssignmentOrRole.Enabled = false; }
+              
 
                 //checkin
-                if (record.SignInTime > DateTime.MinValue) { lblCheckInTime.Text = string.Format("{0:" + Program.DateFormat + " HH:mm}", record.SignInTime); }
+                if (record.CheckInDate > DateTime.MinValue) { lblCheckInTime.Text = string.Format("{0:" + Program.DateFormat + " HH:mm}", record.CheckInDate); }
                 else { lblCheckInTime.Text = "TBD"; }
 
                 if (record.LastDayOnIncident > DateTime.MinValue)
@@ -100,8 +84,7 @@ namespace Wildfire_ICS_Assist
                         lblDaysToLDW.Text = "(" + ts.TotalDays + " days from end of op period)";
                     }
                 } else { lblLDW.Text = "TBD"; }
-                lblDeparturePoint.Text = record.DeparturePoint;
-                lblMethodOfTravel.Text = record.MethodOfTravel;
+              
 
             }
         }
@@ -112,55 +95,10 @@ namespace Wildfire_ICS_Assist
             this.Close();
         }
 
-        private void btnViewAssignmentOrRole_Click(object sender, EventArgs e)
-        {
-            MemberStatus status = Program.CurrentIncident.getMemberStatus(record.teamMember, Program.CurrentOpPeriod);
-            if(null != status && status.IsAssigned)
-            {
-                if(status.ICSRoleID != Guid.Empty)
-                {
-                    OrganizationChart chart = Program.CurrentOrgChart;
-
-                    if(chart.AllRoles.Any(o=>o.RoleID == status.ICSRoleID))
-                    {
-                        ICSRole role = chart.AllRoles.First(o => o.RoleID == status.ICSRoleID);
-                        HelpInfo info = new HelpInfo(role.RoleName, role.RoleDescription);
-
-                        using (HelpInfoForm help = new HelpInfoForm())
-                        {
-                            help.Title = info.Title;
-                            help.Body = info.Body;
-                            help.ShowDialog();
-                        }
-                    }
-                    
-                }
-                else if (status.AssignmentID != Guid.Empty)
-                {
-                    if(Program.CurrentIncident.AllAssignments.Any(o=>o.ID == status.AssignmentID))
-                    {
-                        TeamAssignment ta = Program.CurrentIncident.AllAssignments.First(o => o.ID == status.AssignmentID);
-                        OpenAssignmentForEdit(ta);
-                    }
-                }
-            }
-        }
+      
 
 
-        private void OpenAssignmentForEdit(TeamAssignment assignment)
-        {
-            using (TeamAssignmentEditForm editForm = new TeamAssignmentEditForm())
-            {
-                editForm.selectedAssignment = assignment;
-                DialogResult dr = editForm.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-                    Program.wfIncidentService.UpsertTeamAssignment(editForm.selectedAssignment.Clone());
-                }
-            }
-        }
-
-
+   
         private void btnEditCheckIn_Click(object sender, EventArgs e)
         {
             List<CheckInRecord> records = new List<CheckInRecord>();
@@ -176,12 +114,18 @@ namespace Wildfire_ICS_Assist
         {
             using (OptionsForms.EditSavedTeamMemberForm editForm = new OptionsForms.EditSavedTeamMemberForm())
             {
-                editForm.selectedMember = record.teamMember;
-                DialogResult dr = editForm.ShowDialog();
-                if (dr == DialogResult.OK)
+                Personnel person = new Personnel();
+                if (Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
                 {
-                    record.teamMember = editForm.selectedMember;
-                    Program.wfIncidentService.UpsertMemberStatus(record);
+                    person = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == record.ResourceID);
+
+                    editForm.selectedMember = person;
+                    DialogResult dr = editForm.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        
+                        Program.wfIncidentService.UpsertPersonnel(editForm.selectedMember);
+                    }
                 }
             }
         }

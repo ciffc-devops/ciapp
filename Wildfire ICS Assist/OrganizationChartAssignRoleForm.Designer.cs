@@ -37,7 +37,7 @@
             this.btnClearAssignment = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.editTeamMemberControl1 = new Wildfire_ICS_Assist.CustomControls.EditTeamMemberControl();
+            this.editTeamMemberControl1 = new Wildfire_ICS_Assist.CustomControls.PersonnelEditControl();
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAssignNew = new System.Windows.Forms.Button();
@@ -198,7 +198,6 @@
             this.editTeamMemberControl1.Name = "editTeamMemberControl1";
             this.editTeamMemberControl1.Size = new System.Drawing.Size(759, 378);
             this.editTeamMemberControl1.TabIndex = 100;
-            this.editTeamMemberControl1.teamMember = null;
             // 
             // chkSaveForLater
             // 
@@ -278,7 +277,7 @@
         private System.Windows.Forms.CheckBox chkSaveForLater;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnAssignNew;
-        private CustomControls.EditTeamMemberControl editTeamMemberControl1;
+        private CustomControls.PersonnelEditControl editTeamMemberControl1;
         private System.Windows.Forms.Button btnClearAssignment;
     }
 }

@@ -67,7 +67,7 @@ namespace Wildfire_ICS_Assist
 
             if (rbPersonnel.Checked)
             {
-                List<Personnel> members = Program.CurrentIncident.TaskTeamMembers.OrderBy(o => o.Name).ToList();
+                List<Personnel> members = Program.CurrentIncident.IncidentPersonnel.OrderBy(o => o.Name).ToList();
                 List<Personnel> mems = new List<Personnel>();
                 mems.AddRange(members);
                 mems = mems.Where(o => !subGroup.ResourceListing.Any(r => r.Active && r.ResourceID == o.ID)).ToList();

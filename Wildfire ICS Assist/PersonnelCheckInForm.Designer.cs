@@ -29,62 +29,275 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PersonnelCheckInForm));
-            this.pnlSavedPersonnel = new System.Windows.Forms.Panel();
-            this.btnSelectSaved = new System.Windows.Forms.Button();
-            this.cboSavedPersonnel = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pnlNewPersonnel = new System.Windows.Forms.Panel();
-            this.btnSelectNew = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.editTeamMemberControl1 = new Wildfire_ICS_Assist.CustomControls.EditTeamMemberControl();
-            this.pnlCheckInInfo = new System.Windows.Forms.Panel();
-            this.chkAssignOnOrgChart = new System.Windows.Forms.CheckBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.datFirstDayOnIncident = new System.Windows.Forms.DateTimePicker();
-            this.label13 = new System.Windows.Forms.Label();
-            this.chkDinner = new System.Windows.Forms.CheckBox();
-            this.chkLunch = new System.Windows.Forms.CheckBox();
-            this.chkBreakfast = new System.Windows.Forms.CheckBox();
-            this.cboAccomodations = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cboICSRole = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.datLastDayTravel = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.datStartTravel = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.datLastDayOfRest = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnDeparturePointHelp = new System.Windows.Forms.Button();
             this.btnCheckIn = new System.Windows.Forms.Button();
-            this.cboMethodOfTravel = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblLastDayWorking = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtDeparturePoint = new System.Windows.Forms.TextBox();
-            this.datLDW = new System.Windows.Forms.DateTimePicker();
-            this.datCheckInTime = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtSelectedName = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cboCheckInLocation = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtOther = new System.Windows.Forms.TextBox();
-            this.btnOtherHelp = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.wizardPages1 = new Wildfire_ICS_Assist.CustomControls.WizardPages();
+            this.tpCheckInType = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnVisitor = new System.Windows.Forms.Button();
+            this.btnSinglePersonnel = new System.Windows.Forms.Button();
+            this.btnVehicleEquipment = new System.Windows.Forms.Button();
+            this.btnCrew = new System.Windows.Forms.Button();
+            this.tpResourceDetails = new System.Windows.Forms.TabPage();
+            this.chkSavePersonForLater = new System.Windows.Forms.CheckBox();
+            this.personnelEditControl1 = new Wildfire_ICS_Assist.CustomControls.PersonnelEditControl();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnSelectNewPerson = new System.Windows.Forms.Button();
+            this.pnlSavedPersonnel = new System.Windows.Forms.Panel();
+            this.btnSelectSavedPerson = new System.Windows.Forms.Button();
+            this.cboSavedPersonnel = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tpCrewDetails = new System.Windows.Forms.TabPage();
+            this.crewEditControl1 = new Wildfire_ICS_Assist.CustomControls.CrewEditControl();
+            this.tpVisitorDetails = new System.Windows.Forms.TabPage();
+            this.btnSelectVisitor = new System.Windows.Forms.Button();
+            this.visitorEditControl1 = new Wildfire_ICS_Assist.CustomControls.VisitorEditControl();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tpVehiclesEquipment = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.btnSelectSavedVehicle = new System.Windows.Forms.Button();
+            this.cboSavedVehicles = new System.Windows.Forms.ComboBox();
+            this.vehicleEquipmentEditControl1 = new Wildfire_ICS_Assist.CustomControls.VehicleEquipmentEditControl();
+            this.chkSaveVehicleForLater = new System.Windows.Forms.CheckBox();
+            this.btnSelectNewVehicle = new System.Windows.Forms.Button();
+            this.tpCheckInDetails = new System.Windows.Forms.TabPage();
+            this.resourceCheckInEditControl1 = new Wildfire_ICS_Assist.CustomControls.ResourceCheckInEditControl();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnDoneCrewEdit = new System.Windows.Forms.Button();
+            this.chkAutoNewCheckin = new System.Windows.Forms.CheckBox();
+            this.btnBack = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.wizardPages1.SuspendLayout();
+            this.tpCheckInType.SuspendLayout();
+            this.tpResourceDetails.SuspendLayout();
             this.pnlSavedPersonnel.SuspendLayout();
-            this.pnlNewPersonnel.SuspendLayout();
-            this.pnlCheckInInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tpCrewDetails.SuspendLayout();
+            this.tpVisitorDetails.SuspendLayout();
+            this.tpVehiclesEquipment.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tpCheckInDetails.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnCheckIn
+            // 
+            this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheckIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_431_log_in;
+            this.btnCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCheckIn.Location = new System.Drawing.Point(614, 5);
+            this.btnCheckIn.Name = "btnCheckIn";
+            this.btnCheckIn.Size = new System.Drawing.Size(159, 51);
+            this.btnCheckIn.TabIndex = 24;
+            this.btnCheckIn.Text = "Check In";
+            this.btnCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCheckIn.UseVisualStyleBackColor = true;
+            this.btnCheckIn.Visible = false;
+            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_799_chevron_last_left;
+            this.btnCancel.Location = new System.Drawing.Point(6, 5);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(124, 51);
+            this.btnCancel.TabIndex = 21;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.wizardPages1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnDoneCrewEdit);
+            this.splitContainer1.Panel2.Controls.Add(this.chkAutoNewCheckin);
+            this.splitContainer1.Panel2.Controls.Add(this.btnBack);
+            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
+            this.splitContainer1.Panel2.Controls.Add(this.btnCheckIn);
+            this.splitContainer1.Size = new System.Drawing.Size(785, 935);
+            this.splitContainer1.SplitterDistance = 866;
+            this.splitContainer1.TabIndex = 149;
+            // 
+            // wizardPages1
+            // 
+            this.wizardPages1.Controls.Add(this.tpCheckInType);
+            this.wizardPages1.Controls.Add(this.tpResourceDetails);
+            this.wizardPages1.Controls.Add(this.tpCrewDetails);
+            this.wizardPages1.Controls.Add(this.tpVisitorDetails);
+            this.wizardPages1.Controls.Add(this.tpVehiclesEquipment);
+            this.wizardPages1.Controls.Add(this.tpCheckInDetails);
+            this.wizardPages1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wizardPages1.Location = new System.Drawing.Point(0, 0);
+            this.wizardPages1.Name = "wizardPages1";
+            this.wizardPages1.SelectedIndex = 0;
+            this.wizardPages1.Size = new System.Drawing.Size(785, 866);
+            this.wizardPages1.TabIndex = 148;
+            this.wizardPages1.SelectedIndexChanged += new System.EventHandler(this.wizardPages1_SelectedIndexChanged);
+            // 
+            // tpCheckInType
+            // 
+            this.tpCheckInType.Controls.Add(this.label14);
+            this.tpCheckInType.Controls.Add(this.btnVisitor);
+            this.tpCheckInType.Controls.Add(this.btnSinglePersonnel);
+            this.tpCheckInType.Controls.Add(this.btnVehicleEquipment);
+            this.tpCheckInType.Controls.Add(this.btnCrew);
+            this.tpCheckInType.Location = new System.Drawing.Point(4, 33);
+            this.tpCheckInType.Name = "tpCheckInType";
+            this.tpCheckInType.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCheckInType.Size = new System.Drawing.Size(777, 829);
+            this.tpCheckInType.TabIndex = 0;
+            this.tpCheckInType.Text = "Check In Type";
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(9, 316);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(765, 29);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "What type of resource would you like to check in?";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnVisitor
+            // 
+            this.btnVisitor.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnVisitor.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_35_user_incognito;
+            this.btnVisitor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnVisitor.Location = new System.Drawing.Point(384, 462);
+            this.btnVisitor.Name = "btnVisitor";
+            this.btnVisitor.Size = new System.Drawing.Size(243, 91);
+            this.btnVisitor.TabIndex = 3;
+            this.btnVisitor.Text = "Visitor";
+            this.btnVisitor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnVisitor.UseVisualStyleBackColor = true;
+            this.btnVisitor.Click += new System.EventHandler(this.btnVisitor_Click);
+            // 
+            // btnSinglePersonnel
+            // 
+            this.btnSinglePersonnel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSinglePersonnel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
+            this.btnSinglePersonnel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSinglePersonnel.Location = new System.Drawing.Point(135, 462);
+            this.btnSinglePersonnel.Name = "btnSinglePersonnel";
+            this.btnSinglePersonnel.Size = new System.Drawing.Size(243, 91);
+            this.btnSinglePersonnel.TabIndex = 2;
+            this.btnSinglePersonnel.Text = "Individual Personnel";
+            this.btnSinglePersonnel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSinglePersonnel.UseVisualStyleBackColor = true;
+            this.btnSinglePersonnel.Click += new System.EventHandler(this.btnSinglePersonnel_Click);
+            // 
+            // btnVehicleEquipment
+            // 
+            this.btnVehicleEquipment.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnVehicleEquipment.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
+            this.btnVehicleEquipment.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnVehicleEquipment.Location = new System.Drawing.Point(384, 365);
+            this.btnVehicleEquipment.Name = "btnVehicleEquipment";
+            this.btnVehicleEquipment.Size = new System.Drawing.Size(243, 91);
+            this.btnVehicleEquipment.TabIndex = 1;
+            this.btnVehicleEquipment.Text = "Vehicle/Equipment";
+            this.btnVehicleEquipment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnVehicleEquipment.UseVisualStyleBackColor = true;
+            this.btnVehicleEquipment.Click += new System.EventHandler(this.btnVehicleEquipment_Click);
+            // 
+            // btnCrew
+            // 
+            this.btnCrew.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_532_user_family;
+            this.btnCrew.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCrew.Location = new System.Drawing.Point(135, 365);
+            this.btnCrew.Name = "btnCrew";
+            this.btnCrew.Size = new System.Drawing.Size(243, 91);
+            this.btnCrew.TabIndex = 0;
+            this.btnCrew.Text = "Crew";
+            this.btnCrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCrew.UseVisualStyleBackColor = true;
+            this.btnCrew.Click += new System.EventHandler(this.btnCrew_Click);
+            // 
+            // tpResourceDetails
+            // 
+            this.tpResourceDetails.Controls.Add(this.chkSavePersonForLater);
+            this.tpResourceDetails.Controls.Add(this.personnelEditControl1);
+            this.tpResourceDetails.Controls.Add(this.label1);
+            this.tpResourceDetails.Controls.Add(this.btnSelectNewPerson);
+            this.tpResourceDetails.Controls.Add(this.pnlSavedPersonnel);
+            this.tpResourceDetails.Location = new System.Drawing.Point(4, 33);
+            this.tpResourceDetails.Name = "tpResourceDetails";
+            this.tpResourceDetails.Padding = new System.Windows.Forms.Padding(3);
+            this.tpResourceDetails.Size = new System.Drawing.Size(777, 829);
+            this.tpResourceDetails.TabIndex = 1;
+            this.tpResourceDetails.Text = "Person";
+            // 
+            // chkSavePersonForLater
+            // 
+            this.chkSavePersonForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSavePersonForLater.AutoSize = true;
+            this.chkSavePersonForLater.Location = new System.Drawing.Point(409, 790);
+            this.chkSavePersonForLater.Name = "chkSavePersonForLater";
+            this.chkSavePersonForLater.Size = new System.Drawing.Size(229, 28);
+            this.chkSavePersonForLater.TabIndex = 112;
+            this.chkSavePersonForLater.Text = "Save for future incidents";
+            this.chkSavePersonForLater.UseVisualStyleBackColor = true;
+            // 
+            // personnelEditControl1
+            // 
+            this.personnelEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.personnelEditControl1.BackColor = System.Drawing.Color.Transparent;
+            this.personnelEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.personnelEditControl1.Location = new System.Drawing.Point(9, 117);
+            this.personnelEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.personnelEditControl1.Name = "personnelEditControl1";
+            this.personnelEditControl1.Size = new System.Drawing.Size(762, 664);
+            this.personnelEditControl1.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(757, 29);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "New Personnel";
+            // 
+            // btnSelectNewPerson
+            // 
+            this.btnSelectNewPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectNewPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnSelectNewPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSelectNewPerson.Location = new System.Drawing.Point(644, 783);
+            this.btnSelectNewPerson.Name = "btnSelectNewPerson";
+            this.btnSelectNewPerson.Size = new System.Drawing.Size(130, 40);
+            this.btnSelectNewPerson.TabIndex = 7;
+            this.btnSelectNewPerson.Text = "Select";
+            this.btnSelectNewPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSelectNewPerson.UseVisualStyleBackColor = true;
+            this.btnSelectNewPerson.Click += new System.EventHandler(this.btnSelectNew_Click);
             // 
             // pnlSavedPersonnel
             // 
@@ -92,27 +305,27 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSavedPersonnel.BackColor = System.Drawing.Color.White;
             this.pnlSavedPersonnel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSavedPersonnel.Controls.Add(this.btnSelectSaved);
+            this.pnlSavedPersonnel.Controls.Add(this.btnSelectSavedPerson);
             this.pnlSavedPersonnel.Controls.Add(this.cboSavedPersonnel);
             this.pnlSavedPersonnel.Controls.Add(this.label6);
-            this.pnlSavedPersonnel.Location = new System.Drawing.Point(51, 12);
+            this.pnlSavedPersonnel.Location = new System.Drawing.Point(8, 6);
             this.pnlSavedPersonnel.Name = "pnlSavedPersonnel";
-            this.pnlSavedPersonnel.Size = new System.Drawing.Size(491, 80);
+            this.pnlSavedPersonnel.Size = new System.Drawing.Size(761, 80);
             this.pnlSavedPersonnel.TabIndex = 1;
             // 
-            // btnSelectSaved
+            // btnSelectSavedPerson
             // 
-            this.btnSelectSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
-            this.btnSelectSaved.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelectSaved.Location = new System.Drawing.Point(350, 27);
-            this.btnSelectSaved.Name = "btnSelectSaved";
-            this.btnSelectSaved.Size = new System.Drawing.Size(130, 40);
-            this.btnSelectSaved.TabIndex = 5;
-            this.btnSelectSaved.Text = "Select";
-            this.btnSelectSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnSelectSaved.UseVisualStyleBackColor = true;
-            this.btnSelectSaved.Click += new System.EventHandler(this.btnSelectSaved_Click);
+            this.btnSelectSavedPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectSavedPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnSelectSavedPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSelectSavedPerson.Location = new System.Drawing.Point(620, 27);
+            this.btnSelectSavedPerson.Name = "btnSelectSavedPerson";
+            this.btnSelectSavedPerson.Size = new System.Drawing.Size(130, 40);
+            this.btnSelectSavedPerson.TabIndex = 5;
+            this.btnSelectSavedPerson.Text = "Select";
+            this.btnSelectSavedPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSelectSavedPerson.UseVisualStyleBackColor = true;
+            this.btnSelectSavedPerson.Click += new System.EventHandler(this.btnSelectSaved_Click);
             // 
             // cboSavedPersonnel
             // 
@@ -124,7 +337,7 @@
             this.cboSavedPersonnel.FormattingEnabled = true;
             this.cboSavedPersonnel.Location = new System.Drawing.Point(8, 32);
             this.cboSavedPersonnel.Name = "cboSavedPersonnel";
-            this.cboSavedPersonnel.Size = new System.Drawing.Size(336, 32);
+            this.cboSavedPersonnel.Size = new System.Drawing.Size(606, 32);
             this.cboSavedPersonnel.TabIndex = 4;
             this.cboSavedPersonnel.ValueMember = "PersonID";
             this.cboSavedPersonnel.Leave += new System.EventHandler(this.cboSavedPersonnel_Leave);
@@ -136,662 +349,350 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(483, 29);
+            this.label6.Size = new System.Drawing.Size(753, 29);
             this.label6.TabIndex = 8;
             this.label6.Text = "Saved Personnel";
             // 
-            // pnlNewPersonnel
+            // tpCrewDetails
             // 
-            this.pnlNewPersonnel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tpCrewDetails.Controls.Add(this.crewEditControl1);
+            this.tpCrewDetails.Location = new System.Drawing.Point(4, 33);
+            this.tpCrewDetails.Name = "tpCrewDetails";
+            this.tpCrewDetails.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCrewDetails.Size = new System.Drawing.Size(777, 829);
+            this.tpCrewDetails.TabIndex = 2;
+            this.tpCrewDetails.Text = "Crew";
+            // 
+            // crewEditControl1
+            // 
+            this.crewEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlNewPersonnel.BackColor = System.Drawing.Color.White;
-            this.pnlNewPersonnel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlNewPersonnel.Controls.Add(this.btnSelectNew);
-            this.pnlNewPersonnel.Controls.Add(this.label1);
-            this.pnlNewPersonnel.Controls.Add(this.editTeamMemberControl1);
-            this.pnlNewPersonnel.Location = new System.Drawing.Point(51, 98);
-            this.pnlNewPersonnel.Name = "pnlNewPersonnel";
-            this.pnlNewPersonnel.Size = new System.Drawing.Size(491, 527);
-            this.pnlNewPersonnel.TabIndex = 2;
+            this.crewEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.crewEditControl1.Location = new System.Drawing.Point(0, 0);
+            this.crewEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.crewEditControl1.Name = "crewEditControl1";
+            this.crewEditControl1.Size = new System.Drawing.Size(777, 777);
+            this.crewEditControl1.TabIndex = 0;
             // 
-            // btnSelectNew
+            // tpVisitorDetails
             // 
-            this.btnSelectNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
-            this.btnSelectNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelectNew.Location = new System.Drawing.Point(356, 482);
-            this.btnSelectNew.Name = "btnSelectNew";
-            this.btnSelectNew.Size = new System.Drawing.Size(130, 40);
-            this.btnSelectNew.TabIndex = 7;
-            this.btnSelectNew.Text = "Select";
-            this.btnSelectNew.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnSelectNew.UseVisualStyleBackColor = true;
-            this.btnSelectNew.Click += new System.EventHandler(this.btnSelectNew_Click);
+            this.tpVisitorDetails.Controls.Add(this.btnSelectVisitor);
+            this.tpVisitorDetails.Controls.Add(this.visitorEditControl1);
+            this.tpVisitorDetails.Controls.Add(this.label19);
+            this.tpVisitorDetails.Location = new System.Drawing.Point(4, 22);
+            this.tpVisitorDetails.Name = "tpVisitorDetails";
+            this.tpVisitorDetails.Padding = new System.Windows.Forms.Padding(3);
+            this.tpVisitorDetails.Size = new System.Drawing.Size(777, 840);
+            this.tpVisitorDetails.TabIndex = 4;
+            this.tpVisitorDetails.Text = "Visitor";
             // 
-            // label1
+            // btnSelectVisitor
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnSelectVisitor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectVisitor.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnSelectVisitor.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSelectVisitor.Location = new System.Drawing.Point(636, 288);
+            this.btnSelectVisitor.Name = "btnSelectVisitor";
+            this.btnSelectVisitor.Size = new System.Drawing.Size(130, 40);
+            this.btnSelectVisitor.TabIndex = 12;
+            this.btnSelectVisitor.Text = "Select";
+            this.btnSelectVisitor.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSelectVisitor.UseVisualStyleBackColor = true;
+            this.btnSelectVisitor.Click += new System.EventHandler(this.btnSelectVisitor_Click);
+            // 
+            // visitorEditControl1
+            // 
+            this.visitorEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(466, 29);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "New Personnel";
+            this.visitorEditControl1.BackColor = System.Drawing.Color.Transparent;
+            this.visitorEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.visitorEditControl1.Location = new System.Drawing.Point(2, 44);
+            this.visitorEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.visitorEditControl1.Name = "visitorEditControl1";
+            this.visitorEditControl1.Size = new System.Drawing.Size(764, 235);
+            this.visitorEditControl1.TabIndex = 11;
             // 
-            // editTeamMemberControl1
+            // label19
             // 
-            this.editTeamMemberControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.editTeamMemberControl1.BackColor = System.Drawing.Color.Transparent;
-            this.editTeamMemberControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editTeamMemberControl1.Location = new System.Drawing.Point(6, 35);
-            this.editTeamMemberControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.editTeamMemberControl1.Name = "editTeamMemberControl1";
-            this.editTeamMemberControl1.Size = new System.Drawing.Size(474, 438);
-            this.editTeamMemberControl1.TabIndex = 6;
-            this.editTeamMemberControl1.teamMember = null;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(1, 3);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(765, 46);
+            this.label19.TabIndex = 10;
+            this.label19.Text = "Visitor";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pnlCheckInInfo
+            // tpVehiclesEquipment
             // 
-            this.pnlCheckInInfo.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pnlCheckInInfo.BackColor = System.Drawing.Color.White;
-            this.pnlCheckInInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCheckInInfo.Controls.Add(this.btnOtherHelp);
-            this.pnlCheckInInfo.Controls.Add(this.label18);
-            this.pnlCheckInInfo.Controls.Add(this.txtOther);
-            this.pnlCheckInInfo.Controls.Add(this.cboCheckInLocation);
-            this.pnlCheckInInfo.Controls.Add(this.label17);
-            this.pnlCheckInInfo.Controls.Add(this.chkAssignOnOrgChart);
-            this.pnlCheckInInfo.Controls.Add(this.label16);
-            this.pnlCheckInInfo.Controls.Add(this.datFirstDayOnIncident);
-            this.pnlCheckInInfo.Controls.Add(this.label13);
-            this.pnlCheckInInfo.Controls.Add(this.chkDinner);
-            this.pnlCheckInInfo.Controls.Add(this.chkLunch);
-            this.pnlCheckInInfo.Controls.Add(this.chkBreakfast);
-            this.pnlCheckInInfo.Controls.Add(this.cboAccomodations);
-            this.pnlCheckInInfo.Controls.Add(this.label12);
-            this.pnlCheckInInfo.Controls.Add(this.label11);
-            this.pnlCheckInInfo.Controls.Add(this.cboICSRole);
-            this.pnlCheckInInfo.Controls.Add(this.label10);
-            this.pnlCheckInInfo.Controls.Add(this.datLastDayTravel);
-            this.pnlCheckInInfo.Controls.Add(this.label9);
-            this.pnlCheckInInfo.Controls.Add(this.datStartTravel);
-            this.pnlCheckInInfo.Controls.Add(this.label5);
-            this.pnlCheckInInfo.Controls.Add(this.datLastDayOfRest);
-            this.pnlCheckInInfo.Controls.Add(this.button1);
-            this.pnlCheckInInfo.Controls.Add(this.btnDeparturePointHelp);
-            this.pnlCheckInInfo.Controls.Add(this.btnCheckIn);
-            this.pnlCheckInInfo.Controls.Add(this.cboMethodOfTravel);
-            this.pnlCheckInInfo.Controls.Add(this.label8);
-            this.pnlCheckInInfo.Controls.Add(this.label7);
-            this.pnlCheckInInfo.Controls.Add(this.lblLastDayWorking);
-            this.pnlCheckInInfo.Controls.Add(this.label4);
-            this.pnlCheckInInfo.Controls.Add(this.txtDeparturePoint);
-            this.pnlCheckInInfo.Controls.Add(this.datLDW);
-            this.pnlCheckInInfo.Controls.Add(this.datCheckInTime);
-            this.pnlCheckInInfo.Controls.Add(this.label3);
-            this.pnlCheckInInfo.Controls.Add(this.txtSelectedName);
-            this.pnlCheckInInfo.Controls.Add(this.pictureBox1);
-            this.pnlCheckInInfo.Controls.Add(this.label2);
-            this.pnlCheckInInfo.Enabled = false;
-            this.pnlCheckInInfo.Location = new System.Drawing.Point(603, 12);
-            this.pnlCheckInInfo.Name = "pnlCheckInInfo";
-            this.pnlCheckInInfo.Size = new System.Drawing.Size(492, 667);
-            this.pnlCheckInInfo.TabIndex = 3;
+            this.tpVehiclesEquipment.Controls.Add(this.label20);
+            this.tpVehiclesEquipment.Controls.Add(this.panel1);
+            this.tpVehiclesEquipment.Controls.Add(this.vehicleEquipmentEditControl1);
+            this.tpVehiclesEquipment.Controls.Add(this.chkSaveVehicleForLater);
+            this.tpVehiclesEquipment.Controls.Add(this.btnSelectNewVehicle);
+            this.tpVehiclesEquipment.Location = new System.Drawing.Point(4, 22);
+            this.tpVehiclesEquipment.Name = "tpVehiclesEquipment";
+            this.tpVehiclesEquipment.Padding = new System.Windows.Forms.Padding(3);
+            this.tpVehiclesEquipment.Size = new System.Drawing.Size(777, 840);
+            this.tpVehiclesEquipment.TabIndex = 5;
+            this.tpVehiclesEquipment.Text = "Veh/Eqp";
             // 
-            // chkAssignOnOrgChart
+            // label20
             // 
-            this.chkAssignOnOrgChart.AutoSize = true;
-            this.chkAssignOnOrgChart.Enabled = false;
-            this.chkAssignOnOrgChart.Location = new System.Drawing.Point(200, 399);
-            this.chkAssignOnOrgChart.Name = "chkAssignOnOrgChart";
-            this.chkAssignOnOrgChart.Size = new System.Drawing.Size(199, 28);
-            this.chkAssignOnOrgChart.TabIndex = 17;
-            this.chkAssignOnOrgChart.Text = "Assign on Org Chart";
-            this.chkAssignOnOrgChart.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.Location = new System.Drawing.Point(4, 223);
-            this.label16.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(187, 29);
-            this.label16.TabIndex = 110;
-            this.label16.Text = "First Day on Incident";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // datFirstDayOnIncident
-            // 
-            this.datFirstDayOnIncident.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.datFirstDayOnIncident.Checked = false;
-            this.datFirstDayOnIncident.CustomFormat = "yyyy-MMM-dd";
-            this.datFirstDayOnIncident.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datFirstDayOnIncident.Location = new System.Drawing.Point(200, 221);
-            this.datFirstDayOnIncident.Name = "datFirstDayOnIncident";
-            this.datFirstDayOnIncident.ShowCheckBox = true;
-            this.datFirstDayOnIncident.Size = new System.Drawing.Size(253, 29);
-            this.datFirstDayOnIncident.TabIndex = 12;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(12, 114);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(753, 29);
+            this.label20.TabIndex = 115;
+            this.label20.Text = "New Vehicle / Equipment";
             // 
-            // label13
+            // panel1
             // 
-            this.label13.Location = new System.Drawing.Point(4, 471);
-            this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(187, 29);
-            this.label13.TabIndex = 108;
-            this.label13.Text = "Food";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // chkDinner
-            // 
-            this.chkDinner.AutoSize = true;
-            this.chkDinner.Location = new System.Drawing.Point(398, 471);
-            this.chkDinner.Name = "chkDinner";
-            this.chkDinner.Size = new System.Drawing.Size(85, 28);
-            this.chkDinner.TabIndex = 21;
-            this.chkDinner.Text = "Dinner";
-            this.chkDinner.UseVisualStyleBackColor = true;
-            // 
-            // chkLunch
-            // 
-            this.chkLunch.AutoSize = true;
-            this.chkLunch.Location = new System.Drawing.Point(310, 472);
-            this.chkLunch.Name = "chkLunch";
-            this.chkLunch.Size = new System.Drawing.Size(82, 28);
-            this.chkLunch.TabIndex = 20;
-            this.chkLunch.Text = "Lunch";
-            this.chkLunch.UseVisualStyleBackColor = true;
-            // 
-            // chkBreakfast
-            // 
-            this.chkBreakfast.AutoSize = true;
-            this.chkBreakfast.Location = new System.Drawing.Point(200, 471);
-            this.chkBreakfast.Name = "chkBreakfast";
-            this.chkBreakfast.Size = new System.Drawing.Size(104, 28);
-            this.chkBreakfast.TabIndex = 19;
-            this.chkBreakfast.Text = "Breakfast";
-            this.chkBreakfast.UseVisualStyleBackColor = true;
-            // 
-            // cboAccomodations
-            // 
-            this.cboAccomodations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboAccomodations.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboAccomodations.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboAccomodations.FormattingEnabled = true;
-            this.cboAccomodations.Items.AddRange(new object[] {
-            "Camp",
-            "Hotel",
-            "Private Dwelling",
-            "Other"});
-            this.cboAccomodations.Location = new System.Drawing.Point(200, 433);
-            this.cboAccomodations.Name = "cboAccomodations";
-            this.cboAccomodations.Size = new System.Drawing.Size(253, 32);
-            this.cboAccomodations.TabIndex = 18;
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Controls.Add(this.btnSelectSavedVehicle);
+            this.panel1.Controls.Add(this.cboSavedVehicles);
+            this.panel1.Location = new System.Drawing.Point(8, 15);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(761, 80);
+            this.panel1.TabIndex = 114;
             // 
-            // label12
+            // label22
             // 
-            this.label12.Location = new System.Drawing.Point(4, 436);
-            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(187, 29);
-            this.label12.TabIndex = 104;
-            this.label12.Text = "Accomodations";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label11
-            // 
-            this.label11.Location = new System.Drawing.Point(-1, 362);
-            this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(187, 29);
-            this.label11.TabIndex = 102;
-            this.label11.Text = "Initial Incident Role";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cboICSRole
-            // 
-            this.cboICSRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboICSRole.DisplayMember = "RoleNameForDropdown";
-            this.cboICSRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboICSRole.DropDownWidth = 500;
-            this.cboICSRole.FormattingEnabled = true;
-            this.cboICSRole.Location = new System.Drawing.Point(200, 361);
-            this.cboICSRole.Name = "cboICSRole";
-            this.cboICSRole.Size = new System.Drawing.Size(253, 32);
-            this.cboICSRole.TabIndex = 16;
-            this.cboICSRole.ValueMember = "RoleID";
-            this.cboICSRole.SelectedIndexChanged += new System.EventHandler(this.cboICSRole_SelectedIndexChanged);
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(3, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(753, 29);
+            this.label22.TabIndex = 8;
+            this.label22.Text = "Saved Vehicles / Equipment";
             // 
-            // label10
+            // btnSelectSavedVehicle
             // 
-            this.label10.Location = new System.Drawing.Point(4, 328);
-            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(187, 29);
-            this.label10.TabIndex = 100;
-            this.label10.Text = "Last day of Travel";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSelectSavedVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectSavedVehicle.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnSelectSavedVehicle.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSelectSavedVehicle.Location = new System.Drawing.Point(643, 30);
+            this.btnSelectSavedVehicle.Name = "btnSelectSavedVehicle";
+            this.btnSelectSavedVehicle.Size = new System.Drawing.Size(113, 45);
+            this.btnSelectSavedVehicle.TabIndex = 110;
+            this.btnSelectSavedVehicle.Text = "Select";
+            this.btnSelectSavedVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSelectSavedVehicle.UseVisualStyleBackColor = true;
+            this.btnSelectSavedVehicle.Click += new System.EventHandler(this.btnSelectSavedVehicle_Click);
             // 
-            // datLastDayTravel
+            // cboSavedVehicles
             // 
-            this.datLastDayTravel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cboSavedVehicles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.datLastDayTravel.Checked = false;
-            this.datLastDayTravel.CustomFormat = "yyyy-MMM-dd";
-            this.datLastDayTravel.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datLastDayTravel.Location = new System.Drawing.Point(200, 326);
-            this.datLastDayTravel.Name = "datLastDayTravel";
-            this.datLastDayTravel.ShowCheckBox = true;
-            this.datLastDayTravel.Size = new System.Drawing.Size(253, 29);
-            this.datLastDayTravel.TabIndex = 15;
+            this.cboSavedVehicles.DisplayMember = "IDWithMakeOwner";
+            this.cboSavedVehicles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSavedVehicles.FormattingEnabled = true;
+            this.cboSavedVehicles.Location = new System.Drawing.Point(8, 36);
+            this.cboSavedVehicles.Name = "cboSavedVehicles";
+            this.cboSavedVehicles.Size = new System.Drawing.Size(629, 32);
+            this.cboSavedVehicles.TabIndex = 109;
+            this.cboSavedVehicles.ValueMember = "VehicleID";
             // 
-            // label9
+            // vehicleEquipmentEditControl1
             // 
-            this.label9.Location = new System.Drawing.Point(4, 188);
-            this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(187, 29);
-            this.label9.TabIndex = 98;
-            this.label9.Text = "Start of Travel";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // datStartTravel
-            // 
-            this.datStartTravel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.vehicleEquipmentEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.datStartTravel.Checked = false;
-            this.datStartTravel.CustomFormat = "yyyy-MMM-dd";
-            this.datStartTravel.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datStartTravel.Location = new System.Drawing.Point(200, 186);
-            this.datStartTravel.Name = "datStartTravel";
-            this.datStartTravel.ShowCheckBox = true;
-            this.datStartTravel.Size = new System.Drawing.Size(253, 29);
-            this.datStartTravel.TabIndex = 11;
+            this.vehicleEquipmentEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.vehicleEquipmentEditControl1.Location = new System.Drawing.Point(-4, 149);
+            this.vehicleEquipmentEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.vehicleEquipmentEditControl1.Name = "vehicleEquipmentEditControl1";
+            this.vehicleEquipmentEditControl1.Size = new System.Drawing.Size(779, 622);
+            this.vehicleEquipmentEditControl1.TabIndex = 113;
             // 
-            // label5
+            // chkSaveVehicleForLater
             // 
-            this.label5.Location = new System.Drawing.Point(4, 153);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(187, 29);
-            this.label5.TabIndex = 96;
-            this.label5.Text = "Last Day of Rest";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkSaveVehicleForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSaveVehicleForLater.AutoSize = true;
+            this.chkSaveVehicleForLater.Location = new System.Drawing.Point(414, 792);
+            this.chkSaveVehicleForLater.Name = "chkSaveVehicleForLater";
+            this.chkSaveVehicleForLater.Size = new System.Drawing.Size(229, 28);
+            this.chkSaveVehicleForLater.TabIndex = 111;
+            this.chkSaveVehicleForLater.Text = "Save for future incidents";
+            this.chkSaveVehicleForLater.UseVisualStyleBackColor = true;
             // 
-            // datLastDayOfRest
+            // btnSelectNewVehicle
             // 
-            this.datLastDayOfRest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnSelectNewVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectNewVehicle.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnSelectNewVehicle.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSelectNewVehicle.Location = new System.Drawing.Point(652, 783);
+            this.btnSelectNewVehicle.Margin = new System.Windows.Forms.Padding(6);
+            this.btnSelectNewVehicle.Name = "btnSelectNewVehicle";
+            this.btnSelectNewVehicle.Size = new System.Drawing.Size(113, 45);
+            this.btnSelectNewVehicle.TabIndex = 112;
+            this.btnSelectNewVehicle.Text = "Select";
+            this.btnSelectNewVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSelectNewVehicle.UseVisualStyleBackColor = true;
+            this.btnSelectNewVehicle.Click += new System.EventHandler(this.btnSelectNewVehicle_Click);
+            // 
+            // tpCheckInDetails
+            // 
+            this.tpCheckInDetails.Controls.Add(this.resourceCheckInEditControl1);
+            this.tpCheckInDetails.Controls.Add(this.label2);
+            this.tpCheckInDetails.Location = new System.Drawing.Point(4, 22);
+            this.tpCheckInDetails.Name = "tpCheckInDetails";
+            this.tpCheckInDetails.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCheckInDetails.Size = new System.Drawing.Size(777, 840);
+            this.tpCheckInDetails.TabIndex = 3;
+            this.tpCheckInDetails.Text = "Check In Details";
+            // 
+            // resourceCheckInEditControl1
+            // 
+            this.resourceCheckInEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.datLastDayOfRest.Checked = false;
-            this.datLastDayOfRest.CustomFormat = "yyyy-MMM-dd";
-            this.datLastDayOfRest.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datLastDayOfRest.Location = new System.Drawing.Point(200, 151);
-            this.datLastDayOfRest.Name = "datLastDayOfRest";
-            this.datLastDayOfRest.ShowCheckBox = true;
-            this.datLastDayOfRest.Size = new System.Drawing.Size(253, 29);
-            this.datLastDayOfRest.TabIndex = 10;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(458, 117);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(26, 26);
-            this.button1.TabIndex = 94;
-            this.button1.TabStop = false;
-            this.toolTip1.SetToolTip(this.button1, "Enter the means of travel the individual used to bring themselves to the incident" +
-        " (e.g. bus, truck, engine, etc.)");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnShowHelp_Click);
-            // 
-            // btnDeparturePointHelp
-            // 
-            this.btnDeparturePointHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeparturePointHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDeparturePointHelp.BackgroundImage")));
-            this.btnDeparturePointHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDeparturePointHelp.Location = new System.Drawing.Point(458, 83);
-            this.btnDeparturePointHelp.Name = "btnDeparturePointHelp";
-            this.btnDeparturePointHelp.Size = new System.Drawing.Size(26, 26);
-            this.btnDeparturePointHelp.TabIndex = 93;
-            this.btnDeparturePointHelp.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnDeparturePointHelp, "Enter the location from which the resource or individual departed for this incide" +
-        "nt.");
-            this.btnDeparturePointHelp.UseVisualStyleBackColor = true;
-            this.btnDeparturePointHelp.Click += new System.EventHandler(this.btnShowHelp_Click);
-            // 
-            // btnCheckIn
-            // 
-            this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_431_log_in;
-            this.btnCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCheckIn.Location = new System.Drawing.Point(325, 599);
-            this.btnCheckIn.Name = "btnCheckIn";
-            this.btnCheckIn.Size = new System.Drawing.Size(159, 59);
-            this.btnCheckIn.TabIndex = 24;
-            this.btnCheckIn.Text = "Check In";
-            this.btnCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCheckIn.UseVisualStyleBackColor = true;
-            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
-            // 
-            // cboMethodOfTravel
-            // 
-            this.cboMethodOfTravel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboMethodOfTravel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboMethodOfTravel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboMethodOfTravel.FormattingEnabled = true;
-            this.cboMethodOfTravel.Items.AddRange(new object[] {
-            "Fixed Wing",
-            "Rotary Wing",
-            "Bus / Shuttle",
-            "Personal Vehicle"});
-            this.cboMethodOfTravel.Location = new System.Drawing.Point(200, 113);
-            this.cboMethodOfTravel.Name = "cboMethodOfTravel";
-            this.cboMethodOfTravel.Size = new System.Drawing.Size(253, 32);
-            this.cboMethodOfTravel.TabIndex = 9;
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(4, 116);
-            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(187, 29);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "Method of Travel";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(-1, 80);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(187, 29);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Departure Point";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblLastDayWorking
-            // 
-            this.lblLastDayWorking.Location = new System.Drawing.Point(6, 291);
-            this.lblLastDayWorking.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblLastDayWorking.Name = "lblLastDayWorking";
-            this.lblLastDayWorking.Size = new System.Drawing.Size(187, 29);
-            this.lblLastDayWorking.TabIndex = 20;
-            this.lblLastDayWorking.Text = "Last Day at Incident*";
-            this.lblLastDayWorking.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(4, 258);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(187, 29);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Check-In at Incident";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtDeparturePoint
-            // 
-            this.txtDeparturePoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDeparturePoint.Location = new System.Drawing.Point(200, 80);
-            this.txtDeparturePoint.Name = "txtDeparturePoint";
-            this.txtDeparturePoint.Size = new System.Drawing.Size(253, 29);
-            this.txtDeparturePoint.TabIndex = 8;
-            this.txtDeparturePoint.TextChanged += new System.EventHandler(this.txtDeparturePoint_TextChanged);
-            // 
-            // datLDW
-            // 
-            this.datLDW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datLDW.CustomFormat = "yyyy-MMM-dd";
-            this.datLDW.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datLDW.Location = new System.Drawing.Point(200, 291);
-            this.datLDW.Name = "datLDW";
-            this.datLDW.Size = new System.Drawing.Size(253, 29);
-            this.datLDW.TabIndex = 14;
-            this.datLDW.ValueChanged += new System.EventHandler(this.datLDW_ValueChanged);
-            // 
-            // datCheckInTime
-            // 
-            this.datCheckInTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datCheckInTime.CustomFormat = "yyyy-MMM-dd HH:mm";
-            this.datCheckInTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datCheckInTime.Location = new System.Drawing.Point(200, 256);
-            this.datCheckInTime.Name = "datCheckInTime";
-            this.datCheckInTime.Size = new System.Drawing.Size(253, 29);
-            this.datCheckInTime.TabIndex = 13;
-            this.datCheckInTime.ValueChanged += new System.EventHandler(this.datCheckInTime_ValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(4, 42);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(187, 29);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Name";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtSelectedName
-            // 
-            this.txtSelectedName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSelectedName.Enabled = false;
-            this.txtSelectedName.Location = new System.Drawing.Point(200, 42);
-            this.txtSelectedName.Margin = new System.Windows.Forms.Padding(6);
-            this.txtSelectedName.Name = "txtSelectedName";
-            this.txtSelectedName.Size = new System.Drawing.Size(284, 29);
-            this.txtSelectedName.TabIndex = 13;
-            this.txtSelectedName.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_55_clock;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(33, 33);
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
+            this.resourceCheckInEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resourceCheckInEditControl1.Location = new System.Drawing.Point(9, 48);
+            this.resourceCheckInEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.resourceCheckInEditControl1.Name = "resourceCheckInEditControl1";
+            this.resourceCheckInEditControl1.Size = new System.Drawing.Size(760, 790);
+            this.resourceCheckInEditControl1.TabIndex = 12;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(42, 9);
+            this.label2.Location = new System.Drawing.Point(6, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(423, 29);
             this.label2.TabIndex = 11;
             this.label2.Text = "Check-In Information";
             // 
-            // label15
+            // btnDoneCrewEdit
             // 
-            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(548, 14);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(49, 39);
-            this.label15.TabIndex = 147;
-            this.label15.Text = "2)";
+            this.btnDoneCrewEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDoneCrewEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDoneCrewEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnDoneCrewEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDoneCrewEdit.Location = new System.Drawing.Point(649, 5);
+            this.btnDoneCrewEdit.Name = "btnDoneCrewEdit";
+            this.btnDoneCrewEdit.Size = new System.Drawing.Size(124, 51);
+            this.btnDoneCrewEdit.TabIndex = 8;
+            this.btnDoneCrewEdit.Text = "Next";
+            this.btnDoneCrewEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnDoneCrewEdit.UseVisualStyleBackColor = true;
+            this.btnDoneCrewEdit.Visible = false;
+            this.btnDoneCrewEdit.Click += new System.EventHandler(this.btnDoneCrewEdit_Click);
             // 
-            // label14
+            // chkAutoNewCheckin
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(-4, 13);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(49, 39);
-            this.label14.TabIndex = 146;
-            this.label14.Text = "1)";
+            this.chkAutoNewCheckin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkAutoNewCheckin.AutoSize = true;
+            this.chkAutoNewCheckin.Location = new System.Drawing.Point(369, 17);
+            this.chkAutoNewCheckin.Name = "chkAutoNewCheckin";
+            this.chkAutoNewCheckin.Size = new System.Drawing.Size(239, 28);
+            this.chkAutoNewCheckin.TabIndex = 25;
+            this.chkAutoNewCheckin.Text = "Auto start a new check-in";
+            this.chkAutoNewCheckin.UseVisualStyleBackColor = true;
+            this.chkAutoNewCheckin.Visible = false;
             // 
-            // btnCancel
+            // btnBack
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(9, 635);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 21;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // cboCheckInLocation
-            // 
-            this.cboCheckInLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboCheckInLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboCheckInLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboCheckInLocation.FormattingEnabled = true;
-            this.cboCheckInLocation.Items.AddRange(new object[] {
-            "ICP",
-            "Staging",
-            "Heli-Base",
-            "Other"});
-            this.cboCheckInLocation.Location = new System.Drawing.Point(200, 506);
-            this.cboCheckInLocation.Name = "cboCheckInLocation";
-            this.cboCheckInLocation.Size = new System.Drawing.Size(253, 32);
-            this.cboCheckInLocation.TabIndex = 22;
-            // 
-            // label17
-            // 
-            this.label17.Location = new System.Drawing.Point(4, 509);
-            this.label17.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(187, 29);
-            this.label17.TabIndex = 112;
-            this.label17.Text = "Check In Location";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label18
-            // 
-            this.label18.Location = new System.Drawing.Point(-1, 544);
-            this.label18.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(187, 29);
-            this.label18.TabIndex = 114;
-            this.label18.Text = "Other";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtOther
-            // 
-            this.txtOther.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOther.Location = new System.Drawing.Point(200, 544);
-            this.txtOther.Name = "txtOther";
-            this.txtOther.Size = new System.Drawing.Size(253, 29);
-            this.txtOther.TabIndex = 23;
-            // 
-            // btnOtherHelp
-            // 
-            this.btnOtherHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOtherHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOtherHelp.BackgroundImage")));
-            this.btnOtherHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnOtherHelp.Location = new System.Drawing.Point(457, 544);
-            this.btnOtherHelp.Name = "btnOtherHelp";
-            this.btnOtherHelp.Size = new System.Drawing.Size(26, 26);
-            this.btnOtherHelp.TabIndex = 115;
-            this.btnOtherHelp.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnOtherHelp, "Use this field as needed within the incident or organization to track information" +
-        " not covered elsewhere.");
-            this.btnOtherHelp.UseVisualStyleBackColor = true;
-            this.btnOtherHelp.Click += new System.EventHandler(this.btnShowHelp_Click);
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnBack.Location = new System.Drawing.Point(142, 5);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(6);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(124, 51);
+            this.btnBack.TabIndex = 22;
+            this.btnBack.Text = "Back";
+            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Visible = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // PersonnelCheckInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1104, 691);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.pnlCheckInInfo);
-            this.Controls.Add(this.pnlNewPersonnel);
-            this.Controls.Add(this.pnlSavedPersonnel);
+            this.ClientSize = new System.Drawing.Size(785, 935);
+            this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1069, 589);
+            this.MinimumSize = new System.Drawing.Size(801, 900);
             this.Name = "PersonnelCheckInForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Check In Form";
             this.Load += new System.EventHandler(this.PersonnelSignInForm_Load);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.wizardPages1.ResumeLayout(false);
+            this.tpCheckInType.ResumeLayout(false);
+            this.tpResourceDetails.ResumeLayout(false);
+            this.tpResourceDetails.PerformLayout();
             this.pnlSavedPersonnel.ResumeLayout(false);
-            this.pnlNewPersonnel.ResumeLayout(false);
-            this.pnlCheckInInfo.ResumeLayout(false);
-            this.pnlCheckInInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tpCrewDetails.ResumeLayout(false);
+            this.tpVisitorDetails.ResumeLayout(false);
+            this.tpVehiclesEquipment.ResumeLayout(false);
+            this.tpVehiclesEquipment.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.tpCheckInDetails.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private CustomControls.EditTeamMemberControl editTeamMemberControl1;
         private System.Windows.Forms.Panel pnlSavedPersonnel;
-        private System.Windows.Forms.Panel pnlNewPersonnel;
-        private System.Windows.Forms.Panel pnlCheckInInfo;
         private System.Windows.Forms.ComboBox cboSavedPersonnel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnSelectSaved;
-        private System.Windows.Forms.Button btnSelectNew;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnSelectSavedPerson;
+        private System.Windows.Forms.Button btnSelectNewPerson;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnCheckIn;
-        private System.Windows.Forms.ComboBox cboMethodOfTravel;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblLastDayWorking;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtDeparturePoint;
-        private System.Windows.Forms.DateTimePicker datLDW;
-        private System.Windows.Forms.DateTimePicker datCheckInTime;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtSelectedName;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnDeparturePointHelp;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker datLastDayTravel;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DateTimePicker datStartTravel;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker datLastDayOfRest;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.CheckBox chkDinner;
-        private System.Windows.Forms.CheckBox chkLunch;
-        private System.Windows.Forms.CheckBox chkBreakfast;
-        private System.Windows.Forms.ComboBox cboAccomodations;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cboICSRole;
-        private System.Windows.Forms.CheckBox chkAssignOnOrgChart;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.DateTimePicker datFirstDayOnIncident;
-        private System.Windows.Forms.Button btnOtherHelp;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox txtOther;
-        private System.Windows.Forms.ComboBox cboCheckInLocation;
-        private System.Windows.Forms.Label label17;
+        private CustomControls.WizardPages wizardPages1;
+        private System.Windows.Forms.TabPage tpCheckInType;
+        private System.Windows.Forms.TabPage tpResourceDetails;
+        private System.Windows.Forms.TabPage tpCrewDetails;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TabPage tpCheckInDetails;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnVisitor;
+        private System.Windows.Forms.Button btnSinglePersonnel;
+        private System.Windows.Forms.Button btnVehicleEquipment;
+        private System.Windows.Forms.Button btnCrew;
+        private System.Windows.Forms.TabPage tpVisitorDetails;
+        private System.Windows.Forms.TabPage tpVehiclesEquipment;
+        private System.Windows.Forms.Label label19;
+        private CustomControls.PersonnelEditControl personnelEditControl1;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnSelectSavedVehicle;
+        private System.Windows.Forms.ComboBox cboSavedVehicles;
+        private CustomControls.VehicleEquipmentEditControl vehicleEquipmentEditControl1;
+        private System.Windows.Forms.CheckBox chkSaveVehicleForLater;
+        private System.Windows.Forms.Button btnSelectNewVehicle;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.CheckBox chkSavePersonForLater;
+        private System.Windows.Forms.Button btnSelectVisitor;
+        private CustomControls.VisitorEditControl visitorEditControl1;
+        private System.Windows.Forms.CheckBox chkAutoNewCheckin;
+        private CustomControls.ResourceCheckInEditControl resourceCheckInEditControl1;
+        private CustomControls.CrewEditControl crewEditControl1;
+        private System.Windows.Forms.Button btnDoneCrewEdit;
     }
 }

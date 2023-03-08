@@ -51,7 +51,7 @@ namespace WildfireICSDesktopServices
         public event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
         public event TeamAssignmentEventHandler TeamAssignmentChanged;
 
-       
+
 
         public event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
         public event OperationalGroupEventHandler OperationalGroupChanged;
@@ -88,7 +88,7 @@ namespace WildfireICSDesktopServices
                 return "NO Can't write to " + path;
             }
         }
-       
+
 
         public TaskUpdate UpsertTaskUpdate(object obj, string command, bool processed_locally, bool uploaded)
         {
@@ -189,13 +189,13 @@ namespace WildfireICSDesktopServices
             if (!update.ProcessedLocally && update.Data != null)
             {
                 string source = update.Source;
-                
+
                 if (update.CommandName.Equals("UPSERT"))
                 {
                     update.ProcessedLocally = true;
                     UpsertObject(update.Data, source);
                 }
-               
+
                 else if (update.CommandName.Equals("INITIAL"))
                 {
                     TaskBasics basics = update.Data as TaskBasics;
@@ -380,7 +380,7 @@ namespace WildfireICSDesktopServices
             {
                 UpdateTaskBasics(((TaskBasics)obj), source);
             }
-          
+
             /*else if (dataClassName.Equals(new Timeline().GetType().Name))
             {
                 UpsertTimeline(((Timeline)obj).Clone(), source);
@@ -395,11 +395,11 @@ namespace WildfireICSDesktopServices
             }
             else if (dataClassName.Equals(new CheckInRecord().GetType().Name))
             {
-                UpsertMemberStatus(((CheckInRecord)obj).Clone(), source);
+                UpsertCheckInRecord(((CheckInRecord)obj).Clone(), false, source);
             }
             else if (dataClassName.Equals(new Personnel().GetType().Name))
             {
-                UpsertMemberStatus(((Personnel)obj).Clone(), source);
+                UpsertPersonnel(((Personnel)obj).Clone(), source);
             }
 
 
@@ -614,8 +614,8 @@ namespace WildfireICSDesktopServices
         public void UpsertCommsPlanItem(CommsPlanItem item, string function = null, string source = "local")
         {
             CurrentIncident.createCommsPlanAsNeeded(item.OpsPeriod);
-            CommsPlan plan = CurrentIncident.allCommsPlans.FirstOrDefault(o=>o.OpsPeriod == item.OpsPeriod);
-            if(plan != null)
+            CommsPlan plan = CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == item.OpsPeriod);
+            if (plan != null)
             {
                 if (string.IsNullOrEmpty(function)) { function = item.CommsFunction; }
 
@@ -729,7 +729,7 @@ namespace WildfireICSDesktopServices
             }
             record.RenumberObjectives();
             _currentIncident.allIncidentObjectives.Add(record.Clone());
-         
+
 
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
@@ -759,12 +759,13 @@ namespace WildfireICSDesktopServices
             record.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
             IncidentObjectivesSheet sheet = null;
 
-            if(!_currentIncident.allIncidentObjectives.Any(o=>o.OpPeriod == record.OpPeriod))
+            if (!_currentIncident.allIncidentObjectives.Any(o => o.OpPeriod == record.OpPeriod))
             {
                 _currentIncident.createObjectivesSheetAsNeeded(record.OpPeriod);
                 sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod);
                 UpsertIncidentObjectivesSheet(sheet);
-            } else { sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod); }
+            }
+            else { sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod); }
 
 
 
@@ -868,7 +869,7 @@ namespace WildfireICSDesktopServices
             record.LastUpdatedUTC = DateTime.UtcNow;
             _currentIncident.createMedicalPlanAsNeeded(record.OpPeriod);
             MedicalPlan plan = _currentIncident.allMedicalPlans.FirstOrDefault(o => o.OpPeriod == record.OpPeriod);
-            plan.Ambulances = plan.Ambulances.Where(o=>o.AmbulanceID != record.AmbulanceID).ToList();
+            plan.Ambulances = plan.Ambulances.Where(o => o.AmbulanceID != record.AmbulanceID).ToList();
             plan.Ambulances.Add(record);
 
             if (source.Equals("local") || source.Equals("networkNoInternet"))
@@ -966,7 +967,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-        public void UpsertOrganizationalChart(OrganizationChart record,  string source = "local")
+        public void UpsertOrganizationalChart(OrganizationChart record, string source = "local")
         {
             UpsertOrganizationalChart(record, true, source);
         }
@@ -979,7 +980,7 @@ namespace WildfireICSDesktopServices
                 _currentIncident.allOrgCharts = _currentIncident.allOrgCharts.Where(o => o.OrganizationalChartID != record.OrganizationalChartID && o.OpPeriod != record.OpPeriod).ToList();
             }
             _currentIncident.allOrgCharts.Add(record);
-            
+
 
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
@@ -1088,7 +1089,7 @@ namespace WildfireICSDesktopServices
                 {
                     chart.UpdateRoleName(record, false);
                 }
-                foreach(ICSRole role in chart.AllRoles.Where(o=>o.ReportsTo == record.RoleID && o.IncludeReportsToInName))
+                foreach (ICSRole role in chart.AllRoles.Where(o => o.ReportsTo == record.RoleID && o.IncludeReportsToInName))
                 {
                     chart.UpdateRoleName(role, true);
                 }
@@ -1107,7 +1108,7 @@ namespace WildfireICSDesktopServices
                 if (record.teamMember != null && record.teamMember.PersonID != Guid.Empty)
                 {
                     record.teamMember.CurrentStatus = _currentIncident.getMemberStatus(record.teamMember, record.OpPeriod, DateTime.Now);
-                    UpsertMemberStatus(record.teamMember);
+                    UpsertPersonnel(record.teamMember);
                 }
                 //OnOrganizationalChartChanged(new OrganizationChartEventArgs(chart));
             }
@@ -1447,17 +1448,21 @@ namespace WildfireICSDesktopServices
 */
 
         //Member Status
-        public void UpsertMemberStatus(CheckInRecord signIn, string source = "local")
+        public void UpsertCheckInRecord(CheckInRecord signIn, bool autoAssignToOrgIfPossible = false, string source = "local")
         {
-            if (_currentIncident.AllSignInRecords.Any(o => o.SignInRecordID == signIn.SignInRecordID))
+            if (_currentIncident.AllCheckInRecords.Any(o => o.SignInRecordID == signIn.SignInRecordID))
             {
-                _currentIncident.AllSignInRecords = _currentIncident.AllSignInRecords.Where(o => o.SignInRecordID != signIn.SignInRecordID).ToList();
+                _currentIncident.AllCheckInRecords = _currentIncident.AllCheckInRecords.Where(o => o.SignInRecordID != signIn.SignInRecordID).ToList();
             }
-            _currentIncident.AllSignInRecords.Add(signIn);
+            _currentIncident.AllCheckInRecords.Add(signIn);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(signIn, "UPSERT", true, false); }
+
+          
+
+
             OnMemberSignInChanged(new MemberEventArgs(signIn));
         }
-        public void UpsertMemberStatus(Personnel member, string source = "local")
+        public void UpsertPersonnel(Personnel member, string source = "local")
         {
             if (member != null)
             {
@@ -1624,7 +1629,7 @@ namespace WildfireICSDesktopServices
 
             item.LastUpdatedUTC = DateTime.UtcNow;
 
-            
+
             if (CurrentIncident.AllAssignments.Any(o => o.ID == item.ID))
             {
                 CurrentIncident.AllAssignments = CurrentIncident.AllAssignments.Where(o => o.ID != item.ID).ToList();
@@ -1647,7 +1652,7 @@ namespace WildfireICSDesktopServices
         public void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if(CurrentIncident.AllOperationalSubGroups.Any(o=>o.ID == record.ID)) { CurrentIncident.AllOperationalSubGroups = CurrentIncident.AllOperationalSubGroups.Where(o=>o.ID != record.ID).ToList();}
+            if (CurrentIncident.AllOperationalSubGroups.Any(o => o.ID == record.ID)) { CurrentIncident.AllOperationalSubGroups = CurrentIncident.AllOperationalSubGroups.Where(o => o.ID != record.ID).ToList(); }
             CurrentIncident.AllOperationalSubGroups.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "UPSERT", true, false); }
             CurrentIncident.SetOpGroupDepths(record.OpPeriod);
@@ -1676,14 +1681,16 @@ namespace WildfireICSDesktopServices
             }
             record.GetOpGroupDepth(CurrentIncident);
             CurrentIncident.AllOperationalGroups.Add(record);
+            if (CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == record.OpPeriod))
+            {
+                OrganizationChart CurrentOrgChart = CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod);
 
-
-            //Add new entries to the Org Chart if needed
-           // if (record.IsBranchOrDiv)
-           // {
-                if (CurrentIncident.allOrgCharts.Any(o=>o.OpPeriod == record.OpPeriod) && !CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any(o => o.OperationalGroupID == record.ID))
+                //Add new entries to the Org Chart if needed
+                // if (record.IsBranchOrDiv)
+                // {
+                if (!CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any(o => o.OperationalGroupID == record.ID))
                 {
-                    OrganizationChart CurrentOrgChart = CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod);
+
                     //are any of the generic branch thingies available?
                     Guid potential1 = new Guid("b01ea351-0578-4eb0-b8ca-d319efa74b7c");
                     Guid potential2 = new Guid("9727f016-aed9-4f34-99db-910a06b97f2e");
@@ -1691,10 +1698,17 @@ namespace WildfireICSDesktopServices
                     ICSRole NewRole = new ICSRole();
 
 
-                   
-                   if (record.GroupType.Equals("Branch"))
+
+                    if (record.GroupType.Equals("Branch"))
                     {
-                        NewRole = OrgChartTools.getGenericRoleByName("Operations Branch Director");
+                        if (!string.IsNullOrEmpty(record.Name) && record.Name.Equals("Heavy Equipment"))
+                        {
+                            NewRole = OrgChartTools.getGenericRoleByName("Heavy Equipment Branch Director");
+                        }
+                        else
+                        {
+                            NewRole = OrgChartTools.getGenericRoleByName("Operations Branch Director");
+                        }
                     }
                     else if (record.GroupType.Equals("Division"))
                     {
@@ -1713,7 +1727,7 @@ namespace WildfireICSDesktopServices
                         NewRole.BaseRoleName = "Group Supervisor";
                         NewRole.RoleName = "Group Supervisor";
                         NewRole.SectionID = Globals.OpsChiefID;
-
+                        NewRole.IsOpGroupSup = true;
                     }
 
                     if (record.GroupType.Equals("Branch") && CurrentOrgChart.ActiveRoles.Any(o => (o.RoleID == potential1 || o.RoleID == potential2 || o.RoleID == potential3) && o.RoleName.Contains("Branch/Division/Group") && o.IndividualID == Guid.Empty))
@@ -1738,7 +1752,10 @@ namespace WildfireICSDesktopServices
                     switch (record.GroupType)
                     {
                         case "Branch":
-                            NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
+                            if (record.Name.Length < 4)
+                            {
+                                NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
+                            }
                             NewRole.IsOpGroupSup = true;
                             break;
                         case "Division":
@@ -1761,20 +1778,33 @@ namespace WildfireICSDesktopServices
                     UpsertICSRole(NewRole);
                     record.LeaderICSRoleID = NewRole.RoleID; record.LeaderICSRoleName = NewRole.RoleName;
                 }
-
-                if (CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == record.OpPeriod) &&  CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any(o => o.OperationalGroupID == record.ID) && CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.First(o => o.OperationalGroupID == record.ID).IndividualID != record.LeaderID)
+                else if (CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any(o => o.OperationalGroupID == record.ID))
                 {
+                    //may need to change who the role reports to
                     ICSRole role = CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.First(o => o.OperationalGroupID == record.ID);
-                    if (CurrentIncident.TaskTeamMembers.Any(o => o.PersonID == record.LeaderID))
+                    if (role.ReportsTo != record.ParentID && CurrentOrgChart.GetRoleByID(record.ParentID, false) != null)
                     {
-                        Personnel per = CurrentIncident.TaskTeamMembers.First(o => o.PersonID == record.LeaderID);
-                        role.teamMember = per.Clone();
-                        role.IndividualID = record.LeaderID;
-                        role.IndividualName = record.LeaderName;
+                        role.ReportsTo = record.ParentID;
+                        role.ReportsToRoleName = CurrentOrgChart.GetRoleByID(record.ParentID, false).RoleName;
                         UpsertICSRole(role);
                     }
+
                 }
-           // }
+            }
+
+            if (CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == record.OpPeriod) && CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.Any(o => o.OperationalGroupID == record.ID) && CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.First(o => o.OperationalGroupID == record.ID).IndividualID != record.LeaderID)
+            {
+                ICSRole role = CurrentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).AllRoles.First(o => o.OperationalGroupID == record.ID);
+                if (CurrentIncident.IncidentPersonnel.Any(o => o.PersonID == record.LeaderID))
+                {
+                    Personnel per = CurrentIncident.IncidentPersonnel.First(o => o.PersonID == record.LeaderID);
+                    role.teamMember = per.Clone();
+                    role.IndividualID = record.LeaderID;
+                    role.IndividualName = record.LeaderName;
+                    UpsertICSRole(role);
+                }
+            }
+            // }
             CurrentIncident.SetOpGroupDepths(record.OpPeriod);
 
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "UPSERT", true, false); }
@@ -1866,7 +1896,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        
+
         public virtual void OnOpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
             IncidenOpPeriodChangedEventHandler handler = this.OpPeriodChanged;
@@ -1876,7 +1906,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-      
+
     }
 
 }

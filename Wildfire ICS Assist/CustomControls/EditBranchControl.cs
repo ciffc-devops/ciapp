@@ -48,9 +48,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void PopulateLeader()
         {
-            if ( Program.CurrentIncident != null && Program.CurrentIncident.TaskTeamMembers != null)
+            if ( Program.CurrentIncident != null && Program.CurrentIncident.IncidentPersonnel != null)
             {
-                List<Personnel> members = Program.CurrentIncident.TaskTeamMembers.OrderBy(o => o.Name).ToList();
+                List<Personnel> members = Program.CurrentIncident.IncidentPersonnel.OrderBy(o => o.Name).ToList();
                 Personnel blank = new Personnel(); blank.PersonID = Guid.Empty; members.Insert(0, blank);
 
                 List<Personnel> mems = new List<Personnel>();
@@ -69,6 +69,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 OpsRoles.Add(Program.CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.OpsChiefID && !o.IsPlaceholder));
                 OpsRoles.AddRange(Program.CurrentOrgChart.GetChildRoles(Globals.OpsChiefID, true, true));
+                OpsRoles = OpsRoles.Where(o => o.RoleID == Globals.OpsChiefID || o.IsBranch).OrderByDescending(o=>o.RoleID == Globals.OpsChiefID).ThenBy(o=>o.RoleName).ToList();
                 cboReportsTo.DataSource = OpsRoles;
                 cboReportsTo.DisplayMember = "RoleNameForDropdown";
                 cboReportsTo.ValueMember = "RoleID";
@@ -155,6 +156,12 @@ namespace Wildfire_ICS_Assist.CustomControls
             if (!string.IsNullOrEmpty(SelectedGroup.Name) && cboName.FindStringExact(SelectedGroup.Name) == -1)
             {
                 cboName.Items.Add(SelectedGroup.Name);
+            }
+
+            //Heavy Equipment
+            if (cboName.FindStringExact("Heavy Equipment") == -1 && !Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.OpPeriod == Program.CurrentOpPeriod && o.Name.Equals("Heavy Equipment")))
+            {
+                cboName.Items.Add("Heavy Equipment");
             }
         }
 

@@ -147,7 +147,6 @@
             this.checkInsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memberStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkInMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bulkCheckInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vehiclesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,7 +182,6 @@
             this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
             this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
             this.cpLogistics = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.btnLogisticsBulkSignIn = new System.Windows.Forms.Button();
             this.btnLogisticsSignIn = new System.Windows.Forms.Button();
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnLogisticsMemberStatus = new System.Windows.Forms.Button();
@@ -1079,7 +1077,6 @@
             this.checkInsToolStripMenuItem,
             this.memberStatusToolStripMenuItem,
             this.checkInMemberToolStripMenuItem,
-            this.bulkCheckInToolStripMenuItem,
             this.vehiclesToolStripMenuItem1,
             this.toolStripSeparator10,
             this.additionalContactsToolStripMenuItem});
@@ -1113,12 +1110,6 @@
             this.checkInMemberToolStripMenuItem.Name = "checkInMemberToolStripMenuItem";
             resources.ApplyResources(this.checkInMemberToolStripMenuItem, "checkInMemberToolStripMenuItem");
             this.checkInMemberToolStripMenuItem.Click += new System.EventHandler(this.checkInMemberToolStripMenuItem_Click);
-            // 
-            // bulkCheckInToolStripMenuItem
-            // 
-            this.bulkCheckInToolStripMenuItem.Name = "bulkCheckInToolStripMenuItem";
-            resources.ApplyResources(this.bulkCheckInToolStripMenuItem, "bulkCheckInToolStripMenuItem");
-            this.bulkCheckInToolStripMenuItem.Click += new System.EventHandler(this.bulkCheckInToolStripMenuItem_Click);
             // 
             // vehiclesToolStripMenuItem1
             // 
@@ -1319,28 +1310,20 @@
             // cpLogistics
             // 
             resources.ApplyResources(this.cpLogistics, "cpLogistics");
-            this.cpLogistics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpLogistics.BackColor = System.Drawing.Color.White;
             this.cpLogistics.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpLogistics.CollapsedHeight = 40;
             this.cpLogistics.CollapsedWidth = 485;
             this.cpLogistics.CollapseLeft = false;
-            this.cpLogistics.Controls.Add(this.btnLogisticsBulkSignIn);
             this.cpLogistics.Controls.Add(this.btnLogisticsSignIn);
             this.cpLogistics.Controls.Add(this.btnAdditionalContacts);
             this.cpLogistics.Controls.Add(this.btnLogisticsMemberStatus);
             this.cpLogistics.Controls.Add(this.btnVehicles);
-            this.cpLogistics.CurrentlyCollapsed = true;
+            this.cpLogistics.CurrentlyCollapsed = false;
             this.cpLogistics.ExpandedHeight = 196;
             this.cpLogistics.ExpandedWidth = 530;
             this.cpLogistics.Name = "cpLogistics";
             this.cpLogistics.TitleText = "LOGISTICS";
-            // 
-            // btnLogisticsBulkSignIn
-            // 
-            resources.ApplyResources(this.btnLogisticsBulkSignIn, "btnLogisticsBulkSignIn");
-            this.btnLogisticsBulkSignIn.Name = "btnLogisticsBulkSignIn";
-            this.btnLogisticsBulkSignIn.UseVisualStyleBackColor = true;
-            this.btnLogisticsBulkSignIn.Click += new System.EventHandler(this.btnLogisticsBulkSignIn_Click);
             // 
             // btnLogisticsSignIn
             // 
@@ -1459,6 +1442,7 @@
             // 
             // cpPlanning
             // 
+            resources.ApplyResources(this.cpPlanning, "cpPlanning");
             this.cpPlanning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpPlanning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpPlanning.CollapsedHeight = 40;
@@ -1470,7 +1454,6 @@
             this.cpPlanning.CurrentlyCollapsed = true;
             this.cpPlanning.ExpandedHeight = 195;
             this.cpPlanning.ExpandedWidth = 485;
-            resources.ApplyResources(this.cpPlanning, "cpPlanning");
             this.cpPlanning.Name = "cpPlanning";
             this.cpPlanning.TitleText = "PLANNING";
             // 
@@ -1535,6 +1518,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            this.Controls.Add(this.cpLogistics);
             this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
@@ -1547,7 +1531,6 @@
             this.Controls.Add(this.tcStatus);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.cpOperations);
-            this.Controls.Add(this.cpLogistics);
             this.Controls.Add(this.cpPlanning);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
@@ -1658,7 +1641,6 @@
         private System.Windows.Forms.Button btnCommsPlan;
         private System.Windows.Forms.Button btnPrintIAP;
         private System.Windows.Forms.Button btnIncidentObjectives;
-        private System.Windows.Forms.Button btnLogisticsBulkSignIn;
         private System.Windows.Forms.Button btnLogisticsSignIn;
         private System.Windows.Forms.Button btnLogisticsMemberStatus;
         private System.Windows.Forms.Button btnAdditionalContacts;
@@ -1739,7 +1721,6 @@
         private System.Windows.Forms.ToolStripMenuItem checkInsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem memberStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkInMemberToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bulkCheckInToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem vehiclesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem additionalContactsToolStripMenuItem;

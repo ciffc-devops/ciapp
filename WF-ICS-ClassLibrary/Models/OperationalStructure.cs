@@ -14,7 +14,7 @@ namespace WF_ICS_ClassLibrary.Models
     [ProtoContract]
     public class OperationalGroup : IncidentResource, ICloneable
     {
-        //  [ProtoMember(1)] private Guid _ID;
+
         [ProtoMember(2)] private string _Name;
         [ProtoMember(3)] private Guid _ParentID;
         [ProtoMember(4)] private string _ParentName;
@@ -24,12 +24,12 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(8)] private string _LeaderICSRoleName;
         [ProtoMember(9)] private Guid _LeaderID;
         [ProtoMember(10)] private string _LeaderName;
-        //        [ProtoMember(11)] private bool _Active;
-        //      [ProtoMember(12)] private int _OpPeriod;
+
+
         [ProtoMember(13)] private string _PreparedByName;
         [ProtoMember(14)] private string _PreparedByPosition;
         [ProtoMember(15)] private Guid _PreparedByPositionID;
-        //    [ProtoMember(16)] private DateTime _LastUpatedUTC;
+
         [ProtoMember(17)] private string _Contact; //used for task forces, strike teams, groups
         [ProtoMember(18)] private string _ShortRemarks;  //used for task forces, strike teams, groups
         [ProtoMember(19)] private string _Comments; //used for task forces, strike teams, groups
@@ -53,6 +53,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
+                if (GroupType.Equals("Branch") && (Name != null && Name.Length > 3)) { return Name + " Branch"; }
                 if (GroupType.Equals("Branch") && (Name == null || !Name.Contains("Branch"))) { return "Branch " + Name; }
                 if (GroupType.Equals("Division") && (Name == null || !Name.Contains("Division"))) { return "Division " + Name; }
                 if (GroupType.Equals("Group") && (Name == null || !Name.Contains("Group"))) { return Name + " Group"; }
@@ -114,13 +115,18 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(2)] private Guid _LeaderID;
         [ProtoMember(3)] private string _LeaderName;
         [ProtoMember(4)] private string _Transport;
-        [ProtoMember(5)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
+        [ProtoMember(5)] private string _Email;
+        [ProtoMember(6)] private string _Phone;
+        [ProtoMember(7)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
 
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid LeaderID { get => _LeaderID; set => _LeaderID = value; }
         public string LeaderName { get => _LeaderName; set => _LeaderName = value; }
         public string Transport { get => _Transport; set => _Transport = value; }
+        public string Email { get => _Email; set => _Email = value; }
+        public string Phone { get => _Phone; set => _Phone = value; }
         public List<OperationalGroupResourceListing> ResourceListing { get => _ResourceListing; set => _ResourceListing = value; }
+        public List<OperationalGroupResourceListing> ActiveResourceListing { get => _ResourceListing.Where(o => o.Active).ToList(); }
         public int NumberOfPeople { get { return ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Personnel")); } }
         public int NumberOfVehicles { get { return ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Vehicle/Equipment")); } }
         

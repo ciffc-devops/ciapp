@@ -1588,7 +1588,7 @@ namespace WildfireICSDesktopServices
                                     table.AddCell(role.RoleName);
                                     table.AddCell(role.IndividualName);
                                     string contactInfo = null;
-                                    if (!string.IsNullOrEmpty(role.teamMember.Phone)) { contactInfo = role.teamMember.Phone.FormatPhone(); }
+                                    if (!string.IsNullOrEmpty(role.teamMember.CellphoneNumber)) { contactInfo = role.teamMember.CellphoneNumber.FormatPhone(); }
                                     if (!string.IsNullOrEmpty(role.teamMember.Email))
                                     {
                                         if (!string.IsNullOrEmpty(contactInfo)) { contactInfo += Environment.NewLine; }
@@ -1632,7 +1632,7 @@ namespace WildfireICSDesktopServices
                                         table.AddCell(new Phrase(role.RoleName, fonttoUse));
                                         table.AddCell(new Phrase(role.IndividualName, fonttoUse));
                                         string contactInfo = null;
-                                        if (!string.IsNullOrEmpty(role.teamMember.Phone)) { contactInfo = role.teamMember.Phone.FormatPhone(); }
+                                        if (!string.IsNullOrEmpty(role.teamMember.CellphoneNumber)) { contactInfo = role.teamMember.CellphoneNumber.FormatPhone(); }
                                         if (!string.IsNullOrEmpty(role.teamMember.Email))
                                         {
                                             if (!string.IsNullOrEmpty(contactInfo)) { contactInfo += Environment.NewLine; }
@@ -2205,10 +2205,10 @@ namespace WildfireICSDesktopServices
             {
                 MemberStatus status = statuses[x];
                 Personnel member = new Personnel();
-                if (status.MemberID != Guid.Empty && task.TaskTeamMembers.Any(o => o.PersonID == status.MemberID)) { member = task.TaskTeamMembers.First(o => o.PersonID == status.MemberID); }
+                if (status.MemberID != Guid.Empty && task.IncidentPersonnel.Any(o => o.PersonID == status.MemberID)) { member = task.IncidentPersonnel.First(o => o.PersonID == status.MemberID); }
 
                 stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
-                stamper.AcroFields.SetField("Address" + (x + 1).ToString(), member.AddressWithPhone);
+                
 
 
                 string timein = string.Format("{0:HH:mm}", status.SignInTime);
@@ -2307,13 +2307,12 @@ namespace WildfireICSDesktopServices
                     {
                         MemberStatus status = statuses[x];
                         Personnel member = new Personnel();
-                        if (status.MemberID != Guid.Empty && task.TaskTeamMembers.Where(o => o.PersonID == status.MemberID).Any()) { member = task.TaskTeamMembers.Where(o => o.PersonID == status.MemberID).First(); }
+                        if (status.MemberID != Guid.Empty && task.IncidentPersonnel.Where(o => o.PersonID == status.MemberID).Any()) { member = task.IncidentPersonnel.Where(o => o.PersonID == status.MemberID).First(); }
                         else if (status.MemberID != Guid.Empty && task.getTaskTeamMembers(options.AllTeamMembers, false, false, OpsPeriod).Where(o => o.PersonID == status.MemberID).Any())
                         {
                             member = task.getTaskTeamMembers(options.AllTeamMembers, false, false, OpsPeriod).Where(o => o.PersonID == status.MemberID).First();
                         }
                         stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
-                        stamper.AcroFields.SetField("Address" + (x + 1).ToString(), member.AddressWithPhone);
 
 
 
@@ -3524,7 +3523,7 @@ namespace WildfireICSDesktopServices
                     {
                         stamper.AcroFields.SetField("NameRow" + (x + 1), roles[x].IndividualName);
                         stamper.AcroFields.SetField("PositionRow" + (x + 1), roles[x].RoleName);
-                        if (roles[x].teamMember != null) { stamper.AcroFields.SetField("Phone Row" + (x + 1), roles[x].teamMember.Phone); }
+                        if (roles[x].teamMember != null) { stamper.AcroFields.SetField("Phone Row" + (x + 1), roles[x].teamMember.CellphoneNumber); }
                     }
 
 

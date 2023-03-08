@@ -45,8 +45,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void PopulateDefaultAgency()
         {
             List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
-            List<string> incidentAgencies = Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList();
-            incidentAgencies.AddRange(Program.CurrentIncident.TaskTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeBase)).GroupBy(o => o.HomeBase).Select(o => o.First().HomeBase));
+            List<string> incidentAgencies = Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList();
+            incidentAgencies.AddRange(Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.HomeUnit)).GroupBy(o => o.HomeUnit).Select(o => o.First().HomeUnit));
             agencies.AddRange(incidentAgencies.Distinct());
             agencies = agencies.OrderBy(o => o).ToList();
             agencies.Insert(0, string.Empty);
@@ -194,22 +194,21 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                     Personnel member = new Personnel();
                     member.Name = fields[nameCol];
-                    member.Phone = fields[phoneCol];
+                    member.CellphoneNumber = fields[phoneCol];
                     member.MemberActive = true;
                     member.Email = fields[emailCol];
-                    member.SpecialSkills = fields[qualCol];
-                    member.Dietary = fields[dietaryCol];
+                    //member.Dietary = fields[dietaryCol];
 
                     string xlProvince = fields[provinceCol];
-                    if (string.IsNullOrEmpty(xlProvince)) { member.ProvinceID = new Guid(cboDefaultProvince.SelectedValue.ToString()); }
+                    if (string.IsNullOrEmpty(xlProvince)) { member.HomeProvinceID = new Guid(cboDefaultProvince.SelectedValue.ToString()); }
                     else
                     {
                         List<Province> provinces = ProvinceTools.GetProvinces();
                         if (provinces.Any(o => o.ProvinceName.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase) || o.ProvinceShort.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase)))
                         {
-                            member.ProvinceID = provinces.First(o => o.ProvinceName.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase) || o.ProvinceShort.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase)).ProvinceGUID;
+                            member.HomeProvinceID = provinces.First(o => o.ProvinceName.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase) || o.ProvinceShort.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase)).ProvinceGUID;
                         }
-                        else { member.ProvinceID = new Guid(cboDefaultProvince.SelectedValue.ToString()); }
+                        else { member.HomeProvinceID = new Guid(cboDefaultProvince.SelectedValue.ToString()); }
 
                     }
 
@@ -223,16 +222,16 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         else { member.Agency = xlAgency; }
                     }
                     string xlHome = fields[homeCol];
-                    if (string.IsNullOrEmpty(xlHome)) { member.HomeBase = cboDefaultAgency.SelectedValue.ToString(); }
+                    if (string.IsNullOrEmpty(xlHome)) { member.HomeUnit = cboDefaultAgency.SelectedValue.ToString(); }
                     else
                     {
                         //this will use an existing agency if there's a case-insensitive match. that way we don't have duplciates with different capitalization.
-                        if (agencies.Any(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase))) { member.HomeBase = agencies.First(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase)); }
-                        else { member.HomeBase = xlHome; }
+                        if (agencies.Any(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase))) { member.HomeUnit = agencies.First(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase)); }
+                        else { member.HomeUnit = xlHome; }
                     }
 
 
-
+                    /*
                     string xlVeg = fields[vegCol];
                     if (xlVeg.Equals("yes", StringComparison.InvariantCultureIgnoreCase) || xlVeg.Equals("y", StringComparison.InvariantCultureIgnoreCase) || xlVeg.Equals("1", StringComparison.InvariantCultureIgnoreCase) || xlVeg.Equals("true", StringComparison.InvariantCultureIgnoreCase)) { member.Vegetarian = true; }
                     else { member.Vegetarian = false; }
@@ -240,7 +239,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     string xNoGl = fields[noglutenCol];
                     if (xNoGl.Equals("yes", StringComparison.InvariantCultureIgnoreCase) || xNoGl.Equals("y", StringComparison.InvariantCultureIgnoreCase) || xNoGl.Equals("1", StringComparison.InvariantCultureIgnoreCase) || xNoGl.Equals("true", StringComparison.InvariantCultureIgnoreCase)) { member.NoGluten = true; }
                     else { member.NoGluten = false; }
-
+                    */
                     if (!string.IsNullOrEmpty(member.Name)) { importedMembers.Add(member); }
                 }
 
@@ -255,7 +254,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             {
                 if (chkUpdateWhenPossible.Checked)
                 {
-                    List<Personnel> possibleDuplicates = savedMembers.Where(o => ((!string.IsNullOrEmpty(member.Email) && !string.IsNullOrEmpty(o.Email) && o.Email.Equals(member.Email, StringComparison.InvariantCultureIgnoreCase)) || (!string.IsNullOrEmpty(member.Phone) && !string.IsNullOrEmpty(o.Phone) && o.Phone.Equals(member.Phone, StringComparison.InvariantCultureIgnoreCase)) || ((o.Agency == null && member.Agency == null) || (!string.IsNullOrEmpty(member.Agency) && !string.IsNullOrEmpty(o.Agency) && o.Agency.Equals(member.Agency, StringComparison.InvariantCultureIgnoreCase)))) && (o.Name.Equals(member.Name, StringComparison.InvariantCultureIgnoreCase))).ToList();
+                    List<Personnel> possibleDuplicates = savedMembers.Where(o => ((!string.IsNullOrEmpty(member.Email) && !string.IsNullOrEmpty(o.Email) && o.Email.Equals(member.Email, StringComparison.InvariantCultureIgnoreCase)) || (!string.IsNullOrEmpty(member.CellphoneNumber) && !string.IsNullOrEmpty(o.CellphoneNumber) && o.CellphoneNumber.Equals(member.CellphoneNumber, StringComparison.InvariantCultureIgnoreCase)) || ((o.Agency == null && member.Agency == null) || (!string.IsNullOrEmpty(member.Agency) && !string.IsNullOrEmpty(o.Agency) && o.Agency.Equals(member.Agency, StringComparison.InvariantCultureIgnoreCase)))) && (o.Name.Equals(member.Name, StringComparison.InvariantCultureIgnoreCase))).ToList();
                     //If there is more than one duplicate, best to just import this as new rather than trying to decide which one to replace
                     if (possibleDuplicates.Count == 1 || possibleDuplicates.Where(o=>o.MemberActive).Count() == 1)
                     {
@@ -264,16 +263,13 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         else { dup = possibleDuplicates.First(o => o.MemberActive); }
                         dup.MemberActive = true;
                         dup.Name = member.Name;
-                        dup.Phone = member.Phone;
+                        dup.CellphoneNumber = member.CellphoneNumber;
 
                         dup.Email = member.Email;
-                        dup.SpecialSkills = member.SpecialSkills;
-                        dup.Dietary = member.Dietary;
+                        
                         dup.Agency = member.Agency;
-                        dup.HomeBase = member.HomeBase;
-                        dup.ProvinceID = member.ProvinceID;
-                        dup.Vegetarian = member.Vegetarian;
-                        dup.NoGluten = member.NoGluten;
+                        dup.HomeUnit = member.HomeUnit;
+                        dup.HomeProvinceID = member.HomeProvinceID;
                         Program.generalOptionsService.UpserOptionValue(dup, "TeamMember");
                         UpdatedCount++;
 

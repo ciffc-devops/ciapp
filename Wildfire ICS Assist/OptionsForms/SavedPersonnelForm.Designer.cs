@@ -1,6 +1,6 @@
 ﻿namespace Wildfire_ICS_Assist.OptionsForms
 {
-    partial class SavedTeamMembersForm
+    partial class SavedPersonnelForm
     {
         /// <summary>
         /// Required designer variable.

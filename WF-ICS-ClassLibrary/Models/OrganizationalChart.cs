@@ -256,12 +256,28 @@ namespace WF_ICS_ClassLibrary.Models
         public string BaseRoleName { get => _BaseRoleName; set => _BaseRoleName = value; }
         public bool Active { get => _Active; set => _Active = value; }
         public bool IsPlaceholder { get => _IsPlaceholder; set => _IsPlaceholder = value; }
-        public bool IsTFST { get
+        public bool IsTFST
+        {
+            get
             {
                 if (string.IsNullOrEmpty(Mnemonic)) { return false; }
                 else if (Mnemonic.Equals("STLD") || Mnemonic.Equals("TFLD")) { return true; }
                 return false;
-            } }
+            }
+        }
+        public bool IsBranch
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Mnemonic) || !IsOpGroupSup || string.IsNullOrEmpty(RoleName)) { return false; }
+                else if (RoleName.Contains("Branch")) { return true; }
+                return false;
+
+            }
+        }
+
+
+
         public Personnel teamMember
         {
             get => _teamMember;
@@ -728,10 +744,8 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Air Attack Officer", Globals.OpsChiefID, "AAON", "The person responsible for directing, coordinating, and supervising a fire suppression operation involving the use of aircraft to deliver retardants or suppressants on a fire."));
             allRoles.Add(new ICSRole("Area Commander", Globals.IncidentCommanderID, "ACDR", "The person responsible to manage a very large incident that has multiple IMTs assigned. These teams may be established any time the incidents are close enough that oversight direction is required."));
             allRoles.Add(new ICSRole("Assistant Area Commander, Logistics", Globals.LogisticsChiefID, "ACLC", "The person responsible for providing facilities, services, and material at the Area Command level, and for ensuring effective use of critical resources and supplies among the incident management teams."));
-            allRoles.Add(new ICSRole("Air Operations Branch Director", Globals.OpsChiefID, "AOBD", "The person primarily responsible for managing the resources within the air operations branch, as well as preparing and implementing the air operations portion of the Incident Action Plan. Also responsible for providing logistical support to helicopters operating on the incident."));
+
             allRoles.Add(new ICSRole("Agency Representative", Globals.IncidentCommanderID, "AREP", "The person assigned by a primary, assisting, or cooperating agency to an incident who has been delegated authority to make decisions affecting that agency’s participation at the incident."));
-            allRoles.Add(new ICSRole("Air Support Group Supervisor", Globals.OpsChiefID, "ASGS", "The person responsible for planning and oversight of incident aircraft support functions (helibase, helispot and Fixed Wing Air Bases)."));
-            allRoles.Add(new ICSRole("Air Tactical Group Supervisor", Globals.OpsChiefID, "ATGS", "The person primarily responsible for the coordination of all tactical missions of fixed and/or rotary wing aircraft operating in incident airspace."));
             allRoles.Add(new ICSRole("Base/Camp Manager", Globals.LogisticsChiefID, "BCMG", "The person responsible for appropriate sanitation and facility management services in the assigned Base or Camp."));
             allRoles.Add(new ICSRole("Claims Specialist", Globals.FinanceChiefID, "CLMS", "The person who is responsible to manage all claims related activities (other than injury) for an incident"));
             allRoles.Add(new ICSRole("Clerk", Guid.Empty, "CLRK", "The person who is responsible to provide administrative support to any Section as assigned."));
@@ -756,13 +770,25 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Where(o => o.Mnemonic.Equals("DIVS")).First().IsOpGroupSup = true;
             allRoles.Add(new ICSRole("Operations Branch Director", Globals.OpsChiefID, "OPBD", "The person responsible for implementing the portion of the Incident Action Plan applicable to the assigned Branch of the Operations Section."));
             allRoles.Where(o => o.Mnemonic.Equals("OPBD")).First().IsOpGroupSup = true;
+            allRoles.Add(new ICSRole("Heavy Equipment Branch Director", Globals.OpsChiefID, "HEBD", "The person responsible to supervise and manage the overall operations for all heavy equipment on an incident. This person will prioritize the need and allocation of heavy equipment for the incident."));
+            allRoles.Where(o => o.Mnemonic.Equals("HEBD")).First().IsOpGroupSup = true;
+
 
             allRoles.Add(new ICSRole("Strike Team Leader", Globals.OpsChiefID, "STLD", "The individual responsible for supervising a strike team (usually dozers, engines, or crews), and reports to a Division/Group Supervisor or Operations Section Chief."));
+            allRoles.Where(o => o.Mnemonic.Equals("STLD")).First().IsOpGroupSup = true;
             allRoles.Add(new ICSRole("Task Force Leader", Globals.OpsChiefID, "TFLD", "The individual responsible for supervising a task force. Reports to a Division/Group Supervisor or Operations Section Chief."));
+            allRoles.Where(o => o.Mnemonic.Equals("TFLD")).First().IsOpGroupSup = true;
+
+            allRoles.Add(new ICSRole("Air Operations Branch Director", Globals.OpsChiefID, "AOBD", "The person primarily responsible for managing the resources within the air operations branch, as well as preparing and implementing the air operations portion of the Incident Action Plan. Also responsible for providing logistical support to helicopters operating on the incident.")); allRoles.Where(o => o.Mnemonic.Equals("AOBD")).First().IsOpGroupSup = true;
+
+
+            allRoles.Add(new ICSRole("Air Support Group Supervisor", Globals.OpsChiefID, "ASGS", "The person responsible for planning and oversight of incident aircraft support functions (helibase, helispot and Fixed Wing Air Bases).")); allRoles.Where(o => o.Mnemonic.Equals("ASGS")).First().IsOpGroupSup = true;
+            allRoles.Add(new ICSRole("Air Tactical Group Supervisor", Globals.OpsChiefID, "ATGS", "The person primarily responsible for the coordination of all tactical missions of fixed and/or rotary wing aircraft operating in incident airspace.")); allRoles.Where(o => o.Mnemonic.Equals("ATGS")).First().IsOpGroupSup = true;
 
 
             //Does this one need a group?
             allRoles.Add(new ICSRole("Heavy Equipment Group Supervisor", Globals.OpsChiefID, "HEGS", "The person responsible for supervising and directing operations of assigned heavy equipment, including heavy equipment strike teams/task forces or single resources."));
+            allRoles.Add(new ICSRole("Sector Leader", Globals.OpsChiefID, "SCLD", "The person responsible for directing a combination of personnel, crews, or other types of equipment in performing tactical missions on a sector (specific piece of fire line)."));
 
 
 
@@ -786,7 +812,7 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Fixed Wing Base Manager", Globals.OpsChiefID, "FWBM", "The person responsible for supervision and coordination at a fixed-wing base."));
             allRoles.Add(new ICSRole("Geographic Information System Specialist", Globals.PlanningChiefID, "GISS", "The person responsible for providing timely and accurate spatial information to be used by all facets of the IMT."));
             allRoles.Add(new ICSRole("Ground Support Unit Leader", Globals.LogisticsChiefID, "GSUL", "The person responsible for the fueling, maintaining, and repairing of vehicles, and the transportation of personnel and supplies."));
-            allRoles.Add(new ICSRole("Heavy Equipment Branch Director", Globals.OpsChiefID, "HEBD", "The person responsible to supervise and manage the overall operations for all heavy equipment on an incident. This person will prioritize the need and allocation of heavy equipment for the incident."));
+
             allRoles.Add(new ICSRole("Helibase Manager", Globals.OpsChiefID, "HEBM", "The person responsible for controlling helicopter take-offs and landings at a helibase, managing helibase assigned helicopters, supplies, fire retardant mixing and loading."));
             allRoles.Add(new ICSRole("Helicopter engineer", Globals.OpsChiefID, "HENG", "The person responsible for the maintenance of a helicopter."));
             allRoles.Add(new ICSRole("Heavy Equipment Operator", Globals.OpsChiefID, "HEOP", "The person responsible for the safe and efficient operation of a single piece of heavy equipment on an incident"));
@@ -831,7 +857,7 @@ namespace WF_ICS_ClassLibrary.Models
             allRoles.Add(new ICSRole("Resource Clerk", Globals.PlanningChiefID, "RESC", "The person responsible for support to the Resource Unit."));
             allRoles.Add(new ICSRole("Resources Unit Leader", Globals.PlanningChiefID, "RESL", "The person responsible for establishing all incident check-in activities; preparing and processing resource status information; preparing and maintaining displays, charts, and lists that reflect the current status and location of suppression resources, transportation, and support vehicles; and maintaining a master check-in list of resources assigned to the incident."));
             allRoles.Add(new ICSRole("Status/Check-in Recorders", Globals.PlanningChiefID, "SCKN", "The person responsible, at each check in location, to ensure that all resources assigned to an incident are accounted for."));
-            allRoles.Add(new ICSRole("Sector Leader", Globals.OpsChiefID, "SCLD", "The person responsible for directing a combination of personnel, crews, or other types of equipment in performing tactical missions on a sector (specific piece of fire line)."));
+           
             allRoles.Add(new ICSRole("Situation Unit Leader", Globals.PlanningChiefID, "SITL", "The person responsible for collecting and organizing incident status and information and evaluating, analyzing, and displaying that information."));
             allRoles.Add(new ICSRole("Small Engine Mechanic", Globals.LogisticsChiefID, "SMEC", "The person responsible for the repair and maintenance of small engines powering firefighting equipment, such as portable pumps, chainsaws etc."));
             allRoles.Add(new ICSRole("Smoke Jumper", Globals.OpsChiefID, "SMKJ", "A firefighter who travels to wildland fires by fixed wing aircraft and parachute."));
@@ -1014,7 +1040,7 @@ namespace WF_ICS_ClassLibrary.Models
                 csv.Append("\""); csv.Append(item.RoleName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.ReportsToRoleName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.IndividualName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); if (item.teamMember != null) { csv.Append(item.teamMember.Phone.EscapeQuotes()); }                csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); if (item.teamMember != null) { csv.Append(item.teamMember.CellphoneNumber.EscapeQuotes()); }                csv.Append("\""); csv.Append(delimiter);
 
                 csv.Append(Environment.NewLine);
             }

@@ -19,54 +19,91 @@ namespace WF_ICS_ClassLibrary.Models
             PersonID = Guid.NewGuid();
             MemberActive = true;
             CurrentStatus = null;
+            HomeCountry = "Canada";
         }
         public Personnel(Guid id)
         {
             PersonID = id;
             MemberActive = true;
             CurrentStatus = null;
+            HomeCountry = "Canada";
         }
 
-        [ProtoMember(3)] private string _Group;
-        [ProtoMember(4)] private string _Callsign;
-        [ProtoMember(5)] private string _Phone;
-        [ProtoMember(6)] private Guid _ProvinceID;
+        [ProtoMember(1)] private string _FirstName;
+        [ProtoMember(2)] private string _LastName;
+        [ProtoMember(3)] private string _MiddleInitial;
+        [ProtoMember(4)] private string _Gender;
+        [ProtoMember(5)] private bool _HasDietaryRestrictions;
+        [ProtoMember(6)] private bool _HasAllergies;
+        [ProtoMember(7)] private string _Weight;
+        [ProtoMember(8)] private string _CellphoneNumber;
+        [ProtoMember(9)] private string _Email;
+        [ProtoMember(10)] private string _HomeUnit;
+        [ProtoMember(11)] private Guid _HomeProvince;
+        [ProtoMember(12)] private string _HomeCountry;
+        [ProtoMember(13)] private string _EmergencyContact;
+        [ProtoMember(14)] private string _Agency;
+        [ProtoMember(15)] private bool _IsContractor;
+        [ProtoMember(16)] private string _Callsign;
 
 
 
-        [ProtoMember(10)] private string _SpecialSkills;
-        [ProtoMember(11)] private bool _isAssignmentTeamLeader;
-
-
-        [ProtoMember(13)] private string _Agency;
-        [ProtoMember(14)] private string _HomeBase;
 
 
 
-        [ProtoMember(15)] private string _barcode;
-        [ProtoMember(16)] private bool _signedIn;
-        [ProtoMember(17)] private Guid _organizationID;
-        [ProtoMember(18)] private Guid _userID;
 
-        [ProtoMember(21)] private string _Email;
-        [ProtoMember(22)] private Guid _CreatedByOrgID;
-        [ProtoMember(23)] private string _Address;
-        [ProtoMember(24)] private string _NOKName;
-        [ProtoMember(25)] private string _NOKRelation;
-        [ProtoMember(26)] private string _NOKPhone;
+
+
+
 
         [ProtoMember(28)] private MemberStatus _currentStatus;
 
-        [ProtoMember(32)] private string _Dietary;
-        [ProtoMember(33)] private bool _Vegetarian;
-        [ProtoMember(34)] private bool _NoGluten;
-        [ProtoMember(35)] private bool _AnyDietary;
+
+
+
+        public string FirstName { get => _FirstName; set { _FirstName = value; SetName(); } }
+        public string LastName { get => _LastName; set { _LastName = value; SetName(); } }
+        public string MiddleInitial { get => _MiddleInitial; set { _MiddleInitial = value; SetName(); } }
+        public string Gender { get => _Gender; set => _Gender = value; }
+        public bool HasDietaryRestrictions { get => _HasDietaryRestrictions; set => _HasDietaryRestrictions = value; }
+        public bool HasAllergies { get => _HasAllergies; set => _HasAllergies = value; }
+        public string Weight { get => _Weight; set => _Weight = value; }
+        public string CellphoneNumber { get => _CellphoneNumber; set => _CellphoneNumber = value; }
+        public string Email { get => _Email; set => _Email = value; }
+        public string HomeUnit { get => _HomeUnit; set => _HomeUnit = value; }
+        public Guid HomeProvinceID { get => _HomeProvince; set => _HomeProvince = value; }
+        public string HomeCountry { get => _HomeCountry; set => _HomeCountry = value; }
+        public string EmergencyContact { get => _EmergencyContact; set => _EmergencyContact = value; }
+        public string Agency { get => _Agency; set => _Agency = value; }
+        public bool IsContractor { get => _IsContractor; set => _IsContractor = value; }
+        public string Callsign { get => _Callsign; set => _Callsign = value; }
+
+        private void SetName()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (!string.IsNullOrEmpty(FirstName)) { sb.Append(FirstName); }
+            if (!string.IsNullOrEmpty(MiddleInitial))
+            {
+                if(sb.Length > 0) { sb.Append(" "); }
+                sb.Append(MiddleInitial);
+            }
+            if (!string.IsNullOrEmpty(LastName))
+            {
+                if (sb.Length > 0) { sb.Append(" "); }
+                sb.Append(LastName);
+            }
+            ResourceName = sb.ToString();
+        }
+
+
+
+
+
+
 
         public Guid PersonID { get => ID; set => ID = value; }
 
         public string Name { get => ResourceName; set => ResourceName = value; }
-
-        public string Group { get => _Group; set => _Group = value; } //Use OrganizationName for this value
         public string NameWithAgency { get
             {
                 StringBuilder sb = new StringBuilder();
@@ -77,61 +114,15 @@ namespace WF_ICS_ClassLibrary.Models
 
             }
         }
-        public string NameWithGroup
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(Group)) { return Name + " (" + Group + ")"; }
-                else { return Name; }
-            }
-        }
-        public string NameAndContact { get
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Name);
-                if (!string.IsNullOrEmpty(Phone)) { sb.Append(" "); sb.Append(Phone.FormatPhone()); }
-                return sb.ToString();
-            } }
 
-        public string Callsign { get => _Callsign; set => _Callsign = value; }
-        public string Phone { get => _Phone.FormatPhone(); set => _Phone = value; }
-        public string SpecialSkills { get => _SpecialSkills; set => _SpecialSkills = value; }
-        public bool isAssignmentTeamLeader { get => _isAssignmentTeamLeader; set => _isAssignmentTeamLeader = value; }
-        public string Barcode { get { return _barcode; } set { _barcode = value; } }
-        public bool SignedInToTask { get { return _signedIn; } set { _signedIn = value; } }
-        public Guid OrganizationID { get => _organizationID; set => _organizationID = value; }
-        public Guid UserID { get => _userID; set => _userID = value; }
+
         public bool MemberActive { get => Active; set => Active = value; }
-        public string Email { get => _Email; set => _Email = value; }
-        public Guid CreatedByOrgID { get => _CreatedByOrgID; set => _CreatedByOrgID = value; } //used when a team creates members from outside their group for a task.
-        public string Address { get => _Address; set => _Address = value; }
-        public string AddressWithPhone
-        {
-            get
-            {
-                StringBuilder sb = new StringBuilder();
-                if (!string.IsNullOrEmpty(Address))
-                {
-                    sb.Append(Address.Replace("\r\n", " "));
-                    if (!string.IsNullOrEmpty(Phone)) { sb.Append("\n"); }
-                }
-                if (!string.IsNullOrEmpty(Phone)) { sb.Append(Phone); }
-
-                return sb.ToString();
-            }
-        }
         public MemberStatus CurrentStatus { get => _currentStatus; set => _currentStatus = value; }
-        public string Dietary { get => _Dietary; set => _Dietary = value; }
-        public bool Vegetarian { get => _Vegetarian; set => _Vegetarian = value; }
-        public bool NoGluten { get => _NoGluten; set => _NoGluten = value; }
-        public bool AnyDietary { get => _AnyDietary; set => _AnyDietary = value; }
-
-        public Guid ProvinceID { get => _ProvinceID; set => _ProvinceID = value; }
         public string ProvinceName
         {
             get
             {
-                if (ProvinceID != Guid.Empty) { Province p = new Province(ProvinceID); return p.ProvinceName; }
+                if (HomeProvinceID != Guid.Empty) { Province p = new Province(HomeProvinceID); return p.ProvinceName; }
                 else { return string.Empty; }
             }
         }
@@ -139,100 +130,13 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (ProvinceID != Guid.Empty) { Province p = new Province(ProvinceID); return p.ProvinceShort; }
+                if (HomeProvinceID != Guid.Empty) { Province p = new Province(HomeProvinceID); return p.ProvinceShort; }
                 else { return string.Empty; }
             }
         }
 
 
-        public string Agency { get => _Agency; set => _Agency = value; }
-        public string HomeBase { get => _HomeBase; set => _HomeBase = value; }
 
-        public string NOKName { get => _NOKName; set => _NOKName = value; }
-        public string NOKRelation { get => _NOKRelation; set => _NOKRelation = value; }
-        public string NOKPhone { get => _NOKPhone; set => _NOKPhone = value; }
-        public string NOKOneLine
-        {
-            get
-            {
-                StringBuilder sb = new StringBuilder();
-                if (!string.IsNullOrEmpty(NOKName)) { sb.Append(NOKName); sb.Append(" "); }
-                if (!string.IsNullOrEmpty(NOKRelation)) { sb.Append("("); sb.Append(NOKRelation); sb.Append(") "); }
-                if (!string.IsNullOrEmpty(NOKPhone)) { sb.Append(NOKPhone); }
-                return sb.ToString();
-            }
-        }
-
-
-        public void removeTildeFromRecord()
-        {
-            if (Name.Contains("~")) { Name = Name.Replace("~", ""); }
-            if (!string.IsNullOrEmpty(Address) && Address.Contains("~")) { Address = Address.Replace("~", ""); }
-            if (!string.IsNullOrEmpty(Phone) && Phone.Contains("~")) { Phone = Phone.Replace("~", ""); }
-            if (!string.IsNullOrEmpty(Email) && Email.Contains("~")) { Email = Email.Replace("~", ""); }
-            if (!string.IsNullOrEmpty(Callsign) && Callsign.Contains("~")) { Callsign = Callsign.Replace("~", ""); }
-            if (!string.IsNullOrEmpty(Dietary) && Dietary.Contains("~")) { Dietary = Dietary.Replace("~", ""); }
-
-        }
-
-
-        public string StringForQR
-        {
-            get
-            {
-                StringBuilder qr = new StringBuilder();
-                qr.Append(PersonID.ToString()); qr.Append(";"); //remove?
-
-                qr.Append(Name); qr.Append(";");
-                qr.Append(OrganizationID); qr.Append(";");
-                if (!string.IsNullOrEmpty(Address)) { qr.Append(Address.Replace(Environment.NewLine, " ")); } else { qr.Append(""); }
-                qr.Append(";");
-                qr.Append(Phone); qr.Append(";");
-                qr.Append(Email); qr.Append(";");
-                qr.Append(Callsign); qr.Append(";"); //remove
-                //qualifications
-                //pretend these are characters in a binary string and convert to int?
-
-                //nok
-
-
-                return qr.ToString();
-            }
-        }
-
-        public string StringForQRCompressed
-        {
-            get
-            {
-                StringBuilder qr = new StringBuilder();
-                // qr.Append(PersonID.ToString()); qr.Append(";"); //remove?
-
-                qr.Append(Name); qr.Append(";");
-                if (OrganizationID != Guid.Empty)
-                {
-                    Organization org = OrganizationTools.GetOrganization(OrganizationID);
-
-                    if (org != null)
-                    {
-                        qr.Append(org.ShortOrganizationID); qr.Append(";");
-                    }
-                    else { qr.Append(""); qr.Append(";"); }
-                }
-                else { qr.Append(""); qr.Append(";"); }
-                if (!string.IsNullOrEmpty(Address)) { qr.Append(Address.Replace(Environment.NewLine, " ")); } else { qr.Append(""); }
-                qr.Append(";");
-                if (!string.IsNullOrEmpty(Phone)) { qr.Append(Phone.Replace("-", "").Replace(" ", "")); } else { qr.Append(""); }
-                qr.Append(";");
-                qr.Append(Email); qr.Append(";");
-                // qr.Append(Callsign); qr.Append(";"); //remove
-                // qr.Append(Reference); qr.Append(";"); //remove
-                //qualifications
-                //pretend these are characters in a binary string and convert to int?
-
-
-                return qr.ToString();
-            }
-        }
 
         
 
@@ -248,27 +152,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public bool IsIdentical(Personnel compareTo)
-        {
-            bool Identical = true;
-
-            if (PersonID != compareTo.PersonID) { Identical = false; }
-            if (Name != compareTo.Name) { Identical = false; }
-            if (Group != compareTo.Group) { Identical = false; }
-            if (Callsign != compareTo.Callsign) { Identical = false; }
-            if (Phone != compareTo.Phone) { Identical = false; }
-            if (SpecialSkills != compareTo.SpecialSkills) { Identical = false; }
-            if (isAssignmentTeamLeader != compareTo.isAssignmentTeamLeader) { Identical = false; }
-            if (Barcode != compareTo.Barcode) { Identical = false; }
-            if (OrganizationID != compareTo.OrganizationID) { Identical = false; }
-            if (UserID != compareTo.UserID) { Identical = false; }
-            if (MemberActive != compareTo.MemberActive) { Identical = false; }
-            if (LastUpdatedUTC != compareTo.LastUpdatedUTC) { Identical = false; }
-            if (Email != compareTo.Email) { Identical = false; }
-            if (CreatedByOrgID != compareTo.CreatedByOrgID) { Identical = false; }
-            if (Address != compareTo.Address) { Identical = false; }
-            return Identical;
-        }
+    
 
         public bool Equals(Personnel other)
         {
@@ -344,10 +228,10 @@ namespace WF_ICS_ClassLibrary.Models
                     {
                         Personnel member = new Personnel();
                         member.Name = fields[nameField];
-                        member.Phone = fields[phoneField];
+                        member.CellphoneNumber = fields[phoneField];
                         member.MemberActive = true;
                         member.Email = fields[emailField];
-                        member.Address = fields[addressField];
+                       
                         if (callsignColumn >= 0) { member.Callsign = fields[callsignColumn]; }
                         members.Add(member);
                     }
@@ -368,97 +252,7 @@ namespace WF_ICS_ClassLibrary.Models
 
     }
 
-    [ProtoContract]
-    [Serializable]
-    public class CheckInRecord : ICloneable
-    {
-        [ProtoMember(1)] private DateTime _statusChangeTime = DateTime.MinValue;
-        /*[ProtoMember(2)]
-        private DateTime _signOutTime = DateTime.MaxValue;*/
-        /*
-        [ProtoMember(3)]
-        private Guid _memberID;*/
-        [ProtoMember(2)] private int _opPeriod;
-        [ProtoMember(3)] private Guid _signInRecordID;
-        [ProtoMember(4)] private Personnel _teamMember;
-        [ProtoMember(5)] private bool _isSignIn;
-        
-        //[ProtoMember(9)] private DateTime _TimeOutRequest;
-        [ProtoMember(6)] private DateTime _RecordUpdatedUTC;
-        
-        [ProtoMember(7)] private string _DeparturePoint;
-        
-        [ProtoMember(8)] private string _MethodOfTravel;
-        [ProtoMember(9)] private string _Accomodations;
-        [ProtoMember(10)] private bool _Breakfast;
-        [ProtoMember(11)] private bool _Lunch;
-        [ProtoMember(12)] private bool _Dinner;
-
-
-
-        [ProtoMember(13)] private DateTime _LastDayOfRest;
-        [ProtoMember(14)] private DateTime _StartOfTravel;
-
-        [ProtoMember(15)] private DateTime _LastDayOnIncident;
-        [ProtoMember(16)] private DateTime _LastDayOfTravel;
-        [ProtoMember(17)] private DateTime _FirstDayOnIncident;
-        [ProtoMember(18)] private Guid _InitialIncidentRoleID;
-        [ProtoMember(19)] private string _InitialRoleName;
-        [ProtoMember(20)] private string _CheckInLocation;
-        [ProtoMember(20)] private string _AdditionalInfo;
-        [ProtoMember(21)] private int _PersonalIncidentNumber;
-
-
-        [ProtoMember(99)] private decimal _KMs;
-
-        public DateTime StatusChangeTime { get { return _statusChangeTime; } set { _statusChangeTime = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        /*public DateTime SignOutTime { get { return _signOutTime; } set { _signOutTime = value; } }*/
-        public Guid MemberID { get { return _teamMember.PersonID; } set { _teamMember.PersonID = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public int OpPeriod { get { return _opPeriod; } set { _opPeriod = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public Guid SignInRecordID { get { return _signInRecordID; } set { _signInRecordID = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public Personnel teamMember { get => _teamMember; set { _teamMember = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public bool IsSignIn { get => _isSignIn; set { _isSignIn = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public decimal KMs { get => _KMs; set { _KMs = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-
-        public string Accomodations { get => _Accomodations; set => _Accomodations = value; }
-        public bool Breakfast { get => _Breakfast; set => _Breakfast = value; }
-        public bool Lunch { get => _Lunch; set => _Lunch = value; }
-        public bool Dinner { get => _Dinner; set => _Dinner = value; }
-
-        public CheckInRecord() { SignInRecordID = Guid.NewGuid(); _teamMember = new Personnel(); }
-        public DateTime RecordUpdatedUTC { get => _RecordUpdatedUTC; set => _RecordUpdatedUTC = value; }
-
-
-        public DateTime SignInTime { get => _statusChangeTime; set { _statusChangeTime = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public DateTime SignOutTime { get => _statusChangeTime; set { _statusChangeTime = value; RecordUpdatedUTC = DateTime.UtcNow; } }
-        public string InOrOut { get { if (IsSignIn) { return "Sign In"; } else { return "Sign Out"; } } }
-        public string DeparturePoint { get => _DeparturePoint; set => _DeparturePoint = value; }
-        public string MethodOfTravel { get => _MethodOfTravel; set => _MethodOfTravel = value; }
-        public Guid InitialIncidentRoleID { get => _InitialIncidentRoleID; set => _InitialIncidentRoleID = value; }
-        public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
-
-        public DateTime LastDayOfRest { get => _LastDayOfRest; set => _LastDayOfRest = value; }
-        public DateTime StartOfTravel { get => _StartOfTravel; set => _StartOfTravel = value; }
-        public DateTime LastDayOnIncident { get => _LastDayOnIncident; set => _LastDayOnIncident = value; }
-        public DateTime LastDayOfTravel { get => _LastDayOfTravel; set => _LastDayOfTravel = value; }
-        public DateTime FirstDayOnIncident { get => _FirstDayOnIncident; set => _FirstDayOnIncident = value; }
-
-        public string CheckInLocation { get => _CheckInLocation; set => _CheckInLocation = value; }
-        public string AdditionalInfo { get => _AdditionalInfo; set => _AdditionalInfo = value; }
-        public int PersonalIncidentNumber { get => _PersonalIncidentNumber; set => _PersonalIncidentNumber = value; }
-
-        public CheckInRecord Clone()
-        {
-            CheckInRecord cloneTo = this.MemberwiseClone() as CheckInRecord;
-            cloneTo.teamMember = this.teamMember.Clone();
-            return cloneTo;
-        }
-        object ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-
-    }
+    
 
     [Serializable]
     [ProtoContract]
@@ -588,7 +382,6 @@ namespace WF_ICS_ClassLibrary.Models
         {
             MemberName = member.Name;
             MemberID = member.PersonID;
-            OrganizationID = member.OrganizationID;
             _OrganizationName = member.Agency;
             Callsign = member.Callsign;
 
@@ -631,12 +424,12 @@ namespace WF_ICS_ClassLibrary.Models
             foreach (MemberStatus status in records.OrderBy(o => o.MemberName))
             {
                 CheckInRecord rec  = new CheckInRecord();
-                if (incident.AllSignInRecords.Any(o => o.MemberID == status.MemberID))
+                if (incident.AllCheckInRecords.Any(o => o.ResourceID == status.MemberID))
                 {
-                   rec = incident.AllSignInRecords.Where(o => o.MemberID == status.MemberID).First();
+                   rec = incident.AllCheckInRecords.Where(o => o.ResourceID == status.MemberID).First();
                 }
 
-
+                /*
                 csv.Append("\""); csv.Append(status.MemberName.EscapeQuotes()); csv.Append("\"");
                 csv.Append(delimiter);
                 if (rec != null) { csv.Append(rec.teamMember.ProvinceNameShort.EscapeQuotes()); }
@@ -652,7 +445,7 @@ namespace WF_ICS_ClassLibrary.Models
                 csv.Append(delimiter);
                 if (rec != null) { csv.Append("\""); csv.Append(rec.MethodOfTravel.EscapeQuotes()); csv.Append("\""); }
                 csv.Append(delimiter);
-
+                */
 
                 csv.Append(status.SignOutTimeOrBlank);
                
@@ -661,103 +454,44 @@ namespace WF_ICS_ClassLibrary.Models
             return csv.ToString();
         }
 
-           public static List<AgencyPersonnelCount> GetAgencyPersonnelCount(this WFIncident incident, int OpPeriod)
+        public static List<AgencyPersonnelCount> GetAgencyPersonnelCount(this WFIncident incident, int OpPeriod)
         {
             List<AgencyPersonnelCount> counts = new List<AgencyPersonnelCount>();
 
-            foreach (CheckInRecord record in incident.AllSignInRecords.Where(o => o.OpPeriod == OpPeriod))
+            foreach (CheckInRecord record in incident.AllCheckInRecords.Where(o => o.OpPeriod == OpPeriod && o.Active && (o.IsPerson || o.IsVisitor)))
             {
-                if (!counts.Any(o => o.AgencyName.Equals(record.teamMember.Agency)))
+                if (incident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
                 {
-                    AgencyPersonnelCount c = new AgencyPersonnelCount();
-                    c.AgencyName = record.teamMember.Agency;
-                    c.Count = 0;
-                    counts.Add(c);
+                    Personnel per = incident.IncidentPersonnel.First(o => o.ID == record.ResourceID);
+                    if (!counts.Any(o => o.AgencyName.Equals(per.Agency)))
+                    {
+                        AgencyPersonnelCount c = new AgencyPersonnelCount();
+                        c.AgencyName = per.Agency;
+                        c.Count = 0;
+                        counts.Add(c);
+                    }
+                    counts.First(o => o.AgencyName.Equals(per.Agency)).Count++;
                 }
-                counts.First(o => o.AgencyName.Equals(record.teamMember.Agency)).Count++;
             }
             return counts;
         }
 
-        public static Personnel getMemberFromQR(string qr)
-        {
-            Personnel member = new Personnel();
-            string[] bits = qr.Split(';');
-            if (bits.Length < 11)
-            {
-                return getMemberFromSimplifiedQR(qr);
-            }
-            else
-            {
-                if (bits.Length > 0)
-                {
-                    member.PersonID = new Guid(bits[0]);
-                    member.Name = bits[1];
-                    try
-                    {
-                        member.OrganizationID = new Guid(bits[2]);
-                        Organization org = OrganizationTools.GetOrganization(member.OrganizationID);
-                        if (org != null) { member.Group = org.OrganizationName; }
-                    }
-                    catch (Exception) { }
-
-                    member.Address = bits[3];
-                    member.Phone = bits[4];
-                    member.Email = bits[5];
-                    member.Callsign = bits[6];
-                }
-
-                return member;
-            }
-        }
-
-        public static Personnel getMemberFromSimplifiedQR(string qr)
-        {
-            if (!string.IsNullOrEmpty(qr))
-            {
-                Personnel member = new Personnel();
-                string[] bits = qr.Split(';');
-                if (bits.Length > 0)
-                {
-                    // member.PersonID = new Guid(bits[0]);
-                    member.Name = bits[0];
-                    try
-                    {
-                        string shortOrgID = bits[1];
-                        List<Organization> allOrgs = OrganizationTools.GetOrganizations(Guid.Empty);// new Organization().getStaticOrganizationList();
-                        if (allOrgs.Any(o => o.ShortOrganizationID == shortOrgID))
-                        {
-                            Organization org = allOrgs.First(o => o.ShortOrganizationID == shortOrgID);
-                            member.OrganizationID = org.OrganizationID;
-                            member.Group = org.OrganizationName;
-                        }
-                    }
-                    catch (Exception) { }
-
-                    member.Address = bits[2];
-                    member.Phone = bits[3];
-                    member.Email = bits[4];
-
-                }
-
-                return member;
-            }
-            else { return null; }
-        }
 
         public static string ToCSV(this List<Personnel> members, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();
             csv.Append("Name"); csv.Append(delimiter);
+            csv.Append("Gender"); csv.Append(delimiter);
             csv.Append("Province or Territory"); csv.Append(delimiter);
+            csv.Append("Country"); csv.Append(delimiter);
             csv.Append("Agency"); csv.Append(delimiter);
             csv.Append("Phone"); csv.Append(delimiter);
+            csv.Append("Callsign"); csv.Append(delimiter);
             csv.Append("Email"); csv.Append(delimiter);
             csv.Append("Home Unit / Agency"); csv.Append(delimiter);
-            csv.Append("Other Qualifications"); csv.Append(delimiter);
-            csv.Append("Vegetarian"); csv.Append(delimiter);
-            csv.Append("No Gluten"); csv.Append(delimiter);
-            csv.Append("Other Dietary"); csv.Append(delimiter);
+            csv.Append("Dietary Restrictions"); csv.Append(delimiter);
+            csv.Append("Allergies"); csv.Append(delimiter);
+
             csv.Append(Environment.NewLine);
 
             foreach (Personnel item in members)
@@ -766,17 +500,20 @@ namespace WF_ICS_ClassLibrary.Models
                 //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
 
                 csv.Append("\""); csv.Append(item.Name.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                if(item.ProvinceID != Guid.Empty) { Province p = new Province(item.ProvinceID); csv.Append("\""); csv.Append(p.ProvinceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter); }
+                csv.Append("\""); csv.Append(item.Gender.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
+                if (item.HomeProvinceID != Guid.Empty) { Province p = new Province(item.HomeProvinceID); csv.Append("\""); csv.Append(p.ProvinceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter); }
                 else { csv.Append("\"");  csv.Append("\""); csv.Append(delimiter); }
-                
+
+                csv.Append("\""); csv.Append(item.HomeCountry.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
                 csv.Append("\""); csv.Append(item.Agency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.Phone.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.CellphoneNumber.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Callsign.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Email.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.HomeBase.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.SpecialSkills.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                if (item.Vegetarian) { csv.Append("\"YES\""); csv.Append(delimiter); } else { csv.Append("\"NO\""); csv.Append(delimiter); }
-                if (item.NoGluten) { csv.Append("\"YES\""); csv.Append(delimiter); } else { csv.Append("\"NO\""); csv.Append(delimiter); }
-                csv.Append("\""); csv.Append(item.Dietary.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.HomeUnit.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.HasDietaryRestrictions.ToString()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.HasAllergies.ToString()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append(Environment.NewLine);
             }
             return csv.ToString();

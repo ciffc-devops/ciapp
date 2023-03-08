@@ -80,7 +80,7 @@ namespace Wildfire_ICS_Assist
 
         private void PopulateLeader()
         {
-            List<Personnel> members = Program.CurrentIncident.TaskTeamMembers.OrderBy(o => o.Name).ToList();
+            List<Personnel> members = Program.CurrentIncident.IncidentPersonnel.OrderBy(o => o.Name).ToList();
             Personnel blank = new Personnel(); blank.PersonID = Guid.Empty; members.Insert(0, blank);
 
             List<Personnel> mems = new List<Personnel>();

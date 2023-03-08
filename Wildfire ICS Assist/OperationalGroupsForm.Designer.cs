@@ -96,6 +96,8 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.AutoScroll = true;
+            this.splitContainer2.Panel2.AutoScrollMinSize = new System.Drawing.Size(425, 0);
             this.splitContainer2.Panel2.Controls.Add(this.strikeTeamTaskForceDetailsControl1);
             this.splitContainer2.Panel2.Controls.Add(this.operationalGroupReportingResourcesControl1);
             this.splitContainer2.Size = new System.Drawing.Size(1210, 617);
@@ -256,7 +258,7 @@
             this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
             this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
             this.strikeTeamTaskForceDetailsControl1.role = null;
-            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(762, 330);
+            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(396, 330);
             this.strikeTeamTaskForceDetailsControl1.TabIndex = 1;
             this.strikeTeamTaskForceDetailsControl1.Visible = false;
             // 
@@ -268,7 +270,7 @@
             this.operationalGroupReportingResourcesControl1.Margin = new System.Windows.Forms.Padding(6);
             this.operationalGroupReportingResourcesControl1.Name = "operationalGroupReportingResourcesControl1";
             this.operationalGroupReportingResourcesControl1.role = null;
-            this.operationalGroupReportingResourcesControl1.Size = new System.Drawing.Size(709, 209);
+            this.operationalGroupReportingResourcesControl1.Size = new System.Drawing.Size(558, 209);
             this.operationalGroupReportingResourcesControl1.TabIndex = 0;
             this.operationalGroupReportingResourcesControl1.Visible = false;
             // 

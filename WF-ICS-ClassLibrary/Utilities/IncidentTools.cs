@@ -80,7 +80,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             List<Personnel> members = new List<Personnel>();
 
-            foreach (Personnel member in task.TaskTeamMembers)
+            foreach (Personnel member in task.IncidentPersonnel)
             {
                 if (!members.Any(o => o.PersonID == member.PersonID) && !listAlreadyContainsMember(members, member)) { members.Add(member); }
             }
@@ -97,32 +97,19 @@ namespace WF_ICS_ClassLibrary.Utilities
                 }
             }
 
+            /*
             foreach (CheckInRecord record in task.AllSignInRecords)
             {
-                if (!members.Any(o => o.PersonID == record.teamMember.PersonID) && !listAlreadyContainsMember(members, record.teamMember)) { members.Add(record.teamMember); }
+                if (!members.Any(o => o.PersonID == record.ResourceID) && !listAlreadyContainsMember(members, record.teamMember)) { members.Add(record.teamMember); }
 
             }
-
-
+            */
+            /*
 
             foreach (Personnel member in orgMembers)
             {
                 if (member != null && !string.IsNullOrEmpty(member.Name) && !listAlreadyContainsMember(members, member)) { members.Add(member); }
-            }
-
-            //set signed in to task status
-            if (OpPeriod > 0)
-            {
-                foreach (Personnel member in members)
-                {
-                    if (task.AllSignInRecords.Where(o => o.MemberID == member.PersonID && o.OpPeriod == OpPeriod).Any())
-                    {
-                        CheckInRecord record = task.AllSignInRecords.Where(o => o.MemberID == member.PersonID && o.OpPeriod == OpPeriod).OrderByDescending(o => o.StatusChangeTime).First();
-                        member.SignedInToTask = record.IsSignIn;
-                    }
-                    else { member.SignedInToTask = false; }
-                }
-            }
+            }*/
 
             //update status
             foreach (Personnel member in members)
@@ -130,7 +117,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 member.CurrentStatus = task.getMemberStatus(member, OpPeriod);
             }
 
-            members = members.Where(o => !string.IsNullOrEmpty(o.Name)).OrderByDescending(o => o.OrganizationID == task.OrganizationID).ThenBy(o => o.Group).ThenBy(o => o.Name).ToList();
+            members = members.Where(o => !string.IsNullOrEmpty(o.Name)).OrderBy(o => o.Agency).ThenBy(o => o.Name).ToList();
 
             if (includeBlank)
             {
@@ -140,7 +127,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 members.Insert(0, blank);
             }
 
-            task.TaskTeamMembers = members;
+            task.IncidentPersonnel = members;
             return members;
         }
 
@@ -153,7 +140,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             if (members.Contains(newMember)) { return true; }
             if (string.IsNullOrEmpty(newMember.Email))
             {
-                return members.Any(o => !string.IsNullOrEmpty(o.Name) && o.OrganizationID == newMember.OrganizationID && o.Name.Equals(newMember.Name, StringComparison.InvariantCultureIgnoreCase));
+                return members.Any(o => !string.IsNullOrEmpty(o.Name) && o.Agency.EqualsWithNull(newMember.Agency) && o.Name.Equals(newMember.Name, StringComparison.InvariantCultureIgnoreCase));
             }
             else
             {
@@ -165,43 +152,23 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             if (member != null && member.PersonID != Guid.Empty && !string.IsNullOrEmpty(member.Name))
             {
-                if (task.TaskTeamMembers.Any(o => o.PersonID == member.PersonID))
+                if (task.IncidentPersonnel.Any(o => o.PersonID == member.PersonID))
                 {
-                    task.TaskTeamMembers = task.TaskTeamMembers.Where(o => o.PersonID != member.PersonID).ToList();
+                    task.IncidentPersonnel = task.IncidentPersonnel.Where(o => o.PersonID != member.PersonID).ToList();
                 }
-                task.TaskTeamMembers.Add(member);
+                task.IncidentPersonnel.Add(member);
             }
         }
 
         public static List<Personnel> MembersSignedIn(this WFIncident task, int opPeriod)
         {
-            List<Personnel> members = new List<Personnel>();
-            foreach (CheckInRecord record in task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod))
-            {
-                if (!members.Where(o => o.PersonID == record.teamMember.PersonID).Any())
-                {
-                    members.Add(record.teamMember);
-                }
-
-                if (members.Where(o => o.PersonID == record.teamMember.PersonID).Any())
-                {
-                    if (record.IsSignIn) { members.Where(o => o.PersonID == record.teamMember.PersonID).First().SignedInToTask = true; }
-                    else { members.Where(o => o.PersonID == record.teamMember.PersonID).First().SignedInToTask = false; }
-                }
-                /*
-                if (TaskTeamMembers.Where(o => o.PersonID == record.MemberID).Any() && !members.Where(o=>o.PersonID == record.teamMember.PersonID).Any())
-                {
-                    members.AddRange(TaskTeamMembers.Where(o => o.PersonID == record.MemberID));
-                }*/
-            }
-            return members;
+            return task.GetCurrentlySignedInPersonnel(opPeriod);
         }
 
         public static List<MemberStatus> getAllMemberStatus(this WFIncident task, int opPeriod, DateTime date = new DateTime(), bool getMultipleLinesAsNeeded = false)
         {
             List<MemberStatus> statuses = new List<MemberStatus>();
             List<Personnel> members = task.MembersSignedIn(opPeriod);
-            List<Personnel> savedMembers = Globals._generalOptionsService.GetOptionsValue("TeamMembers") as List<Personnel>;
             //Add members who are on teams or in ICS roles currently
             if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Any(o => o.teamMember != null))
             {
@@ -214,21 +181,12 @@ namespace WF_ICS_ClassLibrary.Utilities
                 }
             }
          
-            foreach(TeamAssignment assignment in task.AllAssignments.Where(o=>o.OpPeriod == opPeriod && o.AssignedMemberIDs.Any()))
-            {
-                foreach(Guid g in assignment.AssignedMemberIDs)
-                {
-                    if(!members.Any(o=>o.PersonID == g) && savedMembers.Any(o=>o.PersonID == g))
-                    {
-                        members.Add(savedMembers.First(o => o.PersonID == g));
-                    }
-                }
-            }
+      
 
 
             foreach (Personnel member in members)
             {
-                int signInCount = task.AllSignInRecords.Where(o => o.IsSignIn && o.teamMember.PersonID == member.PersonID && o.OpPeriod == opPeriod).Count();
+                int signInCount = task.AllCheckInRecords.Count(o => o.ResourceID == member.PersonID && o.OpPeriod == opPeriod);
                 if (signInCount == 1 || !getMultipleLinesAsNeeded)
                 {
 
@@ -245,7 +203,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 }
                 else
                 {
-                    foreach (CheckInRecord record in task.AllSignInRecords.Where(o => o.IsSignIn && o.teamMember.PersonID == member.PersonID && o.OpPeriod == opPeriod))
+                    foreach (CheckInRecord record in task.AllCheckInRecords.Where(o => o.ResourceID == member.PersonID && o.OpPeriod == opPeriod))
                     {
 
                         MemberStatus status = task.getMemberStatus(member, opPeriod, date, record);
@@ -263,28 +221,22 @@ namespace WF_ICS_ClassLibrary.Utilities
             status.setTeamMember(member);
             if (signIn == null)
             {
-                if (task.AllSignInRecords.Any(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn))
+                if (task.AllCheckInRecords.Any(o => o.OpPeriod == opPeriod && o.ResourceID == member.PersonID && (o.CheckInDate <= end_date || end_date == DateTime.MinValue)))
                 {
-                    signIn = task.AllSignInRecords.OrderByDescending(o => o.StatusChangeTime).First(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.IsSignIn);
+                    signIn = task.AllCheckInRecords.OrderByDescending(o => o.CheckInDate).First(o => o.OpPeriod == opPeriod && o.ResourceID == member.PersonID && (o.CheckInDate <= end_date || end_date == DateTime.MinValue) );
                     status.CheckInRecordID = signIn.SignInRecordID;
-                    status.SignInTime = signIn.StatusChangeTime;
-                    status.InitialRoleName = signIn.InitialRoleName;
+                    status.SignInTime = signIn.CheckInDate;
                     if (signIn.LastDayOnIncident > DateTime.MinValue) { status.LastDayWorked = signIn.LastDayOnIncident; }
-                    status.KMs = signIn.KMs;
                 }
                 else { status.SignInTime = DateTime.MinValue; }
             }
-            else { status.SignInTime = signIn.StatusChangeTime; status.KMs = signIn.KMs; status.CheckInRecordID = signIn.SignInRecordID; }
+            else { status.SignInTime = signIn.CheckInDate; status.CheckInRecordID = signIn.SignInRecordID; }
 
-            if (task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).Any())
+            if (task.AllCheckInRecords.Any(o => o.OpPeriod == opPeriod && o.ResourceID == member.PersonID && (o.CheckOutDate <= end_date || end_date == DateTime.MinValue) && o.CheckOutDate > status.SignInTime))
             {
-                CheckInRecord signOut = task.AllSignInRecords.Where(o => o.OpPeriod == opPeriod && o.MemberID == member.PersonID && (o.StatusChangeTime <= end_date || end_date == DateTime.MinValue) && o.StatusChangeTime > status.SignInTime && !o.IsSignIn).OrderBy(o => o.StatusChangeTime).First();
-                status.SignOutTime = signOut.StatusChangeTime;
+                CheckInRecord signOut = task.AllCheckInRecords.First(o => o.OpPeriod == opPeriod && o.ResourceID == member.PersonID && (o.CheckOutDate <= end_date || end_date == DateTime.MinValue) && o.CheckOutDate > status.SignInTime);
+                status.SignOutTime = signOut.CheckOutDate;
                 status.CheckOutRecordID = signOut.SignInRecordID;
-                if (status.KMs <= 0m)
-                {
-                    status.KMs = signOut.KMs;
-                }
             }
             else { status.SignOutTime = DateTime.MaxValue; }
 
@@ -294,29 +246,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             DateTime lastDate = DateTime.MinValue;
 
             DateTime today = DateTime.Now;
-            /*
-            if (status.SignOutTime < DateTime.MaxValue && status.SignOutTime > status.SignInTime && status.SignOutTime <= today)
-            {
-                Assignment signedout = new Assignment();
-                signedout.AssignmentName = "Signed Out";
-                signedout.currentStatus = new TeamStatus(38, "", false);
-                status.currentAssignment = signedout;
-            }
-            else if (status.SignOutTime < DateTime.MaxValue && status.SignOutTime > status.SignInTime)
-            {
-                Assignment signedout = new Assignment();
-                signedout.AssignmentName = "Travelling Home";
-                signedout.currentStatus = new TeamStatus(39, "", false);
-                status.currentAssignment = signedout;
-            }
-            else if (status.AssignmentID == Guid.Empty)
-            {
-                Assignment unassigned = new Assignment();
-                unassigned.AssignmentName = "Unassigned";
-                unassigned.currentStatus = new TeamStatus(99, "", false);
-                status.currentAssignment = unassigned;
-            }
-            */
+
             //ics roles
             if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod))
             {
@@ -552,7 +482,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             group.LeaderICSRoleName = role.RoleName;
             if (role.IsOpGroupSup)
             {
-                if (role.Mnemonic.Equals("OPBD") || role.RoleID == Globals.AirOpsDirector) { 
+                if (role.Mnemonic.Equals("OPBD") || role.RoleID == Globals.AirOpsDirector || role.Mnemonic.Equals("HEBD")) { 
                     group.GroupType = "Branch";
                     group.Name = role.RoleName.Replace(" Director", "");
                 }

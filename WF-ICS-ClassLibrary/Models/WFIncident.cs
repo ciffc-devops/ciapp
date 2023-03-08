@@ -117,7 +117,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(26)] private Guid _RequestID;
         //  [ProtoMember(27)] private List<WhiteboardItem> _whiteboardItems = new List<WhiteboardItem>();
         [ProtoMember(28)] private List<CheckInRecord> _signInRecords = new List<CheckInRecord>();
-        [ProtoMember(29)] private List<Personnel> _taskTeamMembers = new List<Personnel>();
+        [ProtoMember(29)] private List<Personnel> _IncidentPersonnel = new List<Personnel>();
         [ProtoMember(30)] private Organization _taskOrganization = new Organization();
         [ProtoMember(31)] private DateTime _DateCreatedUTC;
         [ProtoMember(32)] private DateTime _DateUpdatedUTC;
@@ -312,14 +312,14 @@ ProtoInclude(127, typeof(SubjectProfile)),
             return AllOperationalPeriods.Max(o => o.PeriodEnd);
         }
 
-        public List<CheckInRecord> AllSignInRecords { get { return _signInRecords; } set { _signInRecords = value; } }
+        public List<CheckInRecord> AllCheckInRecords { get { return _signInRecords; } set { _signInRecords = value; } }
 
 
       
 
 
 
-        public List<Personnel> TaskTeamMembers { get { return _taskTeamMembers; } set { _taskTeamMembers = value; } }
+        public List<Personnel> IncidentPersonnel { get { return _IncidentPersonnel; } set { _IncidentPersonnel = value; } }
         public Organization TaskOrganization { get => _taskOrganization; set => _taskOrganization = value; }
         public Guid OrganizationID { get => TaskOrganization.OrganizationID; set => TaskOrganization.OrganizationID = value; }
         public string OrganizationName { get => TaskOrganization.OrganizationName; set => TaskOrganization.OrganizationName = value; }
@@ -376,7 +376,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 if (allMedicalPlans.Count > 0) { int objOps = allMedicalPlans.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (objOps > ops) { ops = objOps; } }
                 //if (allSubjectProfiles.Count > 0) { int subOps = allSubjectProfiles.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (subOps > ops) { ops = subOps; } }
                 if (allCommsLogEntries.Count > 0) { int commsOps = allCommsLogEntries.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (commsOps > ops) { ops = commsOps; } }
-                if (AllSignInRecords.Count > 0) { int signInOps = AllSignInRecords.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (signInOps > ops) { ops = signInOps; } }
+                if (AllCheckInRecords.Count > 0) { int signInOps = AllCheckInRecords.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (signInOps > ops) { ops = signInOps; } }
                 if (ops <= 0 && _savedHighestOpsPeriod > 0) { ops = _savedHighestOpsPeriod; }
                 if (ops == 0) { ops = 1; }
                 return ops;
@@ -396,7 +396,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 if (allMedicalPlans.Count > 0) { int objOps = allMedicalPlans.OrderBy(o => o.OpPeriod).First().OpPeriod; if (objOps < ops) { ops = objOps; } }
                 //if (allSubjectProfiles.Count > 0) { int subOps = allSubjectProfiles.OrderBy(o => o.OpPeriod).First().OpPeriod; if (subOps < ops) { ops = subOps; } }
                 if (allCommsLogEntries.Count > 0) { int commsOps = allCommsLogEntries.OrderBy(o => o.OpPeriod).First().OpPeriod; if (commsOps < ops) { ops = commsOps; } }
-                if (AllSignInRecords.Count > 0) { int signInOps = AllSignInRecords.OrderBy(o => o.OpPeriod).First().OpPeriod; if (signInOps < ops) { ops = signInOps; } }
+                if (AllCheckInRecords.Count > 0) { int signInOps = AllCheckInRecords.OrderBy(o => o.OpPeriod).First().OpPeriod; if (signInOps < ops) { ops = signInOps; } }
                 if (ops <= 0 && _savedHighestOpsPeriod > 0) { ops = _savedHighestOpsPeriod; }
                 if (ops == 0) { ops = 1; }
                 return ops;
@@ -412,7 +412,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             else if (allIncidentObjectives.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             //else if (allSubjectProfiles.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allCommsLogEntries.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
-            else if (AllSignInRecords.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
+            else if (AllCheckInRecords.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             //  else if (whiteboardItems.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             // else if (hasMeangfulCommsPlan(opPeriod)) { hasContent = true; }
             else if (hasMeaningfulMedicalPlan(opPeriod)) { hasContent = true; }
@@ -471,10 +471,10 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
             //Sign in
-            if (AllSignInRecords.Any(o => o.OpPeriod == opPeriod))
+            if (AllCheckInRecords.Any(o => o.OpPeriod == opPeriod))
             {
-                thisStart = AllSignInRecords.Where(o => o.OpPeriod == opPeriod).Min(o => o.SignInTime);
-                thisEnd = AllSignInRecords.Where(o => o.OpPeriod == opPeriod).Max(o => o.SignOutTime);
+                thisStart = AllCheckInRecords.Where(o => o.OpPeriod == opPeriod).Min(o => o.CheckInDate);
+                thisEnd = AllCheckInRecords.Where(o => o.OpPeriod == opPeriod).Max(o => o.CheckOutDate);
                 if (thisStart < start || (start == DateTime.MinValue && thisStart > DateTime.MinValue)) { start = thisStart; }
                 if (thisEnd > end) { end = thisEnd; }
             }

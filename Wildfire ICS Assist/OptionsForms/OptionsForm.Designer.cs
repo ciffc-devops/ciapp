@@ -322,7 +322,7 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(7, 314);
+            this.label6.Location = new System.Drawing.Point(7, 280);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(194, 80);
             this.label6.TabIndex = 155;
@@ -335,7 +335,7 @@
             this.btnAutomaticSubFoldersHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAutomaticSubFoldersHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnAutomaticSubFoldersHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnAutomaticSubFoldersHelp.Image")));
-            this.btnAutomaticSubFoldersHelp.Location = new System.Drawing.Point(694, 287);
+            this.btnAutomaticSubFoldersHelp.Location = new System.Drawing.Point(694, 253);
             this.btnAutomaticSubFoldersHelp.Name = "btnAutomaticSubFoldersHelp";
             this.btnAutomaticSubFoldersHelp.Size = new System.Drawing.Size(36, 36);
             this.btnAutomaticSubFoldersHelp.TabIndex = 154;
@@ -347,7 +347,7 @@
             // 
             this.txtAutomaticSubFolders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAutomaticSubFolders.Location = new System.Drawing.Point(228, 287);
+            this.txtAutomaticSubFolders.Location = new System.Drawing.Point(228, 253);
             this.txtAutomaticSubFolders.Multiline = true;
             this.txtAutomaticSubFolders.Name = "txtAutomaticSubFolders";
             this.txtAutomaticSubFolders.Size = new System.Drawing.Size(460, 80);
@@ -356,7 +356,7 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(7, 290);
+            this.label5.Location = new System.Drawing.Point(7, 256);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(215, 24);
             this.label5.TabIndex = 152;
@@ -433,9 +433,9 @@
             // 
             this.chkPromptForInitialSave.Location = new System.Drawing.Point(228, 84);
             this.chkPromptForInitialSave.Name = "chkPromptForInitialSave";
-            this.chkPromptForInitialSave.Size = new System.Drawing.Size(410, 52);
+            this.chkPromptForInitialSave.Size = new System.Drawing.Size(502, 52);
             this.chkPromptForInitialSave.TabIndex = 146;
-            this.chkPromptForInitialSave.Text = "Yes, prompt after the task name and number are added";
+            this.chkPromptForInitialSave.Text = "Yes, prompt after the incident name/number are added";
             this.chkPromptForInitialSave.UseVisualStyleBackColor = true;
             // 
             // btnBrowseDefaultSaveLocation
@@ -501,9 +501,9 @@
             this.tbNetworking.Controls.Add(this.btnTrustedDevicesHelp);
             this.tbNetworking.Controls.Add(this.btnRemoveTrustedDevice);
             this.tbNetworking.Controls.Add(this.lbTrustedDevices);
-            this.tbNetworking.Location = new System.Drawing.Point(4, 33);
+            this.tbNetworking.Location = new System.Drawing.Point(4, 22);
             this.tbNetworking.Name = "tbNetworking";
-            this.tbNetworking.Size = new System.Drawing.Size(738, 404);
+            this.tbNetworking.Size = new System.Drawing.Size(738, 415);
             this.tbNetworking.TabIndex = 2;
             this.tbNetworking.Text = "Networking";
             this.tbNetworking.UseVisualStyleBackColor = true;
@@ -608,7 +608,7 @@
             // 
             this.btnRemoveTrustedDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveTrustedDevice.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_193_circle_empty_remove;
-            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 346);
+            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 357);
             this.btnRemoveTrustedDevice.Name = "btnRemoveTrustedDevice";
             this.btnRemoveTrustedDevice.Size = new System.Drawing.Size(290, 42);
             this.btnRemoveTrustedDevice.TabIndex = 115;

@@ -11,9 +11,9 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedTeamMembersForm : Form
+    public partial class SavedPersonnelForm : Form
     {
-        public SavedTeamMembersForm()
+        public SavedPersonnelForm()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
         }

@@ -65,8 +65,8 @@ namespace Wildfire_ICS_Assist
             List<AgencyPersonnelCount> agencyCounts = Program.CurrentIncident.GetAgencyPersonnelCount(Program.CurrentOpPeriod);
             dgvTotalByAgency.DataSource = agencyCounts;
 
-            int LessThan24 = Program.CurrentIncident.AllSignInRecords.Count(o=>(o.LastDayOnIncident - endOfOp).TotalHours <= 24);
-            int LessThan48 = Program.CurrentIncident.AllSignInRecords.Count(o => (o.LastDayOnIncident - endOfOp).TotalHours <= 48);
+            int LessThan24 = Program.CurrentIncident.AllCheckInRecords.Count(o=>(o.LastDayOnIncident - endOfOp).TotalHours <= 24);
+            int LessThan48 = Program.CurrentIncident.AllCheckInRecords.Count(o => (o.LastDayOnIncident - endOfOp).TotalHours <= 48);
             lblLDWLessThan24.Text = "LDW < 24 Hours: " + LessThan24;
             lblLDWLessThan48.Text = "LDW < 48 Hours: " + LessThan48;
 
@@ -79,22 +79,8 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = signInForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    CheckInRecord record = signInForm.signInRecord;
-                    record.IsSignIn = true;
-                    
-
-                    if (signInForm.AutoAssignToOrg)
-                    {
-                        ICSRole roleOnOrg = Program.CurrentOrgChart.GetRoleByName(record.InitialRoleName);
-                        if(roleOnOrg != null && roleOnOrg.IndividualID == Guid.Empty)
-                        {
-                            roleOnOrg.IndividualID = signInForm.selectedMember.PersonID;
-                            roleOnOrg.teamMember = signInForm.selectedMember.Clone();
-                            roleOnOrg.IndividualName = signInForm.selectedMember.Name;
-                            Program.wfIncidentService.UpsertICSRole(roleOnOrg);
-                        }
-                    }
-                    Program.wfIncidentService.UpsertMemberStatus(record);
+                    CheckInRecord record = signInForm.checkInRecord;
+                    Program.wfIncidentService.UpsertCheckInRecord(record);
                 }
             }
         }
@@ -152,18 +138,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnBulkSignIn_Click(object sender, EventArgs e)
         {
-            using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
-            {
-                DialogResult dr = signInForm.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-                    foreach (CheckInRecord record in signInForm.records)
-                    {
-                        record.IsSignIn = true;
-                        Program.wfIncidentService.UpsertMemberStatus(record);
-                    }
-                }
-            }
+           
         }
 
         private void btnExportSignInToCSV_Click(object sender, EventArgs e)
@@ -213,20 +188,22 @@ namespace Wildfire_ICS_Assist
         private CheckInRecord getRecordFromStatus(MemberStatus status)
         {
             CheckInRecord record = null;
-            if (status.CheckInRecordID != Guid.Empty && Program.CurrentIncident.AllSignInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
+            if (status.CheckInRecordID != Guid.Empty && Program.CurrentIncident.AllCheckInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
             {
-                record = Program.CurrentIncident.AllSignInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
+                record = Program.CurrentIncident.AllCheckInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
             }
             else
             {
                 record = new CheckInRecord();
                 record.OpPeriod = Program.CurrentOpPeriod;
-                record.SignInTime = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
-                record.LastDayOnIncident = record.SignInTime.AddDays(14);
-                record.IsSignIn = true;
-                if (Program.CurrentIncident.TaskTeamMembers.Any(o => o.PersonID == status.MemberID))
+                record.CheckInDate = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
+                record.LastDayOnIncident = record.CheckInDate.AddDays(14);
+                record.ResourceType = "Person";
+                if (Program.CurrentIncident.IncidentPersonnel.Any(o => o.PersonID == status.MemberID))
                 {
-                    record.teamMember = Program.CurrentIncident.TaskTeamMembers.First(o => o.PersonID == status.MemberID);
+                    record.ResourceID = Program.CurrentIncident.IncidentPersonnel.First(o => o.PersonID == status.MemberID).ID;
+                    record.ResourceName = Program.CurrentIncident.IncidentPersonnel.First(o => o.PersonID == status.MemberID).ResourceName;
+                    
                 }
 
             }
@@ -317,9 +294,9 @@ namespace Wildfire_ICS_Assist
                     row.Cells[CheckInColumnIndex].Style.BackColor = Color.Yellow;
                 }
 
-                if (Program.CurrentIncident.AllSignInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
+                if (Program.CurrentIncident.AllCheckInRecords.Any(o => o.SignInRecordID == status.CheckInRecordID))
                 {
-                   CheckInRecord rec = Program.CurrentIncident.AllSignInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
+                   CheckInRecord rec = Program.CurrentIncident.AllCheckInRecords.First(o => o.SignInRecordID == status.CheckInRecordID);
                     TimeSpan ts = rec.LastDayOnIncident - Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodEnd;
                     if(ts.TotalHours <= 36)
                     {

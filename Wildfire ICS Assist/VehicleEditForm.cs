@@ -66,47 +66,12 @@ namespace Wildfire_ICS_Assist
 
         private void loadVehicle()
         {
-            if (CurrentVehicle != null)
-            {
-                txtOrderRequestNo.Text = CurrentVehicle.OrderRequestNo;
-                txtIncidentIDNo.Text = CurrentVehicle.IncidentIDNo;
-                txtClassification.Text = CurrentVehicle.Classification;
-                txtMake.Text = CurrentVehicle.Make;
-                txtCategoryKindCapacity.Text = CurrentVehicle.CategoryKindCapacity;
-                txtFeatures.Text = CurrentVehicle.Features;
-                txtAgencyOrOwner.Text = CurrentVehicle.AgencyOrOwner;
-                txtOperatorName.Text = CurrentVehicle.OperatorName;
-                txtLicenseOrID.Text = CurrentVehicle.LicenseOrID;
-                txtIncidentAssignment.Text = CurrentVehicle.IncidentAssignment;
-                txtNotes.Text = CurrentVehicle.Notes;
-                txtKind.Text = CurrentVehicle.Kind;
-                txtType.Text = CurrentVehicle.Type;
-                if (CurrentVehicle.StartTime >= datStartTime.MinDate) { datStartTime.Value = CurrentVehicle.StartTime; }
-                else { datStartTime.Value = datStartTime.MinDate; }
-                if (CurrentVehicle.MustBeOutTime >= datMustBeOutTime.MinDate) { datMustBeOutTime.Value = CurrentVehicle.MustBeOutTime; }
-                else { datMustBeOutTime.Value = datMustBeOutTime.MinDate; }
-
-              
-            }
+            vehicleEquipmentEditControl1.SetVehicle( CurrentVehicle.Clone());
         }
 
         private void SetVehicleFromForm()
         {
-            CurrentVehicle.OrderRequestNo = txtOrderRequestNo.Text;
-            CurrentVehicle.IncidentIDNo = txtIncidentIDNo.Text;
-            CurrentVehicle.Classification = txtClassification.Text;
-            CurrentVehicle.Make = txtMake.Text;
-            CurrentVehicle.CategoryKindCapacity = txtCategoryKindCapacity.Text;
-            CurrentVehicle.Features = txtFeatures.Text;
-            CurrentVehicle.AgencyOrOwner = txtAgencyOrOwner.Text;
-            CurrentVehicle.OperatorName = txtOperatorName.Text;
-            CurrentVehicle.LicenseOrID = txtLicenseOrID.Text;
-            CurrentVehicle.IncidentAssignment = txtIncidentAssignment.Text;
-            CurrentVehicle.Notes = txtNotes.Text;
-            CurrentVehicle.StartTime = datStartTime.Value;
-            CurrentVehicle.MustBeOutTime = datMustBeOutTime.Value;
-            CurrentVehicle.Kind = txtKind.Text; 
-            CurrentVehicle.Type = txtType.Text;
+            CurrentVehicle = vehicleEquipmentEditControl1.CurrentVehicle.Clone();
 
         }
 
@@ -130,7 +95,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            if (validateVehicle())
+            if (vehicleEquipmentEditControl1.IsComplete)
             {
                 SetVehicleFromForm();
                 this.DialogResult = DialogResult.OK;
@@ -158,13 +123,7 @@ namespace Wildfire_ICS_Assist
 
         private bool validateVehicle()
         {
-            if (string.IsNullOrEmpty(txtIncidentIDNo.Text))
-            {
-                txtIncidentIDNo.BackColor = Program.ErrorColor;
-                return false;
-            }
-            else { txtIncidentIDNo.BackColor = Program.GoodColor; }
-            return true;
+            return vehicleEquipmentEditControl1.IsComplete;
         }
 
         private void txtOrderRequestNo_TextChanged(object sender, EventArgs e)

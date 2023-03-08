@@ -70,6 +70,15 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        internal static string AreYouSureTitle {
+            get {
+                return ResourceManager.GetString("AreYouSureTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Roles cannot be set to report to themselves..
         /// </summary>
         internal static string CantReportToSelf {
@@ -431,6 +440,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_33_access_point {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_33_access_point", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_35_user_incognito {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-35-user-incognito", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -808,6 +827,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_799_chevron_last_left {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-799-chevron-last-left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_801_file_plus {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_801_file_plus", resourceCulture);
@@ -861,6 +890,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_89_book_address {
             get {
                 object obj = ResourceManager.GetObject("glyphicons-basic-89-book-address", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_893_user_worker {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-893-user-worker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1100,6 +1139,15 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static string SelectSavedContact {
             get {
                 return ResourceManager.GetString("SelectSavedContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are sure you want to cancel and lose any unsaved changes on this screen?.
+        /// </summary>
+        internal static string SureCancel {
+            get {
+                return ResourceManager.GetString("SureCancel", resourceCulture);
             }
         }
         

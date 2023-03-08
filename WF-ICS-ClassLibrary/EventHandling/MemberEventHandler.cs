@@ -16,7 +16,7 @@ namespace WF_ICS_ClassLibrary.EventHandling
         public Personnel teamMember { get; set; }
 
         public MemberEventArgs(Guid _memberID) { MemberID = _memberID; }
-        public MemberEventArgs(CheckInRecord _record) { signInRecord = _record; if (_record != null) { MemberID = _record.MemberID; } }
+        public MemberEventArgs(CheckInRecord _record) { signInRecord = _record; if (_record != null) { MemberID = _record.ResourceID; } }
         public MemberEventArgs(Personnel _member) { teamMember = _member; if (teamMember != null) { MemberID = teamMember.PersonID; } }
     }
 }

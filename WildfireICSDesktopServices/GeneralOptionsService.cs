@@ -242,7 +242,7 @@ namespace WildfireICSDesktopServices
                     if (_options.AllTeamMembers != null)
                     {
                         
-                        bases.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeBase)).GroupBy(o => o.HomeBase).Select(o => o.First().HomeBase).ToList());
+                        bases.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeUnit)).GroupBy(o => o.HomeUnit).Select(o => o.First().HomeUnit).ToList());
                     }
                     return bases.Distinct().ToList();
 

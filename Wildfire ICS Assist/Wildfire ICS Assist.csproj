@@ -130,6 +130,12 @@
       <DependentUpon>AirOperationsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GeneralTools.cs" />
+    <Compile Include="CloseOpPeriodForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CloseOpPeriodForm.Designer.cs">
+      <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommunicationsListEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,11 +178,23 @@
     <Compile Include="CommunicationsPlanViewForm.Designer.cs">
       <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\CheckInInfoFieldControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\CheckInInfoFieldControl.Designer.cs">
+      <DependentUpon>CheckInInfoFieldControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\CollapsiblePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomControls\CollapsiblePanel.Designer.cs">
       <DependentUpon>CollapsiblePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\CrewEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\CrewEditControl.Designer.cs">
+      <DependentUpon>CrewEditControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\EditAircraftControl.cs">
       <SubType>UserControl</SubType>
@@ -196,17 +214,11 @@
     <Compile Include="CustomControls\EditCommsChannelControl.Designer.cs">
       <DependentUpon>EditCommsChannelControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\EditTeamAssignmentTemplateControl.cs">
+    <Compile Include="CustomControls\PersonnelEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\EditTeamAssignmentTemplateControl.Designer.cs">
-      <DependentUpon>EditTeamAssignmentTemplateControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\EditTeamMemberControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\EditTeamMemberControl.Designer.cs">
-      <DependentUpon>EditTeamMemberControl.cs</DependentUpon>
+    <Compile Include="CustomControls\PersonnelEditControl.Designer.cs">
+      <DependentUpon>PersonnelEditControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\OperationalGroupReportingResourcesControl.cs">
       <SubType>UserControl</SubType>
@@ -214,11 +226,38 @@
     <Compile Include="CustomControls\OperationalGroupReportingResourcesControl.Designer.cs">
       <DependentUpon>OperationalGroupReportingResourcesControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\PersonnelViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\PersonnelViewControl.Designer.cs">
+      <DependentUpon>PersonnelViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ResourceCheckInEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ResourceCheckInEditControl.Designer.cs">
+      <DependentUpon>ResourceCheckInEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\StrikeTeamTaskForceDetailsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomControls\StrikeTeamTaskForceDetailsControl.Designer.cs">
       <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\VehicleEquipmentEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\VehicleEquipmentEditControl.Designer.cs">
+      <DependentUpon>VehicleEquipmentEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\VisitorEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\VisitorEditControl.Designer.cs">
+      <DependentUpon>VisitorEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\WizardPages.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="GeneralMessageEditForm.cs">
       <SubType>Form</SubType>
@@ -304,17 +343,17 @@
     <Compile Include="OperationalGroupSTTFEditForm.Designer.cs">
       <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonnelBulkCheckInForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PersonnelBulkCheckInForm.Designer.cs">
-      <DependentUpon>PersonnelBulkCheckInForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="PersonnelEditCheckInOutForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PersonnelEditCheckInOutForm.Designer.cs">
       <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelEnterPersonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelEnterPersonForm.Designer.cs">
+      <DependentUpon>PersonnelEnterPersonForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PersonnelListForm.cs">
       <SubType>Form</SubType>
@@ -406,12 +445,6 @@
     <Compile Include="OptionsForms\EditSavedSafetyNoteForm.Designer.cs">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OptionsForms\EditSavedTeamAssignmentsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OptionsForms\EditSavedTeamAssignmentsForm.Designer.cs">
-      <DependentUpon>EditSavedTeamAssignmentsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="OptionsForms\EditSavedTeamMemberForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -478,17 +511,11 @@
     <Compile Include="OptionsForms\SavedSafetyNotesForm.Designer.cs">
       <DependentUpon>SavedSafetyNotesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OptionsForms\SavedTeamAssignmentsForm.cs">
+    <Compile Include="OptionsForms\SavedPersonnelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OptionsForms\SavedTeamAssignmentsForm.Designer.cs">
-      <DependentUpon>SavedTeamAssignmentsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OptionsForms\SavedTeamMembersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OptionsForms\SavedTeamMembersForm.Designer.cs">
-      <DependentUpon>SavedTeamMembersForm.cs</DependentUpon>
+    <Compile Include="OptionsForms\SavedPersonnelForm.Designer.cs">
+      <DependentUpon>SavedPersonnelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\SavedVehiclesForm.cs">
       <SubType>Form</SubType>
@@ -570,18 +597,6 @@
     <Compile Include="SafetyMessagesForm.Designer.cs">
       <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TeamAssignmentEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TeamAssignmentEditForm.Designer.cs">
-      <DependentUpon>TeamAssignmentEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TeamAssignmentsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TeamAssignmentsForm.Designer.cs">
-      <DependentUpon>TeamAssignmentsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UtilityForms\AboutProgramForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -624,6 +639,9 @@
     <EmbeddedResource Include="AirOperationsForm.resx">
       <DependentUpon>AirOperationsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CloseOpPeriodForm.resx">
+      <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommunicationsListEntryForm.resx">
       <DependentUpon>CommunicationsListEntryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -645,8 +663,14 @@
     <EmbeddedResource Include="CommunicationsPlanViewForm.resx">
       <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\CheckInInfoFieldControl.resx">
+      <DependentUpon>CheckInInfoFieldControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\CollapsiblePanel.resx">
       <DependentUpon>CollapsiblePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\CrewEditControl.resx">
+      <DependentUpon>CrewEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditAircraftControl.resx">
       <DependentUpon>EditAircraftControl.cs</DependentUpon>
@@ -657,17 +681,26 @@
     <EmbeddedResource Include="CustomControls\EditCommsChannelControl.resx">
       <DependentUpon>EditCommsChannelControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\EditTeamAssignmentTemplateControl.resx">
-      <DependentUpon>EditTeamAssignmentTemplateControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\EditTeamMemberControl.resx">
-      <DependentUpon>EditTeamMemberControl.cs</DependentUpon>
+    <EmbeddedResource Include="CustomControls\PersonnelEditControl.resx">
+      <DependentUpon>PersonnelEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\OperationalGroupReportingResourcesControl.resx">
       <DependentUpon>OperationalGroupReportingResourcesControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\PersonnelViewControl.resx">
+      <DependentUpon>PersonnelViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\ResourceCheckInEditControl.resx">
+      <DependentUpon>ResourceCheckInEditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\StrikeTeamTaskForceDetailsControl.resx">
       <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\VehicleEquipmentEditControl.resx">
+      <DependentUpon>VehicleEquipmentEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\VisitorEditControl.resx">
+      <DependentUpon>VisitorEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralMessageEditForm.resx">
       <DependentUpon>GeneralMessageEditForm.cs</DependentUpon>
@@ -717,11 +750,11 @@
     <EmbeddedResource Include="OperationalGroupSTTFEditForm.resx">
       <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonnelBulkCheckInForm.resx">
-      <DependentUpon>PersonnelBulkCheckInForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PersonnelEditCheckInOutForm.resx">
       <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelEnterPersonForm.resx">
+      <DependentUpon>PersonnelEnterPersonForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonnelListForm.resx">
       <DependentUpon>PersonnelListForm.cs</DependentUpon>
@@ -769,9 +802,6 @@
     <EmbeddedResource Include="OptionsForms\EditSavedSafetyNoteForm.resx">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForms\EditSavedTeamAssignmentsForm.resx">
-      <DependentUpon>EditSavedTeamAssignmentsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedTeamMemberForm.resx">
       <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -806,11 +836,8 @@
     <EmbeddedResource Include="OptionsForms\SavedSafetyNotesForm.resx">
       <DependentUpon>SavedSafetyNotesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForms\SavedTeamAssignmentsForm.resx">
-      <DependentUpon>SavedTeamAssignmentsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForms\SavedTeamMembersForm.resx">
-      <DependentUpon>SavedTeamMembersForm.cs</DependentUpon>
+    <EmbeddedResource Include="OptionsForms\SavedPersonnelForm.resx">
+      <DependentUpon>SavedPersonnelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\SavedVehiclesForm.resx">
       <DependentUpon>SavedVehiclesForm.cs</DependentUpon>
@@ -860,12 +887,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SafetyMessagesForm.resx">
       <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TeamAssignmentEditForm.resx">
-      <DependentUpon>TeamAssignmentEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TeamAssignmentsForm.resx">
-      <DependentUpon>TeamAssignmentsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\AboutProgramForm.resx">
       <DependentUpon>AboutProgramForm.cs</DependentUpon>
@@ -974,6 +995,9 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-799-chevron-last-left.png" />
+    <None Include="Resources\glyphicons-basic-893-user-worker.png" />
+    <None Include="Resources\glyphicons-basic-35-user-incognito.png" />
     <None Include="Resources\CIAPP-LOGO-v3-transparent.png" />
     <None Include="Resources\CIAPP-LOGO-v3.png" />
     <None Include="Resources\glyphicons-basic-89-book-address.png" />

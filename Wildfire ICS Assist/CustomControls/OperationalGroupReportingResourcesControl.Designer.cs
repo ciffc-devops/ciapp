@@ -74,6 +74,7 @@
             this.dgvResources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResources.Size = new System.Drawing.Size(833, 639);
             this.dgvResources.TabIndex = 111;
+            this.dgvResources.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvResources_CellFormatting);
             this.dgvResources.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvResources_RowPostPaint);
             // 
             // colNumber
@@ -97,28 +98,28 @@
             // 
             this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colLeader.DataPropertyName = "LeaderName";
-            this.colLeader.HeaderText = "Resource Leader";
+            this.colLeader.HeaderText = "Leader";
             this.colLeader.Name = "colLeader";
             this.colLeader.ReadOnly = true;
-            this.colLeader.Width = 165;
+            this.colLeader.Width = 94;
             // 
             // colNumberOfPeople
             // 
             this.colNumberOfPeople.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colNumberOfPeople.DataPropertyName = "NumberOfPeople";
-            this.colNumberOfPeople.HeaderText = "# of People";
+            this.colNumberOfPeople.HeaderText = "# of ppl";
             this.colNumberOfPeople.Name = "colNumberOfPeople";
             this.colNumberOfPeople.ReadOnly = true;
-            this.colNumberOfPeople.Width = 119;
+            this.colNumberOfPeople.Width = 96;
             // 
             // colNumberOfVehicles
             // 
             this.colNumberOfVehicles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colNumberOfVehicles.DataPropertyName = "NumberOfVehicles";
-            this.colNumberOfVehicles.HeaderText = "# of Vehicles/Equip";
+            this.colNumberOfVehicles.HeaderText = "# of Eq/Vh";
             this.colNumberOfVehicles.Name = "colNumberOfVehicles";
             this.colNumberOfVehicles.ReadOnly = true;
-            this.colNumberOfVehicles.Width = 180;
+            this.colNumberOfVehicles.Width = 123;
             // 
             // OperationalGroupReportingResourcesControl
             // 

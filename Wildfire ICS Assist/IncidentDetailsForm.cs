@@ -176,9 +176,8 @@ namespace Wildfire_ICS_Assist
         SavedVehiclesForm savedVehiclesForm = null;
         SavedIncidentObjectivesForm savedObjectivesForm = null;
         SavedSafetyNotesForm savedSafetyNotesForm = null;
-        SavedTeamMembersForm savedTeamMembersForm = null;
+        SavedPersonnelForm savedTeamMembersForm = null;
         SavedAircraftsForm savedAircraftForm = null;
-        SavedTeamAssignmentsForm savedTeamAssignmentsForm = null;
 
 
         CommunicationsListForm _communicationsListForm = null;
@@ -452,7 +451,7 @@ namespace Wildfire_ICS_Assist
         {
             if (null == savedTeamMembersForm)
             {
-                savedTeamMembersForm = new SavedTeamMembersForm();
+                savedTeamMembersForm = new SavedPersonnelForm();
                 savedTeamMembersForm.FormClosed += SavedTeamMembersForm_Closed;
                 savedTeamMembersForm.Show(this);
                 ActiveForms.Add(savedTeamMembersForm);
@@ -642,7 +641,7 @@ namespace Wildfire_ICS_Assist
             browseToIncidentFolderToolStripMenuItem.Enabled = true;
 
             List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
-            Program.CurrentIncident.TaskTeamMembers = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
+            Program.CurrentIncident.IncidentPersonnel = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
         }
 
         private void DisplayCurrentICSRole()
@@ -1949,32 +1948,10 @@ namespace Wildfire_ICS_Assist
 
         private void teamAssignmentsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            OpenSavedTeamAssignmentsForm();
         }
 
 
-        private void OpenSavedTeamAssignmentsForm()
-        {
-
-            if (savedTeamAssignmentsForm == null)
-            {
-                savedTeamAssignmentsForm = new SavedTeamAssignmentsForm();
-                savedTeamAssignmentsForm.FormClosed += new FormClosedEventHandler(SavedTeamAssignmentsForm_Closed);
-                ActiveForms.Add(savedTeamAssignmentsForm);
-                savedTeamAssignmentsForm.Show(this);
-            }
-
-            savedTeamAssignmentsForm.BringToFront();
-
-        }
-        void SavedTeamAssignmentsForm_Closed(object sender, FormClosedEventArgs e)
-        {
-            RemoveActiveForm(savedTeamAssignmentsForm);
-            savedTeamAssignmentsForm = null;
-
-
-        }
-
+      
         private void tmrAutoSave_Tick(object sender, EventArgs e)
         {
             CheckForAutoBackup();
@@ -2664,56 +2641,68 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                using (PersonnelCheckInForm signInForm = new PersonnelCheckInForm())
+                while (StartCheckIn())
                 {
-                    DialogResult dr = signInForm.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        CheckInRecord record = signInForm.signInRecord;
-                        record.IsSignIn = true;
-                        Program.wfIncidentService.UpsertMemberStatus(record);
-                    }
+
                 }
             }
         }
 
-        private void btnLogisticsBulkSignIn_Click(object sender, EventArgs e)
+        private bool StartCheckIn()
         {
-            if (initialDetailsSet())
+            bool autoStartNextCheckin = false;
+            using (PersonnelCheckInForm signInForm = new PersonnelCheckInForm())
             {
-                using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
+                DialogResult dr = signInForm.ShowDialog();
+                if (dr == DialogResult.OK)
                 {
-                    DialogResult dr = signInForm.ShowDialog();
-                    if (dr == DialogResult.OK)
+                    //get the resource and add it to the appropriate place
+                    CheckInRecord record = signInForm.checkInRecord;
+                    IncidentResource resource = signInForm.selectedResource;
+                    switch (record.ResourceType)
                     {
-                        foreach (CheckInRecord record in signInForm.records)
-                        {
-                            record.IsSignIn = true;
-                            Program.wfIncidentService.UpsertMemberStatus(record);
-                        }
+                        case "Person":
+                            Personnel p = resource as Personnel;
+                            Program.wfIncidentService.UpsertPersonnel(p);
+                            break;
+                        case "Visitor":
+                            Personnel vis = resource as Personnel;
+                            Program.wfIncidentService.UpsertPersonnel(vis);
+                            break;
+                        case "Vehicle":
+                            Vehicle v = resource as Vehicle;
+                            Program.wfIncidentService.UpsertVehicle(v);
+                            break;
+                        case "Crew":
+                            OperationalSubGroup group = resource as OperationalSubGroup;
+                            Program.wfIncidentService.UpsertOperationalSubGroup(group);
+                            foreach(IncidentResource subres in signInForm.SubResources)
+                            {
+                                if(subres.GetType().Name.Equals("Personnel"))
+                                {
+                                    subres.OpPeriod = Program.CurrentOpPeriod;
+                                    Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
+                                } else if (subres.GetType().Name.Equals("Vehicle"))
+                                {
+                                    Vehicle vh = subres as Vehicle;
+                                    vh.OperatorName = group.ResourceName;
+                                    Program.wfIncidentService.UpsertVehicle(vh);
+                                }
+                            }
+                            //TODO: Save individual people and equipment
+                            break;
                     }
+
+                    
+                    Program.wfIncidentService.UpsertCheckInRecord(record);
+
+                    autoStartNextCheckin = signInForm.AutoStartNextCheckin;
                 }
             }
+            return autoStartNextCheckin;
         }
 
-        private void bulkCheckInToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (initialDetailsSet())
-            {
-                using (PersonnelBulkCheckInForm signInForm = new PersonnelBulkCheckInForm())
-                {
-                    DialogResult dr = signInForm.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        foreach (CheckInRecord record in signInForm.records)
-                        {
-                            record.IsSignIn = true;
-                            Program.wfIncidentService.UpsertMemberStatus(record);
-                        }
-                    }
-                }
-            }
-        }
+     
 
         private void checkInMemberToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2724,9 +2713,9 @@ namespace Wildfire_ICS_Assist
                     DialogResult dr = signInForm.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        CheckInRecord record = signInForm.signInRecord;
-                        record.IsSignIn = true;
-                        Program.wfIncidentService.UpsertMemberStatus(record);
+                        CheckInRecord record = signInForm.checkInRecord;
+                        Program.wfIncidentService.UpsertCheckInRecord(record);
+
                     }
                 }
             }

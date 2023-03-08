@@ -11,16 +11,23 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
+using Wildfire_ICS_Assist.CustomControls;
 
 namespace Wildfire_ICS_Assist
 {
     public partial class PersonnelCheckInForm : Form
     {
-        private Personnel _selectedMember;
-        public Personnel selectedMember { get => _selectedMember; set => _selectedMember = value; }
-        private CheckInRecord _signInRecord = new CheckInRecord();
-        public CheckInRecord signInRecord { get => _signInRecord; set => _signInRecord = value; }
-        public bool AutoAssignToOrg { get => chkAssignOnOrgChart.Checked; }
+        
+        private CheckInRecord _checkInRecord = new CheckInRecord();
+        public CheckInRecord checkInRecord { get => _checkInRecord; private set => _checkInRecord = value; }
+
+        private IncidentResource _selectedResource = new IncidentResource();
+        public IncidentResource selectedResource { get => _selectedResource; private set => _selectedResource = value; }
+        private List<IncidentResource> _SubResources = new List<IncidentResource>();
+        public List<IncidentResource> SubResources { get => _SubResources; private set => _SubResources = value; }
+
+
+        public bool AutoStartNextCheckin { get => chkAutoNewCheckin.Checked; }
 
         public PersonnelCheckInForm()
         {
@@ -31,27 +38,27 @@ namespace Wildfire_ICS_Assist
         private void PersonnelSignInForm_Load(object sender, EventArgs e)
         {
             LoadData();
-            pnlCheckInInfo.BackColor = Program.FormAccent;
-            pnlCheckInInfo.Enabled = false;
-            editTeamMemberControl1.teamMember = new Personnel();
-            datCheckInTime.Value = DateTime.Now;
-            datLDW.Value = DateTime.Now.AddDays(14);
-            buildICSRoleDropdown();
-
+            personnelEditControl1.SetPersonnel( new Personnel());
+           
+            foreach(TabPage p in wizardPages1.TabPages) { p.BackColor = Program.FormBackground; }
+            BuildSavedVehicleList();
 
         }
 
-        private void buildICSRoleDropdown()
+        private void BuildSavedVehicleList()
         {
-            ICSRole role = Program.CurrentRole.Clone();
-            List<ICSRole> roles = OrgChartTools.GetAllRoles();
-            roles = roles.OrderByDescending(o=>o.SectionID == WF_ICS_ClassLibrary.Globals.IncidentCommanderID).ThenBy(o=>o.RoleNameWithSection).ToList();
-            cboICSRole.DataSource = null;
-            cboICSRole.DataSource = roles;
-            cboICSRole.DisplayMember = "RoleNameWithSection";
-            cboICSRole.ValueMember = "RoleID";
+            Vehicle blankVehicle = new Vehicle();
+            blankVehicle.IncidentIDNo = "-Select a saved vehicle-";
+            blankVehicle.ID = Guid.Empty;
+            List<Vehicle> savedVehicles = new List<Vehicle>();
+            savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("Vehicles"));
+            savedVehicles.Insert(0, blankVehicle);
+
+            cboSavedVehicles.DataSource = savedVehicles;
 
         }
+
+   
 
         private void btnShowHelp_Click(object sender, EventArgs e)
         {
@@ -72,8 +79,6 @@ namespace Wildfire_ICS_Assist
 
             cboSavedPersonnel.DataSource = members;
 
-            List<ICSRole> roles = new List<ICSRole>(); roles.AddRange(OrgChartTools.staticRoles);
-            cboICSRole.DataSource = roles;
 
         }
 
@@ -81,31 +86,42 @@ namespace Wildfire_ICS_Assist
         {
             if (cboSavedPersonnel.SelectedItem != null)
             {
-                selectedMember = (Personnel)cboSavedPersonnel.SelectedItem;
-                txtSelectedName.Text = selectedMember.Name;
-                pnlCheckInInfo.Enabled = true;
-                pnlCheckInInfo.BackColor = Color.White;
-                txtDeparturePoint.Focus();
+                _selectedResource = (Personnel)cboSavedPersonnel.SelectedItem;
+                checkInRecord.ResourceType = "Person";
+                MoveToCheckInDetailsPage();
+                //txtSelectedName.Text = selectedMember.Name;
+                
             }
         }
 
         private void btnSelectNew_Click(object sender, EventArgs e)
         {
-            if (editTeamMemberControl1.FormValid)
+            if (personnelEditControl1.FormValid)
             {
-                selectedMember = editTeamMemberControl1.teamMember;
-                txtSelectedName.Text = selectedMember.Name;
-                pnlCheckInInfo.Enabled = true;
-                pnlCheckInInfo.BackColor = Color.White;
-                txtDeparturePoint.Focus();
+                _selectedResource = personnelEditControl1.teamMember;
+                checkInRecord.ResourceType = "Person";
+                //txtSelectedName.Text = selectedMember.Name;
+                MoveToCheckInDetailsPage();
 
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (wizardPages1.SelectedIndex > 0)
+            {
+                if (MessageBox.Show(Properties.Resources.SureCancel, Properties.Resources.AreYouSureTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                    this.Close();
+                }
+            }
+            else
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
+
         }
 
         private void cboSavedPersonnel_Leave(object sender, EventArgs e)
@@ -117,81 +133,151 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private bool ValidateCheckInInfo()
+       
+
+        private void MoveToCheckInDetailsPage()
         {
-            if (datCheckInTime.Value > datLDW.Value)
-            {
-                lblLastDayWorking.ForeColor = Color.Red;
-                return false;
-            }
-            else { lblLastDayWorking.ForeColor = label1.ForeColor; }
-            return true;
+            wizardPages1.SelectedIndex = 5;
+            
+            resourceCheckInEditControl1.SetResource (_selectedResource);
+            resourceCheckInEditControl1.SetCheckInRecord(_checkInRecord);
+            resourceCheckInEditControl1.LoadPage();
         }
+
+      
+
 
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
-            if (selectedMember != null && ValidateCheckInInfo())
+           if(_selectedResource != null && resourceCheckInEditControl1.ValidateCheckInInfo())
             {
-                signInRecord.teamMember = selectedMember;
-                signInRecord.OpPeriod = Program.CurrentOpPeriod;
+                resourceCheckInEditControl1.SaveFormFieldsToCheckin();
 
-                if (datLastDayOfRest.Checked) { signInRecord.LastDayOfRest = datLastDayOfRest.Value; } else { signInRecord.LastDayOfRest = DateTime.MinValue; }
-                if (datStartTravel.Checked) { signInRecord.StartOfTravel = datStartTravel.Value; }                else { signInRecord.StartOfTravel = DateTime.MinValue; }
-
-                signInRecord.SignInTime = datCheckInTime.Value;
-                signInRecord.LastDayOnIncident = datLDW.Value;
-                if (datLastDayTravel.Checked) { signInRecord.LastDayOfTravel = datLastDayTravel.Value; } else { signInRecord.LastDayOfTravel = DateTime.MinValue; }
-                if (datFirstDayOnIncident.Checked) { signInRecord.FirstDayOnIncident = datFirstDayOnIncident.Value; } else { signInRecord.FirstDayOnIncident = DateTime.MinValue; }
-                signInRecord.DeparturePoint = txtDeparturePoint.Text;
-                signInRecord.MethodOfTravel = cboMethodOfTravel.Text;
-                signInRecord.Accomodations= cboAccomodations.Text;
-                signInRecord.Breakfast = chkBreakfast.Checked;
-                signInRecord.Lunch = chkLunch.Checked;
-                signInRecord.Dinner = chkDinner.Checked;
-                signInRecord.AdditionalInfo = txtOther.Text;
-                signInRecord.CheckInLocation = cboCheckInLocation.Text;
-                if(cboICSRole.SelectedItem != null)
-                {
-                    signInRecord.InitialIncidentRoleID = ((ICSRole)cboICSRole.SelectedItem).RoleID;
-                    signInRecord.InitialRoleName = ((ICSRole)cboICSRole.SelectedItem).RoleName;
-                }
+                checkInRecord = resourceCheckInEditControl1.checkInRecord.Clone();
+                checkInRecord.ResourceID = _selectedResource.ID;
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+                
             }
+            /*
+            if (selectedMember != null && ValidateCheckInInfo())
+            {
+                checkInRecord.ResourceID = selectedMember.ID;
+                checkInRecord.ResourceName = selectedMember.Name;
+                checkInRecord.ResourceType = "Person";
+
+                checkInRecord.OpPeriod = Program.CurrentOpPeriod;
+
+
+                checkInRecord.CheckInDate = datCheckInTime.Value;
+                checkInRecord.LastDayOnIncident = datLDW.Value;
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }*/
         }
 
-        private void datCheckInTime_ValueChanged(object sender, EventArgs e)
-        {
-            datLDW.MinDate = datCheckInTime.Value;
-        }
-
-        private void datLDW_ValueChanged(object sender, EventArgs e)
-        {
-            if (datCheckInTime.Value > datLDW.Value) { lblLastDayWorking.ForeColor = Color.Red; }
-            else { lblLastDayWorking.ForeColor = label1.ForeColor; }
-        }
-
+     
         private void txtDeparturePoint_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void cboICSRole_SelectedIndexChanged(object sender, EventArgs e)
+   
+
+        private void btnCrew_Click(object sender, EventArgs e)
         {
-            if(cboICSRole.SelectedItem != null)
-            {
-                ICSRole role = (ICSRole)cboICSRole.SelectedItem;
-                chkAssignOnOrgChart.Enabled = RoleAvailableForAutoAssign(role);
-                chkAssignOnOrgChart.Checked = chkAssignOnOrgChart.Enabled;
-            } else { chkAssignOnOrgChart.Enabled = false; chkAssignOnOrgChart.Checked = false; }
+            wizardPages1.SelectedIndex = 2;
         }
 
-        private bool RoleAvailableForAutoAssign(ICSRole role)
+        private void btnVehicleEquipment_Click(object sender, EventArgs e)
         {
-            List<ICSRole> roles = Program.CurrentOrgChart.ActiveRoles;
-            if (!roles.Any(o => o.RoleName.Equals(role.RoleName, StringComparison.OrdinalIgnoreCase) && o.IndividualID == Guid.Empty)) { return false; }
-            return true;
+            wizardPages1.SelectedIndex = 4;
+        }
+
+        private void btnSinglePersonnel_Click(object sender, EventArgs e)
+        {
+            wizardPages1.SelectedIndex = 1;
+        }
+
+        private void btnVisitor_Click(object sender, EventArgs e)
+        {
+            wizardPages1.SelectedIndex = 3;
+        }
+
+        private void wizardPages1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnBack.Visible = wizardPages1.SelectedIndex > 0;
+            btnCheckIn.Visible = wizardPages1.SelectedIndex == 5;
+            chkAutoNewCheckin.Visible = wizardPages1.SelectedIndex == 5;
+
+            btnDoneCrewEdit.Visible = wizardPages1.SelectedIndex == 2;
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            switch(wizardPages1.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 5:
+                    if (checkInRecord.IsVisitor) { wizardPages1.SelectedIndex = 3; }
+                    else if (checkInRecord.IsCrew) { wizardPages1.SelectedIndex = 2; }
+                    else if (checkInRecord.IsVehicle) { wizardPages1.SelectedIndex = 4; }
+                    else { wizardPages1.SelectedIndex = 1; }
+                    break;
+                default:
+                    wizardPages1.SelectedIndex = 0;
+                    break;
+            }
+        }
+
+        private void btnSelectSavedVehicle_Click(object sender, EventArgs e)
+        {
+            if(cboSavedVehicles.SelectedItem != null && ((Vehicle)cboSavedVehicles.SelectedItem).ID != Guid.Empty)
+            {
+                _selectedResource = ((Vehicle)cboSavedVehicles.SelectedItem).Clone();
+                checkInRecord.ResourceType = "Vehicle";
+                MoveToCheckInDetailsPage();
+            }
+        }
+
+        private void btnSelectNewVehicle_Click(object sender, EventArgs e)
+        {
+            if (vehicleEquipmentEditControl1.IsComplete)
+            {
+                _selectedResource = vehicleEquipmentEditControl1.CurrentVehicle.Clone();
+                checkInRecord.ResourceType = "Vehicle";
+                MoveToCheckInDetailsPage();
+            }
+        }
+
+       
+        private void btnSelectVisitor_Click(object sender, EventArgs e)
+        {
+            if (visitorEditControl1.FormValid)
+            {
+                visitorEditControl1.selectedPerson.Kind = "Visitor";
+                visitorEditControl1.selectedPerson.Type = "Visitor";
+                _selectedResource = visitorEditControl1.selectedPerson.Clone();
+                checkInRecord.ResourceType = "Visitor";
+                MoveToCheckInDetailsPage();
+            }
+        }
+
+        private void btnDoneCrewEdit_Click(object sender, EventArgs e)
+        {
+            if (crewEditControl1.FormIsComplete)
+            {
+                
+
+
+                selectedResource = crewEditControl1.subGroup.Clone();
+                checkInRecord.ResourceType = "Crew";
+                SubResources.Clear();
+                SubResources.AddRange(crewEditControl1.resources);
+                MoveToCheckInDetailsPage();
+            }
         }
     }
 }

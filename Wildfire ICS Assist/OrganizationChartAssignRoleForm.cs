@@ -42,7 +42,7 @@ namespace Wildfire_ICS_Assist
 
         private void OrganizationChartAssignRole_Load(object sender, EventArgs e)
         {
-            editTeamMemberControl1.teamMember = new Personnel();
+            editTeamMemberControl1.SetPersonnel(new Personnel());
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

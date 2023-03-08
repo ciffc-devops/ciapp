@@ -40,6 +40,8 @@ namespace Wildfire_ICS_Assist
             cboReportsTo.Items.Clear();
             CurrentOrgChart.SortRoles();
 
+            
+
             List<ICSRole> reportsToRoles = new List<ICSRole>();
             if (RestrictToAirOps)
             {
@@ -138,7 +140,7 @@ namespace Wildfire_ICS_Assist
             {
                 //update the list of role names based on the currently selected branch.
                 Guid BranchID = parentRole.SectionID;
-                List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o=>o.SectionID == BranchID || o.SectionID == Guid.Empty).OrderBy(o=>o.RoleName).ToList();
+                List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o=>!o.IsOpGroupSup && ( o.SectionID == BranchID || o.SectionID == Guid.Empty)).OrderBy(o=>o.RoleName).ToList();
                 cboNewRoleName.DataSource = null;
                 cboNewRoleName.DataSource = branchRoles;
                 cboNewRoleName.DisplayMember = "RoleName";
@@ -157,6 +159,8 @@ namespace Wildfire_ICS_Assist
                 else if (parentRole.SectionID == Globals.LogisticsChiefID) { splitContainer1.Panel1.BackColor = Color.Khaki; }
                 else if (parentRole.SectionID == Globals.FinanceChiefID) { splitContainer1.Panel1.BackColor = Color.LightGray; }
                 else { splitContainer1.Panel1.BackColor = Color.White; }
+
+                lblOperationalGroupsNote.Visible = parentRole.SectionID == Globals.OpsChiefID;
             }
         }
 

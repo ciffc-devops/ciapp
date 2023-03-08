@@ -34,12 +34,12 @@ namespace WF_ICS_ClassLibrary.Models
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public string OrderRequestNo { get => _OrderRequestNo; set => _OrderRequestNo = value; }
-        public string IncidentIDNo { get => ResourceIdentifier; set => ResourceIdentifier = value; }
+        public string IncidentIDNo { get => ResourceIdentifier; set { ResourceIdentifier = value; SetResourceName(); } }
         public string Classification { get => _Classification; set => _Classification = value; }
-        public string Make { get => _Make; set => _Make = value; }
+        public string Make { get => _Make; set { _Make = value; SetResourceName(); } }
         public string CategoryKindCapacity { get => _CategoryKindCapacity; set => _CategoryKindCapacity = value; }
         public string Features { get => _Features; set => _Features = value; }
-        public string AgencyOrOwner { get => _AgencyOrOwner; set => _AgencyOrOwner = value; }
+        public string AgencyOrOwner { get => _AgencyOrOwner; set { _AgencyOrOwner = value; SetResourceName(); } }
         public string OperatorName { get => _OperatorName; set => _OperatorName = value; }
         public string LicenseOrID { get => _LicenseOrID; set => _LicenseOrID = value; }
         public string IncidentAssignment { get => _IncidentAssignment; set => _IncidentAssignment = value; }
@@ -48,6 +48,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Notes { get => _Notes; set => _Notes = value; }
         public string ASE { get => _ASE; set => _ASE = value; }
 
+        private void SetResourceName() { ResourceName = IDWithMakeOwner; }
         public string IDWithMakeOwner
         {
             get

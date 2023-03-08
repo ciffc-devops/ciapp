@@ -38,6 +38,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblOperationalGroupsNote = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -56,6 +57,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblOperationalGroupsNote);
             this.splitContainer1.Panel1.Controls.Add(this.cboNewRoleName);
             this.splitContainer1.Panel1.Controls.Add(this.cboReportsTo);
             this.splitContainer1.Panel1.Controls.Add(this.lblTitle);
@@ -66,8 +68,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(448, 201);
-            this.splitContainer1.SplitterDistance = 128;
+            this.splitContainer1.Size = new System.Drawing.Size(448, 237);
+            this.splitContainer1.SplitterDistance = 161;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -158,6 +160,19 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lblOperationalGroupsNote
+            // 
+            this.lblOperationalGroupsNote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOperationalGroupsNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOperationalGroupsNote.Location = new System.Drawing.Point(14, 115);
+            this.lblOperationalGroupsNote.Name = "lblOperationalGroupsNote";
+            this.lblOperationalGroupsNote.Size = new System.Drawing.Size(422, 42);
+            this.lblOperationalGroupsNote.TabIndex = 112;
+            this.lblOperationalGroupsNote.Text = "Use the Assignment List screen to add Branches, Divisions, Strike Teams, Task For" +
+    "ces, etc.";
+            this.lblOperationalGroupsNote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblOperationalGroupsNote.Visible = false;
+            // 
             // OrganizationChartAddRoleForm
             // 
             this.AcceptButton = this.btnSave;
@@ -165,12 +180,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(448, 201);
+            this.ClientSize = new System.Drawing.Size(448, 237);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(464, 240);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(464, 240);
             this.Name = "OrganizationChartAddRoleForm";
@@ -197,5 +211,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ComboBox cboNewRoleName;
+        private System.Windows.Forms.Label lblOperationalGroupsNote;
     }
 }

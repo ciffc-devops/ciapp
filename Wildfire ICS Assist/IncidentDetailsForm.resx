@@ -184,7 +184,7 @@
     <value>0, 0</value>
   </data>
   <data name="dgvMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1080, 105</value>
+    <value>1079, 99</value>
   </data>
   <data name="dgvMembersOnTask.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -359,10 +359,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1080, 134</value>
+    <value>1079, 128</value>
   </data>
   <data name="splitContainer4.SplitterDistance" type="System.Int32, mscorlib">
-    <value>105</value>
+    <value>99</value>
   </data>
   <data name="splitContainer4.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -449,7 +449,7 @@
     <value>0, 0</value>
   </data>
   <data name="dgvTaskEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1086, 111</value>
+    <value>1085, 105</value>
   </data>
   <data name="dgvTaskEquipment.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -621,10 +621,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1086, 140</value>
+    <value>1085, 134</value>
   </data>
   <data name="splitContainer5.SplitterDistance" type="System.Int32, mscorlib">
-    <value>111</value>
+    <value>105</value>
   </data>
   <data name="splitContainer5.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -882,7 +882,7 @@
     <value>6</value>
   </data>
   <data name="pnlOpsPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>822, 36</value>
+    <value>821, 36</value>
   </data>
   <data name="pnlOpsPeriod.Size" type="System.Drawing.Size, System.Drawing">
     <value>262, 213</value>
@@ -900,7 +900,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlOpsPeriod.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="pnlTaskInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -912,7 +912,7 @@
     <value>16, 130</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>533, 2</value>
+    <value>532, 2</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
@@ -1101,7 +1101,7 @@
     <value>171, 88</value>
   </data>
   <data name="txtTaskNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 29</value>
+    <value>378, 29</value>
   </data>
   <data name="txtTaskNumber.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1188,7 +1188,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnICSRoleHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 144</value>
+    <value>411, 144</value>
   </data>
   <data name="btnICSRoleHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 37</value>
@@ -1221,7 +1221,7 @@
     <value>170, 147</value>
   </data>
   <data name="cboICSRole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 32</value>
+    <value>231, 32</value>
   </data>
   <data name="cboICSRole.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1281,7 +1281,7 @@
     <value>7, 8</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>543, 32</value>
+    <value>542, 32</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1317,7 +1317,7 @@
     <value>9, 8, 9, 8</value>
   </data>
   <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 29</value>
+    <value>378, 29</value>
   </data>
   <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1410,7 +1410,7 @@
     <value>255, 36</value>
   </data>
   <data name="pnlTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 237</value>
+    <value>560, 237</value>
   </data>
   <data name="pnlTaskInfo.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -1425,7 +1425,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlTaskInfo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblServerStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1437,7 +1437,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblServerStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 626</value>
+    <value>443, 620</value>
   </data>
   <data name="lblServerStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>640, 20</value>
@@ -1461,7 +1461,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblServerStatus.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblVersionNumber.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1473,7 +1473,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVersionNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 626</value>
+    <value>8, 620</value>
   </data>
   <data name="lblVersionNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 20</value>
@@ -1497,7 +1497,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVersionNumber.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="tcStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1512,7 +1512,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1086, 140</value>
+    <value>1085, 134</value>
   </data>
   <data name="tpMembersOnTask.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1539,7 +1539,7 @@
     <value>4, 44</value>
   </data>
   <data name="tpEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1086, 140</value>
+    <value>1085, 134</value>
   </data>
   <data name="tpEquipment.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1596,7 +1596,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpNetworkLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1086, 140</value>
+    <value>1085, 134</value>
   </data>
   <data name="tpNetworkLog.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1627,7 +1627,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAZgBAwGYAQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAbgBAwG4AQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1671,7 +1671,7 @@
     <value>0, 435</value>
   </data>
   <data name="tcStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1094, 188</value>
+    <value>1093, 182</value>
   </data>
   <data name="tcStatus.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -1689,7 +1689,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tcStatus.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="pnlInternetSyncStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1827,7 +1827,7 @@
     <value>3</value>
   </data>
   <data name="pnlInternetSyncStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>465, 607</value>
+    <value>465, 601</value>
   </data>
   <data name="pnlInternetSyncStart.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 27</value>
@@ -1848,7 +1848,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2019,7 +2019,7 @@
     <value>4</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 607</value>
+    <value>376, 601</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 29</value>
@@ -2040,7 +2040,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -2376,13 +2376,7 @@
     <value>318, 30</value>
   </data>
   <data name="checkInMemberToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check-In Personnel</value>
-  </data>
-  <data name="bulkCheckInToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 30</value>
-  </data>
-  <data name="bulkCheckInToolStripMenuItem.Text" xml:space="preserve">
-    <value>Bulk Check-In</value>
+    <value>Check-In Resource</value>
   </data>
   <data name="vehiclesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>318, 30</value>
@@ -2532,7 +2526,7 @@
     <value>0, 0</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1094, 33</value>
+    <value>1093, 33</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -2550,7 +2544,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="llProgramURL.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2583,7 +2577,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;llProgramURL.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2610,7 +2604,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="svdTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1738, 17</value>
@@ -2639,49 +2633,6 @@
   <data name="cpLogistics.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="btnLogisticsBulkSignIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAZRJREFUWEftlVuRwzAMRQuhEAKhEAqhEAplISyEQFkohVAG2XsdySPLivPcfOxU
-        M2cmlfWybLmXYRj+BEgHevAGVBB+U9dlO+t0FJCbJNPEHq7dkq133guEO28lV2jThUHmSI5jKzVYbqt8
-        q15hR4jX92GCKSBX8CXOnofYVLs3/oUevIsEU0A0cau1d7G1unTOLlbZCW9ggSxJrBxbAOQJXtlwnmOO
-        AMIK1yRWvsV/+yWEsOVbkhPunP77xhCytQDSSwzutlUE1+KHiAtgTxFPibPvKYasvYQWJrlGcT2hUmEQ
-        sHQMPSw+73SKWjEewQ9IrRTdmkJoQ9vcAQi7yZj1u1D8GBPZtvM7zbdZZ3Bd9/jED+DjFUeTP7KidFBY
-        fXrpxGbyz0jW74A+uq681CbbVor2FBSFeLgmNt6PMGb7CCyQ1hQwid0xO9JKnO+TJ1QqkLnLx9bbo7BU
-        lzGiVnymoHRQWP1nCixM8k+nIIJBJNimKWgRKqdgUAluE1oWJ1ZC5RyQ5hSsIVSeSag8k1B5HsPlF8Q2
-        aWM62fYlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnLogisticsBulkSignIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnLogisticsBulkSignIn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 119</value>
-  </data>
-  <data name="btnLogisticsBulkSignIn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 57</value>
-  </data>
-  <data name="btnLogisticsBulkSignIn.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="btnLogisticsBulkSignIn.Text" xml:space="preserve">
-    <value>Bulk Sign In</value>
-  </data>
-  <data name="btnLogisticsBulkSignIn.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnLogisticsBulkSignIn.Name" xml:space="preserve">
-    <value>btnLogisticsBulkSignIn</value>
-  </data>
-  <data name="&gt;&gt;btnLogisticsBulkSignIn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnLogisticsBulkSignIn.Parent" xml:space="preserve">
-    <value>cpLogistics</value>
-  </data>
-  <data name="&gt;&gt;btnLogisticsBulkSignIn.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="btnLogisticsSignIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -2697,7 +2648,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnLogisticsSignIn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 119</value>
+    <value>8, 51</value>
   </data>
   <data name="btnLogisticsSignIn.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 57</value>
@@ -2721,7 +2672,7 @@
     <value>cpLogistics</value>
   </data>
   <data name="&gt;&gt;btnLogisticsSignIn.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="btnAdditionalContacts.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -2744,13 +2695,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnAdditionalContacts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 51</value>
+    <value>179, 51</value>
   </data>
   <data name="btnAdditionalContacts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 4, 6, 4</value>
   </data>
   <data name="btnAdditionalContacts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 57</value>
+    <value>288, 57</value>
   </data>
   <data name="btnAdditionalContacts.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -2771,7 +2722,7 @@
     <value>cpLogistics</value>
   </data>
   <data name="&gt;&gt;btnAdditionalContacts.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="btnLogisticsMemberStatus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -2825,7 +2776,7 @@
     <value>cpLogistics</value>
   </data>
   <data name="&gt;&gt;btnLogisticsMemberStatus.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="btnVehicles.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -2849,13 +2800,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnVehicles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 51</value>
+    <value>177, 119</value>
   </data>
   <data name="btnVehicles.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 4, 6, 4</value>
   </data>
   <data name="btnVehicles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 57</value>
+    <value>290, 57</value>
   </data>
   <data name="btnVehicles.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -2876,19 +2827,19 @@
     <value>cpLogistics</value>
   </data>
   <data name="&gt;&gt;btnVehicles.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="cpLogistics.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
   <data name="cpLogistics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>599, 334</value>
+    <value>553, 334</value>
   </data>
   <data name="cpLogistics.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
   </data>
   <data name="cpLogistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 40</value>
+    <value>485, 196</value>
   </data>
   <data name="cpLogistics.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
@@ -2903,7 +2854,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpLogistics.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>0</value>
   </data>
   <data name="btnIncidentSummary.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -3697,7 +3648,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpIncidentActionPlan.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="cpPlanning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="btnPlanningAddAssignment.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -3855,7 +3809,7 @@
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
   <data name="cpPlanning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>599, 386</value>
+    <value>598, 386</value>
   </data>
   <data name="cpPlanning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -4044,7 +3998,7 @@
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
   <data name="cpOperations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>599, 282</value>
+    <value>598, 282</value>
   </data>
   <data name="cpOperations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -4065,7 +4019,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpOperations.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -4074,7 +4028,7 @@
     <value>11, 24</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1094, 655</value>
+    <value>1093, 649</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -11291,6 +11245,9 @@
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
   </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 688</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Canadian Incident Action Plan Producer - Incident Details</value>
   </data>
@@ -11682,12 +11639,6 @@
     <value>checkInMemberToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;checkInMemberToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bulkCheckInToolStripMenuItem.Name" xml:space="preserve">
-    <value>bulkCheckInToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;bulkCheckInToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;vehiclesToolStripMenuItem1.Name" xml:space="preserve">
