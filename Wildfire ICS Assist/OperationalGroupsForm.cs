@@ -212,7 +212,7 @@ namespace Wildfire_ICS_Assist
                     operationalGroupReportingResourcesControl1.Visible = false;
                     strikeTeamTaskForceDetailsControl1.Visible = true;
                     strikeTeamTaskForceDetailsControl1.Dock = DockStyle.Fill;
-                    strikeTeamTaskForceDetailsControl1.role = role;
+                    strikeTeamTaskForceDetailsControl1.SetRole(role);
                 }
                 else
                 {
@@ -481,6 +481,7 @@ namespace Wildfire_ICS_Assist
                     {
                         OperationalGroup grp = form.SelectedGroup;
                         Program.wfIncidentService.UpsertOperationalGroup(grp);
+                        
                     }
                 }
             }

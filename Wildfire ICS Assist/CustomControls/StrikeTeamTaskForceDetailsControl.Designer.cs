@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgvSubGroups = new System.Windows.Forms.DataGridView();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,9 +37,15 @@
             this.colNumberOfVehicles = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblResourcesTitle = new System.Windows.Forms.Label();
             this.btnDeleteResource = new System.Windows.Forms.Button();
-            this.btnEditResource = new System.Windows.Forms.Button();
             this.btnAddResource = new System.Windows.Forms.Button();
+            this.cmsAddResource = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addCrewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addVehicleEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkInNewResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGroups)).BeginInit();
+            this.cmsAddResource.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvSubGroups
@@ -130,7 +137,7 @@
             this.btnDeleteResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteResource.Enabled = false;
             this.btnDeleteResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteResource.Location = new System.Drawing.Point(274, 438);
+            this.btnDeleteResource.Location = new System.Drawing.Point(155, 438);
             this.btnDeleteResource.Name = "btnDeleteResource";
             this.btnDeleteResource.Size = new System.Drawing.Size(113, 42);
             this.btnDeleteResource.TabIndex = 116;
@@ -138,20 +145,6 @@
             this.btnDeleteResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDeleteResource.UseVisualStyleBackColor = true;
             this.btnDeleteResource.Click += new System.EventHandler(this.btnDeleteResource_Click);
-            // 
-            // btnEditResource
-            // 
-            this.btnEditResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEditResource.Enabled = false;
-            this.btnEditResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditResource.Location = new System.Drawing.Point(155, 438);
-            this.btnEditResource.Name = "btnEditResource";
-            this.btnEditResource.Size = new System.Drawing.Size(113, 42);
-            this.btnEditResource.TabIndex = 115;
-            this.btnEditResource.Text = "Edit";
-            this.btnEditResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEditResource.UseVisualStyleBackColor = true;
-            this.btnEditResource.Click += new System.EventHandler(this.btnEditResource_Click);
             // 
             // btnAddResource
             // 
@@ -166,13 +159,56 @@
             this.btnAddResource.UseVisualStyleBackColor = true;
             this.btnAddResource.Click += new System.EventHandler(this.btnAddResource_Click);
             // 
+            // cmsAddResource
+            // 
+            this.cmsAddResource.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.cmsAddResource.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addCrewToolStripMenuItem,
+            this.addPersonToolStripMenuItem,
+            this.addVehicleEquipmentToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.checkInNewResourceToolStripMenuItem});
+            this.cmsAddResource.Name = "cmsAddResource";
+            this.cmsAddResource.Size = new System.Drawing.Size(283, 130);
+            // 
+            // addCrewToolStripMenuItem
+            // 
+            this.addCrewToolStripMenuItem.Name = "addCrewToolStripMenuItem";
+            this.addCrewToolStripMenuItem.Size = new System.Drawing.Size(282, 30);
+            this.addCrewToolStripMenuItem.Text = "Add Crew";
+            this.addCrewToolStripMenuItem.Click += new System.EventHandler(this.addCrewToolStripMenuItem_Click);
+            // 
+            // addPersonToolStripMenuItem
+            // 
+            this.addPersonToolStripMenuItem.Name = "addPersonToolStripMenuItem";
+            this.addPersonToolStripMenuItem.Size = new System.Drawing.Size(282, 30);
+            this.addPersonToolStripMenuItem.Text = "Add Person";
+            this.addPersonToolStripMenuItem.Click += new System.EventHandler(this.addPersonToolStripMenuItem_Click);
+            // 
+            // addVehicleEquipmentToolStripMenuItem
+            // 
+            this.addVehicleEquipmentToolStripMenuItem.Name = "addVehicleEquipmentToolStripMenuItem";
+            this.addVehicleEquipmentToolStripMenuItem.Size = new System.Drawing.Size(282, 30);
+            this.addVehicleEquipmentToolStripMenuItem.Text = "Add Vehicle/Equipment";
+            this.addVehicleEquipmentToolStripMenuItem.Click += new System.EventHandler(this.addVehicleEquipmentToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(279, 6);
+            // 
+            // checkInNewResourceToolStripMenuItem
+            // 
+            this.checkInNewResourceToolStripMenuItem.Name = "checkInNewResourceToolStripMenuItem";
+            this.checkInNewResourceToolStripMenuItem.Size = new System.Drawing.Size(282, 30);
+            this.checkInNewResourceToolStripMenuItem.Text = "Check in new resource";
+            // 
             // StrikeTeamTaskForceDetailsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.btnDeleteResource);
-            this.Controls.Add(this.btnEditResource);
             this.Controls.Add(this.btnAddResource);
             this.Controls.Add(this.lblResourcesTitle);
             this.Controls.Add(this.dgvSubGroups);
@@ -182,6 +218,7 @@
             this.Size = new System.Drawing.Size(762, 483);
             this.Load += new System.EventHandler(this.StrikeTeamTaskForceDetailsControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGroups)).EndInit();
+            this.cmsAddResource.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -191,12 +228,17 @@
         private System.Windows.Forms.DataGridView dgvSubGroups;
         private System.Windows.Forms.Label lblResourcesTitle;
         private System.Windows.Forms.Button btnDeleteResource;
-        private System.Windows.Forms.Button btnEditResource;
         private System.Windows.Forms.Button btnAddResource;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfPeople;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfVehicles;
+        private System.Windows.Forms.ContextMenuStrip cmsAddResource;
+        private System.Windows.Forms.ToolStripMenuItem addCrewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addPersonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addVehicleEquipmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem checkInNewResourceToolStripMenuItem;
     }
 }

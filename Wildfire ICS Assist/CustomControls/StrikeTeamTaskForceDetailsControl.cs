@@ -15,8 +15,19 @@ namespace Wildfire_ICS_Assist.CustomControls
     public partial class StrikeTeamTaskForceDetailsControl : UserControl
     {
         private ICSRole _role = null;
-        public ICSRole role { get => _role; set { _role = value; LoadOpGroup(); } }
-        OperationalGroup selectedGroup = new OperationalGroup();
+        public ICSRole role { get => _role; private set { _role = value;  } }
+
+
+
+        public void SetRole(ICSRole role_to_set)
+        {
+            _role = role_to_set; LoadOpGroup();
+        }
+        OperationalGroup _selectedGroup = new OperationalGroup();
+        public OperationalGroup selectedGroup { get => _selectedGroup; private set => _selectedGroup = value; }
+
+
+        private int ReportingPersonnelCount = 0;
 
         public StrikeTeamTaskForceDetailsControl()
         {
@@ -52,7 +63,10 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 if (!resources.Any(o => o.ID == resource.ID)) { resources.Add(resource); }
             }
+            ReportingPersonnelCount = resources.Count(o => o.GetType().Name.Equals("Personnel") || o.GetType().Name.Equals("OperationalSubGroup"));
+
             dgvSubGroups.DataSource = resources.OrderBy(o => o.ResourceName).ToList();
+
         }
 
         private void StrikeTeamTaskForceDetailsControl_Load(object sender, EventArgs e)
@@ -73,9 +87,42 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void btnAddResource_Click(object sender, EventArgs e)
         {
-            OperationalSubGroup sub = new OperationalSubGroup();
-            sub.OperationalGroupID = selectedGroup.ID;
-            OpenResourceForEdit(sub);
+            using (OperationalGroupAddExistingResoruce addExisting = new OperationalGroupAddExistingResoruce())
+            {
+                DialogResult dr = addExisting.ShowDialog();
+
+                if(dr == DialogResult.OK)
+                {
+                    foreach (IncidentResource resource in addExisting.resourcesToAdd)
+                    {
+                        
+                        
+                        OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
+                        listing.OperationalGroupID = selectedGroup.ID;
+                        listing.Kind = resource.Kind;
+                        listing.Type = resource.Type;
+                        listing.ResourceID = resource.ID;
+                        listing.ResourceName = resource.ResourceName;
+                        listing.Contact = resource.Contact;
+                        listing.LeaderName = resource.LeaderName;
+
+                        if (resource.GetType().Name.Equals("Personnel")) { listing.ResourceType = "Personnel"; }
+                        else if (resource.GetType().Name.Equals("Vehicle")) { listing.ResourceType = "Vehicle/Equipment"; }
+                        else if (resource.GetType().Name.Equals(new OperationalSubGroup().GetType().Name)) { listing.ResourceType = "Crew"; }
+
+
+                        selectedGroup.ResourceListing.Add(listing);
+                        
+                    }
+                    PopulateReportingResources();
+                }
+            }
+            /*
+            Button btnSender = (Button)sender;
+            System.Drawing.Point ptLowerLeft = new System.Drawing.Point(0, btnSender.Height);
+            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+            cmsAddResource.Show(ptLowerLeft);
+            */
         }
 
         private void OpenResourceForEdit(OperationalSubGroup sub)
@@ -126,7 +173,6 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void dgvSubGroups_SelectionChanged(object sender, EventArgs e)
         {
-            btnEditResource.Enabled = dgvSubGroups.SelectedRows.Count == 1;
             btnDeleteResource.Enabled = dgvSubGroups.SelectedRows.Count > 0;
         }
 
@@ -137,7 +183,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
 
                 DataGridViewRow row = dgvSubGroups.Rows[e.RowIndex];
-                if (e.RowIndex >= 7)
+                if (ReportingPersonnelCount > 7)
                 {
                     row.Cells["colNumber"].Style.BackColor = Program.ErrorColor;
                 }
@@ -146,6 +192,21 @@ namespace Wildfire_ICS_Assist.CustomControls
                     row.Cells["colNumber"].Style.BackColor = Program.GoodColor;
                 }
             }
+        }
+
+        private void addCrewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addVehicleEquipmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

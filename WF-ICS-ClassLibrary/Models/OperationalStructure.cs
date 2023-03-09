@@ -138,6 +138,7 @@ namespace WF_ICS_ClassLibrary.Models
             ResourceListing.Add(listing);
             NumberOfPeople = ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Personnel")); 
             NumberOfVehicles = ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Vehicle/Equipment"));
+            if (listing.IsLeader) { LeaderName = listing.LeaderName; LeaderID = listing.ResourceID; }
         }
 
         public OperationalSubGroup Clone()
@@ -200,6 +201,42 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class OperationalGroupTools
     {
+        public static List<IncidentResource> GetUncommittedResources(this WFIncident incident, int OpPeriod)
+        {
+            List<IncidentResource> resources = new List<IncidentResource>();
+            foreach(CheckInRecord rec in incident.AllCheckInRecords.Where(o=>o.Active && o.OpPeriod == OpPeriod && !o.IsVisitor))
+            {
+                if(rec.ParentRecordID == Guid.Empty && !incident.GetIsResourceCurrentlyAssigned(OpPeriod, rec.ResourceID))
+                {
+                    if(rec.IsPerson && incident.IncidentPersonnel.Any(o=>o.ID == rec.ResourceID && o.Active))
+                    {
+                        resources.Add(incident.IncidentPersonnel.First(o => o.ID == rec.ResourceID && o.Active));
+                    }
+                    else if (rec.IsCrew && incident.ActiveOperationalSubGroups.Any(o=>o.ID == rec.ResourceID))
+                    {
+                        resources.Add(incident.ActiveOperationalSubGroups.First(o => o.ID == rec.ResourceID));
+                    }
+                    else if (rec.IsVehicle && incident.allVehicles.Any(o=>o.ID == rec.ResourceID && o.Active))
+                    {
+                        resources.Add(incident.allVehicles.First(o => o.ID == rec.ResourceID && o.Active));
+                    }
+                }
+            }
+            resources = resources.OrderBy(o => o.Kind).ThenBy(o => o.Type).ThenBy(o => o.ResourceName).ToList();
+
+
+            return resources;
+        }
+
+        public static bool GetIsResourceCurrentlyAssigned (this WFIncident incident, int OpPeriod, Guid ResourceID)
+        {
+            if(ResourceID == Guid.Empty) { return false; }
+            if (incident.ActiveOperationalSubGroups.Any(o => o.ResourceListing.Count(r => r.ResourceID == ResourceID) > 0 && o.OpPeriod == OpPeriod)) { return true; }
+            if (incident.ActiveOperationalGroups.Any(o => o.ResourceListing.Count(r => r.ResourceID == ResourceID) > 0  && o.OpPeriod == OpPeriod)) { return true; }
+            if (incident.allOrgCharts.Any(o => o.OpPeriod == OpPeriod) && incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod).AllRoles.Any(o => o.IndividualID == ResourceID)) { return true; }
+            return false;
+        }
+
         public static void UpdateOperationalGroupCounts(this WFIncident incident, int OpPeriod)
         {
             incident.SetOpGroupDepths(OpPeriod);

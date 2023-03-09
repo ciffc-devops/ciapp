@@ -19,13 +19,11 @@ namespace Wildfire_ICS_Assist
     {
         private OperationalGroup _SelectedGroup = new OperationalGroup();
         public OperationalGroup SelectedGroup { get => _SelectedGroup; set { _SelectedGroup = value; } }
-        private List<IncidentResource> _resourcesToBeAdded = new List<IncidentResource>();
-        public List<IncidentResource> resourcesToBeAdded { get => _resourcesToBeAdded; set => _resourcesToBeAdded = value; }
 
         public OperationalGroupSTTFEditForm()
         {
             this.Icon = Program.programIcon; InitializeComponent(); this.BackColor = Program.FormBackground;
-            dgvSubGroups.AutoGenerateColumns = false; dgvSubGroups.BackgroundColor = Program.FormAccent;
+            
         }
 
         private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
@@ -63,15 +61,14 @@ namespace Wildfire_ICS_Assist
 
         private void PopulateReportingResources()
         {
-            dgvSubGroups.DataSource = null;
-            dgvSubGroups.AutoGenerateColumns = false;
-            List<IncidentResource> resources = new List<IncidentResource>();
-            resources.AddRange(SelectedGroup.ActiveResourceListing);
-            foreach(IncidentResource resource in Program.CurrentIncident.GetReportingResources(SelectedGroup.ID).Where(o => o.Active))
+            ICSRole role = new ICSRole();
+            if(Program.CurrentOrgChart.ActiveRoles.Any(o=>o.RoleID == SelectedGroup.LeaderICSRoleID))
             {
-                if (!resources.Any(o => o.ID == resource.ID)) { resources.Add(resource); }
+                role = Program.CurrentOrgChart.ActiveRoles.First(o => o.RoleID == SelectedGroup.LeaderICSRoleID);
+                strikeTeamTaskForceDetailsControl1.SetRole(role);
             }
-            dgvSubGroups.DataSource = resources.OrderBy(o=>o.ResourceName).ToList();
+            
+            
         }
 
         private void PopulateReportsTo()
@@ -122,6 +119,8 @@ namespace Wildfire_ICS_Assist
             SelectedGroup.Contact = txtContact.Text;
             SelectedGroup.GroupType = cboType.Text;
             SelectedGroup.Comments = txtComments.Text;
+
+            SelectedGroup.ResourceListing = strikeTeamTaskForceDetailsControl1.selectedGroup.ResourceListing;
 
             if (cboSupervisor.SelectedItem != null)
             {
@@ -182,130 +181,9 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private void dgvSubGroups_SelectionChanged(object sender, EventArgs e)
-        {
-            btnDeleteResource.Enabled = dgvSubGroups.SelectedRows.Count > 0;
-            btnEditResource.Enabled = dgvSubGroups.SelectedRows.Count == 1;
-        }
+      
 
-        private void btnEditResource_Click(object sender, EventArgs e)
-        {
-            if (dgvSubGroups.SelectedRows.Count == 1)
-            {
-                OperationalSubGroup sub = dgvSubGroups.SelectedRows[0].DataBoundItem as OperationalSubGroup;
-                OpenResourceForEdit(sub);
-            }
-        }
+       
 
-        private void btnDeleteResource_Click(object sender, EventArgs e)
-        {
-            if(dgvSubGroups.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                List<OperationalSubGroup> toDelete = new List<OperationalSubGroup>();
-                foreach(DataGridViewRow row in dgvSubGroups.SelectedRows)
-                {
-                    toDelete.Add(row.DataBoundItem as OperationalSubGroup);
-                }
-                foreach (OperationalSubGroup sub in toDelete) { sub.Active = false; Program.wfIncidentService.UpsertOperationalSubGroup(sub); }
-            }
-        }
-
-        private void btnAddSingle_Click(object sender, EventArgs e)
-        {
-            Button btnSender = (Button)sender;
-            System.Drawing.Point ptLowerLeft = new System.Drawing.Point(0, btnSender.Height);
-            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-            cmsAddSingle.Show(ptLowerLeft);
-        }
-
-        private void btnAddCrew_Click(object sender, EventArgs e)
-        {
-            Button btnSender = (Button)sender;
-            System.Drawing.Point ptLowerLeft = new System.Drawing.Point(0, btnSender.Height);
-            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
-            cmsAddCrew.Show(ptLowerLeft);
-        }
-
-        private void createNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (CheckInEnterPersonForm entryForm = new CheckInEnterPersonForm())
-            {
-                DialogResult dr = entryForm.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-                    
-                    resourcesToBeAdded.Add(entryForm.selectedPerson);
-
-                    OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                    listing.OperationalGroupID = SelectedGroup.ID;
-                    listing.Kind = entryForm.selectedPerson.Kind;
-                    listing.Type = entryForm.selectedPerson.Type;
-
-                    listing.ResourceID = entryForm.selectedPerson.PersonID;
-                    listing.ResourceType = "Personnel";
-                    listing.ResourceName = entryForm.selectedPerson.Name;
-                    listing.Contact = entryForm.selectedPerson.Contact;
-                    listing.LeaderName = entryForm.selectedPerson.Name;
-                    SelectedGroup.ResourceListing.Add(listing);
-                   
-                    PopulateReportingResources();
-
-                }
-            }
-        }
-
-        private void createNewEquipmentVehicleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Vehicle vehicleToEdit = new Vehicle();
-            vehicleToEdit.TaskID = Program.CurrentTask.TaskID;
-            vehicleToEdit.OpPeriod = Program.CurrentOpPeriod;
-            vehicleToEdit.StartTime = DateTime.Now;
-
-            using (VehicleEditForm entryForm = new VehicleEditForm(vehicleToEdit, false))
-            {
-
-                DialogResult dr = entryForm.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-                    resourcesToBeAdded.Add(entryForm.CurrentVehicle);
-
-                    OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                    listing.OperationalGroupID = SelectedGroup.ID;
-                    listing.Kind = entryForm.CurrentVehicle.Kind;
-                    listing.Type = entryForm.CurrentVehicle.Type;
-
-                    listing.ResourceID = entryForm.CurrentVehicle.ID;
-                    listing.ResourceType = "Vehicle/Equipment";
-                    listing.ResourceName = entryForm.CurrentVehicle.ResourceName;
-                    listing.Contact = entryForm.CurrentVehicle.Contact;
-                    SelectedGroup.ResourceListing.Add(listing);
-                    PopulateReportingResources();
-                }
-            }
-        }
-
-        private void dgvSubGroups_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (dgvSubGroups.Rows.Count > 0 && e.RowIndex <= dgvSubGroups.Rows.Count && dgvSubGroups.Rows[e.RowIndex] != null)
-            {
-
-
-                DataGridViewRow row = dgvSubGroups.Rows[e.RowIndex];
-                if (e.RowIndex >= 7)
-                {
-                    row.Cells["colNumber"].Style.BackColor = Program.ErrorColor;
-                }
-                else
-                {
-                    row.Cells["colNumber"].Style.BackColor = Program.GoodColor;
-                }
-            }
-        }
-
-        private void dgvSubGroups_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            this.dgvSubGroups.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
-
-        }
     }
 }

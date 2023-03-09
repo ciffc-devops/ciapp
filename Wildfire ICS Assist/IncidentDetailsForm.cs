@@ -238,7 +238,9 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
             Program.wfIncidentService.TaskBasicsChanged += Program_TaskBasicsChanged;
             Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
-            Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
+            Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            Program.wfIncidentService.OperationalGroupChanged += Program_OperationalGroupChanged;
+            //Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
 
 
             //network stuff
@@ -281,8 +283,10 @@ namespace Wildfire_ICS_Assist
             if (CurrentIncident.hasMeaningfulObjectives(CurrentOpPeriod)) { btnIncidentObjectives.Image = Properties.Resources.glyphicons_basic_739_check; incidentObjectivesICS202ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnIncidentObjectives.Image = null; incidentObjectivesICS202ToolStripMenuItem.Image = null; }
 
+            if (CurrentIncident.hasMeaningfulTeamAssignments(CurrentOpPeriod)) { btnAssignmentList.Image = Properties.Resources.glyphicons_basic_739_check; teamAssignmentsICS204ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
+            else { btnAssignmentList.Image = null; teamAssignmentsICS204ToolStripMenuItem.Image = null; }
 
-
+            
             if (CurrentIncident.hasAnySafetyMessages(CurrentOpPeriod)) { btnSafetyPlans.Image = Properties.Resources.glyphicons_basic_739_check; safetyMessageICS208ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnSafetyPlans.Image = null; safetyMessageICS208ToolStripMenuItem.Image = null; }
 
@@ -725,6 +729,21 @@ namespace Wildfire_ICS_Assist
             }
 
         }
+        private void Program_OperationalGroupChanged(OperationalGroupEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            TriggerAutoSave();
+
+        }
+        private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        {
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            TriggerAutoSave();
+
+        }
+     
+
+
 
         private void Program_AircraftChanged(AircraftEventArgs e)
         {
@@ -750,6 +769,7 @@ namespace Wildfire_ICS_Assist
             }
             TriggerAutoSave();
         }
+
 
         private void Program_TaskBasicsChanged(TaskBasicsEventArgs e)
         {

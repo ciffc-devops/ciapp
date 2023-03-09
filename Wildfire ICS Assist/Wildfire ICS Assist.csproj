@@ -325,6 +325,12 @@
     <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperationalGroupAddExistingResoruce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupAddExistingResoruce.Designer.cs">
+      <DependentUpon>OperationalGroupAddExistingResoruce.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperationalGroupBranchEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -751,6 +757,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupAddExistingResoruce.resx">
+      <DependentUpon>OperationalGroupAddExistingResoruce.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperationalGroupBranchEditForm.resx">
       <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>

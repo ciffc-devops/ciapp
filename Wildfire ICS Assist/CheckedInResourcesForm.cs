@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +23,7 @@ namespace Wildfire_ICS_Assist
         private void CheckedInResourcesForm_Load(object sender, EventArgs e)
         {
             dgvResources.AutoGenerateColumns = false;
+            cboResourceVariety.SelectedIndex = 0;
             LoadResourcesList();
 
             Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
@@ -55,6 +57,7 @@ namespace Wildfire_ICS_Assist
                     {
                         case "Personnel":
                             Personnel p = resource as Personnel;
+                            if (string.IsNullOrEmpty(p.LeaderName)) { p.LeaderName = p.Name; }
                             Program.wfIncidentService.UpsertPersonnel(p);
                             break;
                         case "Visitor":
@@ -67,7 +70,8 @@ namespace Wildfire_ICS_Assist
                             break;
                         case "Crew":
                             OperationalSubGroup group = resource as OperationalSubGroup;
-
+                            group.Kind = "Crew";
+                            if (group.ActiveResourceListing.Any(o => o.IsLeader)) { group.LeaderID = group.ActiveResourceListing.First(o => o.IsLeader).ResourceID; group.LeaderName = group.ActiveResourceListing.First(o => o.IsLeader).ResourceName; }
                             List<OperationalGroupResourceListing> toRemoveFromCrew = signInForm.resourcesToRemoveFromCrew;
                             foreach (OperationalGroupResourceListing l in toRemoveFromCrew)
                             {
@@ -161,8 +165,13 @@ namespace Wildfire_ICS_Assist
                     checkInRecords.Add(new CheckInRecordWithResource(rec, resource));
                 }
             }
+            checkInRecords = checkInRecords.OrderBy(o=>o.ResourceName).ToList();
 
-
+            if(cboResourceVariety.SelectedIndex > 0)
+            {
+                string variety = cboResourceVariety.Text;
+                checkInRecords = checkInRecords.Where(o => o.ResourceType.Equals(variety)).ToList(); ;
+            }
 
             dgvResources.DataSource = checkInRecords;
         }
@@ -183,6 +192,24 @@ namespace Wildfire_ICS_Assist
                 CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
                 StartCheckIn(false, rec.Record);
             }
+        }
+
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            cpFilters.Width = splitContainer2.Panel2.Width - 10;
+            cpFilters.ExpandedWidth = cpFilters.Width;
+            cpFilters.CollapsedWidth = cpFilters.Width;
+
+        }
+
+        private void splitContainer2_SplitterMoving(object sender, SplitterCancelEventArgs e)
+        {
+        }
+
+        private void cboResourceVariety_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadResourcesList();
+
         }
     }
 }

@@ -520,7 +520,10 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public bool hasMeaningfulObjectives(int ops) { return (allIncidentObjectives.Any(o => o.OpPeriod == ops && o.Objectives.Any())); }
         public bool hasAnySafetyMessages(int ops) { return allSafetyMessages.Any(o => o.OpPeriod == ops); }
 
-
+        public bool hasMeaningfulTeamAssignments(int ops)
+        {
+            return ActiveOperationalGroups.Any(o => o.OpPeriod == ops && o.ActiveResourceListing.Any());
+        }
 
         public List<CommsPlanItem> getCommsPlanItemsUsedToDate()
         {

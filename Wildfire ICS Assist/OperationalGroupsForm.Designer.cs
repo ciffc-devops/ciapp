@@ -257,7 +257,6 @@
             this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(18, 236);
             this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
             this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
-            this.strikeTeamTaskForceDetailsControl1.role = null;
             this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(396, 330);
             this.strikeTeamTaskForceDetailsControl1.TabIndex = 1;
             this.strikeTeamTaskForceDetailsControl1.Visible = false;

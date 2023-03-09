@@ -43,26 +43,10 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtContact = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.dgvSubGroups = new System.Windows.Forms.DataGridView();
-            this.btnAddCrew = new System.Windows.Forms.Button();
-            this.cmsAddCrew = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addExistingCrewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createNewCrewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAddSingle = new System.Windows.Forms.Button();
-            this.cmsAddSingle = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.createNewPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createNewEquipmentVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDeleteResource = new System.Windows.Forms.Button();
-            this.btnEditResource = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumberOfPeople = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumberOfVehicles = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,13 +55,6 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSubGroups)).BeginInit();
-            this.cmsAddCrew.SuspendLayout();
-            this.cmsAddSingle.SuspendLayout();
             this.SuspendLayout();
             // 
             // cboType
@@ -238,7 +215,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
+            this.splitContainer2.Panel2.Controls.Add(this.strikeTeamTaskForceDetailsControl1);
             this.splitContainer2.Size = new System.Drawing.Size(1046, 582);
             this.splitContainer2.SplitterDistance = 188;
             this.splitContainer2.TabIndex = 104;
@@ -260,159 +237,6 @@
             this.label6.TabIndex = 104;
             this.label6.Text = "Contact:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer3.IsSplitterFixed = true;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.dgvSubGroups);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.btnAddCrew);
-            this.splitContainer3.Panel2.Controls.Add(this.btnAddSingle);
-            this.splitContainer3.Panel2.Controls.Add(this.btnDeleteResource);
-            this.splitContainer3.Panel2.Controls.Add(this.btnEditResource);
-            this.splitContainer3.Size = new System.Drawing.Size(1046, 390);
-            this.splitContainer3.SplitterDistance = 336;
-            this.splitContainer3.TabIndex = 0;
-            // 
-            // dgvSubGroups
-            // 
-            this.dgvSubGroups.AllowUserToAddRows = false;
-            this.dgvSubGroups.AllowUserToDeleteRows = false;
-            this.dgvSubGroups.AllowUserToResizeColumns = false;
-            this.dgvSubGroups.AllowUserToResizeRows = false;
-            this.dgvSubGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSubGroups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colNumber,
-            this.colName,
-            this.colLeader,
-            this.colNumberOfPeople,
-            this.colNumberOfVehicles});
-            this.dgvSubGroups.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSubGroups.Location = new System.Drawing.Point(0, 0);
-            this.dgvSubGroups.Name = "dgvSubGroups";
-            this.dgvSubGroups.ReadOnly = true;
-            this.dgvSubGroups.RowHeadersVisible = false;
-            this.dgvSubGroups.RowTemplate.Height = 30;
-            this.dgvSubGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSubGroups.Size = new System.Drawing.Size(1046, 336);
-            this.dgvSubGroups.TabIndex = 3;
-            this.dgvSubGroups.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSubGroups_CellFormatting);
-            this.dgvSubGroups.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvSubGroups_RowPostPaint);
-            this.dgvSubGroups.SelectionChanged += new System.EventHandler(this.dgvSubGroups_SelectionChanged);
-            // 
-            // btnAddCrew
-            // 
-            this.btnAddCrew.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnAddCrew.ContextMenuStrip = this.cmsAddCrew;
-            this.btnAddCrew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddCrew.Location = new System.Drawing.Point(258, 3);
-            this.btnAddCrew.Name = "btnAddCrew";
-            this.btnAddCrew.Size = new System.Drawing.Size(145, 42);
-            this.btnAddCrew.TabIndex = 107;
-            this.btnAddCrew.Text = "Add Crew";
-            this.btnAddCrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddCrew.UseVisualStyleBackColor = true;
-            this.btnAddCrew.Click += new System.EventHandler(this.btnAddCrew_Click);
-            // 
-            // cmsAddCrew
-            // 
-            this.cmsAddCrew.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.cmsAddCrew.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addExistingCrewToolStripMenuItem,
-            this.createNewCrewToolStripMenuItem});
-            this.cmsAddCrew.Name = "cmsAddCrew";
-            this.cmsAddCrew.Size = new System.Drawing.Size(234, 64);
-            // 
-            // addExistingCrewToolStripMenuItem
-            // 
-            this.addExistingCrewToolStripMenuItem.Name = "addExistingCrewToolStripMenuItem";
-            this.addExistingCrewToolStripMenuItem.Size = new System.Drawing.Size(233, 30);
-            this.addExistingCrewToolStripMenuItem.Text = "Add existing crew";
-            // 
-            // createNewCrewToolStripMenuItem
-            // 
-            this.createNewCrewToolStripMenuItem.Name = "createNewCrewToolStripMenuItem";
-            this.createNewCrewToolStripMenuItem.Size = new System.Drawing.Size(233, 30);
-            this.createNewCrewToolStripMenuItem.Text = "Create new crew";
-            // 
-            // btnAddSingle
-            // 
-            this.btnAddSingle.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnAddSingle.ContextMenuStrip = this.cmsAddSingle;
-            this.btnAddSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddSingle.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddSingle.Location = new System.Drawing.Point(6, 3);
-            this.btnAddSingle.Name = "btnAddSingle";
-            this.btnAddSingle.Size = new System.Drawing.Size(246, 42);
-            this.btnAddSingle.TabIndex = 106;
-            this.btnAddSingle.Text = "Add Single Resource";
-            this.btnAddSingle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddSingle.UseVisualStyleBackColor = true;
-            this.btnAddSingle.Click += new System.EventHandler(this.btnAddSingle_Click);
-            // 
-            // cmsAddSingle
-            // 
-            this.cmsAddSingle.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.cmsAddSingle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createNewPersonToolStripMenuItem,
-            this.createNewEquipmentVehicleToolStripMenuItem});
-            this.cmsAddSingle.Name = "cmsAddSingle";
-            this.cmsAddSingle.Size = new System.Drawing.Size(293, 64);
-            // 
-            // createNewPersonToolStripMenuItem
-            // 
-            this.createNewPersonToolStripMenuItem.Name = "createNewPersonToolStripMenuItem";
-            this.createNewPersonToolStripMenuItem.Size = new System.Drawing.Size(292, 30);
-            this.createNewPersonToolStripMenuItem.Text = "Add personnel";
-            this.createNewPersonToolStripMenuItem.Click += new System.EventHandler(this.createNewPersonToolStripMenuItem_Click);
-            // 
-            // createNewEquipmentVehicleToolStripMenuItem
-            // 
-            this.createNewEquipmentVehicleToolStripMenuItem.Name = "createNewEquipmentVehicleToolStripMenuItem";
-            this.createNewEquipmentVehicleToolStripMenuItem.Size = new System.Drawing.Size(292, 30);
-            this.createNewEquipmentVehicleToolStripMenuItem.Text = "Add Equipment / Vehicle";
-            this.createNewEquipmentVehicleToolStripMenuItem.Click += new System.EventHandler(this.createNewEquipmentVehicleToolStripMenuItem_Click);
-            // 
-            // btnDeleteResource
-            // 
-            this.btnDeleteResource.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnDeleteResource.Enabled = false;
-            this.btnDeleteResource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteResource.Location = new System.Drawing.Point(528, 2);
-            this.btnDeleteResource.Name = "btnDeleteResource";
-            this.btnDeleteResource.Size = new System.Drawing.Size(113, 42);
-            this.btnDeleteResource.TabIndex = 54;
-            this.btnDeleteResource.Text = "Delete";
-            this.btnDeleteResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDeleteResource.UseVisualStyleBackColor = true;
-            this.btnDeleteResource.Click += new System.EventHandler(this.btnDeleteResource_Click);
-            // 
-            // btnEditResource
-            // 
-            this.btnEditResource.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnEditResource.Enabled = false;
-            this.btnEditResource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditResource.Location = new System.Drawing.Point(409, 2);
-            this.btnEditResource.Name = "btnEditResource";
-            this.btnEditResource.Size = new System.Drawing.Size(113, 42);
-            this.btnEditResource.TabIndex = 53;
-            this.btnEditResource.Text = "Edit";
-            this.btnEditResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEditResource.UseVisualStyleBackColor = true;
-            this.btnEditResource.Click += new System.EventHandler(this.btnEditResource_Click);
             // 
             // btnSave
             // 
@@ -443,49 +267,16 @@
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // colNumber
+            // strikeTeamTaskForceDetailsControl1
             // 
-            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumber.HeaderText = "#";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
-            this.colNumber.Width = 45;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "ResourceName";
-            this.colName.HeaderText = "Resource Name";
-            this.colName.MinimumWidth = 250;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colLeader
-            // 
-            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colLeader.DataPropertyName = "LeaderName";
-            this.colLeader.HeaderText = "Resource Leader";
-            this.colLeader.Name = "colLeader";
-            this.colLeader.ReadOnly = true;
-            this.colLeader.Width = 165;
-            // 
-            // colNumberOfPeople
-            // 
-            this.colNumberOfPeople.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colNumberOfPeople.DataPropertyName = "NumberOfPeople";
-            this.colNumberOfPeople.HeaderText = "# of People";
-            this.colNumberOfPeople.Name = "colNumberOfPeople";
-            this.colNumberOfPeople.ReadOnly = true;
-            this.colNumberOfPeople.Width = 119;
-            // 
-            // colNumberOfVehicles
-            // 
-            this.colNumberOfVehicles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumberOfVehicles.DataPropertyName = "NumberOfVehicles";
-            this.colNumberOfVehicles.HeaderText = "# of Vehicles/Equip";
-            this.colNumberOfVehicles.Name = "colNumberOfVehicles";
-            this.colNumberOfVehicles.ReadOnly = true;
-            this.colNumberOfVehicles.Width = 180;
+            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
+            this.strikeTeamTaskForceDetailsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(0, 0);
+            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
+            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(1046, 390);
+            this.strikeTeamTaskForceDetailsControl1.TabIndex = 0;
             // 
             // OperationalGroupSTTFEditForm
             // 
@@ -509,13 +300,6 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSubGroups)).EndInit();
-            this.cmsAddCrew.ResumeLayout(false);
-            this.cmsAddSingle.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -535,25 +319,9 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.Button btnDeleteResource;
-        private System.Windows.Forms.Button btnEditResource;
-        private System.Windows.Forms.DataGridView dgvSubGroups;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox txtContact;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnAddCrew;
-        private System.Windows.Forms.Button btnAddSingle;
-        private System.Windows.Forms.ContextMenuStrip cmsAddSingle;
-        private System.Windows.Forms.ToolStripMenuItem createNewPersonToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createNewEquipmentVehicleToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip cmsAddCrew;
-        private System.Windows.Forms.ToolStripMenuItem addExistingCrewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createNewCrewToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLeader;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfPeople;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfVehicles;
+        private CustomControls.StrikeTeamTaskForceDetailsControl strikeTeamTaskForceDetailsControl1;
     }
 }
