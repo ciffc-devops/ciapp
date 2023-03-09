@@ -30,6 +30,8 @@ namespace WF_ICS_ClassLibrary.Models
         {
             ID = Guid.NewGuid();
             Active = true;
+            NumberOfVehicles = 1;
+            NumberOfPeople = 0;
         }
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }

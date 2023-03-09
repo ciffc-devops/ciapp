@@ -37,16 +37,22 @@ namespace Wildfire_ICS_Assist.CustomControls
                     selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
                     lblResourcesTitle.Text = selectedGroup.ResourceName + " Resources";
                 }
-                PopulateSubGroups();
+                PopulateReportingResources();
             }
         }
 
 
-        private void PopulateSubGroups()
+        private void PopulateReportingResources()
         {
             dgvSubGroups.DataSource = null;
             dgvSubGroups.AutoGenerateColumns = false;
-            dgvSubGroups.DataSource = Program.CurrentIncident.ActiveOperationalSubGroups.Where(o => o.OperationalGroupID == selectedGroup.ID).ToList();
+            List<IncidentResource> resources = new List<IncidentResource>();
+            resources.AddRange(selectedGroup.ActiveResourceListing);
+            foreach (IncidentResource resource in Program.CurrentIncident.GetReportingResources(selectedGroup.ID).Where(o => o.Active))
+            {
+                if (!resources.Any(o => o.ID == resource.ID)) { resources.Add(resource); }
+            }
+            dgvSubGroups.DataSource = resources.OrderBy(o => o.ResourceName).ToList();
         }
 
         private void StrikeTeamTaskForceDetailsControl_Load(object sender, EventArgs e)
@@ -60,7 +66,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             if (e.item.OperationalGroupID == selectedGroup.ID)
             {
-                PopulateSubGroups();
+                PopulateReportingResources();
             }
         }
 
@@ -122,6 +128,24 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             btnEditResource.Enabled = dgvSubGroups.SelectedRows.Count == 1;
             btnDeleteResource.Enabled = dgvSubGroups.SelectedRows.Count > 0;
+        }
+
+        private void dgvSubGroups_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvSubGroups.Rows.Count > 0 && e.RowIndex <= dgvSubGroups.Rows.Count && dgvSubGroups.Rows[e.RowIndex] != null)
+            {
+
+
+                DataGridViewRow row = dgvSubGroups.Rows[e.RowIndex];
+                if (e.RowIndex >= 7)
+                {
+                    row.Cells["colNumber"].Style.BackColor = Program.ErrorColor;
+                }
+                else
+                {
+                    row.Cells["colNumber"].Style.BackColor = Program.GoodColor;
+                }
+            }
         }
     }
 }

@@ -74,7 +74,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnSignIn_Click(object sender, EventArgs e)
         {
-            using (PersonnelCheckInForm signInForm = new PersonnelCheckInForm())
+            using (CheckInForm signInForm = new CheckInForm())
             {
                 DialogResult dr = signInForm.ShowDialog();
                 if(dr == DialogResult.OK)
@@ -198,7 +198,7 @@ namespace Wildfire_ICS_Assist
                 record.OpPeriod = Program.CurrentOpPeriod;
                 record.CheckInDate = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == Program.CurrentOpPeriod).PeriodStart;
                 record.LastDayOnIncident = record.CheckInDate.AddDays(14);
-                record.ResourceType = "Person";
+                record.ResourceType = "Personnel";
                 if (Program.CurrentIncident.IncidentPersonnel.Any(o => o.PersonID == status.MemberID))
                 {
                     record.ResourceID = Program.CurrentIncident.IncidentPersonnel.First(o => o.PersonID == status.MemberID).ID;

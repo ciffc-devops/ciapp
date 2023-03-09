@@ -197,7 +197,7 @@ namespace Wildfire_ICS_Assist
         OperationalGroupsForm _operationalGroupsForm = null;
         PositionLogReminderForm _positionLogReminderForm = null;
         PersonnelListForm _personnelListForm = null;
-
+        CheckedInResourcesForm _checkedInresourcesForm = null;
 
 
         public event ShortcutEventHandler ShortcutButtonClicked;
@@ -2632,9 +2632,36 @@ namespace Wildfire_ICS_Assist
 
         }
 
+
+        private void OpenCheckedInResourcesForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (_checkedInresourcesForm == null)
+                {
+                    _checkedInresourcesForm = new CheckedInResourcesForm();
+                    _checkedInresourcesForm.FormClosed += new FormClosedEventHandler(CheckedInResourcesForm_Closed);
+                    ActiveForms.Add(_checkedInresourcesForm);
+                    _checkedInresourcesForm.Show(this);
+                }
+
+                _checkedInresourcesForm.BringToFront();
+            }
+        }
+        void CheckedInResourcesForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_checkedInresourcesForm);
+            _checkedInresourcesForm = null;
+
+
+        }
+
+
+
         private void btnLogisticsMemberStatus_Click(object sender, EventArgs e)
         {
-            OpenPersonnelListForm();
+            //OpenPersonnelListForm();
+            OpenCheckedInResourcesForm();
         }
 
         private void btnLogisticsSignIn_Click(object sender, EventArgs e)
@@ -2651,7 +2678,7 @@ namespace Wildfire_ICS_Assist
         private bool StartCheckIn()
         {
             bool autoStartNextCheckin = false;
-            using (PersonnelCheckInForm signInForm = new PersonnelCheckInForm())
+            using (CheckInForm signInForm = new CheckInForm())
             {
                 DialogResult dr = signInForm.ShowDialog();
                 if (dr == DialogResult.OK)
@@ -2661,7 +2688,7 @@ namespace Wildfire_ICS_Assist
                     IncidentResource resource = signInForm.selectedResource;
                     switch (record.ResourceType)
                     {
-                        case "Person":
+                        case "Personnel":
                             Personnel p = resource as Personnel;
                             Program.wfIncidentService.UpsertPersonnel(p);
                             break;
@@ -2669,7 +2696,7 @@ namespace Wildfire_ICS_Assist
                             Personnel vis = resource as Personnel;
                             Program.wfIncidentService.UpsertPersonnel(vis);
                             break;
-                        case "Vehicle":
+                        case "Vehicle/Equipment":
                             Vehicle v = resource as Vehicle;
                             Program.wfIncidentService.UpsertVehicle(v);
                             break;
@@ -2682,14 +2709,25 @@ namespace Wildfire_ICS_Assist
                                 {
                                     subres.OpPeriod = Program.CurrentOpPeriod;
                                     Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
+                                    CheckInRecord prec = signInForm.checkInRecord.Clone();
+                                    prec.ResourceID = subres.ID;
+                                    prec.SignInRecordID = Guid.NewGuid();
+                                    prec.ParentRecordID = record.SignInRecordID;
+                                    prec.ResourceType = "Personnel";
+                                    Program.wfIncidentService.UpsertCheckInRecord(prec);
                                 } else if (subres.GetType().Name.Equals("Vehicle"))
                                 {
                                     Vehicle vh = subres as Vehicle;
                                     vh.OperatorName = group.ResourceName;
                                     Program.wfIncidentService.UpsertVehicle(vh);
+                                    CheckInRecord vrec = signInForm.checkInRecord.Clone();
+                                    vrec.ResourceID = subres.ID;
+                                    vrec.SignInRecordID = Guid.NewGuid();
+                                    vrec.ParentRecordID = record.SignInRecordID;
+                                    vrec.ResourceType = "Vehicle/Equipment";
+                                    Program.wfIncidentService.UpsertCheckInRecord(vrec);
                                 }
                             }
-                            //TODO: Save individual people and equipment
                             break;
                     }
 
@@ -2708,16 +2746,7 @@ namespace Wildfire_ICS_Assist
         {
             if (initialDetailsSet())
             {
-                using (PersonnelCheckInForm signInForm = new PersonnelCheckInForm())
-                {
-                    DialogResult dr = signInForm.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        CheckInRecord record = signInForm.checkInRecord;
-                        Program.wfIncidentService.UpsertCheckInRecord(record);
-
-                    }
-                }
+                StartCheckIn();
             }
         }
 

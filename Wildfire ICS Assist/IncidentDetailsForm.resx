@@ -1627,7 +1627,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAbgBAwG4AQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAcgBAwHIAQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2695,13 +2695,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnAdditionalContacts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 51</value>
+    <value>8, 116</value>
   </data>
   <data name="btnAdditionalContacts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 4, 6, 4</value>
   </data>
   <data name="btnAdditionalContacts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 57</value>
+    <value>160, 57</value>
   </data>
   <data name="btnAdditionalContacts.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -2727,26 +2727,11 @@
   <data name="btnLogisticsMemberStatus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
-  <data name="btnLogisticsMemberStatus.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAf5JREFUWEfFlgGRAjEMRZGABCScBCQgAQlIQAISkICEk4CEk4CDJb/ND2k3bRdu
-        ZsnMu9tN0jSbpi2baZq+Sqhck1C5JqFyTULlfxDZCmfHLvIjobKFCIP/CVAQvEMPO7gL3n6J4oFQGSES
-        Ba6BnUk8VOdBoj9FXP9iSimbgAAYsFfdVWCgHteBP+JubS4+eET84IPqoi+KeKj/welqjjYXH3QQSldn
-        vheg97ouGgvjZjblbHPag6yNMPtKtX2SQG/ML3ySnz2I0jkYzj6ztVgwpkxABE3nHchtYG+R9r7Izek8
-        9zqB1nqltRI5Od0STjoOZ0NtS8CefNRxlEDrS1qwcs0EhLQVRwmkUon0OjqCZ0fv4Mrbe8EE7y7DsPxK
-        PrAWBmdT1foZ6re0aXdMoHdqAVYh3KqOtL1ERl9PtikBHYRlaB23bKqL00WkW09k1LSwv3qAiLQmWNqM
-        veY7CsVNmHyLl3wc+0EAZX/dXjlQXSm8vy6YfAwzicJWM1eUE/BqRUArWwvY1c8Sdjb0BeLGvwdEMLHd
-        Uk6PqviS4rbERCkQ/uu7v0XhbxOJ+OYtkqCDX1sbjP8Cq/EuNpFI3ROw5a2tDvX2YjONtt0IbsvonOHy
-        ho2Xz+m5/m00TvjbgAn4jiU8+T4tP+HPs+hkzDb8+Sahck1C5ZqEyvWYNk832CVO3bd70wAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
   <data name="btnLogisticsMemberStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnLogisticsMemberStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 119</value>
+    <value>179, 51</value>
   </data>
   <data name="btnLogisticsMemberStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 4, 6, 4</value>
@@ -2758,7 +2743,7 @@
     <value>44</value>
   </data>
   <data name="btnLogisticsMemberStatus.Text" xml:space="preserve">
-    <value>Personnel</value>
+    <value>Resources</value>
   </data>
   <data name="btnLogisticsMemberStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -2778,57 +2763,6 @@
   <data name="&gt;&gt;btnLogisticsMemberStatus.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="btnVehicles.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnVehicles.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAWRJREFUWEfFlIERwiAMRR3BERzBERzFERyhIziCIziKIziCG9QkEvikoS09ity9
-        O/jJD+lBOYzj+FdcsSeuWILGmXgTvKiFfedJTSuUYDPxIbBoLezPmsg2mYPGMxRhBi+nBI0HeJ9ZDBd7
-        QuOmTWQ6LvaExkkbIC5Rx6Qo7nDZQt1XyLlHDRNE2Omyhdr3EH9FDRNEyC/bw8bn4HzwymWjoZta5Bi8
-        Ippws7E1sE9rhPVF14a3xNXoJJ8wthb2QY142SDORyxxWZvg5Iy2wP5QJ142iM02UDTWwP5QRz6ERjwW
-        RGJgOmKwIVyXj2XyZ9kGrhhsyDXUH0ATbANbH54lfrfd+RtsAxqIDwjPQV+D6wVN86IuARP8ewPNKe0h
-        WinYEtgDn2p55rs24JEmxtQS3cMjTYypJbqHR5oYU0t0D480qTAtUVMrTSpMS9TUShPnF9lKTS1X7Ikr
-        9sQVe+KK/RgPX8wsRVHfKBI6AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnVehicles.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnVehicles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnVehicles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 119</value>
-  </data>
-  <data name="btnVehicles.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnVehicles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 57</value>
-  </data>
-  <data name="btnVehicles.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="btnVehicles.Text" xml:space="preserve">
-    <value>Vehicles and Equipment</value>
-  </data>
-  <data name="btnVehicles.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnVehicles.Name" xml:space="preserve">
-    <value>btnVehicles</value>
-  </data>
-  <data name="&gt;&gt;btnVehicles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnVehicles.Parent" xml:space="preserve">
-    <value>cpLogistics</value>
-  </data>
-  <data name="&gt;&gt;btnVehicles.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="cpLogistics.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
@@ -2839,7 +2773,7 @@
     <value>6, 6, 6, 6</value>
   </data>
   <data name="cpLogistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 196</value>
+    <value>485, 300</value>
   </data>
   <data name="cpLogistics.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>

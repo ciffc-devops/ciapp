@@ -20,6 +20,8 @@ namespace WF_ICS_ClassLibrary.Models
             MemberActive = true;
             CurrentStatus = null;
             HomeCountry = "Canada";
+            NumberOfPeople = 1;
+            NumberOfVehicles = 0;
         }
         public Personnel(Guid id)
         {
@@ -27,6 +29,8 @@ namespace WF_ICS_ClassLibrary.Models
             MemberActive = true;
             CurrentStatus = null;
             HomeCountry = "Canada";
+            NumberOfPeople = 1;
+            NumberOfVehicles = 0;
         }
 
         [ProtoMember(1)] private string _FirstName;

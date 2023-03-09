@@ -15,7 +15,7 @@ using Wildfire_ICS_Assist.CustomControls;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PersonnelCheckInForm : Form
+    public partial class CheckInForm : Form
     {
         
         private CheckInRecord _checkInRecord = new CheckInRecord();
@@ -25,20 +25,93 @@ namespace Wildfire_ICS_Assist
         public IncidentResource selectedResource { get => _selectedResource; private set => _selectedResource = value; }
         private List<IncidentResource> _SubResources = new List<IncidentResource>();
         public List<IncidentResource> SubResources { get => _SubResources; private set => _SubResources = value; }
+        private bool editingExisting = false;
 
+        public bool AutoStartNextCheckin { get => chkAutoNewCheckin.Checked; set => chkAutoNewCheckin.Checked = value; }
+        public List<OperationalGroupResourceListing> resourcesToRemoveFromCrew { get => crewEditControl1.resourcesToRemoveFromCrew; }
 
-        public bool AutoStartNextCheckin { get => chkAutoNewCheckin.Checked; }
-
-        public PersonnelCheckInForm()
+        public CheckInForm()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
             GeneralTools.SetDateFormat(this);
+            personnelEditControl1.SetPersonnel(new Personnel());
+
+        }
+
+        public void SetCheckIn(CheckInRecord rec)
+        {
+            checkInRecord = rec;
+
+            if(rec.ResourceID != Guid.Empty)
+            {
+                editingExisting = true;
+                crewEditControl1.EditExisting = true;
+                btnCheckIn.Text = "Save Changes";
+                resourceCheckInEditControl1.SetCheckInRecord(rec);
+
+                //we are editing an existing record
+
+                pnlSavedPersonnel.Visible = false;
+                pnlPersonEdit.Location = new Point(0, 0);
+                lblEditPersonTitle.Text = "Edit Personnel";
+
+                chkSaveVehicleForLater.Visible = false;
+                pnlEditVehicle.Location = new Point(0, 0);
+                pnlSavedVehicle.Visible = false;
+                lblEditVehicleTitle.Text = "Edit Vehicle / Equipment";
+            }
+
+
+            if (rec.IsPerson)
+            {
+                if (Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == rec.ResourceID && o.Active))
+                {
+                    selectedResource = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == rec.ResourceID && o.Active);
+                    personnelEditControl1.SetPersonnel(selectedResource as Personnel);
+                    chkSavePersonForLater.Visible = false;
+                    wizardPages1.SelectedIndex = 1;
+
+                    resourceCheckInEditControl1.SetResource(selectedResource as Personnel);
+                }
+            }
+            else if (rec.IsVehicle)
+            {
+                if (Program.CurrentIncident.allVehicles.Any(o => o.ID == rec.ResourceID && o.Active))
+                {
+                    selectedResource = Program.CurrentIncident.allVehicles.First(o => o.ID == rec.ResourceID && o.Active);
+                    vehicleEquipmentEditControl1.SetVehicle(selectedResource as Vehicle);
+
+                    wizardPages1.SelectedIndex = 4;
+                }
+            }
+            else if (rec.IsVisitor)
+            {
+                if (Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == rec.ResourceID && o.Active))
+                {
+                    selectedResource = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == rec.ResourceID && o.Active);
+                    visitorEditControl1.setPerson(selectedResource as Personnel);
+
+                    wizardPages1.SelectedIndex = 3;
+                }
+            }
+            else if (rec.IsCrew)
+            {
+                if (Program.CurrentIncident.ActiveOperationalSubGroups.Any(o => o.ID == rec.ResourceID))
+                {
+                    selectedResource = Program.CurrentIncident.ActiveOperationalSubGroups.First(o => o.ID == rec.ResourceID);
+                    SubResources.AddRange(Program.CurrentIncident.GetReportingResources(selectedResource.ID));
+
+                    crewEditControl1.SetSubGroup(selectedResource as OperationalSubGroup, SubResources);
+                    btnDoneCrewEdit.Visible = true;
+                    wizardPages1.SelectedIndex = 2;
+                }
+            }
         }
 
         private void PersonnelSignInForm_Load(object sender, EventArgs e)
         {
+            checkInRecord.OpPeriod = Program.CurrentOpPeriod;
             LoadData();
-            personnelEditControl1.SetPersonnel( new Personnel());
            
             foreach(TabPage p in wizardPages1.TabPages) { p.BackColor = Program.FormBackground; }
             BuildSavedVehicleList();
@@ -87,7 +160,7 @@ namespace Wildfire_ICS_Assist
             if (cboSavedPersonnel.SelectedItem != null)
             {
                 _selectedResource = (Personnel)cboSavedPersonnel.SelectedItem;
-                checkInRecord.ResourceType = "Person";
+                checkInRecord.ResourceType = "Personnel";
                 MoveToCheckInDetailsPage();
                 //txtSelectedName.Text = selectedMember.Name;
                 
@@ -99,7 +172,7 @@ namespace Wildfire_ICS_Assist
             if (personnelEditControl1.FormValid)
             {
                 _selectedResource = personnelEditControl1.teamMember;
-                checkInRecord.ResourceType = "Person";
+                checkInRecord.ResourceType = "Personnel";
                 //txtSelectedName.Text = selectedMember.Name;
                 MoveToCheckInDetailsPage();
 
@@ -208,9 +281,14 @@ namespace Wildfire_ICS_Assist
         private void wizardPages1_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnBack.Visible = wizardPages1.SelectedIndex > 0;
+
             btnCheckIn.Visible = wizardPages1.SelectedIndex == 5;
             chkAutoNewCheckin.Visible = wizardPages1.SelectedIndex == 5;
-
+            if (editingExisting)
+            {
+                btnBack.Visible = wizardPages1.SelectedIndex == 5;
+                chkAutoNewCheckin.Visible = false;
+            }
             btnDoneCrewEdit.Visible = wizardPages1.SelectedIndex == 2;
         }
 
@@ -237,7 +315,7 @@ namespace Wildfire_ICS_Assist
             if(cboSavedVehicles.SelectedItem != null && ((Vehicle)cboSavedVehicles.SelectedItem).ID != Guid.Empty)
             {
                 _selectedResource = ((Vehicle)cboSavedVehicles.SelectedItem).Clone();
-                checkInRecord.ResourceType = "Vehicle";
+                checkInRecord.ResourceType = "Vehicle/Equipment";
                 MoveToCheckInDetailsPage();
             }
         }
@@ -247,7 +325,7 @@ namespace Wildfire_ICS_Assist
             if (vehicleEquipmentEditControl1.IsComplete)
             {
                 _selectedResource = vehicleEquipmentEditControl1.CurrentVehicle.Clone();
-                checkInRecord.ResourceType = "Vehicle";
+                checkInRecord.ResourceType = "Vehicle/Equipment";
                 MoveToCheckInDetailsPage();
             }
         }
@@ -278,6 +356,11 @@ namespace Wildfire_ICS_Assist
                 SubResources.AddRange(crewEditControl1.resources);
                 MoveToCheckInDetailsPage();
             }
+        }
+
+        private void resourceCheckInEditControl1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

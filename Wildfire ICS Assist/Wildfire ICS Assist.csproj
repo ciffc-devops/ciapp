@@ -129,6 +129,12 @@
     <Compile Include="AirOperationsForm.Designer.cs">
       <DependentUpon>AirOperationsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckedInResourcesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckedInResourcesForm.Designer.cs">
+      <DependentUpon>CheckedInResourcesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\GeneralTools.cs" />
     <Compile Include="CloseOpPeriodForm.cs">
       <SubType>Form</SubType>
@@ -349,11 +355,11 @@
     <Compile Include="PersonnelEditCheckInOutForm.Designer.cs">
       <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonnelEnterPersonForm.cs">
+    <Compile Include="CheckInEnterPersonForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PersonnelEnterPersonForm.Designer.cs">
-      <DependentUpon>PersonnelEnterPersonForm.cs</DependentUpon>
+    <Compile Include="CheckInEnterPersonForm.Designer.cs">
+      <DependentUpon>CheckInEnterPersonForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PersonnelListForm.cs">
       <SubType>Form</SubType>
@@ -361,17 +367,22 @@
     <Compile Include="PersonnelListForm.Designer.cs">
       <DependentUpon>PersonnelListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonnelCheckInForm.cs">
+    <Compile Include="CheckInForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PersonnelCheckInForm.Designer.cs">
-      <DependentUpon>PersonnelCheckInForm.cs</DependentUpon>
+    <Compile Include="CheckInForm.Designer.cs">
+      <DependentUpon>CheckInForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PersonnelViewCheckinForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PersonnelViewCheckinForm.Designer.cs">
       <DependentUpon>PersonnelViewCheckinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
       <SubType>Form</SubType>
@@ -639,6 +650,9 @@
     <EmbeddedResource Include="AirOperationsForm.resx">
       <DependentUpon>AirOperationsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CheckedInResourcesForm.resx">
+      <DependentUpon>CheckedInResourcesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CloseOpPeriodForm.resx">
       <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -753,14 +767,14 @@
     <EmbeddedResource Include="PersonnelEditCheckInOutForm.resx">
       <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonnelEnterPersonForm.resx">
-      <DependentUpon>PersonnelEnterPersonForm.cs</DependentUpon>
+    <EmbeddedResource Include="CheckInEnterPersonForm.resx">
+      <DependentUpon>CheckInEnterPersonForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonnelListForm.resx">
       <DependentUpon>PersonnelListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonnelCheckInForm.resx">
-      <DependentUpon>PersonnelCheckInForm.cs</DependentUpon>
+    <EmbeddedResource Include="CheckInForm.resx">
+      <DependentUpon>CheckInForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonnelViewCheckinForm.resx">
@@ -871,14 +885,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="SafetyMessageEditForm.resx">
       <DependentUpon>SafetyMessageEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -995,6 +1004,8 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-739-check-black.png" />
+    <None Include="Resources\glyphicons-basic-5-settings%403x.png" />
     <None Include="Resources\glyphicons-basic-799-chevron-last-left.png" />
     <None Include="Resources\glyphicons-basic-893-user-worker.png" />
     <None Include="Resources\glyphicons-basic-35-user-incognito.png" />
@@ -1030,7 +1041,6 @@
     <None Include="Resources\glyphicons-basic-763-sync-check-green.png" />
     <None Include="Resources\glyphicons-basic-761-sync-grey.png" />
     <None Include="Resources\glyphicons-basic-740-hash.png" />
-    <None Include="Resources\glyphicons-basic-739-check.png" />
     <None Include="Resources\glyphicons-basic-670-dashboard.png" />
     <None Include="Resources\glyphicons-basic-638-triangle-alert%403x.png" />
     <None Include="Resources\glyphicons-basic-635-circle-question.png" />

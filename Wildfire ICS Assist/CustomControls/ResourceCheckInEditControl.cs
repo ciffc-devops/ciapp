@@ -22,7 +22,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private IncidentResource _selectedResource = new IncidentResource();
         public IncidentResource selectedResource { get => _selectedResource; }
-        public void SetResource(IncidentResource record) { _selectedResource = record; }
+        public void SetResource(IncidentResource record) { _selectedResource = record;  }
+
+
         public ResourceCheckInEditControl()
         {
             InitializeComponent();
@@ -32,9 +34,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             
         }
+
+       
         private void datCheckInTime_ValueChanged(object sender, EventArgs e)
         {
             datLDW.MinDate = datCheckInTime.Value;
+            TimeSpan ts = datLDW.Value - datCheckInTime.Value;
+            lblLastDayCount.Text = Math.Round(ts.TotalDays, 0).ToString() + " days";
         }
 
         private void datLDW_ValueChanged(object sender, EventArgs e)
@@ -70,14 +76,17 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public void LoadPage()
         {
-            datCheckInTime.Value = DateTime.Now;
-            datLDW.Value = DateTime.Now.AddDays(14);
+            if(_checkInRecord.CheckInDate == DateTime.MinValue) { _checkInRecord.CheckInDate = DateTime.Now; _checkInRecord.LastDayOnIncident = _checkInRecord.CheckInDate.AddDays(14); }
+
+            datCheckInTime.Value = _checkInRecord.CheckInDate;
+            datLDW.Value = _checkInRecord.LastDayOnIncident;
 
             txtSelectedName.Text = _selectedResource.ResourceName;
             txtResourceType.Text = checkInRecord.ResourceType;
 
             infoFields.Clear();
-            infoFields = CheckInTools.GetInfoFields(checkInRecord.ResourceType);
+            if (_checkInRecord.InfoFields.Any()) { infoFields.AddRange(_checkInRecord.InfoFields); }
+            else { infoFields = CheckInTools.GetInfoFields(checkInRecord.ResourceType); }
 
             infoFieldControls.Clear();
             pnlCheckInFields.Controls.Clear();

@@ -61,11 +61,16 @@ namespace Wildfire_ICS_Assist.CustomControls
                 switch (infoField.FieldType)
                 {
                     case "Bool":
+                        chkBoolValue.Checked = infoField.BoolValue;
                         chkBoolValue.Visible = true;
                         chkBoolValue.Location = startPoint;
                         btnHelp.Location = new Point(chkBoolValue.Left + chkBoolValue.Width + 5, btnHelp.Location.Y);
                         break;
                     case "DateTime":
+                        if (infoField.DateValue > datDateValue.MinDate && infoField.DateValue < datDateValue.MaxDate)
+                        {
+                            datDateValue.Value = infoField.DateValue;
+                        }
                         datDateValue.Visible = true;
                         datDateValue.Location = startPoint;
                         datDateValue.Width = width;
@@ -73,18 +78,20 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                         break;
                     case "List":
+
                         cboListValue.Visible = true;
                         cboListValue.Width = width;
                         cboListValue.Location = startPoint;
                         cboListValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                         cboListValue.DataSource = CheckInTools.GetInfoFieldListOptions(infoField.ID);
-                        //TODO add items
+                        cboListValue.Text = infoField.StringValue;
                         break;
                     default:
                         txtStringValue.Visible = true;
                         txtStringValue.Width = width;
                         txtStringValue.Location = startPoint;
                         txtStringValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                        txtStringValue.Text = infoField.StringValue;
                         break;
 
                 }

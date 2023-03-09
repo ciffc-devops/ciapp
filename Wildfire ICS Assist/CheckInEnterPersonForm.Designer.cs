@@ -1,6 +1,6 @@
 ﻿namespace Wildfire_ICS_Assist
 {
-    partial class PersonnelEnterPersonForm
+    partial class CheckInEnterPersonForm
     {
         /// <summary>
         /// Required designer variable.

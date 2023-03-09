@@ -19,24 +19,23 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(3)] private Guid _ParentID;
         [ProtoMember(4)] private string _ParentName;
         [ProtoMember(5)] private string _GroupType; //could be: Branch, Division, Task Force, Strike Team, Group, Single Resource    
-        [ProtoMember(6)] private int _NumberOfPeople;
         [ProtoMember(7)] private Guid _LeaderICSRoleID;
         [ProtoMember(8)] private string _LeaderICSRoleName;
         [ProtoMember(9)] private Guid _LeaderID;
-        [ProtoMember(10)] private string _LeaderName;
 
 
         [ProtoMember(13)] private string _PreparedByName;
         [ProtoMember(14)] private string _PreparedByPosition;
         [ProtoMember(15)] private Guid _PreparedByPositionID;
 
-        [ProtoMember(17)] private string _Contact; //used for task forces, strike teams, groups
         [ProtoMember(18)] private string _ShortRemarks;  //used for task forces, strike teams, groups
         [ProtoMember(19)] private string _Comments; //used for task forces, strike teams, groups
         [ProtoMember(20)] private string _TacticalAssignment;//used for branches, divisions
         [ProtoMember(21)] private string _SpecialInstructions;//used for branches, divisions
         [ProtoMember(22)] private List<Guid> _CommsPlanItemIDs; //used for branches, divisions
         [ProtoMember(23)] private string _ResourceID;
+
+        [ProtoMember(24)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
 
 
         private int _Depth;
@@ -77,12 +76,10 @@ namespace WF_ICS_ClassLibrary.Models
         }
         public string GroupType { get => _GroupType; set => _GroupType = value; }
         public bool IsBranchOrDiv { get { if (GroupType.Equals("Branch") || GroupType.Equals("Division") || GroupType.Equals("Group")) { return true; } else if (ParentID == Globals.OpsChiefID) { return true; } return false; } }
-        public int NumberOfPeople { get => _NumberOfPeople; set => _NumberOfPeople = value; }
         public Guid LeaderICSRoleID { get => _LeaderICSRoleID; set => _LeaderICSRoleID = value; }
         public string LeaderICSRoleName { get => _LeaderICSRoleName; set => _LeaderICSRoleName = value; }
 
         public Guid LeaderID { get => _LeaderID; set => _LeaderID = value; }
-        public string LeaderName { get => _LeaderName; set => _LeaderName = value; }
         public string PreparedByName { get => _PreparedByName; set => _PreparedByName = value; }
         public string PreparedByPosition { get => _PreparedByPosition; set => _PreparedByPosition = value; }
         public Guid PreparedByPositionID { get => _PreparedByPositionID; set => _PreparedByPositionID = value; }
@@ -92,12 +89,19 @@ namespace WF_ICS_ClassLibrary.Models
         public string TacticalAssignment { get => _TacticalAssignment; set => _TacticalAssignment = value; }
         public string SpecialInstructions { get => _SpecialInstructions; set => _SpecialInstructions = value; }
         public string Comments { get => _Comments; set => _Comments = value; }
-        public string Contact { get => _Contact; set => _Contact = value; }
         public int Depth { get => _Depth; set => _Depth = value; }
         public int SpanOfControl { get => _SpanOfControl; set => _SpanOfControl = value; }
+
+        public List<OperationalGroupResourceListing> ResourceListing { get => _ResourceListing; set => _ResourceListing = value; }
+        public List<OperationalGroupResourceListing> ActiveResourceListing { get => _ResourceListing.Where(o => o.Active).ToList(); }
+
+
+
         public OperationalGroup Clone()
         {
             OperationalGroup cloneTo = this.MemberwiseClone() as OperationalGroup;
+            cloneTo.ResourceListing = new List<OperationalGroupResourceListing>();
+            foreach(OperationalGroupResourceListing listing in ResourceListing) { cloneTo.ResourceListing.Add(listing.Clone()); }
             return cloneTo;
         }
         object ICloneable.Clone()
@@ -113,7 +117,6 @@ namespace WF_ICS_ClassLibrary.Models
     {
         [ProtoMember(1)] private Guid _OperationalGroupID;
         [ProtoMember(2)] private Guid _LeaderID;
-        [ProtoMember(3)] private string _LeaderName;
         [ProtoMember(4)] private string _Transport;
         [ProtoMember(5)] private string _Email;
         [ProtoMember(6)] private string _Phone;
@@ -121,15 +124,21 @@ namespace WF_ICS_ClassLibrary.Models
 
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid LeaderID { get => _LeaderID; set => _LeaderID = value; }
-        public string LeaderName { get => _LeaderName; set => _LeaderName = value; }
         public string Transport { get => _Transport; set => _Transport = value; }
         public string Email { get => _Email; set => _Email = value; }
         public string Phone { get => _Phone; set => _Phone = value; }
         public List<OperationalGroupResourceListing> ResourceListing { get => _ResourceListing; set => _ResourceListing = value; }
         public List<OperationalGroupResourceListing> ActiveResourceListing { get => _ResourceListing.Where(o => o.Active).ToList(); }
-        public int NumberOfPeople { get { return ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Personnel")); } }
-        public int NumberOfVehicles { get { return ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Vehicle/Equipment")); } }
         
+        
+
+        public void UpsertResourceListing(OperationalGroupResourceListing listing)
+        {
+            ResourceListing = ResourceListing.Where(o=>o.ID != listing.ID).ToList();
+            ResourceListing.Add(listing);
+            NumberOfPeople = ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Personnel")); 
+            NumberOfVehicles = ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Vehicle/Equipment"));
+        }
 
         public OperationalSubGroup Clone()
         {
@@ -156,13 +165,26 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(5)] private string _Role; //the role this resource plays within its sub group e.g. leader, crew
 
 
+        public OperationalGroupResourceListing() { Active = true; ResourceID = Guid.NewGuid(); }
 
         public Guid SubGroupID { get => _SubGroupID; set => _SubGroupID = value; }
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid ResourceID { get => _ResourceID; set => _ResourceID = value; }
-        public string ResourceType { get => _ResourceType; set => _ResourceType = value; }
+        public string ResourceType
+        {
+            get => _ResourceType; 
+            set
+            {
+                _ResourceType = value;
+                if (ResourceType.Equals("Vehicle/Equipment")) { NumberOfVehicles = 1; NumberOfPeople = 0; }
+                else if (ResourceType.Equals("Personnel")) { NumberOfPeople = 1; NumberOfVehicles = 0; }
+            }
+        }
         public string Role { get => _Role; set => _Role = value; }
-        public bool IsLeader { get => Role.EqualsWithNull("Leader"); }
+        public bool IsLeader { get { if (!string.IsNullOrEmpty(Role)) { return Role.EqualsWithNull("Leader"); } else { return false; } } }
+
+
+
         public OperationalGroupResourceListing Clone()
         {
             OperationalGroupResourceListing cloneTo = this.MemberwiseClone() as OperationalGroupResourceListing;
@@ -178,6 +200,56 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class OperationalGroupTools
     {
+        public static void UpdateOperationalGroupCounts(this WFIncident incident, int OpPeriod)
+        {
+            incident.SetOpGroupDepths(OpPeriod);
+            foreach(OperationalSubGroup sub in incident.AllOperationalSubGroups)
+            {
+                sub.NumberOfPeople = sub.ActiveResourceListing.Count(o => o.ResourceType.Equals("Personnel"));
+                sub.NumberOfVehicles = sub.ActiveResourceListing.Count(o => o.ResourceType.Equals("Vehicle/Equipment"));
+            }
+            foreach(OperationalGroup grp in incident.ActiveOperationalGroups.OrderByDescending(o=>o.Depth))
+            {
+                grp.NumberOfPeople = grp.ActiveResourceListing.Sum(o => o.NumberOfPeople);
+                grp.NumberOfPeople += incident.ActiveOperationalSubGroups.Where(o => o.OperationalGroupID == grp.ID).Sum(o => o.NumberOfPeople);
+                grp.NumberOfPeople += incident.ActiveOperationalGroups.Where(o => o.ParentID == grp.LeaderICSRoleID).Sum(o => o.NumberOfPeople);
+
+                grp.NumberOfVehicles = grp.ActiveResourceListing.Sum(o => o.NumberOfVehicles);
+                grp.NumberOfVehicles += incident.ActiveOperationalSubGroups.Where(o => o.OperationalGroupID == grp.ID).Sum(o => o.NumberOfVehicles);
+                grp.NumberOfVehicles += incident.ActiveOperationalGroups.Where(o => o.ParentID == grp.LeaderICSRoleID).Sum(o => o.NumberOfVehicles);
+            }
+        }
+
+
+        public static List<IncidentResource> GetReportingResources(this WFIncident incident, Guid OpGroupID)
+        {
+
+            List<IncidentResource> resources = new List<IncidentResource>();
+            resources.AddRange(incident.AllOperationalSubGroups.Where(o => o.Active && o.OperationalGroupID == OpGroupID));
+            if (incident.AllOperationalGroups.Any(o => o.ID == OpGroupID)) { resources.AddRange(incident.AllOperationalGroups.First(o => o.ID == OpGroupID).ResourceListing); }
+            if (incident.AllOperationalSubGroups.Any(o => o.ID == OpGroupID))
+            {
+                foreach(OperationalGroupResourceListing listing in incident.AllOperationalSubGroups.First(o => o.ID == OpGroupID).ResourceListing)
+                {
+                    switch (listing.ResourceType)
+                    {
+                        case "Personnel":
+                            if (incident.IncidentPersonnel.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.IncidentPersonnel.First(o => o.ID == listing.ResourceID)); }
+                            break;
+                        case "Visitor":
+                            if (incident.IncidentPersonnel.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.IncidentPersonnel.First(o => o.ID == listing.ResourceID)); }
+                            break;
+                        case "Vehicle/Equipment":
+                            if (incident.allVehicles.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.allVehicles.First(o => o.ID == listing.ResourceID)); }
+                            break;
+                    }
+                }
+            }
+
+            return resources;
+        }
+
+
         public static ICSRole GetICSRoleByOpGroupID(this WFIncident incident, Guid OpGroupID)
         {
             if (incident.ActiveOperationalGroups.Any(o => o.ID == OpGroupID))

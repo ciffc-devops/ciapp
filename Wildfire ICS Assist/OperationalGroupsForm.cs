@@ -197,6 +197,7 @@ namespace Wildfire_ICS_Assist
             {
                 btnEditBranch.Enabled = true;
                 btnDelete.Enabled = true;
+                Program.CurrentIncident.UpdateOperationalGroupCounts(Program.CurrentOpPeriod);
 
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
                 OperationalGroup selectedGroup = new OperationalGroup();

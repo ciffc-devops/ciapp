@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.dgvSubGroups = new System.Windows.Forms.DataGridView();
-            this.lblResourcesTitle = new System.Windows.Forms.Label();
-            this.btnDeleteResource = new System.Windows.Forms.Button();
-            this.btnEditResource = new System.Windows.Forms.Button();
-            this.btnAddResource = new System.Windows.Forms.Button();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNumberOfPeople = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNumberOfVehicles = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblResourcesTitle = new System.Windows.Forms.Label();
+            this.btnDeleteResource = new System.Windows.Forms.Button();
+            this.btnEditResource = new System.Windows.Forms.Button();
+            this.btnAddResource = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGroups)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,8 +65,53 @@
             this.dgvSubGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSubGroups.Size = new System.Drawing.Size(738, 394);
             this.dgvSubGroups.TabIndex = 4;
+            this.dgvSubGroups.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSubGroups_CellFormatting);
             this.dgvSubGroups.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvSubGroups_RowPostPaint);
             this.dgvSubGroups.SelectionChanged += new System.EventHandler(this.dgvSubGroups_SelectionChanged);
+            // 
+            // colNumber
+            // 
+            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colNumber.HeaderText = "#";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.Width = 45;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "ResourceName";
+            this.colName.HeaderText = "Resource Name";
+            this.colName.MinimumWidth = 250;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colLeader
+            // 
+            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colLeader.DataPropertyName = "LeaderName";
+            this.colLeader.HeaderText = "Resource Leader";
+            this.colLeader.Name = "colLeader";
+            this.colLeader.ReadOnly = true;
+            this.colLeader.Width = 165;
+            // 
+            // colNumberOfPeople
+            // 
+            this.colNumberOfPeople.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colNumberOfPeople.DataPropertyName = "NumberOfPeople";
+            this.colNumberOfPeople.HeaderText = "# of People";
+            this.colNumberOfPeople.Name = "colNumberOfPeople";
+            this.colNumberOfPeople.ReadOnly = true;
+            this.colNumberOfPeople.Width = 119;
+            // 
+            // colNumberOfVehicles
+            // 
+            this.colNumberOfVehicles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNumberOfVehicles.DataPropertyName = "NumberOfVehicles";
+            this.colNumberOfVehicles.HeaderText = "# of Vehicles/Equip";
+            this.colNumberOfVehicles.Name = "colNumberOfVehicles";
+            this.colNumberOfVehicles.ReadOnly = true;
+            this.colNumberOfVehicles.Width = 180;
             // 
             // lblResourcesTitle
             // 
@@ -120,50 +165,6 @@
             this.btnAddResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddResource.UseVisualStyleBackColor = true;
             this.btnAddResource.Click += new System.EventHandler(this.btnAddResource_Click);
-            // 
-            // colNumber
-            // 
-            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colNumber.HeaderText = "#";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
-            this.colNumber.Width = 45;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "ResourceName";
-            this.colName.HeaderText = "Resource Name";
-            this.colName.MinimumWidth = 250;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colLeader
-            // 
-            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colLeader.DataPropertyName = "LeaderName";
-            this.colLeader.HeaderText = "Resource Leader";
-            this.colLeader.Name = "colLeader";
-            this.colLeader.ReadOnly = true;
-            this.colLeader.Width = 165;
-            // 
-            // colNumberOfPeople
-            // 
-            this.colNumberOfPeople.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colNumberOfPeople.DataPropertyName = "NumberOfPeople";
-            this.colNumberOfPeople.HeaderText = "# of People";
-            this.colNumberOfPeople.Name = "colNumberOfPeople";
-            this.colNumberOfPeople.ReadOnly = true;
-            this.colNumberOfPeople.Width = 119;
-            // 
-            // colNumberOfVehicles
-            // 
-            this.colNumberOfVehicles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumberOfVehicles.DataPropertyName = "NumberOfVehicles";
-            this.colNumberOfVehicles.HeaderText = "# of Vehicles/Equip";
-            this.colNumberOfVehicles.Name = "colNumberOfVehicles";
-            this.colNumberOfVehicles.ReadOnly = true;
-            this.colNumberOfVehicles.Width = 180;
             // 
             // StrikeTeamTaskForceDetailsControl
             // 

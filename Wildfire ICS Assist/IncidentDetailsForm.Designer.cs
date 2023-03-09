@@ -185,7 +185,6 @@
             this.btnLogisticsSignIn = new System.Windows.Forms.Button();
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnLogisticsMemberStatus = new System.Windows.Forms.Button();
-            this.btnVehicles = new System.Windows.Forms.Button();
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnIncidentSummary = new System.Windows.Forms.Button();
             this.btnAssignmentList = new System.Windows.Forms.Button();
@@ -1318,7 +1317,6 @@
             this.cpLogistics.Controls.Add(this.btnLogisticsSignIn);
             this.cpLogistics.Controls.Add(this.btnAdditionalContacts);
             this.cpLogistics.Controls.Add(this.btnLogisticsMemberStatus);
-            this.cpLogistics.Controls.Add(this.btnVehicles);
             this.cpLogistics.CurrentlyCollapsed = false;
             this.cpLogistics.ExpandedHeight = 196;
             this.cpLogistics.ExpandedWidth = 530;
@@ -1342,16 +1340,10 @@
             // btnLogisticsMemberStatus
             // 
             resources.ApplyResources(this.btnLogisticsMemberStatus, "btnLogisticsMemberStatus");
+            this.btnLogisticsMemberStatus.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
             this.btnLogisticsMemberStatus.Name = "btnLogisticsMemberStatus";
             this.btnLogisticsMemberStatus.UseVisualStyleBackColor = true;
             this.btnLogisticsMemberStatus.Click += new System.EventHandler(this.btnLogisticsMemberStatus_Click);
-            // 
-            // btnVehicles
-            // 
-            resources.ApplyResources(this.btnVehicles, "btnVehicles");
-            this.btnVehicles.Name = "btnVehicles";
-            this.btnVehicles.UseVisualStyleBackColor = true;
-            this.btnVehicles.Click += new System.EventHandler(this.btnVehicles_Click);
             // 
             // cpIncidentActionPlan
             // 
@@ -1644,7 +1636,6 @@
         private System.Windows.Forms.Button btnLogisticsSignIn;
         private System.Windows.Forms.Button btnLogisticsMemberStatus;
         private System.Windows.Forms.Button btnAdditionalContacts;
-        private System.Windows.Forms.Button btnVehicles;
         private System.Windows.Forms.Button btnPlanningAddAssignment;
         private System.Windows.Forms.Button btnTeamAssignments;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;

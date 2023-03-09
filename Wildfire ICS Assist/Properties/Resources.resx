@@ -247,8 +247,8 @@
   <data name="SureRemoveImageTitle" xml:space="preserve">
     <value>Remove Image?</value>
   </data>
-  <data name="glyphicons-basic-893-user-worker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-893-user-worker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SureCancel" xml:space="preserve">
+    <value>Are sure you want to cancel and lose any unsaved changes on this screen?</value>
   </data>
   <data name="glyphicons_basic_30_clipboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-30-clipboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -295,6 +295,9 @@
   <data name="glyphicons_basic_557_flash_automatic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-557-flash-automatic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="glyphicons-basic-893-user-worker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-893-user-worker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="glyphicons_basic_965_layers_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-965-layers-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -310,11 +313,14 @@
   <data name="glyphicons_basic_234_calculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-234-calculator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_302_square_download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-302-square-download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons-basic-799-chevron-last-left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-799-chevron-last-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_31_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-31-pencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AreYouSureTitle" xml:space="preserve">
+    <value>Are you sure?</value>
   </data>
   <data name="glyphicons_basic_221_chevron_down_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-221-chevron-down@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -378,6 +384,9 @@
   </data>
   <data name="glyphicons-basic-89-book-address" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-89-book-address1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glyphicons_basic_302_square_download" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-302-square-download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_400_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-400-export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -451,6 +460,9 @@
   <data name="glyphicons_basic_234_calculator_2x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-234-calculator@2x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="glyphicons-basic-5-settings@3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-5-settings@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="glyphicons_basic_475_sort_numerically_alt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-475-sort-numerically-alt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -463,13 +475,10 @@
   <data name="glyphicons_basic_234_calculator1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-234-calculator1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons-basic-799-chevron-last-left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-799-chevron-last-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons-basic-739-check-black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-739-check-black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AreYouSureTitle" xml:space="preserve">
-    <value>Are you sure?</value>
-  </data>
-  <data name="SureCancel" xml:space="preserve">
-    <value>Are sure you want to cancel and lose any unsaved changes on this screen?</value>
+  <data name="SureRemoveFromCrew" xml:space="preserve">
+    <value>Removing this resource from the crew will leave it in the Check In list as a single resource. You can then modify its check-in details as needed, check it out, etc. Are you sure you want to proceed with this change?</value>
   </data>
 </root>

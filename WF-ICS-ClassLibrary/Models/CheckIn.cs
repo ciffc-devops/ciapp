@@ -24,7 +24,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(10)] private bool _Active;
         [ProtoMember(11)] private int _OpPeriod;
         [ProtoMember(12)] private string _ResourceType;
-
+        [ProtoMember(13)] private Guid _ParentRecordID;
 
         public CheckInRecord() { SignInRecordID = Guid.NewGuid(); InfoFields = new List<CheckInInfoField>(); CheckOutDate = DateTime.MaxValue; Active = true; }
 
@@ -32,6 +32,7 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime CheckInDate { get => _CheckInDate; set => _CheckInDate = value; }
         public DateTime CheckOutDate { get => _CheckOutDate; set => _CheckOutDate = value; }
         public Guid SignInRecordID { get => _SignInRecordID; set => _SignInRecordID = value; }
+        public Guid ParentRecordID { get => _ParentRecordID; set => _ParentRecordID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public DateTime LastDayOnIncident { get => _LastDayOnIncident; set => _LastDayOnIncident = value; }
         public int PersonalIncidentNumber { get => _PersonalIncidentNumber; set => _PersonalIncidentNumber = value; }
@@ -41,8 +42,8 @@ namespace WF_ICS_ClassLibrary.Models
         public bool Active { get => _Active; set => _Active = value; }
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public string ResourceType { get => _ResourceType; set => _ResourceType = value; }
-        public bool IsPerson { get { return ResourceType.EqualsWithNull("Person"); } }
-        public bool IsVehicle { get { return ResourceType.EqualsWithNull("Vehicle"); } }
+        public bool IsPerson { get { return ResourceType.EqualsWithNull("Person") || ResourceType.Equals("Personnel"); } }
+        public bool IsVehicle { get { return ResourceType.EqualsWithNull("Vehicle") || ResourceType.Equals("Vehicle/Equipment"); } }
         public bool IsVisitor { get { return ResourceType.EqualsWithNull("Visitor"); } }
         public bool IsCrew { get { return ResourceType.EqualsWithNull("Crew"); } }
         public bool HasCheckOutTime { get => CheckOutDate < DateTime.MaxValue; }
@@ -116,6 +117,39 @@ namespace WF_ICS_ClassLibrary.Models
         }
     }
 
+    public class CheckInRecordWithResource 
+    {
+        private Guid _ID;
+
+        private CheckInRecord _Record = new CheckInRecord();
+        private IncidentResource _Resource = new IncidentResource();
+        public IncidentResource Resource { get => _Resource; }
+        public CheckInRecord Record { get => _Record; }
+        public Guid ID { get => _ID; }
+        public string ResourceType { get => _Record.ResourceType; }
+        public string Kind { get => Resource.Kind; }
+        public string Type { get => Resource.Type; }
+        public int NumberOfPeople { get => Resource.NumberOfPeople; }
+        public int NumberOfVehicles { get => Resource.NumberOfVehicles; }
+        public DateTime CheckInDate { get => Record.CheckInDate; }
+        public DateTime CheckOutDate { get => Record.CheckOutDate;}
+        public DateTime LastDayOnIncident { get => Record.LastDayOnIncident; }
+        public string ResourceName { get => Resource.ResourceName; }
+        public string LeaderName { get => Resource.LeaderName; }
+        public string Status { get
+            {
+                if(CheckOutDate < DateTime.MaxValue) { return "Checked Out"; }
+                else { return "Active"; }
+            } }
+
+        public CheckInRecordWithResource() { _ID = Guid.NewGuid(); }
+        public CheckInRecordWithResource(CheckInRecord rec, IncidentResource res)
+        {
+            _ID = Guid.NewGuid();
+            _Record = rec;
+            _Resource = res;   
+        }
+    }
 
     public static class CheckInTools
     {
@@ -143,8 +177,8 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 case "Visitor": return fields.Where(o => o.UseForVisitor).ToList();
                 case "Crew": return fields.Where(o => o.UseForCrew).ToList();
-                case "Person": return fields.Where(o => o.UseForPersonnel).ToList();
-                case "Vehicle": return fields.Where(o => o.UseForVehicle).ToList();
+                case "Personnel": return fields.Where(o => o.UseForPersonnel).ToList();
+                case "Vehicle/Equipment": return fields.Where(o => o.UseForVehicle).ToList();
             }
             return new List<CheckInInfoField>();
         }

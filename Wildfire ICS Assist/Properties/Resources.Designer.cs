@@ -597,6 +597,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_5_settings_3x {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-5-settings@3x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_52_eye {
             get {
                 object obj = ResourceManager.GetObject("glyphicons-basic-52-eye", resourceCulture);
@@ -780,6 +790,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_739_check {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_739_check", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_739_check_black {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-739-check-black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1166,6 +1186,15 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static string SureDeleteTitle {
             get {
                 return ResourceManager.GetString("SureDeleteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing this resource from the crew will leave it in the Check In list as a single resource. You can then modify its check-in details as needed, check it out, etc. Are you sure you want to proceed with this change?.
+        /// </summary>
+        internal static string SureRemoveFromCrew {
+            get {
+                return ResourceManager.GetString("SureRemoveFromCrew", resourceCulture);
             }
         }
         

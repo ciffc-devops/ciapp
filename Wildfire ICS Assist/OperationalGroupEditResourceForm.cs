@@ -34,7 +34,7 @@ namespace Wildfire_ICS_Assist
         private void buildResourceList()
         {
             _listings.Clear();
-            foreach(OperationalGroupResourceListing l in subGroup.ResourceListing.Where(o=>o.Active).OrderByDescending(o=>o.IsLeader)) { _listings.Add(l); }
+            foreach(OperationalGroupResourceListing l in subGroup.ActiveResourceListing.OrderByDescending(o=>o.IsLeader)) { _listings.Add(l); }
             
         }
 
@@ -149,7 +149,7 @@ namespace Wildfire_ICS_Assist
                 listing.ResourceName = vehicle.ResourceIdentifier;
 
             }
-            subGroup.ResourceListing.Add(listing);
+            subGroup.UpsertResourceListing(listing);
             buildResourceList();
             BuildAddList();
 
