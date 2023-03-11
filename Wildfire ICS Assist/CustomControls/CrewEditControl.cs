@@ -28,6 +28,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         public CrewEditControl()
         {
             InitializeComponent();
+            cboCrewType.SelectedIndex = 0;
         }
 
         private void CrewEditControl_Load(object sender, EventArgs e)
@@ -43,7 +44,12 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtPhone.Text = subGroup.Phone;
                 txtName.Text = subGroup.ResourceName;
                 txtTransport.Text = subGroup.Transport;
+                if (!string.IsNullOrEmpty(subGroup.Type)) { cboCrewType.Text = subGroup.Type; }
+                else { cboCrewType.SelectedIndex = 0; }
                 loadResourceList();
+            } else
+            {
+               
             }
         }
 
@@ -265,6 +271,11 @@ namespace Wildfire_ICS_Assist.CustomControls
 
 
             }
+        }
+
+        private void cboCrewType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            subGroup.Type = cboCrewType.Text;
         }
     }
 }

@@ -53,15 +53,16 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (!string.IsNullOrEmpty(teamMember.Agency)) { cboAgency.Text = teamMember.Agency; }
                 chkContractor.Checked = teamMember.IsContractor;
                 txtPhone.Text = teamMember.CellphoneNumber;
-
+                cboType.Text = teamMember.Type;
+                cboKind.Text = teamMember.Kind;
                 txtEmail.Text = teamMember.Email;
                 if (!string.IsNullOrEmpty(teamMember.HomeUnit)) { cboHomeAgency.Text = teamMember.HomeUnit; }
 
                 //txtDietary.Text = teamMember.Dietary;
                 chkDietary.Checked = teamMember.HasDietaryRestrictions;
-                txtCallsign.Text = teamMember.Callsign;
+                txtCallsign.Text = teamMember.CallSign;
                 chkAllergies.Checked = teamMember.HasAllergies;
-                
+                txtWeight.Text = teamMember.Weight;
 
                 txtNOKName.Text = teamMember.EmergencyContact;
 
@@ -166,7 +167,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void txtCallsign_TextChanged(object sender, EventArgs e)
         {
-            teamMember.Callsign = ((TextBox)sender).Text;
+            teamMember.CallSign = ((TextBox)sender).Text;
         }
 
         private void chkDietary_CheckedChanged(object sender, EventArgs e)
@@ -222,6 +223,21 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void txtType_TextChanged(object sender, EventArgs e)
         {
             teamMember.Type = ((TextBox)sender).Text;
+        }
+
+        private void cboKind_Leave(object sender, EventArgs e)
+        {
+            teamMember.Kind = ((ComboBox)sender).Text;
+        }
+
+        private void cboType_Leave(object sender, EventArgs e)
+        {
+            teamMember.Type = ((ComboBox)sender).Text;
+        }
+
+        private void txtWeight_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.Weight = ((TextBox)sender).Text; 
         }
     }
 }

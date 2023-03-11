@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -119,7 +119,6 @@
             this.templatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentObjectivesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.safetyNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.teamAssignmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.iAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentActionPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentObjectivesICS202ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -147,14 +146,11 @@
             this.checkInsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memberStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkInMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vehiclesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.teamAssignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.incidentTimelineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminFinanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -203,6 +199,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnOpsAssignments = new System.Windows.Forms.Button();
             this.btnOpsMemberStatus = new System.Windows.Forms.Button();
+            this.printTheIncidentActionPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -284,9 +281,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -832,13 +829,13 @@
             this.toolStripSeparator4,
             this.templatesToolStripMenuItem,
             this.incidentObjectivesToolStripMenuItem,
-            this.safetyNotesToolStripMenuItem,
-            this.teamAssignmentsToolStripMenuItem1});
+            this.safetyNotesToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
             // 
             // optionsToolStripMenuItem
             // 
+            this.optionsToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_137_cogwheel;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
@@ -923,12 +920,6 @@
             resources.ApplyResources(this.safetyNotesToolStripMenuItem, "safetyNotesToolStripMenuItem");
             this.safetyNotesToolStripMenuItem.Click += new System.EventHandler(this.safetyNotesToolStripMenuItem_Click);
             // 
-            // teamAssignmentsToolStripMenuItem1
-            // 
-            this.teamAssignmentsToolStripMenuItem1.Name = "teamAssignmentsToolStripMenuItem1";
-            resources.ApplyResources(this.teamAssignmentsToolStripMenuItem1, "teamAssignmentsToolStripMenuItem1");
-            this.teamAssignmentsToolStripMenuItem1.Click += new System.EventHandler(this.teamAssignmentsToolStripMenuItem1_Click);
-            // 
             // iAPToolStripMenuItem
             // 
             this.iAPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -940,6 +931,7 @@
             this.medicalPlanICS206ToolStripMenuItem,
             this.safetyMessageICS208ToolStripMenuItem,
             this.airOperationsSummaryICS220ToolStripMenuItem,
+            this.printTheIncidentActionPlanToolStripMenuItem,
             this.toolStripSeparator5,
             this.additionalDocumentsToolStripMenuItem,
             this.communicationsListICS205AToolStripMenuItem,
@@ -1032,12 +1024,14 @@
             // 
             // printThisOperationalPeriodToolStripMenuItem
             // 
+            this.printThisOperationalPeriodToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.printThisOperationalPeriodToolStripMenuItem.Name = "printThisOperationalPeriodToolStripMenuItem";
             resources.ApplyResources(this.printThisOperationalPeriodToolStripMenuItem, "printThisOperationalPeriodToolStripMenuItem");
             this.printThisOperationalPeriodToolStripMenuItem.Click += new System.EventHandler(this.printThisOperationalPeriodToolStripMenuItem_Click);
             // 
             // printThisIncidentToDateToolStripMenuItem
             // 
+            this.printThisIncidentToDateToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
             resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
             this.printThisIncidentToDateToolStripMenuItem.Click += new System.EventHandler(this.printThisIncidentToDateToolStripMenuItem_Click);
@@ -1076,7 +1070,6 @@
             this.checkInsToolStripMenuItem,
             this.memberStatusToolStripMenuItem,
             this.checkInMemberToolStripMenuItem,
-            this.vehiclesToolStripMenuItem1,
             this.toolStripSeparator10,
             this.additionalContactsToolStripMenuItem});
             this.logisticsToolStripMenuItem.Name = "logisticsToolStripMenuItem";
@@ -1110,12 +1103,6 @@
             resources.ApplyResources(this.checkInMemberToolStripMenuItem, "checkInMemberToolStripMenuItem");
             this.checkInMemberToolStripMenuItem.Click += new System.EventHandler(this.checkInMemberToolStripMenuItem_Click);
             // 
-            // vehiclesToolStripMenuItem1
-            // 
-            this.vehiclesToolStripMenuItem1.Name = "vehiclesToolStripMenuItem1";
-            resources.ApplyResources(this.vehiclesToolStripMenuItem1, "vehiclesToolStripMenuItem1");
-            this.vehiclesToolStripMenuItem1.Click += new System.EventHandler(this.vehiclesToolStripMenuItem1_Click);
-            // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
@@ -1132,8 +1119,6 @@
             this.planningToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.positionLogToolStripMenuItem2,
             this.toolStripSeparator6,
-            this.teamAssignmentsToolStripMenuItem,
-            this.incidentTimelineToolStripMenuItem,
             this.notesToolStripMenuItem});
             this.planningToolStripMenuItem.Name = "planningToolStripMenuItem";
             resources.ApplyResources(this.planningToolStripMenuItem, "planningToolStripMenuItem");
@@ -1148,16 +1133,6 @@
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            // 
-            // teamAssignmentsToolStripMenuItem
-            // 
-            this.teamAssignmentsToolStripMenuItem.Name = "teamAssignmentsToolStripMenuItem";
-            resources.ApplyResources(this.teamAssignmentsToolStripMenuItem, "teamAssignmentsToolStripMenuItem");
-            // 
-            // incidentTimelineToolStripMenuItem
-            // 
-            this.incidentTimelineToolStripMenuItem.Name = "incidentTimelineToolStripMenuItem";
-            resources.ApplyResources(this.incidentTimelineToolStripMenuItem, "incidentTimelineToolStripMenuItem");
             // 
             // notesToolStripMenuItem
             // 
@@ -1505,6 +1480,12 @@
             this.btnOpsMemberStatus.Name = "btnOpsMemberStatus";
             this.btnOpsMemberStatus.UseVisualStyleBackColor = true;
             // 
+            // printTheIncidentActionPlanToolStripMenuItem
+            // 
+            this.printTheIncidentActionPlanToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.printTheIncidentActionPlanToolStripMenuItem.Name = "printTheIncidentActionPlanToolStripMenuItem";
+            resources.ApplyResources(this.printTheIncidentActionPlanToolStripMenuItem, "printTheIncidentActionPlanToolStripMenuItem");
+            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1713,10 +1694,7 @@
         private System.Windows.Forms.ToolStripMenuItem memberStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkInMemberToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem vehiclesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem additionalContactsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem teamAssignmentsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem incidentTimelineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminFinanceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem3;
@@ -1732,11 +1710,11 @@
         private System.Windows.Forms.ToolStripMenuItem aircraftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem airOperationsSummaryICS220ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem teamAssignmentsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem networkTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamAssignmentsICS204ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamAssignmentsICS204ToolStripMenuItem1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem printTheIncidentActionPlanToolStripMenuItem;
     }
 }
 

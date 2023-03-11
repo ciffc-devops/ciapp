@@ -24,6 +24,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(14)] private DateTime _StartTime;
         [ProtoMember(15)] private DateTime _MustBeOutTime;
         [ProtoMember(16)] private string _Notes;
+        [ProtoMember(17)] private Guid _OperatorID;
         [ProtoMember(18)] private string _ASE;
 
         public Vehicle()
@@ -43,6 +44,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Features { get => _Features; set => _Features = value; }
         public string AgencyOrOwner { get => _AgencyOrOwner; set { _AgencyOrOwner = value; SetResourceName(); } }
         public string OperatorName { get => _OperatorName; set => _OperatorName = value; }
+        public Guid OperatorID { get => _OperatorID; set => _OperatorID = value; }
         public string LicenseOrID { get => _LicenseOrID; set => _LicenseOrID = value; }
         public string IncidentAssignment { get => _IncidentAssignment; set => _IncidentAssignment = value; }
         public DateTime StartTime { get => _StartTime; set => _StartTime = value; }

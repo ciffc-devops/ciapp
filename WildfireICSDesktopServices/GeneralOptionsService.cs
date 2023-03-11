@@ -338,6 +338,10 @@ namespace WildfireICSDesktopServices
                     return _options.AllTeamMembers;
                 case "Vehicles":
                     return _options.AllVehicles;
+                case "YellowResourceTimeoutDays":
+                    return _options.YellowResourceTimeoutDays;
+                case "RedResourceTimeoutDays":
+                    return _options.RedResourceTimeoutDays;
                 default:
                     return null;
             }
@@ -551,6 +555,13 @@ namespace WildfireICSDesktopServices
                 case "LastPort":
                     _options.LastPort = newValue.ToString();
                     break;
+                case "RedResourceTimeoutDays":
+                    _options.RedResourceTimeoutDays = Convert.ToInt32(newValue);
+                    break;
+                case "YellowResourceTimeoutDays":
+                    _options.YellowResourceTimeoutDays = Convert.ToInt32(newValue);
+                    break;
+
             }
             SaveGeneralOptions();
         }

@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist
                 cboType.SelectedIndex = cboType.FindStringExact(SelectedGroup.GroupType);
                 txtComments.Text = SelectedGroup.Comments;
                 txtContact.Text = SelectedGroup.Contact;
-                txtIdentifier.Text = SelectedGroup.ResourceIdentifier;
+                txtIdentifier.Text = SelectedGroup.ResourceName;
 
                 try { cboReportsTo.SelectedValue = SelectedGroup.ParentID; }
                 catch { }
@@ -156,30 +156,6 @@ namespace Wildfire_ICS_Assist
             return true;
         }
 
-        private void btnAddResource_Click(object sender, EventArgs e)
-        {
-            OperationalSubGroup sub = new OperationalSubGroup();
-            sub.OperationalGroupID = SelectedGroup.ID;
-            OpenResourceForEdit(sub);
-        }
-
-        private void OpenResourceForEdit(OperationalSubGroup sub)
-        {
-            if (sub != null)
-            {
-                using (OperationalGroupEditResourceForm form = new OperationalGroupEditResourceForm())
-                {
-                    form.subGroup = sub;
-
-                    DialogResult dr = form.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        OperationalSubGroup grp = form.subGroup;
-                        Program.wfIncidentService.UpsertOperationalSubGroup(grp);
-                    }
-                }
-            }
-        }
 
       
 

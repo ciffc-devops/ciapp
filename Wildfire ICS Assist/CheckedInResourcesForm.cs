@@ -24,10 +24,16 @@ namespace Wildfire_ICS_Assist
         {
             dgvResources.AutoGenerateColumns = false;
             cboResourceVariety.SelectedIndex = 0;
+            BuildLastDayOnIncidentFilterOptions();
             LoadResourcesList();
-
+            LoadPNumbers();
             Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
 
+        }
+
+        private void LoadPNumbers()
+        {
+            
         }
 
         private void Program_CheckInChanged(MemberEventArgs e)
@@ -162,7 +168,7 @@ namespace Wildfire_ICS_Assist
                 }
                 if (resource != null)
                 {
-                    checkInRecords.Add(new CheckInRecordWithResource(rec, resource));
+                    checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
                 }
             }
             checkInRecords = checkInRecords.OrderBy(o=>o.ResourceName).ToList();
@@ -171,6 +177,24 @@ namespace Wildfire_ICS_Assist
             {
                 string variety = cboResourceVariety.Text;
                 checkInRecords = checkInRecords.Where(o => o.ResourceType.Equals(variety)).ToList(); ;
+            }
+
+            if(cboTimeOutFilter.SelectedIndex > 0)
+            {
+                DateTime EndOfOp = Program.CurrentOpPeriodDetails.PeriodEnd;
+
+                switch (cboTimeOutFilter.SelectedIndex)
+                {
+                    case 1:
+                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays,0) <= YellowNumber).ToList();
+                        break;
+                    case 2:
+                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays,0) <= YellowNumber && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays,0) > RedNumber).ToList();
+                        break;
+                    case 3:
+                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays,0) <= RedNumber).ToList();
+                        break;
+                }
             }
 
             dgvResources.DataSource = checkInRecords;
@@ -210,6 +234,48 @@ namespace Wildfire_ICS_Assist
         {
             LoadResourcesList();
 
+        }
+
+
+        int YellowNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("YellowResourceTimeoutDays"));
+        int RedNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("RedResourceTimeoutDays"));
+
+        private void BuildLastDayOnIncidentFilterOptions()
+        {
+            List<string> options = new List<string>();
+            options.Add("All Resources");
+            options.Add("Yellow (" + YellowNumber + ") and Red (" + RedNumber + ")");
+            options.Add("Yellow (" + YellowNumber + ") only");
+            options.Add("Red (" + RedNumber + ") only");
+            cboTimeOutFilter.DataSource = options;
+            cboTimeOutFilter.SelectedIndex = 0;
+        }
+
+        private void dgvResources_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvResources.Rows.Count > 0 && e.RowIndex <= dgvResources.Rows.Count && dgvResources.Rows[e.RowIndex] != null)
+            {
+                
+
+                DataGridViewRow row = dgvResources.Rows[e.RowIndex];
+                CheckInRecordWithResource item = (CheckInRecordWithResource)row.DataBoundItem;
+
+                
+                if (item.DaysTillTimeOut <= YellowNumber)
+                {
+                    row.Cells["colLastDay"].Style.BackColor = Color.Yellow;
+                }
+                if(item.DaysTillTimeOut <= RedNumber)
+                {
+                    row.Cells["colLastDay"].Style.BackColor = Color.Red;
+                }
+                
+            }
+        }
+
+        private void cboTimeOutFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadResourcesList();
         }
     }
 }

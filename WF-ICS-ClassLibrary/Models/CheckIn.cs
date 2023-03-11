@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Utilities;
@@ -25,7 +26,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(11)] private int _OpPeriod;
         [ProtoMember(12)] private string _ResourceType;
         [ProtoMember(13)] private Guid _ParentRecordID;
-
+        [ProtoMember(14)] private DateTime _LastDayOfRest;
         public CheckInRecord() { SignInRecordID = Guid.NewGuid(); InfoFields = new List<CheckInInfoField>(); CheckOutDate = DateTime.MaxValue; Active = true; }
 
 
@@ -47,6 +48,7 @@ namespace WF_ICS_ClassLibrary.Models
         public bool IsVisitor { get { return ResourceType.EqualsWithNull("Visitor"); } }
         public bool IsCrew { get { return ResourceType.EqualsWithNull("Crew"); } }
         public bool HasCheckOutTime { get => CheckOutDate < DateTime.MaxValue; }
+        public DateTime LastDayOfRest { get => _LastDayOfRest; set => _LastDayOfRest = value; }
 
 
         public CheckInRecord Clone()
@@ -141,13 +143,17 @@ namespace WF_ICS_ClassLibrary.Models
                 if(CheckOutDate < DateTime.MaxValue) { return "Checked Out"; }
                 else { return "Active"; }
             } }
+        public int DaysTillTimeOut { get; set; }
+
 
         public CheckInRecordWithResource() { _ID = Guid.NewGuid(); }
-        public CheckInRecordWithResource(CheckInRecord rec, IncidentResource res)
+        public CheckInRecordWithResource(CheckInRecord rec, IncidentResource res, DateTime EndOfOp)
         {
             _ID = Guid.NewGuid();
             _Record = rec;
-            _Resource = res;   
+            _Resource = res;
+            TimeSpan ts = LastDayOnIncident - EndOfOp;
+            DaysTillTimeOut = Convert.ToInt32( Math.Round(ts.TotalDays, 0));
         }
     }
 
@@ -167,7 +173,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             OperationalPeriod per = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
             DateTime atNow = per.PeriodEnd.AddMinutes(-5);
-            return incident.IncidentPersonnel.Where(o => o.Active && incident.ResourceIsCheckedIn(o.ID, atNow)).ToList();
+            return incident.IncidentPersonnel.Where(o => o.Active && incident.ResourceIsCheckedIn(o.ID, atNow)).OrderBy(o=>o.Name).ToList();
         }
 
         public static List<CheckInInfoField> GetInfoFields(string CheckInType)
@@ -187,11 +193,9 @@ namespace WF_ICS_ClassLibrary.Models
         {
             List<CheckInInfoField> fields = new List<CheckInInfoField>
             {
-new CheckInInfoField(new Guid("ffdc56b0-f36e-43ff-b412-813c0435ba0d"), "Individuals weight ", "String", "Individual Info", false, true, false,false,false, ""),
 new CheckInInfoField(new Guid("5e1e518c-73db-43a2-8621-779e3e10ae88"), "Resource Order Number", "String", "Deployment Information", false, true, true,false,false, ""),
 new CheckInInfoField(new Guid("172791a7-2fe9-4e0a-9ac8-46d3efedf133"), "Position On Incident", "String", "Deployment Information", false, true, true,false,false, ""),
 new CheckInInfoField(new Guid("3aefed78-eaf9-4f52-a222-43fc389933ce"), "Check-In Location", "List", "Check In Information", false, true, true,true,false, ""),
-new CheckInInfoField(new Guid("c6755f41-2073-474e-9e40-7fb73447aa69"), "Last Day of Rest", "DateTime", "Check In Information", false, true, false,true,false, ""),
 new CheckInInfoField(new Guid("17fe99e1-4a2c-4e15-9ae0-cc3258444b65"), "First Day on Incident", "DateTime", "Check In Information", false, true, true,true,false, ""),
 new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "In-briefing location & time", "String", "Check In Information", false, true, false,true,false, ""),
 new CheckInInfoField(new Guid("c9f49654-b5e5-4291-886b-8d24aaef5045"), "Accomodation Location", "List", "Logistics", true, true, false,true,false, ""),
@@ -232,4 +236,60 @@ new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Duration
 
         }
     }
+
+    [Serializable]
+    [ProtoContract]
+    public class DemobilizationRecord : ICloneable
+    {
+        [ProtoMember(1)] private Guid _ID;
+        [ProtoMember(2)] private Guid _SignInRecordID;
+        [ProtoMember(3)] private Guid _ResourceID;
+        [ProtoMember(4)] private DateTime _DemobDate;
+        [ProtoMember(5)] private string _DemobLocation;
+        [ProtoMember(6)] private DateTime _DebriefDate;
+        [ProtoMember(7)] private string _DebriefLocation;
+        [ProtoMember(8)] private bool _InventoryReconciled;
+        [ProtoMember(9)] private bool _DiscrepanciesWithSupply;
+        [ProtoMember(10)] private bool _DiscrepanciesWithFacilities;
+        [ProtoMember(11)] private bool _DiscrepanciesWithFinance;
+        [ProtoMember(12)] private bool _ICS211Completed;
+        [ProtoMember(13)] private string _TravelTimeToHomeUnit;
+        [ProtoMember(14)] private bool _Active;
+        [ProtoMember(15)] private int _OpPeriod;
+        [ProtoMember(16)] private DateTime _LastUpdatedUTC;
+
+
+
+        public DemobilizationRecord() { ID = Guid.NewGuid(); }
+
+
+        public Guid ID { get => _ID; set => _ID = value; }
+        public Guid SignInRecordID { get => _SignInRecordID; set => _SignInRecordID = value; }
+        public Guid ResourceID { get => _ResourceID; set => _ResourceID = value; }
+        public DateTime DemobDate { get => _DemobDate; set => _DemobDate = value; }
+        public string DemobLocation { get => _DemobLocation; set => _DemobLocation = value; }
+        public DateTime DebriefDate { get => _DebriefDate; set => _DebriefDate = value; }
+        public string DebriefLocation { get => _DebriefLocation; set => _DebriefLocation = value; }
+        public bool InventoryReconciled { get => _InventoryReconciled; set => _InventoryReconciled = value; }
+        public bool DiscrepanciesWithSupply { get => _DiscrepanciesWithSupply; set => _DiscrepanciesWithSupply = value; }
+        public bool DiscrepanciesWithFacilities { get => _DiscrepanciesWithFacilities; set => _DiscrepanciesWithFacilities = value; }
+        public bool DiscrepanciesWithFinance { get => _DiscrepanciesWithFinance; set => _DiscrepanciesWithFinance = value; }
+        public bool ICS211Completed { get => _ICS211Completed; set => _ICS211Completed = value; }
+        public string TravelTimeToHomeUnit { get => _TravelTimeToHomeUnit; set => _TravelTimeToHomeUnit = value; }
+        public bool Active { get => _Active; set => _Active = value; }
+        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
+        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+
+
+        public DemobilizationRecord Clone()
+        {
+            DemobilizationRecord cloneTo = this.MemberwiseClone() as DemobilizationRecord;
+            return cloneTo;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
+    }
+
 }

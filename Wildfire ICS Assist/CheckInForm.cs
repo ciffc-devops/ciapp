@@ -35,6 +35,7 @@ namespace Wildfire_ICS_Assist
             InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
             GeneralTools.SetDateFormat(this);
             personnelEditControl1.SetPersonnel(new Personnel());
+           
 
         }
 
@@ -79,6 +80,7 @@ namespace Wildfire_ICS_Assist
                 if (Program.CurrentIncident.allVehicles.Any(o => o.ID == rec.ResourceID && o.Active))
                 {
                     selectedResource = Program.CurrentIncident.allVehicles.First(o => o.ID == rec.ResourceID && o.Active);
+                    LoadVehicleOperators();
                     vehicleEquipmentEditControl1.SetVehicle(selectedResource as Vehicle);
 
                     wizardPages1.SelectedIndex = 4;
@@ -108,14 +110,32 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void LoadVehicleOperators()
+        {
+            List<IncidentResource> potentialOperators = (Program.CurrentIncident.GetUncommittedResources(Program.CurrentOpPeriod)).Where(o => o.GetType().Name.Equals("Personnel")).ToList();
+            //in case we're editing, add the current operator
+            if (selectedResource.GetType().Name.Equals("Vehicle"))
+            {
+                Vehicle v = selectedResource as Vehicle;
+                if (v.OperatorID != Guid.Empty)
+                {
+                    potentialOperators.AddRange(Program.CurrentIncident.IncidentPersonnel.Where(o => o.ID == v.OperatorID));
+                }
+            }
+
+            cboSavedOperator.DataSource = potentialOperators;
+            List<IncidentResource> operatorsForNewEquipment = new List<IncidentResource>(); operatorsForNewEquipment.AddRange(potentialOperators);
+            vehicleEquipmentEditControl1.SetOperatorList(operatorsForNewEquipment);
+            vehicleEquipmentEditControl1.EnableOperatorField = true;
+        }
+
         private void PersonnelSignInForm_Load(object sender, EventArgs e)
         {
             checkInRecord.OpPeriod = Program.CurrentOpPeriod;
             LoadData();
            
             foreach(TabPage p in wizardPages1.TabPages) { p.BackColor = Program.FormBackground; }
-            BuildSavedVehicleList();
-
+          
         }
 
         private void BuildSavedVehicleList()
@@ -151,8 +171,9 @@ namespace Wildfire_ICS_Assist
             members = members.Where(o => !statuses.Any(s => s.MemberID == o.PersonID)).ToList();
 
             cboSavedPersonnel.DataSource = members;
-
-
+            if(cboSavedOperator.Items.Count == 0) { LoadVehicleOperators(); }
+            BuildSavedVehicleList();
+            
         }
 
         private void btnSelectSaved_Click(object sender, EventArgs e)
@@ -312,12 +333,16 @@ namespace Wildfire_ICS_Assist
 
         private void btnSelectSavedVehicle_Click(object sender, EventArgs e)
         {
-            if(cboSavedVehicles.SelectedItem != null && ((Vehicle)cboSavedVehicles.SelectedItem).ID != Guid.Empty)
+            if(cboSavedVehicles.SelectedItem != null && ((Vehicle)cboSavedVehicles.SelectedItem).ID != Guid.Empty && cboSavedOperator.SelectedItem != null)
             {
                 _selectedResource = ((Vehicle)cboSavedVehicles.SelectedItem).Clone();
                 checkInRecord.ResourceType = "Vehicle/Equipment";
+                (selectedResource as Vehicle).OperatorID = (cboSavedOperator.SelectedItem as IncidentResource).ID;
+                (selectedResource as Vehicle).OperatorName = (cboSavedOperator.SelectedItem as IncidentResource).ResourceName;
+                selectedResource.LeaderName = (cboSavedOperator.SelectedItem as IncidentResource).ResourceName;
+
                 MoveToCheckInDetailsPage();
-            }
+            } else if (cboSavedOperator.SelectedItem == null) { lblSavedOperator.ForeColor = Program.ErrorColor; }
         }
 
         private void btnSelectNewVehicle_Click(object sender, EventArgs e)
@@ -361,6 +386,11 @@ namespace Wildfire_ICS_Assist
         private void resourceCheckInEditControl1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void cboSavedOperator_Leave(object sender, EventArgs e)
+        {
+            if (cboSavedOperator.SelectedItem == null) { cboSavedOperator.Text = string.Empty; }
         }
     }
 }

@@ -35,21 +35,29 @@ namespace Wildfire_ICS_Assist.CustomControls
             
         }
 
+        private void CalculateDateDiffs()
+        {
+            TimeSpan ts1 = datCheckInTime.Value - datLastDayOfRest.Value;
+            lblDaysSinceLastDayOfRest.Text = Math.Round(ts1.TotalDays, 0).ToString() + " days";
+
+            TimeSpan ts2 = datLDW.Value - datCheckInTime.Value;
+            TimeSpan ts3 = datLDW.Value - datLastDayOfRest.Value;
+            lblLastDayCount.Text = Math.Round(ts3.TotalDays, 0).ToString() + " days since rest / " + Math.Round(ts2.TotalDays, 0).ToString() + " since check in";
+        }
        
         private void datCheckInTime_ValueChanged(object sender, EventArgs e)
         {
             datLDW.MinDate = datCheckInTime.Value;
-            TimeSpan ts = datLDW.Value - datCheckInTime.Value;
-            lblLastDayCount.Text = Math.Round(ts.TotalDays, 0).ToString() + " days";
+            CalculateDateDiffs();
         }
 
         private void datLDW_ValueChanged(object sender, EventArgs e)
         {
+
             if (datCheckInTime.Value > datLDW.Value) { lblLastDayWorking.ForeColor = Color.Red; }
             else { lblLastDayWorking.ForeColor = lblLastDayCount.ForeColor; }
 
-            TimeSpan ts = datLDW.Value - datCheckInTime.Value;
-            lblLastDayCount.Text = Math.Round(ts.TotalDays, 0).ToString() + " days";
+            CalculateDateDiffs();
         }
 
         public bool ValidateCheckInInfo()
@@ -72,15 +80,24 @@ namespace Wildfire_ICS_Assist.CustomControls
             }
             checkInRecord.CheckInDate = datCheckInTime.Value;
             checkInRecord.LastDayOnIncident = datLDW.Value;
+            checkInRecord.LastDayOfRest = datLastDayOfRest.Value;
         }
 
         public void LoadPage()
         {
-            if(_checkInRecord.CheckInDate == DateTime.MinValue) { _checkInRecord.CheckInDate = DateTime.Now; _checkInRecord.LastDayOnIncident = _checkInRecord.CheckInDate.AddDays(14); }
+            if (_checkInRecord.CheckInDate == DateTime.MinValue)
+            {
+                DateTime today = DateTime.Now;
+                _checkInRecord.LastDayOfRest = today;
+                _checkInRecord.CheckInDate = today; 
+                _checkInRecord.LastDayOnIncident = today.AddDays(14);
+            }
 
-            datCheckInTime.Value = _checkInRecord.CheckInDate;
-            datLDW.Value = _checkInRecord.LastDayOnIncident;
+                if (datLastDayOfRest.MinDate <= checkInRecord.LastDayOfRest) { datLastDayOfRest.Value = _checkInRecord.LastDayOfRest; } else { datLastDayOfRest.Value = datLastDayOfRest.MinDate; }
 
+            if (datCheckInTime.MinDate <= _checkInRecord.CheckInDate) { datCheckInTime.Value = _checkInRecord.CheckInDate; } else { datCheckInTime.Value = datCheckInTime.MinDate; }
+            if (datLDW.MinDate <= checkInRecord.LastDayOnIncident) { datLDW.Value = _checkInRecord.LastDayOnIncident; } else { datLDW.Value = datLDW.MinDate; }
+            
             txtSelectedName.Text = _selectedResource.ResourceName;
             txtResourceType.Text = checkInRecord.ResourceType;
 
@@ -122,6 +139,12 @@ namespace Wildfire_ICS_Assist.CustomControls
             }
 
             return lastY;
+        }
+
+        private void datLastDayOfRest_ValueChanged(object sender, EventArgs e)
+        {
+            datCheckInTime.MinDate = datLastDayOfRest.Value;
+            CalculateDateDiffs();
         }
     }
 }

@@ -48,7 +48,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private string _EmergencyContact;
         [ProtoMember(14)] private string _Agency;
         [ProtoMember(15)] private bool _IsContractor;
-        [ProtoMember(16)] private string _Callsign;
+        [ProtoMember(16)] private string _CallSign;
 
 
 
@@ -80,7 +80,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string EmergencyContact { get => _EmergencyContact; set => _EmergencyContact = value; }
         public string Agency { get => _Agency; set => _Agency = value; }
         public bool IsContractor { get => _IsContractor; set => _IsContractor = value; }
-        public string Callsign { get => _Callsign; set => _Callsign = value; }
+        public string CallSign { get => _CallSign; set => _CallSign = value; }
 
         private void SetName()
         {
@@ -236,7 +236,7 @@ namespace WF_ICS_ClassLibrary.Models
                         member.MemberActive = true;
                         member.Email = fields[emailField];
                        
-                        if (callsignColumn >= 0) { member.Callsign = fields[callsignColumn]; }
+                        if (callsignColumn >= 0) { member.CallSign = fields[callsignColumn]; }
                         members.Add(member);
                     }
                     /*
@@ -387,7 +387,7 @@ namespace WF_ICS_ClassLibrary.Models
             MemberName = member.Name;
             MemberID = member.PersonID;
             _OrganizationName = member.Agency;
-            Callsign = member.Callsign;
+            Callsign = member.CallSign;
 
         }
         public MemberStatus Clone()
@@ -513,7 +513,7 @@ namespace WF_ICS_ClassLibrary.Models
 
                 csv.Append("\""); csv.Append(item.Agency.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.CellphoneNumber.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.Callsign.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.CallSign.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Email.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.HomeUnit.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.HasDietaryRestrictions.ToString()); csv.Append("\""); csv.Append(delimiter);

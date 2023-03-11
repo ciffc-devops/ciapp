@@ -125,32 +125,6 @@ namespace Wildfire_ICS_Assist.CustomControls
             */
         }
 
-        private void OpenResourceForEdit(OperationalSubGroup sub)
-        {
-            if (sub != null)
-            {
-                using (OperationalGroupEditResourceForm form = new OperationalGroupEditResourceForm())
-                {
-                    form.subGroup = sub;
-
-                    DialogResult dr = form.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        OperationalSubGroup grp = form.subGroup;
-                        Program.wfIncidentService.UpsertOperationalSubGroup(grp);
-                    }
-                }
-            }
-        }
-
-        private void btnEditResource_Click(object sender, EventArgs e)
-        {
-            if (dgvSubGroups.SelectedRows.Count == 1)
-            {
-                OperationalSubGroup sub = dgvSubGroups.SelectedRows[0].DataBoundItem as OperationalSubGroup;
-                OpenResourceForEdit(sub);
-            }
-        }
 
         private void btnDeleteResource_Click(object sender, EventArgs e)
         {

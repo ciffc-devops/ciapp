@@ -77,6 +77,11 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.numYellowResourceTimeoutDays = new System.Windows.Forms.NumericUpDown();
+            this.numRedResourceTimeoutDays = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             this.tbFileManagement.SuspendLayout();
@@ -86,6 +91,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numYellowResourceTimeoutDays)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRedResourceTimeoutDays)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -105,6 +112,11 @@
             // tbGeneral
             // 
             this.tbGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.tbGeneral.Controls.Add(this.numRedResourceTimeoutDays);
+            this.tbGeneral.Controls.Add(this.numYellowResourceTimeoutDays);
+            this.tbGeneral.Controls.Add(this.label10);
+            this.tbGeneral.Controls.Add(this.label9);
+            this.tbGeneral.Controls.Add(this.label8);
             this.tbGeneral.Controls.Add(this.label7);
             this.tbGeneral.Controls.Add(this.cboDateFormat);
             this.tbGeneral.Controls.Add(this.label1);
@@ -281,9 +293,9 @@
             this.tbFileManagement.Controls.Add(this.label4);
             this.tbFileManagement.Controls.Add(this.label2);
             this.tbFileManagement.Controls.Add(this.chkAutoSave);
-            this.tbFileManagement.Location = new System.Drawing.Point(4, 33);
+            this.tbFileManagement.Location = new System.Drawing.Point(4, 22);
             this.tbFileManagement.Name = "tbFileManagement";
-            this.tbFileManagement.Size = new System.Drawing.Size(738, 404);
+            this.tbFileManagement.Size = new System.Drawing.Size(738, 415);
             this.tbFileManagement.TabIndex = 3;
             this.tbFileManagement.Text = "File Management";
             this.tbFileManagement.UseVisualStyleBackColor = true;
@@ -682,6 +694,50 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(19, 226);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(528, 32);
+            this.label8.TabIndex = 122;
+            this.label8.Text = "Highlight resources near their end of incident date";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(19, 261);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(242, 32);
+            this.label9.TabIndex = 123;
+            this.label9.Text = "Yellow";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(19, 296);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(242, 32);
+            this.label10.TabIndex = 124;
+            this.label10.Text = "Red";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numYellowResourceTimeoutDays
+            // 
+            this.numYellowResourceTimeoutDays.Location = new System.Drawing.Point(267, 261);
+            this.numYellowResourceTimeoutDays.Name = "numYellowResourceTimeoutDays";
+            this.numYellowResourceTimeoutDays.Size = new System.Drawing.Size(120, 29);
+            this.numYellowResourceTimeoutDays.TabIndex = 125;
+            // 
+            // numRedResourceTimeoutDays
+            // 
+            this.numRedResourceTimeoutDays.Location = new System.Drawing.Point(267, 296);
+            this.numRedResourceTimeoutDays.Name = "numRedResourceTimeoutDays";
+            this.numRedResourceTimeoutDays.Size = new System.Drawing.Size(120, 29);
+            this.numRedResourceTimeoutDays.TabIndex = 126;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -706,6 +762,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numYellowResourceTimeoutDays)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRedResourceTimeoutDays)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -760,5 +818,10 @@
         private System.Windows.Forms.ComboBox cboDefaultProvince;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cboDateFormat;
+        private System.Windows.Forms.NumericUpDown numRedResourceTimeoutDays;
+        private System.Windows.Forms.NumericUpDown numYellowResourceTimeoutDays;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }

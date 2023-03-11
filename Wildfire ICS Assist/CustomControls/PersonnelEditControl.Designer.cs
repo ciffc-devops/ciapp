@@ -49,6 +49,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.txtNOKName = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.txtWeight = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label13 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -68,9 +69,10 @@
             this.label15 = new System.Windows.Forms.Label();
             this.chkAllergies = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtKind = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.txtType = new System.Windows.Forms.TextBox();
+            this.cboKind = new System.Windows.Forms.ComboBox();
+            this.cboType = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             this.SuspendLayout();
             // 
@@ -279,6 +281,18 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
+            // txtWeight
+            // 
+            this.txtWeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtWeight.Location = new System.Drawing.Point(214, 667);
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.Size = new System.Drawing.Size(233, 29);
+            this.txtWeight.TabIndex = 130;
+            this.toolTip1.SetToolTip(this.txtWeight, "Ideally, your EMBC ID#");
+            this.txtWeight.TextChanged += new System.EventHandler(this.txtWeight_TextChanged);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -302,7 +316,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(187, 29);
             this.label4.TabIndex = 109;
-            this.label4.Text = "Callsign";
+            this.label4.Text = "Call sign";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCallsign
@@ -676,19 +690,8 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(187, 29);
             this.label16.TabIndex = 127;
-            this.label16.Text = "Kind";
+            this.label16.Text = "Resource Kind";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtKind
-            // 
-            this.txtKind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtKind.Location = new System.Drawing.Point(214, 173);
-            this.txtKind.Margin = new System.Windows.Forms.Padding(6);
-            this.txtKind.Name = "txtKind";
-            this.txtKind.Size = new System.Drawing.Size(233, 29);
-            this.txtKind.TabIndex = 4;
-            this.txtKind.TextChanged += new System.EventHandler(this.txtKind_TextChanged);
             // 
             // label17
             // 
@@ -697,29 +700,62 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(187, 29);
             this.label17.TabIndex = 129;
-            this.label17.Text = "Type";
+            this.label17.Text = "Resource Type";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtType
+            // cboKind
             // 
-            this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cboKind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtType.Location = new System.Drawing.Point(214, 214);
-            this.txtType.Margin = new System.Windows.Forms.Padding(6);
-            this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(233, 29);
-            this.txtType.TabIndex = 5;
-            this.txtType.TextChanged += new System.EventHandler(this.txtType_TextChanged);
+            this.cboKind.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboKind.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboKind.FormattingEnabled = true;
+            this.cboKind.Items.AddRange(new object[] {
+            "Overhead / IMT",
+            "Crew",
+            "Single Resource",
+            "Aircraft Personnel",
+            "Contractor"});
+            this.cboKind.Location = new System.Drawing.Point(214, 170);
+            this.cboKind.Name = "cboKind";
+            this.cboKind.Size = new System.Drawing.Size(233, 32);
+            this.cboKind.TabIndex = 4;
+            this.cboKind.Leave += new System.EventHandler(this.cboKind_Leave);
+            // 
+            // cboType
+            // 
+            this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboType.FormattingEnabled = true;
+            this.cboType.Items.AddRange(new object[] {
+            "Type 1",
+            "Type 2",
+            "Type 3"});
+            this.cboType.Location = new System.Drawing.Point(214, 213);
+            this.cboType.Name = "cboType";
+            this.cboType.Size = new System.Drawing.Size(233, 32);
+            this.cboType.TabIndex = 5;
+            this.cboType.Leave += new System.EventHandler(this.cboType_Leave);
+            // 
+            // label18
+            // 
+            this.label18.Location = new System.Drawing.Point(18, 666);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(187, 29);
+            this.label18.TabIndex = 131;
+            this.label18.Text = "Weight";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PersonnelEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.txtWeight);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.cboType);
+            this.Controls.Add(this.cboKind);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.txtType);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.txtKind);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.chkAllergies);
@@ -757,7 +793,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "PersonnelEditControl";
-            this.Size = new System.Drawing.Size(485, 666);
+            this.Size = new System.Drawing.Size(485, 702);
             this.Load += new System.EventHandler(this.PersonnelEditControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).EndInit();
             this.ResumeLayout(false);
@@ -805,8 +841,10 @@
         private System.Windows.Forms.CheckBox chkAllergies;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtKind;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtType;
+        private System.Windows.Forms.ComboBox cboKind;
+        private System.Windows.Forms.ComboBox cboType;
+        private System.Windows.Forms.TextBox txtWeight;
+        private System.Windows.Forms.Label label18;
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label11 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblIdentifierLabel = new System.Windows.Forms.Label();
             this.txtTransport = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -40,44 +40,46 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnDeleteResource = new System.Windows.Forms.Button();
             this.dgvGroup = new System.Windows.Forms.DataGridView();
-            this.btnAddPerson = new System.Windows.Forms.Button();
-            this.btnAddVehicle = new System.Windows.Forms.Button();
-            this.btnEditSelected = new System.Windows.Forms.Button();
-            this.btnRemoveFromCrew = new System.Windows.Forms.Button();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLeader = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.btnAddPerson = new System.Windows.Forms.Button();
+            this.btnAddVehicle = new System.Windows.Forms.Button();
+            this.btnEditSelected = new System.Windows.Forms.Button();
+            this.btnRemoveFromCrew = new System.Windows.Forms.Button();
+            this.cboCrewType = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroup)).BeginInit();
             this.SuspendLayout();
             // 
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(5, 135);
+            this.label11.Location = new System.Drawing.Point(5, 176);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(193, 23);
             this.label11.TabIndex = 115;
             this.label11.Text = "(within incident)";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label3
+            // lblIdentifierLabel
             // 
-            this.label3.Location = new System.Drawing.Point(21, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(177, 29);
-            this.label3.TabIndex = 111;
-            this.label3.Text = "Crew Identifier*:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblIdentifierLabel.Location = new System.Drawing.Point(21, 7);
+            this.lblIdentifierLabel.Name = "lblIdentifierLabel";
+            this.lblIdentifierLabel.Size = new System.Drawing.Size(177, 29);
+            this.lblIdentifierLabel.TabIndex = 111;
+            this.lblIdentifierLabel.Text = "Crew Identifier*:";
+            this.lblIdentifierLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtTransport
             // 
             this.txtTransport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTransport.Location = new System.Drawing.Point(204, 111);
+            this.txtTransport.Location = new System.Drawing.Point(204, 152);
             this.txtTransport.Name = "txtTransport";
             this.txtTransport.Size = new System.Drawing.Size(538, 29);
-            this.txtTransport.TabIndex = 4;
+            this.txtTransport.TabIndex = 5;
             this.txtTransport.TextChanged += new System.EventHandler(this.txtTransport_TextChanged);
             // 
             // txtName
@@ -92,7 +94,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(5, 111);
+            this.label5.Location = new System.Drawing.Point(5, 152);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(193, 29);
             this.label5.TabIndex = 113;
@@ -101,7 +103,7 @@
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(8, 77);
+            this.label6.Location = new System.Drawing.Point(8, 115);
             this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(187, 29);
@@ -113,15 +115,15 @@
             // 
             this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmail.Location = new System.Drawing.Point(204, 76);
+            this.txtEmail.Location = new System.Drawing.Point(204, 114);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(538, 29);
-            this.txtEmail.TabIndex = 3;
+            this.txtEmail.TabIndex = 4;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(8, 38);
+            this.label1.Location = new System.Drawing.Point(8, 76);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 29);
@@ -133,17 +135,17 @@
             // 
             this.txtPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPhone.Location = new System.Drawing.Point(204, 38);
+            this.txtPhone.Location = new System.Drawing.Point(204, 76);
             this.txtPhone.Mask = "(999) 000-0000";
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(538, 29);
-            this.txtPhone.TabIndex = 2;
+            this.txtPhone.TabIndex = 3;
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 558);
+            this.label2.Location = new System.Drawing.Point(12, 588);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(157, 47);
             this.label2.TabIndex = 122;
@@ -155,10 +157,10 @@
             this.btnDeleteResource.Enabled = false;
             this.btnDeleteResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDeleteResource.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnDeleteResource.Location = new System.Drawing.Point(12, 488);
+            this.btnDeleteResource.Location = new System.Drawing.Point(12, 518);
             this.btnDeleteResource.Name = "btnDeleteResource";
             this.btnDeleteResource.Size = new System.Drawing.Size(157, 67);
-            this.btnDeleteResource.TabIndex = 7;
+            this.btnDeleteResource.TabIndex = 10;
             this.btnDeleteResource.Text = "Delete";
             this.btnDeleteResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDeleteResource.UseVisualStyleBackColor = true;
@@ -179,68 +181,14 @@
             this.colKind,
             this.colType,
             this.colLeader});
-            this.dgvGroup.Location = new System.Drawing.Point(175, 172);
+            this.dgvGroup.Location = new System.Drawing.Point(175, 202);
             this.dgvGroup.Name = "dgvGroup";
             this.dgvGroup.RowHeadersVisible = false;
             this.dgvGroup.RowTemplate.Height = 30;
             this.dgvGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGroup.Size = new System.Drawing.Size(567, 475);
+            this.dgvGroup.Size = new System.Drawing.Size(567, 555);
             this.dgvGroup.TabIndex = 8;
             this.dgvGroup.SelectionChanged += new System.EventHandler(this.dgvGroup_SelectionChanged);
-            // 
-            // btnAddPerson
-            // 
-            this.btnAddPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
-            this.btnAddPerson.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAddPerson.Location = new System.Drawing.Point(12, 172);
-            this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(157, 67);
-            this.btnAddPerson.TabIndex = 5;
-            this.btnAddPerson.Text = "Add Person";
-            this.btnAddPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAddPerson.UseVisualStyleBackColor = true;
-            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
-            // 
-            // btnAddVehicle
-            // 
-            this.btnAddVehicle.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
-            this.btnAddVehicle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAddVehicle.Location = new System.Drawing.Point(12, 245);
-            this.btnAddVehicle.Name = "btnAddVehicle";
-            this.btnAddVehicle.Size = new System.Drawing.Size(157, 67);
-            this.btnAddVehicle.TabIndex = 6;
-            this.btnAddVehicle.Text = "Add Veh/Equip";
-            this.btnAddVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAddVehicle.UseVisualStyleBackColor = true;
-            this.btnAddVehicle.Click += new System.EventHandler(this.btnAddVehicle_Click);
-            // 
-            // btnEditSelected
-            // 
-            this.btnEditSelected.Enabled = false;
-            this.btnEditSelected.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditSelected.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEditSelected.Location = new System.Drawing.Point(12, 318);
-            this.btnEditSelected.Name = "btnEditSelected";
-            this.btnEditSelected.Size = new System.Drawing.Size(157, 67);
-            this.btnEditSelected.TabIndex = 123;
-            this.btnEditSelected.Text = "Edit Selected";
-            this.btnEditSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEditSelected.UseVisualStyleBackColor = true;
-            this.btnEditSelected.Click += new System.EventHandler(this.btnEditSelected_Click);
-            // 
-            // btnRemoveFromCrew
-            // 
-            this.btnRemoveFromCrew.Enabled = false;
-            this.btnRemoveFromCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_372_minus;
-            this.btnRemoveFromCrew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRemoveFromCrew.Location = new System.Drawing.Point(12, 391);
-            this.btnRemoveFromCrew.Name = "btnRemoveFromCrew";
-            this.btnRemoveFromCrew.Size = new System.Drawing.Size(157, 91);
-            this.btnRemoveFromCrew.TabIndex = 124;
-            this.btnRemoveFromCrew.Text = "Remove from Crew";
-            this.btnRemoveFromCrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRemoveFromCrew.UseVisualStyleBackColor = true;
-            this.btnRemoveFromCrew.Click += new System.EventHandler(this.btnRemoveFromCrew_Click);
             // 
             // colName
             // 
@@ -271,19 +219,99 @@
             this.colLeader.DataPropertyName = "Role";
             this.colLeader.HeaderText = "Role";
             this.colLeader.Items.AddRange(new object[] {
-            "Leader",
-            "Crew Boss",
-            "Crew",
-            "Operator"});
+            "Crew Leader",
+            "Squad Boss",
+            "Crew Member"});
             this.colLeader.Name = "colLeader";
             this.colLeader.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colLeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colLeader.Width = 74;
             // 
+            // btnAddPerson
+            // 
+            this.btnAddPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
+            this.btnAddPerson.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAddPerson.Location = new System.Drawing.Point(12, 202);
+            this.btnAddPerson.Name = "btnAddPerson";
+            this.btnAddPerson.Size = new System.Drawing.Size(157, 67);
+            this.btnAddPerson.TabIndex = 6;
+            this.btnAddPerson.Text = "Add Person";
+            this.btnAddPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAddPerson.UseVisualStyleBackColor = true;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
+            // 
+            // btnAddVehicle
+            // 
+            this.btnAddVehicle.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
+            this.btnAddVehicle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAddVehicle.Location = new System.Drawing.Point(12, 275);
+            this.btnAddVehicle.Name = "btnAddVehicle";
+            this.btnAddVehicle.Size = new System.Drawing.Size(157, 67);
+            this.btnAddVehicle.TabIndex = 7;
+            this.btnAddVehicle.Text = "Add Veh/Equip";
+            this.btnAddVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAddVehicle.UseVisualStyleBackColor = true;
+            this.btnAddVehicle.Click += new System.EventHandler(this.btnAddVehicle_Click);
+            // 
+            // btnEditSelected
+            // 
+            this.btnEditSelected.Enabled = false;
+            this.btnEditSelected.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEditSelected.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnEditSelected.Location = new System.Drawing.Point(12, 348);
+            this.btnEditSelected.Name = "btnEditSelected";
+            this.btnEditSelected.Size = new System.Drawing.Size(157, 67);
+            this.btnEditSelected.TabIndex = 8;
+            this.btnEditSelected.Text = "Edit Selected";
+            this.btnEditSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEditSelected.UseVisualStyleBackColor = true;
+            this.btnEditSelected.Click += new System.EventHandler(this.btnEditSelected_Click);
+            // 
+            // btnRemoveFromCrew
+            // 
+            this.btnRemoveFromCrew.Enabled = false;
+            this.btnRemoveFromCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_372_minus;
+            this.btnRemoveFromCrew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRemoveFromCrew.Location = new System.Drawing.Point(12, 421);
+            this.btnRemoveFromCrew.Name = "btnRemoveFromCrew";
+            this.btnRemoveFromCrew.Size = new System.Drawing.Size(157, 91);
+            this.btnRemoveFromCrew.TabIndex = 9;
+            this.btnRemoveFromCrew.Text = "Remove from Crew";
+            this.btnRemoveFromCrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRemoveFromCrew.UseVisualStyleBackColor = true;
+            this.btnRemoveFromCrew.Click += new System.EventHandler(this.btnRemoveFromCrew_Click);
+            // 
+            // cboCrewType
+            // 
+            this.cboCrewType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboCrewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCrewType.FormattingEnabled = true;
+            this.cboCrewType.Items.AddRange(new object[] {
+            "Type 1",
+            "Type 2",
+            "Type 3"});
+            this.cboCrewType.Location = new System.Drawing.Point(204, 38);
+            this.cboCrewType.Name = "cboCrewType";
+            this.cboCrewType.Size = new System.Drawing.Size(538, 32);
+            this.cboCrewType.TabIndex = 2;
+            this.cboCrewType.SelectedIndexChanged += new System.EventHandler(this.cboCrewType_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(21, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(177, 29);
+            this.label3.TabIndex = 126;
+            this.label3.Text = "Crew Type:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CrewEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cboCrewType);
             this.Controls.Add(this.btnRemoveFromCrew);
             this.Controls.Add(this.btnEditSelected);
             this.Controls.Add(this.btnAddVehicle);
@@ -296,14 +324,14 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblIdentifierLabel);
             this.Controls.Add(this.txtTransport);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label5);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CrewEditControl";
-            this.Size = new System.Drawing.Size(745, 650);
+            this.Size = new System.Drawing.Size(745, 760);
             this.Load += new System.EventHandler(this.CrewEditControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroup)).EndInit();
             this.ResumeLayout(false);
@@ -314,7 +342,7 @@
         #endregion
 
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblIdentifierLabel;
         private System.Windows.Forms.TextBox txtTransport;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label5;
@@ -333,5 +361,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colKind;
         private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewComboBoxColumn colLeader;
+        private System.Windows.Forms.ComboBox cboCrewType;
+        private System.Windows.Forms.Label label3;
     }
 }

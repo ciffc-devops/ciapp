@@ -43,7 +43,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 lblCellphone.Text = teamMember.CellphoneNumber;
                 lblEmail.Text = teamMember.Email;
                 lblHomeUnit.Text = teamMember.HomeUnit;
-                lblCallsign.Text = teamMember.Callsign;
+                lblCallsign.Text = teamMember.CallSign;
                 lblEmergencyContact.Text = teamMember.EmergencyContact;
             }
         }

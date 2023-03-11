@@ -1656,6 +1656,7 @@ namespace WildfireICSDesktopServices
             CurrentIncident.AllOperationalSubGroups.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "UPSERT", true, false); }
             CurrentIncident.SetOpGroupDepths(record.OpPeriod);
+            CurrentIncident.UpdateThisGroupCount(record);
             OnOperationalSubGroupChanged(new OperationalSubGroupEventArgs(record));
 
         }
@@ -1680,6 +1681,7 @@ namespace WildfireICSDesktopServices
                 CurrentIncident.AllOperationalGroups = CurrentIncident.AllOperationalGroups.Where(o => o.ID != record.ID).ToList();
             }
             record.GetOpGroupDepth(CurrentIncident);
+            CurrentIncident.UpdateThisGroupCount(record);
             CurrentIncident.AllOperationalGroups.Add(record);
             if (CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == record.OpPeriod))
             {

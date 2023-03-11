@@ -66,6 +66,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
             rbNumbersOnly.Checked = !options.AllowStringTaskNumber; rbNumbersOrLetters.Checked = !rbNumbersOnly.Checked;
             if(options.DefaultProvince != null && options.DefaultProvince.ProvinceGUID != Guid.Empty) { cboDefaultProvince.SelectedValue = options.DefaultProvince.ProvinceGUID; }
             if (!string.IsNullOrEmpty(options.DateFormat)) { cboDateFormat.SelectedValue = options.DateFormat; }
+            numRedResourceTimeoutDays.Value = options.RedResourceTimeoutDays;
+            numYellowResourceTimeoutDays.Value = options.YellowResourceTimeoutDays;
+
 
             //File Management
             chkAutoSave.Checked = options.AutoSave;
@@ -140,7 +143,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     options.DefaultProvince = p;
                     options.DateFormat = cboDateFormat.SelectedValue.ToString();
                     Globals.DateFormat = options.DateFormat;
-                    
+                    options.YellowResourceTimeoutDays = Convert.ToInt32( numYellowResourceTimeoutDays.Value);
+                    options.RedResourceTimeoutDays = Convert.ToInt32(numRedResourceTimeoutDays.Value);
 
 
                     //File Management

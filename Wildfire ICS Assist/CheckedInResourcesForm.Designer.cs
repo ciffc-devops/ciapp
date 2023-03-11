@@ -29,21 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvResources = new System.Windows.Forms.DataGridView();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnLogisticsSignIn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cpPNumbers = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cpFilters = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.cboTimeOutFilter = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.cboResourceVariety = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnExportSignInToCSV = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnLogisticsSignIn = new System.Windows.Forms.Button();
             this.colVariety = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNumberOfPeople = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNumberOfEquipment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,6 +103,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.cpPNumbers);
             this.splitContainer2.Panel2.Controls.Add(this.cpFilters);
             this.splitContainer2.Size = new System.Drawing.Size(1245, 580);
             this.splitContainer2.SplitterDistance = 940;
@@ -115,6 +121,8 @@
             this.dgvResources.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colVariety,
             this.colName,
+            this.colKind,
+            this.colType,
             this.colLeader,
             this.colNumberOfPeople,
             this.colNumberOfEquipment,
@@ -130,47 +138,25 @@
             this.dgvResources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResources.Size = new System.Drawing.Size(940, 580);
             this.dgvResources.TabIndex = 1;
+            this.dgvResources.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvResources_CellFormatting);
             // 
-            // btnEdit
+            // cpPNumbers
             // 
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnEdit.Location = new System.Drawing.Point(152, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(149, 66);
-            this.btnEdit.TabIndex = 47;
-            this.btnEdit.Text = "Edit Selected";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnLogisticsSignIn
-            // 
-            this.btnLogisticsSignIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogisticsSignIn.Image = ((System.Drawing.Image)(resources.GetObject("btnLogisticsSignIn.Image")));
-            this.btnLogisticsSignIn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogisticsSignIn.Location = new System.Drawing.Point(3, 3);
-            this.btnLogisticsSignIn.Name = "btnLogisticsSignIn";
-            this.btnLogisticsSignIn.Size = new System.Drawing.Size(143, 66);
-            this.btnLogisticsSignIn.TabIndex = 46;
-            this.btnLogisticsSignIn.Text = "Check-In";
-            this.btnLogisticsSignIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLogisticsSignIn.UseVisualStyleBackColor = true;
-            this.btnLogisticsSignIn.Click += new System.EventHandler(this.btnLogisticsSignIn_Click);
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_432_log_out;
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(307, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 66);
-            this.button1.TabIndex = 48;
-            this.button1.Text = "Demob Selected";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
+            this.cpPNumbers.BackColor = System.Drawing.Color.White;
+            this.cpPNumbers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpPNumbers.CollapsedHeight = 40;
+            this.cpPNumbers.CollapsedWidth = 290;
+            this.cpPNumbers.CollapseLeft = true;
+            this.cpPNumbers.CurrentlyCollapsed = false;
+            this.cpPNumbers.ExpandedHeight = 300;
+            this.cpPNumbers.ExpandedWidth = 290;
+            this.cpPNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpPNumbers.Location = new System.Drawing.Point(6, 67);
+            this.cpPNumbers.Margin = new System.Windows.Forms.Padding(6);
+            this.cpPNumbers.Name = "cpPNumbers";
+            this.cpPNumbers.Size = new System.Drawing.Size(290, 300);
+            this.cpPNumbers.TabIndex = 2;
+            this.cpPNumbers.TitleText = "P-Number Controls";
             // 
             // cpFilters
             // 
@@ -179,6 +165,8 @@
             this.cpFilters.CollapsedHeight = 40;
             this.cpFilters.CollapsedWidth = 290;
             this.cpFilters.CollapseLeft = true;
+            this.cpFilters.Controls.Add(this.cboTimeOutFilter);
+            this.cpFilters.Controls.Add(this.label2);
             this.cpFilters.Controls.Add(this.cboResourceVariety);
             this.cpFilters.Controls.Add(this.label1);
             this.cpFilters.CurrentlyCollapsed = true;
@@ -188,9 +176,30 @@
             this.cpFilters.Location = new System.Drawing.Point(6, 15);
             this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
             this.cpFilters.Name = "cpFilters";
-            this.cpFilters.Size = new System.Drawing.Size(289, 40);
+            this.cpFilters.Size = new System.Drawing.Size(290, 40);
             this.cpFilters.TabIndex = 0;
             this.cpFilters.TitleText = "Filter List";
+            // 
+            // cboTimeOutFilter
+            // 
+            this.cboTimeOutFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboTimeOutFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTimeOutFilter.FormattingEnabled = true;
+            this.cboTimeOutFilter.Location = new System.Drawing.Point(7, 145);
+            this.cboTimeOutFilter.Name = "cboTimeOutFilter";
+            this.cboTimeOutFilter.Size = new System.Drawing.Size(276, 32);
+            this.cboTimeOutFilter.TabIndex = 36;
+            this.cboTimeOutFilter.SelectedIndexChanged += new System.EventHandler(this.cboTimeOutFilter_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 118);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(204, 24);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "By Last Day on Incident";
             // 
             // cboResourceVariety
             // 
@@ -206,7 +215,7 @@
             "Crew"});
             this.cboResourceVariety.Location = new System.Drawing.Point(7, 71);
             this.cboResourceVariety.Name = "cboResourceVariety";
-            this.cboResourceVariety.Size = new System.Drawing.Size(275, 32);
+            this.cboResourceVariety.Size = new System.Drawing.Size(276, 32);
             this.cboResourceVariety.TabIndex = 34;
             this.cboResourceVariety.SelectedIndexChanged += new System.EventHandler(this.cboResourceVariety_SelectedIndexChanged);
             // 
@@ -247,6 +256,47 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_432_log_out;
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button1.Location = new System.Drawing.Point(307, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 66);
+            this.button1.TabIndex = 48;
+            this.button1.Text = "Demob Selected";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnEdit.Location = new System.Drawing.Point(152, 3);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(149, 66);
+            this.btnEdit.TabIndex = 47;
+            this.btnEdit.Text = "Edit Selected";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnLogisticsSignIn
+            // 
+            this.btnLogisticsSignIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogisticsSignIn.Image = ((System.Drawing.Image)(resources.GetObject("btnLogisticsSignIn.Image")));
+            this.btnLogisticsSignIn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnLogisticsSignIn.Location = new System.Drawing.Point(3, 3);
+            this.btnLogisticsSignIn.Name = "btnLogisticsSignIn";
+            this.btnLogisticsSignIn.Size = new System.Drawing.Size(143, 66);
+            this.btnLogisticsSignIn.TabIndex = 46;
+            this.btnLogisticsSignIn.Text = "Check-In";
+            this.btnLogisticsSignIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLogisticsSignIn.UseVisualStyleBackColor = true;
+            this.btnLogisticsSignIn.Click += new System.EventHandler(this.btnLogisticsSignIn_Click);
+            // 
             // colVariety
             // 
             this.colVariety.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -260,10 +310,28 @@
             // 
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colName.DataPropertyName = "ResourceName";
-            this.colName.HeaderText = "Resource ID";
+            this.colName.HeaderText = "Resource";
             this.colName.MinimumWidth = 200;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
+            // 
+            // colKind
+            // 
+            this.colKind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colKind.DataPropertyName = "Kind";
+            this.colKind.HeaderText = "Kind";
+            this.colKind.Name = "colKind";
+            this.colKind.ReadOnly = true;
+            this.colKind.Width = 73;
+            // 
+            // colType
+            // 
+            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colType.DataPropertyName = "Type";
+            this.colType.HeaderText = "Type";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Width = 78;
             // 
             // colLeader
             // 
@@ -295,9 +363,9 @@
             // 
             this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCheckIn.DataPropertyName = "CheckInDate";
-            dataGridViewCellStyle3.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle1;
             this.colCheckIn.HeaderText = "Check In";
             this.colCheckIn.Name = "colCheckIn";
             this.colCheckIn.ReadOnly = true;
@@ -307,9 +375,9 @@
             // 
             this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colLastDay.DataPropertyName = "LastDayOnIncident";
-            dataGridViewCellStyle4.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLastDay.HeaderText = "Last Day";
             this.colLastDay.Name = "colLastDay";
             this.colLastDay.ReadOnly = true;
@@ -363,15 +431,20 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cboResourceVariety;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnExportSignInToCSV;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.ComboBox cboTimeOutFilter;
+        private System.Windows.Forms.Label label2;
+        private CustomControls.CollapsiblePanel cpPNumbers;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVariety;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colKind;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfPeople;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfEquipment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLastDay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.Button btnExportSignInToCSV;
-        private System.Windows.Forms.Button btnPrint;
     }
 }

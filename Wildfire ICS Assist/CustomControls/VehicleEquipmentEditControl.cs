@@ -17,6 +17,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         public Vehicle CurrentVehicle { get => _currentVehicle;  }
         public void SetVehicle(Vehicle vehicle) { _currentVehicle = vehicle; loadVehicle(); }
 
+        public bool EnableOperatorField { get => cboOperator.Enabled; set => cboOperator.Enabled = value; }
+        public void SetOperatorList(List<IncidentResource> Operators)
+        {
+            cboOperator.DataSource = null;
+            cboOperator.DataSource = Operators;
+        }
+
         public VehicleEquipmentEditControl()
         {
             InitializeComponent();
@@ -33,14 +40,18 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtCategoryKindCapacity.Text = CurrentVehicle.CategoryKindCapacity;
                 txtFeatures.Text = CurrentVehicle.Features;
                 txtAgencyOrOwner.Text = CurrentVehicle.AgencyOrOwner;
-                txtOperatorName.Text = CurrentVehicle.OperatorName;
+               // txtOperatorName.Text = CurrentVehicle.OperatorName;
                 txtLicenseOrID.Text = CurrentVehicle.LicenseOrID;
                 txtIncidentAssignment.Text = CurrentVehicle.IncidentAssignment;
                 txtNotes.Text = CurrentVehicle.Notes;
                 txtKind.Text = CurrentVehicle.Kind;
                 txtType.Text = CurrentVehicle.Type;
 
-
+                if(CurrentVehicle.OperatorID != Guid.Empty)
+                {
+                    try { cboOperator.SelectedValue = CurrentVehicle.OperatorID; }
+                    catch { cboOperator.SelectedItem = null; }
+                } else { cboOperator.SelectedItem = null; }
             }
         }
 
@@ -111,11 +122,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         }
 
-        private void txtOperatorName_TextChanged(object sender, EventArgs e)
-        {
-            CurrentVehicle.OperatorName = txtOperatorName.Text;
-
-        }
+    
 
         private void txtLicenseOrID_TextChanged(object sender, EventArgs e)
         {
@@ -133,6 +140,22 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             CurrentVehicle.Notes = txtNotes.Text;
 
+        }
+
+        private void cboOperator_Leave(object sender, EventArgs e)
+        {
+            if(cboOperator.SelectedItem != null) {
+                IncidentResource res = cboOperator.SelectedItem as IncidentResource;
+                CurrentVehicle.OperatorID = res.ID;
+                CurrentVehicle.OperatorName = res.ResourceName;
+                CurrentVehicle.LeaderName = CurrentVehicle.OperatorName;
+            }
+            else
+            {
+                cboOperator.Text = "";
+                CurrentVehicle.OperatorID = Guid.Empty;
+                CurrentVehicle.OperatorName = string.Empty; CurrentVehicle.LeaderName = CurrentVehicle.OperatorName;
+            }
         }
     }
 }

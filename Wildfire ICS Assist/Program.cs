@@ -56,12 +56,15 @@ namespace Wildfire_ICS_Assist
                 Properties.Settings.Default.MachineID = _MachineID;
                 Properties.Settings.Default.Save();
             }
-
+            SetAvailablePandVNums();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new IncidentDetailsForm());
         }
+
+     
+
         /*
        
         private static PositionLogService _positionLogService = null;
@@ -80,7 +83,8 @@ namespace Wildfire_ICS_Assist
         private static Guid _MachineID;
         private static CultureInfo _cultureInfo;
         private static NetworkService _networkService = null;
-
+        private static List<int> _availablePNums = new List<int>();
+        public static List<int> _availableVNums = new List<int>();
         public static IGeneralOptionsService generalOptionsService { get => _generalOptionsService; private set => _generalOptionsService = value; }
 
         public static IPDFExportService pdfExportService { get => _pdfExportService; private set => _pdfExportService = value; }
@@ -129,6 +133,9 @@ namespace Wildfire_ICS_Assist
                 CultureInfo.DefaultThreadCurrentUICulture = _cultureInfo;
             }
         }
+        public static List<int> AvailablePNums { get => _availablePNums; set => _availablePNums = value; }
+        public static List<int> AvailableVNums { get => _availableVNums; set => _availableVNums = value; }
+
 
 
         //Colours used throughout the program
@@ -139,7 +146,14 @@ namespace Wildfire_ICS_Assist
         public static Color StandardControLColor { get => System.Drawing.SystemColors.Window; }
 
 
-
+        private static void SetAvailablePandVNums()
+        {
+            for (int x = 1; x < 80000; x++)
+            {
+                AvailablePNums.Add(x);
+                AvailableVNums.Add(x);
+            }
+        }
 
 
     }

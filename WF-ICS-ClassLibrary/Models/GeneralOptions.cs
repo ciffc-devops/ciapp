@@ -51,6 +51,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(36)] private bool _promptForInitialSave;
         [ProtoMember(37)] private List<Aircraft> _AircraftList = new List<Aircraft>();
         
+
         [ProtoMember(38)] private List<SafetyMessage> _safetyMessages = new List<SafetyMessage>();
         [ProtoMember(39)] private Briefing b_briefingTemplate = new Briefing(false);
         [ProtoMember(40)] private List<IncidentObjective> l_allPresetObjectives = new List<IncidentObjective>();
@@ -81,6 +82,10 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(65)] private Province _DefaultProvince;
         [ProtoMember(66)] private List<TeamAssignment> _AllTeamAssignmentTemplates = new List<TeamAssignment>();
         [ProtoMember(67)] private string _DateFormat;
+        [ProtoMember(33)] private int _YellowResourceTimeoutDays;
+        [ProtoMember(33)] private int _RedResourceTimeoutDays;
+
+
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
         public Guid PrimaryChannelID { get { return g_primaryChannel; } set { g_primaryChannel = value; appSettingsChanged = true; } }
@@ -167,6 +172,11 @@ namespace WF_ICS_ClassLibrary.Models
         public bool AddIMTToContacts { get => _AddIMTToContacts; set => _AddIMTToContacts = value; }
         public Province DefaultProvince { get => _DefaultProvince; set => _DefaultProvince = value; }
         public string DateFormat { get => _DateFormat; set => _DateFormat = value; }
+
+        public int YellowResourceTimeoutDays { get { return _YellowResourceTimeoutDays; } set { _YellowResourceTimeoutDays = value; appSettingsChanged = true; } }
+        public int RedResourceTimeoutDays { get { return _RedResourceTimeoutDays; } set { _RedResourceTimeoutDays = value; appSettingsChanged = true; } }
+
+
         public void addDefaultOptions()
         {
             ICPCallSign = "BASE";
@@ -197,6 +207,8 @@ namespace WF_ICS_ClassLibrary.Models
             AutomaticSubFolders.Add("Other Images");
             DefaultProvince = new Province(4);
             DateFormat = "MMM-dd-yyyy";
+            YellowResourceTimeoutDays = 5;
+            RedResourceTimeoutDays = 2;
 
             //options.PrimaryChannel = "PEPSAR1 149.495";
 

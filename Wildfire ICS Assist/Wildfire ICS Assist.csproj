@@ -202,6 +202,12 @@
     <Compile Include="CustomControls\CrewEditControl.Designer.cs">
       <DependentUpon>CrewEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\DemobilizationEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\DemobilizationEditControl.Designer.cs">
+      <DependentUpon>DemobilizationEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\EditAircraftControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -336,12 +342,6 @@
     </Compile>
     <Compile Include="OperationalGroupBranchEditForm.Designer.cs">
       <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperationalGroupEditResourceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperationalGroupEditResourceForm.Designer.cs">
-      <DependentUpon>OperationalGroupEditResourceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OperationalGroupsForm.cs">
       <SubType>Form</SubType>
@@ -692,6 +692,9 @@
     <EmbeddedResource Include="CustomControls\CrewEditControl.resx">
       <DependentUpon>CrewEditControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\DemobilizationEditControl.resx">
+      <DependentUpon>DemobilizationEditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\EditAircraftControl.resx">
       <DependentUpon>EditAircraftControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -763,9 +766,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OperationalGroupBranchEditForm.resx">
       <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperationalGroupEditResourceForm.resx">
-      <DependentUpon>OperationalGroupEditResourceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperationalGroupsForm.resx">
       <DependentUpon>OperationalGroupsForm.cs</DependentUpon>

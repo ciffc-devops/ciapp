@@ -24,7 +24,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(10)] private int _NumberOfVehicles;
         [ProtoMember(11)] private string _LeaderName;
         [ProtoMember(12)] private string _Contact;
-
+        
 
         public Guid ID { get { return _ID; } set => _ID = value; }
         public bool Active { get => _Active; set => _Active = value; }
@@ -39,6 +39,23 @@ namespace WF_ICS_ClassLibrary.Models
 
         public string LeaderName { get => _LeaderName; set => _LeaderName = value; }
         public string Contact { get => _Contact; set => _Contact = value; }
+        public string NameWithKindAndType
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(ResourceName);
+                if (!string.IsNullOrEmpty(Kind) || !string.IsNullOrEmpty(Type)) { sb.Append(" - "); }
+                if (!string.IsNullOrEmpty(Kind))
+                {
+                    sb.Append(Kind);
+                    if (!string.IsNullOrEmpty(Type)) { sb.Append(" / "); }
+                }
+                if (!string.IsNullOrEmpty(Type)) { sb.Append(Type); }
+
+                return sb.ToString();
+            }
+        }
 
         public IncidentResource()
         {
