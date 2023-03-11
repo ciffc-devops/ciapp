@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
@@ -490,6 +492,60 @@ namespace Wildfire_ICS_Assist
         private void btnDelete_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPrint204_Click(object sender, EventArgs e)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            string fullFilepath = "";
+            //int end = CurrentIncident.FileName.LastIndexOf("\\");
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "ICS 204 - " + Program.CurrentIncident.IncidentIdentifier + " Op " + Program.CurrentOpPeriod;    // + ".pdf";
+
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            allPDFs.AddRange(Program.pdfExportService.exportAllAssignmentSummariesToPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false));
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+            }
+        }
+
+        private void btnPrint204A_Click(object sender, EventArgs e)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            string fullFilepath = "";
+            //int end = CurrentIncident.FileName.LastIndexOf("\\");
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "ICS 204A - " + Program.CurrentIncident.IncidentIdentifier + " Op " + Program.CurrentOpPeriod;    // + ".pdf";
+
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            allPDFs.AddRange(Program.pdfExportService.exportAllAssignmentDetailsToPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false));
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+            }
         }
     }
 }

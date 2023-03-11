@@ -75,7 +75,7 @@ namespace Wildfire_ICS_Assist
         private static IPDFExportService _pdfExportService = null;
         private static IWFIncidentService _wfIncidentService = null;
         private static IPositionLogService _positionLogService= null;
-        private static Icon _programIcon = Properties.Resources.ics_ca_sq_white;
+        private static Icon _programIcon = Properties.Resources.P_icon;
         private static ICSRole _CurrentRole;
         private static int _CurrentOpPeriod;
         private static NetworkSendLog _networkSendLog;

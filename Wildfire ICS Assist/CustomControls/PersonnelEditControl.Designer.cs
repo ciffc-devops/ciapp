@@ -712,7 +712,7 @@
             this.cboKind.FormattingEnabled = true;
             this.cboKind.Items.AddRange(new object[] {
             "Overhead / IMT",
-            "Crew",
+            "Crew Member",
             "Single Resource",
             "Aircraft Personnel",
             "Contractor"});

@@ -201,6 +201,75 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class OperationalGroupTools
     {
+        public static string GetRoleNameFromGroup(this OperationalGroup record)
+        {
+            ICSRole NewRole = new ICSRole();
+
+
+
+            if (record.GroupType.Equals("Branch"))
+            {
+                if (!string.IsNullOrEmpty(record.Name) && record.Name.Equals("Heavy Equipment"))
+                {
+                    NewRole = OrgChartTools.getGenericRoleByName("Heavy Equipment Branch Director");
+                }
+                else
+                {
+                    NewRole = OrgChartTools.getGenericRoleByName("Operations Branch Director");
+                }
+            }
+            else if (record.GroupType.Equals("Division"))
+            {
+                NewRole = OrgChartTools.getGenericRoleByName("Division Supervisor");
+            }
+            else if (record.GroupType.Equals("Strike Team"))
+            {
+                NewRole = OrgChartTools.getGenericRoleByName("Strike Team Leader");
+            }
+            else if (record.GroupType.Equals("Task Force"))
+            {
+                NewRole = OrgChartTools.getGenericRoleByName("Task Force Leader");
+            }
+            else
+            {
+                NewRole.BaseRoleName = "Group Supervisor";
+                NewRole.RoleName = "Group Supervisor";
+                NewRole.SectionID = Globals.OpsChiefID;
+                NewRole.IsOpGroupSup = true;
+            }
+
+
+            NewRole.OperationalGroupID = record.ID;
+
+            switch (record.GroupType)
+            {
+                case "Branch":
+                    if (record.Name.Length < 4)
+                    {
+                        NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
+                    }
+                    NewRole.IsOpGroupSup = true;
+                    break;
+                case "Division":
+                    NewRole.RoleName = NewRole.BaseRoleName.Replace("Division", record.ResourceName);
+                    NewRole.IsOpGroupSup = true;
+                    break;
+                case "Task Force":
+                    NewRole.RoleName = NewRole.BaseRoleName.Replace("Task Force", record.ResourceName);
+                    NewRole.IsOpGroupSup = true;
+                    break;
+                case "Strike Team":
+                    NewRole.RoleName = NewRole.BaseRoleName.Replace("Strike Team", record.ResourceName);
+                    NewRole.IsOpGroupSup = true;
+                    break;
+                default:
+                    NewRole.RoleName = record.ResourceName + " Supervisor";
+                    break;
+            }
+            return NewRole.RoleName;
+        }
+
+
         public static List<IncidentResource> GetUncommittedResources(this WFIncident incident, int OpPeriod)
         {
             List<IncidentResource> resources = new List<IncidentResource>();

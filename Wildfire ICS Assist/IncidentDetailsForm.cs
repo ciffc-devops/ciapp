@@ -45,6 +45,7 @@ namespace Wildfire_ICS_Assist
             */
             this.Icon = Program.programIcon;
             InitializeComponent(); this.BackColor = Program.FormBackground;
+
             this.BackColor = Program.FormBackground;
             menuStrip1.BackColor = Program.FormAccent;
             System.Windows.Forms.Application.EnableVisualStyles();

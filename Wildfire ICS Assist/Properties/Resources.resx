@@ -481,4 +481,7 @@
   <data name="SureRemoveFromCrew" xml:space="preserve">
     <value>Removing this resource from the crew will leave it in the Check In list as a single resource. You can then modify its check-in details as needed, check it out, etc. Are you sure you want to proceed with this change?</value>
   </data>
+  <data name="P_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\P-icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

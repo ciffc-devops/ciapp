@@ -80,6 +80,10 @@ namespace Wildfire_ICS_Assist
             chkOrgAssignments.Enabled = chkOrgChart.Enabled;
             chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
 
+            chkAssignments.Enabled = CurrentIncident.hasMeaningfulTeamAssignments(CurrentOpPeriod);
+            chkAssignments.Checked = chkAssignments.Enabled;
+            chkAssignmentDetails.Enabled = chkAssignments.Enabled;
+
             //additional contacts
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
 
@@ -116,6 +120,9 @@ namespace Wildfire_ICS_Assist
             chkOrgAssignments.Enabled = chkOrgChart.Enabled;
             chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
 
+            chkAssignments.Enabled = CurrentIncident.hasMeaningfulTeamAssignments(CurrentOpPeriod);
+            chkAssignments.Checked = chkAssignments.Enabled;
+            chkAssignmentDetails.Enabled = chkAssignments.Enabled;
 
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
             chkContacts.Checked = chkContacts.Enabled;
@@ -158,6 +165,9 @@ namespace Wildfire_ICS_Assist
             chkOrgAssignments.Enabled = chkOrgChart.Enabled;
             chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
 
+            chkAssignments.Enabled = CurrentIncident.ActiveOperationalGroups.Any(o=>!o.IsBranchOrDiv);
+            chkAssignments.Checked = chkAssignments.Enabled;
+            chkAssignmentDetails.Enabled = chkAssignments.Enabled;
 
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
             chkContacts.Checked = chkContacts.Enabled;
@@ -197,6 +207,10 @@ namespace Wildfire_ICS_Assist
             chkOrgChart.Enabled = CurrentIncident.allOrgCharts.Any(o => o.FilledRoles.Any());
             chkOrgAssignments.Enabled = chkOrgChart.Enabled;
             chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
+
+            chkAssignments.Enabled = CurrentIncident.ActiveOperationalGroups.Any(o => !o.IsBranchOrDiv);
+            chkAssignments.Checked = chkAssignments.Enabled;
+            chkAssignmentDetails.Enabled = chkAssignments.Enabled;
 
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
 
@@ -254,6 +268,17 @@ namespace Wildfire_ICS_Assist
                     allPDFs.AddRange(Program.pdfExportService.exportOrgAssignmentListToPDF(CurrentIncident, op, chkFlattenPDF.Checked));
 
                 }
+                if (chkAssignments.Checked)
+                {
+                    allPDFs.AddRange(Program.pdfExportService.exportAllAssignmentSummariesToPDF(CurrentIncident, op, chkFlattenPDF.Checked));
+
+                }
+                if (chkAssignmentDetails.Checked)
+                {
+                    allPDFs.AddRange(Program.pdfExportService.exportAllAssignmentDetailsToPDF(CurrentIncident, op, chkFlattenPDF.Checked));
+
+                }
+
 
                 if (chkCommsPlan.Checked)
                 {
@@ -378,7 +403,7 @@ namespace Wildfire_ICS_Assist
 
             if (chkIncidentObjectives.Checked) { contents.Add("• ICS-202 WF Incident Objectives"); }
             if (chkOrgAssignments.Checked) { contents.Add("• ICS-203 WF Organization Assignment List"); }
-
+            if (chkAssignments.Checked) { contents.Add("• ICS-204 WF Assignment Summary List"); }
 
             if (chkCommsPlan.Checked) { contents.Add("• ICS-205 WF Communications Plan"); }
             //medical

@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist
                 cboType.SelectedIndex = cboType.FindStringExact(SelectedGroup.GroupType);
                 txtComments.Text = SelectedGroup.Comments;
                 txtContact.Text = SelectedGroup.Contact;
-                txtIdentifier.Text = SelectedGroup.ResourceName;
+                txtIdentifier.Text = SelectedGroup.Name;
 
                 try { cboReportsTo.SelectedValue = SelectedGroup.ParentID; }
                 catch { }

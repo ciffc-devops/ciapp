@@ -32,10 +32,12 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.treeOpsChart = new System.Windows.Forms.TreeView();
+            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
+            this.operationalGroupReportingResourcesControl1 = new Wildfire_ICS_Assist.CustomControls.OperationalGroupReportingResourcesControl();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnPrint204 = new System.Windows.Forms.Button();
             this.btnEditBranch = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnPrint204A = new System.Windows.Forms.Button();
             this.btnExportSignInToCSV = new System.Windows.Forms.Button();
             this.btnAddBranch = new System.Windows.Forms.Button();
             this.cmsAddButton = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -46,8 +48,6 @@
             this.addNewTaskForceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewStrikeTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewSingleResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
-            this.operationalGroupReportingResourcesControl1 = new Wildfire_ICS_Assist.CustomControls.OperationalGroupReportingResourcesControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -75,9 +75,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
-            this.splitContainer1.Panel2.Controls.Add(this.button5);
+            this.splitContainer1.Panel2.Controls.Add(this.btnPrint204);
             this.splitContainer1.Panel2.Controls.Add(this.btnEditBranch);
-            this.splitContainer1.Panel2.Controls.Add(this.button6);
+            this.splitContainer1.Panel2.Controls.Add(this.btnPrint204A);
             this.splitContainer1.Panel2.Controls.Add(this.btnExportSignInToCSV);
             this.splitContainer1.Panel2.Controls.Add(this.btnAddBranch);
             this.splitContainer1.Size = new System.Drawing.Size(1210, 669);
@@ -114,6 +114,29 @@
             this.treeOpsChart.TabIndex = 1;
             this.treeOpsChart.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeOpsChart_AfterSelect);
             // 
+            // strikeTeamTaskForceDetailsControl1
+            // 
+            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
+            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(18, 236);
+            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
+            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(396, 330);
+            this.strikeTeamTaskForceDetailsControl1.TabIndex = 1;
+            this.strikeTeamTaskForceDetailsControl1.Visible = false;
+            // 
+            // operationalGroupReportingResourcesControl1
+            // 
+            this.operationalGroupReportingResourcesControl1.BackColor = System.Drawing.Color.Transparent;
+            this.operationalGroupReportingResourcesControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.operationalGroupReportingResourcesControl1.Location = new System.Drawing.Point(31, 15);
+            this.operationalGroupReportingResourcesControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.operationalGroupReportingResourcesControl1.Name = "operationalGroupReportingResourcesControl1";
+            this.operationalGroupReportingResourcesControl1.role = null;
+            this.operationalGroupReportingResourcesControl1.Size = new System.Drawing.Size(558, 209);
+            this.operationalGroupReportingResourcesControl1.TabIndex = 0;
+            this.operationalGroupReportingResourcesControl1.Visible = false;
+            // 
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
@@ -127,17 +150,18 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // button5
+            // btnPrint204
             // 
-            this.button5.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button5.Location = new System.Drawing.Point(397, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(154, 42);
-            this.button5.TabIndex = 41;
-            this.button5.Text = "Print 204s";
-            this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnPrint204.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrint204.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint204.Location = new System.Drawing.Point(397, 3);
+            this.btnPrint204.Name = "btnPrint204";
+            this.btnPrint204.Size = new System.Drawing.Size(154, 42);
+            this.btnPrint204.TabIndex = 41;
+            this.btnPrint204.Text = "Print 204s";
+            this.btnPrint204.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint204.UseVisualStyleBackColor = true;
+            this.btnPrint204.Click += new System.EventHandler(this.btnPrint204_Click);
             // 
             // btnEditBranch
             // 
@@ -152,17 +176,18 @@
             this.btnEditBranch.UseVisualStyleBackColor = true;
             this.btnEditBranch.Click += new System.EventHandler(this.btnEditBranch_Click);
             // 
-            // button6
+            // btnPrint204A
             // 
-            this.button6.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button6.Location = new System.Drawing.Point(557, 2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(154, 42);
-            this.button6.TabIndex = 52;
-            this.button6.Text = "Print 204As";
-            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnPrint204A.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrint204A.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint204A.Location = new System.Drawing.Point(557, 2);
+            this.btnPrint204A.Name = "btnPrint204A";
+            this.btnPrint204A.Size = new System.Drawing.Size(154, 42);
+            this.btnPrint204A.TabIndex = 52;
+            this.btnPrint204A.Text = "Print 204As";
+            this.btnPrint204A.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint204A.UseVisualStyleBackColor = true;
+            this.btnPrint204A.Click += new System.EventHandler(this.btnPrint204A_Click);
             // 
             // btnExportSignInToCSV
             // 
@@ -250,29 +275,6 @@
             this.addNewSingleResourceToolStripMenuItem.Text = "Add new Single Resource";
             this.addNewSingleResourceToolStripMenuItem.Click += new System.EventHandler(this.addNewSingleResourceToolStripMenuItem_Click);
             // 
-            // strikeTeamTaskForceDetailsControl1
-            // 
-            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
-            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(18, 236);
-            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
-            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(396, 330);
-            this.strikeTeamTaskForceDetailsControl1.TabIndex = 1;
-            this.strikeTeamTaskForceDetailsControl1.Visible = false;
-            // 
-            // operationalGroupReportingResourcesControl1
-            // 
-            this.operationalGroupReportingResourcesControl1.BackColor = System.Drawing.Color.Transparent;
-            this.operationalGroupReportingResourcesControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operationalGroupReportingResourcesControl1.Location = new System.Drawing.Point(31, 15);
-            this.operationalGroupReportingResourcesControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.operationalGroupReportingResourcesControl1.Name = "operationalGroupReportingResourcesControl1";
-            this.operationalGroupReportingResourcesControl1.role = null;
-            this.operationalGroupReportingResourcesControl1.Size = new System.Drawing.Size(558, 209);
-            this.operationalGroupReportingResourcesControl1.TabIndex = 0;
-            this.operationalGroupReportingResourcesControl1.Visible = false;
-            // 
             // OperationalGroupsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -305,8 +307,8 @@
         private System.Windows.Forms.Button btnEditBranch;
         private System.Windows.Forms.Button btnAddBranch;
         private System.Windows.Forms.Button btnExportSignInToCSV;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnPrint204A;
+        private System.Windows.Forms.Button btnPrint204;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ContextMenuStrip cmsAddButton;
         private System.Windows.Forms.ToolStripMenuItem addNewBranchDivisionGroupToolStripMenuItem;

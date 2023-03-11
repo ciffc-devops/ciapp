@@ -51,7 +51,7 @@
     <StartupObject>Wildfire_ICS_Assist.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ics-ca-sq-white.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\P-icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -936,6 +936,9 @@
     <None Include="BlankForms\ICS-204-WF Assignment List.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\ICS-204A-WF Assignment Details.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS-206-WF-Medical-Plan.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1013,6 +1016,7 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\P-icon.ico" />
     <None Include="Resources\glyphicons-basic-739-check-black.png" />
     <None Include="Resources\glyphicons-basic-5-settings%403x.png" />
     <None Include="Resources\glyphicons-basic-799-chevron-last-left.png" />

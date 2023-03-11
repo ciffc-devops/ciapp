@@ -1790,7 +1790,12 @@ namespace WildfireICSDesktopServices
                         role.ReportsToRoleName = CurrentOrgChart.GetRoleByID(record.ParentID, false).RoleName;
                         UpsertICSRole(role);
                     }
+                    if(role.RoleName != record.GetRoleNameFromGroup())
+                    {
+                        role.RoleName = record.GetRoleNameFromGroup();
+                        UpsertICSRole(role);
 
+                    }
                 }
             }
 
