@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -179,7 +179,6 @@
             this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
             this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
             this.cpLogistics = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.btnLogisticsSignIn = new System.Windows.Forms.Button();
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnLogisticsMemberStatus = new System.Windows.Forms.Button();
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
@@ -281,9 +280,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1295,7 +1294,6 @@
             this.cpLogistics.CollapsedHeight = 40;
             this.cpLogistics.CollapsedWidth = 485;
             this.cpLogistics.CollapseLeft = false;
-            this.cpLogistics.Controls.Add(this.btnLogisticsSignIn);
             this.cpLogistics.Controls.Add(this.btnAdditionalContacts);
             this.cpLogistics.Controls.Add(this.btnLogisticsMemberStatus);
             this.cpLogistics.CurrentlyCollapsed = true;
@@ -1303,13 +1301,6 @@
             this.cpLogistics.ExpandedWidth = 530;
             this.cpLogistics.Name = "cpLogistics";
             this.cpLogistics.TitleText = "LOGISTICS";
-            // 
-            // btnLogisticsSignIn
-            // 
-            resources.ApplyResources(this.btnLogisticsSignIn, "btnLogisticsSignIn");
-            this.btnLogisticsSignIn.Name = "btnLogisticsSignIn";
-            this.btnLogisticsSignIn.UseVisualStyleBackColor = true;
-            this.btnLogisticsSignIn.Click += new System.EventHandler(this.btnLogisticsSignIn_Click);
             // 
             // btnAdditionalContacts
             // 
@@ -1614,7 +1605,6 @@
         private System.Windows.Forms.Button btnCommsPlan;
         private System.Windows.Forms.Button btnPrintIAP;
         private System.Windows.Forms.Button btnIncidentObjectives;
-        private System.Windows.Forms.Button btnLogisticsSignIn;
         private System.Windows.Forms.Button btnLogisticsMemberStatus;
         private System.Windows.Forms.Button btnAdditionalContacts;
         private System.Windows.Forms.Button btnPlanningAddAssignment;

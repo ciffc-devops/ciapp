@@ -44,20 +44,20 @@
             this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLastDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cpPNumbers = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cpFilters = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.btnFilter3ShowHelp = new System.Windows.Forms.Button();
+            this.cboAssignedFilter = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.cboTimeOutFilter = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cboResourceVariety = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cpPNumbers = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnExportSignInToCSV = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnLogisticsSignIn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnFilter3ShowHelp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -238,24 +238,6 @@
             this.colStatus.ReadOnly = true;
             this.colStatus.Width = 85;
             // 
-            // cpPNumbers
-            // 
-            this.cpPNumbers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpPNumbers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpPNumbers.CollapsedHeight = 40;
-            this.cpPNumbers.CollapsedWidth = 290;
-            this.cpPNumbers.CollapseLeft = true;
-            this.cpPNumbers.CurrentlyCollapsed = true;
-            this.cpPNumbers.ExpandedHeight = 300;
-            this.cpPNumbers.ExpandedWidth = 290;
-            this.cpPNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpPNumbers.Location = new System.Drawing.Point(6, 67);
-            this.cpPNumbers.Margin = new System.Windows.Forms.Padding(6);
-            this.cpPNumbers.Name = "cpPNumbers";
-            this.cpPNumbers.Size = new System.Drawing.Size(290, 40);
-            this.cpPNumbers.TabIndex = 2;
-            this.cpPNumbers.TitleText = "P-Number Controls";
-            // 
             // cpFilters
             // 
             this.cpFilters.BackColor = System.Drawing.Color.White;
@@ -264,7 +246,7 @@
             this.cpFilters.CollapsedWidth = 290;
             this.cpFilters.CollapseLeft = true;
             this.cpFilters.Controls.Add(this.btnFilter3ShowHelp);
-            this.cpFilters.Controls.Add(this.comboBox1);
+            this.cpFilters.Controls.Add(this.cboAssignedFilter);
             this.cpFilters.Controls.Add(this.label3);
             this.cpFilters.Controls.Add(this.cboTimeOutFilter);
             this.cpFilters.Controls.Add(this.label2);
@@ -280,6 +262,42 @@
             this.cpFilters.Size = new System.Drawing.Size(290, 300);
             this.cpFilters.TabIndex = 0;
             this.cpFilters.TitleText = "Filter List";
+            // 
+            // btnFilter3ShowHelp
+            // 
+            this.btnFilter3ShowHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter3ShowHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFilter3ShowHelp.BackgroundImage")));
+            this.btnFilter3ShowHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFilter3ShowHelp.Location = new System.Drawing.Point(256, 171);
+            this.btnFilter3ShowHelp.Name = "btnFilter3ShowHelp";
+            this.btnFilter3ShowHelp.Size = new System.Drawing.Size(26, 26);
+            this.btnFilter3ShowHelp.TabIndex = 93;
+            this.btnFilter3ShowHelp.TabStop = false;
+            this.btnFilter3ShowHelp.UseVisualStyleBackColor = true;
+            // 
+            // cboAssignedFilter
+            // 
+            this.cboAssignedFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboAssignedFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAssignedFilter.FormattingEnabled = true;
+            this.cboAssignedFilter.Items.AddRange(new object[] {
+            "All resources",
+            "Unassigned Only"});
+            this.cboAssignedFilter.Location = new System.Drawing.Point(7, 203);
+            this.cboAssignedFilter.Name = "cboAssignedFilter";
+            this.cboAssignedFilter.Size = new System.Drawing.Size(276, 32);
+            this.cboAssignedFilter.TabIndex = 38;
+            this.cboAssignedFilter.SelectedIndexChanged += new System.EventHandler(this.cboAssignedFilter_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 176);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(176, 24);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Resource Assigned";
             // 
             // cboTimeOutFilter
             // 
@@ -328,6 +346,24 @@
             this.label1.Size = new System.Drawing.Size(154, 24);
             this.label1.TabIndex = 33;
             this.label1.Text = "Resource Variety";
+            // 
+            // cpPNumbers
+            // 
+            this.cpPNumbers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpPNumbers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpPNumbers.CollapsedHeight = 40;
+            this.cpPNumbers.CollapsedWidth = 290;
+            this.cpPNumbers.CollapseLeft = true;
+            this.cpPNumbers.CurrentlyCollapsed = true;
+            this.cpPNumbers.ExpandedHeight = 300;
+            this.cpPNumbers.ExpandedWidth = 290;
+            this.cpPNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpPNumbers.Location = new System.Drawing.Point(6, 67);
+            this.cpPNumbers.Margin = new System.Windows.Forms.Padding(6);
+            this.cpPNumbers.Name = "cpPNumbers";
+            this.cpPNumbers.Size = new System.Drawing.Size(290, 40);
+            this.cpPNumbers.TabIndex = 2;
+            this.cpPNumbers.TitleText = "P-Number Controls";
             // 
             // btnExportSignInToCSV
             // 
@@ -398,41 +434,6 @@
             this.btnLogisticsSignIn.UseVisualStyleBackColor = true;
             this.btnLogisticsSignIn.Click += new System.EventHandler(this.btnLogisticsSignIn_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "All resources",
-            "Unassigned Only"});
-            this.comboBox1.Location = new System.Drawing.Point(7, 203);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(276, 32);
-            this.comboBox1.TabIndex = 38;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 176);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(176, 24);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "Resource Assigned";
-            // 
-            // btnFilter3ShowHelp
-            // 
-            this.btnFilter3ShowHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter3ShowHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFilter3ShowHelp.BackgroundImage")));
-            this.btnFilter3ShowHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnFilter3ShowHelp.Location = new System.Drawing.Point(256, 171);
-            this.btnFilter3ShowHelp.Name = "btnFilter3ShowHelp";
-            this.btnFilter3ShowHelp.Size = new System.Drawing.Size(26, 26);
-            this.btnFilter3ShowHelp.TabIndex = 93;
-            this.btnFilter3ShowHelp.TabStop = false;
-            this.btnFilter3ShowHelp.UseVisualStyleBackColor = true;
-            // 
             // CheckedInResourcesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -487,7 +488,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLastDay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboAssignedFilter;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnFilter3ShowHelp;
     }

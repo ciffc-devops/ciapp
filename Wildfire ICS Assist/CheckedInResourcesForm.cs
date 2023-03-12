@@ -27,6 +27,7 @@ namespace Wildfire_ICS_Assist
             BuildLastDayOnIncidentFilterOptions();
             LoadResourcesList();
             LoadPNumbers();
+            cboAssignedFilter.SelectedIndex = 0;
             Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
 
         }
@@ -197,6 +198,12 @@ namespace Wildfire_ICS_Assist
                 }
             }
 
+            if(cboAssignedFilter.SelectedIndex == 1)
+            {
+                checkInRecords = checkInRecords.Where(o=>!Program.CurrentIncident.GetIsResourceCurrentlyAssigned(Program.CurrentOpPeriod, o.Resource.ID)).ToList();
+
+            }
+
             dgvResources.DataSource = checkInRecords;
         }
 
@@ -276,6 +283,13 @@ namespace Wildfire_ICS_Assist
         private void cboTimeOutFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadResourcesList();
+        }
+
+
+        private void cboAssignedFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadResourcesList();
+
         }
     }
 }
