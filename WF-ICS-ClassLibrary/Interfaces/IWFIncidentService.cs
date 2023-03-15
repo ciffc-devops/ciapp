@@ -46,7 +46,7 @@ namespace WildfireICSDesktopServices
         event GeneralMessageEventHandler GeneralMessageChanged;
         event AircraftEventHandler AircraftChanged;
         event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
-        event TeamAssignmentEventHandler TeamAssignmentChanged;
+        event DemobEventHandler DemobChanged;
 
         event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
         event OperationalGroupEventHandler OperationalGroupChanged;
@@ -112,9 +112,9 @@ namespace WildfireICSDesktopServices
 
         void UpsertAircraft(Aircraft record, string source = "local");
         void UpsertAirOperationsSummary(AirOperationsSummary record, string source = "local");
-        void UpsertTeamAssignment(TeamAssignment item, string source = "local");
         void OnOpPeriodChanged(IncidentOpPeriodChangedEventArgs e);
         void UpsertOperationalGroup(OperationalGroup record, string source = "local");
         void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local");
+        void UpsertDemobRecord(DemobilizationRecord record, string source = "local");
     }
 }

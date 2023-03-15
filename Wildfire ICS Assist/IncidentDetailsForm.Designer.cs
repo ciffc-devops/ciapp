@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -182,7 +182,6 @@
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnLogisticsMemberStatus = new System.Windows.Forms.Button();
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.btnIncidentSummary = new System.Windows.Forms.Button();
             this.btnAssignmentList = new System.Windows.Forms.Button();
             this.btnAirOpsSummary = new System.Windows.Forms.Button();
             this.btnSafetyPlans = new System.Windows.Forms.Button();
@@ -280,9 +279,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1289,14 +1288,14 @@
             // cpLogistics
             // 
             resources.ApplyResources(this.cpLogistics, "cpLogistics");
-            this.cpLogistics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpLogistics.BackColor = System.Drawing.Color.White;
             this.cpLogistics.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpLogistics.CollapsedHeight = 40;
             this.cpLogistics.CollapsedWidth = 485;
             this.cpLogistics.CollapseLeft = false;
             this.cpLogistics.Controls.Add(this.btnAdditionalContacts);
             this.cpLogistics.Controls.Add(this.btnLogisticsMemberStatus);
-            this.cpLogistics.CurrentlyCollapsed = true;
+            this.cpLogistics.CurrentlyCollapsed = false;
             this.cpLogistics.ExpandedHeight = 196;
             this.cpLogistics.ExpandedWidth = 530;
             this.cpLogistics.Name = "cpLogistics";
@@ -1319,12 +1318,11 @@
             // 
             // cpIncidentActionPlan
             // 
-            this.cpIncidentActionPlan.BackColor = System.Drawing.Color.White;
+            this.cpIncidentActionPlan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpIncidentActionPlan.CollapsedHeight = 40;
             this.cpIncidentActionPlan.CollapsedWidth = 485;
             this.cpIncidentActionPlan.CollapseLeft = true;
-            this.cpIncidentActionPlan.Controls.Add(this.btnIncidentSummary);
             this.cpIncidentActionPlan.Controls.Add(this.btnAssignmentList);
             this.cpIncidentActionPlan.Controls.Add(this.btnAirOpsSummary);
             this.cpIncidentActionPlan.Controls.Add(this.btnSafetyPlans);
@@ -1333,19 +1331,12 @@
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
             this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
-            this.cpIncidentActionPlan.CurrentlyCollapsed = false;
+            this.cpIncidentActionPlan.CurrentlyCollapsed = true;
             this.cpIncidentActionPlan.ExpandedHeight = 331;
             this.cpIncidentActionPlan.ExpandedWidth = 722;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
-            // 
-            // btnIncidentSummary
-            // 
-            resources.ApplyResources(this.btnIncidentSummary, "btnIncidentSummary");
-            this.btnIncidentSummary.Name = "btnIncidentSummary";
-            this.btnIncidentSummary.UseVisualStyleBackColor = true;
-            this.btnIncidentSummary.Click += new System.EventHandler(this.btnIncidentSummary_Click);
             // 
             // btnAssignmentList
             // 
@@ -1482,7 +1473,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.Controls.Add(this.cpIncidentActionPlan);
+            this.Controls.Add(this.cpLogistics);
             this.Controls.Add(this.llProgramURL);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pnlInternetSyncStart);
@@ -1495,7 +1486,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.cpOperations);
             this.Controls.Add(this.cpPlanning);
-            this.Controls.Add(this.cpLogistics);
+            this.Controls.Add(this.cpIncidentActionPlan);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
@@ -1694,7 +1685,6 @@
         private System.Windows.Forms.ToolStripMenuItem internetSyncToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripMenuItem requestOptionsFromServerToolStripMenuItem;
-        private System.Windows.Forms.Button btnIncidentSummary;
         private System.Windows.Forms.Button btnAssignmentList;
         private System.Windows.Forms.Button btnAirOpsSummary;
         private System.Windows.Forms.ToolStripMenuItem aircraftToolStripMenuItem;

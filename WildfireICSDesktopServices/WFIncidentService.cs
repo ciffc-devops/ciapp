@@ -49,8 +49,8 @@ namespace WildfireICSDesktopServices
         public event GeneralMessageEventHandler GeneralMessageChanged;
         public event AircraftEventHandler AircraftChanged;
         public event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
-        public event TeamAssignmentEventHandler TeamAssignmentChanged;
-
+        //public event TeamAssignmentEventHandler TeamAssignmentChanged;
+        public event DemobEventHandler DemobChanged;
 
 
         public event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
@@ -438,10 +438,7 @@ namespace WildfireICSDesktopServices
             }
 
 
-            else if (dataClassName.Equals(new TeamAssignment().GetType().Name))
-            {
-                UpsertTeamAssignment(((TeamAssignment)obj).Clone(), source);
-            }
+          
             else if (dataClassName.Equals(new GeneralMessage().GetType().Name))
             {
                 UpsertGeneralMessage(((GeneralMessage)obj).Clone(), source);
@@ -454,6 +451,10 @@ namespace WildfireICSDesktopServices
             else if (dataClassName.Equals(new OperationalSubGroup().GetType().Name))
             {
                 UpsertOperationalSubGroup(((OperationalSubGroup)obj).Clone(), source);
+            }
+            else if (dataClassName.Equals(new DemobilizationRecord().GetType().Name))
+            {
+                UpsertDemobRecord(((DemobilizationRecord)obj).Clone(), source);
             }
         }
 
@@ -1623,30 +1624,6 @@ namespace WildfireICSDesktopServices
 
 
 
-        // Team Assignment
-        public void UpsertTeamAssignment(TeamAssignment item, string source = "local")
-        {
-
-            item.LastUpdatedUTC = DateTime.UtcNow;
-
-
-            if (CurrentIncident.AllAssignments.Any(o => o.ID == item.ID))
-            {
-                CurrentIncident.AllAssignments = CurrentIncident.AllAssignments.Where(o => o.ID != item.ID).ToList();
-            }
-            CurrentIncident.AllAssignments.Add(item);
-            if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(item, "UPSERT", true, false); }
-            OnTeamAssignmentChanged(new TeamAssignmentEventArgs(item));
-        }
-        protected virtual void OnTeamAssignmentChanged(TeamAssignmentEventArgs e)
-        {
-            TeamAssignmentEventHandler handler = this.TeamAssignmentChanged;
-            if (handler != null)
-            {
-                handler(e);
-            }
-        }
-
 
 
         public void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local")
@@ -1825,6 +1802,60 @@ namespace WildfireICSDesktopServices
                 handler(e);
             }
         }
+
+        // Demob Records
+        protected virtual void OnDemobChanged(DemobEventArgs e)
+        {
+            DemobEventHandler handler = this.DemobChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertDemobRecord(DemobilizationRecord record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.AllDemobilizationRecords.Any(o => o.ID == record.ID || o.OpPeriod == record.OpPeriod))
+            {
+                _currentIncident.AllDemobilizationRecords = _currentIncident.AllDemobilizationRecords.Where(o => o.ID != record.ID && o.OpPeriod != record.OpPeriod).ToList();
+            }
+            _currentIncident.AllDemobilizationRecords.Add(record);
+
+            if (record.SignInRecordID != Guid.Empty && _currentIncident.AllCheckInRecords.Any(o => o.SignInRecordID == record.SignInRecordID))
+            {
+                _currentIncident.AllCheckInRecords.First(o => o.SignInRecordID == record.SignInRecordID).CheckOutDate = record.DemobDate;
+                UpsertCheckInRecord(_currentIncident.AllCheckInRecords.First(o => o.SignInRecordID == record.SignInRecordID));
+            }
+
+            //If this is a crew, demob everyone in it with the same values
+            if (_currentIncident.AllOperationalSubGroups.Any(o => o.ID == record.ResourceID))
+            {
+                OperationalSubGroup crew = _currentIncident.AllOperationalSubGroups.First(o => o.ID == record.ResourceID);
+                foreach (OperationalGroupResourceListing res in crew.ResourceListing)
+                {
+                    DemobilizationRecord demobRec = record.Clone();
+                    demobRec.ResourceID = res.ResourceID;
+                    demobRec.ID = Guid.NewGuid();
+                    if (_currentIncident.AllCheckInRecords.Any(o => o.ResourceID == res.ID && o.ParentRecordID == record.SignInRecordID))
+                    {
+                        demobRec.SignInRecordID = _currentIncident.AllCheckInRecords.First(o => o.ResourceID == res.ID && o.ParentRecordID == record.SignInRecordID).SignInRecordID;
+                    }
+                    else
+                    {
+                        demobRec.SignInRecordID = Guid.Empty;
+                    }
+
+                    UpsertDemobRecord(demobRec);
+                }
+            }
+
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnDemobChanged(new DemobEventArgs(record));
+        }
+
 
 
         public void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local")

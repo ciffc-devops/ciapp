@@ -34,12 +34,12 @@ namespace Wildfire_ICS_Assist
 
         private void LoadPNumbers()
         {
-            
+
         }
 
         private void Program_CheckInChanged(MemberEventArgs e)
         {
-            if((e.signInRecord != null && e.signInRecord.OpPeriod == Program.CurrentOpPeriod))
+            if ((e.signInRecord != null && e.signInRecord.OpPeriod == Program.CurrentOpPeriod))
             {
                 LoadResourcesList();
             }
@@ -51,7 +51,7 @@ namespace Wildfire_ICS_Assist
             bool autoStartNextCheckin = false;
             using (CheckInForm signInForm = new CheckInForm())
             {
-                if(existingRecord != null) { signInForm.SetCheckIn(existingRecord); }
+                if (existingRecord != null) { signInForm.SetCheckIn(existingRecord); }
 
                 signInForm.AutoStartNextCheckin = autoStart;
                 DialogResult dr = signInForm.ShowDialog();
@@ -172,35 +172,35 @@ namespace Wildfire_ICS_Assist
                     checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
                 }
             }
-            checkInRecords = checkInRecords.OrderBy(o=>o.ResourceName).ToList();
+            checkInRecords = checkInRecords.OrderBy(o => o.ResourceName).ToList();
 
-            if(cboResourceVariety.SelectedIndex > 0)
+            if (cboResourceVariety.SelectedIndex > 0)
             {
                 string variety = cboResourceVariety.Text;
                 checkInRecords = checkInRecords.Where(o => o.ResourceType.Equals(variety)).ToList(); ;
             }
 
-            if(cboTimeOutFilter.SelectedIndex > 0)
+            if (cboTimeOutFilter.SelectedIndex > 0)
             {
                 DateTime EndOfOp = Program.CurrentOpPeriodDetails.PeriodEnd;
 
                 switch (cboTimeOutFilter.SelectedIndex)
                 {
                     case 1:
-                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays,0) <= YellowNumber).ToList();
+                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= YellowNumber).ToList();
                         break;
                     case 2:
-                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays,0) <= YellowNumber && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays,0) > RedNumber).ToList();
+                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= YellowNumber && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) > RedNumber).ToList();
                         break;
                     case 3:
-                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays,0) <= RedNumber).ToList();
+                        checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= RedNumber).ToList();
                         break;
                 }
             }
 
-            if(cboAssignedFilter.SelectedIndex == 1)
+            if (cboAssignedFilter.SelectedIndex == 1)
             {
-                checkInRecords = checkInRecords.Where(o=>!Program.CurrentIncident.GetIsResourceCurrentlyAssigned(Program.CurrentOpPeriod, o.Resource.ID)).ToList();
+                checkInRecords = checkInRecords.Where(o => !Program.CurrentIncident.GetIsResourceCurrentlyAssigned(Program.CurrentOpPeriod, o.Resource.ID)).ToList();
 
             }
 
@@ -213,12 +213,12 @@ namespace Wildfire_ICS_Assist
             do
             {
                 autoStartCheckin = StartCheckIn(autoStartCheckin);
-            }while (autoStartCheckin);
+            } while (autoStartCheckin);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(dgvResources.SelectedRows.Count == 1)
+            if (dgvResources.SelectedRows.Count == 1)
             {
                 CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
                 StartCheckIn(false, rec.Record);
@@ -262,21 +262,30 @@ namespace Wildfire_ICS_Assist
         {
             if (dgvResources.Rows.Count > 0 && e.RowIndex <= dgvResources.Rows.Count && dgvResources.Rows[e.RowIndex] != null)
             {
-                
+
 
                 DataGridViewRow row = dgvResources.Rows[e.RowIndex];
                 CheckInRecordWithResource item = (CheckInRecordWithResource)row.DataBoundItem;
+                DateTime endOfOp = Program.CurrentOpPeriodDetails.PeriodEnd;
 
-                
+                if (item.Record.CheckOutDate <= endOfOp)
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                }
+
                 if (item.DaysTillTimeOut <= YellowNumber)
                 {
                     row.Cells["colLastDay"].Style.BackColor = Color.Yellow;
                 }
-                if(item.DaysTillTimeOut <= RedNumber)
+                if (item.DaysTillTimeOut <= RedNumber)
                 {
                     row.Cells["colLastDay"].Style.BackColor = Color.Red;
                 }
-                
+
             }
         }
 
@@ -290,6 +299,63 @@ namespace Wildfire_ICS_Assist
         {
             LoadResourcesList();
 
+        }
+
+        private void dgvResources_SelectionChanged(object sender, EventArgs e)
+        {
+            btnEdit.Enabled = dgvResources.SelectedRows.Count == 1;
+            btnDemob.Enabled = dgvResources.SelectedRows.Count == 1;
+        }
+
+        private void btnDemob_Click(object sender, EventArgs e)
+        {
+            if (dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource item = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                OpenDemobForEdit(item);
+            }
+        }
+
+        private void OpenDemobForEdit(CheckInRecordWithResource res)
+        {
+            DemobilizationRecord demob = new DemobilizationRecord();
+            if (Program.CurrentIncident.ActiveDemobilizationRecords.Any(o => o.SignInRecordID == res.Record.SignInRecordID))
+            {
+                demob = Program.CurrentIncident.ActiveDemobilizationRecords.First(o => o.SignInRecordID == res.Record.SignInRecordID);
+            }
+            else
+            {
+                demob.SignInRecordID = res.Record.SignInRecordID;
+                demob.ResourceID = res.Resource.ID;
+                demob.DebriefDate = DateTime.Now;
+                demob.DemobDate = DateTime.Now;
+                demob.OpPeriod = Program.CurrentOpPeriod;
+
+            }
+
+            using (DemobilizeResourceForm demobForm = new DemobilizeResourceForm())
+            {
+                demobForm.SetRecord(res.Resource, res.Record, demob);
+                DialogResult dr = demobForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertDemobRecord(demob);
+                }
+            }
+
+        }
+
+        private void dgvResources_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                DataGridView.HitTestInfo hit = dgvResources.HitTest(e.X, e.Y);
+                if (hit.Type == DataGridViewHitTestType.None)
+                {
+                    dgvResources.ClearSelection();
+                    dgvResources.CurrentCell = null;
+                }
+            }
         }
     }
 }

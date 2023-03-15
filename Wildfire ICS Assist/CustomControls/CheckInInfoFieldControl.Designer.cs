@@ -80,6 +80,8 @@
             // 
             // cboListValue
             // 
+            this.cboListValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboListValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboListValue.FormattingEnabled = true;
             this.cboListValue.Location = new System.Drawing.Point(554, 3);
             this.cboListValue.Name = "cboListValue";

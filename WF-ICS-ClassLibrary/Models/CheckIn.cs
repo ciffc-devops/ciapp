@@ -50,7 +50,6 @@ namespace WF_ICS_ClassLibrary.Models
         public bool HasCheckOutTime { get => CheckOutDate < DateTime.MaxValue; }
         public DateTime LastDayOfRest { get => _LastDayOfRest; set => _LastDayOfRest = value; }
 
-
         public CheckInRecord Clone()
         {
             CheckInRecord cloneTo = this.MemberwiseClone() as CheckInRecord;
@@ -125,6 +124,8 @@ namespace WF_ICS_ClassLibrary.Models
 
         private CheckInRecord _Record = new CheckInRecord();
         private IncidentResource _Resource = new IncidentResource();
+        private string _StatusText;
+
         public IncidentResource Resource { get => _Resource; }
         public CheckInRecord Record { get => _Record; }
         public Guid ID { get => _ID; }
@@ -135,14 +136,10 @@ namespace WF_ICS_ClassLibrary.Models
         public int NumberOfVehicles { get => Resource.NumberOfVehicles; }
         public DateTime CheckInDate { get => Record.CheckInDate; }
         public DateTime CheckOutDate { get => Record.CheckOutDate;}
-        public DateTime LastDayOnIncident { get => Record.LastDayOnIncident; }
+        public DateTime LastDayOnIncident { get { if (Record.LastDayOnIncident < Record.CheckOutDate) { return Record.LastDayOnIncident; } else { return Record.CheckOutDate; } } }
         public string ResourceName { get => Resource.ResourceName; }
         public string LeaderName { get => Resource.LeaderName; }
-        public string Status { get
-            {
-                if(CheckOutDate < DateTime.MaxValue) { return "Checked Out"; }
-                else { return "Active"; }
-            } }
+        public string Status { get => _StatusText; set => _StatusText = value; }
         public int DaysTillTimeOut { get; set; }
 
 
@@ -154,6 +151,7 @@ namespace WF_ICS_ClassLibrary.Models
             _Resource = res;
             TimeSpan ts = LastDayOnIncident - EndOfOp;
             DaysTillTimeOut = Convert.ToInt32( Math.Round(ts.TotalDays, 0));
+            if(Record.CheckOutDate < EndOfOp) { _StatusText = "Checked-Out"; } else { _StatusText = "Actvie"; }
         }
     }
 
@@ -260,7 +258,7 @@ new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Duration
 
 
 
-        public DemobilizationRecord() { ID = Guid.NewGuid(); }
+        public DemobilizationRecord() { ID = Guid.NewGuid(); Active = true; }
 
 
         public Guid ID { get => _ID; set => _ID = value; }

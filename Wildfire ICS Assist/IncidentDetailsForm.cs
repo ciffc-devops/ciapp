@@ -297,7 +297,6 @@ namespace Wildfire_ICS_Assist
             }
             else { btnAirOpsSummary.Image = null; airOperationsSummaryICS220ToolStripMenuItem.Image = null; }
 
-            btnIncidentSummary.Image = null; 
             //                    
 
         }

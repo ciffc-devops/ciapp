@@ -83,7 +83,7 @@
             this.txtFirstName.Location = new System.Drawing.Point(214, 6);
             this.txtFirstName.Margin = new System.Windows.Forms.Padding(6);
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(233, 29);
+            this.txtFirstName.Size = new System.Drawing.Size(190, 29);
             this.txtFirstName.TabIndex = 0;
             this.txtFirstName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
@@ -97,7 +97,7 @@
             this.cboProvince.Location = new System.Drawing.Point(214, 255);
             this.cboProvince.Margin = new System.Windows.Forms.Padding(6);
             this.cboProvince.Name = "cboProvince";
-            this.cboProvince.Size = new System.Drawing.Size(233, 32);
+            this.cboProvince.Size = new System.Drawing.Size(190, 32);
             this.cboProvince.TabIndex = 6;
             this.cboProvince.SelectedIndexChanged += new System.EventHandler(this.cboProvince_SelectedIndexChanged);
             // 
@@ -111,7 +111,7 @@
             this.cboAgency.Location = new System.Drawing.Point(214, 343);
             this.cboAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboAgency.Name = "cboAgency";
-            this.cboAgency.Size = new System.Drawing.Size(233, 32);
+            this.cboAgency.Size = new System.Drawing.Size(190, 32);
             this.cboAgency.TabIndex = 8;
             this.cboAgency.SelectedIndexChanged += new System.EventHandler(this.cboAgency_SelectedIndexChanged);
             this.cboAgency.Leave += new System.EventHandler(this.cboAgency_Leave);
@@ -153,7 +153,7 @@
             this.txtPhone.Location = new System.Drawing.Point(214, 418);
             this.txtPhone.Mask = "(999) 000-0000";
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(233, 29);
+            this.txtPhone.Size = new System.Drawing.Size(190, 29);
             this.txtPhone.TabIndex = 10;
             this.txtPhone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtPhone_MaskInputRejected);
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
@@ -174,7 +174,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEmail.Location = new System.Drawing.Point(214, 456);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(233, 29);
+            this.txtEmail.Size = new System.Drawing.Size(190, 29);
             this.txtEmail.TabIndex = 11;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
@@ -197,7 +197,7 @@
             this.cboHomeAgency.FormattingEnabled = true;
             this.cboHomeAgency.Location = new System.Drawing.Point(214, 491);
             this.cboHomeAgency.Name = "cboHomeAgency";
-            this.cboHomeAgency.Size = new System.Drawing.Size(233, 32);
+            this.cboHomeAgency.Size = new System.Drawing.Size(190, 32);
             this.cboHomeAgency.TabIndex = 12;
             this.cboHomeAgency.Leave += new System.EventHandler(this.cboHomeAgency_Leave);
             // 
@@ -216,7 +216,7 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(451, 259);
+            this.button1.Location = new System.Drawing.Point(408, 259);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 92;
@@ -230,7 +230,7 @@
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Location = new System.Drawing.Point(451, 345);
+            this.button2.Location = new System.Drawing.Point(408, 345);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 26);
             this.button2.TabIndex = 93;
@@ -245,7 +245,7 @@
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button6.Location = new System.Drawing.Point(453, 495);
+            this.button6.Location = new System.Drawing.Point(410, 495);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 26);
             this.button6.TabIndex = 97;
@@ -262,7 +262,7 @@
             this.txtNOKName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNOKName.Location = new System.Drawing.Point(214, 632);
             this.txtNOKName.Name = "txtNOKName";
-            this.txtNOKName.Size = new System.Drawing.Size(233, 29);
+            this.txtNOKName.Size = new System.Drawing.Size(190, 29);
             this.txtNOKName.TabIndex = 16;
             this.toolTip1.SetToolTip(this.txtNOKName, "Ideally, your EMBC ID#");
             this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged);
@@ -272,7 +272,7 @@
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Location = new System.Drawing.Point(453, 631);
+            this.button3.Location = new System.Drawing.Point(410, 631);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 26);
             this.button3.TabIndex = 125;
@@ -288,7 +288,7 @@
             this.txtWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtWeight.Location = new System.Drawing.Point(214, 667);
             this.txtWeight.Name = "txtWeight";
-            this.txtWeight.Size = new System.Drawing.Size(233, 29);
+            this.txtWeight.Size = new System.Drawing.Size(190, 29);
             this.txtWeight.TabIndex = 130;
             this.toolTip1.SetToolTip(this.txtWeight, "Ideally, your EMBC ID#");
             this.txtWeight.TextChanged += new System.EventHandler(this.txtWeight_TextChanged);
@@ -325,7 +325,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCallsign.Location = new System.Drawing.Point(214, 529);
             this.txtCallsign.Name = "txtCallsign";
-            this.txtCallsign.Size = new System.Drawing.Size(233, 29);
+            this.txtCallsign.Size = new System.Drawing.Size(190, 29);
             this.txtCallsign.TabIndex = 13;
             this.txtCallsign.TextChanged += new System.EventHandler(this.txtCallsign_TextChanged);
             // 
@@ -567,7 +567,7 @@
             this.cboCountry.Location = new System.Drawing.Point(214, 299);
             this.cboCountry.Margin = new System.Windows.Forms.Padding(6);
             this.cboCountry.Name = "cboCountry";
-            this.cboCountry.Size = new System.Drawing.Size(233, 32);
+            this.cboCountry.Size = new System.Drawing.Size(190, 32);
             this.cboCountry.TabIndex = 7;
             this.cboCountry.Leave += new System.EventHandler(this.cboCountry_Leave);
             // 
@@ -588,7 +588,7 @@
             this.txtMiddleName.Location = new System.Drawing.Point(214, 47);
             this.txtMiddleName.Margin = new System.Windows.Forms.Padding(6);
             this.txtMiddleName.Name = "txtMiddleName";
-            this.txtMiddleName.Size = new System.Drawing.Size(233, 29);
+            this.txtMiddleName.Size = new System.Drawing.Size(190, 29);
             this.txtMiddleName.TabIndex = 1;
             this.txtMiddleName.TextChanged += new System.EventHandler(this.txtMiddleName_TextChanged);
             // 
@@ -609,7 +609,7 @@
             this.txtLastName.Location = new System.Drawing.Point(214, 88);
             this.txtLastName.Margin = new System.Windows.Forms.Padding(6);
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(233, 29);
+            this.txtLastName.Size = new System.Drawing.Size(190, 29);
             this.txtLastName.TabIndex = 2;
             this.txtLastName.TextChanged += new System.EventHandler(this.txtLastName_TextChanged);
             // 
@@ -637,7 +637,7 @@
             this.cboGender.Location = new System.Drawing.Point(214, 129);
             this.cboGender.Margin = new System.Windows.Forms.Padding(6);
             this.cboGender.Name = "cboGender";
-            this.cboGender.Size = new System.Drawing.Size(233, 32);
+            this.cboGender.Size = new System.Drawing.Size(190, 32);
             this.cboGender.TabIndex = 3;
             this.cboGender.Leave += new System.EventHandler(this.cboGender_Leave);
             // 
@@ -718,12 +718,14 @@
             "Contractor"});
             this.cboKind.Location = new System.Drawing.Point(214, 170);
             this.cboKind.Name = "cboKind";
-            this.cboKind.Size = new System.Drawing.Size(233, 32);
+            this.cboKind.Size = new System.Drawing.Size(190, 32);
             this.cboKind.TabIndex = 4;
             this.cboKind.Leave += new System.EventHandler(this.cboKind_Leave);
             // 
             // cboType
             // 
+            this.cboType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboType.FormattingEnabled = true;
             this.cboType.Items.AddRange(new object[] {
@@ -732,7 +734,7 @@
             "Type 3"});
             this.cboType.Location = new System.Drawing.Point(214, 213);
             this.cboType.Name = "cboType";
-            this.cboType.Size = new System.Drawing.Size(233, 32);
+            this.cboType.Size = new System.Drawing.Size(190, 32);
             this.cboType.TabIndex = 5;
             this.cboType.Leave += new System.EventHandler(this.cboType_Leave);
             // 
@@ -792,8 +794,9 @@
             this.Controls.Add(this.txtFirstName);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(442, 702);
             this.Name = "PersonnelEditControl";
-            this.Size = new System.Drawing.Size(485, 702);
+            this.Size = new System.Drawing.Size(442, 702);
             this.Load += new System.EventHandler(this.PersonnelEditControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).EndInit();
             this.ResumeLayout(false);

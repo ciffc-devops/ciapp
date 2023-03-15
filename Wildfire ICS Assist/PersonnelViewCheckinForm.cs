@@ -37,7 +37,6 @@ namespace Wildfire_ICS_Assist
         private void PersonnelViewCheckinForm_Load(object sender, EventArgs e)
         {
             Program.wfIncidentService.MemberSignInChanged += Program_StatusChanged;
-            Program.wfIncidentService.TeamAssignmentChanged += Program_AssignmentChanged;
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
 

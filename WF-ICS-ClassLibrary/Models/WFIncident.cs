@@ -44,7 +44,13 @@ ProtoInclude(127, typeof(SubjectProfile)),
  ProtoInclude(130, typeof(TimelineEvent)),
         ProtoInclude(131, typeof(OperationalGroup)),
                 ProtoInclude(132, typeof(OperationalSubGroup)),
- ProtoInclude(133, typeof(Vehicle))]
+ ProtoInclude(133, typeof(Vehicle)),
+        ProtoInclude(134, typeof(DemobilizationRecord))
+        ]
+
+
+
+
     [Serializable]
 
 
@@ -144,6 +150,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(49)] private List<PositionLogEntry> _allPositionLogEntries = new List<PositionLogEntry>();
         [ProtoMember(50)] private string _taskEncryptionKey;
         [ProtoMember(51)] private List<TaskUpdate> _allTaskUpdates = new List<TaskUpdate>();
+        [ProtoMember(52)] private List<DemobilizationRecord> _allDemobilizationRecords = new List<DemobilizationRecord>();
 
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
@@ -267,6 +274,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<OperationalGroup> ActiveOperationalGroups { get => AllOperationalGroups.Where(o => o.Active).ToList(); }
         public List<OperationalSubGroup> AllOperationalSubGroups { get => _AllOperationalSubGroups; set => _AllOperationalSubGroups = value; }
         public List<OperationalSubGroup> ActiveOperationalSubGroups { get => AllOperationalSubGroups.Where(o => o.Active).ToList(); }
+        public List<DemobilizationRecord> AllDemobilizationRecords { get => _allDemobilizationRecords; set => _allDemobilizationRecords = value; }
+        public List<DemobilizationRecord> ActiveDemobilizationRecords { get => _allDemobilizationRecords.Where(o=>o.Active).ToList(); } 
 
         //for network reasons
 

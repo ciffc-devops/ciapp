@@ -31,16 +31,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvTeamMembers = new System.Windows.Forms.DataGridView();
-            this.colProvince = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.colProvince = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,7 +72,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
             this.splitContainer1.Size = new System.Drawing.Size(844, 468);
-            this.splitContainer1.SplitterDistance = 408;
+            this.splitContainer1.SplitterDistance = 405;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -84,6 +86,8 @@
             this.colProvince,
             this.colAgency,
             this.colName,
+            this.colKind,
+            this.colType,
             this.colPhone});
             this.dgvTeamMembers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTeamMembers.Location = new System.Drawing.Point(0, 0);
@@ -93,47 +97,9 @@
             this.dgvTeamMembers.RowHeadersVisible = false;
             this.dgvTeamMembers.RowTemplate.Height = 35;
             this.dgvTeamMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTeamMembers.Size = new System.Drawing.Size(844, 408);
+            this.dgvTeamMembers.Size = new System.Drawing.Size(844, 405);
             this.dgvTeamMembers.TabIndex = 1;
             this.dgvTeamMembers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTeamMembers_CellDoubleClick);
-            // 
-            // colProvince
-            // 
-            this.colProvince.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colProvince.DataPropertyName = "ProvinceNameShort";
-            this.colProvince.HeaderText = "Prov./Terr.";
-            this.colProvince.Name = "colProvince";
-            this.colProvince.ReadOnly = true;
-            this.colProvince.Width = 123;
-            // 
-            // colAgency
-            // 
-            this.colAgency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colAgency.DataPropertyName = "Agency";
-            this.colAgency.HeaderText = "Agency";
-            this.colAgency.Name = "colAgency";
-            this.colAgency.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "Name";
-            this.colName.HeaderText = "Name";
-            this.colName.MinimumWidth = 150;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colPhone
-            // 
-            this.colPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colPhone.DataPropertyName = "Phone";
-            dataGridViewCellStyle1.Format = "###-###-####";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPhone.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colPhone.HeaderText = "Phone";
-            this.colPhone.Name = "colPhone";
-            this.colPhone.ReadOnly = true;
-            this.colPhone.Width = 91;
             // 
             // btnExport
             // 
@@ -207,7 +173,59 @@
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
-            // SavedTeamMembersForm
+            // colProvince
+            // 
+            this.colProvince.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colProvince.DataPropertyName = "ProvinceNameShort";
+            this.colProvince.HeaderText = "Prov./Terr.";
+            this.colProvince.Name = "colProvince";
+            this.colProvince.ReadOnly = true;
+            this.colProvince.Width = 123;
+            // 
+            // colAgency
+            // 
+            this.colAgency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colAgency.DataPropertyName = "Agency";
+            this.colAgency.HeaderText = "Agency";
+            this.colAgency.Name = "colAgency";
+            this.colAgency.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "Name";
+            this.colName.HeaderText = "Name";
+            this.colName.MinimumWidth = 150;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colKind
+            // 
+            this.colKind.DataPropertyName = "Kind";
+            this.colKind.HeaderText = "Kind";
+            this.colKind.Name = "colKind";
+            this.colKind.ReadOnly = true;
+            // 
+            // colType
+            // 
+            this.colType.DataPropertyName = "Type";
+            this.colType.HeaderText = "Type";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            // 
+            // colPhone
+            // 
+            this.colPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colPhone.DataPropertyName = "Phone";
+            dataGridViewCellStyle1.Format = "###-###-####";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colPhone.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colPhone.HeaderText = "Phone";
+            this.colPhone.Name = "colPhone";
+            this.colPhone.ReadOnly = true;
+            this.colPhone.Width = 91;
+            // 
+            // SavedPersonnelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -216,7 +234,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "SavedTeamMembersForm";
+            this.Name = "SavedPersonnelForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Saved Personnel";
             this.Load += new System.EventHandler(this.SavedTeamMembersForm_Load);
@@ -242,6 +260,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProvince;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAgency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colKind;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
     }
 }
