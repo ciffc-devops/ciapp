@@ -255,7 +255,7 @@ new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Duration
         [ProtoMember(14)] private bool _Active;
         [ProtoMember(15)] private int _OpPeriod;
         [ProtoMember(16)] private DateTime _LastUpdatedUTC;
-
+        [ProtoMember(17)] private bool _PerformanceRatingCompleted;
 
 
         public DemobilizationRecord() { ID = Guid.NewGuid(); Active = true; }
@@ -277,6 +277,7 @@ new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Duration
         public bool Active { get => _Active; set => _Active = value; }
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+        public bool PerformanceRatingCompleted { get => _PerformanceRatingCompleted; set => _PerformanceRatingCompleted = value; }
 
 
         public DemobilizationRecord Clone()

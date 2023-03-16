@@ -56,6 +56,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txtTravelTime = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.chkPerformanceRating = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // datCheckInDate
@@ -407,10 +409,37 @@
             this.txtTravelTime.TabIndex = 3;
             this.txtTravelTime.TextChanged += new System.EventHandler(this.txtTravelTime_TextChanged);
             // 
+            // label15
+            // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label15.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label15.Location = new System.Drawing.Point(24, 551);
+            this.label15.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(288, 24);
+            this.label15.TabIndex = 162;
+            this.label15.Text = "Performance Rating Completed";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkPerformanceRating
+            // 
+            this.chkPerformanceRating.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.chkPerformanceRating.AutoSize = true;
+            this.chkPerformanceRating.Location = new System.Drawing.Point(324, 551);
+            this.chkPerformanceRating.Name = "chkPerformanceRating";
+            this.chkPerformanceRating.Size = new System.Drawing.Size(61, 28);
+            this.chkPerformanceRating.TabIndex = 161;
+            this.chkPerformanceRating.Text = "Yes";
+            this.chkPerformanceRating.UseVisualStyleBackColor = true;
+            this.chkPerformanceRating.CheckedChanged += new System.EventHandler(this.chkPerformanceRating_CheckedChanged);
+            // 
             // DemobilizationEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.chkPerformanceRating);
             this.Controls.Add(this.txtTravelTime);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -443,7 +472,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(476, 558);
             this.Name = "DemobilizationEditControl";
-            this.Size = new System.Drawing.Size(476, 558);
+            this.Size = new System.Drawing.Size(476, 583);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -479,5 +508,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtTravelTime;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.CheckBox chkPerformanceRating;
     }
 }

@@ -55,8 +55,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(470, 625);
-            this.splitContainer1.SplitterDistance = 558;
+            this.splitContainer1.Size = new System.Drawing.Size(470, 650);
+            this.splitContainer1.SplitterDistance = 583;
             this.splitContainer1.TabIndex = 0;
             // 
             // btnSave
@@ -91,27 +91,28 @@
             // 
             // demobilizationEditControl1
             // 
-            this.demobilizationEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.demobilizationEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.demobilizationEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.demobilizationEditControl1.Location = new System.Drawing.Point(0, 0);
             this.demobilizationEditControl1.Margin = new System.Windows.Forms.Padding(6);
             this.demobilizationEditControl1.MinimumSize = new System.Drawing.Size(476, 558);
             this.demobilizationEditControl1.Name = "demobilizationEditControl1";
-            this.demobilizationEditControl1.Size = new System.Drawing.Size(476, 558);
+            this.demobilizationEditControl1.Size = new System.Drawing.Size(476, 577);
             this.demobilizationEditControl1.TabIndex = 0;
             // 
             // DemobilizeResourceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 625);
+            this.ClientSize = new System.Drawing.Size(470, 650);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(486, 664);
+            this.MinimumSize = new System.Drawing.Size(486, 689);
             this.Name = "DemobilizeResourceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Demobilize Resource";

@@ -46,6 +46,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             chkWithFinance.Checked = SelectedDemobRecord.DiscrepanciesWithFinance;
             chkWithSupply.Checked = SelectedDemobRecord.DiscrepanciesWithSupply;
             chk211.Checked = SelectedDemobRecord.ICS211Completed;
+            chkPerformanceRating.Checked = SelectedDemobRecord.PerformanceRatingCompleted;
         }
 
         private void datCheckOutDate_ValueChanged(object sender, EventArgs e)
@@ -96,6 +97,12 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void chk211_CheckedChanged(object sender, EventArgs e)
         {
             SelectedDemobRecord.ICS211Completed = ((CheckBox)sender).Checked;
+        }
+
+        private void chkPerformanceRating_CheckedChanged(object sender, EventArgs e)
+        {
+            SelectedDemobRecord.PerformanceRatingCompleted = ((CheckBox)sender).Checked;
+
         }
     }
 }
