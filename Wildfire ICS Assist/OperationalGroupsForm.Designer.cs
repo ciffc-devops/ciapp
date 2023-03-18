@@ -48,6 +48,7 @@
             this.addNewTaskForceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewStrikeTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewSingleResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.svdExport = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -200,6 +201,7 @@
             this.btnExportSignInToCSV.Text = "Export to CSV";
             this.btnExportSignInToCSV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExportSignInToCSV.UseVisualStyleBackColor = true;
+            this.btnExportSignInToCSV.Click += new System.EventHandler(this.btnExportSignInToCSV_Click);
             // 
             // btnAddBranch
             // 
@@ -275,6 +277,11 @@
             this.addNewSingleResourceToolStripMenuItem.Text = "Add new Single Resource";
             this.addNewSingleResourceToolStripMenuItem.Click += new System.EventHandler(this.addNewSingleResourceToolStripMenuItem_Click);
             // 
+            // svdExport
+            // 
+            this.svdExport.DefaultExt = "csv";
+            this.svdExport.Filter = "Comma-separated values|*.csv";
+            // 
             // OperationalGroupsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -321,5 +328,6 @@
         private System.Windows.Forms.TreeView treeOpsChart;
         private CustomControls.OperationalGroupReportingResourcesControl operationalGroupReportingResourcesControl1;
         private CustomControls.StrikeTeamTaskForceDetailsControl strikeTeamTaskForceDetailsControl1;
+        private System.Windows.Forms.SaveFileDialog svdExport;
     }
 }

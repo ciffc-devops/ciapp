@@ -44,6 +44,7 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public bool Active { get => _Active; set => _Active = value; }
         public string ImageBytes { get => _ImageBytes; set => _ImageBytes = value; }
+        public string CopyNextOpText { get; set; } = "Copy to next op";
 
         public SafetyMessage Clone()
         {

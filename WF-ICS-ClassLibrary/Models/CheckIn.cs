@@ -161,7 +161,8 @@ namespace WF_ICS_ClassLibrary.Models
         {
             if (incident.AllCheckInRecords.Any(o => o.Active && o.ResourceID == ResourceID))
             {
-                return incident.AllCheckInRecords.Any(o => o.Active && o.CheckInDate <= AtThisTime && o.CheckOutDate >= AtThisTime);
+
+                return incident.AllCheckInRecords.Any(o => o.ResourceID == ResourceID && o.Active && o.CheckInDate <= AtThisTime && o.CheckOutDate >= AtThisTime && o.LastDayOnIncident.Date >= AtThisTime.Date);
 
             }
             return false;

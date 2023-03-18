@@ -71,7 +71,7 @@
             this.cboType.Location = new System.Drawing.Point(136, 10);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(267, 32);
-            this.cboType.TabIndex = 93;
+            this.cboType.TabIndex = 10;
             // 
             // label3
             // 
@@ -89,7 +89,7 @@
             this.txtIdentifier.Location = new System.Drawing.Point(136, 48);
             this.txtIdentifier.Name = "txtIdentifier";
             this.txtIdentifier.Size = new System.Drawing.Size(267, 29);
-            this.txtIdentifier.TabIndex = 98;
+            this.txtIdentifier.TabIndex = 2;
             // 
             // label2
             // 
@@ -120,7 +120,7 @@
             this.cboSupervisor.Location = new System.Drawing.Point(620, 46);
             this.cboSupervisor.Name = "cboSupervisor";
             this.cboSupervisor.Size = new System.Drawing.Size(414, 32);
-            this.cboSupervisor.TabIndex = 100;
+            this.cboSupervisor.TabIndex = 5;
             this.toolTip1.SetToolTip(this.cboSupervisor, "Use the Check-In feature to add additional personnel");
             this.cboSupervisor.ValueMember = "PersonID";
             // 
@@ -145,7 +145,7 @@
             this.cboReportsTo.Location = new System.Drawing.Point(620, 8);
             this.cboReportsTo.Name = "cboReportsTo";
             this.cboReportsTo.Size = new System.Drawing.Size(414, 32);
-            this.cboReportsTo.TabIndex = 95;
+            this.cboReportsTo.TabIndex = 4;
             this.cboReportsTo.ValueMember = "RoleID";
             this.cboReportsTo.Leave += new System.EventHandler(this.cboReportsTo_Leave);
             // 
@@ -166,7 +166,7 @@
             this.txtComments.Multiline = true;
             this.txtComments.Name = "txtComments";
             this.txtComments.Size = new System.Drawing.Size(898, 62);
-            this.txtComments.TabIndex = 103;
+            this.txtComments.TabIndex = 6;
             // 
             // splitContainer1
             // 
@@ -227,7 +227,7 @@
             this.txtContact.Location = new System.Drawing.Point(136, 83);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(267, 29);
-            this.txtContact.TabIndex = 105;
+            this.txtContact.TabIndex = 3;
             // 
             // label6
             // 
@@ -246,7 +246,7 @@
             this.btnSave.Location = new System.Drawing.Point(909, 6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 51);
-            this.btnSave.TabIndex = 22;
+            this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -262,7 +262,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 21;
+            this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -276,7 +276,7 @@
             this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
             this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
             this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(1046, 390);
-            this.strikeTeamTaskForceDetailsControl1.TabIndex = 0;
+            this.strikeTeamTaskForceDetailsControl1.TabIndex = 7;
             // 
             // OperationalGroupSTTFEditForm
             // 

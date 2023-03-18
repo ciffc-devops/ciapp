@@ -135,6 +135,15 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To edit Branches, Divisions, Groups, Strike Teams, or Task Forces, please use the &quot;Assignment List&quot; tool instead..
+        /// </summary>
+        internal static string EditInAssignmnetList {
+            get {
+                return ResourceManager.GetString("EditInAssignmnetList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_137_cogwheel {

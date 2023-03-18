@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -12,6 +13,8 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class IncidentTools
     {
+
+
         public static int GetNextAssignmentNumber(this WFIncident incident, int Ops)
         {
             if (incident.AllAssignments.Any(o => o.OpPeriod == Ops))
@@ -366,13 +369,14 @@ namespace WF_ICS_ClassLibrary.Utilities
                     plan.PreparedBy = currentChart.getNameByRoleName("Logistics Section Chief");
                 }
 
+                /*
                 if (task.allMedicalPlans.Count > 0)
                 {
                     MedicalPlan old = task.allMedicalPlans.OrderByDescending(o => o.OpPeriod).First();
                     plan.Ambulances.AddRange(old.Ambulances);
                     plan.Hospitals.AddRange(old.Hospitals);
                 }
-
+                */
 
                 DateTime today = DateTime.Now;
                 plan.DatePrepared = today;
@@ -386,6 +390,30 @@ namespace WF_ICS_ClassLibrary.Utilities
                 //task.allMedicalPlans.Add(plan);
                 Globals.incidentService.UpsertMedicalPlan(plan);
 
+            }
+        }
+
+        public static OperationalPeriod createOpPeriodAsNeeded(this WFIncident incident, int newOpNumber)
+        {
+            if (!incident.AllOperationalPeriods.Any(o => o.PeriodNumber == newOpNumber))
+            {
+                OperationalPeriod prevOp = incident.AllOperationalPeriods.OrderByDescending(o => o.PeriodEnd).First();
+                if (prevOp == null)
+                {
+                    incident.GenerateFirstOpPeriod();
+                    prevOp = incident.AllOperationalPeriods.OrderByDescending(o => o.PeriodEnd).First();
+
+                }
+                OperationalPeriod period = new OperationalPeriod();
+                period.TaskID = incident.TaskID;
+                period.PeriodNumber = newOpNumber;
+                period.PeriodStart = prevOp.PeriodEnd.AddMinutes(1);
+                period.PeriodEnd = period.PeriodStart.AddHours(12);
+                return period;
+            }
+            else
+            {
+                return incident.AllOperationalPeriods.First(o => o.PeriodNumber == newOpNumber);
             }
         }
 
@@ -423,52 +451,74 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static void createOrgChartAsNeeded(this WFIncident task, int ops)
+        public static void createOrgChartAsNeeded(this WFIncident task, int ops, bool addRolesFromLastOps = true)
         {
             if (!task.allOrgCharts.Any(o => o.OpPeriod == ops))
             {
-                OrganizationChart chart = new OrganizationChart();
-                chart.OpPeriod = ops;
-
-                if (task.allOrgCharts.Any())
+               OrganizationChart chart = task.createOrgChartFromPrevious(0, ops);
+                if(chart != null)
                 {
-                    OrganizationChart lastOrg = task.allOrgCharts.OrderByDescending(o => o.OpPeriod).FirstOrDefault();
-                    chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, ops, chart.OrganizationalChartID );
+                    chart.CreateOpGroupsForOrgRoles(task);
+
+                    Globals.incidentService.UpsertOrganizationalChart(chart);
                 }
-                else
+            }
+        }
+
+        public static OrganizationChart createOrgChartFromPrevious(this WFIncident incident, int oldOps, int newOps)
+        {
+            OrganizationChart chart = new OrganizationChart();
+            chart.OpPeriod = newOps;
+
+
+            if (incident.allOrgCharts.Any(o=>o.OpPeriod == oldOps))
+            {
+                OrganizationChart lastOrg = incident.allOrgCharts.First(o=>o.OpPeriod == oldOps);
+                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.OrganizationalChartID);
+            } else if (oldOps == 0 && incident.allOrgCharts.Any(o=>o.OpPeriod != newOps))
+            {
+                OrganizationChart lastOrg = incident.allOrgCharts.OrderByDescending(o => o.OpPeriod).First();
+                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.OrganizationalChartID);
+            }
+            else
+            {
+                chart.AllRoles = OrgChartTools.GetBlankPrimaryRoles();
+                foreach (ICSRole role in chart.AllRoles) { role.OpPeriod = newOps; role.OrganizationalChartID = chart.OrganizationalChartID; }
+
+
+            }
+
+          
+
+
+            //chart.DatePrepared = DateTime.Now;
+
+
+            DateTime today = DateTime.Now;
+            chart.DatePrepared = today;
+            if (incident.getOpPeriodStart(newOps).DayOfYear != today.DayOfYear)
+            {
+                DateTime opStart = incident.getOpPeriodStart(newOps);
+                DateTime newDate = new DateTime(opStart.Year, opStart.Month, opStart.Day, today.Hour, today.Minute, today.Second);
+                chart.DatePrepared = newDate;
+            }
+
+
+            //task.allOrgCharts.Add(chart);
+            //Globals.incidentService.UpsertOrganizationalChart(chart);
+            return chart;
+        }
+
+        public static void CreateOpGroupsForOrgRoles(this OrganizationChart chart, WFIncident incident)
+        {
+            foreach (ICSRole role in chart.ActiveRoles.Where(o => o.IsOpGroupSup && !o.IsPlaceholder))
+            {
+                if (role.OperationalGroupID == Guid.Empty)
                 {
-                    chart.AllRoles = OrgChartTools.GetBlankPrimaryRoles();
-                    foreach(ICSRole role in chart.AllRoles) { role.OpPeriod = ops; role.OrganizationalChartID = chart.OrganizationalChartID; }
-
-
+                    OperationalGroup group = incident.createOperationalGroupFromRole(role);
+                    role.OperationalGroupID = group.ID;
+                    Globals.incidentService.UpsertOperationalGroup(group);
                 }
-
-                foreach(ICSRole role in chart.ActiveRoles.Where(o=> o.IsOpGroupSup && !o.IsPlaceholder))
-                {
-                    if(role.OperationalGroupID == Guid.Empty)
-                    {
-                        OperationalGroup group = task.createOperationalGroupFromRole(role);
-                        role.OperationalGroupID = group.ID;
-                        Globals.incidentService.UpsertOperationalGroup(group);
-                    }
-                }
-
-
-                //chart.DatePrepared = DateTime.Now;
-
-
-                DateTime today = DateTime.Now;
-                chart.DatePrepared = today;
-                if (task.getOpPeriodStart(ops).DayOfYear != today.DayOfYear)
-                {
-                    DateTime opStart = task.getOpPeriodStart(ops);
-                    DateTime newDate = new DateTime(opStart.Year, opStart.Month, opStart.Day, today.Hour, today.Minute, today.Second);
-                    chart.DatePrepared = newDate;
-                }
-
-
-                //task.allOrgCharts.Add(chart);
-                Globals.incidentService.UpsertOrganizationalChart(chart);
             }
         }
 
@@ -514,7 +564,9 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         public static int getNextObjectivePriority(this WFIncident task, int thisOpPeriod)
         {
-            if(task.allIncidentObjectives.First(o=>o.OpPeriod == thisOpPeriod).Objectives.Any())
+            task.createObjectivesSheetAsNeeded(thisOpPeriod);
+
+            if (task.allIncidentObjectives.First(o=>o.OpPeriod == thisOpPeriod).Objectives.Any())
             {
                 return task.allIncidentObjectives.First(o => o.OpPeriod == thisOpPeriod).Objectives.Max(o => o.Priority) + 1;
             }

@@ -3597,6 +3597,7 @@ namespace WildfireICSDesktopServices
                 foreach( ICSRole role in org.AllRoles.Where(o => o.IsOpGroupSup && !o.IsTFST && o.Active))
                 {
                     if(task.AllOperationalGroups.Any(o=>!o.IsBranchOrDiv && o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
+                    else if (!task.AllOperationalGroups.Any(o=>o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
                 }
 
 
@@ -3700,14 +3701,17 @@ namespace WildfireICSDesktopServices
                     }
 
                     List<IncidentResource> reportingResources = task.GetReportingResources(opGroup.ID);
-                    reportingResources.AddRange(task.ActiveOperationalGroups.Where(o => o.ParentID == div.RoleID));
+                    reportingResources.AddRange(task.ActiveOperationalGroups.Where(o => o.ParentID == div.RoleID && !o.IsBranchOrDiv));
                     List<CommsPlanItem> comms = new List<CommsPlanItem>();
                        
 
                     int assignmentRow = 1;
                     foreach (IncidentResource ta in reportingResources)
                     {
-                        stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ta.ResourceName);
+                        if (ta.GetType().Name.Equals("OperationalGroup"))
+                        {
+                            stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow,((OperationalGroup) ta).ResourceName);
+                        } else { stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ta.ResourceName); }
                         stamper.AcroFields.SetField("LeaderRow" + assignmentRow, ta.LeaderName);
                         stamper.AcroFields.SetField("No of PersonsRow" + assignmentRow, ta.NumberOfPeople.ToString());
                         stamper.AcroFields.SetField("Contact cell radio frequency etcRow" + assignmentRow, ta.Contact);
@@ -3793,7 +3797,7 @@ namespace WildfireICSDesktopServices
 
             if (task.ActiveOperationalGroups.Any(o=>o.OpPeriod == OpPeriodToExport))
             {
-                groupsToExport.AddRange(task.ActiveOperationalGroups.Where(o => !o.IsBranchOrDiv));
+                groupsToExport.AddRange(task.ActiveOperationalGroups.Where(o => !o.IsBranchOrDiv && o.OpPeriod == OpPeriodToExport));
 
 
                 foreach (OperationalGroup op in groupsToExport)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="7cffee75-b2c7-4b44-88a4-10d8a35ddf32" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.3.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
+	<Product Id="4F5D4DC1-2BC4-4FC1-BCA4-DFCD2DBB790C" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.4.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
          Manufacturer='CIFFC' />
 
@@ -232,6 +232,9 @@
 			</Component>
 			<Component Id='ICS_220_WF_Air_Operations_Summary_pdf' Guid ='9451fa2f-4bac-44b6-a5e2-1aacd4027a7b'>
 				<File Id='ICS_220_WF_Air_Operations_Summary_pdf' Name='ICS-220-WF Air Operations Summary.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-220-WF Air Operations Summary.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_204A_WF_Assignment_Details_pdf' Guid ='8133a843-bab4-4638-b172-1cdd0ab60dd8'>
+				<File Id='ICS_204A_WF_Assignment_Details_pdf' Name='ICS-204A-WF Assignment Details.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-204A-WF Assignment Details.pdf' KeyPath='yes'></File>
 			</Component>
 
 

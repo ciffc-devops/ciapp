@@ -354,7 +354,7 @@ namespace WF_ICS_ClassLibrary.Models
                 return AllowEditReportsTo;
             }
         }
-        public bool AllowEditReportsTo { get => string.IsNullOrEmpty(PDFFieldName); }
+        public bool AllowEditReportsTo { get { if (IsOpGroupSup || !string.IsNullOrEmpty(PDFFieldName)) { return false; } else { return true; } } }
         public bool AllowDelete { get => string.IsNullOrEmpty(PDFFieldName); }
 
         public bool IsOpGroupSup { get => _IsOpGroupSup; set => _IsOpGroupSup = value; }

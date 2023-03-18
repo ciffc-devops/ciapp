@@ -149,7 +149,7 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(9, 372);
+            this.label14.Location = new System.Drawing.Point(9, 378);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(765, 29);
             this.label14.TabIndex = 9;
@@ -161,7 +161,7 @@
             this.btnVisitor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVisitor.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_35_user_incognito;
             this.btnVisitor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVisitor.Location = new System.Drawing.Point(384, 518);
+            this.btnVisitor.Location = new System.Drawing.Point(384, 524);
             this.btnVisitor.Name = "btnVisitor";
             this.btnVisitor.Size = new System.Drawing.Size(243, 91);
             this.btnVisitor.TabIndex = 3;
@@ -175,7 +175,7 @@
             this.btnSinglePersonnel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSinglePersonnel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
             this.btnSinglePersonnel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSinglePersonnel.Location = new System.Drawing.Point(135, 518);
+            this.btnSinglePersonnel.Location = new System.Drawing.Point(135, 524);
             this.btnSinglePersonnel.Name = "btnSinglePersonnel";
             this.btnSinglePersonnel.Size = new System.Drawing.Size(243, 91);
             this.btnSinglePersonnel.TabIndex = 2;
@@ -189,7 +189,7 @@
             this.btnVehicleEquipment.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVehicleEquipment.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
             this.btnVehicleEquipment.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVehicleEquipment.Location = new System.Drawing.Point(384, 421);
+            this.btnVehicleEquipment.Location = new System.Drawing.Point(384, 427);
             this.btnVehicleEquipment.Name = "btnVehicleEquipment";
             this.btnVehicleEquipment.Size = new System.Drawing.Size(243, 91);
             this.btnVehicleEquipment.TabIndex = 1;
@@ -203,7 +203,7 @@
             this.btnCrew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_532_user_family;
             this.btnCrew.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCrew.Location = new System.Drawing.Point(135, 421);
+            this.btnCrew.Location = new System.Drawing.Point(135, 427);
             this.btnCrew.Name = "btnCrew";
             this.btnCrew.Size = new System.Drawing.Size(243, 91);
             this.btnCrew.TabIndex = 0;
@@ -246,6 +246,7 @@
             this.personnelEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.personnelEditControl1.Location = new System.Drawing.Point(12, 44);
             this.personnelEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.personnelEditControl1.MinimumSize = new System.Drawing.Size(442, 702);
             this.personnelEditControl1.Name = "personnelEditControl1";
             this.personnelEditControl1.Size = new System.Drawing.Size(739, 707);
             this.personnelEditControl1.TabIndex = 9;

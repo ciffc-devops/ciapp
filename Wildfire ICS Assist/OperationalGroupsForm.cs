@@ -124,6 +124,8 @@ namespace Wildfire_ICS_Assist
 
             }
             treeOpsChart.Focus();
+
+            btnPrint204A.Enabled = Program.CurrentIncident.ActiveOperationalGroups.Any(o => !o.IsBranchOrDiv && o.OpPeriod == Program.CurrentOpPeriod);
         }
 
         private TreeNode GetSelectedByRoleID(Guid roleid)
@@ -302,7 +304,7 @@ namespace Wildfire_ICS_Assist
                     {
                         selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
 
-                        if (selectedGroup.GroupType.EqualsWithNull("Task Force") || selectedGroup.GroupType.EqualsWithNull("Strike Team"))
+                        if (selectedGroup.GroupType.EqualsWithNull("Task Force") || selectedGroup.GroupType.EqualsWithNull("Strike Team") || selectedGroup.GroupType.EqualsWithNull("Single Resource"))
                         {
                             OpenTFSTForEdit(selectedGroup);
                         }
@@ -336,8 +338,16 @@ namespace Wildfire_ICS_Assist
             if (treeOpsChart.SelectedNode != null)
             {
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                group.ParentID = role.RoleID;
-                group.ParentName = role.RoleName;
+                if (role.ReportsTo == Globals.OpsChiefID || role.RoleID == Globals.OpsChiefID)
+                {
+                    group.ParentID = role.RoleID;
+                    group.ParentName = role.RoleName;
+                }
+                else
+                {
+                    group.ParentID = role.ReportsTo;
+                    group.ParentName = role.ReportsToRoleName;
+                }
             }
             else
             {
@@ -354,8 +364,16 @@ namespace Wildfire_ICS_Assist
             if (treeOpsChart.SelectedNode != null)
             {
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                group.ParentID = role.RoleID;
-                group.ParentName = role.RoleName;
+                if (role.ReportsTo == Globals.OpsChiefID || role.RoleID == Globals.OpsChiefID)
+                {
+                    group.ParentID = role.RoleID;
+                    group.ParentName = role.RoleName;
+                }
+                else
+                {
+                    group.ParentID = role.ReportsTo;
+                    group.ParentName = role.ReportsToRoleName;
+                }
             }
             else
             {
@@ -375,8 +393,16 @@ namespace Wildfire_ICS_Assist
             if (treeOpsChart.SelectedNode != null)
             {
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                group.ParentID = role.RoleID;
-                group.ParentName = role.RoleName;
+                if (!role.IsTFST)
+                {
+                    group.ParentID = role.RoleID;
+                    group.ParentName = role.RoleName;
+                }
+                else
+                {
+                    group.ParentID = role.ReportsTo;
+                    group.ParentName = role.ReportsToRoleName;
+                }
             }
             else
             {
@@ -411,8 +437,16 @@ namespace Wildfire_ICS_Assist
             if (treeOpsChart.SelectedNode != null)
             {
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                group.ParentID = role.RoleID;
-                group.ParentName = role.RoleName;
+                if (!role.IsTFST)
+                {
+                    group.ParentID = role.RoleID;
+                    group.ParentName = role.RoleName;
+                }
+                else
+                {
+                    group.ParentID = role.ReportsTo;
+                    group.ParentName = role.ReportsToRoleName;
+                }
             }
             else
             {
@@ -448,8 +482,16 @@ namespace Wildfire_ICS_Assist
             if (treeOpsChart.SelectedNode != null)
             {
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                group.ParentID = role.RoleID;
-                group.ParentName = role.RoleName;
+                if (!role.IsTFST)
+                {
+                    group.ParentID = role.RoleID;
+                    group.ParentName = role.RoleName;
+                }
+                else
+                {
+                    group.ParentID = role.ReportsTo;
+                    group.ParentName = role.ReportsToRoleName;
+                }
             }
             else
             {
@@ -545,6 +587,45 @@ namespace Wildfire_ICS_Assist
             catch (Exception)
             {
                 MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+            }
+        }
+
+        private void btnExportSignInToCSV_Click(object sender, EventArgs e)
+        {
+            svdExport.FileName = "AssignmentList-" + Program.CurrentIncident.IncidentIdentifier + "-OP-" + Program.CurrentOpPeriod + ".csv";
+            DialogResult result = svdExport.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
+            {
+                string exportPath = svdExport.FileName;
+                string delimiter = ",";
+
+
+
+
+                List<ICSRole> roles = new List<ICSRole>();
+                foreach(ICSRole role in Program.CurrentOrgChart.ActiveRoles.Where(o=>o.IsOpGroupSup || o.RoleID == Globals.OpsChiefID))
+                {
+                    if (role.RoleID == Globals.OpsChiefID) { roles.Add(role); }
+                   else if (role.IsOpGroupSup) { roles.Add(role); }
+                }
+                List<OperationalGroup> groups = Program.CurrentIncident.ActiveOperationalGroups.Where(o=>o.OpPeriod == Program.CurrentOpPeriod).ToList();
+
+                string csv = OperationalGroupTools.OperationalGroupsToCSV(roles, groups, delimiter);
+                try
+                {
+                    System.IO.File.WriteAllText(exportPath, csv);
+
+                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    if (openNow == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(exportPath);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                }
             }
         }
     }

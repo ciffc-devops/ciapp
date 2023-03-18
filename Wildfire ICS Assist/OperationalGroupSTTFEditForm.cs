@@ -40,6 +40,7 @@ namespace Wildfire_ICS_Assist
             PopulateLeader();
             LoadGroup();
             Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            txtIdentifier.Focus();
         }
 
         private void LoadGroup()
@@ -121,6 +122,12 @@ namespace Wildfire_ICS_Assist
             SelectedGroup.Comments = txtComments.Text;
 
             SelectedGroup.ResourceListing = strikeTeamTaskForceDetailsControl1.selectedGroup.ResourceListing;
+
+            if (string.IsNullOrEmpty(SelectedGroup.PreparedByName)) { SelectedGroup.PreparedByName = Program.CurrentRole.IndividualName; }
+            if (string.IsNullOrEmpty(SelectedGroup.PreparedByPosition)) { SelectedGroup.PreparedByPosition = Program.CurrentRole.RoleName; }
+            if (SelectedGroup.PreparedByPositionID == Guid.Empty) { SelectedGroup.PreparedByPositionID = Program.CurrentRole.RoleID; }
+            
+
 
             if (cboSupervisor.SelectedItem != null)
             {

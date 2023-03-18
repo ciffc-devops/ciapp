@@ -199,7 +199,7 @@ namespace Wildfire_ICS_Assist
         PositionLogReminderForm _positionLogReminderForm = null;
         PersonnelListForm _personnelListForm = null;
         CheckedInResourcesForm _checkedInresourcesForm = null;
-
+        CloseOpPeriodForm _closeOpPeriodForm = null;
 
         public event ShortcutEventHandler ShortcutButtonClicked;
 
@@ -634,10 +634,12 @@ namespace Wildfire_ICS_Assist
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { this.Text = Globals.ProgramName + " - " + CurrentIncident.FileName; }
             else { this.Text = Globals.ProgramName; }
 
-            numOpPeriod.Value = CurrentIncident.highestOpsPeriod;
             if (!CurrentIncident.AllOperationalPeriods.Where(o => o.PeriodNumber == CurrentOpPeriod).Any()) { CurrentIncident.AllOperationalPeriods = CurrentIncident.InferOperationalPeriods(); }
-            datOpsStart.Value = CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentIncident.highestOpsPeriod).PeriodStart;
-            datOpsEnd.Value = CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentIncident.highestOpsPeriod).PeriodEnd;
+
+            int highestOpNum = 1; if (CurrentIncident.AllOperationalPeriodsWithContent.Any()) { highestOpNum = CurrentIncident.AllOperationalPeriodsWithContent.OrderByDescending(o => o.PeriodNumber).First().PeriodNumber; }
+            numOpPeriod.Value = highestOpNum;
+            datOpsStart.Value = CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == highestOpNum).PeriodStart;
+            datOpsEnd.Value = CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == highestOpNum).PeriodEnd;
 
 
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { tmrAutoSave.Enabled = Program.generalOptionsService.GetOptionsBoolValue("AutoSave"); }
@@ -2677,6 +2679,30 @@ namespace Wildfire_ICS_Assist
         }
 
 
+        private void OpenCloseOpPeriodForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (_closeOpPeriodForm == null)
+                {
+                    _closeOpPeriodForm = new CloseOpPeriodForm();
+                    _closeOpPeriodForm.FormClosed += new FormClosedEventHandler(CloseOpPeriodForm_Closed);
+                    ActiveForms.Add(_closeOpPeriodForm);
+                    _closeOpPeriodForm.Show(this);
+                }
+
+                _closeOpPeriodForm.BringToFront();
+            }
+        }
+        void CloseOpPeriodForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_closeOpPeriodForm);
+            _closeOpPeriodForm = null;
+
+
+        }
+
+
 
         private void btnLogisticsMemberStatus_Click(object sender, EventArgs e)
         {
@@ -2830,19 +2856,10 @@ namespace Wildfire_ICS_Assist
 
                 if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == newOpNumber))
                 {
-                    OperationalPeriod prevOp = Program.CurrentIncident.AllOperationalPeriods.OrderByDescending(o => o.PeriodEnd).First();
-                    if (prevOp == null)
-                    {
-                        Program.CurrentIncident.GenerateFirstOpPeriod();
-                        prevOp = Program.CurrentIncident.AllOperationalPeriods.OrderByDescending(o => o.PeriodEnd).First();
+                    OperationalPeriod per = Program.CurrentIncident.createOpPeriodAsNeeded(newOpNumber);
 
-                    }
-                    OperationalPeriod period = new OperationalPeriod();
-                    period.TaskID = CurrentIncident.TaskID;
-                    period.PeriodNumber = newOpNumber;
-                    period.PeriodStart = prevOp.PeriodEnd.AddMinutes(1);
-                    period.PeriodEnd = period.PeriodStart.AddHours(12);
-                    Program.wfIncidentService.UpsertOperationalPeriod(period);
+                    Program.wfIncidentService.UpsertOperationalPeriod(per);
+
                     Program.CurrentIncident.createOrgChartAsNeeded(newOpNumber);
                     Program.CurrentIncident.createObjectivesSheetAsNeeded(newOpNumber);
 
@@ -2887,6 +2904,13 @@ namespace Wildfire_ICS_Assist
         private void btnIncidentSummary_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This feature is not yet supported");
+        }
+
+        private void btnCloseOpPeriod_Click(object sender, EventArgs e)
+        {
+            
+                OpenCloseOpPeriodForm();
+            
         }
     }
 }

@@ -194,7 +194,13 @@ namespace Wildfire_ICS_Assist
                         Program.wfIncidentService.UpsertICSRole(addRoleForm.selectedRole);
                     }
                 }
-            } else { MessageBox.Show(Properties.Resources.ProtectedRole); }
+            }
+            else if (role.IsOpGroupSup)
+            {
+                MessageBox.Show(Properties.Resources.EditInAssignmnetList);
+            }
+
+            else { MessageBox.Show(Properties.Resources.ProtectedRole); }
         }
 
         private void btnEditRole_Click(object sender, EventArgs e)

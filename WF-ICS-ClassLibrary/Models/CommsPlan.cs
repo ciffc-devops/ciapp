@@ -230,7 +230,6 @@ namespace WF_ICS_ClassLibrary.Models
         {
             bool isEqual = true;
 
-            if (this.ItemID != other.ItemID) { return false; }
             if (isEqual && this.Active != other.Active) { return false; }
             if (isEqual && !this.CommsSystem.EqualsWithNull(other.CommsSystem)) { return false; }
             if (isEqual && !this.CallSign.EqualsWithNull(other.CallSign)) { return false; }

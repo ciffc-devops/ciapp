@@ -75,7 +75,7 @@ namespace WF_ICS_ClassLibrary.Models
             }
         }
         public string GroupType { get => _GroupType; set => _GroupType = value; }
-        public bool IsBranchOrDiv { get { if (GroupType.Equals("Branch") || GroupType.Equals("Division") || GroupType.Equals("Group")) { return true; } else if (ParentID == Globals.OpsChiefID) { return true; } return false; } }
+        public bool IsBranchOrDiv { get { if (GroupType.Equals("Branch") || GroupType.Equals("Division") || GroupType.Equals("Group")) { return true; }  return false; } }
         public Guid LeaderICSRoleID { get => _LeaderICSRoleID; set => _LeaderICSRoleID = value; }
         public string LeaderICSRoleName { get => _LeaderICSRoleName; set => _LeaderICSRoleName = value; }
 
@@ -201,6 +201,47 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class OperationalGroupTools
     {
+
+        public static string OperationalGroupsToCSV(List<ICSRole> roles, List<OperationalGroup> groups, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            csv.Append("Reports To"); csv.Append(delimiter);
+            csv.Append("Name"); csv.Append(delimiter);
+            csv.Append("Individual Name"); csv.Append(delimiter);
+            csv.Append("Contact"); csv.Append(delimiter);
+            csv.Append("Number of People"); csv.Append(delimiter);
+            csv.Append(Environment.NewLine);
+
+
+
+            foreach (ICSRole item in roles)
+            {
+
+                //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
+
+                csv.Append("\""); csv.Append(item.ReportsToRoleName); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.RoleName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.IndividualName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                if (groups.Any(o => o.LeaderICSRoleID == item.RoleID))
+                {
+                    csv.Append("\""); csv.Append(groups.First(o => o.LeaderICSRoleID == item.RoleID).Contact.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(groups.First(o => o.LeaderICSRoleID == item.RoleID).NumberOfPeople); csv.Append("\""); csv.Append(delimiter);
+
+
+                }
+                else
+                {
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+
+                }
+               
+
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
+        }
+
         public static string GetRoleNameFromGroup(this OperationalGroup record)
         {
             ICSRole NewRole = new ICSRole();

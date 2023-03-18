@@ -253,6 +253,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
         public List<OrganizationChart> allOrgCharts { get => _allOrgCharts; set => _allOrgCharts = value; }
+        public List<OrganizationChart> activeOrgCharts { get => _allOrgCharts.Where(o => o.Active).ToList(); }
         public List<MedicalPlan> allMedicalPlans { get => _allMedicalPlans; set => _allMedicalPlans = value; }
         public List<CommsPlan> allCommsPlans { get => _allCommsPlans; set => _allCommsPlans = value; }
         public List<CommsPlanItem> additionalCommsItems { get => _additionalCommsItems; set => _additionalCommsItems = value; }
