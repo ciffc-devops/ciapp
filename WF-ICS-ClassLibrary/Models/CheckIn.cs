@@ -44,7 +44,9 @@ namespace WF_ICS_ClassLibrary.Models
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public string ResourceType { get => _ResourceType; set => _ResourceType = value; }
         public bool IsPerson { get { return ResourceType.EqualsWithNull("Person") || ResourceType.Equals("Personnel"); } }
-        public bool IsVehicle { get { return ResourceType.EqualsWithNull("Vehicle") || ResourceType.Equals("Vehicle/Equipment"); } }
+        public bool IsOperator { get { return ResourceType.EqualsWithNull("Operator") || ResourceType.Equals("Operator"); } }
+        public bool IsVehicle { get { return ResourceType.EqualsWithNull("Vehicle") || ResourceType.Equals("Vehicle"); } }
+        public bool IsEquipment { get { return ResourceType.EqualsWithNull("Equipment") || ResourceType.Equals("Equipment"); } }
         public bool IsVisitor { get { return ResourceType.EqualsWithNull("Visitor"); } }
         public bool IsCrew { get { return ResourceType.EqualsWithNull("Crew"); } }
         public bool HasCheckOutTime { get => CheckOutDate < DateTime.MaxValue; }
@@ -69,9 +71,10 @@ namespace WF_ICS_ClassLibrary.Models
     public class CheckInInfoField : ICloneable
     {
         public CheckInInfoField() { ID = Guid.NewGuid(); }
-        public CheckInInfoField(Guid id, string name, string type, string group, bool visitor, bool person, bool vehicle, bool crew, bool reqd, string tooltip)
+        public CheckInInfoField(Guid id, string name, string type, string group, bool visitor, bool person, bool vehicle, bool crew, bool equip, bool op, bool reqd, string tooltip)
         {
-            ID = id; Name = name; FieldType = type; FieldGroup = group; UseForVisitor = visitor; UseForPersonnel = person; UseForVehicle = vehicle; UseForCrew = crew; IsRequired = reqd;ToolTipText = tooltip;
+            ID = id; Name = name; FieldType = type; FieldGroup = group;  IsRequired = reqd;ToolTipText = tooltip;
+            UseForVisitor = visitor; UseForPersonnel = person; UseForVehicle = vehicle; UseForCrew = crew; UseForEquipment = equip; UseForOperator = op;
         }
 
         [ProtoMember(1)] private Guid _ID;
@@ -89,7 +92,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private DateTime _DateValue;
         [ProtoMember(14)] private bool _IsRequired;
         [ProtoMember(15)] private string _ToolTipText;
-
+        [ProtoMember(10)] private bool _UseForEquipment; 
+        [ProtoMember(10)] private bool _UseForOperator;
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string Name { get => _Name; set => _Name = value; }
@@ -106,6 +110,9 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime DateValue { get => _DateValue; set => _DateValue = value; }
         public bool IsRequired { get => _IsRequired; set => _IsRequired = value; }
         public string ToolTipText { get => _ToolTipText; set => _ToolTipText = value; }
+        public bool UseForEquipment { get => _UseForEquipment; set => _UseForEquipment = value; }
+        public bool UseForOperator { get => _UseForOperator; set => _UseForOperator = value; }
+
 
         public CheckInInfoField Clone()
         {
@@ -183,7 +190,9 @@ namespace WF_ICS_ClassLibrary.Models
                 case "Visitor": return fields.Where(o => o.UseForVisitor).ToList();
                 case "Crew": return fields.Where(o => o.UseForCrew).ToList();
                 case "Personnel": return fields.Where(o => o.UseForPersonnel).ToList();
-                case "Vehicle/Equipment": return fields.Where(o => o.UseForVehicle).ToList();
+                case "Vehicle": return fields.Where(o => o.UseForVehicle).ToList();
+                case "Equipment": return fields.Where(o => o.UseForVehicle).ToList();
+                case "Operator": return fields.Where(o => o.UseForVehicle).ToList();
             }
             return new List<CheckInInfoField>();
         }
@@ -192,27 +201,36 @@ namespace WF_ICS_ClassLibrary.Models
         {
             List<CheckInInfoField> fields = new List<CheckInInfoField>
             {
-new CheckInInfoField(new Guid("5e1e518c-73db-43a2-8621-779e3e10ae88"), "Resource Order Number", "String", "Deployment Information", false, true, true,false,false, ""),
-new CheckInInfoField(new Guid("172791a7-2fe9-4e0a-9ac8-46d3efedf133"), "Position On Incident", "String", "Deployment Information", false, true, true,false,false, ""),
-new CheckInInfoField(new Guid("3aefed78-eaf9-4f52-a222-43fc389933ce"), "Check-In Location", "List", "Check In Information", false, true, true,true,false, ""),
-new CheckInInfoField(new Guid("17fe99e1-4a2c-4e15-9ae0-cc3258444b65"), "First Day on Incident", "DateTime", "Check In Information", false, true, true,true,false, ""),
-new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "In-briefing location & time", "String", "Check In Information", false, true, false,true,false, ""),
-new CheckInInfoField(new Guid("c9f49654-b5e5-4291-886b-8d24aaef5045"), "Accomodation Location", "List", "Logistics", true, true, false,true,false, ""),
-new CheckInInfoField(new Guid("43fe7e33-4d3d-4866-8401-2ffeaf6fc234"), "Breakfast", "Bool", "Logistics", true, true, false,true,false, "This person will need a meal provided"),
-new CheckInInfoField(new Guid("dcb8f7d2-7904-40d9-8cec-74fce2735ba1"), "Lunch", "Bool", "", true, true, false,true,false, "This person will need a meal provided"),
-new CheckInInfoField(new Guid("3ef2e4a5-fa43-49e9-b69b-00e86a7e62cc"), "Dinner", "Bool", "", true, true, false,true,false, "This person will need a meal provided"),
-new CheckInInfoField(new Guid("9369c50e-3b39-40b8-8557-c25af007ab74"), "Method of Travel", "List", "Logistics", true, true, true,true,false, "Method of Travel to Incident"),
-new CheckInInfoField(new Guid("3458d7d5-a5a5-4104-8488-949ff64c4d31"), "Vehicle License #", "String", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Year / Make / Model", "String", "Logistics", true, true, false,true,false, ""),
-new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "Agency Owned Vehicle", "Bool", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("1934af9e-58ea-4a62-ae4a-16bbb3dbf522"), "Rental Vehicle ", "Bool", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contractor Vehicle(s)", "Bool", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("2631596d-1429-4477-99af-e8459377056a"), "Private Vehicle ", "Bool", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("63c0e3e2-f8d0-447e-a03e-a30eafa003ad"), "Mobile Equip", "String", "Logistics", true, true, false,true,false, "Incident Identification Number ('V' numbers)"),
-new CheckInInfoField(new Guid("940174cc-3c4a-4fbe-99c6-42676f1b5d5e"), "Gear Required", "String", "Logistics", true, true, false,true,false, "Fireline equipment/gear needed from supply unit"),
-new CheckInInfoField(new Guid("e4b5c369-6cb6-4773-aebe-acec8a206ca1"), "Reason for visit", "string", "Visitor Info", true, false, false,false,true, ""),
-new CheckInInfoField(new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), "Incident contact", "string", "Visitor Info", true, false, false,false,true, ""),
-new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Duration of Visit", "string", "Visitor Info", true, false, false,false,true, "")
+                new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individuals weight ", "String", "Individual Info", false, true, false,true,false,true,false, "Enter the individuals seat weight. "),
+                new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Unique Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,true, "Enter the crews unique agency identifer i.e. RU01, Flathead Unit crew, Dryden IA, etc. "),
+                new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "CIFFC Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,false, "Enter the CIFFC crew identifier if the crew is imported through CIFFC i.e C-30"),
+                new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info i.e. cell and email", "String", "Crew Info", false, false, false,true,false,false,true, "0"),
+                new CheckInInfoField(new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), "Resource Order Number", "String", "Deployment Information", false, true, true,true,true,true,false, "Enter agency specific order number or order identifier. "),
+                new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Position On Incident", "String", "Deployment Information", false, true, true,false,true,true,true, "0"),
+                new CheckInInfoField(new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe"), "Check-In Location", "List", "Check In Information", true, true, true,true,true,true,true, "0"),
+                new CheckInInfoField(new Guid("c62a8935-7413-41f1-a2b2-682d4064b08a"), "Check-In Date", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                new CheckInInfoField(new Guid("4836ad52-a6a8-4faa-b6f4-39ef941476b1"), "Check-In Time", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                new CheckInInfoField(new Guid("eacbe40c-d674-40d6-a5eb-3f807e13277a"), "Last Day of Rest", "String", "Check In Information", false, true, false,true,false,true,true, "Enter the resources last day of rest/day off. "),
+                new CheckInInfoField(new Guid("9afc627f-bdad-4076-8d9a-3511759ea2bf"), "First Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                new CheckInInfoField(new Guid("49602e27-8603-4d24-8228-83a3ed4d81d4"), "Last Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                new CheckInInfoField(new Guid("cb7f504c-6233-4c4d-aa67-780b8c90baa7"), "Agency i.e. Parks Canada, Alberta, Town Of Banff, City of Ft.McMurray, Canada Task Force 2, etc", "String", "Check In Information", true, true, true,true,true,true,true, "Enter the resources home agency. "),
+                new CheckInInfoField(new Guid("7a39df77-cb16-463c-812b-573bfa97de5d"), "Accomodation Location", "List", "Logistics", true, true, false,true,false,true,false, "Enter where the resource is staying. "),
+                new CheckInInfoField(new Guid("09e8e520-a82e-491f-a82e-ed108e809392"), "Breakfast", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
+                new CheckInInfoField(new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4"), "Lunch", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
+                new CheckInInfoField(new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488"), "Dinner", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
+                new CheckInInfoField(new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89"), "Method of Travel to Incident", "List", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("2e69adbd-126b-4ae1-abc0-919dca191f68"), "Vehicle License #", "String", "Logistics", false, false, true,false,false,false,false, "0"),
+                new CheckInInfoField(new Guid("ec82d677-a731-4a31-8bb8-452cbafaa58b"), "Year / Make / Model", "String", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f"), "Agency Owned Vehicle", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("c1399559-2ac8-49da-8ce8-cd711365417d"), "Rental Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d"), "Contractor Vehicle(s)", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368"), "Private Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("3208d48d-eaf2-4f9e-b526-3d3437610d16"), "Mobile Equip - Incident Identification Number ('V' numbers)", "String", "Logistics", true, true, false,true,false,false,false, "0"),
+                new CheckInInfoField(new Guid("40718587-d6ee-480a-8451-6c7f02d272a5"), "Fireline equipment/gear needed from supply unit", "String", "Logistics", true, true, false,true,false,false,false, "0"),
+                new CheckInInfoField(new Guid("99c4d8c6-3b39-42f1-af6f-33525b2da4e7"), "Reason for visit", "List", "Visitor Info", true, false, false,false,false,false,true, "0"),
+                new CheckInInfoField(new Guid("c3704eab-5c8e-4619-91f0-4df014560c7a"), "Incident contact", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the IMT individual who the visitor is to report to."),
+                new CheckInInfoField(new Guid("ad5b511a-a99f-4310-ba66-4eeb41ec6ab9"), "Duration of Visit", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the duration of visit down to the nearest day. If the visit is only for 2 hours then enter 1 day. "),
+
 
             };
 

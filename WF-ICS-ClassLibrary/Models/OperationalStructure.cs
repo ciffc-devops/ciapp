@@ -136,8 +136,8 @@ namespace WF_ICS_ClassLibrary.Models
         {
             ResourceListing = ResourceListing.Where(o => o.ID != listing.ID).ToList();
             ResourceListing.Add(listing);
-            NumberOfPeople = ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Personnel"));
-            NumberOfVehicles = ResourceListing.Count(o => o.Active && o.ResourceType.Equals("Vehicle/Equipment"));
+            NumberOfPeople = ResourceListing.Count(o => o.Active && (o.ResourceType.Equals("Personnel") || o.ResourceType.Equals("Operator")));
+            NumberOfVehicles = ResourceListing.Count(o => o.Active && (o.ResourceType.Equals("Vehicle") || o.ResourceType.Equals("Equipment")));
             if (listing.IsLeader) { LeaderName = listing.LeaderName; LeaderID = listing.ResourceID; }
         }
 
@@ -177,8 +177,8 @@ namespace WF_ICS_ClassLibrary.Models
             set
             {
                 _ResourceType = value;
-                if (ResourceType.Equals("Vehicle/Equipment")) { NumberOfVehicles = 1; NumberOfPeople = 0; }
-                else if (ResourceType.Equals("Personnel")) { NumberOfPeople = 1; NumberOfVehicles = 0; }
+                if (ResourceType.Equals("Vehicle") || ResourceType.Equals("Equipment")) { NumberOfVehicles = 1; NumberOfPeople = 0; }
+                else if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator")) { NumberOfPeople = 1; NumberOfVehicles = 0; }
             }
         }
         public string Role { get => _Role; set => _Role = value; }
@@ -373,8 +373,8 @@ namespace WF_ICS_ClassLibrary.Models
         }
         public static void UpdateThisGroupCount(this WFIncident incident, OperationalSubGroup sub)
         {
-            sub.NumberOfPeople = sub.ActiveResourceListing.Count(o => o.ResourceType.Equals("Personnel"));
-            sub.NumberOfVehicles = sub.ActiveResourceListing.Count(o => o.ResourceType.Equals("Vehicle/Equipment"));
+            sub.NumberOfPeople = sub.ActiveResourceListing.Count(o => (o.ResourceType.Equals("Personnel") || o.ResourceType.Equals("Operator")));
+            sub.NumberOfVehicles = sub.ActiveResourceListing.Count(o => (o.ResourceType.Equals("Vehicle") || o.ResourceType.Equals("Equipment")));
 
         }
 

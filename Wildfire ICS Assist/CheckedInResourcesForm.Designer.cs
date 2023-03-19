@@ -402,7 +402,9 @@
             "All Resources",
             "Personnel",
             "Visitor",
-            "Vehicle/Equipment",
+            "Vehicle",
+            "Equipment",
+            "Operator",
             "Crew"});
             this.cboResourceVariety.Location = new System.Drawing.Point(7, 71);
             this.cboResourceVariety.Name = "cboResourceVariety";
