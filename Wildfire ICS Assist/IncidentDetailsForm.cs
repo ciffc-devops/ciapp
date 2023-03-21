@@ -2742,9 +2742,13 @@ namespace Wildfire_ICS_Assist
                             Personnel vis = resource as Personnel;
                             Program.wfIncidentService.UpsertPersonnel(vis);
                             break;
-                        case "Vehicle/Equipment":
+                        case "Vehicle":
                             Vehicle v = resource as Vehicle;
                             Program.wfIncidentService.UpsertVehicle(v);
+                            break;
+                        case "Equipment":
+                            Vehicle ve = resource as Vehicle;
+                            Program.wfIncidentService.UpsertVehicle(ve);
                             break;
                         case "Crew":
                             OperationalSubGroup group = resource as OperationalSubGroup;
@@ -2770,7 +2774,8 @@ namespace Wildfire_ICS_Assist
                                     vrec.ResourceID = subres.ID;
                                     vrec.SignInRecordID = Guid.NewGuid();
                                     vrec.ParentRecordID = record.SignInRecordID;
-                                    vrec.ResourceType = "Vehicle/Equipment";
+                                    if (vh.IsEquipment) { vrec.ResourceType = "Equipment"; }
+                                    else { vrec.ResourceType = "Vehicle"; }
                                     Program.wfIncidentService.UpsertCheckInRecord(vrec);
                                 }
                             }

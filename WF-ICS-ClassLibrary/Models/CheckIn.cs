@@ -242,9 +242,10 @@ namespace WF_ICS_ClassLibrary.Models
         {
             switch (FieldID.ToString())
             {
-                case "3aefed78-eaf9-4f52-a222-43fc389933ce": return new List<string> { "", "ICP", "Base", "Camp", "Staging", "Heli-Base" };
-                case "c9f49654-b5e5-4291-886b-8d24aaef5045": return new List<string> { "", "Incident Camp", "Other" };
-                case "9369c50e-3b39-40b8-8557-c25af007ab74": return new List<string> { "", "Aircraft", "Bus", "Other Vehicle" };
+                case "b4c8332b-ddf3-4d4c-9c83-2c62328061fe": return new List<string> { "", "ICP", "Base", "Camp", "Staging", "Heli-Base", "free text" };
+                case "7a39df77-cb16-463c-812b-573bfa97de5d": return new List<string> { "", "Incident Camp", "Other" };
+                case "a4f1cb0e-9774-4bdc-aeac-96976aceba89": return new List<string> { "", "Aircraft", "Bus", "Vehicle" };
+                case "99c4d8c6-3b39-42f1-af6f-33525b2da4e7": return new List<string> { "", "Research", "maintenance", "servicing equipment", "servicing facilities", "observing", "free text" };
                 default:
                     return new List<string>();
             }

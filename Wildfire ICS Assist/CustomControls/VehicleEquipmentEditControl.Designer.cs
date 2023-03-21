@@ -54,12 +54,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtLicenseOrID = new System.Windows.Forms.TextBox();
             this.cboOperator = new System.Windows.Forms.ComboBox();
+            this.rbVehicle = new System.Windows.Forms.RadioButton();
+            this.rbEquipment = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtType
             // 
             this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtType.Location = new System.Drawing.Point(599, 195);
+            this.txtType.Location = new System.Drawing.Point(599, 229);
             this.txtType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtType.Name = "txtType";
             this.txtType.Size = new System.Drawing.Size(226, 29);
@@ -69,7 +72,7 @@
             // label15
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.Location = new System.Drawing.Point(442, 198);
+            this.label15.Location = new System.Drawing.Point(442, 232);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(150, 24);
             this.label15.TabIndex = 140;
@@ -80,7 +83,7 @@
             // 
             this.txtKind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtKind.Location = new System.Drawing.Point(238, 192);
+            this.txtKind.Location = new System.Drawing.Point(238, 226);
             this.txtKind.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtKind.Name = "txtKind";
             this.txtKind.Size = new System.Drawing.Size(210, 29);
@@ -89,7 +92,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(2, 195);
+            this.label2.Location = new System.Drawing.Point(2, 229);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(229, 24);
             this.label2.TabIndex = 139;
@@ -130,7 +133,7 @@
             // label13
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.Location = new System.Drawing.Point(459, 86);
+            this.label13.Location = new System.Drawing.Point(459, 120);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(66, 24);
             this.label13.TabIndex = 138;
@@ -149,7 +152,7 @@
             // txtMake
             // 
             this.txtMake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMake.Location = new System.Drawing.Point(529, 83);
+            this.txtMake.Location = new System.Drawing.Point(529, 117);
             this.txtMake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtMake.Name = "txtMake";
             this.txtMake.Size = new System.Drawing.Size(296, 29);
@@ -160,7 +163,7 @@
             // 
             this.txtClassification.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtClassification.Location = new System.Drawing.Point(238, 83);
+            this.txtClassification.Location = new System.Drawing.Point(238, 117);
             this.txtClassification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtClassification.Name = "txtClassification";
             this.txtClassification.Size = new System.Drawing.Size(212, 29);
@@ -169,7 +172,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(2, 86);
+            this.label3.Location = new System.Drawing.Point(2, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(229, 24);
             this.label3.TabIndex = 128;
@@ -180,7 +183,7 @@
             // 
             this.txtCategoryKindCapacity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCategoryKindCapacity.Location = new System.Drawing.Point(238, 122);
+            this.txtCategoryKindCapacity.Location = new System.Drawing.Point(238, 156);
             this.txtCategoryKindCapacity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCategoryKindCapacity.Multiline = true;
             this.txtCategoryKindCapacity.Name = "txtCategoryKindCapacity";
@@ -191,7 +194,7 @@
             // 
             // label12
             // 
-            this.label12.Location = new System.Drawing.Point(2, 450);
+            this.label12.Location = new System.Drawing.Point(2, 484);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(229, 24);
             this.label12.TabIndex = 137;
@@ -200,7 +203,7 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(2, 122);
+            this.label4.Location = new System.Drawing.Point(2, 156);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(229, 60);
             this.label4.TabIndex = 129;
@@ -212,12 +215,12 @@
             this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNotes.Location = new System.Drawing.Point(238, 447);
+            this.txtNotes.Location = new System.Drawing.Point(238, 481);
             this.txtNotes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNotes.Size = new System.Drawing.Size(587, 76);
+            this.txtNotes.Size = new System.Drawing.Size(587, 116);
             this.txtNotes.TabIndex = 125;
             this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
             // 
@@ -225,7 +228,7 @@
             // 
             this.txtFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFeatures.Location = new System.Drawing.Point(238, 234);
+            this.txtFeatures.Location = new System.Drawing.Point(238, 268);
             this.txtFeatures.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFeatures.Multiline = true;
             this.txtFeatures.Name = "txtFeatures";
@@ -236,7 +239,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(2, 234);
+            this.label5.Location = new System.Drawing.Point(2, 268);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(229, 24);
             this.label5.TabIndex = 130;
@@ -247,7 +250,7 @@
             // 
             this.txtAgencyOrOwner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAgencyOrOwner.Location = new System.Drawing.Point(238, 292);
+            this.txtAgencyOrOwner.Location = new System.Drawing.Point(238, 326);
             this.txtAgencyOrOwner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAgencyOrOwner.Name = "txtAgencyOrOwner";
             this.txtAgencyOrOwner.Size = new System.Drawing.Size(587, 29);
@@ -256,7 +259,7 @@
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(2, 411);
+            this.label9.Location = new System.Drawing.Point(2, 445);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(229, 24);
             this.label9.TabIndex = 134;
@@ -265,7 +268,7 @@
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(2, 295);
+            this.label6.Location = new System.Drawing.Point(2, 329);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(229, 24);
             this.label6.TabIndex = 131;
@@ -276,7 +279,7 @@
             // 
             this.txtIncidentAssignment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtIncidentAssignment.Location = new System.Drawing.Point(238, 408);
+            this.txtIncidentAssignment.Location = new System.Drawing.Point(238, 442);
             this.txtIncidentAssignment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtIncidentAssignment.Name = "txtIncidentAssignment";
             this.txtIncidentAssignment.Size = new System.Drawing.Size(587, 29);
@@ -285,7 +288,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(2, 372);
+            this.label8.Location = new System.Drawing.Point(2, 406);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(229, 24);
             this.label8.TabIndex = 133;
@@ -294,7 +297,7 @@
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(47, 332);
+            this.label7.Location = new System.Drawing.Point(47, 366);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(184, 24);
             this.label7.TabIndex = 132;
@@ -305,7 +308,7 @@
             // 
             this.txtLicenseOrID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLicenseOrID.Location = new System.Drawing.Point(238, 369);
+            this.txtLicenseOrID.Location = new System.Drawing.Point(238, 403);
             this.txtLicenseOrID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLicenseOrID.Name = "txtLicenseOrID";
             this.txtLicenseOrID.Size = new System.Drawing.Size(587, 29);
@@ -320,17 +323,52 @@
             this.cboOperator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboOperator.DisplayMember = "NameWithKindAndType";
             this.cboOperator.FormattingEnabled = true;
-            this.cboOperator.Location = new System.Drawing.Point(238, 329);
+            this.cboOperator.Location = new System.Drawing.Point(238, 363);
             this.cboOperator.Name = "cboOperator";
             this.cboOperator.Size = new System.Drawing.Size(587, 32);
             this.cboOperator.TabIndex = 120;
             this.cboOperator.ValueMember = "ID";
             this.cboOperator.Leave += new System.EventHandler(this.cboOperator_Leave);
             // 
+            // rbVehicle
+            // 
+            this.rbVehicle.AutoSize = true;
+            this.rbVehicle.Location = new System.Drawing.Point(238, 81);
+            this.rbVehicle.Name = "rbVehicle";
+            this.rbVehicle.Size = new System.Drawing.Size(92, 28);
+            this.rbVehicle.TabIndex = 141;
+            this.rbVehicle.TabStop = true;
+            this.rbVehicle.Text = "Vehicle";
+            this.rbVehicle.UseVisualStyleBackColor = true;
+            this.rbVehicle.CheckedChanged += new System.EventHandler(this.rbVehicle_CheckedChanged);
+            // 
+            // rbEquipment
+            // 
+            this.rbEquipment.AutoSize = true;
+            this.rbEquipment.Location = new System.Drawing.Point(336, 81);
+            this.rbEquipment.Name = "rbEquipment";
+            this.rbEquipment.Size = new System.Drawing.Size(120, 28);
+            this.rbEquipment.TabIndex = 142;
+            this.rbEquipment.TabStop = true;
+            this.rbEquipment.Text = "Equipment";
+            this.rbEquipment.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.Location = new System.Drawing.Point(-4, 83);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(229, 24);
+            this.label10.TabIndex = 143;
+            this.label10.Text = "Vehicle or Equipment";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // VehicleEquipmentEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.rbEquipment);
+            this.Controls.Add(this.rbVehicle);
             this.Controls.Add(this.cboOperator);
             this.Controls.Add(this.txtType);
             this.Controls.Add(this.label15);
@@ -360,7 +398,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "VehicleEquipmentEditControl";
-            this.Size = new System.Drawing.Size(832, 528);
+            this.Size = new System.Drawing.Size(832, 602);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,5 +432,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtLicenseOrID;
         private System.Windows.Forms.ComboBox cboOperator;
+        private System.Windows.Forms.RadioButton rbVehicle;
+        private System.Windows.Forms.RadioButton rbEquipment;
+        private System.Windows.Forms.Label label10;
     }
 }

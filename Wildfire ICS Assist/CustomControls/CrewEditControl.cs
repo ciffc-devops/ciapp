@@ -112,7 +112,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                     listing.Type = entryForm.CurrentVehicle.Type;
 
                     listing.ResourceID = entryForm.CurrentVehicle.ID;
-                    listing.ResourceType = "Vehicle/Equipment";
+                    if (entryForm.CurrentVehicle.IsEquipment) { listing.ResourceType = "Equipment"; }
+                    else { listing.ResourceType = "Vehicle"; }
                     listing.ResourceName = entryForm.CurrentVehicle.ResourceName;
                     //subGroup.ResourceListing.Add(listing);
                     subGroup.UpsertResourceListing(listing);
@@ -168,7 +169,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                     listing.Type = entryForm.vehicle.Type;
 
                     listing.ResourceID = entryForm.vehicle.ID;
-                    listing.ResourceType = "Vehicle/Equipment";
+                    if (entryForm.vehicle.IsEquipment) { listing.ResourceType = "Equipment"; }
+                    else { listing.ResourceType = "Vehicle"; }
                     listing.ResourceName = entryForm.vehicle.ResourceName;
                     subGroup.UpsertResourceListing(listing);
 
@@ -245,7 +247,15 @@ namespace Wildfire_ICS_Assist.CustomControls
                     OpenPersonForEdit(p);
                 }
             }
-            else if (listing.ResourceType.Equals("Vehicle/Equipment"))
+            else if (listing.ResourceType.Equals("Vehicle"))
+            {
+                if (resources.Any(o => o.ID == listing.ResourceID))
+                {
+                    Vehicle p = resources.First(o => o.ID == listing.ResourceID) as Vehicle;
+                    OpenVehicleForEdit(p);
+                }
+            }
+            else if (listing.ResourceType.Equals("Equipment"))
             {
                 if (resources.Any(o => o.ID == listing.ResourceID))
                 {

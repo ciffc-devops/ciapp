@@ -396,8 +396,16 @@ namespace WF_ICS_ClassLibrary.Models
                         case "Visitor":
                             if (incident.IncidentPersonnel.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.IncidentPersonnel.First(o => o.ID == listing.ResourceID)); }
                             break;
-                        case "Vehicle/Equipment":
+                        case "Vehicle":
                             if (incident.allVehicles.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.allVehicles.First(o => o.ID == listing.ResourceID)); }
+                            break;
+                        case "Equipment":
+                            if (incident.allVehicles.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.allVehicles.First(o => o.ID == listing.ResourceID)); }
+
+                            break;
+                        case "Operator":
+                            if (incident.IncidentPersonnel.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.IncidentPersonnel.First(o => o.ID == listing.ResourceID)); }
+
                             break;
                     }
                 }

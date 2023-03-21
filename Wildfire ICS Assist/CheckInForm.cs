@@ -336,7 +336,10 @@ namespace Wildfire_ICS_Assist
             if(cboSavedVehicles.SelectedItem != null && ((Vehicle)cboSavedVehicles.SelectedItem).ID != Guid.Empty && cboSavedOperator.SelectedItem != null)
             {
                 _selectedResource = ((Vehicle)cboSavedVehicles.SelectedItem).Clone();
-                checkInRecord.ResourceType = "Vehicle/Equipment";
+                Vehicle v = (Vehicle)_selectedResource;
+                if (v.IsEquipment) { checkInRecord.ResourceType = "Equipment"; }
+                else { checkInRecord.ResourceType = "Vehicle"; }
+                
                 (selectedResource as Vehicle).OperatorID = (cboSavedOperator.SelectedItem as IncidentResource).ID;
                 (selectedResource as Vehicle).OperatorName = (cboSavedOperator.SelectedItem as IncidentResource).ResourceName;
                 selectedResource.LeaderName = (cboSavedOperator.SelectedItem as IncidentResource).ResourceName;
@@ -350,7 +353,10 @@ namespace Wildfire_ICS_Assist
             if (vehicleEquipmentEditControl1.IsComplete)
             {
                 _selectedResource = vehicleEquipmentEditControl1.CurrentVehicle.Clone();
-                checkInRecord.ResourceType = "Vehicle/Equipment";
+                Vehicle v = (Vehicle)_selectedResource;
+                if (v.IsEquipment) { checkInRecord.ResourceType = "Equipment"; }
+                else { checkInRecord.ResourceType = "Vehicle"; }
+
                 MoveToCheckInDetailsPage();
             }
         }
