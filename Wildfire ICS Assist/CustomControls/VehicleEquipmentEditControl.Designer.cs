@@ -333,6 +333,7 @@
             // rbVehicle
             // 
             this.rbVehicle.AutoSize = true;
+            this.rbVehicle.Checked = true;
             this.rbVehicle.Location = new System.Drawing.Point(238, 81);
             this.rbVehicle.Name = "rbVehicle";
             this.rbVehicle.Size = new System.Drawing.Size(92, 28);
@@ -349,7 +350,6 @@
             this.rbEquipment.Name = "rbEquipment";
             this.rbEquipment.Size = new System.Drawing.Size(120, 28);
             this.rbEquipment.TabIndex = 142;
-            this.rbEquipment.TabStop = true;
             this.rbEquipment.Text = "Equipment";
             this.rbEquipment.UseVisualStyleBackColor = true;
             // 

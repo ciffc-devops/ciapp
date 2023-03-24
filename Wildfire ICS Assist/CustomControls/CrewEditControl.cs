@@ -44,6 +44,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtPhone.Text = subGroup.Phone;
                 txtName.Text = subGroup.ResourceName;
                 txtTransport.Text = subGroup.Transport;
+                rbCrew.Checked = !subGroup.IsEquipmentCrew;
+                rbHECrew.Checked = subGroup.IsEquipmentCrew;
                 if (!string.IsNullOrEmpty(subGroup.Type)) { cboCrewType.Text = subGroup.Type; }
                 else { cboCrewType.SelectedIndex = 0; }
                 loadResourceList();
@@ -286,6 +288,21 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void cboCrewType_SelectedIndexChanged(object sender, EventArgs e)
         {
             subGroup.Type = cboCrewType.Text;
+        }
+
+        private void rbCrew_CheckedChanged(object sender, EventArgs e)
+        {
+            btnAddVehicle.Enabled = !rbCrew.Checked;
+            subGroup.IsEquipmentCrew = !rbCrew.Checked;
+        }
+
+        private void rbHECrew_CheckedChanged(object sender, EventArgs e)
+        {
+            if(!rbHECrew.Checked && subGroup.ActiveResourceListing.Any(o => o.ResourceType.Equals("Equipment") || o.ResourceType.Equals("Vehicle")))
+            {
+                rbHECrew.Checked = true;
+                lblOnlyHECrews.Visible = true;
+            }
         }
     }
 }

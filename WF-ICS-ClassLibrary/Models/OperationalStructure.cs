@@ -121,6 +121,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(5)] private string _Email;
         [ProtoMember(6)] private string _Phone;
         [ProtoMember(7)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
+        [ProtoMember(8)] private bool _IsEquipmentCrew;
 
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid LeaderID { get => _LeaderID; set => _LeaderID = value; }
@@ -129,7 +130,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Phone { get => _Phone; set => _Phone = value; }
         public List<OperationalGroupResourceListing> ResourceListing { get => _ResourceListing; set => _ResourceListing = value; }
         public List<OperationalGroupResourceListing> ActiveResourceListing { get => _ResourceListing.Where(o => o.Active).ToList(); }
-
+        public bool IsEquipmentCrew { get => _IsEquipmentCrew; set => _IsEquipmentCrew = value; }
 
 
         public void UpsertResourceListing(OperationalGroupResourceListing listing)

@@ -281,11 +281,15 @@ namespace Wildfire_ICS_Assist
 
         private void btnCrew_Click(object sender, EventArgs e)
         {
+            OperationalSubGroup sub = new OperationalSubGroup();
+            crewEditControl1.SetSubGroup(sub, SubResources);
             wizardPages1.SelectedIndex = 2;
         }
 
         private void btnVehicleEquipment_Click(object sender, EventArgs e)
         {
+            Vehicle v = new Vehicle();
+            vehicleEquipmentEditControl1.SetVehicle(v);
             wizardPages1.SelectedIndex = 4;
         }
 
@@ -397,6 +401,15 @@ namespace Wildfire_ICS_Assist
         private void cboSavedOperator_Leave(object sender, EventArgs e)
         {
             if (cboSavedOperator.SelectedItem == null) { cboSavedOperator.Text = string.Empty; }
+        }
+
+        private void btnHECrew_Click(object sender, EventArgs e)
+        {
+            OperationalSubGroup sub = new OperationalSubGroup();
+            sub.IsEquipmentCrew = true;
+            crewEditControl1.SetSubGroup(sub, SubResources);
+            wizardPages1.SelectedIndex = 2;
+            
         }
     }
 }
