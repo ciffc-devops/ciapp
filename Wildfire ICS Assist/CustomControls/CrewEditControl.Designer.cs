@@ -40,10 +40,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnDeleteResource = new System.Windows.Forms.Button();
             this.dgvGroup = new System.Windows.Forms.DataGridView();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLeader = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.btnAddVehicle = new System.Windows.Forms.Button();
             this.btnEditSelected = new System.Windows.Forms.Button();
@@ -54,6 +50,10 @@
             this.rbHECrew = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.lblOnlyHECrews = new System.Windows.Forms.Label();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLeader = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroup)).BeginInit();
             this.SuspendLayout();
             // 
@@ -194,43 +194,6 @@
             this.dgvGroup.TabIndex = 8;
             this.dgvGroup.SelectionChanged += new System.EventHandler(this.dgvGroup_SelectionChanged);
             // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "ResourceName";
-            this.colName.HeaderText = "Resource Name";
-            this.colName.MinimumWidth = 250;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colKind
-            // 
-            this.colKind.DataPropertyName = "Kind";
-            this.colKind.HeaderText = "Kind";
-            this.colKind.Name = "colKind";
-            this.colKind.ReadOnly = true;
-            // 
-            // colType
-            // 
-            this.colType.DataPropertyName = "Type";
-            this.colType.HeaderText = "Type";
-            this.colType.Name = "colType";
-            this.colType.ReadOnly = true;
-            // 
-            // colLeader
-            // 
-            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colLeader.DataPropertyName = "Role";
-            this.colLeader.HeaderText = "Role";
-            this.colLeader.Items.AddRange(new object[] {
-            "Crew Leader",
-            "Squad Boss",
-            "Crew Member"});
-            this.colLeader.Name = "colLeader";
-            this.colLeader.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colLeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colLeader.Width = 74;
-            // 
             // btnAddPerson
             // 
             this.btnAddPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
@@ -246,6 +209,7 @@
             // 
             // btnAddVehicle
             // 
+            this.btnAddVehicle.Enabled = false;
             this.btnAddVehicle.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
             this.btnAddVehicle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnAddVehicle.Location = new System.Drawing.Point(12, 329);
@@ -355,6 +319,44 @@
             this.lblOnlyHECrews.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblOnlyHECrews.Visible = false;
             // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "ResourceName";
+            this.colName.HeaderText = "Resource Name";
+            this.colName.MinimumWidth = 250;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colKind
+            // 
+            this.colKind.DataPropertyName = "Kind";
+            this.colKind.HeaderText = "Kind";
+            this.colKind.Name = "colKind";
+            this.colKind.ReadOnly = true;
+            // 
+            // colType
+            // 
+            this.colType.DataPropertyName = "Type";
+            this.colType.HeaderText = "Type";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            // 
+            // colLeader
+            // 
+            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colLeader.DataPropertyName = "Role";
+            this.colLeader.HeaderText = "Role";
+            this.colLeader.Items.AddRange(new object[] {
+            "Crew Leader",
+            "Sub-Leader",
+            "Squad Boss",
+            "Crew Member"});
+            this.colLeader.Name = "colLeader";
+            this.colLeader.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colLeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colLeader.Width = 74;
+            // 
             // CrewEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -410,15 +412,15 @@
         private System.Windows.Forms.Button btnAddVehicle;
         private System.Windows.Forms.Button btnEditSelected;
         private System.Windows.Forms.Button btnRemoveFromCrew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colKind;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colLeader;
         private System.Windows.Forms.ComboBox cboCrewType;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RadioButton rbCrew;
         private System.Windows.Forms.RadioButton rbHECrew;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblOnlyHECrews;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colKind;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colLeader;
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 
@@ -22,15 +23,13 @@ namespace Wildfire_ICS_Assist
 
         private OperationalPeriod NextOpPeriod { get => Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == NextOp); }
 
-        private int NextOp { get => Program.CurrentOpPeriod + 1; }
+        private int NextOp { get => Convert.ToInt32(numOpPeriod.Value); }
 
         private void CloseOpPeriodForm_Load(object sender, EventArgs e)
         {
             dgvObjectives.AutoGenerateColumns = false;
-            OperationalPeriod per = Program.CurrentIncident.createOpPeriodAsNeeded(NextOp);
-            Program.wfIncidentService.UpsertOperationalPeriod(per);
-            datOpsStart.Value = NextOpPeriod.PeriodStart;
-            datOpsEnd.Value = NextOpPeriod.PeriodEnd;
+            numOpPeriod.Value = Program.CurrentOpPeriod + 1;
+
 
             UpdateObjectiveSummary();
 
@@ -210,7 +209,7 @@ namespace Wildfire_ICS_Assist
             }
 
             Program.wfIncidentService.UpsertOrganizationalChart(newCopy);
-            PopulateOrgChart(Program.CurrentOpPeriod + 1, treeOrgChart2);
+            PopulateOrgChart(NextOp, treeOrgChart2);
 
         }
 
@@ -237,9 +236,9 @@ namespace Wildfire_ICS_Assist
                 if (!Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.Any(o => o.Objective.Equals(savedObjective.Objective) && o.OpPeriod == NextOp))
                 {
                     IncidentObjective newObjective = new IncidentObjective();
-                    newObjective.OpPeriod =Program. CurrentOpPeriod + 1;
+                    newObjective.OpPeriod = NextOp;
                     newObjective.Objective = savedObjective.Objective;
-                    newObjective.Priority = Program.CurrentIncident.getNextObjectivePriority(Program.CurrentOpPeriod + 1);
+                    newObjective.Priority = Program.CurrentIncident.getNextObjectivePriority(NextOp);
 
 
                     savedObjective.CopyNextOpText = "Copied";
@@ -398,8 +397,33 @@ namespace Wildfire_ICS_Assist
             lblAirOpsCopyStatus.Text = "Added " + aircraftAdded + " aircraft + NOTAM and general items";
         }
 
+
         #endregion
 
- 
+        private void numOpPeriod_ValueChanged(object sender, EventArgs e)
+        {
+            int newOpNumber = Convert.ToInt32(numOpPeriod.Value);
+            if (newOpNumber != Program.CurrentOpPeriod)
+            {
+                IncidentOpPeriodChangedEventArgs args = new IncidentOpPeriodChangedEventArgs();
+                args.NewOpPeriod = newOpNumber;
+
+
+                if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == newOpNumber))
+                {
+                    OperationalPeriod per = Program.CurrentIncident.createOpPeriodAsNeeded(newOpNumber);
+
+                    Program.wfIncidentService.UpsertOperationalPeriod(per);
+
+                    Program.CurrentIncident.createOrgChartAsNeeded(newOpNumber);
+                    Program.CurrentIncident.createObjectivesSheetAsNeeded(newOpNumber);
+
+                }
+
+                OperationalPeriod selectedPeriod = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == newOpNumber);
+                datOpsStart.Value = selectedPeriod.PeriodStart;
+                datOpsEnd.Value = selectedPeriod.PeriodEnd;
+            }
+        }
     }
 }

@@ -91,6 +91,7 @@ namespace Wildfire_ICS_Assist
             {
                 Objective = (IncidentObjective) cboSavedObjectives.SelectedItem;
                 Objective.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
+                Objective.CopyNextOpText = "Copy to selected op";
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 

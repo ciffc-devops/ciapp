@@ -28,61 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpObjectives = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.tpResources = new System.Windows.Forms.TabPage();
-            this.tpOrgChart = new System.Windows.Forms.TabPage();
-            this.tpSafety = new System.Windows.Forms.TabPage();
-            this.tpSummary = new System.Windows.Forms.TabPage();
             this.dgvObjectives = new System.Windows.Forms.DataGridView();
             this.colObjectivePriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colObjective = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colObjectiveCompleted = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colTransferObjective = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnCopyOrgChart = new System.Windows.Forms.Button();
+            this.tpResources = new System.Windows.Forms.TabPage();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tpOrgChart = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.treeOrgChart = new System.Windows.Forms.TreeView();
-            this.treeOrgChart2 = new System.Windows.Forms.TreeView();
             this.lblCurrentOrgTitle = new System.Windows.Forms.Label();
+            this.chkCopyOrgAssignments = new System.Windows.Forms.CheckBox();
+            this.btnCopyOrgChart = new System.Windows.Forms.Button();
+            this.treeOrgChart = new System.Windows.Forms.TreeView();
             this.lblNextOrgTitle = new System.Windows.Forms.Label();
+            this.treeOrgChart2 = new System.Windows.Forms.TreeView();
+            this.tpSafety = new System.Windows.Forms.TabPage();
             this.dgvSafety = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSafetyCopyToNext = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tpOther = new System.Windows.Forms.TabPage();
-            this.btnCopyCommsPlan = new System.Windows.Forms.Button();
-            this.btnCopyMedPlan = new System.Windows.Forms.Button();
-            this.btnCopyAirOps = new System.Windows.Forms.Button();
-            this.lblCommsPlanCopyStatus = new System.Windows.Forms.Label();
-            this.lblMedPlanCopyStatus = new System.Windows.Forms.Label();
             this.lblAirOpsCopyStatus = new System.Windows.Forms.Label();
-            this.chkCopyOrgAssignments = new System.Windows.Forms.CheckBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.datOpsEnd = new System.Windows.Forms.DateTimePicker();
-            this.datOpsStart = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblMedPlanCopyStatus = new System.Windows.Forms.Label();
+            this.lblCommsPlanCopyStatus = new System.Windows.Forms.Label();
+            this.btnCopyAirOps = new System.Windows.Forms.Button();
+            this.btnCopyMedPlan = new System.Windows.Forms.Button();
+            this.btnCopyCommsPlan = new System.Windows.Forms.Button();
+            this.tpSummary = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.datOpsStart = new System.Windows.Forms.DateTimePicker();
+            this.datOpsEnd = new System.Windows.Forms.DateTimePicker();
+            this.label15 = new System.Windows.Forms.Label();
+            this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tpObjectives.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).BeginInit();
             this.tpResources.SuspendLayout();
             this.tpOrgChart.SuspendLayout();
-            this.tpSafety.SuspendLayout();
-            this.tpSummary.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.tpSafety.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSafety)).BeginInit();
             this.tpOther.SuspendLayout();
+            this.tpSummary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -98,7 +100,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(884, 538);
+            this.tabControl1.Size = new System.Drawing.Size(984, 538);
             this.tabControl1.TabIndex = 0;
             // 
             // tpObjectives
@@ -107,74 +109,10 @@
             this.tpObjectives.Location = new System.Drawing.Point(4, 33);
             this.tpObjectives.Name = "tpObjectives";
             this.tpObjectives.Padding = new System.Windows.Forms.Padding(3);
-            this.tpObjectives.Size = new System.Drawing.Size(876, 501);
+            this.tpObjectives.Size = new System.Drawing.Size(976, 501);
             this.tpObjectives.TabIndex = 0;
             this.tpObjectives.Text = "Objectives";
             this.tpObjectives.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Panel2.Controls.Add(this.label18);
-            this.splitContainer1.Panel2.Controls.Add(this.datOpsStart);
-            this.splitContainer1.Panel2.Controls.Add(this.datOpsEnd);
-            this.splitContainer1.Panel2.Controls.Add(this.label15);
-            this.splitContainer1.Size = new System.Drawing.Size(884, 606);
-            this.splitContainer1.SplitterDistance = 538;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // tpResources
-            // 
-            this.tpResources.Controls.Add(this.textBox2);
-            this.tpResources.Location = new System.Drawing.Point(4, 33);
-            this.tpResources.Name = "tpResources";
-            this.tpResources.Size = new System.Drawing.Size(876, 501);
-            this.tpResources.TabIndex = 1;
-            this.tpResources.Text = "Resources";
-            this.tpResources.UseVisualStyleBackColor = true;
-            // 
-            // tpOrgChart
-            // 
-            this.tpOrgChart.Controls.Add(this.splitContainer2);
-            this.tpOrgChart.Location = new System.Drawing.Point(4, 33);
-            this.tpOrgChart.Name = "tpOrgChart";
-            this.tpOrgChart.Size = new System.Drawing.Size(876, 501);
-            this.tpOrgChart.TabIndex = 2;
-            this.tpOrgChart.Text = "Org Chart";
-            this.tpOrgChart.UseVisualStyleBackColor = true;
-            // 
-            // tpSafety
-            // 
-            this.tpSafety.Controls.Add(this.dgvSafety);
-            this.tpSafety.Location = new System.Drawing.Point(4, 33);
-            this.tpSafety.Name = "tpSafety";
-            this.tpSafety.Size = new System.Drawing.Size(876, 501);
-            this.tpSafety.TabIndex = 5;
-            this.tpSafety.Text = "Safety";
-            this.tpSafety.UseVisualStyleBackColor = true;
-            // 
-            // tpSummary
-            // 
-            this.tpSummary.Controls.Add(this.textBox1);
-            this.tpSummary.Location = new System.Drawing.Point(4, 33);
-            this.tpSummary.Name = "tpSummary";
-            this.tpSummary.Size = new System.Drawing.Size(876, 501);
-            this.tpSummary.TabIndex = 7;
-            this.tpSummary.Text = "Summary Stats";
-            this.tpSummary.UseVisualStyleBackColor = true;
             // 
             // dgvObjectives
             // 
@@ -188,14 +126,14 @@
             this.colObjective,
             this.colObjectiveCompleted,
             this.colTransferObjective});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvObjectives.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvObjectives.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvObjectives.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvObjectives.Location = new System.Drawing.Point(3, 3);
             this.dgvObjectives.MultiSelect = false;
@@ -203,7 +141,7 @@
             this.dgvObjectives.RowHeadersVisible = false;
             this.dgvObjectives.RowTemplate.Height = 35;
             this.dgvObjectives.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvObjectives.Size = new System.Drawing.Size(870, 495);
+            this.dgvObjectives.Size = new System.Drawing.Size(970, 495);
             this.dgvObjectives.TabIndex = 1;
             this.dgvObjectives.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvObjectives_CellContentClick);
             this.dgvObjectives.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvObjectives_CellValueChanged);
@@ -238,25 +176,40 @@
             // 
             this.colTransferObjective.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colTransferObjective.DataPropertyName = "CopyNextOpText";
-            this.colTransferObjective.HeaderText = "Copy to next op";
+            this.colTransferObjective.HeaderText = "Copy to selected op";
             this.colTransferObjective.Name = "colTransferObjective";
-            this.colTransferObjective.Text = "Copy to next Op";
+            this.colTransferObjective.Text = "Copy to selected Op";
             this.colTransferObjective.Width = 148;
             // 
-            // btnCopyOrgChart
+            // tpResources
             // 
-            this.btnCopyOrgChart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCopyOrgChart.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
-            this.btnCopyOrgChart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCopyOrgChart.Location = new System.Drawing.Point(136, 444);
-            this.btnCopyOrgChart.Name = "btnCopyOrgChart";
-            this.btnCopyOrgChart.Size = new System.Drawing.Size(282, 54);
-            this.btnCopyOrgChart.TabIndex = 2;
-            this.btnCopyOrgChart.Text = "Copy Org Chart to Next Op";
-            this.btnCopyOrgChart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCopyOrgChart.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCopyOrgChart.UseVisualStyleBackColor = true;
-            this.btnCopyOrgChart.Click += new System.EventHandler(this.btnCopyOrgChart_Click);
+            this.tpResources.Controls.Add(this.textBox2);
+            this.tpResources.Location = new System.Drawing.Point(4, 33);
+            this.tpResources.Name = "tpResources";
+            this.tpResources.Size = new System.Drawing.Size(876, 501);
+            this.tpResources.TabIndex = 1;
+            this.tpResources.Text = "Resources";
+            this.tpResources.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(44, 68);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(482, 122);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.Text = "-list of resources by type\r\n-filter for those whose last day on incident is today" +
+    "\r\n-quick access to demob screen";
+            // 
+            // tpOrgChart
+            // 
+            this.tpOrgChart.Controls.Add(this.splitContainer2);
+            this.tpOrgChart.Location = new System.Drawing.Point(4, 33);
+            this.tpOrgChart.Name = "tpOrgChart";
+            this.tpOrgChart.Size = new System.Drawing.Size(876, 501);
+            this.tpOrgChart.TabIndex = 2;
+            this.tpOrgChart.Text = "Org Chart";
+            this.tpOrgChart.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
             // 
@@ -279,28 +232,6 @@
             this.splitContainer2.SplitterDistance = 426;
             this.splitContainer2.TabIndex = 0;
             // 
-            // treeOrgChart
-            // 
-            this.treeOrgChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeOrgChart.HideSelection = false;
-            this.treeOrgChart.Location = new System.Drawing.Point(8, 45);
-            this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(410, 359);
-            this.treeOrgChart.TabIndex = 1;
-            // 
-            // treeOrgChart2
-            // 
-            this.treeOrgChart2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeOrgChart2.HideSelection = false;
-            this.treeOrgChart2.Location = new System.Drawing.Point(8, 45);
-            this.treeOrgChart2.Name = "treeOrgChart2";
-            this.treeOrgChart2.Size = new System.Drawing.Size(421, 453);
-            this.treeOrgChart2.TabIndex = 1;
-            // 
             // lblCurrentOrgTitle
             // 
             this.lblCurrentOrgTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -313,6 +244,43 @@
             this.lblCurrentOrgTitle.TabIndex = 35;
             this.lblCurrentOrgTitle.Text = "Incident Information";
             this.lblCurrentOrgTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // chkCopyOrgAssignments
+            // 
+            this.chkCopyOrgAssignments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkCopyOrgAssignments.AutoSize = true;
+            this.chkCopyOrgAssignments.Location = new System.Drawing.Point(7, 410);
+            this.chkCopyOrgAssignments.Name = "chkCopyOrgAssignments";
+            this.chkCopyOrgAssignments.Size = new System.Drawing.Size(411, 28);
+            this.chkCopyOrgAssignments.TabIndex = 1;
+            this.chkCopyOrgAssignments.Text = "Copy Org Chart Assignments (when possible)";
+            this.chkCopyOrgAssignments.UseVisualStyleBackColor = true;
+            // 
+            // btnCopyOrgChart
+            // 
+            this.btnCopyOrgChart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyOrgChart.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnCopyOrgChart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCopyOrgChart.Location = new System.Drawing.Point(136, 444);
+            this.btnCopyOrgChart.Name = "btnCopyOrgChart";
+            this.btnCopyOrgChart.Size = new System.Drawing.Size(282, 54);
+            this.btnCopyOrgChart.TabIndex = 2;
+            this.btnCopyOrgChart.Text = "Copy Org Chart to Next Op";
+            this.btnCopyOrgChart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCopyOrgChart.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCopyOrgChart.UseVisualStyleBackColor = true;
+            this.btnCopyOrgChart.Click += new System.EventHandler(this.btnCopyOrgChart_Click);
+            // 
+            // treeOrgChart
+            // 
+            this.treeOrgChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeOrgChart.HideSelection = false;
+            this.treeOrgChart.Location = new System.Drawing.Point(8, 45);
+            this.treeOrgChart.Name = "treeOrgChart";
+            this.treeOrgChart.Size = new System.Drawing.Size(410, 359);
+            this.treeOrgChart.TabIndex = 1;
             // 
             // lblNextOrgTitle
             // 
@@ -327,6 +295,27 @@
             this.lblNextOrgTitle.Text = "Incident Information";
             this.lblNextOrgTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // treeOrgChart2
+            // 
+            this.treeOrgChart2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeOrgChart2.HideSelection = false;
+            this.treeOrgChart2.Location = new System.Drawing.Point(8, 45);
+            this.treeOrgChart2.Name = "treeOrgChart2";
+            this.treeOrgChart2.Size = new System.Drawing.Size(421, 453);
+            this.treeOrgChart2.TabIndex = 1;
+            // 
+            // tpSafety
+            // 
+            this.tpSafety.Controls.Add(this.dgvSafety);
+            this.tpSafety.Location = new System.Drawing.Point(4, 33);
+            this.tpSafety.Name = "tpSafety";
+            this.tpSafety.Size = new System.Drawing.Size(876, 501);
+            this.tpSafety.TabIndex = 5;
+            this.tpSafety.Text = "Safety";
+            this.tpSafety.UseVisualStyleBackColor = true;
+            // 
             // dgvSafety
             // 
             this.dgvSafety.AllowUserToAddRows = false;
@@ -337,14 +326,14 @@
             this.dgvSafety.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
             this.colSafetyCopyToNext});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSafety.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSafety.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvSafety.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSafety.Location = new System.Drawing.Point(0, 0);
             this.dgvSafety.MultiSelect = false;
@@ -369,9 +358,9 @@
             // 
             this.colSafetyCopyToNext.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSafetyCopyToNext.DataPropertyName = "CopyNextOpText";
-            this.colSafetyCopyToNext.HeaderText = "Copy to next op";
+            this.colSafetyCopyToNext.HeaderText = "Copy to selected op";
             this.colSafetyCopyToNext.Name = "colSafetyCopyToNext";
-            this.colSafetyCopyToNext.Text = "Copy to next Op";
+            this.colSafetyCopyToNext.Text = "Copy to selected Op";
             this.colSafetyCopyToNext.Width = 148;
             // 
             // tpOther
@@ -389,33 +378,32 @@
             this.tpOther.Text = "Other";
             this.tpOther.UseVisualStyleBackColor = true;
             // 
-            // btnCopyCommsPlan
+            // lblAirOpsCopyStatus
             // 
-            this.btnCopyCommsPlan.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
-            this.btnCopyCommsPlan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCopyCommsPlan.Location = new System.Drawing.Point(8, 16);
-            this.btnCopyCommsPlan.Name = "btnCopyCommsPlan";
-            this.btnCopyCommsPlan.Size = new System.Drawing.Size(347, 54);
-            this.btnCopyCommsPlan.TabIndex = 3;
-            this.btnCopyCommsPlan.Text = "Copy Comms Plan to Next Op";
-            this.btnCopyCommsPlan.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCopyCommsPlan.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCopyCommsPlan.UseVisualStyleBackColor = true;
-            this.btnCopyCommsPlan.Click += new System.EventHandler(this.btnCopyCommsPlan_Click);
+            this.lblAirOpsCopyStatus.AutoSize = true;
+            this.lblAirOpsCopyStatus.Location = new System.Drawing.Point(361, 151);
+            this.lblAirOpsCopyStatus.Name = "lblAirOpsCopyStatus";
+            this.lblAirOpsCopyStatus.Size = new System.Drawing.Size(60, 24);
+            this.lblAirOpsCopyStatus.TabIndex = 8;
+            this.lblAirOpsCopyStatus.Text = "label3";
             // 
-            // btnCopyMedPlan
+            // lblMedPlanCopyStatus
             // 
-            this.btnCopyMedPlan.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
-            this.btnCopyMedPlan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCopyMedPlan.Location = new System.Drawing.Point(8, 76);
-            this.btnCopyMedPlan.Name = "btnCopyMedPlan";
-            this.btnCopyMedPlan.Size = new System.Drawing.Size(347, 54);
-            this.btnCopyMedPlan.TabIndex = 4;
-            this.btnCopyMedPlan.Text = "Copy Medical Plan to Next Op";
-            this.btnCopyMedPlan.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCopyMedPlan.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCopyMedPlan.UseVisualStyleBackColor = true;
-            this.btnCopyMedPlan.Click += new System.EventHandler(this.btnCopyMedPlan_Click);
+            this.lblMedPlanCopyStatus.AutoSize = true;
+            this.lblMedPlanCopyStatus.Location = new System.Drawing.Point(361, 91);
+            this.lblMedPlanCopyStatus.Name = "lblMedPlanCopyStatus";
+            this.lblMedPlanCopyStatus.Size = new System.Drawing.Size(60, 24);
+            this.lblMedPlanCopyStatus.TabIndex = 7;
+            this.lblMedPlanCopyStatus.Text = "label2";
+            // 
+            // lblCommsPlanCopyStatus
+            // 
+            this.lblCommsPlanCopyStatus.AutoSize = true;
+            this.lblCommsPlanCopyStatus.Location = new System.Drawing.Point(361, 31);
+            this.lblCommsPlanCopyStatus.Name = "lblCommsPlanCopyStatus";
+            this.lblCommsPlanCopyStatus.Size = new System.Drawing.Size(60, 24);
+            this.lblCommsPlanCopyStatus.TabIndex = 6;
+            this.lblCommsPlanCopyStatus.Text = "label1";
             // 
             // btnCopyAirOps
             // 
@@ -431,102 +419,43 @@
             this.btnCopyAirOps.UseVisualStyleBackColor = true;
             this.btnCopyAirOps.Click += new System.EventHandler(this.btnCopyAirOps_Click);
             // 
-            // lblCommsPlanCopyStatus
+            // btnCopyMedPlan
             // 
-            this.lblCommsPlanCopyStatus.AutoSize = true;
-            this.lblCommsPlanCopyStatus.Location = new System.Drawing.Point(361, 31);
-            this.lblCommsPlanCopyStatus.Name = "lblCommsPlanCopyStatus";
-            this.lblCommsPlanCopyStatus.Size = new System.Drawing.Size(60, 24);
-            this.lblCommsPlanCopyStatus.TabIndex = 6;
-            this.lblCommsPlanCopyStatus.Text = "label1";
+            this.btnCopyMedPlan.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnCopyMedPlan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCopyMedPlan.Location = new System.Drawing.Point(8, 76);
+            this.btnCopyMedPlan.Name = "btnCopyMedPlan";
+            this.btnCopyMedPlan.Size = new System.Drawing.Size(347, 54);
+            this.btnCopyMedPlan.TabIndex = 4;
+            this.btnCopyMedPlan.Text = "Copy Medical Plan to Next Op";
+            this.btnCopyMedPlan.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCopyMedPlan.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCopyMedPlan.UseVisualStyleBackColor = true;
+            this.btnCopyMedPlan.Click += new System.EventHandler(this.btnCopyMedPlan_Click);
             // 
-            // lblMedPlanCopyStatus
+            // btnCopyCommsPlan
             // 
-            this.lblMedPlanCopyStatus.AutoSize = true;
-            this.lblMedPlanCopyStatus.Location = new System.Drawing.Point(361, 91);
-            this.lblMedPlanCopyStatus.Name = "lblMedPlanCopyStatus";
-            this.lblMedPlanCopyStatus.Size = new System.Drawing.Size(60, 24);
-            this.lblMedPlanCopyStatus.TabIndex = 7;
-            this.lblMedPlanCopyStatus.Text = "label2";
+            this.btnCopyCommsPlan.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
+            this.btnCopyCommsPlan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCopyCommsPlan.Location = new System.Drawing.Point(8, 16);
+            this.btnCopyCommsPlan.Name = "btnCopyCommsPlan";
+            this.btnCopyCommsPlan.Size = new System.Drawing.Size(347, 54);
+            this.btnCopyCommsPlan.TabIndex = 3;
+            this.btnCopyCommsPlan.Text = "Copy Comms Plan to Next Op";
+            this.btnCopyCommsPlan.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCopyCommsPlan.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCopyCommsPlan.UseVisualStyleBackColor = true;
+            this.btnCopyCommsPlan.Click += new System.EventHandler(this.btnCopyCommsPlan_Click);
             // 
-            // lblAirOpsCopyStatus
+            // tpSummary
             // 
-            this.lblAirOpsCopyStatus.AutoSize = true;
-            this.lblAirOpsCopyStatus.Location = new System.Drawing.Point(361, 151);
-            this.lblAirOpsCopyStatus.Name = "lblAirOpsCopyStatus";
-            this.lblAirOpsCopyStatus.Size = new System.Drawing.Size(60, 24);
-            this.lblAirOpsCopyStatus.TabIndex = 8;
-            this.lblAirOpsCopyStatus.Text = "label3";
-            // 
-            // chkCopyOrgAssignments
-            // 
-            this.chkCopyOrgAssignments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkCopyOrgAssignments.AutoSize = true;
-            this.chkCopyOrgAssignments.Location = new System.Drawing.Point(7, 410);
-            this.chkCopyOrgAssignments.Name = "chkCopyOrgAssignments";
-            this.chkCopyOrgAssignments.Size = new System.Drawing.Size(411, 28);
-            this.chkCopyOrgAssignments.TabIndex = 1;
-            this.chkCopyOrgAssignments.Text = "Copy Org Chart Assignments (when possible)";
-            this.chkCopyOrgAssignments.UseVisualStyleBackColor = true;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label18.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label18.Location = new System.Drawing.Point(598, 23);
-            this.label18.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(33, 24);
-            this.label18.TabIndex = 20;
-            this.label18.Text = "To";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label15.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label15.Location = new System.Drawing.Point(335, 23);
-            this.label15.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(55, 24);
-            this.label15.TabIndex = 19;
-            this.label15.Text = "From";
-            // 
-            // datOpsEnd
-            // 
-            this.datOpsEnd.CustomFormat = "yyyy-MMM-dd HH:mm";
-            this.datOpsEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.datOpsEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datOpsEnd.Location = new System.Drawing.Point(653, 21);
-            this.datOpsEnd.Name = "datOpsEnd";
-            this.datOpsEnd.Size = new System.Drawing.Size(187, 26);
-            this.datOpsEnd.TabIndex = 18;
-            this.datOpsEnd.Leave += new System.EventHandler(this.datOpsEnd_Leave);
-            // 
-            // datOpsStart
-            // 
-            this.datOpsStart.CustomFormat = "yyyy-MMM-dd HH:mm";
-            this.datOpsStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.datOpsStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datOpsStart.Location = new System.Drawing.Point(390, 21);
-            this.datOpsStart.Name = "datOpsStart";
-            this.datOpsStart.Size = new System.Drawing.Size(187, 26);
-            this.datOpsStart.TabIndex = 17;
-            this.datOpsStart.ValueChanged += new System.EventHandler(this.datOpsStart_ValueChanged);
-            this.datOpsStart.Leave += new System.EventHandler(this.datOpsStart_Leave);
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold);
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(9, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(304, 66);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Next Operational Period";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tpSummary.Controls.Add(this.textBox1);
+            this.tpSummary.Location = new System.Drawing.Point(4, 33);
+            this.tpSummary.Name = "tpSummary";
+            this.tpSummary.Size = new System.Drawing.Size(876, 501);
+            this.tpSummary.TabIndex = 7;
+            this.tpSummary.Text = "Summary Stats";
+            this.tpSummary.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -539,21 +468,122 @@
     "n the IMT, and per section\r\n-total person hours for the op period\r\n-running tota" +
     "l person hours for the incident";
             // 
-            // textBox2
+            // splitContainer1
             // 
-            this.textBox2.Location = new System.Drawing.Point(44, 68);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(482, 122);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "-list of resources by type\r\n-filter for those whose last day on incident is today" +
-    "\r\n-quick access to demob screen";
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.numOpPeriod);
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.label18);
+            this.splitContainer1.Panel2.Controls.Add(this.datOpsStart);
+            this.splitContainer1.Panel2.Controls.Add(this.datOpsEnd);
+            this.splitContainer1.Panel2.Controls.Add(this.label15);
+            this.splitContainer1.Size = new System.Drawing.Size(984, 606);
+            this.splitContainer1.SplitterDistance = 538;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold);
+            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label1.Location = new System.Drawing.Point(2, -1);
+            this.label1.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(248, 66);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Move to this Operational Period:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label18.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label18.Location = new System.Drawing.Point(659, 22);
+            this.label18.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(33, 24);
+            this.label18.TabIndex = 20;
+            this.label18.Text = "To";
+            // 
+            // datOpsStart
+            // 
+            this.datOpsStart.CustomFormat = "yyyy-MMM-dd HH:mm";
+            this.datOpsStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.datOpsStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datOpsStart.Location = new System.Drawing.Point(451, 20);
+            this.datOpsStart.Name = "datOpsStart";
+            this.datOpsStart.Size = new System.Drawing.Size(187, 26);
+            this.datOpsStart.TabIndex = 17;
+            this.datOpsStart.ValueChanged += new System.EventHandler(this.datOpsStart_ValueChanged);
+            this.datOpsStart.Leave += new System.EventHandler(this.datOpsStart_Leave);
+            // 
+            // datOpsEnd
+            // 
+            this.datOpsEnd.CustomFormat = "yyyy-MMM-dd HH:mm";
+            this.datOpsEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.datOpsEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datOpsEnd.Location = new System.Drawing.Point(714, 20);
+            this.datOpsEnd.Name = "datOpsEnd";
+            this.datOpsEnd.Size = new System.Drawing.Size(187, 26);
+            this.datOpsEnd.TabIndex = 18;
+            this.datOpsEnd.Leave += new System.EventHandler(this.datOpsEnd_Leave);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label15.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label15.Location = new System.Drawing.Point(396, 22);
+            this.label15.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(55, 24);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "From";
+            // 
+            // numOpPeriod
+            // 
+            this.numOpPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numOpPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.numOpPeriod.Location = new System.Drawing.Point(268, 7);
+            this.numOpPeriod.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+            this.numOpPeriod.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numOpPeriod.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numOpPeriod.Name = "numOpPeriod";
+            this.numOpPeriod.Size = new System.Drawing.Size(110, 50);
+            this.numOpPeriod.TabIndex = 22;
+            this.numOpPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numOpPeriod.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numOpPeriod.ValueChanged += new System.EventHandler(this.numOpPeriod_ValueChanged);
             // 
             // CloseOpPeriodForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 606);
+            this.ClientSize = new System.Drawing.Size(984, 606);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -563,26 +593,27 @@
             this.Load += new System.EventHandler(this.CloseOpPeriodForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tpObjectives.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).EndInit();
             this.tpResources.ResumeLayout(false);
             this.tpResources.PerformLayout();
             this.tpOrgChart.ResumeLayout(false);
-            this.tpSafety.ResumeLayout(false);
-            this.tpSummary.ResumeLayout(false);
-            this.tpSummary.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.tpSafety.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSafety)).EndInit();
             this.tpOther.ResumeLayout(false);
             this.tpOther.PerformLayout();
+            this.tpSummary.ResumeLayout(false);
+            this.tpSummary.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -625,5 +656,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.NumericUpDown numOpPeriod;
     }
 }

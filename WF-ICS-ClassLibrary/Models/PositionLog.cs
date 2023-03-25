@@ -160,7 +160,7 @@ namespace WF_ICS_ClassLibrary.Models
             LogHistory.Add(sb.ToString());
         }
 
-        public string CopyNextOpText { get; set; } = "Copy to next op";
+        public string CopyNextOpText { get; set; } = "Copy to selected op";
 
 
         public PositionLogEntry Clone()
