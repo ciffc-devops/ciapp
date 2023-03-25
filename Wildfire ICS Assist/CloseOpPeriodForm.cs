@@ -27,6 +27,8 @@ namespace Wildfire_ICS_Assist
 
         private void CloseOpPeriodForm_Load(object sender, EventArgs e)
         {
+            datOpsStart.MinDate = Program.CurrentOpPeriodDetails.PeriodEnd;
+            numOpPeriod.Minimum = Program.CurrentOpPeriod + 1;
             dgvObjectives.AutoGenerateColumns = false;
             numOpPeriod.Value = Program.CurrentOpPeriod + 1;
 

@@ -2906,6 +2906,14 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        private void CloseAllOpenWindows()
+        {
+            foreach(Form f in ActiveForms)
+            {
+                f.Close();
+            }
+        }
+
         private void btnIncidentSummary_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This feature is not yet supported");

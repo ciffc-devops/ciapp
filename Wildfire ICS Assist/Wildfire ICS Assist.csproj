@@ -1025,6 +1025,7 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-11-envelope.png" />
     <None Include="Resources\EquipOp.png" />
     <None Include="Resources\HECrew.png" />
     <None Include="Resources\glyphicons-basic-59-truck.png" />

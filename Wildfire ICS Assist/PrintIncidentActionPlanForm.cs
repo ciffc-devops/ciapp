@@ -165,7 +165,7 @@ namespace Wildfire_ICS_Assist
             chkOrgAssignments.Enabled = chkOrgChart.Enabled;
             chkOrgAssignments.Checked = chkOrgAssignments.Enabled;
 
-            chkAssignments.Enabled = CurrentIncident.ActiveOperationalGroups.Any(o=>!o.IsBranchOrDiv);
+            chkAssignments.Enabled = CurrentIncident.ActiveOperationalGroups.Any(o => !o.IsBranchOrDiv);
             chkAssignments.Checked = chkAssignments.Enabled;
             chkAssignmentDetails.Enabled = chkAssignments.Enabled;
 
@@ -233,6 +233,20 @@ namespace Wildfire_ICS_Assist
         }
 
         private void btnSaveAsPDF_Click(object sender, EventArgs e)
+        {
+            
+
+            string path = generatePDF();
+            if (!string.IsNullOrEmpty(path))
+            {
+                System.Diagnostics.Process.Start(path);
+            }
+
+            
+
+        }
+
+        private string generatePDF()
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -371,13 +385,14 @@ namespace Wildfire_ICS_Assist
             try
             {
                 File.WriteAllBytes(fullFilepath, fullFile);
-                System.Diagnostics.Process.Start(fullFilepath);
-                this.Close();
+
             }
             catch (Exception)
             {
                 MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
             }
+
+            return fullFilepath;
         }
 
         private List<byte[]> buildContentsList()
@@ -523,7 +538,7 @@ namespace Wildfire_ICS_Assist
                     string newFileName = CurrentIncident.IncidentIdentifier;
                     if (PrintIncidentToDate) { newFileName += "-TitleImage"; }
                     else { newFileName += "-Op" + CurrentOpPeriod + "TitleImage"; }
-                    
+
 
                     string newFilePath = CurrentIncident.FileName;
                     newFilePath = Path.Combine(FileAccessClasses.getWritablePath(CurrentIncident), newFileName);
@@ -535,7 +550,7 @@ namespace Wildfire_ICS_Assist
                         newFileName = CurrentIncident.IncidentIdentifier;
                         if (PrintIncidentToDate) { newFileName += "-TitleImage"; }
                         else { newFileName += "-Op" + CurrentOpPeriod + "TitleImage"; }
-                        newFileName += "-" +  uniqueNumber;
+                        newFileName += "-" + uniqueNumber;
                         newFilePath = Path.Combine(FileAccessClasses.getWritablePath(CurrentIncident), newFileName);
                     }
 
@@ -558,19 +573,21 @@ namespace Wildfire_ICS_Assist
 
 
                     image.Dispose();
-                    if (PrintIncidentToDate) {
+                    if (PrintIncidentToDate)
+                    {
                         CurrentIncident.IncidentTitleImageBytes = newImage.BytesStringFromImage();
                         TaskBasics basics = new TaskBasics(CurrentIncident);
                         Program.wfIncidentService.UpdateTaskBasics(basics, "local");
 
                     }
-                    else {
+                    else
+                    {
                         OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
                         period.TitleImageBytes = newImage.BytesStringFromImage();
                         Program.wfIncidentService.UpsertOperationalPeriod(period);
                     }
                     picTitleImage.Image = newImage;
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -594,13 +611,42 @@ namespace Wildfire_ICS_Assist
         private void txtCriticalMessage_Leave(object sender, EventArgs e)
         {
             OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
-            if(period.CriticalMessage == null || !period.CriticalMessage.Equals(txtCriticalMessage.Text))
+            if (period.CriticalMessage == null || !period.CriticalMessage.Equals(txtCriticalMessage.Text))
             {
                 period.CriticalMessage = txtCriticalMessage.Text;
                 Program.wfIncidentService.UpsertOperationalPeriod(period);
 
             }
 
+        }
+
+        private void btnEmailIAP_Click(object sender, EventArgs e)
+        {
+            List<Personnel> activePersonnel = Program.CurrentIncident.GetCurrentlySignedInPersonnel(Program.CurrentOpPeriod);
+            activePersonnel = activePersonnel.Where(o => !string.IsNullOrEmpty(o.Email)).ToList();
+            if (DialogResult.Yes == MessageBox.Show("The PDF will be emailed to " + activePersonnel.Count + " people. You can add additional receipients in your email client. Do you want to proceed?", "Proceed with email", MessageBoxButtons.YesNo))
+            {
+
+                MAPI mapi = new MAPI();
+                string pdf = generatePDF();
+                if (!string.IsNullOrEmpty(pdf))
+                {
+                    mapi.AddAttachment(pdf);
+
+                    foreach (Personnel p in activePersonnel)
+                    {
+                        mapi.AddRecipientBCC(p.Email);
+                    }
+                    try
+                    {
+                        mapi.SendMailPopup("IAP for " + Program.CurrentIncident.IncidentIdentifier, "Attached is the Incident Action Plan for operational period # " + Program.CurrentOpPeriod + " from " + Program.CurrentOpPeriodDetails.PeriodStart.ToString(Program.DateFormat) + " to " + Program.CurrentOpPeriodDetails.PeriodEnd.ToString(Program.DateFormat));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                } else { MessageBox.Show("There was an error generating the pdf."); }
+            }
         }
     }
 }

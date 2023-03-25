@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SureRemoveFromCrew" xml:space="preserve">
-    <value>Removing this resource from the crew will leave it in the Check In list as a single resource. You can then modify its check-in details as needed, check it out, etc. Are you sure you want to proceed with this change?</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="glyphicons_basic_740_hash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-740-hash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,11 +142,11 @@
   <data name="glyphicons_basic_638_triangle_alert_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-638-triangle-alert@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ClearUnifiedCommandRolesTitle" xml:space="preserve">
+    <value>Clear Unified Command roles?</value>
+  </data>
   <data name="glyphicons-basic-218-lock-open@2x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-218-lock-open@2x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MembersImported" xml:space="preserve">
-    <value>You have successfully imported [IMPORT] new members, and updated [UPDATE] existing members.</value>
   </data>
   <data name="glyphicons-basic-52-eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-52-eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,8 +157,8 @@
   <data name="glyphicons_basic_28_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-28-search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="InvalidReportsToRole" xml:space="preserve">
-    <value>Sorry, you have made an invalid choice for who this role reports to.  The role you have selected is further down the org chart under the current role.</value>
+  <data name="glyphicons_basic_371_plus_2x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-371-plus@2x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_152_square_new_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-152-square-new-window.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,6 +187,9 @@
   <data name="CIAPP-LOGO-v3-transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CIAPP-LOGO-v3-transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="glyphicons-basic-5-settings@3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-5-settings@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="glyphicons_basic_739_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-739-check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -198,9 +198,6 @@
   </data>
   <data name="glyphicons_basic_55_clock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-55-clock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glyphicons_basic_976_globe_data" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-976-globe-data.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_refresh_comms" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-refresh-comms.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,8 +211,8 @@
   <data name="CantReportToSelf" xml:space="preserve">
     <value>Roles cannot be set to report to themselves.</value>
   </data>
-  <data name="glyphicons-basic-217-lock@2x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-217-lock@2x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HECrew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HECrew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_33_access_point" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-33-access-point.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,14 +235,14 @@
   <data name="glyphicons_basic_29_cars" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-29-cars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_539_barcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-539-barcode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HECrew" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HECrew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons_basic_763_sync_check_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-763-sync-check-green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_931_speech_bubble_question_sm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-931-speech-bubble-question-sm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glyphicons-basic-799-chevron-last-left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-799-chevron-last-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_145_folder_open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-145-folder-open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -274,9 +271,6 @@
   <data name="glyphicons_basic_876_palette_package" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-876-palette-package.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_371_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-371-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="glyphicons_basic_372_minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-372-minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -292,11 +286,11 @@
   <data name="glyphicons-basic-739-check-black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-739-check-black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_4_user_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-4-user@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="glyphicons_basic_193_circle_empty_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-193-circle-empty-remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ValidCoordinatesRequired" xml:space="preserve">
+    <value>You must enter valid coordinates, or leave the coordinate field(s) blank in order to proceed. You may enter latitude and longitude, UTM, or MGRS.</value>
   </data>
   <data name="glyphicons_basic_224_chevron_right_double" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-224-chevron-right-double.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -307,23 +301,20 @@
   <data name="glyphicons_basic_965_layers_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-965-layers-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_559_target" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-559-target.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glyphicons_basic_965_layers_plus1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-965-layers-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="glyphicons_basic_635_circle_question" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-635-circle-question.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SelectSavedContact" xml:space="preserve">
     <value>-Select a saved contact-</value>
   </data>
-  <data name="glyphicons_basic_234_calculator1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-234-calculator1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons-basic-217-lock@2x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-217-lock@2x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_432_log_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-432-log-out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons_basic_559_target" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-559-target.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glyphicons_basic_221_chevron_down_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-221-chevron-down@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_234_calculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-234-calculator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -331,17 +322,14 @@
   <data name="glyphicons_basic_302_square_download" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-302-square-download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_761_sync_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-761-sync-grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="glyphicons_basic_31_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-31-pencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AreYouSureTitle" xml:space="preserve">
     <value>Are you sure?</value>
   </data>
-  <data name="glyphicons_basic_221_chevron_down_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-221-chevron-down@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons_basic_4_user_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-4-user@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons-basic-217-lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-217-lock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -352,8 +340,8 @@
   <data name="glyphicons_basic_801_file_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-801-file-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons-basic-399-import" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-399-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="InvalidReportsToRole" xml:space="preserve">
+    <value>Sorry, you have made an invalid choice for who this role reports to.  The role you have selected is further down the org chart under the current role.</value>
   </data>
   <data name="glyphicons_basic_159_thumbnails_list" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-159-thumbnails-list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -376,6 +364,12 @@
   <data name="glyphicons_basic_931_speech_bubble_question_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-931-speech-bubble-question@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AddOrgChartRole" xml:space="preserve">
+    <value>Add new organization chart role</value>
+  </data>
+  <data name="RequestIncidentFromServer" xml:space="preserve">
+    <value>STOP! You are about to replace the incident currently on this machine with a current copy of the one on the server computer. You will lose any changes you’ve made here that are not already reflected there. There is no way to undo this. Are you very sure you want to proceed?</value>
+  </data>
   <data name="glyphicons_basic_151_square_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-151-square-edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -385,8 +379,8 @@
   <data name="glyphicons_basic_978_map_cadastral" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-978-map-cadastral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_424_blackboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-424-blackboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DeleteSubordinateRoles" xml:space="preserve">
+    <value>You must first remove or reassign any roles that report to this one before removing it.</value>
   </data>
   <data name="NoMembersImported" xml:space="preserve">
     <value>No members were imported or updated.  Please ensure you have configured the options here correctly, and selected the correct spreadsheet file.</value>
@@ -394,8 +388,8 @@
   <data name="glyphicons_basic_199_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-199-save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AddOrgChartRole" xml:space="preserve">
-    <value>Add new organization chart role</value>
+  <data name="glyphicons_basic_432_log_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-432-log-out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RenameTitle" xml:space="preserve">
     <value>Rename?</value>
@@ -418,8 +412,8 @@
   <data name="glyphicons_basic_224_chevron_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-224-chevron-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DeleteSubordinateRoles" xml:space="preserve">
-    <value>You must first remove or reassign any roles that report to this one before removing it.</value>
+  <data name="glyphicons_basic_965_layers_plus1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-965-layers-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_849_computer_network" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-849-computer-network.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -436,14 +430,20 @@
   <data name="glyphicons_basic_670_dashboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-670-dashboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons-basic-799-chevron-last-left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-799-chevron-last-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons_basic_976_globe_data" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-976-globe-data.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EquipOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EquipOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ics-canada-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ics-canada-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ClearUnifiedCommandRolesTitle" xml:space="preserve">
-    <value>Clear Unified Command roles?</value>
+  <data name="SureDeleteTitle" xml:space="preserve">
+    <value>Delete items?</value>
+  </data>
+  <data name="glyphicons_basic_371_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-371-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_58_history" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-58-history.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -454,8 +454,8 @@
   <data name="glyphicons_basic_16_print" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-16-print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ValidCoordinatesRequired" xml:space="preserve">
-    <value>You must enter valid coordinates, or leave the coordinate field(s) blank in order to proceed. You may enter latitude and longitude, UTM, or MGRS.</value>
+  <data name="glyphicons_basic_539_barcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-539-barcode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SureDelete" xml:space="preserve">
     <value>Are you sure you want to delete the selected item(s)?</value>
@@ -463,14 +463,17 @@
   <data name="glyphicons_calculate_and_output" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-calculate-and-output.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="glyphicons-basic-399-import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-399-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="glyphicons_basic_210_circle_empty_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-210-circle-empty-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SureDeleteTitle" xml:space="preserve">
-    <value>Delete items?</value>
+  <data name="glyphicons_basic_424_blackboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-424-blackboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_763_sync_check_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-763-sync-check-green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons_basic_761_sync_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-761-sync-grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons-basic-35-user-incognito" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-35-user-incognito.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -478,22 +481,22 @@
   <data name="glyphicons_basic_234_calculator_2x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-234-calculator@2x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons-basic-5-settings@3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-5-settings@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SureRemoveFromCrew" xml:space="preserve">
+    <value>Removing this resource from the crew will leave it in the Check In list as a single resource. You can then modify its check-in details as needed, check it out, etc. Are you sure you want to proceed with this change?</value>
   </data>
   <data name="glyphicons_basic_475_sort_numerically_alt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-475-sort-numerically-alt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_371_plus_2x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-371-plus@2x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MembersImported" xml:space="preserve">
+    <value>You have successfully imported [IMPORT] new members, and updated [UPDATE] existing members.</value>
   </data>
   <data name="glyphicons_basic_540_qr_code" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-540-qr-code.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RequestIncidentFromServer" xml:space="preserve">
-    <value>STOP! You are about to replace the incident currently on this machine with a current copy of the one on the server computer. You will lose any changes you’ve made here that are not already reflected there. There is no way to undo this. Are you very sure you want to proceed?</value>
+  <data name="glyphicons_basic_234_calculator1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-234-calculator1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EquipOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EquipOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons-basic-11-envelope" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-11-envelope.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
