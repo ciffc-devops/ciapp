@@ -1410,11 +1410,11 @@ namespace WildfireICSDesktopServices
         public void UpsertVehicle(Vehicle record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allVehicles.Any(o => o.ID == record.ID))
+            if (_currentIncident.AllIncidentResources.Any(o => o.ID == record.ID))
             {
-                _currentIncident.allVehicles = _currentIncident.allVehicles.Where(o => o.ID != record.ID).ToList();
+                _currentIncident.AllIncidentResources = _currentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList();
             }
-            _currentIncident.allVehicles.Add(record);
+            _currentIncident.AllIncidentResources.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
@@ -1629,8 +1629,8 @@ namespace WildfireICSDesktopServices
         public void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (CurrentIncident.AllOperationalSubGroups.Any(o => o.ID == record.ID)) { CurrentIncident.AllOperationalSubGroups = CurrentIncident.AllOperationalSubGroups.Where(o => o.ID != record.ID).ToList(); }
-            CurrentIncident.AllOperationalSubGroups.Add(record);
+            if (CurrentIncident.AllIncidentResources.Any(o => o.ID == record.ID)) { CurrentIncident.AllIncidentResources = CurrentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList(); }
+            CurrentIncident.AllIncidentResources.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "UPSERT", true, false); }
             CurrentIncident.SetOpGroupDepths(record.OpPeriod);
             CurrentIncident.UpdateThisGroupCount(record);

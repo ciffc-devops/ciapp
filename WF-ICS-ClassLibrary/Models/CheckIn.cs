@@ -50,6 +50,7 @@ namespace WF_ICS_ClassLibrary.Models
         public bool IsEquipment { get { return ResourceType.EqualsWithNull("Equipment") || ResourceType.Equals("Equipment"); } }
         public bool IsVisitor { get { return ResourceType.EqualsWithNull("Visitor"); } }
         public bool IsCrew { get { return ResourceType.EqualsWithNull("Crew"); } }
+        public bool IsHECrew { get { return ResourceType.EqualsWithNull("Heavy Equipment Crew"); } }
         public bool HasCheckOutTime { get => CheckOutDate < DateTime.MaxValue; }
         public DateTime LastDayOfRest { get => _LastDayOfRest; set => _LastDayOfRest = value; }
 

@@ -23,7 +23,9 @@ namespace Wildfire_ICS_Assist
 
         private void CheckedInResourcesForm_Load(object sender, EventArgs e)
         {
+           
             dgvResources.AutoGenerateColumns = false;
+            cboExpandCrews.SelectedIndex = 0;
             cboResourceVariety.SelectedIndex = 0;
             BuildLastDayOnIncidentFilterOptions();
             LoadResourcesList();
@@ -146,12 +148,26 @@ namespace Wildfire_ICS_Assist
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, VNumMin, VNumMax); }
                             if(v.OperatorID != Guid.Empty) { v.NumberOfPeople = 1; }
                             Program.wfIncidentService.UpsertVehicle(v);
+
+                            if(v.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o=>o.ID == v.OperatorID))
+                            {
+                                Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == v.OperatorID) as Personnel;
+                                eqop.ParentResourceID = v.ID;
+                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                            }
+
                             break;
                         case "Equipment":
                             Vehicle ve = resource as Vehicle;
                             if (ve.OperatorID != Guid.Empty) { ve.NumberOfPeople = 1; }
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, ENumMin, ENumMax); }
                             Program.wfIncidentService.UpsertVehicle(ve);
+                            if (ve.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == ve.OperatorID))
+                            {
+                                Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == ve.OperatorID) as Personnel;
+                                eqop.ParentResourceID = ve.ID;
+                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                            }
                             break;
                         case "Crew":
                             OperationalSubGroup group = resource as OperationalSubGroup;
@@ -189,7 +205,7 @@ namespace Wildfire_ICS_Assist
                                 {
                                     subres.OpPeriod = Program.CurrentOpPeriod;
                                     if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, PNumMin, PNumMax); }
-
+                                    subres.ParentResourceID = group.ID;
                                     Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
                                     CheckInRecord prec = signInForm.checkInRecord.Clone();
                                     prec.ResourceID = subres.ID;
@@ -209,7 +225,7 @@ namespace Wildfire_ICS_Assist
                                     {
                                         if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, VNumMin, VNumMax); }
                                     }
-                                    
+                                    subres.ParentResourceID = group.ID;
                                     Program.wfIncidentService.UpsertVehicle(vh);
                                     CheckInRecord vrec = signInForm.checkInRecord.Clone();
                                     vrec.ResourceID = subres.ID;
@@ -236,37 +252,44 @@ namespace Wildfire_ICS_Assist
         private void LoadResourcesList()
         {
             List<CheckInRecordWithResource> checkInRecords = new List<CheckInRecordWithResource>();
-            foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.OpPeriod == Program.CurrentOpPeriod && o.Active && o.ParentRecordID == Guid.Empty))
+            bool showCrewDetails = cboExpandCrews.SelectedIndex == 1;
+            if (showCrewDetails)
             {
-                IncidentResource resource = new IncidentResource();
+                foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.OpPeriod == Program.CurrentOpPeriod && o.Active))
+                {
+                    IncidentResource resource = new IncidentResource();
+                    if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
+                    {
+                        resource = Program.CurrentIncident.AllIncidentResources.First(o => o.ID == rec.ResourceID);
+                    }
 
-                if (rec.IsPerson || rec.IsVisitor)
-                {
-                    if (Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == rec.ResourceID))
+                    if (resource != null)
                     {
-                        resource = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == rec.ResourceID);
+                        checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
                     }
-                }
-                else if (rec.IsVehicle)
-                {
-                    if (Program.CurrentIncident.allVehicles.Any(o => o.ID == rec.ResourceID && o.Active))
-                    {
-                        resource = Program.CurrentIncident.allVehicles.First(o => o.ID == rec.ResourceID && o.Active);
-                    }
-                }
-                else if (rec.IsCrew)
-                {
-                    if (Program.CurrentIncident.ActiveOperationalSubGroups.Any(o => o.ID == rec.ResourceID))
-                    {
-                        resource = Program.CurrentIncident.ActiveOperationalSubGroups.First(o => o.ID == rec.ResourceID);
-                    }
-                }
-                if (resource != null)
-                {
-                    checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
                 }
             }
+            else
+            {
+                foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.OpPeriod == Program.CurrentOpPeriod && o.Active && o.ParentRecordID == Guid.Empty))
+                {
+                    IncidentResource resource = new IncidentResource();
+                    if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
+                    {
+                        resource = Program.CurrentIncident.AllIncidentResources.First(o => o.ID == rec.ResourceID);
+                    }
+
+                    if (resource != null && resource.ParentResourceID == Guid.Empty)
+                    {
+                        checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
+                    }
+                }
+            }
+
+
             checkInRecords = checkInRecords.OrderBy(o => o.ResourceName).ToList();
+
+
 
             if (cboResourceVariety.SelectedIndex > 0)
             {
@@ -510,6 +533,11 @@ namespace Wildfire_ICS_Assist
         private void numCNumMax_ValueChanged(object sender, EventArgs e)
         {
             CNumMax = Convert.ToInt32(((NumericUpDown)sender).Value); ConfirmResourceNumberAvailability();
+        }
+
+        private void cboExpandCrews_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadResourcesList();
         }
     }
 }

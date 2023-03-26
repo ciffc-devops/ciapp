@@ -2308,10 +2308,7 @@ namespace WildfireICSDesktopServices
                         MemberStatus status = statuses[x];
                         Personnel member = new Personnel();
                         if (status.MemberID != Guid.Empty && task.IncidentPersonnel.Where(o => o.PersonID == status.MemberID).Any()) { member = task.IncidentPersonnel.Where(o => o.PersonID == status.MemberID).First(); }
-                        else if (status.MemberID != Guid.Empty && task.getTaskTeamMembers(options.AllTeamMembers, false, false, OpsPeriod).Where(o => o.PersonID == status.MemberID).Any())
-                        {
-                            member = task.getTaskTeamMembers(options.AllTeamMembers, false, false, OpsPeriod).Where(o => o.PersonID == status.MemberID).First();
-                        }
+                      
                         stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
 
 

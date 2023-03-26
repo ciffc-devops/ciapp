@@ -30,6 +30,9 @@ namespace Wildfire_ICS_Assist
         public bool AutoStartNextCheckin { get => chkAutoNewCheckin.Checked; set => chkAutoNewCheckin.Checked = value; }
         public List<OperationalGroupResourceListing> resourcesToRemoveFromCrew { get => crewEditControl1.resourcesToRemoveFromCrew; }
 
+        private string CheckInMode = null;
+
+
         public CheckInForm()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
@@ -75,7 +78,7 @@ namespace Wildfire_ICS_Assist
                     resourceCheckInEditControl1.SetResource(selectedResource as Personnel);
                 }
             }
-            else if (rec.IsVehicle)
+            else if (rec.IsVehicle || rec.IsEquipment) 
             {
                 if (Program.CurrentIncident.allVehicles.Any(o => o.ID == rec.ResourceID && o.Active))
                 {
@@ -96,7 +99,7 @@ namespace Wildfire_ICS_Assist
                     wizardPages1.SelectedIndex = 3;
                 }
             }
-            else if (rec.IsCrew)
+            else if (rec.IsCrew || rec.IsHECrew)
             {
                 if (Program.CurrentIncident.ActiveOperationalSubGroups.Any(o => o.ID == rec.ResourceID))
                 {
@@ -122,6 +125,10 @@ namespace Wildfire_ICS_Assist
                     potentialOperators.AddRange(Program.CurrentIncident.IncidentPersonnel.Where(o => o.ID == v.OperatorID));
                 }
             }
+            Personnel p = new Personnel();
+            p.Name = "";
+            p.ID = Guid.Empty;
+            potentialOperators.Insert(0, p);
 
             cboSavedOperator.DataSource = potentialOperators;
             List<IncidentResource> operatorsForNewEquipment = new List<IncidentResource>(); operatorsForNewEquipment.AddRange(potentialOperators);
@@ -145,6 +152,9 @@ namespace Wildfire_ICS_Assist
             blankVehicle.ID = Guid.Empty;
             List<Vehicle> savedVehicles = new List<Vehicle>();
             savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("Vehicles"));
+            if (vehicleEquipmentEditControl1.CurrentVehicle.IsEquipment) { savedVehicles = savedVehicles.Where(o => o.IsEquipment).ToList(); blankVehicle.IncidentIDNo = "-Select a saved piece of equipment-"; }
+            else {  savedVehicles = savedVehicles.Where(o=>!o.IsEquipment).ToList(); blankVehicle.IncidentIDNo = "-Select a saved vehicle-"; }  
+
             savedVehicles.Insert(0, blankVehicle);
 
             cboSavedVehicles.DataSource = savedVehicles;
@@ -281,6 +291,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnCrew_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Crew";
             OperationalSubGroup sub = new OperationalSubGroup();
             crewEditControl1.SetSubGroup(sub, SubResources);
             wizardPages1.SelectedIndex = 2;
@@ -288,18 +299,22 @@ namespace Wildfire_ICS_Assist
 
         private void btnVehicleEquipment_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Vehicle"; 
             Vehicle v = new Vehicle();
             vehicleEquipmentEditControl1.SetVehicle(v);
+            BuildSavedVehicleList();
             wizardPages1.SelectedIndex = 4;
         }
 
         private void btnSinglePersonnel_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Personnel";
             wizardPages1.SelectedIndex = 1;
         }
 
         private void btnVisitor_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Visitor";
             wizardPages1.SelectedIndex = 3;
         }
 
@@ -405,6 +420,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnHECrew_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Heavy Equipment Crew"; 
             OperationalSubGroup sub = new OperationalSubGroup();
             sub.IsEquipmentCrew = true;
             crewEditControl1.SetSubGroup(sub, SubResources);
@@ -414,10 +430,13 @@ namespace Wildfire_ICS_Assist
 
         private void btnEquipAndOperator_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Equipment";
             Vehicle v = new Vehicle();
             v.IsEquipment = true;
             vehicleEquipmentEditControl1.SetVehicle(v);
-            wizardPages1.SelectedIndex = 1;
+            BuildSavedVehicleList();
+            wizardPages1.SelectedIndex = 4;
+
         }
     }
 }

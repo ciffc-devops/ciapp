@@ -28,13 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvResources = new System.Windows.Forms.DataGridView();
+            this.colVariety = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumberOfPeople = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumberOfEquipment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cpFilters = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.cboExpandCrews = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnFilter3ShowHelp = new System.Windows.Forms.Button();
             this.cboAssignedFilter = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -65,17 +78,6 @@
             this.btnDemob = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnStartCheckIn = new System.Windows.Forms.Button();
-            this.colVariety = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumberOfPeople = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumberOfEquipment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLastDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -173,6 +175,110 @@
             this.dgvResources.SelectionChanged += new System.EventHandler(this.dgvResources_SelectionChanged);
             this.dgvResources.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dgvResources_MouseUp);
             // 
+            // colVariety
+            // 
+            this.colVariety.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colVariety.DataPropertyName = "ResourceType";
+            this.colVariety.HeaderText = "Variety";
+            this.colVariety.Name = "colVariety";
+            this.colVariety.ReadOnly = true;
+            this.colVariety.Width = 92;
+            // 
+            // colID
+            // 
+            this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colID.DataPropertyName = "UniqueIDNumWithPrefix";
+            this.colID.HeaderText = "ID";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Width = 52;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "ResourceName";
+            this.colName.HeaderText = "Resource";
+            this.colName.MinimumWidth = 200;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colKind
+            // 
+            this.colKind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colKind.DataPropertyName = "Kind";
+            this.colKind.HeaderText = "Kind";
+            this.colKind.Name = "colKind";
+            this.colKind.ReadOnly = true;
+            this.colKind.Width = 73;
+            // 
+            // colType
+            // 
+            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colType.DataPropertyName = "Type";
+            this.colType.HeaderText = "Type";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Width = 78;
+            // 
+            // colLeader
+            // 
+            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colLeader.DataPropertyName = "LeaderName";
+            this.colLeader.HeaderText = "Leader";
+            this.colLeader.Name = "colLeader";
+            this.colLeader.ReadOnly = true;
+            this.colLeader.Width = 94;
+            // 
+            // colNumberOfPeople
+            // 
+            this.colNumberOfPeople.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNumberOfPeople.DataPropertyName = "NumberOfPeople";
+            this.colNumberOfPeople.HeaderText = "# Ppl";
+            this.colNumberOfPeople.Name = "colNumberOfPeople";
+            this.colNumberOfPeople.ReadOnly = true;
+            this.colNumberOfPeople.Width = 77;
+            // 
+            // colNumberOfEquipment
+            // 
+            this.colNumberOfEquipment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNumberOfEquipment.DataPropertyName = "NumberOfVehicles";
+            this.colNumberOfEquipment.HeaderText = "# Equip";
+            this.colNumberOfEquipment.Name = "colNumberOfEquipment";
+            this.colNumberOfEquipment.ReadOnly = true;
+            // 
+            // colCheckIn
+            // 
+            this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCheckIn.DataPropertyName = "CheckInDate";
+            dataGridViewCellStyle1.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colCheckIn.HeaderText = "Check In";
+            this.colCheckIn.Name = "colCheckIn";
+            this.colCheckIn.ReadOnly = true;
+            this.colCheckIn.Width = 109;
+            // 
+            // colLastDay
+            // 
+            this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colLastDay.DataPropertyName = "LastDayOnIncident";
+            dataGridViewCellStyle2.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colLastDay.HeaderText = "Last Day";
+            this.colLastDay.Name = "colLastDay";
+            this.colLastDay.ReadOnly = true;
+            this.colLastDay.Width = 105;
+            // 
+            // colStatus
+            // 
+            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            this.colStatus.Width = 85;
+            // 
             // cpFilters
             // 
             this.cpFilters.BackColor = System.Drawing.Color.White;
@@ -180,6 +286,8 @@
             this.cpFilters.CollapsedHeight = 40;
             this.cpFilters.CollapsedWidth = 290;
             this.cpFilters.CollapseLeft = true;
+            this.cpFilters.Controls.Add(this.cboExpandCrews);
+            this.cpFilters.Controls.Add(this.label4);
             this.cpFilters.Controls.Add(this.btnFilter3ShowHelp);
             this.cpFilters.Controls.Add(this.cboAssignedFilter);
             this.cpFilters.Controls.Add(this.label3);
@@ -189,14 +297,39 @@
             this.cpFilters.Controls.Add(this.label1);
             this.cpFilters.CurrentlyCollapsed = false;
             this.cpFilters.ExpandedHeight = 242;
-            this.cpFilters.ExpandedWidth = 290;
+            this.cpFilters.ExpandedWidth = 320;
             this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpFilters.Location = new System.Drawing.Point(6, 15);
             this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
             this.cpFilters.Name = "cpFilters";
-            this.cpFilters.Size = new System.Drawing.Size(290, 242);
+            this.cpFilters.Size = new System.Drawing.Size(290, 320);
             this.cpFilters.TabIndex = 0;
             this.cpFilters.TitleText = "Filter List";
+            // 
+            // cboExpandCrews
+            // 
+            this.cboExpandCrews.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboExpandCrews.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboExpandCrews.DropDownWidth = 500;
+            this.cboExpandCrews.FormattingEnabled = true;
+            this.cboExpandCrews.Items.AddRange(new object[] {
+            "Show Crew and Vehicle/Equipment entries only",
+            "Show all resources assigned to crews individually"});
+            this.cboExpandCrews.Location = new System.Drawing.Point(7, 281);
+            this.cboExpandCrews.Name = "cboExpandCrews";
+            this.cboExpandCrews.Size = new System.Drawing.Size(276, 32);
+            this.cboExpandCrews.TabIndex = 95;
+            this.cboExpandCrews.SelectedIndexChanged += new System.EventHandler(this.cboExpandCrews_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 254);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(285, 24);
+            this.label4.TabIndex = 94;
+            this.label4.Text = "Crews and Equipment Operators";
             // 
             // btnFilter3ShowHelp
             // 
@@ -286,7 +419,7 @@
             // 
             // cpPNumbers
             // 
-            this.cpPNumbers.BackColor = System.Drawing.Color.White;
+            this.cpPNumbers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpPNumbers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpPNumbers.CollapsedHeight = 40;
             this.cpPNumbers.CollapsedWidth = 290;
@@ -308,14 +441,14 @@
             this.cpPNumbers.Controls.Add(this.lblVNumTitle);
             this.cpPNumbers.Controls.Add(this.label5);
             this.cpPNumbers.Controls.Add(this.lblPNumTitle);
-            this.cpPNumbers.CurrentlyCollapsed = false;
+            this.cpPNumbers.CurrentlyCollapsed = true;
             this.cpPNumbers.ExpandedHeight = 357;
             this.cpPNumbers.ExpandedWidth = 290;
             this.cpPNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpPNumbers.Location = new System.Drawing.Point(5, 67);
             this.cpPNumbers.Margin = new System.Windows.Forms.Padding(6);
             this.cpPNumbers.Name = "cpPNumbers";
-            this.cpPNumbers.Size = new System.Drawing.Size(290, 357);
+            this.cpPNumbers.Size = new System.Drawing.Size(290, 40);
             this.cpPNumbers.TabIndex = 2;
             this.cpPNumbers.TitleText = "Resource Numbers";
             // 
@@ -663,110 +796,6 @@
             this.btnStartCheckIn.UseVisualStyleBackColor = true;
             this.btnStartCheckIn.Click += new System.EventHandler(this.btnStartCheckIn_Click);
             // 
-            // colVariety
-            // 
-            this.colVariety.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colVariety.DataPropertyName = "ResourceType";
-            this.colVariety.HeaderText = "Variety";
-            this.colVariety.Name = "colVariety";
-            this.colVariety.ReadOnly = true;
-            this.colVariety.Width = 92;
-            // 
-            // colID
-            // 
-            this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colID.DataPropertyName = "UniqueIDNumWithPrefix";
-            this.colID.HeaderText = "ID";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Width = 52;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "ResourceName";
-            this.colName.HeaderText = "Resource";
-            this.colName.MinimumWidth = 200;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colKind
-            // 
-            this.colKind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colKind.DataPropertyName = "Kind";
-            this.colKind.HeaderText = "Kind";
-            this.colKind.Name = "colKind";
-            this.colKind.ReadOnly = true;
-            this.colKind.Width = 73;
-            // 
-            // colType
-            // 
-            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colType.DataPropertyName = "Type";
-            this.colType.HeaderText = "Type";
-            this.colType.Name = "colType";
-            this.colType.ReadOnly = true;
-            this.colType.Width = 78;
-            // 
-            // colLeader
-            // 
-            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colLeader.DataPropertyName = "LeaderName";
-            this.colLeader.HeaderText = "Leader";
-            this.colLeader.Name = "colLeader";
-            this.colLeader.ReadOnly = true;
-            this.colLeader.Width = 94;
-            // 
-            // colNumberOfPeople
-            // 
-            this.colNumberOfPeople.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumberOfPeople.DataPropertyName = "NumberOfPeople";
-            this.colNumberOfPeople.HeaderText = "# Ppl";
-            this.colNumberOfPeople.Name = "colNumberOfPeople";
-            this.colNumberOfPeople.ReadOnly = true;
-            this.colNumberOfPeople.Width = 77;
-            // 
-            // colNumberOfEquipment
-            // 
-            this.colNumberOfEquipment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumberOfEquipment.DataPropertyName = "NumberOfVehicles";
-            this.colNumberOfEquipment.HeaderText = "# Equip";
-            this.colNumberOfEquipment.Name = "colNumberOfEquipment";
-            this.colNumberOfEquipment.ReadOnly = true;
-            // 
-            // colCheckIn
-            // 
-            this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCheckIn.DataPropertyName = "CheckInDate";
-            dataGridViewCellStyle1.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colCheckIn.HeaderText = "Check In";
-            this.colCheckIn.Name = "colCheckIn";
-            this.colCheckIn.ReadOnly = true;
-            this.colCheckIn.Width = 109;
-            // 
-            // colLastDay
-            // 
-            this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colLastDay.DataPropertyName = "LastDayOnIncident";
-            dataGridViewCellStyle2.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colLastDay.HeaderText = "Last Day";
-            this.colLastDay.Name = "colLastDay";
-            this.colLastDay.ReadOnly = true;
-            this.colLastDay.Width = 105;
-            // 
-            // colStatus
-            // 
-            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colStatus.DataPropertyName = "Status";
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 85;
-            // 
             // CheckedInResourcesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -852,5 +881,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLastDay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        private System.Windows.Forms.ComboBox cboExpandCrews;
+        private System.Windows.Forms.Label label4;
     }
 }

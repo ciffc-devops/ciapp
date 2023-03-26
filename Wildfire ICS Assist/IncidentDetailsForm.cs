@@ -646,8 +646,8 @@ namespace Wildfire_ICS_Assist
             setButtonCheckboxes();
             browseToIncidentFolderToolStripMenuItem.Enabled = true;
 
-            List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
-            Program.CurrentIncident.IncidentPersonnel = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
+            //List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            //Program.CurrentIncident.IncidentPersonnel = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
         }
 
         private void DisplayCurrentICSRole()
