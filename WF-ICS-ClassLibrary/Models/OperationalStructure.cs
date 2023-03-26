@@ -322,6 +322,13 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (rec.ParentRecordID == Guid.Empty && !incident.GetIsResourceCurrentlyAssigned(OpPeriod, rec.ResourceID))
                 {
+                    if (incident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
+                    {
+                        resources.Add(incident.AllIncidentResources.First(o => o.ID == rec.ResourceID));
+
+                    }
+
+                    /*
                     if (rec.IsPerson && incident.IncidentPersonnel.Any(o => o.ID == rec.ResourceID && o.Active))
                     {
                         resources.Add(incident.IncidentPersonnel.First(o => o.ID == rec.ResourceID && o.Active));
@@ -333,7 +340,7 @@ namespace WF_ICS_ClassLibrary.Models
                     else if (rec.IsVehicle && incident.allVehicles.Any(o => o.ID == rec.ResourceID && o.Active))
                     {
                         resources.Add(incident.allVehicles.First(o => o.ID == rec.ResourceID && o.Active));
-                    }
+                    }*/
                 }
             }
             resources = resources.OrderBy(o => o.Kind).ThenBy(o => o.Type).ThenBy(o => o.ResourceName).ToList();
@@ -392,6 +399,11 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 foreach (OperationalGroupResourceListing listing in incident.AllOperationalSubGroups.First(o => o.ID == OpGroupID).ResourceListing)
                 {
+                    if(incident.AllIncidentResources.Any(o=>o.ID == listing.ResourceID))
+                    {
+                        resources.Add(incident.AllIncidentResources.First(o => o.ID == listing.ResourceID));
+                    }
+                    /*
                     switch (listing.ResourceType)
                     {
                         case "Personnel":
@@ -411,7 +423,7 @@ namespace WF_ICS_ClassLibrary.Models
                             if (incident.IncidentPersonnel.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.IncidentPersonnel.First(o => o.ID == listing.ResourceID)); }
 
                             break;
-                    }
+                    }*/
                 }
             }
 
