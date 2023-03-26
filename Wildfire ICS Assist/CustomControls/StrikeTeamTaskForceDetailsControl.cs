@@ -105,7 +105,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                         listing.ResourceName = resource.ResourceName;
                         listing.Contact = resource.Contact;
                         listing.LeaderName = resource.LeaderName;
-
+                        listing.NumberOfPeople = resource.NumberOfPeople;
+                        listing.NumberOfVehicles = resource.NumberOfVehicles;
                         if (resource.GetType().Name.Equals("Personnel")) { listing.ResourceType = "Personnel"; }
                         else if (resource.GetType().Name.Equals("Vehicle")) {
                             if (((Vehicle)resource).IsEquipment) { listing.ResourceType = "Equipment"; }
@@ -115,6 +116,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
 
                         selectedGroup.ResourceListing.Add(listing);
+                       
                         
                     }
                     PopulateReportingResources();
@@ -133,12 +135,20 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             if (dgvSubGroups.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                List<OperationalSubGroup> toDelete = new List<OperationalSubGroup>();
+                List<OperationalGroupResourceListing> toDelete = new List<OperationalGroupResourceListing>();
                 foreach (DataGridViewRow row in dgvSubGroups.SelectedRows)
                 {
-                    toDelete.Add(row.DataBoundItem as OperationalSubGroup);
+                    toDelete.Add(row.DataBoundItem as OperationalGroupResourceListing);
                 }
-                foreach (OperationalSubGroup sub in toDelete) { sub.Active = false; Program.wfIncidentService.UpsertOperationalSubGroup(sub); }
+                foreach (OperationalGroupResourceListing sub in toDelete)
+                {
+                    if (selectedGroup.ResourceListing.Any(o => o.ID == sub.ID))
+                    {
+                        selectedGroup.ResourceListing.First(o => o.ID == sub.ID).Active = false;
+                        
+                    }
+                }
+                Program.wfIncidentService.UpsertOperationalGroup(selectedGroup);
             }
         }
 

@@ -387,8 +387,8 @@ namespace Wildfire_ICS_Assist
 
                 selectedResource = crewEditControl1.subGroup.Clone();
                 checkInRecord.ResourceType = "Crew";
-                SubResources.Clear();
-                SubResources.AddRange(crewEditControl1.resources);
+              //  SubResources.Clear();
+              //  SubResources.AddRange(crewEditControl1.resources);
                 MoveToCheckInDetailsPage();
             }
         }
@@ -410,6 +410,14 @@ namespace Wildfire_ICS_Assist
             crewEditControl1.SetSubGroup(sub, SubResources);
             wizardPages1.SelectedIndex = 2;
             
+        }
+
+        private void btnEquipAndOperator_Click(object sender, EventArgs e)
+        {
+            Vehicle v = new Vehicle();
+            v.IsEquipment = true;
+            vehicleEquipmentEditControl1.SetVehicle(v);
+            wizardPages1.SelectedIndex = 1;
         }
     }
 }

@@ -126,7 +126,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void OpenPersonForEdit(Personnel person)
         {
-            using (EditSavedTeamMemberForm entryForm = new EditSavedTeamMemberForm())
+            using (EditSavedPersonnelForm entryForm = new EditSavedPersonnelForm())
             {
                 entryForm.selectedMember = person;
                 DialogResult dr = entryForm.ShowDialog();

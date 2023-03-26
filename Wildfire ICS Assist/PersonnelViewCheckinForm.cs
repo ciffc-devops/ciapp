@@ -111,7 +111,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnEditIndividual_Click(object sender, EventArgs e)
         {
-            using (OptionsForms.EditSavedTeamMemberForm editForm = new OptionsForms.EditSavedTeamMemberForm())
+            using (OptionsForms.EditSavedPersonnelForm editForm = new OptionsForms.EditSavedPersonnelForm())
             {
                 Personnel person = new Personnel();
                 if (Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))

@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Utilities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WF_ICS_ClassLibrary.Models
 {
@@ -148,7 +149,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string LeaderName { get => Resource.LeaderName; }
         public string Status { get => _StatusText; set => _StatusText = value; }
         public int DaysTillTimeOut { get; set; }
-
+        public string UniqueIDNumWithPrefix { get => _Resource.UniqueIDNumWithPrefix; }
 
         public CheckInRecordWithResource() { _ID = Guid.NewGuid(); }
         public CheckInRecordWithResource(CheckInRecord rec, IncidentResource res, DateTime EndOfOp)
@@ -164,6 +165,65 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class CheckInTools
     {
+        public static bool ConfirmResourceNumUnique(this WFIncident incident, string ResourceType, int pNum)
+        {
+            if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator") || ResourceType.Equals("Visitor"))
+            {
+                return !incident.IncidentPersonnel.Any(o => o.UniqueIDNum == pNum);
+            }
+            else if (ResourceType.Equals("Vehicle"))
+            {
+                return !incident.allVehicles.Any(o => !o.IsEquipment && o.UniqueIDNum == pNum);
+            }
+            else if (ResourceType.Equals("Equipment"))
+            {
+                return !incident.allVehicles.Any(o => o.IsEquipment && o.UniqueIDNum == pNum);
+
+            }
+            else if (ResourceType.Equals("Crew") || ResourceType.Equals("Heavy Equipment Crew"))
+            {
+                return !incident.AllOperationalSubGroups.Any(o => o.UniqueIDNum == pNum);
+            }
+            else return false;
+           
+        }
+        public static int GetNextUniqueNum(this WFIncident incident, string ResourceType, int lowerBound = 1, int upperBound = 10000)
+        {
+            int next = lowerBound;
+            if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator") || ResourceType.Equals("Visitor"))
+            {
+                if (incident.IncidentPersonnel.Any(o => o.PNum >= lowerBound && o.PNum <= upperBound))
+                {
+                    next = incident.IncidentPersonnel.Where(o => o.PNum >= lowerBound && o.PNum <= upperBound).OrderByDescending(o => o.PNum).First().PNum + 1;
+                }
+            }
+            else if (ResourceType.Equals("Vehicle"))
+            {
+                if (incident.allVehicles.Any(o => !o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
+                {
+                    next = incident.allVehicles.Where(o => !o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
+                }
+            }
+            else if (ResourceType.Equals("Equipment"))
+            {
+                if (incident.allVehicles.Any(o => o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
+                {
+                    next = incident.allVehicles.Where(o => o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
+                }
+
+            }
+            else if (ResourceType.Equals("Crew") || ResourceType.Equals("Heavy Equipment Crew"))
+            {
+                if (incident.AllOperationalSubGroups.Any(o =>  o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
+                {
+                    next = incident.AllOperationalSubGroups.Where(o => o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
+                }
+            }
+
+            if (next >= lowerBound && next <= upperBound && incident.ConfirmResourceNumUnique(ResourceType, next)) { return next; }
+            else { return -1; }
+        }
+
         public static bool ResourceIsCheckedIn(this WFIncident incident, Guid ResourceID, DateTime AtThisTime)
         {
             if (incident.AllCheckInRecords.Any(o => o.Active && o.ResourceID == ResourceID))
@@ -206,14 +266,14 @@ namespace WF_ICS_ClassLibrary.Models
                 new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "CIFFC Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,false, "Enter the CIFFC crew identifier if the crew is imported through CIFFC i.e C-30"),
                 new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info i.e. cell and email", "String", "Crew Info", false, false, false,true,false,false,true, "0"),
                 new CheckInInfoField(new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), "Resource Order Number", "String", "Deployment Information", false, true, true,true,true,true,false, "Enter agency specific order number or order identifier. "),
-                new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Position On Incident", "String", "Deployment Information", false, true, true,false,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Position On Incident", "String", "Deployment Information", false, true, true,false,true,true,true, "0"),
                 new CheckInInfoField(new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe"), "Check-In Location", "List", "Check In Information", true, true, true,true,true,true,true, "0"),
-                new CheckInInfoField(new Guid("c62a8935-7413-41f1-a2b2-682d4064b08a"), "Check-In Date", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
-                new CheckInInfoField(new Guid("4836ad52-a6a8-4faa-b6f4-39ef941476b1"), "Check-In Time", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
-                new CheckInInfoField(new Guid("eacbe40c-d674-40d6-a5eb-3f807e13277a"), "Last Day of Rest", "String", "Check In Information", false, true, false,true,false,true,true, "Enter the resources last day of rest/day off. "),
+                //new CheckInInfoField(new Guid("c62a8935-7413-41f1-a2b2-682d4064b08a"), "Check-In Date", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("4836ad52-a6a8-4faa-b6f4-39ef941476b1"), "Check-In Time", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("eacbe40c-d674-40d6-a5eb-3f807e13277a"), "Last Day of Rest", "String", "Check In Information", false, true, false,true,false,true,true, "Enter the resources last day of rest/day off. "),
                 new CheckInInfoField(new Guid("9afc627f-bdad-4076-8d9a-3511759ea2bf"), "First Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
-                new CheckInInfoField(new Guid("49602e27-8603-4d24-8228-83a3ed4d81d4"), "Last Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
-                new CheckInInfoField(new Guid("cb7f504c-6233-4c4d-aa67-780b8c90baa7"), "Agency i.e. Parks Canada, Alberta, Town Of Banff, City of Ft.McMurray, Canada Task Force 2, etc", "String", "Check In Information", true, true, true,true,true,true,true, "Enter the resources home agency. "),
+                //new CheckInInfoField(new Guid("49602e27-8603-4d24-8228-83a3ed4d81d4"), "Last Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("cb7f504c-6233-4c4d-aa67-780b8c90baa7"), "Agency i.e. Parks Canada, Alberta, Town Of Banff, City of Ft.McMurray, Canada Task Force 2, etc", "String", "Check In Information", true, true, true,true,true,true,true, "Enter the resources home agency. "),
                 new CheckInInfoField(new Guid("7a39df77-cb16-463c-812b-573bfa97de5d"), "Accomodation Location", "List", "Logistics", true, true, false,true,false,true,false, "Enter where the resource is staying. "),
                 new CheckInInfoField(new Guid("09e8e520-a82e-491f-a82e-ed108e809392"), "Breakfast", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
                 new CheckInInfoField(new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4"), "Lunch", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),

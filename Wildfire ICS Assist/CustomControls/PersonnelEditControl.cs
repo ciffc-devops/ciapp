@@ -68,8 +68,6 @@ namespace Wildfire_ICS_Assist.CustomControls
                 chkDietary.Checked = teamMember.HasDietaryRestrictions;
                 txtCallsign.Text = teamMember.CallSign;
                 chkAllergies.Checked = teamMember.HasAllergies;
-                txtWeight.Text = teamMember.Weight;
-
                 txtNOKName.Text = teamMember.EmergencyContact;
 
                 //chkNoGluten.Checked = teamMember.NoGluten;

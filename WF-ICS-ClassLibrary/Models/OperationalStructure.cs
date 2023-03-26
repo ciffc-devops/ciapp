@@ -123,6 +123,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
         [ProtoMember(8)] private bool _IsEquipmentCrew;
 
+        public OperationalSubGroup() { this.ResourceType = "Crew"; }
+
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid LeaderID { get => _LeaderID; set => _LeaderID = value; }
         public string Transport { get => _Transport; set => _Transport = value; }
@@ -130,7 +132,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Phone { get => _Phone; set => _Phone = value; }
         public List<OperationalGroupResourceListing> ResourceListing { get => _ResourceListing; set => _ResourceListing = value; }
         public List<OperationalGroupResourceListing> ActiveResourceListing { get => _ResourceListing.Where(o => o.Active).ToList(); }
-        public bool IsEquipmentCrew { get => _IsEquipmentCrew; set => _IsEquipmentCrew = value; }
+        public bool IsEquipmentCrew { get => _IsEquipmentCrew; set { _IsEquipmentCrew = value; if (value) { this.ResourceType = "Heavy Equipment Crew"; } else { this.ResourceType = "Crew"; } } }
 
 
         public void UpsertResourceListing(OperationalGroupResourceListing listing)
@@ -172,6 +174,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid SubGroupID { get => _SubGroupID; set => _SubGroupID = value; }
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid ResourceID { get => _ResourceID; set => _ResourceID = value; }
+     /*
         public string ResourceType
         {
             get => _ResourceType;
@@ -181,7 +184,7 @@ namespace WF_ICS_ClassLibrary.Models
                 if (ResourceType.Equals("Vehicle") || ResourceType.Equals("Equipment")) { NumberOfVehicles = 1; NumberOfPeople = 0; }
                 else if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator")) { NumberOfPeople = 1; NumberOfVehicles = 0; }
             }
-        }
+        }*/
         public string Role { get => _Role; set => _Role = value; }
         public bool IsLeader { get { if (!string.IsNullOrEmpty(Role)) { return Role.Contains("Leader"); } else { return false; } } }
 
@@ -342,8 +345,8 @@ namespace WF_ICS_ClassLibrary.Models
         public static bool GetIsResourceCurrentlyAssigned(this WFIncident incident, int OpPeriod, Guid ResourceID)
         {
             if (ResourceID == Guid.Empty) { return false; }
-            if (incident.ActiveOperationalSubGroups.Any(o => o.ResourceListing.Count(r => r.ResourceID == ResourceID) > 0 && o.OpPeriod == OpPeriod)) { return true; }
-            if (incident.ActiveOperationalGroups.Any(o => o.ResourceListing.Count(r => r.ResourceID == ResourceID) > 0 && o.OpPeriod == OpPeriod)) { return true; }
+            if (incident.ActiveOperationalSubGroups.Any(o => o.ActiveResourceListing.Count(r => r.ResourceID == ResourceID) > 0 && o.OpPeriod == OpPeriod)) { return true; }
+            if (incident.ActiveOperationalGroups.Any(o => o.ActiveResourceListing.Count(r => r.ResourceID == ResourceID) > 0 && o.OpPeriod == OpPeriod)) { return true; }
             if (incident.allOrgCharts.Any(o => o.OpPeriod == OpPeriod) && incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod).AllRoles.Any(o => o.IndividualID == ResourceID)) { return true; }
             if (incident.allVehicles.Any(o => o.OperatorID == ResourceID)) { return true; }
             return false;

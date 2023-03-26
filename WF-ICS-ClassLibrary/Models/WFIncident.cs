@@ -277,6 +277,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<OperationalSubGroup> ActiveOperationalSubGroups { get => AllOperationalSubGroups.Where(o => o.Active).ToList(); }
         public List<DemobilizationRecord> AllDemobilizationRecords { get => _allDemobilizationRecords; set => _allDemobilizationRecords = value; }
         public List<DemobilizationRecord> ActiveDemobilizationRecords { get => _allDemobilizationRecords.Where(o=>o.Active).ToList(); } 
+   
+
 
         //for network reasons
 

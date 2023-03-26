@@ -49,7 +49,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.txtNOKName = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.txtWeight = new System.Windows.Forms.TextBox();
+            this.btnEmailHelp = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label13 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -72,10 +72,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.cboKind = new System.Windows.Forms.ComboBox();
             this.cboType = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.cboOtherAgency = new System.Windows.Forms.ComboBox();
-            this.btnEmailHelp = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.txtPronouns = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
@@ -291,17 +289,19 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
-            // txtWeight
+            // btnEmailHelp
             // 
-            this.txtWeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWeight.Location = new System.Drawing.Point(211, 770);
-            this.txtWeight.Name = "txtWeight";
-            this.txtWeight.Size = new System.Drawing.Size(190, 29);
-            this.txtWeight.TabIndex = 130;
-            this.toolTip1.SetToolTip(this.txtWeight, "Ideally, your EMBC ID#");
-            this.txtWeight.TextChanged += new System.EventHandler(this.txtWeight_TextChanged);
+            this.btnEmailHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEmailHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmailHelp.BackgroundImage")));
+            this.btnEmailHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEmailHelp.Location = new System.Drawing.Point(408, 580);
+            this.btnEmailHelp.Name = "btnEmailHelp";
+            this.btnEmailHelp.Size = new System.Drawing.Size(26, 26);
+            this.btnEmailHelp.TabIndex = 134;
+            this.btnEmailHelp.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnEmailHelp, "Emails may be used for IAP delivery. Enter work emails or company emails only. ");
+            this.btnEmailHelp.UseVisualStyleBackColor = true;
+            this.btnEmailHelp.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
             // imageList1
             // 
@@ -750,15 +750,6 @@
             this.cboType.TabIndex = 5;
             this.cboType.Leave += new System.EventHandler(this.cboType_Leave);
             // 
-            // label18
-            // 
-            this.label18.Location = new System.Drawing.Point(15, 769);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(187, 29);
-            this.label18.TabIndex = 131;
-            this.label18.Text = "Weight";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label19
             // 
             this.label19.Location = new System.Drawing.Point(18, 349);
@@ -782,20 +773,6 @@
             this.cboOtherAgency.Size = new System.Drawing.Size(190, 32);
             this.cboOtherAgency.TabIndex = 133;
             this.cboOtherAgency.Leave += new System.EventHandler(this.cboOtherAgency_Leave);
-            // 
-            // btnEmailHelp
-            // 
-            this.btnEmailHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEmailHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmailHelp.BackgroundImage")));
-            this.btnEmailHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnEmailHelp.Location = new System.Drawing.Point(408, 580);
-            this.btnEmailHelp.Name = "btnEmailHelp";
-            this.btnEmailHelp.Size = new System.Drawing.Size(26, 26);
-            this.btnEmailHelp.TabIndex = 134;
-            this.btnEmailHelp.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnEmailHelp, "Emails may be used for IAP delivery. Enter work emails or company emails only. ");
-            this.btnEmailHelp.UseVisualStyleBackColor = true;
-            this.btnEmailHelp.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
             // label20
             // 
@@ -828,8 +805,6 @@
             this.Controls.Add(this.btnEmailHelp);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.cboOtherAgency);
-            this.Controls.Add(this.txtWeight);
-            this.Controls.Add(this.label18);
             this.Controls.Add(this.cboType);
             this.Controls.Add(this.cboKind);
             this.Controls.Add(this.label17);
@@ -870,9 +845,9 @@
             this.Controls.Add(this.txtFirstName);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.MinimumSize = new System.Drawing.Size(442, 702);
+            this.MinimumSize = new System.Drawing.Size(442, 769);
             this.Name = "PersonnelEditControl";
-            this.Size = new System.Drawing.Size(442, 812);
+            this.Size = new System.Drawing.Size(442, 769);
             this.Load += new System.EventHandler(this.PersonnelEditControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).EndInit();
             this.ResumeLayout(false);
@@ -923,8 +898,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox cboKind;
         private System.Windows.Forms.ComboBox cboType;
-        private System.Windows.Forms.TextBox txtWeight;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox cboOtherAgency;
         private System.Windows.Forms.Button btnEmailHelp;

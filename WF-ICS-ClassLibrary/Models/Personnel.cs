@@ -16,6 +16,7 @@ namespace WF_ICS_ClassLibrary.Models
     {
         public Personnel()
         {
+            ResourceType = this.GetType().Name;
             PersonID = Guid.NewGuid();
             MemberActive = true;
             CurrentStatus = null;
@@ -25,6 +26,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
         public Personnel(Guid id)
         {
+            ResourceType = this.GetType().Name;
             PersonID = id;
             MemberActive = true;
             CurrentStatus = null;
@@ -60,7 +62,6 @@ namespace WF_ICS_ClassLibrary.Models
 
 
 
-
         [ProtoMember(28)] private MemberStatus _currentStatus;
 
 
@@ -84,6 +85,8 @@ namespace WF_ICS_ClassLibrary.Models
         public string CallSign { get => _CallSign; set => _CallSign = value; }
         public string Pronouns { get => _Pronouns; set => _Pronouns = value; }
         public string AccomodationPreference { get => _AccomodationPreference; set => _AccomodationPreference = value; }
+        public int PNum { get => UniqueIDNum; set => UniqueIDNum = value; }
+
         private void SetName()
         {
             StringBuilder sb = new StringBuilder();

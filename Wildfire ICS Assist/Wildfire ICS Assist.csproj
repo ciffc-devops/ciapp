@@ -468,11 +468,11 @@
     <Compile Include="OptionsForms\EditSavedSafetyNoteForm.Designer.cs">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OptionsForms\EditSavedTeamMemberForm.cs">
+    <Compile Include="OptionsForms\EditSavedPersonnelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OptionsForms\EditSavedTeamMemberForm.Designer.cs">
-      <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
+    <Compile Include="OptionsForms\EditSavedPersonnelForm.Designer.cs">
+      <DependentUpon>EditSavedPersonnelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\EditSavedVehicleForm.cs">
       <SubType>Form</SubType>
@@ -834,8 +834,8 @@
     <EmbeddedResource Include="OptionsForms\EditSavedSafetyNoteForm.resx">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForms\EditSavedTeamMemberForm.resx">
-      <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
+    <EmbeddedResource Include="OptionsForms\EditSavedPersonnelForm.resx">
+      <DependentUpon>EditSavedPersonnelForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedVehicleForm.resx">
