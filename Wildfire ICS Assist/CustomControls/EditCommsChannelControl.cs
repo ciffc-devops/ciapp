@@ -82,5 +82,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             get { return !string.IsNullOrEmpty(txtChannelID.Text); }
         }
+
+        private void btnCommsSystemHelp_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int durationMilliseconds = 10000;
+            toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
+
+        }
     }
 }

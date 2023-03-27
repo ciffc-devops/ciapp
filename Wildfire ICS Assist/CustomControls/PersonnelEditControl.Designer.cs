@@ -224,6 +224,7 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Help;
             this.button1.Location = new System.Drawing.Point(408, 262);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
@@ -238,6 +239,7 @@
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Help;
             this.button2.Location = new System.Drawing.Point(408, 304);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 26);
@@ -253,6 +255,7 @@
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button6.Cursor = System.Windows.Forms.Cursors.Help;
             this.button6.Location = new System.Drawing.Point(410, 425);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 26);
@@ -280,6 +283,7 @@
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Help;
             this.button3.Location = new System.Drawing.Point(407, 725);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 26);
@@ -294,6 +298,7 @@
             this.btnEmailHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEmailHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmailHelp.BackgroundImage")));
             this.btnEmailHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEmailHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnEmailHelp.Location = new System.Drawing.Point(408, 580);
             this.btnEmailHelp.Name = "btnEmailHelp";
             this.btnEmailHelp.Size = new System.Drawing.Size(26, 26);

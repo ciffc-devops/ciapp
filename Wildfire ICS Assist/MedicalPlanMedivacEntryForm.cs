@@ -55,6 +55,7 @@ namespace Wildfire_ICS_Assist
             List<AmbulanceService> items = (List<AmbulanceService>)Program.generalOptionsService.GetOptionsValue("Ambulances");
             items = items.Where(o => o.Active).OrderBy(o => o.Organization).ToList();
             cboSaved.DataSource = items;
+            pnlSavedMedivac.Enabled = items.Count > 0;
         }
 
         private void MedicalPlanMedivacEntryForm_Load(object sender, EventArgs e)
