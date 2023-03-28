@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -261,9 +261,9 @@
             // 
             this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colCheckIn.DataPropertyName = "CheckInDate";
-            dataGridViewCellStyle1.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle3;
             this.colCheckIn.HeaderText = "Check In";
             this.colCheckIn.Name = "colCheckIn";
             this.colCheckIn.ReadOnly = true;
@@ -273,9 +273,9 @@
             // 
             this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colLastDay.DataPropertyName = "LastDayOnIncident";
-            dataGridViewCellStyle2.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle4;
             this.colLastDay.HeaderText = "Last Day";
             this.colLastDay.Name = "colLastDay";
             this.colLastDay.ReadOnly = true;
@@ -850,6 +850,7 @@
             this.btnLogisticsOverview.Text = "Logistics Overview";
             this.btnLogisticsOverview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLogisticsOverview.UseVisualStyleBackColor = true;
+            this.btnLogisticsOverview.Click += new System.EventHandler(this.btnLogisticsOverview_Click);
             // 
             // CheckedInResourcesForm
             // 

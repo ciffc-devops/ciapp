@@ -403,27 +403,6 @@ namespace WF_ICS_ClassLibrary.Models
                     {
                         resources.Add(incident.AllIncidentResources.First(o => o.ID == listing.ResourceID));
                     }
-                    /*
-                    switch (listing.ResourceType)
-                    {
-                        case "Personnel":
-                            if (incident.IncidentPersonnel.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.IncidentPersonnel.First(o => o.ID == listing.ResourceID)); }
-                            break;
-                        case "Visitor":
-                            if (incident.IncidentPersonnel.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.IncidentPersonnel.First(o => o.ID == listing.ResourceID)); }
-                            break;
-                        case "Vehicle":
-                            if (incident.allVehicles.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.allVehicles.First(o => o.ID == listing.ResourceID)); }
-                            break;
-                        case "Equipment":
-                            if (incident.allVehicles.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.allVehicles.First(o => o.ID == listing.ResourceID)); }
-
-                            break;
-                        case "Operator":
-                            if (incident.IncidentPersonnel.Any(o => o.ID == listing.ResourceID)) { resources.Add(incident.IncidentPersonnel.First(o => o.ID == listing.ResourceID)); }
-
-                            break;
-                    }*/
                 }
             }
 

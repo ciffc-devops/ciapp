@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -11,6 +13,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using Wildfire_ICS_Assist.UtilityForms;
+using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
@@ -604,6 +607,36 @@ namespace Wildfire_ICS_Assist
             {
                 CheckInRecordWithResource item = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
                 OpenDemobForEdit(item);
+            }
+        }
+
+        private void btnLogisticsOverview_Click(object sender, EventArgs e)
+        {
+
+            ICSRole role = Program.CurrentOrgChart.AllRoles.First(o => o.RoleID == WF_ICS_ClassLibrary.Globals.IncidentCommanderID);
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role , false);
+
+
+
+
+            string fullFilepath = "";
+            //int end = CurrentTask.FileName.LastIndexOf("\\");
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
+            //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
             }
         }
     }

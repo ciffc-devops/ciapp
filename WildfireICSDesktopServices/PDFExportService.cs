@@ -3277,6 +3277,184 @@ namespace WildfireICSDesktopServices
         }
         #endregion
 
+
+        #region Logistics Summary
+
+        public List<byte[]> exportLogisticsSummaryToPDF(WFIncident task, int OpPeriodToExport, ICSRole ParentRole, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createLogisticsSummaryPDF(task, OpPeriodToExport, ParentRole, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+        public string createLogisticsSummaryPDF(WFIncident task, int OpPeriod, ICSRole ParentRole, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + task.IncidentIdentifier + " OP " + OpPeriod.ToString() + " " + ParentRole.RoleName + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = "BlankForms/Logistics Overview.pdf";
+            fileToUse = getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+
+
+                    OperationalPeriod currentPeriod = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = task.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+                    stamper.AcroFields.SetField("INCIDENT NAME OR NUMBERRow1", task.IncidentNameOrNumber);
+                    stamper.AcroFields.SetField("BRANCH  DIVISION  OVERHEAD", ParentRole.RoleName);
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+
+                    List<ICSRole> childRoles = currentOrgChart.GetChildRoles(ParentRole.RoleID, true, false);
+
+                    List<IncidentResource> allResources = new List<IncidentResource>();
+                    List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
+                    if (ParentRole.IndividualID != Guid.Empty && !allResources.Any(o => o.ID == ParentRole.IndividualID) && task.ActiveIncidentResources.Any(o => o.ID == ParentRole.IndividualID)) { allResources.Add(task.ActiveIncidentResources.First(o => o.ID == ParentRole.IndividualID)); }
+
+                    foreach(ICSRole role in childRoles)
+                    {
+                        if (role.IndividualID != Guid.Empty && !allResources.Any(o=>o.ID == role.IndividualID) && task.ActiveIncidentResources.Any(o => o.ID == role.IndividualID)) { allResources.Add(task.ActiveIncidentResources.First(o => o.ID == role.IndividualID)); }
+                    }
+                    foreach (ICSRole role in childRoles)
+                    {
+                        if (task.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
+                        {
+                            OperationalGroup opgr = task.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
+                            allResources.AddRange(task.GetReportingResources(opgr.ID));
+                        }
+                    }
+
+
+
+
+                    foreach (IncidentResource res in allResources)
+                    {
+                        if (task.AllCheckInRecords.Any(o => o.ResourceID == res.ID)) { checkInRecords.Add(task.AllCheckInRecords.First(o => o.ResourceID == res.ID)); }
+                    }
+
+                    int maleOnly = allResources.OfType<Personnel>().Count(o => o.AccomodationPreference.EqualsWithNull("Male-Only"));
+                    int femaleOnly = allResources.OfType<Personnel>().Count(o => o.AccomodationPreference.EqualsWithNull("Female-Only"));
+                    int mixedAccomodation = allResources.OfType<Personnel>().Count(o => o.AccomodationPreference.EqualsWithNull("Not Gender-Restricted"));
+                    stamper.AcroFields.SetField("MaleOnlyPersonnel", maleOnly.ToString());
+                    stamper.AcroFields.SetField("FemaleOnlyPersonnel", femaleOnly.ToString());
+                    stamper.AcroFields.SetField("Not GenderRestrictedPersonnel", mixedAccomodation.ToString());
+
+
+                    int[] breakfast = new int[2];
+                    int[] lunch = new int[2];
+                    int[] dinner = new int[2];
+                    Guid breakfastID = new Guid("09e8e520-a82e-491f-a82e-ed108e809392");
+                    Guid lunchID = new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4");
+                    Guid dinnerID = new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488");
+
+                    foreach (Personnel p in allResources.OfType<Personnel>())
+                    {
+                        if(checkInRecords.Any(o=>o.ResourceID == p.ID))
+                        {
+                            CheckInRecord rec = checkInRecords.First(o => o.ResourceID == p.ID);
+                            if(rec.InfoFields.Any(o=>o.ID == breakfastID && o.BoolValue))
+                            {
+                                if (p.HasDietaryRestrictions) { breakfast[1]++; }
+                                else { breakfast[0]++; }
+                            }
+                            if (rec.InfoFields.Any(o => o.ID == lunchID && o.BoolValue))
+                            {
+                                if (p.HasDietaryRestrictions) { lunch[1]++; }
+                                else { lunch[0]++; }
+                            }
+                            if (rec.InfoFields.Any(o => o.ID == dinnerID && o.BoolValue))
+                            {
+                                if (p.HasDietaryRestrictions) { dinner[1]++; }
+                                else { dinner[0]++; }
+                            }
+                        }
+                    }
+                    stamper.AcroFields.SetField("BreakfastUnrestricted", breakfast[0].ToString());
+                    stamper.AcroFields.SetField("BreakfastDietary Restrictions", breakfast[1].ToString());
+                    stamper.AcroFields.SetField("LunchUnrestricted", lunch[0].ToString());
+                    stamper.AcroFields.SetField("LunchDietary Restrictions", lunch[1].ToString());
+                    stamper.AcroFields.SetField("DinnerUnrestricted", dinner[0].ToString());
+                    stamper.AcroFields.SetField("DinnerDietary Restrictions", dinner[1].ToString());
+
+
+                    int[] vehicleTypes = new int[4];
+                    vehicleTypes[0] = checkInRecords.Count(o => o.InfoFields.Any(f => f.ID == new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f") && f.BoolValue));
+                    vehicleTypes[1] = checkInRecords.Count(o => o.InfoFields.Any(f => f.ID == new Guid("c1399559-2ac8-49da-8ce8-cd711365417d") && f.BoolValue));
+                    vehicleTypes[2] = checkInRecords.Count(o => o.InfoFields.Any(f => f.ID == new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d") && f.BoolValue));
+                    vehicleTypes[3] = checkInRecords.Count(o => o.InfoFields.Any(f => f.ID == new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368") && f.BoolValue));
+                    stamper.AcroFields.SetField("AgencyOwnedRow1", vehicleTypes[0].ToString());
+                    stamper.AcroFields.SetField("RentalRow1", vehicleTypes[1].ToString());
+                    stamper.AcroFields.SetField("ContractorRow1", vehicleTypes[2].ToString());
+                    stamper.AcroFields.SetField("PrivateRow1", vehicleTypes[3].ToString());
+
+                    //need resources by type
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    Guid randomID = Guid.NewGuid();
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+            return path;
+        }
+
+        #endregion
+
         #region Assignment Summaries and Details
         public List<byte[]> exportAllAssignmentSummariesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
