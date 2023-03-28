@@ -194,9 +194,9 @@
             this.chkAssignmentDetails.AutoSize = true;
             this.chkAssignmentDetails.Location = new System.Drawing.Point(360, 121);
             this.chkAssignmentDetails.Name = "chkAssignmentDetails";
-            this.chkAssignmentDetails.Size = new System.Drawing.Size(247, 28);
+            this.chkAssignmentDetails.Size = new System.Drawing.Size(237, 28);
             this.chkAssignmentDetails.TabIndex = 33;
-            this.chkAssignmentDetails.Text = "204A - Assignment Details";
+            this.chkAssignmentDetails.Text = "204A - ST/TF/Grp Details";
             this.chkAssignmentDetails.UseVisualStyleBackColor = true;
             // 
             // chkContacts

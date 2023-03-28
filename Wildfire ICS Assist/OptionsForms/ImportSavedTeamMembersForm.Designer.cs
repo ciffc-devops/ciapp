@@ -162,7 +162,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 32);
             this.label1.TabIndex = 110;
-            this.label1.Text = "Full Name*";
+            this.label1.Text = "Full Name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label8
@@ -279,7 +279,7 @@
             // 
             this.label9.Location = new System.Drawing.Point(67, 92);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(448, 55);
+            this.label9.Size = new System.Drawing.Size(652, 55);
             this.label9.TabIndex = 139;
             this.label9.Text = "Use the section below to identify the column (if any) where the data is stored in" +
     " your spreadsheet";
@@ -337,7 +337,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(570, 774);
+            this.splitContainer1.Size = new System.Drawing.Size(774, 774);
             this.splitContainer1.SplitterDistance = 704;
             this.splitContainer1.TabIndex = 140;
             // 
@@ -346,7 +346,7 @@
             this.btnDefaultHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDefaultHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDefaultHelp.BackgroundImage")));
             this.btnDefaultHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDefaultHelp.Location = new System.Drawing.Point(520, 630);
+            this.btnDefaultHelp.Location = new System.Drawing.Point(724, 630);
             this.btnDefaultHelp.Name = "btnDefaultHelp";
             this.btnDefaultHelp.Size = new System.Drawing.Size(26, 26);
             this.btnDefaultHelp.TabIndex = 155;
@@ -359,7 +359,7 @@
             this.btnUpdateExistingHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdateExistingHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUpdateExistingHelp.BackgroundImage")));
             this.btnUpdateExistingHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnUpdateExistingHelp.Location = new System.Drawing.Point(521, 576);
+            this.btnUpdateExistingHelp.Location = new System.Drawing.Point(725, 576);
             this.btnUpdateExistingHelp.Name = "btnUpdateExistingHelp";
             this.btnUpdateExistingHelp.Size = new System.Drawing.Size(26, 26);
             this.btnUpdateExistingHelp.TabIndex = 154;
@@ -372,7 +372,7 @@
             this.btnColumnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnColumnHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnColumnHelp.BackgroundImage")));
             this.btnColumnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnColumnHelp.Location = new System.Drawing.Point(521, 105);
+            this.btnColumnHelp.Location = new System.Drawing.Point(725, 105);
             this.btnColumnHelp.Name = "btnColumnHelp";
             this.btnColumnHelp.Size = new System.Drawing.Size(26, 26);
             this.btnColumnHelp.TabIndex = 153;
@@ -385,7 +385,7 @@
             this.btnCSVHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCSVHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCSVHelp.BackgroundImage")));
             this.btnCSVHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCSVHelp.Location = new System.Drawing.Point(379, 11);
+            this.btnCSVHelp.Location = new System.Drawing.Point(583, 11);
             this.btnCSVHelp.Name = "btnCSVHelp";
             this.btnCSVHelp.Size = new System.Drawing.Size(26, 26);
             this.btnCSVHelp.TabIndex = 152;
@@ -506,7 +506,7 @@
             this.btnSave.Enabled = false;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_399_import;
-            this.btnSave.Location = new System.Drawing.Point(458, 6);
+            this.btnSave.Location = new System.Drawing.Point(662, 6);
             this.btnSave.Margin = new System.Windows.Forms.Padding(6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(106, 51);
@@ -541,14 +541,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 774);
+            this.ClientSize = new System.Drawing.Size(774, 774);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(586, 813);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(586, 813);
             this.Name = "ImportSavedTeamMembersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Import Personnel from CSV";

@@ -160,30 +160,37 @@ namespace WF_ICS_ClassLibrary.Models
             _Resource = res;
             TimeSpan ts = LastDayOnIncident - EndOfOp;
             DaysTillTimeOut = Convert.ToInt32( Math.Round(ts.TotalDays, 0));
-            if(Record.CheckOutDate < EndOfOp) { _StatusText = "Checked-Out"; } else { _StatusText = "Actvie"; }
+            if(Record.CheckOutDate.Date < EndOfOp.Date || Record.LastDayOnIncident.Date < EndOfOp.Date) { _StatusText = "Checked-Out"; } 
+            else { _StatusText = "Actvie"; }
         }
     }
 
     public static class CheckInTools
     {
-        public static bool ConfirmResourceNumUnique(this WFIncident incident, string ResourceType, int pNum)
+        public static bool CheckedInThisTime(this CheckInRecord rec, DateTime timeToCheck)
+        {
+            if (rec.CheckInDate <= timeToCheck && rec.CheckOutDate >= timeToCheck && rec.LastDayOnIncident >= timeToCheck) { return true; }
+            return false;
+        }
+
+        public static bool ConfirmResourceNumUnique(this WFIncident incident, string ResourceType, int pNum, Guid excludeID = new Guid())
         {
             if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator") || ResourceType.Equals("Visitor"))
             {
-                return !incident.IncidentPersonnel.Any(o => o.UniqueIDNum == pNum);
+                return !incident.IncidentPersonnel.Any(o => o.UniqueIDNum == pNum && o.ID != excludeID);
             }
             else if (ResourceType.Equals("Vehicle"))
             {
-                return !incident.allVehicles.Any(o => !o.IsEquipment && o.UniqueIDNum == pNum);
+                return !incident.allVehicles.Any(o => !o.IsEquipment && o.UniqueIDNum == pNum && o.ID != excludeID);
             }
             else if (ResourceType.Equals("Equipment"))
             {
-                return !incident.allVehicles.Any(o => o.IsEquipment && o.UniqueIDNum == pNum);
+                return !incident.allVehicles.Any(o => o.IsEquipment && o.UniqueIDNum == pNum && o.ID != excludeID);
 
             }
             else if (ResourceType.Equals("Crew") || ResourceType.Equals("Heavy Equipment Crew"))
             {
-                return !incident.AllOperationalSubGroups.Any(o => o.UniqueIDNum == pNum);
+                return !incident.AllOperationalSubGroups.Any(o => o.UniqueIDNum == pNum && o.ID != excludeID);
             }
             else return false;
            

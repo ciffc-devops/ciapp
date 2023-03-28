@@ -373,28 +373,22 @@
     <Compile Include="CheckInEnterPersonForm.Designer.cs">
       <DependentUpon>CheckInEnterPersonForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonnelListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PersonnelListForm.Designer.cs">
-      <DependentUpon>PersonnelListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="CheckInForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CheckInForm.Designer.cs">
       <DependentUpon>CheckInForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonnelViewCheckinForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PersonnelViewCheckinForm.Designer.cs">
-      <DependentUpon>PersonnelViewCheckinForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ResourcesEditUniqueNumberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourcesEditUniqueNumberForm.Designer.cs">
+      <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
       <SubType>Form</SubType>
@@ -644,12 +638,6 @@
     <Compile Include="VehicleEditForm.Designer.cs">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="VehiclesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VehiclesForm.Designer.cs">
-      <DependentUpon>VehiclesForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AircraftEditForm.resx">
       <DependentUpon>AircraftEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -788,15 +776,12 @@
     <EmbeddedResource Include="CheckInEnterPersonForm.resx">
       <DependentUpon>CheckInEnterPersonForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonnelListForm.resx">
-      <DependentUpon>PersonnelListForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CheckInForm.resx">
       <DependentUpon>CheckInForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonnelViewCheckinForm.resx">
-      <DependentUpon>PersonnelViewCheckinForm.cs</DependentUpon>
+    <EmbeddedResource Include="ResourcesEditUniqueNumberForm.resx">
+      <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\NetworkSelectIPForm.resx">
       <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
@@ -926,9 +911,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VehicleEditForm.resx">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VehiclesForm.resx">
-      <DependentUpon>VehiclesForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

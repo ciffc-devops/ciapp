@@ -45,6 +45,14 @@ namespace WF_ICS_ClassLibrary.Models
 
             set => _PeriodEnd = value;
         }
+        public DateTime PeriodMid
+        {
+            get
+            {
+                TimeSpan ts = PeriodEnd - PeriodStart;
+                return PeriodStart.AddMinutes(ts.TotalMinutes / 2);
+            }
+        }
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public Guid OperationalPeriodID { get => _OperationalPeriodID; set => _OperationalPeriodID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }

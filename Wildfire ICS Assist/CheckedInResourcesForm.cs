@@ -23,7 +23,9 @@ namespace Wildfire_ICS_Assist
 
         private void CheckedInResourcesForm_Load(object sender, EventArgs e)
         {
-           
+            cpFilters.CurrentlyCollapsed = true;
+            cpPNumbers.CurrentlyCollapsed = true;
+
             dgvResources.AutoGenerateColumns = false;
             cboExpandCrews.SelectedIndex = 0;
             cboResourceVariety.SelectedIndex = 0;
@@ -32,7 +34,9 @@ namespace Wildfire_ICS_Assist
             LoadPNumbers();
             cboAssignedFilter.SelectedIndex = 0;
             Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
-
+            Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
+            Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
         }
 
         public static int PNumMin { get => Program.PNumMin; set => Program.PNumMin = value; }
@@ -55,14 +59,29 @@ namespace Wildfire_ICS_Assist
             ConfirmResourceNumberAvailability();
         }
 
+        private void Program_OperationalPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            LoadResourcesList();
+        }
 
         private void Program_CheckInChanged(MemberEventArgs e)
         {
-            if ((e.signInRecord != null && e.signInRecord.OpPeriod == Program.CurrentOpPeriod))
-            {
+            
                 LoadResourcesList();
                 ConfirmResourceNumberAvailability();
-            }
+            
+        }
+        private void Program_VehicleChanged(VehicleEventArgs e)
+        {
+            LoadResourcesList();
+            ConfirmResourceNumberAvailability();
+        }
+
+        private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        {
+                LoadResourcesList();
+                ConfirmResourceNumberAvailability();
+            
         }
 
         private void ConfirmResourceNumberAvailability()
@@ -253,9 +272,10 @@ namespace Wildfire_ICS_Assist
         {
             List<CheckInRecordWithResource> checkInRecords = new List<CheckInRecordWithResource>();
             bool showCrewDetails = cboExpandCrews.SelectedIndex == 1;
+            DateTime mid = Program.CurrentOpPeriodDetails.PeriodMid;
             if (showCrewDetails)
             {
-                foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.OpPeriod == Program.CurrentOpPeriod && o.Active))
+                foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod <= Program.CurrentOpPeriod))
                 {
                     IncidentResource resource = new IncidentResource();
                     if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
@@ -271,7 +291,7 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
-                foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.OpPeriod == Program.CurrentOpPeriod && o.Active && o.ParentRecordID == Guid.Empty))
+                foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod <= Program.CurrentOpPeriod && o.ParentRecordID == Guid.Empty))
                 {
                     IncidentResource resource = new IncidentResource();
                     if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
@@ -303,15 +323,15 @@ namespace Wildfire_ICS_Assist
             switch (cboTimeOutFilter.SelectedIndex)
             {
                 case 0:
-                    checkInRecords = checkInRecords.Where(o => o.LastDayOnIncident > EndOfOp).ToList(); break;
+                    checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(mid)).ToList(); break;
                 case 2:
-                    checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= YellowNumber).ToList();
+                    checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(mid) && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= YellowNumber).ToList();
                     break;
                 case 3:
-                    checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= YellowNumber && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) > RedNumber).ToList();
+                    checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(mid) && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= YellowNumber && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) > RedNumber).ToList();
                     break;
                 case 4:
-                    checkInRecords = checkInRecords.Where(o => Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= RedNumber).ToList();
+                    checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(mid) && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= RedNumber).ToList();
                     break;
             }
 
@@ -386,15 +406,18 @@ namespace Wildfire_ICS_Assist
 
                 DataGridViewRow row = dgvResources.Rows[e.RowIndex];
                 CheckInRecordWithResource item = (CheckInRecordWithResource)row.DataBoundItem;
-                DateTime endOfOp = Program.CurrentOpPeriodDetails.PeriodEnd;
+                DateTime mid = Program.CurrentOpPeriodDetails.PeriodMid;
 
-                if (item.Record.CheckOutDate <= endOfOp)
+                if (!item.Record.CheckedInThisTime(mid))
                 {
-                    row.DefaultCellStyle.BackColor = Color.LightGray;
+                    row.DefaultCellStyle.BackColor = Color.Gray;
+                    row.DefaultCellStyle.Font = new Font(dgvResources.DefaultCellStyle.Font.Name, dgvResources.DefaultCellStyle.Font.Size, FontStyle.Italic);
                 }
                 else
                 {
                     row.DefaultCellStyle.BackColor = Color.White;
+                    row.DefaultCellStyle.Font = new Font(dgvResources.DefaultCellStyle.Font.Name, dgvResources.DefaultCellStyle.Font.Size, FontStyle.Regular);
+
                 }
 
                 if (item.DaysTillTimeOut <= YellowNumber)
@@ -538,6 +561,50 @@ namespace Wildfire_ICS_Assist
         private void cboExpandCrews_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadResourcesList();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                StartCheckIn(false, rec.Record);
+            }
+        }
+
+        private void changeUniqueIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                UpdateUniqueID(rec);
+            }
+        }
+
+        private void UpdateUniqueID(CheckInRecordWithResource rec)
+        {
+            if (rec != null)
+            {
+                using (ResourcesEditUniqueNumberForm editForm = new ResourcesEditUniqueNumberForm())
+                {
+                    editForm.SetResource(rec.Resource);
+                    DialogResult dr = editForm.ShowDialog();
+                    if(dr == DialogResult.OK)
+                    {
+                        rec.Resource.UniqueIDNum = editForm.newNumber;
+                        Program.wfIncidentService.UpsertIncidentResource(rec.Resource);
+                    }
+                }
+            }
+        }
+
+        private void demobilizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource item = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                OpenDemobForEdit(item);
+            }
         }
     }
 }

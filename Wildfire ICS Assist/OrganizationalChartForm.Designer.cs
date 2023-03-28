@@ -75,8 +75,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint207);
             this.splitContainer1.Panel2.Controls.Add(this.btnAssignRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
-            this.splitContainer1.Size = new System.Drawing.Size(1209, 651);
-            this.splitContainer1.SplitterDistance = 596;
+            this.splitContainer1.Size = new System.Drawing.Size(1226, 594);
+            this.splitContainer1.SplitterDistance = 539;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -98,14 +98,15 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeOrgChart);
-            this.splitContainer2.Size = new System.Drawing.Size(1209, 596);
+            this.splitContainer2.Size = new System.Drawing.Size(1226, 539);
             this.splitContainer2.SplitterDistance = 40;
             this.splitContainer2.TabIndex = 1;
             // 
             // chkIncludeContacts
             // 
+            this.chkIncludeContacts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkIncludeContacts.AutoSize = true;
-            this.chkIncludeContacts.Location = new System.Drawing.Point(896, 7);
+            this.chkIncludeContacts.Location = new System.Drawing.Point(923, 7);
             this.chkIncludeContacts.Name = "chkIncludeContacts";
             this.chkIncludeContacts.Size = new System.Drawing.Size(301, 28);
             this.chkIncludeContacts.TabIndex = 3;
@@ -154,15 +155,16 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(0, 0);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(1209, 552);
+            this.treeOrgChart.Size = new System.Drawing.Size(1226, 495);
             this.treeOrgChart.TabIndex = 0;
             this.treeOrgChart.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeOrgChart_AfterSelect);
             // 
             // btnPrint203
             // 
             this.btnPrint203.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint203.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint203.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint203.Location = new System.Drawing.Point(865, 3);
+            this.btnPrint203.Location = new System.Drawing.Point(882, 3);
             this.btnPrint203.Name = "btnPrint203";
             this.btnPrint203.Size = new System.Drawing.Size(160, 42);
             this.btnPrint203.TabIndex = 53;
@@ -175,8 +177,9 @@
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
-            this.btnExport.Location = new System.Drawing.Point(734, 2);
+            this.btnExport.Location = new System.Drawing.Point(751, 3);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(125, 42);
             this.btnExport.TabIndex = 49;
@@ -188,6 +191,7 @@
             // 
             // btnDeleteRole
             // 
+            this.btnDeleteRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDeleteRole.Location = new System.Drawing.Point(493, 3);
             this.btnDeleteRole.Name = "btnDeleteRole";
@@ -201,6 +205,7 @@
             // 
             // btnEditRole
             // 
+            this.btnEditRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditRole.Location = new System.Drawing.Point(340, 3);
             this.btnEditRole.Name = "btnEditRole";
@@ -215,8 +220,9 @@
             // btnPrint207
             // 
             this.btnPrint207.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint207.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint207.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint207.Location = new System.Drawing.Point(1031, 3);
+            this.btnPrint207.Location = new System.Drawing.Point(1048, 3);
             this.btnPrint207.Name = "btnPrint207";
             this.btnPrint207.Size = new System.Drawing.Size(166, 42);
             this.btnPrint207.TabIndex = 50;
@@ -228,6 +234,7 @@
             // 
             // btnAssignRole
             // 
+            this.btnAssignRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAssignRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
             this.btnAssignRole.Location = new System.Drawing.Point(167, 3);
             this.btnAssignRole.Name = "btnAssignRole";
@@ -240,6 +247,7 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAdd.Location = new System.Drawing.Point(12, 3);
             this.btnAdd.Name = "btnAdd";
@@ -260,11 +268,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(1209, 651);
+            this.ClientSize = new System.Drawing.Size(1226, 594);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.MinimumSize = new System.Drawing.Size(815, 412);
+            this.MinimumSize = new System.Drawing.Size(1168, 498);
             this.Name = "OrganizationalChartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Organization Chart";

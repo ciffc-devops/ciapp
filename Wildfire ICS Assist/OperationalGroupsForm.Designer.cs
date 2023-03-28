@@ -32,8 +32,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.treeOpsChart = new System.Windows.Forms.TreeView();
-            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
-            this.operationalGroupReportingResourcesControl1 = new Wildfire_ICS_Assist.CustomControls.OperationalGroupReportingResourcesControl();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnPrint204 = new System.Windows.Forms.Button();
             this.btnEditBranch = new System.Windows.Forms.Button();
@@ -49,6 +47,15 @@
             this.addNewStrikeTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewSingleResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
+            this.operationalGroupReportingResourcesControl1 = new Wildfire_ICS_Assist.CustomControls.OperationalGroupReportingResourcesControl();
+            this.cmsSelectedItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.addTaskForceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addStrikeTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addSingleResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -58,6 +65,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.cmsAddButton.SuspendLayout();
+            this.cmsSelectedItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -107,6 +115,7 @@
             // 
             // treeOpsChart
             // 
+            this.treeOpsChart.ContextMenuStrip = this.cmsSelectedItem;
             this.treeOpsChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeOpsChart.HideSelection = false;
             this.treeOpsChart.Location = new System.Drawing.Point(0, 0);
@@ -115,32 +124,10 @@
             this.treeOpsChart.TabIndex = 1;
             this.treeOpsChart.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeOpsChart_AfterSelect);
             // 
-            // strikeTeamTaskForceDetailsControl1
-            // 
-            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
-            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(18, 236);
-            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
-            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(396, 330);
-            this.strikeTeamTaskForceDetailsControl1.TabIndex = 1;
-            this.strikeTeamTaskForceDetailsControl1.Visible = false;
-            // 
-            // operationalGroupReportingResourcesControl1
-            // 
-            this.operationalGroupReportingResourcesControl1.BackColor = System.Drawing.Color.Transparent;
-            this.operationalGroupReportingResourcesControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operationalGroupReportingResourcesControl1.Location = new System.Drawing.Point(31, 15);
-            this.operationalGroupReportingResourcesControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.operationalGroupReportingResourcesControl1.Name = "operationalGroupReportingResourcesControl1";
-            this.operationalGroupReportingResourcesControl1.role = null;
-            this.operationalGroupReportingResourcesControl1.Size = new System.Drawing.Size(558, 209);
-            this.operationalGroupReportingResourcesControl1.TabIndex = 0;
-            this.operationalGroupReportingResourcesControl1.Visible = false;
-            // 
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDelete.Location = new System.Drawing.Point(278, 3);
             this.btnDelete.Name = "btnDelete";
@@ -153,6 +140,7 @@
             // 
             // btnPrint204
             // 
+            this.btnPrint204.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint204.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint204.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint204.Location = new System.Drawing.Point(397, 3);
@@ -167,6 +155,7 @@
             // btnEditBranch
             // 
             this.btnEditBranch.Enabled = false;
+            this.btnEditBranch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditBranch.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditBranch.Location = new System.Drawing.Point(159, 3);
             this.btnEditBranch.Name = "btnEditBranch";
@@ -179,6 +168,7 @@
             // 
             // btnPrint204A
             // 
+            this.btnPrint204A.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint204A.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint204A.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint204A.Location = new System.Drawing.Point(557, 2);
@@ -192,6 +182,7 @@
             // 
             // btnExportSignInToCSV
             // 
+            this.btnExportSignInToCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExportSignInToCSV.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
             this.btnExportSignInToCSV.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExportSignInToCSV.Location = new System.Drawing.Point(717, 3);
@@ -206,6 +197,7 @@
             // btnAddBranch
             // 
             this.btnAddBranch.ContextMenuStrip = this.cmsAddButton;
+            this.btnAddBranch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddBranch.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddBranch.Location = new System.Drawing.Point(12, 3);
             this.btnAddBranch.Name = "btnAddBranch";
@@ -282,6 +274,82 @@
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
+            // strikeTeamTaskForceDetailsControl1
+            // 
+            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
+            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(18, 236);
+            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
+            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(396, 330);
+            this.strikeTeamTaskForceDetailsControl1.TabIndex = 1;
+            this.strikeTeamTaskForceDetailsControl1.Visible = false;
+            // 
+            // operationalGroupReportingResourcesControl1
+            // 
+            this.operationalGroupReportingResourcesControl1.BackColor = System.Drawing.Color.Transparent;
+            this.operationalGroupReportingResourcesControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.operationalGroupReportingResourcesControl1.Location = new System.Drawing.Point(31, 15);
+            this.operationalGroupReportingResourcesControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.operationalGroupReportingResourcesControl1.Name = "operationalGroupReportingResourcesControl1";
+            this.operationalGroupReportingResourcesControl1.role = null;
+            this.operationalGroupReportingResourcesControl1.Size = new System.Drawing.Size(558, 209);
+            this.operationalGroupReportingResourcesControl1.TabIndex = 0;
+            this.operationalGroupReportingResourcesControl1.Visible = false;
+            // 
+            // cmsSelectedItem
+            // 
+            this.cmsSelectedItem.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.cmsSelectedItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.addTaskForceToolStripMenuItem,
+            this.addStrikeTeamToolStripMenuItem,
+            this.addSingleResourceToolStripMenuItem});
+            this.cmsSelectedItem.Name = "cmsSelectedItem";
+            this.cmsSelectedItem.Size = new System.Drawing.Size(257, 182);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(256, 30);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
+            // 
+            // addTaskForceToolStripMenuItem
+            // 
+            this.addTaskForceToolStripMenuItem.Name = "addTaskForceToolStripMenuItem";
+            this.addTaskForceToolStripMenuItem.Size = new System.Drawing.Size(256, 30);
+            this.addTaskForceToolStripMenuItem.Text = "Add Task Force";
+            this.addTaskForceToolStripMenuItem.Click += new System.EventHandler(this.addTaskForceToolStripMenuItem_Click);
+            // 
+            // addStrikeTeamToolStripMenuItem
+            // 
+            this.addStrikeTeamToolStripMenuItem.Name = "addStrikeTeamToolStripMenuItem";
+            this.addStrikeTeamToolStripMenuItem.Size = new System.Drawing.Size(256, 30);
+            this.addStrikeTeamToolStripMenuItem.Text = "Add Strike Team";
+            this.addStrikeTeamToolStripMenuItem.Click += new System.EventHandler(this.addStrikeTeamToolStripMenuItem_Click);
+            // 
+            // addSingleResourceToolStripMenuItem
+            // 
+            this.addSingleResourceToolStripMenuItem.Name = "addSingleResourceToolStripMenuItem";
+            this.addSingleResourceToolStripMenuItem.Size = new System.Drawing.Size(256, 30);
+            this.addSingleResourceToolStripMenuItem.Text = "Add Single Resource";
+            this.addSingleResourceToolStripMenuItem.Click += new System.EventHandler(this.addSingleResourceToolStripMenuItem_Click);
+            // 
             // OperationalGroupsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -303,6 +371,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.cmsAddButton.ResumeLayout(false);
+            this.cmsSelectedItem.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -329,5 +398,12 @@
         private CustomControls.OperationalGroupReportingResourcesControl operationalGroupReportingResourcesControl1;
         private CustomControls.StrikeTeamTaskForceDetailsControl strikeTeamTaskForceDetailsControl1;
         private System.Windows.Forms.SaveFileDialog svdExport;
+        private System.Windows.Forms.ContextMenuStrip cmsSelectedItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem addTaskForceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addStrikeTeamToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addSingleResourceToolStripMenuItem;
     }
 }

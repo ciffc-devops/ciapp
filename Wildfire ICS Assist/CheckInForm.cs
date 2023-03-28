@@ -190,7 +190,8 @@ namespace Wildfire_ICS_Assist
         {
             if (cboSavedPersonnel.SelectedItem != null)
             {
-                _selectedResource = (Personnel)cboSavedPersonnel.SelectedItem;
+                _selectedResource = ((Personnel)cboSavedPersonnel.SelectedItem).Clone();
+                _selectedResource.UniqueIDNum = 0;
                 checkInRecord.ResourceType = "Personnel";
                 MoveToCheckInDetailsPage();
                 //txtSelectedName.Text = selectedMember.Name;
@@ -356,6 +357,7 @@ namespace Wildfire_ICS_Assist
             {
                 _selectedResource = ((Vehicle)cboSavedVehicles.SelectedItem).Clone();
                 Vehicle v = (Vehicle)_selectedResource;
+                v.UniqueIDNum = 0;
                 if (v.IsEquipment) { checkInRecord.ResourceType = "Equipment"; }
                 else { checkInRecord.ResourceType = "Vehicle"; }
                 

@@ -354,8 +354,8 @@ namespace WF_ICS_ClassLibrary.Models
             if (ResourceID == Guid.Empty) { return false; }
             if (incident.ActiveOperationalSubGroups.Any(o => o.ActiveResourceListing.Count(r => r.ResourceID == ResourceID) > 0 && o.OpPeriod == OpPeriod)) { return true; }
             if (incident.ActiveOperationalGroups.Any(o => o.ActiveResourceListing.Count(r => r.ResourceID == ResourceID) > 0 && o.OpPeriod == OpPeriod)) { return true; }
-            if (incident.allOrgCharts.Any(o => o.OpPeriod == OpPeriod) && incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod).AllRoles.Any(o => o.IndividualID == ResourceID)) { return true; }
-            if (incident.allVehicles.Any(o => o.OperatorID == ResourceID)) { return true; }
+            if (incident.allOrgCharts.Any(o => o.OpPeriod == OpPeriod) && incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod).ActiveRoles.Any(o => o.IndividualID == ResourceID)) { return true; }
+            if (incident.ActiveIncidentVehicles.Any(o => o.OperatorID == ResourceID)) { return true; }
             return false;
         }
 

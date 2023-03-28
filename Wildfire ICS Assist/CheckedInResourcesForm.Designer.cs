@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
@@ -45,16 +46,10 @@
             this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLastDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cpFilters = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.cboExpandCrews = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnFilter3ShowHelp = new System.Windows.Forms.Button();
-            this.cboAssignedFilter = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cboTimeOutFilter = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cboResourceVariety = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeUniqueIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.demobilizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cpPNumbers = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnPNumHelp = new System.Windows.Forms.Button();
             this.numCNumMax = new System.Windows.Forms.NumericUpDown();
@@ -73,11 +68,22 @@
             this.lblVNumTitle = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblPNumTitle = new System.Windows.Forms.Label();
+            this.cpFilters = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.cboExpandCrews = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnFilter3ShowHelp = new System.Windows.Forms.Button();
+            this.cboAssignedFilter = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cboTimeOutFilter = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cboResourceVariety = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnExportSignInToCSV = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnDemob = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnStartCheckIn = new System.Windows.Forms.Button();
+            this.btnLogisticsOverview = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -87,7 +93,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResources)).BeginInit();
-            this.cpFilters.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.cpPNumbers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCNumMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCNumMin)).BeginInit();
@@ -97,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numVNumMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPNumMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPNumMin)).BeginInit();
+            this.cpFilters.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -114,18 +121,21 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnLogisticsOverview);
             this.splitContainer1.Panel2.Controls.Add(this.btnExportSignInToCSV);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
             this.splitContainer1.Panel2.Controls.Add(this.btnDemob);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnStartCheckIn);
-            this.splitContainer1.Size = new System.Drawing.Size(1245, 658);
+            this.splitContainer1.Size = new System.Drawing.Size(1439, 658);
             this.splitContainer1.SplitterDistance = 580;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -135,10 +145,10 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.cpFilters);
             this.splitContainer2.Panel2.Controls.Add(this.cpPNumbers);
-            this.splitContainer2.Size = new System.Drawing.Size(1245, 580);
-            this.splitContainer2.SplitterDistance = 940;
+            this.splitContainer2.Panel2.Controls.Add(this.cpFilters);
+            this.splitContainer2.Size = new System.Drawing.Size(1439, 580);
+            this.splitContainer2.SplitterDistance = 1134;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoving += new System.Windows.Forms.SplitterCancelEventHandler(this.splitContainer2_SplitterMoving);
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
@@ -162,6 +172,7 @@
             this.colCheckIn,
             this.colLastDay,
             this.colStatus});
+            this.dgvResources.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvResources.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResources.Location = new System.Drawing.Point(0, 0);
             this.dgvResources.Name = "dgvResources";
@@ -169,7 +180,7 @@
             this.dgvResources.RowHeadersVisible = false;
             this.dgvResources.RowTemplate.Height = 30;
             this.dgvResources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResources.Size = new System.Drawing.Size(940, 580);
+            this.dgvResources.Size = new System.Drawing.Size(1134, 580);
             this.dgvResources.TabIndex = 1;
             this.dgvResources.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvResources_CellFormatting);
             this.dgvResources.SelectionChanged += new System.EventHandler(this.dgvResources_SelectionChanged);
@@ -279,143 +290,36 @@
             this.colStatus.ReadOnly = true;
             this.colStatus.Width = 85;
             // 
-            // cpFilters
+            // contextMenuStrip1
             // 
-            this.cpFilters.BackColor = System.Drawing.Color.White;
-            this.cpFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpFilters.CollapsedHeight = 40;
-            this.cpFilters.CollapsedWidth = 290;
-            this.cpFilters.CollapseLeft = true;
-            this.cpFilters.Controls.Add(this.cboExpandCrews);
-            this.cpFilters.Controls.Add(this.label4);
-            this.cpFilters.Controls.Add(this.btnFilter3ShowHelp);
-            this.cpFilters.Controls.Add(this.cboAssignedFilter);
-            this.cpFilters.Controls.Add(this.label3);
-            this.cpFilters.Controls.Add(this.cboTimeOutFilter);
-            this.cpFilters.Controls.Add(this.label2);
-            this.cpFilters.Controls.Add(this.cboResourceVariety);
-            this.cpFilters.Controls.Add(this.label1);
-            this.cpFilters.CurrentlyCollapsed = false;
-            this.cpFilters.ExpandedHeight = 242;
-            this.cpFilters.ExpandedWidth = 320;
-            this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpFilters.Location = new System.Drawing.Point(6, 15);
-            this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
-            this.cpFilters.Name = "cpFilters";
-            this.cpFilters.Size = new System.Drawing.Size(290, 320);
-            this.cpFilters.TabIndex = 0;
-            this.cpFilters.TitleText = "Filter List";
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.changeUniqueIDToolStripMenuItem,
+            this.demobilizeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(261, 94);
             // 
-            // cboExpandCrews
+            // editToolStripMenuItem
             // 
-            this.cboExpandCrews.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboExpandCrews.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboExpandCrews.DropDownWidth = 500;
-            this.cboExpandCrews.FormattingEnabled = true;
-            this.cboExpandCrews.Items.AddRange(new object[] {
-            "Show Crew and Vehicle/Equipment entries only",
-            "Show all resources assigned to crews individually"});
-            this.cboExpandCrews.Location = new System.Drawing.Point(7, 281);
-            this.cboExpandCrews.Name = "cboExpandCrews";
-            this.cboExpandCrews.Size = new System.Drawing.Size(276, 32);
-            this.cboExpandCrews.TabIndex = 95;
-            this.cboExpandCrews.SelectedIndexChanged += new System.EventHandler(this.cboExpandCrews_SelectedIndexChanged);
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(260, 30);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
-            // label4
+            // changeUniqueIDToolStripMenuItem
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 254);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(285, 24);
-            this.label4.TabIndex = 94;
-            this.label4.Text = "Crews and Equipment Operators";
+            this.changeUniqueIDToolStripMenuItem.Name = "changeUniqueIDToolStripMenuItem";
+            this.changeUniqueIDToolStripMenuItem.Size = new System.Drawing.Size(260, 30);
+            this.changeUniqueIDToolStripMenuItem.Text = "Change Unique ID #";
+            this.changeUniqueIDToolStripMenuItem.Click += new System.EventHandler(this.changeUniqueIDToolStripMenuItem_Click);
             // 
-            // btnFilter3ShowHelp
+            // demobilizeToolStripMenuItem
             // 
-            this.btnFilter3ShowHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter3ShowHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFilter3ShowHelp.BackgroundImage")));
-            this.btnFilter3ShowHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnFilter3ShowHelp.Location = new System.Drawing.Point(256, 171);
-            this.btnFilter3ShowHelp.Name = "btnFilter3ShowHelp";
-            this.btnFilter3ShowHelp.Size = new System.Drawing.Size(26, 26);
-            this.btnFilter3ShowHelp.TabIndex = 93;
-            this.btnFilter3ShowHelp.TabStop = false;
-            this.btnFilter3ShowHelp.UseVisualStyleBackColor = true;
-            // 
-            // cboAssignedFilter
-            // 
-            this.cboAssignedFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboAssignedFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboAssignedFilter.FormattingEnabled = true;
-            this.cboAssignedFilter.Items.AddRange(new object[] {
-            "All resources",
-            "Unassigned Only"});
-            this.cboAssignedFilter.Location = new System.Drawing.Point(7, 203);
-            this.cboAssignedFilter.Name = "cboAssignedFilter";
-            this.cboAssignedFilter.Size = new System.Drawing.Size(276, 32);
-            this.cboAssignedFilter.TabIndex = 38;
-            this.cboAssignedFilter.SelectedIndexChanged += new System.EventHandler(this.cboAssignedFilter_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 176);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(176, 24);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "Resource Assigned";
-            // 
-            // cboTimeOutFilter
-            // 
-            this.cboTimeOutFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboTimeOutFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTimeOutFilter.FormattingEnabled = true;
-            this.cboTimeOutFilter.Location = new System.Drawing.Point(7, 133);
-            this.cboTimeOutFilter.Name = "cboTimeOutFilter";
-            this.cboTimeOutFilter.Size = new System.Drawing.Size(276, 32);
-            this.cboTimeOutFilter.TabIndex = 36;
-            this.cboTimeOutFilter.SelectedIndexChanged += new System.EventHandler(this.cboTimeOutFilter_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 106);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(204, 24);
-            this.label2.TabIndex = 35;
-            this.label2.Text = "By Last Day on Incident";
-            // 
-            // cboResourceVariety
-            // 
-            this.cboResourceVariety.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboResourceVariety.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboResourceVariety.FormattingEnabled = true;
-            this.cboResourceVariety.Items.AddRange(new object[] {
-            "All Resources",
-            "Personnel",
-            "Visitor",
-            "Vehicle",
-            "Equipment",
-            "Operator",
-            "Crew"});
-            this.cboResourceVariety.Location = new System.Drawing.Point(7, 71);
-            this.cboResourceVariety.Name = "cboResourceVariety";
-            this.cboResourceVariety.Size = new System.Drawing.Size(276, 32);
-            this.cboResourceVariety.TabIndex = 34;
-            this.cboResourceVariety.SelectedIndexChanged += new System.EventHandler(this.cboResourceVariety_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 24);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Resource Variety";
+            this.demobilizeToolStripMenuItem.Name = "demobilizeToolStripMenuItem";
+            this.demobilizeToolStripMenuItem.Size = new System.Drawing.Size(260, 30);
+            this.demobilizeToolStripMenuItem.Text = "Demobilize Resource";
+            this.demobilizeToolStripMenuItem.Click += new System.EventHandler(this.demobilizeToolStripMenuItem_Click);
             // 
             // cpPNumbers
             // 
@@ -726,13 +630,151 @@
             this.lblPNumTitle.TabIndex = 33;
             this.lblPNumTitle.Text = "Personnel Numbers (PNum)";
             // 
+            // cpFilters
+            // 
+            this.cpFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpFilters.CollapsedHeight = 40;
+            this.cpFilters.CollapsedWidth = 290;
+            this.cpFilters.CollapseLeft = true;
+            this.cpFilters.Controls.Add(this.cboExpandCrews);
+            this.cpFilters.Controls.Add(this.label4);
+            this.cpFilters.Controls.Add(this.btnFilter3ShowHelp);
+            this.cpFilters.Controls.Add(this.cboAssignedFilter);
+            this.cpFilters.Controls.Add(this.label3);
+            this.cpFilters.Controls.Add(this.cboTimeOutFilter);
+            this.cpFilters.Controls.Add(this.label2);
+            this.cpFilters.Controls.Add(this.cboResourceVariety);
+            this.cpFilters.Controls.Add(this.label1);
+            this.cpFilters.CurrentlyCollapsed = true;
+            this.cpFilters.ExpandedHeight = 322;
+            this.cpFilters.ExpandedWidth = 290;
+            this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cpFilters.Location = new System.Drawing.Point(6, 15);
+            this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
+            this.cpFilters.Name = "cpFilters";
+            this.cpFilters.Size = new System.Drawing.Size(290, 40);
+            this.cpFilters.TabIndex = 0;
+            this.cpFilters.TitleText = "Filter List";
+            // 
+            // cboExpandCrews
+            // 
+            this.cboExpandCrews.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboExpandCrews.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboExpandCrews.DropDownWidth = 500;
+            this.cboExpandCrews.FormattingEnabled = true;
+            this.cboExpandCrews.Items.AddRange(new object[] {
+            "Show Crew and Vehicle/Equipment entries only",
+            "Show all resources assigned to crews individually"});
+            this.cboExpandCrews.Location = new System.Drawing.Point(7, 281);
+            this.cboExpandCrews.Name = "cboExpandCrews";
+            this.cboExpandCrews.Size = new System.Drawing.Size(276, 32);
+            this.cboExpandCrews.TabIndex = 95;
+            this.cboExpandCrews.SelectedIndexChanged += new System.EventHandler(this.cboExpandCrews_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 254);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(285, 24);
+            this.label4.TabIndex = 94;
+            this.label4.Text = "Crews and Equipment Operators";
+            // 
+            // btnFilter3ShowHelp
+            // 
+            this.btnFilter3ShowHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter3ShowHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFilter3ShowHelp.BackgroundImage")));
+            this.btnFilter3ShowHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFilter3ShowHelp.Location = new System.Drawing.Point(256, 171);
+            this.btnFilter3ShowHelp.Name = "btnFilter3ShowHelp";
+            this.btnFilter3ShowHelp.Size = new System.Drawing.Size(26, 26);
+            this.btnFilter3ShowHelp.TabIndex = 93;
+            this.btnFilter3ShowHelp.TabStop = false;
+            this.btnFilter3ShowHelp.UseVisualStyleBackColor = true;
+            // 
+            // cboAssignedFilter
+            // 
+            this.cboAssignedFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboAssignedFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAssignedFilter.FormattingEnabled = true;
+            this.cboAssignedFilter.Items.AddRange(new object[] {
+            "All resources",
+            "Unassigned Only"});
+            this.cboAssignedFilter.Location = new System.Drawing.Point(7, 203);
+            this.cboAssignedFilter.Name = "cboAssignedFilter";
+            this.cboAssignedFilter.Size = new System.Drawing.Size(276, 32);
+            this.cboAssignedFilter.TabIndex = 38;
+            this.cboAssignedFilter.SelectedIndexChanged += new System.EventHandler(this.cboAssignedFilter_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 176);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(176, 24);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Resource Assigned";
+            // 
+            // cboTimeOutFilter
+            // 
+            this.cboTimeOutFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboTimeOutFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTimeOutFilter.FormattingEnabled = true;
+            this.cboTimeOutFilter.Location = new System.Drawing.Point(7, 133);
+            this.cboTimeOutFilter.Name = "cboTimeOutFilter";
+            this.cboTimeOutFilter.Size = new System.Drawing.Size(276, 32);
+            this.cboTimeOutFilter.TabIndex = 36;
+            this.cboTimeOutFilter.SelectedIndexChanged += new System.EventHandler(this.cboTimeOutFilter_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 106);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(204, 24);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "By Last Day on Incident";
+            // 
+            // cboResourceVariety
+            // 
+            this.cboResourceVariety.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboResourceVariety.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboResourceVariety.FormattingEnabled = true;
+            this.cboResourceVariety.Items.AddRange(new object[] {
+            "All Resources",
+            "Personnel",
+            "Visitor",
+            "Vehicle",
+            "Equipment",
+            "Operator",
+            "Crew"});
+            this.cboResourceVariety.Location = new System.Drawing.Point(7, 71);
+            this.cboResourceVariety.Name = "cboResourceVariety";
+            this.cboResourceVariety.Size = new System.Drawing.Size(276, 32);
+            this.cboResourceVariety.TabIndex = 34;
+            this.cboResourceVariety.SelectedIndexChanged += new System.EventHandler(this.cboResourceVariety_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 24);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Resource Variety";
+            // 
             // btnExportSignInToCSV
             // 
             this.btnExportSignInToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportSignInToCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExportSignInToCSV.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
             this.btnExportSignInToCSV.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportSignInToCSV.Location = new System.Drawing.Point(861, 2);
+            this.btnExportSignInToCSV.Location = new System.Drawing.Point(1055, 2);
             this.btnExportSignInToCSV.Name = "btnExportSignInToCSV";
             this.btnExportSignInToCSV.Size = new System.Drawing.Size(197, 66);
             this.btnExportSignInToCSV.TabIndex = 50;
@@ -746,7 +788,7 @@
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.Location = new System.Drawing.Point(1064, 2);
+            this.btnPrint.Location = new System.Drawing.Point(1258, 2);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(169, 66);
             this.btnPrint.TabIndex = 49;
@@ -796,11 +838,24 @@
             this.btnStartCheckIn.UseVisualStyleBackColor = true;
             this.btnStartCheckIn.Click += new System.EventHandler(this.btnStartCheckIn_Click);
             // 
+            // btnLogisticsOverview
+            // 
+            this.btnLogisticsOverview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogisticsOverview.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnLogisticsOverview.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnLogisticsOverview.Location = new System.Drawing.Point(522, 3);
+            this.btnLogisticsOverview.Name = "btnLogisticsOverview";
+            this.btnLogisticsOverview.Size = new System.Drawing.Size(150, 66);
+            this.btnLogisticsOverview.TabIndex = 51;
+            this.btnLogisticsOverview.Text = "Logistics Overview";
+            this.btnLogisticsOverview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLogisticsOverview.UseVisualStyleBackColor = true;
+            // 
             // CheckedInResourcesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1245, 658);
+            this.ClientSize = new System.Drawing.Size(1439, 658);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -818,8 +873,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResources)).EndInit();
-            this.cpFilters.ResumeLayout(false);
-            this.cpFilters.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.cpPNumbers.ResumeLayout(false);
             this.cpPNumbers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCNumMax)).EndInit();
@@ -830,6 +884,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numVNumMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPNumMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPNumMin)).EndInit();
+            this.cpFilters.ResumeLayout(false);
+            this.cpFilters.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -883,5 +939,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.ComboBox cboExpandCrews;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeUniqueIDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem demobilizeToolStripMenuItem;
+        private System.Windows.Forms.Button btnLogisticsOverview;
     }
 }

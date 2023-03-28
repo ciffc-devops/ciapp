@@ -63,7 +63,8 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 if (!resources.Any(o => o.ID == resource.ID)) { resources.Add(resource); }
             }
-            ReportingPersonnelCount = resources.Count(o => o.GetType().Name.Equals("Personnel") || o.GetType().Name.Equals("OperationalSubGroup"));
+            // ReportingPersonnelCount = resources.Count(o => o.GetType().Name.Equals("Personnel") || o.GetType().Name.Equals("OperationalSubGroup"));
+            ReportingPersonnelCount = resources.Count(o=>o.NumberOfPeople > 0);
 
             dgvSubGroups.DataSource = resources.OrderBy(o => o.ResourceName).ToList();
 

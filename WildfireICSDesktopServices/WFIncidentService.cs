@@ -1150,6 +1150,15 @@ namespace WildfireICSDesktopServices
         {
             roleToDelete.Active = false;
             UpsertICSRole(roleToDelete, source);
+            if (CurrentIncident.AllOperationalGroups.Any(o => o.LeaderICSRoleID == roleToDelete.RoleID))
+            {
+                foreach (OperationalGroup group in CurrentIncident.AllOperationalGroups.Where(o => o.LeaderICSRoleID == roleToDelete.RoleID))
+                {
+                    group.Active = false;
+                    UpsertOperationalGroup(group);
+                }
+            }
+
             /*
             if(_currentIncident.allOrgCharts.Any(o=>o.OpPeriod == opsPeriod))
             {
@@ -1420,6 +1429,23 @@ namespace WildfireICSDesktopServices
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
             OnVehicleChanged(new VehicleEventArgs(record));
+        }
+
+        public void UpsertIncidentResource(IncidentResource record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.AllIncidentResources.Any(o => o.ID == record.ID))
+            {
+                _currentIncident.AllIncidentResources = _currentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList();
+            }
+            _currentIncident.AllIncidentResources.Add(record);
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            if (record.GetType().Name.Equals("Vehicle")) { OnVehicleChanged(new VehicleEventArgs(record as Vehicle)); }
+            else if (record.GetType().Name.Equals("Personnel")) { OnMemberSignInChanged(new MemberEventArgs(record as Personnel)); }
+            else if (record.GetType().Name.Equals("OperationalSubGroup")) { OnOperationalSubGroupChanged(new OperationalSubGroupEventArgs(record as OperationalSubGroup)); }
         }
 
         /*
