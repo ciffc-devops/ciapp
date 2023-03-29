@@ -41,7 +41,7 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime ObjectiveLastUpdatedUTC { get => _ObjectiveLastUpdated; set => _ObjectiveLastUpdated = value; }
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
         public bool Completed { get => _Completed; set => _Completed = value; }
-        public string CopyNextOpText { get; set; } = "Copy to next op";
+        public string CopyNextOpText { get; set; } = "Copy to selected op";
 
         public IncidentObjective() { ObjectiveID = System.Guid.NewGuid(); Active = true; IncidentObjectiveID = Guid.NewGuid(); }
         private IncidentObjective DeepCopy()

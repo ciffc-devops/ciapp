@@ -16,6 +16,7 @@ namespace WF_ICS_ClassLibrary.Models
     {
         public Personnel()
         {
+            ResourceType = this.GetType().Name;
             PersonID = Guid.NewGuid();
             MemberActive = true;
             CurrentStatus = null;
@@ -25,6 +26,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
         public Personnel(Guid id)
         {
+            ResourceType = this.GetType().Name;
             PersonID = id;
             MemberActive = true;
             CurrentStatus = null;
@@ -49,8 +51,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(14)] private string _Agency;
         [ProtoMember(15)] private bool _IsContractor;
         [ProtoMember(16)] private string _CallSign;
-
-
+        [ProtoMember(16)] private string _Pronouns; 
+        [ProtoMember(16)] private string _AccomodationPreference;
 
 
 
@@ -81,6 +83,9 @@ namespace WF_ICS_ClassLibrary.Models
         public string Agency { get => _Agency; set => _Agency = value; }
         public bool IsContractor { get => _IsContractor; set => _IsContractor = value; }
         public string CallSign { get => _CallSign; set => _CallSign = value; }
+        public string Pronouns { get => _Pronouns; set => _Pronouns = value; }
+        public string AccomodationPreference { get => _AccomodationPreference; set => _AccomodationPreference = value; }
+        public int PNum { get => UniqueIDNum; set => UniqueIDNum = value; }
 
         private void SetName()
         {
@@ -485,7 +490,8 @@ namespace WF_ICS_ClassLibrary.Models
         {
             StringBuilder csv = new StringBuilder();
             csv.Append("Name"); csv.Append(delimiter);
-            csv.Append("Gender"); csv.Append(delimiter);
+            csv.Append("Pronouns"); csv.Append(delimiter);
+            csv.Append("Accomodatoin Preference"); csv.Append(delimiter);
             csv.Append("Province or Territory"); csv.Append(delimiter);
             csv.Append("Country"); csv.Append(delimiter);
             csv.Append("Agency"); csv.Append(delimiter);
@@ -504,7 +510,9 @@ namespace WF_ICS_ClassLibrary.Models
                 //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
 
                 csv.Append("\""); csv.Append(item.Name.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.Gender.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Pronouns.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
+                csv.Append("\""); csv.Append(item.AccomodationPreference.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
 
                 if (item.HomeProvinceID != Guid.Empty) { Province p = new Province(item.HomeProvinceID); csv.Append("\""); csv.Append(p.ProvinceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter); }
                 else { csv.Append("\"");  csv.Append("\""); csv.Append(delimiter); }

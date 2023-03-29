@@ -30,7 +30,7 @@ namespace WildfireICSDesktopServices
         event MedicalAidStationEventHandler MedicalAidStationChanged;
 
         event MedicalPlanEventHandler MedicalPlanChanged;
-        event MemberEventHandler MemberSignInChanged;
+        event CheckInEventHandler MemberSignInChanged;
         event NoteEventHandler NoteChanged;
         event OperationalPeriodEventHandler OperationalPeriodChanged;
         event OrganizationalChartEventHandler OrganizationalChartChanged;
@@ -116,5 +116,6 @@ namespace WildfireICSDesktopServices
         void UpsertOperationalGroup(OperationalGroup record, string source = "local");
         void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local");
         void UpsertDemobRecord(DemobilizationRecord record, string source = "local");
+        void UpsertIncidentResource(IncidentResource record, string source = "local");
     }
 }

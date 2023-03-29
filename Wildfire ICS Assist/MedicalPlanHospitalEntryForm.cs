@@ -51,7 +51,7 @@ namespace Wildfire_ICS_Assist
             List<Hospital> hospitals = (List<Hospital>)Program.generalOptionsService.GetOptionsValue("Hospitals");
             hospitals = hospitals.Where(o => o.Active).OrderBy(o => o.name).ToList();
             cboSaved.DataSource = hospitals;
-            btnAddSaved.Enabled = hospitals.Any();
+            pnlSavedHospital.Enabled = hospitals.Any();
         }
 
         private void btnAddSaved_Click(object sender, EventArgs e)
@@ -92,6 +92,11 @@ namespace Wildfire_ICS_Assist
             else { txtHospitalName.BackColor = Program.GoodColor; }
 
             return true;
+        }
+
+        private void cboSaved_Leave(object sender, EventArgs e)
+        {
+            if(cboSaved.SelectedItem == null) { cboSaved.Text = ""; }
         }
     }
 }

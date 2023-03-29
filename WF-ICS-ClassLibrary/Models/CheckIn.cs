@@ -1,11 +1,13 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Utilities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WF_ICS_ClassLibrary.Models
 {
@@ -27,6 +29,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(12)] private string _ResourceType;
         [ProtoMember(13)] private Guid _ParentRecordID;
         [ProtoMember(14)] private DateTime _LastDayOfRest;
+        [ProtoMember(14)] private string _InitialRoleName;
+        [ProtoMember(15)] private string _InitialRoleAcronym;
+
         public CheckInRecord() { SignInRecordID = Guid.NewGuid(); InfoFields = new List<CheckInInfoField>(); CheckOutDate = DateTime.MaxValue; Active = true; }
 
 
@@ -44,11 +49,16 @@ namespace WF_ICS_ClassLibrary.Models
         public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public string ResourceType { get => _ResourceType; set => _ResourceType = value; }
         public bool IsPerson { get { return ResourceType.EqualsWithNull("Person") || ResourceType.Equals("Personnel"); } }
-        public bool IsVehicle { get { return ResourceType.EqualsWithNull("Vehicle") || ResourceType.Equals("Vehicle/Equipment"); } }
+        public bool IsOperator { get { return ResourceType.EqualsWithNull("Operator") || ResourceType.Equals("Operator"); } }
+        public bool IsVehicle { get { return ResourceType.EqualsWithNull("Vehicle") || ResourceType.Equals("Vehicle"); } }
+        public bool IsEquipment { get { return ResourceType.EqualsWithNull("Equipment") || ResourceType.Equals("Equipment"); } }
         public bool IsVisitor { get { return ResourceType.EqualsWithNull("Visitor"); } }
         public bool IsCrew { get { return ResourceType.EqualsWithNull("Crew"); } }
+        public bool IsHECrew { get { return ResourceType.EqualsWithNull("Heavy Equipment Crew"); } }
         public bool HasCheckOutTime { get => CheckOutDate < DateTime.MaxValue; }
         public DateTime LastDayOfRest { get => _LastDayOfRest; set => _LastDayOfRest = value; }
+        public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
+        public string InitialRoleAcronym { get => _InitialRoleAcronym; set => _InitialRoleAcronym = value; }
 
         public CheckInRecord Clone()
         {
@@ -69,9 +79,10 @@ namespace WF_ICS_ClassLibrary.Models
     public class CheckInInfoField : ICloneable
     {
         public CheckInInfoField() { ID = Guid.NewGuid(); }
-        public CheckInInfoField(Guid id, string name, string type, string group, bool visitor, bool person, bool vehicle, bool crew, bool reqd, string tooltip)
+        public CheckInInfoField(Guid id, string name, string type, string group, bool visitor, bool person, bool vehicle, bool crew, bool equip, bool op, bool reqd, string tooltip)
         {
-            ID = id; Name = name; FieldType = type; FieldGroup = group; UseForVisitor = visitor; UseForPersonnel = person; UseForVehicle = vehicle; UseForCrew = crew; IsRequired = reqd;ToolTipText = tooltip;
+            ID = id; Name = name; FieldType = type; FieldGroup = group;  IsRequired = reqd;ToolTipText = tooltip;
+            UseForVisitor = visitor; UseForPersonnel = person; UseForVehicle = vehicle; UseForCrew = crew; UseForEquipment = equip; UseForOperator = op;
         }
 
         [ProtoMember(1)] private Guid _ID;
@@ -89,7 +100,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private DateTime _DateValue;
         [ProtoMember(14)] private bool _IsRequired;
         [ProtoMember(15)] private string _ToolTipText;
-
+        [ProtoMember(10)] private bool _UseForEquipment; 
+        [ProtoMember(10)] private bool _UseForOperator;
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string Name { get => _Name; set => _Name = value; }
@@ -106,6 +118,9 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime DateValue { get => _DateValue; set => _DateValue = value; }
         public bool IsRequired { get => _IsRequired; set => _IsRequired = value; }
         public string ToolTipText { get => _ToolTipText; set => _ToolTipText = value; }
+        public bool UseForEquipment { get => _UseForEquipment; set => _UseForEquipment = value; }
+        public bool UseForOperator { get => _UseForOperator; set => _UseForOperator = value; }
+
 
         public CheckInInfoField Clone()
         {
@@ -141,7 +156,8 @@ namespace WF_ICS_ClassLibrary.Models
         public string LeaderName { get => Resource.LeaderName; }
         public string Status { get => _StatusText; set => _StatusText = value; }
         public int DaysTillTimeOut { get; set; }
-
+        public string UniqueIDNumWithPrefix { get => _Resource.UniqueIDNumWithPrefix; }
+        public string InitialRoleAcronym { get => _Record.InitialRoleAcronym; }
 
         public CheckInRecordWithResource() { _ID = Guid.NewGuid(); }
         public CheckInRecordWithResource(CheckInRecord rec, IncidentResource res, DateTime EndOfOp)
@@ -151,12 +167,247 @@ namespace WF_ICS_ClassLibrary.Models
             _Resource = res;
             TimeSpan ts = LastDayOnIncident - EndOfOp;
             DaysTillTimeOut = Convert.ToInt32( Math.Round(ts.TotalDays, 0));
-            if(Record.CheckOutDate < EndOfOp) { _StatusText = "Checked-Out"; } else { _StatusText = "Actvie"; }
+            if(Record.CheckOutDate.Date < EndOfOp.Date || Record.LastDayOnIncident.Date < EndOfOp.Date) { _StatusText = "Checked-Out"; } 
+            else { _StatusText = "Actvie"; }
         }
     }
 
+
+
     public static class CheckInTools
     {
+
+        public static int[] GetAccomodationPreferences(this List<CheckInRecordWithResource> list)
+        {
+            int[] accomodation = new int[4];
+            /*  0 = not incident camp
+             *  1 = male only
+             *  2 = female only
+             *  3 = not gender restricted
+             */
+            Guid accomodationID = new Guid("7a39df77-cb16-463c-812b-573bfa97de5d");
+
+            List<CheckInRecordWithResource> personnel = list.Where(o => o.Resource.GetType().Name.Equals("Personnel")).ToList();
+            List<CheckInRecordWithResource> campPersonnel = personnel.Where(o => o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp"))).ToList();
+
+            accomodation[0] = personnel.Count - campPersonnel.Count;
+            accomodation[1] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Male-Only"));
+            accomodation[2] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Female-Only"));
+            accomodation[3] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Not Gender-Restricted"));
+
+            //accomodation[1] = personnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Female-Only") && o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp")));
+            //accomodation[1] = personnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Not Gender-Restricted") && o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp")));
+            return accomodation;
+        }
+
+        public static int[] GetVehicleTypes (this List<CheckInRecordWithResource> list)
+        {
+            int[] vehicleTypes = new int[4];
+            vehicleTypes[0] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f") && f.BoolValue));
+            vehicleTypes[1] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("c1399559-2ac8-49da-8ce8-cd711365417d") && f.BoolValue));
+            vehicleTypes[2] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d") && f.BoolValue));
+            vehicleTypes[3] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368") && f.BoolValue));
+            return vehicleTypes;
+        }
+
+        public static int[,] GetMealRequirements(this List<CheckInRecordWithResource> list)
+        {
+            Guid breakfastID = new Guid("09e8e520-a82e-491f-a82e-ed108e809392");
+            Guid lunchID = new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4");
+            Guid dinnerID = new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488");
+            List<CheckInRecordWithResource> personnel = list.Where(o => o.Resource.GetType().Name.Equals("Personnel")).ToList();
+
+            int[,] food = new int[3, 2];
+
+
+            foreach (CheckInRecordWithResource rec in personnel)
+            {
+
+                if (rec.Record.InfoFields.Any(o => o.ID == breakfastID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[0, 1]++; }
+                    else { food[0, 0]++; }
+                }
+                if (rec.Record.InfoFields.Any(o => o.ID == lunchID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[1, 1]++; }
+                    else { food[1, 0]++; }
+                }
+                if (rec.Record.InfoFields.Any(o => o.ID == dinnerID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[2, 1]++; }
+                    else { food[2, 0]++; }
+                }
+            }
+            return food;
+        }
+
+        public static List<CheckInRecordWithResource> GetCheckInWithResources(this WFIncident incident, int OpPeriod)
+        {
+            List<CheckInRecordWithResource> list = new List<CheckInRecordWithResource>();
+
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+           
+
+            List<IncidentResource> allResources = new List<IncidentResource>();
+            List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
+
+            allResources.AddRange(incident.ActiveIncidentResources);
+
+            foreach (IncidentResource res in allResources)
+            {
+                if (!list.Any(o => o.Resource.ID == res.ID) && incident.AllCheckInRecords.Any(o => o.ResourceID == res.ID))
+                {
+                    CheckInRecord rec = incident.AllCheckInRecords.First(o => o.ResourceID == res.ID);
+                    if (rec.CheckedInThisTime(currentPeriod.PeriodMid))
+                    {
+                        CheckInRecordWithResource resrec = new CheckInRecordWithResource(rec, res, currentPeriod.PeriodEnd);
+
+                        list.Add(resrec);
+                    }
+                }
+
+            }
+
+
+            return list;
+        }
+
+        public static List<CheckInRecordWithResource> GetCheckInWithResources(this WFIncident incident, int OpPeriod, ICSRole ParentRole)
+        {
+            List<CheckInRecordWithResource> list = new List<CheckInRecordWithResource>();
+
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+
+
+           
+            List<ICSRole> childRoles =  currentOrgChart.GetChildRoles(ParentRole.RoleID, true, false);
+
+            List<IncidentResource> allResources = new List<IncidentResource>();
+            List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
+            if (ParentRole.IndividualID != Guid.Empty && !allResources.Any(o => o.ID == ParentRole.IndividualID) && incident.ActiveIncidentResources.Any(o => o.ID == ParentRole.IndividualID))
+            {
+                allResources.Add(incident.ActiveIncidentResources.First(o => o.ID == ParentRole.IndividualID));
+            }
+
+            foreach (ICSRole role in childRoles)
+            {
+                if (role.IndividualID != Guid.Empty && !allResources.Any(o => o.ID == role.IndividualID) && incident.ActiveIncidentResources.Any(o => o.ID == role.IndividualID)) { allResources.Add(incident.ActiveIncidentResources.First(o => o.ID == role.IndividualID)); }
+            }
+
+            if(incident.ActiveOperationalGroups.Any(o=>o.LeaderICSRoleID == ParentRole.RoleID))
+            {
+                OperationalGroup opgr = incident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == ParentRole.RoleID);
+                allResources.AddRange(incident.GetReportingResources(opgr.ID, true));
+            }
+            foreach (ICSRole role in childRoles)
+            {
+                if (incident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
+                {
+                    OperationalGroup opgr = incident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
+                    allResources.AddRange(incident.GetReportingResources(opgr.ID, true));
+                }
+            }
+
+
+
+            //convert OperationalGroupResourceListing into normal resources
+            if (allResources.Any(o => o.GetType().Name.Equals("OperationalGroupResourceListing")))
+            {
+                List<IncidentResource> newResources = new List<IncidentResource>();
+                foreach (OperationalGroupResourceListing listing in allResources.OfType<OperationalGroupResourceListing>())
+                {
+                    if (incident.ActiveIncidentResources.Any(o => o.ID == listing.ResourceID)) { newResources.Add(incident.ActiveIncidentResources.First(o => o.ID == listing.ResourceID)); }
+                }
+                allResources.AddRange(newResources);
+            }
+
+
+
+            foreach (IncidentResource res in allResources)
+            {
+                if (!list.Any(o=>o.Resource.ID == res.ID) && incident.AllCheckInRecords.Any(o => o.ResourceID == res.ID))
+                {
+                    CheckInRecordWithResource rec = new CheckInRecordWithResource(incident.AllCheckInRecords.First(o => o.ResourceID == res.ID), res, currentPeriod.PeriodEnd);
+                    list.Add(rec);
+                }
+                    
+            }
+
+
+            return list;
+        }
+
+
+        public static bool CheckedInThisTime(this CheckInRecord rec, DateTime timeToCheck)
+        {
+            if (rec.CheckInDate <= timeToCheck && rec.CheckOutDate >= timeToCheck && rec.LastDayOnIncident >= timeToCheck) { return true; }
+            return false;
+        }
+
+        public static bool ConfirmResourceNumUnique(this WFIncident incident, string ResourceType, int pNum, Guid excludeID = new Guid())
+        {
+            if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator") || ResourceType.Equals("Visitor"))
+            {
+                return !incident.IncidentPersonnel.Any(o => o.UniqueIDNum == pNum && o.ID != excludeID);
+            }
+            else if (ResourceType.Equals("Vehicle"))
+            {
+                return !incident.allVehicles.Any(o => !o.IsEquipment && o.UniqueIDNum == pNum && o.ID != excludeID);
+            }
+            else if (ResourceType.Equals("Equipment"))
+            {
+                return !incident.allVehicles.Any(o => o.IsEquipment && o.UniqueIDNum == pNum && o.ID != excludeID);
+
+            }
+            else if (ResourceType.Equals("Crew") || ResourceType.Equals("Heavy Equipment Crew"))
+            {
+                return !incident.AllOperationalSubGroups.Any(o => o.UniqueIDNum == pNum && o.ID != excludeID);
+            }
+            else return false;
+           
+        }
+        public static int GetNextUniqueNum(this WFIncident incident, string ResourceType, int lowerBound = 1, int upperBound = 10000)
+        {
+            int next = lowerBound;
+            if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator") || ResourceType.Equals("Visitor"))
+            {
+                if (incident.IncidentPersonnel.Any(o => o.PNum >= lowerBound && o.PNum <= upperBound))
+                {
+                    next = incident.IncidentPersonnel.Where(o => o.PNum >= lowerBound && o.PNum <= upperBound).OrderByDescending(o => o.PNum).First().PNum + 1;
+                }
+            }
+            else if (ResourceType.Equals("Vehicle"))
+            {
+                if (incident.allVehicles.Any(o => !o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
+                {
+                    next = incident.allVehicles.Where(o => !o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
+                }
+            }
+            else if (ResourceType.Equals("Equipment"))
+            {
+                if (incident.allVehicles.Any(o => o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
+                {
+                    next = incident.allVehicles.Where(o => o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
+                }
+
+            }
+            else if (ResourceType.Equals("Crew") || ResourceType.Equals("Heavy Equipment Crew"))
+            {
+                if (incident.AllOperationalSubGroups.Any(o =>  o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
+                {
+                    next = incident.AllOperationalSubGroups.Where(o => o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
+                }
+            }
+
+            if (next >= lowerBound && next <= upperBound && incident.ConfirmResourceNumUnique(ResourceType, next)) { return next; }
+            else { return -1; }
+        }
+
         public static bool ResourceIsCheckedIn(this WFIncident incident, Guid ResourceID, DateTime AtThisTime)
         {
             if (incident.AllCheckInRecords.Any(o => o.Active && o.ResourceID == ResourceID))
@@ -183,7 +434,9 @@ namespace WF_ICS_ClassLibrary.Models
                 case "Visitor": return fields.Where(o => o.UseForVisitor).ToList();
                 case "Crew": return fields.Where(o => o.UseForCrew).ToList();
                 case "Personnel": return fields.Where(o => o.UseForPersonnel).ToList();
-                case "Vehicle/Equipment": return fields.Where(o => o.UseForVehicle).ToList();
+                case "Vehicle": return fields.Where(o => o.UseForVehicle).ToList();
+                case "Equipment": return fields.Where(o => o.UseForVehicle).ToList();
+                case "Operator": return fields.Where(o => o.UseForVehicle).ToList();
             }
             return new List<CheckInInfoField>();
         }
@@ -192,27 +445,36 @@ namespace WF_ICS_ClassLibrary.Models
         {
             List<CheckInInfoField> fields = new List<CheckInInfoField>
             {
-new CheckInInfoField(new Guid("5e1e518c-73db-43a2-8621-779e3e10ae88"), "Resource Order Number", "String", "Deployment Information", false, true, true,false,false, ""),
-new CheckInInfoField(new Guid("172791a7-2fe9-4e0a-9ac8-46d3efedf133"), "Position On Incident", "String", "Deployment Information", false, true, true,false,false, ""),
-new CheckInInfoField(new Guid("3aefed78-eaf9-4f52-a222-43fc389933ce"), "Check-In Location", "List", "Check In Information", false, true, true,true,false, ""),
-new CheckInInfoField(new Guid("17fe99e1-4a2c-4e15-9ae0-cc3258444b65"), "First Day on Incident", "DateTime", "Check In Information", false, true, true,true,false, ""),
-new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "In-briefing location & time", "String", "Check In Information", false, true, false,true,false, ""),
-new CheckInInfoField(new Guid("c9f49654-b5e5-4291-886b-8d24aaef5045"), "Accomodation Location", "List", "Logistics", true, true, false,true,false, ""),
-new CheckInInfoField(new Guid("43fe7e33-4d3d-4866-8401-2ffeaf6fc234"), "Breakfast", "Bool", "Logistics", true, true, false,true,false, "This person will need a meal provided"),
-new CheckInInfoField(new Guid("dcb8f7d2-7904-40d9-8cec-74fce2735ba1"), "Lunch", "Bool", "", true, true, false,true,false, "This person will need a meal provided"),
-new CheckInInfoField(new Guid("3ef2e4a5-fa43-49e9-b69b-00e86a7e62cc"), "Dinner", "Bool", "", true, true, false,true,false, "This person will need a meal provided"),
-new CheckInInfoField(new Guid("9369c50e-3b39-40b8-8557-c25af007ab74"), "Method of Travel", "List", "Logistics", true, true, true,true,false, "Method of Travel to Incident"),
-new CheckInInfoField(new Guid("3458d7d5-a5a5-4104-8488-949ff64c4d31"), "Vehicle License #", "String", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Year / Make / Model", "String", "Logistics", true, true, false,true,false, ""),
-new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "Agency Owned Vehicle", "Bool", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("1934af9e-58ea-4a62-ae4a-16bbb3dbf522"), "Rental Vehicle ", "Bool", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contractor Vehicle(s)", "Bool", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("2631596d-1429-4477-99af-e8459377056a"), "Private Vehicle ", "Bool", "Logistics", true, true, true,true,false, ""),
-new CheckInInfoField(new Guid("63c0e3e2-f8d0-447e-a03e-a30eafa003ad"), "Mobile Equip", "String", "Logistics", true, true, false,true,false, "Incident Identification Number ('V' numbers)"),
-new CheckInInfoField(new Guid("940174cc-3c4a-4fbe-99c6-42676f1b5d5e"), "Gear Required", "String", "Logistics", true, true, false,true,false, "Fireline equipment/gear needed from supply unit"),
-new CheckInInfoField(new Guid("e4b5c369-6cb6-4773-aebe-acec8a206ca1"), "Reason for visit", "string", "Visitor Info", true, false, false,false,true, ""),
-new CheckInInfoField(new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), "Incident contact", "string", "Visitor Info", true, false, false,false,true, ""),
-new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Duration of Visit", "string", "Visitor Info", true, false, false,false,true, "")
+                new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individuals weight ", "String", "Individual Info", false, true, false,true,false,true,false, "Enter the individuals seat weight. "),
+                new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Unique Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,true, "Enter the crews unique agency identifer i.e. RU01, Flathead Unit crew, Dryden IA, etc. "),
+                new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "CIFFC Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,false, "Enter the CIFFC crew identifier if the crew is imported through CIFFC i.e C-30"),
+                new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info i.e. cell and email", "String", "Crew Info", false, false, false,true,false,false,true, "0"),
+                new CheckInInfoField(new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), "Resource Order Number", "String", "Deployment Information", false, true, true,true,true,true,false, "Enter agency specific order number or order identifier. "),
+                //new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Position On Incident", "String", "Deployment Information", false, true, true,false,true,true,true, "0"),
+                new CheckInInfoField(new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe"), "Check-In Location", "List", "Check In Information", true, true, true,true,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("c62a8935-7413-41f1-a2b2-682d4064b08a"), "Check-In Date", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("4836ad52-a6a8-4faa-b6f4-39ef941476b1"), "Check-In Time", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("eacbe40c-d674-40d6-a5eb-3f807e13277a"), "Last Day of Rest", "String", "Check In Information", false, true, false,true,false,true,true, "Enter the resources last day of rest/day off. "),
+                new CheckInInfoField(new Guid("9afc627f-bdad-4076-8d9a-3511759ea2bf"), "First Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("49602e27-8603-4d24-8228-83a3ed4d81d4"), "Last Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
+                //new CheckInInfoField(new Guid("cb7f504c-6233-4c4d-aa67-780b8c90baa7"), "Agency i.e. Parks Canada, Alberta, Town Of Banff, City of Ft.McMurray, Canada Task Force 2, etc", "String", "Check In Information", true, true, true,true,true,true,true, "Enter the resources home agency. "),
+                new CheckInInfoField(new Guid("7a39df77-cb16-463c-812b-573bfa97de5d"), "Accomodation Location", "List", "Logistics", true, true, false,true,false,true,false, "Enter where the resource is staying. "),
+                new CheckInInfoField(new Guid("09e8e520-a82e-491f-a82e-ed108e809392"), "Breakfast", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
+                new CheckInInfoField(new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4"), "Lunch", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
+                new CheckInInfoField(new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488"), "Dinner", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
+                new CheckInInfoField(new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89"), "Method of Travel to Incident", "List", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("2e69adbd-126b-4ae1-abc0-919dca191f68"), "Vehicle License #", "String", "Logistics", false, false, true,false,false,false,false, "0"),
+                new CheckInInfoField(new Guid("ec82d677-a731-4a31-8bb8-452cbafaa58b"), "Year / Make / Model", "String", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f"), "Agency Owned Vehicle", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("c1399559-2ac8-49da-8ce8-cd711365417d"), "Rental Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d"), "Contractor Vehicle(s)", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368"), "Private Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
+                new CheckInInfoField(new Guid("3208d48d-eaf2-4f9e-b526-3d3437610d16"), "Mobile Equip - Incident Identification Number ('V' numbers)", "String", "Logistics", true, true, false,true,false,false,false, "0"),
+                new CheckInInfoField(new Guid("40718587-d6ee-480a-8451-6c7f02d272a5"), "Fireline equipment/gear needed from supply unit", "String", "Logistics", true, true, false,true,false,false,false, "0"),
+                new CheckInInfoField(new Guid("99c4d8c6-3b39-42f1-af6f-33525b2da4e7"), "Reason for visit", "List", "Visitor Info", true, false, false,false,false,false,true, "0"),
+                new CheckInInfoField(new Guid("c3704eab-5c8e-4619-91f0-4df014560c7a"), "Incident contact", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the IMT individual who the visitor is to report to."),
+                new CheckInInfoField(new Guid("ad5b511a-a99f-4310-ba66-4eeb41ec6ab9"), "Duration of Visit", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the duration of visit down to the nearest day. If the visit is only for 2 hours then enter 1 day. "),
+
 
             };
 
@@ -224,9 +486,10 @@ new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Duration
         {
             switch (FieldID.ToString())
             {
-                case "3aefed78-eaf9-4f52-a222-43fc389933ce": return new List<string> { "", "ICP", "Base", "Camp", "Staging", "Heli-Base" };
-                case "c9f49654-b5e5-4291-886b-8d24aaef5045": return new List<string> { "", "Incident Camp", "Other" };
-                case "9369c50e-3b39-40b8-8557-c25af007ab74": return new List<string> { "", "Aircraft", "Bus", "Other Vehicle" };
+                case "b4c8332b-ddf3-4d4c-9c83-2c62328061fe": return new List<string> { "", "ICP", "Base", "Camp", "Staging", "Heli-Base", "free text" };
+                case "7a39df77-cb16-463c-812b-573bfa97de5d": return new List<string> { "", "Incident Camp", "Other" };
+                case "a4f1cb0e-9774-4bdc-aeac-96976aceba89": return new List<string> { "", "Aircraft", "Bus", "Vehicle" };
+                case "99c4d8c6-3b39-42f1-af6f-33525b2da4e7": return new List<string> { "", "Research", "maintenance", "servicing equipment", "servicing facilities", "observing", "free text" };
                 default:
                     return new List<string>();
             }

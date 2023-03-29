@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSavedMedivac = new System.Windows.Forms.Panel();
             this.btnAddSaved = new System.Windows.Forms.Button();
             this.cboSaved = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlSavedMedivac.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +69,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            this.splitContainer1.Panel1.Controls.Add(this.pnlSavedMedivac);
             // 
             // splitContainer1.Panel2
             // 
@@ -80,20 +80,20 @@
             this.splitContainer1.SplitterDistance = 100;
             this.splitContainer1.TabIndex = 1;
             // 
-            // panel1
+            // pnlSavedMedivac
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlSavedMedivac.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btnAddSaved);
-            this.panel1.Controls.Add(this.cboSaved);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(6, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(716, 87);
-            this.panel1.TabIndex = 1;
+            this.pnlSavedMedivac.BackColor = System.Drawing.Color.White;
+            this.pnlSavedMedivac.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSavedMedivac.Controls.Add(this.btnAddSaved);
+            this.pnlSavedMedivac.Controls.Add(this.cboSaved);
+            this.pnlSavedMedivac.Controls.Add(this.label1);
+            this.pnlSavedMedivac.Location = new System.Drawing.Point(6, 7);
+            this.pnlSavedMedivac.Name = "pnlSavedMedivac";
+            this.pnlSavedMedivac.Size = new System.Drawing.Size(716, 87);
+            this.pnlSavedMedivac.TabIndex = 1;
             // 
             // btnAddSaved
             // 
@@ -348,8 +348,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlSavedMedivac.ResumeLayout(false);
+            this.pnlSavedMedivac.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -359,7 +359,7 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlSavedMedivac;
         private System.Windows.Forms.Button btnAddSaved;
         private System.Windows.Forms.ComboBox cboSaved;
         private System.Windows.Forms.Label label1;

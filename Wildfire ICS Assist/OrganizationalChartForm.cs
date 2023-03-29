@@ -114,7 +114,7 @@ namespace Wildfire_ICS_Assist
         {
             foreach (TreeNode node in rootNode.Nodes)
             {
-                if (((ICSRole) node.Tag).RoleID == itemId) return node;
+                if (((ICSRole)node.Tag).RoleID == itemId) return node;
                 TreeNode next = FromID(itemId, node);
                 if (next != null) return next;
             }
@@ -167,7 +167,7 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -212,31 +212,44 @@ namespace Wildfire_ICS_Assist
         private void btnAssignRole_Click(object sender, EventArgs e)
         {
             ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
-            using (OrganizationChartAssignRoleForm assignRoleForm = new OrganizationChartAssignRoleForm())
+            AssignRole(role);
+        }
+
+        private void AssignRole(ICSRole role)
+        {
+            if (role != null)
             {
-                assignRoleForm.selectedRole = role.Clone();
-
-                DialogResult dr = assignRoleForm.ShowDialog();
-                if (dr == DialogResult.OK)
+                using (OrganizationChartAssignRoleForm assignRoleForm = new OrganizationChartAssignRoleForm())
                 {
-                    Program.wfIncidentService.UpsertICSRole(assignRoleForm.selectedRole);
+                    assignRoleForm.selectedRole = role.Clone();
 
-                    if ( CurrentOrgChart.PreparedByRoleID == Guid.Empty)
+                    DialogResult dr = assignRoleForm.ShowDialog();
+                    if (dr == DialogResult.OK)
                     {
-                        CurrentOrgChart.PreparedByRole = Program.CurrentRole.RoleName;
-                        CurrentOrgChart.PreparedBy = Program.CurrentRole.IndividualName;
-                        CurrentOrgChart.PreparedByRoleID = Program.CurrentRole.RoleID;
-                        CurrentOrgChart.PreparedByUserID = Program.CurrentRole.IndividualID;
-                        Program.wfIncidentService.UpsertOrganizationalChart(CurrentOrgChart, false);
+                        Program.wfIncidentService.UpsertICSRole(assignRoleForm.selectedRole);
+
+                        if (CurrentOrgChart.PreparedByRoleID == Guid.Empty)
+                        {
+                            CurrentOrgChart.PreparedByRole = Program.CurrentRole.RoleName;
+                            CurrentOrgChart.PreparedBy = Program.CurrentRole.IndividualName;
+                            CurrentOrgChart.PreparedByRoleID = Program.CurrentRole.RoleID;
+                            CurrentOrgChart.PreparedByUserID = Program.CurrentRole.IndividualID;
+                            Program.wfIncidentService.UpsertOrganizationalChart(CurrentOrgChart, false);
+                        }
                     }
                 }
-
             }
         }
 
         private void btnDeleteRole_Click(object sender, EventArgs e)
         {
             ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
+            DeleteRole(role);
+
+        }
+
+        private void DeleteRole(ICSRole role)
+        {
             if (role.AllowDelete)
             {
                 //check if there are subordinate roles
@@ -256,18 +269,17 @@ namespace Wildfire_ICS_Assist
             else if (role.AllowEditName)
             {
                 DialogResult dr = MessageBox.Show(Properties.Resources.RenameInsteadOfDeleteRole, Properties.Resources.RenameTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(dr == DialogResult.Yes)
+                if (dr == DialogResult.Yes)
                 {
                     openRoleForEdit(role);
                 }
             }
             else { MessageBox.Show(Properties.Resources.ProtectedRole); }
-
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-           
+
 
             if (chkIncludeContacts.Checked)
             {
@@ -385,7 +397,7 @@ namespace Wildfire_ICS_Assist
                 string delimiter = ",";
 
 
-                
+
 
 
 
@@ -414,7 +426,7 @@ namespace Wildfire_ICS_Assist
             {
                 string fullFilepath = "";
                 fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
-               
+
                 PDFCreationResults orgChartResults = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, true, false);
                 string orgChart = orgChartResults.path;
 
@@ -462,7 +474,8 @@ namespace Wildfire_ICS_Assist
                     {
                         MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
                     }
-                } else
+                }
+                else
                 {
                     MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
                 }
@@ -477,6 +490,57 @@ namespace Wildfire_ICS_Assist
                     MessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
                 }
             }
+        }
+
+        private void addRoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICSRole parentRole = (ICSRole)treeOrgChart.SelectedNode.Tag;
+
+
+            ICSRole role = new ICSRole();
+            role.OrganizationalChartID = CurrentOrgChart.OrganizationalChartID;
+            role.OpPeriod = CurrentOrgChart.OpPeriod;
+            role.ReportsTo = parentRole.RoleID;
+            openRoleForEdit(role);
+        }
+
+        private void assignSelectedRoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
+            AssignRole(role);
+        }
+
+        private void editSelectedRoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
+            openRoleForEdit(role);
+
+        }
+
+        private void printLogisticsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+        }
+
+        private void removeSelectedRoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
+            DeleteRole(role);
         }
     }
 }

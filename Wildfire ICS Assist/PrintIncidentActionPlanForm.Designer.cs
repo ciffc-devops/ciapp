@@ -46,7 +46,6 @@
             this.chkActivityLog = new System.Windows.Forms.CheckBox();
             this.chkGeneralMessages = new System.Windows.Forms.CheckBox();
             this.chkAirOps = new System.Windows.Forms.CheckBox();
-            this.chkIncidentStatus = new System.Windows.Forms.CheckBox();
             this.chkSafetyMessage = new System.Windows.Forms.CheckBox();
             this.chkOrgChart = new System.Windows.Forms.CheckBox();
             this.chkMedPlan = new System.Windows.Forms.CheckBox();
@@ -58,6 +57,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chkIncidentObjectives = new System.Windows.Forms.CheckBox();
             this.lblOpPeriodTitle = new System.Windows.Forms.Label();
+            this.btnEmailIAP = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -94,7 +94,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.chkActivityLog);
             this.splitContainer1.Panel1.Controls.Add(this.chkGeneralMessages);
             this.splitContainer1.Panel1.Controls.Add(this.chkAirOps);
-            this.splitContainer1.Panel1.Controls.Add(this.chkIncidentStatus);
             this.splitContainer1.Panel1.Controls.Add(this.chkSafetyMessage);
             this.splitContainer1.Panel1.Controls.Add(this.chkOrgChart);
             this.splitContainer1.Panel1.Controls.Add(this.chkMedPlan);
@@ -108,10 +107,11 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnEmailIAP);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveAsPDF);
             this.splitContainer1.Size = new System.Drawing.Size(650, 649);
-            this.splitContainer1.SplitterDistance = 587;
+            this.splitContainer1.SplitterDistance = 572;
             this.splitContainer1.TabIndex = 1;
             // 
             // chkCheckInLists
@@ -143,7 +143,7 @@
             this.txtCriticalMessage.Multiline = true;
             this.txtCriticalMessage.Name = "txtCriticalMessage";
             this.txtCriticalMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCriticalMessage.Size = new System.Drawing.Size(321, 114);
+            this.txtCriticalMessage.Size = new System.Drawing.Size(321, 99);
             this.txtCriticalMessage.TabIndex = 35;
             this.txtCriticalMessage.TextChanged += new System.EventHandler(this.txtCriticalMessage_TextChanged);
             this.txtCriticalMessage.Leave += new System.EventHandler(this.txtCriticalMessage_Leave);
@@ -194,9 +194,9 @@
             this.chkAssignmentDetails.AutoSize = true;
             this.chkAssignmentDetails.Location = new System.Drawing.Point(360, 121);
             this.chkAssignmentDetails.Name = "chkAssignmentDetails";
-            this.chkAssignmentDetails.Size = new System.Drawing.Size(247, 28);
+            this.chkAssignmentDetails.Size = new System.Drawing.Size(237, 28);
             this.chkAssignmentDetails.TabIndex = 33;
-            this.chkAssignmentDetails.Text = "204A - Assignment Details";
+            this.chkAssignmentDetails.Text = "204A - ST/TF/Grp Details";
             this.chkAssignmentDetails.UseVisualStyleBackColor = true;
             // 
             // chkContacts
@@ -262,22 +262,12 @@
             // chkAirOps
             // 
             this.chkAirOps.AutoSize = true;
-            this.chkAirOps.Location = new System.Drawing.Point(45, 393);
+            this.chkAirOps.Location = new System.Drawing.Point(44, 359);
             this.chkAirOps.Name = "chkAirOps";
             this.chkAirOps.Size = new System.Drawing.Size(223, 28);
             this.chkAirOps.TabIndex = 26;
             this.chkAirOps.Text = "220 - Air Ops Summary";
             this.chkAirOps.UseVisualStyleBackColor = true;
-            // 
-            // chkIncidentStatus
-            // 
-            this.chkIncidentStatus.AutoSize = true;
-            this.chkIncidentStatus.Location = new System.Drawing.Point(45, 359);
-            this.chkIncidentStatus.Name = "chkIncidentStatus";
-            this.chkIncidentStatus.Size = new System.Drawing.Size(196, 28);
-            this.chkIncidentStatus.TabIndex = 25;
-            this.chkIncidentStatus.Text = "209 - Incident Status";
-            this.chkIncidentStatus.UseVisualStyleBackColor = true;
             // 
             // chkSafetyMessage
             // 
@@ -397,12 +387,25 @@
             this.lblOpPeriodTitle.TabIndex = 13;
             this.lblOpPeriodTitle.Text = "Print Operational Period 22";
             // 
+            // btnEmailIAP
+            // 
+            this.btnEmailIAP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEmailIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_11_envelope;
+            this.btnEmailIAP.Location = new System.Drawing.Point(432, 7);
+            this.btnEmailIAP.Name = "btnEmailIAP";
+            this.btnEmailIAP.Size = new System.Drawing.Size(208, 58);
+            this.btnEmailIAP.TabIndex = 17;
+            this.btnEmailIAP.Text = "Email PDF to all responders";
+            this.btnEmailIAP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEmailIAP.UseVisualStyleBackColor = true;
+            this.btnEmailIAP.Click += new System.EventHandler(this.btnEmailIAP_Click);
+            // 
             // btnCancel
             // 
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(12, 3);
+            this.btnCancel.Location = new System.Drawing.Point(12, 7);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(129, 46);
+            this.btnCancel.Size = new System.Drawing.Size(129, 58);
             this.btnCancel.TabIndex = 16;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -413,9 +416,9 @@
             // 
             this.btnSaveAsPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveAsPDF.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnSaveAsPDF.Location = new System.Drawing.Point(469, 3);
+            this.btnSaveAsPDF.Location = new System.Drawing.Point(235, 7);
             this.btnSaveAsPDF.Name = "btnSaveAsPDF";
-            this.btnSaveAsPDF.Size = new System.Drawing.Size(178, 46);
+            this.btnSaveAsPDF.Size = new System.Drawing.Size(178, 58);
             this.btnSaveAsPDF.TabIndex = 15;
             this.btnSaveAsPDF.Text = "Save as a PDF";
             this.btnSaveAsPDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -462,7 +465,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSaveAsPDF;
         private System.Windows.Forms.CheckBox chkAirOps;
-        private System.Windows.Forms.CheckBox chkIncidentStatus;
         private System.Windows.Forms.CheckBox chkSafetyMessage;
         private System.Windows.Forms.CheckBox chkOrgChart;
         private System.Windows.Forms.CheckBox chkMedPlan;
@@ -485,5 +487,6 @@
         private System.Windows.Forms.TextBox txtCriticalMessage;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.CheckBox chkCheckInLists;
+        private System.Windows.Forms.Button btnEmailIAP;
     }
 }

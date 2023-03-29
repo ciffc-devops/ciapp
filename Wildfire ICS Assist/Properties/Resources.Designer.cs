@@ -146,6 +146,26 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EquipOp {
+            get {
+                object obj = ResourceManager.GetObject("EquipOp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_11_envelope {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-11-envelope", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_137_cogwheel {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_137_cogwheel", resourceCulture);
@@ -716,6 +736,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_59_truck {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-59-truck", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_592_map {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_592_map", resourceCulture);
@@ -1039,6 +1069,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_filetypes_9_file_spreadsheet {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_filetypes_9_file_spreadsheet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HECrew {
+            get {
+                object obj = ResourceManager.GetObject("HECrew", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -191,13 +191,11 @@ namespace Wildfire_ICS_Assist
         MedicalPlanForm _medicalPlanForm = null;
         NotesForm _notesForm = null;
         SafetyMessagesForm _safetyMessagesForm = null;
-        VehiclesForm _vehiclesForm = null;
         PrintIncidentForm _printIAPForm = null;
         AirOperationsForm _airOperationsForm = null;
         //TeamAssignmentsForm _teamAssignmentsForm = null;
         OperationalGroupsForm _operationalGroupsForm = null;
         PositionLogReminderForm _positionLogReminderForm = null;
-        PersonnelListForm _personnelListForm = null;
         CheckedInResourcesForm _checkedInresourcesForm = null;
         CloseOpPeriodForm _closeOpPeriodForm = null;
 
@@ -241,6 +239,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
             Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
             Program.wfIncidentService.OperationalGroupChanged += Program_OperationalGroupChanged;
+            Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
             //Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
 
 
@@ -521,20 +520,48 @@ namespace Wildfire_ICS_Assist
 
         private void newIncidentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateNewIncident();
+            if (checkForSave)
+            {
+                DialogResult dr = MessageBox.Show("Would you like to save the current incident before creating a new one?", "Save current incdient?", MessageBoxButtons.YesNoCancel);
+                if (dr == DialogResult.Yes)
+                {
+                    saveFile();
+                    CreateNewIncident();
+                }
+                else if (dr == DialogResult.No)
+                {
+                    CreateNewIncident();
+                }
+
+            }
+            else
+            {
+                CreateNewIncident();
+            }
+
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (checkForSave && MessageBox.Show("Would you like to save the current incident before opening another?", "Save current incdient?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (checkForSave)
             {
-                saveFile();
-                openTask();
+                DialogResult dr = MessageBox.Show("Would you like to save the current incident before opening another?", "Save current incdient?", MessageBoxButtons.YesNoCancel);
+                if (dr == DialogResult.Yes)
+                {
+                    saveFile();
+                    openTask();
+                }
+                else if (dr == DialogResult.No)
+                {
+                    openTask();
+                }
+
             }
             else
             {
                 openTask();
             }
+
 
         }
 
@@ -646,8 +673,8 @@ namespace Wildfire_ICS_Assist
             setButtonCheckboxes();
             browseToIncidentFolderToolStripMenuItem.Enabled = true;
 
-            List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
-            Program.CurrentIncident.IncidentPersonnel = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
+            //List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            //Program.CurrentIncident.IncidentPersonnel = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
         }
 
         private void DisplayCurrentICSRole()
@@ -727,10 +754,24 @@ namespace Wildfire_ICS_Assist
         {
             if (!saveAsPromptShown)
             {
-                if (Program.generalOptionsService.GetOptionsBoolValue("AutoSave") && lastSaveSuccessful) { if (initialDetailsSet(false, false)) { if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { saveFile(false, false); } } }
+                if (Program.generalOptionsService.GetOptionsBoolValue("AutoSave") && lastSaveSuccessful)
+                {
+                    if (initialDetailsSet(false, false))
+                    {
+                        if (!string.IsNullOrEmpty(CurrentIncident.FileName))
+                        {
+                            saveFile(false, false);
+                        }
+                        else { checkForSave = true; }
+                    }
+                    else { checkForSave = true; }
+                }
+                else { checkForSave = true; }
             }
+            else { checkForSave = true; }
 
         }
+
         private void Program_OperationalGroupChanged(OperationalGroupEventArgs e)
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
@@ -761,6 +802,11 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        private void Program_CheckInChanged(CheckInEventArgs e)
+        {
+            TriggerAutoSave();
+
+        }
 
         private void Program_OperationalPeriodChanged(OperationalPeriodEventArgs e)
         {
@@ -914,8 +960,14 @@ namespace Wildfire_ICS_Assist
 
         private void CreateNewIncident()
         {
+           
+            CloseActiveForms();
+
             browseToIncidentFolderToolStripMenuItem.Enabled = false;
             CurrentIncident = new WFIncident();
+            txtTaskName.Text = string.Empty;
+            txtTaskNumber.Text = string.Empty;
+
             OperationalPeriod period = CurrentIncident.GenerateFirstOpPeriod();
             if (period != null) { Program.wfIncidentService.UpsertOperationalPeriod(period); }
 
@@ -929,11 +981,10 @@ namespace Wildfire_ICS_Assist
             checkForSave = false;
             //setSavedFlag(false);
             LastAutoBackup = DateTime.Now;
+            displayIncidentDetails();
 
             //AddDefaultEquipment(CurrentOpPeriod);
 
-            PauseNetworkSend = true;
-            PauseNetworkSend = false;
 
         }
 
@@ -1178,35 +1229,32 @@ namespace Wildfire_ICS_Assist
 
         void recent_file_Click(object sender, EventArgs e)
         {
-            if (checkForSave && MessageBox.Show("Would you like to save the current incident before opening another?", "Save current incident?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (checkForSave)
             {
-                string tag = ((ToolStripMenuItem)sender).Tag.ToString();
-                //MessageBox.Show(tag);
-                openTask(tag);
+                DialogResult dr = MessageBox.Show("Would you like to save the current incident before opening another?", "Save current incdient?", MessageBoxButtons.YesNoCancel);
+                if (dr == DialogResult.Yes)
+                {
+                    saveFile();
+                    string tag = ((ToolStripMenuItem)sender).Tag.ToString();
+                    openTask(tag);
+                }
+                else if (dr == DialogResult.No)
+                {
+                    string tag = ((ToolStripMenuItem)sender).Tag.ToString();
+                    openTask(tag);
+                }
+
             }
             else
             {
                 string tag = ((ToolStripMenuItem)sender).Tag.ToString();
-                //MessageBox.Show(tag);
                 openTask(tag);
             }
+
         }
 
         private void txtTaskName_Leave(object sender, EventArgs e)
         {
-            /*
-            if (!PauseNetworkSend)
-            {
-                bool changed = (string.IsNullOrEmpty(CurrentIncident.TaskName) || !CurrentIncident.TaskName.Equals(((TextBox)sender).Text));
-                CurrentIncident.TaskName = txtTaskName.Text;
-                checkForSave = true;
-                if (changed)
-                {
-                    TaskBasics basics = new TaskBasics(CurrentIncident);
-                    Program.wfIncidentService.UpdateTaskBasics(basics, "local");
-                }
-            }
-            */
             initialDetailsSet(true, false);
 
         }
@@ -1745,33 +1793,6 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        private void vehiclesToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            OpenVehiclesForm();
-        }
-
-        private void OpenVehiclesForm()
-        {
-            if (initialDetailsSet())
-            {
-                if (_vehiclesForm == null)
-                {
-                    _vehiclesForm = new VehiclesForm();
-                    _vehiclesForm.FormClosed += new FormClosedEventHandler(VehiclesForm_Closed);
-                    ActiveForms.Add(_vehiclesForm);
-                    _vehiclesForm.Show(this);
-                }
-
-                _vehiclesForm.BringToFront();
-            }
-        }
-        void VehiclesForm_Closed(object sender, FormClosedEventArgs e)
-        {
-            RemoveActiveForm(_vehiclesForm);
-            _vehiclesForm = null;
-
-
-        }
 
         private void btnPrintIAP_Click(object sender, EventArgs e)
         {
@@ -1841,10 +1862,6 @@ namespace Wildfire_ICS_Assist
             OpenPrintIAPForm(true, false);
         }
 
-        private void btnVehicles_Click(object sender, EventArgs e)
-        {
-            OpenVehiclesForm();
-        }
 
         private void btnAdditionalContacts_Click(object sender, EventArgs e)
         {
@@ -2628,31 +2645,9 @@ namespace Wildfire_ICS_Assist
 
         private void memberStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenPersonnelListForm();
         }
 
-        private void OpenPersonnelListForm()
-        {
-            if (initialDetailsSet())
-            {
-                if (_personnelListForm == null)
-                {
-                    _personnelListForm = new PersonnelListForm();
-                    _personnelListForm.FormClosed += new FormClosedEventHandler(PersonnelListForm_Closed);
-                    ActiveForms.Add(_personnelListForm);
-                    _personnelListForm.Show(this);
-                }
-
-                _personnelListForm.BringToFront();
-            }
-        }
-        void PersonnelListForm_Closed(object sender, FormClosedEventArgs e)
-        {
-            RemoveActiveForm(_personnelListForm);
-            _personnelListForm = null;
-
-
-        }
+       
 
 
         private void OpenCheckedInResourcesForm()
@@ -2742,9 +2737,13 @@ namespace Wildfire_ICS_Assist
                             Personnel vis = resource as Personnel;
                             Program.wfIncidentService.UpsertPersonnel(vis);
                             break;
-                        case "Vehicle/Equipment":
+                        case "Vehicle":
                             Vehicle v = resource as Vehicle;
                             Program.wfIncidentService.UpsertVehicle(v);
+                            break;
+                        case "Equipment":
+                            Vehicle ve = resource as Vehicle;
+                            Program.wfIncidentService.UpsertVehicle(ve);
                             break;
                         case "Crew":
                             OperationalSubGroup group = resource as OperationalSubGroup;
@@ -2770,7 +2769,8 @@ namespace Wildfire_ICS_Assist
                                     vrec.ResourceID = subres.ID;
                                     vrec.SignInRecordID = Guid.NewGuid();
                                     vrec.ParentRecordID = record.SignInRecordID;
-                                    vrec.ResourceType = "Vehicle/Equipment";
+                                    if (vh.IsEquipment) { vrec.ResourceType = "Equipment"; }
+                                    else { vrec.ResourceType = "Vehicle"; }
                                     Program.wfIncidentService.UpsertCheckInRecord(vrec);
                                 }
                             }
@@ -2901,6 +2901,14 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        private void CloseAllOpenWindows()
+        {
+            foreach(Form f in ActiveForms)
+            {
+                f.Close();
+            }
+        }
+
         private void btnIncidentSummary_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This feature is not yet supported");
@@ -2911,6 +2919,11 @@ namespace Wildfire_ICS_Assist
             
                 OpenCloseOpPeriodForm();
             
+        }
+
+        private void btnPlanningAddAssignment_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

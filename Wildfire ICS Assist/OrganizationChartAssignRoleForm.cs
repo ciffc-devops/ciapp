@@ -22,11 +22,13 @@ namespace Wildfire_ICS_Assist
 
         private void DisplayRole()
         {
+            /*
             List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
             members = Program.CurrentIncident.getTaskTeamMembers(savedMembers, false, false, Program.CurrentOpPeriod);
 
             cboSavedMembers.DataSource = members;
-
+            */
+            cboSavedMembers.DataSource = Program.CurrentIncident.GetCurrentlySignedInPersonnel(Program.CurrentOpPeriod);
             if(selectedRole.IndividualID != Guid.Empty && members.Any(o=>o.PersonID == selectedRole.IndividualID)) { cboSavedMembers.SelectedValue = selectedRole.IndividualID; }
             lblRoleName.Text = selectedRole.RoleName;
         }

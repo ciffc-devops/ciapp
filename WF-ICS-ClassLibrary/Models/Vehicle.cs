@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,10 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(16)] private string _Notes;
         [ProtoMember(17)] private Guid _OperatorID;
         [ProtoMember(18)] private string _ASE;
-
+        [ProtoMember(19)] private bool _IsEquipment;
         public Vehicle()
         {
+
             ID = Guid.NewGuid();
             Active = true;
             NumberOfVehicles = 1;
@@ -51,6 +53,7 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime MustBeOutTime { get => _MustBeOutTime; set => _MustBeOutTime = value; }
         public string Notes { get => _Notes; set => _Notes = value; }
         public string ASE { get => _ASE; set => _ASE = value; }
+        public bool IsEquipment { get => _IsEquipment; set { _IsEquipment = value; if (IsEquipment) { this.ResourceType = "Equipment"; } else { this.ResourceType = "Vehicle"; } } }
 
         private void SetResourceName() { ResourceName = IDWithMakeOwner; }
         public string IDWithMakeOwner

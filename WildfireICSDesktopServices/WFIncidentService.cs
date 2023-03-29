@@ -18,7 +18,7 @@ namespace WildfireICSDesktopServices
     public class WFIncidentService : IWFIncidentService
     {
         public event CommsEventHandler CommsChanged;
-        public event MemberEventHandler MemberSignInChanged;
+        public event CheckInEventHandler MemberSignInChanged;
         public event BriefingEventHandler BriefingChanged;
         public event CommsPlanEventHandler CommsPlanChanged;
         public event CommsPlanItemEventHandler CommsPlanItemChanged;
@@ -1150,6 +1150,15 @@ namespace WildfireICSDesktopServices
         {
             roleToDelete.Active = false;
             UpsertICSRole(roleToDelete, source);
+            if (CurrentIncident.AllOperationalGroups.Any(o => o.LeaderICSRoleID == roleToDelete.RoleID))
+            {
+                foreach (OperationalGroup group in CurrentIncident.AllOperationalGroups.Where(o => o.LeaderICSRoleID == roleToDelete.RoleID))
+                {
+                    group.Active = false;
+                    UpsertOperationalGroup(group);
+                }
+            }
+
             /*
             if(_currentIncident.allOrgCharts.Any(o=>o.OpPeriod == opsPeriod))
             {
@@ -1410,16 +1419,33 @@ namespace WildfireICSDesktopServices
         public void UpsertVehicle(Vehicle record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allVehicles.Any(o => o.ID == record.ID))
+            if (_currentIncident.AllIncidentResources.Any(o => o.ID == record.ID))
             {
-                _currentIncident.allVehicles = _currentIncident.allVehicles.Where(o => o.ID != record.ID).ToList();
+                _currentIncident.AllIncidentResources = _currentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList();
             }
-            _currentIncident.allVehicles.Add(record);
+            _currentIncident.AllIncidentResources.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
             {
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
             OnVehicleChanged(new VehicleEventArgs(record));
+        }
+
+        public void UpsertIncidentResource(IncidentResource record, string source = "local")
+        {
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.AllIncidentResources.Any(o => o.ID == record.ID))
+            {
+                _currentIncident.AllIncidentResources = _currentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList();
+            }
+            _currentIncident.AllIncidentResources.Add(record);
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            if (record.GetType().Name.Equals("Vehicle")) { OnVehicleChanged(new VehicleEventArgs(record as Vehicle)); }
+            else if (record.GetType().Name.Equals("Personnel")) { OnMemberSignInChanged(new CheckInEventArgs(record as Personnel)); }
+            else if (record.GetType().Name.Equals("OperationalSubGroup")) { OnOperationalSubGroupChanged(new OperationalSubGroupEventArgs(record as OperationalSubGroup)); }
         }
 
         /*
@@ -1461,7 +1487,7 @@ namespace WildfireICSDesktopServices
           
 
 
-            OnMemberSignInChanged(new MemberEventArgs(signIn));
+            OnMemberSignInChanged(new CheckInEventArgs(signIn));
         }
         public void UpsertPersonnel(Personnel member, string source = "local")
         {
@@ -1470,12 +1496,12 @@ namespace WildfireICSDesktopServices
                 _currentIncident.UpsertTaskTeamMember(member);
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(member, "UPSERT", true, false); }
             }
-            OnMemberSignInChanged(new MemberEventArgs(member));
+            OnMemberSignInChanged(new CheckInEventArgs(member));
         }
 
-        protected virtual void OnMemberSignInChanged(MemberEventArgs e)
+        protected virtual void OnMemberSignInChanged(CheckInEventArgs e)
         {
-            MemberEventHandler handler = this.MemberSignInChanged;
+            CheckInEventHandler handler = this.MemberSignInChanged;
             if (handler != null)
             {
                 handler(e);
@@ -1629,8 +1655,8 @@ namespace WildfireICSDesktopServices
         public void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (CurrentIncident.AllOperationalSubGroups.Any(o => o.ID == record.ID)) { CurrentIncident.AllOperationalSubGroups = CurrentIncident.AllOperationalSubGroups.Where(o => o.ID != record.ID).ToList(); }
-            CurrentIncident.AllOperationalSubGroups.Add(record);
+            if (CurrentIncident.AllIncidentResources.Any(o => o.ID == record.ID)) { CurrentIncident.AllIncidentResources = CurrentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList(); }
+            CurrentIncident.AllIncidentResources.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(record, "UPSERT", true, false); }
             CurrentIncident.SetOpGroupDepths(record.OpPeriod);
             CurrentIncident.UpdateThisGroupCount(record);

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
@@ -19,18 +20,13 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void displayTeamMember()
         {
-            
+            cboAgency.DataSource = AgencyTools.GetFixedAgencies();
+
+
+
             if (Program.generalOptionsService != null && Program.generalOptionsService.GetOptionsValue("Agencies") != null)
             {
-                List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
-                List<string> incidentAgencies = Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList();
-               
-                agencies.AddRange(incidentAgencies.Distinct());
-                agencies = agencies.Distinct().ToList();
-                agencies = agencies.OrderBy(o => o).ToList();
-                agencies.Insert(0, string.Empty);
-
-                cboAgency.DataSource = agencies;
+                cboOtherAgency.DataSource = GetIncidentAgencies();
 
                 List<string> homebases = (List<string>)Program.generalOptionsService.GetOptionsValue("HomeBases");
                 List<string> incidentBases = Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.HomeUnit)).GroupBy(o => o.HomeUnit).Select(o => o.First().HomeUnit).ToList();
@@ -46,15 +42,25 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtFirstName.Text = teamMember.FirstName;
                 txtMiddleName.Text = teamMember.MiddleInitial;
                 txtLastName.Text = teamMember.LastName;
-                cboGender.Text = teamMember.Gender;
+                cboAccomodationPreference.Text = teamMember.AccomodationPreference;
                 if (teamMember.HomeProvinceID != Guid.Empty) { cboProvince.SelectedValue = teamMember.HomeProvinceID; }
                 else if (Program.generalOptionsService != null && Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID") != Guid.Empty) { cboProvince.SelectedValue = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); _teamMember.HomeProvinceID = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); ; }
                 cboCountry.Text = teamMember.HomeCountry;
-                if (!string.IsNullOrEmpty(teamMember.Agency)) { cboAgency.Text = teamMember.Agency; }
+                if (!string.IsNullOrEmpty(teamMember.Agency))
+                {
+                    List<string> fixedAgencies = AgencyTools.GetFixedAgencies();
+                    if (fixedAgencies.Contains(teamMember.Agency)) { cboAgency.SelectedIndex = cboAgency.FindStringExact(teamMember.Agency); }
+                    else
+                    {
+                        cboAgency.SelectedValue = Guid.Empty;
+                        cboOtherAgency.Text = teamMember.Agency;
+                    }
+                }
                 chkContractor.Checked = teamMember.IsContractor;
                 txtPhone.Text = teamMember.CellphoneNumber;
                 cboType.Text = teamMember.Type;
                 cboKind.Text = teamMember.Kind;
+                txtPronouns.Text = teamMember.Pronouns;
                 txtEmail.Text = teamMember.Email;
                 if (!string.IsNullOrEmpty(teamMember.HomeUnit)) { cboHomeAgency.Text = teamMember.HomeUnit; }
 
@@ -62,8 +68,6 @@ namespace Wildfire_ICS_Assist.CustomControls
                 chkDietary.Checked = teamMember.HasDietaryRestrictions;
                 txtCallsign.Text = teamMember.CallSign;
                 chkAllergies.Checked = teamMember.HasAllergies;
-                txtWeight.Text = teamMember.Weight;
-
                 txtNOKName.Text = teamMember.EmergencyContact;
 
                 //chkNoGluten.Checked = teamMember.NoGluten;
@@ -73,10 +77,35 @@ namespace Wildfire_ICS_Assist.CustomControls
                 cboCountry.Text = "Canada";
             }
         }
+
+        private List<string> GetIncidentAgencies()
+        {
+            List<string> final = new List<string>();
+            List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
+            List<string> incidentAgencies = Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList();
+            List<string> staticAgencies = AgencyTools.GetFixedAgencies();
+
+            foreach(string s in agencies)
+            {
+                if (!final.Contains(s) && !staticAgencies.Contains(s)) { final.Add(s); }
+            }
+            foreach (string s in incidentAgencies)
+            {
+                if (!final.Contains(s) && !staticAgencies.Contains(s)) { final.Add(s); }
+            }
+
+            final = final.Distinct().ToList();
+            final = final.OrderBy(o => o).ToList();
+            final.Insert(0, "");
+            return final;
+        }
+
         public PersonnelEditControl()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground;
-            bsProvAndTerr.DataSource = ProvinceTools.GetProvinces();
+            List<Province> provinces = ProvinceTools.GetProvinces();
+            Province other = new Province(); other.ProvinceGUID = Guid.Empty; other.ProvinceName = "Other / NA"; provinces.Add(other);
+            bsProvAndTerr.DataSource = provinces;
             cboProvince.DisplayMember = "ProvinceName";
             cboProvince.ValueMember = "ProvinceGUID";
         }
@@ -124,6 +153,11 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboAgency_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cboOtherAgency.Enabled = cboAgency.Text.Equals("Other Agency");
+            if (cboOtherAgency.Enabled)
+            {
+                teamMember.Agency = cboOtherAgency.Text;
+            } else { teamMember.Agency = cboAgency.Text; }
         }
 
         private void txtPhone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
@@ -149,7 +183,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboAgency_Leave(object sender, EventArgs e)
         {
-            teamMember.Agency = cboAgency.Text;
+          
         }
 
         private void cboHomeAgency_Leave(object sender, EventArgs e)
@@ -238,6 +272,25 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void txtWeight_TextChanged(object sender, EventArgs e)
         {
             teamMember.Weight = ((TextBox)sender).Text; 
+        }
+
+        private void cboAccomodationPreference_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            teamMember.AccomodationPreference = ((ComboBox)sender).Text;
+        }
+
+        private void cboOtherAgency_Leave(object sender, EventArgs e)
+        {
+            if (cboOtherAgency.Enabled)
+            {
+                teamMember.Agency = cboOtherAgency.Text;
+            }
+        }
+
+        private void txtPronouns_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.Pronouns = ((TextBox)sender).Text;
+
         }
     }
 }

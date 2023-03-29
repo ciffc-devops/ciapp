@@ -32,8 +32,17 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.OperationalGroupChanged += Program_OperationalGroupChanged;
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChangedChanged;
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChangedChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
 
         }
+
+
+        private void Program_OperationalPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            PopulateTree();
+        }
+
+
 
         private void Program_OperationalGroupChanged(OperationalGroupEventArgs e)
         {
@@ -200,10 +209,11 @@ namespace Wildfire_ICS_Assist
             if (treeOpsChart.SelectedNode != null)
             {
                 btnEditBranch.Enabled = true;
-                btnDelete.Enabled = true;
+               
                 Program.CurrentIncident.UpdateOperationalGroupCounts(Program.CurrentOpPeriod);
 
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+                btnDelete.Enabled = role.AllowDelete;
                 OperationalGroup selectedGroup = new OperationalGroup();
                 if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
                 {
@@ -266,6 +276,11 @@ namespace Wildfire_ICS_Assist
 
 
         private void btnEditBranch_Click(object sender, EventArgs e)
+        {
+            EditSelectedNode();
+        }
+
+        private void EditSelectedNode()
         {
             if (treeOpsChart.SelectedNode != null)
             {
@@ -385,9 +400,11 @@ namespace Wildfire_ICS_Assist
 
         private void addNewTaskForceToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AddStTf("Task Force");
+        }
 
-
-
+        private void AddStTf(string type)
+        {
             OperationalGroup group = new OperationalGroup();
             group.OpPeriod = Program.CurrentOpPeriod;
             if (treeOpsChart.SelectedNode != null)
@@ -408,108 +425,19 @@ namespace Wildfire_ICS_Assist
             {
                 group.ParentID = Globals.OpsChiefID;
             }
-            group.GroupType = "Task Force";
-            /*
-            if (dgvGroup.SelectedRows.Count == 1)
-            {
-                OperationalGroup selectedGroup = (OperationalGroup)dgvGroup.SelectedRows[0].DataBoundItem;
-                if (selectedGroup.IsBranchOrDiv && Program.CurrentIncident.GetICSRoleByOpGroupID(selectedGroup.ID) != null)
-                {
-                    ICSRole role = Program.CurrentIncident.GetICSRoleByOpGroupID(selectedGroup.ID);
-                    group.ParentID = role.RoleID;
-                    group.ParentName = role.RoleName;
-                }
-                else if (!selectedGroup.IsBranchOrDiv)
-                {
-                    group.ParentID = selectedGroup.ParentID;
-                    group.ParentName = selectedGroup.ParentName;
-                }
+            group.GroupType = type;
 
-            }
-            */
             OpenTFSTForEdit(group);
         }
 
         private void addNewStrikeTeamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperationalGroup group = new OperationalGroup();
-            group.OpPeriod = Program.CurrentOpPeriod;
-            if (treeOpsChart.SelectedNode != null)
-            {
-                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                if (!role.IsTFST)
-                {
-                    group.ParentID = role.RoleID;
-                    group.ParentName = role.RoleName;
-                }
-                else
-                {
-                    group.ParentID = role.ReportsTo;
-                    group.ParentName = role.ReportsToRoleName;
-                }
-            }
-            else
-            {
-                group.ParentID = Globals.OpsChiefID;
-            }
-            group.GroupType = "Strike Team";
-
-            /*
-            if (dgvGroup.SelectedRows.Count == 1)
-            {
-                OperationalGroup selectedGroup = (OperationalGroup)dgvGroup.SelectedRows[0].DataBoundItem;
-                if (selectedGroup.IsBranchOrDiv && Program.CurrentIncident.GetICSRoleByOpGroupID(selectedGroup.ID) != null)
-                {
-                    ICSRole role = Program.CurrentIncident.GetICSRoleByOpGroupID(selectedGroup.ID);
-                    group.ParentID = role.RoleID;
-                    group.ParentName = role.RoleName;
-                }
-                else if (!selectedGroup.IsBranchOrDiv)
-                {
-                    group.ParentID = selectedGroup.ParentID;
-                    group.ParentName = selectedGroup.ParentName;
-                }
-
-            }*/
-
-            OpenTFSTForEdit(group);
+            AddStTf("Strike Team");
         }
 
         private void addNewSingleResourceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperationalGroup group = new OperationalGroup();
-            group.OpPeriod = Program.CurrentOpPeriod;
-            if (treeOpsChart.SelectedNode != null)
-            {
-                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                if (!role.IsTFST)
-                {
-                    group.ParentID = role.RoleID;
-                    group.ParentName = role.RoleName;
-                }
-                else
-                {
-                    group.ParentID = role.ReportsTo;
-                    group.ParentName = role.ReportsToRoleName;
-                }
-            }
-            else
-            {
-                group.ParentID = Globals.OpsChiefID;
-            }
-            group.GroupType = "Single Resource";
-
-            /*
-            if (dgvGroup.SelectedRows.Count == 1)
-            {
-                OperationalGroup selectedGroup = (OperationalGroup)dgvGroup.SelectedRows[0].DataBoundItem;
-                ICSRole role = Program.CurrentIncident.GetICSRoleByOpGroupID(selectedGroup.ID);
-                group.ParentID = role.RoleID;
-                group.ParentName = role.RoleName;
-
-            }
-            */
-            OpenTFSTForEdit(group);
+            AddStTf("Single Resource");
         }
 
         private void OpenTFSTForEdit(OperationalGroup group)
@@ -533,7 +461,35 @@ namespace Wildfire_ICS_Assist
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            DeleteSelectedNode();
+        }
 
+        private void DeleteSelectedNode()
+        {
+            if (treeOpsChart.SelectedNode != null)
+            {
+                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+
+                if (role.AllowDelete)
+                {
+                    List<ICSRole> reportingRoles = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == role.RoleID).ToList();
+                    if (reportingRoles.Count > 0)
+                    {
+                        MessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
+                    }
+                    else
+                    {
+                        DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                        if (dr == DialogResult.Yes)
+                        {
+                            Program.wfIncidentService.DeleteICSRole(role, Program.CurrentOpPeriod);
+                        }
+
+
+                    }
+                }
+
+            }
         }
 
         private void btnPrint204_Click(object sender, EventArgs e)
@@ -627,6 +583,74 @@ namespace Wildfire_ICS_Assist
                     MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditSelectedNode();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteSelectedNode();
+        }
+
+        private void addTaskForceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddStTf("Task Force");
+
+        }
+
+        private void addStrikeTeamToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddStTf("Strike Team");
+
+        }
+
+        private void addSingleResourceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddStTf("Single Resource");
+
+        }
+
+        private void btnPrintLogistics_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+        }
+
+        private void printLogisticsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
     }
 }

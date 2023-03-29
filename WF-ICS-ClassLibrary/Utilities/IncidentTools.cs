@@ -79,60 +79,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         }
 
 
-        public static List<Personnel> getTaskTeamMembers(this WFIncident task, List<Personnel> orgMembers, bool useDatabase = true, bool includeBlank = false, int OpPeriod = 0)
-        {
-            List<Personnel> members = new List<Personnel>();
-
-            foreach (Personnel member in task.IncidentPersonnel)
-            {
-                if (!members.Any(o => o.PersonID == member.PersonID) && !listAlreadyContainsMember(members, member)) { members.Add(member); }
-            }
-
-
-            foreach (OrganizationChart orgchart in task.allOrgCharts)
-            {
-                foreach (ICSRole role in orgchart.ActiveRoles.Where(o=>o.teamMember != null && o.teamMember.PersonID != Guid.Empty))
-                {
-                    if (role.teamMember != null && !members.Any(o => o.PersonID == role.teamMember.PersonID) && !listAlreadyContainsMember(members, role.teamMember))
-                    {
-                        members.Add(role.teamMember);
-                    }
-                }
-            }
-
-            /*
-            foreach (CheckInRecord record in task.AllSignInRecords)
-            {
-                if (!members.Any(o => o.PersonID == record.ResourceID) && !listAlreadyContainsMember(members, record.teamMember)) { members.Add(record.teamMember); }
-
-            }
-            */
-            /*
-
-            foreach (Personnel member in orgMembers)
-            {
-                if (member != null && !string.IsNullOrEmpty(member.Name) && !listAlreadyContainsMember(members, member)) { members.Add(member); }
-            }*/
-
-            //update status
-            foreach (Personnel member in members)
-            {
-                member.CurrentStatus = task.getMemberStatus(member, OpPeriod);
-            }
-
-            members = members.Where(o => !string.IsNullOrEmpty(o.Name)).OrderBy(o => o.Agency).ThenBy(o => o.Name).ToList();
-
-            if (includeBlank)
-            {
-                Personnel blank = new Personnel();
-                blank.PersonID = Guid.Empty;
-                blank.Name = "";
-                members.Insert(0, blank);
-            }
-
-            task.IncidentPersonnel = members;
-            return members;
-        }
+       
 
         private static bool listAlreadyContainsMember(List<Personnel> members, Personnel newMember)
         {
@@ -155,11 +102,28 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             if (member != null && member.PersonID != Guid.Empty && !string.IsNullOrEmpty(member.Name))
             {
-                if (task.IncidentPersonnel.Any(o => o.PersonID == member.PersonID))
+                if (task.AllIncidentResources.Any(o => o.ID == member.PersonID))
                 {
-                    task.IncidentPersonnel = task.IncidentPersonnel.Where(o => o.PersonID != member.PersonID).ToList();
+                    task.AllIncidentResources = task.AllIncidentResources.Where(o => o.ID != member.PersonID).ToList();
                 }
-                task.IncidentPersonnel.Add(member);
+                task.AllIncidentResources.Add(member);
+
+                if(member.ParentResourceID != Guid.Empty && task.AllIncidentResources.Any(o=>o.ID == member.ParentResourceID))
+                {
+                    IncidentResource parent = task.AllIncidentResources.First(o => o.ID == member.ParentResourceID);
+                    if (parent.GetType().Name.Equals("OperationalSubGroup"))
+                    {
+                        OperationalSubGroup opsub = parent as OperationalSubGroup;
+                        if(opsub.ResourceListing.Any(o=>o.ResourceID == member.ID))
+                        {
+                            opsub.ResourceListing.First(o => o.ResourceID == member.ID).ResourceName = member.Name;
+                            opsub.ResourceListing.First(o => o.ResourceID == member.ID).Type = member.Type;
+                            opsub.ResourceListing.First(o => o.ResourceID == member.ID).Kind = member.Kind;
+                            Globals.incidentService.UpsertOperationalSubGroup(opsub);
+                        }
+                    }
+                }
+
             }
         }
 

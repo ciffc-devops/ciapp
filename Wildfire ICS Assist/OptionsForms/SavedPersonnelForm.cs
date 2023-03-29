@@ -37,7 +37,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void OpenForEdit(Personnel member)
         {
-            using (EditSavedTeamMemberForm editForm = new EditSavedTeamMemberForm())
+            using (EditSavedPersonnelForm editForm = new EditSavedPersonnelForm())
             {
                 editForm.selectedMember = member.Clone();
                 DialogResult dr = editForm.ShowDialog();

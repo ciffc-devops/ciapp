@@ -104,6 +104,7 @@ namespace Wildfire_ICS_Assist
                 selectedMessage = ((SafetyMessage)cboSaved.SelectedItem).Clone();
                 selectedMessage.SitePlanLocation = txtSavedSitePlanLocation.Text;
                 selectedMessage.SitePlanRequired = chkSavedSitePlanRequired.Checked;
+                selectedMessage.CopyNextOpText = "Copy to selected op";
                 selectedMessage.OpPeriod = Program.CurrentOpPeriod;
                 selectedMessage.TaskID = Program.CurrentIncident.TaskID;
                 this.DialogResult = DialogResult.OK;

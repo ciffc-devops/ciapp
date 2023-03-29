@@ -99,7 +99,18 @@ namespace WF_ICS_ClassLibrary.Models
                     return true;
 
 
-
+                case "UniqueResourceNumbers":
+                    Title = "Unique resource numbering";
+                    bt.Append("This system will attempt to assign a unique identifier to each resource that is checked in.  For personnel, crew members, visitors, and equipment operators this will be a “P Number”, for vehicles a “V Number”, for equipment an “E Number” and lastly for crews a “C Number”."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    bt.Append("If all devices doing check-ins are connected to one another via local area network, the system should run fine with no extra steps required."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    bt.Append("If you have computers connected via internet, or who are offsite and working remotely, you’ll need to allocate blocks of numbers to those machines for them to use.  In that case, follow this procedure:"); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    bt.Append("1. Select the block of numbers to be used by the remote machine for personnel, vehicles, equipment, and crews.  For example, give them 700-900."); bt.Append(Environment.NewLine); 
+                    bt.Append("2. On the primary system, set the upper and lower values to avoid that range.  In the example above, set it to 1-699."); bt.Append(Environment.NewLine); 
+                    bt.Append("3. On the remote system, set the upper and lower values to the numbers selected. In that example, set the lower bound to 700 and the upper top 900."); bt.Append(Environment.NewLine); 
+                    bt.Append("4. When a system runs out of available numbers for a category, you will be alerted."); bt.Append(Environment.NewLine);
+                    bt.Append("5. It is possible that your primary system will use all available numbers between 1 and the start of the block you’ve given to the remote system.  When that happens, just set the lower bound to 1 higher than the block given and the upper bound to 10,000.  In the example, above, set the lower to 901 and the upper to 10,000.");
+                    Body = bt.ToString();
+                    return true;
 
 
 

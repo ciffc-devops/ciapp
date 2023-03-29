@@ -44,6 +44,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtPhone.Text = subGroup.Phone;
                 txtName.Text = subGroup.ResourceName;
                 txtTransport.Text = subGroup.Transport;
+                rbCrew.Checked = !subGroup.IsEquipmentCrew;
+                rbHECrew.Checked = subGroup.IsEquipmentCrew;
                 if (!string.IsNullOrEmpty(subGroup.Type)) { cboCrewType.Text = subGroup.Type; }
                 else { cboCrewType.SelectedIndex = 0; }
                 loadResourceList();
@@ -112,7 +114,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                     listing.Type = entryForm.CurrentVehicle.Type;
 
                     listing.ResourceID = entryForm.CurrentVehicle.ID;
-                    listing.ResourceType = "Vehicle/Equipment";
+                    if (entryForm.CurrentVehicle.IsEquipment) { listing.ResourceType = "Equipment"; }
+                    else { listing.ResourceType = "Vehicle"; }
                     listing.ResourceName = entryForm.CurrentVehicle.ResourceName;
                     //subGroup.ResourceListing.Add(listing);
                     subGroup.UpsertResourceListing(listing);
@@ -123,7 +126,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void OpenPersonForEdit(Personnel person)
         {
-            using (EditSavedTeamMemberForm entryForm = new EditSavedTeamMemberForm())
+            using (EditSavedPersonnelForm entryForm = new EditSavedPersonnelForm())
             {
                 entryForm.selectedMember = person;
                 DialogResult dr = entryForm.ShowDialog();
@@ -168,7 +171,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                     listing.Type = entryForm.vehicle.Type;
 
                     listing.ResourceID = entryForm.vehicle.ID;
-                    listing.ResourceType = "Vehicle/Equipment";
+                    if (entryForm.vehicle.IsEquipment) { listing.ResourceType = "Equipment"; }
+                    else { listing.ResourceType = "Vehicle"; }
                     listing.ResourceName = entryForm.vehicle.ResourceName;
                     subGroup.UpsertResourceListing(listing);
 
@@ -245,7 +249,15 @@ namespace Wildfire_ICS_Assist.CustomControls
                     OpenPersonForEdit(p);
                 }
             }
-            else if (listing.ResourceType.Equals("Vehicle/Equipment"))
+            else if (listing.ResourceType.Equals("Vehicle"))
+            {
+                if (resources.Any(o => o.ID == listing.ResourceID))
+                {
+                    Vehicle p = resources.First(o => o.ID == listing.ResourceID) as Vehicle;
+                    OpenVehicleForEdit(p);
+                }
+            }
+            else if (listing.ResourceType.Equals("Equipment"))
             {
                 if (resources.Any(o => o.ID == listing.ResourceID))
                 {
@@ -276,6 +288,21 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void cboCrewType_SelectedIndexChanged(object sender, EventArgs e)
         {
             subGroup.Type = cboCrewType.Text;
+        }
+
+        private void rbCrew_CheckedChanged(object sender, EventArgs e)
+        {
+            btnAddVehicle.Enabled = !rbCrew.Checked;
+            subGroup.IsEquipmentCrew = !rbCrew.Checked;
+        }
+
+        private void rbHECrew_CheckedChanged(object sender, EventArgs e)
+        {
+            if(!rbHECrew.Checked && subGroup.ActiveResourceListing.Any(o => o.ResourceType.Equals("Equipment") || o.ResourceType.Equals("Vehicle")))
+            {
+                rbHECrew.Checked = true;
+                lblOnlyHECrews.Visible = true;
+            }
         }
     }
 }

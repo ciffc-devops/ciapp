@@ -68,7 +68,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(828, 982);
+            this.splitContainer1.Size = new System.Drawing.Size(828, 1085);
             this.splitContainer1.SplitterDistance = 137;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -144,7 +144,7 @@
             this.btnClearAssignment.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClearAssignment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearAssignment.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_250_eraser;
-            this.btnClearAssignment.Location = new System.Drawing.Point(142, 784);
+            this.btnClearAssignment.Location = new System.Drawing.Point(142, 887);
             this.btnClearAssignment.Margin = new System.Windows.Forms.Padding(6);
             this.btnClearAssignment.Name = "btnClearAssignment";
             this.btnClearAssignment.Size = new System.Drawing.Size(217, 51);
@@ -160,7 +160,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 784);
+            this.btnCancel.Location = new System.Drawing.Point(6, 887);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
@@ -183,7 +183,7 @@
             this.panel2.Controls.Add(this.btnAssignNew);
             this.panel2.Location = new System.Drawing.Point(30, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(786, 772);
+            this.panel2.Size = new System.Drawing.Size(786, 875);
             this.panel2.TabIndex = 98;
             // 
             // editTeamMemberControl1
@@ -195,15 +195,16 @@
             this.editTeamMemberControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editTeamMemberControl1.Location = new System.Drawing.Point(8, 43);
             this.editTeamMemberControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.editTeamMemberControl1.MinimumSize = new System.Drawing.Size(442, 769);
             this.editTeamMemberControl1.Name = "editTeamMemberControl1";
-            this.editTeamMemberControl1.Size = new System.Drawing.Size(759, 661);
+            this.editTeamMemberControl1.Size = new System.Drawing.Size(759, 769);
             this.editTeamMemberControl1.TabIndex = 100;
             // 
             // chkSaveForLater
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(417, 726);
+            this.chkSaveForLater.Location = new System.Drawing.Point(417, 829);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSaveForLater.TabIndex = 12;
@@ -225,7 +226,7 @@
             this.btnAssignNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAssignNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAssignNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
-            this.btnAssignNew.Location = new System.Drawing.Point(655, 716);
+            this.btnAssignNew.Location = new System.Drawing.Point(655, 819);
             this.btnAssignNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAssignNew.Name = "btnAssignNew";
             this.btnAssignNew.Size = new System.Drawing.Size(123, 46);
@@ -241,7 +242,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(828, 982);
+            this.ClientSize = new System.Drawing.Size(828, 1085);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);

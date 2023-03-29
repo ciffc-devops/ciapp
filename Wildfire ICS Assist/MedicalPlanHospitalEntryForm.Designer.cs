@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSavedHospital = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.numSavedTravelGround = new System.Windows.Forms.NumericUpDown();
             this.numSavedTravelAir = new System.Windows.Forms.NumericUpDown();
@@ -64,7 +64,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlSavedHospital.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSavedTravelGround)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSavedTravelAir)).BeginInit();
             this.panel2.SuspendLayout();
@@ -83,7 +83,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            this.splitContainer1.Panel1.Controls.Add(this.pnlSavedHospital);
             // 
             // splitContainer1.Panel2
             // 
@@ -94,25 +94,25 @@
             this.splitContainer1.SplitterDistance = 133;
             this.splitContainer1.TabIndex = 1;
             // 
-            // panel1
+            // pnlSavedHospital
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlSavedHospital.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.numSavedTravelGround);
-            this.panel1.Controls.Add(this.numSavedTravelAir);
-            this.panel1.Controls.Add(this.btnAddSaved);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.cboSaved);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(6, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(572, 120);
-            this.panel1.TabIndex = 1;
+            this.pnlSavedHospital.BackColor = System.Drawing.Color.White;
+            this.pnlSavedHospital.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSavedHospital.Controls.Add(this.label2);
+            this.pnlSavedHospital.Controls.Add(this.numSavedTravelGround);
+            this.pnlSavedHospital.Controls.Add(this.numSavedTravelAir);
+            this.pnlSavedHospital.Controls.Add(this.btnAddSaved);
+            this.pnlSavedHospital.Controls.Add(this.label8);
+            this.pnlSavedHospital.Controls.Add(this.cboSaved);
+            this.pnlSavedHospital.Controls.Add(this.label7);
+            this.pnlSavedHospital.Controls.Add(this.label1);
+            this.pnlSavedHospital.Location = new System.Drawing.Point(6, 7);
+            this.pnlSavedHospital.Name = "pnlSavedHospital";
+            this.pnlSavedHospital.Size = new System.Drawing.Size(572, 120);
+            this.pnlSavedHospital.TabIndex = 1;
             // 
             // label2
             // 
@@ -194,6 +194,7 @@
             this.cboSaved.Size = new System.Drawing.Size(424, 32);
             this.cboSaved.TabIndex = 1;
             this.cboSaved.ValueMember = "HospitalID";
+            this.cboSaved.Leave += new System.EventHandler(this.cboSaved_Leave);
             // 
             // label7
             // 
@@ -490,8 +491,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlSavedHospital.ResumeLayout(false);
+            this.pnlSavedHospital.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSavedTravelGround)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSavedTravelAir)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -505,7 +506,7 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlSavedHospital;
         private System.Windows.Forms.Button btnAddSaved;
         private System.Windows.Forms.ComboBox cboSaved;
         private System.Windows.Forms.Label label1;

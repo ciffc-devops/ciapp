@@ -26,9 +26,12 @@ namespace Wildfire_ICS_Assist
         private List<IncidentResource> _SubResources = new List<IncidentResource>();
         public List<IncidentResource> SubResources { get => _SubResources; private set => _SubResources = value; }
         private bool editingExisting = false;
-
+        public bool AssignIfPossible { get => resourceCheckInEditControl1.AssignIfPossible; }
         public bool AutoStartNextCheckin { get => chkAutoNewCheckin.Checked; set => chkAutoNewCheckin.Checked = value; }
         public List<OperationalGroupResourceListing> resourcesToRemoveFromCrew { get => crewEditControl1.resourcesToRemoveFromCrew; }
+
+        private string CheckInMode = null;
+
 
         public CheckInForm()
         {
@@ -75,7 +78,7 @@ namespace Wildfire_ICS_Assist
                     resourceCheckInEditControl1.SetResource(selectedResource as Personnel);
                 }
             }
-            else if (rec.IsVehicle)
+            else if (rec.IsVehicle || rec.IsEquipment) 
             {
                 if (Program.CurrentIncident.allVehicles.Any(o => o.ID == rec.ResourceID && o.Active))
                 {
@@ -96,7 +99,7 @@ namespace Wildfire_ICS_Assist
                     wizardPages1.SelectedIndex = 3;
                 }
             }
-            else if (rec.IsCrew)
+            else if (rec.IsCrew || rec.IsHECrew)
             {
                 if (Program.CurrentIncident.ActiveOperationalSubGroups.Any(o => o.ID == rec.ResourceID))
                 {
@@ -122,6 +125,10 @@ namespace Wildfire_ICS_Assist
                     potentialOperators.AddRange(Program.CurrentIncident.IncidentPersonnel.Where(o => o.ID == v.OperatorID));
                 }
             }
+            Personnel p = new Personnel();
+            p.Name = "";
+            p.ID = Guid.Empty;
+            potentialOperators.Insert(0, p);
 
             cboSavedOperator.DataSource = potentialOperators;
             List<IncidentResource> operatorsForNewEquipment = new List<IncidentResource>(); operatorsForNewEquipment.AddRange(potentialOperators);
@@ -145,6 +152,9 @@ namespace Wildfire_ICS_Assist
             blankVehicle.ID = Guid.Empty;
             List<Vehicle> savedVehicles = new List<Vehicle>();
             savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("Vehicles"));
+            if (vehicleEquipmentEditControl1.CurrentVehicle.IsEquipment) { savedVehicles = savedVehicles.Where(o => o.IsEquipment).ToList(); blankVehicle.IncidentIDNo = "-Select a saved piece of equipment-"; }
+            else {  savedVehicles = savedVehicles.Where(o=>!o.IsEquipment).ToList(); blankVehicle.IncidentIDNo = "-Select a saved vehicle-"; }  
+
             savedVehicles.Insert(0, blankVehicle);
 
             cboSavedVehicles.DataSource = savedVehicles;
@@ -180,7 +190,8 @@ namespace Wildfire_ICS_Assist
         {
             if (cboSavedPersonnel.SelectedItem != null)
             {
-                _selectedResource = (Personnel)cboSavedPersonnel.SelectedItem;
+                _selectedResource = ((Personnel)cboSavedPersonnel.SelectedItem).Clone();
+                _selectedResource.UniqueIDNum = 0;
                 checkInRecord.ResourceType = "Personnel";
                 MoveToCheckInDetailsPage();
                 //txtSelectedName.Text = selectedMember.Name;
@@ -281,21 +292,30 @@ namespace Wildfire_ICS_Assist
 
         private void btnCrew_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Crew";
+            OperationalSubGroup sub = new OperationalSubGroup();
+            crewEditControl1.SetSubGroup(sub, SubResources);
             wizardPages1.SelectedIndex = 2;
         }
 
         private void btnVehicleEquipment_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Vehicle"; 
+            Vehicle v = new Vehicle();
+            vehicleEquipmentEditControl1.SetVehicle(v);
+            BuildSavedVehicleList();
             wizardPages1.SelectedIndex = 4;
         }
 
         private void btnSinglePersonnel_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Personnel";
             wizardPages1.SelectedIndex = 1;
         }
 
         private void btnVisitor_Click(object sender, EventArgs e)
         {
+            CheckInMode = "Visitor";
             wizardPages1.SelectedIndex = 3;
         }
 
@@ -336,7 +356,11 @@ namespace Wildfire_ICS_Assist
             if(cboSavedVehicles.SelectedItem != null && ((Vehicle)cboSavedVehicles.SelectedItem).ID != Guid.Empty && cboSavedOperator.SelectedItem != null)
             {
                 _selectedResource = ((Vehicle)cboSavedVehicles.SelectedItem).Clone();
-                checkInRecord.ResourceType = "Vehicle/Equipment";
+                Vehicle v = (Vehicle)_selectedResource;
+                v.UniqueIDNum = 0;
+                if (v.IsEquipment) { checkInRecord.ResourceType = "Equipment"; }
+                else { checkInRecord.ResourceType = "Vehicle"; }
+                
                 (selectedResource as Vehicle).OperatorID = (cboSavedOperator.SelectedItem as IncidentResource).ID;
                 (selectedResource as Vehicle).OperatorName = (cboSavedOperator.SelectedItem as IncidentResource).ResourceName;
                 selectedResource.LeaderName = (cboSavedOperator.SelectedItem as IncidentResource).ResourceName;
@@ -350,7 +374,10 @@ namespace Wildfire_ICS_Assist
             if (vehicleEquipmentEditControl1.IsComplete)
             {
                 _selectedResource = vehicleEquipmentEditControl1.CurrentVehicle.Clone();
-                checkInRecord.ResourceType = "Vehicle/Equipment";
+                Vehicle v = (Vehicle)_selectedResource;
+                if (v.IsEquipment) { checkInRecord.ResourceType = "Equipment"; }
+                else { checkInRecord.ResourceType = "Vehicle"; }
+
                 MoveToCheckInDetailsPage();
             }
         }
@@ -377,8 +404,8 @@ namespace Wildfire_ICS_Assist
 
                 selectedResource = crewEditControl1.subGroup.Clone();
                 checkInRecord.ResourceType = "Crew";
-                SubResources.Clear();
-                SubResources.AddRange(crewEditControl1.resources);
+              //  SubResources.Clear();
+              //  SubResources.AddRange(crewEditControl1.resources);
                 MoveToCheckInDetailsPage();
             }
         }
@@ -391,6 +418,27 @@ namespace Wildfire_ICS_Assist
         private void cboSavedOperator_Leave(object sender, EventArgs e)
         {
             if (cboSavedOperator.SelectedItem == null) { cboSavedOperator.Text = string.Empty; }
+        }
+
+        private void btnHECrew_Click(object sender, EventArgs e)
+        {
+            CheckInMode = "Heavy Equipment Crew"; 
+            OperationalSubGroup sub = new OperationalSubGroup();
+            sub.IsEquipmentCrew = true;
+            crewEditControl1.SetSubGroup(sub, SubResources);
+            wizardPages1.SelectedIndex = 2;
+            
+        }
+
+        private void btnEquipAndOperator_Click(object sender, EventArgs e)
+        {
+            CheckInMode = "Equipment";
+            Vehicle v = new Vehicle();
+            v.IsEquipment = true;
+            vehicleEquipmentEditControl1.SetVehicle(v);
+            BuildSavedVehicleList();
+            wizardPages1.SelectedIndex = 4;
+
         }
     }
 }

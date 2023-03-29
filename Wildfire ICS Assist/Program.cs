@@ -56,7 +56,6 @@ namespace Wildfire_ICS_Assist
                 Properties.Settings.Default.MachineID = _MachineID;
                 Properties.Settings.Default.Save();
             }
-            SetAvailablePandVNums();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -83,8 +82,17 @@ namespace Wildfire_ICS_Assist
         private static Guid _MachineID;
         private static CultureInfo _cultureInfo;
         private static NetworkService _networkService = null;
-        private static List<int> _availablePNums = new List<int>();
-        public static List<int> _availableVNums = new List<int>();
+
+        private static int _PNumMin = 1;
+        private static int _PNumMax = 10000;
+        private static int _VNumMin = 1;
+        private static int _VNumMax = 10000;
+        private static int _ENumMin = 1;
+        private static int _ENumMax = 10000;
+        private static int _CNumMin = 1;
+        private static int _CNumMax = 10000;
+
+
         public static IGeneralOptionsService generalOptionsService { get => _generalOptionsService; private set => _generalOptionsService = value; }
 
         public static IPDFExportService pdfExportService { get => _pdfExportService; private set => _pdfExportService = value; }
@@ -133,8 +141,6 @@ namespace Wildfire_ICS_Assist
                 CultureInfo.DefaultThreadCurrentUICulture = _cultureInfo;
             }
         }
-        public static List<int> AvailablePNums { get => _availablePNums; set => _availablePNums = value; }
-        public static List<int> AvailableVNums { get => _availableVNums; set => _availableVNums = value; }
 
 
 
@@ -145,16 +151,17 @@ namespace Wildfire_ICS_Assist
         public static Color GoodColor { get => Color.LightSkyBlue; }
         public static Color StandardControLColor { get => System.Drawing.SystemColors.Window; }
 
+        public static int PNumMin { get => _PNumMin; set => _PNumMin = value; }
+        public static int PNumMax { get => _PNumMax; set => _PNumMax = value; }
+        public static int VNumMin { get => _VNumMin; set => _VNumMin = value; }
+        public static int VNumMax { get => _VNumMax; set => _VNumMax = value; }
+        public static int ENumMin { get => _ENumMin; set => _ENumMin = value; }
+        public static int ENumMax { get => _ENumMax; set => _ENumMax = value; }
+        public static int CNumMin { get => _CNumMin; set => _CNumMin = value; }
+        public static int CNumMax { get => _CNumMax; set => _CNumMax = value; }
 
-        private static void SetAvailablePandVNums()
-        {
-            for (int x = 1; x < 80000; x++)
-            {
-                AvailablePNums.Add(x);
-                AvailableVNums.Add(x);
-            }
-        }
 
+     
 
     }
 }

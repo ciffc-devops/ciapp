@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="FileManagementService.cs" />
     <Compile Include="GeneralOptionsService.cs" />
+    <Compile Include="MAPI.cs" />
     <Compile Include="NetworkService.cs" />
     <Compile Include="PDFExportService.cs" />
     <Compile Include="PDFExtraTools.cs" />

@@ -46,6 +46,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtNotes.Text = CurrentVehicle.Notes;
                 txtKind.Text = CurrentVehicle.Kind;
                 txtType.Text = CurrentVehicle.Type;
+                if (CurrentVehicle.IsEquipment) { rbEquipment.Checked = true; }
+                else { rbVehicle.Checked = true; }
 
                 if(CurrentVehicle.OperatorID != Guid.Empty)
                 {
@@ -156,6 +158,14 @@ namespace Wildfire_ICS_Assist.CustomControls
                 CurrentVehicle.OperatorID = Guid.Empty;
                 CurrentVehicle.OperatorName = string.Empty; CurrentVehicle.LeaderName = CurrentVehicle.OperatorName;
             }
+        }
+
+        private void rbVehicle_CheckedChanged(object sender, EventArgs e)
+        {
+            txtLicenseOrID.Enabled = rbVehicle.Checked;
+            txtType.Enabled = !rbVehicle.Checked;
+            txtKind.Enabled = !rbVehicle.Checked;
+            CurrentVehicle.IsEquipment = !rbVehicle.Checked;
         }
     }
 }

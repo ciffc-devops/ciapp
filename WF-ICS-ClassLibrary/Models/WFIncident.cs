@@ -80,11 +80,11 @@ ProtoInclude(127, typeof(SubjectProfile)),
             
             taskTimeline = new Timeline();
             _AllOperationalGroups = new List<OperationalGroup>();
-            _AllOperationalSubGroups = new List<OperationalSubGroup>();
+            //_AllOperationalSubGroups = new List<OperationalSubGroup>();
             // allEquipment = new List<TaskEquipment>();
             // allLogisticalNeeds = new List<LogisticalNeed>();
             // allLogisticalNeedsLists = new List<LogisticalNeedsList>();
-            allVehicles = new List<Vehicle>();
+            //allVehicles = new List<Vehicle>();
             allTaskUpdates = new List<TaskUpdate>();
             allSafetyMessages = new List<SafetyMessage>();
             allAirOperationsSummaries = new List<AirOperationsSummary>();
@@ -123,7 +123,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(26)] private Guid _RequestID;
         //  [ProtoMember(27)] private List<WhiteboardItem> _whiteboardItems = new List<WhiteboardItem>();
         [ProtoMember(28)] private List<CheckInRecord> _signInRecords = new List<CheckInRecord>();
-        [ProtoMember(29)] private List<Personnel> _IncidentPersonnel = new List<Personnel>();
+        //[ProtoMember(29)] private List<Personnel> _IncidentPersonnel = new List<Personnel>();
         [ProtoMember(30)] private Organization _taskOrganization = new Organization();
         [ProtoMember(31)] private DateTime _DateCreatedUTC;
         [ProtoMember(32)] private DateTime _DateUpdatedUTC;
@@ -132,13 +132,13 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(35)] private bool _IsTraining;
         [ProtoMember(36)] private List<GeneralMessage> _AllGeneralMessages;
         [ProtoMember(37)] private List<OperationalGroup> _AllOperationalGroups;
-        [ProtoMember(38)] private List<OperationalSubGroup> _AllOperationalSubGroups;
+       // [ProtoMember(38)] private List<OperationalSubGroup> _AllOperationalSubGroups;
 
         // [ProtoMember(39)] private List<MattsonEvaluation> _allMattsonEvaluations = new List<MattsonEvaluation>();
         [ProtoMember(40)] private List<Contact> _allContacts = new List<Contact>();
         [ProtoMember(41)] private Timeline _taskTimeline;
         [ProtoMember(42)] private List<Note> _allNotes = new List<Note>();
-        [ProtoMember(43)] private List<Vehicle> _allVehicles = new List<Vehicle>();
+       // [ProtoMember(43)] private List<Vehicle> _allVehicles = new List<Vehicle>();
         [ProtoMember(45)] private List<TaskEquipment> _allEquipment = new List<TaskEquipment>();
         [ProtoMember(46)] private List<EquipmentIssue> _allEquipmentIssues = new List<EquipmentIssue>();
 
@@ -151,7 +151,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(50)] private string _taskEncryptionKey;
         [ProtoMember(51)] private List<TaskUpdate> _allTaskUpdates = new List<TaskUpdate>();
         [ProtoMember(52)] private List<DemobilizationRecord> _allDemobilizationRecords = new List<DemobilizationRecord>();
-
+        [ProtoMember(53)] private List<IncidentResource> _IncidentResources = new List<IncidentResource>();
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public string TaskName { get => _TaskName; set { if (!string.IsNullOrEmpty(value)) { _TaskName = value.Trim(); } else { _TaskName = null; } } }
@@ -250,7 +250,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<Briefing> allBriefings { get => _allBriefings; set => _allBriefings = value; }
         //public List<IncidentObjective> allObjectives { get => _allObjectives; set => _allObjectives = value; }
         public List<IncidentObjectivesSheet> allIncidentObjectives { get => _allIncidentObjectives; set => _allIncidentObjectives = value; }
-
+        public List<IncidentResource> AllIncidentResources { get => _IncidentResources; set => _IncidentResources = value; }
+        public List<IncidentResource> ActiveIncidentResources { get => _IncidentResources.Where(o => o.Active).ToList(); }
 
         public List<OrganizationChart> allOrgCharts { get => _allOrgCharts; set => _allOrgCharts = value; }
         public List<OrganizationChart> activeOrgCharts { get => _allOrgCharts.Where(o => o.Active).ToList(); }
@@ -265,7 +266,9 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<GeneralMessage> ActiveGeneralMessages { get { if (_AllGeneralMessages.Any()) { return _AllGeneralMessages.Where(o => o.Active).ToList(); } else { return new List<GeneralMessage>(); } } }
         public Timeline taskTimeline { get => _taskTimeline; set => _taskTimeline = value; }
         public List<Note> allNotes { get => _allNotes; set => _allNotes = value; }
-        public List<Vehicle> allVehicles { get { if (_allVehicles == null) { _allVehicles = new List<Vehicle>(); } return _allVehicles; } set => _allVehicles = value; }
+        public List<Vehicle> allVehicles { get => AllIncidentResources.OfType<Vehicle>().ToList(); } 
+        public List<Vehicle> ActiveIncidentVehicles { get { return ActiveIncidentResources.OfType<Vehicle>().ToList(); } }
+
         public List<PositionLogEntry> allPositionLogEntries { get => _allPositionLogEntries; set => _allPositionLogEntries = value; }
         public List<TaskUpdate> allTaskUpdates { get => _allTaskUpdates; set => _allTaskUpdates = value; }
         public List<AirOperationsSummary> allAirOperationsSummaries { get => _allAirOperationsSummaries; set => _allAirOperationsSummaries = value; }
@@ -273,10 +276,12 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<TeamAssignment> ActiveAssignments { get => _AllAssignments.Where(o => o.Active).ToList(); }
         public List<OperationalGroup> AllOperationalGroups { get => _AllOperationalGroups; set => _AllOperationalGroups = value; }
         public List<OperationalGroup> ActiveOperationalGroups { get => AllOperationalGroups.Where(o => o.Active).ToList(); }
-        public List<OperationalSubGroup> AllOperationalSubGroups { get => _AllOperationalSubGroups; set => _AllOperationalSubGroups = value; }
+        public List<OperationalSubGroup> AllOperationalSubGroups { get => AllIncidentResources.OfType<OperationalSubGroup>().ToList(); }
         public List<OperationalSubGroup> ActiveOperationalSubGroups { get => AllOperationalSubGroups.Where(o => o.Active).ToList(); }
         public List<DemobilizationRecord> AllDemobilizationRecords { get => _allDemobilizationRecords; set => _allDemobilizationRecords = value; }
         public List<DemobilizationRecord> ActiveDemobilizationRecords { get => _allDemobilizationRecords.Where(o=>o.Active).ToList(); } 
+   
+
 
         //for network reasons
 
@@ -329,7 +334,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
 
-        public List<Personnel> IncidentPersonnel { get { return _IncidentPersonnel; } set { _IncidentPersonnel = value; } }
+        public List<Personnel> IncidentPersonnel { get => AllIncidentResources.OfType<Personnel>().ToList(); }
         public Organization TaskOrganization { get => _taskOrganization; set => _taskOrganization = value; }
         public Guid OrganizationID { get => TaskOrganization.OrganizationID; set => TaskOrganization.OrganizationID = value; }
         public string OrganizationName { get => TaskOrganization.OrganizationName; set => TaskOrganization.OrganizationName = value; }

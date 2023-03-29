@@ -154,7 +154,7 @@
     <value>0, 0</value>
   </data>
   <data name="dgvMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1079, 99</value>
+    <value>1114, 27</value>
   </data>
   <data name="dgvMembersOnTask.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -329,10 +329,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1079, 128</value>
+    <value>1079, 0</value>
   </data>
   <data name="splitContainer4.SplitterDistance" type="System.Int32, mscorlib">
-    <value>99</value>
+    <value>27</value>
   </data>
   <data name="splitContainer4.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -431,7 +431,7 @@
     <value>0, 0</value>
   </data>
   <data name="dgvTaskEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 105</value>
+    <value>1120, 105</value>
   </data>
   <data name="dgvTaskEquipment.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -603,7 +603,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 134</value>
+    <value>1120, 134</value>
   </data>
   <data name="splitContainer5.SplitterDistance" type="System.Int32, mscorlib">
     <value>105</value>
@@ -762,10 +762,10 @@
     <value>6</value>
   </data>
   <data name="pnlOpsPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>821, 36</value>
+    <value>785, 36</value>
   </data>
   <data name="pnlOpsPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 213</value>
+    <value>296, 213</value>
   </data>
   <data name="pnlOpsPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -780,7 +780,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlOpsPeriod.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="btnCloseOpPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -792,7 +792,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCloseOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 156</value>
+    <value>44, 156</value>
   </data>
   <data name="btnCloseOpPeriod.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 48</value>
@@ -903,7 +903,7 @@
     <value>60, 124</value>
   </data>
   <data name="datOpsEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 26</value>
+    <value>225, 26</value>
   </data>
   <data name="datOpsEnd.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -933,7 +933,7 @@
     <value>60, 88</value>
   </data>
   <data name="datOpsStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 26</value>
+    <value>225, 26</value>
   </data>
   <data name="datOpsStart.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -957,16 +957,19 @@
     <value>Microsoft Sans Serif, 28pt</value>
   </data>
   <data name="numOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 20</value>
+    <value>179, 20</value>
   </data>
   <data name="numOpPeriod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 8, 9, 8</value>
   </data>
   <data name="numOpPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 50</value>
+    <value>110, 50</value>
   </data>
   <data name="numOpPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="numOpPeriod.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
   </data>
   <data name="&gt;&gt;numOpPeriod.Name" xml:space="preserve">
     <value>numOpPeriod</value>
@@ -996,7 +999,7 @@
     <value>9, 0, 9, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 66</value>
+    <value>169, 66</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1179,10 +1182,10 @@
     <value>12</value>
   </data>
   <data name="pnlTaskInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 36</value>
+    <value>217, 36</value>
   </data>
   <data name="pnlTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 237</value>
+    <value>562, 237</value>
   </data>
   <data name="pnlTaskInfo.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -1197,7 +1200,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlTaskInfo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1206,7 +1209,7 @@
     <value>16, 130</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>532, 2</value>
+    <value>534, 2</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
@@ -1395,7 +1398,7 @@
     <value>171, 88</value>
   </data>
   <data name="txtTaskNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 29</value>
+    <value>380, 29</value>
   </data>
   <data name="txtTaskNumber.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1482,7 +1485,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnICSRoleHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 144</value>
+    <value>413, 144</value>
   </data>
   <data name="btnICSRoleHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 37</value>
@@ -1515,7 +1518,7 @@
     <value>170, 147</value>
   </data>
   <data name="cboICSRole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 32</value>
+    <value>233, 32</value>
   </data>
   <data name="cboICSRole.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1575,7 +1578,7 @@
     <value>7, 8</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 32</value>
+    <value>544, 32</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1611,7 +1614,7 @@
     <value>9, 8, 9, 8</value>
   </data>
   <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 29</value>
+    <value>380, 29</value>
   </data>
   <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1734,7 +1737,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblServerStatus.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="lblVersionNumber.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1770,7 +1773,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVersionNumber.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="tcStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1785,7 +1788,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 134</value>
+    <value>1085, 0</value>
   </data>
   <data name="tpMembersOnTask.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1812,7 +1815,7 @@
     <value>4, 44</value>
   </data>
   <data name="tpEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 134</value>
+    <value>1120, 134</value>
   </data>
   <data name="tpEquipment.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1851,7 +1854,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpNetworkLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 134</value>
+    <value>1120, 134</value>
   </data>
   <data name="tpNetworkLog.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1882,7 +1885,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAfgBAwH4AQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAARABBAEQAQQBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1923,10 +1926,10 @@
     <value>148, 40</value>
   </data>
   <data name="tcStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 435</value>
+    <value>0, 578</value>
   </data>
   <data name="tcStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1093, 182</value>
+    <value>1093, 39</value>
   </data>
   <data name="tcStatus.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -1944,7 +1947,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tcStatus.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="txtNetworkLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2049,7 +2052,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="btnCancelInternetSync.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2268,7 +2271,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="lblNetworkShareMoreInfoMsg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2441,6 +2444,150 @@
   <data name="menuStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14pt</value>
   </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 29</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>355, 6</value>
+  </data>
+  <data name="savedValuesToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="savedValuesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Italic</value>
+  </data>
+  <data name="savedValuesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="savedValuesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Saved Values</value>
+  </data>
+  <data name="aircraftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="aircraftToolStripMenuItem.Text" xml:space="preserve">
+    <value>Aircraft</value>
+  </data>
+  <data name="communicationsSystemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="communicationsSystemsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Communications Systems</value>
+  </data>
+  <data name="contactsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="contactsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="hospitalsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="hospitalsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Hospitals</value>
+  </data>
+  <data name="medivacServicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="medivacServicesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Medivac Services</value>
+  </data>
+  <data name="teamMembersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="teamMembersToolStripMenuItem.Text" xml:space="preserve">
+    <value>Personnel</value>
+  </data>
+  <data name="vehiclesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="vehiclesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Support Vehicles and Equipment</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>355, 6</value>
+  </data>
+  <data name="templatesToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="templatesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Italic</value>
+  </data>
+  <data name="templatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="templatesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="incidentObjectivesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="incidentObjectivesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Incident Objectives</value>
+  </data>
+  <data name="safetyNotesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 30</value>
+  </data>
+  <data name="safetyNotesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Safety Notes</value>
+  </data>
+  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 29</value>
+  </data>
+  <data name="editToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="iAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 29</value>
+  </data>
+  <data name="iAPToolStripMenuItem.Text" xml:space="preserve">
+    <value>IAP</value>
+  </data>
+  <data name="operationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 29</value>
+  </data>
+  <data name="operationsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="logisticsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 29</value>
+  </data>
+  <data name="logisticsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Logistics</value>
+  </data>
+  <data name="planningToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 29</value>
+  </data>
+  <data name="planningToolStripMenuItem.Text" xml:space="preserve">
+    <value>Planning</value>
+  </data>
+  <data name="adminFinanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 29</value>
+  </data>
+  <data name="adminFinanceToolStripMenuItem.Text" xml:space="preserve">
+    <value>Admin / Finance</value>
+  </data>
+  <data name="networkInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 29</value>
+  </data>
+  <data name="networkInternetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Network / Internet</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 29</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -2463,13 +2610,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 29</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
+    <value>9</value>
   </data>
   <data name="newIncidentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>298, 30</value>
@@ -2518,114 +2659,6 @@
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
-  </data>
-  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 29</value>
-  </data>
-  <data name="editToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 6</value>
-  </data>
-  <data name="savedValuesToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="savedValuesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Italic</value>
-  </data>
-  <data name="savedValuesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="savedValuesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Saved Values</value>
-  </data>
-  <data name="aircraftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="aircraftToolStripMenuItem.Text" xml:space="preserve">
-    <value>Aircraft</value>
-  </data>
-  <data name="communicationsSystemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="communicationsSystemsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Communications Systems</value>
-  </data>
-  <data name="contactsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="contactsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Contacts</value>
-  </data>
-  <data name="equipmentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="equipmentToolStripMenuItem.Text" xml:space="preserve">
-    <value>Equipment</value>
-  </data>
-  <data name="hospitalsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="hospitalsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hospitals</value>
-  </data>
-  <data name="medivacServicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="medivacServicesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Medivac Services</value>
-  </data>
-  <data name="teamMembersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="teamMembersToolStripMenuItem.Text" xml:space="preserve">
-    <value>Personnel</value>
-  </data>
-  <data name="vehiclesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="vehiclesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Support Vehicles</value>
-  </data>
-  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 6</value>
-  </data>
-  <data name="templatesToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="templatesToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Italic</value>
-  </data>
-  <data name="templatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="templatesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Templates</value>
-  </data>
-  <data name="incidentObjectivesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="incidentObjectivesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Incident Objectives</value>
-  </data>
-  <data name="safetyNotesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="safetyNotesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Safety Notes</value>
-  </data>
-  <data name="iAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 29</value>
-  </data>
-  <data name="iAPToolStripMenuItem.Text" xml:space="preserve">
-    <value>IAP</value>
   </data>
   <data name="incidentActionPlanToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2741,12 +2774,6 @@
   <data name="printThisIncidentToDateToolStripMenuItem.Text" xml:space="preserve">
     <value>Print this Incident to date</value>
   </data>
-  <data name="operationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 29</value>
-  </data>
-  <data name="operationsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Operations</value>
-  </data>
   <data name="positionLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 30</value>
   </data>
@@ -2762,32 +2789,11 @@
   <data name="teamAssignmentsICS204ToolStripMenuItem1.Text" xml:space="preserve">
     <value>Assignment List (ICS-204)</value>
   </data>
-  <data name="logisticsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 29</value>
-  </data>
-  <data name="logisticsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Logistics</value>
-  </data>
   <data name="positionLogToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>318, 30</value>
   </data>
   <data name="positionLogToolStripMenuItem1.Text" xml:space="preserve">
     <value>Activity Log</value>
-  </data>
-  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 6</value>
-  </data>
-  <data name="checkInsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="checkInsToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Italic</value>
-  </data>
-  <data name="checkInsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 30</value>
-  </data>
-  <data name="checkInsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check-Ins</value>
   </data>
   <data name="memberStatusToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>318, 30</value>
@@ -2795,26 +2801,11 @@
   <data name="memberStatusToolStripMenuItem.Text" xml:space="preserve">
     <value>Resources</value>
   </data>
-  <data name="checkInMemberToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 30</value>
-  </data>
-  <data name="checkInMemberToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check-In Resource</value>
-  </data>
-  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 6</value>
-  </data>
   <data name="additionalContactsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>318, 30</value>
   </data>
   <data name="additionalContactsToolStripMenuItem.Text" xml:space="preserve">
     <value>Communications List (205A)</value>
-  </data>
-  <data name="planningToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 29</value>
-  </data>
-  <data name="planningToolStripMenuItem.Text" xml:space="preserve">
-    <value>Planning</value>
   </data>
   <data name="positionLogToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 30</value>
@@ -2831,23 +2822,11 @@
   <data name="notesToolStripMenuItem.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="adminFinanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 29</value>
-  </data>
-  <data name="adminFinanceToolStripMenuItem.Text" xml:space="preserve">
-    <value>Admin / Finance</value>
-  </data>
   <data name="positionLogToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 30</value>
   </data>
   <data name="positionLogToolStripMenuItem3.Text" xml:space="preserve">
     <value>Activity Log</value>
-  </data>
-  <data name="networkInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 29</value>
-  </data>
-  <data name="networkInternetToolStripMenuItem.Text" xml:space="preserve">
-    <value>Network / Internet</value>
   </data>
   <data name="localNetworkSharingSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>329, 30</value>
@@ -2885,35 +2864,14 @@
   <data name="networkTestToolStripMenuItem.Text" xml:space="preserve">
     <value>Network Test</value>
   </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 29</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
-  <data name="checkForTemplateUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 30</value>
-  </data>
-  <data name="checkForTemplateUpdatesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check for Template Updates</value>
-  </data>
-  <data name="checkForAppUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 30</value>
-  </data>
-  <data name="checkForAppUpdatesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check for app updates</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 6</value>
-  </data>
   <data name="supportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 30</value>
+    <value>191, 30</value>
   </data>
   <data name="supportToolStripMenuItem.Text" xml:space="preserve">
     <value>Support</value>
   </data>
   <data name="aboutCIAPPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 30</value>
+    <value>191, 30</value>
   </data>
   <data name="aboutCIAPPToolStripMenuItem.Text" xml:space="preserve">
     <value>About CIAPP</value>
@@ -2949,7 +2907,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;llProgramURL.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2958,7 +2916,7 @@
     <value>12, 36</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 102</value>
+    <value>199, 102</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -2976,7 +2934,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="svdTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1738, 17</value>
@@ -3004,6 +2962,57 @@
   </metadata>
   <data name="cpLogistics.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;btnAdditionalContacts.Name" xml:space="preserve">
+    <value>btnAdditionalContacts</value>
+  </data>
+  <data name="&gt;&gt;btnAdditionalContacts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnAdditionalContacts.Parent" xml:space="preserve">
+    <value>cpLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnAdditionalContacts.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsMemberStatus.Name" xml:space="preserve">
+    <value>btnLogisticsMemberStatus</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsMemberStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsMemberStatus.Parent" xml:space="preserve">
+    <value>cpLogistics</value>
+  </data>
+  <data name="&gt;&gt;btnLogisticsMemberStatus.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cpLogistics.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="cpLogistics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>596, 386</value>
+  </data>
+  <data name="cpLogistics.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
+  <data name="cpLogistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 40</value>
+  </data>
+  <data name="cpLogistics.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="&gt;&gt;cpLogistics.Name" xml:space="preserve">
+    <value>cpLogistics</value>
+  </data>
+  <data name="&gt;&gt;cpLogistics.Type" xml:space="preserve">
+    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=0.0.4.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cpLogistics.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cpLogistics.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="btnAdditionalContacts.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -3093,33 +3102,6 @@
   </data>
   <data name="&gt;&gt;btnLogisticsMemberStatus.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="cpLogistics.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="cpLogistics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 334</value>
-  </data>
-  <data name="cpLogistics.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="cpLogistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 40</value>
-  </data>
-  <data name="cpLogistics.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <data name="&gt;&gt;cpLogistics.Name" xml:space="preserve">
-    <value>cpLogistics</value>
-  </data>
-  <data name="&gt;&gt;cpLogistics.Type" xml:space="preserve">
-    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=0.0.4.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cpLogistics.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cpLogistics.ZOrder" xml:space="preserve">
-    <value>12</value>
   </data>
   <data name="&gt;&gt;btnAssignmentList.Name" xml:space="preserve">
     <value>btnAssignmentList</value>
@@ -3227,7 +3209,7 @@
     <value>6, 6, 6, 6</value>
   </data>
   <data name="cpIncidentActionPlan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>722, 331</value>
+    <value>485, 40</value>
   </data>
   <data name="cpIncidentActionPlan.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
@@ -3242,7 +3224,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpIncidentActionPlan.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>13</value>
   </data>
   <data name="btnAssignmentList.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -3923,54 +3905,44 @@
   <data name="cpPlanning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="btnPlanningAddAssignment.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
+  <data name="&gt;&gt;btnNotes.Name" xml:space="preserve">
+    <value>btnNotes</value>
   </data>
-  <data name="btnPlanningAddAssignment.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAANdJREFUWEfF1lGKwzAQBFHf/xS5qWIJxoRSQzdEjA0PlmK8/ZMse40xXiVjJxk7
-        ydhJxk4yOvfzuc0ffn3UrSOjg+EH7xIyOhwuvEvI6HC48C4ho8PhwruEjA6HC+8SMjocLrxLyOhwuPAu
-        oaP+nv9L/p3Ywor7y0dwZ9rCinjxFO5MW1gRL57CnWkLK+LFU7gzbWHFtz+EDn7xg3cJGR0OF94lZHQ4
-        XHiXkNHhcOFdQkaHw4V3CRkdDhfeJWR0OFx4l5DRuZ93/yk9ScZOMnaSsZOMfcb1BWBPK2dnoVH/AAAA
-        AElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnPlanningAddAssignment.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnPlanningAddAssignment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnPlanningAddAssignment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 48</value>
-  </data>
-  <data name="btnPlanningAddAssignment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnPlanningAddAssignment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 64</value>
-  </data>
-  <data name="btnPlanningAddAssignment.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="btnPlanningAddAssignment.Text" xml:space="preserve">
-    <value>Create Working Group</value>
-  </data>
-  <data name="btnPlanningAddAssignment.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnPlanningAddAssignment.Name" xml:space="preserve">
-    <value>btnPlanningAddAssignment</value>
-  </data>
-  <data name="&gt;&gt;btnPlanningAddAssignment.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnNotes.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnPlanningAddAssignment.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnNotes.Parent" xml:space="preserve">
     <value>cpPlanning</value>
   </data>
-  <data name="&gt;&gt;btnPlanningAddAssignment.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnNotes.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="cpPlanning.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="cpPlanning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>596, 334</value>
+  </data>
+  <data name="cpPlanning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
+  <data name="cpPlanning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 40</value>
+  </data>
+  <data name="cpPlanning.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;cpPlanning.Name" xml:space="preserve">
+    <value>cpPlanning</value>
+  </data>
+  <data name="&gt;&gt;cpPlanning.Type" xml:space="preserve">
+    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=0.0.4.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cpPlanning.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cpPlanning.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="btnNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -3992,7 +3964,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 120</value>
+    <value>6, 53</value>
   </data>
   <data name="btnNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 4, 6, 4</value>
@@ -4019,130 +3991,22 @@
     <value>cpPlanning</value>
   </data>
   <data name="&gt;&gt;btnNotes.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btnTeamAssignments.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnTeamAssignments.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAhhJREFUWEfFlg15AjEMhicBCZOABCQgAQmTgAQkIGESJgEJkzAH7Huzppe2ORg/
-        u+V53ofr1zZp2vSOl/P5/K+k4pKk4rOR7cR72peJz6QE50HNpD8T55BtxVF84rADjb5tN+dL2JioO4OQ
-        IduILOgcjN2UuX0f1OMYgvXIDmEinMResKgIGn1xLDsS286u+o/BemTRAc4tq0swRsztFsdRg9v42IjI
-        YuYsZFV0iupDeJ+DZs5lLMJ1gq6j70gutg6ORXsV/RZnMMYLrwaXvcYYziCYOG0hzlaC4LWahWUr/Pyz
-        XYnB7eb0caxvEH6umjvxSo6ZN2foyNYiyxzd5zZX1PoHYSq8U2nXFwnPRWORsdDIPgtu2y7zBOw4I03D
-        hMnxvrR9az9KO+5QT7/tPocrysNwDE3DhMlZ/yLx7GN9vJVnxwPWIs7akaZhQhkomEQBzrXZieo4wJg/
-        WQDF1C+ANtvrWywX/DxpAV07OwIWAV5kdsay5gsou2kBjxShXTNZP+emIrznGvLswbPxN13DmOGvX0RA
-        XxjnCdTtF9dfRCZO2RGYQrv0KqY4efZtB8Yyh7lNfQyxUrFd9T0fI38D+nFC+ikfBEf2yOeYzGPwQ/Qd
-        SUWnc0JmaRYRxpSxPm8ovEgqRmSP/CWbzdxJxR4ZAeK1uwZjr+4WpOIcMq4ox5ItBo2+4apdIhWXJBWX
-        JBWXJBWX4/zyDRRkFv/ULKZkAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnTeamAssignments.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnTeamAssignments.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnTeamAssignments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 48</value>
-  </data>
-  <data name="btnTeamAssignments.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnTeamAssignments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 64</value>
-  </data>
-  <data name="btnTeamAssignments.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <data name="btnTeamAssignments.Text" xml:space="preserve">
-    <value>Team Assignments</value>
-  </data>
-  <data name="btnTeamAssignments.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnTeamAssignments.Name" xml:space="preserve">
-    <value>btnTeamAssignments</value>
-  </data>
-  <data name="&gt;&gt;btnTeamAssignments.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnTeamAssignments.Parent" xml:space="preserve">
-    <value>cpPlanning</value>
-  </data>
-  <data name="&gt;&gt;btnTeamAssignments.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cpPlanning.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="cpPlanning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 386</value>
-  </data>
-  <data name="cpPlanning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="cpPlanning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 40</value>
-  </data>
-  <data name="cpPlanning.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="&gt;&gt;cpPlanning.Name" xml:space="preserve">
-    <value>cpPlanning</value>
-  </data>
-  <data name="&gt;&gt;cpPlanning.Type" xml:space="preserve">
-    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=0.0.4.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cpPlanning.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cpPlanning.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>2</value>
   </data>
   <data name="cpOperations.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
   </data>
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAWRJREFUWEfFlIERwiAMRR3BERzBERzFERyhIziCIziKIziCG9QkEvikoS09ity9
-        O/jJD+lBOYzj+FdcsSeuWILGmXgTvKiFfedJTSuUYDPxIbBoLezPmsg2mYPGMxRhBi+nBI0HeJ9ZDBd7
-        QuOmTWQ6LvaExkkbIC5Rx6Qo7nDZQt1XyLlHDRNE2Omyhdr3EH9FDRNEyC/bw8bn4HzwymWjoZta5Bi8
-        Ippws7E1sE9rhPVF14a3xNXoJJ8wthb2QY142SDORyxxWZvg5Iy2wP5QJ142iM02UDTWwP5QRz6ERjwW
-        RGJgOmKwIVyXj2XyZ9kGrhhsyDXUH0ATbANbH54lfrfd+RtsAxqIDwjPQV+D6wVN86IuARP8ewPNKe0h
-        WinYEtgDn2p55rs24JEmxtQS3cMjTYypJbqHR5oYU0t0D480qTAtUVMrTSpMS9TUShPnF9lKTS1X7Ikr
-        9sQVe+KK/RgPX8wsRVHfKBI6AAAAAElFTkSuQmCC
-</value>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="button1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>cpOperations</value>
   </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 116</value>
-  </data>
-  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 57</value>
-  </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>Vehicles and Equipment</value>
-  </data>
-  <data name="button1.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
@@ -4154,121 +4018,13 @@
     <value>cpOperations</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btnOpsAssignments.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnOpsAssignments.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAhhJREFUWEfFlg15AjEMhicBCZOABCQgAQmTgAQkIGESJgEJkzAH7Huzppe2ORg/
-        u+V53ofr1zZp2vSOl/P5/K+k4pKk4rOR7cR72peJz6QE50HNpD8T55BtxVF84rADjb5tN+dL2JioO4OQ
-        IduILOgcjN2UuX0f1OMYgvXIDmEinMResKgIGn1xLDsS286u+o/BemTRAc4tq0swRsztFsdRg9v42IjI
-        YuYsZFV0iupDeJ+DZs5lLMJ1gq6j70gutg6ORXsV/RZnMMYLrwaXvcYYziCYOG0hzlaC4LWahWUr/Pyz
-        XYnB7eb0caxvEH6umjvxSo6ZN2foyNYiyxzd5zZX1PoHYSq8U2nXFwnPRWORsdDIPgtu2y7zBOw4I03D
-        hMnxvrR9az9KO+5QT7/tPocrysNwDE3DhMlZ/yLx7GN9vJVnxwPWIs7akaZhQhkomEQBzrXZieo4wJg/
-        WQDF1C+ANtvrWywX/DxpAV07OwIWAV5kdsay5gsou2kBjxShXTNZP+emIrznGvLswbPxN13DmOGvX0RA
-        XxjnCdTtF9dfRCZO2RGYQrv0KqY4efZtB8Yyh7lNfQyxUrFd9T0fI38D+nFC+ikfBEf2yOeYzGPwQ/Qd
-        SUWnc0JmaRYRxpSxPm8ovEgqRmSP/CWbzdxJxR4ZAeK1uwZjr+4WpOIcMq4ox5ItBo2+4apdIhWXJBWX
-        JBWXJBWX4/zyDRRkFv/ULKZkAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnOpsAssignments.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnOpsAssignments.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnOpsAssignments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 49</value>
-  </data>
-  <data name="btnOpsAssignments.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnOpsAssignments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 59</value>
-  </data>
-  <data name="btnOpsAssignments.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="btnOpsAssignments.Text" xml:space="preserve">
-    <value>Team Assignments (204)</value>
-  </data>
-  <data name="btnOpsAssignments.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnOpsAssignments.Name" xml:space="preserve">
-    <value>btnOpsAssignments</value>
-  </data>
-  <data name="&gt;&gt;btnOpsAssignments.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnOpsAssignments.Parent" xml:space="preserve">
-    <value>cpOperations</value>
-  </data>
-  <data name="&gt;&gt;btnOpsAssignments.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btnOpsMemberStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnOpsMemberStatus.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAf5JREFUWEfFlgGRAjEMRZGABCScBCQgAQlIQAISkICEk4CEk4CDJb/ND2k3bRdu
-        ZsnMu9tN0jSbpi2baZq+Sqhck1C5JqFyTULlfxDZCmfHLvIjobKFCIP/CVAQvEMPO7gL3n6J4oFQGSES
-        Ba6BnUk8VOdBoj9FXP9iSimbgAAYsFfdVWCgHteBP+JubS4+eET84IPqoi+KeKj/welqjjYXH3QQSldn
-        vheg97ouGgvjZjblbHPag6yNMPtKtX2SQG/ML3ySnz2I0jkYzj6ztVgwpkxABE3nHchtYG+R9r7Izek8
-        9zqB1nqltRI5Od0STjoOZ0NtS8CefNRxlEDrS1qwcs0EhLQVRwmkUon0OjqCZ0fv4Mrbe8EE7y7DsPxK
-        PrAWBmdT1foZ6re0aXdMoHdqAVYh3KqOtL1ERl9PtikBHYRlaB23bKqL00WkW09k1LSwv3qAiLQmWNqM
-        veY7CsVNmHyLl3wc+0EAZX/dXjlQXSm8vy6YfAwzicJWM1eUE/BqRUArWwvY1c8Sdjb0BeLGvwdEMLHd
-        Uk6PqviS4rbERCkQ/uu7v0XhbxOJ+OYtkqCDX1sbjP8Cq/EuNpFI3ROw5a2tDvX2YjONtt0IbsvonOHy
-        ho2Xz+m5/m00TvjbgAn4jiU8+T4tP+HPs+hkzDb8+Sahck1C5ZqEyvWYNk832CVO3bd70wAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
-  <data name="btnOpsMemberStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnOpsMemberStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 49</value>
-  </data>
-  <data name="btnOpsMemberStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnOpsMemberStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 59</value>
-  </data>
-  <data name="btnOpsMemberStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="btnOpsMemberStatus.Text" xml:space="preserve">
-    <value>Personnel Status</value>
-  </data>
-  <data name="btnOpsMemberStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="btnOpsMemberStatus.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnOpsMemberStatus.Name" xml:space="preserve">
-    <value>btnOpsMemberStatus</value>
-  </data>
-  <data name="&gt;&gt;btnOpsMemberStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnOpsMemberStatus.Parent" xml:space="preserve">
-    <value>cpOperations</value>
-  </data>
-  <data name="&gt;&gt;btnOpsMemberStatus.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="cpOperations.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
   <data name="cpOperations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 282</value>
+    <value>596, 282</value>
   </data>
   <data name="cpOperations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -4289,7 +4045,85 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpOperations.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
+  </data>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 6</value>
+  </data>
+  <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 46</value>
+  </data>
+  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 4, 6, 4</value>
+  </data>
+  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 57</value>
+  </data>
+  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>Assignment List (ICS-204)</value>
+  </data>
+  <data name="button1.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+    <value>cpOperations</value>
+  </data>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="button2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 46</value>
+  </data>
+  <data name="button2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 4, 6, 4</value>
+  </data>
+  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 57</value>
+  </data>
+  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>Resources</value>
+  </data>
+  <data name="button2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="button2.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>cpOperations</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -4767,12 +4601,6 @@
   <data name="&gt;&gt;contactsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;equipmentToolStripMenuItem.Name" xml:space="preserve">
-    <value>equipmentToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;equipmentToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;hospitalsToolStripMenuItem.Name" xml:space="preserve">
     <value>hospitalsToolStripMenuItem</value>
   </data>
@@ -4965,35 +4793,11 @@
   <data name="&gt;&gt;positionLogToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
-    <value>toolStripSeparator7</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkInsToolStripMenuItem.Name" xml:space="preserve">
-    <value>checkInsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;checkInsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;memberStatusToolStripMenuItem.Name" xml:space="preserve">
     <value>memberStatusToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;memberStatusToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkInMemberToolStripMenuItem.Name" xml:space="preserve">
-    <value>checkInMemberToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;checkInMemberToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
-    <value>toolStripSeparator10</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;additionalContactsToolStripMenuItem.Name" xml:space="preserve">
     <value>additionalContactsToolStripMenuItem</value>
@@ -5091,24 +4895,6 @@
   <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkForTemplateUpdatesToolStripMenuItem.Name" xml:space="preserve">
-    <value>checkForTemplateUpdatesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;checkForTemplateUpdatesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkForAppUpdatesToolStripMenuItem.Name" xml:space="preserve">
-    <value>checkForAppUpdatesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;checkForAppUpdatesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;supportToolStripMenuItem.Name" xml:space="preserve">
     <value>supportToolStripMenuItem</value>
   </data>
@@ -5162,6 +4948,12 @@
   </data>
   <data name="&gt;&gt;tmrNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
+    <value>toolStripSeparator7</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>IncidentDetailsForm</value>

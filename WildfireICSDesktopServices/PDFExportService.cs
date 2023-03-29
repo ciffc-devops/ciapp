@@ -31,50 +31,23 @@ namespace WildfireICSDesktopServices
             else { DateFormat = "MMM-dd-yyyy"; }
         }
 
-
-        public List<byte[]> exportTimelineToPDF(WFIncident task)
+        private string getBlankFormsFolder()
         {
-            List<byte[]> allPDFs = new List<byte[]>();
-            string path = createTimelinePDF(task, true, true, false, true);
-            using (FileStream stream = File.OpenRead(path))
-            {
-                byte[] fileBytes = new byte[stream.Length];
-
-                stream.Read(fileBytes, 0, fileBytes.Length);
-                stream.Close();
-                allPDFs.Add(fileBytes);
-            }
-            return allPDFs;
+            string dir = AppContext.BaseDirectory;
+            return System.IO.Path.Combine(dir, "BlankForms");
         }
 
-
-        public List<byte[]> exportNotesToPDF(WFIncident task, int CurrentOpPeriod)
+        private string getPDFFilePath(string fileToUse)
         {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-            foreach (Note note in task.allNotes.Where(o => o.Active && o.OpPeriod == CurrentOpPeriod))
+            if (fileToUse.Contains("BlankForms/"))
             {
-                string path = createNotePDF(task, note, false, true);
-                using (FileStream stream = File.OpenRead(path))
-                {
-                    byte[] fileBytes = new byte[stream.Length];
-
-                    stream.Read(fileBytes, 0, fileBytes.Length);
-                    stream.Close();
-                    allPDFs.Add(fileBytes);
-                }
+                fileToUse = fileToUse.Replace("BlankForms/", "");
             }
-
-            return allPDFs;
+            string dir = getBlankFormsFolder();
+            return System.IO.Path.Combine(dir, fileToUse);
         }
 
-
-
-
-
-       
-       
-
+        #region General Message
         public List<byte[]> exportGeneralMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
@@ -224,14 +197,9 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
+        #endregion
 
-
-
-
-
-
-
-
+        #region Safety Messages
 
         public List<byte[]> exportSafetyMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
@@ -396,7 +364,10 @@ namespace WildfireICSDesktopServices
             }
             return path;
         }
+        #endregion
 
+
+        #region Medical Plan
         public List<byte[]> exportMedicalPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
@@ -576,8 +547,10 @@ namespace WildfireICSDesktopServices
 
             return path;
         }
+        #endregion
 
 
+        #region Comms Plan
         public List<byte[]> exportCommsPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
@@ -692,8 +665,10 @@ namespace WildfireICSDesktopServices
             }
             return path;
         }
+        #endregion
 
 
+        #region Objectives
         public List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool IncludeAttachments, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
@@ -826,10 +801,10 @@ namespace WildfireICSDesktopServices
             }
             else { return null; }
         }
+        #endregion
 
 
-
-
+        #region Organization Assignments / Chart
         public List<byte[]> exportOrgAssignmentListToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
@@ -851,21 +826,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        private string getBlankFormsFolder()
-        {
-            string dir = AppContext.BaseDirectory;
-            return System.IO.Path.Combine(dir, "BlankForms");
-        }
-
-        private string getPDFFilePath(string fileToUse)
-        {
-            if (fileToUse.Contains("BlankForms/"))
-            {
-                fileToUse = fileToUse.Replace("BlankForms/", "");
-            }
-            string dir = getBlankFormsFolder();
-            return System.IO.Path.Combine(dir, fileToUse);
-        }
+  
 
         public PDFCreationResults createOrgAssignmentListPDF(WFIncident task, int OpsPeriod,  bool tempFileName = false, bool flattenPDF = false)
         {
@@ -1679,7 +1640,9 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
+        #endregion
 
+        #region Contacts
 
         public List<byte[]> exportContactsToPDF(WFIncident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
         {
@@ -1760,9 +1723,9 @@ namespace WildfireICSDesktopServices
             }
             return path;
         }
+        #endregion
 
-
-
+        #region Vehicles
         public List<byte[]> exportVehiclesToPDF(WFIncident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName,  bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
@@ -1860,310 +1823,9 @@ namespace WildfireICSDesktopServices
 
             return stamper;
         }
+        #endregion
 
-
-        public List<byte[]> exportBriefingToBytes(int OpPeriodToExport, WFIncident task)
-        {
-            List<byte[]> allPDFs = new List<byte[]>();
-            if (task.allBriefings.Any(o => o.OpPeriod == OpPeriodToExport))
-            {
-                Briefing selectedBriefing = task.allBriefings.First(o => o.OpPeriod == OpPeriodToExport);
-                string briefingPath = exportBriefingToPDF(selectedBriefing, task, true);
-                using (FileStream stream = File.OpenRead(briefingPath))
-                {
-                    byte[] fileBytes = new byte[stream.Length];
-
-                    stream.Read(fileBytes, 0, fileBytes.Length);
-                    stream.Close();
-                    allPDFs.Add(fileBytes);
-                }
-            }
-            return allPDFs;
-        }
-
-
-        public string createBriefingPDF(WFIncident task, Briefing briefing, bool automaticallyOpen = true, bool tempFileName = false)
-        {
-            string path = null;
-            if (task != null && briefing != null)
-            {
-                Guid ExecutionSectionID = new Guid("5f6a9484-9f56-4baa-a1b6-43dacd1fe6b8");
-                path = FileAccessClasses.getWritablePath(task);
-                if (!tempFileName)
-                {
-
-
-
-
-                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string outputFileName = "Briefing Op Period " + briefing.OpPeriod;
-                    path = FileAccessClasses.getUniqueFileName(outputFileName, path);
-                    //path = System.IO.Path.Combine(path, outputFileName);
-
-                }
-                else
-                {
-                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
-
-                }
-                try
-                {
-
-                    using (System.IO.FileStream fs = new FileStream(path, FileMode.Create))
-                    {
-
-
-                        // Create an instance of the document class which represents the PDF document itself.
-                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
-
-                        // Create an instance to the PDF file by creating an instance of the PDF 
-                        // Writer class using the document and the filestrem in the constructor.
-
-                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
-
-                        OrganizationChart chart = new OrganizationChart();
-                        if (task.allOrgCharts.Where(o => o.OpPeriod == briefing.OpPeriod).Any())
-                        {
-                            chart = task.allOrgCharts.Where(o => o.OpPeriod == briefing.OpPeriod).First();
-                        }
-
-                        document.AddAuthor(chart.getNameByRoleName("SAR Manager"));
-
-                        TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
-                        writer.PageEvent = PageEventHandler;
-                        // Define the page header
-                        PageEventHandler.Title = "";
-                        //PageEventHandler.Title = "Task Number " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName + " Op Period " + selectedBriefing.OpPeriod.ToString();
-                        PageEventHandler.HeaderFont = FontFactory.GetFont(BaseFont.COURIER_BOLD, 10, iTextSharp.text.Font.BOLD);
-
-
-                        document.AddTitle("Task Number " + task.TaskNumber + " - " + task.TaskName + " Op Period " + briefing.OpPeriod.ToString());
-
-                        // Open the document to enable you to write to the document
-
-                        document.Open();
-                        BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
-                        iTextSharp.text.Font titlefont = new iTextSharp.text.Font(bfTimes, 22, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font sectionfont = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font subsectionfont = new iTextSharp.text.Font(bfTimes, 16, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font normalfont = new iTextSharp.text.Font(bfTimes, 14, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font notefont = new iTextSharp.text.Font(bfTimes, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK);
-
-                        // Add a simple and wellknown phrase to the document in a flow layout manner
-                        //Chapter chapter1 = new Chapter(new Paragraph("Briefing"), 1);
-                        Anchor briefingTarget = new Anchor("Task Number " + task.TaskNumber + " - " + task.TaskName + " Op Period " + briefing.OpPeriod.ToString(), titlefont);
-                        briefingTarget.Name = "Briefing";
-                        Paragraph tp = new Paragraph();
-                        tp.Add(briefingTarget);
-                        tp.Font = titlefont;
-
-                        document.Add(tp);
-
-                        foreach (BriefingSection section in briefing.AllSections)
-                        {
-                            List<BriefingItem> subSections = section.allItems.Where(o => !string.IsNullOrEmpty(o.itemValue)).GroupBy(o => o.subSectionName).Select(grp => grp.First()).ToList();
-
-                            document.Add(new Paragraph(section.sectionName, sectionfont));
-                            foreach (BriefingItem ss in subSections)
-                            {
-                                if (section.allItems.Where(o => o.subSectionName == ss.subSectionName).Count() > 1)
-                                {
-                                    document.Add(new Paragraph(ss.subSectionName, subsectionfont));
-                                }
-
-                                foreach (BriefingItem bi in section.allItems.Where(o => o.subSectionName == ss.subSectionName))
-                                {
-                                    if (!string.IsNullOrEmpty(bi.itemValue))
-                                    {
-                                        Paragraph p1 = new Paragraph(bi.itemName + " -- " + bi.itemValue, normalfont);
-                                        p1.IndentationLeft = 10;
-                                        document.Add(p1);
-
-                                        //if this is a map URL, lets make a QR
-                                        /*
-                                        if (bi.BriefingFieldID == new Guid("8536d309-d946-44ad-9a86-1fe77336c17c"))
-                                        {
-                                            Paragraph p2 = new Paragraph("Scan the QR code below to load the map", notefont);
-                                            p2.IndentationLeft = 40;
-                                            document.Add(p2);
-
-                                            Bitmap mapQR = briefing.MapQRCode(bi.itemValue.Trim(), 100);
-                                            iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(mapQR, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-
-
-                                            pic.Border = iTextSharp.text.Rectangle.BOX;
-                                            pic.BorderColor = iTextSharp.text.BaseColor.BLACK;
-                                            pic.BorderWidth = 1f;
-                                            pic.IndentationLeft = 40;
-
-                                            document.Add(pic);
-                                        }*/
-                                    }
-                                }
-                            }
-
-                        }
-
-                        /*
-                        Anchor click = new Anchor("Click to go to Target");
-                        click.Reference = "#Briefing";
-                        Paragraph pe = new Paragraph();
-                        pe.Add(click);
-                        document.Add(pe);*/
-                        // Close the document
-                        document.Close();
-                        // Close the writer instance
-                        writer.Close();
-
-                        // Always close open filehandles explicity
-
-                    }
-
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-            return path;
-        }
-
-        public string exportBriefingToPDF(Briefing briefing, WFIncident task, bool includeExecution, bool includeMapQRImage = false)
-        {
-            Guid ExecutionSectionID = new Guid("5f6a9484-9f56-4baa-a1b6-43dacd1fe6b8");
-            Guid MissionSectionID = new Guid("440c3692-da5a-49d3-a01c-073d33a4ef1f");
-            string path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
-            using (System.IO.FileStream fs = new FileStream(path, FileMode.Create))
-            {
-                // Create an instance of the document class which represents the PDF document itself.
-                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
-                // Create an instance to the PDF file by creating an instance of the PDF 
-                // Writer class using the document and the filestrem in the constructor.
-
-
-
-                PdfWriter writer = PdfWriter.GetInstance(document, fs);
-
-                document.AddAuthor(task.PlansChief(briefing.OpPeriod));
-
-                TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
-                writer.PageEvent = PageEventHandler;
-                // Define the page header
-                PageEventHandler.Title = "";
-                //PageEventHandler.Title = "Task Number " + task.TaskNumber + " - " + task.TaskName + " Op Period " + selectedBriefing.OpPeriod.ToString();
-                PageEventHandler.HeaderFont = FontFactory.GetFont(BaseFont.COURIER_BOLD, 10, iTextSharp.text.Font.BOLD);
-
-
-                document.AddTitle(task.TaskNumber + " - " + task.TaskName + " Op Period " + briefing.OpPeriod.ToString());
-
-                // Open the document to enable you to write to the document
-
-                document.Open();
-                BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
-                iTextSharp.text.Font titlefont = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                iTextSharp.text.Font sectionfont = new iTextSharp.text.Font(bfTimes, 18, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                iTextSharp.text.Font subsectionfont = new iTextSharp.text.Font(bfTimes, 14, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                iTextSharp.text.Font normalfont = new iTextSharp.text.Font(bfTimes, 12, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
-                iTextSharp.text.Font italicFont = new iTextSharp.text.Font(bfTimes, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.DARK_GRAY);
-                iTextSharp.text.Font notefont = new iTextSharp.text.Font(bfTimes, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK);
-
-                // Add a simple and wellknown phrase to the document in a flow layout manner
-                document.Add(new Paragraph(task.TaskNumber + " | " + task.TaskName + " | Op #" + briefing.OpPeriod.ToString(), titlefont));
-
-                GeneralOptionsService service = new GeneralOptionsService();
-                GeneralOptions options = service.GetGeneralOptions();
-
-                foreach (BriefingSection section in briefing.AllSections)
-                {
-                    if (!includeExecution && section.sectionID == ExecutionSectionID)
-                    {
-                        document.Add(new Paragraph(section.sectionName, sectionfont));
-                        if (options.LeaveSpaceIn204SMEAC)
-                        {
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                        }
-                        else
-                        {
-                            document.Add(new Paragraph(" TBD", italicFont));
-                        }
-                    }
-                    else if (!includeExecution && section.sectionID == MissionSectionID)
-                    {
-                        document.Add(new Paragraph(section.sectionName, sectionfont));
-                        if (options.LeaveSpaceIn204SMEAC)
-                        {
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                            document.Add(new Paragraph(" "));
-                        }
-                        else
-                        {
-                            document.Add(new Paragraph(" TBD", italicFont));
-                        }
-                    }
-                    else
-                    {
-                        List<BriefingItem> subSections = section.allItems.Where(o => !string.IsNullOrEmpty(o.itemValue)).GroupBy(o => o.subSectionName).Select(grp => grp.First()).ToList();
-                        document.Add(new Paragraph(section.sectionName, sectionfont));
-                        foreach (BriefingItem ss in subSections)
-                        {
-                            if (section.allItems.Where(o => o.subSectionName == ss.subSectionName).Count() > 1)
-                            {
-                                document.Add(new Paragraph(ss.subSectionName, subsectionfont));
-                            }
-
-                            foreach (BriefingItem bi in section.allItems.Where(o => o.subSectionName == ss.subSectionName))
-                            {
-                                if (!string.IsNullOrEmpty(bi.itemValue))
-                                {
-                                    Paragraph p1 = new Paragraph(bi.itemName + " -- " + bi.itemValue, normalfont);
-                                    p1.IndentationLeft = 10;
-                                    document.Add(p1);
-
-
-                                }
-                            }
-                        }
-                    }
-
-                }
-                // Close the document
-
-                document.Close();
-                // Close the writer instance
-
-                writer.Close();
-                // Always close open filehandles explicity
-
-            }
-            return path;
-        }
-
+        #region Sign In Sheets (SAR)
         public string exportSinglePageSignInSheetAsPDF(WFIncident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod)
         {
             string path = System.IO.Path.GetTempFileName();
@@ -2308,10 +1970,7 @@ namespace WildfireICSDesktopServices
                         MemberStatus status = statuses[x];
                         Personnel member = new Personnel();
                         if (status.MemberID != Guid.Empty && task.IncidentPersonnel.Where(o => o.PersonID == status.MemberID).Any()) { member = task.IncidentPersonnel.Where(o => o.PersonID == status.MemberID).First(); }
-                        else if (status.MemberID != Guid.Empty && task.getTaskTeamMembers(options.AllTeamMembers, false, false, OpsPeriod).Where(o => o.PersonID == status.MemberID).Any())
-                        {
-                            member = task.getTaskTeamMembers(options.AllTeamMembers, false, false, OpsPeriod).Where(o => o.PersonID == status.MemberID).First();
-                        }
+                      
                         stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
 
 
@@ -2380,136 +2039,6 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-
-
-        public string createTimelinePDF(WFIncident task, bool IncludeSAR, bool IncludeSubject, bool automaticallyOpen = true, bool tempFileName = false)
-        {
-            string path = null;
-            if (task != null && task.taskTimeline != null)
-            {
-                path = FileAccessClasses.getWritablePath(task);
-                if (!tempFileName)
-                {
-
-
-
-                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string outputFileName = "Task " + task.TaskNumber + " Timeline"; ;
-                    path = FileAccessClasses.getUniqueFileName(outputFileName, path);
-                    //path = System.IO.Path.Combine(path, outputFileName);
-
-                }
-                else
-                {
-                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
-
-                }
-                try
-                {
-
-                    using (System.IO.FileStream fs = new FileStream(path, FileMode.Create))
-                    {
-
-
-                        // Create an instance of the document class which represents the PDF document itself.
-                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
-
-                        // Create an instance to the PDF file by creating an instance of the PDF 
-                        // Writer class using the document and the filestrem in the constructor.
-
-                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
-
-
-
-                        TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
-                        writer.PageEvent = PageEventHandler;
-                        // Define the page header
-                        PageEventHandler.Title = "";
-                        //PageEventHandler.Title = "Task Number " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName + " Op Period " + selectedBriefing.OpPeriod.ToString();
-                        PageEventHandler.HeaderFont = FontFactory.GetFont(BaseFont.COURIER_BOLD, 10, iTextSharp.text.Font.BOLD);
-
-
-                        document.AddTitle("Task Number " + task.TaskNumber + " - " + task.TaskName + " Timeline");
-
-                        // Open the document to enable you to write to the document
-
-                        document.Open();
-                        BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
-                        iTextSharp.text.Font titlefont = new iTextSharp.text.Font(bfTimes, 22, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font sectionfont = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font subsectionfont = new iTextSharp.text.Font(bfTimes, 18, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font normalfont = new iTextSharp.text.Font(bfTimes, 14, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
-
-                        // Add a simple and wellknown phrase to the document in a flow layout manner
-                        //Chapter chapter1 = new Chapter(new Paragraph("Briefing"), 1);
-                        string title = "Timeline for Task Number " + task.TaskNumber;
-                        if (IncludeSAR && !IncludeSubject)
-                        {
-                            title = "Timeline for Task Number " + task.TaskNumber + " SAR Events Only";
-                        }
-                        else if (IncludeSubject && !IncludeSAR)
-                        {
-                            title = "Timeline for Task Number " + task.TaskNumber + " Subject Events Only";
-                        }
-
-
-                        Anchor briefingTarget = new Anchor(title, titlefont);
-                        briefingTarget.Name = "Timeline";
-                        Paragraph tp = new Paragraph();
-                        tp.Add(briefingTarget);
-                        tp.Font = titlefont;
-
-
-                        document.Add(tp);
-
-                        List<TimelineEvent> eventsIncluded = task.taskTimeline.AllTimelineEvents.Where(o => (IncludeSAR && o.SAREvent) || (IncludeSubject && o.SubjectEvent)).ToList();
-                        DateTime earliestDate = eventsIncluded.Min(o => o.EventDateTime);
-                        DateTime latestDate = eventsIncluded.Max(o => o.EventDateTime);
-                        TimeSpan timespan = latestDate - earliestDate;
-                        double totalDays = timespan.TotalDays;
-                        totalDays = Math.Ceiling(totalDays);
-                        for (int x = 0; x <= totalDays; x++)
-                        {
-                            DateTime date = earliestDate.AddDays(x);
-
-                            if (eventsIncluded.Any(o => o.EventDateTime.Year == date.Year && o.EventDateTime.Month == date.Month && o.EventDateTime.Day == date.Day))
-                            {
-                                document.Add(new Paragraph(date.ToString(DateFormat, Globals.cultureInfo), subsectionfont));
-
-                                foreach (TimelineEvent ev in eventsIncluded.Where(o => o.EventDateTime.Year == date.Year && o.EventDateTime.Month == date.Month && o.EventDateTime.Day == date.Day))
-                                {
-                                    Paragraph p1 = new Paragraph(ev.EventDateTime.ToString("HH:mm", Globals.cultureInfo) + " -- " + ev.EventName + " - " + ev.EventText, normalfont);
-                                    p1.IndentationLeft = 10;
-                                    document.Add(p1);
-                                }
-                            }
-                            else if (x < totalDays)
-                            {
-                                document.Add(new Paragraph(date.ToString(DateFormat, Globals.cultureInfo), subsectionfont));
-                                Paragraph p1 = new Paragraph("No events for this day", normalfont);
-                                p1.IndentationLeft = 10;
-                                document.Add(p1);
-                            }
-                        }
-
-
-
-                        // Close the document
-                        document.Close();
-                        // Close the writer instance
-                        writer.Close();
-
-                        // Always close open filehandles explicity
-
-                    }
-
-                }
-                catch (Exception)
-                {
-                }
-            }
-            return path;
-        }
 
         public List<byte[]> createSinglePageBlankSignInSheetAsBytes(WFIncident task, GroupSignInPrintRequest group, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
         {
@@ -2772,6 +2301,155 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
+        #endregion
+
+        #region Timeline
+
+        public List<byte[]> exportTimelineToPDF(WFIncident task)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+            string path = createTimelinePDF(task, true, true, false, true);
+            using (FileStream stream = File.OpenRead(path))
+            {
+                byte[] fileBytes = new byte[stream.Length];
+
+                stream.Read(fileBytes, 0, fileBytes.Length);
+                stream.Close();
+                allPDFs.Add(fileBytes);
+            }
+            return allPDFs;
+        }
+        public string createTimelinePDF(WFIncident task, bool IncludeSAR, bool IncludeSubject, bool automaticallyOpen = true, bool tempFileName = false)
+        {
+            string path = null;
+            if (task != null && task.taskTimeline != null)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+                if (!tempFileName)
+                {
+
+
+
+                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+                    string outputFileName = "Task " + task.TaskNumber + " Timeline"; ;
+                    path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+                    //path = System.IO.Path.Combine(path, outputFileName);
+
+                }
+                else
+                {
+                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+                }
+                try
+                {
+
+                    using (System.IO.FileStream fs = new FileStream(path, FileMode.Create))
+                    {
+
+
+                        // Create an instance of the document class which represents the PDF document itself.
+                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+
+                        // Create an instance to the PDF file by creating an instance of the PDF 
+                        // Writer class using the document and the filestrem in the constructor.
+
+                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
+
+
+
+                        TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
+                        writer.PageEvent = PageEventHandler;
+                        // Define the page header
+                        PageEventHandler.Title = "";
+                        //PageEventHandler.Title = "Task Number " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName + " Op Period " + selectedBriefing.OpPeriod.ToString();
+                        PageEventHandler.HeaderFont = FontFactory.GetFont(BaseFont.COURIER_BOLD, 10, iTextSharp.text.Font.BOLD);
+
+
+                        document.AddTitle("Task Number " + task.TaskNumber + " - " + task.TaskName + " Timeline");
+
+                        // Open the document to enable you to write to the document
+
+                        document.Open();
+                        BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
+                        iTextSharp.text.Font titlefont = new iTextSharp.text.Font(bfTimes, 22, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                        iTextSharp.text.Font sectionfont = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                        iTextSharp.text.Font subsectionfont = new iTextSharp.text.Font(bfTimes, 18, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                        iTextSharp.text.Font normalfont = new iTextSharp.text.Font(bfTimes, 14, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
+
+                        // Add a simple and wellknown phrase to the document in a flow layout manner
+                        //Chapter chapter1 = new Chapter(new Paragraph("Briefing"), 1);
+                        string title = "Timeline for Task Number " + task.TaskNumber;
+                        if (IncludeSAR && !IncludeSubject)
+                        {
+                            title = "Timeline for Task Number " + task.TaskNumber + " SAR Events Only";
+                        }
+                        else if (IncludeSubject && !IncludeSAR)
+                        {
+                            title = "Timeline for Task Number " + task.TaskNumber + " Subject Events Only";
+                        }
+
+
+                        Anchor briefingTarget = new Anchor(title, titlefont);
+                        briefingTarget.Name = "Timeline";
+                        Paragraph tp = new Paragraph();
+                        tp.Add(briefingTarget);
+                        tp.Font = titlefont;
+
+
+                        document.Add(tp);
+
+                        List<TimelineEvent> eventsIncluded = task.taskTimeline.AllTimelineEvents.Where(o => (IncludeSAR && o.SAREvent) || (IncludeSubject && o.SubjectEvent)).ToList();
+                        DateTime earliestDate = eventsIncluded.Min(o => o.EventDateTime);
+                        DateTime latestDate = eventsIncluded.Max(o => o.EventDateTime);
+                        TimeSpan timespan = latestDate - earliestDate;
+                        double totalDays = timespan.TotalDays;
+                        totalDays = Math.Ceiling(totalDays);
+                        for (int x = 0; x <= totalDays; x++)
+                        {
+                            DateTime date = earliestDate.AddDays(x);
+
+                            if (eventsIncluded.Any(o => o.EventDateTime.Year == date.Year && o.EventDateTime.Month == date.Month && o.EventDateTime.Day == date.Day))
+                            {
+                                document.Add(new Paragraph(date.ToString(DateFormat, Globals.cultureInfo), subsectionfont));
+
+                                foreach (TimelineEvent ev in eventsIncluded.Where(o => o.EventDateTime.Year == date.Year && o.EventDateTime.Month == date.Month && o.EventDateTime.Day == date.Day))
+                                {
+                                    Paragraph p1 = new Paragraph(ev.EventDateTime.ToString("HH:mm", Globals.cultureInfo) + " -- " + ev.EventName + " - " + ev.EventText, normalfont);
+                                    p1.IndentationLeft = 10;
+                                    document.Add(p1);
+                                }
+                            }
+                            else if (x < totalDays)
+                            {
+                                document.Add(new Paragraph(date.ToString(DateFormat, Globals.cultureInfo), subsectionfont));
+                                Paragraph p1 = new Paragraph("No events for this day", normalfont);
+                                p1.IndentationLeft = 10;
+                                document.Add(p1);
+                            }
+                        }
+
+
+
+                        // Close the document
+                        document.Close();
+                        // Close the writer instance
+                        writer.Close();
+
+                        // Always close open filehandles explicity
+
+                    }
+
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return path;
+        }
+        #endregion
+
+        #region Title Page
 
         public List<byte[]> createFreeformOpPeriodContentsList(WFIncident task, List<string> items, int OpPeriod)
         {
@@ -3027,18 +2705,9 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
+        #endregion
 
-
-
-
-
-
-
-
-
-
-
-
+        #region Radio Log (SAR)
         private int getRadioLogPageCount(WFIncident task, int OpPeriodToExport)
         {
             List<CommsLogEntry> entries = task.allCommsLogEntries.Where(o => o.OpPeriod == OpPeriodToExport).OrderBy(o => o.LogDate).ToList();
@@ -3221,6 +2890,31 @@ namespace WildfireICSDesktopServices
 
             return allPDFs;
         }
+        #endregion
+
+        #region Note
+
+        public List<byte[]> exportNotesToPDF(WFIncident task, int CurrentOpPeriod)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            foreach (Note note in task.allNotes.Where(o => o.Active && o.OpPeriod == CurrentOpPeriod))
+            {
+                string path = createNotePDF(task, note, false, true);
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
 
         public string createNotePDF(WFIncident task, Note note, bool automaticallyOpen = true, bool tempFileName = false)
         {
@@ -3315,11 +3009,9 @@ namespace WildfireICSDesktopServices
             }
             return path;
         }
+        #endregion
 
-
-
-
-
+        #region Air Ops Summary
 
         public string CreateAirOpsSummaryPDF(WFIncident task, int OpPeriod, bool useTempPath, bool flattenPDF)
         {
@@ -3583,8 +3275,386 @@ namespace WildfireICSDesktopServices
 
             return allPDFs;
         }
+        #endregion
 
 
+        #region Logistics Summary
+
+        public string createLogisticsSummaryPDF(WFIncident task, int OpPeriod, ICSRole ParentRole, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + task.IncidentIdentifier + " OP " + OpPeriod.ToString() + " " + ParentRole.RoleName + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+
+
+            List<byte[]> allPDFs = exportLogisticsSummaryToPDF(task, OpPeriod, ParentRole, flattenPDF);
+
+            //path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(path, fullFile);
+
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+
+            return path;
+        }
+
+        public List<byte[]> exportLogisticsSummaryToPDF(WFIncident incident, int OpPeriodToExport, ICSRole ParentRole, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodToExport);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
+            List<CheckInRecordWithResource> allCheckInRecords = new List<CheckInRecordWithResource>();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport, ParentRole); }
+            else { allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport); }
+
+            List<KindTypeWithCounts> typesWithCount = getTypesWithCounts(allCheckInRecords, currentPeriod.PeriodEnd);
+
+            int totalPages = 1;
+            int rowsOnPage1 = 3;
+            int rowsOnPage2Plus = 38;
+
+            if (typesWithCount.Count > rowsOnPage1)
+            {
+
+                totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(typesWithCount.Count - rowsOnPage1) / Convert.ToDecimal(rowsOnPage2Plus)));
+                if ((typesWithCount.Count - rowsOnPage1) % rowsOnPage2Plus > 0) { totalPages += 1; }
+
+
+
+                if (totalPages == 0) { totalPages = 1; }
+            }
+
+            List<string> pdfFileNames = new List<string>();
+            allPDFs.AddRange(createLogisticsSummaryPage1PDF(incident, OpPeriodToExport, ParentRole, allCheckInRecords, 1, totalPages, flattenPDF));
+            for(int x = 1; x<totalPages; x++)
+            {
+                List<KindTypeWithCounts> pageCounts = typesWithCount.Skip(rowsOnPage1).Skip(rowsOnPage2Plus * (x-1)).Take(rowsOnPage2Plus).ToList();
+                allPDFs.AddRange(createLogisticsSummarySubsequentPDF(incident, OpPeriodToExport, ParentRole, pageCounts, (x+1), totalPages, flattenPDF));
+
+            }
+
+            /*
+            List<PositionLogEntry> extraPageEntries = entries.Skip(19).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(31 * (x - 1)).Take(37).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            */
+
+
+            return allPDFs;
+        }
+
+
+        private class KindTypeWithCounts
+        {
+            public string KindName { get; set; }
+            public string TypeName { get; set; }
+            public int[] Counts { get; set; } = new int[2];
+            public KindTypeWithCounts() { }
+            public KindTypeWithCounts(string knd, string ty) { KindName = knd; TypeName = ty; }
+        }
+
+        private List<KindTypeWithCounts> getTypesWithCounts(List<CheckInRecordWithResource> list, DateTime opEndDate)
+        {
+            List<KindTypeWithCounts> counts = new List<KindTypeWithCounts>();
+
+            foreach (CheckInRecordWithResource item in list)
+            {
+                if (!counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)))
+                {
+                    if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")))
+                    {
+
+                        counts.Add(new KindTypeWithCounts("No Kind Given", "No Type Given"));
+
+                    }
+                    else if (string.IsNullOrEmpty(item.Resource.Kind) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals(item.Resource.Type)))
+                    {
+                        counts.Add(new KindTypeWithCounts("No Kind Given", item.Resource.Type));
+
+                    }
+                    else if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals("No Type Given")))
+                    {
+                        counts.Add(new KindTypeWithCounts(item.Resource.Kind, "No Type Given"));
+                    }
+                    else
+                    {
+                        counts.Add(new KindTypeWithCounts(item.Resource.Kind, item.Resource.Type));
+                    }
+
+
+                }
+
+                KindTypeWithCounts thisone = null;
+                if (!string.IsNullOrEmpty(item.Resource.Kind) && !string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)); }
+                else if (string.IsNullOrEmpty(item.Resource.Kind) && string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")); }
+                else if (string.IsNullOrEmpty(item.Resource.Kind)) { thisone = counts.First(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals(item.Resource.Type)); }
+                else if (string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals("No Type Given")); }
+
+                if (thisone != null)
+                {
+                    thisone.Counts[0]++;
+                    if (item.CheckOutDate.Date <= opEndDate.Date || item.LastDayOnIncident.Date <= opEndDate.Date)
+                    {
+                        thisone.Counts[1]++;
+                    }
+                }
+            }
+
+            counts = counts.OrderBy(o => o.KindName).ThenBy(o => o.TypeName).ToList();
+            return counts;
+        }
+    
+        private List<byte[]> createLogisticsSummaryPage1PDF(WFIncident incident, int OpPeriod, ICSRole ParentRole, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { outputFileName += " " + ParentRole.RoleName; }
+            outputFileName += ".pdf";
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = "BlankForms/Logistics Overview.pdf";
+            fileToUse = getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+
+
+                    stamper.AcroFields.SetField("INCIDENT NAME OR NUMBERRow1", incident.IncidentNameOrNumber);
+                    if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { stamper.AcroFields.SetField("BRANCH  DIVISION  OVERHEAD", ParentRole.RoleName); }
+                    else { stamper.AcroFields.SetField("BRANCH  DIVISION  OVERHEAD", "Full Incident"); }
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+
+                    int[] accomodations = allCheckInRecords.GetAccomodationPreferences();
+
+                    stamper.AcroFields.SetField("Not Incident CampRow1", accomodations[0].ToString());
+                    stamper.AcroFields.SetField("MaleOnlyRow1", accomodations[1].ToString());
+                    stamper.AcroFields.SetField("FemaleOnlyRow1", accomodations[2].ToString());
+                    stamper.AcroFields.SetField("Not GenderRestrictedRow1", accomodations[3].ToString());
+
+
+                    int[,] food = allCheckInRecords.GetMealRequirements();
+
+                    stamper.AcroFields.SetField("BreakfastUnrestricted", food[0, 0].ToString());
+                    stamper.AcroFields.SetField("BreakfastDietary Restrictions", food[0,1].ToString());
+                    stamper.AcroFields.SetField("LunchUnrestricted", food[1,0].ToString());
+                    stamper.AcroFields.SetField("LunchDietary Restrictions", food[1,1].ToString());
+                    stamper.AcroFields.SetField("DinnerUnrestricted", food[2,0].ToString());
+                    stamper.AcroFields.SetField("DinnerDietary Restrictions", food[2,1].ToString());
+
+                    int[] vehicleTypes = allCheckInRecords.GetVehicleTypes();
+                    stamper.AcroFields.SetField("AgencyOwnedRow1", vehicleTypes[0].ToString());
+                    stamper.AcroFields.SetField("RentalRow1", vehicleTypes[1].ToString());
+                    stamper.AcroFields.SetField("ContractorRow1", vehicleTypes[2].ToString());
+                    stamper.AcroFields.SetField("PrivateRow1", vehicleTypes[3].ToString());
+
+                    //need resources by type
+                    List<KindTypeWithCounts> typesWithCount = getTypesWithCounts(allCheckInRecords, currentPeriod.PeriodEnd);
+                 
+
+                    for (int x = 0; x< typesWithCount.Count && x < 28; x++)
+                    {
+                        stamper.AcroFields.SetField("KindRow" + (x + 1).ToString(), typesWithCount[x].KindName);
+                        stamper.AcroFields.SetField("TypeRow" + (x + 1).ToString(), typesWithCount[x].TypeName);
+                        stamper.AcroFields.SetField("Total this Op PeriodRow" + (x + 1).ToString(), typesWithCount[x].Counts[0].ToString());
+                        stamper.AcroFields.SetField("Departing End of Op PeriodRow" + (x + 1).ToString(), typesWithCount[x].Counts[1].ToString());
+                    }
+
+
+
+
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("OF", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    Guid randomID = Guid.NewGuid();
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+
+
+        private List<byte[]> createLogisticsSummarySubsequentPDF(WFIncident incident, int OpPeriod, ICSRole ParentRole, List<KindTypeWithCounts> counts, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { outputFileName += " " + ParentRole.RoleName; }
+            outputFileName += ".pdf";
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = "BlankForms/Logistics Overview Subsequent Page.pdf";
+            fileToUse = getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+
+
+                    stamper.AcroFields.SetField("INCIDENT NAME OR NUMBERRow1", incident.IncidentNameOrNumber);
+                    if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { stamper.AcroFields.SetField("SCOPE", ParentRole.RoleName); }
+                    else { stamper.AcroFields.SetField("SCOPE", "Full Incident"); }
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+
+
+
+                    for (int x = 0; x < counts.Count && x < 28; x++)
+                    {
+                        stamper.AcroFields.SetField("KindRow" + (x + 1).ToString(), counts[x].KindName);
+                        stamper.AcroFields.SetField("TypeRow" + (x + 1).ToString(), counts[x].TypeName);
+                        stamper.AcroFields.SetField("Total this Op PeriodRow" + (x + 1).ToString(), counts[x].Counts[0].ToString());
+                        stamper.AcroFields.SetField("Departing End of Op PeriodRow" + (x + 1).ToString(), counts[x].Counts[1].ToString());
+                    }
+
+
+
+
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("OF", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    Guid randomID = Guid.NewGuid();
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+
+
+
+        #endregion
+
+        #region Assignment Summaries and Details
         public List<byte[]> exportAllAssignmentSummariesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
@@ -3935,6 +4005,23 @@ namespace WildfireICSDesktopServices
             }
             return path;
         }
+        #endregion
 
+
+        public string createBriefingPDF(WFIncident task, Briefing briefing, bool automaticallyOpen = true, bool tempFileName = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<byte[]> exportBriefingToBytes(int OpPeriodToExport, WFIncident task)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string exportBriefingToPDF(Briefing briefing, WFIncident task, bool includeExecution, bool includeMapQRImage = false)
+        {
+            throw new NotImplementedException();
+        }
+     
     }
 }

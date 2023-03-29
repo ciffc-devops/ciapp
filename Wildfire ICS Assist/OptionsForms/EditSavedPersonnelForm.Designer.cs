@@ -1,6 +1,6 @@
 ﻿namespace Wildfire_ICS_Assist.OptionsForms
 {
-    partial class EditSavedTeamMemberForm
+    partial class EditSavedPersonnelForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.editTeamMemberControl1 = new Wildfire_ICS_Assist.CustomControls.PersonnelEditControl();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.editTeamMemberControl1 = new Wildfire_ICS_Assist.CustomControls.PersonnelEditControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -57,9 +57,24 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(512, 770);
-            this.splitContainer1.SplitterDistance = 705;
+            this.splitContainer1.Size = new System.Drawing.Size(512, 838);
+            this.splitContainer1.SplitterDistance = 773;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // editTeamMemberControl1
+            // 
+            this.editTeamMemberControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editTeamMemberControl1.BackColor = System.Drawing.Color.Transparent;
+            this.editTeamMemberControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editTeamMemberControl1.Location = new System.Drawing.Point(0, 0);
+            this.editTeamMemberControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.editTeamMemberControl1.MinimumSize = new System.Drawing.Size(512, 702);
+            this.editTeamMemberControl1.Name = "editTeamMemberControl1";
+            this.editTeamMemberControl1.Size = new System.Drawing.Size(512, 770);
+            this.editTeamMemberControl1.TabIndex = 0;
+            this.editTeamMemberControl1.Load += new System.EventHandler(this.editTeamMemberControl1_Load);
             // 
             // btnSave
             // 
@@ -91,33 +106,18 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // editTeamMemberControl1
-            // 
-            this.editTeamMemberControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.editTeamMemberControl1.BackColor = System.Drawing.Color.Transparent;
-            this.editTeamMemberControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editTeamMemberControl1.Location = new System.Drawing.Point(0, 0);
-            this.editTeamMemberControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.editTeamMemberControl1.MinimumSize = new System.Drawing.Size(512, 702);
-            this.editTeamMemberControl1.Name = "editTeamMemberControl1";
-            this.editTeamMemberControl1.Size = new System.Drawing.Size(512, 702);
-            this.editTeamMemberControl1.TabIndex = 0;
-            this.editTeamMemberControl1.Load += new System.EventHandler(this.editTeamMemberControl1_Load);
-            // 
-            // EditSavedTeamMemberForm
+            // EditSavedPersonnelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 770);
+            this.ClientSize = new System.Drawing.Size(512, 838);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(528, 809);
-            this.Name = "EditSavedTeamMemberForm";
+            this.MinimumSize = new System.Drawing.Size(528, 877);
+            this.Name = "EditSavedPersonnelForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add / Edit Member";
             this.Load += new System.EventHandler(this.EditSavedTeamMemberForm_Load);

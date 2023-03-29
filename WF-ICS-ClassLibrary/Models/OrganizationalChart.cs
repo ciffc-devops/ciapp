@@ -942,7 +942,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         private static List<ICSRole> AddChildRoles(OrganizationChart sourceChart, List<ICSRole> baseList, ICSRole parentRole)
         {
-            List<ICSRole> children = sourceChart.ActiveRoles.Where(o => o.ReportsTo == parentRole.RoleID).ToList();
+            List<ICSRole> children = sourceChart.AllRoles.Where(o => o.ReportsTo == parentRole.RoleID).ToList();
             children = children.OrderBy(o => o.ManualSortOrder).ThenBy(o => o.RoleName).ToList();
             foreach(ICSRole child in children)
             {

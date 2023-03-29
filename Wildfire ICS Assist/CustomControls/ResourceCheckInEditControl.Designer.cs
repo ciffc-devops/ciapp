@@ -41,13 +41,16 @@
             this.lblDaysSinceLastDayOfRest = new System.Windows.Forms.Label();
             this.datLastDayOfRest = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.cboICSRole = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.chkAutoAssign = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblLastDayCount
             // 
             this.lblLastDayCount.AutoSize = true;
             this.lblLastDayCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastDayCount.Location = new System.Drawing.Point(406, 123);
+            this.lblLastDayCount.Location = new System.Drawing.Point(406, 154);
             this.lblLastDayCount.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLastDayCount.Name = "lblLastDayCount";
             this.lblLastDayCount.Size = new System.Drawing.Size(306, 20);
@@ -58,14 +61,15 @@
             // lblScrollHint
             // 
             this.lblScrollHint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblScrollHint.BackColor = System.Drawing.Color.Maroon;
             this.lblScrollHint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScrollHint.ForeColor = System.Drawing.Color.Maroon;
-            this.lblScrollHint.Location = new System.Drawing.Point(581, 47);
+            this.lblScrollHint.ForeColor = System.Drawing.Color.White;
+            this.lblScrollHint.Location = new System.Drawing.Point(578, 94);
             this.lblScrollHint.Name = "lblScrollHint";
-            this.lblScrollHint.Size = new System.Drawing.Size(132, 70);
+            this.lblScrollHint.Size = new System.Drawing.Size(132, 54);
             this.lblScrollHint.TabIndex = 128;
-            this.lblScrollHint.Text = "*be sure to scroll the box below";
-            this.lblScrollHint.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.lblScrollHint.Text = "Be sure to scroll the box below";
+            this.lblScrollHint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlCheckInFields
             // 
@@ -75,15 +79,15 @@
             this.pnlCheckInFields.AutoScroll = true;
             this.pnlCheckInFields.BackColor = System.Drawing.Color.White;
             this.pnlCheckInFields.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCheckInFields.Location = new System.Drawing.Point(7, 156);
+            this.pnlCheckInFields.Location = new System.Drawing.Point(7, 184);
             this.pnlCheckInFields.Name = "pnlCheckInFields";
-            this.pnlCheckInFields.Size = new System.Drawing.Size(709, 314);
+            this.pnlCheckInFields.Size = new System.Drawing.Size(706, 286);
             this.pnlCheckInFields.TabIndex = 4;
             // 
             // txtResourceType
             // 
             this.txtResourceType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtResourceType.Location = new System.Drawing.Point(446, 6);
+            this.txtResourceType.Location = new System.Drawing.Point(443, 6);
             this.txtResourceType.Margin = new System.Windows.Forms.Padding(6);
             this.txtResourceType.Name = "txtResourceType";
             this.txtResourceType.ReadOnly = true;
@@ -99,7 +103,7 @@
             this.txtSelectedName.Margin = new System.Windows.Forms.Padding(6);
             this.txtSelectedName.Name = "txtSelectedName";
             this.txtSelectedName.ReadOnly = true;
-            this.txtSelectedName.Size = new System.Drawing.Size(232, 29);
+            this.txtSelectedName.Size = new System.Drawing.Size(229, 29);
             this.txtSelectedName.TabIndex = 120;
             this.txtSelectedName.TabStop = false;
             // 
@@ -117,7 +121,7 @@
             // 
             this.datCheckInTime.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datCheckInTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datCheckInTime.Location = new System.Drawing.Point(202, 86);
+            this.datCheckInTime.Location = new System.Drawing.Point(202, 117);
             this.datCheckInTime.Name = "datCheckInTime";
             this.datCheckInTime.Size = new System.Drawing.Size(195, 29);
             this.datCheckInTime.TabIndex = 2;
@@ -127,7 +131,7 @@
             // 
             this.datLDW.CustomFormat = "yyyy-MMM-dd";
             this.datLDW.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datLDW.Location = new System.Drawing.Point(202, 121);
+            this.datLDW.Location = new System.Drawing.Point(202, 152);
             this.datLDW.Name = "datLDW";
             this.datLDW.Size = new System.Drawing.Size(195, 29);
             this.datLDW.TabIndex = 3;
@@ -135,7 +139,7 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(6, 88);
+            this.label4.Location = new System.Drawing.Point(6, 119);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(187, 29);
@@ -145,7 +149,7 @@
             // 
             // lblLastDayWorking
             // 
-            this.lblLastDayWorking.Location = new System.Drawing.Point(8, 121);
+            this.lblLastDayWorking.Location = new System.Drawing.Point(8, 152);
             this.lblLastDayWorking.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLastDayWorking.Name = "lblLastDayWorking";
             this.lblLastDayWorking.Size = new System.Drawing.Size(187, 29);
@@ -157,7 +161,7 @@
             // 
             this.lblDaysSinceLastDayOfRest.AutoSize = true;
             this.lblDaysSinceLastDayOfRest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDaysSinceLastDayOfRest.Location = new System.Drawing.Point(406, 86);
+            this.lblDaysSinceLastDayOfRest.Location = new System.Drawing.Point(406, 117);
             this.lblDaysSinceLastDayOfRest.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblDaysSinceLastDayOfRest.Name = "lblDaysSinceLastDayOfRest";
             this.lblDaysSinceLastDayOfRest.Size = new System.Drawing.Size(55, 20);
@@ -169,7 +173,7 @@
             // 
             this.datLastDayOfRest.CustomFormat = "yyyy-MMM-dd";
             this.datLastDayOfRest.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datLastDayOfRest.Location = new System.Drawing.Point(202, 51);
+            this.datLastDayOfRest.Location = new System.Drawing.Point(202, 82);
             this.datLastDayOfRest.Name = "datLastDayOfRest";
             this.datLastDayOfRest.Size = new System.Drawing.Size(195, 29);
             this.datLastDayOfRest.TabIndex = 1;
@@ -177,7 +181,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(8, 51);
+            this.label2.Location = new System.Drawing.Point(8, 82);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(187, 29);
@@ -185,10 +189,51 @@
             this.label2.Text = "Last Day of Rest*";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // cboICSRole
+            // 
+            this.cboICSRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboICSRole.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboICSRole.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboICSRole.DisplayMember = "RoleName";
+            this.cboICSRole.FormattingEnabled = true;
+            this.cboICSRole.Location = new System.Drawing.Point(202, 44);
+            this.cboICSRole.Name = "cboICSRole";
+            this.cboICSRole.Size = new System.Drawing.Size(351, 32);
+            this.cboICSRole.TabIndex = 133;
+            this.cboICSRole.ValueMember = "RoleID";
+            this.cboICSRole.SelectedIndexChanged += new System.EventHandler(this.cboICSRole_SelectedIndexChanged);
+            this.cboICSRole.Leave += new System.EventHandler(this.cboICSRole_Leave);
+            // 
+            // label17
+            // 
+            this.label17.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label17.Location = new System.Drawing.Point(12, 48);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(179, 24);
+            this.label17.TabIndex = 134;
+            this.label17.Text = "Initial Incident Role";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkAutoAssign
+            // 
+            this.chkAutoAssign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkAutoAssign.AutoSize = true;
+            this.chkAutoAssign.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAutoAssign.Location = new System.Drawing.Point(559, 48);
+            this.chkAutoAssign.Name = "chkAutoAssign";
+            this.chkAutoAssign.Size = new System.Drawing.Size(150, 24);
+            this.chkAutoAssign.TabIndex = 135;
+            this.chkAutoAssign.Text = "Assign if possible";
+            this.chkAutoAssign.UseVisualStyleBackColor = true;
+            // 
             // ResourceCheckInEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkAutoAssign);
+            this.Controls.Add(this.cboICSRole);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.lblDaysSinceLastDayOfRest);
             this.Controls.Add(this.datLastDayOfRest);
             this.Controls.Add(this.label2);
@@ -204,8 +249,9 @@
             this.Controls.Add(this.lblLastDayWorking);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(716, 473);
             this.Name = "ResourceCheckInEditControl";
-            this.Size = new System.Drawing.Size(719, 473);
+            this.Size = new System.Drawing.Size(716, 473);
             this.Load += new System.EventHandler(this.ResourceCheckInEditControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -227,5 +273,8 @@
         private System.Windows.Forms.Label lblDaysSinceLastDayOfRest;
         private System.Windows.Forms.DateTimePicker datLastDayOfRest;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cboICSRole;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.CheckBox chkAutoAssign;
     }
 }

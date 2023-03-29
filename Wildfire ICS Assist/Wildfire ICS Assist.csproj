@@ -373,28 +373,22 @@
     <Compile Include="CheckInEnterPersonForm.Designer.cs">
       <DependentUpon>CheckInEnterPersonForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonnelListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PersonnelListForm.Designer.cs">
-      <DependentUpon>PersonnelListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="CheckInForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CheckInForm.Designer.cs">
       <DependentUpon>CheckInForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonnelViewCheckinForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PersonnelViewCheckinForm.Designer.cs">
-      <DependentUpon>PersonnelViewCheckinForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ResourcesEditUniqueNumberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourcesEditUniqueNumberForm.Designer.cs">
+      <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
       <SubType>Form</SubType>
@@ -468,11 +462,11 @@
     <Compile Include="OptionsForms\EditSavedSafetyNoteForm.Designer.cs">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OptionsForms\EditSavedTeamMemberForm.cs">
+    <Compile Include="OptionsForms\EditSavedPersonnelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OptionsForms\EditSavedTeamMemberForm.Designer.cs">
-      <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
+    <Compile Include="OptionsForms\EditSavedPersonnelForm.Designer.cs">
+      <DependentUpon>EditSavedPersonnelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\EditSavedVehicleForm.cs">
       <SubType>Form</SubType>
@@ -644,12 +638,6 @@
     <Compile Include="VehicleEditForm.Designer.cs">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="VehiclesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VehiclesForm.Designer.cs">
-      <DependentUpon>VehiclesForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AircraftEditForm.resx">
       <DependentUpon>AircraftEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -788,15 +776,12 @@
     <EmbeddedResource Include="CheckInEnterPersonForm.resx">
       <DependentUpon>CheckInEnterPersonForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonnelListForm.resx">
-      <DependentUpon>PersonnelListForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CheckInForm.resx">
       <DependentUpon>CheckInForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonnelViewCheckinForm.resx">
-      <DependentUpon>PersonnelViewCheckinForm.cs</DependentUpon>
+    <EmbeddedResource Include="ResourcesEditUniqueNumberForm.resx">
+      <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\NetworkSelectIPForm.resx">
       <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
@@ -834,8 +819,8 @@
     <EmbeddedResource Include="OptionsForms\EditSavedSafetyNoteForm.resx">
       <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForms\EditSavedTeamMemberForm.resx">
-      <DependentUpon>EditSavedTeamMemberForm.cs</DependentUpon>
+    <EmbeddedResource Include="OptionsForms\EditSavedPersonnelForm.resx">
+      <DependentUpon>EditSavedPersonnelForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditSavedVehicleForm.resx">
@@ -927,9 +912,6 @@
     <EmbeddedResource Include="VehicleEditForm.resx">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VehiclesForm.resx">
-      <DependentUpon>VehiclesForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -981,10 +963,19 @@
     <None Include="BlankForms\ICS-220-WF Air Operations Summary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\ICS-221-WF Demobilization Checkout.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS205A-CommunicationsList.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS205WF-Communications-Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Logistics Overview Subsequent Page.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Logistics Overview.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -1025,6 +1016,10 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-11-envelope.png" />
+    <None Include="Resources\EquipOp.png" />
+    <None Include="Resources\HECrew.png" />
+    <None Include="Resources\glyphicons-basic-59-truck.png" />
     <None Include="Resources\P-icon.ico" />
     <None Include="Resources\glyphicons-basic-739-check-black.png" />
     <None Include="Resources\glyphicons-basic-5-settings%403x.png" />
