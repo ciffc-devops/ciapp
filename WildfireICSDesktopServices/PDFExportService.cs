@@ -3328,7 +3328,7 @@ namespace WildfireICSDesktopServices
             List<KindTypeWithCounts> typesWithCount = getTypesWithCounts(allCheckInRecords, currentPeriod.PeriodEnd);
 
             int totalPages = 1;
-            int rowsOnPage1 = 3;
+            int rowsOnPage1 = 28;
             int rowsOnPage2Plus = 38;
 
             if (typesWithCount.Count > rowsOnPage1)

@@ -140,9 +140,9 @@ namespace Wildfire_ICS_Assist.CustomControls
                 List<ICSRole> roles = GetICSRolesForDropdown();
                 cboICSRole.DataSource = roles;
 
-                if (!string.IsNullOrEmpty(checkInRecord.InitialRoleAcronym) && roles.Any(o => o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)))
+                if (!string.IsNullOrEmpty(checkInRecord.InitialRoleAcronym) && roles.Any(o =>!string.IsNullOrEmpty( o.Mnemonic) && o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)))
                 {
-                    cboICSRole.SelectedValue = roles.First(o => o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)).RoleID;
+                    cboICSRole.SelectedValue = roles.First(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)).RoleID;
                 }
             } else { cboICSRole.Enabled = false; chkAutoAssign.Checked = false; cboICSRole.SelectedIndex = -1; chkAutoAssign.Enabled = false; }
 

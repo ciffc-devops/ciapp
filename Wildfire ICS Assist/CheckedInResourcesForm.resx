@@ -157,6 +157,17 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnStartCheckIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAR1JREFUWEfF1osNwjAMBNCOwAiMwCiMwCiM0BEYgZEYgQ2Kg1p0ds5uSNo00pOw
+        Ex8Vn6rDNE2Hos2eaLMn2uyJNhlZo0gvao00lzWtNAxBLbKLUIXHhDTJsm2DMSEXdsaTzsNsclb7WHgw
+        wO6ViOZV4YkCSkTzqvBEASWieVV4WICsu3iJ29LzyMrmf3u2UQpDxVOc2LkEzklp9myjFIbO3uK6djbb
+        s42FrAcO/iHdtNSnAXtSmvexjQUOVbh7Wdj/7tnGAocqbHIBx34FazB0tu2PcA2Gin3/hixAVr8bURRQ
+        IppXhScKKBHNq8ITBZSI5lXhwQDR9ECS7dsGgwGtsmzbYGQd+1CapGEIqlH/WL4n2uyJNnuizX6m4QMu
+        Xp5RcLi09wAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="btnPNumHelp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -277,15 +288,7 @@
         MhdhCEK1P1HKuw61zdWV9SiNtaDqHCRV5+BopT8y4GLRq1x4QQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btnStartCheckIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAR1JREFUWEfF1osNwjAMBNCOwAiMwCiMwCiM0BEYgZEYgQ2Kg1p0ds5uSNo00pOw
-        Ex8Vn6rDNE2Hos2eaLMn2uyJNhlZo0gvao00lzWtNAxBLbKLUIXHhDTJsm2DMSEXdsaTzsNsclb7WHgw
-        wO6ViOZV4YkCSkTzqvBEASWieVV4WICsu3iJ29LzyMrmf3u2UQpDxVOc2LkEzklp9myjFIbO3uK6djbb
-        s42FrAcO/iHdtNSnAXtSmvexjQUOVbh7Wdj/7tnGAocqbHIBx34FazB0tu2PcA2Gin3/hixAVr8bURRQ
-        IppXhScKKBHNq8ITBZSI5lXhwQDR9ECS7dsGgwGtsmzbYGQd+1CapGEIqlH/WL4n2uyJNnuizX6m4QMu
-        Xp5RcLi09wAAAABJRU5ErkJggg==
-</value>
-  </data>
+  <metadata name="svdExport.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>122, 17</value>
+  </metadata>
 </root>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Utilities;
 using static System.Net.Mime.MediaTypeNames;
@@ -176,6 +177,197 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class CheckInTools
     {
+        public static string ExportCheckInRecordsToCSV(this List<CheckInRecordWithResource> records, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            csv.Append("Unique Incident Number"); csv.Append(delimiter);
+            csv.Append("First Name"); csv.Append(delimiter);
+            csv.Append("Middle Initial"); csv.Append(delimiter);
+            csv.Append("Last Name"); csv.Append(delimiter);
+            csv.Append("Dietary Requirements"); csv.Append(delimiter);
+            csv.Append("Allergies"); csv.Append(delimiter);
+            csv.Append("Cellular Ph. Number Primary contact number"); csv.Append(delimiter);
+            csv.Append("Email address"); csv.Append(delimiter);
+            csv.Append("Home Unit / Base"); csv.Append(delimiter);
+            csv.Append("Home Province / Territory"); csv.Append(delimiter);
+            csv.Append("Home Country"); csv.Append(delimiter);
+            csv.Append("Employer emergency contact Information "); csv.Append(delimiter);
+            csv.Append("Agency"); csv.Append(delimiter);
+            csv.Append("Individuals weight"); csv.Append(delimiter);
+            csv.Append("Accomodation Preference"); csv.Append(delimiter);
+            csv.Append("Unique Crew Identifier"); csv.Append(delimiter);
+            csv.Append("CIFFC Crew Identifier"); csv.Append(delimiter);
+            csv.Append("Leaders Name"); csv.Append(delimiter);
+            csv.Append("Contact Info i.e. cell and email"); csv.Append(delimiter);
+            csv.Append("Total number of personell"); csv.Append(delimiter);
+            csv.Append("Resource Order Number"); csv.Append(delimiter);
+            csv.Append("Position On Incident"); csv.Append(delimiter);
+            csv.Append("Resource Kind"); csv.Append(delimiter);
+            csv.Append("Resource Type"); csv.Append(delimiter);
+            csv.Append("Check-In Location"); csv.Append(delimiter);
+            csv.Append("Check-In Date"); csv.Append(delimiter);
+            csv.Append("Check-In Time"); csv.Append(delimiter);
+            csv.Append("Last Day of Rest"); csv.Append(delimiter);
+            csv.Append("First Day on Incident"); csv.Append(delimiter);
+            csv.Append("Last Day on Incident"); csv.Append(delimiter);
+            csv.Append("Accomodation Location"); csv.Append(delimiter);
+            csv.Append("Breakfast"); csv.Append(delimiter);
+            csv.Append("Lunch"); csv.Append(delimiter);
+            csv.Append("Dinner"); csv.Append(delimiter);
+            csv.Append("Method of Travel to Incident"); csv.Append(delimiter);
+            csv.Append("Vehicle License #"); csv.Append(delimiter);
+            csv.Append("Year / Make / Model"); csv.Append(delimiter);
+            csv.Append("Agency Owned Vehicle"); csv.Append(delimiter);
+            csv.Append("Rental Vehicle "); csv.Append(delimiter);
+            csv.Append("Contractor Vehicle(s)"); csv.Append(delimiter);
+            csv.Append("Private Vehicle "); csv.Append(delimiter);
+            csv.Append("Mobile Equip - Incident Identification Number ('V' numbers)"); csv.Append(delimiter);
+            csv.Append("Fireline equipment/gear needed from supply unit"); csv.Append(delimiter);
+            csv.Append("Reason for visit"); csv.Append(delimiter);
+            csv.Append("Incident contact"); csv.Append(delimiter);
+            csv.Append("Duration of Visit"); csv.Append(delimiter);
+
+            csv.Append(Environment.NewLine);
+
+
+
+            foreach (CheckInRecordWithResource item in records)
+            {
+
+                //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
+                Personnel p = null; if (item.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)item.Resource; }
+                Vehicle v = null; if (item.Resource.GetType().Name.Equals("Vehicle")) { v = (Vehicle)item.Resource; }
+                OperationalSubGroup c = null; if (item.Resource.GetType().Name.Equals("OperationalSubGroup")) { c = (OperationalSubGroup)item.Resource; }
+
+                csv.Append("\""); csv.Append(item.Resource.UniqueIDNumWithPrefix); csv.Append("\""); csv.Append(delimiter);
+                if (p != null)
+                {
+                    csv.Append("\""); csv.Append(p.FirstName); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(p.MiddleInitial); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(p.LastName); csv.Append("\""); csv.Append(delimiter);
+                    if (p.HasDietaryRestrictions) { csv.Append("\""); csv.Append("YES"); csv.Append("\""); csv.Append(delimiter); } else { csv.Append("\""); csv.Append("NO"); csv.Append("\""); csv.Append(delimiter); }
+                    if (p.HasAllergies) { csv.Append("\""); csv.Append("YES"); csv.Append("\""); csv.Append(delimiter); } else { csv.Append("\""); csv.Append("NO"); csv.Append("\""); csv.Append(delimiter); }
+                    csv.Append("\""); csv.Append(p.CellphoneNumber); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(p.Email); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(p.HomeUnit); csv.Append("\""); csv.Append(delimiter);
+                    if (p.HomeProvinceID != Guid.Empty)
+                    {
+                        Province prov = new Province(p.HomeProvinceID);
+                        csv.Append("\""); csv.Append(prov.ProvinceName); csv.Append("\""); csv.Append(delimiter);
+                    }
+                    else
+                    {
+                        csv.Append(""); csv.Append(delimiter);
+
+                    }
+
+                    csv.Append("\""); csv.Append(p.HomeCountry); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(p.EmergencyContact); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(p.Agency); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append(AddToCSVIfPossible(item, new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), delimiter));
+                    csv.Append("\""); csv.Append(p.AccomodationPreference); csv.Append("\""); csv.Append(delimiter);
+                }
+                else
+                {
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                }
+
+
+                if (c != null)
+                {
+                    csv.Append(AddToCSVIfPossible(item, new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), delimiter));
+                    csv.Append(AddToCSVIfPossible(item, new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), delimiter));
+                    csv.Append("\""); csv.Append(c.LeaderName); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(c.Contact); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(c.NumberOfPeople); csv.Append("\""); csv.Append(delimiter);
+                }
+                else
+                {
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append(""); csv.Append(delimiter);
+
+                }
+
+
+
+                csv.Append(AddToCSVIfPossible(item, new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), delimiter));
+                 csv.Append("\""); csv.Append(item.Record.InitialRoleName); csv.Append("\""); csv.Append(delimiter);
+
+                csv.Append("\""); csv.Append(item.Resource.Kind); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Resource.Type); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("Check-In Location"); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Record.CheckInDate.ToString(Globals.DateFormat)); csv.Append("\""); csv.Append(delimiter); 
+
+                csv.Append("\""); csv.Append(item.Record.CheckInDate.ToString("HH:mm")); csv.Append("\""); csv.Append(delimiter); 
+                csv.Append("\""); csv.Append(item.Record.LastDayOfRest.ToString(Globals.DateFormat)); csv.Append("\""); csv.Append(delimiter);
+                csv.Append(AddToCSVIfPossible(item, new Guid("9afc627f-bdad-4076-8d9a-3511759ea2bf"), delimiter));
+                csv.Append("\""); csv.Append(item.Record.LastDayOnIncident.ToString(Globals.DateFormat)); csv.Append("\""); csv.Append(delimiter);
+                csv.Append(AddToCSVIfPossible(item, new Guid("7a39df77-cb16-463c-812b-573bfa97de5d"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("09e8e520-a82e-491f-a82e-ed108e809392"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("2e69adbd-126b-4ae1-abc0-919dca191f68"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("ec82d677-a731-4a31-8bb8-452cbafaa58b"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("c1399559-2ac8-49da-8ce8-cd711365417d"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("3208d48d-eaf2-4f9e-b526-3d3437610d16"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("40718587-d6ee-480a-8451-6c7f02d272a5"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("99c4d8c6-3b39-42f1-af6f-33525b2da4e7"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("c3704eab-5c8e-4619-91f0-4df014560c7a"), delimiter));
+                csv.Append(AddToCSVIfPossible(item, new Guid("ad5b511a-a99f-4310-ba66-4eeb41ec6ab9"), delimiter));
+
+
+
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
+        }
+
+        private static StringBuilder AddToCSVIfPossible(CheckInRecordWithResource item, Guid id, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            if (item.Record.InfoFields.Any(o => o.ID == id))
+            {
+                csv.Append("\"");
+                CheckInInfoField field = item.Record.InfoFields.First(o => o.ID == id);
+                switch (field.FieldType)
+                {
+                    case "Bool":
+                        if (field.BoolValue) { csv.Append("YES"); } else { csv.Append("NO"); } break;
+                    case "DateTime":
+                        csv.Append(field.DateValue.ToString(Globals.DateFormat)); break;
+                    case "Int":
+                        csv.Append(field.IntValue.ToString()); break;
+                    default:
+                        csv.Append(field.StringValue); break;
+                }
+                
+                csv.Append("\"");
+            }
+            else { csv.Append("\""); csv.Append("\""); }
+            csv.Append(delimiter);
+            return csv;
+        }
+
 
         public static int[] GetAccomodationPreferences(this List<CheckInRecordWithResource> list)
         {
@@ -448,34 +640,26 @@ namespace WF_ICS_ClassLibrary.Models
                 new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individuals weight ", "String", "Individual Info", false, true, false,true,false,true,false, "Enter the individuals seat weight. "),
                 new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Unique Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,true, "Enter the crews unique agency identifer i.e. RU01, Flathead Unit crew, Dryden IA, etc. "),
                 new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "CIFFC Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,false, "Enter the CIFFC crew identifier if the crew is imported through CIFFC i.e C-30"),
-                new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info i.e. cell and email", "String", "Crew Info", false, false, false,true,false,false,true, "0"),
+                new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info i.e. cell and email", "String", "Crew Info", false, false, false,true,false,false,true, ""),
                 new CheckInInfoField(new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), "Resource Order Number", "String", "Deployment Information", false, true, true,true,true,true,false, "Enter agency specific order number or order identifier. "),
-                //new CheckInInfoField(new Guid("3ac1684c-f882-484b-b31e-e9cd6c21c1f9"), "Position On Incident", "String", "Deployment Information", false, true, true,false,true,true,true, "0"),
-                new CheckInInfoField(new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe"), "Check-In Location", "List", "Check In Information", true, true, true,true,true,true,true, "0"),
-                //new CheckInInfoField(new Guid("c62a8935-7413-41f1-a2b2-682d4064b08a"), "Check-In Date", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
-                //new CheckInInfoField(new Guid("4836ad52-a6a8-4faa-b6f4-39ef941476b1"), "Check-In Time", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
-                //new CheckInInfoField(new Guid("eacbe40c-d674-40d6-a5eb-3f807e13277a"), "Last Day of Rest", "String", "Check In Information", false, true, false,true,false,true,true, "Enter the resources last day of rest/day off. "),
-                new CheckInInfoField(new Guid("9afc627f-bdad-4076-8d9a-3511759ea2bf"), "First Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
-                //new CheckInInfoField(new Guid("49602e27-8603-4d24-8228-83a3ed4d81d4"), "Last Day on Incident", "String", "Check In Information", true, true, true,true,true,true,true, "0"),
-                //new CheckInInfoField(new Guid("cb7f504c-6233-4c4d-aa67-780b8c90baa7"), "Agency i.e. Parks Canada, Alberta, Town Of Banff, City of Ft.McMurray, Canada Task Force 2, etc", "String", "Check In Information", true, true, true,true,true,true,true, "Enter the resources home agency. "),
+                new CheckInInfoField(new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe"), "Check-In Location", "List", "Check In Information", true, true, true,true,true,true,true, ""),
+                new CheckInInfoField(new Guid("9afc627f-bdad-4076-8d9a-3511759ea2bf"), "First Day on Incident", "DateTime", "Check In Information", true, true, true,true,true,true,true, ""),
                 new CheckInInfoField(new Guid("7a39df77-cb16-463c-812b-573bfa97de5d"), "Accomodation Location", "List", "Logistics", true, true, false,true,false,true,false, "Enter where the resource is staying. "),
-                new CheckInInfoField(new Guid("09e8e520-a82e-491f-a82e-ed108e809392"), "Breakfast", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
-                new CheckInInfoField(new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4"), "Lunch", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
-                new CheckInInfoField(new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488"), "Dinner", "Bool", "Logistics", true, true, false,true,false,true,false, "0"),
-                new CheckInInfoField(new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89"), "Method of Travel to Incident", "List", "Logistics", true, true, true,true,true,true,false, "0"),
-                new CheckInInfoField(new Guid("2e69adbd-126b-4ae1-abc0-919dca191f68"), "Vehicle License #", "String", "Logistics", false, false, true,false,false,false,false, "0"),
-                new CheckInInfoField(new Guid("ec82d677-a731-4a31-8bb8-452cbafaa58b"), "Year / Make / Model", "String", "Logistics", true, true, true,true,true,true,false, "0"),
-                new CheckInInfoField(new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f"), "Agency Owned Vehicle", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
-                new CheckInInfoField(new Guid("c1399559-2ac8-49da-8ce8-cd711365417d"), "Rental Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
-                new CheckInInfoField(new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d"), "Contractor Vehicle(s)", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
-                new CheckInInfoField(new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368"), "Private Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, "0"),
-                new CheckInInfoField(new Guid("3208d48d-eaf2-4f9e-b526-3d3437610d16"), "Mobile Equip - Incident Identification Number ('V' numbers)", "String", "Logistics", true, true, false,true,false,false,false, "0"),
-                new CheckInInfoField(new Guid("40718587-d6ee-480a-8451-6c7f02d272a5"), "Fireline equipment/gear needed from supply unit", "String", "Logistics", true, true, false,true,false,false,false, "0"),
-                new CheckInInfoField(new Guid("99c4d8c6-3b39-42f1-af6f-33525b2da4e7"), "Reason for visit", "List", "Visitor Info", true, false, false,false,false,false,true, "0"),
+                new CheckInInfoField(new Guid("09e8e520-a82e-491f-a82e-ed108e809392"), "Breakfast", "Bool", "Logistics", true, true, false,true,false,true,false, ""),
+                new CheckInInfoField(new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4"), "Lunch", "Bool", "Logistics", true, true, false,true,false,true,false, ""),
+                new CheckInInfoField(new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488"), "Dinner", "Bool", "Logistics", true, true, false,true,false,true,false, ""),
+                new CheckInInfoField(new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89"), "Method of Travel to Incident", "List", "Logistics", true, true, true,true,true,true,false, ""),
+                new CheckInInfoField(new Guid("2e69adbd-126b-4ae1-abc0-919dca191f68"), "Vehicle License #", "String", "Logistics", false, false, true,false,false,false,false, ""),
+                new CheckInInfoField(new Guid("ec82d677-a731-4a31-8bb8-452cbafaa58b"), "Year / Make / Model", "String", "Logistics", true, true, true,true,true,true,false, ""),
+                new CheckInInfoField(new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f"), "Agency Owned Vehicle", "Bool", "Logistics", true, true, true,true,true,true,false, ""),
+                new CheckInInfoField(new Guid("c1399559-2ac8-49da-8ce8-cd711365417d"), "Rental Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, ""),
+                new CheckInInfoField(new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d"), "Contractor Vehicle(s)", "Bool", "Logistics", true, true, true,true,true,true,false, ""),
+                new CheckInInfoField(new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368"), "Private Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, ""),
+                new CheckInInfoField(new Guid("3208d48d-eaf2-4f9e-b526-3d3437610d16"), "Mobile Equip - Incident Identification Number ('V' numbers)", "String", "Logistics", true, true, false,true,false,false,false, ""),
+                new CheckInInfoField(new Guid("40718587-d6ee-480a-8451-6c7f02d272a5"), "Fireline equipment/gear needed from supply unit", "String", "Logistics", true, true, false,true,false,false,false, ""),
+                new CheckInInfoField(new Guid("99c4d8c6-3b39-42f1-af6f-33525b2da4e7"), "Reason for visit", "List", "Visitor Info", true, false, false,false,false,false,true, ""),
                 new CheckInInfoField(new Guid("c3704eab-5c8e-4619-91f0-4df014560c7a"), "Incident contact", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the IMT individual who the visitor is to report to."),
-                new CheckInInfoField(new Guid("ad5b511a-a99f-4310-ba66-4eeb41ec6ab9"), "Duration of Visit", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the duration of visit down to the nearest day. If the visit is only for 2 hours then enter 1 day. "),
-
-
+                new CheckInInfoField(new Guid("ad5b511a-a99f-4310-ba66-4eeb41ec6ab9"), "Duration of Visit", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the duration of visit down to the nearest day. If the visit is only for 2 hours then enter 1 day. ")
             };
 
 
