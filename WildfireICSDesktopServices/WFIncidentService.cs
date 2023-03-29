@@ -18,7 +18,7 @@ namespace WildfireICSDesktopServices
     public class WFIncidentService : IWFIncidentService
     {
         public event CommsEventHandler CommsChanged;
-        public event MemberEventHandler MemberSignInChanged;
+        public event CheckInEventHandler MemberSignInChanged;
         public event BriefingEventHandler BriefingChanged;
         public event CommsPlanEventHandler CommsPlanChanged;
         public event CommsPlanItemEventHandler CommsPlanItemChanged;
@@ -1444,7 +1444,7 @@ namespace WildfireICSDesktopServices
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
             if (record.GetType().Name.Equals("Vehicle")) { OnVehicleChanged(new VehicleEventArgs(record as Vehicle)); }
-            else if (record.GetType().Name.Equals("Personnel")) { OnMemberSignInChanged(new MemberEventArgs(record as Personnel)); }
+            else if (record.GetType().Name.Equals("Personnel")) { OnMemberSignInChanged(new CheckInEventArgs(record as Personnel)); }
             else if (record.GetType().Name.Equals("OperationalSubGroup")) { OnOperationalSubGroupChanged(new OperationalSubGroupEventArgs(record as OperationalSubGroup)); }
         }
 
@@ -1487,7 +1487,7 @@ namespace WildfireICSDesktopServices
           
 
 
-            OnMemberSignInChanged(new MemberEventArgs(signIn));
+            OnMemberSignInChanged(new CheckInEventArgs(signIn));
         }
         public void UpsertPersonnel(Personnel member, string source = "local")
         {
@@ -1496,12 +1496,12 @@ namespace WildfireICSDesktopServices
                 _currentIncident.UpsertTaskTeamMember(member);
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(member, "UPSERT", true, false); }
             }
-            OnMemberSignInChanged(new MemberEventArgs(member));
+            OnMemberSignInChanged(new CheckInEventArgs(member));
         }
 
-        protected virtual void OnMemberSignInChanged(MemberEventArgs e)
+        protected virtual void OnMemberSignInChanged(CheckInEventArgs e)
         {
-            MemberEventHandler handler = this.MemberSignInChanged;
+            CheckInEventHandler handler = this.MemberSignInChanged;
             if (handler != null)
             {
                 handler(e);

@@ -67,7 +67,7 @@ namespace Wildfire_ICS_Assist
             LoadResourcesList();
         }
 
-        private void Program_CheckInChanged(MemberEventArgs e)
+        private void Program_CheckInChanged(CheckInEventArgs e)
         {
             
                 LoadResourcesList();
@@ -263,6 +263,20 @@ namespace Wildfire_ICS_Assist
 
 
                     Program.wfIncidentService.UpsertCheckInRecord(record);
+
+                    if (signInForm.AssignIfPossible && !string.IsNullOrEmpty(record.InitialRoleAcronym))
+                    {
+                        if(Program.CurrentOrgChart.ActiveRoles.Any(o=>!string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
+                        {
+                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty);
+                            Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == record.ResourceID);
+                            role.IndividualID = p.ID;
+                            role.IndividualName = p.Name;
+                            role.teamMember = p.Clone();
+                            Program.wfIncidentService.UpsertICSRole(role);
+                        }
+                    }
+
 
                     autoStartNextCheckin = signInForm.AutoStartNextCheckin;
                 }
@@ -613,31 +627,22 @@ namespace Wildfire_ICS_Assist
         private void btnLogisticsOverview_Click(object sender, EventArgs e)
         {
 
-            ICSRole role = Program.CurrentOrgChart.AllRoles.First(o => o.RoleID == WF_ICS_ClassLibrary.Globals.IncidentCommanderID);
+            ICSRole role = null;
             List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role , false);
 
-
-
-
             string fullFilepath = "";
-            //int end = CurrentTask.FileName.LastIndexOf("\\");
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
             string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
-            //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
             byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
             try
             {
                 File.WriteAllBytes(fullFilepath, fullFile);
-
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
-            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
     }
 }

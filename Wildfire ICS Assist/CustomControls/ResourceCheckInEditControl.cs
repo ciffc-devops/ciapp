@@ -5,9 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.CustomControls
@@ -23,7 +25,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private IncidentResource _selectedResource = new IncidentResource();
         public IncidentResource selectedResource { get => _selectedResource; }
         public void SetResource(IncidentResource record) { _selectedResource = record;  }
-
+        public bool AssignIfPossible { get => chkAutoAssign.Checked; }
 
         public ResourceCheckInEditControl()
         {
@@ -35,6 +37,25 @@ namespace Wildfire_ICS_Assist.CustomControls
             
         }
 
+        private List<ICSRole> GetICSRolesForDropdown()
+        {
+            List<ICSRole> roles = OrgChartTools.GetAllRoles();
+            roles = roles.
+                OrderByDescending(o => o.Mnemonic.Contains("ICT")).ThenByDescending(o => o.SectionID == Globals.IncidentCommanderID)
+                .ThenByDescending(o => o.Mnemonic.Contains("OSC")).ThenByDescending(o => o.SectionID == Globals.OpsChiefID)
+                .ThenByDescending(o => o.Mnemonic.Contains("PSC")).ThenByDescending(o => o.SectionID == Globals.PlanningChiefID)
+                .ThenByDescending(o => o.Mnemonic.Contains("LSC")).ThenByDescending(o => o.SectionID == Globals.LogisticsChiefID)
+                .ThenByDescending(o => o.Mnemonic.Contains("FSC")).ThenByDescending(o => o.SectionID == Globals.FinanceChiefID)
+                .ThenBy(o => o.RoleName).ToList();
+
+            ICSRole blank = new ICSRole();
+            blank.RoleID = Guid.Empty;
+            blank.RoleName = string.Empty;
+            roles.Insert(0, blank);
+
+            return roles;
+        }
+        
         private void CalculateDateDiffs()
         {
             TimeSpan ts1 = datCheckInTime.Value - datLastDayOfRest.Value;
@@ -47,14 +68,14 @@ namespace Wildfire_ICS_Assist.CustomControls
        
         private void datCheckInTime_ValueChanged(object sender, EventArgs e)
         {
-            datLDW.MinDate = datCheckInTime.Value;
+            datLDW.MinDate = datCheckInTime.Value.Date;
             CalculateDateDiffs();
         }
 
         private void datLDW_ValueChanged(object sender, EventArgs e)
         {
 
-            if (datCheckInTime.Value > datLDW.Value) { lblLastDayWorking.ForeColor = Color.Red; }
+            if (datCheckInTime.Value.Date > datLDW.Value.Date) { lblLastDayWorking.ForeColor = Color.Red; }
             else { lblLastDayWorking.ForeColor = lblLastDayCount.ForeColor; }
 
             CalculateDateDiffs();
@@ -62,7 +83,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public bool ValidateCheckInInfo()
         {
-            if (datCheckInTime.Value > datLDW.Value)
+            if (datCheckInTime.Value.Date > datLDW.Value.Date)
             {
                 lblLastDayWorking.ForeColor = Color.Red;
                 return false;
@@ -81,6 +102,14 @@ namespace Wildfire_ICS_Assist.CustomControls
             checkInRecord.CheckInDate = datCheckInTime.Value;
             checkInRecord.LastDayOnIncident = datLDW.Value;
             checkInRecord.LastDayOfRest = datLastDayOfRest.Value;
+            if(cboICSRole.SelectedItem != null)
+            {
+                ICSRole role = (ICSRole)cboICSRole.SelectedItem;
+                checkInRecord.InitialRoleName = role.RoleName;
+                checkInRecord.InitialRoleAcronym = role.Mnemonic;
+            }
+            else { checkInRecord.InitialRoleAcronym = string.Empty; checkInRecord.InitialRoleName = string.Empty; }
+            
         }
 
         public void LoadPage()
@@ -89,21 +118,34 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 DateTime today = DateTime.Now;
                 _checkInRecord.LastDayOfRest = today;
-                _checkInRecord.CheckInDate = today; 
+                _checkInRecord.CheckInDate = today;
                 _checkInRecord.LastDayOnIncident = today.AddDays(14);
             }
 
-                if (datLastDayOfRest.MinDate <= checkInRecord.LastDayOfRest) { datLastDayOfRest.Value = _checkInRecord.LastDayOfRest; } else { datLastDayOfRest.Value = datLastDayOfRest.MinDate; }
+            if (datLastDayOfRest.MinDate <= checkInRecord.LastDayOfRest) { datLastDayOfRest.Value = _checkInRecord.LastDayOfRest; } else { datLastDayOfRest.Value = datLastDayOfRest.MinDate; }
 
             if (datCheckInTime.MinDate <= _checkInRecord.CheckInDate) { datCheckInTime.Value = _checkInRecord.CheckInDate; } else { datCheckInTime.Value = datCheckInTime.MinDate; }
             if (datLDW.MinDate <= checkInRecord.LastDayOnIncident) { datLDW.Value = _checkInRecord.LastDayOnIncident; } else { datLDW.Value = datLDW.MinDate; }
-            
+
             txtSelectedName.Text = _selectedResource.ResourceName;
             txtResourceType.Text = checkInRecord.ResourceType;
 
             infoFields.Clear();
             if (_checkInRecord.InfoFields.Any()) { infoFields.AddRange(_checkInRecord.InfoFields); }
             else { infoFields = CheckInTools.GetInfoFields(checkInRecord.ResourceType); }
+
+            if (checkInRecord.ResourceType.Equals("Personnel"))
+            {
+                cboICSRole.Enabled = true; chkAutoAssign.Enabled = true;
+                List<ICSRole> roles = GetICSRolesForDropdown();
+                cboICSRole.DataSource = roles;
+
+                if (!string.IsNullOrEmpty(checkInRecord.InitialRoleAcronym) && roles.Any(o => o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)))
+                {
+                    cboICSRole.SelectedValue = roles.First(o => o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)).RoleID;
+                }
+            } else { cboICSRole.Enabled = false; chkAutoAssign.Checked = false; cboICSRole.SelectedIndex = -1; chkAutoAssign.Enabled = false; }
+
 
             infoFieldControls.Clear();
             pnlCheckInFields.Controls.Clear();
@@ -145,6 +187,16 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             datCheckInTime.MinDate = datLastDayOfRest.Value;
             CalculateDateDiffs();
+        }
+
+        private void cboICSRole_Leave(object sender, EventArgs e)
+        {
+            if (cboICSRole.SelectedItem == null) { cboICSRole.Text = string.Empty; }
+        }
+
+        private void cboICSRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            chkAutoAssign.Checked = cboICSRole.SelectedIndex > 0;
         }
     }
 }

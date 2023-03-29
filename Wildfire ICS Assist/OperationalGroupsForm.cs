@@ -612,5 +612,45 @@ namespace Wildfire_ICS_Assist
             AddStTf("Single Resource");
 
         }
+
+        private void btnPrintLogistics_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+        }
+
+        private void printLogisticsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.chkIncludeContacts = new System.Windows.Forms.CheckBox();
@@ -43,6 +44,14 @@
             this.btnAssignRole = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.assignSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -51,6 +60,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -151,6 +161,7 @@
             // 
             // treeOrgChart
             // 
+            this.treeOrgChart.ContextMenuStrip = this.contextMenuStrip1;
             this.treeOrgChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(0, 0);
@@ -263,6 +274,70 @@
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addRoleToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.assignSelectedRoleToolStripMenuItem,
+            this.editSelectedRoleToolStripMenuItem,
+            this.printLogisticsOverviewToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.removeSelectedRoleToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(285, 188);
+            // 
+            // addRoleToolStripMenuItem
+            // 
+            this.addRoleToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.addRoleToolStripMenuItem.Name = "addRoleToolStripMenuItem";
+            this.addRoleToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
+            this.addRoleToolStripMenuItem.Text = "Add Role";
+            this.addRoleToolStripMenuItem.Click += new System.EventHandler(this.addRoleToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(281, 6);
+            // 
+            // assignSelectedRoleToolStripMenuItem
+            // 
+            this.assignSelectedRoleToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
+            this.assignSelectedRoleToolStripMenuItem.Name = "assignSelectedRoleToolStripMenuItem";
+            this.assignSelectedRoleToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
+            this.assignSelectedRoleToolStripMenuItem.Text = "Assign Selected Role";
+            this.assignSelectedRoleToolStripMenuItem.Click += new System.EventHandler(this.assignSelectedRoleToolStripMenuItem_Click);
+            // 
+            // editSelectedRoleToolStripMenuItem
+            // 
+            this.editSelectedRoleToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.editSelectedRoleToolStripMenuItem.Name = "editSelectedRoleToolStripMenuItem";
+            this.editSelectedRoleToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
+            this.editSelectedRoleToolStripMenuItem.Text = "Edit Selected Role";
+            this.editSelectedRoleToolStripMenuItem.Click += new System.EventHandler(this.editSelectedRoleToolStripMenuItem_Click);
+            // 
+            // removeSelectedRoleToolStripMenuItem
+            // 
+            this.removeSelectedRoleToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
+            this.removeSelectedRoleToolStripMenuItem.Name = "removeSelectedRoleToolStripMenuItem";
+            this.removeSelectedRoleToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
+            this.removeSelectedRoleToolStripMenuItem.Text = "Remove Selected Role";
+            this.removeSelectedRoleToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedRoleToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(281, 6);
+            // 
+            // printLogisticsOverviewToolStripMenuItem
+            // 
+            this.printLogisticsOverviewToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.printLogisticsOverviewToolStripMenuItem.Name = "printLogisticsOverviewToolStripMenuItem";
+            this.printLogisticsOverviewToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
+            this.printLogisticsOverviewToolStripMenuItem.Text = "Print Logistics Overview";
+            this.printLogisticsOverviewToolStripMenuItem.Click += new System.EventHandler(this.printLogisticsOverviewToolStripMenuItem_Click);
+            // 
             // OrganizationalChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -286,6 +361,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -307,5 +383,13 @@
         private System.Windows.Forms.SaveFileDialog svdExport;
         private System.Windows.Forms.Button btnPrint203;
         private System.Windows.Forms.CheckBox chkIncludeContacts;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem addRoleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem assignSelectedRoleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editSelectedRoleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printLogisticsOverviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem removeSelectedRoleToolStripMenuItem;
     }
 }

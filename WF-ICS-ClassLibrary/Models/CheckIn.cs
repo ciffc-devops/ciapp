@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -28,6 +29,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(12)] private string _ResourceType;
         [ProtoMember(13)] private Guid _ParentRecordID;
         [ProtoMember(14)] private DateTime _LastDayOfRest;
+        [ProtoMember(14)] private string _InitialRoleName;
+        [ProtoMember(15)] private string _InitialRoleAcronym;
+
         public CheckInRecord() { SignInRecordID = Guid.NewGuid(); InfoFields = new List<CheckInInfoField>(); CheckOutDate = DateTime.MaxValue; Active = true; }
 
 
@@ -53,6 +57,8 @@ namespace WF_ICS_ClassLibrary.Models
         public bool IsHECrew { get { return ResourceType.EqualsWithNull("Heavy Equipment Crew"); } }
         public bool HasCheckOutTime { get => CheckOutDate < DateTime.MaxValue; }
         public DateTime LastDayOfRest { get => _LastDayOfRest; set => _LastDayOfRest = value; }
+        public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
+        public string InitialRoleAcronym { get => _InitialRoleAcronym; set => _InitialRoleAcronym = value; }
 
         public CheckInRecord Clone()
         {
@@ -151,6 +157,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Status { get => _StatusText; set => _StatusText = value; }
         public int DaysTillTimeOut { get; set; }
         public string UniqueIDNumWithPrefix { get => _Resource.UniqueIDNumWithPrefix; }
+        public string InitialRoleAcronym { get => _Record.InitialRoleAcronym; }
 
         public CheckInRecordWithResource() { _ID = Guid.NewGuid(); }
         public CheckInRecordWithResource(CheckInRecord rec, IncidentResource res, DateTime EndOfOp)
@@ -165,8 +172,177 @@ namespace WF_ICS_ClassLibrary.Models
         }
     }
 
+
+
     public static class CheckInTools
     {
+
+        public static int[] GetAccomodationPreferences(this List<CheckInRecordWithResource> list)
+        {
+            int[] accomodation = new int[4];
+            /*  0 = not incident camp
+             *  1 = male only
+             *  2 = female only
+             *  3 = not gender restricted
+             */
+            Guid accomodationID = new Guid("7a39df77-cb16-463c-812b-573bfa97de5d");
+
+            List<CheckInRecordWithResource> personnel = list.Where(o => o.Resource.GetType().Name.Equals("Personnel")).ToList();
+            List<CheckInRecordWithResource> campPersonnel = personnel.Where(o => o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp"))).ToList();
+
+            accomodation[0] = personnel.Count - campPersonnel.Count;
+            accomodation[1] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Male-Only"));
+            accomodation[2] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Female-Only"));
+            accomodation[3] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Not Gender-Restricted"));
+
+            //accomodation[1] = personnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Female-Only") && o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp")));
+            //accomodation[1] = personnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Not Gender-Restricted") && o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp")));
+            return accomodation;
+        }
+
+        public static int[] GetVehicleTypes (this List<CheckInRecordWithResource> list)
+        {
+            int[] vehicleTypes = new int[4];
+            vehicleTypes[0] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f") && f.BoolValue));
+            vehicleTypes[1] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("c1399559-2ac8-49da-8ce8-cd711365417d") && f.BoolValue));
+            vehicleTypes[2] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d") && f.BoolValue));
+            vehicleTypes[3] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368") && f.BoolValue));
+            return vehicleTypes;
+        }
+
+        public static int[,] GetMealRequirements(this List<CheckInRecordWithResource> list)
+        {
+            Guid breakfastID = new Guid("09e8e520-a82e-491f-a82e-ed108e809392");
+            Guid lunchID = new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4");
+            Guid dinnerID = new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488");
+            List<CheckInRecordWithResource> personnel = list.Where(o => o.Resource.GetType().Name.Equals("Personnel")).ToList();
+
+            int[,] food = new int[3, 2];
+
+
+            foreach (CheckInRecordWithResource rec in personnel)
+            {
+
+                if (rec.Record.InfoFields.Any(o => o.ID == breakfastID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[0, 1]++; }
+                    else { food[0, 0]++; }
+                }
+                if (rec.Record.InfoFields.Any(o => o.ID == lunchID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[1, 1]++; }
+                    else { food[1, 0]++; }
+                }
+                if (rec.Record.InfoFields.Any(o => o.ID == dinnerID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[2, 1]++; }
+                    else { food[2, 0]++; }
+                }
+            }
+            return food;
+        }
+
+        public static List<CheckInRecordWithResource> GetCheckInWithResources(this WFIncident incident, int OpPeriod)
+        {
+            List<CheckInRecordWithResource> list = new List<CheckInRecordWithResource>();
+
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+           
+
+            List<IncidentResource> allResources = new List<IncidentResource>();
+            List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
+
+            allResources.AddRange(incident.ActiveIncidentResources);
+
+            foreach (IncidentResource res in allResources)
+            {
+                if (!list.Any(o => o.Resource.ID == res.ID) && incident.AllCheckInRecords.Any(o => o.ResourceID == res.ID))
+                {
+                    CheckInRecord rec = incident.AllCheckInRecords.First(o => o.ResourceID == res.ID);
+                    if (rec.CheckedInThisTime(currentPeriod.PeriodMid))
+                    {
+                        CheckInRecordWithResource resrec = new CheckInRecordWithResource(rec, res, currentPeriod.PeriodEnd);
+
+                        list.Add(resrec);
+                    }
+                }
+
+            }
+
+
+            return list;
+        }
+
+        public static List<CheckInRecordWithResource> GetCheckInWithResources(this WFIncident incident, int OpPeriod, ICSRole ParentRole)
+        {
+            List<CheckInRecordWithResource> list = new List<CheckInRecordWithResource>();
+
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+
+
+           
+            List<ICSRole> childRoles =  currentOrgChart.GetChildRoles(ParentRole.RoleID, true, false);
+
+            List<IncidentResource> allResources = new List<IncidentResource>();
+            List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
+            if (ParentRole.IndividualID != Guid.Empty && !allResources.Any(o => o.ID == ParentRole.IndividualID) && incident.ActiveIncidentResources.Any(o => o.ID == ParentRole.IndividualID))
+            {
+                allResources.Add(incident.ActiveIncidentResources.First(o => o.ID == ParentRole.IndividualID));
+            }
+
+            foreach (ICSRole role in childRoles)
+            {
+                if (role.IndividualID != Guid.Empty && !allResources.Any(o => o.ID == role.IndividualID) && incident.ActiveIncidentResources.Any(o => o.ID == role.IndividualID)) { allResources.Add(incident.ActiveIncidentResources.First(o => o.ID == role.IndividualID)); }
+            }
+
+            if(incident.ActiveOperationalGroups.Any(o=>o.LeaderICSRoleID == ParentRole.RoleID))
+            {
+                OperationalGroup opgr = incident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == ParentRole.RoleID);
+                allResources.AddRange(incident.GetReportingResources(opgr.ID, true));
+            }
+            foreach (ICSRole role in childRoles)
+            {
+                if (incident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
+                {
+                    OperationalGroup opgr = incident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
+                    allResources.AddRange(incident.GetReportingResources(opgr.ID, true));
+                }
+            }
+
+
+
+            //convert OperationalGroupResourceListing into normal resources
+            if (allResources.Any(o => o.GetType().Name.Equals("OperationalGroupResourceListing")))
+            {
+                List<IncidentResource> newResources = new List<IncidentResource>();
+                foreach (OperationalGroupResourceListing listing in allResources.OfType<OperationalGroupResourceListing>())
+                {
+                    if (incident.ActiveIncidentResources.Any(o => o.ID == listing.ResourceID)) { newResources.Add(incident.ActiveIncidentResources.First(o => o.ID == listing.ResourceID)); }
+                }
+                allResources.AddRange(newResources);
+            }
+
+
+
+            foreach (IncidentResource res in allResources)
+            {
+                if (!list.Any(o=>o.Resource.ID == res.ID) && incident.AllCheckInRecords.Any(o => o.ResourceID == res.ID))
+                {
+                    CheckInRecordWithResource rec = new CheckInRecordWithResource(incident.AllCheckInRecords.First(o => o.ResourceID == res.ID), res, currentPeriod.PeriodEnd);
+                    list.Add(rec);
+                }
+                    
+            }
+
+
+            return list;
+        }
+
+
         public static bool CheckedInThisTime(this CheckInRecord rec, DateTime timeToCheck)
         {
             if (rec.CheckInDate <= timeToCheck && rec.CheckOutDate >= timeToCheck && rec.LastDayOnIncident >= timeToCheck) { return true; }

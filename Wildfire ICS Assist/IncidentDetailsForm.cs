@@ -239,6 +239,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
             Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
             Program.wfIncidentService.OperationalGroupChanged += Program_OperationalGroupChanged;
+            Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
             //Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
 
 
@@ -801,6 +802,11 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        private void Program_CheckInChanged(CheckInEventArgs e)
+        {
+            TriggerAutoSave();
+
+        }
 
         private void Program_OperationalPeriodChanged(OperationalPeriodEventArgs e)
         {

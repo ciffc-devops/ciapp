@@ -3280,26 +3280,6 @@ namespace WildfireICSDesktopServices
 
         #region Logistics Summary
 
-        public List<byte[]> exportLogisticsSummaryToPDF(WFIncident task, int OpPeriodToExport, ICSRole ParentRole, bool flattenPDF)
-        {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-            string path = createLogisticsSummaryPDF(task, OpPeriodToExport, ParentRole, true, flattenPDF);
-            if (path != null)
-            {
-                using (FileStream stream = File.OpenRead(path))
-                {
-                    byte[] fileBytes = new byte[stream.Length];
-
-                    stream.Read(fileBytes, 0, fileBytes.Length);
-                    stream.Close();
-                    allPDFs.Add(fileBytes);
-                }
-            }
-
-            return allPDFs;
-        }
-
         public string createLogisticsSummaryPDF(WFIncident task, int OpPeriod, ICSRole ParentRole, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
@@ -3309,7 +3289,151 @@ namespace WildfireICSDesktopServices
             }
 
 
+
             string outputFileName = "LOGISTICS OVERVIEW - " + task.IncidentIdentifier + " OP " + OpPeriod.ToString() + " " + ParentRole.RoleName + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+
+
+            List<byte[]> allPDFs = exportLogisticsSummaryToPDF(task, OpPeriod, ParentRole, flattenPDF);
+
+            //path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(path, fullFile);
+
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+
+            return path;
+        }
+
+        public List<byte[]> exportLogisticsSummaryToPDF(WFIncident incident, int OpPeriodToExport, ICSRole ParentRole, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodToExport);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
+            List<CheckInRecordWithResource> allCheckInRecords = new List<CheckInRecordWithResource>();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport, ParentRole); }
+            else { allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport); }
+
+            List<KindTypeWithCounts> typesWithCount = getTypesWithCounts(allCheckInRecords, currentPeriod.PeriodEnd);
+
+            int totalPages = 1;
+            int rowsOnPage1 = 3;
+            int rowsOnPage2Plus = 38;
+
+            if (typesWithCount.Count > rowsOnPage1)
+            {
+
+                totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(typesWithCount.Count - rowsOnPage1) / Convert.ToDecimal(rowsOnPage2Plus)));
+                if ((typesWithCount.Count - rowsOnPage1) % rowsOnPage2Plus > 0) { totalPages += 1; }
+
+
+
+                if (totalPages == 0) { totalPages = 1; }
+            }
+
+            List<string> pdfFileNames = new List<string>();
+            allPDFs.AddRange(createLogisticsSummaryPage1PDF(incident, OpPeriodToExport, ParentRole, allCheckInRecords, 1, totalPages, flattenPDF));
+            for(int x = 1; x<totalPages; x++)
+            {
+                List<KindTypeWithCounts> pageCounts = typesWithCount.Skip(rowsOnPage1).Skip(rowsOnPage2Plus * (x-1)).Take(rowsOnPage2Plus).ToList();
+                allPDFs.AddRange(createLogisticsSummarySubsequentPDF(incident, OpPeriodToExport, ParentRole, pageCounts, (x+1), totalPages, flattenPDF));
+
+            }
+
+            /*
+            List<PositionLogEntry> extraPageEntries = entries.Skip(19).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(31 * (x - 1)).Take(37).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            */
+
+
+            return allPDFs;
+        }
+
+
+        private class KindTypeWithCounts
+        {
+            public string KindName { get; set; }
+            public string TypeName { get; set; }
+            public int[] Counts { get; set; } = new int[2];
+            public KindTypeWithCounts() { }
+            public KindTypeWithCounts(string knd, string ty) { KindName = knd; TypeName = ty; }
+        }
+
+        private List<KindTypeWithCounts> getTypesWithCounts(List<CheckInRecordWithResource> list, DateTime opEndDate)
+        {
+            List<KindTypeWithCounts> counts = new List<KindTypeWithCounts>();
+
+            foreach (CheckInRecordWithResource item in list)
+            {
+                if (!counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)))
+                {
+                    if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")))
+                    {
+
+                        counts.Add(new KindTypeWithCounts("No Kind Given", "No Type Given"));
+
+                    }
+                    else if (string.IsNullOrEmpty(item.Resource.Kind) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals(item.Resource.Type)))
+                    {
+                        counts.Add(new KindTypeWithCounts("No Kind Given", item.Resource.Type));
+
+                    }
+                    else if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals("No Type Given")))
+                    {
+                        counts.Add(new KindTypeWithCounts(item.Resource.Kind, "No Type Given"));
+                    }
+                    else
+                    {
+                        counts.Add(new KindTypeWithCounts(item.Resource.Kind, item.Resource.Type));
+                    }
+
+
+                }
+
+                KindTypeWithCounts thisone = null;
+                if (!string.IsNullOrEmpty(item.Resource.Kind) && !string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)); }
+                else if (string.IsNullOrEmpty(item.Resource.Kind) && string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")); }
+                else if (string.IsNullOrEmpty(item.Resource.Kind)) { thisone = counts.First(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals(item.Resource.Type)); }
+                else if (string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals("No Type Given")); }
+
+                if (thisone != null)
+                {
+                    thisone.Counts[0]++;
+                    if (item.CheckOutDate.Date <= opEndDate.Date || item.LastDayOnIncident.Date <= opEndDate.Date)
+                    {
+                        thisone.Counts[1]++;
+                    }
+                }
+            }
+
+            counts = counts.OrderBy(o => o.KindName).ThenBy(o => o.TypeName).ToList();
+            return counts;
+        }
+    
+        private List<byte[]> createLogisticsSummaryPage1PDF(WFIncident incident, int OpPeriod, ICSRole ParentRole, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { outputFileName += " " + ParentRole.RoleName; }
+            outputFileName += ".pdf";
+
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
@@ -3322,102 +3446,60 @@ namespace WildfireICSDesktopServices
                 {
                     PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
 
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
 
 
-                    OperationalPeriod currentPeriod = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
-                    OrganizationChart currentOrgChart = task.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
 
-                    stamper.AcroFields.SetField("INCIDENT NAME OR NUMBERRow1", task.IncidentNameOrNumber);
-                    stamper.AcroFields.SetField("BRANCH  DIVISION  OVERHEAD", ParentRole.RoleName);
+                    stamper.AcroFields.SetField("INCIDENT NAME OR NUMBERRow1", incident.IncidentNameOrNumber);
+                    if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { stamper.AcroFields.SetField("BRANCH  DIVISION  OVERHEAD", ParentRole.RoleName); }
+                    else { stamper.AcroFields.SetField("BRANCH  DIVISION  OVERHEAD", "Full Incident"); }
 
                     stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
                     stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
 
-                    List<ICSRole> childRoles = currentOrgChart.GetChildRoles(ParentRole.RoleID, true, false);
+                    int[] accomodations = allCheckInRecords.GetAccomodationPreferences();
 
-                    List<IncidentResource> allResources = new List<IncidentResource>();
-                    List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
-                    if (ParentRole.IndividualID != Guid.Empty && !allResources.Any(o => o.ID == ParentRole.IndividualID) && task.ActiveIncidentResources.Any(o => o.ID == ParentRole.IndividualID)) { allResources.Add(task.ActiveIncidentResources.First(o => o.ID == ParentRole.IndividualID)); }
-
-                    foreach(ICSRole role in childRoles)
-                    {
-                        if (role.IndividualID != Guid.Empty && !allResources.Any(o=>o.ID == role.IndividualID) && task.ActiveIncidentResources.Any(o => o.ID == role.IndividualID)) { allResources.Add(task.ActiveIncidentResources.First(o => o.ID == role.IndividualID)); }
-                    }
-                    foreach (ICSRole role in childRoles)
-                    {
-                        if (task.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
-                        {
-                            OperationalGroup opgr = task.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
-                            allResources.AddRange(task.GetReportingResources(opgr.ID));
-                        }
-                    }
+                    stamper.AcroFields.SetField("Not Incident CampRow1", accomodations[0].ToString());
+                    stamper.AcroFields.SetField("MaleOnlyRow1", accomodations[1].ToString());
+                    stamper.AcroFields.SetField("FemaleOnlyRow1", accomodations[2].ToString());
+                    stamper.AcroFields.SetField("Not GenderRestrictedRow1", accomodations[3].ToString());
 
 
+                    int[,] food = allCheckInRecords.GetMealRequirements();
 
+                    stamper.AcroFields.SetField("BreakfastUnrestricted", food[0, 0].ToString());
+                    stamper.AcroFields.SetField("BreakfastDietary Restrictions", food[0,1].ToString());
+                    stamper.AcroFields.SetField("LunchUnrestricted", food[1,0].ToString());
+                    stamper.AcroFields.SetField("LunchDietary Restrictions", food[1,1].ToString());
+                    stamper.AcroFields.SetField("DinnerUnrestricted", food[2,0].ToString());
+                    stamper.AcroFields.SetField("DinnerDietary Restrictions", food[2,1].ToString());
 
-                    foreach (IncidentResource res in allResources)
-                    {
-                        if (task.AllCheckInRecords.Any(o => o.ResourceID == res.ID)) { checkInRecords.Add(task.AllCheckInRecords.First(o => o.ResourceID == res.ID)); }
-                    }
-
-                    int maleOnly = allResources.OfType<Personnel>().Count(o => o.AccomodationPreference.EqualsWithNull("Male-Only"));
-                    int femaleOnly = allResources.OfType<Personnel>().Count(o => o.AccomodationPreference.EqualsWithNull("Female-Only"));
-                    int mixedAccomodation = allResources.OfType<Personnel>().Count(o => o.AccomodationPreference.EqualsWithNull("Not Gender-Restricted"));
-                    stamper.AcroFields.SetField("MaleOnlyPersonnel", maleOnly.ToString());
-                    stamper.AcroFields.SetField("FemaleOnlyPersonnel", femaleOnly.ToString());
-                    stamper.AcroFields.SetField("Not GenderRestrictedPersonnel", mixedAccomodation.ToString());
-
-
-                    int[] breakfast = new int[2];
-                    int[] lunch = new int[2];
-                    int[] dinner = new int[2];
-                    Guid breakfastID = new Guid("09e8e520-a82e-491f-a82e-ed108e809392");
-                    Guid lunchID = new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4");
-                    Guid dinnerID = new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488");
-
-                    foreach (Personnel p in allResources.OfType<Personnel>())
-                    {
-                        if(checkInRecords.Any(o=>o.ResourceID == p.ID))
-                        {
-                            CheckInRecord rec = checkInRecords.First(o => o.ResourceID == p.ID);
-                            if(rec.InfoFields.Any(o=>o.ID == breakfastID && o.BoolValue))
-                            {
-                                if (p.HasDietaryRestrictions) { breakfast[1]++; }
-                                else { breakfast[0]++; }
-                            }
-                            if (rec.InfoFields.Any(o => o.ID == lunchID && o.BoolValue))
-                            {
-                                if (p.HasDietaryRestrictions) { lunch[1]++; }
-                                else { lunch[0]++; }
-                            }
-                            if (rec.InfoFields.Any(o => o.ID == dinnerID && o.BoolValue))
-                            {
-                                if (p.HasDietaryRestrictions) { dinner[1]++; }
-                                else { dinner[0]++; }
-                            }
-                        }
-                    }
-                    stamper.AcroFields.SetField("BreakfastUnrestricted", breakfast[0].ToString());
-                    stamper.AcroFields.SetField("BreakfastDietary Restrictions", breakfast[1].ToString());
-                    stamper.AcroFields.SetField("LunchUnrestricted", lunch[0].ToString());
-                    stamper.AcroFields.SetField("LunchDietary Restrictions", lunch[1].ToString());
-                    stamper.AcroFields.SetField("DinnerUnrestricted", dinner[0].ToString());
-                    stamper.AcroFields.SetField("DinnerDietary Restrictions", dinner[1].ToString());
-
-
-                    int[] vehicleTypes = new int[4];
-                    vehicleTypes[0] = checkInRecords.Count(o => o.InfoFields.Any(f => f.ID == new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f") && f.BoolValue));
-                    vehicleTypes[1] = checkInRecords.Count(o => o.InfoFields.Any(f => f.ID == new Guid("c1399559-2ac8-49da-8ce8-cd711365417d") && f.BoolValue));
-                    vehicleTypes[2] = checkInRecords.Count(o => o.InfoFields.Any(f => f.ID == new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d") && f.BoolValue));
-                    vehicleTypes[3] = checkInRecords.Count(o => o.InfoFields.Any(f => f.ID == new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368") && f.BoolValue));
+                    int[] vehicleTypes = allCheckInRecords.GetVehicleTypes();
                     stamper.AcroFields.SetField("AgencyOwnedRow1", vehicleTypes[0].ToString());
                     stamper.AcroFields.SetField("RentalRow1", vehicleTypes[1].ToString());
                     stamper.AcroFields.SetField("ContractorRow1", vehicleTypes[2].ToString());
                     stamper.AcroFields.SetField("PrivateRow1", vehicleTypes[3].ToString());
 
                     //need resources by type
+                    List<KindTypeWithCounts> typesWithCount = getTypesWithCounts(allCheckInRecords, currentPeriod.PeriodEnd);
+                 
+
+                    for (int x = 0; x< typesWithCount.Count && x < 28; x++)
+                    {
+                        stamper.AcroFields.SetField("KindRow" + (x + 1).ToString(), typesWithCount[x].KindName);
+                        stamper.AcroFields.SetField("TypeRow" + (x + 1).ToString(), typesWithCount[x].TypeName);
+                        stamper.AcroFields.SetField("Total this Op PeriodRow" + (x + 1).ToString(), typesWithCount[x].Counts[0].ToString());
+                        stamper.AcroFields.SetField("Departing End of Op PeriodRow" + (x + 1).ToString(), typesWithCount[x].Counts[1].ToString());
+                    }
+
+
+
+
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("OF", totalPageNum.ToString());
 
 
 
@@ -3450,8 +3532,125 @@ namespace WildfireICSDesktopServices
             {
                 path = null;
             }
-            return path;
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
         }
+
+
+
+        private List<byte[]> createLogisticsSummarySubsequentPDF(WFIncident incident, int OpPeriod, ICSRole ParentRole, List<KindTypeWithCounts> counts, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { outputFileName += " " + ParentRole.RoleName; }
+            outputFileName += ".pdf";
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = "BlankForms/Logistics Overview Subsequent Page.pdf";
+            fileToUse = getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+
+
+                    stamper.AcroFields.SetField("INCIDENT NAME OR NUMBERRow1", incident.IncidentNameOrNumber);
+                    if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { stamper.AcroFields.SetField("SCOPE", ParentRole.RoleName); }
+                    else { stamper.AcroFields.SetField("SCOPE", "Full Incident"); }
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+
+
+
+                    for (int x = 0; x < counts.Count && x < 28; x++)
+                    {
+                        stamper.AcroFields.SetField("KindRow" + (x + 1).ToString(), counts[x].KindName);
+                        stamper.AcroFields.SetField("TypeRow" + (x + 1).ToString(), counts[x].TypeName);
+                        stamper.AcroFields.SetField("Total this Op PeriodRow" + (x + 1).ToString(), counts[x].Counts[0].ToString());
+                        stamper.AcroFields.SetField("Departing End of Op PeriodRow" + (x + 1).ToString(), counts[x].Counts[1].ToString());
+                    }
+
+
+
+
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("OF", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    Guid randomID = Guid.NewGuid();
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+
+
 
         #endregion
 

@@ -389,7 +389,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         }
 
-        public static List<IncidentResource> GetReportingResources(this WFIncident incident, Guid OpGroupID)
+        public static List<IncidentResource> GetReportingResources(this WFIncident incident, Guid OpGroupID, bool expandSubResources = false)
         {
 
             List<IncidentResource> resources = new List<IncidentResource>();
@@ -399,13 +399,14 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 foreach (OperationalGroupResourceListing listing in incident.AllOperationalSubGroups.First(o => o.ID == OpGroupID).ResourceListing)
                 {
-                    if(incident.AllIncidentResources.Any(o=>o.ID == listing.ResourceID))
+                    if (incident.AllIncidentResources.Any(o => o.ID == listing.ResourceID))
                     {
                         resources.Add(incident.AllIncidentResources.First(o => o.ID == listing.ResourceID));
                     }
                 }
             }
 
+           
             return resources;
         }
 

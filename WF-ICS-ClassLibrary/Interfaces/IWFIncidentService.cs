@@ -30,7 +30,7 @@ namespace WildfireICSDesktopServices
         event MedicalAidStationEventHandler MedicalAidStationChanged;
 
         event MedicalPlanEventHandler MedicalPlanChanged;
-        event MemberEventHandler MemberSignInChanged;
+        event CheckInEventHandler MemberSignInChanged;
         event NoteEventHandler NoteChanged;
         event OperationalPeriodEventHandler OperationalPeriodChanged;
         event OrganizationalChartEventHandler OrganizationalChartChanged;

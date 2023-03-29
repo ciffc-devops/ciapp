@@ -26,7 +26,7 @@ namespace Wildfire_ICS_Assist
         private List<IncidentResource> _SubResources = new List<IncidentResource>();
         public List<IncidentResource> SubResources { get => _SubResources; private set => _SubResources = value; }
         private bool editingExisting = false;
-
+        public bool AssignIfPossible { get => resourceCheckInEditControl1.AssignIfPossible; }
         public bool AutoStartNextCheckin { get => chkAutoNewCheckin.Checked; set => chkAutoNewCheckin.Checked = value; }
         public List<OperationalGroupResourceListing> resourcesToRemoveFromCrew { get => crewEditControl1.resourcesToRemoveFromCrew; }
 
