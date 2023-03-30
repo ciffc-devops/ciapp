@@ -1162,6 +1162,7 @@
             // 
             this.internetSyncToolStripMenuItem.Name = "internetSyncToolStripMenuItem";
             resources.ApplyResources(this.internetSyncToolStripMenuItem, "internetSyncToolStripMenuItem");
+            this.internetSyncToolStripMenuItem.Click += new System.EventHandler(this.internetSyncToolStripMenuItem_Click);
             // 
             // toolStripSeparator12
             // 

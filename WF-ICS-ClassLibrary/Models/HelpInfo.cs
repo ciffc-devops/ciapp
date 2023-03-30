@@ -367,16 +367,14 @@ namespace WF_ICS_ClassLibrary.Models
                     Body = bt.ToString();
                     return true;
                 case "InternetSync":
-                    Title = "Internet Task Sync";
-                    bt.Append("This internet sync tool allows users to collaborate via the internet on a task in real time. "); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    Title = "Internet Incident Sync";
+                    bt.Append("This internet sync tool allows users to collaborate via the internet on an incident in real time. "); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
                     bt.Append("HOW TO USE"); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
-                    bt.Append("On a computer with the current task information, click on Network > Internet Sync, then click on Start a New Sync.  You’ll get an encryption key that looks something like this: 3316b8c8-119a-4075-a952-6425f9e922f7MMpLYYXwbZJCGdxmGCkCRw7uuksIW86oC.  You’ll need to share that key with others if you want them to join you. "); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
-                    bt.Append("On any other computer, click on Network > Internet Sync then select Join an Ongoing Sync.  You’ll be asked to provide the encryption key you were given by whomever started the task sync.  Enter the key, and press OK.  The system will take several seconds to download and unencrypt the task, then you’re good to go! "); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    bt.Append("On a computer with the current incident information, click on Network / Internet > Internet Sync, then click on Start a New Sync.  You’ll get an encryption key that looks something like this: 3316b8c8-119a-4075-a952-6425f9e922f7MMpLYYXwbZJCGdxmGCkCRw7uuksIW86oC.  You’ll need to share that key with others if you want them to join you. "); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
+                    bt.Append("On any other computer, click on Network / Internet > Internet Sync then select Join an Ongoing Sync.  You’ll be asked to provide the encryption key you were given by whomever started the incident sync.  Enter the key, and press OK.  The system will take several seconds to download and unencrypt the incident, then you’re good to go! "); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
                     bt.Append("If you lose internet access at some point, changes will pile up on your computer.  Once you are reconnected to the internet (with the program open), those changes will head into the server and be processed by any other computers.  You’ll also pick up any changes that have been made while you were away. "); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
                     bt.Append("SECURITY"); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
-                    bt.Append("When you sync data, it is encrypted on your computer using the key shown, and then transmitted to a central server to be stored in a database.  That server is located in Canada. When a request to join a sync is made, the data is transmitted to the new computer still encrypted, then decrypted on the computer using that sync key. At no point is the sever able to read the contents of your task. For more information, visit the link below"); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
-                    MoreInfoURL = "https://www.sarassist.ca/Support/InternetSync";
-                    MoreInfoButtonText = "Learn more";
+                    bt.Append("When you sync data, it is encrypted on your computer using the key shown, and then transmitted to a central server to be stored in a database.  That server is located in Canada and owned by CIFFC. When a request to join a sync is made, the data is transmitted to the new computer still encrypted, then decrypted on the computer using that sync key. At no point is the sever able to read the contents of your incident."); bt.Append(Environment.NewLine); bt.Append(Environment.NewLine);
                     Body = bt.ToString();
                     return true;
                 default:

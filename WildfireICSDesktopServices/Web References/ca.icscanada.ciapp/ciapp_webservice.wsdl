@@ -1,0 +1,1339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:tns="http://microsoft.com/webservices/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://microsoft.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/webservices/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="SubmitTaskUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="update" type="tns:TaskUpdate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TaskUpdate">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommandName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProcessedLocally" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UploadedSuccessfully" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="MachineID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataEnc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WFIncident">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyFileNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ICPCallSign" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IncidentTitleImageBytes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="allEquipment" type="tns:ArrayOfTaskEquipment" />
+          <s:element minOccurs="0" maxOccurs="1" name="allEquipmentIssues" type="tns:ArrayOfEquipmentIssue" />
+          <s:element minOccurs="0" maxOccurs="1" name="currentFilePath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="allBriefings" type="tns:ArrayOfBriefing" />
+          <s:element minOccurs="0" maxOccurs="1" name="allIncidentObjectives" type="tns:ArrayOfIncidentObjectivesSheet" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllIncidentResources" type="tns:ArrayOfIncidentResource" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveIncidentResources" type="tns:ArrayOfIncidentResource" />
+          <s:element minOccurs="0" maxOccurs="1" name="allOrgCharts" type="tns:ArrayOfOrganizationChart" />
+          <s:element minOccurs="0" maxOccurs="1" name="activeOrgCharts" type="tns:ArrayOfOrganizationChart" />
+          <s:element minOccurs="0" maxOccurs="1" name="allMedicalPlans" type="tns:ArrayOfMedicalPlan" />
+          <s:element minOccurs="0" maxOccurs="1" name="allCommsPlans" type="tns:ArrayOfCommsPlan" />
+          <s:element minOccurs="0" maxOccurs="1" name="additionalCommsItems" type="tns:ArrayOfCommsPlanItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="allCommsLogEntries" type="tns:ArrayOfCommsLogEntry" />
+          <s:element minOccurs="0" maxOccurs="1" name="allSafetyMessages" type="tns:ArrayOfSafetyMessage" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentPath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="allContacts" type="tns:ArrayOfContact" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllGeneralMessages" type="tns:ArrayOfGeneralMessage" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveGeneralMessages" type="tns:ArrayOfGeneralMessage" />
+          <s:element minOccurs="0" maxOccurs="1" name="taskTimeline" type="tns:Timeline" />
+          <s:element minOccurs="0" maxOccurs="1" name="allNotes" type="tns:ArrayOfNote" />
+          <s:element minOccurs="0" maxOccurs="1" name="allVehicles" type="tns:ArrayOfVehicle" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveIncidentVehicles" type="tns:ArrayOfVehicle" />
+          <s:element minOccurs="0" maxOccurs="1" name="allPositionLogEntries" type="tns:ArrayOfPositionLogEntry" />
+          <s:element minOccurs="0" maxOccurs="1" name="allTaskUpdates" type="tns:ArrayOfTaskUpdate" />
+          <s:element minOccurs="0" maxOccurs="1" name="allAirOperationsSummaries" type="tns:ArrayOfAirOperationsSummary" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllAssignments" type="tns:ArrayOfTeamAssignment" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveAssignments" type="tns:ArrayOfTeamAssignment" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllOperationalGroups" type="tns:ArrayOfOperationalGroup" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveOperationalGroups" type="tns:ArrayOfOperationalGroup" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllOperationalSubGroups" type="tns:ArrayOfOperationalSubGroup" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveOperationalSubGroups" type="tns:ArrayOfOperationalSubGroup" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllDemobilizationRecords" type="tns:ArrayOfDemobilizationRecord" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveDemobilizationRecords" type="tns:ArrayOfDemobilizationRecord" />
+          <s:element minOccurs="1" maxOccurs="1" name="SourceIdentifier" type="tns:ShortGuid" />
+          <s:element minOccurs="1" maxOccurs="1" name="RelayCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RequestID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllOperationalPeriods" type="tns:ArrayOfOperationalPeriod" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllOperationalPeriodsWithContent" type="tns:ArrayOfOperationalPeriod" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllCheckInRecords" type="tns:ArrayOfCheckInRecord" />
+          <s:element minOccurs="0" maxOccurs="1" name="IncidentPersonnel" type="tns:ArrayOfPersonnel" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskOrganization" type="tns:Organization" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastCheckDBUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTraining" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskEncryptionKey" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SavedHighestOpsPeriod" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTaskEquipment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TaskEquipment" nillable="true" type="tns:TaskEquipment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TaskEquipment">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Equipment">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentStatus" type="tns:EquipmentStatus" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentIssue" type="tns:EquipmentIssue" />
+              <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParentCategoryName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TaskEquipmentID" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Equipment">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EquipmentID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Category" type="tns:EquipmentCategory" />
+          <s:element minOccurs="0" maxOccurs="1" name="EquipmentName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferenceID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EquipmentBarcodeID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EquipmentStorageLocation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EquipmentNotes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="D4HReferenceID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InService" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EquipmentCategory">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CategoryID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ParentCategoryID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryNotes" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EquipmentStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StatusID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsActive" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusColorRGB" type="tns:ArrayOfInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EquipmentIssue">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IssueID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="EquipmentID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="MemberID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="AssignmentID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="IssueDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssigneeName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEquipmentIssue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EquipmentIssue" nillable="true" type="tns:EquipmentIssue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBriefing">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Briefing" nillable="true" type="tns:Briefing" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Briefing">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TaskNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OperationalPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllSections" type="tns:ArrayOfBriefingSection" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="BriefingID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateUpdatedUTC" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBriefingSection">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BriefingSection" nillable="true" type="tns:BriefingSection" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BriefingSection">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="sectionID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="sectionName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="sortOrder" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="allItems" type="tns:ArrayOfBriefingItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBriefingItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BriefingItem" nillable="true" type="tns:BriefingItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BriefingItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="itemName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="itemValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="subSectionName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BriefingValueID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="BriefingFieldID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="BriefingSectionID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="FieldSort" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BriefingID" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIncidentObjectivesSheet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IncidentObjectivesSheet" nillable="true" type="tns:IncidentObjectivesSheet" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IncidentObjectivesSheet">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SheetID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="DatePrepared" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FireSize" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FireStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WeatherForcast" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeneralSafety" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedByRole" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedByRole" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Objectives" type="tns:ArrayOfIncidentObjective" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveObjectives" type="tns:ArrayOfIncidentObjective" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIncidentObjective">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IncidentObjective" nillable="true" type="tns:IncidentObjective" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IncidentObjective">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ObjectiveID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Objective" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Priority" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="isUniversal" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PresetLastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChildObjectives" type="tns:ArrayOfIncidentObjective" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="IncidentObjectiveID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ObjectiveLastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Completed" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="CopyNextOpText" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIncidentResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IncidentResource" nillable="true" type="tns:IncidentResource" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IncidentResource">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Kind" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceIdentifier" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfPeople" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfVehicles" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LeaderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contact" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UniqueIDNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ParentResourceID" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OperationalSubGroup">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IncidentResource">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="OperationalGroupID" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="LeaderID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="Transport" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ResourceListing" type="tns:ArrayOfOperationalGroupResourceListing" />
+              <s:element minOccurs="0" maxOccurs="1" name="ActiveResourceListing" type="tns:ArrayOfOperationalGroupResourceListing" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsEquipmentCrew" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfOperationalGroupResourceListing">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OperationalGroupResourceListing" nillable="true" type="tns:OperationalGroupResourceListing" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OperationalGroupResourceListing">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IncidentResource">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="SubGroupID" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="OperationalGroupID" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="ResourceID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="Role" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="OperationalGroup">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IncidentResource">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ResourceID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ParentID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParentName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GroupType" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="LeaderICSRoleID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="LeaderICSRoleName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="LeaderID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="PreparedByName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PreparedByPosition" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PreparedByPositionID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="CommsPlanItemIDs" type="tns:ArrayOfGuid" />
+              <s:element minOccurs="0" maxOccurs="1" name="ShortRemarks" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TacticalAssignment" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SpecialInstructions" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Depth" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="SpanOfControl" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ResourceListing" type="tns:ArrayOfOperationalGroupResourceListing" />
+              <s:element minOccurs="0" maxOccurs="1" name="ActiveResourceListing" type="tns:ArrayOfOperationalGroupResourceListing" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGuid">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="guid" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Aircraft">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IncidentResource">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Registration" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MakeModel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Base" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Pilot" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContactNumber" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsMedivac" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Vehicle">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IncidentResource">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrderRequestNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IncidentIDNo" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Classification" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Make" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CategoryKindCapacity" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Features" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AgencyOrOwner" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OperatorName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="OperatorID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="LicenseOrID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IncidentAssignment" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="MustBeOutTime" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ASE" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsEquipment" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Personnel">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:IncidentResource">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MiddleInitial" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="HasDietaryRestrictions" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="HasAllergies" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Weight" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CellphoneNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="HomeUnit" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="HomeProvinceID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="HomeCountry" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="EmergencyContact" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Agency" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsContractor" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="CallSign" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Pronouns" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AccomodationPreference" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PNum" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="PersonID" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="MemberActive" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentStatus" type="tns:MemberStatus" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MemberStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AssignmentID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="SignInTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SignOutTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="AssignmentNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssignmentName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssignmentStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ICSRoleName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ICSRoleID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="KMs" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MemberName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MemberID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastDayWorked" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckInRecordID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckOutRecordID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Callsign" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InitialRoleName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOrganizationChart">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrganizationChart" nillable="true" type="tns:OrganizationChart" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrganizationChart">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreparedByUserID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreparedByRoleID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedByRole" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationalChartID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DatePrepared" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DatePreparedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllRoles" type="tns:ArrayOfICSRole" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveRoles" type="tns:ArrayOfICSRole" />
+          <s:element minOccurs="0" maxOccurs="1" name="FilledRoles" type="tns:ArrayOfICSRole" />
+          <s:element minOccurs="0" maxOccurs="1" name="FilledActiveRoles" type="tns:ArrayOfICSRole" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsUnifiedCommand" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfICSRole">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ICSRole" nillable="true" type="tns:ICSRole" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ICSRole">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RoleID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoleName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SectionID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReportsTo" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="PDFFieldName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PDFTitleName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IndividualName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IndividualID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationalChartID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrgChartRoleID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReportsToRoleName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ManualSortOrder" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IncludeReportsToInName" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="BaseRoleName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPlaceholder" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="teamMember" type="tns:Personnel" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Depth" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoleDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mnemonic" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsOpGroupSup" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OperationalGroupID" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMedicalPlan">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MedicalPlan" nillable="true" type="tns:MedicalPlan" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MedicalPlan">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DatePrepared" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ambulances" type="tns:ArrayOfAmbulanceService" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveAmbulances" type="tns:ArrayOfAmbulanceService" />
+          <s:element minOccurs="0" maxOccurs="1" name="Hospitals" type="tns:ArrayOfHospital" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveHospitals" type="tns:ArrayOfHospital" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmergencyProcedures" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedByPosition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedByPosition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreparedByRoleID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ApprovedByRoleID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicalAidStations" type="tns:ArrayOfMedicalAidStation" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveAidStations" type="tns:ArrayOfMedicalAidStation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAmbulanceService">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AmbulanceService" nillable="true" type="tns:AmbulanceService" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AmbulanceService">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AmbulanceID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Organization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contact" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RadioFrequency" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsUniversal" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsALS" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsBLS" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHospital">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Hospital" nillable="true" type="tns:Hospital" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Hospital">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="HospitalID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="travelTimeAir" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="travelTimeGround" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="phone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="traumaUnit" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="burnUnit" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="hypothermia" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="helipad" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isUniversal" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMedicalAidStation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MedicalAidStation" nillable="true" type="tns:MedicalAidStation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MedicalAidStation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AidStationID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ParamedicsAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OFA1" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OFA2" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OFA3" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALS" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="FirstResponder" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCommsPlan">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CommsPlan" nillable="true" type="tns:CommsPlan" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CommsPlan">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OpsPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DatePrepared" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="allCommsItems" type="tns:ArrayOfCommsPlanItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveCommsItems" type="tns:ArrayOfCommsPlanItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveAirCommsItems" type="tns:ArrayOfCommsPlanItem" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedByPosition" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCommsPlanItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CommsPlanItem" nillable="true" type="tns:CommsPlanItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CommsPlanItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ItemID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommsSystem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CallSign" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommsFunction" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChannelID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChannelNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RxFrequency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TxFrequency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsRepeater" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="isUniversal" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpsPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RxTone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TxTone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Assignment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UsedForAircraft" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TemplateItemID" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCommsLogEntry">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CommsLogEntry" nillable="true" type="tns:CommsLogEntry" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CommsLogEntry">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EntryID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LogKeeper" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LogDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Created" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FromTeamID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ToTeamID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="FromName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ToName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Starred" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="status" type="tns:TeamStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="OperationalPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TeamStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StatusID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSafetyMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SafetyMessage" nillable="true" type="tns:SafetyMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SafetyMessage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SitePlanRequired" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SitePlanLocation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedByName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedByRoleName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ApprovedByRoleID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="SafetyTemplateID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="SummaryLine" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImageBytes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CopyNextOpText" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContact">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Contact" nillable="true" type="tns:Contact" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Contact">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ContactID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Organization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Callsign" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RadioChannel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGeneralMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GeneralMessage" nillable="true" type="tns:GeneralMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GeneralMessage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ToName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ToPosition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FromName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FromPosition" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateSent" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedByName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApprovedByPosition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReplyByPosition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReplyByName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reply" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReplyDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FromRoleID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ApprovedByRoleID" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Timeline">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TimeLineID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimelineName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelatedToSubject" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateUpdated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="AllTimelineEvents" type="tns:ArrayOfTimelineEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTimelineEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TimelineEvent" nillable="true" type="tns:TimelineEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TimelineEvent">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TimelineEventID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimelineID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EventDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeUnsure" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateUnsure" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubjectEvent" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SAREvent" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExternalID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAuto" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfNote">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Note" nillable="true" type="tns:Note" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Note">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="NoteID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="CategoryID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NoteTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NoteText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateUpdated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateUpdatedUTC" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfVehicle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Vehicle" nillable="true" type="tns:Vehicle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPositionLogEntry">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PositionLogEntry" nillable="true" type="tns:PositionLogEntry" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PositionLogEntry">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LogID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Role" type="tns:ICSRole" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateUpdated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsComplete" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReminderTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeDue" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="LogText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsInfoOnly" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="LogHistory" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="CopyNextOpText" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTaskUpdate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TaskUpdate" nillable="true" type="tns:TaskUpdate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAirOperationsSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AirOperationsSummary" nillable="true" type="tns:AirOperationsSummary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AirOperationsSummary">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sunrise" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sunset" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedivacAircraftText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="notam" type="tns:NOTAM" />
+          <s:element minOccurs="0" maxOccurs="1" name="aircrafts" type="tns:ArrayOfAircraft" />
+          <s:element minOccurs="0" maxOccurs="1" name="activeAircraft" type="tns:ArrayOfAircraft" />
+          <s:element minOccurs="0" maxOccurs="1" name="medivacAircraftList" type="tns:ArrayOfAircraft" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedByName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedByPosition" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreparedByPositionID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NOTAM">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseRadius" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="RadiusNM" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AltitudeASL" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="CenterPoint" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RadiusCentre" type="tns:Coordinate" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolygonNE" type="tns:Coordinate" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolygonNW" type="tns:Coordinate" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolygonSE" type="tns:Coordinate" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolygonSW" type="tns:Coordinate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Coordinate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CardinalLabel" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAircraft">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Aircraft" nillable="true" type="tns:Aircraft" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTeamAssignment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TeamAssignment" nillable="true" type="tns:TeamAssignment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TeamAssignment">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LeaderName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LeaderPersonID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfPersons" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssignedMemberIDs" type="tns:ArrayOfGuid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contact" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReportingLocation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialEquipment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TacticalAssignment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialInstructions" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReportsToRoleID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResourceIDNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommsPlanItemIDs" type="tns:ArrayOfGuid" />
+          <s:element minOccurs="0" maxOccurs="1" name="currentStatus" type="tns:TeamStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssignedToolIDs" type="tns:ArrayOfGuid" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssignmentType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BriefSummary" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IncidentID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreparedByRoleID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedByRoleName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreparedByIndividualName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DivisionName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOperationalGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OperationalGroup" nillable="true" type="tns:OperationalGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOperationalSubGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OperationalSubGroup" nillable="true" type="tns:OperationalSubGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDemobilizationRecord">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DemobilizationRecord" nillable="true" type="tns:DemobilizationRecord" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DemobilizationRecord">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="SignInRecordID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResourceID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="DemobDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DemobLocation" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DebriefDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DebriefLocation" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InventoryReconciled" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiscrepanciesWithSupply" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiscrepanciesWithFacilities" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiscrepanciesWithFinance" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ICS211Completed" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TravelTimeToHomeUnit" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PerformanceRatingCompleted" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShortGuid">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Guid" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOperationalPeriod">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OperationalPeriod" nillable="true" type="tns:OperationalPeriod" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OperationalPeriod">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PeriodNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PeriodStart" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PeriodEnd" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="OperationalPeriodID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="TitleImageBytes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CriticalMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCheckInRecord">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CheckInRecord" nillable="true" type="tns:CheckInRecord" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CheckInRecord">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CheckInDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckOutDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SignInRecordID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ParentRecordID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastDayOnIncident" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PersonalIncidentNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResourceID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InfoFields" type="tns:ArrayOfCheckInInfoField" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpPeriod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResourceType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastDayOfRest" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="InitialRoleName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InitialRoleAcronym" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCheckInInfoField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CheckInInfoField" nillable="true" type="tns:CheckInInfoField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CheckInInfoField">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldGroup" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SortOrder" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StringValue" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BoolValue" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IntValue" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseForVisitor" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseForPersonnel" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseForVehicle" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseForCrew" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateValue" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsRequired" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ToolTipText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseForEquipment" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseForOperator" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPersonnel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Personnel" nillable="true" type="tns:Personnel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Organization">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ParentOrganizationID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryPassword" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LogoFileName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TaskBasics">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyFileNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ICPCallSign" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubjectCategory" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubjectVisibility" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="GeneralRangeOfDetection" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastUpdatedUTC" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="IncidentTitleImageBytes" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SubmitTaskUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SubmitTaskUpdateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskUpdateList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskUpdateListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTaskUpdateListResult" type="tns:ArrayOfTaskUpdate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskUpdateListFull">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTaskUpdateListFullResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTaskUpdateListFullResult" type="tns:ArrayOfTaskUpdate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskUpdateDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="machineID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutoffDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskUpdateDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTaskUpdateDetailsResult" type="tns:ArrayOfTaskUpdate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskUpdateDetailByCommand">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="CommandName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskUpdateDetailByCommandResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTaskUpdateDetailByCommandResult" type="tns:ArrayOfTaskUpdate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllTaskUpdateDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CutoffDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllTaskUpdateDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllTaskUpdateDetailsResult" type="tns:ArrayOfTaskUpdate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SubmitTaskUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitTaskUpdate" />
+  </wsdl:message>
+  <wsdl:message name="SubmitTaskUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitTaskUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskUpdateListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTaskUpdateList" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskUpdateListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTaskUpdateListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskUpdateListFullSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTaskUpdateListFull" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskUpdateListFullSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTaskUpdateListFullResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskUpdateDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTaskUpdateDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskUpdateDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTaskUpdateDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskUpdateDetailByCommandSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTaskUpdateDetailByCommand" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskUpdateDetailByCommandSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTaskUpdateDetailByCommandResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTaskUpdateDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllTaskUpdateDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTaskUpdateDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllTaskUpdateDetailsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ciapp_webserviceSoap">
+    <wsdl:operation name="SubmitTaskUpdate">
+      <wsdl:input message="tns:SubmitTaskUpdateSoapIn" />
+      <wsdl:output message="tns:SubmitTaskUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateList">
+      <wsdl:input message="tns:GetTaskUpdateListSoapIn" />
+      <wsdl:output message="tns:GetTaskUpdateListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateListFull">
+      <wsdl:input message="tns:GetTaskUpdateListFullSoapIn" />
+      <wsdl:output message="tns:GetTaskUpdateListFullSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateDetails">
+      <wsdl:input message="tns:GetTaskUpdateDetailsSoapIn" />
+      <wsdl:output message="tns:GetTaskUpdateDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateDetailByCommand">
+      <wsdl:input message="tns:GetTaskUpdateDetailByCommandSoapIn" />
+      <wsdl:output message="tns:GetTaskUpdateDetailByCommandSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTaskUpdateDetails">
+      <wsdl:input message="tns:GetAllTaskUpdateDetailsSoapIn" />
+      <wsdl:output message="tns:GetAllTaskUpdateDetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ciapp_webserviceSoap" type="tns:ciapp_webserviceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitTaskUpdate">
+      <soap:operation soapAction="http://microsoft.com/webservices/SubmitTaskUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateList">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetTaskUpdateList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateListFull">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetTaskUpdateListFull" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateDetails">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetTaskUpdateDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateDetailByCommand">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetTaskUpdateDetailByCommand" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTaskUpdateDetails">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetAllTaskUpdateDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ciapp_webserviceSoap12" type="tns:ciapp_webserviceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitTaskUpdate">
+      <soap12:operation soapAction="http://microsoft.com/webservices/SubmitTaskUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateList">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetTaskUpdateList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateListFull">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetTaskUpdateListFull" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateDetails">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetTaskUpdateDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskUpdateDetailByCommand">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetTaskUpdateDetailByCommand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTaskUpdateDetails">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetAllTaskUpdateDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ciapp_webservice">
+    <wsdl:port name="ciapp_webserviceSoap" binding="tns:ciapp_webserviceSoap">
+      <soap:address location="https://ciapp.icscanada.ca/ciapp_webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ciapp_webserviceSoap12" binding="tns:ciapp_webserviceSoap12">
+      <soap12:address location="https://ciapp.icscanada.ca/ciapp_webservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -129,7 +129,7 @@ namespace WF_ICS_ClassLibrary.Models
     public static class TaskUpdateTools
     {
 
-        public static object DecryptTaskUpdateData(TaskUpdate update, string encryptKey)
+        public static object DecryptTaskUpdateData(this TaskUpdate update, string encryptKey)
         {
             object objDecrypted = null;
 

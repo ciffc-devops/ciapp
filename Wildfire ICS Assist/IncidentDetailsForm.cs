@@ -43,8 +43,8 @@ namespace Wildfire_ICS_Assist
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
             Thread.CurrentThread.CurrentCulture = new CultureInfo("fr");
             */
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
 
             this.BackColor = Program.FormBackground;
             menuStrip1.BackColor = Program.FormAccent;
@@ -2925,5 +2925,77 @@ namespace Wildfire_ICS_Assist
         {
 
         }
+
+        private void internetSyncToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (InternetSyncForm settings = new InternetSyncForm())
+            {
+                if (settings.ShowDialog(this) == DialogResult.OK)
+                {
+                    PauseNetworkSend = true;
+                    if (settings.InternetSyncEnabled)
+                    {
+                        try
+                        {
+                            //pnlInternetSyncStart.Visible = true;
+                            pnlInternetSyncStart.Dock = DockStyle.Fill;
+                            pnlInternetSyncStart.BringToFront();
+                            if (settings.CreateNewSync)
+                            {
+                                StartInternetSync(CurrentIncident.TaskID, CurrentIncident.TaskEncryptionKey, true);
+                            }
+                            else
+                            {
+                                Guid JoinTaskID = new Guid(settings.JoinTaskID);
+                                StartInternetSync(JoinTaskID, settings.JoinEncryptionKey, false);
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                    }
+                    else { Program.InternetSyncEnabled = false; }
+                    PauseNetworkSend = false;
+                }
+                pnlInternetSyncStart.Visible = false;
+                setServerStatusDisplay();
+            }
+        }
+
+        private void StartInternetSync(Guid TaskID, string EncryptionKey, bool IsNewSync)
+        {
+            //do stuff to sync the task
+            PauseNetworkSend = true;
+            if (IsNewSync)
+            {
+                Program.wfIncidentService.SendInitialTaskUpdate();
+            }
+            else
+            {
+                try
+                {
+                    TaskUpdateService service = new TaskUpdateService();
+                    if (TaskID != CurrentIncident.TaskID)
+                    {
+                        Program.wfIncidentService.LoadNewTaskFromServer(TaskID, EncryptionKey);
+                    }
+                    else
+                    {
+                        Program.wfIncidentService.ConnectToServerTask(TaskID, EncryptionKey);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
+            PauseNetworkSend = false;
+            Program.InternetSyncEnabled = true;
+        }
+
     }
+
+
 }

@@ -391,6 +391,12 @@
     <Compile Include="ResourcesEditUniqueNumberForm.Designer.cs">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\InternetSyncForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\InternetSyncForm.Designer.cs">
+      <DependentUpon>InternetSyncForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -783,6 +789,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResourcesEditUniqueNumberForm.resx">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\InternetSyncForm.resx">
+      <DependentUpon>InternetSyncForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\NetworkSelectIPForm.resx">
       <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>

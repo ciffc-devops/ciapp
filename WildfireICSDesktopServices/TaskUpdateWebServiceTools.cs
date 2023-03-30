@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 
@@ -10,8 +11,8 @@ namespace WildfireICSDesktopServices
 {
     public static class TaskUpdateWebServiceTools
     {
-        /*
-        public static TaskUpdate taskUpdateFromWebServiceItem(this ca.sarassist.TaskUpdate webItem)
+        
+        public static TaskUpdate taskUpdateFromWebServiceItem(this ca.icscanada.ciapp.TaskUpdate webItem)
         {
             TaskUpdate item = new TaskUpdate();
 
@@ -26,9 +27,9 @@ namespace WildfireICSDesktopServices
             return item;
         }
 
-        public static ca.sarassist.TaskUpdate taskUpdateToWebServiceItem(this TaskUpdate localItem)
+        public static ca.icscanada.ciapp.TaskUpdate taskUpdateToWebServiceItem(this TaskUpdate localItem)
         {
-            ca.sarassist.TaskUpdate webItem = new ca.sarassist.TaskUpdate();
+            ca.icscanada.ciapp.TaskUpdate webItem = new ca.icscanada.ciapp.TaskUpdate();
 
             webItem.UpdateID = localItem.UpdateID;
             webItem.TaskID = localItem.TaskID;
@@ -40,25 +41,34 @@ namespace WildfireICSDesktopServices
             //Importantly, localitem.data is never used here, and thus never sent to the web server.
             return webItem;
         }
-        */
-
-
-       
 
     }
 
-    public class TaskUpdateService 
+    public class TaskUpdateService : ITaskUpdateService
     {
         public async Task<List<TaskUpdate>> DownloadTaskUpdateDetails(Guid TaskID, Guid machineID, DateTime cutoffDate)
         {
-            throw new NotImplementedException();
+            GetTaskUpdateDetailsComplete = new TaskCompletionSource<bool>();
+            serverUpdateService.GetTaskUpdateDetailsAsync(TaskID, machineID, cutoffDate);
+            await GetTaskUpdateDetailsComplete.Task;
+            return DownloadTaskUpdateDetailsResult;
+
         }
+
         public async Task<bool> SubmitTaskUpdate(TaskUpdate update)
         {
-            throw new NotImplementedException();
+
+            SubmitTaskUpdateComplete = new TaskCompletionSource<bool>();
+            ca.icscanada.ciapp.TaskUpdate webUpdate = update.taskUpdateToWebServiceItem();
+            serverUpdateService.SubmitTaskUpdateAsync(webUpdate);
+            await SubmitTaskUpdateComplete.Task;
+
+            return SubmitTaskUpdateResult;
         }
-        /*
-        ca.sarassist.ICAUpdatesWebservice serverUpdateService;
+    
+
+
+        ca.icscanada.ciapp.ciapp_webservice serverUpdateService;
 
         TaskCompletionSource<bool> SubmitTaskUpdateComplete = null;
         TaskCompletionSource<bool> GetTaskUpdateListComplete = null;
@@ -73,7 +83,7 @@ namespace WildfireICSDesktopServices
 
         public TaskUpdateService()
         {
-            serverUpdateService = new ca.sarassist.ICAUpdatesWebservice();
+            serverUpdateService = new ca.icscanada.ciapp.ciapp_webservice();
 
             serverUpdateService.GetTaskUpdateListCompleted += GetTaskUpdateListCompleted;
             serverUpdateService.SubmitTaskUpdateCompleted += SubmitTaskUpdateCompleted;
@@ -91,7 +101,7 @@ namespace WildfireICSDesktopServices
 
         }
 
-        public async Task<List<TaskUpdate>> DownloadTaskUpdateDetails(Guid TaskID, Guid machineID, DateTime cutoffDate)
+        public async Task<List<TaskUpdate>> DownloadTaskUpdateDetailsAsync(Guid TaskID, Guid machineID, DateTime cutoffDate)
         {
             GetTaskUpdateDetailsComplete = new TaskCompletionSource<bool>();
             serverUpdateService.GetTaskUpdateDetailsAsync(TaskID, machineID, cutoffDate);
@@ -109,17 +119,7 @@ namespace WildfireICSDesktopServices
 
         }
 
-        public async Task<bool> SubmitTaskUpdate(TaskUpdate update)
-        {
-
-            SubmitTaskUpdateComplete = new TaskCompletionSource<bool>();
-            ca.sarassist.TaskUpdate webUpdate = update.taskUpdateToWebServiceItem();
-            serverUpdateService.SubmitTaskUpdateAsync(webUpdate);
-            await SubmitTaskUpdateComplete.Task;
-
-            return SubmitTaskUpdateResult;
-        }
-
+   
 
         public async Task<bool> InitialTaskUpdateExists(Guid TaskID, string EncryiptionKey)
         {
@@ -144,7 +144,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        private void SubmitTaskUpdateCompleted(object sender, ca.sarassist.SubmitTaskUpdateCompletedEventArgs e)
+        private void SubmitTaskUpdateCompleted(object sender, ca.icscanada.ciapp.SubmitTaskUpdateCompletedEventArgs e)
         {
             try
             {
@@ -160,7 +160,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        private void GetTaskUpdateListCompleted(object sender, ca.sarassist.GetTaskUpdateListCompletedEventArgs e)
+        private void GetTaskUpdateListCompleted(object sender, ca.icscanada.ciapp.GetTaskUpdateListCompletedEventArgs e)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace WildfireICSDesktopServices
                 GetTaskUpdateListComplete = GetTaskUpdateListComplete ?? new TaskCompletionSource<bool>();
                 foreach (var item in e.Result)
                 {
-                    DownloadTaskUpdateListResult.Add(TaskUpdateTools.taskUpdateFromWebServiceItem(item));
+                    DownloadTaskUpdateListResult.Add(TaskUpdateWebServiceTools.taskUpdateFromWebServiceItem(item));
                 }
                 GetTaskUpdateListComplete?.TrySetResult(true);
 
@@ -181,7 +181,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-        private void GetTaskUpdateDetailsCompleted(object sender, ca.sarassist.GetTaskUpdateDetailsCompletedEventArgs e)
+        private void GetTaskUpdateDetailsCompleted(object sender, ca.icscanada.ciapp.GetTaskUpdateDetailsCompletedEventArgs e)
         {
             try
             {
@@ -190,7 +190,7 @@ namespace WildfireICSDesktopServices
                 GetTaskUpdateDetailsComplete = GetTaskUpdateDetailsComplete ?? new TaskCompletionSource<bool>();
                 foreach (var item in e.Result)
                 {
-                    DownloadTaskUpdateDetailsResult.Add(TaskUpdateTools.taskUpdateFromWebServiceItem(item));
+                    DownloadTaskUpdateDetailsResult.Add(TaskUpdateWebServiceTools.taskUpdateFromWebServiceItem(item));
                 }
                 GetTaskUpdateDetailsComplete?.TrySetResult(true);
 
@@ -202,7 +202,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-        private void GetTaskUpdateDetailsByCommandCompleted(object sender, ca.sarassist.GetTaskUpdateDetailByCommandCompletedEventArgs e)
+        private void GetTaskUpdateDetailsByCommandCompleted(object sender, ca.icscanada.ciapp.GetTaskUpdateDetailByCommandCompletedEventArgs e)
         {
             try
             {
@@ -211,7 +211,7 @@ namespace WildfireICSDesktopServices
                 GetTaskUpdateDetailsByCommandComplete = GetTaskUpdateDetailsByCommandComplete ?? new TaskCompletionSource<bool>();
                 foreach (var item in e.Result)
                 {
-                    DownloadTaskUpdateDetailsByCommandResult.Add(TaskUpdateTools.taskUpdateFromWebServiceItem(item));
+                    DownloadTaskUpdateDetailsByCommandResult.Add(TaskUpdateWebServiceTools.taskUpdateFromWebServiceItem(item));
                 }
                 GetTaskUpdateDetailsByCommandComplete?.TrySetResult(true);
 
@@ -221,6 +221,6 @@ namespace WildfireICSDesktopServices
             {
 
             }
-        }*/
+        }
     }
 }

@@ -189,6 +189,7 @@ namespace WildfireICSDesktopServices
             if (!update.ProcessedLocally && update.Data != null)
             {
                 string source = update.Source;
+                if (string.IsNullOrEmpty(source)) { source = "internet"; }
 
                 if (update.CommandName.Equals("UPSERT"))
                 {
