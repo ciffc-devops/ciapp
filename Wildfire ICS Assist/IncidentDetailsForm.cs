@@ -2230,8 +2230,11 @@ namespace Wildfire_ICS_Assist
 
                 if (Program.InternetSyncEnabled)
                 {
-                    serverStatusText.Append("Internet Sync Enabled | ");
+                    serverStatusText.Append("Internet sync enabled | ");
                     tmrInternetSync.Enabled = true;
+                } else
+                {
+                    serverStatusText.Append("Internet sync NOT enabled | ");
                 }
 
                 if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && ThisMachineIsServer)
@@ -3002,6 +3005,10 @@ namespace Wildfire_ICS_Assist
             Program.InternetSyncEnabled = true;
         }
 
+        private void supportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://ciapp.icscanada.ca/Support");
+        }
     }
 
 

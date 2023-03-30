@@ -1193,6 +1193,7 @@
             // 
             this.supportToolStripMenuItem.Name = "supportToolStripMenuItem";
             resources.ApplyResources(this.supportToolStripMenuItem, "supportToolStripMenuItem");
+            this.supportToolStripMenuItem.Click += new System.EventHandler(this.supportToolStripMenuItem_Click);
             // 
             // aboutCIAPPToolStripMenuItem
             // 
