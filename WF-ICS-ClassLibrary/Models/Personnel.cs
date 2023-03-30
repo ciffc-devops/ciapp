@@ -489,8 +489,12 @@ namespace WF_ICS_ClassLibrary.Models
         public static string ToCSV(this List<Personnel> members, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();
-            csv.Append("Name"); csv.Append(delimiter);
+            csv.Append("First Name"); csv.Append(delimiter);
+            csv.Append("Middle Initial"); csv.Append(delimiter);
+            csv.Append("Last Name"); csv.Append(delimiter);
             csv.Append("Pronouns"); csv.Append(delimiter);
+            csv.Append("Kind"); csv.Append(delimiter);
+            csv.Append("Type"); csv.Append(delimiter);
             csv.Append("Accomodatoin Preference"); csv.Append(delimiter);
             csv.Append("Province or Territory"); csv.Append(delimiter);
             csv.Append("Country"); csv.Append(delimiter);
@@ -501,7 +505,8 @@ namespace WF_ICS_ClassLibrary.Models
             csv.Append("Home Unit / Agency"); csv.Append(delimiter);
             csv.Append("Dietary Restrictions"); csv.Append(delimiter);
             csv.Append("Allergies"); csv.Append(delimiter);
-
+            csv.Append("Employer Emergency Contact"); csv.Append(delimiter);
+            
             csv.Append(Environment.NewLine);
 
             foreach (Personnel item in members)
@@ -509,8 +514,13 @@ namespace WF_ICS_ClassLibrary.Models
 
                 //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
 
-                csv.Append("\""); csv.Append(item.Name.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.FirstName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.MiddleInitial.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.LastName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
                 csv.Append("\""); csv.Append(item.Pronouns.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Kind.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Type.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
 
                 csv.Append("\""); csv.Append(item.AccomodationPreference.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
 
@@ -526,6 +536,10 @@ namespace WF_ICS_ClassLibrary.Models
                 csv.Append("\""); csv.Append(item.HomeUnit.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.HasDietaryRestrictions.ToString()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.HasAllergies.ToString()); csv.Append("\""); csv.Append(delimiter);
+
+                csv.Append("\""); csv.Append(item.EmergencyContact.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
+
                 csv.Append(Environment.NewLine);
             }
             return csv.ToString();

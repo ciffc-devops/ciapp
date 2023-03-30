@@ -58,17 +58,24 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void setExcelColumnNames()
         {
             List<string> columns = WF_ICS_ClassLibrary.Utilities.ExcelColumns.getExcelColumns();
-            cboName.DataSource = new List<string>(columns);
-            cboAgency.DataSource = new List<string>(columns);
-            cboEmail.DataSource = new List<string>(columns);
-            cboPhone.DataSource = new List<string>(columns);
+            cboFirst.DataSource = new List<string>(columns);
+            cboMiddle.DataSource = new List<string>(columns);
+            cboLast.DataSource = new List<string>(columns);
+            cboAccom.DataSource = new List<string>(columns);
+            cboPronoun.DataSource = new List<string>(columns);
+            cboCountry.DataSource = new List<string>(columns);
             cboProvince.DataSource = new List<string>(columns);
-            cboOtherQualifications.DataSource = new List<string>(columns);
-            cboHomeAgency.DataSource = new List<string>(columns);
-            cboVegetarian.DataSource = new List<string>(columns);
-            cboNoGluten.DataSource = new List<string>(columns);
-            cboOtherDietary.DataSource = new List<string>(columns);
-
+            cboAgency.DataSource = new List<string>(columns);
+            cboContractor.DataSource = new List<string>(columns);
+            cboHomeUnit.DataSource = new List<string>(columns);
+            cboKind.DataSource = new List<string>(columns);
+            cboType.DataSource = new List<string>(columns);
+            cboCell.DataSource = new List<string>(columns);
+            cboEmail.DataSource = new List<string>(columns);
+            cboCallsign.DataSource = new List<string>(columns);
+            cboDietary.DataSource = new List<string>(columns);
+            cboAllergies.DataSource = new List<string>(columns);
+            cboEmergerncy.DataSource = new List<string>(columns);
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -97,29 +104,37 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         {
                             string lower = fields[x].ToLower();
 
-                            if (lower.Equals("Name", StringComparison.InvariantCultureIgnoreCase)) { cboName.SelectedIndex = x; }
-                            else if (lower.Equals("Full Name", StringComparison.InvariantCultureIgnoreCase)) { cboName.SelectedIndex = x; }
-
+                            if (lower.Equals("First Name", StringComparison.InvariantCultureIgnoreCase)) { cboFirst.SelectedIndex = x; }
+                            else if (lower.Equals("First", StringComparison.InvariantCultureIgnoreCase)) { cboFirst.SelectedIndex = x; }
+                            else if (lower.Contains("middle")) { cboMiddle.SelectedIndex = x; }
+                            else if (lower.Equals("Last Name", StringComparison.InvariantCultureIgnoreCase)) { cboLast.SelectedIndex = x; }
+                            else if (lower.Equals("Last", StringComparison.InvariantCultureIgnoreCase)) { cboLast.SelectedIndex = x; }
+                            else if (lower.Contains("pronoun")) { cboPronoun.SelectedIndex = x; }
                             else if (lower.Equals("Agency", StringComparison.InvariantCultureIgnoreCase)) { cboAgency.SelectedIndex = x; }
                             else if (lower.Equals("Organization", StringComparison.InvariantCultureIgnoreCase)) { cboAgency.SelectedIndex = x; }
 
                             else if (lower.Contains("email")) { cboEmail.SelectedIndex = x; }
 
-                            else if (lower.Contains("phone")) { cboPhone.SelectedIndex = x; }
+                            else if (lower.Contains("phone")) { cboCell.SelectedIndex = x; }
+                            else if (lower.Contains("cell")) { cboCell.SelectedIndex = x; }
 
+                            else if (lower.Contains("country")) { cboCountry.SelectedIndex = x; }
                             else if (lower.Contains("province")) { cboProvince.SelectedIndex = x; }
                             else if (lower.Contains("territory")) { cboProvince.SelectedIndex = x; }
 
-                            else if (lower.Contains("qualification")) { cboOtherQualifications.SelectedIndex = x; }
-                            else if (lower.Contains("skills")) { cboOtherQualifications.SelectedIndex = x; }
+                            else if (lower.Contains("kind")) { cboKind.SelectedIndex = x; }
+                            else if (lower.Contains("type")) { cboType.SelectedIndex = x; }
 
-                            else if (lower.Equals("home unit", StringComparison.InvariantCultureIgnoreCase)) { cboHomeAgency.SelectedIndex = x; }
-                            else if (lower.Contains("home unit")) { cboHomeAgency.SelectedIndex = x; }
-                            else if (lower.Equals("home agency", StringComparison.InvariantCultureIgnoreCase)) { cboHomeAgency.SelectedIndex = x; }
+                            else if (lower.Equals("home unit", StringComparison.InvariantCultureIgnoreCase)) { cboHomeUnit.SelectedIndex = x; }
+                            else if (lower.Contains("home unit")) { cboHomeUnit.SelectedIndex = x; }
+                            else if (lower.Equals("home agency", StringComparison.InvariantCultureIgnoreCase)) { cboHomeUnit.SelectedIndex = x; }
 
-                            else if (lower.Contains("vegetarian")) { cboVegetarian.SelectedIndex = x; }
-                            else if (lower.Contains("gluten")) { cboNoGluten.SelectedIndex = x; }
-                            else if (lower.Contains("dietary")) { cboOtherDietary.SelectedIndex = x; }
+                            else if (lower.Contains("call sign")) { cboCallsign.SelectedIndex = x; }
+                            else if (lower.Contains("callsign")) { cboCallsign.SelectedIndex = x; }
+
+                            else if (lower.Contains("allergies")) { cboAllergies.SelectedIndex = x; }
+                            else if (lower.Contains("dietary")) { cboDietary.SelectedIndex = x; }
+                            else if (lower.Contains("emergency")) { cboEmergerncy.SelectedIndex = x; }
                         }
 
                     }
@@ -159,16 +174,24 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private bool ImportMemberFromFile(string path)
         {
             List<Personnel> importedMembers = new List<Personnel>();
-            int nameCol = cboName.SelectedIndex;
+            int firstCol = cboFirst.SelectedIndex;
+            int lastCol = cboLast.SelectedIndex;
+            int accomCol = cboAccom.SelectedIndex;
+            int pronounCol = cboPronoun.SelectedIndex;
+            int middCol = cboMiddle.SelectedIndex;
+            int provCol = cboProvince.SelectedIndex;
+            int countryCol = cboCountry.SelectedIndex;
             int agencyCol = cboAgency.SelectedIndex;
+            int contractorCol = cboContractor.SelectedIndex;
+            int homeCol = cboHomeUnit.SelectedIndex;
+            int kindCol = cboKind.SelectedIndex;
+            int typeCol = cboType.SelectedIndex;
+            int cellCol = cboCell.SelectedIndex;
             int emailCol = cboEmail.SelectedIndex;
-            int phoneCol = cboPhone.SelectedIndex;
-            int provinceCol = cboProvince.SelectedIndex;
-            int qualCol = cboOtherQualifications.SelectedIndex;
-            int homeCol = cboHomeAgency.SelectedIndex;
-            int vegCol = cboVegetarian.SelectedIndex;
-            int noglutenCol = cboNoGluten.SelectedIndex;
-            int dietaryCol = cboOtherDietary.SelectedIndex;
+            int callsignCol = cboCallsign.SelectedIndex;
+            int dietaryCol = cboDietary.SelectedIndex;
+            int allergyCol = cboAllergies.SelectedIndex;
+            int emergCol = cboEmergerncy.SelectedIndex;
 
             List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
             agencies = agencies.OrderBy(o => o).ToList();
@@ -192,55 +215,73 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                     //Need a check for the header row
 
-                    Personnel member = new Personnel();
-                    member.Name = fields[nameCol];
-                    member.CellphoneNumber = fields[phoneCol];
-                    member.MemberActive = true;
-                    member.Email = fields[emailCol];
+                    Personnel p = new Personnel();
+                    p.FirstName = fields[firstCol];
+                    p.MiddleInitial = fields[middCol];
+                    p.LastName = fields[lastCol];
+                    p.Pronouns = fields[pronounCol];
+                    p.CallSign = fields[callsignCol];
+
+                    p.CellphoneNumber = fields[cellCol];
+                    p.MemberActive = true;
+                    p.Email = fields[emailCol];
                     //member.Dietary = fields[dietaryCol];
 
-                    string xlProvince = fields[provinceCol];
-                    if (string.IsNullOrEmpty(xlProvince)) { member.HomeProvinceID = new Guid(cboDefaultProvince.SelectedValue.ToString()); }
+                    p.HomeCountry = fields[countryCol];
+                    p.Kind = fields[kindCol];
+                    p.Type = fields[typeCol];
+                    p.EmergencyContact = fields[emergCol];
+
+
+                    string xlAccom = fields[accomCol];
+                    if (xlAccom != null && (xlAccom.Contains("female") || xlAccom.Contains("woman"))) { p.AccomodationPreference = "Female-Only"; }
+                    else if (xlAccom != null && (xlAccom.Contains("male") || xlAccom.Contains("man"))) { p.AccomodationPreference = "Male-Only"; }
+                    else { p.AccomodationPreference = "Not Gender-Restricted"; }
+
+                    string xlProvince = fields[provCol];
+                    if (string.IsNullOrEmpty(xlProvince)) { p.HomeProvinceID = new Guid(cboDefaultProvince.SelectedValue.ToString()); }
                     else
                     {
                         List<Province> provinces = ProvinceTools.GetProvinces();
                         if (provinces.Any(o => o.ProvinceName.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase) || o.ProvinceShort.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase)))
                         {
-                            member.HomeProvinceID = provinces.First(o => o.ProvinceName.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase) || o.ProvinceShort.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase)).ProvinceGUID;
+                            p.HomeProvinceID = provinces.First(o => o.ProvinceName.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase) || o.ProvinceShort.Equals(xlProvince, StringComparison.InvariantCultureIgnoreCase)).ProvinceGUID;
                         }
-                        else { member.HomeProvinceID = new Guid(cboDefaultProvince.SelectedValue.ToString()); }
+                        else { p.HomeProvinceID = new Guid(cboDefaultProvince.SelectedValue.ToString()); }
 
                     }
 
 
                     string xlAgency = fields[agencyCol];
-                    if (string.IsNullOrEmpty(xlAgency)) { member.Agency = cboDefaultAgency.SelectedValue.ToString(); }
+                    if (string.IsNullOrEmpty(xlAgency)) { p.Agency = cboDefaultAgency.SelectedValue.ToString(); }
                     else
                     {
                         //this will use an existing agency if there's a case-insensitive match. that way we don't have duplciates with different capitalization.
-                        if (agencies.Any(o => xlAgency.Equals(o, StringComparison.InvariantCultureIgnoreCase))) { member.Agency = agencies.First(o => xlAgency.Equals(o, StringComparison.InvariantCultureIgnoreCase)); }
-                        else { member.Agency = xlAgency; }
+                        if (agencies.Any(o => xlAgency.Equals(o, StringComparison.InvariantCultureIgnoreCase))) { p.Agency = agencies.First(o => xlAgency.Equals(o, StringComparison.InvariantCultureIgnoreCase)); }
+                        else { p.Agency = xlAgency; }
                     }
                     string xlHome = fields[homeCol];
-                    if (string.IsNullOrEmpty(xlHome)) { member.HomeUnit = cboDefaultAgency.SelectedValue.ToString(); }
+                    if (string.IsNullOrEmpty(xlHome)) { p.HomeUnit = cboDefaultAgency.SelectedValue.ToString(); }
                     else
                     {
                         //this will use an existing agency if there's a case-insensitive match. that way we don't have duplciates with different capitalization.
-                        if (agencies.Any(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase))) { member.HomeUnit = agencies.First(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase)); }
-                        else { member.HomeUnit = xlHome; }
+                        if (agencies.Any(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase))) { p.HomeUnit = agencies.First(o => xlHome.Equals(o, StringComparison.InvariantCultureIgnoreCase)); }
+                        else { p.HomeUnit = xlHome; }
                     }
 
+                    string xlContract = fields[contractorCol];
+                    if (xlContract.Equals("yes", StringComparison.InvariantCultureIgnoreCase) || xlContract.Equals("y", StringComparison.InvariantCultureIgnoreCase) || xlContract.Equals("1", StringComparison.InvariantCultureIgnoreCase) || xlContract.Equals("true", StringComparison.InvariantCultureIgnoreCase)) { p.IsContractor = true; }
+                    else { p.IsContractor = false; }
 
-                    /*
-                    string xlVeg = fields[vegCol];
-                    if (xlVeg.Equals("yes", StringComparison.InvariantCultureIgnoreCase) || xlVeg.Equals("y", StringComparison.InvariantCultureIgnoreCase) || xlVeg.Equals("1", StringComparison.InvariantCultureIgnoreCase) || xlVeg.Equals("true", StringComparison.InvariantCultureIgnoreCase)) { member.Vegetarian = true; }
-                    else { member.Vegetarian = false; }
+                    string xlAllergy = fields[allergyCol];
+                    if (xlAllergy.Equals("yes", StringComparison.InvariantCultureIgnoreCase) || xlAllergy.Equals("y", StringComparison.InvariantCultureIgnoreCase) || xlAllergy.Equals("1", StringComparison.InvariantCultureIgnoreCase) || xlAllergy.Equals("true", StringComparison.InvariantCultureIgnoreCase)) { p.HasAllergies = true; }
+                    else { p.HasAllergies = false; }
 
-                    string xNoGl = fields[noglutenCol];
-                    if (xNoGl.Equals("yes", StringComparison.InvariantCultureIgnoreCase) || xNoGl.Equals("y", StringComparison.InvariantCultureIgnoreCase) || xNoGl.Equals("1", StringComparison.InvariantCultureIgnoreCase) || xNoGl.Equals("true", StringComparison.InvariantCultureIgnoreCase)) { member.NoGluten = true; }
-                    else { member.NoGluten = false; }
-                    */
-                    if (!string.IsNullOrEmpty(member.Name)) { importedMembers.Add(member); }
+                    string xlDietary = fields[dietaryCol];
+                    if (xlDietary.Equals("yes", StringComparison.InvariantCultureIgnoreCase) || xlDietary.Equals("y", StringComparison.InvariantCultureIgnoreCase) || xlDietary.Equals("1", StringComparison.InvariantCultureIgnoreCase) || xlDietary.Equals("true", StringComparison.InvariantCultureIgnoreCase)) { p.HasAllergies = true; }
+                    else { p.HasAllergies = false; }
+
+                    if (!string.IsNullOrEmpty(p.Name)) { importedMembers.Add(p); }
                 }
 
 
@@ -262,14 +303,23 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         if (possibleDuplicates.Count == 1) { dup = possibleDuplicates[0]; }
                         else { dup = possibleDuplicates.First(o => o.MemberActive); }
                         dup.MemberActive = true;
-                        dup.Name = member.Name;
-                        dup.CellphoneNumber = member.CellphoneNumber;
-
-                        dup.Email = member.Email;
-                        
-                        dup.Agency = member.Agency;
-                        dup.HomeUnit = member.HomeUnit;
+                        dup.FirstName = member.FirstName;
+                        dup.MiddleInitial = member.MiddleInitial;
+                        dup.Pronouns = member.Pronouns;
+                        dup.AccomodationPreference = member.AccomodationPreference;
+                        dup.HomeCountry = member.HomeCountry;
                         dup.HomeProvinceID = member.HomeProvinceID;
+                        dup.Agency = member.Agency;
+                        dup.IsContractor = member.IsContractor;
+                        dup.Kind = member.Kind;
+                        dup.Type = member.Type;
+                        dup.CellphoneNumber = member.CellphoneNumber;
+                        dup.Email = member.Email;
+                        dup.CallSign    = member.CallSign;
+                        dup.HasDietaryRestrictions = member.HasDietaryRestrictions;
+                        dup.HasAllergies    = member.HasAllergies;
+                        dup.EmergencyContact = member.EmergencyContact;
+                        dup.HomeUnit = member.HomeUnit;
                         Program.generalOptionsService.UpserOptionValue(dup, "TeamMember");
                         UpdatedCount++;
 

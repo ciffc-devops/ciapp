@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="4F5D4DC1-2BC4-4FC1-BCA4-DFCD2DBB790C" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.4.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
+	<Product Id="c52efb66-6f2a-4694-b3f2-aedac8e55a01" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.5.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
          Manufacturer='CIFFC' />
 
@@ -191,6 +191,9 @@
 			<Component Id='ICS_203_WF_Organization_Assignment_List_Blanked_pdf' Guid ='ec60d4e0-c097-4cf0-9027-2fabccec0b7e'>
 				<File Id='ICS_203_WF_Organization_Assignment_List_Blanked_pdf' Name='ICS-203-WF Organization Assignment List Blanked.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-203-WF Organization Assignment List Blanked.pdf' KeyPath='yes'></File>
 			</Component>
+			<Component Id='ICS_204A_WF_Assignment_Details_pdf' Guid ='8133a843-bab4-4638-b172-1cdd0ab60dd8'>
+				<File Id='ICS_204A_WF_Assignment_Details_pdf' Name='ICS-204A-WF Assignment Details.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-204A-WF Assignment Details.pdf' KeyPath='yes'></File>
+			</Component>
 			<Component Id='ICS_204_WF_Assignment_List_pdf' Guid ='232b5b2f-b087-4684-a987-684c9103cf0d'>
 				<File Id='ICS_204_WF_Assignment_List_pdf' Name='ICS-204-WF Assignment List.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-204-WF Assignment List.pdf' KeyPath='yes'></File>
 			</Component>
@@ -233,9 +236,19 @@
 			<Component Id='ICS_220_WF_Air_Operations_Summary_pdf' Guid ='9451fa2f-4bac-44b6-a5e2-1aacd4027a7b'>
 				<File Id='ICS_220_WF_Air_Operations_Summary_pdf' Name='ICS-220-WF Air Operations Summary.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-220-WF Air Operations Summary.pdf' KeyPath='yes'></File>
 			</Component>
-			<Component Id='ICS_204A_WF_Assignment_Details_pdf' Guid ='8133a843-bab4-4638-b172-1cdd0ab60dd8'>
-				<File Id='ICS_204A_WF_Assignment_Details_pdf' Name='ICS-204A-WF Assignment Details.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-204A-WF Assignment Details.pdf' KeyPath='yes'></File>
+			<Component Id='Logistics_Overview_pdf' Guid ='deab6c3e-e25e-4d6c-81de-19ff5d3e61d9'>
+				<File Id='Logistics_Overview_pdf' Name='Logistics Overview.pdf' DiskId='1' Source='ProgramOutput\BlankForms\Logistics Overview.pdf' KeyPath='yes'></File>
 			</Component>
+			<Component Id='Logistics_Overview_Subsequent_Page_pdf' Guid ='244d88bb-cd9b-4bdd-b71c-d1299a89a3bf'>
+				<File Id='Logistics_Overview_Subsequent_Page_pdf' Name='Logistics Overview Subsequent Page.pdf' DiskId='1' Source='ProgramOutput\BlankForms\Logistics Overview Subsequent Page.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_221_WF_Demobilization_Checkout_pdf' Guid ='14288a87-b1dc-42ae-97ad-04c4d8ff5b6a'>
+				<File Id='ICS_221_WF_Demobilization_Checkout_pdf' Name='ICS-221-WF Demobilization Checkout.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-221-WF Demobilization Checkout.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_211_WF_Check_In_pdf' Guid ='8a35b34f-27d2-4982-acdd-e979358ef3d8'>
+				<File Id='ICS_211_WF_Check_In_pdf' Name='ICS-211-WF Check In.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-211-WF Check In.pdf' KeyPath='yes'></File>
+			</Component>
+
 
 
 		</ComponentGroup>
