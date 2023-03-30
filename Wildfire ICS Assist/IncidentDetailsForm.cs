@@ -2164,11 +2164,12 @@ namespace Wildfire_ICS_Assist
                 await Task.WhenAll(send, get);
                 //tmrInternetSync.Enabled = true;
 
+                /*
                 this.BeginInvoke((Action)delegate ()
                 {
                     lblServerStatus.Text = "Last Internet Check " + DateTime.Now.ToString("HH:mm:ss");
                 });
-
+                */
             }
         }
 
