@@ -293,6 +293,8 @@ namespace Wildfire_ICS_Assist
             {
                 SafetyMessage msg = cboSafetyMessages.SelectedItem as SafetyMessage;
                 txtGeneralSafetyMessage.Text = msg.Message.Replace("\n", Environment.NewLine); ;
+                objectivesSheet.GeneralSafety = txtGeneralSafetyMessage.Text;
+
             }
         }
 

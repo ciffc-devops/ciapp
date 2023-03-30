@@ -100,8 +100,8 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.cpFireStatus);
             this.splitContainer2.Panel2.Controls.Add(this.cpGeneralSafety);
+            this.splitContainer2.Panel2.Controls.Add(this.cpFireStatus);
             this.splitContainer2.Panel2.Controls.Add(this.cpWeather);
             this.splitContainer2.Size = new System.Drawing.Size(1079, 390);
             this.splitContainer2.SplitterDistance = 577;
@@ -227,7 +227,7 @@
             // 
             // cpGeneralSafety
             // 
-            this.cpGeneralSafety.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpGeneralSafety.BackColor = System.Drawing.Color.White;
             this.cpGeneralSafety.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpGeneralSafety.CollapsedHeight = 40;
             this.cpGeneralSafety.CollapsedWidth = 485;
@@ -235,14 +235,14 @@
             this.cpGeneralSafety.Controls.Add(this.cboSafetyMessages);
             this.cpGeneralSafety.Controls.Add(this.btnFillSafetyFrom208);
             this.cpGeneralSafety.Controls.Add(this.txtGeneralSafetyMessage);
-            this.cpGeneralSafety.CurrentlyCollapsed = true;
+            this.cpGeneralSafety.CurrentlyCollapsed = false;
             this.cpGeneralSafety.ExpandedHeight = 300;
             this.cpGeneralSafety.ExpandedWidth = 485;
             this.cpGeneralSafety.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.cpGeneralSafety.Location = new System.Drawing.Point(7, 67);
             this.cpGeneralSafety.Margin = new System.Windows.Forms.Padding(6);
             this.cpGeneralSafety.Name = "cpGeneralSafety";
-            this.cpGeneralSafety.Size = new System.Drawing.Size(485, 40);
+            this.cpGeneralSafety.Size = new System.Drawing.Size(485, 300);
             this.cpGeneralSafety.TabIndex = 59;
             this.cpGeneralSafety.TitleText = "General Safety Message";
             // 

@@ -82,7 +82,7 @@ namespace WF_ICS_ClassLibrary.Models
                 {
                     try
                     {
-
+                        _Data = CompressionUtilities.Decompress(_DataAsJSONString);
                         _Data = _DataAsJSONString.ObjectFromJSONData(ObjectType);
                     }
                     catch (Exception) { _Data = null; }
@@ -97,6 +97,7 @@ namespace WF_ICS_ClassLibrary.Models
                 {
                     //_DataAsXMLString = value.XmlSerializeToString();
                     _DataAsJSONString = JsonSerializer.Serialize(value);
+                    _DataAsJSONString = CompressionUtilities.Compress(_DataAsJSONString);
                 }
             }
         }
