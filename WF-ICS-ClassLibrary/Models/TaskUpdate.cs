@@ -97,7 +97,9 @@ namespace WF_ICS_ClassLibrary.Models
                 {
                     //_DataAsXMLString = value.XmlSerializeToString();
                     _DataAsJSONString = JsonSerializer.Serialize(value);
+                    int len = _DataAsJSONString.Length;
                     _DataAsJSONString = CompressionUtilities.Compress(_DataAsJSONString);
+                    int len2 = _DataAsJSONString.Length;
                 }
             }
         }
