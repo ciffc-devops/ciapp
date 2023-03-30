@@ -57,6 +57,7 @@
             this.btnDemob = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnStartCheckIn = new System.Windows.Forms.Button();
+            this.svdExport = new System.Windows.Forms.SaveFileDialog();
             this.cpPNumbers = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnPNumHelp = new System.Windows.Forms.Button();
             this.numCNumMax = new System.Windows.Forms.NumericUpDown();
@@ -85,7 +86,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cboResourceVariety = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.btnPrinttAll211sToDate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -123,7 +124,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnLogisticsOverview);
+            this.splitContainer1.Panel2.Controls.Add(this.btnPrinttAll211sToDate);
             this.splitContainer1.Panel2.Controls.Add(this.btnExportSignInToCSV);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
             this.splitContainer1.Panel2.Controls.Add(this.btnDemob);
@@ -335,10 +336,10 @@
             // 
             // btnLogisticsOverview
             // 
-            this.btnLogisticsOverview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogisticsOverview.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnLogisticsOverview.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnLogisticsOverview.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogisticsOverview.Location = new System.Drawing.Point(522, 3);
+            this.btnLogisticsOverview.Location = new System.Drawing.Point(463, 587);
             this.btnLogisticsOverview.Name = "btnLogisticsOverview";
             this.btnLogisticsOverview.Size = new System.Drawing.Size(150, 66);
             this.btnLogisticsOverview.TabIndex = 51;
@@ -350,12 +351,12 @@
             // btnExportSignInToCSV
             // 
             this.btnExportSignInToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportSignInToCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportSignInToCSV.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnExportSignInToCSV.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
             this.btnExportSignInToCSV.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportSignInToCSV.Location = new System.Drawing.Point(1055, 2);
+            this.btnExportSignInToCSV.Location = new System.Drawing.Point(918, 3);
             this.btnExportSignInToCSV.Name = "btnExportSignInToCSV";
-            this.btnExportSignInToCSV.Size = new System.Drawing.Size(197, 66);
+            this.btnExportSignInToCSV.Size = new System.Drawing.Size(136, 66);
             this.btnExportSignInToCSV.TabIndex = 50;
             this.btnExportSignInToCSV.Text = "Export to CSV";
             this.btnExportSignInToCSV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -365,20 +366,21 @@
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.Location = new System.Drawing.Point(1258, 2);
+            this.btnPrint.Location = new System.Drawing.Point(1060, 3);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(169, 66);
             this.btnPrint.TabIndex = 49;
-            this.btnPrint.Text = "Print ICS-211";
+            this.btnPrint.Text = "Print new ICS-211";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnDemob
             // 
-            this.btnDemob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDemob.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_432_log_out;
             this.btnDemob.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnDemob.Location = new System.Drawing.Point(307, 3);
@@ -392,7 +394,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnEdit.Location = new System.Drawing.Point(152, 3);
@@ -406,7 +408,7 @@
             // 
             // btnStartCheckIn
             // 
-            this.btnStartCheckIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartCheckIn.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnStartCheckIn.Image = ((System.Drawing.Image)(resources.GetObject("btnStartCheckIn.Image")));
             this.btnStartCheckIn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnStartCheckIn.Location = new System.Drawing.Point(3, 3);
@@ -417,6 +419,11 @@
             this.btnStartCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnStartCheckIn.UseVisualStyleBackColor = true;
             this.btnStartCheckIn.Click += new System.EventHandler(this.btnStartCheckIn_Click);
+            // 
+            // svdExport
+            // 
+            this.svdExport.DefaultExt = "csv";
+            this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
             // cpPNumbers
             // 
@@ -865,16 +872,27 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Resource Variety";
             // 
-            // svdExport
+            // btnPrinttAll211sToDate
             // 
-            this.svdExport.DefaultExt = "csv";
-            this.svdExport.Filter = "Comma-separated values|*.csv";
+            this.btnPrinttAll211sToDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrinttAll211sToDate.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.btnPrinttAll211sToDate.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrinttAll211sToDate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrinttAll211sToDate.Location = new System.Drawing.Point(1235, 3);
+            this.btnPrinttAll211sToDate.Name = "btnPrinttAll211sToDate";
+            this.btnPrinttAll211sToDate.Size = new System.Drawing.Size(193, 66);
+            this.btnPrinttAll211sToDate.TabIndex = 51;
+            this.btnPrinttAll211sToDate.Text = "Print all ICS-211s to date";
+            this.btnPrinttAll211sToDate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrinttAll211sToDate.UseVisualStyleBackColor = true;
+            this.btnPrinttAll211sToDate.Click += new System.EventHandler(this.btnPrinttAll211sToDate_Click);
             // 
             // CheckedInResourcesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1439, 658);
+            this.Controls.Add(this.btnLogisticsOverview);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -965,5 +983,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLastDay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.SaveFileDialog svdExport;
+        private System.Windows.Forms.Button btnPrinttAll211sToDate;
     }
 }

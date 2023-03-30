@@ -37,7 +37,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtPhone = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -76,6 +75,7 @@
             this.cboOtherAgency = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.txtPronouns = new System.Windows.Forms.TextBox();
+            this.txtCellphone = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,6 +96,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboProvince.DataSource = this.bsProvAndTerr;
             this.cboProvince.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboProvince.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboProvince.FormattingEnabled = true;
             this.cboProvince.Location = new System.Drawing.Point(214, 258);
             this.cboProvince.Margin = new System.Windows.Forms.Padding(6);
@@ -111,12 +112,13 @@
             this.cboAgency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboAgency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboAgency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAgency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboAgency.FormattingEnabled = true;
             this.cboAgency.Location = new System.Drawing.Point(214, 302);
             this.cboAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboAgency.Name = "cboAgency";
             this.cboAgency.Size = new System.Drawing.Size(190, 32);
-            this.cboAgency.TabIndex = 8;
+            this.cboAgency.TabIndex = 7;
             this.cboAgency.SelectedIndexChanged += new System.EventHandler(this.cboAgency_SelectedIndexChanged);
             this.cboAgency.Leave += new System.EventHandler(this.cboAgency_Leave);
             // 
@@ -150,18 +152,6 @@
             this.label3.Text = "Agency";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtPhone
-            // 
-            this.txtPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPhone.Location = new System.Drawing.Point(214, 540);
-            this.txtPhone.Mask = "(999) 000-0000";
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(190, 29);
-            this.txtPhone.TabIndex = 10;
-            this.txtPhone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtPhone_MaskInputRejected);
-            this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
-            // 
             // label5
             // 
             this.label5.Location = new System.Drawing.Point(18, 540);
@@ -179,7 +169,7 @@
             this.txtEmail.Location = new System.Drawing.Point(214, 579);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(190, 29);
-            this.txtEmail.TabIndex = 11;
+            this.txtEmail.TabIndex = 14;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // label6
@@ -198,11 +188,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboHomeAgency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboHomeAgency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboHomeAgency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboHomeAgency.FormattingEnabled = true;
             this.cboHomeAgency.Location = new System.Drawing.Point(214, 421);
             this.cboHomeAgency.Name = "cboHomeAgency";
             this.cboHomeAgency.Size = new System.Drawing.Size(190, 32);
-            this.cboHomeAgency.TabIndex = 12;
+            this.cboHomeAgency.TabIndex = 10;
             this.cboHomeAgency.Leave += new System.EventHandler(this.cboHomeAgency_Leave);
             // 
             // label7
@@ -274,7 +265,7 @@
             this.txtNOKName.Location = new System.Drawing.Point(211, 724);
             this.txtNOKName.Name = "txtNOKName";
             this.txtNOKName.Size = new System.Drawing.Size(190, 29);
-            this.txtNOKName.TabIndex = 16;
+            this.txtNOKName.TabIndex = 18;
             this.toolTip1.SetToolTip(this.txtNOKName, "Ideally, your EMBC ID#");
             this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged);
             // 
@@ -341,7 +332,7 @@
             this.txtCallsign.Location = new System.Drawing.Point(214, 613);
             this.txtCallsign.Name = "txtCallsign";
             this.txtCallsign.Size = new System.Drawing.Size(190, 29);
-            this.txtCallsign.TabIndex = 13;
+            this.txtCallsign.TabIndex = 15;
             this.txtCallsign.TextChanged += new System.EventHandler(this.txtCallsign_TextChanged);
             // 
             // chkDietary
@@ -350,7 +341,7 @@
             this.chkDietary.Location = new System.Drawing.Point(214, 648);
             this.chkDietary.Name = "chkDietary";
             this.chkDietary.Size = new System.Drawing.Size(220, 28);
-            this.chkDietary.TabIndex = 14;
+            this.chkDietary.TabIndex = 16;
             this.chkDietary.Text = "Yes, dietary restrictions";
             this.chkDietary.UseVisualStyleBackColor = true;
             this.chkDietary.CheckedChanged += new System.EventHandler(this.chkDietary_CheckedChanged);
@@ -381,6 +372,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboCountry.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboCountry.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboCountry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboCountry.FormattingEnabled = true;
             this.cboCountry.Items.AddRange(new object[] {
             "Afghanistan",
@@ -583,7 +575,7 @@
             this.cboCountry.Margin = new System.Windows.Forms.Padding(6);
             this.cboCountry.Name = "cboCountry";
             this.cboCountry.Size = new System.Drawing.Size(190, 32);
-            this.cboCountry.TabIndex = 7;
+            this.cboCountry.TabIndex = 5;
             this.cboCountry.Leave += new System.EventHandler(this.cboCountry_Leave);
             // 
             // label10
@@ -645,6 +637,7 @@
             this.cboAccomodationPreference.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboAccomodationPreference.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboAccomodationPreference.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAccomodationPreference.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboAccomodationPreference.FormattingEnabled = true;
             this.cboAccomodationPreference.Items.AddRange(new object[] {
             "Male-Only",
@@ -654,7 +647,7 @@
             this.cboAccomodationPreference.Margin = new System.Windows.Forms.Padding(6);
             this.cboAccomodationPreference.Name = "cboAccomodationPreference";
             this.cboAccomodationPreference.Size = new System.Drawing.Size(190, 32);
-            this.cboAccomodationPreference.TabIndex = 3;
+            this.cboAccomodationPreference.TabIndex = 4;
             this.cboAccomodationPreference.SelectedIndexChanged += new System.EventHandler(this.cboAccomodationPreference_SelectedIndexChanged);
             this.cboAccomodationPreference.Leave += new System.EventHandler(this.cboGender_Leave);
             // 
@@ -695,7 +688,7 @@
             this.chkAllergies.Location = new System.Drawing.Point(214, 682);
             this.chkAllergies.Name = "chkAllergies";
             this.chkAllergies.Size = new System.Drawing.Size(141, 28);
-            this.chkAllergies.TabIndex = 15;
+            this.chkAllergies.TabIndex = 17;
             this.chkAllergies.Text = "Yes, allergies";
             this.chkAllergies.UseVisualStyleBackColor = true;
             this.chkAllergies.CheckedChanged += new System.EventHandler(this.chkAllergies_CheckedChanged);
@@ -726,6 +719,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboKind.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboKind.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboKind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboKind.FormattingEnabled = true;
             this.cboKind.Items.AddRange(new object[] {
             "Overhead / IMT",
@@ -736,7 +730,7 @@
             this.cboKind.Location = new System.Drawing.Point(214, 459);
             this.cboKind.Name = "cboKind";
             this.cboKind.Size = new System.Drawing.Size(190, 32);
-            this.cboKind.TabIndex = 4;
+            this.cboKind.TabIndex = 11;
             this.cboKind.Leave += new System.EventHandler(this.cboKind_Leave);
             // 
             // cboType
@@ -744,6 +738,7 @@
             this.cboType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboType.FormattingEnabled = true;
             this.cboType.Items.AddRange(new object[] {
             "Type 1",
@@ -752,7 +747,7 @@
             this.cboType.Location = new System.Drawing.Point(214, 502);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(190, 32);
-            this.cboType.TabIndex = 5;
+            this.cboType.TabIndex = 12;
             this.cboType.Leave += new System.EventHandler(this.cboType_Leave);
             // 
             // label19
@@ -771,12 +766,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboOtherAgency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboOtherAgency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboOtherAgency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboOtherAgency.FormattingEnabled = true;
             this.cboOtherAgency.Location = new System.Drawing.Point(214, 346);
             this.cboOtherAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboOtherAgency.Name = "cboOtherAgency";
             this.cboOtherAgency.Size = new System.Drawing.Size(190, 32);
-            this.cboOtherAgency.TabIndex = 133;
+            this.cboOtherAgency.TabIndex = 8;
             this.cboOtherAgency.Leave += new System.EventHandler(this.cboOtherAgency_Leave);
             // 
             // label20
@@ -797,14 +793,26 @@
             this.txtPronouns.Margin = new System.Windows.Forms.Padding(6);
             this.txtPronouns.Name = "txtPronouns";
             this.txtPronouns.Size = new System.Drawing.Size(190, 29);
-            this.txtPronouns.TabIndex = 135;
+            this.txtPronouns.TabIndex = 3;
             this.txtPronouns.TextChanged += new System.EventHandler(this.txtPronouns_TextChanged);
+            // 
+            // txtCellphone
+            // 
+            this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCellphone.Location = new System.Drawing.Point(214, 543);
+            this.txtCellphone.Margin = new System.Windows.Forms.Padding(6);
+            this.txtCellphone.Name = "txtCellphone";
+            this.txtCellphone.Size = new System.Drawing.Size(190, 29);
+            this.txtCellphone.TabIndex = 13;
+            this.txtCellphone.TextChanged += new System.EventHandler(this.txtCellphone_TextChanged);
             // 
             // PersonnelEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.txtCellphone);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.txtPronouns);
             this.Controls.Add(this.btnEmailHelp);
@@ -841,7 +849,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -868,7 +875,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.MaskedTextBox txtPhone;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label6;
@@ -908,5 +914,6 @@
         private System.Windows.Forms.Button btnEmailHelp;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtPronouns;
+        private System.Windows.Forms.TextBox txtCellphone;
     }
 }

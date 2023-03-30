@@ -119,7 +119,7 @@
             this.btnMedivacHelpSaved.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMedivacHelpSaved.BackgroundImage")));
             this.btnMedivacHelpSaved.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMedivacHelpSaved.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnMedivacHelpSaved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMedivacHelpSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnMedivacHelpSaved.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnMedivacHelpSaved.Location = new System.Drawing.Point(409, 147);
             this.btnMedivacHelpSaved.Name = "btnMedivacHelpSaved";
@@ -207,7 +207,7 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.Location = new System.Drawing.Point(710, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
@@ -248,7 +248,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 487);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -292,7 +292,7 @@
             this.btnMedivacHelpNew.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMedivacHelpNew.BackgroundImage")));
             this.btnMedivacHelpNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMedivacHelpNew.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnMedivacHelpNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMedivacHelpNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnMedivacHelpNew.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnMedivacHelpNew.Location = new System.Drawing.Point(480, 377);
             this.btnMedivacHelpNew.Name = "btnMedivacHelpNew";
@@ -420,7 +420,7 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(629, 419);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);

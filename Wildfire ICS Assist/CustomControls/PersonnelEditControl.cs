@@ -21,7 +21,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void displayTeamMember()
         {
             cboAgency.DataSource = AgencyTools.GetFixedAgencies();
-
+            
 
 
             if (Program.generalOptionsService != null && Program.generalOptionsService.GetOptionsValue("Agencies") != null)
@@ -30,8 +30,8 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                 List<string> homebases = (List<string>)Program.generalOptionsService.GetOptionsValue("HomeBases");
                 List<string> incidentBases = Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.HomeUnit)).GroupBy(o => o.HomeUnit).Select(o => o.First().HomeUnit).ToList();
-                homebases.AddRange(incidentBases.Distinct());
-                homebases = homebases.OrderBy(o => o).ToList();
+                homebases.AddRange(incidentBases);
+                homebases = homebases.Distinct().OrderBy(o => o).ToList();
                 homebases.Insert(0, string.Empty);
 
                 cboHomeAgency.DataSource = homebases;
@@ -57,7 +57,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                     }
                 }
                 chkContractor.Checked = teamMember.IsContractor;
-                txtPhone.Text = teamMember.CellphoneNumber;
+                txtCellphone.Text = teamMember.CellphoneNumber;
                 cboType.Text = teamMember.Type;
                 cboKind.Text = teamMember.Kind;
                 txtPronouns.Text = teamMember.Pronouns;
@@ -102,7 +102,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public PersonnelEditControl()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.BackColor = Program.FormBackground; cboAccomodationPreference.SelectedIndex = 0;
             List<Province> provinces = ProvinceTools.GetProvinces();
             Province other = new Province(); other.ProvinceGUID = Guid.Empty; other.ProvinceName = "Other / NA"; provinces.Add(other);
             bsProvAndTerr.DataSource = provinces;
@@ -110,6 +110,13 @@ namespace Wildfire_ICS_Assist.CustomControls
             cboProvince.ValueMember = "ProvinceGUID";
         }
 
+        private void SetColours()
+        {
+            if (string.IsNullOrEmpty(txtFirstName.Text.Trim())) { txtFirstName.BackColor = Program.ErrorColor; } else { txtFirstName.BackColor = SystemColors.Window; }
+            if (string.IsNullOrEmpty(txtLastName.Text.Trim())) { txtLastName.BackColor = Program.ErrorColor; } else { txtLastName.BackColor = SystemColors.Window; }
+            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; } else { cboAccomodationPreference.BackColor = SystemColors.Window; }
+            if (string.IsNullOrEmpty(txtCellphone.Text.Trim())) { txtCellphone.BackColor = Program.ErrorColor; } else { txtCellphone.BackColor = SystemColors.Window; }
+        }
 
         public bool FormValid
         {
@@ -117,12 +124,11 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
 
                 if (teamMember == null) { return false; }
-                if (string.IsNullOrEmpty(teamMember.LastName) || string.IsNullOrEmpty(teamMember.LastName.Trim()))
-                {
-                    txtLastName.BackColor = Program.ErrorColor;
-                    return false;
-
-                }
+                if (string.IsNullOrEmpty(teamMember.FirstName) || string.IsNullOrEmpty(teamMember.FirstName.Trim())) { return false; }
+                if (string.IsNullOrEmpty(teamMember.LastName) || string.IsNullOrEmpty(teamMember.LastName.Trim())) { return false; }
+                if (string.IsNullOrEmpty(teamMember.AccomodationPreference) || string.IsNullOrEmpty(teamMember.AccomodationPreference.Trim())) { return false; }
+                if (string.IsNullOrEmpty(teamMember.CellphoneNumber) || string.IsNullOrEmpty(teamMember.CellphoneNumber.Trim())) { return false; }
+                SetColours();
 
                 return true;
             }
@@ -139,7 +145,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void txtName_TextChanged(object sender, EventArgs e)
         {
             teamMember.FirstName = ((TextBox)sender).Text;
-           
+            SetColours();
         }
 
         private void cboProvince_SelectedIndexChanged(object sender, EventArgs e)
@@ -178,7 +184,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void txtPhone_Leave(object sender, EventArgs e)
         {
-            teamMember.CellphoneNumber = ((MaskedTextBox)sender).Text;
+            teamMember.CellphoneNumber = ((MaskedTextBox)sender).Text; SetColours();
         }
 
         private void cboAgency_Leave(object sender, EventArgs e)
@@ -193,7 +199,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void txtNOKName_TextChanged(object sender, EventArgs e)
         {
-            teamMember.EmergencyContact = ((TextBox)sender).Text;
+            teamMember.EmergencyContact = ((TextBox)sender).Text; SetColours();
 
         }
 
@@ -217,11 +223,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void txtLastName_TextChanged(object sender, EventArgs e)
         {
             teamMember.LastName = ((TextBox)sender).Text;
-            if (string.IsNullOrEmpty(((TextBox)sender).Text))
-            {
-                ((TextBox)sender).BackColor = Program.ErrorColor;
-            }
-            else { ((TextBox)sender).BackColor = Program.GoodColor; }
+            SetColours();
         }
 
         private void chkContractor_CheckedChanged(object sender, EventArgs e)
@@ -236,7 +238,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboGender_Leave(object sender, EventArgs e)
         {
-            teamMember.Gender = ((ComboBox)sender).Text;
+            teamMember.Gender = ((ComboBox)sender).Text; SetColours();
         }
 
         private void cboCountry_Leave(object sender, EventArgs e)
@@ -276,7 +278,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboAccomodationPreference_SelectedIndexChanged(object sender, EventArgs e)
         {
-            teamMember.AccomodationPreference = ((ComboBox)sender).Text;
+            teamMember.AccomodationPreference = ((ComboBox)sender).Text; SetColours();
         }
 
         private void cboOtherAgency_Leave(object sender, EventArgs e)
@@ -291,6 +293,12 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             teamMember.Pronouns = ((TextBox)sender).Text;
 
+        }
+
+        private void txtCellphone_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.CellphoneNumber = ((TextBox)sender).Text;
+            SetColours();
         }
     }
 }

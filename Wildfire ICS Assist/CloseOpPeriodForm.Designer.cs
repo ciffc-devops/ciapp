@@ -609,7 +609,7 @@
             // 
             // btnPrintDemob
             // 
-            this.btnPrintDemob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrintDemob.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrintDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrintDemob.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrintDemob.Location = new System.Drawing.Point(8, 7);
@@ -623,7 +623,7 @@
             // 
             // btnDemob
             // 
-            this.btnDemob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDemob.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_432_log_out;
             this.btnDemob.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnDemob.Location = new System.Drawing.Point(224, 7);

@@ -118,7 +118,7 @@
             this.chkAllOpPeriods.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.chkAllOpPeriods.FlatAppearance.BorderSize = 0;
             this.chkAllOpPeriods.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            this.chkAllOpPeriods.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkAllOpPeriods.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.chkAllOpPeriods.ImageIndex = 1;
             this.chkAllOpPeriods.ImageList = this.imageList1;
             this.chkAllOpPeriods.Location = new System.Drawing.Point(846, 3);
@@ -228,7 +228,7 @@
             // 
             // btnView
             // 
-            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnView.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
             this.btnView.Location = new System.Drawing.Point(174, 8);
             this.btnView.Name = "btnView";
@@ -242,7 +242,7 @@
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint.Location = new System.Drawing.Point(857, 8);
             this.btnPrint.Name = "btnPrint";
@@ -255,7 +255,7 @@
             // 
             // btnNew
             // 
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnNew.Location = new System.Drawing.Point(3, 8);
             this.btnNew.Name = "btnNew";
@@ -268,7 +268,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEdit.Location = new System.Drawing.Point(296, 8);
             this.btnEdit.Name = "btnEdit";
@@ -281,7 +281,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDelete.Location = new System.Drawing.Point(426, 8);
             this.btnDelete.Name = "btnDelete";

@@ -27,6 +27,18 @@ namespace Wildfire_ICS_Assist.CustomControls
         public void SetResource(IncidentResource record) { _selectedResource = record;  }
         public bool AssignIfPossible { get => chkAutoAssign.Checked; }
 
+        public bool IsComplete
+        {
+            get
+            {
+                foreach(CheckInInfoFieldControl ctrl in infoFieldControls)
+                {
+                    if (!ctrl.IsComplete) { return false; }
+                }
+                return true;
+            }
+        }
+
         public ResourceCheckInEditControl()
         {
             InitializeComponent();
@@ -89,7 +101,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 return false;
             }
             else { lblLastDayWorking.ForeColor = lblLastDayCount.ForeColor; }
-            return true;
+            return IsComplete;
         }
 
         public void SaveFormFieldsToCheckin()

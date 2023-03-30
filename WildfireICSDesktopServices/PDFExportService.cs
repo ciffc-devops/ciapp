@@ -696,7 +696,6 @@ namespace WildfireICSDesktopServices
         }
         #endregion
 
-
         #region Comms Plan
         public List<byte[]> exportCommsPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
@@ -813,7 +812,6 @@ namespace WildfireICSDesktopServices
             return path;
         }
         #endregion
-
 
         #region Objectives
         public List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool IncludeAttachments, bool flattenPDF)
@@ -949,7 +947,6 @@ namespace WildfireICSDesktopServices
             else { return null; }
         }
         #endregion
-
 
         #region Organization Assignments / Chart
         public List<byte[]> exportOrgAssignmentListToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
@@ -1971,6 +1968,200 @@ namespace WildfireICSDesktopServices
             return stamper;
         }
         #endregion
+
+        #region Check In Sheet (211)
+
+        public List<byte[]> exportCheckInSheetsToPDF(WFIncident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodToExport);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
+            List<CheckInRecordWithResource> allCheckInRecords =   incident.GetCheckInWithResources(OpPeriodToExport); 
+            allCheckInRecords = allCheckInRecords.Where(o=>o.Record.ParentRecordID == Guid.Empty).OrderBy(o=>o.Record.CheckInLocation).ToList(); //remove contents of crews
+            if (thisOpOnly) { allCheckInRecords = allCheckInRecords.Where(o=>o.Record.OpPeriod == OpPeriodToExport).ToList(); }
+
+            List<string> CheckInLocations = allCheckInRecords.Select(o => o.CheckInLocation).Distinct().ToList();
+
+            foreach (string checkInLocation in CheckInLocations)
+            {
+
+                List<CheckInRecordWithResource> checkInThisLocation = allCheckInRecords.Where(o => o.CheckInLocation.Equals(checkInLocation, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                int totalPages = 1;
+                int rowsOnPage = 18;
+
+
+                if (checkInThisLocation.Count > rowsOnPage)
+                {
+                    totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(checkInThisLocation.Count - rowsOnPage) / Convert.ToDecimal(rowsOnPage)));
+                    if ((checkInThisLocation.Count - rowsOnPage) % rowsOnPage > 0) { totalPages += 1; }
+                    if (totalPages == 0) { totalPages = 1; }
+                }
+
+                List<string> pdfFileNames = new List<string>();
+
+                for (int x = 1; x <= totalPages; x++)
+                {
+                    List<CheckInRecordWithResource> resourcesThisPage = checkInThisLocation.Skip((x - 1) * rowsOnPage).Take(rowsOnPage).ToList();
+                    allPDFs.AddRange(createSinglePageCheckInSheetPDF(incident, OpPeriodToExport, resourcesThisPage, x, totalPages, flattenPDF));
+
+                }
+            }
+            /*
+            List<PositionLogEntry> extraPageEntries = entries.Skip(19).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(31 * (x - 1)).Take(37).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            */
+
+
+            return allPDFs;
+        }
+
+        private List<byte[]> createSinglePageCheckInSheetPDF(WFIncident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "ICS-211 - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
+            outputFileName += ".pdf";
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            string fileToUse = "BlankForms/ICS-211-WF Check In.pdf";
+            fileToUse = getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+                    string checkInLocation = null;
+                    if (allCheckInRecords.Any(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)))
+                    {
+                        checkInLocation = allCheckInRecords.First(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)).Record.CheckInLocation;
+                    }
+
+                    stamper.AcroFields.SetField("1 INCIDENT NAMERow1", incident.TaskName);
+                    stamper.AcroFields.SetField("2 INCIDENT NUMBERRow1", incident.TaskNumber);
+                    stamper.AcroFields.SetField("3 CHECKIN LOCATIONRow1", checkInLocation);
+
+
+
+                    stamper.AcroFields.SetField("DATE", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("TIME", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+
+                   
+                    for(int x = 0; x<allCheckInRecords.Count && x < 18; x++ )
+                    {
+                        CheckInRecordWithResource record = allCheckInRecords[x];
+
+                        Personnel p = null; if (record.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)record.Resource; }
+                        Vehicle v = null; if (record.Resource.GetType().Name.Equals("Vehicle")) { v = (Vehicle)record.Resource; }
+                        OperationalSubGroup c = null; if (record.Resource.GetType().Name.Equals("OperationalSubGroup")) { c = (OperationalSubGroup)record.Resource; }
+
+
+
+                        //Field 5
+                        if (p != null) { stamper.AcroFields.SetField("PTRow" + (x + 1), p.ProvinceNameShort); }
+                        if (p != null) { stamper.AcroFields.SetField("AGENCYRow" + (x + 1), p.Agency); }
+                        stamper.AcroFields.SetField("CATRow" + (x + 1), record.ResourceType);
+                        stamper.AcroFields.SetField("KINDRow" + (x + 1), record.Resource.Kind);
+                        stamper.AcroFields.SetField("TYPERow" + (x + 1), record.Resource.Type);
+                        stamper.AcroFields.SetField("STTFRow" + (x + 1), "");
+                        stamper.AcroFields.SetField("RESOURCE NAME OR IDRow" + (x + 1), record.Resource.UniqueIDNumWithPrefix + " " + record.Resource.ResourceName);
+
+
+                        stamper.AcroFields.SetField("6 LDWRow" + (x + 1), record.Record.LastDayOnIncident.ToString(Globals.DateFormat));
+                        if (record.Record.InfoFields.Any(o => o.ID == new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d")))
+                        {
+                            CheckInInfoField field = record.Record.InfoFields.First(o => o.ID == new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"));
+                            stamper.AcroFields.SetField("7 ORDER REQUEST NUMBERRow" + (x + 1), field.StringValue);
+                        }
+                        stamper.AcroFields.SetField("8 DATETIME CHECKINRow" + (x + 1), record.CheckInDate.ToString(Globals.DateFormat));
+                        stamper.AcroFields.SetField("9 LEADERS NAMERow" + (x + 1), record.Resource.LeaderName);
+                        stamper.AcroFields.SetField("10 TOTAL NUMBER PERSONNELRow" + (x + 1), record.Resource.NumberOfPeople.ToString());
+                        stamper.AcroFields.SetField("11 CONTACT INFORMATIONRow" + (x + 1), record.Resource.Contact);
+                        if (p != null) { stamper.AcroFields.SetField("12 HOME UNITBASERow" + (x + 1), p.HomeUnit); }
+                        stamper.AcroFields.SetField("13 DEPARTURE POINTRow" + (x + 1), "");
+                        if (record.Record.InfoFields.Any(o => o.ID == new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89")))
+                        {
+                            CheckInInfoField field = record.Record.InfoFields.First(o => o.ID == new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89"));
+                            stamper.AcroFields.SetField("14 METHOD OF TRAVELRow" + (x + 1), field.StringValue);
+                        }
+                        stamper.AcroFields.SetField("15 INCIDENT ASSINGMENTRow" + (x + 1), record.Record.InitialRoleAcronym);
+                        stamper.AcroFields.SetField("16 OTHER QUALIFICATIONSRow" + (x + 1), "");
+                        stamper.AcroFields.SetField("17 SENT TO RESOURCE UNITRow" + (x + 1), "");
+                    }
+
+
+                    ICSRole PreparedBy = currentOrgChart.GetRoleByID(Globals.LogisticsChiefID, true);
+
+
+                    stamper.AcroFields.SetField("18 REMARKSRow1", "");
+                    stamper.AcroFields.SetField("Position", PreparedBy.RoleName);
+                    stamper.AcroFields.SetField("Name", PreparedBy.IndividualName);
+
+
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("OF", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    Guid randomID = Guid.NewGuid();
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+        #endregion
+
 
         #region Sign In Sheets (SAR)
         public string exportSinglePageSignInSheetAsPDF(WFIncident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod)
@@ -3423,7 +3614,6 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
         #endregion
-
 
         #region Logistics Summary
 

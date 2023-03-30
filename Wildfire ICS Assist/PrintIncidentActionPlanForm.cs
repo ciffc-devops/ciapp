@@ -87,6 +87,8 @@ namespace Wildfire_ICS_Assist
             //additional contacts
             chkContacts.Enabled = CurrentIncident.allContacts.Any(o => o.Active);
 
+            chkCheckInLists.Enabled = CurrentIncident.AllCheckInRecords.Any(o => o.OpPeriod <= Program.CurrentOpPeriod);
+            
 
             chkSafetyMessage.Enabled = CurrentIncident.allSafetyMessages.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
             chkSafetyMessage.Checked = chkSafetyMessage.Enabled;
@@ -99,7 +101,6 @@ namespace Wildfire_ICS_Assist
             chkActivityLog.Checked = chkActivityLog.Enabled;
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
 
-            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
 
             chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps(CurrentOpPeriod);
             chkAirOps.Checked = chkAirOps.Enabled;
@@ -141,11 +142,11 @@ namespace Wildfire_ICS_Assist
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
             chkVerboseActivityLog.Checked = chkVerboseActivityLog.Enabled;
 
-            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.OpPeriod == CurrentOpPeriod && o.Active);
-            chkSupportVehicles.Checked = chkSupportVehicles.Enabled;
             chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps(CurrentOpPeriod);
             chkAirOps.Checked = chkAirOps.Enabled;
 
+            chkCheckInLists.Enabled = CurrentIncident.AllCheckInRecords.Any(o => o.OpPeriod <= Program.CurrentOpPeriod);
+            chkCheckInLists.Checked = chkCheckInLists.Enabled;
 
         }
 
@@ -187,8 +188,8 @@ namespace Wildfire_ICS_Assist
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
             chkVerboseActivityLog.Checked = chkVerboseActivityLog.Enabled;
 
-            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.Active);
-            chkSupportVehicles.Checked = chkSupportVehicles.Enabled;
+            chkCheckInLists.Enabled = CurrentIncident.AllCheckInRecords.Any(o => o.OpPeriod <= Program.CurrentOpPeriod);
+            chkCheckInLists.Checked = chkCheckInLists.Enabled;
 
             chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps();
             chkAirOps.Checked = chkAirOps.Enabled;
@@ -226,7 +227,8 @@ namespace Wildfire_ICS_Assist
             chkActivityLog.Checked = chkActivityLog.Enabled;
             chkVerboseActivityLog.Enabled = chkActivityLog.Enabled;
 
-            chkSupportVehicles.Enabled = CurrentIncident.allVehicles.Any(o => o.Active);
+            chkCheckInLists.Enabled = CurrentIncident.AllCheckInRecords.Any(o => o.OpPeriod <= Program.CurrentOpPeriod);
+
             chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps();
             chkAirOps.Checked = chkAirOps.Enabled;
 
@@ -336,6 +338,11 @@ namespace Wildfire_ICS_Assist
                     allPDFs.AddRange(Program.pdfExportService.exportContactsToPDF(CurrentIncident, CurrentOpPeriod, null, null, chkFlattenPDF.Checked));
                 }
 
+                if (chkCheckInLists.Checked)
+                {
+                    allPDFs.AddRange(Program.pdfExportService.exportCheckInSheetsToPDF(CurrentIncident, CurrentOpPeriod, false, chkFlattenPDF.Checked));
+                }
+
 
                 //general msg
                 if (chkGeneralMessages.Checked)
@@ -364,12 +371,6 @@ namespace Wildfire_ICS_Assist
                             allPDFs.AddRange(Program.positionLogService.exportVerbosePositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
                         }
                     }
-                }
-
-                if (chkSupportVehicles.Checked)
-                {
-                    allPDFs.AddRange(Program.pdfExportService.exportVehiclesToPDF(CurrentIncident, CurrentOpPeriod, null, null, chkFlattenPDF.Checked));
-
                 }
 
 
@@ -471,7 +472,6 @@ namespace Wildfire_ICS_Assist
 
             }
 
-            if (chkSupportVehicles.Checked) { contents.Add("•  ICS-218 Support Vehicle(s)"); }
             if (chkNotes.Checked) { contents.Add("•  Note(s)"); }
 
             if (PrintIncidentToDate)

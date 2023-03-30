@@ -117,7 +117,7 @@
             this.btnFormInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFormInfo.BackColor = System.Drawing.Color.White;
             this.btnFormInfo.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnFormInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFormInfo.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnFormInfo.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
             this.btnFormInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFormInfo.ImeMode = System.Windows.Forms.ImeMode.NoControl;

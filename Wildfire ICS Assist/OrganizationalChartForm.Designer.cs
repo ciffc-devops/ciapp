@@ -173,7 +173,7 @@
             // btnPrint203
             // 
             this.btnPrint203.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint203.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint203.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrint203.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint203.Location = new System.Drawing.Point(882, 3);
             this.btnPrint203.Name = "btnPrint203";
@@ -188,7 +188,7 @@
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
             this.btnExport.Location = new System.Drawing.Point(751, 3);
             this.btnExport.Name = "btnExport";
@@ -202,7 +202,7 @@
             // 
             // btnDeleteRole
             // 
-            this.btnDeleteRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteRole.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDeleteRole.Location = new System.Drawing.Point(493, 3);
             this.btnDeleteRole.Name = "btnDeleteRole";
@@ -216,7 +216,7 @@
             // 
             // btnEditRole
             // 
-            this.btnEditRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditRole.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnEditRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditRole.Location = new System.Drawing.Point(340, 3);
             this.btnEditRole.Name = "btnEditRole";
@@ -231,7 +231,7 @@
             // btnPrint207
             // 
             this.btnPrint207.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint207.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint207.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrint207.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint207.Location = new System.Drawing.Point(1048, 3);
             this.btnPrint207.Name = "btnPrint207";
@@ -245,7 +245,7 @@
             // 
             // btnAssignRole
             // 
-            this.btnAssignRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAssignRole.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAssignRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
             this.btnAssignRole.Location = new System.Drawing.Point(167, 3);
             this.btnAssignRole.Name = "btnAssignRole";
@@ -258,7 +258,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAdd.Location = new System.Drawing.Point(12, 3);
             this.btnAdd.Name = "btnAdd";

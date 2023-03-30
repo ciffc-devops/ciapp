@@ -41,7 +41,7 @@
             // 
             // btnMoreInfo
             // 
-            this.btnMoreInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoreInfo.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnMoreInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnMoreInfo.Location = new System.Drawing.Point(8, 3);
             this.btnMoreInfo.Name = "btnMoreInfo";
@@ -86,7 +86,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnOK.Location = new System.Drawing.Point(306, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(197, 51);

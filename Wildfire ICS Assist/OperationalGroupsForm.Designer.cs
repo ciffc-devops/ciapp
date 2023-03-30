@@ -207,7 +207,7 @@
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDelete.Location = new System.Drawing.Point(278, 7);
             this.btnDelete.Name = "btnDelete";
@@ -221,7 +221,7 @@
             // btnPrint204
             // 
             this.btnPrint204.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint204.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint204.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrint204.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint204.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint204.Location = new System.Drawing.Point(558, 7);
@@ -236,7 +236,7 @@
             // btnEditBranch
             // 
             this.btnEditBranch.Enabled = false;
-            this.btnEditBranch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditBranch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnEditBranch.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditBranch.Location = new System.Drawing.Point(159, 7);
             this.btnEditBranch.Name = "btnEditBranch";
@@ -250,7 +250,7 @@
             // btnPrint204A
             // 
             this.btnPrint204A.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint204A.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint204A.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrint204A.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint204A.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint204A.Location = new System.Drawing.Point(718, 7);
@@ -265,7 +265,7 @@
             // btnExportSignInToCSV
             // 
             this.btnExportSignInToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportSignInToCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportSignInToCSV.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnExportSignInToCSV.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
             this.btnExportSignInToCSV.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExportSignInToCSV.Location = new System.Drawing.Point(878, 7);
@@ -280,7 +280,7 @@
             // btnAddBranch
             // 
             this.btnAddBranch.ContextMenuStrip = this.cmsAddButton;
-            this.btnAddBranch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddBranch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddBranch.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddBranch.Location = new System.Drawing.Point(12, 7);
             this.btnAddBranch.Name = "btnAddBranch";
@@ -359,7 +359,7 @@
             // 
             // btnPrintLogistics
             // 
-            this.btnPrintLogistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrintLogistics.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrintLogistics.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrintLogistics.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrintLogistics.Location = new System.Drawing.Point(397, 7);

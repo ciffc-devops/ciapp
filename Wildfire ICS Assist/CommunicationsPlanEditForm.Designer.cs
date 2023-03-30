@@ -78,7 +78,7 @@
             this.btnAirHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAirHelp.BackColor = System.Drawing.Color.White;
             this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAirHelp.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
             this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnAirHelp.Location = new System.Drawing.Point(426, 403);
@@ -168,7 +168,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);

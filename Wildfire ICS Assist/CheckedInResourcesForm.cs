@@ -153,6 +153,12 @@ namespace Wildfire_ICS_Assist
                             if (string.IsNullOrEmpty(p.LeaderName)) { p.LeaderName = p.Name; }
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, PNumMin, PNumMax); }
                             Program.wfIncidentService.UpsertPersonnel(p);
+
+                            if (signInForm.SavePersonForLater)
+                            {
+                                Program.generalOptionsService.UpserOptionValue(p.Clone(), "TeamMember");
+                            }
+
                             break;
                         case "Operator":
                             Personnel op = resource as Personnel;
@@ -271,7 +277,7 @@ namespace Wildfire_ICS_Assist
                     {
                         if(Program.CurrentOrgChart.ActiveRoles.Any(o=>!string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
                         {
-                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty);
+                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty);
                             Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == record.ResourceID);
                             role.IndividualID = p.ID;
                             role.IndividualName = p.Name;
@@ -679,6 +685,44 @@ namespace Wildfire_ICS_Assist
                     MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            List<byte[]> allPDFs = Program.pdfExportService.exportCheckInSheetsToPDF(Program.CurrentTask, Program.CurrentOpPeriod, true,  false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "ICS-211 " + Program.CurrentIncident.IncidentIdentifier;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+        }
+
+        private void btnPrinttAll211sToDate_Click(object sender, EventArgs e)
+        {
+            List<byte[]> allPDFs = Program.pdfExportService.exportCheckInSheetsToPDF(Program.CurrentTask, Program.CurrentOpPeriod, false, false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "ICS-211 " + Program.CurrentIncident.IncidentIdentifier;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
     }
 }

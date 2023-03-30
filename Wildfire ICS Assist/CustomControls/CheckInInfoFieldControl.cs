@@ -34,6 +34,28 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         }
 
+        public bool IsComplete
+        {
+            get
+            {
+                if (infoField.IsRequired)
+                {
+                    switch (infoField.FieldType)
+                    {
+                        case "Bool":
+                            return true;
+                        case "DateTime":
+                            return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
+                        case "List":
+                            return !string.IsNullOrEmpty(cboListValue.Text);
+                        default:
+                            return !string.IsNullOrEmpty(txtStringValue.Text);
+                    }
+                }
+                return true;
+            }
+        }
+
 
         private void loadInfoField()
         {
@@ -96,26 +118,39 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                 }
             }
+            SetColors();
         }
 
         private void datDateValue_ValueChanged(object sender, EventArgs e)
         {
-            infoField.DateValue = datDateValue.Value;
+            infoField.DateValue = datDateValue.Value; SetColors();
         }
 
         private void txtStringValue_TextChanged(object sender, EventArgs e)
         {
-            infoField.StringValue = txtStringValue.Text;
+            infoField.StringValue = txtStringValue.Text; SetColors();
+
         }
 
         private void chkBoolValue_CheckedChanged(object sender, EventArgs e)
         {
-            infoField.BoolValue = chkBoolValue.Checked;
+            infoField.BoolValue = chkBoolValue.Checked; SetColors();
         }
 
         private void cboListValue_Leave(object sender, EventArgs e)
         {
             infoField.StringValue = cboListValue.Text;
+            SetColors();
+        }
+
+        private void SetColors()
+        {
+            if (!IsComplete)
+            {
+                lblFieldName.ForeColor = Program.ErrorColor;
+                txtStringValue.BackColor = Program.ErrorColor;
+            }
+            else { lblFieldName.ForeColor = SystemColors.ControlText; txtStringValue.BackColor = SystemColors.Window; }
         }
     }
 }

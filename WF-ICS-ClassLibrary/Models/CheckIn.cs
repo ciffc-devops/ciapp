@@ -61,6 +61,17 @@ namespace WF_ICS_ClassLibrary.Models
         public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
         public string InitialRoleAcronym { get => _InitialRoleAcronym; set => _InitialRoleAcronym = value; }
 
+        public string CheckInLocation
+        {
+            get
+            {
+                if (InfoFields.Any(o => o.ID == new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe")))
+                {
+                    return InfoFields.First(o => o.ID == new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe")).StringValue;
+                }
+                else { return string.Empty; }
+            }
+        }
         public CheckInRecord Clone()
         {
             CheckInRecord cloneTo = this.MemberwiseClone() as CheckInRecord;
@@ -159,6 +170,7 @@ namespace WF_ICS_ClassLibrary.Models
         public int DaysTillTimeOut { get; set; }
         public string UniqueIDNumWithPrefix { get => _Resource.UniqueIDNumWithPrefix; }
         public string InitialRoleAcronym { get => _Record.InitialRoleAcronym; }
+        public string CheckInLocation { get => _Record.CheckInLocation; }
 
         public CheckInRecordWithResource() { _ID = Guid.NewGuid(); }
         public CheckInRecordWithResource(CheckInRecord rec, IncidentResource res, DateTime EndOfOp)

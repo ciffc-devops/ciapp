@@ -25,7 +25,7 @@ namespace Wildfire_ICS_Assist
 
         public ResourcesEditUniqueNumberForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void ResourcesEditUniqueNumber_Load(object sender, EventArgs e)

@@ -136,7 +136,7 @@
             // 
             this.btnDeleteResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteResource.Enabled = false;
-            this.btnDeleteResource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteResource.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDeleteResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDeleteResource.Location = new System.Drawing.Point(155, 438);
             this.btnDeleteResource.Name = "btnDeleteResource";
@@ -150,7 +150,7 @@
             // btnAddResource
             // 
             this.btnAddResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddResource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddResource.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddResource.Location = new System.Drawing.Point(8, 438);
             this.btnAddResource.Name = "btnAddResource";

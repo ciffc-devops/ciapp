@@ -133,7 +133,7 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.Location = new System.Drawing.Point(698, 36);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
@@ -196,7 +196,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 461);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -325,7 +325,7 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(617, 393);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);

@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
 
         public CheckInEnterPersonForm()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
 
         private void PersonnelEnterPersonForm_Load(object sender, EventArgs e)

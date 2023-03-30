@@ -154,7 +154,7 @@
             this.btnHECrew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnHECrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.HECrew;
             this.btnHECrew.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHECrew.Location = new System.Drawing.Point(381, 357);
+            this.btnHECrew.Location = new System.Drawing.Point(381, 362);
             this.btnHECrew.Name = "btnHECrew";
             this.btnHECrew.Size = new System.Drawing.Size(243, 91);
             this.btnHECrew.TabIndex = 11;
@@ -168,7 +168,7 @@
             this.btnEquipAndOperator.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEquipAndOperator.Image = global::Wildfire_ICS_Assist.Properties.Resources.EquipOp;
             this.btnEquipAndOperator.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEquipAndOperator.Location = new System.Drawing.Point(381, 454);
+            this.btnEquipAndOperator.Location = new System.Drawing.Point(381, 459);
             this.btnEquipAndOperator.Name = "btnEquipAndOperator";
             this.btnEquipAndOperator.Size = new System.Drawing.Size(243, 91);
             this.btnEquipAndOperator.TabIndex = 10;
@@ -181,7 +181,7 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(6, 308);
+            this.label14.Location = new System.Drawing.Point(6, 313);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(765, 29);
             this.label14.TabIndex = 9;
@@ -193,7 +193,7 @@
             this.btnVisitor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVisitor.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_35_user_incognito;
             this.btnVisitor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVisitor.Location = new System.Drawing.Point(381, 551);
+            this.btnVisitor.Location = new System.Drawing.Point(381, 556);
             this.btnVisitor.Name = "btnVisitor";
             this.btnVisitor.Size = new System.Drawing.Size(243, 91);
             this.btnVisitor.TabIndex = 3;
@@ -207,7 +207,7 @@
             this.btnSinglePersonnel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSinglePersonnel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
             this.btnSinglePersonnel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSinglePersonnel.Location = new System.Drawing.Point(132, 551);
+            this.btnSinglePersonnel.Location = new System.Drawing.Point(132, 556);
             this.btnSinglePersonnel.Name = "btnSinglePersonnel";
             this.btnSinglePersonnel.Size = new System.Drawing.Size(243, 91);
             this.btnSinglePersonnel.TabIndex = 2;
@@ -221,7 +221,7 @@
             this.btnVehicleEquipment.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVehicleEquipment.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
             this.btnVehicleEquipment.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVehicleEquipment.Location = new System.Drawing.Point(132, 454);
+            this.btnVehicleEquipment.Location = new System.Drawing.Point(132, 459);
             this.btnVehicleEquipment.Name = "btnVehicleEquipment";
             this.btnVehicleEquipment.Size = new System.Drawing.Size(243, 91);
             this.btnVehicleEquipment.TabIndex = 1;
@@ -235,7 +235,7 @@
             this.btnCrew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_532_user_family;
             this.btnCrew.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCrew.Location = new System.Drawing.Point(132, 357);
+            this.btnCrew.Location = new System.Drawing.Point(132, 362);
             this.btnCrew.Name = "btnCrew";
             this.btnCrew.Size = new System.Drawing.Size(243, 91);
             this.btnCrew.TabIndex = 0;
@@ -248,10 +248,10 @@
             // 
             this.tpResourceDetails.Controls.Add(this.pnlPersonEdit);
             this.tpResourceDetails.Controls.Add(this.pnlSavedPersonnel);
-            this.tpResourceDetails.Location = new System.Drawing.Point(4, 22);
+            this.tpResourceDetails.Location = new System.Drawing.Point(4, 33);
             this.tpResourceDetails.Name = "tpResourceDetails";
             this.tpResourceDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tpResourceDetails.Size = new System.Drawing.Size(777, 971);
+            this.tpResourceDetails.Size = new System.Drawing.Size(777, 960);
             this.tpResourceDetails.TabIndex = 1;
             this.tpResourceDetails.Text = "Person";
             // 
@@ -266,7 +266,7 @@
             this.pnlPersonEdit.Controls.Add(this.btnSelectNewPerson);
             this.pnlPersonEdit.Location = new System.Drawing.Point(8, 92);
             this.pnlPersonEdit.Name = "pnlPersonEdit";
-            this.pnlPersonEdit.Size = new System.Drawing.Size(757, 873);
+            this.pnlPersonEdit.Size = new System.Drawing.Size(757, 862);
             this.pnlPersonEdit.TabIndex = 113;
             // 
             // personnelEditControl1
@@ -280,14 +280,14 @@
             this.personnelEditControl1.Margin = new System.Windows.Forms.Padding(6);
             this.personnelEditControl1.MinimumSize = new System.Drawing.Size(442, 702);
             this.personnelEditControl1.Name = "personnelEditControl1";
-            this.personnelEditControl1.Size = new System.Drawing.Size(739, 774);
+            this.personnelEditControl1.Size = new System.Drawing.Size(739, 763);
             this.personnelEditControl1.TabIndex = 9;
             // 
             // chkSavePersonForLater
             // 
             this.chkSavePersonForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSavePersonForLater.AutoSize = true;
-            this.chkSavePersonForLater.Location = new System.Drawing.Point(386, 834);
+            this.chkSavePersonForLater.Location = new System.Drawing.Point(386, 823);
             this.chkSavePersonForLater.Name = "chkSavePersonForLater";
             this.chkSavePersonForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSavePersonForLater.TabIndex = 112;
@@ -310,7 +310,7 @@
             this.btnSelectNewPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectNewPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
             this.btnSelectNewPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelectNewPerson.Location = new System.Drawing.Point(621, 827);
+            this.btnSelectNewPerson.Location = new System.Drawing.Point(621, 816);
             this.btnSelectNewPerson.Name = "btnSelectNewPerson";
             this.btnSelectNewPerson.Size = new System.Drawing.Size(130, 40);
             this.btnSelectNewPerson.TabIndex = 7;
@@ -603,10 +603,10 @@
             // 
             this.tpCheckInDetails.Controls.Add(this.resourceCheckInEditControl1);
             this.tpCheckInDetails.Controls.Add(this.label2);
-            this.tpCheckInDetails.Location = new System.Drawing.Point(4, 33);
+            this.tpCheckInDetails.Location = new System.Drawing.Point(4, 22);
             this.tpCheckInDetails.Name = "tpCheckInDetails";
             this.tpCheckInDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCheckInDetails.Size = new System.Drawing.Size(777, 960);
+            this.tpCheckInDetails.Size = new System.Drawing.Size(777, 971);
             this.tpCheckInDetails.TabIndex = 3;
             this.tpCheckInDetails.Text = "Check In Details";
             // 
@@ -618,8 +618,9 @@
             this.resourceCheckInEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resourceCheckInEditControl1.Location = new System.Drawing.Point(9, 48);
             this.resourceCheckInEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.resourceCheckInEditControl1.MinimumSize = new System.Drawing.Size(716, 473);
             this.resourceCheckInEditControl1.Name = "resourceCheckInEditControl1";
-            this.resourceCheckInEditControl1.Size = new System.Drawing.Size(760, 910);
+            this.resourceCheckInEditControl1.Size = new System.Drawing.Size(760, 921);
             this.resourceCheckInEditControl1.TabIndex = 12;
             this.resourceCheckInEditControl1.Load += new System.EventHandler(this.resourceCheckInEditControl1_Load);
             // 
@@ -637,7 +638,7 @@
             // btnDoneCrewEdit
             // 
             this.btnDoneCrewEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDoneCrewEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDoneCrewEdit.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDoneCrewEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
             this.btnDoneCrewEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDoneCrewEdit.Location = new System.Drawing.Point(649, 5);
@@ -664,7 +665,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnBack.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnBack.Location = new System.Drawing.Point(142, 5);
             this.btnBack.Margin = new System.Windows.Forms.Padding(6);
@@ -679,7 +680,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_799_chevron_last_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 5);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -694,7 +695,7 @@
             // btnCheckIn
             // 
             this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheckIn.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_431_log_in;
             this.btnCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCheckIn.Location = new System.Drawing.Point(569, 5);

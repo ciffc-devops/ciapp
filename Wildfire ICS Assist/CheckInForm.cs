@@ -31,7 +31,7 @@ namespace Wildfire_ICS_Assist
         public List<OperationalGroupResourceListing> resourcesToRemoveFromCrew { get => crewEditControl1.resourcesToRemoveFromCrew; }
 
         private string CheckInMode = null;
-
+        public bool SavePersonForLater { get => chkSavePersonForLater.Checked; }
 
         public CheckInForm()
         {
@@ -257,6 +257,8 @@ namespace Wildfire_ICS_Assist
            if(_selectedResource != null && resourceCheckInEditControl1.ValidateCheckInInfo())
             {
                 resourceCheckInEditControl1.SaveFormFieldsToCheckin();
+
+                
 
                 checkInRecord = resourceCheckInEditControl1.checkInRecord.Clone();
                 checkInRecord.ResourceID = _selectedResource.ID;

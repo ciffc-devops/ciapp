@@ -123,7 +123,7 @@
             this.btnSavedUsedForAir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSavedUsedForAir.BackgroundImage")));
             this.btnSavedUsedForAir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSavedUsedForAir.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnSavedUsedForAir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSavedUsedForAir.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnSavedUsedForAir.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnSavedUsedForAir.Location = new System.Drawing.Point(449, 119);
             this.btnSavedUsedForAir.Name = "btnSavedUsedForAir";
@@ -184,7 +184,7 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.Location = new System.Drawing.Point(620, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
@@ -226,7 +226,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 549);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -268,7 +268,7 @@
             this.btnAirHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAirHelp.BackgroundImage")));
             this.btnAirHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnAirHelp.Location = new System.Drawing.Point(464, 428);
             this.btnAirHelp.Name = "btnAirHelp";
@@ -364,7 +364,7 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(539, 481);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);

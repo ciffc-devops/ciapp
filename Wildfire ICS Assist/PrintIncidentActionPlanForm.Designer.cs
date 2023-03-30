@@ -40,7 +40,6 @@
             this.btnRemoveImage = new System.Windows.Forms.Button();
             this.chkAssignmentDetails = new System.Windows.Forms.CheckBox();
             this.chkContacts = new System.Windows.Forms.CheckBox();
-            this.chkSupportVehicles = new System.Windows.Forms.CheckBox();
             this.chkNotes = new System.Windows.Forms.CheckBox();
             this.chkVerboseActivityLog = new System.Windows.Forms.CheckBox();
             this.chkActivityLog = new System.Windows.Forms.CheckBox();
@@ -88,7 +87,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.btnRemoveImage);
             this.splitContainer1.Panel1.Controls.Add(this.chkAssignmentDetails);
             this.splitContainer1.Panel1.Controls.Add(this.chkContacts);
-            this.splitContainer1.Panel1.Controls.Add(this.chkSupportVehicles);
             this.splitContainer1.Panel1.Controls.Add(this.chkNotes);
             this.splitContainer1.Panel1.Controls.Add(this.chkVerboseActivityLog);
             this.splitContainer1.Panel1.Controls.Add(this.chkActivityLog);
@@ -209,20 +207,10 @@
             this.chkContacts.Text = "205A - Communications List";
             this.chkContacts.UseVisualStyleBackColor = true;
             // 
-            // chkSupportVehicles
-            // 
-            this.chkSupportVehicles.AutoSize = true;
-            this.chkSupportVehicles.Location = new System.Drawing.Point(360, 325);
-            this.chkSupportVehicles.Name = "chkSupportVehicles";
-            this.chkSupportVehicles.Size = new System.Drawing.Size(219, 28);
-            this.chkSupportVehicles.TabIndex = 31;
-            this.chkSupportVehicles.Text = "218 - Support Vehicles";
-            this.chkSupportVehicles.UseVisualStyleBackColor = true;
-            // 
             // chkNotes
             // 
             this.chkNotes.AutoSize = true;
-            this.chkNotes.Location = new System.Drawing.Point(360, 359);
+            this.chkNotes.Location = new System.Drawing.Point(360, 325);
             this.chkNotes.Name = "chkNotes";
             this.chkNotes.Size = new System.Drawing.Size(166, 28);
             this.chkNotes.TabIndex = 30;
@@ -338,7 +326,7 @@
             this.chkFlattenPDF.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkFlattenPDF.FlatAppearance.BorderSize = 0;
             this.chkFlattenPDF.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.chkFlattenPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkFlattenPDF.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.chkFlattenPDF.ImageIndex = 1;
             this.chkFlattenPDF.ImageList = this.imageList1;
             this.chkFlattenPDF.Location = new System.Drawing.Point(34, 41);
@@ -475,7 +463,6 @@
         private System.Windows.Forms.CheckBox chkVerboseActivityLog;
         private System.Windows.Forms.CheckBox chkActivityLog;
         private System.Windows.Forms.CheckBox chkGeneralMessages;
-        private System.Windows.Forms.CheckBox chkSupportVehicles;
         private System.Windows.Forms.CheckBox chkContacts;
         private System.Windows.Forms.CheckBox chkAssignmentDetails;
         private System.Windows.Forms.Label label1;

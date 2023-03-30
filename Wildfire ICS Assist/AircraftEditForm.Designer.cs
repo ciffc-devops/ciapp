@@ -85,7 +85,7 @@
             this.btnMedivacHelpNew.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMedivacHelpNew.BackgroundImage")));
             this.btnMedivacHelpNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMedivacHelpNew.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnMedivacHelpNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMedivacHelpNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnMedivacHelpNew.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnMedivacHelpNew.Location = new System.Drawing.Point(476, 371);
             this.btnMedivacHelpNew.Name = "btnMedivacHelpNew";

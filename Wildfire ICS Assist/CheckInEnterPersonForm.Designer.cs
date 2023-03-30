@@ -187,7 +187,7 @@
             // btnBack
             // 
             this.btnBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnBack.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnBack.Location = new System.Drawing.Point(6, 6);
             this.btnBack.Margin = new System.Windows.Forms.Padding(6);
