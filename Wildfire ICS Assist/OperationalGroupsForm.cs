@@ -214,6 +214,15 @@ namespace Wildfire_ICS_Assist
 
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
                 btnDelete.Enabled = role.AllowDelete;
+
+                //save any changes to the strike team before moving on
+                if(strikeTeamTaskForceDetailsControl1.Visible && strikeTeamTaskForceDetailsControl1.ChangesMade)
+                {
+                    strikeTeamTaskForceDetailsControl1.ChangesMade = false;
+
+                    Program.wfIncidentService.UpsertOperationalGroup(strikeTeamTaskForceDetailsControl1.selectedGroup);
+                }
+
                 OperationalGroup selectedGroup = new OperationalGroup();
                 if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
                 {

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -142,6 +142,7 @@
             this.teamAssignmentsICS204ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positionLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.memberStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -185,9 +186,8 @@
             this.cpPlanning = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnNotes = new System.Windows.Forms.Button();
             this.cpOperations = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -269,9 +269,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1072,6 +1072,11 @@
             resources.ApplyResources(this.positionLogToolStripMenuItem1, "positionLogToolStripMenuItem1");
             this.positionLogToolStripMenuItem1.Click += new System.EventHandler(this.positionLogToolStripMenuItem1_Click);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            // 
             // memberStatusToolStripMenuItem
             // 
             this.memberStatusToolStripMenuItem.Name = "memberStatusToolStripMenuItem";
@@ -1381,10 +1386,12 @@
             this.cpOperations.Name = "cpOperations";
             this.cpOperations.TitleText = "OPERATIONS";
             // 
-            // toolStripSeparator7
+            // button2
             // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -1392,13 +1399,6 @@
             this.button1.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_532_user_family;
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // IncidentDetailsForm
             // 

@@ -19,6 +19,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public CheckInRecord SelectedCheckInRecord { get => _SelectedCheckInRecord; private set => _SelectedCheckInRecord = value; }
         public DemobilizationRecord SelectedDemobRecord { get => _SelectedDemobRecord; private set => _SelectedDemobRecord = value; }
+        public IncidentResource SelectedResource { get => _ResourceBeingDebriefed; }
 
         public void SetRecord(IncidentResource res, CheckInRecord rec, DemobilizationRecord demob)
         {

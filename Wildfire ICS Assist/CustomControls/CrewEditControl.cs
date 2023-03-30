@@ -74,7 +74,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 DialogResult dr = entryForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    resources.Add(entryForm.selectedPerson);
+                    resources.Add(entryForm.selectedPerson.Clone());
 
                     OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
                     listing.SubGroupID = subGroup.ID;
@@ -105,7 +105,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 DialogResult dr = entryForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    resources.Add(entryForm.CurrentVehicle);
+                    resources.Add(entryForm.CurrentVehicle.Clone());
 
                     OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
                     listing.SubGroupID = subGroup.ID;
@@ -133,7 +133,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (dr == DialogResult.OK)
                 {
                     _resources = _resources.Where(o => o.ID != person.ID).ToList();
-                    resources.Add(entryForm.selectedMember);
+                    resources.Add(entryForm.selectedMember.Clone());
 
                     OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
                     if(subGroup.ResourceListing.Any(o=>o.ResourceID == entryForm.selectedMember.ID)) { listing = subGroup.ResourceListing.First(o => o.ResourceID == entryForm.selectedMember.ID); }
@@ -161,7 +161,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (dr == DialogResult.OK)
                 {
                     _resources = _resources.Where(o => o.ID != v.ID).ToList();
-                    resources.Add(entryForm.vehicle);
+                    resources.Add(entryForm.vehicle.Clone());
 
                     OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
                     if (subGroup.ResourceListing.Any(o => o.ResourceID == entryForm.vehicle.ID)) { listing = subGroup.ResourceListing.First(o => o.ResourceID == entryForm.vehicle.ID); }

@@ -1701,7 +1701,7 @@ namespace WildfireICSDesktopServices
                     Guid potential2 = new Guid("9727f016-aed9-4f34-99db-910a06b97f2e");
                     Guid potential3 = new Guid("9e75f813-cab4-4a6c-87b7-0fc141f06df9");
                     ICSRole NewRole = new ICSRole();
-
+                    NewRole.teamMember.ID = Guid.Empty;
 
 
                     if (record.GroupType.Equals("Branch"))

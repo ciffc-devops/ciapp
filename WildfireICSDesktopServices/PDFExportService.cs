@@ -366,6 +366,139 @@ namespace WildfireICSDesktopServices
         }
         #endregion
 
+        #region Demob Checklist
+
+        public List<byte[]> exportDemobChecklistToPDF(WFIncident task, List< IncidentResource> Resources, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            string outputFileName = "ICS-211 " + DateTime.Now.ToString(Globals.DateFormat) + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            foreach (IncidentResource res in Resources)
+            {
+                allPDFs.AddRange(exportDemobChecklistToPDF(task, res, flattenPDF));
+            }
+            return allPDFs;
+        }
+
+
+        public List<byte[]> exportDemobChecklistToPDF(WFIncident task, IncidentResource Resource, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createDemobChecklistPDF(task, Resource, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
+        public string createDemobChecklistPDF(WFIncident task, IncidentResource Resource, bool tempFileName = false, bool flattenPDF = false)
+        {
+
+            string path = FileAccessClasses.getWritablePath(task);
+
+            if (!tempFileName)
+            {
+
+
+                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+
+                string outputFileName = "ICS 221 - " + Resource.UniqueIDNumWithPrefix;
+
+                //path = System.IO.Path.Combine(path, outputFileName);
+                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            }
+            else
+            {
+                path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+            }
+            try
+            {
+
+                string fileToUse = "BlankForms/ICS-221-WF Demobilization Checkout.pdf";
+                fileToUse = getPDFFilePath(fileToUse);
+
+
+                PdfReader rdr = new PdfReader(fileToUse);
+                PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
+
+
+
+                //Op Plan
+                DateTime today = DateTime.Now;
+                //Top Section
+                stamper.AcroFields.SetField("1 INCIDENT NAMENUMBER", task.IncidentNameOrNumber);
+                stamper.AcroFields.SetField("2 DATETIME", DateTime.Now.ToString(Globals.DateFormat));
+
+
+                stamper.AcroFields.SetField("4 UNITPERSONNEL RELEASED", Resource.ResourceName);
+                stamper.AcroFields.SetField("10 UNIT LEADER RESPONSIBLE FOR COLLECTING PERFORMANCE RATING", Resource.LeaderName);
+
+
+                stamper.AcroFields.SetField("PAGE", "1");
+                stamper.AcroFields.SetField("OF", "1");
+
+
+
+
+                //Rename all fields
+                AcroFields af = stamper.AcroFields;
+
+                List<string> fieldNames = new List<string>();
+                foreach (var field in af.Fields)
+                {
+                    fieldNames.Add(field.Key);
+                }
+                Guid randomID = Guid.NewGuid();
+                foreach (string s in fieldNames)
+                {
+                    stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                }
+
+
+                if (flattenPDF)
+                {
+                    stamper.FormFlattening = true;
+                }
+
+                stamper.Close();//Close a PDFStamper Object
+                rdr.Close();    //Close a PDFReader Object
+
+
+
+            }
+            catch (IOException ex)
+            {
+            }
+            catch (System.UnauthorizedAccessException ex)
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return path;
+        }
+
+
+        #endregion
 
         #region Medical Plan
         public List<byte[]> exportMedicalPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
@@ -524,6 +657,20 @@ namespace WildfireICSDesktopServices
                     else { PDFExtraTools.SetPDFCheckbox(stamper, "BurnN" + (a + 1)); }
                 }
 
+
+                //Rename all fields
+                AcroFields af = stamper.AcroFields;
+
+                List<string> fieldNames = new List<string>();
+                foreach (var field in af.Fields)
+                {
+                    fieldNames.Add(field.Key);
+                }
+                Guid randomID = Guid.NewGuid();
+                foreach (string s in fieldNames)
+                {
+                    stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                }
 
 
                 if (flattenPDF)

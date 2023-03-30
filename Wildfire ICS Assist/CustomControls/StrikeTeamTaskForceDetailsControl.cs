@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private ICSRole _role = null;
         public ICSRole role { get => _role; private set { _role = value;  } }
 
-
+        public bool ChangesMade { get; set; } = false;
 
         public void SetRole(ICSRole role_to_set)
         {
@@ -94,6 +94,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                 if(dr == DialogResult.OK)
                 {
+                    ChangesMade = true;
                     foreach (IncidentResource resource in addExisting.resourcesToAdd)
                     {
                         
@@ -136,6 +137,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             if (dgvSubGroups.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                ChangesMade = true;
                 List<OperationalGroupResourceListing> toDelete = new List<OperationalGroupResourceListing>();
                 foreach (DataGridViewRow row in dgvSubGroups.SelectedRows)
                 {

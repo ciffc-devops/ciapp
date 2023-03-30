@@ -202,6 +202,7 @@
     <Compile Include="CustomControls\CrewEditControl.Designer.cs">
       <DependentUpon>CrewEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\DataGridViewDisableButtonCell.cs" />
     <Compile Include="CustomControls\DemobilizationEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

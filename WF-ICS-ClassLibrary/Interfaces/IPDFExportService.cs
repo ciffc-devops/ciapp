@@ -58,5 +58,8 @@ namespace WildfireICSDesktopServices
 
         List<byte[]> exportLogisticsSummaryToPDF(WFIncident task, int OpPeriodToExport, ICSRole ParentRole, bool flattenPDF);
         string createLogisticsSummaryPDF(WFIncident task, int OpPeriod, ICSRole ParentRole, bool useTempPath, bool flattenPDF);
+        List<byte[]> exportDemobChecklistToPDF(WFIncident task, IncidentResource Resource, bool flattenPDF);
+        string createDemobChecklistPDF(WFIncident task, IncidentResource Resource, bool tempFileName = false, bool flattenPDF = false);
+        List<byte[]> exportDemobChecklistToPDF(WFIncident task, List<IncidentResource> Resources, bool flattenPDF);
     }
 }

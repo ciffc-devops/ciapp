@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
@@ -27,33 +31,119 @@ namespace Wildfire_ICS_Assist
 
         private void CloseOpPeriodForm_Load(object sender, EventArgs e)
         {
+            dgvSafety.AutoGenerateColumns = false;
+            dgvResources.AutoGenerateColumns = false;
+            dgvSummaryStats.AutoGenerateColumns = false;
+            LoadOpPeriod();
+        }
+
+        private void LoadOpPeriod()
+        {
             datOpsStart.MinDate = Program.CurrentOpPeriodDetails.PeriodEnd;
             numOpPeriod.Minimum = Program.CurrentOpPeriod + 1;
             dgvObjectives.AutoGenerateColumns = false;
             numOpPeriod.Value = Program.CurrentOpPeriod + 1;
 
+            LoadObjectives();
+            LoadResources();
+            LoadOrgChart();
+            LoadOther();
+            BuildSafetyPlanList();
+            BuildSummaryStats();
 
+            Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
+            Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
+            Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
+
+            Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
+            Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
+            Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
+            Program.wfIncidentService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
+            Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
+
+        }
+
+        private void LoadObjectives()
+        {
             UpdateObjectiveSummary();
 
+        }
+        private void LoadResources()
+        {
+            LoadResourcesList();
+
+        }
+        private void LoadOrgChart()
+        {
             lblCurrentOrgTitle.Text = "Op " + Program.CurrentOpPeriod + " Org Chart";
             lblNextOrgTitle.Text = "Op " + NextOp + " Org Chart";
             PopulateOrgChart(Program.CurrentOpPeriod, treeOrgChart);
             PopulateOrgChart(NextOp, treeOrgChart2);
 
-            dgvSafety.AutoGenerateColumns = false;
-            BuildSafetyPlanList();
-
-
+        }
+        private void LoadOther()
+        {            
             //other
             lblAirOpsCopyStatus.Text = "";
             lblCommsPlanCopyStatus.Text = "";
             lblMedPlanCopyStatus.Text = "";
+
+
         }
+
+
+        #region Incident Event Handling
+        private void Program_OperationalPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        {
+            LoadOpPeriod();
+        }
+
+        private void Program_CheckInChanged(CheckInEventArgs e)
+        {
+            LoadResources(); BuildSummaryStats();
+        }
+        private void Program_VehicleChanged(VehicleEventArgs e)
+        {
+            LoadResources(); BuildSummaryStats();
+        }
+
+        private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        {
+            LoadResources(); BuildSummaryStats();
+        }
+
+        private void Program_OrgChartChanged(OrganizationChartEventArgs e)
+        {
+            LoadOrgChart();
+
+        }
+        private void Program_ICSRoleChanged(ICSRoleEventArgs e)
+        {
+            LoadOrgChart();
+
+        }
+        private void Program_IncidentObjectiveChanged(IncidentObjectiveEventArgs e)
+        {
+            LoadObjectives();
+        }
+        private void Program_IncidentObjectivesSheetChanged(IncidentObjectivesSheetEventArgs e)
+        {
+            LoadObjectives();
+        }
+        private void Program_SafetyMessageChanged(SafetyMessageEventArgs e)
+        {
+            BuildSafetyPlanList();
+        }
+        #endregion
+
 
         private void datOpsStart_ValueChanged(object sender, EventArgs e)
         {
 
         }
+
+
 
         private void datOpsStart_Leave(object sender, EventArgs e)
         {
@@ -65,6 +155,94 @@ namespace Wildfire_ICS_Assist
             NextOpPeriod.PeriodEnd = datOpsEnd.Value; Program.wfIncidentService.UpsertOperationalPeriod(NextOpPeriod);
         }
 
+        #region Resources
+
+        private void LoadResourcesList()
+        {
+           
+            List<CheckInRecordWithResource> checkInRecords = new List<CheckInRecordWithResource>();
+            bool showCrewDetails = false;
+            DateTime mid = Program.CurrentOpPeriodDetails.PeriodMid;
+            if (showCrewDetails)
+            {
+                foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod <= Program.CurrentOpPeriod))
+                {
+                    IncidentResource resource = new IncidentResource();
+                    if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
+                    {
+                        resource = Program.CurrentIncident.AllIncidentResources.First(o => o.ID == rec.ResourceID);
+                    }
+
+                    if (resource != null)
+                    {
+                        checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
+                    }
+                }
+            }
+            else
+            {
+                foreach (CheckInRecord rec in Program.CurrentIncident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod <= Program.CurrentOpPeriod && o.ParentRecordID == Guid.Empty))
+                {
+                    IncidentResource resource = new IncidentResource();
+                    if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
+                    {
+                        resource = Program.CurrentIncident.AllIncidentResources.First(o => o.ID == rec.ResourceID);
+                    }
+
+                    if (resource != null && resource.ParentResourceID == Guid.Empty)
+                    {
+                        checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
+                    }
+                }
+            }
+
+            int RedNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("RedResourceTimeoutDays"));
+            lblResourceListDetail.Text = "The list above includes all resources with a Last Day On Incident date within the next " + RedNumber + " days.";
+            checkInRecords = checkInRecords.OrderBy(o => o.ResourceName).ToList();
+
+            DateTime EndOfOp = Program.CurrentOpPeriodDetails.PeriodEnd;
+            checkInRecords = checkInRecords.Where(o => o.CheckOutDate == DateTime.MaxValue).ToList();
+            checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(mid) && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= RedNumber).ToList();
+            dgvResources.DataSource = checkInRecords;
+        }
+
+        private void btnPrintDemob_Click(object sender, EventArgs e)
+        {
+            List<IncidentResource> selectedResources = new List<IncidentResource>();
+            foreach (DataGridViewRow row in dgvResources.SelectedRows)
+            {
+                CheckInRecordWithResource rec = (CheckInRecordWithResource)row.DataBoundItem;
+                selectedResources.Add(rec.Resource);
+            }
+
+            if (selectedResources.Any())
+            {
+                List<byte[]> allPDFs = Program.pdfExportService.exportDemobChecklistToPDF(Program.CurrentIncident, selectedResources, false);
+
+                string fullFilepath = "";
+                fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+                string fullOutputFilename = "ICS-221 " + Program.CurrentIncident.IncidentIdentifier + " " + DateTime.Now.ToString(Globals.DateFormat);
+                fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+                try
+                {
+                    File.WriteAllBytes(fullFilepath, fullFile);
+                    System.Diagnostics.Process.Start(fullFilepath);
+                }
+                catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            }
+
+        }
+
+        private void dgvResources_SelectionChanged(object sender, EventArgs e)
+        {
+            btnPrintDemob.Enabled = dgvResources.SelectedRows.Count > 0;
+            btnDemob.Enabled = dgvResources.SelectedRows.Count == 1;
+        }
+
+        #endregion
 
         #region OrgChart
 
@@ -402,6 +580,21 @@ namespace Wildfire_ICS_Assist
 
         #endregion
 
+        #region Summary Stats
+
+        private void BuildSummaryStats()
+        {
+            List<SummaryStat> allSummaryStats = new List<SummaryStat>();
+            allSummaryStats.AddRange(Program.CurrentIncident.GetSummaryPersonHours(Program.CurrentOpPeriod));
+            allSummaryStats.AddRange(Program.CurrentIncident.GetSummaryResourceCounts(Program.CurrentOpPeriod));
+            allSummaryStats.AddRange((Program.CurrentIncident.GetSummaryPersonnelPerSection(Program.CurrentOpPeriod)));
+
+            dgvSummaryStats.DataSource = null;
+            dgvSummaryStats.DataSource = allSummaryStats;
+        }
+
+        #endregion
+
         private void numOpPeriod_ValueChanged(object sender, EventArgs e)
         {
             int newOpNumber = Convert.ToInt32(numOpPeriod.Value);
@@ -426,6 +619,65 @@ namespace Wildfire_ICS_Assist
                 datOpsStart.Value = selectedPeriod.PeriodStart;
                 datOpsEnd.Value = selectedPeriod.PeriodEnd;
             }
+        }
+
+       
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvSummaryStats_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            
+        }
+
+        private void dgvSummaryStats_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int colindex = dgvSummaryStats.Columns["colSummaryMoreInfo"].Index;
+            if(e.RowIndex >= 0 && e.ColumnIndex == colindex)
+            {
+                SummaryStat stat = (SummaryStat)dgvSummaryStats.Rows[e.RowIndex].DataBoundItem;
+                if (!string.IsNullOrEmpty(stat.MoreInfo)) { MessageBox.Show(stat.MoreInfo); }
+            }
+        }
+
+        private void btnDemob_Click(object sender, EventArgs e)
+        {
+            if(dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource res = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                OpenDemobForEdit(res);
+            }
+        }
+
+        private void OpenDemobForEdit(CheckInRecordWithResource res)
+        {
+            DemobilizationRecord demob = new DemobilizationRecord();
+            if (Program.CurrentIncident.ActiveDemobilizationRecords.Any(o => o.SignInRecordID == res.Record.SignInRecordID))
+            {
+                demob = Program.CurrentIncident.ActiveDemobilizationRecords.First(o => o.SignInRecordID == res.Record.SignInRecordID);
+            }
+            else
+            {
+                demob.SignInRecordID = res.Record.SignInRecordID;
+                demob.ResourceID = res.Resource.ID;
+                demob.DebriefDate = DateTime.Now;
+                demob.DemobDate = DateTime.Now;
+                demob.OpPeriod = Program.CurrentOpPeriod;
+
+            }
+
+            using (DemobilizeResourceForm demobForm = new DemobilizeResourceForm())
+            {
+                demobForm.SetRecord(res.Resource, res.Record, demob);
+                DialogResult dr = demobForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Program.wfIncidentService.UpsertDemobRecord(demob);
+                }
+            }
+
         }
     }
 }

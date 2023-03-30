@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.demobilizationEditControl1 = new Wildfire_ICS_Assist.CustomControls.DemobilizationEditControl();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnPrintDemob = new System.Windows.Forms.Button();
+            this.demobilizationEditControl1 = new Wildfire_ICS_Assist.CustomControls.DemobilizationEditControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -49,28 +50,16 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnPrintDemob);
             this.splitContainer1.Panel1.Controls.Add(this.demobilizationEditControl1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(470, 654);
-            this.splitContainer1.SplitterDistance = 587;
+            this.splitContainer1.Size = new System.Drawing.Size(470, 747);
+            this.splitContainer1.SplitterDistance = 680;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // demobilizationEditControl1
-            // 
-            this.demobilizationEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.demobilizationEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.demobilizationEditControl1.Location = new System.Drawing.Point(0, 0);
-            this.demobilizationEditControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.demobilizationEditControl1.MinimumSize = new System.Drawing.Size(476, 558);
-            this.demobilizationEditControl1.Name = "demobilizationEditControl1";
-            this.demobilizationEditControl1.Size = new System.Drawing.Size(476, 581);
-            this.demobilizationEditControl1.TabIndex = 0;
             // 
             // btnSave
             // 
@@ -102,11 +91,40 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnPrintDemob
+            // 
+            this.btnPrintDemob.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnPrintDemob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrintDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrintDemob.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrintDemob.Location = new System.Drawing.Point(108, 15);
+            this.btnPrintDemob.Margin = new System.Windows.Forms.Padding(6);
+            this.btnPrintDemob.Name = "btnPrintDemob";
+            this.btnPrintDemob.Size = new System.Drawing.Size(260, 51);
+            this.btnPrintDemob.TabIndex = 25;
+            this.btnPrintDemob.Text = "Print Demob Checklist";
+            this.btnPrintDemob.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrintDemob.UseVisualStyleBackColor = true;
+            this.btnPrintDemob.Click += new System.EventHandler(this.btnPrintDemob_Click);
+            // 
+            // demobilizationEditControl1
+            // 
+            this.demobilizationEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.demobilizationEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.demobilizationEditControl1.Location = new System.Drawing.Point(0, 78);
+            this.demobilizationEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.demobilizationEditControl1.MinimumSize = new System.Drawing.Size(476, 558);
+            this.demobilizationEditControl1.Name = "demobilizationEditControl1";
+            this.demobilizationEditControl1.Size = new System.Drawing.Size(476, 596);
+            this.demobilizationEditControl1.TabIndex = 0;
+            // 
             // DemobilizeResourceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 654);
+            this.ClientSize = new System.Drawing.Size(470, 747);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -131,5 +149,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private CustomControls.DemobilizationEditControl demobilizationEditControl1;
+        private System.Windows.Forms.Button btnPrintDemob;
     }
 }

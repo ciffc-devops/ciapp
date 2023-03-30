@@ -262,6 +262,7 @@ namespace Wildfire_ICS_Assist
                 checkInRecord.ResourceID = _selectedResource.ID;
 
                 this.DialogResult = DialogResult.OK;
+                this.Dispose();
                 this.Close();
                 
             }

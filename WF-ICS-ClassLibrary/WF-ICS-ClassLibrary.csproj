@@ -152,6 +152,7 @@
     <Compile Include="Models\SafetyMessage.cs" />
     <Compile Include="Models\ShortcutButtonOption.cs" />
     <Compile Include="Models\SoftwareUpdate.cs" />
+    <Compile Include="Models\SummaryStat.cs" />
     <Compile Include="Models\TaskBasics.cs" />
     <Compile Include="Models\TaskUpdate.cs" />
     <Compile Include="Models\TeamAssignment.cs" />

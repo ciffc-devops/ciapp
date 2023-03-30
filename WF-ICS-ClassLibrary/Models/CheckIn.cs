@@ -177,7 +177,7 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class CheckInTools
     {
-        public static string ExportCheckInRecordsToCSV(this List<CheckInRecordWithResource> records, string delimiter = ",")
+        public static string ExportCheckInRecordsToCSV(this List<CheckInRecordWithResource> records, List<DemobilizationRecord> demobRecords, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();
             csv.Append("Unique Incident Number"); csv.Append(delimiter);
@@ -227,6 +227,20 @@ namespace WF_ICS_ClassLibrary.Models
             csv.Append("Incident contact"); csv.Append(delimiter);
             csv.Append("Duration of Visit"); csv.Append(delimiter);
 
+            //debrief
+            csv.Append("Check out date"); csv.Append(delimiter);
+            csv.Append("Demob location"); csv.Append(delimiter);
+            csv.Append("Travel time to home unit"); csv.Append(delimiter);
+            csv.Append("Debrief date/time"); csv.Append(delimiter);
+            csv.Append("Debrief location"); csv.Append(delimiter);
+            csv.Append("Inventory reconciled with supply unit"); csv.Append(delimiter);
+            csv.Append("Any discrepincies with Supply Uint"); csv.Append(delimiter);
+            csv.Append("Any discrepincies with Facilities Unit"); csv.Append(delimiter);
+            csv.Append("Any discrepincies with Finance Unit"); csv.Append(delimiter);
+            csv.Append("ICS211 completed"); csv.Append(delimiter);
+            csv.Append("Performance Rating Completed"); csv.Append(delimiter);
+
+
             csv.Append(Environment.NewLine);
 
 
@@ -257,7 +271,7 @@ namespace WF_ICS_ClassLibrary.Models
                     }
                     else
                     {
-                        csv.Append(""); csv.Append(delimiter);
+                        csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
 
                     }
 
@@ -269,20 +283,20 @@ namespace WF_ICS_ClassLibrary.Models
                 }
                 else
                 {
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
                 }
 
 
@@ -296,25 +310,25 @@ namespace WF_ICS_ClassLibrary.Models
                 }
                 else
                 {
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
-                    csv.Append(""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
 
                 }
 
 
 
                 csv.Append(AddToCSVIfPossible(item, new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), delimiter));
-                 csv.Append("\""); csv.Append(item.Record.InitialRoleName); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.Record.InitialRoleName); csv.Append("\""); csv.Append(delimiter);
 
                 csv.Append("\""); csv.Append(item.Resource.Kind); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Resource.Type); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("Check-In Location"); csv.Append(delimiter);
-                csv.Append("\""); csv.Append(item.Record.CheckInDate.ToString(Globals.DateFormat)); csv.Append("\""); csv.Append(delimiter); 
+                csv.Append("\""); csv.Append(item.Record.CheckInDate.ToString(Globals.DateFormat)); csv.Append("\""); csv.Append(delimiter);
 
-                csv.Append("\""); csv.Append(item.Record.CheckInDate.ToString("HH:mm")); csv.Append("\""); csv.Append(delimiter); 
+                csv.Append("\""); csv.Append(item.Record.CheckInDate.ToString("HH:mm")); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Record.LastDayOfRest.ToString(Globals.DateFormat)); csv.Append("\""); csv.Append(delimiter);
                 csv.Append(AddToCSVIfPossible(item, new Guid("9afc627f-bdad-4076-8d9a-3511759ea2bf"), delimiter));
                 csv.Append("\""); csv.Append(item.Record.LastDayOnIncident.ToString(Globals.DateFormat)); csv.Append("\""); csv.Append(delimiter);
@@ -334,6 +348,42 @@ namespace WF_ICS_ClassLibrary.Models
                 csv.Append(AddToCSVIfPossible(item, new Guid("99c4d8c6-3b39-42f1-af6f-33525b2da4e7"), delimiter));
                 csv.Append(AddToCSVIfPossible(item, new Guid("c3704eab-5c8e-4619-91f0-4df014560c7a"), delimiter));
                 csv.Append(AddToCSVIfPossible(item, new Guid("ad5b511a-a99f-4310-ba66-4eeb41ec6ab9"), delimiter));
+
+                //Demob
+                if (demobRecords.Any(o => o.ResourceID == item.Resource.ID))
+                {
+                    DemobilizationRecord demob = demobRecords.First(o => o.ResourceID == item.Resource.ID);
+                    csv.Append("\""); csv.Append(demob.DemobDate.ToString(Globals.DateFormat + " HH:mm")); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(demob.DemobLocation); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(demob.TravelTimeToHomeUnit); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(demob.DebriefDate.ToString(Globals.DateFormat + " HH:mm")); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(demob.DebriefLocation); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); if (demob.InventoryReconciled) { csv.Append("YES"); } else { csv.Append("NO"); } csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); if (demob.DiscrepanciesWithSupply) { csv.Append("YES"); } else { csv.Append("NO"); }
+                    csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); if (demob.DiscrepanciesWithFacilities) { csv.Append("YES"); } else { csv.Append("NO"); }
+                    csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); if (demob.DiscrepanciesWithFinance) { csv.Append("YES"); } else { csv.Append("NO"); }
+                    csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); if (demob.ICS211Completed) { csv.Append("YES"); } else { csv.Append("NO"); }
+                    csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); if (demob.PerformanceRatingCompleted) { csv.Append("YES"); } else { csv.Append("NO"); }
+                    csv.Append("\""); csv.Append(delimiter);
+                }
+                else
+                {
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append("\""); csv.Append(delimiter);
+                }
 
 
 
@@ -432,6 +482,38 @@ namespace WF_ICS_ClassLibrary.Models
                 }
             }
             return food;
+        }
+
+        public static List<CheckInRecordWithResource> GetAllCheckInWithResources(this WFIncident incident, int OpPeriod)
+        {
+            List<CheckInRecordWithResource> list = new List<CheckInRecordWithResource>();
+
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+
+
+            List<IncidentResource> allResources = new List<IncidentResource>();
+            List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
+
+            allResources.AddRange(incident.ActiveIncidentResources);
+
+            foreach (IncidentResource res in allResources)
+            {
+                if (!list.Any(o => o.Resource.ID == res.ID) && incident.AllCheckInRecords.Any(o => o.ResourceID == res.ID))
+                {
+                    CheckInRecord rec = incident.AllCheckInRecords.First(o => o.ResourceID == res.ID);
+                    if (rec.CheckInDate <= currentPeriod.PeriodEnd)
+                    {
+                        CheckInRecordWithResource resrec = new CheckInRecordWithResource(rec, res, currentPeriod.PeriodEnd);
+
+                        list.Add(resrec);
+                    }
+                }
+
+            }
+
+
+            return list;
         }
 
         public static List<CheckInRecordWithResource> GetCheckInWithResources(this WFIncident incident, int OpPeriod)
@@ -537,7 +619,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public static bool CheckedInThisTime(this CheckInRecord rec, DateTime timeToCheck)
         {
-            if (rec.CheckInDate <= timeToCheck && rec.CheckOutDate >= timeToCheck && rec.LastDayOnIncident >= timeToCheck) { return true; }
+            if (rec.CheckInDate <= timeToCheck && rec.CheckOutDate >= timeToCheck && rec.LastDayOnIncident.Date >= timeToCheck.Date) { return true; }
             return false;
         }
 

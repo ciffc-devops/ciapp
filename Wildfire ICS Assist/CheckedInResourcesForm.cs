@@ -149,6 +149,7 @@ namespace Wildfire_ICS_Assist
                     {
                         case "Personnel":
                             Personnel p = resource as Personnel;
+                            p.ParentResourceID = Guid.Empty;
                             if (string.IsNullOrEmpty(p.LeaderName)) { p.LeaderName = p.Name; }
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, PNumMin, PNumMax); }
                             Program.wfIncidentService.UpsertPersonnel(p);
@@ -161,6 +162,7 @@ namespace Wildfire_ICS_Assist
                             break;
                         case "Visitor":
                             Personnel vis = resource as Personnel;
+                            vis.ParentResourceID = Guid.Empty;
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, PNumMin, PNumMax); }
                             Program.wfIncidentService.UpsertPersonnel(vis);
 
@@ -231,6 +233,7 @@ namespace Wildfire_ICS_Assist
                                     Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
                                     CheckInRecord prec = signInForm.checkInRecord.Clone();
                                     prec.ResourceID = subres.ID;
+                                    prec.ResourceName = subres.ResourceName;
                                     prec.SignInRecordID = Guid.NewGuid();
                                     prec.ParentRecordID = record.SignInRecordID;
                                     prec.ResourceType = "Personnel";
@@ -654,12 +657,12 @@ namespace Wildfire_ICS_Assist
                 string exportPath = svdExport.FileName;
                 string delimiter = ",";
 
-                List<CheckInRecordWithResource> resources = Program.CurrentIncident.GetCheckInWithResources(Program.CurrentOpPeriod);
+                List<CheckInRecordWithResource> resources = Program.CurrentIncident.GetAllCheckInWithResources(Program.CurrentOpPeriod);
 
 
 
 
-                string csv = resources.ExportCheckInRecordsToCSV(delimiter);
+                string csv = resources.ExportCheckInRecordsToCSV(Program.CurrentIncident.ActiveDemobilizationRecords.Where(o=>o.OpPeriod <= Program.CurrentOpPeriod).ToList(), delimiter);
                 try
                 {
                     System.IO.File.WriteAllText(exportPath, csv);

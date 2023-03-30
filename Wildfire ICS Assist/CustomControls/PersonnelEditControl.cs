@@ -52,7 +52,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                     if (fixedAgencies.Contains(teamMember.Agency)) { cboAgency.SelectedIndex = cboAgency.FindStringExact(teamMember.Agency); }
                     else
                     {
-                        cboAgency.SelectedValue = Guid.Empty;
+                        cboAgency.SelectedIndex = -1;
                         cboOtherAgency.Text = teamMember.Agency;
                     }
                 }

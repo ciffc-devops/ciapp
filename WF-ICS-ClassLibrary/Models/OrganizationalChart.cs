@@ -334,6 +334,8 @@ namespace WF_ICS_ClassLibrary.Models
             RoleDescription = description;
             Mnemonic = mnemonic;
             _IncludeReportsToInName = includeReportsToInName;
+            teamMember = new Personnel();
+            teamMember.ID = Guid.Empty;
         }
 
 
