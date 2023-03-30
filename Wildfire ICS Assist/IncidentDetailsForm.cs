@@ -2157,12 +2157,12 @@ namespace Wildfire_ICS_Assist
         {
             if (PingTool.TestPing())
             {
-                tmrInternetSync.Enabled = false;
+                //tmrInternetSync.Enabled = false;
                 var send = SendPendingInternetUpdates();
                 var get = GetPendingInternetUpdates();
 
                 await Task.WhenAll(send, get);
-                tmrInternetSync.Enabled = true;
+                //tmrInternetSync.Enabled = true;
 
                 this.BeginInvoke((Action)delegate ()
                 {
