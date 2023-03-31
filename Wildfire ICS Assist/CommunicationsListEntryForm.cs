@@ -74,7 +74,8 @@ namespace Wildfire_ICS_Assist
                 this.Close();
             } else
             {
-                MessageBox.Show(Properties.Resources.EditContactValidationError);
+                txtContactName.BackColor = Program.ErrorColor;
+                //MessageBox.Show(Properties.Resources.EditContactValidationError);
             }
         }
 
@@ -144,6 +145,12 @@ namespace Wildfire_ICS_Assist
         private void cboSavedContacts_KeyDown(object sender, KeyEventArgs e)
         {
          
+        }
+
+        private void txtContactName_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtContactName.Text)) { txtContactName.BackColor = Program.ErrorColor; }
+            else { txtContactName.BackColor = Program.GoodColor; }
         }
     }
 }

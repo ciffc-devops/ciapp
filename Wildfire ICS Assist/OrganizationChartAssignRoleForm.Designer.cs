@@ -36,23 +36,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnClearAssignment = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.editTeamMemberControl1 = new Wildfire_ICS_Assist.CustomControls.PersonnelEditControl();
-            this.chkSaveForLater = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnAssignNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -66,9 +61,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnClearAssignment);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(828, 1085);
+            this.splitContainer1.Size = new System.Drawing.Size(514, 206);
             this.splitContainer1.SplitterDistance = 137;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -92,16 +86,16 @@
             this.panel1.Controls.Add(this.btnAssignSaved);
             this.panel1.Controls.Add(this.cboSavedMembers);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(30, 40);
+            this.panel1.Location = new System.Drawing.Point(6, 40);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(786, 91);
+            this.panel1.Size = new System.Drawing.Size(496, 91);
             this.panel1.TabIndex = 1;
             // 
             // btnAssignSaved
             // 
             this.btnAssignSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAssignSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
-            this.btnAssignSaved.Location = new System.Drawing.Point(655, 33);
+            this.btnAssignSaved.Location = new System.Drawing.Point(365, 33);
             this.btnAssignSaved.Margin = new System.Windows.Forms.Padding(6);
             this.btnAssignSaved.Name = "btnAssignSaved";
             this.btnAssignSaved.Size = new System.Drawing.Size(123, 46);
@@ -122,7 +116,7 @@
             this.cboSavedMembers.FormattingEnabled = true;
             this.cboSavedMembers.Location = new System.Drawing.Point(8, 41);
             this.cboSavedMembers.Name = "cboSavedMembers";
-            this.cboSavedMembers.Size = new System.Drawing.Size(638, 32);
+            this.cboSavedMembers.Size = new System.Drawing.Size(348, 32);
             this.cboSavedMembers.TabIndex = 1;
             this.cboSavedMembers.ValueMember = "PersonID";
             this.cboSavedMembers.Leave += new System.EventHandler(this.cboSavedMembers_Leave);
@@ -139,10 +133,9 @@
             // 
             // btnClearAssignment
             // 
-            this.btnClearAssignment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClearAssignment.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClearAssignment.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_250_eraser;
-            this.btnClearAssignment.Location = new System.Drawing.Point(142, 887);
+            this.btnClearAssignment.Location = new System.Drawing.Point(142, 6);
             this.btnClearAssignment.Margin = new System.Windows.Forms.Padding(6);
             this.btnClearAssignment.Name = "btnClearAssignment";
             this.btnClearAssignment.Size = new System.Drawing.Size(217, 51);
@@ -154,10 +147,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 887);
+            this.btnCancel.Location = new System.Drawing.Point(6, 6);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
@@ -167,84 +159,19 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.editTeamMemberControl1);
-            this.panel2.Controls.Add(this.chkSaveForLater);
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.btnAssignNew);
-            this.panel2.Location = new System.Drawing.Point(30, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(786, 875);
-            this.panel2.TabIndex = 98;
-            // 
-            // editTeamMemberControl1
-            // 
-            this.editTeamMemberControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.editTeamMemberControl1.BackColor = System.Drawing.Color.Transparent;
-            this.editTeamMemberControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editTeamMemberControl1.Location = new System.Drawing.Point(8, 43);
-            this.editTeamMemberControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.editTeamMemberControl1.MinimumSize = new System.Drawing.Size(442, 769);
-            this.editTeamMemberControl1.Name = "editTeamMemberControl1";
-            this.editTeamMemberControl1.Size = new System.Drawing.Size(759, 769);
-            this.editTeamMemberControl1.TabIndex = 100;
-            // 
-            // chkSaveForLater
-            // 
-            this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(417, 829);
-            this.chkSaveForLater.Name = "chkSaveForLater";
-            this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
-            this.chkSaveForLater.TabIndex = 12;
-            this.chkSaveForLater.Text = "Save for future incidents";
-            this.chkSaveForLater.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 8);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(192, 29);
-            this.label10.TabIndex = 99;
-            this.label10.Text = "New Personnel";
-            // 
-            // btnAssignNew
-            // 
-            this.btnAssignNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAssignNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
-            this.btnAssignNew.Location = new System.Drawing.Point(655, 819);
-            this.btnAssignNew.Margin = new System.Windows.Forms.Padding(6);
-            this.btnAssignNew.Name = "btnAssignNew";
-            this.btnAssignNew.Size = new System.Drawing.Size(123, 46);
-            this.btnAssignNew.TabIndex = 13;
-            this.btnAssignNew.Text = "Assign";
-            this.btnAssignNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAssignNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAssignNew.UseVisualStyleBackColor = true;
-            this.btnAssignNew.Click += new System.EventHandler(this.btnAssignNew_Click);
-            // 
             // OrganizationChartAssignRoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(828, 1085);
+            this.ClientSize = new System.Drawing.Size(514, 206);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(2000, 245);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(844, 1124);
+            this.MinimumSize = new System.Drawing.Size(530, 245);
             this.Name = "OrganizationChartAssignRoleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Assign Role";
@@ -256,8 +183,6 @@
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -271,11 +196,6 @@
         private System.Windows.Forms.ComboBox cboSavedMembers;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.CheckBox chkSaveForLater;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button btnAssignNew;
-        private CustomControls.PersonnelEditControl editTeamMemberControl1;
         private System.Windows.Forms.Button btnClearAssignment;
     }
 }

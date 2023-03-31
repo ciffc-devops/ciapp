@@ -162,12 +162,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboAgency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cboOtherAgency.Enabled = cboAgency.Text.Equals("Other Agency");
-            if (cboOtherAgency.Enabled)
-            {
-                teamMember.Agency = cboOtherAgency.Text;
-            } else { teamMember.Agency = cboAgency.Text; }
-            SetColours();
+            
         }
 
         private void txtPhone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
@@ -193,7 +188,12 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboAgency_Leave(object sender, EventArgs e)
         {
-          
+          cboOtherAgency.Enabled = cboAgency.Text.Equals("Other Agency");
+            if (cboOtherAgency.Enabled)
+            {
+                teamMember.Agency = cboOtherAgency.Text;
+            } else { teamMember.Agency = cboAgency.Text; }
+            SetColours();
         }
 
         private void cboHomeAgency_Leave(object sender, EventArgs e)

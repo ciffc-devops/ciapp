@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using Wildfire_ICS_Assist.UtilityForms;
 
+
 namespace Wildfire_ICS_Assist
 {
     public partial class CommunicationsPlanEntryForm : Form
@@ -163,17 +164,9 @@ namespace Wildfire_ICS_Assist
 
         private void btnAirHelp_Click(object sender, EventArgs e)
         {
-            HelpInfo info = new HelpInfo();
-            if (info.loadByTopic("CommsForAir"))
-            {
-
-                using (HelpInfoForm help = new HelpInfoForm())
-                {
-                    help.Title = info.Title;
-                    help.Body = info.Body;
-                    help.ShowDialog();
-                }
-            }
+            Button btn = (Button)sender;
+            int durationMilliseconds = 10000;
+            toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
         }
     }
 }

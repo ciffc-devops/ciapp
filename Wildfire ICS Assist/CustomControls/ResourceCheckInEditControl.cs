@@ -75,7 +75,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
             TimeSpan ts2 = datLDW.Value - datCheckInTime.Value;
             TimeSpan ts3 = datLDW.Value - datLastDayOfRest.Value;
-            lblLastDayCount.Text = Math.Round(ts3.TotalDays, 0).ToString() + " days since rest / " + Math.Round(ts2.TotalDays, 0).ToString() + " since check in";
+            lblLastDayCount.Text = Math.Round(ts3.TotalDays, 0).ToString() + " days since rest / " + Math.Round(ts2.TotalDays, 0).ToString() + " days since check in";
         }
        
         private void datCheckInTime_ValueChanged(object sender, EventArgs e)

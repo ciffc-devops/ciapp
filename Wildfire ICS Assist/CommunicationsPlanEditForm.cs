@@ -63,17 +63,10 @@ namespace Wildfire_ICS_Assist
 
         private void btnAirHelp_Click(object sender, EventArgs e)
         {
-            HelpInfo info = new HelpInfo();
-            if (info.loadByTopic("CommsForAir"))
-            {
+            Button btn = (Button)sender;
+            int durationMilliseconds = 10000;
+            toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
 
-                using (HelpInfoForm help = new HelpInfoForm())
-                {
-                    help.Title = info.Title;
-                    help.Body = info.Body;
-                    help.ShowDialog();
-                }
-            }
         }
     }
 }

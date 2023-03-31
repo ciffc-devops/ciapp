@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="c52efb66-6f2a-4694-b3f2-aedac8e55a01" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.5.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
+	<Product Id="501191B3-2B46-4511-83D2-492ACF6DB5E2" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.7.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
          Manufacturer='CIFFC' />
 
@@ -24,6 +24,7 @@
 				<ComponentGroupRef Id="ProductComponents" />
 				<ComponentGroupRef Id="BlankFormComponents" />
 				<ComponentRef Id='MainExecutable' />
+				<ComponentRef Id="ApplicationShortcut" />
 			</Feature>
 
 		
@@ -37,19 +38,22 @@
 		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
 		
 		<Icon Id="CanadianIncidentActionPlanProgram.exe" SourceFile="ProgramOutput\Canadian Incident Action Plan Program.exe" />
+<!--WorkingDirectory="INSTALLDIR"-->
+
+	
 
 		<DirectoryRef Id="ApplicationProgramsFolder">
 			<Component Id="ApplicationShortcut" Guid="069951ea-679d-416d-accb-c1d0e6bdbe1c">
 				<Shortcut Id="ApplicationStartMenuShortcut"
-						  Name="Canadian Incident Action Plan Program"
-						  Description="Canadian Incident Action Plan Program"
-						  Target="[#Canadian_Incident_Action_Plan_ProgramExe]"
-						 
-						  WorkingDirectory="INSTALLDIR"/>
-				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+                          Name="Canadian Incident Action Plan Program"
+                          Description="Canadian Incident Action Plan Program"
+                          Target="[#Canadian_Incident_Action_Plan_ProgramExe]"
+                          WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+				<RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
 				<RegistryValue Root="HKCU" Key="Software\CIFFC\CanadianIncidentActionPlanProgram" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
 			</Component>
 		</DirectoryRef>
+		
 	</Product>
 
 	<Fragment>
@@ -64,9 +68,8 @@
 				</Directory>
 			</Directory>
 			<Directory Id="ProgramMenuFolder">
-				<Directory Id="ApplicationProgramsFolder" Name="CIFFC"/>
+				<Directory Id="ApplicationProgramsFolder" Name="My Application Name"/>
 			</Directory>
-
 			<Directory Id="DesktopFolder" Name="Desktop" />
 		</Directory>
 	</Fragment>
@@ -80,7 +83,7 @@
 						WorkingDirectory='INSTALLDIR' Icon="CanadianIncidentActionPlanProgram.exe" IconIndex="0" Advertise="yes" />
 				</File>
 			</Component>
-			<ComponentRef Id="ApplicationShortcut" />
+			
 			
 			<Component Id='CoordinateSharp_dll' Guid ='27455d98-6929-479e-a3fc-8889758b2b2a'>
 				<File Id='CoordinateSharp_dll' Name='CoordinateSharp.dll' DiskId='1' Source='ProgramOutput\CoordinateSharp.dll' KeyPath='yes'></File>

@@ -1496,6 +1496,16 @@ namespace WildfireICSDesktopServices
             {
                 _currentIncident.UpsertTaskTeamMember(member);
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(member, "UPSERT", true, false); }
+
+                foreach (OrganizationChart chart in _currentIncident.allOrgCharts)
+                {
+                    if (chart.ActiveRoles.Any(o => o.IndividualID == member.ID && !o.IndividualName.EqualsWithNull(member.Name)))
+                    {
+                        ICSRole role = chart.ActiveRoles.First(o => o.IndividualID == member.ID && !o.IndividualName.EqualsWithNull(member.Name));
+                        role.IndividualName = member.Name;
+                        UpsertICSRole(role);
+                    }
+                }
             }
             OnMemberSignInChanged(new CheckInEventArgs(member));
         }

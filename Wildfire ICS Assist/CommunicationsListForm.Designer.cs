@@ -262,7 +262,7 @@
             this.MinimumSize = new System.Drawing.Size(733, 440);
             this.Name = "CommunicationsListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Communications List";
+            this.Text = "Additional Contacts";
             this.Load += new System.EventHandler(this.CommunicationsListForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

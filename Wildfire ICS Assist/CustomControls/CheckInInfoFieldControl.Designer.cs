@@ -43,7 +43,7 @@
             // 
             this.datDateValue.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datDateValue.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datDateValue.Location = new System.Drawing.Point(235, 5);
+            this.datDateValue.Location = new System.Drawing.Point(267, 5);
             this.datDateValue.Name = "datDateValue";
             this.datDateValue.Size = new System.Drawing.Size(109, 29);
             this.datDateValue.TabIndex = 20;
@@ -54,14 +54,14 @@
             this.lblFieldName.Location = new System.Drawing.Point(4, 5);
             this.lblFieldName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFieldName.Name = "lblFieldName";
-            this.lblFieldName.Size = new System.Drawing.Size(222, 29);
+            this.lblFieldName.Size = new System.Drawing.Size(254, 29);
             this.lblFieldName.TabIndex = 21;
             this.lblFieldName.Text = "Check-In at Incident*";
             this.lblFieldName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtStringValue
             // 
-            this.txtStringValue.Location = new System.Drawing.Point(319, 5);
+            this.txtStringValue.Location = new System.Drawing.Point(492, 6);
             this.txtStringValue.Name = "txtStringValue";
             this.txtStringValue.Size = new System.Drawing.Size(100, 29);
             this.txtStringValue.TabIndex = 22;

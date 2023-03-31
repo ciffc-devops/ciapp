@@ -141,7 +141,8 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Where(o => o.teamMember != null))
                 {
-                    if (role.teamMember.PersonID != Guid.Empty && !string.IsNullOrEmpty(role.teamMember.Name) && !members.Any(o => o.PersonID == role.teamMember.PersonID))
+
+                    if (role.IndividualID != Guid.Empty && !string.IsNullOrEmpty(role.IndividualName) && members.Any(o => o.PersonID == role.IndividualID))
                     {
                         members.Add(role.teamMember);
                     }

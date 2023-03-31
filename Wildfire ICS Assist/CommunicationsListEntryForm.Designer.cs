@@ -101,7 +101,6 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.Location = new System.Drawing.Point(485, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
@@ -144,7 +143,6 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(8, 392);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -211,7 +209,6 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(537, 303);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
@@ -364,7 +361,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(139, 24);
             this.label9.TabIndex = 115;
-            this.label9.Text = "Name";
+            this.label9.Text = "Name*";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtContactName
@@ -376,6 +373,7 @@
             this.txtContactName.Name = "txtContactName";
             this.txtContactName.Size = new System.Drawing.Size(247, 29);
             this.txtContactName.TabIndex = 114;
+            this.txtContactName.TextChanged += new System.EventHandler(this.txtContactName_TextChanged);
             // 
             // CommunicationsListEntryForm
             // 
@@ -391,7 +389,7 @@
             this.MinimumSize = new System.Drawing.Size(717, 563);
             this.Name = "CommunicationsListEntryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Communications List Entry Form";
+            this.Text = "Additional Contacts Entry Form";
             this.Load += new System.EventHandler(this.CommunicationsListEntryForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

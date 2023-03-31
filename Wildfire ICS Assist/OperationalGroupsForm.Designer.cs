@@ -382,7 +382,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "OperationalGroupsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Operational Groups";
+            this.Text = "Assignments List";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OperationalGroupsForm_FormClosing);
             this.Load += new System.EventHandler(this.OperationalGroupsForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

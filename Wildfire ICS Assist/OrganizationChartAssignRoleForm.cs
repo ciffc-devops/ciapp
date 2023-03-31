@@ -45,7 +45,7 @@ namespace Wildfire_ICS_Assist
 
         private void OrganizationChartAssignRole_Load(object sender, EventArgs e)
         {
-            editTeamMemberControl1.SetPersonnel(new Personnel());
+            //editTeamMemberControl1.SetPersonnel(new Personnel());
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -100,10 +100,10 @@ namespace Wildfire_ICS_Assist
                 this.Close();
             }
         }
-
+        /*
         private void btnAssignNew_Click(object sender, EventArgs e)
         {
-            if (editTeamMemberControl1.FormValid)
+                       if (editTeamMemberControl1.FormValid)
             {
                 Personnel member = editTeamMemberControl1.teamMember;
 
@@ -124,7 +124,7 @@ namespace Wildfire_ICS_Assist
             {
                 MessageBox.Show(Properties.Resources.MissingInformationValidationError);
             }
-        }
+        }*/
 
         
 

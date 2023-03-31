@@ -49,11 +49,11 @@
             // lblLastDayCount
             // 
             this.lblLastDayCount.AutoSize = true;
-            this.lblLastDayCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastDayCount.Location = new System.Drawing.Point(406, 154);
+            this.lblLastDayCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastDayCount.Location = new System.Drawing.Point(413, 158);
             this.lblLastDayCount.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLastDayCount.Name = "lblLastDayCount";
-            this.lblLastDayCount.Size = new System.Drawing.Size(306, 20);
+            this.lblLastDayCount.Size = new System.Drawing.Size(278, 17);
             this.lblLastDayCount.TabIndex = 129;
             this.lblLastDayCount.Text = "25 days since rest / 25 days since check in";
             this.lblLastDayCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -68,7 +68,7 @@
             this.lblScrollHint.Name = "lblScrollHint";
             this.lblScrollHint.Size = new System.Drawing.Size(132, 54);
             this.lblScrollHint.TabIndex = 128;
-            this.lblScrollHint.Text = "Be sure to scroll the box below";
+            this.lblScrollHint.Text = "Be sure to scroll the area below";
             this.lblScrollHint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlCheckInFields
@@ -77,11 +77,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheckInFields.AutoScroll = true;
-            this.pnlCheckInFields.BackColor = System.Drawing.Color.White;
-            this.pnlCheckInFields.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCheckInFields.BackColor = System.Drawing.Color.Transparent;
             this.pnlCheckInFields.Location = new System.Drawing.Point(7, 184);
             this.pnlCheckInFields.Name = "pnlCheckInFields";
-            this.pnlCheckInFields.Size = new System.Drawing.Size(706, 286);
+            this.pnlCheckInFields.Size = new System.Drawing.Size(706, 113);
             this.pnlCheckInFields.TabIndex = 4;
             // 
             // txtResourceType
@@ -119,21 +118,21 @@
             // 
             // datCheckInTime
             // 
-            this.datCheckInTime.CustomFormat = "yyyy-MMM-dd HH:mm";
+            this.datCheckInTime.CustomFormat = "yyyy-MMMM-dd";
             this.datCheckInTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datCheckInTime.Location = new System.Drawing.Point(202, 117);
+            this.datCheckInTime.Location = new System.Drawing.Point(202, 119);
             this.datCheckInTime.Name = "datCheckInTime";
-            this.datCheckInTime.Size = new System.Drawing.Size(195, 29);
+            this.datCheckInTime.Size = new System.Drawing.Size(203, 29);
             this.datCheckInTime.TabIndex = 2;
             this.datCheckInTime.ValueChanged += new System.EventHandler(this.datCheckInTime_ValueChanged);
             // 
             // datLDW
             // 
-            this.datLDW.CustomFormat = "yyyy-MMM-dd";
+            this.datLDW.CustomFormat = "yyyy-MMMM-dd";
             this.datLDW.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datLDW.Location = new System.Drawing.Point(202, 152);
             this.datLDW.Name = "datLDW";
-            this.datLDW.Size = new System.Drawing.Size(195, 29);
+            this.datLDW.Size = new System.Drawing.Size(203, 29);
             this.datLDW.TabIndex = 3;
             this.datLDW.ValueChanged += new System.EventHandler(this.datLDW_ValueChanged);
             // 
@@ -160,22 +159,22 @@
             // lblDaysSinceLastDayOfRest
             // 
             this.lblDaysSinceLastDayOfRest.AutoSize = true;
-            this.lblDaysSinceLastDayOfRest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDaysSinceLastDayOfRest.Location = new System.Drawing.Point(406, 117);
+            this.lblDaysSinceLastDayOfRest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDaysSinceLastDayOfRest.Location = new System.Drawing.Point(413, 125);
             this.lblDaysSinceLastDayOfRest.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblDaysSinceLastDayOfRest.Name = "lblDaysSinceLastDayOfRest";
-            this.lblDaysSinceLastDayOfRest.Size = new System.Drawing.Size(55, 20);
+            this.lblDaysSinceLastDayOfRest.Size = new System.Drawing.Size(50, 17);
             this.lblDaysSinceLastDayOfRest.TabIndex = 132;
             this.lblDaysSinceLastDayOfRest.Text = "5 days";
             this.lblDaysSinceLastDayOfRest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // datLastDayOfRest
             // 
-            this.datLastDayOfRest.CustomFormat = "yyyy-MMM-dd";
+            this.datLastDayOfRest.CustomFormat = "yyyy-MMMM-dd";
             this.datLastDayOfRest.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datLastDayOfRest.Location = new System.Drawing.Point(202, 82);
             this.datLastDayOfRest.Name = "datLastDayOfRest";
-            this.datLastDayOfRest.Size = new System.Drawing.Size(195, 29);
+            this.datLastDayOfRest.Size = new System.Drawing.Size(203, 29);
             this.datLastDayOfRest.TabIndex = 1;
             this.datLastDayOfRest.ValueChanged += new System.EventHandler(this.datLastDayOfRest_ValueChanged);
             // 
@@ -249,9 +248,9 @@
             this.Controls.Add(this.lblLastDayWorking);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.MinimumSize = new System.Drawing.Size(716, 473);
+            this.MinimumSize = new System.Drawing.Size(716, 300);
             this.Name = "ResourceCheckInEditControl";
-            this.Size = new System.Drawing.Size(716, 473);
+            this.Size = new System.Drawing.Size(716, 300);
             this.Load += new System.EventHandler(this.ResourceCheckInEditControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

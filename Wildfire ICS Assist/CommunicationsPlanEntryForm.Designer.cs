@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommunicationsPlanEntryForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pnlSavedComms = new System.Windows.Forms.Panel();
@@ -43,6 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.editCommsChannelControl1 = new Wildfire_ICS_Assist.CustomControls.EditCommsChannelControl();
             this.btnAirHelp = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.chkUsedForAir = new System.Windows.Forms.CheckBox();
@@ -53,7 +55,7 @@
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
-            this.editCommsChannelControl1 = new Wildfire_ICS_Assist.CustomControls.EditCommsChannelControl();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -123,13 +125,14 @@
             this.btnSavedUsedForAir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSavedUsedForAir.BackgroundImage")));
             this.btnSavedUsedForAir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSavedUsedForAir.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnSavedUsedForAir.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnSavedUsedForAir.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnSavedUsedForAir.Location = new System.Drawing.Point(449, 119);
             this.btnSavedUsedForAir.Name = "btnSavedUsedForAir";
             this.btnSavedUsedForAir.Size = new System.Drawing.Size(25, 25);
             this.btnSavedUsedForAir.TabIndex = 132;
             this.btnSavedUsedForAir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.btnSavedUsedForAir, "If this box is checked, this item will be included in the \'7. FREQUENCIES\' sectio" +
+        "n of ICS-220 Air Ops Summary.");
             this.btnSavedUsedForAir.UseVisualStyleBackColor = false;
             this.btnSavedUsedForAir.Click += new System.EventHandler(this.btnAirHelp_Click);
             // 
@@ -184,7 +187,6 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.Location = new System.Drawing.Point(620, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
@@ -226,7 +228,6 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 549);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -261,6 +262,20 @@
             this.panel2.Size = new System.Drawing.Size(751, 537);
             this.panel2.TabIndex = 98;
             // 
+            // editCommsChannelControl1
+            // 
+            this.editCommsChannelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editCommsChannelControl1.BackColor = System.Drawing.Color.Transparent;
+            this.editCommsChannelControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editCommsChannelControl1.Location = new System.Drawing.Point(9, 43);
+            this.editCommsChannelControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.editCommsChannelControl1.Name = "editCommsChannelControl1";
+            this.editCommsChannelControl1.selectedItem = null;
+            this.editCommsChannelControl1.Size = new System.Drawing.Size(734, 296);
+            this.editCommsChannelControl1.TabIndex = 132;
+            // 
             // btnAirHelp
             // 
             this.btnAirHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -268,13 +283,14 @@
             this.btnAirHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAirHelp.BackgroundImage")));
             this.btnAirHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnAirHelp.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnAirHelp.Location = new System.Drawing.Point(464, 428);
             this.btnAirHelp.Name = "btnAirHelp";
             this.btnAirHelp.Size = new System.Drawing.Size(25, 25);
             this.btnAirHelp.TabIndex = 99;
             this.btnAirHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.btnAirHelp, "If this box is checked, this item will be included in the \'7. FREQUENCIES\' sectio" +
+        "n of ICS-220 Air Ops Summary.");
             this.btnAirHelp.UseVisualStyleBackColor = false;
             this.btnAirHelp.Click += new System.EventHandler(this.btnAirHelp_Click);
             // 
@@ -364,7 +380,6 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(539, 481);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
@@ -375,20 +390,6 @@
             this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
-            // 
-            // editCommsChannelControl1
-            // 
-            this.editCommsChannelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.editCommsChannelControl1.BackColor = System.Drawing.Color.Transparent;
-            this.editCommsChannelControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editCommsChannelControl1.Location = new System.Drawing.Point(9, 43);
-            this.editCommsChannelControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.editCommsChannelControl1.Name = "editCommsChannelControl1";
-            this.editCommsChannelControl1.selectedItem = null;
-            this.editCommsChannelControl1.Size = new System.Drawing.Size(734, 296);
-            this.editCommsChannelControl1.TabIndex = 132;
             // 
             // CommunicationsPlanEntryForm
             // 
@@ -444,5 +445,6 @@
         private System.Windows.Forms.Button btnSavedUsedForAir;
         private System.Windows.Forms.CheckBox chkSavedUsedForAir;
         private CustomControls.EditCommsChannelControl editCommsChannelControl1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -135,7 +135,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (!string.IsNullOrEmpty(RxFrequency) && !string.IsNullOrEmpty(TxFrequency) && !RxFrequency.Equals(TxFrequency)) { return RxFrequency + "/" + TxFrequency; }
+                if (!string.IsNullOrEmpty(RxFrequency) && !string.IsNullOrEmpty(TxFrequency) && !RxFrequency.Equals(TxFrequency)) { return "(Rx) "+   RxFrequency + " / (Tx) " + TxFrequency; }
                 else { return RxFrequency; }
             }
         }
@@ -152,7 +152,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (!string.IsNullOrEmpty(RxTone) && !string.IsNullOrEmpty(TxTone) && !RxTone.Equals(TxTone)) { return RxTone + "/" + TxTone; }
+                if (!string.IsNullOrEmpty(RxTone) && !string.IsNullOrEmpty(TxTone) && !RxTone.Equals(TxTone)) { return "(Rx) " + RxTone + " / (Tx) "  + TxTone; }
                 else { return RxTone; }
             }
         }

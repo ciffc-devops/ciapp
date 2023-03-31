@@ -205,12 +205,12 @@ namespace WF_ICS_ClassLibrary.Models
             csv.Append("Home Country"); csv.Append(delimiter);
             csv.Append("Employer emergency contact Information "); csv.Append(delimiter);
             csv.Append("Agency"); csv.Append(delimiter);
-            csv.Append("Individuals weight"); csv.Append(delimiter);
+            csv.Append("Individual's weight"); csv.Append(delimiter);
             csv.Append("Accomodation Preference"); csv.Append(delimiter);
             csv.Append("Unique Crew Identifier"); csv.Append(delimiter);
             csv.Append("CIFFC Crew Identifier"); csv.Append(delimiter);
             csv.Append("Leaders Name"); csv.Append(delimiter);
-            csv.Append("Contact Info i.e. cell and email"); csv.Append(delimiter);
+            csv.Append("Contact Info (cell/email)"); csv.Append(delimiter);
             csv.Append("Total number of personell"); csv.Append(delimiter);
             csv.Append("Resource Order Number"); csv.Append(delimiter);
             csv.Append("Position On Incident"); csv.Append(delimiter);
@@ -731,10 +731,10 @@ namespace WF_ICS_ClassLibrary.Models
         {
             List<CheckInInfoField> fields = new List<CheckInInfoField>
             {
-                new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individuals weight ", "String", "Individual Info", false, true, false,true,false,true,false, "Enter the individuals seat weight. "),
+                new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individual's weight ", "String", "Individual Info", false, true, false,true,false,true,false, "Enter the individuals seat weight. "),
                 new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Unique Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,true, "Enter the crews unique agency identifer i.e. RU01, Flathead Unit crew, Dryden IA, etc. "),
                 new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "CIFFC Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,false, "Enter the CIFFC crew identifier if the crew is imported through CIFFC i.e C-30"),
-                new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info i.e. cell and email", "String", "Crew Info", false, false, false,true,false,false,true, ""),
+                //new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info (cell/email)", "String", "Crew Info", false, false, false,true,false,false,true, ""),
                 new CheckInInfoField(new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), "Resource Order Number", "String", "Deployment Information", false, true, true,true,true,true,false, "Enter agency specific order number or order identifier. "),
                 new CheckInInfoField(new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe"), "Check-In Location", "List", "Check In Information", true, true, true,true,true,true,true, ""),
                 new CheckInInfoField(new Guid("9afc627f-bdad-4076-8d9a-3511759ea2bf"), "First Day on Incident", "DateTime", "Check In Information", true, true, true,true,true,true,true, ""),
@@ -749,8 +749,8 @@ namespace WF_ICS_ClassLibrary.Models
                 new CheckInInfoField(new Guid("c1399559-2ac8-49da-8ce8-cd711365417d"), "Rental Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, ""),
                 new CheckInInfoField(new Guid("f9aa8b53-d619-422c-8825-bc3da2a4d67d"), "Contractor Vehicle(s)", "Bool", "Logistics", true, true, true,true,true,true,false, ""),
                 new CheckInInfoField(new Guid("c8adde5b-cb21-4b31-8a90-e5b46f192368"), "Private Vehicle ", "Bool", "Logistics", true, true, true,true,true,true,false, ""),
-                new CheckInInfoField(new Guid("3208d48d-eaf2-4f9e-b526-3d3437610d16"), "Mobile Equip - Incident Identification Number ('V' numbers)", "String", "Logistics", true, true, false,true,false,false,false, ""),
-                new CheckInInfoField(new Guid("40718587-d6ee-480a-8451-6c7f02d272a5"), "Fireline equipment/gear needed from supply unit", "String", "Logistics", true, true, false,true,false,false,false, ""),
+                new CheckInInfoField(new Guid("3208d48d-eaf2-4f9e-b526-3d3437610d16"), "Mobile Equip", "String", "Logistics", true, true, false,true,false,false,false, "Incident Identification Number ('V' numbers)"),
+                new CheckInInfoField(new Guid("40718587-d6ee-480a-8451-6c7f02d272a5"), "Fireline equipment", "String", "Logistics", true, true, false,true,false,false,false, "Fireline equipment/gear needed from supply unit"),
                 new CheckInInfoField(new Guid("99c4d8c6-3b39-42f1-af6f-33525b2da4e7"), "Reason for visit", "List", "Visitor Info", true, false, false,false,false,false,true, ""),
                 new CheckInInfoField(new Guid("c3704eab-5c8e-4619-91f0-4df014560c7a"), "Incident contact", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the IMT individual who the visitor is to report to."),
                 new CheckInInfoField(new Guid("ad5b511a-a99f-4310-ba66-4eeb41ec6ab9"), "Duration of Visit", "String", "Visitor Info", true, false, false,false,false,false,true, "Enter the duration of visit down to the nearest day. If the visit is only for 2 hours then enter 1 day. ")
