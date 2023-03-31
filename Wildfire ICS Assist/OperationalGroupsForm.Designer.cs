@@ -35,12 +35,14 @@
             this.cmsSelectedItem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.addTaskForceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addStrikeTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSingleResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
             this.operationalGroupReportingResourcesControl1 = new Wildfire_ICS_Assist.CustomControls.OperationalGroupReportingResourcesControl();
+            this.btnPrintLogistics = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnPrint204 = new System.Windows.Forms.Button();
             this.btnEditBranch = new System.Windows.Forms.Button();
@@ -56,8 +58,6 @@
             this.addNewStrikeTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewSingleResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
-            this.btnPrintLogistics = new System.Windows.Forms.Button();
-            this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -139,7 +139,7 @@
             this.addStrikeTeamToolStripMenuItem,
             this.addSingleResourceToolStripMenuItem});
             this.cmsSelectedItem.Name = "cmsSelectedItem";
-            this.cmsSelectedItem.Size = new System.Drawing.Size(285, 212);
+            this.cmsSelectedItem.Size = new System.Drawing.Size(285, 190);
             // 
             // editToolStripMenuItem
             // 
@@ -154,6 +154,13 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // printLogisticsOverviewToolStripMenuItem
+            // 
+            this.printLogisticsOverviewToolStripMenuItem.Name = "printLogisticsOverviewToolStripMenuItem";
+            this.printLogisticsOverviewToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
+            this.printLogisticsOverviewToolStripMenuItem.Text = "Print Logistics Overview";
+            this.printLogisticsOverviewToolStripMenuItem.Click += new System.EventHandler(this.printLogisticsOverviewToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -184,6 +191,7 @@
             // strikeTeamTaskForceDetailsControl1
             // 
             this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
+            this.strikeTeamTaskForceDetailsControl1.ChangesMade = false;
             this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(18, 236);
             this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
@@ -204,10 +212,22 @@
             this.operationalGroupReportingResourcesControl1.TabIndex = 0;
             this.operationalGroupReportingResourcesControl1.Visible = false;
             // 
+            // btnPrintLogistics
+            // 
+            this.btnPrintLogistics.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrintLogistics.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrintLogistics.Location = new System.Drawing.Point(397, 7);
+            this.btnPrintLogistics.Name = "btnPrintLogistics";
+            this.btnPrintLogistics.Size = new System.Drawing.Size(153, 58);
+            this.btnPrintLogistics.TabIndex = 53;
+            this.btnPrintLogistics.Text = "Logistics Overview";
+            this.btnPrintLogistics.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrintLogistics.UseVisualStyleBackColor = true;
+            this.btnPrintLogistics.Click += new System.EventHandler(this.btnPrintLogistics_Click);
+            // 
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDelete.Location = new System.Drawing.Point(278, 7);
             this.btnDelete.Name = "btnDelete";
@@ -221,7 +241,6 @@
             // btnPrint204
             // 
             this.btnPrint204.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint204.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrint204.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint204.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint204.Location = new System.Drawing.Point(558, 7);
@@ -236,7 +255,6 @@
             // btnEditBranch
             // 
             this.btnEditBranch.Enabled = false;
-            this.btnEditBranch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnEditBranch.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditBranch.Location = new System.Drawing.Point(159, 7);
             this.btnEditBranch.Name = "btnEditBranch";
@@ -250,7 +268,6 @@
             // btnPrint204A
             // 
             this.btnPrint204A.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint204A.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnPrint204A.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint204A.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint204A.Location = new System.Drawing.Point(718, 7);
@@ -265,7 +282,6 @@
             // btnExportSignInToCSV
             // 
             this.btnExportSignInToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportSignInToCSV.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnExportSignInToCSV.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
             this.btnExportSignInToCSV.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExportSignInToCSV.Location = new System.Drawing.Point(878, 7);
@@ -280,7 +296,6 @@
             // btnAddBranch
             // 
             this.btnAddBranch.ContextMenuStrip = this.cmsAddButton;
-            this.btnAddBranch.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddBranch.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddBranch.Location = new System.Drawing.Point(12, 7);
             this.btnAddBranch.Name = "btnAddBranch";
@@ -357,27 +372,6 @@
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
-            // btnPrintLogistics
-            // 
-            this.btnPrintLogistics.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnPrintLogistics.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrintLogistics.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrintLogistics.Location = new System.Drawing.Point(397, 7);
-            this.btnPrintLogistics.Name = "btnPrintLogistics";
-            this.btnPrintLogistics.Size = new System.Drawing.Size(153, 58);
-            this.btnPrintLogistics.TabIndex = 53;
-            this.btnPrintLogistics.Text = "Logistics Overview";
-            this.btnPrintLogistics.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrintLogistics.UseVisualStyleBackColor = true;
-            this.btnPrintLogistics.Click += new System.EventHandler(this.btnPrintLogistics_Click);
-            // 
-            // printLogisticsOverviewToolStripMenuItem
-            // 
-            this.printLogisticsOverviewToolStripMenuItem.Name = "printLogisticsOverviewToolStripMenuItem";
-            this.printLogisticsOverviewToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
-            this.printLogisticsOverviewToolStripMenuItem.Text = "Print Logistics Overview";
-            this.printLogisticsOverviewToolStripMenuItem.Click += new System.EventHandler(this.printLogisticsOverviewToolStripMenuItem_Click);
-            // 
             // OperationalGroupsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -389,6 +383,7 @@
             this.Name = "OperationalGroupsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Operational Groups";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OperationalGroupsForm_FormClosing);
             this.Load += new System.EventHandler(this.OperationalGroupsForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

@@ -204,6 +204,17 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void SaveSTTFChanges()
+        {
+            //save any changes to the strike team before moving on
+            if (strikeTeamTaskForceDetailsControl1.Visible && strikeTeamTaskForceDetailsControl1.ChangesMade)
+            {
+                strikeTeamTaskForceDetailsControl1.ChangesMade = false;
+
+                Program.wfIncidentService.UpsertOperationalGroup(strikeTeamTaskForceDetailsControl1.selectedGroup);
+            }
+        }
+
         private void treeOpsChart_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (treeOpsChart.SelectedNode != null)
@@ -215,13 +226,7 @@ namespace Wildfire_ICS_Assist
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
                 btnDelete.Enabled = role.AllowDelete;
 
-                //save any changes to the strike team before moving on
-                if(strikeTeamTaskForceDetailsControl1.Visible && strikeTeamTaskForceDetailsControl1.ChangesMade)
-                {
-                    strikeTeamTaskForceDetailsControl1.ChangesMade = false;
-
-                    Program.wfIncidentService.UpsertOperationalGroup(strikeTeamTaskForceDetailsControl1.selectedGroup);
-                }
+                SaveSTTFChanges();
 
                 OperationalGroup selectedGroup = new OperationalGroup();
                 if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
@@ -660,6 +665,11 @@ namespace Wildfire_ICS_Assist
                 System.Diagnostics.Process.Start(fullFilepath);
             }
             catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+        }
+
+        private void OperationalGroupsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSTTFChanges();
         }
     }
 }
