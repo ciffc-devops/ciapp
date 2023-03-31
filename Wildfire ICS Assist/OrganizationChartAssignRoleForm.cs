@@ -28,7 +28,8 @@ namespace Wildfire_ICS_Assist
 
             cboSavedMembers.DataSource = members;
             */
-            cboSavedMembers.DataSource = Program.CurrentIncident.GetCurrentlySignedInPersonnel(Program.CurrentOpPeriod);
+            members = Program.CurrentIncident.GetCurrentlySignedInPersonnel(Program.CurrentOpPeriod);
+            cboSavedMembers.DataSource = members;
             if(selectedRole.IndividualID != Guid.Empty && members.Any(o=>o.PersonID == selectedRole.IndividualID)) { cboSavedMembers.SelectedValue = selectedRole.IndividualID; }
             lblRoleName.Text = selectedRole.RoleName;
         }
@@ -57,7 +58,7 @@ namespace Wildfire_ICS_Assist
         {
             if (cboSavedMembers.SelectedItem == null)
             {
-                if (!string.IsNullOrEmpty(cboSavedMembers.Text))
+                if (!string.IsNullOrEmpty(cboSavedMembers.Text) && members != null && members.Any())
                 {
                     if (members.Any(o => o.Name.Equals(cboSavedMembers.Text, StringComparison.InvariantCultureIgnoreCase)))
                     {
@@ -69,14 +70,13 @@ namespace Wildfire_ICS_Assist
                     else
                     {
                         cboSavedMembers.SelectedIndex = -1;
-                        System.Media.SystemSounds.Exclamation.Play();
-                        cboSavedMembers.Focus();
+                        cboSavedMembers.Text = string.Empty;
                     }
                 }
                 else
                 {
                     cboSavedMembers.SelectedIndex = -1;
-                    
+                    cboSavedMembers.Text = string.Empty;
                     //System.Media.SystemSounds.Exclamation.Play();
                     //cboSavedMembers.Focus();
                 }

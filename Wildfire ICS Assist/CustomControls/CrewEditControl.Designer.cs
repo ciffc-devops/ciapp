@@ -50,6 +50,7 @@
             this.rbHECrew = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.lblOnlyHECrews = new System.Windows.Forms.Label();
+            this.colVariety = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,7 +83,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTransport.Location = new System.Drawing.Point(249, 206);
             this.txtTransport.Name = "txtTransport";
-            this.txtTransport.Size = new System.Drawing.Size(494, 29);
+            this.txtTransport.Size = new System.Drawing.Size(600, 29);
             this.txtTransport.TabIndex = 5;
             this.txtTransport.TextChanged += new System.EventHandler(this.txtTransport_TextChanged);
             // 
@@ -92,7 +93,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Location = new System.Drawing.Point(249, 57);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(494, 29);
+            this.txtName.Size = new System.Drawing.Size(600, 29);
             this.txtName.TabIndex = 1;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
@@ -121,7 +122,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEmail.Location = new System.Drawing.Point(249, 168);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(494, 29);
+            this.txtEmail.Size = new System.Drawing.Size(600, 29);
             this.txtEmail.TabIndex = 4;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
@@ -142,7 +143,7 @@
             this.txtPhone.Location = new System.Drawing.Point(249, 130);
             this.txtPhone.Mask = "(999) 000-0000";
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(494, 29);
+            this.txtPhone.Size = new System.Drawing.Size(600, 29);
             this.txtPhone.TabIndex = 3;
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
             // 
@@ -181,6 +182,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGroup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colVariety,
             this.colName,
             this.colKind,
             this.colType,
@@ -190,8 +192,10 @@
             this.dgvGroup.RowHeadersVisible = false;
             this.dgvGroup.RowTemplate.Height = 30;
             this.dgvGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGroup.Size = new System.Drawing.Size(567, 517);
+            this.dgvGroup.Size = new System.Drawing.Size(673, 517);
             this.dgvGroup.TabIndex = 8;
+            this.dgvGroup.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvGroup_CellFormatting);
+            this.dgvGroup.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvGroup_EditingControlShowing);
             this.dgvGroup.SelectionChanged += new System.EventHandler(this.dgvGroup_SelectionChanged);
             // 
             // btnAddPerson
@@ -261,7 +265,7 @@
             "Type 3"});
             this.cboCrewType.Location = new System.Drawing.Point(249, 92);
             this.cboCrewType.Name = "cboCrewType";
-            this.cboCrewType.Size = new System.Drawing.Size(494, 32);
+            this.cboCrewType.Size = new System.Drawing.Size(600, 32);
             this.cboCrewType.TabIndex = 2;
             this.cboCrewType.SelectedIndexChanged += new System.EventHandler(this.cboCrewType_SelectedIndexChanged);
             // 
@@ -318,6 +322,14 @@
             this.lblOnlyHECrews.Text = "Only Heavy Equipment Crews can contain equipment/vehicles";
             this.lblOnlyHECrews.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblOnlyHECrews.Visible = false;
+            // 
+            // colVariety
+            // 
+            this.colVariety.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colVariety.DataPropertyName = "ResourceType";
+            this.colVariety.HeaderText = "Category";
+            this.colVariety.Name = "colVariety";
+            this.colVariety.Width = 110;
             // 
             // colName
             // 
@@ -386,7 +398,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CrewEditControl";
-            this.Size = new System.Drawing.Size(745, 791);
+            this.Size = new System.Drawing.Size(851, 791);
             this.Load += new System.EventHandler(this.CrewEditControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroup)).EndInit();
             this.ResumeLayout(false);
@@ -418,6 +430,7 @@
         private System.Windows.Forms.RadioButton rbHECrew;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblOnlyHECrews;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colVariety;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colKind;
         private System.Windows.Forms.DataGridViewTextBoxColumn colType;

@@ -57,8 +57,9 @@ namespace Wildfire_ICS_Assist
         {
             SetVersionNumber();
             setRecentFiles();
-
-            collapseAllPanels();
+            cpIncidentActionPlan.Expand();
+            cpOtherTools.Expand();
+            //collapseAllPanels();
 
             //debug
             cpIncidentActionPlan.CurrentlyCollapsed = false;
@@ -314,9 +315,9 @@ namespace Wildfire_ICS_Assist
         {
             collapsiblePanels.Clear();
             collapsiblePanels.Add(cpIncidentActionPlan);
-            collapsiblePanels.Add(cpPlanning);
-            collapsiblePanels.Add(cpOperations);
-            collapsiblePanels.Add(cpLogistics);
+            //collapsiblePanels.Add(cpPlanning);
+            collapsiblePanels.Add(cpOtherTools);
+            //collapsiblePanels.Add(cpLogistics);
         }
 
         private void collapseAllPanels()
@@ -693,29 +694,24 @@ namespace Wildfire_ICS_Assist
                 }
 
                 foreach (CollapsiblePanel panel in collapsiblePanels) { panel.BackColor = Color.White; }
-                collapseAllPanels();
                 //resizeGroup("Assignments", false, true);
                 if (ICRoles.Contains(Program.CurrentRole.RoleID))
                 {
                     pnlTaskInfo.BackColor = Color.LimeGreen;
-                    cpIncidentActionPlan.Expand();
                     //    pnlCommandTeam.BackColor = Color.LimeGreen;
                 }
                 else if (CommandStaffRoles.Contains(Program.CurrentRole.RoleID))
                 {
                     pnlTaskInfo.BackColor = Color.IndianRed;
-                    cpIncidentActionPlan.Expand();
                 }
                 else if (Program.CurrentRole.SectionID == Globals.OpsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Orange;
-                    cpOperations.Expand();
                     //resizeGroup("Ops", false, true);
                 }
                 else if (Program.CurrentRole.SectionID == Globals.PlanningChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.CornflowerBlue;
-                    cpPlanning.Expand();
                     /*
                                         pnlIAP.BackColor = Color.CornflowerBlue;
                                         pnlCommandTeam.BackColor = Color.CornflowerBlue;
@@ -727,7 +723,6 @@ namespace Wildfire_ICS_Assist
                 else if (Program.CurrentRole.SectionID == Globals.LogisticsChiefID)
                 {
                     pnlTaskInfo.BackColor = Color.Khaki;
-                    cpLogistics.Expand();
                     /*
                     pnlCommsPlan.BackColor = Color.Khaki;
                     pnlIAP.BackColor = Color.Khaki;
@@ -887,15 +882,10 @@ namespace Wildfire_ICS_Assist
         {
             bool set = false;
             List<string> errors = new List<string>();
-            if (!string.IsNullOrEmpty(txtTaskName.Text.Trim()) || !string.IsNullOrEmpty(txtTaskNumber.Text.Trim())) { set = true; }
-            else { set = false; errors.Add("You must set either an incident name or number to begin."); }
+            if (!string.IsNullOrEmpty(txtTaskName.Text.Trim()) || !string.IsNullOrEmpty(txtTaskNumber.Text.Trim())) { set = true; txtTaskName.BackColor = Program.GoodColor; txtTaskNumber.BackColor = Program.GoodColor; }
+            else { set = false; errors.Add("You must set either an incident name or number to begin."); txtTaskName.BackColor = Program.ErrorColor; txtTaskNumber.BackColor = Program.ErrorColor; }
 
-            if (string.IsNullOrEmpty(txtTaskName.Text.Trim())) { txtTaskName.BackColor = Program.ErrorColor; }
-            else { txtTaskName.BackColor = Program.GoodColor; ; }
-
-            if (string.IsNullOrEmpty(txtTaskNumber.Text.Trim())) { txtTaskNumber.BackColor = Program.ErrorColor; }
-            else { txtTaskNumber.BackColor = Program.GoodColor; ; }
-
+        
 
             bool tasknamechanged = !CurrentIncident.TaskName.EqualsWithNull(txtTaskName.Text.Trim());
             if (tasknamechanged) { CurrentIncident.TaskName = txtTaskName.Text.Trim(); }
@@ -3008,6 +2998,11 @@ namespace Wildfire_ICS_Assist
         private void supportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://ciapp.icscanada.ca/Support");
+        }
+
+        private void btnShowResources_Click(object sender, EventArgs e)
+        {
+            OpenCheckedInResourcesForm();
         }
     }
 

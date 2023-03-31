@@ -148,7 +148,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>653, 256</value>
+    <value>702, 256</value>
   </data>
   <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 51</value>
@@ -261,6 +261,9 @@
   <data name="&gt;&gt;chkReminder.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="datReminderTime.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="datReminderTime.CustomFormat" xml:space="preserve">
     <value>yyyy-MMM-dd HH:mm</value>
   </data>
@@ -268,7 +271,7 @@
     <value>154, 65</value>
   </data>
   <data name="datReminderTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="datReminderTime.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -285,6 +288,9 @@
   <data name="&gt;&gt;datReminderTime.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="datDueDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="datDueDate.CustomFormat" xml:space="preserve">
     <value>yyyy-MMM-dd HH:mm</value>
   </data>
@@ -292,7 +298,7 @@
     <value>154, 31</value>
   </data>
   <data name="datDueDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 29</value>
+    <value>249, 29</value>
   </data>
   <data name="datDueDate.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -343,7 +349,7 @@
     <value>410, 150</value>
   </data>
   <data name="pnlTrackProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 100</value>
+    <value>414, 100</value>
   </data>
   <data name="pnlTrackProgress.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -460,7 +466,7 @@
     <value>134, 150</value>
   </data>
   <data name="datDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 29</value>
+    <value>243, 29</value>
   </data>
   <data name="datDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -520,7 +526,7 @@
     <value>Vertical</value>
   </data>
   <data name="txtEntryText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>763, 108</value>
+    <value>812, 108</value>
   </data>
   <data name="txtEntryText.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -571,7 +577,7 @@
     <value>11, 24</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>783, 315</value>
+    <value>832, 315</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>

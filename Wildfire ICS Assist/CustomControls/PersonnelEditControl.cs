@@ -20,7 +20,8 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void displayTeamMember()
         {
-            cboAgency.DataSource = AgencyTools.GetFixedAgencies();
+
+            cboAgency.DataSource = AgencyTools.GetFixedAgencies(true);
             
 
 
@@ -116,6 +117,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             if (string.IsNullOrEmpty(txtLastName.Text.Trim())) { txtLastName.BackColor = Program.ErrorColor; } else { txtLastName.BackColor = SystemColors.Window; }
             if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; } else { cboAccomodationPreference.BackColor = SystemColors.Window; }
             if (string.IsNullOrEmpty(txtCellphone.Text.Trim())) { txtCellphone.BackColor = Program.ErrorColor; } else { txtCellphone.BackColor = SystemColors.Window; }
+            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; } else {  cboAgency.BackColor= SystemColors.Window; }
         }
 
         public bool FormValid
@@ -128,6 +130,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (string.IsNullOrEmpty(teamMember.LastName) || string.IsNullOrEmpty(teamMember.LastName.Trim())) { return false; }
                 if (string.IsNullOrEmpty(teamMember.AccomodationPreference) || string.IsNullOrEmpty(teamMember.AccomodationPreference.Trim())) { return false; }
                 if (string.IsNullOrEmpty(teamMember.CellphoneNumber) || string.IsNullOrEmpty(teamMember.CellphoneNumber.Trim())) { return false; }
+                if (string.IsNullOrEmpty(teamMember.Agency)) { return false; };
                 SetColours();
 
                 return true;
@@ -164,6 +167,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 teamMember.Agency = cboOtherAgency.Text;
             } else { teamMember.Agency = cboAgency.Text; }
+            SetColours();
         }
 
         private void txtPhone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)

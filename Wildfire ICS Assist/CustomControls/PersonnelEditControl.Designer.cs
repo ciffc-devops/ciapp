@@ -129,7 +129,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 29);
             this.label1.TabIndex = 3;
-            this.label1.Text = "First Name";
+            this.label1.Text = "First Name*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -159,7 +159,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(187, 29);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Cellphone";
+            this.label5.Text = "Cellphone*";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtEmail
@@ -221,7 +221,7 @@
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 92;
             this.button1.TabStop = false;
-            this.toolTip1.SetToolTip(this.button1, "Enter he Province or Territory");
+            this.toolTip1.SetToolTip(this.button1, "Enter the Province or Territory");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
@@ -312,7 +312,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(201, 57);
             this.label13.TabIndex = 102;
-            this.label13.Text = "Employer emergency contact information ";
+            this.label13.Text = "Employer emergency contact information *";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
@@ -627,7 +627,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(205, 29);
             this.label12.TabIndex = 119;
-            this.label12.Text = "Accomodation Pref.";
+            this.label12.Text = "Accomodation Pref.*";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cboAccomodationPreference

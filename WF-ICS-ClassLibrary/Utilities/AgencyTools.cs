@@ -8,7 +8,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class AgencyTools
     {
-        public static List<string> GetFixedAgencies()
+        public static List<string> GetFixedAgencies(bool includeBlank = false)
         {
             List<string> list = new List<string>();
 
@@ -36,6 +36,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             list.Add("ZA – South Africa");
             list.Add("Other Agency");
 
+            if (includeBlank) { list.Insert(0, string.Empty); }
 
             return list;
         }
