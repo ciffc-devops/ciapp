@@ -359,7 +359,7 @@ namespace Wildfire_ICS_Assist
             {
                 if (!newCopy.AllRoles.Any(o => o.RoleID == role.RoleID))
                 {
-                    ICSRole r = role.Clone(); r.OpPeriod = NextOp; r.OrganizationalChartID = newCopy.OrganizationalChartID; r.teamMember = new Personnel(); newCopy.AllRoles.Add(r);
+                    ICSRole r = role.Clone(); r.OpPeriod = NextOp; r.OrganizationalChartID = newCopy.OrganizationalChartID; r.IndividualID = Guid.Empty; r.IndividualName = string.Empty ; newCopy.AllRoles.Add(r);
                 }
             }
 
@@ -378,7 +378,9 @@ namespace Wildfire_ICS_Assist
                        if(newCopy.AllRoles.Any(o=>o.RoleID == role.RoleID))
                         {
                             ICSRole nr = newCopy.AllRoles.First(o => o.RoleID == role.RoleID);
-                            nr.teamMember = role.teamMember.Clone();
+                            nr.IndividualName = role.IndividualName;
+                            nr.IndividualID = role.IndividualID;
+                            
                         }
                     }
                 }
