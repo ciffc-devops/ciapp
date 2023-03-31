@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -171,7 +171,10 @@
             this.tmrPositionLogReminders = new System.Windows.Forms.Timer(this.components);
             this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
             this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
+            this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
+            this.btnNotes = new System.Windows.Forms.Button();
+            this.btnShowResources = new System.Windows.Forms.Button();
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnAssignmentList = new System.Windows.Forms.Button();
             this.btnAirOpsSummary = new System.Windows.Forms.Button();
@@ -181,9 +184,6 @@
             this.btnPrintIAP = new System.Windows.Forms.Button();
             this.btnPrintOrgChart = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
-            this.btnNotes = new System.Windows.Forms.Button();
-            this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.btnShowResources = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -205,8 +205,8 @@
             this.pnlNetworkSyncInProgress.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.cpIncidentActionPlan.SuspendLayout();
             this.cpOtherTools.SuspendLayout();
+            this.cpIncidentActionPlan.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer4
@@ -263,9 +263,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle3.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1234,12 +1234,44 @@
             this.tmrNetwork.Interval = 10000;
             this.tmrNetwork.Tick += new System.EventHandler(this.tmrNetwork_Tick);
             // 
+            // cpOtherTools
+            // 
+            this.cpOtherTools.BackColor = System.Drawing.Color.White;
+            this.cpOtherTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpOtherTools.CollapsedHeight = 40;
+            this.cpOtherTools.CollapsedWidth = 349;
+            this.cpOtherTools.CollapseLeft = true;
+            this.cpOtherTools.Controls.Add(this.btnAdditionalContacts);
+            this.cpOtherTools.Controls.Add(this.btnNotes);
+            this.cpOtherTools.Controls.Add(this.btnShowResources);
+            this.cpOtherTools.CurrentlyCollapsed = false;
+            this.cpOtherTools.ExpandedHeight = 180;
+            this.cpOtherTools.ExpandedWidth = 349;
+            resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
+            this.cpOtherTools.Name = "cpOtherTools";
+            this.cpOtherTools.TitleText = "Other Tools";
+            // 
             // btnAdditionalContacts
             // 
             resources.ApplyResources(this.btnAdditionalContacts, "btnAdditionalContacts");
             this.btnAdditionalContacts.Name = "btnAdditionalContacts";
             this.btnAdditionalContacts.UseVisualStyleBackColor = true;
             this.btnAdditionalContacts.Click += new System.EventHandler(this.btnAdditionalContacts_Click);
+            // 
+            // btnNotes
+            // 
+            resources.ApplyResources(this.btnNotes, "btnNotes");
+            this.btnNotes.Name = "btnNotes";
+            this.btnNotes.UseVisualStyleBackColor = true;
+            this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
+            // 
+            // btnShowResources
+            // 
+            resources.ApplyResources(this.btnShowResources, "btnShowResources");
+            this.btnShowResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
+            this.btnShowResources.Name = "btnShowResources";
+            this.btnShowResources.UseVisualStyleBackColor = true;
+            this.btnShowResources.Click += new System.EventHandler(this.btnShowResources_Click);
             // 
             // cpIncidentActionPlan
             // 
@@ -1320,38 +1352,6 @@
             this.btnCommsPlan.UseVisualStyleBackColor = true;
             this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
             // 
-            // btnNotes
-            // 
-            resources.ApplyResources(this.btnNotes, "btnNotes");
-            this.btnNotes.Name = "btnNotes";
-            this.btnNotes.UseVisualStyleBackColor = true;
-            this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
-            // 
-            // cpOtherTools
-            // 
-            resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
-            this.cpOtherTools.BackColor = System.Drawing.Color.White;
-            this.cpOtherTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpOtherTools.CollapsedHeight = 40;
-            this.cpOtherTools.CollapsedWidth = 349;
-            this.cpOtherTools.CollapseLeft = true;
-            this.cpOtherTools.Controls.Add(this.btnAdditionalContacts);
-            this.cpOtherTools.Controls.Add(this.btnNotes);
-            this.cpOtherTools.Controls.Add(this.btnShowResources);
-            this.cpOtherTools.CurrentlyCollapsed = false;
-            this.cpOtherTools.ExpandedHeight = 180;
-            this.cpOtherTools.ExpandedWidth = 349;
-            this.cpOtherTools.Name = "cpOtherTools";
-            this.cpOtherTools.TitleText = "Other Tools";
-            // 
-            // btnShowResources
-            // 
-            resources.ApplyResources(this.btnShowResources, "btnShowResources");
-            this.btnShowResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
-            this.btnShowResources.Name = "btnShowResources";
-            this.btnShowResources.UseVisualStyleBackColor = true;
-            this.btnShowResources.Click += new System.EventHandler(this.btnShowResources_Click);
-            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1399,8 +1399,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.cpIncidentActionPlan.ResumeLayout(false);
             this.cpOtherTools.ResumeLayout(false);
+            this.cpIncidentActionPlan.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

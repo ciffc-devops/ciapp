@@ -2229,7 +2229,7 @@ namespace Wildfire_ICS_Assist
 
                 if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && ThisMachineIsServer)
                 {
-                    serverStatusText.Append("This computer is acting as a local network server. IP: "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
+                    serverStatusText.Append("LAN Server enabled IP: "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
                     requestIncidentFromServerToolStripMenuItem.Enabled = false;
                     //downloadMembersFromServerToolStripMenuItem.Enabled = false;
                     requestOptionsFromServerToolStripMenuItem.Enabled = false;
@@ -2238,7 +2238,7 @@ namespace Wildfire_ICS_Assist
                 }
                 else if (ThisMachineIsClient)
                 {
-                    serverStatusText.Append("Connected to "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
+                    serverStatusText.Append("LAN connection to "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
                     requestIncidentFromServerToolStripMenuItem.Enabled = true;
                     ///downloadMembersFromServerToolStripMenuItem.Enabled = true;
                     requestOptionsFromServerToolStripMenuItem.Enabled = true;
