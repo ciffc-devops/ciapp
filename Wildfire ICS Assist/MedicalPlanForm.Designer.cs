@@ -476,6 +476,7 @@
             this.txtEmergencyProcedures.Size = new System.Drawing.Size(1234, 99);
             this.txtEmergencyProcedures.TabIndex = 57;
             this.txtEmergencyProcedures.TextChanged += new System.EventHandler(this.txtEmergencyProcedures_TextChanged);
+            this.txtEmergencyProcedures.Leave += new System.EventHandler(this.txtEmergencyProcedures_Leave);
             // 
             // label2
             // 

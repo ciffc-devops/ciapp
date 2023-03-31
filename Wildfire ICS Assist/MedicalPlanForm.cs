@@ -313,6 +313,8 @@ namespace Wildfire_ICS_Assist
                 CurrentPlan.ApprovedByRoleID = Guid.Empty;
 
             }
+            Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);
+
         }
 
         private void cboPreparedBy_Leave(object sender, EventArgs e)
@@ -397,6 +399,12 @@ namespace Wildfire_ICS_Assist
                 Hospital h = (Hospital) dgvHospitals.Rows[e.RowIndex].DataBoundItem;
                 OpenHospitalForEdit(h);
             }
+        }
+
+        private void txtEmergencyProcedures_Leave(object sender, EventArgs e)
+        {
+            Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);
+
         }
     }
 }
