@@ -112,8 +112,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private DateTime _DateValue;
         [ProtoMember(14)] private bool _IsRequired;
         [ProtoMember(15)] private string _ToolTipText;
-        [ProtoMember(10)] private bool _UseForEquipment; 
-        [ProtoMember(10)] private bool _UseForOperator;
+        [ProtoMember(16)] private bool _UseForEquipment; 
+        [ProtoMember(17)] private bool _UseForOperator;
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string Name { get => _Name; set => _Name = value; }
