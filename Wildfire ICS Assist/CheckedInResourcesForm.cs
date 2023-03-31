@@ -281,7 +281,7 @@ namespace Wildfire_ICS_Assist
                             Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == record.ResourceID);
                             role.IndividualID = p.ID;
                             role.IndividualName = p.Name;
-                            role.teamMember = p.Clone();
+                            //role.teamMember = p.Clone();
                             Program.wfIncidentService.UpsertICSRole(role);
                         }
                     }

@@ -1107,10 +1107,12 @@ namespace WildfireICSDesktopServices
 
                 OnICSRoleChanged(new ICSRoleEventArgs(record));
 
-                if (record.teamMember != null && record.teamMember.PersonID != Guid.Empty)
+                if (record.IndividualID != Guid.Empty && _currentIncident.IncidentPersonnel.Any(o=>o.ID == record.IndividualID))
                 {
-                    record.teamMember.CurrentStatus = _currentIncident.getMemberStatus(record.teamMember, record.OpPeriod, DateTime.Now);
-                    UpsertPersonnel(record.teamMember);
+                    Personnel p = _currentIncident.IncidentPersonnel.First(o => o.ID == record.IndividualID);
+
+                    p.CurrentStatus = _currentIncident.getMemberStatus(p, record.OpPeriod, DateTime.Now);
+                    UpsertPersonnel(p);
                 }
                 //OnOrganizationalChartChanged(new OrganizationChartEventArgs(chart));
             }
@@ -1134,7 +1136,9 @@ namespace WildfireICSDesktopServices
             }
 
             ICSRole role = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().GetRoleByName(roleName).Clone();
-            role.teamMember = member;
+            //role.teamMember = member;
+            role.IndividualID = member.ID;
+            role.IndividualName = member.Name;
             role.OpPeriod = opsPeriod;
             role.OrganizationalChartID = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().OrganizationalChartID;
             UpsertICSRole(role);
@@ -1712,7 +1716,7 @@ namespace WildfireICSDesktopServices
                     Guid potential2 = new Guid("9727f016-aed9-4f34-99db-910a06b97f2e");
                     Guid potential3 = new Guid("9e75f813-cab4-4a6c-87b7-0fc141f06df9");
                     ICSRole NewRole = new ICSRole();
-                    NewRole.teamMember.ID = Guid.Empty;
+                    NewRole.IndividualID = Guid.Empty;
 
 
                     if (record.GroupType.Equals("Branch"))
@@ -1819,7 +1823,7 @@ namespace WildfireICSDesktopServices
                 if (CurrentIncident.IncidentPersonnel.Any(o => o.PersonID == record.LeaderID))
                 {
                     Personnel per = CurrentIncident.IncidentPersonnel.First(o => o.PersonID == record.LeaderID);
-                    role.teamMember = per.Clone();
+                    
                     role.IndividualID = record.LeaderID;
                     role.IndividualName = record.LeaderName;
                     UpsertICSRole(role);
