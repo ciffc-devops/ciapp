@@ -30,8 +30,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(12)] private string _ResourceType;
         [ProtoMember(13)] private Guid _ParentRecordID;
         [ProtoMember(14)] private DateTime _LastDayOfRest;
-        [ProtoMember(14)] private string _InitialRoleName;
-        [ProtoMember(15)] private string _InitialRoleAcronym;
+        [ProtoMember(15)] private string _InitialRoleName;
+        [ProtoMember(16)] private string _InitialRoleAcronym;
 
         public CheckInRecord() { SignInRecordID = Guid.NewGuid(); InfoFields = new List<CheckInInfoField>(); CheckOutDate = DateTime.MaxValue; Active = true; }
 
