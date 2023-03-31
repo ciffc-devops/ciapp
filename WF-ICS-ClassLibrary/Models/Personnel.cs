@@ -51,8 +51,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(14)] private string _Agency;
         [ProtoMember(15)] private bool _IsContractor;
         [ProtoMember(16)] private string _CallSign;
-        [ProtoMember(16)] private string _Pronouns; 
-        [ProtoMember(16)] private string _AccomodationPreference;
+        [ProtoMember(17)] private string _Pronouns; 
+        [ProtoMember(18)] private string _AccomodationPreference;
 
 
 
