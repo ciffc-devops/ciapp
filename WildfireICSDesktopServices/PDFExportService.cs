@@ -1031,8 +1031,8 @@ namespace WildfireICSDesktopServices
                                 ICSRole PreparedBy = new ICSRole();
                                 if (currentChart.PreparedByUserID != Guid.Empty)
                                 {
-                                    PreparedBy.teamMember = new Personnel(currentChart.PreparedByUserID);
-                                    PreparedBy.teamMember.Name = currentChart.PreparedBy;
+                                   
+                                    PreparedBy.IndividualName = currentChart.PreparedBy;
                                     PreparedBy.RoleName = currentChart.PreparedByRole;
                                 }
                                 else
@@ -1062,7 +1062,11 @@ namespace WildfireICSDesktopServices
                                 for (int x = 0; x < 8 && x < repRoles.Count; x++)
                                 {
 
-                                    if (repRoles[x].teamMember != null) { stamper.AcroFields.SetField("Agency  OrganizationRow" + (x + 1), repRoles[x].teamMember.Agency); }
+                                    if (repRoles[x].IndividualID != Guid.Empty && task.IncidentPersonnel.Any(o => o.ID == repRoles[x].IndividualID))
+                                    {
+                                        Personnel p = task.IncidentPersonnel.First(o=>o.ID == repRoles[x].IndividualID);    
+                                        stamper.AcroFields.SetField("Agency  OrganizationRow" + (x + 1), p.Agency);
+                                    }
                                     else { stamper.AcroFields.SetField("Agency  OrganizationRow" + (x + 1), repRoles[x].RoleName); }
                                     stamper.AcroFields.SetField("RepresentativeRow" + (x + 1), repRoles[x].IndividualName);
                                 }
@@ -1259,8 +1263,8 @@ namespace WildfireICSDesktopServices
                             ICSRole PreparedBy = new ICSRole();
                             if(currentChart.PreparedByUserID != Guid.Empty)
                             {
-                                PreparedBy.teamMember = new Personnel(currentChart.PreparedByUserID);
-                                PreparedBy.teamMember.Name = currentChart.PreparedBy;
+                                //PreparedBy.teamMember = new Personnel(currentChart.PreparedByUserID);
+                                PreparedBy.IndividualName = currentChart.PreparedBy;
                                 PreparedBy.RoleName = currentChart.PreparedByRole;
                             }
                             else
@@ -1635,7 +1639,7 @@ namespace WildfireICSDesktopServices
                             PdfWriter writer = PdfWriter.GetInstance(document, fs);
 
 
-                            if (chart.GetRoleByID(Globals.IncidentCommanderID).teamMember != null)
+                            if (chart.GetRoleByID(Globals.IncidentCommanderID).IndividualID != Guid.Empty)
                             {
                                 document.AddAuthor(chart.GetRoleByID(Globals.IncidentCommanderID).IndividualName);
                             }
@@ -1690,16 +1694,21 @@ namespace WildfireICSDesktopServices
                                 table.AddCell(cell);
                                 foreach (ICSRole role in chart.ActiveRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)))
                                 {
-                                    table.AddCell(role.RoleName);
-                                    table.AddCell(role.IndividualName);
-                                    string contactInfo = null;
-                                    if (!string.IsNullOrEmpty(role.teamMember.CellphoneNumber)) { contactInfo = role.teamMember.CellphoneNumber.FormatPhone(); }
-                                    if (!string.IsNullOrEmpty(role.teamMember.Email))
+                                    if (task.IncidentPersonnel.Any(o => o.ID == role.IndividualID))
                                     {
-                                        if (!string.IsNullOrEmpty(contactInfo)) { contactInfo += Environment.NewLine; }
-                                        contactInfo += role.teamMember.Email;
+                                        Personnel pers = task.IncidentPersonnel.First(o => o.ID == role.IndividualID);
+
+                                        table.AddCell(role.RoleName);
+                                        table.AddCell(role.IndividualName);
+                                        string contactInfo = null;
+                                        if (!string.IsNullOrEmpty(pers.CellphoneNumber)) { contactInfo = pers.CellphoneNumber.FormatPhone(); }
+                                        if (!string.IsNullOrEmpty(pers.Email))
+                                        {
+                                            if (!string.IsNullOrEmpty(contactInfo)) { contactInfo += Environment.NewLine; }
+                                            contactInfo += pers.Email;
+                                        }
+                                        table.AddCell(contactInfo);
                                     }
-                                    table.AddCell(contactInfo);
                                 }
 
                                 document.Add(table);
@@ -1731,19 +1740,23 @@ namespace WildfireICSDesktopServices
                                     table.AddCell(cell);
                                     foreach (ICSRole role in chart.ActiveRoles.Where(o => o.SectionID == branch && !string.IsNullOrEmpty(o.IndividualName)))
                                     {
-                                        iTextSharp.text.Font fonttoUse = normalfont;
-                                        if (role.RoleID == branch) { fonttoUse = subsectionfont; }
-
-                                        table.AddCell(new Phrase(role.RoleName, fonttoUse));
-                                        table.AddCell(new Phrase(role.IndividualName, fonttoUse));
-                                        string contactInfo = null;
-                                        if (!string.IsNullOrEmpty(role.teamMember.CellphoneNumber)) { contactInfo = role.teamMember.CellphoneNumber.FormatPhone(); }
-                                        if (!string.IsNullOrEmpty(role.teamMember.Email))
+                                        if (task.IncidentPersonnel.Any(o => o.ID == role.IndividualID))
                                         {
-                                            if (!string.IsNullOrEmpty(contactInfo)) { contactInfo += Environment.NewLine; }
-                                            contactInfo += role.teamMember.Email;
+                                            Personnel pers = task.IncidentPersonnel.First(o => o.ID == role.IndividualID);
+                                            iTextSharp.text.Font fonttoUse = normalfont;
+                                            if (role.RoleID == branch) { fonttoUse = subsectionfont; }
+
+                                            table.AddCell(new Phrase(role.RoleName, fonttoUse));
+                                            table.AddCell(new Phrase(role.IndividualName, fonttoUse));
+                                            string contactInfo = null;
+                                            if (!string.IsNullOrEmpty(pers.CellphoneNumber)) { contactInfo = pers.CellphoneNumber.FormatPhone(); }
+                                            if (!string.IsNullOrEmpty(pers.Email))
+                                            {
+                                                if (!string.IsNullOrEmpty(contactInfo)) { contactInfo += Environment.NewLine; }
+                                                contactInfo += pers.Email;
+                                            }
+                                            table.AddCell(contactInfo);
                                         }
-                                        table.AddCell(contactInfo);
                                         /*
                                         if (!string.IsNullOrEmpty(role.teamMember.Phone)) { table.AddCell(new Phrase(role.teamMember.Phone.FormatPhone(), fonttoUse)); }
                                         else { table.AddCell(new Phrase(role.teamMember.Email, fonttoUse)); }
@@ -3553,7 +3566,12 @@ namespace WildfireICSDesktopServices
                     {
                         stamper.AcroFields.SetField("NameRow" + (x + 1), roles[x].IndividualName);
                         stamper.AcroFields.SetField("PositionRow" + (x + 1), roles[x].RoleName);
-                        if (roles[x].teamMember != null) { stamper.AcroFields.SetField("Phone Row" + (x + 1), roles[x].teamMember.CellphoneNumber); }
+                        if (roles[x].IndividualID != Guid.Empty && task.IncidentPersonnel.Any(o => o.ID == roles[x].IndividualID))
+                        {
+                            Personnel p = task.IncidentPersonnel.First(o => o.ID == roles[x].IndividualID);
+                            stamper.AcroFields.SetField("Phone Row" + (x + 1), p.CellphoneNumber);
+                        }
+
                     }
 
 
@@ -4101,9 +4119,9 @@ namespace WildfireICSDesktopServices
                         operationalpersonnel.Insert(0, role);
                         reportsTo = role.ReportsTo;
                     }
-                    for (int x = 0; x<8 && x<operationalpersonnel.Count; x++)
+                    for (int x = 0; x < 8 && x < operationalpersonnel.Count; x++)
                     {
-                        if (operationalpersonnel[x].teamMember != null) { stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1),operationalpersonnel[x].RoleNameWithIndividual); }
+                        if (operationalpersonnel[x].IndividualID != Guid.Empty) { stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalpersonnel[x].RoleNameWithIndividual); }
                         else { stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalpersonnel[x].RoleName + " - Unassigned"); }
                     }
 

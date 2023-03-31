@@ -94,7 +94,7 @@ namespace Wildfire_ICS_Assist
             {
                 Personnel member =(Personnel) cboSavedMembers.SelectedItem;
                 selectedRole.IndividualID = member.PersonID;
-                selectedRole.teamMember = member.Clone();
+                //selectedRole.teamMember = member.Clone();
                 selectedRole.IndividualName= member.Name;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -108,7 +108,7 @@ namespace Wildfire_ICS_Assist
                 Personnel member = editTeamMemberControl1.teamMember;
 
                 selectedRole.IndividualID = member.PersonID;
-                selectedRole.teamMember = member.Clone();
+               // selectedRole.teamMember = member.Clone();
                 selectedRole.IndividualName = member.Name;
 
                 if (chkSaveForLater.Checked)
@@ -134,7 +134,7 @@ namespace Wildfire_ICS_Assist
             blankMember.PersonID = Guid.Empty;
 
             selectedRole.IndividualID = Guid.Empty;
-            selectedRole.teamMember = blankMember;
+            //selectedRole.teamMember = blankMember;
             selectedRole.IndividualName = null;
             this.DialogResult = DialogResult.OK;
             this.Close();

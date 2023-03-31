@@ -74,8 +74,11 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 chart = task.allOrgCharts.First(o => o.OpPeriod == Ops);
             }
-            member = chart.getTeamMemberByRoleName(roleName, defaultUpChain);
-            return member;
+            Guid personID = chart.getPersonnelIDByRoleName(roleName, defaultUpChain);
+            if(task.IncidentPersonnel.Any(o=>o.ID == personID)) { return task.IncidentPersonnel.First(o=>o.ID==personID); }
+            else { return null; }
+            //member = chart.getTeamMemberByRoleName(roleName, defaultUpChain);
+            
         }
 
 
@@ -137,13 +140,14 @@ namespace WF_ICS_ClassLibrary.Utilities
             List<MemberStatus> statuses = new List<MemberStatus>();
             List<Personnel> members = task.MembersSignedIn(opPeriod);
             //Add members who are on teams or in ICS roles currently
-            if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Any(o => o.teamMember != null))
+            if (task.allOrgCharts.Any(o => o.OpPeriod == opPeriod) && task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Any(o => o.IndividualID != Guid.Empty))
             {
-                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Where(o => o.teamMember != null))
+                foreach (ICSRole role in task.allOrgCharts.First(o => o.OpPeriod == opPeriod).ActiveRoles.Where(o => o.IndividualID != Guid.Empty))
                 {
-                    if (role.teamMember.PersonID != Guid.Empty && !string.IsNullOrEmpty(role.teamMember.Name) && !members.Any(o => o.PersonID == role.teamMember.PersonID))
+
+                    if (role.IndividualID != Guid.Empty && !string.IsNullOrEmpty(role.IndividualName) && !members.Any(o => o.PersonID == role.IndividualID))
                     {
-                        members.Add(role.teamMember);
+                        members.Add(members.First(o=>o.ID == role.IndividualID));
                     }
                 }
             }
