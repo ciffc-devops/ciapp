@@ -32,6 +32,7 @@ bld/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/
+[Pp]rogramOutput/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -361,3 +362,13 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Wildfire ICS Assist/bin/Debug/Canadian Incident Action Plan Producer.exe
+/ProtobufSerializer/bin/Debug/ProtobufSerializer.dll
+/WF-ICS-ClassLibrary/bin/Debug/WF-ICS-ClassLibrary.dll.config
+/WF-ICS-ClassLibrary/bin/Debug/WF-ICS-ClassLibrary.dll
+/WF-ICS-ClassLibrary/bin/Debug/ProtobufSerializer.dll
+/WildfireICSDesktopServices/bin/Debug/WF-ICS-ClassLibrary.dll
+/WF-ICS-ClassLibrary/bin/Debug/System.Text.Json.dll
+/Wildfire ICS Assist/bin/Debug/System.Text.Json.dll
+/Wildfire ICS Assist/bin/Debug/Resources/ics-canada-logo.png
+/WildfireICSDesktopServices/bin/Debug/ProtobufSerializer.dll

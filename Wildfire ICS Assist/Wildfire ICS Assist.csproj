@@ -7,11 +7,26 @@
     <ProjectGuid>{72934FFD-ADD6-4050-884A-CA77FB3D3262}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Wildfire_ICS_Assist</RootNamespace>
-    <AssemblyName>Wildfire ICS Assist</AssemblyName>
+    <AssemblyName>Canadian Incident Action Plan Program</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,9 +47,53 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Wildfire_ICS_Assist.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\P-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NetworkCommsDotNet, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetworkCommsDotNet.3.0.3\lib\NetworkCommsDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.3.1.33\lib\net462\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.Core.3.1.33\lib\net462\protobuf-net.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,23 +105,894 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="AircraftEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AircraftEditForm.Designer.cs">
+      <DependentUpon>AircraftEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AircraftEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AircraftEntryForm.Designer.cs">
+      <DependentUpon>AircraftEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AirNOTAMEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AirNOTAMEditForm.Designer.cs">
+      <DependentUpon>AirNOTAMEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AirOperationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AirOperationsForm.Designer.cs">
+      <DependentUpon>AirOperationsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckedInResourcesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckedInResourcesForm.Designer.cs">
+      <DependentUpon>CheckedInResourcesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\GeneralTools.cs" />
+    <Compile Include="CloseOpPeriodForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CloseOpPeriodForm.Designer.cs">
+      <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsListEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsListEntryForm.Designer.cs">
+      <DependentUpon>CommunicationsListEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsListForm.Designer.cs">
+      <DependentUpon>CommunicationsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsListViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsListViewForm.Designer.cs">
+      <DependentUpon>CommunicationsListViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanEditForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanEntryForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanViewForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\CheckInInfoFieldControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\CheckInInfoFieldControl.Designer.cs">
+      <DependentUpon>CheckInInfoFieldControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\CollapsiblePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\CollapsiblePanel.Designer.cs">
+      <DependentUpon>CollapsiblePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\CrewEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\CrewEditControl.Designer.cs">
+      <DependentUpon>CrewEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\DataGridViewDisableButtonCell.cs" />
+    <Compile Include="CustomControls\DemobilizationEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\DemobilizationEditControl.Designer.cs">
+      <DependentUpon>DemobilizationEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\EditAircraftControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\EditAircraftControl.Designer.cs">
+      <DependentUpon>EditAircraftControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\EditBranchControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\EditBranchControl.Designer.cs">
+      <DependentUpon>EditBranchControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\EditCommsChannelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\EditCommsChannelControl.Designer.cs">
+      <DependentUpon>EditCommsChannelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\PersonnelEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\PersonnelEditControl.Designer.cs">
+      <DependentUpon>PersonnelEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\OperationalGroupReportingResourcesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\OperationalGroupReportingResourcesControl.Designer.cs">
+      <DependentUpon>OperationalGroupReportingResourcesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\PersonnelViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\PersonnelViewControl.Designer.cs">
+      <DependentUpon>PersonnelViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ResourceCheckInEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ResourceCheckInEditControl.Designer.cs">
+      <DependentUpon>ResourceCheckInEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\StrikeTeamTaskForceDetailsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\StrikeTeamTaskForceDetailsControl.Designer.cs">
+      <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\VehicleEquipmentEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\VehicleEquipmentEditControl.Designer.cs">
+      <DependentUpon>VehicleEquipmentEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\VisitorEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\VisitorEditControl.Designer.cs">
+      <DependentUpon>VisitorEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\WizardPages.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DemobilizeResourceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DemobilizeResourceForm.Designer.cs">
+      <DependentUpon>DemobilizeResourceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralMessageEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralMessageEditForm.Designer.cs">
+      <DependentUpon>GeneralMessageEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralMessagesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralMessagesForm.Designer.cs">
+      <DependentUpon>GeneralMessagesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralMessageViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralMessageViewForm.Designer.cs">
+      <DependentUpon>GeneralMessageViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentDetailsForm.Designer.cs">
+      <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentObjectiveEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentObjectiveEntryForm.Designer.cs">
+      <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentObjectivesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentObjectivesForm.Designer.cs">
+      <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalPlanEditAidStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalPlanEditAidStation.Designer.cs">
+      <DependentUpon>MedicalPlanEditAidStation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalPlanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalPlanForm.Designer.cs">
+      <DependentUpon>MedicalPlanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalPlanHospitalEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalPlanHospitalEntryForm.Designer.cs">
+      <DependentUpon>MedicalPlanHospitalEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalPlanMedivacEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalPlanMedivacEntryForm.Designer.cs">
+      <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupAddExistingResoruce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupAddExistingResoruce.Designer.cs">
+      <DependentUpon>OperationalGroupAddExistingResoruce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupBranchEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupBranchEditForm.Designer.cs">
+      <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupsForm.Designer.cs">
+      <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupSTTFEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupSTTFEditForm.Designer.cs">
+      <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonnelEditCheckInOutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonnelEditCheckInOutForm.Designer.cs">
+      <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckInEnterPersonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckInEnterPersonForm.Designer.cs">
+      <DependentUpon>CheckInEnterPersonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckInForm.Designer.cs">
+      <DependentUpon>CheckInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ResourcesEditUniqueNumberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourcesEditUniqueNumberForm.Designer.cs">
+      <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\InternetSyncForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\InternetSyncForm.Designer.cs">
+      <DependentUpon>InternetSyncForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\NetworkSelectIPForm.Designer.cs">
+      <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\NetworkSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\NetworkSettingsForm.Designer.cs">
+      <DependentUpon>NetworkSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotesForm.Designer.cs">
+      <DependentUpon>NotesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotesListEditNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotesListEditNoteForm.Designer.cs">
+      <DependentUpon>NotesListEditNoteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotesListViewNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotesListViewNoteForm.Designer.cs">
+      <DependentUpon>NotesListViewNoteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditCommsItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditCommsItemForm.Designer.cs">
+      <DependentUpon>EditCommsItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditContactForm.Designer.cs">
+      <DependentUpon>EditContactForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditHosptalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditHosptalForm.Designer.cs">
+      <DependentUpon>EditHosptalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditMedivacForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditMedivacForm.Designer.cs">
+      <DependentUpon>EditMedivacForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedAircraftForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedAircraftForm.Designer.cs">
+      <DependentUpon>EditSavedAircraftForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedIncidentObjectiveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedIncidentObjectiveForm.Designer.cs">
+      <DependentUpon>EditSavedIncidentObjectiveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedSafetyNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedSafetyNoteForm.Designer.cs">
+      <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedPersonnelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedPersonnelForm.Designer.cs">
+      <DependentUpon>EditSavedPersonnelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedVehicleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditSavedVehicleForm.Designer.cs">
+      <DependentUpon>EditSavedVehicleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\HospitalsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\HospitalsForm.Designer.cs">
+      <DependentUpon>HospitalsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\ImportSavedTeamMembersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\ImportSavedTeamMembersForm.Designer.cs">
+      <DependentUpon>ImportSavedTeamMembersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\MedivacsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\MedivacsForm.Designer.cs">
+      <DependentUpon>MedivacsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedAircraftsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedAircraftsForm.Designer.cs">
+      <DependentUpon>SavedAircraftsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedCommsItemsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedCommsItemsForm.Designer.cs">
+      <DependentUpon>SavedCommsItemsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedContactsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedContactsForm.Designer.cs">
+      <DependentUpon>SavedContactsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedIncidentObjectivesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedIncidentObjectivesForm.Designer.cs">
+      <DependentUpon>SavedIncidentObjectivesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedSafetyNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedSafetyNotesForm.Designer.cs">
+      <DependentUpon>SavedSafetyNotesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedPersonnelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedPersonnelForm.Designer.cs">
+      <DependentUpon>SavedPersonnelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsForms\SavedVehiclesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\SavedVehiclesForm.Designer.cs">
+      <DependentUpon>SavedVehiclesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationalChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrganizationalChartForm.Designer.cs">
+      <DependentUpon>OrganizationalChartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationChartAddRoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrganizationChartAddRoleForm.Designer.cs">
+      <DependentUpon>OrganizationChartAddRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationChartAssignRoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrganizationChartAssignRoleForm.Designer.cs">
+      <DependentUpon>OrganizationChartAssignRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogAddForm.Designer.cs">
+      <DependentUpon>PositionLogAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogAllOutstandingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogAllOutstandingForm.Designer.cs">
+      <DependentUpon>PositionLogAllOutstandingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogForm.Designer.cs">
+      <DependentUpon>PositionLogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogReminderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogReminderForm.Designer.cs">
+      <DependentUpon>PositionLogReminderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PositionLogViewDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionLogViewDetailsForm.Designer.cs">
+      <DependentUpon>PositionLogViewDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintIncidentActionPlanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintIncidentActionPlanForm.Designer.cs">
+      <DependentUpon>PrintIncidentActionPlanForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    <Compile Include="SafetyMessageEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SafetyMessageEditForm.Designer.cs">
+      <DependentUpon>SafetyMessageEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SafetyMessageEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SafetyMessageEntryForm.Designer.cs">
+      <DependentUpon>SafetyMessageEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SafetyMessagesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SafetyMessagesForm.Designer.cs">
+      <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\AboutProgramForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\AboutProgramForm.Designer.cs">
+      <DependentUpon>AboutProgramForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\AuthorizeNetworkIncidentRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\AuthorizeNetworkIncidentRequestForm.Designer.cs">
+      <DependentUpon>AuthorizeNetworkIncidentRequestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\HelpInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\HelpInfoForm.Designer.cs">
+      <DependentUpon>HelpInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VehicleEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VehicleEditForm.Designer.cs">
+      <DependentUpon>VehicleEditForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AircraftEditForm.resx">
+      <DependentUpon>AircraftEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AircraftEntryForm.resx">
+      <DependentUpon>AircraftEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AirNOTAMEditForm.resx">
+      <DependentUpon>AirNOTAMEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AirOperationsForm.resx">
+      <DependentUpon>AirOperationsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckedInResourcesForm.resx">
+      <DependentUpon>CheckedInResourcesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CloseOpPeriodForm.resx">
+      <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsListEntryForm.resx">
+      <DependentUpon>CommunicationsListEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsListForm.resx">
+      <DependentUpon>CommunicationsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsListViewForm.resx">
+      <DependentUpon>CommunicationsListViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanEditForm.resx">
+      <DependentUpon>CommunicationsPlanEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanEntryForm.resx">
+      <DependentUpon>CommunicationsPlanEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanForm.resx">
+      <DependentUpon>CommunicationsPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanViewForm.resx">
+      <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\CheckInInfoFieldControl.resx">
+      <DependentUpon>CheckInInfoFieldControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\CollapsiblePanel.resx">
+      <DependentUpon>CollapsiblePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\CrewEditControl.resx">
+      <DependentUpon>CrewEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\DemobilizationEditControl.resx">
+      <DependentUpon>DemobilizationEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\EditAircraftControl.resx">
+      <DependentUpon>EditAircraftControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\EditBranchControl.resx">
+      <DependentUpon>EditBranchControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\EditCommsChannelControl.resx">
+      <DependentUpon>EditCommsChannelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\PersonnelEditControl.resx">
+      <DependentUpon>PersonnelEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\OperationalGroupReportingResourcesControl.resx">
+      <DependentUpon>OperationalGroupReportingResourcesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\PersonnelViewControl.resx">
+      <DependentUpon>PersonnelViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\ResourceCheckInEditControl.resx">
+      <DependentUpon>ResourceCheckInEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\StrikeTeamTaskForceDetailsControl.resx">
+      <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\VehicleEquipmentEditControl.resx">
+      <DependentUpon>VehicleEquipmentEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\VisitorEditControl.resx">
+      <DependentUpon>VisitorEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DemobilizeResourceForm.resx">
+      <DependentUpon>DemobilizeResourceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralMessageEditForm.resx">
+      <DependentUpon>GeneralMessageEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralMessagesForm.resx">
+      <DependentUpon>GeneralMessagesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralMessageViewForm.resx">
+      <DependentUpon>GeneralMessageViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncidentDetailsForm.en.resx">
+      <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncidentDetailsForm.fr.resx">
+      <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncidentDetailsForm.resx">
+      <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncidentObjectiveEntryForm.resx">
+      <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncidentObjectivesForm.resx">
+      <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalPlanEditAidStation.resx">
+      <DependentUpon>MedicalPlanEditAidStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalPlanForm.resx">
+      <DependentUpon>MedicalPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalPlanHospitalEntryForm.resx">
+      <DependentUpon>MedicalPlanHospitalEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalPlanMedivacEntryForm.resx">
+      <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupAddExistingResoruce.resx">
+      <DependentUpon>OperationalGroupAddExistingResoruce.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupBranchEditForm.resx">
+      <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupsForm.resx">
+      <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupSTTFEditForm.resx">
+      <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonnelEditCheckInOutForm.resx">
+      <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckInEnterPersonForm.resx">
+      <DependentUpon>CheckInEnterPersonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckInForm.resx">
+      <DependentUpon>CheckInForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="ResourcesEditUniqueNumberForm.resx">
+      <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\InternetSyncForm.resx">
+      <DependentUpon>InternetSyncForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\NetworkSelectIPForm.resx">
+      <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\NetworkSettingsForm.resx">
+      <DependentUpon>NetworkSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotesForm.resx">
+      <DependentUpon>NotesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotesListEditNoteForm.resx">
+      <DependentUpon>NotesListEditNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotesListViewNoteForm.resx">
+      <DependentUpon>NotesListViewNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditCommsItemForm.resx">
+      <DependentUpon>EditCommsItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditContactForm.resx">
+      <DependentUpon>EditContactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditHosptalForm.resx">
+      <DependentUpon>EditHosptalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditMedivacForm.resx">
+      <DependentUpon>EditMedivacForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedAircraftForm.resx">
+      <DependentUpon>EditSavedAircraftForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedIncidentObjectiveForm.resx">
+      <DependentUpon>EditSavedIncidentObjectiveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedSafetyNoteForm.resx">
+      <DependentUpon>EditSavedSafetyNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedPersonnelForm.resx">
+      <DependentUpon>EditSavedPersonnelForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditSavedVehicleForm.resx">
+      <DependentUpon>EditSavedVehicleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\HospitalsForm.resx">
+      <DependentUpon>HospitalsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\ImportSavedTeamMembersForm.resx">
+      <DependentUpon>ImportSavedTeamMembersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\MedivacsForm.resx">
+      <DependentUpon>MedivacsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedAircraftsForm.resx">
+      <DependentUpon>SavedAircraftsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedCommsItemsForm.resx">
+      <DependentUpon>SavedCommsItemsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedContactsForm.resx">
+      <DependentUpon>SavedContactsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedIncidentObjectivesForm.resx">
+      <DependentUpon>SavedIncidentObjectivesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedSafetyNotesForm.resx">
+      <DependentUpon>SavedSafetyNotesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedPersonnelForm.resx">
+      <DependentUpon>SavedPersonnelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\SavedVehiclesForm.resx">
+      <DependentUpon>SavedVehiclesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrganizationalChartForm.resx">
+      <DependentUpon>OrganizationalChartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrganizationChartAddRoleForm.resx">
+      <DependentUpon>OrganizationChartAddRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrganizationChartAssignRoleForm.resx">
+      <DependentUpon>OrganizationChartAssignRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogAddForm.resx">
+      <DependentUpon>PositionLogAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogAllOutstandingForm.resx">
+      <DependentUpon>PositionLogAllOutstandingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogForm.resx">
+      <DependentUpon>PositionLogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogReminderForm.resx">
+      <DependentUpon>PositionLogReminderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionLogViewDetailsForm.resx">
+      <DependentUpon>PositionLogViewDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintIncidentActionPlanForm.resx">
+      <DependentUpon>PrintIncidentActionPlanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SafetyMessageEditForm.resx">
+      <DependentUpon>SafetyMessageEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SafetyMessageEntryForm.resx">
+      <DependentUpon>SafetyMessageEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SafetyMessagesForm.resx">
+      <DependentUpon>SafetyMessagesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\AboutProgramForm.resx">
+      <DependentUpon>AboutProgramForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\AuthorizeNetworkIncidentRequestForm.resx">
+      <DependentUpon>AuthorizeNetworkIncidentRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\HelpInfoForm.resx">
+      <DependentUpon>HelpInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VehicleEditForm.resx">
+      <DependentUpon>VehicleEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-000 Title Page.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-202-WF-Incident-Objectives.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-203-WF Organization Assignment List Blanked.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-204-WF Assignment List.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-204A-WF Assignment Details.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-206-WF-Medical-Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-207-WF Incident Organization Chart Unified.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-207-WF Incident Organization Chart.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-208-WF-Safety-Message-with-image.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-208-WF-Safety-Message.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-211-WF Check In.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-213-WF-General-Message.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-214-WF-Activity-Log-Supplemental.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-214-WF-Activity-Log.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-220-WF Air Operations Summary Polygon.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-220-WF Air Operations Summary.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-221-WF Demobilization Checkout.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS205A-CommunicationsList.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS205WF-Communications-Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Logistics Overview Subsequent Page.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Logistics Overview.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -76,5 +1006,141 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ics-canada-logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProtobufSerializer\ProtobufSerializer.csproj">
+      <Project>{f27e4076-1ddc-485f-9a75-915a74d7958d}</Project>
+      <Name>ProtobufSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WF-ICS-ClassLibrary\WF-ICS-ClassLibrary.csproj">
+      <Project>{d475afbf-741a-4897-b9dd-284ec0da210f}</Project>
+      <Name>WF-ICS-ClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WildfireICSDesktopServices\WildfireICSDesktopServices.csproj">
+      <Project>{7b090711-f8d7-406f-9dcd-f70082f6b27e}</Project>
+      <Name>WildfireICSDesktopServices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ics-ca-sq-white.ico" />
+    <Content Include="Resources\check-box-checked.png" />
+    <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-11-envelope.png" />
+    <None Include="Resources\EquipOp.png" />
+    <None Include="Resources\HECrew.png" />
+    <None Include="Resources\glyphicons-basic-59-truck.png" />
+    <None Include="Resources\P-icon.ico" />
+    <None Include="Resources\glyphicons-basic-739-check-black.png" />
+    <None Include="Resources\glyphicons-basic-5-settings%403x.png" />
+    <None Include="Resources\glyphicons-basic-799-chevron-last-left.png" />
+    <None Include="Resources\glyphicons-basic-893-user-worker.png" />
+    <None Include="Resources\glyphicons-basic-35-user-incognito.png" />
+    <None Include="Resources\CIAPP-LOGO-v3-transparent.png" />
+    <None Include="Resources\CIAPP-LOGO-v3.png" />
+    <None Include="Resources\glyphicons-basic-89-book-address.png" />
+    <None Include="Resources\glyphicons-basic-89-book-address1.png" />
+    <None Include="Resources\glyphicons-basic-965-layers-plus1.png" />
+    <None Include="Resources\glyphicons-basic-218-lock-open%402x.png" />
+    <None Include="Resources\glyphicons-basic-217-lock%402x.png" />
+    <None Include="Resources\glyphicons-basic-218-lock-open.png" />
+    <None Include="Resources\glyphicons-basic-217-lock.png" />
+    <None Include="Resources\glyphicons-basic-38-picture.png" />
+    <None Include="Resources\glyphicons-basic-639-octagon-remove-empty-red.png" />
+    <None Include="Resources\glyphicons-basic-739-check-green.png" />
+    <None Include="Resources\glyphicons-basic-613-paste.png" />
+    <None Include="Resources\glyphicons-basic-52-eye.png" />
+    <None Include="Resources\glyphicons-basic-399-import.png" />
+    <None Include="Resources\glyphicons-basic-849-computer-network.png" />
+    <None Include="Resources\glyphicons-filetypes-9-file-spreadsheet.png" />
+    <None Include="Resources\glyphicons-calculate-and-output.png" />
+    <None Include="Resources\glyphicons-basic-refresh-comms.png" />
+    <None Include="Resources\glyphicons-basic-988-switch-on.png" />
+    <None Include="Resources\glyphicons-basic-987-switch-off.png" />
+    <None Include="Resources\glyphicons-basic-978-map-cadastral.png" />
+    <None Include="Resources\glyphicons-basic-976-globe-data.png" />
+    <None Include="Resources\glyphicons-basic-965-layers-plus.png" />
+    <None Include="Resources\glyphicons-basic-931-speech-bubble-question-sm.png" />
+    <None Include="Resources\glyphicons-basic-931-speech-bubble-question%403x.png" />
+    <None Include="Resources\glyphicons-basic-931-speech-bubble-question%402x.png" />
+    <None Include="Resources\glyphicons-basic-876-palette-package.png" />
+    <None Include="Resources\glyphicons-basic-801-file-plus.png" />
+    <None Include="Resources\glyphicons-basic-763-sync-check-green.png" />
+    <None Include="Resources\glyphicons-basic-761-sync-grey.png" />
+    <None Include="Resources\glyphicons-basic-740-hash.png" />
+    <None Include="Resources\glyphicons-basic-670-dashboard.png" />
+    <None Include="Resources\glyphicons-basic-638-triangle-alert%403x.png" />
+    <None Include="Resources\glyphicons-basic-635-circle-question.png" />
+    <None Include="Resources\glyphicons-basic-611-copy-duplicate.png" />
+    <None Include="Resources\glyphicons-basic-592-map.png" />
+    <None Include="Resources\glyphicons-basic-559-target.png" />
+    <None Include="Resources\glyphicons-basic-557-flash-automatic.png" />
+    <None Include="Resources\glyphicons-basic-556-flash.png" />
+    <None Include="Resources\glyphicons-basic-540-qr-code.png" />
+    <None Include="Resources\glyphicons-basic-539-barcode.png" />
+    <None Include="Resources\glyphicons-basic-537-progress.png" />
+    <None Include="Resources\glyphicons-basic-532-user-family.png" />
+    <None Include="Resources\glyphicons-basic-477-sort-attributes-alt.png" />
+    <None Include="Resources\glyphicons-basic-475-sort-numerically-alt.png" />
+    <None Include="Resources\glyphicons-basic-432-log-out.png" />
+    <None Include="Resources\glyphicons-basic-431-log-in.png" />
+    <None Include="Resources\glyphicons-basic-424-blackboard.png" />
+    <None Include="Resources\glyphicons-basic-400-export.png" />
+    <None Include="Resources\glyphicons-basic-372-minus.png" />
+    <None Include="Resources\glyphicons-basic-371-plus%402x.png" />
+    <None Include="Resources\glyphicons-basic-371-plus.png" />
+    <None Include="Resources\glyphicons-basic-302-square-download.png" />
+    <None Include="Resources\glyphicons-basic-278-cutlery.png" />
+    <None Include="Resources\glyphicons-basic-250-eraser.png" />
+    <None Include="Resources\glyphicons-basic-234-calculator1.png" />
+    <None Include="Resources\glyphicons-basic-234-calculator%402x.png" />
+    <None Include="Resources\glyphicons-basic-234-calculator.png" />
+    <None Include="Resources\glyphicons-basic-224-chevron-right-double.png" />
+    <None Include="Resources\glyphicons-basic-224-chevron-right.png" />
+    <None Include="Resources\glyphicons-basic-223-chevron-left.png" />
+    <None Include="Resources\glyphicons-basic-222-chevron-up%403x.png" />
+    <None Include="Resources\glyphicons-basic-221-chevron-down%403x.png" />
+    <None Include="Resources\glyphicons-basic-210-circle-empty-right.png" />
+    <None Include="Resources\glyphicons-basic-199-save.png" />
+    <None Include="Resources\glyphicons-basic-193-circle-empty-remove.png" />
+    <None Include="Resources\glyphicons-basic-159-thumbnails-list.png" />
+    <None Include="Resources\glyphicons-basic-152-square-new-window%402x.png" />
+    <None Include="Resources\glyphicons-basic-152-square-new-window.png" />
+    <None Include="Resources\glyphicons-basic-151-square-edit.png" />
+    <None Include="Resources\glyphicons-basic-145-folder-open.png" />
+    <None Include="Resources\glyphicons-basic-137-cogwheel.png" />
+    <None Include="Resources\glyphicons-basic-82-refresh.png" />
+    <None Include="Resources\glyphicons-basic-61-compass.png" />
+    <None Include="Resources\glyphicons-basic-58-history.png" />
+    <None Include="Resources\glyphicons-basic-55-clock.png" />
+    <None Include="Resources\glyphicons-basic-40-notes.png" />
+    <None Include="Resources\glyphicons-basic-33-access-point.png" />
+    <None Include="Resources\glyphicons-basic-31-pencil.png" />
+    <None Include="Resources\glyphicons-basic-30-clipboard.png" />
+    <None Include="Resources\glyphicons-basic-29-cars.png" />
+    <None Include="Resources\glyphicons-basic-28-search.png" />
+    <None Include="Resources\glyphicons-basic-17-bin.png" />
+    <None Include="Resources\glyphicons-basic-16-print.png" />
+    <None Include="Resources\glyphicons-basic-4-user%403x.png" />
+    <None Include="Resources\glyphicons-basic-4-user.png" />
+    <None Include="Resources\ics-ca-sq-white.ico" />
+    <None Include="Resources\ics-canada-icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+	<Product Id="501191B3-2B46-4511-83D2-492ACF6DB5E2" Name="Canadian Incident Action Plan Program" Language="1033" Version="0.0.7.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
+         Manufacturer='CIFFC' />
+
+		<MediaTemplate EmbedCab="yes" />
+		<UI Id="WixUI_Mondo">
+			<UIRef Id="WixUI_InstallDir" />
+			<UIRef Id="WixUI_ErrorProgressText"/>
+		</UI>
+
+		
+		
+		<WixVariable Id="WixUILicenseRtf" Value="LicenseAgreement.rtf" />
+		
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+		<WixVariable Id="WixUIBannerBmp" Value="CIAPPInstallHeader.jpg" />
+		<WixVariable Id="WixUIDialogBmp" Value="CIAPPInstallerBg.jpg" />
+
+		<Feature Id='Complete' Title='Canadian Incident Action Plan Program' Description='The complete package.'    Display='expand' Level='1' ConfigurableDirectory='INSTALLFOLDER'>
+			<Feature Id='MainProgram' Title='Program' Description='The main executable.' Level='1'>
+				<ComponentGroupRef Id="ProductComponents" />
+				<ComponentGroupRef Id="BlankFormComponents" />
+				<ComponentRef Id='MainExecutable' />
+				<ComponentRef Id="ApplicationShortcut" />
+			</Feature>
+
+		
+		</Feature>
+		
+		
+		<PropertyRef Id="WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED"/>
+		<Condition Message='This setup requires the .NET Framework 4.7 or later installed.'>
+			<![CDATA[Installed OR WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED]]>
+		</Condition>
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+		
+		<Icon Id="CanadianIncidentActionPlanProgram.exe" SourceFile="ProgramOutput\Canadian Incident Action Plan Program.exe" />
+<!--WorkingDirectory="INSTALLDIR"-->
+
+	
+
+		<DirectoryRef Id="ApplicationProgramsFolder">
+			<Component Id="ApplicationShortcut" Guid="069951ea-679d-416d-accb-c1d0e6bdbe1c">
+				<Shortcut Id="ApplicationStartMenuShortcut"
+                          Name="Canadian Incident Action Plan Program"
+                          Description="Canadian Incident Action Plan Program"
+                          Target="[#Canadian_Incident_Action_Plan_ProgramExe]"
+                          WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+				<RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+				<RegistryValue Root="HKCU" Key="Software\CIFFC\CanadianIncidentActionPlanProgram" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+			</Component>
+		</DirectoryRef>
+		
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id='CIFFCFolder' Name='CIFFC'>
+					<Directory Id="INSTALLFOLDER" Name="Canadian Incident Action Plan Program" >
+						<Directory Id="BlankFormsFolder" Name="BlankForms" >
+						</Directory>
+						
+					</Directory>
+				</Directory>
+			</Directory>
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ApplicationProgramsFolder" Name="My Application Name"/>
+			</Directory>
+			<Directory Id="DesktopFolder" Name="Desktop" />
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id='MainExecutable' Guid='d42acf2c-6b70-43c0-bb0f-1f2768b548c0'>
+				<File Id='Canadian_Incident_Action_Plan_ProgramExe' Name='Canadian Incident Action Plan Program.exe' DiskId='1' Source='ProgramOutput\Canadian Incident Action Plan Program.exe' KeyPath='yes'>
+					
+					<Shortcut Id="desktopFoobar10" Directory="DesktopFolder" Name="Canadian Incident Action Plan Program"
+						WorkingDirectory='INSTALLDIR' Icon="CanadianIncidentActionPlanProgram.exe" IconIndex="0" Advertise="yes" />
+				</File>
+			</Component>
+			
+			
+			<Component Id='CoordinateSharp_dll' Guid ='27455d98-6929-479e-a3fc-8889758b2b2a'>
+				<File Id='CoordinateSharp_dll' Name='CoordinateSharp.dll' DiskId='1' Source='ProgramOutput\CoordinateSharp.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='NetworkCommsDotNet_dll' Guid ='edce7286-ded5-442d-8d54-3aae22d6602c'>
+				<File Id='NetworkCommsDotNet_dll' Name='NetworkCommsDotNet.dll' DiskId='1' Source='ProgramOutput\NetworkCommsDotNet.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_Bcl_AsyncInterfaces_dll' Guid ='6666475d-7ceb-41a9-9d7b-8603cf9058ad'>
+				<File Id='Microsoft_Bcl_AsyncInterfaces_dll' Name='Microsoft.Bcl.AsyncInterfaces.dll' DiskId='1' Source='ProgramOutput\Microsoft.Bcl.AsyncInterfaces.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='protobuf_net_Core_dll' Guid ='cff4b8c1-64ad-48cb-8f70-262a17ba39e3'>
+				<File Id='protobuf_net_Core_dll' Name='protobuf-net.Core.dll' DiskId='1' Source='ProgramOutput\protobuf-net.Core.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='protobuf_net_dll' Guid ='170401e1-60e9-4bde-bde3-988cfaa2420b'>
+				<File Id='protobuf_net_dll' Name='protobuf-net.dll' DiskId='1' Source='ProgramOutput\protobuf-net.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ProtobufSerializer_dll' Guid ='2a599d7f-1a9a-4ff0-a36b-415c15bba708'>
+				<File Id='ProtobufSerializer_dll' Name='ProtobufSerializer.dll' DiskId='1' Source='ProgramOutput\ProtobufSerializer.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Buffers_dll' Guid ='f8f4993d-538b-4256-9c76-97a7c78b316b'>
+				<File Id='System_Buffers_dll' Name='System.Buffers.dll' DiskId='1' Source='ProgramOutput\System.Buffers.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Collections_Immutable_dll' Guid ='b045e228-490f-493b-ac35-992ea152f9cd'>
+				<File Id='System_Collections_Immutable_dll' Name='System.Collections.Immutable.dll' DiskId='1' Source='ProgramOutput\System.Collections.Immutable.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Memory_dll' Guid ='722748c7-8b89-4d2b-ac27-f3d22891c4b0'>
+				<File Id='System_Memory_dll' Name='System.Memory.dll' DiskId='1' Source='ProgramOutput\System.Memory.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Numerics_Vectors_dll' Guid ='ef73003d-f631-4cc7-bd8d-84f35c03e908'>
+				<File Id='System_Numerics_Vectors_dll' Name='System.Numerics.Vectors.dll' DiskId='1' Source='ProgramOutput\System.Numerics.Vectors.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Runtime_CompilerServices_Unsafe_dll' Guid ='6b3faa88-8ecb-44ec-841b-5e54351948a9'>
+				<File Id='System_Runtime_CompilerServices_Unsafe_dll' Name='System.Runtime.CompilerServices.Unsafe.dll' DiskId='1' Source='ProgramOutput\System.Runtime.CompilerServices.Unsafe.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Text_Encodings_Web_dll' Guid ='b6e37846-9db3-4bbd-8698-c73787bb00f9'>
+				<File Id='System_Text_Encodings_Web_dll' Name='System.Text.Encodings.Web.dll' DiskId='1' Source='ProgramOutput\System.Text.Encodings.Web.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Text_Json_dll' Guid ='acc42f1b-a39f-4b86-9ed8-500ca357d3d2'>
+				<File Id='System_Text_Json_dll' Name='System.Text.Json.dll' DiskId='1' Source='ProgramOutput\System.Text.Json.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Threading_Tasks_Extensions_dll' Guid ='b49de4c4-f034-481e-a475-725e62d4315d'>
+				<File Id='System_Threading_Tasks_Extensions_dll' Name='System.Threading.Tasks.Extensions.dll' DiskId='1' Source='ProgramOutput\System.Threading.Tasks.Extensions.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_ValueTuple_dll' Guid ='10ddfd73-efcf-42cd-b39f-2b27734b996a'>
+				<File Id='System_ValueTuple_dll' Name='System.ValueTuple.dll' DiskId='1' Source='ProgramOutput\System.ValueTuple.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WF_ICS_ClassLibrary_dll' Guid ='40c780e8-36d8-4652-b892-29dd616a3771'>
+				<File Id='WF_ICS_ClassLibrary_dll' Name='WF-ICS-ClassLibrary.dll' DiskId='1' Source='ProgramOutput\WF-ICS-ClassLibrary.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='itextsharp_dll' Guid ='fff5a8fc-7e02-4b38-b7dd-03b07ea85171'>
+				<File Id='itextsharp_dll' Name='itextsharp.dll' DiskId='1' Source='ProgramOutput\itextsharp.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WildfireICSDesktopServices_dll' Guid ='ca4f1234-30bb-4983-9c80-dfd8b09b1b4b'>
+				<File Id='WildfireICSDesktopServices_dll' Name='WildfireICSDesktopServices.dll' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Newtonsoft_Json_dll' Guid ='893cc98c-a2b6-4d7d-bd75-a86829c46e66'>
+				<File Id='Newtonsoft_Json_dll' Name='Newtonsoft.Json.dll' DiskId='1' Source='ProgramOutput\Newtonsoft.Json.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Canadian_Incident_Action_Plan_Program_pdb' Guid ='07cbdeaa-26e8-4d50-802b-9281488219fe'>
+				<File Id='Canadian_Incident_Action_Plan_Program_pdb' Name='Canadian Incident Action Plan Program.pdb' DiskId='1' Source='ProgramOutput\Canadian Incident Action Plan Program.pdb' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ProtobufSerializer_pdb' Guid ='b209afa4-53ea-440f-8e60-bfe65df809e0'>
+				<File Id='ProtobufSerializer_pdb' Name='ProtobufSerializer.pdb' DiskId='1' Source='ProgramOutput\ProtobufSerializer.pdb' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WF_ICS_ClassLibrary_pdb' Guid ='6966d9e2-a4bc-4758-87cf-ba03db6ff69c'>
+				<File Id='WF_ICS_ClassLibrary_pdb' Name='WF-ICS-ClassLibrary.pdb' DiskId='1' Source='ProgramOutput\WF-ICS-ClassLibrary.pdb' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WildfireICSDesktopServices_pdb' Guid ='8fedf489-dd79-4697-b4c0-024744baf1a3'>
+				<File Id='WildfireICSDesktopServices_pdb' Name='WildfireICSDesktopServices.pdb' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.pdb' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Canadian_Incident_Action_Plan_Program_exe_config' Guid ='8e1aa0c8-a4db-4e3d-9402-3207c1cf3b89'>
+				<File Id='Canadian_Incident_Action_Plan_Program_exe_config' Name='Canadian Incident Action Plan Program.exe.config' DiskId='1' Source='ProgramOutput\Canadian Incident Action Plan Program.exe.config' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ProtobufSerializer_dll_config' Guid ='fb5c6a5d-a217-4447-935a-5f5026ceeff6'>
+				<File Id='ProtobufSerializer_dll_config' Name='ProtobufSerializer.dll.config' DiskId='1' Source='ProgramOutput\ProtobufSerializer.dll.config' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WF_ICS_ClassLibrary_dll_config' Guid ='63626438-fe31-40f0-a2a8-1c85d3367065'>
+				<File Id='WF_ICS_ClassLibrary_dll_config' Name='WF-ICS-ClassLibrary.dll.config' DiskId='1' Source='ProgramOutput\WF-ICS-ClassLibrary.dll.config' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WildfireICSDesktopServices_dll_config' Guid ='9f2bd738-140d-4b23-b71a-5c79444ba136'>
+				<File Id='WildfireICSDesktopServices_dll_config' Name='WildfireICSDesktopServices.dll.config' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.dll.config' KeyPath='yes'></File>
+			</Component>
+			<Component Id='BouncyCastle_Crypto_dll' Guid ='df9c1a1d-3d57-4645-986f-12b5905120fc'>
+				<File Id='BouncyCastle_Crypto_dll' Name='BouncyCastle.Crypto.dll' DiskId='1' Source='ProgramOutput\BouncyCastle.Crypto.dll' KeyPath='yes'></File>
+			</Component>
+
+
+
+
+
+
+
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+			<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+		</ComponentGroup>
+		<ComponentGroup Id="BlankFormComponents" Directory="BlankFormsFolder">
+			<Component Id='ICS_218___Support_Vehicle_Equipment_Inventory_pdf' Guid ='92b85aa8-4126-46d8-882f-bb285bf627b8'>
+				<File Id='ICS_218___Support_Vehicle_Equipment_Inventory_pdf' Name='ICS 218 - Support Vehicle Equipment Inventory.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_000_Title_Page_pdf' Guid ='ddc54d49-fe24-421a-bf54-2cd043493af1'>
+				<File Id='ICS_000_Title_Page_pdf' Name='ICS-000 Title Page.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-000 Title Page.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_202_WF_Incident_Objectives_pdf' Guid ='60e3f391-374f-4899-900a-d88d60705d24'>
+				<File Id='ICS_202_WF_Incident_Objectives_pdf' Name='ICS-202-WF-Incident-Objectives.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-202-WF-Incident-Objectives.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_203_WF_Organization_Assignment_List_Blanked_pdf' Guid ='ec60d4e0-c097-4cf0-9027-2fabccec0b7e'>
+				<File Id='ICS_203_WF_Organization_Assignment_List_Blanked_pdf' Name='ICS-203-WF Organization Assignment List Blanked.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-203-WF Organization Assignment List Blanked.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_204A_WF_Assignment_Details_pdf' Guid ='8133a843-bab4-4638-b172-1cdd0ab60dd8'>
+				<File Id='ICS_204A_WF_Assignment_Details_pdf' Name='ICS-204A-WF Assignment Details.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-204A-WF Assignment Details.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_204_WF_Assignment_List_pdf' Guid ='232b5b2f-b087-4684-a987-684c9103cf0d'>
+				<File Id='ICS_204_WF_Assignment_List_pdf' Name='ICS-204-WF Assignment List.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-204-WF Assignment List.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS205A_CommunicationsList_pdf' Guid ='5ca41784-6e10-4930-be9a-57cbfa93892a'>
+				<File Id='ICS205A_CommunicationsList_pdf' Name='ICS205A-CommunicationsList.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS205A-CommunicationsList.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS205WF_Communications_Plan_pdf' Guid ='6a6b0cc6-9ad9-4f21-ad98-337836f5c48b'>
+				<File Id='ICS205WF_Communications_Plan_pdf' Name='ICS205WF-Communications-Plan.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS205WF-Communications-Plan.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_206_WF_Medical_Plan_pdf' Guid ='bfc842b2-e45c-4e76-bed8-6ee125b51d84'>
+				<File Id='ICS_206_WF_Medical_Plan_pdf' Name='ICS-206-WF-Medical-Plan.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-206-WF-Medical-Plan.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_207_WF_Incident_Organization_Chart_Unified_pdf' Guid ='4d396eff-0e9b-40d0-bc51-dd52b2810579'>
+				<File Id='ICS_207_WF_Incident_Organization_Chart_Unified_pdf' Name='ICS-207-WF Incident Organization Chart Unified.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-207-WF Incident Organization Chart Unified.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_207_WF_Incident_Organization_Chart_pdf' Guid ='58243d2b-385f-45fb-823c-7576d6c908af'>
+				<File Id='ICS_207_WF_Incident_Organization_Chart_pdf' Name='ICS-207-WF Incident Organization Chart.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-207-WF Incident Organization Chart.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_207_WF_Organization_Chart_Extension_pdf' Guid ='1641555c-636b-4480-a743-e76e59291f5e'>
+				<File Id='ICS_207_WF_Organization_Chart_Extension_pdf' Name='ICS-207-WF-Organization-Chart-Extension.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_208_WF_Safety_Message_pdf' Guid ='52cabacd-9173-4c84-abfa-5fb2ba0a86aa'>
+				<File Id='ICS_208_WF_Safety_Message_pdf' Name='ICS-208-WF-Safety-Message.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-208-WF-Safety-Message.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_208_WF_Safety_Message_with_image_pdf' Guid ='6aebd668-2b73-473f-bed2-0b4806e0cdd8'>
+				<File Id='ICS_208_WF_Safety_Message_with_image_pdf' Name='ICS-208-WF-Safety-Message-with-image.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-208-WF-Safety-Message-with-image.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_213_WF_General_Message_pdf' Guid ='af06a5ee-e4c4-4bfe-aa63-5b8e7c470540'>
+				<File Id='ICS_213_WF_General_Message_pdf' Name='ICS-213-WF-General-Message.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-213-WF-General-Message.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_214_WF_Activity_Log_pdf' Guid ='ba32099e-a152-4bf9-bff0-2cbead1cfc37'>
+				<File Id='ICS_214_WF_Activity_Log_pdf' Name='ICS-214-WF-Activity-Log.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-214-WF-Activity-Log.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_214_WF_Activity_Log_Supplemental_pdf' Guid ='aeb344f5-20ac-43f2-8254-1aae3fb5ee2b'>
+				<File Id='ICS_214_WF_Activity_Log_Supplemental_pdf' Name='ICS-214-WF-Activity-Log-Supplemental.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-214-WF-Activity-Log-Supplemental.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_220_WF_Air_Operations_Summary_Polygon_pdf' Guid ='c36e3dfa-336c-4c98-8ff0-9062cc878d75'>
+				<File Id='ICS_220_WF_Air_Operations_Summary_Polygon_pdf' Name='ICS-220-WF Air Operations Summary Polygon.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-220-WF Air Operations Summary Polygon.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_220_WF_Air_Operations_Summary_pdf' Guid ='9451fa2f-4bac-44b6-a5e2-1aacd4027a7b'>
+				<File Id='ICS_220_WF_Air_Operations_Summary_pdf' Name='ICS-220-WF Air Operations Summary.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-220-WF Air Operations Summary.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Logistics_Overview_pdf' Guid ='deab6c3e-e25e-4d6c-81de-19ff5d3e61d9'>
+				<File Id='Logistics_Overview_pdf' Name='Logistics Overview.pdf' DiskId='1' Source='ProgramOutput\BlankForms\Logistics Overview.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Logistics_Overview_Subsequent_Page_pdf' Guid ='244d88bb-cd9b-4bdd-b71c-d1299a89a3bf'>
+				<File Id='Logistics_Overview_Subsequent_Page_pdf' Name='Logistics Overview Subsequent Page.pdf' DiskId='1' Source='ProgramOutput\BlankForms\Logistics Overview Subsequent Page.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_221_WF_Demobilization_Checkout_pdf' Guid ='14288a87-b1dc-42ae-97ad-04c4d8ff5b6a'>
+				<File Id='ICS_221_WF_Demobilization_Checkout_pdf' Name='ICS-221-WF Demobilization Checkout.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-221-WF Demobilization Checkout.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='ICS_211_WF_Check_In_pdf' Guid ='8a35b34f-27d2-4982-acdd-e979358ef3d8'>
+				<File Id='ICS_211_WF_Check_In_pdf' Name='ICS-211-WF Check In.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-211-WF Check In.pdf' KeyPath='yes'></File>
+			</Component>
+
+
+
+		</ComponentGroup>
+	</Fragment>
+
+	
+</Wix>

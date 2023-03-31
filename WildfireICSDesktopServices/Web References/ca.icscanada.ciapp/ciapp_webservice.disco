@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://ciapp.icscanada.ca/ciapp_webservice.asmx?wsdl" docRef="https://ciapp.icscanada.ca/ciapp_webservice.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://ciapp.icscanada.ca/ciapp_webservice.asmx" xmlns:q1="http://microsoft.com/webservices/" binding="q1:ciapp_webserviceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://ciapp.icscanada.ca/ciapp_webservice.asmx" xmlns:q2="http://microsoft.com/webservices/" binding="q2:ciapp_webserviceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

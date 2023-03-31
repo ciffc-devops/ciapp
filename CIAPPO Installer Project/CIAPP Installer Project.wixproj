@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>eaeed868-41c0-4506-8660-0e83eb5d914d</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>CIAPP_Installer_Project</OutputName>
+    <OutputType>Package</OutputType>
+    <Name>CIAPP Installer Project</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ProgramOutput\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CIAPPInstallerBg.jpg" />
+    <Content Include="CIAPPInstallHeader.jpg" />
+    <Content Include="LicenseAgreement.rtf" />
+    <Content Include="ProgramOutput\Canadian_Incident_Action_Plan_Program.exe" />
+    <Content Include="ProgramOutput\CoordinateSharp.dll" />
+    <Content Include="ProgramOutput\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="ProgramOutput\NetworkCommsDotNet.dll" />
+    <Content Include="ProgramOutput\protobuf-net.Core.dll" />
+    <Content Include="ProgramOutput\protobuf-net.dll" />
+    <Content Include="ProgramOutput\ProtobufSerializer.dll" />
+    <Content Include="ProgramOutput\System.Buffers.dll" />
+    <Content Include="ProgramOutput\System.Collections.Immutable.dll" />
+    <Content Include="ProgramOutput\System.Memory.dll" />
+    <Content Include="ProgramOutput\System.Net.Http.Json.dll" />
+    <Content Include="ProgramOutput\System.Numerics.Vectors.dll" />
+    <Content Include="ProgramOutput\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="ProgramOutput\System.Text.Encodings.Web.dll" />
+    <Content Include="ProgramOutput\System.Text.Json.dll" />
+    <Content Include="ProgramOutput\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="ProgramOutput\System.ValueTuple.dll" />
+    <Content Include="ProgramOutput\WF-ICS-ClassLibrary.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\WiX Toolset v3.14\bin\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\WiX Toolset v3.14\bin\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+    <Error Text="The WiX Toolset v3.11 build tools must be installed to build this project. To download the WiX Toolset, see https://wixtoolset.org/releases/v3.11/stable" />
+  </Target>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>
