@@ -2645,6 +2645,7 @@ namespace Wildfire_ICS_Assist
 
         private void memberStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenCheckedInResourcesForm();
         }
 
        
