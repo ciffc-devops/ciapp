@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,6 +12,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -36,15 +38,53 @@ namespace Wildfire_ICS_Assist
             dgvObjectives.AutoGenerateColumns = false;
             CurrentIncident.createObjectivesSheetAsNeeded(CurrentOpPeriod);
             LoadSheet();
-            cpFireStatus.CurrentlyCollapsed = true;
-            cpGeneralSafety.CurrentlyCollapsed = true;
-            cpWeather.CurrentlyCollapsed = true;
+            panels.Add(cpFireStatus); panels.Add(cpWeather); panels.Add(cpGeneralSafety);
+            
             Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
             Program.wfIncidentService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessagesChanged;
             Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
+            foreach(CollapsiblePanel p in panels)
+            {
+                p.Collapse();
+                p.PanelExpanded += HandlePanelExpanded;
+                p.PanelCollapsed += HandlePanelCollapsed;
+
+            }
         }
+
+        private List<CollapsiblePanel> panels = new List<CollapsiblePanel>();
+
+        private void HandlePanelExpanded(object sender, EventArgs e)
+        {
+            if (sender != null)
+            {
+                CollapsiblePanel c = (CollapsiblePanel)sender;
+                c.Location = new Point(0, c.Location.Y);
+                foreach (CollapsiblePanel cp in panels)
+                {
+                    if (!cp.Name.Equals(c.Name))
+                    {
+                        cp.Collapse();
+                        cp.Location = new Point(10, cp.Location.Y);
+                    }
+                }
+            }
+        }
+
+
+        private void HandlePanelCollapsed(object sender, EventArgs e)
+        {
+            if (sender != null)
+            {
+                CollapsiblePanel c = (CollapsiblePanel)sender;
+                c.Location = new Point(10, c.Location.Y);
+                
+               
+            }
+        }
+
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
             CurrentIncident.createObjectivesSheetAsNeeded(CurrentOpPeriod);
@@ -122,6 +162,12 @@ namespace Wildfire_ICS_Assist
                     obj.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
                     obj.Priority = objectivesSheet.GetNextPriorityNumber();
                     Program.wfIncidentService.UpsertIncidentObjective(obj);
+
+                    if (entryForm.SaveForLater)
+                    {
+                        Program.generalOptionsService.UpserOptionValue(entryForm.Objective, "Objective");
+
+                    }
 
                 }
             }

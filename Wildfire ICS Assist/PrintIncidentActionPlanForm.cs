@@ -623,7 +623,7 @@ namespace Wildfire_ICS_Assist
         private void btnEmailIAP_Click(object sender, EventArgs e)
         {
             List<Personnel> activePersonnel = Program.CurrentIncident.GetCurrentlySignedInPersonnel(Program.CurrentOpPeriod);
-            activePersonnel = activePersonnel.Where(o => !string.IsNullOrEmpty(o.Email)).ToList();
+            activePersonnel = activePersonnel.Where(o => !string.IsNullOrEmpty(o.Email) && o.Email.isValidEmail()).ToList();
             if (DialogResult.Yes == MessageBox.Show("The PDF will be emailed to " + activePersonnel.Count + " people. You can add additional receipients in your email client. Do you want to proceed?", "Proceed with email", MessageBoxButtons.YesNo))
             {
 
@@ -644,6 +644,7 @@ namespace Wildfire_ICS_Assist
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.ToString());
+                        MessageBox.Show("Sorry, there was an error trying to send the PDF.  You may need to save the pdf and email it manually.");
                     }
                 } else { MessageBox.Show("There was an error generating the pdf."); }
             }

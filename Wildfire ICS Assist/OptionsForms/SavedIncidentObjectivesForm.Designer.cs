@@ -60,8 +60,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
-            this.splitContainer1.Size = new System.Drawing.Size(1467, 831);
-            this.splitContainer1.SplitterDistance = 762;
+            this.splitContainer1.Size = new System.Drawing.Size(678, 403);
+            this.splitContainer1.SplitterDistance = 331;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -81,7 +81,7 @@
             this.dgvObjectives.RowHeadersVisible = false;
             this.dgvObjectives.RowTemplate.Height = 35;
             this.dgvObjectives.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvObjectives.Size = new System.Drawing.Size(1467, 762);
+            this.dgvObjectives.Size = new System.Drawing.Size(678, 331);
             this.dgvObjectives.TabIndex = 1;
             this.dgvObjectives.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvObjectives_CellDoubleClick);
             this.dgvObjectives.SelectionChanged += new System.EventHandler(this.dgvObjectives_SelectionChanged);
@@ -138,10 +138,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(1467, 831);
+            this.ClientSize = new System.Drawing.Size(678, 403);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(456, 331);
             this.Name = "SavedIncidentObjectivesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Saved Incident Objectives";

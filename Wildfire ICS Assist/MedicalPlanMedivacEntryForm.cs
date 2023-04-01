@@ -109,5 +109,11 @@ namespace Wildfire_ICS_Assist
                 this.Close();
             }
         }
+
+        private void txtOrganization_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtOrganization.Text)) { txtOrganization.BackColor = Program.ErrorColor;}
+            else { txtOrganization.BackColor = SystemColors.Window; }
+        }
     }
 }

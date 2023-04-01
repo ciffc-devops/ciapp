@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace Wildfire_ICS_Assist
         {
             cpFilters.CurrentlyCollapsed = true;
             cpPNumbers.CurrentlyCollapsed = true;
+            this.dgvResources.DoubleBuffered(true);
 
             dgvResources.AutoGenerateColumns = false;
             cboExpandCrews.SelectedIndex = 0;
@@ -509,6 +511,9 @@ namespace Wildfire_ICS_Assist
                 if (dr == DialogResult.OK)
                 {
                     Program.wfIncidentService.UpsertDemobRecord(demob);
+
+                    
+
                 }
             }
 
@@ -682,7 +687,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    MessageBox.Show("Sorry, there was a problem writing to the file.  It is likely the file was already open elsewhere.  Please check for open copies and try again.");
                 }
             }
         }
@@ -723,6 +728,16 @@ namespace Wildfire_ICS_Assist
                 System.Diagnostics.Process.Start(fullFilepath);
             }
             catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+        }
+    }
+
+    public static class ExtensionMethods
+    {
+        public static void DoubleBuffered(this DataGridView dgv, bool setting)
+        {
+            Type dgvType = dgv.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(dgv, setting, null);
         }
     }
 }

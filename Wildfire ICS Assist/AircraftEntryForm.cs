@@ -33,17 +33,9 @@ namespace Wildfire_ICS_Assist
 
         private void btnMedivacHelpNew_Click(object sender, EventArgs e)
         {
-            HelpInfo info = new HelpInfo();
-            if (info.loadByTopic("AircraftIsMedivac"))
-            {
-
-                using (HelpInfoForm help = new HelpInfoForm())
-                {
-                    help.Title = info.Title;
-                    help.Body = info.Body;
-                    help.ShowDialog();
-                }
-            }
+            Button btn = (Button)sender;
+            int durationMilliseconds = 10000;
+            toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

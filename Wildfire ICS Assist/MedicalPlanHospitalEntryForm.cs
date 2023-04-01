@@ -98,5 +98,13 @@ namespace Wildfire_ICS_Assist
         {
             if(cboSaved.SelectedItem == null) { cboSaved.Text = ""; }
         }
+
+        private void txtHospitalName_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtHospitalName.Text.Trim())) { txtHospitalName.BackColor = Program.ErrorColor; }
+            else { txtHospitalName.BackColor = Program.GoodColor; }
+
+
+        }
     }
 }

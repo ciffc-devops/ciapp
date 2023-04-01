@@ -210,7 +210,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(153, 26);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Hospital Name";
+            this.label1.Text = "Hospital Name*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtHospitalName

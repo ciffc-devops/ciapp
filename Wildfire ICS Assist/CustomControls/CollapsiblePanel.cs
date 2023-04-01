@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel.Design;
 using System.Security.Policy;
+using WF_ICS_ClassLibrary.EventHandling;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
@@ -46,6 +47,10 @@ namespace Wildfire_ICS_Assist.CustomControls
         public int ExpandedHeight { get => _ExpandedHeight; set => _ExpandedHeight = value; }
 
 
+        public event EventHandler PanelCollapsed;
+        public event EventHandler PanelExpanded;
+
+
         public CollapsiblePanel()
         {
             InitializeComponent(); this.BackColor = Program.FormBackground;
@@ -69,7 +74,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 this.Location = new Point(collapsedX, currentY);
             }
 
-            lblTitle.Width = this.Width - 10 - lblTitle.Location.X;
+            lblTitle.Width = this.Width  - lblTitle.Location.X;
 
 
             this.SendToBack();
@@ -78,7 +83,37 @@ namespace Wildfire_ICS_Assist.CustomControls
 
             btnExpandCollapse.BackgroundImage = Properties.Resources.glyphicons_basic_221_chevron_down_3x;
             _CurrentlyCollapsed = true;
+            HandlePanelCollapsed(this, null);
+        }
 
+        private void HandlePanelCollapsed(object sender, EventArgs e)
+        {
+            // we'll explain this in a minute
+            this.OnPanelCollapsed(EventArgs.Empty);
+        }
+
+        protected virtual void OnPanelCollapsed(EventArgs e)
+        {
+            EventHandler handler = this.PanelCollapsed;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        private void HandlePanelExpanded(object sender, EventArgs e)
+        {
+            // we'll explain this in a minute
+            this.OnPanelExpanded(EventArgs.Empty);
+        }
+
+        protected virtual void OnPanelExpanded(EventArgs e)
+        {
+            EventHandler handler = this.PanelExpanded;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
 
         public void Expand()
@@ -99,10 +134,11 @@ namespace Wildfire_ICS_Assist.CustomControls
                 collapsedX = currentX - (ExpandedWidth - CollapsedWidth);
                 this.Location = new Point(collapsedX, currentY);
             }
-            lblTitle.Width = this.Width - 10 - lblTitle.Location.X;
+            lblTitle.Width = this.Width  - lblTitle.Location.X;
 
             this.BringToFront();
             _CurrentlyCollapsed = false;
+            HandlePanelExpanded(this, null);
         }
 
         public void Toggle()
@@ -121,4 +157,5 @@ namespace Wildfire_ICS_Assist.CustomControls
             Toggle();
         }
     }
+
 }

@@ -41,9 +41,9 @@
             this.lblTitle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblTitle.Location = new System.Drawing.Point(39, 3);
+            this.lblTitle.Location = new System.Drawing.Point(39, -1);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(443, 30);
+            this.lblTitle.Size = new System.Drawing.Size(447, 42);
             this.lblTitle.TabIndex = 32;
             this.lblTitle.Text = "Panel Title Here";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -58,7 +58,7 @@
             this.btnExpandCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExpandCollapse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.btnExpandCollapse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExpandCollapse.Location = new System.Drawing.Point(6, 3);
+            this.btnExpandCollapse.Location = new System.Drawing.Point(6, 5);
             this.btnExpandCollapse.Name = "btnExpandCollapse";
             this.btnExpandCollapse.Size = new System.Drawing.Size(30, 30);
             this.btnExpandCollapse.TabIndex = 31;

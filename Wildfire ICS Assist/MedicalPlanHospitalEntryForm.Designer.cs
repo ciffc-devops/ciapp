@@ -160,7 +160,6 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.Location = new System.Drawing.Point(441, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
@@ -219,7 +218,6 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 436);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -376,7 +374,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(153, 26);
             this.label12.TabIndex = 107;
-            this.label12.Text = "Hospital Name";
+            this.label12.Text = "Hospital Name*";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtHospitalName
@@ -387,6 +385,7 @@
             this.txtHospitalName.Name = "txtHospitalName";
             this.txtHospitalName.Size = new System.Drawing.Size(360, 29);
             this.txtHospitalName.TabIndex = 101;
+            this.txtHospitalName.TextChanged += new System.EventHandler(this.txtHospitalName_TextChanged);
             // 
             // txtAddress
             // 
@@ -460,7 +459,6 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(360, 368);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);

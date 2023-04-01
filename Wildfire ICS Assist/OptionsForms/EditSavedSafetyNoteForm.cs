@@ -52,23 +52,23 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             bool isGood = true;
             if (string.IsNullOrEmpty(txtSummaryLine.Text.Trim())) { txtSummaryLine.BackColor = Program.ErrorColor; isGood = false; }
-            else { txtSummaryLine.BackColor = Program.GoodColor; }
+            else { txtSummaryLine.BackColor = SystemColors.Window; }
 
             if (string.IsNullOrEmpty(txtMessage.Text.Trim())) { txtMessage.BackColor = Program.ErrorColor; isGood = false; }
-            else { txtMessage.BackColor = Program.GoodColor; }
+            else { txtMessage.BackColor = SystemColors.Window;}
             return isGood;
         }
 
         private void txtSummaryLine_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtSummaryLine.Text.Trim())) { txtSummaryLine.BackColor = Program.ErrorColor; }
-            else { txtSummaryLine.BackColor = Program.GoodColor; }
+            else { txtSummaryLine.BackColor = SystemColors.Window;  }
         }
 
         private void txtMessage_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtMessage.Text.Trim())) { txtMessage.BackColor = Program.ErrorColor; }
-            else { txtMessage.BackColor = Program.GoodColor; }
+            else { txtMessage.BackColor = SystemColors.Window; }
 
         }
 

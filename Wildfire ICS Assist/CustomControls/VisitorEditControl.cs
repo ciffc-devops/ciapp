@@ -23,6 +23,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void displayTeamMember()
         {
+          
 
             if (Program.generalOptionsService != null && Program.generalOptionsService.GetOptionsValue("Agencies") != null)
             {
@@ -110,6 +111,15 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void txtNOKName_TextChanged(object sender, EventArgs e)
         {
             selectedPerson.EmergencyContact = ((TextBox)sender).Text;   
+        }
+
+        private void VisitorEditControl_Load(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtLastName.Text))
+            {
+                txtLastName.BackColor = Program.ErrorColor;
+            }
+            else { txtLastName.BackColor = Program.GoodColor; }
         }
     }
 }

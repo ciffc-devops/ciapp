@@ -71,6 +71,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void txtHospitalName_TextChanged(object sender, EventArgs e)
         {
             selectedHospital.name = ((TextBox)sender).Text;
+            if (string.IsNullOrEmpty(txtHospitalName.Text)) { txtHospitalName.BackColor = Program.ErrorColor; }
+            else { txtHospitalName.BackColor = SystemColors.Window; }
         }
 
         private void txtAddress_TextChanged(object sender, EventArgs e)
@@ -105,8 +107,13 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if (!string.IsNullOrEmpty(txtHospitalName.Text))
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            if (string.IsNullOrEmpty(txtHospitalName.Text)) { txtHospitalName.BackColor = Program.ErrorColor; }
+            else { txtHospitalName.BackColor = SystemColors.Window; }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

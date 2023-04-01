@@ -63,8 +63,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
-            this.splitContainer1.Size = new System.Drawing.Size(760, 454);
-            this.splitContainer1.SplitterDistance = 389;
+            this.splitContainer1.Size = new System.Drawing.Size(774, 378);
+            this.splitContainer1.SplitterDistance = 310;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -87,7 +87,7 @@
             this.dgvAircraft.RowHeadersVisible = false;
             this.dgvAircraft.RowTemplate.Height = 35;
             this.dgvAircraft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAircraft.Size = new System.Drawing.Size(760, 389);
+            this.dgvAircraft.Size = new System.Drawing.Size(774, 310);
             this.dgvAircraft.TabIndex = 1;
             this.dgvAircraft.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAircraft_CellDoubleClick);
             this.dgvAircraft.SelectionChanged += new System.EventHandler(this.dgvAircraft_SelectionChanged);
@@ -171,10 +171,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 454);
+            this.ClientSize = new System.Drawing.Size(774, 378);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(790, 417);
             this.Name = "SavedAircraftsForm";
             this.Text = "Saved Aircraft";
             this.Load += new System.EventHandler(this.SavedAircraftsForm_Load);
