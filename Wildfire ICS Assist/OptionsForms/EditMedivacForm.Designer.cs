@@ -94,6 +94,7 @@
             // rbBLS
             // 
             this.rbBLS.AutoSize = true;
+            this.rbBLS.Checked = true;
             this.rbBLS.Location = new System.Drawing.Point(209, 172);
             this.rbBLS.Name = "rbBLS";
             this.rbBLS.Size = new System.Drawing.Size(229, 28);
@@ -110,7 +111,6 @@
             this.rbALS.Name = "rbALS";
             this.rbALS.Size = new System.Drawing.Size(271, 28);
             this.rbALS.TabIndex = 9;
-            this.rbALS.TabStop = true;
             this.rbALS.Text = "Advanced Life Support (ALS)";
             this.rbALS.UseVisualStyleBackColor = true;
             this.rbALS.CheckedChanged += new System.EventHandler(this.rbALS_CheckedChanged);
@@ -197,7 +197,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Medivac Service";
+            this.label1.Text = "Medivac Service*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnSave

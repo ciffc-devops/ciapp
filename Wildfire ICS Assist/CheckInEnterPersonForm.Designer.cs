@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnSelectNewPerson = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -47,6 +48,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.pnlSavedPersonnel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -65,8 +67,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnBack);
-            this.splitContainer1.Size = new System.Drawing.Size(630, 1026);
-            this.splitContainer1.SplitterDistance = 958;
+            this.splitContainer1.Size = new System.Drawing.Size(630, 640);
+            this.splitContainer1.SplitterDistance = 572;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -84,10 +86,10 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.personnelEditControl1);
+            this.splitContainer2.Panel2.Controls.Add(this.panel1);
             this.splitContainer2.Panel2.Controls.Add(this.label1);
             this.splitContainer2.Panel2.Controls.Add(this.btnSelectNewPerson);
-            this.splitContainer2.Size = new System.Drawing.Size(630, 958);
+            this.splitContainer2.Size = new System.Drawing.Size(630, 572);
             this.splitContainer2.SplitterDistance = 98;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -147,16 +149,14 @@
             // 
             // personnelEditControl1
             // 
-            this.personnelEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.personnelEditControl1.BackColor = System.Drawing.Color.Transparent;
+            this.personnelEditControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.personnelEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.personnelEditControl1.Location = new System.Drawing.Point(17, 35);
+            this.personnelEditControl1.Location = new System.Drawing.Point(0, 0);
             this.personnelEditControl1.Margin = new System.Windows.Forms.Padding(6);
             this.personnelEditControl1.MinimumSize = new System.Drawing.Size(442, 702);
             this.personnelEditControl1.Name = "personnelEditControl1";
-            this.personnelEditControl1.Size = new System.Drawing.Size(601, 769);
+            this.personnelEditControl1.Size = new System.Drawing.Size(607, 770);
             this.personnelEditControl1.TabIndex = 13;
             // 
             // label1
@@ -175,7 +175,7 @@
             this.btnSelectNewPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectNewPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
             this.btnSelectNewPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelectNewPerson.Location = new System.Drawing.Point(488, 813);
+            this.btnSelectNewPerson.Location = new System.Drawing.Point(488, 427);
             this.btnSelectNewPerson.Name = "btnSelectNewPerson";
             this.btnSelectNewPerson.Size = new System.Drawing.Size(130, 40);
             this.btnSelectNewPerson.TabIndex = 11;
@@ -187,7 +187,6 @@
             // btnBack
             // 
             this.btnBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnBack.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnBack.Location = new System.Drawing.Point(6, 6);
             this.btnBack.Margin = new System.Windows.Forms.Padding(6);
@@ -198,18 +197,31 @@
             this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBack.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.AutoScrollMinSize = new System.Drawing.Size(0, 770);
+            this.panel1.Controls.Add(this.personnelEditControl1);
+            this.panel1.Location = new System.Drawing.Point(3, 32);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(624, 389);
+            this.panel1.TabIndex = 14;
+            // 
             // CheckInEnterPersonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnBack;
-            this.ClientSize = new System.Drawing.Size(630, 1026);
+            this.ClientSize = new System.Drawing.Size(630, 640);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(646, 875);
+            this.MinimumSize = new System.Drawing.Size(646, 600);
             this.Name = "CheckInEnterPersonForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select or Enter a Person";
@@ -223,6 +235,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.pnlSavedPersonnel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -239,5 +252,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSelectNewPerson;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Panel panel1;
     }
 }

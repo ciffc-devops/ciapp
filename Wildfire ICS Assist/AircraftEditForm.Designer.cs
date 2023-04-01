@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AircraftEditForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnMedivacHelpNew = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             this.editAircraftControl1 = new Wildfire_ICS_Assist.CustomControls.EditAircraftControl();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -85,14 +87,16 @@
             this.btnMedivacHelpNew.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMedivacHelpNew.BackgroundImage")));
             this.btnMedivacHelpNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMedivacHelpNew.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnMedivacHelpNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnMedivacHelpNew.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnMedivacHelpNew.Location = new System.Drawing.Point(476, 371);
             this.btnMedivacHelpNew.Name = "btnMedivacHelpNew";
             this.btnMedivacHelpNew.Size = new System.Drawing.Size(25, 25);
             this.btnMedivacHelpNew.TabIndex = 124;
             this.btnMedivacHelpNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.btnMedivacHelpNew, "If checked, this aircraft\'s information will be summarized in the Medivac field (" +
+        "4) on the Air Operations Summary form.");
             this.btnMedivacHelpNew.UseVisualStyleBackColor = false;
+            this.btnMedivacHelpNew.Click += new System.EventHandler(this.btnMedivacHelpNew_Click);
             // 
             // label7
             // 
@@ -253,5 +257,6 @@
         private System.Windows.Forms.DateTimePicker datNewStart;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtNewPilot;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

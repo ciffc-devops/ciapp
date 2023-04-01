@@ -149,7 +149,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(187, 29);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Agency";
+            this.label3.Text = "Agency*";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5

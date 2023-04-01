@@ -20,6 +20,7 @@ namespace Wildfire_ICS_Assist
         {
             InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
         }
+        public bool SaveForLater { get => chkSaveForLater.Checked; }
 
         private void loadSavedObjectives()
         {

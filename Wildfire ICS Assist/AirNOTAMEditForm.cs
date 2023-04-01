@@ -124,7 +124,7 @@ namespace Wildfire_ICS_Assist
                 {
                     lblResultMessage.Text = "Coordinate OK";
                     lblResultMessage.ForeColor = label1.ForeColor;
-                    txtCoordinates.BackColor = Program.GoodColor;
+                    txtCoordinates.BackColor = SystemColors.Window;
                 }
                 else
                 {
@@ -165,10 +165,10 @@ namespace Wildfire_ICS_Assist
                 {
                     selectedNOTAM.RadiusNM = 0;
                     selectedNOTAM.RadiusCentre = null;
-                    selectedNOTAM.PolygonNW = enteredPolygonCoordinates[0];
-                    selectedNOTAM.PolygonNE = enteredPolygonCoordinates[1];
-                    selectedNOTAM.PolygonSE = enteredPolygonCoordinates[2];
-                    selectedNOTAM.PolygonSW = enteredPolygonCoordinates[3];
+                    if (enteredPolygonCoordinates[0] != null) { selectedNOTAM.PolygonNW = enteredPolygonCoordinates[0]; }
+                    if (enteredPolygonCoordinates[1] != null) { selectedNOTAM.PolygonNE = enteredPolygonCoordinates[1]; }
+                    if (enteredPolygonCoordinates[2] != null) { selectedNOTAM.PolygonSE = enteredPolygonCoordinates[2]; }
+                    if (enteredPolygonCoordinates[3] != null) { selectedNOTAM.PolygonSW = enteredPolygonCoordinates[3]; }
                 }
 
 
@@ -270,7 +270,7 @@ namespace Wildfire_ICS_Assist
         private void txtPolygonNW_Leave(object sender, EventArgs e)
         {
             Coordinate temp = CheckCoordinates((TextBox)sender, lblNWCoordinateOK);
-            if (temp != null)
+            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
             {
                 enteredPolygonCoordinates[0] = temp;
             }
@@ -280,7 +280,7 @@ namespace Wildfire_ICS_Assist
         private void txtPolygonNE_Leave(object sender, EventArgs e)
         {
             Coordinate temp = CheckCoordinates((TextBox)sender, lblNECoordinateOK);
-            if (temp != null)
+            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
             {
                 enteredPolygonCoordinates[1] = temp;
             }
@@ -290,7 +290,7 @@ namespace Wildfire_ICS_Assist
         private void txtPolygonSW_Leave(object sender, EventArgs e)
         {
             Coordinate temp = CheckCoordinates((TextBox)sender, lblSWCoordinateOK);
-            if (temp != null)
+            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
             {
                 enteredPolygonCoordinates[3] = temp;
             }
@@ -300,7 +300,7 @@ namespace Wildfire_ICS_Assist
         private void txtPolygonSE_Leave(object sender, EventArgs e)
         {
             Coordinate temp = CheckCoordinates((TextBox)sender, lblSECoordinateOK);
-            if (temp != null)
+            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
             {
                 enteredPolygonCoordinates[2] = temp;
             }

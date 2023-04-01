@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 
+
 namespace Wildfire_ICS_Assist
 {
     public partial class AircraftEditForm : Form
@@ -48,6 +49,13 @@ namespace Wildfire_ICS_Assist
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private void btnMedivacHelpNew_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int durationMilliseconds = 10000;
+            toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
         }
     }
 }

@@ -98,7 +98,6 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddSaved.Location = new System.Drawing.Point(522, 27);
@@ -141,7 +140,6 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 343);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -193,6 +191,7 @@
             // rbBLS
             // 
             this.rbBLS.AutoSize = true;
+            this.rbBLS.Checked = true;
             this.rbBLS.Location = new System.Drawing.Point(207, 203);
             this.rbBLS.Name = "rbBLS";
             this.rbBLS.Size = new System.Drawing.Size(229, 28);
@@ -208,7 +207,6 @@
             this.rbALS.Name = "rbALS";
             this.rbALS.Size = new System.Drawing.Size(271, 28);
             this.rbALS.TabIndex = 109;
-            this.rbALS.TabStop = true;
             this.rbALS.Text = "Advanced Life Support (ALS)";
             this.rbALS.UseVisualStyleBackColor = true;
             // 
@@ -248,6 +246,7 @@
             this.txtOrganization.Name = "txtOrganization";
             this.txtOrganization.Size = new System.Drawing.Size(499, 29);
             this.txtOrganization.TabIndex = 105;
+            this.txtOrganization.TextChanged += new System.EventHandler(this.txtOrganization_TextChanged);
             // 
             // label5
             // 
@@ -291,7 +290,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(191, 29);
             this.label6.TabIndex = 100;
-            this.label6.Text = "Medivac Service";
+            this.label6.Text = "Medivac Service*";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // chkSaveForLater
@@ -318,7 +317,6 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(504, 275);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);

@@ -30,7 +30,7 @@ namespace WF_ICS_ClassLibrary.Models
             List<SummaryStat> stats = new List<SummaryStat>();
             OperationalPeriod period = incident.AllOperationalPeriods.First(o=>o.PeriodNumber == OpPeriod); 
 
-            stats.Add(new SummaryStat("Person Hours", period.PeriodStart.ToString(Globals.DateFormat) + " - " + period.PeriodEnd.ToString(Globals.DateFormat), "This assumes everyone was working during the operational periods during which they were checked in.  If tere are times of reduced activity, or operational periods where not all chcecked in resources are used this number will be inaccurate."));
+            stats.Add(new SummaryStat("Person Hours", period.PeriodStart.ToString(Globals.DateFormat) + " - " + period.PeriodEnd.ToString(Globals.DateFormat), "This assumes everyone was working during the operational periods during which they were checked in.  If there are times of reduced activity, or operational periods where not all chcecked in resources are used this number will be inaccurate."));
 
             List<OperationalPeriod> periodsToDate = incident.AllOperationalPeriods.Where(o => o.PeriodNumber <= OpPeriod).ToList();
             foreach(CheckInRecord rec in incident.AllCheckInRecords.Where(o=>o.CheckInDate < period.PeriodEnd && o.IsPerson))

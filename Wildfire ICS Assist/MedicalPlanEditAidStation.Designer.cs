@@ -178,13 +178,12 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Medical Aid Station";
+            this.label1.Text = "Medical Aid Station*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
             this.btnSave.Location = new System.Drawing.Point(458, 7);
             this.btnSave.Name = "btnSave";
@@ -199,7 +198,6 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(8, 7);
             this.btnCancel.Name = "btnCancel";

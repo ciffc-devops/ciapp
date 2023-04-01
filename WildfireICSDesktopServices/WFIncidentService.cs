@@ -1855,10 +1855,14 @@ namespace WildfireICSDesktopServices
         }
         public void UpsertDemobRecord(DemobilizationRecord record, string source = "local")
         {
+            if(record.SignInRecordID == Guid.Empty)
+            {
+
+            }
             record.LastUpdatedUTC = DateTime.UtcNow;
             if (_currentIncident.AllDemobilizationRecords.Any(o => o.ID == record.ID || o.OpPeriod == record.OpPeriod))
             {
-                _currentIncident.AllDemobilizationRecords = _currentIncident.AllDemobilizationRecords.Where(o => o.ID != record.ID && o.OpPeriod != record.OpPeriod).ToList();
+                _currentIncident.AllDemobilizationRecords = _currentIncident.AllDemobilizationRecords.Where(o => o.ID != record.ID).ToList();
             }
             _currentIncident.AllDemobilizationRecords.Add(record);
 
@@ -1866,6 +1870,9 @@ namespace WildfireICSDesktopServices
             {
                 _currentIncident.AllCheckInRecords.First(o => o.SignInRecordID == record.SignInRecordID).CheckOutDate = record.DemobDate;
                 UpsertCheckInRecord(_currentIncident.AllCheckInRecords.First(o => o.SignInRecordID == record.SignInRecordID));
+            } else
+            {
+
             }
 
             //If this is a crew, demob everyone in it with the same values
@@ -1877,9 +1884,9 @@ namespace WildfireICSDesktopServices
                     DemobilizationRecord demobRec = record.Clone();
                     demobRec.ResourceID = res.ResourceID;
                     demobRec.ID = Guid.NewGuid();
-                    if (_currentIncident.AllCheckInRecords.Any(o => o.ResourceID == res.ID && o.ParentRecordID == record.SignInRecordID))
+                    if (_currentIncident.AllCheckInRecords.Any(o => o.ResourceID == res.ResourceID && o.ParentRecordID == record.SignInRecordID))
                     {
-                        demobRec.SignInRecordID = _currentIncident.AllCheckInRecords.First(o => o.ResourceID == res.ID && o.ParentRecordID == record.SignInRecordID).SignInRecordID;
+                        demobRec.SignInRecordID = _currentIncident.AllCheckInRecords.First(o => o.ResourceID == res.ResourceID && o.ParentRecordID == record.SignInRecordID).SignInRecordID;
                     }
                     else
                     {

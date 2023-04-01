@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AircraftEntryForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -58,6 +59,7 @@
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -119,13 +121,14 @@
             this.btnMedivacHelpSaved.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMedivacHelpSaved.BackgroundImage")));
             this.btnMedivacHelpSaved.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMedivacHelpSaved.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnMedivacHelpSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnMedivacHelpSaved.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnMedivacHelpSaved.Location = new System.Drawing.Point(409, 147);
             this.btnMedivacHelpSaved.Name = "btnMedivacHelpSaved";
             this.btnMedivacHelpSaved.Size = new System.Drawing.Size(25, 25);
             this.btnMedivacHelpSaved.TabIndex = 122;
             this.btnMedivacHelpSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.btnMedivacHelpSaved, "If checked, this aircraft\'s information will be summarized in the Medivac field (" +
+        "4) on the Air Operations Summary form.");
             this.btnMedivacHelpSaved.UseVisualStyleBackColor = false;
             this.btnMedivacHelpSaved.Click += new System.EventHandler(this.btnMedivacHelpNew_Click);
             // 
@@ -207,7 +210,6 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.Location = new System.Drawing.Point(710, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
@@ -248,7 +250,6 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 487);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -292,13 +293,14 @@
             this.btnMedivacHelpNew.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMedivacHelpNew.BackgroundImage")));
             this.btnMedivacHelpNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMedivacHelpNew.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnMedivacHelpNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnMedivacHelpNew.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnMedivacHelpNew.Location = new System.Drawing.Point(480, 377);
             this.btnMedivacHelpNew.Name = "btnMedivacHelpNew";
             this.btnMedivacHelpNew.Size = new System.Drawing.Size(25, 25);
             this.btnMedivacHelpNew.TabIndex = 115;
             this.btnMedivacHelpNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.btnMedivacHelpNew, "If checked, this aircraft\'s information will be summarized in the Medivac field (" +
+        "4) on the Air Operations Summary form.");
             this.btnMedivacHelpNew.UseVisualStyleBackColor = false;
             this.btnMedivacHelpNew.Click += new System.EventHandler(this.btnMedivacHelpNew_Click);
             // 
@@ -420,7 +422,6 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(629, 419);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
@@ -490,5 +491,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox chkSavedIsMedivac;
         private System.Windows.Forms.Button btnMedivacHelpNew;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -30,10 +30,10 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvSafetyNotes = new System.Windows.Forms.DataGridView();
+            this.colSummaryLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.colSummaryLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,8 +60,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
-            this.splitContainer1.Size = new System.Drawing.Size(1467, 831);
-            this.splitContainer1.SplitterDistance = 759;
+            this.splitContainer1.Size = new System.Drawing.Size(621, 359);
+            this.splitContainer1.SplitterDistance = 284;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -81,8 +81,16 @@
             this.dgvSafetyNotes.RowHeadersVisible = false;
             this.dgvSafetyNotes.RowTemplate.Height = 35;
             this.dgvSafetyNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSafetyNotes.Size = new System.Drawing.Size(1467, 759);
+            this.dgvSafetyNotes.Size = new System.Drawing.Size(621, 284);
             this.dgvSafetyNotes.TabIndex = 1;
+            // 
+            // colSummaryLine
+            // 
+            this.colSummaryLine.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSummaryLine.DataPropertyName = "SummaryLine";
+            this.colSummaryLine.HeaderText = "Safety Message / Plan";
+            this.colSummaryLine.Name = "colSummaryLine";
+            this.colSummaryLine.ReadOnly = true;
             // 
             // btnDelete
             // 
@@ -123,23 +131,16 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // colSummaryLine
-            // 
-            this.colSummaryLine.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSummaryLine.DataPropertyName = "SummaryLine";
-            this.colSummaryLine.HeaderText = "Safety Message / Plan";
-            this.colSummaryLine.Name = "colSummaryLine";
-            this.colSummaryLine.ReadOnly = true;
-            // 
             // SavedSafetyNotesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(1467, 831);
+            this.ClientSize = new System.Drawing.Size(621, 359);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(456, 331);
             this.Name = "SavedSafetyNotesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Saved Safety Messages / Plans";

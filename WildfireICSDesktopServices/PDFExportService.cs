@@ -3744,12 +3744,12 @@ namespace WildfireICSDesktopServices
                         counts.Add(new KindTypeWithCounts("No Kind Given", "No Type Given"));
 
                     }
-                    else if (string.IsNullOrEmpty(item.Resource.Kind) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals(item.Resource.Type)))
+                    else if (item.Resource != null && string.IsNullOrEmpty(item.Resource.Kind) && !string.IsNullOrEmpty(item.Resource.Type) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals(item.Resource.Type)))
                     {
                         counts.Add(new KindTypeWithCounts("No Kind Given", item.Resource.Type));
 
                     }
-                    else if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals("No Type Given")))
+                    else if (string.IsNullOrEmpty(item.Resource.Type) && !string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals("No Type Given")))
                     {
                         counts.Add(new KindTypeWithCounts(item.Resource.Kind, "No Type Given"));
                     }

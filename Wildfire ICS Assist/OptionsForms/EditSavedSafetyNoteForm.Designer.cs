@@ -81,7 +81,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(192, 29);
             this.label2.TabIndex = 119;
-            this.label2.Text = "Message/Plan Name";
+            this.label2.Text = "Message/Plan Name*";
             // 
             // txtMessage
             // 
@@ -103,13 +103,12 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(652, 24);
             this.label1.TabIndex = 118;
-            this.label1.Text = "Safety Message / Expanded Safety Message, Plan, Site Safety Plan";
+            this.label1.Text = "Safety Message / Expanded Safety Message, Plan, Site Safety Plan*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
             this.btnSave.Location = new System.Drawing.Point(551, 6);
             this.btnSave.Margin = new System.Windows.Forms.Padding(6);
@@ -124,7 +123,6 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 6);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);

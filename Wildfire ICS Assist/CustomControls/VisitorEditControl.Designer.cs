@@ -223,6 +223,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "VisitorEditControl";
             this.Size = new System.Drawing.Size(539, 235);
+            this.Load += new System.EventHandler(this.VisitorEditControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

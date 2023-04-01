@@ -181,7 +181,8 @@ namespace WF_ICS_ClassLibrary.Models
             TimeSpan ts = LastDayOnIncident - EndOfOp;
             DaysTillTimeOut = Convert.ToInt32( Math.Round(ts.TotalDays, 0));
             if(Record.CheckOutDate.Date < EndOfOp.Date || Record.LastDayOnIncident.Date < EndOfOp.Date) { _StatusText = "Checked-Out"; } 
-            else { _StatusText = "Actvie"; }
+            else if (Record.CheckOutDate.Date == EndOfOp.Date) { _StatusText = "Demobilizing"; }
+            else { _StatusText = "Active"; }
         }
     }
 
@@ -263,7 +264,10 @@ namespace WF_ICS_ClassLibrary.Models
                 //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
                 Personnel p = null; if (item.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)item.Resource; }
                 Vehicle v = null; if (item.Resource.GetType().Name.Equals("Vehicle")) { v = (Vehicle)item.Resource; }
-                OperationalSubGroup c = null; if (item.Resource.GetType().Name.Equals("OperationalSubGroup")) { c = (OperationalSubGroup)item.Resource; }
+                OperationalSubGroup c = null; 
+                if (item.Resource.GetType().Name.Equals("OperationalSubGroup")) { c = (OperationalSubGroup)item.Resource; }
+                else if (item.Resource.ParentResourceID != Guid.Empty && records.Any(o=>o.Resource.ID == item.Resource.ParentResourceID)) { c = records.First(o => o.Resource.ID == item.Resource.ParentResourceID).Resource as OperationalSubGroup; }
+
 
                 csv.Append("\""); csv.Append(item.Resource.UniqueIDNumWithPrefix); csv.Append("\""); csv.Append(delimiter);
                 if (p != null)
@@ -337,7 +341,8 @@ namespace WF_ICS_ClassLibrary.Models
 
                 csv.Append("\""); csv.Append(item.Resource.Kind); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Resource.Type); csv.Append("\""); csv.Append(delimiter);
-                csv.Append("Check-In Location"); csv.Append(delimiter);
+                csv.Append(AddToCSVIfPossible(item, new Guid("b4c8332b-ddf3-4d4c-9c83-2c62328061fe"), delimiter));
+
                 csv.Append("\""); csv.Append(item.Record.CheckInDate.ToString(Globals.DateFormat)); csv.Append("\""); csv.Append(delimiter);
 
                 csv.Append("\""); csv.Append(item.Record.CheckInDate.ToString("HH:mm")); csv.Append("\""); csv.Append(delimiter);
@@ -731,7 +736,8 @@ namespace WF_ICS_ClassLibrary.Models
         {
             List<CheckInInfoField> fields = new List<CheckInInfoField>
             {
-                new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individual's weight ", "String", "Individual Info", false, true, false,true,false,true,false, "Enter the individuals seat weight. "),
+                new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individual's weight ", "String", "Individual Info", false, true, false,false,false,true,false, "Enter the individuals seat weight. "),
+                
                 new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Unique Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,true, "Enter the crews unique agency identifer i.e. RU01, Flathead Unit crew, Dryden IA, etc. "),
                 new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "CIFFC Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,false, "Enter the CIFFC crew identifier if the crew is imported through CIFFC i.e C-30"),
                 //new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info (cell/email)", "String", "Crew Info", false, false, false,true,false,false,true, ""),
@@ -764,10 +770,10 @@ namespace WF_ICS_ClassLibrary.Models
         {
             switch (FieldID.ToString())
             {
-                case "b4c8332b-ddf3-4d4c-9c83-2c62328061fe": return new List<string> { "", "ICP", "Base", "Camp", "Staging", "Heli-Base", "free text" };
+                case "b4c8332b-ddf3-4d4c-9c83-2c62328061fe": return new List<string> { "", "ICP", "Base", "Camp", "Staging", "Heli-Base" };
                 case "7a39df77-cb16-463c-812b-573bfa97de5d": return new List<string> { "", "Incident Camp", "Other" };
                 case "a4f1cb0e-9774-4bdc-aeac-96976aceba89": return new List<string> { "", "Aircraft", "Bus", "Vehicle" };
-                case "99c4d8c6-3b39-42f1-af6f-33525b2da4e7": return new List<string> { "", "Research", "maintenance", "servicing equipment", "servicing facilities", "observing", "free text" };
+                case "99c4d8c6-3b39-42f1-af6f-33525b2da4e7": return new List<string> { "", "Research", "Maintenance", "Servicing equipment", "Servicing facilities", "Observing" };
                 default:
                     return new List<string>();
             }
