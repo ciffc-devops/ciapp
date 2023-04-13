@@ -28,9 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralMessagesForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rbThisOpOnly = new System.Windows.Forms.RadioButton();
+            this.rbAllOps = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.rbOutstandingMessages = new System.Windows.Forms.RadioButton();
             this.rbAllMessages = new System.Windows.Forms.RadioButton();
             this.btnFormInfo = new System.Windows.Forms.Button();
@@ -46,23 +52,17 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.rbThisOpOnly = new System.Windows.Forms.RadioButton();
-            this.rbAllOps = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -84,9 +84,73 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1467, 831);
+            this.splitContainer1.Size = new System.Drawing.Size(1235, 442);
             this.splitContainer1.SplitterDistance = 55;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.rbThisOpOnly);
+            this.panel2.Controls.Add(this.rbAllOps);
+            this.panel2.Location = new System.Drawing.Point(582, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(506, 50);
+            this.panel2.TabIndex = 93;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(121, 24);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "OP PERIOD";
+            // 
+            // rbThisOpOnly
+            // 
+            this.rbThisOpOnly.AutoSize = true;
+            this.rbThisOpOnly.Checked = true;
+            this.rbThisOpOnly.Location = new System.Drawing.Point(304, 10);
+            this.rbThisOpOnly.Name = "rbThisOpOnly";
+            this.rbThisOpOnly.Size = new System.Drawing.Size(199, 28);
+            this.rbThisOpOnly.TabIndex = 11;
+            this.rbThisOpOnly.TabStop = true;
+            this.rbThisOpOnly.Text = "This Op Period Only";
+            this.rbThisOpOnly.UseVisualStyleBackColor = true;
+            this.rbThisOpOnly.CheckedChanged += new System.EventHandler(this.rbThisOpOnly_CheckedChanged);
+            // 
+            // rbAllOps
+            // 
+            this.rbAllOps.AutoSize = true;
+            this.rbAllOps.Location = new System.Drawing.Point(149, 10);
+            this.rbAllOps.Name = "rbAllOps";
+            this.rbAllOps.Size = new System.Drawing.Size(149, 28);
+            this.rbAllOps.TabIndex = 10;
+            this.rbAllOps.Text = "All Op Periods";
+            this.rbAllOps.UseVisualStyleBackColor = true;
+            this.rbAllOps.CheckedChanged += new System.EventHandler(this.rbAllOps_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.rbOutstandingMessages);
+            this.panel1.Controls.Add(this.rbAllMessages);
+            this.panel1.Location = new System.Drawing.Point(8, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(554, 50);
+            this.panel1.TabIndex = 92;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(4, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(161, 24);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "REPLY STATUS";
             // 
             // rbOutstandingMessages
             // 
@@ -117,11 +181,10 @@
             this.btnFormInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFormInfo.BackColor = System.Drawing.Color.White;
             this.btnFormInfo.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnFormInfo.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnFormInfo.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
             this.btnFormInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFormInfo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnFormInfo.Location = new System.Drawing.Point(1325, 9);
+            this.btnFormInfo.Location = new System.Drawing.Point(1093, 9);
             this.btnFormInfo.Name = "btnFormInfo";
             this.btnFormInfo.Size = new System.Drawing.Size(130, 40);
             this.btnFormInfo.TabIndex = 9;
@@ -151,8 +214,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer2.Panel2.Controls.Add(this.btnAdd);
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
-            this.splitContainer2.Size = new System.Drawing.Size(1467, 772);
-            this.splitContainer2.SplitterDistance = 700;
+            this.splitContainer2.Size = new System.Drawing.Size(1235, 383);
+            this.splitContainer2.SplitterDistance = 311;
             this.splitContainer2.TabIndex = 0;
             // 
             // dgvLog
@@ -174,7 +237,7 @@
             this.dgvLog.RowHeadersVisible = false;
             this.dgvLog.RowTemplate.Height = 30;
             this.dgvLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLog.Size = new System.Drawing.Size(1467, 700);
+            this.dgvLog.Size = new System.Drawing.Size(1235, 311);
             this.dgvLog.TabIndex = 0;
             this.dgvLog.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLog_CellDoubleClick);
             this.dgvLog.SelectionChanged += new System.EventHandler(this.dgvLog_SelectionChanged);
@@ -183,9 +246,9 @@
             // 
             this.colDateSent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDateSent.DataPropertyName = "DateSent";
-            dataGridViewCellStyle2.Format = "yyyy-MMM-dd HH:mm";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colDateSent.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "yyyy-MMM-dd HH:mm";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colDateSent.DefaultCellStyle = dataGridViewCellStyle1;
             this.colDateSent.HeaderText = "Date/Time";
             this.colDateSent.Name = "colDateSent";
             this.colDateSent.ReadOnly = true;
@@ -233,7 +296,7 @@
             this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
             this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPrint.Location = new System.Drawing.Point(1246, 6);
+            this.btnPrint.Location = new System.Drawing.Point(1014, 6);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(209, 52);
             this.btnPrint.TabIndex = 91;
@@ -302,95 +365,33 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.rbOutstandingMessages);
-            this.panel1.Controls.Add(this.rbAllMessages);
-            this.panel1.Location = new System.Drawing.Point(8, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(554, 50);
-            this.panel1.TabIndex = 92;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.rbThisOpOnly);
-            this.panel2.Controls.Add(this.rbAllOps);
-            this.panel2.Location = new System.Drawing.Point(582, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(506, 50);
-            this.panel2.TabIndex = 93;
-            // 
-            // rbThisOpOnly
-            // 
-            this.rbThisOpOnly.AutoSize = true;
-            this.rbThisOpOnly.Checked = true;
-            this.rbThisOpOnly.Location = new System.Drawing.Point(304, 10);
-            this.rbThisOpOnly.Name = "rbThisOpOnly";
-            this.rbThisOpOnly.Size = new System.Drawing.Size(199, 28);
-            this.rbThisOpOnly.TabIndex = 11;
-            this.rbThisOpOnly.TabStop = true;
-            this.rbThisOpOnly.Text = "This Op Period Only";
-            this.rbThisOpOnly.UseVisualStyleBackColor = true;
-            this.rbThisOpOnly.CheckedChanged += new System.EventHandler(this.rbThisOpOnly_CheckedChanged);
-            // 
-            // rbAllOps
-            // 
-            this.rbAllOps.AutoSize = true;
-            this.rbAllOps.Location = new System.Drawing.Point(149, 10);
-            this.rbAllOps.Name = "rbAllOps";
-            this.rbAllOps.Size = new System.Drawing.Size(149, 28);
-            this.rbAllOps.TabIndex = 10;
-            this.rbAllOps.Text = "All Op Periods";
-            this.rbAllOps.UseVisualStyleBackColor = true;
-            this.rbAllOps.CheckedChanged += new System.EventHandler(this.rbAllOps_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(161, 24);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "REPLY STATUS";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 24);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "OP PERIOD";
-            // 
             // GeneralMessagesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(1467, 831);
+            this.ClientSize = new System.Drawing.Size(1235, 442);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(1251, 481);
             this.Name = "GeneralMessagesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "General Messages";
             this.Load += new System.EventHandler(this.GeneralMessagesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }

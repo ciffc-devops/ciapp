@@ -80,12 +80,12 @@
             this.cboResourceVariety = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnPrinttAll211sToDate = new System.Windows.Forms.Button();
+            this.btnLogisticsOverview = new System.Windows.Forms.Button();
             this.btnExportSignInToCSV = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnDemob = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnStartCheckIn = new System.Windows.Forms.Button();
-            this.btnLogisticsOverview = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -796,6 +796,19 @@
             this.btnPrinttAll211sToDate.UseVisualStyleBackColor = true;
             this.btnPrinttAll211sToDate.Click += new System.EventHandler(this.btnPrinttAll211sToDate_Click);
             // 
+            // btnLogisticsOverview
+            // 
+            this.btnLogisticsOverview.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnLogisticsOverview.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnLogisticsOverview.Location = new System.Drawing.Point(463, 3);
+            this.btnLogisticsOverview.Name = "btnLogisticsOverview";
+            this.btnLogisticsOverview.Size = new System.Drawing.Size(150, 66);
+            this.btnLogisticsOverview.TabIndex = 51;
+            this.btnLogisticsOverview.Text = "Logistics Overview";
+            this.btnLogisticsOverview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLogisticsOverview.UseVisualStyleBackColor = true;
+            this.btnLogisticsOverview.Click += new System.EventHandler(this.btnLogisticsOverview_Click);
+            // 
             // btnExportSignInToCSV
             // 
             this.btnExportSignInToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -862,19 +875,6 @@
             this.btnStartCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnStartCheckIn.UseVisualStyleBackColor = true;
             this.btnStartCheckIn.Click += new System.EventHandler(this.btnStartCheckIn_Click);
-            // 
-            // btnLogisticsOverview
-            // 
-            this.btnLogisticsOverview.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnLogisticsOverview.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogisticsOverview.Location = new System.Drawing.Point(463, 3);
-            this.btnLogisticsOverview.Name = "btnLogisticsOverview";
-            this.btnLogisticsOverview.Size = new System.Drawing.Size(150, 66);
-            this.btnLogisticsOverview.TabIndex = 51;
-            this.btnLogisticsOverview.Text = "Logistics Overview";
-            this.btnLogisticsOverview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLogisticsOverview.UseVisualStyleBackColor = true;
-            this.btnLogisticsOverview.Click += new System.EventHandler(this.btnLogisticsOverview_Click);
             // 
             // svdExport
             // 

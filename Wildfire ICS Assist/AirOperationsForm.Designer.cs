@@ -123,7 +123,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.datSunrise);
             this.splitContainer1.Panel2.Controls.Add(this.txtRemarks);
             this.splitContainer1.Size = new System.Drawing.Size(1351, 582);
-            this.splitContainer1.SplitterDistance = 399;
+            this.splitContainer1.SplitterDistance = 396;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -144,7 +144,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1351, 399);
+            this.splitContainer2.Size = new System.Drawing.Size(1351, 396);
             this.splitContainer2.SplitterDistance = 449;
             this.splitContainer2.TabIndex = 2;
             // 
@@ -152,7 +152,7 @@
             // 
             this.btnDeleteAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteAircraft.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteAircraft.Location = new System.Drawing.Point(235, 323);
+            this.btnDeleteAircraft.Location = new System.Drawing.Point(235, 320);
             this.btnDeleteAircraft.Name = "btnDeleteAircraft";
             this.btnDeleteAircraft.Size = new System.Drawing.Size(113, 73);
             this.btnDeleteAircraft.TabIndex = 53;
@@ -165,7 +165,7 @@
             // 
             this.btnEditAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditAircraft.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditAircraft.Location = new System.Drawing.Point(116, 323);
+            this.btnEditAircraft.Location = new System.Drawing.Point(116, 320);
             this.btnEditAircraft.Name = "btnEditAircraft";
             this.btnEditAircraft.Size = new System.Drawing.Size(113, 73);
             this.btnEditAircraft.TabIndex = 52;
@@ -178,7 +178,7 @@
             // 
             this.btnAddAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddAircraft.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddAircraft.Location = new System.Drawing.Point(8, 323);
+            this.btnAddAircraft.Location = new System.Drawing.Point(8, 320);
             this.btnAddAircraft.Name = "btnAddAircraft";
             this.btnAddAircraft.Size = new System.Drawing.Size(102, 73);
             this.btnAddAircraft.TabIndex = 51;
@@ -222,7 +222,7 @@
             this.dgvAircraft.RowHeadersVisible = false;
             this.dgvAircraft.RowTemplate.Height = 35;
             this.dgvAircraft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAircraft.Size = new System.Drawing.Size(435, 273);
+            this.dgvAircraft.Size = new System.Drawing.Size(435, 270);
             this.dgvAircraft.TabIndex = 1;
             this.dgvAircraft.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAircraft_CellDoubleClick);
             this.dgvAircraft.SelectionChanged += new System.EventHandler(this.dgvAircraft_SelectionChanged);
@@ -324,7 +324,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.btnEditComms);
             this.splitContainer3.Panel2.Controls.Add(this.btnAddComms);
             this.splitContainer3.Panel2.Controls.Add(this.label2);
-            this.splitContainer3.Size = new System.Drawing.Size(898, 399);
+            this.splitContainer3.Size = new System.Drawing.Size(898, 396);
             this.splitContainer3.SplitterDistance = 448;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -336,14 +336,14 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(8, 41);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(437, 276);
+            this.treeOrgChart.Size = new System.Drawing.Size(437, 273);
             this.treeOrgChart.TabIndex = 56;
             // 
             // btnDeleteRole
             // 
             this.btnDeleteRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteRole.Location = new System.Drawing.Point(314, 323);
+            this.btnDeleteRole.Location = new System.Drawing.Point(314, 320);
             this.btnDeleteRole.Name = "btnDeleteRole";
             this.btnDeleteRole.Size = new System.Drawing.Size(123, 73);
             this.btnDeleteRole.TabIndex = 60;
@@ -357,7 +357,7 @@
             // 
             this.btnEditRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditRole.Location = new System.Drawing.Point(219, 323);
+            this.btnEditRole.Location = new System.Drawing.Point(219, 320);
             this.btnEditRole.Name = "btnEditRole";
             this.btnEditRole.Size = new System.Drawing.Size(89, 73);
             this.btnEditRole.TabIndex = 59;
@@ -371,7 +371,7 @@
             // 
             this.btnAssignRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAssignRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
-            this.btnAssignRole.Location = new System.Drawing.Point(101, 323);
+            this.btnAssignRole.Location = new System.Drawing.Point(101, 320);
             this.btnAssignRole.Name = "btnAssignRole";
             this.btnAssignRole.Size = new System.Drawing.Size(112, 73);
             this.btnAssignRole.TabIndex = 58;
@@ -384,7 +384,7 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAdd.Location = new System.Drawing.Point(3, 323);
+            this.btnAdd.Location = new System.Drawing.Point(3, 320);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(92, 73);
             this.btnAdd.TabIndex = 57;
@@ -426,7 +426,7 @@
             this.dgvCommsItems.RowHeadersVisible = false;
             this.dgvCommsItems.RowTemplate.Height = 30;
             this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommsItems.Size = new System.Drawing.Size(421, 276);
+            this.dgvCommsItems.Size = new System.Drawing.Size(421, 273);
             this.dgvCommsItems.TabIndex = 59;
             // 
             // colCommsSystem
@@ -485,7 +485,7 @@
             // 
             this.btnDeleteComms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteComms.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteComms.Location = new System.Drawing.Point(240, 323);
+            this.btnDeleteComms.Location = new System.Drawing.Point(240, 320);
             this.btnDeleteComms.Name = "btnDeleteComms";
             this.btnDeleteComms.Size = new System.Drawing.Size(113, 73);
             this.btnDeleteComms.TabIndex = 58;
@@ -498,7 +498,7 @@
             // 
             this.btnEditComms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditComms.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditComms.Location = new System.Drawing.Point(121, 323);
+            this.btnEditComms.Location = new System.Drawing.Point(121, 320);
             this.btnEditComms.Name = "btnEditComms";
             this.btnEditComms.Size = new System.Drawing.Size(113, 73);
             this.btnEditComms.TabIndex = 57;
@@ -511,7 +511,7 @@
             // 
             this.btnAddComms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddComms.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddComms.Location = new System.Drawing.Point(13, 323);
+            this.btnAddComms.Location = new System.Drawing.Point(13, 320);
             this.btnAddComms.Name = "btnAddComms";
             this.btnAddComms.Size = new System.Drawing.Size(102, 73);
             this.btnAddComms.TabIndex = 56;
@@ -583,7 +583,7 @@
             // 
             // btnNOTAM
             // 
-            this.btnNOTAM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNOTAM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNOTAM.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.btnNOTAM.Image = ((System.Drawing.Image)(resources.GetObject("btnNOTAM.Image")));
             this.btnNOTAM.ImeMode = System.Windows.Forms.ImeMode.NoControl;
