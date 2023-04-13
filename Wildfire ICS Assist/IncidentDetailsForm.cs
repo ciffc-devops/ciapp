@@ -3005,6 +3005,11 @@ namespace Wildfire_ICS_Assist
         {
             OpenCheckedInResourcesForm();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

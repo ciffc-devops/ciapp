@@ -22,6 +22,8 @@ namespace Wildfire_ICS_Assist.CustomControls
         private int _ExpandedHeight = 300;
         private bool _CollapseLeft = true;
         private bool _CurrentlyCollapsed = true;
+        private Color _BackgroundColorCollapsed = Program.FormAccent;
+
 
         [Description("Text displayed at the top of the panel"), Category("Appearance")]
         public string TitleText { get => lblTitle.Text; set => lblTitle.Text = value; }
@@ -46,6 +48,9 @@ namespace Wildfire_ICS_Assist.CustomControls
         [Description("The width of the panel when collapsed"), Category("Layout")]
         public int ExpandedHeight { get => _ExpandedHeight; set => _ExpandedHeight = value; }
 
+        [Description("The background color to be used when collapsed. It will default to Form Accent if nothing is provided"), Category("Appearance")]
+        public Color BackgroundColorCollapsed { get => _BackgroundColorCollapsed; set => _BackgroundColorCollapsed = value; }
+
 
         public event EventHandler PanelCollapsed;
         public event EventHandler PanelExpanded;
@@ -64,8 +69,8 @@ namespace Wildfire_ICS_Assist.CustomControls
             this.Height = CollapsedHeight;
             this.Width = CollapsedWidth;
 
-            this.BackColor = Program.FormAccent;// Color.FromArgb(219, 218, 204);
-            btnExpandCollapse.BackColor = Color.White;
+            this.BackColor = BackgroundColorCollapsed;// Color.FromArgb(219, 218, 204);
+            btnExpandCollapse.BackColor = BackgroundColorCollapsed; // Color.FromArgb(219, 218, 204); 
 
             if (!CollapseLeft && !CurrentlyCollapsed)
             {
@@ -123,7 +128,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
             this.Height = ExpandedHeight;
             this.Width = ExpandedWidth;
-            this.BackColor = Color.White;
+            btnExpandCollapse.BackColor = BackgroundColorCollapsed; // Color.FromArgb(219, 218, 204); 
 
             btnExpandCollapse.BackgroundImage = Properties.Resources.glyphicons_basic_222_chevron_up_3x;
             btnExpandCollapse.BackColor = Program.FormAccent; // Color.FromArgb(219, 218, 204); 
