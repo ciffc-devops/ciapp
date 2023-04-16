@@ -1238,6 +1238,7 @@
             // cpOtherTools
             // 
             this.cpOtherTools.BackColor = System.Drawing.Color.White;
+            this.cpOtherTools.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpOtherTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpOtherTools.CollapsedHeight = 40;
             this.cpOtherTools.CollapsedWidth = 349;
@@ -1277,6 +1278,7 @@
             // cpIncidentActionPlan
             // 
             this.cpIncidentActionPlan.BackColor = System.Drawing.Color.White;
+            this.cpIncidentActionPlan.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpIncidentActionPlan.CollapsedHeight = 40;
             this.cpIncidentActionPlan.CollapsedWidth = 485;

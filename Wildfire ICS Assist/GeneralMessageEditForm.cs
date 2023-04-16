@@ -216,7 +216,7 @@ namespace Wildfire_ICS_Assist
                 {
                     txtReplyName.BackColor = Program.GoodColor; txtReplyPosition.BackColor = Program.GoodColor;
                 }
-            } else { txtReply.BackColor = Program.StandardControLColor; }
+            } else { txtReply.BackColor = Program.StandardTextboxColor; }
 
             return isValid;
         }

@@ -149,7 +149,7 @@ namespace Wildfire_ICS_Assist
         public static Color FormAccent { get => Color.FromArgb(219, 218, 204); }
         public static Color ErrorColor { get => Color.LightCoral; }
         public static Color GoodColor { get => Color.LightSkyBlue; }
-        public static Color StandardControLColor { get => System.Drawing.SystemColors.Window; }
+        public static Color StandardTextboxColor { get => System.Drawing.SystemColors.Window; }
 
         public static int PNumMin { get => _PNumMin; set => _PNumMin = value; }
         public static int PNumMax { get => _PNumMax; set => _PNumMax = value; }
