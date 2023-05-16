@@ -891,7 +891,7 @@ namespace Wildfire_ICS_Assist
             if (tasknamechanged) { CurrentIncident.TaskName = txtTaskName.Text.Trim(); }
 
             bool tasknumberchanged = !CurrentIncident.TaskNumber.EqualsWithNull(txtTaskNumber.Text.Trim());
-            if (tasknumberchanged && validateTaskNumber()) { CurrentIncident.TaskNumber = txtTaskNumber.Text.Trim(); }
+            if (tasknumberchanged ) { CurrentIncident.TaskNumber = txtTaskNumber.Text.Trim(); }
 
             if (tasknamechanged || tasknumberchanged)
             {
