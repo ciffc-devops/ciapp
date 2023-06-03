@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="D7B53204-CFB7-48AE-91DC-B3077903C096" Name="Canadian Incident Action Plan Program" Language="1033" Version="1.0.0.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
+	<Product Id="F5992DD5-4B82-4907-B80E-5DFD0E2952D3" Name="Canadian Incident Action Plan Program" Language="1033" Version="1.0.1.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
          Manufacturer='CIFFC' />
 
