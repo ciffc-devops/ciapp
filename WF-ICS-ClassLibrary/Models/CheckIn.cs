@@ -665,34 +665,33 @@ namespace WF_ICS_ClassLibrary.Models
         public static int GetNextUniqueNum(this WFIncident incident, string ResourceType, int lowerBound = 1, int upperBound = 10000)
         {
             int next = lowerBound;
+            List<IncidentResource> resList = new List<IncidentResource>();
+
             if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator") || ResourceType.Equals("Visitor"))
             {
-                if (incident.IncidentPersonnel.Any(o => o.PNum >= lowerBound && o.PNum <= upperBound))
-                {
-                    next = incident.IncidentPersonnel.Where(o => o.PNum >= lowerBound && o.PNum <= upperBound).OrderByDescending(o => o.PNum).First().PNum + 1;
-                }
+                resList.AddRange(incident.IncidentPersonnel.Where(o => o.PNum >= lowerBound && o.PNum <= upperBound).OrderBy(o=>o.UniqueIDNum));
+
             }
             else if (ResourceType.Equals("Vehicle"))
             {
-                if (incident.allVehicles.Any(o => !o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
-                {
-                    next = incident.allVehicles.Where(o => !o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
-                }
+                resList.AddRange(incident.allVehicles.Where(o => !o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderBy(o => o.UniqueIDNum));
+
             }
             else if (ResourceType.Equals("Equipment"))
             {
-                if (incident.allVehicles.Any(o => o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
-                {
-                    next = incident.allVehicles.Where(o => o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
-                }
+                resList.AddRange(incident.allVehicles.Where(o => o.IsEquipment && o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderBy(o => o.UniqueIDNum));
+
 
             }
             else if (ResourceType.Equals("Crew") || ResourceType.Equals("Heavy Equipment Crew"))
             {
-                if (incident.AllOperationalSubGroups.Any(o =>  o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound))
-                {
-                    next = incident.AllOperationalSubGroups.Where(o => o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderByDescending(o => o.UniqueIDNum).First().UniqueIDNum + 1;
-                }
+                resList.AddRange(incident.AllOperationalSubGroups.Where(o => o.UniqueIDNum >= lowerBound && o.UniqueIDNum <= upperBound).OrderBy(o => o.UniqueIDNum));
+            }
+
+            foreach (IncidentResource res in resList)
+            {
+                if (res.UniqueIDNum == next && (next + 1) < upperBound) { next++; } 
+                else { break; }
             }
 
             if (next >= lowerBound && next <= upperBound && incident.ConfirmResourceNumUnique(ResourceType, next)) { return next; }

@@ -374,7 +374,7 @@ namespace Wildfire_ICS_Assist
 
             }
 
-            if (_previousIndex >= 0) { checkInRecords = GetSortedList(checkInRecords, dgvResources.Columns[_previousIndex].Name, _sortDirection); }
+            if (_previousIndex >= 0 && dgvResources.Columns.Count > _previousIndex) { checkInRecords = GetSortedList(checkInRecords, dgvResources.Columns[_previousIndex].Name, _sortDirection); }
             dgvResources.DataSource = checkInRecords;
 
         }
@@ -454,13 +454,18 @@ namespace Wildfire_ICS_Assist
 
                 }
 
-                if (item.DaysTillTimeOut <= YellowNumber)
-                {
-                    row.Cells["colLastDay"].Style.BackColor = Color.Yellow;
-                }
                 if (item.DaysTillTimeOut <= RedNumber)
                 {
                     row.Cells["colLastDay"].Style.BackColor = Color.Red;
+                }
+                else if (item.DaysTillTimeOut <= YellowNumber)
+                {
+                    row.Cells["colLastDay"].Style.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    row.Cells["colLastDay"].Style.BackColor = Color.White;
+
                 }
 
             }
