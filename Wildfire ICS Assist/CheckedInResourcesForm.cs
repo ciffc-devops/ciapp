@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace Wildfire_ICS_Assist
 {
     public partial class CheckedInResourcesForm : Form
     {
+
+
         public CheckedInResourcesForm()
         {
             InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
@@ -71,10 +74,10 @@ namespace Wildfire_ICS_Assist
 
         private void Program_CheckInChanged(CheckInEventArgs e)
         {
-            
-                LoadResourcesList();
-                ConfirmResourceNumberAvailability();
-            
+
+            LoadResourcesList();
+            ConfirmResourceNumberAvailability();
+
         }
         private void Program_VehicleChanged(VehicleEventArgs e)
         {
@@ -84,9 +87,9 @@ namespace Wildfire_ICS_Assist
 
         private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
         {
-                LoadResourcesList();
-                ConfirmResourceNumberAvailability();
-            
+            LoadResourcesList();
+            ConfirmResourceNumberAvailability();
+
         }
 
         private void ConfirmResourceNumberAvailability()
@@ -103,17 +106,17 @@ namespace Wildfire_ICS_Assist
             else { lblPNumTitle.ForeColor = label1.ForeColor; }
 
             if (nextV > (VNumMax - 20)) { note.Append("You are running low on Vehicle (V) numbers, please add more before continuing to check resources in"); note.Append(Environment.NewLine); lblVNumTitle.ForeColor = Program.ErrorColor; }
-           else if (nextV < 0) { note.Append("You do not have any available Vehicle (V) numbers"); note.Append(Environment.NewLine); lblVNumTitle.ForeColor = Program.ErrorColor; } 
+            else if (nextV < 0) { note.Append("You do not have any available Vehicle (V) numbers"); note.Append(Environment.NewLine); lblVNumTitle.ForeColor = Program.ErrorColor; }
             else { lblVNumTitle.ForeColor = label1.ForeColor; }
 
 
             if (nextE > (ENumMax - 20)) { note.Append("You are running low on Equipment (E) numbers, please add more before continuing to check resources in"); note.Append(Environment.NewLine); lblENumTitle.ForeColor = Program.ErrorColor; }
-            else if (nextE < 0) { note.Append("You do not have any available Equipment (E) numbers"); note.Append(Environment.NewLine); lblENumTitle.ForeColor = Program.ErrorColor; } 
+            else if (nextE < 0) { note.Append("You do not have any available Equipment (E) numbers"); note.Append(Environment.NewLine); lblENumTitle.ForeColor = Program.ErrorColor; }
             else { lblENumTitle.ForeColor = label1.ForeColor; }
 
 
             if (nextC > (CNumMax - 20)) { note.Append("You are running low on Crew (C) numbers, please add more before continuing to check resources in"); note.Append(Environment.NewLine); lblCNumTitle.ForeColor = Program.ErrorColor; }
-           else if (nextC < 0) { note.Append("You do not have any available Crew (C) numbers"); note.Append(Environment.NewLine); lblCNumTitle.ForeColor = Program.ErrorColor; } 
+            else if (nextC < 0) { note.Append("You do not have any available Crew (C) numbers"); note.Append(Environment.NewLine); lblCNumTitle.ForeColor = Program.ErrorColor; }
             else { lblCNumTitle.ForeColor = label1.ForeColor; }
 
             if (note.Length > 0)
@@ -141,7 +144,7 @@ namespace Wildfire_ICS_Assist
                     //get the resource and add it to the appropriate place
                     CheckInRecord record = signInForm.checkInRecord;
                     IncidentResource resource = signInForm.selectedResource;
-                   
+
 
 
 
@@ -178,10 +181,10 @@ namespace Wildfire_ICS_Assist
                         case "Vehicle":
                             Vehicle v = resource as Vehicle;
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, VNumMin, VNumMax); }
-                            if(v.OperatorID != Guid.Empty) { v.NumberOfPeople = 1; }
+                            if (v.OperatorID != Guid.Empty) { v.NumberOfPeople = 1; }
                             Program.wfIncidentService.UpsertVehicle(v);
 
-                            if(v.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o=>o.ID == v.OperatorID))
+                            if (v.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == v.OperatorID))
                             {
                                 Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == v.OperatorID) as Personnel;
                                 eqop.ParentResourceID = v.ID;
@@ -208,7 +211,7 @@ namespace Wildfire_ICS_Assist
                             else { group.Kind = "Crew"; }
 
                             if (group.ActiveResourceListing.Any(o => o.IsLeader)) { group.LeaderID = group.ActiveResourceListing.First(o => o.IsLeader).ResourceID; group.LeaderName = group.ActiveResourceListing.First(o => o.IsLeader).ResourceName; }
-                            List<OperationalGroupResourceListing> toRemoveFromCrew = signInForm.         resourcesToRemoveFromCrew;
+                            List<OperationalGroupResourceListing> toRemoveFromCrew = signInForm.resourcesToRemoveFromCrew;
                             foreach (OperationalGroupResourceListing l in toRemoveFromCrew)
                             {
                                 if (Program.CurrentIncident.AllOperationalSubGroups.Any(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod))
@@ -224,8 +227,8 @@ namespace Wildfire_ICS_Assist
                                     Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod).ParentRecordID = Guid.Empty;
                                     Program.wfIncidentService.UpsertCheckInRecord(Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod));
                                 }
-                                
-                                
+
+
 
                             }
 
@@ -254,7 +257,8 @@ namespace Wildfire_ICS_Assist
                                     if (vh.IsEquipment)
                                     {
                                         if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, ENumMin, ENumMax); }
-                                    } else
+                                    }
+                                    else
                                     {
                                         if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, VNumMin, VNumMax); }
                                     }
@@ -277,7 +281,7 @@ namespace Wildfire_ICS_Assist
 
                     if (signInForm.AssignIfPossible && !string.IsNullOrEmpty(record.InitialRoleAcronym))
                     {
-                        if(Program.CurrentOrgChart.ActiveRoles.Any(o=>!string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
+                        if (Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
                         {
                             ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty);
                             Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == record.ResourceID);
@@ -370,12 +374,14 @@ namespace Wildfire_ICS_Assist
 
             }
 
+            if (_previousIndex >= 0) { checkInRecords = GetSortedList(checkInRecords, dgvResources.Columns[_previousIndex].Name, _sortDirection); }
             dgvResources.DataSource = checkInRecords;
+
         }
 
         private void btnStartCheckIn_Click(object sender, EventArgs e)
         {
-             
+
             bool autoStartCheckin = false;
             do
             {
@@ -512,7 +518,7 @@ namespace Wildfire_ICS_Assist
                 {
                     Program.wfIncidentService.UpsertDemobRecord(demob);
 
-                    
+
 
                 }
             }
@@ -620,7 +626,7 @@ namespace Wildfire_ICS_Assist
                 {
                     editForm.SetResource(rec.Resource);
                     DialogResult dr = editForm.ShowDialog();
-                    if(dr == DialogResult.OK)
+                    if (dr == DialogResult.OK)
                     {
                         rec.Resource.UniqueIDNum = editForm.newNumber;
                         Program.wfIncidentService.UpsertIncidentResource(rec.Resource);
@@ -642,7 +648,7 @@ namespace Wildfire_ICS_Assist
         {
 
             ICSRole role = null;
-            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role , false);
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
 
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
@@ -673,7 +679,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-                string csv = resources.ExportCheckInRecordsToCSV(Program.CurrentIncident.ActiveDemobilizationRecords.Where(o=>o.OpPeriod <= Program.CurrentOpPeriod).ToList(), delimiter);
+                string csv = resources.ExportCheckInRecordsToCSV(Program.CurrentIncident.ActiveDemobilizationRecords.Where(o => o.OpPeriod <= Program.CurrentOpPeriod).ToList(), delimiter);
                 try
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
@@ -694,7 +700,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            List<byte[]> allPDFs = Program.pdfExportService.exportCheckInSheetsToPDF(Program.CurrentTask, Program.CurrentOpPeriod, true,  false);
+            List<byte[]> allPDFs = Program.pdfExportService.exportCheckInSheetsToPDF(Program.CurrentTask, Program.CurrentOpPeriod, true, false);
 
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
@@ -728,6 +734,59 @@ namespace Wildfire_ICS_Assist
                 System.Diagnostics.Process.Start(fullFilepath);
             }
             catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+        }
+
+        private int _previousIndex = 1;
+        private bool _sortDirection = true;
+        private void dgvResources_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == _previousIndex)
+                _sortDirection ^= true; // toggle direction
+
+            List<CheckInRecordWithResource> list = (List<CheckInRecordWithResource>)dgvResources.DataSource;
+            dgvResources.DataSource = GetSortedList(list, dgvResources.Columns[e.ColumnIndex].Name, _sortDirection);
+
+            _previousIndex = e.ColumnIndex;
+        }
+
+        private List<CheckInRecordWithResource> GetSortedList(List<CheckInRecordWithResource> list, string column, bool ascending)
+        {
+            switch (column)
+            {
+                case "colVariety":
+                    if (ascending) { list = list.OrderBy(o => o.ResourceType).ToList(); }
+                    else { list = list.OrderByDescending(o => o.ResourceType).ToList(); }
+                    break;
+                case "colID":
+                    if (ascending) { list = list.OrderBy(o => o.UniqueIDNumWithPrefix).ToList(); }
+                    else { list = list.OrderByDescending(o => o.UniqueIDNumWithPrefix).ToList(); }
+                    break;
+                case "colName":
+                    if (ascending) { list = list.OrderBy(o => o.ResourceName).ToList(); }
+                    else { list = list.OrderByDescending(o => o.ResourceName).ToList(); }
+                    break;
+                case "colKind":
+                    if (ascending) { list = list.OrderBy(o => o.Kind).ToList(); }
+                    else { list = list.OrderByDescending(o => o.Kind).ToList(); }
+                    break;
+                case "colType":
+                    if (ascending) { list = list.OrderBy(o => o.Type).ToList(); }
+                    else { list = list.OrderByDescending(o => o.Type).ToList(); }
+                    break;
+                case "colCheckIn":
+                    if (ascending) { list = list.OrderBy(o => o.CheckInDate).ToList(); }
+                    else { list = list.OrderByDescending(o => o.CheckInDate).ToList(); }
+                    break;
+                case "colLastDay":
+                    if (ascending) { list = list.OrderBy(o => o.LastDayOnIncident).ToList(); }
+                    else { list = list.OrderByDescending(o => o.LastDayOnIncident).ToList(); }
+                    break;
+                case "colStatus":
+                    if (ascending) { list = list.OrderBy(o => o.Status).ToList(); }
+                    else { list = list.OrderByDescending(o => o.Status).ToList(); }
+                    break;
+            }
+            return list;
         }
     }
 
