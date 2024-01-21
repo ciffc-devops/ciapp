@@ -154,7 +154,7 @@
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Location = new System.Drawing.Point(437, 115);
+            this.label4.Location = new System.Drawing.Point(361, 112);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 26);
             this.label4.TabIndex = 119;
@@ -175,9 +175,9 @@
             this.datSavedEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.datSavedEnd.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datSavedEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datSavedEnd.Location = new System.Drawing.Point(498, 112);
+            this.datSavedEnd.Location = new System.Drawing.Point(422, 112);
             this.datSavedEnd.Name = "datSavedEnd";
-            this.datSavedEnd.Size = new System.Drawing.Size(203, 29);
+            this.datSavedEnd.Size = new System.Drawing.Size(279, 29);
             this.datSavedEnd.TabIndex = 4;
             // 
             // datSavedStart
@@ -186,7 +186,7 @@
             this.datSavedStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datSavedStart.Location = new System.Drawing.Point(97, 112);
             this.datSavedStart.Name = "datSavedStart";
-            this.datSavedStart.Size = new System.Drawing.Size(200, 29);
+            this.datSavedStart.Size = new System.Drawing.Size(258, 29);
             this.datSavedStart.TabIndex = 3;
             // 
             // label6
@@ -255,7 +255,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 14;
+            this.btnCancel.TabIndex = 99;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -321,14 +321,14 @@
             this.chkNewIsMedivac.Location = new System.Drawing.Point(168, 377);
             this.chkNewIsMedivac.Name = "chkNewIsMedivac";
             this.chkNewIsMedivac.Size = new System.Drawing.Size(306, 28);
-            this.chkNewIsMedivac.TabIndex = 11;
+            this.chkNewIsMedivac.TabIndex = 31;
             this.chkNewIsMedivac.Text = "Yes, this will be used for medivac";
             this.chkNewIsMedivac.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Location = new System.Drawing.Point(563, 345);
+            this.label3.Location = new System.Drawing.Point(450, 342);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 26);
             this.label3.TabIndex = 113;
@@ -350,10 +350,10 @@
             this.datNewEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.datNewEnd.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datNewEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datNewEnd.Location = new System.Drawing.Point(621, 342);
+            this.datNewEnd.Location = new System.Drawing.Point(511, 342);
             this.datNewEnd.Name = "datNewEnd";
-            this.datNewEnd.Size = new System.Drawing.Size(203, 29);
-            this.datNewEnd.TabIndex = 10;
+            this.datNewEnd.Size = new System.Drawing.Size(313, 29);
+            this.datNewEnd.TabIndex = 30;
             // 
             // datNewStart
             // 
@@ -362,8 +362,8 @@
             this.datNewStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datNewStart.Location = new System.Drawing.Point(168, 342);
             this.datNewStart.Name = "datNewStart";
-            this.datNewStart.Size = new System.Drawing.Size(200, 29);
-            this.datNewStart.TabIndex = 9;
+            this.datNewStart.Size = new System.Drawing.Size(266, 29);
+            this.datNewStart.TabIndex = 29;
             // 
             // editAircraftControl1
             // 
@@ -377,7 +377,7 @@
             this.editAircraftControl1.Name = "editAircraftControl1";
             this.editAircraftControl1.selectedAircraft = null;
             this.editAircraftControl1.Size = new System.Drawing.Size(824, 255);
-            this.editAircraftControl1.TabIndex = 7;
+            this.editAircraftControl1.TabIndex = 27;
             // 
             // label12
             // 
@@ -396,7 +396,7 @@
             this.txtNewPilot.Location = new System.Drawing.Point(168, 307);
             this.txtNewPilot.Name = "txtNewPilot";
             this.txtNewPilot.Size = new System.Drawing.Size(656, 29);
-            this.txtNewPilot.TabIndex = 8;
+            this.txtNewPilot.TabIndex = 28;
             // 
             // chkSaveForLater
             // 
@@ -405,7 +405,7 @@
             this.chkSaveForLater.Location = new System.Drawing.Point(391, 430);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
-            this.chkSaveForLater.TabIndex = 12;
+            this.chkSaveForLater.TabIndex = 32;
             this.chkSaveForLater.Text = "Save for future incidents";
             this.chkSaveForLater.UseVisualStyleBackColor = true;
             // 
@@ -427,7 +427,7 @@
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
-            this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.TabIndex = 33;
             this.btnAddNew.Text = "Add to Incident";
             this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNew.UseVisualStyleBackColor = true;
