@@ -908,6 +908,30 @@
   <data name="pnlTaskInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="txtTaskName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="txtTaskName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 45</value>
+  </data>
+  <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 29</value>
+  </data>
+  <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtTaskName.Name" xml:space="preserve">
+    <value>txtTaskName</value>
+  </data>
+  <data name="&gt;&gt;txtTaskName.Type" xml:space="preserve">
+    <value>SpellBox, Canadian Incident Action Plan Program, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTaskName.Parent" xml:space="preserve">
+    <value>pnlTaskInfo</value>
+  </data>
+  <data name="&gt;&gt;txtTaskName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -930,7 +954,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btnOutstandingLogItems.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -976,7 +1000,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;btnOutstandingLogItems.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1006,7 +1030,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btnViewPositionLog.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -1052,7 +1076,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;btnViewPositionLog.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btnAddToPositionLog.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -1095,7 +1119,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;btnAddToPositionLog.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="txtTaskNumber.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1119,7 +1143,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;txtTaskNumber.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="btnICSRoleHelp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1215,7 +1239,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;btnICSRoleHelp.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="cboICSRole.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1239,7 +1263,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;cboICSRole.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1269,7 +1293,7 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="label16.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1305,36 +1329,6 @@
     <value>pnlTaskInfo</value>
   </data>
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="txtTaskName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="txtTaskName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="txtTaskName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 48</value>
-  </data>
-  <data name="txtTaskName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 8, 9, 8</value>
-  </data>
-  <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 29</value>
-  </data>
-  <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtTaskName.Name" xml:space="preserve">
-    <value>txtTaskName</value>
-  </data>
-  <data name="&gt;&gt;txtTaskName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtTaskName.Parent" xml:space="preserve">
-    <value>pnlTaskInfo</value>
-  </data>
-  <data name="&gt;&gt;txtTaskName.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="lblTaskName.Font" type="System.Drawing.Font, System.Drawing">
@@ -1630,7 +1624,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAZgBBAGYAQQBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAbABBAGwAQQBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
