@@ -882,8 +882,8 @@ namespace Wildfire_ICS_Assist
         {
             bool set = false;
             List<string> errors = new List<string>();
-            if (!string.IsNullOrEmpty(txtTaskName.Text.Trim()) || !string.IsNullOrEmpty(txtTaskNumber.Text.Trim())) { set = true; txtTaskName.BackColor = Program.GoodColor; txtTaskNumber.BackColor = Program.GoodColor; }
-            else { set = false; errors.Add("You must set either an incident name or number to begin."); txtTaskName.BackColor = Program.ErrorColor; txtTaskNumber.BackColor = Program.ErrorColor; }
+            if (!string.IsNullOrEmpty(txtTaskName.Text.Trim()) || !string.IsNullOrEmpty(txtTaskNumber.Text.Trim())) { set = true; txtTaskName.SetBackColor(Program.GoodColor); txtTaskNumber.BackColor = Program.GoodColor; }
+            else { set = false; errors.Add("You must set either an incident name or number to begin."); txtTaskName.SetBackColor(Program.ErrorColor); txtTaskNumber.BackColor = Program.ErrorColor; }
 
         
 
@@ -1331,6 +1331,7 @@ namespace Wildfire_ICS_Assist
 
         private void txtTaskName_Validating(object sender, CancelEventArgs e)
         {
+            initialDetailsSet(true, false);
 
         }
 

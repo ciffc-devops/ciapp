@@ -61,6 +61,7 @@
             this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
+            this.txtTaskName = new SpellBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnOutstandingLogItems = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
@@ -71,7 +72,6 @@
             this.cboICSRole = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtTaskName = new System.Windows.Forms.TextBox();
             this.lblTaskName = new System.Windows.Forms.Label();
             this.lblTaskNumber = new System.Windows.Forms.Label();
             this.lblServerStatus = new System.Windows.Forms.Label();
@@ -483,6 +483,7 @@
             resources.ApplyResources(this.pnlTaskInfo, "pnlTaskInfo");
             this.pnlTaskInfo.BackColor = System.Drawing.Color.White;
             this.pnlTaskInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTaskInfo.Controls.Add(this.txtTaskName);
             this.pnlTaskInfo.Controls.Add(this.panel1);
             this.pnlTaskInfo.Controls.Add(this.btnOutstandingLogItems);
             this.pnlTaskInfo.Controls.Add(this.label19);
@@ -493,11 +494,17 @@
             this.pnlTaskInfo.Controls.Add(this.cboICSRole);
             this.pnlTaskInfo.Controls.Add(this.label17);
             this.pnlTaskInfo.Controls.Add(this.label16);
-            this.pnlTaskInfo.Controls.Add(this.txtTaskName);
             this.pnlTaskInfo.Controls.Add(this.lblTaskName);
             this.pnlTaskInfo.Controls.Add(this.lblTaskNumber);
             this.pnlTaskInfo.Name = "pnlTaskInfo";
             this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
+            // 
+            // txtTaskName
+            // 
+            resources.ApplyResources(this.txtTaskName, "txtTaskName");
+            this.txtTaskName.Name = "txtTaskName";
+            this.txtTaskName.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskName_Validating);
+            this.txtTaskName.Child = new System.Windows.Controls.TextBox();
             // 
             // panel1
             // 
@@ -570,13 +577,6 @@
             // 
             resources.ApplyResources(this.label16, "label16");
             this.label16.Name = "label16";
-            // 
-            // txtTaskName
-            // 
-            resources.ApplyResources(this.txtTaskName, "txtTaskName");
-            this.txtTaskName.Name = "txtTaskName";
-            this.txtTaskName.Leave += new System.EventHandler(this.txtTaskName_Leave);
-            this.txtTaskName.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskName_Validating);
             // 
             // lblTaskName
             // 
@@ -1249,6 +1249,7 @@
             this.cpOtherTools.CurrentlyCollapsed = false;
             this.cpOtherTools.ExpandedHeight = 180;
             this.cpOtherTools.ExpandedWidth = 349;
+            this.cpOtherTools.ExpandUp = false;
             resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
             this.cpOtherTools.Name = "cpOtherTools";
             this.cpOtherTools.TitleText = "Other Tools";
@@ -1256,6 +1257,7 @@
             // btnAdditionalContacts
             // 
             resources.ApplyResources(this.btnAdditionalContacts, "btnAdditionalContacts");
+            this.btnAdditionalContacts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAdditionalContacts.Name = "btnAdditionalContacts";
             this.btnAdditionalContacts.UseVisualStyleBackColor = true;
             this.btnAdditionalContacts.Click += new System.EventHandler(this.btnAdditionalContacts_Click);
@@ -1263,6 +1265,7 @@
             // btnNotes
             // 
             resources.ApplyResources(this.btnNotes, "btnNotes");
+            this.btnNotes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnNotes.Name = "btnNotes";
             this.btnNotes.UseVisualStyleBackColor = true;
             this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
@@ -1270,6 +1273,7 @@
             // btnShowResources
             // 
             resources.ApplyResources(this.btnShowResources, "btnShowResources");
+            this.btnShowResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnShowResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
             this.btnShowResources.Name = "btnShowResources";
             this.btnShowResources.UseVisualStyleBackColor = true;
@@ -1294,6 +1298,7 @@
             this.cpIncidentActionPlan.CurrentlyCollapsed = false;
             this.cpIncidentActionPlan.ExpandedHeight = 331;
             this.cpIncidentActionPlan.ExpandedWidth = 722;
+            this.cpIncidentActionPlan.ExpandUp = false;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
@@ -1301,6 +1306,7 @@
             // btnAssignmentList
             // 
             resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
+            this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAssignmentList.Name = "btnAssignmentList";
             this.btnAssignmentList.UseVisualStyleBackColor = true;
             this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
@@ -1308,6 +1314,7 @@
             // btnAirOpsSummary
             // 
             resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
+            this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAirOpsSummary.Name = "btnAirOpsSummary";
             this.btnAirOpsSummary.UseVisualStyleBackColor = true;
             this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
@@ -1315,6 +1322,7 @@
             // btnSafetyPlans
             // 
             resources.ApplyResources(this.btnSafetyPlans, "btnSafetyPlans");
+            this.btnSafetyPlans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnSafetyPlans.Name = "btnSafetyPlans";
             this.btnSafetyPlans.UseVisualStyleBackColor = true;
             this.btnSafetyPlans.Click += new System.EventHandler(this.btnSafetyPlans_Click);
@@ -1322,6 +1330,7 @@
             // btnIncidentObjectives
             // 
             resources.ApplyResources(this.btnIncidentObjectives, "btnIncidentObjectives");
+            this.btnIncidentObjectives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnIncidentObjectives.Name = "btnIncidentObjectives";
             this.btnIncidentObjectives.UseVisualStyleBackColor = true;
             this.btnIncidentObjectives.Click += new System.EventHandler(this.btnIncidentObjectives_Click);
@@ -1329,6 +1338,7 @@
             // btnMedicalPlan
             // 
             resources.ApplyResources(this.btnMedicalPlan, "btnMedicalPlan");
+            this.btnMedicalPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnMedicalPlan.Name = "btnMedicalPlan";
             this.btnMedicalPlan.UseVisualStyleBackColor = true;
             this.btnMedicalPlan.Click += new System.EventHandler(this.btnMedicalPlan_Click);
@@ -1336,6 +1346,7 @@
             // btnPrintIAP
             // 
             resources.ApplyResources(this.btnPrintIAP, "btnPrintIAP");
+            this.btnPrintIAP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrintIAP.Name = "btnPrintIAP";
             this.btnPrintIAP.UseVisualStyleBackColor = true;
@@ -1344,6 +1355,7 @@
             // btnPrintOrgChart
             // 
             resources.ApplyResources(this.btnPrintOrgChart, "btnPrintOrgChart");
+            this.btnPrintOrgChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnPrintOrgChart.Name = "btnPrintOrgChart";
             this.btnPrintOrgChart.UseVisualStyleBackColor = true;
             this.btnPrintOrgChart.Click += new System.EventHandler(this.btnPrintOrgChart_Click);
@@ -1351,6 +1363,7 @@
             // btnCommsPlan
             // 
             resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
+            this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnCommsPlan.Name = "btnCommsPlan";
             this.btnCommsPlan.UseVisualStyleBackColor = true;
             this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
@@ -1429,7 +1442,6 @@
         private System.Windows.Forms.ComboBox cboICSRole;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtTaskName;
         private System.Windows.Forms.Label lblTaskName;
         private System.Windows.Forms.Label lblTaskNumber;
         private System.Windows.Forms.Label lblServerStatus;
@@ -1564,6 +1576,7 @@
         private System.Windows.Forms.ToolStripMenuItem printTheIncidentActionPlanToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.Button btnShowResources;
+        private SpellBox txtTaskName;
     }
 }
 
