@@ -14,6 +14,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -679,6 +680,12 @@ namespace Wildfire_ICS_Assist
                     Program.wfIncidentService.UpsertDemobRecord(demob);
                 }
             }
+
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
 
         }
     }
