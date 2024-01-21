@@ -12,6 +12,8 @@ using System.Threading;
 using WildfireICSDesktopServices;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Utilities;
+using System.Runtime.InteropServices;
+using Microsoft.VisualStudio.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
@@ -23,15 +25,9 @@ namespace Wildfire_ICS_Assist
         [STAThread]
         static void Main()
         {
-            /*
-             
+            if (Environment.OSVersion.Version.Major >= 6) SetProcessDpiAwarenessContext(DpiAwarenessContext.Unaware);
 
-             equipmentService = new EquipmentService();
-             ICAClassLibrary.Globals._equipmentService = equipmentService;
-             
-             
-             networkSendLog = new NetworkSendLog();
-            */
+       
 
             generalOptionsService = new GeneralOptionsService(true);
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
@@ -62,7 +58,9 @@ namespace Wildfire_ICS_Assist
             Application.Run(new IncidentDetailsForm());
         }
 
-     
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int SetProcessDpiAwarenessContext(DpiAwarenessContext value);
+
 
         /*
        
