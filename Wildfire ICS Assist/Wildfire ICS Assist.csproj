@@ -369,6 +369,12 @@
       <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\TabControlExt.cs" />
+    <Compile Include="CustomControls\TextBoxRequiredControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxRequiredControl.Designer.cs">
+      <DependentUpon>TextBoxRequiredControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\VehicleEquipmentEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -831,6 +837,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\StrikeTeamTaskForceDetailsControl.resx">
       <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\TextBoxRequiredControl.resx">
+      <DependentUpon>TextBoxRequiredControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\VehicleEquipmentEditControl.resx">
       <DependentUpon>VehicleEquipmentEditControl.cs</DependentUpon>

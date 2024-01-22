@@ -85,6 +85,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(33)] private int _YellowResourceTimeoutDays;
         [ProtoMember(33)] private int _RedResourceTimeoutDays;
 
+        [ProtoMember(68)] private byte[] _OrganizationLogo;
+        [ProtoMember(69)] private string _OrganizationName;
+
 
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
@@ -176,6 +179,8 @@ namespace WF_ICS_ClassLibrary.Models
         public int YellowResourceTimeoutDays { get { return _YellowResourceTimeoutDays; } set { _YellowResourceTimeoutDays = value; appSettingsChanged = true; } }
         public int RedResourceTimeoutDays { get { return _RedResourceTimeoutDays; } set { _RedResourceTimeoutDays = value; appSettingsChanged = true; } }
 
+        public byte[] OrganizationLogo { get => _OrganizationLogo; set => _OrganizationLogo = value; }
+        public string OrganizationName { get => _OrganizationName; set => _OrganizationName = value; }
 
         public void addDefaultOptions()
         {
@@ -209,6 +214,7 @@ namespace WF_ICS_ClassLibrary.Models
             DateFormat = "MMM-dd-yyyy";
             YellowResourceTimeoutDays = 5;
             RedResourceTimeoutDays = 2;
+            OrganizationName = "Canadian Interagency Forest Fire Centre";
 
             //options.PrimaryChannel = "PEPSAR1 149.495";
 

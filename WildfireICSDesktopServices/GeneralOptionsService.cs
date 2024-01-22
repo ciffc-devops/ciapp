@@ -342,6 +342,10 @@ namespace WildfireICSDesktopServices
                     return _options.YellowResourceTimeoutDays;
                 case "RedResourceTimeoutDays":
                     return _options.RedResourceTimeoutDays;
+                case "OrganizationLogo":
+                    return _options.OrganizationLogo;
+                case "OrganizationName":
+                    return _options.OrganizationName;
                 default:
                     return null;
             }
@@ -403,6 +407,9 @@ namespace WildfireICSDesktopServices
                     return _options.LastPort;
                 case "DateFormat":
                     return _options.DateFormat;
+                case "OrganizationName":
+                    return _options.OrganizationName;
+
                 default:
                     return null;
             }
@@ -561,6 +568,11 @@ namespace WildfireICSDesktopServices
                 case "YellowResourceTimeoutDays":
                     _options.YellowResourceTimeoutDays = Convert.ToInt32(newValue);
                     break;
+                case "OrganizationName":
+                    _options.OrganizationName = newValue.ToString();
+                    break;
+                case "OrganizationLogo":
+                    _options.OrganizationLogo = (byte[])newValue; break;
 
             }
             SaveGeneralOptions();

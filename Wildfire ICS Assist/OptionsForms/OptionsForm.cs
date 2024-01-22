@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
 using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
@@ -19,6 +21,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
     public partial class OptionsForm : Form
     {
         private List<DeviceInformation> allDevices = new List<DeviceInformation>();
+        byte[] NewOrgLogo = null;
 
         public OptionsForm()
         {
@@ -68,6 +71,17 @@ namespace Wildfire_ICS_Assist.OptionsForms
             if (!string.IsNullOrEmpty(options.DateFormat)) { cboDateFormat.SelectedValue = options.DateFormat; }
             numRedResourceTimeoutDays.Value = options.RedResourceTimeoutDays;
             numYellowResourceTimeoutDays.Value = options.YellowResourceTimeoutDays;
+            if (options.OrganizationLogo != null)
+            {
+                Image img = options.OrganizationLogo.getImageFromBytes();
+                picReportLogo.Image = img;
+            } else
+            {
+                Image img = Properties.Resources.CIAPP_LOGO_v3;
+                picReportLogo.Image = img;
+            }
+            if (string.IsNullOrEmpty(options.OrganizationName)) { txtOrganizationName.SetText("Canadian Interagency Forest Fire Centre"); }
+            else { txtOrganizationName.SetText(options.OrganizationName); }
 
 
             //File Management
@@ -145,6 +159,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     Globals.DateFormat = options.DateFormat;
                     options.YellowResourceTimeoutDays = Convert.ToInt32( numYellowResourceTimeoutDays.Value);
                     options.RedResourceTimeoutDays = Convert.ToInt32(numRedResourceTimeoutDays.Value);
+                    if (NewOrgLogo != null) { Program.generalOptionsService.UpserOptionValue(NewOrgLogo, "OrganizationLogo"); }
+                    options.OrganizationName = txtOrganizationName.Text;
 
 
                     //File Management
@@ -193,6 +209,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private bool ValidateForm()
         {
+            if (!txtOrganizationName.IsValid) { return false; }
+
             return true;
         }
 
@@ -308,6 +326,68 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void tbGeneral_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
+
+        }
+
+        private void btnChangeLogo_Click(object sender, EventArgs e)
+        {
+            selectPhoto();
+
+        }
+
+        private void selectPhoto()
+        {
+            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            openFileDialog1.ShowDialog();
+
+            if (!string.IsNullOrEmpty(openFileDialog1.FileName))
+            {
+                //they've chosen a file, try to open it.
+                try
+                {
+                    FileInfo file = new FileInfo(openFileDialog1.FileName);
+
+
+
+                    System.Drawing.Image image = System.Drawing.Image.FromFile(file.FullName);
+                    Bitmap newImage = new Bitmap(image);
+                    long maxFileSize = 200000;
+                    if (file.Length > maxFileSize)
+                    {
+                        long factor = (file.Length + (maxFileSize - 1)) / maxFileSize;
+
+                        int newh = image.Height / (int)factor;
+                        int neww = image.Width / (int)factor;
+                        newImage = image.ResizeImage(neww, newh);
+
+                    }
+
+
+
+                    image.Dispose();
+                    NewOrgLogo = newImage.BytesFromImage();
+
+                    picReportLogo.Image = newImage;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
+                }
+            }
+        }
+
+        private void btnRemoveLogo_Click(object sender, EventArgs e)
+        {
+            System.Drawing.Image img = Properties.Resources.CIAPP_LOGO_v3;
+            NewOrgLogo = img.BytesFromImage();
+            picReportLogo.Image = img;
 
         }
     }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using iTextSharp.text.pdf.parser;
 using WF_ICS_ClassLibrary;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace WildfireICSDesktopServices
 {
@@ -27,6 +28,38 @@ namespace WildfireICSDesktopServices
             acroFields.DecodeGenericDictionary(mergedFieldAttributes, tmp);
             return tmp.FontSize;
         }
+
+
+        public static PdfStamper AddOrgLogoToForm(this PdfStamper stamper, int pageCount = 1)
+        {
+            byte[] orgLogo = (byte[])Globals._generalOptionsService.GetOptionsValue("OrganizationLogo");
+            if (orgLogo != null)
+            {
+                iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(orgLogo.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                pic.ScaleToFit(75, 75);
+                float x = 40; //((250 - pic.ScaledWidth) / 2) + 315;
+                float y = 20;
+                pic.SetAbsolutePosition(x, y);
+
+
+                Font font = new Font();
+                font.Size = 10;
+                float textx = 40 + 75 + 10; //((250 - pic.ScaledWidth) / 2) + 315;
+                float texty = 30;
+                Phrase phrase = new Phrase(Globals._generalOptionsService.GetStringOptionValue("OrganizationName"), font);
+
+                for (int i = 1; i <= pageCount; i++)
+                {
+                    stamper.GetOverContent(i).AddImage(pic);
+                    ColumnText.ShowTextAligned(stamper.GetOverContent(i), Element.ALIGN_LEFT, phrase, textx, texty, 0);
+
+                }
+            }
+            return stamper;
+        }
+
+
 
         public static PdfStamper AddPDFField(this PdfStamper stamper, string originalFilePath, string adjacentText, string fieldType, int height, int width, string fieldName, int[] instancesOfInterest)
         {

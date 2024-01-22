@@ -55,6 +55,18 @@ namespace Wildfire_ICS_Assist
         }
         private void IncidentDetailsForm_Load(object sender, EventArgs e)
         {
+            byte[] logo = (byte[])Program.generalOptionsService.GetOptionsValue("OrganizationLogo");
+            if (logo != null)
+            {
+                Image img = logo.getImageFromBytes();
+                picOrgLogo.Image = img;
+            }
+            else
+            {
+                Image img = Properties.Resources.CIAPP_LOGO_v3;
+                picOrgLogo.Image = img;
+            }
+            
             SetVersionNumber();
             setRecentFiles();
             cpIncidentActionPlan.Expand();
@@ -1516,6 +1528,9 @@ namespace Wildfire_ICS_Assist
                 if(result == DialogResult.OK)
                 {
                     tmrAutoSave.Enabled = true;
+                    Image img = ((byte[])Program.generalOptionsService.GetOptionsValue("OrganizationLogo")).getImageFromBytes();
+                    picOrgLogo.Image = img;
+
                 }
             }
         }
@@ -3011,6 +3026,16 @@ namespace Wildfire_ICS_Assist
         {
 
         }
+
+        private void SetDefaultLogoAsNeeded()
+        {
+            if (Program.generalOptionsService.GetOptionsValue("OrganizationLogo") == null)
+            {
+                System.Drawing.Image img = Properties.Resources.CIAPP_LOGO_v3;
+                Program.generalOptionsService.UpserOptionValue(img.BytesFromImage(), "OrganizationLogo");
+            }
+        }
+
     }
 
 

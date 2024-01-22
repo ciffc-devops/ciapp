@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -162,8 +162,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutCIAPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.llProgramURL = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picOrgLogo = new System.Windows.Forms.PictureBox();
             this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
             this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
@@ -204,7 +203,7 @@
             this.pnlInternetSyncStart.SuspendLayout();
             this.pnlNetworkSyncInProgress.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
             this.cpOtherTools.SuspendLayout();
             this.cpIncidentActionPlan.SuspendLayout();
             this.SuspendLayout();
@@ -263,9 +262,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1195,20 +1194,13 @@
             resources.ApplyResources(this.aboutCIAPPToolStripMenuItem, "aboutCIAPPToolStripMenuItem");
             this.aboutCIAPPToolStripMenuItem.Click += new System.EventHandler(this.aboutCIAPPToolStripMenuItem_Click);
             // 
-            // llProgramURL
+            // picOrgLogo
             // 
-            resources.ApplyResources(this.llProgramURL, "llProgramURL");
-            this.llProgramURL.Name = "llProgramURL";
-            this.llProgramURL.TabStop = true;
-            this.llProgramURL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llProgramURL_LinkClicked);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
+            resources.ApplyResources(this.picOrgLogo, "picOrgLogo");
+            this.picOrgLogo.Name = "picOrgLogo";
+            this.picOrgLogo.TabStop = false;
+            this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // ofdOpenTaskFile
             // 
@@ -1375,8 +1367,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.Controls.Add(this.cpOtherTools);
             this.Controls.Add(this.cpIncidentActionPlan);
-            this.Controls.Add(this.llProgramURL);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picOrgLogo);
             this.Controls.Add(this.pnlInternetSyncStart);
             this.Controls.Add(this.pnlNetworkSyncInProgress);
             this.Controls.Add(this.pnlOpsPeriod);
@@ -1414,7 +1405,7 @@
             this.pnlNetworkSyncInProgress.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).EndInit();
             this.cpOtherTools.ResumeLayout(false);
             this.cpIncidentActionPlan.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1499,8 +1490,7 @@
         private System.Windows.Forms.ToolStripMenuItem planningToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem networkInternetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel llProgramURL;
+        private System.Windows.Forms.PictureBox picOrgLogo;
         private System.Windows.Forms.ToolStripMenuItem newIncidentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recentIncidentsToolStripMenuItem;

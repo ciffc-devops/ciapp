@@ -48,6 +48,18 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
             catch (Exception) { return null; }
         }
+        public static byte[] BytesFromImage(this System.Drawing.Image img)
+        {
+            try
+            {
+                TypeConverter converter = TypeDescriptor.GetConverter(typeof(System.Drawing.Image));
+
+                return (Byte[])converter.ConvertTo(img, typeof(Byte[]));
+            }
+            catch (Exception) { return null; }
+        }
+
+
         public static System.Drawing.Image getImageFromBytes(this string ImageBytes)
         {
             Byte[] TheImageAsBytes = Convert.FromBase64String(ImageBytes);
@@ -57,5 +69,15 @@ namespace WF_ICS_ClassLibrary.Utilities
             System.Drawing.Image I = System.Drawing.Image.FromStream(MemStr);
             return I;
         }
+
+        public static System.Drawing.Image getImageFromBytes(this byte[] TheImageAsBytes)
+        {
+
+            MemoryStream MemStr = new MemoryStream(TheImageAsBytes);
+
+            System.Drawing.Image I = System.Drawing.Image.FromStream(MemStr);
+            return I;
+        }
+
     }
 }

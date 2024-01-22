@@ -56,7 +56,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chkIncidentObjectives = new System.Windows.Forms.CheckBox();
             this.lblOpPeriodTitle = new System.Windows.Forms.Label();
-            this.btnEmailIAP = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -105,7 +104,6 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnEmailIAP);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveAsPDF);
             this.splitContainer1.Size = new System.Drawing.Size(650, 649);
@@ -326,7 +324,6 @@
             this.chkFlattenPDF.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkFlattenPDF.FlatAppearance.BorderSize = 0;
             this.chkFlattenPDF.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.chkFlattenPDF.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.chkFlattenPDF.ImageIndex = 1;
             this.chkFlattenPDF.ImageList = this.imageList1;
             this.chkFlattenPDF.Location = new System.Drawing.Point(34, 41);
@@ -375,19 +372,6 @@
             this.lblOpPeriodTitle.TabIndex = 13;
             this.lblOpPeriodTitle.Text = "Print Operational Period 22";
             // 
-            // btnEmailIAP
-            // 
-            this.btnEmailIAP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEmailIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_11_envelope;
-            this.btnEmailIAP.Location = new System.Drawing.Point(432, 7);
-            this.btnEmailIAP.Name = "btnEmailIAP";
-            this.btnEmailIAP.Size = new System.Drawing.Size(208, 58);
-            this.btnEmailIAP.TabIndex = 17;
-            this.btnEmailIAP.Text = "Email PDF to all responders";
-            this.btnEmailIAP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEmailIAP.UseVisualStyleBackColor = true;
-            this.btnEmailIAP.Click += new System.EventHandler(this.btnEmailIAP_Click);
-            // 
             // btnCancel
             // 
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
@@ -404,7 +388,7 @@
             // 
             this.btnSaveAsPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveAsPDF.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnSaveAsPDF.Location = new System.Drawing.Point(235, 7);
+            this.btnSaveAsPDF.Location = new System.Drawing.Point(462, 7);
             this.btnSaveAsPDF.Name = "btnSaveAsPDF";
             this.btnSaveAsPDF.Size = new System.Drawing.Size(178, 58);
             this.btnSaveAsPDF.TabIndex = 15;
@@ -474,6 +458,5 @@
         private System.Windows.Forms.TextBox txtCriticalMessage;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.CheckBox chkCheckInLists;
-        private System.Windows.Forms.Button btnEmailIAP;
     }
 }

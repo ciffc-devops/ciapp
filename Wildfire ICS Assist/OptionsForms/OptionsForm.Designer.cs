@@ -31,6 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbGeneral = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnRemoveLogo = new System.Windows.Forms.Button();
+            this.btnChangeLogo = new System.Windows.Forms.Button();
+            this.picReportLogo = new System.Windows.Forms.PictureBox();
+            this.numRedResourceTimeoutDays = new System.Windows.Forms.NumericUpDown();
+            this.numYellowResourceTimeoutDays = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cboDateFormat = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -77,13 +87,13 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.numYellowResourceTimeoutDays = new System.Windows.Forms.NumericUpDown();
-            this.numRedResourceTimeoutDays = new System.Windows.Forms.NumericUpDown();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtOrganizationName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picReportLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRedResourceTimeoutDays)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numYellowResourceTimeoutDays)).BeginInit();
             this.tbFileManagement.SuspendLayout();
             this.tbNetworking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDefaultPortNumber)).BeginInit();
@@ -91,8 +101,6 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numYellowResourceTimeoutDays)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRedResourceTimeoutDays)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -101,17 +109,25 @@
             this.tabControl1.Controls.Add(this.tbFileManagement);
             this.tabControl1.Controls.Add(this.tbNetworking);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(746, 441);
+            this.tabControl1.Size = new System.Drawing.Size(746, 520);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
             // tbGeneral
             // 
             this.tbGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.tbGeneral.Controls.Add(this.txtOrganizationName);
+            this.tbGeneral.Controls.Add(this.label12);
+            this.tbGeneral.Controls.Add(this.label11);
+            this.tbGeneral.Controls.Add(this.btnRemoveLogo);
+            this.tbGeneral.Controls.Add(this.btnChangeLogo);
+            this.tbGeneral.Controls.Add(this.picReportLogo);
             this.tbGeneral.Controls.Add(this.numRedResourceTimeoutDays);
             this.tbGeneral.Controls.Add(this.numYellowResourceTimeoutDays);
             this.tbGeneral.Controls.Add(this.label10);
@@ -131,10 +147,103 @@
             this.tbGeneral.Location = new System.Drawing.Point(4, 33);
             this.tbGeneral.Name = "tbGeneral";
             this.tbGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tbGeneral.Size = new System.Drawing.Size(738, 404);
+            this.tbGeneral.Size = new System.Drawing.Size(738, 483);
             this.tbGeneral.TabIndex = 0;
             this.tbGeneral.Text = "General";
             this.tbGeneral.Click += new System.EventHandler(this.tbGeneral_Click);
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(3, 334);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(258, 32);
+            this.label12.TabIndex = 137;
+            this.label12.Text = "Organization/Nation Name";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(19, 375);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(242, 32);
+            this.label11.TabIndex = 136;
+            this.label11.Text = "Report Logo";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnRemoveLogo
+            // 
+            this.btnRemoveLogo.Location = new System.Drawing.Point(447, 416);
+            this.btnRemoveLogo.Name = "btnRemoveLogo";
+            this.btnRemoveLogo.Size = new System.Drawing.Size(100, 34);
+            this.btnRemoveLogo.TabIndex = 135;
+            this.btnRemoveLogo.Text = "Remove";
+            this.btnRemoveLogo.UseVisualStyleBackColor = true;
+            this.btnRemoveLogo.Click += new System.EventHandler(this.btnRemoveLogo_Click);
+            // 
+            // btnChangeLogo
+            // 
+            this.btnChangeLogo.Location = new System.Drawing.Point(447, 375);
+            this.btnChangeLogo.Name = "btnChangeLogo";
+            this.btnChangeLogo.Size = new System.Drawing.Size(100, 34);
+            this.btnChangeLogo.TabIndex = 134;
+            this.btnChangeLogo.Text = "Change";
+            this.btnChangeLogo.UseVisualStyleBackColor = true;
+            this.btnChangeLogo.Click += new System.EventHandler(this.btnChangeLogo_Click);
+            // 
+            // picReportLogo
+            // 
+            this.picReportLogo.Location = new System.Drawing.Point(267, 375);
+            this.picReportLogo.Name = "picReportLogo";
+            this.picReportLogo.Size = new System.Drawing.Size(174, 99);
+            this.picReportLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picReportLogo.TabIndex = 133;
+            this.picReportLogo.TabStop = false;
+            // 
+            // numRedResourceTimeoutDays
+            // 
+            this.numRedResourceTimeoutDays.Location = new System.Drawing.Point(267, 296);
+            this.numRedResourceTimeoutDays.Name = "numRedResourceTimeoutDays";
+            this.numRedResourceTimeoutDays.Size = new System.Drawing.Size(120, 29);
+            this.numRedResourceTimeoutDays.TabIndex = 126;
+            // 
+            // numYellowResourceTimeoutDays
+            // 
+            this.numYellowResourceTimeoutDays.Location = new System.Drawing.Point(267, 261);
+            this.numYellowResourceTimeoutDays.Name = "numYellowResourceTimeoutDays";
+            this.numYellowResourceTimeoutDays.Size = new System.Drawing.Size(120, 29);
+            this.numYellowResourceTimeoutDays.TabIndex = 125;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(19, 296);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(242, 32);
+            this.label10.TabIndex = 124;
+            this.label10.Text = "Red";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(19, 261);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(242, 32);
+            this.label9.TabIndex = 123;
+            this.label9.Text = "Yellow";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(19, 226);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(528, 32);
+            this.label8.TabIndex = 122;
+            this.label8.Text = "Highlight resources near their end of incident date";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
             // 
@@ -293,9 +402,9 @@
             this.tbFileManagement.Controls.Add(this.label4);
             this.tbFileManagement.Controls.Add(this.label2);
             this.tbFileManagement.Controls.Add(this.chkAutoSave);
-            this.tbFileManagement.Location = new System.Drawing.Point(4, 22);
+            this.tbFileManagement.Location = new System.Drawing.Point(4, 33);
             this.tbFileManagement.Name = "tbFileManagement";
-            this.tbFileManagement.Size = new System.Drawing.Size(738, 415);
+            this.tbFileManagement.Size = new System.Drawing.Size(738, 483);
             this.tbFileManagement.TabIndex = 3;
             this.tbFileManagement.Text = "File Management";
             this.tbFileManagement.UseVisualStyleBackColor = true;
@@ -513,9 +622,9 @@
             this.tbNetworking.Controls.Add(this.btnTrustedDevicesHelp);
             this.tbNetworking.Controls.Add(this.btnRemoveTrustedDevice);
             this.tbNetworking.Controls.Add(this.lbTrustedDevices);
-            this.tbNetworking.Location = new System.Drawing.Point(4, 22);
+            this.tbNetworking.Location = new System.Drawing.Point(4, 33);
             this.tbNetworking.Name = "tbNetworking";
-            this.tbNetworking.Size = new System.Drawing.Size(738, 415);
+            this.tbNetworking.Size = new System.Drawing.Size(738, 483);
             this.tbNetworking.TabIndex = 2;
             this.tbNetworking.Text = "Networking";
             this.tbNetworking.UseVisualStyleBackColor = true;
@@ -620,7 +729,7 @@
             // 
             this.btnRemoveTrustedDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveTrustedDevice.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_193_circle_empty_remove;
-            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 357);
+            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 425);
             this.btnRemoveTrustedDevice.Name = "btnRemoveTrustedDevice";
             this.btnRemoveTrustedDevice.Size = new System.Drawing.Size(290, 42);
             this.btnRemoveTrustedDevice.TabIndex = 115;
@@ -641,7 +750,7 @@
             this.lbTrustedDevices.Name = "lbTrustedDevices";
             this.lbTrustedDevices.ScrollAlwaysVisible = true;
             this.lbTrustedDevices.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 124);
+            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 172);
             this.lbTrustedDevices.TabIndex = 114;
             this.lbTrustedDevices.ValueMember = "DeviceID";
             // 
@@ -662,8 +771,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(746, 511);
-            this.splitContainer1.SplitterDistance = 441;
+            this.splitContainer1.Size = new System.Drawing.Size(746, 590);
+            this.splitContainer1.SplitterDistance = 520;
             this.splitContainer1.TabIndex = 1;
             // 
             // btnCancel
@@ -694,56 +803,26 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // label8
+            // openFileDialog1
             // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(19, 226);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(528, 32);
-            this.label8.TabIndex = 122;
-            this.label8.Text = "Highlight resources near their end of incident date";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Images|*.jpg;*.jpeg;*.png;,*.gif,*.bmp";
             // 
-            // label9
+            // txtOrganizationName
             // 
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(19, 261);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(242, 32);
-            this.label9.TabIndex = 123;
-            this.label9.Text = "Yellow";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(19, 296);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(242, 32);
-            this.label10.TabIndex = 124;
-            this.label10.Text = "Red";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numYellowResourceTimeoutDays
-            // 
-            this.numYellowResourceTimeoutDays.Location = new System.Drawing.Point(267, 261);
-            this.numYellowResourceTimeoutDays.Name = "numYellowResourceTimeoutDays";
-            this.numYellowResourceTimeoutDays.Size = new System.Drawing.Size(120, 29);
-            this.numYellowResourceTimeoutDays.TabIndex = 125;
-            // 
-            // numRedResourceTimeoutDays
-            // 
-            this.numRedResourceTimeoutDays.Location = new System.Drawing.Point(267, 296);
-            this.numRedResourceTimeoutDays.Name = "numRedResourceTimeoutDays";
-            this.numRedResourceTimeoutDays.Size = new System.Drawing.Size(120, 29);
-            this.numRedResourceTimeoutDays.TabIndex = 126;
+            this.txtOrganizationName.Location = new System.Drawing.Point(267, 334);
+            this.txtOrganizationName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtOrganizationName.Multiline = false;
+            this.txtOrganizationName.Name = "txtOrganizationName";
+            this.txtOrganizationName.Size = new System.Drawing.Size(463, 32);
+            this.txtOrganizationName.TabIndex = 138;
             // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(746, 511);
+            this.ClientSize = new System.Drawing.Size(746, 590);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -753,6 +832,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tbGeneral.ResumeLayout(false);
             this.tbGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picReportLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRedResourceTimeoutDays)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numYellowResourceTimeoutDays)).EndInit();
             this.tbFileManagement.ResumeLayout(false);
             this.tbFileManagement.PerformLayout();
             this.tbNetworking.ResumeLayout(false);
@@ -762,8 +844,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numYellowResourceTimeoutDays)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRedResourceTimeoutDays)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -823,5 +903,12 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnRemoveLogo;
+        private System.Windows.Forms.Button btnChangeLogo;
+        private System.Windows.Forms.PictureBox picReportLogo;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private CustomControls.TextBoxRequiredControl txtOrganizationName;
     }
 }
