@@ -4021,8 +4021,11 @@ namespace WildfireICSDesktopServices
                 OrganizationChart org = task.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
                 foreach( ICSRole role in org.AllRoles.Where(o => o.IsOpGroupSup && !o.IsTFST && o.Active))
                 {
-                    if(task.AllOperationalGroups.Any(o=>!o.IsBranchOrDiv && o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
-                    else if (!task.AllOperationalGroups.Any(o=>o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
+                    if (role.RoleID != Globals.AirOpsDirector && role.ReportsTo != Globals.AirOpsDirector)
+                    {
+                        if (task.AllOperationalGroups.Any(o => !o.IsBranchOrDiv && o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
+                        else if (!task.AllOperationalGroups.Any(o => o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
+                    }
                 }
 
 
@@ -4090,10 +4093,18 @@ namespace WildfireICSDesktopServices
                     PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
 
                     ICSRole branch = new ICSRole();
+
                     if(div.RoleID != Globals.OpsChiefID) { branch = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriod).GetRoleByID(div.ReportsTo, false); }
                     else { branch = div; }
-                    stamper.AcroFields.SetField("1 BRANCH", branch.RoleName);
-                    stamper.AcroFields.SetField("2 DIVISIONGROUPSTAGING", div.RoleName);
+
+                    if (task.AllOperationalGroups.Any(o => o.ID == branch.OperationalGroupID))
+                    {
+                        OperationalGroup branchGroup = task.AllOperationalGroups.First(o => o.ID == branch.OperationalGroupID);
+                        stamper.AcroFields.SetField("1 BRANCH", branchGroup.Name);
+                    }
+
+
+                    stamper.AcroFields.SetField("2 DIVISIONGROUPSTAGING", opGroup.Name);
 
 
                     OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
