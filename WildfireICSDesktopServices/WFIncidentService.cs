@@ -1728,6 +1728,7 @@ namespace WildfireICSDesktopServices
                         else
                         {
                             NewRole = OrgChartTools.getGenericRoleByName("Operations Branch Director");
+                            
                         }
                     }
                     else if (record.GroupType.Equals("Division"))
@@ -1772,10 +1773,9 @@ namespace WildfireICSDesktopServices
                     switch (record.GroupType)
                     {
                         case "Branch":
-                            if (record.Name.Length < 4)
-                            {
-                                NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
-                            }
+
+                            NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
+
                             NewRole.IsOpGroupSup = true;
                             break;
                         case "Division":

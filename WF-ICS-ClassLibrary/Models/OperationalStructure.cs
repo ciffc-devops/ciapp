@@ -34,6 +34,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(21)] private string _SpecialInstructions;//used for branches, divisions
         [ProtoMember(22)] private List<Guid> _CommsPlanItemIDs; //used for branches, divisions
         [ProtoMember(23)] private string _ResourceID;
+        [ProtoMember(24)] private string _BoxText;
 
         [ProtoMember(24)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
 
@@ -89,6 +90,8 @@ namespace WF_ICS_ClassLibrary.Models
         public string TacticalAssignment { get => _TacticalAssignment; set => _TacticalAssignment = value; }
         public string SpecialInstructions { get => _SpecialInstructions; set => _SpecialInstructions = value; }
         public string Comments { get => _Comments; set => _Comments = value; }
+        public string BoxText { get => _BoxText; set => _BoxText = value; }
+
         public int Depth { get => _Depth; set => _Depth = value; }
         public int SpanOfControl { get => _SpanOfControl; set => _SpanOfControl = value; }
 
@@ -289,10 +292,9 @@ namespace WF_ICS_ClassLibrary.Models
             switch (record.GroupType)
             {
                 case "Branch":
-                    if (record.Name.Length < 4)
-                    {
+                    
                         NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
-                    }
+                    
                     NewRole.IsOpGroupSup = true;
                     break;
                 case "Division":
