@@ -33,6 +33,12 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void CrewEditControl_Load(object sender, EventArgs e)
         {
+            txtName.TextChanged += TxtName_TextChanged;
+        }
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            subGroup.ResourceName = txtName.Text;
 
         }
 
@@ -42,7 +48,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 txtEmail.Text = subGroup.Email;
                 txtPhone.Text = subGroup.Phone;
-                txtName.Text = subGroup.ResourceName;
+                txtName.SetText( subGroup.ResourceName);
                 txtTransport.Text = subGroup.Transport;
                 rbCrew.Checked = !subGroup.IsEquipmentCrew;
                 rbHECrew.Checked = subGroup.IsEquipmentCrew;
@@ -223,20 +229,12 @@ namespace Wildfire_ICS_Assist.CustomControls
             btnEditSelected.Enabled = dgvGroup.SelectedRows.Count == 1;
         }
 
-        private void txtName_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtName.Text)) { txtName.BackColor = Program.ErrorColor; }
-            else { txtName.BackColor = Program.GoodColor; }
-            subGroup.ResourceName = txtName.Text;
-        }
 
         public bool FormIsComplete
         {
             get
             {
-                if (string.IsNullOrEmpty(txtName.Text)) { txtName.BackColor = Program.ErrorColor; }
-                else { txtName.BackColor = Program.GoodColor; }
-                return !string.IsNullOrEmpty(txtName.Text);
+                return txtName.IsValid;
             }
         }
 
@@ -318,7 +316,6 @@ namespace Wildfire_ICS_Assist.CustomControls
             if (!rbHECrew.Checked && subGroup.ActiveResourceListing.Any(o => o.ResourceType.Equals("Equipment") || o.ResourceType.Equals("Vehicle")))
             {
                 rbHECrew.Checked = true;
-                lblOnlyHECrews.Visible = true;
             }
         }
 

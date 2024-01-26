@@ -40,9 +40,9 @@ namespace Wildfire_ICS_Assist.CustomControls
             
             if (_teamMember != null)
             {
-                txtFirstName.Text = teamMember.FirstName;
+                txtFirstName.SetText(teamMember.FirstName);
                 txtMiddleName.Text = teamMember.MiddleInitial;
-                txtLastName.Text = teamMember.LastName;
+                txtLastName.SetText(teamMember.LastName);
                 cboAccomodationPreference.Text = teamMember.AccomodationPreference;
                 if (teamMember.HomeProvinceID != Guid.Empty) { cboProvince.SelectedValue = teamMember.HomeProvinceID; }
                 else if (Program.generalOptionsService != null && Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID") != Guid.Empty) { cboProvince.SelectedValue = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); _teamMember.HomeProvinceID = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); ; }
@@ -69,7 +69,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 chkDietary.Checked = teamMember.HasDietaryRestrictions;
                 txtCallsign.Text = teamMember.CallSign;
                 chkAllergies.Checked = teamMember.HasAllergies;
-                txtNOKName.Text = teamMember.EmergencyContact;
+                txtNOKName.SetText(teamMember.EmergencyContact);
 
                 //chkNoGluten.Checked = teamMember.NoGluten;
                 //chkVegetarian.Checked = teamMember.Vegetarian;
@@ -109,12 +109,29 @@ namespace Wildfire_ICS_Assist.CustomControls
             bsProvAndTerr.DataSource = provinces;
             cboProvince.DisplayMember = "ProvinceName";
             cboProvince.ValueMember = "ProvinceGUID";
+
+            txtFirstName.TextChanged += TxtFirstName_TextChanged;
+            txtLastName.TextChanged += TxtLastName_TextChanged;
+            txtNOKName.TextChanged += TxtNOKName_TextChanged;
+        }
+
+        private void TxtNOKName_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.EmergencyContact = ((TextBox)sender).Text; SetColours();
+        }
+
+        private void TxtLastName_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.LastName = ((TextBox)sender).Text;
+        }
+
+        private void TxtFirstName_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.FirstName = ((TextBox)sender).Text;
         }
 
         private void SetColours()
         {
-            if (string.IsNullOrEmpty(txtFirstName.Text.Trim())) { txtFirstName.BackColor = Program.ErrorColor; } else { txtFirstName.BackColor = SystemColors.Window; }
-            if (string.IsNullOrEmpty(txtLastName.Text.Trim())) { txtLastName.BackColor = Program.ErrorColor; } else { txtLastName.BackColor = SystemColors.Window; }
             if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; } else { cboAccomodationPreference.BackColor = SystemColors.Window; }
             if (string.IsNullOrEmpty(txtCellphone.Text.Trim())) { txtCellphone.BackColor = Program.ErrorColor; } else { txtCellphone.BackColor = SystemColors.Window; }
             if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; } else {  cboAgency.BackColor= SystemColors.Window; }
@@ -131,6 +148,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (string.IsNullOrEmpty(teamMember.AccomodationPreference) || string.IsNullOrEmpty(teamMember.AccomodationPreference.Trim())) { return false; }
                 if (string.IsNullOrEmpty(teamMember.CellphoneNumber) || string.IsNullOrEmpty(teamMember.CellphoneNumber.Trim())) { return false; }
                 if (string.IsNullOrEmpty(teamMember.Agency)) { return false; };
+                if (string.IsNullOrEmpty(teamMember.EmergencyContact)) { return false; };
                 SetColours();
 
                 return true;
@@ -201,11 +219,6 @@ namespace Wildfire_ICS_Assist.CustomControls
             teamMember.HomeUnit = cboHomeAgency.Text;
         }
 
-        private void txtNOKName_TextChanged(object sender, EventArgs e)
-        {
-            teamMember.EmergencyContact = ((TextBox)sender).Text; SetColours();
-
-        }
 
        
 
@@ -224,11 +237,6 @@ namespace Wildfire_ICS_Assist.CustomControls
             teamMember.MiddleInitial = ((TextBox)sender).Text;
         }
 
-        private void txtLastName_TextChanged(object sender, EventArgs e)
-        {
-            teamMember.LastName = ((TextBox)sender).Text;
-            SetColours();
-        }
 
         private void chkContractor_CheckedChanged(object sender, EventArgs e)
         {

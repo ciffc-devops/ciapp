@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 namespace Wildfire_ICS_Assist.CustomControls
@@ -18,9 +19,14 @@ namespace Wildfire_ICS_Assist.CustomControls
             get => textBox1.Multiline; set
             {
                 textBox1.Multiline = value;
-                if (value) { textBox1.ScrollBars = ScrollBars.Vertical; }
-                else { textBox1.ScrollBars = ScrollBars.None; }
+                textBox1.WordWrap = value;
             }
+        }
+
+        public new event EventHandler TextChanged
+        {
+            add { textBox1.Click += value; }
+            remove { textBox1.Click -= value; }
         }
 
         public bool IsValid { get { return !string.IsNullOrEmpty(textBox1.Text); } }
@@ -42,12 +48,12 @@ namespace Wildfire_ICS_Assist.CustomControls
             if (string.IsNullOrEmpty(textBox1.Text))
             {
                 errorProvider1.SetError(textBox1, "This field is required");
-                textBox1.BackColor = Program.ErrorColor;
+                textBox1.SetBackColor(Program.ErrorColor);
             }
             else
             {
                 errorProvider1.SetError(textBox1, string.Empty);
-                textBox1.BackColor = Program.GoodColor;
+                textBox1.SetBackColor(Program.GoodColor);
             }
         }
 
@@ -57,6 +63,12 @@ namespace Wildfire_ICS_Assist.CustomControls
         }
 
         private void TextBoxRequiredControl_Load(object sender, EventArgs e)
+        {
+            validateTextBox();
+
+        }
+
+        private void TextBoxRequiredControl_Enter(object sender, EventArgs e)
         {
             validateTextBox();
 

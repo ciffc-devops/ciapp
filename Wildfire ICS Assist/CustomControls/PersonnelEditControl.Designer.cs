@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PersonnelEditControl));
-            this.txtFirstName = new System.Windows.Forms.TextBox();
             this.cboProvince = new System.Windows.Forms.ComboBox();
             this.bsProvAndTerr = new System.Windows.Forms.BindingSource(this.components);
             this.cboAgency = new System.Windows.Forms.ComboBox();
@@ -46,7 +45,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.txtNOKName = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.btnEmailHelp = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -60,7 +58,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtMiddleName = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtLastName = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cboAccomodationPreference = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -76,19 +73,11 @@
             this.label20 = new System.Windows.Forms.Label();
             this.txtPronouns = new System.Windows.Forms.TextBox();
             this.txtCellphone = new System.Windows.Forms.TextBox();
+            this.txtFirstName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
+            this.txtLastName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
+            this.txtNOKName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtFirstName
-            // 
-            this.txtFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFirstName.Location = new System.Drawing.Point(214, 6);
-            this.txtFirstName.Margin = new System.Windows.Forms.Padding(6);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(190, 29);
-            this.txtFirstName.TabIndex = 0;
-            this.txtFirstName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // cboProvince
             // 
@@ -101,7 +90,7 @@
             this.cboProvince.Location = new System.Drawing.Point(214, 258);
             this.cboProvince.Margin = new System.Windows.Forms.Padding(6);
             this.cboProvince.Name = "cboProvince";
-            this.cboProvince.Size = new System.Drawing.Size(190, 32);
+            this.cboProvince.Size = new System.Drawing.Size(607, 32);
             this.cboProvince.TabIndex = 6;
             this.cboProvince.SelectedIndexChanged += new System.EventHandler(this.cboProvince_SelectedIndexChanged);
             // 
@@ -117,7 +106,7 @@
             this.cboAgency.Location = new System.Drawing.Point(214, 302);
             this.cboAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboAgency.Name = "cboAgency";
-            this.cboAgency.Size = new System.Drawing.Size(190, 32);
+            this.cboAgency.Size = new System.Drawing.Size(607, 32);
             this.cboAgency.TabIndex = 7;
             this.cboAgency.SelectedIndexChanged += new System.EventHandler(this.cboAgency_SelectedIndexChanged);
             this.cboAgency.Leave += new System.EventHandler(this.cboAgency_Leave);
@@ -168,7 +157,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEmail.Location = new System.Drawing.Point(214, 579);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(190, 29);
+            this.txtEmail.Size = new System.Drawing.Size(607, 29);
             this.txtEmail.TabIndex = 14;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
@@ -192,7 +181,7 @@
             this.cboHomeAgency.FormattingEnabled = true;
             this.cboHomeAgency.Location = new System.Drawing.Point(214, 421);
             this.cboHomeAgency.Name = "cboHomeAgency";
-            this.cboHomeAgency.Size = new System.Drawing.Size(190, 32);
+            this.cboHomeAgency.Size = new System.Drawing.Size(607, 32);
             this.cboHomeAgency.TabIndex = 10;
             this.cboHomeAgency.Leave += new System.EventHandler(this.cboHomeAgency_Leave);
             // 
@@ -216,7 +205,7 @@
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button1.Location = new System.Drawing.Point(408, 262);
+            this.button1.Location = new System.Drawing.Point(831, 262);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 92;
@@ -231,7 +220,7 @@
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button2.Location = new System.Drawing.Point(408, 304);
+            this.button2.Location = new System.Drawing.Point(831, 304);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 26);
             this.button2.TabIndex = 93;
@@ -247,7 +236,7 @@
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button6.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button6.Location = new System.Drawing.Point(410, 425);
+            this.button6.Location = new System.Drawing.Point(833, 425);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 26);
             this.button6.TabIndex = 97;
@@ -257,25 +246,13 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
-            // txtNOKName
-            // 
-            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNOKName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNOKName.Location = new System.Drawing.Point(211, 724);
-            this.txtNOKName.Name = "txtNOKName";
-            this.txtNOKName.Size = new System.Drawing.Size(190, 29);
-            this.txtNOKName.TabIndex = 18;
-            this.toolTip1.SetToolTip(this.txtNOKName, "Ideally, your EMBC ID#");
-            this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged);
-            // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button3.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button3.Location = new System.Drawing.Point(407, 725);
+            this.button3.Location = new System.Drawing.Point(830, 725);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 26);
             this.button3.TabIndex = 125;
@@ -290,7 +267,7 @@
             this.btnEmailHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmailHelp.BackgroundImage")));
             this.btnEmailHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnEmailHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnEmailHelp.Location = new System.Drawing.Point(408, 580);
+            this.btnEmailHelp.Location = new System.Drawing.Point(831, 580);
             this.btnEmailHelp.Name = "btnEmailHelp";
             this.btnEmailHelp.Size = new System.Drawing.Size(26, 26);
             this.btnEmailHelp.TabIndex = 134;
@@ -331,7 +308,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCallsign.Location = new System.Drawing.Point(214, 613);
             this.txtCallsign.Name = "txtCallsign";
-            this.txtCallsign.Size = new System.Drawing.Size(190, 29);
+            this.txtCallsign.Size = new System.Drawing.Size(607, 29);
             this.txtCallsign.TabIndex = 15;
             this.txtCallsign.TextChanged += new System.EventHandler(this.txtCallsign_TextChanged);
             // 
@@ -574,7 +551,7 @@
             this.cboCountry.Location = new System.Drawing.Point(214, 214);
             this.cboCountry.Margin = new System.Windows.Forms.Padding(6);
             this.cboCountry.Name = "cboCountry";
-            this.cboCountry.Size = new System.Drawing.Size(190, 32);
+            this.cboCountry.Size = new System.Drawing.Size(607, 32);
             this.cboCountry.TabIndex = 5;
             this.cboCountry.Leave += new System.EventHandler(this.cboCountry_Leave);
             // 
@@ -595,7 +572,7 @@
             this.txtMiddleName.Location = new System.Drawing.Point(214, 47);
             this.txtMiddleName.Margin = new System.Windows.Forms.Padding(6);
             this.txtMiddleName.Name = "txtMiddleName";
-            this.txtMiddleName.Size = new System.Drawing.Size(190, 29);
+            this.txtMiddleName.Size = new System.Drawing.Size(607, 29);
             this.txtMiddleName.TabIndex = 1;
             this.txtMiddleName.TextChanged += new System.EventHandler(this.txtMiddleName_TextChanged);
             // 
@@ -608,17 +585,6 @@
             this.label11.TabIndex = 117;
             this.label11.Text = "Last Name*";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtLastName
-            // 
-            this.txtLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLastName.Location = new System.Drawing.Point(214, 88);
-            this.txtLastName.Margin = new System.Windows.Forms.Padding(6);
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(190, 29);
-            this.txtLastName.TabIndex = 2;
-            this.txtLastName.TextChanged += new System.EventHandler(this.txtLastName_TextChanged);
             // 
             // label12
             // 
@@ -646,7 +612,7 @@
             this.cboAccomodationPreference.Location = new System.Drawing.Point(214, 170);
             this.cboAccomodationPreference.Margin = new System.Windows.Forms.Padding(6);
             this.cboAccomodationPreference.Name = "cboAccomodationPreference";
-            this.cboAccomodationPreference.Size = new System.Drawing.Size(190, 32);
+            this.cboAccomodationPreference.Size = new System.Drawing.Size(607, 32);
             this.cboAccomodationPreference.TabIndex = 4;
             this.cboAccomodationPreference.SelectedIndexChanged += new System.EventHandler(this.cboAccomodationPreference_SelectedIndexChanged);
             this.cboAccomodationPreference.Leave += new System.EventHandler(this.cboGender_Leave);
@@ -729,7 +695,7 @@
             "Contractor"});
             this.cboKind.Location = new System.Drawing.Point(214, 459);
             this.cboKind.Name = "cboKind";
-            this.cboKind.Size = new System.Drawing.Size(190, 32);
+            this.cboKind.Size = new System.Drawing.Size(607, 32);
             this.cboKind.TabIndex = 11;
             this.cboKind.Leave += new System.EventHandler(this.cboKind_Leave);
             // 
@@ -746,7 +712,7 @@
             "Type 3"});
             this.cboType.Location = new System.Drawing.Point(214, 502);
             this.cboType.Name = "cboType";
-            this.cboType.Size = new System.Drawing.Size(190, 32);
+            this.cboType.Size = new System.Drawing.Size(607, 32);
             this.cboType.TabIndex = 12;
             this.cboType.Leave += new System.EventHandler(this.cboType_Leave);
             // 
@@ -771,7 +737,7 @@
             this.cboOtherAgency.Location = new System.Drawing.Point(214, 346);
             this.cboOtherAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboOtherAgency.Name = "cboOtherAgency";
-            this.cboOtherAgency.Size = new System.Drawing.Size(190, 32);
+            this.cboOtherAgency.Size = new System.Drawing.Size(607, 32);
             this.cboOtherAgency.TabIndex = 8;
             this.cboOtherAgency.Leave += new System.EventHandler(this.cboOtherAgency_Leave);
             // 
@@ -792,7 +758,7 @@
             this.txtPronouns.Location = new System.Drawing.Point(214, 129);
             this.txtPronouns.Margin = new System.Windows.Forms.Padding(6);
             this.txtPronouns.Name = "txtPronouns";
-            this.txtPronouns.Size = new System.Drawing.Size(190, 29);
+            this.txtPronouns.Size = new System.Drawing.Size(607, 29);
             this.txtPronouns.TabIndex = 3;
             this.txtPronouns.TextChanged += new System.EventHandler(this.txtPronouns_TextChanged);
             // 
@@ -803,15 +769,51 @@
             this.txtCellphone.Location = new System.Drawing.Point(214, 543);
             this.txtCellphone.Margin = new System.Windows.Forms.Padding(6);
             this.txtCellphone.Name = "txtCellphone";
-            this.txtCellphone.Size = new System.Drawing.Size(190, 29);
+            this.txtCellphone.Size = new System.Drawing.Size(607, 29);
             this.txtCellphone.TabIndex = 13;
             this.txtCellphone.TextChanged += new System.EventHandler(this.txtCellphone_TextChanged);
+            // 
+            // txtFirstName
+            // 
+            this.txtFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFirstName.Location = new System.Drawing.Point(214, 6);
+            this.txtFirstName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtFirstName.Multiline = false;
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(607, 29);
+            this.txtFirstName.TabIndex = 137;
+            // 
+            // txtLastName
+            // 
+            this.txtLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLastName.Location = new System.Drawing.Point(214, 88);
+            this.txtLastName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtLastName.Multiline = false;
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(607, 29);
+            this.txtLastName.TabIndex = 138;
+            // 
+            // txtNOKName
+            // 
+            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNOKName.Location = new System.Drawing.Point(214, 724);
+            this.txtNOKName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtNOKName.Multiline = false;
+            this.txtNOKName.Name = "txtNOKName";
+            this.txtNOKName.Size = new System.Drawing.Size(607, 29);
+            this.txtNOKName.TabIndex = 139;
             // 
             // PersonnelEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.txtNOKName);
+            this.Controls.Add(this.txtLastName);
+            this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.txtCellphone);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.txtPronouns);
@@ -830,7 +832,6 @@
             this.Controls.Add(this.cboAccomodationPreference);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtMiddleName);
             this.Controls.Add(this.label9);
@@ -839,7 +840,6 @@
             this.Controls.Add(this.chkDietary);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtCallsign);
-            this.Controls.Add(this.txtNOKName);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button2);
@@ -854,12 +854,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboAgency);
             this.Controls.Add(this.cboProvince);
-            this.Controls.Add(this.txtFirstName);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(442, 769);
             this.Name = "PersonnelEditControl";
-            this.Size = new System.Drawing.Size(442, 769);
+            this.Size = new System.Drawing.Size(865, 769);
             this.Load += new System.EventHandler(this.PersonnelEditControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).EndInit();
             this.ResumeLayout(false);
@@ -868,8 +867,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.ComboBox cboProvince;
         private System.Windows.Forms.ComboBox cboAgency;
         private System.Windows.Forms.Label label1;
@@ -886,7 +883,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.BindingSource bsProvAndTerr;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.TextBox txtNOKName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCallsign;
@@ -897,7 +893,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtMiddleName;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cboAccomodationPreference;
         private System.Windows.Forms.Label label14;
@@ -915,5 +910,8 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtPronouns;
         private System.Windows.Forms.TextBox txtCellphone;
+        private TextBoxRequiredControl txtFirstName;
+        private TextBoxRequiredControl txtLastName;
+        private TextBoxRequiredControl txtNOKName;
     }
 }
