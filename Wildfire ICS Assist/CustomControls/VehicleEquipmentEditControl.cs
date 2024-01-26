@@ -162,7 +162,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void rbVehicle_CheckedChanged(object sender, EventArgs e)
         {
-            txtLicenseOrID.Enabled = rbVehicle.Checked;
+            //txtLicenseOrID.Enabled = rbVehicle.Checked;
             txtType.Enabled = !rbVehicle.Checked;
             txtKind.Enabled = !rbVehicle.Checked;
             CurrentVehicle.IsEquipment = !rbVehicle.Checked;
