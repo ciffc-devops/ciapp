@@ -4094,7 +4094,7 @@ namespace WildfireICSDesktopServices
 
                     ICSRole branch = new ICSRole();
 
-                    if(div.RoleID != Globals.OpsChiefID) { branch = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriod).GetRoleByID(div.ReportsTo, false); }
+                    if(div.RoleID != Globals.OpsChiefID && div.ReportsTo != Globals.OpsChiefID) { branch = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriod).GetRoleByID(div.ReportsTo, false); }
                     else { branch = div; }
 
                     if (task.AllOperationalGroups.Any(o => o.ID == branch.OperationalGroupID))
@@ -4130,10 +4130,15 @@ namespace WildfireICSDesktopServices
                         operationalpersonnel.Insert(0, role);
                         reportsTo = role.ReportsTo;
                     }
-                    for (int x = 0; x < 8 && x < operationalpersonnel.Count; x++)
+                    for (int x = 0; x < 4 && x < operationalpersonnel.Count; x++)
                     {
-                        if (operationalpersonnel[x].IndividualID != Guid.Empty) { stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalpersonnel[x].RoleNameWithIndividual); }
-                        else { stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalpersonnel[x].RoleName + " - Unassigned"); }
+                        stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalpersonnel[x].RoleName);
+
+                        if (operationalpersonnel[x].IndividualID != Guid.Empty)
+                        {
+                            stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 5), operationalpersonnel[x].IndividualName);
+                        }
+                        
                     }
 
                     List<IncidentResource> reportingResources = task.GetReportingResources(opGroup.ID);
