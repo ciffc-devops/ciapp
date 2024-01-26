@@ -101,10 +101,17 @@ namespace Wildfire_ICS_Assist.CustomControls
                 return false;
             }
             else { lblLastDayWorking.ForeColor = lblLastDayCount.ForeColor; }
+
+            if (datCheckInTime.Value > Program.CurrentOpPeriodDetails.PeriodEnd || datLDW.Value < Program.CurrentOpPeriodDetails.PeriodStart)
+            {
+                DialogResult proceed = MessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (proceed == DialogResult.No) { return false; }
+            }
+
             return IsComplete;
         }
 
-        public void SaveFormFieldsToCheckin()
+        public void SaveFormFieldsToCheckIn()
         {
             checkInRecord.InfoFields = new List<CheckInInfoField>();
             foreach (CheckInInfoFieldControl ctrl in infoFieldControls)

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
@@ -22,12 +23,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
 
             cboAgency.DataSource = AgencyTools.GetFixedAgencies(true);
-            
+            cboAgency.DropDownWidth = cboAgency.GetDropDownWidth();
 
 
             if (Program.generalOptionsService != null && Program.generalOptionsService.GetOptionsValue("Agencies") != null)
             {
                 cboOtherAgency.DataSource = GetIncidentAgencies();
+                cboOtherAgency.DropDownWidth = cboOtherAgency.GetDropDownWidth();
 
                 List<string> homebases = (List<string>)Program.generalOptionsService.GetOptionsValue("HomeBases");
                 List<string> incidentBases = Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.HomeUnit)).GroupBy(o => o.HomeUnit).Select(o => o.First().HomeUnit).ToList();
@@ -36,6 +38,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 homebases.Insert(0, string.Empty);
 
                 cboHomeAgency.DataSource = homebases;
+                cboHomeAgency.DropDownWidth = cboHomeAgency.GetDropDownWidth();
             }
             
             if (_teamMember != null)
@@ -58,7 +61,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                     }
                 }
                 chkContractor.Checked = teamMember.IsContractor;
-                txtCellphone.Text = teamMember.CellphoneNumber;
+                txtCellphone.SetText(teamMember.CellphoneNumber);
                 cboType.Text = teamMember.Type;
                 cboKind.Text = teamMember.Kind;
                 txtPronouns.Text = teamMember.Pronouns;
@@ -109,10 +112,16 @@ namespace Wildfire_ICS_Assist.CustomControls
             bsProvAndTerr.DataSource = provinces;
             cboProvince.DisplayMember = "ProvinceName";
             cboProvince.ValueMember = "ProvinceGUID";
-
+            cboProvince.DropDownWidth = cboProvince.GetDropDownWidth();
             txtFirstName.TextChanged += TxtFirstName_TextChanged;
             txtLastName.TextChanged += TxtLastName_TextChanged;
             txtNOKName.TextChanged += TxtNOKName_TextChanged;
+            txtCellphone.TextChanged += TxtCellphone_TextChanged;
+        }
+
+        private void TxtCellphone_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.CellphoneNumber = ((TextBox)sender).Text;
         }
 
         private void TxtNOKName_TextChanged(object sender, EventArgs e)
@@ -132,9 +141,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void SetColours()
         {
-            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; } else { cboAccomodationPreference.BackColor = SystemColors.Window; }
-            if (string.IsNullOrEmpty(txtCellphone.Text.Trim())) { txtCellphone.BackColor = Program.ErrorColor; } else { txtCellphone.BackColor = SystemColors.Window; }
-            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; } else {  cboAgency.BackColor= SystemColors.Window; }
+            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; } else { cboAccomodationPreference.BackColor = Program.GoodColor; }
+            if (string.IsNullOrEmpty(txtCellphone.Text.Trim())) { txtCellphone.BackColor = Program.ErrorColor; } else { txtCellphone.BackColor = Program.GoodColor; }
+            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; } else {  cboAgency.BackColor= Program.GoodColor; }
         }
 
         public bool FormValid
@@ -307,10 +316,6 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         }
 
-        private void txtCellphone_TextChanged(object sender, EventArgs e)
-        {
-            teamMember.CellphoneNumber = ((TextBox)sender).Text;
-            SetColours();
-        }
+       
     }
 }

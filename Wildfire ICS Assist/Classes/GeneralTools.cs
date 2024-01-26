@@ -11,6 +11,19 @@ namespace Wildfire_ICS_Assist.Classes
 {
     public static class GeneralTools
     {
+        public static int GetDropDownWidth(this ComboBox myCombo)
+        {
+            try
+            {
+                int w = myCombo.Items.Cast<object>().Max(o => TextRenderer.MeasureText(myCombo.GetItemText(o), myCombo.Font).Width);
+                if(w > 0) { return w; } else { return 100; }
+            }
+            catch
+            {
+                return 100;
+            }
+        }
+
         public static void SetDateFormat(Control parent)
         {
             foreach (Control c in parent.Controls)

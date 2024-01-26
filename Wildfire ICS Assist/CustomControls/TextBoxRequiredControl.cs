@@ -31,7 +31,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public bool IsValid { get { return !string.IsNullOrEmpty(textBox1.Text); } }
         public new string Text { get => textBox1.Text; }
-        public void SetText(string txt) { textBox1.Text = txt; }
+        public void SetText(string txt) { textBox1.Text = txt; validateTextBox(); }
 
         public TextBoxRequiredControl()
         {

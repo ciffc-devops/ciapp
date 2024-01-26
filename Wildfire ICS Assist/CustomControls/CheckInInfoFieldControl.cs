@@ -106,7 +106,17 @@ namespace Wildfire_ICS_Assist.CustomControls
                         cboListValue.Location = startPoint;
                         cboListValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                         cboListValue.DataSource = CheckInTools.GetInfoFieldListOptions(infoField.ID);
-                        cboListValue.Text = infoField.StringValue;
+                        if (string.IsNullOrEmpty(infoField.StringValue) && cboListValue.Items.Count > 0)
+                        {
+                            for (int x = 0; x < cboListValue.Items.Count; x++)
+                            {
+                                if (!string.IsNullOrEmpty(cboListValue.Items[x].ToString()))
+                                {
+                                    cboListValue.SelectedIndex = x; break;
+                                }
+                            }
+                        }
+                        else { cboListValue.Text = infoField.StringValue; }
                         break;
                     default:
                         txtStringValue.Visible = true;

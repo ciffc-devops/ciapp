@@ -256,7 +256,7 @@ namespace Wildfire_ICS_Assist
         {
            if(_selectedResource != null && resourceCheckInEditControl1.ValidateCheckInInfo())
             {
-                resourceCheckInEditControl1.SaveFormFieldsToCheckin();
+                resourceCheckInEditControl1.SaveFormFieldsToCheckIn();
 
                 
 
@@ -441,6 +441,11 @@ namespace Wildfire_ICS_Assist
             vehicleEquipmentEditControl1.SetVehicle(v);
             BuildSavedVehicleList();
             wizardPages1.SelectedIndex = 4;
+
+        }
+
+        private void crewEditControl1_Load(object sender, EventArgs e)
+        {
 
         }
     }
