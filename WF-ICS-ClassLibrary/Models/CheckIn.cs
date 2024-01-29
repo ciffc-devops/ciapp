@@ -190,6 +190,69 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class CheckInTools
     {
+        public static int[,] GetMealRequirementsSummary(this List<CheckInRecordWithResource> list)
+        {
+            Guid breakfastID = new Guid("09e8e520-a82e-491f-a82e-ed108e809392");
+            Guid lunchID = new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4");
+            Guid dinnerID = new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488");
+            List<CheckInRecordWithResource> personnel = list.Where(o => o.Resource.GetType().Name.Equals("Personnel")).ToList();
+
+            int[,] food = new int[3, 2];
+
+
+            foreach (CheckInRecordWithResource rec in personnel)
+            {
+
+                if (rec.Record.InfoFields.Any(o => o.ID == breakfastID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[0, 1]++; }
+                    else { food[0, 0]++; }
+                }
+                if (rec.Record.InfoFields.Any(o => o.ID == lunchID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[1, 1]++; }
+                    else { food[1, 0]++; }
+                }
+                if (rec.Record.InfoFields.Any(o => o.ID == dinnerID && o.BoolValue))
+                {
+                    if ((rec.Resource as Personnel).HasDietaryRestrictions) { food[2, 1]++; }
+                    else { food[2, 0]++; }
+                }
+            }
+            return food;
+        }
+
+        public static bool[] GetMealRequirements(this CheckInRecord record)
+        {
+            Guid breakfastID = new Guid("09e8e520-a82e-491f-a82e-ed108e809392");
+            Guid lunchID = new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4");
+            Guid dinnerID = new Guid("dd5a2327-bfdc-42fb-a3b4-e6e68fd1d488");
+
+            bool[] food = new bool[3];
+
+
+
+            if (record.InfoFields.Any(o => o.ID == breakfastID))
+            {
+                food[0] = record.InfoFields.First(o => o.ID == breakfastID).BoolValue;
+            }
+            if (record.InfoFields.Any(o => o.ID == lunchID))
+            {
+                food[1] = record.InfoFields.First(o => o.ID == lunchID).BoolValue;
+            }
+            if (record.InfoFields.Any(o => o.ID == dinnerID))
+            {
+                food[2] = record.InfoFields.First(o => o.ID == dinnerID).BoolValue;
+            }
+
+            return food;
+        }
+        public static bool[] GetMealRequirements(this CheckInRecordWithResource record)
+        {
+            return GetMealRequirements(record.Record);
+        }
+
+
         public static string ExportCheckInRecordsToCSV(this List<CheckInRecordWithResource> records, List<DemobilizationRecord> demobRecords, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();

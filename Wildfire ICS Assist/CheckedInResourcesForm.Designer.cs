@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -79,13 +79,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cboResourceVariety = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnDietaryAndAllergy = new System.Windows.Forms.Button();
+            this.btnEditCheckIn = new System.Windows.Forms.Button();
+            this.btnEditResource = new System.Windows.Forms.Button();
             this.btnCheckInByManifest = new System.Windows.Forms.Button();
             this.btnPrinttAll211sToDate = new System.Windows.Forms.Button();
             this.btnLogisticsOverview = new System.Windows.Forms.Button();
             this.btnExportSignInToCSV = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnDemob = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.btnStartCheckIn = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -125,16 +127,18 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnDietaryAndAllergy);
+            this.splitContainer1.Panel2.Controls.Add(this.btnEditCheckIn);
+            this.splitContainer1.Panel2.Controls.Add(this.btnEditResource);
             this.splitContainer1.Panel2.Controls.Add(this.btnCheckInByManifest);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrinttAll211sToDate);
             this.splitContainer1.Panel2.Controls.Add(this.btnLogisticsOverview);
             this.splitContainer1.Panel2.Controls.Add(this.btnExportSignInToCSV);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
             this.splitContainer1.Panel2.Controls.Add(this.btnDemob);
-            this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnStartCheckIn);
-            this.splitContainer1.Size = new System.Drawing.Size(1141, 683);
-            this.splitContainer1.SplitterDistance = 531;
+            this.splitContainer1.Size = new System.Drawing.Size(1141, 590);
+            this.splitContainer1.SplitterDistance = 438;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -153,7 +157,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cpPNumbers);
             this.splitContainer2.Panel2.Controls.Add(this.cpFilters);
-            this.splitContainer2.Size = new System.Drawing.Size(1141, 531);
+            this.splitContainer2.Size = new System.Drawing.Size(1141, 438);
             this.splitContainer2.SplitterDistance = 835;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoving += new System.Windows.Forms.SplitterCancelEventHandler(this.splitContainer2_SplitterMoving);
@@ -188,7 +192,7 @@
             this.dgvResources.RowHeadersVisible = false;
             this.dgvResources.RowTemplate.Height = 30;
             this.dgvResources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResources.Size = new System.Drawing.Size(835, 531);
+            this.dgvResources.Size = new System.Drawing.Size(835, 438);
             this.dgvResources.TabIndex = 1;
             this.dgvResources.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvResources_CellFormatting);
             this.dgvResources.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvResources_ColumnHeaderMouseClick);
@@ -279,9 +283,9 @@
             // 
             this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colCheckIn.DataPropertyName = "CheckInDate";
-            dataGridViewCellStyle1.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle3;
             this.colCheckIn.HeaderText = "Check In";
             this.colCheckIn.Name = "colCheckIn";
             this.colCheckIn.ReadOnly = true;
@@ -291,9 +295,9 @@
             // 
             this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colLastDay.DataPropertyName = "LastDayOnIncident";
-            dataGridViewCellStyle2.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle4;
             this.colLastDay.HeaderText = "Last Day";
             this.colLastDay.Name = "colLastDay";
             this.colLastDay.ReadOnly = true;
@@ -367,6 +371,7 @@
             this.cpPNumbers.CurrentlyCollapsed = true;
             this.cpPNumbers.ExpandedHeight = 357;
             this.cpPNumbers.ExpandedWidth = 290;
+            this.cpPNumbers.ExpandUp = false;
             this.cpPNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpPNumbers.Location = new System.Drawing.Point(5, 67);
             this.cpPNumbers.Margin = new System.Windows.Forms.Padding(6);
@@ -669,6 +674,7 @@
             this.cpFilters.CurrentlyCollapsed = true;
             this.cpFilters.ExpandedHeight = 322;
             this.cpFilters.ExpandedWidth = 290;
+            this.cpFilters.ExpandUp = false;
             this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpFilters.Location = new System.Drawing.Point(6, 15);
             this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
@@ -788,9 +794,51 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Resource Variety";
             // 
+            // btnDietaryAndAllergy
+            // 
+            this.btnDietaryAndAllergy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDietaryAndAllergy.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnDietaryAndAllergy.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDietaryAndAllergy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnDietaryAndAllergy.Location = new System.Drawing.Point(763, 74);
+            this.btnDietaryAndAllergy.Name = "btnDietaryAndAllergy";
+            this.btnDietaryAndAllergy.Size = new System.Drawing.Size(173, 66);
+            this.btnDietaryAndAllergy.TabIndex = 58;
+            this.btnDietaryAndAllergy.Text = "Dietary / Allergy Details";
+            this.btnDietaryAndAllergy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDietaryAndAllergy.UseVisualStyleBackColor = true;
+            this.btnDietaryAndAllergy.Click += new System.EventHandler(this.btnDietaryAndAllergy_Click);
+            // 
+            // btnEditCheckIn
+            // 
+            this.btnEditCheckIn.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEditCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEditCheckIn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnEditCheckIn.Location = new System.Drawing.Point(205, 75);
+            this.btnEditCheckIn.Name = "btnEditCheckIn";
+            this.btnEditCheckIn.Size = new System.Drawing.Size(203, 66);
+            this.btnEditCheckIn.TabIndex = 57;
+            this.btnEditCheckIn.Text = "Edit Check-In Info";
+            this.btnEditCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEditCheckIn.UseVisualStyleBackColor = true;
+            // 
+            // btnEditResource
+            // 
+            this.btnEditResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEditResource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEditResource.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnEditResource.Location = new System.Drawing.Point(205, 3);
+            this.btnEditResource.Name = "btnEditResource";
+            this.btnEditResource.Size = new System.Drawing.Size(203, 66);
+            this.btnEditResource.TabIndex = 56;
+            this.btnEditResource.Text = "Edit Resource";
+            this.btnEditResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEditResource.UseVisualStyleBackColor = true;
+            // 
             // btnCheckInByManifest
             // 
             this.btnCheckInByManifest.Image = ((System.Drawing.Image)(resources.GetObject("btnCheckInByManifest.Image")));
+            this.btnCheckInByManifest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCheckInByManifest.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnCheckInByManifest.Location = new System.Drawing.Point(12, 75);
             this.btnCheckInByManifest.Name = "btnCheckInByManifest";
@@ -799,6 +847,7 @@
             this.btnCheckInByManifest.Text = "Check-In from Manifest";
             this.btnCheckInByManifest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCheckInByManifest.UseVisualStyleBackColor = true;
+            this.btnCheckInByManifest.Visible = false;
             // 
             // btnPrinttAll211sToDate
             // 
@@ -816,11 +865,13 @@
             // 
             // btnLogisticsOverview
             // 
+            this.btnLogisticsOverview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogisticsOverview.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnLogisticsOverview.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLogisticsOverview.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogisticsOverview.Location = new System.Drawing.Point(619, 2);
+            this.btnLogisticsOverview.Location = new System.Drawing.Point(763, 3);
             this.btnLogisticsOverview.Name = "btnLogisticsOverview";
-            this.btnLogisticsOverview.Size = new System.Drawing.Size(150, 66);
+            this.btnLogisticsOverview.Size = new System.Drawing.Size(173, 66);
             this.btnLogisticsOverview.TabIndex = 51;
             this.btnLogisticsOverview.Text = "Logistics Overview";
             this.btnLogisticsOverview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -832,7 +883,7 @@
             this.btnExportSignInToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportSignInToCSV.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
             this.btnExportSignInToCSV.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportSignInToCSV.Location = new System.Drawing.Point(802, 2);
+            this.btnExportSignInToCSV.Location = new System.Drawing.Point(621, 3);
             this.btnExportSignInToCSV.Name = "btnExportSignInToCSV";
             this.btnExportSignInToCSV.Size = new System.Drawing.Size(136, 66);
             this.btnExportSignInToCSV.TabIndex = 50;
@@ -846,7 +897,7 @@
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.Location = new System.Drawing.Point(944, 2);
+            this.btnPrint.Location = new System.Drawing.Point(944, 3);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(191, 66);
             this.btnPrint.TabIndex = 49;
@@ -858,8 +909,9 @@
             // btnDemob
             // 
             this.btnDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_432_log_out;
+            this.btnDemob.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDemob.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDemob.Location = new System.Drawing.Point(419, 3);
+            this.btnDemob.Location = new System.Drawing.Point(414, 3);
             this.btnDemob.Name = "btnDemob";
             this.btnDemob.Size = new System.Drawing.Size(150, 66);
             this.btnDemob.TabIndex = 48;
@@ -868,22 +920,10 @@
             this.btnDemob.UseVisualStyleBackColor = true;
             this.btnDemob.Click += new System.EventHandler(this.btnDemob_Click);
             // 
-            // btnEdit
-            // 
-            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnEdit.Location = new System.Drawing.Point(264, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(149, 66);
-            this.btnEdit.TabIndex = 47;
-            this.btnEdit.Text = "Edit Selected";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
             // btnStartCheckIn
             // 
             this.btnStartCheckIn.Image = ((System.Drawing.Image)(resources.GetObject("btnStartCheckIn.Image")));
+            this.btnStartCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnStartCheckIn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnStartCheckIn.Location = new System.Drawing.Point(12, 3);
             this.btnStartCheckIn.Name = "btnStartCheckIn";
@@ -903,7 +943,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1141, 683);
+            this.ClientSize = new System.Drawing.Size(1141, 590);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -944,7 +984,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.DataGridView dgvResources;
         private System.Windows.Forms.Button btnStartCheckIn;
-        private System.Windows.Forms.Button btnEdit;
         private CustomControls.CollapsiblePanel cpFilters;
         private System.Windows.Forms.Button btnDemob;
         private System.Windows.Forms.ComboBox cboResourceVariety;
@@ -996,5 +1035,8 @@
         private System.Windows.Forms.SaveFileDialog svdExport;
         private System.Windows.Forms.Button btnPrinttAll211sToDate;
         private System.Windows.Forms.Button btnCheckInByManifest;
+        private System.Windows.Forms.Button btnEditCheckIn;
+        private System.Windows.Forms.Button btnEditResource;
+        private System.Windows.Forms.Button btnDietaryAndAllergy;
     }
 }

@@ -1044,6 +1044,9 @@
     <EmbeddedResource Include="VehicleEditForm.resx">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="BlankForms\Dietary and Allergy Details.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

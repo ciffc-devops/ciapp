@@ -485,7 +485,8 @@ namespace Wildfire_ICS_Assist
 
         private void dgvResources_SelectionChanged(object sender, EventArgs e)
         {
-            btnEdit.Enabled = dgvResources.SelectedRows.Count == 1;
+            btnEditCheckIn.Enabled = dgvResources.SelectedRows.Count == 1;
+            btnEditResource.Enabled = dgvResources.SelectedRows.Count == 1;
             btnDemob.Enabled = dgvResources.SelectedRows.Count == 1;
         }
 
@@ -792,6 +793,26 @@ namespace Wildfire_ICS_Assist
                     break;
             }
             return list;
+        }
+
+        private void btnDietaryAndAllergy_Click(object sender, EventArgs e)
+        {
+            List<byte[]> allPDFs = Program.pdfExportService.exportDietaryAndAllergyToPDF(Program.CurrentTask, Program.CurrentOpPeriod, true, false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "Dietary and Allergy Details - " + Program.CurrentIncident.IncidentIdentifier;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+
         }
     }
 

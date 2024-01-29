@@ -62,5 +62,7 @@ namespace WildfireICSDesktopServices
         string createDemobChecklistPDF(WFIncident task, IncidentResource Resource, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportDemobChecklistToPDF(WFIncident task, List<IncidentResource> Resources, bool flattenPDF);
         List<byte[]> exportCheckInSheetsToPDF(WFIncident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF);
+        List<byte[]> createSinglePageDietaryAndAllergyPDF(WFIncident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF);
+        List<byte[]> exportDietaryAndAllergyToPDF(WFIncident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF);
     }
 }

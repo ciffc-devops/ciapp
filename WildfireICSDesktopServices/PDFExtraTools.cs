@@ -29,6 +29,23 @@ namespace WildfireICSDesktopServices
             return tmp.FontSize;
         }
 
+        public static PdfStamper RenameAllFields(this PdfStamper stamper)
+        {
+            AcroFields af = stamper.AcroFields;
+            Guid g = Guid.NewGuid();
+
+            List<string> fieldNames = new List<string>();
+            foreach (var field in af.Fields)
+            {
+                fieldNames.Add(field.Key);
+            }
+            foreach (string s in fieldNames)
+            {
+                stamper.AcroFields.RenameField(s, s + g.ToString());
+            }
+            return stamper;
+        }
+
 
         public static PdfStamper AddOrgLogoToForm(this PdfStamper stamper, int pageCount = 1)
         {

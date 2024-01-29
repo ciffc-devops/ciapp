@@ -47,6 +47,166 @@ namespace WildfireICSDesktopServices
             return System.IO.Path.Combine(dir, fileToUse);
         }
 
+        #region Dietary and Allergy Details
+
+        public List<byte[]> exportDietaryAndAllergyToPDF(WFIncident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodToExport);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
+            List<CheckInRecordWithResource> allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport);
+
+            allCheckInRecords = allCheckInRecords.Where(o => o.Record.ParentRecordID == Guid.Empty && o.Resource.GetType().Equals(typeof(Personnel))).OrderBy(o => o.Record.CheckInLocation).ToList(); //remove non-personnel
+            allCheckInRecords = allCheckInRecords.Where(o => (o.Resource as Personnel).HasAllergies || (o.Resource as Personnel).HasDietaryRestrictions).ToList();
+            //if (thisOpOnly) { allCheckInRecords = allCheckInRecords.Where(o => o.Record.DailyCheckInRecords.Any(d => d.OpPeriod == OpPeriodToExport)).ToList(); }
+
+
+            int totalPages = 1;
+            int rowsOnPage = 40;
+
+
+            if (allCheckInRecords.Count > rowsOnPage)
+            {
+                totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(allCheckInRecords.Count - rowsOnPage) / Convert.ToDecimal(rowsOnPage)));
+                if ((allCheckInRecords.Count - rowsOnPage) % rowsOnPage > 0) { totalPages += 1; }
+                if (totalPages == 0) { totalPages = 1; }
+            }
+
+            List<string> pdfFileNames = new List<string>();
+
+            for (int x = 1; x <= totalPages; x++)
+            {
+                List<CheckInRecordWithResource> resourcesThisPage = allCheckInRecords.Skip((x - 1) * rowsOnPage).Take(rowsOnPage).ToList();
+                allPDFs.AddRange(createSinglePageDietaryAndAllergyPDF(incident, OpPeriodToExport, resourcesThisPage, x, totalPages, flattenPDF));
+
+            }
+
+            /*
+            List<PositionLogEntry> extraPageEntries = entries.Skip(19).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(31 * (x - 1)).Take(37).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            */
+
+
+            return allPDFs;
+        }
+
+        public List<byte[]> createSinglePageDietaryAndAllergyPDF(WFIncident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "Dietary and Allergy Details - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
+            outputFileName += ".pdf";
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            string fileToUse = "BlankForms/Dietary and Allergy Details.pdf";
+            fileToUse = getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+                    string checkInLocation = null;
+                    if (allCheckInRecords.Any(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)))
+                    {
+                        checkInLocation = allCheckInRecords.First(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)).Record.CheckInLocation;
+                    }
+
+                    stamper.AcroFields.SetField("1 Event", incident.TaskName);
+                    stamper.AcroFields.SetField("2 Task No", incident.TaskNumber);
+                    stamper.AcroFields.SetField("3 Operational Period", OpPeriod.ToString());
+
+
+
+                    stamper.AcroFields.SetField("From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("From_2", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("To_2", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                    //stamper.AcroFields.SetField("TIME", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+
+
+                    for (int x = 0; x < allCheckInRecords.Count && x < 40; x++)
+                    {
+                        CheckInRecordWithResource record = allCheckInRecords[x];
+
+                        Personnel p = null; if (record.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)record.Resource; }
+
+                        if (p != null)
+                        {
+                            stamper.AcroFields.SetField("PersonRow" + (x + 1), p.Name);
+                            stamper.AcroFields.SetField("AgencyRow" + (x + 1), p.Agency);
+
+                            if (p.HasDietaryRestrictions) { stamper.AcroFields.SetField("DietaryRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("DietaryRow" + (x + 1), "NO"); }
+                            if (p.HasAllergies) { stamper.AcroFields.SetField("AllergiesRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("AllergiesRow" + (x + 1), "N/A"); }
+
+                            bool[] mealRequirements = record.GetMealRequirements();
+
+
+
+                            if (mealRequirements[0]) { stamper.AcroFields.SetField("BrkRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("BrkRow" + (x + 1), "NO"); }
+                            if (mealRequirements[1]) { stamper.AcroFields.SetField("LnchRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("LnchRow" + (x + 1), "NO"); }
+                            if (mealRequirements[2]) { stamper.AcroFields.SetField("DinRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("DinRow" + (x + 1), "NO"); }
+
+
+
+                        }
+
+                    }
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("Of", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    //stamper = stamper.AddOrgLogoToForm();
+                    stamper = stamper.RenameAllFields();
+
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+        #endregion
+
         #region General Message
         public List<byte[]> exportGeneralMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
