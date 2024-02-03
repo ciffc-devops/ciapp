@@ -121,22 +121,22 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void TxtCellphone_TextChanged(object sender, EventArgs e)
         {
-            teamMember.CellphoneNumber = ((TextBox)sender).Text;
+            teamMember.CellphoneNumber = ((SpellBox)sender).Text;
         }
 
         private void TxtNOKName_TextChanged(object sender, EventArgs e)
         {
-            teamMember.EmergencyContact = ((TextBox)sender).Text; SetColours();
+            teamMember.EmergencyContact = ((SpellBox)sender).Text; SetColours();
         }
 
         private void TxtLastName_TextChanged(object sender, EventArgs e)
         {
-            teamMember.LastName = ((TextBox)sender).Text;
+            teamMember.LastName = ((SpellBox)sender).Text;
         }
 
         private void TxtFirstName_TextChanged(object sender, EventArgs e)
         {
-            teamMember.FirstName = ((TextBox)sender).Text;
+            teamMember.FirstName = ((SpellBox)sender).Text;
         }
 
         private void SetColours()

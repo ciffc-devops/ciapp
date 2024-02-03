@@ -126,7 +126,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
         [ProtoMember(8)] private bool _IsEquipmentCrew;
 
-        public OperationalSubGroup() { this.ResourceType = "Crew"; }
+        public OperationalSubGroup() { this.ResourceType = "Crew"; this.Type = "Type 1"; }
 
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid LeaderID { get => _LeaderID; set => _LeaderID = value; }

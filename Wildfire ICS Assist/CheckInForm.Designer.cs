@@ -44,8 +44,8 @@
             this.pnlPersonEdit = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.personnelEditControl1 = new Wildfire_ICS_Assist.CustomControls.PersonnelEditControl();
-            this.lblEditPersonTitle = new System.Windows.Forms.Label();
             this.chkSavePersonForLater = new System.Windows.Forms.CheckBox();
+            this.lblEditPersonTitle = new System.Windows.Forms.Label();
             this.btnSelectNewPerson = new System.Windows.Forms.Button();
             this.pnlSavedPersonnel = new System.Windows.Forms.Panel();
             this.btnSelectSavedPerson = new System.Windows.Forms.Button();
@@ -158,13 +158,14 @@
             this.btnHECrew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnHECrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.HECrew;
             this.btnHECrew.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHECrew.Location = new System.Drawing.Point(381, 245);
+            this.btnHECrew.Location = new System.Drawing.Point(257, 576);
             this.btnHECrew.Name = "btnHECrew";
             this.btnHECrew.Size = new System.Drawing.Size(243, 91);
             this.btnHECrew.TabIndex = 11;
             this.btnHECrew.Text = "Heavy Equipment Crew";
             this.btnHECrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnHECrew.UseVisualStyleBackColor = true;
+            this.btnHECrew.Visible = false;
             this.btnHECrew.Click += new System.EventHandler(this.btnHECrew_Click);
             // 
             // btnEquipAndOperator
@@ -172,7 +173,7 @@
             this.btnEquipAndOperator.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEquipAndOperator.Image = global::Wildfire_ICS_Assist.Properties.Resources.EquipOp;
             this.btnEquipAndOperator.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEquipAndOperator.Location = new System.Drawing.Point(381, 342);
+            this.btnEquipAndOperator.Location = new System.Drawing.Point(381, 326);
             this.btnEquipAndOperator.Name = "btnEquipAndOperator";
             this.btnEquipAndOperator.Size = new System.Drawing.Size(243, 91);
             this.btnEquipAndOperator.TabIndex = 10;
@@ -185,7 +186,7 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(6, 196);
+            this.label14.Location = new System.Drawing.Point(6, 180);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(765, 29);
             this.label14.TabIndex = 9;
@@ -197,7 +198,7 @@
             this.btnVisitor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVisitor.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_35_user_incognito;
             this.btnVisitor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVisitor.Location = new System.Drawing.Point(381, 439);
+            this.btnVisitor.Location = new System.Drawing.Point(381, 423);
             this.btnVisitor.Name = "btnVisitor";
             this.btnVisitor.Size = new System.Drawing.Size(243, 91);
             this.btnVisitor.TabIndex = 3;
@@ -211,7 +212,7 @@
             this.btnSinglePersonnel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSinglePersonnel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
             this.btnSinglePersonnel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSinglePersonnel.Location = new System.Drawing.Point(132, 439);
+            this.btnSinglePersonnel.Location = new System.Drawing.Point(132, 423);
             this.btnSinglePersonnel.Name = "btnSinglePersonnel";
             this.btnSinglePersonnel.Size = new System.Drawing.Size(243, 91);
             this.btnSinglePersonnel.TabIndex = 2;
@@ -225,7 +226,7 @@
             this.btnVehicleEquipment.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVehicleEquipment.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
             this.btnVehicleEquipment.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVehicleEquipment.Location = new System.Drawing.Point(132, 342);
+            this.btnVehicleEquipment.Location = new System.Drawing.Point(132, 326);
             this.btnVehicleEquipment.Name = "btnVehicleEquipment";
             this.btnVehicleEquipment.Size = new System.Drawing.Size(243, 91);
             this.btnVehicleEquipment.TabIndex = 1;
@@ -239,9 +240,9 @@
             this.btnCrew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_532_user_family;
             this.btnCrew.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCrew.Location = new System.Drawing.Point(132, 245);
+            this.btnCrew.Location = new System.Drawing.Point(132, 229);
             this.btnCrew.Name = "btnCrew";
-            this.btnCrew.Size = new System.Drawing.Size(243, 91);
+            this.btnCrew.Size = new System.Drawing.Size(492, 91);
             this.btnCrew.TabIndex = 0;
             this.btnCrew.Text = "Crew";
             this.btnCrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -252,10 +253,10 @@
             // 
             this.tpResourceDetails.Controls.Add(this.pnlPersonEdit);
             this.tpResourceDetails.Controls.Add(this.pnlSavedPersonnel);
-            this.tpResourceDetails.Location = new System.Drawing.Point(4, 33);
+            this.tpResourceDetails.Location = new System.Drawing.Point(4, 22);
             this.tpResourceDetails.Name = "tpResourceDetails";
             this.tpResourceDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tpResourceDetails.Size = new System.Drawing.Size(777, 693);
+            this.tpResourceDetails.Size = new System.Drawing.Size(777, 704);
             this.tpResourceDetails.TabIndex = 1;
             this.tpResourceDetails.Text = "Person";
             // 
@@ -267,7 +268,7 @@
             this.pnlPersonEdit.Controls.Add(this.panel1);
             this.pnlPersonEdit.Location = new System.Drawing.Point(8, 92);
             this.pnlPersonEdit.Name = "pnlPersonEdit";
-            this.pnlPersonEdit.Size = new System.Drawing.Size(757, 595);
+            this.pnlPersonEdit.Size = new System.Drawing.Size(757, 606);
             this.pnlPersonEdit.TabIndex = 113;
             // 
             // panel1
@@ -282,7 +283,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(757, 595);
+            this.panel1.Size = new System.Drawing.Size(757, 606);
             this.panel1.TabIndex = 113;
             // 
             // personnelEditControl1
@@ -297,8 +298,19 @@
             this.personnelEditControl1.Location = new System.Drawing.Point(7, 35);
             this.personnelEditControl1.Margin = new System.Windows.Forms.Padding(6);
             this.personnelEditControl1.Name = "personnelEditControl1";
-            this.personnelEditControl1.Size = new System.Drawing.Size(748, 506);
+            this.personnelEditControl1.Size = new System.Drawing.Size(748, 517);
             this.personnelEditControl1.TabIndex = 9;
+            // 
+            // chkSavePersonForLater
+            // 
+            this.chkSavePersonForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSavePersonForLater.AutoSize = true;
+            this.chkSavePersonForLater.Location = new System.Drawing.Point(387, 568);
+            this.chkSavePersonForLater.Name = "chkSavePersonForLater";
+            this.chkSavePersonForLater.Size = new System.Drawing.Size(229, 28);
+            this.chkSavePersonForLater.TabIndex = 112;
+            this.chkSavePersonForLater.Text = "Save for future incidents";
+            this.chkSavePersonForLater.UseVisualStyleBackColor = true;
             // 
             // lblEditPersonTitle
             // 
@@ -311,23 +323,12 @@
             this.lblEditPersonTitle.TabIndex = 8;
             this.lblEditPersonTitle.Text = "New Personnel";
             // 
-            // chkSavePersonForLater
-            // 
-            this.chkSavePersonForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSavePersonForLater.AutoSize = true;
-            this.chkSavePersonForLater.Location = new System.Drawing.Point(387, 557);
-            this.chkSavePersonForLater.Name = "chkSavePersonForLater";
-            this.chkSavePersonForLater.Size = new System.Drawing.Size(229, 28);
-            this.chkSavePersonForLater.TabIndex = 112;
-            this.chkSavePersonForLater.Text = "Save for future incidents";
-            this.chkSavePersonForLater.UseVisualStyleBackColor = true;
-            // 
             // btnSelectNewPerson
             // 
             this.btnSelectNewPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectNewPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
             this.btnSelectNewPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelectNewPerson.Location = new System.Drawing.Point(622, 550);
+            this.btnSelectNewPerson.Location = new System.Drawing.Point(622, 561);
             this.btnSelectNewPerson.Name = "btnSelectNewPerson";
             this.btnSelectNewPerson.Size = new System.Drawing.Size(130, 40);
             this.btnSelectNewPerson.TabIndex = 7;

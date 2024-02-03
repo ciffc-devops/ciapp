@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.OptionsForms;
+using Wildfire_ICS_Assist.Properties;
 using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
@@ -45,6 +47,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
             Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
             Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
+            
         }
 
         public static int PNumMin { get => Program.PNumMin; set => Program.PNumMin = value; }
@@ -812,6 +815,197 @@ namespace Wildfire_ICS_Assist
                 System.Diagnostics.Process.Start(fullFilepath);
             }
             catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+
+        }
+
+        private void btnEditResource_Click(object sender, EventArgs e)
+        {
+            if (dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                OpenResourceForEdit(rec);
+            }
+        }
+
+        private void btnEditCheckIn_Click(object sender, EventArgs e)
+        {
+            if (dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                using (CheckInInfoEditForm editForm = new CheckInInfoEditForm())
+                {
+                    editForm.SetRecord(rec.Clone());
+                    if (editForm.ShowDialog() == DialogResult.OK)
+                    {
+                        Program.wfIncidentService.UpsertCheckInRecord(editForm.SelectedRecord);
+
+                        if (editForm.AssignIfPossible && !string.IsNullOrEmpty(editForm.SelectedRecord.InitialRoleName))
+                        {
+                            if (Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.BaseRoleName) && o.BaseRoleName.Equals(editForm.SelectedRecord.InitialRoleName) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == editForm.SelectedRecord.ResourceID))
+                            {
+                                ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.BaseRoleName) && o.BaseRoleName.Equals(editForm.SelectedRecord.InitialRoleName) && o.IndividualID == Guid.Empty);
+                                Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == editForm.SelectedRecord.ResourceID);
+                                role.IndividualID = p.ID;
+                                role.IndividualName = p.Name;
+                                //role.teamMember = p.Clone();
+                                Program.wfIncidentService.UpsertICSRole(role);
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+        private void OpenResourceForEdit(CheckInRecordWithResource rec)
+        {
+
+            switch (rec.ResourceType)
+            {
+                case "Personnel":
+                    Personnel p = rec.Resource as Personnel;
+                    using (EditSavedPersonnelForm personnelForm = new EditSavedPersonnelForm())
+                    {
+                        personnelForm.selectedMember = p.Clone();
+                        if (personnelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            Program.wfIncidentService.UpsertPersonnel(personnelForm.selectedMember);
+                        }
+                    }
+
+
+                    break;
+
+                case "Visitor":
+                    Personnel v = rec.Resource as Personnel;
+                    using (EditSavedPersonnelForm personnelForm = new EditSavedPersonnelForm())
+                    {
+                        personnelForm.selectedMember = v.Clone();
+                        if (personnelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            Program.wfIncidentService.UpsertPersonnel(personnelForm.selectedMember);
+                        }
+                    }
+
+
+                    break;
+                case "Vehicle":
+                    Vehicle ve = rec.Resource as Vehicle;
+
+                    using (EditSavedVehicleForm personnelForm = new EditSavedVehicleForm())
+                    {
+                        personnelForm.vehicle = ve.Clone();
+                        if (personnelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            Program.wfIncidentService.UpsertVehicle(personnelForm.vehicle);
+                        }
+                    }
+
+                    break;
+                case "Equipment":
+                    Vehicle eq = rec.Resource as Vehicle;
+                    using (EditSavedVehicleForm personnelForm = new EditSavedVehicleForm())
+                    {
+                        personnelForm.vehicle = eq.Clone();
+                        if (personnelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            Program.wfIncidentService.UpsertVehicle(personnelForm.vehicle);
+                        }
+                    }
+
+                    break;
+                case "Crew":
+                    OperationalSubGroup crew = rec.Resource as OperationalSubGroup;
+                    using (CheckInEditCrewForm crewForm = new CheckInEditCrewForm())
+                    {
+                        crewForm.selectedCrew = crew.Clone();
+                        if(crewForm.ShowDialog() == DialogResult.OK)
+                        {
+
+                            OperationalSubGroup group = crewForm.selectedCrew;
+                            if (group.ActiveResourceListing.Any(o => o.IsLeader)) { group.LeaderID = group.ActiveResourceListing.First(o => o.IsLeader).ResourceID; group.LeaderName = group.ActiveResourceListing.First(o => o.IsLeader).ResourceName; }
+                            List<OperationalGroupResourceListing> toRemoveFromCrew = crewForm.resourcesToRemoveFromCrew;
+                            foreach (OperationalGroupResourceListing l in toRemoveFromCrew)
+                            {
+                                if (Program.CurrentIncident.AllOperationalSubGroups.Any(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod))
+                                {
+                                    OperationalSubGroup sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
+                                    sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
+                                    Program.wfIncidentService.UpsertOperationalSubGroup(sub);
+                                }
+
+
+                                if (Program.CurrentIncident.AllCheckInRecords.Any(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod))
+                                {
+                                    Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod).ParentRecordID = Guid.Empty;
+                                    Program.wfIncidentService.UpsertCheckInRecord(Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod));
+                                }
+
+
+
+                            }
+
+
+                            Program.wfIncidentService.UpsertOperationalSubGroup(group);
+                            foreach (IncidentResource subres in crewForm.subResources)
+                            {
+                                if (subres.GetType().Name.Equals("Personnel"))
+                                {
+                                    subres.OpPeriod = Program.CurrentOpPeriod;
+                                    if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, PNumMin, PNumMax); }
+                                    subres.ParentResourceID = group.ID;
+                                    Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
+                                    /*
+                                    CheckInRecord prec = crewForm.checkInRecord.Clone();
+                                    prec.ResourceID = subres.ID;
+                                    prec.ResourceName = subres.ResourceName;
+                                    prec.SignInRecordID = Guid.NewGuid();
+                                    prec.ParentRecordID = record.SignInRecordID;
+                                    prec.ResourceType = "Personnel";
+                                    Program.wfIncidentService.UpsertCheckInRecord(prec);*/
+                                }
+                                else if (subres.GetType().Name.Equals("Vehicle"))
+                                {
+                                    Vehicle vh = subres as Vehicle;
+                                    vh.OperatorName = group.ResourceName;
+                                    if (vh.IsEquipment)
+                                    {
+                                        if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, ENumMin, ENumMax); }
+                                    }
+                                    else
+                                    {
+                                        if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, VNumMin, VNumMax); }
+                                    }
+                                    subres.ParentResourceID = group.ID;
+                                    Program.wfIncidentService.UpsertVehicle(vh);
+                                   /*
+                                    CheckInRecord vrec = signInForm.checkInRecord.Clone();
+                                    vrec.ResourceID = subres.ID;
+                                    vrec.SignInRecordID = Guid.NewGuid();
+                                    vrec.ParentRecordID = record.SignInRecordID;
+                                    if (vrec.IsEquipment) { vrec.ResourceType = "Equipment"; }
+                                    else { vrec.ResourceType = "Vehicle"; }
+                                    Program.wfIncidentService.UpsertCheckInRecord(vrec);*/
+                                }
+                            }
+
+
+
+
+
+
+
+
+
+
+
+                        }
+                    }
+                        break;
+            }
+
+
 
         }
     }

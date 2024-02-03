@@ -25,8 +25,8 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public new event EventHandler TextChanged
         {
-            add { textBox1.Click += value; }
-            remove { textBox1.Click -= value; }
+            add { textBox1.TextChanged += value; }
+            remove { textBox1.TextChanged -= value; }
         }
 
         public bool IsValid { get { return !string.IsNullOrEmpty(textBox1.Text); } }

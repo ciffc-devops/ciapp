@@ -145,7 +145,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
     }
 
-    public class CheckInRecordWithResource 
+    public class CheckInRecordWithResource : ICloneable
     {
         private Guid _ID;
 
@@ -153,8 +153,8 @@ namespace WF_ICS_ClassLibrary.Models
         private IncidentResource _Resource = new IncidentResource();
         private string _StatusText;
 
-        public IncidentResource Resource { get => _Resource; }
-        public CheckInRecord Record { get => _Record; }
+        public IncidentResource Resource { get => _Resource; private set => _Resource = value; }
+        public CheckInRecord Record { get => _Record; private set => _Record = value; }
         public Guid ID { get => _ID; }
         public string ResourceType { get => _Record.ResourceType; }
         public string Kind { get => Resource.Kind; }
@@ -183,6 +183,18 @@ namespace WF_ICS_ClassLibrary.Models
             if(Record.CheckOutDate.Date < EndOfOp.Date || Record.LastDayOnIncident.Date < EndOfOp.Date) { _StatusText = "Checked-Out"; } 
             else if (Record.CheckOutDate.Date == EndOfOp.Date) { _StatusText = "Demobilizing"; }
             else { _StatusText = "Active"; }
+        }
+
+        public CheckInRecordWithResource Clone()
+        {
+            CheckInRecordWithResource cloneTo = this.MemberwiseClone() as CheckInRecordWithResource;
+            cloneTo.Record = this.Record.Clone();
+            cloneTo.Resource = this.Resource.Clone();
+            return cloneTo;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
         }
     }
 
