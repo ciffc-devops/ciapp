@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using WF_ICS_ClassLibrary.Utilities;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+
 
 namespace WF_ICS_ClassLibrary.Models
 {
@@ -96,7 +96,7 @@ namespace WF_ICS_ClassLibrary.Models
                 _Data = value; if (value != null)
                 {
                     //_DataAsXMLString = value.XmlSerializeToString();
-                    _DataAsJSONString = JsonSerializer.Serialize(value);
+                    _DataAsJSONString = JsonConvert.SerializeObject(value);
                     int len = _DataAsJSONString.Length;
                     _DataAsJSONString = CompressionUtilities.Compress(_DataAsJSONString);
                     int len2 = _DataAsJSONString.Length;
@@ -109,6 +109,10 @@ namespace WF_ICS_ClassLibrary.Models
         public string ObjectType { get => _ObjcetType; set => _ObjcetType = value; }
         public string DataEnc { get => _DataEnc; set => _DataEnc = value; }
         public string Source { get => _Source; set => _Source = value; }
+        public void SetEncData(string key)
+        {
+            DataEnc = StringCipher.Encrypt(_DataAsJSONString, key);
+        }
 
         public TaskUpdate Clone()
         {
@@ -139,6 +143,8 @@ namespace WF_ICS_ClassLibrary.Models
             try
             {
                 string dataDecrypt = StringCipher.Decrypt(update.DataEnc, encryptKey);
+                dataDecrypt = CompressionUtilities.Decompress(dataDecrypt);
+
                 objDecrypted = dataDecrypt.ObjectFromJSONData(update.ObjectType);
 
             }
@@ -156,137 +162,137 @@ namespace WF_ICS_ClassLibrary.Models
 
             if (ObjectType.Equals(new Contact().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<Contact>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Contact>(jsonData);
 
             }
             else if (ObjectType.Equals(new Briefing().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<Briefing>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Briefing>(jsonData);
             }
             else if (ObjectType.Equals(new CommsLogEntry().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<CommsLogEntry>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<CommsLogEntry>(jsonData);
             }
             else if (ObjectType.Equals(new CommsPlanItem().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<CommsPlanItem>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<CommsPlanItem>(jsonData);
             }
 
             else if (ObjectType.Equals(new CommsPlan().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<CommsPlan>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<CommsPlan>(jsonData);
             }
             else if (ObjectType.Equals(new Hospital().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<Hospital>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Hospital>(jsonData);
             }
             else if (ObjectType.Equals(new AmbulanceService().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<AmbulanceService>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<AmbulanceService>(jsonData);
             }
             else if (ObjectType.Equals(new IncidentObjective().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<IncidentObjective>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<IncidentObjective>(jsonData);
             }
 
             else if (ObjectType.Equals(new MedicalPlan().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<MedicalPlan>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<MedicalPlan>(jsonData);
             }
             else if (ObjectType.Equals(new Note().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<Note>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Note>(jsonData);
             }
             else if (ObjectType.Equals(new OperationalPeriod().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<OperationalPeriod>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<OperationalPeriod>(jsonData);
             }
             else if (ObjectType.Equals(new OrganizationChart().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<OrganizationChart>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<OrganizationChart>(jsonData);
             }
             else if (ObjectType.Equals(new ICSRole().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<ICSRole>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<ICSRole>(jsonData);
             }
             else if (ObjectType.Equals(new PositionLogEntry().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<PositionLogEntry>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<PositionLogEntry>(jsonData);
             }
 
             else if (ObjectType.Equals(new TaskBasics().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<TaskBasics>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<TaskBasics>(jsonData);
             }
             else if (ObjectType.Equals(new Timeline().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<Timeline>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Timeline>(jsonData);
             }
             else if (ObjectType.Equals(new TimelineEvent().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<TimelineEvent>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<TimelineEvent>(jsonData);
             }
 
             else if (ObjectType.Equals(new Vehicle().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<Vehicle>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Vehicle>(jsonData);
             }
 
 
             else if (ObjectType.Equals(new CheckInRecord().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<CheckInRecord>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<CheckInRecord>(jsonData);
             }
             else if (ObjectType.Equals(new Personnel().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<Personnel>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Personnel>(jsonData);
             }
             else if (ObjectType.Equals(new WFIncident().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<WFIncident>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<WFIncident>(jsonData);
             }
             else if (ObjectType.Equals(new AirOperationsSummary().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<AirOperationsSummary>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<AirOperationsSummary>(jsonData);
             }
             else if (ObjectType.Equals(new Aircraft().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<Aircraft>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Aircraft>(jsonData);
             }
             else if (ObjectType.Equals(new NOTAM().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<NOTAM>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<NOTAM>(jsonData);
             }
             else if (ObjectType.Equals(new GeneralMessage().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<GeneralMessage>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<GeneralMessage>(jsonData);
             }
             else if (ObjectType.Equals(new IncidentObjectivesSheet().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<IncidentObjectivesSheet>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<IncidentObjectivesSheet>(jsonData);
             }
             else if (ObjectType.Equals(new MedicalAidStation().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<MedicalAidStation>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<MedicalAidStation>(jsonData);
             }
             else if (ObjectType.Equals(new SafetyMessage().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<SafetyMessage>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<SafetyMessage>(jsonData);
             }
 
             else if (ObjectType.Equals(new TeamAssignment().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<TeamAssignment>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<TeamAssignment>(jsonData);
             }
 
             else if (ObjectType.Equals(new OperationalGroup().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<OperationalGroup>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<OperationalGroup>(jsonData);
             }
 
             else if (ObjectType.Equals(new OperationalSubGroup().GetType().Name))
             {
-                objDecrypted = JsonSerializer.Deserialize<OperationalSubGroup>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<OperationalSubGroup>(jsonData);
             }
 
 

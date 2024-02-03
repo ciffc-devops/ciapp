@@ -96,9 +96,12 @@ namespace WildfireICSDesktopServices
             update.TaskID = _currentIncident.TaskID;
             update.LastUpdatedUTC = DateTime.UtcNow;
             update.CommandName = command;
-            update.Data = obj;
-            update.DataEnc = JsonSerializer.Serialize(update.Data);
-            update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
+            if (obj is ICloneable) { update.Data = (obj as ICloneable).Clone(); }
+            else { update.Data = obj; }
+            update.SetEncData(_currentIncident.TaskEncryptionKey);
+
+            //update.DataEnc = JsonSerializer.Serialize(update.Data);
+            //update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
             update.ProcessedLocally = processed_locally;
             update.MachineID = MachineID;
             update.UploadedSuccessfully = uploaded;
