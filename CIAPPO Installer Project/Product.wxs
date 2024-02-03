@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="F5992DD5-4B82-4907-B80E-5DFD0E2952D3" Name="Canadian Incident Action Plan Program" Language="1033" Version="1.0.1.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
+	<Product Id="AC9C5B03-CBD2-463E-8E2F-282647D9F5BF" Name="Canadian Incident Action Plan Program" Language="1033" Version="1.0.2.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
          Manufacturer='CIFFC' />
 
@@ -83,91 +83,154 @@
 						WorkingDirectory='INSTALLDIR' Icon="CanadianIncidentActionPlanProgram.exe" IconIndex="0" Advertise="yes" />
 				</File>
 			</Component>
-			
-			
-			<Component Id='CoordinateSharp_dll' Guid ='27455d98-6929-479e-a3fc-8889758b2b2a'>
+
+
+			<Component Id='BouncyCastle_Crypto_dll' Guid ='57549251-86c7-4786-81b3-d7f869b1595e'>
+				<File Id='BouncyCastle_Crypto_dll' Name='BouncyCastle.Crypto.dll' DiskId='1' Source='ProgramOutput\BouncyCastle.Crypto.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='CoordinateSharp_dll' Guid ='a0718e63-b200-4621-bac2-4703d113914b'>
 				<File Id='CoordinateSharp_dll' Name='CoordinateSharp.dll' DiskId='1' Source='ProgramOutput\CoordinateSharp.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='NetworkCommsDotNet_dll' Guid ='edce7286-ded5-442d-8d54-3aae22d6602c'>
-				<File Id='NetworkCommsDotNet_dll' Name='NetworkCommsDotNet.dll' DiskId='1' Source='ProgramOutput\NetworkCommsDotNet.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='Microsoft_Bcl_AsyncInterfaces_dll' Guid ='6666475d-7ceb-41a9-9d7b-8603cf9058ad'>
-				<File Id='Microsoft_Bcl_AsyncInterfaces_dll' Name='Microsoft.Bcl.AsyncInterfaces.dll' DiskId='1' Source='ProgramOutput\Microsoft.Bcl.AsyncInterfaces.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='protobuf_net_Core_dll' Guid ='cff4b8c1-64ad-48cb-8f70-262a17ba39e3'>
-				<File Id='protobuf_net_Core_dll' Name='protobuf-net.Core.dll' DiskId='1' Source='ProgramOutput\protobuf-net.Core.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='protobuf_net_dll' Guid ='170401e1-60e9-4bde-bde3-988cfaa2420b'>
-				<File Id='protobuf_net_dll' Name='protobuf-net.dll' DiskId='1' Source='ProgramOutput\protobuf-net.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='ProtobufSerializer_dll' Guid ='2a599d7f-1a9a-4ff0-a36b-415c15bba708'>
-				<File Id='ProtobufSerializer_dll' Name='ProtobufSerializer.dll' DiskId='1' Source='ProgramOutput\ProtobufSerializer.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_Buffers_dll' Guid ='f8f4993d-538b-4256-9c76-97a7c78b316b'>
-				<File Id='System_Buffers_dll' Name='System.Buffers.dll' DiskId='1' Source='ProgramOutput\System.Buffers.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_Collections_Immutable_dll' Guid ='b045e228-490f-493b-ac35-992ea152f9cd'>
-				<File Id='System_Collections_Immutable_dll' Name='System.Collections.Immutable.dll' DiskId='1' Source='ProgramOutput\System.Collections.Immutable.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_Memory_dll' Guid ='722748c7-8b89-4d2b-ac27-f3d22891c4b0'>
-				<File Id='System_Memory_dll' Name='System.Memory.dll' DiskId='1' Source='ProgramOutput\System.Memory.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_Numerics_Vectors_dll' Guid ='ef73003d-f631-4cc7-bd8d-84f35c03e908'>
-				<File Id='System_Numerics_Vectors_dll' Name='System.Numerics.Vectors.dll' DiskId='1' Source='ProgramOutput\System.Numerics.Vectors.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_Runtime_CompilerServices_Unsafe_dll' Guid ='6b3faa88-8ecb-44ec-841b-5e54351948a9'>
-				<File Id='System_Runtime_CompilerServices_Unsafe_dll' Name='System.Runtime.CompilerServices.Unsafe.dll' DiskId='1' Source='ProgramOutput\System.Runtime.CompilerServices.Unsafe.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_Text_Encodings_Web_dll' Guid ='b6e37846-9db3-4bbd-8698-c73787bb00f9'>
-				<File Id='System_Text_Encodings_Web_dll' Name='System.Text.Encodings.Web.dll' DiskId='1' Source='ProgramOutput\System.Text.Encodings.Web.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_Text_Json_dll' Guid ='acc42f1b-a39f-4b86-9ed8-500ca357d3d2'>
-				<File Id='System_Text_Json_dll' Name='System.Text.Json.dll' DiskId='1' Source='ProgramOutput\System.Text.Json.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_Threading_Tasks_Extensions_dll' Guid ='b49de4c4-f034-481e-a475-725e62d4315d'>
-				<File Id='System_Threading_Tasks_Extensions_dll' Name='System.Threading.Tasks.Extensions.dll' DiskId='1' Source='ProgramOutput\System.Threading.Tasks.Extensions.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='System_ValueTuple_dll' Guid ='10ddfd73-efcf-42cd-b39f-2b27734b996a'>
-				<File Id='System_ValueTuple_dll' Name='System.ValueTuple.dll' DiskId='1' Source='ProgramOutput\System.ValueTuple.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='WF_ICS_ClassLibrary_dll' Guid ='40c780e8-36d8-4652-b892-29dd616a3771'>
-				<File Id='WF_ICS_ClassLibrary_dll' Name='WF-ICS-ClassLibrary.dll' DiskId='1' Source='ProgramOutput\WF-ICS-ClassLibrary.dll' KeyPath='yes'></File>
-			</Component>
-			<Component Id='itextsharp_dll' Guid ='fff5a8fc-7e02-4b38-b7dd-03b07ea85171'>
+			<Component Id='itextsharp_dll' Guid ='2dd090a9-b72e-4d5e-8e89-d376cbf687ab'>
 				<File Id='itextsharp_dll' Name='itextsharp.dll' DiskId='1' Source='ProgramOutput\itextsharp.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='WildfireICSDesktopServices_dll' Guid ='ca4f1234-30bb-4983-9c80-dfd8b09b1b4b'>
-				<File Id='WildfireICSDesktopServices_dll' Name='WildfireICSDesktopServices.dll' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.dll' KeyPath='yes'></File>
+			<Component Id='MessagePack_Annotations_dll' Guid ='fd176b23-caee-4b32-9106-35f7b2b7c173'>
+				<File Id='MessagePack_Annotations_dll' Name='MessagePack.Annotations.dll' DiskId='1' Source='ProgramOutput\MessagePack.Annotations.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='Newtonsoft_Json_dll' Guid ='893cc98c-a2b6-4d7d-bd75-a86829c46e66'>
+			<Component Id='MessagePack_dll' Guid ='1f96cedd-d233-458e-87cb-81e0b7c4aebc'>
+				<File Id='MessagePack_dll' Name='MessagePack.dll' DiskId='1' Source='ProgramOutput\MessagePack.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_Bcl_AsyncInterfaces_dll' Guid ='0d72aee8-3942-4802-a2f9-bd6c6f6c1da5'>
+				<File Id='Microsoft_Bcl_AsyncInterfaces_dll' Name='Microsoft.Bcl.AsyncInterfaces.dll' DiskId='1' Source='ProgramOutput\Microsoft.Bcl.AsyncInterfaces.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_IO_Redist_dll' Guid ='99e56bad-56ab-45d6-8736-279ed60020e0'>
+				<File Id='Microsoft_IO_Redist_dll' Name='Microsoft.IO.Redist.dll' DiskId='1' Source='ProgramOutput\Microsoft.IO.Redist.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_NET_StringTools_dll' Guid ='6f7b6ef6-e9a1-425f-87d6-804d2c3edff1'>
+				<File Id='Microsoft_NET_StringTools_dll' Name='Microsoft.NET.StringTools.dll' DiskId='1' Source='ProgramOutput\Microsoft.NET.StringTools.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_ServiceHub_Framework_dll' Guid ='4f1a5f90-bbee-46f2-a4e4-d0d0f0930202'>
+				<File Id='Microsoft_ServiceHub_Framework_dll' Name='Microsoft.ServiceHub.Framework.dll' DiskId='1' Source='ProgramOutput\Microsoft.ServiceHub.Framework.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_VisualStudio_Composition_dll' Guid ='c07602e2-9270-43cf-bfce-f247aa157559'>
+				<File Id='Microsoft_VisualStudio_Composition_dll' Name='Microsoft.VisualStudio.Composition.dll' DiskId='1' Source='ProgramOutput\Microsoft.VisualStudio.Composition.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_VisualStudio_RemoteControl_dll' Guid ='5cc8dd1b-da52-4ed8-b4a3-ad7c99ec03b4'>
+				<File Id='Microsoft_VisualStudio_RemoteControl_dll' Name='Microsoft.VisualStudio.RemoteControl.dll' DiskId='1' Source='ProgramOutput\Microsoft.VisualStudio.RemoteControl.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_VisualStudio_RpcContracts_dll' Guid ='33f5cf63-e6be-49d6-8fb1-024d68827eb6'>
+				<File Id='Microsoft_VisualStudio_RpcContracts_dll' Name='Microsoft.VisualStudio.RpcContracts.dll' DiskId='1' Source='ProgramOutput\Microsoft.VisualStudio.RpcContracts.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_VisualStudio_Telemetry_dll' Guid ='76b63920-9e1e-4bf3-b662-7bb92b0ae9dc'>
+				<File Id='Microsoft_VisualStudio_Telemetry_dll' Name='Microsoft.VisualStudio.Telemetry.dll' DiskId='1' Source='ProgramOutput\Microsoft.VisualStudio.Telemetry.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_VisualStudio_Threading_dll' Guid ='9fb03a13-b42f-4772-beaa-9d2fc569f6a0'>
+				<File Id='Microsoft_VisualStudio_Threading_dll' Name='Microsoft.VisualStudio.Threading.dll' DiskId='1' Source='ProgramOutput\Microsoft.VisualStudio.Threading.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_VisualStudio_Utilities_dll' Guid ='cc434263-12ff-4547-bb05-ec0cd29c7994'>
+				<File Id='Microsoft_VisualStudio_Utilities_dll' Name='Microsoft.VisualStudio.Utilities.dll' DiskId='1' Source='ProgramOutput\Microsoft.VisualStudio.Utilities.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_VisualStudio_Utilities_Internal_dll' Guid ='77496382-95a9-4fe2-9d79-f25ac8ecff21'>
+				<File Id='Microsoft_VisualStudio_Utilities_Internal_dll' Name='Microsoft.VisualStudio.Utilities.Internal.dll' DiskId='1' Source='ProgramOutput\Microsoft.VisualStudio.Utilities.Internal.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_VisualStudio_Validation_dll' Guid ='395f74c0-2467-4d73-9310-e2d1b189676b'>
+				<File Id='Microsoft_VisualStudio_Validation_dll' Name='Microsoft.VisualStudio.Validation.dll' DiskId='1' Source='ProgramOutput\Microsoft.VisualStudio.Validation.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Microsoft_Win32_Registry_dll' Guid ='2cef31c7-a7d7-4367-a1f0-f84e91a57093'>
+				<File Id='Microsoft_Win32_Registry_dll' Name='Microsoft.Win32.Registry.dll' DiskId='1' Source='ProgramOutput\Microsoft.Win32.Registry.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Nerdbank_Streams_dll' Guid ='7e8e23cb-d253-4156-adca-5f1e85866fe2'>
+				<File Id='Nerdbank_Streams_dll' Name='Nerdbank.Streams.dll' DiskId='1' Source='ProgramOutput\Nerdbank.Streams.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='NetworkCommsDotNet_dll' Guid ='4aa0fda9-be2a-48c5-a274-fbe1885220e2'>
+				<File Id='NetworkCommsDotNet_dll' Name='NetworkCommsDotNet.dll' DiskId='1' Source='ProgramOutput\NetworkCommsDotNet.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Newtonsoft_Json_dll' Guid ='f57b903a-6eed-4d34-926f-a3a076255404'>
 				<File Id='Newtonsoft_Json_dll' Name='Newtonsoft.Json.dll' DiskId='1' Source='ProgramOutput\Newtonsoft.Json.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='Canadian_Incident_Action_Plan_Program_pdb' Guid ='07cbdeaa-26e8-4d50-802b-9281488219fe'>
-				<File Id='Canadian_Incident_Action_Plan_Program_pdb' Name='Canadian Incident Action Plan Program.pdb' DiskId='1' Source='ProgramOutput\Canadian Incident Action Plan Program.pdb' KeyPath='yes'></File>
+			<Component Id='protobuf_net_Core_dll' Guid ='ee5866e7-71c3-458e-a9e8-93ec780d69f6'>
+				<File Id='protobuf_net_Core_dll' Name='protobuf-net.Core.dll' DiskId='1' Source='ProgramOutput\protobuf-net.Core.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='ProtobufSerializer_pdb' Guid ='b209afa4-53ea-440f-8e60-bfe65df809e0'>
-				<File Id='ProtobufSerializer_pdb' Name='ProtobufSerializer.pdb' DiskId='1' Source='ProgramOutput\ProtobufSerializer.pdb' KeyPath='yes'></File>
+			<Component Id='protobuf_net_dll' Guid ='addecdb6-d79f-4262-b84b-e631f9b9f632'>
+				<File Id='protobuf_net_dll' Name='protobuf-net.dll' DiskId='1' Source='ProgramOutput\protobuf-net.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='WF_ICS_ClassLibrary_pdb' Guid ='6966d9e2-a4bc-4758-87cf-ba03db6ff69c'>
-				<File Id='WF_ICS_ClassLibrary_pdb' Name='WF-ICS-ClassLibrary.pdb' DiskId='1' Source='ProgramOutput\WF-ICS-ClassLibrary.pdb' KeyPath='yes'></File>
+			<Component Id='ProtobufSerializer_dll' Guid ='acf2ffb0-dfe8-4f41-a900-56133bac7511'>
+				<File Id='ProtobufSerializer_dll' Name='ProtobufSerializer.dll' DiskId='1' Source='ProgramOutput\ProtobufSerializer.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='WildfireICSDesktopServices_pdb' Guid ='8fedf489-dd79-4697-b4c0-024744baf1a3'>
-				<File Id='WildfireICSDesktopServices_pdb' Name='WildfireICSDesktopServices.pdb' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.pdb' KeyPath='yes'></File>
+			<Component Id='StreamJsonRpc_dll' Guid ='b025cff1-d19a-4ab3-b435-a9ca0e44f0da'>
+				<File Id='StreamJsonRpc_dll' Name='StreamJsonRpc.dll' DiskId='1' Source='ProgramOutput\StreamJsonRpc.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='Canadian_Incident_Action_Plan_Program_exe_config' Guid ='8e1aa0c8-a4db-4e3d-9402-3207c1cf3b89'>
-				<File Id='Canadian_Incident_Action_Plan_Program_exe_config' Name='Canadian Incident Action Plan Program.exe.config' DiskId='1' Source='ProgramOutput\Canadian Incident Action Plan Program.exe.config' KeyPath='yes'></File>
+			<Component Id='System_Buffers_dll' Guid ='e06e6f56-e489-4332-bd70-b7953608d19e'>
+				<File Id='System_Buffers_dll' Name='System.Buffers.dll' DiskId='1' Source='ProgramOutput\System.Buffers.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='ProtobufSerializer_dll_config' Guid ='fb5c6a5d-a217-4447-935a-5f5026ceeff6'>
-				<File Id='ProtobufSerializer_dll_config' Name='ProtobufSerializer.dll.config' DiskId='1' Source='ProgramOutput\ProtobufSerializer.dll.config' KeyPath='yes'></File>
+			<Component Id='System_Collections_Immutable_dll' Guid ='a2caf004-1a18-4db4-9c7f-f068ad35b3e0'>
+				<File Id='System_Collections_Immutable_dll' Name='System.Collections.Immutable.dll' DiskId='1' Source='ProgramOutput\System.Collections.Immutable.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='WF_ICS_ClassLibrary_dll_config' Guid ='63626438-fe31-40f0-a2a8-1c85d3367065'>
-				<File Id='WF_ICS_ClassLibrary_dll_config' Name='WF-ICS-ClassLibrary.dll.config' DiskId='1' Source='ProgramOutput\WF-ICS-ClassLibrary.dll.config' KeyPath='yes'></File>
+			<Component Id='System_Composition_AttributedModel_dll' Guid ='06db89d6-eadd-420d-8e3c-28e2ddb1bc21'>
+				<File Id='System_Composition_AttributedModel_dll' Name='System.Composition.AttributedModel.dll' DiskId='1' Source='ProgramOutput\System.Composition.AttributedModel.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='WildfireICSDesktopServices_dll_config' Guid ='9f2bd738-140d-4b23-b71a-5c79444ba136'>
-				<File Id='WildfireICSDesktopServices_dll_config' Name='WildfireICSDesktopServices.dll.config' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.dll.config' KeyPath='yes'></File>
+			<Component Id='System_Composition_Convention_dll' Guid ='65725c78-725b-48e1-8114-4f5f7f084106'>
+				<File Id='System_Composition_Convention_dll' Name='System.Composition.Convention.dll' DiskId='1' Source='ProgramOutput\System.Composition.Convention.dll' KeyPath='yes'></File>
 			</Component>
-			<Component Id='BouncyCastle_Crypto_dll' Guid ='df9c1a1d-3d57-4645-986f-12b5905120fc'>
-				<File Id='BouncyCastle_Crypto_dll' Name='BouncyCastle.Crypto.dll' DiskId='1' Source='ProgramOutput\BouncyCastle.Crypto.dll' KeyPath='yes'></File>
+			<Component Id='System_Composition_Hosting_dll' Guid ='226a9d3e-0ec1-465a-adac-8d4d525e41fd'>
+				<File Id='System_Composition_Hosting_dll' Name='System.Composition.Hosting.dll' DiskId='1' Source='ProgramOutput\System.Composition.Hosting.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Composition_Runtime_dll' Guid ='a24e44c4-5cb8-4eb6-ad00-0014b71a3943'>
+				<File Id='System_Composition_Runtime_dll' Name='System.Composition.Runtime.dll' DiskId='1' Source='ProgramOutput\System.Composition.Runtime.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Composition_TypedParts_dll' Guid ='f4c1bdf9-2304-465e-b3ec-eec3f7110f34'>
+				<File Id='System_Composition_TypedParts_dll' Name='System.Composition.TypedParts.dll' DiskId='1' Source='ProgramOutput\System.Composition.TypedParts.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Diagnostics_DiagnosticSource_dll' Guid ='010d52d0-21d5-4b55-9c30-cf090fd7932f'>
+				<File Id='System_Diagnostics_DiagnosticSource_dll' Name='System.Diagnostics.DiagnosticSource.dll' DiskId='1' Source='ProgramOutput\System.Diagnostics.DiagnosticSource.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_IO_Pipelines_dll' Guid ='5bb86c7b-0fe6-4845-8b25-fb16d6b05758'>
+				<File Id='System_IO_Pipelines_dll' Name='System.IO.Pipelines.dll' DiskId='1' Source='ProgramOutput\System.IO.Pipelines.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Memory_dll' Guid ='a3f633a3-7d8b-4052-bed8-90307442b3ec'>
+				<File Id='System_Memory_dll' Name='System.Memory.dll' DiskId='1' Source='ProgramOutput\System.Memory.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Numerics_Vectors_dll' Guid ='0a1b3ca1-c115-4aed-869d-23429880def2'>
+				<File Id='System_Numerics_Vectors_dll' Name='System.Numerics.Vectors.dll' DiskId='1' Source='ProgramOutput\System.Numerics.Vectors.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Reflection_Metadata_dll' Guid ='65c8b37f-1358-4af2-a54f-c1c7a8f6e14a'>
+				<File Id='System_Reflection_Metadata_dll' Name='System.Reflection.Metadata.dll' DiskId='1' Source='ProgramOutput\System.Reflection.Metadata.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Runtime_CompilerServices_Unsafe_dll' Guid ='13f5dfd0-fc70-4a75-807a-fa21abea950f'>
+				<File Id='System_Runtime_CompilerServices_Unsafe_dll' Name='System.Runtime.CompilerServices.Unsafe.dll' DiskId='1' Source='ProgramOutput\System.Runtime.CompilerServices.Unsafe.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Security_AccessControl_dll' Guid ='7cd1cda0-05ca-4d8d-adba-2a6447131740'>
+				<File Id='System_Security_AccessControl_dll' Name='System.Security.AccessControl.dll' DiskId='1' Source='ProgramOutput\System.Security.AccessControl.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Security_Principal_Windows_dll' Guid ='ac5a970e-cbc0-4e8e-ba31-26362b53f4c2'>
+				<File Id='System_Security_Principal_Windows_dll' Name='System.Security.Principal.Windows.dll' DiskId='1' Source='ProgramOutput\System.Security.Principal.Windows.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Text_Encodings_Web_dll' Guid ='51672f3f-6c52-4849-bb6f-febfc00f1f8b'>
+				<File Id='System_Text_Encodings_Web_dll' Name='System.Text.Encodings.Web.dll' DiskId='1' Source='ProgramOutput\System.Text.Encodings.Web.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Text_Json_dll' Guid ='cb1ee368-4cbc-4071-8326-5b9369880d4e'>
+				<File Id='System_Text_Json_dll' Name='System.Text.Json.dll' DiskId='1' Source='ProgramOutput\System.Text.Json.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Threading_AccessControl_dll' Guid ='ad17d3d1-0b55-47ac-a6e0-a91a60215dac'>
+				<File Id='System_Threading_AccessControl_dll' Name='System.Threading.AccessControl.dll' DiskId='1' Source='ProgramOutput\System.Threading.AccessControl.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Threading_Tasks_Dataflow_dll' Guid ='6c6d8901-f1cc-49d8-ab9c-0baedbb30103'>
+				<File Id='System_Threading_Tasks_Dataflow_dll' Name='System.Threading.Tasks.Dataflow.dll' DiskId='1' Source='ProgramOutput\System.Threading.Tasks.Dataflow.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_Threading_Tasks_Extensions_dll' Guid ='7c533c78-c2b6-4254-940a-c380730a1d36'>
+				<File Id='System_Threading_Tasks_Extensions_dll' Name='System.Threading.Tasks.Extensions.dll' DiskId='1' Source='ProgramOutput\System.Threading.Tasks.Extensions.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='System_ValueTuple_dll' Guid ='2ff0494a-6764-4bb3-b876-b84415579821'>
+				<File Id='System_ValueTuple_dll' Name='System.ValueTuple.dll' DiskId='1' Source='ProgramOutput\System.ValueTuple.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WF_ICS_ClassLibrary_dll' Guid ='86f6624b-f625-451c-8d60-5dec59beff4a'>
+				<File Id='WF_ICS_ClassLibrary_dll' Name='WF-ICS-ClassLibrary.dll' DiskId='1' Source='ProgramOutput\WF-ICS-ClassLibrary.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WildfireICSDesktopServices_dll' Guid ='d2d8c7d0-34c3-4da0-ad9e-28dd1e7630ab'>
+				<File Id='WildfireICSDesktopServices_dll' Name='WildfireICSDesktopServices.dll' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.dll' KeyPath='yes'></File>
+			</Component>
+			<Component Id='WildfireICSDesktopServices_XmlSerializers_dll' Guid ='abdbf876-24fb-4adf-86dd-9fc381279969'>
+				<File Id='WildfireICSDesktopServices_XmlSerializers_dll' Name='WildfireICSDesktopServices.XmlSerializers.dll' DiskId='1' Source='ProgramOutput\WildfireICSDesktopServices.XmlSerializers.dll' KeyPath='yes'></File>
 			</Component>
 
 
@@ -250,6 +313,9 @@
 			</Component>
 			<Component Id='ICS_211_WF_Check_In_pdf' Guid ='8a35b34f-27d2-4982-acdd-e979358ef3d8'>
 				<File Id='ICS_211_WF_Check_In_pdf' Name='ICS-211-WF Check In.pdf' DiskId='1' Source='ProgramOutput\BlankForms\ICS-211-WF Check In.pdf' KeyPath='yes'></File>
+			</Component>
+			<Component Id='Dietary_and_Allergy_Details_pdf' Guid ='0babcff0-f294-43b4-98c1-9e50df05dd37'>
+				<File Id='Dietary_and_Allergy_Details_pdf' Name='Dietary and Allergy Details.pdf' DiskId='1' Source='ProgramOutput\BlankForms\Dietary and Allergy Details.pdf' KeyPath='yes'></File>
 			</Component>
 
 
