@@ -181,7 +181,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Hi, I would like you to join a SAR task I'm currently working on.  You'll need the most recent version of "); sb.Append(Globals.ProgramName); sb.Append(" (www.sarassist.ca) and the information shown below. Please keep this information confidential and do not share it.");
+            sb.Append("Hi, I would like you to join an incident I'm currently working on.  You'll need the most recent version of "); sb.Append(Globals.ProgramName); sb.Append(" (www.ciffc.ca/applications) and the information shown below. Please keep this information confidential and do not share it.");
             sb.Append(Environment.NewLine); sb.Append(Environment.NewLine);
             sb.Append("Encryption Key: "); sb.Append(txtNewSyncEncryptionKey.Text); sb.Append(Environment.NewLine);
             sb.Append(Environment.NewLine);
@@ -359,7 +359,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Hi, I would like you to join a SAR task I'm currently working on.  You'll need the most recent version of "); sb.Append(Globals.ProgramName); sb.Append(" (www.sarassist.ca) and the information shown below. Please keep this information confidential and do not share it.");
+            sb.Append("Hi, I would like you to join an incident I'm currently working on.  You'll need the most recent version of "); sb.Append(Globals.ProgramName); sb.Append(" (www.ciffc.ca/applications) and the information shown below. Please keep this information confidential and do not share it.");
             sb.Append(Environment.NewLine); sb.Append(Environment.NewLine);
             sb.Append("Encryption Key: "); sb.Append(txtJoinSyncEncryptionKey.Text); sb.Append(Environment.NewLine);
             sb.Append(Environment.NewLine);
