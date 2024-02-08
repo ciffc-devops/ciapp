@@ -114,7 +114,7 @@
             this.cboProvince.Margin = new System.Windows.Forms.Padding(6);
             this.cboProvince.Name = "cboProvince";
             this.cboProvince.Size = new System.Drawing.Size(137, 32);
-            this.cboProvince.TabIndex = 6;
+            this.cboProvince.TabIndex = 7;
             this.cboProvince.SelectedIndexChanged += new System.EventHandler(this.cboProvince_SelectedIndexChanged);
             // 
             // cboAgency
@@ -130,7 +130,7 @@
             this.cboAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboAgency.Name = "cboAgency";
             this.cboAgency.Size = new System.Drawing.Size(490, 32);
-            this.cboAgency.TabIndex = 7;
+            this.cboAgency.TabIndex = 8;
             this.cboAgency.SelectedIndexChanged += new System.EventHandler(this.cboAgency_SelectedIndexChanged);
             this.cboAgency.Leave += new System.EventHandler(this.cboAgency_Leave);
             // 
@@ -181,7 +181,7 @@
             this.txtEmail.Location = new System.Drawing.Point(218, 438);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(490, 29);
-            this.txtEmail.TabIndex = 14;
+            this.txtEmail.TabIndex = 16;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // label6
@@ -205,7 +205,7 @@
             this.cboHomeAgency.Location = new System.Drawing.Point(220, 301);
             this.cboHomeAgency.Name = "cboHomeAgency";
             this.cboHomeAgency.Size = new System.Drawing.Size(490, 32);
-            this.cboHomeAgency.TabIndex = 10;
+            this.cboHomeAgency.TabIndex = 11;
             this.cboHomeAgency.Leave += new System.EventHandler(this.cboHomeAgency_Leave);
             // 
             // label7
@@ -341,7 +341,7 @@
             this.chkDietary.Location = new System.Drawing.Point(218, 473);
             this.chkDietary.Name = "chkDietary";
             this.chkDietary.Size = new System.Drawing.Size(220, 28);
-            this.chkDietary.TabIndex = 16;
+            this.chkDietary.TabIndex = 17;
             this.chkDietary.Text = "Yes, dietary restrictions";
             this.chkDietary.UseVisualStyleBackColor = true;
             this.chkDietary.CheckedChanged += new System.EventHandler(this.chkDietary_CheckedChanged);
@@ -575,7 +575,7 @@
             this.cboCountry.Margin = new System.Windows.Forms.Padding(6);
             this.cboCountry.Name = "cboCountry";
             this.cboCountry.Size = new System.Drawing.Size(168, 32);
-            this.cboCountry.TabIndex = 5;
+            this.cboCountry.TabIndex = 6;
             this.cboCountry.Leave += new System.EventHandler(this.cboCountry_Leave);
             // 
             // txtMiddleName
@@ -586,7 +586,7 @@
             this.txtMiddleName.Margin = new System.Windows.Forms.Padding(6);
             this.txtMiddleName.Name = "txtMiddleName";
             this.txtMiddleName.Size = new System.Drawing.Size(150, 29);
-            this.txtMiddleName.TabIndex = 1;
+            this.txtMiddleName.TabIndex = 2;
             this.txtMiddleName.TextChanged += new System.EventHandler(this.txtMiddleName_TextChanged);
             // 
             // label12
@@ -616,7 +616,7 @@
             this.cboAccomodationPreference.Margin = new System.Windows.Forms.Padding(6);
             this.cboAccomodationPreference.Name = "cboAccomodationPreference";
             this.cboAccomodationPreference.Size = new System.Drawing.Size(490, 32);
-            this.cboAccomodationPreference.TabIndex = 4;
+            this.cboAccomodationPreference.TabIndex = 5;
             this.cboAccomodationPreference.SelectedIndexChanged += new System.EventHandler(this.cboAccomodationPreference_SelectedIndexChanged);
             this.cboAccomodationPreference.Leave += new System.EventHandler(this.cboGender_Leave);
             // 
@@ -636,7 +636,7 @@
             this.chkContractor.Location = new System.Drawing.Point(220, 267);
             this.chkContractor.Name = "chkContractor";
             this.chkContractor.Size = new System.Drawing.Size(61, 28);
-            this.chkContractor.TabIndex = 9;
+            this.chkContractor.TabIndex = 10;
             this.chkContractor.Text = "Yes";
             this.chkContractor.UseVisualStyleBackColor = true;
             this.chkContractor.CheckedChanged += new System.EventHandler(this.chkContractor_CheckedChanged);
@@ -657,7 +657,7 @@
             this.chkAllergies.Location = new System.Drawing.Point(587, 473);
             this.chkAllergies.Name = "chkAllergies";
             this.chkAllergies.Size = new System.Drawing.Size(141, 28);
-            this.chkAllergies.TabIndex = 17;
+            this.chkAllergies.TabIndex = 18;
             this.chkAllergies.Text = "Yes, allergies";
             this.chkAllergies.UseVisualStyleBackColor = true;
             this.chkAllergies.CheckedChanged += new System.EventHandler(this.chkAllergies_CheckedChanged);
@@ -699,7 +699,7 @@
             this.cboKind.Location = new System.Drawing.Point(220, 9);
             this.cboKind.Name = "cboKind";
             this.cboKind.Size = new System.Drawing.Size(170, 32);
-            this.cboKind.TabIndex = 11;
+            this.cboKind.TabIndex = 12;
             this.cboKind.Leave += new System.EventHandler(this.cboKind_Leave);
             // 
             // cboType
@@ -716,7 +716,7 @@
             this.cboType.Location = new System.Drawing.Point(163, 9);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(149, 32);
-            this.cboType.TabIndex = 12;
+            this.cboType.TabIndex = 13;
             this.cboType.Leave += new System.EventHandler(this.cboType_Leave);
             // 
             // label19
@@ -741,7 +741,7 @@
             this.cboOtherAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboOtherAgency.Name = "cboOtherAgency";
             this.cboOtherAgency.Size = new System.Drawing.Size(490, 32);
-            this.cboOtherAgency.TabIndex = 8;
+            this.cboOtherAgency.TabIndex = 9;
             this.cboOtherAgency.Leave += new System.EventHandler(this.cboOtherAgency_Leave);
             // 
             // label20
@@ -762,7 +762,7 @@
             this.txtPronouns.Margin = new System.Windows.Forms.Padding(6);
             this.txtPronouns.Name = "txtPronouns";
             this.txtPronouns.Size = new System.Drawing.Size(490, 29);
-            this.txtPronouns.TabIndex = 3;
+            this.txtPronouns.TabIndex = 4;
             this.txtPronouns.TextChanged += new System.EventHandler(this.txtPronouns_TextChanged);
             // 
             // txtFirstName
@@ -773,7 +773,7 @@
             this.txtFirstName.Multiline = false;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(155, 29);
-            this.txtFirstName.TabIndex = 137;
+            this.txtFirstName.TabIndex = 1;
             // 
             // txtLastName
             // 
@@ -783,7 +783,7 @@
             this.txtLastName.Multiline = false;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(153, 29);
-            this.txtLastName.TabIndex = 138;
+            this.txtLastName.TabIndex = 3;
             // 
             // txtNOKName
             // 
@@ -794,7 +794,7 @@
             this.txtNOKName.Multiline = true;
             this.txtNOKName.Name = "txtNOKName";
             this.txtNOKName.Size = new System.Drawing.Size(490, 59);
-            this.txtNOKName.TabIndex = 139;
+            this.txtNOKName.TabIndex = 19;
             // 
             // splitContainer1
             // 
@@ -813,7 +813,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(496, 38);
             this.splitContainer1.SplitterDistance = 164;
-            this.splitContainer1.TabIndex = 140;
+            this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer2
             // 
@@ -852,7 +852,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.label17);
             this.splitContainer3.Size = new System.Drawing.Size(745, 48);
             this.splitContainer3.SplitterDistance = 394;
-            this.splitContainer3.TabIndex = 141;
+            this.splitContainer3.TabIndex = 12;
             // 
             // splitContainer4
             // 
@@ -873,7 +873,7 @@
             this.splitContainer4.Panel2.Controls.Add(this.label4);
             this.splitContainer4.Size = new System.Drawing.Size(745, 39);
             this.splitContainer4.SplitterDistance = 394;
-            this.splitContainer4.TabIndex = 142;
+            this.splitContainer4.TabIndex = 14;
             // 
             // txtCellphone
             // 
@@ -884,7 +884,7 @@
             this.txtCellphone.Multiline = false;
             this.txtCellphone.Name = "txtCellphone";
             this.txtCellphone.Size = new System.Drawing.Size(167, 29);
-            this.txtCellphone.TabIndex = 10;
+            this.txtCellphone.TabIndex = 14;
             // 
             // splitContainer5
             // 
@@ -906,7 +906,7 @@
             this.splitContainer5.Panel2.Controls.Add(this.button1);
             this.splitContainer5.Size = new System.Drawing.Size(745, 48);
             this.splitContainer5.SplitterDistance = 394;
-            this.splitContainer5.TabIndex = 143;
+            this.splitContainer5.TabIndex = 6;
             // 
             // PersonnelEditControl
             // 
