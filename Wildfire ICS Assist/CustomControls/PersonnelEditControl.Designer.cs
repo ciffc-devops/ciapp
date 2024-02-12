@@ -832,7 +832,7 @@
             this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCellphone.Location = new System.Drawing.Point(218, 2);
-            this.txtCellphone.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtCellphone.Margin = new System.Windows.Forms.Padding(6);
             this.txtCellphone.Multiline = false;
             this.txtCellphone.Name = "txtCellphone";
             this.txtCellphone.Size = new System.Drawing.Size(166, 30);
