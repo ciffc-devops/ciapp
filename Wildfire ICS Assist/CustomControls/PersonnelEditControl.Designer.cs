@@ -46,11 +46,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.btnEmailHelp = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label13 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtCallsign = new System.Windows.Forms.TextBox();
             this.chkDietary = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -72,13 +69,13 @@
             this.txtPronouns = new System.Windows.Forms.TextBox();
             this.txtFirstName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.txtLastName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
-            this.txtNOKName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.txtCellphone = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.txtNOKName = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -113,7 +110,7 @@
             this.cboProvince.Location = new System.Drawing.Point(170, 3);
             this.cboProvince.Margin = new System.Windows.Forms.Padding(6);
             this.cboProvince.Name = "cboProvince";
-            this.cboProvince.Size = new System.Drawing.Size(137, 32);
+            this.cboProvince.Size = new System.Drawing.Size(131, 32);
             this.cboProvince.TabIndex = 7;
             this.cboProvince.SelectedIndexChanged += new System.EventHandler(this.cboProvince_SelectedIndexChanged);
             // 
@@ -129,7 +126,7 @@
             this.cboAgency.Location = new System.Drawing.Point(220, 182);
             this.cboAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboAgency.Name = "cboAgency";
-            this.cboAgency.Size = new System.Drawing.Size(490, 32);
+            this.cboAgency.Size = new System.Drawing.Size(477, 32);
             this.cboAgency.TabIndex = 8;
             this.cboAgency.SelectedIndexChanged += new System.EventHandler(this.cboAgency_SelectedIndexChanged);
             this.cboAgency.Leave += new System.EventHandler(this.cboAgency_Leave);
@@ -178,18 +175,18 @@
             // 
             this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmail.Location = new System.Drawing.Point(218, 438);
+            this.txtEmail.Location = new System.Drawing.Point(90, 3);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(490, 29);
+            this.txtEmail.Size = new System.Drawing.Size(242, 29);
             this.txtEmail.TabIndex = 16;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(6, 438);
+            this.label6.Location = new System.Drawing.Point(11, 3);
             this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(205, 29);
+            this.label6.Size = new System.Drawing.Size(70, 29);
             this.label6.TabIndex = 11;
             this.label6.Text = "Email";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -204,7 +201,7 @@
             this.cboHomeAgency.FormattingEnabled = true;
             this.cboHomeAgency.Location = new System.Drawing.Point(220, 301);
             this.cboHomeAgency.Name = "cboHomeAgency";
-            this.cboHomeAgency.Size = new System.Drawing.Size(490, 32);
+            this.cboHomeAgency.Size = new System.Drawing.Size(477, 32);
             this.cboHomeAgency.TabIndex = 11;
             this.cboHomeAgency.Leave += new System.EventHandler(this.cboHomeAgency_Leave);
             // 
@@ -228,7 +225,7 @@
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button1.Location = new System.Drawing.Point(321, 8);
+            this.button1.Location = new System.Drawing.Point(307, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 92;
@@ -243,7 +240,7 @@
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button2.Location = new System.Drawing.Point(720, 184);
+            this.button2.Location = new System.Drawing.Point(700, 184);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 26);
             this.button2.TabIndex = 93;
@@ -259,7 +256,7 @@
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button6.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button6.Location = new System.Drawing.Point(722, 305);
+            this.button6.Location = new System.Drawing.Point(700, 305);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 26);
             this.button6.TabIndex = 97;
@@ -275,7 +272,7 @@
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button3.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button3.Location = new System.Drawing.Point(720, 512);
+            this.button3.Location = new System.Drawing.Point(700, 477);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 26);
             this.button3.TabIndex = 125;
@@ -283,21 +280,6 @@
             this.toolTip1.SetToolTip(this.button3, "Provide regional or home unit emergency contact. ");
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.btnShowHelp_Click);
-            // 
-            // btnEmailHelp
-            // 
-            this.btnEmailHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEmailHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmailHelp.BackgroundImage")));
-            this.btnEmailHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnEmailHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnEmailHelp.Location = new System.Drawing.Point(722, 440);
-            this.btnEmailHelp.Name = "btnEmailHelp";
-            this.btnEmailHelp.Size = new System.Drawing.Size(26, 26);
-            this.btnEmailHelp.TabIndex = 134;
-            this.btnEmailHelp.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnEmailHelp, "Emails may be used for IAP delivery. Enter work emails or company emails only. ");
-            this.btnEmailHelp.UseVisualStyleBackColor = true;
-            this.btnEmailHelp.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
             // imageList1
             // 
@@ -308,37 +290,17 @@
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(6, 512);
+            this.label13.Location = new System.Drawing.Point(8, 477);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(205, 57);
             this.label13.TabIndex = 102;
-            this.label13.Text = "Employer emergency contact information *";
+            this.label13.Text = "Employer emergency contact information ";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(7, 6);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(144, 29);
-            this.label4.TabIndex = 109;
-            this.label4.Text = "Call sign";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtCallsign
-            // 
-            this.txtCallsign.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCallsign.Location = new System.Drawing.Point(160, 6);
-            this.txtCallsign.Name = "txtCallsign";
-            this.txtCallsign.Size = new System.Drawing.Size(149, 29);
-            this.txtCallsign.TabIndex = 15;
-            this.txtCallsign.TextChanged += new System.EventHandler(this.txtCallsign_TextChanged);
             // 
             // chkDietary
             // 
             this.chkDietary.AutoSize = true;
-            this.chkDietary.Location = new System.Drawing.Point(218, 473);
+            this.chkDietary.Location = new System.Drawing.Point(220, 438);
             this.chkDietary.Name = "chkDietary";
             this.chkDietary.Size = new System.Drawing.Size(220, 28);
             this.chkDietary.TabIndex = 17;
@@ -348,7 +310,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(6, 472);
+            this.label8.Location = new System.Drawing.Point(8, 437);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(205, 29);
@@ -574,7 +536,7 @@
             this.cboCountry.Location = new System.Drawing.Point(218, 6);
             this.cboCountry.Margin = new System.Windows.Forms.Padding(6);
             this.cboCountry.Name = "cboCountry";
-            this.cboCountry.Size = new System.Drawing.Size(168, 32);
+            this.cboCountry.Size = new System.Drawing.Size(161, 32);
             this.cboCountry.TabIndex = 6;
             this.cboCountry.Leave += new System.EventHandler(this.cboCountry_Leave);
             // 
@@ -585,7 +547,7 @@
             this.txtMiddleName.Location = new System.Drawing.Point(6, 6);
             this.txtMiddleName.Margin = new System.Windows.Forms.Padding(6);
             this.txtMiddleName.Name = "txtMiddleName";
-            this.txtMiddleName.Size = new System.Drawing.Size(150, 29);
+            this.txtMiddleName.Size = new System.Drawing.Size(146, 29);
             this.txtMiddleName.TabIndex = 2;
             this.txtMiddleName.TextChanged += new System.EventHandler(this.txtMiddleName_TextChanged);
             // 
@@ -615,7 +577,7 @@
             this.cboAccomodationPreference.Location = new System.Drawing.Point(220, 91);
             this.cboAccomodationPreference.Margin = new System.Windows.Forms.Padding(6);
             this.cboAccomodationPreference.Name = "cboAccomodationPreference";
-            this.cboAccomodationPreference.Size = new System.Drawing.Size(490, 32);
+            this.cboAccomodationPreference.Size = new System.Drawing.Size(477, 32);
             this.cboAccomodationPreference.TabIndex = 5;
             this.cboAccomodationPreference.SelectedIndexChanged += new System.EventHandler(this.cboAccomodationPreference_SelectedIndexChanged);
             this.cboAccomodationPreference.Leave += new System.EventHandler(this.cboGender_Leave);
@@ -643,7 +605,7 @@
             // 
             // label15
             // 
-            this.label15.Location = new System.Drawing.Point(450, 472);
+            this.label15.Location = new System.Drawing.Point(452, 437);
             this.label15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(131, 29);
@@ -654,7 +616,7 @@
             // chkAllergies
             // 
             this.chkAllergies.AutoSize = true;
-            this.chkAllergies.Location = new System.Drawing.Point(587, 473);
+            this.chkAllergies.Location = new System.Drawing.Point(589, 438);
             this.chkAllergies.Name = "chkAllergies";
             this.chkAllergies.Size = new System.Drawing.Size(141, 28);
             this.chkAllergies.TabIndex = 18;
@@ -698,7 +660,7 @@
             "Contractor"});
             this.cboKind.Location = new System.Drawing.Point(220, 9);
             this.cboKind.Name = "cboKind";
-            this.cboKind.Size = new System.Drawing.Size(170, 32);
+            this.cboKind.Size = new System.Drawing.Size(163, 32);
             this.cboKind.TabIndex = 12;
             this.cboKind.Leave += new System.EventHandler(this.cboKind_Leave);
             // 
@@ -715,7 +677,7 @@
             "Type 3"});
             this.cboType.Location = new System.Drawing.Point(163, 9);
             this.cboType.Name = "cboType";
-            this.cboType.Size = new System.Drawing.Size(149, 32);
+            this.cboType.Size = new System.Drawing.Size(143, 32);
             this.cboType.TabIndex = 13;
             this.cboType.Leave += new System.EventHandler(this.cboType_Leave);
             // 
@@ -740,7 +702,7 @@
             this.cboOtherAgency.Location = new System.Drawing.Point(220, 226);
             this.cboOtherAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboOtherAgency.Name = "cboOtherAgency";
-            this.cboOtherAgency.Size = new System.Drawing.Size(490, 32);
+            this.cboOtherAgency.Size = new System.Drawing.Size(477, 32);
             this.cboOtherAgency.TabIndex = 9;
             this.cboOtherAgency.Leave += new System.EventHandler(this.cboOtherAgency_Leave);
             // 
@@ -761,7 +723,7 @@
             this.txtPronouns.Location = new System.Drawing.Point(220, 50);
             this.txtPronouns.Margin = new System.Windows.Forms.Padding(6);
             this.txtPronouns.Name = "txtPronouns";
-            this.txtPronouns.Size = new System.Drawing.Size(490, 29);
+            this.txtPronouns.Size = new System.Drawing.Size(477, 29);
             this.txtPronouns.TabIndex = 4;
             this.txtPronouns.TextChanged += new System.EventHandler(this.txtPronouns_TextChanged);
             // 
@@ -772,7 +734,7 @@
             this.txtFirstName.Location = new System.Drawing.Point(6, 6);
             this.txtFirstName.Multiline = false;
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(155, 29);
+            this.txtFirstName.Size = new System.Drawing.Size(150, 29);
             this.txtFirstName.TabIndex = 1;
             // 
             // txtLastName
@@ -782,19 +744,8 @@
             this.txtLastName.Location = new System.Drawing.Point(6, 6);
             this.txtLastName.Multiline = false;
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(153, 29);
+            this.txtLastName.Size = new System.Drawing.Size(149, 29);
             this.txtLastName.TabIndex = 3;
-            // 
-            // txtNOKName
-            // 
-            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNOKName.Location = new System.Drawing.Point(214, 510);
-            this.txtNOKName.Margin = new System.Windows.Forms.Padding(6);
-            this.txtNOKName.Multiline = true;
-            this.txtNOKName.Name = "txtNOKName";
-            this.txtNOKName.Size = new System.Drawing.Size(490, 59);
-            this.txtNOKName.TabIndex = 19;
             // 
             // splitContainer1
             // 
@@ -811,8 +762,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(496, 38);
-            this.splitContainer1.SplitterDistance = 164;
+            this.splitContainer1.Size = new System.Drawing.Size(483, 38);
+            this.splitContainer1.SplitterDistance = 159;
             this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer2
@@ -829,8 +780,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.txtLastName);
-            this.splitContainer2.Size = new System.Drawing.Size(328, 38);
-            this.splitContainer2.SplitterDistance = 162;
+            this.splitContainer2.Size = new System.Drawing.Size(320, 38);
+            this.splitContainer2.SplitterDistance = 158;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -850,14 +801,15 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.cboType);
             this.splitContainer3.Panel2.Controls.Add(this.label17);
-            this.splitContainer3.Size = new System.Drawing.Size(745, 48);
-            this.splitContainer3.SplitterDistance = 394;
+            this.splitContainer3.Size = new System.Drawing.Size(732, 48);
+            this.splitContainer3.SplitterDistance = 387;
             this.splitContainer3.TabIndex = 12;
             // 
             // splitContainer4
             // 
             this.splitContainer4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer4.IsSplitterFixed = true;
             this.splitContainer4.Location = new System.Drawing.Point(1, 393);
             this.splitContainer4.Name = "splitContainer4";
@@ -869,21 +821,21 @@
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.txtCallsign);
-            this.splitContainer4.Panel2.Controls.Add(this.label4);
-            this.splitContainer4.Size = new System.Drawing.Size(745, 39);
-            this.splitContainer4.SplitterDistance = 394;
+            this.splitContainer4.Panel2.Controls.Add(this.txtEmail);
+            this.splitContainer4.Panel2.Controls.Add(this.label6);
+            this.splitContainer4.Size = new System.Drawing.Size(732, 39);
+            this.splitContainer4.SplitterDistance = 387;
             this.splitContainer4.TabIndex = 14;
             // 
             // txtCellphone
             // 
             this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCellphone.Location = new System.Drawing.Point(219, 4);
-            this.txtCellphone.Margin = new System.Windows.Forms.Padding(6);
+            this.txtCellphone.Location = new System.Drawing.Point(218, 2);
+            this.txtCellphone.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtCellphone.Multiline = false;
             this.txtCellphone.Name = "txtCellphone";
-            this.txtCellphone.Size = new System.Drawing.Size(167, 29);
+            this.txtCellphone.Size = new System.Drawing.Size(166, 30);
             this.txtCellphone.TabIndex = 14;
             // 
             // splitContainer5
@@ -904,23 +856,35 @@
             this.splitContainer5.Panel2.Controls.Add(this.label2);
             this.splitContainer5.Panel2.Controls.Add(this.cboProvince);
             this.splitContainer5.Panel2.Controls.Add(this.button1);
-            this.splitContainer5.Size = new System.Drawing.Size(745, 48);
-            this.splitContainer5.SplitterDistance = 394;
+            this.splitContainer5.Size = new System.Drawing.Size(732, 48);
+            this.splitContainer5.SplitterDistance = 387;
             this.splitContainer5.TabIndex = 6;
+            // 
+            // txtNOKName
+            // 
+            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNOKName.Location = new System.Drawing.Point(220, 477);
+            this.txtNOKName.Multiline = true;
+            this.txtNOKName.Name = "txtNOKName";
+            this.txtNOKName.Size = new System.Drawing.Size(474, 57);
+            this.txtNOKName.TabIndex = 137;
+            this.txtNOKName.WordWrap = true;
+            this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged_1);
+            this.txtNOKName.Child = new System.Windows.Controls.TextBox();
             // 
             // PersonnelEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.txtNOKName);
             this.Controls.Add(this.splitContainer5);
             this.Controls.Add(this.splitContainer4);
             this.Controls.Add(this.splitContainer3);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.txtNOKName);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.txtPronouns);
-            this.Controls.Add(this.btnEmailHelp);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.cboOtherAgency);
             this.Controls.Add(this.button3);
@@ -937,15 +901,14 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cboHomeAgency);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboAgency);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimumSize = new System.Drawing.Size(735, 543);
             this.Name = "PersonnelEditControl";
-            this.Size = new System.Drawing.Size(748, 577);
+            this.Size = new System.Drawing.Size(735, 543);
             this.Load += new System.EventHandler(this.PersonnelEditControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -993,8 +956,6 @@
         private System.Windows.Forms.BindingSource bsProvAndTerr;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCallsign;
         private System.Windows.Forms.CheckBox chkDietary;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
@@ -1013,17 +974,16 @@
         private System.Windows.Forms.ComboBox cboType;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox cboOtherAgency;
-        private System.Windows.Forms.Button btnEmailHelp;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtPronouns;
         private TextBoxRequiredControl txtFirstName;
         private TextBoxRequiredControl txtLastName;
-        private TextBoxRequiredControl txtNOKName;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private TextBoxRequiredControl txtCellphone;
+        private SpellBox txtNOKName;
     }
 }

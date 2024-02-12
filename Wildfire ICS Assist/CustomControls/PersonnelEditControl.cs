@@ -70,9 +70,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                 //txtDietary.Text = teamMember.Dietary;
                 chkDietary.Checked = teamMember.HasDietaryRestrictions;
-                txtCallsign.Text = teamMember.CallSign;
+               
                 chkAllergies.Checked = teamMember.HasAllergies;
-                txtNOKName.SetText(teamMember.EmergencyContact);
+                txtNOKName.Text = (teamMember.EmergencyContact);
 
                 //chkNoGluten.Checked = teamMember.NoGluten;
                 //chkVegetarian.Checked = teamMember.Vegetarian;
@@ -157,7 +157,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (string.IsNullOrEmpty(teamMember.AccomodationPreference) || string.IsNullOrEmpty(teamMember.AccomodationPreference.Trim())) { return false; }
                 if (string.IsNullOrEmpty(teamMember.CellphoneNumber) || string.IsNullOrEmpty(teamMember.CellphoneNumber.Trim())) { return false; }
                 if (string.IsNullOrEmpty(teamMember.Agency)) { return false; };
-                if (string.IsNullOrEmpty(teamMember.EmergencyContact)) { return false; };
+                //if (string.IsNullOrEmpty(teamMember.EmergencyContact)) { return false; };
                 SetColours();
 
                 return true;
@@ -316,6 +316,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         }
 
-       
+        private void txtNOKName_TextChanged_1(object sender, EventArgs e)
+        {
+            teamMember.EmergencyContact = txtNOKName.Text;
+        }
     }
 }
