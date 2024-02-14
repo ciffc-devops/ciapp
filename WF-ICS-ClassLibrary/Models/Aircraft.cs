@@ -116,8 +116,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(8)] private string _Pilot;
         [ProtoMember(9)] private string _ContactNumber;
         [ProtoMember(13)] private bool _IsMedivac;
+        [ProtoMember(14)] private bool _IsHeli;
 
-        public Aircraft() { ID = Guid.NewGuid(); Active = true; }
+        public Aircraft() { ID = Guid.NewGuid(); Active = true; IsHeli = true; }
 
         public string Registration { get => ResourceName; set => ResourceName = value; }
         public string MakeModel { get => _MakeModel; set => _MakeModel = value; }
@@ -136,6 +137,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Pilot { get => _Pilot; set => _Pilot = value; }
         public string ContactNumber { get => _ContactNumber; set => _ContactNumber = value; }
         public bool IsMedivac { get => _IsMedivac; set => _IsMedivac = value; }
+        public bool IsHeli { get => _IsHeli; set => _IsHeli = value; }
 
         public Aircraft Clone()
         {

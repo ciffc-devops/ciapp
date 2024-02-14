@@ -20,6 +20,15 @@ namespace Wildfire_ICS_Assist.CustomControls
         public EditAircraftControl()
         {
             InitializeComponent();
+            txtRegistration.TextChanged += TxtRegistration_TextChanged;
+        }
+
+        private void TxtRegistration_TextChanged(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null)
+            {
+                selectedAircraft.Registration = txtRegistration.Text;
+            }
         }
 
         private void loadAircraft()
@@ -28,45 +37,72 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 txtBase.Text = selectedAircraft.Base;
                 txtMakeModel.Text = selectedAircraft.MakeModel;
-                txtRegistration.Text = selectedAircraft.Registration;
+                txtRegistration.SetText(selectedAircraft.Registration);
                 txtContactNumber.Text = selectedAircraft.ContactNumber;
                 if (!string.IsNullOrEmpty(selectedAircraft.Remarks)) { txtRemarks.Text = selectedAircraft.Remarks.Replace("\n", Environment.NewLine); }
+                if (!selectedAircraft.IsHeli) { cboIsHeli.SelectedIndex = 1; } else { cboIsHeli.SelectedIndex = 0; }
             }
         }
 
         private void txtRegistration_TextChanged(object sender, EventArgs e)
         {
-            if (selectedAircraft != null)
-            {
-                selectedAircraft.Registration = txtRegistration.Text;
-                if (string.IsNullOrEmpty(txtRegistration.Text.Trim())) { txtRegistration.BackColor = Program.ErrorColor; }
-                else { txtRegistration.BackColor = Program.GoodColor; }
-            }
+           
         }
 
         private void txtMakeModel_TextChanged(object sender, EventArgs e)
         {
-            if (selectedAircraft != null) { selectedAircraft.MakeModel = txtMakeModel.Text; }
         }
 
         private void txtBase_TextChanged(object sender, EventArgs e)
         {
-            if (selectedAircraft != null) { selectedAircraft.Base = txtBase.Text; }
         }
 
         private void txtRemarks_TextChanged(object sender, EventArgs e)
         {
-            if (selectedAircraft != null) { selectedAircraft.Remarks = txtRemarks.Text; }
         }
 
         private bool ValidateForm()
         {
-            return !string.IsNullOrEmpty(txtRegistration.Text.Trim());
+            return txtRegistration.IsValid;
         }
 
         private void txtContactNumber_TextChanged(object sender, EventArgs e)
         {
             if(selectedAircraft != null) { selectedAircraft.ContactNumber = txtContactNumber.Text; }
+        }
+
+        private void txtMakeModel_TextChanged_1(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null) { selectedAircraft.MakeModel = txtMakeModel.Text; }
+
+        }
+
+        private void txtBase_TextChanged_1(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null) { selectedAircraft.Base = txtBase.Text; }
+
+        }
+
+        private void txtContactNumber_TextChanged_1(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null) { selectedAircraft.ContactNumber = txtContactNumber.Text; }
+
+        }
+
+        private void txtRemarks_TextChanged_1(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null) { selectedAircraft.Remarks = txtRemarks.Text; }
+
+        }
+
+        private void cboIsHeli_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null) { selectedAircraft.IsHeli = cboIsHeli.SelectedIndex == 0; }
+        }
+
+        private void txtContactNumber_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
+        {
+
         }
     }
 }
