@@ -138,6 +138,14 @@ namespace WF_ICS_ClassLibrary.Models
         public string ContactNumber { get => _ContactNumber; set => _ContactNumber = value; }
         public bool IsMedivac { get => _IsMedivac; set => _IsMedivac = value; }
         public bool IsHeli { get => _IsHeli; set => _IsHeli = value; }
+        public string AircraftTypeText
+        {
+            get
+            {
+                if (IsHeli) { return "Helicopter"; }
+                return "Fixed-Wing";
+            }
+        }
 
         public Aircraft Clone()
         {
