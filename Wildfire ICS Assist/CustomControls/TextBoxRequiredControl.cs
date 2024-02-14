@@ -23,11 +23,27 @@ namespace Wildfire_ICS_Assist.CustomControls
             }
         }
 
+        [Browsable(true)]
+        [Category("Action")]
+        [Description("Invoked when Text Changes")]
+
         public new event EventHandler TextChanged
         {
             add { textBox1.TextChanged += value; }
             remove { textBox1.TextChanged -= value; }
         }
+
+        [Browsable(true)]
+        [Category("Action")]
+        [Description("Invoked when control loses focus")]
+
+        public new event EventHandler Leave
+        {
+            add { textBox1.Leave += value; }
+            remove { textBox1.Leave -= value; }
+        }
+
+
 
         public bool IsValid { get { return !string.IsNullOrEmpty(textBox1.Text); } }
         public new string Text { get => textBox1.Text; }

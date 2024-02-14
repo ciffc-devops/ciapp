@@ -51,6 +51,19 @@ class SpellBox : ElementHost
             this.TextChanged(this, e);
     }
 
+
+    [Browsable(true)]
+    [Category("Action")]
+    [Description("Invoked when the control loses focus")]
+    public new event EventHandler Leave;
+    protected void SpellBox_Leave(object sender, EventArgs e)
+    {
+        if (this.Leave != null)
+            this.Leave(this, e);
+    }
+
+
+
     public override string Text
     {
         get { return box.Text; }
