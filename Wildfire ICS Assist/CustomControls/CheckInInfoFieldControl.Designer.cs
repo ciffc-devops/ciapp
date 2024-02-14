@@ -37,6 +37,12 @@
             this.cboListValue = new System.Windows.Forms.ComboBox();
             this.btnHelp = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.numNumberValue = new System.Windows.Forms.NumericUpDown();
+            this.pnlWeight = new System.Windows.Forms.Panel();
+            this.rbLBS = new System.Windows.Forms.RadioButton();
+            this.rbKG = new System.Windows.Forms.RadioButton();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberValue)).BeginInit();
+            this.pnlWeight.SuspendLayout();
             this.SuspendLayout();
             // 
             // datDateValue
@@ -95,7 +101,7 @@
             this.btnHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnHelp.BackgroundImage")));
             this.btnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.btnHelp.Location = new System.Drawing.Point(681, 6);
+            this.btnHelp.Location = new System.Drawing.Point(1306, 6);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(26, 26);
             this.btnHelp.TabIndex = 140;
@@ -103,10 +109,61 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnShowHelp_Click);
             // 
+            // numNumberValue
+            // 
+            this.numNumberValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numNumberValue.Location = new System.Drawing.Point(700, 5);
+            this.numNumberValue.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numNumberValue.Name = "numNumberValue";
+            this.numNumberValue.Size = new System.Drawing.Size(469, 29);
+            this.numNumberValue.TabIndex = 141;
+            this.numNumberValue.ValueChanged += new System.EventHandler(this.numNumberValue_ValueChanged);
+            // 
+            // pnlWeight
+            // 
+            this.pnlWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlWeight.Controls.Add(this.rbLBS);
+            this.pnlWeight.Controls.Add(this.rbKG);
+            this.pnlWeight.Location = new System.Drawing.Point(1175, 0);
+            this.pnlWeight.Name = "pnlWeight";
+            this.pnlWeight.Size = new System.Drawing.Size(125, 40);
+            this.pnlWeight.TabIndex = 142;
+            // 
+            // rbLBS
+            // 
+            this.rbLBS.AutoSize = true;
+            this.rbLBS.Location = new System.Drawing.Point(65, 5);
+            this.rbLBS.Name = "rbLBS";
+            this.rbLBS.Size = new System.Drawing.Size(58, 28);
+            this.rbLBS.TabIndex = 1;
+            this.rbLBS.Text = "Lbs";
+            this.rbLBS.UseVisualStyleBackColor = true;
+            this.rbLBS.CheckedChanged += new System.EventHandler(this.rbLBS_CheckedChanged);
+            // 
+            // rbKG
+            // 
+            this.rbKG.AutoSize = true;
+            this.rbKG.Checked = true;
+            this.rbKG.Location = new System.Drawing.Point(8, 6);
+            this.rbKG.Name = "rbKG";
+            this.rbKG.Size = new System.Drawing.Size(51, 28);
+            this.rbKG.TabIndex = 0;
+            this.rbKG.TabStop = true;
+            this.rbKG.Text = "Kg";
+            this.rbKG.UseVisualStyleBackColor = true;
+            this.rbKG.CheckedChanged += new System.EventHandler(this.rbKG_CheckedChanged);
+            // 
             // CheckInInfoFieldControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnlWeight);
+            this.Controls.Add(this.numNumberValue);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.cboListValue);
             this.Controls.Add(this.chkBoolValue);
@@ -116,8 +173,11 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CheckInInfoFieldControl";
-            this.Size = new System.Drawing.Size(710, 40);
+            this.Size = new System.Drawing.Size(1335, 40);
             this.Load += new System.EventHandler(this.CheckInInfoFieldControl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberValue)).EndInit();
+            this.pnlWeight.ResumeLayout(false);
+            this.pnlWeight.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,5 +192,9 @@
         private System.Windows.Forms.ComboBox cboListValue;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.NumericUpDown numNumberValue;
+        private System.Windows.Forms.Panel pnlWeight;
+        private System.Windows.Forms.RadioButton rbLBS;
+        private System.Windows.Forms.RadioButton rbKG;
     }
 }

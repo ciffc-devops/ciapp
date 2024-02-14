@@ -48,6 +48,9 @@ namespace Wildfire_ICS_Assist.CustomControls
                             return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
                         case "List":
                             return !string.IsNullOrEmpty(cboListValue.Text);
+
+                        case "Weight":
+                            return WeightInKG > 0;
                         default:
                             return !string.IsNullOrEmpty(txtStringValue.Text);
                     }
@@ -56,6 +59,17 @@ namespace Wildfire_ICS_Assist.CustomControls
             }
         }
 
+        private decimal WeightInKG
+        {
+            get
+            {
+                if (rbKG.Checked) { return numNumberValue.Value; }
+                else
+                {
+                    return numNumberValue.Value * 0.4535924m;
+                }
+            }
+        }
 
         private void loadInfoField()
         {
@@ -78,7 +92,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 datDateValue.Visible = false;
                 txtStringValue.Visible = false;
                 cboListValue.Visible = false;
-
+                pnlWeight.Visible = false;
+                numNumberValue.Visible = false;
 
                 switch (infoField.FieldType)
                 {
@@ -117,6 +132,14 @@ namespace Wildfire_ICS_Assist.CustomControls
                             }
                         }
                         else { cboListValue.Text = infoField.StringValue; }
+                        break;
+                    case "Weight":
+                        numNumberValue.Visible = true;
+                        pnlWeight.Visible = true;
+                        numNumberValue.Location = startPoint;
+                        numNumberValue.Width = pnlWeight.Location.X - 5 - startPoint.X;
+                        numNumberValue.Value = infoField.DecimalValue;
+                        rbKG.Checked = true;
                         break;
                     default:
                         txtStringValue.Visible = true;
@@ -161,6 +184,23 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtStringValue.BackColor = Program.ErrorColor;
             }
             else { lblFieldName.ForeColor = SystemColors.ControlText; txtStringValue.BackColor = SystemColors.Window; }
+        }
+
+        private void numNumberValue_ValueChanged(object sender, EventArgs e)
+        {
+            infoField.DecimalValue = WeightInKG;
+        }
+
+        private void rbKG_CheckedChanged(object sender, EventArgs e)
+        {
+            infoField.DecimalValue = WeightInKG;
+
+        }
+
+        private void rbLBS_CheckedChanged(object sender, EventArgs e)
+        {
+            infoField.DecimalValue = WeightInKG;
+
         }
     }
 }

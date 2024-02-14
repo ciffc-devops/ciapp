@@ -114,6 +114,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(15)] private string _ToolTipText;
         [ProtoMember(16)] private bool _UseForEquipment; 
         [ProtoMember(17)] private bool _UseForOperator;
+        [ProtoMember(18)] private decimal _DecimalValue;
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string Name { get => _Name; set => _Name = value; }
@@ -123,6 +124,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string StringValue { get => _StringValue; set => _StringValue = value; }
         public bool BoolValue { get => _BoolValue; set => _BoolValue = value; }
         public int IntValue { get => _IntValue; set => _IntValue = value; }
+        public decimal DecimalValue { get => _DecimalValue; set => _DecimalValue = value; }
         public bool UseForVisitor { get => _UseForVisitor; set => _UseForVisitor = value; }
         public bool UseForPersonnel { get => _UseForPersonnel; set => _UseForPersonnel = value; }
         public bool UseForVehicle { get => _UseForVehicle; set => _UseForVehicle = value; }
@@ -810,7 +812,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             List<CheckInInfoField> fields = new List<CheckInInfoField>
             {
-                new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individual's weight ", "String", "Individual Info", false, true, false,false,false,true,false, "Enter the individuals seat weight. "),
+                new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individual's weight ", "Weight", "Individual Info", false, true, false,false,false,true,false, "Enter the individuals seat weight. "),
                 
                 new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Unique Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,true, "Enter the crews unique agency identifer i.e. RU01, Flathead Unit crew, Dryden IA, etc. "),
                 new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "CIFFC Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,false, "Enter the CIFFC crew identifier if the crew is imported through CIFFC i.e C-30"),

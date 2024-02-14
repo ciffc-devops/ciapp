@@ -3896,7 +3896,7 @@ namespace WildfireICSDesktopServices
 
             foreach (CheckInRecordWithResource item in list)
             {
-                if (!counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)))
+                if (!counts.Any(o => o.KindName.Equals(item.Resource.Kind) && (o.TypeName == null || o.TypeName.Equals(item.Resource.Type))))
                 {
                     if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")))
                     {
