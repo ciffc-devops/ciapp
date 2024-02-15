@@ -101,13 +101,13 @@ namespace Wildfire_ICS_Assist
 
         private void txtMessage_TextChanged(object sender, EventArgs e)
         {
-            generalMessage.Message = ((TextBox)sender).Text.Trim();
+            generalMessage.Message = ((SpellBox)sender).Text.Trim();
             _ = ValidateNew();
         }
 
         private void txtReply_TextChanged(object sender, EventArgs e)
         {
-            generalMessage.Reply = ((TextBox)sender).Text.Trim(); _ = ValidateNew();
+            generalMessage.Reply = ((SpellBox)sender).Text.Trim(); _ = ValidateNew();
 
         }
 

@@ -47,13 +47,13 @@
             this.txtReplyPosition = new System.Windows.Forms.TextBox();
             this.txtReplyName = new System.Windows.Forms.TextBox();
             this.cboFrom = new System.Windows.Forms.ComboBox();
-            this.txtReply = new System.Windows.Forms.TextBox();
             this.txtSubject = new System.Windows.Forms.TextBox();
             this.cboApprovedBy = new System.Windows.Forms.ComboBox();
             this.datMessageSent = new System.Windows.Forms.DateTimePicker();
-            this.txtMessage = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.txtMessage = new SpellBox();
+            this.txtReply = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,6 +71,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtReply);
+            this.splitContainer1.Panel1.Controls.Add(this.txtMessage);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.label11);
             this.splitContainer1.Panel1.Controls.Add(this.label9);
@@ -89,11 +91,9 @@
             this.splitContainer1.Panel1.Controls.Add(this.txtReplyPosition);
             this.splitContainer1.Panel1.Controls.Add(this.txtReplyName);
             this.splitContainer1.Panel1.Controls.Add(this.cboFrom);
-            this.splitContainer1.Panel1.Controls.Add(this.txtReply);
             this.splitContainer1.Panel1.Controls.Add(this.txtSubject);
             this.splitContainer1.Panel1.Controls.Add(this.cboApprovedBy);
             this.splitContainer1.Panel1.Controls.Add(this.datMessageSent);
-            this.splitContainer1.Panel1.Controls.Add(this.txtMessage);
             // 
             // splitContainer1.Panel2
             // 
@@ -279,18 +279,6 @@
             this.cboFrom.TabIndex = 21;
             this.cboFrom.Leave += new System.EventHandler(this.cboFrom_Leave);
             // 
-            // txtReply
-            // 
-            this.txtReply.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtReply.Location = new System.Drawing.Point(203, 425);
-            this.txtReply.Multiline = true;
-            this.txtReply.Name = "txtReply";
-            this.txtReply.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtReply.Size = new System.Drawing.Size(706, 165);
-            this.txtReply.TabIndex = 26;
-            this.txtReply.TextChanged += new System.EventHandler(this.txtReply_TextChanged);
-            // 
             // txtSubject
             // 
             this.txtSubject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -323,19 +311,6 @@
             this.datMessageSent.TabIndex = 23;
             this.datMessageSent.ValueChanged += new System.EventHandler(this.datMessageSent_ValueChanged);
             // 
-            // txtMessage
-            // 
-            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessage.Location = new System.Drawing.Point(203, 152);
-            this.txtMessage.Multiline = true;
-            this.txtMessage.Name = "txtMessage";
-            this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessage.Size = new System.Drawing.Size(706, 200);
-            this.txtMessage.TabIndex = 24;
-            this.txtMessage.TextChanged += new System.EventHandler(this.txtMessage_TextChanged);
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -364,6 +339,34 @@
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // txtMessage
+            // 
+            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMessage.Location = new System.Drawing.Point(203, 152);
+            this.txtMessage.Multiline = true;
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.Size = new System.Drawing.Size(708, 200);
+            this.txtMessage.TabIndex = 46;
+            this.txtMessage.WordWrap = true;
+            this.txtMessage.TextChanged += new System.EventHandler(this.txtMessage_TextChanged);
+            this.txtMessage.Child = new System.Windows.Controls.TextBox();
+            // 
+            // txtReply
+            // 
+            this.txtReply.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtReply.Location = new System.Drawing.Point(205, 425);
+            this.txtReply.Multiline = true;
+            this.txtReply.Name = "txtReply";
+            this.txtReply.Size = new System.Drawing.Size(708, 164);
+            this.txtReply.TabIndex = 47;
+            this.txtReply.WordWrap = true;
+            this.txtReply.TextChanged += new System.EventHandler(this.txtReply_TextChanged);
+            this.txtReply.Child = new System.Windows.Controls.TextBox();
             // 
             // GeneralMessageEditForm
             // 
@@ -408,12 +411,12 @@
         private System.Windows.Forms.TextBox txtReplyPosition;
         private System.Windows.Forms.TextBox txtReplyName;
         private System.Windows.Forms.ComboBox cboFrom;
-        private System.Windows.Forms.TextBox txtReply;
         private System.Windows.Forms.TextBox txtSubject;
         private System.Windows.Forms.ComboBox cboApprovedBy;
         private System.Windows.Forms.DateTimePicker datMessageSent;
-        private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private SpellBox txtReply;
+        private SpellBox txtMessage;
     }
 }
