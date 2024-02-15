@@ -37,10 +37,10 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnHelp = new System.Windows.Forms.Button();
-            this.txtNewObjective = new System.Windows.Forms.TextBox();
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.txtNewObjective = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,7 +66,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(609, 403);
+            this.splitContainer1.Size = new System.Drawing.Size(588, 452);
             this.splitContainer1.SplitterDistance = 137;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -82,15 +82,14 @@
             this.pnlSaved.Controls.Add(this.label1);
             this.pnlSaved.Location = new System.Drawing.Point(6, 7);
             this.pnlSaved.Name = "pnlSaved";
-            this.pnlSaved.Size = new System.Drawing.Size(591, 124);
+            this.pnlSaved.Size = new System.Drawing.Size(570, 124);
             this.pnlSaved.TabIndex = 1;
             // 
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddSaved.Location = new System.Drawing.Point(460, 26);
+            this.btnAddSaved.Location = new System.Drawing.Point(439, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddSaved.Name = "btnAddSaved";
             this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
@@ -110,7 +109,7 @@
             this.cboSavedObjectives.FormattingEnabled = true;
             this.cboSavedObjectives.Location = new System.Drawing.Point(8, 51);
             this.cboSavedObjectives.Name = "cboSavedObjectives";
-            this.cboSavedObjectives.Size = new System.Drawing.Size(443, 32);
+            this.cboSavedObjectives.Size = new System.Drawing.Size(422, 32);
             this.cboSavedObjectives.TabIndex = 1;
             this.cboSavedObjectives.ValueMember = "ItemID";
             this.cboSavedObjectives.Leave += new System.EventHandler(this.cboSavedObjectives_Leave);
@@ -129,9 +128,8 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 205);
+            this.btnCancel.Location = new System.Drawing.Point(6, 254);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
@@ -148,14 +146,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.btnHelp);
             this.panel2.Controls.Add(this.txtNewObjective);
+            this.panel2.Controls.Add(this.btnHelp);
             this.panel2.Controls.Add(this.chkSaveForLater);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.btnAddNew);
             this.panel2.Location = new System.Drawing.Point(6, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(591, 193);
+            this.panel2.Size = new System.Drawing.Size(570, 242);
             this.panel2.TabIndex = 98;
             // 
             // btnHelp
@@ -164,7 +162,7 @@
             this.btnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
             this.btnHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHelp.Location = new System.Drawing.Point(542, 8);
+            this.btnHelp.Location = new System.Drawing.Point(521, 8);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(39, 37);
             this.btnHelp.TabIndex = 100;
@@ -173,24 +171,11 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
-            // txtNewObjective
-            // 
-            this.txtNewObjective.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewObjective.Location = new System.Drawing.Point(8, 53);
-            this.txtNewObjective.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtNewObjective.Multiline = true;
-            this.txtNewObjective.Name = "txtNewObjective";
-            this.txtNewObjective.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNewObjective.Size = new System.Drawing.Size(573, 73);
-            this.txtNewObjective.TabIndex = 11;
-            // 
             // chkSaveForLater
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(141, 148);
+            this.chkSaveForLater.Location = new System.Drawing.Point(120, 197);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSaveForLater.TabIndex = 12;
@@ -210,9 +195,8 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(379, 137);
+            this.btnAddNew.Location = new System.Drawing.Point(358, 186);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
@@ -222,17 +206,31 @@
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
+            // txtNewObjective
+            // 
+            this.txtNewObjective.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNewObjective.Location = new System.Drawing.Point(8, 51);
+            this.txtNewObjective.Multiline = true;
+            this.txtNewObjective.Name = "txtNewObjective";
+            this.txtNewObjective.Size = new System.Drawing.Size(554, 126);
+            this.txtNewObjective.TabIndex = 101;
+            this.txtNewObjective.WordWrap = true;
+            this.txtNewObjective.Child = new System.Windows.Controls.TextBox();
+            // 
             // IncidentObjectiveEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(609, 403);
+            this.ClientSize = new System.Drawing.Size(588, 452);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(604, 429);
             this.Name = "IncidentObjectiveEntryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Incident Objective";
@@ -258,10 +256,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox txtNewObjective;
         private System.Windows.Forms.CheckBox chkSaveForLater;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnHelp;
+        private SpellBox txtNewObjective;
     }
 }
