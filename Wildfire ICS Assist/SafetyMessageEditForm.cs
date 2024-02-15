@@ -167,5 +167,12 @@ namespace Wildfire_ICS_Assist
                 }
             }
         }
+
+        private void txtMessage_TextChanged_1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMessage.Text.Trim())) { txtMessage.BackColor = Program.ErrorColor; }
+            else { txtMessage.BackColor = Program.GoodColor; }
+
+        }
     }
 }

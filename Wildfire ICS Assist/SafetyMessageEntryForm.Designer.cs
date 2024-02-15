@@ -46,10 +46,10 @@
             this.txtSummaryLine = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtNewMessage = new System.Windows.Forms.TextBox();
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.lblEditTitle = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.txtNewMessage = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -133,7 +133,6 @@
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddSaved.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddSaved.Location = new System.Drawing.Point(698, 36);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
@@ -196,7 +195,6 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 461);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -215,13 +213,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtNewMessage);
             this.panel2.Controls.Add(this.txtNewSitePlanLocation);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.chkNewSitePlanRequired);
             this.panel2.Controls.Add(this.txtSummaryLine);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.txtNewMessage);
             this.panel2.Controls.Add(this.chkSaveForLater);
             this.panel2.Controls.Add(this.lblEditTitle);
             this.panel2.Controls.Add(this.btnAddNew);
@@ -287,20 +285,6 @@
             this.label3.Text = "Safety Message / Expanded Safety Message, Plan, Site Safety Plan";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtNewMessage
-            // 
-            this.txtNewMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewMessage.Location = new System.Drawing.Point(8, 121);
-            this.txtNewMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtNewMessage.Multiline = true;
-            this.txtNewMessage.Name = "txtNewMessage";
-            this.txtNewMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNewMessage.Size = new System.Drawing.Size(811, 187);
-            this.txtNewMessage.TabIndex = 6;
-            this.txtNewMessage.TextChanged += new System.EventHandler(this.txtNewMessage_TextChanged);
-            // 
             // chkSaveForLater
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -325,7 +309,6 @@
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnAddNew.Location = new System.Drawing.Point(617, 393);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
@@ -336,6 +319,20 @@
             this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            // 
+            // txtNewMessage
+            // 
+            this.txtNewMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNewMessage.Location = new System.Drawing.Point(12, 119);
+            this.txtNewMessage.Multiline = true;
+            this.txtNewMessage.Name = "txtNewMessage";
+            this.txtNewMessage.Size = new System.Drawing.Size(807, 191);
+            this.txtNewMessage.TabIndex = 125;
+            this.txtNewMessage.WordWrap = true;
+            this.txtNewMessage.TextChanged += new System.EventHandler(this.txtNewMessage_TextChanged);
+            this.txtNewMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // SafetyMessageEntryForm
             // 
@@ -375,7 +372,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox txtNewMessage;
         private System.Windows.Forms.CheckBox chkSaveForLater;
         private System.Windows.Forms.Label lblEditTitle;
         private System.Windows.Forms.Button btnAddNew;
@@ -390,5 +386,6 @@
         private System.Windows.Forms.CheckBox chkSavedSitePlanRequired;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
+        private SpellBox txtNewMessage;
     }
 }
