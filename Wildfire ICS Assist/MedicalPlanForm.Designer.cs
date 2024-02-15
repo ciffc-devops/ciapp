@@ -56,12 +56,14 @@
             this.colHospitalTravelGround = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddHospital = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtEmergencyProcedures = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cboPreparedBy = new System.Windows.Forms.ComboBox();
             this.cboApprovedBy = new System.Windows.Forms.ComboBox();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.txtEmergencyProcedures = new SpellBox();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,6 +79,14 @@
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHospitals)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -94,16 +104,12 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer4);
             this.splitContainer1.Panel2.Controls.Add(this.txtEmergencyProcedures);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Panel2.Controls.Add(this.cboPreparedBy);
-            this.splitContainer1.Panel2.Controls.Add(this.cboApprovedBy);
-            this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
+            this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(1251, 590);
-            this.splitContainer1.SplitterDistance = 398;
+            this.splitContainer1.Size = new System.Drawing.Size(1085, 544);
+            this.splitContainer1.SplitterDistance = 352;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -123,15 +129,15 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1251, 398);
-            this.splitContainer2.SplitterDistance = 416;
+            this.splitContainer2.Size = new System.Drawing.Size(1085, 352);
+            this.splitContainer2.SplitterDistance = 360;
             this.splitContainer2.TabIndex = 0;
             // 
             // btnDeleteAidStation
             // 
             this.btnDeleteAidStation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteAidStation.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteAidStation.Location = new System.Drawing.Point(235, 353);
+            this.btnDeleteAidStation.Location = new System.Drawing.Point(235, 307);
             this.btnDeleteAidStation.Name = "btnDeleteAidStation";
             this.btnDeleteAidStation.Size = new System.Drawing.Size(113, 42);
             this.btnDeleteAidStation.TabIndex = 49;
@@ -144,7 +150,7 @@
             // 
             this.btnEditAidStation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditAidStation.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditAidStation.Location = new System.Drawing.Point(116, 353);
+            this.btnEditAidStation.Location = new System.Drawing.Point(116, 307);
             this.btnEditAidStation.Name = "btnEditAidStation";
             this.btnEditAidStation.Size = new System.Drawing.Size(113, 42);
             this.btnEditAidStation.TabIndex = 48;
@@ -157,7 +163,7 @@
             // 
             this.btnAddAidStation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddAidStation.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddAidStation.Location = new System.Drawing.Point(8, 353);
+            this.btnAddAidStation.Location = new System.Drawing.Point(8, 307);
             this.btnAddAidStation.Name = "btnAddAidStation";
             this.btnAddAidStation.Size = new System.Drawing.Size(102, 42);
             this.btnAddAidStation.TabIndex = 47;
@@ -186,7 +192,7 @@
             this.dgvAidStations.RowHeadersVisible = false;
             this.dgvAidStations.RowTemplate.Height = 30;
             this.dgvAidStations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAidStations.Size = new System.Drawing.Size(405, 306);
+            this.dgvAidStations.Size = new System.Drawing.Size(349, 260);
             this.dgvAidStations.TabIndex = 1;
             this.dgvAidStations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAidStations_CellDoubleClick);
             this.dgvAidStations.SelectionChanged += new System.EventHandler(this.dgvAidStations_SelectionChanged);
@@ -249,15 +255,15 @@
             this.splitContainer3.Panel2.Controls.Add(this.btnEditHospital);
             this.splitContainer3.Panel2.Controls.Add(this.dgvHospitals);
             this.splitContainer3.Panel2.Controls.Add(this.btnAddHospital);
-            this.splitContainer3.Size = new System.Drawing.Size(831, 398);
-            this.splitContainer3.SplitterDistance = 415;
+            this.splitContainer3.Size = new System.Drawing.Size(721, 352);
+            this.splitContainer3.SplitterDistance = 360;
             this.splitContainer3.TabIndex = 0;
             // 
             // btnDeleteTransport
             // 
             this.btnDeleteTransport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteTransport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteTransport.Location = new System.Drawing.Point(235, 353);
+            this.btnDeleteTransport.Location = new System.Drawing.Point(235, 307);
             this.btnDeleteTransport.Name = "btnDeleteTransport";
             this.btnDeleteTransport.Size = new System.Drawing.Size(113, 42);
             this.btnDeleteTransport.TabIndex = 53;
@@ -270,7 +276,7 @@
             // 
             this.btnEditTransport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditTransport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditTransport.Location = new System.Drawing.Point(116, 353);
+            this.btnEditTransport.Location = new System.Drawing.Point(116, 307);
             this.btnEditTransport.Name = "btnEditTransport";
             this.btnEditTransport.Size = new System.Drawing.Size(113, 42);
             this.btnEditTransport.TabIndex = 52;
@@ -283,7 +289,7 @@
             // 
             this.btnAddTransport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddTransport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddTransport.Location = new System.Drawing.Point(8, 353);
+            this.btnAddTransport.Location = new System.Drawing.Point(8, 307);
             this.btnAddTransport.Name = "btnAddTransport";
             this.btnAddTransport.Size = new System.Drawing.Size(102, 42);
             this.btnAddTransport.TabIndex = 51;
@@ -311,7 +317,7 @@
             this.dgvTransport.RowHeadersVisible = false;
             this.dgvTransport.RowTemplate.Height = 30;
             this.dgvTransport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTransport.Size = new System.Drawing.Size(404, 306);
+            this.dgvTransport.Size = new System.Drawing.Size(349, 260);
             this.dgvTransport.TabIndex = 50;
             this.dgvTransport.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransport_CellDoubleClick);
             this.dgvTransport.SelectionChanged += new System.EventHandler(this.dgvTransport_SelectionChanged);
@@ -348,7 +354,7 @@
             // 
             this.btnDeleteHospital.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteHospital.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteHospital.Location = new System.Drawing.Point(235, 353);
+            this.btnDeleteHospital.Location = new System.Drawing.Point(235, 307);
             this.btnDeleteHospital.Name = "btnDeleteHospital";
             this.btnDeleteHospital.Size = new System.Drawing.Size(113, 42);
             this.btnDeleteHospital.TabIndex = 57;
@@ -371,7 +377,7 @@
             // 
             this.btnEditHospital.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditHospital.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditHospital.Location = new System.Drawing.Point(116, 353);
+            this.btnEditHospital.Location = new System.Drawing.Point(116, 307);
             this.btnEditHospital.Name = "btnEditHospital";
             this.btnEditHospital.Size = new System.Drawing.Size(113, 42);
             this.btnEditHospital.TabIndex = 56;
@@ -401,7 +407,7 @@
             this.dgvHospitals.RowHeadersVisible = false;
             this.dgvHospitals.RowTemplate.Height = 30;
             this.dgvHospitals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHospitals.Size = new System.Drawing.Size(401, 306);
+            this.dgvHospitals.Size = new System.Drawing.Size(346, 260);
             this.dgvHospitals.TabIndex = 54;
             this.dgvHospitals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHospitals_CellDoubleClick);
             // 
@@ -445,7 +451,7 @@
             // 
             this.btnAddHospital.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddHospital.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddHospital.Location = new System.Drawing.Point(8, 353);
+            this.btnAddHospital.Location = new System.Drawing.Point(8, 307);
             this.btnAddHospital.Name = "btnAddHospital";
             this.btnAddHospital.Size = new System.Drawing.Size(102, 42);
             this.btnAddHospital.TabIndex = 55;
@@ -464,24 +470,9 @@
             this.label3.TabIndex = 58;
             this.label3.Text = "Medical Emergency Procedures";
             // 
-            // txtEmergencyProcedures
-            // 
-            this.txtEmergencyProcedures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmergencyProcedures.Location = new System.Drawing.Point(8, 36);
-            this.txtEmergencyProcedures.Multiline = true;
-            this.txtEmergencyProcedures.Name = "txtEmergencyProcedures";
-            this.txtEmergencyProcedures.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtEmergencyProcedures.Size = new System.Drawing.Size(1234, 99);
-            this.txtEmergencyProcedures.TabIndex = 57;
-            this.txtEmergencyProcedures.TextChanged += new System.EventHandler(this.txtEmergencyProcedures_TextChanged);
-            this.txtEmergencyProcedures.Leave += new System.EventHandler(this.txtEmergencyProcedures_Leave);
-            // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.Location = new System.Drawing.Point(579, 146);
+            this.label2.Location = new System.Drawing.Point(3, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 32);
             this.label2.TabIndex = 56;
@@ -490,8 +481,7 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.Location = new System.Drawing.Point(3, 146);
+            this.label1.Location = new System.Drawing.Point(3, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 32);
             this.label1.TabIndex = 55;
@@ -500,31 +490,32 @@
             // 
             // cboPreparedBy
             // 
-            this.cboPreparedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cboPreparedBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboPreparedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPreparedBy.FormattingEnabled = true;
-            this.cboPreparedBy.Location = new System.Drawing.Point(129, 146);
+            this.cboPreparedBy.Location = new System.Drawing.Point(129, 8);
             this.cboPreparedBy.Name = "cboPreparedBy";
-            this.cboPreparedBy.Size = new System.Drawing.Size(416, 32);
+            this.cboPreparedBy.Size = new System.Drawing.Size(309, 32);
             this.cboPreparedBy.TabIndex = 54;
             this.cboPreparedBy.Leave += new System.EventHandler(this.cboPreparedBy_Leave);
             // 
             // cboApprovedBy
             // 
-            this.cboApprovedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cboApprovedBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboApprovedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboApprovedBy.FormattingEnabled = true;
-            this.cboApprovedBy.Location = new System.Drawing.Point(707, 146);
+            this.cboApprovedBy.Location = new System.Drawing.Point(131, 8);
             this.cboApprovedBy.Name = "cboApprovedBy";
-            this.cboApprovedBy.Size = new System.Drawing.Size(416, 32);
+            this.cboApprovedBy.Size = new System.Drawing.Size(372, 32);
             this.cboApprovedBy.TabIndex = 53;
             this.cboApprovedBy.Leave += new System.EventHandler(this.cboApprovedBy_Leave);
             // 
             // btnPrint
             // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(1129, 141);
+            this.btnPrint.Location = new System.Drawing.Point(8, 3);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(113, 42);
             this.btnPrint.TabIndex = 52;
@@ -534,18 +525,74 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // txtEmergencyProcedures
+            // 
+            this.txtEmergencyProcedures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmergencyProcedures.Location = new System.Drawing.Point(8, 36);
+            this.txtEmergencyProcedures.Multiline = true;
+            this.txtEmergencyProcedures.Name = "txtEmergencyProcedures";
+            this.txtEmergencyProcedures.Size = new System.Drawing.Size(1072, 99);
+            this.txtEmergencyProcedures.TabIndex = 59;
+            this.txtEmergencyProcedures.WordWrap = true;
+            this.txtEmergencyProcedures.TextChanged += new System.EventHandler(this.txtEmergencyProcedures_TextChanged_1);
+            this.txtEmergencyProcedures.Leave += new System.EventHandler(this.txtEmergencyProcedures_Leave_1);
+            this.txtEmergencyProcedures.Child = new System.Windows.Controls.TextBox();
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer4.IsSplitterFixed = true;
+            this.splitContainer4.Location = new System.Drawing.Point(3, 141);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.cboPreparedBy);
+            this.splitContainer4.Panel1.Controls.Add(this.label1);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.splitContainer5);
+            this.splitContainer4.Size = new System.Drawing.Size(1079, 47);
+            this.splitContainer4.SplitterDistance = 441;
+            this.splitContainer4.TabIndex = 60;
+            // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer5.IsSplitterFixed = true;
+            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer5.Name = "splitContainer5";
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.cboApprovedBy);
+            this.splitContainer5.Panel1.Controls.Add(this.label2);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.btnPrint);
+            this.splitContainer5.Size = new System.Drawing.Size(634, 47);
+            this.splitContainer5.SplitterDistance = 506;
+            this.splitContainer5.TabIndex = 0;
+            // 
             // MedicalPlanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(1251, 590);
+            this.ClientSize = new System.Drawing.Size(1085, 544);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(1101, 491);
             this.Name = "MedicalPlanForm";
             this.Text = "Medical Plan";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MedicalPlanForm_FormClosing);
             this.Load += new System.EventHandler(this.MedicalPlanForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -566,6 +613,14 @@
             this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHospitals)).EndInit();
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
+            this.splitContainer5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -574,7 +629,6 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtEmergencyProcedures;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboPreparedBy;
@@ -606,5 +660,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colHospitalLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHospitalTravelAir;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHospitalTravelGround;
+        private SpellBox txtEmergencyProcedures;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.SplitContainer splitContainer5;
     }
 }

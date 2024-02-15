@@ -11,6 +11,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.OptionsForms;
 
 namespace Wildfire_ICS_Assist
@@ -72,12 +73,12 @@ namespace Wildfire_ICS_Assist
             rolesForApproval.Insert(0, blank);
             cboApprovedBy.DataSource = rolesForApproval; cboApprovedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboApprovedBy.ValueMember = "RoleID";
             if (CurrentPlan.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentPlan.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = CurrentPlan.ApprovedByRoleID; }
-            
+            cboApprovedBy.DropDownWidth = cboApprovedBy.GetDropDownWidth();
             
             
             cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
             if (CurrentPlan.PreparedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentPlan.PreparedByRoleID)) { cboPreparedBy.SelectedValue = CurrentPlan.PreparedByRoleID; }
-
+            cboPreparedBy.DropDownWidth = cboPreparedBy.GetDropDownWidth();
         }
 
         private void BuildAidStations()
@@ -401,9 +402,22 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private void txtEmergencyProcedures_Leave(object sender, EventArgs e)
+
+        private void txtEmergencyProcedures_Leave_1(object sender, EventArgs e)
         {
             Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);
+
+        }
+
+        private void MedicalPlanForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);
+
+        }
+
+        private void txtEmergencyProcedures_TextChanged_1(object sender, EventArgs e)
+        {
+            CurrentPlan.EmergencyProcedures = txtEmergencyProcedures.Text.Trim();
 
         }
     }
