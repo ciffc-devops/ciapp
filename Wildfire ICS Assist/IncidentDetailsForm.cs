@@ -3036,6 +3036,11 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        private void tESTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TestForm testform = new TestForm();
+            testform.Show();
+        }
     }
 
 

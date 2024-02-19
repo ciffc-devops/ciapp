@@ -17,7 +17,6 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(3)] private DateTime _DatePrepared;
         [ProtoMember(4)] private string _PreparedBy;
         [ProtoMember(5)] private List<CommsPlanItem> _allCommsItems;
-       // [ProtoMember(6)] private List<CommsPlanItemLink> _allItemLinks;
         [ProtoMember(7)] private Guid _ID;
         [ProtoMember(8)] private DateTime _lastUpdatedUTC;
         [ProtoMember(9)] private string _PreparedByPosition;
@@ -117,7 +116,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private Guid _OrganizationID;
         [ProtoMember(14)] private int _OpsPeriod;
         [ProtoMember(15)] private string _RxTone;
-        [ProtoMember(16)] private string _Aassignment;
+        [ProtoMember(16)] private string _Assignment;
         [ProtoMember(17)] private Guid _TemplateItemID; //This is a unique identifier for the item as saved in Options.
         [ProtoMember(18)] private bool _Aircraft;
         [ProtoMember(19)] private string _TxFrequency;
@@ -173,7 +172,7 @@ namespace WF_ICS_ClassLibrary.Models
             }
         }
 
-        public string Assignment { get => _Aassignment; set => _Aassignment = value; }
+        public string Assignment { get => _Assignment; set => _Assignment = value; }
         public bool UsedForAircraft { get => _Aircraft; set => _Aircraft = value; }
 
         public string IDWithFrequency { get { return ChannelID + " " + RxFrequency; } }

@@ -771,6 +771,12 @@
     <Compile Include="UtilityForms\HelpInfoForm.Designer.cs">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VehicleEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1061,6 +1067,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\HelpInfoForm.resx">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VehicleEditForm.resx">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
