@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtobufSerializer", "Proto
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "CIAPP Installer Project", "CIAPPO Installer Project\CIAPP Installer Project.wixproj", "{EAEED868-41C0-4506-8660-0E83EB5D914D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wildfire ICS Tests", "Wildfire ICS Tests\Wildfire ICS Tests.csproj", "{8B2525B6-1536-4855-854B-8BB866EB6CFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,22 @@ Global
 		{EAEED868-41C0-4506-8660-0E83EB5D914D}.Release|x64.Build.0 = Release|x86
 		{EAEED868-41C0-4506-8660-0E83EB5D914D}.Release|x86.ActiveCfg = Release|x86
 		{EAEED868-41C0-4506-8660-0E83EB5D914D}.Release|x86.Build.0 = Release|x86
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Release|ARM64.Build.0 = Release|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Release|x64.Build.0 = Release|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B2525B6-1536-4855-854B-8BB866EB6CFB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
