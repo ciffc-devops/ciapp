@@ -102,6 +102,7 @@ namespace WF_ICS_ClassLibrary.Models
                 sb.Append(LastName);
             }
             ResourceName = sb.ToString();
+            LeaderName = sb.ToString();
         }
 
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Properties;
 
 namespace Wildfire_ICS_Assist.UtilityForms
 {
@@ -157,7 +158,6 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     {
                         CheckInRecordWithResource testCheckIn = TestTools.createTestCheckIn(seed + x, "Equipment");
                         testCheckIn.Record.OpPeriod = Program.CurrentOpPeriod;
-                        //testCheckIn.Record.DailyCheckInRecords.First().OpPeriod = Program.CurrentOpPeriod;
                         testCheckIn.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckIn.Record.ResourceType, 1, 1000);
 
 
@@ -171,8 +171,105 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 if (checkboxes[10].Checked)
                 {
                     //crews
+                    for (int x = 0; x < 3; x++)
+                    {
+                        List<CheckInRecordWithResource> resources = new List<CheckInRecordWithResource>();
+                        List<IncidentResource> crewResources = new List<IncidentResource>();
+                        for(int i = 0; i < 8; i++)
+                        {
+                            CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + i, "Personnel");
+                            testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
+                            testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 10000);
+                            Program.wfIncidentService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
+                            crewResources.Add(testCheckInPersonnel.Resource);
+                            resources.Add(testCheckInPersonnel);
+                        }
+
+
+                        CheckInRecordWithResource testCheckin = TestTools.createTestCheckIn(seed + x, "Crew", crewResources);
+                        testCheckin.Record.OpPeriod = Program.CurrentOpPeriod;
+                        testCheckin.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckin.Record.ResourceType, 1, 1000);
+
+
+                        log.Append("Created Check in for Crew"); log.Append(Environment.NewLine);
+                        Program.wfIncidentService.UpsertOperationalSubGroup(testCheckin.Resource as OperationalSubGroup);
+                        Program.wfIncidentService.UpsertCheckInRecord(testCheckin.Record);
+                        log.Append("Saved Check in for Crew"); log.Append(Environment.NewLine);
+
+                      
+                       foreach(CheckInRecordWithResource resource in resources)
+                        {
+                            resource.Record.ParentRecordID = testCheckin.Record.SignInRecordID;
+                            resource.Resource.ParentResourceID = testCheckin.Resource.ID;
+                            Program.wfIncidentService.UpsertPersonnel(resource.Resource as Personnel);
+                            Program.wfIncidentService.UpsertCheckInRecord(resource.Record);
+
+                        }
+
+
+
+
+                    }
+
                 }
                 if (checkboxes[11].Checked)
+                {
+                    //crews
+                    for (int x = 0; x < 3; x++)
+                    {
+                        List<CheckInRecordWithResource> resources = new List<CheckInRecordWithResource>();
+                        List<IncidentResource> crewResources = new List<IncidentResource>();
+                        for (int i = 0; i < 8; i++)
+                        {
+                            CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + i, "Personnel");
+                            testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
+                            testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 10000);
+                            Program.wfIncidentService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
+                            crewResources.Add(testCheckInPersonnel.Resource);
+                            resources.Add(testCheckInPersonnel);
+                        }
+                        for (int i = 0; i < 3; i++)
+                        {
+                            CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + i, "Equipment");
+                            testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
+                            testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 10000);
+
+                            (testCheckInPersonnel.Resource as Vehicle).IsEquipment = true;
+                            Program.wfIncidentService.UpsertVehicle(testCheckInPersonnel.Resource as Vehicle);
+                            crewResources.Add(testCheckInPersonnel.Resource);
+                            resources.Add(testCheckInPersonnel);
+                        }
+
+                        CheckInRecordWithResource testCheckin = TestTools.createTestCheckIn(seed + x, "Crew", crewResources);
+                        testCheckin.Record.OpPeriod = Program.CurrentOpPeriod;
+                        testCheckin.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckin.Record.ResourceType, 1, 1000);
+
+
+                        log.Append("Created Check in for Crew"); log.Append(Environment.NewLine);
+                        Program.wfIncidentService.UpsertOperationalSubGroup(testCheckin.Resource as OperationalSubGroup);
+                        Program.wfIncidentService.UpsertCheckInRecord(testCheckin.Record);
+                        log.Append("Saved Check in for Crew"); log.Append(Environment.NewLine);
+
+
+                        foreach (CheckInRecordWithResource resource in resources)
+                        {
+                            resource.Record.ParentRecordID = testCheckin.Record.SignInRecordID;
+                            resource.Resource.ParentResourceID = testCheckin.Resource.ID;
+                            Program.wfIncidentService.UpsertPersonnel(resource.Resource as Personnel);
+                            Program.wfIncidentService.UpsertCheckInRecord(resource.Record);
+
+                        }
+
+
+
+
+                    }
+
+                }
+
+
+
+                if (checkboxes[12].Checked)
                 {
                     //comms plan
                     CommsPlan commsPlan = TestTools.createTestCommsPlan(seed);
@@ -183,7 +280,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                 }
-                if (checkboxes[12].Checked)
+                if (checkboxes[13].Checked)
                 {
                     //comms plan
                     GeneralMessage test = TestTools.createTestGeneralMessage(seed);
@@ -194,7 +291,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                 }
-                if (checkboxes[13].Checked)
+                if (checkboxes[14].Checked)
                 {
                     IncidentObjectivesSheet tesIncidentObjectivesSheet = TestTools.createTestObjectiveSheet(seed);
                     tesIncidentObjectivesSheet.OpPeriod = Program.CurrentOpPeriod;
@@ -276,6 +373,9 @@ namespace Wildfire_ICS_Assist.UtilityForms
             
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Crew Check In";
+
+            checkboxes.Add(new CheckBox());
+            checkboxes.Last().Text = "HE Crew Check In";
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Comms Plan";

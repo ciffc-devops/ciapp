@@ -216,6 +216,57 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         }
 
+        public static OperationalSubGroup createTestCrew(int seed, List<IncidentResource> childResources)
+        {
+            OperationalSubGroup test = new OperationalSubGroup();
+            test.Active = true;
+            test.ResourceName = "Crew " + seed;
+            test.Transport = "Transport " + seed;
+            test.Email = "email" + seed + "@test.com";
+            test.Phone = "(" + seed.ToString() + seed.ToString() + seed.ToString() + ") " + seed.ToString() + seed.ToString() + seed.ToString() + "-" + seed.ToString() + seed.ToString() + seed.ToString() + seed.ToString();
+            test.IsEquipmentCrew = false;
+            test.UniqueIDNum = seed;
+            test.Kind = "Crew";
+            test.Type = "Type " + random.Next(1, 4);
+            
+            foreach(IncidentResource resource in childResources)
+            {
+                if(resource.GetType().Name .Equals( new Vehicle().GetType().Name))
+                {
+                    test.IsEquipmentCrew = true;
+                    test.Kind = "Heavy Equipment Crew";
+                }
+                OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
+                listing.SubGroupID = test.ID;
+                listing.OperationalGroupID = test.OperationalGroupID;
+                listing.Kind = resource.Kind;
+                listing.Type = resource.Type;
+                listing.ResourceIdentifier = "Crew " + seed;
+                listing.ResourceID = resource.ID;
+                listing.ResourceName = resource.ResourceName;
+
+                if (resource.GetType().Name.Equals(new Personnel().GetType().Name))
+                {
+                    listing.ResourceType = "Personnel";
+
+                    if (test.LeaderID == Guid.Empty)
+                    {
+                        test.LeaderID = resource.ID;
+                        test.LeaderName = resource.ResourceName;
+                       
+                        listing.Role = "Crew Leader";
+                        listing.LeaderName = resource.LeaderName;
+                    }
+                    else { listing.Role = "Crew Member"; }
+                }
+                else { listing.ResourceType = "Equipment"; }
+
+                test.UpsertResourceListing(listing);
+
+            }
+
+            return test;
+        }
 
         public static CheckInRecord createTestCheckInRecord(int seed)
         {
@@ -237,7 +288,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return test;
         }
 
-        public static CheckInRecordWithResource createTestCheckIn(int seed, string type)
+        public static CheckInRecordWithResource createTestCheckIn(int seed, string type, List<IncidentResource> childResources = null)
         {
 
             IncidentResource resource = new IncidentResource();
@@ -262,7 +313,8 @@ namespace WF_ICS_ClassLibrary.Utilities
                     (resource as Vehicle).IsEquipment = true;
                     break;
                 case "Crew":
-
+                    resource = createTestCrew(seed, childResources);
+                    (resource as OperationalSubGroup).IsEquipmentCrew = false;
                     break;
             }
             record.ResourceID = resource.ID;
