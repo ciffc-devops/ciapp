@@ -240,7 +240,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                             resources.Add(testCheckInPersonnel);
                         }
 
-                        CheckInRecordWithResource testCheckin = TestTools.createTestCheckIn(seed + x, "Crew", crewResources);
+                        CheckInRecordWithResource testCheckin = TestTools.createTestCheckIn(seed + x, "Heavy Equipment Crew", crewResources);
                         testCheckin.Record.OpPeriod = Program.CurrentOpPeriod;
                         testCheckin.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckin.Record.ResourceType, 1, 1000);
 

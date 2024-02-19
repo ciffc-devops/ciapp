@@ -158,14 +158,13 @@
             this.btnHECrew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnHECrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.HECrew;
             this.btnHECrew.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHECrew.Location = new System.Drawing.Point(257, 602);
+            this.btnHECrew.Location = new System.Drawing.Point(381, 261);
             this.btnHECrew.Name = "btnHECrew";
             this.btnHECrew.Size = new System.Drawing.Size(243, 91);
             this.btnHECrew.TabIndex = 11;
             this.btnHECrew.Text = "Heavy Equipment Crew";
             this.btnHECrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnHECrew.UseVisualStyleBackColor = true;
-            this.btnHECrew.Visible = false;
             this.btnHECrew.Click += new System.EventHandler(this.btnHECrew_Click);
             // 
             // btnEquipAndOperator
@@ -173,7 +172,7 @@
             this.btnEquipAndOperator.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEquipAndOperator.Image = global::Wildfire_ICS_Assist.Properties.Resources.EquipOp;
             this.btnEquipAndOperator.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEquipAndOperator.Location = new System.Drawing.Point(381, 352);
+            this.btnEquipAndOperator.Location = new System.Drawing.Point(381, 358);
             this.btnEquipAndOperator.Name = "btnEquipAndOperator";
             this.btnEquipAndOperator.Size = new System.Drawing.Size(243, 91);
             this.btnEquipAndOperator.TabIndex = 10;
@@ -186,7 +185,7 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(6, 206);
+            this.label14.Location = new System.Drawing.Point(6, 212);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(765, 29);
             this.label14.TabIndex = 9;
@@ -198,7 +197,7 @@
             this.btnVisitor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVisitor.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_35_user_incognito;
             this.btnVisitor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVisitor.Location = new System.Drawing.Point(381, 449);
+            this.btnVisitor.Location = new System.Drawing.Point(381, 455);
             this.btnVisitor.Name = "btnVisitor";
             this.btnVisitor.Size = new System.Drawing.Size(243, 91);
             this.btnVisitor.TabIndex = 3;
@@ -212,7 +211,7 @@
             this.btnSinglePersonnel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSinglePersonnel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
             this.btnSinglePersonnel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSinglePersonnel.Location = new System.Drawing.Point(132, 449);
+            this.btnSinglePersonnel.Location = new System.Drawing.Point(132, 455);
             this.btnSinglePersonnel.Name = "btnSinglePersonnel";
             this.btnSinglePersonnel.Size = new System.Drawing.Size(243, 91);
             this.btnSinglePersonnel.TabIndex = 2;
@@ -226,7 +225,7 @@
             this.btnVehicleEquipment.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnVehicleEquipment.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
             this.btnVehicleEquipment.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVehicleEquipment.Location = new System.Drawing.Point(132, 352);
+            this.btnVehicleEquipment.Location = new System.Drawing.Point(132, 358);
             this.btnVehicleEquipment.Name = "btnVehicleEquipment";
             this.btnVehicleEquipment.Size = new System.Drawing.Size(243, 91);
             this.btnVehicleEquipment.TabIndex = 1;
@@ -240,9 +239,9 @@
             this.btnCrew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_532_user_family;
             this.btnCrew.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCrew.Location = new System.Drawing.Point(132, 255);
+            this.btnCrew.Location = new System.Drawing.Point(132, 261);
             this.btnCrew.Name = "btnCrew";
-            this.btnCrew.Size = new System.Drawing.Size(492, 91);
+            this.btnCrew.Size = new System.Drawing.Size(243, 91);
             this.btnCrew.TabIndex = 0;
             this.btnCrew.Text = "Crew";
             this.btnCrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;

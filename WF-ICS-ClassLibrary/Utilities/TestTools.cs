@@ -316,6 +316,10 @@ namespace WF_ICS_ClassLibrary.Utilities
                     resource = createTestCrew(seed, childResources);
                     (resource as OperationalSubGroup).IsEquipmentCrew = false;
                     break;
+                case "Heavy Equipment Crew":
+                    resource = createTestCrew(seed, childResources);
+                    (resource as OperationalSubGroup).IsEquipmentCrew = true;
+                    break;
             }
             record.ResourceID = resource.ID;
             record.ResourceName = resource.ResourceName;

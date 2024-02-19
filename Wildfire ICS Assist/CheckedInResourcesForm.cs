@@ -920,94 +920,98 @@ namespace Wildfire_ICS_Assist
                     using (CheckInEditCrewForm crewForm = new CheckInEditCrewForm())
                     {
                         crewForm.selectedCrew = crew.Clone();
-                        if(crewForm.ShowDialog() == DialogResult.OK)
-                        {
-
-                            OperationalSubGroup group = crewForm.selectedCrew;
-                            if (group.ActiveResourceListing.Any(o => o.IsLeader)) { group.LeaderID = group.ActiveResourceListing.First(o => o.IsLeader).ResourceID; group.LeaderName = group.ActiveResourceListing.First(o => o.IsLeader).ResourceName; }
-                            List<OperationalGroupResourceListing> toRemoveFromCrew = crewForm.resourcesToRemoveFromCrew;
-                            foreach (OperationalGroupResourceListing l in toRemoveFromCrew)
-                            {
-                                if (Program.CurrentIncident.AllOperationalSubGroups.Any(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod))
-                                {
-                                    OperationalSubGroup sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
-                                    sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
-                                    Program.wfIncidentService.UpsertOperationalSubGroup(sub);
-                                }
-
-
-                                if (Program.CurrentIncident.AllCheckInRecords.Any(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod))
-                                {
-                                    Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod).ParentRecordID = Guid.Empty;
-                                    Program.wfIncidentService.UpsertCheckInRecord(Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod));
-                                }
-
-
-
-                            }
-
-
-                            Program.wfIncidentService.UpsertOperationalSubGroup(group);
-                            foreach (IncidentResource subres in crewForm.subResources)
-                            {
-                                if (subres.GetType().Name.Equals("Personnel"))
-                                {
-                                    subres.OpPeriod = Program.CurrentOpPeriod;
-                                    if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, PNumMin, PNumMax); }
-                                    subres.ParentResourceID = group.ID;
-                                    Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
-                                    /*
-                                    CheckInRecord prec = crewForm.checkInRecord.Clone();
-                                    prec.ResourceID = subres.ID;
-                                    prec.ResourceName = subres.ResourceName;
-                                    prec.SignInRecordID = Guid.NewGuid();
-                                    prec.ParentRecordID = record.SignInRecordID;
-                                    prec.ResourceType = "Personnel";
-                                    Program.wfIncidentService.UpsertCheckInRecord(prec);*/
-                                }
-                                else if (subres.GetType().Name.Equals("Vehicle"))
-                                {
-                                    Vehicle vh = subres as Vehicle;
-                                    vh.OperatorName = group.ResourceName;
-                                    if (vh.IsEquipment)
-                                    {
-                                        if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, ENumMin, ENumMax); }
-                                    }
-                                    else
-                                    {
-                                        if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, VNumMin, VNumMax); }
-                                    }
-                                    subres.ParentResourceID = group.ID;
-                                    Program.wfIncidentService.UpsertVehicle(vh);
-                                   /*
-                                    CheckInRecord vrec = signInForm.checkInRecord.Clone();
-                                    vrec.ResourceID = subres.ID;
-                                    vrec.SignInRecordID = Guid.NewGuid();
-                                    vrec.ParentRecordID = record.SignInRecordID;
-                                    if (vrec.IsEquipment) { vrec.ResourceType = "Equipment"; }
-                                    else { vrec.ResourceType = "Vehicle"; }
-                                    Program.wfIncidentService.UpsertCheckInRecord(vrec);*/
-                                }
-                            }
-
-
-
-
-
-
-
-
-
-
-
-                        }
+                        UpdateEditedCrew(crew, crewForm);
                     }
-                        break;
+                    break;
+                case "Heavy Equipment Crew":
+                    OperationalSubGroup hecrew = rec.Resource as OperationalSubGroup;
+                    using (CheckInEditCrewForm crewForm = new CheckInEditCrewForm())
+                    {
+                        crewForm.selectedCrew = hecrew.Clone();
+                        UpdateEditedCrew(hecrew, crewForm);
+                    }
+                    break;
             }
 
 
 
         }
+
+        private void UpdateEditedCrew(OperationalSubGroup crew, CheckInEditCrewForm crewForm)
+        {
+            if (crewForm.ShowDialog() == DialogResult.OK)
+            {
+
+                OperationalSubGroup group = crewForm.selectedCrew;
+                if (group.ActiveResourceListing.Any(o => o.IsLeader)) { group.LeaderID = group.ActiveResourceListing.First(o => o.IsLeader).ResourceID; group.LeaderName = group.ActiveResourceListing.First(o => o.IsLeader).ResourceName; }
+                List<OperationalGroupResourceListing> toRemoveFromCrew = crewForm.resourcesToRemoveFromCrew;
+                foreach (OperationalGroupResourceListing l in toRemoveFromCrew)
+                {
+                    if (Program.CurrentIncident.AllOperationalSubGroups.Any(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod))
+                    {
+                        OperationalSubGroup sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
+                        sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
+                        Program.wfIncidentService.UpsertOperationalSubGroup(sub);
+                    }
+
+
+                    if (Program.CurrentIncident.AllCheckInRecords.Any(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod))
+                    {
+                        Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod).ParentRecordID = Guid.Empty;
+                        Program.wfIncidentService.UpsertCheckInRecord(Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod));
+                    }
+
+
+
+                }
+
+
+                Program.wfIncidentService.UpsertOperationalSubGroup(group);
+                foreach (IncidentResource subres in crewForm.subResources)
+                {
+                    if (subres.GetType().Name.Equals("Personnel"))
+                    {
+                        subres.OpPeriod = Program.CurrentOpPeriod;
+                        if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, PNumMin, PNumMax); }
+                        subres.ParentResourceID = group.ID;
+                        Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
+                        /*
+                        CheckInRecord prec = crewForm.checkInRecord.Clone();
+                        prec.ResourceID = subres.ID;
+                        prec.ResourceName = subres.ResourceName;
+                        prec.SignInRecordID = Guid.NewGuid();
+                        prec.ParentRecordID = record.SignInRecordID;
+                        prec.ResourceType = "Personnel";
+                        Program.wfIncidentService.UpsertCheckInRecord(prec);*/
+                    }
+                    else if (subres.GetType().Name.Equals("Vehicle"))
+                    {
+                        Vehicle vh = subres as Vehicle;
+                        vh.OperatorName = group.ResourceName;
+                        if (vh.IsEquipment)
+                        {
+                            if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, ENumMin, ENumMax); }
+                        }
+                        else
+                        {
+                            if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, VNumMin, VNumMax); }
+                        }
+                        subres.ParentResourceID = group.ID;
+                        Program.wfIncidentService.UpsertVehicle(vh);
+                        /*
+                         CheckInRecord vrec = signInForm.checkInRecord.Clone();
+                         vrec.ResourceID = subres.ID;
+                         vrec.SignInRecordID = Guid.NewGuid();
+                         vrec.ParentRecordID = record.SignInRecordID;
+                         if (vrec.IsEquipment) { vrec.ResourceType = "Equipment"; }
+                         else { vrec.ResourceType = "Vehicle"; }
+                         Program.wfIncidentService.UpsertCheckInRecord(vrec);*/
+                    }
+                }
+            }
+        }
+
+   
     }
 
     public static class ExtensionMethods

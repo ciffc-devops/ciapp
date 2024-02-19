@@ -54,6 +54,11 @@ namespace Wildfire_ICS_Assist.CustomControls
                 rbHECrew.Checked = subGroup.IsEquipmentCrew;
                 if (!string.IsNullOrEmpty(subGroup.Type)) { cboCrewType.Text = subGroup.Type; }
                 else { cboCrewType.SelectedIndex = 0; }
+
+                btnAddVehicle.Enabled = !rbCrew.Checked;
+                subGroup.IsEquipmentCrew = !rbCrew.Checked;
+
+
                 loadResourceList();
             }
             else
