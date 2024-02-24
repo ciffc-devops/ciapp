@@ -33,6 +33,14 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(15)] private string _InitialRoleName;
         [ProtoMember(16)] private string _InitialRoleAcronym;
 
+        //These are used for demob planning
+        [ProtoMember(17)] private bool _ReplacementRequired;
+        [ProtoMember(18)] private DateTime _DateReplacementRequired;
+        [ProtoMember(19)] private Guid _ReplacementRecordID;
+        [ProtoMember(20)] private string _ReplacementComment;
+
+
+
         public CheckInRecord() { SignInRecordID = Guid.NewGuid(); InfoFields = new List<CheckInInfoField>(); CheckOutDate = DateTime.MaxValue; Active = true; }
 
 
@@ -72,6 +80,17 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return string.Empty; }
             }
         }
+
+
+
+        public bool ReplacementRequired { get => _ReplacementRequired; set => _ReplacementRequired = value; }
+        public DateTime DateReplacementRequired { get => _DateReplacementRequired; set => _DateReplacementRequired = value; }
+        public Guid ReplacementRecordID { get => _ReplacementRecordID; set => _ReplacementRecordID = value; }
+        public string ReplacementComment { get => _ReplacementComment; set => _ReplacementComment = value; }
+
+
+
+
         public CheckInRecord Clone()
         {
             CheckInRecord cloneTo = this.MemberwiseClone() as CheckInRecord;
@@ -93,7 +112,7 @@ namespace WF_ICS_ClassLibrary.Models
         public CheckInInfoField() { ID = Guid.NewGuid(); }
         public CheckInInfoField(Guid id, string name, string type, string group, bool visitor, bool person, bool vehicle, bool crew, bool equip, bool op, bool reqd, string tooltip)
         {
-            ID = id; Name = name; FieldType = type; FieldGroup = group;  IsRequired = reqd;ToolTipText = tooltip;
+            ID = id; Name = name; FieldType = type; FieldGroup = group; IsRequired = reqd; ToolTipText = tooltip;
             UseForVisitor = visitor; UseForPersonnel = person; UseForVehicle = vehicle; UseForCrew = crew; UseForEquipment = equip; UseForOperator = op;
         }
 
@@ -112,7 +131,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private DateTime _DateValue;
         [ProtoMember(14)] private bool _IsRequired;
         [ProtoMember(15)] private string _ToolTipText;
-        [ProtoMember(16)] private bool _UseForEquipment; 
+        [ProtoMember(16)] private bool _UseForEquipment;
         [ProtoMember(17)] private bool _UseForOperator;
         [ProtoMember(18)] private decimal _DecimalValue;
 
@@ -164,7 +183,7 @@ namespace WF_ICS_ClassLibrary.Models
         public int NumberOfPeople { get => Resource.NumberOfPeople; }
         public int NumberOfVehicles { get => Resource.NumberOfVehicles; }
         public DateTime CheckInDate { get => Record.CheckInDate; }
-        public DateTime CheckOutDate { get => Record.CheckOutDate;}
+        public DateTime CheckOutDate { get => Record.CheckOutDate; }
         public DateTime LastDayOnIncident { get { if (Record.LastDayOnIncident < Record.CheckOutDate) { return Record.LastDayOnIncident; } else { return Record.CheckOutDate; } } }
         public string ResourceName { get => Resource.ResourceName; }
         public string LeaderName { get => Resource.LeaderName; }
@@ -181,8 +200,8 @@ namespace WF_ICS_ClassLibrary.Models
             _Record = rec;
             _Resource = res;
             TimeSpan ts = LastDayOnIncident - EndOfOp;
-            DaysTillTimeOut = Convert.ToInt32( Math.Round(ts.TotalDays, 0));
-            if(Record.CheckOutDate.Date < EndOfOp.Date || Record.LastDayOnIncident.Date < EndOfOp.Date) { _StatusText = "Checked-Out"; } 
+            DaysTillTimeOut = Convert.ToInt32(Math.Round(ts.TotalDays, 0));
+            if (Record.CheckOutDate.Date < EndOfOp.Date || Record.LastDayOnIncident.Date < EndOfOp.Date) { _StatusText = "Checked-Out"; }
             else if (Record.CheckOutDate.Date == EndOfOp.Date) { _StatusText = "Demobilizing"; }
             else { _StatusText = "Active"; }
         }
@@ -341,9 +360,9 @@ namespace WF_ICS_ClassLibrary.Models
                 //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
                 Personnel p = null; if (item.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)item.Resource; }
                 Vehicle v = null; if (item.Resource.GetType().Name.Equals("Vehicle")) { v = (Vehicle)item.Resource; }
-                OperationalSubGroup c = null; 
+                OperationalSubGroup c = null;
                 if (item.Resource.GetType().Name.Equals("OperationalSubGroup")) { c = (OperationalSubGroup)item.Resource; }
-                else if (item.Resource.ParentResourceID != Guid.Empty && records.Any(o=>o.Resource.ID == item.Resource.ParentResourceID)) { c = records.First(o => o.Resource.ID == item.Resource.ParentResourceID).Resource as OperationalSubGroup; }
+                else if (item.Resource.ParentResourceID != Guid.Empty && records.Any(o => o.Resource.ID == item.Resource.ParentResourceID)) { c = records.First(o => o.Resource.ID == item.Resource.ParentResourceID).Resource as OperationalSubGroup; }
 
 
                 csv.Append("\""); csv.Append(item.Resource.UniqueIDNumWithPrefix); csv.Append("\""); csv.Append(delimiter);
@@ -452,7 +471,8 @@ namespace WF_ICS_ClassLibrary.Models
                     csv.Append("\""); csv.Append(demob.TravelTimeToHomeUnit); csv.Append("\""); csv.Append(delimiter);
                     csv.Append("\""); csv.Append(demob.DebriefDate.ToString(Globals.DateFormat + " HH:mm")); csv.Append("\""); csv.Append(delimiter);
                     csv.Append("\""); csv.Append(demob.DebriefLocation); csv.Append("\""); csv.Append(delimiter);
-                    csv.Append("\""); if (demob.InventoryReconciled) { csv.Append("YES"); } else { csv.Append("NO"); } csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); if (demob.InventoryReconciled) { csv.Append("YES"); } else { csv.Append("NO"); }
+                    csv.Append("\""); csv.Append(delimiter);
                     csv.Append("\""); if (demob.DiscrepanciesWithSupply) { csv.Append("YES"); } else { csv.Append("NO"); }
                     csv.Append("\""); csv.Append(delimiter);
                     csv.Append("\""); if (demob.DiscrepanciesWithFacilities) { csv.Append("YES"); } else { csv.Append("NO"); }
@@ -496,7 +516,8 @@ namespace WF_ICS_ClassLibrary.Models
                 switch (field.FieldType)
                 {
                     case "Bool":
-                        if (field.BoolValue) { csv.Append("YES"); } else { csv.Append("NO"); } break;
+                        if (field.BoolValue) { csv.Append("YES"); } else { csv.Append("NO"); }
+                        break;
                     case "DateTime":
                         csv.Append(field.DateValue.ToString(Globals.DateFormat)); break;
                     case "Int":
@@ -504,7 +525,7 @@ namespace WF_ICS_ClassLibrary.Models
                     default:
                         csv.Append(field.StringValue); break;
                 }
-                
+
                 csv.Append("\"");
             }
             else { csv.Append("\""); csv.Append("\""); }
@@ -536,7 +557,7 @@ namespace WF_ICS_ClassLibrary.Models
             return accomodation;
         }
 
-        public static int[] GetVehicleTypes (this List<CheckInRecordWithResource> list)
+        public static int[] GetVehicleTypes(this List<CheckInRecordWithResource> list)
         {
             int[] vehicleTypes = new int[4];
             vehicleTypes[0] = list.Count(o => o.Record.InfoFields.Any(f => f.ID == new Guid("8c78ca45-d18d-4bc4-8993-848f6b088e7f") && f.BoolValue));
@@ -616,7 +637,7 @@ namespace WF_ICS_ClassLibrary.Models
 
 
             OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
-           
+
 
             List<IncidentResource> allResources = new List<IncidentResource>();
             List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
@@ -652,8 +673,8 @@ namespace WF_ICS_ClassLibrary.Models
 
 
 
-           
-            List<ICSRole> childRoles =  currentOrgChart.GetChildRoles(ParentRole.RoleID, true, false);
+
+            List<ICSRole> childRoles = currentOrgChart.GetChildRoles(ParentRole.RoleID, true, false);
 
             List<IncidentResource> allResources = new List<IncidentResource>();
             List<CheckInRecord> checkInRecords = new List<CheckInRecord>();
@@ -667,7 +688,7 @@ namespace WF_ICS_ClassLibrary.Models
                 if (role.IndividualID != Guid.Empty && !allResources.Any(o => o.ID == role.IndividualID) && incident.ActiveIncidentResources.Any(o => o.ID == role.IndividualID)) { allResources.Add(incident.ActiveIncidentResources.First(o => o.ID == role.IndividualID)); }
             }
 
-            if(incident.ActiveOperationalGroups.Any(o=>o.LeaderICSRoleID == ParentRole.RoleID))
+            if (incident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == ParentRole.RoleID))
             {
                 OperationalGroup opgr = incident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == ParentRole.RoleID);
                 allResources.AddRange(incident.GetReportingResources(opgr.ID, true));
@@ -698,12 +719,12 @@ namespace WF_ICS_ClassLibrary.Models
 
             foreach (IncidentResource res in allResources)
             {
-                if (!list.Any(o=>o.Resource.ID == res.ID) && incident.AllCheckInRecords.Any(o => o.ResourceID == res.ID))
+                if (!list.Any(o => o.Resource.ID == res.ID) && incident.AllCheckInRecords.Any(o => o.ResourceID == res.ID))
                 {
                     CheckInRecordWithResource rec = new CheckInRecordWithResource(incident.AllCheckInRecords.First(o => o.ResourceID == res.ID), res, currentPeriod.PeriodEnd);
                     list.Add(rec);
                 }
-                    
+
             }
 
 
@@ -737,7 +758,7 @@ namespace WF_ICS_ClassLibrary.Models
                 return !incident.AllOperationalSubGroups.Any(o => o.UniqueIDNum == pNum && o.ID != excludeID);
             }
             else return false;
-           
+
         }
         public static int GetNextUniqueNum(this WFIncident incident, string ResourceType, int lowerBound = 1, int upperBound = 10000)
         {
@@ -746,7 +767,7 @@ namespace WF_ICS_ClassLibrary.Models
 
             if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator") || ResourceType.Equals("Visitor"))
             {
-                resList.AddRange(incident.IncidentPersonnel.Where(o => o.PNum >= lowerBound && o.PNum <= upperBound).OrderBy(o=>o.UniqueIDNum));
+                resList.AddRange(incident.IncidentPersonnel.Where(o => o.PNum >= lowerBound && o.PNum <= upperBound).OrderBy(o => o.UniqueIDNum));
 
             }
             else if (ResourceType.Equals("Vehicle"))
@@ -767,7 +788,7 @@ namespace WF_ICS_ClassLibrary.Models
 
             foreach (IncidentResource res in resList)
             {
-                if (res.UniqueIDNum == next && (next + 1) < upperBound) { next++; } 
+                if (res.UniqueIDNum == next && (next + 1) < upperBound) { next++; }
                 else { break; }
             }
 
@@ -790,7 +811,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             OperationalPeriod per = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
             DateTime atNow = per.PeriodEnd.AddMinutes(-5);
-            return incident.IncidentPersonnel.Where(o => o.Active && incident.ResourceIsCheckedIn(o.ID, atNow)).OrderBy(o=>o.Name).ToList();
+            return incident.IncidentPersonnel.Where(o => o.Active && incident.ResourceIsCheckedIn(o.ID, atNow)).OrderBy(o => o.Name).ToList();
         }
 
         public static List<CheckInInfoField> GetInfoFields(string CheckInType)
@@ -814,7 +835,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 new CheckInInfoField(new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), "Individual's weight ", "Weight", "Individual Info", false, true, false,false,false,true,false, "Enter the individuals seat weight. "),
                 
-                new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Unique Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,true, "Enter the crews unique agency identifer i.e. RU01, Flathead Unit crew, Dryden IA, etc. "),
+                //new CheckInInfoField(new Guid("1d50d619-bfbe-4c1a-ae9b-13cfe66ac654"), "Unique Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,true, "Enter the crews unique agency identifer i.e. RU01, Flathead Unit crew, Dryden IA, etc. "),
                 new CheckInInfoField(new Guid("b496b1a3-3efa-4714-b15d-d17d311a919d"), "CIFFC Crew Identifier", "String", "Crew Info", false, false, false,true,false,false,false, "Enter the CIFFC crew identifier if the crew is imported through CIFFC i.e C-30"),
                 //new CheckInInfoField(new Guid("538d4802-cd56-49d1-aa06-f1fbf269f6f5"), "Contact Info (cell/email)", "String", "Crew Info", false, false, false,true,false,false,true, ""),
                 new CheckInInfoField(new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"), "Resource Order Number", "String", "Deployment Information", false, true, true,true,true,true,false, "Enter agency specific order number or order identifier. "),
@@ -907,6 +928,47 @@ namespace WF_ICS_ClassLibrary.Models
         public DemobilizationRecord Clone()
         {
             DemobilizationRecord cloneTo = this.MemberwiseClone() as DemobilizationRecord;
+            return cloneTo;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
+    }
+
+
+    [Serializable]
+    [ProtoContract]
+    public class ResourceReplacementPlan : SyncableItem, ICloneable
+    {
+
+        [ProtoMember(1)] private string _ResourceName;
+        [ProtoMember(2)] private string _Kind;
+        [ProtoMember(3)] private string _Assignment;
+        [ProtoMember(4)] private DateTime _EstimatedArrival;
+        [ProtoMember(5)] private string _HomeArea;
+        [ProtoMember(6)] private string _Transportation;
+        [ProtoMember(7)] private string _OrderNumber;
+        [ProtoMember(8)] private string _CheckInLocation;
+        [ProtoMember(9)] private string _Comments;
+        [ProtoMember(10)] private Guid _ReplacementForCheckInID;
+
+
+        public string ResourceName { get => _ResourceName; set => _ResourceName = value; }
+        public string Kind { get => _Kind; set => _Kind = value; }
+        public string Assignment { get => _Assignment; set => _Assignment = value; }
+        public DateTime EstimatedArrival { get => _EstimatedArrival; set => _EstimatedArrival = value; }
+        public string HomeArea { get => _HomeArea; set => _HomeArea = value; }
+        public string Transportation { get => _Transportation; set => _Transportation = value; }
+        public string OrderNumber { get => _OrderNumber; set => _OrderNumber = value; }
+        public string CheckInLocation { get => _CheckInLocation; set => _CheckInLocation = value; }
+        public string Comments { get => _Comments; set => _Comments = value; }
+        public Guid ReplacementForCheckInID { get => _ReplacementForCheckInID; set => _ReplacementForCheckInID = value; }
+
+
+        public ResourceReplacementPlan Clone()
+        {
+            ResourceReplacementPlan cloneTo = this.MemberwiseClone() as ResourceReplacementPlan;
             return cloneTo;
         }
         object ICloneable.Clone()

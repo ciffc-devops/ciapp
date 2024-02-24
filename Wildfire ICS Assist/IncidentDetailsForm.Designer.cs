@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -162,6 +162,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutCIAPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tESTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picOrgLogo = new System.Windows.Forms.PictureBox();
             this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
@@ -183,7 +184,6 @@
             this.btnPrintIAP = new System.Windows.Forms.Button();
             this.btnPrintOrgChart = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
-            this.tESTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -263,9 +263,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1196,6 +1196,13 @@
             resources.ApplyResources(this.aboutCIAPPToolStripMenuItem, "aboutCIAPPToolStripMenuItem");
             this.aboutCIAPPToolStripMenuItem.Click += new System.EventHandler(this.aboutCIAPPToolStripMenuItem_Click);
             // 
+            // tESTToolStripMenuItem
+            // 
+            this.tESTToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
+            this.tESTToolStripMenuItem.Name = "tESTToolStripMenuItem";
+            resources.ApplyResources(this.tESTToolStripMenuItem, "tESTToolStripMenuItem");
+            this.tESTToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
+            // 
             // picOrgLogo
             // 
             this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
@@ -1361,13 +1368,6 @@
             this.btnCommsPlan.Name = "btnCommsPlan";
             this.btnCommsPlan.UseVisualStyleBackColor = true;
             this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
-            // 
-            // tESTToolStripMenuItem
-            // 
-            this.tESTToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
-            this.tESTToolStripMenuItem.Name = "tESTToolStripMenuItem";
-            resources.ApplyResources(this.tESTToolStripMenuItem, "tESTToolStripMenuItem");
-            this.tESTToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
             // 
             // IncidentDetailsForm
             // 

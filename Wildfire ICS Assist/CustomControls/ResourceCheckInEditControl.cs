@@ -95,20 +95,40 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public bool ValidateCheckInInfo()
         {
+            bool IsValid = true;
             if (datCheckInTime.Value.Date > datLDW.Value.Date)
             {
                 lblLastDayWorking.ForeColor = Color.Red;
-                return false;
+                errorProvider1.SetError(datCheckInTime, "Your check in time should be earlier than your last day working");
+                IsValid = false;
             }
-            else { lblLastDayWorking.ForeColor = lblLastDayCount.ForeColor; }
+            else { lblLastDayWorking.ForeColor = lblLastDayCount.ForeColor; errorProvider1.SetError(datCheckInTime, "");
+            }
 
             if (datCheckInTime.Value > Program.CurrentOpPeriodDetails.PeriodEnd || datLDW.Value < Program.CurrentOpPeriodDetails.PeriodStart)
             {
                 DialogResult proceed = MessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (proceed == DialogResult.No) { return false; }
+                if (proceed == DialogResult.No) { IsValid = false; }
             }
 
-            return IsComplete;
+            //confirm the ID is unique
+            bool isUnique =  Program.CurrentIncident.ConfirmResourceNumUnique(selectedResource.ResourceType, selectedResource.UniqueIDNum,selectedResource.ID);
+            if (!isUnique)
+            {
+                numUniqueIDNumber.BackColor = Program.ErrorColor;
+                errorProvider1.SetError(numUniqueIDNumber, "This number must be unique");
+                IsValid = false;
+            }
+            else
+            {
+                numUniqueIDNumber.BackColor = Program.GoodColor;
+                errorProvider1.SetError(numUniqueIDNumber, "");
+
+            }
+
+            bool allAdditionalFieldsComplete = IsComplete;
+            if (!IsComplete) { IsValid = false; }
+            return IsValid;
         }
 
         public void SaveFormFieldsToCheckIn()
@@ -187,6 +207,20 @@ namespace Wildfire_ICS_Assist.CustomControls
                 pnlCheckInFields.Controls.Add(ctrl);
             }
             lblScrollHint.Visible = pnlCheckInFields.VerticalScroll.Visible;
+
+            switch (selectedResource.ResourceType)
+            {
+                case "Personnel": cboUniqueIDLetter.Text = "P";break;
+                case "Vehicle": cboUniqueIDLetter.Text = "V";break;
+                case "Equipment": cboUniqueIDLetter.Text = "E";break;
+                case "Crew": cboUniqueIDLetter.Text = "C";break;
+                case "Heavy Equipment Crew": cboUniqueIDLetter.Text = "C";break;
+            }
+            if(selectedResource.UniqueIDNum == 0)
+            {
+                numUniqueIDNumber.Value = Program.CurrentIncident.GetNextUniqueNum(selectedResource.ResourceType, 1, 1000);
+
+            }
         }
 
         private int getCheckInFieldY()
@@ -216,6 +250,16 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void cboICSRole_SelectedIndexChanged(object sender, EventArgs e)
         {
             chkAutoAssign.Checked = cboICSRole.SelectedIndex > 0;
+        }
+
+        private void btnGetNextID_Click(object sender, EventArgs e)
+        {
+           numUniqueIDNumber.Value = Program.CurrentIncident.GetNextUniqueNum(selectedResource.ResourceType, 1, 1000);
+        }
+
+        private void numUniqueIDNumber_ValueChanged(object sender, EventArgs e)
+        {
+            selectedResource.UniqueIDNum = Convert.ToInt32(numUniqueIDNumber.Value); ValidateCheckInInfo();
         }
     }
 }

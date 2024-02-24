@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblLastDayCount = new System.Windows.Forms.Label();
             this.lblScrollHint = new System.Windows.Forms.Label();
             this.pnlCheckInFields = new System.Windows.Forms.Panel();
@@ -44,6 +45,13 @@
             this.cboICSRole = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.chkAutoAssign = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cboUniqueIDLetter = new System.Windows.Forms.ComboBox();
+            this.numUniqueIDNumber = new System.Windows.Forms.NumericUpDown();
+            this.btnGetNextID = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.numUniqueIDNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblLastDayCount
@@ -78,9 +86,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCheckInFields.AutoScroll = true;
             this.pnlCheckInFields.BackColor = System.Drawing.Color.Transparent;
-            this.pnlCheckInFields.Location = new System.Drawing.Point(7, 184);
+            this.pnlCheckInFields.Location = new System.Drawing.Point(7, 225);
             this.pnlCheckInFields.Name = "pnlCheckInFields";
-            this.pnlCheckInFields.Size = new System.Drawing.Size(706, 113);
+            this.pnlCheckInFields.Size = new System.Drawing.Size(706, 369);
             this.pnlCheckInFields.TabIndex = 4;
             // 
             // txtResourceType
@@ -148,7 +156,7 @@
             // 
             // lblLastDayWorking
             // 
-            this.lblLastDayWorking.Location = new System.Drawing.Point(8, 152);
+            this.lblLastDayWorking.Location = new System.Drawing.Point(6, 152);
             this.lblLastDayWorking.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLastDayWorking.Name = "lblLastDayWorking";
             this.lblLastDayWorking.Size = new System.Drawing.Size(187, 29);
@@ -180,7 +188,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(8, 82);
+            this.label2.Location = new System.Drawing.Point(6, 82);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(187, 29);
@@ -207,7 +215,7 @@
             // label17
             // 
             this.label17.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label17.Location = new System.Drawing.Point(12, 48);
+            this.label17.Location = new System.Drawing.Point(14, 48);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(179, 24);
             this.label17.TabIndex = 134;
@@ -226,10 +234,76 @@
             this.chkAutoAssign.Text = "Assign if possible";
             this.chkAutoAssign.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(6, 188);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(187, 29);
+            this.label1.TabIndex = 136;
+            this.label1.Text = "Unique ID*";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cboUniqueIDLetter
+            // 
+            this.cboUniqueIDLetter.Enabled = false;
+            this.cboUniqueIDLetter.FormattingEnabled = true;
+            this.cboUniqueIDLetter.Items.AddRange(new object[] {
+            "P",
+            "V",
+            "C",
+            "E"});
+            this.cboUniqueIDLetter.Location = new System.Drawing.Point(202, 186);
+            this.cboUniqueIDLetter.Name = "cboUniqueIDLetter";
+            this.cboUniqueIDLetter.Size = new System.Drawing.Size(77, 32);
+            this.cboUniqueIDLetter.TabIndex = 137;
+            // 
+            // numUniqueIDNumber
+            // 
+            this.numUniqueIDNumber.Location = new System.Drawing.Point(285, 188);
+            this.numUniqueIDNumber.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numUniqueIDNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numUniqueIDNumber.Name = "numUniqueIDNumber";
+            this.numUniqueIDNumber.Size = new System.Drawing.Size(120, 29);
+            this.numUniqueIDNumber.TabIndex = 138;
+            this.numUniqueIDNumber.ThousandsSeparator = true;
+            this.numUniqueIDNumber.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numUniqueIDNumber.ValueChanged += new System.EventHandler(this.numUniqueIDNumber_ValueChanged);
+            // 
+            // btnGetNextID
+            // 
+            this.btnGetNextID.Location = new System.Drawing.Point(431, 186);
+            this.btnGetNextID.Name = "btnGetNextID";
+            this.btnGetNextID.Size = new System.Drawing.Size(75, 32);
+            this.btnGetNextID.TabIndex = 139;
+            this.btnGetNextID.Text = "Get";
+            this.btnGetNextID.UseVisualStyleBackColor = true;
+            this.btnGetNextID.Click += new System.EventHandler(this.btnGetNextID_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // ResourceCheckInEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnGetNextID);
+            this.Controls.Add(this.numUniqueIDNumber);
+            this.Controls.Add(this.cboUniqueIDLetter);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.chkAutoAssign);
             this.Controls.Add(this.cboICSRole);
             this.Controls.Add(this.label17);
@@ -250,8 +324,10 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(716, 300);
             this.Name = "ResourceCheckInEditControl";
-            this.Size = new System.Drawing.Size(716, 300);
+            this.Size = new System.Drawing.Size(716, 597);
             this.Load += new System.EventHandler(this.ResourceCheckInEditControl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numUniqueIDNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,5 +351,10 @@
         private System.Windows.Forms.ComboBox cboICSRole;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox chkAutoAssign;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cboUniqueIDLetter;
+        private System.Windows.Forms.NumericUpDown numUniqueIDNumber;
+        private System.Windows.Forms.Button btnGetNextID;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

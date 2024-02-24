@@ -56,9 +56,12 @@ namespace Wildfire_ICS_Assist.CustomControls
                     if (fixedAgencies.Contains(teamMember.Agency)) { cboAgency.SelectedIndex = cboAgency.FindStringExact(teamMember.Agency); }
                     else
                     {
-                        cboAgency.SelectedIndex = -1;
+                        cboAgency.SelectedIndex = cboAgency.Items.Count -1;
                         cboOtherAgency.Text = teamMember.Agency;
                     }
+                } else
+                {
+
                 }
                 chkContractor.Checked = teamMember.IsContractor;
                 txtCellphone.SetText(teamMember.CellphoneNumber);
@@ -141,15 +144,18 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void SetColours()
         {
-            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; } else { cboAccomodationPreference.BackColor = Program.GoodColor; }
-            if (string.IsNullOrEmpty(txtCellphone.Text.Trim())) { txtCellphone.BackColor = Program.ErrorColor; } else { txtCellphone.BackColor = Program.GoodColor; }
-            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; } else {  cboAgency.BackColor= Program.GoodColor; }
+            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; errorProvider1.SetError(cboAccomodationPreference, "This field is required"); }
+            else { cboAccomodationPreference.BackColor = Program.GoodColor; errorProvider1.SetError(cboAccomodationPreference, ""); }
+            
+            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; errorProvider1.SetError(cboAgency, "This field is required"); } 
+            else {  cboAgency.BackColor= Program.GoodColor; errorProvider1.SetError(cboAgency, ""); }
         }
 
         public bool FormValid
         {
             get
             {
+                bool IsValid = true;
 
                 if (teamMember == null) { return false; }
                 if (string.IsNullOrEmpty(teamMember.FirstName) || string.IsNullOrEmpty(teamMember.FirstName.Trim())) { return false; }
@@ -160,7 +166,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 //if (string.IsNullOrEmpty(teamMember.EmergencyContact)) { return false; };
                 SetColours();
 
-                return true;
+                return IsValid;
             }
         }
 

@@ -179,7 +179,9 @@ namespace Wildfire_ICS_Assist
             List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
             members = members.Where(o => o.MemberActive).OrderBy(o => o.ProvinceName).ThenBy(o => o.Agency).ThenBy(o => o.Name).ToList();
             members = members.Where(o => !statuses.Any(s => s.MemberID == o.PersonID)).ToList();
-
+            Personnel blankPerson = new Personnel();
+            blankPerson.ID = Guid.Empty;
+            members.Insert(0, blankPerson); 
             cboSavedPersonnel.DataSource = members;
             if(cboSavedOperator.Items.Count == 0) { LoadVehicleOperators(); }
             BuildSavedVehicleList();
@@ -188,7 +190,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnSelectSaved_Click(object sender, EventArgs e)
         {
-            if (cboSavedPersonnel.SelectedItem != null)
+            if (cboSavedPersonnel.SelectedItem != null && ((Personnel)cboSavedPersonnel.SelectedItem).ID != Guid.Empty)
             {
                 _selectedResource = ((Personnel)cboSavedPersonnel.SelectedItem).Clone();
                 _selectedResource.UniqueIDNum = 0;

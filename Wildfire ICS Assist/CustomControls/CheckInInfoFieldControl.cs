@@ -19,6 +19,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         public CheckInInfoFieldControl()
         {
             InitializeComponent();
+            foreach (var cb in Controls.OfType<ComboBox>())
+            {
+                cb.Resize += (sender, e) => {
+                    if (!cb.Focused)
+                        cb.SelectionLength = 0;
+                };
+            }
         }
 
         private void CheckInInfoFieldControl_Load(object sender, EventArgs e)
@@ -45,13 +52,17 @@ namespace Wildfire_ICS_Assist.CustomControls
                         case "Bool":
                             return true;
                         case "DateTime":
+                            if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, "This field is required"); }
                             return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
                         case "List":
+                            if (string.IsNullOrEmpty(cboListValue.Text)) { errorProvider1.SetError(cboListValue, "This field is required"); } else { errorProvider1.SetError(cboListValue, ""); }
                             return !string.IsNullOrEmpty(cboListValue.Text);
 
                         case "Weight":
+                            if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, "This field is required"); } else { errorProvider1.SetError(txtStringValue, ""); }
                             return WeightInKG > 0;
                         default:
+                            if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, "This field is required"); } else { errorProvider1.SetError(txtStringValue, ""); }
                             return !string.IsNullOrEmpty(txtStringValue.Text);
                     }
                 }
@@ -85,8 +96,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 startPoint.X = lblFieldName.Location.X + 5 + lblFieldName.Width;
 
                 int width = 0;
-                if (btnHelp.Visible) { width = btnHelp.Location.X - 5 - startPoint.X; }
-                else { width = this.Width - 5 - startPoint.X; }
+                if (btnHelp.Visible) { width = btnHelp.Location.X - 15 - startPoint.X; }
+                else { width = this.Width - 15 - startPoint.X; }
 
                 chkBoolValue.Visible = false;
                 datDateValue.Visible = false;
@@ -132,6 +143,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                             }
                         }
                         else { cboListValue.Text = infoField.StringValue; }
+
                         break;
                     case "Weight":
                         numNumberValue.Visible = true;

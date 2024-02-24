@@ -41,8 +41,10 @@
             this.pnlWeight = new System.Windows.Forms.Panel();
             this.rbLBS = new System.Windows.Forms.RadioButton();
             this.rbKG = new System.Windows.Forms.RadioButton();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numNumberValue)).BeginInit();
             this.pnlWeight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // datDateValue
@@ -158,6 +160,11 @@
             this.rbKG.UseVisualStyleBackColor = true;
             this.rbKG.CheckedChanged += new System.EventHandler(this.rbKG_CheckedChanged);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
+            // 
             // CheckInInfoFieldControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -178,6 +185,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numNumberValue)).EndInit();
             this.pnlWeight.ResumeLayout(false);
             this.pnlWeight.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,5 +204,6 @@
         private System.Windows.Forms.Panel pnlWeight;
         private System.Windows.Forms.RadioButton rbLBS;
         private System.Windows.Forms.RadioButton rbKG;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

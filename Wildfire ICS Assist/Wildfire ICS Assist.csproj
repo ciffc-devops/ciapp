@@ -517,6 +517,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ResourceReplacementPlanningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceReplacementPlanningForm.Designer.cs">
+      <DependentUpon>ResourceReplacementPlanningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResourcesEditUniqueNumberForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -936,6 +942,9 @@
       <DependentUpon>CheckInForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ResourceReplacementPlanningForm.resx">
+      <DependentUpon>ResourceReplacementPlanningForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ResourcesEditUniqueNumberForm.resx">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1184,6 +1193,7 @@
     <Content Include="ics-ca-sq-white.ico" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-46-calendar.png" />
     <None Include="Resources\glyphicons-basic-11-envelope.png" />
     <None Include="Resources\EquipOp.png" />
     <None Include="Resources\HECrew.png" />

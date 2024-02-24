@@ -76,6 +76,7 @@
             this.txtCellphone = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.txtNOKName = new SpellBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,6 +98,7 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // cboProvince
@@ -225,7 +227,7 @@
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button1.Location = new System.Drawing.Point(307, 8);
+            this.button1.Location = new System.Drawing.Point(314, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 92;
@@ -240,7 +242,7 @@
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button2.Location = new System.Drawing.Point(700, 184);
+            this.button2.Location = new System.Drawing.Point(707, 184);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 26);
             this.button2.TabIndex = 93;
@@ -256,7 +258,7 @@
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button6.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button6.Location = new System.Drawing.Point(700, 305);
+            this.button6.Location = new System.Drawing.Point(707, 305);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 26);
             this.button6.TabIndex = 97;
@@ -272,7 +274,7 @@
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button3.Cursor = System.Windows.Forms.Cursors.Help;
-            this.button3.Location = new System.Drawing.Point(700, 477);
+            this.button3.Location = new System.Drawing.Point(707, 477);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 26);
             this.button3.TabIndex = 125;
@@ -544,7 +546,7 @@
             // 
             this.txtMiddleName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMiddleName.Location = new System.Drawing.Point(6, 6);
+            this.txtMiddleName.Location = new System.Drawing.Point(6, 4);
             this.txtMiddleName.Margin = new System.Windows.Forms.Padding(6);
             this.txtMiddleName.Name = "txtMiddleName";
             this.txtMiddleName.Size = new System.Drawing.Size(146, 29);
@@ -731,7 +733,8 @@
             // 
             this.txtFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFirstName.Location = new System.Drawing.Point(6, 6);
+            this.txtFirstName.BackColor = System.Drawing.Color.Transparent;
+            this.txtFirstName.Location = new System.Drawing.Point(4, 4);
             this.txtFirstName.Multiline = false;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(150, 29);
@@ -741,7 +744,8 @@
             // 
             this.txtLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLastName.Location = new System.Drawing.Point(6, 6);
+            this.txtLastName.BackColor = System.Drawing.Color.Transparent;
+            this.txtLastName.Location = new System.Drawing.Point(6, 4);
             this.txtLastName.Multiline = false;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(149, 29);
@@ -831,6 +835,7 @@
             // 
             this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCellphone.BackColor = System.Drawing.Color.Transparent;
             this.txtCellphone.Location = new System.Drawing.Point(218, 2);
             this.txtCellphone.Margin = new System.Windows.Forms.Padding(6);
             this.txtCellphone.Multiline = false;
@@ -872,6 +877,11 @@
             this.txtNOKName.WordWrap = true;
             this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged_1);
             this.txtNOKName.Child = new System.Windows.Controls.TextBox();
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
             // 
             // PersonnelEditControl
             // 
@@ -933,6 +943,7 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -985,5 +996,6 @@
         private System.Windows.Forms.SplitContainer splitContainer5;
         private TextBoxRequiredControl txtCellphone;
         private SpellBox txtNOKName;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

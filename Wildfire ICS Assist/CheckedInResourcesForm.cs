@@ -23,6 +23,7 @@ namespace Wildfire_ICS_Assist
 {
     public partial class CheckedInResourcesForm : Form
     {
+        bool keepListBuilt = false;
 
 
         public CheckedInResourcesForm()
@@ -32,7 +33,13 @@ namespace Wildfire_ICS_Assist
 
         private void CheckedInResourcesForm_Load(object sender, EventArgs e)
         {
-            cpFilters.CurrentlyCollapsed = true;
+            keepListBuilt = false;
+            _bw.DoWork += bw_DoWork;
+            _bw.ProgressChanged += backgroundWorker_ProgressChanged;
+            _bw.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
+
+
+            cpFilters.CurrentlyCollapsed = false;
             cpPNumbers.CurrentlyCollapsed = true;
             this.dgvResources.DoubleBuffered(true);
 
@@ -47,7 +54,11 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
             Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
             Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
-            
+
+            keepListBuilt = true;
+            BuildCheckInListViaWorker();
+
+
         }
 
         public static int PNumMin { get => Program.PNumMin; set => Program.PNumMin = value; }
@@ -97,6 +108,7 @@ namespace Wildfire_ICS_Assist
 
         private void ConfirmResourceNumberAvailability()
         {
+            /*
             StringBuilder note = new StringBuilder();
 
             int nextP = Program.CurrentIncident.GetNextUniqueNum("Personnel", PNumMin, PNumMax);
@@ -131,6 +143,7 @@ namespace Wildfire_ICS_Assist
             {
                 btnStartCheckIn.Enabled = true;
             }
+            */
         }
 
         private bool StartCheckIn(bool autoStart, CheckInRecord existingRecord = null)
@@ -302,9 +315,27 @@ namespace Wildfire_ICS_Assist
             return autoStartNextCheckin;
         }
 
+        private class FilterSettings
+        {
+            public bool ShowCrewDetails { get; set; } = false;
+            public int CheckInStatus { get; set; } = 0;
+            public int ResourceVariety { get; set; } = 0;
+            public string ResourceVarietyName { get; set; } = string.Empty;
+            public int TimeOut { get; set; } = 0;
+            public int Assigned { get; set; } = 0;
+            public DateTime MidPoint { get; set; }
+        }
+
 
         private void LoadResourcesList()
         {
+            if (keepListBuilt)
+            {
+                BuildCheckInListViaWorker();
+
+            }
+
+            /*
             List<CheckInRecordWithResource> checkInRecords = new List<CheckInRecordWithResource>();
             bool showCrewDetails = cboExpandCrews.SelectedIndex == 1;
             DateTime mid = Program.CurrentOpPeriodDetails.PeriodMid;
@@ -379,8 +410,150 @@ namespace Wildfire_ICS_Assist
 
             if (_previousIndex >= 0 && dgvResources.Columns.Count > _previousIndex) { checkInRecords = GetSortedList(checkInRecords, dgvResources.Columns[_previousIndex].Name, _sortDirection); }
             dgvResources.DataSource = checkInRecords;
+            */
+        }
+
+
+        static BackgroundWorker _bw = new BackgroundWorker { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
+        static bool RunBWAgain = false;
+        private void BuildCheckInListViaWorker()
+        {
+
+            FilterSettings filters = new FilterSettings();
+            filters.ShowCrewDetails = cboExpandCrews.SelectedIndex == 1;
+            //filters.CheckInStatus = cboCheckInStatus.SelectedIndex;
+            filters.ResourceVariety = cboResourceVariety.SelectedIndex;
+            filters.TimeOut = cboTimeOutFilter.SelectedIndex;
+            filters.Assigned = cboAssignedFilter.SelectedIndex;
+            filters.MidPoint = Program.CurrentOpPeriodDetails.PeriodMid;
+            filters.ResourceVarietyName = cboResourceVariety.Text;
+            if (_bw.IsBusy == false)
+            {
+                dgvResources.Visible = false;
+
+                _bw.RunWorkerAsync(filters);
+            }
+            else { RunBWAgain = true; }
+        }
+
+        static void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+
+            DateTime today = DateTime.Now;
+
+
+            FilterSettings filters = (FilterSettings)e.Argument;
+
+            List<CheckInRecordWithResource> checkInRecords = new List<CheckInRecordWithResource>();
+            List<CheckInRecord> allrecords = new List<CheckInRecord>(Program.CurrentIncident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod <= Program.CurrentOpPeriod));
+
+            _bw.ReportProgress(0);
+
+
+            if (filters.ShowCrewDetails)
+            {
+                foreach (CheckInRecord rec in allrecords)
+                {
+                    IncidentResource resource = new IncidentResource();
+                    if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
+                    {
+                        resource = Program.CurrentIncident.AllIncidentResources.First(o => o.ID == rec.ResourceID);
+                    }
+
+                    if (resource != null)
+                    {
+                        checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
+                    }
+                }
+            }
+            else
+            {
+                foreach (CheckInRecord rec in allrecords)
+                {
+                    IncidentResource resource = new IncidentResource();
+                    if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
+                    {
+                        resource = Program.CurrentIncident.AllIncidentResources.First(o => o.ID == rec.ResourceID);
+                    }
+
+                    if (resource != null && resource.ParentResourceID == Guid.Empty)
+                    {
+                        checkInRecords.Add(new CheckInRecordWithResource(rec, resource, Program.CurrentOpPeriodDetails.PeriodEnd));
+                    }
+                }
+            }
+
+
+            //checkInRecords = checkInRecords.OrderBy(o => o.ResourceName).ToList();
+            _bw.ReportProgress(1);
+
+
+
+            if (filters.ResourceVariety > 0)
+            {
+                checkInRecords = checkInRecords.Where(o => o.ResourceType.Equals(filters.ResourceVarietyName)).ToList(); ;
+            }
+            _bw.ReportProgress(2);
+
+
+            DateTime EndOfOp = Program.CurrentOpPeriodDetails.PeriodEnd;
+
+
+            switch (filters.TimeOut)
+            {
+                case 0:
+                    checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(filters.MidPoint)).ToList(); break;
+                case 2:
+                    checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(filters.MidPoint) && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= YellowNumber).ToList();
+                    break;
+                case 3:
+                    checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(filters.MidPoint) && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= YellowNumber && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) > RedNumber).ToList();
+                    break;
+                case 4:
+                    checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(filters.MidPoint) && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= RedNumber).ToList();
+                    break;
+            }
+            _bw.ReportProgress(3);
+
+
+            if (filters.Assigned == 1)
+            {
+                checkInRecords = checkInRecords.Where(o => !Program.CurrentIncident.GetIsResourceCurrentlyAssigned(Program.CurrentOpPeriod, o.Resource.ID)).ToList();
+
+            }
+
+            _bw.ReportProgress(4);
+
+
+            e.Result = checkInRecords;
+        }
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
 
         }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            List<CheckInRecordWithResource> checkInRecords = (List<CheckInRecordWithResource>)e.Result;
+            if (_previousIndex >= 0 && dgvResources.Columns.Count > _previousIndex) { checkInRecords = GetSortedList(checkInRecords, dgvResources.Columns[_previousIndex].Name, _sortDirection); }
+
+            //progressBar1.Visible = false;
+            dgvResources.DataSource = checkInRecords;
+            dgvResources.Visible = true;
+            dgvResources.Columns[0].Frozen = true;
+            dgvResources.Columns[1].Frozen = true;
+            dgvResources.Columns[2].Frozen = true;
+
+            if (RunBWAgain)
+            {
+                RunBWAgain = false;
+                BuildCheckInListViaWorker();
+            }
+        }
+
+
+
 
         private void btnStartCheckIn_Click(object sender, EventArgs e)
         {
@@ -420,8 +593,8 @@ namespace Wildfire_ICS_Assist
         }
 
 
-        int YellowNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("YellowResourceTimeoutDays"));
-        int RedNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("RedResourceTimeoutDays"));
+        static int YellowNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("YellowResourceTimeoutDays"));
+        static int RedNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("RedResourceTimeoutDays"));
 
         private void BuildLastDayOnIncidentFilterOptions()
         {
@@ -491,6 +664,7 @@ namespace Wildfire_ICS_Assist
             btnEditCheckIn.Enabled = dgvResources.SelectedRows.Count == 1;
             btnEditResource.Enabled = dgvResources.SelectedRows.Count == 1;
             btnDemob.Enabled = dgvResources.SelectedRows.Count == 1;
+            btnChangeID.Enabled = btnEditCheckIn.Enabled;
         }
 
         private void btnDemob_Click(object sender, EventArgs e)
@@ -614,7 +788,7 @@ namespace Wildfire_ICS_Assist
             if (dgvResources.SelectedRows.Count == 1)
             {
                 CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
-                StartCheckIn(false, rec.Record);
+                OpenResourceForEdit(rec);
             }
         }
 
@@ -655,6 +829,12 @@ namespace Wildfire_ICS_Assist
 
         private void btnLogisticsOverview_Click(object sender, EventArgs e)
         {
+            PrintLogisticsOverview();
+
+        }
+
+        private void PrintLogisticsOverview()
+        {
 
             ICSRole role = null;
             List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
@@ -675,6 +855,11 @@ namespace Wildfire_ICS_Assist
         }
 
         private void btnExportSignInToCSV_Click(object sender, EventArgs e)
+        {
+            ExportToCSV();
+        }
+
+        private void ExportToCSV()
         {
             svdExport.FileName = "Check In Records-" + Program.CurrentIncident.IncidentIdentifier + "-OP-" + Program.CurrentOpPeriod + ".csv";
             DialogResult result = svdExport.ShowDialog();
@@ -709,6 +894,18 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            Button btnSender = (Button)sender;
+            System.Drawing.Point ptLowerLeft = new System.Drawing.Point(0, btnSender.Height);
+            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+            cmsPrint211.Show(ptLowerLeft);
+
+
+
+
+        }
+
+        private void PrintNew211s()
+        {
             List<byte[]> allPDFs = Program.pdfExportService.exportCheckInSheetsToPDF(Program.CurrentTask, Program.CurrentOpPeriod, true, false);
 
             string fullFilepath = "";
@@ -726,7 +923,7 @@ namespace Wildfire_ICS_Assist
             catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
 
-        private void btnPrinttAll211sToDate_Click(object sender, EventArgs e)
+        private void PrintAll211s()
         {
             List<byte[]> allPDFs = Program.pdfExportService.exportCheckInSheetsToPDF(Program.CurrentTask, Program.CurrentOpPeriod, false, false);
 
@@ -743,6 +940,12 @@ namespace Wildfire_ICS_Assist
                 System.Diagnostics.Process.Start(fullFilepath);
             }
             catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+
+        }
+
+        private void btnPrinttAll211sToDate_Click(object sender, EventArgs e)
+        {
+            PrintAll211s();
         }
 
         private int _previousIndex = 1;
@@ -800,6 +1003,12 @@ namespace Wildfire_ICS_Assist
 
         private void btnDietaryAndAllergy_Click(object sender, EventArgs e)
         {
+
+            PrintDietaryAndAllergySummary();
+        }
+
+        private void PrintDietaryAndAllergySummary()
+        {
             List<byte[]> allPDFs = Program.pdfExportService.exportDietaryAndAllergyToPDF(Program.CurrentTask, Program.CurrentOpPeriod, true, false);
 
             string fullFilepath = "";
@@ -815,7 +1024,6 @@ namespace Wildfire_ICS_Assist
                 System.Diagnostics.Process.Start(fullFilepath);
             }
             catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
-
         }
 
         private void btnEditResource_Click(object sender, EventArgs e)
@@ -832,27 +1040,32 @@ namespace Wildfire_ICS_Assist
             if (dgvResources.SelectedRows.Count == 1)
             {
                 CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
-                using (CheckInInfoEditForm editForm = new CheckInInfoEditForm())
+                EditCheckInInfo(rec);
+            }
+        }
+
+        private void EditCheckInInfo(CheckInRecordWithResource rec)
+        {
+            using (CheckInInfoEditForm editForm = new CheckInInfoEditForm())
+            {
+                editForm.SetRecord(rec.Clone());
+                if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    editForm.SetRecord(rec.Clone());
-                    if (editForm.ShowDialog() == DialogResult.OK)
+                    Program.wfIncidentService.UpsertCheckInRecord(editForm.SelectedRecord);
+
+                    if (editForm.AssignIfPossible && !string.IsNullOrEmpty(editForm.SelectedRecord.InitialRoleName))
                     {
-                        Program.wfIncidentService.UpsertCheckInRecord(editForm.SelectedRecord);
-
-                        if (editForm.AssignIfPossible && !string.IsNullOrEmpty(editForm.SelectedRecord.InitialRoleName))
+                        if (Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.BaseRoleName) && o.BaseRoleName.Equals(editForm.SelectedRecord.InitialRoleName) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == editForm.SelectedRecord.ResourceID))
                         {
-                            if (Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.BaseRoleName) && o.BaseRoleName.Equals(editForm.SelectedRecord.InitialRoleName) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == editForm.SelectedRecord.ResourceID))
-                            {
-                                ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.BaseRoleName) && o.BaseRoleName.Equals(editForm.SelectedRecord.InitialRoleName) && o.IndividualID == Guid.Empty);
-                                Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == editForm.SelectedRecord.ResourceID);
-                                role.IndividualID = p.ID;
-                                role.IndividualName = p.Name;
-                                //role.teamMember = p.Clone();
-                                Program.wfIncidentService.UpsertICSRole(role);
-                            }
+                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.BaseRoleName) && o.BaseRoleName.Equals(editForm.SelectedRecord.InitialRoleName) && o.IndividualID == Guid.Empty);
+                            Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == editForm.SelectedRecord.ResourceID);
+                            role.IndividualID = p.ID;
+                            role.IndividualName = p.Name;
+                            //role.teamMember = p.Clone();
+                            Program.wfIncidentService.UpsertICSRole(role);
                         }
-
                     }
+
                 }
             }
         }
@@ -1011,7 +1224,115 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-   
+        private void editCheckInInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                EditCheckInInfo(rec);
+            }
+        }
+
+        private void btnChangeID_Click(object sender, EventArgs e)
+        {
+            if (dgvResources.SelectedRows.Count == 1)
+            {
+                CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvResources.SelectedRows[0].DataBoundItem;
+                UpdateUniqueID(rec);
+            }
+        }
+
+        private void printNewICS211sToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintNew211s();
+        }
+
+        private void printAllICS211sToToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintAll211s();
+        }
+
+        private void checkInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void printLogisticsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintLogisticsOverview();
+        }
+
+        private void printDietaryAndAllergySummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintDietaryAndAllergySummary();
+        }
+
+        private void exportCheckInDataToCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportToCSV();
+        }
+
+        private void printNewICS211sToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PrintNew211s();
+
+        }
+
+        private void printAllICS211sToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintAll211s();
+
+        }
+
+        private void editSavedRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SavedPersonnelForm savedTeamMembersForm = new SavedPersonnelForm())
+            {
+
+                DialogResult dr = savedTeamMembersForm.ShowDialog(this);
+                MessageBox.Show("The resources you have added/edited will now be available for check in.");
+            }
+
+        }
+
+        private void importResourcesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (ImportSavedTeamMembersForm importForm = new ImportSavedTeamMembersForm())
+            {
+                DialogResult dr = importForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    MessageBox.Show("The resources you have added/edited will now be available for check in.");
+                }
+            }
+        }
+
+        private void importSavedVehiclesEquipmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editSavedVehiclesEquipmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SavedVehiclesForm savedTeamMembersForm = new SavedVehiclesForm())
+            {
+
+                DialogResult dr = savedTeamMembersForm.ShowDialog(this);
+                MessageBox.Show("The resources you have added/edited will now be available for check in.");
+            }
+
+
+        }
+
+        private void newCheckInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            bool autoStartCheckin = false;
+            do
+            {
+                autoStartCheckin = StartCheckIn(autoStartCheckin);
+            } while (autoStartCheckin);
+        }
     }
 
     public static class ExtensionMethods
