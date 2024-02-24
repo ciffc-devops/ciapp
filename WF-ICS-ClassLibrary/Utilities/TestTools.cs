@@ -169,9 +169,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static Personnel createTestPerson(int seed)
         {
             Personnel test = new Personnel();
-            test.FirstName = "FirstName" + seed;
-            test.LastName = "LastName" + seed;
-            test.MiddleInitial = "MiddleInitial" + seed;
+            test.FirstName = "First" + seed;
+            test.LastName = "Last" + seed;
+            test.MiddleInitial = "MI" + seed;
             test.Gender = "Gender" + seed;
             test.HasDietaryRestrictions =
             test.HasAllergies = RandomBooleanGenerator.GetRandomBoolean();
@@ -188,7 +188,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.Pronouns = "Pronouns" + seed;
             test.AccomodationPreference = "AccommodationPreference" + seed;
             test.Kind = "Kind" + seed;
-            test.Type = "Type" + seed;
+            test.Type = "Type" + random.Next(1,4);
             return test;
         }
         public static Vehicle createTestVehicle(int seed)
