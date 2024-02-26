@@ -50,8 +50,8 @@ namespace WildfireICSDesktopServices
 
         event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
         event OperationalGroupEventHandler OperationalGroupChanged;
-        event OperationalSubGroupEventHandler OperationalSubGroupChanged;   
-
+        event OperationalSubGroupEventHandler OperationalSubGroupChanged;
+        event ResourceReplacementEventHandler ResourceReplacementChanged;
 
 
         void ApplyTaskUpdate(TaskUpdate update, bool applyAllSubsequent = false);
@@ -117,5 +117,6 @@ namespace WildfireICSDesktopServices
         void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local");
         void UpsertDemobRecord(DemobilizationRecord record, string source = "local");
         void UpsertIncidentResource(IncidentResource record, string source = "local");
+        void UpsertResourceReplacementPlan(ResourceReplacementPlan record, string source = "local");
     }
 }

@@ -112,6 +112,7 @@
     <Compile Include="EventHandling\OperationalPeriodEventHandler.cs" />
     <Compile Include="EventHandling\OrganizationalChartEventHandler.cs" />
     <Compile Include="EventHandling\PositionLogEventHandler.cs" />
+    <Compile Include="EventHandling\ResourceReplacementEventHandler.cs" />
     <Compile Include="EventHandling\SafetyPlanEventHandler.cs" />
     <Compile Include="EventHandling\ShortcutEventHandler.cs" />
     <Compile Include="EventHandling\TaskBasicsEventHandler.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Models\ShortcutButtonOption.cs" />
     <Compile Include="Models\SoftwareUpdate.cs" />
     <Compile Include="Models\SummaryStat.cs" />
+    <Compile Include="Models\SyncableItem.cs" />
     <Compile Include="Models\TaskBasics.cs" />
     <Compile Include="Models\TaskUpdate.cs" />
     <Compile Include="Models\TeamAssignment.cs" />

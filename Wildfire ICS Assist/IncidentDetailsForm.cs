@@ -211,6 +211,7 @@ namespace Wildfire_ICS_Assist
         PositionLogReminderForm _positionLogReminderForm = null;
         CheckedInResourcesForm _checkedInresourcesForm = null;
         CloseOpPeriodForm _closeOpPeriodForm = null;
+        ResourceReplacementPlanningForm _resourceReplacementPlanningForm = null;
 
         public event ShortcutEventHandler ShortcutButtonClicked;
 
@@ -253,6 +254,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
             Program.wfIncidentService.OperationalGroupChanged += Program_OperationalGroupChanged;
             Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
+            Program.wfIncidentService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
             //Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
 
 
@@ -265,6 +267,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.OpPeriodChanged += changeOpPeriod;
         }
 
+       
 
         private void CloseActiveForms()
         {
@@ -791,7 +794,10 @@ namespace Wildfire_ICS_Assist
             TriggerAutoSave();
 
         }
-     
+        private void WfIncidentService_ResourceReplacementChanged(ResourceReplacementPlanEventArgs e)
+        {
+            TriggerAutoSave();
+        }
 
 
 
@@ -1692,6 +1698,31 @@ namespace Wildfire_ICS_Assist
 
 
         }
+
+
+        private void OpenResourceReplacementPlanningForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (_resourceReplacementPlanningForm == null)
+                {
+                    _resourceReplacementPlanningForm = new ResourceReplacementPlanningForm();
+                    _resourceReplacementPlanningForm.FormClosed += new FormClosedEventHandler(ResourceReplacementPlanningForm_Closed);
+                    ActiveForms.Add(_resourceReplacementPlanningForm);
+                    _resourceReplacementPlanningForm.Show(this);
+                }
+
+                _resourceReplacementPlanningForm.BringToFront();
+            }
+        }
+        void ResourceReplacementPlanningForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_resourceReplacementPlanningForm);
+            _resourceReplacementPlanningForm = null;
+
+
+        }
+
 
         private void pnlTaskInfo_Paint(object sender, PaintEventArgs e)
         {
@@ -3040,6 +3071,17 @@ namespace Wildfire_ICS_Assist
         {
             TestForm testform = new TestForm();
             testform.Show();
+        }
+
+        private void btnGeneralMessage_Click(object sender, EventArgs e)
+        {
+            OpenGeneralMessagesForm();
+
+        }
+
+        private void btnReplacementResources_Click(object sender, EventArgs e)
+        {
+            OpenResourceReplacementPlanningForm();
         }
     }
 

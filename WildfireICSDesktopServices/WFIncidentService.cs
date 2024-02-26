@@ -51,6 +51,7 @@ namespace WildfireICSDesktopServices
         public event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
         //public event TeamAssignmentEventHandler TeamAssignmentChanged;
         public event DemobEventHandler DemobChanged;
+        public event ResourceReplacementEventHandler ResourceReplacementChanged;
 
 
         public event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
@@ -1359,7 +1360,7 @@ namespace WildfireICSDesktopServices
 
 
         //Aircraft
-        protected virtual void OnAircrafteChanged(AircraftEventArgs e)
+        protected virtual void OnAircraftChanged(AircraftEventArgs e)
         {
             AircraftEventHandler handler = this.AircraftChanged;
             if (handler != null)
@@ -1383,7 +1384,7 @@ namespace WildfireICSDesktopServices
                 {
                     UpsertTaskUpdate(record, "UPSERT", true, false);
                 }
-                OnAircrafteChanged(new AircraftEventArgs(record));
+                OnAircraftChanged(new AircraftEventArgs(record));
 
             }
 
@@ -1907,6 +1908,34 @@ namespace WildfireICSDesktopServices
             OnDemobChanged(new DemobEventArgs(record));
         }
 
+
+        // Resource Replacement Plan
+        protected virtual void OnResourceReplacementPlanChanged(ResourceReplacementPlanEventArgs e)
+        {
+            ResourceReplacementEventHandler handler = this.ResourceReplacementChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertResourceReplacementPlan(ResourceReplacementPlan record, string source = "local")
+        {
+          
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.AllResourceReplacementPlans.Any(o => o.ID == record.ID))
+            {
+                _currentIncident.AllResourceReplacementPlans = _currentIncident.AllResourceReplacementPlans.Where(o => o.ID != record.ID).ToList();
+            }
+            _currentIncident.AllResourceReplacementPlans.Add(record);
+
+           
+
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnResourceReplacementPlanChanged(new ResourceReplacementPlanEventArgs(record));
+        }
 
 
         public void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local")

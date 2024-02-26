@@ -48,6 +48,7 @@ namespace WF_ICS_ClassLibrary.Models
     [XmlInclude(typeof(WFIncident))]
     [XmlInclude(typeof(OperationalGroup))]
     [XmlInclude(typeof(OperationalSubGroup))]
+    [XmlInclude(typeof(ResourceReplacementPlan))]
 
     [Serializable]
     [ProtoContract]
@@ -294,7 +295,10 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 objDecrypted = JsonConvert.DeserializeObject<OperationalSubGroup>(jsonData);
             }
-
+            else if (ObjectType.Equals(new ResourceReplacementPlan().GetType().Name))
+            {
+                objDecrypted = JsonConvert.DeserializeObject<ResourceReplacementPlan>(jsonData);
+            }
 
 
             return objDecrypted;

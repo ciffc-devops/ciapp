@@ -24,28 +24,29 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
     ProtoInclude(103, typeof(Briefing)),
- ProtoInclude(105, typeof(CommsLogEntry)),
- ProtoInclude(106, typeof(CommsPlan)),
- ProtoInclude(107, typeof(CommsPlanItem)),
- ProtoInclude(109, typeof(Contact)),
- ProtoInclude(112, typeof(IncidentObjective)),
- ProtoInclude(116, typeof(MedicalPlan)),
- ProtoInclude(117, typeof(Personnel)),
- ProtoInclude(118, typeof(MemberStatus)),
- ProtoInclude(119, typeof(CheckInRecord)),
- ProtoInclude(120, typeof(Note)),
- ProtoInclude(121, typeof(OperationalPeriod)),
- ProtoInclude(122, typeof(OrganizationChart)),
- ProtoInclude(123, typeof(ICSRole)),
- ProtoInclude(124, typeof(PositionLogEntry)),
- ProtoInclude(125, typeof(SafetyMessage)),
- ProtoInclude(128, typeof(TaskBasics)),
- ProtoInclude(129, typeof(Timeline)),
- ProtoInclude(130, typeof(TimelineEvent)),
-        ProtoInclude(131, typeof(OperationalGroup)),
-                ProtoInclude(132, typeof(OperationalSubGroup)),
- ProtoInclude(133, typeof(Vehicle)),
-        ProtoInclude(134, typeof(DemobilizationRecord))
+    ProtoInclude(105, typeof(CommsLogEntry)),
+    ProtoInclude(106, typeof(CommsPlan)),
+    ProtoInclude(107, typeof(CommsPlanItem)),
+    ProtoInclude(109, typeof(Contact)),
+    ProtoInclude(112, typeof(IncidentObjective)),
+    ProtoInclude(116, typeof(MedicalPlan)),
+    ProtoInclude(117, typeof(Personnel)),
+    ProtoInclude(118, typeof(MemberStatus)),
+    ProtoInclude(119, typeof(CheckInRecord)),
+    ProtoInclude(120, typeof(Note)),
+    ProtoInclude(121, typeof(OperationalPeriod)),
+    ProtoInclude(122, typeof(OrganizationChart)),
+    ProtoInclude(123, typeof(ICSRole)),
+    ProtoInclude(124, typeof(PositionLogEntry)),
+    ProtoInclude(125, typeof(SafetyMessage)),
+    ProtoInclude(128, typeof(TaskBasics)),
+    ProtoInclude(129, typeof(Timeline)),
+    ProtoInclude(130, typeof(TimelineEvent)),
+    ProtoInclude(131, typeof(OperationalGroup)),
+    ProtoInclude(132, typeof(OperationalSubGroup)),
+    ProtoInclude(133, typeof(Vehicle)),
+    ProtoInclude(134, typeof(DemobilizationRecord)),
+        ProtoInclude(135, typeof(ResourceReplacementPlan))
         ]
 
 
@@ -59,7 +60,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public WFIncident()
         {
             TaskID = System.Guid.NewGuid();
-            
+
             //allObjectives = new List<IncidentObjective>();
             allIncidentObjectives = new List<IncidentObjectivesSheet>();
 
@@ -77,7 +78,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             allCommsLogEntries = new List<CommsLogEntry>();
             AllOperationalPeriods = new List<OperationalPeriod>();
             AllGeneralMessages = new List<GeneralMessage>();
-            
+
             taskTimeline = new Timeline();
             _AllOperationalGroups = new List<OperationalGroup>();
             //_AllOperationalSubGroups = new List<OperationalSubGroup>();
@@ -104,7 +105,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         //  [ProtoMember(9)] private double _subjectVisibility;
         //  [ProtoMember(10)] private double _generalRangeOfDetection;
         [ProtoMember(11)] private string _currentFilePath;
-         [ProtoMember(12)] private List<TeamAssignment> _AllAssignments;
+        [ProtoMember(12)] private List<TeamAssignment> _AllAssignments;
         [ProtoMember(13)] private List<SafetyMessage> _allSafetyMessages;
         [ProtoMember(14)] private List<Briefing> _allBriefings;
         //[ProtoMember(15)] private List<IncidentObjective> _allObjectives;
@@ -114,8 +115,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(19)] private List<CommsPlan> _allCommsPlans;
         [ProtoMember(20)] private List<CommsPlanItem> _additionalCommsItems;
         [ProtoMember(21)] private List<AirOperationsSummary> _allAirOperationsSummaries;
-        
-        
+
+
         [ProtoMember(22)] private List<CommsLogEntry> _allCommsLogEntries;
         [ProtoMember(23)] private string _DocumentPath;
         [ProtoMember(24)] private string _sourceIdentifier;
@@ -132,13 +133,13 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(35)] private bool _IsTraining;
         [ProtoMember(36)] private List<GeneralMessage> _AllGeneralMessages;
         [ProtoMember(37)] private List<OperationalGroup> _AllOperationalGroups;
-       // [ProtoMember(38)] private List<OperationalSubGroup> _AllOperationalSubGroups;
+        // [ProtoMember(38)] private List<OperationalSubGroup> _AllOperationalSubGroups;
 
         // [ProtoMember(39)] private List<MattsonEvaluation> _allMattsonEvaluations = new List<MattsonEvaluation>();
         [ProtoMember(40)] private List<Contact> _allContacts = new List<Contact>();
         [ProtoMember(41)] private Timeline _taskTimeline;
         [ProtoMember(42)] private List<Note> _allNotes = new List<Note>();
-       // [ProtoMember(43)] private List<Vehicle> _allVehicles = new List<Vehicle>();
+        // [ProtoMember(43)] private List<Vehicle> _allVehicles = new List<Vehicle>();
         [ProtoMember(45)] private List<TaskEquipment> _allEquipment = new List<TaskEquipment>();
         [ProtoMember(46)] private List<EquipmentIssue> _allEquipmentIssues = new List<EquipmentIssue>();
 
@@ -152,6 +153,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(51)] private List<TaskUpdate> _allTaskUpdates = new List<TaskUpdate>();
         [ProtoMember(52)] private List<DemobilizationRecord> _allDemobilizationRecords = new List<DemobilizationRecord>();
         [ProtoMember(53)] private List<IncidentResource> _IncidentResources = new List<IncidentResource>();
+        [ProtoMember(54)] private List<ResourceReplacementPlan> _ResourceReplacementPlans = new List<ResourceReplacementPlan>();
 
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public string TaskName { get => _TaskName; set { if (!string.IsNullOrEmpty(value)) { _TaskName = value.Trim(); } else { _TaskName = null; } } }
@@ -266,7 +268,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<GeneralMessage> ActiveGeneralMessages { get { if (_AllGeneralMessages.Any()) { return _AllGeneralMessages.Where(o => o.Active).ToList(); } else { return new List<GeneralMessage>(); } } }
         public Timeline taskTimeline { get => _taskTimeline; set => _taskTimeline = value; }
         public List<Note> allNotes { get => _allNotes; set => _allNotes = value; }
-        public List<Vehicle> allVehicles { get => AllIncidentResources.OfType<Vehicle>().ToList(); } 
+        public List<Vehicle> allVehicles { get => AllIncidentResources.OfType<Vehicle>().ToList(); }
         public List<Vehicle> ActiveIncidentVehicles { get { return ActiveIncidentResources.OfType<Vehicle>().ToList(); } }
 
         public List<PositionLogEntry> allPositionLogEntries { get => _allPositionLogEntries; set => _allPositionLogEntries = value; }
@@ -279,8 +281,9 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<OperationalSubGroup> AllOperationalSubGroups { get => AllIncidentResources.OfType<OperationalSubGroup>().ToList(); }
         public List<OperationalSubGroup> ActiveOperationalSubGroups { get => AllOperationalSubGroups.Where(o => o.Active).ToList(); }
         public List<DemobilizationRecord> AllDemobilizationRecords { get => _allDemobilizationRecords; set => _allDemobilizationRecords = value; }
-        public List<DemobilizationRecord> ActiveDemobilizationRecords { get => _allDemobilizationRecords.Where(o=>o.Active).ToList(); } 
-   
+        public List<DemobilizationRecord> ActiveDemobilizationRecords { get => _allDemobilizationRecords.Where(o => o.Active).ToList(); }
+        public List<ResourceReplacementPlan> AllResourceReplacementPlans { get => _ResourceReplacementPlans; set => _ResourceReplacementPlans = value; }
+        public List<ResourceReplacementPlan> ActiveResourceReplacementPlans { get => _ResourceReplacementPlans.Where(o => o.Active).ToList(); }
 
 
         //for network reasons
@@ -330,7 +333,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<CheckInRecord> AllCheckInRecords { get { return _signInRecords; } set { _signInRecords = value; } }
 
 
-      
+
 
 
 
@@ -507,7 +510,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             if (ops > 0)
             {
                 return allAirOperationsSummaries.Any(o => o.OpPeriod == ops && o.Active && o.HasContent);
-            } 
+            }
             else
             {
                 return allAirOperationsSummaries.Any(o => o.Active && o.HasContent);
@@ -523,7 +526,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public bool hasMeangfulCommsPlan(int ops)
         {
             if (allCommsPlans.Where(o => o.OpsPeriod == ops).Count() <= 0) { return false; }
-            else if (allCommsPlans.Where(o => o.OpsPeriod == ops).First().allCommsItems.Any(o => !string.IsNullOrEmpty( o.ChannelID ))) { return true; }
+            else if (allCommsPlans.Where(o => o.OpsPeriod == ops).First().allCommsItems.Any(o => !string.IsNullOrEmpty(o.ChannelID))) { return true; }
             else { return false; }
         }
         public bool hasMeaningfulMedicalPlan(int ops)

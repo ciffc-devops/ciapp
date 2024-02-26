@@ -446,14 +446,14 @@ namespace Wildfire_ICS_Assist
             FilterSettings filters = (FilterSettings)e.Argument;
 
             List<CheckInRecordWithResource> checkInRecords = new List<CheckInRecordWithResource>();
-            List<CheckInRecord> allrecords = new List<CheckInRecord>(Program.CurrentIncident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod <= Program.CurrentOpPeriod));
+            List<CheckInRecord> allRecords = new List<CheckInRecord>(Program.CurrentIncident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod <= Program.CurrentOpPeriod));
 
             _bw.ReportProgress(0);
 
 
             if (filters.ShowCrewDetails)
             {
-                foreach (CheckInRecord rec in allrecords)
+                foreach (CheckInRecord rec in allRecords)
                 {
                     IncidentResource resource = new IncidentResource();
                     if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
@@ -469,7 +469,7 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
-                foreach (CheckInRecord rec in allrecords)
+                foreach (CheckInRecord rec in allRecords)
                 {
                     IncidentResource resource = new IncidentResource();
                     if (Program.CurrentIncident.AllIncidentResources.Any(o => o.ID == rec.ResourceID))
@@ -541,10 +541,12 @@ namespace Wildfire_ICS_Assist
             //progressBar1.Visible = false;
             dgvResources.DataSource = checkInRecords;
             dgvResources.Visible = true;
-            dgvResources.Columns[0].Frozen = true;
-            dgvResources.Columns[1].Frozen = true;
-            dgvResources.Columns[2].Frozen = true;
-
+            if (dgvResources.Columns.Count >= 3)
+            {
+                dgvResources.Columns[0].Frozen = true;
+                dgvResources.Columns[1].Frozen = true;
+                dgvResources.Columns[2].Frozen = true;
+            }
             if (RunBWAgain)
             {
                 RunBWAgain = false;
@@ -1332,6 +1334,22 @@ namespace Wildfire_ICS_Assist
             {
                 autoStartCheckin = StartCheckIn(autoStartCheckin);
             } while (autoStartCheckin);
+        }
+
+        private void btnResourcePlanning_Click(object sender, EventArgs e)
+        {
+            ShowResourcePlanning();
+        }
+
+        private void ShowResourcePlanning()
+        {
+            ResourceReplacementPlanningForm form = new ResourceReplacementPlanningForm();
+            form.Show();
+        }
+
+        private void replacementPlanToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowResourcePlanning();
         }
     }
 

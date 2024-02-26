@@ -41,7 +41,7 @@ namespace WF_ICS_ClassLibrary.Models
 
 
 
-        public CheckInRecord() { SignInRecordID = Guid.NewGuid(); InfoFields = new List<CheckInInfoField>(); CheckOutDate = DateTime.MaxValue; Active = true; }
+        public CheckInRecord() { SignInRecordID = Guid.NewGuid(); InfoFields = new List<CheckInInfoField>(); CheckOutDate = DateTime.MaxValue; Active = true; ReplacementRequired = true; }
 
 
         public DateTime CheckInDate { get => _CheckInDate; set => _CheckInDate = value; }
@@ -177,6 +177,7 @@ namespace WF_ICS_ClassLibrary.Models
         public IncidentResource Resource { get => _Resource; private set => _Resource = value; }
         public CheckInRecord Record { get => _Record; private set => _Record = value; }
         public Guid ID { get => _ID; }
+        public Guid SignInRecordID { get => _Record.SignInRecordID; }
         public string ResourceType { get => _Record.ResourceType; }
         public string Kind { get => Resource.Kind; }
         public string Type { get => Resource.Type; }
@@ -185,6 +186,7 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime CheckInDate { get => Record.CheckInDate; }
         public DateTime CheckOutDate { get => Record.CheckOutDate; }
         public DateTime LastDayOnIncident { get { if (Record.LastDayOnIncident < Record.CheckOutDate) { return Record.LastDayOnIncident; } else { return Record.CheckOutDate; } } }
+
         public string ResourceName { get => Resource.ResourceName; }
         public string LeaderName { get => Resource.LeaderName; }
         public string Status { get => _StatusText; set => _StatusText = value; }
@@ -192,6 +194,52 @@ namespace WF_ICS_ClassLibrary.Models
         public string UniqueIDNumWithPrefix { get => _Resource.UniqueIDNumWithPrefix; }
         public string InitialRoleAcronym { get => _Record.InitialRoleAcronym; }
         public string CheckInLocation { get => _Record.CheckInLocation; }
+
+
+        //Used for the resource planning section
+        public bool ReplacementRequired { get => _Record.ReplacementRequired; set => _Record.ReplacementRequired = value; }
+        public DateTime DateReplacementRequired { get => _Record.DateReplacementRequired; set => _Record.DateReplacementRequired = value; }
+        public Guid ReplacementRecordID { get => _Record.ReplacementRecordID; set => _Record.ReplacementRecordID = value; }
+        public string ReplacementComment { get => _Record.ReplacementComment; set => _Record.ReplacementComment = value; }
+        public string HomeUnit
+        {
+            get
+            {
+                if (_Resource.GetType().Name.Equals(new Personnel().GetType().Name))
+                {
+                    return ((Personnel)_Resource).HomeUnit;
+                }
+                else { return string.Empty; }
+            }
+        }
+        public string Transport
+        {
+            get
+            {
+                Guid fieldid = new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89");
+                if (_Record.InfoFields.Any(o => o.ID == fieldid))
+                {
+                    return _Record.InfoFields.First(o => o.ID == fieldid).StringValue;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+        public string ResourceReplacementEditButtonText
+        {
+            get
+            {
+                
+                if (ReplacementRecordID != Guid.Empty) { return "Edit"; }
+                else { return "Create"; }
+            }
+        }
+        public string Assignment { get; set; }
+        public string NameWithAssignment { get => ResourceName + " - " + Assignment; }
+        public string ReplacementOrderNumber { get; set; }
+        public string ReplacementResourceName { get; set; }
 
         public CheckInRecordWithResource() { _ID = Guid.NewGuid(); }
         public CheckInRecordWithResource(CheckInRecord rec, IncidentResource res, DateTime EndOfOp)
@@ -204,6 +252,7 @@ namespace WF_ICS_ClassLibrary.Models
             if (Record.CheckOutDate.Date < EndOfOp.Date || Record.LastDayOnIncident.Date < EndOfOp.Date) { _StatusText = "Checked-Out"; }
             else if (Record.CheckOutDate.Date == EndOfOp.Date) { _StatusText = "Demobilizing"; }
             else { _StatusText = "Active"; }
+
         }
 
         public CheckInRecordWithResource Clone()
@@ -732,6 +781,11 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
+        public static bool HasResourceReplacementPlan(this WFIncident incident, Guid CheckInID, Guid ExcludePlanID = new Guid())
+        {
+            return incident.ActiveResourceReplacementPlans.Any(o=>o.ReplacementForCheckInID == CheckInID && o.ID != ExcludePlanID);
+        }
+
         public static bool CheckedInThisTime(this CheckInRecord rec, DateTime timeToCheck)
         {
             if (rec.CheckInDate <= timeToCheck && rec.CheckOutDate >= timeToCheck && rec.LastDayOnIncident.Date >= timeToCheck.Date) { return true; }
@@ -952,6 +1006,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(8)] private string _CheckInLocation;
         [ProtoMember(9)] private string _Comments;
         [ProtoMember(10)] private Guid _ReplacementForCheckInID;
+        [ProtoMember(11)] private string _ReplacedResourceName;
 
 
         public string ResourceName { get => _ResourceName; set => _ResourceName = value; }
@@ -964,6 +1019,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string CheckInLocation { get => _CheckInLocation; set => _CheckInLocation = value; }
         public string Comments { get => _Comments; set => _Comments = value; }
         public Guid ReplacementForCheckInID { get => _ReplacementForCheckInID; set => _ReplacementForCheckInID = value; }
+        public string ReplacedResourceName { get => _ReplacedResourceName; set => _ReplacedResourceName = value; }
 
 
         public ResourceReplacementPlan Clone()

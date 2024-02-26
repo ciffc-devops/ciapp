@@ -326,6 +326,7 @@
     <Compile Include="CustomControls\CrewEditControl.Designer.cs">
       <DependentUpon>CrewEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\DataGridviewCalendarCell.cs" />
     <Compile Include="CustomControls\DataGridViewDisableButtonCell.cs" />
     <Compile Include="CustomControls\DemobilizationEditControl.cs">
       <SubType>UserControl</SubType>
@@ -516,6 +517,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceReplacementEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceReplacementEditForm.Designer.cs">
+      <DependentUpon>ResourceReplacementEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ResourceReplacementPlanningForm.cs">
       <SubType>Form</SubType>
@@ -941,6 +948,9 @@
     <EmbeddedResource Include="CheckInForm.resx">
       <DependentUpon>CheckInForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceReplacementEditForm.resx">
+      <DependentUpon>ResourceReplacementEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResourceReplacementPlanningForm.resx">
       <DependentUpon>ResourceReplacementPlanningForm.cs</DependentUpon>

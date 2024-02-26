@@ -256,11 +256,12 @@ namespace Wildfire_ICS_Assist
 
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
-           if(_selectedResource != null && resourceCheckInEditControl1.ValidateCheckInInfo())
+            if (_selectedResource != null && resourceCheckInEditControl1.ValidateCheckInInfo())
             {
                 resourceCheckInEditControl1.SaveFormFieldsToCheckIn();
+                if (selectedResource.ResourceType.Equals("Visitor")) { checkInRecord.ReplacementRequired = false; }
+                checkInRecord.DateReplacementRequired = checkInRecord.LastDayOnIncident.AddDays(-1);
 
-                
 
                 checkInRecord = resourceCheckInEditControl1.checkInRecord.Clone();
                 checkInRecord.ResourceID = _selectedResource.ID;
@@ -268,7 +269,7 @@ namespace Wildfire_ICS_Assist
                 this.DialogResult = DialogResult.OK;
                 this.Dispose();
                 this.Close();
-                
+
             }
             /*
             if (selectedMember != null && ValidateCheckInInfo())

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -172,6 +172,8 @@
             this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
             this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
             this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.btnGeneralMessage = new System.Windows.Forms.Button();
+            this.btnReplacementResources = new System.Windows.Forms.Button();
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnNotes = new System.Windows.Forms.Button();
             this.btnShowResources = new System.Windows.Forms.Button();
@@ -263,9 +265,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -1244,6 +1246,8 @@
             this.cpOtherTools.CollapsedHeight = 40;
             this.cpOtherTools.CollapsedWidth = 349;
             this.cpOtherTools.CollapseLeft = true;
+            this.cpOtherTools.Controls.Add(this.btnGeneralMessage);
+            this.cpOtherTools.Controls.Add(this.btnReplacementResources);
             this.cpOtherTools.Controls.Add(this.btnAdditionalContacts);
             this.cpOtherTools.Controls.Add(this.btnNotes);
             this.cpOtherTools.Controls.Add(this.btnShowResources);
@@ -1254,6 +1258,24 @@
             resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
             this.cpOtherTools.Name = "cpOtherTools";
             this.cpOtherTools.TitleText = "Other Tools";
+            // 
+            // btnGeneralMessage
+            // 
+            resources.ApplyResources(this.btnGeneralMessage, "btnGeneralMessage");
+            this.btnGeneralMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnGeneralMessage.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_11_envelope;
+            this.btnGeneralMessage.Name = "btnGeneralMessage";
+            this.btnGeneralMessage.UseVisualStyleBackColor = true;
+            this.btnGeneralMessage.Click += new System.EventHandler(this.btnGeneralMessage_Click);
+            // 
+            // btnReplacementResources
+            // 
+            resources.ApplyResources(this.btnReplacementResources, "btnReplacementResources");
+            this.btnReplacementResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnReplacementResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_46_calendar;
+            this.btnReplacementResources.Name = "btnReplacementResources";
+            this.btnReplacementResources.UseVisualStyleBackColor = true;
+            this.btnReplacementResources.Click += new System.EventHandler(this.btnReplacementResources_Click);
             // 
             // btnAdditionalContacts
             // 
@@ -1577,6 +1599,8 @@
         private System.Windows.Forms.Button btnShowResources;
         private SpellBox txtTaskName;
         private System.Windows.Forms.ToolStripMenuItem tESTToolStripMenuItem;
+        private System.Windows.Forms.Button btnGeneralMessage;
+        private System.Windows.Forms.Button btnReplacementResources;
     }
 }
 

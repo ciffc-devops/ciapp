@@ -284,7 +284,8 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.LastDayOfRest = DateTime.Now.AddDays(-1);
             test.InitialRoleName = string.Empty;
             test.InitialRoleAcronym = "InitialRoleAcronym" + seed;
-
+            test.ReplacementRequired = RandomBooleanGenerator.GetRandomBoolean();
+             test.DateReplacementRequired = test.LastDayOnIncident.AddDays(-1); 
             return test;
         }
 

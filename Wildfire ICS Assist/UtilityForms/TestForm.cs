@@ -125,6 +125,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     {
                         CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + x, "Visitor");
                         testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
+                        testCheckInPersonnel.Record.ReplacementRequired = false;
                         testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 1000);
 
 
