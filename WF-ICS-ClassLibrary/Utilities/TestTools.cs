@@ -169,9 +169,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static Personnel createTestPerson(int seed)
         {
             Personnel test = new Personnel();
-            test.FirstName = "First" + seed;
-            test.LastName = "Last" + seed;
-            test.MiddleInitial = "MI" + seed;
+            test.FirstName = RandomNameGenerator.FirstName;
+            test.LastName = RandomNameGenerator.LastName;
+            test.MiddleInitial = RandomLetterGenerator.GetRandomLetter().ToString();
             test.Gender = "Gender" + seed;
             test.HasDietaryRestrictions =
             test.HasAllergies = RandomBooleanGenerator.GetRandomBoolean();
@@ -282,8 +282,10 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.ResourceType = "ResourceType" + seed;
             test.ParentRecordID = Guid.Empty;
             test.LastDayOfRest = DateTime.Now.AddDays(-1);
-            test.InitialRoleName = string.Empty;
-            test.InitialRoleAcronym = "InitialRoleAcronym" + seed;
+            List<ICSRole> roles = OrgChartTools.GetAllRoles().OrderBy(o=>Guid.NewGuid()).ToList();
+
+            test.InitialRoleName = roles.First().RoleName;
+            test.InitialRoleAcronym = roles.First().Mnemonic;
             test.ReplacementRequired = RandomBooleanGenerator.GetRandomBoolean();
              test.DateReplacementRequired = test.LastDayOnIncident.AddDays(-1); 
             return test;
@@ -299,6 +301,8 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 case "Personnel":
                     resource = createTestPerson(seed);
+                    (resource as Personnel).InitialRoleName = record.InitialRoleName;
+                    (resource as Personnel).InitialRoleAcronym = record.InitialRoleAcronym;
                     break;
                 case "Operator":
                     break;
