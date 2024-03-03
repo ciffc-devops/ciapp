@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvOutgoing = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,6 +74,35 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.calendarColumn2 = new Wildfire_ICS_Assist.CustomControls.CalendarColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewButtonColumn2 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collapsiblePanel2 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.collapsiblePanel3 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.cboIncomingToAsOf = new System.Windows.Forms.ComboBox();
+            this.cboReplacementIdentified = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.datArrivalAsOf = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cboIncomingVariety = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -82,6 +112,14 @@
             this.cpFilters.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpOutgoing.SuspendLayout();
+            this.tpIncoming.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.collapsiblePanel2.SuspendLayout();
+            this.collapsiblePanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -101,8 +139,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.collapsiblePanel1);
             this.splitContainer1.Panel2.Controls.Add(this.btnExportSignInToCSV);
             this.splitContainer1.Panel2.Controls.Add(this.cpFilters);
-            this.splitContainer1.Size = new System.Drawing.Size(1903, 630);
-            this.splitContainer1.SplitterDistance = 1598;
+            this.splitContainer1.Size = new System.Drawing.Size(1191, 630);
+            this.splitContainer1.SplitterDistance = 886;
             this.splitContainer1.TabIndex = 0;
             // 
             // dgvOutgoing
@@ -125,14 +163,14 @@
             this.colReplacementName,
             this.colEdit,
             this.colComments});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOutgoing.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOutgoing.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvOutgoing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOutgoing.Location = new System.Drawing.Point(0, 0);
             this.dgvOutgoing.MultiSelect = false;
@@ -140,7 +178,7 @@
             this.dgvOutgoing.RowHeadersVisible = false;
             this.dgvOutgoing.RowTemplate.Height = 30;
             this.dgvOutgoing.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOutgoing.Size = new System.Drawing.Size(1598, 630);
+            this.dgvOutgoing.Size = new System.Drawing.Size(886, 630);
             this.dgvOutgoing.TabIndex = 0;
             this.dgvOutgoing.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOutgoing_CellContentClick);
             this.dgvOutgoing.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOutgoing_CellEndEdit);
@@ -473,7 +511,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1917, 673);
+            this.tabControl1.Size = new System.Drawing.Size(1205, 673);
             this.tabControl1.TabIndex = 1;
             // 
             // tpOutgoing
@@ -482,19 +520,20 @@
             this.tpOutgoing.Location = new System.Drawing.Point(4, 33);
             this.tpOutgoing.Name = "tpOutgoing";
             this.tpOutgoing.Padding = new System.Windows.Forms.Padding(3);
-            this.tpOutgoing.Size = new System.Drawing.Size(1909, 636);
+            this.tpOutgoing.Size = new System.Drawing.Size(1197, 636);
             this.tpOutgoing.TabIndex = 0;
-            this.tpOutgoing.Text = "Outgoing";
+            this.tpOutgoing.Text = "Outgoing Resources";
             this.tpOutgoing.UseVisualStyleBackColor = true;
             // 
             // tpIncoming
             // 
+            this.tpIncoming.Controls.Add(this.splitContainer2);
             this.tpIncoming.Location = new System.Drawing.Point(4, 33);
             this.tpIncoming.Name = "tpIncoming";
             this.tpIncoming.Padding = new System.Windows.Forms.Padding(3);
-            this.tpIncoming.Size = new System.Drawing.Size(1909, 636);
+            this.tpIncoming.Size = new System.Drawing.Size(1197, 636);
             this.tpIncoming.TabIndex = 1;
-            this.tpIncoming.Text = "Incoming";
+            this.tpIncoming.Text = "Incoming Resources";
             this.tpIncoming.UseVisualStyleBackColor = true;
             // 
             // dataGridViewTextBoxColumn1
@@ -602,11 +641,386 @@
             this.dataGridViewTextBoxColumn10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer2.IsSplitterFixed = true;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.dataGridView1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.button1);
+            this.splitContainer2.Panel2.Controls.Add(this.collapsiblePanel3);
+            this.splitContainer2.Panel2.Controls.Add(this.collapsiblePanel2);
+            this.splitContainer2.Size = new System.Drawing.Size(1191, 630);
+            this.splitContainer2.SplitterDistance = 886;
+            this.splitContainer2.TabIndex = 1;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewCheckBoxColumn1,
+            this.calendarColumn2,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewButtonColumn2,
+            this.dataGridViewTextBoxColumn20});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 30;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(886, 630);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "ResourceName";
+            this.dataGridViewTextBoxColumn11.Frozen = true;
+            this.dataGridViewTextBoxColumn11.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.Width = 86;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "Kind";
+            this.dataGridViewTextBoxColumn12.HeaderText = "Kind";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "Assignment";
+            this.dataGridViewTextBoxColumn13.HeaderText = "Assignment";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.dataGridViewTextBoxColumn13.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "LastDayOnIncident";
+            this.dataGridViewTextBoxColumn14.HeaderText = "Last Day";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.Width = 105;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "DaysTillTimeOut";
+            this.dataGridViewTextBoxColumn15.HeaderText = "Day #";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.Width = 82;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "HomeUnit";
+            this.dataGridViewTextBoxColumn16.HeaderText = "Home";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            this.dataGridViewTextBoxColumn16.Width = 130;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "Transport";
+            this.dataGridViewTextBoxColumn17.HeaderText = "Transport";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            this.dataGridViewTextBoxColumn17.Width = 150;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.dataGridViewCheckBoxColumn1.DataPropertyName = "ReplacementRequired";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "Req\'d";
+            this.dataGridViewCheckBoxColumn1.MinimumWidth = 75;
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.Width = 75;
+            // 
+            // calendarColumn2
+            // 
+            this.calendarColumn2.DataPropertyName = "DateReplacementRequired";
+            this.calendarColumn2.HeaderText = "Date Req\'d";
+            this.calendarColumn2.Name = "calendarColumn2";
+            this.calendarColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.calendarColumn2.Width = 160;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "ReplacementOrderNumber";
+            this.dataGridViewTextBoxColumn18.HeaderText = "Order #";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            this.dataGridViewTextBoxColumn18.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn18.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "ReplacementResourceName";
+            this.dataGridViewTextBoxColumn19.HeaderText = "Replacement";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            this.dataGridViewTextBoxColumn19.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn19.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn19.Width = 128;
+            // 
+            // dataGridViewButtonColumn2
+            // 
+            this.dataGridViewButtonColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewButtonColumn2.DataPropertyName = "ResourceReplacementEditButtonText";
+            this.dataGridViewButtonColumn2.HeaderText = "";
+            this.dataGridViewButtonColumn2.Name = "dataGridViewButtonColumn2";
+            this.dataGridViewButtonColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewButtonColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewButtonColumn2.Text = "Edit";
+            this.dataGridViewButtonColumn2.Width = 19;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "ReplacementComment";
+            this.dataGridViewTextBoxColumn20.HeaderText = "Comments";
+            this.dataGridViewTextBoxColumn20.MinimumWidth = 150;
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            this.dataGridViewTextBoxColumn20.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn20.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // collapsiblePanel2
+            // 
+            this.collapsiblePanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel2.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.collapsiblePanel2.CollapsedHeight = 40;
+            this.collapsiblePanel2.CollapsedWidth = 290;
+            this.collapsiblePanel2.CollapseLeft = true;
+            this.collapsiblePanel2.Controls.Add(this.label4);
+            this.collapsiblePanel2.Controls.Add(this.label5);
+            this.collapsiblePanel2.Controls.Add(this.label6);
+            this.collapsiblePanel2.Controls.Add(this.label7);
+            this.collapsiblePanel2.CurrentlyCollapsed = true;
+            this.collapsiblePanel2.ExpandedHeight = 196;
+            this.collapsiblePanel2.ExpandedWidth = 290;
+            this.collapsiblePanel2.ExpandUp = false;
+            this.collapsiblePanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.collapsiblePanel2.Location = new System.Drawing.Point(6, 327);
+            this.collapsiblePanel2.Margin = new System.Windows.Forms.Padding(6);
+            this.collapsiblePanel2.Name = "collapsiblePanel2";
+            this.collapsiblePanel2.Size = new System.Drawing.Size(290, 40);
+            this.collapsiblePanel2.TabIndex = 56;
+            this.collapsiblePanel2.TitleText = "Legend";
+            this.collapsiblePanel2.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Red;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.label4.Location = new System.Drawing.Point(15, 157);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(254, 31);
+            this.label4.TabIndex = 55;
+            this.label4.Text = "red";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Yellow;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.label5.Location = new System.Drawing.Point(15, 119);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(254, 31);
+            this.label5.TabIndex = 54;
+            this.label5.Text = "yellow";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label6
+            // 
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.label6.Location = new System.Drawing.Point(15, 43);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(254, 31);
+            this.label6.TabIndex = 52;
+            this.label6.Text = "A replacement is planned";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.label7.Location = new System.Drawing.Point(15, 81);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(254, 31);
+            this.label7.TabIndex = 53;
+            this.label7.Text = "No replacement needed";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // button1
+            // 
+            this.button1.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.Location = new System.Drawing.Point(6, 532);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(214, 48);
+            this.button1.TabIndex = 51;
+            this.button1.Text = "Export to CSV";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // collapsiblePanel3
+            // 
+            this.collapsiblePanel3.BackColor = System.Drawing.Color.White;
+            this.collapsiblePanel3.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.collapsiblePanel3.CollapsedHeight = 40;
+            this.collapsiblePanel3.CollapsedWidth = 290;
+            this.collapsiblePanel3.CollapseLeft = true;
+            this.collapsiblePanel3.Controls.Add(this.cboIncomingToAsOf);
+            this.collapsiblePanel3.Controls.Add(this.cboReplacementIdentified);
+            this.collapsiblePanel3.Controls.Add(this.label8);
+            this.collapsiblePanel3.Controls.Add(this.datArrivalAsOf);
+            this.collapsiblePanel3.Controls.Add(this.label9);
+            this.collapsiblePanel3.Controls.Add(this.cboIncomingVariety);
+            this.collapsiblePanel3.Controls.Add(this.label10);
+            this.collapsiblePanel3.CurrentlyCollapsed = false;
+            this.collapsiblePanel3.ExpandedHeight = 300;
+            this.collapsiblePanel3.ExpandedWidth = 290;
+            this.collapsiblePanel3.ExpandUp = false;
+            this.collapsiblePanel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.collapsiblePanel3.Location = new System.Drawing.Point(6, 15);
+            this.collapsiblePanel3.Margin = new System.Windows.Forms.Padding(6);
+            this.collapsiblePanel3.Name = "collapsiblePanel3";
+            this.collapsiblePanel3.Size = new System.Drawing.Size(290, 300);
+            this.collapsiblePanel3.TabIndex = 1;
+            this.collapsiblePanel3.TitleText = "Filter List";
+            // 
+            // cboIncomingToAsOf
+            // 
+            this.cboIncomingToAsOf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboIncomingToAsOf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.cboIncomingToAsOf.FormattingEnabled = true;
+            this.cboIncomingToAsOf.Items.AddRange(new object[] {
+            "As of...",
+            "On..."});
+            this.cboIncomingToAsOf.Location = new System.Drawing.Point(3, 144);
+            this.cboIncomingToAsOf.Name = "cboIncomingToAsOf";
+            this.cboIncomingToAsOf.Size = new System.Drawing.Size(280, 32);
+            this.cboIncomingToAsOf.TabIndex = 97;
+            // 
+            // cboReplacementIdentified
+            // 
+            this.cboReplacementIdentified.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboReplacementIdentified.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboReplacementIdentified.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.cboReplacementIdentified.FormattingEnabled = true;
+            this.cboReplacementIdentified.Items.AddRange(new object[] {
+            "All Incoming Resources",
+            "Resources Without Replacement",
+            "Resources With Replacement"});
+            this.cboReplacementIdentified.Location = new System.Drawing.Point(8, 252);
+            this.cboReplacementIdentified.Name = "cboReplacementIdentified";
+            this.cboReplacementIdentified.Size = new System.Drawing.Size(276, 32);
+            this.cboReplacementIdentified.TabIndex = 96;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.label8.Location = new System.Drawing.Point(4, 225);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(202, 24);
+            this.label8.TabIndex = 95;
+            this.label8.Text = "Replacement Identified";
+            // 
+            // datArrivalAsOf
+            // 
+            this.datArrivalAsOf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.datArrivalAsOf.Location = new System.Drawing.Point(3, 182);
+            this.datArrivalAsOf.Name = "datArrivalAsOf";
+            this.datArrivalAsOf.Size = new System.Drawing.Size(280, 29);
+            this.datArrivalAsOf.TabIndex = 94;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.label9.Location = new System.Drawing.Point(3, 117);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(136, 24);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "Est Arrival Date";
+            // 
+            // cboIncomingVariety
+            // 
+            this.cboIncomingVariety.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboIncomingVariety.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboIncomingVariety.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.cboIncomingVariety.FormattingEnabled = true;
+            this.cboIncomingVariety.Items.AddRange(new object[] {
+            "All Resources",
+            "Personnel",
+            "Visitor",
+            "Vehicle",
+            "Equipment",
+            "Operator",
+            "Crew"});
+            this.cboIncomingVariety.Location = new System.Drawing.Point(7, 71);
+            this.cboIncomingVariety.Name = "cboIncomingVariety";
+            this.cboIncomingVariety.Size = new System.Drawing.Size(276, 32);
+            this.cboIncomingVariety.TabIndex = 34;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.label10.Location = new System.Drawing.Point(3, 44);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(154, 24);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "Resource Variety";
+            // 
             // ResourceReplacementPlanningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1917, 673);
+            this.ClientSize = new System.Drawing.Size(1205, 673);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -624,6 +1038,15 @@
             this.cpFilters.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tpOutgoing.ResumeLayout(false);
+            this.tpIncoming.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.collapsiblePanel2.ResumeLayout(false);
+            this.collapsiblePanel3.ResumeLayout(false);
+            this.collapsiblePanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -674,5 +1097,34 @@
         private System.Windows.Forms.Label lblLegendResourceYellow;
         private CustomControls.CollapsiblePanel collapsiblePanel1;
         private System.Windows.Forms.ComboBox cboLastDayAsOf;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private CustomControls.CalendarColumn calendarColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewButtonColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private CustomControls.CollapsiblePanel collapsiblePanel2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button1;
+        private CustomControls.CollapsiblePanel collapsiblePanel3;
+        private System.Windows.Forms.ComboBox cboIncomingToAsOf;
+        private System.Windows.Forms.ComboBox cboReplacementIdentified;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker datArrivalAsOf;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cboIncomingVariety;
+        private System.Windows.Forms.Label label10;
     }
 }
