@@ -44,8 +44,14 @@
             this.colReplacementName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.lblReplacementResourceRed = new System.Windows.Forms.Label();
+            this.lblLegendResourceYellow = new System.Windows.Forms.Label();
+            this.lblLegendReplacementPlanned = new System.Windows.Forms.Label();
+            this.lblLegendNoReplacementNeeded = new System.Windows.Forms.Label();
             this.btnExportSignInToCSV = new System.Windows.Forms.Button();
             this.cpFilters = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.cboLastDayAsOf = new System.Windows.Forms.ComboBox();
             this.cboReplacementReqdFilter = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.datLastDayFilter = new System.Windows.Forms.DateTimePicker();
@@ -72,6 +78,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutgoing)).BeginInit();
+            this.collapsiblePanel1.SuspendLayout();
             this.cpFilters.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpOutgoing.SuspendLayout();
@@ -91,9 +98,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.collapsiblePanel1);
             this.splitContainer1.Panel2.Controls.Add(this.btnExportSignInToCSV);
             this.splitContainer1.Panel2.Controls.Add(this.cpFilters);
-            this.splitContainer1.Size = new System.Drawing.Size(1903, 491);
+            this.splitContainer1.Size = new System.Drawing.Size(1903, 630);
             this.splitContainer1.SplitterDistance = 1598;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -132,7 +140,7 @@
             this.dgvOutgoing.RowHeadersVisible = false;
             this.dgvOutgoing.RowTemplate.Height = 30;
             this.dgvOutgoing.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOutgoing.Size = new System.Drawing.Size(1598, 491);
+            this.dgvOutgoing.Size = new System.Drawing.Size(1598, 630);
             this.dgvOutgoing.TabIndex = 0;
             this.dgvOutgoing.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOutgoing_CellContentClick);
             this.dgvOutgoing.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOutgoing_CellEndEdit);
@@ -257,11 +265,81 @@
             this.colComments.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colComments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // collapsiblePanel1
+            // 
+            this.collapsiblePanel1.BackColor = System.Drawing.Color.White;
+            this.collapsiblePanel1.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.collapsiblePanel1.CollapsedHeight = 40;
+            this.collapsiblePanel1.CollapsedWidth = 485;
+            this.collapsiblePanel1.CollapseLeft = true;
+            this.collapsiblePanel1.Controls.Add(this.lblReplacementResourceRed);
+            this.collapsiblePanel1.Controls.Add(this.lblLegendResourceYellow);
+            this.collapsiblePanel1.Controls.Add(this.lblLegendReplacementPlanned);
+            this.collapsiblePanel1.Controls.Add(this.lblLegendNoReplacementNeeded);
+            this.collapsiblePanel1.CurrentlyCollapsed = false;
+            this.collapsiblePanel1.ExpandedHeight = 196;
+            this.collapsiblePanel1.ExpandedWidth = 290;
+            this.collapsiblePanel1.ExpandUp = false;
+            this.collapsiblePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.collapsiblePanel1.Location = new System.Drawing.Point(6, 327);
+            this.collapsiblePanel1.Margin = new System.Windows.Forms.Padding(6);
+            this.collapsiblePanel1.Name = "collapsiblePanel1";
+            this.collapsiblePanel1.Size = new System.Drawing.Size(290, 196);
+            this.collapsiblePanel1.TabIndex = 56;
+            this.collapsiblePanel1.TitleText = "Legend";
+            // 
+            // lblReplacementResourceRed
+            // 
+            this.lblReplacementResourceRed.BackColor = System.Drawing.Color.Red;
+            this.lblReplacementResourceRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblReplacementResourceRed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.lblReplacementResourceRed.Location = new System.Drawing.Point(15, 157);
+            this.lblReplacementResourceRed.Name = "lblReplacementResourceRed";
+            this.lblReplacementResourceRed.Size = new System.Drawing.Size(254, 31);
+            this.lblReplacementResourceRed.TabIndex = 55;
+            this.lblReplacementResourceRed.Text = "red";
+            this.lblReplacementResourceRed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLegendResourceYellow
+            // 
+            this.lblLegendResourceYellow.BackColor = System.Drawing.Color.Yellow;
+            this.lblLegendResourceYellow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLegendResourceYellow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.lblLegendResourceYellow.Location = new System.Drawing.Point(15, 119);
+            this.lblLegendResourceYellow.Name = "lblLegendResourceYellow";
+            this.lblLegendResourceYellow.Size = new System.Drawing.Size(254, 31);
+            this.lblLegendResourceYellow.TabIndex = 54;
+            this.lblLegendResourceYellow.Text = "yellow";
+            this.lblLegendResourceYellow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLegendReplacementPlanned
+            // 
+            this.lblLegendReplacementPlanned.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLegendReplacementPlanned.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.lblLegendReplacementPlanned.Location = new System.Drawing.Point(15, 43);
+            this.lblLegendReplacementPlanned.Name = "lblLegendReplacementPlanned";
+            this.lblLegendReplacementPlanned.Size = new System.Drawing.Size(254, 31);
+            this.lblLegendReplacementPlanned.TabIndex = 52;
+            this.lblLegendReplacementPlanned.Text = "A replacement is planned";
+            this.lblLegendReplacementPlanned.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLegendNoReplacementNeeded
+            // 
+            this.lblLegendNoReplacementNeeded.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLegendNoReplacementNeeded.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.lblLegendNoReplacementNeeded.Location = new System.Drawing.Point(15, 81);
+            this.lblLegendNoReplacementNeeded.Name = "lblLegendNoReplacementNeeded";
+            this.lblLegendNoReplacementNeeded.Size = new System.Drawing.Size(254, 31);
+            this.lblLegendNoReplacementNeeded.TabIndex = 53;
+            this.lblLegendNoReplacementNeeded.Text = "No replacement needed";
+            this.lblLegendNoReplacementNeeded.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // btnExportSignInToCSV
             // 
             this.btnExportSignInToCSV.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
             this.btnExportSignInToCSV.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportSignInToCSV.Location = new System.Drawing.Point(14, 438);
+            this.btnExportSignInToCSV.Location = new System.Drawing.Point(6, 532);
             this.btnExportSignInToCSV.Name = "btnExportSignInToCSV";
             this.btnExportSignInToCSV.Size = new System.Drawing.Size(214, 48);
             this.btnExportSignInToCSV.TabIndex = 51;
@@ -277,6 +355,7 @@
             this.cpFilters.CollapsedHeight = 40;
             this.cpFilters.CollapsedWidth = 290;
             this.cpFilters.CollapseLeft = true;
+            this.cpFilters.Controls.Add(this.cboLastDayAsOf);
             this.cpFilters.Controls.Add(this.cboReplacementReqdFilter);
             this.cpFilters.Controls.Add(this.label3);
             this.cpFilters.Controls.Add(this.datLastDayFilter);
@@ -284,16 +363,30 @@
             this.cpFilters.Controls.Add(this.cboResourceVariety);
             this.cpFilters.Controls.Add(this.label1);
             this.cpFilters.CurrentlyCollapsed = false;
-            this.cpFilters.ExpandedHeight = 322;
+            this.cpFilters.ExpandedHeight = 300;
             this.cpFilters.ExpandedWidth = 290;
             this.cpFilters.ExpandUp = false;
             this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpFilters.Location = new System.Drawing.Point(6, 15);
             this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
             this.cpFilters.Name = "cpFilters";
-            this.cpFilters.Size = new System.Drawing.Size(290, 322);
+            this.cpFilters.Size = new System.Drawing.Size(290, 300);
             this.cpFilters.TabIndex = 1;
             this.cpFilters.TitleText = "Filter List";
+            // 
+            // cboLastDayAsOf
+            // 
+            this.cboLastDayAsOf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLastDayAsOf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.cboLastDayAsOf.FormattingEnabled = true;
+            this.cboLastDayAsOf.Items.AddRange(new object[] {
+            "As of...",
+            "On..."});
+            this.cboLastDayAsOf.Location = new System.Drawing.Point(3, 144);
+            this.cboLastDayAsOf.Name = "cboLastDayAsOf";
+            this.cboLastDayAsOf.Size = new System.Drawing.Size(280, 32);
+            this.cboLastDayAsOf.TabIndex = 97;
+            this.cboLastDayAsOf.SelectedIndexChanged += new System.EventHandler(this.cboLastDayAsOf_SelectedIndexChanged);
             // 
             // cboReplacementReqdFilter
             // 
@@ -306,7 +399,7 @@
             "All Resources",
             "All Replacement Required",
             "Replacements Outstanding"});
-            this.cboReplacementReqdFilter.Location = new System.Drawing.Point(7, 204);
+            this.cboReplacementReqdFilter.Location = new System.Drawing.Point(8, 252);
             this.cboReplacementReqdFilter.Name = "cboReplacementReqdFilter";
             this.cboReplacementReqdFilter.Size = new System.Drawing.Size(276, 32);
             this.cboReplacementReqdFilter.TabIndex = 96;
@@ -316,7 +409,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.label3.Location = new System.Drawing.Point(3, 177);
+            this.label3.Location = new System.Drawing.Point(4, 225);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(177, 24);
             this.label3.TabIndex = 95;
@@ -325,7 +418,7 @@
             // datLastDayFilter
             // 
             this.datLastDayFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.datLastDayFilter.Location = new System.Drawing.Point(3, 133);
+            this.datLastDayFilter.Location = new System.Drawing.Point(3, 182);
             this.datLastDayFilter.Name = "datLastDayFilter";
             this.datLastDayFilter.Size = new System.Drawing.Size(280, 29);
             this.datLastDayFilter.TabIndex = 94;
@@ -335,7 +428,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.label2.Location = new System.Drawing.Point(3, 106);
+            this.label2.Location = new System.Drawing.Point(3, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 24);
             this.label2.TabIndex = 35;
@@ -380,7 +473,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1917, 534);
+            this.tabControl1.Size = new System.Drawing.Size(1917, 673);
             this.tabControl1.TabIndex = 1;
             // 
             // tpOutgoing
@@ -389,7 +482,7 @@
             this.tpOutgoing.Location = new System.Drawing.Point(4, 33);
             this.tpOutgoing.Name = "tpOutgoing";
             this.tpOutgoing.Padding = new System.Windows.Forms.Padding(3);
-            this.tpOutgoing.Size = new System.Drawing.Size(1909, 497);
+            this.tpOutgoing.Size = new System.Drawing.Size(1909, 636);
             this.tpOutgoing.TabIndex = 0;
             this.tpOutgoing.Text = "Outgoing";
             this.tpOutgoing.UseVisualStyleBackColor = true;
@@ -399,7 +492,7 @@
             this.tpIncoming.Location = new System.Drawing.Point(4, 33);
             this.tpIncoming.Name = "tpIncoming";
             this.tpIncoming.Padding = new System.Windows.Forms.Padding(3);
-            this.tpIncoming.Size = new System.Drawing.Size(1909, 497);
+            this.tpIncoming.Size = new System.Drawing.Size(1909, 636);
             this.tpIncoming.TabIndex = 1;
             this.tpIncoming.Text = "Incoming";
             this.tpIncoming.UseVisualStyleBackColor = true;
@@ -513,7 +606,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1917, 534);
+            this.ClientSize = new System.Drawing.Size(1917, 673);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -526,6 +619,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutgoing)).EndInit();
+            this.collapsiblePanel1.ResumeLayout(false);
             this.cpFilters.ResumeLayout(false);
             this.cpFilters.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -574,5 +668,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.Label lblLegendNoReplacementNeeded;
+        private System.Windows.Forms.Label lblLegendReplacementPlanned;
+        private System.Windows.Forms.Label lblReplacementResourceRed;
+        private System.Windows.Forms.Label lblLegendResourceYellow;
+        private CustomControls.CollapsiblePanel collapsiblePanel1;
+        private System.Windows.Forms.ComboBox cboLastDayAsOf;
     }
 }

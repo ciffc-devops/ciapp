@@ -43,16 +43,25 @@ namespace Wildfire_ICS_Assist
             dgvOutgoing.Columns[12].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
         }
+        static int YellowNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("YellowResourceTimeoutDays"));
+        static int RedNumber = Convert.ToInt32(Program.generalOptionsService.GetOptionsValue("RedResourceTimeoutDays"));
 
         private void ResourceReplacementPlanningForm_Load(object sender, EventArgs e)
         {
             cboResourceVariety.SelectedIndex = 0;
             cboReplacementReqdFilter.SelectedIndex = 0;
+            cboLastDayAsOf.SelectedIndex = 0;
             datLastDayFilter.Value = DateTime.Now.AddDays(14);
             BuildResourceList(getFilters());
 
             Program.wfIncidentService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
             Program.wfIncidentService.MemberSignInChanged += WfIncidentService_MemberSignInChanged;
+
+            lblLegendNoReplacementNeeded.BackColor = Color.Gray;
+            lblLegendReplacementPlanned.BackColor = Program.GoodColor;
+            lblLegendResourceYellow.Text = "Resource leaving in " + YellowNumber + " days";
+            lblReplacementResourceRed.Text = "Resource leaving in " + RedNumber + " days";
+
         }
 
         private void WfIncidentService_MemberSignInChanged(WF_ICS_ClassLibrary.EventHandling.CheckInEventArgs e)
@@ -115,7 +124,13 @@ namespace Wildfire_ICS_Assist
 
 
             //last day as of
-            checkInRecords = checkInRecords.Where(o => o.LastDayOnIncident.Date <= filters.LastDayAsOf.Date && o.LastDayOnIncident.Date >= filters.StillInAsOf.Date).ToList();
+            if (filters.LastDayIsOrAsOf == 0)
+            {
+                checkInRecords = checkInRecords.Where(o => o.LastDayOnIncident.Date <= filters.LastDayAsOf.Date && o.LastDayOnIncident.Date >= filters.StillInAsOf.Date).ToList();
+            } else if (filters.LastDayIsOrAsOf == 1)
+            {
+                checkInRecords = checkInRecords.Where(o => o.LastDayOnIncident.Date == filters.LastDayAsOf.Date ).ToList();
+            }
 
             //get replacement info
             foreach(CheckInRecordWithResource rec in checkInRecords) { 
@@ -173,7 +188,19 @@ namespace Wildfire_ICS_Assist
                 }
                 else if (item.ReplacementRequired && item.ReplacementRecordID == Guid.Empty)
                 {
-                    row.DefaultCellStyle.BackColor = Color.White;
+                    if (item.DaysTillTimeOut <= RedNumber)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                    else if (item.DaysTillTimeOut <= YellowNumber)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White;
+                    }
+                    
                     row.DefaultCellStyle.Font = f;
                 }
                 else
@@ -192,6 +219,7 @@ namespace Wildfire_ICS_Assist
             public DateTime MidPoint { get; set; }
             public DateTime LastDayAsOf { get; set; } //only view resources who will be timing out as of this date (usually 2 weeks from today)
             public DateTime StillInAsOf { get; set; } //Only view resources who are still on incident as of this date (usually today)
+            public int LastDayIsOrAsOf { get; set; } = 0; //= 0 As Of, 1 = On
         }
 
         private FilterSettings getFilters()
@@ -201,6 +229,7 @@ namespace Wildfire_ICS_Assist
             filters.LastDayAsOf = datLastDayFilter.Value;
             filters.ResourceVariety = cboResourceVariety.SelectedIndex;
             filters.ResourceVarietyName = cboResourceVariety.Text;
+            filters.LastDayIsOrAsOf = cboLastDayAsOf.SelectedIndex;
             filters.ReplacementRequirement = cboReplacementReqdFilter.SelectedIndex ;
             return filters;
         }
@@ -262,6 +291,13 @@ namespace Wildfire_ICS_Assist
 
                 CellEditingInProgress = false;
             }
+        }
+
+        private void cboLastDayAsOf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuildResourceList(getFilters());
+
+
         }
     }
 }
