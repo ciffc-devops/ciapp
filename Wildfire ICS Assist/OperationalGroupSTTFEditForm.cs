@@ -95,7 +95,7 @@ namespace Wildfire_ICS_Assist
             mems.AddRange(members);
             cboSupervisor.DataSource = mems;
             cboSupervisor.ValueMember = "PersonID";
-            cboSupervisor.DisplayMember = "Name";
+            cboSupervisor.DisplayMember = "NameWithInitialRoleAcronym";
         }
 
         private void cboReportsTo_Leave(object sender, EventArgs e)

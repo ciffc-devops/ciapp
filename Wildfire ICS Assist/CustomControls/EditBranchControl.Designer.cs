@@ -151,7 +151,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSupervisor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboSupervisor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboSupervisor.DisplayMember = "Name";
+            this.cboSupervisor.DisplayMember = "NameWithInitialRoleAcronym";
             this.cboSupervisor.FormattingEnabled = true;
             this.cboSupervisor.Location = new System.Drawing.Point(194, 156);
             this.cboSupervisor.Name = "cboSupervisor";

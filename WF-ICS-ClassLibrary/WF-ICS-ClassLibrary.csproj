@@ -181,7 +181,7 @@
     <Compile Include="Utilities\GISTools.cs" />
     <Compile Include="Utilities\ImageTools.cs" />
     <Compile Include="Utilities\IncidentTools.cs" />
-    <Compile Include="Utilities\RandomBooleanGenerator.cs" />
+    <Compile Include="Utilities\RandomGenerators.cs" />
     <Compile Include="Utilities\StringExt.cs" />
     <Compile Include="Utilities\TestTools.cs" />
   </ItemGroup>

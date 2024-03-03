@@ -57,7 +57,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 mems.AddRange(members);
                 cboSupervisor.DataSource = mems;
                 cboSupervisor.ValueMember = "PersonID";
-                cboSupervisor.DisplayMember = "Name";
+                cboSupervisor.DisplayMember = "NameWithInitialRoleAcronym";
             }
 
 

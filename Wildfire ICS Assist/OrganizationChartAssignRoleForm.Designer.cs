@@ -112,7 +112,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSavedMembers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboSavedMembers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboSavedMembers.DisplayMember = "Name";
+            this.cboSavedMembers.DisplayMember = "NameWithInitialRoleAcronym";
             this.cboSavedMembers.FormattingEnabled = true;
             this.cboSavedMembers.Location = new System.Drawing.Point(8, 41);
             this.cboSavedMembers.Name = "cboSavedMembers";

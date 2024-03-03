@@ -265,7 +265,12 @@ namespace Wildfire_ICS_Assist
 
                 checkInRecord = resourceCheckInEditControl1.checkInRecord.Clone();
                 checkInRecord.ResourceID = _selectedResource.ID;
+                if(selectedResource.GetType().Name.Equals(new Personnel().GetType().Name))
+                {
+                    (selectedResource as Personnel).InitialRoleAcronym = checkInRecord.InitialRoleAcronym;
+                    (selectedResource as Personnel).InitialRoleName = checkInRecord.InitialRoleName;
 
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Dispose();
                 this.Close();

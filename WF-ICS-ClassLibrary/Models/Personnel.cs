@@ -53,6 +53,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(16)] private string _CallSign;
         [ProtoMember(17)] private string _Pronouns; 
         [ProtoMember(18)] private string _AccomodationPreference;
+        [ProtoMember(19)] private string _InitialRoleName;
+        [ProtoMember(20)] private string _InitialRoleAcronym;
+
 
 
 
@@ -86,6 +89,18 @@ namespace WF_ICS_ClassLibrary.Models
         public string Pronouns { get => _Pronouns; set => _Pronouns = value; }
         public string AccomodationPreference { get => _AccomodationPreference; set => _AccomodationPreference = value; }
         public int PNum { get => UniqueIDNum; set => UniqueIDNum = value; }
+        public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
+        public string InitialRoleAcronym { get => _InitialRoleAcronym; set => _InitialRoleAcronym = value; }
+        public string NameWithInitialRoleAcronym
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Name);
+                if (!string.IsNullOrEmpty(InitialRoleAcronym)) { sb.Append(" (initial: "); sb.Append(InitialRoleAcronym); sb.Append(")"); }
+                return sb.ToString();
+            }
+        }
 
         private void SetName()
         {
