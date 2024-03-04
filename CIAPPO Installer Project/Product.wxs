@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="AC9C5B03-CBD2-463E-8E2F-282647D9F5BF" Name="Canadian Incident Action Plan Program" Language="1033" Version="1.0.2.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
+	<Product Id="dc23377b-6bea-4eee-b82b-95f048c77680" Name="Canadian Incident Action Plan Program" Language="1033" Version="1.0.3.0" Manufacturer="CIFFC" UpgradeCode="14f3f8c0-721f-4c77-9daa-d33b6accf00d">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"  Keywords='Installer' Description="CIFFC Incident Action Plan Program Installer"
          Manufacturer='CIFFC' />
 
@@ -29,11 +29,11 @@
 
 		
 		</Feature>
-		
-		
-		<PropertyRef Id="WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED"/>
-		<Condition Message='This setup requires the .NET Framework 4.7 or later installed.'>
-			<![CDATA[Installed OR WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED]]>
+
+
+		<PropertyRef Id="WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED" />
+		<Condition Message="[ProductName] Requires .NET Framework 4.7 or later to be installed">
+			<![CDATA[Installed OR (WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED AND WIX_IS_NETFRAMEWORK_472_OR_LATER_INSTALLED >= "#461808")]]>
 		</Condition>
 		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
 		
