@@ -34,7 +34,7 @@ namespace Wildfire_ICS_Assist
         {
             LoadKindList();
             LoadReplacingList();
-
+            cboVariety.Text = plan.ResourceVariety;
             txtName.SetText(plan.ResourceName);
            cboKind.Text = plan.Kind;
             txtAssignment.Text = plan.Assignment;
@@ -102,6 +102,14 @@ namespace Wildfire_ICS_Assist
             {
                 kinds = Program.CurrentIncident.AllIncidentResources.GroupBy(o => o.Kind).Select(o => o.First().Kind).ToList();
             }
+
+            List<string> planKinds = new List<string>();
+            if (Program.CurrentIncident.AllResourceReplacementPlans.Any())
+            {
+                planKinds = Program.CurrentIncident.AllResourceReplacementPlans.GroupBy(o => o.Kind).Select(o => o.First().Kind).ToList();
+            }
+            foreach(string s in planKinds) { if (!kinds.Contains(s)) { kinds.Add(s); } }
+            kinds = kinds.OrderBy(o => o).ToList();
             cboKind.DataSource = kinds;
         }
         private void ResourceReplacementEditForm_Load(object sender, EventArgs e)
@@ -128,6 +136,7 @@ namespace Wildfire_ICS_Assist
                 plan.EstimatedArrival = datArrival.Value;
                 plan.HomeArea = txtHomeArea.Text;
                 plan.Transportation = cboTransportation.Text;
+                plan.ResourceVariety = cboVariety.Text;
                 //replacing
                 if(cboReplacing.SelectedItem != null)
                 {

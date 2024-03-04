@@ -210,7 +210,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.OperatorID = Guid.Empty;
             test.ASE = "ASE" + seed;
             test.Kind = "Kind" + seed;
-            test.Type = "Type" + seed;
+            test.Type = "Type" + random.Next(1, 4);
             test.IsEquipment = RandomBooleanGenerator.GetRandomBoolean();
             return test;
 
@@ -286,7 +286,8 @@ namespace WF_ICS_ClassLibrary.Utilities
 
             test.InitialRoleName = roles.First().RoleName;
             test.InitialRoleAcronym = roles.First().Mnemonic;
-            test.ReplacementRequired = RandomBooleanGenerator.GetRandomBoolean();
+            int rnd = random.Next(4);
+            test.ReplacementRequired = rnd < 3;
              test.DateReplacementRequired = test.LastDayOnIncident.AddDays(-1); 
             return test;
         }

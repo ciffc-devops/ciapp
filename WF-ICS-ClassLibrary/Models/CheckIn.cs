@@ -325,12 +325,62 @@ namespace WF_ICS_ClassLibrary.Models
             }
             return csv.ToString();
         }
+        public static string ExportIncomingResources(List<ResourceReplacementPlan> records, ResourceReplacementFilterSettings filters, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            csv.Append("INCOMING");
+            csv.Append(Environment.NewLine);
+
+            csv.Append("Estimated Arrival On Incident");
+            if (filters.LastDayIsOrAsOf == 0) { csv.Append(" as of"); }
+            else { csv.Append(" is "); }
+            csv.Append(delimiter);
+            csv.Append(filters.LastDayAsOf.ToString(Globals.DateFormat));
+            csv.Append(Environment.NewLine);
 
 
 
-    
 
-    public static int[,] GetMealRequirementsSummary(this List<CheckInRecordWithResource> list)
+            csv.Append("Name"); csv.Append(delimiter);
+            csv.Append("Kind of Resource"); csv.Append(delimiter);
+            csv.Append("Assignment"); csv.Append(delimiter);
+            csv.Append("Estimated Arrival"); csv.Append(delimiter);
+            csv.Append("Home Area"); csv.Append(delimiter);
+            csv.Append("Transportation"); csv.Append(delimiter);
+            csv.Append("Replacing"); csv.Append(delimiter);
+            
+            csv.Append("Order Number"); csv.Append(delimiter);
+            csv.Append("Check In Location"); csv.Append(delimiter);
+            csv.Append("Comments"); csv.Append(delimiter);
+
+            csv.Append(Environment.NewLine);
+
+            foreach (ResourceReplacementPlan rec in records)
+            {
+
+                //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
+                csv.Append("\""); csv.Append(rec.ResourceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.Kind.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.Assignment.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.EstimatedArrival.ToString(Globals.DateFormat).EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.HomeArea.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.Transportation.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.ReplacedResourceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.OrderNumber.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.CheckInLocation.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
+                csv.Append("\""); csv.Append(rec.Comments.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
+        }
+
+
+
+
+
+        public static int[,] GetMealRequirementsSummary(this List<CheckInRecordWithResource> list)
         {
             Guid breakfastID = new Guid("09e8e520-a82e-491f-a82e-ed108e809392");
             Guid lunchID = new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4");
@@ -1065,6 +1115,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(9)] private string _Comments;
         [ProtoMember(10)] private Guid _ReplacementForCheckInID;
         [ProtoMember(11)] private string _ReplacedResourceName;
+        [ProtoMember(12)] private string _ResourceVariety;
 
 
         public string ResourceName { get => _ResourceName; set => _ResourceName = value; }
@@ -1078,6 +1129,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string Comments { get => _Comments; set => _Comments = value; }
         public Guid ReplacementForCheckInID { get => _ReplacementForCheckInID; set => _ReplacementForCheckInID = value; }
         public string ReplacedResourceName { get => _ReplacedResourceName; set => _ReplacedResourceName = value; }
+        public string ResourceVariety { get => _ResourceVariety; set => _ResourceVariety = value; }
 
 
         public ResourceReplacementPlan Clone()

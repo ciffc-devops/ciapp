@@ -219,7 +219,7 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(179, 24);
             this.label17.TabIndex = 134;
-            this.label17.Text = "Initial Incident Role";
+            this.label17.Text = "Incident Role";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // chkAutoAssign

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using Wildfire_ICS_Assist.Classes;
+using Wildfire_ICS_Assist.CustomControls;
 
 namespace Wildfire_ICS_Assist
 {
@@ -29,6 +30,8 @@ namespace Wildfire_ICS_Assist
             datLastDayFilter.Format = DateTimePickerFormat.Custom;
             colLastDay.DefaultCellStyle.Format = Program.DateFormat;
             colDateRequired.DefaultCellStyle.Format = Program.DateFormat + " HH:mm";
+            dgvIncoming.AutoGenerateColumns = false;
+            colIncomingArrivalDate.DefaultCellStyle.Format = Program.DateFormat + "HH:mm";
             setWrap();
         }
 
@@ -53,8 +56,8 @@ namespace Wildfire_ICS_Assist
             cboReplacementReqdFilter.SelectedIndex = 0;
             cboLastDayAsOf.SelectedIndex = 0;
             datLastDayFilter.Value = DateTime.Now.AddDays(14);
-            BuildResourceList(getFilters());
-
+            BuildResourceList(getOutgoingFilters());
+            BuildIncomingResourceList(getIncomingFilters());
             Program.wfIncidentService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
             Program.wfIncidentService.MemberSignInChanged += WfIncidentService_MemberSignInChanged;
 
@@ -66,15 +69,58 @@ namespace Wildfire_ICS_Assist
             cboOutgoingOutputInclude.DropDownWidth = cboOutgoingOutputInclude.GetDropDownWidth();
             cboOutgoingOutputFilters.DropDownWidth = cboOutgoingOutputFilters.GetDropDownWidth();
             cboOutgoingOutputFilters.SelectedIndex = 0;
-            cboOutgoingOutputInclude.SelectedIndex = 0;
+            cboOutgoingOutputInclude.SelectedIndex = 0; 
+            cboIncomingOutputFilters.DropDownWidth = cboOutgoingOutputInclude.GetDropDownWidth();
+            cboIncomingOutputInclude.DropDownWidth = cboIncomingOutputInclude.GetDropDownWidth();
+            cboIncomingOutputFilters.SelectedIndex = 0;
+            cboIncomingOutputInclude.SelectedIndex = 0;
+
+
+            outgoingPanels.Add(collapsiblePanel1); outgoingPanels.Add(collapsiblePanel2); outgoingPanels.Add(collapsiblePanel3);
+            //foreach(CollapsiblePanel panel in outgoingPanels) { panel.PanelCollapsed += HandlePanelCollapsed; panel.PanelExpanded += HandlePanelExpanded; }
 
         }
+        private List<CollapsiblePanel> outgoingPanels = new List<CollapsiblePanel>();
+        private List<CollapsiblePanel> incomingPanels = new List<CollapsiblePanel>();
 
+        private void HandlePanelExpanded(object sender, EventArgs e)
+        {
+            if (sender != null)
+            {
+                CollapsiblePanel c = (CollapsiblePanel)sender;
+                c.Location = new Point(0, c.Location.Y);
+                List<CollapsiblePanel> otherPanels = new List<CollapsiblePanel>();
+                if (outgoingPanels.Contains(sender as CollapsiblePanel)) { otherPanels = outgoingPanels; }
+                else { otherPanels = incomingPanels; }
+
+                foreach (CollapsiblePanel cp in otherPanels)
+                {
+                    if (!cp.Name.Equals(c.Name))
+                    {
+                        cp.Collapse();
+                        cp.Location = new Point(10, cp.Location.Y);
+                    }
+                }
+            }
+        }
+
+
+        private void HandlePanelCollapsed(object sender, EventArgs e)
+        {
+            if (sender != null)
+            {
+                CollapsiblePanel c = (CollapsiblePanel)sender;
+                c.Location = new Point(10, c.Location.Y);
+
+
+            }
+        }
         private void WfIncidentService_MemberSignInChanged(WF_ICS_ClassLibrary.EventHandling.CheckInEventArgs e)
         {
             if (!CellEditingInProgress)
             {
-                BuildResourceList(getFilters());
+                BuildResourceList(getOutgoingFilters()); BuildIncomingResourceList(getIncomingFilters());
+
             }
         }
 
@@ -82,8 +128,59 @@ namespace Wildfire_ICS_Assist
         {
             if (!CellEditingInProgress)
             {
-                BuildResourceList(getFilters());
+                BuildResourceList(getOutgoingFilters()); BuildIncomingResourceList(getIncomingFilters());
+
             }
+        }
+
+        private List<ResourceReplacementPlan> GetReplacementPlans(ResourceReplacementFilterSettings filters)
+        {
+            List<ResourceReplacementPlan> plans = new List<ResourceReplacementPlan>(Program.CurrentIncident.AllResourceReplacementPlans);
+
+
+
+
+            if (filters.ReplacementRequirement == 1)
+            {
+                plans = plans.Where(o => o.ReplacementForCheckInID == Guid.Empty).ToList();
+            }
+            else if (filters.ReplacementRequirement == 2)
+            {
+                plans = plans.Where(o => o.ReplacementForCheckInID != Guid.Empty).ToList();
+            }
+
+            //checkInRecords = checkInRecords.OrderBy(o => o.ResourceName).ToList();
+
+
+
+            if (filters.ResourceVariety > 0)
+            {
+                plans = plans.Where(o => o.ResourceVariety.Equals(filters.ResourceVarietyName)).ToList(); ;
+            }
+
+
+            DateTime EndOfOp = Program.CurrentOpPeriodDetails.PeriodEnd;
+
+
+            //arrival as of
+            if (filters.LastDayIsOrAsOf == 0)
+            {
+                plans = plans.Where(o => o.EstimatedArrival.Date <= filters.LastDayAsOf.Date && o.EstimatedArrival.Date >= filters.StillInAsOf.Date).ToList();
+            }
+            else if (filters.LastDayIsOrAsOf == 1)
+            {
+                plans = plans.Where(o => o.EstimatedArrival.Date == filters.LastDayAsOf.Date).ToList();
+            }
+
+
+            plans = plans.OrderBy(o => o.ResourceName).ToList();
+
+
+
+
+
+
+            return plans;
         }
 
         private List<CheckInRecordWithResource> GetResources(ResourceReplacementFilterSettings filters)
@@ -173,15 +270,19 @@ namespace Wildfire_ICS_Assist
             List<CheckInRecordWithResource> checkInRecords = GetResources(filters);
             dgvOutgoing.DataSource = checkInRecords;
         }
-
+        private void BuildIncomingResourceList(ResourceReplacementFilterSettings filters)
+        {
+            List<ResourceReplacementPlan> plans = GetReplacementPlans(filters);
+            dgvIncoming.DataSource = plans;
+        }
         private void cboResourceVariety_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BuildResourceList(getFilters());
+            BuildResourceList(getOutgoingFilters());
         }
 
         private void datLastDayFilter_ValueChanged(object sender, EventArgs e)
         {
-            BuildResourceList(getFilters());
+            BuildResourceList(getOutgoingFilters());
         }
 
         private void dgvOutgoing_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -215,7 +316,7 @@ namespace Wildfire_ICS_Assist
                     {
                         row.DefaultCellStyle.BackColor = Color.White;
                     }
-                    
+
                     row.DefaultCellStyle.Font = f;
                 }
                 else
@@ -226,42 +327,53 @@ namespace Wildfire_ICS_Assist
                 }
             }
         }
-         
-        private ResourceReplacementFilterSettings getFilters()
+
+        private ResourceReplacementFilterSettings getOutgoingFilters()
         {
-            ResourceReplacementFilterSettings filters = new ResourceReplacementFilterSettings(); 
-            filters.StillInAsOf = DateTime.Now; 
+            ResourceReplacementFilterSettings filters = new ResourceReplacementFilterSettings();
+            filters.StillInAsOf = DateTime.Now;
             filters.LastDayAsOf = datLastDayFilter.Value;
             filters.ResourceVariety = cboResourceVariety.SelectedIndex;
             filters.ResourceVarietyName = cboResourceVariety.Text;
             filters.LastDayIsOrAsOf = cboLastDayAsOf.SelectedIndex;
-            filters.ReplacementRequirement = cboReplacementReqdFilter.SelectedIndex ;
+            filters.ReplacementRequirement = cboReplacementReqdFilter.SelectedIndex;
             return filters;
         }
-
+        private ResourceReplacementFilterSettings getIncomingFilters()
+        {
+            ResourceReplacementFilterSettings filters = new ResourceReplacementFilterSettings();
+            filters.StillInAsOf = DateTime.Now;
+            filters.LastDayAsOf = datArrivalAsOf.Value;
+            filters.ResourceVariety = cboIncomingVariety.SelectedIndex;
+            filters.ResourceVarietyName = cboIncomingVariety.Text;
+            filters.LastDayIsOrAsOf = cboIncomingToAsOf.SelectedIndex;
+            filters.ReplacementRequirement = cboReplacementIdentified.SelectedIndex;
+            return filters;
+        }
         private void cboReplacementReqdFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            BuildResourceList(getFilters());
+
+            BuildResourceList(getOutgoingFilters());
 
         }
 
         private void dgvOutgoing_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == colEdit.Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == colEdit.Index && e.RowIndex >= 0)
             {
                 CheckInRecordWithResource rec = (CheckInRecordWithResource)dgvOutgoing.Rows[e.RowIndex].DataBoundItem;
 
-                if (rec.ReplacementRecordID == Guid.Empty || !Program.CurrentIncident.ActiveResourceReplacementPlans.Any(o=>o.ID == rec.ReplacementRecordID))
+                if (rec.ReplacementRecordID == Guid.Empty || !Program.CurrentIncident.ActiveResourceReplacementPlans.Any(o => o.ID == rec.ReplacementRecordID))
                 {
                     ResourceReplacementPlan plan = new ResourceReplacementPlan();
                     plan.ReplacementForCheckInID = rec.Record.SignInRecordID;
                     plan.ReplacedResourceName = rec.Resource.ResourceName;
                     plan.Assignment = rec.Assignment;
                     plan.EstimatedArrival = rec.DateReplacementRequired;
-                    
+                    plan.ResourceVariety = rec.ResourceType;
                     OpenPlanForEdit(plan);
-                } else
+                }
+                else
                 {
                     ResourceReplacementPlan plan = Program.CurrentIncident.ActiveResourceReplacementPlans.First(o => o.ID == rec.ReplacementRecordID);
                     OpenPlanForEdit(plan);
@@ -277,11 +389,11 @@ namespace Wildfire_ICS_Assist
             using (ResourceReplacementEditForm editForm = new ResourceReplacementEditForm())
             {
                 editForm.plan = plan.Clone();
-                if(editForm.ShowDialog() == DialogResult.OK)
+                if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     plan = editForm.plan.Clone();
                     Program.wfIncidentService.UpsertResourceReplacementPlan(plan);
-                    
+
                 }
             }
         }
@@ -300,7 +412,7 @@ namespace Wildfire_ICS_Assist
 
         private void cboLastDayAsOf_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BuildResourceList(getFilters());
+            BuildResourceList(getOutgoingFilters());
 
 
         }
@@ -314,22 +426,121 @@ namespace Wildfire_ICS_Assist
                 string exportPath = svdExport.FileName;
                 string delimiter = ",";
 
-                ResourceReplacementFilterSettings filters = getFilters();
-                if(cboOutgoingOutputFilters.SelectedIndex == 1)
+                ResourceReplacementFilterSettings filters = getOutgoingFilters();
+                if (cboOutgoingOutputFilters.SelectedIndex == 1)
                 {
                     filters.ResourceVariety = 0;
                     filters.ResourceVarietyName = "All";
                     filters.ReplacementRequirement = 0;
                 }
-                
-                List<CheckInRecordWithResource> resources = GetResources(filters);
-               
 
-                string csv =CheckInTools.ExportOutgoingResources(resources, filters, delimiter);
+                List<CheckInRecordWithResource> resources = GetResources(filters);
+                List<ResourceReplacementPlan> plans = GetReplacementPlans(filters);
+
+                string Outgoingcsv = CheckInTools.ExportOutgoingResources(resources, filters, delimiter);
+                string IncomingCSV = CheckInTools.ExportIncomingResources(plans, filters, delimiter);
                 try
                 {
-                    System.IO.File.WriteAllText(exportPath, csv);
+                    StringBuilder sb = new StringBuilder();
+                    if(cboOutgoingOutputInclude.SelectedIndex == 0 || cboOutgoingOutputInclude.SelectedIndex == 2)
+                    {
+                        sb.Append(Outgoingcsv);
+                    }
+                    if(cboOutgoingOutputInclude.SelectedIndex == 2) { sb.Append(Environment.NewLine); sb.Append(Environment.NewLine); }
+                    if(cboOutgoingOutputInclude.SelectedIndex == 1 || cboOutgoingOutputInclude.SelectedIndex == 2)
+                    {
+                        sb.Append(IncomingCSV);
+                    }
 
+                    System.IO.File.WriteAllText(exportPath, sb.ToString());
+                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    if (openNow == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(exportPath);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                }
+            }
+        }
+
+        private void cboReplacementIdentified_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuildIncomingResourceList(getIncomingFilters());
+
+        }
+
+        private void datArrivalAsOf_ValueChanged(object sender, EventArgs e)
+        {
+            BuildIncomingResourceList(getIncomingFilters());
+
+        }
+
+        private void cboIncomingToAsOf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuildIncomingResourceList(getIncomingFilters());
+
+        }
+
+        private void cboIncomingVariety_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuildIncomingResourceList(getIncomingFilters());
+
+        }
+
+        private void dgvIncoming_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == colIncomingEdit.Index && e.RowIndex >= 0)
+            {
+                ResourceReplacementPlan rec = (ResourceReplacementPlan)dgvIncoming.Rows[e.RowIndex].DataBoundItem;
+
+
+                OpenPlanForEdit(rec);
+
+
+            }
+        }
+
+        private void btnExportIncoming_Click(object sender, EventArgs e)
+        {
+            svdExport.FileName = "Resource Replacement Planning-" + Program.CurrentIncident.IncidentIdentifier + ".csv";
+            DialogResult result = svdExport.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
+            {
+                string exportPath = svdExport.FileName;
+                string delimiter = ",";
+
+                ResourceReplacementFilterSettings filters = getIncomingFilters();
+                if (cboIncomingOutputFilters.SelectedIndex == 1)
+                {
+                    filters.ResourceVariety = 0;
+                    filters.ResourceVarietyName = "All";
+                    filters.ReplacementRequirement = 0;
+                }
+
+                List<CheckInRecordWithResource> resources = GetResources(filters);
+                List<ResourceReplacementPlan> plans = GetReplacementPlans(filters);
+
+                string Outgoingcsv = CheckInTools.ExportOutgoingResources(resources, filters, delimiter);
+                string IncomingCSV = CheckInTools.ExportIncomingResources(plans, filters, delimiter);
+                try
+                {
+                    StringBuilder sb = new StringBuilder();
+                    if (cboIncomingOutputInclude.SelectedIndex == 0 || cboIncomingOutputInclude.SelectedIndex == 2)
+                    {
+                        sb.Append(IncomingCSV);
+                    }
+                    if (cboIncomingOutputInclude.SelectedIndex == 2) { sb.Append(Environment.NewLine); sb.Append(Environment.NewLine); }
+                    if (cboIncomingOutputInclude.SelectedIndex == 1 || cboIncomingOutputInclude.SelectedIndex == 2)
+                    {
+                        sb.Append(Outgoingcsv);
+                       
+                    }
+
+                    System.IO.File.WriteAllText(exportPath, sb.ToString());
                     DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {

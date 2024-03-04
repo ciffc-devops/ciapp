@@ -461,6 +461,10 @@ namespace WildfireICSDesktopServices
             {
                 UpsertDemobRecord(((DemobilizationRecord)obj).Clone(), source);
             }
+            else if (dataClassName.Equals(new ResourceReplacementPlan().GetType().Name))
+            {
+                UpsertResourceReplacementPlan(((ResourceReplacementPlan)obj).Clone(), source);
+            }
         }
 
 
