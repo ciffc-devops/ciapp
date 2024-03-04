@@ -344,9 +344,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void selectPhoto()
         {
             openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            openFileDialog1.ShowDialog();
+            
 
-            if (!string.IsNullOrEmpty(openFileDialog1.FileName))
+            if (openFileDialog1.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(openFileDialog1.FileName))
             {
                 //they've chosen a file, try to open it.
                 try
