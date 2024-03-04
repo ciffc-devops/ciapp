@@ -272,7 +272,65 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class CheckInTools
     {
-        public static int[,] GetMealRequirementsSummary(this List<CheckInRecordWithResource> list)
+        public static string ExportOutgoingResources(List<CheckInRecordWithResource> records, ResourceReplacementFilterSettings filters, string delimiter = ",")
+        {
+            StringBuilder csv = new StringBuilder();
+            csv.Append("OUTGOING");
+            csv.Append(Environment.NewLine);
+
+            csv.Append("Last Day On Incident");
+            if (filters.LastDayIsOrAsOf == 0) { csv.Append(" as of"); }
+            else { csv.Append(" is "); }
+            csv.Append(delimiter);
+            csv.Append(filters.LastDayAsOf.ToString(Globals.DateFormat));
+            csv.Append(Environment.NewLine);
+
+
+
+
+            csv.Append("Name"); csv.Append(delimiter); 
+            csv.Append("Kind of Resource"); csv.Append(delimiter); 
+            csv.Append("Assignment"); csv.Append(delimiter);
+            csv.Append("Last Day On Incident"); csv.Append(delimiter); 
+            csv.Append("Day Count"); csv.Append(delimiter);
+            csv.Append("Home Area"); csv.Append(delimiter);
+            csv.Append("Transportation"); csv.Append(delimiter); 
+            csv.Append("Replacement Required"); csv.Append(delimiter); 
+            csv.Append("Date & Time Replacement Required"); csv.Append(delimiter);
+            csv.Append("Replacement Order # or filled with"); csv.Append(delimiter);
+            csv.Append("Replacement Filled By"); csv.Append(delimiter); 
+            csv.Append("Comments"); csv.Append(delimiter);
+
+            csv.Append(Environment.NewLine);
+
+            foreach (CheckInRecordWithResource rec in records)
+            {
+
+                //csv.Append("\"");  csv.Append(member.StringForQR.EscapeQuotes()); csv.Append("\""); 
+                csv.Append("\""); csv.Append(rec.ResourceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.Kind.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.Assignment.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.LastDayOnIncident.ToString(Globals.DateFormat).EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.DaysTillTimeOut.ToString().EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.HomeUnit.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.Transport.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                if (rec.ReplacementRequired) { csv.Append("\""); csv.Append("YES"); csv.Append("\""); csv.Append(delimiter); }
+                else { csv.Append("\""); csv.Append("NO"); csv.Append("\""); csv.Append(delimiter); }
+                csv.Append("\""); csv.Append(rec.DateReplacementRequired.ToString(Globals.DateFormat).EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.ReplacementOrderNumber.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.ReplacementResourceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(rec.ReplacementComment.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+
+                csv.Append(Environment.NewLine);
+            }
+            return csv.ToString();
+        }
+
+
+
+    
+
+    public static int[,] GetMealRequirementsSummary(this List<CheckInRecordWithResource> list)
         {
             Guid breakfastID = new Guid("09e8e520-a82e-491f-a82e-ed108e809392");
             Guid lunchID = new Guid("8355bc4b-238c-4992-9ded-0cff32f1bbf4");
@@ -925,13 +983,13 @@ namespace WF_ICS_ClassLibrary.Models
                 case "7a39df77-cb16-463c-812b-573bfa97de5d": return new List<string> { "", "Incident Camp", "Other" };
                 case "a4f1cb0e-9774-4bdc-aeac-96976aceba89": return new List<string> { "", "Aircraft", "Bus", "Vehicle" };
                 case "99c4d8c6-3b39-42f1-af6f-33525b2da4e7": return new List<string> { "", "Research", "Maintenance", "Servicing equipment", "Servicing facilities", "Observing" };
-                default:
-                    return new List<string>();
+                default:                    return new List<string>();
             }
-
-
-
         }
+
+
+
+
     }
 
     [Serializable]
@@ -1032,5 +1090,17 @@ namespace WF_ICS_ClassLibrary.Models
             return this.Clone();
         }
     }
+
+    public class ResourceReplacementFilterSettings
+    {
+        public int ResourceVariety { get; set; } = 0;
+        public string ResourceVarietyName { get; set; } = string.Empty;
+        public int ReplacementRequirement { get; set; } = 0;
+        public DateTime MidPoint { get; set; }
+        public DateTime LastDayAsOf { get; set; } //only view resources who will be timing out as of this date (usually 2 weeks from today)
+        public DateTime StillInAsOf { get; set; } //Only view resources who are still on incident as of this date (usually today)
+        public int LastDayIsOrAsOf { get; set; } = 0; //= 0 As Of, 1 = On
+    }
+
 
 }

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
@@ -62,6 +63,11 @@ namespace Wildfire_ICS_Assist
             lblLegendResourceYellow.Text = "Resource leaving in " + YellowNumber + " days";
             lblReplacementResourceRed.Text = "Resource leaving in " + RedNumber + " days";
 
+            cboOutgoingOutputInclude.DropDownWidth = cboOutgoingOutputInclude.GetDropDownWidth();
+            cboOutgoingOutputFilters.DropDownWidth = cboOutgoingOutputFilters.GetDropDownWidth();
+            cboOutgoingOutputFilters.SelectedIndex = 0;
+            cboOutgoingOutputInclude.SelectedIndex = 0;
+
         }
 
         private void WfIncidentService_MemberSignInChanged(WF_ICS_ClassLibrary.EventHandling.CheckInEventArgs e)
@@ -80,7 +86,7 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private void BuildResourceList(FilterSettings filters)
+        private List<CheckInRecordWithResource> GetResources(ResourceReplacementFilterSettings filters)
         {
             List<CheckInRecordWithResource> checkInRecords = new List<CheckInRecordWithResource>();
             List<CheckInRecord> allRecords = new List<CheckInRecord>(Program.CurrentIncident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod <= Program.CurrentOpPeriod));
@@ -127,21 +133,24 @@ namespace Wildfire_ICS_Assist
             if (filters.LastDayIsOrAsOf == 0)
             {
                 checkInRecords = checkInRecords.Where(o => o.LastDayOnIncident.Date <= filters.LastDayAsOf.Date && o.LastDayOnIncident.Date >= filters.StillInAsOf.Date).ToList();
-            } else if (filters.LastDayIsOrAsOf == 1)
+            }
+            else if (filters.LastDayIsOrAsOf == 1)
             {
-                checkInRecords = checkInRecords.Where(o => o.LastDayOnIncident.Date == filters.LastDayAsOf.Date ).ToList();
+                checkInRecords = checkInRecords.Where(o => o.LastDayOnIncident.Date == filters.LastDayAsOf.Date).ToList();
             }
 
             //get replacement info
-            foreach(CheckInRecordWithResource rec in checkInRecords) { 
-                if(Program.CurrentIncident.ActiveResourceReplacementPlans.Any(o=>o.ReplacementForCheckInID == rec.Record.SignInRecordID))
+            foreach (CheckInRecordWithResource rec in checkInRecords)
+            {
+                if (Program.CurrentIncident.ActiveResourceReplacementPlans.Any(o => o.ReplacementForCheckInID == rec.Record.SignInRecordID))
                 {
                     ResourceReplacementPlan plan = Program.CurrentIncident.ActiveResourceReplacementPlans.First(o => o.ReplacementForCheckInID == rec.Record.SignInRecordID);
                     rec.ReplacementRecordID = plan.ID;
                     rec.ReplacementOrderNumber = plan.OrderNumber;
                     rec.ReplacementResourceName = plan.ResourceName;
                     rec.ReplacementComment = plan.Comments;
-                } else
+                }
+                else
                 {
                     rec.ReplacementRecordID = Guid.Empty;
                     rec.ReplacementOrderNumber = string.Empty;
@@ -156,6 +165,12 @@ namespace Wildfire_ICS_Assist
                 }
             }
             checkInRecords = checkInRecords.OrderBy(o => o.ResourceName).ToList();
+            return checkInRecords;
+        }
+
+        private void BuildResourceList(ResourceReplacementFilterSettings filters)
+        {
+            List<CheckInRecordWithResource> checkInRecords = GetResources(filters);
             dgvOutgoing.DataSource = checkInRecords;
         }
 
@@ -211,20 +226,10 @@ namespace Wildfire_ICS_Assist
                 }
             }
         }
-        private class FilterSettings
+         
+        private ResourceReplacementFilterSettings getFilters()
         {
-            public int ResourceVariety { get; set; } = 0;
-            public string ResourceVarietyName { get; set; } = string.Empty;
-            public int ReplacementRequirement { get; set; } = 0;
-            public DateTime MidPoint { get; set; }
-            public DateTime LastDayAsOf { get; set; } //only view resources who will be timing out as of this date (usually 2 weeks from today)
-            public DateTime StillInAsOf { get; set; } //Only view resources who are still on incident as of this date (usually today)
-            public int LastDayIsOrAsOf { get; set; } = 0; //= 0 As Of, 1 = On
-        }
-
-        private FilterSettings getFilters()
-        {
-            FilterSettings filters = new FilterSettings(); 
+            ResourceReplacementFilterSettings filters = new ResourceReplacementFilterSettings(); 
             filters.StillInAsOf = DateTime.Now; 
             filters.LastDayAsOf = datLastDayFilter.Value;
             filters.ResourceVariety = cboResourceVariety.SelectedIndex;
@@ -298,6 +303,45 @@ namespace Wildfire_ICS_Assist
             BuildResourceList(getFilters());
 
 
+        }
+
+        private void btnExportSignInToCSV_Click(object sender, EventArgs e)
+        {
+            svdExport.FileName = "Resource Replacement Planning-" + Program.CurrentIncident.IncidentIdentifier + ".csv";
+            DialogResult result = svdExport.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
+            {
+                string exportPath = svdExport.FileName;
+                string delimiter = ",";
+
+                ResourceReplacementFilterSettings filters = getFilters();
+                if(cboOutgoingOutputFilters.SelectedIndex == 1)
+                {
+                    filters.ResourceVariety = 0;
+                    filters.ResourceVarietyName = "All";
+                    filters.ReplacementRequirement = 0;
+                }
+                
+                List<CheckInRecordWithResource> resources = GetResources(filters);
+               
+
+                string csv =CheckInTools.ExportOutgoingResources(resources, filters, delimiter);
+                try
+                {
+                    System.IO.File.WriteAllText(exportPath, csv);
+
+                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    if (openNow == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(exportPath);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                }
+            }
         }
     }
 }
