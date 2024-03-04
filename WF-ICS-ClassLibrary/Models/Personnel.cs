@@ -97,7 +97,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(Name);
-                if (!string.IsNullOrEmpty(InitialRoleAcronym)) { sb.Append(" (initial: "); sb.Append(InitialRoleAcronym); sb.Append(")"); }
+                if (!string.IsNullOrEmpty(InitialRoleAcronym)) { sb.Append(" ("); sb.Append(InitialRoleAcronym); sb.Append(")"); }
                 return sb.ToString();
             }
         }
