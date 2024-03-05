@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms.Design;
 using System.Windows.Forms.Integration;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
@@ -17,13 +18,16 @@ class SpellBox : ElementHost
     {
         box = new TextBox();
         base.Child = box;
-        box.TextChanged += (s, e) => OnTextChanged(EventArgs.Empty);
+        box.TextChanged += (s, e) => OnTextChanged(EventArgs.Empty); 
+        box.KeyUp += OnNewKeyUp;
+
         //this.AutoSize = true;
 
         box.SpellCheck.IsEnabled = true;
         box.VerticalContentAlignment = VerticalAlignment.Center;
         box.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         box.TextChanged += new System.Windows.Controls.TextChangedEventHandler(SpellBox_TextChanged);
+        box.KeyUp += new KeyEventHandler(WPF_KeyUp);
 
         this.Size = new System.Drawing.Size(100, 20);
 
@@ -37,8 +41,44 @@ class SpellBox : ElementHost
             {
                 hwndTarget.RenderMode = RenderMode.SoftwareOnly;
             }
+
+            HwndSource s = HwndSource.FromVisual(box) as HwndSource;
+            if (s != null)
+                s.AddHook(new HwndSourceHook(ChildHwndSourceHook));
         };
 
+    }
+    private const UInt32 DLGC_WANTARROWS = 0x0001;
+    private const UInt32 DLGC_WANTTAB = 0x0002;
+    private const UInt32 DLGC_WANTALLKEYS = 0x0004;
+    private const UInt32 DLGC_HASSETSEL = 0x0008;
+    private const UInt32 DLGC_WANTCHARS = 0x0080;
+    private const UInt32 WM_GETDLGCODE = 0x0087;
+
+    IntPtr ChildHwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        if (msg == WM_GETDLGCODE)
+        {
+            handled = true;
+            return new IntPtr(DLGC_WANTCHARS | DLGC_WANTARROWS | DLGC_HASSETSEL);
+        }
+        return IntPtr.Zero;
+    }
+
+
+    private void OnNewKeyUp(object sender, KeyEventArgs e)
+    {
+        if (this.KeyUp != null)
+            this.KeyUp(this, e);
+    }
+    [Browsable(true)]
+    [Category("Action")]
+    [Description("Invoked when Text Changes")]
+    public new event KeyEventHandler KeyUp;
+    protected void WPF_KeyUp(object sender, EventArgs e)
+    {
+        if (this.KeyUp != null)
+            this.KeyUp(this, (KeyEventArgs)e);
     }
 
     [Browsable(true)]
