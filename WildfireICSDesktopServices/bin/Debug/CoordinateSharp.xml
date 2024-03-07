@@ -749,6 +749,16 @@
             Sun azimuth in degrees (E of N).
             </summary>
         </member>
+        <member name="P:CoordinateSharp.Celestial.DaySpan">
+            <summary>
+            Daylight time span for date and location. 
+            </summary>
+        </member>
+        <member name="P:CoordinateSharp.Celestial.NightSpan">
+            <summary>
+            Night time span for date and location.
+            </summary>
+        </member>
         <member name="P:CoordinateSharp.Celestial.MoonAltitude">
             <summary>
             Moon altitude in degrees (E of N) (corrected for parallax and refraction).
