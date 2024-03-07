@@ -97,26 +97,35 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 if (checkboxes[6].Checked)
                 {
                     //check in
-                    for (int x = 0; x < 15; x++)
+                    for (int x = 0; x < 30; x++)
                     {
                         CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + x, "Personnel");
                         testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
                         testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 1000);
 
-                        ICSRole role = Program.CurrentOrgChart.ActiveRoles.OrderBy(o => Guid.NewGuid()).Where(o => o.IndividualID == Guid.Empty).First();
-                        testCheckInPersonnel.Record.InitialRoleName = role.RoleName;
+                        
 
                         log.Append("Created Check in for Personnel"); log.Append(Environment.NewLine);
                         Program.wfIncidentService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
                         Program.wfIncidentService.UpsertCheckInRecord(testCheckInPersonnel.Record);
                         log.Append("Saved Check in for Personnel"); log.Append(Environment.NewLine);
 
-                        //Assign them
-                        Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == testCheckInPersonnel.Record.ResourceID);
-                        role.IndividualID = p.ID;
-                        role.IndividualName = p.Name;
-                        //role.teamMember = p.Clone();
-                        Program.wfIncidentService.UpsertICSRole(role);
+
+                        if (!string.IsNullOrEmpty(testCheckInPersonnel.Record.InitialRoleAcronym)
+                            && Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.Mnemonic)
+                            && o.Mnemonic.Equals(testCheckInPersonnel.Record.InitialRoleAcronym)))
+                        {
+                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.OrderBy(o => Guid.NewGuid()).Where(o => o.IndividualID == Guid.Empty).First();
+                            testCheckInPersonnel.Record.InitialRoleName = role.RoleName;
+
+                            //Assign them
+                            Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == testCheckInPersonnel.Record.ResourceID);
+                            role.IndividualID = p.ID;
+                            role.IndividualName = p.Name;
+                            //role.teamMember = p.Clone();
+                            Program.wfIncidentService.UpsertICSRole(role);
+                        }
+
                     }
                 }
                 if (checkboxes[7].Checked)

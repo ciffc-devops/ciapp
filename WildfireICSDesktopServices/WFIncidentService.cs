@@ -1506,6 +1506,11 @@ namespace WildfireICSDesktopServices
         {
             if (member != null)
             {
+                if(member.UniqueIDNum == 0)
+                {
+                    ;
+                }
+
                 _currentIncident.UpsertTaskTeamMember(member);
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(member, "UPSERT", true, false); }
 

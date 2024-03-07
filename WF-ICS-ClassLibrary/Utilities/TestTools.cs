@@ -282,8 +282,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.ResourceType = "ResourceType" + seed;
             test.ParentRecordID = Guid.Empty;
             test.LastDayOfRest = DateTime.Now.AddDays(-1);
-            List<ICSRole> roles = OrgChartTools.GetAllRoles().OrderBy(o=>Guid.NewGuid()).ToList();
 
+            
+            List<ICSRole> roles = OrgChartTools.GetBlankPrimaryRoles().OrderBy(o=>Guid.NewGuid()).ToList();
             test.InitialRoleName = roles.First().RoleName;
             test.InitialRoleAcronym = roles.First().Mnemonic;
             int rnd = random.Next(4);
@@ -302,6 +303,13 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 case "Personnel":
                     resource = createTestPerson(seed);
+                    int rnd = random.Next(4);
+                    if(rnd == 3)
+                    {
+                        record.InitialRoleAcronym = string.Empty;
+                        record.InitialRoleName = string.Empty;
+                    }
+
                     (resource as Personnel).InitialRoleName = record.InitialRoleName;
                     (resource as Personnel).InitialRoleAcronym = record.InitialRoleAcronym;
                     break;
@@ -309,22 +317,32 @@ namespace WF_ICS_ClassLibrary.Utilities
                     break;
                 case "Visitor":
                     resource = createTestPerson(seed);
+                    record.InitialRoleAcronym = string.Empty;
+                    record.InitialRoleName = string.Empty;
                     break;
                 case "Vehicle":
                     resource = createTestVehicle(seed);
                     (resource as Vehicle).IsEquipment = false;
+                    record.InitialRoleAcronym = string.Empty;
+                    record.InitialRoleName = string.Empty;
                     break;
                 case "Equipment":
                     resource = createTestVehicle(seed);
                     (resource as Vehicle).IsEquipment = true;
+                    record.InitialRoleAcronym = string.Empty;
+                    record.InitialRoleName = string.Empty;
                     break;
                 case "Crew":
                     resource = createTestCrew(seed, childResources);
                     (resource as OperationalSubGroup).IsEquipmentCrew = false;
+                    record.InitialRoleAcronym = string.Empty;
+                    record.InitialRoleName = string.Empty;
                     break;
                 case "Heavy Equipment Crew":
                     resource = createTestCrew(seed, childResources);
                     (resource as OperationalSubGroup).IsEquipmentCrew = true;
+                    record.InitialRoleAcronym = string.Empty;
+                    record.InitialRoleName = string.Empty;
                     break;
             }
             record.ResourceID = resource.ID;
