@@ -4486,16 +4486,23 @@ namespace WildfireICSDesktopServices
                     foreach (IncidentResource ta in reportingResources)
                     {
                         stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ta.ResourceName);
-                        stamper.AcroFields.SetField("Resource KindRow" + assignmentRow, ta.Kind);
-                        stamper.AcroFields.SetField("Resource TypeRow" + assignmentRow, ta.Type);
-                        stamper.AcroFields.SetField("NameRow" + assignmentRow, ta.LeaderName);
-                        if (ta.GetType().Name.Equals("OperationalGroupResourceListing"))
+                        stamper.AcroFields.SetField("KindRow" + assignmentRow, ta.Kind);
+                        stamper.AcroFields.SetField("TypeRow" + assignmentRow, ta.Type);
+                        if (ta.NumberOfPeople <= 1)
+                        {
+                            stamper.AcroFields.SetField("Name  Leader QtyRow" + assignmentRow, ta.LeaderName);
+                        } else { stamper.AcroFields.SetField("Name  Leader QtyRow" + assignmentRow, ta.LeaderName + " (" + ta.NumberOfPeople + ")"); }
+                        if (ta.GetType().Name.Equals(new OperationalGroupResourceListing().GetType().Name))
                         {
                             stamper.AcroFields.SetField("RoleRow" + assignmentRow, (ta as OperationalGroupResourceListing).Role);
                         }
-                        if(task.AllOperationalSubGroups.Any(o=>o.ID == ta.ID))
+                        if(ta.NumberOfPeople > 1)
                         {
-                            stamper.AcroFields.SetField("TransportationRow" + assignmentRow, task.AllOperationalSubGroups.First(o=>o.ID == ta.ID).Transport);
+                            ;
+                        }
+                        if(ta.GetType().Name.Equals(new OperationalGroupResourceListing().GetType().Name) &&  task.AllOperationalSubGroups.Any(o=>o.ID == (ta as OperationalGroupResourceListing).ResourceID))
+                        {
+                            stamper.AcroFields.SetField("TransportationRow" + assignmentRow, task.AllOperationalSubGroups.First(o => o.ID == (ta as OperationalGroupResourceListing).ResourceID).Transport);
                         }
 
                         assignmentRow++;
