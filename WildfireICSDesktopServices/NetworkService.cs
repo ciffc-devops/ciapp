@@ -21,6 +21,7 @@ using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Interfaces;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace WildfireICSDesktopServices
 {
@@ -60,7 +61,7 @@ namespace WildfireICSDesktopServices
         /// <summary>
         /// The maximum number of times a chat message will be relayed
         /// </summary>
-        int relayMaximum = 3;
+        int relayMaximum = 20;
         private bool PauseNetworkSend = false;
 
 
@@ -105,7 +106,7 @@ namespace WildfireICSDesktopServices
                 }
 
                 //Reject network send objects from a different task.  This should mitigate issues of multiple tasks running on the same network.
-                if (acceptInfo && incomingMessage.TaskID != Guid.Empty && incomingMessage.TaskID != CurrentIncidentID) { acceptInfo = false; }
+                if (acceptInfo && incomingMessage.TaskID != Guid.Empty && incomingMessage.TaskID != CurrentIncidentID && incomingMessage.GuidValue == Guid.Empty) { acceptInfo = false; }
 
                 if (acceptInfo)
                 {
@@ -445,24 +446,28 @@ namespace WildfireICSDesktopServices
                 switch (objToSend)
                 {
 
-                    
+
                     case Guid g:
                         networkSendObject.GuidValue = g;
-                        networkSendObject.TaskID = Guid.Empty;
+                        networkSendObject.TaskID = TaskID;
                         break;
-                   
-                   
+
+
                     case GeneralOptions options:
                         networkSendObject.generalOptions = options;
                         networkSendObject.TaskID = Guid.Empty;
                         break;
-                   
-                  
+
+
                     case TaskUpdate taskUpdate:
                         networkSendObject.taskUpdate = taskUpdate.Clone();
                         networkSendObject.taskUpdate.ProcessedLocally = false;
-                        networkSendObject.taskUpdate.Source = "Network";
+                        networkSendObject.taskUpdate.Source = "network";
 
+                        break;
+                    case List<TaskUpdate> tasks:
+                        networkSendObject.taskUpdates = tasks;
+                        foreach (TaskUpdate taskUpdate in tasks) { taskUpdate.Source = "network"; taskUpdate.ProcessedLocally = false; }
                         break;
                     case null:
                         break;
@@ -835,9 +840,10 @@ namespace WildfireICSDesktopServices
                 //We perform the send within a try catch to ensure the application continues to run if there is a problem.
                 try
                 {
+                    WFIncident compressed = task.CompressTaskUpdates();
 
-                    
-                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("WFIncident", task);
+
+                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("WFIncident", compressed);
                     DateTime today = DateTime.Now;
                     
                     args.message += string.Format("{0:HH:mm:ss}", today) + " - sent full task" + "\r\n";

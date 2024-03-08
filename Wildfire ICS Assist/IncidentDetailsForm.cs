@@ -263,6 +263,7 @@ namespace Wildfire_ICS_Assist
             Program.networkService.localNetworkClosedEvent += Program_LocalConnectionClosed;
             Program.networkService.localNetworkIncomingIncidentEvent += replaceCurrentIncidentWithNetworkIncident;
             Program.networkService.localNetworkIncomingObjectEvent += Program_HandleIncomingNetworkObject;
+            
             Program.wfIncidentService.TaskUpdateChanged += Program_TaskUpdateChanged;
             Program.wfIncidentService.OpPeriodChanged += changeOpPeriod;
         }
@@ -2184,7 +2185,7 @@ namespace Wildfire_ICS_Assist
             }
             if (Program.networkService.ThisMachineIsServer || Program.networkService.ThisMachineIsClient)
             {
-                if (!e.item.Source.EqualsWithNull("Network"))
+                if (!e.item.Source.EqualsWithNull("network"))
                 {
                     Program.networkService.SendNetworkObject(e.item, CurrentIncident.TaskID);
                 }
@@ -2260,6 +2261,8 @@ namespace Wildfire_ICS_Assist
             return true;
 
         }
+
+
 
 
 
@@ -2346,16 +2349,6 @@ namespace Wildfire_ICS_Assist
                 pnlNetworkSyncInProgress.BringToFront();
                 btnNetworkSyncDone.Visible = false;
                 btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
-
-
-
-                /*
-                pnlNetworkSyncInProgress.Location = new Point(0, 0);
-                pnlNetworkSyncInProgress.Height = this.Height;
-                pnlNetworkSyncInProgress.Width = this.Width;
-                */
-
-
                 pnlNetworkSyncInProgress.Dock = DockStyle.Fill;
                 pnlNetworkSyncInProgress.BringToFront();
                 lblNetworkSyncStatus.Text = "Beginning Network Status Check";
@@ -2412,14 +2405,39 @@ namespace Wildfire_ICS_Assist
             this.BeginInvoke((Action)delegate ()
             {
                 string taskUpdateName = new TaskUpdate().GetType().ToString();
+                string taskUpdateListName = new List<TaskUpdate>().GetType().ToString();
+
                 if (incomingMessage.objectType == taskUpdateName)
                 {
                     this.BeginInvoke((Action)delegate ()
                     {
+                        incomingMessage.taskUpdate.ProcessedLocally = false;
                         Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
                     });
                 }
+                else if (incomingMessage.objectType.Equals(taskUpdateListName))
+                {
+                    this.BeginInvoke((Action)delegate ()
+                    {
+                        DateTime LastNetworkSync = Program.CurrentTask.LastNetworkTaskUpdate();
+                        if (incomingMessage.taskUpdates.Any() && incomingMessage.taskUpdates.First().TaskID == Program.CurrentTask.TaskID)
+                        {
+                            foreach (TaskUpdate tu in incomingMessage.taskUpdates)
+                            {
+                                Program.wfIncidentService.ProcessTaskUpdate(tu);
+                            }
 
+
+                            List<TaskUpdate> updatesToSend = Program.CurrentIncident.MostRecentTaskUpdates(true);
+                            Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.TaskID);
+                        }
+                        if (networkTaskRequested)
+                        {
+                            FinishRequestingNetworkTask();
+                            networkTaskRequested = false;
+                        }
+                    });
+                }
                 else if (incomingMessage.objectType == new GeneralOptions().GetType().ToString())
                 {
                     replaceOptionsFromNetwork(incomingMessage.generalOptions);
@@ -2489,8 +2507,21 @@ namespace Wildfire_ICS_Assist
                     lblNetworkShareMoreInfoMsg.Visible = true;
                     pbNetworkSyncInProgress.Value = 2;
 
-                    if (!silentNetworkTest && !initialConnectionTest) { MessageBox.Show("Connected successfully to host"); }
-                    else if (initialConnectionTest)
+                    if (!silentNetworkTest && !initialConnectionTest)
+                    {
+                        List<TaskUpdate> updatesToSend = Program.CurrentIncident.MostRecentTaskUpdates(false);
+                        networkTaskRequested = true;
+                        Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.TaskID);
+
+                    }
+                    else if (initialConnectionTest && incomingMessage.TaskID == CurrentIncident.TaskID)
+                    {
+                        List<TaskUpdate> updatesToSend = Program.CurrentIncident.MostRecentTaskUpdates(false);
+                        networkTaskRequested = true;
+                        Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.TaskID);
+
+                    }
+                    else if (initialConnectionTest && !networkTaskRequested)
                     {
                         //if (MessageBox.Show("Connected successfully!\r\n\r\nWould you like to download the current task from the server? This will replace whatever you have open now.", "Download server task?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         // {
@@ -2499,6 +2530,8 @@ namespace Wildfire_ICS_Assist
                         request.RequestDate = DateTime.Now;
                         request.SourceName = HostInfo.HostName;
                         request.SourceIdentifier = NetworkComms.NetworkIdentifier;
+                        request.CurrentTaskID = Program.CurrentTask.TaskID;
+                        request.LastSync = Program.CurrentTask.LastNetworkTaskUpdate();
                         request.RequestIP = Program.networkService.GetLocalIPAddress();
                         Program.networkService.SendNetworkSarTaskRequest(request);
 
@@ -2509,6 +2542,7 @@ namespace Wildfire_ICS_Assist
                               MessageBox.Show("You can request the current server task from the Network menu later.");
                           }*/
                     }
+
                     silentNetworkTest = true;
                     NetworkTestGuidValue = Guid.Empty;
                     initialConnectionTest = false;
@@ -2551,6 +2585,29 @@ namespace Wildfire_ICS_Assist
                     }
                 }
             }
+        }
+
+        private void FinishRequestingNetworkTask()
+        {
+            networkTaskRequested = false;
+            DateTime today = DateTime.Now;
+            addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received full incident " + Program.CurrentTask.IncidentIdentifier + "\r\n");
+
+            if (pnlNetworkSyncInProgress.Visible)
+            {
+                pnlNetworkSyncInProgress.BringToFront();
+                lblNetworkSyncStatus.Text = "Incident loaded successfully from the network!";
+                pbNetworkSyncInProgress.Value = 4;
+
+                btnNetworkSyncDone.Visible = true;
+                btnCloseNetworkSyncInProgress.Visible = !btnNetworkSyncDone.Visible;
+            }
+            else
+            {
+                pnlNetworkSyncInProgress.BringToFront(); MessageBox.Show("Network incident downloaded successfully!");
+            }
+            //pnlNetworkSyncInProgress.Visible = false;
+            PauseNetworkSend = false;
         }
 
         private void replaceCurrentIncidentWithNetworkIncident(WFIncident task)
@@ -2612,7 +2669,7 @@ namespace Wildfire_ICS_Assist
 
 
                     DateTime today = DateTime.Now;
-                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received a request for the current incident" + "\r\n");
+                    addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - received a request for the current incident from " + incomingMessage.RequestIP + "\r\n");
                     DeviceInformation requester = new DeviceInformation();
                     requester.DeviceIP = incomingMessage.RequestIP;
                     requester.DeviceName = incomingMessage.SourceName;
@@ -2621,8 +2678,16 @@ namespace Wildfire_ICS_Assist
                     //if the device appears in the list of trusted devices, send automatically
                     if (!string.IsNullOrEmpty(requester.DeviceIP) && !string.IsNullOrEmpty(requester.DeviceName) && savedNetworkDevices.Where(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && o.TrustDevice).Any())
                     {
-
-                        Program.networkService.SendTaskData(CurrentIncident);
+                        if (incomingMessage.CurrentTaskID == Program.CurrentTask.TaskID && incomingMessage.LastSync > DateTime.MinValue)
+                        {
+                            List<TaskUpdate> taskUpdates = new List<TaskUpdate>(Program.CurrentTask.allTaskUpdates.Where(o => o.LastUpdatedUTC > incomingMessage.LastSync).ToList());
+                            foreach (TaskUpdate tu in taskUpdates) { tu.Source = "networksync"; }
+                            Program.networkService.SendNetworkObject(taskUpdates, Program.CurrentIncident.TaskID);
+                        }
+                        else
+                        {
+                            Program.networkService.SendTaskData(CurrentIncident);
+                        }
                         today = DateTime.Now;
                         addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current incident to trusted device " + requester.DeviceIP + "\r\n");
                     }
@@ -2664,7 +2729,15 @@ namespace Wildfire_ICS_Assist
                                     }
                                 }
 
-                                Program.networkService.SendTaskData(CurrentIncident);
+                                if (incomingMessage.CurrentTaskID == Program.CurrentTask.TaskID && incomingMessage.LastSync > DateTime.MinValue)
+                                {
+                                    List<TaskUpdate> taskUpdates = Program.CurrentTask.allTaskUpdates.Where(o => o.LastUpdatedUTC > incomingMessage.LastSync).ToList();
+                                    Program.networkService.SendNetworkObject(taskUpdates, Program.CurrentIncident.TaskID);
+                                }
+                                else
+                                {
+                                    Program.networkService.SendTaskData(CurrentIncident);
+                                }
                                 today = DateTime.Now;
                                 addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - sent current incident" + "\r\n");
                             }

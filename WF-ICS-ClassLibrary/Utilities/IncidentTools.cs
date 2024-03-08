@@ -13,7 +13,44 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class IncidentTools
     {
+        public static List<TaskUpdate> MostRecentTaskUpdates(this WFIncident task, bool localOnly = false)
+        {
+            List<TaskUpdate> updatesToKeep = new List<TaskUpdate>();
 
+            List<TaskUpdate> updatesToInspect = task.allTaskUpdates.OrderByDescending(o => o.LastUpdatedUTC).ToList();
+            if (localOnly) { updatesToInspect = updatesToInspect.Where(o => string.IsNullOrEmpty(o.Source) || o.Source.Equals("local")).ToList(); }
+            //filter as needed
+
+            updatesToKeep = updatesToInspect.GroupBy(o => o.ItemID).Select(g => g.OrderByDescending(y => y.LastUpdatedUTC).FirstOrDefault()).ToList();
+            return updatesToKeep;
+        }
+
+        public static DateTime LastNetworkTaskUpdate(this WFIncident task)
+        {
+            if (task.allTaskUpdates != null && task.allTaskUpdates.Any(o => !string.IsNullOrEmpty(o.Source) && o.Source.Equals("network")))
+            {
+                TaskUpdate lastNetwork = task.allTaskUpdates.Where(o => !string.IsNullOrEmpty(o.Source) && o.Source.Equals("network")).OrderByDescending(o => o.LastUpdatedUTC).FirstOrDefault();
+                return lastNetwork.LastUpdatedUTC;
+            }
+
+            return DateTime.MinValue;
+
+        }
+
+        public static WFIncident CompressTaskUpdates(this WFIncident task)
+        {
+            WFIncident compressed = task.Clone();
+
+            List<TaskUpdate> updatesToKeep = new List<TaskUpdate>();
+            List<TaskUpdate> updatesToRemove = new List<TaskUpdate>();
+
+            List<TaskUpdate> updatesToInspect = compressed.allTaskUpdates.OrderByDescending(o => o.LastUpdatedUTC).ToList();
+            //filter as needed
+
+            updatesToKeep = updatesToInspect.GroupBy(o => o.ItemID).Select(g => g.OrderByDescending(y => y.LastUpdatedUTC).FirstOrDefault()).ToList();
+            compressed.allTaskUpdates = updatesToKeep;
+            return compressed;
+        }
 
         public static int GetNextAssignmentNumber(this WFIncident incident, int Ops)
         {

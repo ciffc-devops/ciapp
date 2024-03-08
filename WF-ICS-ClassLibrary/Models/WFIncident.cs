@@ -46,8 +46,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
     ProtoInclude(132, typeof(OperationalSubGroup)),
     ProtoInclude(133, typeof(Vehicle)),
     ProtoInclude(134, typeof(DemobilizationRecord)),
-        ProtoInclude(135, typeof(ResourceReplacementPlan))
-        ]
+        ProtoInclude(135, typeof(ResourceReplacementPlan))]
 
 
 
@@ -55,7 +54,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
     [Serializable]
 
 
-    public class WFIncident
+    public class WFIncident : ICloneable
     {
         public WFIncident()
         {
@@ -589,6 +588,40 @@ ProtoInclude(127, typeof(SubjectProfile)),
         }
 
 
+        public WFIncident Clone()
+        {
+            WFIncident cloneTo = this.MemberwiseClone() as WFIncident;
+
+            cloneTo._AllAssignments = new List<TeamAssignment>(_AllAssignments);
+            cloneTo._allSafetyMessages = new List<SafetyMessage>(_allSafetyMessages);
+            cloneTo._allBriefings = new List<Briefing>(_allBriefings);
+
+            cloneTo._allOrgCharts = new List<OrganizationChart>(_allOrgCharts);
+            cloneTo._allIncidentObjectives = new List<IncidentObjectivesSheet>(_allIncidentObjectives);
+            cloneTo._allMedicalPlans = new List<MedicalPlan>(_allMedicalPlans);
+            cloneTo._allCommsPlans = new List<CommsPlan>(_allCommsPlans);
+            cloneTo._additionalCommsItems = new List<CommsPlanItem>(_additionalCommsItems);
+            cloneTo._allAirOperationsSummaries = new List<AirOperationsSummary>(_allAirOperationsSummaries);
+            cloneTo._allCommsLogEntries = new List<CommsLogEntry>(_allCommsLogEntries);
+            cloneTo._signInRecords = new List<CheckInRecord>(_signInRecords);
+            cloneTo._AllOperationalPeriods = new List<OperationalPeriod>(_AllOperationalPeriods);
+            cloneTo._AllGeneralMessages = new List<GeneralMessage>(_AllGeneralMessages);
+            cloneTo._AllOperationalGroups = new List<OperationalGroup>(_AllOperationalGroups);
+            cloneTo._allContacts = new List<Contact>(_allContacts);
+            cloneTo._allNotes = new List<Note>(_allNotes);
+            cloneTo._allEquipment = new List<TaskEquipment>(_allEquipment);
+            cloneTo._allEquipmentIssues = new List<EquipmentIssue>(_allEquipmentIssues);
+            cloneTo._allPositionLogEntries = new List<PositionLogEntry>(_allPositionLogEntries);
+            cloneTo._allTaskUpdates = new List<TaskUpdate>(_allTaskUpdates);
+            cloneTo._allDemobilizationRecords = new List<DemobilizationRecord>(_allDemobilizationRecords);
+            cloneTo._IncidentResources = new List<IncidentResource>(_IncidentResources);
+            cloneTo._ResourceReplacementPlans = new List<ResourceReplacementPlan>(_ResourceReplacementPlans);
+            return cloneTo;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
 
 
 

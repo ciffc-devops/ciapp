@@ -29,6 +29,13 @@ namespace WF_ICS_ClassLibrary.Networking
         [ProtoMember(6)]
         private string _RequestID;
         public string RequestIP { get => _RequestID; set => _RequestID = value; }
+
+        [ProtoMember(7)] private DateTime _LastSync = DateTime.MinValue;
+        [ProtoMember(8)] private Guid _CurrentTaskID;
+
+        public DateTime LastSync { get => _LastSync; set => _LastSync = value; }
+        public Guid CurrentTaskID { get => _CurrentTaskID; set => _CurrentTaskID = value; }
+
     }
 
     [ProtoContract]

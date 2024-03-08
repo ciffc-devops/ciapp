@@ -35,7 +35,6 @@ namespace WF_ICS_ClassLibrary.Models
     [XmlInclude(typeof(Timeline))]
     [XmlInclude(typeof(TimelineEvent))]
     [XmlInclude(typeof(Vehicle))]
-
     [XmlInclude(typeof(Aircraft))]
     [XmlInclude(typeof(AirOperationsSummary))]
     [XmlInclude(typeof(NOTAM))]
@@ -67,6 +66,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(10)] private string _DataEnc;
         [ProtoMember(11)] private string _DataAsJSONString;
         [ProtoMember(12)] private string _Source;
+        [ProtoMember(13)] private Guid _ItemID;
 
         public TaskUpdate() { UpdateID = System.Guid.NewGuid(); }
 
@@ -114,6 +114,15 @@ namespace WF_ICS_ClassLibrary.Models
         {
             DataEnc = StringCipher.Encrypt(_DataAsJSONString, key);
         }
+        public Guid ItemID
+        {
+            get
+            {
+                if (_ItemID == Guid.Empty) { _ItemID = this.GetItemID(); }
+                return _ItemID;
+            }
+            set { _ItemID = value; }
+        }
 
         public TaskUpdate Clone()
         {
@@ -136,6 +145,49 @@ namespace WF_ICS_ClassLibrary.Models
 
     public static class TaskUpdateTools
     {
+        public static Guid GetItemID(this TaskUpdate update)
+        {
+            if (update.Data != null)
+            {
+                if (update.ObjectType.Equals(new Contact().GetType().Name)) { return (update.Data as Contact).ContactID; }
+                else if (update.ObjectType.Equals(new TeamAssignment().GetType().Name)) { return (update.Data as TeamAssignment).ID; }
+                else if (update.ObjectType.Equals(new Briefing().GetType().Name)) { return (update.Data as Briefing).BriefingID; }
+                else if (update.ObjectType.Equals(new CommsLogEntry().GetType().Name)) { return (update.Data as CommsLogEntry).EntryID; }
+                else if (update.ObjectType.Equals(new CommsPlan().GetType().Name)) { return (update.Data as CommsPlan).ID; }
+                else if (update.ObjectType.Equals(new CommsPlanItem().GetType().Name)) { return (update.Data as CommsPlanItem).ItemID; }
+                else if (update.ObjectType.Equals(new TaskEquipment().GetType().Name)) { return (update.Data as TaskEquipment).EquipmentID; }
+                else if (update.ObjectType.Equals(new EquipmentIssue().GetType().Name)) { return (update.Data as EquipmentIssue).IssueID; }
+                else if (update.ObjectType.Equals(new IncidentObjective().GetType().Name)) { return (update.Data as IncidentObjective).ObjectiveID; }
+                else if (update.ObjectType.Equals(new IncidentObjectivesSheet().GetType().Name)) { return (update.Data as IncidentObjectivesSheet).SheetID; }
+                else if (update.ObjectType.Equals(new MedicalPlan().GetType().Name)) { return (update.Data as MedicalPlan).ID; }
+                else if (update.ObjectType.Equals(new Personnel().GetType().Name)) { return (update.Data as Personnel).ID; }
+                else if (update.ObjectType.Equals(new CheckInRecord().GetType().Name)) { return (update.Data as CheckInRecord).SignInRecordID; }
+                else if (update.ObjectType.Equals(new Note().GetType().Name)) { return (update.Data as Note).NoteID; }
+                else if (update.ObjectType.Equals(new OperationalPeriod().GetType().Name)) { return (update.Data as OperationalPeriod).OperationalPeriodID; }
+                else if (update.ObjectType.Equals(new OrganizationChart().GetType().Name)) { return (update.Data as OrganizationChart).OrganizationalChartID; }
+                else if (update.ObjectType.Equals(new ICSRole().GetType().Name)) { return (update.Data as ICSRole).RoleID; }
+                else if (update.ObjectType.Equals(new PositionLogEntry().GetType().Name)) { return (update.Data as PositionLogEntry).LogID; }
+                else if (update.ObjectType.Equals(new Timeline().GetType().Name)) { return (update.Data as Timeline).TimeLineID; }
+                else if (update.ObjectType.Equals(new TimelineEvent().GetType().Name)) { return (update.Data as TimelineEvent).TimelineEventID; }
+                else if (update.ObjectType.Equals(new Vehicle().GetType().Name)) { return (update.Data as Vehicle).ID; }
+                else if (update.ObjectType.Equals(new Aircraft().GetType().Name)) { return (update.Data as Aircraft).ID; }
+                else if (update.ObjectType.Equals(new AirOperationsSummary().GetType().Name)) { return (update.Data as AirOperationsSummary).ID; }
+                else if (update.ObjectType.Equals(new NOTAM().GetType().Name)) { return (update.Data as NOTAM).ID; }
+                else if (update.ObjectType.Equals(new GeneralMessage().GetType().Name)) { return (update.Data as GeneralMessage).MessageID; }
+                else if (update.ObjectType.Equals(new AmbulanceService().GetType().Name)) { return (update.Data as AmbulanceService).AmbulanceID; }
+                else if (update.ObjectType.Equals(new Hospital().GetType().Name)) { return (update.Data as Hospital).HospitalID; }
+                else if (update.ObjectType.Equals(new MedicalPlan().GetType().Name)) { return (update.Data as MedicalPlan).ID; }
+                else if (update.ObjectType.Equals(new MedicalAidStation().GetType().Name)) { return (update.Data as MedicalAidStation).AidStationID; }
+                else if (update.ObjectType.Equals(new SafetyMessage().GetType().Name)) { return (update.Data as SafetyMessage).ID; }
+                else if (update.ObjectType.Equals(new WFIncident().GetType().Name)) { return (update.Data as WFIncident).TaskID; }
+                else if (update.ObjectType.Equals(new OperationalGroup().GetType().Name)) { return (update.Data as OperationalGroup).ID; }
+                else if (update.ObjectType.Equals(new OperationalSubGroup().GetType().Name)) { return (update.Data as OperationalSubGroup).ID; }
+                else if (update.ObjectType.Equals(new ResourceReplacementPlan().GetType().Name)) { return (update.Data as ResourceReplacementPlan).ID; }
+            }
+            return Guid.Empty;
+
+        }
+
 
         public static object DecryptTaskUpdateData(this TaskUpdate update, string encryptKey)
         {

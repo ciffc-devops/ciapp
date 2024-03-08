@@ -13,7 +13,7 @@ namespace WF_ICS_ClassLibrary.Networking
 {
     [ProtoContract]
     [Serializable]
-    public class NetworkSendObject 
+    public class NetworkSendObject
     {
         public NetworkSendObject()
         {
@@ -41,7 +41,7 @@ namespace WF_ICS_ClassLibrary.Networking
 
         [ProtoMember(43)] private TaskUpdate _taskUpdate; //[ProtoMember(43)] private TaskUpdate _taskUpdate;
         [ProtoMember(44)] private bool _UploadedToInternet;
-
+        [ProtoMember(45)] private List<TaskUpdate> _taskUpdates = new List<TaskUpdate>();
         public Guid GuidValue { get { return _guidValue; } set { _guidValue = value; } }
         public bool UploadedToInternet { get => _UploadedToInternet; set => _UploadedToInternet = value; }
 
@@ -50,13 +50,14 @@ namespace WF_ICS_ClassLibrary.Networking
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public GeneralOptions generalOptions { get => _generalOptions; set => _generalOptions = value; }
 
-     
+
         public TaskUpdate taskUpdate { get => _taskUpdate; set => _taskUpdate = value; }
+        public List<TaskUpdate> taskUpdates { get => _taskUpdates; set => _taskUpdates = value; }
 
 
     }
 
-    
+
     public static class NetworkCheck
     {
         public static bool CheckForInternetConnection()
@@ -64,7 +65,7 @@ namespace WF_ICS_ClassLibrary.Networking
             try
             {
                 using (var client = new WebClient())
-                using (client.OpenRead("http://sarassist.ca"))
+                using (client.OpenRead("https://google.com"))
                     return true;
             }
             catch
