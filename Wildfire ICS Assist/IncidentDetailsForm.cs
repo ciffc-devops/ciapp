@@ -1534,8 +1534,12 @@ namespace Wildfire_ICS_Assist
                 if(result == DialogResult.OK)
                 {
                     tmrAutoSave.Enabled = true;
-                    Image img = ((byte[])Program.generalOptionsService.GetOptionsValue("OrganizationLogo")).getImageFromBytes();
-                    picOrgLogo.Image = img;
+                    if (Program.generalOptionsService.GetOptionsValue("OrganizationLogo") != null)
+                    {
+                        Image img = ((byte[])Program.generalOptionsService.GetOptionsValue("OrganizationLogo")).getImageFromBytes();
+                        picOrgLogo.Image = img;
+                    }
+                    
 
                 }
             }

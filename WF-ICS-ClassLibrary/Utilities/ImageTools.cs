@@ -72,11 +72,13 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         public static System.Drawing.Image getImageFromBytes(this byte[] TheImageAsBytes)
         {
+            if (TheImageAsBytes != null)
+            {
+                MemoryStream MemStr = new MemoryStream(TheImageAsBytes);
 
-            MemoryStream MemStr = new MemoryStream(TheImageAsBytes);
-
-            System.Drawing.Image I = System.Drawing.Image.FromStream(MemStr);
-            return I;
+                System.Drawing.Image I = System.Drawing.Image.FromStream(MemStr);
+                return I;
+            } return null;
         }
 
     }
