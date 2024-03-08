@@ -385,6 +385,8 @@ namespace WildfireICSDesktopServices
                     return _options.IncludeOrgContactsInIAP;
                 case "DefaultToNetworkServer":
                     return _options.DefaultToServer;
+                case "ShowTestButton":
+                    return _options.ShowTestButton;
                 default:
                     return false;
             }

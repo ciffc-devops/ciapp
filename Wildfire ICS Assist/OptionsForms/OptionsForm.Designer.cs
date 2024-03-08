@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbGeneral = new System.Windows.Forms.TabPage();
+            this.txtOrganizationName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.btnRemoveLogo = new System.Windows.Forms.Button();
@@ -88,7 +89,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtOrganizationName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
+            this.label13 = new System.Windows.Forms.Label();
+            this.chkShowTest = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReportLogo)).BeginInit();
@@ -114,7 +116,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(746, 520);
+            this.tabControl1.Size = new System.Drawing.Size(746, 574);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 0;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
@@ -122,6 +124,8 @@
             // tbGeneral
             // 
             this.tbGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.tbGeneral.Controls.Add(this.label13);
+            this.tbGeneral.Controls.Add(this.chkShowTest);
             this.tbGeneral.Controls.Add(this.txtOrganizationName);
             this.tbGeneral.Controls.Add(this.label12);
             this.tbGeneral.Controls.Add(this.label11);
@@ -147,10 +151,21 @@
             this.tbGeneral.Location = new System.Drawing.Point(4, 33);
             this.tbGeneral.Name = "tbGeneral";
             this.tbGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tbGeneral.Size = new System.Drawing.Size(738, 483);
+            this.tbGeneral.Size = new System.Drawing.Size(738, 537);
             this.tbGeneral.TabIndex = 0;
             this.tbGeneral.Text = "General";
             this.tbGeneral.Click += new System.EventHandler(this.tbGeneral_Click);
+            // 
+            // txtOrganizationName
+            // 
+            this.txtOrganizationName.BackColor = System.Drawing.Color.Transparent;
+            this.txtOrganizationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrganizationName.Location = new System.Drawing.Point(267, 334);
+            this.txtOrganizationName.Margin = new System.Windows.Forms.Padding(6);
+            this.txtOrganizationName.Multiline = false;
+            this.txtOrganizationName.Name = "txtOrganizationName";
+            this.txtOrganizationName.Size = new System.Drawing.Size(463, 32);
+            this.txtOrganizationName.TabIndex = 138;
             // 
             // label12
             // 
@@ -404,7 +419,7 @@
             this.tbFileManagement.Controls.Add(this.chkAutoSave);
             this.tbFileManagement.Location = new System.Drawing.Point(4, 33);
             this.tbFileManagement.Name = "tbFileManagement";
-            this.tbFileManagement.Size = new System.Drawing.Size(738, 483);
+            this.tbFileManagement.Size = new System.Drawing.Size(738, 537);
             this.tbFileManagement.TabIndex = 3;
             this.tbFileManagement.Text = "File Management";
             this.tbFileManagement.UseVisualStyleBackColor = true;
@@ -624,7 +639,7 @@
             this.tbNetworking.Controls.Add(this.lbTrustedDevices);
             this.tbNetworking.Location = new System.Drawing.Point(4, 33);
             this.tbNetworking.Name = "tbNetworking";
-            this.tbNetworking.Size = new System.Drawing.Size(738, 483);
+            this.tbNetworking.Size = new System.Drawing.Size(738, 537);
             this.tbNetworking.TabIndex = 2;
             this.tbNetworking.Text = "Networking";
             this.tbNetworking.UseVisualStyleBackColor = true;
@@ -729,7 +744,7 @@
             // 
             this.btnRemoveTrustedDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveTrustedDevice.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_193_circle_empty_remove;
-            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 425);
+            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 479);
             this.btnRemoveTrustedDevice.Name = "btnRemoveTrustedDevice";
             this.btnRemoveTrustedDevice.Size = new System.Drawing.Size(290, 42);
             this.btnRemoveTrustedDevice.TabIndex = 115;
@@ -750,7 +765,7 @@
             this.lbTrustedDevices.Name = "lbTrustedDevices";
             this.lbTrustedDevices.ScrollAlwaysVisible = true;
             this.lbTrustedDevices.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 172);
+            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 196);
             this.lbTrustedDevices.TabIndex = 114;
             this.lbTrustedDevices.ValueMember = "DeviceID";
             // 
@@ -771,8 +786,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(746, 590);
-            this.splitContainer1.SplitterDistance = 520;
+            this.splitContainer1.Size = new System.Drawing.Size(746, 644);
+            this.splitContainer1.SplitterDistance = 574;
             this.splitContainer1.TabIndex = 1;
             // 
             // btnCancel
@@ -808,21 +823,32 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Images|*.jpg;*.jpeg;*.png;,*.gif,*.bmp";
             // 
-            // txtOrganizationName
+            // label13
             // 
-            this.txtOrganizationName.Location = new System.Drawing.Point(267, 334);
-            this.txtOrganizationName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.txtOrganizationName.Multiline = false;
-            this.txtOrganizationName.Name = "txtOrganizationName";
-            this.txtOrganizationName.Size = new System.Drawing.Size(463, 32);
-            this.txtOrganizationName.TabIndex = 138;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(46, 482);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(215, 24);
+            this.label13.TabIndex = 144;
+            this.label13.Text = "Testing";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkShowTest
+            // 
+            this.chkShowTest.AutoSize = true;
+            this.chkShowTest.Location = new System.Drawing.Point(267, 480);
+            this.chkShowTest.Name = "chkShowTest";
+            this.chkShowTest.Size = new System.Drawing.Size(245, 28);
+            this.chkShowTest.TabIndex = 145;
+            this.chkShowTest.Text = "Yes, show the Test button";
+            this.chkShowTest.UseVisualStyleBackColor = true;
             // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(746, 590);
+            this.ClientSize = new System.Drawing.Size(746, 644);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -910,5 +936,7 @@
         private System.Windows.Forms.PictureBox picReportLogo;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private CustomControls.TextBoxRequiredControl txtOrganizationName;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.CheckBox chkShowTest;
     }
 }

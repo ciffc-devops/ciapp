@@ -82,7 +82,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             }
             if (string.IsNullOrEmpty(options.OrganizationName)) { txtOrganizationName.SetText("Canadian Interagency Forest Fire Centre"); }
             else { txtOrganizationName.SetText(options.OrganizationName); }
-
+            chkShowTest.Checked = options.ShowTestButton;
 
             //File Management
             chkAutoSave.Checked = options.AutoSave;
@@ -161,7 +161,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     options.RedResourceTimeoutDays = Convert.ToInt32(numRedResourceTimeoutDays.Value);
                     if (NewOrgLogo != null) { Program.generalOptionsService.UpserOptionValue(NewOrgLogo, "OrganizationLogo"); }
                     options.OrganizationName = txtOrganizationName.Text;
-
+                    options.ShowTestButton = chkShowTest.Checked;
 
                     //File Management
                     options.AutoSave = chkAutoSave.Checked;

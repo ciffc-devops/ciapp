@@ -87,7 +87,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         [ProtoMember(68)] private byte[] _OrganizationLogo;
         [ProtoMember(69)] private string _OrganizationName;
-
+        [ProtoMember(70)] private bool _ShowTestButton;
 
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
@@ -181,6 +181,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         public byte[] OrganizationLogo { get => _OrganizationLogo; set => _OrganizationLogo = value; }
         public string OrganizationName { get => _OrganizationName; set => _OrganizationName = value; }
+        public bool ShowTestButton { get => _ShowTestButton; set => _ShowTestButton = value; }
 
         public void addDefaultOptions()
         {
@@ -215,7 +216,7 @@ namespace WF_ICS_ClassLibrary.Models
             YellowResourceTimeoutDays = 5;
             RedResourceTimeoutDays = 2;
             OrganizationName = "Canadian Interagency Forest Fire Centre";
-
+            ShowTestButton = false;
             //options.PrimaryChannel = "PEPSAR1 149.495";
 
             LastUpdateCheck = DateTime.Now;

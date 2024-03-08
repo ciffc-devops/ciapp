@@ -99,7 +99,7 @@ namespace Wildfire_ICS_Assist
 
             NetworkComms.AppendGlobalIncomingPacketHandler<WFIncident>("WFIncident", Program.networkService.HandleIncomingIncident);
 
-
+            tESTToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
 
         }
@@ -1540,7 +1540,10 @@ namespace Wildfire_ICS_Assist
                         Image img = ((byte[])Program.generalOptionsService.GetOptionsValue("OrganizationLogo")).getImageFromBytes();
                         picOrgLogo.Image = img;
                     }
-                    
+
+                    tESTToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
+
+
 
                 }
             }

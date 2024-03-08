@@ -18,6 +18,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
         public TestForm()
         {
             InitializeComponent();
+            this.Icon = Program.programIcon;
+            this.BackColor = Program.FormBackground;
         }
 
         List<CheckBox> checkboxes = new List<CheckBox>();
@@ -401,6 +403,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
             {
                 checkboxes[x].Width = panel1.Width;
                 checkboxes[x].Location = new Point(0, x * 24);
+                checkboxes[x].Height = 30;
                 panel1.Controls.Add(checkboxes[x]);
             }
 
