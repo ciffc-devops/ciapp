@@ -36,7 +36,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(23)] private string _ResourceID;
         [ProtoMember(24)] private string _BoxText;
 
-        [ProtoMember(24)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
+        [ProtoMember(25)] private List<OperationalGroupResourceListing> _ResourceListing = new List<OperationalGroupResourceListing>();
 
 
         private int _Depth;
