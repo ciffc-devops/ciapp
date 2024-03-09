@@ -62,7 +62,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(6)] private bool _ProcessedLocally;
         [ProtoMember(7)] private bool _UploadedSuccessfully;
         [ProtoMember(8)] private Guid _MachineID;
-        [ProtoMember(9)] private string _ObjcetType;
+        [ProtoMember(9)] private string _ObjectType;
         [ProtoMember(10)] private string _DataEnc;
         [ProtoMember(11)] private string _DataAsJSONString;
         [ProtoMember(12)] private string _Source;
@@ -107,7 +107,7 @@ namespace WF_ICS_ClassLibrary.Models
         public bool ProcessedLocally { get => _ProcessedLocally; set => _ProcessedLocally = value; }
         public bool UploadedSuccessfully { get => _UploadedSuccessfully; set => _UploadedSuccessfully = value; }
         public Guid MachineID { get => _MachineID; set => _MachineID = value; }
-        public string ObjectType { get => _ObjcetType; set => _ObjcetType = value; }
+        public string ObjectType { get => _ObjectType; set => _ObjectType = value; }
         public string DataEnc { get => _DataEnc; set => _DataEnc = value; }
         public string Source { get => _Source; set => _Source = value; }
         public void SetEncData(string key)
