@@ -252,34 +252,7 @@ namespace WF_ICS_ClassLibrary.Models
 
     }
 
-    /*
-    [ProtoContract]
-    [Serializable]
-    public class CommsPlanItemLink : ICloneable
-    {
-        [ProtoMember(1)] private Guid _ItemID;
-        [ProtoMember(2)] private string _CommsFunction;
-        [ProtoMember(3)] private int _OpsPeriod;
-
-        public Guid ItemID { get => _ItemID; set => _ItemID = value; }
-        public string CommsFunction { get => _CommsFunction; set => _CommsFunction = value; }
-        public int OpsPeriod { get => _OpsPeriod; set => _OpsPeriod = value; }
-
-        public CommsPlanItemLink() { }
-        public CommsPlanItemLink(Guid id, string function, int ops)
-        {
-            ItemID = id; CommsFunction = function; OpsPeriod = ops;
-        }
-        public CommsPlanItemLink Clone()
-        {
-            return this.MemberwiseClone() as CommsPlanItemLink;
-        }
-        object ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-
-    }*/
+  
     public static class CommsPlanTools
     {
         public static string PlanToCSV(List<CommsPlanItem> items, string delimiter = ",")

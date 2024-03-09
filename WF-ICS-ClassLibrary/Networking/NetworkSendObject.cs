@@ -1,13 +1,9 @@
-﻿using NetworkCommsDotNet.DPSBase;
-using NetworkCommsDotNet.Tools;
+﻿using NetworkCommsDotNet.Tools;
 using ProtoBuf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Models;
+using System.Collections.Generic;
 
 namespace WF_ICS_ClassLibrary.Networking
 {
@@ -24,8 +20,7 @@ namespace WF_ICS_ClassLibrary.Networking
             TaskID = task_id;
         }
 
-        [ProtoMember(1)]
-        public Guid RequestID { get; set; }
+        [ProtoMember(1)]        public Guid RequestID { get; set; }
 
         //for network reasons
         public ShortGuid SourceIdentifier { get { return new ShortGuid(_sourceIdentifier); } set { _sourceIdentifier = value; } }
@@ -38,10 +33,11 @@ namespace WF_ICS_ClassLibrary.Networking
         [ProtoMember(33)] private Guid _TaskID;
         [ProtoMember(32)] private GeneralOptions _generalOptions;
 
-
-        [ProtoMember(43)] private TaskUpdate _taskUpdate; //[ProtoMember(43)] private TaskUpdate _taskUpdate;
+        //  [ProtoMember(43)]
+        [ProtoIgnore] private TaskUpdate _taskUpdate; //[ProtoMember(43)] private TaskUpdate _taskUpdate;
         [ProtoMember(44)] private bool _UploadedToInternet;
-        [ProtoMember(45)] private List<TaskUpdate> _taskUpdates = new List<TaskUpdate>();
+        //  [ProtoMember(45)]
+        [ProtoIgnore] private List<TaskUpdate> _taskUpdates = new List<TaskUpdate>();
         public Guid GuidValue { get { return _guidValue; } set { _guidValue = value; } }
         public bool UploadedToInternet { get => _UploadedToInternet; set => _UploadedToInternet = value; }
 

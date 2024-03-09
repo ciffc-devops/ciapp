@@ -1,21 +1,19 @@
-﻿using NetworkCommsDotNet.Connections.TCP;
+﻿using NetworkCommsDotNet;
 using NetworkCommsDotNet.Connections;
+using NetworkCommsDotNet.Connections.TCP;
 using NetworkCommsDotNet.DPSBase;
 using NetworkCommsDotNet.Tools;
-using NetworkCommsDotNet;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using static iTextSharp.text.TabStop;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary;
@@ -431,7 +429,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        
+
 
         public NetworkSendResults SendNetworkObject(object objToSend, Guid TaskID, string comment = null, string ip = null, string port = null, bool sentByInternet = false)
         {
@@ -476,7 +474,7 @@ namespace WildfireICSDesktopServices
                 }
                 networkSendObject.RequestID = Guid.NewGuid();
                 networkSendObject.objectType = objToSend.GetType().ToString();
-              
+
                 networkSendObject.SourceName = HostInfo.HostName;
                 networkSendObject.SourceIdentifier = NetworkComms.NetworkIdentifier;
                 networkSendObject.comment = comment;
@@ -514,12 +512,13 @@ namespace WildfireICSDesktopServices
                     //We perform the send within a try catch to ensure the application continues to run if there is a problem.
                     try
                     {
-                        //SendReceiveOptions customSendReceiveOptions = new SendReceiveOptions<ProtobufSerializer>();
+                        SendReceiveOptions customSendReceiveOptions = new SendReceiveOptions<ProtobufSerializer>();
                         //ConnectionInfo connectionInfo = new ConnectionInfo("192.168.1.105", 5614);
-                        //TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo, customSendReceiveOptions);
+                        TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo, customSendReceiveOptions);
 
 
-                        TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo);
+
+                       // TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo);
                         serverConnection.SendObject("NetworkSendObject", networkSendObject);
                         results.SentSuccessfully = true;
                         //errors.Add(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " - sent " + networkSendObject.objectType + " - " + networkSendObject.comment + "\r\n");
