@@ -33,11 +33,11 @@ namespace WF_ICS_ClassLibrary.Networking
         [ProtoMember(33)] private Guid _TaskID;
         [ProtoMember(32)] private GeneralOptions _generalOptions;
 
-        //  [ProtoMember(43)]
-        [ProtoIgnore] private TaskUpdate _taskUpdate; //[ProtoMember(43)] private TaskUpdate _taskUpdate;
+        //  
+        [ProtoMember(43)] private TaskUpdate _taskUpdate; //[ProtoMember(43)] private TaskUpdate _taskUpdate;
         [ProtoMember(44)] private bool _UploadedToInternet;
-        //  [ProtoMember(45)]
-        [ProtoIgnore] private List<TaskUpdate> _taskUpdates = new List<TaskUpdate>();
+        // 
+        [ProtoMember(45)] private List<TaskUpdate> _taskUpdates = new List<TaskUpdate>();
         public Guid GuidValue { get { return _guidValue; } set { _guidValue = value; } }
         public bool UploadedToInternet { get => _UploadedToInternet; set => _UploadedToInternet = value; }
 
