@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
+    [Serializable]
     public class Vehicle : IncidentResource,  ICloneable
     {
         [ProtoMember(2)] private Guid _TaskID;
