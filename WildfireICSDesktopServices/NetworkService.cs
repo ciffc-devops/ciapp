@@ -512,13 +512,13 @@ namespace WildfireICSDesktopServices
                     //We perform the send within a try catch to ensure the application continues to run if there is a problem.
                     try
                     {
-                        SendReceiveOptions customSendReceiveOptions = new SendReceiveOptions<ProtobufSerializer>();
+                        //SendReceiveOptions customSendReceiveOptions = new SendReceiveOptions<ProtobufSerializer>();
                         //ConnectionInfo connectionInfo = new ConnectionInfo("192.168.1.105", 5614);
-                        TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo, customSendReceiveOptions);
+                        //TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo, customSendReceiveOptions);
 
 
 
-                       // TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo);
+                        TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo);
                         serverConnection.SendObject("NetworkSendObject", networkSendObject);
                         results.SentSuccessfully = true;
                         //errors.Add(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " - sent " + networkSendObject.objectType + " - " + networkSendObject.comment + "\r\n");
