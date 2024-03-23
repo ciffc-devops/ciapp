@@ -120,6 +120,8 @@ namespace Wildfire_ICS_Assist.CustomControls
             txtLastName.TextChanged += TxtLastName_TextChanged;
             txtNOKName.TextChanged += TxtNOKName_TextChanged;
             txtCellphone.TextChanged += TxtCellphone_TextChanged;
+            cboKind.DropDownWidth = cboKind.GetDropDownWidth();
+            cboType.DropDownWidth = cboType.GetDropDownWidth();
         }
 
         private void TxtCellphone_TextChanged(object sender, EventArgs e)

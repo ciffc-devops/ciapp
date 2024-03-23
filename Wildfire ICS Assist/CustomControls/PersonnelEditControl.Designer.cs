@@ -655,11 +655,21 @@
             this.cboKind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboKind.FormattingEnabled = true;
             this.cboKind.Items.AddRange(new object[] {
-            "Overhead / IMT",
-            "Crew Member",
+            "IMT - Command/General Staff/Unit Leaders/Managers",
             "Single Resource",
-            "Aircraft Personnel",
-            "Contractor"});
+            "Structure Protection Specialist - STPS",
+            "Wildland Urban Interface Crew Boss - WUIB",
+            "Wildland Urban Interface STLD ",
+            "Wildland Urban Interface TFLD",
+            "Wildland Urban Interface Crew Member",
+            "Contractor",
+            "Unit Crew Member",
+            "Unit Crew Leader",
+            "Unit Crew Sub-Leader",
+            "Initial Attack Crew Member",
+            "Initial Attack Crew Leader",
+            "Sustained Action Crew Member",
+            "Sustained Action Crew Leader"});
             this.cboKind.Location = new System.Drawing.Point(220, 9);
             this.cboKind.Name = "cboKind";
             this.cboKind.Size = new System.Drawing.Size(163, 32);
@@ -676,7 +686,11 @@
             this.cboType.Items.AddRange(new object[] {
             "Type 1",
             "Type 2",
-            "Type 3"});
+            "Type 3",
+            "Type 4",
+            "Type 5",
+            "Type 6",
+            "Type 7"});
             this.cboType.Location = new System.Drawing.Point(163, 9);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(143, 32);
@@ -734,7 +748,9 @@
             this.txtFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFirstName.BackColor = System.Drawing.Color.Transparent;
+            this.txtFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFirstName.Location = new System.Drawing.Point(4, 4);
+            this.txtFirstName.Margin = new System.Windows.Forms.Padding(6);
             this.txtFirstName.Multiline = false;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(150, 29);
@@ -745,7 +761,9 @@
             this.txtLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLastName.BackColor = System.Drawing.Color.Transparent;
+            this.txtLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLastName.Location = new System.Drawing.Point(6, 4);
+            this.txtLastName.Margin = new System.Windows.Forms.Padding(6);
             this.txtLastName.Multiline = false;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(149, 29);
@@ -836,6 +854,7 @@
             this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCellphone.BackColor = System.Drawing.Color.Transparent;
+            this.txtCellphone.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCellphone.Location = new System.Drawing.Point(218, 2);
             this.txtCellphone.Margin = new System.Windows.Forms.Padding(6);
             this.txtCellphone.Multiline = false;
