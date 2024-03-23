@@ -61,11 +61,12 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.browseFileControl3 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
+            this.browseFileControl4 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
             this.browseFileControl2 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
             this.browseFileControl1 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
             this.txtCriticalMessage = new SpellBox();
-            this.browseFileControl3 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
-            this.browseFileControl4 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -85,6 +86,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.browseFileControl3);
             this.splitContainer1.Panel1.Controls.Add(this.browseFileControl4);
             this.splitContainer1.Panel1.Controls.Add(this.browseFileControl2);
@@ -115,8 +117,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveAsPDF);
-            this.splitContainer1.Size = new System.Drawing.Size(865, 803);
-            this.splitContainer1.SplitterDistance = 726;
+            this.splitContainer1.Size = new System.Drawing.Size(865, 779);
+            this.splitContainer1.SplitterDistance = 702;
             this.splitContainer1.TabIndex = 1;
             // 
             // label4
@@ -139,7 +141,7 @@
             this.pnlTitlePageContent.Controls.Add(this.btnSelectImage);
             this.pnlTitlePageContent.Controls.Add(this.label3);
             this.pnlTitlePageContent.Controls.Add(this.picTitleImage);
-            this.pnlTitlePageContent.Location = new System.Drawing.Point(3, 581);
+            this.pnlTitlePageContent.Location = new System.Drawing.Point(3, 557);
             this.pnlTitlePageContent.Name = "pnlTitlePageContent";
             this.pnlTitlePageContent.Size = new System.Drawing.Size(862, 141);
             this.pnlTitlePageContent.TabIndex = 39;
@@ -180,9 +182,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(306, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(327, 24);
+            this.label3.Size = new System.Drawing.Size(437, 24);
             this.label3.TabIndex = 36;
-            this.label3.Text = "Critical message for this op period";
+            this.label3.Text = "Title page message for this operational period";
             // 
             // picTitleImage
             // 
@@ -435,11 +437,36 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Images|*.jpg;*.jpeg;*.png;,*.gif,*.bmp";
             // 
+            // browseFileControl3
+            // 
+            this.browseFileControl3.FileName = null;
+            this.browseFileControl3.Filter = "PDFs|*.pdf";
+            this.browseFileControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseFileControl3.Location = new System.Drawing.Point(15, 460);
+            this.browseFileControl3.Margin = new System.Windows.Forms.Padding(6);
+            this.browseFileControl3.MinimumSize = new System.Drawing.Size(0, 44);
+            this.browseFileControl3.Name = "browseFileControl3";
+            this.browseFileControl3.Size = new System.Drawing.Size(838, 44);
+            this.browseFileControl3.TabIndex = 44;
+            // 
+            // browseFileControl4
+            // 
+            this.browseFileControl4.FileName = null;
+            this.browseFileControl4.Filter = "PDFs|*.pdf";
+            this.browseFileControl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseFileControl4.Location = new System.Drawing.Point(15, 508);
+            this.browseFileControl4.Margin = new System.Windows.Forms.Padding(6);
+            this.browseFileControl4.MinimumSize = new System.Drawing.Size(0, 44);
+            this.browseFileControl4.Name = "browseFileControl4";
+            this.browseFileControl4.Size = new System.Drawing.Size(838, 44);
+            this.browseFileControl4.TabIndex = 43;
+            // 
             // browseFileControl2
             // 
             this.browseFileControl2.FileName = null;
+            this.browseFileControl2.Filter = "PDFs|*.pdf";
             this.browseFileControl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.browseFileControl2.Location = new System.Drawing.Point(15, 420);
+            this.browseFileControl2.Location = new System.Drawing.Point(15, 412);
             this.browseFileControl2.Margin = new System.Windows.Forms.Padding(6);
             this.browseFileControl2.MinimumSize = new System.Drawing.Size(0, 44);
             this.browseFileControl2.Name = "browseFileControl2";
@@ -449,6 +476,7 @@
             // browseFileControl1
             // 
             this.browseFileControl1.FileName = null;
+            this.browseFileControl1.Filter = "PDFs|*.pdf";
             this.browseFileControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.browseFileControl1.Location = new System.Drawing.Point(15, 364);
             this.browseFileControl1.Margin = new System.Windows.Forms.Padding(6);
@@ -471,33 +499,22 @@
             this.txtCriticalMessage.Leave += new System.EventHandler(this.txtCriticalMessage_Leave_1);
             this.txtCriticalMessage.Child = new System.Windows.Controls.TextBox();
             // 
-            // browseFileControl3
+            // label5
             // 
-            this.browseFileControl3.FileName = null;
-            this.browseFileControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.browseFileControl3.Location = new System.Drawing.Point(15, 476);
-            this.browseFileControl3.Margin = new System.Windows.Forms.Padding(6);
-            this.browseFileControl3.MinimumSize = new System.Drawing.Size(0, 44);
-            this.browseFileControl3.Name = "browseFileControl3";
-            this.browseFileControl3.Size = new System.Drawing.Size(838, 44);
-            this.browseFileControl3.TabIndex = 44;
-            // 
-            // browseFileControl4
-            // 
-            this.browseFileControl4.FileName = null;
-            this.browseFileControl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.browseFileControl4.Location = new System.Drawing.Point(15, 532);
-            this.browseFileControl4.Margin = new System.Windows.Forms.Padding(6);
-            this.browseFileControl4.MinimumSize = new System.Drawing.Size(0, 44);
-            this.browseFileControl4.Name = "browseFileControl4";
-            this.browseFileControl4.Size = new System.Drawing.Size(838, 44);
-            this.browseFileControl4.TabIndex = 43;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(178, 338);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(608, 17);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "*These documents will be included in the PDF, but not saved within this software " +
+    "for other users";
             // 
             // PrintIncidentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 803);
+            this.ClientSize = new System.Drawing.Size(865, 779);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -558,5 +575,6 @@
         private CustomControls.BrowseFileControl browseFileControl1;
         private CustomControls.BrowseFileControl browseFileControl3;
         private CustomControls.BrowseFileControl browseFileControl4;
+        private System.Windows.Forms.Label label5;
     }
 }

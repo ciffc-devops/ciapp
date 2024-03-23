@@ -3138,7 +3138,7 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
                         stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
                         stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "OPERATIONAL PERIOD");
-                        if (!string.IsNullOrEmpty(currentPeriod.CriticalMessage)) { stamper.AcroFields.SetField("CriticalMessage", "Critical Message for this Operational Period: " + Environment.NewLine + currentPeriod.CriticalMessage); }
+                        if (!string.IsNullOrEmpty(currentPeriod.CriticalMessage)) { stamper.AcroFields.SetField("CriticalMessage", "Message for this Operational Period: " + Environment.NewLine + currentPeriod.CriticalMessage); }
                     }
                     else
                     {
