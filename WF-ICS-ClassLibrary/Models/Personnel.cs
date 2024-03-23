@@ -430,6 +430,29 @@ namespace WF_ICS_ClassLibrary.Models
 
    public static class PersonnelTools
     {
+
+        public static List<string> GetPersonnelKinds()
+        {
+            List<string> kinds = new List<string>();
+            kinds.Add("IMT - Command/General Staff/Unit Leaders/Managers");
+            kinds.Add("Single Resource");
+            kinds.Add("Structure Protection Specialist - STPS");
+            kinds.Add("Wildland Urban Interface Crew Boss - WUIB");
+            kinds.Add("Wildland Urban Interface STLD ");
+            kinds.Add("Wildland Urban Interface TFLD");
+            kinds.Add("Wildland Urban Interface Crew Member");
+            kinds.Add("Contractor");
+            kinds.Add("Unit Crew Member");
+            kinds.Add("Unit Crew Leader");
+            kinds.Add("Unit Crew Sub-Leader");
+            kinds.Add("Initial Attack Crew Member");
+            kinds.Add("Initial Attack Crew Leader");
+            kinds.Add("Sustained Action Crew Member");
+            kinds.Add("Sustained Action Crew Leader");
+
+
+            return kinds;
+        }
         public static string ExportSignInRecordsToCSV(this WFIncident incident, List<MemberStatus> records, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();

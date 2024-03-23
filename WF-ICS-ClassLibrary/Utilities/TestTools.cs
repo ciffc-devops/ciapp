@@ -187,8 +187,10 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.CallSign = "CallSign" + seed;
             test.Pronouns = "Pronouns" + seed;
             test.AccomodationPreference = "AccommodationPreference" + seed;
-            test.Kind = "Kind" + seed;
-            test.Type = "Type" + random.Next(1,4);
+            List<string> kinds = PersonnelTools.GetPersonnelKinds();
+
+            test.Kind = kinds[random.Next(kinds.Count)];
+            test.Type = "Type" + random.Next(1, 8);
             return test;
         }
         public static Vehicle createTestVehicle(int seed)
