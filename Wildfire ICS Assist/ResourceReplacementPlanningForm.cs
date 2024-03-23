@@ -136,7 +136,7 @@ namespace Wildfire_ICS_Assist
         private List<ResourceReplacementPlan> GetReplacementPlans(ResourceReplacementFilterSettings filters)
         {
             List<ResourceReplacementPlan> plans = new List<ResourceReplacementPlan>(Program.CurrentIncident.AllResourceReplacementPlans);
-
+            plans = plans.Where(o => o.Active).ToList();
 
 
 
@@ -371,6 +371,7 @@ namespace Wildfire_ICS_Assist
                     plan.Assignment = rec.Assignment;
                     plan.EstimatedArrival = rec.DateReplacementRequired;
                     plan.ResourceVariety = rec.ResourceType;
+                    plan.Kind = rec.Kind;
                     OpenPlanForEdit(plan);
                 }
                 else
@@ -552,6 +553,29 @@ namespace Wildfire_ICS_Assist
                 {
                     MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
+            }
+        }
+
+        private void btnAddIncoming_Click(object sender, EventArgs e)
+        {
+            ResourceReplacementPlan plan = new ResourceReplacementPlan();
+            plan.ReplacementForCheckInID = Guid.Empty;
+            plan.ReplacedResourceName = string.Empty;
+            plan.Assignment = string.Empty;
+            plan.EstimatedArrival = DateTime.Now;
+            plan.ResourceVariety = string.Empty;
+            OpenPlanForEdit(plan);
+
+           
+        }
+
+        private void dgvIncoming_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0 && dgvIncoming.Rows[e.RowIndex].DataBoundItem != null)
+            {
+                ResourceReplacementPlan plan = (ResourceReplacementPlan)dgvIncoming.Rows[e.RowIndex].DataBoundItem;
+                OpenPlanForEdit(plan);
+
             }
         }
     }

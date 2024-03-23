@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvOutgoing = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,8 +46,8 @@
             this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collapsiblePanel4 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.cboOutgoingOutputFilters = new System.Windows.Forms.ComboBox();
             this.cboOutgoingOutputInclude = new System.Windows.Forms.ComboBox();
+            this.cboOutgoingOutputFilters = new System.Windows.Forms.ComboBox();
             this.btnExportSignInToCSV = new System.Windows.Forms.Button();
             this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.lblReplacementResourceRed = new System.Windows.Forms.Label();
@@ -77,6 +77,7 @@
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIncomingEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAddIncoming = new System.Windows.Forms.Button();
             this.collapsiblePanel5 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cboIncomingOutputFilters = new System.Windows.Forms.ComboBox();
             this.cboIncomingOutputInclude = new System.Windows.Forms.ComboBox();
@@ -169,14 +170,14 @@
             this.colReplacementName,
             this.colEdit,
             this.colComments});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOutgoing.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOutgoing.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOutgoing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOutgoing.Location = new System.Drawing.Point(0, 0);
             this.dgvOutgoing.MultiSelect = false;
@@ -332,21 +333,6 @@
             this.collapsiblePanel4.TabIndex = 2;
             this.collapsiblePanel4.TitleText = "Output";
             // 
-            // cboOutgoingOutputFilters
-            // 
-            this.cboOutgoingOutputFilters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboOutgoingOutputFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboOutgoingOutputFilters.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.cboOutgoingOutputFilters.FormattingEnabled = true;
-            this.cboOutgoingOutputFilters.Items.AddRange(new object[] {
-            "Displayed Resources",
-            "All Resources"});
-            this.cboOutgoingOutputFilters.Location = new System.Drawing.Point(8, 40);
-            this.cboOutgoingOutputFilters.Name = "cboOutgoingOutputFilters";
-            this.cboOutgoingOutputFilters.Size = new System.Drawing.Size(313, 32);
-            this.cboOutgoingOutputFilters.TabIndex = 52;
-            // 
             // cboOutgoingOutputInclude
             // 
             this.cboOutgoingOutputInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -362,6 +348,21 @@
             this.cboOutgoingOutputInclude.Name = "cboOutgoingOutputInclude";
             this.cboOutgoingOutputInclude.Size = new System.Drawing.Size(313, 32);
             this.cboOutgoingOutputInclude.TabIndex = 53;
+            // 
+            // cboOutgoingOutputFilters
+            // 
+            this.cboOutgoingOutputFilters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboOutgoingOutputFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOutgoingOutputFilters.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.cboOutgoingOutputFilters.FormattingEnabled = true;
+            this.cboOutgoingOutputFilters.Items.AddRange(new object[] {
+            "Displayed Resources",
+            "All Resources"});
+            this.cboOutgoingOutputFilters.Location = new System.Drawing.Point(8, 40);
+            this.cboOutgoingOutputFilters.Name = "cboOutgoingOutputFilters";
+            this.cboOutgoingOutputFilters.Size = new System.Drawing.Size(313, 32);
+            this.cboOutgoingOutputFilters.TabIndex = 52;
             // 
             // btnExportSignInToCSV
             // 
@@ -626,6 +627,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnAddIncoming);
             this.splitContainer2.Panel2.Controls.Add(this.collapsiblePanel5);
             this.splitContainer2.Panel2.Controls.Add(this.collapsiblePanel3);
             this.splitContainer2.Panel2.Controls.Add(this.collapsiblePanel2);
@@ -650,14 +652,14 @@
             this.dataGridViewTextBoxColumn18,
             this.colIncomingEdit,
             this.dataGridViewTextBoxColumn20});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvIncoming.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvIncoming.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvIncoming.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvIncoming.Location = new System.Drawing.Point(0, 0);
             this.dgvIncoming.MultiSelect = false;
@@ -668,6 +670,7 @@
             this.dgvIncoming.Size = new System.Drawing.Size(842, 711);
             this.dgvIncoming.TabIndex = 0;
             this.dgvIncoming.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvIncoming_CellContentClick);
+            this.dgvIncoming.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvIncoming_CellDoubleClick);
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -762,6 +765,19 @@
             this.dataGridViewTextBoxColumn20.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn20.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // btnAddIncoming
+            // 
+            this.btnAddIncoming.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAddIncoming.Location = new System.Drawing.Point(14, 13);
+            this.btnAddIncoming.Name = "btnAddIncoming";
+            this.btnAddIncoming.Size = new System.Drawing.Size(314, 43);
+            this.btnAddIncoming.TabIndex = 2;
+            this.btnAddIncoming.Text = "Add Incoming Resource";
+            this.btnAddIncoming.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAddIncoming.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddIncoming.UseVisualStyleBackColor = true;
+            this.btnAddIncoming.Click += new System.EventHandler(this.btnAddIncoming_Click);
+            // 
             // collapsiblePanel5
             // 
             this.collapsiblePanel5.BackColor = System.Drawing.Color.White;
@@ -778,7 +794,7 @@
             this.collapsiblePanel5.ExpandedWidth = 329;
             this.collapsiblePanel5.ExpandUp = false;
             this.collapsiblePanel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collapsiblePanel5.Location = new System.Drawing.Point(4, 327);
+            this.collapsiblePanel5.Location = new System.Drawing.Point(5, 431);
             this.collapsiblePanel5.Margin = new System.Windows.Forms.Padding(6);
             this.collapsiblePanel5.Name = "collapsiblePanel5";
             this.collapsiblePanel5.Size = new System.Drawing.Size(329, 177);
@@ -852,7 +868,7 @@
             this.collapsiblePanel3.ExpandedWidth = 329;
             this.collapsiblePanel3.ExpandUp = false;
             this.collapsiblePanel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collapsiblePanel3.Location = new System.Drawing.Point(4, 15);
+            this.collapsiblePanel3.Location = new System.Drawing.Point(5, 119);
             this.collapsiblePanel3.Margin = new System.Windows.Forms.Padding(6);
             this.collapsiblePanel3.Name = "collapsiblePanel3";
             this.collapsiblePanel3.Size = new System.Drawing.Size(329, 300);
@@ -967,7 +983,7 @@
             this.collapsiblePanel2.ExpandedWidth = 329;
             this.collapsiblePanel2.ExpandUp = false;
             this.collapsiblePanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collapsiblePanel2.Location = new System.Drawing.Point(4, 554);
+            this.collapsiblePanel2.Location = new System.Drawing.Point(5, 658);
             this.collapsiblePanel2.Margin = new System.Windows.Forms.Padding(6);
             this.collapsiblePanel2.Name = "collapsiblePanel2";
             this.collapsiblePanel2.Size = new System.Drawing.Size(329, 40);
@@ -1247,5 +1263,6 @@
         private System.Windows.Forms.ComboBox cboIncomingOutputFilters;
         private System.Windows.Forms.ComboBox cboIncomingOutputInclude;
         private System.Windows.Forms.Button btnExportIncoming;
+        private System.Windows.Forms.Button btnAddIncoming;
     }
 }
