@@ -28,6 +28,7 @@ class SpellBox : ElementHost
         box.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         box.TextChanged += new System.Windows.Controls.TextChangedEventHandler(SpellBox_TextChanged);
         box.KeyUp += new KeyEventHandler(WPF_KeyUp);
+        box.LostFocus += Box_LostFocus;
 
         this.Size = new System.Drawing.Size(100, 20);
 
@@ -48,6 +49,15 @@ class SpellBox : ElementHost
         };
 
     }
+
+    private void Box_LostFocus(object sender, RoutedEventArgs e)
+    {
+        if(this.Leave != null)
+        {
+            this.Leave(this, EventArgs.Empty);
+        }
+    }
+
     private const UInt32 DLGC_WANTARROWS = 0x0001;
     private const UInt32 DLGC_WANTTAB = 0x0002;
     private const UInt32 DLGC_WANTALLKEYS = 0x0004;
