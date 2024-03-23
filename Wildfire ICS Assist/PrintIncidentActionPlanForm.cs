@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -234,6 +235,20 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        List<BrowseFileControl> browseControls
+        {
+            get
+            {
+                List<BrowseFileControl> controls = new List<BrowseFileControl>();
+                controls.Add(browseFileControl1);
+                controls.Add(browseFileControl2);
+                controls.Add(browseFileControl3);
+                controls.Add(browseFileControl4);
+                return controls;
+            }
+        }
+
+
         private void btnSaveAsPDF_Click(object sender, EventArgs e)
         {
             
@@ -382,6 +397,17 @@ namespace Wildfire_ICS_Assist
                 }
             }
 
+
+            //add additional PDFs
+            foreach(BrowseFileControl browseFileControl in browseControls)
+            {
+                if(!string.IsNullOrEmpty(browseFileControl.FileName) && File.Exists(browseFileControl.FileName))
+                {
+                    byte[] bytes = System.IO.File.ReadAllBytes(browseFileControl.FileName);
+                    allPDFs.Add(bytes);
+
+                }
+            }
 
 
             byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);

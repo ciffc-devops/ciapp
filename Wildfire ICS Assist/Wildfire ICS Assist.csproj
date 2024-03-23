@@ -308,6 +308,12 @@
     <Compile Include="CommunicationsPlanViewForm.Designer.cs">
       <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\BrowseFileControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\BrowseFileControl.Designer.cs">
+      <DependentUpon>BrowseFileControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\CheckInInfoFieldControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -840,6 +846,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommunicationsPlanViewForm.resx">
       <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\BrowseFileControl.resx">
+      <DependentUpon>BrowseFileControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\CheckInInfoFieldControl.resx">
       <DependentUpon>CheckInInfoFieldControl.cs</DependentUpon>

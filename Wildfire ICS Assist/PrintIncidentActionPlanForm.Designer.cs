@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintIncidentForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label4 = new System.Windows.Forms.Label();
             this.pnlTitlePageContent = new System.Windows.Forms.Panel();
-            this.txtCriticalMessage = new SpellBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRemoveImage = new System.Windows.Forms.Button();
             this.btnSelectImage = new System.Windows.Forms.Button();
@@ -61,6 +61,11 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.browseFileControl2 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
+            this.browseFileControl1 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
+            this.txtCriticalMessage = new SpellBox();
+            this.browseFileControl3 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
+            this.browseFileControl4 = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -80,6 +85,11 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.browseFileControl3);
+            this.splitContainer1.Panel1.Controls.Add(this.browseFileControl4);
+            this.splitContainer1.Panel1.Controls.Add(this.browseFileControl2);
+            this.splitContainer1.Panel1.Controls.Add(this.browseFileControl1);
+            this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.pnlTitlePageContent);
             this.splitContainer1.Panel1.Controls.Add(this.chkTitlePage);
             this.splitContainer1.Panel1.Controls.Add(this.chkCheckInLists);
@@ -105,36 +115,34 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveAsPDF);
-            this.splitContainer1.Size = new System.Drawing.Size(650, 645);
-            this.splitContainer1.SplitterDistance = 568;
+            this.splitContainer1.Size = new System.Drawing.Size(865, 803);
+            this.splitContainer1.SplitterDistance = 726;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(13, 334);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(159, 24);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Additional PDFs";
             // 
             // pnlTitlePageContent
             // 
+            this.pnlTitlePageContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTitlePageContent.Controls.Add(this.txtCriticalMessage);
             this.pnlTitlePageContent.Controls.Add(this.label1);
             this.pnlTitlePageContent.Controls.Add(this.btnRemoveImage);
             this.pnlTitlePageContent.Controls.Add(this.btnSelectImage);
             this.pnlTitlePageContent.Controls.Add(this.label3);
             this.pnlTitlePageContent.Controls.Add(this.picTitleImage);
-            this.pnlTitlePageContent.Location = new System.Drawing.Point(3, 404);
+            this.pnlTitlePageContent.Location = new System.Drawing.Point(3, 581);
             this.pnlTitlePageContent.Name = "pnlTitlePageContent";
-            this.pnlTitlePageContent.Size = new System.Drawing.Size(647, 160);
+            this.pnlTitlePageContent.Size = new System.Drawing.Size(862, 141);
             this.pnlTitlePageContent.TabIndex = 39;
-            // 
-            // txtCriticalMessage
-            // 
-            this.txtCriticalMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCriticalMessage.Location = new System.Drawing.Point(310, 37);
-            this.txtCriticalMessage.Multiline = true;
-            this.txtCriticalMessage.Name = "txtCriticalMessage";
-            this.txtCriticalMessage.Size = new System.Drawing.Size(327, 120);
-            this.txtCriticalMessage.TabIndex = 37;
-            this.txtCriticalMessage.WordWrap = true;
-            this.txtCriticalMessage.Leave += new System.EventHandler(this.txtCriticalMessage_Leave_1);
-            this.txtCriticalMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // label1
             // 
@@ -203,7 +211,7 @@
             // chkCheckInLists
             // 
             this.chkCheckInLists.AutoSize = true;
-            this.chkCheckInLists.Location = new System.Drawing.Point(359, 223);
+            this.chkCheckInLists.Location = new System.Drawing.Point(313, 291);
             this.chkCheckInLists.Name = "chkCheckInLists";
             this.chkCheckInLists.Size = new System.Drawing.Size(190, 28);
             this.chkCheckInLists.TabIndex = 37;
@@ -213,7 +221,7 @@
             // chkAssignmentDetails
             // 
             this.chkAssignmentDetails.AutoSize = true;
-            this.chkAssignmentDetails.Location = new System.Drawing.Point(359, 155);
+            this.chkAssignmentDetails.Location = new System.Drawing.Point(313, 223);
             this.chkAssignmentDetails.Name = "chkAssignmentDetails";
             this.chkAssignmentDetails.Size = new System.Drawing.Size(237, 28);
             this.chkAssignmentDetails.TabIndex = 33;
@@ -223,7 +231,7 @@
             // chkContacts
             // 
             this.chkContacts.AutoSize = true;
-            this.chkContacts.Location = new System.Drawing.Point(359, 189);
+            this.chkContacts.Location = new System.Drawing.Point(313, 257);
             this.chkContacts.Name = "chkContacts";
             this.chkContacts.Size = new System.Drawing.Size(261, 28);
             this.chkContacts.TabIndex = 32;
@@ -233,7 +241,7 @@
             // chkNotes
             // 
             this.chkNotes.AutoSize = true;
-            this.chkNotes.Location = new System.Drawing.Point(359, 359);
+            this.chkNotes.Location = new System.Drawing.Point(617, 223);
             this.chkNotes.Name = "chkNotes";
             this.chkNotes.Size = new System.Drawing.Size(166, 28);
             this.chkNotes.TabIndex = 30;
@@ -243,7 +251,7 @@
             // chkVerboseActivityLog
             // 
             this.chkVerboseActivityLog.AutoSize = true;
-            this.chkVerboseActivityLog.Location = new System.Drawing.Point(359, 325);
+            this.chkVerboseActivityLog.Location = new System.Drawing.Point(617, 189);
             this.chkVerboseActivityLog.Name = "chkVerboseActivityLog";
             this.chkVerboseActivityLog.Size = new System.Drawing.Size(209, 28);
             this.chkVerboseActivityLog.TabIndex = 29;
@@ -253,7 +261,7 @@
             // chkActivityLog
             // 
             this.chkActivityLog.AutoSize = true;
-            this.chkActivityLog.Location = new System.Drawing.Point(359, 291);
+            this.chkActivityLog.Location = new System.Drawing.Point(617, 155);
             this.chkActivityLog.Name = "chkActivityLog";
             this.chkActivityLog.Size = new System.Drawing.Size(190, 28);
             this.chkActivityLog.TabIndex = 28;
@@ -263,7 +271,7 @@
             // chkGeneralMessages
             // 
             this.chkGeneralMessages.AutoSize = true;
-            this.chkGeneralMessages.Location = new System.Drawing.Point(359, 257);
+            this.chkGeneralMessages.Location = new System.Drawing.Point(617, 121);
             this.chkGeneralMessages.Name = "chkGeneralMessages";
             this.chkGeneralMessages.Size = new System.Drawing.Size(245, 28);
             this.chkGeneralMessages.TabIndex = 27;
@@ -273,7 +281,7 @@
             // chkAirOps
             // 
             this.chkAirOps.AutoSize = true;
-            this.chkAirOps.Location = new System.Drawing.Point(359, 121);
+            this.chkAirOps.Location = new System.Drawing.Point(313, 189);
             this.chkAirOps.Name = "chkAirOps";
             this.chkAirOps.Size = new System.Drawing.Size(223, 28);
             this.chkAirOps.TabIndex = 26;
@@ -283,7 +291,7 @@
             // chkSafetyMessage
             // 
             this.chkSafetyMessage.AutoSize = true;
-            this.chkSafetyMessage.Location = new System.Drawing.Point(46, 359);
+            this.chkSafetyMessage.Location = new System.Drawing.Point(313, 155);
             this.chkSafetyMessage.Name = "chkSafetyMessage";
             this.chkSafetyMessage.Size = new System.Drawing.Size(270, 28);
             this.chkSafetyMessage.TabIndex = 24;
@@ -293,7 +301,7 @@
             // chkOrgChart
             // 
             this.chkOrgChart.AutoSize = true;
-            this.chkOrgChart.Location = new System.Drawing.Point(46, 325);
+            this.chkOrgChart.Location = new System.Drawing.Point(313, 121);
             this.chkOrgChart.Name = "chkOrgChart";
             this.chkOrgChart.Size = new System.Drawing.Size(230, 28);
             this.chkOrgChart.TabIndex = 23;
@@ -413,7 +421,7 @@
             // 
             this.btnSaveAsPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveAsPDF.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnSaveAsPDF.Location = new System.Drawing.Point(462, 7);
+            this.btnSaveAsPDF.Location = new System.Drawing.Point(677, 7);
             this.btnSaveAsPDF.Name = "btnSaveAsPDF";
             this.btnSaveAsPDF.Size = new System.Drawing.Size(178, 58);
             this.btnSaveAsPDF.TabIndex = 15;
@@ -427,11 +435,69 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Images|*.jpg;*.jpeg;*.png;,*.gif,*.bmp";
             // 
+            // browseFileControl2
+            // 
+            this.browseFileControl2.FileName = null;
+            this.browseFileControl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseFileControl2.Location = new System.Drawing.Point(15, 420);
+            this.browseFileControl2.Margin = new System.Windows.Forms.Padding(6);
+            this.browseFileControl2.MinimumSize = new System.Drawing.Size(0, 44);
+            this.browseFileControl2.Name = "browseFileControl2";
+            this.browseFileControl2.Size = new System.Drawing.Size(838, 44);
+            this.browseFileControl2.TabIndex = 42;
+            // 
+            // browseFileControl1
+            // 
+            this.browseFileControl1.FileName = null;
+            this.browseFileControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseFileControl1.Location = new System.Drawing.Point(15, 364);
+            this.browseFileControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.browseFileControl1.MinimumSize = new System.Drawing.Size(0, 44);
+            this.browseFileControl1.Name = "browseFileControl1";
+            this.browseFileControl1.Size = new System.Drawing.Size(838, 44);
+            this.browseFileControl1.TabIndex = 41;
+            // 
+            // txtCriticalMessage
+            // 
+            this.txtCriticalMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCriticalMessage.Location = new System.Drawing.Point(310, 37);
+            this.txtCriticalMessage.Multiline = true;
+            this.txtCriticalMessage.Name = "txtCriticalMessage";
+            this.txtCriticalMessage.Size = new System.Drawing.Size(542, 101);
+            this.txtCriticalMessage.TabIndex = 37;
+            this.txtCriticalMessage.WordWrap = true;
+            this.txtCriticalMessage.Leave += new System.EventHandler(this.txtCriticalMessage_Leave_1);
+            this.txtCriticalMessage.Child = new System.Windows.Controls.TextBox();
+            // 
+            // browseFileControl3
+            // 
+            this.browseFileControl3.FileName = null;
+            this.browseFileControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseFileControl3.Location = new System.Drawing.Point(15, 476);
+            this.browseFileControl3.Margin = new System.Windows.Forms.Padding(6);
+            this.browseFileControl3.MinimumSize = new System.Drawing.Size(0, 44);
+            this.browseFileControl3.Name = "browseFileControl3";
+            this.browseFileControl3.Size = new System.Drawing.Size(838, 44);
+            this.browseFileControl3.TabIndex = 44;
+            // 
+            // browseFileControl4
+            // 
+            this.browseFileControl4.FileName = null;
+            this.browseFileControl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseFileControl4.Location = new System.Drawing.Point(15, 532);
+            this.browseFileControl4.Margin = new System.Windows.Forms.Padding(6);
+            this.browseFileControl4.MinimumSize = new System.Drawing.Size(0, 44);
+            this.browseFileControl4.Name = "browseFileControl4";
+            this.browseFileControl4.Size = new System.Drawing.Size(838, 44);
+            this.browseFileControl4.TabIndex = 43;
+            // 
             // PrintIncidentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 645);
+            this.ClientSize = new System.Drawing.Size(865, 803);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -487,5 +553,10 @@
         private System.Windows.Forms.CheckBox chkTitlePage;
         private System.Windows.Forms.Panel pnlTitlePageContent;
         private SpellBox txtCriticalMessage;
+        private System.Windows.Forms.Label label4;
+        private CustomControls.BrowseFileControl browseFileControl2;
+        private CustomControls.BrowseFileControl browseFileControl1;
+        private CustomControls.BrowseFileControl browseFileControl3;
+        private CustomControls.BrowseFileControl browseFileControl4;
     }
 }
