@@ -31,13 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintIncidentForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.chkCheckInLists = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCriticalMessage = new System.Windows.Forms.TextBox();
+            this.pnlTitlePageContent = new System.Windows.Forms.Panel();
+            this.txtCriticalMessage = new SpellBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.picTitleImage = new System.Windows.Forms.PictureBox();
-            this.btnSelectImage = new System.Windows.Forms.Button();
             this.btnRemoveImage = new System.Windows.Forms.Button();
+            this.btnSelectImage = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.picTitleImage = new System.Windows.Forms.PictureBox();
+            this.chkTitlePage = new System.Windows.Forms.CheckBox();
+            this.chkCheckInLists = new System.Windows.Forms.CheckBox();
             this.chkAssignmentDetails = new System.Windows.Forms.CheckBox();
             this.chkContacts = new System.Windows.Forms.CheckBox();
             this.chkNotes = new System.Windows.Forms.CheckBox();
@@ -63,6 +65,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.pnlTitlePageContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTitleImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,13 +80,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.pnlTitlePageContent);
+            this.splitContainer1.Panel1.Controls.Add(this.chkTitlePage);
             this.splitContainer1.Panel1.Controls.Add(this.chkCheckInLists);
-            this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.txtCriticalMessage);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.picTitleImage);
-            this.splitContainer1.Panel1.Controls.Add(this.btnSelectImage);
-            this.splitContainer1.Panel1.Controls.Add(this.btnRemoveImage);
             this.splitContainer1.Panel1.Controls.Add(this.chkAssignmentDetails);
             this.splitContainer1.Panel1.Controls.Add(this.chkContacts);
             this.splitContainer1.Panel1.Controls.Add(this.chkNotes);
@@ -106,78 +105,50 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveAsPDF);
-            this.splitContainer1.Size = new System.Drawing.Size(650, 649);
-            this.splitContainer1.SplitterDistance = 572;
+            this.splitContainer1.Size = new System.Drawing.Size(650, 645);
+            this.splitContainer1.SplitterDistance = 568;
             this.splitContainer1.TabIndex = 1;
             // 
-            // chkCheckInLists
+            // pnlTitlePageContent
             // 
-            this.chkCheckInLists.AutoSize = true;
-            this.chkCheckInLists.Location = new System.Drawing.Point(360, 189);
-            this.chkCheckInLists.Name = "chkCheckInLists";
-            this.chkCheckInLists.Size = new System.Drawing.Size(190, 28);
-            this.chkCheckInLists.TabIndex = 37;
-            this.chkCheckInLists.Text = "211 - Check In Lists";
-            this.chkCheckInLists.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(313, 436);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(327, 24);
-            this.label3.TabIndex = 36;
-            this.label3.Text = "Critical message for this op period";
+            this.pnlTitlePageContent.Controls.Add(this.txtCriticalMessage);
+            this.pnlTitlePageContent.Controls.Add(this.label1);
+            this.pnlTitlePageContent.Controls.Add(this.btnRemoveImage);
+            this.pnlTitlePageContent.Controls.Add(this.btnSelectImage);
+            this.pnlTitlePageContent.Controls.Add(this.label3);
+            this.pnlTitlePageContent.Controls.Add(this.picTitleImage);
+            this.pnlTitlePageContent.Location = new System.Drawing.Point(3, 404);
+            this.pnlTitlePageContent.Name = "pnlTitlePageContent";
+            this.pnlTitlePageContent.Size = new System.Drawing.Size(647, 160);
+            this.pnlTitlePageContent.TabIndex = 39;
             // 
             // txtCriticalMessage
             // 
             this.txtCriticalMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCriticalMessage.Location = new System.Drawing.Point(317, 463);
+            this.txtCriticalMessage.Location = new System.Drawing.Point(310, 37);
             this.txtCriticalMessage.Multiline = true;
             this.txtCriticalMessage.Name = "txtCriticalMessage";
-            this.txtCriticalMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCriticalMessage.Size = new System.Drawing.Size(321, 99);
-            this.txtCriticalMessage.TabIndex = 35;
-            this.txtCriticalMessage.TextChanged += new System.EventHandler(this.txtCriticalMessage_TextChanged);
-            this.txtCriticalMessage.Leave += new System.EventHandler(this.txtCriticalMessage_Leave);
+            this.txtCriticalMessage.Size = new System.Drawing.Size(327, 120);
+            this.txtCriticalMessage.TabIndex = 37;
+            this.txtCriticalMessage.WordWrap = true;
+            this.txtCriticalMessage.Leave += new System.EventHandler(this.txtCriticalMessage_Leave_1);
+            this.txtCriticalMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 436);
+            this.label1.Location = new System.Drawing.Point(5, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(167, 24);
             this.label1.TabIndex = 2;
             this.label1.Text = "Title Page Image";
             // 
-            // picTitleImage
-            // 
-            this.picTitleImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picTitleImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picTitleImage.Location = new System.Drawing.Point(44, 463);
-            this.picTitleImage.Name = "picTitleImage";
-            this.picTitleImage.Size = new System.Drawing.Size(123, 89);
-            this.picTitleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picTitleImage.TabIndex = 3;
-            this.picTitleImage.TabStop = false;
-            // 
-            // btnSelectImage
-            // 
-            this.btnSelectImage.Location = new System.Drawing.Point(175, 463);
-            this.btnSelectImage.Name = "btnSelectImage";
-            this.btnSelectImage.Size = new System.Drawing.Size(112, 36);
-            this.btnSelectImage.TabIndex = 4;
-            this.btnSelectImage.Text = "Select...";
-            this.btnSelectImage.UseVisualStyleBackColor = true;
-            this.btnSelectImage.Click += new System.EventHandler(this.btnSelectImage_Click);
-            // 
             // btnRemoveImage
             // 
-            this.btnRemoveImage.Location = new System.Drawing.Point(175, 505);
+            this.btnRemoveImage.Location = new System.Drawing.Point(168, 79);
             this.btnRemoveImage.Name = "btnRemoveImage";
             this.btnRemoveImage.Size = new System.Drawing.Size(112, 36);
             this.btnRemoveImage.TabIndex = 5;
@@ -185,10 +156,64 @@
             this.btnRemoveImage.UseVisualStyleBackColor = true;
             this.btnRemoveImage.Click += new System.EventHandler(this.btnRemoveImage_Click);
             // 
+            // btnSelectImage
+            // 
+            this.btnSelectImage.Location = new System.Drawing.Point(168, 37);
+            this.btnSelectImage.Name = "btnSelectImage";
+            this.btnSelectImage.Size = new System.Drawing.Size(112, 36);
+            this.btnSelectImage.TabIndex = 4;
+            this.btnSelectImage.Text = "Select...";
+            this.btnSelectImage.UseVisualStyleBackColor = true;
+            this.btnSelectImage.Click += new System.EventHandler(this.btnSelectImage_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(306, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(327, 24);
+            this.label3.TabIndex = 36;
+            this.label3.Text = "Critical message for this op period";
+            // 
+            // picTitleImage
+            // 
+            this.picTitleImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picTitleImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picTitleImage.Location = new System.Drawing.Point(37, 37);
+            this.picTitleImage.Name = "picTitleImage";
+            this.picTitleImage.Size = new System.Drawing.Size(123, 89);
+            this.picTitleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTitleImage.TabIndex = 3;
+            this.picTitleImage.TabStop = false;
+            // 
+            // chkTitlePage
+            // 
+            this.chkTitlePage.AutoSize = true;
+            this.chkTitlePage.Checked = true;
+            this.chkTitlePage.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTitlePage.Location = new System.Drawing.Point(46, 121);
+            this.chkTitlePage.Name = "chkTitlePage";
+            this.chkTitlePage.Size = new System.Drawing.Size(113, 28);
+            this.chkTitlePage.TabIndex = 38;
+            this.chkTitlePage.Text = "Title Page";
+            this.chkTitlePage.UseVisualStyleBackColor = true;
+            this.chkTitlePage.CheckedChanged += new System.EventHandler(this.chkTitlePage_CheckedChanged);
+            // 
+            // chkCheckInLists
+            // 
+            this.chkCheckInLists.AutoSize = true;
+            this.chkCheckInLists.Location = new System.Drawing.Point(359, 223);
+            this.chkCheckInLists.Name = "chkCheckInLists";
+            this.chkCheckInLists.Size = new System.Drawing.Size(190, 28);
+            this.chkCheckInLists.TabIndex = 37;
+            this.chkCheckInLists.Text = "211 - Check In Lists";
+            this.chkCheckInLists.UseVisualStyleBackColor = true;
+            // 
             // chkAssignmentDetails
             // 
             this.chkAssignmentDetails.AutoSize = true;
-            this.chkAssignmentDetails.Location = new System.Drawing.Point(360, 121);
+            this.chkAssignmentDetails.Location = new System.Drawing.Point(359, 155);
             this.chkAssignmentDetails.Name = "chkAssignmentDetails";
             this.chkAssignmentDetails.Size = new System.Drawing.Size(237, 28);
             this.chkAssignmentDetails.TabIndex = 33;
@@ -198,7 +223,7 @@
             // chkContacts
             // 
             this.chkContacts.AutoSize = true;
-            this.chkContacts.Location = new System.Drawing.Point(360, 155);
+            this.chkContacts.Location = new System.Drawing.Point(359, 189);
             this.chkContacts.Name = "chkContacts";
             this.chkContacts.Size = new System.Drawing.Size(261, 28);
             this.chkContacts.TabIndex = 32;
@@ -208,7 +233,7 @@
             // chkNotes
             // 
             this.chkNotes.AutoSize = true;
-            this.chkNotes.Location = new System.Drawing.Point(360, 325);
+            this.chkNotes.Location = new System.Drawing.Point(359, 359);
             this.chkNotes.Name = "chkNotes";
             this.chkNotes.Size = new System.Drawing.Size(166, 28);
             this.chkNotes.TabIndex = 30;
@@ -218,7 +243,7 @@
             // chkVerboseActivityLog
             // 
             this.chkVerboseActivityLog.AutoSize = true;
-            this.chkVerboseActivityLog.Location = new System.Drawing.Point(360, 291);
+            this.chkVerboseActivityLog.Location = new System.Drawing.Point(359, 325);
             this.chkVerboseActivityLog.Name = "chkVerboseActivityLog";
             this.chkVerboseActivityLog.Size = new System.Drawing.Size(209, 28);
             this.chkVerboseActivityLog.TabIndex = 29;
@@ -228,7 +253,7 @@
             // chkActivityLog
             // 
             this.chkActivityLog.AutoSize = true;
-            this.chkActivityLog.Location = new System.Drawing.Point(360, 257);
+            this.chkActivityLog.Location = new System.Drawing.Point(359, 291);
             this.chkActivityLog.Name = "chkActivityLog";
             this.chkActivityLog.Size = new System.Drawing.Size(190, 28);
             this.chkActivityLog.TabIndex = 28;
@@ -238,7 +263,7 @@
             // chkGeneralMessages
             // 
             this.chkGeneralMessages.AutoSize = true;
-            this.chkGeneralMessages.Location = new System.Drawing.Point(360, 223);
+            this.chkGeneralMessages.Location = new System.Drawing.Point(359, 257);
             this.chkGeneralMessages.Name = "chkGeneralMessages";
             this.chkGeneralMessages.Size = new System.Drawing.Size(245, 28);
             this.chkGeneralMessages.TabIndex = 27;
@@ -248,7 +273,7 @@
             // chkAirOps
             // 
             this.chkAirOps.AutoSize = true;
-            this.chkAirOps.Location = new System.Drawing.Point(44, 359);
+            this.chkAirOps.Location = new System.Drawing.Point(359, 121);
             this.chkAirOps.Name = "chkAirOps";
             this.chkAirOps.Size = new System.Drawing.Size(223, 28);
             this.chkAirOps.TabIndex = 26;
@@ -258,7 +283,7 @@
             // chkSafetyMessage
             // 
             this.chkSafetyMessage.AutoSize = true;
-            this.chkSafetyMessage.Location = new System.Drawing.Point(45, 325);
+            this.chkSafetyMessage.Location = new System.Drawing.Point(46, 359);
             this.chkSafetyMessage.Name = "chkSafetyMessage";
             this.chkSafetyMessage.Size = new System.Drawing.Size(270, 28);
             this.chkSafetyMessage.TabIndex = 24;
@@ -268,7 +293,7 @@
             // chkOrgChart
             // 
             this.chkOrgChart.AutoSize = true;
-            this.chkOrgChart.Location = new System.Drawing.Point(45, 291);
+            this.chkOrgChart.Location = new System.Drawing.Point(46, 325);
             this.chkOrgChart.Name = "chkOrgChart";
             this.chkOrgChart.Size = new System.Drawing.Size(230, 28);
             this.chkOrgChart.TabIndex = 23;
@@ -278,7 +303,7 @@
             // chkMedPlan
             // 
             this.chkMedPlan.AutoSize = true;
-            this.chkMedPlan.Location = new System.Drawing.Point(45, 257);
+            this.chkMedPlan.Location = new System.Drawing.Point(46, 291);
             this.chkMedPlan.Name = "chkMedPlan";
             this.chkMedPlan.Size = new System.Drawing.Size(183, 28);
             this.chkMedPlan.TabIndex = 22;
@@ -288,7 +313,7 @@
             // chkCommsPlan
             // 
             this.chkCommsPlan.AutoSize = true;
-            this.chkCommsPlan.Location = new System.Drawing.Point(45, 223);
+            this.chkCommsPlan.Location = new System.Drawing.Point(46, 257);
             this.chkCommsPlan.Name = "chkCommsPlan";
             this.chkCommsPlan.Size = new System.Drawing.Size(258, 28);
             this.chkCommsPlan.TabIndex = 21;
@@ -298,7 +323,7 @@
             // chkAssignments
             // 
             this.chkAssignments.AutoSize = true;
-            this.chkAssignments.Location = new System.Drawing.Point(45, 189);
+            this.chkAssignments.Location = new System.Drawing.Point(46, 223);
             this.chkAssignments.Name = "chkAssignments";
             this.chkAssignments.Size = new System.Drawing.Size(206, 28);
             this.chkAssignments.TabIndex = 20;
@@ -308,7 +333,7 @@
             // chkOrgAssignments
             // 
             this.chkOrgAssignments.AutoSize = true;
-            this.chkOrgAssignments.Location = new System.Drawing.Point(45, 155);
+            this.chkOrgAssignments.Location = new System.Drawing.Point(46, 189);
             this.chkOrgAssignments.Name = "chkOrgAssignments";
             this.chkOrgAssignments.Size = new System.Drawing.Size(243, 28);
             this.chkOrgAssignments.TabIndex = 19;
@@ -355,7 +380,7 @@
             // chkIncidentObjectives
             // 
             this.chkIncidentObjectives.AutoSize = true;
-            this.chkIncidentObjectives.Location = new System.Drawing.Point(45, 121);
+            this.chkIncidentObjectives.Location = new System.Drawing.Point(46, 155);
             this.chkIncidentObjectives.Name = "chkIncidentObjectives";
             this.chkIncidentObjectives.Size = new System.Drawing.Size(234, 28);
             this.chkIncidentObjectives.TabIndex = 14;
@@ -406,7 +431,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 649);
+            this.ClientSize = new System.Drawing.Size(650, 645);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -422,6 +447,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.pnlTitlePageContent.ResumeLayout(false);
+            this.pnlTitlePageContent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTitleImage)).EndInit();
             this.ResumeLayout(false);
 
@@ -455,8 +482,10 @@
         private System.Windows.Forms.Button btnRemoveImage;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtCriticalMessage;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.CheckBox chkCheckInLists;
+        private System.Windows.Forms.CheckBox chkTitlePage;
+        private System.Windows.Forms.Panel pnlTitlePageContent;
+        private SpellBox txtCriticalMessage;
     }
 }

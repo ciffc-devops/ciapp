@@ -262,8 +262,10 @@ namespace Wildfire_ICS_Assist
 
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
-            allPDFs.AddRange(buildContentsList());
-
+            if (chkTitlePage.Checked)
+            {
+                allPDFs.AddRange(buildContentsList());
+            }
             List<int> OpsToPrint = new List<int>();
             if (!PrintIncidentToDate) { OpsToPrint.Add(CurrentOpPeriod); }
             else
@@ -647,6 +649,22 @@ namespace Wildfire_ICS_Assist
                         MessageBox.Show("Sorry, there was an error trying to send the PDF.  You may need to save the pdf and email it manually.");
                     }
                 } else { MessageBox.Show("There was an error generating the pdf."); }
+            }
+        }
+
+        private void chkTitlePage_CheckedChanged(object sender, EventArgs e)
+        {
+            pnlTitlePageContent.Enabled =  chkTitlePage.Checked;
+        }
+
+        private void txtCriticalMessage_Leave_1(object sender, EventArgs e)
+        {
+            OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
+            if (period.CriticalMessage == null || !period.CriticalMessage.Equals(txtCriticalMessage.Text))
+            {
+                period.CriticalMessage = txtCriticalMessage.Text;
+                Program.wfIncidentService.UpsertOperationalPeriod(period);
+
             }
         }
     }
