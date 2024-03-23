@@ -27,6 +27,7 @@ namespace Wildfire_ICS_Assist
             this.BackColor = Program.FormBackground;
             datArrival.Format = DateTimePickerFormat.Custom;
             datArrival.CustomFormat = Program.DateFormat + " HH:mm";
+
         }
 
 
@@ -34,7 +35,8 @@ namespace Wildfire_ICS_Assist
         {
             LoadKindList();
             LoadReplacingList();
-            cboVariety.Text = plan.ResourceVariety;
+            if (!string.IsNullOrEmpty(plan.ResourceVariety)) { cboVariety.Text = plan.ResourceVariety; }
+            else { cboVariety.SelectedIndex = 0; }
             txtName.SetText(plan.ResourceName);
            cboKind.Text = plan.Kind;
             txtAssignment.Text = plan.Assignment;

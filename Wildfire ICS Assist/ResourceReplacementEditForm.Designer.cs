@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cboVariety = new System.Windows.Forms.ComboBox();
             this.lblEditPersonTitle = new System.Windows.Forms.Label();
             this.txtOrder = new SpellBox();
             this.txtHomeArea = new SpellBox();
@@ -53,8 +55,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cboVariety = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -104,6 +104,35 @@
             this.splitContainer1.Size = new System.Drawing.Size(545, 575);
             this.splitContainer1.SplitterDistance = 512;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(5, 56);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(166, 29);
+            this.label11.TabIndex = 165;
+            this.label11.Text = "Variety";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cboVariety
+            // 
+            this.cboVariety.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboVariety.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboVariety.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboVariety.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboVariety.FormattingEnabled = true;
+            this.cboVariety.Items.AddRange(new object[] {
+            "Personnel",
+            "Visitor",
+            "Vehicle",
+            "Equipment",
+            "Operator",
+            "Crew"});
+            this.cboVariety.Location = new System.Drawing.Point(177, 54);
+            this.cboVariety.Name = "cboVariety";
+            this.cboVariety.Size = new System.Drawing.Size(336, 32);
+            this.cboVariety.TabIndex = 143;
             // 
             // lblEditPersonTitle
             // 
@@ -369,36 +398,6 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.Location = new System.Drawing.Point(5, 56);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(166, 29);
-            this.label11.TabIndex = 165;
-            this.label11.Text = "Variety";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cboVariety
-            // 
-            this.cboVariety.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboVariety.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboVariety.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboVariety.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboVariety.FormattingEnabled = true;
-            this.cboVariety.Items.AddRange(new object[] {
-            "All Resources",
-            "Personnel",
-            "Visitor",
-            "Vehicle",
-            "Equipment",
-            "Operator",
-            "Crew"});
-            this.cboVariety.Location = new System.Drawing.Point(177, 54);
-            this.cboVariety.Name = "cboVariety";
-            this.cboVariety.Size = new System.Drawing.Size(336, 32);
-            this.cboVariety.TabIndex = 143;
             // 
             // ResourceReplacementEditForm
             // 
