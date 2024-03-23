@@ -112,6 +112,8 @@ namespace Wildfire_ICS_Assist.CustomControls
             InitializeComponent(); this.BackColor = Program.FormBackground; cboAccomodationPreference.SelectedIndex = 0;
             List<Province> provinces = ProvinceTools.GetProvinces();
             Province other = new Province(); other.ProvinceGUID = Guid.Empty; other.ProvinceName = "Other / NA"; provinces.Add(other);
+            cboKind.DataSource = PersonnelTools.GetPersonnelKinds();
+
             bsProvAndTerr.DataSource = provinces;
             cboProvince.DisplayMember = "ProvinceName";
             cboProvince.ValueMember = "ProvinceGUID";
