@@ -1422,9 +1422,9 @@ namespace WildfireICSDesktopServices
         public void UpsertAirOperationsSummary(AirOperationsSummary record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allAirOperationsSummaries.Any(o => o.ID == record.ID))
+            if (_currentIncident.allAirOperationsSummaries.Any(o => o.ID == record.ID || o.OpPeriod == record.OpPeriod))
             {
-                _currentIncident.allAirOperationsSummaries = _currentIncident.allAirOperationsSummaries.Where(o => o.ID != record.ID).ToList();
+                _currentIncident.allAirOperationsSummaries = _currentIncident.allAirOperationsSummaries.Where(o => o.ID != record.ID && o.OpPeriod != record.OpPeriod).ToList();
             }
             _currentIncident.allAirOperationsSummaries.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
