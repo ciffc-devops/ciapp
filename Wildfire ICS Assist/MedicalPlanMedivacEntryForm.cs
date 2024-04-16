@@ -12,14 +12,14 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class MedicalPlanMedivacEntryForm : Form
+    public partial class MedicalPlanMedivacEntryForm : BaseForm
     {
         private AmbulanceService _SelectedAmbulance = new AmbulanceService();
         public AmbulanceService SelectedAmbulance { get => _SelectedAmbulance; }
         public bool SaveForLater { get => chkSaveForLater.Checked; }
         public MedicalPlanMedivacEntryForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

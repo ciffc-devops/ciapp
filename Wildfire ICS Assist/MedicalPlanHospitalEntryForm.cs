@@ -12,7 +12,7 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class MedicalPlanHospitalEntryForm : Form
+    public partial class MedicalPlanHospitalEntryForm : BaseForm
     {
         private Hospital _selectedHospital = new Hospital();
 
@@ -21,7 +21,7 @@ namespace Wildfire_ICS_Assist
 
         public MedicalPlanHospitalEntryForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

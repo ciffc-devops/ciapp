@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CommunicationsPlanEntryForm : Form
+    public partial class CommunicationsPlanEntryForm : BaseForm
     {
         private CommsPlanItem _SelectedItem = null;
         public CommsPlanItem SelectedItem { get => _SelectedItem; }
@@ -25,7 +25,7 @@ namespace Wildfire_ICS_Assist
 
         public CommunicationsPlanEntryForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

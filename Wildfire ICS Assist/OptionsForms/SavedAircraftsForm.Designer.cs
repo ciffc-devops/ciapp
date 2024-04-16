@@ -30,13 +30,18 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvAircraft = new System.Windows.Forms.DataGridView();
-            this.colReg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMakeModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompanyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMakeModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -64,7 +69,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
             this.splitContainer1.Size = new System.Drawing.Size(774, 378);
-            this.splitContainer1.SplitterDistance = 310;
+            this.splitContainer1.SplitterDistance = 307;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -75,8 +80,9 @@
             this.dgvAircraft.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.dgvAircraft.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAircraft.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colReg,
+            this.colCompanyName,
             this.colMakeModel,
+            this.colReg,
             this.colBase,
             this.colRemarks});
             this.dgvAircraft.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -87,46 +93,10 @@
             this.dgvAircraft.RowHeadersVisible = false;
             this.dgvAircraft.RowTemplate.Height = 35;
             this.dgvAircraft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAircraft.Size = new System.Drawing.Size(774, 310);
+            this.dgvAircraft.Size = new System.Drawing.Size(774, 307);
             this.dgvAircraft.TabIndex = 1;
             this.dgvAircraft.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAircraft_CellDoubleClick);
             this.dgvAircraft.SelectionChanged += new System.EventHandler(this.dgvAircraft_SelectionChanged);
-            // 
-            // colReg
-            // 
-            this.colReg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colReg.DataPropertyName = "Registration";
-            this.colReg.HeaderText = "Registration";
-            this.colReg.Name = "colReg";
-            this.colReg.ReadOnly = true;
-            this.colReg.Width = 133;
-            // 
-            // colMakeModel
-            // 
-            this.colMakeModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colMakeModel.DataPropertyName = "MakeModel";
-            this.colMakeModel.HeaderText = "Make/Model";
-            this.colMakeModel.Name = "colMakeModel";
-            this.colMakeModel.ReadOnly = true;
-            this.colMakeModel.Width = 139;
-            // 
-            // colBase
-            // 
-            this.colBase.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colBase.DataPropertyName = "Base";
-            this.colBase.HeaderText = "Base";
-            this.colBase.Name = "colBase";
-            this.colBase.ReadOnly = true;
-            this.colBase.Width = 77;
-            // 
-            // colRemarks
-            // 
-            this.colRemarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colRemarks.DataPropertyName = "Remarks";
-            this.colRemarks.HeaderText = "Remarks";
-            this.colRemarks.MinimumWidth = 150;
-            this.colRemarks.Name = "colRemarks";
-            this.colRemarks.ReadOnly = true;
             // 
             // btnDelete
             // 
@@ -167,6 +137,81 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Registration";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Registration";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 88;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "MakeModel";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Make/Model";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Base";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Base";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 56;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Remarks";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Remarks";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 150;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // colCompanyName
+            // 
+            this.colCompanyName.DataPropertyName = "CompanyName";
+            this.colCompanyName.HeaderText = "Company";
+            this.colCompanyName.Name = "colCompanyName";
+            this.colCompanyName.ReadOnly = true;
+            // 
+            // colMakeModel
+            // 
+            this.colMakeModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colMakeModel.DataPropertyName = "MakeModel";
+            this.colMakeModel.HeaderText = "Make/Model";
+            this.colMakeModel.Name = "colMakeModel";
+            this.colMakeModel.ReadOnly = true;
+            this.colMakeModel.Width = 139;
+            // 
+            // colReg
+            // 
+            this.colReg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colReg.DataPropertyName = "Registration";
+            this.colReg.HeaderText = "Registration";
+            this.colReg.Name = "colReg";
+            this.colReg.ReadOnly = true;
+            this.colReg.Width = 133;
+            // 
+            // colBase
+            // 
+            this.colBase.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colBase.DataPropertyName = "Base";
+            this.colBase.HeaderText = "Base";
+            this.colBase.Name = "colBase";
+            this.colBase.ReadOnly = true;
+            this.colBase.Width = 77;
+            // 
+            // colRemarks
+            // 
+            this.colRemarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colRemarks.DataPropertyName = "Remarks";
+            this.colRemarks.HeaderText = "Remarks";
+            this.colRemarks.MinimumWidth = 150;
+            this.colRemarks.Name = "colRemarks";
+            this.colRemarks.ReadOnly = true;
+            // 
             // SavedAircraftsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -195,9 +240,14 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCompanyName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMakeModel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReg;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBase;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemarks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
     }
 }

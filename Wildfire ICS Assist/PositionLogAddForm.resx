@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 188</value>
+    <value>374, 204</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 33</value>
@@ -142,13 +142,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btnSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 256</value>
+    <value>702, 276</value>
   </data>
   <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 51</value>
@@ -172,13 +172,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnSave.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 256</value>
+    <value>11, 276</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 51</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="pnlTrackProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -271,7 +271,7 @@
     <value>154, 65</value>
   </data>
   <data name="datReminderTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 29</value>
+    <value>229, 29</value>
   </data>
   <data name="datReminderTime.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -298,7 +298,7 @@
     <value>154, 31</value>
   </data>
   <data name="datDueDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 29</value>
+    <value>229, 29</value>
   </data>
   <data name="datDueDate.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -346,10 +346,10 @@
     <value>False</value>
   </data>
   <data name="pnlTrackProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 150</value>
+    <value>411, 170</value>
   </data>
   <data name="pnlTrackProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 100</value>
+    <value>396, 100</value>
   </data>
   <data name="pnlTrackProgress.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -364,7 +364,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlTrackProgress.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -373,7 +373,7 @@
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>198, 189</value>
+    <value>199, 208</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>27, 24</value>
@@ -394,7 +394,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="rbTrackProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -403,7 +403,7 @@
     <value>True</value>
   </data>
   <data name="rbTrackProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 187</value>
+    <value>249, 206</value>
   </data>
   <data name="rbTrackProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 28</value>
@@ -424,7 +424,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rbTrackProgress.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="rbInfoOnly.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -433,7 +433,7 @@
     <value>True</value>
   </data>
   <data name="rbInfoOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 187</value>
+    <value>12, 206</value>
   </data>
   <data name="rbInfoOnly.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 28</value>
@@ -454,7 +454,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rbInfoOnly.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="datDateCreated.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -463,7 +463,7 @@
     <value>yyyy-MMM-dd HH:mm</value>
   </data>
   <data name="datDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 150</value>
+    <value>134, 151</value>
   </data>
   <data name="datDateCreated.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 29</value>
@@ -481,7 +481,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;datDateCreated.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -490,7 +490,7 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 154</value>
+    <value>7, 155</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 24</value>
@@ -511,36 +511,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="txtEntryText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="txtEntryText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 36</value>
-  </data>
-  <data name="txtEntryText.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="txtEntryText.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="txtEntryText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>812, 108</value>
-  </data>
-  <data name="txtEntryText.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;txtEntryText.Name" xml:space="preserve">
-    <value>txtEntryText</value>
-  </data>
-  <data name="&gt;&gt;txtEntryText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtEntryText.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;txtEntryText.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="lblEntryText.AutoSize" type="System.Boolean, mscorlib">
@@ -570,6 +540,36 @@
   <data name="&gt;&gt;lblEntryText.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="txtEntryText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="txtEntryText.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="txtEntryText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 36</value>
+  </data>
+  <data name="txtEntryText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
+  <data name="txtEntryText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>813, 106</value>
+  </data>
+  <data name="txtEntryText.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;txtEntryText.Name" xml:space="preserve">
+    <value>txtEntryText</value>
+  </data>
+  <data name="&gt;&gt;txtEntryText.Type" xml:space="preserve">
+    <value>Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl, Canadian Incident Action Plan Program, Version=1.0.5.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtEntryText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtEntryText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -577,16 +577,10 @@
     <value>11, 24</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>832, 315</value>
+    <value>832, 335</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Add to your position log</value>
@@ -595,6 +589,6 @@
     <value>PositionLogAddForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Wildfire_ICS_Assist.BaseForm, Canadian Incident Action Plan Program, Version=1.0.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

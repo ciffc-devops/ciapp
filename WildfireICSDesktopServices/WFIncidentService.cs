@@ -51,6 +51,7 @@ namespace WildfireICSDesktopServices
         public event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
         //public event TeamAssignmentEventHandler TeamAssignmentChanged;
         public event DemobEventHandler DemobChanged;
+        public event ResourceReplacementEventHandler ResourceReplacementChanged;
 
 
         public event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
@@ -96,9 +97,12 @@ namespace WildfireICSDesktopServices
             update.TaskID = _currentIncident.TaskID;
             update.LastUpdatedUTC = DateTime.UtcNow;
             update.CommandName = command;
-            update.Data = obj;
-            update.DataEnc = JsonSerializer.Serialize(update.Data);
-            update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
+            if (obj is ICloneable) { update.Data = (obj as ICloneable).Clone(); }
+            else { update.Data = obj; }
+            update.SetEncData(_currentIncident.TaskEncryptionKey);
+
+            //update.DataEnc = JsonSerializer.Serialize(update.Data);
+            //update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
             update.ProcessedLocally = processed_locally;
             update.MachineID = MachineID;
             update.UploadedSuccessfully = uploaded;
@@ -456,6 +460,10 @@ namespace WildfireICSDesktopServices
             else if (dataClassName.Equals(new DemobilizationRecord().GetType().Name))
             {
                 UpsertDemobRecord(((DemobilizationRecord)obj).Clone(), source);
+            }
+            else if (dataClassName.Equals(new ResourceReplacementPlan().GetType().Name))
+            {
+                UpsertResourceReplacementPlan(((ResourceReplacementPlan)obj).Clone(), source);
             }
         }
 
@@ -1356,7 +1364,7 @@ namespace WildfireICSDesktopServices
 
 
         //Aircraft
-        protected virtual void OnAircrafteChanged(AircraftEventArgs e)
+        protected virtual void OnAircraftChanged(AircraftEventArgs e)
         {
             AircraftEventHandler handler = this.AircraftChanged;
             if (handler != null)
@@ -1367,7 +1375,24 @@ namespace WildfireICSDesktopServices
         public void UpsertAircraft(Aircraft record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
+
+            if (_currentIncident.AllIncidentResources.Any(o => o.ID == record.ID))
+            {
+                _currentIncident.AllIncidentResources = _currentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList();
+            }
+            _currentIncident.AllIncidentResources.Add(record);
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnAircraftChanged(new AircraftEventArgs(record));
+
+            //Also, add it to the air ops summary automagically
+
+
+
             _currentIncident.createAirOpsSummaryAsNeeded(record.OpPeriod);
+            /*
             AirOperationsSummary sum = _currentIncident.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == record.OpPeriod);
             if (sum != null)
             {
@@ -1378,12 +1403,12 @@ namespace WildfireICSDesktopServices
                 sum.aircrafts.Add(record);
                 if (source.Equals("local") || source.Equals("networkNoInternet"))
                 {
-                    UpsertTaskUpdate(record, "UPSERT", true, false);
+                    UpsertTaskUpdate(sum, "UPSERT", true, false);
                 }
-                OnAircrafteChanged(new AircraftEventArgs(record));
+                OnAircraftChanged(new AircraftEventArgs(record));
 
             }
-
+            */
         }
 
         protected virtual void OnAirOperationsSummaryChanged(AirOperationsSummaryEventArgs e)
@@ -1397,9 +1422,9 @@ namespace WildfireICSDesktopServices
         public void UpsertAirOperationsSummary(AirOperationsSummary record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allAirOperationsSummaries.Any(o => o.ID == record.ID))
+            if (_currentIncident.allAirOperationsSummaries.Any(o => o.ID == record.ID || o.OpPeriod == record.OpPeriod))
             {
-                _currentIncident.allAirOperationsSummaries = _currentIncident.allAirOperationsSummaries.Where(o => o.ID != record.ID).ToList();
+                _currentIncident.allAirOperationsSummaries = _currentIncident.allAirOperationsSummaries.Where(o => o.ID != record.ID && o.OpPeriod != record.OpPeriod).ToList();
             }
             _currentIncident.allAirOperationsSummaries.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
@@ -1498,6 +1523,11 @@ namespace WildfireICSDesktopServices
         {
             if (member != null)
             {
+                if(member.UniqueIDNum == 0)
+                {
+                    ;
+                }
+
                 _currentIncident.UpsertTaskTeamMember(member);
                 if (source.Equals("local") || source.Equals("networkNoInternet")) { UpsertTaskUpdate(member, "UPSERT", true, false); }
 
@@ -1728,6 +1758,7 @@ namespace WildfireICSDesktopServices
                         else
                         {
                             NewRole = OrgChartTools.getGenericRoleByName("Operations Branch Director");
+                            
                         }
                     }
                     else if (record.GroupType.Equals("Division"))
@@ -1772,10 +1803,9 @@ namespace WildfireICSDesktopServices
                     switch (record.GroupType)
                     {
                         case "Branch":
-                            if (record.Name.Length < 4)
-                            {
-                                NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
-                            }
+
+                            NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
+
                             NewRole.IsOpGroupSup = true;
                             break;
                         case "Division":
@@ -1904,6 +1934,34 @@ namespace WildfireICSDesktopServices
             OnDemobChanged(new DemobEventArgs(record));
         }
 
+
+        // Resource Replacement Plan
+        protected virtual void OnResourceReplacementPlanChanged(ResourceReplacementPlanEventArgs e)
+        {
+            ResourceReplacementEventHandler handler = this.ResourceReplacementChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertResourceReplacementPlan(ResourceReplacementPlan record, string source = "local")
+        {
+          
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.AllResourceReplacementPlans.Any(o => o.ID == record.ID))
+            {
+                _currentIncident.AllResourceReplacementPlans = _currentIncident.AllResourceReplacementPlans.Where(o => o.ID != record.ID).ToList();
+            }
+            _currentIncident.AllResourceReplacementPlans.Add(record);
+
+           
+
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnResourceReplacementPlanChanged(new ResourceReplacementPlanEventArgs(record));
+        }
 
 
         public void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local")

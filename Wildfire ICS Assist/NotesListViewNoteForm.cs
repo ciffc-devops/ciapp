@@ -12,14 +12,14 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class NotesListViewNoteForm : Form
+    public partial class NotesListViewNoteForm : BaseForm
     {
         Note _currentNote = null;
         public Note CurrentNote { get => _currentNote; private set => _currentNote = value; }
 
         public NotesListViewNoteForm(Note note)
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
             CurrentNote = note;
         }
 

@@ -43,8 +43,8 @@
             this.rbInfoOnly = new System.Windows.Forms.RadioButton();
             this.datDateCreated = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtEntryText = new System.Windows.Forms.TextBox();
             this.lblEntryText = new System.Windows.Forms.Label();
+            this.txtEntryText = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlTrackProgress.SuspendLayout();
             this.SuspendLayout();
@@ -152,15 +152,17 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // txtEntryText
-            // 
-            resources.ApplyResources(this.txtEntryText, "txtEntryText");
-            this.txtEntryText.Name = "txtEntryText";
-            // 
             // lblEntryText
             // 
             resources.ApplyResources(this.lblEntryText, "lblEntryText");
             this.lblEntryText.Name = "lblEntryText";
+            // 
+            // txtEntryText
+            // 
+            resources.ApplyResources(this.txtEntryText, "txtEntryText");
+            this.txtEntryText.BackColor = System.Drawing.Color.Transparent;
+            this.txtEntryText.Multiline = true;
+            this.txtEntryText.Name = "txtEntryText";
             // 
             // PositionLogAddForm
             // 
@@ -169,6 +171,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.txtEntryText);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
@@ -178,7 +181,6 @@
             this.Controls.Add(this.rbInfoOnly);
             this.Controls.Add(this.datDateCreated);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtEntryText);
             this.Controls.Add(this.lblEntryText);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -208,7 +210,7 @@
         private System.Windows.Forms.RadioButton rbInfoOnly;
         private System.Windows.Forms.DateTimePicker datDateCreated;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtEntryText;
         private System.Windows.Forms.Label lblEntryText;
+        private CustomControls.TextBoxRequiredControl txtEntryText;
     }
 }

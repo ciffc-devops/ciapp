@@ -34,17 +34,17 @@
             this.label15 = new System.Windows.Forms.Label();
             this.chkAllergies = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtLastName = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.chkDietary = new System.Windows.Forms.CheckBox();
-            this.txtNOKName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cboAgency = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.txtFirstName = new SpellBox();
+            this.txtNOKName = new SpellBox();
+            this.txtLastName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.SuspendLayout();
             // 
             // button3
@@ -52,7 +52,7 @@
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Location = new System.Drawing.Point(510, 204);
+            this.button3.Location = new System.Drawing.Point(559, 204);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 26);
             this.button3.TabIndex = 136;
@@ -91,17 +91,6 @@
             this.label11.Text = "Last Name*";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtLastName
-            // 
-            this.txtLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLastName.Location = new System.Drawing.Point(202, 51);
-            this.txtLastName.Margin = new System.Windows.Forms.Padding(6);
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(301, 29);
-            this.txtLastName.TabIndex = 127;
-            this.txtLastName.TextChanged += new System.EventHandler(this.txtLastName_TextChanged);
-            // 
             // label8
             // 
             this.label8.Location = new System.Drawing.Point(6, 132);
@@ -123,17 +112,6 @@
             this.chkDietary.UseVisualStyleBackColor = true;
             this.chkDietary.CheckedChanged += new System.EventHandler(this.chkDietary_CheckedChanged);
             // 
-            // txtNOKName
-            // 
-            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNOKName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNOKName.Location = new System.Drawing.Point(202, 201);
-            this.txtNOKName.Name = "txtNOKName";
-            this.txtNOKName.Size = new System.Drawing.Size(301, 29);
-            this.txtNOKName.TabIndex = 131;
-            this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged);
-            // 
             // label13
             // 
             this.label13.Location = new System.Drawing.Point(6, 200);
@@ -153,23 +131,12 @@
             this.label1.Text = "First Name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtFirstName
-            // 
-            this.txtFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFirstName.Location = new System.Drawing.Point(202, 10);
-            this.txtFirstName.Margin = new System.Windows.Forms.Padding(6);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(301, 29);
-            this.txtFirstName.TabIndex = 126;
-            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
-            // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Location = new System.Drawing.Point(510, 96);
+            this.button2.Location = new System.Drawing.Point(559, 96);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 26);
             this.button2.TabIndex = 139;
@@ -197,14 +164,53 @@
             this.cboAgency.Location = new System.Drawing.Point(202, 92);
             this.cboAgency.Margin = new System.Windows.Forms.Padding(6);
             this.cboAgency.Name = "cboAgency";
-            this.cboAgency.Size = new System.Drawing.Size(299, 32);
+            this.cboAgency.Size = new System.Drawing.Size(348, 32);
             this.cboAgency.TabIndex = 138;
             this.cboAgency.Leave += new System.EventHandler(this.cboAgency_Leave);
+            // 
+            // txtFirstName
+            // 
+            this.txtFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFirstName.Location = new System.Drawing.Point(202, 13);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(348, 29);
+            this.txtFirstName.TabIndex = 140;
+            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged_1);
+            this.txtFirstName.Child = new System.Windows.Controls.TextBox();
+            // 
+            // txtNOKName
+            // 
+            this.txtNOKName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNOKName.Location = new System.Drawing.Point(202, 200);
+            this.txtNOKName.Name = "txtNOKName";
+            this.txtNOKName.Size = new System.Drawing.Size(348, 29);
+            this.txtNOKName.TabIndex = 141;
+            this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged_1);
+            this.txtNOKName.Child = new System.Windows.Controls.TextBox();
+            // 
+            // txtLastName
+            // 
+            this.txtLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLastName.BackColor = System.Drawing.Color.Transparent;
+            this.txtLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastName.Location = new System.Drawing.Point(202, 51);
+            this.txtLastName.Margin = new System.Windows.Forms.Padding(6);
+            this.txtLastName.Multiline = true;
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(366, 29);
+            this.txtLastName.TabIndex = 142;
+            this.txtLastName.TextChanged += new System.EventHandler(this.txtLastName_TextChanged_1);
             // 
             // VisitorEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtLastName);
+            this.Controls.Add(this.txtNOKName);
+            this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cboAgency);
@@ -212,17 +218,14 @@
             this.Controls.Add(this.label15);
             this.Controls.Add(this.chkAllergies);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkDietary);
-            this.Controls.Add(this.txtNOKName);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtFirstName);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "VisitorEditControl";
-            this.Size = new System.Drawing.Size(539, 235);
+            this.Size = new System.Drawing.Size(588, 235);
             this.Load += new System.EventHandler(this.VisitorEditControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -235,16 +238,16 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckBox chkAllergies;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox chkDietary;
-        private System.Windows.Forms.TextBox txtNOKName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboAgency;
         private System.Windows.Forms.ToolTip toolTip1;
+        private SpellBox txtFirstName;
+        private TextBoxRequiredControl txtLastName;
+        private SpellBox txtNOKName;
     }
 }

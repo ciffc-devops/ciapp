@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class GeneralMessageEditForm : Form
+    public partial class GeneralMessageEditForm : BaseForm
     {
         private GeneralMessage _generalMessage = null;
         public GeneralMessage generalMessage { get => _generalMessage; set { _generalMessage = value; DisplayMessage(); } }
@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist
         public GeneralMessageEditForm()
         {
             
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
         }
 
@@ -101,13 +101,13 @@ namespace Wildfire_ICS_Assist
 
         private void txtMessage_TextChanged(object sender, EventArgs e)
         {
-            generalMessage.Message = ((TextBox)sender).Text.Trim();
+            generalMessage.Message = ((SpellBox)sender).Text.Trim();
             _ = ValidateNew();
         }
 
         private void txtReply_TextChanged(object sender, EventArgs e)
         {
-            generalMessage.Reply = ((TextBox)sender).Text.Trim(); _ = ValidateNew();
+            generalMessage.Reply = ((SpellBox)sender).Text.Trim(); _ = ValidateNew();
 
         }
 
@@ -216,7 +216,7 @@ namespace Wildfire_ICS_Assist
                 {
                     txtReplyName.BackColor = Program.GoodColor; txtReplyPosition.BackColor = Program.GoodColor;
                 }
-            } else { txtReply.BackColor = Program.StandardControLColor; }
+            } else { txtReply.BackColor = Program.StandardTextboxColor; }
 
             return isValid;
         }

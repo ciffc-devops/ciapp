@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpObjectives = new System.Windows.Forms.TabPage();
             this.dgvObjectives = new System.Windows.Forms.DataGridView();
@@ -40,6 +40,22 @@
             this.colObjectiveCompleted = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colTransferObjective = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tpResources = new System.Windows.Forms.TabPage();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.dgvResources = new System.Windows.Forms.DataGridView();
+            this.colVariety = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumberOfPeople = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumberOfEquipment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblResourceListDetail = new System.Windows.Forms.Label();
+            this.btnPrintDemob = new System.Windows.Forms.Button();
+            this.btnDemob = new System.Windows.Forms.Button();
             this.tpOrgChart = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lblCurrentOrgTitle = new System.Windows.Forms.Label();
@@ -60,6 +76,12 @@
             this.btnCopyMedPlan = new System.Windows.Forms.Button();
             this.btnCopyCommsPlan = new System.Windows.Forms.Button();
             this.tpSummary = new System.Windows.Forms.TabPage();
+            this.dgvSummaryStats = new System.Windows.Forms.DataGridView();
+            this.colSumCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSumItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOpTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIncidentTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSummaryMoreInfo = new System.Windows.Forms.DataGridViewButtonColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -67,32 +89,15 @@
             this.datOpsStart = new System.Windows.Forms.DateTimePicker();
             this.datOpsEnd = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.btnPrintDemob = new System.Windows.Forms.Button();
-            this.btnDemob = new System.Windows.Forms.Button();
-            this.dgvResources = new System.Windows.Forms.DataGridView();
-            this.colVariety = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumberOfPeople = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumberOfEquipment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLastDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSummaryStats = new System.Windows.Forms.DataGridView();
-            this.colSumCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSumItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOpTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIncidentTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSummaryMoreInfo = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.lblResourceListDetail = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpObjectives.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).BeginInit();
             this.tpResources.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResources)).BeginInit();
             this.tpOrgChart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -102,17 +107,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSafety)).BeginInit();
             this.tpOther.SuspendLayout();
             this.tpSummary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSummaryStats)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResources)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSummaryStats)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -124,12 +124,15 @@
             this.tabControl1.Controls.Add(this.tpOther);
             this.tabControl1.Controls.Add(this.tpSummary);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.ItemSize = new System.Drawing.Size(100, 29);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(10, 3);
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(918, 456);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
             // tpObjectives
             // 
@@ -154,14 +157,14 @@
             this.colObjective,
             this.colObjectiveCompleted,
             this.colTransferObjective});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvObjectives.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvObjectives.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvObjectives.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvObjectives.Location = new System.Drawing.Point(3, 3);
             this.dgvObjectives.MultiSelect = false;
@@ -219,6 +222,202 @@
             this.tpResources.Text = "Resources";
             this.tpResources.UseVisualStyleBackColor = true;
             // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer3.IsSplitterFixed = true;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.dgvResources);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.lblResourceListDetail);
+            this.splitContainer3.Panel2.Controls.Add(this.btnPrintDemob);
+            this.splitContainer3.Panel2.Controls.Add(this.btnDemob);
+            this.splitContainer3.Size = new System.Drawing.Size(910, 419);
+            this.splitContainer3.SplitterDistance = 334;
+            this.splitContainer3.TabIndex = 0;
+            // 
+            // dgvResources
+            // 
+            this.dgvResources.AllowUserToAddRows = false;
+            this.dgvResources.AllowUserToDeleteRows = false;
+            this.dgvResources.AllowUserToResizeColumns = false;
+            this.dgvResources.AllowUserToResizeRows = false;
+            this.dgvResources.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResources.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colVariety,
+            this.colID,
+            this.colName,
+            this.colKind,
+            this.colType,
+            this.colLeader,
+            this.colNumberOfPeople,
+            this.colNumberOfEquipment,
+            this.colCheckIn,
+            this.colLastDay,
+            this.colStatus});
+            this.dgvResources.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvResources.Location = new System.Drawing.Point(0, 0);
+            this.dgvResources.Name = "dgvResources";
+            this.dgvResources.ReadOnly = true;
+            this.dgvResources.RowHeadersVisible = false;
+            this.dgvResources.RowTemplate.Height = 30;
+            this.dgvResources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvResources.Size = new System.Drawing.Size(910, 334);
+            this.dgvResources.TabIndex = 2;
+            this.dgvResources.SelectionChanged += new System.EventHandler(this.dgvResources_SelectionChanged);
+            // 
+            // colVariety
+            // 
+            this.colVariety.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colVariety.DataPropertyName = "ResourceType";
+            this.colVariety.HeaderText = "Variety";
+            this.colVariety.Name = "colVariety";
+            this.colVariety.ReadOnly = true;
+            this.colVariety.Width = 92;
+            // 
+            // colID
+            // 
+            this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colID.DataPropertyName = "UniqueIDNumWithPrefix";
+            this.colID.HeaderText = "ID";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Width = 52;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "ResourceName";
+            this.colName.HeaderText = "Resource";
+            this.colName.MinimumWidth = 200;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colKind
+            // 
+            this.colKind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colKind.DataPropertyName = "Kind";
+            this.colKind.HeaderText = "Kind";
+            this.colKind.Name = "colKind";
+            this.colKind.ReadOnly = true;
+            this.colKind.Width = 73;
+            // 
+            // colType
+            // 
+            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colType.DataPropertyName = "Type";
+            this.colType.HeaderText = "Type";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Width = 78;
+            // 
+            // colLeader
+            // 
+            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colLeader.DataPropertyName = "LeaderName";
+            this.colLeader.HeaderText = "Leader";
+            this.colLeader.Name = "colLeader";
+            this.colLeader.ReadOnly = true;
+            this.colLeader.Width = 94;
+            // 
+            // colNumberOfPeople
+            // 
+            this.colNumberOfPeople.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNumberOfPeople.DataPropertyName = "NumberOfPeople";
+            this.colNumberOfPeople.HeaderText = "# Ppl";
+            this.colNumberOfPeople.Name = "colNumberOfPeople";
+            this.colNumberOfPeople.ReadOnly = true;
+            this.colNumberOfPeople.Width = 77;
+            // 
+            // colNumberOfEquipment
+            // 
+            this.colNumberOfEquipment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNumberOfEquipment.DataPropertyName = "NumberOfVehicles";
+            this.colNumberOfEquipment.HeaderText = "# Equip";
+            this.colNumberOfEquipment.Name = "colNumberOfEquipment";
+            this.colNumberOfEquipment.ReadOnly = true;
+            // 
+            // colCheckIn
+            // 
+            this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCheckIn.DataPropertyName = "CheckInDate";
+            dataGridViewCellStyle2.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCheckIn.HeaderText = "Check In";
+            this.colCheckIn.Name = "colCheckIn";
+            this.colCheckIn.ReadOnly = true;
+            this.colCheckIn.Width = 109;
+            // 
+            // colLastDay
+            // 
+            this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colLastDay.DataPropertyName = "LastDayOnIncident";
+            dataGridViewCellStyle3.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colLastDay.HeaderText = "Last Day";
+            this.colLastDay.Name = "colLastDay";
+            this.colLastDay.ReadOnly = true;
+            this.colLastDay.Width = 105;
+            // 
+            // colStatus
+            // 
+            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            this.colStatus.Width = 85;
+            // 
+            // lblResourceListDetail
+            // 
+            this.lblResourceListDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResourceListDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResourceListDetail.Location = new System.Drawing.Point(380, 7);
+            this.lblResourceListDetail.Name = "lblResourceListDetail";
+            this.lblResourceListDetail.Size = new System.Drawing.Size(522, 66);
+            this.lblResourceListDetail.TabIndex = 52;
+            this.lblResourceListDetail.Text = "The list above includes all resources with a Last Day On Incident date within the" +
+    " next few days.";
+            this.lblResourceListDetail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnPrintDemob
+            // 
+            this.btnPrintDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrintDemob.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrintDemob.Location = new System.Drawing.Point(8, 7);
+            this.btnPrintDemob.Name = "btnPrintDemob";
+            this.btnPrintDemob.Size = new System.Drawing.Size(210, 66);
+            this.btnPrintDemob.TabIndex = 51;
+            this.btnPrintDemob.Text = "Print Demob Checklists (221)";
+            this.btnPrintDemob.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrintDemob.UseVisualStyleBackColor = true;
+            this.btnPrintDemob.Click += new System.EventHandler(this.btnPrintDemob_Click);
+            // 
+            // btnDemob
+            // 
+            this.btnDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_432_log_out;
+            this.btnDemob.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnDemob.Location = new System.Drawing.Point(224, 7);
+            this.btnDemob.Name = "btnDemob";
+            this.btnDemob.Size = new System.Drawing.Size(150, 66);
+            this.btnDemob.TabIndex = 50;
+            this.btnDemob.Text = "Demob Selected";
+            this.btnDemob.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDemob.UseVisualStyleBackColor = true;
+            this.btnDemob.Click += new System.EventHandler(this.btnDemob_Click);
+            // 
             // tpOrgChart
             // 
             this.tpOrgChart.Controls.Add(this.splitContainer2);
@@ -247,7 +446,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.lblNextOrgTitle);
             this.splitContainer2.Panel2.Controls.Add(this.treeOrgChart2);
             this.splitContainer2.Size = new System.Drawing.Size(910, 419);
-            this.splitContainer2.SplitterDistance = 441;
+            this.splitContainer2.SplitterDistance = 440;
             this.splitContainer2.TabIndex = 0;
             // 
             // lblCurrentOrgTitle
@@ -258,7 +457,7 @@
             this.lblCurrentOrgTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblCurrentOrgTitle.Location = new System.Drawing.Point(8, 10);
             this.lblCurrentOrgTitle.Name = "lblCurrentOrgTitle";
-            this.lblCurrentOrgTitle.Size = new System.Drawing.Size(429, 32);
+            this.lblCurrentOrgTitle.Size = new System.Drawing.Size(428, 32);
             this.lblCurrentOrgTitle.TabIndex = 35;
             this.lblCurrentOrgTitle.Text = "Incident Information";
             this.lblCurrentOrgTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -267,7 +466,7 @@
             // 
             this.chkCopyOrgAssignments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkCopyOrgAssignments.AutoSize = true;
-            this.chkCopyOrgAssignments.Location = new System.Drawing.Point(22, 328);
+            this.chkCopyOrgAssignments.Location = new System.Drawing.Point(21, 328);
             this.chkCopyOrgAssignments.Name = "chkCopyOrgAssignments";
             this.chkCopyOrgAssignments.Size = new System.Drawing.Size(411, 28);
             this.chkCopyOrgAssignments.TabIndex = 1;
@@ -279,7 +478,7 @@
             this.btnCopyOrgChart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopyOrgChart.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right;
             this.btnCopyOrgChart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCopyOrgChart.Location = new System.Drawing.Point(151, 362);
+            this.btnCopyOrgChart.Location = new System.Drawing.Point(150, 362);
             this.btnCopyOrgChart.Name = "btnCopyOrgChart";
             this.btnCopyOrgChart.Size = new System.Drawing.Size(282, 54);
             this.btnCopyOrgChart.TabIndex = 2;
@@ -297,7 +496,7 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(8, 45);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(425, 277);
+            this.treeOrgChart.Size = new System.Drawing.Size(424, 277);
             this.treeOrgChart.TabIndex = 1;
             // 
             // lblNextOrgTitle
@@ -308,7 +507,7 @@
             this.lblNextOrgTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblNextOrgTitle.Location = new System.Drawing.Point(3, 10);
             this.lblNextOrgTitle.Name = "lblNextOrgTitle";
-            this.lblNextOrgTitle.Size = new System.Drawing.Size(451, 32);
+            this.lblNextOrgTitle.Size = new System.Drawing.Size(452, 32);
             this.lblNextOrgTitle.TabIndex = 36;
             this.lblNextOrgTitle.Text = "Incident Information";
             this.lblNextOrgTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -321,7 +520,7 @@
             this.treeOrgChart2.HideSelection = false;
             this.treeOrgChart2.Location = new System.Drawing.Point(8, 45);
             this.treeOrgChart2.Name = "treeOrgChart2";
-            this.treeOrgChart2.Size = new System.Drawing.Size(440, 371);
+            this.treeOrgChart2.Size = new System.Drawing.Size(441, 371);
             this.treeOrgChart2.TabIndex = 1;
             // 
             // tpSafety
@@ -344,14 +543,14 @@
             this.dgvSafety.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
             this.colSafetyCopyToNext});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSafety.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSafety.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvSafety.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSafety.Location = new System.Drawing.Point(0, 0);
             this.dgvSafety.MultiSelect = false;
@@ -475,6 +674,74 @@
             this.tpSummary.Text = "Summary Stats";
             this.tpSummary.UseVisualStyleBackColor = true;
             // 
+            // dgvSummaryStats
+            // 
+            this.dgvSummaryStats.AllowUserToAddRows = false;
+            this.dgvSummaryStats.AllowUserToDeleteRows = false;
+            this.dgvSummaryStats.AllowUserToOrderColumns = true;
+            this.dgvSummaryStats.AllowUserToResizeColumns = false;
+            this.dgvSummaryStats.AllowUserToResizeRows = false;
+            this.dgvSummaryStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSummaryStats.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSumCategory,
+            this.colSumItem,
+            this.colOpTotal,
+            this.colIncidentTotal,
+            this.colSummaryMoreInfo});
+            this.dgvSummaryStats.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvSummaryStats.Location = new System.Drawing.Point(0, 0);
+            this.dgvSummaryStats.Name = "dgvSummaryStats";
+            this.dgvSummaryStats.ReadOnly = true;
+            this.dgvSummaryStats.RowHeadersVisible = false;
+            this.dgvSummaryStats.RowTemplate.Height = 30;
+            this.dgvSummaryStats.Size = new System.Drawing.Size(910, 419);
+            this.dgvSummaryStats.TabIndex = 1;
+            this.dgvSummaryStats.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSummaryStats_CellContentClick);
+            this.dgvSummaryStats.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSummaryStats_CellFormatting);
+            // 
+            // colSumCategory
+            // 
+            this.colSumCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colSumCategory.DataPropertyName = "Category";
+            this.colSumCategory.HeaderText = "Category";
+            this.colSumCategory.Name = "colSumCategory";
+            this.colSumCategory.ReadOnly = true;
+            this.colSumCategory.Width = 110;
+            // 
+            // colSumItem
+            // 
+            this.colSumItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSumItem.DataPropertyName = "Text";
+            this.colSumItem.HeaderText = "Item";
+            this.colSumItem.MinimumWidth = 100;
+            this.colSumItem.Name = "colSumItem";
+            this.colSumItem.ReadOnly = true;
+            // 
+            // colOpTotal
+            // 
+            this.colOpTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colOpTotal.DataPropertyName = "OpTotal";
+            this.colOpTotal.HeaderText = "This Op Period";
+            this.colOpTotal.Name = "colOpTotal";
+            this.colOpTotal.ReadOnly = true;
+            this.colOpTotal.Width = 148;
+            // 
+            // colIncidentTotal
+            // 
+            this.colIncidentTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colIncidentTotal.DataPropertyName = "IncidentToDateStr";
+            this.colIncidentTotal.HeaderText = "Incident To Date";
+            this.colIncidentTotal.Name = "colIncidentTotal";
+            this.colIncidentTotal.ReadOnly = true;
+            this.colIncidentTotal.Width = 123;
+            // 
+            // colSummaryMoreInfo
+            // 
+            this.colSummaryMoreInfo.DataPropertyName = "MoreInfoTitle";
+            this.colSummaryMoreInfo.HeaderText = "More Info";
+            this.colSummaryMoreInfo.Name = "colSummaryMoreInfo";
+            this.colSummaryMoreInfo.ReadOnly = true;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -585,272 +852,6 @@
             this.label15.TabIndex = 19;
             this.label15.Text = "From";
             // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer3.IsSplitterFixed = true;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.dgvResources);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.lblResourceListDetail);
-            this.splitContainer3.Panel2.Controls.Add(this.btnPrintDemob);
-            this.splitContainer3.Panel2.Controls.Add(this.btnDemob);
-            this.splitContainer3.Size = new System.Drawing.Size(910, 419);
-            this.splitContainer3.SplitterDistance = 334;
-            this.splitContainer3.TabIndex = 0;
-            // 
-            // btnPrintDemob
-            // 
-            this.btnPrintDemob.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnPrintDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrintDemob.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrintDemob.Location = new System.Drawing.Point(8, 7);
-            this.btnPrintDemob.Name = "btnPrintDemob";
-            this.btnPrintDemob.Size = new System.Drawing.Size(210, 66);
-            this.btnPrintDemob.TabIndex = 51;
-            this.btnPrintDemob.Text = "Print Demob Checklists (221)";
-            this.btnPrintDemob.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrintDemob.UseVisualStyleBackColor = true;
-            this.btnPrintDemob.Click += new System.EventHandler(this.btnPrintDemob_Click);
-            // 
-            // btnDemob
-            // 
-            this.btnDemob.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_432_log_out;
-            this.btnDemob.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDemob.Location = new System.Drawing.Point(224, 7);
-            this.btnDemob.Name = "btnDemob";
-            this.btnDemob.Size = new System.Drawing.Size(150, 66);
-            this.btnDemob.TabIndex = 50;
-            this.btnDemob.Text = "Demob Selected";
-            this.btnDemob.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDemob.UseVisualStyleBackColor = true;
-            this.btnDemob.Click += new System.EventHandler(this.btnDemob_Click);
-            // 
-            // dgvResources
-            // 
-            this.dgvResources.AllowUserToAddRows = false;
-            this.dgvResources.AllowUserToDeleteRows = false;
-            this.dgvResources.AllowUserToResizeColumns = false;
-            this.dgvResources.AllowUserToResizeRows = false;
-            this.dgvResources.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResources.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colVariety,
-            this.colID,
-            this.colName,
-            this.colKind,
-            this.colType,
-            this.colLeader,
-            this.colNumberOfPeople,
-            this.colNumberOfEquipment,
-            this.colCheckIn,
-            this.colLastDay,
-            this.colStatus});
-            this.dgvResources.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvResources.Location = new System.Drawing.Point(0, 0);
-            this.dgvResources.Name = "dgvResources";
-            this.dgvResources.ReadOnly = true;
-            this.dgvResources.RowHeadersVisible = false;
-            this.dgvResources.RowTemplate.Height = 30;
-            this.dgvResources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResources.Size = new System.Drawing.Size(910, 334);
-            this.dgvResources.TabIndex = 2;
-            this.dgvResources.SelectionChanged += new System.EventHandler(this.dgvResources_SelectionChanged);
-            // 
-            // colVariety
-            // 
-            this.colVariety.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colVariety.DataPropertyName = "ResourceType";
-            this.colVariety.HeaderText = "Variety";
-            this.colVariety.Name = "colVariety";
-            this.colVariety.ReadOnly = true;
-            this.colVariety.Width = 92;
-            // 
-            // colID
-            // 
-            this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colID.DataPropertyName = "UniqueIDNumWithPrefix";
-            this.colID.HeaderText = "ID";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Width = 52;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "ResourceName";
-            this.colName.HeaderText = "Resource";
-            this.colName.MinimumWidth = 200;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colKind
-            // 
-            this.colKind.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colKind.DataPropertyName = "Kind";
-            this.colKind.HeaderText = "Kind";
-            this.colKind.Name = "colKind";
-            this.colKind.ReadOnly = true;
-            this.colKind.Width = 73;
-            // 
-            // colType
-            // 
-            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colType.DataPropertyName = "Type";
-            this.colType.HeaderText = "Type";
-            this.colType.Name = "colType";
-            this.colType.ReadOnly = true;
-            this.colType.Width = 78;
-            // 
-            // colLeader
-            // 
-            this.colLeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colLeader.DataPropertyName = "LeaderName";
-            this.colLeader.HeaderText = "Leader";
-            this.colLeader.Name = "colLeader";
-            this.colLeader.ReadOnly = true;
-            this.colLeader.Width = 94;
-            // 
-            // colNumberOfPeople
-            // 
-            this.colNumberOfPeople.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumberOfPeople.DataPropertyName = "NumberOfPeople";
-            this.colNumberOfPeople.HeaderText = "# Ppl";
-            this.colNumberOfPeople.Name = "colNumberOfPeople";
-            this.colNumberOfPeople.ReadOnly = true;
-            this.colNumberOfPeople.Width = 77;
-            // 
-            // colNumberOfEquipment
-            // 
-            this.colNumberOfEquipment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumberOfEquipment.DataPropertyName = "NumberOfVehicles";
-            this.colNumberOfEquipment.HeaderText = "# Equip";
-            this.colNumberOfEquipment.Name = "colNumberOfEquipment";
-            this.colNumberOfEquipment.ReadOnly = true;
-            // 
-            // colCheckIn
-            // 
-            this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCheckIn.DataPropertyName = "CheckInDate";
-            dataGridViewCellStyle7.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colCheckIn.HeaderText = "Check In";
-            this.colCheckIn.Name = "colCheckIn";
-            this.colCheckIn.ReadOnly = true;
-            this.colCheckIn.Width = 109;
-            // 
-            // colLastDay
-            // 
-            this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colLastDay.DataPropertyName = "LastDayOnIncident";
-            dataGridViewCellStyle8.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle8.NullValue = null;
-            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colLastDay.HeaderText = "Last Day";
-            this.colLastDay.Name = "colLastDay";
-            this.colLastDay.ReadOnly = true;
-            this.colLastDay.Width = 105;
-            // 
-            // colStatus
-            // 
-            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colStatus.DataPropertyName = "Status";
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 85;
-            // 
-            // dgvSummaryStats
-            // 
-            this.dgvSummaryStats.AllowUserToAddRows = false;
-            this.dgvSummaryStats.AllowUserToDeleteRows = false;
-            this.dgvSummaryStats.AllowUserToOrderColumns = true;
-            this.dgvSummaryStats.AllowUserToResizeColumns = false;
-            this.dgvSummaryStats.AllowUserToResizeRows = false;
-            this.dgvSummaryStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSummaryStats.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSumCategory,
-            this.colSumItem,
-            this.colOpTotal,
-            this.colIncidentTotal,
-            this.colSummaryMoreInfo});
-            this.dgvSummaryStats.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSummaryStats.Location = new System.Drawing.Point(0, 0);
-            this.dgvSummaryStats.Name = "dgvSummaryStats";
-            this.dgvSummaryStats.ReadOnly = true;
-            this.dgvSummaryStats.RowHeadersVisible = false;
-            this.dgvSummaryStats.RowTemplate.Height = 30;
-            this.dgvSummaryStats.Size = new System.Drawing.Size(910, 419);
-            this.dgvSummaryStats.TabIndex = 1;
-            this.dgvSummaryStats.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSummaryStats_CellContentClick);
-            this.dgvSummaryStats.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSummaryStats_CellFormatting);
-            // 
-            // colSumCategory
-            // 
-            this.colSumCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSumCategory.DataPropertyName = "Category";
-            this.colSumCategory.HeaderText = "Category";
-            this.colSumCategory.Name = "colSumCategory";
-            this.colSumCategory.ReadOnly = true;
-            this.colSumCategory.Width = 110;
-            // 
-            // colSumItem
-            // 
-            this.colSumItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSumItem.DataPropertyName = "Text";
-            this.colSumItem.HeaderText = "Item";
-            this.colSumItem.MinimumWidth = 100;
-            this.colSumItem.Name = "colSumItem";
-            this.colSumItem.ReadOnly = true;
-            // 
-            // colOpTotal
-            // 
-            this.colOpTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colOpTotal.DataPropertyName = "OpTotal";
-            this.colOpTotal.HeaderText = "This Op Period";
-            this.colOpTotal.Name = "colOpTotal";
-            this.colOpTotal.ReadOnly = true;
-            this.colOpTotal.Width = 162;
-            // 
-            // colIncidentTotal
-            // 
-            this.colIncidentTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colIncidentTotal.DataPropertyName = "IncidentToDateStr";
-            this.colIncidentTotal.HeaderText = "Incident To Date";
-            this.colIncidentTotal.Name = "colIncidentTotal";
-            this.colIncidentTotal.ReadOnly = true;
-            this.colIncidentTotal.Width = 123;
-            // 
-            // colSummaryMoreInfo
-            // 
-            this.colSummaryMoreInfo.DataPropertyName = "MoreInfoTitle";
-            this.colSummaryMoreInfo.HeaderText = "More Info";
-            this.colSummaryMoreInfo.Name = "colSummaryMoreInfo";
-            this.colSummaryMoreInfo.ReadOnly = true;
-            // 
-            // lblResourceListDetail
-            // 
-            this.lblResourceListDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblResourceListDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResourceListDetail.Location = new System.Drawing.Point(380, 7);
-            this.lblResourceListDetail.Name = "lblResourceListDetail";
-            this.lblResourceListDetail.Size = new System.Drawing.Size(522, 66);
-            this.lblResourceListDetail.TabIndex = 52;
-            this.lblResourceListDetail.Text = "The list above includes all resources with a Last Day On Incident date within the" +
-    " next few days.";
-            this.lblResourceListDetail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // CloseOpPeriodForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -868,6 +869,11 @@
             this.tpObjectives.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).EndInit();
             this.tpResources.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResources)).EndInit();
             this.tpOrgChart.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
@@ -879,18 +885,13 @@
             this.tpOther.ResumeLayout(false);
             this.tpOther.PerformLayout();
             this.tpSummary.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSummaryStats)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).EndInit();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResources)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSummaryStats)).EndInit();
             this.ResumeLayout(false);
 
         }

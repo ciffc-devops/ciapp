@@ -17,7 +17,6 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(3)] private DateTime _DatePrepared;
         [ProtoMember(4)] private string _PreparedBy;
         [ProtoMember(5)] private List<CommsPlanItem> _allCommsItems;
-       // [ProtoMember(6)] private List<CommsPlanItemLink> _allItemLinks;
         [ProtoMember(7)] private Guid _ID;
         [ProtoMember(8)] private DateTime _lastUpdatedUTC;
         [ProtoMember(9)] private string _PreparedByPosition;
@@ -117,7 +116,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private Guid _OrganizationID;
         [ProtoMember(14)] private int _OpsPeriod;
         [ProtoMember(15)] private string _RxTone;
-        [ProtoMember(16)] private string _Aassignment;
+        [ProtoMember(16)] private string _Assignment;
         [ProtoMember(17)] private Guid _TemplateItemID; //This is a unique identifier for the item as saved in Options.
         [ProtoMember(18)] private bool _Aircraft;
         [ProtoMember(19)] private string _TxFrequency;
@@ -173,7 +172,7 @@ namespace WF_ICS_ClassLibrary.Models
             }
         }
 
-        public string Assignment { get => _Aassignment; set => _Aassignment = value; }
+        public string Assignment { get => _Assignment; set => _Assignment = value; }
         public bool UsedForAircraft { get => _Aircraft; set => _Aircraft = value; }
 
         public string IDWithFrequency { get { return ChannelID + " " + RxFrequency; } }
@@ -253,34 +252,7 @@ namespace WF_ICS_ClassLibrary.Models
 
     }
 
-    /*
-    [ProtoContract]
-    [Serializable]
-    public class CommsPlanItemLink : ICloneable
-    {
-        [ProtoMember(1)] private Guid _ItemID;
-        [ProtoMember(2)] private string _CommsFunction;
-        [ProtoMember(3)] private int _OpsPeriod;
-
-        public Guid ItemID { get => _ItemID; set => _ItemID = value; }
-        public string CommsFunction { get => _CommsFunction; set => _CommsFunction = value; }
-        public int OpsPeriod { get => _OpsPeriod; set => _OpsPeriod = value; }
-
-        public CommsPlanItemLink() { }
-        public CommsPlanItemLink(Guid id, string function, int ops)
-        {
-            ItemID = id; CommsFunction = function; OpsPeriod = ops;
-        }
-        public CommsPlanItemLink Clone()
-        {
-            return this.MemberwiseClone() as CommsPlanItemLink;
-        }
-        object ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-
-    }*/
+  
     public static class CommsPlanTools
     {
         public static string PlanToCSV(List<CommsPlanItem> items, string delimiter = ",")

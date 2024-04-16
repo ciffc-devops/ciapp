@@ -17,12 +17,11 @@
 // under the License.
 // 
 
+
+using ProtoBuf.Meta;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Runtime.InteropServices;
-using ProtoBuf.Meta;
 
 #if ANDROID
 using PreserveAttribute = Android.Runtime.PreserveAttribute;
@@ -37,14 +36,14 @@ namespace NetworkCommsDotNet.DPSBase
     /// </summary>
     [DataSerializerProcessor(1)]
     public class ProtobufSerializer : DataSerializer
-    {        
+    {
         private static int metaDataTimeoutMS = 150000;
 
 #if ANDROID || iOS
         [Preserve]
 #endif
         private ProtobufSerializer() { }
-        
+
         #region Depreciated
 
         static DataSerializer instance;
@@ -70,12 +69,12 @@ namespace NetworkCommsDotNet.DPSBase
         }
 
         #endregion
-        
+
         #region ISerialize Members
-                
+
         /// <inheritdoc />
         protected override void SerialiseDataObjectInt(Stream ouputStream, object objectToSerialise, Dictionary<string, string> options)
-        {               
+        {
             ProtoBuf.Serializer.NonGeneric.Serialize(ouputStream, objectToSerialise);
             ouputStream.Seek(0, 0);
         }

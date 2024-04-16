@@ -11,7 +11,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class NotesListEditNoteForm : Form
+    public partial class NotesListEditNoteForm : BaseForm
     {
         Note _currentNote = null;
         public Note CurrentNote { get => _currentNote; private set => _currentNote = value; }
@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
 
         public NotesListEditNoteForm(Note note)
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
             CurrentNote = note;
         }
 

@@ -47,6 +47,166 @@ namespace WildfireICSDesktopServices
             return System.IO.Path.Combine(dir, fileToUse);
         }
 
+        #region Dietary and Allergy Details
+
+        public List<byte[]> exportDietaryAndAllergyToPDF(WFIncident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodToExport);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
+            List<CheckInRecordWithResource> allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport);
+
+            allCheckInRecords = allCheckInRecords.Where(o => o.Record.ParentRecordID == Guid.Empty && o.Resource.GetType().Equals(typeof(Personnel))).OrderBy(o => o.Record.CheckInLocation).ToList(); //remove non-personnel
+            allCheckInRecords = allCheckInRecords.Where(o => (o.Resource as Personnel).HasAllergies || (o.Resource as Personnel).HasDietaryRestrictions).ToList();
+            //if (thisOpOnly) { allCheckInRecords = allCheckInRecords.Where(o => o.Record.DailyCheckInRecords.Any(d => d.OpPeriod == OpPeriodToExport)).ToList(); }
+
+
+            int totalPages = 1;
+            int rowsOnPage = 40;
+
+
+            if (allCheckInRecords.Count > rowsOnPage)
+            {
+                totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(allCheckInRecords.Count - rowsOnPage) / Convert.ToDecimal(rowsOnPage)));
+                if ((allCheckInRecords.Count - rowsOnPage) % rowsOnPage > 0) { totalPages += 1; }
+                if (totalPages == 0) { totalPages = 1; }
+            }
+
+            List<string> pdfFileNames = new List<string>();
+
+            for (int x = 1; x <= totalPages; x++)
+            {
+                List<CheckInRecordWithResource> resourcesThisPage = allCheckInRecords.Skip((x - 1) * rowsOnPage).Take(rowsOnPage).ToList();
+                allPDFs.AddRange(createSinglePageDietaryAndAllergyPDF(incident, OpPeriodToExport, resourcesThisPage, x, totalPages, flattenPDF));
+
+            }
+
+            /*
+            List<PositionLogEntry> extraPageEntries = entries.Skip(19).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(31 * (x - 1)).Take(37).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            */
+
+
+            return allPDFs;
+        }
+
+        public List<byte[]> createSinglePageDietaryAndAllergyPDF(WFIncident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "Dietary and Allergy Details - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
+            outputFileName += ".pdf";
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            string fileToUse = getPDFFilePath("Dietary and Allergy Details.pdf");
+            fileToUse = getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+                    string checkInLocation = null;
+                    if (allCheckInRecords.Any(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)))
+                    {
+                        checkInLocation = allCheckInRecords.First(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)).Record.CheckInLocation;
+                    }
+
+                    stamper.AcroFields.SetField("1 Event", incident.TaskName);
+                    stamper.AcroFields.SetField("2 Task No", incident.TaskNumber);
+                    stamper.AcroFields.SetField("3 Operational Period", OpPeriod.ToString());
+
+
+
+                    stamper.AcroFields.SetField("From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("From_2", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("To_2", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                    //stamper.AcroFields.SetField("TIME", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+
+
+                    for (int x = 0; x < allCheckInRecords.Count && x < 40; x++)
+                    {
+                        CheckInRecordWithResource record = allCheckInRecords[x];
+
+                        Personnel p = null; if (record.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)record.Resource; }
+
+                        if (p != null)
+                        {
+                            stamper.AcroFields.SetField("PersonRow" + (x + 1), p.Name);
+                            stamper.AcroFields.SetField("AgencyRow" + (x + 1), p.Agency);
+
+                            if (p.HasDietaryRestrictions) { stamper.AcroFields.SetField("DietaryRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("DietaryRow" + (x + 1), "NO"); }
+                            if (p.HasAllergies) { stamper.AcroFields.SetField("AllergiesRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("AllergiesRow" + (x + 1), "N/A"); }
+
+                            bool[] mealRequirements = record.GetMealRequirements();
+
+
+
+                            if (mealRequirements[0]) { stamper.AcroFields.SetField("BrkRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("BrkRow" + (x + 1), "NO"); }
+                            if (mealRequirements[1]) { stamper.AcroFields.SetField("LnchRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("LnchRow" + (x + 1), "NO"); }
+                            if (mealRequirements[2]) { stamper.AcroFields.SetField("DinRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("DinRow" + (x + 1), "NO"); }
+
+
+
+                        }
+
+                    }
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("Of", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    //stamper = stamper.AddOrgLogoToForm();
+                    stamper = stamper.RenameAllFields();
+
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+        #endregion
+
         #region General Message
         public List<byte[]> exportGeneralMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
         {
@@ -125,7 +285,7 @@ namespace WildfireICSDesktopServices
 
 
 
-                    string fileToUse = "BlankForms/ICS-213-WF-General-Message.pdf";
+                    string fileToUse = getPDFFilePath("ICS-213-WF-General-Message.pdf");
                     fileToUse = getPDFFilePath(fileToUse);
                     PdfReader rdr = new PdfReader(fileToUse);
 
@@ -281,10 +441,10 @@ namespace WildfireICSDesktopServices
 
 
 
-                    string fileToUse = "BlankForms/ICS-208-WF-Safety-Message.pdf";
+                    string fileToUse = getPDFFilePath("ICS-208-WF-Safety-Message.pdf");
                     if(!string.IsNullOrEmpty(plan.ImageBytes))
                     {
-                        fileToUse = "BlankForms/ICS-208-WF-Safety-Message-with-image.pdf";
+                        fileToUse = getPDFFilePath("ICS-208-WF-Safety-Message-with-image.pdf");
                     }
                     fileToUse = getPDFFilePath(fileToUse);
                     PdfReader rdr = new PdfReader(fileToUse);
@@ -430,7 +590,7 @@ namespace WildfireICSDesktopServices
             try
             {
 
-                string fileToUse = "BlankForms/ICS-221-WF Demobilization Checkout.pdf";
+                string fileToUse = getPDFFilePath("ICS-221-WF Demobilization Checkout.pdf");
                 fileToUse = getPDFFilePath(fileToUse);
 
 
@@ -554,7 +714,7 @@ namespace WildfireICSDesktopServices
             try
             {
 
-                string fileToUse = "BlankForms/ICS-206-WF-Medical-Plan.pdf";
+                string fileToUse = getPDFFilePath("ICS-206-WF-Medical-Plan.pdf");
                 fileToUse = getPDFFilePath(fileToUse);
 
 
@@ -752,7 +912,7 @@ namespace WildfireICSDesktopServices
             try
             {
 
-                string fileToUse = "BlankForms/ICS205WF-Communications-Plan.pdf";
+                string fileToUse = getPDFFilePath("ICS205WF-Communications-Plan.pdf");
                 fileToUse = getPDFFilePath(fileToUse);
                 PdfReader rdr = new PdfReader(fileToUse);
                 PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
@@ -858,7 +1018,7 @@ namespace WildfireICSDesktopServices
 
                 try
                 {
-                    string fileToUse = "BlankForms/ICS-202-WF-Incident-Objectives.pdf";
+                    string fileToUse = getPDFFilePath("ICS-202-WF-Incident-Objectives.pdf");
                     fileToUse = getPDFFilePath(fileToUse);
 
                     if (!File.Exists(fileToUse)) { return "err Blank PDF Not found"; }
@@ -1240,8 +1400,8 @@ namespace WildfireICSDesktopServices
 
                 OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
 
-                string fileToUse = "BlankForms/ICS-207-WF Incident Organization Chart.pdf";
-                if (currentChart.IsUnifiedCommand) { fileToUse = "BlankForms/ICS-207-WF Incident Organization Chart Unified.pdf"; }
+                string fileToUse = getPDFFilePath("ICS-207-WF Incident Organization Chart.pdf");
+                if (currentChart.IsUnifiedCommand) { fileToUse = ("ICS-207-WF Incident Organization Chart Unified.pdf"); }
                 fileToUse = getPDFFilePath(fileToUse);
                 using (PdfReader rdr = new PdfReader(fileToUse))
                 {
@@ -1436,7 +1596,7 @@ namespace WildfireICSDesktopServices
 
             try
             {
-                string fileToUse = "BlankForms/ICS-207-WF-Organization-Chart-Extension.pdf";
+                string fileToUse = getPDFFilePath("ICS-207-WF-Organization-Chart-Extension.pdf");
                 fileToUse = getPDFFilePath(fileToUse);
 
                 using (PdfReader rdr = new PdfReader(fileToUse))
@@ -1833,7 +1993,7 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "BlankForms/ICS205A-CommunicationsList.pdf";
+            string fileToUse = getPDFFilePath("ICS205A-CommunicationsList.pdf");
             fileToUse = getPDFFilePath(fileToUse);
             try
             {
@@ -1916,7 +2076,7 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "BlankForms/ICS 218 - Support Vehicle Equipment Inventory.pdf";
+            string fileToUse = getPDFFilePath("ICS 218 - Support Vehicle Equipment Inventory.pdf");
             fileToUse = getPDFFilePath(fileToUse);
             try
             {
@@ -2043,7 +2203,7 @@ namespace WildfireICSDesktopServices
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
-            string fileToUse = "BlankForms/ICS-211-WF Check In.pdf";
+            string fileToUse = getPDFFilePath("ICS-211-WF Check In.pdf");
             fileToUse = getPDFFilePath(fileToUse);
             try
             {
@@ -2960,7 +3120,7 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "BlankForms/ICS-000 Title Page.pdf";
+            string fileToUse = getPDFFilePath ("/ICS-000 Title Page.pdf");
             fileToUse = getPDFFilePath(fileToUse);
             try
             {
@@ -2978,7 +3138,7 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
                         stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
                         stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "OPERATIONAL PERIOD");
-                        if (!string.IsNullOrEmpty(currentPeriod.CriticalMessage)) { stamper.AcroFields.SetField("CriticalMessage", "Critical Message for this Operational Period: " + Environment.NewLine + currentPeriod.CriticalMessage); }
+                        if (!string.IsNullOrEmpty(currentPeriod.CriticalMessage)) { stamper.AcroFields.SetField("CriticalMessage", "Message for this Operational Period: " + Environment.NewLine + currentPeriod.CriticalMessage); }
                     }
                     else
                     {
@@ -3405,9 +3565,9 @@ namespace WildfireICSDesktopServices
             List<byte[]> allPDFs = new List<byte[]>();
 
             AirOperationsSummary summary = incident.allAirOperationsSummaries.FirstOrDefault(o=>o.OpPeriod == OpPeriodToExport);
+            List<Aircraft> aircraftList = incident.GetActiveAircraft(OpPeriodToExport);
 
 
-            
             int totalPages = getAirOpsSummaryPageCount(incident, summary);
 
 
@@ -3427,7 +3587,7 @@ namespace WildfireICSDesktopServices
                 List<CommsPlanItem> pagecomms = new List<CommsPlanItem>();
                 List<ICSRole> pageroles = new List<ICSRole>();
 
-                pageair =  summary.activeAircraft.Skip(15 * (x)).Take(15).ToList();
+                pageair = aircraftList.Skip(15 * (x)).Take(15).ToList();
                 pagecomms = comms.Skip(10 * (x )).Take(10).ToList();
                 pageroles = roles.Skip(10 * (x)).Take(10).ToList();
 
@@ -3443,6 +3603,7 @@ namespace WildfireICSDesktopServices
             int AirPP = 15;
             int RolePP = 10;
             int CommsPP = 10;
+            List<Aircraft> aircraftList = incident.GetActiveAircraft(sum.OpPeriod);
 
             List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == sum.OpPeriod).ActiveAirCommsItems;
             List<ICSRole> roles = new List<ICSRole>();
@@ -3451,14 +3612,14 @@ namespace WildfireICSDesktopServices
 
 
             int totalPages = 0;
-            if(sum.activeAircraft.Count < AirPP && comms.Count < CommsPP && roles.Count < RolePP)
+            if(aircraftList.Count < AirPP && comms.Count < CommsPP && roles.Count < RolePP)
             {
                 return 1;
             }
             else
             {
-                int pagesAir = Convert.ToInt32(Math.Floor(Convert.ToDecimal(sum.activeAircraft.Count) / 15m));
-                if ((sum.activeAircraft.Count) % 15 > 0) { pagesAir += 1; }
+                int pagesAir = Convert.ToInt32(Math.Floor(Convert.ToDecimal(aircraftList.Count) / 15m));
+                if ((aircraftList.Count) % 15 > 0) { pagesAir += 1; }
                 totalPages = pagesAir;
 
                 int pagesComms = Convert.ToInt32(Math.Floor(Convert.ToDecimal(comms.Count) / 10m));
@@ -3481,13 +3642,13 @@ namespace WildfireICSDesktopServices
         private List<byte[]> buildSingleAirOpsSummaryPage(WFIncident task, int OpsPeriod, List<Aircraft> aircraft, List<ICSRole> roles, List<CommsPlanItem> comms, int pageNumber, int pageCount, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempFileName();
-            string fileToUse = "BlankForms/ICS-220-WF Air Operations Summary.pdf";
+            string fileToUse = getPDFFilePath("ICS-220-WF Air Operations Summary.pdf");
             
 
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
             AirOperationsSummary summary = task.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
-            if (summary.notam.UseRadius) { fileToUse = "BlankForms/ICS-220-WF Air Operations Summary.pdf"; }
-            else { fileToUse = "BlankForms/ICS-220-WF Air Operations Summary Polygon.pdf"; }
+            if (summary.notam.UseRadius) { fileToUse = getPDFFilePath("ICS-220-WF Air Operations Summary.pdf"); }
+            else { fileToUse = getPDFFilePath("ICS-220-WF Air Operations Summary Polygon.pdf"); }
             fileToUse = getPDFFilePath(fileToUse);
             using (PdfReader rdr = new PdfReader(fileToUse))
             {
@@ -3504,7 +3665,10 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
                     stamper.AcroFields.SetField("3 REMARKS safety notes hazards etcRow1", summary.Remarks);
-                    stamper.AcroFields.SetField("4 MEDIVAC AIRCRAFTRow1", summary.MedivacTextBlock);
+                    List<Aircraft> MedvacAircraft = task.GetActiveAircraft(currentOp.PeriodMid).Where(o => o.IsMedivac).ToList();
+
+
+                    stamper.AcroFields.SetField("4 MEDIVAC AIRCRAFTRow1", summary.MedivacTextBlock(MedvacAircraft));
                     stamper.AcroFields.SetField("Sunrise", string.Format("{0:HH:mm}", summary.Sunrise));
                     stamper.AcroFields.SetField("Sunset", string.Format("{0:HH:mm}", summary.Sunset));
 
@@ -3736,7 +3900,7 @@ namespace WildfireICSDesktopServices
 
             foreach (CheckInRecordWithResource item in list)
             {
-                if (!counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)))
+                if (!counts.Any(o => o.KindName.Equals(item.Resource.Kind) && (o.TypeName == null || o.TypeName.Equals(item.Resource.Type))))
                 {
                     if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")))
                     {
@@ -3792,7 +3956,7 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "BlankForms/Logistics Overview.pdf";
+            string fileToUse = getPDFFilePath("Logistics Overview.pdf");
             fileToUse = getPDFFilePath(fileToUse);
             try
             {
@@ -3815,7 +3979,7 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
 
-                    int[] accomodations = allCheckInRecords.GetAccomodationPreferences();
+                    int[] accomodations = allCheckInRecords.GetAccommodationPreferences();
 
                     stamper.AcroFields.SetField("Not Incident CampRow1", accomodations[0].ToString());
                     stamper.AcroFields.SetField("MaleOnlyRow1", accomodations[1].ToString());
@@ -3917,7 +4081,7 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "BlankForms/Logistics Overview Subsequent Page.pdf";
+            string fileToUse = getPDFFilePath("Logistics Overview Subsequent Page.pdf");
             fileToUse = getPDFFilePath(fileToUse);
             try
             {
@@ -4021,8 +4185,11 @@ namespace WildfireICSDesktopServices
                 OrganizationChart org = task.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
                 foreach( ICSRole role in org.AllRoles.Where(o => o.IsOpGroupSup && !o.IsTFST && o.Active))
                 {
-                    if(task.AllOperationalGroups.Any(o=>!o.IsBranchOrDiv && o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
-                    else if (!task.AllOperationalGroups.Any(o=>o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
+                    if (role.RoleID != Globals.AirOpsDirector && role.ReportsTo != Globals.AirOpsDirector)
+                    {
+                        if (task.AllOperationalGroups.Any(o => !o.IsBranchOrDiv && o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
+                        else if (!task.AllOperationalGroups.Any(o => o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
+                    }
                 }
 
 
@@ -4080,7 +4247,7 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "BlankForms/ICS-204-WF Assignment List.pdf";
+            string fileToUse = getPDFFilePath("ICS-204-WF Assignment List.pdf");
             fileToUse = getPDFFilePath(fileToUse);
             try
             {
@@ -4090,10 +4257,18 @@ namespace WildfireICSDesktopServices
                     PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
 
                     ICSRole branch = new ICSRole();
-                    if(div.RoleID != Globals.OpsChiefID) { branch = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriod).GetRoleByID(div.ReportsTo, false); }
+
+                    if(div.RoleID != Globals.OpsChiefID && div.ReportsTo != Globals.OpsChiefID) { branch = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriod).GetRoleByID(div.ReportsTo, false); }
                     else { branch = div; }
-                    stamper.AcroFields.SetField("1 BRANCH", branch.RoleName);
-                    stamper.AcroFields.SetField("2 DIVISIONGROUPSTAGING", div.RoleName);
+
+                    if (task.AllOperationalGroups.Any(o => o.ID == branch.OperationalGroupID))
+                    {
+                        OperationalGroup branchGroup = task.AllOperationalGroups.First(o => o.ID == branch.OperationalGroupID);
+                        stamper.AcroFields.SetField("1 BRANCH", branchGroup.Name);
+                    }
+
+
+                    stamper.AcroFields.SetField("2 DIVISIONGROUPSTAGING", opGroup.Name);
 
 
                     OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
@@ -4119,10 +4294,15 @@ namespace WildfireICSDesktopServices
                         operationalpersonnel.Insert(0, role);
                         reportsTo = role.ReportsTo;
                     }
-                    for (int x = 0; x < 8 && x < operationalpersonnel.Count; x++)
+                    for (int x = 0; x < 4 && x < operationalpersonnel.Count; x++)
                     {
-                        if (operationalpersonnel[x].IndividualID != Guid.Empty) { stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalpersonnel[x].RoleNameWithIndividual); }
-                        else { stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalpersonnel[x].RoleName + " - Unassigned"); }
+                        stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalpersonnel[x].RoleName);
+
+                        if (operationalpersonnel[x].IndividualID != Guid.Empty)
+                        {
+                            stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 5), operationalpersonnel[x].IndividualName);
+                        }
+                        
                     }
 
                     List<IncidentResource> reportingResources = task.GetReportingResources(opGroup.ID);
@@ -4257,7 +4437,7 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = "BlankForms/ICS-204A-WF Assignment Details.pdf";
+            string fileToUse = getPDFFilePath("ICS-204A-WF Assignment Details.pdf");
             fileToUse = getPDFFilePath(fileToUse);
             try
             {
@@ -4310,16 +4490,23 @@ namespace WildfireICSDesktopServices
                     foreach (IncidentResource ta in reportingResources)
                     {
                         stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ta.ResourceName);
-                        stamper.AcroFields.SetField("Resource KindRow" + assignmentRow, ta.Kind);
-                        stamper.AcroFields.SetField("Resource TypeRow" + assignmentRow, ta.Type);
-                        stamper.AcroFields.SetField("NameRow" + assignmentRow, ta.LeaderName);
-                        if (ta.GetType().Name.Equals("OperationalGroupResourceListing"))
+                        stamper.AcroFields.SetField("KindRow" + assignmentRow, ta.Kind);
+                        stamper.AcroFields.SetField("TypeRow" + assignmentRow, ta.Type);
+                        if (ta.NumberOfPeople <= 1)
+                        {
+                            stamper.AcroFields.SetField("Name  Leader QtyRow" + assignmentRow, ta.LeaderName);
+                        } else { stamper.AcroFields.SetField("Name  Leader QtyRow" + assignmentRow, ta.LeaderName + " (" + ta.NumberOfPeople + ")"); }
+                        if (ta.GetType().Name.Equals(new OperationalGroupResourceListing().GetType().Name))
                         {
                             stamper.AcroFields.SetField("RoleRow" + assignmentRow, (ta as OperationalGroupResourceListing).Role);
                         }
-                        if(task.AllOperationalSubGroups.Any(o=>o.ID == ta.ID))
+                        if(ta.NumberOfPeople > 1)
                         {
-                            stamper.AcroFields.SetField("TransportationRow" + assignmentRow, task.AllOperationalSubGroups.First(o=>o.ID == ta.ID).Transport);
+                            ;
+                        }
+                        if(ta.GetType().Name.Equals(new OperationalGroupResourceListing().GetType().Name) &&  task.AllOperationalSubGroups.Any(o=>o.ID == (ta as OperationalGroupResourceListing).ResourceID))
+                        {
+                            stamper.AcroFields.SetField("TransportationRow" + assignmentRow, task.AllOperationalSubGroups.First(o => o.ID == (ta as OperationalGroupResourceListing).ResourceID).Transport);
                         }
 
                         assignmentRow++;

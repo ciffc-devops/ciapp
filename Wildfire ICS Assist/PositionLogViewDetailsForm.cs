@@ -11,16 +11,15 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PositionLogViewDetailsForm : Form
+    public partial class PositionLogViewDetailsForm : BaseForm
     {
         private PositionLogEntry _thisEntry;
         public PositionLogEntry thisEntry { get => _thisEntry; set { _thisEntry = value; loadEntry(); } }
 
         public PositionLogViewDetailsForm()
         {
-            this.Icon = Program.programIcon;
-
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+          
+            InitializeComponent(); 
         }
 
         private void btnBack_Click(object sender, EventArgs e)

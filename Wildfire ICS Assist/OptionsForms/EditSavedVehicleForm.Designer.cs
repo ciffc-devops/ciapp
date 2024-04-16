@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.vehicleEquipmentEditControl1 = new Wildfire_ICS_Assist.CustomControls.VehicleEquipmentEditControl();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.vehicleEquipmentEditControl1 = new Wildfire_ICS_Assist.CustomControls.VehicleEquipmentEditControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,16 +55,26 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(812, 624);
-            this.splitContainer1.SplitterDistance = 557;
+            this.splitContainer1.Size = new System.Drawing.Size(714, 395);
+            this.splitContainer1.SplitterDistance = 328;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // vehicleEquipmentEditControl1
+            // 
+            this.vehicleEquipmentEditControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.vehicleEquipmentEditControl1.EnableOperatorField = true;
+            this.vehicleEquipmentEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.vehicleEquipmentEditControl1.Location = new System.Drawing.Point(0, 0);
+            this.vehicleEquipmentEditControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.vehicleEquipmentEditControl1.Name = "vehicleEquipmentEditControl1";
+            this.vehicleEquipmentEditControl1.Size = new System.Drawing.Size(714, 328);
+            this.vehicleEquipmentEditControl1.TabIndex = 0;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(691, 6);
+            this.btnSave.Location = new System.Drawing.Point(593, 6);
             this.btnSave.Margin = new System.Windows.Forms.Padding(6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(106, 51);
@@ -77,7 +87,6 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 6);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -89,33 +98,21 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // vehicleEquipmentEditControl1
-            // 
-            this.vehicleEquipmentEditControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.vehicleEquipmentEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.vehicleEquipmentEditControl1.Location = new System.Drawing.Point(0, 6);
-            this.vehicleEquipmentEditControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.vehicleEquipmentEditControl1.Name = "vehicleEquipmentEditControl1";
-            this.vehicleEquipmentEditControl1.Size = new System.Drawing.Size(806, 549);
-            this.vehicleEquipmentEditControl1.TabIndex = 0;
-            // 
             // EditSavedVehicleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(812, 624);
+            this.ClientSize = new System.Drawing.Size(714, 395);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(828, 499);
+            this.MinimumSize = new System.Drawing.Size(730, 434);
             this.Name = "EditSavedVehicleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Saved Vehicle / Equipment";
+            this.Text = "Edit Equipment / Vehicle";
             this.Load += new System.EventHandler(this.EditSavedVehicleForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

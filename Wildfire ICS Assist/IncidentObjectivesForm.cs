@@ -12,24 +12,61 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class IncidentObjectivesForm : Form
+    public partial class IncidentObjectivesForm : BaseForm
     {
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
         private IncidentObjectivesSheet objectivesSheet { get => Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == CurrentOpPeriod); }
+        private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
+
 
         bool anyChanges = false;
 
         public IncidentObjectivesForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+           
+            InitializeComponent();
+            txtWeatherForcast.Leave += txtWeatherForcast_Leave;
+            txtGeneralSafetyMessage.Leave += txtGeneralSafetyMessage_Leave; 
         }
+
+
+        private void LoadPreparedBy()
+        {
+            List<ICSRole> roles = CurrentOrgChart.Clone().ActiveRoles;
+            ICSRole blank = new ICSRole(); blank.RoleName = string.Empty; blank.RoleID = Guid.Empty; roles.Insert(0, blank);
+
+            cboPreparedBy.DataSource = null;
+            cboPreparedBy.DataSource = roles;
+            cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
+            if (objectivesSheet.PreparedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == objectivesSheet.PreparedByRoleID)) { cboPreparedBy.SelectedValue = objectivesSheet.PreparedByRoleID; }
+            cboPreparedBy.DropDownWidth = cboPreparedBy.GetDropDownWidth();
+
+        }
+
+
+        private void LoadApprovedBy()
+        {
+            List<ICSRole> roles = CurrentOrgChart.Clone().ActiveRoles;
+            ICSRole blank = new ICSRole(); blank.RoleName = string.Empty; blank.RoleID = Guid.Empty; roles.Insert(0, blank);
+
+
+            cboApprovedBy.DataSource = null;
+            cboApprovedBy.DataSource = roles;
+            cboApprovedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboApprovedBy.ValueMember = "RoleID";
+            if (objectivesSheet.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == objectivesSheet.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = objectivesSheet.ApprovedByRoleID; }
+            cboApprovedBy.DropDownWidth = cboApprovedBy.GetDropDownWidth();
+
+            
+        }
+
+
 
         private void IncidentObjectivesForm_Load(object sender, EventArgs e)
         {
@@ -45,7 +82,7 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessagesChanged;
             Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
-            foreach(CollapsiblePanel p in panels)
+            foreach (CollapsiblePanel p in panels)
             {
                 p.Collapse();
                 p.PanelExpanded += HandlePanelExpanded;
@@ -93,6 +130,9 @@ namespace Wildfire_ICS_Assist
 
         private void LoadSheet()
         {
+            LoadPreparedBy();
+            LoadApprovedBy();
+
             BuildSafetyMessageList();
             LoadObjectives();
             txtFireSize.Text = objectivesSheet.FireSize;
@@ -367,6 +407,42 @@ namespace Wildfire_ICS_Assist
             {
                 Program.wfIncidentService.UpsertIncidentObjectivesSheet(objectivesSheet);
 
+            }
+        }
+
+        private void cboPreparedBy_Leave(object sender, EventArgs e)
+        {
+            if(cboPreparedBy.SelectedItem != null)
+            {
+                ICSRole selected = (ICSRole)cboPreparedBy.SelectedItem;
+
+                objectivesSheet.PreparedByRoleID = selected.RoleID;
+                objectivesSheet.PreparedBy = selected.IndividualName;
+                objectivesSheet.PreparedByRole = selected.RoleName;
+            } else
+            {
+                cboPreparedBy.Text = string.Empty;
+                objectivesSheet.PreparedByRoleID = Guid.Empty;
+                objectivesSheet.PreparedBy = string.Empty;
+                objectivesSheet.PreparedByRole = string.Empty;
+            }
+        }
+
+        private void cboApprovedBy_Leave(object sender, EventArgs e)
+        {
+            if(cboApprovedBy.SelectedItem != null)
+            {
+                ICSRole selected = (ICSRole)cboApprovedBy.SelectedItem;
+
+                objectivesSheet.ApprovedByRoleID = selected.RoleID;
+                objectivesSheet.ApprovedBy = selected.IndividualName;
+                objectivesSheet.ApprovedByRole = selected.RoleName;
+            } else
+            {
+                cboPreparedBy.Text = string.Empty;
+                objectivesSheet.ApprovedByRoleID = Guid.Empty;
+                objectivesSheet.ApprovedBy = string.Empty;
+                objectivesSheet.ApprovedByRole = string.Empty;
             }
         }
     }

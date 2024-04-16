@@ -14,7 +14,7 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class NotesForm : Form
+    public partial class NotesForm : BaseForm
     {
         int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
 
@@ -27,7 +27,7 @@ namespace Wildfire_ICS_Assist
 
         public NotesForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
         }
 
         private void NotesForm_Load(object sender, EventArgs e)

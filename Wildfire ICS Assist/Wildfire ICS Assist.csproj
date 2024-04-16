@@ -27,6 +27,8 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,27 +65,108 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MessagePack, Version=2.5.0.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.2.5.140\lib\netstandard2.0\MessagePack.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagePack.Annotations, Version=2.5.0.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.Annotations.2.5.140\lib\netstandard2.0\MessagePack.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IO.Redist, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.Redist.6.0.0\lib\net472\Microsoft.IO.Redist.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.NET.StringTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.NET.StringTools.17.9.5\lib\net472\Microsoft.NET.StringTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ServiceHub.Framework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ServiceHub.Framework.4.4.22\lib\net472\Microsoft.ServiceHub.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualStudio.Composition, Version=17.7.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Composition.17.7.40\lib\net472\Microsoft.VisualStudio.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.RemoteControl, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.RemoteControl.16.3.52\lib\net45\Microsoft.VisualStudio.RemoteControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.RpcContracts, Version=17.9.7.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.RpcContracts.17.9.7\lib\netstandard2.0\Microsoft.VisualStudio.RpcContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Telemetry, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Telemetry.17.9.305\lib\net45\Microsoft.VisualStudio.Telemetry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Threading, Version=17.9.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Threading.17.9.28\lib\net472\Microsoft.VisualStudio.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Utilities, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Utilities.17.9.37000\lib\net472\Microsoft.VisualStudio.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Utilities.Internal, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Utilities.Internal.16.3.56\lib\net45\Microsoft.VisualStudio.Utilities.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Validation, Version=17.8.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Validation.17.8.8\lib\netstandard2.0\Microsoft.VisualStudio.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Nerdbank.Streams, Version=2.10.0.0, Culture=neutral, PublicKeyToken=cac503e1823ce71c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nerdbank.Streams.2.10.72\lib\netstandard2.0\Nerdbank.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard" />
     <Reference Include="NetworkCommsDotNet, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
       <HintPath>..\packages\NetworkCommsDotNet.3.0.3\lib\NetworkCommsDotNet.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.3.1.33\lib\net462\protobuf-net.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.3.2.30\lib\net462\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.Core.3.1.33\lib\net462\protobuf-net.Core.dll</HintPath>
+      <HintPath>..\packages\protobuf-net.Core.3.2.30\lib\net462\protobuf-net.Core.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="StreamJsonRpc, Version=2.17.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\StreamJsonRpc.2.17.11\lib\netstandard2.0\StreamJsonRpc.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Composition.AttributedModel.8.0.0\lib\net462\System.Composition.AttributedModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Convention, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Composition.Convention.8.0.0\lib\net462\System.Composition.Convention.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Hosting, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Composition.Hosting.8.0.0\lib\net462\System.Composition.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Composition.Runtime.8.0.0\lib\net462\System.Composition.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.TypedParts, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Composition.TypedParts.8.0.0\lib\net462\System.Composition.TypedParts.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.8.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -91,8 +174,35 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.8.0.0\lib\net462\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.1\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.3\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.AccessControl, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.AccessControl.8.0.0\lib\net462\System.Threading.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Dataflow.8.0.0\lib\net462\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -103,20 +213,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AircraftEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AircraftEditForm.Designer.cs">
-      <DependentUpon>AircraftEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AircraftEntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AircraftEntryForm.Designer.cs">
-      <DependentUpon>AircraftEntryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="AirNOTAMEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,11 +229,35 @@
     <Compile Include="AirOperationsForm.Designer.cs">
       <DependentUpon>AirOperationsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AirOpsAddAircraftForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AirOpsAddAircraftForm.Designer.cs">
+      <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CheckedInResourcesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CheckedInResourcesForm.Designer.cs">
       <DependentUpon>CheckedInResourcesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckInEditCrewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckInEditCrewForm.Designer.cs">
+      <DependentUpon>CheckInEditCrewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckInInfoEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckInInfoEditForm.Designer.cs">
+      <DependentUpon>CheckInInfoEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GeneralTools.cs" />
     <Compile Include="CloseOpPeriodForm.cs">
@@ -184,6 +308,12 @@
     <Compile Include="CommunicationsPlanViewForm.Designer.cs">
       <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\BrowseFileControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\BrowseFileControl.Designer.cs">
+      <DependentUpon>BrowseFileControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\CheckInInfoFieldControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -202,6 +332,7 @@
     <Compile Include="CustomControls\CrewEditControl.Designer.cs">
       <DependentUpon>CrewEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\DataGridviewCalendarCell.cs" />
     <Compile Include="CustomControls\DataGridViewDisableButtonCell.cs" />
     <Compile Include="CustomControls\DemobilizationEditControl.cs">
       <SubType>UserControl</SubType>
@@ -251,11 +382,19 @@
     <Compile Include="CustomControls\ResourceCheckInEditControl.Designer.cs">
       <DependentUpon>ResourceCheckInEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\SpellBox.cs" />
     <Compile Include="CustomControls\StrikeTeamTaskForceDetailsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomControls\StrikeTeamTaskForceDetailsControl.Designer.cs">
       <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TabControlExt.cs" />
+    <Compile Include="CustomControls\TextBoxRequiredControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxRequiredControl.Designer.cs">
+      <DependentUpon>TextBoxRequiredControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\VehicleEquipmentEditControl.cs">
       <SubType>UserControl</SubType>
@@ -362,6 +501,12 @@
     <Compile Include="OperationalGroupSTTFEditForm.Designer.cs">
       <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\EditVisitorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditVisitorForm.Designer.cs">
+      <DependentUpon>EditVisitorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PersonnelEditCheckInOutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -385,11 +530,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ResourceReplacementEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceReplacementEditForm.Designer.cs">
+      <DependentUpon>ResourceReplacementEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceReplacementPlanningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceReplacementPlanningForm.Designer.cs">
+      <DependentUpon>ResourceReplacementPlanningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResourcesEditUniqueNumberForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ResourcesEditUniqueNumberForm.Designer.cs">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\EnterTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\EnterTextForm.Designer.cs">
+      <DependentUpon>EnterTextForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityForms\InternetSyncForm.cs">
       <SubType>Form</SubType>
@@ -639,26 +802,50 @@
     <Compile Include="UtilityForms\HelpInfoForm.Designer.cs">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\SelectBooleanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\SelectBooleanForm.Designer.cs">
+      <DependentUpon>SelectBooleanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\SelectTimeRangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\SelectTimeRangeForm.Designer.cs">
+      <DependentUpon>SelectTimeRangeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VehicleEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VehicleEditForm.Designer.cs">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AircraftEditForm.resx">
-      <DependentUpon>AircraftEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AircraftEntryForm.resx">
-      <DependentUpon>AircraftEntryForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AirNOTAMEditForm.resx">
       <DependentUpon>AirNOTAMEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AirOperationsForm.resx">
       <DependentUpon>AirOperationsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AirOpsAddAircraftForm.resx">
+      <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CheckedInResourcesForm.resx">
       <DependentUpon>CheckedInResourcesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckInEditCrewForm.resx">
+      <DependentUpon>CheckInEditCrewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckInInfoEditForm.resx">
+      <DependentUpon>CheckInInfoEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CloseOpPeriodForm.resx">
       <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
@@ -683,6 +870,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommunicationsPlanViewForm.resx">
       <DependentUpon>CommunicationsPlanViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\BrowseFileControl.resx">
+      <DependentUpon>BrowseFileControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\CheckInInfoFieldControl.resx">
       <DependentUpon>CheckInInfoFieldControl.cs</DependentUpon>
@@ -720,6 +910,9 @@
     <EmbeddedResource Include="CustomControls\StrikeTeamTaskForceDetailsControl.resx">
       <DependentUpon>StrikeTeamTaskForceDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\TextBoxRequiredControl.resx">
+      <DependentUpon>TextBoxRequiredControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\VehicleEquipmentEditControl.resx">
       <DependentUpon>VehicleEquipmentEditControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -746,6 +939,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentDetailsForm.resx">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentObjectiveEntryForm.resx">
       <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
@@ -770,12 +964,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OperationalGroupBranchEditForm.resx">
       <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OperationalGroupsForm.resx">
       <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperationalGroupSTTFEditForm.resx">
       <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditVisitorForm.resx">
+      <DependentUpon>EditVisitorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonnelEditCheckInOutForm.resx">
       <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
@@ -787,8 +985,17 @@
       <DependentUpon>CheckInForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ResourceReplacementEditForm.resx">
+      <DependentUpon>ResourceReplacementEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceReplacementPlanningForm.resx">
+      <DependentUpon>ResourceReplacementPlanningForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ResourcesEditUniqueNumberForm.resx">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\EnterTextForm.resx">
+      <DependentUpon>EnterTextForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\InternetSyncForm.resx">
       <DependentUpon>InternetSyncForm.cs</DependentUpon>
@@ -919,9 +1126,21 @@
     <EmbeddedResource Include="UtilityForms\HelpInfoForm.resx">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\SelectBooleanForm.resx">
+      <DependentUpon>SelectBooleanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\SelectTimeRangeForm.resx">
+      <DependentUpon>SelectTimeRangeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VehicleEditForm.resx">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="BlankForms\Dietary and Allergy Details.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1027,8 +1246,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-238-chat-message.png" />
+    <None Include="Resources\glyphicons-basic-730-ambulance.png" />
+    <None Include="Resources\glyphicons-basic-39-airplane.png" />
+    <None Include="Resources\Artboard 1%402x.png" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
+    <None Include="Resources\glyphicons-basic-46-calendar.png" />
     <None Include="Resources\glyphicons-basic-11-envelope.png" />
     <None Include="Resources\EquipOp.png" />
     <None Include="Resources\HECrew.png" />
@@ -1141,6 +1365,22 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.ServiceHub.Analyzers.4.4.22\analyzers\Microsoft.ServiceHub.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.Composition.Analyzers.17.7.40\analyzers\dotnet\Microsoft.VisualStudio.Composition.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.CSharp.dll" />
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\analyzers\vb\Microsoft.VisualStudio.Threading.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\analyzers\vb\Microsoft.VisualStudio.Threading.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\analyzers\vb\Microsoft.VisualStudio.Threading.Analyzers.VisualBasic.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\build\Microsoft.VisualStudio.Threading.Analyzers.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.9.28\build\Microsoft.VisualStudio.Threading.Analyzers.targets'))" />
+  </Target>
 </Project>

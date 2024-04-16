@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.OptionsForms;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CommunicationsListViewForm : Form
+    public partial class CommunicationsListViewForm : BaseForm
     {
         private Contact _contact = new Contact();
         public Contact contact { get => _contact;  set { _contact = value; DisplayContact(); } }
@@ -31,7 +31,7 @@ namespace Wildfire_ICS_Assist
         }
         public CommunicationsListViewForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
 

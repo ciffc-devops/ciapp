@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         public CheckInInfoFieldControl()
         {
             InitializeComponent();
+            foreach (var cb in Controls.OfType<ComboBox>())
+            {
+                cb.Resize += (sender, e) => {
+                    if (!cb.Focused)
+                        cb.SelectionLength = 0;
+                };
+            }
         }
 
         private void CheckInInfoFieldControl_Load(object sender, EventArgs e)
@@ -45,10 +53,22 @@ namespace Wildfire_ICS_Assist.CustomControls
                         case "Bool":
                             return true;
                         case "DateTime":
+                            if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, "This field is required"); }
+                            return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
+                        case "Time":
+                            if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, "This field is required"); }
                             return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
                         case "List":
+                            if (string.IsNullOrEmpty(cboListValue.Text)) { errorProvider1.SetError(cboListValue, "This field is required"); } else { errorProvider1.SetError(cboListValue, ""); }
                             return !string.IsNullOrEmpty(cboListValue.Text);
+
+                        case "Weight":
+                            if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, "This field is required"); } else { errorProvider1.SetError(txtStringValue, ""); }
+                            return WeightInKG > 0;
+                        case "Int":
+                            return numNumberValue.Value > 0;
                         default:
+                            if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, "This field is required"); } else { errorProvider1.SetError(txtStringValue, ""); }
                             return !string.IsNullOrEmpty(txtStringValue.Text);
                     }
                 }
@@ -56,6 +76,17 @@ namespace Wildfire_ICS_Assist.CustomControls
             }
         }
 
+        private decimal WeightInKG
+        {
+            get
+            {
+                if (rbKG.Checked) { return numNumberValue.Value; }
+                else
+                {
+                    return numNumberValue.Value * 0.4535924m;
+                }
+            }
+        }
 
         private void loadInfoField()
         {
@@ -71,14 +102,15 @@ namespace Wildfire_ICS_Assist.CustomControls
                 startPoint.X = lblFieldName.Location.X + 5 + lblFieldName.Width;
 
                 int width = 0;
-                if (btnHelp.Visible) { width = btnHelp.Location.X - 5 - startPoint.X; }
-                else { width = this.Width - 5 - startPoint.X; }
+                if (btnHelp.Visible) { width = btnHelp.Location.X - 15 - startPoint.X; }
+                else { width = this.Width - 15 - startPoint.X; }
 
                 chkBoolValue.Visible = false;
                 datDateValue.Visible = false;
                 txtStringValue.Visible = false;
                 cboListValue.Visible = false;
-
+                pnlWeight.Visible = false;
+                numNumberValue.Visible = false;
 
                 switch (infoField.FieldType)
                 {
@@ -97,8 +129,21 @@ namespace Wildfire_ICS_Assist.CustomControls
                         datDateValue.Location = startPoint;
                         datDateValue.Width = width;
                         datDateValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                        datDateValue.CustomFormat = Program.DateFormat;
+                        break;
+                    case "Time":
+                        if (infoField.DateValue > datDateValue.MinDate && infoField.DateValue < datDateValue.MaxDate)
+                        {
+                            datDateValue.Value = infoField.DateValue;
+                        }
+                        datDateValue.Visible = true;
+                        datDateValue.Location = startPoint;
+                        datDateValue.Width = width;
+                        datDateValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                        datDateValue.CustomFormat = "HH:mm";
 
                         break;
+
                     case "List":
 
                         cboListValue.Visible = true;
@@ -106,7 +151,33 @@ namespace Wildfire_ICS_Assist.CustomControls
                         cboListValue.Location = startPoint;
                         cboListValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                         cboListValue.DataSource = CheckInTools.GetInfoFieldListOptions(infoField.ID);
-                        cboListValue.Text = infoField.StringValue;
+                        if (string.IsNullOrEmpty(infoField.StringValue) && cboListValue.Items.Count > 0)
+                        {
+                            for (int x = 0; x < cboListValue.Items.Count; x++)
+                            {
+                                if (!string.IsNullOrEmpty(cboListValue.Items[x].ToString()))
+                                {
+                                    cboListValue.SelectedIndex = x; break;
+                                }
+                            }
+                        }
+                        else { cboListValue.Text = infoField.StringValue; }
+
+                        break;
+                    case "Weight":
+                        numNumberValue.Visible = true;
+                        pnlWeight.Visible = true;
+                        numNumberValue.Location = startPoint;
+                        numNumberValue.Width = pnlWeight.Location.X - 5 - startPoint.X;
+                        numNumberValue.Value = infoField.DecimalValue;
+                        rbKG.Checked = true;
+                        break;
+                    case "Int":
+                        numNumberValue.Visible = true;
+                        numNumberValue.Location = startPoint;
+                        numNumberValue.Width = pnlWeight.Location.X - 5 - startPoint.X;
+                        numNumberValue.Value = infoField.IntValue;
+
                         break;
                     default:
                         txtStringValue.Visible = true;
@@ -151,6 +222,24 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtStringValue.BackColor = Program.ErrorColor;
             }
             else { lblFieldName.ForeColor = SystemColors.ControlText; txtStringValue.BackColor = SystemColors.Window; }
+        }
+
+        private void numNumberValue_ValueChanged(object sender, EventArgs e)
+        {
+            infoField.DecimalValue = WeightInKG;
+            infoField.IntValue = Convert.ToInt32(numNumberValue.Value);
+        }
+
+        private void rbKG_CheckedChanged(object sender, EventArgs e)
+        {
+            infoField.DecimalValue = WeightInKG;
+
+        }
+
+        private void rbLBS_CheckedChanged(object sender, EventArgs e)
+        {
+            infoField.DecimalValue = WeightInKG;
+
         }
     }
 }

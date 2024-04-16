@@ -142,7 +142,7 @@
             this.chkSavedUsedForAir.Location = new System.Drawing.Point(154, 119);
             this.chkSavedUsedForAir.Name = "chkSavedUsedForAir";
             this.chkSavedUsedForAir.Size = new System.Drawing.Size(289, 28);
-            this.chkSavedUsedForAir.TabIndex = 133;
+            this.chkSavedUsedForAir.TabIndex = 4;
             this.chkSavedUsedForAir.Text = "Yes, this item is used for aircraft";
             this.chkSavedUsedForAir.UseVisualStyleBackColor = true;
             // 
@@ -192,7 +192,7 @@
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddSaved.Name = "btnAddSaved";
             this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
-            this.btnAddSaved.TabIndex = 4;
+            this.btnAddSaved.TabIndex = 5;
             this.btnAddSaved.Text = "Add to Incident";
             this.btnAddSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddSaved.UseVisualStyleBackColor = true;
@@ -233,8 +233,8 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 14;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TabIndex = 99;
+            this.btnCancel.Text = "99";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -274,7 +274,7 @@
             this.editCommsChannelControl1.Name = "editCommsChannelControl1";
             this.editCommsChannelControl1.selectedItem = null;
             this.editCommsChannelControl1.Size = new System.Drawing.Size(734, 296);
-            this.editCommsChannelControl1.TabIndex = 132;
+            this.editCommsChannelControl1.TabIndex = 26;
             // 
             // btnAirHelp
             // 
@@ -311,7 +311,7 @@
             this.chkUsedForAir.Location = new System.Drawing.Point(169, 428);
             this.chkUsedForAir.Name = "chkUsedForAir";
             this.chkUsedForAir.Size = new System.Drawing.Size(289, 28);
-            this.chkUsedForAir.TabIndex = 130;
+            this.chkUsedForAir.TabIndex = 29;
             this.chkUsedForAir.Text = "Yes, this item is used for aircraft";
             this.chkUsedForAir.UseVisualStyleBackColor = true;
             // 
@@ -333,7 +333,7 @@
             this.txtAssignment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAssignment.Name = "txtAssignment";
             this.txtAssignment.Size = new System.Drawing.Size(572, 29);
-            this.txtAssignment.TabIndex = 10;
+            this.txtAssignment.TabIndex = 28;
             // 
             // txtFunction
             // 
@@ -343,7 +343,7 @@
             this.txtFunction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFunction.Name = "txtFunction";
             this.txtFunction.Size = new System.Drawing.Size(572, 29);
-            this.txtFunction.TabIndex = 7;
+            this.txtFunction.TabIndex = 27;
             this.txtFunction.Leave += new System.EventHandler(this.txtFunction_Leave);
             // 
             // label7
@@ -363,7 +363,7 @@
             this.chkSaveForLater.Location = new System.Drawing.Point(301, 492);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
-            this.chkSaveForLater.TabIndex = 12;
+            this.chkSaveForLater.TabIndex = 30;
             this.chkSaveForLater.Text = "Save for future incidents";
             this.chkSaveForLater.UseVisualStyleBackColor = true;
             // 
@@ -385,7 +385,7 @@
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
-            this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.TabIndex = 31;
             this.btnAddNew.Text = "Add to Incident";
             this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNew.UseVisualStyleBackColor = true;

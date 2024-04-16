@@ -50,38 +50,34 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.AutoScroll = true;
-            this.splitContainer1.Panel1.AutoScrollMinSize = new System.Drawing.Size(512, 702);
             this.splitContainer1.Panel1.Controls.Add(this.editTeamMemberControl1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(512, 838);
-            this.splitContainer1.SplitterDistance = 773;
+            this.splitContainer1.Size = new System.Drawing.Size(764, 641);
+            this.splitContainer1.SplitterDistance = 576;
             this.splitContainer1.TabIndex = 1;
             // 
             // editTeamMemberControl1
             // 
-            this.editTeamMemberControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.editTeamMemberControl1.BackColor = System.Drawing.Color.Transparent;
+            this.editTeamMemberControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editTeamMemberControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editTeamMemberControl1.Location = new System.Drawing.Point(0, 0);
             this.editTeamMemberControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.editTeamMemberControl1.MinimumSize = new System.Drawing.Size(512, 702);
+            this.editTeamMemberControl1.MinimumSize = new System.Drawing.Size(735, 543);
             this.editTeamMemberControl1.Name = "editTeamMemberControl1";
-            this.editTeamMemberControl1.Size = new System.Drawing.Size(512, 770);
+            this.editTeamMemberControl1.Size = new System.Drawing.Size(764, 576);
             this.editTeamMemberControl1.TabIndex = 0;
             this.editTeamMemberControl1.Load += new System.EventHandler(this.editTeamMemberControl1_Load);
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(391, 4);
+            this.btnSave.Location = new System.Drawing.Point(643, 4);
             this.btnSave.Margin = new System.Windows.Forms.Padding(6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(106, 51);
@@ -94,7 +90,6 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(15, 4);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -110,16 +105,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 838);
+            this.ClientSize = new System.Drawing.Size(764, 641);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(528, 877);
+            this.MinimumSize = new System.Drawing.Size(780, 680);
             this.Name = "EditSavedPersonnelForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add / Edit Member";
+            this.Text = "Edit Personnel";
             this.Load += new System.EventHandler(this.EditSavedTeamMemberForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

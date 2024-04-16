@@ -55,8 +55,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(619, 416);
-            this.splitContainer1.SplitterDistance = 345;
+            this.splitContainer1.Size = new System.Drawing.Size(619, 630);
+            this.splitContainer1.SplitterDistance = 559;
             this.splitContainer1.TabIndex = 2;
             // 
             // editAircraftControl1
@@ -68,7 +68,7 @@
             this.editAircraftControl1.Margin = new System.Windows.Forms.Padding(6);
             this.editAircraftControl1.Name = "editAircraftControl1";
             this.editAircraftControl1.selectedAircraft = null;
-            this.editAircraftControl1.Size = new System.Drawing.Size(619, 345);
+            this.editAircraftControl1.Size = new System.Drawing.Size(619, 559);
             this.editAircraftControl1.TabIndex = 0;
             // 
             // btnSave
@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 416);
+            this.ClientSize = new System.Drawing.Size(619, 630);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);

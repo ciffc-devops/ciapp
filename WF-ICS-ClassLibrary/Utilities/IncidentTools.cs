@@ -14,6 +14,62 @@ namespace WF_ICS_ClassLibrary.Utilities
     public static class IncidentTools
     {
 
+        public static List<Aircraft> GetActiveAircraft(this WFIncident incident, DateTime Date)
+        {
+            List<Aircraft> aircraft = new List<Aircraft>();
+
+            aircraft.AddRange(incident.AllAircraft.Where(o => o.Active && incident.ResourceIsCheckedIn(o.ID, Date)));
+            aircraft = aircraft.OrderBy(o => o.CompanyName).ThenBy(o => o.Registration).ToList();
+            return aircraft;
+        }
+        public static List<Aircraft> GetActiveAircraft(this WFIncident incident, int OpPeriodNumber)
+        {
+            OperationalPeriod op = new OperationalPeriod();
+            if (incident.AllOperationalPeriods.Any(o => o.PeriodNumber == OpPeriodNumber)) { op = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodNumber); }
+            else { op.PeriodStart = DateTime.Now; op.PeriodEnd = op.PeriodStart.AddHours(12); }
+            return incident.GetActiveAircraft(op.PeriodMid);
+
+        }
+
+
+        public static List<TaskUpdate> MostRecentTaskUpdates(this WFIncident task, bool localOnly = false)
+        {
+            List<TaskUpdate> updatesToKeep = new List<TaskUpdate>();
+
+            List<TaskUpdate> updatesToInspect = task.allTaskUpdates.OrderByDescending(o => o.LastUpdatedUTC).ToList();
+            if (localOnly) { updatesToInspect = updatesToInspect.Where(o => string.IsNullOrEmpty(o.Source) || o.Source.Equals("local")).ToList(); }
+            //filter as needed
+
+            updatesToKeep = updatesToInspect.GroupBy(o => o.ItemID).Select(g => g.OrderByDescending(y => y.LastUpdatedUTC).FirstOrDefault()).ToList();
+            return updatesToKeep;
+        }
+
+        public static DateTime LastNetworkTaskUpdate(this WFIncident task)
+        {
+            if (task.allTaskUpdates != null && task.allTaskUpdates.Any(o => !string.IsNullOrEmpty(o.Source) && o.Source.Equals("network")))
+            {
+                TaskUpdate lastNetwork = task.allTaskUpdates.Where(o => !string.IsNullOrEmpty(o.Source) && o.Source.Equals("network")).OrderByDescending(o => o.LastUpdatedUTC).FirstOrDefault();
+                return lastNetwork.LastUpdatedUTC;
+            }
+
+            return DateTime.MinValue;
+
+        }
+
+        public static WFIncident CompressTaskUpdates(this WFIncident task)
+        {
+            WFIncident compressed = task.Clone();
+
+            List<TaskUpdate> updatesToKeep = new List<TaskUpdate>();
+            List<TaskUpdate> updatesToRemove = new List<TaskUpdate>();
+
+            List<TaskUpdate> updatesToInspect = compressed.allTaskUpdates.OrderByDescending(o => o.LastUpdatedUTC).ToList();
+            //filter as needed
+
+            updatesToKeep = updatesToInspect.GroupBy(o => o.ItemID).Select(g => g.OrderByDescending(y => y.LastUpdatedUTC).FirstOrDefault()).ToList();
+            compressed.allTaskUpdates = updatesToKeep;
+            return compressed;
+        }
 
         public static int GetNextAssignmentNumber(this WFIncident incident, int Ops)
         {
@@ -410,9 +466,10 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 AirOperationsSummary summary = new AirOperationsSummary();
                 summary.OpPeriod = ops;
+                DateTime opMid = DateTime.Now;
+                if(incident.AllOperationalPeriods.Any(o=>o.PeriodNumber == ops)) { opMid = incident.AllOperationalPeriods.First(o=>o.PeriodNumber ==ops).PeriodMid; }
 
-               
-
+              
 
                 Globals.incidentService.UpsertAirOperationsSummary(summary);
             }

@@ -11,7 +11,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class DemobilizeResourceForm : Form
+    public partial class DemobilizeResourceForm : BaseForm
     {
         public DemobilizationRecord SelectedDemobRecord { get => demobilizationEditControl1.SelectedDemobRecord; }
 
@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist
 
         public DemobilizeResourceForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void DemobilizeResourceForm_Load(object sender, EventArgs e)

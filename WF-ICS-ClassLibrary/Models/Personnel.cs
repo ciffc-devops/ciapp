@@ -53,6 +53,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(16)] private string _CallSign;
         [ProtoMember(17)] private string _Pronouns; 
         [ProtoMember(18)] private string _AccomodationPreference;
+        [ProtoMember(19)] private string _InitialRoleName;
+        [ProtoMember(20)] private string _InitialRoleAcronym;
+
 
 
 
@@ -86,6 +89,18 @@ namespace WF_ICS_ClassLibrary.Models
         public string Pronouns { get => _Pronouns; set => _Pronouns = value; }
         public string AccomodationPreference { get => _AccomodationPreference; set => _AccomodationPreference = value; }
         public int PNum { get => UniqueIDNum; set => UniqueIDNum = value; }
+        public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
+        public string InitialRoleAcronym { get => _InitialRoleAcronym; set => _InitialRoleAcronym = value; }
+        public string NameWithInitialRoleAcronym
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Name);
+                if (!string.IsNullOrEmpty(InitialRoleAcronym)) { sb.Append(" ("); sb.Append(InitialRoleAcronym); sb.Append(")"); }
+                return sb.ToString();
+            }
+        }
 
         private void SetName()
         {
@@ -102,6 +117,7 @@ namespace WF_ICS_ClassLibrary.Models
                 sb.Append(LastName);
             }
             ResourceName = sb.ToString();
+            LeaderName = sb.ToString();
         }
 
 
@@ -414,6 +430,29 @@ namespace WF_ICS_ClassLibrary.Models
 
    public static class PersonnelTools
     {
+
+        public static List<string> GetPersonnelKinds()
+        {
+            List<string> kinds = new List<string>();
+            kinds.Add("IMT - Command/General Staff/Unit Leaders/Managers");
+            kinds.Add("Single Resource");
+            kinds.Add("Structure Protection Specialist - STPS");
+            kinds.Add("Wildland Urban Interface Crew Boss - WUIB");
+            kinds.Add("Wildland Urban Interface STLD ");
+            kinds.Add("Wildland Urban Interface TFLD");
+            kinds.Add("Wildland Urban Interface Crew Member");
+            kinds.Add("Contractor");
+            kinds.Add("Unit Crew Member");
+            kinds.Add("Unit Crew Leader");
+            kinds.Add("Unit Crew Sub-Leader");
+            kinds.Add("Initial Attack Crew Member");
+            kinds.Add("Initial Attack Crew Leader");
+            kinds.Add("Sustained Action Crew Member");
+            kinds.Add("Sustained Action Crew Leader");
+
+
+            return kinds;
+        }
         public static string ExportSignInRecordsToCSV(this WFIncident incident, List<MemberStatus> records, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();

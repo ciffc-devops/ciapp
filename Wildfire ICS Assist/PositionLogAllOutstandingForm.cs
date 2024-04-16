@@ -14,7 +14,7 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PositionLogAllOutstandingForm : Form
+    public partial class PositionLogAllOutstandingForm : BaseForm
     {
         private WFIncident CurrentTask { get => Program.CurrentTask; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
@@ -24,8 +24,8 @@ namespace Wildfire_ICS_Assist
 
         public PositionLogAllOutstandingForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent();
         }
         private void buildPositionLog()
         {

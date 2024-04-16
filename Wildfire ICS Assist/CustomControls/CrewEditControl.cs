@@ -33,6 +33,12 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void CrewEditControl_Load(object sender, EventArgs e)
         {
+            txtName.TextChanged += TxtName_TextChanged;
+        }
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            subGroup.ResourceName = txtName.Text;
 
         }
 
@@ -42,12 +48,17 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 txtEmail.Text = subGroup.Email;
                 txtPhone.Text = subGroup.Phone;
-                txtName.Text = subGroup.ResourceName;
+                txtName.SetText( subGroup.ResourceName);
                 txtTransport.Text = subGroup.Transport;
                 rbCrew.Checked = !subGroup.IsEquipmentCrew;
                 rbHECrew.Checked = subGroup.IsEquipmentCrew;
                 if (!string.IsNullOrEmpty(subGroup.Type)) { cboCrewType.Text = subGroup.Type; }
                 else { cboCrewType.SelectedIndex = 0; }
+
+                btnAddVehicle.Enabled = !rbCrew.Checked;
+                subGroup.IsEquipmentCrew = !rbCrew.Checked;
+
+
                 loadResourceList();
             }
             else
@@ -68,6 +79,17 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         }
 
+        private int getNextUniqueID(IncidentResource res)
+        {
+            int uniqueid = Program.CurrentIncident.GetNextUniqueNum(res.ResourceType);
+            while(resources.Count(o=>o.ResourceType.Equals(res.ResourceType) && o.UniqueIDNum == uniqueid && o.ID != res.ID) > 0)
+            {
+                uniqueid++;
+            }
+            return uniqueid;
+        }
+
+
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
             using (CheckInEnterPersonForm entryForm = new CheckInEnterPersonForm())
@@ -76,6 +98,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (dr == DialogResult.OK)
                 {
                     Personnel p = entryForm.selectedPerson.Clone();
+                    p.UniqueIDNum = getNextUniqueID(p); 
+
                     if (resources.Any(o => o.ID == p.ID))
                     {
                         MessageBox.Show("Sorry, this resource is already in the list.");
@@ -93,6 +117,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                         listing.ResourceID = entryForm.selectedPerson.PersonID;
                         listing.ResourceType = "Personnel";
                         listing.ResourceName = entryForm.selectedPerson.Name;
+                        listing.UniqueIDNum = p.UniqueIDNum;
+                        listing.Role = "Crew Member";
                         subGroup.UpsertResourceListing(listing);
 
                         loadResourceList();
@@ -115,6 +141,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (dr == DialogResult.OK)
                 {
                     Vehicle r = entryForm.CurrentVehicle.Clone();
+                    r.UniqueIDNum = getNextUniqueID(r); 
+
                     if (resources.Any(o => o.ID == r.ID))
                     {
                         MessageBox.Show("Sorry, this resource is already in the list.");
@@ -128,6 +156,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                         listing.OperationalGroupID = subGroup.OperationalGroupID;
                         listing.Kind = entryForm.CurrentVehicle.Kind;
                         listing.Type = entryForm.CurrentVehicle.Type;
+                        listing.UniqueIDNum = r.UniqueIDNum;
 
                         listing.ResourceID = entryForm.CurrentVehicle.ID;
                         if (entryForm.CurrentVehicle.IsEquipment) { listing.ResourceType = "Equipment"; }
@@ -221,22 +250,15 @@ namespace Wildfire_ICS_Assist.CustomControls
             btnRemoveFromCrew.Enabled = dgvGroup.SelectedRows.Count > 0;
             if (!EditExisting) { btnRemoveFromCrew.Enabled = false; }
             btnEditSelected.Enabled = dgvGroup.SelectedRows.Count == 1;
+            btnChangeID.Enabled = btnEditSelected.Enabled;
         }
 
-        private void txtName_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtName.Text)) { txtName.BackColor = Program.ErrorColor; }
-            else { txtName.BackColor = Program.GoodColor; }
-            subGroup.ResourceName = txtName.Text;
-        }
 
         public bool FormIsComplete
         {
             get
             {
-                if (string.IsNullOrEmpty(txtName.Text)) { txtName.BackColor = Program.ErrorColor; }
-                else { txtName.BackColor = Program.GoodColor; }
-                return !string.IsNullOrEmpty(txtName.Text);
+                return txtName.IsValid;
             }
         }
 
@@ -258,6 +280,11 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void btnEditSelected_Click(object sender, EventArgs e)
         {
             OperationalGroupResourceListing listing = (OperationalGroupResourceListing)dgvGroup.SelectedRows[0].DataBoundItem;
+            EditResource(listing);
+        }
+
+        private void EditResource(OperationalGroupResourceListing listing)
+        {
             if (listing.ResourceType.Equals("Personnel"))
             {
                 if (resources.Any(o => o.ID == listing.ResourceID))
@@ -318,7 +345,6 @@ namespace Wildfire_ICS_Assist.CustomControls
             if (!rbHECrew.Checked && subGroup.ActiveResourceListing.Any(o => o.ResourceType.Equals("Equipment") || o.ResourceType.Equals("Vehicle")))
             {
                 rbHECrew.Checked = true;
-                lblOnlyHECrews.Visible = true;
             }
         }
 
@@ -345,6 +371,61 @@ namespace Wildfire_ICS_Assist.CustomControls
                     }
                 }
 
+            }
+        }
+
+        private void updateUniqueIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvGroup.SelectedRows.Count == 1)
+            {
+                OperationalGroupResourceListing rec = (OperationalGroupResourceListing)dgvGroup.SelectedRows[0].DataBoundItem;
+                UpdateUniqueID(rec);
+            }
+        }
+
+        private void UpdateUniqueID(OperationalGroupResourceListing rec)
+        {
+            if (rec != null)
+            {
+                using (ResourcesEditUniqueNumberForm editForm = new ResourcesEditUniqueNumberForm())
+                {
+                    if (resources.Any(o => o.ID == rec.ResourceID))
+                    {
+                        IncidentResource resource = resources.First(o => o.ID == rec.ResourceID);
+                        editForm.SetResource(resource);
+                        List<int> OtherNumbersToExclude = new List<int>();
+                        foreach (IncidentResource res in resources.Where(o => o.ResourceType.Equals(rec.ResourceType) && o.ID != resource.ID)) { OtherNumbersToExclude.Add(res.UniqueIDNum); }
+                        editForm.OtherNumbersToExclude = OtherNumbersToExclude;
+
+                        DialogResult dr = editForm.ShowDialog();
+                        if (dr == DialogResult.OK)
+                        {
+                            rec.UniqueIDNum = editForm.newNumber;
+                            resource.UniqueIDNum = editForm.newNumber;
+                            loadResourceList();
+
+                            //Program.wfIncidentService.UpsertIncidentResource(rec.Resource);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(dgvGroup.SelectedRows.Count == 1)
+            {
+                OperationalGroupResourceListing rec = (OperationalGroupResourceListing)dgvGroup.SelectedRows[0].DataBoundItem;
+                EditResource(rec);
+            }
+        }
+
+        private void btnChangeID_Click(object sender, EventArgs e)
+        {
+            if (dgvGroup.SelectedRows.Count == 1)
+            {
+                OperationalGroupResourceListing rec = (OperationalGroupResourceListing)dgvGroup.SelectedRows[0].DataBoundItem;
+                UpdateUniqueID(rec);
             }
         }
     }

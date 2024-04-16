@@ -15,12 +15,11 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class GeneralMessagesForm : Form
+    public partial class GeneralMessagesForm : BaseForm
     {
         public GeneralMessagesForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)

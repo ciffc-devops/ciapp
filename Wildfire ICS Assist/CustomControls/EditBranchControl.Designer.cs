@@ -39,8 +39,6 @@
             this.cboSupervisor = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cboReportsTo = new System.Windows.Forms.ComboBox();
-            this.txtSpecial = new System.Windows.Forms.TextBox();
-            this.txtTactical = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -50,7 +48,14 @@
             this.cboComms1 = new System.Windows.Forms.ComboBox();
             this.cboComms3 = new System.Windows.Forms.ComboBox();
             this.cboComms2 = new System.Windows.Forms.ComboBox();
+            this.txtTactical = new SpellBox();
+            this.txtSpecial = new SpellBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label10
@@ -94,13 +99,13 @@
             // 
             this.cboName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboName.FormattingEnabled = true;
             this.cboName.Location = new System.Drawing.Point(194, 113);
             this.cboName.Name = "cboName";
             this.cboName.Size = new System.Drawing.Size(121, 32);
             this.cboName.TabIndex = 103;
             this.cboName.SelectedIndexChanged += new System.EventHandler(this.cboName_SelectedIndexChanged);
+            this.cboName.TextUpdate += new System.EventHandler(this.cboName_TextUpdate);
             // 
             // label3
             // 
@@ -146,7 +151,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSupervisor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboSupervisor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboSupervisor.DisplayMember = "Name";
+            this.cboSupervisor.DisplayMember = "NameWithInitialRoleAcronym";
             this.cboSupervisor.FormattingEnabled = true;
             this.cboSupervisor.Location = new System.Drawing.Point(194, 156);
             this.cboSupervisor.Name = "cboSupervisor";
@@ -181,35 +186,10 @@
             this.cboReportsTo.ValueMember = "RoleID";
             this.cboReportsTo.SelectedIndexChanged += new System.EventHandler(this.cboReportsTo_SelectedIndexChanged);
             // 
-            // txtSpecial
-            // 
-            this.txtSpecial.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSpecial.Location = new System.Drawing.Point(7, 468);
-            this.txtSpecial.Multiline = true;
-            this.txtSpecial.Name = "txtSpecial";
-            this.txtSpecial.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtSpecial.Size = new System.Drawing.Size(787, 89);
-            this.txtSpecial.TabIndex = 97;
-            this.txtSpecial.TextChanged += new System.EventHandler(this.txtSpecial_TextChanged);
-            // 
-            // txtTactical
-            // 
-            this.txtTactical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTactical.Location = new System.Drawing.Point(8, 263);
-            this.txtTactical.Multiline = true;
-            this.txtTactical.Name = "txtTactical";
-            this.txtTactical.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTactical.Size = new System.Drawing.Size(786, 146);
-            this.txtTactical.TabIndex = 96;
-            this.txtTactical.TextChanged += new System.EventHandler(this.txtTactical_TextChanged);
-            // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(2, 436);
+            this.label8.Location = new System.Drawing.Point(3, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(357, 29);
             this.label8.TabIndex = 95;
@@ -219,7 +199,7 @@
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 231);
+            this.label7.Location = new System.Drawing.Point(3, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(343, 29);
             this.label7.TabIndex = 94;
@@ -318,10 +298,62 @@
             this.cboComms2.TabIndex = 35;
             this.cboComms2.ValueMember = "ItemID";
             // 
+            // txtTactical
+            // 
+            this.txtTactical.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTactical.Location = new System.Drawing.Point(8, 32);
+            this.txtTactical.Multiline = true;
+            this.txtTactical.Name = "txtTactical";
+            this.txtTactical.Size = new System.Drawing.Size(783, 116);
+            this.txtTactical.TabIndex = 109;
+            this.txtTactical.WordWrap = true;
+            this.txtTactical.TextChanged += new System.EventHandler(this.txtTactical_TextChanged);
+            this.txtTactical.Child = new System.Windows.Controls.TextBox();
+            // 
+            // txtSpecial
+            // 
+            this.txtSpecial.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSpecial.Location = new System.Drawing.Point(8, 32);
+            this.txtSpecial.Multiline = true;
+            this.txtSpecial.Name = "txtSpecial";
+            this.txtSpecial.Size = new System.Drawing.Size(783, 116);
+            this.txtSpecial.TabIndex = 110;
+            this.txtSpecial.WordWrap = true;
+            this.txtSpecial.TextChanged += new System.EventHandler(this.txtSpecial_TextChanged);
+            this.txtSpecial.Child = new System.Windows.Controls.TextBox();
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 263);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtTactical);
+            this.splitContainer1.Panel1.Controls.Add(this.label7);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtSpecial);
+            this.splitContainer1.Panel2.Controls.Add(this.label8);
+            this.splitContainer1.Size = new System.Drawing.Size(806, 309);
+            this.splitContainer1.SplitterDistance = 154;
+            this.splitContainer1.TabIndex = 111;
+            // 
             // EditBranchControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cboType);
@@ -333,17 +365,17 @@
             this.Controls.Add(this.cboSupervisor);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cboReportsTo);
-            this.Controls.Add(this.txtSpecial);
-            this.Controls.Add(this.txtTactical);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "EditBranchControl";
-            this.Size = new System.Drawing.Size(812, 569);
+            this.Size = new System.Drawing.Size(812, 575);
             this.Load += new System.EventHandler(this.EditBranchControl_Load);
             this.panel2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,8 +394,6 @@
         private System.Windows.Forms.ComboBox cboSupervisor;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cboReportsTo;
-        private System.Windows.Forms.TextBox txtSpecial;
-        private System.Windows.Forms.TextBox txtTactical;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel2;
@@ -373,5 +403,8 @@
         private System.Windows.Forms.ComboBox cboComms1;
         private System.Windows.Forms.ComboBox cboComms3;
         private System.Windows.Forms.ComboBox cboComms2;
+        private SpellBox txtTactical;
+        private SpellBox txtSpecial;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }

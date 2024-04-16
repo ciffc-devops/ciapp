@@ -12,6 +12,8 @@ using System.Threading;
 using WildfireICSDesktopServices;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Utilities;
+using System.Runtime.InteropServices;
+using Microsoft.VisualStudio.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
@@ -23,15 +25,9 @@ namespace Wildfire_ICS_Assist
         [STAThread]
         static void Main()
         {
-            /*
-             
+            if (Environment.OSVersion.Version.Major >= 6) SetProcessDpiAwarenessContext(DpiAwarenessContext.Unaware);
 
-             equipmentService = new EquipmentService();
-             ICAClassLibrary.Globals._equipmentService = equipmentService;
-             
-             
-             networkSendLog = new NetworkSendLog();
-            */
+       
 
             generalOptionsService = new GeneralOptionsService(true);
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
@@ -62,7 +58,9 @@ namespace Wildfire_ICS_Assist
             Application.Run(new IncidentDetailsForm());
         }
 
-     
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int SetProcessDpiAwarenessContext(DpiAwarenessContext value);
+
 
         /*
        
@@ -149,7 +147,7 @@ namespace Wildfire_ICS_Assist
         public static Color FormAccent { get => Color.FromArgb(219, 218, 204); }
         public static Color ErrorColor { get => Color.LightCoral; }
         public static Color GoodColor { get => Color.LightSkyBlue; }
-        public static Color StandardControLColor { get => System.Drawing.SystemColors.Window; }
+        public static Color StandardTextboxColor { get => System.Drawing.SystemColors.Window; }
 
         public static int PNumMin { get => _PNumMin; set => _PNumMin = value; }
         public static int PNumMax { get => _PNumMax; set => _PNumMax = value; }

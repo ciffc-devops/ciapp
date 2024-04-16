@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
             this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +61,7 @@
             this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
+            this.txtTaskName = new SpellBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnOutstandingLogItems = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
@@ -71,7 +72,6 @@
             this.cboICSRole = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtTaskName = new System.Windows.Forms.TextBox();
             this.lblTaskName = new System.Windows.Forms.Label();
             this.lblTaskNumber = new System.Windows.Forms.Label();
             this.lblServerStatus = new System.Windows.Forms.Label();
@@ -162,8 +162,8 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutCIAPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.llProgramURL = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tESTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.picOrgLogo = new System.Windows.Forms.PictureBox();
             this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
             this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
@@ -172,6 +172,8 @@
             this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
             this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
             this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.btnGeneralMessage = new System.Windows.Forms.Button();
+            this.btnReplacementResources = new System.Windows.Forms.Button();
             this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnNotes = new System.Windows.Forms.Button();
             this.btnShowResources = new System.Windows.Forms.Button();
@@ -204,7 +206,7 @@
             this.pnlInternetSyncStart.SuspendLayout();
             this.pnlNetworkSyncInProgress.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
             this.cpOtherTools.SuspendLayout();
             this.cpIncidentActionPlan.SuspendLayout();
             this.SuspendLayout();
@@ -263,9 +265,9 @@
             // 
             this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle2.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.colSignInTime, "colSignInTime");
             this.colSignInTime.Name = "colSignInTime";
             this.colSignInTime.ReadOnly = true;
@@ -483,6 +485,7 @@
             resources.ApplyResources(this.pnlTaskInfo, "pnlTaskInfo");
             this.pnlTaskInfo.BackColor = System.Drawing.Color.White;
             this.pnlTaskInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTaskInfo.Controls.Add(this.txtTaskName);
             this.pnlTaskInfo.Controls.Add(this.panel1);
             this.pnlTaskInfo.Controls.Add(this.btnOutstandingLogItems);
             this.pnlTaskInfo.Controls.Add(this.label19);
@@ -493,11 +496,17 @@
             this.pnlTaskInfo.Controls.Add(this.cboICSRole);
             this.pnlTaskInfo.Controls.Add(this.label17);
             this.pnlTaskInfo.Controls.Add(this.label16);
-            this.pnlTaskInfo.Controls.Add(this.txtTaskName);
             this.pnlTaskInfo.Controls.Add(this.lblTaskName);
             this.pnlTaskInfo.Controls.Add(this.lblTaskNumber);
             this.pnlTaskInfo.Name = "pnlTaskInfo";
             this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
+            // 
+            // txtTaskName
+            // 
+            resources.ApplyResources(this.txtTaskName, "txtTaskName");
+            this.txtTaskName.Name = "txtTaskName";
+            this.txtTaskName.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskName_Validating);
+            this.txtTaskName.Child = new System.Windows.Controls.TextBox();
             // 
             // panel1
             // 
@@ -570,13 +579,6 @@
             // 
             resources.ApplyResources(this.label16, "label16");
             this.label16.Name = "label16";
-            // 
-            // txtTaskName
-            // 
-            resources.ApplyResources(this.txtTaskName, "txtTaskName");
-            this.txtTaskName.Name = "txtTaskName";
-            this.txtTaskName.Leave += new System.EventHandler(this.txtTaskName_Leave);
-            this.txtTaskName.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskName_Validating);
             // 
             // lblTaskName
             // 
@@ -736,7 +738,8 @@
             this.planningToolStripMenuItem,
             this.adminFinanceToolStripMenuItem,
             this.networkInternetToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.tESTToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -1195,19 +1198,20 @@
             resources.ApplyResources(this.aboutCIAPPToolStripMenuItem, "aboutCIAPPToolStripMenuItem");
             this.aboutCIAPPToolStripMenuItem.Click += new System.EventHandler(this.aboutCIAPPToolStripMenuItem_Click);
             // 
-            // llProgramURL
+            // tESTToolStripMenuItem
             // 
-            resources.ApplyResources(this.llProgramURL, "llProgramURL");
-            this.llProgramURL.Name = "llProgramURL";
-            this.llProgramURL.TabStop = true;
-            this.llProgramURL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llProgramURL_LinkClicked);
+            this.tESTToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
+            this.tESTToolStripMenuItem.Name = "tESTToolStripMenuItem";
+            resources.ApplyResources(this.tESTToolStripMenuItem, "tESTToolStripMenuItem");
+            this.tESTToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
             // 
-            // pictureBox1
+            // picOrgLogo
             // 
-            this.pictureBox1.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
+            resources.ApplyResources(this.picOrgLogo, "picOrgLogo");
+            this.picOrgLogo.Name = "picOrgLogo";
+            this.picOrgLogo.TabStop = false;
+            this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // ofdOpenTaskFile
             // 
@@ -1237,23 +1241,46 @@
             // cpOtherTools
             // 
             this.cpOtherTools.BackColor = System.Drawing.Color.White;
+            this.cpOtherTools.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpOtherTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpOtherTools.CollapsedHeight = 40;
             this.cpOtherTools.CollapsedWidth = 349;
             this.cpOtherTools.CollapseLeft = true;
+            this.cpOtherTools.Controls.Add(this.btnGeneralMessage);
+            this.cpOtherTools.Controls.Add(this.btnReplacementResources);
             this.cpOtherTools.Controls.Add(this.btnAdditionalContacts);
             this.cpOtherTools.Controls.Add(this.btnNotes);
             this.cpOtherTools.Controls.Add(this.btnShowResources);
             this.cpOtherTools.CurrentlyCollapsed = false;
             this.cpOtherTools.ExpandedHeight = 180;
             this.cpOtherTools.ExpandedWidth = 349;
+            this.cpOtherTools.ExpandUp = false;
             resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
             this.cpOtherTools.Name = "cpOtherTools";
             this.cpOtherTools.TitleText = "Other Tools";
             // 
+            // btnGeneralMessage
+            // 
+            resources.ApplyResources(this.btnGeneralMessage, "btnGeneralMessage");
+            this.btnGeneralMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnGeneralMessage.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_11_envelope;
+            this.btnGeneralMessage.Name = "btnGeneralMessage";
+            this.btnGeneralMessage.UseVisualStyleBackColor = true;
+            this.btnGeneralMessage.Click += new System.EventHandler(this.btnGeneralMessage_Click);
+            // 
+            // btnReplacementResources
+            // 
+            resources.ApplyResources(this.btnReplacementResources, "btnReplacementResources");
+            this.btnReplacementResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnReplacementResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_46_calendar;
+            this.btnReplacementResources.Name = "btnReplacementResources";
+            this.btnReplacementResources.UseVisualStyleBackColor = true;
+            this.btnReplacementResources.Click += new System.EventHandler(this.btnReplacementResources_Click);
+            // 
             // btnAdditionalContacts
             // 
             resources.ApplyResources(this.btnAdditionalContacts, "btnAdditionalContacts");
+            this.btnAdditionalContacts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAdditionalContacts.Name = "btnAdditionalContacts";
             this.btnAdditionalContacts.UseVisualStyleBackColor = true;
             this.btnAdditionalContacts.Click += new System.EventHandler(this.btnAdditionalContacts_Click);
@@ -1261,6 +1288,7 @@
             // btnNotes
             // 
             resources.ApplyResources(this.btnNotes, "btnNotes");
+            this.btnNotes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnNotes.Name = "btnNotes";
             this.btnNotes.UseVisualStyleBackColor = true;
             this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
@@ -1268,6 +1296,7 @@
             // btnShowResources
             // 
             resources.ApplyResources(this.btnShowResources, "btnShowResources");
+            this.btnShowResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnShowResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
             this.btnShowResources.Name = "btnShowResources";
             this.btnShowResources.UseVisualStyleBackColor = true;
@@ -1276,6 +1305,7 @@
             // cpIncidentActionPlan
             // 
             this.cpIncidentActionPlan.BackColor = System.Drawing.Color.White;
+            this.cpIncidentActionPlan.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpIncidentActionPlan.CollapsedHeight = 40;
             this.cpIncidentActionPlan.CollapsedWidth = 485;
@@ -1291,6 +1321,7 @@
             this.cpIncidentActionPlan.CurrentlyCollapsed = false;
             this.cpIncidentActionPlan.ExpandedHeight = 331;
             this.cpIncidentActionPlan.ExpandedWidth = 722;
+            this.cpIncidentActionPlan.ExpandUp = false;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
@@ -1298,6 +1329,7 @@
             // btnAssignmentList
             // 
             resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
+            this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAssignmentList.Name = "btnAssignmentList";
             this.btnAssignmentList.UseVisualStyleBackColor = true;
             this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
@@ -1305,6 +1337,7 @@
             // btnAirOpsSummary
             // 
             resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
+            this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAirOpsSummary.Name = "btnAirOpsSummary";
             this.btnAirOpsSummary.UseVisualStyleBackColor = true;
             this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
@@ -1312,6 +1345,7 @@
             // btnSafetyPlans
             // 
             resources.ApplyResources(this.btnSafetyPlans, "btnSafetyPlans");
+            this.btnSafetyPlans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnSafetyPlans.Name = "btnSafetyPlans";
             this.btnSafetyPlans.UseVisualStyleBackColor = true;
             this.btnSafetyPlans.Click += new System.EventHandler(this.btnSafetyPlans_Click);
@@ -1319,6 +1353,7 @@
             // btnIncidentObjectives
             // 
             resources.ApplyResources(this.btnIncidentObjectives, "btnIncidentObjectives");
+            this.btnIncidentObjectives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnIncidentObjectives.Name = "btnIncidentObjectives";
             this.btnIncidentObjectives.UseVisualStyleBackColor = true;
             this.btnIncidentObjectives.Click += new System.EventHandler(this.btnIncidentObjectives_Click);
@@ -1326,6 +1361,7 @@
             // btnMedicalPlan
             // 
             resources.ApplyResources(this.btnMedicalPlan, "btnMedicalPlan");
+            this.btnMedicalPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnMedicalPlan.Name = "btnMedicalPlan";
             this.btnMedicalPlan.UseVisualStyleBackColor = true;
             this.btnMedicalPlan.Click += new System.EventHandler(this.btnMedicalPlan_Click);
@@ -1333,6 +1369,7 @@
             // btnPrintIAP
             // 
             resources.ApplyResources(this.btnPrintIAP, "btnPrintIAP");
+            this.btnPrintIAP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrintIAP.Name = "btnPrintIAP";
             this.btnPrintIAP.UseVisualStyleBackColor = true;
@@ -1341,6 +1378,7 @@
             // btnPrintOrgChart
             // 
             resources.ApplyResources(this.btnPrintOrgChart, "btnPrintOrgChart");
+            this.btnPrintOrgChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnPrintOrgChart.Name = "btnPrintOrgChart";
             this.btnPrintOrgChart.UseVisualStyleBackColor = true;
             this.btnPrintOrgChart.Click += new System.EventHandler(this.btnPrintOrgChart_Click);
@@ -1348,6 +1386,7 @@
             // btnCommsPlan
             // 
             resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
+            this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnCommsPlan.Name = "btnCommsPlan";
             this.btnCommsPlan.UseVisualStyleBackColor = true;
             this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
@@ -1359,8 +1398,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.Controls.Add(this.cpOtherTools);
             this.Controls.Add(this.cpIncidentActionPlan);
-            this.Controls.Add(this.llProgramURL);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picOrgLogo);
             this.Controls.Add(this.pnlInternetSyncStart);
             this.Controls.Add(this.pnlNetworkSyncInProgress);
             this.Controls.Add(this.pnlOpsPeriod);
@@ -1398,7 +1436,7 @@
             this.pnlNetworkSyncInProgress.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).EndInit();
             this.cpOtherTools.ResumeLayout(false);
             this.cpIncidentActionPlan.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1426,7 +1464,6 @@
         private System.Windows.Forms.ComboBox cboICSRole;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtTaskName;
         private System.Windows.Forms.Label lblTaskName;
         private System.Windows.Forms.Label lblTaskNumber;
         private System.Windows.Forms.Label lblServerStatus;
@@ -1484,8 +1521,7 @@
         private System.Windows.Forms.ToolStripMenuItem planningToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem networkInternetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel llProgramURL;
+        private System.Windows.Forms.PictureBox picOrgLogo;
         private System.Windows.Forms.ToolStripMenuItem newIncidentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recentIncidentsToolStripMenuItem;
@@ -1561,6 +1597,10 @@
         private System.Windows.Forms.ToolStripMenuItem printTheIncidentActionPlanToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.Button btnShowResources;
+        private SpellBox txtTaskName;
+        private System.Windows.Forms.ToolStripMenuItem tESTToolStripMenuItem;
+        private System.Windows.Forms.Button btnGeneralMessage;
+        private System.Windows.Forms.Button btnReplacementResources;
     }
 }
 

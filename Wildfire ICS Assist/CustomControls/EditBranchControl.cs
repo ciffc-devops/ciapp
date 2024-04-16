@@ -57,7 +57,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 mems.AddRange(members);
                 cboSupervisor.DataSource = mems;
                 cboSupervisor.ValueMember = "PersonID";
-                cboSupervisor.DisplayMember = "Name";
+                cboSupervisor.DisplayMember = "NameWithInitialRoleAcronym";
             }
 
 
@@ -163,6 +163,12 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 cboName.Items.Add("Heavy Equipment");
             }
+            //Heavy Equipment
+            if (cboName.FindStringExact("Structure Protection") == -1 && !Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.OpPeriod == Program.CurrentOpPeriod && o.Name.Equals("Structure Protection")))
+            {
+                cboName.Items.Add("Structure Protection");
+            }
+
         }
 
         private void BuildDivisionNames()
@@ -352,6 +358,12 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void cboComms1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UnsavedChanges = true;
+        }
+
+        private void cboName_TextUpdate(object sender, EventArgs e)
+        {
+            UnsavedChanges = true;
+
         }
     }
 }

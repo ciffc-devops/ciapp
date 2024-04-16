@@ -93,11 +93,15 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private string _GeneralSafety;
         [ProtoMember(8)] private string _PreparedBy;
         [ProtoMember(9)] private string _PreparedByRole;
+        
         [ProtoMember(10)] private string _ApprovedBy;
         [ProtoMember(11)] private string _ApprovedByRole;
+
         [ProtoMember(12)] private List<IncidentObjective> _Objectives;
         [ProtoMember(13)] private Guid _TaskID;
         [ProtoMember(14)] private DateTime _LastUpdatedUTC;
+        [ProtoMember(15)] private Guid _PreparedByRoleID;
+        [ProtoMember(16)] private Guid _ApprovedByRoleID;
 
         public IncidentObjectivesSheet() { _SheetID = Guid.NewGuid(); _Objectives = new List<IncidentObjective>(); }
 
@@ -110,8 +114,12 @@ namespace WF_ICS_ClassLibrary.Models
         public string GeneralSafety { get => _GeneralSafety; set => _GeneralSafety = value; }
         public string PreparedBy { get => _PreparedBy; set => _PreparedBy = value; }
         public string PreparedByRole { get => _PreparedByRole; set => _PreparedByRole = value; }
+        public Guid PreparedByRoleID { get => _PreparedByRoleID; set { _PreparedByRoleID = value; } }
+
         public string ApprovedBy { get => _ApprovedBy; set => _ApprovedBy = value; }
         public string ApprovedByRole { get => _ApprovedByRole; set => _ApprovedByRole = value; }
+        public Guid ApprovedByRoleID { get => _ApprovedByRoleID; set { _ApprovedByRoleID = value; } }
+
         public List<IncidentObjective> Objectives { get => _Objectives; set => _Objectives = value; }
         public List<IncidentObjective> ActiveObjectives { get => _Objectives.Where(o=>o.Active).ToList(); }
 

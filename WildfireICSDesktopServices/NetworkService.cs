@@ -1,26 +1,25 @@
-﻿using NetworkCommsDotNet.Connections.TCP;
+﻿using NetworkCommsDotNet;
 using NetworkCommsDotNet.Connections;
+using NetworkCommsDotNet.Connections.TCP;
 using NetworkCommsDotNet.DPSBase;
 using NetworkCommsDotNet.Tools;
-using NetworkCommsDotNet;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using static iTextSharp.text.TabStop;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Interfaces;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace WildfireICSDesktopServices
 {
@@ -60,7 +59,7 @@ namespace WildfireICSDesktopServices
         /// <summary>
         /// The maximum number of times a chat message will be relayed
         /// </summary>
-        int relayMaximum = 3;
+        int relayMaximum = 20;
         private bool PauseNetworkSend = false;
 
 
@@ -105,7 +104,7 @@ namespace WildfireICSDesktopServices
                 }
 
                 //Reject network send objects from a different task.  This should mitigate issues of multiple tasks running on the same network.
-                if (acceptInfo && incomingMessage.TaskID != Guid.Empty && incomingMessage.TaskID != CurrentIncidentID) { acceptInfo = false; }
+                if (acceptInfo && incomingMessage.TaskID != Guid.Empty && incomingMessage.TaskID != CurrentIncidentID && incomingMessage.GuidValue == Guid.Empty) { acceptInfo = false; }
 
                 if (acceptInfo)
                 {
@@ -430,7 +429,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        
+
 
         public NetworkSendResults SendNetworkObject(object objToSend, Guid TaskID, string comment = null, string ip = null, string port = null, bool sentByInternet = false)
         {
@@ -445,24 +444,28 @@ namespace WildfireICSDesktopServices
                 switch (objToSend)
                 {
 
-                    
+
                     case Guid g:
                         networkSendObject.GuidValue = g;
-                        networkSendObject.TaskID = Guid.Empty;
+                        networkSendObject.TaskID = TaskID;
                         break;
-                   
-                   
+
+
                     case GeneralOptions options:
                         networkSendObject.generalOptions = options;
                         networkSendObject.TaskID = Guid.Empty;
                         break;
-                   
-                  
+
+
                     case TaskUpdate taskUpdate:
                         networkSendObject.taskUpdate = taskUpdate.Clone();
                         networkSendObject.taskUpdate.ProcessedLocally = false;
-                        networkSendObject.taskUpdate.Source = "Network";
+                        networkSendObject.taskUpdate.Source = "network";
 
+                        break;
+                    case List<TaskUpdate> tasks:
+                        networkSendObject.taskUpdates = tasks;
+                        foreach (TaskUpdate taskUpdate in tasks) { taskUpdate.Source = "network"; taskUpdate.ProcessedLocally = false; }
                         break;
                     case null:
                         break;
@@ -471,7 +474,7 @@ namespace WildfireICSDesktopServices
                 }
                 networkSendObject.RequestID = Guid.NewGuid();
                 networkSendObject.objectType = objToSend.GetType().ToString();
-              
+
                 networkSendObject.SourceName = HostInfo.HostName;
                 networkSendObject.SourceIdentifier = NetworkComms.NetworkIdentifier;
                 networkSendObject.comment = comment;
@@ -512,6 +515,7 @@ namespace WildfireICSDesktopServices
                         //SendReceiveOptions customSendReceiveOptions = new SendReceiveOptions<ProtobufSerializer>();
                         //ConnectionInfo connectionInfo = new ConnectionInfo("192.168.1.105", 5614);
                         //TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo, customSendReceiveOptions);
+
 
 
                         TCPConnection serverConnection = TCPConnection.GetConnection(serverConnectionInfo);
@@ -835,9 +839,10 @@ namespace WildfireICSDesktopServices
                 //We perform the send within a try catch to ensure the application continues to run if there is a problem.
                 try
                 {
+                    WFIncident compressed = task.CompressTaskUpdates();
 
-                    
-                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("WFIncident", task);
+
+                    TCPConnection.GetConnection(serverConnectionInfo).SendObject("WFIncident", compressed);
                     DateTime today = DateTime.Now;
                     
                     args.message += string.Format("{0:HH:mm:ss}", today) + " - sent full task" + "\r\n";

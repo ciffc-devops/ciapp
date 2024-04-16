@@ -14,7 +14,7 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class SafetyMessageEditForm : Form
+    public partial class SafetyMessageEditForm : BaseForm
     {
         private SafetyMessage _selectedMessage = null;
         public SafetyMessage selectedMessage { get => _selectedMessage; set { _selectedMessage = value; LoadMessage(); } }
@@ -34,7 +34,7 @@ namespace Wildfire_ICS_Assist
         }
         public SafetyMessageEditForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -166,6 +166,13 @@ namespace Wildfire_ICS_Assist
                     MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
                 }
             }
+        }
+
+        private void txtMessage_TextChanged_1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMessage.Text.Trim())) { txtMessage.BackColor = Program.ErrorColor; }
+            else { txtMessage.BackColor = Program.GoodColor; }
+
         }
     }
 }

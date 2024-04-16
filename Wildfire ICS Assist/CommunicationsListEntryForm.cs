@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CommunicationsListEntryForm : Form
+    public partial class CommunicationsListEntryForm : BaseForm
     {
         List<Contact> savedContacts = null;
         private Contact _selected = null;
@@ -23,7 +23,7 @@ namespace Wildfire_ICS_Assist
 
         public CommunicationsListEntryForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

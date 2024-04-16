@@ -12,13 +12,13 @@ using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class IncidentObjectiveEntryForm : Form
+    public partial class IncidentObjectiveEntryForm : BaseForm
     {
         private IncidentObjective _objective = null;
         public IncidentObjective Objective { get => _objective; set => _objective = value; }
         public IncidentObjectiveEntryForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
         public bool SaveForLater { get => chkSaveForLater.Checked; }
 

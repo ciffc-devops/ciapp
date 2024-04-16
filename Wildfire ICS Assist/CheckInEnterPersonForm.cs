@@ -12,14 +12,14 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CheckInEnterPersonForm : Form
+    public partial class CheckInEnterPersonForm : BaseForm
     {
         private Personnel _selectedPerson = new Personnel();
         public Personnel selectedPerson { get => _selectedPerson; private set => _selectedPerson = value; }
 
         public CheckInEnterPersonForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private void PersonnelEnterPersonForm_Load(object sender, EventArgs e)

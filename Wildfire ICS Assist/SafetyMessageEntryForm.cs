@@ -12,7 +12,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class SafetyMessageEntryForm : Form
+    public partial class SafetyMessageEntryForm : BaseForm
     {
 
         private SafetyMessage _selectedMessage = new SafetyMessage();
@@ -20,7 +20,7 @@ namespace Wildfire_ICS_Assist
         public bool SaveForLater { get => chkSaveForLater.Checked; }
         public SafetyMessageEntryForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

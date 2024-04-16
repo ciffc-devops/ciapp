@@ -19,7 +19,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class OrganizationalChartForm : Form
+    public partial class OrganizationalChartForm : BaseForm
     {
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
@@ -27,8 +27,8 @@ namespace Wildfire_ICS_Assist
 
         public OrganizationalChartForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+           
+            InitializeComponent(); 
         }
 
 

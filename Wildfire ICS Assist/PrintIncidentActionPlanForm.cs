@@ -11,11 +11,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PrintIncidentForm : Form
+    public partial class PrintIncidentForm : BaseForm
     {
         private WFIncident CurrentIncident { get => Program.CurrentIncident; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
@@ -23,7 +24,7 @@ namespace Wildfire_ICS_Assist
         public bool PrintIAPByDefault { get; set; } = false;
         public PrintIncidentForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -234,6 +235,20 @@ namespace Wildfire_ICS_Assist
 
         }
 
+        List<BrowseFileControl> browseControls
+        {
+            get
+            {
+                List<BrowseFileControl> controls = new List<BrowseFileControl>();
+                controls.Add(browseFileControl1);
+                controls.Add(browseFileControl2);
+                controls.Add(browseFileControl3);
+                controls.Add(browseFileControl4);
+                return controls;
+            }
+        }
+
+
         private void btnSaveAsPDF_Click(object sender, EventArgs e)
         {
             
@@ -262,8 +277,10 @@ namespace Wildfire_ICS_Assist
 
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
-            allPDFs.AddRange(buildContentsList());
-
+            if (chkTitlePage.Checked)
+            {
+                allPDFs.AddRange(buildContentsList());
+            }
             List<int> OpsToPrint = new List<int>();
             if (!PrintIncidentToDate) { OpsToPrint.Add(CurrentOpPeriod); }
             else
@@ -380,6 +397,17 @@ namespace Wildfire_ICS_Assist
                 }
             }
 
+
+            //add additional PDFs
+            foreach(BrowseFileControl browseFileControl in browseControls)
+            {
+                if(!string.IsNullOrEmpty(browseFileControl.FileName) && File.Exists(browseFileControl.FileName))
+                {
+                    byte[] bytes = System.IO.File.ReadAllBytes(browseFileControl.FileName);
+                    allPDFs.Add(bytes);
+
+                }
+            }
 
 
             byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
@@ -647,6 +675,22 @@ namespace Wildfire_ICS_Assist
                         MessageBox.Show("Sorry, there was an error trying to send the PDF.  You may need to save the pdf and email it manually.");
                     }
                 } else { MessageBox.Show("There was an error generating the pdf."); }
+            }
+        }
+
+        private void chkTitlePage_CheckedChanged(object sender, EventArgs e)
+        {
+            pnlTitlePageContent.Enabled =  chkTitlePage.Checked;
+        }
+
+        private void txtCriticalMessage_Leave_1(object sender, EventArgs e)
+        {
+            OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
+            if (period.CriticalMessage == null || !period.CriticalMessage.Equals(txtCriticalMessage.Text))
+            {
+                period.CriticalMessage = txtCriticalMessage.Text;
+                Program.wfIncidentService.UpsertOperationalPeriod(period);
+
             }
         }
     }

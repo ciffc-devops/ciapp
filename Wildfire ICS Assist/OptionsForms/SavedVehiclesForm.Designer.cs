@@ -30,14 +30,20 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvVehicles = new System.Windows.Forms.DataGridView();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colResourceType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIncidentIDNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClassification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMake = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAgency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
+            this.colSerial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -65,7 +71,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
             this.splitContainer1.Size = new System.Drawing.Size(774, 378);
-            this.splitContainer1.SplitterDistance = 303;
+            this.splitContainer1.SplitterDistance = 316;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -80,7 +86,8 @@
             this.colIncidentIDNo,
             this.colClassification,
             this.colMake,
-            this.colAgency});
+            this.colAgency,
+            this.colSerial});
             this.dgvVehicles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVehicles.Location = new System.Drawing.Point(0, 0);
             this.dgvVehicles.Margin = new System.Windows.Forms.Padding(6);
@@ -89,53 +96,10 @@
             this.dgvVehicles.RowHeadersVisible = false;
             this.dgvVehicles.RowTemplate.Height = 35;
             this.dgvVehicles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVehicles.Size = new System.Drawing.Size(774, 303);
+            this.dgvVehicles.Size = new System.Drawing.Size(774, 316);
             this.dgvVehicles.TabIndex = 1;
             this.dgvVehicles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehicles_CellDoubleClick);
             this.dgvVehicles.SelectionChanged += new System.EventHandler(this.dgvVehicles_SelectionChanged);
-            // 
-            // colResourceType
-            // 
-            this.colResourceType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colResourceType.DataPropertyName = "ResourceType";
-            this.colResourceType.HeaderText = "Veh / Eq";
-            this.colResourceType.Name = "colResourceType";
-            this.colResourceType.ReadOnly = true;
-            this.colResourceType.Width = 109;
-            // 
-            // colIncidentIDNo
-            // 
-            this.colIncidentIDNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colIncidentIDNo.DataPropertyName = "IncidentIDNo";
-            this.colIncidentIDNo.HeaderText = "Typical ID";
-            this.colIncidentIDNo.Name = "colIncidentIDNo";
-            this.colIncidentIDNo.ReadOnly = true;
-            this.colIncidentIDNo.Width = 117;
-            // 
-            // colClassification
-            // 
-            this.colClassification.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colClassification.DataPropertyName = "Classification";
-            this.colClassification.HeaderText = "Class";
-            this.colClassification.Name = "colClassification";
-            this.colClassification.ReadOnly = true;
-            // 
-            // colMake
-            // 
-            this.colMake.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMake.DataPropertyName = "Make";
-            this.colMake.HeaderText = "Make";
-            this.colMake.Name = "colMake";
-            this.colMake.ReadOnly = true;
-            // 
-            // colAgency
-            // 
-            this.colAgency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colAgency.DataPropertyName = "AgencyOrOwner";
-            this.colAgency.HeaderText = "Agency/Owner";
-            this.colAgency.Name = "colAgency";
-            this.colAgency.ReadOnly = true;
-            this.colAgency.Width = 162;
             // 
             // btnDelete
             // 
@@ -176,6 +140,101 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ResourceType";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Veh / Eq";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "IncidentIDNo";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Typical ID";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Classification";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Class";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Make";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Make";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "AgencyOrOwner";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Agency/Owner";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 104;
+            // 
+            // colResourceType
+            // 
+            this.colResourceType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colResourceType.DataPropertyName = "ResourceType";
+            this.colResourceType.HeaderText = "Veh / Eq";
+            this.colResourceType.Name = "colResourceType";
+            this.colResourceType.ReadOnly = true;
+            this.colResourceType.Width = 109;
+            // 
+            // colIncidentIDNo
+            // 
+            this.colIncidentIDNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colIncidentIDNo.DataPropertyName = "IncidentIDNo";
+            this.colIncidentIDNo.HeaderText = "Company";
+            this.colIncidentIDNo.Name = "colIncidentIDNo";
+            this.colIncidentIDNo.ReadOnly = true;
+            this.colIncidentIDNo.Width = 116;
+            // 
+            // colClassification
+            // 
+            this.colClassification.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colClassification.DataPropertyName = "Kind";
+            this.colClassification.HeaderText = "Kind";
+            this.colClassification.Name = "colClassification";
+            this.colClassification.ReadOnly = true;
+            // 
+            // colMake
+            // 
+            this.colMake.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMake.DataPropertyName = "Type";
+            this.colMake.HeaderText = "Type";
+            this.colMake.Name = "colMake";
+            this.colMake.ReadOnly = true;
+            // 
+            // colAgency
+            // 
+            this.colAgency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colAgency.DataPropertyName = "UnitNumber";
+            this.colAgency.HeaderText = "Unit #";
+            this.colAgency.Name = "colAgency";
+            this.colAgency.ReadOnly = true;
+            this.colAgency.Width = 82;
+            // 
+            // colSerial
+            // 
+            this.colSerial.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colSerial.DataPropertyName = "SerialNumber";
+            this.colSerial.HeaderText = "Serial #";
+            this.colSerial.Name = "colSerial";
+            this.colSerial.ReadOnly = true;
+            this.colSerial.Width = 97;
+            // 
             // SavedVehiclesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -211,5 +270,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMake;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAgency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSerial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }

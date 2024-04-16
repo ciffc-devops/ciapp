@@ -268,7 +268,7 @@
         </member>
         <member name="M:ProtoBuf.Meta.MetaType.SetCallbacks(System.Reflection.MethodInfo,System.Reflection.MethodInfo,System.Reflection.MethodInfo,System.Reflection.MethodInfo)">
             <summary>
-            Assigns the callbacks to use during serialiation/deserialization.
+            Assigns the callbacks to use during serialization/deserialization.
             </summary>
             <param name="beforeSerialize">The method (or null) called before serialization begins.</param>
             <param name="afterSerialize">The method (or null) called when serialization is complete.</param>
@@ -464,6 +464,44 @@
             <summary>
             Adds a named field reservation
             </summary>
+        </member>
+        <member name="M:ProtoBuf.Meta.MetaType.ExtraLayerValueMembers.IsEmpty">
+            <returns>true, if doese not contain any <see cref="T:ProtoBuf.Meta.NullWrappedValueMemberData"/></returns>
+        </member>
+        <member name="M:ProtoBuf.Meta.MetaType.ExtraLayerValueMembers.Add(System.String,ProtoBuf.Meta.ValueMember)">
+            <summary>
+            Processes another <see cref="T:ProtoBuf.Meta.ValueMember"/> of model 
+            and adds a metadata used for it's representation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Meta.MetaType.ExtraLayerValueMembers.GetEnumerator">
+            <summary>
+            Iterates over build wrapped valueMembers with additional representation metadata
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ProtoBuf.Meta.NullWrappedValueMemberData.HasSchemaTypeNameCollision">
+            <summary>
+            Calculates, if valueMember has a schemaTypeName collision
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Meta.NullWrappedValueMemberData.ItemType">
+            <summary>
+            Gets inner valueMember's item type
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Meta.NullWrappedValueMemberData.HasGroupModifier">
+            <summary>
+            Requires `group` to be placed on original valueMember level
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Meta.NullWrappedValueMemberData.HasKnownTypeSchema">
+            <summary>
+            Identifies, if original schemaTypeName is a known .net type
+            </summary>
+            <returns>
+            true, if original schemaTypeName is a string representation of known System.XXX type 
+            </returns>
         </member>
         <member name="T:ProtoBuf.Meta.RuntimeTypeModel">
             <summary>
@@ -769,6 +807,16 @@
             Available to all callers in the same assembly, or assemblies specified via [InternalsVisibleTo(...)]
             </summary>
         </member>
+        <member name="M:ProtoBuf.Meta.RuntimeTypeModel.Compile(System.String,System.String)">
+            <summary>
+            Fully compiles the current model into a static-compiled serialization dll
+            (the serialization dll still requires protobuf-net for support services).
+            </summary>
+            <remarks>A full compilation is restricted to accessing public types / members</remarks>
+            <param name="name">The name of the TypeModel class to create</param>
+            <param name="path">The path for the new dll</param>
+            <returns>An instance of the newly created compiled type-model</returns>
+        </member>
         <member name="M:ProtoBuf.Meta.RuntimeTypeModel.Compile(ProtoBuf.Meta.RuntimeTypeModel.CompilerOptions)">
             <summary>
             Fully compiles the current model into a static-compiled serialization dll
@@ -1062,6 +1110,18 @@
         </member>
         <member name="P:ProtoBuf.Meta.ValueMember.NullWrappedCollectionGroup">
             <see cref="P:ProtoBuf.NullWrappedValueAttribute.AsGroup"/>
+        </member>
+        <member name="M:ProtoBuf.Meta.ValueMember.HasExtendedNullSupport">
+            <see href="https://github.com/protobuf-net/protobuf-net/blob/main/docs/nullwrappers.md"/>
+        </member>
+        <member name="M:ProtoBuf.Meta.ValueMember.RequiresExtraLayerInSchema">
+            <see href="https://github.com/protobuf-net/protobuf-net/blob/main/docs/nullwrappers.md"/>
+            <remarks>NullWrappers are needed **only** for items of collections</remarks>
+        </member>
+        <member name="P:ProtoBuf.Meta.ValueMember.RequiresGroupModifier">
+            <summary>
+            Requires `group` to be placed on original valueMember level
+            </summary>
         </member>
         <member name="T:ProtoBuf.Serializer">
             <summary>

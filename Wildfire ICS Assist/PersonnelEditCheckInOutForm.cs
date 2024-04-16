@@ -12,7 +12,7 @@ using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PersonnelEditCheckInOutForm : Form
+    public partial class PersonnelEditCheckInOutForm : BaseForm
     {
         private List<CheckInRecord> _records = new List<CheckInRecord>();
         public List<CheckInRecord> records { get => _records; set { _records = value; LoadValues(); } }
@@ -20,7 +20,7 @@ namespace Wildfire_ICS_Assist
 
         public PersonnelEditCheckInOutForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
         }
 

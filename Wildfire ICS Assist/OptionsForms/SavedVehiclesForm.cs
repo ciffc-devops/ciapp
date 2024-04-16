@@ -40,6 +40,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             using (EditSavedVehicleForm editItem = new EditSavedVehicleForm())
             {
                 editItem.vehicle = item.Clone();
+                editItem.DisplayOperator = false;
                 DialogResult dr = editItem.ShowDialog();
 
                 if (dr == DialogResult.OK)

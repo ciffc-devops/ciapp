@@ -12,7 +12,7 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class AirNOTAMEditForm : Form
+    public partial class AirNOTAMEditForm : BaseForm
     {
         private NOTAM _selectedNOTAM = null;
         public NOTAM selectedNOTAM { get => _selectedNOTAM; set { _selectedNOTAM = value;  loadNOTAM(); } }

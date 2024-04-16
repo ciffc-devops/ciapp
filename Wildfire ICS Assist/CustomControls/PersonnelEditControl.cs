@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
@@ -22,12 +23,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
 
             cboAgency.DataSource = AgencyTools.GetFixedAgencies(true);
-            
+            cboAgency.DropDownWidth = cboAgency.GetDropDownWidth();
 
 
             if (Program.generalOptionsService != null && Program.generalOptionsService.GetOptionsValue("Agencies") != null)
             {
                 cboOtherAgency.DataSource = GetIncidentAgencies();
+                cboOtherAgency.DropDownWidth = cboOtherAgency.GetDropDownWidth();
 
                 List<string> homebases = (List<string>)Program.generalOptionsService.GetOptionsValue("HomeBases");
                 List<string> incidentBases = Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.HomeUnit)).GroupBy(o => o.HomeUnit).Select(o => o.First().HomeUnit).ToList();
@@ -36,13 +38,14 @@ namespace Wildfire_ICS_Assist.CustomControls
                 homebases.Insert(0, string.Empty);
 
                 cboHomeAgency.DataSource = homebases;
+                cboHomeAgency.DropDownWidth = cboHomeAgency.GetDropDownWidth();
             }
             
             if (_teamMember != null)
             {
-                txtFirstName.Text = teamMember.FirstName;
+                txtFirstName.SetText(teamMember.FirstName);
                 txtMiddleName.Text = teamMember.MiddleInitial;
-                txtLastName.Text = teamMember.LastName;
+                txtLastName.SetText(teamMember.LastName);
                 cboAccomodationPreference.Text = teamMember.AccomodationPreference;
                 if (teamMember.HomeProvinceID != Guid.Empty) { cboProvince.SelectedValue = teamMember.HomeProvinceID; }
                 else if (Program.generalOptionsService != null && Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID") != Guid.Empty) { cboProvince.SelectedValue = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); _teamMember.HomeProvinceID = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); ; }
@@ -53,12 +56,15 @@ namespace Wildfire_ICS_Assist.CustomControls
                     if (fixedAgencies.Contains(teamMember.Agency)) { cboAgency.SelectedIndex = cboAgency.FindStringExact(teamMember.Agency); }
                     else
                     {
-                        cboAgency.SelectedIndex = -1;
+                        cboAgency.SelectedIndex = cboAgency.Items.Count -1;
                         cboOtherAgency.Text = teamMember.Agency;
                     }
+                } else
+                {
+
                 }
                 chkContractor.Checked = teamMember.IsContractor;
-                txtCellphone.Text = teamMember.CellphoneNumber;
+                txtCellphone.Text  = teamMember.CellphoneNumber.FormatPhone();
                 cboType.Text = teamMember.Type;
                 cboKind.Text = teamMember.Kind;
                 txtPronouns.Text = teamMember.Pronouns;
@@ -67,9 +73,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                 //txtDietary.Text = teamMember.Dietary;
                 chkDietary.Checked = teamMember.HasDietaryRestrictions;
-                txtCallsign.Text = teamMember.CallSign;
+               
                 chkAllergies.Checked = teamMember.HasAllergies;
-                txtNOKName.Text = teamMember.EmergencyContact;
+                txtNOKName.Text = (teamMember.EmergencyContact);
 
                 //chkNoGluten.Checked = teamMember.NoGluten;
                 //chkVegetarian.Checked = teamMember.Vegetarian;
@@ -106,24 +112,54 @@ namespace Wildfire_ICS_Assist.CustomControls
             InitializeComponent(); this.BackColor = Program.FormBackground; cboAccomodationPreference.SelectedIndex = 0;
             List<Province> provinces = ProvinceTools.GetProvinces();
             Province other = new Province(); other.ProvinceGUID = Guid.Empty; other.ProvinceName = "Other / NA"; provinces.Add(other);
+            cboKind.DataSource = PersonnelTools.GetPersonnelKinds();
+
             bsProvAndTerr.DataSource = provinces;
             cboProvince.DisplayMember = "ProvinceName";
             cboProvince.ValueMember = "ProvinceGUID";
+            cboProvince.DropDownWidth = cboProvince.GetDropDownWidth();
+            txtFirstName.TextChanged += TxtFirstName_TextChanged;
+            txtLastName.TextChanged += TxtLastName_TextChanged;
+            txtNOKName.TextChanged += TxtNOKName_TextChanged;
+            txtCellphone.TextChanged += TxtCellphone_TextChanged;
+            cboKind.DropDownWidth = cboKind.GetDropDownWidth();
+            cboType.DropDownWidth = cboType.GetDropDownWidth();
+        }
+
+        private void TxtCellphone_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.CellphoneNumber = ((SpellBox)sender).Text;
+        }
+
+        private void TxtNOKName_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.EmergencyContact = ((SpellBox)sender).Text; SetColours();
+        }
+
+        private void TxtLastName_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.LastName = ((SpellBox)sender).Text;
+        }
+
+        private void TxtFirstName_TextChanged(object sender, EventArgs e)
+        {
+            teamMember.FirstName = ((SpellBox)sender).Text;
         }
 
         private void SetColours()
         {
-            if (string.IsNullOrEmpty(txtFirstName.Text.Trim())) { txtFirstName.BackColor = Program.ErrorColor; } else { txtFirstName.BackColor = SystemColors.Window; }
-            if (string.IsNullOrEmpty(txtLastName.Text.Trim())) { txtLastName.BackColor = Program.ErrorColor; } else { txtLastName.BackColor = SystemColors.Window; }
-            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; } else { cboAccomodationPreference.BackColor = SystemColors.Window; }
-            if (string.IsNullOrEmpty(txtCellphone.Text.Trim())) { txtCellphone.BackColor = Program.ErrorColor; } else { txtCellphone.BackColor = SystemColors.Window; }
-            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; } else {  cboAgency.BackColor= SystemColors.Window; }
+            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; errorProvider1.SetError(cboAccomodationPreference, "This field is required"); }
+            else { cboAccomodationPreference.BackColor = Program.GoodColor; errorProvider1.SetError(cboAccomodationPreference, ""); }
+            
+            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; errorProvider1.SetError(cboAgency, "This field is required"); } 
+            else {  cboAgency.BackColor= Program.GoodColor; errorProvider1.SetError(cboAgency, ""); }
         }
 
         public bool FormValid
         {
             get
             {
+                bool IsValid = true;
 
                 if (teamMember == null) { return false; }
                 if (string.IsNullOrEmpty(teamMember.FirstName) || string.IsNullOrEmpty(teamMember.FirstName.Trim())) { return false; }
@@ -131,9 +167,10 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (string.IsNullOrEmpty(teamMember.AccomodationPreference) || string.IsNullOrEmpty(teamMember.AccomodationPreference.Trim())) { return false; }
                 if (string.IsNullOrEmpty(teamMember.CellphoneNumber) || string.IsNullOrEmpty(teamMember.CellphoneNumber.Trim())) { return false; }
                 if (string.IsNullOrEmpty(teamMember.Agency)) { return false; };
+                //if (string.IsNullOrEmpty(teamMember.EmergencyContact)) { return false; };
                 SetColours();
 
-                return true;
+                return IsValid;
             }
         }
 
@@ -201,11 +238,6 @@ namespace Wildfire_ICS_Assist.CustomControls
             teamMember.HomeUnit = cboHomeAgency.Text;
         }
 
-        private void txtNOKName_TextChanged(object sender, EventArgs e)
-        {
-            teamMember.EmergencyContact = ((TextBox)sender).Text; SetColours();
-
-        }
 
        
 
@@ -224,11 +256,6 @@ namespace Wildfire_ICS_Assist.CustomControls
             teamMember.MiddleInitial = ((TextBox)sender).Text;
         }
 
-        private void txtLastName_TextChanged(object sender, EventArgs e)
-        {
-            teamMember.LastName = ((TextBox)sender).Text;
-            SetColours();
-        }
 
         private void chkContractor_CheckedChanged(object sender, EventArgs e)
         {
@@ -299,10 +326,14 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         }
 
-        private void txtCellphone_TextChanged(object sender, EventArgs e)
+        private void txtNOKName_TextChanged_1(object sender, EventArgs e)
         {
-            teamMember.CellphoneNumber = ((TextBox)sender).Text;
-            SetColours();
+            teamMember.EmergencyContact = txtNOKName.Text;
+        }
+
+        private void txtCellphone_TextChanged_1(object sender, EventArgs e)
+        {
+            teamMember.CellphoneNumber = txtCellphone.Text;
         }
     }
 }

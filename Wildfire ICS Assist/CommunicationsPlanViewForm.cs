@@ -12,7 +12,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CommunicationsPlanViewForm : Form
+    public partial class CommunicationsPlanViewForm : BaseForm
     {
         private CommsPlanItem _SelectedItem = null;
         public CommsPlanItem SelectedItem { get => _SelectedItem; set { _SelectedItem = value; loadSelectedCommsPlanItem(); } }
@@ -29,7 +29,7 @@ namespace Wildfire_ICS_Assist
         }
         public CommunicationsPlanViewForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

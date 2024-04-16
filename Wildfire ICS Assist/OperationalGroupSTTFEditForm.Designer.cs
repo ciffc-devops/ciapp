@@ -43,10 +43,10 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtContact = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -115,7 +115,7 @@
             this.cboSupervisor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSupervisor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboSupervisor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboSupervisor.DisplayMember = "Name";
+            this.cboSupervisor.DisplayMember = "NameWithInitialRoleAcronym";
             this.cboSupervisor.FormattingEnabled = true;
             this.cboSupervisor.Location = new System.Drawing.Point(620, 46);
             this.cboSupervisor.Name = "cboSupervisor";
@@ -238,10 +238,21 @@
             this.label6.Text = "Contact:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // strikeTeamTaskForceDetailsControl1
+            // 
+            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
+            this.strikeTeamTaskForceDetailsControl1.ChangesMade = false;
+            this.strikeTeamTaskForceDetailsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(0, 0);
+            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
+            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(1046, 390);
+            this.strikeTeamTaskForceDetailsControl1.TabIndex = 7;
+            // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
             this.btnSave.Location = new System.Drawing.Point(909, 6);
             this.btnSave.Name = "btnSave";
@@ -256,7 +267,6 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
             this.btnCancel.Location = new System.Drawing.Point(6, 6);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
@@ -266,17 +276,6 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // strikeTeamTaskForceDetailsControl1
-            // 
-            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
-            this.strikeTeamTaskForceDetailsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(0, 0);
-            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
-            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(1046, 390);
-            this.strikeTeamTaskForceDetailsControl1.TabIndex = 7;
             // 
             // OperationalGroupSTTFEditForm
             // 

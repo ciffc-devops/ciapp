@@ -79,6 +79,16 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Artboard_1_2x {
+            get {
+                object obj = ResourceManager.GetObject("Artboard 1@2x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Roles cannot be set to report to themselves..
         /// </summary>
         internal static string CantReportToSelf {
@@ -396,6 +406,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_238_chat_message {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-238-chat-message", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_250_eraser {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_250_eraser", resourceCulture);
@@ -526,6 +546,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_39_airplane {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-39-airplane", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_399_import {
             get {
                 object obj = ResourceManager.GetObject("glyphicons-basic-399-import", resourceCulture);
@@ -599,6 +629,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_432_log_out {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_432_log_out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_46_calendar {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-46-calendar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -819,6 +859,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_670_dashboard {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_670_dashboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_730_ambulance {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-730-ambulance", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

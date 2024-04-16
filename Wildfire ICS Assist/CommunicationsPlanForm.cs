@@ -15,14 +15,14 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CommunicationsPlanForm : Form
+    public partial class CommunicationsPlanForm : BaseForm
     {
         private const int RowsPerSheet = 27;
 
         public CommunicationsPlanForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+           
+            InitializeComponent(); 
         }
         private void CommunicationsPlanForm_Load(object sender, EventArgs e)
         {

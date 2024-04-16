@@ -10,7 +10,7 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class IncidentResource
+    public class IncidentResource : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private bool _Active;
@@ -56,6 +56,7 @@ namespace WF_ICS_ClassLibrary.Models
                     case "Equipment": return "E" + UniqueIDNum;
                     case "Crew": return "C" + UniqueIDNum;
                     case "Heavy Equipment Crew": return "C" + UniqueIDNum;
+                    case "Aircraft": return "A" + UniqueIDNum;
                     default: return UniqueIDNum.ToString();
                 }
             }
@@ -84,7 +85,16 @@ namespace WF_ICS_ClassLibrary.Models
             Active = true;
             LastUpdatedUTC = DateTime.UtcNow;
         }
+        public IncidentResource Clone()
+        {
+            IncidentResource cloneTo = this.MemberwiseClone() as IncidentResource;
 
+            return cloneTo;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
     }
 
     public static class IncidentResourceTools

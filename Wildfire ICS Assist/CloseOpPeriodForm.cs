@@ -14,15 +14,16 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CloseOpPeriodForm : Form
+    public partial class CloseOpPeriodForm : BaseForm
     {
         public CloseOpPeriodForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private OperationalPeriod NextOpPeriod { get => Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == NextOp); }
@@ -562,16 +563,7 @@ namespace Wildfire_ICS_Assist
             next.Sunset = current.Sunset;
             next.MedivacAircraftText = current.MedivacAircraftText;
 
-            foreach(Aircraft a in current.aircrafts)
-            {
-                if(!next.aircrafts.Any(o=>o.ID == a.ID))
-                {
-                    Aircraft nextA = a.Clone();
-                    nextA.OpPeriod = NextOp;
-                    Program.wfIncidentService.UpsertAircraft(nextA);
-                    aircraftAdded++;
-                }
-            }
+           
 
             next.notam = current.notam.Clone();
 
@@ -679,6 +671,12 @@ namespace Wildfire_ICS_Assist
                     Program.wfIncidentService.UpsertDemobRecord(demob);
                 }
             }
+
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
 
         }
     }

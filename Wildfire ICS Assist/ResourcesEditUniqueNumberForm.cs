@@ -11,10 +11,11 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class ResourcesEditUniqueNumberForm : Form
+    public partial class ResourcesEditUniqueNumberForm : BaseForm
     {
         private IncidentResource _selectedResource = new IncidentResource();
         public int newNumber { get => Convert.ToInt32(numNewNumber.Value); }
+        public List<int> OtherNumbersToExclude { get; set; } = new List<int>();
         public void SetResource(IncidentResource resource)
         {
             _selectedResource = resource;
@@ -25,7 +26,7 @@ namespace Wildfire_ICS_Assist
 
         public ResourcesEditUniqueNumberForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private void ResourcesEditUniqueNumber_Load(object sender, EventArgs e)
@@ -36,6 +37,7 @@ namespace Wildfire_ICS_Assist
         private void numNewNumber_ValueChanged(object sender, EventArgs e)
         {
             bool isUnique = Program.CurrentIncident.ConfirmResourceNumUnique(_selectedResource.ResourceType, newNumber, _selectedResource.ID);
+            if(OtherNumbersToExclude.Any(o=>o == newNumber)) { isUnique = false; }
             if (isUnique) { lblUniqueCheck.Text = "Number is unique"; lblUniqueCheck.BackColor = Program.GoodColor; btnSave.Enabled = true; }
             else { lblUniqueCheck.Text = "NOT unique"; lblUniqueCheck.BackColor = Program.ErrorColor; btnSave.Enabled = false; }
         }

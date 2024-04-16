@@ -13,13 +13,13 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class OperationalGroupBranchEditForm : Form
+    public partial class OperationalGroupBranchEditForm : BaseForm
     {
         public OperationalGroup SelectedGroup { get => editBranchControl3.SelectedGroup; set { editBranchControl3.SelectedGroup = value; } }
 
         public OperationalGroupBranchEditForm()
         {
-            this.Icon = Program.programIcon; InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
          
            
         }

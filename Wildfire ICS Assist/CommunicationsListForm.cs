@@ -14,12 +14,11 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CommunicationsListForm : Form
+    public partial class CommunicationsListForm : BaseForm
     {
         public CommunicationsListForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void Program_ContactChanged(ContactEventArgs e)

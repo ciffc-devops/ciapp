@@ -12,18 +12,23 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class AirOperationsForm : Form
+    public partial class AirOperationsForm : BaseForm
     {
         private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
         private AirOperationsSummary CurrentAirOpsSummary { get => Program.CurrentIncident.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
+        public NOTAM selectedNOTAM { get => CurrentAirOpsSummary.notam; set { CurrentAirOpsSummary.notam = value; } }
+        private Coordinate[] enteredPolygonCoordinates = new Coordinate[4]; //NW, NE, SE, SW
+        private Coordinate enteredRadiusCoordinate = null;
 
 
         public AirOperationsForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground; dgvAircraft.BackgroundColor = Program.FormAccent;
+            InitializeComponent(); dgvAircraft.BackgroundColor = Program.FormAccent;
         }
 
         private void AirOperationsForm_Load(object sender, EventArgs e)
@@ -37,7 +42,7 @@ namespace Wildfire_ICS_Assist
             PopulateCommsItems();
             LoadPreparedBy();
 
-            SetNOTAMCheckbox();
+            loadNOTAM();
 
             Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
             Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
@@ -47,10 +52,88 @@ namespace Wildfire_ICS_Assist
 
             Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
             Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
-
+            Program.wfIncidentService.MemberSignInChanged += WfIncidentService_MemberSignInChanged;
             Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
 
         }
+
+        private void WfIncidentService_MemberSignInChanged(CheckInEventArgs e)
+        {
+            if (e.signInRecord != null && e.signInRecord.ResourceType != null && e.signInRecord.ResourceType.Equals("Aircraft"))
+            {
+                PopulateAircraft();
+
+            }
+        }
+
+        private void loadNOTAM()
+        {
+            lblNWCoordinateOK.Text = ""; lblNECoordinateOK.Text = ""; lblSECoordinateOK.Text = ""; lblSWCoordinateOK.Text = "";
+            lblCoordinateStatus.Text = "";
+
+            numAltitude.Value = selectedNOTAM.AltitudeASL;
+            txtCenterPoint.Text = selectedNOTAM.CenterPoint;
+
+            if (selectedNOTAM.UseRadius)
+            {
+                rbRadius.Checked = true;
+                numRadius.Value = selectedNOTAM.RadiusNM;
+                if (selectedNOTAM.RadiusCentre != null)
+                {
+                    rbRadius.Checked = true;
+                    Coordinate coord = selectedNOTAM.RadiusCentre;
+
+                    if (coord.Latitude != 0 || coord.Longitude != 0)
+                    {
+                        txtRadiusCoordinates.Text = coord.CoordinateOutput("Degrees Decimal Minutes");
+                        lblCoordinateStatus.Text = "Coordinate OK";
+                        lblCoordinateStatus.ForeColor = label1.ForeColor;
+                        enteredRadiusCoordinate = coord;
+                    }
+                    else { txtRadiusCoordinates.Text = string.Empty; lblCoordinateStatus.Text = ""; }
+                }
+                else { txtRadiusCoordinates.Text = string.Empty; lblCoordinateStatus.Text = ""; }
+            }
+            else
+            {
+                rbPoygon.Checked = true;
+
+                if (selectedNOTAM.PolygonNW != null)
+                {
+                    txtPolygonNW.Text = selectedNOTAM.PolygonNW.CoordinateOutput("Degrees Decimal Minutes");
+                    lblNWCoordinateOK.Text = "Coordinate OK";
+                    lblNWCoordinateOK.ForeColor = label1.ForeColor;
+                }
+                else { txtPolygonNW.Text = string.Empty; lblNWCoordinateOK.Text = ""; }
+
+                if (selectedNOTAM.PolygonNE != null)
+                {
+                    txtPolygonNE.Text = selectedNOTAM.PolygonNE.CoordinateOutput("Degrees Decimal Minutes");
+                    lblNECoordinateOK.Text = "Coordinate OK";
+                    lblNECoordinateOK.ForeColor = label1.ForeColor;
+                }
+                else { txtPolygonNE.Text = string.Empty; lblNECoordinateOK.Text = ""; }
+
+                if (selectedNOTAM.PolygonSE != null)
+                {
+                    txtPolygonSE.Text = selectedNOTAM.PolygonSE.CoordinateOutput("Degrees Decimal Minutes");
+                    lblSECoordinateOK.Text = "Coordinate OK";
+                    lblSECoordinateOK.ForeColor = label1.ForeColor;
+                }
+                else { txtPolygonSE.Text = string.Empty; lblSECoordinateOK.Text = ""; }
+
+                if (selectedNOTAM.PolygonSW != null)
+                {
+                    txtPolygonSW.Text = selectedNOTAM.PolygonSW.CoordinateOutput("Degrees Decimal Minutes");
+                    lblSWCoordinateOK.Text = "Coordinate OK";
+                    lblSWCoordinateOK.ForeColor = label1.ForeColor;
+                }
+                else { txtPolygonSW.Text = string.Empty; lblSWCoordinateOK.Text = ""; }
+
+            }
+
+        }
+
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
             Program.CurrentIncident.createAirOpsSummaryAsNeeded(Program.CurrentOpPeriod);
@@ -59,8 +142,7 @@ namespace Wildfire_ICS_Assist
             PopulateTree();
             PopulateCommsItems();
             LoadPreparedBy();
-
-            SetNOTAMCheckbox();
+            loadNOTAM();
         }
 
         private void LoadPreparedBy()
@@ -84,11 +166,11 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        private void Program_AirOpsSummaryChanged (AirOperationsSummaryEventArgs e)
+        private void Program_AirOpsSummaryChanged(AirOperationsSummaryEventArgs e)
         {
-            if(e.item.OpPeriod == Program.CurrentOpPeriod)
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
-                SetNOTAMCheckbox();
+                loadNOTAM();
                 LoadMainData();
                 LoadPreparedBy();
             }
@@ -115,14 +197,15 @@ namespace Wildfire_ICS_Assist
 
         private void Program_AircraftChanged(AircraftEventArgs e)
         {
-            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateAircraft(); }
+            PopulateAircraft();
         }
+
 
         private void PopulateAircraft()
         {
             dgvAircraft.DataSource = null;
             dgvAircraft.AutoGenerateColumns = false;
-            dgvAircraft.DataSource = CurrentAirOpsSummary.activeAircraft;
+            dgvAircraft.DataSource = Program.CurrentIncident.GetActiveAircraft(Program.CurrentOpPeriodDetails.PeriodMid);
         }
 
         private void PopulateCommsItems()
@@ -383,38 +466,33 @@ namespace Wildfire_ICS_Assist
         }
 
 
-        private void SetNOTAMCheckbox()
-        {
-            if (CurrentAirOpsSummary.notam.AnyContent) { btnNOTAM.Image = Properties.Resources.glyphicons_basic_739_check; }
-            else { btnNOTAM.Image = null; }
 
-        }
-
-        private void btnAddAircraft_Click(object sender, EventArgs e)
-        {
-            using (AircraftEntryForm entryForm = new AircraftEntryForm())
-            {
-                Aircraft a = new Aircraft();
-                a.OpPeriod = Program.CurrentOpPeriod;
-                entryForm.selectedAircraft = a;
-                DialogResult dr = entryForm.ShowDialog();
-                if (dr == DialogResult.OK)
+        /*
+                private void btnAddAircraft_Click(object sender, EventArgs e)
                 {
-                    Program.wfIncidentService.UpsertAircraft(entryForm.selectedAircraft);
-                    if (entryForm.SaveForLater)
+                    using (AircraftEntryForm entryForm = new AircraftEntryForm())
                     {
-                        Aircraft save = entryForm.selectedAircraft.Clone();
-                        save.Pilot = string.Empty;
-                        save.StartTime = DateTime.MinValue;
-                        save.EndTime = DateTime.MinValue;
-                        save.IsMedivac = false;
-                        Program.generalOptionsService.UpserOptionValue(save, "Aircraft");
+                        Aircraft a = new Aircraft();
+                        a.OpPeriod = Program.CurrentOpPeriod;
+                        entryForm.selectedAircraft = a;
+                        DialogResult dr = entryForm.ShowDialog();
+                        if (dr == DialogResult.OK)
+                        {
+                            Program.wfIncidentService.UpsertAircraft(entryForm.selectedAircraft);
+                            if (entryForm.SaveForLater)
+                            {
+                                Aircraft save = entryForm.selectedAircraft.Clone();
+                                save.Pilot = string.Empty;
+                                save.StartTime = DateTime.MinValue;
+                                save.EndTime = DateTime.MinValue;
+                                save.IsMedivac = false;
+                                Program.generalOptionsService.UpserOptionValue(save, "Aircraft");
 
+                            }
+                        }
                     }
-                }
-            }
-        }
-
+                }*/
+        /*
         private void OpenAircraftForEdit(Aircraft aircraft)
         {
             using (AircraftEditForm editForm = new AircraftEditForm())
@@ -435,36 +513,40 @@ namespace Wildfire_ICS_Assist
                 if (a != null) { OpenAircraftForEdit(a); }
             }
         }
-
+        */
         private void dgvAircraft_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
-            {
-                Aircraft a = dgvAircraft.Rows[e.RowIndex].DataBoundItem as Aircraft;
-                if(a != null) { OpenAircraftForEdit(a); }
-            }
+            /*  if(e.RowIndex >= 0)
+              {
+                  Aircraft a = dgvAircraft.Rows[e.RowIndex].DataBoundItem as Aircraft;
+                  if(a != null) { OpenAircraftForEdit(a); }
+              }*/
         }
 
         private void dgvAircraft_SelectionChanged(object sender, EventArgs e)
         {
-            btnEditAircraft.Enabled = dgvAircraft.SelectedRows.Count == 1;
-            btnDeleteAircraft.Enabled = dgvAircraft.SelectedRows.Count > 0;
+            //btnEditAircraft.Enabled = dgvAircraft.SelectedRows.Count == 1;
+            //btnDeleteAircraft.Enabled = dgvAircraft.SelectedRows.Count > 0;
+            btnToggleMedicvac.Enabled = dgvAircraft.SelectedRows.Count > 0;
+            btnSetStartEndTimes.Enabled = dgvAircraft.SelectedRows.Count > 0;
+            btnRemarks.Enabled = dgvAircraft.SelectedRows.Count > 0;
+
         }
 
         private void btnDeleteAircraft_Click(object sender, EventArgs e)
         {
-            if(dgvAircraft.SelectedRows.Count > 0)
+            if (dgvAircraft.SelectedRows.Count > 0)
             {
                 DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(dr == DialogResult.Yes)
+                if (dr == DialogResult.Yes)
                 {
                     List<Aircraft> toDelete = new List<Aircraft>();
-                    foreach(DataGridViewRow row in dgvAircraft.SelectedRows)
+                    foreach (DataGridViewRow row in dgvAircraft.SelectedRows)
                     {
                         Aircraft a = (Aircraft)row.DataBoundItem;
-                        if(a != null) { toDelete.Add(a); }
+                        if (a != null) { toDelete.Add(a); }
                     }
-                    foreach(Aircraft a in toDelete)
+                    foreach (Aircraft a in toDelete)
                     {
                         a.Active = false;
                         Program.wfIncidentService.UpsertAircraft(a);
@@ -475,7 +557,7 @@ namespace Wildfire_ICS_Assist
 
         private void txtMedivacText_TextChanged(object sender, EventArgs e)
         {
-            CurrentAirOpsSummary.MedivacAircraftText= txtMedivacText.Text;
+            CurrentAirOpsSummary.MedivacAircraftText = txtMedivacText.Text;
         }
 
         private void cboPreparedBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -485,12 +567,12 @@ namespace Wildfire_ICS_Assist
 
         private void cboPreparedBy_Leave(object sender, EventArgs e)
         {
-            if(cboPreparedBy.SelectedItem != null)
+            if (cboPreparedBy.SelectedItem != null)
             {
                 ICSRole role = (ICSRole)cboPreparedBy.SelectedItem;
                 CurrentAirOpsSummary.PreparedByName = role.IndividualName;
                 CurrentAirOpsSummary.PreparedByPosition = role.RoleName;
-                CurrentAirOpsSummary.PreparedByPositionID= role.RoleID;
+                CurrentAirOpsSummary.PreparedByPositionID = role.RoleID;
             }
         }
 
@@ -518,7 +600,6 @@ namespace Wildfire_ICS_Assist
                         }
                     }
                     Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
-                    SetNOTAMCheckbox();
                 }
             }
         }
@@ -532,22 +613,24 @@ namespace Wildfire_ICS_Assist
 
         private void datSunrise_ValueChanged(object sender, EventArgs e)
         {
-            CurrentAirOpsSummary.Sunrise= datSunrise.Value;
+            CurrentAirOpsSummary.Sunrise = datSunrise.Value;
         }
 
         private void datSunset_ValueChanged(object sender, EventArgs e)
         {
-            CurrentAirOpsSummary.Sunset= datSunset.Value;
+            CurrentAirOpsSummary.Sunset = datSunset.Value;
         }
 
         private void AirOperationsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SaveNOTAM();
             Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
 
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            SaveNOTAM();
             //catch any changes that have been made and make sure they're saved.
             Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
 
@@ -563,7 +646,350 @@ namespace Wildfire_ICS_Assist
                 MessageBox.Show("Sorry, there was an error generating the contact list.");
             }
 
-            
+
+        }
+
+        private void SaveNOTAM()
+        {
+            if (!coordinatesAreGoodOrBlank)
+            {
+                MessageBox.Show(Properties.Resources.ValidCoordinatesRequired);
+            }
+            else
+            {
+                selectedNOTAM.UseRadius = rbRadius.Checked;
+                if (selectedNOTAM.UseRadius)
+                {
+                    selectedNOTAM.RadiusNM = numRadius.Value;
+                    selectedNOTAM.RadiusCentre = enteredRadiusCoordinate;
+                    selectedNOTAM.PolygonNW = null;
+                    selectedNOTAM.PolygonNE = null;
+                    selectedNOTAM.PolygonSE = null;
+                    selectedNOTAM.PolygonSW = null;
+
+                }
+                else
+                {
+                    selectedNOTAM.RadiusNM = 0;
+                    selectedNOTAM.RadiusCentre = null;
+                    if (enteredPolygonCoordinates[0] != null) { selectedNOTAM.PolygonNW = enteredPolygonCoordinates[0]; }
+                    if (enteredPolygonCoordinates[1] != null) { selectedNOTAM.PolygonNE = enteredPolygonCoordinates[1]; }
+                    if (enteredPolygonCoordinates[2] != null) { selectedNOTAM.PolygonSE = enteredPolygonCoordinates[2]; }
+                    if (enteredPolygonCoordinates[3] != null) { selectedNOTAM.PolygonSW = enteredPolygonCoordinates[3]; }
+                }
+
+
+                if (CurrentAirOpsSummary.notam.UseRadius && CurrentAirOpsSummary.notam.RadiusCentre != null) { SetSunTimesByCoordinate(CurrentAirOpsSummary.notam.RadiusCentre); }
+                else if (!CurrentAirOpsSummary.notam.UseRadius && CurrentAirOpsSummary.notam.AnyCoordinates)
+                {
+                    List<Coordinate> coordinates = new List<Coordinate>();
+                    if (CurrentAirOpsSummary.notam.PolygonNW != null) { coordinates.Add(CurrentAirOpsSummary.notam.PolygonNW); }
+                    if (CurrentAirOpsSummary.notam.PolygonNE != null) { coordinates.Add(CurrentAirOpsSummary.notam.PolygonNE); }
+                    if (CurrentAirOpsSummary.notam.PolygonSW != null) { coordinates.Add(CurrentAirOpsSummary.notam.PolygonSW); }
+                    if (CurrentAirOpsSummary.notam.PolygonSE != null) { coordinates.Add(CurrentAirOpsSummary.notam.PolygonSE); }
+                    if (coordinates.Any())
+                    {
+                        Coordinate centre = GISTools.FindCentroid(coordinates);
+                        if (centre != null) { SetSunTimesByCoordinate(centre); }
+                    }
+                }
+            }
+        }
+
+        private void dgvAircraft_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvAircraft.Rows[e.RowIndex].DataBoundItem != null)
+            {
+                Aircraft a = (Aircraft)dgvAircraft.Rows[e.RowIndex].DataBoundItem;
+                Program.wfIncidentService.UpsertAircraft(a);
+            }
+        }
+
+
+
+        private void txtCoordinates_Leave(object sender, EventArgs e)
+        {
+            Coordinate temp = CheckCoordinates(txtRadiusCoordinates, lblCoordinateStatus);
+            if (temp != null)
+            {
+                enteredRadiusCoordinate = temp;
+            }
+            else { enteredRadiusCoordinate = null; }
+        }
+
+        private Coordinate CheckCoordinates(TextBox txtCoordinates, Label lblResultMessage)
+        {
+            Coordinate temp = new Coordinate();
+            if (!string.IsNullOrEmpty(txtCoordinates.Text))
+            {
+                if (temp.TryParseCoordinate(txtCoordinates.Text, out temp))
+                {
+                    lblResultMessage.Text = "Coordinate OK";
+                    lblResultMessage.ForeColor = label1.ForeColor;
+                    txtCoordinates.BackColor = SystemColors.Window;
+                }
+                else
+                {
+                    lblResultMessage.Text = "Coordinate Error!";
+                    lblResultMessage.ForeColor = Color.Red;
+                    txtCoordinates.BackColor = Program.ErrorColor;
+                }
+            }
+            else
+            {
+                lblResultMessage.Text = "";
+                lblResultMessage.ForeColor = Color.Red;
+                txtCoordinates.BackColor = txtCenterPoint.BackColor;
+            }
+            return temp;
+        }
+
+        private bool coordinatesAreGoodOrBlank
+        {
+            get
+            {
+                if (rbRadius.Checked)
+                {
+                    if (string.IsNullOrEmpty(txtRadiusCoordinates.Text)) { return true; }
+                    Coordinate temp = new Coordinate();
+                    return temp.TryParseCoordinate(txtRadiusCoordinates.Text, out temp);
+                }
+                else
+                {
+                    Coordinate temp = new Coordinate();
+                    if (!string.IsNullOrEmpty(txtPolygonNW.Text) && !temp.TryParseCoordinate(txtPolygonNW.Text, out temp)) { return false; }
+                    if (!string.IsNullOrEmpty(txtPolygonNE.Text) && !temp.TryParseCoordinate(txtPolygonNE.Text, out temp)) { return false; }
+                    if (!string.IsNullOrEmpty(txtPolygonSE.Text) && !temp.TryParseCoordinate(txtPolygonSE.Text, out temp)) { return false; }
+                    if (!string.IsNullOrEmpty(txtPolygonSW.Text) && !temp.TryParseCoordinate(txtPolygonSW.Text, out temp)) { return false; }
+
+                    return true;
+                }
+            }
+        }
+
+        private void txtCenterPoint_TextChanged(object sender, EventArgs e)
+        {
+            selectedNOTAM.CenterPoint = txtCenterPoint.Text;
+
+        }
+
+        private void numAltitude_ValueChanged(object sender, EventArgs e)
+        {
+            selectedNOTAM.AltitudeASL = numAltitude.Value;
+
+        }
+
+        private void numRadius_ValueChanged(object sender, EventArgs e)
+        {
+            selectedNOTAM.RadiusNM = numRadius.Value;
+
+        }
+
+        private void rbRadius_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbRadius.Checked)
+            {
+                pnlRadius.BackColor = Color.White;
+                rbPoygon.Checked = false;
+            }
+            else
+            {
+                pnlRadius.BackColor = Program.FormAccent;
+
+
+            }
+
+        }
+
+        private void rbPoygon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbPoygon.Checked)
+            {
+                pnlPolygon.BackColor = Color.White;
+                rbRadius.Checked = false;
+            }
+            else
+            {
+                pnlPolygon.BackColor = Program.FormAccent;
+
+
+            }
+        }
+
+        private void pnlRadius_Enter(object sender, EventArgs e)
+        {
+            rbRadius.Checked = true;
+
+        }
+
+        private void pnlPolygon_Enter(object sender, EventArgs e)
+        {
+            rbPoygon.Checked = true;
+
+        }
+
+        //NW, NE, SE, SW
+
+        private void txtPolygonNW_Leave(object sender, EventArgs e)
+        {
+            Coordinate temp = CheckCoordinates((TextBox)sender, lblNWCoordinateOK);
+            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
+            {
+                enteredPolygonCoordinates[0] = temp;
+            }
+            else { enteredPolygonCoordinates[0] = null; }
+        }
+
+        private void txtPolygonNE_Leave(object sender, EventArgs e)
+        {
+            Coordinate temp = CheckCoordinates((TextBox)sender, lblNECoordinateOK);
+            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
+            {
+                enteredPolygonCoordinates[1] = temp;
+            }
+            else { enteredPolygonCoordinates[1] = null; }
+        }
+
+        private void txtPolygonSW_Leave(object sender, EventArgs e)
+        {
+            Coordinate temp = CheckCoordinates((TextBox)sender, lblSWCoordinateOK);
+            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
+            {
+                enteredPolygonCoordinates[3] = temp;
+            }
+            else { enteredPolygonCoordinates[3] = null; }
+        }
+
+        private void txtPolygonSE_Leave(object sender, EventArgs e)
+        {
+            Coordinate temp = CheckCoordinates((TextBox)sender, lblSECoordinateOK);
+            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
+            {
+                enteredPolygonCoordinates[2] = temp;
+            }
+            else { enteredPolygonCoordinates[2] = null; }
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
+        }
+
+        private void btnSetStartEndTimes_Click(object sender, EventArgs e)
+        {
+            if (dgvAircraft.SelectedRows.Count > 0)
+            {
+                using (SelectTimeRangeForm selectForm = new SelectTimeRangeForm())
+                {
+                    List<Aircraft> aircraft = new List<Aircraft>();
+
+                    foreach (DataGridViewRow row in dgvAircraft.SelectedRows)
+                    {
+                        if (row.DataBoundItem != null)
+                        {
+                            aircraft.Add((Aircraft)row.DataBoundItem);
+                        }
+                    }
+                    if (aircraft.Any())
+                    {
+                        selectForm.StartTime = aircraft.OrderBy(o => o.StartTime).First().StartTime;
+                        selectForm.EndTime = aircraft.OrderByDescending(o => o.EndTime).First().EndTime;
+
+
+                        if (selectForm.ShowDialog() == DialogResult.OK)
+                        {
+
+
+                            foreach (Aircraft a in aircraft)
+                            {
+                                a.StartTime = selectForm.StartTime;
+                                a.EndTime = selectForm.EndTime;
+                                Program.wfIncidentService.UpsertAircraft(a);
+                            }
+                        }
+                    }
+                }
+
+
+
+            }
+        }
+
+        private void btnToggleMedicvac_Click(object sender, EventArgs e)
+        {
+            if (dgvAircraft.SelectedRows.Count > 0)
+            {
+                using (SelectBooleanForm selectForm = new SelectBooleanForm())
+                {
+                    List<Aircraft> aircraft = new List<Aircraft>();
+
+                    foreach (DataGridViewRow row in dgvAircraft.SelectedRows)
+                    {
+                        if (row.DataBoundItem != null)
+                        {
+                            aircraft.Add((Aircraft)row.DataBoundItem);
+                        }
+                    }
+
+                    if (aircraft.Any())
+                    {
+                        selectForm.Question = "Are the selected aircraft used for medivac?";
+                        selectForm.Response = aircraft.First().IsMedivac;
+                        if (selectForm.ShowDialog() == DialogResult.OK)
+                        {
+
+
+                            foreach (Aircraft a in aircraft)
+                            {
+                                a.IsMedivac = selectForm.Response;
+                                Program.wfIncidentService.UpsertAircraft(a);
+                            }
+                        }
+                    }
+                }
+
+
+
+            }
+        }
+
+        private void btnRemarks_Click(object sender, EventArgs e)
+        {
+            if (dgvAircraft.SelectedRows.Count > 0)
+            {
+                using (EnterTextForm selectForm = new EnterTextForm())
+                {
+                    List<Aircraft> aircraft = new List<Aircraft>();
+
+                    foreach (DataGridViewRow row in dgvAircraft.SelectedRows)
+                    {
+                        if (row.DataBoundItem != null)
+                        {
+                            aircraft.Add((Aircraft)row.DataBoundItem);
+                        }
+                    }
+
+                    if (aircraft.Any())
+                    {
+                        selectForm.Question = "Aircraft remarks";
+                        selectForm.Response = aircraft.First().Remarks;
+                        if (selectForm.ShowDialog() == DialogResult.OK)
+                        {
+
+
+                            foreach (Aircraft a in aircraft)
+                            {
+                                a.Remarks = selectForm.Response;
+                                Program.wfIncidentService.UpsertAircraft(a);
+                            }
+                        }
+                    }
+                }
+
+
+
+            }
         }
     }
 }
+

@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PositionLogAddForm : Form
+    public partial class PositionLogAddForm : BaseForm
     {
         private PositionLogEntry _thisEntry;
         public PositionLogEntry thisEntry { get => _thisEntry; set { _thisEntry = value; loadEntry(); } }
@@ -21,8 +21,7 @@ namespace Wildfire_ICS_Assist
 
         public PositionLogAddForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
-            this.Icon = Program.programIcon;
+            InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
 
         }
@@ -37,7 +36,7 @@ namespace Wildfire_ICS_Assist
             rbInfoOnly.Checked = thisEntry.IsInfoOnly;
             rbTrackProgress.Checked = !thisEntry.IsInfoOnly;
             datDateCreated.Value = thisEntry.DateCreated;
-            txtEntryText.Text = thisEntry.LogText;
+            txtEntryText.SetText(thisEntry.LogText);
             datDueDate.Value = thisEntry.TimeDue;
             chkComplete.Checked = thisEntry.IsComplete;
             chkReminder.Checked = thisEntry.ReminderTime != DateTime.MinValue;
@@ -105,11 +104,14 @@ namespace Wildfire_ICS_Assist
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            thisEntry.UpdateLogText(txtEntryText.Text, currentUser);
-            if (chkReminder.Checked) { thisEntry.ReminderTime = datReminderTime.Value; }
-            else { thisEntry.ReminderTime = DateTime.MinValue; }
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if (txtEntryText.IsValid)
+            {
+                thisEntry.UpdateLogText(txtEntryText.Text, currentUser);
+                if (chkReminder.Checked) { thisEntry.ReminderTime = datReminderTime.Value; }
+                else { thisEntry.ReminderTime = DateTime.MinValue; }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void txtEntryText_TextChanged(object sender, EventArgs e)
