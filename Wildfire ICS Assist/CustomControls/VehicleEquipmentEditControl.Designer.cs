@@ -129,7 +129,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSerialNumber.Location = new System.Drawing.Point(159, 2);
             this.txtSerialNumber.Name = "txtSerialNumber";
-            this.txtSerialNumber.Size = new System.Drawing.Size(209, 29);
+            this.txtSerialNumber.Size = new System.Drawing.Size(194, 29);
             this.txtSerialNumber.TabIndex = 3;
             this.txtSerialNumber.TextChanged += new System.EventHandler(this.txtSerialNumber_TextChanged);
             this.txtSerialNumber.Child = new System.Windows.Controls.TextBox();
@@ -140,7 +140,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUnitNumber.Location = new System.Drawing.Point(187, 2);
             this.txtUnitNumber.Name = "txtUnitNumber";
-            this.txtUnitNumber.Size = new System.Drawing.Size(285, 29);
+            this.txtUnitNumber.Size = new System.Drawing.Size(268, 29);
             this.txtUnitNumber.TabIndex = 2;
             this.txtUnitNumber.TextChanged += new System.EventHandler(this.txtUnitNumber_TextChanged);
             this.txtUnitNumber.Child = new System.Windows.Controls.TextBox();
@@ -155,7 +155,7 @@
             this.txtIncidentIDNo.Margin = new System.Windows.Forms.Padding(6);
             this.txtIncidentIDNo.Multiline = true;
             this.txtIncidentIDNo.Name = "txtIncidentIDNo";
-            this.txtIncidentIDNo.Size = new System.Drawing.Size(674, 29);
+            this.txtIncidentIDNo.Size = new System.Drawing.Size(642, 29);
             this.txtIncidentIDNo.TabIndex = 1;
             this.txtIncidentIDNo.TextChanged += new System.EventHandler(this.txtIncidentIDNo_TextChanged);
             // 
@@ -176,8 +176,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label11);
             this.splitContainer1.Panel2.Controls.Add(this.txtSerialNumber);
-            this.splitContainer1.Size = new System.Drawing.Size(864, 35);
-            this.splitContainer1.SplitterDistance = 472;
+            this.splitContainer1.Size = new System.Drawing.Size(832, 35);
+            this.splitContainer1.SplitterDistance = 455;
             this.splitContainer1.TabIndex = 2;
             // 
             // label10
@@ -215,8 +215,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.cboType);
             this.splitContainer2.Panel2.Controls.Add(this.label15);
-            this.splitContainer2.Size = new System.Drawing.Size(864, 35);
-            this.splitContainer2.SplitterDistance = 472;
+            this.splitContainer2.Size = new System.Drawing.Size(832, 35);
+            this.splitContainer2.SplitterDistance = 455;
             this.splitContainer2.TabIndex = 5;
             // 
             // txtKind
@@ -225,7 +225,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtKind.Location = new System.Drawing.Point(187, 4);
             this.txtKind.Name = "txtKind";
-            this.txtKind.Size = new System.Drawing.Size(285, 29);
+            this.txtKind.Size = new System.Drawing.Size(268, 29);
             this.txtKind.TabIndex = 5;
             this.txtKind.TextChanged += new System.EventHandler(this.txtKind_TextChanged);
             this.txtKind.Child = new System.Windows.Controls.TextBox();
@@ -247,7 +247,7 @@
             "Type 7"});
             this.cboType.Location = new System.Drawing.Point(159, 2);
             this.cboType.Name = "cboType";
-            this.cboType.Size = new System.Drawing.Size(209, 32);
+            this.cboType.Size = new System.Drawing.Size(194, 32);
             this.cboType.TabIndex = 6;
             this.cboType.SelectedIndexChanged += new System.EventHandler(this.cboType_SelectedIndexChanged);
             // 
@@ -257,7 +257,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLicenseOrID.Location = new System.Drawing.Point(187, 85);
             this.txtLicenseOrID.Name = "txtLicenseOrID";
-            this.txtLicenseOrID.Size = new System.Drawing.Size(657, 29);
+            this.txtLicenseOrID.Size = new System.Drawing.Size(625, 29);
             this.txtLicenseOrID.TabIndex = 4;
             this.txtLicenseOrID.TextChanged += new System.EventHandler(this.txtLicenseOrID_TextChanged);
             this.txtLicenseOrID.Child = new System.Windows.Controls.TextBox();
@@ -268,7 +268,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFeatures.Location = new System.Drawing.Point(187, 159);
             this.txtFeatures.Name = "txtFeatures";
-            this.txtFeatures.Size = new System.Drawing.Size(657, 29);
+            this.txtFeatures.Size = new System.Drawing.Size(625, 29);
             this.txtFeatures.TabIndex = 7;
             this.txtFeatures.TextChanged += new System.EventHandler(this.txtFeatures_TextChanged);
             this.txtFeatures.Child = new System.Windows.Controls.TextBox();
@@ -279,7 +279,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOrderRequestNo.Location = new System.Drawing.Point(187, 194);
             this.txtOrderRequestNo.Name = "txtOrderRequestNo";
-            this.txtOrderRequestNo.Size = new System.Drawing.Size(657, 29);
+            this.txtOrderRequestNo.Size = new System.Drawing.Size(625, 29);
             this.txtOrderRequestNo.TabIndex = 8;
             this.txtOrderRequestNo.TextChanged += new System.EventHandler(this.txtOrderRequestNo_TextChanged);
             this.txtOrderRequestNo.Child = new System.Windows.Controls.TextBox();
@@ -292,7 +292,7 @@
             this.txtNotes.Location = new System.Drawing.Point(187, 269);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(657, 83);
+            this.txtNotes.Size = new System.Drawing.Size(625, 83);
             this.txtNotes.TabIndex = 10;
             this.txtNotes.Text = "`";
             this.txtNotes.WordWrap = true;
@@ -309,7 +309,7 @@
             this.cboOperator.FormattingEnabled = true;
             this.cboOperator.Location = new System.Drawing.Point(187, 231);
             this.cboOperator.Name = "cboOperator";
-            this.cboOperator.Size = new System.Drawing.Size(657, 32);
+            this.cboOperator.Size = new System.Drawing.Size(625, 32);
             this.cboOperator.TabIndex = 9;
             this.cboOperator.ValueMember = "ID";
             this.cboOperator.Leave += new System.EventHandler(this.cboOperator_Leave);
@@ -344,7 +344,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "VehicleEquipmentEditControl";
-            this.Size = new System.Drawing.Size(864, 355);
+            this.Size = new System.Drawing.Size(832, 355);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
