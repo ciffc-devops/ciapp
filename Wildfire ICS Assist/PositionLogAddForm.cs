@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PositionLogAddForm : Form
+    public partial class PositionLogAddForm : BaseForm
     {
         private PositionLogEntry _thisEntry;
         public PositionLogEntry thisEntry { get => _thisEntry; set { _thisEntry = value; loadEntry(); } }
@@ -21,8 +21,7 @@ namespace Wildfire_ICS_Assist
 
         public PositionLogAddForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
-            this.Icon = Program.programIcon;
+            InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
 
         }

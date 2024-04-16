@@ -14,7 +14,7 @@ using Wildfire_ICS_Assist.CustomControls;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class ResourceReplacementEditForm : Form
+    public partial class ResourceReplacementEditForm : BaseForm
     {
         private ResourceReplacementPlan _plan = new ResourceReplacementPlan();
 
@@ -23,8 +23,7 @@ namespace Wildfire_ICS_Assist
         public ResourceReplacementEditForm()
         {
             InitializeComponent(); 
-            this.Icon = Program.programIcon;
-            this.BackColor = Program.FormBackground;
+           
             datArrival.Format = DateTimePickerFormat.Custom;
             datArrival.CustomFormat = Program.DateFormat + " HH:mm";
 

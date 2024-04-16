@@ -15,15 +15,14 @@ using Wildfire_ICS_Assist.Properties;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class OperationalGroupSTTFEditForm : Form
+    public partial class OperationalGroupSTTFEditForm : BaseForm
     {
         private OperationalGroup _SelectedGroup = new OperationalGroup();
         public OperationalGroup SelectedGroup { get => _SelectedGroup; set { _SelectedGroup = value; } }
 
         public OperationalGroupSTTFEditForm()
         {
-            this.Icon = Program.programIcon; InitializeComponent(); this.BackColor = Program.FormBackground;
-            
+            InitializeComponent();
         }
 
         private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)

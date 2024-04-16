@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.CustomControls;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CheckInEditCrewForm : Form
+    public partial class CheckInEditCrewForm : BaseForm
     {
        public  OperationalSubGroup selectedCrew
         {

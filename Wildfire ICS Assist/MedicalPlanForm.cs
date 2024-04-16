@@ -16,7 +16,7 @@ using Wildfire_ICS_Assist.OptionsForms;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class MedicalPlanForm : Form
+    public partial class MedicalPlanForm : BaseForm
     {
         private MedicalPlan CurrentPlan
         {
@@ -30,8 +30,8 @@ namespace Wildfire_ICS_Assist
 
         public MedicalPlanForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); 
             dgvAidStations.BackgroundColor = Program.FormAccent;
             dgvTransport.BackgroundColor = Program.FormAccent;
             dgvHospitals.BackgroundColor = Program.FormAccent;

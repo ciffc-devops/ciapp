@@ -11,7 +11,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CheckInInfoEditForm : Form
+    public partial class CheckInInfoEditForm : BaseForm
     {
         public CheckInRecord SelectedRecord { get => resourceCheckInEditControl1.checkInRecord; }
 
@@ -19,8 +19,7 @@ namespace Wildfire_ICS_Assist
         public CheckInInfoEditForm()
         {
             InitializeComponent();
-            this.Icon = Program.programIcon;
-            this.BackColor = Program.FormBackground;
+           
         }
         public bool AssignIfPossible { get => resourceCheckInEditControl1.AssignIfPossible; }
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -58,6 +57,10 @@ namespace Wildfire_ICS_Assist
             {
                 resourceCheckInEditControl1.SetResource(rec.Resource as OperationalSubGroup);
 
+            }
+            else if (rec.Record.IsAircraft)
+            {
+                resourceCheckInEditControl1.SetResource(rec.Resource as Aircraft);
             }
             resourceCheckInEditControl1.LoadPage();
         }

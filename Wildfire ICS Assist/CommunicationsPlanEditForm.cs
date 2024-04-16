@@ -12,14 +12,14 @@ using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CommunicationsPlanEditForm : Form
+    public partial class CommunicationsPlanEditForm : BaseForm
     {
         public CommsPlanItem SelectedItem { get => editCommsChannelControl1.selectedItem; set { editCommsChannelControl1.selectedItem = value; loadSelectedCommsPlanItem(); } }
 
 
         public CommunicationsPlanEditForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private void loadSelectedCommsPlanItem()

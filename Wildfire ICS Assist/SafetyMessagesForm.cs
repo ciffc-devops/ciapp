@@ -14,11 +14,11 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class SafetyMessagesForm : Form
+    public partial class SafetyMessagesForm : BaseForm
     {
         public SafetyMessagesForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
         }
 
         private void SafetyMessagesForm_Load(object sender, EventArgs e)

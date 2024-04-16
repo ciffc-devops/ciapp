@@ -15,7 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class OrganizationChartAddRoleForm : Form
+    public partial class OrganizationChartAddRoleForm : BaseForm
     {
         private ICSRole _selectedRole = null;
         public ICSRole selectedRole { get => _selectedRole; set { _selectedRole = value;  } }
@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
 
         public OrganizationChartAddRoleForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
 
 
         }

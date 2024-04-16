@@ -41,7 +41,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             if (_selectedPerson != null)
             {
                 txtFirstName.Text = selectedPerson.FirstName;
-                txtLastName.Text = selectedPerson.LastName;
+                txtLastName.SetText(selectedPerson.LastName);
                 if (!string.IsNullOrEmpty(selectedPerson.Agency)) { cboAgency.Text = selectedPerson.Agency; }
                 //txtDietary.Text = teamMember.Dietary;
                 chkDietary.Checked = selectedPerson.HasDietaryRestrictions;
@@ -58,7 +58,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (selectedPerson == null) { return false; }
                 if (string.IsNullOrEmpty(selectedPerson.LastName) || string.IsNullOrEmpty(selectedPerson.LastName.Trim()))
                 {
-                    txtLastName.BackColor = Program.ErrorColor;
+                    
                     return false;
 
                 }
@@ -75,23 +75,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         }
 
-        private void txtFirstName_TextChanged(object sender, EventArgs e)
-        {
-            selectedPerson.FirstName = ((TextBox)sender).Text;
-
-        }
-
-        private void txtLastName_TextChanged(object sender, EventArgs e)
-        {
-            selectedPerson.LastName = ((TextBox)sender).Text;
-            if (string.IsNullOrEmpty(((TextBox)sender).Text))
-            {
-                ((TextBox)sender).BackColor = Program.ErrorColor;
-            }
-            else { ((TextBox)sender).BackColor = Program.GoodColor; }
-
-        }
-
+       
         private void cboAgency_Leave(object sender, EventArgs e)
         {
             selectedPerson.Agency = cboAgency.Text;
@@ -108,18 +92,26 @@ namespace Wildfire_ICS_Assist.CustomControls
             selectedPerson.HasAllergies = chkAllergies.Checked;
         }
 
-        private void txtNOKName_TextChanged(object sender, EventArgs e)
-        {
-            selectedPerson.EmergencyContact = ((TextBox)sender).Text;   
-        }
-
         private void VisitorEditControl_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtLastName.Text))
-            {
-                txtLastName.BackColor = Program.ErrorColor;
-            }
-            else { txtLastName.BackColor = Program.GoodColor; }
+ 
+        }
+
+        private void txtFirstName_TextChanged_1(object sender, EventArgs e)
+        {
+            selectedPerson.FirstName = ((SpellBox)sender).Text;
+
+        }
+
+        private void txtNOKName_TextChanged_1(object sender, EventArgs e)
+        {
+            selectedPerson.EmergencyContact = ((SpellBox)sender).Text;
+
+        }
+
+        private void txtLastName_TextChanged_1(object sender, EventArgs e)
+        {
+            selectedPerson.LastName = txtLastName.Text;
         }
     }
 }

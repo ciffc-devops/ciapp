@@ -1375,7 +1375,24 @@ namespace WildfireICSDesktopServices
         public void UpsertAircraft(Aircraft record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
+
+            if (_currentIncident.AllIncidentResources.Any(o => o.ID == record.ID))
+            {
+                _currentIncident.AllIncidentResources = _currentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList();
+            }
+            _currentIncident.AllIncidentResources.Add(record);
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnAircraftChanged(new AircraftEventArgs(record));
+
+            //Also, add it to the air ops summary automagically
+
+
+
             _currentIncident.createAirOpsSummaryAsNeeded(record.OpPeriod);
+            /*
             AirOperationsSummary sum = _currentIncident.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == record.OpPeriod);
             if (sum != null)
             {
@@ -1386,12 +1403,12 @@ namespace WildfireICSDesktopServices
                 sum.aircrafts.Add(record);
                 if (source.Equals("local") || source.Equals("networkNoInternet"))
                 {
-                    UpsertTaskUpdate(record, "UPSERT", true, false);
+                    UpsertTaskUpdate(sum, "UPSERT", true, false);
                 }
                 OnAircraftChanged(new AircraftEventArgs(record));
 
             }
-
+            */
         }
 
         protected virtual void OnAirOperationsSummaryChanged(AirOperationsSummaryEventArgs e)

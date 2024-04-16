@@ -18,7 +18,7 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class IncidentObjectivesForm : Form
+    public partial class IncidentObjectivesForm : BaseForm
     {
         private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
@@ -30,8 +30,8 @@ namespace Wildfire_ICS_Assist
 
         public IncidentObjectivesForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+           
+            InitializeComponent();
             txtWeatherForcast.Leave += txtWeatherForcast_Leave;
             txtGeneralSafetyMessage.Leave += txtGeneralSafetyMessage_Leave; 
         }

@@ -21,8 +21,12 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             InitializeComponent();
             txtRegistration.TextChanged += TxtRegistration_TextChanged;
+            cboIsHeli.SelectedIndex = 0;
         }
-
+        public void SetAircraft(Aircraft a)
+        {
+            selectedAircraft = a;
+        }
         private void TxtRegistration_TextChanged(object sender, EventArgs e)
         {
             if (selectedAircraft != null)
@@ -35,12 +39,16 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             if (selectedAircraft != null)
             {
-                txtBase.Text = selectedAircraft.Base;
-                txtMakeModel.Text = selectedAircraft.MakeModel;
                 txtRegistration.SetText(selectedAircraft.Registration);
                 txtContactNumber.Text = selectedAircraft.ContactNumber;
+               txtCompanyName.SetText(selectedAircraft.CompanyName);
+                numBurnRate.Value = selectedAircraft.FuelBurnRate;
+
                 if (!string.IsNullOrEmpty(selectedAircraft.Remarks)) { txtRemarks.Text = selectedAircraft.Remarks.Replace("\n", Environment.NewLine); }
-                if (!selectedAircraft.IsHeli) { cboIsHeli.SelectedIndex = 1; } else { cboIsHeli.SelectedIndex = 0; }
+                if (!selectedAircraft.IsHeli) { cboIsHeli.SelectedIndex = 5; } else { cboIsHeli.SelectedIndex = 0; }
+                cboModel.SelectedIndex = -1;
+                cboModel.Text = selectedAircraft.MakeModel;
+
             }
         }
 
@@ -63,7 +71,12 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private bool ValidateForm()
         {
-            return txtRegistration.IsValid;
+
+            if (!txtRegistration.IsValid) { return false; }
+            if (!txtCompanyName.IsValid) { return false; }
+            if (string.IsNullOrEmpty(cboModel.Text)) { return false; }
+            return true;
+
         }
 
         private void txtContactNumber_TextChanged(object sender, EventArgs e)
@@ -73,15 +86,10 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void txtMakeModel_TextChanged_1(object sender, EventArgs e)
         {
-            if (selectedAircraft != null) { selectedAircraft.MakeModel = txtMakeModel.Text; }
 
         }
 
-        private void txtBase_TextChanged_1(object sender, EventArgs e)
-        {
-            if (selectedAircraft != null) { selectedAircraft.Base = txtBase.Text; }
-
-        }
+     
 
         private void txtContactNumber_TextChanged_1(object sender, EventArgs e)
         {
@@ -97,12 +105,61 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboIsHeli_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (selectedAircraft != null) { selectedAircraft.IsHeli = cboIsHeli.SelectedIndex == 0; }
+            if (selectedAircraft != null) { selectedAircraft.IsHeli = cboIsHeli.SelectedIndex <5; }
+            switch (cboIsHeli.SelectedIndex)
+            {
+                
+                case 1:
+                    cboModel.DataSource = AircraftTools.GetHelicopterTypes("Light", true); break;
+                case 2:
+                    cboModel.DataSource = AircraftTools.GetHelicopterTypes("Intermediate", true); break;
+                case 3:
+                    cboModel.DataSource = AircraftTools.GetHelicopterTypes("Medium", true); break;
+                case 4:
+                    cboModel.DataSource = AircraftTools.GetHelicopterTypes("Heavy", true); break;
+                case 5:
+                    cboModel.DataSource = AircraftTools.GetFixedWingTypes(true); break;
+                default:
+                    cboModel.DataSource = AircraftTools.GetHelicopterTypes(true); break;
+            }
+            cboModel.SelectedIndex = -1;
         }
 
         private void txtContactNumber_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
         {
 
+        }
+
+        private void txtCompanyName_TextChanged(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null)
+            {
+                selectedAircraft.CompanyName = txtCompanyName.Text;
+            }
+        }
+
+        private void txtRegistration_TextChanged_1(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null)
+            {
+                selectedAircraft.Registration = txtRegistration.Text;
+            }
+        }
+
+        private void cboModel_Leave(object sender, EventArgs e)
+        {
+            if (selectedAircraft != null)
+            {
+                selectedAircraft.MakeModel = cboModel.Text;
+            }
+
+            if (string.IsNullOrEmpty(cboModel.Text)) { errorProvider1.SetError(cboModel, "You must enter or select a model for this aircraft"); }
+            else { errorProvider1.SetError(cboModel, string.Empty); }
+        }
+
+        private void numBurnRate_ValueChanged(object sender, EventArgs e)
+        {
+            if(selectedAircraft != null) { selectedAircraft.FuelBurnRate = numBurnRate.Value; }
         }
     }
 }

@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class VehicleEditForm : Form
+    public partial class VehicleEditForm : BaseForm
     {
         private Vehicle _currentVehicle = new Vehicle();
         private bool _EditingSavedVehicle;
@@ -23,7 +23,7 @@ namespace Wildfire_ICS_Assist
 
         public VehicleEditForm(Vehicle vehicle_to_edit, bool editExisting = false)
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
             CurrentVehicle = vehicle_to_edit;
             EditingSavedVehicle = editExisting;

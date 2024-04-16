@@ -29,6 +29,10 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(17)] private Guid _OperatorID;
         [ProtoMember(18)] private string _ASE;
         [ProtoMember(19)] private bool _IsEquipment;
+        [ProtoMember(20)] private string _UnitNumber;
+        [ProtoMember(21)] private string _SerialNumber;
+
+
         public Vehicle()
         {
 
@@ -55,6 +59,8 @@ namespace WF_ICS_ClassLibrary.Models
         public string Notes { get => _Notes; set => _Notes = value; }
         public string ASE { get => _ASE; set => _ASE = value; }
         public bool IsEquipment { get => _IsEquipment; set { _IsEquipment = value; if (IsEquipment) { this.ResourceType = "Equipment"; } else { this.ResourceType = "Vehicle"; } } }
+        public string UnitNumber { get => _UnitNumber; set => _UnitNumber = value; }
+        public string SerialNumber { get => _SerialNumber; set => _SerialNumber = value; }
 
         private void SetResourceName() { ResourceName = IDWithMakeOwner; }
         public string IDWithMakeOwner
@@ -74,11 +80,24 @@ namespace WF_ICS_ClassLibrary.Models
                     if (sb.Length > 0) { sb.Append(" ("); sb.Append(AgencyOrOwner); sb.Append(")"); }
                     else { sb.Append(AgencyOrOwner); }
                 }
+
+                if (!string.IsNullOrEmpty(UnitNumber))
+                {
+                    if (sb.Length > 0) { sb.Append(" ("); sb.Append(UnitNumber); sb.Append(")"); }
+                    else { sb.Append(UnitNumber); }
+                }
+                if (!string.IsNullOrEmpty(SerialNumber))
+                {
+                    if (sb.Length > 0) { sb.Append(" ("); sb.Append(SerialNumber); sb.Append(")"); }
+                    else { sb.Append(SerialNumber); }
+                }
+
+
                 return sb.ToString();
             }
         }
 
-        public Vehicle Clone()
+        public new Vehicle Clone()
         {
             return this.MemberwiseClone() as Vehicle;
         }

@@ -13,7 +13,7 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class MedicalPlanEditAidStation : Form
+    public partial class MedicalPlanEditAidStation : BaseForm
     {
         private MedicalAidStation _aidStation = null;
         public MedicalAidStation aidStation { get => _aidStation; set { _aidStation = value; LoadAidStation(); } }
@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist
         }
         public MedicalPlanEditAidStation()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void MedicalPlanEditAidStation_Load(object sender, EventArgs e)

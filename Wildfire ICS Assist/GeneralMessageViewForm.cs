@@ -12,14 +12,14 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class GeneralMessageViewForm : Form
+    public partial class GeneralMessageViewForm : BaseForm
     {
         private GeneralMessage _generalMessage = null;
         public GeneralMessage generalMessage { get => _generalMessage; set { _generalMessage = value; DisplayMessage(); } }
 
         public GeneralMessageViewForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private void DisplayMessage()

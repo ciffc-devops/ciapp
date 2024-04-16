@@ -160,8 +160,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Pipelines, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.8.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
@@ -180,8 +180,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.1\lib\net461\System.Security.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
@@ -189,8 +189,8 @@
     <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=8.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.8.0.2\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=8.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.3\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.AccessControl, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.AccessControl.8.0.0\lib\net462\System.Threading.AccessControl.dll</HintPath>
@@ -217,18 +217,6 @@
     <Reference Include="WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AircraftEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AircraftEditForm.Designer.cs">
-      <DependentUpon>AircraftEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AircraftEntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AircraftEntryForm.Designer.cs">
-      <DependentUpon>AircraftEntryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="AirNOTAMEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +228,18 @@
     </Compile>
     <Compile Include="AirOperationsForm.Designer.cs">
       <DependentUpon>AirOperationsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AirOpsAddAircraftForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AirOpsAddAircraftForm.Designer.cs">
+      <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CheckedInResourcesForm.cs">
       <SubType>Form</SubType>
@@ -501,6 +501,12 @@
     <Compile Include="OperationalGroupSTTFEditForm.Designer.cs">
       <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OptionsForms\EditVisitorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForms\EditVisitorForm.Designer.cs">
+      <DependentUpon>EditVisitorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PersonnelEditCheckInOutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -541,6 +547,12 @@
     </Compile>
     <Compile Include="ResourcesEditUniqueNumberForm.Designer.cs">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\EnterTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\EnterTextForm.Designer.cs">
+      <DependentUpon>EnterTextForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityForms\InternetSyncForm.cs">
       <SubType>Form</SubType>
@@ -790,6 +802,18 @@
     <Compile Include="UtilityForms\HelpInfoForm.Designer.cs">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\SelectBooleanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\SelectBooleanForm.Designer.cs">
+      <DependentUpon>SelectBooleanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\SelectTimeRangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\SelectTimeRangeForm.Designer.cs">
+      <DependentUpon>SelectTimeRangeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -802,17 +826,17 @@
     <Compile Include="VehicleEditForm.Designer.cs">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AircraftEditForm.resx">
-      <DependentUpon>AircraftEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AircraftEntryForm.resx">
-      <DependentUpon>AircraftEntryForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AirNOTAMEditForm.resx">
       <DependentUpon>AirNOTAMEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AirOperationsForm.resx">
       <DependentUpon>AirOperationsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AirOpsAddAircraftForm.resx">
+      <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CheckedInResourcesForm.resx">
       <DependentUpon>CheckedInResourcesForm.cs</DependentUpon>
@@ -948,6 +972,9 @@
     <EmbeddedResource Include="OperationalGroupSTTFEditForm.resx">
       <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForms\EditVisitorForm.resx">
+      <DependentUpon>EditVisitorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PersonnelEditCheckInOutForm.resx">
       <DependentUpon>PersonnelEditCheckInOutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -966,6 +993,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResourcesEditUniqueNumberForm.resx">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\EnterTextForm.resx">
+      <DependentUpon>EnterTextForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\InternetSyncForm.resx">
       <DependentUpon>InternetSyncForm.cs</DependentUpon>
@@ -1096,6 +1126,12 @@
     <EmbeddedResource Include="UtilityForms\HelpInfoForm.resx">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\SelectBooleanForm.resx">
+      <DependentUpon>SelectBooleanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\SelectTimeRangeForm.resx">
+      <DependentUpon>SelectTimeRangeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1210,6 +1246,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-238-chat-message.png" />
+    <None Include="Resources\glyphicons-basic-730-ambulance.png" />
+    <None Include="Resources\glyphicons-basic-39-airplane.png" />
+    <None Include="Resources\Artboard 1%402x.png" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
     <None Include="Resources\glyphicons-basic-46-calendar.png" />

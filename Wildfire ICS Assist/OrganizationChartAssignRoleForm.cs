@@ -14,7 +14,7 @@ using Wildfire_ICS_Assist.OptionsForms;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class OrganizationChartAssignRoleForm : Form
+    public partial class OrganizationChartAssignRoleForm : BaseForm
     {
         private ICSRole _selectedRole = null;
         public ICSRole selectedRole { get => _selectedRole; set { _selectedRole = value; DisplayRole(); } }
@@ -35,7 +35,7 @@ namespace Wildfire_ICS_Assist
         }
         public OrganizationChartAssignRoleForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

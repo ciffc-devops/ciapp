@@ -16,7 +16,7 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class PrintIncidentForm : Form
+    public partial class PrintIncidentForm : BaseForm
     {
         private WFIncident CurrentIncident { get => Program.CurrentIncident; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
         public bool PrintIAPByDefault { get; set; } = false;
         public PrintIncidentForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

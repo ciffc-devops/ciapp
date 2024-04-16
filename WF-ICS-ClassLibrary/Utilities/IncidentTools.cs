@@ -13,6 +13,25 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class IncidentTools
     {
+
+        public static List<Aircraft> GetActiveAircraft(this WFIncident incident, DateTime Date)
+        {
+            List<Aircraft> aircraft = new List<Aircraft>();
+
+            aircraft.AddRange(incident.AllAircraft.Where(o => o.Active && incident.ResourceIsCheckedIn(o.ID, Date)));
+            aircraft = aircraft.OrderBy(o => o.CompanyName).ThenBy(o => o.Registration).ToList();
+            return aircraft;
+        }
+        public static List<Aircraft> GetActiveAircraft(this WFIncident incident, int OpPeriodNumber)
+        {
+            OperationalPeriod op = new OperationalPeriod();
+            if (incident.AllOperationalPeriods.Any(o => o.PeriodNumber == OpPeriodNumber)) { op = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodNumber); }
+            else { op.PeriodStart = DateTime.Now; op.PeriodEnd = op.PeriodStart.AddHours(12); }
+            return incident.GetActiveAircraft(op.PeriodMid);
+
+        }
+
+
         public static List<TaskUpdate> MostRecentTaskUpdates(this WFIncident task, bool localOnly = false)
         {
             List<TaskUpdate> updatesToKeep = new List<TaskUpdate>();
@@ -447,9 +466,10 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 AirOperationsSummary summary = new AirOperationsSummary();
                 summary.OpPeriod = ops;
+                DateTime opMid = DateTime.Now;
+                if(incident.AllOperationalPeriods.Any(o=>o.PeriodNumber == ops)) { opMid = incident.AllOperationalPeriods.First(o=>o.PeriodNumber ==ops).PeriodMid; }
 
-               
-
+              
 
                 Globals.incidentService.UpsertAirOperationsSummary(summary);
             }

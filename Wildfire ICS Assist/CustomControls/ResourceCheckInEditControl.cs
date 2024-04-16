@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
@@ -96,20 +97,36 @@ namespace Wildfire_ICS_Assist.CustomControls
         public bool ValidateCheckInInfo()
         {
             bool IsValid = true;
-            if (datCheckInTime.Value.Date > datLDW.Value.Date)
+            if (checkInRecord.IsPerson)
             {
-                lblLastDayWorking.ForeColor = Color.Red;
-                errorProvider1.SetError(datCheckInTime, "Your check in time should be earlier than your last day working");
-                IsValid = false;
+                if (datCheckInTime.Value.Date > datLDW.Value.Date)
+                {
+                    lblLastDayWorking.ForeColor = Color.Red;
+                    errorProvider1.SetError(datCheckInTime, "Your check in time should be earlier than your last day working");
+                    IsValid = false;
+                }
+                else
+                {
+                    lblLastDayWorking.ForeColor = lblLastDayCount.ForeColor; errorProvider1.SetError(datCheckInTime, "");
+                }
+
+                if (datCheckInTime.Value > Program.CurrentOpPeriodDetails.PeriodEnd || datLDW.Value < Program.CurrentOpPeriodDetails.PeriodStart)
+                {
+                    DialogResult proceed = MessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (proceed == DialogResult.No) { IsValid = false; }
+                }
             }
-            else { lblLastDayWorking.ForeColor = lblLastDayCount.ForeColor; errorProvider1.SetError(datCheckInTime, "");
+            else
+            {
+                if (datCheckInTimeOtherResource.Value > Program.CurrentOpPeriodDetails.PeriodEnd || (datLDWOtherResource.Checked && datLDWOtherResource.Value < Program.CurrentOpPeriodDetails.PeriodStart))
+                {
+                    DialogResult proceed = MessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (proceed == DialogResult.No) { IsValid = false; }
+                }
+
             }
 
-            if (datCheckInTime.Value > Program.CurrentOpPeriodDetails.PeriodEnd || datLDW.Value < Program.CurrentOpPeriodDetails.PeriodStart)
-            {
-                DialogResult proceed = MessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (proceed == DialogResult.No) { IsValid = false; }
-            }
+
 
             //confirm the ID is unique
             bool isUnique =  Program.CurrentIncident.ConfirmResourceNumUnique(selectedResource.ResourceType, selectedResource.UniqueIDNum,selectedResource.ID);
@@ -138,52 +155,126 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 checkInRecord.InfoFields.Add(ctrl.infoField.Clone());
             }
-            checkInRecord.CheckInDate = datCheckInTime.Value;
-            checkInRecord.LastDayOnIncident = datLDW.Value;
-            checkInRecord.LastDayOfRest = datLastDayOfRest.Value;
-            if(cboICSRole.SelectedItem != null)
+            if (pnlPersonnelDetails.Visible)
             {
-                ICSRole role = (ICSRole)cboICSRole.SelectedItem;
-                checkInRecord.InitialRoleName = role.RoleName;
-                checkInRecord.InitialRoleAcronym = role.Mnemonic;
+                checkInRecord.CheckInDate = datCheckInTime.Value;
+                checkInRecord.FirstDayOnIncident = datFirstDayOnIncident.Value;
+                checkInRecord.LastDayOnIncident = datLDW.Value;
+                checkInRecord.LastDayOfRest = datLastDayOfRest.Value;
+
+                
             }
-            else { checkInRecord.InitialRoleAcronym = string.Empty; checkInRecord.InitialRoleName = string.Empty; }
-            
+            else
+            {
+                checkInRecord.CheckInDate = datCheckInTimeOtherResource.Value;
+                if (datLDWOtherResource.Checked) { checkInRecord.LastDayOnIncident = datLDWOtherResource.Value; }
+                else { checkInRecord.LastDayOnIncident = DateTime.MaxValue; }
+                checkInRecord.FirstDayOnIncident = datFirstDayOnIncidentOtherResource.Value;
+            }
+
+            if (pnlRoleOnTask.Visible)
+            {
+if (cboICSRole.SelectedItem != null)
+                {
+                    ICSRole role = (ICSRole)cboICSRole.SelectedItem;
+                    checkInRecord.InitialRoleName = role.RoleName;
+                    checkInRecord.InitialRoleAcronym = role.Mnemonic;
+                }
+                else { checkInRecord.InitialRoleAcronym = string.Empty; checkInRecord.InitialRoleName = string.Empty; }
+            }
+
+
+
         }
 
         public void LoadPage()
         {
-            if (_checkInRecord.CheckInDate == DateTime.MinValue)
-            {
-                DateTime today = DateTime.Now;
-                _checkInRecord.LastDayOfRest = today;
-                _checkInRecord.CheckInDate = today;
-                _checkInRecord.LastDayOnIncident = today.AddDays(14);
-            }
-
-            if (datLastDayOfRest.MinDate <= checkInRecord.LastDayOfRest) { datLastDayOfRest.Value = _checkInRecord.LastDayOfRest; } else { datLastDayOfRest.Value = datLastDayOfRest.MinDate; }
-
-            if (datCheckInTime.MinDate <= _checkInRecord.CheckInDate) { datCheckInTime.Value = _checkInRecord.CheckInDate; } else { datCheckInTime.Value = datCheckInTime.MinDate; }
-            if (datLDW.MinDate <= checkInRecord.LastDayOnIncident) { datLDW.Value = _checkInRecord.LastDayOnIncident; } else { datLDW.Value = datLDW.MinDate; }
+            
 
             txtSelectedName.Text = _selectedResource.ResourceName;
             txtResourceType.Text = checkInRecord.ResourceType;
+
+
+
 
             infoFields.Clear();
             if (_checkInRecord.InfoFields.Any()) { infoFields.AddRange(_checkInRecord.InfoFields); }
             else { infoFields = CheckInTools.GetInfoFields(checkInRecord.ResourceType); }
 
-            if (checkInRecord.ResourceType.Equals("Personnel"))
+            if (checkInRecord.IsCrew || checkInRecord.IsPerson || checkInRecord.IsVisitor || checkInRecord.IsHECrew)
             {
-                cboICSRole.Enabled = true; chkAutoAssign.Enabled = true;
-                List<ICSRole> roles = GetICSRolesForDropdown();
-                cboICSRole.DataSource = roles;
-
-                if (!string.IsNullOrEmpty(checkInRecord.InitialRoleAcronym) && roles.Any(o =>!string.IsNullOrEmpty( o.Mnemonic) && o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)))
+                if (_checkInRecord.CheckInDate == DateTime.MinValue)
                 {
-                    cboICSRole.SelectedValue = roles.First(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)).RoleID;
+                    DateTime today = DateTime.Now;
+                    _checkInRecord.LastDayOfRest = today;
+                    _checkInRecord.CheckInDate = today;
+                    _checkInRecord.FirstDayOnIncident = today;
+                    _checkInRecord.LastDayOnIncident = today.AddDays(14);
                 }
-            } else { cboICSRole.Enabled = false; chkAutoAssign.Checked = false; cboICSRole.SelectedIndex = -1; chkAutoAssign.Enabled = false; }
+                else if (_checkInRecord.LastDayOnIncident > datLDW.MaxDate) { _checkInRecord.LastDayOnIncident = _checkInRecord.CheckInDate.AddDays(14); }
+
+
+                if (datLastDayOfRest.MinDate <= checkInRecord.LastDayOfRest) { datLastDayOfRest.Value = _checkInRecord.LastDayOfRest; } else { datLastDayOfRest.Value = datLastDayOfRest.MinDate; }
+
+                if (datCheckInTime.MinDate <= _checkInRecord.CheckInDate) { datCheckInTime.Value = _checkInRecord.CheckInDate; } else { datCheckInTime.Value = datCheckInTime.MinDate; }
+                if (datFirstDayOnIncident.MinDate <= _checkInRecord.FirstDayOnIncident) { datFirstDayOnIncident.Value = _checkInRecord.FirstDayOnIncident; } else { datFirstDayOnIncident.Value = datFirstDayOnIncident.MinDate; }
+                if (datLDW.MinDate <= checkInRecord.LastDayOnIncident) { datLDW.Value = _checkInRecord.LastDayOnIncident; } else { datLDW.Value = datLDW.MinDate; }
+
+                if (checkInRecord.IsPerson)
+                {
+                    chkAutoAssign.Enabled = true;
+                    List<ICSRole> roles = GetICSRolesForDropdown();
+                    cboICSRole.DataSource = roles;
+
+                    if (!string.IsNullOrEmpty(checkInRecord.InitialRoleAcronym) && roles.Any(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)))
+                    {
+                        cboICSRole.SelectedValue = roles.First(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)).RoleID;
+                    }
+                }
+                pnlOtherResourceDetails.Visible = false;
+                pnlPersonnelDetails.Visible = true;
+
+                if (checkInRecord.IsPerson)
+                {
+                    pnlRoleOnTask.Visible = true;
+                    pnlPersonnelDetails.Location = new System.Drawing.Point(0, pnlRoleOnTask.Location.Y + pnlRoleOnTask.Size.Height + 10);
+                    pnlCheckInFields.Location = new System.Drawing.Point(0, pnlPersonnelDetails.Location.Y + pnlPersonnelDetails.Size.Height + 10);
+                    pnlCheckInFields.Height = this.Height - pnlCheckInFields.Location.Y;
+
+                }
+                else //crew or visitor
+                {
+                    pnlRoleOnTask.Visible = false;
+                    pnlPersonnelDetails.Location = new System.Drawing.Point(0, cboUniqueIDLetter.Location.Y + cboUniqueIDLetter.Size.Height + 10);
+                    pnlCheckInFields.Location = new System.Drawing.Point(0, pnlPersonnelDetails.Location.Y + pnlPersonnelDetails.Size.Height + 10);
+                    pnlCheckInFields.Height = this.Height - pnlCheckInFields.Location.Y;
+
+                }
+            }
+
+
+            else
+            {
+                if (_checkInRecord.CheckInDate == DateTime.MinValue)
+                {
+                    DateTime today = DateTime.Now;
+                    _checkInRecord.CheckInDate = today;
+                    _checkInRecord.FirstDayOnIncident = today;
+                }
+                pnlRoleOnTask.Visible = false;
+
+                datLDWOtherResource.Checked = checkInRecord.LastDayOnIncident != DateTime.MaxValue;
+                if (datLDWOtherResource.Checked) { datLDWOtherResource.Value = checkInRecord.LastDayOnIncident; }
+                
+                if (datCheckInTimeOtherResource.MinDate <= _checkInRecord.CheckInDate) { datCheckInTimeOtherResource.Value = _checkInRecord.CheckInDate; } else { datCheckInTimeOtherResource.Value = datCheckInTimeOtherResource.MinDate; }
+
+                if (datFirstDayOnIncidentOtherResource.MinDate <= _checkInRecord.FirstDayOnIncident) { datFirstDayOnIncidentOtherResource.Value = _checkInRecord.FirstDayOnIncident; } else { datFirstDayOnIncidentOtherResource.Value = datFirstDayOnIncidentOtherResource.MinDate; }
+                pnlPersonnelDetails.Visible = false;
+                pnlOtherResourceDetails.Location = new System.Drawing.Point(0, cboUniqueIDLetter.Location.Y + cboUniqueIDLetter.Size.Height + 10);
+                pnlOtherResourceDetails.Visible = true;
+                pnlCheckInFields.Location = new System.Drawing.Point(0, pnlOtherResourceDetails.Location.Y + pnlOtherResourceDetails.Size.Height + 10);
+                pnlCheckInFields.Height = this.Height - pnlCheckInFields.Location.Y;
+            }
 
 
             infoFieldControls.Clear();
@@ -210,13 +301,15 @@ namespace Wildfire_ICS_Assist.CustomControls
 
             switch (selectedResource.ResourceType)
             {
-                case "Personnel": cboUniqueIDLetter.Text = "P";break;
-                case "Vehicle": cboUniqueIDLetter.Text = "V";break;
-                case "Equipment": cboUniqueIDLetter.Text = "E";break;
-                case "Crew": cboUniqueIDLetter.Text = "C";break;
-                case "Heavy Equipment Crew": cboUniqueIDLetter.Text = "C";break;
+                case "Personnel": cboUniqueIDLetter.Text = "P"; break;
+                case "Vehicle": cboUniqueIDLetter.Text = "V"; break;
+                case "Equipment": cboUniqueIDLetter.Text = "E"; break;
+                case "Crew": cboUniqueIDLetter.Text = "C"; break;
+                case "Heavy Equipment Crew": cboUniqueIDLetter.Text = "C"; break;
+                case "Aircraft":cboUniqueIDLetter.Text = "A"; break;
+
             }
-            if(selectedResource.UniqueIDNum == 0)
+            if (selectedResource.UniqueIDNum == 0)
             {
                 numUniqueIDNumber.Value = Program.CurrentIncident.GetNextUniqueNum(selectedResource.ResourceType, 1, 1000);
 

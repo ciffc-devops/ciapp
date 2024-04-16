@@ -73,10 +73,10 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.txtCellphone = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.txtNOKName = new SpellBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtCellphone = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -170,7 +170,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(205, 29);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Cellphone*";
+            this.label5.Text = "Cellphone";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtEmail
@@ -849,19 +849,6 @@
             this.splitContainer4.SplitterDistance = 387;
             this.splitContainer4.TabIndex = 14;
             // 
-            // txtCellphone
-            // 
-            this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCellphone.BackColor = System.Drawing.Color.Transparent;
-            this.txtCellphone.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCellphone.Location = new System.Drawing.Point(218, 2);
-            this.txtCellphone.Margin = new System.Windows.Forms.Padding(6);
-            this.txtCellphone.Multiline = false;
-            this.txtCellphone.Name = "txtCellphone";
-            this.txtCellphone.Size = new System.Drawing.Size(166, 30);
-            this.txtCellphone.TabIndex = 14;
-            // 
             // splitContainer5
             // 
             this.splitContainer5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -901,6 +888,17 @@
             // 
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
+            // 
+            // txtCellphone
+            // 
+            this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCellphone.Location = new System.Drawing.Point(220, 3);
+            this.txtCellphone.Name = "txtCellphone";
+            this.txtCellphone.Size = new System.Drawing.Size(160, 29);
+            this.txtCellphone.TabIndex = 10;
+            this.txtCellphone.TextChanged += new System.EventHandler(this.txtCellphone_TextChanged_1);
+            this.txtCellphone.Child = new System.Windows.Controls.TextBox();
             // 
             // PersonnelEditControl
             // 
@@ -1013,8 +1011,8 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.SplitContainer splitContainer5;
-        private TextBoxRequiredControl txtCellphone;
         private SpellBox txtNOKName;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private SpellBox txtCellphone;
     }
 }

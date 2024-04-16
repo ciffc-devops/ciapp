@@ -56,6 +56,7 @@ namespace WF_ICS_ClassLibrary.Models
                     case "Equipment": return "E" + UniqueIDNum;
                     case "Crew": return "C" + UniqueIDNum;
                     case "Heavy Equipment Crew": return "C" + UniqueIDNum;
+                    case "Aircraft": return "A" + UniqueIDNum;
                     default: return UniqueIDNum.ToString();
                 }
             }

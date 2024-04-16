@@ -16,13 +16,20 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             Aircraft a = new Aircraft();
             a.MakeModel = "MakeModel" + seed;
+            a.CompanyName = "Company Name " + seed;
+            List<string> models = AircraftTools.GetHelicopterTypes();
+            a.MakeModel = models[random.Next(models.Count)];
+            a.Registration = "Reg " + seed;
             a.Base = "Base" + seed;
             a.StartTime = DateTime.Now;
-            a.EndTime = DateTime.Now.AddHours(seed);
+            
+            a.EndTime = a.StartTime.AddHours(seed);
             a.Remarks = "Remarks" + seed;
             a.Pilot = "Pilot" + seed;
             a.Contact = "Contact" + seed;
             a.ContactNumber = "ContactNumber" + seed;
+            a.FuelBurnRate = random.Next(10000);
+            a.PointOfHire = "Point of Hire " + seed;
             a.IsMedivac = RandomBooleanGenerator.GetRandomBoolean();
             return a;
         }
@@ -46,7 +53,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.Sunset = DateTime.Now.AddHours(seed);
             test.MedivacAircraftText = "Medivac Test" + seed;
             test.notam = CreateNOTAMTest(seed);
-            test.aircrafts.Add(CreateAircraftTest(seed));
+            //test.aircrafts.Add(CreateAircraftTest(seed));
             test.PreparedByPositionID = Globals.PlanningChiefID;
             test.PreparedByPosition = "Planning Section Chief";
             test.PreparedByName = "Name" + seed;
@@ -345,6 +352,12 @@ namespace WF_ICS_ClassLibrary.Utilities
                     (resource as OperationalSubGroup).IsEquipmentCrew = true;
                     record.InitialRoleAcronym = string.Empty;
                     record.InitialRoleName = string.Empty;
+                    break;
+                case "Aircraft":
+                    resource = CreateAircraftTest(seed);
+                    record.InitialRoleAcronym = string.Empty;
+                    record.InitialRoleName = string.Empty;
+
                     break;
             }
             record.ResourceID = resource.ID;

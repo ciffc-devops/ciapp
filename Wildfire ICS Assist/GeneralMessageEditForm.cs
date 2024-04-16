@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.Classes;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class GeneralMessageEditForm : Form
+    public partial class GeneralMessageEditForm : BaseForm
     {
         private GeneralMessage _generalMessage = null;
         public GeneralMessage generalMessage { get => _generalMessage; set { _generalMessage = value; DisplayMessage(); } }
@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist
         public GeneralMessageEditForm()
         {
             
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
         }
 

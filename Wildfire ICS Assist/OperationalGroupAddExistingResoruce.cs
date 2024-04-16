@@ -11,11 +11,11 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class OperationalGroupAddExistingResoruce : Form
+    public partial class OperationalGroupAddExistingResoruce : BaseForm
     {
         public OperationalGroupAddExistingResoruce()
         {
-            this.Icon = Program.programIcon; InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent();
             dgvSubGroups.BackgroundColor = Program.FormAccent;
         }
 

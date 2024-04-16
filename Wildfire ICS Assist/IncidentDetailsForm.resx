@@ -654,7 +654,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCloseOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 156</value>
+    <value>42, 156</value>
   </data>
   <data name="btnCloseOpPeriod.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 48</value>
@@ -765,7 +765,7 @@
     <value>60, 124</value>
   </data>
   <data name="datOpsEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
+    <value>223, 26</value>
   </data>
   <data name="datOpsEnd.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -795,7 +795,7 @@
     <value>60, 88</value>
   </data>
   <data name="datOpsStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 26</value>
+    <value>223, 26</value>
   </data>
   <data name="datOpsStart.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -819,7 +819,7 @@
     <value>Microsoft Sans Serif, 28pt</value>
   </data>
   <data name="numOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 20</value>
+    <value>177, 20</value>
   </data>
   <data name="numOpPeriod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 8, 9, 8</value>
@@ -861,7 +861,7 @@
     <value>9, 0, 9, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 66</value>
+    <value>167, 66</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -915,7 +915,7 @@
     <value>171, 45</value>
   </data>
   <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 29</value>
+    <value>378, 29</value>
   </data>
   <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -924,7 +924,7 @@
     <value>txtTaskName</value>
   </data>
   <data name="&gt;&gt;txtTaskName.Type" xml:space="preserve">
-    <value>SpellBox, Canadian Incident Action Plan Program, Version=1.0.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>SpellBox, Canadian Incident Action Plan Program, Version=1.0.4.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtTaskName.Parent" xml:space="preserve">
     <value>pnlTaskInfo</value>
@@ -939,7 +939,7 @@
     <value>16, 130</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 2</value>
+    <value>532, 2</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
@@ -1128,7 +1128,7 @@
     <value>171, 88</value>
   </data>
   <data name="txtTaskNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 29</value>
+    <value>378, 29</value>
   </data>
   <data name="txtTaskNumber.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1215,7 +1215,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnICSRoleHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 144</value>
+    <value>411, 144</value>
   </data>
   <data name="btnICSRoleHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 37</value>
@@ -1248,7 +1248,7 @@
     <value>170, 147</value>
   </data>
   <data name="cboICSRole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 32</value>
+    <value>231, 32</value>
   </data>
   <data name="cboICSRole.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1308,7 +1308,7 @@
     <value>7, 8</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>544, 32</value>
+    <value>542, 32</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1624,7 +1624,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAARABBQEQAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAASABBQEgAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2772,7 +2772,7 @@
     <value>cpOtherTools</value>
   </data>
   <data name="&gt;&gt;cpOtherTools.Type" xml:space="preserve">
-    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=1.0.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=1.0.4.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cpOtherTools.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3475,7 +3475,7 @@
     <value>cpIncidentActionPlan</value>
   </data>
   <data name="&gt;&gt;cpIncidentActionPlan.Type" xml:space="preserve">
-    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=1.0.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=1.0.4.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cpIncidentActionPlan.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3781,9 +3781,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1109, 688</value>
@@ -4323,6 +4320,6 @@
     <value>IncidentDetailsForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Wildfire_ICS_Assist.BaseForm, Canadian Incident Action Plan Program, Version=1.0.4.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -17,13 +17,11 @@ using Wildfire_ICS_Assist.CustomControls;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class ResourceReplacementPlanningForm : Form
+    public partial class ResourceReplacementPlanningForm : BaseForm
     {
         public ResourceReplacementPlanningForm()
         {
             InitializeComponent();
-            this.Icon = Program.programIcon;
-            this.BackColor = Program.FormBackground;
             dgvOutgoing.BackgroundColor = Program.FormAccent;
             dgvOutgoing.AutoGenerateColumns = false;
             datLastDayFilter.CustomFormat = Program.DateFormat;

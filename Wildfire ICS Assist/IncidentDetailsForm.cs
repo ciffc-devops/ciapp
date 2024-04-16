@@ -34,7 +34,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class IncidentDetailsForm : Form
+    public partial class IncidentDetailsForm : BaseForm
     {
         public IncidentDetailsForm()
         {
@@ -44,9 +44,9 @@ namespace Wildfire_ICS_Assist
             Thread.CurrentThread.CurrentCulture = new CultureInfo("fr");
             */
             
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
 
-            this.BackColor = Program.FormBackground;
+            
             menuStrip1.BackColor = Program.FormAccent;
             System.Windows.Forms.Application.EnableVisualStyles();
             LastAutoBackup = DateTime.Now;

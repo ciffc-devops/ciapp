@@ -11,7 +11,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class ResourcesEditUniqueNumberForm : Form
+    public partial class ResourcesEditUniqueNumberForm : BaseForm
     {
         private IncidentResource _selectedResource = new IncidentResource();
         public int newNumber { get => Convert.ToInt32(numNewNumber.Value); }
@@ -26,7 +26,7 @@ namespace Wildfire_ICS_Assist
 
         public ResourcesEditUniqueNumberForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private void ResourcesEditUniqueNumber_Load(object sender, EventArgs e)

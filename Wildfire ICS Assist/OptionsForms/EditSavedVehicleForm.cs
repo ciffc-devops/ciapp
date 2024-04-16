@@ -15,6 +15,11 @@ namespace Wildfire_ICS_Assist.OptionsForms
     {
 
         public Vehicle vehicle { get => vehicleEquipmentEditControl1.CurrentVehicle; set {  displayVehicle(value); } }
+        public bool DisplayOperator { get => vehicleEquipmentEditControl1.EnableOperatorField; set => vehicleEquipmentEditControl1.EnableOperatorField = value; }
+        public void SetPossibleOperators(List<IncidentResource> resources)
+        {
+            vehicleEquipmentEditControl1.SetOperatorList(resources);
+        }
         public EditSavedVehicleForm()
         {
             InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
@@ -22,7 +27,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void displayVehicle(Vehicle veh)
         {
-            vehicleEquipmentEditControl1.EnableOperatorField = false;
+            
             vehicleEquipmentEditControl1.SetVehicle(veh);
 
         }

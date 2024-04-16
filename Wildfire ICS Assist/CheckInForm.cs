@@ -15,9 +15,9 @@ using Wildfire_ICS_Assist.CustomControls;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CheckInForm : Form
+    public partial class CheckInForm : BaseForm
     {
-        
+
         private CheckInRecord _checkInRecord = new CheckInRecord();
         public CheckInRecord checkInRecord { get => _checkInRecord; private set => _checkInRecord = value; }
 
@@ -35,10 +35,10 @@ namespace Wildfire_ICS_Assist
 
         public CheckInForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
             personnelEditControl1.SetPersonnel(new Personnel());
-           
+
 
         }
 
@@ -46,7 +46,7 @@ namespace Wildfire_ICS_Assist
         {
             checkInRecord = rec;
 
-            if(rec.ResourceID != Guid.Empty)
+            if (rec.ResourceID != Guid.Empty)
             {
                 editingExisting = true;
                 crewEditControl1.EditExisting = true;
@@ -78,7 +78,7 @@ namespace Wildfire_ICS_Assist
                     resourceCheckInEditControl1.SetResource(selectedResource as Personnel);
                 }
             }
-            else if (rec.IsVehicle || rec.IsEquipment) 
+            else if (rec.IsVehicle || rec.IsEquipment)
             {
                 if (Program.CurrentIncident.allVehicles.Any(o => o.ID == rec.ResourceID && o.Active))
                 {
@@ -86,7 +86,7 @@ namespace Wildfire_ICS_Assist
                     LoadVehicleOperators();
                     vehicleEquipmentEditControl1.SetVehicle(selectedResource as Vehicle);
 
-                    wizardPages1.SelectedIndex = 4;
+                    wizardPages1.SelectedIndex = 5;
                 }
             }
             else if (rec.IsVisitor)
@@ -140,9 +140,9 @@ namespace Wildfire_ICS_Assist
         {
             checkInRecord.OpPeriod = Program.CurrentOpPeriod;
             LoadData();
-           
-            foreach(TabPage p in wizardPages1.TabPages) { p.BackColor = Program.FormBackground; }
-          
+
+            foreach (TabPage p in wizardPages1.TabPages) { p.BackColor = Program.FormBackground; }
+
         }
 
         private void BuildSavedVehicleList()
@@ -152,16 +152,33 @@ namespace Wildfire_ICS_Assist
             blankVehicle.ID = Guid.Empty;
             List<Vehicle> savedVehicles = new List<Vehicle>();
             savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("Vehicles"));
+            savedVehicles = savedVehicles.Where(o => o.Active).ToList(); 
+            blankVehicle.IncidentIDNo = "-Select saved equipment/vehicle-";
+            /*
             if (vehicleEquipmentEditControl1.CurrentVehicle.IsEquipment) { savedVehicles = savedVehicles.Where(o => o.IsEquipment).ToList(); blankVehicle.IncidentIDNo = "-Select a saved piece of equipment-"; }
-            else {  savedVehicles = savedVehicles.Where(o=>!o.IsEquipment).ToList(); blankVehicle.IncidentIDNo = "-Select a saved vehicle-"; }  
-
+            else { savedVehicles = savedVehicles.Where(o => !o.IsEquipment).ToList(); blankVehicle.IncidentIDNo = "-Select a saved vehicle-"; }
+            */
             savedVehicles.Insert(0, blankVehicle);
 
             cboSavedVehicles.DataSource = savedVehicles;
 
         }
 
-   
+        private void BuildSavedAircraftList()
+        {
+            Aircraft blankAircraft = new Aircraft();
+            blankAircraft.Registration = "-Select a saved aircraft-";
+            blankAircraft.ID = Guid.Empty;
+            List<Aircraft> savedAircraft = new List<Aircraft>();
+            savedAircraft.AddRange((List<Aircraft>)Program.generalOptionsService.GetOptionsValue("Aircrafts"));
+
+            savedAircraft.Insert(0, blankAircraft);
+
+            cboSavedAircraft.DataSource = savedAircraft;
+
+        }
+
+
 
         private void btnShowHelp_Click(object sender, EventArgs e)
         {
@@ -181,11 +198,13 @@ namespace Wildfire_ICS_Assist
             members = members.Where(o => !statuses.Any(s => s.MemberID == o.PersonID)).ToList();
             Personnel blankPerson = new Personnel();
             blankPerson.ID = Guid.Empty;
-            members.Insert(0, blankPerson); 
+            members.Insert(0, blankPerson);
             cboSavedPersonnel.DataSource = members;
-            if(cboSavedOperator.Items.Count == 0) { LoadVehicleOperators(); }
+            if (cboSavedOperator.Items.Count == 0) { LoadVehicleOperators(); }
             BuildSavedVehicleList();
-            
+            BuildSavedAircraftList();
+
+
         }
 
         private void btnSelectSaved_Click(object sender, EventArgs e)
@@ -197,7 +216,7 @@ namespace Wildfire_ICS_Assist
                 checkInRecord.ResourceType = "Personnel";
                 MoveToCheckInDetailsPage();
                 //txtSelectedName.Text = selectedMember.Name;
-                
+
             }
         }
 
@@ -240,18 +259,18 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-       
+
 
         private void MoveToCheckInDetailsPage()
         {
-            wizardPages1.SelectedIndex = 5;
-            
-            resourceCheckInEditControl1.SetResource (_selectedResource);
+            wizardPages1.SelectedIndex = 6;
+
+            resourceCheckInEditControl1.SetResource(_selectedResource);
             resourceCheckInEditControl1.SetCheckInRecord(_checkInRecord);
             resourceCheckInEditControl1.LoadPage();
         }
 
-      
+
 
 
         private void btnCheckIn_Click(object sender, EventArgs e)
@@ -265,7 +284,7 @@ namespace Wildfire_ICS_Assist
 
                 checkInRecord = resourceCheckInEditControl1.checkInRecord.Clone();
                 checkInRecord.ResourceID = _selectedResource.ID;
-                if(selectedResource.GetType().Name.Equals(new Personnel().GetType().Name))
+                if (selectedResource.GetType().Name.Equals(new Personnel().GetType().Name))
                 {
                     (selectedResource as Personnel).InitialRoleAcronym = checkInRecord.InitialRoleAcronym;
                     (selectedResource as Personnel).InitialRoleName = checkInRecord.InitialRoleName;
@@ -293,13 +312,13 @@ namespace Wildfire_ICS_Assist
             }*/
         }
 
-     
+
         private void txtDeparturePoint_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-   
+
 
         private void btnCrew_Click(object sender, EventArgs e)
         {
@@ -311,10 +330,10 @@ namespace Wildfire_ICS_Assist
 
         private void btnVehicleEquipment_Click(object sender, EventArgs e)
         {
-            CheckInMode = "Vehicle"; 
-            Vehicle v = new Vehicle();
-            vehicleEquipmentEditControl1.SetVehicle(v);
-            BuildSavedVehicleList();
+            CheckInMode = "Aircraft";
+            Aircraft v = new Aircraft();
+            editAircraftControl1.SetAircraft(v);
+            BuildSavedAircraftList();
             wizardPages1.SelectedIndex = 4;
         }
 
@@ -334,11 +353,11 @@ namespace Wildfire_ICS_Assist
         {
             btnBack.Visible = wizardPages1.SelectedIndex > 0;
 
-            btnCheckIn.Visible = wizardPages1.SelectedIndex == 5;
-            chkAutoNewCheckin.Visible = wizardPages1.SelectedIndex == 5;
+            btnCheckIn.Visible = wizardPages1.SelectedIndex == 6;
+            chkAutoNewCheckin.Visible = wizardPages1.SelectedIndex == 6;
             if (editingExisting)
             {
-                btnBack.Visible = wizardPages1.SelectedIndex == 5;
+                btnBack.Visible = wizardPages1.SelectedIndex == 6;
                 chkAutoNewCheckin.Visible = false;
             }
             btnDoneCrewEdit.Visible = wizardPages1.SelectedIndex == 2;
@@ -346,14 +365,15 @@ namespace Wildfire_ICS_Assist
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            switch(wizardPages1.SelectedIndex)
+            switch (wizardPages1.SelectedIndex)
             {
                 case 0:
                     break;
-                case 5:
+                case 6:
                     if (checkInRecord.IsVisitor) { wizardPages1.SelectedIndex = 3; }
-                    else if (checkInRecord.IsCrew) { wizardPages1.SelectedIndex = 2; }
-                    else if (checkInRecord.IsVehicle) { wizardPages1.SelectedIndex = 4; }
+                    else if (checkInRecord.IsCrew || checkInRecord.IsHECrew) { wizardPages1.SelectedIndex = 2; }
+                    else if (checkInRecord.IsVehicle || checkInRecord.IsEquipment) { wizardPages1.SelectedIndex = 5; }
+                    else if (checkInRecord.IsAircraft) { wizardPages1.SelectedIndex = 4; }
                     else { wizardPages1.SelectedIndex = 1; }
                     break;
                 default:
@@ -364,20 +384,21 @@ namespace Wildfire_ICS_Assist
 
         private void btnSelectSavedVehicle_Click(object sender, EventArgs e)
         {
-            if(cboSavedVehicles.SelectedItem != null && ((Vehicle)cboSavedVehicles.SelectedItem).ID != Guid.Empty && cboSavedOperator.SelectedItem != null)
+            if (cboSavedVehicles.SelectedItem != null && ((Vehicle)cboSavedVehicles.SelectedItem).ID != Guid.Empty && cboSavedOperator.SelectedItem != null)
             {
                 _selectedResource = ((Vehicle)cboSavedVehicles.SelectedItem).Clone();
                 Vehicle v = (Vehicle)_selectedResource;
                 v.UniqueIDNum = 0;
                 if (v.IsEquipment) { checkInRecord.ResourceType = "Equipment"; }
                 else { checkInRecord.ResourceType = "Vehicle"; }
-                
+
                 (selectedResource as Vehicle).OperatorID = (cboSavedOperator.SelectedItem as IncidentResource).ID;
                 (selectedResource as Vehicle).OperatorName = (cboSavedOperator.SelectedItem as IncidentResource).ResourceName;
                 selectedResource.LeaderName = (cboSavedOperator.SelectedItem as IncidentResource).ResourceName;
 
                 MoveToCheckInDetailsPage();
-            } else if (cboSavedOperator.SelectedItem == null) { lblSavedOperator.ForeColor = Program.ErrorColor; }
+            }
+            else if (cboSavedOperator.SelectedItem == null) { lblSavedOperator.ForeColor = Program.ErrorColor; }
         }
 
         private void btnSelectNewVehicle_Click(object sender, EventArgs e)
@@ -388,12 +409,13 @@ namespace Wildfire_ICS_Assist
                 Vehicle v = (Vehicle)_selectedResource;
                 if (v.IsEquipment) { checkInRecord.ResourceType = "Equipment"; }
                 else { checkInRecord.ResourceType = "Vehicle"; }
+                checkInRecord.LastDayOnIncident = DateTime.MaxValue;
 
                 MoveToCheckInDetailsPage();
             }
         }
 
-       
+
         private void btnSelectVisitor_Click(object sender, EventArgs e)
         {
             if (visitorEditControl1.FormValid)
@@ -410,13 +432,13 @@ namespace Wildfire_ICS_Assist
         {
             if (crewEditControl1.FormIsComplete)
             {
-                
+
 
 
                 selectedResource = crewEditControl1.subGroup.Clone();
                 checkInRecord.ResourceType = "Crew";
-              //  SubResources.Clear();
-              //  SubResources.AddRange(crewEditControl1.resources);
+                //  SubResources.Clear();
+                //  SubResources.AddRange(crewEditControl1.resources);
                 MoveToCheckInDetailsPage();
             }
         }
@@ -433,12 +455,12 @@ namespace Wildfire_ICS_Assist
 
         private void btnHECrew_Click(object sender, EventArgs e)
         {
-            CheckInMode = "Heavy Equipment Crew"; 
+            CheckInMode = "Heavy Equipment Crew";
             OperationalSubGroup sub = new OperationalSubGroup();
             sub.IsEquipmentCrew = true;
             crewEditControl1.SetSubGroup(sub, SubResources);
             wizardPages1.SelectedIndex = 2;
-            
+
         }
 
         private void btnEquipAndOperator_Click(object sender, EventArgs e)
@@ -448,13 +470,43 @@ namespace Wildfire_ICS_Assist
             v.IsEquipment = true;
             vehicleEquipmentEditControl1.SetVehicle(v);
             BuildSavedVehicleList();
-            wizardPages1.SelectedIndex = 4;
+            wizardPages1.SelectedIndex = 5;
+            checkInRecord.LastDayOnIncident = DateTime.MaxValue;
 
         }
 
         private void crewEditControl1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSelectSavedAircraft_Click(object sender, EventArgs e)
+        {
+            if (cboSavedAircraft.SelectedItem != null && ((IncidentResource)cboSavedAircraft.SelectedItem).ID != Guid.Empty)
+            {
+                _selectedResource = ((Aircraft)cboSavedAircraft.SelectedItem).Clone();
+                Aircraft v = (Aircraft)_selectedResource;
+                v.UniqueIDNum = 0;
+                checkInRecord.ResourceType = "Aircraft";
+                checkInRecord.LastDayOnIncident = DateTime.MaxValue;
+
+
+                MoveToCheckInDetailsPage();
+            }
+
+        }
+
+        private void btnSelectNewAircraft_Click(object sender, EventArgs e)
+        {
+            if (editAircraftControl1.IsValid)
+            {
+                _selectedResource = editAircraftControl1.selectedAircraft.Clone();
+                Aircraft v = (Aircraft)_selectedResource;
+               checkInRecord.ResourceType = "Aircraft";
+                checkInRecord.LastDayOnIncident = DateTime.MaxValue;
+
+                MoveToCheckInDetailsPage();
+            }
         }
     }
 }

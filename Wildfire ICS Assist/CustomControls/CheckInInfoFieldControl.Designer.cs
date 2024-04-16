@@ -78,7 +78,7 @@
             // chkBoolValue
             // 
             this.chkBoolValue.AutoSize = true;
-            this.chkBoolValue.Location = new System.Drawing.Point(425, 5);
+            this.chkBoolValue.Location = new System.Drawing.Point(392, 6);
             this.chkBoolValue.Name = "chkBoolValue";
             this.chkBoolValue.Size = new System.Drawing.Size(61, 28);
             this.chkBoolValue.TabIndex = 23;
@@ -122,7 +122,7 @@
             0,
             0});
             this.numNumberValue.Name = "numNumberValue";
-            this.numNumberValue.Size = new System.Drawing.Size(469, 29);
+            this.numNumberValue.Size = new System.Drawing.Size(102, 29);
             this.numNumberValue.TabIndex = 141;
             this.numNumberValue.ValueChanged += new System.EventHandler(this.numNumberValue_ValueChanged);
             // 

@@ -268,6 +268,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public Timeline taskTimeline { get => _taskTimeline; set => _taskTimeline = value; }
         public List<Note> allNotes { get => _allNotes; set => _allNotes = value; }
         public List<Vehicle> allVehicles { get => AllIncidentResources.OfType<Vehicle>().ToList(); }
+        public List<Aircraft> AllAircraft { get => AllIncidentResources.OfType<Aircraft>().ToList(); }
         public List<Vehicle> ActiveIncidentVehicles { get { return ActiveIncidentResources.OfType<Vehicle>().ToList(); } }
 
         public List<PositionLogEntry> allPositionLogEntries { get => _allPositionLogEntries; set => _allPositionLogEntries = value; }

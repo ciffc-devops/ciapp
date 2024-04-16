@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.CustomControls;
 using Wildfire_ICS_Assist.OptionsForms;
 using Wildfire_ICS_Assist.Properties;
 using Wildfire_ICS_Assist.UtilityForms;
@@ -21,14 +22,15 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CheckedInResourcesForm : Form
+    public partial class CheckedInResourcesForm : BaseForm
     {
         bool keepListBuilt = false;
 
 
         public CheckedInResourcesForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
+            this.menuStrip1.BackColor = Program.FormAccent;
         }
 
         private void CheckedInResourcesForm_Load(object sender, EventArgs e)
@@ -53,12 +55,18 @@ namespace Wildfire_ICS_Assist
             Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
             Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
             Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            Program.wfIncidentService.AircraftChanged += WfIncidentService_AircraftChanged;
             Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
 
             keepListBuilt = true;
             BuildCheckInListViaWorker();
 
 
+        }
+
+        private void WfIncidentService_AircraftChanged(AircraftEventArgs e)
+        {
+            LoadResourcesList();
         }
 
         public static int PNumMin { get => Program.PNumMin; set => Program.PNumMin = value; }
@@ -146,6 +154,23 @@ namespace Wildfire_ICS_Assist
             */
         }
 
+        private Aircraft UpdateAircraftFromCheckinInfo(CheckInRecord record, Aircraft air)
+        {
+            if (record.GetInfoFieldValue(new Guid("2747c124-5f49-4594-b33c-27914cf639c1")) != null) { air.Pilot = record.GetInfoFieldValue(new Guid("2747c124-5f49-4594-b33c-27914cf639c1")).ToString(); }
+            air.LeaderName = air.Pilot;
+            //if (record.GetInfoFieldValue(new Guid("4d85520b-e0a7-4667-be82-9dbfe8c85f8d")) != null) { air.IsMedivac = Convert.ToBoolean(record.GetInfoFieldValue(new Guid("4d85520b-e0a7-4667-be82-9dbfe8c85f8d"))); }
+            air.IsMedivac = false;
+            if (record.GetInfoFieldValue(new Guid("f61cd676-dba8-4ca3-a26a-ae47ffb5fe2f")) != null) { air.NumberOfPeople = Convert.ToInt32(record.GetInfoFieldValue(new Guid("f61cd676-dba8-4ca3-a26a-ae47ffb5fe2f"))); }
+            air.Type = air.AircraftTypeText;
+            air.Kind = air.MakeModel;
+            air.OpPeriod = Program.CurrentOpPeriod;
+            if (record.GetInfoFieldValue(new Guid("52e0b701-0f1b-445c-855a-dd7354b3078e")) != null) { air.Base = record.GetInfoFieldValue(new Guid("52e0b701-0f1b-445c-855a-dd7354b3078e")).ToString(); }
+
+            //if (record.GetInfoFieldValue(new Guid("41ABBEA0-5995-4F23-883E-8F2C311A922D")) != null) { air.StartTime = Convert.ToDateTime(record.GetInfoFieldValue(new Guid("41ABBEA0-5995-4F23-883E-8F2C311A922D"))); }
+            
+            //Program.wfIncidentService.UpsertAircraft(air);
+            return air;
+        }
         private bool StartCheckIn(bool autoStart, CheckInRecord existingRecord = null)
         {
             bool autoStartNextCheckin = false;
@@ -220,6 +245,18 @@ namespace Wildfire_ICS_Assist
                                 Program.wfIncidentService.UpsertPersonnel(eqop);
                             }
                             break;
+                        case "Aircraft":
+                            Aircraft air = resource as Aircraft;
+                            air.NumberOfPeople = 1;
+                            air.StartTime = Program.CurrentOpPeriodDetails.PeriodStart;
+                            air.EndTime = Program.CurrentOpPeriodDetails.PeriodEnd;
+                           air =  UpdateAircraftFromCheckinInfo(record, air);
+                            Program.wfIncidentService.UpsertAircraft(air);
+                            if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, ENumMin, ENumMax); }
+
+                            break;
+
+
                         case "Crew":
                             OperationalSubGroup group = resource as OperationalSubGroup;
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, CNumMin, CNumMax); }
@@ -1053,7 +1090,20 @@ namespace Wildfire_ICS_Assist
                 editForm.SetRecord(rec.Clone());
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
+                    editForm.SelectedRecord.DateReplacementRequired = editForm.SelectedRecord.LastDayOnIncident.AddDays(-1);
                     Program.wfIncidentService.UpsertCheckInRecord(editForm.SelectedRecord);
+
+
+                    if (editForm.SelectedRecord.ResourceType.Equals("Aircraft"))
+                    {
+                        if (Program.CurrentIncident.AllAircraft.Any(o => o.ID == editForm.SelectedRecord.ResourceID))
+                        {
+                            Aircraft air = UpdateAircraftFromCheckinInfo(editForm.SelectedRecord, Program.CurrentIncident.AllAircraft.First(o => o.ID == editForm.SelectedRecord.ResourceID).Clone());
+                            Program.wfIncidentService.UpsertAircraft(air);
+                        }
+                    }
+                    
+
 
                     if (editForm.AssignIfPossible && !string.IsNullOrEmpty(editForm.SelectedRecord.InitialRoleName))
                     {
@@ -1071,7 +1121,7 @@ namespace Wildfire_ICS_Assist
                 }
             }
         }
-
+        
 
         private void OpenResourceForEdit(CheckInRecordWithResource rec)
         {
@@ -1094,12 +1144,12 @@ namespace Wildfire_ICS_Assist
 
                 case "Visitor":
                     Personnel v = rec.Resource as Personnel;
-                    using (EditSavedPersonnelForm personnelForm = new EditSavedPersonnelForm())
+                    using (EditVisitorForm personnelForm = new EditVisitorForm())
                     {
-                        personnelForm.selectedMember = v.Clone();
+                        personnelForm.selectedPerson = v.Clone();
                         if (personnelForm.ShowDialog() == DialogResult.OK)
                         {
-                            Program.wfIncidentService.UpsertPersonnel(personnelForm.selectedMember);
+                            Program.wfIncidentService.UpsertPersonnel(personnelForm.selectedPerson);
                         }
                     }
 
@@ -1110,10 +1160,27 @@ namespace Wildfire_ICS_Assist
 
                     using (EditSavedVehicleForm personnelForm = new EditSavedVehicleForm())
                     {
+                        List<IncidentResource> potentialOperators = GetPossibleVehicleOperators(ve);
+                        personnelForm.SetPossibleOperators(potentialOperators);
                         personnelForm.vehicle = ve.Clone();
+                        personnelForm.DisplayOperator = true;
                         if (personnelForm.ShowDialog() == DialogResult.OK)
                         {
+
+                            if (personnelForm.vehicle.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == personnelForm.vehicle.OperatorID))
+                            {
+                                Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == personnelForm.vehicle.OperatorID) as Personnel;
+                                eqop.ParentResourceID = personnelForm.vehicle.ID;
+                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                            } else if (ve.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == ve.OperatorID))
+                            {
+                                Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == ve.OperatorID) as Personnel;
+                                eqop.ParentResourceID = Guid.Empty;
+                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                            }
+
                             Program.wfIncidentService.UpsertVehicle(personnelForm.vehicle);
+
                         }
                     }
 
@@ -1122,9 +1189,28 @@ namespace Wildfire_ICS_Assist
                     Vehicle eq = rec.Resource as Vehicle;
                     using (EditSavedVehicleForm personnelForm = new EditSavedVehicleForm())
                     {
+
+                        List<IncidentResource> potentialOperators = GetPossibleVehicleOperators(eq);
+                        personnelForm.SetPossibleOperators(potentialOperators);
+
+
+                        personnelForm.DisplayOperator = true;
                         personnelForm.vehicle = eq.Clone();
                         if (personnelForm.ShowDialog() == DialogResult.OK)
                         {
+                            if (personnelForm.vehicle.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == personnelForm.vehicle.OperatorID))
+                            {
+                                Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == personnelForm.vehicle.OperatorID) as Personnel;
+                                eqop.ParentResourceID = personnelForm.vehicle.ID;
+                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                            }
+                            else if (eq.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == eq.OperatorID))
+                            {
+                                Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == eq.OperatorID) as Personnel;
+                                eqop.ParentResourceID = Guid.Empty;
+                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                            }
+
                             Program.wfIncidentService.UpsertVehicle(personnelForm.vehicle);
                         }
                     }
@@ -1146,10 +1232,45 @@ namespace Wildfire_ICS_Assist
                         UpdateEditedCrew(hecrew, crewForm);
                     }
                     break;
+                case "Aircraft":
+                    Aircraft air = rec.Resource as Aircraft;
+
+                    using (EditSavedAircraftForm personnelForm = new EditSavedAircraftForm())
+                    {
+                        personnelForm.SelectedAircraft = air.Clone();
+                        if (personnelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            Program.wfIncidentService.UpsertAircraft(personnelForm.SelectedAircraft);
+                        }
+                    }
+
+                    break;
             }
 
 
 
+        }
+
+        private List<IncidentResource> GetPossibleVehicleOperators(IncidentResource selectedResource)
+        {
+            List<IncidentResource> potentialOperators = (Program.CurrentIncident.GetUncommittedResources(Program.CurrentOpPeriod)).Where(o => o.GetType().Name.Equals("Personnel")).ToList();
+            //in case we're editing, add the current operator
+            if (selectedResource.GetType().Name.Equals("Vehicle"))
+            {
+                Vehicle v = selectedResource as Vehicle;
+                if (v.OperatorID != Guid.Empty)
+                {
+                    potentialOperators.AddRange(Program.CurrentIncident.IncidentPersonnel.Where(o => o.ID == v.OperatorID));
+                }
+            }
+            Personnel p = new Personnel();
+            p.Name = "";
+            p.ID = Guid.Empty;
+            potentialOperators.Insert(0, p);
+
+            
+            List<IncidentResource> operatorsForNewEquipment = new List<IncidentResource>(); operatorsForNewEquipment.AddRange(potentialOperators);
+            return operatorsForNewEquipment;
         }
 
         private void UpdateEditedCrew(OperationalSubGroup crew, CheckInEditCrewForm crewForm)
@@ -1350,6 +1471,12 @@ namespace Wildfire_ICS_Assist
         private void replacementPlanToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ShowResourcePlanning();
+        }
+
+        private void editSavedAircraftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SavedAircraftsForm savedForm = new SavedAircraftsForm();
+            savedForm.Show(this);
         }
     }
 

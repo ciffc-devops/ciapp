@@ -64,7 +64,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                 }
                 chkContractor.Checked = teamMember.IsContractor;
-                txtCellphone.SetText(teamMember.CellphoneNumber);
+                txtCellphone.Text  = teamMember.CellphoneNumber.FormatPhone();
                 cboType.Text = teamMember.Type;
                 cboKind.Text = teamMember.Kind;
                 txtPronouns.Text = teamMember.Pronouns;
@@ -329,6 +329,11 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void txtNOKName_TextChanged_1(object sender, EventArgs e)
         {
             teamMember.EmergencyContact = txtNOKName.Text;
+        }
+
+        private void txtCellphone_TextChanged_1(object sender, EventArgs e)
+        {
+            teamMember.CellphoneNumber = txtCellphone.Text;
         }
     }
 }

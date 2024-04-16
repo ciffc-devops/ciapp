@@ -19,11 +19,11 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class CloseOpPeriodForm : Form
+    public partial class CloseOpPeriodForm : BaseForm
     {
         public CloseOpPeriodForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent();
         }
 
         private OperationalPeriod NextOpPeriod { get => Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == NextOp); }
@@ -563,16 +563,7 @@ namespace Wildfire_ICS_Assist
             next.Sunset = current.Sunset;
             next.MedivacAircraftText = current.MedivacAircraftText;
 
-            foreach(Aircraft a in current.aircrafts)
-            {
-                if(!next.aircrafts.Any(o=>o.ID == a.ID))
-                {
-                    Aircraft nextA = a.Clone();
-                    nextA.OpPeriod = NextOp;
-                    Program.wfIncidentService.UpsertAircraft(nextA);
-                    aircraftAdded++;
-                }
-            }
+           
 
             next.notam = current.notam.Clone();
 

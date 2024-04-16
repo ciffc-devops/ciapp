@@ -17,12 +17,12 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class OperationalGroupsForm : Form
+    public partial class OperationalGroupsForm : BaseForm
     {
         OrganizationChart CurrentOrgChart { get => Program.CurrentOrgChart; }
         public OperationalGroupsForm()
         {
-            this.Icon = Program.programIcon; InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); 
         }
 
         private void OperationalGroupsForm_Load(object sender, EventArgs e)

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -92,6 +92,7 @@
             this.btnLogisticsOverview = new System.Windows.Forms.Button();
             this.btnDietaryAndAllergy = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnChangeID = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.btnEditResource = new System.Windows.Forms.Button();
             this.btnEditCheckIn = new System.Windows.Forms.Button();
@@ -101,13 +102,20 @@
             this.btnStartCheckIn = new System.Windows.Forms.Button();
             this.btnCheckInByManifest = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
-            this.btnChangeID = new System.Windows.Forms.Button();
             this.cmsPrint211 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printNewICS211sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printAllICS211sToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.checkInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newCheckInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replacementPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replacementPlanToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editSavedRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.importSavedVehiclesEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editSavedVehiclesEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDietaryAndAllergySummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,14 +124,8 @@
             this.printAllICS211sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exportCheckInDataToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editSavedRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editSavedVehiclesEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importSavedVehiclesEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.newCheckInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.replacementPlanToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.editSavedAircraftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -320,9 +322,9 @@
             // 
             this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colCheckIn.DataPropertyName = "CheckInDate";
-            dataGridViewCellStyle35.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle35.NullValue = null;
-            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle7.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle7.NullValue = null;
+            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle7;
             this.colCheckIn.HeaderText = "Check In";
             this.colCheckIn.Name = "colCheckIn";
             this.colCheckIn.ReadOnly = true;
@@ -331,10 +333,10 @@
             // colLastDay
             // 
             this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colLastDay.DataPropertyName = "LastDayOnIncident";
-            dataGridViewCellStyle36.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle36.NullValue = null;
-            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle36;
+            this.colLastDay.DataPropertyName = "LastDayOnIncidentStr";
+            dataGridViewCellStyle8.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle8.NullValue = null;
+            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle8;
             this.colLastDay.HeaderText = "Last Day";
             this.colLastDay.Name = "colLastDay";
             this.colLastDay.ReadOnly = true;
@@ -517,10 +519,11 @@
             "All Resources",
             "Personnel",
             "Visitor",
-            "Vehicle",
             "Equipment",
             "Operator",
-            "Crew"});
+            "Crew",
+            "Heavy Equipment Crew",
+            "Aircraft"});
             this.cboResourceVariety.Location = new System.Drawing.Point(7, 71);
             this.cboResourceVariety.Name = "cboResourceVariety";
             this.cboResourceVariety.Size = new System.Drawing.Size(276, 32);
@@ -878,7 +881,7 @@
             this.btnResourcePlanning.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnResourcePlanning.Location = new System.Drawing.Point(8, 32);
             this.btnResourcePlanning.Name = "btnResourcePlanning";
-            this.btnResourcePlanning.Size = new System.Drawing.Size(215, 48);
+            this.btnResourcePlanning.Size = new System.Drawing.Size(215, 105);
             this.btnResourcePlanning.TabIndex = 51;
             this.btnResourcePlanning.Text = "Replacement Plan";
             this.btnResourcePlanning.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -999,6 +1002,20 @@
             this.panel1.Size = new System.Drawing.Size(386, 145);
             this.panel1.TabIndex = 60;
             // 
+            // btnChangeID
+            // 
+            this.btnChangeID.Enabled = false;
+            this.btnChangeID.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_740_hash;
+            this.btnChangeID.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnChangeID.Location = new System.Drawing.Point(214, 89);
+            this.btnChangeID.Name = "btnChangeID";
+            this.btnChangeID.Size = new System.Drawing.Size(163, 48);
+            this.btnChangeID.TabIndex = 134;
+            this.btnChangeID.Text = "Change ID #";
+            this.btnChangeID.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnChangeID.UseVisualStyleBackColor = true;
+            this.btnChangeID.Click += new System.EventHandler(this.btnChangeID_Click);
+            // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1063,7 +1080,7 @@
             this.pnlSignIn.Controls.Add(this.btnStartCheckIn);
             this.pnlSignIn.Location = new System.Drawing.Point(7, 7);
             this.pnlSignIn.Name = "pnlSignIn";
-            this.pnlSignIn.Size = new System.Drawing.Size(189, 94);
+            this.pnlSignIn.Size = new System.Drawing.Size(189, 145);
             this.pnlSignIn.TabIndex = 59;
             // 
             // label6
@@ -1079,12 +1096,13 @@
             // 
             // btnStartCheckIn
             // 
+            this.btnStartCheckIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartCheckIn.Image = ((System.Drawing.Image)(resources.GetObject("btnStartCheckIn.Image")));
             this.btnStartCheckIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnStartCheckIn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnStartCheckIn.Location = new System.Drawing.Point(3, 35);
             this.btnStartCheckIn.Name = "btnStartCheckIn";
-            this.btnStartCheckIn.Size = new System.Drawing.Size(181, 48);
+            this.btnStartCheckIn.Size = new System.Drawing.Size(181, 99);
             this.btnStartCheckIn.TabIndex = 46;
             this.btnStartCheckIn.Text = "Check-In";
             this.btnStartCheckIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -1096,7 +1114,7 @@
             this.btnCheckInByManifest.Image = ((System.Drawing.Image)(resources.GetObject("btnCheckInByManifest.Image")));
             this.btnCheckInByManifest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCheckInByManifest.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCheckInByManifest.Location = new System.Drawing.Point(5, 106);
+            this.btnCheckInByManifest.Location = new System.Drawing.Point(1230, 131);
             this.btnCheckInByManifest.Name = "btnCheckInByManifest";
             this.btnCheckInByManifest.Size = new System.Drawing.Size(187, 53);
             this.btnCheckInByManifest.TabIndex = 52;
@@ -1109,20 +1127,6 @@
             // 
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
-            // 
-            // btnChangeID
-            // 
-            this.btnChangeID.Enabled = false;
-            this.btnChangeID.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_740_hash;
-            this.btnChangeID.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnChangeID.Location = new System.Drawing.Point(214, 89);
-            this.btnChangeID.Name = "btnChangeID";
-            this.btnChangeID.Size = new System.Drawing.Size(163, 48);
-            this.btnChangeID.TabIndex = 134;
-            this.btnChangeID.Text = "Change ID #";
-            this.btnChangeID.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnChangeID.UseVisualStyleBackColor = true;
-            this.btnChangeID.Click += new System.EventHandler(this.btnChangeID_Click);
             // 
             // cmsPrint211
             // 
@@ -1173,6 +1177,13 @@
             this.checkInToolStripMenuItem.Text = "Check In";
             this.checkInToolStripMenuItem.Click += new System.EventHandler(this.checkInToolStripMenuItem_Click);
             // 
+            // newCheckInToolStripMenuItem
+            // 
+            this.newCheckInToolStripMenuItem.Name = "newCheckInToolStripMenuItem";
+            this.newCheckInToolStripMenuItem.Size = new System.Drawing.Size(199, 30);
+            this.newCheckInToolStripMenuItem.Text = "New Check In";
+            this.newCheckInToolStripMenuItem.Click += new System.EventHandler(this.newCheckInToolStripMenuItem_Click);
+            // 
             // replacementPlanToolStripMenuItem
             // 
             this.replacementPlanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1181,6 +1192,62 @@
             this.replacementPlanToolStripMenuItem.Name = "replacementPlanToolStripMenuItem";
             this.replacementPlanToolStripMenuItem.Size = new System.Drawing.Size(228, 29);
             this.replacementPlanToolStripMenuItem.Text = "Replacement Planning";
+            // 
+            // replacementPlanToolStripMenuItem1
+            // 
+            this.replacementPlanToolStripMenuItem1.Name = "replacementPlanToolStripMenuItem1";
+            this.replacementPlanToolStripMenuItem1.Size = new System.Drawing.Size(234, 30);
+            this.replacementPlanToolStripMenuItem1.Text = "Replacement Plan";
+            this.replacementPlanToolStripMenuItem1.Click += new System.EventHandler(this.replacementPlanToolStripMenuItem1_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importResourcesToolStripMenuItem,
+            this.editSavedRToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.importSavedVehiclesEquipmentToolStripMenuItem,
+            this.editSavedVehiclesEquipmentToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.editSavedAircraftToolStripMenuItem});
+            this.importToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_399_import;
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(96, 29);
+            this.importToolStripMenuItem.Text = "Import";
+            // 
+            // importResourcesToolStripMenuItem
+            // 
+            this.importResourcesToolStripMenuItem.Name = "importResourcesToolStripMenuItem";
+            this.importResourcesToolStripMenuItem.Size = new System.Drawing.Size(343, 30);
+            this.importResourcesToolStripMenuItem.Text = "Import Personnel";
+            this.importResourcesToolStripMenuItem.Click += new System.EventHandler(this.importResourcesToolStripMenuItem_Click);
+            // 
+            // editSavedRToolStripMenuItem
+            // 
+            this.editSavedRToolStripMenuItem.Name = "editSavedRToolStripMenuItem";
+            this.editSavedRToolStripMenuItem.Size = new System.Drawing.Size(343, 30);
+            this.editSavedRToolStripMenuItem.Text = "Edit Saved Personnel";
+            this.editSavedRToolStripMenuItem.Click += new System.EventHandler(this.editSavedRToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(340, 6);
+            // 
+            // importSavedVehiclesEquipmentToolStripMenuItem
+            // 
+            this.importSavedVehiclesEquipmentToolStripMenuItem.Name = "importSavedVehiclesEquipmentToolStripMenuItem";
+            this.importSavedVehiclesEquipmentToolStripMenuItem.Size = new System.Drawing.Size(343, 30);
+            this.importSavedVehiclesEquipmentToolStripMenuItem.Text = "Import Vehicles / Equipment";
+            this.importSavedVehiclesEquipmentToolStripMenuItem.Visible = false;
+            this.importSavedVehiclesEquipmentToolStripMenuItem.Click += new System.EventHandler(this.importSavedVehiclesEquipmentToolStripMenuItem_Click);
+            // 
+            // editSavedVehiclesEquipmentToolStripMenuItem
+            // 
+            this.editSavedVehiclesEquipmentToolStripMenuItem.Name = "editSavedVehiclesEquipmentToolStripMenuItem";
+            this.editSavedVehiclesEquipmentToolStripMenuItem.Size = new System.Drawing.Size(343, 30);
+            this.editSavedVehiclesEquipmentToolStripMenuItem.Text = "Edit Saved Vehicles/Equipment";
+            this.editSavedVehiclesEquipmentToolStripMenuItem.Click += new System.EventHandler(this.editSavedVehiclesEquipmentToolStripMenuItem_Click);
             // 
             // logisticsToolStripMenuItem
             // 
@@ -1195,14 +1262,14 @@
             // printLogisticsOverviewToolStripMenuItem
             // 
             this.printLogisticsOverviewToolStripMenuItem.Name = "printLogisticsOverviewToolStripMenuItem";
-            this.printLogisticsOverviewToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.printLogisticsOverviewToolStripMenuItem.Size = new System.Drawing.Size(374, 30);
             this.printLogisticsOverviewToolStripMenuItem.Text = "Print Logistics Overview";
             this.printLogisticsOverviewToolStripMenuItem.Click += new System.EventHandler(this.printLogisticsOverviewToolStripMenuItem_Click);
             // 
             // printDietaryAndAllergySummaryToolStripMenuItem
             // 
             this.printDietaryAndAllergySummaryToolStripMenuItem.Name = "printDietaryAndAllergySummaryToolStripMenuItem";
-            this.printDietaryAndAllergySummaryToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.printDietaryAndAllergySummaryToolStripMenuItem.Size = new System.Drawing.Size(374, 30);
             this.printDietaryAndAllergySummaryToolStripMenuItem.Text = "Print Dietary and Allergy Summary";
             this.printDietaryAndAllergySummaryToolStripMenuItem.Click += new System.EventHandler(this.printDietaryAndAllergySummaryToolStripMenuItem_Click);
             // 
@@ -1221,89 +1288,40 @@
             // printNewICS211sToolStripMenuItem1
             // 
             this.printNewICS211sToolStripMenuItem1.Name = "printNewICS211sToolStripMenuItem1";
-            this.printNewICS211sToolStripMenuItem1.Size = new System.Drawing.Size(272, 26);
+            this.printNewICS211sToolStripMenuItem1.Size = new System.Drawing.Size(318, 30);
             this.printNewICS211sToolStripMenuItem1.Text = "Print new ICS-211s";
             this.printNewICS211sToolStripMenuItem1.Click += new System.EventHandler(this.printNewICS211sToolStripMenuItem1_Click);
             // 
             // printAllICS211sToolStripMenuItem
             // 
             this.printAllICS211sToolStripMenuItem.Name = "printAllICS211sToolStripMenuItem";
-            this.printAllICS211sToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
+            this.printAllICS211sToolStripMenuItem.Size = new System.Drawing.Size(318, 30);
             this.printAllICS211sToolStripMenuItem.Text = "Print all ICS-211s";
             this.printAllICS211sToolStripMenuItem.Click += new System.EventHandler(this.printAllICS211sToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(269, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(315, 6);
             // 
             // exportCheckInDataToCSVToolStripMenuItem
             // 
             this.exportCheckInDataToCSVToolStripMenuItem.Name = "exportCheckInDataToCSVToolStripMenuItem";
-            this.exportCheckInDataToCSVToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
+            this.exportCheckInDataToCSVToolStripMenuItem.Size = new System.Drawing.Size(318, 30);
             this.exportCheckInDataToCSVToolStripMenuItem.Text = "Export Check In data to CSV";
             this.exportCheckInDataToCSVToolStripMenuItem.Click += new System.EventHandler(this.exportCheckInDataToCSVToolStripMenuItem_Click);
             // 
-            // importToolStripMenuItem
+            // toolStripSeparator3
             // 
-            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importResourcesToolStripMenuItem,
-            this.editSavedRToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.importSavedVehiclesEquipmentToolStripMenuItem,
-            this.editSavedVehiclesEquipmentToolStripMenuItem});
-            this.importToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_399_import;
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(96, 29);
-            this.importToolStripMenuItem.Text = "Import";
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(340, 6);
             // 
-            // importResourcesToolStripMenuItem
+            // editSavedAircraftToolStripMenuItem
             // 
-            this.importResourcesToolStripMenuItem.Name = "importResourcesToolStripMenuItem";
-            this.importResourcesToolStripMenuItem.Size = new System.Drawing.Size(293, 26);
-            this.importResourcesToolStripMenuItem.Text = "Import Personnel";
-            this.importResourcesToolStripMenuItem.Click += new System.EventHandler(this.importResourcesToolStripMenuItem_Click);
-            // 
-            // editSavedRToolStripMenuItem
-            // 
-            this.editSavedRToolStripMenuItem.Name = "editSavedRToolStripMenuItem";
-            this.editSavedRToolStripMenuItem.Size = new System.Drawing.Size(293, 26);
-            this.editSavedRToolStripMenuItem.Text = "Edit Saved Personnel";
-            this.editSavedRToolStripMenuItem.Click += new System.EventHandler(this.editSavedRToolStripMenuItem_Click);
-            // 
-            // editSavedVehiclesEquipmentToolStripMenuItem
-            // 
-            this.editSavedVehiclesEquipmentToolStripMenuItem.Name = "editSavedVehiclesEquipmentToolStripMenuItem";
-            this.editSavedVehiclesEquipmentToolStripMenuItem.Size = new System.Drawing.Size(293, 26);
-            this.editSavedVehiclesEquipmentToolStripMenuItem.Text = "Edit Saved Vehicles/Equipment";
-            this.editSavedVehiclesEquipmentToolStripMenuItem.Click += new System.EventHandler(this.editSavedVehiclesEquipmentToolStripMenuItem_Click);
-            // 
-            // importSavedVehiclesEquipmentToolStripMenuItem
-            // 
-            this.importSavedVehiclesEquipmentToolStripMenuItem.Name = "importSavedVehiclesEquipmentToolStripMenuItem";
-            this.importSavedVehiclesEquipmentToolStripMenuItem.Size = new System.Drawing.Size(343, 30);
-            this.importSavedVehiclesEquipmentToolStripMenuItem.Text = "Import Vehicles / Equipment";
-            this.importSavedVehiclesEquipmentToolStripMenuItem.Visible = false;
-            this.importSavedVehiclesEquipmentToolStripMenuItem.Click += new System.EventHandler(this.importSavedVehiclesEquipmentToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(290, 6);
-            // 
-            // newCheckInToolStripMenuItem
-            // 
-            this.newCheckInToolStripMenuItem.Name = "newCheckInToolStripMenuItem";
-            this.newCheckInToolStripMenuItem.Size = new System.Drawing.Size(199, 30);
-            this.newCheckInToolStripMenuItem.Text = "New Check In";
-            this.newCheckInToolStripMenuItem.Click += new System.EventHandler(this.newCheckInToolStripMenuItem_Click);
-            // 
-            // replacementPlanToolStripMenuItem1
-            // 
-            this.replacementPlanToolStripMenuItem1.Name = "replacementPlanToolStripMenuItem1";
-            this.replacementPlanToolStripMenuItem1.Size = new System.Drawing.Size(234, 30);
-            this.replacementPlanToolStripMenuItem1.Text = "Replacement Plan";
-            this.replacementPlanToolStripMenuItem1.Click += new System.EventHandler(this.replacementPlanToolStripMenuItem1_Click);
+            this.editSavedAircraftToolStripMenuItem.Name = "editSavedAircraftToolStripMenuItem";
+            this.editSavedAircraftToolStripMenuItem.Size = new System.Drawing.Size(343, 30);
+            this.editSavedAircraftToolStripMenuItem.Text = "Edit Saved Aircraft";
+            this.editSavedAircraftToolStripMenuItem.Click += new System.EventHandler(this.editSavedAircraftToolStripMenuItem_Click);
             // 
             // CheckedInResourcesForm
             // 
@@ -1396,18 +1414,6 @@
         private System.Windows.Forms.ToolStripMenuItem changeUniqueIDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem demobilizeToolStripMenuItem;
         private System.Windows.Forms.Button btnLogisticsOverview;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colVariety;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colKind;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInitialRole;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLeader;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfPeople;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfEquipment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckIn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLastDay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.SaveFileDialog svdExport;
         private System.Windows.Forms.Button btnCheckInByManifest;
         private System.Windows.Forms.Button btnEditCheckIn;
@@ -1448,5 +1454,19 @@
         private System.Windows.Forms.ToolStripMenuItem importSavedVehiclesEquipmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newCheckInToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem replacementPlanToolStripMenuItem1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colVariety;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colKind;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInitialRole;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLeader;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfPeople;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumberOfEquipment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastDay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem editSavedAircraftToolStripMenuItem;
     }
 }

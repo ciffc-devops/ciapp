@@ -53,13 +53,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.datNewEnd = new System.Windows.Forms.DateTimePicker();
             this.datNewStart = new System.Windows.Forms.DateTimePicker();
-            this.editAircraftControl1 = new Wildfire_ICS_Assist.CustomControls.EditAircraftControl();
             this.label12 = new System.Windows.Forms.Label();
             this.txtNewPilot = new System.Windows.Forms.TextBox();
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.editAircraftControl1 = new Wildfire_ICS_Assist.CustomControls.EditAircraftControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -86,7 +86,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(859, 744);
+            this.splitContainer1.Size = new System.Drawing.Size(859, 811);
             this.splitContainer1.SplitterDistance = 196;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -251,7 +251,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 487);
+            this.btnCancel.Location = new System.Drawing.Point(6, 554);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
@@ -283,7 +283,7 @@
             this.panel2.Controls.Add(this.btnAddNew);
             this.panel2.Location = new System.Drawing.Point(6, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(841, 475);
+            this.panel2.Size = new System.Drawing.Size(841, 542);
             this.panel2.TabIndex = 98;
             // 
             // btnMedivacHelpNew
@@ -294,7 +294,7 @@
             this.btnMedivacHelpNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMedivacHelpNew.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnMedivacHelpNew.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMedivacHelpNew.Location = new System.Drawing.Point(480, 377);
+            this.btnMedivacHelpNew.Location = new System.Drawing.Point(480, 444);
             this.btnMedivacHelpNew.Name = "btnMedivacHelpNew";
             this.btnMedivacHelpNew.Size = new System.Drawing.Size(25, 25);
             this.btnMedivacHelpNew.TabIndex = 115;
@@ -307,7 +307,7 @@
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label7.Location = new System.Drawing.Point(5, 377);
+            this.label7.Location = new System.Drawing.Point(5, 444);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(153, 26);
             this.label7.TabIndex = 114;
@@ -318,7 +318,7 @@
             // 
             this.chkNewIsMedivac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkNewIsMedivac.AutoSize = true;
-            this.chkNewIsMedivac.Location = new System.Drawing.Point(168, 377);
+            this.chkNewIsMedivac.Location = new System.Drawing.Point(168, 444);
             this.chkNewIsMedivac.Name = "chkNewIsMedivac";
             this.chkNewIsMedivac.Size = new System.Drawing.Size(306, 28);
             this.chkNewIsMedivac.TabIndex = 31;
@@ -328,7 +328,7 @@
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Location = new System.Drawing.Point(450, 342);
+            this.label3.Location = new System.Drawing.Point(450, 409);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 26);
             this.label3.TabIndex = 113;
@@ -338,7 +338,7 @@
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.Location = new System.Drawing.Point(0, 342);
+            this.label2.Location = new System.Drawing.Point(0, 409);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(153, 26);
             this.label2.TabIndex = 112;
@@ -350,7 +350,7 @@
             this.datNewEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.datNewEnd.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datNewEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datNewEnd.Location = new System.Drawing.Point(511, 342);
+            this.datNewEnd.Location = new System.Drawing.Point(511, 409);
             this.datNewEnd.Name = "datNewEnd";
             this.datNewEnd.Size = new System.Drawing.Size(313, 29);
             this.datNewEnd.TabIndex = 30;
@@ -360,29 +360,15 @@
             this.datNewStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.datNewStart.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datNewStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datNewStart.Location = new System.Drawing.Point(168, 342);
+            this.datNewStart.Location = new System.Drawing.Point(168, 409);
             this.datNewStart.Name = "datNewStart";
             this.datNewStart.Size = new System.Drawing.Size(266, 29);
             this.datNewStart.TabIndex = 29;
             // 
-            // editAircraftControl1
-            // 
-            this.editAircraftControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.editAircraftControl1.BackColor = System.Drawing.Color.Transparent;
-            this.editAircraftControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editAircraftControl1.Location = new System.Drawing.Point(6, 43);
-            this.editAircraftControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.editAircraftControl1.Name = "editAircraftControl1";
-            this.editAircraftControl1.selectedAircraft = null;
-            this.editAircraftControl1.Size = new System.Drawing.Size(824, 255);
-            this.editAircraftControl1.TabIndex = 27;
-            // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label12.Location = new System.Drawing.Point(0, 309);
+            this.label12.Location = new System.Drawing.Point(0, 376);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(153, 26);
             this.label12.TabIndex = 107;
@@ -393,7 +379,7 @@
             // 
             this.txtNewPilot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewPilot.Location = new System.Drawing.Point(168, 307);
+            this.txtNewPilot.Location = new System.Drawing.Point(168, 374);
             this.txtNewPilot.Name = "txtNewPilot";
             this.txtNewPilot.Size = new System.Drawing.Size(656, 29);
             this.txtNewPilot.TabIndex = 28;
@@ -402,7 +388,7 @@
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(391, 430);
+            this.chkSaveForLater.Location = new System.Drawing.Point(391, 497);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSaveForLater.TabIndex = 32;
@@ -423,7 +409,7 @@
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(629, 419);
+            this.btnAddNew.Location = new System.Drawing.Point(629, 486);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
@@ -433,11 +419,25 @@
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
+            // editAircraftControl1
+            // 
+            this.editAircraftControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editAircraftControl1.BackColor = System.Drawing.Color.Transparent;
+            this.editAircraftControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editAircraftControl1.Location = new System.Drawing.Point(6, 43);
+            this.editAircraftControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.editAircraftControl1.Name = "editAircraftControl1";
+            this.editAircraftControl1.selectedAircraft = null;
+            this.editAircraftControl1.Size = new System.Drawing.Size(824, 322);
+            this.editAircraftControl1.TabIndex = 27;
+            // 
             // AircraftEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(859, 744);
+            this.ClientSize = new System.Drawing.Size(859, 811);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);

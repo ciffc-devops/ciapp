@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -54,6 +55,9 @@ namespace Wildfire_ICS_Assist.CustomControls
                         case "DateTime":
                             if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, "This field is required"); }
                             return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
+                        case "Time":
+                            if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, "This field is required"); }
+                            return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
                         case "List":
                             if (string.IsNullOrEmpty(cboListValue.Text)) { errorProvider1.SetError(cboListValue, "This field is required"); } else { errorProvider1.SetError(cboListValue, ""); }
                             return !string.IsNullOrEmpty(cboListValue.Text);
@@ -61,6 +65,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                         case "Weight":
                             if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, "This field is required"); } else { errorProvider1.SetError(txtStringValue, ""); }
                             return WeightInKG > 0;
+                        case "Int":
+                            return numNumberValue.Value > 0;
                         default:
                             if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, "This field is required"); } else { errorProvider1.SetError(txtStringValue, ""); }
                             return !string.IsNullOrEmpty(txtStringValue.Text);
@@ -123,8 +129,21 @@ namespace Wildfire_ICS_Assist.CustomControls
                         datDateValue.Location = startPoint;
                         datDateValue.Width = width;
                         datDateValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                        datDateValue.CustomFormat = Program.DateFormat;
+                        break;
+                    case "Time":
+                        if (infoField.DateValue > datDateValue.MinDate && infoField.DateValue < datDateValue.MaxDate)
+                        {
+                            datDateValue.Value = infoField.DateValue;
+                        }
+                        datDateValue.Visible = true;
+                        datDateValue.Location = startPoint;
+                        datDateValue.Width = width;
+                        datDateValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                        datDateValue.CustomFormat = "HH:mm";
 
                         break;
+
                     case "List":
 
                         cboListValue.Visible = true;
@@ -152,6 +171,13 @@ namespace Wildfire_ICS_Assist.CustomControls
                         numNumberValue.Width = pnlWeight.Location.X - 5 - startPoint.X;
                         numNumberValue.Value = infoField.DecimalValue;
                         rbKG.Checked = true;
+                        break;
+                    case "Int":
+                        numNumberValue.Visible = true;
+                        numNumberValue.Location = startPoint;
+                        numNumberValue.Width = pnlWeight.Location.X - 5 - startPoint.X;
+                        numNumberValue.Value = infoField.IntValue;
+
                         break;
                     default:
                         txtStringValue.Visible = true;
@@ -201,6 +227,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void numNumberValue_ValueChanged(object sender, EventArgs e)
         {
             infoField.DecimalValue = WeightInKG;
+            infoField.IntValue = Convert.ToInt32(numNumberValue.Value);
         }
 
         private void rbKG_CheckedChanged(object sender, EventArgs e)

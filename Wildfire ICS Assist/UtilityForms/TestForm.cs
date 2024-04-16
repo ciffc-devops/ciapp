@@ -47,7 +47,6 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     AirOperationsSummary airOps = TestTools.CreateAirOpsTest(seed);
                     airOps.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created air ops summary"); log.Append(Environment.NewLine);
-                    foreach (Aircraft a in airOps.aircrafts) { Program.wfIncidentService.UpsertAircraft(a); }
                     Program.wfIncidentService.UpsertAirOperationsSummary(airOps);
                     log.Append("Saved air ops summary"); log.Append(Environment.NewLine);
                 }
@@ -313,6 +312,26 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                 }
+
+                if (checkboxes[15].Checked)
+                {
+                    //check in
+                    for (int x = 0; x < 8; x++)
+                    {
+                        CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + x, "Aircraft");
+                        testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
+                        testCheckInPersonnel.Resource.OpPeriod = Program.CurrentOpPeriod;
+                        testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 1000);
+
+
+
+                        log.Append("Created Check in for Aircraft"); log.Append(Environment.NewLine);
+                        Program.wfIncidentService.UpsertAircraft(testCheckInPersonnel.Resource as Aircraft);
+                        Program.wfIncidentService.UpsertCheckInRecord(testCheckInPersonnel.Record);
+                        log.Append("Saved Check in for Aircraft"); log.Append(Environment.NewLine);
+
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -398,6 +417,9 @@ namespace Wildfire_ICS_Assist.UtilityForms
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Objectives";
 
+
+            checkboxes.Add(new CheckBox());
+            checkboxes.Last().Text = "Aircraft Check In";
 
             for (int x = 0; x < checkboxes.Count; x++)
             {
