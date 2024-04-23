@@ -162,10 +162,10 @@ namespace Wildfire_ICS_Assist.CustomControls
                 bool IsValid = true;
 
                 if (teamMember == null) { return false; }
-                if (string.IsNullOrEmpty(teamMember.FirstName) || string.IsNullOrEmpty(teamMember.FirstName.Trim())) { return false; }
-                if (string.IsNullOrEmpty(teamMember.LastName) || string.IsNullOrEmpty(teamMember.LastName.Trim())) { return false; }
+                if (!txtFirstName.IsValid) { return false; }
+                if (!txtLastName.IsValid) { return false; }
                 if (string.IsNullOrEmpty(teamMember.AccomodationPreference) || string.IsNullOrEmpty(teamMember.AccomodationPreference.Trim())) { return false; }
-                if (string.IsNullOrEmpty(teamMember.CellphoneNumber) || string.IsNullOrEmpty(teamMember.CellphoneNumber.Trim())) { return false; }
+                
                 if (string.IsNullOrEmpty(teamMember.Agency)) { return false; };
                 //if (string.IsNullOrEmpty(teamMember.EmergencyContact)) { return false; };
                 SetColours();
