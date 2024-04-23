@@ -147,10 +147,12 @@ namespace Wildfire_ICS_Assist
 
         private void LoadPreparedBy()
         {
-            cboPreparedBy.DataSource = null;
-            cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
-            if (CurrentAirOpsSummary.PreparedByPositionID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByPositionID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByPositionID; }
-
+            if (cboPreparedBy != null && CurrentAirOpsSummary != null && CurrentOrgChart != null)
+            {
+                cboPreparedBy.DataSource = null;
+                cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
+                if (CurrentAirOpsSummary.PreparedByPositionID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByPositionID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByPositionID; }
+            }
         }
 
         private void LoadMainData()
