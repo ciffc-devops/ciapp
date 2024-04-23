@@ -86,7 +86,7 @@ namespace Wildfire_ICS_Assist
             numENumMin.Value = ENumMin; numENumMax.Value = ENumMax;
             numCNumMin.Value = CNumMin; numCNumMax.Value = CNumMax;
 
-            ConfirmResourceNumberAvailability();
+            //ConfirmResourceNumberAvailability();
         }
 
         private void Program_OperationalPeriodChanged(IncidentOpPeriodChangedEventArgs e)
@@ -98,19 +98,19 @@ namespace Wildfire_ICS_Assist
         {
 
             LoadResourcesList();
-            ConfirmResourceNumberAvailability();
+            //ConfirmResourceNumberAvailability();
 
         }
         private void Program_VehicleChanged(VehicleEventArgs e)
         {
             LoadResourcesList();
-            ConfirmResourceNumberAvailability();
+            //ConfirmResourceNumberAvailability();
         }
 
         private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
         {
             LoadResourcesList();
-            ConfirmResourceNumberAvailability();
+            //ConfirmResourceNumberAvailability();
 
         }
 
@@ -464,10 +464,11 @@ namespace Wildfire_ICS_Assist
             filters.Assigned = cboAssignedFilter.SelectedIndex;
             filters.MidPoint = Program.CurrentOpPeriodDetails.PeriodMid;
             filters.ResourceVarietyName = cboResourceVariety.Text;
+            
             if (_bw.IsBusy == false)
             {
                 dgvResources.Visible = false;
-
+                progBuildList.Visible = true;
                 _bw.RunWorkerAsync(filters);
             }
             else { RunBWAgain = true; }
@@ -523,7 +524,7 @@ namespace Wildfire_ICS_Assist
 
 
             //checkInRecords = checkInRecords.OrderBy(o => o.ResourceName).ToList();
-            _bw.ReportProgress(1);
+            _bw.ReportProgress(30);
 
 
 
@@ -531,7 +532,7 @@ namespace Wildfire_ICS_Assist
             {
                 checkInRecords = checkInRecords.Where(o => o.ResourceType.Equals(filters.ResourceVarietyName)).ToList(); ;
             }
-            _bw.ReportProgress(2);
+            _bw.ReportProgress(50);
 
 
             DateTime EndOfOp = Program.CurrentOpPeriodDetails.PeriodEnd;
@@ -551,7 +552,7 @@ namespace Wildfire_ICS_Assist
                     checkInRecords = checkInRecords.Where(o => o.Record.CheckedInThisTime(filters.MidPoint) && Math.Round(((TimeSpan)(o.LastDayOnIncident - EndOfOp)).TotalDays, 0) <= RedNumber).ToList();
                     break;
             }
-            _bw.ReportProgress(3);
+            _bw.ReportProgress(80);
 
 
             if (filters.Assigned == 1)
@@ -560,21 +561,21 @@ namespace Wildfire_ICS_Assist
 
             }
 
-            _bw.ReportProgress(4);
+            _bw.ReportProgress(100);
 
 
             e.Result = checkInRecords;
         }
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            progBuildList.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             List<CheckInRecordWithResource> checkInRecords = (List<CheckInRecordWithResource>)e.Result;
             if (_previousIndex >= 0 && dgvResources.Columns.Count > _previousIndex) { checkInRecords = GetSortedList(checkInRecords, dgvResources.Columns[_previousIndex].Name, _sortDirection); }
-
+            //progBuildList.Visible = false;
             //progressBar1.Visible = false;
             dgvResources.DataSource = checkInRecords;
             dgvResources.Visible = true;
@@ -584,7 +585,7 @@ namespace Wildfire_ICS_Assist
                 dgvResources.Columns[1].Frozen = true;
                 dgvResources.Columns[2].Frozen = true;
             }
-            if (RunBWAgain)
+            if (RunBWAgain || e.Cancelled)
             {
                 RunBWAgain = false;
                 BuildCheckInListViaWorker();
@@ -1477,6 +1478,11 @@ namespace Wildfire_ICS_Assist
         {
             SavedAircraftsForm savedForm = new SavedAircraftsForm();
             savedForm.Show(this);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            BuildCheckInListViaWorker();
         }
     }
 
