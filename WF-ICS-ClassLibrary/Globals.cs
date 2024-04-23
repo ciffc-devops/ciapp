@@ -25,7 +25,7 @@ namespace WF_ICS_ClassLibrary
         static Globals()
         {
             //Gets the connection string from the calling website and uses it throughout the class library
-            ProgramName = "Canadian Incident Action Plan Producer";
+            ProgramName = "Canadian Incident Action Plan Program";
             ProgramURL = "https://www.icscanada.ca";
         }
 
