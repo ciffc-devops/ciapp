@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.progBuildList = new System.Windows.Forms.ProgressBar();
             this.dgvResources = new System.Windows.Forms.DataGridView();
             this.colVariety = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +53,7 @@
             this.editCheckInInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeUniqueIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.demobilizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.cpFilters = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cboExpandCrews = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -116,6 +118,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.importSavedVehiclesEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editSavedVehiclesEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.editSavedAircraftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDietaryAndAllergySummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,8 +128,6 @@
             this.printAllICS211sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exportCheckInDataToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.editSavedAircraftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -176,8 +178,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.pnlSignIn);
             this.splitContainer1.Panel2.Controls.Add(this.btnCheckInByManifest);
-            this.splitContainer1.Size = new System.Drawing.Size(1348, 508);
-            this.splitContainer1.SplitterDistance = 346;
+            this.splitContainer1.Size = new System.Drawing.Size(1348, 571);
+            this.splitContainer1.SplitterDistance = 409;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -194,13 +196,26 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.progBuildList);
+            this.splitContainer2.Panel2.Controls.Add(this.btnRefresh);
             this.splitContainer2.Panel2.Controls.Add(this.cpFilters);
             this.splitContainer2.Panel2.Controls.Add(this.cpPNumbers);
-            this.splitContainer2.Size = new System.Drawing.Size(1348, 346);
+            this.splitContainer2.Size = new System.Drawing.Size(1348, 409);
             this.splitContainer2.SplitterDistance = 1042;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoving += new System.Windows.Forms.SplitterCancelEventHandler(this.splitContainer2_SplitterMoving);
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
+            // 
+            // progBuildList
+            // 
+            this.progBuildList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progBuildList.Location = new System.Drawing.Point(2, 60);
+            this.progBuildList.Name = "progBuildList";
+            this.progBuildList.Size = new System.Drawing.Size(299, 16);
+            this.progBuildList.TabIndex = 2;
+            this.progBuildList.Value = 50;
+            this.progBuildList.Visible = false;
             // 
             // dgvResources
             // 
@@ -231,7 +246,7 @@
             this.dgvResources.RowHeadersVisible = false;
             this.dgvResources.RowTemplate.Height = 30;
             this.dgvResources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResources.Size = new System.Drawing.Size(1042, 346);
+            this.dgvResources.Size = new System.Drawing.Size(1042, 409);
             this.dgvResources.TabIndex = 1;
             this.dgvResources.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvResources_CellFormatting);
             this.dgvResources.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvResources_ColumnHeaderMouseClick);
@@ -322,9 +337,9 @@
             // 
             this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colCheckIn.DataPropertyName = "CheckInDate";
-            dataGridViewCellStyle7.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle3;
             this.colCheckIn.HeaderText = "Check In";
             this.colCheckIn.Name = "colCheckIn";
             this.colCheckIn.ReadOnly = true;
@@ -334,9 +349,9 @@
             // 
             this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colLastDay.DataPropertyName = "LastDayOnIncidentStr";
-            dataGridViewCellStyle8.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle8.NullValue = null;
-            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle4;
             this.colLastDay.HeaderText = "Last Day";
             this.colLastDay.Name = "colLastDay";
             this.colLastDay.ReadOnly = true;
@@ -390,6 +405,20 @@
             this.demobilizeToolStripMenuItem.Text = "Demobilize Resource";
             this.demobilizeToolStripMenuItem.Click += new System.EventHandler(this.demobilizeToolStripMenuItem_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_82_refresh;
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRefresh.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnRefresh.Location = new System.Drawing.Point(15, 6);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(272, 48);
+            this.btnRefresh.TabIndex = 57;
+            this.btnRefresh.Text = "Refresh List";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // cpFilters
             // 
             this.cpFilters.BackColor = System.Drawing.Color.White;
@@ -412,7 +441,7 @@
             this.cpFilters.ExpandedWidth = 290;
             this.cpFilters.ExpandUp = false;
             this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpFilters.Location = new System.Drawing.Point(6, 15);
+            this.cpFilters.Location = new System.Drawing.Point(6, 81);
             this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
             this.cpFilters.Name = "cpFilters";
             this.cpFilters.Size = new System.Drawing.Size(290, 322);
@@ -570,10 +599,10 @@
             this.cpPNumbers.ExpandedWidth = 290;
             this.cpPNumbers.ExpandUp = true;
             this.cpPNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpPNumbers.Location = new System.Drawing.Point(6, 349);
+            this.cpPNumbers.Location = new System.Drawing.Point(278, 399);
             this.cpPNumbers.Margin = new System.Windows.Forms.Padding(6);
             this.cpPNumbers.Name = "cpPNumbers";
-            this.cpPNumbers.Size = new System.Drawing.Size(290, 40);
+            this.cpPNumbers.Size = new System.Drawing.Size(275, 30);
             this.cpPNumbers.TabIndex = 2;
             this.cpPNumbers.TitleText = "Resource Numbers";
             this.cpPNumbers.Visible = false;
@@ -585,7 +614,7 @@
             this.btnPNumHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnPNumHelp.Image")));
             this.btnPNumHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPNumHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPNumHelp.Location = new System.Drawing.Point(12, 48);
+            this.btnPNumHelp.Location = new System.Drawing.Point(-3, 48);
             this.btnPNumHelp.Name = "btnPNumHelp";
             this.btnPNumHelp.Size = new System.Drawing.Size(245, 49);
             this.btnPNumHelp.TabIndex = 88;
@@ -1249,6 +1278,18 @@
             this.editSavedVehiclesEquipmentToolStripMenuItem.Text = "Edit Saved Vehicles/Equipment";
             this.editSavedVehiclesEquipmentToolStripMenuItem.Click += new System.EventHandler(this.editSavedVehiclesEquipmentToolStripMenuItem_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(340, 6);
+            // 
+            // editSavedAircraftToolStripMenuItem
+            // 
+            this.editSavedAircraftToolStripMenuItem.Name = "editSavedAircraftToolStripMenuItem";
+            this.editSavedAircraftToolStripMenuItem.Size = new System.Drawing.Size(343, 30);
+            this.editSavedAircraftToolStripMenuItem.Text = "Edit Saved Aircraft";
+            this.editSavedAircraftToolStripMenuItem.Click += new System.EventHandler(this.editSavedAircraftToolStripMenuItem_Click);
+            // 
             // logisticsToolStripMenuItem
             // 
             this.logisticsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1311,30 +1352,15 @@
             this.exportCheckInDataToCSVToolStripMenuItem.Text = "Export Check In data to CSV";
             this.exportCheckInDataToCSVToolStripMenuItem.Click += new System.EventHandler(this.exportCheckInDataToCSVToolStripMenuItem_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(340, 6);
-            // 
-            // editSavedAircraftToolStripMenuItem
-            // 
-            this.editSavedAircraftToolStripMenuItem.Name = "editSavedAircraftToolStripMenuItem";
-            this.editSavedAircraftToolStripMenuItem.Size = new System.Drawing.Size(343, 30);
-            this.editSavedAircraftToolStripMenuItem.Text = "Edit Saved Aircraft";
-            this.editSavedAircraftToolStripMenuItem.Click += new System.EventHandler(this.editSavedAircraftToolStripMenuItem_Click);
-            // 
             // CheckedInResourcesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1348, 541);
+            this.ClientSize = new System.Drawing.Size(1348, 604);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
-            this.MinimumSize = new System.Drawing.Size(1364, 580);
+            this.MinimumSize = new System.Drawing.Size(1364, 635);
             this.Name = "CheckedInResourcesForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Checked In Resources";
             this.Load += new System.EventHandler(this.CheckedInResourcesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -1468,5 +1494,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem editSavedAircraftToolStripMenuItem;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ProgressBar progBuildList;
     }
 }
