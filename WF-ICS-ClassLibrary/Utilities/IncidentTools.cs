@@ -533,16 +533,18 @@ namespace WF_ICS_ClassLibrary.Utilities
             return chart;
         }
 
+      
+
+
         public static void CreateOpGroupsForOrgRoles(this OrganizationChart chart, WFIncident incident)
         {
-            foreach (ICSRole role in chart.ActiveRoles.Where(o => o.IsOpGroupSup && !o.IsPlaceholder))
+            foreach (ICSRole role in chart.ActiveRoles.Where(o =>o.OperationalGroupID != Guid.Empty))
             {
-                if (role.OperationalGroupID == Guid.Empty)
-                {
+                
                     OperationalGroup group = incident.createOperationalGroupFromRole(role);
                     role.OperationalGroupID = group.ID;
                     Globals.incidentService.UpsertOperationalGroup(group);
-                }
+                
             }
         }
 

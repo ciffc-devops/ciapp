@@ -329,9 +329,9 @@ namespace Wildfire_ICS_Assist
                 else
                 {
                     OperationalGroup selectedGroup = new OperationalGroup();
-                    if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
+                    if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID && o.OpPeriod == role.OpPeriod))
                     {
-                        selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
+                        selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID && o.OpPeriod == role.OpPeriod);
 
                         if (selectedGroup.GroupType.EqualsWithNull("Task Force") || selectedGroup.GroupType.EqualsWithNull("Strike Team") || selectedGroup.GroupType.EqualsWithNull("Single Resource"))
                         {
