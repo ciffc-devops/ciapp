@@ -55,7 +55,7 @@ namespace Wildfire_ICS_Assist
             }
             else if (rec.Record.IsCrew || rec.Record.IsHECrew)
             {
-                resourceCheckInEditControl1.SetResource(rec.Resource as OperationalSubGroup);
+                resourceCheckInEditControl1.SetResource(rec.Resource as Crew);
 
             }
             else if (rec.Record.IsAircraft)

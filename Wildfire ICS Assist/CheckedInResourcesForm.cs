@@ -258,7 +258,7 @@ namespace Wildfire_ICS_Assist
 
 
                         case "Crew":
-                            OperationalSubGroup group = resource as OperationalSubGroup;
+                            Crew group = resource as Crew;
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, CNumMin, CNumMax); }
                             if (group.IsEquipmentCrew) { group.Kind = "Heavy Equipment Crew"; }
                             else { group.Kind = "Crew"; }
@@ -269,7 +269,7 @@ namespace Wildfire_ICS_Assist
                             {
                                 if (Program.CurrentIncident.AllOperationalSubGroups.Any(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod))
                                 {
-                                    OperationalSubGroup sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
+                                    Crew sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
                                     sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
                                     Program.wfIncidentService.UpsertOperationalSubGroup(sub);
                                 }
@@ -1218,7 +1218,7 @@ namespace Wildfire_ICS_Assist
 
                     break;
                 case "Crew":
-                    OperationalSubGroup crew = rec.Resource as OperationalSubGroup;
+                    Crew crew = rec.Resource as Crew;
                     using (CheckInEditCrewForm crewForm = new CheckInEditCrewForm())
                     {
                         crewForm.selectedCrew = crew.Clone();
@@ -1226,7 +1226,7 @@ namespace Wildfire_ICS_Assist
                     }
                     break;
                 case "Heavy Equipment Crew":
-                    OperationalSubGroup hecrew = rec.Resource as OperationalSubGroup;
+                    Crew hecrew = rec.Resource as Crew;
                     using (CheckInEditCrewForm crewForm = new CheckInEditCrewForm())
                     {
                         crewForm.selectedCrew = hecrew.Clone();
@@ -1274,19 +1274,19 @@ namespace Wildfire_ICS_Assist
             return operatorsForNewEquipment;
         }
 
-        private void UpdateEditedCrew(OperationalSubGroup crew, CheckInEditCrewForm crewForm)
+        private void UpdateEditedCrew(Crew crew, CheckInEditCrewForm crewForm)
         {
             if (crewForm.ShowDialog() == DialogResult.OK)
             {
 
-                OperationalSubGroup group = crewForm.selectedCrew;
+                Crew group = crewForm.selectedCrew;
                 if (group.ActiveResourceListing.Any(o => o.IsLeader)) { group.LeaderID = group.ActiveResourceListing.First(o => o.IsLeader).ResourceID; group.LeaderName = group.ActiveResourceListing.First(o => o.IsLeader).ResourceName; }
                 List<OperationalGroupResourceListing> toRemoveFromCrew = crewForm.resourcesToRemoveFromCrew;
                 foreach (OperationalGroupResourceListing l in toRemoveFromCrew)
                 {
                     if (Program.CurrentIncident.AllOperationalSubGroups.Any(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod))
                     {
-                        OperationalSubGroup sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
+                        Crew sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
                         sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
                         Program.wfIncidentService.UpsertOperationalSubGroup(sub);
                     }

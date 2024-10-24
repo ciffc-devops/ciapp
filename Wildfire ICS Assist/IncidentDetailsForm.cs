@@ -284,8 +284,6 @@ namespace Wildfire_ICS_Assist
 
         private void setButtonCheckboxes()
         {
-            if (CurrentIncident.ActiveAssignments.Any(o => o.OpPeriod == Program.CurrentOpPeriod)) { btnAssignmentList.Image = Properties.Resources.glyphicons_basic_739_check; teamMembersToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
-            else { btnAssignmentList.Image = null; teamMembersToolStripMenuItem.Image = null; }
 
             if (CurrentIncident.hasMeangfulCommsPlan(CurrentOpPeriod)) { btnCommsPlan.Image = Properties.Resources.glyphicons_basic_739_check; communicationsPlanICS205ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check; }
             else { btnCommsPlan.Image = null; communicationsPlanICS205ToolStripMenuItem.Image = null; }
@@ -1634,15 +1632,6 @@ namespace Wildfire_ICS_Assist
             TriggerAutoSave();
         }
 
-        private void Program_TeamAssignmentChanged(TeamAssignmentEventArgs e)
-        {
-            if (e.item.OpPeriod == Program.CurrentOpPeriod)
-            {
-                setButtonCheckboxes();
-            }
-            TriggerAutoSave();
-        }
-
 
 
         private void Program_SafetyMessageChanged(SafetyMessageEventArgs e)
@@ -2874,7 +2863,7 @@ namespace Wildfire_ICS_Assist
                             Program.wfIncidentService.UpsertVehicle(ve);
                             break;
                         case "Crew":
-                            OperationalSubGroup group = resource as OperationalSubGroup;
+                            Crew group = resource as Crew;
                             Program.wfIncidentService.UpsertOperationalSubGroup(group);
                             foreach(IncidentResource subres in signInForm.SubResources)
                             {

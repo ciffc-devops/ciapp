@@ -63,7 +63,7 @@ namespace WildfireICSDesktopServices
         void DeleteIncidentObjective(Guid IncidentObjectiveID, string source = "local");
         void DeleteIncidentObjective(IncidentObjective record, string source = "local");
         void DeleteObject(object obj, string source);
-        void DeleteTaskEquipment(TaskEquipment te, string source = "local");
+        void DeleteTaskEquipment(IncidentGear te, string source = "local");
         void DeleteTimelineEvent(Guid RecordID, string source = "local");
         void DeleteTimelineEvent(TimelineEvent record, string source = "local");
         void DeleteVehicle(Guid RecordID, string source = "local");
@@ -82,7 +82,7 @@ namespace WildfireICSDesktopServices
         void UpsertCommsPlanItem(CommsPlanItem item, string function = null, string source = "local");
         // void UpsertCommsPlanItemLink(CommsPlanItemLink link, string source = "local");
         void UpsertContact(Contact record, string source = "local");
-        void UpsertEquipmentIssue(EquipmentIssue issue, string source = "local");
+        void UpsertEquipmentIssue(GearIssue issue, string source = "local");
         void UpsertICSRole(ICSRole record, string source = "local");
         void UpsertICSRole(string roleName, int opsPeriod, Personnel member, string source = "local");
         void DeleteICSRole(ICSRole roleToDelete, int opsPeriod, string source = "local");
@@ -102,7 +102,7 @@ namespace WildfireICSDesktopServices
         void UpsertOrganizationalChart(OrganizationChart record, bool UpsertRoles, string source = "local");
         void UpsertPositionLogEntry(PositionLogEntry record, string source = "local");
         void UpsertSafetyMessage(SafetyMessage record, string source = "local");
-        void UpsertTaskEquipment(TaskEquipment te, string source = "local");
+        void UpsertTaskEquipment(IncidentGear te, string source = "local");
         TaskUpdate UpsertTaskUpdate(object obj, string command, bool processed_locally, bool uploaded);
         TaskUpdate UpsertTaskUpdate(TaskUpdate update);
         void UpsertTimeline(Timeline record, string source = "local");
@@ -114,7 +114,7 @@ namespace WildfireICSDesktopServices
         void UpsertAirOperationsSummary(AirOperationsSummary record, string source = "local");
         void OnOpPeriodChanged(IncidentOpPeriodChangedEventArgs e);
         void UpsertOperationalGroup(OperationalGroup record, string source = "local");
-        void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local");
+        void UpsertOperationalSubGroup(Crew record, string source = "local");
         void UpsertDemobRecord(DemobilizationRecord record, string source = "local");
         void UpsertIncidentResource(IncidentResource record, string source = "local");
         void UpsertResourceReplacementPlan(ResourceReplacementPlan record, string source = "local");

@@ -9,18 +9,18 @@ namespace WF_ICS_ClassLibrary.EventHandling
 {
     public class TaskEquipmentEventArgs
     {
-        public TaskEquipment item { get; set; }
+        public IncidentGear item { get; set; }
 
-        public TaskEquipmentEventArgs(TaskEquipment _item) { item = _item; }
+        public TaskEquipmentEventArgs(IncidentGear _item) { item = _item; }
     }
     public delegate void TaskEquipmentEventHandler(TaskEquipmentEventArgs e);
 
 
     public class EquipmentIssueEventArgs
     {
-        public EquipmentIssue item { get; set; }
+        public GearIssue item { get; set; }
 
-        public EquipmentIssueEventArgs(EquipmentIssue _item) { item = _item; }
+        public EquipmentIssueEventArgs(GearIssue _item) { item = _item; }
     }
     public delegate void EquipmentIssueEventHandler(EquipmentIssueEventArgs e);
 }

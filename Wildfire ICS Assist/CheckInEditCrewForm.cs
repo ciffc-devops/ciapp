@@ -15,7 +15,7 @@ namespace Wildfire_ICS_Assist
 {
     public partial class CheckInEditCrewForm : BaseForm
     {
-       public  OperationalSubGroup selectedCrew
+       public  Crew selectedCrew
         {
             get { return crewEditControl1.subGroup; }
             set { SetCrew(value); }
@@ -31,7 +31,7 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        private void SetCrew(OperationalSubGroup crew)
+        private void SetCrew(Crew crew)
         {
             
             if (Program.CurrentIncident.ActiveOperationalSubGroups.Any(o => o.ID == crew.ID))

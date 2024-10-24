@@ -203,7 +203,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Crew"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertOperationalSubGroup(testCheckin.Resource as OperationalSubGroup);
+                        Program.wfIncidentService.UpsertOperationalSubGroup(testCheckin.Resource as Crew);
                         Program.wfIncidentService.UpsertCheckInRecord(testCheckin.Record);
                         log.Append("Saved Check in for Crew"); log.Append(Environment.NewLine);
 
@@ -257,7 +257,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Crew"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertOperationalSubGroup(testCheckin.Resource as OperationalSubGroup);
+                        Program.wfIncidentService.UpsertOperationalSubGroup(testCheckin.Resource as Crew);
                         Program.wfIncidentService.UpsertCheckInRecord(testCheckin.Record);
                         log.Append("Saved Check in for Crew"); log.Append(Environment.NewLine);
 

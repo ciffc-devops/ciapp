@@ -346,13 +346,13 @@ namespace WildfireICSDesktopServices
             {
                 UpsertContact(((Contact)obj).Clone(), source);
             }
-            else if (dataClassName.Equals(new TaskEquipment().GetType().Name))
+            else if (dataClassName.Equals(new IncidentGear().GetType().Name))
             {
-                UpsertTaskEquipment(((TaskEquipment)obj).Clone(), source);
+                UpsertTaskEquipment(((IncidentGear)obj).Clone(), source);
             }
-            else if (dataClassName.Equals(new EquipmentIssue().GetType().Name))
+            else if (dataClassName.Equals(new GearIssue().GetType().Name))
             {
-                UpsertEquipmentIssue(((EquipmentIssue)obj).Clone(), source);
+                UpsertEquipmentIssue(((GearIssue)obj).Clone(), source);
             }
             else if (dataClassName.Equals(new Hospital().GetType().Name))
             {
@@ -463,9 +463,9 @@ namespace WildfireICSDesktopServices
             {
                 UpsertOperationalGroup(((OperationalGroup)obj).Clone(), source);
             }
-            else if (dataClassName.Equals(new OperationalSubGroup().GetType().Name))
+            else if (dataClassName.Equals(new Crew().GetType().Name))
             {
-                UpsertOperationalSubGroup(((OperationalSubGroup)obj).Clone(), source);
+                UpsertOperationalSubGroup(((Crew)obj).Clone(), source);
             }
             else if (dataClassName.Equals(new DemobilizationRecord().GetType().Name))
             {
@@ -1485,7 +1485,7 @@ namespace WildfireICSDesktopServices
             }
             if (record.GetType().Name.Equals("Vehicle")) { OnVehicleChanged(new VehicleEventArgs(record as Vehicle)); }
             else if (record.GetType().Name.Equals("Personnel")) { OnMemberSignInChanged(new CheckInEventArgs(record as Personnel)); }
-            else if (record.GetType().Name.Equals("OperationalSubGroup")) { OnOperationalSubGroupChanged(new OperationalSubGroupEventArgs(record as OperationalSubGroup)); }
+            else if (record.GetType().Name.Equals("OperationalSubGroup")) { OnOperationalSubGroupChanged(new OperationalSubGroupEventArgs(record as Crew)); }
         }
 
         /*
@@ -1595,7 +1595,7 @@ namespace WildfireICSDesktopServices
         // Equipment Stuff
 
 
-        public void UpsertTaskEquipment(TaskEquipment te, string source = "local")
+        public void UpsertTaskEquipment(IncidentGear te, string source = "local")
         {
 
             te.LastUpdatedUTC = DateTime.UtcNow;
@@ -1630,7 +1630,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-        public void UpsertEquipmentIssue(EquipmentIssue issue, string source = "local")
+        public void UpsertEquipmentIssue(GearIssue issue, string source = "local")
         {
 
             issue.LastUpdatedUTC = DateTime.UtcNow;
@@ -1707,7 +1707,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public void UpsertOperationalSubGroup(OperationalSubGroup record, string source = "local")
+        public void UpsertOperationalSubGroup(Crew record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
             if (CurrentIncident.AllIncidentResources.Any(o => o.ID == record.ID)) { CurrentIncident.AllIncidentResources = CurrentIncident.AllIncidentResources.Where(o => o.ID != record.ID).ToList(); }
@@ -1918,7 +1918,7 @@ namespace WildfireICSDesktopServices
             //If this is a crew, demob everyone in it with the same values
             if (_currentIncident.AllOperationalSubGroups.Any(o => o.ID == record.ResourceID))
             {
-                OperationalSubGroup crew = _currentIncident.AllOperationalSubGroups.First(o => o.ID == record.ResourceID);
+                Crew crew = _currentIncident.AllOperationalSubGroups.First(o => o.ID == record.ResourceID);
                 foreach (OperationalGroupResourceListing res in crew.ResourceListing)
                 {
                     DemobilizationRecord demobRec = record.Clone();
@@ -2009,7 +2009,7 @@ namespace WildfireICSDesktopServices
             throw new NotImplementedException();
         }
 
-        public void DeleteTaskEquipment(TaskEquipment te, string source = "local")
+        public void DeleteTaskEquipment(IncidentGear te, string source = "local")
         {
             throw new NotImplementedException();
         }

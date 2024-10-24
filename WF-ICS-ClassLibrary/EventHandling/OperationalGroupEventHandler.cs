@@ -22,9 +22,9 @@ namespace WF_ICS_ClassLibrary.EventHandling
 
     public class OperationalSubGroupEventArgs
     {
-        public OperationalSubGroup item { get; set; }
+        public Crew item { get; set; }
 
-        public OperationalSubGroupEventArgs(OperationalSubGroup _item) { item = _item; }
+        public OperationalSubGroupEventArgs(Crew _item) { item = _item; }
     }
 
 

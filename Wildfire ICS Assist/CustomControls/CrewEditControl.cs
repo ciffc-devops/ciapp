@@ -14,9 +14,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 {
     public partial class CrewEditControl : UserControl
     {
-        private OperationalSubGroup _subGroup = new OperationalSubGroup();
-        public OperationalSubGroup subGroup { get { return _subGroup; } }
-        public void SetSubGroup(OperationalSubGroup sub, List<IncidentResource> res) { _subGroup = sub; resources = res; loadSubGroup(); }
+        private Crew _subGroup = new Crew();
+        public Crew subGroup { get { return _subGroup; } }
+        public void SetSubGroup(Crew sub, List<IncidentResource> res) { _subGroup = sub; resources = res; loadSubGroup(); }
 
         private List<IncidentResource> _resources = new List<IncidentResource>();
         public List<IncidentResource> resources { get => _resources; private set => _resources = value; }

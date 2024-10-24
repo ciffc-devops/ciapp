@@ -71,33 +71,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return compressed;
         }
 
-        public static int GetNextAssignmentNumber(this WFIncident incident, int Ops)
-        {
-            if (incident.AllAssignments.Any(o => o.OpPeriod == Ops))
-            {
-                int next = 1000 * Ops + 1;
-                while(incident.AllAssignments.Any(o=>o.ResourceIDNumber == next))
-                {
-                    next++;
-                }
-                return next;
-                //return incident.AllAssignments.Where(o => o.OpPeriod == Ops).Max(o => o.ResourceIDNumber) + 1;
-            }
-            else
-            {
-                return 1000 * Ops + 1;
-            }
-        }
-
-        public static bool AssignmentNumberUniqueAndValid(this WFIncident incident, int Ops, int ProposedNumber, Guid AssignmentID)
-        {
-            if(incident.AllAssignments.Any(o=>o.ResourceIDNumber == ProposedNumber && o.ID != AssignmentID)) { return false; } //duplicate number, different ID
-            int incidentMin = 1000 * Ops + 1;
-            int incidentMax = 1000 * (Ops + 1) - 1;
-            if(ProposedNumber > incidentMax) { return false; }
-            if(ProposedNumber < incidentMin) { return false; }
-            return true;
-        }
+      
 
         public static string getNameByRoleName(this WFIncident task, int Ops, string roleName, bool defaultUpChain = true)
         {
@@ -172,7 +146,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                     IncidentResource parent = task.AllIncidentResources.First(o => o.ID == member.ParentResourceID);
                     if (parent.GetType().Name.Equals("OperationalSubGroup"))
                     {
-                        OperationalSubGroup opsub = parent as OperationalSubGroup;
+                        Crew opsub = parent as Crew;
                         if(opsub.ResourceListing.Any(o=>o.ResourceID == member.ID))
                         {
                             opsub.ResourceListing.First(o => o.ResourceID == member.ID).ResourceName = member.Name;
@@ -287,13 +261,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                     }
                 }
             }
-            if(task.AllAssignments.Any(o=>o.OpPeriod == opPeriod && o.AssignedMemberIDs.Contains(member.PersonID)))
-            {
-                TeamAssignment assignment = task.AllAssignments.OrderByDescending(o=>o.currentStatus.Active).First(o => o.OpPeriod == opPeriod && o.AssignedMemberIDs.Contains(member.PersonID));
-                status.AssignmentID = assignment.ID;
-                status.AssignmentName = assignment.FullResourceID;
-                status.AssignmentStatus = assignment.currentStatusName;
-            }
+           
             return status;
         }
 
@@ -533,18 +501,16 @@ namespace WF_ICS_ClassLibrary.Utilities
             return chart;
         }
 
-      
-
-
         public static void CreateOpGroupsForOrgRoles(this OrganizationChart chart, WFIncident incident)
         {
-            foreach (ICSRole role in chart.ActiveRoles.Where(o =>o.OperationalGroupID != Guid.Empty))
+            foreach (ICSRole role in chart.ActiveRoles.Where(o => o.IsOpGroupSup && !o.IsPlaceholder))
             {
-                
+                if (role.OperationalGroupID == Guid.Empty)
+                {
                     OperationalGroup group = incident.createOperationalGroupFromRole(role);
                     role.OperationalGroupID = group.ID;
                     Globals.incidentService.UpsertOperationalGroup(group);
-                
+                }
             }
         }
 

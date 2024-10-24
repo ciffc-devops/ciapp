@@ -106,7 +106,7 @@ namespace Wildfire_ICS_Assist
                     selectedResource = Program.CurrentIncident.ActiveOperationalSubGroups.First(o => o.ID == rec.ResourceID);
                     SubResources.AddRange(Program.CurrentIncident.GetReportingResources(selectedResource.ID));
 
-                    crewEditControl1.SetSubGroup(selectedResource as OperationalSubGroup, SubResources);
+                    crewEditControl1.SetSubGroup(selectedResource as Crew, SubResources);
                     btnDoneCrewEdit.Visible = true;
                     wizardPages1.SelectedIndex = 2;
                 }
@@ -323,7 +323,7 @@ namespace Wildfire_ICS_Assist
         private void btnCrew_Click(object sender, EventArgs e)
         {
             CheckInMode = "Crew";
-            OperationalSubGroup sub = new OperationalSubGroup();
+            Crew sub = new Crew();
             crewEditControl1.SetSubGroup(sub, SubResources);
             wizardPages1.SelectedIndex = 2;
         }
@@ -456,7 +456,7 @@ namespace Wildfire_ICS_Assist
         private void btnHECrew_Click(object sender, EventArgs e)
         {
             CheckInMode = "Heavy Equipment Crew";
-            OperationalSubGroup sub = new OperationalSubGroup();
+            Crew sub = new Crew();
             sub.IsEquipmentCrew = true;
             crewEditControl1.SetSubGroup(sub, SubResources);
             wizardPages1.SelectedIndex = 2;

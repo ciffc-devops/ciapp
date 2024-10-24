@@ -43,7 +43,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
     ProtoInclude(129, typeof(Timeline)),
     ProtoInclude(130, typeof(TimelineEvent)),
     ProtoInclude(131, typeof(OperationalGroup)),
-    ProtoInclude(132, typeof(OperationalSubGroup)),
+    ProtoInclude(132, typeof(Crew)),
     ProtoInclude(133, typeof(Vehicle)),
     ProtoInclude(134, typeof(DemobilizationRecord)),
         ProtoInclude(135, typeof(ResourceReplacementPlan))]
@@ -88,7 +88,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             allTaskUpdates = new List<TaskUpdate>();
             allSafetyMessages = new List<SafetyMessage>();
             allAirOperationsSummaries = new List<AirOperationsSummary>();
-            AllAssignments = new List<TeamAssignment>();
+            //AllAssignments = new List<TeamAssignment>();
             TaskEncryptionKey = Utilities.RandomPasswordGenerator.GeneratePassword();
         }
 
@@ -104,7 +104,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         //  [ProtoMember(9)] private double _subjectVisibility;
         //  [ProtoMember(10)] private double _generalRangeOfDetection;
         [ProtoMember(11)] private string _currentFilePath;
-        [ProtoMember(12)] private List<TeamAssignment> _AllAssignments;
+        //[ProtoMember(12)] private List<TeamAssignment> _AllAssignments;
         [ProtoMember(13)] private List<SafetyMessage> _allSafetyMessages;
         [ProtoMember(14)] private List<Briefing> _allBriefings;
         //[ProtoMember(15)] private List<IncidentObjective> _allObjectives;
@@ -139,8 +139,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(41)] private Timeline _taskTimeline;
         [ProtoMember(42)] private List<Note> _allNotes = new List<Note>();
         // [ProtoMember(43)] private List<Vehicle> _allVehicles = new List<Vehicle>();
-        [ProtoMember(45)] private List<TaskEquipment> _allEquipment = new List<TaskEquipment>();
-        [ProtoMember(46)] private List<EquipmentIssue> _allEquipmentIssues = new List<EquipmentIssue>();
+        [ProtoMember(45)] private List<IncidentGear> _allEquipment = new List<IncidentGear>();
+        [ProtoMember(46)] private List<GearIssue> _allEquipmentIssues = new List<GearIssue>();
 
         /*
         [ProtoMember(44)] private List<ShiftBriefing> _allShiftBriefings = new List<ShiftBriefing>();
@@ -211,8 +211,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
         public string ICPCallSign { get => _ICPCallsign; set => _ICPCallsign = value; }
         public string IncidentTitleImageBytes { get => _IncidentTitleImageBytes; set => _IncidentTitleImageBytes = value; }
-        public List<TaskEquipment> allEquipment { get => _allEquipment; set => _allEquipment = value; }
-        public List<EquipmentIssue> allEquipmentIssues { get => _allEquipmentIssues; set => _allEquipmentIssues = value; }
+        public List<IncidentGear> allEquipment { get => _allEquipment; set => _allEquipment = value; }
+        public List<GearIssue> allEquipmentIssues { get => _allEquipmentIssues; set => _allEquipmentIssues = value; }
 
 
         /*
@@ -274,12 +274,11 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<PositionLogEntry> allPositionLogEntries { get => _allPositionLogEntries; set => _allPositionLogEntries = value; }
         public List<TaskUpdate> allTaskUpdates { get => _allTaskUpdates; set => _allTaskUpdates = value; }
         public List<AirOperationsSummary> allAirOperationsSummaries { get => _allAirOperationsSummaries; set => _allAirOperationsSummaries = value; }
-        public List<TeamAssignment> AllAssignments { get => _AllAssignments; set => _AllAssignments = value; }
-        public List<TeamAssignment> ActiveAssignments { get => _AllAssignments.Where(o => o.Active).ToList(); }
+      
         public List<OperationalGroup> AllOperationalGroups { get => _AllOperationalGroups; set => _AllOperationalGroups = value; }
         public List<OperationalGroup> ActiveOperationalGroups { get => AllOperationalGroups.Where(o => o.Active).ToList(); }
-        public List<OperationalSubGroup> AllOperationalSubGroups { get => AllIncidentResources.OfType<OperationalSubGroup>().ToList(); }
-        public List<OperationalSubGroup> ActiveOperationalSubGroups { get => AllOperationalSubGroups.Where(o => o.Active).ToList(); }
+        public List<Crew> AllOperationalSubGroups { get => AllIncidentResources.OfType<Crew>().ToList(); }
+        public List<Crew> ActiveOperationalSubGroups { get => AllOperationalSubGroups.Where(o => o.Active).ToList(); }
         public List<DemobilizationRecord> AllDemobilizationRecords { get => _allDemobilizationRecords; set => _allDemobilizationRecords = value; }
         public List<DemobilizationRecord> ActiveDemobilizationRecords { get => _allDemobilizationRecords.Where(o => o.Active).ToList(); }
         public List<ResourceReplacementPlan> AllResourceReplacementPlans { get => _ResourceReplacementPlans; set => _ResourceReplacementPlans = value; }
@@ -387,7 +386,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
             {
                 int ops = 0;
                 if (allOrgCharts.Count > 0) { int orgOps = allOrgCharts.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (orgOps > ops) { ops = orgOps; } }
-                if (_AllAssignments.Count > 0) { int asigOps = _AllAssignments.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (asigOps > ops) { ops = asigOps; } }
                 if (allSafetyMessages.Count > 0) { int safeOps = allSafetyMessages.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (safeOps > ops) { ops = safeOps; } }
                 if (allBriefings.Count > 0) { int briefOps = allBriefings.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (briefOps > ops) { ops = briefOps; } }
                 if (allIncidentObjectives.Count > 0) { int objOps = allIncidentObjectives.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (objOps > ops) { ops = objOps; } }
@@ -407,7 +405,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
             {
                 int ops = 1000;
                 if (allOrgCharts.Count > 0) { int orgOps = allOrgCharts.OrderBy(o => o.OpPeriod).First().OpPeriod; if (orgOps < ops) { ops = orgOps; } }
-                if (_AllAssignments.Count > 0) { int asigOps = _AllAssignments.OrderBy(o => o.OpPeriod).First().OpPeriod; if (asigOps < ops) { ops = asigOps; } }
                 if (allSafetyMessages.Count > 0) { int safeOps = allSafetyMessages.OrderBy(o => o.OpPeriod).First().OpPeriod; if (safeOps < ops) { ops = safeOps; } }
                 if (allBriefings.Count > 0) { int briefOps = allBriefings.OrderBy(o => o.OpPeriod).First().OpPeriod; if (briefOps < ops) { ops = briefOps; } }
                 if (allIncidentObjectives.Count > 0) { int objOps = allIncidentObjectives.OrderBy(o => o.OpPeriod).First().OpPeriod; if (objOps < ops) { ops = objOps; } }
@@ -424,7 +421,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public bool OpPeriodHasContent(int opPeriod)
         {
             bool hasContent = false;
-            if (_AllAssignments.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             if (allSafetyMessages.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allBriefings.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allIncidentObjectives.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
@@ -593,7 +589,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
         {
             WFIncident cloneTo = this.MemberwiseClone() as WFIncident;
 
-            cloneTo._AllAssignments = new List<TeamAssignment>(_AllAssignments);
             cloneTo._allSafetyMessages = new List<SafetyMessage>(_allSafetyMessages);
             cloneTo._allBriefings = new List<Briefing>(_allBriefings);
 
@@ -610,8 +605,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
             cloneTo._AllOperationalGroups = new List<OperationalGroup>(_AllOperationalGroups);
             cloneTo._allContacts = new List<Contact>(_allContacts);
             cloneTo._allNotes = new List<Note>(_allNotes);
-            cloneTo._allEquipment = new List<TaskEquipment>(_allEquipment);
-            cloneTo._allEquipmentIssues = new List<EquipmentIssue>(_allEquipmentIssues);
+            cloneTo._allEquipment = new List<IncidentGear>(_allEquipment);
+            cloneTo._allEquipmentIssues = new List<GearIssue>(_allEquipmentIssues);
             cloneTo._allPositionLogEntries = new List<PositionLogEntry>(_allPositionLogEntries);
             cloneTo._allTaskUpdates = new List<TaskUpdate>(_allTaskUpdates);
             cloneTo._allDemobilizationRecords = new List<DemobilizationRecord>(_allDemobilizationRecords);

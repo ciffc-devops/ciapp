@@ -225,9 +225,9 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         }
 
-        public static OperationalSubGroup createTestCrew(int seed, List<IncidentResource> childResources)
+        public static Crew createTestCrew(int seed, List<IncidentResource> childResources)
         {
-            OperationalSubGroup test = new OperationalSubGroup();
+            Crew test = new Crew();
             test.Active = true;
             test.ResourceName = "Crew " + seed;
             test.Transport = "Transport " + seed;
@@ -343,13 +343,13 @@ namespace WF_ICS_ClassLibrary.Utilities
                     break;
                 case "Crew":
                     resource = createTestCrew(seed, childResources);
-                    (resource as OperationalSubGroup).IsEquipmentCrew = false;
+                    (resource as Crew).IsEquipmentCrew = false;
                     record.InitialRoleAcronym = string.Empty;
                     record.InitialRoleName = string.Empty;
                     break;
                 case "Heavy Equipment Crew":
                     resource = createTestCrew(seed, childResources);
-                    (resource as OperationalSubGroup).IsEquipmentCrew = true;
+                    (resource as Crew).IsEquipmentCrew = true;
                     record.InitialRoleAcronym = string.Empty;
                     record.InitialRoleName = string.Empty;
                     break;

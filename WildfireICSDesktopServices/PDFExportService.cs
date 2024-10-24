@@ -2237,7 +2237,7 @@ namespace WildfireICSDesktopServices
 
                         Personnel p = null; if (record.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)record.Resource; }
                         Vehicle v = null; if (record.Resource.GetType().Name.Equals("Vehicle")) { v = (Vehicle)record.Resource; }
-                        OperationalSubGroup c = null; if (record.Resource.GetType().Name.Equals("OperationalSubGroup")) { c = (OperationalSubGroup)record.Resource; }
+                        Crew c = null; if (record.Resource.GetType().Name.Equals("OperationalSubGroup")) { c = (Crew)record.Resource; }
 
 
 

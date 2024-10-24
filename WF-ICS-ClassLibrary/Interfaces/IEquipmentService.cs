@@ -10,9 +10,9 @@ namespace WF_ICS_ClassLibrary.Interfaces
     public interface IEquipmentService
     {
        
-        List<EquipmentStatus> GetEquipmentStatuses();
-        EquipmentStatus GetEquipmentStatus(string name);
-        List<EquipmentCategory> GetStartingCategories();
+        List<GearStatus> GetEquipmentStatuses();
+        GearStatus GetEquipmentStatus(string name);
+        List<GearCategory> GetStartingCategories();
         string CreatePDF(WFIncident task, int OpPeriod, bool useTempPath, bool flattenPDF);
        
     }

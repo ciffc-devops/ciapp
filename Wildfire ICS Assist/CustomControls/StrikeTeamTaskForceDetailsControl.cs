@@ -114,7 +114,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                             if (((Vehicle)resource).IsEquipment) { listing.ResourceType = "Equipment"; }
                             else { listing.ResourceType = "Vehicle"; }
                         }
-                        else if (resource.GetType().Name.Equals(new OperationalSubGroup().GetType().Name)) { listing.ResourceType = "Crew"; }
+                        else if (resource.GetType().Name.Equals(new Crew().GetType().Name)) { listing.ResourceType = "Crew"; }
 
 
                         selectedGroup.ResourceListing.Add(listing);
