@@ -2500,10 +2500,12 @@
             Sun's Condition based on the provided date and specified altitude.
             </summary>
         </member>
-        <member name="M:CoordinateSharp.SunCalc.Get_Event_Time(System.Double,System.Double,System.Double,System.DateTime,System.Double,System.Boolean)">
+        <member name="M:CoordinateSharp.SunCalc.Get_Event_Time(System.Double,System.Double,System.Double,System.Double,System.Double,System.DateTime,System.Double,System.Boolean)">
             <summary>
             Gets time of event based on specified degree below specified altitude
             </summary>
+            <param name="lat">Observer  Latitude  in degrees</param>
+            <param name="lng">Observer Longitude in degrees</param>
             <param name="lw">Observer Longitude in radians</param>
             <param name="phi">Observer Latitude in radians</param>
             <param name="h">Angle in Degrees</param>
@@ -2511,6 +2513,20 @@
             <param name="offset">Offset hours</param>
             <param name="calculateNoon">Should solar noon iterate and return value</param>
             <returns>DateTime?[]{rise, set}</returns> 
+        </member>
+        <member name="M:CoordinateSharp.SunCalc.solarEventsCorrection(System.Double,System.Double,System.DateTime,System.Double,System.Nullable{System.DateTime}[],System.Nullable{System.DateTime}[],System.Nullable{System.DateTime})">
+             <summary>
+             Corrects near horizon miss calculations that may occur on rare occasion due to Meeus 15.1 limitation. 
+             May cause slight efficiency decrease during transition from rise/set to up or down all day.
+             Occurs rare so delay should be negligent in most instances.
+             </summary>
+             <param name="lat">latitude</param>
+             <param name="lng">longitude</param>
+             <param name="target">target date</param>
+             <param name="offset">timezone offset</param>
+             <param name="rises">sun rises</param>
+             <param name="sets">sun sets</param>
+            <param name="solarNoon">solar noon time</param>
         </member>
         <member name="M:CoordinateSharp.SunCalc.Get_Event_Target_Date(System.Nullable{System.DateTime}[],System.DateTime)">
             <summary>
@@ -5296,7 +5312,8 @@
             </summary>
             <param name="point">Point to test</param>
             <remarks>
-            Points sitting on the edge of a polygon may return true or false.
+            This method utilizes 2D ray casting techniques and does not inherently account for the curvature of the Earth. To mitigate the impact of Earth shape distortion on polygons or polylines that span long distances, users should employ densification.
+            Points sitting on the edge of a polygon may return true or false. 
             </remarks>
             <returns>bool</returns>
             <example>
@@ -5327,6 +5344,9 @@
             </summary>
             <param name="point">Point to test</param>
             <param name="range">Range in meters</param>
+            <remarks>
+            This method utilizes 2D ray casting techniques and does not inherently account for the curvature of the Earth. To mitigate the impact of Earth shape distortion on polygons or polylines that span long distances, users should employ densification.
+            </remarks>
             <returns>bool</returns>
             <example>
             The following example shows how to determine if a coordinate is within 1000 meters of
@@ -5357,6 +5377,9 @@
             </summary>
             <param name="point">Point to test</param>
             <param name="range">Range is a distance object</param>
+            <remarks>
+            This method utilizes 2D ray casting techniques and does not inherently account for the curvature of the Earth. To mitigate the impact of Earth shape distortion on polygons or polylines that span long distances, users should employ densification.
+            </remarks>
             <returns>bool</returns>
             <example>
             The following example shows how to determine if a coordinate is within 1 km of
@@ -5384,9 +5407,126 @@
         <member name="M:CoordinateSharp.GeoFence.DistanceFromNearestPolyLine(CoordinateSharp.Coordinate)">
             <summary>
             Gets distance from nearest polyline in shape
-            </summary>
+            </summary>       
             <param name="point">Coordinate</param>
+            <remarks>This method utilizes 2D ray casting techniques and does not inherently account for the curvature of the Earth. To mitigate the impact of Earth shape distortion on polygons or polylines that span long distances, users should employ densification.</remarks>
             <returns>Distance</returns>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.Densify(CoordinateSharp.Distance)">
+             <summary>
+             Densifies the polygon by adding additional points along each edge at specified intervals using ellipsoidal (Vincenty) logic.
+             </summary>
+             <param name="distance">The distance between points along the polygon's edges. This distance determines how frequently new points are inserted into the polygon</param>
+             <remarks>
+             This method is particularly useful for large polygons where the curvature of the Earth can cause 
+             significant distortion in geographic calculations. By adding more points at regular intervals, 
+             the polygon better conforms to the curved surface of the Earth, reducing errors in area calculations, 
+             perimeter calculations, and point-in-polygon tests.
+            
+             The function automatically calculates intermediate points based on the great-circle distance between 
+             existing vertices, ensuring that the new points adhere to the true geographic shape of the polygon.
+             This is essential for maintaining geographic integrity when performing spatial operations or visualizations.
+            
+             Note: The densification process increases the number of vertices in the polygon, which may impact performance 
+             and memory usage in spatial computations and data storage. Optimal use of this function depends on the required 
+             precision and the geographic extent of the application.
+             </remarks>
+             <example>
+             Here is how you might use this function to densify a polygon representing a large geographic area:
+             <code>
+             //Create a four point GeoFence around Utah
+             List&lt;GeoFence.Point&gt; points = new List&lt;GeoFence.Point&gt;();
+             points.Add(new GeoFence.Point(41.003444, -109.045223));
+             points.Add(new GeoFence.Point(41.003444, -102.041524));
+             points.Add(new GeoFence.Point(36.993076, -102.041524));
+             points.Add(new GeoFence.Point(36.993076, -109.045223));
+             points.Add(new GeoFence.Point(41.003444, -109.045223));
+            
+             GeoFence gf = new GeoFence(points);
+            
+             gf.Densify(new Distance(10, DistanceType.Kilometers));
+             
+             //The gf.Points list now contains additional points at intervals of approximately 10 kilometers.
+             </code>
+             </example>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.Densify(CoordinateSharp.Distance,CoordinateSharp.Shape)">
+             <summary>
+             Densifies the polygon by adding additional points along each edge at specified intervals.
+             </summary>
+             <param name="distance">The distance between points along the polygon's edges. This distance determines how frequently new points are inserted into the polygon</param>
+             <param name="shape">Specify earth shape. Sphere is more efficient, but less precise than ellipsoid.</param>
+             <remarks>
+             This method is particularly useful for large polygons where the curvature of the Earth can cause 
+             significant distortion in geographic calculations. By adding more points at regular intervals, 
+             the polygon better conforms to the curved surface of the Earth, reducing errors in area calculations, 
+             perimeter calculations, and point-in-polygon tests.
+            
+             The function automatically calculates intermediate points based on the great-circle distance between 
+             existing vertices, ensuring that the new points adhere to the true geographic shape of the polygon.
+             This is essential for maintaining geographic integrity when performing spatial operations or visualizations.
+            
+             Note: The densification process increases the number of vertices in the polygon, which may impact performance 
+             and memory usage in spatial computations and data storage. Optimal use of this function depends on the required 
+             precision and the geographic extent of the application.
+             </remarks>
+             <example>
+             Here is how you might use this function to densify a polygon representing a large geographic area:
+             <code>     
+             //Create a four point GeoFence around Utah
+             List&lt;GeoFence.Point&gt; points = new List&lt;GeoFence.Point&gt;();
+             points.Add(new GeoFence.Point(41.003444, -109.045223));
+             points.Add(new GeoFence.Point(41.003444, -102.041524));
+             points.Add(new GeoFence.Point(36.993076, -102.041524));
+             points.Add(new GeoFence.Point(36.993076, -109.045223));
+             points.Add(new GeoFence.Point(41.003444, -109.045223));
+            
+             GeoFence gf = new GeoFence(points);
+            
+             gf.Densify(new Distance(10, DistanceType.Kilometers), Shape.Sphere);
+             
+             //The gf.Points list now contains additional points at intervals of approximately 10 kilometers.
+             </code>
+             </example>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.Densify(CoordinateSharp.Distance,CoordinateSharp.Earth_Ellipsoid)">
+             <summary>
+             Densifies the polygon by adding additional points along each edge at specified intervals using ellipsoidal (Vincenty) logic with a user specified earth shape.
+             </summary>
+             <param name="distance">The distance between points along the polygon's edges. This distance determines how frequently new points are inserted into the polygon</param>    
+             <param name="ellipsoid">Specify earth ellipsoid shape.</param>
+             <remarks>
+             This method is particularly useful for large polygons where the curvature of the Earth can cause 
+             significant distortion in geographic calculations. By adding more points at regular intervals, 
+             the polygon better conforms to the curved surface of the Earth, reducing errors in area calculations, 
+             perimeter calculations, and point-in-polygon tests.
+            
+             The function automatically calculates intermediate points based on the great-circle distance between 
+             existing vertices, ensuring that the new points adhere to the true geographic shape of the polygon.
+             This is essential for maintaining geographic integrity when performing spatial operations or visualizations.
+            
+             Note: The densification process increases the number of vertices in the polygon, which may impact performance 
+             and memory usage in spatial computations and data storage. Optimal use of this function depends on the required 
+             precision and the geographic extent of the application.
+             </remarks>
+             <example>
+             Here is how you might use this function to densify a polygon representing a large geographic area:
+             <code>     
+             //Create a four point GeoFence around Utah
+             List&lt;GeoFence.Point&gt; points = new List&lt;GeoFence.Point&gt;();
+             points.Add(new GeoFence.Point(41.003444, -109.045223));
+             points.Add(new GeoFence.Point(41.003444, -102.041524));
+             points.Add(new GeoFence.Point(36.993076, -102.041524));
+             points.Add(new GeoFence.Point(36.993076, -109.045223));
+             points.Add(new GeoFence.Point(41.003444, -109.045223));
+            
+             GeoFence gf = new GeoFence(points);
+            
+             gf.Densify(new Distance(10, DistanceType.Kilometers), Earth_Ellipsoid.Get_Ellipsoid(Earth_Ellipsoid_Spec.GRS67_1967));
+             
+             //The gf.Points list now contains additional points at intervals of approximately 10 kilometers.
+             </code>
+             </example>
         </member>
         <member name="T:CoordinateSharp.GeoFence.Drawer">
             <summary>

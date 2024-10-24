@@ -35878,7 +35878,7 @@
             <exception cref="T:iTextSharp.xmp.XmpException"> If qualifier and element fields are mixed. </exception>
         </member>
         <!-- Badly formed XML comment ignored for member "M:iTextSharp.xmp.impl.XmpSerializerRdf.SerializeCanonicalRdfSchema(iTextSharp.xmp.impl.XmpNode,System.Int32)" -->
-        <member name="M:iTextSharp.xmp.impl.XmpSerializerRdf.DeclareUsedNamespaces(iTextSharp.xmp.impl.XmpNode,Org.BouncyCastle.Utilities.Collections.ISet,System.Int32)">
+        <member name="M:iTextSharp.xmp.impl.XmpSerializerRdf.DeclareUsedNamespaces(iTextSharp.xmp.impl.XmpNode,System.Collections.Generic.ICollection{System.String},System.Int32)">
             <summary>
             Writes all used namespaces of the subtree in node to the output. 
             The subtree is recursivly traversed. </summary>
@@ -35887,7 +35887,7 @@
             <param name="indent"> the current indent level </param>
             <exception cref="T:System.IO.IOException"> Forwards all writer exceptions. </exception>
         </member>
-        <member name="M:iTextSharp.xmp.impl.XmpSerializerRdf.DeclareNamespace(System.String,System.String,Org.BouncyCastle.Utilities.Collections.ISet,System.Int32)">
+        <member name="M:iTextSharp.xmp.impl.XmpSerializerRdf.DeclareNamespace(System.String,System.String,System.Collections.Generic.ICollection{System.String},System.Int32)">
             <summary>
             Writes one namespace declaration to the output. </summary>
             <param name="prefix"> a namespace prefix (without colon) or a complete qname (when namespace == null) </param>

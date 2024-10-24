@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CoordinateSharp, Version=2.22.1.1, Culture=neutral, PublicKeyToken=f45e02df057b7725, processorArchitecture=MSIL">
-      <HintPath>..\packages\CoordinateSharp.2.22.1.1\lib\net40\CoordinateSharp.dll</HintPath>
+    <Reference Include="CoordinateSharp, Version=2.24.2.1, Culture=neutral, PublicKeyToken=f45e02df057b7725, processorArchitecture=MSIL">
+      <HintPath>..\packages\CoordinateSharp.2.24.2.1\lib\net40\CoordinateSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -142,8 +142,10 @@
     <Compile Include="Models\CheckInModels\CheckInTools.cs" />
     <Compile Include="Models\CheckInModels\DemobilizationRecord.cs" />
     <Compile Include="Models\CheckInModels\ResourceReplacementPlan.cs" />
+    <Compile Include="Models\CommunicationsLogModels\QuickCommsLogEntry.cs" />
+    <Compile Include="Models\CommunicationsLogModels\CommsRecipient.cs" />
     <Compile Include="Models\CommunicationsPlanModels\CommsPlan.cs" />
-    <Compile Include="Models\CommunicationsLogModels\CommunicationsLog.cs" />
+    <Compile Include="Models\CommunicationsLogModels\CommsLogEntry.cs" />
     <Compile Include="Models\CommunicationsPlanModels\CommsPlanItem.cs" />
     <Compile Include="Models\CommunicationsPlanModels\CommsPlanTools.cs" />
     <Compile Include="Models\ContactModels\Contact.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Models\GearModels\GearStatus.cs" />
     <Compile Include="Models\GearModels\IncidentGear.cs" />
     <Compile Include="Models\GeneralMessageModels\GeneralMessage.cs" />
+    <Compile Include="Models\GeneralModels\ICSFormData.cs" />
     <Compile Include="Models\GeneralOptionsModels\GeneralOptions.cs" />
     <Compile Include="Models\HelpModels\HelpInfo.cs" />
     <Compile Include="Models\IncidentObjectiveModels\IncidentObjectivesSheet.cs" />
@@ -179,7 +182,7 @@
     <Compile Include="Models\OrganizationalStructureModels\OperationalGroupResourceListing.cs" />
     <Compile Include="Models\OrganizationalStructureModels\OperationalGroupTools.cs" />
     <Compile Include="Models\OrganizationalStructureModels\OperationalGroup.cs" />
-    <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\GeneralModels\Organization.cs" />
     <Compile Include="Models\OrganizationalChartModels\ICSRole.cs" />
     <Compile Include="Models\OrganizationalChartModels\OrganizationalChart.cs" />
     <Compile Include="Models\OrganizationalChartModels\OrgChartTools.cs" />
@@ -195,7 +198,7 @@
     <Compile Include="Models\SoftwareUpdateModels\SoftwareUpdate.cs" />
     <Compile Include="Models\SummaryStatModels\SummaryStat.cs" />
     <Compile Include="Models\SummaryStatModels\SummaryStatTools.cs" />
-    <Compile Include="Models\TaskUpdateModels\SyncableItem.cs" />
+    <Compile Include="Models\GeneralModels\SyncableItem.cs" />
     <Compile Include="Models\TaskUpdateModels\TaskBasics.cs" />
     <Compile Include="Models\TaskUpdateModels\TaskUpdate.cs" />
     <Compile Include="Models\TaskUpdateModels\TaskUpdateTools.cs" />
@@ -205,7 +208,7 @@
     <Compile Include="Models\TimelineModels\Timeline.cs" />
     <Compile Include="Models\IncidentResourcesModels\Vehicle.cs" />
     <Compile Include="Models\TimelineModels\TimelineEvent.cs" />
-    <Compile Include="Models\WFIncident.cs" />
+    <Compile Include="Models\GeneralModels\WFIncident.cs" />
     <Compile Include="Networking\DeviceInformation.cs" />
     <Compile Include="Networking\NetworkOptionsRequest.cs" />
     <Compile Include="Networking\NetworkSendLog.cs" />
