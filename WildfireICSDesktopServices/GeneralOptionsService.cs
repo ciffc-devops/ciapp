@@ -116,25 +116,7 @@ namespace WildfireICSDesktopServices
             return _options;
         }
 
-        public List<string> GetTeamAssignmentTypes()
-        {
-            List<string> types = new List<string>();
-
-            List<TeamAssignment> templates = GetOptionsValue("TeamAssignments") as List<TeamAssignment>;
-            templates = templates.Where(o => !string.IsNullOrEmpty(o.AssignmentType) && o.Active).ToList();
-            foreach (TeamAssignment t in templates)
-            {
-                if (!types.Contains(t.AssignmentType.Trim(), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    types.Add(t.AssignmentType.Trim());
-                }
-            }
-
-
-            return types;
-
-        }
-
+      
         public ShortcutButtonOption[] GetDefaultShortcuts()
         {
             ShortcutButtonOption[] shortcuts = new ShortcutButtonOption[6];
@@ -276,9 +258,9 @@ namespace WildfireICSDesktopServices
                 case "EquipmentCategories":
                     return _options.AllEquipmentCategories.OrderBy(o => o.CategoryName).ToList();
                 case "EquipmentCategoriesHierarchy":
-                    List<EquipmentCategory> categories = new List<EquipmentCategory>();
+                    List<GearCategory> categories = new List<GearCategory>();
 
-                    foreach (EquipmentCategory parent in _options.AllEquipmentCategories.Where(o => o.ParentCategoryID == Guid.Empty).OrderBy(o => o.CategoryName).ToList())
+                    foreach (GearCategory parent in _options.AllEquipmentCategories.Where(o => o.ParentCategoryID == Guid.Empty).OrderBy(o => o.CategoryName).ToList())
                     {
                         categories.Add(parent);
                         categories.AddRange(_options.AllEquipmentCategories.Where(o => o.ParentCategoryID == parent.CategoryID).OrderBy(o => o.CategoryName).ToList());
@@ -332,8 +314,6 @@ namespace WildfireICSDesktopServices
                     return _options.SavedNetworkDeviceList;
                 case "ShortcutButtons":
                     return _options.ShortcutButtons;
-                case "TeamAssignments":
-                    return _options.AllTeamAssignmentTemplates;
                 case "TeamMembers":
                     return _options.AllTeamMembers;
                 case "Vehicles":
@@ -500,29 +480,29 @@ namespace WildfireICSDesktopServices
                     break;
                
                 case "Equipment":
-                    Equipment eq = (Equipment)newValue;
+                    Gear eq = (Gear)newValue;
                     _options.AllEquipment = _options.AllEquipment.Where(o => o.EquipmentID != eq.EquipmentID).ToList();
                     _options.AllEquipment.Add(eq);
                     break;
                 case "EquipmentCategory":
-                    EquipmentCategory ec = (EquipmentCategory)newValue;
+                    GearCategory ec = (GearCategory)newValue;
                     _options.AllEquipmentCategories = _options.AllEquipmentCategories.Where(o => o.CategoryID != ec.CategoryID).ToList();
                     _options.AllEquipmentCategories.Add(ec);
                     if (_options.AllEquipment.Any(o => o.Category.CategoryID == ec.CategoryID))
                     {
-                        foreach (Equipment e in _options.AllEquipment.Where(o => o.Category.CategoryID == ec.CategoryID))
+                        foreach (Gear e in _options.AllEquipment.Where(o => o.Category.CategoryID == ec.CategoryID))
                         {
                             e.Category = ec;
                         }
                     }
                     break;
                 case "EquipmentSet":
-                    EquipmentSet es = (EquipmentSet)newValue;
+                    GearSet es = (GearSet)newValue;
                     _options.AllEquipmentSets = _options.AllEquipmentSets.Where(o => o.SetID != es.SetID).ToList();
                     _options.AllEquipmentSets.Add(es);
                     break;
                 case "EquipmentSetMembership":
-                    EquipmentSetMembership esm = (EquipmentSetMembership)newValue;
+                    GearSetMembership esm = (GearSetMembership)newValue;
                     if (_options.AllEquipmentSets.Any(o => o.SetID == esm.SetID))
                     {
                         _options.AllEquipmentSets.Where(o => o.SetID == esm.SetID).First().AllItems = _options.AllEquipmentSets.Where(o => o.SetID == esm.SetID).First().AllItems.Where(o => o.EquipmentID != esm.EquipmentID).ToList();
@@ -547,11 +527,6 @@ namespace WildfireICSDesktopServices
                     _options.RecentFilePaths = _options.RecentFilePaths.Where(o=> !o.Equals(recentFileName)).ToList();
                     _options.RecentFilePaths.Insert(0, recentFileName);
                     if(_options.RecentFilePaths.Count > 5) { _options.RecentFilePaths = _options.RecentFilePaths.Take(5).ToList(); }
-                    break;
-                case "TeamAssignment":
-                    TeamAssignment ta = (TeamAssignment)newValue;
-                    _options.AllTeamAssignmentTemplates = _options.AllTeamAssignmentTemplates.Where(o => o.ID != ta.ID).ToList();
-                    _options.AllTeamAssignmentTemplates.Add(ta);
                     break;
                 case "NetworkDevice":
                     DeviceInformation info = (DeviceInformation)newValue;
@@ -605,19 +580,19 @@ namespace WildfireICSDesktopServices
                         _options.AllContacts = _options.AllContacts.Where(o => o.ContactID != c.ContactID).ToList();
                         break;
                     case "Equipment":
-                        Equipment eq = (Equipment)removeValue;
+                        Gear eq = (Gear)removeValue;
                         _options.AllEquipment = _options.AllEquipment.Where(o => o.EquipmentID != eq.EquipmentID).ToList();
                         break;
                     case "EquipmentCategory":
-                        EquipmentCategory ec = (EquipmentCategory)removeValue;
+                        GearCategory ec = (GearCategory)removeValue;
                         _options.AllEquipmentCategories = _options.AllEquipmentCategories.Where(o => o.CategoryID != ec.CategoryID).ToList();
                         break;
                     case "EquipmentSet":
-                        EquipmentSet es = (EquipmentSet)removeValue;
+                        GearSet es = (GearSet)removeValue;
                         _options.AllEquipmentSets = _options.AllEquipmentSets.Where(o => o.SetID != es.SetID).ToList();
                         break;
                     case "EquipmentSetMembership":
-                        EquipmentSetMembership esm = (EquipmentSetMembership)removeValue;
+                        GearSetMembership esm = (GearSetMembership)removeValue;
 
                         if (_options.AllEquipmentSets.Any(o => o.SetID == esm.SetID))
                         {
