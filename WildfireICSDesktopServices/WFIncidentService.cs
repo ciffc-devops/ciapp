@@ -221,8 +221,18 @@ namespace WildfireICSDesktopServices
                     }
                 }
 
+                if (_currentIncident.allTaskUpdates.Any(o => o.UpdateID == update.UpdateID))
+                {
+                    _currentIncident.allTaskUpdates.First(o => o.UpdateID == update.UpdateID).ProcessedLocally = true;
+                }
 
             }
+            else if (update.Data == null)
+            {
+                //this prevents a nasty loop
+                update.ProcessedLocally = true;
+            }
+
 
             if (applyAllSubsequent)
             {

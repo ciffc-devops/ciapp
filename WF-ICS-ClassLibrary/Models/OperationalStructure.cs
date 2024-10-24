@@ -320,7 +320,8 @@ namespace WF_ICS_ClassLibrary.Models
         public static List<IncidentResource> GetUncommittedResources(this WFIncident incident, int OpPeriod)
         {
             List<IncidentResource> resources = new List<IncidentResource>();
-            foreach (CheckInRecord rec in incident.AllCheckInRecords.Where(o => o.Active && o.OpPeriod == OpPeriod && !o.IsVisitor))
+            OperationalPeriod op = incident.AllOperationalPeriods.First(o=>o.PeriodNumber == OpPeriod);
+            foreach (CheckInRecord rec in incident.AllCheckInRecords.Where(o => o.CheckedInThisTime(op.PeriodMid) && !o.IsVisitor))
             {
                 if (rec.ParentRecordID == Guid.Empty && !incident.GetIsResourceCurrentlyAssigned(OpPeriod, rec.ResourceID))
                 {

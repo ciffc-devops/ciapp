@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
@@ -60,10 +61,50 @@ namespace Wildfire_ICS_Assist
             lblPositionName.Text = CurrentRole.RoleName;
             dgvLog.AutoGenerateColumns = false;
             cboSort.SelectedIndex = 0;
+            cboOpPeriod.SelectedIndex = 0;
+            cboViewOption.SelectedIndex = 0;
+
+            cboSort.DropDownWidth = cboSort.GetDropDownWidth();
+            cboOpPeriod.DropDownWidth = cboOpPeriod.GetDropDownWidth();
+            cboViewOption.DropDownWidth = cboViewOption.GetDropDownWidth();
+
         }
         private void buildPositionLog()
         {
-            List<PositionLogEntry> entries = CurrentTask.GetPositionLog(CurrentRole, CurrentOpPeriod);
+            lblPositionName.Text = CurrentRole.RoleName;
+
+            List<PositionLogEntry> entries = GetEntries();
+
+            dgvLog.DataSource = entries;
+
+            if (dgvLog.Columns.Count > 0)
+            {
+                if (!entries.Any(o => !o.IsInfoOnly)) { dgvLog.Columns["colComplete"].Visible = false; dgvLog.Columns["colDueDate"].Visible = false; }
+                else { dgvLog.Columns["colComplete"].Visible = true; dgvLog.Columns["colDueDate"].Visible = true; }
+            }
+        }
+
+        private List<PositionLogEntry> GetEntries()
+        {
+            List<PositionLogEntry> entries = new List<PositionLogEntry>(CurrentTask.allPositionLogEntries);
+            if (cboOpPeriod.SelectedIndex == 0) { entries = entries.Where(o => o.OpPeriod == Program.CurrentOpPeriod).ToList(); }
+
+            switch (cboViewOption.SelectedIndex)
+            {
+                case 0: //just me
+                    entries = entries.Where(o => o.Role.RoleID == Program.CurrentRole.RoleID).ToList();
+                    if (dgvLog.Columns.Count > 0) { dgvLog.Columns["colRoleName"].Visible = false; }
+                    break;
+                case 1: //this section
+                    entries = entries.Where(o => o.Role.SectionID == Program.CurrentRole.SectionID).ToList();
+                    if (dgvLog.Columns.Count > 0) { dgvLog.Columns["colRoleName"].Visible = true; }
+                    break;
+                default:
+                    if (dgvLog.Columns.Count > 0) { dgvLog.Columns["colRoleName"].Visible = true; }
+                    break;
+            }
+
+            //CurrentTask.GetPositionLog(CurrentRole, CurrentOpPeriod);
             switch (cboSort.SelectedIndex)
             {
                 case 0: //full log, newest first
@@ -82,8 +123,9 @@ namespace Wildfire_ICS_Assist
                     entries = entries.Where(o => !o.IsComplete && !o.IsInfoOnly).OrderByDescending(o => o.TimeDue).ToList();
                     break;
             }
-            dgvLog.DataSource = entries;
+            return entries;
         }
+
 
         private void btnAddToPositionLog_Click(object sender, EventArgs e)
         {
@@ -215,5 +257,45 @@ namespace Wildfire_ICS_Assist
             else { row.Cells["colDueDate"].Style.BackColor = Color.White; }
         }
 
+        private void cboOpPeriod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buildPositionLog();
+        }
+
+        private void cboViewOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buildPositionLog();
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            svdExport.FileName = "ActivityLog-" + Program.CurrentIncident.IncidentIdentifier + ".csv";
+            DialogResult result = svdExport.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
+            {
+                string exportPath = svdExport.FileName;
+                string delimiter = ",";
+
+
+                List<PositionLogEntry> entries = GetEntries();
+
+                string csv = PositionLogTools.ExportToCSV(entries, delimiter);
+                try
+                {
+                    System.IO.File.WriteAllText(exportPath, csv);
+
+                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    if (openNow == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(exportPath);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                }
+            }
+        }
     }
 }
