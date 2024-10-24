@@ -36,7 +36,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                     selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
                     lblResourcesTitle.Text = selectedGroup.ResourceName + " Resources";
                 }
-                if (Program.CurrentIncident != null) { dgvResources.DataSource = Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.ParentID == role.RoleID).ToList(); }
+                if (Program.CurrentIncident != null) { dgvResources.DataSource = Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.ParentID == role.RoleID && o.OpPeriod == Program.CurrentOpPeriod).ToList(); }
             }
         }
 

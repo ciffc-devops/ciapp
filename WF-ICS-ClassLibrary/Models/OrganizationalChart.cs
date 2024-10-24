@@ -542,6 +542,7 @@ namespace WF_ICS_ClassLibrary.Models
                 newRole.IndividualName = string.Empty; newRole.IndividualID = Guid.Empty;
                 newRole.OrganizationalChartID = newChartID;
                 newRole.OpPeriod = newOpPeriod;
+                newRole.OrgChartRoleID = Guid.NewGuid();
                 AllRoles.Add(newRole);
             }
             return AllRoles;

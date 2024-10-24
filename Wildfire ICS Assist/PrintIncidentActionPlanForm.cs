@@ -409,19 +409,21 @@ namespace Wildfire_ICS_Assist
                 }
             }
 
-
-            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-            try
+            if (allPDFs != null && allPDFs.Count > 0)
             {
-                File.WriteAllBytes(fullFilepath, fullFile);
-
+                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+                try
+                {
+                    File.WriteAllBytes(fullFilepath, fullFile);
+                    return fullFilepath;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
-            }
 
-            return fullFilepath;
+            return null;
         }
 
         private List<byte[]> buildContentsList()
