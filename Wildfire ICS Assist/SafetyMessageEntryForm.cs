@@ -85,7 +85,6 @@ namespace Wildfire_ICS_Assist
                 selectedMessage.SitePlanLocation = txtNewSitePlanLocation.Text;
                 selectedMessage.SafetyTemplateID = Guid.Empty;
                 selectedMessage.OpPeriod = Program.CurrentOpPeriod;
-                selectedMessage.TaskID = Program.CurrentIncident.TaskID;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -106,7 +105,6 @@ namespace Wildfire_ICS_Assist
                 selectedMessage.SitePlanRequired = chkSavedSitePlanRequired.Checked;
                 selectedMessage.CopyNextOpText = "Copy to selected op";
                 selectedMessage.OpPeriod = Program.CurrentOpPeriod;
-                selectedMessage.TaskID = Program.CurrentIncident.TaskID;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 

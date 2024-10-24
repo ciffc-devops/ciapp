@@ -284,7 +284,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 {
                     //comms plan
                     CommsPlan commsPlan = TestTools.createTestCommsPlan(seed);
-                    commsPlan.OpsPeriod = Program.CurrentOpPeriod;
+                    commsPlan.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created CommsPlan"); log.Append(Environment.NewLine);
                     Program.wfIncidentService.UpsertCommsPlan(commsPlan);
                     log.Append("Saved CommsPlan"); log.Append(Environment.NewLine);

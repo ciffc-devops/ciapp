@@ -602,9 +602,9 @@ namespace WildfireICSDesktopServices
         public void UpsertCommsPlan(CommsPlan record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allCommsPlans.Any(o => o.ID == record.ID || o.OpsPeriod == record.OpsPeriod))
+            if (_currentIncident.allCommsPlans.Any(o => o.ID == record.ID || o.OpPeriod == record.OpPeriod))
             {
-                _currentIncident.allCommsPlans = _currentIncident.allCommsPlans.Where(o => o.ID != record.ID && o.OpsPeriod != record.OpsPeriod).ToList();
+                _currentIncident.allCommsPlans = _currentIncident.allCommsPlans.Where(o => o.ID != record.ID && o.OpPeriod != record.OpPeriod).ToList();
             }
             _currentIncident.allCommsPlans.Add(record);
             if (source.Equals("local") || source.Equals("networkNoInternet"))
@@ -633,8 +633,8 @@ namespace WildfireICSDesktopServices
         }
         public void UpsertCommsPlanItem(CommsPlanItem item, string function = null, string source = "local")
         {
-            CurrentIncident.createCommsPlanAsNeeded(item.OpsPeriod);
-            CommsPlan plan = CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == item.OpsPeriod);
+            CurrentIncident.createCommsPlanAsNeeded(item.OpPeriod);
+            CommsPlan plan = CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == item.OpPeriod);
             if (plan != null)
             {
                 if (string.IsNullOrEmpty(function)) { function = item.CommsFunction; }
@@ -995,9 +995,9 @@ namespace WildfireICSDesktopServices
         public void UpsertOrganizationalChart(OrganizationChart record, bool UpsertRoles, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allOrgCharts.Any(o => o.OrganizationalChartID == record.OrganizationalChartID || o.OpPeriod == record.OpPeriod))
+            if (_currentIncident.allOrgCharts.Any(o => o.ID == record.ID || o.OpPeriod == record.OpPeriod))
             {
-                _currentIncident.allOrgCharts = _currentIncident.allOrgCharts.Where(o => o.OrganizationalChartID != record.OrganizationalChartID && o.OpPeriod != record.OpPeriod).ToList();
+                _currentIncident.allOrgCharts = _currentIncident.allOrgCharts.Where(o => o.ID != record.ID && o.OpPeriod != record.OpPeriod).ToList();
             }
             _currentIncident.allOrgCharts.Add(record);
 
@@ -1096,9 +1096,9 @@ namespace WildfireICSDesktopServices
                 UpsertOrganizationalChart(_currentIncident.allOrgCharts.First(o => o.OpPeriod == record.OpPeriod).Clone());
             }
 
-            if (_currentIncident.allOrgCharts.Any(o => o.OrganizationalChartID == record.OrganizationalChartID))
+            if (_currentIncident.allOrgCharts.Any(o => o.ID == record.OrganizationalChartID))
             {
-                OrganizationChart chart = _currentIncident.allOrgCharts.First(o => o.OrganizationalChartID == record.OrganizationalChartID);
+                OrganizationChart chart = _currentIncident.allOrgCharts.First(o => o.ID == record.OrganizationalChartID);
                 if (chart.AllRoles.Any(o => o.RoleID == record.RoleID))
                 {
 
@@ -1158,7 +1158,7 @@ namespace WildfireICSDesktopServices
             role.IndividualID = member.ID;
             role.IndividualName = member.Name;
             role.OpPeriod = opsPeriod;
-            role.OrganizationalChartID = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().OrganizationalChartID;
+            role.OrganizationalChartID = _currentIncident.allOrgCharts.Where(o => o.OpPeriod == opsPeriod).First().ID;
             UpsertICSRole(role);
 
             /*
@@ -1803,7 +1803,7 @@ namespace WildfireICSDesktopServices
 
 
                     NewRole.OperationalGroupID = record.ID;
-                    NewRole.OrganizationalChartID = CurrentOrgChart.OrganizationalChartID;
+                    NewRole.OrganizationalChartID = CurrentOrgChart.ID;
                     NewRole.OpPeriod = CurrentOrgChart.OpPeriod;
                     NewRole.Active = true;
                     NewRole.ReportsTo = record.ParentID;

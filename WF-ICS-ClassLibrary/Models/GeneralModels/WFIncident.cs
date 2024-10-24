@@ -190,23 +190,23 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public CommsPlanItem PrimaryChannel(int Ops)
         {
             this.createCommsPlanAsNeeded(Ops);
-            return allCommsPlans.Where(o => o.OpsPeriod == Ops).First().getItemByFunction("OPERATIONS");
+            return allCommsPlans.FirstOrDefault(o => o.OpPeriod == Ops).getItemByFunction("OPERATIONS");
 
         }
         public CommsPlanItem SecondaryChannel(int Ops)
         {
             this.createCommsPlanAsNeeded(Ops);
-            return allCommsPlans.Where(o => o.OpsPeriod == Ops).First().getItemByFunction("SUPPORT NET");
+            return allCommsPlans.FirstOrDefault(o => o.OpPeriod == Ops).getItemByFunction("SUPPORT NET");
         }
         public CommsPlanItem EmergencyChannel(int Ops)
         {
             this.createCommsPlanAsNeeded(Ops);
-            return allCommsPlans.Where(o => o.OpsPeriod == Ops).First().getItemByFunction("EMERGENCY CHANNEL");
+            return allCommsPlans.FirstOrDefault(o => o.OpPeriod == Ops).getItemByFunction("EMERGENCY CHANNEL");
         }
         public CommsPlanItem Repeater(int Ops)
         {
             this.createCommsPlanAsNeeded(Ops);
-            return allCommsPlans.Where(o => o.OpsPeriod == Ops).First().getItemByFunction("REPEATER");
+            return allCommsPlans.FirstOrDefault(o => o.OpPeriod == Ops).getItemByFunction("REPEATER");
         }
 
         public string ICPCallSign { get => _ICPCallsign; set => _ICPCallsign = value; }
@@ -515,14 +515,14 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
         public bool hasMeaningfulOrgChart(int ops)
         {
-            if (allOrgCharts.Where(o => o.OpPeriod == ops).Count() <= 0) { return false; }
+            if (!allOrgCharts.Any(o => o.OpPeriod == ops)) { return false; }
             else if (allOrgCharts.Where(o => o.OpPeriod == ops).First().AllRoles.Any(o => !string.IsNullOrEmpty(o.IndividualName))) { return true; }
             else { return false; }
         }
         public bool hasMeangfulCommsPlan(int ops)
         {
-            if (allCommsPlans.Where(o => o.OpsPeriod == ops).Count() <= 0) { return false; }
-            else if (allCommsPlans.Where(o => o.OpsPeriod == ops).First().allCommsItems.Any(o => !string.IsNullOrEmpty(o.ChannelID))) { return true; }
+            if (!allCommsPlans.Any(o => o.OpPeriod == ops)) { return false; }
+            else if (allCommsPlans.Where(o => o.OpPeriod == ops).First().allCommsItems.Any(o => !string.IsNullOrEmpty(o.ChannelID))) { return true; }
             else { return false; }
         }
         public bool hasMeaningfulMedicalPlan(int ops)

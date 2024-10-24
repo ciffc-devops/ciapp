@@ -151,7 +151,7 @@ namespace Wildfire_ICS_Assist
             {
                 cboPreparedBy.DataSource = null;
                 cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
-                if (CurrentAirOpsSummary.PreparedByPositionID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByPositionID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByPositionID; }
+                if (CurrentAirOpsSummary.PreparedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByRoleID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByRoleID; }
             }
         }
 
@@ -190,11 +190,11 @@ namespace Wildfire_ICS_Assist
 
         private void Program_CommsPlanChanged(CommsPlanEventArgs e)
         {
-            if (e.item.OpsPeriod == Program.CurrentOpPeriod) { PopulateCommsItems(); }
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateCommsItems(); }
         }
         private void Program_CommsPlanItemChanged(CommsPlanItemEventArgs e)
         {
-            if (e.item.OpsPeriod == Program.CurrentOpPeriod) { PopulateCommsItems(); }
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateCommsItems(); }
         }
 
         private void Program_AircraftChanged(AircraftEventArgs e)
@@ -214,11 +214,11 @@ namespace Wildfire_ICS_Assist
         {
             dgvCommsItems.AutoGenerateColumns = false;
             dgvCommsItems.DataSource = null;
-            if (!Program.CurrentIncident.allCommsPlans.Any(o => o.OpsPeriod == Program.CurrentOpPeriod))
+            if (!Program.CurrentIncident.allCommsPlans.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
             {
                 Program.CurrentIncident.createCommsPlanAsNeeded(Program.CurrentOpPeriod);
             }
-            CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == Program.CurrentOpPeriod);
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
 
             dgvCommsItems.DataSource = plan.ActiveAirCommsItems;
 
@@ -339,7 +339,7 @@ namespace Wildfire_ICS_Assist
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ICSRole role = new ICSRole();
-            role.OrganizationalChartID = CurrentOrgChart.OrganizationalChartID;
+            role.OrganizationalChartID = CurrentOrgChart.ID;
             role.OpPeriod = CurrentOrgChart.OpPeriod;
             openRoleForEdit(role);
         }
@@ -358,10 +358,10 @@ namespace Wildfire_ICS_Assist
 
                     if (CurrentOrgChart.PreparedByRoleID == Guid.Empty)
                     {
-                        CurrentOrgChart.PreparedByRole = Program.CurrentRole.RoleName;
-                        CurrentOrgChart.PreparedBy = Program.CurrentRole.IndividualName;
+                        CurrentOrgChart.PreparedByRoleName = Program.CurrentRole.RoleName;
+                        CurrentOrgChart.PreparedByResourceName = Program.CurrentRole.IndividualName;
                         CurrentOrgChart.PreparedByRoleID = Program.CurrentRole.RoleID;
-                        CurrentOrgChart.PreparedByUserID = Program.CurrentRole.IndividualID;
+                        CurrentOrgChart.PreparedByResourceID = Program.CurrentRole.IndividualID;
                         Program.wfIncidentService.UpsertOrganizationalChart(CurrentOrgChart, false);
                     }
                 }
@@ -415,8 +415,8 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = entryForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    entryForm.SelectedItem.OpsPeriod = Program.CurrentOpPeriod;
-                    entryForm.SelectedItem.OrganizationID = CurrentOrgChart.OrganizationalChartID;
+                    entryForm.SelectedItem.OpPeriod = Program.CurrentOpPeriod;
+                    entryForm.SelectedItem.OrganizationID = CurrentOrgChart.ID;
 
                     Program.wfIncidentService.UpsertCommsPlanItem(entryForm.SelectedItem, null, "local");
 
@@ -572,9 +572,9 @@ namespace Wildfire_ICS_Assist
             if (cboPreparedBy.SelectedItem != null)
             {
                 ICSRole role = (ICSRole)cboPreparedBy.SelectedItem;
-                CurrentAirOpsSummary.PreparedByName = role.IndividualName;
-                CurrentAirOpsSummary.PreparedByPosition = role.RoleName;
-                CurrentAirOpsSummary.PreparedByPositionID = role.RoleID;
+                CurrentAirOpsSummary.PreparedByResourceName = role.IndividualName;
+                CurrentAirOpsSummary.PreparedByRoleName = role.RoleName;
+                CurrentAirOpsSummary.PreparedByRoleID = role.RoleID;
             }
         }
 

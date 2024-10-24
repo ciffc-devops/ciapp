@@ -126,7 +126,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             if (Program.CurrentIncident != null)
             {
                 _AvailableCommsPlanItems.Clear();
-                if (Program.CurrentIncident.hasMeangfulCommsPlan(Program.CurrentOpPeriod)) { _AvailableCommsPlanItems = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == Program.CurrentOpPeriod).ActiveCommsItems; }
+                if (Program.CurrentIncident.hasMeangfulCommsPlan(Program.CurrentOpPeriod)) { _AvailableCommsPlanItems = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveCommsItems; }
                 CommsPlanItem blank = new CommsPlanItem();
                 blank.ItemID = Guid.Empty;
                 _AvailableCommsPlanItems.Insert(0, blank);

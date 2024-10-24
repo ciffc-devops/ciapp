@@ -151,14 +151,14 @@ namespace Wildfire_ICS_Assist
             {
                 ICSRole approvedBy = (ICSRole)cboApprovedBy.SelectedItem;
                 generalMessage.ApprovedByRoleID = approvedBy.RoleID;
-                generalMessage.ApprovedByName = approvedBy.IndividualName;
-                generalMessage.ApprovedByPosition = approvedBy.RoleName;
+                generalMessage.ApprovedByResourceName = approvedBy.IndividualName;
+                generalMessage.ApprovedByRoleName = approvedBy.RoleName;
             }
             else
             {
                 generalMessage.ApprovedByRoleID = Guid.Empty;
-                generalMessage.ApprovedByName = string.Empty;
-                generalMessage.ApprovedByPosition = string.Empty;
+                generalMessage.ApprovedByResourceName = string.Empty;
+                generalMessage.ApprovedByRoleName = string.Empty;
             }
         }
 

@@ -91,7 +91,6 @@ namespace Wildfire_ICS_Assist
         private void btnAdd_Click(object sender, EventArgs e)
         {
             GeneralMessage gm = new GeneralMessage();
-            gm.TaskID = Program.CurrentIncident.TaskID;
             gm.OpPeriod = Program.CurrentOpPeriod;
             gm.FromRoleID = Program.CurrentRole.RoleID;
             gm.FromName = Program.CurrentRole.IndividualName;
@@ -99,8 +98,8 @@ namespace Wildfire_ICS_Assist
 
 
             gm.ApprovedByRoleID = Program.CurrentRole.RoleID;
-            gm.ApprovedByName = Program.CurrentRole.IndividualName;
-            gm.ApprovedByPosition = Program.CurrentRole.RoleName;
+            gm.ApprovedByResourceName = Program.CurrentRole.IndividualName;
+            gm.ApprovedByRoleName = Program.CurrentRole.RoleName;
             gm.DateSent = DateTime.Now;
             gm.Active = true;
             OpenForEdit(gm);

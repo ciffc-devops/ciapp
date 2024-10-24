@@ -54,9 +54,8 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.MedivacAircraftText = "Medivac Test" + seed;
             test.notam = CreateNOTAMTest(seed);
             //test.aircrafts.Add(CreateAircraftTest(seed));
-            test.PreparedByPositionID = Globals.PlanningChiefID;
-            test.PreparedByPosition = "Planning Section Chief";
-            test.PreparedByName = "Name" + seed;
+            test.PreparedByRoleID = Globals.PlanningChiefID;
+            test.PreparedByResourceName = "Name" + seed;
             return test;
         }
         public static Contact createContactTest(int seed)
@@ -119,15 +118,15 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static MedicalPlan createTestMedicalPlan(int seed)
         {
             MedicalPlan test = new MedicalPlan();
-            test.PreparedBy = "PrepBy" + seed;
+            test.PreparedByResourceName = "PrepBy" + seed;
             test.DatePrepared = DateTime.Now.AddHours(seed);
             test.Ambulances.Add(createTestAmbulanceService(seed));
             test.Hospitals.Add(createTestHospital(seed));
             test.MedicalAidStations.Add(createTestMedicalAidStation(seed));
             test.EmergencyProcedures = "EmergencyProcedures" + seed;
-            test.PreparedByPosition = "Operations Section Chief";
+            test.PreparedByRoleName = "Operations Section Chief";
             test.PreparedByRoleID = Globals.OpsChiefID;
-            test.PreparedBy = "Tim " + seed;
+            test.PreparedByResourceName = "Tim " + seed;
             test.ApprovedByRoleID = Globals.IncidentCommanderID;
             return test;
         }
@@ -166,7 +165,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.Message = "Message" + seed;
             test.SitePlanRequired = RandomBooleanGenerator.GetRandomBoolean();
             test.SitePlanLocation = "Location" + seed;
-            test.ApprovedByName = "Tim " + seed;
+            test.ApprovedByResourceName = "Tim " + seed;
             test.ApprovedByRoleName = "Planning Section Chief";
             test.ApprovedByRoleID = Globals.PlanningChiefID;
             test.SummaryLine = "Hazard " + seed;
@@ -406,7 +405,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.LastUpdatedUTC = DateTime.Now;
             test.Active = true;
             test.OrganizationID = Guid.Empty;
-            test.OpsPeriod = 1;
+            test.OpPeriod = 1;
             test.RxTone = "RxTone" + seed;
             test.Assignment = "Aassignment" + seed;
             test.TemplateItemID = Guid.Empty;
@@ -420,9 +419,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             CommsPlan test = new CommsPlan();
 
-            test.OpsPeriod = 1;
+            test.OpPeriod = 1;
             test.DatePrepared = DateTime.Now.AddHours(seed);
-            test.PreparedBy = "PreparedBy" + seed;
+            test.PreparedByResourceName = "PreparedBy" + seed;
             test.allCommsItems = new List<CommsPlanItem>();
             for (int x = 0; x < 5; x++)
             {
@@ -432,7 +431,6 @@ namespace WF_ICS_ClassLibrary.Utilities
 
 
             test.LastUpdatedUTC = DateTime.Now;
-            test.PreparedByPosition = "PreparedByPosition" + seed;
             return test;
         }
 
@@ -447,8 +445,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.FromPosition = "FromPosition" + seed;
             test.DateSent = DateTime.Now.AddHours(seed);
             test.LastUpdatedUTC = DateTime.UtcNow;
-            test.ApprovedByName = "ApprovedByName" + seed;
-            test.ApprovedByPosition = "ApprovedByPosition" + seed;
+            test.ApprovedByResourceName = "ApprovedByName" + seed;
             test.ReplyByPosition = "ReplyByPosition" + seed;
             test.ReplyByName = "ReplyByName" + seed;
             test.Subject = "Subject" + seed;
@@ -481,10 +478,10 @@ namespace WF_ICS_ClassLibrary.Utilities
             sheet.GeneralSafety = "General Safety" + seed;
             sheet.FireSize = random.Next(100).ToString();
             sheet.FireStatus = "Status" + seed;
-            sheet.PreparedBy = "Tim " + seed;
-            sheet.PreparedByRole = "Planning Section Chief";
-            sheet.ApprovedBy = "Jim " + seed;
-            sheet.ApprovedByRole = "EOC Director";
+            sheet.PreparedByResourceName = "Tim " + seed;
+            sheet.PreparedByRoleName = "Planning Section Chief";
+            sheet.ApprovedByResourceName = "Jim " + seed;
+            sheet.ApprovedByRoleName = "EOC Director";
             for (int x = 0; x < 5; x++)
             {
                 sheet.Objectives.Add(createTestIncidentObjective(x));

@@ -406,9 +406,9 @@ namespace WildfireICSDesktopServices
             }
 
             var type = newValue.GetType();
-            if (type == new List<CannedCommsLogEntry>().GetType())
+            if (type == new List<QuickCommsLogEntry>().GetType())
             {
-                _options.AllCannedCommsLogEntries = newValue as List<CannedCommsLogEntry>;
+                _options.AllCannedCommsLogEntries = newValue as List<QuickCommsLogEntry>;
             }
             else if (type == new ShortcutButtonOption().GetType())
             {

@@ -43,21 +43,21 @@ namespace Wildfire_ICS_Assist
 
         private void Program_OnCommsPlanChanged(CommsPlanEventArgs e)
         {
-            if(e.item.OpsPeriod == Program.CurrentOpPeriod) { BuildDataList(); }
+            if(e.item.OpPeriod == Program.CurrentOpPeriod) { BuildDataList(); }
         }
         private void Program_OnCommsPlanItemChanged(CommsPlanItemEventArgs e)
         {
-            if(e.item.OpsPeriod == Program.CurrentOpPeriod) { BuildDataList(); }
+            if(e.item.OpPeriod == Program.CurrentOpPeriod) { BuildDataList(); }
         }
         private void BuildDataList()
         {
             dgvCommsItems.AutoGenerateColumns = false;
             dgvCommsItems.DataSource = null;
-            if(!Program.CurrentIncident.allCommsPlans.Any(o => o.OpsPeriod == Program.CurrentOpPeriod))
+            if(!Program.CurrentIncident.allCommsPlans.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
             {
                 Program.CurrentIncident.createCommsPlanAsNeeded(Program.CurrentOpPeriod);
             }
-            CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == Program.CurrentOpPeriod);
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
 
             dgvCommsItems.DataSource = plan.ActiveCommsItems;
             btnAdd.Enabled = plan.ActiveCommsItems.Count < RowsPerSheet;
@@ -69,7 +69,7 @@ namespace Wildfire_ICS_Assist
                DialogResult dr = entryForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    entryForm.SelectedItem.OpsPeriod = Program.CurrentOpPeriod;
+                    entryForm.SelectedItem.OpPeriod = Program.CurrentOpPeriod;
                     
                     Program.wfIncidentService.UpsertCommsPlanItem(entryForm.SelectedItem, null, "local");
 
@@ -148,7 +148,7 @@ namespace Wildfire_ICS_Assist
                 string delimiter = ",";
 
 
-                CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == Program.CurrentOpPeriod);
+                CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
 
 
 
@@ -173,28 +173,28 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == Program.CurrentOpPeriod);
-            if (string.IsNullOrEmpty(plan.PreparedBy) || string.IsNullOrEmpty(plan.PreparedByPosition))
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
+            if (string.IsNullOrEmpty(plan.PreparedByResourceName) || string.IsNullOrEmpty(plan.PreparedByRoleName))
             {
 
 
 
-                if (Program.CurrentIncident.allOrgCharts.Where(o => o.OpPeriod == Program.CurrentOpPeriod).Any())
+                if (Program.CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
                 {
-                    OrganizationChart currentChart = Program.CurrentIncident.allOrgCharts.Where(o => o.OpPeriod == Program.CurrentOpPeriod).First();
+                    OrganizationChart currentChart = Program.CurrentIncident.allOrgCharts.First(o => o.OpPeriod == Program.CurrentOpPeriod);
                     ICSRole prepBy = currentChart.GetRoleByID(Globals.LogisticsChiefID, true);
                     if (prepBy != null)
                     {
-                        plan.PreparedBy = prepBy.IndividualName; plan.PreparedByPosition = prepBy.RoleName;
+                        plan.PreparedByResourceName = prepBy.IndividualName; plan.PreparedByRoleName = prepBy.RoleName;
                         Program.wfIncidentService.UpsertCommsPlan(plan);
                     }
                 }
 
             }
-            if (string.IsNullOrEmpty(plan.PreparedBy) || string.IsNullOrEmpty(plan.PreparedByPosition))
+            if (string.IsNullOrEmpty(plan.PreparedByResourceName) || string.IsNullOrEmpty(plan.PreparedByRoleName))
             {
-                plan.PreparedBy = Program.CurrentRole.IndividualName;
-                plan.PreparedByPosition = Program.CurrentRole.RoleName;
+                plan.PreparedByResourceName = Program.CurrentRole.IndividualName;
+                plan.PreparedByRoleName = Program.CurrentRole.RoleName;
             }
 
             string path = Program.pdfExportService.createCommsPlanPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false, false, false);

@@ -26,7 +26,7 @@ namespace WF_ICS_ClassLibrary.Models
                 else if (update.ObjectType.Equals(new CheckInRecord().GetType().Name)) { return (update.Data as CheckInRecord).SignInRecordID; }
                 else if (update.ObjectType.Equals(new Note().GetType().Name)) { return (update.Data as Note).NoteID; }
                 else if (update.ObjectType.Equals(new OperationalPeriod().GetType().Name)) { return (update.Data as OperationalPeriod).OperationalPeriodID; }
-                else if (update.ObjectType.Equals(new OrganizationChart().GetType().Name)) { return (update.Data as OrganizationChart).OrganizationalChartID; }
+                else if (update.ObjectType.Equals(new OrganizationChart().GetType().Name)) { return (update.Data as OrganizationChart).ID; }
                 else if (update.ObjectType.Equals(new ICSRole().GetType().Name)) { return (update.Data as ICSRole).OrgChartRoleID; }
                 else if (update.ObjectType.Equals(new PositionLogEntry().GetType().Name)) { return (update.Data as PositionLogEntry).LogID; }
                 else if (update.ObjectType.Equals(new Timeline().GetType().Name)) { return (update.Data as Timeline).TimeLineID; }

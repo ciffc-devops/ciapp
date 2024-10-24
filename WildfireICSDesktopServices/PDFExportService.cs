@@ -303,8 +303,8 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("3 FROM Name and Position", item.From);
 
                         //approved by
-                        if (!string.IsNullOrEmpty(item.ApprovedByPosition)) { stamper.AcroFields.SetField("Position", item.ApprovedByPosition); }
-                        if (!string.IsNullOrEmpty(item.ApprovedByName)) { stamper.AcroFields.SetField("Name", item.ApprovedByName); }
+                        if (!string.IsNullOrEmpty(item.ApprovedByRoleName)) { stamper.AcroFields.SetField("Position", item.ApprovedByRoleName); }
+                        if (!string.IsNullOrEmpty(item.ApprovedByResourceName)) { stamper.AcroFields.SetField("Name", item.ApprovedByResourceName); }
                         //reply
                         if (!string.IsNullOrEmpty(item.Reply)) { stamper.AcroFields.SetField("9 REPLY", item.Reply); }
                         if (!string.IsNullOrEmpty(item.ReplyByPosition)) { stamper.AcroFields.SetField("ReplyPosition", item.ReplyByPosition); }
@@ -458,7 +458,7 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("Approved Site Safety Plans Located at I", plan.SitePlanLocation);
 
                         stamper.AcroFields.SetField("PreparedByPosition", plan.ApprovedByRoleName);
-                        stamper.AcroFields.SetField("5 PREPARED BY I Position I Name I", plan.ApprovedByName);
+                        stamper.AcroFields.SetField("5 PREPARED BY I Position I Name I", plan.ApprovedByResourceName);
 
 
                         if (plan.SitePlanRequired) { PDFExtraTools.SetPDFCheckbox(stamper, "SitePlanRequiredYes"); }
@@ -739,22 +739,22 @@ namespace WildfireICSDesktopServices
 
 
                 //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
-                if (plan.PreparedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.PreparedBy) && currentChart.ActiveRoles.Any(o => o.RoleID == plan.PreparedByRoleID))
+                if (plan.PreparedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.PreparedByResourceName) && currentChart.ActiveRoles.Any(o => o.RoleID == plan.PreparedByRoleID))
                 {
                     ICSRole role = currentChart.ActiveRoles.First(o => o.RoleID == plan.PreparedByRoleID);
-                    plan.PreparedBy = role.IndividualName;
+                    plan.PreparedByResourceName = role.IndividualName;
                 }
-                stamper.AcroFields.SetField("Name", plan.PreparedBy);
-                stamper.AcroFields.SetField("Position", plan.PreparedByPosition);
+                stamper.AcroFields.SetField("Name", plan.PreparedByResourceName);
+                stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
 
                 //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
-                if (plan.ApprovedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.ApprovedBy) && currentChart.ActiveRoles.Any(o => o.RoleID == plan.ApprovedByRoleID))
+                if (plan.ApprovedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.ApprovedByResourceName) && currentChart.ActiveRoles.Any(o => o.RoleID == plan.ApprovedByRoleID))
                 {
                     ICSRole role = currentChart.ActiveRoles.First(o => o.RoleID == plan.ApprovedByRoleID);
-                    plan.ApprovedBy = role.IndividualName;
+                    plan.ApprovedByResourceName = role.IndividualName;
                 }
-                stamper.AcroFields.SetField("Name_2", plan.ApprovedBy);
-                stamper.AcroFields.SetField("Position_2", plan.ApprovedByPosition);
+                stamper.AcroFields.SetField("Name_2", plan.ApprovedByResourceName);
+                stamper.AcroFields.SetField("Position_2", plan.ApprovedByRoleName);
 
                 stamper.AcroFields.SetField("6 MEDICAL EMERGENCY PROCEDURESRow1", plan.EmergencyProcedures);
 
@@ -900,12 +900,12 @@ namespace WildfireICSDesktopServices
             }
 
 
-            if (!task.allCommsPlans.Where(o => o.OpsPeriod == OpsPeriod).Any())
+            if (!task.allCommsPlans.Any(o => o.OpPeriod == OpsPeriod))
             {
                 task.createCommsPlanAsNeeded(OpsPeriod);
             }
 
-            CommsPlan plan = task.allCommsPlans.Where(o => o.OpsPeriod == OpsPeriod).First();
+            CommsPlan plan = task.allCommsPlans.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
 
 
 
@@ -917,7 +917,7 @@ namespace WildfireICSDesktopServices
                 PdfReader rdr = new PdfReader(fileToUse);
                 PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
 
-                OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == plan.OpsPeriod);
+                OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == plan.OpPeriod);
 
                 //Op Plan
                 DateTime today = DateTime.Now;
@@ -929,8 +929,8 @@ namespace WildfireICSDesktopServices
                 stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
 
-                stamper.AcroFields.SetField("Name", plan.PreparedBy);
-                stamper.AcroFields.SetField("Position", plan.PreparedByPosition);
+                stamper.AcroFields.SetField("Name", plan.PreparedByResourceName);
+                stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
 
                 for (int row = 0; row < plan.ActiveCommsItems.Count && row < 26; row++)
                 {
@@ -1189,11 +1189,11 @@ namespace WildfireICSDesktopServices
                                 stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
                                 ICSRole PreparedBy = new ICSRole();
-                                if (currentChart.PreparedByUserID != Guid.Empty)
+                                if (currentChart.PreparedByResourceID != Guid.Empty)
                                 {
                                    
-                                    PreparedBy.IndividualName = currentChart.PreparedBy;
-                                    PreparedBy.RoleName = currentChart.PreparedByRole;
+                                    PreparedBy.IndividualName = currentChart.PreparedByResourceName;
+                                    PreparedBy.RoleName = currentChart.PreparedByRoleName;
                                 }
                                 else
                                 {
@@ -1421,11 +1421,11 @@ namespace WildfireICSDesktopServices
                             stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
                             ICSRole PreparedBy = new ICSRole();
-                            if(currentChart.PreparedByUserID != Guid.Empty)
+                            if(currentChart.PreparedByResourceID != Guid.Empty)
                             {
                                 //PreparedBy.teamMember = new Personnel(currentChart.PreparedByUserID);
-                                PreparedBy.IndividualName = currentChart.PreparedBy;
-                                PreparedBy.RoleName = currentChart.PreparedByRole;
+                                PreparedBy.IndividualName = currentChart.PreparedByResourceName;
+                                PreparedBy.RoleName = currentChart.PreparedByRoleName;
                             }
                             else
                             {
@@ -3574,7 +3574,7 @@ namespace WildfireICSDesktopServices
             List<string> pdfFileNames = new List<string>();
 
 
-            List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == summary.OpPeriod).ActiveAirCommsItems;
+            List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).ActiveAirCommsItems;
             List<ICSRole> roles = new List<ICSRole>();
             roles.Add(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
             roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).GetChildRoles(Globals.AirOpsDirector, true));
@@ -3605,7 +3605,7 @@ namespace WildfireICSDesktopServices
             int CommsPP = 10;
             List<Aircraft> aircraftList = incident.GetActiveAircraft(sum.OpPeriod);
 
-            List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpsPeriod == sum.OpPeriod).ActiveAirCommsItems;
+            List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).ActiveAirCommsItems;
             List<ICSRole> roles = new List<ICSRole>();
             roles.Add(incident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == sum.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
             roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).GetChildRoles(Globals.AirOpsDirector, true));
@@ -3656,8 +3656,8 @@ namespace WildfireICSDesktopServices
                 {
                     stamper.AcroFields.SetField("1 INCIDENT NAME OR NUMBERRow1", task.IncidentNameOrNumber);
 
-                    stamper.AcroFields.SetField("Contact Name", summary.PreparedByName);
-                    stamper.AcroFields.SetField("Position", summary.PreparedByPosition);
+                    stamper.AcroFields.SetField("Contact Name", summary.PreparedByResourceName);
+                    stamper.AcroFields.SetField("Position", summary.PreparedByRoleName);
 
                     stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
@@ -4336,9 +4336,9 @@ namespace WildfireICSDesktopServices
 
                     foreach(Guid g in opGroup.CommsPlanItemIDs)
                     {
-                        if(task.allCommsPlans.Any(o=>o.OpsPeriod == OpPeriod) && task.allCommsPlans.First(o=>o.OpsPeriod == OpPeriod).allCommsItems.Any(o=>o.ItemID == g))
+                        if(task.allCommsPlans.Any(o=>o.OpPeriod == OpPeriod) && task.allCommsPlans.First(o=>o.OpPeriod == OpPeriod).allCommsItems.Any(o=>o.ItemID == g))
                         {
-                            comms.Add(task.allCommsPlans.First(o => o.OpsPeriod == OpPeriod).allCommsItems.First(o => o.ItemID == g));
+                            comms.Add(task.allCommsPlans.First(o => o.OpPeriod == OpPeriod).allCommsItems.First(o => o.ItemID == g));
                         }
                     }
 

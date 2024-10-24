@@ -360,7 +360,7 @@ namespace Wildfire_ICS_Assist
             {
                 if (!newCopy.AllRoles.Any(o => o.RoleID == role.RoleID))
                 {
-                    ICSRole r = role.Clone(); r.OpPeriod = NextOp; r.OrganizationalChartID = newCopy.OrganizationalChartID; r.IndividualID = Guid.Empty; r.IndividualName = string.Empty ; newCopy.AllRoles.Add(r);
+                    ICSRole r = role.Clone(); r.OpPeriod = NextOp; r.OrganizationalChartID = newCopy.ID; r.IndividualID = Guid.Empty; r.IndividualName = string.Empty ; newCopy.AllRoles.Add(r);
                 }
             }
 
@@ -495,13 +495,13 @@ namespace Wildfire_ICS_Assist
             Program.CurrentIncident.createCommsPlanAsNeeded(Program.CurrentOpPeriod);
             Program.CurrentIncident.createCommsPlanAsNeeded(NextOp);
 
-            foreach(CommsPlanItem item in Program.CurrentIncident.allCommsPlans.First(o=>o.OpsPeriod == Program.CurrentOpPeriod).ActiveCommsItems)
+            foreach(CommsPlanItem item in Program.CurrentIncident.allCommsPlans.First(o=>o.OpPeriod == Program.CurrentOpPeriod).ActiveCommsItems)
             {
-                if (!Program.CurrentIncident.allCommsPlans.First(o => o.OpsPeriod == NextOp).ActiveCommsItems.Any(o => o.Equals(item)))
+                if (!Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == NextOp).ActiveCommsItems.Any(o => o.Equals(item)))
                 {
 
                     CommsPlanItem newItem = item.Clone();
-                    newItem.OpsPeriod = NextOp;
+                    newItem.OpPeriod = NextOp;
                     newItem.ItemID = Guid.NewGuid();
                     Program.wfIncidentService.UpsertCommsPlanItem(newItem);
                     itemsAdded++;

@@ -327,10 +327,10 @@ namespace WF_ICS_ClassLibrary.Utilities
     }  */
         public static void createCommsPlanAsNeeded(this WFIncident task, int Ops)
         {
-            if (task.allCommsPlans.Where(o => o.OpsPeriod == Ops).Count() <= 0)
+            if (!task.allCommsPlans.Any(o => o.OpPeriod == Ops))
             {
                 CommsPlan cp = new CommsPlan();
-                cp.OpsPeriod = Ops;
+                cp.OpPeriod = Ops;
 
 
                 DateTime today = DateTime.Now;
@@ -357,7 +357,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 if (task.allOrgCharts.Any(o => o.OpPeriod == ops))
                 {
                     OrganizationChart currentChart = task.allOrgCharts.First(o => o.OpPeriod == ops);
-                    plan.PreparedBy = currentChart.getNameByRoleName("Logistics Section Chief");
+                    plan.PreparedByResourceName = currentChart.getNameByRoleName("Logistics Section Chief");
                 }
 
                 /*
@@ -414,7 +414,6 @@ namespace WF_ICS_ClassLibrary.Utilities
             {
                 IncidentObjectivesSheet sheet = new IncidentObjectivesSheet();
                 sheet.OpPeriod = ops;
-                sheet.TaskID = incident.TaskID;
                 DateTime today = DateTime.Now;
                 sheet.DatePrepared = today;
                 if (incident.getOpPeriodStart(ops).DayOfYear != today.DayOfYear)
@@ -466,16 +465,16 @@ namespace WF_ICS_ClassLibrary.Utilities
             if (incident.allOrgCharts.Any(o=>o.OpPeriod == oldOps))
             {
                 OrganizationChart lastOrg = incident.allOrgCharts.First(o=>o.OpPeriod == oldOps);
-                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.OrganizationalChartID);
+                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.ID);
             } else if (oldOps == 0 && incident.allOrgCharts.Any(o=>o.OpPeriod != newOps))
             {
                 OrganizationChart lastOrg = incident.allOrgCharts.OrderByDescending(o => o.OpPeriod).First();
-                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.OrganizationalChartID);
+                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.ID);
             }
             else
             {
                 chart.AllRoles = OrgChartTools.GetBlankPrimaryRoles();
-                foreach (ICSRole role in chart.AllRoles) { role.OpPeriod = newOps; role.OrganizationalChartID = chart.OrganizationalChartID; }
+                foreach (ICSRole role in chart.AllRoles) { role.OpPeriod = newOps; role.OrganizationalChartID = chart.ID; }
 
 
             }

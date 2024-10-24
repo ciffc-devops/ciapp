@@ -417,14 +417,14 @@ namespace Wildfire_ICS_Assist
                 ICSRole selected = (ICSRole)cboPreparedBy.SelectedItem;
 
                 objectivesSheet.PreparedByRoleID = selected.RoleID;
-                objectivesSheet.PreparedBy = selected.IndividualName;
-                objectivesSheet.PreparedByRole = selected.RoleName;
+                objectivesSheet.PreparedByResourceName = selected.IndividualName;
+                objectivesSheet.PreparedByRoleName = selected.RoleName;
             } else
             {
                 cboPreparedBy.Text = string.Empty;
                 objectivesSheet.PreparedByRoleID = Guid.Empty;
-                objectivesSheet.PreparedBy = string.Empty;
-                objectivesSheet.PreparedByRole = string.Empty;
+                objectivesSheet.PreparedByResourceName = string.Empty;
+                objectivesSheet.PreparedByRoleName = string.Empty;
             }
         }
 
@@ -435,14 +435,14 @@ namespace Wildfire_ICS_Assist
                 ICSRole selected = (ICSRole)cboApprovedBy.SelectedItem;
 
                 objectivesSheet.ApprovedByRoleID = selected.RoleID;
-                objectivesSheet.ApprovedBy = selected.IndividualName;
-                objectivesSheet.ApprovedByRole = selected.RoleName;
+                objectivesSheet.ApprovedByResourceName = selected.IndividualName;
+                objectivesSheet.ApprovedByRoleName = selected.RoleName;
             } else
             {
                 cboPreparedBy.Text = string.Empty;
                 objectivesSheet.ApprovedByRoleID = Guid.Empty;
-                objectivesSheet.ApprovedBy = string.Empty;
-                objectivesSheet.ApprovedByRole = string.Empty;
+                objectivesSheet.ApprovedByResourceName = string.Empty;
+                objectivesSheet.ApprovedByRoleName = string.Empty;
             }
         }
     }

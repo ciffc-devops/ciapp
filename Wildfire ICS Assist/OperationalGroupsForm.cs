@@ -316,10 +316,10 @@ namespace Wildfire_ICS_Assist
 
                             if (CurrentOrgChart.PreparedByRoleID == Guid.Empty)
                             {
-                                CurrentOrgChart.PreparedByRole = Program.CurrentRole.RoleName;
-                                CurrentOrgChart.PreparedBy = Program.CurrentRole.IndividualName;
+                                CurrentOrgChart.PreparedByRoleName = Program.CurrentRole.RoleName;
+                                CurrentOrgChart.PreparedByResourceName = Program.CurrentRole.IndividualName;
                                 CurrentOrgChart.PreparedByRoleID = Program.CurrentRole.RoleID;
-                                CurrentOrgChart.PreparedByUserID = Program.CurrentRole.IndividualID;
+                                CurrentOrgChart.PreparedByResourceID = Program.CurrentRole.IndividualID;
                                 Program.wfIncidentService.UpsertOrganizationalChart(CurrentOrgChart, false);
                             }
                         }

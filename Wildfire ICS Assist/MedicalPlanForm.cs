@@ -283,8 +283,8 @@ namespace Wildfire_ICS_Assist
 
             if (plan.PreparedByRoleID == Guid.Empty)
             {
-                plan.PreparedBy = Program.CurrentRole.IndividualName;
-                plan.PreparedByPosition = Program.CurrentRole.RoleName;
+                plan.PreparedByResourceName = Program.CurrentRole.IndividualName;
+                plan.PreparedByRoleName = Program.CurrentRole.RoleName;
             }
 
             string path = Program.pdfExportService.createMedicalPlanPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false, false, false);
@@ -304,13 +304,13 @@ namespace Wildfire_ICS_Assist
             if(cboApprovedBy.SelectedItem != null)
             {
                 ICSRole role = (ICSRole)cboApprovedBy.SelectedItem;
-                CurrentPlan.ApprovedBy = role.IndividualName;
-                CurrentPlan.ApprovedByPosition = role.RoleName;
+                CurrentPlan.ApprovedByResourceName = role.IndividualName;
+                CurrentPlan.ApprovedByRoleName = role.RoleName;
                 CurrentPlan.ApprovedByRoleID = role.RoleID;
             } else
             {
-                CurrentPlan.ApprovedBy = string.Empty;
-                CurrentPlan.ApprovedByPosition = string.Empty;
+                CurrentPlan.ApprovedByResourceName = string.Empty;
+                CurrentPlan.ApprovedByRoleName = string.Empty;
                 CurrentPlan.ApprovedByRoleID = Guid.Empty;
 
             }
@@ -323,14 +323,14 @@ namespace Wildfire_ICS_Assist
             if (cboPreparedBy.SelectedItem != null)
             {
                 ICSRole role = (ICSRole)cboPreparedBy.SelectedItem;
-                CurrentPlan.PreparedBy = role.IndividualName;
-                CurrentPlan.PreparedByPosition = role.RoleName;
+                CurrentPlan.PreparedByResourceName = role.IndividualName;
+                CurrentPlan.PreparedByRoleName = role.RoleName;
                 CurrentPlan.PreparedByRoleID = role.RoleID;
             }
             else
             {
-                CurrentPlan.PreparedBy = string.Empty;
-                CurrentPlan.PreparedByPosition = string.Empty;
+                CurrentPlan.PreparedByResourceName = string.Empty;
+                CurrentPlan.PreparedByRoleName = string.Empty;
                 CurrentPlan.PreparedByRoleID = Guid.Empty;
             }
             Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);

@@ -843,13 +843,13 @@ namespace Wildfire_ICS_Assist
 
         private void Program_CommsPlanChanged(CommsPlanEventArgs e)
         {
-            if (e.item.OpsPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
             TriggerAutoSave();
         }
 
         private void Program_CommsPlanItemChanged(CommsPlanItemEventArgs e)
         {
-            if (e.item.OpsPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
             TriggerAutoSave();
 
         }

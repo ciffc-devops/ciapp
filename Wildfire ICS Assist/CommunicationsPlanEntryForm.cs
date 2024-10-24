@@ -56,7 +56,7 @@ namespace Wildfire_ICS_Assist
                 _SelectedItem = ((CommsPlanItem)cboSavedComms.SelectedItem).Clone();
                 _SelectedItem.CommsFunction = txtSavedFunction.Text;
                 _SelectedItem.Assignment = txtSavedAssignment.Text;
-                _SelectedItem.OpsPeriod = Program.CurrentOpPeriod;
+                _SelectedItem.OpPeriod = Program.CurrentOpPeriod;
                 _SelectedItem.Active = true;
                 _SelectedItem.UsedForAircraft = chkSavedUsedForAir.Checked;
                 
@@ -70,7 +70,7 @@ namespace Wildfire_ICS_Assist
             if (ValidateNew())
             {
                 _SelectedItem = editCommsChannelControl1.selectedItem;
-                _SelectedItem.OpsPeriod = Program.CurrentOpPeriod;
+                _SelectedItem.OpPeriod = Program.CurrentOpPeriod;
                 _SelectedItem.CommsFunction = txtFunction.Text;
                 _SelectedItem.Assignment = txtAssignment.Text;
                 _SelectedItem.UsedForAircraft = chkUsedForAir.Checked;

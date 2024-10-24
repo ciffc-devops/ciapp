@@ -7,7 +7,7 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class CommsPlanItem : ICloneable, IEquatable<CommsPlanItem>
+    public class CommsPlanItem : SyncableItem, ICloneable, IEquatable<CommsPlanItem>
     {
         public CommsPlanItem() { ItemID = System.Guid.NewGuid(); TemplateItemID = Guid.NewGuid(); Active = true; }
         public CommsPlanItem(string function, Guid id = new Guid())
@@ -19,7 +19,6 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        [ProtoMember(1)] private Guid _ItemID; //This is a unique identifier for each instance of an item in a specific comms plan
         [ProtoMember(2)] private string _CommsSystem;
         [ProtoMember(3)] private string _CallSign;
         [ProtoMember(4)] private string _CommsFunction;
@@ -28,11 +27,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private string _RxFrequency;
         [ProtoMember(8)] private string _Comments;
         [ProtoMember(9)] private bool _IsRepeater;
-        [ProtoMember(10)] private DateTime _LastUpdatedUTC;
         [ProtoMember(11)] private bool _isUniversal;
-        [ProtoMember(12)] private bool _Active;
         [ProtoMember(13)] private Guid _OrganizationID;
-        [ProtoMember(14)] private int _OpsPeriod;
         [ProtoMember(15)] private string _RxTone;
         [ProtoMember(16)] private string _Assignment;
         [ProtoMember(17)] private Guid _TemplateItemID; //This is a unique identifier for the item as saved in Options.
@@ -40,7 +36,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(19)] private string _TxFrequency;
         [ProtoMember(20)] private string _TxTone;
 
-        public Guid ItemID { get => _ItemID; set => _ItemID = value; }
+        public Guid ItemID { get => ID; set => ID = value; }
         public string CommsSystem { get => _CommsSystem; set => _CommsSystem = value; }
         public string CallSign { get => _CallSign; set => _CallSign = value; }
         public string CommsFunction { get => _CommsFunction; set => _CommsFunction = value; }
@@ -58,11 +54,8 @@ namespace WF_ICS_ClassLibrary.Models
         }
         public string Comments { get => _Comments; set => _Comments = value; }
         public bool IsRepeater { get => _IsRepeater; set => _IsRepeater = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public bool isUniversal { get => _isUniversal; set => _isUniversal = value; }
-        public bool Active { get => _Active; set => _Active = value; }
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
-        public int OpsPeriod { get => _OpsPeriod; set => _OpsPeriod = value; }
         public string RxTone { get => _RxTone; set => _RxTone = value; }
         public string TxTone { get => _TxTone; set => _TxTone = value; }
         public string FullTone

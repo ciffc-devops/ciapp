@@ -2,14 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WF_ICS_ClassLibrary.Models.GeneralModels;
 
 namespace WF_ICS_ClassLibrary.Models
 {
     [Serializable]
     [ProtoContract]
-    public class AirOperationsSummary : ICloneable
+    public class AirOperationsSummary : ICSFormData, ICloneable
     {
-        [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private string _Remarks;
         [ProtoMember(3)] private DateTime _Sunrise;
         [ProtoMember(4)] private DateTime _Sunset;
@@ -19,17 +19,11 @@ namespace WF_ICS_ClassLibrary.Models
         //[ProtoMember(7)] private List<ICSRole> _personnel;
         //[ProtoMember(8)] private List<CommsPlanItem> _Frequencies;
         [ProtoMember(9)] private List<Aircraft> _aircrafts;
-        [ProtoMember(10)] private string _PreparedByName;
-        [ProtoMember(11)] private string _PreparedByPosition;
-        [ProtoMember(12)] private Guid _PreparedByPositionID;
-        [ProtoMember(13)] private bool _Active;
-        [ProtoMember(14)] private int _OpPeriod;
-        [ProtoMember(15)] private DateTime _LastUpdatedUTC;
 
 
         public AirOperationsSummary()
         {
-            _ID = Guid.NewGuid();
+            ID = Guid.NewGuid();
             _notam = new NOTAM();
             // _personnel = new List<ICSRole>();
             // _Frequencies = new List<CommsPlanItem>();
@@ -37,7 +31,6 @@ namespace WF_ICS_ClassLibrary.Models
             Active = true;
         }
 
-        public Guid ID { get => _ID; set => _ID = value; }
         public string Remarks { get => _Remarks; set => _Remarks = value; }
         public DateTime Sunrise { get => _Sunrise; set => _Sunrise = value; }
         public DateTime Sunset { get => _Sunset; set => _Sunset = value; }
@@ -63,13 +56,6 @@ namespace WF_ICS_ClassLibrary.Models
                 return sb.ToString();
             
         }
-        public string PreparedByName { get => _PreparedByName; set => _PreparedByName = value; }
-        public string PreparedByPosition { get => _PreparedByPosition; set => _PreparedByPosition = value; }
-        public Guid PreparedByPositionID { get => _PreparedByPositionID; set => _PreparedByPositionID = value; }
-        public bool Active { get => _Active; set => _Active = value; }
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
-
         public AirOperationsSummary Clone()
         {
             AirOperationsSummary cloneTo = this.MemberwiseClone() as AirOperationsSummary;

@@ -84,7 +84,7 @@ namespace Wildfire_ICS_Tests
             int seed = 1;
             int countBefore = wFIncidentService.CurrentIncident.allCommsPlans.Count;
             CommsPlan item = TestTools.createTestCommsPlan(seed);
-            item.OpsPeriod = seed;
+            item.OpPeriod = seed;
             wFIncidentService.UpsertCommsPlan(item);
             Assert.AreEqual(item.allCommsItems.Count, 5, "Comms plan items not added correctly");
             Assert.AreNotEqual(wFIncidentService.CurrentIncident.allCommsPlans.Count, countBefore, 0, "Comms Plan not added");

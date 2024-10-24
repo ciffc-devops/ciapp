@@ -60,7 +60,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(43)] private List<CommsPlanItem> l_allCommsPlanItems = new List<CommsPlanItem>();
         [ProtoMember(44)] private List<Personnel> l_allTeamMembers = new List<Personnel>();
         [ProtoMember(45)] private List<DeviceInformation> _SavedNetworkDeviceList = new List<DeviceInformation>();
-        [ProtoMember(46)] private List<CannedCommsLogEntry> l_AllCannedCommsEntries = new List<CannedCommsLogEntry>();
+        [ProtoMember(46)] private List<QuickCommsLogEntry> l_AllCannedCommsEntries = new List<QuickCommsLogEntry>();
         [ProtoMember(47)] private List<Contact> l_AllContacts = new List<Contact>();
         [ProtoMember(48)] private List<Vehicle> l_AllVehicles = new List<Vehicle>();
         [ProtoMember(49)] private List<string> l_recentFilePaths = new List<string>();
@@ -140,7 +140,7 @@ namespace WF_ICS_ClassLibrary.Models
         public List<string> RecentFilePaths { get { return l_recentFilePaths; } set { l_recentFilePaths = value; appSettingsChanged = true; } }
         public List<Personnel> AllTeamMembers { get { return l_allTeamMembers; } set { l_allTeamMembers = value; appSettingsChanged = true; } }
         public List<DeviceInformation> SavedNetworkDeviceList { get => _SavedNetworkDeviceList; set => _SavedNetworkDeviceList = value; }
-        public List<CannedCommsLogEntry> AllCannedCommsLogEntries { get => l_AllCannedCommsEntries; set => l_AllCannedCommsEntries = value; }
+        public List<QuickCommsLogEntry> AllCannedCommsLogEntries { get => l_AllCannedCommsEntries; set => l_AllCannedCommsEntries = value; }
         public List<Contact> AllContacts { get => l_AllContacts; set => l_AllContacts = value; }
         public List<Vehicle> AllVehicles { get => l_AllVehicles; set => l_AllVehicles = value; }
         public List<GearCategory> AllEquipmentCategories { get => _AllEquipmentCategories; set => _AllEquipmentCategories = value; }

@@ -57,7 +57,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = entryForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    entryForm.selectedMessage.ApprovedByName = Program.CurrentRole.IndividualName;
+                    entryForm.selectedMessage.ApprovedByResourceName = Program.CurrentRole.IndividualName;
                     entryForm.selectedMessage.ApprovedByRoleID = Program.CurrentRole.RoleID; 
                     entryForm.selectedMessage.ApprovedByRoleName = Program.CurrentRole.RoleName;
                     Program.wfIncidentService.UpsertSafetyMessage(entryForm.selectedMessage);
@@ -80,7 +80,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = editForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    editForm.selectedMessage.ApprovedByName = Program.CurrentRole.IndividualName;
+                    editForm.selectedMessage.ApprovedByResourceName = Program.CurrentRole.IndividualName;
                     editForm.selectedMessage.ApprovedByRoleID = Program.CurrentRole.RoleID;
                     editForm.selectedMessage.ApprovedByRoleName = Program.CurrentRole.RoleName;
                     Program.wfIncidentService.UpsertSafetyMessage(editForm.selectedMessage);
