@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WildfireICSDesktopServices;
+using WildfireICSDesktopServices.Logging;
 
 namespace Wildfire_ICS_Assist.InternetSyncForms
 {
