@@ -12,10 +12,12 @@ using static iTextSharp.text.pdf.AcroFields;
 using System.Text.Json;
 using System.Data;
 using WF_ICS_ClassLibrary;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace WildfireICSDesktopServices
 {
-    public class WFIncidentService : IWFIncidentService
+    public class IncidentDataService : IWFIncidentService
     {
         public event CommsEventHandler CommsChanged;
         public event CheckInEventHandler MemberSignInChanged;
@@ -32,7 +34,7 @@ namespace WildfireICSDesktopServices
         public event IncidentObjectivesSheetEventHandler IncidentObjectivesSheetChanged;
         public event MedicalPlanEventHandler MedicalPlanChanged;
         public event NoteEventHandler NoteChanged;
-        public event OperationalPeriodEventHandler OperationalPeriodChanged;
+        public event OperationalPeriodEventHandler OperationalPeriodDetailsChanged;
         public event OrganizationalChartEventHandler OrganizationalChartChanged;
         public event ICSRoleEventHandler ICSRoleChanged;
         public event SafetyMessageEventHandler SafetyMessageChanged;
@@ -54,24 +56,42 @@ namespace WildfireICSDesktopServices
         public event ResourceReplacementEventHandler ResourceReplacementChanged;
 
 
-        public event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
         public event OperationalGroupEventHandler OperationalGroupChanged;
         public event OperationalSubGroupEventHandler OperationalSubGroupChanged;
 
+        public event CurrentICSRoleEventHandler CurrentICSRoleChanged;
+        public event IncidenOpPeriodChangedEventHandler CurrentOpPeriodChanged;
 
-        private WFIncident _currentIncident;
-        public WFIncident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
+
+
+        private Incident _currentIncident;
+        public Incident CurrentIncident { get => _currentIncident; set => _currentIncident = value; }
         public List<TaskUpdate> allTaskUpdates { get => _currentIncident.allTaskUpdates; set => _currentIncident.allTaskUpdates = value; }
         private Guid _MachineID;
         public Guid MachineID { get => _MachineID; set => _MachineID = value; }
 
+        private ICSRole _CurrentRole;
+        public ICSRole CurrentRole
+        {
+            get => _CurrentRole;
+            set { _CurrentRole = value; OnCurrentRoleChanged(new ICSRoleEventArgs(value)); }
+        }
 
-        public WFIncidentService(WFIncident currentTask)
+        public virtual void OnCurrentRoleChanged(ICSRoleEventArgs e)
+        {
+            CurrentICSRoleEventHandler handler = this.CurrentICSRoleChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+
+        public IncidentDataService(Incident currentTask)
         {
             _currentIncident = currentTask;
             allTaskUpdates = new List<TaskUpdate>();
         }
-        public WFIncidentService()
+        public IncidentDataService()
         {
 
         }
@@ -91,26 +111,40 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public TaskUpdate UpsertTaskUpdate(object obj, string command, bool processed_locally, bool uploaded)
+        public TaskUpdate UpsertTaskUpdate(SyncableItem obj, string command, bool processed_locally, bool uploaded)
         {
             TaskUpdate update = new TaskUpdate();
-            update.TaskID = _currentIncident.TaskID;
+            update.TaskID = _currentIncident.ID;
             update.LastUpdatedUTC = DateTime.UtcNow;
             update.CommandName = command;
-            if (obj is ICloneable) { update.Data = (obj as ICloneable).Clone(); }
-            else { update.Data = obj; }
-            update.SetEncData(_currentIncident.TaskEncryptionKey);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
-            //update.DataEnc = JsonSerializer.Serialize(update.Data);
+
+            update.SoftwareVersionMajor = fileVersionInfo.ProductMajorPart;
+            update.SoftwareVersionMinor = fileVersionInfo.FileMinorPart;
+            update.SoftwareVersionBuild = fileVersionInfo.FileBuildPart;
+
+            if (obj is ICloneable) { update.Data = obj.Clone(); }
+            else { update.Data = obj; }
+            update.CreatedByRoleName = CurrentRole.RoleName;
+            //update.DataEnc = update.Data.XmlSerializeToString();
             //update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
+            update.SetEncData(_currentIncident.TaskEncryptionKey);
             update.ProcessedLocally = processed_locally;
             update.MachineID = MachineID;
             update.UploadedSuccessfully = uploaded;
             update.ObjectType = obj.GetType().Name.ToString();
+            var type = obj.GetType();
+            if (typeof(SyncableItem).IsAssignableFrom(obj.GetType()))
+            {
+                update.ItemID = ((SyncableItem)obj).ID;
+            }
             //Remove it in case it is a duplicate
             allTaskUpdates = allTaskUpdates.Where(o => o.UpdateID != update.UpdateID).ToList();
             allTaskUpdates.Add(update);
             allTaskUpdates = allTaskUpdates.OrderBy(o => o.LastUpdatedUTC).ToList();
+            CurrentIncident.LastUpdatedUTC = DateTime.UtcNow;
             OnTaskUpdateChanged(new TaskUpdateEventArgs(update));
 
             return update;
@@ -205,11 +239,11 @@ namespace WildfireICSDesktopServices
                 {
                     TaskBasics basics = update.Data as TaskBasics;
 
-                    if (update.TaskID != CurrentIncident.TaskID)
+                    if (update.TaskID != CurrentIncident.ID)
                     {
-                        _currentIncident = new WFIncident();
+                        _currentIncident = new Incident();
 
-                        _currentIncident.TaskID = basics.TaskID;
+                        _currentIncident.ID = basics.ID;
                         update.ProcessedLocally = true;
                         UpdateTaskBasics(basics, source);
 
@@ -245,83 +279,131 @@ namespace WildfireICSDesktopServices
             }
         }
 
-
-        public void SendInitialTaskUpdate()
+        #region Internet Sync Methods
+        public async Task SendInitialTaskUpdate(IProgress<Tuple<int, int, int>> progress)
         {
             //This sends the "Initial" record, and all updates saved locally to this point.
             //It also means we need to save those updates persistently from now on
 
             TaskBasics basics = new TaskBasics(CurrentIncident);
             TaskUpdate update = UpsertTaskUpdate(basics, "INITIAL", true, false);
-            _ = uploadTaskUpdateToServer(update);
+            _ = await uploadTaskUpdateToServer(update);
 
             //No need to process the other task basics updates, since a current one has already been generated.
             foreach (TaskUpdate up in allTaskUpdates.Where(o => o.ObjectType == "TaskBasics")) { up.UploadedSuccessfully = true; }
 
-
+            int totalUpdates = allTaskUpdates.Count(o => !o.UploadedSuccessfully);
+            int completedUpdates = 0;
             foreach (TaskUpdate up in allTaskUpdates.Where(o => !o.UploadedSuccessfully))
             {
-                _ = uploadTaskUpdateToServer(up);
+                _ = await uploadTaskUpdateToServer(up);
+                completedUpdates++;
+                progress.Report(new Tuple<int, int, int>(1, completedUpdates, totalUpdates));
             }
         }
 
 
-        public async void LoadNewTaskFromServer(Guid TaskID, string EncryptionKey)
+        private async Task<bool> LoadOutstandingTaskUpdatesFromServer(Guid TaskID, string EncryptionKey, DateTime CutoffTime, IProgress<Tuple<int, int, int>> progress)
         {
             TaskUpdateService service = new TaskUpdateService();
+            progress.Report(new Tuple<int, int, int>(1, 0, 100));
+            List<TaskUpdate> updates = await service.DownloadTaskUpdateDetails(TaskID, Guid.Empty, CutoffTime);
+
+            List<TaskUpdate> MostRecentForEach = updates.GroupBy(o => o.ItemID).Select(g => g.OrderByDescending(y => y.LastUpdatedUTC).FirstOrDefault()).ToList();
+
+            int totalUpdates = MostRecentForEach.Count;
+            int completedUpdates = 0;
+
+            progress.Report(new Tuple<int, int, int>(2, 0, totalUpdates));
+
+            await Task.Run(() =>
+            {
+                int decryptCount = 0;
+                foreach (TaskUpdate update in MostRecentForEach)
+                {
+                    if (!CurrentIncident.allTaskUpdates.Any(o => o.UpdateID == update.UpdateID) && update.Data == null && !string.IsNullOrEmpty(update.DataEnc))
+                    {
+                        update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, CurrentIncident.TaskEncryptionKey);
+                    }
+                    decryptCount++;
+                    progress.Report(new Tuple<int, int, int>(3, decryptCount, totalUpdates));
+                }
+
+            });
+
+            progress.Report(new Tuple<int, int, int>(4, 0, totalUpdates));
+            await Task.Delay(100);
+
+            foreach (TaskUpdate update in MostRecentForEach)
+            {
+                ProcessTaskUpdate(update);
+                completedUpdates++;
+                //InternetSyncEventArgs args = new InternetSyncEventArgs(completedUpdates, totalUpdates);
+                //OnInternetSyncProgressUpdated(args);
+                progress.Report(new Tuple<int, int, int>(4, completedUpdates, totalUpdates));
+                await Task.Delay(10);
+
+            }
+
+            return true;
+        }
+
+        public async Task<bool> LoadNewTaskFromServer(Guid TaskID, string EncryptionKey, IProgress<Tuple<int, int, int>> progress)
+        {
+            CurrentIncident = new Incident();
+            CurrentIncident.allTaskUpdates.Clear();
+            CurrentIncident.TaskEncryptionKey = EncryptionKey;
+
+            TaskUpdateService service = new TaskUpdateService();
+            progress.Report(new Tuple<int, int, int>(1, 0, 100));
             List<TaskUpdate> updates = await service.DownloadTaskUpdateDetails(TaskID, Guid.Empty, DateTime.MinValue);
 
-            foreach (TaskUpdate update in updates)
-            {
-                if (!string.IsNullOrEmpty(update.DataEnc))
-                {
-                    update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, EncryptionKey);
-                }
-                update.UploadedSuccessfully = true;
-            }
 
 
             if (updates.Any(o => o.CommandName.Equals("INITIAL")))
             {
                 ApplyTaskUpdate(updates.First(o => o.CommandName.Equals("INITIAL")));
-                CurrentIncident.TaskEncryptionKey = EncryptionKey;
+
             }
-            foreach (TaskUpdate update in updates)
-            {
-                ProcessTaskUpdate(update);
-            }
+
+            await LoadOutstandingTaskUpdatesFromServer(TaskID, EncryptionKey, DateTime.MinValue, progress);
+
             OnWFIncidentChanged(new WFIncidentEventArgs(_currentIncident));
+            return true;
         }
 
-        public async void ConnectToServerTask(Guid TaskID, string EncryptionKey)
+        public async Task ConnectToServerTaskAsync(Guid TaskID, string EncryptionKey, IProgress<Tuple<int, int, int>> progress)
         {
             TaskUpdateService service = new TaskUpdateService();
 
+            DateTime LastGoodSend = DateTime.MinValue;
+            if (allTaskUpdates.Any(o => o.UploadedSuccessfully))
+            {
+                LastGoodSend = allTaskUpdates.Where(o => o.UploadedSuccessfully).Max(o => o.LastUpdatedUTC);
+            }
+
             List<TaskUpdate> localUpdates = allTaskUpdates.Where(o => !o.UploadedSuccessfully).ToList();
+            int uploadCount = 0;
 
             foreach (TaskUpdate update in localUpdates)
             {
-                _ = uploadTaskUpdateToServer(update);
+                _ = await uploadTaskUpdateToServer(update);
+                uploadCount++;
+                progress.Report(new Tuple<int, int, int>(0, uploadCount, localUpdates.Count));
             }
 
-            List<TaskUpdate> updates = await service.DownloadTaskUpdateDetails(TaskID, MachineID, DateTime.MinValue);
 
-            foreach (TaskUpdate update in updates)
-            {
-                update.UploadedSuccessfully = true;
-                if (!string.IsNullOrEmpty(update.DataEnc))
-                {
-                    update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, EncryptionKey);
-                }
 
-                if (update.Data != null)
-                {
-                    ProcessTaskUpdate(update);
-                }
+            await LoadOutstandingTaskUpdatesFromServer(TaskID, EncryptionKey, LastGoodSend, progress);
 
-            }
+
+
             OnWFIncidentChanged(new WFIncidentEventArgs(_currentIncident));
+
         }
+
+
+        #endregion
 
         public void UpsertObject(object obj, string source)
         {
@@ -955,7 +1037,7 @@ namespace WildfireICSDesktopServices
         // Operational Period
         protected virtual void OnOperationalPeriodChanged(OperationalPeriodEventArgs e)
         {
-            OperationalPeriodEventHandler handler = this.OperationalPeriodChanged;
+            OperationalPeriodEventHandler handler = this.OperationalPeriodDetailsChanged;
             if (handler != null)
             {
                 handler(e);
@@ -1570,7 +1652,6 @@ namespace WildfireICSDesktopServices
 
             note.DateUpdated = DateTime.Now;
             if (note.DateCreated == DateTime.MinValue) { note.DateCreated = note.DateUpdated; }
-            if (note.TaskID == Guid.Empty) { note.TaskID = CurrentIncident.TaskID; }
 
             if (CurrentIncident.allNotes.Any(o => o.NoteID == note.NoteID))
             {
@@ -2053,7 +2134,7 @@ namespace WildfireICSDesktopServices
 
         public virtual void OnOpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
-            IncidenOpPeriodChangedEventHandler handler = this.OpPeriodChanged;
+            IncidenOpPeriodChangedEventHandler handler = this.CurrentOpPeriodChanged;
             if (handler != null)
             {
                 handler(e);

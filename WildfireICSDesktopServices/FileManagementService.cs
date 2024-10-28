@@ -44,7 +44,7 @@ namespace WildfireICSDesktopServices
             return filename;
         }
 
-        public static string getWritablePath(WFIncident CurrentTask)
+        public static string getWritablePath(Incident CurrentTask)
         {
             string path = null;
 

@@ -30,7 +30,7 @@ namespace WildfireICSDesktopServices
             return System.IO.Path.Combine(dir, fileToUse);
         }
 
-        public string CreateICSPDF(WFIncident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF)
+        public string CreateICSPDF(Incident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             if (!useTempPath)
@@ -66,7 +66,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public List<byte[]> exportPositionLogToPDF(WFIncident task, int OpPeriodToExport, ICSRole role, bool flattenPDF = false)
+        public List<byte[]> exportPositionLogToPDF(Incident task, int OpPeriodToExport, ICSRole role, bool flattenPDF = false)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -108,7 +108,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        private static List<byte[]> buildFirstPDFPage(List<PositionLogEntry> entries, WFIncident task, int OpsPeriod, ICSRole role, int pageNumber, int pageCount, bool flattenPDF)
+        private static List<byte[]> buildFirstPDFPage(List<PositionLogEntry> entries, Incident task, int OpsPeriod, ICSRole role, int pageNumber, int pageCount, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempFileName();
             string fileToUse = getPDFFilePath("ICS-214-WF-Activity-Log.pdf");
@@ -219,7 +219,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        private static List<byte[]> buildPDFPage(List<PositionLogEntry> entries, WFIncident task, int OpsPeriod, ICSRole role, int pageNumber, int pageCount, bool flattenPDF)
+        private static List<byte[]> buildPDFPage(List<PositionLogEntry> entries, Incident task, int OpsPeriod, ICSRole role, int pageNumber, int pageCount, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempFileName();
             string fileToUse = getPDFFilePath("BlankForms/ICS-214-WF-Activity-Log-Supplemental.pdf");
@@ -312,7 +312,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public List<byte[]> exportVerbosePositionLogToPDF(WFIncident task, int OpPeriodToExport, ICSRole role, bool flattenPDF = false)
+        public List<byte[]> exportVerbosePositionLogToPDF(Incident task, int OpPeriodToExport, ICSRole role, bool flattenPDF = false)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -332,7 +332,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public string CreateVerbosePDF(WFIncident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF)
+        public string CreateVerbosePDF(Incident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF)
         {
             string path = pathToUse;
             if (task != null)

@@ -49,7 +49,7 @@ namespace WildfireICSDesktopServices
 
         #region Dietary and Allergy Details
 
-        public List<byte[]> exportDietaryAndAllergyToPDF(WFIncident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
+        public List<byte[]> exportDietaryAndAllergyToPDF(Incident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -96,7 +96,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public List<byte[]> createSinglePageDietaryAndAllergyPDF(WFIncident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        public List<byte[]> createSinglePageDietaryAndAllergyPDF(Incident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
 
@@ -208,7 +208,7 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region General Message
-        public List<byte[]> exportGeneralMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportGeneralMessagesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -231,7 +231,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public List<byte[]> exportGeneralMessagesToPDF(WFIncident task, List<GeneralMessage> items, bool flattenPDF)
+        public List<byte[]> exportGeneralMessagesToPDF(Incident task, List<GeneralMessage> items, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -253,7 +253,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public string createGeneralMessagePDF(WFIncident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false)
+        public string createGeneralMessagePDF(Incident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false)
         {
             string path = FileAccessClasses.getWritablePath(task);
             if (task != null && item != null)
@@ -361,7 +361,7 @@ namespace WildfireICSDesktopServices
 
         #region Safety Messages
 
-        public List<byte[]> exportSafetyMessagesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportSafetyMessagesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -384,7 +384,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public List<byte[]> exportSafetyMessagesToPDF(WFIncident task, List<SafetyMessage> messagesToPrint, bool flattenPDF)
+        public List<byte[]> exportSafetyMessagesToPDF(Incident task, List<SafetyMessage> messagesToPrint, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -408,7 +408,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public string createSafetyMessagePDF(WFIncident task, SafetyMessage plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        public string createSafetyMessagePDF(Incident task, SafetyMessage plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
             string path = FileAccessClasses.getWritablePath(task);
             if (task != null && plan != null)
@@ -528,7 +528,7 @@ namespace WildfireICSDesktopServices
 
         #region Demob Checklist
 
-        public List<byte[]> exportDemobChecklistToPDF(WFIncident task, List< IncidentResource> Resources, bool flattenPDF)
+        public List<byte[]> exportDemobChecklistToPDF(Incident task, List< IncidentResource> Resources, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             string outputFileName = "ICS-211 " + DateTime.Now.ToString(Globals.DateFormat) + ".pdf";
@@ -544,7 +544,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public List<byte[]> exportDemobChecklistToPDF(WFIncident task, IncidentResource Resource, bool flattenPDF)
+        public List<byte[]> exportDemobChecklistToPDF(Incident task, IncidentResource Resource, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -565,7 +565,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public string createDemobChecklistPDF(WFIncident task, IncidentResource Resource, bool tempFileName = false, bool flattenPDF = false)
+        public string createDemobChecklistPDF(Incident task, IncidentResource Resource, bool tempFileName = false, bool flattenPDF = false)
         {
 
             string path = FileAccessClasses.getWritablePath(task);
@@ -661,7 +661,7 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region Medical Plan
-        public List<byte[]> exportMedicalPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportMedicalPlanToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -682,7 +682,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public string createMedicalPlanPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        public string createMedicalPlanPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
             if (!task.allMedicalPlans.Any(o => o.OpPeriod == OpsPeriod)) { task.createMedicalPlanAsNeeded(OpsPeriod); }
             MedicalPlan plan = task.allMedicalPlans.Where(o => o.OpPeriod == OpsPeriod).First();
@@ -857,7 +857,7 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region Comms Plan
-        public List<byte[]> exportCommsPlanToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportCommsPlanToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -878,7 +878,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public string createCommsPlanPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        public string createCommsPlanPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
             string path = FileAccessClasses.getWritablePath(task);
             if (!tempFileName)
@@ -974,7 +974,7 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region Objectives
-        public List<byte[]> exportIncidentObjectivesToPDF(WFIncident task, int OpPeriodToExport, bool IncludeAttachments, bool flattenPDF)
+        public List<byte[]> exportIncidentObjectivesToPDF(Incident task, int OpPeriodToExport, bool IncludeAttachments, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -994,7 +994,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public string createObjectivesPDF(WFIncident task, int OpsPeriod, bool includeAttachments = false, bool tempFileName = false, bool flattenPDF = false)
+        public string createObjectivesPDF(Incident task, int OpsPeriod, bool includeAttachments = false, bool tempFileName = false, bool flattenPDF = false)
         {
             if (task != null)
             {
@@ -1056,7 +1056,7 @@ namespace WildfireICSDesktopServices
 
                     stamper.AcroFields.SetField("3A FIRE SIZE", currentSheet.FireSize);
                     stamper.AcroFields.SetField("3B FIRE STATUS", currentSheet.FireStatus);
-                    stamper.AcroFields.SetField("6 WEATHER FORCASTRow1", currentSheet.WeatherForcast);
+                    stamper.AcroFields.SetField("6 WEATHER FORCASTRow1", currentSheet.WeatherForecast);
                     stamper.AcroFields.SetField("7 GENERAL SAFETY MESSAGERow1", currentSheet.GeneralSafety);
 
                     stamper.AcroFields.SetField("5 GENERAL CONTROL OBJECTIVES FOR THE INCIDENT include alternativesRow1", currentSheet.ActiveObjectivesAsString);
@@ -1109,7 +1109,7 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region Organization Assignments / Chart
-        public List<byte[]> exportOrgAssignmentListToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportOrgAssignmentListToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
             PDFCreationResults results = createOrgAssignmentListPDF(task, OpPeriodToExport, true, flattenPDF);
@@ -1132,7 +1132,7 @@ namespace WildfireICSDesktopServices
 
   
 
-        public PDFCreationResults createOrgAssignmentListPDF(WFIncident task, int OpsPeriod,  bool tempFileName = false, bool flattenPDF = false)
+        public PDFCreationResults createOrgAssignmentListPDF(Incident task, int OpsPeriod,  bool tempFileName = false, bool flattenPDF = false)
         {
             PDFCreationResults results = new PDFCreationResults();
             
@@ -1354,7 +1354,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public List<byte[]> exportOrgChartToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportOrgChartToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -1375,7 +1375,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public string createOrgChartPDF(WFIncident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        public string createOrgChartPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
         {
             List<string> paths = new List<string>();
             string finalPath = FileAccessClasses.getWritablePath(task);
@@ -1585,7 +1585,7 @@ namespace WildfireICSDesktopServices
 
         
 
-        public List<string> createOrgChartExtensionPDF(WFIncident task, OrganizationChart currentChart, ICSRole parentRole, int ThisPageNumber, int totalPages, int startOnChild = 0, bool flattenPDF = false)
+        public List<string> createOrgChartExtensionPDF(Incident task, OrganizationChart currentChart, ICSRole parentRole, int ThisPageNumber, int totalPages, int startOnChild = 0, bool flattenPDF = false)
         {
             List<string> paths = new List<string>();
 
@@ -1734,7 +1734,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public List<byte[]> exportOrgChartContactsToPDF(WFIncident task, int OpPeriodToExport)
+        public List<byte[]> exportOrgChartContactsToPDF(Incident task, int OpPeriodToExport)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -1755,7 +1755,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public string createOrgChartContactList(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false)
+        public string createOrgChartContactList(Incident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false)
         {
             string path = null;
 
@@ -1961,7 +1961,7 @@ namespace WildfireICSDesktopServices
 
         #region Contacts
 
-        public List<byte[]> exportContactsToPDF(WFIncident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
+        public List<byte[]> exportContactsToPDF(Incident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -1981,7 +1981,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public  string createContactsPDF(WFIncident task, int OpPeriod, string createdBy, string createdByTitle, bool useTempPath, bool flattenPDF)
+        public  string createContactsPDF(Incident task, int OpPeriod, string createdBy, string createdByTitle, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             if (!useTempPath)
@@ -2043,7 +2043,7 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region Vehicles
-        public List<byte[]> exportVehiclesToPDF(WFIncident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName,  bool flattenPDF)
+        public List<byte[]> exportVehiclesToPDF(Incident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName,  bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -2064,7 +2064,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public string createVehiclePDF(WFIncident task, int OpPeriod, string PreparedByName, string PreparedByRoleName, bool useTempPath, bool flattenPDF)
+        public string createVehiclePDF(Incident task, int OpPeriod, string PreparedByName, string PreparedByRoleName, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             if (!useTempPath)
@@ -2101,7 +2101,7 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
-        private PdfStamper buildVehiclePDFContents(PdfStamper stamper, WFIncident task, int OpsPeriod, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
+        private PdfStamper buildVehiclePDFContents(PdfStamper stamper, Incident task, int OpsPeriod, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
         {
             OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpsPeriod).First();
 
@@ -2144,7 +2144,7 @@ namespace WildfireICSDesktopServices
 
         #region Check In Sheet (211)
 
-        public List<byte[]> exportCheckInSheetsToPDF(WFIncident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
+        public List<byte[]> exportCheckInSheetsToPDF(Incident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -2194,7 +2194,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        private List<byte[]> createSinglePageCheckInSheetPDF(WFIncident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        private List<byte[]> createSinglePageCheckInSheetPDF(Incident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
 
@@ -2337,7 +2337,7 @@ namespace WildfireICSDesktopServices
 
 
         #region Sign In Sheets (SAR)
-        public string exportSinglePageSignInSheetAsPDF(WFIncident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod)
+        public string exportSinglePageSignInSheetAsPDF(Incident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod)
         {
             string path = System.IO.Path.GetTempFileName();
 
@@ -2436,7 +2436,7 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
-        public List<byte[]> createSinglePageSignInSheetAsBytes(WFIncident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
+        public List<byte[]> createSinglePageSignInSheetAsBytes(Incident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
         {
             string path = System.IO.Path.GetTempFileName();
 
@@ -2551,7 +2551,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public List<byte[]> createSinglePageBlankSignInSheetAsBytes(WFIncident task, GroupSignInPrintRequest group, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
+        public List<byte[]> createSinglePageBlankSignInSheetAsBytes(Incident task, GroupSignInPrintRequest group, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
         {
             string path = System.IO.Path.GetTempFileName();
 
@@ -2620,7 +2620,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public List<byte[]> getSignInSheetPDFs(WFIncident task, int OpsPeriod, bool flattenPDF)
+        public List<byte[]> getSignInSheetPDFs(Incident task, int OpsPeriod, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -2649,7 +2649,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public List<byte[]> getBlankSignInSheetPDFs(WFIncident task, List<GroupSignInPrintRequest> groups, int OpsPeriod, bool flattenPDF)
+        public List<byte[]> getBlankSignInSheetPDFs(Incident task, List<GroupSignInPrintRequest> groups, int OpsPeriod, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -2668,7 +2668,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public string createSignInPDF(WFIncident task, int opsPeriod, bool tempFileName = false, bool flattenPDF = false)
+        public string createSignInPDF(Incident task, int opsPeriod, bool tempFileName = false, bool flattenPDF = false)
         {
             string path = FileAccessClasses.getWritablePath(task);
 
@@ -2740,7 +2740,7 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
-        public string createBlankSignInPDF(WFIncident task, List<GroupSignInPrintRequest> groups, int opsPeriod, bool tempFileName = false, bool flattenPDF = false)
+        public string createBlankSignInPDF(Incident task, List<GroupSignInPrintRequest> groups, int opsPeriod, bool tempFileName = false, bool flattenPDF = false)
         {
             string path = FileAccessClasses.getWritablePath(task);
 
@@ -2816,7 +2816,7 @@ namespace WildfireICSDesktopServices
 
         #region Timeline
 
-        public List<byte[]> exportTimelineToPDF(WFIncident task)
+        public List<byte[]> exportTimelineToPDF(Incident task)
         {
             List<byte[]> allPDFs = new List<byte[]>();
             string path = createTimelinePDF(task, true, true, false, true);
@@ -2830,7 +2830,7 @@ namespace WildfireICSDesktopServices
             }
             return allPDFs;
         }
-        public string createTimelinePDF(WFIncident task, bool IncludeSAR, bool IncludeSubject, bool automaticallyOpen = true, bool tempFileName = false)
+        public string createTimelinePDF(Incident task, bool IncludeSAR, bool IncludeSubject, bool automaticallyOpen = true, bool tempFileName = false)
         {
             string path = null;
             if (task != null && task.taskTimeline != null)
@@ -2962,7 +2962,7 @@ namespace WildfireICSDesktopServices
 
         #region Title Page
 
-        public List<byte[]> createFreeformOpPeriodContentsList(WFIncident task, List<string> items, int OpPeriod)
+        public List<byte[]> createFreeformOpPeriodContentsList(Incident task, List<string> items, int OpPeriod)
         {
             List<byte[]> allPDFs = new List<byte[]>();
             string path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
@@ -3088,7 +3088,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public List<byte[]> exportOpTitlePageToPDF(WFIncident task, int OpPeriod, string contentsText,string titleImageBytes, bool flattenPDF)
+        public List<byte[]> exportOpTitlePageToPDF(Incident task, int OpPeriod, string contentsText,string titleImageBytes, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -3108,7 +3108,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public string createOpTitlePagePDF(WFIncident task, int OpPeriod, string contentsText, string titleImageBytes, bool useTempPath, bool flattenPDF)
+        public string createOpTitlePagePDF(Incident task, int OpPeriod, string contentsText, string titleImageBytes, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             if (!useTempPath)
@@ -3219,7 +3219,7 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region Radio Log (SAR)
-        private int getRadioLogPageCount(WFIncident task, int OpPeriodToExport)
+        private int getRadioLogPageCount(Incident task, int OpPeriodToExport)
         {
             List<CommsLogEntry> entries = task.allCommsLogEntries.Where(o => o.OpPeriod == OpPeriodToExport).OrderBy(o => o.LogDate).ToList();
 
@@ -3229,7 +3229,7 @@ namespace WildfireICSDesktopServices
             return totalPages;
         }
 
-        public List<byte[]> exportRadioLogToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF = false)
+        public List<byte[]> exportRadioLogToPDF(Incident task, int OpPeriodToExport, bool flattenPDF = false)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -3248,7 +3248,7 @@ namespace WildfireICSDesktopServices
 
         }
 
-        private string createSinglePageRadioLog(WFIncident task, List<CommsLogEntry> entries, int pageNumber, int totalPages, int OpsPeriod)
+        private string createSinglePageRadioLog(Incident task, List<CommsLogEntry> entries, int pageNumber, int totalPages, int OpsPeriod)
         {
             string path = System.IO.Path.GetTempFileName();
 
@@ -3304,7 +3304,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public string createRadioLogPDF(WFIncident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false)
+        public string createRadioLogPDF(Incident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false)
         {
             string path = FileAccessClasses.getWritablePath(task);
 
@@ -3333,7 +3333,7 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
-        private List<byte[]> createSinglePageRadioLogAsBytes(WFIncident task, List<CommsLogEntry> entries, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
+        private List<byte[]> createSinglePageRadioLogAsBytes(Incident task, List<CommsLogEntry> entries, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
         {
             string path = System.IO.Path.GetTempFileName();
             string fileToUse = "ICSForms/ICS 309 - Radio Log.pdf";
@@ -3405,7 +3405,7 @@ namespace WildfireICSDesktopServices
 
         #region Note
 
-        public List<byte[]> exportNotesToPDF(WFIncident task, int CurrentOpPeriod)
+        public List<byte[]> exportNotesToPDF(Incident task, int CurrentOpPeriod)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -3427,7 +3427,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public string createNotePDF(WFIncident task, Note note, bool automaticallyOpen = true, bool tempFileName = false)
+        public string createNotePDF(Incident task, Note note, bool automaticallyOpen = true, bool tempFileName = false)
         {
             string path = null;
             if (task != null && task.taskTimeline != null)
@@ -3524,7 +3524,7 @@ namespace WildfireICSDesktopServices
 
         #region Air Ops Summary
 
-        public string CreateAirOpsSummaryPDF(WFIncident task, int OpPeriod, bool useTempPath, bool flattenPDF)
+        public string CreateAirOpsSummaryPDF(Incident task, int OpPeriod, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             if (!useTempPath)
@@ -3560,7 +3560,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public List<byte[]> exportAirOpsSummaryToPDF(WFIncident incident, int OpPeriodToExport, bool flattenPDF = false)
+        public List<byte[]> exportAirOpsSummaryToPDF(Incident incident, int OpPeriodToExport, bool flattenPDF = false)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -3598,7 +3598,7 @@ namespace WildfireICSDesktopServices
 
         }
 
-        private int getAirOpsSummaryPageCount(WFIncident incident, AirOperationsSummary sum)
+        private int getAirOpsSummaryPageCount(Incident incident, AirOperationsSummary sum)
         {
             int AirPP = 15;
             int RolePP = 10;
@@ -3639,7 +3639,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        private List<byte[]> buildSingleAirOpsSummaryPage(WFIncident task, int OpsPeriod, List<Aircraft> aircraft, List<ICSRole> roles, List<CommsPlanItem> comms, int pageNumber, int pageCount, bool flattenPDF)
+        private List<byte[]> buildSingleAirOpsSummaryPage(Incident task, int OpsPeriod, List<Aircraft> aircraft, List<ICSRole> roles, List<CommsPlanItem> comms, int pageNumber, int pageCount, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempFileName();
             string fileToUse = getPDFFilePath("ICS-220-WF Air Operations Summary.pdf");
@@ -3799,7 +3799,7 @@ namespace WildfireICSDesktopServices
 
         #region Logistics Summary
 
-        public string createLogisticsSummaryPDF(WFIncident task, int OpPeriod, ICSRole ParentRole, bool useTempPath, bool flattenPDF)
+        public string createLogisticsSummaryPDF(Incident task, int OpPeriod, ICSRole ParentRole, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             if (!useTempPath)
@@ -3834,7 +3834,7 @@ namespace WildfireICSDesktopServices
             return path;
         }
 
-        public List<byte[]> exportLogisticsSummaryToPDF(WFIncident incident, int OpPeriodToExport, ICSRole ParentRole, bool flattenPDF)
+        public List<byte[]> exportLogisticsSummaryToPDF(Incident incident, int OpPeriodToExport, ICSRole ParentRole, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -3945,7 +3945,7 @@ namespace WildfireICSDesktopServices
             return counts;
         }
     
-        private List<byte[]> createLogisticsSummaryPage1PDF(WFIncident incident, int OpPeriod, ICSRole ParentRole, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        private List<byte[]> createLogisticsSummaryPage1PDF(Incident incident, int OpPeriod, ICSRole ParentRole, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
 
@@ -4070,7 +4070,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        private List<byte[]> createLogisticsSummarySubsequentPDF(WFIncident incident, int OpPeriod, ICSRole ParentRole, List<KindTypeWithCounts> counts, int thisPageNum, int totalPageNum, bool flattenPDF)
+        private List<byte[]> createLogisticsSummarySubsequentPDF(Incident incident, int OpPeriod, ICSRole ParentRole, List<KindTypeWithCounts> counts, int thisPageNum, int totalPageNum, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
 
@@ -4174,7 +4174,7 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region Assignment Summaries and Details
-        public List<byte[]> exportAllAssignmentSummariesToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportAllAssignmentSummariesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -4212,7 +4212,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public List<byte[]> exportAssignmentListToPDF(WFIncident task, int OpPeriodToExport, Guid DivisionID, bool flattenPDF)
+        public List<byte[]> exportAssignmentListToPDF(Incident task, int OpPeriodToExport, Guid DivisionID, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -4232,7 +4232,7 @@ namespace WildfireICSDesktopServices
             return allPDFs;
         }
 
-        public string createAssignmentSummaryPDF(WFIncident task, int OpPeriod, Guid OpGroupICSRoleID, bool useTempPath, bool flattenPDF)
+        public string createAssignmentSummaryPDF(Incident task, int OpPeriod, Guid OpGroupICSRoleID, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             if (!useTempPath)
@@ -4394,7 +4394,7 @@ namespace WildfireICSDesktopServices
 
 
 
-        public List<byte[]> exportAllAssignmentDetailsToPDF(WFIncident task, int OpPeriodToExport, bool flattenPDF)
+        public List<byte[]> exportAllAssignmentDetailsToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
             List<byte[]> allPDFs = new List<byte[]>();
 
@@ -4423,7 +4423,7 @@ namespace WildfireICSDesktopServices
             }
             return allPDFs;
         }
-        public string createAssignmentDetailsPDF(WFIncident task, int OpPeriod, Guid OpGroupID, bool useTempPath, bool flattenPDF)
+        public string createAssignmentDetailsPDF(Incident task, int OpPeriod, Guid OpGroupID, bool useTempPath, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempPath();
             if (!useTempPath)
@@ -4550,17 +4550,17 @@ namespace WildfireICSDesktopServices
         #endregion
 
 
-        public string createBriefingPDF(WFIncident task, Briefing briefing, bool automaticallyOpen = true, bool tempFileName = false)
+        public string createBriefingPDF(Incident task, Briefing briefing, bool automaticallyOpen = true, bool tempFileName = false)
         {
             throw new NotImplementedException();
         }
 
-        public List<byte[]> exportBriefingToBytes(int OpPeriodToExport, WFIncident task)
+        public List<byte[]> exportBriefingToBytes(int OpPeriodToExport, Incident task)
         {
             throw new NotImplementedException();
         }
 
-        public string exportBriefingToPDF(Briefing briefing, WFIncident task, bool includeExecution, bool includeMapQRImage = false)
+        public string exportBriefingToPDF(Briefing briefing, Incident task, bool includeExecution, bool includeMapQRImage = false)
         {
             throw new NotImplementedException();
         }
