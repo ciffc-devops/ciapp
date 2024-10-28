@@ -9,8 +9,8 @@ namespace Wildfire_ICS_Tests
     [TestClass]
     public class AddObjectTets
     {
-        static WFIncident incident = new WFIncident();
-        static WFIncidentService wFIncidentService = new WFIncidentService(incident);
+        static Incident incident = new Incident();
+        static IncidentDataService wFIncidentService = new IncidentDataService(incident);
 
         [TestMethod]
         public void TestMedicalPlan()
