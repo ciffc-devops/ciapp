@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -19,20 +20,22 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         public static string Encrypt(string plainText, string passPhrase)
         {
-            // Salt and IV is randomly generated each time, but is preprended to encrypted cipher text
-            // so that the same Salt and IV values can be used when decrypting.  
+            // Generate a random salt
             var saltStringBytes = Generate256BitsOfRandomEntropy();
+            // Generate a random IV
             var ivStringBytes = Generate256BitsOfRandomEntropy();
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+
             using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations))
             {
                 var keyBytes = password.GetBytes(Keysize / 8);
-                using (var symmetricKey = new RijndaelManaged())
+                using (var aes = Aes.Create())
                 {
-                    symmetricKey.BlockSize = 256;
-                    symmetricKey.Mode = CipherMode.CBC;
-                    symmetricKey.Padding = PaddingMode.PKCS7;
-                    using (var encryptor = symmetricKey.CreateEncryptor(keyBytes, ivStringBytes))
+                    aes.BlockSize = 256;
+                    aes.Mode = CipherMode.CBC;
+                    aes.Padding = PaddingMode.PKCS7;
+
+                    using (var encryptor = aes.CreateEncryptor(keyBytes, ivStringBytes))
                     {
                         using (var memoryStream = new MemoryStream())
                         {
@@ -40,12 +43,10 @@ namespace WF_ICS_ClassLibrary.Utilities
                             {
                                 cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
                                 cryptoStream.FlushFinalBlock();
-                                // Create the final bytes as a concatenation of the random salt bytes, the random iv bytes and the cipher bytes.
+                                // Create the final bytes as a concatenation of the random salt, random iv and cipher bytes.
                                 var cipherTextBytes = saltStringBytes;
                                 cipherTextBytes = cipherTextBytes.Concat(ivStringBytes).ToArray();
                                 cipherTextBytes = cipherTextBytes.Concat(memoryStream.ToArray()).ToArray();
-                                memoryStream.Close();
-                                cryptoStream.Close();
                                 return Convert.ToBase64String(cipherTextBytes);
                             }
                         }
@@ -100,6 +101,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return randomBytes;
         }
     }
+}
 
     public static class RandomPasswordGenerator
     {
