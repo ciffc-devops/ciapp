@@ -56,8 +56,8 @@ namespace Wildfire_ICS_Assist
             datLastDayFilter.Value = DateTime.Now.AddDays(14);
             BuildResourceList(getOutgoingFilters());
             BuildIncomingResourceList(getIncomingFilters());
-            Program.wfIncidentService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
-            Program.wfIncidentService.MemberSignInChanged += WfIncidentService_MemberSignInChanged;
+            Program.incidentDataService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
+            Program.incidentDataService.MemberSignInChanged += WfIncidentService_MemberSignInChanged;
 
             lblLegendNoReplacementNeeded.BackColor = Color.Gray;
             lblLegendReplacementPlanned.BackColor = Program.GoodColor;
@@ -391,7 +391,7 @@ namespace Wildfire_ICS_Assist
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     plan = editForm.plan.Clone();
-                    Program.wfIncidentService.UpsertResourceReplacementPlan(plan);
+                    Program.incidentDataService.UpsertResourceReplacementPlan(plan);
 
                 }
             }
@@ -403,7 +403,7 @@ namespace Wildfire_ICS_Assist
             {
                 CheckInRecordWithResource row = dgvOutgoing.Rows[e.RowIndex].DataBoundItem as CheckInRecordWithResource;
                 CellEditingInProgress = true;
-                Program.wfIncidentService.UpsertCheckInRecord(row.Record);
+                Program.incidentDataService.UpsertCheckInRecord(row.Record);
 
                 CellEditingInProgress = false;
             }

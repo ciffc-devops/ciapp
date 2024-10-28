@@ -29,10 +29,10 @@ namespace Wildfire_ICS_Assist
         {
             if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
             PopulateTree();
-            Program.wfIncidentService.OperationalGroupChanged += Program_OperationalGroupChanged;
-            Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChangedChanged;
-            Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChangedChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
+            Program.incidentDataService.OperationalGroupChanged += Program_OperationalGroupChanged;
+            Program.incidentDataService.OrganizationalChartChanged += Program_OrgChartChangedChanged;
+            Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChangedChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OperationalPeriodChanged;
 
         }
 
@@ -211,7 +211,7 @@ namespace Wildfire_ICS_Assist
             {
                 strikeTeamTaskForceDetailsControl1.ChangesMade = false;
 
-                Program.wfIncidentService.UpsertOperationalGroup(strikeTeamTaskForceDetailsControl1.selectedGroup);
+                Program.incidentDataService.UpsertOperationalGroup(strikeTeamTaskForceDetailsControl1.selectedGroup);
             }
         }
 
@@ -271,7 +271,7 @@ namespace Wildfire_ICS_Assist
                     if (dr == DialogResult.OK)
                     {
                         OperationalGroup grp = form.SelectedGroup;
-                        Program.wfIncidentService.UpsertOperationalGroup(grp);
+                        Program.incidentDataService.UpsertOperationalGroup(grp);
                     }
                 }
             }
@@ -312,7 +312,7 @@ namespace Wildfire_ICS_Assist
                         DialogResult dr = assignRoleForm.ShowDialog();
                         if (dr == DialogResult.OK)
                         {
-                            Program.wfIncidentService.UpsertICSRole(assignRoleForm.selectedRole);
+                            Program.incidentDataService.UpsertICSRole(assignRoleForm.selectedRole);
 
                             if (CurrentOrgChart.PreparedByRoleID == Guid.Empty)
                             {
@@ -320,7 +320,7 @@ namespace Wildfire_ICS_Assist
                                 CurrentOrgChart.PreparedByResourceName = Program.CurrentRole.IndividualName;
                                 CurrentOrgChart.PreparedByRoleID = Program.CurrentRole.RoleID;
                                 CurrentOrgChart.PreparedByResourceID = Program.CurrentRole.IndividualID;
-                                Program.wfIncidentService.UpsertOrganizationalChart(CurrentOrgChart, false);
+                                Program.incidentDataService.UpsertOrganizationalChart(CurrentOrgChart, false);
                             }
                         }
 
@@ -466,7 +466,7 @@ namespace Wildfire_ICS_Assist
                     if (dr == DialogResult.OK)
                     {
                         OperationalGroup grp = form.SelectedGroup;
-                        Program.wfIncidentService.UpsertOperationalGroup(grp);
+                        Program.incidentDataService.UpsertOperationalGroup(grp);
                         
                     }
                 }
@@ -496,7 +496,7 @@ namespace Wildfire_ICS_Assist
                         DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                         if (dr == DialogResult.Yes)
                         {
-                            Program.wfIncidentService.DeleteICSRole(role, Program.CurrentOpPeriod);
+                            Program.incidentDataService.DeleteICSRole(role, Program.CurrentOpPeriod);
                         }
 
 

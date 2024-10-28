@@ -109,7 +109,7 @@ namespace Wildfire_ICS_Assist
 
                 if(chkCheckIn.Checked || chkLDW.Checked )
                 {
-                    Program.wfIncidentService.UpsertCheckInRecord(record);
+                    Program.incidentDataService.UpsertCheckInRecord(record);
                 }
             }
             this.DialogResult = DialogResult.OK;

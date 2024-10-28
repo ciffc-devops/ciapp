@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist
 
         private void CommunicationsListViewForm_Load(object sender, EventArgs e)
         {
-            Program.wfIncidentService.ContactChanged += Program_ContactChanged;
+            Program.incidentDataService.ContactChanged += Program_ContactChanged;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace Wildfire_ICS_Assist
                 {
                     if (editItem.contact != null)
                     {
-                        Program.wfIncidentService.UpsertContact(editItem.contact);
+                        Program.incidentDataService.UpsertContact(editItem.contact);
 
                         //if options.allcontacts includes this one, update its contents
                         List<Contact> savedContacts = (List<Contact>)Program.generalOptionsService.GetOptionsValue("Contacts");

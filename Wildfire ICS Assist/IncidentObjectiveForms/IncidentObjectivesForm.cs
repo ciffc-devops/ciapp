@@ -20,7 +20,7 @@ namespace Wildfire_ICS_Assist
 {
     public partial class IncidentObjectivesForm : BaseForm
     {
-        private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
+        private Incident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
         private IncidentObjectivesSheet objectivesSheet { get => Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == CurrentOpPeriod); }
         private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
@@ -77,10 +77,10 @@ namespace Wildfire_ICS_Assist
             LoadSheet();
             panels.Add(cpFireStatus); panels.Add(cpWeather); panels.Add(cpGeneralSafety);
             
-            Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
-            Program.wfIncidentService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
-            Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessagesChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
+            Program.incidentDataService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
+            Program.incidentDataService.SafetyMessageChanged += Program_SafetyMessagesChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
             foreach (CollapsiblePanel p in panels)
             {
@@ -136,7 +136,7 @@ namespace Wildfire_ICS_Assist
             BuildSafetyMessageList();
             LoadObjectives();
             txtFireSize.Text = objectivesSheet.FireSize;
-            if (!string.IsNullOrEmpty(objectivesSheet.WeatherForcast)) { txtWeatherForcast.Text = objectivesSheet.WeatherForcast.Replace("\n", Environment.NewLine); ; }
+            if (!string.IsNullOrEmpty(objectivesSheet.WeatherForecast)) { txtWeatherForcast.Text = objectivesSheet.WeatherForecast.Replace("\n", Environment.NewLine); ; }
             if (!string.IsNullOrEmpty(objectivesSheet.GeneralSafety)) { txtGeneralSafetyMessage.Text = objectivesSheet.GeneralSafety.Replace("\n", Environment.NewLine); ; }
             cboFireStatus.Text = objectivesSheet.FireStatus;
             anyChanges = false;
@@ -198,10 +198,9 @@ namespace Wildfire_ICS_Assist
                 {
                     IncidentObjective obj = entryForm.Objective;
                     obj.OpPeriod = CurrentOpPeriod;
-                    obj.TaskID = CurrentIncident.TaskID;
                     obj.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
                     obj.Priority = objectivesSheet.GetNextPriorityNumber();
-                    Program.wfIncidentService.UpsertIncidentObjective(obj);
+                    Program.incidentDataService.UpsertIncidentObjective(obj);
 
                     if (entryForm.SaveForLater)
                     {
@@ -230,7 +229,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = editForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertIncidentObjective(editForm.objective);
+                    Program.incidentDataService.UpsertIncidentObjective(editForm.objective);
                 }
             }
         }
@@ -247,7 +246,7 @@ namespace Wildfire_ICS_Assist
                 foreach (IncidentObjective obj in objectivesToDelete)
                 {
                     obj.Active = false;
-                    Program.wfIncidentService.UpsertIncidentObjective(obj);
+                    Program.incidentDataService.UpsertIncidentObjective(obj);
                 }
 
             }
@@ -275,7 +274,7 @@ namespace Wildfire_ICS_Assist
 
         private void txtWeatherForcast_Leave(object sender, EventArgs e)
         {
-            objectivesSheet.WeatherForcast = txtWeatherForcast.Text;
+            objectivesSheet.WeatherForecast = txtWeatherForcast.Text;
             anyChanges = true;
         }
 
@@ -313,8 +312,8 @@ namespace Wildfire_ICS_Assist
                             int newHigherPriority = nextUp.Priority;
                             nextUp.Priority = obj.Priority;
                             obj.Priority = newHigherPriority;
-                            Program.wfIncidentService.UpsertIncidentObjective(nextUp);
-                            Program.wfIncidentService.UpsertIncidentObjective(obj);
+                            Program.incidentDataService.UpsertIncidentObjective(nextUp);
+                            Program.incidentDataService.UpsertIncidentObjective(obj);
                         }
 
                         break;
@@ -325,8 +324,8 @@ namespace Wildfire_ICS_Assist
                             int newLowerPriority = nextDown.Priority;
                             nextDown.Priority = obj.Priority;
                             obj.Priority = newLowerPriority;
-                            Program.wfIncidentService.UpsertIncidentObjective(nextDown);
-                            Program.wfIncidentService.UpsertIncidentObjective(obj);
+                            Program.incidentDataService.UpsertIncidentObjective(nextDown);
+                            Program.incidentDataService.UpsertIncidentObjective(obj);
                         }
 
                         break;
@@ -401,11 +400,11 @@ namespace Wildfire_ICS_Assist
         {
             if (!txtFireSize.Text.Equals(objectivesSheet.FireSize)) { objectivesSheet.FireSize = txtFireSize.Text; anyChanges = true; }
             if (!txtGeneralSafetyMessage.Text.Equals(objectivesSheet.GeneralSafety)) { objectivesSheet.GeneralSafety = txtGeneralSafetyMessage.Text; anyChanges = true; }
-            if (!txtWeatherForcast.Text.Equals(objectivesSheet.WeatherForcast)) { objectivesSheet.WeatherForcast = txtWeatherForcast.Text; anyChanges = true; }
+            if (!txtWeatherForcast.Text.Equals(objectivesSheet.WeatherForecast)) { objectivesSheet.WeatherForecast = txtWeatherForcast.Text; anyChanges = true; }
             if (!cboFireStatus.Text.Equals(objectivesSheet.FireStatus)) { objectivesSheet.FireStatus = cboFireStatus.Text; anyChanges = true; }
             if (anyChanges)
             {
-                Program.wfIncidentService.UpsertIncidentObjectivesSheet(objectivesSheet);
+                Program.incidentDataService.UpsertIncidentObjectivesSheet(objectivesSheet);
 
             }
         }

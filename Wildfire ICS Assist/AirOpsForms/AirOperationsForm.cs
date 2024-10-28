@@ -44,16 +44,16 @@ namespace Wildfire_ICS_Assist
 
             loadNOTAM();
 
-            Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
-            Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
+            Program.incidentDataService.OrganizationalChartChanged += Program_OrgChartChanged;
+            Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
 
-            Program.wfIncidentService.CommsPlanChanged += Program_CommsPlanChanged;
-            Program.wfIncidentService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
+            Program.incidentDataService.CommsPlanChanged += Program_CommsPlanChanged;
+            Program.incidentDataService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
 
-            Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
-            Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
-            Program.wfIncidentService.MemberSignInChanged += WfIncidentService_MemberSignInChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.AircraftChanged += Program_AircraftChanged;
+            Program.incidentDataService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
+            Program.incidentDataService.MemberSignInChanged += WfIncidentService_MemberSignInChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
         }
 
@@ -354,7 +354,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = assignRoleForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertICSRole(assignRoleForm.selectedRole);
+                    Program.incidentDataService.UpsertICSRole(assignRoleForm.selectedRole);
 
                     if (CurrentOrgChart.PreparedByRoleID == Guid.Empty)
                     {
@@ -362,7 +362,7 @@ namespace Wildfire_ICS_Assist
                         CurrentOrgChart.PreparedByResourceName = Program.CurrentRole.IndividualName;
                         CurrentOrgChart.PreparedByRoleID = Program.CurrentRole.RoleID;
                         CurrentOrgChart.PreparedByResourceID = Program.CurrentRole.IndividualID;
-                        Program.wfIncidentService.UpsertOrganizationalChart(CurrentOrgChart, false);
+                        Program.incidentDataService.UpsertOrganizationalChart(CurrentOrgChart, false);
                     }
                 }
 
@@ -383,7 +383,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
-                    Program.wfIncidentService.DeleteICSRole(role, Program.CurrentOpPeriod);
+                    Program.incidentDataService.DeleteICSRole(role, Program.CurrentOpPeriod);
                 }
             }
             else { MessageBox.Show(Properties.Resources.ProtectedRole); }
@@ -400,7 +400,7 @@ namespace Wildfire_ICS_Assist
                     DialogResult dr = addRoleForm.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        Program.wfIncidentService.UpsertICSRole(addRoleForm.selectedRole);
+                        Program.incidentDataService.UpsertICSRole(addRoleForm.selectedRole);
                     }
                 }
             }
@@ -418,7 +418,7 @@ namespace Wildfire_ICS_Assist
                     entryForm.SelectedItem.OpPeriod = Program.CurrentOpPeriod;
                     entryForm.SelectedItem.OrganizationID = CurrentOrgChart.ID;
 
-                    Program.wfIncidentService.UpsertCommsPlanItem(entryForm.SelectedItem, null, "local");
+                    Program.incidentDataService.UpsertCommsPlanItem(entryForm.SelectedItem, null, "local");
 
 
                     if (entryForm.SaveForLater)
@@ -446,7 +446,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = editForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
+                    Program.incidentDataService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
 
                 }
             }
@@ -463,7 +463,7 @@ namespace Wildfire_ICS_Assist
                     toDelete.Add((CommsPlanItem)row.DataBoundItem);
                 }
 
-                foreach (CommsPlanItem c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertCommsPlanItem(c); }
+                foreach (CommsPlanItem c in toDelete) { c.Active = false; Program.incidentDataService.UpsertCommsPlanItem(c); }
             }
         }
 
@@ -551,7 +551,7 @@ namespace Wildfire_ICS_Assist
                     foreach (Aircraft a in toDelete)
                     {
                         a.Active = false;
-                        Program.wfIncidentService.UpsertAircraft(a);
+                        Program.incidentDataService.UpsertAircraft(a);
                     }
                 }
             }
@@ -601,7 +601,7 @@ namespace Wildfire_ICS_Assist
                             if (centre != null) { SetSunTimesByCoordinate(centre); }
                         }
                     }
-                    Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
+                    Program.incidentDataService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
                 }
             }
         }
@@ -626,7 +626,7 @@ namespace Wildfire_ICS_Assist
         private void AirOperationsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveNOTAM();
-            Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
+            Program.incidentDataService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
 
         }
 
@@ -634,7 +634,7 @@ namespace Wildfire_ICS_Assist
         {
             SaveNOTAM();
             //catch any changes that have been made and make sure they're saved.
-            Program.wfIncidentService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
+            Program.incidentDataService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
 
 
             string path = Program.pdfExportService.CreateAirOpsSummaryPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false, false);
@@ -703,7 +703,7 @@ namespace Wildfire_ICS_Assist
             if (e.RowIndex >= 0 && dgvAircraft.Rows[e.RowIndex].DataBoundItem != null)
             {
                 Aircraft a = (Aircraft)dgvAircraft.Rows[e.RowIndex].DataBoundItem;
-                Program.wfIncidentService.UpsertAircraft(a);
+                Program.incidentDataService.UpsertAircraft(a);
             }
         }
 
@@ -906,7 +906,7 @@ namespace Wildfire_ICS_Assist
                             {
                                 a.StartTime = selectForm.StartTime;
                                 a.EndTime = selectForm.EndTime;
-                                Program.wfIncidentService.UpsertAircraft(a);
+                                Program.incidentDataService.UpsertAircraft(a);
                             }
                         }
                     }
@@ -944,7 +944,7 @@ namespace Wildfire_ICS_Assist
                             foreach (Aircraft a in aircraft)
                             {
                                 a.IsMedivac = selectForm.Response;
-                                Program.wfIncidentService.UpsertAircraft(a);
+                                Program.incidentDataService.UpsertAircraft(a);
                             }
                         }
                     }
@@ -982,7 +982,7 @@ namespace Wildfire_ICS_Assist
                             foreach (Aircraft a in aircraft)
                             {
                                 a.Remarks = selectForm.Response;
-                                Program.wfIncidentService.UpsertAircraft(a);
+                                Program.incidentDataService.UpsertAircraft(a);
                             }
                         }
                     }

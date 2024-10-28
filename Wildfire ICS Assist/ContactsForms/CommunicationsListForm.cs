@@ -48,7 +48,7 @@ namespace Wildfire_ICS_Assist
                 {
                     if (editItem.contact != null)
                     {
-                        Program.wfIncidentService.UpsertContact(editItem.contact);
+                        Program.incidentDataService.UpsertContact(editItem.contact);
 
                         //if options.allcontacts includes this one, update its contents
                         List<Contact> savedContacts = (List<Contact>)Program.generalOptionsService.GetOptionsValue("Contacts");
@@ -112,8 +112,8 @@ namespace Wildfire_ICS_Assist
         {
             if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
 
-            Program.wfIncidentService.ContactChanged += Program_ContactChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.ContactChanged += Program_ContactChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
             BuildData();
         }
@@ -133,7 +133,7 @@ namespace Wildfire_ICS_Assist
                     Contact c = entryForm.selected;
                     if (null != c)
                     {
-                        Program.wfIncidentService.UpsertContact(c);
+                        Program.incidentDataService.UpsertContact(c);
 
                         if (entryForm.IsNewContact && entryForm.SaveForLater)
                         {
@@ -190,7 +190,7 @@ namespace Wildfire_ICS_Assist
                     toDelete.Add((Contact)row.DataBoundItem);
                 }
 
-                foreach (Contact c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertContact(c); }
+                foreach (Contact c in toDelete) { c.Active = false; Program.incidentDataService.UpsertContact(c); }
             }
         }
 

@@ -52,11 +52,11 @@ namespace Wildfire_ICS_Assist
             LoadResourcesList();
             LoadPNumbers();
             cboAssignedFilter.SelectedIndex = 0;
-            Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
-            Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
-            Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
-            Program.wfIncidentService.AircraftChanged += WfIncidentService_AircraftChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
+            Program.incidentDataService.MemberSignInChanged += Program_CheckInChanged;
+            Program.incidentDataService.VehicleChanged += Program_VehicleChanged;
+            Program.incidentDataService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            Program.incidentDataService.AircraftChanged += WfIncidentService_AircraftChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OperationalPeriodChanged;
 
             keepListBuilt = true;
             BuildCheckInListViaWorker();
@@ -198,7 +198,7 @@ namespace Wildfire_ICS_Assist
                             p.ParentResourceID = Guid.Empty;
                             if (string.IsNullOrEmpty(p.LeaderName)) { p.LeaderName = p.Name; }
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, PNumMin, PNumMax); }
-                            Program.wfIncidentService.UpsertPersonnel(p);
+                            Program.incidentDataService.UpsertPersonnel(p);
 
                             if (signInForm.SavePersonForLater)
                             {
@@ -210,26 +210,26 @@ namespace Wildfire_ICS_Assist
                             Personnel op = resource as Personnel;
                             if (string.IsNullOrEmpty(op.LeaderName)) { op.LeaderName = op.Name; }
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, PNumMin, PNumMax); }
-                            Program.wfIncidentService.UpsertPersonnel(op);
+                            Program.incidentDataService.UpsertPersonnel(op);
                             break;
                         case "Visitor":
                             Personnel vis = resource as Personnel;
                             vis.ParentResourceID = Guid.Empty;
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, PNumMin, PNumMax); }
-                            Program.wfIncidentService.UpsertPersonnel(vis);
+                            Program.incidentDataService.UpsertPersonnel(vis);
 
                             break;
                         case "Vehicle":
                             Vehicle v = resource as Vehicle;
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, VNumMin, VNumMax); }
                             if (v.OperatorID != Guid.Empty) { v.NumberOfPeople = 1; }
-                            Program.wfIncidentService.UpsertVehicle(v);
+                            Program.incidentDataService.UpsertVehicle(v);
 
                             if (v.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == v.OperatorID))
                             {
                                 Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == v.OperatorID) as Personnel;
                                 eqop.ParentResourceID = v.ID;
-                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                                Program.incidentDataService.UpsertPersonnel(eqop);
                             }
 
                             break;
@@ -237,12 +237,12 @@ namespace Wildfire_ICS_Assist
                             Vehicle ve = resource as Vehicle;
                             if (ve.OperatorID != Guid.Empty) { ve.NumberOfPeople = 1; }
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, ENumMin, ENumMax); }
-                            Program.wfIncidentService.UpsertVehicle(ve);
+                            Program.incidentDataService.UpsertVehicle(ve);
                             if (ve.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == ve.OperatorID))
                             {
                                 Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == ve.OperatorID) as Personnel;
                                 eqop.ParentResourceID = ve.ID;
-                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                                Program.incidentDataService.UpsertPersonnel(eqop);
                             }
                             break;
                         case "Aircraft":
@@ -251,7 +251,7 @@ namespace Wildfire_ICS_Assist
                             air.StartTime = Program.CurrentOpPeriodDetails.PeriodStart;
                             air.EndTime = Program.CurrentOpPeriodDetails.PeriodEnd;
                            air =  UpdateAircraftFromCheckinInfo(record, air);
-                            Program.wfIncidentService.UpsertAircraft(air);
+                            Program.incidentDataService.UpsertAircraft(air);
                             if (resource.UniqueIDNum <= 0) { resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(record.ResourceType, ENumMin, ENumMax); }
 
                             break;
@@ -271,14 +271,14 @@ namespace Wildfire_ICS_Assist
                                 {
                                     Crew sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
                                     sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
-                                    Program.wfIncidentService.UpsertOperationalSubGroup(sub);
+                                    Program.incidentDataService.UpsertOperationalSubGroup(sub);
                                 }
 
 
                                 if (Program.CurrentIncident.AllCheckInRecords.Any(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod))
                                 {
                                     Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod).ParentRecordID = Guid.Empty;
-                                    Program.wfIncidentService.UpsertCheckInRecord(Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod));
+                                    Program.incidentDataService.UpsertCheckInRecord(Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod));
                                 }
 
 
@@ -286,7 +286,7 @@ namespace Wildfire_ICS_Assist
                             }
 
 
-                            Program.wfIncidentService.UpsertOperationalSubGroup(group);
+                            Program.incidentDataService.UpsertOperationalSubGroup(group);
                             foreach (IncidentResource subres in signInForm.SubResources)
                             {
                                 if (subres.GetType().Name.Equals("Personnel"))
@@ -294,14 +294,14 @@ namespace Wildfire_ICS_Assist
                                     subres.OpPeriod = Program.CurrentOpPeriod;
                                     if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, PNumMin, PNumMax); }
                                     subres.ParentResourceID = group.ID;
-                                    Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
+                                    Program.incidentDataService.UpsertPersonnel(subres as Personnel);
                                     CheckInRecord prec = signInForm.checkInRecord.Clone();
                                     prec.ResourceID = subres.ID;
                                     prec.ResourceName = subres.ResourceName;
                                     prec.SignInRecordID = Guid.NewGuid();
                                     prec.ParentRecordID = record.SignInRecordID;
                                     prec.ResourceType = "Personnel";
-                                    Program.wfIncidentService.UpsertCheckInRecord(prec);
+                                    Program.incidentDataService.UpsertCheckInRecord(prec);
                                 }
                                 else if (subres.GetType().Name.Equals("Vehicle"))
                                 {
@@ -316,21 +316,21 @@ namespace Wildfire_ICS_Assist
                                         if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, VNumMin, VNumMax); }
                                     }
                                     subres.ParentResourceID = group.ID;
-                                    Program.wfIncidentService.UpsertVehicle(vh);
+                                    Program.incidentDataService.UpsertVehicle(vh);
                                     CheckInRecord vrec = signInForm.checkInRecord.Clone();
                                     vrec.ResourceID = subres.ID;
                                     vrec.SignInRecordID = Guid.NewGuid();
                                     vrec.ParentRecordID = record.SignInRecordID;
                                     if (vrec.IsEquipment) { vrec.ResourceType = "Equipment"; }
                                     else { vrec.ResourceType = "Vehicle"; }
-                                    Program.wfIncidentService.UpsertCheckInRecord(vrec);
+                                    Program.incidentDataService.UpsertCheckInRecord(vrec);
                                 }
                             }
                             break;
                     }
 
 
-                    Program.wfIncidentService.UpsertCheckInRecord(record);
+                    Program.incidentDataService.UpsertCheckInRecord(record);
 
                     if (signInForm.AssignIfPossible && !string.IsNullOrEmpty(record.InitialRoleAcronym))
                     {
@@ -341,7 +341,7 @@ namespace Wildfire_ICS_Assist
                             role.IndividualID = p.ID;
                             role.IndividualName = p.Name;
                             //role.teamMember = p.Clone();
-                            Program.wfIncidentService.UpsertICSRole(role);
+                            Program.incidentDataService.UpsertICSRole(role);
                         }
                     }
 
@@ -739,7 +739,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = demobForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertDemobRecord(demob);
+                    Program.incidentDataService.UpsertDemobRecord(demob);
 
 
 
@@ -852,7 +852,7 @@ namespace Wildfire_ICS_Assist
                     if (dr == DialogResult.OK)
                     {
                         rec.Resource.UniqueIDNum = editForm.newNumber;
-                        Program.wfIncidentService.UpsertIncidentResource(rec.Resource);
+                        Program.incidentDataService.UpsertIncidentResource(rec.Resource);
                     }
                 }
             }
@@ -1092,7 +1092,7 @@ namespace Wildfire_ICS_Assist
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     editForm.SelectedRecord.DateReplacementRequired = editForm.SelectedRecord.LastDayOnIncident.AddDays(-1);
-                    Program.wfIncidentService.UpsertCheckInRecord(editForm.SelectedRecord);
+                    Program.incidentDataService.UpsertCheckInRecord(editForm.SelectedRecord);
 
 
                     if (editForm.SelectedRecord.ResourceType.Equals("Aircraft"))
@@ -1100,7 +1100,7 @@ namespace Wildfire_ICS_Assist
                         if (Program.CurrentIncident.AllAircraft.Any(o => o.ID == editForm.SelectedRecord.ResourceID))
                         {
                             Aircraft air = UpdateAircraftFromCheckinInfo(editForm.SelectedRecord, Program.CurrentIncident.AllAircraft.First(o => o.ID == editForm.SelectedRecord.ResourceID).Clone());
-                            Program.wfIncidentService.UpsertAircraft(air);
+                            Program.incidentDataService.UpsertAircraft(air);
                         }
                     }
                     
@@ -1115,7 +1115,7 @@ namespace Wildfire_ICS_Assist
                             role.IndividualID = p.ID;
                             role.IndividualName = p.Name;
                             //role.teamMember = p.Clone();
-                            Program.wfIncidentService.UpsertICSRole(role);
+                            Program.incidentDataService.UpsertICSRole(role);
                         }
                     }
 
@@ -1136,7 +1136,7 @@ namespace Wildfire_ICS_Assist
                         personnelForm.selectedMember = p.Clone();
                         if (personnelForm.ShowDialog() == DialogResult.OK)
                         {
-                            Program.wfIncidentService.UpsertPersonnel(personnelForm.selectedMember);
+                            Program.incidentDataService.UpsertPersonnel(personnelForm.selectedMember);
                         }
                     }
 
@@ -1150,7 +1150,7 @@ namespace Wildfire_ICS_Assist
                         personnelForm.selectedPerson = v.Clone();
                         if (personnelForm.ShowDialog() == DialogResult.OK)
                         {
-                            Program.wfIncidentService.UpsertPersonnel(personnelForm.selectedPerson);
+                            Program.incidentDataService.UpsertPersonnel(personnelForm.selectedPerson);
                         }
                     }
 
@@ -1172,15 +1172,15 @@ namespace Wildfire_ICS_Assist
                             {
                                 Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == personnelForm.vehicle.OperatorID) as Personnel;
                                 eqop.ParentResourceID = personnelForm.vehicle.ID;
-                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                                Program.incidentDataService.UpsertPersonnel(eqop);
                             } else if (ve.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == ve.OperatorID))
                             {
                                 Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == ve.OperatorID) as Personnel;
                                 eqop.ParentResourceID = Guid.Empty;
-                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                                Program.incidentDataService.UpsertPersonnel(eqop);
                             }
 
-                            Program.wfIncidentService.UpsertVehicle(personnelForm.vehicle);
+                            Program.incidentDataService.UpsertVehicle(personnelForm.vehicle);
 
                         }
                     }
@@ -1203,16 +1203,16 @@ namespace Wildfire_ICS_Assist
                             {
                                 Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == personnelForm.vehicle.OperatorID) as Personnel;
                                 eqop.ParentResourceID = personnelForm.vehicle.ID;
-                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                                Program.incidentDataService.UpsertPersonnel(eqop);
                             }
                             else if (eq.OperatorID != Guid.Empty && Program.CurrentIncident.ActiveIncidentResources.Any(o => o.ID == eq.OperatorID))
                             {
                                 Personnel eqop = Program.CurrentIncident.ActiveIncidentResources.First(o => o.ID == eq.OperatorID) as Personnel;
                                 eqop.ParentResourceID = Guid.Empty;
-                                Program.wfIncidentService.UpsertPersonnel(eqop);
+                                Program.incidentDataService.UpsertPersonnel(eqop);
                             }
 
-                            Program.wfIncidentService.UpsertVehicle(personnelForm.vehicle);
+                            Program.incidentDataService.UpsertVehicle(personnelForm.vehicle);
                         }
                     }
 
@@ -1241,7 +1241,7 @@ namespace Wildfire_ICS_Assist
                         personnelForm.SelectedAircraft = air.Clone();
                         if (personnelForm.ShowDialog() == DialogResult.OK)
                         {
-                            Program.wfIncidentService.UpsertAircraft(personnelForm.SelectedAircraft);
+                            Program.incidentDataService.UpsertAircraft(personnelForm.SelectedAircraft);
                         }
                     }
 
@@ -1288,14 +1288,14 @@ namespace Wildfire_ICS_Assist
                     {
                         Crew sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
                         sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
-                        Program.wfIncidentService.UpsertOperationalSubGroup(sub);
+                        Program.incidentDataService.UpsertOperationalSubGroup(sub);
                     }
 
 
                     if (Program.CurrentIncident.AllCheckInRecords.Any(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod))
                     {
                         Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod).ParentRecordID = Guid.Empty;
-                        Program.wfIncidentService.UpsertCheckInRecord(Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod));
+                        Program.incidentDataService.UpsertCheckInRecord(Program.CurrentIncident.AllCheckInRecords.First(o => o.ResourceID == l.ResourceID && o.OpPeriod == Program.CurrentOpPeriod));
                     }
 
 
@@ -1303,7 +1303,7 @@ namespace Wildfire_ICS_Assist
                 }
 
 
-                Program.wfIncidentService.UpsertOperationalSubGroup(group);
+                Program.incidentDataService.UpsertOperationalSubGroup(group);
                 foreach (IncidentResource subres in crewForm.subResources)
                 {
                     if (subres.GetType().Name.Equals("Personnel"))
@@ -1311,7 +1311,7 @@ namespace Wildfire_ICS_Assist
                         subres.OpPeriod = Program.CurrentOpPeriod;
                         if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, PNumMin, PNumMax); }
                         subres.ParentResourceID = group.ID;
-                        Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
+                        Program.incidentDataService.UpsertPersonnel(subres as Personnel);
                         /*
                         CheckInRecord prec = crewForm.checkInRecord.Clone();
                         prec.ResourceID = subres.ID;
@@ -1334,7 +1334,7 @@ namespace Wildfire_ICS_Assist
                             if (subres.UniqueIDNum <= 0) { subres.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(subres.ResourceType, VNumMin, VNumMax); }
                         }
                         subres.ParentResourceID = group.ID;
-                        Program.wfIncidentService.UpsertVehicle(vh);
+                        Program.incidentDataService.UpsertVehicle(vh);
                         /*
                          CheckInRecord vrec = signInForm.checkInRecord.Clone();
                          vrec.ResourceID = subres.ID;

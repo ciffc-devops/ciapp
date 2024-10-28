@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist
 {
     public partial class PositionLogForm : BaseForm
     {
-        private WFIncident CurrentTask { get => Program.CurrentTask; }
+        private Incident CurrentTask { get => Program.CurrentTask; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
         private ICSRole CurrentRole { get => Program.CurrentRole; }
         string currentUserName { get => Program.CurrentTask.getNameByRoleID(Program.CurrentOpPeriod, Program.CurrentRole.RoleID, false); }
@@ -55,8 +55,8 @@ namespace Wildfire_ICS_Assist
         private void PositionLogForm_Load(object sender, EventArgs e)
         {
             if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
-            Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.PositionLogChanged += Program_PositionLogChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
             lblPositionName.Text = CurrentRole.RoleName;
             dgvLog.AutoGenerateColumns = false;
@@ -142,7 +142,7 @@ namespace Wildfire_ICS_Assist
             DialogResult dr = _positionLogAddForm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
-                Program.wfIncidentService.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);// .CurrentTask.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);
+                Program.incidentDataService.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);// .CurrentTask.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);
             }
         }
 
@@ -153,7 +153,7 @@ namespace Wildfire_ICS_Assist
             DialogResult dr = _positionLogAddForm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
-                Program.wfIncidentService.UpsertPositionLogEntry(_positionLogAddForm.thisEntry.Clone());
+                Program.incidentDataService.UpsertPositionLogEntry(_positionLogAddForm.thisEntry.Clone());
             }
         }
 
@@ -179,7 +179,7 @@ namespace Wildfire_ICS_Assist
                     PositionLogEntry entry = (PositionLogEntry)row.DataBoundItem;
                     entry.UpdateLogText("-Deleted " + DateTime.Now.ToString(Program.DateFormat + " HH:mm") + "-", currentUserName);
                     entry.IsInfoOnly = true;
-                    Program.wfIncidentService.UpsertPositionLogEntry(entry.Clone());
+                    Program.incidentDataService.UpsertPositionLogEntry(entry.Clone());
 
                 }
             }

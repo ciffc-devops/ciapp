@@ -16,7 +16,7 @@ namespace Wildfire_ICS_Assist
 {
     public partial class PositionLogAllOutstandingForm : BaseForm
     {
-        private WFIncident CurrentTask { get => Program.CurrentTask; }
+        private Incident CurrentTask { get => Program.CurrentTask; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
         private ICSRole CurrentRole { get => Program.CurrentRole; }
         string currentUserName { get => Program.CurrentTask.getNameByRoleID(Program.CurrentOpPeriod, Program.CurrentRole.RoleID, false); }
@@ -61,7 +61,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = _positionLogAddForm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);
+                    Program.incidentDataService.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);
 
                     //buildPositionLog();
                 }
@@ -78,7 +78,7 @@ namespace Wildfire_ICS_Assist
                     PositionLogEntry entry = (PositionLogEntry)row.DataBoundItem;
                     entry.UpdateLogText("-Deleted " + DateTime.Now.ToString(Globals.DateFormat + " HH:mm") + "-", currentUserName);
                     entry.IsInfoOnly = true;
-                    Program.wfIncidentService.UpsertPositionLogEntry(entry);
+                    Program.incidentDataService.UpsertPositionLogEntry(entry);
 
 
                     // buildPositionLog();
@@ -89,7 +89,7 @@ namespace Wildfire_ICS_Assist
 
         private void PositionLogAllOutstandingForm_Load(object sender, EventArgs e)
         {
-            Program.wfIncidentService.PositionLogChanged += Parent_PositionLogChanged;
+            Program.incidentDataService.PositionLogChanged += Parent_PositionLogChanged;
 
             dgvLog.AutoGenerateColumns = false;
             buildPositionLog();
@@ -105,7 +105,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = _positionLogAddForm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);
+                    Program.incidentDataService.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);
 
 
                     //buildPositionLog();

@@ -37,8 +37,8 @@ namespace Wildfire_ICS_Assist
 
             dgvNotes.AutoGenerateColumns = false;
             buildNoteList();
-            Program.wfIncidentService.NoteChanged += Program_NoteChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.NoteChanged += Program_NoteChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
         }
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
@@ -89,7 +89,7 @@ namespace Wildfire_ICS_Assist
 
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertNote(editNote.CurrentNote);
+                    Program.incidentDataService.UpsertNote(editNote.CurrentNote);
 
 
 
@@ -121,7 +121,7 @@ namespace Wildfire_ICS_Assist
 
                     if (dr == DialogResult.OK)
                     {
-                        Program.wfIncidentService.UpsertNote(editNote.CurrentNote);
+                        Program.incidentDataService.UpsertNote(editNote.CurrentNote);
                     }
                 }
             }
@@ -146,7 +146,7 @@ namespace Wildfire_ICS_Assist
                 foreach (Note note in notesToDelete)
                 {
                     note.Active = false;
-                    Program.wfIncidentService.UpsertNote(note);
+                    Program.incidentDataService.UpsertNote(note);
                 }
             }
         }

@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
             if (Program.CurrentTask.AnyOpPeriodHasMeanginfulContent && !string.IsNullOrEmpty(Program.CurrentTask.FileName))
             {
-                txtJoinSyncEncryptionKey.Text = Program.CurrentTask.TaskID.ToString() + Program.CurrentTask.TaskEncryptionKey;
+                txtJoinSyncEncryptionKey.Text = Program.CurrentTask.ID.ToString() + Program.CurrentTask.TaskEncryptionKey;
             }
             if (Program.InternetSyncEnabled)
             {
@@ -42,7 +42,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 rbNewSync.Checked = !(rbOngoingSync).Checked;
                 setPanelStatus();
                 automaticallySettingRadios = false;
-                txtJoinSyncEncryptionKey.Text = Program.CurrentTask.TaskID.ToString() + Program.CurrentTask.TaskEncryptionKey;
+                txtJoinSyncEncryptionKey.Text = Program.CurrentTask.ID.ToString() + Program.CurrentTask.TaskEncryptionKey;
             }
         }
 
@@ -148,7 +148,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
             //new sync
             if (rbNewSync.Checked)
             {
-                txtNewSyncEncryptionKey.Text = Program.CurrentTask.TaskID.ToString() + Program.CurrentTask.TaskEncryptionKey;
+                txtNewSyncEncryptionKey.Text = Program.CurrentTask.ID.ToString() + Program.CurrentTask.TaskEncryptionKey;
                 btnCopyExistingEncryptionKey.Enabled = true;
                 btnCopySharingInfo.Enabled = true;
                 pnlNewSync.BackColor = Color.White;
@@ -219,7 +219,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     //check if there is already a task synced with this ID
                     try
                     {
-                        Guid TaskID = Program.CurrentTask.TaskID;
+                        Guid TaskID = Program.CurrentTask.ID;
                         TaskUpdateService service = new TaskUpdateService();
                         bool initialEntryExists = await service.InitialTaskUpdateExists(TaskID, Program.CurrentTask.TaskEncryptionKey);
 

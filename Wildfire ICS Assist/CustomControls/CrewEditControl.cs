@@ -130,7 +130,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void btnAddVehicle_Click(object sender, EventArgs e)
         {
             Vehicle vehicleToEdit = new Vehicle();
-            vehicleToEdit.TaskID = Program.CurrentTask.TaskID;
+            vehicleToEdit.TaskID = Program.CurrentTask.ID;
             vehicleToEdit.OpPeriod = Program.CurrentOpPeriod;
             vehicleToEdit.StartTime = DateTime.Now;
 

@@ -84,7 +84,7 @@ namespace Wildfire_ICS_Assist
             ICSRole defaultRole = (ICSRole)Program.generalOptionsService.GetOptionsValue("DefaultICSRole");
             if (defaultRole != null && defaultRole.RoleID != Guid.Empty) { cboICSRole.SelectedValue = defaultRole.RoleID; }
 
-            Program.networkService.CurrentIncidentID = Program.CurrentIncident.TaskID;
+            Program.networkService.CurrentIncidentID = Program.CurrentIncident.ID;
             //Default status for networking
             if (Program.generalOptionsService.GetOptionsBoolValue("DefaultToNetworkServer"))
             {
@@ -97,7 +97,7 @@ namespace Wildfire_ICS_Assist
             datOpsEnd.CustomFormat = Program.DateFormat + " HH:mm";
             datOpsStart.CustomFormat = Program.DateFormat + " HH:mm";
 
-            NetworkComms.AppendGlobalIncomingPacketHandler<WFIncident>("WFIncident", Program.networkService.HandleIncomingIncident);
+            NetworkComms.AppendGlobalIncomingPacketHandler<Incident>("WFIncident", Program.networkService.HandleIncomingIncident);
 
             tESTToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
@@ -154,7 +154,7 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private WFIncident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
+        private Incident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
         private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
 
@@ -179,6 +179,7 @@ namespace Wildfire_ICS_Assist
         bool lastSaveSuccessful = true;
         private DateTime lastSuccessfulSaveTime = DateTime.MinValue;
         bool saveAsPromptShown = false;
+        private bool allowAutoSave = true;
 
 
         //These hold a reference to the various forms so that only one of each can be open at a time.
@@ -232,29 +233,29 @@ namespace Wildfire_ICS_Assist
 
         private void WireWFIncidentServiceEvents()
         {
-            Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
-            Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
-            Program.wfIncidentService.PositionLogChanged += Program_PositionLogChanged;
-            Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
-            Program.wfIncidentService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
-            Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
-            Program.wfIncidentService.MedicalPlanChanged += Program_MedicalPlanChanged;
-            Program.wfIncidentService.MedicalAidStationChanged += Program_AidStationChanged;
-            Program.wfIncidentService.AmbulanceServiceChanged += Program_MedivacChanged;
-            Program.wfIncidentService.HospitalChanged += Program_HospitalChanged;
-            Program.wfIncidentService.NoteChanged += Program_NoteChanged;
-            Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
-            Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
-            Program.wfIncidentService.CommsPlanChanged += Program_CommsPlanChanged;
-            Program.wfIncidentService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
-            Program.wfIncidentService.AircraftChanged += Program_AircraftChanged;
-            Program.wfIncidentService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
-            Program.wfIncidentService.TaskBasicsChanged += Program_TaskBasicsChanged;
-            Program.wfIncidentService.OperationalPeriodChanged += Program_OperationalPeriodChanged;
-            Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
-            Program.wfIncidentService.OperationalGroupChanged += Program_OperationalGroupChanged;
-            Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
-            Program.wfIncidentService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
+            Program.incidentDataService.OrganizationalChartChanged += Program_OrgChartChanged;
+            Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
+            Program.incidentDataService.PositionLogChanged += Program_PositionLogChanged;
+            Program.incidentDataService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
+            Program.incidentDataService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
+            Program.incidentDataService.GeneralMessageChanged += Program_GeneralMessageChanged;
+            Program.incidentDataService.MedicalPlanChanged += Program_MedicalPlanChanged;
+            Program.incidentDataService.MedicalAidStationChanged += Program_AidStationChanged;
+            Program.incidentDataService.AmbulanceServiceChanged += Program_MedivacChanged;
+            Program.incidentDataService.HospitalChanged += Program_HospitalChanged;
+            Program.incidentDataService.NoteChanged += Program_NoteChanged;
+            Program.incidentDataService.SafetyMessageChanged += Program_SafetyMessageChanged;
+            Program.incidentDataService.VehicleChanged += Program_VehicleChanged;
+            Program.incidentDataService.CommsPlanChanged += Program_CommsPlanChanged;
+            Program.incidentDataService.CommsPlanItemChanged += Program_CommsPlanItemChanged;
+            Program.incidentDataService.AircraftChanged += Program_AircraftChanged;
+            Program.incidentDataService.AircraftsOperationsSummaryChanged += Program_AirOpsSummaryChanged;
+            Program.incidentDataService.TaskBasicsChanged += Program_TaskBasicsChanged;
+            Program.incidentDataService.OperationalPeriodDetailsChanged += Program_OperationalPeriodChanged;
+            Program.incidentDataService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            Program.incidentDataService.OperationalGroupChanged += Program_OperationalGroupChanged;
+            Program.incidentDataService.MemberSignInChanged += Program_CheckInChanged;
+            Program.incidentDataService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
             //Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
 
 
@@ -264,8 +265,8 @@ namespace Wildfire_ICS_Assist
             Program.networkService.localNetworkIncomingIncidentEvent += replaceCurrentIncidentWithNetworkIncident;
             Program.networkService.localNetworkIncomingObjectEvent += Program_HandleIncomingNetworkObject;
             
-            Program.wfIncidentService.TaskUpdateChanged += Program_TaskUpdateChanged;
-            Program.wfIncidentService.OpPeriodChanged += changeOpPeriod;
+            Program.incidentDataService.TaskUpdateChanged += Program_TaskUpdateChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += changeOpPeriod;
         }
 
        
@@ -763,7 +764,7 @@ namespace Wildfire_ICS_Assist
         {
             if (!saveAsPromptShown)
             {
-                if (Program.generalOptionsService.GetOptionsBoolValue("AutoSave") && lastSaveSuccessful)
+                if (allowAutoSave && Program.generalOptionsService.GetOptionsBoolValue("AutoSave") && lastSaveSuccessful)
                 {
                     if (initialDetailsSet(false, false))
                     {
@@ -913,7 +914,7 @@ namespace Wildfire_ICS_Assist
             if (tasknamechanged || tasknumberchanged)
             {
                 TaskBasics basics = new TaskBasics(CurrentIncident);
-                Program.wfIncidentService.UpdateTaskBasics(basics, "local");
+                Program.incidentDataService.UpdateTaskBasics(basics, "local");
             }
 
 
@@ -971,12 +972,12 @@ namespace Wildfire_ICS_Assist
             CloseActiveForms();
 
             browseToIncidentFolderToolStripMenuItem.Enabled = false;
-            CurrentIncident = new WFIncident();
+            CurrentIncident = new Incident();
             txtTaskName.Text = string.Empty;
             txtTaskNumber.Text = string.Empty;
 
             OperationalPeriod period = CurrentIncident.GenerateFirstOpPeriod();
-            if (period != null) { Program.wfIncidentService.UpsertOperationalPeriod(period); }
+            if (period != null) { Program.incidentDataService.UpsertOperationalPeriod(period); }
 
             CurrentIncident.createOrgChartAsNeeded(period.PeriodNumber);
 
@@ -1021,12 +1022,12 @@ namespace Wildfire_ICS_Assist
                 PauseNetworkSend = true;
                 try
                 {
-                    XmlSerializer reader = new XmlSerializer(typeof(WFIncident));
+                    XmlSerializer reader = new XmlSerializer(typeof(Incident));
                     using (StreamReader file = new StreamReader(filename))
                     {
                         using (XmlReader xr = XmlReader.Create(file, new XmlReaderSettings() { DtdProcessing = DtdProcessing.Prohibit }))
                         {
-                            WFIncident testTaskDeserialize = (WFIncident)reader.Deserialize(xr);
+                            Incident testTaskDeserialize = (Incident)reader.Deserialize(xr);
                             CurrentIncident = testTaskDeserialize;
                             CurrentOpPeriod = testTaskDeserialize.highestOpsPeriod;
 
@@ -1042,7 +1043,7 @@ namespace Wildfire_ICS_Assist
                         if (!CurrentIncident.AllOperationalPeriods.Any()) { CurrentIncident.AllOperationalPeriods = CurrentIncident.InferOperationalPeriods(); }
 
                         LastAutoBackup = DateTime.Now;
-                        Program.networkService.CurrentIncidentID = Program.CurrentIncident.TaskID;
+                        Program.networkService.CurrentIncidentID = Program.CurrentIncident.ID;
                         displayIncidentDetails();
                         tmrAutoSave.Enabled = true;
                         //setSavedFlag(true);
@@ -1135,7 +1136,7 @@ namespace Wildfire_ICS_Assist
                         ws.NewLineHandling = System.Xml.NewLineHandling.Entitize;
 
                         var path = fileName;
-                        XmlSerializer ser = new XmlSerializer(typeof(WFIncident));
+                        XmlSerializer ser = new XmlSerializer(typeof(Incident));
                         using (System.Xml.XmlWriter wr = System.Xml.XmlWriter.Create(path, ws))
                         {
                             ser.Serialize(wr, CurrentIncident);
@@ -1453,7 +1454,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = _positionLogAddForm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertPositionLogEntry(entry);
+                    Program.incidentDataService.UpsertPositionLogEntry(entry);
 
 
                 }
@@ -1966,7 +1967,7 @@ namespace Wildfire_ICS_Assist
             if (per != null)
             {
                 per.PeriodStart = datOpsStart.Value;
-                Program.wfIncidentService.UpsertOperationalPeriod(per);
+                Program.incidentDataService.UpsertOperationalPeriod(per);
             }
         }
 
@@ -1976,7 +1977,7 @@ namespace Wildfire_ICS_Assist
             if (per != null)
             {
                 per.PeriodEnd = datOpsEnd.Value;
-                Program.wfIncidentService.UpsertOperationalPeriod(per);
+                Program.incidentDataService.UpsertOperationalPeriod(per);
             }
 
         }
@@ -2128,7 +2129,7 @@ namespace Wildfire_ICS_Assist
                     ws.NewLineHandling = System.Xml.NewLineHandling.Entitize;
 
 
-                    XmlSerializer ser = new XmlSerializer(typeof(WFIncident));
+                    XmlSerializer ser = new XmlSerializer(typeof(Incident));
                     using (System.Xml.XmlWriter wr = System.Xml.XmlWriter.Create(path, ws))
                     {
                         ser.Serialize(wr, CurrentIncident);
@@ -2168,18 +2169,18 @@ namespace Wildfire_ICS_Assist
 
         private async void Program_TaskUpdateChanged(TaskUpdateEventArgs e)
         {
-            Program.wfIncidentService.ProcessTaskUpdate(e.item);
+            Program.incidentDataService.ProcessTaskUpdate(e.item);
             if (Program.InternetSyncEnabled && !e.item.UploadedSuccessfully)
             {
 
-                e.item.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(e.item);
+                e.item.UploadedSuccessfully = await Program.incidentDataService.uploadTaskUpdateToServer(e.item);
 
             }
             if (Program.networkService.ThisMachineIsServer || Program.networkService.ThisMachineIsClient)
             {
                 if (!e.item.Source.EqualsWithNull("network"))
                 {
-                    Program.networkService.SendNetworkObject(e.item, CurrentIncident.TaskID);
+                    Program.networkService.SendNetworkObject(e.item, CurrentIncident.ID);
                 }
 
             }
@@ -2213,7 +2214,7 @@ namespace Wildfire_ICS_Assist
             foreach (TaskUpdate update in pendingUpdates)
             {
 
-                update.UploadedSuccessfully = await Program.wfIncidentService.uploadTaskUpdateToServer(update);
+                update.UploadedSuccessfully = await Program.incidentDataService.uploadTaskUpdateToServer(update);
 
                 addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Uploaded a pending change to a(n) " + update.ObjectType + Environment.NewLine);
 
@@ -2225,7 +2226,7 @@ namespace Wildfire_ICS_Assist
         private async Task<bool> GetPendingInternetUpdates()
         {
             TaskUpdateService service = new TaskUpdateService();
-            Task<List<TaskUpdate>> internetUpdates = service.DownloadTaskUpdateDetails(CurrentIncident.TaskID, Program.MachineID, DateTime.MinValue);
+            Task<List<TaskUpdate>> internetUpdates = service.DownloadTaskUpdateDetails(CurrentIncident.ID, Program.MachineID, DateTime.MinValue);
             List<TaskUpdate> updates = await internetUpdates;
 
             foreach (TaskUpdate update in updates)
@@ -2233,7 +2234,7 @@ namespace Wildfire_ICS_Assist
                 update.UploadedSuccessfully = true;
                 update.Source = "Internet";
                 //Program.sarTaskService.ProcessTaskUpdate(update);
-                Program.wfIncidentService.InsertIfUniqueTaskUpdate(update);
+                Program.incidentDataService.InsertIfUniqueTaskUpdate(update);
 
             }
 
@@ -2242,10 +2243,10 @@ namespace Wildfire_ICS_Assist
 
                 TaskUpdate firstUnprocessed = CurrentIncident.allTaskUpdates.First(o => !o.ProcessedLocally);
                 addToNetworkLog(DateTime.Now.ToLongTimeString() + " - Received a change to a(n) " + firstUnprocessed.ObjectType + Environment.NewLine);
-                Program.wfIncidentService.ApplyTaskUpdate(firstUnprocessed, true);
+                Program.incidentDataService.ApplyTaskUpdate(firstUnprocessed, true);
                 if (Program.networkService.ThisMachineIsClient || Program.networkService.ThisMachineIsServer)
                 {
-                    Program.networkService.SendNetworkObject(firstUnprocessed, CurrentIncident.TaskID, null, null, null, true);
+                    Program.networkService.SendNetworkObject(firstUnprocessed, CurrentIncident.ID, null, null, null, true);
                 }
             }
 
@@ -2346,7 +2347,7 @@ namespace Wildfire_ICS_Assist
                 lblNetworkSyncStatus.Text = "Beginning Network Status Check";
                 lblNetworkShareMoreInfoMsg.Visible = false;
                 pbNetworkSyncInProgress.Value = 1;
-                NetworkTestGuidValue = Program.networkService.sendTestConnection(CurrentIncident.TaskID, ip, port);
+                NetworkTestGuidValue = Program.networkService.sendTestConnection(CurrentIncident.ID, ip, port);
 
                 if (initialConnectionTest)
                 {
@@ -2363,7 +2364,7 @@ namespace Wildfire_ICS_Assist
             if (ThisMachineIsServer)
             {
                 //MessageBox.Show("Test connection from " + incomingMessage.SourceIdentifier + " received, sending reply");
-                Program.networkService.SendNetworkObject(incomingMessage.GuidValue, CurrentIncident.TaskID, "success");
+                Program.networkService.SendNetworkObject(incomingMessage.GuidValue, CurrentIncident.ID, "success");
             }
         }
 
@@ -2404,7 +2405,7 @@ namespace Wildfire_ICS_Assist
                     this.BeginInvoke((Action)delegate ()
                     {
                         incomingMessage.taskUpdate.ProcessedLocally = false;
-                        Program.wfIncidentService.ProcessTaskUpdate(incomingMessage.taskUpdate);
+                        Program.incidentDataService.ProcessTaskUpdate(incomingMessage.taskUpdate);
                     });
                 }
                 else if (incomingMessage.objectType.Equals(taskUpdateListName))
@@ -2412,16 +2413,16 @@ namespace Wildfire_ICS_Assist
                     this.BeginInvoke((Action)delegate ()
                     {
                         DateTime LastNetworkSync = Program.CurrentTask.LastNetworkTaskUpdate();
-                        if (incomingMessage.taskUpdates.Any() && incomingMessage.taskUpdates.First().TaskID == Program.CurrentTask.TaskID)
+                        if (incomingMessage.taskUpdates.Any() && incomingMessage.taskUpdates.First().TaskID == Program.CurrentTask.ID)
                         {
                             foreach (TaskUpdate tu in incomingMessage.taskUpdates)
                             {
-                                Program.wfIncidentService.ProcessTaskUpdate(tu);
+                                Program.incidentDataService.ProcessTaskUpdate(tu);
                             }
 
 
                             List<TaskUpdate> updatesToSend = Program.CurrentIncident.MostRecentTaskUpdates(true);
-                            Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.TaskID);
+                            Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.ID);
                         }
                         if (networkTaskRequested)
                         {
@@ -2503,14 +2504,14 @@ namespace Wildfire_ICS_Assist
                     {
                         List<TaskUpdate> updatesToSend = Program.CurrentIncident.MostRecentTaskUpdates(false);
                         networkTaskRequested = true;
-                        Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.TaskID);
+                        Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.ID);
 
                     }
-                    else if (initialConnectionTest && incomingMessage.TaskID == CurrentIncident.TaskID)
+                    else if (initialConnectionTest && incomingMessage.TaskID == CurrentIncident.ID)
                     {
                         List<TaskUpdate> updatesToSend = Program.CurrentIncident.MostRecentTaskUpdates(false);
                         networkTaskRequested = true;
-                        Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.TaskID);
+                        Program.networkService.SendNetworkObject(updatesToSend, Program.CurrentTask.ID);
 
                     }
                     else if (initialConnectionTest && !networkTaskRequested)
@@ -2522,7 +2523,7 @@ namespace Wildfire_ICS_Assist
                         request.RequestDate = DateTime.Now;
                         request.SourceName = HostInfo.HostName;
                         request.SourceIdentifier = NetworkComms.NetworkIdentifier;
-                        request.CurrentTaskID = Program.CurrentTask.TaskID;
+                        request.CurrentTaskID = Program.CurrentTask.ID;
                         request.LastSync = Program.CurrentTask.LastNetworkTaskUpdate();
                         request.RequestIP = Program.networkService.GetLocalIPAddress();
                         Program.networkService.SendNetworkSarTaskRequest(request);
@@ -2602,7 +2603,7 @@ namespace Wildfire_ICS_Assist
             PauseNetworkSend = false;
         }
 
-        private void replaceCurrentIncidentWithNetworkIncident(WFIncident task)
+        private void replaceCurrentIncidentWithNetworkIncident(Incident task)
         {
             if (networkTaskRequested)
             {
@@ -2615,7 +2616,7 @@ namespace Wildfire_ICS_Assist
 
                     pbNetworkSyncInProgress.Value = 3;
 
-                    if (CurrentIncident.TaskID != task.TaskID)
+                    if (CurrentIncident.ID != task.ID)
                     {
                         task.FileName = string.Empty;
                     }
@@ -2670,11 +2671,11 @@ namespace Wildfire_ICS_Assist
                     //if the device appears in the list of trusted devices, send automatically
                     if (!string.IsNullOrEmpty(requester.DeviceIP) && !string.IsNullOrEmpty(requester.DeviceName) && savedNetworkDevices.Where(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && o.TrustDevice).Any())
                     {
-                        if (incomingMessage.CurrentTaskID == Program.CurrentTask.TaskID && incomingMessage.LastSync > DateTime.MinValue)
+                        if (incomingMessage.CurrentTaskID == Program.CurrentTask.ID && incomingMessage.LastSync > DateTime.MinValue)
                         {
                             List<TaskUpdate> taskUpdates = new List<TaskUpdate>(Program.CurrentTask.allTaskUpdates.Where(o => o.LastUpdatedUTC > incomingMessage.LastSync).ToList());
                             foreach (TaskUpdate tu in taskUpdates) { tu.Source = "networksync"; }
-                            Program.networkService.SendNetworkObject(taskUpdates, Program.CurrentIncident.TaskID);
+                            Program.networkService.SendNetworkObject(taskUpdates, Program.CurrentIncident.ID);
                         }
                         else
                         {
@@ -2721,10 +2722,10 @@ namespace Wildfire_ICS_Assist
                                     }
                                 }
 
-                                if (incomingMessage.CurrentTaskID == Program.CurrentTask.TaskID && incomingMessage.LastSync > DateTime.MinValue)
+                                if (incomingMessage.CurrentTaskID == Program.CurrentTask.ID && incomingMessage.LastSync > DateTime.MinValue)
                                 {
                                     List<TaskUpdate> taskUpdates = Program.CurrentTask.allTaskUpdates.Where(o => o.LastUpdatedUTC > incomingMessage.LastSync).ToList();
-                                    Program.networkService.SendNetworkObject(taskUpdates, Program.CurrentIncident.TaskID);
+                                    Program.networkService.SendNetworkObject(taskUpdates, Program.CurrentIncident.ID);
                                 }
                                 else
                                 {
@@ -2848,54 +2849,54 @@ namespace Wildfire_ICS_Assist
                     {
                         case "Personnel":
                             Personnel p = resource as Personnel;
-                            Program.wfIncidentService.UpsertPersonnel(p);
+                            Program.incidentDataService.UpsertPersonnel(p);
                             break;
                         case "Visitor":
                             Personnel vis = resource as Personnel;
-                            Program.wfIncidentService.UpsertPersonnel(vis);
+                            Program.incidentDataService.UpsertPersonnel(vis);
                             break;
                         case "Vehicle":
                             Vehicle v = resource as Vehicle;
-                            Program.wfIncidentService.UpsertVehicle(v);
+                            Program.incidentDataService.UpsertVehicle(v);
                             break;
                         case "Equipment":
                             Vehicle ve = resource as Vehicle;
-                            Program.wfIncidentService.UpsertVehicle(ve);
+                            Program.incidentDataService.UpsertVehicle(ve);
                             break;
                         case "Crew":
                             Crew group = resource as Crew;
-                            Program.wfIncidentService.UpsertOperationalSubGroup(group);
+                            Program.incidentDataService.UpsertOperationalSubGroup(group);
                             foreach(IncidentResource subres in signInForm.SubResources)
                             {
                                 if(subres.GetType().Name.Equals("Personnel"))
                                 {
                                     subres.OpPeriod = Program.CurrentOpPeriod;
-                                    Program.wfIncidentService.UpsertPersonnel(subres as Personnel);
+                                    Program.incidentDataService.UpsertPersonnel(subres as Personnel);
                                     CheckInRecord prec = signInForm.checkInRecord.Clone();
                                     prec.ResourceID = subres.ID;
                                     prec.SignInRecordID = Guid.NewGuid();
                                     prec.ParentRecordID = record.SignInRecordID;
                                     prec.ResourceType = "Personnel";
-                                    Program.wfIncidentService.UpsertCheckInRecord(prec);
+                                    Program.incidentDataService.UpsertCheckInRecord(prec);
                                 } else if (subres.GetType().Name.Equals("Vehicle"))
                                 {
                                     Vehicle vh = subres as Vehicle;
                                     vh.OperatorName = group.ResourceName;
-                                    Program.wfIncidentService.UpsertVehicle(vh);
+                                    Program.incidentDataService.UpsertVehicle(vh);
                                     CheckInRecord vrec = signInForm.checkInRecord.Clone();
                                     vrec.ResourceID = subres.ID;
                                     vrec.SignInRecordID = Guid.NewGuid();
                                     vrec.ParentRecordID = record.SignInRecordID;
                                     if (vh.IsEquipment) { vrec.ResourceType = "Equipment"; }
                                     else { vrec.ResourceType = "Vehicle"; }
-                                    Program.wfIncidentService.UpsertCheckInRecord(vrec);
+                                    Program.incidentDataService.UpsertCheckInRecord(vrec);
                                 }
                             }
                             break;
                     }
 
                     
-                    Program.wfIncidentService.UpsertCheckInRecord(record);
+                    Program.incidentDataService.UpsertCheckInRecord(record);
 
                     autoStartNextCheckin = signInForm.AutoStartNextCheckin;
                 }
@@ -2975,14 +2976,14 @@ namespace Wildfire_ICS_Assist
                 {
                     OperationalPeriod per = Program.CurrentIncident.createOpPeriodAsNeeded(newOpNumber);
 
-                    Program.wfIncidentService.UpsertOperationalPeriod(per);
+                    Program.incidentDataService.UpsertOperationalPeriod(per);
 
                     Program.CurrentIncident.createOrgChartAsNeeded(newOpNumber);
                     Program.CurrentIncident.createObjectivesSheetAsNeeded(newOpNumber);
 
                 }
                 Program.CurrentOpPeriod = newOpNumber;
-                Program.wfIncidentService.OnOpPeriodChanged(args);
+                Program.incidentDataService.OnOpPeriodChanged(args);
 
             }
         }
@@ -3054,63 +3055,48 @@ namespace Wildfire_ICS_Assist
                     {
                         try
                         {
+                            allowAutoSave = false;
+                            using (InternetSyncForms.InternetSyncStartForm startForm = new InternetSyncForms.InternetSyncStartForm())
+                            {
+                                startForm.CreateNewSync = settings.CreateNewSync;
+                                startForm.JoinEncryptionKey = settings.JoinEncryptionKey;
+                                if (!string.IsNullOrEmpty(settings.JoinTaskID)) { startForm.JoinTaskID = new Guid(settings.JoinTaskID); }
+
+
+                                DialogResult dr = startForm.ShowDialog();
+
+                                if (dr == DialogResult.OK)
+                                {
+                                    Program.InternetSyncEnabled = true;
+                                }
+                                else { Program.InternetSyncEnabled = false; }
+                            }
                             //pnlInternetSyncStart.Visible = true;
-                            pnlInternetSyncStart.Dock = DockStyle.Fill;
-                            pnlInternetSyncStart.BringToFront();
-                            if (settings.CreateNewSync)
-                            {
-                                StartInternetSync(CurrentIncident.TaskID, CurrentIncident.TaskEncryptionKey, true);
-                            }
-                            else
-                            {
-                                Guid JoinTaskID = new Guid(settings.JoinTaskID);
-                                StartInternetSync(JoinTaskID, settings.JoinEncryptionKey, false);
-                            }
+                            //pnlInternetSyncStart.Dock = DockStyle.Fill;
+                            //pnlInternetSyncStart.BringToFront();
+
                         }
                         catch (Exception)
                         {
 
                         }
+                        finally
+                        {
+                            allowAutoSave = true;
+                            PauseNetworkSend = false;
+                        }
                     }
                     else { Program.InternetSyncEnabled = false; }
                     PauseNetworkSend = false;
                 }
-                pnlInternetSyncStart.Visible = false;
-                setServerStatusDisplay();
+
+                //pnlInternetSyncStart.Visible = false;
+
             }
+            setServerStatusDisplay();
         }
 
-        private void StartInternetSync(Guid TaskID, string EncryptionKey, bool IsNewSync)
-        {
-            //do stuff to sync the task
-            PauseNetworkSend = true;
-            if (IsNewSync)
-            {
-                Program.wfIncidentService.SendInitialTaskUpdate();
-            }
-            else
-            {
-                try
-                {
-                    TaskUpdateService service = new TaskUpdateService();
-                    if (TaskID != CurrentIncident.TaskID)
-                    {
-                        Program.wfIncidentService.LoadNewTaskFromServer(TaskID, EncryptionKey);
-                    }
-                    else
-                    {
-                        Program.wfIncidentService.ConnectToServerTask(TaskID, EncryptionKey);
-                    }
-                }
-                catch (Exception)
-                {
-
-                }
-
-            }
-            PauseNetworkSend = false;
-            Program.InternetSyncEnabled = true;
-        }
+     
 
         private void supportToolStripMenuItem_Click(object sender, EventArgs e)
         {

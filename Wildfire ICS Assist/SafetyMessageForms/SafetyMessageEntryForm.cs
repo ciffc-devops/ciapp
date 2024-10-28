@@ -31,7 +31,7 @@ namespace Wildfire_ICS_Assist
         private void SafetyMessageEntryForm_Load(object sender, EventArgs e)
         {
             BuildDataList();
-            Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
+            Program.incidentDataService.SafetyMessageChanged += Program_SafetyMessageChanged;
         }
 
         private void Program_SafetyMessageChanged(SafetyMessageEventArgs e)

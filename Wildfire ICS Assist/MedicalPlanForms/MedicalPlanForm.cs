@@ -47,11 +47,11 @@ namespace Wildfire_ICS_Assist
 
             buildRoleDropdowns();
 
-            Program.wfIncidentService.HospitalChanged += Program_HospitalChanged;
-            Program.wfIncidentService.AmbulanceServiceChanged += Program_AmbulanceChanged;
-            Program.wfIncidentService.MedicalAidStationChanged += Program_AidStationChanged;
-            Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.HospitalChanged += Program_HospitalChanged;
+            Program.incidentDataService.AmbulanceServiceChanged += Program_AmbulanceChanged;
+            Program.incidentDataService.MedicalAidStationChanged += Program_AidStationChanged;
+            Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
         }
 
@@ -155,7 +155,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = editForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertMedicalAidStation(editForm.aidStation);
+                    Program.incidentDataService.UpsertMedicalAidStation(editForm.aidStation);
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace Wildfire_ICS_Assist
                     toDelete.Add((MedicalAidStation)row.DataBoundItem);
                 }
 
-                foreach (MedicalAidStation c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertMedicalAidStation(c); }
+                foreach (MedicalAidStation c in toDelete) { c.Active = false; Program.incidentDataService.UpsertMedicalAidStation(c); }
             }
         }
 
@@ -211,7 +211,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = entryForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertAmbulance(entryForm.SelectedAmbulance);
+                    Program.incidentDataService.UpsertAmbulance(entryForm.SelectedAmbulance);
                     if (entryForm.SaveForLater)
                     {
                         Program.generalOptionsService.UpserOptionValue(entryForm.SelectedAmbulance, "Ambulance");
@@ -239,7 +239,7 @@ namespace Wildfire_ICS_Assist
 
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertAmbulance(editForm.selectedAmbulance);
+                    Program.incidentDataService.UpsertAmbulance(editForm.selectedAmbulance);
                 }
 
             }
@@ -265,7 +265,7 @@ namespace Wildfire_ICS_Assist
                     toDelete.Add((AmbulanceService)row.DataBoundItem);
                 }
 
-                foreach (AmbulanceService c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertAmbulance(c); }
+                foreach (AmbulanceService c in toDelete) { c.Active = false; Program.incidentDataService.UpsertAmbulance(c); }
             }
         }
 
@@ -314,7 +314,7 @@ namespace Wildfire_ICS_Assist
                 CurrentPlan.ApprovedByRoleID = Guid.Empty;
 
             }
-            Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);
+            Program.incidentDataService.UpsertMedicalPlan(CurrentPlan);
 
         }
 
@@ -333,7 +333,7 @@ namespace Wildfire_ICS_Assist
                 CurrentPlan.PreparedByRoleName = string.Empty;
                 CurrentPlan.PreparedByRoleID = Guid.Empty;
             }
-            Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);
+            Program.incidentDataService.UpsertMedicalPlan(CurrentPlan);
         }
 
         private void btnDeleteHospital_Click(object sender, EventArgs e)
@@ -347,7 +347,7 @@ namespace Wildfire_ICS_Assist
                     toDelete.Add((Hospital)row.DataBoundItem);
                 }
 
-                foreach (Hospital c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertHospital(c); }
+                foreach (Hospital c in toDelete) { c.Active = false; Program.incidentDataService.UpsertHospital(c); }
             }
         }
 
@@ -359,7 +359,7 @@ namespace Wildfire_ICS_Assist
                 if (dr == DialogResult.OK)
                 {
                     entryForm.selectedHospital.OpPeriod = Program.CurrentOpPeriod;
-                    Program.wfIncidentService.UpsertHospital(entryForm.selectedHospital);
+                    Program.incidentDataService.UpsertHospital(entryForm.selectedHospital);
 
                     if (entryForm.SaveForLater)
                     {
@@ -388,7 +388,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = editForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertHospital(editForm.selectedHospital);
+                    Program.incidentDataService.UpsertHospital(editForm.selectedHospital);
                 }
             }
         }
@@ -405,13 +405,13 @@ namespace Wildfire_ICS_Assist
 
         private void txtEmergencyProcedures_Leave_1(object sender, EventArgs e)
         {
-            Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);
+            Program.incidentDataService.UpsertMedicalPlan(CurrentPlan);
 
         }
 
         private void MedicalPlanForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Program.wfIncidentService.UpsertMedicalPlan(CurrentPlan);
+            Program.incidentDataService.UpsertMedicalPlan(CurrentPlan);
 
         }
 

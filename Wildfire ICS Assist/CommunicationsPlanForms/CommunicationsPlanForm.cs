@@ -29,9 +29,9 @@ namespace Wildfire_ICS_Assist
             if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
 
             BuildDataList();
-            Program.wfIncidentService.CommsPlanChanged += Program_OnCommsPlanChanged;
-            Program.wfIncidentService.CommsPlanItemChanged += Program_OnCommsPlanItemChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.CommsPlanChanged += Program_OnCommsPlanChanged;
+            Program.incidentDataService.CommsPlanItemChanged += Program_OnCommsPlanItemChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
         }
 
@@ -71,7 +71,7 @@ namespace Wildfire_ICS_Assist
                 {
                     entryForm.SelectedItem.OpPeriod = Program.CurrentOpPeriod;
                     
-                    Program.wfIncidentService.UpsertCommsPlanItem(entryForm.SelectedItem, null, "local");
+                    Program.incidentDataService.UpsertCommsPlanItem(entryForm.SelectedItem, null, "local");
 
 
                     if (entryForm.SaveForLater)
@@ -117,7 +117,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = editForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
+                    Program.incidentDataService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
 
                 }
             }
@@ -134,7 +134,7 @@ namespace Wildfire_ICS_Assist
                     toDelete.Add((CommsPlanItem)row.DataBoundItem);
                 }
 
-                foreach (CommsPlanItem c in toDelete) { c.Active = false; Program.wfIncidentService.UpsertCommsPlanItem(c); }
+                foreach (CommsPlanItem c in toDelete) { c.Active = false; Program.incidentDataService.UpsertCommsPlanItem(c); }
             }
         }
 
@@ -186,7 +186,7 @@ namespace Wildfire_ICS_Assist
                     if (prepBy != null)
                     {
                         plan.PreparedByResourceName = prepBy.IndividualName; plan.PreparedByRoleName = prepBy.RoleName;
-                        Program.wfIncidentService.UpsertCommsPlan(plan);
+                        Program.incidentDataService.UpsertCommsPlan(plan);
                     }
                 }
 

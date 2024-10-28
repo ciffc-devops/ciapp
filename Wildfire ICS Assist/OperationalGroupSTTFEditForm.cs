@@ -38,7 +38,7 @@ namespace Wildfire_ICS_Assist
             PopulateReportsTo();
             PopulateLeader();
             LoadGroup();
-            Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            Program.incidentDataService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
             txtIdentifier.Focus();
         }
 

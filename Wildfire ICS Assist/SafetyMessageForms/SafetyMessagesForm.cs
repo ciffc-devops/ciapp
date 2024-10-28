@@ -25,9 +25,9 @@ namespace Wildfire_ICS_Assist
         {
             if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
             BuildDataList();
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
-            Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
+            Program.incidentDataService.SafetyMessageChanged += Program_SafetyMessageChanged;
         }
 
         private void Program_SafetyMessageChanged(SafetyMessageEventArgs e)
@@ -60,7 +60,7 @@ namespace Wildfire_ICS_Assist
                     entryForm.selectedMessage.ApprovedByResourceName = Program.CurrentRole.IndividualName;
                     entryForm.selectedMessage.ApprovedByRoleID = Program.CurrentRole.RoleID; 
                     entryForm.selectedMessage.ApprovedByRoleName = Program.CurrentRole.RoleName;
-                    Program.wfIncidentService.UpsertSafetyMessage(entryForm.selectedMessage);
+                    Program.incidentDataService.UpsertSafetyMessage(entryForm.selectedMessage);
 
                     if (entryForm.SaveForLater)
                     {
@@ -83,7 +83,7 @@ namespace Wildfire_ICS_Assist
                     editForm.selectedMessage.ApprovedByResourceName = Program.CurrentRole.IndividualName;
                     editForm.selectedMessage.ApprovedByRoleID = Program.CurrentRole.RoleID;
                     editForm.selectedMessage.ApprovedByRoleName = Program.CurrentRole.RoleName;
-                    Program.wfIncidentService.UpsertSafetyMessage(editForm.selectedMessage);
+                    Program.incidentDataService.UpsertSafetyMessage(editForm.selectedMessage);
                 }
             }
         }
@@ -113,7 +113,7 @@ namespace Wildfire_ICS_Assist
                     foreach (SafetyMessage sm in list)
                     {
                         sm.Active = false;
-                        Program.wfIncidentService.UpsertSafetyMessage(sm);
+                        Program.incidentDataService.UpsertSafetyMessage(sm);
 
                     }
                 }

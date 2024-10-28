@@ -38,8 +38,8 @@ namespace Wildfire_ICS_Assist
 
             dgvLog.AutoGenerateColumns = false;
             BuildMessageList();
-            Program.wfIncidentService.GeneralMessageChanged += Program_GeneralMessageChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OpPeriodChanged;
+            Program.incidentDataService.GeneralMessageChanged += Program_GeneralMessageChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
         }
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
@@ -74,7 +74,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = editForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertGeneralMessage(editForm.generalMessage);
+                    Program.incidentDataService.UpsertGeneralMessage(editForm.generalMessage);
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace Wildfire_ICS_Assist
 
                     }
 
-                    foreach (GeneralMessage gm in toDelete) { gm.Active = false; Program.wfIncidentService.UpsertGeneralMessage(gm); }
+                    foreach (GeneralMessage gm in toDelete) { gm.Active = false; Program.incidentDataService.UpsertGeneralMessage(gm); }
                 }
             }
         }

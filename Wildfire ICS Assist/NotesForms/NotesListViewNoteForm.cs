@@ -27,7 +27,7 @@ namespace Wildfire_ICS_Assist
         {
             rtxtNoteTExt.Text = CurrentNote.NoteText;
             this.Text = CurrentNote.NoteTitle;
-            Program.wfIncidentService.NoteChanged += Program_NoteChanged;
+            Program.incidentDataService.NoteChanged += Program_NoteChanged;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace Wildfire_ICS_Assist
 
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertNote(editNote.CurrentNote);
+                    Program.incidentDataService.UpsertNote(editNote.CurrentNote);
                 }
             }
         }

@@ -52,16 +52,16 @@ namespace Wildfire_ICS_Assist
             BuildSafetyPlanList();
             BuildSummaryStats();
 
-            Program.wfIncidentService.MemberSignInChanged += Program_CheckInChanged;
-            Program.wfIncidentService.VehicleChanged += Program_VehicleChanged;
-            Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
-            Program.wfIncidentService.OpPeriodChanged += Program_OperationalPeriodChanged;
+            Program.incidentDataService.MemberSignInChanged += Program_CheckInChanged;
+            Program.incidentDataService.VehicleChanged += Program_VehicleChanged;
+            Program.incidentDataService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged;
+            Program.incidentDataService.CurrentOpPeriodChanged += Program_OperationalPeriodChanged;
 
-            Program.wfIncidentService.OrganizationalChartChanged += Program_OrgChartChanged;
-            Program.wfIncidentService.ICSRoleChanged += Program_ICSRoleChanged;
-            Program.wfIncidentService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
-            Program.wfIncidentService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
-            Program.wfIncidentService.SafetyMessageChanged += Program_SafetyMessageChanged;
+            Program.incidentDataService.OrganizationalChartChanged += Program_OrgChartChanged;
+            Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
+            Program.incidentDataService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
+            Program.incidentDataService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;
+            Program.incidentDataService.SafetyMessageChanged += Program_SafetyMessageChanged;
 
         }
 
@@ -148,12 +148,12 @@ namespace Wildfire_ICS_Assist
 
         private void datOpsStart_Leave(object sender, EventArgs e)
         {
-            NextOpPeriod.PeriodStart = datOpsStart.Value; Program.wfIncidentService.UpsertOperationalPeriod(NextOpPeriod);
+            NextOpPeriod.PeriodStart = datOpsStart.Value; Program.incidentDataService.UpsertOperationalPeriod(NextOpPeriod);
         }
 
         private void datOpsEnd_Leave(object sender, EventArgs e)
         {
-            NextOpPeriod.PeriodEnd = datOpsEnd.Value; Program.wfIncidentService.UpsertOperationalPeriod(NextOpPeriod);
+            NextOpPeriod.PeriodEnd = datOpsEnd.Value; Program.incidentDataService.UpsertOperationalPeriod(NextOpPeriod);
         }
 
         #region Resources
@@ -365,7 +365,7 @@ namespace Wildfire_ICS_Assist
             }
 
             currentNextOp.OpPeriod = -99; currentNextOp.Active = false;
-            Program.wfIncidentService.UpsertOrganizationalChart(currentNextOp);
+            Program.incidentDataService.UpsertOrganizationalChart(currentNextOp);
             newCopy.CreateOpGroupsForOrgRoles(Program.CurrentIncident);
 
             if (chkCopyOrgAssignments.Checked)
@@ -391,7 +391,7 @@ namespace Wildfire_ICS_Assist
                 ICSRole first = newCopy.AllRoles.First(o => o.IndividualID == Guid.Empty && !string.IsNullOrEmpty(o.IndividualName));
             }
 
-            Program.wfIncidentService.UpsertOrganizationalChart(newCopy);
+            Program.incidentDataService.UpsertOrganizationalChart(newCopy);
             PopulateOrgChart(NextOp, treeOrgChart2);
 
         }
@@ -425,7 +425,7 @@ namespace Wildfire_ICS_Assist
 
 
                     savedObjective.CopyNextOpText = "Copied";
-                    Program.wfIncidentService.UpsertIncidentObjective(newObjective);
+                    Program.incidentDataService.UpsertIncidentObjective(newObjective);
 
                 }
             }
@@ -440,7 +440,7 @@ namespace Wildfire_ICS_Assist
                 {
                     IncidentObjective savedObjective = Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.First(o => o.ObjectiveID == objective.ObjectiveID);
                     savedObjective.Completed = objective.Completed;
-                    Program.wfIncidentService.UpsertIncidentObjective(savedObjective);
+                    Program.incidentDataService.UpsertIncidentObjective(savedObjective);
                 }
             }
         }
@@ -471,7 +471,7 @@ namespace Wildfire_ICS_Assist
 
 
                     saved.CopyNextOpText = "Copied";
-                    Program.wfIncidentService.UpsertSafetyMessage(newitem);
+                    Program.incidentDataService.UpsertSafetyMessage(newitem);
 
                 }
                 else
@@ -503,7 +503,7 @@ namespace Wildfire_ICS_Assist
                     CommsPlanItem newItem = item.Clone();
                     newItem.OpPeriod = NextOp;
                     newItem.ItemID = Guid.NewGuid();
-                    Program.wfIncidentService.UpsertCommsPlanItem(newItem);
+                    Program.incidentDataService.UpsertCommsPlanItem(newItem);
                     itemsAdded++;
                 }
             }
@@ -524,7 +524,7 @@ namespace Wildfire_ICS_Assist
             MedicalPlan next = Program.CurrentIncident.allMedicalPlans.First(o => o.OpPeriod == NextOp);
 
             next.EmergencyProcedures = current.EmergencyProcedures;
-            Program.wfIncidentService.UpsertMedicalPlan(next);
+            Program.incidentDataService.UpsertMedicalPlan(next);
 
             foreach (Hospital h in current.Hospitals)
             {
@@ -567,7 +567,7 @@ namespace Wildfire_ICS_Assist
 
             next.notam = current.notam.Clone();
 
-            Program.wfIncidentService.UpsertAirOperationsSummary(next);
+            Program.incidentDataService.UpsertAirOperationsSummary(next);
             lblAirOpsCopyStatus.Text = "Added " + aircraftAdded + " aircraft + NOTAM and general items";
         }
 
@@ -602,7 +602,7 @@ namespace Wildfire_ICS_Assist
                 {
                     OperationalPeriod per = Program.CurrentIncident.createOpPeriodAsNeeded(newOpNumber);
 
-                    Program.wfIncidentService.UpsertOperationalPeriod(per);
+                    Program.incidentDataService.UpsertOperationalPeriod(per);
 
                     Program.CurrentIncident.createOrgChartAsNeeded(newOpNumber);
                     Program.CurrentIncident.createObjectivesSheetAsNeeded(newOpNumber);
@@ -668,7 +668,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = demobForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertDemobRecord(demob);
+                    Program.incidentDataService.UpsertDemobRecord(demob);
                 }
             }
 

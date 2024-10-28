@@ -73,7 +73,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void StrikeTeamTaskForceDetailsControl_Load(object sender, EventArgs e)
         {
             LoadOpGroup();
-            if (Program.wfIncidentService != null) { Program.wfIncidentService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged; }
+            if (Program.incidentDataService != null) { Program.incidentDataService.OperationalSubGroupChanged += Program_OperationalSubGroupChanged; }
 
         }
 
@@ -151,7 +151,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                         
                     }
                 }
-                Program.wfIncidentService.UpsertOperationalGroup(selectedGroup);
+                Program.incidentDataService.UpsertOperationalGroup(selectedGroup);
             }
         }
 

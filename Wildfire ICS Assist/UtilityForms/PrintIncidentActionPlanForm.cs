@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist
 {
     public partial class PrintIncidentForm : BaseForm
     {
-        private WFIncident CurrentIncident { get => Program.CurrentIncident; }
+        private Incident CurrentIncident { get => Program.CurrentIncident; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
         public bool PrintIncidentToDate { get; set; } = false;
         public bool PrintIAPByDefault { get; set; } = false;
@@ -539,14 +539,14 @@ namespace Wildfire_ICS_Assist
                 {
                     CurrentIncident.IncidentTitleImageBytes = string.Empty;
                     TaskBasics basics = new TaskBasics(CurrentIncident);
-                    Program.wfIncidentService.UpdateTaskBasics(basics, "local");
+                    Program.incidentDataService.UpdateTaskBasics(basics, "local");
                     picTitleImage.Image = null;
                 }
                 else
                 {
                     OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
                     period.TitleImageBytes = string.Empty;
-                    Program.wfIncidentService.UpsertOperationalPeriod(period);
+                    Program.incidentDataService.UpsertOperationalPeriod(period);
                     picTitleImage.Image = null;
 
                 }
@@ -607,14 +607,14 @@ namespace Wildfire_ICS_Assist
                     {
                         CurrentIncident.IncidentTitleImageBytes = newImage.BytesStringFromImage();
                         TaskBasics basics = new TaskBasics(CurrentIncident);
-                        Program.wfIncidentService.UpdateTaskBasics(basics, "local");
+                        Program.incidentDataService.UpdateTaskBasics(basics, "local");
 
                     }
                     else
                     {
                         OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
                         period.TitleImageBytes = newImage.BytesStringFromImage();
-                        Program.wfIncidentService.UpsertOperationalPeriod(period);
+                        Program.incidentDataService.UpsertOperationalPeriod(period);
                     }
                     picTitleImage.Image = newImage;
 
@@ -644,7 +644,7 @@ namespace Wildfire_ICS_Assist
             if (period.CriticalMessage == null || !period.CriticalMessage.Equals(txtCriticalMessage.Text))
             {
                 period.CriticalMessage = txtCriticalMessage.Text;
-                Program.wfIncidentService.UpsertOperationalPeriod(period);
+                Program.incidentDataService.UpsertOperationalPeriod(period);
 
             }
 
@@ -691,7 +691,7 @@ namespace Wildfire_ICS_Assist
             if (period.CriticalMessage == null || !period.CriticalMessage.Equals(txtCriticalMessage.Text))
             {
                 period.CriticalMessage = txtCriticalMessage.Text;
-                Program.wfIncidentService.UpsertOperationalPeriod(period);
+                Program.incidentDataService.UpsertOperationalPeriod(period);
 
             }
         }

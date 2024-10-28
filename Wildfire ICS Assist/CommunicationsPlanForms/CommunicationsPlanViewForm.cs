@@ -51,7 +51,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = editForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.wfIncidentService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
+                    Program.incidentDataService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
 
                 }
             }
@@ -59,7 +59,7 @@ namespace Wildfire_ICS_Assist
 
         private void CommunicationsPlanViewForm_Load(object sender, EventArgs e)
         {
-            Program.wfIncidentService.CommsPlanItemChanged += Program_OnCommsPlanItemChanged;
+            Program.incidentDataService.CommsPlanItemChanged += Program_OnCommsPlanItemChanged;
         }
 
         private void Program_OnCommsPlanItemChanged(CommsPlanItemEventArgs e)

@@ -237,9 +237,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     if (accomCol >= 0 && accomCol < fields.Length)
                     {
                         string xlAccom = fields[accomCol];
-                        if (xlAccom != null && (xlAccom.Contains("female") || xlAccom.Contains("woman"))) { p.AccomodationPreference = "Female-Only"; }
-                        else if (xlAccom != null && (xlAccom.Contains("male") || xlAccom.Contains("man"))) { p.AccomodationPreference = "Male-Only"; }
-                        else { p.AccomodationPreference = "Not Gender-Restricted"; }
+                        if (xlAccom != null && (xlAccom.Contains("female") || xlAccom.Contains("woman"))) { p.AccommodationPreference = "Female-Only"; }
+                        else if (xlAccom != null && (xlAccom.Contains("male") || xlAccom.Contains("man"))) { p.AccommodationPreference = "Male-Only"; }
+                        else { p.AccommodationPreference = "Not Gender-Restricted"; }
                     }
 
                     if (provCol >= 0 && provCol < fields.Length)
@@ -329,7 +329,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         dup.FirstName = member.FirstName;
                         dup.MiddleInitial = member.MiddleInitial;
                         dup.Pronouns = member.Pronouns;
-                        dup.AccomodationPreference = member.AccomodationPreference;
+                        dup.AccommodationPreference = member.AccommodationPreference;
                         dup.HomeCountry = member.HomeCountry;
                         dup.HomeProvinceID = member.HomeProvinceID;
                         dup.Agency = member.Agency;

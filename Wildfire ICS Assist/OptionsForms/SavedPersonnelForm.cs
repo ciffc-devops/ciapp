@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     if(Program.CurrentIncident.IncidentPersonnel.Any(o=>o.ID == editForm.selectedMember.ID))
                     {
                         editForm.selectedMember.UniqueIDNum = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == editForm.selectedMember.ID).UniqueIDNum;
-                        Program.wfIncidentService.UpsertPersonnel(editForm.selectedMember.Clone());
+                        Program.incidentDataService.UpsertPersonnel(editForm.selectedMember.Clone());
 
                     }
 
