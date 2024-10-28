@@ -128,6 +128,7 @@
     <Compile Include="Interfaces\IEquipmentService.cs" />
     <Compile Include="Interfaces\IFileAccessServices.cs" />
     <Compile Include="Interfaces\IGeneralOptionsService.cs" />
+    <Compile Include="Interfaces\ILogService.cs" />
     <Compile Include="Interfaces\IPDFExportService.cs" />
     <Compile Include="Interfaces\IPositionLogService.cs" />
     <Compile Include="Interfaces\ITaskUpdateService.cs" />
