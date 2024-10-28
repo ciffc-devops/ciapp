@@ -7,30 +7,26 @@ using System.Threading.Tasks;
 namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
-    public class Timeline : ICloneable
+    public class Timeline : SyncableItem, ICloneable
     {
-        [ProtoMember(1)] private Guid _TimelineID;
         [ProtoMember(2)] private string _TimelineName;
         [ProtoMember(3)] private string _RelatedToSubject;
         [ProtoMember(4)] private DateTime _DateCreated;
         [ProtoMember(5)] private DateTime _DateUpdated;
         [ProtoMember(6)] private List<TimelineEvent> _AllTimelineEvents;
-        [ProtoMember(7)] private DateTime _LastUpdatedUTC;
-        public Guid TimeLineID { get => _TimelineID; set => _TimelineID = value; }
         public string TimelineName { get => _TimelineName; set => _TimelineName = value; }
         public string RelatedToSubject { get => _RelatedToSubject; set => _RelatedToSubject = value; }
         public DateTime DateCreated { get => _DateCreated; set => _DateCreated = value; }
-        public DateTime DateUpdated { get => _DateUpdated; set { _DateUpdated = value; _LastUpdatedUTC = value.ToUniversalTime(); } }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set { _LastUpdatedUTC = value; } }
+        public DateTime DateUpdated { get => _DateUpdated; set { _DateUpdated = value; LastUpdatedUTC = value.ToUniversalTime(); } }
         public List<TimelineEvent> AllTimelineEvents { get => _AllTimelineEvents; set => _AllTimelineEvents = value; }
 
         public Timeline()
         {
-            TimeLineID = Guid.NewGuid();
+            ID = Guid.NewGuid();
             _AllTimelineEvents = new List<TimelineEvent>();
         }
 
-        public Timeline Clone()
+        public new Timeline Clone()
         {
             Timeline cloneTo = this.MemberwiseClone() as Timeline;
             cloneTo.AllTimelineEvents = new List<TimelineEvent>();

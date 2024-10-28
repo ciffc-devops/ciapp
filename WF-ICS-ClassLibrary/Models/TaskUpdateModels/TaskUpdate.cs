@@ -44,7 +44,7 @@ namespace WF_ICS_ClassLibrary.Models
     [XmlInclude(typeof(MedicalPlan))]
     [XmlInclude(typeof(MedicalAidStation))]
     [XmlInclude(typeof(SafetyMessage))]
-    [XmlInclude(typeof(WFIncident))]
+    [XmlInclude(typeof(Incident))]
     [XmlInclude(typeof(OperationalGroup))]
     [XmlInclude(typeof(Crew))]
     [XmlInclude(typeof(ResourceReplacementPlan))]
@@ -58,7 +58,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(2)] private Guid _TaskID;
         [ProtoMember(3)] private DateTime _LastUpdatedUTC;
         [ProtoMember(4)] private string _CommandName;
-        [ProtoIgnore] private object _Data;
+        [ProtoIgnore] private SyncableItem _Data;
         [ProtoMember(6)] private bool _ProcessedLocally;
         [ProtoMember(7)] private bool _UploadedSuccessfully;
         [ProtoMember(8)] private Guid _MachineID;
@@ -67,14 +67,20 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(11)] private string _DataAsJSONString;
         [ProtoMember(12)] private string _Source;
         [ProtoMember(13)] private Guid _ItemID;
+        [ProtoMember(14)] private string _CreatedByRoleName;
+        [ProtoMember(15)] private int _SoftwareVersionMajor;
+        [ProtoMember(16)] private int _SoftwareVersionMinor;
+        [ProtoMember(17)] private int _SoftwareVersionBuild;
 
         public TaskUpdate() { UpdateID = System.Guid.NewGuid(); }
 
         public Guid UpdateID { get => _UpdateID; set => _UpdateID = value; }
         public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+        public DateTime LastUpdateLocal { get => LastUpdatedUTC.ToLocalTime(); }
+
         public string CommandName { get => _CommandName; set => _CommandName = value; }
-        public object Data
+        public SyncableItem Data
         {
             get
             {
@@ -83,26 +89,26 @@ namespace WF_ICS_ClassLibrary.Models
                 {
                     try
                     {
-                        _Data = CompressionUtilities.Decompress(_DataAsJSONString);
+                        _DataAsJSONString = CompressionUtilities.Decompress(_DataAsJSONString);
+
                         _Data = _DataAsJSONString.ObjectFromJSONData(ObjectType);
                     }
                     catch (Exception) { _Data = null; }
+
                 }
-               
                 return _Data;
             }
 
-            set
+            set { _Data = value; }
+        }
+        public string DataAsJSON
+        {
+            get
             {
-                _Data = value; if (value != null)
-                {
-                    //_DataAsXMLString = value.XmlSerializeToString();
-                    _DataAsJSONString = JsonConvert.SerializeObject(value);
-                    int len = _DataAsJSONString.Length;
-                    _DataAsJSONString = CompressionUtilities.Compress(_DataAsJSONString);
-                    int len2 = _DataAsJSONString.Length;
-                }
+                //if (string.IsNullOrEmpty(_DataAsJSONString) && Data != null) { SerializeDataAsJSON(); }
+                return _DataAsJSONString;
             }
+            set { _DataAsJSONString = value; }
         }
         public bool ProcessedLocally { get => _ProcessedLocally; set => _ProcessedLocally = value; }
         public bool UploadedSuccessfully { get => _UploadedSuccessfully; set => _UploadedSuccessfully = value; }
@@ -110,6 +116,8 @@ namespace WF_ICS_ClassLibrary.Models
         public string ObjectType { get => _ObjectType; set => _ObjectType = value; }
         public string DataEnc { get => _DataEnc; set => _DataEnc = value; }
         public string Source { get => _Source; set => _Source = value; }
+        public string CreatedByRoleName { get => _CreatedByRoleName; set => _CreatedByRoleName = value; }
+
         public void SetEncData(string key)
         {
             DataEnc = StringCipher.Encrypt(_DataAsJSONString, key);
@@ -118,11 +126,20 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (_ItemID == Guid.Empty) { _ItemID = this.GetItemID(); }
+                try
+                {
+                    if (Data != null) { ItemID = ((SyncableItem)Data).ID; }
+
+                }
+                catch { ItemID = Guid.Empty; }
                 return _ItemID;
             }
             set { _ItemID = value; }
         }
+
+        public int SoftwareVersionMajor { get => _SoftwareVersionMajor; set => _SoftwareVersionMajor = value; }
+        public int SoftwareVersionMinor { get => _SoftwareVersionMinor; set => _SoftwareVersionMinor = value; }
+        public int SoftwareVersionBuild { get => _SoftwareVersionBuild; set => _SoftwareVersionBuild = value; }
 
         public TaskUpdate Clone()
         {

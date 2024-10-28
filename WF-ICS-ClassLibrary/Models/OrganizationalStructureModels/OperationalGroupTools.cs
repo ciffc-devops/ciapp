@@ -117,7 +117,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public static List<IncidentResource> GetUncommittedResources(this WFIncident incident, int OpPeriod)
+        public static List<IncidentResource> GetUncommittedResources(this Incident incident, int OpPeriod)
         {
             List<IncidentResource> resources = new List<IncidentResource>();
             OperationalPeriod op = incident.AllOperationalPeriods.First(o=>o.PeriodNumber == OpPeriod);
@@ -152,7 +152,7 @@ namespace WF_ICS_ClassLibrary.Models
             return resources;
         }
 
-        public static bool GetIsResourceCurrentlyAssigned(this WFIncident incident, int OpPeriod, Guid ResourceID)
+        public static bool GetIsResourceCurrentlyAssigned(this Incident incident, int OpPeriod, Guid ResourceID)
         {
             if (ResourceID == Guid.Empty) { return false; }
             if (incident.ActiveOperationalSubGroups.Any(o => o.ActiveResourceListing.Count(r => r.ResourceID == ResourceID) > 0 && o.OpPeriod == OpPeriod)) { return true; }
@@ -162,7 +162,7 @@ namespace WF_ICS_ClassLibrary.Models
             return false;
         }
 
-        public static void UpdateOperationalGroupCounts(this WFIncident incident, int OpPeriod)
+        public static void UpdateOperationalGroupCounts(this Incident incident, int OpPeriod)
         {
             incident.SetOpGroupDepths(OpPeriod);
             foreach (Crew sub in incident.AllOperationalSubGroups)
@@ -175,7 +175,7 @@ namespace WF_ICS_ClassLibrary.Models
             }
         }
 
-        public static void UpdateThisGroupCount(this WFIncident incident, OperationalGroup grp)
+        public static void UpdateThisGroupCount(this Incident incident, OperationalGroup grp)
         {
             grp.NumberOfPeople = grp.ActiveResourceListing.Sum(o => o.NumberOfPeople);
             grp.NumberOfPeople += incident.ActiveOperationalSubGroups.Where(o => o.OperationalGroupID == grp.ID).Sum(o => o.NumberOfPeople);
@@ -185,14 +185,14 @@ namespace WF_ICS_ClassLibrary.Models
             grp.NumberOfVehicles += incident.ActiveOperationalSubGroups.Where(o => o.OperationalGroupID == grp.ID).Sum(o => o.NumberOfVehicles);
             grp.NumberOfVehicles += incident.ActiveOperationalGroups.Where(o => o.ParentID == grp.LeaderICSRoleID).Sum(o => o.NumberOfVehicles);
         }
-        public static void UpdateThisGroupCount(this WFIncident incident, Crew sub)
+        public static void UpdateThisGroupCount(this Incident incident, Crew sub)
         {
             sub.NumberOfPeople = sub.ActiveResourceListing.Count(o => (o.ResourceType.Equals("Personnel") || o.ResourceType.Equals("Operator")));
             sub.NumberOfVehicles = sub.ActiveResourceListing.Count(o => (o.ResourceType.Equals("Vehicle") || o.ResourceType.Equals("Equipment")));
 
         }
 
-        public static List<IncidentResource> GetReportingResources(this WFIncident incident, Guid OpGroupID, bool expandSubResources = false)
+        public static List<IncidentResource> GetReportingResources(this Incident incident, Guid OpGroupID, bool expandSubResources = false)
         {
 
             List<IncidentResource> resources = new List<IncidentResource>();
@@ -214,7 +214,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public static ICSRole GetICSRoleByOpGroupID(this WFIncident incident, Guid OpGroupID)
+        public static ICSRole GetICSRoleByOpGroupID(this Incident incident, Guid OpGroupID)
         {
             if (incident.ActiveOperationalGroups.Any(o => o.ID == OpGroupID))
             {
@@ -227,14 +227,14 @@ namespace WF_ICS_ClassLibrary.Models
             }
             return null;
         }
-        public static OperationalGroup GetOpGroupByID(this WFIncident incident, Guid OpGroupID)
+        public static OperationalGroup GetOpGroupByID(this Incident incident, Guid OpGroupID)
         {
             if (incident.ActiveOperationalGroups.Any(o => o.ID == OpGroupID)) { return incident.ActiveOperationalGroups.First(o => o.ID == OpGroupID); }
             return null;
         }
 
 
-        public static void SetOpGroupDepths(this WFIncident incident, int OpPeriod)
+        public static void SetOpGroupDepths(this Incident incident, int OpPeriod)
         {
             foreach (OperationalGroup grp in incident.ActiveOperationalGroups.Where(o => o.OpPeriod == OpPeriod))
             {
@@ -243,7 +243,7 @@ namespace WF_ICS_ClassLibrary.Models
             }
         }
 
-        public static int GetOpGroupDepth(this OperationalGroup group, WFIncident incident)
+        public static int GetOpGroupDepth(this OperationalGroup group, Incident incident)
         {
             int depth = 1;
             if (group.ParentID == Globals.OpsChiefID) { depth = 1; }

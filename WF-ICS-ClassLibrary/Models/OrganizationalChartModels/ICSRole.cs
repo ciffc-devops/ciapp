@@ -7,7 +7,7 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class ICSRole : ICloneable
+    public class ICSRole : SyncableItem, ICloneable
     {
         [ProtoMember(1)] private Guid _RoleID;
         [ProtoMember(2)] private string _RoleName;
@@ -16,8 +16,6 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(5)] private Guid _OrganizationalChartID;
         [ProtoMember(6)] private Guid _OrgChartRoleID;
         //[ProtoMember(7)] private Personnel _teamMember;
-        [ProtoMember(8)] private DateTime _LastUpdatedUTC;
-        [ProtoMember(9)] private int _OpPeriod;
         [ProtoMember(10)] private Guid _SectionID;
         [ProtoMember(11)] private string _ReportsToRoleName;
         [ProtoMember(12)] private int _ManualSortOrder;
@@ -27,7 +25,6 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(16)] private string _Mnemonic;
         [ProtoMember(17)] private bool _IncludeReportsToInName;
         [ProtoMember(18)] private string _BaseRoleName;
-        [ProtoMember(19)] private bool _Active;
 
 
         [ProtoMember(22)] private Guid _OperationalGroupID;
@@ -104,12 +101,10 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid OrganizationalChartID { get => _OrganizationalChartID; set => _OrganizationalChartID = value; }
 
         public Guid OrgChartRoleID { get => _OrgChartRoleID; set => _OrgChartRoleID = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public string ReportsToRoleName { get => _ReportsToRoleName; set => _ReportsToRoleName = value; }
         public int ManualSortOrder { get => _ManualSortOrder; set => _ManualSortOrder = value; }
         public bool IncludeReportsToInName { get => _IncludeReportsToInName; set => _IncludeReportsToInName = value; }
         public string BaseRoleName { get => _BaseRoleName; set => _BaseRoleName = value; }
-        public bool Active { get => _Active; set => _Active = value; }
         public bool IsPlaceholder { get => _IsPlaceholder; set => _IsPlaceholder = value; }
         public bool IsTFST
         {
@@ -182,7 +177,6 @@ namespace WF_ICS_ClassLibrary.Models
 
 
 
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public int Depth { get => _Depth; set => _Depth = value; }
 
         public string RoleDescription { get => _RoleDescription; set => _RoleDescription = value; }

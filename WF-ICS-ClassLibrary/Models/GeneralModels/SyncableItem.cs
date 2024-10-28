@@ -20,8 +20,9 @@ namespace WF_ICS_ClassLibrary.Models
 
         public Guid ID { get { return _ID; } set => _ID = value; }
         public bool Active { get => _Active; set => _Active = value; }
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
+        public virtual int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+        public string ItemDescription { get => this.GetType().Name; }
 
 
         public SyncableItem() { ID = Guid.NewGuid(); LastUpdatedUTC = DateTime.UtcNow; Active = true; }

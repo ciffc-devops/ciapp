@@ -6,7 +6,7 @@ namespace WF_ICS_ClassLibrary.Models
 {
     public static class SummaryStatTools
     {
-        public static List<SummaryStat> GetSummaryPersonHours(this WFIncident incident, int OpPeriod)
+        public static List<SummaryStat> GetSummaryPersonHours(this Incident incident, int OpPeriod)
         {
             List<SummaryStat> stats = new List<SummaryStat>();
             OperationalPeriod period = incident.AllOperationalPeriods.First(o=>o.PeriodNumber == OpPeriod); 
@@ -54,7 +54,7 @@ namespace WF_ICS_ClassLibrary.Models
             return hours;
         }
 
-        public static List<SummaryStat> GetSummaryPersonnelPerSection(this WFIncident incident, int OpPeriod)
+        public static List<SummaryStat> GetSummaryPersonnelPerSection(this Incident incident, int OpPeriod)
         {
             List<SummaryStat> stats = new List<SummaryStat>();
 
@@ -86,7 +86,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         }
 
-        public static List<SummaryStat> GetSummaryResourceCounts(this WFIncident incident, int opPeriod)
+        public static List<SummaryStat> GetSummaryResourceCounts(this Incident incident, int opPeriod)
         {
             List<SummaryStat> stats = new List<SummaryStat>();
 

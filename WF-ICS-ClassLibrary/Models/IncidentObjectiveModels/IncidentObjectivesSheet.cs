@@ -13,7 +13,7 @@ namespace WF_ICS_ClassLibrary.Models
     {
         [ProtoMember(4)] private string _FireSize;
         [ProtoMember(5)] private string _FireStatus;
-        [ProtoMember(6)] private string _WeatherForcast;
+        [ProtoMember(6)] private string _WeatherForecast;
         [ProtoMember(7)] private string _GeneralSafety;
 
         [ProtoMember(12)] private List<IncidentObjective> _Objectives;
@@ -23,7 +23,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid SheetID { get => ID; set { ID = value; } }
         public string FireSize { get => _FireSize; set => _FireSize = value; }
         public string FireStatus { get => _FireStatus; set => _FireStatus = value; }
-        public string WeatherForcast { get => _WeatherForcast; set => _WeatherForcast = value; }
+        public string WeatherForecast { get => _WeatherForecast; set => _WeatherForecast = value; }
         public string GeneralSafety { get => _GeneralSafety; set => _GeneralSafety = value; }
 
 

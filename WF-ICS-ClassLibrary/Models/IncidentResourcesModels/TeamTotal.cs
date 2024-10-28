@@ -18,7 +18,7 @@ namespace WF_ICS_ClassLibrary.Models
             TeamName = name; MemberCount = 0;
         }
 
-        public List<TeamTotal> getTeamTotals(WFIncident task, int CurrentOpPeriod)
+        public List<TeamTotal> getTeamTotals(Incident task, int CurrentOpPeriod)
         {
             List<TeamTotal> teamTotals = new List<TeamTotal>();
             List<MemberStatus> allStatuses = task.getAllMemberStatus(CurrentOpPeriod, DateTime.MinValue);

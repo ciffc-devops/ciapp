@@ -31,7 +31,7 @@ namespace WF_ICS_ClassLibrary.Models
 
             return kinds;
         }
-        public static string ExportSignInRecordsToCSV(this WFIncident incident, List<MemberStatus> records, string delimiter = ",")
+        public static string ExportSignInRecordsToCSV(this Incident incident, List<MemberStatus> records, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();
             //header row
@@ -80,7 +80,7 @@ namespace WF_ICS_ClassLibrary.Models
             return csv.ToString();
         }
 
-        public static List<AgencyPersonnelCount> GetAgencyPersonnelCount(this WFIncident incident, int OpPeriod)
+        public static List<AgencyPersonnelCount> GetAgencyPersonnelCount(this Incident incident, int OpPeriod)
         {
             List<AgencyPersonnelCount> counts = new List<AgencyPersonnelCount>();
 
@@ -139,7 +139,7 @@ namespace WF_ICS_ClassLibrary.Models
                 csv.Append("\""); csv.Append(item.Kind.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
                 csv.Append("\""); csv.Append(item.Type.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
 
-                csv.Append("\""); csv.Append(item.AccomodationPreference.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
+                csv.Append("\""); csv.Append(item.AccommodationPreference.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter);
 
                 if (item.HomeProvinceID != Guid.Empty) { Province p = new Province(item.HomeProvinceID); csv.Append("\""); csv.Append(p.ProvinceName.EscapeQuotes()); csv.Append("\""); csv.Append(delimiter); }
                 else { csv.Append("\"");  csv.Append("\""); csv.Append(delimiter); }

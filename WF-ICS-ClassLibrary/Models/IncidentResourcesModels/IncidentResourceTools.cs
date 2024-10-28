@@ -5,7 +5,7 @@ namespace WF_ICS_ClassLibrary.Models
 {
     public static class IncidentResourceTools
     {
-        public static List<IncidentResource> GetAllResources(this WFIncident incident, int OpPeriod)
+        public static List<IncidentResource> GetAllResources(this Incident incident, int OpPeriod)
         {
             List<IncidentResource> resources = new List<IncidentResource>();
             resources.AddRange(incident.GetCurrentlySignedInPersonnel(OpPeriod));

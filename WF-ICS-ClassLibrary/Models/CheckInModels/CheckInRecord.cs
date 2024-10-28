@@ -8,19 +8,15 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class CheckInRecord : ICloneable
+    public class CheckInRecord : SyncableItem, ICloneable
     {
         [ProtoMember(1)] private DateTime _CheckInDate;
         [ProtoMember(2)] private DateTime _CheckOutDate;
-        [ProtoMember(3)] private Guid _SignInRecordID;
-        [ProtoMember(4)] private DateTime _LastUpdatedUTC;
         [ProtoMember(5)] private DateTime _LastDayOnIncident;
         [ProtoMember(6)] private int _PersonalIncidentNumber;
         [ProtoMember(7)] private Guid _ResourceID;
         [ProtoMember(8)] private string _ResourceName;
         [ProtoMember(9)] private List<CheckInInfoField> _InfoFields;
-        [ProtoMember(10)] private bool _Active;
-        [ProtoMember(11)] private int _OpPeriod;
         [ProtoMember(12)] private string _ResourceType;
         [ProtoMember(13)] private Guid _ParentRecordID;
         [ProtoMember(14)] private DateTime _LastDayOfRest;
@@ -47,15 +43,12 @@ namespace WF_ICS_ClassLibrary.Models
         public DateTime CheckOutDate { get => _CheckOutDate; set => _CheckOutDate = value; }
         public DateTime LastDayOnIncident { get => _LastDayOnIncident; set => _LastDayOnIncident = value; }
 
-        public Guid SignInRecordID { get => _SignInRecordID; set => _SignInRecordID = value; }
+        public Guid SignInRecordID { get => ID; set => ID = value; }
         public Guid ParentRecordID { get => _ParentRecordID; set => _ParentRecordID = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
         public int PersonalIncidentNumber { get => _PersonalIncidentNumber; set => _PersonalIncidentNumber = value; }
         public Guid ResourceID { get => _ResourceID; set => _ResourceID = value; }
         public string ResourceName { get => _ResourceName; set => _ResourceName = value; }
         public List<CheckInInfoField> InfoFields { get => _InfoFields; set => _InfoFields = value; }
-        public bool Active { get => _Active; set => _Active = value; }
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
         public string ResourceType { get => _ResourceType; set => _ResourceType = value; }
         public bool IsPerson { get { return ResourceType.EqualsWithNull("Person") || ResourceType.Equals("Personnel"); } }
         public bool IsOperator { get { return ResourceType.EqualsWithNull("Operator") || ResourceType.Equals("Operator"); } }

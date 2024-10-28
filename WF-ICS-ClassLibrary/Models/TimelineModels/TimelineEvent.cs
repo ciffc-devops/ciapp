@@ -5,9 +5,8 @@ using System.Text;
 namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
-    public class TimelineEvent : ICloneable
+    public class TimelineEvent : SyncableItem, ICloneable
     {
-        [ProtoMember(1)] private Guid _TimelineEventID;
         [ProtoMember(2)] private Guid _TimelineID;
         [ProtoMember(3)] private string _EventName;
         [ProtoMember(4)] private string _EventText;
@@ -18,8 +17,6 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(9)] private bool _SAREvent;
         [ProtoMember(10)] private Guid _ExternalID; //if this timeline event references an external item like a comms log entry, operational period, etc. this will let it find its way back
         [ProtoMember(11)] private string _EventType;
-        [ProtoMember(12)] private bool _Active;
-        [ProtoMember(13)] private DateTime _LastUpdatedUTC;
         [ProtoMember(14)] private bool _IsAuto;
         /*
          * Event Type Options (so far)
@@ -31,7 +28,6 @@ namespace WF_ICS_ClassLibrary.Models
          */
 
 
-        public Guid TimelineEventID { get => _TimelineEventID; set => _TimelineEventID = value; }
         public Guid TimelineID { get => _TimelineID; set => _TimelineID = value; }
         public string EventName { get => _EventName; set => _EventName = value; }
         public string EventText { get => _EventText; set => _EventText = value; }
@@ -67,17 +63,15 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
         public Guid ExternalID { get => _ExternalID; set => _ExternalID = value; }
-        public bool Active { get => _Active; set => _Active = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set { _LastUpdatedUTC = value; } }
         public bool IsAuto { get => _IsAuto; set => _IsAuto = value; }
 
         /* constructors to automate a lot of the work */
-        public TimelineEvent() { TimelineEventID = Guid.NewGuid(); _LastUpdatedUTC = DateTime.UtcNow; }
+        public TimelineEvent() { ID = Guid.NewGuid(); LastUpdatedUTC = DateTime.UtcNow; }
         public TimelineEvent(OperationalPeriod ops, bool start, bool end)
         {
-            TimelineEventID = Guid.NewGuid();
+            ID = Guid.NewGuid();
             ExternalID = ops.OperationalPeriodID;
-            _LastUpdatedUTC = DateTime.UtcNow;
+            LastUpdatedUTC = DateTime.UtcNow;
             TimeUnsure = false;
             DateUnsure = false;
             SAREvent = true;
@@ -100,13 +94,13 @@ namespace WF_ICS_ClassLibrary.Models
 
         public TimelineEvent(CommsLogEntry entry)
         {
-            TimelineEventID = Guid.NewGuid();
+            ID = Guid.NewGuid();
             ExternalID = entry.EntryID;
             TimeUnsure = false;
             DateUnsure = false;
             SAREvent = true;
             SubjectEvent = false;
-            _LastUpdatedUTC = DateTime.UtcNow;
+            LastUpdatedUTC = DateTime.UtcNow;
             EventName = "Critical Comms from " + entry.FromName + " to " + entry.ToName;
             StringBuilder sb = new StringBuilder();
             sb.Append(entry.Message);

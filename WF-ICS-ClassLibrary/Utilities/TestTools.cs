@@ -192,7 +192,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.IsContractor = RandomBooleanGenerator.GetRandomBoolean();
             test.CallSign = "CallSign" + seed;
             test.Pronouns = "Pronouns" + seed;
-            test.AccomodationPreference = "AccommodationPreference" + seed;
+            test.AccommodationPreference = "AccommodationPreference" + seed;
             List<string> kinds = PersonnelTools.GetPersonnelKinds();
 
             test.Kind = kinds[random.Next(kinds.Count)];
@@ -474,7 +474,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             IncidentObjectivesSheet sheet = new IncidentObjectivesSheet();
             sheet.DatePrepared = DateTime.Now;
-            sheet.WeatherForcast = "WeatherForcast " + seed;
+            sheet.WeatherForecast = "WeatherForcast " + seed;
             sheet.GeneralSafety = "General Safety" + seed;
             sheet.FireSize = random.Next(100).ToString();
             sheet.FireStatus = "Status" + seed;

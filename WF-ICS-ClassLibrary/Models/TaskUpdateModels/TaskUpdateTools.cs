@@ -11,6 +11,15 @@ namespace WF_ICS_ClassLibrary.Models
         {
             if (update.Data != null)
             {
+                try
+                {
+                    return  ((SyncableItem)update.Data).ID;
+                }
+                catch
+                {
+                    return  Guid.Empty;
+                }
+
                 if (update.ObjectType.Equals(new Contact().GetType().Name)) { return (update.Data as Contact).ContactID; }
                 //else if (update.ObjectType.Equals(new TeamAssignment().GetType().Name)) { return (update.Data as TeamAssignment).ID; }
                 else if (update.ObjectType.Equals(new Briefing().GetType().Name)) { return (update.Data as Briefing).BriefingID; }
@@ -29,8 +38,8 @@ namespace WF_ICS_ClassLibrary.Models
                 else if (update.ObjectType.Equals(new OrganizationChart().GetType().Name)) { return (update.Data as OrganizationChart).ID; }
                 else if (update.ObjectType.Equals(new ICSRole().GetType().Name)) { return (update.Data as ICSRole).OrgChartRoleID; }
                 else if (update.ObjectType.Equals(new PositionLogEntry().GetType().Name)) { return (update.Data as PositionLogEntry).LogID; }
-                else if (update.ObjectType.Equals(new Timeline().GetType().Name)) { return (update.Data as Timeline).TimeLineID; }
-                else if (update.ObjectType.Equals(new TimelineEvent().GetType().Name)) { return (update.Data as TimelineEvent).TimelineEventID; }
+                else if (update.ObjectType.Equals(new Timeline().GetType().Name)) { return (update.Data as Timeline).ID; }
+                else if (update.ObjectType.Equals(new TimelineEvent().GetType().Name)) { return (update.Data as TimelineEvent).ID; }
                 else if (update.ObjectType.Equals(new Vehicle().GetType().Name)) { return (update.Data as Vehicle).ID; }
                 else if (update.ObjectType.Equals(new Aircraft().GetType().Name)) { return (update.Data as Aircraft).ID; }
                 else if (update.ObjectType.Equals(new AirOperationsSummary().GetType().Name)) { return (update.Data as AirOperationsSummary).ID; }
@@ -41,7 +50,7 @@ namespace WF_ICS_ClassLibrary.Models
                 else if (update.ObjectType.Equals(new MedicalPlan().GetType().Name)) { return (update.Data as MedicalPlan).ID; }
                 else if (update.ObjectType.Equals(new MedicalAidStation().GetType().Name)) { return (update.Data as MedicalAidStation).AidStationID; }
                 else if (update.ObjectType.Equals(new SafetyMessage().GetType().Name)) { return (update.Data as SafetyMessage).ID; }
-                else if (update.ObjectType.Equals(new WFIncident().GetType().Name)) { return (update.Data as WFIncident).TaskID; }
+                else if (update.ObjectType.Equals(new Incident().GetType().Name)) { return (update.Data as Incident).ID; }
                 else if (update.ObjectType.Equals(new OperationalGroup().GetType().Name)) { return (update.Data as OperationalGroup).ID; }
                 else if (update.ObjectType.Equals(new Crew().GetType().Name)) { return (update.Data as Crew).ID; }
                 else if (update.ObjectType.Equals(new ResourceReplacementPlan().GetType().Name)) { return (update.Data as ResourceReplacementPlan).ID; }
@@ -51,9 +60,9 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public static object DecryptTaskUpdateData(this TaskUpdate update, string encryptKey)
+        public static SyncableItem DecryptTaskUpdateData(this TaskUpdate update, string encryptKey)
         {
-            object objDecrypted = null;
+            SyncableItem objDecrypted = null;
 
             try
             {
@@ -71,9 +80,9 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public static object ObjectFromJSONData(this string jsonData, string ObjectType)
+        public static SyncableItem ObjectFromJSONData(this string jsonData, string ObjectType)
         {
-            object objDecrypted = null;
+            SyncableItem objDecrypted = null;
 
             if (ObjectType.Equals(new Contact().GetType().Name))
             {
@@ -162,9 +171,9 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 objDecrypted = JsonConvert.DeserializeObject<Personnel>(jsonData);
             }
-            else if (ObjectType.Equals(new WFIncident().GetType().Name))
+            else if (ObjectType.Equals(new Incident().GetType().Name))
             {
-                objDecrypted = JsonConvert.DeserializeObject<WFIncident>(jsonData);
+                objDecrypted = JsonConvert.DeserializeObject<Incident>(jsonData);
             }
             else if (ObjectType.Equals(new AirOperationsSummary().GetType().Name))
             {

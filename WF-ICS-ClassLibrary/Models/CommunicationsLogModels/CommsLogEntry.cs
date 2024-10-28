@@ -7,10 +7,8 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class CommsLogEntry : ICloneable
+    public class CommsLogEntry : SyncableItem, ICloneable
     {
-        [ProtoMember(1)] private Guid _EntryID;
-        [ProtoMember(2)] private int _OpPeriod;
         [ProtoMember(3)] private string _LogKeeper;
         [ProtoMember(4)] private DateTime _LogDate;
         [ProtoMember(5)] private DateTime _Created;
@@ -22,11 +20,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(11)] private string _Message;
         [ProtoMember(12)] private bool _Starred;
         [ProtoMember(13)] private TeamStatus _status;
-        [ProtoMember(14)] private bool _Active;
-        [ProtoMember(15)] private Guid _TaskID;
-        [ProtoMember(16)] private DateTime _LastUpdatedUTC;
-        public Guid EntryID { get => _EntryID; set => _EntryID = value; }
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
+
+        public Guid EntryID { get => ID; set => ID = value; }
         public string LogKeeper { get => _LogKeeper; set => _LogKeeper = value; }
         public DateTime LogDate { get => _LogDate; set => _LogDate = value; }
         public DateTime Created { get => _Created; set => _Created = value; }
@@ -38,10 +33,6 @@ namespace WF_ICS_ClassLibrary.Models
         public string Message { get => _Message; set => _Message = value; }
         public bool Starred { get => _Starred; set => _Starred = value; }
         public TeamStatus status { get => _status; set => _status = value; }
-        public int OperationalPeriod { get => OpPeriod; set => OpPeriod = value; }
-        public bool Active { get => _Active; set => _Active = value; }
-        public Guid TaskID { get => _TaskID; set => _TaskID = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
 
         //for network reasons
         /*

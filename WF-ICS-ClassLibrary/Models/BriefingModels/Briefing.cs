@@ -10,13 +10,9 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class Briefing : ICloneable
+    public class Briefing : SyncableItem, ICloneable
     {
-        [ProtoMember(1)] public string TaskNumber { get; set; }
         [ProtoMember(2)] private List<BriefingSection> l_allSections = new List<BriefingSection>();
-        [ProtoMember(3)] public int OpPeriod { get; set; }
-        [ProtoMember(4)] private Guid _TaskID;
-        [ProtoMember(5)] private Guid _BriefingID;
         [ProtoMember(6)] private DateTime _DateCreatedUTC;
         [ProtoMember(7)] private DateTime _DateUpdatedUTC;
 
@@ -24,9 +20,8 @@ namespace WF_ICS_ClassLibrary.Models
         public List<BriefingSection> AllSections { get { return l_allSections; } set { l_allSections = value; } }
         public string OperationalPeriodWithText { get { return "Operation Period " + OpPeriod.ToString(); } }
 
-        public Guid TaskID { get => _TaskID; set => _TaskID = value; }
 
-        public Guid BriefingID { get => _BriefingID; set => _BriefingID = value; }
+        public Guid BriefingID { get => ID; set => ID = value; }
 
         public DateTime DateCreatedUTC { get => _DateCreatedUTC; set => _DateCreatedUTC = value; }
 
@@ -244,7 +239,7 @@ namespace WF_ICS_ClassLibrary.Models
             }
         }
 
-        public void buildBriefingFromTask(WFIncident task)
+        public void buildBriefingFromTask(Incident task)
         {
             setCmdAndCommsPlanItems(task);
         }
@@ -258,7 +253,7 @@ namespace WF_ICS_ClassLibrary.Models
             else { return currentValue + ", " + valueToAdd; }
         }
 
-        private void setCmdAndCommsPlanItems(WFIncident task)
+        private void setCmdAndCommsPlanItems(Incident task)
         {
             //fills the briefing with items specific to this task, overriding any template they've saved.
             Guid situationID = new Guid("9aee25ed-7242-4922-90a7-ac906abfff7a");

@@ -8,9 +8,8 @@ namespace WF_ICS_ClassLibrary.Models
 
     [ProtoContract]
     [ProtoInclude(500, typeof(IncidentGear))]
-    public class Gear : ICloneable
+    public class Gear : SyncableItem, ICloneable
     {
-        [ProtoMember(1)] private Guid _EquipmentID;
         [ProtoMember(2)] private GearCategory _Category;
         [ProtoMember(3)] private string _EquipmentName;
         [ProtoMember(4)] private string _ReferenceID;
@@ -27,7 +26,7 @@ namespace WF_ICS_ClassLibrary.Models
 
 
 
-        public Guid EquipmentID { get => _EquipmentID; set => _EquipmentID = value; }
+        public Guid EquipmentID { get => ID; set => ID = value; }
         public GearCategory Category { get => _Category; set => _Category = value; }
         public string CategoryName { get { if (_Category != null) { return _Category.CategoryName; } else { return null; } } }
         public string EquipmentName { get => _EquipmentName; set => _EquipmentName = value; }

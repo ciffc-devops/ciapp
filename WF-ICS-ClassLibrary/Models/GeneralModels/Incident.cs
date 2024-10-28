@@ -52,13 +52,11 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
     [Serializable]
-
-
-    public class WFIncident : ICloneable
+    public class Incident : SyncableItem, ICloneable
     {
-        public WFIncident()
+        public Incident()
         {
-            TaskID = System.Guid.NewGuid();
+            ID = System.Guid.NewGuid();
 
             //allObjectives = new List<IncidentObjective>();
             allIncidentObjectives = new List<IncidentObjectivesSheet>();
@@ -92,7 +90,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
             TaskEncryptionKey = Utilities.RandomPasswordGenerator.GeneratePassword();
         }
 
-        [ProtoMember(1)] private Guid _TaskID;
         [ProtoMember(2)] private string _TaskName;
         [ProtoMember(3)] private string _TaskNumber;
         [ProtoMember(4)] private string _AgencyFileNumber;
@@ -154,7 +151,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(53)] private List<IncidentResource> _IncidentResources = new List<IncidentResource>();
         [ProtoMember(54)] private List<ResourceReplacementPlan> _ResourceReplacementPlans = new List<ResourceReplacementPlan>();
 
-        public Guid TaskID { get => _TaskID; set => _TaskID = value; }
         public string TaskName { get => _TaskName; set { if (!string.IsNullOrEmpty(value)) { _TaskName = value.Trim(); } else { _TaskName = null; } } }
         public string TaskNumber { get => _TaskNumber; set => _TaskNumber = value; }
 
@@ -585,9 +581,9 @@ ProtoInclude(127, typeof(SubjectProfile)),
         }
 
 
-        public WFIncident Clone()
+        public Incident Clone()
         {
-            WFIncident cloneTo = this.MemberwiseClone() as WFIncident;
+            Incident cloneTo = this.MemberwiseClone() as Incident;
 
             cloneTo._allSafetyMessages = new List<SafetyMessage>(_allSafetyMessages);
             cloneTo._allBriefings = new List<Briefing>(_allBriefings);

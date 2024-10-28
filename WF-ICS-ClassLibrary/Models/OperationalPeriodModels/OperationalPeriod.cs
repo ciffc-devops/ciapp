@@ -9,14 +9,11 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class OperationalPeriod : ICloneable
+    public class OperationalPeriod : SyncableItem, ICloneable
     {
         [ProtoMember(1)] private int _PeriodNumber;
         [ProtoMember(2)] private DateTime _PeriodStart;
         [ProtoMember(3)] private DateTime _PeriodEnd;
-        [ProtoMember(4)] private Guid _TaskID;
-        [ProtoMember(5)] private Guid _OperationalPeriodID;
-        [ProtoMember(6)] private DateTime _LastUpdatedUTC;
         [ProtoMember(7)] private string _titleImageBytes;
         [ProtoMember(8)] private string _CriticalMessage;
 
@@ -26,6 +23,7 @@ namespace WF_ICS_ClassLibrary.Models
 
 
         public int PeriodNumber { get => _PeriodNumber; set => _PeriodNumber = value; }
+        public override int OpPeriod { get => PeriodNumber; set => PeriodNumber = value; }
         public DateTime PeriodStart
         {
             get
@@ -53,9 +51,7 @@ namespace WF_ICS_ClassLibrary.Models
                 return PeriodStart.AddMinutes(ts.TotalMinutes / 2);
             }
         }
-        public Guid TaskID { get => _TaskID; set => _TaskID = value; }
-        public Guid OperationalPeriodID { get => _OperationalPeriodID; set => _OperationalPeriodID = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
+        public Guid OperationalPeriodID { get => ID; set => ID = value; }
         public string TitleImageBytes { get => _titleImageBytes; set => _titleImageBytes = value; }
         public string CriticalMessage { get => _CriticalMessage; set => _CriticalMessage = value; }
 

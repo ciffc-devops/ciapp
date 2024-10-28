@@ -13,7 +13,7 @@ namespace WF_ICS_ClassLibrary.Interfaces
         List<GearStatus> GetEquipmentStatuses();
         GearStatus GetEquipmentStatus(string name);
         List<GearCategory> GetStartingCategories();
-        string CreatePDF(WFIncident task, int OpPeriod, bool useTempPath, bool flattenPDF);
+        string CreatePDF(Incident task, int OpPeriod, bool useTempPath, bool flattenPDF);
        
     }
 }

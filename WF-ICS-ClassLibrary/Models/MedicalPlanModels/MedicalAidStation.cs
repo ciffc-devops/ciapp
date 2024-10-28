@@ -8,18 +8,14 @@ using System.Threading.Tasks;
 namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
-    public class MedicalAidStation : ICloneable
+    public class MedicalAidStation : SyncableItem, ICloneable
     {
-        [ProtoMember(1)] private Guid _AidStationID;
         [ProtoMember(2)] private string _Name;
         [ProtoMember(3)] private string _Location;
         [ProtoMember(4)] private string _ContactNumber;
         [ProtoMember(5)] private bool _ParamedicsAvailable;
         [ProtoMember(11)] private double _Latitude;
         [ProtoMember(12)] private double _Longitude;
-        [ProtoMember(13)] private int _OpPeriod;
-        [ProtoMember(14)] private bool _Active;
-        [ProtoMember(15)] private DateTime _LastUpatedUTC;
 
         //not currently used
         [ProtoMember(6)] private bool _OFA1;
@@ -37,7 +33,7 @@ namespace WF_ICS_ClassLibrary.Models
 
         }
 
-        public Guid AidStationID { get => _AidStationID; set => _AidStationID = value; }
+        public Guid AidStationID { get => ID; set => ID = value; }
         public string Name { get => _Name; set => _Name = value; }
         public string Location { get => _Location; set => _Location = value; }
         public string ContactNumber { get => _ContactNumber; set => _ContactNumber = value; }
@@ -49,9 +45,6 @@ namespace WF_ICS_ClassLibrary.Models
         public bool FirstResponder { get => _FirstResponder; set => _FirstResponder = value; }
         public double Latitude { get => _Latitude; set => _Latitude = value; }
         public double Longitude { get => _Longitude; set => _Longitude = value; }
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
-        public bool Active { get => _Active; set => _Active = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpatedUTC; set => _LastUpatedUTC = value; }
 
         public MedicalAidStation Clone()
         {

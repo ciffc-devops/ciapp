@@ -50,7 +50,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(15)] private bool _IsContractor;
         [ProtoMember(16)] private string _CallSign;
         [ProtoMember(17)] private string _Pronouns; 
-        [ProtoMember(18)] private string _AccomodationPreference;
+        [ProtoMember(18)] private string _AccommodationsPreference;
         [ProtoMember(19)] private string _InitialRoleName;
         [ProtoMember(20)] private string _InitialRoleAcronym;
 
@@ -85,7 +85,7 @@ namespace WF_ICS_ClassLibrary.Models
         public bool IsContractor { get => _IsContractor; set => _IsContractor = value; }
         public string CallSign { get => _CallSign; set => _CallSign = value; }
         public string Pronouns { get => _Pronouns; set => _Pronouns = value; }
-        public string AccomodationPreference { get => _AccomodationPreference; set => _AccomodationPreference = value; }
+        public string AccommodationPreference { get => _AccommodationsPreference; set => _AccommodationsPreference = value; }
         public int PNum { get => UniqueIDNum; set => UniqueIDNum = value; }
         public string InitialRoleName { get => _InitialRoleName; set => _InitialRoleName = value; }
         public string InitialRoleAcronym { get => _InitialRoleAcronym; set => _InitialRoleAcronym = value; }

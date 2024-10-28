@@ -9,10 +9,8 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class PositionLogEntry : ICloneable
+    public class PositionLogEntry : SyncableItem, ICloneable
     {
-        [ProtoMember(1)] private Guid _LogID;
-        [ProtoMember(2)] private int _OpPeriod;
         [ProtoMember(3)] private ICSRole _Role;
         [ProtoMember(4)] private DateTime _DateCreated;
         [ProtoMember(5)] private DateTime _DateUpdated;
@@ -22,22 +20,19 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(9)] private string _LogText;
         [ProtoMember(10)] private bool _IsInfoOnly;
         [ProtoMember(11)] private List<string> _LogHistory;
-        [ProtoMember(12)] private DateTime _LastUpdatedUTC;
-        public PositionLogEntry() { _LogID = Guid.NewGuid(); _LogHistory = new List<string>(); _DateCreated = DateTime.Now; _IsComplete = false; }
+        public PositionLogEntry() { ID = Guid.NewGuid(); _LogHistory = new List<string>(); _DateCreated = DateTime.Now; _IsComplete = false; }
         public PositionLogEntry(ICSRole role, int op_period, string text)
         {
-            _LogID = Guid.NewGuid();
+            ID = Guid.NewGuid();
             _LogHistory = new List<string>();
             _Role = role;
             _DateCreated = DateTime.Now;
             _DateUpdated = DateTime.Now;
             _IsComplete = false;
-            _OpPeriod = op_period;
             _LogText = text;
         }
 
-        public Guid LogID { get => _LogID; set => _LogID = value; }
-        public int OpPeriod { get => _OpPeriod; set => _OpPeriod = value; }
+        public Guid LogID { get => ID; set => ID = value; }
         public ICSRole Role { get => _Role; set => _Role = value; }
         public string RoleName { get { if (Role != null) { return Role.RoleName; } else { return null; } } }
         public DateTime DateCreated
@@ -63,7 +58,6 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
         public DateTime DateUpdated { get => _DateUpdated; set => _DateUpdated = value; }
-        public DateTime LastUpdatedUTC { get => _LastUpdatedUTC; set => _LastUpdatedUTC = value; }
 
         public bool IsComplete
         {

@@ -9,7 +9,7 @@ namespace WildfireICSDesktopServices
     public interface IWFIncidentService
     {
         List<TaskUpdate> allTaskUpdates { get; set; }
-        WFIncident CurrentIncident { get; set; }
+        Incident CurrentIncident { get; set; }
         Guid MachineID { get; set; }
 
         string TestWrite(string path);
@@ -32,7 +32,7 @@ namespace WildfireICSDesktopServices
         event MedicalPlanEventHandler MedicalPlanChanged;
         event CheckInEventHandler MemberSignInChanged;
         event NoteEventHandler NoteChanged;
-        event OperationalPeriodEventHandler OperationalPeriodChanged;
+        event OperationalPeriodEventHandler OperationalPeriodDetailsChanged;
         event OrganizationalChartEventHandler OrganizationalChartChanged;
         event PositionLogEventHandler PositionLogChanged;
         event SafetyMessageEventHandler SafetyMessageChanged;
@@ -48,14 +48,13 @@ namespace WildfireICSDesktopServices
         event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
         event DemobEventHandler DemobChanged;
 
-        event IncidenOpPeriodChangedEventHandler OpPeriodChanged;
+        event IncidenOpPeriodChangedEventHandler CurrentOpPeriodChanged;
         event OperationalGroupEventHandler OperationalGroupChanged;
         event OperationalSubGroupEventHandler OperationalSubGroupChanged;
         event ResourceReplacementEventHandler ResourceReplacementChanged;
 
 
         void ApplyTaskUpdate(TaskUpdate update, bool applyAllSubsequent = false);
-        void ConnectToServerTask(Guid TaskID, string EncryptionKey);
         void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local");
         void DeleteCommsLogEntry(Guid EntryID, string source = "local");
         void DeleteContact(Contact contact, string source = "local");
@@ -70,10 +69,12 @@ namespace WildfireICSDesktopServices
         void DeleteVehicle(Vehicle record, string source = "local");
         List<CommsPlanItem> GetCommsPlanItems(bool includeBlank, bool ActiveOnly = true);
         TaskUpdate InsertIfUniqueTaskUpdate(TaskUpdate update);
-        void LoadNewTaskFromServer(Guid TaskID, string EncryptionKey);
         void ProcessTaskUpdate(TaskUpdate update);
         void RefreshAutomatedTimelineEvents();
-        void SendInitialTaskUpdate();
+        Task ConnectToServerTaskAsync(Guid TaskID, string EncryptionKey, IProgress<Tuple<int, int, int>> progress);
+        Task<bool> LoadNewTaskFromServer(Guid TaskID, string EncryptionKey, IProgress<Tuple<int, int, int>> progress);
+        Task SendInitialTaskUpdate(IProgress<Tuple<int, int, int>> progress);
+
         void UpdateTaskBasics(TaskBasics basics, string source);
         Task<bool> uploadTaskUpdateToServer(TaskUpdate update);
         void UpsertBriefing(Briefing record, string source = "local");
@@ -103,7 +104,7 @@ namespace WildfireICSDesktopServices
         void UpsertPositionLogEntry(PositionLogEntry record, string source = "local");
         void UpsertSafetyMessage(SafetyMessage record, string source = "local");
         void UpsertTaskEquipment(IncidentGear te, string source = "local");
-        TaskUpdate UpsertTaskUpdate(object obj, string command, bool processed_locally, bool uploaded);
+        TaskUpdate UpsertTaskUpdate(SyncableItem obj, string command, bool processed_locally, bool uploaded);
         TaskUpdate UpsertTaskUpdate(TaskUpdate update);
         void UpsertTimeline(Timeline record, string source = "local");
         void UpsertTimelineEvent(TimelineEvent record, string source = "local");

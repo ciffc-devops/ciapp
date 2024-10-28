@@ -6,9 +6,8 @@ namespace WF_ICS_ClassLibrary.Models
 {
     [Serializable]
     [ProtoContract]
-    public class NOTAM : ICloneable
+    public class NOTAM : SyncableItem, ICloneable
     {
-        [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private bool _UseRadius;
         //[ProtoMember(2)] private double _Latitude;
         //[ProtoMember(3)] private double _Longitude;
@@ -22,9 +21,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(11)] private Coordinate _PolygonSW;
 
 
-        public NOTAM() { _ID = Guid.NewGuid(); }
+        public NOTAM() { ID = Guid.NewGuid(); }
 
-        public Guid ID { get => _ID; set => _ID = value; }
         public bool UseRadius { get => _UseRadius; set => _UseRadius = value; }
         // public double Latitude { get => _Latitude; set => _Latitude = value; }
         //public double Longitude { get => _Longitude; set => _Longitude = value; }

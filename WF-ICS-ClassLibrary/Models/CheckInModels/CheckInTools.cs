@@ -380,7 +380,7 @@ namespace WF_ICS_ClassLibrary.Models
                     csv.Append("\""); csv.Append(p.EmergencyContact); csv.Append("\""); csv.Append(delimiter);
                     csv.Append("\""); csv.Append(p.Agency); csv.Append("\""); csv.Append(delimiter);
                     csv.Append(AddToCSVIfPossible(item, new Guid("10a107d2-4bec-43af-bedf-87837fbcb447"), delimiter));
-                    csv.Append("\""); csv.Append(p.AccomodationPreference); csv.Append("\""); csv.Append(delimiter);
+                    csv.Append("\""); csv.Append(p.AccommodationPreference); csv.Append("\""); csv.Append(delimiter);
                     csv.Append("\""); csv.Append(item.Record.InitialRoleName); csv.Append("\""); csv.Append(delimiter);
 
                 }
@@ -535,9 +535,9 @@ namespace WF_ICS_ClassLibrary.Models
             List<CheckInRecordWithResource> campPersonnel = personnel.Where(o => o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp"))).ToList();
 
             accomodation[0] = personnel.Count - campPersonnel.Count;
-            accomodation[1] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Male-Only"));
-            accomodation[2] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Female-Only"));
-            accomodation[3] = campPersonnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Not Gender-Restricted"));
+            accomodation[1] = campPersonnel.Count(o => (o.Resource as Personnel).AccommodationPreference.EqualsWithNull("Male-Only"));
+            accomodation[2] = campPersonnel.Count(o => (o.Resource as Personnel).AccommodationPreference.EqualsWithNull("Female-Only"));
+            accomodation[3] = campPersonnel.Count(o => (o.Resource as Personnel).AccommodationPreference.EqualsWithNull("Not Gender-Restricted"));
 
             //accomodation[1] = personnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Female-Only") && o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp")));
             //accomodation[1] = personnel.Count(o => (o.Resource as Personnel).AccomodationPreference.EqualsWithNull("Not Gender-Restricted") && o.Record.InfoFields.Any(i => i.ID == accomodationID && i.StringValue.EqualsWithNull("Incident Camp")));
@@ -586,7 +586,7 @@ namespace WF_ICS_ClassLibrary.Models
             return food;
         }
 
-        public static List<CheckInRecordWithResource> GetAllCheckInWithResources(this WFIncident incident, int OpPeriod)
+        public static List<CheckInRecordWithResource> GetAllCheckInWithResources(this Incident incident, int OpPeriod)
         {
             List<CheckInRecordWithResource> list = new List<CheckInRecordWithResource>();
 
@@ -618,7 +618,7 @@ namespace WF_ICS_ClassLibrary.Models
             return list;
         }
 
-        public static List<CheckInRecordWithResource> GetCheckInWithResources(this WFIncident incident, int OpPeriod)
+        public static List<CheckInRecordWithResource> GetCheckInWithResources(this Incident incident, int OpPeriod)
         {
             List<CheckInRecordWithResource> list = new List<CheckInRecordWithResource>();
 
@@ -650,7 +650,7 @@ namespace WF_ICS_ClassLibrary.Models
             return list;
         }
 
-        public static List<CheckInRecordWithResource> GetCheckInWithResources(this WFIncident incident, int OpPeriod, ICSRole ParentRole)
+        public static List<CheckInRecordWithResource> GetCheckInWithResources(this Incident incident, int OpPeriod, ICSRole ParentRole)
         {
             List<CheckInRecordWithResource> list = new List<CheckInRecordWithResource>();
 
@@ -719,7 +719,7 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public static bool HasResourceReplacementPlan(this WFIncident incident, Guid CheckInID, Guid ExcludePlanID = new Guid())
+        public static bool HasResourceReplacementPlan(this Incident incident, Guid CheckInID, Guid ExcludePlanID = new Guid())
         {
             return incident.ActiveResourceReplacementPlans.Any(o=>o.ReplacementForCheckInID == CheckInID && o.ID != ExcludePlanID);
         }
@@ -730,7 +730,7 @@ namespace WF_ICS_ClassLibrary.Models
             return false;
         }
 
-        public static bool ConfirmResourceNumUnique(this WFIncident incident, string ResourceType, int pNum, Guid excludeID = new Guid())
+        public static bool ConfirmResourceNumUnique(this Incident incident, string ResourceType, int pNum, Guid excludeID = new Guid())
         {
             if (ResourceType.Equals("Personnel") || ResourceType.Equals("Operator") || ResourceType.Equals("Visitor"))
             {
@@ -756,7 +756,7 @@ namespace WF_ICS_ClassLibrary.Models
             else return false;
 
         }
-        public static int GetNextUniqueNum(this WFIncident incident, string ResourceType, int lowerBound = 1, int upperBound = 10000)
+        public static int GetNextUniqueNum(this Incident incident, string ResourceType, int lowerBound = 1, int upperBound = 10000)
         {
             int next = lowerBound;
             List<IncidentResource> resList = new List<IncidentResource>();
@@ -796,7 +796,7 @@ namespace WF_ICS_ClassLibrary.Models
             else { return -1; }
         }
 
-        public static bool ResourceIsCheckedIn(this WFIncident incident, Guid ResourceID, DateTime AtThisTime)
+        public static bool ResourceIsCheckedIn(this Incident incident, Guid ResourceID, DateTime AtThisTime)
         {
             if (incident.AllCheckInRecords.Any(o => o.Active && o.ResourceID == ResourceID))
             {
@@ -807,7 +807,7 @@ namespace WF_ICS_ClassLibrary.Models
             return false;
         }
 
-        public static List<Personnel> GetCurrentlySignedInPersonnel(this WFIncident incident, int OpPeriod)
+        public static List<Personnel> GetCurrentlySignedInPersonnel(this Incident incident, int OpPeriod)
         {
             OperationalPeriod per = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
             DateTime atNow = per.PeriodEnd.AddMinutes(-5);
