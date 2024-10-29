@@ -47,8 +47,10 @@
             this.txtNewSyncEncryptionKey = new System.Windows.Forms.TextBox();
             this.pnlNoSync = new System.Windows.Forms.Panel();
             this.rbDoNotSync = new System.Windows.Forms.RadioButton();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.lblSyncStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,6 +79,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblSyncStatus);
+            this.splitContainer1.Panel2.Controls.Add(this.progressBar1);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Size = new System.Drawing.Size(868, 572);
@@ -299,6 +303,17 @@
             this.rbDoNotSync.UseVisualStyleBackColor = true;
             this.rbDoNotSync.CheckedChanged += new System.EventHandler(this.rbDoNotSync_CheckedChanged);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Enabled = false;
+            this.progressBar1.Location = new System.Drawing.Point(733, 10);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(117, 46);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 90;
+            this.progressBar1.Visible = false;
+            // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -319,7 +334,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
+            this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_487_exchange;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.Location = new System.Drawing.Point(729, 10);
             this.btnSave.Margin = new System.Windows.Forms.Padding(6);
@@ -330,6 +345,17 @@
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // lblSyncStatus
+            // 
+            this.lblSyncStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSyncStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSyncStatus.Location = new System.Drawing.Point(136, 10);
+            this.lblSyncStatus.Name = "lblSyncStatus";
+            this.lblSyncStatus.Size = new System.Drawing.Size(584, 46);
+            this.lblSyncStatus.TabIndex = 90;
+            this.lblSyncStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // InternetSyncForm
             // 
@@ -383,5 +409,7 @@
         private System.Windows.Forms.RadioButton rbDoNotSync;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lblSyncStatus;
     }
 }

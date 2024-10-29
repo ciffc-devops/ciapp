@@ -14,38 +14,12 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist.UtilityForms
 {
-    public partial class InternetSyncForm : Form
+    public partial class InternetSyncForm : BaseForm
     {
         public InternetSyncForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); 
         }
-
-        private void InternetSyncForm_Load(object sender, EventArgs e)
-        {
-            automaticallySettingRadios = true;
-
-            if (Program.InternetSyncEnabled) { rbOngoingSync.Checked = true; }
-            else { rbDoNotSync.Checked = true; }
-            setPanelStatus();
-            automaticallySettingRadios = false;
-
-            if (Program.CurrentTask.AnyOpPeriodHasMeanginfulContent && !string.IsNullOrEmpty(Program.CurrentTask.FileName))
-            {
-                txtJoinSyncEncryptionKey.Text = Program.CurrentTask.ID.ToString() + Program.CurrentTask.TaskEncryptionKey;
-            }
-            if (Program.InternetSyncEnabled)
-            {
-                automaticallySettingRadios = true;
-                rbOngoingSync.Checked = true;
-                rbDoNotSync.Checked = !(rbOngoingSync).Checked;
-                rbNewSync.Checked = !(rbOngoingSync).Checked;
-                setPanelStatus();
-                automaticallySettingRadios = false;
-                txtJoinSyncEncryptionKey.Text = Program.CurrentTask.ID.ToString() + Program.CurrentTask.TaskEncryptionKey;
-            }
-        }
-
         bool automaticallySettingRadios = false;
         public bool InternetSyncEnabled
         {
@@ -79,6 +53,33 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
             }
         }
+
+
+        private void InternetSyncForm_Load(object sender, EventArgs e)
+        {
+            automaticallySettingRadios = true;
+
+            if (Program.InternetSyncEnabled) { rbOngoingSync.Checked = true; }
+            else { rbDoNotSync.Checked = true; }
+            setPanelStatus();
+            automaticallySettingRadios = false;
+
+            if (Program.CurrentTask.AnyOpPeriodHasMeaningfulContent && !string.IsNullOrEmpty(Program.CurrentTask.FileName))
+            {
+                txtJoinSyncEncryptionKey.Text = Program.CurrentTask.ID.ToString() + Program.CurrentTask.TaskEncryptionKey;
+            }
+            if (Program.InternetSyncEnabled)
+            {
+                automaticallySettingRadios = true;
+                rbOngoingSync.Checked = true;
+                rbDoNotSync.Checked = !(rbOngoingSync).Checked;
+                rbNewSync.Checked = !(rbOngoingSync).Checked;
+                setPanelStatus();
+                automaticallySettingRadios = false;
+                txtJoinSyncEncryptionKey.Text = Program.CurrentTask.ID.ToString() + Program.CurrentTask.TaskEncryptionKey;
+            }
+        }
+
 
 
         private void rbDoNotSync_CheckedChanged(object sender, EventArgs e)
@@ -204,12 +205,42 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            bool testOK = false;
+            btnSave.Visible = false;
+            progressBar1.Enabled = true;
+            progressBar1.Visible = true;
+            if (await TrySyncAsync())
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                btnSave.Visible = true;
+                progressBar1.Enabled = false;
+                progressBar1.Visible = false;
 
+            }
+        }
+
+        private void UpdateSyncStatus(string status, int progress)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                progressBar1.Value = progress;
+                lblSyncStatus.Text = status;
+            });
+
+        }
+
+        private async Task<bool> TrySyncAsync()
+        {
+            bool testOK = false;
+            UpdateSyncStatus("Checking internet connection...", 40);
             if (rbDoNotSync.Checked) { testOK = true; }
             else if (rbNewSync.Checked)
             {
                 bool internet = PingTool.TestPing();
+                UpdateSyncStatus("Internet available, checking task availability...", 70);
+
                 if (!internet)
                 {
                     MessageBox.Show("You must be connected to the internet in order to initiate a new task sync.");
@@ -221,6 +252,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     {
                         Guid TaskID = Program.CurrentTask.ID;
                         TaskUpdateService service = new TaskUpdateService();
+
                         bool initialEntryExists = await service.InitialTaskUpdateExists(TaskID, Program.CurrentTask.TaskEncryptionKey);
 
                         if (initialEntryExists)
@@ -257,6 +289,9 @@ namespace Wildfire_ICS_Assist.UtilityForms
                         if (!internet) { MessageBox.Show("You must be connected to the internet to join an internet sync task."); }
                         else
                         {
+                            UpdateSyncStatus("Internet available, checking task availability...", 70);
+
+
                             TaskUpdateService service = new TaskUpdateService();
                             bool initialEntryExists = await service.InitialTaskUpdateExists(TaskID, JoinEncryptionKey);
 
@@ -276,16 +311,15 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 }
                 catch (Exception)
                 {
+                    MessageBox.Show("There was an error connecting to this task.  Please verify your encryption key was correct, and that others are using the same version of SAR Assist.");
                     testOK = false;
                 }
             }
 
-            if (testOK)
-            {
-                this.DialogResult = DialogResult.OK;
-            }
-        }
 
+
+            return testOK;
+        }
 
         private Guid GetGuidFromJoinString(string str)
         {

@@ -42,29 +42,31 @@ namespace Wildfire_ICS_Assist.InternetSyncForms
 
         private async void InternetSyncStartForm_Load(object sender, EventArgs e)
         {
-            if (JoinTaskID != Guid.Empty && !string.IsNullOrEmpty(JoinEncryptionKey))
+
+            if (CreateNewSync)
             {
-                if (CreateNewSync)
-                {
-                    lblStatus.Text = "Starting New Task...";
-                }
-                else
-                {
-                    lblStatus.Text = "Joining Task...";
-                }
-
-
-                if (CreateNewSync)
-                {
-                    await StartInternetSyncAsync(Program.CurrentTask.ID, Program.CurrentTask.TaskEncryptionKey, true);
-                }
-                else
-                {
-                    await StartInternetSyncAsync(JoinTaskID, JoinEncryptionKey, false);
-                }
-
-
+                lblStatus.Text = "Starting New Task...";
             }
+            else
+            {
+                lblStatus.Text = "Joining Task...";
+            }
+
+
+            if (CreateNewSync)
+            {
+                await StartInternetSyncAsync(Program.CurrentTask.ID, Program.CurrentTask.TaskEncryptionKey, true);
+            }
+            else if (JoinTaskID != Guid.Empty && !string.IsNullOrEmpty(JoinEncryptionKey))
+            {
+                await StartInternetSyncAsync(JoinTaskID, JoinEncryptionKey, false);
+            }
+            else
+            {
+                lblStatus.Text = "Sorry, there was an error joining the sync.  Please contact support";
+            }
+
+
         }
 
         private void UpdateStatusDisplay(string status, int progress, int totalprogress)
