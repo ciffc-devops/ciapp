@@ -13,10 +13,15 @@ namespace WF_ICS_ClassLibrary.Models
         private DateTime _UpdateDate;
         private int _UpdateID;
         private string _Description;
-        private decimal _Version;
+        //private decimal _Version;
         private string _DownloadURL;
         private string _ProjectName;
         private bool _Visible;
+        private int _MajorVersion;
+        private int _MinorVersion;
+        private int _BuildNumber;
+        private string _ZipDownloadURL;
+
         public DateTime UpdateDate { get => _UpdateDate; set => _UpdateDate = value; }
         public int UpdateID { get => _UpdateID; set => _UpdateID = value; }
 
@@ -65,10 +70,25 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public decimal Version { get => _Version; set => _Version = value; }
+        public decimal Version { get { return Convert.ToDecimal(MajorVersion.ToString() + "." + MinorVersion.ToString()); } }
+        public string VersionWithBuild { get { return MajorVersion.ToString() + "." + MinorVersion.ToString() + "." + BuildNumber; } }
         public string DownloadURL { get => _DownloadURL; set => _DownloadURL = value; }
-        public string sarassistDownloadURL { get { return DownloadURL.Replace("https://greathat.ca/sarics/", "http://www.sarassist.ca/downloads/"); } }
+        public string ZipDownloadURL { get => _ZipDownloadURL; set => _ZipDownloadURL = value; }
+        public bool HasDownloadURL { get => !string.IsNullOrEmpty(DownloadURL); }
+        public string sarassistDownloadURL { get { return DownloadURL; } }
+        public string ZipIfPossibleDownloadURL
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(ZipDownloadURL)) { return ZipDownloadURL; }
+                else { return DownloadURL; }
+            }
+        }
         public bool Visible { get => _Visible; set => _Visible = value; }
+
+        public int MajorVersion { get => _MajorVersion; set => _MajorVersion = value; }
+        public int MinorVersion { get => _MinorVersion; set => _MinorVersion = value; }
+        public int BuildNumber { get => _BuildNumber; set => _BuildNumber = value; }
 
 
 
