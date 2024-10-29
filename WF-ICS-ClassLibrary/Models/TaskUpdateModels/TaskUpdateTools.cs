@@ -58,7 +58,14 @@ namespace WF_ICS_ClassLibrary.Models
             return Guid.Empty;
 
         }
-
+        public static string SerializeDataAsJSON(this SyncableItem s)
+        {
+            string output  = JsonConvert.SerializeObject(s);
+            //int len = _DataAsJSONString.Length;
+            output = CompressionUtilities.Compress(output);
+            //int len2 = _DataAsJSONString.Length;
+            return output;
+        }
 
         public static SyncableItem DecryptTaskUpdateData(this TaskUpdate update, string encryptKey)
         {

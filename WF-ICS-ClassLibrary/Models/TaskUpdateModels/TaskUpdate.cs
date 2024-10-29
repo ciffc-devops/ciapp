@@ -120,6 +120,10 @@ namespace WF_ICS_ClassLibrary.Models
 
         public void SetEncData(string key)
         {
+            if (string.IsNullOrEmpty(_DataAsJSONString) && Data != null)
+            {
+                _DataAsJSONString = Data.SerializeDataAsJSON();
+            }
             DataEnc = StringCipher.Encrypt(_DataAsJSONString, key);
         }
         public Guid ItemID

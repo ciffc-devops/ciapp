@@ -1241,23 +1241,23 @@
             // cpOtherTools
             // 
             this.cpOtherTools.BackColor = System.Drawing.Color.White;
-            this.cpOtherTools.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpOtherTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpOtherTools.CollapsedHeight = 40;
-            this.cpOtherTools.CollapsedWidth = 349;
-            this.cpOtherTools.CollapseLeft = true;
+            this.cpOtherTools.Collapsed = false;
+            this.cpOtherTools.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpOtherTools.Controls.Add(this.btnGeneralMessage);
             this.cpOtherTools.Controls.Add(this.btnReplacementResources);
             this.cpOtherTools.Controls.Add(this.btnAdditionalContacts);
             this.cpOtherTools.Controls.Add(this.btnNotes);
             this.cpOtherTools.Controls.Add(this.btnShowResources);
-            this.cpOtherTools.CurrentlyCollapsed = false;
-            this.cpOtherTools.ExpandedHeight = 180;
-            this.cpOtherTools.ExpandedWidth = 349;
-            this.cpOtherTools.ExpandUp = false;
+            this.cpOtherTools.ExpandsRight = true;
+            this.cpOtherTools.ExpandsUpward = false;
             resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
+            this.cpOtherTools.HeightWhenCollapsed = 40;
+            this.cpOtherTools.HeightWhenExpanded = 180;
             this.cpOtherTools.Name = "cpOtherTools";
             this.cpOtherTools.TitleText = "Other Tools";
+            this.cpOtherTools.WidthWhenCollapsed = 349;
+            this.cpOtherTools.WidthWhenExpanded = 349;
             // 
             // btnGeneralMessage
             // 
@@ -1305,11 +1305,9 @@
             // cpIncidentActionPlan
             // 
             this.cpIncidentActionPlan.BackColor = System.Drawing.Color.White;
-            this.cpIncidentActionPlan.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpIncidentActionPlan.CollapsedHeight = 40;
-            this.cpIncidentActionPlan.CollapsedWidth = 485;
-            this.cpIncidentActionPlan.CollapseLeft = true;
+            this.cpIncidentActionPlan.Collapsed = false;
+            this.cpIncidentActionPlan.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpIncidentActionPlan.Controls.Add(this.btnAssignmentList);
             this.cpIncidentActionPlan.Controls.Add(this.btnAirOpsSummary);
             this.cpIncidentActionPlan.Controls.Add(this.btnSafetyPlans);
@@ -1318,13 +1316,15 @@
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
             this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
-            this.cpIncidentActionPlan.CurrentlyCollapsed = false;
-            this.cpIncidentActionPlan.ExpandedHeight = 331;
-            this.cpIncidentActionPlan.ExpandedWidth = 722;
-            this.cpIncidentActionPlan.ExpandUp = false;
+            this.cpIncidentActionPlan.ExpandsRight = true;
+            this.cpIncidentActionPlan.ExpandsUpward = false;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
+            this.cpIncidentActionPlan.HeightWhenCollapsed = 40;
+            this.cpIncidentActionPlan.HeightWhenExpanded = 331;
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
+            this.cpIncidentActionPlan.WidthWhenCollapsed = 485;
+            this.cpIncidentActionPlan.WidthWhenExpanded = 722;
             // 
             // btnAssignmentList
             // 

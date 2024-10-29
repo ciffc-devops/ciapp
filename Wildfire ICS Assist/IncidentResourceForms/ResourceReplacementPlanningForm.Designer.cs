@@ -313,18 +313,18 @@
             // collapsiblePanel4
             // 
             this.collapsiblePanel4.BackColor = System.Drawing.Color.White;
-            this.collapsiblePanel4.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel4.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.collapsiblePanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.collapsiblePanel4.CollapsedHeight = 40;
-            this.collapsiblePanel4.CollapsedWidth = 329;
-            this.collapsiblePanel4.CollapseLeft = true;
+            this.collapsiblePanel4.HeightWhenCollapsed = 40;
+            this.collapsiblePanel4.WidthWhenCollapsed = 329;
+            this.collapsiblePanel4.ExpandsRight = true;
             this.collapsiblePanel4.Controls.Add(this.cboOutgoingOutputInclude);
             this.collapsiblePanel4.Controls.Add(this.cboOutgoingOutputFilters);
             this.collapsiblePanel4.Controls.Add(this.btnExportSignInToCSV);
-            this.collapsiblePanel4.CurrentlyCollapsed = false;
-            this.collapsiblePanel4.ExpandedHeight = 177;
-            this.collapsiblePanel4.ExpandedWidth = 329;
-            this.collapsiblePanel4.ExpandUp = false;
+            this.collapsiblePanel4.Collapsed = false;
+            this.collapsiblePanel4.HeightWhenExpanded = 177;
+            this.collapsiblePanel4.WidthWhenExpanded = 329;
+            this.collapsiblePanel4.ExpandsUpward = false;
             this.collapsiblePanel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.collapsiblePanel4.Location = new System.Drawing.Point(5, 526);
             this.collapsiblePanel4.Margin = new System.Windows.Forms.Padding(6);
@@ -383,19 +383,19 @@
             // collapsiblePanel1
             // 
             this.collapsiblePanel1.BackColor = System.Drawing.Color.White;
-            this.collapsiblePanel1.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.collapsiblePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.collapsiblePanel1.CollapsedHeight = 40;
-            this.collapsiblePanel1.CollapsedWidth = 329;
-            this.collapsiblePanel1.CollapseLeft = true;
+            this.collapsiblePanel1.HeightWhenCollapsed = 40;
+            this.collapsiblePanel1.WidthWhenCollapsed = 329;
+            this.collapsiblePanel1.ExpandsRight = true;
             this.collapsiblePanel1.Controls.Add(this.lblReplacementResourceRed);
             this.collapsiblePanel1.Controls.Add(this.lblLegendResourceYellow);
             this.collapsiblePanel1.Controls.Add(this.lblLegendReplacementPlanned);
             this.collapsiblePanel1.Controls.Add(this.lblLegendNoReplacementNeeded);
-            this.collapsiblePanel1.CurrentlyCollapsed = false;
-            this.collapsiblePanel1.ExpandedHeight = 196;
-            this.collapsiblePanel1.ExpandedWidth = 329;
-            this.collapsiblePanel1.ExpandUp = false;
+            this.collapsiblePanel1.Collapsed = false;
+            this.collapsiblePanel1.HeightWhenExpanded = 196;
+            this.collapsiblePanel1.WidthWhenExpanded = 329;
+            this.collapsiblePanel1.ExpandsUpward = false;
             this.collapsiblePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.collapsiblePanel1.Location = new System.Drawing.Point(5, 318);
             this.collapsiblePanel1.Margin = new System.Windows.Forms.Padding(6);
@@ -461,11 +461,11 @@
             // cpFilters
             // 
             this.cpFilters.BackColor = System.Drawing.Color.White;
-            this.cpFilters.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpFilters.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpFilters.CollapsedHeight = 40;
-            this.cpFilters.CollapsedWidth = 329;
-            this.cpFilters.CollapseLeft = true;
+            this.cpFilters.HeightWhenCollapsed = 40;
+            this.cpFilters.WidthWhenCollapsed = 329;
+            this.cpFilters.ExpandsRight = true;
             this.cpFilters.Controls.Add(this.cboLastDayAsOf);
             this.cpFilters.Controls.Add(this.cboReplacementReqdFilter);
             this.cpFilters.Controls.Add(this.label3);
@@ -473,10 +473,10 @@
             this.cpFilters.Controls.Add(this.label2);
             this.cpFilters.Controls.Add(this.cboResourceVariety);
             this.cpFilters.Controls.Add(this.label1);
-            this.cpFilters.CurrentlyCollapsed = false;
-            this.cpFilters.ExpandedHeight = 300;
-            this.cpFilters.ExpandedWidth = 329;
-            this.cpFilters.ExpandUp = false;
+            this.cpFilters.Collapsed = false;
+            this.cpFilters.HeightWhenExpanded = 300;
+            this.cpFilters.WidthWhenExpanded = 329;
+            this.cpFilters.ExpandsUpward = false;
             this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpFilters.Location = new System.Drawing.Point(5, 6);
             this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
@@ -781,18 +781,18 @@
             // collapsiblePanel5
             // 
             this.collapsiblePanel5.BackColor = System.Drawing.Color.White;
-            this.collapsiblePanel5.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel5.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.collapsiblePanel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.collapsiblePanel5.CollapsedHeight = 40;
-            this.collapsiblePanel5.CollapsedWidth = 329;
-            this.collapsiblePanel5.CollapseLeft = true;
+            this.collapsiblePanel5.HeightWhenCollapsed = 40;
+            this.collapsiblePanel5.WidthWhenCollapsed = 329;
+            this.collapsiblePanel5.ExpandsRight = true;
             this.collapsiblePanel5.Controls.Add(this.cboIncomingOutputFilters);
             this.collapsiblePanel5.Controls.Add(this.cboIncomingOutputInclude);
             this.collapsiblePanel5.Controls.Add(this.btnExportIncoming);
-            this.collapsiblePanel5.CurrentlyCollapsed = false;
-            this.collapsiblePanel5.ExpandedHeight = 177;
-            this.collapsiblePanel5.ExpandedWidth = 329;
-            this.collapsiblePanel5.ExpandUp = false;
+            this.collapsiblePanel5.Collapsed = false;
+            this.collapsiblePanel5.HeightWhenExpanded = 177;
+            this.collapsiblePanel5.WidthWhenExpanded = 329;
+            this.collapsiblePanel5.ExpandsUpward = false;
             this.collapsiblePanel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.collapsiblePanel5.Location = new System.Drawing.Point(5, 431);
             this.collapsiblePanel5.Margin = new System.Windows.Forms.Padding(6);
@@ -851,11 +851,11 @@
             // collapsiblePanel3
             // 
             this.collapsiblePanel3.BackColor = System.Drawing.Color.White;
-            this.collapsiblePanel3.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel3.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.collapsiblePanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.collapsiblePanel3.CollapsedHeight = 40;
-            this.collapsiblePanel3.CollapsedWidth = 329;
-            this.collapsiblePanel3.CollapseLeft = true;
+            this.collapsiblePanel3.HeightWhenCollapsed = 40;
+            this.collapsiblePanel3.WidthWhenCollapsed = 329;
+            this.collapsiblePanel3.ExpandsRight = true;
             this.collapsiblePanel3.Controls.Add(this.cboIncomingToAsOf);
             this.collapsiblePanel3.Controls.Add(this.cboReplacementIdentified);
             this.collapsiblePanel3.Controls.Add(this.label8);
@@ -863,10 +863,10 @@
             this.collapsiblePanel3.Controls.Add(this.label9);
             this.collapsiblePanel3.Controls.Add(this.cboIncomingVariety);
             this.collapsiblePanel3.Controls.Add(this.label10);
-            this.collapsiblePanel3.CurrentlyCollapsed = false;
-            this.collapsiblePanel3.ExpandedHeight = 300;
-            this.collapsiblePanel3.ExpandedWidth = 329;
-            this.collapsiblePanel3.ExpandUp = false;
+            this.collapsiblePanel3.Collapsed = false;
+            this.collapsiblePanel3.HeightWhenExpanded = 300;
+            this.collapsiblePanel3.WidthWhenExpanded = 329;
+            this.collapsiblePanel3.ExpandsUpward = false;
             this.collapsiblePanel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.collapsiblePanel3.Location = new System.Drawing.Point(5, 119);
             this.collapsiblePanel3.Margin = new System.Windows.Forms.Padding(6);
@@ -969,19 +969,19 @@
             // collapsiblePanel2
             // 
             this.collapsiblePanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.collapsiblePanel2.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel2.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.collapsiblePanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.collapsiblePanel2.CollapsedHeight = 40;
-            this.collapsiblePanel2.CollapsedWidth = 329;
-            this.collapsiblePanel2.CollapseLeft = true;
+            this.collapsiblePanel2.HeightWhenCollapsed = 40;
+            this.collapsiblePanel2.WidthWhenCollapsed = 329;
+            this.collapsiblePanel2.ExpandsRight = true;
             this.collapsiblePanel2.Controls.Add(this.label4);
             this.collapsiblePanel2.Controls.Add(this.label5);
             this.collapsiblePanel2.Controls.Add(this.label6);
             this.collapsiblePanel2.Controls.Add(this.label7);
-            this.collapsiblePanel2.CurrentlyCollapsed = true;
-            this.collapsiblePanel2.ExpandedHeight = 196;
-            this.collapsiblePanel2.ExpandedWidth = 329;
-            this.collapsiblePanel2.ExpandUp = false;
+            this.collapsiblePanel2.Collapsed = true;
+            this.collapsiblePanel2.HeightWhenExpanded = 196;
+            this.collapsiblePanel2.WidthWhenExpanded = 329;
+            this.collapsiblePanel2.ExpandsUpward = false;
             this.collapsiblePanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.collapsiblePanel2.Location = new System.Drawing.Point(5, 658);
             this.collapsiblePanel2.Margin = new System.Windows.Forms.Padding(6);

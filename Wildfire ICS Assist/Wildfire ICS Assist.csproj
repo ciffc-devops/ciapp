@@ -264,10 +264,16 @@
     <Compile Include="AirOpsForms\AirOpsAddAircraftForm.Designer.cs">
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BaseForm.cs">
+    <Compile Include="CustomControls\PrepAndApprovePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\PrepAndApprovePanel.Designer.cs">
+      <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateForms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BaseForm.Designer.cs">
+    <Compile Include="TemplateForms\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IncidentResourceForms\CheckedInResourcesForm.cs">
@@ -870,7 +876,10 @@
     <EmbeddedResource Include="AirOpsForms\AirOpsAddAircraftForm.resx">
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BaseForm.resx">
+    <EmbeddedResource Include="CustomControls\PrepAndApprovePanel.resx">
+      <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateForms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentResourceForms\CheckedInResourcesForm.resx">
@@ -1284,6 +1293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-487-exchange.png" />
     <None Include="Resources\glyphicons-basic-238-chat-message.png" />
     <None Include="Resources\glyphicons-basic-730-ambulance.png" />
     <None Include="Resources\glyphicons-basic-39-airplane.png" />

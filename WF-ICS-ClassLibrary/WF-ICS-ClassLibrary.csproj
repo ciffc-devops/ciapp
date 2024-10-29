@@ -181,6 +181,8 @@
     <Compile Include="Models\MedicalPlanModels\MedicalAidStation.cs" />
     <Compile Include="Models\MedicalPlanModels\MedicalPlan.cs" />
     <Compile Include="Models\MedicalPlanModels\MedivacService.cs" />
+    <Compile Include="Models\NewsModels\NewsArchive.cs" />
+    <Compile Include="Models\NewsModels\NewsItem.cs" />
     <Compile Include="Models\NoteModels\Note.cs" />
     <Compile Include="Models\NoteModels\NoteCategory.cs" />
     <Compile Include="Models\NoteModels\NoteTools.cs" />

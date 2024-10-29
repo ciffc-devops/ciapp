@@ -13,7 +13,7 @@ namespace WF_ICS_ClassLibrary.Utilities
     {
         // This constant is used to determine the keysize of the encryption algorithm in bits.
         // We divide this by 8 within the code below to get the equivalent number of bytes.
-        private const int Keysize = 256;
+        private const int Keysize = 128;
 
         // This constant determines the number of iterations for the password bytes generation function.
         private const int DerivationIterations = 1000;
@@ -21,9 +21,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static string Encrypt(string plainText, string passPhrase)
         {
             // Generate a random salt
-            var saltStringBytes = Generate256BitsOfRandomEntropy();
+            var saltStringBytes = Generate128BitsOfRandomEntropy();
             // Generate a random IV
-            var ivStringBytes = Generate256BitsOfRandomEntropy();
+            var ivStringBytes = Generate128BitsOfRandomEntropy();
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
 
             using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations))
@@ -31,7 +31,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 var keyBytes = password.GetBytes(Keysize / 8);
                 using (var aes = Aes.Create())
                 {
-                    aes.BlockSize = 256;
+                    aes.BlockSize = 128;
                     aes.Mode = CipherMode.CBC;
                     aes.Padding = PaddingMode.PKCS7;
 
@@ -72,7 +72,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 var keyBytes = password.GetBytes(Keysize / 8);
                 using (var symmetricKey = new RijndaelManaged())
                 {
-                    symmetricKey.BlockSize = 256;
+                    symmetricKey.BlockSize = 128;
                     symmetricKey.Mode = CipherMode.CBC;
                     symmetricKey.Padding = PaddingMode.PKCS7;
                     using (var decryptor = symmetricKey.CreateDecryptor(keyBytes, ivStringBytes))
@@ -100,8 +100,18 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
             return randomBytes;
         }
+        private static byte[] Generate128BitsOfRandomEntropy()
+        {
+            var randomBytes = new byte[16]; // 32 Bytes will give us 256 bits.
+            using (var rngCsp = new RNGCryptoServiceProvider())
+            {
+                // Fill the array with cryptographically secure random bytes.
+                rngCsp.GetBytes(randomBytes);
+            }
+            return randomBytes;
+        }
     }
-}
+
 
     public static class RandomPasswordGenerator
     {
@@ -142,4 +152,5 @@ namespace WF_ICS_ClassLibrary.Utilities
             return String.Join(null, _password);
         }
     }
+
 }

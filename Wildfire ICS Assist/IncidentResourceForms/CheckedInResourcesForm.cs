@@ -41,8 +41,8 @@ namespace Wildfire_ICS_Assist
             _bw.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
 
 
-            cpFilters.CurrentlyCollapsed = false;
-            cpPNumbers.CurrentlyCollapsed = true;
+            cpFilters.Collapsed = false;
+            cpPNumbers.Collapsed = true;
             this.dgvResources.DoubleBuffered(true);
 
             dgvResources.AutoGenerateColumns = false;
@@ -617,8 +617,8 @@ namespace Wildfire_ICS_Assist
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
             cpFilters.Width = splitContainer2.Panel2.Width - 10;
-            cpFilters.ExpandedWidth = cpFilters.Width;
-            cpFilters.CollapsedWidth = cpFilters.Width;
+            cpFilters.WidthWhenExpanded = cpFilters.Width;
+            cpFilters.WidthWhenCollapsed = cpFilters.Width;
 
         }
 

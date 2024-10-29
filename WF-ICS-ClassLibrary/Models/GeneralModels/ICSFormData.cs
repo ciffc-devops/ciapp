@@ -82,6 +82,29 @@ namespace WF_ICS_ClassLibrary.Models.GeneralModels
         public DateTime DatePrepared { get => _DatePrepared; set => _DatePrepared = value; }
         public DateTime DateApproved { get => _DateApproved; set => _DateApproved = value; }
 
+
+        public void SetApprovedBy(ICSRole role)
+        {
+            if (role != null)
+            {
+                ApprovedByRoleID = role.ID;
+                ApprovedByResourceID = role.IndividualID;
+                ApprovedByResourceName = role.IndividualName;
+                ApprovedByRoleName = role.RoleName;
+            }
+        }
+
+        public void SetPreparedBy(ICSRole role)
+        {
+            if (role != null)
+            {
+                PreparedByRoleID = role.ID;
+                PreparedByResourceID = role.IndividualID;
+                PreparedByResourceName = role.IndividualName;
+                PreparedByRoleName = role.RoleName;
+            }
+        }
+
         public ICSFormData Clone()
         {
             return this.MemberwiseClone() as ICSFormData;

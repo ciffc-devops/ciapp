@@ -59,7 +59,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             ID = System.Guid.NewGuid();
 
             //allObjectives = new List<IncidentObjective>();
-            allIncidentObjectives = new List<IncidentObjectivesSheet>();
+            AllIncidentObjectiveSheets = new List<IncidentObjectivesSheet>();
 
 
 
@@ -106,7 +106,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(14)] private List<Briefing> _allBriefings;
         //[ProtoMember(15)] private List<IncidentObjective> _allObjectives;
         [ProtoMember(16)] private List<OrganizationChart> _allOrgCharts;
-        [ProtoMember(17)] private List<IncidentObjectivesSheet> _allIncidentObjectives;
+        [ProtoMember(17)] private List<IncidentObjectivesSheet> _AllIncidentObjectiveSheets;
         [ProtoMember(18)] private List<MedicalPlan> _allMedicalPlans;
         [ProtoMember(19)] private List<CommsPlan> _allCommsPlans;
         [ProtoMember(20)] private List<CommsPlanItem> _additionalCommsItems;
@@ -246,7 +246,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
         public List<Briefing> allBriefings { get => _allBriefings; set => _allBriefings = value; }
         //public List<IncidentObjective> allObjectives { get => _allObjectives; set => _allObjectives = value; }
-        public List<IncidentObjectivesSheet> allIncidentObjectives { get => _allIncidentObjectives; set => _allIncidentObjectives = value; }
+        public List<IncidentObjectivesSheet> AllIncidentObjectiveSheets { get => _AllIncidentObjectiveSheets; set => _AllIncidentObjectiveSheets = value; }
+        public List<IncidentObjectivesSheet> ActiveIncidentObjectiveSheets { get => _AllIncidentObjectiveSheets.Where(o=>o.Active).ToList(); }
         public List<IncidentResource> AllIncidentResources { get => _IncidentResources; set => _IncidentResources = value; }
         public List<IncidentResource> ActiveIncidentResources { get => _IncidentResources.Where(o => o.Active).ToList(); }
 
@@ -384,7 +385,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 if (allOrgCharts.Count > 0) { int orgOps = allOrgCharts.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (orgOps > ops) { ops = orgOps; } }
                 if (allSafetyMessages.Count > 0) { int safeOps = allSafetyMessages.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (safeOps > ops) { ops = safeOps; } }
                 if (allBriefings.Count > 0) { int briefOps = allBriefings.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (briefOps > ops) { ops = briefOps; } }
-                if (allIncidentObjectives.Count > 0) { int objOps = allIncidentObjectives.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (objOps > ops) { ops = objOps; } }
+                if (AllIncidentObjectiveSheets.Count > 0) { int objOps = AllIncidentObjectiveSheets.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (objOps > ops) { ops = objOps; } }
                 if (allMedicalPlans.Count > 0) { int objOps = allMedicalPlans.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (objOps > ops) { ops = objOps; } }
                 //if (allSubjectProfiles.Count > 0) { int subOps = allSubjectProfiles.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (subOps > ops) { ops = subOps; } }
                 if (allCommsLogEntries.Count > 0) { int commsOps = allCommsLogEntries.OrderByDescending(o => o.OpPeriod).First().OpPeriod; if (commsOps > ops) { ops = commsOps; } }
@@ -403,7 +404,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 if (allOrgCharts.Count > 0) { int orgOps = allOrgCharts.OrderBy(o => o.OpPeriod).First().OpPeriod; if (orgOps < ops) { ops = orgOps; } }
                 if (allSafetyMessages.Count > 0) { int safeOps = allSafetyMessages.OrderBy(o => o.OpPeriod).First().OpPeriod; if (safeOps < ops) { ops = safeOps; } }
                 if (allBriefings.Count > 0) { int briefOps = allBriefings.OrderBy(o => o.OpPeriod).First().OpPeriod; if (briefOps < ops) { ops = briefOps; } }
-                if (allIncidentObjectives.Count > 0) { int objOps = allIncidentObjectives.OrderBy(o => o.OpPeriod).First().OpPeriod; if (objOps < ops) { ops = objOps; } }
+                if (AllIncidentObjectiveSheets.Count > 0) { int objOps = AllIncidentObjectiveSheets.OrderBy(o => o.OpPeriod).First().OpPeriod; if (objOps < ops) { ops = objOps; } }
                 if (allMedicalPlans.Count > 0) { int objOps = allMedicalPlans.OrderBy(o => o.OpPeriod).First().OpPeriod; if (objOps < ops) { ops = objOps; } }
                 //if (allSubjectProfiles.Count > 0) { int subOps = allSubjectProfiles.OrderBy(o => o.OpPeriod).First().OpPeriod; if (subOps < ops) { ops = subOps; } }
                 if (allCommsLogEntries.Count > 0) { int commsOps = allCommsLogEntries.OrderBy(o => o.OpPeriod).First().OpPeriod; if (commsOps < ops) { ops = commsOps; } }
@@ -419,7 +420,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             bool hasContent = false;
             if (allSafetyMessages.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allBriefings.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
-            else if (allIncidentObjectives.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
+            else if (AllIncidentObjectiveSheets.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             //else if (allSubjectProfiles.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (allCommsLogEntries.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
             else if (AllCheckInRecords.Where(o => o.OpPeriod == opPeriod).Any()) { hasContent = true; }
@@ -527,7 +528,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             else if (allMedicalPlans.First(o => o.OpPeriod == ops).ActiveAmbulances.Any() || allMedicalPlans.First(o => o.OpPeriod == ops).ActiveHospitals.Any() || allMedicalPlans.First(o => o.OpPeriod == ops).ActiveAidStations.Any()) { return true; }
             else { return false; }
         }
-        public bool hasMeaningfulObjectives(int ops) { return (allIncidentObjectives.Any(o => o.OpPeriod == ops && o.Objectives.Any())); }
+        public bool hasMeaningfulObjectives(int ops) { return (AllIncidentObjectiveSheets.Any(o => o.OpPeriod == ops && o.Objectives.Any())); }
         public bool hasAnySafetyMessages(int ops) { return allSafetyMessages.Any(o => o.OpPeriod == ops); }
 
         public bool hasMeaningfulTeamAssignments(int ops)
@@ -580,6 +581,17 @@ ProtoInclude(127, typeof(SubjectProfile)),
             return ops;
         }
 
+        public bool AnyOpPeriodHasMeaningfulContent
+        {
+            get
+            {
+                foreach (OperationalPeriod period in AllOperationalPeriods)
+                {
+                    if (this.OpPeriodHasContent(period.PeriodNumber)) { return true; }
+                }
+                return false;
+            }
+        }
 
         public Incident Clone()
         {
@@ -589,7 +601,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             cloneTo._allBriefings = new List<Briefing>(_allBriefings);
 
             cloneTo._allOrgCharts = new List<OrganizationChart>(_allOrgCharts);
-            cloneTo._allIncidentObjectives = new List<IncidentObjectivesSheet>(_allIncidentObjectives);
+            cloneTo._AllIncidentObjectiveSheets = new List<IncidentObjectivesSheet>(_AllIncidentObjectiveSheets);
             cloneTo._allMedicalPlans = new List<MedicalPlan>(_allMedicalPlans);
             cloneTo._allCommsPlans = new List<CommsPlan>(_allCommsPlans);
             cloneTo._additionalCommsItems = new List<CommsPlanItem>(_additionalCommsItems);

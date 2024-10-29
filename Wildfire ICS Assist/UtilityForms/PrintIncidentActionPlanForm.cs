@@ -153,7 +153,7 @@ namespace Wildfire_ICS_Assist
 
         private void setCheckboxStatusIncident()
         {
-            chkIncidentObjectives.Enabled = CurrentIncident.allIncidentObjectives.Any(o => o.Objectives.Any(i => i.Active));
+            chkIncidentObjectives.Enabled = CurrentIncident.AllIncidentObjectiveSheets.Any(o => o.Objectives.Any(i => i.Active));
             chkIncidentObjectives.Checked = chkIncidentObjectives.Enabled;
 
             chkCommsPlan.Enabled = CurrentIncident.allCommsPlans.Any(o => o.ActiveCommsItems.Any());
@@ -197,7 +197,7 @@ namespace Wildfire_ICS_Assist
         }
         private void setCheckboxStatusIncidentIAP()
         {
-            chkIncidentObjectives.Enabled = CurrentIncident.allIncidentObjectives.Any(o => o.Objectives.Any(i => i.Active));
+            chkIncidentObjectives.Enabled = CurrentIncident.AllIncidentObjectiveSheets.Any(o => o.Objectives.Any(i => i.Active));
             chkIncidentObjectives.Checked = chkIncidentObjectives.Enabled;
 
             chkCommsPlan.Enabled = CurrentIncident.allCommsPlans.Any(o => o.ActiveCommsItems.Any());

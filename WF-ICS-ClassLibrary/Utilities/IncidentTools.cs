@@ -295,7 +295,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static void renumberObjectives(this Incident task, int currentOpPeriod)
         {
             int priority = 1;
-            IncidentObjectivesSheet incidentObjectives = task.allIncidentObjectives.First(o => o.OpPeriod == currentOpPeriod);
+            IncidentObjectivesSheet incidentObjectives = task.AllIncidentObjectiveSheets.First(o => o.OpPeriod == currentOpPeriod);
 
             foreach (IncidentObjective objective in incidentObjectives.Objectives.OrderBy(o => o.Priority))
             {
@@ -409,7 +409,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         public static void createObjectivesSheetAsNeeded(this Incident incident, int ops)
         {
-            if (!incident.allIncidentObjectives.Any(o => o.OpPeriod == ops))
+            if (!incident.AllIncidentObjectiveSheets.Any(o => o.OpPeriod == ops))
             {
                 IncidentObjectivesSheet sheet = new IncidentObjectivesSheet();
                 sheet.OpPeriod = ops;
@@ -446,11 +446,13 @@ namespace WF_ICS_ClassLibrary.Utilities
             if (!task.allOrgCharts.Any(o => o.OpPeriod == ops))
             {
                OrganizationChart chart = task.createOrgChartFromPrevious(0, ops);
-                if(chart != null)
+                if (chart != null)
                 {
                     chart.CreateOpGroupsForOrgRoles(task);
-
-                    Globals.incidentService.UpsertOrganizationalChart(chart);
+                    if (Globals.incidentService != null)
+                    {
+                        Globals.incidentService.UpsertOrganizationalChart(chart);
+                    }
                 }
             }
         }
@@ -507,7 +509,10 @@ namespace WF_ICS_ClassLibrary.Utilities
                 {
                     OperationalGroup group = incident.createOperationalGroupFromRole(role);
                     role.OperationalGroupID = group.ID;
-                    Globals.incidentService.UpsertOperationalGroup(group);
+                    if (Globals.incidentService != null)
+                    {
+                        Globals.incidentService.UpsertOperationalGroup(group);
+                    }
                 }
             }
         }
@@ -556,9 +561,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             task.createObjectivesSheetAsNeeded(thisOpPeriod);
 
-            if (task.allIncidentObjectives.First(o=>o.OpPeriod == thisOpPeriod).Objectives.Any())
+            if (task.AllIncidentObjectiveSheets.First(o=>o.OpPeriod == thisOpPeriod).Objectives.Any())
             {
-                return task.allIncidentObjectives.First(o => o.OpPeriod == thisOpPeriod).Objectives.Max(o => o.Priority) + 1;
+                return task.AllIncidentObjectiveSheets.First(o => o.OpPeriod == thisOpPeriod).Objectives.Max(o => o.Priority) + 1;
             }
             return 1;
         }

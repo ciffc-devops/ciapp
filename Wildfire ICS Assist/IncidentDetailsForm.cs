@@ -74,7 +74,7 @@ namespace Wildfire_ICS_Assist
             //collapseAllPanels();
 
             //debug
-            cpIncidentActionPlan.CurrentlyCollapsed = false;
+            cpIncidentActionPlan.Collapsed = false;
 
             CreateNewIncident();
             displayIncidentDetails();
@@ -2267,15 +2267,16 @@ namespace Wildfire_ICS_Assist
 
                 if (Program.InternetSyncEnabled)
                 {
-                    serverStatusText.Append("Internet sync enabled | ");
+                    serverStatusText.Append("Internet sync enabled");
                     tmrInternetSync.Enabled = true;
                 } else
                 {
-                    serverStatusText.Append("Internet sync NOT enabled | ");
+                    //serverStatusText.Append("Internet sync NOT enabled");
                 }
 
                 if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && ThisMachineIsServer)
                 {
+                    if (Program.InternetSyncEnabled) { serverStatusText.Append(" | "); }
                     serverStatusText.Append("LAN Server enabled IP: "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
                     requestIncidentFromServerToolStripMenuItem.Enabled = false;
                     //downloadMembersFromServerToolStripMenuItem.Enabled = false;
@@ -2285,6 +2286,7 @@ namespace Wildfire_ICS_Assist
                 }
                 else if (ThisMachineIsClient)
                 {
+                    if (Program.InternetSyncEnabled) { serverStatusText.Append(" | "); }
                     serverStatusText.Append("LAN connection to "); serverStatusText.Append(ServerIP); serverStatusText.Append(" Port "); serverStatusText.Append(ServerPort);
                     requestIncidentFromServerToolStripMenuItem.Enabled = true;
                     ///downloadMembersFromServerToolStripMenuItem.Enabled = true;
@@ -2294,7 +2296,7 @@ namespace Wildfire_ICS_Assist
                 }
                 else
                 {
-                    serverStatusText.Append("Not connected to another local computer");
+                    //serverStatusText.Append("Not connected to another local computer");
                     requestIncidentFromServerToolStripMenuItem.Enabled = false;
                     networkTestToolStripMenuItem.Enabled = false;
                     requestOptionsFromServerToolStripMenuItem.Enabled = false;

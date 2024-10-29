@@ -422,11 +422,11 @@
             // cpFilters
             // 
             this.cpFilters.BackColor = System.Drawing.Color.White;
-            this.cpFilters.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpFilters.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpFilters.CollapsedHeight = 40;
-            this.cpFilters.CollapsedWidth = 290;
-            this.cpFilters.CollapseLeft = true;
+            this.cpFilters.HeightWhenCollapsed = 40;
+            this.cpFilters.WidthWhenCollapsed = 290;
+            this.cpFilters.ExpandsRight = true;
             this.cpFilters.Controls.Add(this.cboExpandCrews);
             this.cpFilters.Controls.Add(this.label4);
             this.cpFilters.Controls.Add(this.btnFilter3ShowHelp);
@@ -436,10 +436,10 @@
             this.cpFilters.Controls.Add(this.label2);
             this.cpFilters.Controls.Add(this.cboResourceVariety);
             this.cpFilters.Controls.Add(this.label1);
-            this.cpFilters.CurrentlyCollapsed = false;
-            this.cpFilters.ExpandedHeight = 322;
-            this.cpFilters.ExpandedWidth = 290;
-            this.cpFilters.ExpandUp = false;
+            this.cpFilters.Collapsed = false;
+            this.cpFilters.HeightWhenExpanded = 322;
+            this.cpFilters.WidthWhenExpanded = 290;
+            this.cpFilters.ExpandsUpward = false;
             this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpFilters.Location = new System.Drawing.Point(6, 81);
             this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
@@ -572,11 +572,11 @@
             // cpPNumbers
             // 
             this.cpPNumbers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpPNumbers.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpPNumbers.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpPNumbers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpPNumbers.CollapsedHeight = 40;
-            this.cpPNumbers.CollapsedWidth = 290;
-            this.cpPNumbers.CollapseLeft = true;
+            this.cpPNumbers.HeightWhenCollapsed = 40;
+            this.cpPNumbers.WidthWhenCollapsed = 290;
+            this.cpPNumbers.ExpandsRight = true;
             this.cpPNumbers.Controls.Add(this.btnPNumHelp);
             this.cpPNumbers.Controls.Add(this.numCNumMax);
             this.cpPNumbers.Controls.Add(this.numCNumMin);
@@ -594,10 +594,10 @@
             this.cpPNumbers.Controls.Add(this.lblVNumTitle);
             this.cpPNumbers.Controls.Add(this.label5);
             this.cpPNumbers.Controls.Add(this.lblPNumTitle);
-            this.cpPNumbers.CurrentlyCollapsed = true;
-            this.cpPNumbers.ExpandedHeight = 357;
-            this.cpPNumbers.ExpandedWidth = 290;
-            this.cpPNumbers.ExpandUp = true;
+            this.cpPNumbers.Collapsed = true;
+            this.cpPNumbers.HeightWhenExpanded = 357;
+            this.cpPNumbers.WidthWhenExpanded = 290;
+            this.cpPNumbers.ExpandsUpward = true;
             this.cpPNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpPNumbers.Location = new System.Drawing.Point(278, 399);
             this.cpPNumbers.Margin = new System.Windows.Forms.Padding(6);

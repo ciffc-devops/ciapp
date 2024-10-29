@@ -106,11 +106,13 @@ namespace Wildfire_ICS_Assist
         {
             get
             {
+                if (CurrentIncident == null) { return null; }
                 if(CurrentIncident != null)
                 {
                     CurrentIncident.createOrgChartAsNeeded(CurrentOpPeriod);
                 }
-                return CurrentIncident.allOrgCharts.First(o=>o.OpPeriod== CurrentOpPeriod);
+                if (CurrentIncident != null && CurrentIncident.allOrgCharts != null) { return CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == CurrentOpPeriod); }
+                return null;
             }
         }
         /*

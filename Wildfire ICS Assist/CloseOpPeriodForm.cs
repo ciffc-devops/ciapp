@@ -405,7 +405,7 @@ namespace Wildfire_ICS_Assist
         {
             Program.CurrentIncident.createObjectivesSheetAsNeeded(Program.CurrentOpPeriod);
 
-            dgvObjectives.DataSource = Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.OrderBy(o=>o.Priority).ThenBy(o=>o.Objective).ToList();
+            dgvObjectives.DataSource = Program.CurrentIncident.AllIncidentObjectiveSheets.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.OrderBy(o=>o.Priority).ThenBy(o=>o.Objective).ToList();
 
 
         }
@@ -416,7 +416,7 @@ namespace Wildfire_ICS_Assist
             {
                 IncidentObjective savedObjective = (IncidentObjective)dgvObjectives.Rows[e.RowIndex].DataBoundItem;
 
-                if (!Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.Any(o => o.Objective.Equals(savedObjective.Objective) && o.OpPeriod == NextOp))
+                if (!Program.CurrentIncident.AllIncidentObjectiveSheets.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.Any(o => o.Objective.Equals(savedObjective.Objective) && o.OpPeriod == NextOp))
                 {
                     IncidentObjective newObjective = new IncidentObjective();
                     newObjective.OpPeriod = NextOp;
@@ -436,9 +436,9 @@ namespace Wildfire_ICS_Assist
             if (dgvObjectives.Columns["colObjectiveCompleted"] != null && e.RowIndex >= 0 && e.ColumnIndex == dgvObjectives.Columns["colObjectiveCompleted"].Index)
             {
                 IncidentObjective objective = (IncidentObjective)dgvObjectives.Rows[e.RowIndex].DataBoundItem;
-                if (Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.Any(o => o.ObjectiveID == objective.ObjectiveID))
+                if (Program.CurrentIncident.AllIncidentObjectiveSheets.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.Any(o => o.ObjectiveID == objective.ObjectiveID))
                 {
-                    IncidentObjective savedObjective = Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.First(o => o.ObjectiveID == objective.ObjectiveID);
+                    IncidentObjective savedObjective = Program.CurrentIncident.AllIncidentObjectiveSheets.First(o => o.OpPeriod == Program.CurrentOpPeriod).ActiveObjectives.First(o => o.ObjectiveID == objective.ObjectiveID);
                     savedObjective.Completed = objective.Completed;
                     Program.incidentDataService.UpsertIncidentObjective(savedObjective);
                 }

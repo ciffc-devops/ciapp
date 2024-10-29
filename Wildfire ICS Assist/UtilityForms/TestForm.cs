@@ -282,18 +282,34 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
                 if (checkboxes[12].Checked)
                 {
+
                     //comms plan
-                    CommsPlan commsPlan = TestTools.createTestCommsPlan(seed);
-                    commsPlan.OpPeriod = Program.CurrentOpPeriod;
-                    log.Append("Created CommsPlan"); log.Append(Environment.NewLine);
+                    CommsPlan commsPlan = null;
+                    if(Program.CurrentIncident.allCommsPlans.Any(o=>o.OpPeriod == Program.CurrentOpPeriod && o.Active))
+                    {
+                        commsPlan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod && o.Active);
+                        for(int x = 0; x < 6; x++)
+                        {
+                            CommsPlanItem item = TestTools.createTestCommsPlanItem(x);
+                            commsPlan.allCommsItems.Add(item);
+                        }
+                    }
+                    if (commsPlan == null)
+                    {
+                        commsPlan = TestTools.createTestCommsPlan(seed);
+                        commsPlan.OpPeriod = Program.CurrentOpPeriod;
+                        log.Append("Created CommsPlan"); log.Append(Environment.NewLine);
+
+                    }
                     Program.incidentDataService.UpsertCommsPlan(commsPlan);
+
                     log.Append("Saved CommsPlan"); log.Append(Environment.NewLine);
 
 
                 }
                 if (checkboxes[13].Checked)
                 {
-                    //comms plan
+                    //general messages
                     GeneralMessage test = TestTools.createTestGeneralMessage(seed);
                     test.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created GeneralMessage"); log.Append(Environment.NewLine);
@@ -304,10 +320,25 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 }
                 if (checkboxes[14].Checked)
                 {
-                    IncidentObjectivesSheet tesIncidentObjectivesSheet = TestTools.createTestObjectiveSheet(seed);
-                    tesIncidentObjectivesSheet.OpPeriod = Program.CurrentOpPeriod;
-                    log.Append("Created IncidentObjectivesSheet"); log.Append(Environment.NewLine);
-                    Program.incidentDataService.UpsertIncidentObjectivesSheet(tesIncidentObjectivesSheet);
+                    IncidentObjectivesSheet testIncidentObjectivesSheet = null;
+                    if (Program.CurrentIncident.ActiveIncidentObjectiveSheets.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
+                    {
+                        testIncidentObjectivesSheet = Program.CurrentIncident.ActiveIncidentObjectiveSheets.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
+                        for (int x = 0; x < 5; x++)
+                        {
+                            testIncidentObjectivesSheet.Objectives.Add(TestTools.createTestIncidentObjective(x));
+                        }
+                    }
+                    else
+                    {
+                        testIncidentObjectivesSheet  = TestTools.createTestObjectiveSheet(seed);
+                        testIncidentObjectivesSheet.OpPeriod = Program.CurrentOpPeriod;
+                        log.Append("Created IncidentObjectivesSheet"); log.Append(Environment.NewLine);
+                    }
+                    Program.incidentDataService.UpsertIncidentObjectivesSheet(testIncidentObjectivesSheet);
+
+
+
                     log.Append("Saved IncidentObjectivesSheet"); log.Append(Environment.NewLine);
 
 
