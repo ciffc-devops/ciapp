@@ -105,13 +105,13 @@ namespace Wildfire_ICS_Tests
         public void TestIncidentObjectives()
         {
             int seed = 1;
-            int countBefore = wFIncidentService.CurrentIncident.allIncidentObjectives.Count;
+            int countBefore = wFIncidentService.CurrentIncident.AllIncidentObjectiveSheets.Count;
             IncidentObjectivesSheet item = TestTools.createTestObjectiveSheet(seed);
             item.OpPeriod = seed;
             wFIncidentService.UpsertIncidentObjectivesSheet(item);
             Assert.AreEqual(item.Objectives.Count, 5, "Objectives not added correctly");
 
-            Assert.AreNotEqual(wFIncidentService.CurrentIncident.allIncidentObjectives.Count, countBefore, 0, "Incident Objectives Sheet not added");
+            Assert.AreNotEqual(wFIncidentService.CurrentIncident.AllIncidentObjectiveSheets.Count, countBefore, 0, "Incident Objectives Sheet not added");
         }
     }
 }

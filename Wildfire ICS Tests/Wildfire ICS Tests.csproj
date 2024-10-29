@@ -112,6 +112,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddObjectTets.cs" />
+    <Compile Include="EncryptionTests.cs" />
+    <Compile Include="InternetSyncTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
