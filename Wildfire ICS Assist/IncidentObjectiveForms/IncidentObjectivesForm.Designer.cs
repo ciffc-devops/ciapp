@@ -34,28 +34,24 @@
             this.colObjective = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUp = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colDown = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.prepAndApprovePanel1 = new Wildfire_ICS_Assist.CustomControls.PrepAndApprovePanel();
+            this.cpWeather = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.txtWeatherForcast = new SpellBox();
+            this.cpGeneralSafety = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.txtGeneralSafetyMessage = new SpellBox();
+            this.cboSafetyMessages = new System.Windows.Forms.ComboBox();
+            this.btnFillSafetyFrom208 = new System.Windows.Forms.Button();
             this.cpFireStatus = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cboFireStatus = new System.Windows.Forms.ComboBox();
             this.txtFireSize = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cpWeather = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.cpGeneralSafety = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.cboSafetyMessages = new System.Windows.Forms.ComboBox();
-            this.btnFillSafetyFrom208 = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dataGridViewButtonColumn2 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.txtWeatherForcast = new SpellBox();
-            this.txtGeneralSafetyMessage = new SpellBox();
-            this.cpPrepared = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.cboPreparedBy = new System.Windows.Forms.ComboBox();
-            this.cboApprovedBy = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -65,10 +61,9 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).BeginInit();
-            this.cpFireStatus.SuspendLayout();
             this.cpWeather.SuspendLayout();
             this.cpGeneralSafety.SuspendLayout();
-            this.cpPrepared.SuspendLayout();
+            this.cpFireStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -108,7 +103,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.cpPrepared);
+            this.splitContainer2.Panel2.Controls.Add(this.prepAndApprovePanel1);
             this.splitContainer2.Panel2.Controls.Add(this.cpWeather);
             this.splitContainer2.Panel2.Controls.Add(this.cpGeneralSafety);
             this.splitContainer2.Panel2.Controls.Add(this.cpFireStatus);
@@ -170,29 +165,141 @@
             this.colDown.ReadOnly = true;
             this.colDown.Width = 65;
             // 
+            // prepAndApprovePanel1
+            // 
+            this.prepAndApprovePanel1.ApprovedByDateTime = new System.DateTime(((long)(0)));
+            this.prepAndApprovePanel1.BackColor = System.Drawing.Color.White;
+            this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.prepAndApprovePanel1.Collapsed = false;
+            this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.prepAndApprovePanel1.ExpandsRight = true;
+            this.prepAndApprovePanel1.ExpandsUpward = false;
+            this.prepAndApprovePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prepAndApprovePanel1.Location = new System.Drawing.Point(10, 162);
+            this.prepAndApprovePanel1.Margin = new System.Windows.Forms.Padding(6);
+            this.prepAndApprovePanel1.Name = "prepAndApprovePanel1";
+            this.prepAndApprovePanel1.PreparedByDateTime = new System.DateTime(2024, 10, 29, 14, 7, 6, 690);
+            this.prepAndApprovePanel1.Size = new System.Drawing.Size(485, 199);
+            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(485, 199);
+            this.prepAndApprovePanel1.TabIndex = 61;
+            this.prepAndApprovePanel1.TitleText = "Prepared and Approved by";
+            // 
+            // cpWeather
+            // 
+            this.cpWeather.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpWeather.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpWeather.Collapsed = true;
+            this.cpWeather.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpWeather.Controls.Add(this.txtWeatherForcast);
+            this.cpWeather.ExpandsRight = true;
+            this.cpWeather.ExpandsUpward = false;
+            this.cpWeather.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.cpWeather.HeightWhenCollapsed = 40;
+            this.cpWeather.HeightWhenExpanded = 260;
+            this.cpWeather.Location = new System.Drawing.Point(10, 6);
+            this.cpWeather.Margin = new System.Windows.Forms.Padding(6);
+            this.cpWeather.Name = "cpWeather";
+            this.cpWeather.Size = new System.Drawing.Size(485, 40);
+            this.cpWeather.TabIndex = 58;
+            this.cpWeather.TitleText = "Weather Forecast";
+            this.cpWeather.WidthWhenCollapsed = 485;
+            this.cpWeather.WidthWhenExpanded = 485;
+            // 
+            // txtWeatherForcast
+            // 
+            this.txtWeatherForcast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.txtWeatherForcast.Location = new System.Drawing.Point(7, 51);
+            this.txtWeatherForcast.Multiline = true;
+            this.txtWeatherForcast.Name = "txtWeatherForcast";
+            this.txtWeatherForcast.Size = new System.Drawing.Size(471, 204);
+            this.txtWeatherForcast.TabIndex = 34;
+            this.txtWeatherForcast.WordWrap = true;
+            this.txtWeatherForcast.Child = new System.Windows.Controls.TextBox();
+            // 
+            // cpGeneralSafety
+            // 
+            this.cpGeneralSafety.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpGeneralSafety.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpGeneralSafety.Collapsed = true;
+            this.cpGeneralSafety.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpGeneralSafety.Controls.Add(this.txtGeneralSafetyMessage);
+            this.cpGeneralSafety.Controls.Add(this.cboSafetyMessages);
+            this.cpGeneralSafety.Controls.Add(this.btnFillSafetyFrom208);
+            this.cpGeneralSafety.ExpandsRight = true;
+            this.cpGeneralSafety.ExpandsUpward = false;
+            this.cpGeneralSafety.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.cpGeneralSafety.HeightWhenCollapsed = 40;
+            this.cpGeneralSafety.HeightWhenExpanded = 300;
+            this.cpGeneralSafety.Location = new System.Drawing.Point(10, 58);
+            this.cpGeneralSafety.Margin = new System.Windows.Forms.Padding(6);
+            this.cpGeneralSafety.Name = "cpGeneralSafety";
+            this.cpGeneralSafety.Size = new System.Drawing.Size(485, 40);
+            this.cpGeneralSafety.TabIndex = 59;
+            this.cpGeneralSafety.TitleText = "General Safety Message";
+            this.cpGeneralSafety.WidthWhenCollapsed = 485;
+            this.cpGeneralSafety.WidthWhenExpanded = 485;
+            // 
+            // txtGeneralSafetyMessage
+            // 
+            this.txtGeneralSafetyMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.txtGeneralSafetyMessage.Location = new System.Drawing.Point(7, 51);
+            this.txtGeneralSafetyMessage.Multiline = true;
+            this.txtGeneralSafetyMessage.Name = "txtGeneralSafetyMessage";
+            this.txtGeneralSafetyMessage.Size = new System.Drawing.Size(471, 192);
+            this.txtGeneralSafetyMessage.TabIndex = 36;
+            this.txtGeneralSafetyMessage.WordWrap = true;
+            this.txtGeneralSafetyMessage.Child = new System.Windows.Controls.TextBox();
+            // 
+            // cboSafetyMessages
+            // 
+            this.cboSafetyMessages.DisplayMember = "SummaryLine";
+            this.cboSafetyMessages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSafetyMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.cboSafetyMessages.FormattingEnabled = true;
+            this.cboSafetyMessages.Location = new System.Drawing.Point(176, 257);
+            this.cboSafetyMessages.Name = "cboSafetyMessages";
+            this.cboSafetyMessages.Size = new System.Drawing.Size(302, 32);
+            this.cboSafetyMessages.TabIndex = 35;
+            this.cboSafetyMessages.ValueMember = "ID";
+            // 
+            // btnFillSafetyFrom208
+            // 
+            this.btnFillSafetyFrom208.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnFillSafetyFrom208.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_302_square_download;
+            this.btnFillSafetyFrom208.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFillSafetyFrom208.Location = new System.Drawing.Point(7, 249);
+            this.btnFillSafetyFrom208.Name = "btnFillSafetyFrom208";
+            this.btnFillSafetyFrom208.Size = new System.Drawing.Size(163, 46);
+            this.btnFillSafetyFrom208.TabIndex = 34;
+            this.btnFillSafetyFrom208.Text = "Fill from 208";
+            this.btnFillSafetyFrom208.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnFillSafetyFrom208.UseVisualStyleBackColor = true;
+            this.btnFillSafetyFrom208.Click += new System.EventHandler(this.btnFillSafetyFrom208_Click);
+            // 
             // cpFireStatus
             // 
             this.cpFireStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpFireStatus.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpFireStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpFireStatus.CollapsedHeight = 40;
-            this.cpFireStatus.CollapsedWidth = 485;
-            this.cpFireStatus.CollapseLeft = true;
+            this.cpFireStatus.Collapsed = true;
+            this.cpFireStatus.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpFireStatus.Controls.Add(this.cboFireStatus);
             this.cpFireStatus.Controls.Add(this.txtFireSize);
             this.cpFireStatus.Controls.Add(this.label2);
             this.cpFireStatus.Controls.Add(this.label1);
-            this.cpFireStatus.CurrentlyCollapsed = true;
-            this.cpFireStatus.ExpandedHeight = 137;
-            this.cpFireStatus.ExpandedWidth = 485;
-            this.cpFireStatus.ExpandUp = false;
+            this.cpFireStatus.ExpandsRight = true;
+            this.cpFireStatus.ExpandsUpward = false;
             this.cpFireStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.cpFireStatus.Location = new System.Drawing.Point(10, 119);
+            this.cpFireStatus.HeightWhenCollapsed = 40;
+            this.cpFireStatus.HeightWhenExpanded = 137;
+            this.cpFireStatus.Location = new System.Drawing.Point(10, 110);
             this.cpFireStatus.Margin = new System.Windows.Forms.Padding(6);
             this.cpFireStatus.Name = "cpFireStatus";
             this.cpFireStatus.Size = new System.Drawing.Size(485, 40);
             this.cpFireStatus.TabIndex = 60;
             this.cpFireStatus.TitleText = "Fire Size / Status";
+            this.cpFireStatus.WidthWhenCollapsed = 485;
+            this.cpFireStatus.WidthWhenExpanded = 485;
             // 
             // cboFireStatus
             // 
@@ -239,76 +346,6 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Fire Size ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cpWeather
-            // 
-            this.cpWeather.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpWeather.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpWeather.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpWeather.CollapsedHeight = 40;
-            this.cpWeather.CollapsedWidth = 485;
-            this.cpWeather.CollapseLeft = true;
-            this.cpWeather.Controls.Add(this.txtWeatherForcast);
-            this.cpWeather.CurrentlyCollapsed = true;
-            this.cpWeather.ExpandedHeight = 260;
-            this.cpWeather.ExpandedWidth = 485;
-            this.cpWeather.ExpandUp = false;
-            this.cpWeather.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.cpWeather.Location = new System.Drawing.Point(10, 15);
-            this.cpWeather.Margin = new System.Windows.Forms.Padding(6);
-            this.cpWeather.Name = "cpWeather";
-            this.cpWeather.Size = new System.Drawing.Size(485, 40);
-            this.cpWeather.TabIndex = 58;
-            this.cpWeather.TitleText = "Weather Forecast";
-            // 
-            // cpGeneralSafety
-            // 
-            this.cpGeneralSafety.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpGeneralSafety.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpGeneralSafety.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpGeneralSafety.CollapsedHeight = 40;
-            this.cpGeneralSafety.CollapsedWidth = 485;
-            this.cpGeneralSafety.CollapseLeft = true;
-            this.cpGeneralSafety.Controls.Add(this.txtGeneralSafetyMessage);
-            this.cpGeneralSafety.Controls.Add(this.cboSafetyMessages);
-            this.cpGeneralSafety.Controls.Add(this.btnFillSafetyFrom208);
-            this.cpGeneralSafety.CurrentlyCollapsed = true;
-            this.cpGeneralSafety.ExpandedHeight = 300;
-            this.cpGeneralSafety.ExpandedWidth = 485;
-            this.cpGeneralSafety.ExpandUp = false;
-            this.cpGeneralSafety.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.cpGeneralSafety.Location = new System.Drawing.Point(10, 67);
-            this.cpGeneralSafety.Margin = new System.Windows.Forms.Padding(6);
-            this.cpGeneralSafety.Name = "cpGeneralSafety";
-            this.cpGeneralSafety.Size = new System.Drawing.Size(485, 40);
-            this.cpGeneralSafety.TabIndex = 59;
-            this.cpGeneralSafety.TitleText = "General Safety Message";
-            // 
-            // cboSafetyMessages
-            // 
-            this.cboSafetyMessages.DisplayMember = "SummaryLine";
-            this.cboSafetyMessages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSafetyMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.cboSafetyMessages.FormattingEnabled = true;
-            this.cboSafetyMessages.Location = new System.Drawing.Point(176, 257);
-            this.cboSafetyMessages.Name = "cboSafetyMessages";
-            this.cboSafetyMessages.Size = new System.Drawing.Size(302, 32);
-            this.cboSafetyMessages.TabIndex = 35;
-            this.cboSafetyMessages.ValueMember = "ID";
-            // 
-            // btnFillSafetyFrom208
-            // 
-            this.btnFillSafetyFrom208.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnFillSafetyFrom208.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_302_square_download;
-            this.btnFillSafetyFrom208.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFillSafetyFrom208.Location = new System.Drawing.Point(7, 249);
-            this.btnFillSafetyFrom208.Name = "btnFillSafetyFrom208";
-            this.btnFillSafetyFrom208.Size = new System.Drawing.Size(163, 46);
-            this.btnFillSafetyFrom208.TabIndex = 34;
-            this.btnFillSafetyFrom208.Text = "Fill from 208";
-            this.btnFillSafetyFrom208.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnFillSafetyFrom208.UseVisualStyleBackColor = true;
-            this.btnFillSafetyFrom208.Click += new System.EventHandler(this.btnFillSafetyFrom208_Click);
             // 
             // btnPrint
             // 
@@ -379,94 +416,6 @@
             this.dataGridViewButtonColumn2.ReadOnly = true;
             this.dataGridViewButtonColumn2.Width = 65;
             // 
-            // txtWeatherForcast
-            // 
-            this.txtWeatherForcast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.txtWeatherForcast.Location = new System.Drawing.Point(7, 51);
-            this.txtWeatherForcast.Multiline = true;
-            this.txtWeatherForcast.Name = "txtWeatherForcast";
-            this.txtWeatherForcast.Size = new System.Drawing.Size(471, 204);
-            this.txtWeatherForcast.TabIndex = 34;
-            this.txtWeatherForcast.WordWrap = true;
-            this.txtWeatherForcast.Child = new System.Windows.Controls.TextBox();
-            // 
-            // txtGeneralSafetyMessage
-            // 
-            this.txtGeneralSafetyMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.txtGeneralSafetyMessage.Location = new System.Drawing.Point(7, 51);
-            this.txtGeneralSafetyMessage.Multiline = true;
-            this.txtGeneralSafetyMessage.Name = "txtGeneralSafetyMessage";
-            this.txtGeneralSafetyMessage.Size = new System.Drawing.Size(471, 192);
-            this.txtGeneralSafetyMessage.TabIndex = 36;
-            this.txtGeneralSafetyMessage.WordWrap = true;
-            this.txtGeneralSafetyMessage.Child = new System.Windows.Controls.TextBox();
-            // 
-            // cpPrepared
-            // 
-            this.cpPrepared.BackColor = System.Drawing.Color.White;
-            this.cpPrepared.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpPrepared.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpPrepared.CollapsedHeight = 40;
-            this.cpPrepared.CollapsedWidth = 485;
-            this.cpPrepared.CollapseLeft = true;
-            this.cpPrepared.Controls.Add(this.label4);
-            this.cpPrepared.Controls.Add(this.label3);
-            this.cpPrepared.Controls.Add(this.cboApprovedBy);
-            this.cpPrepared.Controls.Add(this.cboPreparedBy);
-            this.cpPrepared.CurrentlyCollapsed = false;
-            this.cpPrepared.ExpandedHeight = 140;
-            this.cpPrepared.ExpandedWidth = 485;
-            this.cpPrepared.ExpandUp = false;
-            this.cpPrepared.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpPrepared.Location = new System.Drawing.Point(10, 168);
-            this.cpPrepared.Margin = new System.Windows.Forms.Padding(6);
-            this.cpPrepared.Name = "cpPrepared";
-            this.cpPrepared.Size = new System.Drawing.Size(485, 140);
-            this.cpPrepared.TabIndex = 61;
-            this.cpPrepared.TitleText = "Prepared and Approved";
-            // 
-            // cboPreparedBy
-            // 
-            this.cboPreparedBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboPreparedBy.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboPreparedBy.FormattingEnabled = true;
-            this.cboPreparedBy.Location = new System.Drawing.Point(140, 51);
-            this.cboPreparedBy.Name = "cboPreparedBy";
-            this.cboPreparedBy.Size = new System.Drawing.Size(335, 32);
-            this.cboPreparedBy.TabIndex = 33;
-            this.cboPreparedBy.Leave += new System.EventHandler(this.cboPreparedBy_Leave);
-            // 
-            // cboApprovedBy
-            // 
-            this.cboApprovedBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboApprovedBy.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboApprovedBy.FormattingEnabled = true;
-            this.cboApprovedBy.Location = new System.Drawing.Point(140, 89);
-            this.cboApprovedBy.Name = "cboApprovedBy";
-            this.cboApprovedBy.Size = new System.Drawing.Size(335, 32);
-            this.cboApprovedBy.TabIndex = 34;
-            this.cboApprovedBy.Leave += new System.EventHandler(this.cboApprovedBy_Leave);
-            // 
-            // label3
-            // 
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.label3.Location = new System.Drawing.Point(7, 51);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 32);
-            this.label3.TabIndex = 35;
-            this.label3.Text = "Prepared by";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label4
-            // 
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.label4.Location = new System.Drawing.Point(7, 89);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 32);
-            this.label4.TabIndex = 36;
-            this.label4.Text = "Approved by";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // IncidentObjectivesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -474,11 +423,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(878, 440);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(894, 479);
             this.Name = "IncidentObjectivesForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Incident Objectives";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentObjectivesForm_FormClosing);
             this.Load += new System.EventHandler(this.IncidentObjectivesForm_Load);
@@ -491,11 +437,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvObjectives)).EndInit();
-            this.cpFireStatus.ResumeLayout(false);
-            this.cpFireStatus.PerformLayout();
             this.cpWeather.ResumeLayout(false);
             this.cpGeneralSafety.ResumeLayout(false);
-            this.cpPrepared.ResumeLayout(false);
+            this.cpFireStatus.ResumeLayout(false);
+            this.cpFireStatus.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -525,10 +470,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn dataGridViewButtonColumn2;
         private SpellBox txtWeatherForcast;
         private SpellBox txtGeneralSafetyMessage;
-        private CustomControls.CollapsiblePanel cpPrepared;
-        private System.Windows.Forms.ComboBox cboApprovedBy;
-        private System.Windows.Forms.ComboBox cboPreparedBy;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private CustomControls.PrepAndApprovePanel prepAndApprovePanel1;
     }
 }

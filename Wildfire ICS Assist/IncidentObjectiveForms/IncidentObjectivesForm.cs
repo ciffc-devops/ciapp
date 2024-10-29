@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist
     {
         private Incident CurrentIncident { get => Program.CurrentIncident; set => Program.CurrentIncident = value; }
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; set => Program.CurrentOpPeriod = value; }
-        private IncidentObjectivesSheet objectivesSheet { get => Program.CurrentIncident.allIncidentObjectives.First(o => o.OpPeriod == CurrentOpPeriod); }
+        private IncidentObjectivesSheet objectivesSheet { get => Program.CurrentIncident.AllIncidentObjectiveSheets.First(o => o.OpPeriod == CurrentOpPeriod); }
         private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
 
 
@@ -37,35 +37,7 @@ namespace Wildfire_ICS_Assist
         }
 
 
-        private void LoadPreparedBy()
-        {
-            List<ICSRole> roles = CurrentOrgChart.Clone().ActiveRoles;
-            ICSRole blank = new ICSRole(); blank.RoleName = string.Empty; blank.RoleID = Guid.Empty; roles.Insert(0, blank);
-
-            cboPreparedBy.DataSource = null;
-            cboPreparedBy.DataSource = roles;
-            cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
-            if (objectivesSheet.PreparedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == objectivesSheet.PreparedByRoleID)) { cboPreparedBy.SelectedValue = objectivesSheet.PreparedByRoleID; }
-            cboPreparedBy.DropDownWidth = cboPreparedBy.GetDropDownWidth();
-
-        }
-
-
-        private void LoadApprovedBy()
-        {
-            List<ICSRole> roles = CurrentOrgChart.Clone().ActiveRoles;
-            ICSRole blank = new ICSRole(); blank.RoleName = string.Empty; blank.RoleID = Guid.Empty; roles.Insert(0, blank);
-
-
-            cboApprovedBy.DataSource = null;
-            cboApprovedBy.DataSource = roles;
-            cboApprovedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboApprovedBy.ValueMember = "RoleID";
-            if (objectivesSheet.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == objectivesSheet.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = objectivesSheet.ApprovedByRoleID; }
-            cboApprovedBy.DropDownWidth = cboApprovedBy.GetDropDownWidth();
-
-            
-        }
-
+     
 
 
         private void IncidentObjectivesForm_Load(object sender, EventArgs e)
@@ -82,6 +54,9 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.SafetyMessageChanged += Program_SafetyMessagesChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
+            prepAndApprovePanel1.ApprovedByChanged += PrepAndApprovePanel1_ApprovedByChanged;
+            prepAndApprovePanel1.PreparedByChanged += PrepAndApprovePanel1_PreparedByChanged; ;
+
             foreach (CollapsiblePanel p in panels)
             {
                 p.Collapse();
@@ -89,6 +64,20 @@ namespace Wildfire_ICS_Assist
                 p.PanelCollapsed += HandlePanelCollapsed;
 
             }
+        }
+
+        private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
+        {
+            objectivesSheet.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+            objectivesSheet.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+
+
+        }
+
+        private void PrepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
+        {
+            objectivesSheet.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+            objectivesSheet.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
         }
 
         private List<CollapsiblePanel> panels = new List<CollapsiblePanel>();
@@ -130,8 +119,14 @@ namespace Wildfire_ICS_Assist
 
         private void LoadSheet()
         {
-            LoadPreparedBy();
-            LoadApprovedBy();
+            //LoadPreparedBy();
+            //LoadApprovedBy();
+
+            prepAndApprovePanel1.ApprovedByDateTime = objectivesSheet.DateApproved;
+            prepAndApprovePanel1.PreparedByDateTime = objectivesSheet.DatePrepared;
+            prepAndApprovePanel1.SetPreparedBy(objectivesSheet.PreparedByRoleID);
+            prepAndApprovePanel1.SetApprovedBy(objectivesSheet.ApprovedByRoleID);
+
 
             BuildSafetyMessageList();
             LoadObjectives();
@@ -409,6 +404,8 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+
+        /*
         private void cboPreparedBy_Leave(object sender, EventArgs e)
         {
             if(cboPreparedBy.SelectedItem != null)
@@ -444,5 +441,6 @@ namespace Wildfire_ICS_Assist
                 objectivesSheet.ApprovedByRoleName = string.Empty;
             }
         }
+        */
     }
 }
