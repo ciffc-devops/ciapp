@@ -23,6 +23,7 @@ namespace WildfireICSDesktopServices
             item.MachineID = webItem.MachineID;
             item.ObjectType = webItem.ObjectType;
             item.DataEnc = webItem.DataEnc;
+            item.ItemID = webItem.ItemID;
 
             return item;
         }
@@ -38,6 +39,10 @@ namespace WildfireICSDesktopServices
             webItem.MachineID = localItem.MachineID;
             webItem.ObjectType = localItem.ObjectType;
             webItem.DataEnc = localItem.DataEnc;
+            webItem.ItemID = localItem.ItemID;
+            webItem.SoftwareVersionMajor = localItem.SoftwareVersionMajor;
+            webItem.SoftwareVersionMinor = localItem.SoftwareVersionMinor;
+            webItem.SoftwareVersionBuild = localItem.SoftwareVersionBuild;
             //Importantly, localitem.data is never used here, and thus never sent to the web server.
             return webItem;
         }

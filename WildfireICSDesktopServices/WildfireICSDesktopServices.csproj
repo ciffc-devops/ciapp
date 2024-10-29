@@ -157,6 +157,9 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\ca.icscanada.ciapp\TaskOfListOfNewsItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\ca.icscanada.ciapp\TaskUpdate.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

@@ -127,7 +127,8 @@ namespace WildfireICSDesktopServices
 
             if (obj is ICloneable) { update.Data = obj.Clone(); }
             else { update.Data = obj; }
-            update.CreatedByRoleName = CurrentRole.RoleName;
+            if (CurrentRole == null || string.IsNullOrEmpty(CurrentRole.RoleName)) { update.CreatedByRoleName = string.Empty; }
+            else { update.CreatedByRoleName = CurrentRole.RoleName; }
             //update.DataEnc = update.Data.XmlSerializeToString();
             //update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
             update.SetEncData(_currentIncident.TaskEncryptionKey);
@@ -224,41 +225,47 @@ namespace WildfireICSDesktopServices
                 update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, CurrentIncident.TaskEncryptionKey);
             }
 
+
+
             if (!update.ProcessedLocally && update.Data != null)
             {
-                string source = update.Source;
-                if (string.IsNullOrEmpty(source)) { source = "internet"; }
+                string source = "internet";
+                if (!string.IsNullOrEmpty(update.Source)) { source = update.Source; }
 
                 if (update.CommandName.Equals("UPSERT"))
                 {
                     update.ProcessedLocally = true;
                     UpsertObject(update.Data, source);
                 }
-
+                else if (update.CommandName.Equals("DELETE"))
+                {
+                    update.ProcessedLocally = true;
+                    DeleteObject(update.Data, source);
+                }
                 else if (update.CommandName.Equals("INITIAL"))
                 {
                     TaskBasics basics = update.Data as TaskBasics;
 
                     if (update.TaskID != CurrentIncident.ID)
                     {
-                        _currentIncident = new Incident();
 
                         _currentIncident.ID = basics.ID;
                         update.ProcessedLocally = true;
-                        UpdateTaskBasics(basics, source);
+                        UpdateTaskBasics(basics, "internet");
 
                     }
                     else
                     {
                         update.ProcessedLocally = true;
-                        UpdateTaskBasics(basics, source);
+                        UpdateTaskBasics(basics, "internet");
                     }
                 }
 
-                if (_currentIncident.allTaskUpdates.Any(o => o.UpdateID == update.UpdateID))
+                if (CurrentIncident.allTaskUpdates.Any(o => o.UpdateID == update.UpdateID))
                 {
-                    _currentIncident.allTaskUpdates.First(o => o.UpdateID == update.UpdateID).ProcessedLocally = true;
+                    CurrentIncident.allTaskUpdates.First(o => o.UpdateID == update.UpdateID).ProcessedLocally = true;
                 }
+
 
             }
             else if (update.Data == null)
@@ -267,15 +274,16 @@ namespace WildfireICSDesktopServices
                 update.ProcessedLocally = true;
             }
 
-
             if (applyAllSubsequent)
             {
-                List<TaskUpdate> subsequent = allTaskUpdates.Where(o => o.LastUpdatedUTC > update.LastUpdatedUTC && o.ObjectType.Equals(update.ObjectType)).ToList();
+                List<TaskUpdate> subsequent = allTaskUpdates.Where(o => o.LastUpdatedUTC > update.LastUpdatedUTC && o.ObjectType.Equals(update.ObjectType) && o.ItemID == update.ItemID).ToList();
 
                 foreach (TaskUpdate subUpdate in subsequent)
                 {
                     ApplyTaskUpdate(subUpdate, false);
                 }
+
+
             }
         }
 
@@ -284,24 +292,29 @@ namespace WildfireICSDesktopServices
         {
             //This sends the "Initial" record, and all updates saved locally to this point.
             //It also means we need to save those updates persistently from now on
-
-            TaskBasics basics = new TaskBasics(CurrentIncident);
-            TaskUpdate update = UpsertTaskUpdate(basics, "INITIAL", true, false);
-            _ = await uploadTaskUpdateToServer(update);
-
-            //No need to process the other task basics updates, since a current one has already been generated.
-            foreach (TaskUpdate up in allTaskUpdates.Where(o => o.ObjectType == "TaskBasics")) { up.UploadedSuccessfully = true; }
-
-            int totalUpdates = allTaskUpdates.Count(o => !o.UploadedSuccessfully);
-            int completedUpdates = 0;
-            foreach (TaskUpdate up in allTaskUpdates.Where(o => !o.UploadedSuccessfully))
+            try
             {
-                _ = await uploadTaskUpdateToServer(up);
-                completedUpdates++;
-                progress.Report(new Tuple<int, int, int>(1, completedUpdates, totalUpdates));
+                TaskBasics basics = new TaskBasics(CurrentIncident);
+                TaskUpdate update = UpsertTaskUpdate(basics, "INITIAL", true, false);
+                _ = await uploadTaskUpdateToServer(update);
+
+                //No need to process the other task basics updates, since a current one has already been generated.
+                foreach (TaskUpdate up in allTaskUpdates.Where(o => o.ObjectType == "TaskBasics")) { up.UploadedSuccessfully = true; }
+
+                int totalUpdates = allTaskUpdates.Count(o => !o.UploadedSuccessfully);
+                int completedUpdates = 0;
+                foreach (TaskUpdate up in allTaskUpdates.Where(o => !o.UploadedSuccessfully))
+                {
+                    _ = await uploadTaskUpdateToServer(up);
+                    completedUpdates++;
+                    progress.Report(new Tuple<int, int, int>(1, completedUpdates, totalUpdates));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
-
 
         private async Task<bool> LoadOutstandingTaskUpdatesFromServer(Guid TaskID, string EncryptionKey, DateTime CutoffTime, IProgress<Tuple<int, int, int>> progress)
         {
@@ -825,12 +838,12 @@ namespace WildfireICSDesktopServices
         public void UpsertIncidentObjectivesSheet(IncidentObjectivesSheet record, string source = "local")
         {
             record.LastUpdatedUTC = DateTime.UtcNow;
-            if (_currentIncident.allIncidentObjectives.Any(o => o.SheetID == record.SheetID))
+            if (_currentIncident.AllIncidentObjectiveSheets.Any(o => o.SheetID == record.SheetID))
             {
-                _currentIncident.allIncidentObjectives = _currentIncident.allIncidentObjectives.Where(o => o.SheetID != record.SheetID).ToList();
+                _currentIncident.AllIncidentObjectiveSheets = _currentIncident.AllIncidentObjectiveSheets.Where(o => o.SheetID != record.SheetID).ToList();
             }
             record.RenumberObjectives();
-            _currentIncident.allIncidentObjectives.Add(record.Clone());
+            _currentIncident.AllIncidentObjectiveSheets.Add(record.Clone());
 
 
             if (source.Equals("local") || source.Equals("networkNoInternet"))
@@ -861,13 +874,13 @@ namespace WildfireICSDesktopServices
             record.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
             IncidentObjectivesSheet sheet = null;
 
-            if (!_currentIncident.allIncidentObjectives.Any(o => o.OpPeriod == record.OpPeriod))
+            if (!_currentIncident.AllIncidentObjectiveSheets.Any(o => o.OpPeriod == record.OpPeriod))
             {
                 _currentIncident.createObjectivesSheetAsNeeded(record.OpPeriod);
-                sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod);
+                sheet = _currentIncident.AllIncidentObjectiveSheets.First(o => o.OpPeriod == record.OpPeriod);
                 UpsertIncidentObjectivesSheet(sheet);
             }
-            else { sheet = _currentIncident.allIncidentObjectives.First(o => o.OpPeriod == record.OpPeriod); }
+            else { sheet = _currentIncident.AllIncidentObjectiveSheets.First(o => o.OpPeriod == record.OpPeriod); }
 
 
 

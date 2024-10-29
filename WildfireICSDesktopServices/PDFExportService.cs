@@ -1028,7 +1028,7 @@ namespace WildfireICSDesktopServices
 
                     task.createObjectivesSheetAsNeeded(OpsPeriod);
 
-                    IncidentObjectivesSheet currentSheet = task.allIncidentObjectives.First(o=>o.OpPeriod== OpsPeriod);
+                    IncidentObjectivesSheet currentSheet = task.AllIncidentObjectiveSheets.First(o=>o.OpPeriod== OpsPeriod);
 
                     //Op Plan
                     OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
