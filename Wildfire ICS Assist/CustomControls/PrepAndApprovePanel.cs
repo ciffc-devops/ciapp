@@ -19,6 +19,8 @@ namespace Wildfire_ICS_Assist.CustomControls
         public PrepAndApprovePanel()
         {
             InitializeComponent();
+            PopulateRoleComboBoxes();
+
         }
 
         private Size _CollapsedSize = new Size(485, 40);
@@ -28,9 +30,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         private bool _ExpandUp = false;
         private bool _IsCurrentlyCollapsed = false;
         private Color _BackgroundColorCollapsed = Program.FormAccent;
+        private bool _ExpandAndCollapseEnabled = true;
 
         [Description("Text displayed at the top of the panel"), Category("Appearance")]
         public string TitleText { get => lblTitle.Text; set => lblTitle.Text = value; }
+        [Description("Enable the expand and collapse properties"), Category("Behavior")]
+        public bool EnableExpandCollapse { get => _ExpandAndCollapseEnabled; set { ToggleExpandCapability( value); } }
+
 
         [Description("If true, the panel will collapsed towards the left. if false, towards the right"), Category("Layout")]
         public bool ExpandsRight { get => _CollapseLeft; set => _CollapseLeft = value; }
@@ -156,6 +162,21 @@ namespace Wildfire_ICS_Assist.CustomControls
             }
         }
 
+        private void ToggleExpandCapability(bool ExpandCollapseEnabled)
+        {
+            _ExpandAndCollapseEnabled = ExpandCollapseEnabled;
+            btnExpandCollapse.Visible = ExpandCollapseEnabled;
+            if (!ExpandCollapseEnabled)
+            {
+                lblTitle.Location = new Point(5, 0);
+                lblTitle.Cursor = Cursors.Default;
+            } else
+            {
+                lblTitle.Location = new Point(40, 0);
+                lblTitle.Cursor = Cursors.Hand;
+            }
+        }
+
         public void Collapse()
         {
 
@@ -265,8 +286,11 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public void Toggle()
         {
-            if (Collapsed) { Expand(); }
-            else { Collapse(); }
+            if (_ExpandAndCollapseEnabled)
+            {
+                if (Collapsed) { Expand(); }
+                else { Collapse(); }
+            }
         }
 
         private void btnExpandCollapse_Click(object sender, EventArgs e)
@@ -336,7 +360,6 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void PrepAndApprovePanel_Load(object sender, EventArgs e)
         {
             
-            PopulateRoleComboBoxes();
             datApproveDate.Enabled = chkApproved.Checked;
             datApproveTime.Enabled = chkApproved.Checked;
             cboApproveBy.Enabled = chkApproved.Checked;
