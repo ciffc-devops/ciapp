@@ -13,7 +13,7 @@ namespace WF_ICS_ClassLibrary.Utilities
     {
         // This constant is used to determine the keysize of the encryption algorithm in bits.
         // We divide this by 8 within the code below to get the equivalent number of bytes.
-        private const int Keysize = 128;
+        private const int Keysize = 256;
 
         // This constant determines the number of iterations for the password bytes generation function.
         private const int DerivationIterations = 1000;
