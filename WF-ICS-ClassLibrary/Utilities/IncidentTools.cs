@@ -426,7 +426,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static void createAirOpsSummaryAsNeeded(this Incident incident, int ops)
+        public static void createAirOpsSummaryAsNeeded(this Incident incident, int ops, ICSRole preparedBy = null)
         {
             if(!incident.allAirOperationsSummaries.Any(o=>o.OpPeriod == ops))
             {
@@ -434,7 +434,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 summary.OpPeriod = ops;
                 DateTime opMid = DateTime.Now;
                 if(incident.AllOperationalPeriods.Any(o=>o.PeriodNumber == ops)) { opMid = incident.AllOperationalPeriods.First(o=>o.PeriodNumber ==ops).PeriodMid; }
-
+                if (preparedBy != null) { summary.SetPreparedBy(preparedBy); }
               
 
                 Globals.incidentService.UpsertAirOperationsSummary(summary);
