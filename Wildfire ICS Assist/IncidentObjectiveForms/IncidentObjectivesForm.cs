@@ -124,10 +124,8 @@ namespace Wildfire_ICS_Assist
             //LoadPreparedBy();
             //LoadApprovedBy();
 
-            prepAndApprovePanel1.ApprovedByDateTime = objectivesSheet.DateApproved;
-            prepAndApprovePanel1.PreparedByDateTime = objectivesSheet.DatePrepared;
-            prepAndApprovePanel1.SetPreparedBy(objectivesSheet.PreparedByRoleID);
-            prepAndApprovePanel1.SetApprovedBy(objectivesSheet.ApprovedByRoleID);
+            prepAndApprovePanel1.SetPreparedBy(objectivesSheet.PreparedByRoleID, objectivesSheet.DatePrepared);
+            prepAndApprovePanel1.SetApprovedBy(objectivesSheet.ApprovedByRoleID, objectivesSheet.DateApproved);
 
 
             BuildSafetyMessageList();

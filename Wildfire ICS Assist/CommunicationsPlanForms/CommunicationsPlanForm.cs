@@ -85,10 +85,8 @@ namespace Wildfire_ICS_Assist
             dgvCommsItems.DataSource = plan.ActiveCommsItems;
             btnAdd.Enabled = plan.ActiveCommsItems.Count < RowsPerSheet;
 
-            prepAndApprovePanel1.ApprovedByDateTime = plan.DateApproved;
-            prepAndApprovePanel1.PreparedByDateTime = plan.DatePrepared;
-            prepAndApprovePanel1.SetPreparedBy(plan.PreparedByRoleID);
-            prepAndApprovePanel1.SetApprovedBy(plan.ApprovedByRoleID);
+            prepAndApprovePanel1.SetPreparedBy(plan.PreparedByRoleID, plan.DatePrepared);
+            prepAndApprovePanel1.SetApprovedBy(plan.ApprovedByRoleID, plan.DateApproved);
 
         }
         private void btnAdd_Click(object sender, EventArgs e)

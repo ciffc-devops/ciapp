@@ -170,10 +170,8 @@ namespace Wildfire_ICS_Assist
             txtRemarks.Text = CurrentAirOpsSummary.Remarks;
             txtMedivacText.Text = CurrentAirOpsSummary.MedivacAircraftText;
 
-            prepAndApprovePanel1.ApprovedByDateTime = CurrentAirOpsSummary.DateApproved;
-            prepAndApprovePanel1.PreparedByDateTime = CurrentAirOpsSummary.DatePrepared;
-            prepAndApprovePanel1.SetPreparedBy(CurrentAirOpsSummary.PreparedByRoleID);
-            prepAndApprovePanel1.SetApprovedBy(CurrentAirOpsSummary.ApprovedByRoleID);
+            prepAndApprovePanel1.SetPreparedBy(CurrentAirOpsSummary.PreparedByRoleID, CurrentAirOpsSummary.DatePrepared);
+            prepAndApprovePanel1.SetApprovedBy(CurrentAirOpsSummary.ApprovedByRoleID, CurrentAirOpsSummary.DateApproved);
 
         }
 

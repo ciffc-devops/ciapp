@@ -127,13 +127,15 @@ namespace Wildfire_ICS_Assist.CustomControls
             }
            
         }
-        public void SetPreparedBy(Guid RoleID)
+        public void SetPreparedBy(Guid RoleID, DateTime PrepDate)
         {
+            PreparedByDateTime = PrepDate;
             try { cboPrepBy.SelectedValue = RoleID; }
             catch { cboPrepBy.SelectedIndex = 0; }
         }
-        public void SetApprovedBy(Guid RoleID)
+        public void SetApprovedBy(Guid RoleID, DateTime ApproveDate)
         {
+            ApprovedByDateTime = ApproveDate;
             try { cboApproveBy.SelectedValue = RoleID; }
             catch { cboApproveBy.SelectedIndex = 0; }
         }

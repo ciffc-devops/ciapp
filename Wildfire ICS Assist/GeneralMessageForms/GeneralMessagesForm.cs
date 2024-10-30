@@ -95,12 +95,11 @@ namespace Wildfire_ICS_Assist
             gm.FromRoleID = Program.CurrentRole.RoleID;
             gm.FromName = Program.CurrentRole.IndividualName;
             gm.FromPosition = Program.CurrentRole.RoleName;
-
-
-            gm.ApprovedByRoleID = Program.CurrentRole.RoleID;
-            gm.ApprovedByResourceName = Program.CurrentRole.IndividualName;
-            gm.ApprovedByRoleName = Program.CurrentRole.RoleName;
+            gm.SetPreparedBy(Program.CurrentRole);
+            gm.SetApprovedBy(Program.CurrentRole);
             gm.DateSent = DateTime.Now;
+            gm.DatePrepared = gm.DateSent;
+            gm.DateApproved = DateTime.MinValue;
             gm.Active = true;
             OpenForEdit(gm);
         }

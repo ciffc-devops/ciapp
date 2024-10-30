@@ -41,7 +41,6 @@ namespace Wildfire_ICS_Assist
         private void DisplayMessage()
         {
             PopulateComboBox(cboFrom);
-            PopulateComboBox(cboApprovedBy);
 
             txtToName.Text = generalMessage.ToName;
             txtToPosition.Text = generalMessage.ToPosition;
@@ -55,8 +54,10 @@ namespace Wildfire_ICS_Assist
             if (generalMessage.ReplyDate != DateTime.MinValue) { datReplyReceived.Value = generalMessage.ReplyDate; }
             else { datMessageSent.Value = DateTime.Now; }
             if (generalMessage.FromRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == generalMessage.FromRoleID)) { cboFrom.SelectedValue = generalMessage.FromRoleID; }
-            if (generalMessage.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == generalMessage.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = generalMessage.ApprovedByRoleID; }
 
+            prepAndApprovePanel1.SetPreparedBy(generalMessage.PreparedByRoleID, generalMessage.DatePrepared);
+            prepAndApprovePanel1.SetApprovedBy(generalMessage.ApprovedByRoleID, generalMessage.DateApproved);
+            
         }
 
         private void PopulateComboBox(ComboBox cbo)
@@ -145,23 +146,7 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private void cboApprovedBy_Leave(object sender, EventArgs e)
-        {
-            if (cboApprovedBy.SelectedItem != null)
-            {
-                ICSRole approvedBy = (ICSRole)cboApprovedBy.SelectedItem;
-                generalMessage.ApprovedByRoleID = approvedBy.RoleID;
-                generalMessage.ApprovedByResourceName = approvedBy.IndividualName;
-                generalMessage.ApprovedByRoleName = approvedBy.RoleName;
-            }
-            else
-            {
-                generalMessage.ApprovedByRoleID = Guid.Empty;
-                generalMessage.ApprovedByResourceName = string.Empty;
-                generalMessage.ApprovedByRoleName = string.Empty;
-            }
-        }
-
+ 
         private void GeneralMessageEditForm_Load(object sender, EventArgs e)
         {
             requiredFields.Add(txtMessage);
@@ -180,6 +165,8 @@ namespace Wildfire_ICS_Assist
         {
             if (ValidateNew())
             {
+                DateTime dat = generalMessage.DatePrepared;
+                
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -220,5 +207,21 @@ namespace Wildfire_ICS_Assist
 
             return isValid;
         }
+
+        private void prepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
+        {
+            generalMessage.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+            generalMessage.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
+
+        }
+
+        private void prepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
+        {
+            generalMessage.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+            generalMessage.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+
+        }
+
+        
     }
 }

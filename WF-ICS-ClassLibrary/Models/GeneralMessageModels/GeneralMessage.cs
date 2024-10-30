@@ -50,7 +50,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid FromRoleID { get => _FromRoleID; set => _FromRoleID = value; }
 
 
-        public GeneralMessage Clone()
+        public new GeneralMessage Clone()
         {
             return this.MemberwiseClone() as GeneralMessage;
         }
