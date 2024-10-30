@@ -11,6 +11,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -33,6 +34,28 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.CommsPlanItemChanged += Program_OnCommsPlanItemChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
+            prepAndApprovePanel1.ApprovedByChanged += PrepAndApprovePanel1_ApprovedByChanged;
+            prepAndApprovePanel1.PreparedByChanged += PrepAndApprovePanel1_PreparedByChanged; ;
+        }
+
+        private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
+        {
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
+            if (plan != null)
+            {
+                plan.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+                plan.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+            }
+        }
+
+        private void PrepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
+        {
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
+            if (plan != null)
+            {
+                plan.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+                plan.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
+            }
         }
 
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
@@ -61,6 +84,12 @@ namespace Wildfire_ICS_Assist
 
             dgvCommsItems.DataSource = plan.ActiveCommsItems;
             btnAdd.Enabled = plan.ActiveCommsItems.Count < RowsPerSheet;
+
+            prepAndApprovePanel1.ApprovedByDateTime = plan.DateApproved;
+            prepAndApprovePanel1.PreparedByDateTime = plan.DatePrepared;
+            prepAndApprovePanel1.SetPreparedBy(plan.PreparedByRoleID);
+            prepAndApprovePanel1.SetApprovedBy(plan.ApprovedByRoleID);
+
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -226,5 +255,10 @@ namespace Wildfire_ICS_Assist
             btnDelete.Enabled = dgvCommsItems.SelectedRows.Count > 0;
         }
 
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
+
+        }
     }
 }

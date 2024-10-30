@@ -28,27 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dgvCommsItems = new System.Windows.Forms.DataGridView();
-            this.btnView = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tpAircraft = new System.Windows.Forms.TabPage();
+            this.dgvCommsItems = new System.Windows.Forms.DataGridView();
             this.colCommsSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChannelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toOther = new System.Windows.Forms.TabPage();
+            this.prepAndApprovePanel1 = new Wildfire_ICS_Assist.CustomControls.PrepAndApprovePanel();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tpAircraft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCommsItems)).BeginInit();
+            this.toOther.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // svdExport
+            // 
+            this.svdExport.DefaultExt = "csv";
+            this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
             // splitContainer1
             // 
@@ -61,7 +73,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dgvCommsItems);
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
             // 
             // splitContainer1.Panel2
             // 
@@ -74,6 +86,31 @@
             this.splitContainer1.Size = new System.Drawing.Size(776, 366);
             this.splitContainer1.SplitterDistance = 312;
             this.splitContainer1.TabIndex = 3;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tpAircraft);
+            this.tabControl1.Controls.Add(this.toOther);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(10, 3);
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(776, 312);
+            this.tabControl1.TabIndex = 4;
+            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
+            // 
+            // tpAircraft
+            // 
+            this.tpAircraft.Controls.Add(this.dgvCommsItems);
+            this.tpAircraft.Location = new System.Drawing.Point(4, 33);
+            this.tpAircraft.Name = "tpAircraft";
+            this.tpAircraft.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAircraft.Size = new System.Drawing.Size(768, 275);
+            this.tpAircraft.TabIndex = 0;
+            this.tpAircraft.Text = "Comms Systems";
+            this.tpAircraft.UseVisualStyleBackColor = true;
             // 
             // dgvCommsItems
             // 
@@ -90,16 +127,98 @@
             this.colTone,
             this.colComments});
             this.dgvCommsItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCommsItems.Location = new System.Drawing.Point(0, 0);
+            this.dgvCommsItems.Location = new System.Drawing.Point(3, 3);
             this.dgvCommsItems.Name = "dgvCommsItems";
             this.dgvCommsItems.ReadOnly = true;
             this.dgvCommsItems.RowHeadersVisible = false;
             this.dgvCommsItems.RowTemplate.Height = 30;
             this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommsItems.Size = new System.Drawing.Size(776, 312);
+            this.dgvCommsItems.Size = new System.Drawing.Size(762, 269);
             this.dgvCommsItems.TabIndex = 3;
             this.dgvCommsItems.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCommsItems_CellDoubleClick);
             this.dgvCommsItems.SelectionChanged += new System.EventHandler(this.dgvCommsItems_SelectionChanged);
+            // 
+            // colCommsSystem
+            // 
+            this.colCommsSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCommsSystem.DataPropertyName = "CommsSystem";
+            this.colCommsSystem.HeaderText = "Comms System";
+            this.colCommsSystem.Name = "colCommsSystem";
+            this.colCommsSystem.ReadOnly = true;
+            this.colCommsSystem.Width = 166;
+            // 
+            // colChannelID
+            // 
+            this.colChannelID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colChannelID.DataPropertyName = "ChannelID";
+            this.colChannelID.HeaderText = "Channel";
+            this.colChannelID.Name = "colChannelID";
+            this.colChannelID.ReadOnly = true;
+            this.colChannelID.Width = 106;
+            // 
+            // colFunction
+            // 
+            this.colFunction.DataPropertyName = "CommsFunction";
+            this.colFunction.HeaderText = "Function";
+            this.colFunction.Name = "colFunction";
+            this.colFunction.ReadOnly = true;
+            this.colFunction.Width = 109;
+            // 
+            // colFrequency
+            // 
+            this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colFrequency.DataPropertyName = "FullRx";
+            this.colFrequency.HeaderText = "Rx Freq/Tone";
+            this.colFrequency.Name = "colFrequency";
+            this.colFrequency.ReadOnly = true;
+            this.colFrequency.Width = 153;
+            // 
+            // colTone
+            // 
+            this.colTone.DataPropertyName = "FullTx";
+            this.colTone.HeaderText = "Tx Freq/Tone";
+            this.colTone.Name = "colTone";
+            this.colTone.ReadOnly = true;
+            this.colTone.Width = 152;
+            // 
+            // colComments
+            // 
+            this.colComments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colComments.DataPropertyName = "Comments";
+            this.colComments.HeaderText = "Remarks";
+            this.colComments.MinimumWidth = 100;
+            this.colComments.Name = "colComments";
+            this.colComments.ReadOnly = true;
+            // 
+            // toOther
+            // 
+            this.toOther.Controls.Add(this.prepAndApprovePanel1);
+            this.toOther.Location = new System.Drawing.Point(4, 22);
+            this.toOther.Name = "toOther";
+            this.toOther.Size = new System.Drawing.Size(768, 286);
+            this.toOther.TabIndex = 4;
+            this.toOther.Text = "Prepared By";
+            this.toOther.UseVisualStyleBackColor = true;
+            // 
+            // prepAndApprovePanel1
+            // 
+            this.prepAndApprovePanel1.ApprovedByDateTime = new System.DateTime(((long)(0)));
+            this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.prepAndApprovePanel1.Collapsed = false;
+            this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.prepAndApprovePanel1.EnableExpandCollapse = false;
+            this.prepAndApprovePanel1.ExpandsRight = true;
+            this.prepAndApprovePanel1.ExpandsUpward = false;
+            this.prepAndApprovePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prepAndApprovePanel1.Location = new System.Drawing.Point(8, 6);
+            this.prepAndApprovePanel1.Margin = new System.Windows.Forms.Padding(6);
+            this.prepAndApprovePanel1.Name = "prepAndApprovePanel1";
+            this.prepAndApprovePanel1.PreparedByDateTime = new System.DateTime(2024, 10, 30, 11, 49, 49, 204);
+            this.prepAndApprovePanel1.Size = new System.Drawing.Size(754, 197);
+            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(619, 197);
+            this.prepAndApprovePanel1.TabIndex = 71;
+            this.prepAndApprovePanel1.TitleText = "Prepared and Approved Info";
             // 
             // btnView
             // 
@@ -176,63 +295,6 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // svdExport
-            // 
-            this.svdExport.DefaultExt = "csv";
-            this.svdExport.Filter = "Comma-separated values|*.csv";
-            // 
-            // colCommsSystem
-            // 
-            this.colCommsSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colCommsSystem.DataPropertyName = "CommsSystem";
-            this.colCommsSystem.HeaderText = "Comms System";
-            this.colCommsSystem.Name = "colCommsSystem";
-            this.colCommsSystem.ReadOnly = true;
-            this.colCommsSystem.Width = 166;
-            // 
-            // colChannelID
-            // 
-            this.colChannelID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colChannelID.DataPropertyName = "ChannelID";
-            this.colChannelID.HeaderText = "Channel";
-            this.colChannelID.Name = "colChannelID";
-            this.colChannelID.ReadOnly = true;
-            this.colChannelID.Width = 106;
-            // 
-            // colFunction
-            // 
-            this.colFunction.DataPropertyName = "CommsFunction";
-            this.colFunction.HeaderText = "Function";
-            this.colFunction.Name = "colFunction";
-            this.colFunction.ReadOnly = true;
-            this.colFunction.Width = 109;
-            // 
-            // colFrequency
-            // 
-            this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colFrequency.DataPropertyName = "FullRx";
-            this.colFrequency.HeaderText = "Rx Freq/Tone";
-            this.colFrequency.Name = "colFrequency";
-            this.colFrequency.ReadOnly = true;
-            this.colFrequency.Width = 153;
-            // 
-            // colTone
-            // 
-            this.colTone.DataPropertyName = "FullTx";
-            this.colTone.HeaderText = "Tx Freq/Tone";
-            this.colTone.Name = "colTone";
-            this.colTone.ReadOnly = true;
-            this.colTone.Width = 152;
-            // 
-            // colComments
-            // 
-            this.colComments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colComments.DataPropertyName = "Comments";
-            this.colComments.HeaderText = "Remarks";
-            this.colComments.MinimumWidth = 100;
-            this.colComments.Name = "colComments";
-            this.colComments.ReadOnly = true;
-            // 
             // CommunicationsPlanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -240,18 +302,18 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(776, 366);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(792, 405);
             this.Name = "CommunicationsPlanForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Communications Plan (ICS-205)";
             this.Load += new System.EventHandler(this.CommunicationsPlanForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tpAircraft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCommsItems)).EndInit();
+            this.toOther.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -273,5 +335,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFrequency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComments;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tpAircraft;
+        private System.Windows.Forms.TabPage toOther;
+        private CustomControls.PrepAndApprovePanel prepAndApprovePanel1;
     }
 }

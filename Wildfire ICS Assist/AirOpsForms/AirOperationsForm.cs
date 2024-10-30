@@ -35,12 +35,11 @@ namespace Wildfire_ICS_Assist
         {
             if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
 
-            Program.CurrentIncident.createAirOpsSummaryAsNeeded(Program.CurrentOpPeriod);
+            Program.CurrentIncident.createAirOpsSummaryAsNeeded(Program.CurrentOpPeriod, Program.CurrentRole);
             LoadMainData();
             PopulateAircraft();
             PopulateTree();
             PopulateCommsItems();
-            LoadPreparedBy();
 
             loadNOTAM();
 
@@ -55,6 +54,21 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.MemberSignInChanged += WfIncidentService_MemberSignInChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
+            prepAndApprovePanel1.ApprovedByChanged += PrepAndApprovePanel1_ApprovedByChanged;
+            prepAndApprovePanel1.PreparedByChanged += PrepAndApprovePanel1_PreparedByChanged;
+
+        }
+
+        private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
+        {
+            CurrentAirOpsSummary.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+            CurrentAirOpsSummary.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+        }
+
+        private void PrepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
+        {
+            CurrentAirOpsSummary.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+            CurrentAirOpsSummary.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
         }
 
         private void WfIncidentService_MemberSignInChanged(CheckInEventArgs e)
@@ -141,19 +155,10 @@ namespace Wildfire_ICS_Assist
             PopulateAircraft();
             PopulateTree();
             PopulateCommsItems();
-            LoadPreparedBy();
             loadNOTAM();
         }
 
-        private void LoadPreparedBy()
-        {
-            if (cboPreparedBy != null && CurrentAirOpsSummary != null && CurrentOrgChart != null)
-            {
-                cboPreparedBy.DataSource = null;
-                cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
-                if (CurrentAirOpsSummary.PreparedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentAirOpsSummary.PreparedByRoleID)) { cboPreparedBy.SelectedValue = CurrentAirOpsSummary.PreparedByRoleID; }
-            }
-        }
+     
 
         private void LoadMainData()
         {
@@ -165,6 +170,10 @@ namespace Wildfire_ICS_Assist
             txtRemarks.Text = CurrentAirOpsSummary.Remarks;
             txtMedivacText.Text = CurrentAirOpsSummary.MedivacAircraftText;
 
+            prepAndApprovePanel1.ApprovedByDateTime = CurrentAirOpsSummary.DateApproved;
+            prepAndApprovePanel1.PreparedByDateTime = CurrentAirOpsSummary.DatePrepared;
+            prepAndApprovePanel1.SetPreparedBy(CurrentAirOpsSummary.PreparedByRoleID);
+            prepAndApprovePanel1.SetApprovedBy(CurrentAirOpsSummary.ApprovedByRoleID);
 
         }
 
@@ -174,7 +183,6 @@ namespace Wildfire_ICS_Assist
             {
                 loadNOTAM();
                 LoadMainData();
-                LoadPreparedBy();
             }
         }
 
@@ -184,7 +192,7 @@ namespace Wildfire_ICS_Assist
         }
         private void Program_ICSRoleChanged(ICSRoleEventArgs e)
         {
-            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree(); LoadPreparedBy(); }
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree();  }
         }
 
 
@@ -567,17 +575,7 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        private void cboPreparedBy_Leave(object sender, EventArgs e)
-        {
-            if (cboPreparedBy.SelectedItem != null)
-            {
-                ICSRole role = (ICSRole)cboPreparedBy.SelectedItem;
-                CurrentAirOpsSummary.PreparedByResourceName = role.IndividualName;
-                CurrentAirOpsSummary.PreparedByRoleName = role.RoleName;
-                CurrentAirOpsSummary.PreparedByRoleID = role.RoleID;
-            }
-        }
-
+     
         private void btnNOTAM_Click(object sender, EventArgs e)
         {
             using (AirNOTAMEditForm editForm = new AirNOTAMEditForm())

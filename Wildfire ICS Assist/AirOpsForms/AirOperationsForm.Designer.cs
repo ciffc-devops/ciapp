@@ -28,15 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpAircraft = new System.Windows.Forms.TabPage();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.dgvAircraft = new System.Windows.Forms.DataGridView();
+            this.colAircraftType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsMedivac = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colReg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMakeModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPilot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRemarks = new System.Windows.Forms.Button();
             this.btnToggleMedicvac = new System.Windows.Forms.Button();
             this.btnSetStartEndTimes = new System.Windows.Forms.Button();
@@ -98,6 +107,7 @@
             this.label25 = new System.Windows.Forms.Label();
             this.txtCenterPoint = new System.Windows.Forms.TextBox();
             this.toOther = new System.Windows.Forms.TabPage();
+            this.prepAndApprovePanel1 = new Wildfire_ICS_Assist.CustomControls.PrepAndApprovePanel();
             this.txtMedivacText = new SpellBox();
             this.txtRemarks = new SpellBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -107,8 +117,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.datSunset = new System.Windows.Forms.DateTimePicker();
             this.datSunrise = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cboPreparedBy = new System.Windows.Forms.ComboBox();
             this.btnPrint = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -124,15 +132,6 @@
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAircraftType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsMedivac = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colReg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMakeModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPilot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -183,11 +182,9 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.label5);
-            this.splitContainer1.Panel2.Controls.Add(this.cboPreparedBy);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
             this.splitContainer1.Size = new System.Drawing.Size(1008, 533);
-            this.splitContainer1.SplitterDistance = 451;
+            this.splitContainer1.SplitterDistance = 467;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -204,7 +201,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(10, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1008, 451);
+            this.tabControl1.Size = new System.Drawing.Size(1008, 467);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
@@ -214,7 +211,7 @@
             this.tpAircraft.Location = new System.Drawing.Point(4, 33);
             this.tpAircraft.Name = "tpAircraft";
             this.tpAircraft.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAircraft.Size = new System.Drawing.Size(1000, 414);
+            this.tpAircraft.Size = new System.Drawing.Size(1000, 430);
             this.tpAircraft.TabIndex = 0;
             this.tpAircraft.Text = "Aircraft";
             this.tpAircraft.UseVisualStyleBackColor = true;
@@ -238,8 +235,8 @@
             this.splitContainer5.Panel2.Controls.Add(this.btnToggleMedicvac);
             this.splitContainer5.Panel2.Controls.Add(this.btnSetStartEndTimes);
             this.splitContainer5.Panel2.Controls.Add(this.label10);
-            this.splitContainer5.Size = new System.Drawing.Size(994, 408);
-            this.splitContainer5.SplitterDistance = 317;
+            this.splitContainer5.Size = new System.Drawing.Size(994, 424);
+            this.splitContainer5.SplitterDistance = 333;
             this.splitContainer5.TabIndex = 70;
             // 
             // dgvAircraft
@@ -266,10 +263,93 @@
             this.dgvAircraft.RowHeadersVisible = false;
             this.dgvAircraft.RowTemplate.Height = 35;
             this.dgvAircraft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAircraft.Size = new System.Drawing.Size(994, 317);
+            this.dgvAircraft.Size = new System.Drawing.Size(994, 333);
             this.dgvAircraft.TabIndex = 1;
             this.dgvAircraft.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAircraft_CellDoubleClick);
             this.dgvAircraft.SelectionChanged += new System.EventHandler(this.dgvAircraft_SelectionChanged);
+            // 
+            // colAircraftType
+            // 
+            this.colAircraftType.DataPropertyName = "AircraftTypeText";
+            this.colAircraftType.HeaderText = "Type";
+            this.colAircraftType.Name = "colAircraftType";
+            this.colAircraftType.ReadOnly = true;
+            // 
+            // colIsMedivac
+            // 
+            this.colIsMedivac.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colIsMedivac.DataPropertyName = "IsMedivac";
+            this.colIsMedivac.HeaderText = "Medivac";
+            this.colIsMedivac.Name = "colIsMedivac";
+            this.colIsMedivac.ReadOnly = true;
+            this.colIsMedivac.Width = 87;
+            // 
+            // colReg
+            // 
+            this.colReg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colReg.DataPropertyName = "Registration";
+            this.colReg.HeaderText = "Registration";
+            this.colReg.Name = "colReg";
+            this.colReg.ReadOnly = true;
+            this.colReg.Width = 133;
+            // 
+            // colMakeModel
+            // 
+            this.colMakeModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colMakeModel.DataPropertyName = "MakeModel";
+            this.colMakeModel.HeaderText = "Make/Model";
+            this.colMakeModel.Name = "colMakeModel";
+            this.colMakeModel.ReadOnly = true;
+            this.colMakeModel.Width = 139;
+            // 
+            // colBase
+            // 
+            this.colBase.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colBase.DataPropertyName = "Base";
+            this.colBase.HeaderText = "Base";
+            this.colBase.Name = "colBase";
+            this.colBase.ReadOnly = true;
+            this.colBase.Width = 77;
+            // 
+            // colPilot
+            // 
+            this.colPilot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colPilot.DataPropertyName = "Pilot";
+            this.colPilot.HeaderText = "Pilot";
+            this.colPilot.Name = "colPilot";
+            this.colPilot.ReadOnly = true;
+            this.colPilot.Width = 70;
+            // 
+            // colStart
+            // 
+            this.colStart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colStart.DataPropertyName = "StartTime";
+            dataGridViewCellStyle1.Format = "HH:mm";
+            this.colStart.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colStart.HeaderText = "Start Time";
+            this.colStart.Name = "colStart";
+            this.colStart.ReadOnly = true;
+            this.colStart.Width = 119;
+            // 
+            // colEndTime
+            // 
+            this.colEndTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colEndTime.DataPropertyName = "EndTime";
+            dataGridViewCellStyle2.Format = "HH:mm";
+            this.colEndTime.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colEndTime.HeaderText = "End Time";
+            this.colEndTime.Name = "colEndTime";
+            this.colEndTime.ReadOnly = true;
+            this.colEndTime.Width = 118;
+            // 
+            // colRemarks
+            // 
+            this.colRemarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colRemarks.DataPropertyName = "Remarks";
+            this.colRemarks.HeaderText = "Remarks";
+            this.colRemarks.MinimumWidth = 150;
+            this.colRemarks.Name = "colRemarks";
+            this.colRemarks.ReadOnly = true;
             // 
             // btnRemarks
             // 
@@ -328,7 +408,7 @@
             this.tpPersonnel.Location = new System.Drawing.Point(4, 33);
             this.tpPersonnel.Name = "tpPersonnel";
             this.tpPersonnel.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPersonnel.Size = new System.Drawing.Size(1000, 417);
+            this.tpPersonnel.Size = new System.Drawing.Size(1000, 430);
             this.tpPersonnel.TabIndex = 1;
             this.tpPersonnel.Text = "Personnel";
             this.tpPersonnel.UseVisualStyleBackColor = true;
@@ -352,8 +432,8 @@
             this.splitContainer3.Panel2.Controls.Add(this.btnDeleteRole);
             this.splitContainer3.Panel2.Controls.Add(this.btnAssignRole);
             this.splitContainer3.Panel2.Controls.Add(this.btnEditRole);
-            this.splitContainer3.Size = new System.Drawing.Size(994, 411);
-            this.splitContainer3.SplitterDistance = 344;
+            this.splitContainer3.Size = new System.Drawing.Size(994, 424);
+            this.splitContainer3.SplitterDistance = 357;
             this.splitContainer3.TabIndex = 61;
             // 
             // treeOrgChart
@@ -362,7 +442,7 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(0, 0);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(994, 344);
+            this.treeOrgChart.Size = new System.Drawing.Size(994, 357);
             this.treeOrgChart.TabIndex = 56;
             // 
             // btnAdd
@@ -420,7 +500,7 @@
             this.tpFrequencies.Controls.Add(this.splitContainer4);
             this.tpFrequencies.Location = new System.Drawing.Point(4, 33);
             this.tpFrequencies.Name = "tpFrequencies";
-            this.tpFrequencies.Size = new System.Drawing.Size(1000, 417);
+            this.tpFrequencies.Size = new System.Drawing.Size(1000, 430);
             this.tpFrequencies.TabIndex = 2;
             this.tpFrequencies.Text = "Frequencies";
             this.tpFrequencies.UseVisualStyleBackColor = true;
@@ -443,8 +523,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.btnAddComms);
             this.splitContainer4.Panel2.Controls.Add(this.btnEditComms);
             this.splitContainer4.Panel2.Controls.Add(this.btnDeleteComms);
-            this.splitContainer4.Size = new System.Drawing.Size(1000, 417);
-            this.splitContainer4.SplitterDistance = 352;
+            this.splitContainer4.Size = new System.Drawing.Size(1000, 430);
+            this.splitContainer4.SplitterDistance = 365;
             this.splitContainer4.TabIndex = 60;
             // 
             // dgvCommsItems
@@ -468,7 +548,7 @@
             this.dgvCommsItems.RowHeadersVisible = false;
             this.dgvCommsItems.RowTemplate.Height = 30;
             this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommsItems.Size = new System.Drawing.Size(1000, 352);
+            this.dgvCommsItems.Size = new System.Drawing.Size(1000, 365);
             this.dgvCommsItems.TabIndex = 59;
             // 
             // colCommsSystem
@@ -570,7 +650,7 @@
             this.tpNOTAM.Controls.Add(this.txtCenterPoint);
             this.tpNOTAM.Location = new System.Drawing.Point(4, 33);
             this.tpNOTAM.Name = "tpNOTAM";
-            this.tpNOTAM.Size = new System.Drawing.Size(1000, 417);
+            this.tpNOTAM.Size = new System.Drawing.Size(1000, 430);
             this.tpNOTAM.TabIndex = 3;
             this.tpNOTAM.Text = "NOTAM";
             this.tpNOTAM.UseVisualStyleBackColor = true;
@@ -984,6 +1064,7 @@
             // 
             // toOther
             // 
+            this.toOther.Controls.Add(this.prepAndApprovePanel1);
             this.toOther.Controls.Add(this.txtMedivacText);
             this.toOther.Controls.Add(this.txtRemarks);
             this.toOther.Controls.Add(this.label9);
@@ -995,10 +1076,30 @@
             this.toOther.Controls.Add(this.datSunrise);
             this.toOther.Location = new System.Drawing.Point(4, 33);
             this.toOther.Name = "toOther";
-            this.toOther.Size = new System.Drawing.Size(1000, 417);
+            this.toOther.Size = new System.Drawing.Size(1000, 430);
             this.toOther.TabIndex = 4;
             this.toOther.Text = "Other";
             this.toOther.UseVisualStyleBackColor = true;
+            // 
+            // prepAndApprovePanel1
+            // 
+            this.prepAndApprovePanel1.ApprovedByDateTime = new System.DateTime(((long)(0)));
+            this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.prepAndApprovePanel1.Collapsed = false;
+            this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.prepAndApprovePanel1.EnableExpandCollapse = false;
+            this.prepAndApprovePanel1.ExpandsRight = true;
+            this.prepAndApprovePanel1.ExpandsUpward = false;
+            this.prepAndApprovePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prepAndApprovePanel1.Location = new System.Drawing.Point(528, 16);
+            this.prepAndApprovePanel1.Margin = new System.Windows.Forms.Padding(6);
+            this.prepAndApprovePanel1.Name = "prepAndApprovePanel1";
+            this.prepAndApprovePanel1.PreparedByDateTime = new System.DateTime(2024, 10, 30, 11, 49, 49, 204);
+            this.prepAndApprovePanel1.Size = new System.Drawing.Size(461, 197);
+            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(619, 197);
+            this.prepAndApprovePanel1.TabIndex = 71;
+            this.prepAndApprovePanel1.TitleText = "Prepared and Approved Info";
             // 
             // txtMedivacText
             // 
@@ -1007,7 +1108,7 @@
             this.txtMedivacText.Location = new System.Drawing.Point(13, 161);
             this.txtMedivacText.Multiline = true;
             this.txtMedivacText.Name = "txtMedivacText";
-            this.txtMedivacText.Size = new System.Drawing.Size(665, 54);
+            this.txtMedivacText.Size = new System.Drawing.Size(506, 54);
             this.txtMedivacText.TabIndex = 70;
             this.txtMedivacText.WordWrap = true;
             this.txtMedivacText.TextChanged += new System.EventHandler(this.txtMedivacText_TextChanged);
@@ -1020,7 +1121,7 @@
             this.txtRemarks.Location = new System.Drawing.Point(13, 48);
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(979, 78);
+            this.txtRemarks.Size = new System.Drawing.Size(506, 78);
             this.txtRemarks.TabIndex = 69;
             this.txtRemarks.WordWrap = true;
             this.txtRemarks.TextChanged += new System.EventHandler(this.txtRemarks_TextChanged);
@@ -1030,9 +1131,9 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(684, 161);
+            this.label9.Location = new System.Drawing.Point(15, 218);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(299, 54);
+            this.label9.Size = new System.Drawing.Size(504, 42);
             this.label9.TabIndex = 68;
             this.label9.Text = "*Note: info for any aircraft identified as Medivac in the upper left Aircraft sec" +
     "tion will be automatically included here when printed";
@@ -1050,7 +1151,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(203, 251);
+            this.label8.Location = new System.Drawing.Point(204, 265);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 24);
             this.label8.TabIndex = 65;
@@ -1069,7 +1170,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 249);
+            this.label7.Location = new System.Drawing.Point(14, 265);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(74, 24);
             this.label7.TabIndex = 64;
@@ -1079,7 +1180,7 @@
             // 
             this.datSunset.CustomFormat = "HH:mm";
             this.datSunset.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datSunset.Location = new System.Drawing.Point(278, 249);
+            this.datSunset.Location = new System.Drawing.Point(279, 263);
             this.datSunset.Name = "datSunset";
             this.datSunset.ShowUpDown = true;
             this.datSunset.Size = new System.Drawing.Size(88, 29);
@@ -1090,42 +1191,20 @@
             // 
             this.datSunrise.CustomFormat = "HH:mm";
             this.datSunrise.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datSunrise.Location = new System.Drawing.Point(97, 247);
+            this.datSunrise.Location = new System.Drawing.Point(98, 263);
             this.datSunrise.Name = "datSunrise";
             this.datSunrise.ShowUpDown = true;
             this.datSunrise.Size = new System.Drawing.Size(88, 29);
             this.datSunrise.TabIndex = 1;
             this.datSunrise.ValueChanged += new System.EventHandler(this.datSunrise_ValueChanged);
             // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Location = new System.Drawing.Point(394, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(120, 32);
-            this.label5.TabIndex = 60;
-            this.label5.Text = "Prepared By";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cboPreparedBy
-            // 
-            this.cboPreparedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboPreparedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPreparedBy.FormattingEnabled = true;
-            this.cboPreparedBy.Location = new System.Drawing.Point(520, 19);
-            this.cboPreparedBy.Name = "cboPreparedBy";
-            this.cboPreparedBy.Size = new System.Drawing.Size(334, 32);
-            this.cboPreparedBy.TabIndex = 59;
-            this.cboPreparedBy.SelectedIndexChanged += new System.EventHandler(this.cboPreparedBy_SelectedIndexChanged);
-            this.cboPreparedBy.Leave += new System.EventHandler(this.cboPreparedBy_Leave);
-            // 
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(878, 3);
+            this.btnPrint.Location = new System.Drawing.Point(870, 3);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(126, 63);
+            this.btnPrint.Size = new System.Drawing.Size(126, 48);
             this.btnPrint.TabIndex = 57;
             this.btnPrint.Text = "Print";
             this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1253,89 +1332,6 @@
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             this.dataGridViewTextBoxColumn14.ReadOnly = true;
             // 
-            // colAircraftType
-            // 
-            this.colAircraftType.DataPropertyName = "AircraftTypeText";
-            this.colAircraftType.HeaderText = "Type";
-            this.colAircraftType.Name = "colAircraftType";
-            this.colAircraftType.ReadOnly = true;
-            // 
-            // colIsMedivac
-            // 
-            this.colIsMedivac.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colIsMedivac.DataPropertyName = "IsMedivac";
-            this.colIsMedivac.HeaderText = "Medivac";
-            this.colIsMedivac.Name = "colIsMedivac";
-            this.colIsMedivac.ReadOnly = true;
-            this.colIsMedivac.Width = 87;
-            // 
-            // colReg
-            // 
-            this.colReg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colReg.DataPropertyName = "Registration";
-            this.colReg.HeaderText = "Registration";
-            this.colReg.Name = "colReg";
-            this.colReg.ReadOnly = true;
-            this.colReg.Width = 133;
-            // 
-            // colMakeModel
-            // 
-            this.colMakeModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colMakeModel.DataPropertyName = "MakeModel";
-            this.colMakeModel.HeaderText = "Make/Model";
-            this.colMakeModel.Name = "colMakeModel";
-            this.colMakeModel.ReadOnly = true;
-            this.colMakeModel.Width = 139;
-            // 
-            // colBase
-            // 
-            this.colBase.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colBase.DataPropertyName = "Base";
-            this.colBase.HeaderText = "Base";
-            this.colBase.Name = "colBase";
-            this.colBase.ReadOnly = true;
-            this.colBase.Width = 77;
-            // 
-            // colPilot
-            // 
-            this.colPilot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colPilot.DataPropertyName = "Pilot";
-            this.colPilot.HeaderText = "Pilot";
-            this.colPilot.Name = "colPilot";
-            this.colPilot.ReadOnly = true;
-            this.colPilot.Width = 70;
-            // 
-            // colStart
-            // 
-            this.colStart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colStart.DataPropertyName = "StartTime";
-            dataGridViewCellStyle1.Format = "HH:mm";
-            this.colStart.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colStart.HeaderText = "Start Time";
-            this.colStart.Name = "colStart";
-            this.colStart.ReadOnly = true;
-            this.colStart.Width = 119;
-            // 
-            // colEndTime
-            // 
-            this.colEndTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colEndTime.DataPropertyName = "EndTime";
-            dataGridViewCellStyle2.Format = "HH:mm";
-            this.colEndTime.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colEndTime.HeaderText = "End Time";
-            this.colEndTime.Name = "colEndTime";
-            this.colEndTime.ReadOnly = true;
-            this.colEndTime.Width = 118;
-            // 
-            // colRemarks
-            // 
-            this.colRemarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colRemarks.DataPropertyName = "Remarks";
-            this.colRemarks.HeaderText = "Remarks";
-            this.colRemarks.MinimumWidth = 150;
-            this.colRemarks.Name = "colRemarks";
-            this.colRemarks.ReadOnly = true;
-            // 
             // AirOperationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -1409,8 +1405,6 @@
         private System.Windows.Forms.DateTimePicker datSunset;
         private System.Windows.Forms.DateTimePicker datSunrise;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cboPreparedBy;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -1490,5 +1484,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStart;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEndTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemarks;
+        private CustomControls.PrepAndApprovePanel prepAndApprovePanel1;
     }
 }

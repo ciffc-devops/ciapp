@@ -64,6 +64,8 @@ namespace Wildfire_ICS_Assist
                 p.PanelCollapsed += HandlePanelCollapsed;
 
             }
+            prepAndApprovePanel1.PanelExpanded += HandlePanelExpanded;
+            prepAndApprovePanel1.PanelCollapsed += HandlePanelCollapsed;
         }
 
         private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
