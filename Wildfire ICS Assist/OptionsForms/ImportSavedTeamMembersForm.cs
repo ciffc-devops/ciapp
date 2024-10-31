@@ -343,20 +343,20 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         dup.HasAllergies    = member.HasAllergies;
                         dup.EmergencyContact = member.EmergencyContact;
                         dup.HomeUnit = member.HomeUnit;
-                        Program.generalOptionsService.UpserOptionValue(dup, "TeamMember");
+                        Program.generalOptionsService.UpsertOptionValue(dup, "TeamMember");
                         UpdatedCount++;
 
                     }
                     else
                     {
-                        Program.generalOptionsService.UpserOptionValue(member, "TeamMember");
+                        Program.generalOptionsService.UpsertOptionValue(member, "TeamMember");
                         ImportedCount += 1;
 
                     }
                 }
                 else
                 {
-                    Program.generalOptionsService.UpserOptionValue(member, "TeamMember");
+                    Program.generalOptionsService.UpsertOptionValue(member, "TeamMember");
                     ImportedCount += 1;
                 }
             }

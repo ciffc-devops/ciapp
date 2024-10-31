@@ -214,7 +214,7 @@ namespace Wildfire_ICS_Assist
                     Program.incidentDataService.UpsertAmbulance(entryForm.SelectedAmbulance);
                     if (entryForm.SaveForLater)
                     {
-                        Program.generalOptionsService.UpserOptionValue(entryForm.SelectedAmbulance, "Ambulance");
+                        Program.generalOptionsService.UpsertOptionValue(entryForm.SelectedAmbulance, "Ambulance");
 
                     }
                 }
@@ -363,7 +363,7 @@ namespace Wildfire_ICS_Assist
 
                     if (entryForm.SaveForLater)
                     {
-                        Program.generalOptionsService.UpserOptionValue(entryForm.selectedHospital, "Hospital");
+                        Program.generalOptionsService.UpsertOptionValue(entryForm.selectedHospital, "Hospital");
 
                     }
                 }

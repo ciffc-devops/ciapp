@@ -42,7 +42,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = editForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editForm.selectedMessage, "SafetyMessage");
+                    Program.generalOptionsService.UpsertOptionValue(editForm.selectedMessage, "SafetyMessage");
                     BuildDataList();
                 }
             }
@@ -66,7 +66,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 {
                     messages.Add((SafetyMessage)row.DataBoundItem);
                 }
-                foreach (SafetyMessage sm in messages) { sm.Active = false; Program.generalOptionsService.UpserOptionValue(sm, "SafetyMessage"); }
+                foreach (SafetyMessage sm in messages) { sm.Active = false; Program.generalOptionsService.UpsertOptionValue(sm, "SafetyMessage"); }
                 BuildDataList();
             }
         }

@@ -202,7 +202,7 @@ namespace Wildfire_ICS_Assist
 
                             if (signInForm.SavePersonForLater)
                             {
-                                Program.generalOptionsService.UpserOptionValue(p.Clone(), "TeamMember");
+                                Program.generalOptionsService.UpsertOptionValue(p.Clone(), "TeamMember");
                             }
 
                             break;

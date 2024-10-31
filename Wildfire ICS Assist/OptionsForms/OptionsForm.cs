@@ -159,7 +159,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     Globals.DateFormat = options.DateFormat;
                     options.YellowResourceTimeoutDays = Convert.ToInt32( numYellowResourceTimeoutDays.Value);
                     options.RedResourceTimeoutDays = Convert.ToInt32(numRedResourceTimeoutDays.Value);
-                    if (NewOrgLogo != null) { Program.generalOptionsService.UpserOptionValue(NewOrgLogo, "OrganizationLogo"); }
+                    if (NewOrgLogo != null) { Program.generalOptionsService.UpsertOptionValue(NewOrgLogo, "OrganizationLogo"); }
                     options.OrganizationName = txtOrganizationName.Text;
                     options.ShowTestButton = chkShowTest.Checked;
 

@@ -103,7 +103,7 @@ namespace Wildfire_ICS_Assist
 
                     if (entryForm.SaveForLater)
                     {
-                        Program.generalOptionsService.UpserOptionValue(entryForm.SelectedItem, "CommsItem");
+                        Program.generalOptionsService.UpsertOptionValue(entryForm.SelectedItem, "CommsItem");
                     }
                 }
             }

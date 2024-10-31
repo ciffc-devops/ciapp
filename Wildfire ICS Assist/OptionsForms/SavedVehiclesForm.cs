@@ -45,7 +45,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editItem.vehicle, "Vehicle");
+                    Program.generalOptionsService.UpsertOptionValue(editItem.vehicle, "Vehicle");
                     buildList();
 
 
@@ -81,7 +81,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     {
                         Vehicle h = (Vehicle)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Vehicle");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Vehicle");
                     }
                     buildList();
                 }

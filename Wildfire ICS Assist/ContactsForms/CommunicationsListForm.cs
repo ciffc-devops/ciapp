@@ -54,7 +54,7 @@ namespace Wildfire_ICS_Assist
                         List<Contact> savedContacts = (List<Contact>)Program.generalOptionsService.GetOptionsValue("Contacts");
                         if (savedContacts.Any(o => o.ContactID == editItem.contact.ContactID))
                         {
-                            Program.generalOptionsService.UpserOptionValue(editItem.contact, "Contact");
+                            Program.generalOptionsService.UpsertOptionValue(editItem.contact, "Contact");
                         }
                     }
                 }
@@ -137,7 +137,7 @@ namespace Wildfire_ICS_Assist
 
                         if (entryForm.IsNewContact && entryForm.SaveForLater)
                         {
-                            Program.generalOptionsService.UpserOptionValue(entryForm.selected, "Contact");
+                            Program.generalOptionsService.UpsertOptionValue(entryForm.selected, "Contact");
 
                         }
                     }

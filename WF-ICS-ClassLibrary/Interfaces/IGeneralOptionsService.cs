@@ -20,7 +20,7 @@ namespace WF_ICS_ClassLibrary.Interfaces
         bool GetOptionsBoolValue(string ValueName);
         Guid GetGuidOptionValue(string ValueName);
         string GetStringOptionValue(string ValueName);
-        void UpserOptionValue(object newValue, string property_name = null);
+        void UpsertOptionValue(object newValue, string property_name = null);
         void RemoveOptionValue(object removeValue, string property_name);
 
 

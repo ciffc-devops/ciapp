@@ -44,7 +44,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = contactListEditContact.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(contactListEditContact.contact, "Contact");
+                    Program.generalOptionsService.UpsertOptionValue(contactListEditContact.contact, "Contact");
                     buildDataList();
 
                 }
@@ -59,7 +59,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = contactListEditContact.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(contactListEditContact.contact, "Contact");
+                    Program.generalOptionsService.UpsertOptionValue(contactListEditContact.contact, "Contact");
                     buildDataList();
                 }
             }
@@ -76,7 +76,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 {
                     Contact c = (Contact)row.DataBoundItem;
                     c.Active = false;
-                    Program.generalOptionsService.UpserOptionValue(c, "Contact");
+                    Program.generalOptionsService.UpsertOptionValue(c, "Contact");
 
                 }
                 buildDataList();
@@ -99,7 +99,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     DialogResult dr = contactListEditContact.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        Program.generalOptionsService.UpserOptionValue(contactListEditContact.contact, "Contact");
+                        Program.generalOptionsService.UpsertOptionValue(contactListEditContact.contact, "Contact");
                         buildDataList();
                     }
                 }

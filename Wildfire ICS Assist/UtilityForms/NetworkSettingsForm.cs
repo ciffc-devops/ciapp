@@ -83,8 +83,8 @@ namespace Wildfire_ICS_Assist
                 NetworkComms.Shutdown();
                 Program.networkService.ServerIP = txtServerIP.Text;
                 Program.networkService.ServerPortStr = txtServerPort.Text;
-                Program.generalOptionsService.UpserOptionValue(Program.networkService.ServerIP, "LastServerIP");
-                Program.generalOptionsService.UpserOptionValue(Program.networkService.ServerPortStr, "LastPort");
+                Program.generalOptionsService.UpsertOptionValue(Program.networkService.ServerIP, "LastServerIP");
+                Program.generalOptionsService.UpsertOptionValue(Program.networkService.ServerPortStr, "LastPort");
 
                 DateTime today = DateTime.Now;
                 //parent.addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - Attempting to connect to server " + Program.networkService.ServerIP + "\r\n");
@@ -211,7 +211,7 @@ namespace Wildfire_ICS_Assist
                         selectIPForm.ipAddresses = allIPs;
                         DialogResult dr = selectIPForm.ShowDialog();
                         tempServerIP = selectIPForm.SelectedAddress;
-                        Program.generalOptionsService.UpserOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
+                        Program.generalOptionsService.UpsertOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
                     }
                 }
             }

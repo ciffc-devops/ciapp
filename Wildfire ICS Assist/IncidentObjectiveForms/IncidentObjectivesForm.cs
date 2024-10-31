@@ -199,7 +199,7 @@ namespace Wildfire_ICS_Assist
 
                     if (entryForm.SaveForLater)
                     {
-                        Program.generalOptionsService.UpserOptionValue(entryForm.Objective, "Objective");
+                        Program.generalOptionsService.UpsertOptionValue(entryForm.Objective, "Objective");
 
                     }
 

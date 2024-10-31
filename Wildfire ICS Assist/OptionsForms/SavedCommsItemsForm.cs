@@ -45,7 +45,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editCommsItem.commsPlanItem, "CommsItem");
+                    Program.generalOptionsService.UpsertOptionValue(editCommsItem.commsPlanItem, "CommsItem");
                     buildCommsItemList();
 
 
@@ -79,7 +79,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     {
                         CommsPlanItem h = (CommsPlanItem)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "CommsItem");
+                        Program.generalOptionsService.UpsertOptionValue(h, "CommsItem");
                     }
                     buildCommsItemList();
                 }

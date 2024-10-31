@@ -42,7 +42,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
            
             if (editForm.ShowDialog() == DialogResult.OK)
             {
-                Program.generalOptionsService.UpserOptionValue(editForm.selectedAmbulance, "Ambulance");
+                Program.generalOptionsService.UpsertOptionValue(editForm.selectedAmbulance, "Ambulance");
                 buildDataList();
             }
         }
@@ -57,7 +57,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editForm.selectedAmbulance, "Ambulance");
+                    Program.generalOptionsService.UpsertOptionValue(editForm.selectedAmbulance, "Ambulance");
                     buildDataList();
                 }
 
@@ -76,7 +76,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     {
                         AmbulanceService h = (AmbulanceService)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Ambulance");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Ambulance");
                     }
                     buildDataList();
                 }
@@ -93,7 +93,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editForm.selectedAmbulance, "Ambulance");
+                    Program.generalOptionsService.UpsertOptionValue(editForm.selectedAmbulance, "Ambulance");
                     buildDataList();
                 }
 

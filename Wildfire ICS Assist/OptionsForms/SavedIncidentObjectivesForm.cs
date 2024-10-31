@@ -43,7 +43,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editItem.objective, "Objective");
+                    Program.generalOptionsService.UpsertOptionValue(editItem.objective, "Objective");
                     buildList();
 
 
@@ -80,7 +80,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     {
                         IncidentObjective h = (IncidentObjective)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Objective");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Objective");
                     }
                     buildList();
                 }

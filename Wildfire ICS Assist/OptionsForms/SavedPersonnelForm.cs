@@ -43,7 +43,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = editForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editForm.selectedMember, "TeamMember");
+                    Program.generalOptionsService.UpsertOptionValue(editForm.selectedMember, "TeamMember");
                     LoadData();
 
                     if(Program.CurrentIncident.IncidentPersonnel.Any(o=>o.ID == editForm.selectedMember.ID))
@@ -97,7 +97,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     foreach (Personnel mem in toDelete)
                     {
                         mem.MemberActive = false;
-                        Program.generalOptionsService.UpserOptionValue(mem, "TeamMember");
+                        Program.generalOptionsService.UpsertOptionValue(mem, "TeamMember");
 
                     }
                     LoadData();

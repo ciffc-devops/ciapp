@@ -41,7 +41,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = editForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editForm.SelectedAircraft, "Aircraft");
+                    Program.generalOptionsService.UpsertOptionValue(editForm.SelectedAircraft, "Aircraft");
                     LoadAircraft();
                 }
             }
@@ -73,7 +73,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     {
                         Aircraft h = (Aircraft)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Aircraft");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Aircraft");
                     }
                     LoadAircraft();
                 }

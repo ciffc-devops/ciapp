@@ -150,6 +150,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(52)] private List<DemobilizationRecord> _allDemobilizationRecords = new List<DemobilizationRecord>();
         [ProtoMember(53)] private List<IncidentResource> _IncidentResources = new List<IncidentResource>();
         [ProtoMember(54)] private List<ResourceReplacementPlan> _ResourceReplacementPlans = new List<ResourceReplacementPlan>();
+        [ProtoMember(55)] private int[] _SoftwareVersion = new int[3];
 
         public string TaskName { get => _TaskName; set { if (!string.IsNullOrEmpty(value)) { _TaskName = value.Trim(); } else { _TaskName = null; } } }
         public string TaskNumber { get => _TaskNumber; set => _TaskNumber = value; }
@@ -177,6 +178,18 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 if (!string.IsNullOrEmpty(TaskNumber)) { return TaskNumber; }
                 else { return TaskName; }
 
+            }
+        }
+        public string IncidentNameAndNumberForPath
+        {
+            get
+            {
+                StringBuilder path = new StringBuilder();
+                if (!string.IsNullOrEmpty(TaskNumber)) { path.Append(TaskNumber.ReplaceInvalidPathChars()); }
+                if (!string.IsNullOrEmpty(TaskNumber) && !string.IsNullOrEmpty(TaskName)) { path.Append(" - "); }
+                if (!string.IsNullOrEmpty(TaskName)) { path.Append(TaskName.ReplaceInvalidPathChars()); }
+
+                return path.ToString();
             }
         }
 
@@ -232,6 +245,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
 
 
         public string currentFilePath { get => _currentFilePath; set => _currentFilePath = value; }
+        public int[] SoftwareVersion { get => _SoftwareVersion; set => _SoftwareVersion = value; }
 
 
         public string IncidentCommander(int Ops) { return this.getNameByRoleID(Ops, Globals.IncidentCommanderID); }
@@ -375,6 +389,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         }
 
         private int _savedHighestOpsPeriod; //to be used when getting a list of these from the database without loading everything.
+
         public int SavedHighestOpsPeriod { get => _savedHighestOpsPeriod; set => _savedHighestOpsPeriod = value; }
 
         public int highestOpsPeriod

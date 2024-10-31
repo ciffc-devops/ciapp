@@ -66,7 +66,7 @@ namespace Wildfire_ICS_Assist
                     {
                         SafetyMessage msg = entryForm.selectedMessage.Clone();
                         msg.SafetyTemplateID = Guid.NewGuid();
-                        Program.generalOptionsService.UpserOptionValue(msg, "SafetyMessage");
+                        Program.generalOptionsService.UpsertOptionValue(msg, "SafetyMessage");
                     }
                 }
             }

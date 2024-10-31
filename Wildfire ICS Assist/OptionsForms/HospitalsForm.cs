@@ -45,7 +45,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             editHosptalForm.ShowTravelTimes = false;
             if (editHosptalForm.ShowDialog() == DialogResult.OK)
             {
-                Program.generalOptionsService.UpserOptionValue(editHosptalForm.selectedHospital, "Hospital");
+                Program.generalOptionsService.UpsertOptionValue(editHosptalForm.selectedHospital, "Hospital");
                 buildDataList();
             }
         }
@@ -66,7 +66,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 editHosptalForm.ShowTravelTimes = false;
                 if (editHosptalForm.ShowDialog() == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editHosptalForm.selectedHospital, "Hospital");
+                    Program.generalOptionsService.UpsertOptionValue(editHosptalForm.selectedHospital, "Hospital");
                     buildDataList();
                 }
 
@@ -85,7 +85,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     {
                         Hospital h = (Hospital)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Hospiatl");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Hospiatl");
                     }
                     buildDataList();
                 }
@@ -103,7 +103,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 editHosptalForm.ShowTravelTimes = false;
                 if (editHosptalForm.ShowDialog() == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editHosptalForm.selectedHospital, "Hospital");
+                    Program.generalOptionsService.UpsertOptionValue(editHosptalForm.selectedHospital, "Hospital");
                     buildDataList();
                 }
 
