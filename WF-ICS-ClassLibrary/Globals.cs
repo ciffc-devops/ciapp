@@ -21,12 +21,15 @@ namespace WF_ICS_ClassLibrary
         public static IEquipmentService _equipmentService { get; set; }
         public static IWFIncidentService incidentService { get; set; }
         public static string DateFormat { get; set; }
+        public static string DefaultFolderName { get; set; }
 
         static Globals()
         {
             //Gets the connection string from the calling website and uses it throughout the class library
             ProgramName = "Canadian Incident Action Plan Program";
             ProgramURL = "https://www.icscanada.ca";
+            DefaultFolderName = "CIAPP";
+
         }
 
 

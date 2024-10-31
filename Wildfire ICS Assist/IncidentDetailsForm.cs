@@ -133,7 +133,7 @@ namespace Wildfire_ICS_Assist
                     selectIPForm.ipAddresses = allIPs;
                     DialogResult dr = selectIPForm.ShowDialog();
                     tempServerIP = selectIPForm.SelectedAddress;
-                    Program.generalOptionsService.UpserOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
+                    Program.generalOptionsService.UpsertOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
                 }
             }
 
@@ -1008,7 +1008,8 @@ namespace Wildfire_ICS_Assist
                 }
                 else
                 {
-                    folder = Path.Combine(folder, "CIAPP");
+                    
+                    folder = Path.Combine(folder, Globals.DefaultFolderName);
                     System.IO.Directory.CreateDirectory(folder);
                 }
                 ofdOpenTaskFile.InitialDirectory = folder;
@@ -1032,7 +1033,7 @@ namespace Wildfire_ICS_Assist
                             CurrentOpPeriod = testTaskDeserialize.highestOpsPeriod;
 
                             List<string> recentFilePaths = (List<string>)OptionValue("RecentFiles");
-                            Program.generalOptionsService.UpserOptionValue(filename, "RecentFileName");
+                            Program.generalOptionsService.UpsertOptionValue(filename, "RecentFileName");
                             setRecentFiles();
                         }
                         file.Close();
@@ -1073,79 +1074,46 @@ namespace Wildfire_ICS_Assist
                     CurrentIncident.TaskNumber = txtTaskNumber.Text;
                 }
 
-                //saveSelectedCommsPlanItems("Save File");
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+                int version = fileVersionInfo.ProductMajorPart;
+                int minor = fileVersionInfo.ProductMinorPart;
+                int d_build = fileVersionInfo.FileBuildPart;
+                CurrentIncident.SoftwareVersion = new int[] { version, minor, d_build };
 
-               /* if (!string.IsNullOrEmpty(txtICPCallsign.Text)) { CurrentIncident.ICPCallSign = txtICPCallsign.Text; }
-                else { CurrentIncident.ICPCallSign = "BASE"; }*/
-                string fileName = CurrentIncident.FileName;
-                bool proceed = true;
-                if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName) || forceBrowseForFile)
-                {
-                    string path = "";
-                    if (!string.IsNullOrEmpty(Program.generalOptionsService.GetStringOptionValue("DefaultSaveLocation"))) { path = Program.generalOptionsService.GetStringOptionValue("DefaultSaveLocation"); }
-                    else
-                    {
-                        path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                        path = Path.Combine(path, "CIAPP");
-
-                    }
-                    path = Path.Combine(path, "Incident " + CurrentIncident.IncidentIdentifier);
-                    try
-                    {
-                        System.IO.Directory.CreateDirectory(path);
+                string fileName = GetFileSavePath(forceBrowseForFile);
 
 
-                    }
-                    catch (IOException ioex)
-                    {
-                        MessageBox.Show("There was an error creating the folder for this Incident.  Please verify that the current user has access to the folder specified, and it is not in the process of syncronizing with a cloud service.");
-                        proceed = false;
-                    }
-                    if (proceed)
-                    {
-                        svdTaskFile.InitialDirectory = path;
-                        svdTaskFile.DefaultExt = "xml";
-                        svdTaskFile.FileName = "ICS Forms - Incident " + CurrentIncident.IncidentIdentifier + ".xml";
-                        svdTaskFile.Filter = "Extensible Markup Language|*.xml";
-                        svdTaskFile.Title = "Save Incident Information";
-                        DialogResult sv = svdTaskFile.ShowDialog();
-
-                        if (sv == DialogResult.Cancel)
-                        {
-                            fileName = null;
-                            //txtFileName.Text = "";
-                            Text = Globals.ProgramName + " - Unsaved Incident";
-                        }
-                        else
-                        {
-                            if (!string.IsNullOrEmpty(svdTaskFile.FileName)) { fileName = svdTaskFile.FileName; this.Text = Globals.ProgramName + " - " + svdTaskFile.FileName; }
-                            else { this.Text = Globals.ProgramName; }
-
-
-                            //txtFileName.Text = svdTaskFile.FileName;
-                        }
-                    }
-                }
-
-                if (proceed && !string.IsNullOrEmpty(fileName))
+                if (!string.IsNullOrEmpty(fileName))
                 {
                     try
                     {
+                        if (File.Exists(fileName))
+                        {
+                            File.Copy(fileName, fileName + ".bak", true);
+                        }
 
                         System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
                         ws.NewLineHandling = System.Xml.NewLineHandling.Entitize;
-
                         var path = fileName;
                         XmlSerializer ser = new XmlSerializer(typeof(Incident));
+
                         using (System.Xml.XmlWriter wr = System.Xml.XmlWriter.Create(path, ws))
                         {
                             ser.Serialize(wr, CurrentIncident);
                         }
 
-                        //System.IO.FileStream file = System.IO.File.Create(path);
+                        if (ValidateFile(fileName))
+                        {
+                            if (File.Exists(fileName + ".bak")) { File.Delete(fileName + ".bak"); }
+                        }
+                        else
+                        {
+                            if (File.Exists(fileName + ".bak")) { File.Copy(fileName + ".bak", fileName, true); }
+                            if (notifyOnSave) { MessageBox.Show("The file has NOT been saved.  An error has been encountered, please report the following: The file did not pass validation checks."); }
+                        }
 
-                        //writer.Serialize(file, CurrentIncident);
-                        //file.Close();
+
                         if (notifyOnSave) { MessageBox.Show("Save Complete"); }
                         CurrentIncident.FileName = path;
                         CurrentIncident.DocumentPath = null;
@@ -1157,49 +1125,138 @@ namespace Wildfire_ICS_Assist
                         lastSaveSuccessful = true;
                         lastSuccessfulSaveTime = DateTime.Now;
 
-                        List<string> recentFilePaths = (List<string>)OptionValue("RecentFiles");
-                        Program.generalOptionsService.UpserOptionValue(fileName, "RecentFileName");
-
+                        Program.generalOptionsService.UpsertOptionValue(fileName, "RecentFile");
 
                         setRecentFiles();
-                        //setSavedFlag(true);
-                        //tmrAutoSave.Enabled = options.AutoSave;
+                       
 
                         browseToIncidentFolderToolStripMenuItem.Enabled = true;
                         CreateAutomaticSubFolders();
 
-                        tmrAutoSave.Enabled = true;
                     }
                     catch (IOException)
                     {
                         lastSaveSuccessful = false;
-                        if (notifyOnSave)
-                        {
-                            MessageBox.Show("The file has NOT been saved.  It may be open in another program, or the disk may be full.");
-
-                        }
+                        if (notifyOnSave) { MessageBox.Show("The file has NOT been saved.  It may be open in another program, or the disk may be full."); }
                     }
                     catch (System.UnauthorizedAccessException)
                     {
                         lastSaveSuccessful = false;
-                        if (notifyOnSave)
-                        {
-                            MessageBox.Show("A program on your system, typically a virus scanner, is prevening files from being saved to " + fileName + ". Please select a different folder to save to.");
-                        }
+                        if (notifyOnSave) { MessageBox.Show("A program on your system, typically a virus scanner, is prevening files from being saved to " + fileName + ". Please select a different folder to save to."); }
                         saveFile(true);
                     }
                     catch (Exception ex)
                     {
                         lastSaveSuccessful = false;
-                        if (notifyOnSave)
-                        {
-                            MessageBox.Show("The file has NOT been saved.  An error has been encountered, please report the following:" + ex.Message);
-
-                        }
-
+                        if (notifyOnSave) { MessageBox.Show("The file has NOT been saved.  An error has been encountered, please report the following:" + ex.Message); }
                     }
                 }
             }
+        }
+        private string GetFileSavePath(bool forceBrowseForFile = false)
+        {
+            CurrentIncident.TaskName = txtTaskName.Text;
+            if (validateTaskNumber())
+            {
+                CurrentIncident.TaskNumber = txtTaskNumber.Text;
+            }
+
+
+
+
+
+            string fileName = CurrentIncident.FileName;
+            bool proceed = true;
+            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName) || forceBrowseForFile)
+            {
+                string path = "";
+                if (!string.IsNullOrEmpty(Program.generalOptionsService.GetStringOptionValue("DefaultSaveLocation"))) { path = Program.generalOptionsService.GetStringOptionValue("DefaultSaveLocation"); }
+                else
+                {
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    path = Path.Combine(path, Globals.DefaultFolderName);
+
+                }
+                path = Path.Combine(path, CurrentIncident.IncidentNameAndNumberForPath);
+                try
+                {
+                    System.IO.Directory.CreateDirectory(path);
+
+
+                }
+                catch (IOException ioex)
+                {
+                    MessageBox.Show("There was an error creating the folder for this task.  Please verify that the current user has access to the folder specified, and it is not in the process of syncronizing with a cloud service.");
+                    proceed = false;
+                }
+                if (proceed)
+                {
+                    svdTaskFile.InitialDirectory = path;
+                    svdTaskFile.DefaultExt = "xml";
+                    string defaultFileName = "ICS Forms - " + CurrentIncident.IncidentIdentifier + ".xml";
+                    defaultFileName = defaultFileName.ReplaceInvalidPathChars();
+                    svdTaskFile.FileName = defaultFileName;
+
+
+                    svdTaskFile.Filter = "Extensible Markup Language|*.xml";
+                    svdTaskFile.Title = "Save Task Information";
+                    DialogResult sv = svdTaskFile.ShowDialog();
+
+                    if (sv == DialogResult.Cancel)
+                    {
+                        fileName = null;
+                        //txtFileName.Text = "";
+                        Text = Globals.ProgramName + " - Unsaved Task";
+                    }
+                    else if (!string.IsNullOrEmpty(svdTaskFile.FileName) && svdTaskFile.FileName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0)
+                    {
+                        fileName = null;
+                        MessageBox.Show("Sorry, you must enter a valid file name without invalid characters");
+                    }
+                    else
+                    {
+
+                        if (!string.IsNullOrEmpty(svdTaskFile.FileName)) { fileName = svdTaskFile.FileName; this.Text = Globals.ProgramName + " - " + svdTaskFile.FileName; }
+                        else { this.Text = Globals.ProgramName; }
+
+
+                        //txtFileName.Text = svdTaskFile.FileName;
+                    }
+                }
+            }
+            if (proceed)
+            {
+                return fileName;
+            }
+            else { return null; }
+        }
+
+
+        private bool ValidateFile(string filePath)
+        {
+            bool fileGood = false;
+
+            XmlSerializer reader = new XmlSerializer(typeof(Incident));
+            using (StreamReader file = new StreamReader(filePath))
+            {
+                using (XmlReader xr = XmlReader.Create(file, new XmlReaderSettings() { DtdProcessing = DtdProcessing.Prohibit }))
+                {
+                    try
+                    {
+                        Incident testTaskDeserialize = (Incident)reader.Deserialize(xr);
+                        if (testTaskDeserialize != null)
+                        {
+                            fileGood = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        fileGood = false;
+                    }
+                }
+                file.Close();
+            }
+            return fileGood;
         }
 
         private void CreateAutomaticSubFolders()
@@ -2107,7 +2164,7 @@ namespace Wildfire_ICS_Assist
             else
             {
                 path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                path = Path.Combine(path, "CIAPP");
+                path = Path.Combine(path, Globals.DefaultFolderName);
 
 
 
@@ -2462,7 +2519,7 @@ namespace Wildfire_ICS_Assist
                     string baseFileName = "myCIAPP_Options" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm");
                     int i = 0;
                     string backupFileName = baseFileName + ".xml";
-                    string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CIAPP");
+                    string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Globals.DefaultFolderName);
                     while (File.Exists(Path.Combine(path, backupFileName)))
                     {
                         i += 1;
@@ -2713,13 +2770,13 @@ namespace Wildfire_ICS_Assist
                                     {
                                         DeviceInformation info = savedNetworkDevices.First(o => o.DeviceName.Equals(requester.DeviceName, StringComparison.InvariantCulture) && o.DeviceIP.Equals(requester.DeviceIP, StringComparison.InvariantCulture) && !o.TrustDevice);
                                         info.TrustDevice = true;
-                                        Program.generalOptionsService.UpserOptionValue(info, "NetworkDevice");
+                                        Program.generalOptionsService.UpsertOptionValue(info, "NetworkDevice");
 
                                     }
                                     else
                                     {
                                         requester.TrustDevice = true;
-                                        Program.generalOptionsService.UpserOptionValue(requester, "NetworkDevice");
+                                        Program.generalOptionsService.UpsertOptionValue(requester, "NetworkDevice");
 
                                     }
                                 }
@@ -3120,7 +3177,7 @@ namespace Wildfire_ICS_Assist
             if (Program.generalOptionsService.GetOptionsValue("OrganizationLogo") == null)
             {
                 System.Drawing.Image img = Properties.Resources.CIAPP_LOGO_v3;
-                Program.generalOptionsService.UpserOptionValue(img.BytesFromImage(), "OrganizationLogo");
+                Program.generalOptionsService.UpsertOptionValue(img.BytesFromImage(), "OrganizationLogo");
             }
         }
 
