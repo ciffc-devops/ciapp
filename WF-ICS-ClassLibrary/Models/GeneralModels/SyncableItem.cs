@@ -11,7 +11,7 @@ namespace WF_ICS_ClassLibrary.Models
     [Serializable]
     [ProtoInclude(200, typeof(ResourceReplacementPlan))]
 
-    public class SyncableItem : ICloneable
+    public abstract class SyncableItem : ICloneable
     {
         [ProtoMember(1)] private Guid _ID;
         [ProtoMember(2)] private bool _Active;

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels;
 using WF_ICS_ClassLibrary.Utilities;
 
 namespace WF_ICS_ClassLibrary.Models
@@ -46,7 +47,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
     ProtoInclude(132, typeof(Crew)),
     ProtoInclude(133, typeof(Vehicle)),
     ProtoInclude(134, typeof(DemobilizationRecord)),
-        ProtoInclude(135, typeof(ResourceReplacementPlan))]
+        ProtoInclude(135, typeof(ResourceReplacementPlan)),
+    ProtoInclude(136, typeof(IncidentStatusSummary))]
 
 
 
@@ -151,6 +153,8 @@ ProtoInclude(127, typeof(SubjectProfile)),
         [ProtoMember(53)] private List<IncidentResource> _IncidentResources = new List<IncidentResource>();
         [ProtoMember(54)] private List<ResourceReplacementPlan> _ResourceReplacementPlans = new List<ResourceReplacementPlan>();
         [ProtoMember(55)] private int[] _SoftwareVersion = new int[3];
+        [ProtoMember(56)] private List<IncidentStatusSummary> _AllIncidentStatusSummaries = new List<IncidentStatusSummary>();
+
 
         public string TaskName { get => _TaskName; set { if (!string.IsNullOrEmpty(value)) { _TaskName = value.Trim(); } else { _TaskName = null; } } }
         public string TaskNumber { get => _TaskNumber; set => _TaskNumber = value; }
@@ -294,6 +298,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<DemobilizationRecord> ActiveDemobilizationRecords { get => _allDemobilizationRecords.Where(o => o.Active).ToList(); }
         public List<ResourceReplacementPlan> AllResourceReplacementPlans { get => _ResourceReplacementPlans; set => _ResourceReplacementPlans = value; }
         public List<ResourceReplacementPlan> ActiveResourceReplacementPlans { get => _ResourceReplacementPlans.Where(o => o.Active).ToList(); }
+        public List<IncidentStatusSummary> AllIncidentStatusSummaries { get => _AllIncidentStatusSummaries; set => _AllIncidentStatusSummaries = value; }
 
 
         //for network reasons
@@ -525,6 +530,18 @@ ProtoInclude(127, typeof(SubjectProfile)),
             }
         }
 
+        public bool hasMeaningfulIncidentSummary(int ops = 0)
+        {
+            if (ops > 0)
+            {
+                return AllIncidentStatusSummaries.Any(o => o.OpPeriod == ops && o.Active);
+            }
+            else
+            {
+                return AllIncidentStatusSummaries.Any(o => o.Active);
+            }
+        }
+
         public bool hasMeaningfulOrgChart(int ops)
         {
             if (!allOrgCharts.Any(o => o.OpPeriod == ops)) { return false; }
@@ -607,6 +624,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
                 return false;
             }
         }
+
 
         public Incident Clone()
         {
