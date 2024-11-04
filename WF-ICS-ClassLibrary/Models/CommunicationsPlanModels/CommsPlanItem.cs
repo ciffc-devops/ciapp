@@ -9,12 +9,13 @@ namespace WF_ICS_ClassLibrary.Models
     [Serializable]
     public class CommsPlanItem : SyncableItem, ICloneable, IEquatable<CommsPlanItem>
     {
-        public CommsPlanItem() { ItemID = System.Guid.NewGuid(); TemplateItemID = Guid.NewGuid(); Active = true; }
+        public CommsPlanItem() { ItemID = System.Guid.NewGuid(); TemplateItemID = Guid.NewGuid(); Active = true; SortOrder = 0; }
         public CommsPlanItem(string function, Guid id = new Guid())
         {
             if (id == Guid.Empty) { ItemID = System.Guid.NewGuid(); } else { ItemID = id; }
             CommsFunction = function;
             TemplateItemID = Guid.NewGuid();
+            SortOrder = 0;
             Active = true;
         }
 
@@ -35,6 +36,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(18)] private bool _Aircraft;
         [ProtoMember(19)] private string _TxFrequency;
         [ProtoMember(20)] private string _TxTone;
+        [ProtoMember(21)] private int _SortOrder;
 
         public Guid ItemID { get => ID; set => ID = value; }
         public string CommsSystem { get => _CommsSystem; set => _CommsSystem = value; }
@@ -124,7 +126,7 @@ namespace WF_ICS_ClassLibrary.Models
 
 
         public Guid TemplateItemID { get => _TemplateItemID; set => _TemplateItemID = value; }
-
+        public int SortOrder { get => _SortOrder; set => _SortOrder = value; }
 
         public CommsPlanItem Clone()
         {
