@@ -10,9 +10,12 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Models.GeneralModels;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
+using Wildfire_ICS_Assist.CustomControls;
 using Wildfire_ICS_Assist.OptionsForms;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -26,26 +29,22 @@ namespace Wildfire_ICS_Assist
                 return Program.CurrentIncident.allMedicalPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
             }
         }
-        private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
 
         public MedicalPlanForm()
         {
-            
-            InitializeComponent(); 
+
+            InitializeComponent();
             dgvAidStations.BackgroundColor = Program.FormAccent;
             dgvTransport.BackgroundColor = Program.FormAccent;
             dgvHospitals.BackgroundColor = Program.FormAccent;
+
+
         }
 
         private void MedicalPlanForm_Load(object sender, EventArgs e)
         {
             if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
-            BuildAidStations();
-            BuildAmbulances();
-            BuildHospitals();
-            txtEmergencyProcedures.Text = CurrentPlan.EmergencyProcedures;
-
-            buildRoleDropdowns();
+            LoadMedicalPlan();
 
             Program.incidentDataService.HospitalChanged += Program_HospitalChanged;
             Program.incidentDataService.AmbulanceServiceChanged += Program_AmbulanceChanged;
@@ -53,33 +52,31 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
+            ICSFormInformation form = ICSFormTools.GetFormByNumber(206);
+            if (form.Fields.Any(o => o.FieldNumber == 4)) { toolTip1.SetToolTip(llBox4, form.Fields.First(o => o.FieldNumber == 4).InstructionsWithLineFeed); }
+            if (form.Fields.Any(o => o.FieldNumber == 5)) { toolTip1.SetToolTip(btnFieldHelp5, form.Fields.First(o => o.FieldNumber == 5).InstructionsWithLineFeed); }
+            if (form.Fields.Any(o => o.FieldNumber == 6)) { toolTip1.SetToolTip(btnFieldHelp6, form.Fields.First(o => o.FieldNumber == 6).InstructionsWithLineFeed); }
+            if (form.Fields.Any(o => o.FieldNumber == 7)) { toolTip1.SetToolTip(btnFieldHelp7, form.Fields.First(o => o.FieldNumber == 7).InstructionsWithLineFeed); }
         }
 
 
-        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
+        private void LoadMedicalPlan()
         {
             BuildAidStations();
             BuildAmbulances();
             BuildHospitals();
             txtEmergencyProcedures.Text = CurrentPlan.EmergencyProcedures;
+            prepAndApprovePanel1.SetPreparedBy(CurrentPlan.PreparedByRoleID, CurrentPlan.DatePrepared);
+            prepAndApprovePanel1.SetApprovedBy(CurrentPlan.ApprovedByRoleID, CurrentPlan.DateApproved);
 
-            buildRoleDropdowns();
         }
 
-        private void buildRoleDropdowns()
+        private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
-            List<ICSRole> rolesForApproval = CurrentOrgChart.Clone().ActiveRoles;
-            ICSRole blank = new ICSRole(); blank.RoleID = Guid.Empty; blank.RoleName = ""; blank.ReportsTo = Guid.Empty; blank.ManualSortOrder = -1;
-            rolesForApproval.Insert(0, blank);
-            cboApprovedBy.DataSource = rolesForApproval; cboApprovedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboApprovedBy.ValueMember = "RoleID";
-            if (CurrentPlan.ApprovedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentPlan.ApprovedByRoleID)) { cboApprovedBy.SelectedValue = CurrentPlan.ApprovedByRoleID; }
-            cboApprovedBy.DropDownWidth = cboApprovedBy.GetDropDownWidth();
-            
-            
-            cboPreparedBy.DataSource = CurrentOrgChart.Clone().ActiveRoles; cboPreparedBy.DisplayMember = "RoleNameWithIndividualAndDepth"; cboPreparedBy.ValueMember = "RoleID";
-            if (CurrentPlan.PreparedByRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == CurrentPlan.PreparedByRoleID)) { cboPreparedBy.SelectedValue = CurrentPlan.PreparedByRoleID; }
-            cboPreparedBy.DropDownWidth = cboPreparedBy.GetDropDownWidth();
+            LoadMedicalPlan();
+
         }
+
 
         private void BuildAidStations()
         {
@@ -91,7 +88,7 @@ namespace Wildfire_ICS_Assist
 
         private void BuildAmbulances()
         {
-            dgvTransport.DataSource = null; 
+            dgvTransport.DataSource = null;
             dgvTransport.AutoGenerateColumns = false;
             dgvTransport.DataSource = CurrentPlan.ActiveAmbulances;
             btnAddTransport.Enabled = CurrentPlan.ActiveAmbulances.Count < 5;
@@ -100,14 +97,14 @@ namespace Wildfire_ICS_Assist
         private void BuildHospitals()
         {
             dgvHospitals.DataSource = null;
-            dgvHospitals.AutoGenerateColumns=false;
-            dgvHospitals.DataSource= CurrentPlan.ActiveHospitals;
+            dgvHospitals.AutoGenerateColumns = false;
+            dgvHospitals.DataSource = CurrentPlan.ActiveHospitals;
             btnAddHospital.Enabled = CurrentPlan.ActiveHospitals.Count < 5;
         }
 
         private void Program_AidStationChanged(MedicalAidStationEventArgs e)
         {
-            if(e.item.OpPeriod == Program.CurrentOpPeriod)
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
                 BuildAidStations();
             }
@@ -128,9 +125,9 @@ namespace Wildfire_ICS_Assist
         }
         private void Program_ICSRoleChanged(ICSRoleEventArgs e)
         {
-            if(e.item.OpPeriod == Program.CurrentOpPeriod)
+            if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
-                buildRoleDropdowns();
+
             }
         }
 
@@ -162,7 +159,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnEditAidStation_Click(object sender, EventArgs e)
         {
-            if(dgvAidStations.SelectedRows.Count == 1)
+            if (dgvAidStations.SelectedRows.Count == 1)
             {
                 MedicalAidStation aid = (MedicalAidStation)dgvAidStations.SelectedRows[0].DataBoundItem;
                 OpenAidStationForEdit(aid);
@@ -186,7 +183,7 @@ namespace Wildfire_ICS_Assist
 
         private void dgvAidStations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
                 MedicalAidStation aid = (MedicalAidStation)dgvAidStations.Rows[e.RowIndex].DataBoundItem;
                 OpenAidStationForEdit(aid);
@@ -209,7 +206,7 @@ namespace Wildfire_ICS_Assist
             using (MedicalPlanMedivacEntryForm entryForm = new MedicalPlanMedivacEntryForm())
             {
                 DialogResult dr = entryForm.ShowDialog();
-                if(dr == DialogResult.OK)
+                if (dr == DialogResult.OK)
                 {
                     Program.incidentDataService.UpsertAmbulance(entryForm.SelectedAmbulance);
                     if (entryForm.SaveForLater)
@@ -223,7 +220,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnEditTransport_Click(object sender, EventArgs e)
         {
-            if(dgvTransport.SelectedRows.Count == 1)
+            if (dgvTransport.SelectedRows.Count == 1)
             {
                 AmbulanceService amb = (AmbulanceService)dgvTransport.SelectedRows[0].DataBoundItem;
                 OpenMedivacForEdit(amb);
@@ -247,7 +244,7 @@ namespace Wildfire_ICS_Assist
 
         private void dgvTransport_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
                 AmbulanceService am = (AmbulanceService)dgvTransport.Rows[e.RowIndex].DataBoundItem;
                 OpenMedivacForEdit(am);
@@ -279,7 +276,7 @@ namespace Wildfire_ICS_Assist
         private void btnPrint_Click(object sender, EventArgs e)
         {
             MedicalPlan plan = Program.CurrentIncident.allMedicalPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
-           
+
 
             if (plan.PreparedByRoleID == Guid.Empty)
             {
@@ -299,42 +296,7 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private void cboApprovedBy_Leave(object sender, EventArgs e)
-        {
-            if(cboApprovedBy.SelectedItem != null)
-            {
-                ICSRole role = (ICSRole)cboApprovedBy.SelectedItem;
-                CurrentPlan.ApprovedByResourceName = role.IndividualName;
-                CurrentPlan.ApprovedByRoleName = role.RoleName;
-                CurrentPlan.ApprovedByRoleID = role.RoleID;
-            } else
-            {
-                CurrentPlan.ApprovedByResourceName = string.Empty;
-                CurrentPlan.ApprovedByRoleName = string.Empty;
-                CurrentPlan.ApprovedByRoleID = Guid.Empty;
 
-            }
-            Program.incidentDataService.UpsertMedicalPlan(CurrentPlan);
-
-        }
-
-        private void cboPreparedBy_Leave(object sender, EventArgs e)
-        {
-            if (cboPreparedBy.SelectedItem != null)
-            {
-                ICSRole role = (ICSRole)cboPreparedBy.SelectedItem;
-                CurrentPlan.PreparedByResourceName = role.IndividualName;
-                CurrentPlan.PreparedByRoleName = role.RoleName;
-                CurrentPlan.PreparedByRoleID = role.RoleID;
-            }
-            else
-            {
-                CurrentPlan.PreparedByResourceName = string.Empty;
-                CurrentPlan.PreparedByRoleName = string.Empty;
-                CurrentPlan.PreparedByRoleID = Guid.Empty;
-            }
-            Program.incidentDataService.UpsertMedicalPlan(CurrentPlan);
-        }
 
         private void btnDeleteHospital_Click(object sender, EventArgs e)
         {
@@ -372,7 +334,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnEditHospital_Click(object sender, EventArgs e)
         {
-            if(dgvHospitals.SelectedRows.Count == 1)
+            if (dgvHospitals.SelectedRows.Count == 1)
             {
                 Hospital h = (Hospital)dgvHospitals.SelectedRows[0].DataBoundItem;
                 OpenHospitalForEdit(h);
@@ -386,7 +348,7 @@ namespace Wildfire_ICS_Assist
                 editForm.selectedHospital = h;
                 editForm.ShowTravelTimes = true;
                 DialogResult dr = editForm.ShowDialog();
-                if(dr == DialogResult.OK)
+                if (dr == DialogResult.OK)
                 {
                     Program.incidentDataService.UpsertHospital(editForm.selectedHospital);
                 }
@@ -395,9 +357,9 @@ namespace Wildfire_ICS_Assist
 
         private void dgvHospitals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
-                Hospital h = (Hospital) dgvHospitals.Rows[e.RowIndex].DataBoundItem;
+                Hospital h = (Hospital)dgvHospitals.Rows[e.RowIndex].DataBoundItem;
                 OpenHospitalForEdit(h);
             }
         }
@@ -418,6 +380,48 @@ namespace Wildfire_ICS_Assist
         private void txtEmergencyProcedures_TextChanged_1(object sender, EventArgs e)
         {
             CurrentPlan.EmergencyProcedures = txtEmergencyProcedures.Text.Trim();
+
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
+        }
+
+        private void prepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
+        {
+            CurrentPlan.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+            CurrentPlan.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+
+        }
+
+        private void prepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
+        {
+            CurrentPlan.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+            CurrentPlan.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
+
+        }
+
+        private void btnFormVideo_Click(object sender, EventArgs e)
+        {
+            ICSFormInformation form = ICSFormTools.GetFormByNumber(206);
+            if (form != null && !string.IsNullOrEmpty(form.VideoURL))
+            {
+                System.Diagnostics.Process.Start(form.VideoURL);
+            }
+        }
+
+        private void btnFormHelp_Click(object sender, EventArgs e)
+        {
+            ICSFormHelpForm helpForm = new ICSFormHelpForm();
+            helpForm.SelectedForm = ICSFormTools.GetFormByNumber(206);
+            helpForm.Show();
+        }
+
+        private void btnFieldHelp4_Click(object sender, EventArgs e)
+        {
+          
+
 
         }
     }
