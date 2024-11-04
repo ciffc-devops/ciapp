@@ -172,6 +172,7 @@
             this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.prepAndApprovePanel1.Collapsed = false;
             this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.prepAndApprovePanel1.EnableExpandCollapse = true;
             this.prepAndApprovePanel1.ExpandsRight = true;
             this.prepAndApprovePanel1.ExpandsUpward = false;
             this.prepAndApprovePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -350,12 +351,12 @@
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(753, 6);
+            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
+            this.btnPrint.Location = new System.Drawing.Point(717, 5);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(113, 42);
+            this.btnPrint.Size = new System.Drawing.Size(149, 51);
             this.btnPrint.TabIndex = 51;
-            this.btnPrint.Text = "Print";
+            this.btnPrint.Text = "View PDF";
             this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -364,7 +365,7 @@
             // btnDelete
             // 
             this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDelete.Location = new System.Drawing.Point(274, 2);
+            this.btnDelete.Location = new System.Drawing.Point(274, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(125, 51);
             this.btnDelete.TabIndex = 35;
@@ -377,7 +378,7 @@
             // btnEdit
             // 
             this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEdit.Location = new System.Drawing.Point(143, 2);
+            this.btnEdit.Location = new System.Drawing.Point(143, 5);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(125, 51);
             this.btnEdit.TabIndex = 34;
@@ -390,7 +391,7 @@
             // btnNew
             // 
             this.btnNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnNew.Location = new System.Drawing.Point(12, 2);
+            this.btnNew.Location = new System.Drawing.Point(12, 5);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(125, 51);
             this.btnNew.TabIndex = 33;

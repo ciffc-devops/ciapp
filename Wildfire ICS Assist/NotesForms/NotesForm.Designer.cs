@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotesForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.chkAllOpPeriods = new System.Windows.Forms.CheckBox();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.cboCategory = new System.Windows.Forms.ComboBox();
             this.dgvNotes = new System.Windows.Forms.DataGridView();
@@ -48,7 +49,6 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -82,8 +82,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2MinSize = 40;
-            this.splitContainer1.Size = new System.Drawing.Size(1073, 481);
-            this.splitContainer1.SplitterDistance = 418;
+            this.splitContainer1.Size = new System.Drawing.Size(774, 322);
+            this.splitContainer1.SplitterDistance = 259;
             this.splitContainer1.TabIndex = 25;
             // 
             // splitContainer2
@@ -104,7 +104,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dgvNotes);
-            this.splitContainer2.Size = new System.Drawing.Size(1073, 418);
+            this.splitContainer2.Size = new System.Drawing.Size(774, 259);
             this.splitContainer2.SplitterDistance = 44;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -118,10 +118,9 @@
             this.chkAllOpPeriods.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.chkAllOpPeriods.FlatAppearance.BorderSize = 0;
             this.chkAllOpPeriods.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
-            this.chkAllOpPeriods.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.chkAllOpPeriods.ImageIndex = 1;
             this.chkAllOpPeriods.ImageList = this.imageList1;
-            this.chkAllOpPeriods.Location = new System.Drawing.Point(846, 3);
+            this.chkAllOpPeriods.Location = new System.Drawing.Point(547, 3);
             this.chkAllOpPeriods.Name = "chkAllOpPeriods";
             this.chkAllOpPeriods.Size = new System.Drawing.Size(224, 38);
             this.chkAllOpPeriods.TabIndex = 2;
@@ -129,6 +128,13 @@
             this.chkAllOpPeriods.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.chkAllOpPeriods.UseVisualStyleBackColor = false;
             this.chkAllOpPeriods.CheckedChanged += new System.EventHandler(this.chkAllOpPeriods_CheckedChanged);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "check-box-unchecked.png");
+            this.imageList1.Images.SetKeyName(1, "check-box-checked.png");
             // 
             // label1
             // 
@@ -148,7 +154,7 @@
             this.cboCategory.FormattingEnabled = true;
             this.cboCategory.Location = new System.Drawing.Point(117, 8);
             this.cboCategory.Name = "cboCategory";
-            this.cboCategory.Size = new System.Drawing.Size(712, 32);
+            this.cboCategory.Size = new System.Drawing.Size(413, 32);
             this.cboCategory.TabIndex = 0;
             this.cboCategory.ValueMember = "CategoryID";
             this.cboCategory.SelectedIndexChanged += new System.EventHandler(this.cboCategory_SelectedIndexChanged);
@@ -172,7 +178,7 @@
             this.dgvNotes.RowHeadersVisible = false;
             this.dgvNotes.RowTemplate.Height = 35;
             this.dgvNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvNotes.Size = new System.Drawing.Size(1073, 370);
+            this.dgvNotes.Size = new System.Drawing.Size(774, 211);
             this.dgvNotes.TabIndex = 0;
             this.dgvNotes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNotes_CellDoubleClick);
             this.dgvNotes.SelectionChanged += new System.EventHandler(this.dgvNotes_SelectionChanged);
@@ -189,9 +195,9 @@
             // 
             this.colDateCreated.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDateCreated.DataPropertyName = "DateCreated";
-            dataGridViewCellStyle17.Format = "yyyy-MMM-dd HH:mm";
-            dataGridViewCellStyle17.NullValue = null;
-            this.colDateCreated.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Format = "yyyy-MMM-dd HH:mm";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colDateCreated.DefaultCellStyle = dataGridViewCellStyle3;
             this.colDateCreated.HeaderText = "Created";
             this.colDateCreated.Name = "colDateCreated";
             this.colDateCreated.ReadOnly = true;
@@ -201,8 +207,8 @@
             // 
             this.colDateUpdated.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDateUpdated.DataPropertyName = "DateUpdated";
-            dataGridViewCellStyle18.Format = "yyyy-MMM-dd HH:mm";
-            this.colDateUpdated.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Format = "yyyy-MMM-dd HH:mm";
+            this.colDateUpdated.DefaultCellStyle = dataGridViewCellStyle4;
             this.colDateUpdated.HeaderText = "Updated";
             this.colDateUpdated.Name = "colDateUpdated";
             this.colDateUpdated.ReadOnly = true;
@@ -228,7 +234,6 @@
             // 
             // btnView
             // 
-            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnView.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
             this.btnView.Location = new System.Drawing.Point(174, 8);
             this.btnView.Name = "btnView";
@@ -242,20 +247,19 @@
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(857, 8);
+            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
+            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint.Location = new System.Drawing.Point(558, 8);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(204, 44);
             this.btnPrint.TabIndex = 24;
-            this.btnPrint.Text = "Print Selected";
+            this.btnPrint.Text = "View PDF(s)";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnNew
             // 
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
             this.btnNew.Location = new System.Drawing.Point(3, 8);
             this.btnNew.Name = "btnNew";
@@ -268,7 +272,6 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEdit.Location = new System.Drawing.Point(296, 8);
             this.btnEdit.Name = "btnEdit";
@@ -281,7 +284,6 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
             this.btnDelete.Location = new System.Drawing.Point(426, 8);
             this.btnDelete.Name = "btnDelete";
@@ -292,24 +294,14 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "check-box-unchecked.png");
-            this.imageList1.Images.SetKeyName(1, "check-box-checked.png");
-            // 
             // NotesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 481);
+            this.ClientSize = new System.Drawing.Size(774, 322);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(790, 300);
             this.Name = "NotesForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Notes";
             this.Load += new System.EventHandler(this.NotesForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

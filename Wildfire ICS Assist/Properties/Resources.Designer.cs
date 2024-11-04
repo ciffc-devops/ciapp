@@ -266,6 +266,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_196_circle_empty_info {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-196-circle-empty-info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_199_save {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_199_save", resourceCulture);
@@ -1119,6 +1129,26 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_calculate_and_output {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_calculate_and_output", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_filetypes_2_file_rich_text {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-filetypes-2-file-rich-text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_filetypes_52_folder_video {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-filetypes-52-folder-video", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

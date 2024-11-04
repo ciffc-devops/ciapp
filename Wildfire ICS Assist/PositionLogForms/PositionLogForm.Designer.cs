@@ -44,19 +44,19 @@
             this.lblPositionName = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvLog = new System.Windows.Forms.DataGridView();
+            this.colRoleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLogText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComplete = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnPrintVerbose = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnViewDetails = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddToPositionLog = new System.Windows.Forms.Button();
-            this.colRoleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLogText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComplete = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
-            this.btnExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -231,54 +231,6 @@
             this.dgvLog.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLog_CellDoubleClick);
             this.dgvLog.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLog_CellFormatting);
             // 
-            // btnPrintVerbose
-            // 
-            resources.ApplyResources(this.btnPrintVerbose, "btnPrintVerbose");
-            this.btnPrintVerbose.Name = "btnPrintVerbose";
-            this.btnPrintVerbose.UseVisualStyleBackColor = true;
-            this.btnPrintVerbose.Click += new System.EventHandler(this.btnPrintVerbose_Click);
-            // 
-            // btnPrint
-            // 
-            resources.ApplyResources(this.btnPrint, "btnPrint");
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnViewDetails
-            // 
-            resources.ApplyResources(this.btnViewDetails, "btnViewDetails");
-            this.btnViewDetails.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_28_search;
-            this.btnViewDetails.Name = "btnViewDetails";
-            this.btnViewDetails.TabStop = false;
-            this.btnViewDetails.UseVisualStyleBackColor = true;
-            this.btnViewDetails.Click += new System.EventHandler(this.btnViewDetails_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            resources.ApplyResources(this.btnDelete, "btnDelete");
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            resources.ApplyResources(this.btnEdit, "btnEdit");
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnAddToPositionLog
-            // 
-            resources.ApplyResources(this.btnAddToPositionLog, "btnAddToPositionLog");
-            this.btnAddToPositionLog.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddToPositionLog.Name = "btnAddToPositionLog";
-            this.btnAddToPositionLog.TabStop = false;
-            this.btnAddToPositionLog.UseVisualStyleBackColor = true;
-            this.btnAddToPositionLog.Click += new System.EventHandler(this.btnAddToPositionLog_Click);
-            // 
             // colRoleName
             // 
             this.colRoleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -326,11 +278,6 @@
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.ReadOnly = true;
             // 
-            // svdExport
-            // 
-            this.svdExport.DefaultExt = "csv";
-            resources.ApplyResources(this.svdExport, "svdExport");
-            // 
             // btnExport
             // 
             resources.ApplyResources(this.btnExport, "btnExport");
@@ -338,6 +285,61 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnPrintVerbose
+            // 
+            resources.ApplyResources(this.btnPrintVerbose, "btnPrintVerbose");
+            this.btnPrintVerbose.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
+            this.btnPrintVerbose.Name = "btnPrintVerbose";
+            this.btnPrintVerbose.UseVisualStyleBackColor = true;
+            this.btnPrintVerbose.Click += new System.EventHandler(this.btnPrintVerbose_Click);
+            // 
+            // btnPrint
+            // 
+            resources.ApplyResources(this.btnPrint, "btnPrint");
+            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnViewDetails
+            // 
+            resources.ApplyResources(this.btnViewDetails, "btnViewDetails");
+            this.btnViewDetails.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_28_search;
+            this.btnViewDetails.Name = "btnViewDetails";
+            this.btnViewDetails.TabStop = false;
+            this.btnViewDetails.UseVisualStyleBackColor = true;
+            this.btnViewDetails.Click += new System.EventHandler(this.btnViewDetails_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
+            resources.ApplyResources(this.btnDelete, "btnDelete");
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            resources.ApplyResources(this.btnEdit, "btnEdit");
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnAddToPositionLog
+            // 
+            resources.ApplyResources(this.btnAddToPositionLog, "btnAddToPositionLog");
+            this.btnAddToPositionLog.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAddToPositionLog.Name = "btnAddToPositionLog";
+            this.btnAddToPositionLog.TabStop = false;
+            this.btnAddToPositionLog.UseVisualStyleBackColor = true;
+            this.btnAddToPositionLog.Click += new System.EventHandler(this.btnAddToPositionLog_Click);
+            // 
+            // svdExport
+            // 
+            this.svdExport.DefaultExt = "csv";
+            resources.ApplyResources(this.svdExport, "svdExport");
             // 
             // PositionLogForm
             // 

@@ -30,13 +30,6 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvContacts = new System.Windows.Forms.DataGridView();
-            this.colContactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRadio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnView = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -44,6 +37,13 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.colContactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRadio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -72,7 +72,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
-            this.splitContainer1.Size = new System.Drawing.Size(717, 401);
+            this.splitContainer1.Size = new System.Drawing.Size(736, 401);
             this.splitContainer1.SplitterDistance = 347;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -98,10 +98,94 @@
             this.dgvContacts.RowHeadersVisible = false;
             this.dgvContacts.RowTemplate.Height = 30;
             this.dgvContacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContacts.Size = new System.Drawing.Size(717, 347);
+            this.dgvContacts.Size = new System.Drawing.Size(736, 347);
             this.dgvContacts.TabIndex = 0;
             this.dgvContacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContacts_CellDoubleClick);
             this.dgvContacts.SelectionChanged += new System.EventHandler(this.dgvContacts_SelectionChanged);
+            // 
+            // btnView
+            // 
+            this.btnView.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
+            this.btnView.Location = new System.Drawing.Point(120, 3);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(102, 42);
+            this.btnView.TabIndex = 49;
+            this.btnView.Text = "View";
+            this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Enabled = false;
+            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
+            this.btnExport.Location = new System.Drawing.Point(463, 3);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(125, 42);
+            this.btnExport.TabIndex = 48;
+            this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Enabled = false;
+            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
+            this.btnPrint.Location = new System.Drawing.Point(594, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(139, 42);
+            this.btnPrint.TabIndex = 47;
+            this.btnPrint.Text = "View PDF";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
+            this.btnDelete.Location = new System.Drawing.Point(347, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(113, 42);
+            this.btnDelete.TabIndex = 46;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Enabled = false;
+            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEdit.Location = new System.Drawing.Point(228, 3);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(113, 42);
+            this.btnEdit.TabIndex = 45;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAdd.Location = new System.Drawing.Point(12, 3);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(102, 42);
+            this.btnAdd.TabIndex = 44;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // svdExport
+            // 
+            this.svdExport.DefaultExt = "csv";
+            this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
             // colContactName
             // 
@@ -166,102 +250,15 @@
             this.colNotes.Name = "colNotes";
             this.colNotes.ReadOnly = true;
             // 
-            // btnView
-            // 
-            this.btnView.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
-            this.btnView.Location = new System.Drawing.Point(120, 3);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(102, 42);
-            this.btnView.TabIndex = 49;
-            this.btnView.Text = "View";
-            this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnView.UseVisualStyleBackColor = true;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Enabled = false;
-            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
-            this.btnExport.Location = new System.Drawing.Point(470, 3);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(125, 42);
-            this.btnExport.TabIndex = 48;
-            this.btnExport.Text = "Export";
-            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Enabled = false;
-            this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint.Location = new System.Drawing.Point(601, 3);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(113, 42);
-            this.btnPrint.TabIndex = 47;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDelete.Location = new System.Drawing.Point(347, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(113, 42);
-            this.btnDelete.TabIndex = 46;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEdit.Location = new System.Drawing.Point(228, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(113, 42);
-            this.btnEdit.TabIndex = 45;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAdd.Location = new System.Drawing.Point(12, 3);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(102, 42);
-            this.btnAdd.TabIndex = 44;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // svdExport
-            // 
-            this.svdExport.DefaultExt = "csv";
-            this.svdExport.Filter = "Comma-separated values|*.csv";
-            // 
             // CommunicationsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(717, 401);
+            this.ClientSize = new System.Drawing.Size(736, 401);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
-            this.MinimumSize = new System.Drawing.Size(733, 440);
+            this.MinimumSize = new System.Drawing.Size(752, 440);
             this.Name = "CommunicationsListForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Additional Contacts";
             this.Load += new System.EventHandler(this.CommunicationsListForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -277,13 +274,6 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dgvContacts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContactName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrganization;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRadio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNotes;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
@@ -291,5 +281,12 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.SaveFileDialog svdExport;
         private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContactName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrganization;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRadio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNotes;
     }
 }
