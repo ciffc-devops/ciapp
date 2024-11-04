@@ -11,6 +11,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
@@ -19,11 +20,13 @@ namespace Wildfire_ICS_Assist
     public partial class CommunicationsPlanForm : BaseForm
     {
         private const int RowsPerSheet = 27;
+        SortableBindingList<CommsPlanItem> items = null;
 
         public CommunicationsPlanForm()
         {
            
-            InitializeComponent(); 
+            InitializeComponent();
+            dgvCommsItems.AutoGenerateColumns = false;
         }
         private void CommunicationsPlanForm_Load(object sender, EventArgs e)
         {
@@ -74,15 +77,15 @@ namespace Wildfire_ICS_Assist
         }
         private void BuildDataList()
         {
-            dgvCommsItems.AutoGenerateColumns = false;
-            dgvCommsItems.DataSource = null;
+           
+            
             if(!Program.CurrentIncident.allCommsPlans.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
             {
                 Program.CurrentIncident.createCommsPlanAsNeeded(Program.CurrentOpPeriod);
             }
             CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
-
-            dgvCommsItems.DataSource = plan.ActiveCommsItems;
+            items = new SortableBindingList<CommsPlanItem>(plan.ActiveCommsItems);
+            dgvCommsItems.DataSource = items;
             btnAdd.Enabled = plan.ActiveCommsItems.Count < RowsPerSheet;
 
             prepAndApprovePanel1.SetPreparedBy(plan.PreparedByRoleID, plan.DatePrepared);
@@ -239,7 +242,7 @@ namespace Wildfire_ICS_Assist
 
         private void dgvCommsItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if(e.RowIndex >= 0 && e.ColumnIndex != dgvCommsItems.Columns["colDown"].Index && e.ColumnIndex != dgvCommsItems.Columns["colUp"].Index)
             {
                 CommsPlanItem item = (CommsPlanItem) dgvCommsItems.Rows[e.RowIndex].DataBoundItem;
                 OpenForView(item);
@@ -257,6 +260,50 @@ namespace Wildfire_ICS_Assist
         {
             TabControlExt.tabControlCustomColor_DrawItem(sender, e);
 
+        }
+
+        private void dgvCommsItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+        
+        private void dgvCommsItems_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewColumn column = dgvCommsItems.Columns[e.ColumnIndex];
+            int currentSortColumn = dgvCommsItems.SortedColumn?.Index ?? -1;
+
+
+            ListSortDirection direction;
+
+            // Determine the sort direction
+            if (dgvCommsItems.SortOrder == SortOrder.Ascending)
+            {
+                if (column.Index == currentSortColumn)
+                {
+                    direction = ListSortDirection.Ascending;
+                }
+                else
+                {
+                    direction = ListSortDirection.Descending;
+                }
+            }
+            else
+            {
+                if (column.Index == currentSortColumn)
+                {
+                    direction = ListSortDirection.Descending;
+                }
+                else
+                {
+                    direction = ListSortDirection.Ascending;
+                }
+            }
+
+            // Sort the selected column
+            dgvCommsItems.Sort(column, direction);
+           
         }
     }
 }
