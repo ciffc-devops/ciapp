@@ -264,11 +264,18 @@
     <Compile Include="AirOpsForms\AirOpsAddAircraftForm.Designer.cs">
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\SortedBindingList.cs" />
     <Compile Include="CustomControls\PrepAndApprovePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomControls\PrepAndApprovePanel.Designer.cs">
       <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.Designer.cs">
+      <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TemplateForms\BaseForm.cs">
       <SubType>Form</SubType>
@@ -601,6 +608,12 @@
     <Compile Include="InternetSyncForms\InternetSyncForm.Designer.cs">
       <DependentUpon>InternetSyncForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\ICSFormHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\ICSFormHelpForm.Designer.cs">
+      <DependentUpon>ICSFormHelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -879,6 +892,9 @@
     <EmbeddedResource Include="CustomControls\PrepAndApprovePanel.resx">
       <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.resx">
+      <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TemplateForms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1046,6 +1062,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InternetSyncForms\InternetSyncForm.resx">
       <DependentUpon>InternetSyncForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\ICSFormHelpForm.resx">
+      <DependentUpon>ICSFormHelpForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\NetworkSelectIPForm.resx">
       <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
@@ -1293,6 +1312,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-filetypes-52-folder-video.png" />
+    <None Include="Resources\glyphicons-basic-196-circle-empty-info.png" />
+    <None Include="Resources\glyphicons-filetypes-2-file-rich-text.png" />
     <None Include="Resources\glyphicons-basic-487-exchange.png" />
     <None Include="Resources\glyphicons-basic-238-chat-message.png" />
     <None Include="Resources\glyphicons-basic-730-ambulance.png" />

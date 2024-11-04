@@ -14,6 +14,7 @@ using System.Data;
 using WF_ICS_ClassLibrary;
 using System.Diagnostics;
 using System.Reflection;
+using WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels;
 
 namespace WildfireICSDesktopServices
 {
@@ -54,6 +55,7 @@ namespace WildfireICSDesktopServices
         //public event TeamAssignmentEventHandler TeamAssignmentChanged;
         public event DemobEventHandler DemobChanged;
         public event ResourceReplacementEventHandler ResourceReplacementChanged;
+        public event IncidentSummaryEventHandler IncidentSummaryChanged;
 
 
         public event OperationalGroupEventHandler OperationalGroupChanged;
@@ -735,7 +737,7 @@ namespace WildfireICSDesktopServices
                 if (string.IsNullOrEmpty(function)) { function = item.CommsFunction; }
 
                 plan.allCommsItems = plan.allCommsItems.Where(o => o.ItemID != item.ItemID).ToList();
-                plan.allCommsItems.Add(item);
+                plan.AddCommsItem(item);
                 if (source.Equals("local") || source.Equals("networkNoInternet"))
                 {
                     UpsertTaskUpdate(item, "UPSERT", true, false);
@@ -2065,6 +2067,35 @@ namespace WildfireICSDesktopServices
                 UpsertTaskUpdate(record, "UPSERT", true, false);
             }
             OnResourceReplacementPlanChanged(new ResourceReplacementPlanEventArgs(record));
+        }
+
+
+        //Incident Summary
+        protected virtual void OnIncidentSummaryChanged(IncidentSummaryEventArgs e)
+        {
+            IncidentSummaryEventHandler handler = this.IncidentSummaryChanged;
+            if (handler != null)
+            {
+                handler(e);
+            }
+        }
+        public void UpsertIncidentSummary(IncidentStatusSummary record, string source = "local")
+        {
+
+            record.LastUpdatedUTC = DateTime.UtcNow;
+            if (_currentIncident.AllIncidentStatusSummaries.Any(o => o.ID == record.ID))
+            {
+                _currentIncident.AllIncidentStatusSummaries = _currentIncident.AllIncidentStatusSummaries.Where(o => o.ID != record.ID).ToList();
+            }
+            _currentIncident.AllIncidentStatusSummaries.Add(record);
+
+
+
+            if (source.Equals("local") || source.Equals("networkNoInternet"))
+            {
+                UpsertTaskUpdate(record, "UPSERT", true, false);
+            }
+            OnIncidentSummaryChanged(new IncidentSummaryEventArgs(record));
         }
 
 

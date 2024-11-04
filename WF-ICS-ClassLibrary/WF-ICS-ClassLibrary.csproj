@@ -108,6 +108,7 @@
     <Compile Include="EventHandling\HospitalEventHandler.cs" />
     <Compile Include="EventHandling\IncidentObjectiveEventHandling.cs" />
     <Compile Include="EventHandling\IncidentOpPeriodEventHandler.cs" />
+    <Compile Include="EventHandling\IncidentSummaryEventHandler.cs" />
     <Compile Include="EventHandling\MedicalPlanEventHandler.cs" />
     <Compile Include="EventHandling\CheckInEventHandler.cs" />
     <Compile Include="EventHandling\NetworkEventHandlers.cs" />
@@ -164,9 +165,12 @@
     <Compile Include="Models\GearModels\IncidentGear.cs" />
     <Compile Include="Models\GeneralMessageModels\GeneralMessage.cs" />
     <Compile Include="Models\GeneralModels\DeletedItemRecord.cs" />
-    <Compile Include="Models\GeneralModels\ICSFormData.cs" />
+    <Compile Include="Models\ICSFormModels\ICSFormData.cs" />
+    <Compile Include="Models\ICSFormModels\ICSFormField.cs" />
     <Compile Include="Models\GeneralOptionsModels\GeneralOptions.cs" />
     <Compile Include="Models\HelpModels\HelpInfo.cs" />
+    <Compile Include="Models\ICSFormModels\ICSFormInformation.cs" />
+    <Compile Include="Models\ICSFormModels\ICSFormTools.cs" />
     <Compile Include="Models\IncidentObjectiveModels\IncidentObjectivesSheet.cs" />
     <Compile Include="Models\IncidentObjectiveModels\IncidentObjectiveTools.cs" />
     <Compile Include="Models\IncidentResourcesModels\AgencyPersonnelCount.cs" />
@@ -175,6 +179,7 @@
     <Compile Include="Models\IncidentResourcesModels\MemberStatus.cs" />
     <Compile Include="Models\IncidentResourcesModels\PersonnelTools.cs" />
     <Compile Include="Models\IncidentResourcesModels\TeamTotal.cs" />
+    <Compile Include="Models\IncidentStatusSummaryModels\IncidentStatusSummary.cs" />
     <Compile Include="Models\MedicalPlanModels\Hospital.cs" />
     <Compile Include="Models\IncidentObjectiveModels\IncidentObjective.cs" />
     <Compile Include="Models\IncidentResourcesModels\IncidentResource.cs" />

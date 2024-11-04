@@ -19,6 +19,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         public PrepAndApprovePanel()
         {
             InitializeComponent();
+            if (Program.incidentDataService != null) { Program.incidentDataService.CurrentOpPeriodChanged += IncidentDataService_CurrentOpPeriodChanged; }
+            PopulateRoleComboBoxes();
+
+        }
+
+        private void IncidentDataService_CurrentOpPeriodChanged(WF_ICS_ClassLibrary.EventHandling.IncidentOpPeriodChangedEventArgs e)
+        {
             PopulateRoleComboBoxes();
 
         }
@@ -341,6 +348,9 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             if (Program.CurrentOrgChart != null)
             {
+                Guid currentPrepByID = Guid.Empty; if (cboPrepBy.SelectedItem != null) { currentPrepByID = ((ICSRole)cboPrepBy.SelectedItem).ID; }
+                Guid currentApproveByID = Guid.Empty; if (cboApproveBy.SelectedItem != null) { currentApproveByID = ((ICSRole)cboApproveBy.SelectedItem).ID; }
+
                 List<ICSRole> prepRoles = new List<ICSRole>(Program.CurrentOrgChart.ActiveRoles);
                 ICSRole blank = new ICSRole(); blank.RoleName = string.Empty; blank.RoleID = Guid.Empty; prepRoles.Insert(0, blank);
 
@@ -356,6 +366,16 @@ namespace Wildfire_ICS_Assist.CustomControls
                 cboApproveBy.DisplayMember = "RoleNameWithIndividualAndDepth";
                 cboApproveBy.ValueMember = "ID";
                 cboApproveBy.DropDownWidth = cboApproveBy.GetDropDownWidth();
+                if (currentPrepByID != Guid.Empty)
+                {
+                    try { cboPrepBy.SelectedValue = currentPrepByID; }
+                    catch { cboPrepBy.SelectedIndex = 0; }
+                }
+                if (currentApproveByID != Guid.Empty)
+                {
+                    try { cboApproveBy.SelectedValue = currentApproveByID; }
+                    catch { cboApproveBy.SelectedIndex = 0; }
+                }
             }
         }
 

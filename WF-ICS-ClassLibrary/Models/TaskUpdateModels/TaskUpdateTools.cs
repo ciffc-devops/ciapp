@@ -1,6 +1,7 @@
 ﻿using System;
 using WF_ICS_ClassLibrary.Utilities;
 using Newtonsoft.Json;
+using WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels;
 
 
 namespace WF_ICS_ClassLibrary.Models
@@ -225,6 +226,10 @@ namespace WF_ICS_ClassLibrary.Models
             else if (ObjectType.Equals(new ResourceReplacementPlan().GetType().Name))
             {
                 objDecrypted = JsonConvert.DeserializeObject<ResourceReplacementPlan>(jsonData);
+            }
+            else if (ObjectType.Equals(new IncidentStatusSummary().GetType().Name))
+            {
+                objDecrypted = JsonConvert.DeserializeObject<IncidentStatusSummary>(jsonData);
             }
 
 

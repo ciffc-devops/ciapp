@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using WF_ICS_ClassLibrary.Utilities;
 using Newtonsoft.Json;
+using WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels;
 
 
 namespace WF_ICS_ClassLibrary.Models
@@ -48,7 +49,7 @@ namespace WF_ICS_ClassLibrary.Models
     [XmlInclude(typeof(OperationalGroup))]
     [XmlInclude(typeof(Crew))]
     [XmlInclude(typeof(ResourceReplacementPlan))]
-
+    [XmlInclude(typeof(IncidentStatusSummary))]
     [Serializable]
     [ProtoContract]
 

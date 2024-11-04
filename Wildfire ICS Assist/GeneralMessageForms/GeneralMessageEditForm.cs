@@ -34,6 +34,7 @@ namespace Wildfire_ICS_Assist
             
             InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
+            splitContainer2.BackColor = Program.FormAccent;
         }
 
         List<Control> requiredFields = new List<Control>();

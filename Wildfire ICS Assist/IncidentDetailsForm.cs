@@ -30,6 +30,7 @@ using NetworkCommsDotNet.Connections;
 using NetworkCommsDotNet.DPSBase;
 using Wildfire_ICS_Assist.Properties;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Wildfire_ICS_Assist.IncidentStatusSummaryForms;
 
 
 namespace Wildfire_ICS_Assist
@@ -213,6 +214,7 @@ namespace Wildfire_ICS_Assist
         CheckedInResourcesForm _checkedInresourcesForm = null;
         CloseOpPeriodForm _closeOpPeriodForm = null;
         ResourceReplacementPlanningForm _resourceReplacementPlanningForm = null;
+        IncidentStatusSummaryForm _incidentStatusSummaryForm = null;
 
         public event ShortcutEventHandler ShortcutButtonClicked;
 
@@ -256,6 +258,7 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.OperationalGroupChanged += Program_OperationalGroupChanged;
             Program.incidentDataService.MemberSignInChanged += Program_CheckInChanged;
             Program.incidentDataService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
+            Program.incidentDataService.IncidentSummaryChanged += IncidentDataService_IncidentSummaryChanged;
             //Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
 
 
@@ -269,7 +272,7 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.CurrentOpPeriodChanged += changeOpPeriod;
         }
 
-       
+        
 
         private void CloseActiveForms()
         {
@@ -280,7 +283,10 @@ namespace Wildfire_ICS_Assist
         }
         private void RemoveActiveForm(Form form)
         {
-            if (form != null) { ActiveForms = ActiveForms.Where(o => o.GetType() != form.GetType()).ToList(); }
+            if (form != null) {
+                Type ftype = form.GetType();
+
+                ActiveForms = ActiveForms.Where(o => o.GetType() != form.GetType()).ToList(); }
         }
 
         private void setButtonCheckboxes()
@@ -311,7 +317,11 @@ namespace Wildfire_ICS_Assist
                 btnAirOpsSummary.Image = Properties.Resources.glyphicons_basic_739_check; airOperationsSummaryICS220ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check;
             }
             else { btnAirOpsSummary.Image = null; airOperationsSummaryICS220ToolStripMenuItem.Image = null; }
+            if (CurrentIncident.hasMeaningfulIncidentSummary(CurrentOpPeriod))
+            {
+                btnIncidentStatusSummary.Image = Properties.Resources.glyphicons_basic_739_check; incidentStatusSummaryICS209ToolStripMenuItem.Image = Properties.Resources.glyphicons_basic_739_check;
 
+            }else { btnIncidentStatusSummary.Image = null; incidentStatusSummaryICS209ToolStripMenuItem.Image = null; }
             //                    
 
         }
@@ -799,7 +809,10 @@ namespace Wildfire_ICS_Assist
             TriggerAutoSave();
         }
 
-
+        private void IncidentDataService_IncidentSummaryChanged(IncidentSummaryEventArgs e)
+        {
+            TriggerAutoSave();
+        }
 
         private void Program_AircraftChanged(AircraftEventArgs e)
         {
@@ -1321,7 +1334,11 @@ namespace Wildfire_ICS_Assist
         private void txtTaskName_Leave(object sender, EventArgs e)
         {
             initialDetailsSet(true, false);
+            if (!string.IsNullOrEmpty(txtTaskName.Text) && !string.IsNullOrEmpty(txtTaskNumber.Text))
+            {
+                tmrLock.Enabled = true;
 
+            }
         }
 
         private void txtTaskNumber_Leave(object sender, EventArgs e)
@@ -1371,6 +1388,12 @@ namespace Wildfire_ICS_Assist
             else if (!validateTaskNumber()) { txtTaskNumber.BackColor = Program.ErrorColor; }
             else { txtTaskNumber.BackColor = Color.LightGreen; }
             */
+
+            if (!string.IsNullOrEmpty(txtTaskName.Text) && !string.IsNullOrEmpty(txtTaskNumber.Text))
+            {
+                tmrLock.Enabled = true;
+
+            }
         }
 
         private void communicationsListICS205AToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2002,6 +2025,29 @@ namespace Wildfire_ICS_Assist
         private void btnAirOpsSummary_Click(object sender, EventArgs e)
         {
             OpenAirOpsForm();
+        }
+
+        private void OpenIncidentStatusSummaryForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (_incidentStatusSummaryForm == null)
+                {
+                    _incidentStatusSummaryForm = new IncidentStatusSummaryForm();
+                    _incidentStatusSummaryForm.FormClosed += new FormClosedEventHandler(IncidentStatusSummaryForm_Closed);
+                    ActiveForms.Add(_incidentStatusSummaryForm);
+                    _incidentStatusSummaryForm.Show(this);
+                }
+
+                _incidentStatusSummaryForm.BringToFront();
+            }
+        }
+        void IncidentStatusSummaryForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_incidentStatusSummaryForm);
+            _incidentStatusSummaryForm = null;
+
+
         }
 
         private void btnICSRoleHelp_Click(object sender, EventArgs e)
@@ -3196,6 +3242,42 @@ namespace Wildfire_ICS_Assist
         private void btnReplacementResources_Click(object sender, EventArgs e)
         {
             OpenResourceReplacementPlanningForm();
+        }
+
+        private void btnIncidentStatusSummary_Click(object sender, EventArgs e)
+        {
+            OpenIncidentStatusSummaryForm();
+        }
+
+        private void btnLockTaskInfo_Click(object sender, EventArgs e)
+        {
+            ToggleTaskInfoLock();
+
+        }
+
+        private bool TaskInfoLocked = false;
+
+        private void ToggleTaskInfoLock()
+        {
+            if (TaskInfoLocked)
+            {
+                btnLockTaskInfo.BackgroundImage = Properties.Resources.glyphicons_basic_218_lock_open_2x;
+                txtTaskNumber.Enabled = true;
+                txtTaskName.Enabled = true;
+            }
+            else
+            {
+                tmrLock.Enabled = false;
+                btnLockTaskInfo.BackgroundImage = Properties.Resources.glyphicons_basic_217_lock_2x;
+                txtTaskNumber.Enabled = false;
+                txtTaskName.Enabled = false;
+            }
+            TaskInfoLocked = !TaskInfoLocked;
+        }
+
+        private void tmrLock_Tick(object sender, EventArgs e)
+        {
+            if (!TaskInfoLocked) { ToggleTaskInfoLock(); }
         }
     }
 

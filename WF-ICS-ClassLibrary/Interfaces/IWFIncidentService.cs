@@ -52,7 +52,7 @@ namespace WildfireICSDesktopServices
         event OperationalGroupEventHandler OperationalGroupChanged;
         event OperationalSubGroupEventHandler OperationalSubGroupChanged;
         event ResourceReplacementEventHandler ResourceReplacementChanged;
-
+        event IncidentSummaryEventHandler IncidentSummaryChanged;
 
         void ApplyTaskUpdate(TaskUpdate update, bool applyAllSubsequent = false);
         void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local");

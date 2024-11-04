@@ -61,6 +61,7 @@
             this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
+            this.btnLockTaskInfo = new System.Windows.Forms.Button();
             this.txtTaskName = new SpellBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnOutstandingLogItems = new System.Windows.Forms.Button();
@@ -126,6 +127,7 @@
             this.communicationsPlanICS205ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicalPlanICS206ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.safetyMessageICS208ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.incidentStatusSummaryICS209ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.airOperationsSummaryICS220ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printTheIncidentActionPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -178,6 +180,7 @@
             this.btnNotes = new System.Windows.Forms.Button();
             this.btnShowResources = new System.Windows.Forms.Button();
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.btnIncidentStatusSummary = new System.Windows.Forms.Button();
             this.btnAssignmentList = new System.Windows.Forms.Button();
             this.btnAirOpsSummary = new System.Windows.Forms.Button();
             this.btnSafetyPlans = new System.Windows.Forms.Button();
@@ -186,6 +189,7 @@
             this.btnPrintIAP = new System.Windows.Forms.Button();
             this.btnPrintOrgChart = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
+            this.tmrLock = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -485,6 +489,7 @@
             resources.ApplyResources(this.pnlTaskInfo, "pnlTaskInfo");
             this.pnlTaskInfo.BackColor = System.Drawing.Color.White;
             this.pnlTaskInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTaskInfo.Controls.Add(this.btnLockTaskInfo);
             this.pnlTaskInfo.Controls.Add(this.txtTaskName);
             this.pnlTaskInfo.Controls.Add(this.panel1);
             this.pnlTaskInfo.Controls.Add(this.btnOutstandingLogItems);
@@ -500,6 +505,13 @@
             this.pnlTaskInfo.Controls.Add(this.lblTaskNumber);
             this.pnlTaskInfo.Name = "pnlTaskInfo";
             this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
+            // 
+            // btnLockTaskInfo
+            // 
+            resources.ApplyResources(this.btnLockTaskInfo, "btnLockTaskInfo");
+            this.btnLockTaskInfo.Name = "btnLockTaskInfo";
+            this.btnLockTaskInfo.UseVisualStyleBackColor = true;
+            this.btnLockTaskInfo.Click += new System.EventHandler(this.btnLockTaskInfo_Click);
             // 
             // txtTaskName
             // 
@@ -915,6 +927,7 @@
             this.communicationsPlanICS205ToolStripMenuItem,
             this.medicalPlanICS206ToolStripMenuItem,
             this.safetyMessageICS208ToolStripMenuItem,
+            this.incidentStatusSummaryICS209ToolStripMenuItem,
             this.airOperationsSummaryICS220ToolStripMenuItem,
             this.printTheIncidentActionPlanToolStripMenuItem,
             this.toolStripSeparator5,
@@ -968,6 +981,11 @@
             this.safetyMessageICS208ToolStripMenuItem.Name = "safetyMessageICS208ToolStripMenuItem";
             resources.ApplyResources(this.safetyMessageICS208ToolStripMenuItem, "safetyMessageICS208ToolStripMenuItem");
             this.safetyMessageICS208ToolStripMenuItem.Click += new System.EventHandler(this.safetyMessageICS208ToolStripMenuItem_Click);
+            // 
+            // incidentStatusSummaryICS209ToolStripMenuItem
+            // 
+            this.incidentStatusSummaryICS209ToolStripMenuItem.Name = "incidentStatusSummaryICS209ToolStripMenuItem";
+            resources.ApplyResources(this.incidentStatusSummaryICS209ToolStripMenuItem, "incidentStatusSummaryICS209ToolStripMenuItem");
             // 
             // airOperationsSummaryICS220ToolStripMenuItem
             // 
@@ -1308,6 +1326,7 @@
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpIncidentActionPlan.Collapsed = false;
             this.cpIncidentActionPlan.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpIncidentActionPlan.Controls.Add(this.btnIncidentStatusSummary);
             this.cpIncidentActionPlan.Controls.Add(this.btnAssignmentList);
             this.cpIncidentActionPlan.Controls.Add(this.btnAirOpsSummary);
             this.cpIncidentActionPlan.Controls.Add(this.btnSafetyPlans);
@@ -1325,6 +1344,14 @@
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
             this.cpIncidentActionPlan.WidthWhenCollapsed = 485;
             this.cpIncidentActionPlan.WidthWhenExpanded = 722;
+            // 
+            // btnIncidentStatusSummary
+            // 
+            resources.ApplyResources(this.btnIncidentStatusSummary, "btnIncidentStatusSummary");
+            this.btnIncidentStatusSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnIncidentStatusSummary.Name = "btnIncidentStatusSummary";
+            this.btnIncidentStatusSummary.UseVisualStyleBackColor = true;
+            this.btnIncidentStatusSummary.Click += new System.EventHandler(this.btnIncidentStatusSummary_Click);
             // 
             // btnAssignmentList
             // 
@@ -1370,7 +1397,7 @@
             // 
             resources.ApplyResources(this.btnPrintIAP, "btnPrintIAP");
             this.btnPrintIAP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
             this.btnPrintIAP.Name = "btnPrintIAP";
             this.btnPrintIAP.UseVisualStyleBackColor = true;
             this.btnPrintIAP.Click += new System.EventHandler(this.btnPrintIAP_Click);
@@ -1390,6 +1417,11 @@
             this.btnCommsPlan.Name = "btnCommsPlan";
             this.btnCommsPlan.UseVisualStyleBackColor = true;
             this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
+            // 
+            // tmrLock
+            // 
+            this.tmrLock.Interval = 30000;
+            this.tmrLock.Tick += new System.EventHandler(this.tmrLock_Tick);
             // 
             // IncidentDetailsForm
             // 
@@ -1601,6 +1633,10 @@
         private System.Windows.Forms.ToolStripMenuItem tESTToolStripMenuItem;
         private System.Windows.Forms.Button btnGeneralMessage;
         private System.Windows.Forms.Button btnReplacementResources;
+        private System.Windows.Forms.Button btnIncidentStatusSummary;
+        private System.Windows.Forms.ToolStripMenuItem incidentStatusSummaryICS209ToolStripMenuItem;
+        private System.Windows.Forms.Button btnLockTaskInfo;
+        private System.Windows.Forms.Timer tmrLock;
     }
 }
 
