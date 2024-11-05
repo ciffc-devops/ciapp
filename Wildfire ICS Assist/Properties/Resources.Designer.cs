@@ -1267,6 +1267,27 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alberta
+        ///British Columbia
+        ///Manitoba
+        ///New Brunswick
+        ///Newfoundland and Labrador
+        ///Northwest Territories
+        ///Nova Scotia
+        ///Nunavut
+        ///Ontario
+        ///Prince Edward Island
+        ///Quebec
+        ///Saskatchewan
+        ///Yukon.
+        /// </summary>
+        internal static string ProvincesAndTerritoriesEN {
+            get {
+                return ResourceManager.GetString("ProvincesAndTerritoriesEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, you cannot delete this role, but you can rename it as needed.  Would you like to rename this role now?.
         /// </summary>
         internal static string RenameInsteadOfDeleteRole {
