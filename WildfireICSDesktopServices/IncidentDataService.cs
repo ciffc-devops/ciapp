@@ -112,6 +112,38 @@ namespace WildfireICSDesktopServices
             }
         }
 
+        public TaskUpdate CreateTaskUpdateForItem(SyncableItem obj, string command)
+        {
+            TaskUpdate update = new TaskUpdate();
+            update.TaskID = _currentIncident.ID;
+            update.LastUpdatedUTC = DateTime.UtcNow;
+            update.CommandName = command;
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+
+            update.SoftwareVersionMajor = fileVersionInfo.ProductMajorPart;
+            update.SoftwareVersionMinor = fileVersionInfo.FileMinorPart;
+            update.SoftwareVersionBuild = fileVersionInfo.FileBuildPart;
+
+            if (obj is ICloneable) { update.Data = obj.Clone(); }
+            else { update.Data = obj; }
+            update.CreatedByRoleName = CurrentRole.RoleName;
+            //update.DataEnc = update.Data.XmlSerializeToString();
+            //update.DataEnc = StringCipher.Encrypt(update.DataEnc, _currentIncident.TaskEncryptionKey);
+            update.SetEncData(_currentIncident.TaskEncryptionKey);
+            update.ProcessedLocally = false;
+            update.MachineID = MachineID;
+            update.UploadedSuccessfully = false;
+            update.ObjectType = obj.GetType().Name.ToString();
+            var type = obj.GetType();
+            if (typeof(SyncableItem).IsAssignableFrom(obj.GetType()))
+            {
+                update.ItemID = ((SyncableItem)obj).ID;
+            }
+
+            return update;
+        }
 
         public TaskUpdate UpsertTaskUpdate(SyncableItem obj, string command, bool processed_locally, bool uploaded)
         {
