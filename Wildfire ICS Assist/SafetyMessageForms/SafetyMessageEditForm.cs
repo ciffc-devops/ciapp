@@ -34,7 +34,7 @@ namespace Wildfire_ICS_Assist
         }
         public SafetyMessageEditForm()
         {
-            InitializeComponent();
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

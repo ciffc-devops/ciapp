@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class ImportSavedTeamMembersForm : Form
+    public partial class ImportSavedTeamMembersForm : BaseForm
     {
         private int _ImportedCount = 0;
         public int ImportedCount { get => _ImportedCount; set => _ImportedCount = value; }
@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public ImportSavedTeamMembersForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void ImportSavedTeamMembersForm_Load(object sender, EventArgs e)

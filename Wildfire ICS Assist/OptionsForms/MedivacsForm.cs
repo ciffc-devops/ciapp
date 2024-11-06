@@ -11,12 +11,12 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class MedivacsForm : Form
+    public partial class MedivacsForm : BaseForm
     {
         public MedivacsForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void MedivacsForm_Load(object sender, EventArgs e)

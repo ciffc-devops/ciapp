@@ -12,7 +12,7 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditMedivacForm : Form
+    public partial class EditMedivacForm : BaseForm
     {
         private AmbulanceService _selectedAmbulance = null;
 
@@ -20,8 +20,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public EditMedivacForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
 

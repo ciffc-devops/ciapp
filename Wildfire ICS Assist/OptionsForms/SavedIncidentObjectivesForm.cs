@@ -11,12 +11,12 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedIncidentObjectivesForm : Form
+    public partial class SavedIncidentObjectivesForm : BaseForm
     {
         public SavedIncidentObjectivesForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
         private void SavedIncidentObjectivesForm_Load(object sender, EventArgs e)
         {

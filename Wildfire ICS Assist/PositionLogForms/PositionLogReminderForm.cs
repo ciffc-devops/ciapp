@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
             
 
             InitializeComponent(); 
-            GeneralTools.SetDateFormat(this);
+            GeneralTools.SetDateFormat(this); SetControlColors(this.Controls);
         }
         private void loadEntry()
         {

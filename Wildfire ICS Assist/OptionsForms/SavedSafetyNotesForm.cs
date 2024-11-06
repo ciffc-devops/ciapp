@@ -11,11 +11,11 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedSafetyNotesForm : Form
+    public partial class SavedSafetyNotesForm : BaseForm
     {
         public SavedSafetyNotesForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void btnNew_Click(object sender, EventArgs e)

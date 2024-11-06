@@ -16,7 +16,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
         public ICSFormInformation SelectedForm { get; set; }
         public ICSFormHelpForm()
         {
-            InitializeComponent();
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void ICSFormHelpForm_Load(object sender, EventArgs e)

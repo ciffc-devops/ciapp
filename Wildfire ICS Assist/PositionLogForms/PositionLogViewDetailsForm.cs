@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
         public PositionLogViewDetailsForm()
         {
           
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void btnBack_Click(object sender, EventArgs e)

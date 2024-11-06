@@ -9,12 +9,11 @@ using System.Windows.Forms;
 
 namespace Wildfire_ICS_Assist.UtilityForms
 {
-    partial class AboutProgramForm : Form
+    partial class AboutProgramForm : BaseForm
     {
         public AboutProgramForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
-            this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);

@@ -11,7 +11,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditContactForm : Form
+    public partial class EditContactForm : BaseForm
     {
         private Contact _contact = new Contact();
         public Contact contact { get => _contact; private set => _contact = value; }
@@ -20,8 +20,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public EditContactForm(Contact contactToEdit)
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
             contact = contactToEdit;
 
         }

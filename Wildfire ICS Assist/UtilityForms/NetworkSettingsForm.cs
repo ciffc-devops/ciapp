@@ -17,14 +17,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class NetworkSettingsForm : Form
+    public partial class NetworkSettingsForm : BaseForm
     {
         private string tempServerIP = null; private string tempPort = null;
         int preferredPort = 42999;
 
         public NetworkSettingsForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void NetworkSettingsForm_Load(object sender, EventArgs e)

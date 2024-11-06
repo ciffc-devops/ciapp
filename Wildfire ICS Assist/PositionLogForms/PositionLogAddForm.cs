@@ -23,7 +23,7 @@ namespace Wildfire_ICS_Assist
         {
             InitializeComponent(); 
             GeneralTools.SetDateFormat(this);
-
+            SetControlColors(this.Controls);
         }
 
         private void PositionLogAddForm_Load(object sender, EventArgs e)

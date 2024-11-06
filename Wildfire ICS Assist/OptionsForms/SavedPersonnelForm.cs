@@ -11,11 +11,11 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedPersonnelForm : Form
+    public partial class SavedPersonnelForm : BaseForm
     {
         public SavedPersonnelForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void SavedTeamMembersForm_Load(object sender, EventArgs e)

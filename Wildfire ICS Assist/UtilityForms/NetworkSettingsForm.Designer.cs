@@ -170,6 +170,7 @@
             this.btnImportCoordinatesHelp.Name = "btnImportCoordinatesHelp";
             this.btnImportCoordinatesHelp.Size = new System.Drawing.Size(38, 38);
             this.btnImportCoordinatesHelp.TabIndex = 57;
+            this.btnImportCoordinatesHelp.Tag = "Help";
             this.btnImportCoordinatesHelp.UseVisualStyleBackColor = true;
             this.btnImportCoordinatesHelp.Click += new System.EventHandler(this.btnImportCoordinatesHelp_Click);
             // 
@@ -221,10 +222,7 @@
             this.Controls.Add(this.rbClient);
             this.Controls.Add(this.rbServer);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "NetworkSettingsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Network Share Settings";
             this.Load += new System.EventHandler(this.NetworkSettingsForm_Load);
             this.pnlServerInfo.ResumeLayout(false);

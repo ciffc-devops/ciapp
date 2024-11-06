@@ -130,6 +130,7 @@
             this.btnSavedUsedForAir.Name = "btnSavedUsedForAir";
             this.btnSavedUsedForAir.Size = new System.Drawing.Size(25, 25);
             this.btnSavedUsedForAir.TabIndex = 132;
+            this.btnSavedUsedForAir.Tag = "HelpSM";
             this.btnSavedUsedForAir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.toolTip1.SetToolTip(this.btnSavedUsedForAir, "If this box is checked, this item will be included in the \'7. FREQUENCIES\' sectio" +
         "n of ICS-220 Air Ops Summary.");
@@ -234,7 +235,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
             this.btnCancel.TabIndex = 99;
-            this.btnCancel.Text = "99";
+            this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -288,6 +289,7 @@
             this.btnAirHelp.Name = "btnAirHelp";
             this.btnAirHelp.Size = new System.Drawing.Size(25, 25);
             this.btnAirHelp.TabIndex = 99;
+            this.btnAirHelp.Tag = "HelpSM";
             this.btnAirHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.toolTip1.SetToolTip(this.btnAirHelp, "If this box is checked, this item will be included in the \'7. FREQUENCIES\' sectio" +
         "n of ICS-220 Air Ops Summary.");
@@ -398,12 +400,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(769, 781);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CommunicationsPlanEntryForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add a Communications Tool to the Incident";
             this.Load += new System.EventHandler(this.CommunicationsPlanEntryForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

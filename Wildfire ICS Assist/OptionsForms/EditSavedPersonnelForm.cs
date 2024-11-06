@@ -11,14 +11,14 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditSavedPersonnelForm : Form
+    public partial class EditSavedPersonnelForm : BaseForm
     {
         public Personnel selectedMember { get => editTeamMemberControl1.teamMember; set { editTeamMemberControl1.SetPersonnel(value); } } 
 
 
         public EditSavedPersonnelForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

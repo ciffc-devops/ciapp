@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
         public bool Response { get => rbYes.Checked; set { rbYes.Checked = value;  rbNo.Checked = !value; } }
         public SelectBooleanForm()
         {
-            InitializeComponent();
+            InitializeComponent(); SetControlColors(this.Controls);
         }
     }
 }

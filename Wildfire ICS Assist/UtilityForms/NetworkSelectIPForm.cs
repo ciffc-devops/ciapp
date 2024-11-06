@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Wildfire_ICS_Assist.UtilityForms
 {
-    public partial class NetworkSelectIPForm : Form
+    public partial class NetworkSelectIPForm : BaseForm
     {
         public NetworkSelectIPForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         public List<string> ipAddresses { get; set; } = new List<string>();

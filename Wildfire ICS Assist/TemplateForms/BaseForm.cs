@@ -63,6 +63,17 @@ namespace Wildfire_ICS_Assist
                         button.Cursor = Cursors.Help;
 
                     }
+                    else if (control.Tag != null && control.Tag.ToString() == "HelpSM")
+                    {
+                        button.BackgroundImage = Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_196_circle_empty_info;
+                        button.BackgroundImageLayout = ImageLayout.Stretch;
+                        //button.TextImageRelation = TextImageRelation.ImageBeforeText;
+                        //button.ImageAlign = ContentAlignment.MiddleRight;
+                        button.TextAlign = ContentAlignment.MiddleCenter;
+                        button.BackColor = Program.HelpColor;
+                        button.Cursor = Cursors.Help;
+
+                    }
                 }
                 
             });

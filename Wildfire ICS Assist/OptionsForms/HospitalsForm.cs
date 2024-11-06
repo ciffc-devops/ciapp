@@ -12,12 +12,12 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class HospitalsForm : Form
+    public partial class HospitalsForm : BaseForm
     {
         public HospitalsForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
 
         }
 

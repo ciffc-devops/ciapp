@@ -13,12 +13,12 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedContactsForm : Form
+    public partial class SavedContactsForm : BaseForm
     {
         public SavedContactsForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void SavedContactsForm_Load(object sender, EventArgs e)

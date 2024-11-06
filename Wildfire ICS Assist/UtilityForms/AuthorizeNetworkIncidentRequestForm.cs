@@ -11,7 +11,7 @@ using WF_ICS_ClassLibrary.Networking;
 
 namespace Wildfire_ICS_Assist.UtilityForms
 {
-    public partial class AuthorizeNetworkIncidentRequestForm : Form
+    public partial class AuthorizeNetworkIncidentRequestForm : BaseForm
     {
         private NetworkSARTaskRequest _incomingMessage;
 
@@ -21,8 +21,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
         public AuthorizeNetworkIncidentRequestForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void AuthorizeNetworkIncidentRequestForm_Load(object sender, EventArgs e)

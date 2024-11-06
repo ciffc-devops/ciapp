@@ -11,15 +11,14 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditVisitorForm : Form
+    public partial class EditVisitorForm : BaseForm
     {
         public Personnel selectedPerson { get => visitorEditControl1.selectedPerson; set { visitorEditControl1.setPerson(value); } }    
 
         public EditVisitorForm()
         {
             InitializeComponent();
-            this.Icon = Program.programIcon;
-            this.BackColor = Program.FormBackground;
+            SetControlColors(this.Controls);
         }
 
         private void EditVisitorForm_Load(object sender, EventArgs e)

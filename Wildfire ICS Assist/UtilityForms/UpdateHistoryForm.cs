@@ -28,7 +28,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
         public UpdateHistoryForm()
         {
             InitializeComponent();
-            this.Icon = Program.programIcon;
+            SetControlColors(this.Controls);
             dgvUpdates.AutoGenerateColumns = false;
         }
 

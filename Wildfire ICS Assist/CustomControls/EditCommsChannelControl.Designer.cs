@@ -57,7 +57,6 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Cursor = System.Windows.Forms.Cursors.Help;
             this.button1.Location = new System.Drawing.Point(413, 200);
@@ -65,6 +64,7 @@
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 125;
             this.button1.TabStop = false;
+            this.button1.Tag = "HelpSM";
             this.toolTip1.SetToolTip(this.button1, "Include any sub audible, Network Access or CTCSS tones if applicable. This inform" +
         "ation is useful for field programmable radios.");
             this.button1.UseVisualStyleBackColor = true;
@@ -93,7 +93,6 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button3.Cursor = System.Windows.Forms.Cursors.Help;
             this.button3.Location = new System.Drawing.Point(413, 161);
@@ -101,6 +100,7 @@
             this.button3.Size = new System.Drawing.Size(26, 26);
             this.button3.TabIndex = 123;
             this.button3.TabStop = false;
+            this.button3.Tag = "HelpSM";
             this.toolTip1.SetToolTip(this.button3, "enter the transmit (TX) frequency");
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.btnCommsSystemHelp_Click);
@@ -128,7 +128,6 @@
             // btnToneHelp
             // 
             this.btnToneHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToneHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnToneHelp.BackgroundImage")));
             this.btnToneHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnToneHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnToneHelp.Location = new System.Drawing.Point(413, 122);
@@ -136,6 +135,7 @@
             this.btnToneHelp.Size = new System.Drawing.Size(26, 26);
             this.btnToneHelp.TabIndex = 119;
             this.btnToneHelp.TabStop = false;
+            this.btnToneHelp.Tag = "HelpSM";
             this.toolTip1.SetToolTip(this.btnToneHelp, "Include any sub audible, Network Access or CTCSS tones if applicable. This inform" +
         "ation is useful for field programmable radios.");
             this.btnToneHelp.UseVisualStyleBackColor = true;
@@ -175,7 +175,6 @@
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.Cursor = System.Windows.Forms.Cursors.Help;
             this.button5.Location = new System.Drawing.Point(413, 242);
@@ -183,6 +182,7 @@
             this.button5.Size = new System.Drawing.Size(26, 26);
             this.button5.TabIndex = 117;
             this.button5.TabStop = false;
+            this.button5.Tag = "HelpSM";
             this.toolTip1.SetToolTip(this.button5, "Include any comments or remarks specific to the channel assignment.");
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.btnCommsSystemHelp_Click);
@@ -190,7 +190,6 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button4.Cursor = System.Windows.Forms.Cursors.Help;
             this.button4.Location = new System.Drawing.Point(413, 83);
@@ -198,6 +197,7 @@
             this.button4.Size = new System.Drawing.Size(26, 26);
             this.button4.TabIndex = 116;
             this.button4.TabStop = false;
+            this.button4.Tag = "HelpSM";
             this.toolTip1.SetToolTip(this.button4, "Enter the receive (RX) frequency");
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.btnCommsSystemHelp_Click);
@@ -205,7 +205,6 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.Cursor = System.Windows.Forms.Cursors.Help;
             this.button2.Location = new System.Drawing.Point(413, 44);
@@ -213,6 +212,7 @@
             this.button2.Size = new System.Drawing.Size(26, 26);
             this.button2.TabIndex = 115;
             this.button2.TabStop = false;
+            this.button2.Tag = "HelpSM";
             this.toolTip1.SetToolTip(this.button2, resources.GetString("button2.ToolTip"));
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnCommsSystemHelp_Click);
@@ -220,7 +220,6 @@
             // btnCommsSystemHelp
             // 
             this.btnCommsSystemHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCommsSystemHelp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCommsSystemHelp.BackgroundImage")));
             this.btnCommsSystemHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCommsSystemHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnCommsSystemHelp.Location = new System.Drawing.Point(413, 5);
@@ -228,6 +227,7 @@
             this.btnCommsSystemHelp.Size = new System.Drawing.Size(26, 26);
             this.btnCommsSystemHelp.TabIndex = 114;
             this.btnCommsSystemHelp.TabStop = false;
+            this.btnCommsSystemHelp.Tag = "HelpSM";
             this.toolTip1.SetToolTip(this.btnCommsSystemHelp, "Use this field to describe the owner of the radio system (if multi systems are us" +
         "ed on same incident. I.e., DNR, DOT, DFO, and \"Type\" examples are: Cellular, Sat" +
         "ellite, UHF, VHF, etc.");

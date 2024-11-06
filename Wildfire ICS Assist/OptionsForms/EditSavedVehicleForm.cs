@@ -11,7 +11,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditSavedVehicleForm : Form
+    public partial class EditSavedVehicleForm : BaseForm
     {
 
         public Vehicle vehicle { get => vehicleEquipmentEditControl1.CurrentVehicle; set {  displayVehicle(value); } }
@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         }
         public EditSavedVehicleForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void displayVehicle(Vehicle veh)
