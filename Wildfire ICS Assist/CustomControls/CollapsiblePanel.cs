@@ -25,7 +25,13 @@ namespace Wildfire_ICS_Assist.CustomControls
         private bool _CollapseLeft = true;
         private bool _ExpandUp = false;
         private bool _IsCurrentlyCollapsed = true;
-        private Color _BackgroundColorCollapsed = Program.FormAccent;
+        private Color _BackgroundColorCollapsed = Program.FormAccent; 
+        private bool _ExpandAndCollapseEnabled = true;
+
+
+        [Description("Enable the expand and collapse properties"), Category("Behavior")]
+        public bool EnableExpandCollapse { get => _ExpandAndCollapseEnabled; set { ToggleExpandCapability(value); } }
+
 
         [Description("Text displayed at the top of the panel"), Category("Appearance")]
         public string TitleText { get => lblTitle.Text; set => lblTitle.Text = value; }
@@ -75,7 +81,21 @@ namespace Wildfire_ICS_Assist.CustomControls
             InitializeComponent();
         }
 
-
+        private void ToggleExpandCapability(bool ExpandCollapseEnabled)
+        {
+            _ExpandAndCollapseEnabled = ExpandCollapseEnabled;
+            btnExpandCollapse.Visible = ExpandCollapseEnabled;
+            if (!ExpandCollapseEnabled)
+            {
+                lblTitle.Location = new Point(5, 0);
+                lblTitle.Cursor = Cursors.Default;
+            }
+            else
+            {
+                lblTitle.Location = new Point(40, 0);
+                lblTitle.Cursor = Cursors.Hand;
+            }
+        }
         private void SetForegroundColor()
         {
             foreach (Control c in this.Controls)
