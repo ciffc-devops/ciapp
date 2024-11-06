@@ -28,6 +28,11 @@ namespace WF_ICS_ClassLibrary.Models
             ID = id;
             switch (id)
             {
+                case "RestoreDeleted":
+                    Title = "Restore Deleted Items";
+                    bt.Append("This tool allows you to review and restore previously deleted items from within the task. Any items you opt to restore will re-appear in their original location, and be re-transmitted via the network and internet sync.");
+                    Body = bt.ToString();
+                    return true;
                 case "TeamAssignmentTemplate":
                     Title = "Use Assignment Template";
                     Body = "This tool allows you to use a pre-written assignment template. Clicking on the Use Template button will overwrite the assignment name, tactical assignment, and special instructions with pre-written information.  You will have a chance to edit this after applying the template as needed.";
