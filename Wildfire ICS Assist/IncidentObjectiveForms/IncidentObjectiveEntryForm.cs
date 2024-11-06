@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist
         public IncidentObjective Objective { get => _objective; set => _objective = value; }
         public IncidentObjectiveEntryForm()
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
         }
         public bool SaveForLater { get => chkSaveForLater.Checked; }
 

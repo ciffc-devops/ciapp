@@ -47,10 +47,10 @@
             this.txtNewSyncEncryptionKey = new System.Windows.Forms.TextBox();
             this.pnlNoSync = new System.Windows.Forms.Panel();
             this.rbDoNotSync = new System.Windows.Forms.RadioButton();
+            this.lblSyncStatus = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.lblSyncStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -98,6 +98,7 @@
             this.btnLearnMore.Size = new System.Drawing.Size(164, 37);
             this.btnLearnMore.TabIndex = 88;
             this.btnLearnMore.TabStop = false;
+            this.btnLearnMore.Tag = "Help";
             this.btnLearnMore.Text = "Learn more";
             this.btnLearnMore.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLearnMore.UseVisualStyleBackColor = true;
@@ -303,6 +304,17 @@
             this.rbDoNotSync.UseVisualStyleBackColor = true;
             this.rbDoNotSync.CheckedChanged += new System.EventHandler(this.rbDoNotSync_CheckedChanged);
             // 
+            // lblSyncStatus
+            // 
+            this.lblSyncStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSyncStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSyncStatus.Location = new System.Drawing.Point(136, 10);
+            this.lblSyncStatus.Name = "lblSyncStatus";
+            this.lblSyncStatus.Size = new System.Drawing.Size(584, 46);
+            this.lblSyncStatus.TabIndex = 90;
+            this.lblSyncStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // progressBar1
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -346,31 +358,17 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // lblSyncStatus
-            // 
-            this.lblSyncStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSyncStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSyncStatus.Location = new System.Drawing.Point(136, 10);
-            this.lblSyncStatus.Name = "lblSyncStatus";
-            this.lblSyncStatus.Size = new System.Drawing.Size(584, 46);
-            this.lblSyncStatus.TabIndex = 90;
-            this.lblSyncStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // InternetSyncForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 572);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(884, 611);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(884, 611);
             this.Name = "InternetSyncForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Internet Sync";
             this.Load += new System.EventHandler(this.InternetSyncForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

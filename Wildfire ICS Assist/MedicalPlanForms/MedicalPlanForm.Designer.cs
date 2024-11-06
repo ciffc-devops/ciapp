@@ -641,11 +641,15 @@
             // 
             // btnFormHelp
             // 
+            this.btnFormHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFormHelp.FlatAppearance.BorderSize = 2;
+            this.btnFormHelp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFormHelp.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_196_circle_empty_info;
             this.btnFormHelp.Location = new System.Drawing.Point(12, 3);
             this.btnFormHelp.Name = "btnFormHelp";
             this.btnFormHelp.Size = new System.Drawing.Size(144, 42);
             this.btnFormHelp.TabIndex = 53;
+            this.btnFormHelp.Tag = "Help";
             this.btnFormHelp.Text = "Form Help";
             this.btnFormHelp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFormHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -660,6 +664,7 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(144, 42);
             this.btnPrint.TabIndex = 52;
+            this.btnPrint.Tag = "ViewPDF";
             this.btnPrint.Text = "View PDF";
             this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

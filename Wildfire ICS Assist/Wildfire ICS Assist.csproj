@@ -281,6 +281,9 @@
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SortedBindingList.cs" />
+    <Compile Include="CustomControls\HelpButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomControls\PrepAndApprovePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -292,6 +295,12 @@
     </Compile>
     <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.Designer.cs">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalPeriodForms\CreateOperationalPeriodForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalPeriodForms\CreateOperationalPeriodForm.Designer.cs">
+      <DependentUpon>CreateOperationalPeriodForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TemplateForms\BaseForm.cs">
       <SubType>Form</SubType>
@@ -318,10 +327,10 @@
       <DependentUpon>CheckInInfoEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GeneralTools.cs" />
-    <Compile Include="CloseOpPeriodForm.cs">
+    <Compile Include="OperationalPeriodForms\CloseOpPeriodForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CloseOpPeriodForm.Designer.cs">
+    <Compile Include="OperationalPeriodForms\CloseOpPeriodForm.Designer.cs">
       <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactsForms\CommunicationsListEntryForm.cs">
@@ -612,6 +621,12 @@
     <Compile Include="IncidentResourceForms\ResourcesEditUniqueNumberForm.Designer.cs">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\DeletedItemsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\DeletedItemsForm.Designer.cs">
+      <DependentUpon>DeletedItemsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\EnterTextForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -896,6 +911,12 @@
     <Compile Include="IncidentResourceForms\VehicleEditForm.Designer.cs">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\UpdateHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\UpdateHistoryForm.Designer.cs">
+      <DependentUpon>UpdateHistoryForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AirOpsForms\AirNOTAMEditForm.resx">
       <DependentUpon>AirNOTAMEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -911,6 +932,9 @@
     <EmbeddedResource Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.resx">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperationalPeriodForms\CreateOperationalPeriodForm.resx">
+      <DependentUpon>CreateOperationalPeriodForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TemplateForms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -923,7 +947,7 @@
     <EmbeddedResource Include="IncidentResourceForms\CheckInInfoEditForm.resx">
       <DependentUpon>CheckInInfoEditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CloseOpPeriodForm.resx">
+    <EmbeddedResource Include="OperationalPeriodForms\CloseOpPeriodForm.resx">
       <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContactsForms\CommunicationsListEntryForm.resx">
@@ -1073,6 +1097,9 @@
     <EmbeddedResource Include="IncidentResourceForms\ResourcesEditUniqueNumberForm.resx">
       <DependentUpon>ResourcesEditUniqueNumberForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\DeletedItemsForm.resx">
+      <DependentUpon>DeletedItemsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\EnterTextForm.resx">
       <DependentUpon>EnterTextForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1220,6 +1247,9 @@
     <EmbeddedResource Include="IncidentResourceForms\VehicleEditForm.resx">
       <DependentUpon>VehicleEditForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\UpdateHistoryForm.resx">
+      <DependentUpon>UpdateHistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="BlankForms\Dietary and Allergy Details.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1328,6 +1358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-888-redo.png" />
     <None Include="Resources\ProvincesAndTerritoriesEN.txt" />
     <None Include="Resources\glyphicons-filetypes-52-folder-video.png" />
     <None Include="Resources\glyphicons-basic-196-circle-empty-info.png" />
@@ -1462,6 +1493,7 @@
     <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.11.20\analyzers\vb\Microsoft.VisualStudio.Threading.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.11.20\analyzers\vb\Microsoft.VisualStudio.Threading.Analyzers.VisualBasic.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.11.20\build\Microsoft.VisualStudio.Threading.Analyzers.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.11.20\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -25,7 +25,7 @@ namespace Wildfire_ICS_Assist
         public PositionLogForm()
         {
            
-            InitializeComponent();
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)

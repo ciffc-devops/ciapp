@@ -27,7 +27,7 @@ namespace Wildfire_ICS_Assist
 
         public NotesForm()
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void NotesForm_Load(object sender, EventArgs e)

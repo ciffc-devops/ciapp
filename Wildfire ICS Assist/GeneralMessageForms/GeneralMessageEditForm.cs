@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist
         public GeneralMessageEditForm()
         {
             
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
             GeneralTools.SetDateFormat(this);
             splitContainer2.BackColor = Program.FormAccent;
         }

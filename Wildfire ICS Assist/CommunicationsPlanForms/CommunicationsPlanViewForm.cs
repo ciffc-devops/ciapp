@@ -29,7 +29,7 @@ namespace Wildfire_ICS_Assist
         }
         public CommunicationsPlanViewForm()
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

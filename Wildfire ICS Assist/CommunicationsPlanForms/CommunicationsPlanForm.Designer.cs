@@ -33,6 +33,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpAircraft = new System.Windows.Forms.TabPage();
             this.dgvCommsItems = new System.Windows.Forms.DataGridView();
+            this.colCommsSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChannelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toOther = new System.Windows.Forms.TabPage();
             this.prepAndApprovePanel1 = new Wildfire_ICS_Assist.CustomControls.PrepAndApprovePanel();
             this.btnView = new System.Windows.Forms.Button();
@@ -41,13 +48,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.colCommsSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colChannelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -142,6 +142,66 @@
             this.dgvCommsItems.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCommsItems_ColumnHeaderMouseClick);
             this.dgvCommsItems.SelectionChanged += new System.EventHandler(this.dgvCommsItems_SelectionChanged);
             // 
+            // colCommsSystem
+            // 
+            this.colCommsSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCommsSystem.DataPropertyName = "CommsSystem";
+            this.colCommsSystem.HeaderText = "Comms System";
+            this.colCommsSystem.Name = "colCommsSystem";
+            this.colCommsSystem.ReadOnly = true;
+            this.colCommsSystem.Width = 166;
+            // 
+            // colChannelID
+            // 
+            this.colChannelID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colChannelID.DataPropertyName = "ChannelID";
+            this.colChannelID.HeaderText = "Channel";
+            this.colChannelID.Name = "colChannelID";
+            this.colChannelID.ReadOnly = true;
+            this.colChannelID.Width = 106;
+            // 
+            // colFunction
+            // 
+            this.colFunction.DataPropertyName = "CommsFunction";
+            this.colFunction.HeaderText = "Function";
+            this.colFunction.Name = "colFunction";
+            this.colFunction.ReadOnly = true;
+            this.colFunction.Width = 109;
+            // 
+            // colFrequency
+            // 
+            this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colFrequency.DataPropertyName = "FullRx";
+            this.colFrequency.HeaderText = "Rx Freq/Tone";
+            this.colFrequency.Name = "colFrequency";
+            this.colFrequency.ReadOnly = true;
+            this.colFrequency.Width = 153;
+            // 
+            // colTone
+            // 
+            this.colTone.DataPropertyName = "FullTx";
+            this.colTone.HeaderText = "Tx Freq/Tone";
+            this.colTone.Name = "colTone";
+            this.colTone.ReadOnly = true;
+            this.colTone.Width = 152;
+            // 
+            // colAssignment
+            // 
+            this.colAssignment.DataPropertyName = "Assignment";
+            this.colAssignment.HeaderText = "Assignment";
+            this.colAssignment.Name = "colAssignment";
+            this.colAssignment.ReadOnly = true;
+            this.colAssignment.Width = 134;
+            // 
+            // colComments
+            // 
+            this.colComments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colComments.DataPropertyName = "Comments";
+            this.colComments.HeaderText = "Remarks";
+            this.colComments.MinimumWidth = 100;
+            this.colComments.Name = "colComments";
+            this.colComments.ReadOnly = true;
+            // 
             // toOther
             // 
             this.toOther.Controls.Add(this.prepAndApprovePanel1);
@@ -206,6 +266,7 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(141, 42);
             this.btnPrint.TabIndex = 47;
+            this.btnPrint.Tag = "ViewPDF";
             this.btnPrint.Text = "View PDF";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -246,66 +307,6 @@
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // colCommsSystem
-            // 
-            this.colCommsSystem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colCommsSystem.DataPropertyName = "CommsSystem";
-            this.colCommsSystem.HeaderText = "Comms System";
-            this.colCommsSystem.Name = "colCommsSystem";
-            this.colCommsSystem.ReadOnly = true;
-            this.colCommsSystem.Width = 166;
-            // 
-            // colChannelID
-            // 
-            this.colChannelID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colChannelID.DataPropertyName = "ChannelID";
-            this.colChannelID.HeaderText = "Channel";
-            this.colChannelID.Name = "colChannelID";
-            this.colChannelID.ReadOnly = true;
-            this.colChannelID.Width = 106;
-            // 
-            // colFunction
-            // 
-            this.colFunction.DataPropertyName = "CommsFunction";
-            this.colFunction.HeaderText = "Function";
-            this.colFunction.Name = "colFunction";
-            this.colFunction.ReadOnly = true;
-            this.colFunction.Width = 109;
-            // 
-            // colFrequency
-            // 
-            this.colFrequency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colFrequency.DataPropertyName = "FullRx";
-            this.colFrequency.HeaderText = "Rx Freq/Tone";
-            this.colFrequency.Name = "colFrequency";
-            this.colFrequency.ReadOnly = true;
-            this.colFrequency.Width = 153;
-            // 
-            // colTone
-            // 
-            this.colTone.DataPropertyName = "FullTx";
-            this.colTone.HeaderText = "Tx Freq/Tone";
-            this.colTone.Name = "colTone";
-            this.colTone.ReadOnly = true;
-            this.colTone.Width = 152;
-            // 
-            // colAssignment
-            // 
-            this.colAssignment.DataPropertyName = "Assignment";
-            this.colAssignment.HeaderText = "Assignment";
-            this.colAssignment.Name = "colAssignment";
-            this.colAssignment.ReadOnly = true;
-            this.colAssignment.Width = 134;
-            // 
-            // colComments
-            // 
-            this.colComments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colComments.DataPropertyName = "Comments";
-            this.colComments.HeaderText = "Remarks";
-            this.colComments.MinimumWidth = 100;
-            this.colComments.Name = "colComments";
-            this.colComments.ReadOnly = true;
             // 
             // CommunicationsPlanForm
             // 

@@ -11,13 +11,13 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditCommsItemForm : Form
+    public partial class EditCommsItemForm : BaseForm
     {
         public CommsPlanItem commsPlanItem { get => editCommsChannelControl1.selectedItem; set => editCommsChannelControl1.selectedItem = value; }
         public EditCommsItemForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
       

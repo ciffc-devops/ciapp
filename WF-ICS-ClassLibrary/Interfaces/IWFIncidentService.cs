@@ -10,6 +10,7 @@ namespace WildfireICSDesktopServices
     {
         List<TaskUpdate> allTaskUpdates { get; set; }
         Incident CurrentIncident { get; set; }
+        ICSRole CurrentRole { get; set; }
         Guid MachineID { get; set; }
 
         string TestWrite(string path);
@@ -119,5 +120,6 @@ namespace WildfireICSDesktopServices
         void UpsertDemobRecord(DemobilizationRecord record, string source = "local");
         void UpsertIncidentResource(IncidentResource record, string source = "local");
         void UpsertResourceReplacementPlan(ResourceReplacementPlan record, string source = "local");
+        TaskUpdate CreateTaskUpdateForItem(SyncableItem obj, string command);
     }
 }

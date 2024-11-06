@@ -73,7 +73,6 @@ namespace Wildfire_ICS_Assist
         private static IWFIncidentService _incidentDataService = null;
         private static IPositionLogService _positionLogService= null;
         private static Icon _programIcon = Properties.Resources.P_icon;
-        private static ICSRole _CurrentRole;
         private static int _CurrentOpPeriod;
         private static NetworkSendLog _networkSendLog;
         private static bool _InternetSyncEnabled;
@@ -123,7 +122,7 @@ namespace Wildfire_ICS_Assist
         public static IPositionLogService positionLogService { get => _positionLogService; private set => _positionLogService = value; }
         public static Icon programIcon { get => _programIcon; private set => _programIcon = value; }
         public static Incident CurrentTask { get => incidentDataService.CurrentIncident; set { incidentDataService.CurrentIncident = value; } }
-        public static ICSRole CurrentRole { get => _CurrentRole; set => _CurrentRole = value; }
+        public static ICSRole CurrentRole { get => incidentDataService.CurrentRole; set { incidentDataService.CurrentRole = value; } }
         public static int CurrentOpPeriod { get => _CurrentOpPeriod; set => _CurrentOpPeriod = value; }
         public static OperationalPeriod CurrentOpPeriodDetails { get { if (CurrentIncident != null && CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == CurrentOpPeriod)) { return CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod); } else { return null; } } }
         public static bool InternetSyncEnabled { get => _InternetSyncEnabled; set => _InternetSyncEnabled = value; }
@@ -151,6 +150,15 @@ namespace Wildfire_ICS_Assist
         public static Color GoodColor { get => Color.LightSkyBlue; }
         public static Color StandardTextboxColor { get => System.Drawing.SystemColors.Window; }
         public static Color DarkColor { get => Color.FromArgb(35, 31, 32); }
+
+        //this is a particular pallet based off the ivory form background color
+        public static Color HelpColor { get => Color.FromArgb(122, 139, 153); }
+        public static Color DarkBlueColor { get => Color.FromArgb(11, 19, 43); }
+        public static Color MidBlueColor { get => Color.FromArgb(28, 37, 56); }
+        public static Color LightBlueColor { get => Color.FromArgb(58, 80, 107); }
+
+        public static Color ViewPDFColor { get => Color.FromArgb(168, 118, 62); }
+
 
         public static int PNumMin { get => _PNumMin; set => _PNumMin = value; }
         public static int PNumMax { get => _PNumMax; set => _PNumMax = value; }

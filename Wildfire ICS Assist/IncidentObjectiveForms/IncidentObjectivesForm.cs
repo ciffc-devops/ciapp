@@ -32,6 +32,7 @@ namespace Wildfire_ICS_Assist
         {
            
             InitializeComponent();
+            SetControlColors(this.Controls);
             txtWeatherForcast.Leave += txtWeatherForcast_Leave;
             txtGeneralSafetyMessage.Leave += txtGeneralSafetyMessage_Leave; 
         }

@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
     {
         public GeneralMessagesForm()
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)

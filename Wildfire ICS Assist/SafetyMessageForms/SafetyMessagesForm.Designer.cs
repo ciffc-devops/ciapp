@@ -64,7 +64,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
             this.splitContainer1.Size = new System.Drawing.Size(822, 566);
-            this.splitContainer1.SplitterDistance = 502;
+            this.splitContainer1.SplitterDistance = 499;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -85,7 +85,7 @@
             this.dgvSafetyNotes.RowHeadersVisible = false;
             this.dgvSafetyNotes.RowTemplate.Height = 35;
             this.dgvSafetyNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSafetyNotes.Size = new System.Drawing.Size(822, 502);
+            this.dgvSafetyNotes.Size = new System.Drawing.Size(822, 499);
             this.dgvSafetyNotes.TabIndex = 1;
             this.dgvSafetyNotes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSafetyNotes_CellDoubleClick);
             this.dgvSafetyNotes.SelectionChanged += new System.EventHandler(this.dgvSafetyNotes_SelectionChanged);
@@ -115,6 +115,7 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(187, 43);
             this.btnPrint.TabIndex = 33;
+            this.btnPrint.Tag = "ViewPDF";
             this.btnPrint.Text = "View PDF(s)";
             this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

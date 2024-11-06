@@ -18,7 +18,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
     {
         public InternetSyncForm()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            SetControlColors(this.Controls);
         }
         bool automaticallySettingRadios = false;
         public bool InternetSyncEnabled

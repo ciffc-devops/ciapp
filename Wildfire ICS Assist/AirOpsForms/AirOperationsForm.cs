@@ -29,6 +29,7 @@ namespace Wildfire_ICS_Assist
         public AirOperationsForm()
         {
             InitializeComponent(); dgvAircraft.BackgroundColor = Program.FormAccent;
+            SetControlColors(this.Controls);
         }
 
         private void AirOperationsForm_Load(object sender, EventArgs e)

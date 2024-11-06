@@ -31,6 +31,7 @@ using NetworkCommsDotNet.DPSBase;
 using Wildfire_ICS_Assist.Properties;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Wildfire_ICS_Assist.IncidentStatusSummaryForms;
+using Wildfire_ICS_Assist.Classes;
 
 
 namespace Wildfire_ICS_Assist
@@ -52,6 +53,7 @@ namespace Wildfire_ICS_Assist
             System.Windows.Forms.Application.EnableVisualStyles();
             LastAutoBackup = DateTime.Now;
             populateCollapsiblePanelList();
+            SetControlColors(this.Controls);
 
         }
         private void IncidentDetailsForm_Load(object sender, EventArgs e)
@@ -102,7 +104,9 @@ namespace Wildfire_ICS_Assist
 
             tESTToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
-
+#if DEBUG
+            txtTaskName.Text = "test " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+#endif
         }
 
         private void StartAsServer()
@@ -664,6 +668,7 @@ namespace Wildfire_ICS_Assist
             cboICSRole.DisplayMember = "RoleNameForDropdown";
             cboICSRole.ValueMember = "RoleID";
             if (role != null && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == role.RoleID)) { cboICSRole.SelectedValue = role.RoleID; }
+            cboICSRole.DropDownWidth = cboICSRole.GetDropDownWidth();
 
         }
 
@@ -3278,6 +3283,12 @@ namespace Wildfire_ICS_Assist
         private void tmrLock_Tick(object sender, EventArgs e)
         {
             if (!TaskInfoLocked) { ToggleTaskInfoLock(); }
+        }
+
+        private void restoreDeletedItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeletedItemsForm form = new DeletedItemsForm();
+            form.Show();
         }
     }
 

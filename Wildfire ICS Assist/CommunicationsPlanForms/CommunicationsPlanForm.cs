@@ -27,6 +27,7 @@ namespace Wildfire_ICS_Assist
            
             InitializeComponent();
             dgvCommsItems.AutoGenerateColumns = false;
+            SetControlColors(this.Controls);
         }
         private void CommunicationsPlanForm_Load(object sender, EventArgs e)
         {

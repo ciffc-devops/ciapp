@@ -299,6 +299,7 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(179, 52);
             this.btnPrint.TabIndex = 91;
+            this.btnPrint.Tag = "ViewPDF";
             this.btnPrint.Text = "View PDF(s)";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;

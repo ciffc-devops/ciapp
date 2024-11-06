@@ -24,6 +24,7 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
         public IncidentStatusSummaryForm()
         {
             InitializeComponent();
+            SetControlColors(this.Controls);
 
 
             cboProvince.DataSource = ProvinceTools.GetProvinces(false);

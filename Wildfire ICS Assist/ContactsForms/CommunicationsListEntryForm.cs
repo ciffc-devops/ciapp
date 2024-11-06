@@ -23,7 +23,7 @@ namespace Wildfire_ICS_Assist
 
         public CommunicationsListEntryForm()
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

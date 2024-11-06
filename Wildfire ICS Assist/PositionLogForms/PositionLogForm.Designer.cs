@@ -181,6 +181,7 @@
             this.btnFormInfo.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnFormInfo.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_931_speech_bubble_question_sm;
             this.btnFormInfo.Name = "btnFormInfo";
+            this.btnFormInfo.Tag = "Help";
             this.btnFormInfo.UseVisualStyleBackColor = false;
             this.btnFormInfo.Click += new System.EventHandler(this.btnFormInfo_Click);
             // 
@@ -291,6 +292,7 @@
             resources.ApplyResources(this.btnPrintVerbose, "btnPrintVerbose");
             this.btnPrintVerbose.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
             this.btnPrintVerbose.Name = "btnPrintVerbose";
+            this.btnPrintVerbose.Tag = "ViewPDF";
             this.btnPrintVerbose.UseVisualStyleBackColor = true;
             this.btnPrintVerbose.Click += new System.EventHandler(this.btnPrintVerbose_Click);
             // 
@@ -299,6 +301,7 @@
             resources.ApplyResources(this.btnPrint, "btnPrint");
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
             this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Tag = "ViewPDF";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 

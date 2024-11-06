@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist
     {
         public CommunicationsListForm()
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void Program_ContactChanged(ContactEventArgs e)

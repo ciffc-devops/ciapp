@@ -31,7 +31,7 @@ namespace Wildfire_ICS_Assist
         }
         public CommunicationsListViewForm()
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
 

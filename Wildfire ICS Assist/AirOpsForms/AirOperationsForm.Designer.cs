@@ -184,7 +184,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
             this.splitContainer1.Size = new System.Drawing.Size(1008, 533);
-            this.splitContainer1.SplitterDistance = 458;
+            this.splitContainer1.SplitterDistance = 463;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -201,7 +201,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(10, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1008, 458);
+            this.tabControl1.Size = new System.Drawing.Size(1008, 463);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
@@ -211,7 +211,7 @@
             this.tpAircraft.Location = new System.Drawing.Point(4, 33);
             this.tpAircraft.Name = "tpAircraft";
             this.tpAircraft.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAircraft.Size = new System.Drawing.Size(1000, 421);
+            this.tpAircraft.Size = new System.Drawing.Size(1000, 426);
             this.tpAircraft.TabIndex = 0;
             this.tpAircraft.Text = "Aircraft";
             this.tpAircraft.UseVisualStyleBackColor = true;
@@ -235,8 +235,8 @@
             this.splitContainer5.Panel2.Controls.Add(this.btnToggleMedicvac);
             this.splitContainer5.Panel2.Controls.Add(this.btnSetStartEndTimes);
             this.splitContainer5.Panel2.Controls.Add(this.label10);
-            this.splitContainer5.Size = new System.Drawing.Size(994, 415);
-            this.splitContainer5.SplitterDistance = 324;
+            this.splitContainer5.Size = new System.Drawing.Size(994, 420);
+            this.splitContainer5.SplitterDistance = 329;
             this.splitContainer5.TabIndex = 70;
             // 
             // dgvAircraft
@@ -263,7 +263,7 @@
             this.dgvAircraft.RowHeadersVisible = false;
             this.dgvAircraft.RowTemplate.Height = 35;
             this.dgvAircraft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAircraft.Size = new System.Drawing.Size(994, 324);
+            this.dgvAircraft.Size = new System.Drawing.Size(994, 329);
             this.dgvAircraft.TabIndex = 1;
             this.dgvAircraft.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAircraft_CellDoubleClick);
             this.dgvAircraft.SelectionChanged += new System.EventHandler(this.dgvAircraft_SelectionChanged);
@@ -408,7 +408,7 @@
             this.tpPersonnel.Location = new System.Drawing.Point(4, 33);
             this.tpPersonnel.Name = "tpPersonnel";
             this.tpPersonnel.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPersonnel.Size = new System.Drawing.Size(1000, 424);
+            this.tpPersonnel.Size = new System.Drawing.Size(1000, 429);
             this.tpPersonnel.TabIndex = 1;
             this.tpPersonnel.Text = "Personnel";
             this.tpPersonnel.UseVisualStyleBackColor = true;
@@ -432,8 +432,8 @@
             this.splitContainer3.Panel2.Controls.Add(this.btnDeleteRole);
             this.splitContainer3.Panel2.Controls.Add(this.btnAssignRole);
             this.splitContainer3.Panel2.Controls.Add(this.btnEditRole);
-            this.splitContainer3.Size = new System.Drawing.Size(994, 418);
-            this.splitContainer3.SplitterDistance = 351;
+            this.splitContainer3.Size = new System.Drawing.Size(994, 423);
+            this.splitContainer3.SplitterDistance = 356;
             this.splitContainer3.TabIndex = 61;
             // 
             // treeOrgChart
@@ -442,7 +442,7 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(0, 0);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(994, 351);
+            this.treeOrgChart.Size = new System.Drawing.Size(994, 356);
             this.treeOrgChart.TabIndex = 56;
             // 
             // btnAdd
@@ -500,7 +500,7 @@
             this.tpFrequencies.Controls.Add(this.splitContainer4);
             this.tpFrequencies.Location = new System.Drawing.Point(4, 33);
             this.tpFrequencies.Name = "tpFrequencies";
-            this.tpFrequencies.Size = new System.Drawing.Size(1000, 421);
+            this.tpFrequencies.Size = new System.Drawing.Size(1000, 429);
             this.tpFrequencies.TabIndex = 2;
             this.tpFrequencies.Text = "Frequencies";
             this.tpFrequencies.UseVisualStyleBackColor = true;
@@ -523,8 +523,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.btnAddComms);
             this.splitContainer4.Panel2.Controls.Add(this.btnEditComms);
             this.splitContainer4.Panel2.Controls.Add(this.btnDeleteComms);
-            this.splitContainer4.Size = new System.Drawing.Size(1000, 421);
-            this.splitContainer4.SplitterDistance = 356;
+            this.splitContainer4.Size = new System.Drawing.Size(1000, 429);
+            this.splitContainer4.SplitterDistance = 364;
             this.splitContainer4.TabIndex = 60;
             // 
             // dgvCommsItems
@@ -548,7 +548,7 @@
             this.dgvCommsItems.RowHeadersVisible = false;
             this.dgvCommsItems.RowTemplate.Height = 30;
             this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommsItems.Size = new System.Drawing.Size(1000, 356);
+            this.dgvCommsItems.Size = new System.Drawing.Size(1000, 364);
             this.dgvCommsItems.TabIndex = 59;
             // 
             // colCommsSystem
@@ -650,7 +650,7 @@
             this.tpNOTAM.Controls.Add(this.txtCenterPoint);
             this.tpNOTAM.Location = new System.Drawing.Point(4, 33);
             this.tpNOTAM.Name = "tpNOTAM";
-            this.tpNOTAM.Size = new System.Drawing.Size(1000, 421);
+            this.tpNOTAM.Size = new System.Drawing.Size(1000, 429);
             this.tpNOTAM.TabIndex = 3;
             this.tpNOTAM.Text = "NOTAM";
             this.tpNOTAM.UseVisualStyleBackColor = true;
@@ -1076,7 +1076,7 @@
             this.toOther.Controls.Add(this.datSunrise);
             this.toOther.Location = new System.Drawing.Point(4, 33);
             this.toOther.Name = "toOther";
-            this.toOther.Size = new System.Drawing.Size(1000, 421);
+            this.toOther.Size = new System.Drawing.Size(1000, 429);
             this.toOther.TabIndex = 4;
             this.toOther.Text = "Other";
             this.toOther.UseVisualStyleBackColor = true;
@@ -1202,12 +1202,13 @@
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
-            this.btnPrint.Location = new System.Drawing.Point(845, 5);
+            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint.Location = new System.Drawing.Point(824, 5);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(151, 48);
+            this.btnPrint.Size = new System.Drawing.Size(172, 48);
             this.btnPrint.TabIndex = 57;
+            this.btnPrint.Tag = "ViewPDF";
             this.btnPrint.Text = "View PDF";
-            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);

@@ -18,7 +18,8 @@ namespace Wildfire_ICS_Assist
     {
         public SafetyMessagesForm()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            SetControlColors(this.Controls);
         }
 
         private void SafetyMessagesForm_Load(object sender, EventArgs e)

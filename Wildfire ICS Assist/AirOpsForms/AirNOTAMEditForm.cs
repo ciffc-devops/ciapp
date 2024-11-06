@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
 
         public AirNOTAMEditForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void loadNOTAM()

@@ -356,6 +356,7 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(149, 51);
             this.btnPrint.TabIndex = 51;
+            this.btnPrint.Tag = "ViewPDF";
             this.btnPrint.Text = "View PDF";
             this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

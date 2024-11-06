@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist
         AirOperationsSummary SelectedAirOps { get => _selectedAirOps; set { _selectedAirOps = value; } }
         public AirOpsAddAircraftForm()
         {
-            InitializeComponent();
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void AirOpsAddAircraftForm_Load(object sender, EventArgs e)

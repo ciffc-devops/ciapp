@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist
 
         public NotesListEditNoteForm(Note note)
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
             CurrentNote = note;
         }
 

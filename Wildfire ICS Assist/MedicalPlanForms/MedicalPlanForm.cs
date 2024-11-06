@@ -37,7 +37,7 @@ namespace Wildfire_ICS_Assist
             dgvAidStations.BackgroundColor = Program.FormAccent;
             dgvTransport.BackgroundColor = Program.FormAccent;
             dgvHospitals.BackgroundColor = Program.FormAccent;
-
+            SetControlColors(this.Controls);
 
         }
 

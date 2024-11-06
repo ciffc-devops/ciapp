@@ -18,14 +18,14 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class OptionsForm : Form
+    public partial class OptionsForm : BaseForm
     {
         private List<DeviceInformation> allDevices = new List<DeviceInformation>();
         byte[] NewOrgLogo = null;
 
         public OptionsForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void LoadICSRoles()

@@ -43,10 +43,10 @@
             this.lblDistribution = new System.Windows.Forms.Label();
             this.tpFields = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnOK = new System.Windows.Forms.Button();
             this.colBlockNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBlockName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInstructions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnOK = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -207,19 +207,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(491, 355);
             this.dataGridView1.TabIndex = 0;
             // 
-            // btnOK
-            // 
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOK.Location = new System.Drawing.Point(11, 3);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(121, 42);
-            this.btnOK.TabIndex = 2;
-            this.btnOK.Text = "Done";
-            this.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOK.UseVisualStyleBackColor = true;
-            // 
             // colBlockNumber
             // 
             this.colBlockNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -252,6 +239,20 @@
             this.colInstructions.MinimumWidth = 200;
             this.colInstructions.Name = "colInstructions";
             this.colInstructions.ReadOnly = true;
+            // 
+            // btnOK
+            // 
+            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOK.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnOK.Location = new System.Drawing.Point(11, 3);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(121, 42);
+            this.btnOK.TabIndex = 2;
+            this.btnOK.Text = "Done";
+            this.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // ICSFormHelpForm
             // 

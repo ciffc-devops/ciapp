@@ -53,13 +53,14 @@
             this.btnViewEquipment = new System.Windows.Forms.Button();
             this.btnReturnEquipment = new System.Windows.Forms.Button();
             this.pnlOpsPeriod = new System.Windows.Forms.Panel();
-            this.btnCloseOpPeriod = new System.Windows.Forms.Button();
+            this.cboCurrentOperationalPeriod = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.datOpsEnd = new System.Windows.Forms.DateTimePicker();
             this.datOpsStart = new System.Windows.Forms.DateTimePicker();
-            this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnCloseOpPeriod = new System.Windows.Forms.Button();
+            this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
             this.btnLockTaskInfo = new System.Windows.Forms.Button();
             this.txtTaskName = new SpellBox();
@@ -101,7 +102,9 @@
             this.recentIncidentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.browseToIncidentFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreDeletedItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -417,22 +420,19 @@
             resources.ApplyResources(this.pnlOpsPeriod, "pnlOpsPeriod");
             this.pnlOpsPeriod.BackColor = System.Drawing.Color.White;
             this.pnlOpsPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOpsPeriod.Controls.Add(this.btnCloseOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.cboCurrentOperationalPeriod);
             this.pnlOpsPeriod.Controls.Add(this.label18);
             this.pnlOpsPeriod.Controls.Add(this.label15);
             this.pnlOpsPeriod.Controls.Add(this.datOpsEnd);
             this.pnlOpsPeriod.Controls.Add(this.datOpsStart);
-            this.pnlOpsPeriod.Controls.Add(this.numOpPeriod);
             this.pnlOpsPeriod.Controls.Add(this.label1);
             this.pnlOpsPeriod.Name = "pnlOpsPeriod";
             // 
-            // btnCloseOpPeriod
+            // cboCurrentOperationalPeriod
             // 
-            resources.ApplyResources(this.btnCloseOpPeriod, "btnCloseOpPeriod");
-            this.btnCloseOpPeriod.Name = "btnCloseOpPeriod";
-            this.btnCloseOpPeriod.TabStop = false;
-            this.btnCloseOpPeriod.UseVisualStyleBackColor = true;
-            this.btnCloseOpPeriod.Click += new System.EventHandler(this.btnCloseOpPeriod_Click);
+            resources.ApplyResources(this.cboCurrentOperationalPeriod, "cboCurrentOperationalPeriod");
+            this.cboCurrentOperationalPeriod.FormattingEnabled = true;
+            this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
             // 
             // label18
             // 
@@ -458,6 +458,19 @@
             this.datOpsStart.Name = "datOpsStart";
             this.datOpsStart.Leave += new System.EventHandler(this.datOpsStart_Leave);
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // btnCloseOpPeriod
+            // 
+            resources.ApplyResources(this.btnCloseOpPeriod, "btnCloseOpPeriod");
+            this.btnCloseOpPeriod.Name = "btnCloseOpPeriod";
+            this.btnCloseOpPeriod.TabStop = false;
+            this.btnCloseOpPeriod.UseVisualStyleBackColor = true;
+            this.btnCloseOpPeriod.Click += new System.EventHandler(this.btnCloseOpPeriod_Click);
+            // 
             // numOpPeriod
             // 
             resources.ApplyResources(this.numOpPeriod, "numOpPeriod");
@@ -478,11 +491,6 @@
             0,
             0});
             this.numOpPeriod.ValueChanged += new System.EventHandler(this.numOpPeriod_ValueChanged);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
             // 
             // pnlTaskInfo
             // 
@@ -568,6 +576,7 @@
             resources.ApplyResources(this.btnICSRoleHelp, "btnICSRoleHelp");
             this.btnICSRoleHelp.Name = "btnICSRoleHelp";
             this.btnICSRoleHelp.TabStop = false;
+            this.btnICSRoleHelp.Tag = "Help";
             this.btnICSRoleHelp.UseVisualStyleBackColor = true;
             this.btnICSRoleHelp.Click += new System.EventHandler(this.btnICSRoleHelp_Click);
             // 
@@ -762,7 +771,9 @@
             this.recentIncidentsToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.toolStripSeparator2,
             this.browseToIncidentFolderToolStripMenuItem,
+            this.restoreDeletedItemsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -798,11 +809,22 @@
             resources.ApplyResources(this.saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
             // browseToIncidentFolderToolStripMenuItem
             // 
             resources.ApplyResources(this.browseToIncidentFolderToolStripMenuItem, "browseToIncidentFolderToolStripMenuItem");
             this.browseToIncidentFolderToolStripMenuItem.Name = "browseToIncidentFolderToolStripMenuItem";
             this.browseToIncidentFolderToolStripMenuItem.Click += new System.EventHandler(this.browseToIncidentFolderToolStripMenuItem_Click);
+            // 
+            // restoreDeletedItemsToolStripMenuItem
+            // 
+            this.restoreDeletedItemsToolStripMenuItem.Name = "restoreDeletedItemsToolStripMenuItem";
+            resources.ApplyResources(this.restoreDeletedItemsToolStripMenuItem, "restoreDeletedItemsToolStripMenuItem");
+            this.restoreDeletedItemsToolStripMenuItem.Click += new System.EventHandler(this.restoreDeletedItemsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1429,10 +1451,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.Controls.Add(this.cpOtherTools);
+            this.Controls.Add(this.btnCloseOpPeriod);
             this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.picOrgLogo);
             this.Controls.Add(this.pnlInternetSyncStart);
             this.Controls.Add(this.pnlNetworkSyncInProgress);
+            this.Controls.Add(this.numOpPeriod);
             this.Controls.Add(this.pnlOpsPeriod);
             this.Controls.Add(this.pnlTaskInfo);
             this.Controls.Add(this.lblServerStatus);
@@ -1637,6 +1661,9 @@
         private System.Windows.Forms.ToolStripMenuItem incidentStatusSummaryICS209ToolStripMenuItem;
         private System.Windows.Forms.Button btnLockTaskInfo;
         private System.Windows.Forms.Timer tmrLock;
+        private System.Windows.Forms.ComboBox cboCurrentOperationalPeriod;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem restoreDeletedItemsToolStripMenuItem;
     }
 }
 

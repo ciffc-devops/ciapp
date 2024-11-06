@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotesForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.chkAllOpPeriods = new System.Windows.Forms.CheckBox();
@@ -195,9 +195,9 @@
             // 
             this.colDateCreated.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDateCreated.DataPropertyName = "DateCreated";
-            dataGridViewCellStyle3.Format = "yyyy-MMM-dd HH:mm";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colDateCreated.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "yyyy-MMM-dd HH:mm";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colDateCreated.DefaultCellStyle = dataGridViewCellStyle1;
             this.colDateCreated.HeaderText = "Created";
             this.colDateCreated.Name = "colDateCreated";
             this.colDateCreated.ReadOnly = true;
@@ -207,8 +207,8 @@
             // 
             this.colDateUpdated.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDateUpdated.DataPropertyName = "DateUpdated";
-            dataGridViewCellStyle4.Format = "yyyy-MMM-dd HH:mm";
-            this.colDateUpdated.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "yyyy-MMM-dd HH:mm";
+            this.colDateUpdated.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDateUpdated.HeaderText = "Updated";
             this.colDateUpdated.Name = "colDateUpdated";
             this.colDateUpdated.ReadOnly = true;
@@ -253,6 +253,7 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(204, 44);
             this.btnPrint.TabIndex = 24;
+            this.btnPrint.Tag = "ViewPDF";
             this.btnPrint.Text = "View PDF(s)";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
