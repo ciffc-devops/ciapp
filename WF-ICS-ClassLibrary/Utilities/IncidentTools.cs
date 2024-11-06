@@ -8,12 +8,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Models.GeneralModels;
 
 namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class IncidentTools
     {
+        public static TaskUpdate GetLastUpdateByItemID(this Incident task, Guid ItemID)
+        {
+            if (task.allTaskUpdates.Any(o => o.ItemID == ItemID))
+            {
+                return task.allTaskUpdates.Where(o => o.ItemID == ItemID).OrderByDescending(o => o.LastUpdatedUTC).First();
+            }
+            return null;
+        }
+        public static List<DeletedItemRecord> GetDeletedItemRecords(this Incident task, int OpPeriod)
+        {
+            List<DeletedItemRecord> records = new List<DeletedItemRecord>();
 
+            List<TaskUpdate> recentUpdates = task.MostRecentTaskUpdates(false);
+            recentUpdates = recentUpdates.Where(o => !o.Data.Active && o.Data.OpPeriod == OpPeriod).ToList();
+            foreach (TaskUpdate update in recentUpdates)
+            {
+                records.Add(new DeletedItemRecord(update));
+            }
+
+            return records;
+        }
         public static List<Aircraft> GetActiveAircraft(this Incident incident, DateTime Date)
         {
             List<Aircraft> aircraft = new List<Aircraft>();
