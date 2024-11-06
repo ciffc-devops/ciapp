@@ -16,6 +16,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(3)] private DateTime _PeriodEnd;
         [ProtoMember(7)] private string _titleImageBytes;
         [ProtoMember(8)] private string _CriticalMessage;
+        [ProtoMember(9)] private string _OperationalPeriodName;
 
         private static DateTime minDate = Convert.ToDateTime("1753-01-01");
 
@@ -54,6 +55,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid OperationalPeriodID { get => ID; set => ID = value; }
         public string TitleImageBytes { get => _titleImageBytes; set => _titleImageBytes = value; }
         public string CriticalMessage { get => _CriticalMessage; set => _CriticalMessage = value; }
+        public string OperationalPeriodName { get => _OperationalPeriodName; set => _OperationalPeriodName = value; }
 
         public OperationalPeriod()
         {
