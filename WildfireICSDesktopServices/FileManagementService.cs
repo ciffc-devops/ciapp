@@ -82,7 +82,7 @@ namespace WildfireICSDesktopServices
                 path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 path = Path.Combine(path, "CIAPP");
                 System.IO.Directory.CreateDirectory(path);
-                path = System.IO.Path.Combine(path, "Incident " + CurrentTask.IncidentIdentifier);
+                path = System.IO.Path.Combine(path, "Incident " + CurrentTask.IncidentNameAndNumberForPath);
                 System.IO.Directory.CreateDirectory(path);
 
 
