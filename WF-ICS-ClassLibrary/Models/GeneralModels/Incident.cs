@@ -308,12 +308,13 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public Guid RequestID { get => _RequestID; set => _RequestID = value; }
 
         public List<OperationalPeriod> AllOperationalPeriods { get => _AllOperationalPeriods; set => _AllOperationalPeriods = value; }
+        public List<OperationalPeriod> ActiveOperationalPeriods { get => AllOperationalPeriods.Where(o => o.Active).ToList(); }
         public List<OperationalPeriod> AllOperationalPeriodsWithContent
         {
             get
             {
                 List<OperationalPeriod> periods = new List<OperationalPeriod>();
-                foreach (OperationalPeriod ops in _AllOperationalPeriods)
+                foreach (OperationalPeriod ops in ActiveOperationalPeriods)
                 {
                     if (OpPeriodHasContent(ops.PeriodNumber))
                     {

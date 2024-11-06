@@ -118,546 +118,167 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="splitContainer4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="splitContainer4.IsSplitterFixed" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="splitContainer4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="splitContainer4.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
-  </data>
-  <metadata name="colMemberName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colMemberName.HeaderText" xml:space="preserve">
-    <value>Member Name</value>
-  </data>
-  <data name="colMemberName.MinimumWidth" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <metadata name="colMemberSARGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colMemberSARGroup.HeaderText" xml:space="preserve">
-    <value>SAR Team</value>
-  </data>
-  <data name="colMemberSARGroup.Width" type="System.Int32, mscorlib">
-    <value>132</value>
-  </data>
-  <metadata name="colSignInTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colSignInTime.HeaderText" xml:space="preserve">
-    <value>Sign In</value>
-  </data>
-  <data name="colSignInTime.Width" type="System.Int32, mscorlib">
-    <value>97</value>
-  </data>
-  <metadata name="colAssignmentNumber.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colAssignmentNumber.HeaderText" xml:space="preserve">
-    <value>Assignment</value>
-  </data>
-  <data name="colAssignmentNumber.Width" type="System.Int32, mscorlib">
-    <value>152</value>
-  </data>
-  <metadata name="colMemberAssignmentStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colMemberAssignmentStatus.HeaderText" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="colMemberAssignmentStatus.Width" type="System.Int32, mscorlib">
-    <value>99</value>
-  </data>
-  <data name="dgvMembersOnTask.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dgvMembersOnTask.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="dgvMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1079, 25</value>
-  </data>
-  <data name="dgvMembersOnTask.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dgvMembersOnTask.Name" xml:space="preserve">
-    <value>dgvMembersOnTask</value>
-  </data>
-  <data name="&gt;&gt;dgvMembersOnTask.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvMembersOnTask.Parent" xml:space="preserve">
-    <value>splitContainer4.Panel1</value>
-  </data>
-  <data name="&gt;&gt;dgvMembersOnTask.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Panel1.Name" xml:space="preserve">
-    <value>splitContainer4.Panel1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Panel1.Parent" xml:space="preserve">
-    <value>splitContainer4</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnAddAMember.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAR1JREFUWEfF1osNwjAMBNCOwAiMwCiMwCiM0BEYgZEYgQ2Kg1p0ds5uSNo00pOw
-        Ex8Vn6rDNE2Hos2eaLMn2uyJNhlZo0gvao00lzWtNAxBLbKLUIXHhDTJsm2DMSEXdsaTzsNsclb7WHgw
-        wO6ViOZV4YkCSkTzqvBEASWieVV4WICsu3iJ29LzyMrmf3u2UQpDxVOc2LkEzklp9myjFIbO3uK6djbb
-        s42FrAcO/iHdtNSnAXtSmvexjQUOVbh7Wdj/7tnGAocqbHIBx34FazB0tu2PcA2Gin3/hixAVr8bURRQ
-        IppXhScKKBHNq8ITBZSI5lXhwQDR9ECS7dsGgwGtsmzbYGQd+1CapGEIqlH/WL4n2uyJNnuizX6m4QMu
-        Xp5RcLi09wAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnAddAMember.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnAddAMember.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="btnAddAMember.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 38</value>
-  </data>
-  <data name="btnAddAMember.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="btnAddAMember.Text" xml:space="preserve">
-    <value>Add a Member / Sign In</value>
-  </data>
-  <data name="btnAddAMember.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnAddAMember.Name" xml:space="preserve">
-    <value>btnAddAMember</value>
-  </data>
-  <data name="&gt;&gt;btnAddAMember.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAddAMember.Parent" xml:space="preserve">
-    <value>splitContainer4.Panel2</value>
-  </data>
-  <data name="&gt;&gt;btnAddAMember.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnBulkSignIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAZRJREFUWEftlVuRwzAMRQuhEAKhEAqhEAplISyEQFkohVAG2XsdySPLivPcfOxU
-        M2cmlfWybLmXYRj+BEgHevAGVBB+U9dlO+t0FJCbJNPEHq7dkq133guEO28lV2jThUHmSI5jKzVYbqt8
-        q15hR4jX92GCKSBX8CXOnofYVLs3/oUevIsEU0A0cau1d7G1unTOLlbZCW9ggSxJrBxbAOQJXtlwnmOO
-        AMIK1yRWvsV/+yWEsOVbkhPunP77xhCytQDSSwzutlUE1+KHiAtgTxFPibPvKYasvYQWJrlGcT2hUmEQ
-        sHQMPSw+73SKWjEewQ9IrRTdmkJoQ9vcAQi7yZj1u1D8GBPZtvM7zbdZZ3Bd9/jED+DjFUeTP7KidFBY
-        fXrpxGbyz0jW74A+uq681CbbVor2FBSFeLgmNt6PMGb7CCyQ1hQwid0xO9JKnO+TJ1QqkLnLx9bbo7BU
-        lzGiVnymoHRQWP1nCixM8k+nIIJBJNimKWgRKqdgUAluE1oWJ1ZC5RyQ5hSsIVSeSag8k1B5HsPlF8Q2
-        aWM62fYlAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnBulkSignIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnBulkSignIn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 3</value>
-  </data>
-  <data name="btnBulkSignIn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 38</value>
-  </data>
-  <data name="btnBulkSignIn.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
-  </data>
-  <data name="btnBulkSignIn.Text" xml:space="preserve">
-    <value>Bulk Sign In</value>
-  </data>
-  <data name="btnBulkSignIn.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnBulkSignIn.Name" xml:space="preserve">
-    <value>btnBulkSignIn</value>
-  </data>
-  <data name="&gt;&gt;btnBulkSignIn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnBulkSignIn.Parent" xml:space="preserve">
-    <value>splitContainer4.Panel2</value>
-  </data>
-  <data name="&gt;&gt;btnBulkSignIn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAZRJREFUWEfFloGNwjAQBCmBEiiBEiiFEiiFEiiFEiiFDvJ7p9i531vbH4H8J430
-        mfPawSZ5Dsuy/CtSzkTKmUg5Eyk/BXUCF3ADd/AEb/BKY1kU1qD9obDJzmGsLfgAthCPjbzjGp5l4bK/
-        eKHeBMo+LfcVz7QWC5c52CLexHV1Pe5pLRYuf4fqVo9A2THELHNLGRYuQ4h7LVBnYDtSs4JLyrFwGULc
-        U6CO4FUyHU4py8JlCHFPgRptvcM5IwmXg1AE1fry2XHEG0tPgOel3EK4zP0CqnXudhz8dDw4730pw2Tc
-        K6Ba526f+khj7T2Rzt97UoYJuVdA8bnbTlzFuO5jrGWYmHsGis+9brkYW19WCi3D5KJn7/147mnLI+uY
-        5k0k4XKbHJepV25AbjmDKnOlf0Tel3IL4VL27Sbkl4qxOQrcM5JwOQjtYTRXEi4HoT2M5krC5SC0h9Fc
-        SbgMIdB9jntYNswDJcZIGULfhNcxknD5t59ke0m/hnwtJQ0LhPCnyMUNKWci5UyknImUM5FyHsvhByuz
-        bKlr3S8HAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 3</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 38</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.Text" xml:space="preserve">
-    <value>View in new window</value>
-  </data>
-  <data name="btnMembersOnTaskNewWindow.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnMembersOnTaskNewWindow.Name" xml:space="preserve">
-    <value>btnMembersOnTaskNewWindow</value>
-  </data>
-  <data name="&gt;&gt;btnMembersOnTaskNewWindow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnMembersOnTaskNewWindow.Parent" xml:space="preserve">
-    <value>splitContainer4.Panel2</value>
-  </data>
-  <data name="&gt;&gt;btnMembersOnTaskNewWindow.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Panel2.Name" xml:space="preserve">
-    <value>splitContainer4.Panel2</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Panel2.Parent" xml:space="preserve">
-    <value>splitContainer4</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="splitContainer4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1106, 0</value>
-  </data>
-  <data name="splitContainer4.SplitterDistance" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="splitContainer4.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Name" xml:space="preserve">
-    <value>splitContainer4</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.Parent" xml:space="preserve">
-    <value>tpMembersOnTask</value>
-  </data>
-  <data name="&gt;&gt;splitContainer4.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="splitContainer5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="splitContainer5.IsSplitterFixed" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="splitContainer5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="splitContainer5.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
-  </data>
-  <metadata name="colCategory.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colCategory.HeaderText" xml:space="preserve">
-    <value>Category</value>
-  </data>
-  <data name="colCategory.Width" type="System.Int32, mscorlib">
-    <value>110</value>
-  </data>
-  <metadata name="colSubCategory.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colSubCategory.HeaderText" xml:space="preserve">
-    <value>Sub-Category</value>
-  </data>
-  <data name="colSubCategory.Width" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colName.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="colName.Width" type="System.Int32, mscorlib">
-    <value>86</value>
-  </data>
-  <metadata name="colReferenceID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colReferenceID.HeaderText" xml:space="preserve">
-    <value>Reference ID</value>
-  </data>
-  <data name="colReferenceID.Width" type="System.Int32, mscorlib">
-    <value>145</value>
-  </data>
-  <metadata name="colEquipmentStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colEquipmentStatus.HeaderText" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="colEquipmentStatus.Width" type="System.Int32, mscorlib">
-    <value>85</value>
-  </data>
-  <metadata name="colAssignee.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colAssignee.HeaderText" xml:space="preserve">
-    <value>Assignee</value>
-  </data>
-  <data name="dgvTaskEquipment.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dgvTaskEquipment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="dgvTaskEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 25</value>
-  </data>
-  <data name="dgvTaskEquipment.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;dgvTaskEquipment.Name" xml:space="preserve">
-    <value>dgvTaskEquipment</value>
-  </data>
-  <data name="&gt;&gt;dgvTaskEquipment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvTaskEquipment.Parent" xml:space="preserve">
-    <value>splitContainer5.Panel1</value>
-  </data>
-  <data name="&gt;&gt;dgvTaskEquipment.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Panel1.Name" xml:space="preserve">
-    <value>splitContainer5.Panel1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Panel1.Parent" xml:space="preserve">
-    <value>splitContainer5</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnAssignEquipment.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAP9JREFUWEfFloENgjAQRTuCIziCozCCozgCIziCIzkCG9SrAXLe/wi9kmuTl+hr
-        73sBLE05565QGQmVkVAZCZcpjUL54GVkuQwU7T++cKgJFBjkxmYzUPyG3Oz8P8p6VVu4snUaFCrAzh2h
-        th5FZYBFxrOmHsVcfDSAIWMQJjZnQeFsQMZDeAv3+fvFrmGg8Dew1gkvoWsDhUkY2FoNChVi/PpwVVI2
-        ts2rgUIVb3kHD52lQaEKt7yDUxroewv20HUz5z6Ee+g6ocvfsO9GpJERvxUvyOj7MqqtR6EChKYDiZ1n
-        oFABrdhsBoreh9KvbG/CfyyPhspIqIyEyjhy+gC8raYt+ZcbxwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnAssignEquipment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnAssignEquipment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="btnAssignEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 38</value>
-  </data>
-  <data name="btnAssignEquipment.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btnAssignEquipment.Text" xml:space="preserve">
-    <value>Issue Equipment</value>
-  </data>
-  <data name="btnAssignEquipment.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnAssignEquipment.Name" xml:space="preserve">
-    <value>btnAssignEquipment</value>
-  </data>
-  <data name="&gt;&gt;btnAssignEquipment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAssignEquipment.Parent" xml:space="preserve">
-    <value>splitContainer5.Panel2</value>
-  </data>
-  <data name="&gt;&gt;btnAssignEquipment.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnViewEquipment.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="btnViewEquipment.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAZRJREFUWEfFloGNwjAQBCmBEiiBEiiFEiiFEiiFEiiFDvJ7p9i531vbH4H8J430
-        mfPawSZ5Dsuy/CtSzkTKmUg5Eyk/BXUCF3ADd/AEb/BKY1kU1qD9obDJzmGsLfgAthCPjbzjGp5l4bK/
-        eKHeBMo+LfcVz7QWC5c52CLexHV1Pe5pLRYuf4fqVo9A2THELHNLGRYuQ4h7LVBnYDtSs4JLyrFwGULc
-        U6CO4FUyHU4py8JlCHFPgRptvcM5IwmXg1AE1fry2XHEG0tPgOel3EK4zP0CqnXudhz8dDw4730pw2Tc
-        K6Ba526f+khj7T2Rzt97UoYJuVdA8bnbTlzFuO5jrGWYmHsGis+9brkYW19WCi3D5KJn7/147mnLI+uY
-        5k0k4XKbHJepV25AbjmDKnOlf0Tel3IL4VL27Sbkl4qxOQrcM5JwOQjtYTRXEi4HoT2M5krC5SC0h9Fc
-        SbgMIdB9jntYNswDJcZIGULfhNcxknD5t59ke0m/hnwtJQ0LhPCnyMUNKWci5UyknImUM5FyHsvhByuz
-        bKlr3S8HAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnViewEquipment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnViewEquipment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 3</value>
-  </data>
-  <data name="btnViewEquipment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 6, 4</value>
-  </data>
-  <data name="btnViewEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 38</value>
-  </data>
-  <data name="btnViewEquipment.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="btnViewEquipment.Text" xml:space="preserve">
-    <value>View in new window</value>
-  </data>
-  <data name="btnViewEquipment.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnViewEquipment.Name" xml:space="preserve">
-    <value>btnViewEquipment</value>
-  </data>
-  <data name="&gt;&gt;btnViewEquipment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnViewEquipment.Parent" xml:space="preserve">
-    <value>splitContainer5.Panel2</value>
-  </data>
-  <data name="&gt;&gt;btnViewEquipment.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="btnReturnEquipment.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAR1JREFUWEfF1osNwjAMBNCOwAiMwCiMwCiM0BEYgZEYgQ2Kg1p0ds5uSNo00pOw
-        Ex8Vn6rDNE2Hos2eaLMn2uyJNhlZo0gvao00lzWtNAxBLbKLUIXHhDTJsm2DMSEXdsaTzsNsclb7WHgw
-        wO6ViOZV4YkCSkTzqvBEASWieVV4WICsu3iJ29LzyMrmf3u2UQpDxVOc2LkEzklp9myjFIbO3uK6djbb
-        s42FrAcO/iHdtNSnAXtSmvexjQUOVbh7Wdj/7tnGAocqbHIBx34FazB0tu2PcA2Gin3/hixAVr8bURRQ
-        IppXhScKKBHNq8ITBZSI5lXhwQDR9ECS7dsGgwGtsmzbYGQd+1CapGEIqlH/WL4n2uyJNnuizX6m4QMu
-        Xp5RcLi09wAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnReturnEquipment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnReturnEquipment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 3</value>
-  </data>
-  <data name="btnReturnEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 38</value>
-  </data>
-  <data name="btnReturnEquipment.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="btnReturnEquipment.Text" xml:space="preserve">
-    <value>Return Equipment</value>
-  </data>
-  <data name="btnReturnEquipment.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;btnReturnEquipment.Name" xml:space="preserve">
-    <value>btnReturnEquipment</value>
-  </data>
-  <data name="&gt;&gt;btnReturnEquipment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnReturnEquipment.Parent" xml:space="preserve">
-    <value>splitContainer5.Panel2</value>
-  </data>
-  <data name="&gt;&gt;btnReturnEquipment.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Panel2.Name" xml:space="preserve">
-    <value>splitContainer5.Panel2</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Panel2.Parent" xml:space="preserve">
-    <value>splitContainer5</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="splitContainer5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 0</value>
-  </data>
-  <data name="splitContainer5.SplitterDistance" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="splitContainer5.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Name" xml:space="preserve">
-    <value>splitContainer5</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.Parent" xml:space="preserve">
-    <value>tpEquipment</value>
-  </data>
-  <data name="&gt;&gt;splitContainer5.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="pnlOpsPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="cboCurrentOperationalPeriod.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 24pt</value>
+  <data name="btnMoveToOpNow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnMoveToOpNow.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="btnMoveToOpNow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnMoveToOpNow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>299, 48</value>
+  </data>
+  <data name="btnMoveToOpNow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 37</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnMoveToOpNow.TabIndex" type="System.Int32, mscorlib">
+    <value>97</value>
+  </data>
+  <data name="btnMoveToOpNow.Text" xml:space="preserve">
+    <value>Now</value>
+  </data>
+  <data name="btnMoveToOpNow.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnMoveToOpNow.Name" xml:space="preserve">
+    <value>btnMoveToOpNow</value>
+  </data>
+  <data name="&gt;&gt;btnMoveToOpNow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMoveToOpNow.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnMoveToOpNow.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnReviewOpPeriod.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="btnReviewOpPeriod.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnReviewOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>214, 93</value>
+  </data>
+  <data name="btnReviewOpPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 37</value>
+  </data>
+  <data name="btnReviewOpPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>96</value>
+  </data>
+  <data name="btnReviewOpPeriod.Text" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="btnReviewOpPeriod.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnReviewOpPeriod.Name" xml:space="preserve">
+    <value>btnReviewOpPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnReviewOpPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnReviewOpPeriod.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnReviewOpPeriod.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnEditOpPeriod.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="btnEditOpPeriod.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnEditOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 93</value>
+  </data>
+  <data name="btnEditOpPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 37</value>
+  </data>
+  <data name="btnEditOpPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
+  <data name="btnEditOpPeriod.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="btnEditOpPeriod.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnEditOpPeriod.Name" xml:space="preserve">
+    <value>btnEditOpPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnEditOpPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnEditOpPeriod.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnEditOpPeriod.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnNewOpPeriod.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="btnNewOpPeriod.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAANdJREFUWEfF1lGKwzAQBFHf/xS5qWIJxoRSQzdEjA0PlmK8/ZMse40xXiVjJxk7
+        ydhJxk4yOvfzuc0ffn3UrSOjg+EH7xIyOhwuvEvI6HC48C4ho8PhwruEjA6HC+8SMjocLrxLyOhwuPAu
+        oaP+nv9L/p3Ywor7y0dwZ9rCinjxFO5MW1gRL57CnWkLK+LFU7gzbWHFtz+EDn7xg3cJGR0OF94lZHQ4
+        XHiXkNHhcOFdQkaHw4V3CRkdDhfeJWR0OFx4l5DRuZ93/yk9ScZOMnaSsZOMfcb1BWBPK2dnoVH/AAAA
+        AElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnNewOpPeriod.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnNewOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 93</value>
+  </data>
+  <data name="btnNewOpPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 37</value>
+  </data>
+  <data name="btnNewOpPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>94</value>
+  </data>
+  <data name="btnNewOpPeriod.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="btnNewOpPeriod.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnNewOpPeriod.Name" xml:space="preserve">
+    <value>btnNewOpPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnNewOpPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNewOpPeriod.Parent" xml:space="preserve">
+    <value>pnlOpsPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnNewOpPeriod.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cboCurrentOperationalPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="cboCurrentOperationalPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 23</value>
+    <value>8, 50</value>
   </data>
   <data name="cboCurrentOperationalPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 45</value>
+    <value>285, 32</value>
   </data>
   <data name="cboCurrentOperationalPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>93</value>
-  </data>
-  <data name="cboCurrentOperationalPeriod.Text" xml:space="preserve">
-    <value>9999</value>
   </data>
   <data name="&gt;&gt;cboCurrentOperationalPeriod.Name" xml:space="preserve">
     <value>cboCurrentOperationalPeriod</value>
@@ -669,138 +290,6 @@
     <value>pnlOpsPeriod</value>
   </data>
   <data name="&gt;&gt;cboCurrentOperationalPeriod.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label18.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label18.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 126</value>
-  </data>
-  <data name="label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 0, 9, 0</value>
-  </data>
-  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 24</value>
-  </data>
-  <data name="label18.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="label18.Text" xml:space="preserve">
-    <value>To</value>
-  </data>
-  <data name="&gt;&gt;label18.Name" xml:space="preserve">
-    <value>label18</value>
-  </data>
-  <data name="&gt;&gt;label18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label18.Parent" xml:space="preserve">
-    <value>pnlOpsPeriod</value>
-  </data>
-  <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label15.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 90</value>
-  </data>
-  <data name="label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 0, 9, 0</value>
-  </data>
-  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 24</value>
-  </data>
-  <data name="label15.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label15.Text" xml:space="preserve">
-    <value>From</value>
-  </data>
-  <data name="&gt;&gt;label15.Name" xml:space="preserve">
-    <value>label15</value>
-  </data>
-  <data name="&gt;&gt;label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
-    <value>pnlOpsPeriod</value>
-  </data>
-  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="datOpsEnd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="datOpsEnd.CustomFormat" xml:space="preserve">
-    <value>yyyy-MMM-dd HH:mm</value>
-  </data>
-  <data name="datOpsEnd.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="datOpsEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 124</value>
-  </data>
-  <data name="datOpsEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 26</value>
-  </data>
-  <data name="datOpsEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;datOpsEnd.Name" xml:space="preserve">
-    <value>datOpsEnd</value>
-  </data>
-  <data name="&gt;&gt;datOpsEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;datOpsEnd.Parent" xml:space="preserve">
-    <value>pnlOpsPeriod</value>
-  </data>
-  <data name="&gt;&gt;datOpsEnd.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="datOpsStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="datOpsStart.CustomFormat" xml:space="preserve">
-    <value>yyyy-MMM-dd HH:mm</value>
-  </data>
-  <data name="datOpsStart.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="datOpsStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 88</value>
-  </data>
-  <data name="datOpsStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 26</value>
-  </data>
-  <data name="datOpsStart.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;datOpsStart.Name" xml:space="preserve">
-    <value>datOpsStart</value>
-  </data>
-  <data name="&gt;&gt;datOpsStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;datOpsStart.Parent" xml:space="preserve">
-    <value>pnlOpsPeriod</value>
-  </data>
-  <data name="&gt;&gt;datOpsStart.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -813,13 +302,13 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 12</value>
+    <value>5, 3</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 0, 9, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 66</value>
+    <value>345, 38</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -843,10 +332,10 @@
     <value>5</value>
   </data>
   <data name="pnlOpsPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>812, 36</value>
+    <value>827, 36</value>
   </data>
   <data name="pnlOpsPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 213</value>
+    <value>363, 142</value>
   </data>
   <data name="pnlOpsPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -861,7 +350,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlOpsPeriod.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="btnCloseOpPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -873,16 +362,16 @@
     <value>NoControl</value>
   </data>
   <data name="btnCloseOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>765, 538</value>
+    <value>788, 539</value>
   </data>
   <data name="btnCloseOpPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 64</value>
+    <value>195, 52</value>
   </data>
   <data name="btnCloseOpPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>92</value>
   </data>
   <data name="btnCloseOpPeriod.Text" xml:space="preserve">
-    <value>Review / Close Op Period</value>
+    <value>Review Op Period</value>
   </data>
   <data name="btnCloseOpPeriod.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -897,7 +386,139 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCloseOpPeriod.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label18.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label18.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>772, 640</value>
+  </data>
+  <data name="label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 0, 9, 0</value>
+  </data>
+  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 24</value>
+  </data>
+  <data name="label18.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="label18.Text" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="&gt;&gt;label18.Name" xml:space="preserve">
+    <value>label18</value>
+  </data>
+  <data name="&gt;&gt;label18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label18.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label15.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>772, 604</value>
+  </data>
+  <data name="label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 0, 9, 0</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 24</value>
+  </data>
+  <data name="label15.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="datOpsEnd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="datOpsEnd.CustomFormat" xml:space="preserve">
+    <value>yyyy-MMM-dd HH:mm</value>
+  </data>
+  <data name="datOpsEnd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="datOpsEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>827, 638</value>
+  </data>
+  <data name="datOpsEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 26</value>
+  </data>
+  <data name="datOpsEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;datOpsEnd.Name" xml:space="preserve">
+    <value>datOpsEnd</value>
+  </data>
+  <data name="&gt;&gt;datOpsEnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;datOpsEnd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;datOpsEnd.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="datOpsStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="datOpsStart.CustomFormat" xml:space="preserve">
+    <value>yyyy-MMM-dd HH:mm</value>
+  </data>
+  <data name="datOpsStart.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="datOpsStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>827, 602</value>
+  </data>
+  <data name="datOpsStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 26</value>
+  </data>
+  <data name="datOpsStart.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;datOpsStart.Name" xml:space="preserve">
+    <value>datOpsStart</value>
+  </data>
+  <data name="&gt;&gt;datOpsStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;datOpsStart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;datOpsStart.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="numOpPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -906,7 +527,7 @@
     <value>Microsoft Sans Serif, 28pt</value>
   </data>
   <data name="numOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>925, 540</value>
+    <value>995, 540</value>
   </data>
   <data name="numOpPeriod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 8, 9, 8</value>
@@ -930,7 +551,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;numOpPeriod.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="pnlTaskInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -958,7 +579,7 @@
     <value>Zoom</value>
   </data>
   <data name="btnLockTaskInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>534, 3</value>
+    <value>559, 2</value>
   </data>
   <data name="btnLockTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 38</value>
@@ -985,7 +606,7 @@
     <value>171, 45</value>
   </data>
   <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 29</value>
+    <value>413, 29</value>
   </data>
   <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1009,7 +630,7 @@
     <value>16, 130</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>533, 2</value>
+    <value>575, 2</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
@@ -1042,6 +663,9 @@
         JAsQnKGbXQ96u78jihV7INZ8ljdHbQ4rbokVt8SKW2LF7RhevgC1RjrNw86T4QAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnOutstandingLogItems.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="btnOutstandingLogItems.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1049,7 +673,7 @@
     <value>377, 185</value>
   </data>
   <data name="btnOutstandingLogItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 37</value>
+    <value>159, 37</value>
   </data>
   <data name="btnOutstandingLogItems.TabIndex" type="System.Int32, mscorlib">
     <value>91</value>
@@ -1198,7 +822,7 @@
     <value>171, 88</value>
   </data>
   <data name="txtTaskNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 29</value>
+    <value>413, 29</value>
   </data>
   <data name="txtTaskNumber.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1285,7 +909,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnICSRoleHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 144</value>
+    <value>447, 144</value>
   </data>
   <data name="btnICSRoleHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 37</value>
@@ -1318,7 +942,7 @@
     <value>170, 147</value>
   </data>
   <data name="cboICSRole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 32</value>
+    <value>271, 32</value>
   </data>
   <data name="cboICSRole.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1378,7 +1002,7 @@
     <value>7, 8</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 32</value>
+    <value>276, 32</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1477,7 +1101,7 @@
     <value>217, 36</value>
   </data>
   <data name="pnlTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>589, 237</value>
+    <value>604, 237</value>
   </data>
   <data name="pnlTaskInfo.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -1492,7 +1116,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlTaskInfo.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="lblServerStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1504,7 +1128,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblServerStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>442, 620</value>
+    <value>512, 691</value>
   </data>
   <data name="lblServerStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>668, 20</value>
@@ -1528,7 +1152,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblServerStatus.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>13</value>
   </data>
   <data name="lblVersionNumber.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1540,7 +1164,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVersionNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 620</value>
+    <value>8, 691</value>
   </data>
   <data name="lblVersionNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>369, 20</value>
@@ -1564,127 +1188,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVersionNumber.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="tcStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="tpMembersOnTask.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tpMembersOnTask.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 44</value>
-  </data>
-  <data name="tpMembersOnTask.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tpMembersOnTask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1112, 0</value>
-  </data>
-  <data name="tpMembersOnTask.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="tpMembersOnTask.Text" xml:space="preserve">
-    <value>Members</value>
-  </data>
-  <data name="&gt;&gt;tpMembersOnTask.Name" xml:space="preserve">
-    <value>tpMembersOnTask</value>
-  </data>
-  <data name="&gt;&gt;tpMembersOnTask.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tpMembersOnTask.Parent" xml:space="preserve">
-    <value>tcStatus</value>
-  </data>
-  <data name="&gt;&gt;tpMembersOnTask.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tpEquipment.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="tpEquipment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 44</value>
-  </data>
-  <data name="tpEquipment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 0</value>
-  </data>
-  <data name="tpEquipment.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="tpEquipment.Text" xml:space="preserve">
-    <value>Equipment</value>
-  </data>
-  <data name="&gt;&gt;tpEquipment.Name" xml:space="preserve">
-    <value>tpEquipment</value>
-  </data>
-  <data name="&gt;&gt;tpEquipment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tpEquipment.Parent" xml:space="preserve">
-    <value>tcStatus</value>
-  </data>
-  <data name="&gt;&gt;tpEquipment.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txtNetworkLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="txtNetworkLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="txtNetworkLog.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="txtNetworkLog.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="txtNetworkLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1080, 284</value>
-  </data>
-  <data name="txtNetworkLog.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtNetworkLog.Name" xml:space="preserve">
-    <value>txtNetworkLog</value>
-  </data>
-  <data name="&gt;&gt;txtNetworkLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtNetworkLog.Parent" xml:space="preserve">
-    <value>tpNetworkLog</value>
-  </data>
-  <data name="&gt;&gt;txtNetworkLog.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tpNetworkLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 44</value>
-  </data>
-  <data name="tpNetworkLog.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tpNetworkLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1085, 0</value>
-  </data>
-  <data name="tpNetworkLog.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tpNetworkLog.Text" xml:space="preserve">
-    <value>Sync Log</value>
-  </data>
-  <data name="&gt;&gt;tpNetworkLog.Name" xml:space="preserve">
-    <value>tpNetworkLog</value>
-  </data>
-  <data name="&gt;&gt;tpNetworkLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tpNetworkLog.Parent" xml:space="preserve">
-    <value>tcStatus</value>
-  </data>
-  <data name="&gt;&gt;tpNetworkLog.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tcStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 16pt</value>
+    <value>14</value>
   </data>
   <metadata name="imglTabIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
@@ -1694,7 +1198,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAYgBBQGIAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAcABBQHAAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -1730,33 +1234,6 @@
         AYcCAAGAAQAC/wHgAYcCAAGIARABwAF/AeABhwIAAYgBEQHAAXcC/wIAAYgBAQHgAfcB/AE/AgAB4AEB
         Ae4BhwH8AT8CAAH4AQEB7gH/AfwBPwIAAf8BxwHgA/8CAAb/AgAG/wIACw==
 </value>
-  </data>
-  <data name="tcStatus.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>148, 40</value>
-  </data>
-  <data name="tcStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 578</value>
-  </data>
-  <data name="tcStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1120, 39</value>
-  </data>
-  <data name="tcStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="tcStatus.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;tcStatus.Name" xml:space="preserve">
-    <value>tcStatus</value>
-  </data>
-  <data name="&gt;&gt;tcStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tcStatus.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tcStatus.ZOrder" xml:space="preserve">
-    <value>11</value>
   </data>
   <data name="pnlInternetSyncStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1894,7 +1371,7 @@
     <value>3</value>
   </data>
   <data name="pnlInternetSyncStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>465, 601</value>
+    <value>465, 672</value>
   </data>
   <data name="pnlInternetSyncStart.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 27</value>
@@ -1915,7 +1392,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2086,7 +1563,7 @@
     <value>4</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 601</value>
+    <value>376, 672</value>
   </data>
   <data name="pnlNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 29</value>
@@ -2107,7 +1584,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -2551,7 +2028,7 @@
     <value>0, 0</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1120, 33</value>
+    <value>1190, 33</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -2569,7 +2046,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="picOrgLogo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2596,7 +2073,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;picOrgLogo.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <metadata name="svdTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1738, 17</value>
@@ -3657,7 +3134,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cpIncidentActionPlan.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <metadata name="tmrLock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>874, 56</value>
@@ -3669,7 +3146,7 @@
     <value>11, 24</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1120, 649</value>
+    <value>1190, 720</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -3962,76 +3439,10 @@
 </value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1109, 688</value>
+    <value>1120, 688</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Canadian Incident Action Plan Producer - Incident Details</value>
-  </data>
-  <data name="&gt;&gt;colMemberName.Name" xml:space="preserve">
-    <value>colMemberName</value>
-  </data>
-  <data name="&gt;&gt;colMemberName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colMemberSARGroup.Name" xml:space="preserve">
-    <value>colMemberSARGroup</value>
-  </data>
-  <data name="&gt;&gt;colMemberSARGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colSignInTime.Name" xml:space="preserve">
-    <value>colSignInTime</value>
-  </data>
-  <data name="&gt;&gt;colSignInTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colAssignmentNumber.Name" xml:space="preserve">
-    <value>colAssignmentNumber</value>
-  </data>
-  <data name="&gt;&gt;colAssignmentNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colMemberAssignmentStatus.Name" xml:space="preserve">
-    <value>colMemberAssignmentStatus</value>
-  </data>
-  <data name="&gt;&gt;colMemberAssignmentStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colCategory.Name" xml:space="preserve">
-    <value>colCategory</value>
-  </data>
-  <data name="&gt;&gt;colCategory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colSubCategory.Name" xml:space="preserve">
-    <value>colSubCategory</value>
-  </data>
-  <data name="&gt;&gt;colSubCategory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colName.Name" xml:space="preserve">
-    <value>colName</value>
-  </data>
-  <data name="&gt;&gt;colName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colReferenceID.Name" xml:space="preserve">
-    <value>colReferenceID</value>
-  </data>
-  <data name="&gt;&gt;colReferenceID.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colEquipmentStatus.Name" xml:space="preserve">
-    <value>colEquipmentStatus</value>
-  </data>
-  <data name="&gt;&gt;colEquipmentStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colAssignee.Name" xml:space="preserve">
-    <value>colAssignee</value>
-  </data>
-  <data name="&gt;&gt;colAssignee.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imglTabIcons.Name" xml:space="preserve">
     <value>imglTabIcons</value>

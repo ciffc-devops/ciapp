@@ -14,6 +14,28 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class IncidentTools
     {
+
+        public static OperationalPeriod GetCurrentOpPeriod(this Incident incident, DateTime currentTime)
+        {
+            return incident.ActiveOperationalPeriods.FirstOrDefault(o=>o.PeriodStart.Date <= currentTime.Date && o.PeriodEnd.Date >= currentTime.Date);
+        }
+
+        //validate operational period details
+        public static Tuple<bool, bool, bool> GetDoesThisOperationalPeriodOverlap(this Incident incident, OperationalPeriod operationalPeriod)
+        {
+            
+            //does the start point of the new op fall between the start and end points of another OP?
+            bool overlapStart = incident.ActiveOperationalPeriods.Any(o => o.PeriodStart < operationalPeriod.PeriodStart && o.PeriodEnd > operationalPeriod.PeriodStart);
+
+            bool overlapEnd = incident.ActiveOperationalPeriods.Any(o => o.PeriodStart < operationalPeriod.PeriodEnd && o.PeriodEnd > operationalPeriod.PeriodEnd);
+            bool within = incident.ActiveOperationalPeriods.Any(o => o.PeriodStart > operationalPeriod.PeriodStart && o.PeriodEnd < operationalPeriod.PeriodEnd);
+
+            Tuple<bool, bool, bool> results = new Tuple<bool, bool, bool>(overlapStart, overlapEnd, within);
+            return results;
+        }
+
+
+
         public static TaskUpdate GetLastUpdateByItemID(this Incident task, Guid ItemID)
         {
             if (task.allTaskUpdates.Any(o => o.ItemID == ItemID))

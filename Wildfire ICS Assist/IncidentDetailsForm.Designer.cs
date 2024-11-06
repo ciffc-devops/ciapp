@@ -30,36 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
-            this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemberSARGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSignInTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemberAssignmentStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAddAMember = new System.Windows.Forms.Button();
-            this.btnBulkSignIn = new System.Windows.Forms.Button();
-            this.btnMembersOnTaskNewWindow = new System.Windows.Forms.Button();
-            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.dgvTaskEquipment = new System.Windows.Forms.DataGridView();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReferenceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEquipmentStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAssignEquipment = new System.Windows.Forms.Button();
-            this.btnViewEquipment = new System.Windows.Forms.Button();
-            this.btnReturnEquipment = new System.Windows.Forms.Button();
             this.pnlOpsPeriod = new System.Windows.Forms.Panel();
+            this.btnReviewOpPeriod = new System.Windows.Forms.Button();
+            this.btnEditOpPeriod = new System.Windows.Forms.Button();
+            this.btnNewOpPeriod = new System.Windows.Forms.Button();
             this.cboCurrentOperationalPeriod = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCloseOpPeriod = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.datOpsEnd = new System.Windows.Forms.DateTimePicker();
             this.datOpsStart = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnCloseOpPeriod = new System.Windows.Forms.Button();
             this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
             this.btnLockTaskInfo = new System.Windows.Forms.Button();
@@ -78,11 +59,6 @@
             this.lblTaskNumber = new System.Windows.Forms.Label();
             this.lblServerStatus = new System.Windows.Forms.Label();
             this.lblVersionNumber = new System.Windows.Forms.Label();
-            this.tcStatus = new System.Windows.Forms.TabControl();
-            this.tpMembersOnTask = new System.Windows.Forms.TabPage();
-            this.tpEquipment = new System.Windows.Forms.TabPage();
-            this.tpNetworkLog = new System.Windows.Forms.TabPage();
-            this.txtNetworkLog = new System.Windows.Forms.TextBox();
             this.imglTabIcons = new System.Windows.Forms.ImageList(this.components);
             this.pnlInternetSyncStart = new System.Windows.Forms.Panel();
             this.btnCancelInternetSync = new System.Windows.Forms.Button();
@@ -193,23 +169,10 @@
             this.btnPrintOrgChart = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
             this.tmrLock = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel1.SuspendLayout();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMembersOnTask)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
-            this.splitContainer5.Panel1.SuspendLayout();
-            this.splitContainer5.Panel2.SuspendLayout();
-            this.splitContainer5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTaskEquipment)).BeginInit();
+            this.btnMoveToOpNow = new System.Windows.Forms.Button();
             this.pnlOpsPeriod.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).BeginInit();
             this.pnlTaskInfo.SuspendLayout();
-            this.tcStatus.SuspendLayout();
-            this.tpMembersOnTask.SuspendLayout();
-            this.tpEquipment.SuspendLayout();
-            this.tpNetworkLog.SuspendLayout();
             this.pnlInternetSyncStart.SuspendLayout();
             this.pnlNetworkSyncInProgress.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -218,221 +181,64 @@
             this.cpIncidentActionPlan.SuspendLayout();
             this.SuspendLayout();
             // 
-            // splitContainer4
-            // 
-            resources.ApplyResources(this.splitContainer4, "splitContainer4");
-            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer4.Name = "splitContainer4";
-            // 
-            // splitContainer4.Panel1
-            // 
-            this.splitContainer4.Panel1.Controls.Add(this.dgvMembersOnTask);
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.btnAddAMember);
-            this.splitContainer4.Panel2.Controls.Add(this.btnBulkSignIn);
-            this.splitContainer4.Panel2.Controls.Add(this.btnMembersOnTaskNewWindow);
-            // 
-            // dgvMembersOnTask
-            // 
-            this.dgvMembersOnTask.AllowUserToAddRows = false;
-            this.dgvMembersOnTask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMembersOnTask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colMemberName,
-            this.colMemberSARGroup,
-            this.colSignInTime,
-            this.colAssignmentNumber,
-            this.colMemberAssignmentStatus});
-            resources.ApplyResources(this.dgvMembersOnTask, "dgvMembersOnTask");
-            this.dgvMembersOnTask.MultiSelect = false;
-            this.dgvMembersOnTask.Name = "dgvMembersOnTask";
-            this.dgvMembersOnTask.ReadOnly = true;
-            this.dgvMembersOnTask.RowHeadersVisible = false;
-            this.dgvMembersOnTask.RowTemplate.Height = 30;
-            this.dgvMembersOnTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // colMemberName
-            // 
-            this.colMemberName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemberName.DataPropertyName = "MemberName";
-            resources.ApplyResources(this.colMemberName, "colMemberName");
-            this.colMemberName.Name = "colMemberName";
-            this.colMemberName.ReadOnly = true;
-            // 
-            // colMemberSARGroup
-            // 
-            this.colMemberSARGroup.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colMemberSARGroup.DataPropertyName = "OrganizationName";
-            resources.ApplyResources(this.colMemberSARGroup, "colMemberSARGroup");
-            this.colMemberSARGroup.Name = "colMemberSARGroup";
-            this.colMemberSARGroup.ReadOnly = true;
-            // 
-            // colSignInTime
-            // 
-            this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.colSignInTime, "colSignInTime");
-            this.colSignInTime.Name = "colSignInTime";
-            this.colSignInTime.ReadOnly = true;
-            // 
-            // colAssignmentNumber
-            // 
-            this.colAssignmentNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colAssignmentNumber.DataPropertyName = "getCurrentActivityName";
-            resources.ApplyResources(this.colAssignmentNumber, "colAssignmentNumber");
-            this.colAssignmentNumber.Name = "colAssignmentNumber";
-            this.colAssignmentNumber.ReadOnly = true;
-            // 
-            // colMemberAssignmentStatus
-            // 
-            this.colMemberAssignmentStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colMemberAssignmentStatus.DataPropertyName = "AssignmentStatus";
-            resources.ApplyResources(this.colMemberAssignmentStatus, "colMemberAssignmentStatus");
-            this.colMemberAssignmentStatus.Name = "colMemberAssignmentStatus";
-            this.colMemberAssignmentStatus.ReadOnly = true;
-            // 
-            // btnAddAMember
-            // 
-            resources.ApplyResources(this.btnAddAMember, "btnAddAMember");
-            this.btnAddAMember.Name = "btnAddAMember";
-            this.btnAddAMember.UseVisualStyleBackColor = true;
-            // 
-            // btnBulkSignIn
-            // 
-            resources.ApplyResources(this.btnBulkSignIn, "btnBulkSignIn");
-            this.btnBulkSignIn.Name = "btnBulkSignIn";
-            this.btnBulkSignIn.UseVisualStyleBackColor = true;
-            // 
-            // btnMembersOnTaskNewWindow
-            // 
-            resources.ApplyResources(this.btnMembersOnTaskNewWindow, "btnMembersOnTaskNewWindow");
-            this.btnMembersOnTaskNewWindow.Name = "btnMembersOnTaskNewWindow";
-            this.btnMembersOnTaskNewWindow.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer5
-            // 
-            resources.ApplyResources(this.splitContainer5, "splitContainer5");
-            this.splitContainer5.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer5.Name = "splitContainer5";
-            // 
-            // splitContainer5.Panel1
-            // 
-            this.splitContainer5.Panel1.Controls.Add(this.dgvTaskEquipment);
-            // 
-            // splitContainer5.Panel2
-            // 
-            this.splitContainer5.Panel2.Controls.Add(this.btnAssignEquipment);
-            this.splitContainer5.Panel2.Controls.Add(this.btnViewEquipment);
-            this.splitContainer5.Panel2.Controls.Add(this.btnReturnEquipment);
-            // 
-            // dgvTaskEquipment
-            // 
-            this.dgvTaskEquipment.AllowUserToAddRows = false;
-            this.dgvTaskEquipment.AllowUserToDeleteRows = false;
-            this.dgvTaskEquipment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTaskEquipment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCategory,
-            this.colSubCategory,
-            this.colName,
-            this.colReferenceID,
-            this.colEquipmentStatus,
-            this.colAssignee});
-            resources.ApplyResources(this.dgvTaskEquipment, "dgvTaskEquipment");
-            this.dgvTaskEquipment.Name = "dgvTaskEquipment";
-            this.dgvTaskEquipment.ReadOnly = true;
-            this.dgvTaskEquipment.RowHeadersVisible = false;
-            this.dgvTaskEquipment.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTaskEquipment.RowTemplate.Height = 30;
-            this.dgvTaskEquipment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCategory.DataPropertyName = "ParentCategoryName";
-            resources.ApplyResources(this.colCategory, "colCategory");
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colSubCategory
-            // 
-            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSubCategory.DataPropertyName = "CategoryName";
-            resources.ApplyResources(this.colSubCategory, "colSubCategory");
-            this.colSubCategory.Name = "colSubCategory";
-            this.colSubCategory.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.DataPropertyName = "EquipmentName";
-            resources.ApplyResources(this.colName, "colName");
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colReferenceID
-            // 
-            this.colReferenceID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colReferenceID.DataPropertyName = "ReferenceID";
-            resources.ApplyResources(this.colReferenceID, "colReferenceID");
-            this.colReferenceID.Name = "colReferenceID";
-            this.colReferenceID.ReadOnly = true;
-            // 
-            // colEquipmentStatus
-            // 
-            this.colEquipmentStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colEquipmentStatus.DataPropertyName = "StatusName";
-            resources.ApplyResources(this.colEquipmentStatus, "colEquipmentStatus");
-            this.colEquipmentStatus.Name = "colEquipmentStatus";
-            this.colEquipmentStatus.ReadOnly = true;
-            // 
-            // colAssignee
-            // 
-            this.colAssignee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAssignee.DataPropertyName = "AssigneeName";
-            resources.ApplyResources(this.colAssignee, "colAssignee");
-            this.colAssignee.Name = "colAssignee";
-            this.colAssignee.ReadOnly = true;
-            // 
-            // btnAssignEquipment
-            // 
-            resources.ApplyResources(this.btnAssignEquipment, "btnAssignEquipment");
-            this.btnAssignEquipment.Name = "btnAssignEquipment";
-            this.btnAssignEquipment.UseVisualStyleBackColor = true;
-            // 
-            // btnViewEquipment
-            // 
-            resources.ApplyResources(this.btnViewEquipment, "btnViewEquipment");
-            this.btnViewEquipment.Name = "btnViewEquipment";
-            this.btnViewEquipment.UseVisualStyleBackColor = true;
-            // 
-            // btnReturnEquipment
-            // 
-            resources.ApplyResources(this.btnReturnEquipment, "btnReturnEquipment");
-            this.btnReturnEquipment.Name = "btnReturnEquipment";
-            this.btnReturnEquipment.UseVisualStyleBackColor = true;
-            // 
             // pnlOpsPeriod
             // 
             resources.ApplyResources(this.pnlOpsPeriod, "pnlOpsPeriod");
             this.pnlOpsPeriod.BackColor = System.Drawing.Color.White;
             this.pnlOpsPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOpsPeriod.Controls.Add(this.btnMoveToOpNow);
+            this.pnlOpsPeriod.Controls.Add(this.btnReviewOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.btnEditOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.btnNewOpPeriod);
             this.pnlOpsPeriod.Controls.Add(this.cboCurrentOperationalPeriod);
-            this.pnlOpsPeriod.Controls.Add(this.label18);
-            this.pnlOpsPeriod.Controls.Add(this.label15);
-            this.pnlOpsPeriod.Controls.Add(this.datOpsEnd);
-            this.pnlOpsPeriod.Controls.Add(this.datOpsStart);
             this.pnlOpsPeriod.Controls.Add(this.label1);
             this.pnlOpsPeriod.Name = "pnlOpsPeriod";
+            // 
+            // btnReviewOpPeriod
+            // 
+            resources.ApplyResources(this.btnReviewOpPeriod, "btnReviewOpPeriod");
+            this.btnReviewOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_41_stats;
+            this.btnReviewOpPeriod.Name = "btnReviewOpPeriod";
+            this.btnReviewOpPeriod.TabStop = false;
+            this.btnReviewOpPeriod.UseVisualStyleBackColor = true;
+            // 
+            // btnEditOpPeriod
+            // 
+            resources.ApplyResources(this.btnEditOpPeriod, "btnEditOpPeriod");
+            this.btnEditOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEditOpPeriod.Name = "btnEditOpPeriod";
+            this.btnEditOpPeriod.TabStop = false;
+            this.btnEditOpPeriod.UseVisualStyleBackColor = true;
+            this.btnEditOpPeriod.Click += new System.EventHandler(this.btnEditOpPeriod_Click);
+            // 
+            // btnNewOpPeriod
+            // 
+            resources.ApplyResources(this.btnNewOpPeriod, "btnNewOpPeriod");
+            this.btnNewOpPeriod.Name = "btnNewOpPeriod";
+            this.btnNewOpPeriod.TabStop = false;
+            this.btnNewOpPeriod.UseVisualStyleBackColor = true;
+            this.btnNewOpPeriod.Click += new System.EventHandler(this.btnNewOpPeriod_Click);
             // 
             // cboCurrentOperationalPeriod
             // 
             resources.ApplyResources(this.cboCurrentOperationalPeriod, "cboCurrentOperationalPeriod");
+            this.cboCurrentOperationalPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCurrentOperationalPeriod.FormattingEnabled = true;
             this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
+            this.cboCurrentOperationalPeriod.SelectedIndexChanged += new System.EventHandler(this.cboCurrentOperationalPeriod_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // btnCloseOpPeriod
+            // 
+            resources.ApplyResources(this.btnCloseOpPeriod, "btnCloseOpPeriod");
+            this.btnCloseOpPeriod.Name = "btnCloseOpPeriod";
+            this.btnCloseOpPeriod.TabStop = false;
+            this.btnCloseOpPeriod.UseVisualStyleBackColor = true;
+            this.btnCloseOpPeriod.Click += new System.EventHandler(this.btnCloseOpPeriod_Click);
             // 
             // label18
             // 
@@ -457,19 +263,6 @@
             this.datOpsStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datOpsStart.Name = "datOpsStart";
             this.datOpsStart.Leave += new System.EventHandler(this.datOpsStart_Leave);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // btnCloseOpPeriod
-            // 
-            resources.ApplyResources(this.btnCloseOpPeriod, "btnCloseOpPeriod");
-            this.btnCloseOpPeriod.Name = "btnCloseOpPeriod";
-            this.btnCloseOpPeriod.TabStop = false;
-            this.btnCloseOpPeriod.UseVisualStyleBackColor = true;
-            this.btnCloseOpPeriod.Click += new System.EventHandler(this.btnCloseOpPeriod_Click);
             // 
             // numOpPeriod
             // 
@@ -621,44 +414,6 @@
             resources.ApplyResources(this.lblVersionNumber, "lblVersionNumber");
             this.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblVersionNumber.Name = "lblVersionNumber";
-            // 
-            // tcStatus
-            // 
-            resources.ApplyResources(this.tcStatus, "tcStatus");
-            this.tcStatus.Controls.Add(this.tpMembersOnTask);
-            this.tcStatus.Controls.Add(this.tpEquipment);
-            this.tcStatus.Controls.Add(this.tpNetworkLog);
-            this.tcStatus.ImageList = this.imglTabIcons;
-            this.tcStatus.Multiline = true;
-            this.tcStatus.Name = "tcStatus";
-            this.tcStatus.SelectedIndex = 0;
-            // 
-            // tpMembersOnTask
-            // 
-            resources.ApplyResources(this.tpMembersOnTask, "tpMembersOnTask");
-            this.tpMembersOnTask.Controls.Add(this.splitContainer4);
-            this.tpMembersOnTask.Name = "tpMembersOnTask";
-            this.tpMembersOnTask.UseVisualStyleBackColor = true;
-            // 
-            // tpEquipment
-            // 
-            this.tpEquipment.Controls.Add(this.splitContainer5);
-            resources.ApplyResources(this.tpEquipment, "tpEquipment");
-            this.tpEquipment.Name = "tpEquipment";
-            this.tpEquipment.UseVisualStyleBackColor = true;
-            // 
-            // tpNetworkLog
-            // 
-            this.tpNetworkLog.Controls.Add(this.txtNetworkLog);
-            resources.ApplyResources(this.tpNetworkLog, "tpNetworkLog");
-            this.tpNetworkLog.Name = "tpNetworkLog";
-            this.tpNetworkLog.UseVisualStyleBackColor = true;
-            // 
-            // txtNetworkLog
-            // 
-            resources.ApplyResources(this.txtNetworkLog, "txtNetworkLog");
-            this.txtNetworkLog.Name = "txtNetworkLog";
-            this.txtNetworkLog.ReadOnly = true;
             // 
             // imglTabIcons
             // 
@@ -1289,6 +1044,7 @@
             this.cpOtherTools.Controls.Add(this.btnAdditionalContacts);
             this.cpOtherTools.Controls.Add(this.btnNotes);
             this.cpOtherTools.Controls.Add(this.btnShowResources);
+            this.cpOtherTools.EnableExpandCollapse = false;
             this.cpOtherTools.ExpandsRight = true;
             this.cpOtherTools.ExpandsUpward = false;
             resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
@@ -1357,6 +1113,7 @@
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
             this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
             this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
+            this.cpIncidentActionPlan.EnableExpandCollapse = false;
             this.cpIncidentActionPlan.ExpandsRight = true;
             this.cpIncidentActionPlan.ExpandsUpward = false;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
@@ -1421,6 +1178,7 @@
             this.btnPrintIAP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
             this.btnPrintIAP.Name = "btnPrintIAP";
+            this.btnPrintIAP.Tag = "ViewPDF";
             this.btnPrintIAP.UseVisualStyleBackColor = true;
             this.btnPrintIAP.Click += new System.EventHandler(this.btnPrintIAP_Click);
             // 
@@ -1445,15 +1203,27 @@
             this.tmrLock.Interval = 30000;
             this.tmrLock.Tick += new System.EventHandler(this.tmrLock_Tick);
             // 
+            // btnMoveToOpNow
+            // 
+            resources.ApplyResources(this.btnMoveToOpNow, "btnMoveToOpNow");
+            this.btnMoveToOpNow.Name = "btnMoveToOpNow";
+            this.btnMoveToOpNow.TabStop = false;
+            this.btnMoveToOpNow.UseVisualStyleBackColor = true;
+            this.btnMoveToOpNow.Click += new System.EventHandler(this.btnMoveToOpNow_Click);
+            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.Controls.Add(this.cpOtherTools);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.btnCloseOpPeriod);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.cpIncidentActionPlan);
+            this.Controls.Add(this.datOpsEnd);
             this.Controls.Add(this.picOrgLogo);
+            this.Controls.Add(this.datOpsStart);
             this.Controls.Add(this.pnlInternetSyncStart);
             this.Controls.Add(this.pnlNetworkSyncInProgress);
             this.Controls.Add(this.numOpPeriod);
@@ -1461,33 +1231,16 @@
             this.Controls.Add(this.pnlTaskInfo);
             this.Controls.Add(this.lblServerStatus);
             this.Controls.Add(this.lblVersionNumber);
-            this.Controls.Add(this.tcStatus);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IncidentDetailsForm_FormClosed);
             this.Load += new System.EventHandler(this.IncidentDetailsForm_Load);
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMembersOnTask)).EndInit();
-            this.splitContainer5.Panel1.ResumeLayout(false);
-            this.splitContainer5.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
-            this.splitContainer5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTaskEquipment)).EndInit();
             this.pnlOpsPeriod.ResumeLayout(false);
-            this.pnlOpsPeriod.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).EndInit();
             this.pnlTaskInfo.ResumeLayout(false);
             this.pnlTaskInfo.PerformLayout();
-            this.tcStatus.ResumeLayout(false);
-            this.tpMembersOnTask.ResumeLayout(false);
-            this.tpEquipment.ResumeLayout(false);
-            this.tpNetworkLog.ResumeLayout(false);
-            this.tpNetworkLog.PerformLayout();
             this.pnlInternetSyncStart.ResumeLayout(false);
             this.pnlNetworkSyncInProgress.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -1524,32 +1277,6 @@
         private System.Windows.Forms.Label lblTaskNumber;
         private System.Windows.Forms.Label lblServerStatus;
         private System.Windows.Forms.Label lblVersionNumber;
-        private System.Windows.Forms.TabControl tcStatus;
-        private System.Windows.Forms.TabPage tpMembersOnTask;
-        private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.DataGridView dgvMembersOnTask;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemberName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemberSARGroup;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSignInTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignmentNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemberAssignmentStatus;
-        private System.Windows.Forms.Button btnAddAMember;
-        private System.Windows.Forms.Button btnBulkSignIn;
-        private System.Windows.Forms.Button btnMembersOnTaskNewWindow;
-        private System.Windows.Forms.TabPage tpEquipment;
-        private System.Windows.Forms.SplitContainer splitContainer5;
-        private System.Windows.Forms.DataGridView dgvTaskEquipment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReferenceID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEquipmentStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignee;
-        private System.Windows.Forms.Button btnAssignEquipment;
-        private System.Windows.Forms.Button btnViewEquipment;
-        private System.Windows.Forms.Button btnReturnEquipment;
-        private System.Windows.Forms.TabPage tpNetworkLog;
-        private System.Windows.Forms.TextBox txtNetworkLog;
         private System.Windows.Forms.Panel pnlInternetSyncStart;
         private System.Windows.Forms.Button btnCancelInternetSync;
         private System.Windows.Forms.Label label22;
@@ -1664,6 +1391,10 @@
         private System.Windows.Forms.ComboBox cboCurrentOperationalPeriod;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem restoreDeletedItemsToolStripMenuItem;
+        private System.Windows.Forms.Button btnReviewOpPeriod;
+        private System.Windows.Forms.Button btnEditOpPeriod;
+        private System.Windows.Forms.Button btnNewOpPeriod;
+        private System.Windows.Forms.Button btnMoveToOpNow;
     }
 }
 

@@ -57,6 +57,17 @@ namespace WF_ICS_ClassLibrary.Models
         public string CriticalMessage { get => _CriticalMessage; set => _CriticalMessage = value; }
         public string OperationalPeriodName { get => _OperationalPeriodName; set => _OperationalPeriodName = value; }
 
+        public string DisplayName
+        {
+            get
+            {
+                
+                    return $"#{PeriodNumber}) {PeriodStart.ToString("MMM dd HH:mm")} - {PeriodEnd.ToString("MMM dd HH:mm")}";
+
+                
+            }
+        }
+
         public OperationalPeriod()
         {
             OperationalPeriodID = Guid.NewGuid();

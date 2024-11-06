@@ -1358,6 +1358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-41-stats.png" />
     <None Include="Resources\glyphicons-basic-888-redo.png" />
     <None Include="Resources\ProvincesAndTerritoriesEN.txt" />
     <None Include="Resources\glyphicons-filetypes-52-folder-video.png" />

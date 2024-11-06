@@ -32,6 +32,7 @@ using Wildfire_ICS_Assist.Properties;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Wildfire_ICS_Assist.IncidentStatusSummaryForms;
 using Wildfire_ICS_Assist.Classes;
+using Wildfire_ICS_Assist.OperationalPeriodForms;
 
 
 namespace Wildfire_ICS_Assist
@@ -677,7 +678,7 @@ namespace Wildfire_ICS_Assist
             //cboICSRole.Items.Clear();
             CurrentIncident.createOrgChartAsNeeded(CurrentOpPeriod);
             buildICSRoleDropdown();
-
+            BuildOpPeriodComboBox();
             /*
             if (!string.IsNullOrEmpty(CurrentIncident.ICPCallSign)) { txtICPCallsign.Text = CurrentIncident.ICPCallSign; }
             else { txtICPCallsign.Text = "BASE"; CurrentIncident.ICPCallSign = txtICPCallsign.Text; }*/
@@ -839,13 +840,28 @@ namespace Wildfire_ICS_Assist
 
         }
 
+
+        private void BuildOpPeriodComboBox()
+        {
+            cboCurrentOperationalPeriod.DisplayMember = "DisplayName";
+            cboCurrentOperationalPeriod.ValueMember = "PeriodNumber";
+
+            List<OperationalPeriod> periods = Program.CurrentIncident.AllOperationalPeriods.Where(o=>o.Active).OrderBy(o=>o.PeriodStart).ToList();
+            cboCurrentOperationalPeriod.DataSource = periods;
+            cboCurrentOperationalPeriod.DropDownWidth = cboCurrentOperationalPeriod.GetDropDownWidth();
+        }
+
         private void Program_OperationalPeriodChanged(OperationalPeriodEventArgs e)
         {
+            /*
             if (e.item.PeriodNumber == Program.CurrentOpPeriod)
             {
                 datOpsStart.Value = e.item.PeriodStart;
                 datOpsEnd.Value = e.item.PeriodEnd;
-            }
+            }*/
+            int currentPeriod = Program.CurrentOpPeriod;
+            BuildOpPeriodComboBox();
+            cboCurrentOperationalPeriod.SelectedValue = currentPeriod;
             TriggerAutoSave();
         }
 
@@ -2419,7 +2435,7 @@ namespace Wildfire_ICS_Assist
         {
             this.BeginInvoke((Action)delegate ()
             {
-                txtNetworkLog.AppendText(item);
+                //txtNetworkLog.AppendText(item);
             });
         }
 
@@ -3081,7 +3097,7 @@ namespace Wildfire_ICS_Assist
                 IncidentOpPeriodChangedEventArgs args = new IncidentOpPeriodChangedEventArgs();
                 args.NewOpPeriod = newOpNumber;
 
-
+                
                 if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == newOpNumber))
                 {
                     OperationalPeriod per = Program.CurrentIncident.createOpPeriodAsNeeded(newOpNumber);
@@ -3092,7 +3108,6 @@ namespace Wildfire_ICS_Assist
                     Program.CurrentIncident.createObjectivesSheetAsNeeded(newOpNumber);
 
                 }
-                Program.CurrentOpPeriod = newOpNumber;
                 Program.incidentDataService.OnOpPeriodChanged(args);
 
             }
@@ -3289,6 +3304,83 @@ namespace Wildfire_ICS_Assist
         {
             DeletedItemsForm form = new DeletedItemsForm();
             form.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Program.FormBackground = Program.DarkBlueColor;
+        }
+
+        private void cboCurrentOperationalPeriod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int newOpNumber = Convert.ToInt32(cboCurrentOperationalPeriod.SelectedValue);
+            if (newOpNumber != Program.CurrentOpPeriod)
+            {
+                IncidentOpPeriodChangedEventArgs args = new IncidentOpPeriodChangedEventArgs();
+                args.NewOpPeriod = newOpNumber;
+
+                /*
+                if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == newOpNumber))
+                {
+                    OperationalPeriod per = Program.CurrentIncident.createOpPeriodAsNeeded(newOpNumber);
+
+                    Program.incidentDataService.UpsertOperationalPeriod(per);
+
+                    Program.CurrentIncident.createOrgChartAsNeeded(newOpNumber);
+                    Program.CurrentIncident.createObjectivesSheetAsNeeded(newOpNumber);
+
+                }*/
+                Program.CurrentOpPeriod = newOpNumber;
+                Program.incidentDataService.OnOpPeriodChanged(args);
+
+            }
+        }
+
+        private void btnNewOpPeriod_Click(object sender, EventArgs e)
+        {
+            using (CreateOperationalPeriodForm createForm = new CreateOperationalPeriodForm())
+            {
+                OperationalPeriod opNext = new OperationalPeriod();
+                opNext.PeriodStart = Program.CurrentIncident.ActiveOperationalPeriods.Max(o => o.PeriodEnd);
+                opNext.PeriodEnd = opNext.PeriodStart.AddHours(12);
+                int lowestUnusedOpNumber = 0;
+                for (int x = 1; x < numOpPeriod.Maximum; x++)
+                {
+                    if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.Active && o.PeriodNumber == x))
+                    {
+                        lowestUnusedOpNumber = x; break;
+                    }
+                }
+                opNext.PeriodNumber = lowestUnusedOpNumber;
+                createForm.operationalPeriod = opNext;
+
+                if (createForm.ShowDialog() == DialogResult.OK)
+                {
+                    
+
+                    if (createForm.SwitchToNewOpNow)
+                    {
+                        cboCurrentOperationalPeriod.SelectedValue = createForm.operationalPeriod.PeriodNumber;
+
+                        IncidentOpPeriodChangedEventArgs args = new IncidentOpPeriodChangedEventArgs();
+                        args.NewOpPeriod = createForm.operationalPeriod.PeriodNumber;
+
+                        Program.CurrentOpPeriod = createForm.operationalPeriod.PeriodNumber;
+                        Program.incidentDataService.OnOpPeriodChanged(args);
+                    }
+                }
+            }
+        }
+
+        private void btnEditOpPeriod_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMoveToOpNow_Click(object sender, EventArgs e)
+        {
+            OperationalPeriod current = Program.CurrentIncident.GetCurrentOpPeriod(DateTime.Now);
+            if(current != null) { cboCurrentOperationalPeriod.SelectedValue = current.PeriodNumber; }
         }
     }
 
