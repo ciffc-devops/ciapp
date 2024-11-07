@@ -25,7 +25,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private bool _CollapseLeft = true;
         private bool _ExpandUp = false;
         private bool _IsCurrentlyCollapsed = true;
-        private Color _BackgroundColorCollapsed = Program.FormAccent; 
+        private Color _BackgroundColorCollapsed = Program.AccentColor; 
         private bool _ExpandAndCollapseEnabled = true;
 
 
@@ -222,8 +222,11 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public void Toggle()
         {
-            if (Collapsed) { Expand(); }
-            else { Collapse(); }
+            if (_ExpandAndCollapseEnabled)
+            {
+                if (Collapsed) { Expand(); }
+                else { Collapse(); }
+            }
         }
 
         private void btnExpandCollapse_Click(object sender, EventArgs e)
