@@ -19,7 +19,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
         {
             InitializeComponent();
             this.Icon = Program.programIcon;
-            this.BackColor = Program.FormBackground;
+            this.BackColor = Program.FormBackgroundColor;
         }
 
         List<CheckBox> checkboxes = new List<CheckBox>();
@@ -29,6 +29,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
             buildCheckboxList();
 
         }
+
+        List<int> nonResourceCheckboxIndexes = new List<int>();
 
         private void btnTest_Click(object sender, EventArgs e)
         {
@@ -392,28 +394,35 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Air Ops Summary";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count-1);
 
 
             CheckBox chkContact = new CheckBox();
             checkboxes.Add(chkContact);
             checkboxes.Last().Text = "Contact";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
+
 
             CheckBox chkMedPlan = new CheckBox();
             checkboxes.Add(chkMedPlan);
             checkboxes.Last().Text = "Medical Plan";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
             CheckBox chkNote = new CheckBox();
             checkboxes.Add(chkNote);
             checkboxes.Last().Text = "Note";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
             CheckBox chkPositionLog = new CheckBox();
             checkboxes.Add(chkPositionLog);
             checkboxes.Last().Text = "Position Log";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
 
             CheckBox chkSafetyMessage = new CheckBox();
             checkboxes.Add(chkSafetyMessage);
             checkboxes.Last().Text = "Safety Message";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
 
             CheckBox chkCheckInPersonnel = new CheckBox();
@@ -436,17 +445,21 @@ namespace Wildfire_ICS_Assist.UtilityForms
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Crew Check In";
 
+
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "HE Crew Check In";
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Comms Plan";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "General Message";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Objectives";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
 
             checkboxes.Add(new CheckBox());
@@ -459,6 +472,16 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 checkboxes[x].Height = 30;
                 panel1.Controls.Add(checkboxes[x]);
             }
+
+        }
+
+        private void btnAllNonResource_Click(object sender, EventArgs e)
+        {
+            for(int x = 0; x < checkboxes.Count; x++)
+            {
+                if (nonResourceCheckboxIndexes.Contains(x)) { checkboxes[x].Checked = true; }
+            }
+
 
         }
     }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,19 +21,32 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
         OperationalPeriod _operationalPeriod = new OperationalPeriod();
         public OperationalPeriod operationalPeriod { get => _operationalPeriod; set => _operationalPeriod = value; }
         public bool SwitchToNewOpNow { get => chkSwitchNow.Checked; }
+        bool LoadingInProgress = false;
+
+        List<IncidentDataItem> ItemsAvailableForCopy = new List<IncidentDataItem>();
+
+
         public CreateOperationalPeriodForm()
         {
             InitializeComponent(); SetControlColors(this.Controls);
+
+            
+
         }
         private void CreateOperationalPeriodForm_Load(object sender, EventArgs e)
         {
+            LoadingInProgress = true;
             numOpPeriod.Value = operationalPeriod.PeriodNumber;
             datOpsStart.Value = operationalPeriod.PeriodStart;
-            datOpsEnd.Value = operationalPeriod.PeriodEnd;
             datStartTime.Value = operationalPeriod.PeriodStart;
+
+            datOpsEnd.Value = operationalPeriod.PeriodEnd;
             datEndTime.Value = operationalPeriod.PeriodEnd;
 
             BuildOpPeriodComboBox();
+
+
+            LoadingInProgress = false;
             //numOpPeriod.Minimum = lowestUnusedOpNumber;
         }
 
@@ -45,17 +59,68 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
             List<OperationalPeriod> periods = Program.CurrentIncident.AllOperationalPeriods.Where(o => o.Active && o.ID != operationalPeriod.ID).OrderBy(o => o.PeriodStart).ToList();
             cboCurrentOperationalPeriod.DataSource = periods;
             cboCurrentOperationalPeriod.DropDownWidth = cboCurrentOperationalPeriod.GetDropDownWidth();
+            cboCurrentOperationalPeriod.SelectedIndex = cboCurrentOperationalPeriod.Items.Count - 1;
+        }
+
+        private void BuildListOfCopyableItems()
+        {
+            ItemsAvailableForCopy = new List<IncidentDataItem>();
+
+            if (cboCurrentOperationalPeriod.SelectedItem != null)
+            {
+                OperationalPeriod copyFrom = cboCurrentOperationalPeriod.SelectedItem as OperationalPeriod;
+                
+                if (Program.CurrentIncident.hasMeaningfulObjectives(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Incident Objectives", ID = ItemsAvailableForCopy.Count + 1 }); }
+                if (Program.CurrentIncident.hasMeangfulCommsPlan(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Communications Plan", ID = ItemsAvailableForCopy.Count + 1 }); }
+                if (Program.CurrentIncident.hasMeaningfulMedicalPlan(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Medical Plan", ID = ItemsAvailableForCopy.Count + 1 }); }
+                if (Program.CurrentIncident.hasMeaningfulOrgChart(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Organization Chart", ID = ItemsAvailableForCopy.Count + 1 }); }
+                if (Program.CurrentIncident.allSafetyMessages.Any(o => o.OpPeriod == copyFrom.PeriodNumber && o.Active)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Safety Message(s)", ID = ItemsAvailableForCopy.Count + 1 }); }
+                if (Program.CurrentIncident.hasMeaningfulAirOps(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Air Operations", ID = ItemsAvailableForCopy.Count + 1 }); }
+                //if (Program.CurrentIncident.hasMeaningfulObjectives(copyFrom.PeriodNumber)) { items.Add(new IncidentDataItem() { DisplayName = "Incident Objectives", ID = 1 }); }
+
+
+            }
+
+            flowCopyableItems.Controls.Clear();
+
+            foreach (IncidentDataItem item in ItemsAvailableForCopy)
+            {
+                CheckBox chk = new CheckBox();
+                chk.Text = item.DisplayName;
+                chk.Tag = item.ID;
+                chk.AutoSize = true;
+
+                flowCopyableItems.Controls.Add(chk);
+            }
         }
 
 
         private void btnCreateOpPeriod_Click(object sender, EventArgs e)
         {
-            if (ValidateNewOP())
+            Tuple<bool, string> result = ValidateNewOP();
+            if (result.Item1)
             {
 
                 Program.incidentDataService.UpsertOperationalPeriod(operationalPeriod);
-                //copy stuff over
 
+                //copy stuff over
+               foreach(Control c in flowCopyableItems.Controls)
+                {
+                    if(c is CheckBox)
+                    {
+                        CheckBox chk = c as CheckBox;
+                        if (chk.Checked)
+                        {
+                            switch (chk.Text)
+                            {
+                                case "Communications Plan":
+                                    CopyCommsPlan();
+                                    break;
+                            }
+                        }
+
+                    }
+                }
 
 
 
@@ -64,10 +129,38 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+            } else
+            {
+                MessageBox.Show(result.Item2, "Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private bool ValidateNewOP()
+        private void CopyCommsPlan()
+        {
+            OperationalPeriod copyFrom = cboCurrentOperationalPeriod.SelectedItem as OperationalPeriod;
+
+
+
+            int itemsAdded = 0;
+
+            Program.CurrentIncident.createCommsPlanAsNeeded(operationalPeriod.PeriodNumber);
+
+            foreach (CommsPlanItem item in Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == copyFrom.PeriodNumber).ActiveCommsItems)
+            {
+                if (!Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == operationalPeriod.PeriodNumber).ActiveCommsItems.Any(o => o.Equals(item)))
+                {
+
+                    CommsPlanItem newItem = item.Clone();
+                    newItem.OpPeriod = operationalPeriod.PeriodNumber;
+                    newItem.ItemID = Guid.NewGuid();
+                    Program.incidentDataService.UpsertCommsPlanItem(newItem);
+                    itemsAdded++;
+                }
+            }
+        }
+        
+
+        private Tuple<bool, string> ValidateNewOP()
         {
             bool opGood = true;
 
@@ -100,18 +193,18 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
             }
             else { errorProvider1.SetError(datStartTime, ""); errorProvider1.SetError(datEndTime, ""); }
 
-            return opGood;
+            return new Tuple<bool, string> (opGood, errs.ToString());
         }
 
         private void numOpPeriod_ValueChanged(object sender, EventArgs e)
         {
             operationalPeriod.PeriodNumber = (int)numOpPeriod.Value;
-            ValidateNewOP();
+            _ = ValidateNewOP();
         }
 
         private void datOpsStart_ValueChanged(object sender, EventArgs e)
         {
-            datOpsEnd.MinDate = datOpsStart.Value;
+            datOpsEnd.MinDate = datOpsStart.Value.Date;
             SetStartTime();
         }
 
@@ -132,19 +225,63 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
 
         private void SetStartTime()
         {
-            DateTime start = datOpsStart.Value.Date;
-            start = start.AddHours(datStartTime.Value.Hour).AddMinutes(datStartTime.Value.Minute);
-            operationalPeriod.PeriodStart = start;
-            ValidateNewOP();
+            if (!LoadingInProgress)
+            {
+                DateTime start = datOpsStart.Value.Date;
+                start = start.AddHours(datStartTime.Value.Hour).AddMinutes(datStartTime.Value.Minute);
+                operationalPeriod.PeriodStart = start;
+                _ = ValidateNewOP();
+            }
         }
         private void SetEndTime()
         {
-            DateTime end = datOpsEnd.Value.Date;
-            end = end.AddHours(datEndTime.Value.Hour).AddMinutes(datEndTime.Value.Minute);
-            operationalPeriod.PeriodEnd = end;
-            ValidateNewOP();
+            if (!LoadingInProgress)
+            {
+                DateTime end = datOpsEnd.Value.Date;
+                end = end.AddHours(datEndTime.Value.Hour).AddMinutes(datEndTime.Value.Minute);
+                operationalPeriod.PeriodEnd = end;
+                _ = ValidateNewOP();
+
+            }
         }
 
-    
+        private void cboCurrentOperationalPeriod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuildListOfCopyableItems();
+        }
+
+
+
+        private class IncidentDataItem
+        {
+            public string DisplayName { get; set; }
+            public int ID { get; set; }
+        }
+
+        private void btnCheckAll_Click(object sender, EventArgs e)
+        {
+            foreach(Control c in flowCopyableItems.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    CheckBox chk = c as CheckBox;
+                    chk.Checked = true;
+                }
+            }
+        }
+
+        private void btnCheckNone_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in flowCopyableItems.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    CheckBox chk = c as CheckBox;
+                    chk.Checked = false;
+                }
+            }
+        }
     }
+
+ 
 }

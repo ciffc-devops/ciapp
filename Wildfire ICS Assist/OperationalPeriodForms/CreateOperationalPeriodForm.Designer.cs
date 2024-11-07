@@ -42,9 +42,11 @@
             this.datEndTime = new System.Windows.Forms.DateTimePicker();
             this.label18 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.flowCopyableItems = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnCheckNone = new System.Windows.Forms.Button();
+            this.btnCheckAll = new System.Windows.Forms.Button();
             this.cboCurrentOperationalPeriod = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.clbItemsToCopy = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chkSwitchNow = new System.Windows.Forms.CheckBox();
             this.btnCreateOpPeriod = new System.Windows.Forms.Button();
@@ -106,9 +108,11 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.flowCopyableItems);
+            this.splitContainer2.Panel2.Controls.Add(this.btnCheckNone);
+            this.splitContainer2.Panel2.Controls.Add(this.btnCheckAll);
             this.splitContainer2.Panel2.Controls.Add(this.cboCurrentOperationalPeriod);
             this.splitContainer2.Panel2.Controls.Add(this.label4);
-            this.splitContainer2.Panel2.Controls.Add(this.clbItemsToCopy);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Size = new System.Drawing.Size(813, 519);
             this.splitContainer2.SplitterDistance = 80;
@@ -274,6 +278,44 @@
             this.label2.TabIndex = 99;
             this.label2.Text = "Create Operational Period";
             // 
+            // flowCopyableItems
+            // 
+            this.flowCopyableItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowCopyableItems.AutoScroll = true;
+            this.flowCopyableItems.BackColor = System.Drawing.Color.White;
+            this.flowCopyableItems.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowCopyableItems.Location = new System.Drawing.Point(12, 132);
+            this.flowCopyableItems.Name = "flowCopyableItems";
+            this.flowCopyableItems.Size = new System.Drawing.Size(789, 300);
+            this.flowCopyableItems.TabIndex = 108;
+            // 
+            // btnCheckNone
+            // 
+            this.btnCheckNone.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_292_square_empty_minus;
+            this.btnCheckNone.Location = new System.Drawing.Point(94, 85);
+            this.btnCheckNone.Name = "btnCheckNone";
+            this.btnCheckNone.Size = new System.Drawing.Size(103, 41);
+            this.btnCheckNone.TabIndex = 107;
+            this.btnCheckNone.Text = "None";
+            this.btnCheckNone.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCheckNone.UseVisualStyleBackColor = true;
+            this.btnCheckNone.Click += new System.EventHandler(this.btnCheckNone_Click);
+            // 
+            // btnCheckAll
+            // 
+            this.btnCheckAll.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_294_square_empty_check;
+            this.btnCheckAll.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCheckAll.Location = new System.Drawing.Point(12, 85);
+            this.btnCheckAll.Name = "btnCheckAll";
+            this.btnCheckAll.Size = new System.Drawing.Size(76, 41);
+            this.btnCheckAll.TabIndex = 106;
+            this.btnCheckAll.Text = "All";
+            this.btnCheckAll.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCheckAll.UseVisualStyleBackColor = true;
+            this.btnCheckAll.Click += new System.EventHandler(this.btnCheckAll_Click);
+            // 
             // cboCurrentOperationalPeriod
             // 
             this.cboCurrentOperationalPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -285,6 +327,7 @@
             this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
             this.cboCurrentOperationalPeriod.Size = new System.Drawing.Size(430, 37);
             this.cboCurrentOperationalPeriod.TabIndex = 105;
+            this.cboCurrentOperationalPeriod.SelectedIndexChanged += new System.EventHandler(this.cboCurrentOperationalPeriod_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -296,17 +339,6 @@
             this.label4.TabIndex = 104;
             this.label4.Text = "Transfer from this Operational Period:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // clbItemsToCopy
-            // 
-            this.clbItemsToCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clbItemsToCopy.FormattingEnabled = true;
-            this.clbItemsToCopy.Location = new System.Drawing.Point(12, 91);
-            this.clbItemsToCopy.Name = "clbItemsToCopy";
-            this.clbItemsToCopy.Size = new System.Drawing.Size(788, 316);
-            this.clbItemsToCopy.TabIndex = 103;
             // 
             // label3
             // 
@@ -398,7 +430,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker datStartTime;
         private System.Windows.Forms.DateTimePicker datEndTime;
-        private System.Windows.Forms.CheckedListBox clbItemsToCopy;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button btnCreateOpPeriod;
@@ -407,5 +438,8 @@
         private System.Windows.Forms.ComboBox cboCurrentOperationalPeriod;
         private System.Windows.Forms.CheckBox chkSwitchNow;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.FlowLayoutPanel flowCopyableItems;
+        private System.Windows.Forms.Button btnCheckNone;
+        private System.Windows.Forms.Button btnCheckAll;
     }
 }
