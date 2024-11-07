@@ -36,7 +36,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         private bool _CollapseLeft = true;
         private bool _ExpandUp = false;
         private bool _IsCurrentlyCollapsed = false;
-        private Color _BackgroundColorCollapsed = Program.FormAccent;
+        private Color _BackgroundColorCollapsed = Program.AccentColor;
         private bool _ExpandAndCollapseEnabled = true;
 
         [Description("Text displayed at the top of the panel"), Category("Appearance")]

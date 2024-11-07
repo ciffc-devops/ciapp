@@ -281,9 +281,6 @@
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SortedBindingList.cs" />
-    <Compile Include="CustomControls\HelpButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CustomControls\PrepAndApprovePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1358,6 +1355,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-292-square-empty-minus.png" />
+    <None Include="Resources\glyphicons-basic-294-square-empty-check.png" />
     <None Include="Resources\glyphicons-basic-41-stats.png" />
     <None Include="Resources\glyphicons-basic-888-redo.png" />
     <None Include="Resources\ProvincesAndTerritoriesEN.txt" />

@@ -14,6 +14,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Utilities;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Utilities;
+using Microsoft.VisualStudio.PlatformUI;
 
 namespace Wildfire_ICS_Assist
 {
@@ -53,6 +54,8 @@ namespace Wildfire_ICS_Assist
                 Properties.Settings.Default.Save();
             }
 
+            LoadColors(2);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new IncidentDetailsForm());
@@ -80,14 +83,6 @@ namespace Wildfire_ICS_Assist
         private static CultureInfo _cultureInfo;
         private static NetworkService _networkService = null;
 
-        private static int _PNumMin = 1;
-        private static int _PNumMax = 10000;
-        private static int _VNumMin = 1;
-        private static int _VNumMax = 10000;
-        private static int _ENumMin = 1;
-        private static int _ENumMax = 10000;
-        private static int _CNumMin = 1;
-        private static int _CNumMax = 10000;
 
 
         public static IGeneralOptionsService generalOptionsService { get => _generalOptionsService; private set => _generalOptionsService = value; }
@@ -144,22 +139,47 @@ namespace Wildfire_ICS_Assist
 
 
         //Colours used throughout the program
-        private static Color _FormBackground = Color.FromArgb(246, 245, 229);
-        public static Color FormBackground { get => _FormBackground; set => _FormBackground = value; }
-        public static Color FormAccent { get => Color.FromArgb(219, 218, 204); }
-        public static Color ErrorColor { get => Color.LightCoral; }
-        public static Color GoodColor { get => Color.LightSkyBlue; }
+        private static void LoadColors(int colorPalletId)
+        {
+            List<ProgramColor> colors = ColourUtilities.GetColourSetById(colorPalletId);
+            FormBackgroundColor = colors.FirstOrDefault(o => o.Name.Equals("Background")).Color;
+            AccentColor = colors.FirstOrDefault(o => o.Name.Equals("Accent")).Color;
+            DarkAccentColor = colors.FirstOrDefault(o => o.Name.Equals("DarkAccent")).Color;
+            HelpColor = colors.FirstOrDefault(o => o.Name.Equals("Help")).Color;
+            PrimaryColor = colors.FirstOrDefault(o => o.Name.Equals("Primary")).Color;
+            ErrorColor = colors.FirstOrDefault(o => o.Name.Equals("BadInput")).Color;
+            GoodColor = colors.FirstOrDefault(o => o.Name.Equals("GoodInput")).Color;
+        }
+
+
+
+        private static Color _FormBackgroundColor = Color.FromArgb(255, 248, 222);
+        private static Color _AccentColor = Color.FromArgb(219, 218, 204);
+        private static Color _DarkAccentColor = Color.FromArgb(35, 31, 32);
+        private static Color _PrimaryColor = Color.FromArgb(168, 118, 62);
+        private static Color _HelpColor = Color.FromArgb(122, 139, 153);
+        private static Color _GoodInputColor = Color.LightSkyBlue;
+        private static Color _BadInputColor = Color.LightCoral;
+
+        public static Color FormBackgroundColor { get => _FormBackgroundColor; set => _FormBackgroundColor = value; }
+        public static Color AccentColor { get => _AccentColor; set => _AccentColor = value; }
         public static Color StandardTextboxColor { get => System.Drawing.SystemColors.Window; }
-        public static Color DarkColor { get => Color.FromArgb(35, 31, 32); }
+        public static Color DarkAccentColor { get => _DarkAccentColor; set => _DarkAccentColor = value; }
+        public static Color HelpColor { get => _HelpColor; set => _HelpColor = value; }
+        public static Color PrimaryColor { get => _PrimaryColor; set => _PrimaryColor = value; }
+        public static Color ErrorColor { get => _GoodInputColor; set => _GoodInputColor = value; }
+        public static Color GoodColor { get => _BadInputColor; set => _BadInputColor = value; }
 
-        //this is a particular pallet based off the ivory form background color
-        public static Color HelpColor { get => Color.FromArgb(122, 139, 153); }
-        public static Color DarkBlueColor { get => Color.FromArgb(11, 19, 43); }
-        public static Color MidBlueColor { get => Color.FromArgb(28, 37, 56); }
-        public static Color LightBlueColor { get => Color.FromArgb(58, 80, 107); }
 
-        public static Color ViewPDFColor { get => Color.FromArgb(168, 118, 62); }
-
+        //P-num controls, are these still needed?
+        private static int _PNumMin = 1;
+        private static int _PNumMax = 10000;
+        private static int _VNumMin = 1;
+        private static int _VNumMax = 10000;
+        private static int _ENumMin = 1;
+        private static int _ENumMax = 10000;
+        private static int _CNumMin = 1;
+        private static int _CNumMax = 10000;
 
         public static int PNumMin { get => _PNumMin; set => _PNumMin = value; }
         public static int PNumMax { get => _PNumMax; set => _PNumMax = value; }

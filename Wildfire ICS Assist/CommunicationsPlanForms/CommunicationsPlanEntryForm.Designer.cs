@@ -397,7 +397,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            
             this.ClientSize = new System.Drawing.Size(769, 781);
             this.Controls.Add(this.splitContainer1);
             this.MaximizeBox = false;

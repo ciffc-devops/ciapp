@@ -169,7 +169,7 @@
             this.AcceptButton = this.btnSave;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            
             this.CancelButton = this.btnCancel;
             this.Controls.Add(this.txtEntryText);
             this.Controls.Add(this.pictureBox1);

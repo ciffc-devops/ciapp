@@ -109,7 +109,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public PersonnelEditControl()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; cboAccomodationPreference.SelectedIndex = 0;
+            InitializeComponent(); this.BackColor = Program.FormBackgroundColor; cboAccomodationPreference.SelectedIndex = 0;
             List<Province> provinces = ProvinceTools.GetProvinces();
             Province other = new Province(); other.ProvinceGUID = Guid.Empty; other.ProvinceName = "Other / NA"; provinces.Add(other);
             cboKind.DataSource = PersonnelTools.GetPersonnelKinds();

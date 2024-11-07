@@ -28,7 +28,7 @@ namespace Wildfire_ICS_Assist
 
         public AirOperationsForm()
         {
-            InitializeComponent(); dgvAircraft.BackgroundColor = Program.FormAccent;
+            InitializeComponent(); dgvAircraft.BackgroundColor = Program.AccentColor;
             SetControlColors(this.Controls);
         }
 
@@ -793,7 +793,7 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
-                pnlRadius.BackColor = Program.FormAccent;
+                pnlRadius.BackColor = Program.AccentColor;
 
 
             }
@@ -809,7 +809,7 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
-                pnlPolygon.BackColor = Program.FormAccent;
+                pnlPolygon.BackColor = Program.AccentColor;
 
 
             }

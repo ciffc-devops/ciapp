@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist.InternetSyncForms
         public InternetSyncStartForm()
         {
             InitializeComponent();
-            this.BackColor = Program.DarkColor;
+            this.BackColor = Program.DarkAccentColor;
         }
 
         private void InternetSyncStartForm_FormClosing(object sender, FormClosingEventArgs e)

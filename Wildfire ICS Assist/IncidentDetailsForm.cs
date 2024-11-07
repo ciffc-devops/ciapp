@@ -50,7 +50,7 @@ namespace Wildfire_ICS_Assist
             InitializeComponent(); 
 
             
-            menuStrip1.BackColor = Program.FormAccent;
+            menuStrip1.BackColor = Program.AccentColor;
             System.Windows.Forms.Application.EnableVisualStyles();
             LastAutoBackup = DateTime.Now;
             populateCollapsiblePanelList();
@@ -98,8 +98,6 @@ namespace Wildfire_ICS_Assist
             }
             setServerStatusDisplay();
 
-            datOpsEnd.CustomFormat = Program.DateFormat + " HH:mm";
-            datOpsStart.CustomFormat = Program.DateFormat + " HH:mm";
 
             NetworkComms.AppendGlobalIncomingPacketHandler<Incident>("WFIncident", Program.networkService.HandleIncomingIncident);
 
@@ -696,9 +694,7 @@ namespace Wildfire_ICS_Assist
             if (!CurrentIncident.AllOperationalPeriods.Where(o => o.PeriodNumber == CurrentOpPeriod).Any()) { CurrentIncident.AllOperationalPeriods = CurrentIncident.InferOperationalPeriods(); }
 
             int highestOpNum = 1; if (CurrentIncident.AllOperationalPeriodsWithContent.Any()) { highestOpNum = CurrentIncident.AllOperationalPeriodsWithContent.OrderByDescending(o => o.PeriodNumber).First().PeriodNumber; }
-            numOpPeriod.Value = highestOpNum;
-            datOpsStart.Value = CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == highestOpNum).PeriodStart;
-            datOpsEnd.Value = CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == highestOpNum).PeriodEnd;
+            cboCurrentOperationalPeriod.SelectedValue = highestOpNum;
 
 
             if (!string.IsNullOrEmpty(CurrentIncident.FileName)) { tmrAutoSave.Enabled = Program.generalOptionsService.GetOptionsBoolValue("AutoSave"); }
@@ -849,6 +845,7 @@ namespace Wildfire_ICS_Assist
             List<OperationalPeriod> periods = Program.CurrentIncident.AllOperationalPeriods.Where(o=>o.Active).OrderBy(o=>o.PeriodStart).ToList();
             cboCurrentOperationalPeriod.DataSource = periods;
             cboCurrentOperationalPeriod.DropDownWidth = cboCurrentOperationalPeriod.GetDropDownWidth();
+            colorOpsPeriodPanel();
         }
 
         private void Program_OperationalPeriodChanged(OperationalPeriodEventArgs e)
@@ -2085,27 +2082,6 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        private void datOpsStart_Leave(object sender, EventArgs e)
-        {
-            OperationalPeriod per = Program.CurrentIncident.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == Program.CurrentOpPeriod);
-            if (per != null)
-            {
-                per.PeriodStart = datOpsStart.Value;
-                Program.incidentDataService.UpsertOperationalPeriod(per);
-            }
-        }
-
-        private void datOpsEnd_Leave(object sender, EventArgs e)
-        {
-            OperationalPeriod per = Program.CurrentIncident.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == Program.CurrentOpPeriod);
-            if (per != null)
-            {
-                per.PeriodEnd = datOpsEnd.Value;
-                Program.incidentDataService.UpsertOperationalPeriod(per);
-            }
-
-        }
-
         private void btnAssignmentList_Click(object sender, EventArgs e)
         {
             OpenOperationalGroupsForm();
@@ -3089,6 +3065,7 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        /*
         private void numOpPeriod_ValueChanged(object sender, EventArgs e)
         {
             int newOpNumber = Convert.ToInt32(numOpPeriod.Value);
@@ -3112,7 +3089,7 @@ namespace Wildfire_ICS_Assist
 
             }
         }
-
+        */
 
         private void colorOpsPeriodPanel()
         {
@@ -3137,8 +3114,6 @@ namespace Wildfire_ICS_Assist
         private void changeOpPeriod(IncidentOpPeriodChangedEventArgs e)
         {
 
-            datOpsStart.Value = Program.CurrentOpPeriodDetails.PeriodStart;
-            datOpsEnd.Value = Program.CurrentOpPeriodDetails.PeriodEnd;
             colorOpsPeriodPanel();
             setButtonCheckboxes();
 
@@ -3306,10 +3281,6 @@ namespace Wildfire_ICS_Assist
             form.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Program.FormBackground = Program.DarkBlueColor;
-        }
 
         private void cboCurrentOperationalPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3344,13 +3315,17 @@ namespace Wildfire_ICS_Assist
                 opNext.PeriodStart = Program.CurrentIncident.ActiveOperationalPeriods.Max(o => o.PeriodEnd);
                 opNext.PeriodEnd = opNext.PeriodStart.AddHours(12);
                 int lowestUnusedOpNumber = 0;
-                for (int x = 1; x < numOpPeriod.Maximum; x++)
+
+                int count = 1;
+                while (lowestUnusedOpNumber <= 0)
                 {
-                    if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.Active && o.PeriodNumber == x))
+                    if (!Program.CurrentIncident.AllOperationalPeriods.Any(o => o.Active && o.PeriodNumber == count))
                     {
-                        lowestUnusedOpNumber = x; break;
+                        lowestUnusedOpNumber = count; 
                     }
+                    count++;
                 }
+
                 opNext.PeriodNumber = lowestUnusedOpNumber;
                 createForm.operationalPeriod = opNext;
 
@@ -3381,6 +3356,11 @@ namespace Wildfire_ICS_Assist
         {
             OperationalPeriod current = Program.CurrentIncident.GetCurrentOpPeriod(DateTime.Now);
             if(current != null) { cboCurrentOperationalPeriod.SelectedValue = current.PeriodNumber; }
+        }
+
+        private void btnReviewOpPeriod_Click(object sender, EventArgs e)
+        {
+            OpenCloseOpPeriodForm();
         }
     }
 

@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist
         public ResourceReplacementPlanningForm()
         {
             InitializeComponent();
-            dgvOutgoing.BackgroundColor = Program.FormAccent;
+            dgvOutgoing.BackgroundColor = Program.AccentColor;
             dgvOutgoing.AutoGenerateColumns = false;
             datLastDayFilter.CustomFormat = Program.DateFormat;
             datLastDayFilter.Format = DateTimePickerFormat.Custom;

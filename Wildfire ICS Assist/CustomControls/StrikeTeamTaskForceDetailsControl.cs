@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         public StrikeTeamTaskForceDetailsControl()
         {
             InitializeComponent();
-            dgvSubGroups.AutoGenerateColumns = false; dgvSubGroups.BackgroundColor = Program.FormAccent;
+            dgvSubGroups.AutoGenerateColumns = false; dgvSubGroups.BackgroundColor = Program.AccentColor;
 
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.PlatformUI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -87,7 +88,7 @@ namespace Wildfire_ICS_Assist
 
         private void HandlePanelExpanded(object sender, EventArgs e)
         {
-            if (sender != null)
+            if (sender != null && sender is CollapsiblePanel)
             {
                 CollapsiblePanel c = (CollapsiblePanel)sender;
                 c.Location = new Point(0, c.Location.Y);
@@ -105,7 +106,7 @@ namespace Wildfire_ICS_Assist
 
         private void HandlePanelCollapsed(object sender, EventArgs e)
         {
-            if (sender != null)
+            if (sender != null && sender is CollapsiblePanel)
             {
                 CollapsiblePanel c = (CollapsiblePanel)sender;
                 c.Location = new Point(10, c.Location.Y);

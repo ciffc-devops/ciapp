@@ -31,17 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
             this.pnlOpsPeriod = new System.Windows.Forms.Panel();
+            this.btnMoveToOpNow = new System.Windows.Forms.Button();
             this.btnReviewOpPeriod = new System.Windows.Forms.Button();
             this.btnEditOpPeriod = new System.Windows.Forms.Button();
             this.btnNewOpPeriod = new System.Windows.Forms.Button();
             this.cboCurrentOperationalPeriod = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCloseOpPeriod = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.datOpsEnd = new System.Windows.Forms.DateTimePicker();
-            this.datOpsStart = new System.Windows.Forms.DateTimePicker();
-            this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
             this.btnLockTaskInfo = new System.Windows.Forms.Button();
             this.txtTaskName = new SpellBox();
@@ -169,9 +164,7 @@
             this.btnPrintOrgChart = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
             this.tmrLock = new System.Windows.Forms.Timer(this.components);
-            this.btnMoveToOpNow = new System.Windows.Forms.Button();
             this.pnlOpsPeriod.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).BeginInit();
             this.pnlTaskInfo.SuspendLayout();
             this.pnlInternetSyncStart.SuspendLayout();
             this.pnlNetworkSyncInProgress.SuspendLayout();
@@ -194,6 +187,14 @@
             this.pnlOpsPeriod.Controls.Add(this.label1);
             this.pnlOpsPeriod.Name = "pnlOpsPeriod";
             // 
+            // btnMoveToOpNow
+            // 
+            resources.ApplyResources(this.btnMoveToOpNow, "btnMoveToOpNow");
+            this.btnMoveToOpNow.Name = "btnMoveToOpNow";
+            this.btnMoveToOpNow.TabStop = false;
+            this.btnMoveToOpNow.UseVisualStyleBackColor = true;
+            this.btnMoveToOpNow.Click += new System.EventHandler(this.btnMoveToOpNow_Click);
+            // 
             // btnReviewOpPeriod
             // 
             resources.ApplyResources(this.btnReviewOpPeriod, "btnReviewOpPeriod");
@@ -201,6 +202,7 @@
             this.btnReviewOpPeriod.Name = "btnReviewOpPeriod";
             this.btnReviewOpPeriod.TabStop = false;
             this.btnReviewOpPeriod.UseVisualStyleBackColor = true;
+            this.btnReviewOpPeriod.Click += new System.EventHandler(this.btnReviewOpPeriod_Click);
             // 
             // btnEditOpPeriod
             // 
@@ -231,59 +233,6 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // btnCloseOpPeriod
-            // 
-            resources.ApplyResources(this.btnCloseOpPeriod, "btnCloseOpPeriod");
-            this.btnCloseOpPeriod.Name = "btnCloseOpPeriod";
-            this.btnCloseOpPeriod.TabStop = false;
-            this.btnCloseOpPeriod.UseVisualStyleBackColor = true;
-            this.btnCloseOpPeriod.Click += new System.EventHandler(this.btnCloseOpPeriod_Click);
-            // 
-            // label18
-            // 
-            resources.ApplyResources(this.label18, "label18");
-            this.label18.Name = "label18";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
-            // datOpsEnd
-            // 
-            resources.ApplyResources(this.datOpsEnd, "datOpsEnd");
-            this.datOpsEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datOpsEnd.Name = "datOpsEnd";
-            this.datOpsEnd.Leave += new System.EventHandler(this.datOpsEnd_Leave);
-            // 
-            // datOpsStart
-            // 
-            resources.ApplyResources(this.datOpsStart, "datOpsStart");
-            this.datOpsStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datOpsStart.Name = "datOpsStart";
-            this.datOpsStart.Leave += new System.EventHandler(this.datOpsStart_Leave);
-            // 
-            // numOpPeriod
-            // 
-            resources.ApplyResources(this.numOpPeriod, "numOpPeriod");
-            this.numOpPeriod.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numOpPeriod.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numOpPeriod.Name = "numOpPeriod";
-            this.numOpPeriod.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numOpPeriod.ValueChanged += new System.EventHandler(this.numOpPeriod_ValueChanged);
             // 
             // pnlTaskInfo
             // 
@@ -1203,30 +1152,15 @@
             this.tmrLock.Interval = 30000;
             this.tmrLock.Tick += new System.EventHandler(this.tmrLock_Tick);
             // 
-            // btnMoveToOpNow
-            // 
-            resources.ApplyResources(this.btnMoveToOpNow, "btnMoveToOpNow");
-            this.btnMoveToOpNow.Name = "btnMoveToOpNow";
-            this.btnMoveToOpNow.TabStop = false;
-            this.btnMoveToOpNow.UseVisualStyleBackColor = true;
-            this.btnMoveToOpNow.Click += new System.EventHandler(this.btnMoveToOpNow_Click);
-            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.Controls.Add(this.cpOtherTools);
-            this.Controls.Add(this.label18);
-            this.Controls.Add(this.btnCloseOpPeriod);
-            this.Controls.Add(this.label15);
             this.Controls.Add(this.cpIncidentActionPlan);
-            this.Controls.Add(this.datOpsEnd);
             this.Controls.Add(this.picOrgLogo);
-            this.Controls.Add(this.datOpsStart);
             this.Controls.Add(this.pnlInternetSyncStart);
             this.Controls.Add(this.pnlNetworkSyncInProgress);
-            this.Controls.Add(this.numOpPeriod);
             this.Controls.Add(this.pnlOpsPeriod);
             this.Controls.Add(this.pnlTaskInfo);
             this.Controls.Add(this.lblServerStatus);
@@ -1238,7 +1172,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IncidentDetailsForm_FormClosed);
             this.Load += new System.EventHandler(this.IncidentDetailsForm_Load);
             this.pnlOpsPeriod.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).EndInit();
             this.pnlTaskInfo.ResumeLayout(false);
             this.pnlTaskInfo.PerformLayout();
             this.pnlInternetSyncStart.ResumeLayout(false);
@@ -1256,12 +1189,6 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlOpsPeriod;
-        private System.Windows.Forms.Button btnCloseOpPeriod;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.DateTimePicker datOpsEnd;
-        private System.Windows.Forms.DateTimePicker datOpsStart;
-        private System.Windows.Forms.NumericUpDown numOpPeriod;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlTaskInfo;
         private System.Windows.Forms.Button btnOutstandingLogItems;

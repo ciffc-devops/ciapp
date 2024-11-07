@@ -141,7 +141,7 @@ namespace Wildfire_ICS_Assist
             checkInRecord.OpPeriod = Program.CurrentOpPeriod;
             LoadData();
 
-            foreach (TabPage p in wizardPages1.TabPages) { p.BackColor = Program.FormBackground; }
+            foreach (TabPage p in wizardPages1.TabPages) { p.BackColor = Program.FormBackgroundColor; }
 
         }
 

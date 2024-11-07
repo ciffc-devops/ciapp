@@ -13,10 +13,12 @@ namespace Wildfire_ICS_Assist.CustomControls
         public static void tabControlCustomColor_DrawItem(object sender, System.Windows.Forms.DrawItemEventArgs e)
         {
             TabControl tcStatus = (TabControl)sender;
+            
             TabPage CurrentTab = tcStatus.TabPages[e.Index];
+            CurrentTab.BackColor = Program.FormBackgroundColor;
             Rectangle ItemRect = tcStatus.GetTabRect(e.Index);
-            SolidBrush FillBrush = new SolidBrush(Program.FormAccent);
-            SolidBrush TextBrush = new SolidBrush(Color.DarkGray);
+            SolidBrush FillBrush = new SolidBrush(Program.AccentColor);
+            SolidBrush TextBrush = new SolidBrush(Program.DarkAccentColor);
             StringFormat sf = new StringFormat();
             sf.Alignment = StringAlignment.Center;
             sf.LineAlignment = StringAlignment.Center;
@@ -46,7 +48,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             e.Graphics.FillRectangle(FillBrush, ItemRect);
 
             //Now draw the text.
-            e.Graphics.DrawString(CurrentTab.Text, e.Font, TextBrush, (RectangleF)ItemRect, sf);
+             e.Graphics.DrawString(CurrentTab.Text, e.Font, TextBrush, (RectangleF)ItemRect, sf); 
 
             //Reset any Graphics rotation
             e.Graphics.ResetTransform();

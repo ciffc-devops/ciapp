@@ -20,7 +20,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             InitializeComponent();
             dgvResources.AutoGenerateColumns = false;
-            dgvResources.BackgroundColor = Program.FormAccent;
+            dgvResources.BackgroundColor = Program.AccentColor;
 
         }
 

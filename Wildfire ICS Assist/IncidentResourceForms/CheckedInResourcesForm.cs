@@ -30,7 +30,7 @@ namespace Wildfire_ICS_Assist
         public CheckedInResourcesForm()
         {
             InitializeComponent();
-            this.menuStrip1.BackColor = Program.FormAccent;
+            this.menuStrip1.BackColor = Program.AccentColor;
         }
 
         private void CheckedInResourcesForm_Load(object sender, EventArgs e)

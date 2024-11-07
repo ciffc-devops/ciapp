@@ -233,7 +233,7 @@ namespace Wildfire_ICS_Assist
                 rbPoygon.Checked = false;
             } else
             {
-                pnlRadius.BackColor = Program.FormAccent;
+                pnlRadius.BackColor = Program.AccentColor;
                 
 
             }
@@ -248,7 +248,7 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
-                pnlPolygon.BackColor = Program.FormAccent;
+                pnlPolygon.BackColor = Program.AccentColor;
 
 
             }

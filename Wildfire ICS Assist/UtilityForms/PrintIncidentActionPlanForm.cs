@@ -274,6 +274,7 @@ namespace Wildfire_ICS_Assist
 
             string fullOutputFilename = "Task " + CurrentIncident.IncidentIdentifier + " Op " + CurrentOpPeriod;    // + ".pdf";
             if (PrintIncidentToDate) { fullOutputFilename = "Task " + CurrentIncident.IncidentIdentifier + " as of Op " + CurrentOpPeriod; }
+            fullOutputFilename = fullOutputFilename.ReplaceInvalidPathChars();
 
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
@@ -571,6 +572,8 @@ namespace Wildfire_ICS_Assist
 
 
                     string newFilePath = CurrentIncident.FileName;
+                    newFilePath = newFilePath.ReplaceInvalidPathChars();
+                    newFileName = newFileName.ReplaceInvalidPathChars() +  file.Extension;
                     newFilePath = Path.Combine(FileAccessClasses.getWritablePath(CurrentIncident), newFileName);
 
                     int uniqueNumber = 0;
@@ -581,12 +584,14 @@ namespace Wildfire_ICS_Assist
                         if (PrintIncidentToDate) { newFileName += "-TitleImage"; }
                         else { newFileName += "-Op" + CurrentOpPeriod + "TitleImage"; }
                         newFileName += "-" + uniqueNumber;
+                        newFileName = newFileName.ReplaceInvalidPathChars();
+                        newFileName +=  file.Extension;
                         newFilePath = Path.Combine(FileAccessClasses.getWritablePath(CurrentIncident), newFileName);
                     }
 
                     System.Drawing.Image image = System.Drawing.Image.FromFile(file.FullName);
                     Bitmap newImage = new Bitmap(image);
-                    long maxFileSize = 200000;
+                    long maxFileSize = 250000;
                     if (file.Length > maxFileSize)
                     {
                         long factor = (file.Length + (maxFileSize - 1)) / maxFileSize;

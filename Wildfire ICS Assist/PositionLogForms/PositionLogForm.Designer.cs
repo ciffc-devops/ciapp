@@ -348,7 +348,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            
             this.Controls.Add(this.splitContainer1);
             this.Name = "PositionLogForm";
             this.Load += new System.EventHandler(this.PositionLogForm_Load);

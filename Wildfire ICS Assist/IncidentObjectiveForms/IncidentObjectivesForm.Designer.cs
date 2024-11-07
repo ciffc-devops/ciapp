@@ -193,6 +193,7 @@
             this.cpWeather.Collapsed = true;
             this.cpWeather.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpWeather.Controls.Add(this.txtWeatherForcast);
+            this.cpWeather.EnableExpandCollapse = true;
             this.cpWeather.ExpandsRight = true;
             this.cpWeather.ExpandsUpward = false;
             this.cpWeather.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -227,6 +228,7 @@
             this.cpGeneralSafety.Controls.Add(this.txtGeneralSafetyMessage);
             this.cpGeneralSafety.Controls.Add(this.cboSafetyMessages);
             this.cpGeneralSafety.Controls.Add(this.btnFillSafetyFrom208);
+            this.cpGeneralSafety.EnableExpandCollapse = true;
             this.cpGeneralSafety.ExpandsRight = true;
             this.cpGeneralSafety.ExpandsUpward = false;
             this.cpGeneralSafety.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -288,6 +290,7 @@
             this.cpFireStatus.Controls.Add(this.txtFireSize);
             this.cpFireStatus.Controls.Add(this.label2);
             this.cpFireStatus.Controls.Add(this.label1);
+            this.cpFireStatus.EnableExpandCollapse = true;
             this.cpFireStatus.ExpandsRight = true;
             this.cpFireStatus.ExpandsUpward = false;
             this.cpFireStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -422,7 +425,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(878, 440);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(894, 479);

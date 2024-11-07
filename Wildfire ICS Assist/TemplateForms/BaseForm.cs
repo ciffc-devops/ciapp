@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist
         {
             InitializeComponent();
             this.Icon = Program.programIcon;
-            this.BackColor = Program.FormBackground;
+            this.BackColor = Program.FormBackgroundColor;
 
             //Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_196_circle_empty_info
             //loop through all controls with the "Help" tag and set their icon and background colour
@@ -40,7 +40,7 @@ namespace Wildfire_ICS_Assist
                 {
                     button.FlatStyle = FlatStyle.Popup;
                     button.Cursor = Cursors.Hand;
-                    button.BackColor = Program.FormAccent;
+                    button.BackColor = Program.AccentColor;
 
                     if (control.Tag != null && control.Tag.ToString() == "ViewPDF")
                     {
@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist
                         button.TextImageRelation = TextImageRelation.ImageBeforeText;
                         button.ImageAlign = ContentAlignment.MiddleRight;
                         button.TextAlign = ContentAlignment.MiddleCenter;
-                        button.BackColor = Program.ViewPDFColor;
+                        button.BackColor = Program.PrimaryColor;
                         //button.Cursor = Cursors.Help;
 
                     }
@@ -86,7 +86,7 @@ namespace Wildfire_ICS_Assist
 
                 if (control is DataGridView view)
                 {
-                    view.BackgroundColor = Program.FormAccent;
+                    view.BackgroundColor = Program.AccentColor;
                     //button.Cursor = Cursors.Help;
                 }
 

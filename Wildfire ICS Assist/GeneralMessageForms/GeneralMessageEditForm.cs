@@ -34,7 +34,7 @@ namespace Wildfire_ICS_Assist
             
             InitializeComponent(); SetControlColors(this.Controls);
             GeneralTools.SetDateFormat(this);
-            splitContainer2.BackColor = Program.FormAccent;
+            splitContainer2.BackColor = Program.AccentColor;
         }
 
         List<Control> requiredFields = new List<Control>();
@@ -204,7 +204,7 @@ namespace Wildfire_ICS_Assist
                 {
                     txtReplyName.BackColor = Program.GoodColor; txtReplyPosition.BackColor = Program.GoodColor;
                 }
-            } else { txtReply.BackColor = Program.StandardTextboxColor; }
+            } else { txtReply.BackColor = System.Drawing.SystemColors.Window;  }
 
             return isValid;
         }

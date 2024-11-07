@@ -70,7 +70,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            
             this.Controls.Add(this.txtHistory);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtCurrentLog);

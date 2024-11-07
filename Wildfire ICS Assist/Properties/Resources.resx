@@ -247,6 +247,9 @@
   <data name="glyphicons_basic_539_barcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-539-barcode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="glyphicons_basic_432_log_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-432-log-out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="glyphicons_basic_931_speech_bubble_question_sm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-931-speech-bubble-question-sm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -301,8 +304,8 @@
   <data name="glyphicons-basic-39-airplane" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-39-airplane.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_4_user_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-4-user@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons_basic_424_blackboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-424-blackboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_193_circle_empty_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-193-circle-empty-remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -319,11 +322,11 @@
   <data name="glyphicons_basic_761_sync_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-761-sync-grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="glyphicons_basic_58_history" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-58-history.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="glyphicons_basic_965_layers_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-965-layers-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glyphicons_basic_559_target" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-559-target.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons-basic-613-paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-613-paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -343,8 +346,8 @@
   <data name="glyphicons_basic_234_calculator1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-234-calculator1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glyphicons_basic_432_log_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-432-log-out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons_basic_559_target" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-559-target.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_234_calculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-234-calculator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -405,9 +408,6 @@
   </data>
   <data name="glyphicons_basic_978_map_cadastral" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-978-map-cadastral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glyphicons_basic_424_blackboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-424-blackboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NoMembersImported" xml:space="preserve">
     <value>No members were imported or updated.  Please ensure you have configured the options here correctly, and selected the correct spreadsheet file.</value>
@@ -475,8 +475,8 @@
   <data name="ClearUnifiedCommandRolesTitle" xml:space="preserve">
     <value>Clear Unified Command roles?</value>
   </data>
-  <data name="glyphicons_basic_58_history" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-58-history.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons_basic_4_user_3x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-4-user@3x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RequestOptionsFromServer" xml:space="preserve">
     <value>Are you sure you want to request all of the options from the server?\r\n\r\n*These options will replace any already on this machine, including personnel, templates, general options, saved communications channels, and so forth.</value>
@@ -490,6 +490,9 @@
   <data name="glyphicons-filetypes-52-folder-video" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-filetypes-52-folder-video.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="glyphicons-basic-41-stats" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-41-stats.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="glyphicons-basic-196-circle-empty-info" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-196-circle-empty-info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -498,6 +501,9 @@
   </data>
   <data name="glyphicons_calculate_and_output" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-calculate-and-output.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glyphicons-basic-294-square-empty-check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-294-square-empty-check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glyphicons_basic_210_circle_empty_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-210-circle-empty-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -532,7 +538,7 @@
   <data name="RequestIncidentFromServer" xml:space="preserve">
     <value>STOP! You are about to replace the incident currently on this machine with a current copy of the one on the server computer. You will lose any changes you’ve made here that are not already reflected there. There is no way to undo this. Are you very sure you want to proceed?</value>
   </data>
-  <data name="glyphicons-basic-41-stats" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphicons-basic-41-stats.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glyphicons-basic-292-square-empty-minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphicons-basic-292-square-empty-minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -32,5 +32,48 @@ namespace WF_ICS_ClassLibrary.Utilities
             textColor = Color.FromArgb(240, 240, 240);
             return textColor;
         }
+
+        public static List<ProgramColor> GetColourSetById(int id)
+        {
+            List<ProgramColor> colors = new List<ProgramColor>();
+            colors.Add(new ProgramColor { Name = "GoodInput", Color = Color.LightSkyBlue });
+            colors.Add(new ProgramColor { Name = "BadInput", Color = Color.LightCoral });
+
+
+            switch (id) {
+                case 1:
+                    colors.Add(new ProgramColor { Name = "Background", Color = Color.FromArgb(255, 248, 222) });
+                    colors.Add(new ProgramColor { Name = "Accent", Color = Color.FromArgb(219, 218, 204) });
+                    colors.Add(new ProgramColor { Name = "Primary", Color = Color.FromArgb(168, 118, 62) });
+                    colors.Add(new ProgramColor { Name = "Help", Color = Color.FromArgb(122, 139, 153) });
+                    colors.Add(new ProgramColor { Name = "DarkAccent", Color = Color.FromArgb(219, 218, 204) });
+                    break;
+                case 2:
+                    colors.Add(new ProgramColor { Name = "Background", Color = Color.FromArgb(245, 245, 245) });
+                    colors.Add(new ProgramColor { Name = "Accent", Color = Color.FromArgb(193, 193, 193) });
+                    colors.Add(new ProgramColor { Name = "Primary", Color = Color.FromArgb(239, 64, 53) });
+                    colors.Add(new ProgramColor { Name = "Help", Color = Color.FromArgb(252, 222, 112) });
+                    colors.Add(new ProgramColor { Name = "DarkAccent", Color = Color.FromArgb(85, 94, 89) });
+                    break;
+                case 3:
+                    colors.Add(new ProgramColor { Name = "Background", Color = Color.FromArgb(245, 231, 178) });
+                    colors.Add(new ProgramColor { Name = "Accent", Color = Color.FromArgb(249, 214, 137) });
+                    colors.Add(new ProgramColor { Name = "Primary", Color = Color.FromArgb(224, 167, 94) });
+                    colors.Add(new ProgramColor { Name = "Help", Color = Color.FromArgb(165, 186, 234) });
+                    colors.Add(new ProgramColor { Name = "DarkAccent", Color = Color.FromArgb(151, 49, 49) });
+                    break;
+                case 4:
+                    colors.Add(new ProgramColor { Name = "Background", Color = Color.FromArgb(248, 237, 227) });
+                    colors.Add(new ProgramColor { Name = "Accent", Color = Color.FromArgb(223, 211, 195) });
+                    colors.Add(new ProgramColor { Name = "Primary", Color = Color.FromArgb(197, 112, 93) });
+                    colors.Add(new ProgramColor { Name = "Help", Color = Color.FromArgb(157, 151, 174) });
+                    colors.Add(new ProgramColor { Name = "DarkAccent", Color = Color.FromArgb(120, 59, 45) });
+                    break;
+
+            }
+
+
+            return colors;
+        }
     }
 }

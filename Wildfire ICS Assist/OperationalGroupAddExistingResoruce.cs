@@ -16,7 +16,7 @@ namespace Wildfire_ICS_Assist
         public OperationalGroupAddExistingResoruce()
         {
             InitializeComponent();
-            dgvSubGroups.BackgroundColor = Program.FormAccent;
+            dgvSubGroups.BackgroundColor = Program.AccentColor;
         }
 
         private List<IncidentResource> _resourcesToAdd = new List<IncidentResource>();

@@ -18,7 +18,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         public void setPerson(Personnel person) { _selectedPerson = person; displayTeamMember(); }
         public VisitorEditControl()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            InitializeComponent(); this.BackColor = Program.FormBackgroundColor;
         }
 
         private void displayTeamMember()

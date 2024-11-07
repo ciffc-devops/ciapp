@@ -136,6 +136,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(890, 443);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 58;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
@@ -606,6 +607,7 @@
             // prepAndApprovePanel1
             // 
             this.prepAndApprovePanel1.ApprovedByDateTime = new System.DateTime(((long)(0)));
+            this.prepAndApprovePanel1.BackColor = System.Drawing.Color.White;
             this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.prepAndApprovePanel1.Collapsed = false;
             this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
@@ -685,7 +687,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(890, 499);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(784, 453);

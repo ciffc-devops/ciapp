@@ -13,6 +13,7 @@ namespace WF_ICS_ClassLibrary.Utilities
     {
         public static string ReplaceInvalidPathChars(this string filename, string replaceChar = "-")
         {
+            if (string.IsNullOrEmpty(filename)){ return null; }
             string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
             Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
             return r.Replace(filename, replaceChar);
