@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateHistoryForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvUpdates = new System.Windows.Forms.DataGridView();
@@ -87,14 +87,15 @@
             this.dgvUpdates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUpdates.Size = new System.Drawing.Size(800, 376);
             this.dgvUpdates.TabIndex = 0;
+            this.dgvUpdates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUpdates_CellDoubleClick);
             // 
             // colDate
             // 
             this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDate.DataPropertyName = "LastUpdateLocal";
-            dataGridViewCellStyle1.Format = "yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "yyyy-MMM-dd";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colDate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
             this.colDate.ReadOnly = true;
@@ -104,9 +105,9 @@
             // 
             this.colTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colTime.DataPropertyName = "LastUpdateLocal";
-            dataGridViewCellStyle2.Format = "HH:mm:ss";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "HH:mm:ss";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colTime.DefaultCellStyle = dataGridViewCellStyle4;
             this.colTime.HeaderText = "Time";
             this.colTime.Name = "colTime";
             this.colTime.ReadOnly = true;
@@ -149,6 +150,7 @@
             this.btnNext.Text = "Revert to selected";
             this.btnNext.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // UpdateHistoryForm
             // 
@@ -158,6 +160,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "UpdateHistoryForm";
             this.Text = "Update History";
+            this.Load += new System.EventHandler(this.UpdateHistoryForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
