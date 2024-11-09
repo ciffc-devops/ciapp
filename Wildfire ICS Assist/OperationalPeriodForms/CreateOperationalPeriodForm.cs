@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
+using WildfireICSDesktopServices;
 
 
 namespace Wildfire_ICS_Assist.OperationalPeriodForms
@@ -75,7 +76,7 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
                 if (Program.CurrentIncident.hasMeaningfulMedicalPlan(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Medical Plan", ID = ItemsAvailableForCopy.Count + 1 }); }
                 if (Program.CurrentIncident.hasMeaningfulOrgChart(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Organization Chart", ID = ItemsAvailableForCopy.Count + 1 }); }
                 if (Program.CurrentIncident.allSafetyMessages.Any(o => o.OpPeriod == copyFrom.PeriodNumber && o.Active)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Safety Message(s)", ID = ItemsAvailableForCopy.Count + 1 }); }
-                if (Program.CurrentIncident.hasMeaningfulAirOps(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Air Operations", ID = ItemsAvailableForCopy.Count + 1 }); }
+                if (Program.CurrentIncident.hasMeaningfulAirOps(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Air Operations Plans", ID = ItemsAvailableForCopy.Count + 1 }); }
                 //if (Program.CurrentIncident.hasMeaningfulObjectives(copyFrom.PeriodNumber)) { items.Add(new IncidentDataItem() { DisplayName = "Incident Objectives", ID = 1 }); }
 
 
@@ -103,10 +104,13 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
 
                 Program.incidentDataService.UpsertOperationalPeriod(operationalPeriod);
 
+                int copyFromPeriodNumber = (cboCurrentOperationalPeriod.SelectedItem as OperationalPeriod).PeriodNumber;
+                int copyToPeriodNumber = operationalPeriod.PeriodNumber;
+
                 //copy stuff over
-               foreach(Control c in flowCopyableItems.Controls)
+                foreach (Control c in flowCopyableItems.Controls)
                 {
-                    if(c is CheckBox)
+                    if (c is CheckBox)
                     {
                         CheckBox chk = c as CheckBox;
                         if (chk.Checked)
@@ -114,7 +118,20 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
                             switch (chk.Text)
                             {
                                 case "Communications Plan":
-                                    CopyCommsPlan();
+                                    List<CommsPlanItem> commsItems = Program.CurrentIncident.CopyCommunicationsPlan(copyFromPeriodNumber, copyToPeriodNumber);
+
+                                    break;
+                                case "Medical Plan":
+                                    var newMedPlan = Program.CurrentIncident.CopyMedicalPlan(copyFromPeriodNumber, copyToPeriodNumber);
+                                    break;
+                                case "Incident Objectives":
+                                    IncidentObjectivesSheet newSheet = Program.CurrentIncident.CopyIncidentObjectivesSheet(copyFromPeriodNumber, copyToPeriodNumber);
+                                    break;
+                                case "Safety Message(s)":
+                                    List<SafetyMessage> newMessages = Program.CurrentIncident.CopySafetyMessages(copyFromPeriodNumber, copyToPeriodNumber);
+                                    break;
+                                case "Air Operations Plans":
+                                    AirOperationsSummary airOperationsSummary = Program.CurrentIncident.CopyAirOperationsSummary(copyFromPeriodNumber, copyToPeriodNumber);
                                     break;
                             }
                         }
@@ -135,29 +152,7 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
             }
         }
 
-        private void CopyCommsPlan()
-        {
-            OperationalPeriod copyFrom = cboCurrentOperationalPeriod.SelectedItem as OperationalPeriod;
-
-
-
-            int itemsAdded = 0;
-
-            Program.CurrentIncident.createCommsPlanAsNeeded(operationalPeriod.PeriodNumber);
-
-            foreach (CommsPlanItem item in Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == copyFrom.PeriodNumber).ActiveCommsItems)
-            {
-                if (!Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == operationalPeriod.PeriodNumber).ActiveCommsItems.Any(o => o.Equals(item)))
-                {
-
-                    CommsPlanItem newItem = item.Clone();
-                    newItem.OpPeriod = operationalPeriod.PeriodNumber;
-                    newItem.ItemID = Guid.NewGuid();
-                    Program.incidentDataService.UpsertCommsPlanItem(newItem);
-                    itemsAdded++;
-                }
-            }
-        }
+       
         
 
         private Tuple<bool, string> ValidateNewOP()

@@ -73,12 +73,12 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     TaskUpdate LastUpdateForItem = Program.CurrentTask.GetLastUpdateByItemID(record.Id);
                     if (LastUpdateForItem != null)
                     {
-                        TaskUpdate newUpdate = Program.incidentDataService.CreateTaskUpdateForItem(LastUpdateForItem.Data.Clone(), "UPSERT");
+                        SyncableItem item = LastUpdateForItem.Data.Clone();
+                        item.Active = true;
+                        item.LastUpdatedUTC = DateTime.UtcNow;
 
-                        newUpdate.Data = LastUpdateForItem.Data.Clone();
-                        newUpdate.Data.LastUpdatedUTC = DateTime.UtcNow;
-                        newUpdate.Data.Active = true;
-
+                        TaskUpdate newUpdate = Program.incidentDataService.CreateTaskUpdateForItem(item, "UPSERT");
+                        
                         Program.incidentDataService.ProcessTaskUpdate(newUpdate);
                     }
                 }

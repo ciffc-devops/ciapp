@@ -65,9 +65,9 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     MedicalPlan medplan = TestTools.createTestMedicalPlan(seed);
                     medplan.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created MedicalPlan"); log.Append(Environment.NewLine);
-                    foreach (MedicalAidStation aidStation in medplan.MedicalAidStations) { Program.incidentDataService.UpsertMedicalAidStation(aidStation); }
-                    foreach (AmbulanceService item in medplan.Ambulances) { Program.incidentDataService.UpsertAmbulance(item); }
-                    foreach (Hospital item in medplan.Hospitals) { Program.incidentDataService.UpsertHospital(item); }
+                    foreach (MedicalAidStation aidStation in medplan.MedicalAidStations) { aidStation.OpPeriod = Program.CurrentOpPeriod; Program.incidentDataService.UpsertMedicalAidStation(aidStation); }
+                    foreach (AmbulanceService item in medplan.Ambulances) { item.OpPeriod = Program.CurrentOpPeriod; Program.incidentDataService.UpsertAmbulance(item); }
+                    foreach (Hospital item in medplan.Hospitals) { item.OpPeriod = Program.CurrentOpPeriod; Program.incidentDataService.UpsertHospital(item); }
                     Program.incidentDataService.UpsertMedicalPlan(medplan);
                     log.Append("Saved MedicalPlan"); log.Append(Environment.NewLine);
                 }
@@ -329,6 +329,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                         for (int x = 0; x < 5; x++)
                         {
                             testIncidentObjectivesSheet.Objectives.Add(TestTools.createTestIncidentObjective(x));
+                            testIncidentObjectivesSheet.Objectives[x].OpPeriod = Program.CurrentOpPeriod;
                         }
                     }
                     else

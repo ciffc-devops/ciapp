@@ -37,7 +37,6 @@
             this.colAidName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAidLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAidParamedics = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.llBox4 = new System.Windows.Forms.LinkLabel();
             this.btnAddAidStation = new System.Windows.Forms.Button();
             this.btnDeleteAidStation = new System.Windows.Forms.Button();
             this.btnEditAidStation = new System.Windows.Forms.Button();
@@ -71,6 +70,7 @@
             this.btnFormHelp = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnFieldHelp4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -166,7 +166,7 @@
             // 
             // splitContainer6.Panel2
             // 
-            this.splitContainer6.Panel2.Controls.Add(this.llBox4);
+            this.splitContainer6.Panel2.Controls.Add(this.btnFieldHelp4);
             this.splitContainer6.Panel2.Controls.Add(this.btnAddAidStation);
             this.splitContainer6.Panel2.Controls.Add(this.btnDeleteAidStation);
             this.splitContainer6.Panel2.Controls.Add(this.btnEditAidStation);
@@ -224,20 +224,10 @@
             this.colAidParamedics.ReadOnly = true;
             this.colAidParamedics.Width = 55;
             // 
-            // llBox4
-            // 
-            this.llBox4.AutoSize = true;
-            this.llBox4.Location = new System.Drawing.Point(767, 12);
-            this.llBox4.Name = "llBox4";
-            this.llBox4.Size = new System.Drawing.Size(104, 24);
-            this.llBox4.TabIndex = 50;
-            this.llBox4.TabStop = true;
-            this.llBox4.Text = "Instructions";
-            // 
             // btnAddAidStation
             // 
             this.btnAddAidStation.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddAidStation.Location = new System.Drawing.Point(3, 3);
+            this.btnAddAidStation.Location = new System.Drawing.Point(5, 2);
             this.btnAddAidStation.Name = "btnAddAidStation";
             this.btnAddAidStation.Size = new System.Drawing.Size(102, 42);
             this.btnAddAidStation.TabIndex = 47;
@@ -348,11 +338,11 @@
             // 
             this.btnFieldHelp5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFieldHelp5.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_196_circle_empty_info;
-            this.btnFieldHelp5.Location = new System.Drawing.Point(727, 6);
+            this.btnFieldHelp5.Location = new System.Drawing.Point(830, 6);
             this.btnFieldHelp5.Name = "btnFieldHelp5";
-            this.btnFieldHelp5.Size = new System.Drawing.Size(144, 37);
+            this.btnFieldHelp5.Size = new System.Drawing.Size(41, 37);
             this.btnFieldHelp5.TabIndex = 55;
-            this.btnFieldHelp5.Text = "Field Help";
+            this.btnFieldHelp5.Tag = "Help";
             this.btnFieldHelp5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFieldHelp5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFieldHelp5.UseVisualStyleBackColor = true;
@@ -489,11 +479,11 @@
             // 
             this.btnFieldHelp6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFieldHelp6.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_196_circle_empty_info;
-            this.btnFieldHelp6.Location = new System.Drawing.Point(735, 6);
+            this.btnFieldHelp6.Location = new System.Drawing.Point(838, 6);
             this.btnFieldHelp6.Name = "btnFieldHelp6";
-            this.btnFieldHelp6.Size = new System.Drawing.Size(144, 37);
+            this.btnFieldHelp6.Size = new System.Drawing.Size(41, 37);
             this.btnFieldHelp6.TabIndex = 58;
-            this.btnFieldHelp6.Text = "Field Help";
+            this.btnFieldHelp6.Tag = "Help";
             this.btnFieldHelp6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFieldHelp6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFieldHelp6.UseVisualStyleBackColor = true;
@@ -585,11 +575,11 @@
             // 
             this.btnFieldHelp7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFieldHelp7.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_196_circle_empty_info;
-            this.btnFieldHelp7.Location = new System.Drawing.Point(730, 3);
+            this.btnFieldHelp7.Location = new System.Drawing.Point(835, 3);
             this.btnFieldHelp7.Name = "btnFieldHelp7";
-            this.btnFieldHelp7.Size = new System.Drawing.Size(144, 37);
+            this.btnFieldHelp7.Size = new System.Drawing.Size(39, 37);
             this.btnFieldHelp7.TabIndex = 60;
-            this.btnFieldHelp7.Text = "Field Help";
+            this.btnFieldHelp7.Tag = "Help";
             this.btnFieldHelp7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFieldHelp7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFieldHelp7.UseVisualStyleBackColor = true;
@@ -683,6 +673,19 @@
             this.toolTip1.ReshowDelay = 1000;
             this.toolTip1.ToolTipTitle = "Form Instructions";
             // 
+            // btnFieldHelp1
+            // 
+            this.btnFieldHelp4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFieldHelp4.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_196_circle_empty_info;
+            this.btnFieldHelp4.Location = new System.Drawing.Point(830, 6);
+            this.btnFieldHelp4.Name = "btnFieldHelp1";
+            this.btnFieldHelp4.Size = new System.Drawing.Size(41, 37);
+            this.btnFieldHelp4.TabIndex = 56;
+            this.btnFieldHelp4.Tag = "Help";
+            this.btnFieldHelp4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFieldHelp4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnFieldHelp4.UseVisualStyleBackColor = true;
+            // 
             // MedicalPlanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -702,7 +705,6 @@
             this.tpAidStations.ResumeLayout(false);
             this.splitContainer6.Panel1.ResumeLayout(false);
             this.splitContainer6.Panel2.ResumeLayout(false);
-            this.splitContainer6.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
             this.splitContainer6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAidStations)).EndInit();
@@ -771,6 +773,6 @@
         private System.Windows.Forms.Button btnFieldHelp7;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.LinkLabel llBox4;
+        private System.Windows.Forms.Button btnFieldHelp4;
     }
 }

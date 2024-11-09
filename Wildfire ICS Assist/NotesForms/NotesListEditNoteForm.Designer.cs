@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnHistory = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,6 +62,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnHistory);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Size = new System.Drawing.Size(689, 562);
@@ -148,16 +150,25 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnHistory
+            // 
+            this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHistory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnHistory.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_55_clock;
+            this.btnHistory.Location = new System.Drawing.Point(513, 8);
+            this.btnHistory.Name = "btnHistory";
+            this.btnHistory.Size = new System.Drawing.Size(55, 51);
+            this.btnHistory.TabIndex = 34;
+            this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
+            // 
             // NotesListEditNoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 562);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "NotesListEditNoteForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add / Edit Note";
             this.Load += new System.EventHandler(this.NotesListEditNoteForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -179,5 +190,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnHistory;
     }
 }

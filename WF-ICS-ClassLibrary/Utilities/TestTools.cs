@@ -120,14 +120,18 @@ namespace WF_ICS_ClassLibrary.Utilities
             MedicalPlan test = new MedicalPlan();
             test.PreparedByResourceName = "PrepBy" + seed;
             test.DatePrepared = DateTime.Now.AddHours(seed);
-            test.Ambulances.Add(createTestAmbulanceService(seed));
-            test.Hospitals.Add(createTestHospital(seed));
-            test.MedicalAidStations.Add(createTestMedicalAidStation(seed));
+            for (int x = 0; x < 3; x++)
+            {
+                test.Ambulances.Add(createTestAmbulanceService(x));
+                test.Hospitals.Add(createTestHospital(x));
+                test.MedicalAidStations.Add(createTestMedicalAidStation(x));
+            }
             test.EmergencyProcedures = "EmergencyProcedures" + seed;
             test.PreparedByRoleName = "Operations Section Chief";
             test.PreparedByRoleID = Globals.OpsChiefID;
             test.PreparedByResourceName = "Tim " + seed;
             test.ApprovedByRoleID = Globals.IncidentCommanderID;
+            test.OpPeriod = seed;
             return test;
         }
 
@@ -419,9 +423,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             CommsPlan test = new CommsPlan();
 
-            test.OpPeriod = 1;
+            test.OpPeriod = seed;
             test.DatePrepared = DateTime.Now.AddHours(seed);
-            test.PreparedByResourceName = "PreparedBy" + seed;
+            test.PreparedByResourceName = RandomNameGenerator.FirstName + " " + RandomNameGenerator.LastName;
             test.allCommsItems = new List<CommsPlanItem>();
             for (int x = 0; x < 5; x++)
             {
@@ -461,11 +465,12 @@ namespace WF_ICS_ClassLibrary.Utilities
             return test;
         }
 
-        public static IncidentObjective createTestIncidentObjective(int seed)
+        public static IncidentObjective createTestIncidentObjective(int seed, int opPeriod = 0)
         {
             IncidentObjective test = new IncidentObjective();
             test.Objective = "Objective " + seed;
             test.Priority = seed;
+            test.OpPeriod = opPeriod;
             test.Completed = RandomBooleanGenerator.GetRandomBoolean();
            
 
@@ -475,6 +480,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static IncidentObjectivesSheet createTestObjectiveSheet(int seed)
         {
             IncidentObjectivesSheet sheet = new IncidentObjectivesSheet();
+            sheet.OpPeriod = seed;
             sheet.DatePrepared = DateTime.Now;
             sheet.WeatherForecast = "WeatherForcast " + seed;
             sheet.GeneralSafety = "General Safety" + seed;
@@ -486,7 +492,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             sheet.ApprovedByRoleName = "EOC Director";
             for (int x = 0; x < 5; x++)
             {
-                sheet.Objectives.Add(createTestIncidentObjective(x));
+                sheet.Objectives.Add(createTestIncidentObjective(x, sheet.OpPeriod));
             }
             
 

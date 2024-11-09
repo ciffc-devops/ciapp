@@ -18,7 +18,6 @@ namespace WF_ICS_ClassLibrary.Models
 
         //[ProtoMember(7)] private List<ICSRole> _personnel;
         //[ProtoMember(8)] private List<CommsPlanItem> _Frequencies;
-        [ProtoMember(9)] private List<Aircraft> _aircrafts;
 
 
         public AirOperationsSummary()
@@ -27,7 +26,6 @@ namespace WF_ICS_ClassLibrary.Models
             _notam = new NOTAM();
             // _personnel = new List<ICSRole>();
             // _Frequencies = new List<CommsPlanItem>();
-            _aircrafts = new List<Aircraft>();
             Active = true;
         }
 

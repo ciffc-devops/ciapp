@@ -1328,6 +1328,26 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RedExclaim {
+            get {
+                object obj = ResourceManager.GetObject("RedExclaim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RedExclaimSq {
+            get {
+                object obj = ResourceManager.GetObject("RedExclaimSq", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, you cannot delete this role, but you can rename it as needed.  Would you like to rename this role now?.
         /// </summary>
         internal static string RenameInsteadOfDeleteRole {

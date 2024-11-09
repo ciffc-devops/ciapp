@@ -293,6 +293,18 @@
     <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.Designer.cs">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewsForms\NewsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewsForms\NewsListForm.Designer.cs">
+      <DependentUpon>NewsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewsForms\NewsViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewsForms\NewsViewForm.Designer.cs">
+      <DependentUpon>NewsViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperationalPeriodForms\CreateOperationalPeriodForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -929,6 +941,12 @@
     <EmbeddedResource Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.resx">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewsForms\NewsListForm.resx">
+      <DependentUpon>NewsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewsForms\NewsViewForm.resx">
+      <DependentUpon>NewsViewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperationalPeriodForms\CreateOperationalPeriodForm.resx">
       <DependentUpon>CreateOperationalPeriodForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1355,6 +1373,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\RedExclaimSq.png" />
+    <None Include="Resources\RedExclaim.png" />
     <None Include="Resources\glyphicons-basic-292-square-empty-minus.png" />
     <None Include="Resources\glyphicons-basic-294-square-empty-check.png" />
     <None Include="Resources\glyphicons-basic-41-stats.png" />

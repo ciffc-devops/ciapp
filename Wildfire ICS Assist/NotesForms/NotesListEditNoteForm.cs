@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -26,6 +27,11 @@ namespace Wildfire_ICS_Assist
         private void NotesListEditNoteForm_Load(object sender, EventArgs e)
         {
             cboNoteCategory.DataSource = NoteTools.NoteCategories;
+            LoadNote();   
+        }
+
+        private void LoadNote()
+        {
             if (CurrentNote != null)
             {
                 txtNoteTitle.Text = CurrentNote.NoteTitle;
@@ -68,6 +74,29 @@ namespace Wildfire_ICS_Assist
         {
             if (string.IsNullOrEmpty(txtNoteTitle.Text.Trim())) { txtNoteTitle.BackColor = Program.ErrorColor; }
             else { txtNoteTitle.BackColor = Program.GoodColor; }
+        }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            using (UpdateHistoryForm historyForm = new UpdateHistoryForm())
+            {
+                List<TaskUpdate> assignmentUpdates = Program.CurrentTask.allTaskUpdates.Where(o => o.ItemID == CurrentNote.ID).ToList();
+
+
+
+                historyForm.SetUpdateList(assignmentUpdates);
+
+                DialogResult dr = historyForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    TaskUpdate update = (TaskUpdate)historyForm.SelectedUpdate;
+
+                    Program.incidentDataService.ApplyTaskUpdate(update);
+
+                    CurrentNote = Program.CurrentIncident.allNotes.First(o => o.ID == CurrentNote.ID).Clone();
+                    LoadNote();
+                }
+            }
         }
     }
 }

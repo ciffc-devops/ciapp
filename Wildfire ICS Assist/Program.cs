@@ -15,6 +15,7 @@ using WF_ICS_ClassLibrary.Utilities;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.VisualStudio.PlatformUI;
+using WildfireICSDesktopServices.NewsServices;
 
 namespace Wildfire_ICS_Assist
 {
@@ -40,6 +41,7 @@ namespace Wildfire_ICS_Assist
             WF_ICS_ClassLibrary.Globals.incidentService = incidentDataService;
             positionLogService = new PositionLogService();
             networkService = new NetworkService();
+            newsService = new NewsService();
 
             CurrentTask = new Incident();
             CurrentOpPeriod = 1;
@@ -73,6 +75,7 @@ namespace Wildfire_ICS_Assist
         */
         private static IGeneralOptionsService _generalOptionsService = null;
         private static IPDFExportService _pdfExportService = null;
+        private static NewsService _newsService = null;
         private static IWFIncidentService _incidentDataService = null;
         private static IPositionLogService _positionLogService= null;
         private static Icon _programIcon = Properties.Resources.P_icon;
@@ -89,6 +92,7 @@ namespace Wildfire_ICS_Assist
 
         public static IPDFExportService pdfExportService { get => _pdfExportService; private set => _pdfExportService = value; }
         public static IWFIncidentService incidentDataService { get => _incidentDataService; private set => _incidentDataService = value; }
+        public static NewsService newsService { get => _newsService; private set => _newsService = value; }
 
 
         public static Incident CurrentIncident

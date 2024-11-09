@@ -50,7 +50,7 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
             ICSFormInformation form = ICSFormTools.GetFormByNumber(206);
-            if (form.Fields.Any(o => o.FieldNumber == 4)) { toolTip1.SetToolTip(llBox4, form.Fields.First(o => o.FieldNumber == 4).InstructionsWithLineFeed); }
+            if (form.Fields.Any(o => o.FieldNumber == 4)) { toolTip1.SetToolTip(btnFieldHelp4, form.Fields.First(o => o.FieldNumber == 4).InstructionsWithLineFeed); }
             if (form.Fields.Any(o => o.FieldNumber == 5)) { toolTip1.SetToolTip(btnFieldHelp5, form.Fields.First(o => o.FieldNumber == 5).InstructionsWithLineFeed); }
             if (form.Fields.Any(o => o.FieldNumber == 6)) { toolTip1.SetToolTip(btnFieldHelp6, form.Fields.First(o => o.FieldNumber == 6).InstructionsWithLineFeed); }
             if (form.Fields.Any(o => o.FieldNumber == 7)) { toolTip1.SetToolTip(btnFieldHelp7, form.Fields.First(o => o.FieldNumber == 7).InstructionsWithLineFeed); }

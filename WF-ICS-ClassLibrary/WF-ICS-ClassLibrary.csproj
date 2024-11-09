@@ -112,6 +112,7 @@
     <Compile Include="EventHandling\MedicalPlanEventHandler.cs" />
     <Compile Include="EventHandling\CheckInEventHandler.cs" />
     <Compile Include="EventHandling\NetworkEventHandlers.cs" />
+    <Compile Include="EventHandling\NewsEventHandler.cs" />
     <Compile Include="EventHandling\NoteEventHandler.cs" />
     <Compile Include="EventHandling\OperationalGroupEventHandler.cs" />
     <Compile Include="EventHandling\OperationalPeriodEventHandler.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Utilities\GISTools.cs" />
     <Compile Include="Utilities\ImageTools.cs" />
     <Compile Include="Utilities\IncidentTools.cs" />
+    <Compile Include="Utilities\OpCopyTools.cs" />
     <Compile Include="Utilities\ProgramColor.cs" />
     <Compile Include="Utilities\RandomGenerators.cs" />
     <Compile Include="Utilities\StringExt.cs" />

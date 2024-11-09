@@ -88,8 +88,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.chkSwitchNow);
             this.splitContainer1.Panel2.Controls.Add(this.btnCreateOpPeriod);
-            this.splitContainer1.Size = new System.Drawing.Size(813, 582);
-            this.splitContainer1.SplitterDistance = 519;
+            this.splitContainer1.Size = new System.Drawing.Size(759, 355);
+            this.splitContainer1.SplitterDistance = 292;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -114,7 +114,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.cboCurrentOperationalPeriod);
             this.splitContainer2.Panel2.Controls.Add(this.label4);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(813, 519);
+            this.splitContainer2.Size = new System.Drawing.Size(759, 292);
             this.splitContainer2.SplitterDistance = 80;
             this.splitContainer2.TabIndex = 99;
             // 
@@ -122,6 +122,8 @@
             // 
             this.splitContainer3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer3.IsSplitterFixed = true;
             this.splitContainer3.Location = new System.Drawing.Point(0, 37);
             this.splitContainer3.Name = "splitContainer3";
             // 
@@ -133,8 +135,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer3.Size = new System.Drawing.Size(813, 42);
-            this.splitContainer3.SplitterDistance = 135;
+            this.splitContainer3.Size = new System.Drawing.Size(759, 42);
+            this.splitContainer3.SplitterDistance = 125;
             this.splitContainer3.TabIndex = 102;
             // 
             // numOpPeriod
@@ -154,7 +156,7 @@
             0,
             0});
             this.numOpPeriod.Name = "numOpPeriod";
-            this.numOpPeriod.Size = new System.Drawing.Size(68, 29);
+            this.numOpPeriod.Size = new System.Drawing.Size(72, 29);
             this.numOpPeriod.TabIndex = 93;
             this.numOpPeriod.Value = new decimal(new int[] {
             9999,
@@ -178,6 +180,7 @@
             // splitContainer4
             // 
             this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.IsSplitterFixed = true;
             this.splitContainer4.Location = new System.Drawing.Point(0, 0);
             this.splitContainer4.Name = "splitContainer4";
             // 
@@ -192,8 +195,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.datOpsEnd);
             this.splitContainer4.Panel2.Controls.Add(this.datEndTime);
             this.splitContainer4.Panel2.Controls.Add(this.label18);
-            this.splitContainer4.Size = new System.Drawing.Size(674, 42);
-            this.splitContainer4.SplitterDistance = 336;
+            this.splitContainer4.Size = new System.Drawing.Size(630, 42);
+            this.splitContainer4.SplitterDistance = 319;
             this.splitContainer4.TabIndex = 0;
             // 
             // datOpsStart
@@ -204,7 +207,7 @@
             this.datOpsStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datOpsStart.Location = new System.Drawing.Point(70, 8);
             this.datOpsStart.Name = "datOpsStart";
-            this.datOpsStart.Size = new System.Drawing.Size(155, 29);
+            this.datOpsStart.Size = new System.Drawing.Size(145, 29);
             this.datOpsStart.TabIndex = 94;
             this.datOpsStart.ValueChanged += new System.EventHandler(this.datOpsStart_ValueChanged);
             // 
@@ -213,7 +216,7 @@
             this.datStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.datStartTime.CustomFormat = "HH:mm";
             this.datStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datStartTime.Location = new System.Drawing.Point(231, 8);
+            this.datStartTime.Location = new System.Drawing.Point(219, 8);
             this.datStartTime.Name = "datStartTime";
             this.datStartTime.ShowUpDown = true;
             this.datStartTime.Size = new System.Drawing.Size(77, 29);
@@ -240,7 +243,7 @@
             this.datOpsEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datOpsEnd.Location = new System.Drawing.Point(54, 8);
             this.datOpsEnd.Name = "datOpsEnd";
-            this.datOpsEnd.Size = new System.Drawing.Size(164, 29);
+            this.datOpsEnd.Size = new System.Drawing.Size(152, 29);
             this.datOpsEnd.TabIndex = 95;
             this.datOpsEnd.ValueChanged += new System.EventHandler(this.datOpsEnd_ValueChanged);
             // 
@@ -249,7 +252,7 @@
             this.datEndTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.datEndTime.CustomFormat = "HH:mm";
             this.datEndTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datEndTime.Location = new System.Drawing.Point(224, 8);
+            this.datEndTime.Location = new System.Drawing.Point(212, 8);
             this.datEndTime.Name = "datEndTime";
             this.datEndTime.ShowUpDown = true;
             this.datEndTime.Size = new System.Drawing.Size(73, 29);
@@ -288,7 +291,7 @@
             this.flowCopyableItems.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowCopyableItems.Location = new System.Drawing.Point(12, 132);
             this.flowCopyableItems.Name = "flowCopyableItems";
-            this.flowCopyableItems.Size = new System.Drawing.Size(789, 300);
+            this.flowCopyableItems.Size = new System.Drawing.Size(735, 73);
             this.flowCopyableItems.TabIndex = 108;
             // 
             // btnCheckNone
@@ -325,7 +328,7 @@
             this.cboCurrentOperationalPeriod.FormattingEnabled = true;
             this.cboCurrentOperationalPeriod.Location = new System.Drawing.Point(370, 48);
             this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
-            this.cboCurrentOperationalPeriod.Size = new System.Drawing.Size(430, 37);
+            this.cboCurrentOperationalPeriod.Size = new System.Drawing.Size(376, 37);
             this.cboCurrentOperationalPeriod.TabIndex = 105;
             this.cboCurrentOperationalPeriod.SelectedIndexChanged += new System.EventHandler(this.cboCurrentOperationalPeriod_SelectedIndexChanged);
             // 
@@ -354,7 +357,9 @@
             // 
             this.chkSwitchNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSwitchNow.AutoSize = true;
-            this.chkSwitchNow.Location = new System.Drawing.Point(359, 17);
+            this.chkSwitchNow.Checked = true;
+            this.chkSwitchNow.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSwitchNow.Location = new System.Drawing.Point(305, 17);
             this.chkSwitchNow.Name = "chkSwitchNow";
             this.chkSwitchNow.Size = new System.Drawing.Size(210, 28);
             this.chkSwitchNow.TabIndex = 56;
@@ -365,7 +370,7 @@
             // 
             this.btnCreateOpPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnCreateOpPeriod.Location = new System.Drawing.Point(575, 5);
+            this.btnCreateOpPeriod.Location = new System.Drawing.Point(521, 5);
             this.btnCreateOpPeriod.Name = "btnCreateOpPeriod";
             this.btnCreateOpPeriod.Size = new System.Drawing.Size(226, 51);
             this.btnCreateOpPeriod.TabIndex = 55;
@@ -384,8 +389,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 582);
+            this.ClientSize = new System.Drawing.Size(759, 355);
             this.Controls.Add(this.splitContainer1);
+            this.MinimumSize = new System.Drawing.Size(775, 394);
             this.Name = "CreateOperationalPeriodForm";
             this.Text = "Create Operational Period";
             this.Load += new System.EventHandler(this.CreateOperationalPeriodForm_Load);
