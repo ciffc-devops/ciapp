@@ -130,6 +130,9 @@
             this.requestOptionsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.networkTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutCIAPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -840,10 +843,32 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newsToolStripMenuItem,
+            this.viewLogFileToolStripMenuItem,
+            this.toolStripSeparator6,
             this.supportToolStripMenuItem,
             this.aboutCIAPPToolStripMenuItem});
+            this.helpToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.RedExclaimSq;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // newsToolStripMenuItem
+            // 
+            this.newsToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.RedExclaimSq;
+            this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
+            resources.ApplyResources(this.newsToolStripMenuItem, "newsToolStripMenuItem");
+            this.newsToolStripMenuItem.Click += new System.EventHandler(this.newsToolStripMenuItem_Click);
+            // 
+            // viewLogFileToolStripMenuItem
+            // 
+            this.viewLogFileToolStripMenuItem.Name = "viewLogFileToolStripMenuItem";
+            resources.ApplyResources(this.viewLogFileToolStripMenuItem, "viewLogFileToolStripMenuItem");
+            this.viewLogFileToolStripMenuItem.Click += new System.EventHandler(this.viewLogFileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             // 
             // supportToolStripMenuItem
             // 
@@ -1184,6 +1209,9 @@
         private System.Windows.Forms.Button btnNewOpPeriod;
         private System.Windows.Forms.Button btnMoveToOpNow;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripMenuItem viewLogFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
 

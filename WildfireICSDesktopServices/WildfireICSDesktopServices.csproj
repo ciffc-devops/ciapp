@@ -123,6 +123,8 @@
     <Compile Include="Logging\LogService.cs" />
     <Compile Include="MAPI.cs" />
     <Compile Include="NetworkService.cs" />
+    <Compile Include="NewsServices\NewsService.cs" />
+    <Compile Include="NewsServices\NewsWebTools.cs" />
     <Compile Include="PDFExportService.cs" />
     <Compile Include="PDFExtraTools.cs" />
     <Compile Include="PositionLogService.cs" />

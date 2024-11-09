@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAUABBgFAAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAWABBgFgAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -204,7 +204,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnMoveToOpNow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 48</value>
+    <value>259, 48</value>
   </data>
   <data name="btnMoveToOpNow.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -743,7 +743,7 @@
     <value>8, 50</value>
   </data>
   <data name="cboCurrentOperationalPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 32</value>
+    <value>245, 32</value>
   </data>
   <data name="cboCurrentOperationalPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>93</value>
@@ -776,7 +776,7 @@
     <value>9, 0, 9, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 38</value>
+    <value>305, 38</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -852,7 +852,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnLockTaskInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 7</value>
+    <value>668, 7</value>
   </data>
   <data name="btnLockTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -879,7 +879,7 @@
     <value>192, 45</value>
   </data>
   <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 29</value>
+    <value>490, 29</value>
   </data>
   <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -903,7 +903,7 @@
     <value>16, 130</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>681, 2</value>
+    <value>673, 2</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
@@ -1095,7 +1095,7 @@
     <value>192, 88</value>
   </data>
   <data name="txtTaskNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 29</value>
+    <value>490, 29</value>
   </data>
   <data name="txtTaskNumber.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1185,7 +1185,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnICSRoleHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 144</value>
+    <value>589, 144</value>
   </data>
   <data name="btnICSRoleHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 37</value>
@@ -1218,7 +1218,7 @@
     <value>170, 147</value>
   </data>
   <data name="cboICSRole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 32</value>
+    <value>413, 32</value>
   </data>
   <data name="cboICSRole.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1278,7 +1278,7 @@
     <value>7, 8</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>382, 32</value>
+    <value>374, 32</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1793,20 +1793,35 @@
   <data name="networkInternetToolStripMenuItem.Text" xml:space="preserve">
     <value>Network / Internet</value>
   </data>
+  <data name="newsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 30</value>
+  </data>
+  <data name="newsToolStripMenuItem.Text" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="viewLogFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 30</value>
+  </data>
+  <data name="viewLogFileToolStripMenuItem.Text" xml:space="preserve">
+    <value>View Log File</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 6</value>
+  </data>
   <data name="supportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 30</value>
+    <value>195, 30</value>
   </data>
   <data name="supportToolStripMenuItem.Text" xml:space="preserve">
     <value>Support</value>
   </data>
   <data name="aboutCIAPPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 30</value>
+    <value>195, 30</value>
   </data>
   <data name="aboutCIAPPToolStripMenuItem.Text" xml:space="preserve">
     <value>About CIAPP</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 29</value>
+    <value>79, 29</value>
   </data>
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
     <value>Help</value>
@@ -3563,6 +3578,24 @@
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newsToolStripMenuItem.Name" xml:space="preserve">
+    <value>newsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;newsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;viewLogFileToolStripMenuItem.Name" xml:space="preserve">
+    <value>viewLogFileToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;viewLogFileToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
+    <value>toolStripSeparator6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;supportToolStripMenuItem.Name" xml:space="preserve">
     <value>supportToolStripMenuItem</value>

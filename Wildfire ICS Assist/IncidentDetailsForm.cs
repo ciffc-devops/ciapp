@@ -33,6 +33,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Wildfire_ICS_Assist.IncidentStatusSummaryForms;
 using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.OperationalPeriodForms;
+using WildfireICSDesktopServices.Logging;
+using Wildfire_ICS_Assist.NewsForms;
+using WF_ICS_ClassLibrary.Models.NewsModels;
 
 
 namespace Wildfire_ICS_Assist
@@ -57,7 +60,7 @@ namespace Wildfire_ICS_Assist
             SetControlColors(this.Controls);
 
         }
-        private void IncidentDetailsForm_Load(object sender, EventArgs e)
+        private  async void IncidentDetailsForm_Load(object sender, EventArgs e)
         {
             
             
@@ -93,10 +96,18 @@ namespace Wildfire_ICS_Assist
 
             TestToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
+            DownloadNewsOperationCompleted += IncidentDetailsForm_DownloadNewsOperationCompleted;
+           DownloadNewsAsync();
+
+           
+
+
 #if DEBUG
             txtTaskName.Text = "test " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 #endif
         }
+
+      
 
         private void StartAsServer()
         {
@@ -145,6 +156,18 @@ namespace Wildfire_ICS_Assist
             {
                 MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
 
+            }
+
+
+            if (Program.newsService.newsArchive.Any(o => !o.ReadLocally))
+            {
+                helpToolStripMenuItem.Image = Properties.Resources.RedExclaimSq;
+                newsToolStripMenuItem.Image = Properties.Resources.RedExclaimSq;
+            }
+            else
+            {
+                helpToolStripMenuItem.Image = null;
+                newsToolStripMenuItem.Image = null;
             }
         }
 
@@ -208,7 +231,7 @@ namespace Wildfire_ICS_Assist
         CloseOpPeriodForm _closeOpPeriodForm = null;
         ResourceReplacementPlanningForm _resourceReplacementPlanningForm = null;
         IncidentStatusSummaryForm _incidentStatusSummaryForm = null;
-
+        NewsListForm _newsListForm = null;
         public event ShortcutEventHandler ShortcutButtonClicked;
 
 
@@ -253,6 +276,7 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.ResourceReplacementChanged += WfIncidentService_ResourceReplacementChanged;
             Program.incidentDataService.IncidentSummaryChanged += IncidentDataService_IncidentSummaryChanged;
             //Program.wfIncidentService.TeamAssignmentChanged += Program_TeamAssignmentChanged;
+            Program.newsService.newsArchiveChanged += NewsService_newsArchiveChanged; ;
 
 
             //network stuff
@@ -265,7 +289,7 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.CurrentOpPeriodChanged += changeOpPeriod;
         }
 
-        
+       
 
         private void CloseActiveForms()
         {
@@ -3355,6 +3379,100 @@ namespace Wildfire_ICS_Assist
         {
             OpenCloseOpPeriodForm();
         }
+
+        private void viewLogFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = new LogService().GetLogPath();
+            if (!string.IsNullOrEmpty(path))
+            {
+                Process.Start(path);
+            }
+
+        }
+        #region News
+        private void newsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenNewsList();
+        }
+
+        private void OpenNewsList()
+        {
+
+            if (_newsListForm == null)
+            {
+                _newsListForm = new NewsListForm();
+                _newsListForm.FormClosed += delegate { _newsListForm = null; RemoveActiveForm(_newsListForm); };
+                ActiveForms.Add(_newsListForm);
+                _newsListForm.Show();
+            }
+            _newsListForm.BringToFront();
+            _newsListForm.WindowState = FormWindowState.Normal;
+            _newsListForm.Focus();
+
+        }
+
+        public event EventHandler DownloadNewsOperationCompleted;
+        private async Task DownloadNewsAsync()
+        {
+            bool isConnected = await Program.networkService.CheckForInternetConnectionAsync();
+            if (isConnected)
+            {
+                try
+                {
+                    List<NewsItem> updates = await Program.newsService.DownloadNewsList().ConfigureAwait(false);
+                    Program.newsService.AddNewNews(updates);
+                    OnDownloadNewsOperationCompleted(EventArgs.Empty);
+
+                }
+                catch (Exception ex)
+                {
+                    LogService log = new LogService();
+                    log.Log("Error downloading news - " + ex.ToString());
+                }
+            }
+
+        }
+        protected virtual void OnDownloadNewsOperationCompleted(EventArgs e)
+        {
+            DownloadNewsOperationCompleted?.Invoke(this, e);
+        }
+
+        private void NewsService_newsArchiveChanged(NewsEventArgs e)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                if (Program.newsService.newsArchive.Any(o => !o.ReadLocally))
+                {
+                    helpToolStripMenuItem.Image = Properties.Resources.RedExclaimSq;
+                    newsToolStripMenuItem.Image = Properties.Resources.RedExclaimSq;
+                }
+                else
+                {
+                    helpToolStripMenuItem.Image = null;
+                    newsToolStripMenuItem.Image = null;
+                }
+            });
+        }
+
+        private void IncidentDetailsForm_DownloadNewsOperationCompleted(object sender, EventArgs e)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                if (Program.newsService.newsArchive.Any(o => !o.ReadLocally))
+                {
+                    helpToolStripMenuItem.Image = Properties.Resources.RedExclaimSq;
+                    newsToolStripMenuItem.Image = Properties.Resources.RedExclaimSq;
+                }
+                else
+                {
+                    helpToolStripMenuItem.Image = null;
+                    newsToolStripMenuItem.Image = null;
+                }
+            });
+        }
+
+        #endregion
+
     }
 
 
