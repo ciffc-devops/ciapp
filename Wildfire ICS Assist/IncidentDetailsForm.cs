@@ -59,17 +59,7 @@ namespace Wildfire_ICS_Assist
         }
         private void IncidentDetailsForm_Load(object sender, EventArgs e)
         {
-            byte[] logo = (byte[])Program.generalOptionsService.GetOptionsValue("OrganizationLogo");
-            if (logo != null)
-            {
-                Image img = logo.getImageFromBytes();
-                picOrgLogo.Image = img;
-            }
-            else
-            {
-                Image img = Properties.Resources.CIAPP_LOGO_v3;
-                picOrgLogo.Image = img;
-            }
+            
             
             SetVersionNumber();
             setRecentFiles();
@@ -101,7 +91,7 @@ namespace Wildfire_ICS_Assist
 
             NetworkComms.AppendGlobalIncomingPacketHandler<Incident>("WFIncident", Program.networkService.HandleIncomingIncident);
 
-            tESTToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
+            TestToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
 #if DEBUG
             txtTaskName.Text = "test " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -1638,7 +1628,7 @@ namespace Wildfire_ICS_Assist
                         picOrgLogo.Image = img;
                     }
 
-                    tESTToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
+                    TestToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
 
 
@@ -3257,6 +3247,7 @@ namespace Wildfire_ICS_Assist
             if (TaskInfoLocked)
             {
                 btnLockTaskInfo.BackgroundImage = Properties.Resources.glyphicons_basic_218_lock_open_2x;
+                btnLockTaskInfo.BackgroundImageLayout = ImageLayout.Zoom;
                 txtTaskNumber.Enabled = true;
                 txtTaskName.Enabled = true;
             }
@@ -3264,6 +3255,8 @@ namespace Wildfire_ICS_Assist
             {
                 tmrLock.Enabled = false;
                 btnLockTaskInfo.BackgroundImage = Properties.Resources.glyphicons_basic_217_lock_2x;
+                btnLockTaskInfo.BackgroundImageLayout = ImageLayout.Zoom;
+
                 txtTaskNumber.Enabled = false;
                 txtTaskName.Enabled = false;
             }

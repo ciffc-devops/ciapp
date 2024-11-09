@@ -30,8 +30,30 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            this.pnlOpsPeriod = new System.Windows.Forms.Panel();
+            this.imglTabIcons = new System.Windows.Forms.ImageList(this.components);
+            this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
+            this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
+            this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
+            this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
+            this.tmrPositionLogReminders = new System.Windows.Forms.Timer(this.components);
+            this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
+            this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
+            this.tmrLock = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnMoveToOpNow = new System.Windows.Forms.Button();
+            this.picOrgLogo = new System.Windows.Forms.PictureBox();
+            this.pnlInternetSyncStart = new System.Windows.Forms.Panel();
+            this.btnCancelInternetSync = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.pnlNetworkSyncInProgress = new System.Windows.Forms.Panel();
+            this.lblNetworkShareMoreInfoMsg = new System.Windows.Forms.Label();
+            this.btnNetworkSyncDone = new System.Windows.Forms.Button();
+            this.pbNetworkSyncInProgress = new System.Windows.Forms.ProgressBar();
+            this.btnCloseNetworkSyncInProgress = new System.Windows.Forms.Button();
+            this.lblNetworkSyncStatus = new System.Windows.Forms.Label();
+            this.pnlOpsPeriod = new System.Windows.Forms.Panel();
             this.btnReviewOpPeriod = new System.Windows.Forms.Button();
             this.btnEditOpPeriod = new System.Windows.Forms.Button();
             this.btnNewOpPeriod = new System.Windows.Forms.Button();
@@ -54,18 +76,6 @@
             this.lblTaskNumber = new System.Windows.Forms.Label();
             this.lblServerStatus = new System.Windows.Forms.Label();
             this.lblVersionNumber = new System.Windows.Forms.Label();
-            this.imglTabIcons = new System.Windows.Forms.ImageList(this.components);
-            this.pnlInternetSyncStart = new System.Windows.Forms.Panel();
-            this.btnCancelInternetSync = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.pnlNetworkSyncInProgress = new System.Windows.Forms.Panel();
-            this.lblNetworkShareMoreInfoMsg = new System.Windows.Forms.Label();
-            this.btnNetworkSyncDone = new System.Windows.Forms.Button();
-            this.pbNetworkSyncInProgress = new System.Windows.Forms.ProgressBar();
-            this.btnCloseNetworkSyncInProgress = new System.Windows.Forms.Button();
-            this.lblNetworkSyncStatus = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newIncidentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +113,6 @@
             this.safetyMessageICS208ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incidentStatusSummaryICS209ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.airOperationsSummaryICS220ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printTheIncidentActionPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.additionalDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationsListICS205AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,21 +121,6 @@
             this.printingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printThisOperationalPeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printThisIncidentToDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.teamAssignmentsICS204ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.memberStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.planningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminFinanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.networkInternetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localNetworkSharingSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.requestIncidentFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,15 +132,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutCIAPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tESTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.picOrgLogo = new System.Windows.Forms.PictureBox();
-            this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
-            this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
-            this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
-            this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
-            this.tmrPositionLogReminders = new System.Windows.Forms.Timer(this.components);
-            this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
-            this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
+            this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnGeneralMessage = new System.Windows.Forms.Button();
             this.btnReplacementResources = new System.Windows.Forms.Button();
@@ -163,16 +149,148 @@
             this.btnPrintIAP = new System.Windows.Forms.Button();
             this.btnPrintOrgChart = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
-            this.tmrLock = new System.Windows.Forms.Timer(this.components);
-            this.pnlOpsPeriod.SuspendLayout();
-            this.pnlTaskInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
             this.pnlInternetSyncStart.SuspendLayout();
             this.pnlNetworkSyncInProgress.SuspendLayout();
+            this.pnlOpsPeriod.SuspendLayout();
+            this.pnlTaskInfo.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
             this.cpOtherTools.SuspendLayout();
             this.cpIncidentActionPlan.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // imglTabIcons
+            // 
+            this.imglTabIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglTabIcons.ImageStream")));
+            this.imglTabIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imglTabIcons.Images.SetKeyName(0, "glyphicons-basic-532-user-family.png");
+            this.imglTabIcons.Images.SetKeyName(1, "glyphicons-basic-849-computer-network.png");
+            this.imglTabIcons.Images.SetKeyName(2, "glyphicons-basic-876-palette-package.png");
+            // 
+            // ofdOpenTaskFile
+            // 
+            this.ofdOpenTaskFile.DefaultExt = "xml";
+            resources.ApplyResources(this.ofdOpenTaskFile, "ofdOpenTaskFile");
+            // 
+            // tmrAutoSave
+            // 
+            this.tmrAutoSave.Interval = 10000;
+            this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
+            // 
+            // tmrPositionLogReminders
+            // 
+            this.tmrPositionLogReminders.Interval = 60000;
+            this.tmrPositionLogReminders.Tick += new System.EventHandler(this.tmrPositionLogReminders_Tick);
+            // 
+            // tmrInternetSync
+            // 
+            this.tmrInternetSync.Interval = 2000;
+            this.tmrInternetSync.Tick += new System.EventHandler(this.tmrInternetSync_Tick);
+            // 
+            // tmrNetwork
+            // 
+            this.tmrNetwork.Interval = 10000;
+            this.tmrNetwork.Tick += new System.EventHandler(this.tmrNetwork_Tick);
+            // 
+            // tmrLock
+            // 
+            this.tmrLock.Interval = 30000;
+            this.tmrLock.Tick += new System.EventHandler(this.tmrLock_Tick);
+            // 
+            // btnMoveToOpNow
+            // 
+            resources.ApplyResources(this.btnMoveToOpNow, "btnMoveToOpNow");
+            this.btnMoveToOpNow.Name = "btnMoveToOpNow";
+            this.btnMoveToOpNow.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnMoveToOpNow, resources.GetString("btnMoveToOpNow.ToolTip"));
+            this.btnMoveToOpNow.UseVisualStyleBackColor = true;
+            this.btnMoveToOpNow.Click += new System.EventHandler(this.btnMoveToOpNow_Click);
+            // 
+            // picOrgLogo
+            // 
+            resources.ApplyResources(this.picOrgLogo, "picOrgLogo");
+            this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
+            this.picOrgLogo.Name = "picOrgLogo";
+            this.picOrgLogo.TabStop = false;
+            this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // pnlInternetSyncStart
+            // 
+            resources.ApplyResources(this.pnlInternetSyncStart, "pnlInternetSyncStart");
+            this.pnlInternetSyncStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
+            this.pnlInternetSyncStart.Controls.Add(this.btnCancelInternetSync);
+            this.pnlInternetSyncStart.Controls.Add(this.label22);
+            this.pnlInternetSyncStart.Controls.Add(this.label21);
+            this.pnlInternetSyncStart.Controls.Add(this.progressBar1);
+            this.pnlInternetSyncStart.Name = "pnlInternetSyncStart";
+            // 
+            // btnCancelInternetSync
+            // 
+            resources.ApplyResources(this.btnCancelInternetSync, "btnCancelInternetSync");
+            this.btnCancelInternetSync.Name = "btnCancelInternetSync";
+            this.btnCancelInternetSync.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label22.Name = "label22";
+            // 
+            // label21
+            // 
+            resources.ApplyResources(this.label21, "label21");
+            this.label21.ForeColor = System.Drawing.Color.White;
+            this.label21.Name = "label21";
+            // 
+            // progressBar1
+            // 
+            resources.ApplyResources(this.progressBar1, "progressBar1");
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // pnlNetworkSyncInProgress
+            // 
+            resources.ApplyResources(this.pnlNetworkSyncInProgress, "pnlNetworkSyncInProgress");
+            this.pnlNetworkSyncInProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
+            this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkShareMoreInfoMsg);
+            this.pnlNetworkSyncInProgress.Controls.Add(this.btnNetworkSyncDone);
+            this.pnlNetworkSyncInProgress.Controls.Add(this.pbNetworkSyncInProgress);
+            this.pnlNetworkSyncInProgress.Controls.Add(this.btnCloseNetworkSyncInProgress);
+            this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkSyncStatus);
+            this.pnlNetworkSyncInProgress.Name = "pnlNetworkSyncInProgress";
+            // 
+            // lblNetworkShareMoreInfoMsg
+            // 
+            resources.ApplyResources(this.lblNetworkShareMoreInfoMsg, "lblNetworkShareMoreInfoMsg");
+            this.lblNetworkShareMoreInfoMsg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lblNetworkShareMoreInfoMsg.Name = "lblNetworkShareMoreInfoMsg";
+            // 
+            // btnNetworkSyncDone
+            // 
+            resources.ApplyResources(this.btnNetworkSyncDone, "btnNetworkSyncDone");
+            this.btnNetworkSyncDone.Name = "btnNetworkSyncDone";
+            this.btnNetworkSyncDone.UseVisualStyleBackColor = true;
+            this.btnNetworkSyncDone.Click += new System.EventHandler(this.btnNetworkSyncDone_Click);
+            // 
+            // pbNetworkSyncInProgress
+            // 
+            resources.ApplyResources(this.pbNetworkSyncInProgress, "pbNetworkSyncInProgress");
+            this.pbNetworkSyncInProgress.Maximum = 4;
+            this.pbNetworkSyncInProgress.Name = "pbNetworkSyncInProgress";
+            this.pbNetworkSyncInProgress.Step = 1;
+            // 
+            // btnCloseNetworkSyncInProgress
+            // 
+            resources.ApplyResources(this.btnCloseNetworkSyncInProgress, "btnCloseNetworkSyncInProgress");
+            this.btnCloseNetworkSyncInProgress.Name = "btnCloseNetworkSyncInProgress";
+            this.btnCloseNetworkSyncInProgress.UseVisualStyleBackColor = true;
+            this.btnCloseNetworkSyncInProgress.Click += new System.EventHandler(this.btnCloseNetworkSyncInProgress_Click);
+            // 
+            // lblNetworkSyncStatus
+            // 
+            resources.ApplyResources(this.lblNetworkSyncStatus, "lblNetworkSyncStatus");
+            this.lblNetworkSyncStatus.ForeColor = System.Drawing.Color.White;
+            this.lblNetworkSyncStatus.Name = "lblNetworkSyncStatus";
             // 
             // pnlOpsPeriod
             // 
@@ -186,14 +304,6 @@
             this.pnlOpsPeriod.Controls.Add(this.cboCurrentOperationalPeriod);
             this.pnlOpsPeriod.Controls.Add(this.label1);
             this.pnlOpsPeriod.Name = "pnlOpsPeriod";
-            // 
-            // btnMoveToOpNow
-            // 
-            resources.ApplyResources(this.btnMoveToOpNow, "btnMoveToOpNow");
-            this.btnMoveToOpNow.Name = "btnMoveToOpNow";
-            this.btnMoveToOpNow.TabStop = false;
-            this.btnMoveToOpNow.UseVisualStyleBackColor = true;
-            this.btnMoveToOpNow.Click += new System.EventHandler(this.btnMoveToOpNow_Click);
             // 
             // btnReviewOpPeriod
             // 
@@ -364,92 +474,6 @@
             this.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblVersionNumber.Name = "lblVersionNumber";
             // 
-            // imglTabIcons
-            // 
-            this.imglTabIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglTabIcons.ImageStream")));
-            this.imglTabIcons.TransparentColor = System.Drawing.Color.Transparent;
-            this.imglTabIcons.Images.SetKeyName(0, "glyphicons-basic-532-user-family.png");
-            this.imglTabIcons.Images.SetKeyName(1, "glyphicons-basic-849-computer-network.png");
-            this.imglTabIcons.Images.SetKeyName(2, "glyphicons-basic-876-palette-package.png");
-            // 
-            // pnlInternetSyncStart
-            // 
-            resources.ApplyResources(this.pnlInternetSyncStart, "pnlInternetSyncStart");
-            this.pnlInternetSyncStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
-            this.pnlInternetSyncStart.Controls.Add(this.btnCancelInternetSync);
-            this.pnlInternetSyncStart.Controls.Add(this.label22);
-            this.pnlInternetSyncStart.Controls.Add(this.label21);
-            this.pnlInternetSyncStart.Controls.Add(this.progressBar1);
-            this.pnlInternetSyncStart.Name = "pnlInternetSyncStart";
-            // 
-            // btnCancelInternetSync
-            // 
-            resources.ApplyResources(this.btnCancelInternetSync, "btnCancelInternetSync");
-            this.btnCancelInternetSync.Name = "btnCancelInternetSync";
-            this.btnCancelInternetSync.UseVisualStyleBackColor = true;
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label22.Name = "label22";
-            // 
-            // label21
-            // 
-            resources.ApplyResources(this.label21, "label21");
-            this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Name = "label21";
-            // 
-            // progressBar1
-            // 
-            resources.ApplyResources(this.progressBar1, "progressBar1");
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            // 
-            // pnlNetworkSyncInProgress
-            // 
-            resources.ApplyResources(this.pnlNetworkSyncInProgress, "pnlNetworkSyncInProgress");
-            this.pnlNetworkSyncInProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
-            this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkShareMoreInfoMsg);
-            this.pnlNetworkSyncInProgress.Controls.Add(this.btnNetworkSyncDone);
-            this.pnlNetworkSyncInProgress.Controls.Add(this.pbNetworkSyncInProgress);
-            this.pnlNetworkSyncInProgress.Controls.Add(this.btnCloseNetworkSyncInProgress);
-            this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkSyncStatus);
-            this.pnlNetworkSyncInProgress.Name = "pnlNetworkSyncInProgress";
-            // 
-            // lblNetworkShareMoreInfoMsg
-            // 
-            resources.ApplyResources(this.lblNetworkShareMoreInfoMsg, "lblNetworkShareMoreInfoMsg");
-            this.lblNetworkShareMoreInfoMsg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lblNetworkShareMoreInfoMsg.Name = "lblNetworkShareMoreInfoMsg";
-            // 
-            // btnNetworkSyncDone
-            // 
-            resources.ApplyResources(this.btnNetworkSyncDone, "btnNetworkSyncDone");
-            this.btnNetworkSyncDone.Name = "btnNetworkSyncDone";
-            this.btnNetworkSyncDone.UseVisualStyleBackColor = true;
-            this.btnNetworkSyncDone.Click += new System.EventHandler(this.btnNetworkSyncDone_Click);
-            // 
-            // pbNetworkSyncInProgress
-            // 
-            resources.ApplyResources(this.pbNetworkSyncInProgress, "pbNetworkSyncInProgress");
-            this.pbNetworkSyncInProgress.Maximum = 4;
-            this.pbNetworkSyncInProgress.Name = "pbNetworkSyncInProgress";
-            this.pbNetworkSyncInProgress.Step = 1;
-            // 
-            // btnCloseNetworkSyncInProgress
-            // 
-            resources.ApplyResources(this.btnCloseNetworkSyncInProgress, "btnCloseNetworkSyncInProgress");
-            this.btnCloseNetworkSyncInProgress.Name = "btnCloseNetworkSyncInProgress";
-            this.btnCloseNetworkSyncInProgress.UseVisualStyleBackColor = true;
-            this.btnCloseNetworkSyncInProgress.Click += new System.EventHandler(this.btnCloseNetworkSyncInProgress_Click);
-            // 
-            // lblNetworkSyncStatus
-            // 
-            resources.ApplyResources(this.lblNetworkSyncStatus, "lblNetworkSyncStatus");
-            this.lblNetworkSyncStatus.ForeColor = System.Drawing.Color.White;
-            this.lblNetworkSyncStatus.Name = "lblNetworkSyncStatus";
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
@@ -458,13 +482,9 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.iAPToolStripMenuItem,
-            this.operationsToolStripMenuItem,
-            this.logisticsToolStripMenuItem,
-            this.planningToolStripMenuItem,
-            this.adminFinanceToolStripMenuItem,
             this.networkInternetToolStripMenuItem,
             this.helpToolStripMenuItem,
-            this.tESTToolStripMenuItem});
+            this.TestToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -655,7 +675,6 @@
             this.safetyMessageICS208ToolStripMenuItem,
             this.incidentStatusSummaryICS209ToolStripMenuItem,
             this.airOperationsSummaryICS220ToolStripMenuItem,
-            this.printTheIncidentActionPlanToolStripMenuItem,
             this.toolStripSeparator5,
             this.additionalDocumentsToolStripMenuItem,
             this.communicationsListICS205AToolStripMenuItem,
@@ -719,12 +738,6 @@
             resources.ApplyResources(this.airOperationsSummaryICS220ToolStripMenuItem, "airOperationsSummaryICS220ToolStripMenuItem");
             this.airOperationsSummaryICS220ToolStripMenuItem.Click += new System.EventHandler(this.airOperationsSummaryICS220ToolStripMenuItem_Click);
             // 
-            // printTheIncidentActionPlanToolStripMenuItem
-            // 
-            this.printTheIncidentActionPlanToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.printTheIncidentActionPlanToolStripMenuItem.Name = "printTheIncidentActionPlanToolStripMenuItem";
-            resources.ApplyResources(this.printTheIncidentActionPlanToolStripMenuItem, "printTheIncidentActionPlanToolStripMenuItem");
-            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
@@ -770,104 +783,6 @@
             this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
             resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
             this.printThisIncidentToDateToolStripMenuItem.Click += new System.EventHandler(this.printThisIncidentToDateToolStripMenuItem_Click);
-            // 
-            // operationsToolStripMenuItem
-            // 
-            this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem,
-            this.toolStripSeparator8,
-            this.teamAssignmentsICS204ToolStripMenuItem1});
-            this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
-            resources.ApplyResources(this.operationsToolStripMenuItem, "operationsToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem
-            // 
-            this.positionLogToolStripMenuItem.Name = "positionLogToolStripMenuItem";
-            resources.ApplyResources(this.positionLogToolStripMenuItem, "positionLogToolStripMenuItem");
-            this.positionLogToolStripMenuItem.Click += new System.EventHandler(this.positionLogToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
-            // 
-            // teamAssignmentsICS204ToolStripMenuItem1
-            // 
-            this.teamAssignmentsICS204ToolStripMenuItem1.Name = "teamAssignmentsICS204ToolStripMenuItem1";
-            resources.ApplyResources(this.teamAssignmentsICS204ToolStripMenuItem1, "teamAssignmentsICS204ToolStripMenuItem1");
-            this.teamAssignmentsICS204ToolStripMenuItem1.Click += new System.EventHandler(this.teamAssignmentsICS204ToolStripMenuItem1_Click);
-            // 
-            // logisticsToolStripMenuItem
-            // 
-            this.logisticsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem1,
-            this.toolStripSeparator7,
-            this.memberStatusToolStripMenuItem,
-            this.additionalContactsToolStripMenuItem});
-            this.logisticsToolStripMenuItem.Name = "logisticsToolStripMenuItem";
-            resources.ApplyResources(this.logisticsToolStripMenuItem, "logisticsToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem1
-            // 
-            this.positionLogToolStripMenuItem1.Name = "positionLogToolStripMenuItem1";
-            resources.ApplyResources(this.positionLogToolStripMenuItem1, "positionLogToolStripMenuItem1");
-            this.positionLogToolStripMenuItem1.Click += new System.EventHandler(this.positionLogToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
-            // 
-            // memberStatusToolStripMenuItem
-            // 
-            this.memberStatusToolStripMenuItem.Name = "memberStatusToolStripMenuItem";
-            resources.ApplyResources(this.memberStatusToolStripMenuItem, "memberStatusToolStripMenuItem");
-            this.memberStatusToolStripMenuItem.Click += new System.EventHandler(this.memberStatusToolStripMenuItem_Click);
-            // 
-            // additionalContactsToolStripMenuItem
-            // 
-            this.additionalContactsToolStripMenuItem.Name = "additionalContactsToolStripMenuItem";
-            resources.ApplyResources(this.additionalContactsToolStripMenuItem, "additionalContactsToolStripMenuItem");
-            this.additionalContactsToolStripMenuItem.Click += new System.EventHandler(this.additionalContactsToolStripMenuItem_Click);
-            // 
-            // planningToolStripMenuItem
-            // 
-            this.planningToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem2,
-            this.toolStripSeparator6,
-            this.notesToolStripMenuItem});
-            this.planningToolStripMenuItem.Name = "planningToolStripMenuItem";
-            resources.ApplyResources(this.planningToolStripMenuItem, "planningToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem2
-            // 
-            this.positionLogToolStripMenuItem2.Name = "positionLogToolStripMenuItem2";
-            resources.ApplyResources(this.positionLogToolStripMenuItem2, "positionLogToolStripMenuItem2");
-            this.positionLogToolStripMenuItem2.Click += new System.EventHandler(this.positionLogToolStripMenuItem2_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            // 
-            // notesToolStripMenuItem
-            // 
-            this.notesToolStripMenuItem.Name = "notesToolStripMenuItem";
-            resources.ApplyResources(this.notesToolStripMenuItem, "notesToolStripMenuItem");
-            this.notesToolStripMenuItem.Click += new System.EventHandler(this.notesToolStripMenuItem_Click);
-            // 
-            // adminFinanceToolStripMenuItem
-            // 
-            this.adminFinanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem3});
-            this.adminFinanceToolStripMenuItem.Name = "adminFinanceToolStripMenuItem";
-            resources.ApplyResources(this.adminFinanceToolStripMenuItem, "adminFinanceToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem3
-            // 
-            this.positionLogToolStripMenuItem3.Name = "positionLogToolStripMenuItem3";
-            resources.ApplyResources(this.positionLogToolStripMenuItem3, "positionLogToolStripMenuItem3");
-            this.positionLogToolStripMenuItem3.Click += new System.EventHandler(this.positionLogToolStripMenuItem3_Click);
             // 
             // networkInternetToolStripMenuItem
             // 
@@ -942,45 +857,12 @@
             resources.ApplyResources(this.aboutCIAPPToolStripMenuItem, "aboutCIAPPToolStripMenuItem");
             this.aboutCIAPPToolStripMenuItem.Click += new System.EventHandler(this.aboutCIAPPToolStripMenuItem_Click);
             // 
-            // tESTToolStripMenuItem
+            // TestToolStripMenuItem
             // 
-            this.tESTToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
-            this.tESTToolStripMenuItem.Name = "tESTToolStripMenuItem";
-            resources.ApplyResources(this.tESTToolStripMenuItem, "tESTToolStripMenuItem");
-            this.tESTToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
-            // 
-            // picOrgLogo
-            // 
-            this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
-            resources.ApplyResources(this.picOrgLogo, "picOrgLogo");
-            this.picOrgLogo.Name = "picOrgLogo";
-            this.picOrgLogo.TabStop = false;
-            this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // ofdOpenTaskFile
-            // 
-            this.ofdOpenTaskFile.DefaultExt = "xml";
-            resources.ApplyResources(this.ofdOpenTaskFile, "ofdOpenTaskFile");
-            // 
-            // tmrAutoSave
-            // 
-            this.tmrAutoSave.Interval = 10000;
-            this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
-            // 
-            // tmrPositionLogReminders
-            // 
-            this.tmrPositionLogReminders.Interval = 60000;
-            this.tmrPositionLogReminders.Tick += new System.EventHandler(this.tmrPositionLogReminders_Tick);
-            // 
-            // tmrInternetSync
-            // 
-            this.tmrInternetSync.Interval = 2000;
-            this.tmrInternetSync.Tick += new System.EventHandler(this.tmrInternetSync_Tick);
-            // 
-            // tmrNetwork
-            // 
-            this.tmrNetwork.Interval = 10000;
-            this.tmrNetwork.Tick += new System.EventHandler(this.tmrNetwork_Tick);
+            this.TestToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
+            this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
+            resources.ApplyResources(this.TestToolStripMenuItem, "TestToolStripMenuItem");
+            this.TestToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
             // 
             // cpOtherTools
             // 
@@ -1147,11 +1029,6 @@
             this.btnCommsPlan.UseVisualStyleBackColor = true;
             this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
             // 
-            // tmrLock
-            // 
-            this.tmrLock.Interval = 30000;
-            this.tmrLock.Tick += new System.EventHandler(this.tmrLock_Tick);
-            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1171,14 +1048,14 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IncidentDetailsForm_FormClosed);
             this.Load += new System.EventHandler(this.IncidentDetailsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).EndInit();
+            this.pnlInternetSyncStart.ResumeLayout(false);
+            this.pnlNetworkSyncInProgress.ResumeLayout(false);
             this.pnlOpsPeriod.ResumeLayout(false);
             this.pnlTaskInfo.ResumeLayout(false);
             this.pnlTaskInfo.PerformLayout();
-            this.pnlInternetSyncStart.ResumeLayout(false);
-            this.pnlNetworkSyncInProgress.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).EndInit();
             this.cpOtherTools.ResumeLayout(false);
             this.cpIncidentActionPlan.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1226,9 +1103,6 @@
         private System.Windows.Forms.Button btnAdditionalContacts;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iAPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem operationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logisticsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem planningToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem networkInternetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.PictureBox picOrgLogo;
@@ -1275,21 +1149,11 @@
         private CustomControls.CollapsiblePanel cpOtherTools;
         private System.Windows.Forms.ToolStripMenuItem organizationChartICS207ToolStripMenuItem;
         private System.Windows.Forms.Button btnNotes;
-        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem safetyMessageICS208ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generalMessageICS213ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem printThisOperationalPeriodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printThisIncidentToDateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem memberStatusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem additionalContactsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem notesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem adminFinanceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem localNetworkSharingSyncToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem requestIncidentFromServerToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
@@ -1303,12 +1167,9 @@
         private System.Windows.Forms.ToolStripMenuItem printingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem networkTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamAssignmentsICS204ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem teamAssignmentsICS204ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem printTheIncidentActionPlanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.Button btnShowResources;
         private SpellBox txtTaskName;
-        private System.Windows.Forms.ToolStripMenuItem tESTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TestToolStripMenuItem;
         private System.Windows.Forms.Button btnGeneralMessage;
         private System.Windows.Forms.Button btnReplacementResources;
         private System.Windows.Forms.Button btnIncidentStatusSummary;
@@ -1322,6 +1183,7 @@
         private System.Windows.Forms.Button btnEditOpPeriod;
         private System.Windows.Forms.Button btnNewOpPeriod;
         private System.Windows.Forms.Button btnMoveToOpNow;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

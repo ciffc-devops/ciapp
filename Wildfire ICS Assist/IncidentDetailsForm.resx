@@ -117,10 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pnlOpsPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <metadata name="imglTabIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
+  <data name="imglTabIcons.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
+        CAAAAk1TRnQBSQFMAgEBAwEAAUABBgFAAQYBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/4EAAfNBAAETAQABDwYA
+        AQ8DAAH0MgAB8AIAAewEAAHsAgAB7wHzPgAB8BUAAQ8DAAEPXAAB7wEHBAABBwHvAwAB7T8AAf8CAAHt
+        BQAB7QoAAQ8DAAEPWQAB8wkAAf84AAHxAQ8EAAEPAfENAAHtKwAB/wQAAf8BDwIAAfM7AAH/Ae8B9AYA
+        Ae0DAAHtqAABQgFNAT4HAAE+AwABKAMAAUADAAEQAwABAQEAAQEFAAGAFwAD/wEABv8CAAb/AgABEAEI
+        Af8BAwHOAXMCAAGQAQgB/wEDAcABAwIAAcsB2QHxAbcC/wIAAcQBIwH3AbcB4AGHAgABhAEgAfcBhwHg
+        AYcCAAGAAQAC/wHgAYcCAAGIARABwAF/AeABhwIAAYgBEQHAAXcC/wIAAYgBAQHgAfcB/AE/AgAB4AEB
+        Ae4BhwH8AT8CAAH4AQEB7gH/AfwBPwIAAf8BxwHgA/8CAAb/AgAG/wIACw==
+</value>
   </data>
+  <metadata name="svdTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1738, 17</value>
+  </metadata>
+  <metadata name="ofdOpenTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
+  </metadata>
+  <data name="ofdOpenTaskFile.Filter" xml:space="preserve">
+    <value>Extensible Markup Language|*.xml</value>
+  </data>
+  <metadata name="fbdSaveLocation.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>160, 56</value>
+  </metadata>
+  <metadata name="tmrAutoSave.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>302, 56</value>
+  </metadata>
+  <metadata name="tmrPositionLogReminders.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>424, 56</value>
+  </metadata>
+  <metadata name="tmrInternetSync.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>617, 56</value>
+  </metadata>
+  <metadata name="tmrNetwork.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>756, 56</value>
+  </metadata>
+  <metadata name="tmrLock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>874, 56</value>
+  </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>972, 56</value>
+  </metadata>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnMoveToOpNow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -132,7 +204,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnMoveToOpNow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 48</value>
+    <value>267, 48</value>
   </data>
   <data name="btnMoveToOpNow.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -147,6 +219,9 @@
   <data name="btnMoveToOpNow.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
+  <data name="btnMoveToOpNow.ToolTip" xml:space="preserve">
+    <value>Change the selected operational period to the one that the current time falls within (if available)</value>
+  </data>
   <data name="&gt;&gt;btnMoveToOpNow.Name" xml:space="preserve">
     <value>btnMoveToOpNow</value>
   </data>
@@ -159,17 +234,404 @@
   <data name="&gt;&gt;btnMoveToOpNow.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="picOrgLogo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="picOrgLogo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="picOrgLogo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>743, 36</value>
+  </data>
+  <data name="picOrgLogo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 89</value>
+  </data>
+  <data name="picOrgLogo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="picOrgLogo.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="&gt;&gt;picOrgLogo.Name" xml:space="preserve">
+    <value>picOrgLogo</value>
+  </data>
+  <data name="&gt;&gt;picOrgLogo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picOrgLogo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;picOrgLogo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pnlInternetSyncStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="btnCancelInternetSync.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnCancelInternetSync.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnCancelInternetSync.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 12</value>
+  </data>
+  <data name="btnCancelInternetSync.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 38</value>
+  </data>
+  <data name="btnCancelInternetSync.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnCancelInternetSync.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;btnCancelInternetSync.Name" xml:space="preserve">
+    <value>btnCancelInternetSync</value>
+  </data>
+  <data name="&gt;&gt;btnCancelInternetSync.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancelInternetSync.Parent" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;btnCancelInternetSync.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label22.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="label22.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 265</value>
+  </data>
+  <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 40</value>
+  </data>
+  <data name="label22.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="label22.Text" xml:space="preserve">
+    <value>This may take a few moments, please wait</value>
+  </data>
+  <data name="label22.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="label22.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;label22.Name" xml:space="preserve">
+    <value>label22</value>
+  </data>
+  <data name="&gt;&gt;label22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="label21.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 20pt</value>
+  </data>
+  <data name="label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 113</value>
+  </data>
+  <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 85</value>
+  </data>
+  <data name="label21.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label21.Text" xml:space="preserve">
+    <value>Syncronizing internet task data</value>
+  </data>
+  <data name="label21.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label21.Name" xml:space="preserve">
+    <value>label21</value>
+  </data>
+  <data name="&gt;&gt;label21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="progressBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="progressBar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>154, 198</value>
+  </data>
+  <data name="progressBar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 68</value>
+  </data>
+  <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
+    <value>progressBar1</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="pnlInternetSyncStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>465, 601</value>
+  </data>
+  <data name="pnlInternetSyncStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 27</value>
+  </data>
+  <data name="pnlInternetSyncStart.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="pnlInternetSyncStart.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;pnlInternetSyncStart.Name" xml:space="preserve">
+    <value>pnlInternetSyncStart</value>
+  </data>
+  <data name="&gt;&gt;pnlInternetSyncStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlInternetSyncStart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 279</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 40</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.Text" xml:space="preserve">
+    <value>Someone on the main computer may need to press "Yes" to share the task. If this takes too long, go ask them.</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="lblNetworkShareMoreInfoMsg.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Name" xml:space="preserve">
+    <value>lblNetworkShareMoreInfoMsg</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnNetworkSyncDone.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="btnNetworkSyncDone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnNetworkSyncDone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-78, 322</value>
+  </data>
+  <data name="btnNetworkSyncDone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 66</value>
+  </data>
+  <data name="btnNetworkSyncDone.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btnNetworkSyncDone.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="btnNetworkSyncDone.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btnNetworkSyncDone.Name" xml:space="preserve">
+    <value>btnNetworkSyncDone</value>
+  </data>
+  <data name="&gt;&gt;btnNetworkSyncDone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNetworkSyncDone.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;btnNetworkSyncDone.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pbNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="pbNetworkSyncInProgress.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pbNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 253</value>
+  </data>
+  <data name="pbNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 23</value>
+  </data>
+  <data name="pbNetworkSyncInProgress.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pbNetworkSyncInProgress.Name" xml:space="preserve">
+    <value>pbNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;pbNetworkSyncInProgress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pbNetworkSyncInProgress.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;pbNetworkSyncInProgress.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnCloseNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnCloseNetworkSyncInProgress.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnCloseNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-7, 12</value>
+  </data>
+  <data name="btnCloseNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 38</value>
+  </data>
+  <data name="btnCloseNetworkSyncInProgress.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnCloseNetworkSyncInProgress.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Name" xml:space="preserve">
+    <value>btnCloseNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblNetworkSyncStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lblNetworkSyncStatus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 20pt</value>
+  </data>
+  <data name="lblNetworkSyncStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblNetworkSyncStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 161</value>
+  </data>
+  <data name="lblNetworkSyncStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 85</value>
+  </data>
+  <data name="lblNetworkSyncStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblNetworkSyncStatus.Text" xml:space="preserve">
+    <value>Network Satus Check Successful, Requesting Task</value>
+  </data>
+  <data name="lblNetworkSyncStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkSyncStatus.Name" xml:space="preserve">
+    <value>lblNetworkSyncStatus</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkSyncStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkSyncStatus.Parent" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;lblNetworkSyncStatus.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>376, 601</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 29</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="pnlNetworkSyncInProgress.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;pnlNetworkSyncInProgress.Name" xml:space="preserve">
+    <value>pnlNetworkSyncInProgress</value>
+  </data>
+  <data name="&gt;&gt;pnlNetworkSyncInProgress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlNetworkSyncInProgress.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="pnlOpsPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="btnReviewOpPeriod.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
+  </data>
+  <data name="btnReviewOpPeriod.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="btnReviewOpPeriod.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnReviewOpPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 93</value>
+    <value>214, 95</value>
   </data>
   <data name="btnReviewOpPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 37</value>
+    <value>114, 37</value>
   </data>
   <data name="btnReviewOpPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
@@ -194,6 +656,9 @@
   </data>
   <data name="btnEditOpPeriod.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
+  </data>
+  <data name="btnEditOpPeriod.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="btnEditOpPeriod.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -238,6 +703,9 @@
         AElFTkSuQmCC
 </value>
   </data>
+  <data name="btnNewOpPeriod.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="btnNewOpPeriod.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -275,7 +743,7 @@
     <value>8, 50</value>
   </data>
   <data name="cboCurrentOperationalPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 32</value>
+    <value>253, 32</value>
   </data>
   <data name="cboCurrentOperationalPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>93</value>
@@ -308,7 +776,7 @@
     <value>9, 0, 9, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 38</value>
+    <value>313, 38</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -332,10 +800,10 @@
     <value>5</value>
   </data>
   <data name="pnlOpsPeriod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>776, 39</value>
+    <value>743, 129</value>
   </data>
   <data name="pnlOpsPeriod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 142</value>
+    <value>341, 144</value>
   </data>
   <data name="pnlOpsPeriod.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -377,11 +845,17 @@
   <data name="btnLockTaskInfo.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
+  <data name="btnLockTaskInfo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnLockTaskInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnLockTaskInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 6</value>
+    <value>676, 7</value>
   </data>
   <data name="btnLockTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 38</value>
+    <value>32, 32</value>
   </data>
   <data name="btnLockTaskInfo.TabIndex" type="System.Int32, mscorlib">
     <value>95</value>
@@ -405,7 +879,7 @@
     <value>192, 45</value>
   </data>
   <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 29</value>
+    <value>498, 29</value>
   </data>
   <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -429,7 +903,7 @@
     <value>16, 130</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>508, 2</value>
+    <value>681, 2</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
@@ -621,7 +1095,7 @@
     <value>192, 88</value>
   </data>
   <data name="txtTaskNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 29</value>
+    <value>498, 29</value>
   </data>
   <data name="txtTaskNumber.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -704,20 +1178,23 @@
         MhdhCEK1P1HKuw61zdWV9SiNtaDqHCRV5+BopT8y4GLRq1x4QQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnICSRoleHelp.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="btnICSRoleHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnICSRoleHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>380, 144</value>
+    <value>597, 144</value>
   </data>
   <data name="btnICSRoleHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 37</value>
+    <value>93, 37</value>
   </data>
   <data name="btnICSRoleHelp.TabIndex" type="System.Int32, mscorlib">
     <value>87</value>
   </data>
   <data name="btnICSRoleHelp.Text" xml:space="preserve">
-    <value>Role Help</value>
+    <value>Role</value>
   </data>
   <data name="btnICSRoleHelp.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -741,7 +1218,7 @@
     <value>170, 147</value>
   </data>
   <data name="cboICSRole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 32</value>
+    <value>421, 32</value>
   </data>
   <data name="cboICSRole.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -801,7 +1278,7 @@
     <value>7, 8</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 32</value>
+    <value>382, 32</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -897,10 +1374,10 @@
     <value>13</value>
   </data>
   <data name="pnlTaskInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 39</value>
+    <value>8, 40</value>
   </data>
   <data name="pnlTaskInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>543, 237</value>
+    <value>720, 237</value>
   </data>
   <data name="pnlTaskInfo.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -927,7 +1404,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblServerStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>471, 620</value>
+    <value>414, 620</value>
   </data>
   <data name="lblServerStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>668, 20</value>
@@ -989,545 +1466,11 @@
   <data name="&gt;&gt;lblVersionNumber.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <metadata name="imglTabIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 17</value>
-  </metadata>
-  <data name="imglTabIcons.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAAdgBBQHYAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
-        AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
-        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
-        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
-        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
-        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
-        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
-        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
-        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
-        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
-        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
-        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
-        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
-        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
-        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
-        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
-        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
-        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
-        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
-        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
-        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
-        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
-        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
-        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
-        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
-        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
-        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
-        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
-        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/4EAAfNBAAETAQABDwYA
-        AQ8DAAH0MgAB8AIAAewEAAHsAgAB7wHzPgAB8BUAAQ8DAAEPXAAB7wEHBAABBwHvAwAB7T8AAf8CAAHt
-        BQAB7QoAAQ8DAAEPWQAB8wkAAf84AAHxAQ8EAAEPAfENAAHtKwAB/wQAAf8BDwIAAfM7AAH/Ae8B9AYA
-        Ae0DAAHtqAABQgFNAT4HAAE+AwABKAMAAUADAAEQAwABAQEAAQEFAAGAFwAD/wEABv8CAAb/AgABEAEI
-        Af8BAwHOAXMCAAGQAQgB/wEDAcABAwIAAcsB2QHxAbcC/wIAAcQBIwH3AbcB4AGHAgABhAEgAfcBhwHg
-        AYcCAAGAAQAC/wHgAYcCAAGIARABwAF/AeABhwIAAYgBEQHAAXcC/wIAAYgBAQHgAfcB/AE/AgAB4AEB
-        Ae4BhwH8AT8CAAH4AQEB7gH/AfwBPwIAAf8BxwHgA/8CAAb/AgAG/wIACw==
-</value>
-  </data>
-  <data name="pnlInternetSyncStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="&gt;&gt;btnCancelInternetSync.Name" xml:space="preserve">
-    <value>btnCancelInternetSync</value>
-  </data>
-  <data name="&gt;&gt;btnCancelInternetSync.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCancelInternetSync.Parent" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;btnCancelInternetSync.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label22.Name" xml:space="preserve">
-    <value>label22</value>
-  </data>
-  <data name="&gt;&gt;label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label21.Name" xml:space="preserve">
-    <value>label21</value>
-  </data>
-  <data name="&gt;&gt;label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
-    <value>progressBar1</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="pnlInternetSyncStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>465, 601</value>
-  </data>
-  <data name="pnlInternetSyncStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 27</value>
-  </data>
-  <data name="pnlInternetSyncStart.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <data name="pnlInternetSyncStart.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;pnlInternetSyncStart.Name" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;pnlInternetSyncStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlInternetSyncStart.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlInternetSyncStart.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btnCancelInternetSync.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnCancelInternetSync.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnCancelInternetSync.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 12</value>
-  </data>
-  <data name="btnCancelInternetSync.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 38</value>
-  </data>
-  <data name="btnCancelInternetSync.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btnCancelInternetSync.Text" xml:space="preserve">
-    <value>X</value>
-  </data>
-  <data name="&gt;&gt;btnCancelInternetSync.Name" xml:space="preserve">
-    <value>btnCancelInternetSync</value>
-  </data>
-  <data name="&gt;&gt;btnCancelInternetSync.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCancelInternetSync.Parent" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;btnCancelInternetSync.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label22.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="label22.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 265</value>
-  </data>
-  <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 40</value>
-  </data>
-  <data name="label22.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="label22.Text" xml:space="preserve">
-    <value>This may take a few moments, please wait</value>
-  </data>
-  <data name="label22.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="label22.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;label22.Name" xml:space="preserve">
-    <value>label22</value>
-  </data>
-  <data name="&gt;&gt;label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="label21.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 20pt</value>
-  </data>
-  <data name="label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 113</value>
-  </data>
-  <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 85</value>
-  </data>
-  <data name="label21.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label21.Text" xml:space="preserve">
-    <value>Syncronizing internet task data</value>
-  </data>
-  <data name="label21.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;label21.Name" xml:space="preserve">
-    <value>label21</value>
-  </data>
-  <data name="&gt;&gt;label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="progressBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="progressBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 198</value>
-  </data>
-  <data name="progressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 68</value>
-  </data>
-  <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
-    <value>progressBar1</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
-    <value>pnlInternetSyncStart</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="pnlNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Name" xml:space="preserve">
-    <value>lblNetworkShareMoreInfoMsg</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnNetworkSyncDone.Name" xml:space="preserve">
-    <value>btnNetworkSyncDone</value>
-  </data>
-  <data name="&gt;&gt;btnNetworkSyncDone.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnNetworkSyncDone.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;btnNetworkSyncDone.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;pbNetworkSyncInProgress.Name" xml:space="preserve">
-    <value>pbNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;pbNetworkSyncInProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pbNetworkSyncInProgress.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;pbNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Name" xml:space="preserve">
-    <value>btnCloseNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkSyncStatus.Name" xml:space="preserve">
-    <value>lblNetworkSyncStatus</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkSyncStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkSyncStatus.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkSyncStatus.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="pnlNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 601</value>
-  </data>
-  <data name="pnlNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 29</value>
-  </data>
-  <data name="pnlNetworkSyncInProgress.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="pnlNetworkSyncInProgress.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;pnlNetworkSyncInProgress.Name" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;pnlNetworkSyncInProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlNetworkSyncInProgress.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 279</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 40</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.Text" xml:space="preserve">
-    <value>Someone on the main computer may need to press "Yes" to share the task. If this takes too long, go ask them.</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="lblNetworkShareMoreInfoMsg.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Name" xml:space="preserve">
-    <value>lblNetworkShareMoreInfoMsg</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkShareMoreInfoMsg.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnNetworkSyncDone.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="btnNetworkSyncDone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnNetworkSyncDone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-78, 322</value>
-  </data>
-  <data name="btnNetworkSyncDone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 66</value>
-  </data>
-  <data name="btnNetworkSyncDone.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="btnNetworkSyncDone.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="btnNetworkSyncDone.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;btnNetworkSyncDone.Name" xml:space="preserve">
-    <value>btnNetworkSyncDone</value>
-  </data>
-  <data name="&gt;&gt;btnNetworkSyncDone.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnNetworkSyncDone.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;btnNetworkSyncDone.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="pbNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="pbNetworkSyncInProgress.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pbNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 253</value>
-  </data>
-  <data name="pbNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 23</value>
-  </data>
-  <data name="pbNetworkSyncInProgress.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;pbNetworkSyncInProgress.Name" xml:space="preserve">
-    <value>pbNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;pbNetworkSyncInProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pbNetworkSyncInProgress.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;pbNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btnCloseNetworkSyncInProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnCloseNetworkSyncInProgress.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnCloseNetworkSyncInProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-7, 12</value>
-  </data>
-  <data name="btnCloseNetworkSyncInProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 38</value>
-  </data>
-  <data name="btnCloseNetworkSyncInProgress.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="btnCloseNetworkSyncInProgress.Text" xml:space="preserve">
-    <value>X</value>
-  </data>
-  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Name" xml:space="preserve">
-    <value>btnCloseNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;btnCloseNetworkSyncInProgress.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="lblNetworkSyncStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="lblNetworkSyncStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 20pt</value>
-  </data>
-  <data name="lblNetworkSyncStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblNetworkSyncStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 161</value>
-  </data>
-  <data name="lblNetworkSyncStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 85</value>
-  </data>
-  <data name="lblNetworkSyncStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblNetworkSyncStatus.Text" xml:space="preserve">
-    <value>Network Satus Check Successful, Requesting Task</value>
-  </data>
-  <data name="lblNetworkSyncStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkSyncStatus.Name" xml:space="preserve">
-    <value>lblNetworkSyncStatus</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkSyncStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkSyncStatus.Parent" xml:space="preserve">
-    <value>pnlNetworkSyncInProgress</value>
-  </data>
-  <data name="&gt;&gt;lblNetworkSyncStatus.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="menuStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14pt</value>
-  </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1149, 33</value>
-  </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 29</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
   </data>
   <data name="newIncidentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>298, 30</value>
@@ -1586,11 +1529,11 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 29</value>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 29</value>
   </data>
-  <data name="editToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit</value>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 30</value>
@@ -1682,11 +1625,11 @@
   <data name="safetyNotesToolStripMenuItem.Text" xml:space="preserve">
     <value>Safety Notes</value>
   </data>
-  <data name="iAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 29</value>
+  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 29</value>
   </data>
-  <data name="iAPToolStripMenuItem.Text" xml:space="preserve">
-    <value>IAP</value>
+  <data name="editToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="incidentActionPlanToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1740,19 +1683,13 @@
     <value>406, 30</value>
   </data>
   <data name="incidentStatusSummaryICS209ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Incident Status Summary (ICS 209)</value>
+    <value>Incident Status Summaries (ICS 209)</value>
   </data>
   <data name="airOperationsSummaryICS220ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 30</value>
   </data>
   <data name="airOperationsSummaryICS220ToolStripMenuItem.Text" xml:space="preserve">
     <value>Air Operations Summary (ICS 220)</value>
-  </data>
-  <data name="printTheIncidentActionPlanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 30</value>
-  </data>
-  <data name="printTheIncidentActionPlanToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print the Incident Action Plan</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>403, 6</value>
@@ -1794,106 +1731,25 @@
     <value>406, 30</value>
   </data>
   <data name="printingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Printing</value>
+    <value>PDFs / Printing</value>
   </data>
   <data name="printThisOperationalPeriodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 30</value>
   </data>
   <data name="printThisOperationalPeriodToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print this Operational Period</value>
+    <value>Generate IAP PDF</value>
   </data>
   <data name="printThisIncidentToDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 30</value>
   </data>
   <data name="printThisIncidentToDateToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print this Incident to date</value>
+    <value>Generate Incident Summary PDF</value>
   </data>
-  <data name="operationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 29</value>
+  <data name="iAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 29</value>
   </data>
-  <data name="operationsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Operations</value>
-  </data>
-  <data name="positionLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="positionLogToolStripMenuItem.Text" xml:space="preserve">
-    <value>Activity Log</value>
-  </data>
-  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 6</value>
-  </data>
-  <data name="teamAssignmentsICS204ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 30</value>
-  </data>
-  <data name="teamAssignmentsICS204ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Assignment List (ICS-204)</value>
-  </data>
-  <data name="logisticsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 29</value>
-  </data>
-  <data name="logisticsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Logistics</value>
-  </data>
-  <data name="positionLogToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 30</value>
-  </data>
-  <data name="positionLogToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Activity Log</value>
-  </data>
-  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 6</value>
-  </data>
-  <data name="memberStatusToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 30</value>
-  </data>
-  <data name="memberStatusToolStripMenuItem.Text" xml:space="preserve">
-    <value>Resources</value>
-  </data>
-  <data name="additionalContactsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 30</value>
-  </data>
-  <data name="additionalContactsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Additional Contacts (205A)</value>
-  </data>
-  <data name="planningToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 29</value>
-  </data>
-  <data name="planningToolStripMenuItem.Text" xml:space="preserve">
-    <value>Planning</value>
-  </data>
-  <data name="positionLogToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 30</value>
-  </data>
-  <data name="positionLogToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Activity Log</value>
-  </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 6</value>
-  </data>
-  <data name="notesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 30</value>
-  </data>
-  <data name="notesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Notes</value>
-  </data>
-  <data name="adminFinanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 29</value>
-  </data>
-  <data name="adminFinanceToolStripMenuItem.Text" xml:space="preserve">
-    <value>Admin / Finance</value>
-  </data>
-  <data name="positionLogToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 30</value>
-  </data>
-  <data name="positionLogToolStripMenuItem3.Text" xml:space="preserve">
-    <value>Activity Log</value>
-  </data>
-  <data name="networkInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 29</value>
-  </data>
-  <data name="networkInternetToolStripMenuItem.Text" xml:space="preserve">
-    <value>Network / Internet</value>
+  <data name="iAPToolStripMenuItem.Text" xml:space="preserve">
+    <value>IAP</value>
   </data>
   <data name="localNetworkSharingSyncToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>329, 30</value>
@@ -1931,11 +1787,11 @@
   <data name="networkTestToolStripMenuItem.Text" xml:space="preserve">
     <value>Network Test</value>
   </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 29</value>
+  <data name="networkInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 29</value>
   </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
+  <data name="networkInternetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Network / Internet</value>
   </data>
   <data name="supportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 30</value>
@@ -1949,149 +1805,41 @@
   <data name="aboutCIAPPToolStripMenuItem.Text" xml:space="preserve">
     <value>About CIAPP</value>
   </data>
-  <data name="tESTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 29</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="TestToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 29</value>
   </data>
-  <data name="tESTToolStripMenuItem.Text" xml:space="preserve">
+  <data name="TestToolStripMenuItem.Text" xml:space="preserve">
     <value>TEST</value>
   </data>
-  <data name="picOrgLogo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="picOrgLogo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 36</value>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1092, 33</value>
   </data>
-  <data name="picOrgLogo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 237</value>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
   </data>
-  <data name="picOrgLogo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
   </data>
-  <data name="picOrgLogo.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
   </data>
-  <data name="&gt;&gt;picOrgLogo.Name" xml:space="preserve">
-    <value>picOrgLogo</value>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;picOrgLogo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picOrgLogo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;picOrgLogo.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="svdTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1738, 17</value>
-  </metadata>
-  <metadata name="ofdOpenTaskFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
-  </metadata>
-  <data name="ofdOpenTaskFile.Filter" xml:space="preserve">
-    <value>Extensible Markup Language|*.xml</value>
-  </data>
-  <metadata name="fbdSaveLocation.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>160, 56</value>
-  </metadata>
-  <metadata name="tmrAutoSave.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>302, 56</value>
-  </metadata>
-  <metadata name="tmrPositionLogReminders.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>424, 56</value>
-  </metadata>
-  <metadata name="tmrInternetSync.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>617, 56</value>
-  </metadata>
-  <metadata name="tmrNetwork.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>756, 56</value>
-  </metadata>
-  <data name="&gt;&gt;btnGeneralMessage.Name" xml:space="preserve">
-    <value>btnGeneralMessage</value>
-  </data>
-  <data name="&gt;&gt;btnGeneralMessage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnGeneralMessage.Parent" xml:space="preserve">
-    <value>cpOtherTools</value>
-  </data>
-  <data name="&gt;&gt;btnGeneralMessage.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnReplacementResources.Name" xml:space="preserve">
-    <value>btnReplacementResources</value>
-  </data>
-  <data name="&gt;&gt;btnReplacementResources.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnReplacementResources.Parent" xml:space="preserve">
-    <value>cpOtherTools</value>
-  </data>
-  <data name="&gt;&gt;btnReplacementResources.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;btnAdditionalContacts.Name" xml:space="preserve">
-    <value>btnAdditionalContacts</value>
-  </data>
-  <data name="&gt;&gt;btnAdditionalContacts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAdditionalContacts.Parent" xml:space="preserve">
-    <value>cpOtherTools</value>
-  </data>
-  <data name="&gt;&gt;btnAdditionalContacts.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;btnNotes.Name" xml:space="preserve">
-    <value>btnNotes</value>
-  </data>
-  <data name="&gt;&gt;btnNotes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnNotes.Parent" xml:space="preserve">
-    <value>cpOtherTools</value>
-  </data>
-  <data name="&gt;&gt;btnNotes.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;btnShowResources.Name" xml:space="preserve">
-    <value>btnShowResources</value>
-  </data>
-  <data name="&gt;&gt;btnShowResources.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnShowResources.Parent" xml:space="preserve">
-    <value>cpOtherTools</value>
-  </data>
-  <data name="&gt;&gt;btnShowResources.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="cpOtherTools.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="cpOtherTools.Location" type="System.Drawing.Point, System.Drawing">
-    <value>741, 282</value>
-  </data>
-  <data name="cpOtherTools.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="cpOtherTools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 248</value>
-  </data>
-  <data name="cpOtherTools.TabIndex" type="System.Int32, mscorlib">
-    <value>57</value>
-  </data>
-  <data name="&gt;&gt;cpOtherTools.Name" xml:space="preserve">
-    <value>cpOtherTools</value>
-  </data>
-  <data name="&gt;&gt;cpOtherTools.Type" xml:space="preserve">
-    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cpOtherTools.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cpOtherTools.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="btnGeneralMessage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -2309,140 +2057,32 @@
   <data name="&gt;&gt;btnShowResources.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;btnIncidentStatusSummary.Name" xml:space="preserve">
-    <value>btnIncidentStatusSummary</value>
-  </data>
-  <data name="&gt;&gt;btnIncidentStatusSummary.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnIncidentStatusSummary.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnIncidentStatusSummary.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnAssignmentList.Name" xml:space="preserve">
-    <value>btnAssignmentList</value>
-  </data>
-  <data name="&gt;&gt;btnAssignmentList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAssignmentList.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnAssignmentList.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;btnAirOpsSummary.Name" xml:space="preserve">
-    <value>btnAirOpsSummary</value>
-  </data>
-  <data name="&gt;&gt;btnAirOpsSummary.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAirOpsSummary.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnAirOpsSummary.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;btnSafetyPlans.Name" xml:space="preserve">
-    <value>btnSafetyPlans</value>
-  </data>
-  <data name="&gt;&gt;btnSafetyPlans.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnSafetyPlans.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnSafetyPlans.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;btnIncidentObjectives.Name" xml:space="preserve">
-    <value>btnIncidentObjectives</value>
-  </data>
-  <data name="&gt;&gt;btnIncidentObjectives.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnIncidentObjectives.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnIncidentObjectives.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;btnMedicalPlan.Name" xml:space="preserve">
-    <value>btnMedicalPlan</value>
-  </data>
-  <data name="&gt;&gt;btnMedicalPlan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnMedicalPlan.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnMedicalPlan.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;btnPrintIAP.Name" xml:space="preserve">
-    <value>btnPrintIAP</value>
-  </data>
-  <data name="&gt;&gt;btnPrintIAP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnPrintIAP.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnPrintIAP.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;btnPrintOrgChart.Name" xml:space="preserve">
-    <value>btnPrintOrgChart</value>
-  </data>
-  <data name="&gt;&gt;btnPrintOrgChart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnPrintOrgChart.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnPrintOrgChart.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;btnCommsPlan.Name" xml:space="preserve">
-    <value>btnCommsPlan</value>
-  </data>
-  <data name="&gt;&gt;btnCommsPlan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCommsPlan.Parent" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
-  </data>
-  <data name="&gt;&gt;btnCommsPlan.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="cpIncidentActionPlan.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cpOtherTools.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
   </data>
-  <data name="cpIncidentActionPlan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 282</value>
+  <data name="cpOtherTools.Location" type="System.Drawing.Point, System.Drawing">
+    <value>741, 282</value>
   </data>
-  <data name="cpIncidentActionPlan.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cpOtherTools.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
   </data>
-  <data name="cpIncidentActionPlan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>722, 331</value>
+  <data name="cpOtherTools.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 248</value>
   </data>
-  <data name="cpIncidentActionPlan.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
+  <data name="cpOtherTools.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
   </data>
-  <data name="&gt;&gt;cpIncidentActionPlan.Name" xml:space="preserve">
-    <value>cpIncidentActionPlan</value>
+  <data name="&gt;&gt;cpOtherTools.Name" xml:space="preserve">
+    <value>cpOtherTools</value>
   </data>
-  <data name="&gt;&gt;cpIncidentActionPlan.Type" xml:space="preserve">
+  <data name="&gt;&gt;cpOtherTools.Type" xml:space="preserve">
     <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cpIncidentActionPlan.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cpOtherTools.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cpIncidentActionPlan.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;cpOtherTools.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="btnIncidentStatusSummary.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -2518,7 +2158,7 @@
     <value>37</value>
   </data>
   <data name="btnIncidentStatusSummary.Text" xml:space="preserve">
-    <value>Incident Status Summary (ICS-209)</value>
+    <value>Incident Status Summaries (ICS-209)</value>
   </data>
   <data name="btnIncidentStatusSummary.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
@@ -3211,9 +2851,33 @@
   <data name="&gt;&gt;btnCommsPlan.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <metadata name="tmrLock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>874, 56</value>
-  </metadata>
+  <data name="cpIncidentActionPlan.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="cpIncidentActionPlan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 282</value>
+  </data>
+  <data name="cpIncidentActionPlan.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
+  <data name="cpIncidentActionPlan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>722, 331</value>
+  </data>
+  <data name="cpIncidentActionPlan.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="&gt;&gt;cpIncidentActionPlan.Name" xml:space="preserve">
+    <value>cpIncidentActionPlan</value>
+  </data>
+  <data name="&gt;&gt;cpIncidentActionPlan.Type" xml:space="preserve">
+    <value>Wildfire_ICS_Assist.CustomControls.CollapsiblePanel, Canadian Incident Action Plan Program, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cpIncidentActionPlan.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cpIncidentActionPlan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -3221,7 +2885,7 @@
     <value>11, 24</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1149, 649</value>
+    <value>1092, 649</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14pt</value>
@@ -3514,7 +3178,10 @@
 </value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1165, 688</value>
+    <value>1108, 688</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>WindowsDefaultLocation</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Canadian Incident Action Plan Producer - Incident Details</value>
@@ -3524,6 +3191,60 @@
   </data>
   <data name="&gt;&gt;imglTabIcons.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;svdTaskFile.Name" xml:space="preserve">
+    <value>svdTaskFile</value>
+  </data>
+  <data name="&gt;&gt;svdTaskFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ofdOpenTaskFile.Name" xml:space="preserve">
+    <value>ofdOpenTaskFile</value>
+  </data>
+  <data name="&gt;&gt;ofdOpenTaskFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fbdSaveLocation.Name" xml:space="preserve">
+    <value>fbdSaveLocation</value>
+  </data>
+  <data name="&gt;&gt;fbdSaveLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tmrAutoSave.Name" xml:space="preserve">
+    <value>tmrAutoSave</value>
+  </data>
+  <data name="&gt;&gt;tmrAutoSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tmrPositionLogReminders.Name" xml:space="preserve">
+    <value>tmrPositionLogReminders</value>
+  </data>
+  <data name="&gt;&gt;tmrPositionLogReminders.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tmrInternetSync.Name" xml:space="preserve">
+    <value>tmrInternetSync</value>
+  </data>
+  <data name="&gt;&gt;tmrInternetSync.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tmrNetwork.Name" xml:space="preserve">
+    <value>tmrNetwork</value>
+  </data>
+  <data name="&gt;&gt;tmrNetwork.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tmrLock.Name" xml:space="preserve">
+    <value>tmrLock</value>
+  </data>
+  <data name="&gt;&gt;tmrLock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
     <value>fileToolStripMenuItem</value>
@@ -3741,12 +3462,6 @@
   <data name="&gt;&gt;airOperationsSummaryICS220ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;printTheIncidentActionPlanToolStripMenuItem.Name" xml:space="preserve">
-    <value>printTheIncidentActionPlanToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;printTheIncidentActionPlanToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
     <value>toolStripSeparator5</value>
   </data>
@@ -3793,96 +3508,6 @@
     <value>printThisIncidentToDateToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;printThisIncidentToDateToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;operationsToolStripMenuItem.Name" xml:space="preserve">
-    <value>operationsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;operationsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem.Name" xml:space="preserve">
-    <value>positionLogToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
-    <value>toolStripSeparator8</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem1.Name" xml:space="preserve">
-    <value>teamAssignmentsICS204ToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;teamAssignmentsICS204ToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;logisticsToolStripMenuItem.Name" xml:space="preserve">
-    <value>logisticsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;logisticsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem1.Name" xml:space="preserve">
-    <value>positionLogToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
-    <value>toolStripSeparator7</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;memberStatusToolStripMenuItem.Name" xml:space="preserve">
-    <value>memberStatusToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;memberStatusToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;additionalContactsToolStripMenuItem.Name" xml:space="preserve">
-    <value>additionalContactsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;additionalContactsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;planningToolStripMenuItem.Name" xml:space="preserve">
-    <value>planningToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;planningToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem2.Name" xml:space="preserve">
-    <value>positionLogToolStripMenuItem2</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
-    <value>toolStripSeparator6</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;notesToolStripMenuItem.Name" xml:space="preserve">
-    <value>notesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;notesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;adminFinanceToolStripMenuItem.Name" xml:space="preserve">
-    <value>adminFinanceToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;adminFinanceToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem3.Name" xml:space="preserve">
-    <value>positionLogToolStripMenuItem3</value>
-  </data>
-  <data name="&gt;&gt;positionLogToolStripMenuItem3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;networkInternetToolStripMenuItem.Name" xml:space="preserve">
@@ -3951,59 +3576,11 @@
   <data name="&gt;&gt;aboutCIAPPToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tESTToolStripMenuItem.Name" xml:space="preserve">
-    <value>tESTToolStripMenuItem</value>
+  <data name="&gt;&gt;TestToolStripMenuItem.Name" xml:space="preserve">
+    <value>TestToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;tESTToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;TestToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;svdTaskFile.Name" xml:space="preserve">
-    <value>svdTaskFile</value>
-  </data>
-  <data name="&gt;&gt;svdTaskFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ofdOpenTaskFile.Name" xml:space="preserve">
-    <value>ofdOpenTaskFile</value>
-  </data>
-  <data name="&gt;&gt;ofdOpenTaskFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fbdSaveLocation.Name" xml:space="preserve">
-    <value>fbdSaveLocation</value>
-  </data>
-  <data name="&gt;&gt;fbdSaveLocation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tmrAutoSave.Name" xml:space="preserve">
-    <value>tmrAutoSave</value>
-  </data>
-  <data name="&gt;&gt;tmrAutoSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tmrPositionLogReminders.Name" xml:space="preserve">
-    <value>tmrPositionLogReminders</value>
-  </data>
-  <data name="&gt;&gt;tmrPositionLogReminders.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tmrInternetSync.Name" xml:space="preserve">
-    <value>tmrInternetSync</value>
-  </data>
-  <data name="&gt;&gt;tmrInternetSync.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tmrNetwork.Name" xml:space="preserve">
-    <value>tmrNetwork</value>
-  </data>
-  <data name="&gt;&gt;tmrNetwork.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tmrLock.Name" xml:space="preserve">
-    <value>tmrLock</value>
-  </data>
-  <data name="&gt;&gt;tmrLock.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>IncidentDetailsForm</value>
