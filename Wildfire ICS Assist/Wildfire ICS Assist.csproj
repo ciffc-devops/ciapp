@@ -311,6 +311,12 @@
     <Compile Include="OperationalPeriodForms\CreateOperationalPeriodForm.Designer.cs">
       <DependentUpon>CreateOperationalPeriodForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SafetyMessageForms\CreateNewSafetyMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SafetyMessageForms\CreateNewSafetyMessageForm.Designer.cs">
+      <DependentUpon>CreateNewSafetyMessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TemplateForms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -950,6 +956,9 @@
     <EmbeddedResource Include="OperationalPeriodForms\CreateOperationalPeriodForm.resx">
       <DependentUpon>CreateOperationalPeriodForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SafetyMessageForms\CreateNewSafetyMessageForm.resx">
+      <DependentUpon>CreateNewSafetyMessageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TemplateForms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1373,6 +1382,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-841-square-plus.png" />
+    <None Include="Resources\glyphicons-basic-809-drop-plus.png" />
     <None Include="Resources\RedExclaimSq.png" />
     <None Include="Resources\RedExclaim.png" />
     <None Include="Resources\glyphicons-basic-292-square-empty-minus.png" />

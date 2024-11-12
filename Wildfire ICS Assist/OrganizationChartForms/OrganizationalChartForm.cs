@@ -313,7 +313,7 @@ namespace Wildfire_ICS_Assist
                 //int end = CurrentTask.FileName.LastIndexOf("\\");
                 fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
 
-                string fullOutputFilename = "ICS 207 - Task " + CurrentIncident.IncidentIdentifier + " - Op " + CurrentOpPeriod + " - Org Chart";
+                string fullOutputFilename = "ICS 207 - Task " + CurrentIncident.IncidentNameAndNumberForPath + " - Op " + CurrentOpPeriod + " - Org Chart";
                 //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
                 fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
@@ -389,7 +389,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "OrgChart-" + Program.CurrentIncident.IncidentIdentifier + "-OP-" + Program.CurrentOpPeriod + ".csv";
+            svdExport.FileName = "OrgChart-" + Program.CurrentIncident.IncidentNameAndNumberForPath + "-OP-" + Program.CurrentOpPeriod + ".csv";
             DialogResult result = svdExport.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
             {
@@ -459,7 +459,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-                    string fullOutputFilename = "ICS 203 - Incident " + CurrentIncident.IncidentIdentifier + " - Op " + CurrentOpPeriod + " - Org Assignments List";
+                    string fullOutputFilename = "ICS 203 - Incident " + CurrentIncident.IncidentNameAndNumberForPath + " - Op " + CurrentOpPeriod + " - Org Assignments List";
                     //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
                     fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
@@ -525,7 +525,7 @@ namespace Wildfire_ICS_Assist
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentNameAndNumberForPath;
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
             byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);

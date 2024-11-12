@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist
             dgvObjectives.AutoGenerateColumns = false;
             CurrentIncident.createObjectivesSheetAsNeeded(CurrentOpPeriod);
             LoadSheet();
-            panels.Add(cpFireStatus); panels.Add(cpWeather); panels.Add(cpGeneralSafety);
+            panels.Add(cpFireStatus); panels.Add(cpWeather); panels.Add(cpGeneralSafety); panels.Add(prepAndApprovePanel1);
             
             Program.incidentDataService.IncidentObjectiveChanged += Program_IncidentObjectiveChanged;
             Program.incidentDataService.IncidentObjectivesSheetChanged += Program_IncidentObjectivesSheetChanged;

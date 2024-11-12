@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckedInResourcesForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.progBuildList = new System.Windows.Forms.ProgressBar();
             this.dgvResources = new System.Windows.Forms.DataGridView();
             this.colVariety = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +52,7 @@
             this.editCheckInInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeUniqueIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.demobilizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.progBuildList = new System.Windows.Forms.ProgressBar();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.cpFilters = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.cboExpandCrews = new System.Windows.Forms.ComboBox();
@@ -198,24 +198,13 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.progBuildList);
             this.splitContainer2.Panel2.Controls.Add(this.btnRefresh);
-            this.splitContainer2.Panel2.Controls.Add(this.cpFilters);
             this.splitContainer2.Panel2.Controls.Add(this.cpPNumbers);
+            this.splitContainer2.Panel2.Controls.Add(this.cpFilters);
             this.splitContainer2.Size = new System.Drawing.Size(1348, 409);
             this.splitContainer2.SplitterDistance = 1042;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoving += new System.Windows.Forms.SplitterCancelEventHandler(this.splitContainer2_SplitterMoving);
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
-            // 
-            // progBuildList
-            // 
-            this.progBuildList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progBuildList.Location = new System.Drawing.Point(2, 60);
-            this.progBuildList.Name = "progBuildList";
-            this.progBuildList.Size = new System.Drawing.Size(299, 16);
-            this.progBuildList.TabIndex = 2;
-            this.progBuildList.Value = 50;
-            this.progBuildList.Visible = false;
             // 
             // dgvResources
             // 
@@ -337,9 +326,9 @@
             // 
             this.colCheckIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colCheckIn.DataPropertyName = "CheckInDate";
-            dataGridViewCellStyle3.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colCheckIn.DefaultCellStyle = dataGridViewCellStyle1;
             this.colCheckIn.HeaderText = "Check In";
             this.colCheckIn.Name = "colCheckIn";
             this.colCheckIn.ReadOnly = true;
@@ -349,9 +338,9 @@
             // 
             this.colLastDay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colLastDay.DataPropertyName = "LastDayOnIncidentStr";
-            dataGridViewCellStyle4.Format = "MMM-dd-yyyy";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "MMM-dd-yyyy";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colLastDay.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLastDay.HeaderText = "Last Day";
             this.colLastDay.Name = "colLastDay";
             this.colLastDay.ReadOnly = true;
@@ -405,6 +394,17 @@
             this.demobilizeToolStripMenuItem.Text = "Demobilize Resource";
             this.demobilizeToolStripMenuItem.Click += new System.EventHandler(this.demobilizeToolStripMenuItem_Click);
             // 
+            // progBuildList
+            // 
+            this.progBuildList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progBuildList.Location = new System.Drawing.Point(2, 60);
+            this.progBuildList.Name = "progBuildList";
+            this.progBuildList.Size = new System.Drawing.Size(299, 16);
+            this.progBuildList.TabIndex = 2;
+            this.progBuildList.Value = 50;
+            this.progBuildList.Visible = false;
+            // 
             // btnRefresh
             // 
             this.btnRefresh.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_82_refresh;
@@ -421,12 +421,10 @@
             // 
             // cpFilters
             // 
-            this.cpFilters.BackColor = System.Drawing.Color.White;
-            this.cpFilters.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpFilters.HeightWhenCollapsed = 40;
-            this.cpFilters.WidthWhenCollapsed = 290;
-            this.cpFilters.ExpandsRight = true;
+            this.cpFilters.Collapsed = true;
+            this.cpFilters.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpFilters.Controls.Add(this.cboExpandCrews);
             this.cpFilters.Controls.Add(this.label4);
             this.cpFilters.Controls.Add(this.btnFilter3ShowHelp);
@@ -436,15 +434,16 @@
             this.cpFilters.Controls.Add(this.label2);
             this.cpFilters.Controls.Add(this.cboResourceVariety);
             this.cpFilters.Controls.Add(this.label1);
-            this.cpFilters.Collapsed = false;
-            this.cpFilters.HeightWhenExpanded = 322;
-            this.cpFilters.WidthWhenExpanded = 290;
+            this.cpFilters.EnableExpandCollapse = true;
+            this.cpFilters.ExpandsRight = true;
             this.cpFilters.ExpandsUpward = false;
             this.cpFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpFilters.Location = new System.Drawing.Point(6, 81);
             this.cpFilters.Margin = new System.Windows.Forms.Padding(6);
             this.cpFilters.Name = "cpFilters";
-            this.cpFilters.Size = new System.Drawing.Size(290, 322);
+            this.cpFilters.Size = new System.Drawing.Size(290, 40);
+            this.cpFilters.SizeWhenCollapsed = new System.Drawing.Size(290, 40);
+            this.cpFilters.SizeWhenExpanded = new System.Drawing.Size(290, 322);
             this.cpFilters.TabIndex = 0;
             this.cpFilters.TitleText = "Filter List";
             // 
@@ -572,11 +571,9 @@
             // cpPNumbers
             // 
             this.cpPNumbers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpPNumbers.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpPNumbers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpPNumbers.HeightWhenCollapsed = 40;
-            this.cpPNumbers.WidthWhenCollapsed = 290;
-            this.cpPNumbers.ExpandsRight = true;
+            this.cpPNumbers.Collapsed = true;
+            this.cpPNumbers.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpPNumbers.Controls.Add(this.btnPNumHelp);
             this.cpPNumbers.Controls.Add(this.numCNumMax);
             this.cpPNumbers.Controls.Add(this.numCNumMin);
@@ -594,15 +591,16 @@
             this.cpPNumbers.Controls.Add(this.lblVNumTitle);
             this.cpPNumbers.Controls.Add(this.label5);
             this.cpPNumbers.Controls.Add(this.lblPNumTitle);
-            this.cpPNumbers.Collapsed = true;
-            this.cpPNumbers.HeightWhenExpanded = 357;
-            this.cpPNumbers.WidthWhenExpanded = 290;
+            this.cpPNumbers.EnableExpandCollapse = true;
+            this.cpPNumbers.ExpandsRight = true;
             this.cpPNumbers.ExpandsUpward = true;
             this.cpPNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cpPNumbers.Location = new System.Drawing.Point(278, 399);
+            this.cpPNumbers.Location = new System.Drawing.Point(5, 133);
             this.cpPNumbers.Margin = new System.Windows.Forms.Padding(6);
             this.cpPNumbers.Name = "cpPNumbers";
-            this.cpPNumbers.Size = new System.Drawing.Size(275, 30);
+            this.cpPNumbers.Size = new System.Drawing.Size(291, 164);
+            this.cpPNumbers.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.cpPNumbers.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpPNumbers.TabIndex = 2;
             this.cpPNumbers.TitleText = "Resource Numbers";
             this.cpPNumbers.Visible = false;
@@ -611,10 +609,11 @@
             // 
             this.btnPNumHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPNumHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPNumHelp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnPNumHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnPNumHelp.Image")));
             this.btnPNumHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPNumHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPNumHelp.Location = new System.Drawing.Point(-3, 48);
+            this.btnPNumHelp.Location = new System.Drawing.Point(13, 48);
             this.btnPNumHelp.Name = "btnPNumHelp";
             this.btnPNumHelp.Size = new System.Drawing.Size(245, 49);
             this.btnPNumHelp.TabIndex = 88;
@@ -627,6 +626,7 @@
             // 
             // numCNumMax
             // 
+            this.numCNumMax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numCNumMax.Location = new System.Drawing.Point(142, 318);
             this.numCNumMax.Maximum = new decimal(new int[] {
             10000,
@@ -650,6 +650,7 @@
             // 
             // numCNumMin
             // 
+            this.numCNumMin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numCNumMin.Location = new System.Drawing.Point(12, 318);
             this.numCNumMin.Maximum = new decimal(new int[] {
             10000,
@@ -674,6 +675,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.label10.Location = new System.Drawing.Point(103, 320);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(33, 24);
@@ -683,6 +685,7 @@
             // lblCNumTitle
             // 
             this.lblCNumTitle.AutoSize = true;
+            this.lblCNumTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.lblCNumTitle.Location = new System.Drawing.Point(12, 289);
             this.lblCNumTitle.Name = "lblCNumTitle";
             this.lblCNumTitle.Size = new System.Drawing.Size(208, 24);
@@ -691,6 +694,7 @@
             // 
             // numENumMax
             // 
+            this.numENumMax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numENumMax.Location = new System.Drawing.Point(142, 255);
             this.numENumMax.Maximum = new decimal(new int[] {
             10000,
@@ -714,6 +718,7 @@
             // 
             // numENumMin
             // 
+            this.numENumMin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numENumMin.Location = new System.Drawing.Point(12, 255);
             this.numENumMin.Maximum = new decimal(new int[] {
             10000,
@@ -737,6 +742,7 @@
             // 
             // numVNumMax
             // 
+            this.numVNumMax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numVNumMax.Location = new System.Drawing.Point(142, 192);
             this.numVNumMax.Maximum = new decimal(new int[] {
             10000,
@@ -760,6 +766,7 @@
             // 
             // numVNumMin
             // 
+            this.numVNumMin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numVNumMin.Location = new System.Drawing.Point(12, 192);
             this.numVNumMin.Maximum = new decimal(new int[] {
             10000,
@@ -783,6 +790,7 @@
             // 
             // numPNumMax
             // 
+            this.numPNumMax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numPNumMax.Location = new System.Drawing.Point(142, 129);
             this.numPNumMax.Maximum = new decimal(new int[] {
             10000,
@@ -806,6 +814,7 @@
             // 
             // numPNumMin
             // 
+            this.numPNumMin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numPNumMin.Location = new System.Drawing.Point(12, 129);
             this.numPNumMin.Maximum = new decimal(new int[] {
             10000,
@@ -830,6 +839,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.label9.Location = new System.Drawing.Point(103, 257);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(33, 24);
@@ -839,6 +849,7 @@
             // lblENumTitle
             // 
             this.lblENumTitle.AutoSize = true;
+            this.lblENumTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.lblENumTitle.Location = new System.Drawing.Point(12, 226);
             this.lblENumTitle.Name = "lblENumTitle";
             this.lblENumTitle.Size = new System.Drawing.Size(256, 24);
@@ -848,6 +859,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.label7.Location = new System.Drawing.Point(103, 194);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 24);
@@ -857,6 +869,7 @@
             // lblVNumTitle
             // 
             this.lblVNumTitle.AutoSize = true;
+            this.lblVNumTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.lblVNumTitle.Location = new System.Drawing.Point(12, 163);
             this.lblVNumTitle.Name = "lblVNumTitle";
             this.lblVNumTitle.Size = new System.Drawing.Size(228, 24);
@@ -866,6 +879,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.label5.Location = new System.Drawing.Point(103, 131);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 24);
@@ -875,6 +889,7 @@
             // lblPNumTitle
             // 
             this.lblPNumTitle.AutoSize = true;
+            this.lblPNumTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.lblPNumTitle.Location = new System.Drawing.Point(12, 100);
             this.lblPNumTitle.Name = "lblPNumTitle";
             this.lblPNumTitle.Size = new System.Drawing.Size(249, 24);

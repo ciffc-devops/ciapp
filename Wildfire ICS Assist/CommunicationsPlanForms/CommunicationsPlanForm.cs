@@ -171,7 +171,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "CommsPlan-" + Program.CurrentIncident.IncidentIdentifier + "-OP-" + Program.CurrentOpPeriod + ".csv";
+            svdExport.FileName = "CommsPlan-" + Program.CurrentIncident.IncidentNameAndNumberForPath + "-OP-" + Program.CurrentOpPeriod + ".csv";
             DialogResult result = svdExport.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
             {

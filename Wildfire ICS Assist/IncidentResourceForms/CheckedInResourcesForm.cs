@@ -617,8 +617,8 @@ namespace Wildfire_ICS_Assist
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
             cpFilters.Width = splitContainer2.Panel2.Width - 10;
-            cpFilters.WidthWhenExpanded = cpFilters.Width;
-            cpFilters.WidthWhenCollapsed = cpFilters.Width;
+            cpFilters.SizeWhenCollapsed = new Size(cpFilters.Width, cpFilters.SizeWhenCollapsed.Height);
+            cpFilters.SizeWhenExpanded = new Size(cpFilters.Width, cpFilters.SizeWhenExpanded.Height);
 
         }
 
@@ -882,7 +882,7 @@ namespace Wildfire_ICS_Assist
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentIdentifier;
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentNameAndNumberForPath;
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
             byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
@@ -901,7 +901,7 @@ namespace Wildfire_ICS_Assist
 
         private void ExportToCSV()
         {
-            svdExport.FileName = "Check In Records-" + Program.CurrentIncident.IncidentIdentifier + "-OP-" + Program.CurrentOpPeriod + ".csv";
+            svdExport.FileName = "Check In Records-" + Program.CurrentIncident.IncidentNameAndNumberForPath + "-OP-" + Program.CurrentOpPeriod + ".csv";
             DialogResult result = svdExport.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
             {
@@ -951,7 +951,7 @@ namespace Wildfire_ICS_Assist
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-            string fullOutputFilename = "ICS-211 " + Program.CurrentIncident.IncidentIdentifier;
+            string fullOutputFilename = "ICS-211 " + Program.CurrentIncident.IncidentNameAndNumberForPath;
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
             byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
@@ -970,7 +970,7 @@ namespace Wildfire_ICS_Assist
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-            string fullOutputFilename = "ICS-211 " + Program.CurrentIncident.IncidentIdentifier;
+            string fullOutputFilename = "ICS-211 " + Program.CurrentIncident.IncidentNameAndNumberForPath;
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
             byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
@@ -1054,7 +1054,7 @@ namespace Wildfire_ICS_Assist
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-            string fullOutputFilename = "Dietary and Allergy Details - " + Program.CurrentIncident.IncidentIdentifier;
+            string fullOutputFilename = "Dietary and Allergy Details - " + Program.CurrentIncident.IncidentNameAndNumberForPath;
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
             byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);

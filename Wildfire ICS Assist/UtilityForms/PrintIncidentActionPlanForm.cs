@@ -272,8 +272,8 @@ namespace Wildfire_ICS_Assist
             //int end = CurrentIncident.FileName.LastIndexOf("\\");
             fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
 
-            string fullOutputFilename = "Task " + CurrentIncident.IncidentIdentifier + " Op " + CurrentOpPeriod;    // + ".pdf";
-            if (PrintIncidentToDate) { fullOutputFilename = "Task " + CurrentIncident.IncidentIdentifier + " as of Op " + CurrentOpPeriod; }
+            string fullOutputFilename = CurrentIncident.IncidentNameAndNumberForPath + " Op " + CurrentOpPeriod;    // + ".pdf";
+            if (PrintIncidentToDate) { fullOutputFilename = CurrentIncident.IncidentNameAndNumberForPath + " as of Op " + CurrentOpPeriod; }
             fullOutputFilename = fullOutputFilename.ReplaceInvalidPathChars();
 
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
@@ -566,7 +566,7 @@ namespace Wildfire_ICS_Assist
                 {
                     FileInfo file = new FileInfo(openFileDialog1.FileName);
 
-                    string newFileName = CurrentIncident.IncidentIdentifier;
+                    string newFileName = CurrentIncident.IncidentNameAndNumberForPath;
                     if (PrintIncidentToDate) { newFileName += "-TitleImage"; }
                     else { newFileName += "-Op" + CurrentOpPeriod + "TitleImage"; }
 
@@ -580,7 +580,7 @@ namespace Wildfire_ICS_Assist
                     while (File.Exists(newFilePath + file.Extension))
                     {
                         uniqueNumber += 1;
-                        newFileName = CurrentIncident.IncidentIdentifier;
+                        newFileName = CurrentIncident.IncidentNameAndNumberForPath;
                         if (PrintIncidentToDate) { newFileName += "-TitleImage"; }
                         else { newFileName += "-Op" + CurrentOpPeriod + "TitleImage"; }
                         newFileName += "-" + uniqueNumber;

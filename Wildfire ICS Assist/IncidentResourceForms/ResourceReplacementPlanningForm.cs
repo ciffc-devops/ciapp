@@ -19,6 +19,7 @@ namespace Wildfire_ICS_Assist
 {
     public partial class ResourceReplacementPlanningForm : BaseForm
     {
+
         public ResourceReplacementPlanningForm()
         {
             InitializeComponent();
@@ -74,8 +75,10 @@ namespace Wildfire_ICS_Assist
             cboIncomingOutputInclude.SelectedIndex = 0;
 
 
-            outgoingPanels.Add(collapsiblePanel1); outgoingPanels.Add(collapsiblePanel2); outgoingPanels.Add(collapsiblePanel3);
-            //foreach(CollapsiblePanel panel in outgoingPanels) { panel.PanelCollapsed += HandlePanelCollapsed; panel.PanelExpanded += HandlePanelExpanded; }
+            outgoingPanels.Add(cpFilters); outgoingPanels.Add(collapsiblePanel1); outgoingPanels.Add(collapsiblePanel4);
+            incomingPanels.Add(collapsiblePanel3); incomingPanels.Add(collapsiblePanel5); incomingPanels.Add(collapsiblePanel2);
+            foreach (CollapsiblePanel panel in outgoingPanels) { panel.PanelCollapsed += HandlePanelCollapsed; panel.PanelExpanded += HandlePanelExpanded; }
+            foreach (CollapsiblePanel panel in incomingPanels) { panel.PanelCollapsed += HandlePanelCollapsed; panel.PanelExpanded += HandlePanelExpanded; }
 
         }
         private List<CollapsiblePanel> outgoingPanels = new List<CollapsiblePanel>();
@@ -418,7 +421,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnExportSignInToCSV_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "Resource Replacement Planning-" + Program.CurrentIncident.IncidentIdentifier + ".csv";
+            svdExport.FileName = "Resource Replacement Planning-" + Program.CurrentIncident.IncidentNameAndNumberForPath + ".csv";
             DialogResult result = svdExport.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
             {
@@ -505,7 +508,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnExportIncoming_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "Resource Replacement Planning-" + Program.CurrentIncident.IncidentIdentifier + ".csv";
+            svdExport.FileName = "Resource Replacement Planning-" + Program.CurrentIncident.IncidentNameAndNumberForPath + ".csv";
             DialogResult result = svdExport.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
             {

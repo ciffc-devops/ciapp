@@ -63,7 +63,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "Contacts-" + Program.CurrentIncident.IncidentIdentifier + ".csv";
+            svdExport.FileName = "Contacts-" + Program.CurrentIncident.IncidentNameAndNumberForPath + ".csv";
             DialogResult result = svdExport.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
             {

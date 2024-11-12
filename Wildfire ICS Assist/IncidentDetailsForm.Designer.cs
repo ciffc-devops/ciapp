@@ -904,12 +904,10 @@
             this.cpOtherTools.ExpandsRight = true;
             this.cpOtherTools.ExpandsUpward = false;
             resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
-            this.cpOtherTools.HeightWhenCollapsed = 40;
-            this.cpOtherTools.HeightWhenExpanded = 180;
             this.cpOtherTools.Name = "cpOtherTools";
+            this.cpOtherTools.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.cpOtherTools.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpOtherTools.TitleText = "Other Tools";
-            this.cpOtherTools.WidthWhenCollapsed = 349;
-            this.cpOtherTools.WidthWhenExpanded = 349;
             // 
             // btnGeneralMessage
             // 
@@ -973,12 +971,10 @@
             this.cpIncidentActionPlan.ExpandsRight = true;
             this.cpIncidentActionPlan.ExpandsUpward = false;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
-            this.cpIncidentActionPlan.HeightWhenCollapsed = 40;
-            this.cpIncidentActionPlan.HeightWhenExpanded = 331;
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
+            this.cpIncidentActionPlan.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.cpIncidentActionPlan.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
-            this.cpIncidentActionPlan.WidthWhenCollapsed = 485;
-            this.cpIncidentActionPlan.WidthWhenExpanded = 722;
             // 
             // btnIncidentStatusSummary
             // 

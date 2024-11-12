@@ -269,7 +269,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "ActivityLog-" + Program.CurrentIncident.IncidentIdentifier + ".csv";
+            svdExport.FileName = "ActivityLog-" + Program.CurrentIncident.IncidentNameAndNumberForPath + ".csv";
             DialogResult result = svdExport.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
             {

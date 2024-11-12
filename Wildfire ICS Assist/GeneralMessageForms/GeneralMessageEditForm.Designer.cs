@@ -96,7 +96,6 @@
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.Color.White;
             this.splitContainer2.Panel1.Controls.Add(this.txtToName);
-            this.splitContainer2.Panel1.Controls.Add(this.prepAndApprovePanel1);
             this.splitContainer2.Panel1.Controls.Add(this.datMessageSent);
             this.splitContainer2.Panel1.Controls.Add(this.txtMessage);
             this.splitContainer2.Panel1.Controls.Add(this.txtSubject);
@@ -108,6 +107,7 @@
             this.splitContainer2.Panel1.Controls.Add(this.label6);
             this.splitContainer2.Panel1.Controls.Add(this.label3);
             this.splitContainer2.Panel1.Controls.Add(this.label4);
+            this.splitContainer2.Panel1.Controls.Add(this.prepAndApprovePanel1);
             // 
             // splitContainer2.Panel2
             // 
@@ -131,7 +131,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtToName.Location = new System.Drawing.Point(205, 3);
             this.txtToName.Name = "txtToName";
-            this.txtToName.Size = new System.Drawing.Size(328, 29);
+            this.txtToName.Size = new System.Drawing.Size(371, 29);
             this.txtToName.TabIndex = 19;
             this.txtToName.TextChanged += new System.EventHandler(this.txtToName_TextChanged);
             // 
@@ -147,13 +147,13 @@
             this.prepAndApprovePanel1.ExpandsRight = false;
             this.prepAndApprovePanel1.ExpandsUpward = false;
             this.prepAndApprovePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prepAndApprovePanel1.Location = new System.Drawing.Point(543, 6);
+            this.prepAndApprovePanel1.Location = new System.Drawing.Point(585, 6);
             this.prepAndApprovePanel1.Margin = new System.Windows.Forms.Padding(6);
             this.prepAndApprovePanel1.Name = "prepAndApprovePanel1";
             this.prepAndApprovePanel1.PreparedByDateTime = new System.DateTime(2024, 10, 31, 9, 52, 19, 867);
-            this.prepAndApprovePanel1.Size = new System.Drawing.Size(414, 40);
-            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(414, 40);
-            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(619, 197);
+            this.prepAndApprovePanel1.Size = new System.Drawing.Size(372, 40);
+            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(372, 40);
+            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(731, 143);
             this.prepAndApprovePanel1.TabIndex = 48;
             this.prepAndApprovePanel1.TitleText = "Prepared and Approved By";
             this.prepAndApprovePanel1.PreparedByChanged += new System.EventHandler(this.prepAndApprovePanel1_PreparedByChanged);
@@ -211,7 +211,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtToPosition.Location = new System.Drawing.Point(206, 37);
             this.txtToPosition.Name = "txtToPosition";
-            this.txtToPosition.Size = new System.Drawing.Size(327, 29);
+            this.txtToPosition.Size = new System.Drawing.Size(370, 29);
             this.txtToPosition.TabIndex = 20;
             this.txtToPosition.TextChanged += new System.EventHandler(this.txtToPosition_TextChanged);
             // 
@@ -286,7 +286,7 @@
             this.txtReply.Location = new System.Drawing.Point(205, 12);
             this.txtReply.Multiline = true;
             this.txtReply.Name = "txtReply";
-            this.txtReply.Size = new System.Drawing.Size(752, 94);
+            this.txtReply.Size = new System.Drawing.Size(752, 88);
             this.txtReply.TabIndex = 47;
             this.txtReply.WordWrap = true;
             this.txtReply.TextChanged += new System.EventHandler(this.txtReply_TextChanged);
@@ -295,7 +295,7 @@
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label9.Location = new System.Drawing.Point(-11, 148);
+            this.label9.Location = new System.Drawing.Point(-11, 142);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(210, 29);
             this.label9.TabIndex = 43;
@@ -305,7 +305,7 @@
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label11.Location = new System.Drawing.Point(6, 182);
+            this.label11.Location = new System.Drawing.Point(6, 176);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(193, 29);
             this.label11.TabIndex = 44;
@@ -315,7 +315,7 @@
             // txtReplyPosition
             // 
             this.txtReplyPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtReplyPosition.Location = new System.Drawing.Point(206, 147);
+            this.txtReplyPosition.Location = new System.Drawing.Point(206, 141);
             this.txtReplyPosition.Name = "txtReplyPosition";
             this.txtReplyPosition.Size = new System.Drawing.Size(403, 29);
             this.txtReplyPosition.TabIndex = 28;
@@ -324,7 +324,7 @@
             // txtReplyName
             // 
             this.txtReplyName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtReplyName.Location = new System.Drawing.Point(206, 112);
+            this.txtReplyName.Location = new System.Drawing.Point(206, 106);
             this.txtReplyName.Name = "txtReplyName";
             this.txtReplyName.Size = new System.Drawing.Size(403, 29);
             this.txtReplyName.TabIndex = 27;
@@ -333,7 +333,7 @@
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.Location = new System.Drawing.Point(6, 112);
+            this.label10.Location = new System.Drawing.Point(6, 106);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(193, 29);
             this.label10.TabIndex = 42;
@@ -345,7 +345,7 @@
             this.datReplyReceived.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.datReplyReceived.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datReplyReceived.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datReplyReceived.Location = new System.Drawing.Point(206, 182);
+            this.datReplyReceived.Location = new System.Drawing.Point(206, 176);
             this.datReplyReceived.Name = "datReplyReceived";
             this.datReplyReceived.Size = new System.Drawing.Size(213, 29);
             this.datReplyReceived.TabIndex = 29;
@@ -384,7 +384,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
             this.ClientSize = new System.Drawing.Size(969, 561);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(819, 571);

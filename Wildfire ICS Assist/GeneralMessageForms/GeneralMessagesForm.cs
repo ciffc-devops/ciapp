@@ -168,7 +168,7 @@ namespace Wildfire_ICS_Assist
             //int end = CurrentTask.FileName.LastIndexOf("\\");
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-            string fullOutputFilename = "ICS 213 - Task " + Program.CurrentIncident.IncidentIdentifier + " - General Messages";
+            string fullOutputFilename = "ICS 213 - " + Program.CurrentIncident.IncidentNameAndNumberForPath + " - General Messages";
             //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 

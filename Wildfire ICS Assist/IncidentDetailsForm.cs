@@ -1170,7 +1170,7 @@ namespace Wildfire_ICS_Assist
                         lastSaveSuccessful = true;
                         lastSuccessfulSaveTime = DateTime.Now;
 
-                        Program.generalOptionsService.UpsertOptionValue(fileName, "RecentFile");
+                        Program.generalOptionsService.UpsertOptionValue(fileName, "RecentFileName");
 
                         setRecentFiles();
                        
@@ -1238,7 +1238,7 @@ namespace Wildfire_ICS_Assist
                 {
                     svdTaskFile.InitialDirectory = path;
                     svdTaskFile.DefaultExt = "xml";
-                    string defaultFileName = "ICS Forms - " + CurrentIncident.IncidentIdentifier + ".xml";
+                    string defaultFileName = "ICS Forms - " + CurrentIncident.IncidentNameAndNumberForPath + ".xml";
                     defaultFileName = defaultFileName.ReplaceInvalidPathChars();
                     svdTaskFile.FileName = defaultFileName;
 
@@ -2226,7 +2226,7 @@ namespace Wildfire_ICS_Assist
 
 
             }
-            path = Path.Combine(path, "Incident " + CurrentIncident.IncidentIdentifier);
+            path = Path.Combine(path, "Incident " + CurrentIncident.IncidentNameAndNumberForPath);
 
             System.IO.Directory.CreateDirectory(path);
 

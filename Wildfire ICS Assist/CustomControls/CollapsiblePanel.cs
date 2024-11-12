@@ -18,15 +18,18 @@ namespace Wildfire_ICS_Assist.CustomControls
     [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
     public partial class CollapsiblePanel : UserControl
     {
-        private int _CollapsedWidth = 485;
-        private int _CollapsedHeight = 40;
-        private int _ExpandedWidth = 485;
-        private int _ExpandedHeight = 300;
+
+        private Size _CollapsedSize = new Size(485, 40);
+        private Size _ExpandedSize = new Size(485, 300);
+
         private bool _CollapseLeft = true;
         private bool _ExpandUp = false;
-        private bool _IsCurrentlyCollapsed = true;
-        private Color _BackgroundColorCollapsed = Program.AccentColor; 
+        private bool _IsCurrentlyCollapsed = false;
+        private Color _BackgroundColorCollapsed = Program.AccentColor;
         private bool _ExpandAndCollapseEnabled = true;
+
+
+
 
 
         [Description("Enable the expand and collapse properties"), Category("Behavior")]
@@ -46,18 +49,6 @@ namespace Wildfire_ICS_Assist.CustomControls
 
 
 
-        [Description("The width of the panel when collapsed"), Category("Layout")]
-        public int HeightWhenCollapsed { get => _CollapsedHeight; set => _CollapsedHeight = value; }
-
-        [Description("The width of the panel when collapsed"), Category("Layout")]
-        public int WidthWhenCollapsed { get => _CollapsedWidth; set => _CollapsedWidth = value; }
-
-        [Description("The width of the panel when collapsed"), Category("Layout")]
-        public int WidthWhenExpanded { get => _ExpandedWidth; set => _ExpandedWidth = value; }
-
-        [Description("The width of the panel when collapsed"), Category("Layout")]
-        public int HeightWhenExpanded { get => _ExpandedHeight; set => _ExpandedHeight = value; }
-
         [Description("The background color to be used when collapsed. It will default to Form Accent if nothing is provided"), Category("Appearance")]
         public Color CollapsedBackgroundColor
         {
@@ -73,12 +64,27 @@ namespace Wildfire_ICS_Assist.CustomControls
             }
         }
 
+
+
+
+
+        [Description("The width and height of the panel when collapsed"), Category("Layout")]
+        public Size SizeWhenCollapsed { get => _CollapsedSize; set => _CollapsedSize = value; }
+
+        [Description("The width and height of the panel when Expanded"), Category("Layout")]
+        public Size SizeWhenExpanded { get => _ExpandedSize; set => _ExpandedSize = value; }
+
+
+
+
+
         public event EventHandler PanelCollapsed;
         public event EventHandler PanelExpanded;
 
         public CollapsiblePanel()
         {
             InitializeComponent();
+            lblTitle.Size = new Size(this.Width - lblTitle.Location.X, lblTitle.Height);
         }
 
         private void ToggleExpandCapability(bool ExpandCollapseEnabled)
@@ -123,8 +129,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 int currentX = this.Location.X;
                 int currentY = this.Location.Y;
 
-                this.Height = HeightWhenCollapsed;
-                this.Width = WidthWhenCollapsed;
+                this.Height = SizeWhenCollapsed.Height;
+                this.Width = SizeWhenCollapsed.Width;
 
                 int newX = 0;
                 int newY = 0;
@@ -136,7 +142,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 {
                     if (ExpandsUpward)
                     {
-                        newY = currentY + (HeightWhenExpanded - HeightWhenCollapsed);
+                        newY = currentY + (SizeWhenExpanded.Height - SizeWhenCollapsed.Height);
                     }
                     else
                     {
@@ -145,7 +151,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                     if (!ExpandsRight)
                     {
-                        newX = currentX + (WidthWhenExpanded - WidthWhenCollapsed);
+                        newX = currentX + (SizeWhenExpanded.Width - SizeWhenCollapsed.Width);
                     }
                     else
                     {
@@ -178,8 +184,8 @@ namespace Wildfire_ICS_Assist.CustomControls
                 int currentX = this.Location.X;
                 int currentY = this.Location.Y;
 
-                this.Height = HeightWhenExpanded;
-                this.Width = WidthWhenExpanded;
+                this.Height = SizeWhenExpanded.Height;
+                this.Width = SizeWhenExpanded.Width;
                 this.BackColor = Color.White;
 
                 btnExpandCollapse.BackgroundImage = Properties.Resources.glyphicons_basic_222_chevron_up_3x;
@@ -192,7 +198,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 {
                     if (ExpandsUpward)
                     {
-                        newY = currentY - (HeightWhenExpanded - HeightWhenCollapsed);
+                        newY = currentY - (SizeWhenExpanded.Height - SizeWhenCollapsed.Height);
                     }
                     else
                     {
@@ -201,7 +207,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                     if (!ExpandsRight)
                     {
-                        newX = currentX - (WidthWhenExpanded - WidthWhenCollapsed);
+                        newX = currentX - (SizeWhenExpanded.Width - SizeWhenCollapsed.Width);
                     }
                     else
                     {

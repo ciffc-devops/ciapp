@@ -223,7 +223,7 @@ namespace Wildfire_ICS_Assist
                 string fullFilepath = "";
                 fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-                string fullOutputFilename = "ICS-221 " + Program.CurrentIncident.IncidentIdentifier + " " + DateTime.Now.ToString(Globals.DateFormat);
+                string fullOutputFilename = "ICS-221 " + Program.CurrentIncident.IncidentNameAndNumberForPath + " " + DateTime.Now.ToString(Globals.DateFormat);
                 fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
                 byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
