@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.CustomControls;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -18,6 +19,7 @@ namespace Wildfire_ICS_Assist
     {
         private SafetyMessage _selectedMessage = null;
         public SafetyMessage selectedMessage { get => _selectedMessage; set { _selectedMessage = value; LoadMessage(); } }
+        List<CollapsiblePanel> collapsiblePanelList;
 
         private void LoadMessage()
         {
@@ -31,10 +33,32 @@ namespace Wildfire_ICS_Assist
                 Image img = selectedMessage.ImageBytes.getImageFromBytes();
                 if (img != null) { picTitleImage.Image = img; }
             }
+
+            prepAndApprovePanel1.SetPreparedBy(selectedMessage.PreparedByRoleID, selectedMessage.DatePrepared);
+            prepAndApprovePanel1.SetApprovedBy(selectedMessage.ApprovedByRoleID, selectedMessage.DateApproved);
+
         }
         public SafetyMessageEditForm()
         {
             InitializeComponent(); SetControlColors(this.Controls);
+            prepAndApprovePanel1.ApprovedByChanged += PrepAndApprovePanel1_ApprovedByChanged;
+            prepAndApprovePanel1.PreparedByChanged += PrepAndApprovePanel1_PreparedByChanged;
+            collapsiblePanelList = new List<CollapsiblePanel>();
+            collapsiblePanelList.Add(collapsiblePanel1);
+            collapsiblePanelList.Add(prepAndApprovePanel1);
+
+        }
+
+        private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
+        {
+            selectedMessage.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+            selectedMessage.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+        }
+
+        private void PrepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
+        {
+            selectedMessage.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+            selectedMessage.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -77,16 +101,45 @@ namespace Wildfire_ICS_Assist
             else { txtSummaryLine.BackColor = Program.GoodColor; }
         }
 
-        private void txtMessage_TextChanged(object sender, EventArgs e)
+        private void SafetyMessageEditForm_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMessage.Text.Trim())) { txtMessage.BackColor = Program.ErrorColor; }
-            else { txtMessage.BackColor = Program.GoodColor; }
+            foreach (CollapsiblePanel p in collapsiblePanelList)
+            {
+                p.Collapse();
+                p.PanelExpanded += HandlePanelExpanded;
+                p.PanelCollapsed += HandlePanelCollapsed;
+
+            }
 
         }
 
-        private void SafetyMessageEditForm_Load(object sender, EventArgs e)
+        private void HandlePanelExpanded(object sender, EventArgs e)
         {
+            if (sender != null && sender is CollapsiblePanel)
+            {
+                CollapsiblePanel c = (CollapsiblePanel)sender;
+                c.Location = new Point(0, c.Location.Y);
+                foreach (CollapsiblePanel cp in collapsiblePanelList)
+                {
+                    if (!cp.Name.Equals(c.Name))
+                    {
+                        cp.Collapse();
+                        cp.Location = new Point(10, cp.Location.Y);
+                    }
+                }
+            }
+        }
 
+
+        private void HandlePanelCollapsed(object sender, EventArgs e)
+        {
+            if (sender != null && sender is CollapsiblePanel)
+            {
+                CollapsiblePanel c = (CollapsiblePanel)sender;
+                c.Location = new Point(10, c.Location.Y);
+
+
+            }
         }
 
         private void btnSelectImage_Click(object sender, EventArgs e)
@@ -131,7 +184,7 @@ namespace Wildfire_ICS_Assist
                     while (File.Exists(newFilePath + file.Extension))
                     {
                         uniqueNumber += 1;
-                        newFileName = Program.CurrentIncident.IncidentIdentifier;
+                        newFileName = Program.CurrentIncident.IncidentNameAndNumberForPath;
 
                         newFileName += "-" + uniqueNumber;
                         newFilePath = Path.Combine(FileAccessClasses.getWritablePath(Program.CurrentIncident), newFileName);
@@ -173,6 +226,16 @@ namespace Wildfire_ICS_Assist
             if (string.IsNullOrEmpty(txtMessage.Text.Trim())) { txtMessage.BackColor = Program.ErrorColor; }
             else { txtMessage.BackColor = Program.GoodColor; }
 
+        }
+
+        private void chkNewSitePlanRequired_CheckedChanged(object sender, EventArgs e)
+        {
+            selectedMessage.SitePlanRequired = chkNewSitePlanRequired.Checked;
+        }
+
+        private void txtNewSitePlanLocation_TextChanged(object sender, EventArgs e)
+        {
+            selectedMessage.SitePlanLocation = txtNewSitePlanLocation.Text;
         }
     }
 }

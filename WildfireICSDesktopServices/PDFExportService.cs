@@ -458,8 +458,8 @@ namespace WildfireICSDesktopServices
                         stamper.AcroFields.SetField("SafetyMessage", plan.Message);
                         stamper.AcroFields.SetField("Approved Site Safety Plans Located at I", plan.SitePlanLocation);
 
-                        stamper.AcroFields.SetField("PreparedByPosition", plan.ApprovedByRoleName);
-                        stamper.AcroFields.SetField("5 PREPARED BY I Position I Name I", plan.ApprovedByResourceName);
+                        stamper.AcroFields.SetField("PreparedByPosition", plan.PreparedByRoleName);
+                        stamper.AcroFields.SetField("5 PREPARED BY I Position I Name I", plan.PreparedByResourceName);
 
 
                         if (plan.SitePlanRequired) { PDFExtraTools.SetPDFCheckbox(stamper, "SitePlanRequiredYes"); }

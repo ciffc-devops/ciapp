@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.SafetyMessageForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -53,14 +54,17 @@ namespace Wildfire_ICS_Assist
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            using (SafetyMessageEntryForm entryForm = new SafetyMessageEntryForm())
+            using (CreateNewSafetyMessageForm entryForm = new CreateNewSafetyMessageForm())
             {
+                SafetyMessage message = new SafetyMessage();
+                message.OpPeriod = Program.CurrentOpPeriod;
+                message.SetPreparedBy(Program.CurrentRole);
+                entryForm.selectedMessage = message;
                 DialogResult dr = entryForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    entryForm.selectedMessage.ApprovedByResourceName = Program.CurrentRole.IndividualName;
-                    entryForm.selectedMessage.ApprovedByRoleID = Program.CurrentRole.RoleID; 
-                    entryForm.selectedMessage.ApprovedByRoleName = Program.CurrentRole.RoleName;
+                   
+
                     Program.incidentDataService.UpsertSafetyMessage(entryForm.selectedMessage);
 
                     if (entryForm.SaveForLater)
@@ -141,7 +145,7 @@ namespace Wildfire_ICS_Assist
                 //int end = CurrentTask.FileName.LastIndexOf("\\");
                 fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-                string fullOutputFilename = "ICS 208 - Task " + Program.CurrentIncident.IncidentIdentifier + " - Safety Messages";
+                string fullOutputFilename = "ICS 208 - Task " + Program.CurrentIncident.IncidentNameAndNumberForPath + " - Safety Messages";
                 //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
                 fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 

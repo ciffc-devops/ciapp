@@ -1006,9 +1006,29 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_809_drop_plus {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-809-drop-plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_82_refresh {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_82_refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_841_square_plus {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-841-square-plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
