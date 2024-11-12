@@ -216,11 +216,11 @@ namespace WildfireICSDesktopServices
             }
 
             var type = newValue.GetType();
-            if (type == new List<QuickCommsLogEntry>().GetType())
+            if (type == typeof(QuickCommsLogEntry))
             {
                 _options.AllCannedCommsLogEntries = newValue as List<QuickCommsLogEntry>;
             }
-            else if (type == new ShortcutButtonOption().GetType())
+            else if (type == typeof(ShortcutButtonOption))
             {
                 int nextBlank = -1;
                 if (_options.ShortcutButtons != null)

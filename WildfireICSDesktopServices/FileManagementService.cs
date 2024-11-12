@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Interfaces;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace WildfireICSDesktopServices
 {
@@ -55,9 +56,9 @@ namespace WildfireICSDesktopServices
                 try { System.IO.Directory.CreateDirectory(path); }
                 catch (IOException) { }
 
-                if (!path.Contains(CurrentTask.IncidentIdentifier))
+                if (!path.Contains(CurrentTask.IncidentNameAndNumberForPath))
                 {
-                    path = System.IO.Path.Combine(path, "Incident " + CurrentTask.IncidentIdentifier);
+                    path = System.IO.Path.Combine(path, "Incident " + CurrentTask.IncidentNameAndNumberForPath);
                     System.IO.Directory.CreateDirectory(path);
                 }
 

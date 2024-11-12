@@ -100,7 +100,7 @@ namespace WildfireICSDesktopServices
         {
             string path = System.IO.Path.GetTempPath();
 
-            string outputFileName = "Dietary and Allergy Details - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
+            string outputFileName = "Dietary and Allergy Details - " + incident.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
             outputFileName += ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
 
@@ -264,10 +264,10 @@ namespace WildfireICSDesktopServices
 
 
                     if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string filename = "ICS 213 - " + task.IncidentIdentifier + " - " + item.Subject.Sanitize() + ".pdf";
+                    string filename = "ICS 213 - " + task.IncidentNameAndNumberForPath + " - " + item.Subject.Sanitize() + ".pdf";
                     if (filename.Length > 100)
                     {
-                        filename = "ICS 213 - " + task.IncidentIdentifier + " - " + item.Subject.Sanitize().Substring(0, 20) + ".pdf";
+                        filename = "ICS 213 - " + task.IncidentNameAndNumberForPath + " - " + item.Subject.Sanitize().Substring(0, 20) + ".pdf";
                     }
                     path = FileAccessClasses.getUniqueFileName(filename, path);
 
@@ -419,10 +419,10 @@ namespace WildfireICSDesktopServices
 
 
                     if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string filename = "ICS 208 - Task " + task.IncidentIdentifier + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " +  plan.SummaryLine.Sanitize() + ".pdf";
+                    string filename = "ICS 208 - Task " + task.IncidentNameAndNumberForPath + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " +  plan.SummaryLine.Sanitize() + ".pdf";
                     if (filename.Length > 100)
                     {
-                        filename = "ICS 208 - Task " + task.IncidentIdentifier + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " + plan.SummaryLine.Sanitize().Substring(0, 20) + ".pdf";
+                        filename = "ICS 208 - Task " + task.IncidentNameAndNumberForPath + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " + plan.SummaryLine.Sanitize().Substring(0, 20) + ".pdf";
                     }
                     path = FileAccessClasses.getUniqueFileName(filename, path);
 
@@ -1014,7 +1014,7 @@ namespace WildfireICSDesktopServices
 
 
                     if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string outputFileName = "ICS 202 - Task " + task.IncidentIdentifier + " - Op Period " + OpsPeriod.ToString();
+                    string outputFileName = "ICS 202 - Task " + task.IncidentNameAndNumberForPath + " - Op Period " + OpsPeriod.ToString();
                     //path = System.IO.Path.Combine(path, outputFileName);
                     outputFileName = outputFileName.ReplaceInvalidPathChars();
 
@@ -1318,7 +1318,7 @@ namespace WildfireICSDesktopServices
                 if (!tempFileName)
                 {
                     if (task.DocumentPath == null && finalPath != null) { task.DocumentPath = finalPath; }
-                    string outputFileName = "ICS 207 - Incident " + task.IncidentIdentifier + " - Op " + OpsPeriod + " - Org Chart";
+                    string outputFileName = "ICS 207 - Incident " + task.IncidentNameAndNumberForPath + " - Op " + OpsPeriod + " - Org Chart";
                     finalPath = FileAccessClasses.getUniqueFileName(outputFileName, finalPath);
 
                 }
@@ -1518,7 +1518,7 @@ namespace WildfireICSDesktopServices
                 if (!tempFileName)
                 {
                     if (task.DocumentPath == null && finalPath != null) { task.DocumentPath = finalPath; }
-                    string outputFileName = "ICS 207 - Task " + task.IncidentIdentifier + " - Op " + OpsPeriod + " - Org Chart";
+                    string outputFileName = "ICS 207 - Task " + task.IncidentNameAndNumberForPath + " - Op " + OpsPeriod + " - Org Chart";
                     finalPath = FileAccessClasses.getUniqueFileName(outputFileName, finalPath);
                 }
                 else { finalPath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf"; }
@@ -2001,7 +2001,7 @@ namespace WildfireICSDesktopServices
                 path = FileAccessClasses.getWritablePath(task);
             }
 
-            string outputFileName = "ICS 205A - Task " + task.IncidentIdentifier + " - Communications List " + OpPeriod.ToString() + ".pdf";
+            string outputFileName = "ICS 205A - " + task.IncidentNameAndNumberForPath + " - Communications List " + OpPeriod.ToString() + ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
@@ -2214,7 +2214,7 @@ namespace WildfireICSDesktopServices
         {
             string path = System.IO.Path.GetTempPath();
 
-            string outputFileName = "ICS-211 - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
+            string outputFileName = "ICS-211 - " + incident.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
             outputFileName += ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
 
@@ -3139,7 +3139,7 @@ namespace WildfireICSDesktopServices
                 path = FileAccessClasses.getWritablePath(task);
             }
 
-            string outputFileName = "Task " + task.IncidentIdentifier + " - Title Page - OP " + OpPeriod.ToString() + ".pdf";
+            string outputFileName = task.IncidentNameAndNumberForPath + " - Title Page - OP " + OpPeriod.ToString() + ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
@@ -3563,7 +3563,7 @@ namespace WildfireICSDesktopServices
 
 
 
-            string outputFileName = "ICS 220 - Task " + task.IncidentIdentifier + " - OP " + OpPeriod.ToString() + ".pdf";
+            string outputFileName = "ICS 220 - " + task.IncidentNameAndNumberForPath + " - OP " + OpPeriod.ToString() + ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
@@ -3840,7 +3840,7 @@ namespace WildfireICSDesktopServices
 
 
 
-            string outputFileName = "LOGISTICS OVERVIEW - " + task.IncidentIdentifier + " OP " + OpPeriod.ToString() + " " + ParentRole.RoleName + ".pdf";
+            string outputFileName = "LOGISTICS OVERVIEW - " + task.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString() + " " + ParentRole.RoleName + ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
@@ -3982,7 +3982,7 @@ namespace WildfireICSDesktopServices
         {
             string path = System.IO.Path.GetTempPath();
 
-            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString();
+            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString();
             if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { outputFileName += " " + ParentRole.RoleName; }
             outputFileName += ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
@@ -4108,7 +4108,7 @@ namespace WildfireICSDesktopServices
         {
             string path = System.IO.Path.GetTempPath();
 
-            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentIdentifier + " OP " + OpPeriod.ToString();
+            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString();
             if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { outputFileName += " " + ParentRole.RoleName; }
             outputFileName += ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
@@ -4278,7 +4278,7 @@ namespace WildfireICSDesktopServices
             ICSRole div = task.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == OpPeriod).GetRoleByID(OpGroupICSRoleID, false);
             OperationalGroup opGroup = task.AllOperationalGroups.FirstOrDefault(o => o.LeaderICSRoleID == div.RoleID);
 
-            string outputFileName = "ICS 204 - " + task.IncidentIdentifier + " OP " + OpPeriod.ToString()  + " " + div.RoleName + ".pdf";
+            string outputFileName = "ICS 204 - " + task.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString()  + " " + div.RoleName + ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
@@ -4470,7 +4470,7 @@ namespace WildfireICSDesktopServices
 
             OperationalGroup opGroup = task.AllOperationalGroups.FirstOrDefault(o => o.ID == OpGroupID);
 
-            string outputFileName = "ICS 204A - " + task.IncidentIdentifier + " OP " + OpPeriod.ToString() + " " + opGroup.ResourceName + ".pdf";
+            string outputFileName = "ICS 204A - " + task.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString() + " " + opGroup.ResourceName + ".pdf";
             outputFileName = outputFileName.ReplaceInvalidPathChars();
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);

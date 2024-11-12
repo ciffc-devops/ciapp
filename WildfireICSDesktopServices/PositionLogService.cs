@@ -40,7 +40,7 @@ namespace WildfireICSDesktopServices
 
 
 
-            string outputFileName = "ICS 214 - Task " + task.IncidentIdentifier + " - " + role.RoleName + " - OP " + OpPeriod.ToString() + ".pdf";
+            string outputFileName = "ICS 214 - " + task.IncidentNameAndNumberForPath + " - " + role.RoleName + " - OP " + OpPeriod.ToString() + ".pdf";
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
@@ -343,7 +343,7 @@ namespace WildfireICSDesktopServices
                     if (string.IsNullOrEmpty(path)) { path = FileAccessClasses.getWritablePath(task); }
 
                     if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string outputFileName = "Incident " + task.IncidentIdentifier + " Op # " + OpPeriod + " - " + role.RoleName;
+                    string outputFileName = "Incident " + task.IncidentNameAndNumberForPath + " Op # " + OpPeriod + " - " + role.RoleName;
                     path = FileAccessClasses.getUniqueFileName(outputFileName, path);
                     //path = System.IO.Path.Combine(path, outputFileName);
 
