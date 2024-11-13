@@ -14,7 +14,15 @@ namespace WildfireICSDesktopServices
 {
     public static class PDFExtraTools
     {
-
+        public static int GetPageCount(string filePath)
+        {
+            using (var reader = new PdfReader(filePath))
+            {
+                int numberOfPages = reader.NumberOfPages;
+                return numberOfPages;
+            }
+            return 0;
+        }
         public static void SetFieldFontBold(this PdfStamper stamper, string fieldName)
         {
             BaseFont family = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, false);
