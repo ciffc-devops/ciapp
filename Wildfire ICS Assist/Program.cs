@@ -56,7 +56,7 @@ namespace Wildfire_ICS_Assist
                 Properties.Settings.Default.Save();
             }
 
-            LoadColors(2);
+            LoadColors(3);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -153,6 +153,8 @@ namespace Wildfire_ICS_Assist
             PrimaryColor = colors.FirstOrDefault(o => o.Name.Equals("Primary")).Color;
             ErrorColor = colors.FirstOrDefault(o => o.Name.Equals("BadInput")).Color;
             GoodColor = colors.FirstOrDefault(o => o.Name.Equals("GoodInput")).Color;
+            SaveColor = colors.FirstOrDefault(o => o.Name.Equals("Save")).Color;
+
         }
 
 
@@ -164,6 +166,7 @@ namespace Wildfire_ICS_Assist
         private static Color _HelpColor = Color.FromArgb(122, 139, 153);
         private static Color _GoodInputColor = Color.LightSkyBlue;
         private static Color _BadInputColor = Color.LightCoral;
+        private static Color _SaveColor = Color.LightSkyBlue;
 
         public static Color FormBackgroundColor { get => _FormBackgroundColor; set => _FormBackgroundColor = value; }
         public static Color AccentColor { get => _AccentColor; set => _AccentColor = value; }
@@ -173,6 +176,7 @@ namespace Wildfire_ICS_Assist
         public static Color PrimaryColor { get => _PrimaryColor; set => _PrimaryColor = value; }
         public static Color ErrorColor { get => _GoodInputColor; set => _GoodInputColor = value; }
         public static Color GoodColor { get => _BadInputColor; set => _BadInputColor = value; }
+        public static Color SaveColor { get => _SaveColor; set => _SaveColor = value; }
 
 
         //P-num controls, are these still needed?
