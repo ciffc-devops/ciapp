@@ -285,7 +285,6 @@
             this.txtTemplatePreviewMessage.Name = "txtTemplatePreviewMessage";
             this.txtTemplatePreviewMessage.Size = new System.Drawing.Size(1046, 252);
             this.txtTemplatePreviewMessage.TabIndex = 136;
-            this.txtTemplatePreviewMessage.WordWrap = true;
             this.txtTemplatePreviewMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // btnUseTemplate
@@ -435,7 +434,6 @@
             this.txtPreviewPrevOpMessage.Name = "txtPreviewPrevOpMessage";
             this.txtPreviewPrevOpMessage.Size = new System.Drawing.Size(1046, 252);
             this.txtPreviewPrevOpMessage.TabIndex = 136;
-            this.txtPreviewPrevOpMessage.WordWrap = true;
             this.txtPreviewPrevOpMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // btnSelectPrevOpPlan
@@ -522,7 +520,6 @@
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(669, 252);
             this.txtMessage.TabIndex = 132;
-            this.txtMessage.WordWrap = true;
             this.txtMessage.TextChanged += new System.EventHandler(this.txtMessage_TextChanged);
             this.txtMessage.Child = new System.Windows.Controls.TextBox();
             // 

@@ -880,7 +880,6 @@
             this.txtNOKName.Name = "txtNOKName";
             this.txtNOKName.Size = new System.Drawing.Size(474, 57);
             this.txtNOKName.TabIndex = 137;
-            this.txtNOKName.WordWrap = true;
             this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged_1);
             this.txtNOKName.Child = new System.Windows.Controls.TextBox();
             // 

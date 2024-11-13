@@ -36,11 +36,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtNewObjective = new SpellBox();
             this.btnHelp = new System.Windows.Forms.Button();
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
-            this.txtNewObjective = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -94,6 +94,7 @@
             this.btnAddSaved.Name = "btnAddSaved";
             this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
             this.btnAddSaved.TabIndex = 4;
+            this.btnAddSaved.Tag = "AddToIncident";
             this.btnAddSaved.Text = "Add to Incident";
             this.btnAddSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddSaved.UseVisualStyleBackColor = true;
@@ -156,6 +157,18 @@
             this.panel2.Size = new System.Drawing.Size(570, 242);
             this.panel2.TabIndex = 98;
             // 
+            // txtNewObjective
+            // 
+            this.txtNewObjective.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNewObjective.Location = new System.Drawing.Point(8, 51);
+            this.txtNewObjective.Multiline = true;
+            this.txtNewObjective.Name = "txtNewObjective";
+            this.txtNewObjective.Size = new System.Drawing.Size(554, 126);
+            this.txtNewObjective.TabIndex = 101;
+            this.txtNewObjective.Child = new System.Windows.Controls.TextBox();
+            // 
             // btnHelp
             // 
             this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -201,38 +214,22 @@
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
             this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.Tag = "AddToIncident";
             this.btnAddNew.Text = "Add to Incident";
             this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
-            // txtNewObjective
-            // 
-            this.txtNewObjective.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewObjective.Location = new System.Drawing.Point(8, 51);
-            this.txtNewObjective.Multiline = true;
-            this.txtNewObjective.Name = "txtNewObjective";
-            this.txtNewObjective.Size = new System.Drawing.Size(554, 126);
-            this.txtNewObjective.TabIndex = 101;
-            this.txtNewObjective.WordWrap = true;
-            this.txtNewObjective.Child = new System.Windows.Controls.TextBox();
-            // 
             // IncidentObjectiveEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
             this.ClientSize = new System.Drawing.Size(588, 452);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(604, 429);
             this.Name = "IncidentObjectiveEntryForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Incident Objective";
             this.Load += new System.EventHandler(this.IncidentObjectiveEntryForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

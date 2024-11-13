@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WildfireICSDesktopServices;
+using WildfireICSDesktopServices.Logging;
 
 namespace Wildfire_ICS_Assist
 {
@@ -44,13 +45,20 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            string path = Program.pdfExportService.createGeneralMessagePDF(Program.CurrentIncident, generalMessage, false, true);
-            if (!string.IsNullOrEmpty(path))
+            PDFCreationResults results = Program.pdfExportService.CreateGeneralMessagePDF(Program.CurrentIncident, generalMessage, false, true);
+            if (!string.IsNullOrEmpty(results.path))
             {
-                System.Diagnostics.Process.Start(path);
+                System.Diagnostics.Process.Start(results.path);
             }
 
-
+            if (results.errors.Any())
+            {
+                LogService logService = new LogService();
+                foreach (Exception ex in results.errors)
+                {
+                    logService.Log("Error creating general message PDF - " + ex.ToString());
+                }
+            }
         }
 
         private void GeneralMessageViewForm_Load(object sender, EventArgs e)

@@ -331,17 +331,16 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
 
         }
 
         private void btnChangeLogo_Click(object sender, EventArgs e)
         {
-            selectPhoto();
+            SelectOrganizationLogo();
 
         }
 
-        private void selectPhoto()
+        private void SelectOrganizationLogo()
         {
             openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             

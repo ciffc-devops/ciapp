@@ -313,7 +313,6 @@
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(302, 162);
             this.txtRemarks.TabIndex = 8;
-            this.txtRemarks.WordWrap = true;
             this.txtRemarks.TextChanged += new System.EventHandler(this.txtRemarks_TextChanged_1);
             this.txtRemarks.Child = new System.Windows.Controls.TextBox();
             // 

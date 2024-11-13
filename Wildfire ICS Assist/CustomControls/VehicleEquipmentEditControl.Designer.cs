@@ -295,7 +295,6 @@
             this.txtNotes.Size = new System.Drawing.Size(625, 83);
             this.txtNotes.TabIndex = 10;
             this.txtNotes.Text = "`";
-            this.txtNotes.WordWrap = true;
             this.txtNotes.TextChanged += new System.EventHandler(this.txtNotes_TextChanged);
             this.txtNotes.Child = new System.Windows.Controls.TextBox();
             // 

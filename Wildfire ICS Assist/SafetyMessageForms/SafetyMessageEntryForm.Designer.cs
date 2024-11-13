@@ -330,7 +330,6 @@
             this.txtNewMessage.Name = "txtNewMessage";
             this.txtNewMessage.Size = new System.Drawing.Size(807, 191);
             this.txtNewMessage.TabIndex = 125;
-            this.txtNewMessage.WordWrap = true;
             this.txtNewMessage.TextChanged += new System.EventHandler(this.txtNewMessage_TextChanged);
             this.txtNewMessage.Child = new System.Windows.Controls.TextBox();
             // 

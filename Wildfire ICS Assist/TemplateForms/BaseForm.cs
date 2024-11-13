@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Wildfire_ICS_Assist.CustomControls;
 using static System.Windows.Forms.Control;
 
 namespace Wildfire_ICS_Assist
@@ -29,14 +30,9 @@ namespace Wildfire_ICS_Assist
 
         public void SetControlColors(System.Windows.Forms.Control.ControlCollection controls)
         {
-            SetButtonColors(controls);
-            SetDataGridViewColors(controls);
-        }
-        private void SetButtonColors(System.Windows.Forms.Control.ControlCollection controls)
-        {
             IterateControls(controls, control =>
             {
-                if(control is Button button)
+                if (control is Button button)
                 {
                     button.FlatStyle = FlatStyle.Popup;
                     button.Cursor = Cursors.Hand;
@@ -73,25 +69,57 @@ namespace Wildfire_ICS_Assist
                         button.BackColor = Program.HelpColor;
                         button.Cursor = Cursors.Help;
 
+                    } else if (control.Tag != null && control.Tag.ToString().Equals("Save"))
+                    {
+
+                        button.Image = Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
+                        button.TextImageRelation = TextImageRelation.ImageBeforeText;
+                        button.ImageAlign = ContentAlignment.MiddleRight;
+                        button.TextAlign = ContentAlignment.MiddleCenter;
+                        button.BackColor = Program.SaveColor;
+                        //button.Cursor = Cursors.Help;
+
+                    }
+                    else if (control.Tag != null && control.Tag.ToString().Equals("AddToIncident"))
+                    {
+
+                        button.Image = Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+                        button.TextImageRelation = TextImageRelation.ImageBeforeText;
+                        button.ImageAlign = ContentAlignment.MiddleRight;
+                        button.TextAlign = ContentAlignment.MiddleCenter;
+                        button.BackColor = Program.SaveColor;
+                        //button.Cursor = Cursors.Help;
+
                     }
                 }
-                
-            });
-        }
-
-        private void SetDataGridViewColors(System.Windows.Forms.Control.ControlCollection controls)
-        {
-            IterateControls(controls, control =>
-            {
-
-                if (control is DataGridView view)
+                else if (control is DataGridView view)
                 {
                     view.BackgroundColor = Program.AccentColor;
                     //button.Cursor = Cursors.Help;
                 }
+                else if (control is TabControl tabControl)
+                {
+                    tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
+                    tabControl.DrawItem += TabControl_DrawItem;
+                    tabControl.Padding = new Point(15, 10);
+
+                    foreach (TabPage tab in tabControl.TabPages)
+                    {
+                        tab.BorderStyle = BorderStyle.Fixed3D;
+                        
+                    }
+                }
 
             });
         }
+
+        private void TabControl_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
+
+        }
+
+     
 
      
         public static void IterateControls(System.Windows.Forms.Control.ControlCollection controls, Action<Control> action)

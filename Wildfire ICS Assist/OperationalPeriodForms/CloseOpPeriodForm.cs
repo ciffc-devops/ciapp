@@ -676,7 +676,6 @@ namespace Wildfire_ICS_Assist
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
 
         }
     }

@@ -1148,7 +1148,6 @@
             this.spellBox4.Name = "spellBox4";
             this.spellBox4.Size = new System.Drawing.Size(266, 112);
             this.spellBox4.TabIndex = 14;
-            this.spellBox4.WordWrap = true;
             this.spellBox4.Child = new System.Windows.Controls.TextBox();
             // 
             // spellBox2
@@ -1523,7 +1522,6 @@
             this.spellBox10.Name = "spellBox10";
             this.spellBox10.Size = new System.Drawing.Size(477, 44);
             this.spellBox10.TabIndex = 19;
-            this.spellBox10.WordWrap = true;
             this.spellBox10.Child = new System.Windows.Controls.TextBox();
             // 
             // panel20
@@ -1554,7 +1552,6 @@
             this.spellBox11.Name = "spellBox11";
             this.spellBox11.Size = new System.Drawing.Size(477, 49);
             this.spellBox11.TabIndex = 21;
-            this.spellBox11.WordWrap = true;
             this.spellBox11.Child = new System.Windows.Controls.TextBox();
             // 
             // label16
@@ -1677,7 +1674,6 @@
             this.spellBox15.Name = "spellBox15";
             this.spellBox15.Size = new System.Drawing.Size(492, 75);
             this.spellBox15.TabIndex = 6;
-            this.spellBox15.WordWrap = true;
             this.spellBox15.Child = new System.Windows.Controls.TextBox();
             // 
             // spellBox12
@@ -1688,7 +1684,6 @@
             this.spellBox12.Name = "spellBox12";
             this.spellBox12.Size = new System.Drawing.Size(231, 39);
             this.spellBox12.TabIndex = 7;
-            this.spellBox12.WordWrap = true;
             this.spellBox12.Child = new System.Windows.Controls.TextBox();
             // 
             // flowLayoutPanel4

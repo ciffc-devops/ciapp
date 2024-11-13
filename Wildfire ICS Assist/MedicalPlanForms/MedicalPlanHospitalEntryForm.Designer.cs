@@ -166,6 +166,7 @@
             this.btnAddSaved.Name = "btnAddSaved";
             this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
             this.btnAddSaved.TabIndex = 4;
+            this.btnAddSaved.Tag = "AddToIncident";
             this.btnAddSaved.Text = "Add to Incident";
             this.btnAddSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddSaved.UseVisualStyleBackColor = true;
@@ -465,6 +466,7 @@
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
             this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.Tag = "AddToIncident";
             this.btnAddNew.Text = "Add to Incident";
             this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNew.UseVisualStyleBackColor = true;
@@ -476,13 +478,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 630);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(606, 646);
             this.Name = "MedicalPlanHospitalEntryForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add a Hospital";
             this.Load += new System.EventHandler(this.MedicalPlanHospitalEntryForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

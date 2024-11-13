@@ -266,7 +266,6 @@
             this.txtComments.Name = "txtComments";
             this.txtComments.Size = new System.Drawing.Size(336, 70);
             this.txtComments.TabIndex = 153;
-            this.txtComments.WordWrap = true;
             this.txtComments.Child = new System.Windows.Controls.TextBox();
             // 
             // cboCheckInLocation

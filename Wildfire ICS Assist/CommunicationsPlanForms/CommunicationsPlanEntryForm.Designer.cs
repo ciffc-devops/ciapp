@@ -194,6 +194,7 @@
             this.btnAddSaved.Name = "btnAddSaved";
             this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
             this.btnAddSaved.TabIndex = 5;
+            this.btnAddSaved.Tag = "AddToIncident";
             this.btnAddSaved.Text = "Add to Incident";
             this.btnAddSaved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddSaved.UseVisualStyleBackColor = true;
@@ -388,6 +389,7 @@
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
             this.btnAddNew.TabIndex = 31;
+            this.btnAddNew.Tag = "AddToIncident";
             this.btnAddNew.Text = "Add to Incident";
             this.btnAddNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNew.UseVisualStyleBackColor = true;
@@ -397,7 +399,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
             this.ClientSize = new System.Drawing.Size(769, 781);
             this.Controls.Add(this.splitContainer1);
             this.MaximizeBox = false;

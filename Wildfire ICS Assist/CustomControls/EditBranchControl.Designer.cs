@@ -308,7 +308,6 @@
             this.txtTactical.Name = "txtTactical";
             this.txtTactical.Size = new System.Drawing.Size(783, 116);
             this.txtTactical.TabIndex = 109;
-            this.txtTactical.WordWrap = true;
             this.txtTactical.TextChanged += new System.EventHandler(this.txtTactical_TextChanged);
             this.txtTactical.Child = new System.Windows.Controls.TextBox();
             // 
@@ -322,7 +321,6 @@
             this.txtSpecial.Name = "txtSpecial";
             this.txtSpecial.Size = new System.Drawing.Size(783, 116);
             this.txtSpecial.TabIndex = 110;
-            this.txtSpecial.WordWrap = true;
             this.txtSpecial.TextChanged += new System.EventHandler(this.txtSpecial_TextChanged);
             this.txtSpecial.Child = new System.Windows.Controls.TextBox();
             // 

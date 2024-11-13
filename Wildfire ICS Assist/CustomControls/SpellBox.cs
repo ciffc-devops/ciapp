@@ -114,6 +114,7 @@ class SpellBox : ElementHost
 
 
 
+
     public override string Text
     {
         get { return box.Text; }
@@ -126,6 +127,7 @@ class SpellBox : ElementHost
         set
         {
             box.AcceptsReturn = value;
+            box.TextWrapping = value ? TextWrapping.Wrap : TextWrapping.NoWrap;
             if (value)
             {
                 box.VerticalContentAlignment = VerticalAlignment.Top;
@@ -138,12 +140,7 @@ class SpellBox : ElementHost
 
         }
     }
-    [DefaultValue(false)]
-    public bool WordWrap
-    {
-        get { return box.TextWrapping != TextWrapping.NoWrap; }
-        set { box.TextWrapping = value ? TextWrapping.Wrap : TextWrapping.NoWrap; }
-    }
+  
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public new System.Windows.UIElement Child
     {

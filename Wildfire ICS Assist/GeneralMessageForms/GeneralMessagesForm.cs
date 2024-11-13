@@ -159,7 +159,7 @@ namespace Wildfire_ICS_Assist
             }
             messagesToPrint = messagesToPrint.OrderBy(o => o.DateSent).ToList();
 
-            List<byte[]> allPDFs = Program.pdfExportService.exportGeneralMessagesToPDF(Program.CurrentTask, messagesToPrint, false);
+            PDFCreationResults results = Program.pdfExportService.ExportGeneralMessagesToPDF(Program.CurrentTask, messagesToPrint, false);
 
 
          
@@ -172,7 +172,7 @@ namespace Wildfire_ICS_Assist
             //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
-            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(results.bytes);
             try
             {
                 File.WriteAllBytes(fullFilepath, fullFile);

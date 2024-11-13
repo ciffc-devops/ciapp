@@ -566,7 +566,6 @@
             this.txtEmergencyProcedures.Name = "txtEmergencyProcedures";
             this.txtEmergencyProcedures.Size = new System.Drawing.Size(866, 149);
             this.txtEmergencyProcedures.TabIndex = 59;
-            this.txtEmergencyProcedures.WordWrap = true;
             this.txtEmergencyProcedures.TextChanged += new System.EventHandler(this.txtEmergencyProcedures_TextChanged_1);
             this.txtEmergencyProcedures.Leave += new System.EventHandler(this.txtEmergencyProcedures_Leave_1);
             this.txtEmergencyProcedures.Child = new System.Windows.Controls.TextBox();

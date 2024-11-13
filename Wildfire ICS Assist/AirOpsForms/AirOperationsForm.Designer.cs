@@ -1110,7 +1110,6 @@
             this.txtMedivacText.Name = "txtMedivacText";
             this.txtMedivacText.Size = new System.Drawing.Size(506, 54);
             this.txtMedivacText.TabIndex = 70;
-            this.txtMedivacText.WordWrap = true;
             this.txtMedivacText.TextChanged += new System.EventHandler(this.txtMedivacText_TextChanged);
             this.txtMedivacText.Child = new System.Windows.Controls.TextBox();
             // 
@@ -1123,7 +1122,6 @@
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(506, 78);
             this.txtRemarks.TabIndex = 69;
-            this.txtRemarks.WordWrap = true;
             this.txtRemarks.TextChanged += new System.EventHandler(this.txtRemarks_TextChanged);
             this.txtRemarks.Child = new System.Windows.Controls.TextBox();
             // 

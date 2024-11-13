@@ -285,7 +285,6 @@
             this.txtGeneralSafetyMessage.Name = "txtGeneralSafetyMessage";
             this.txtGeneralSafetyMessage.Size = new System.Drawing.Size(471, 192);
             this.txtGeneralSafetyMessage.TabIndex = 36;
-            this.txtGeneralSafetyMessage.WordWrap = true;
             this.txtGeneralSafetyMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // cboSafetyMessages
@@ -342,7 +341,6 @@
             this.txtWeatherForcast.Name = "txtWeatherForcast";
             this.txtWeatherForcast.Size = new System.Drawing.Size(471, 244);
             this.txtWeatherForcast.TabIndex = 34;
-            this.txtWeatherForcast.WordWrap = true;
             this.txtWeatherForcast.Child = new System.Windows.Controls.TextBox();
             // 
             // btnPrint

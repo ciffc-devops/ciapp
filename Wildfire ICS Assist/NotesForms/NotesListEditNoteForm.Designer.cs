@@ -34,9 +34,9 @@
             this.txtNoteTitle = new System.Windows.Forms.TextBox();
             this.cboNoteCategory = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnHistory = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnHistory = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -121,6 +121,18 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Type";
             // 
+            // btnHistory
+            // 
+            this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHistory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnHistory.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_55_clock;
+            this.btnHistory.Location = new System.Drawing.Point(513, 8);
+            this.btnHistory.Name = "btnHistory";
+            this.btnHistory.Size = new System.Drawing.Size(55, 51);
+            this.btnHistory.TabIndex = 34;
+            this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
+            // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -130,6 +142,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(106, 51);
             this.btnSave.TabIndex = 11;
+            this.btnSave.Tag = "Save";
             this.btnSave.Text = "Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
@@ -149,18 +162,6 @@
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnHistory
-            // 
-            this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHistory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnHistory.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_55_clock;
-            this.btnHistory.Location = new System.Drawing.Point(513, 8);
-            this.btnHistory.Name = "btnHistory";
-            this.btnHistory.Size = new System.Drawing.Size(55, 51);
-            this.btnHistory.TabIndex = 34;
-            this.btnHistory.UseVisualStyleBackColor = true;
-            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // NotesListEditNoteForm
             // 
