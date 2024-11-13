@@ -13,7 +13,7 @@ namespace WildfireICSDesktopServices.Logging
         {
             CreateAppDataFolder();
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string specificFolder = System.IO.Path.Combine(folder, "SARAssist");
+            string specificFolder = System.IO.Path.Combine(folder, "CIAPP");
             //string logFile = System.IO.Path.Combine(specificFolder, "log.txt");
 
             return specificFolder;
@@ -21,7 +21,7 @@ namespace WildfireICSDesktopServices.Logging
         private static void CreateAppDataFolder()
         {
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string specificFolder = System.IO.Path.Combine(folder, "SARAssist");
+            string specificFolder = System.IO.Path.Combine(folder, "CIAPP");
             if (!System.IO.Directory.Exists(specificFolder))
             {
                 System.IO.Directory.CreateDirectory(specificFolder);
@@ -34,7 +34,7 @@ namespace WildfireICSDesktopServices.Logging
             CreateAppDataFolder();
             DeleteOldLogFiles();
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string specificFolder = System.IO.Path.Combine(folder, "SARAssist");
+            string specificFolder = System.IO.Path.Combine(folder, "CIAPP");
             string logFileName = "CIAPPLog" + DateTime.Now.ToString("yyyyMM") + ".txt";
             string logFile = System.IO.Path.Combine(specificFolder, logFileName);
             try
@@ -52,7 +52,7 @@ namespace WildfireICSDesktopServices.Logging
         {
             DateTime today = DateTime.Now;
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string specificFolder = System.IO.Path.Combine(folder, "SARAssist");
+            string specificFolder = System.IO.Path.Combine(folder, "CIAPP");
             if (System.IO.Directory.Exists(specificFolder))
             {
 
