@@ -88,6 +88,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(68)] private byte[] _OrganizationLogo;
         [ProtoMember(69)] private string _OrganizationName;
         [ProtoMember(70)] private bool _ShowTestButton;
+        [ProtoMember(71)] private bool _IncludeLogoOnTestPageByDefault;
 
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
@@ -182,6 +183,7 @@ namespace WF_ICS_ClassLibrary.Models
         public byte[] OrganizationLogo { get => _OrganizationLogo; set => _OrganizationLogo = value; }
         public string OrganizationName { get => _OrganizationName; set => _OrganizationName = value; }
         public bool ShowTestButton { get => _ShowTestButton; set => _ShowTestButton = value; }
+        public bool IncludeLogoOnTitlePageByDefault { get => _IncludeLogoOnTestPageByDefault; set => _IncludeLogoOnTestPageByDefault = value; }
 
         public void addDefaultOptions()
         {

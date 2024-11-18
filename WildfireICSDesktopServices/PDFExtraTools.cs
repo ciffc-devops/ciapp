@@ -9,11 +9,88 @@ using System.Threading.Tasks;
 using iTextSharp.text.pdf.parser;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Utilities;
+using System.Drawing;
+using ZXing.QrCode;
+using ZXing;
 
 namespace WildfireICSDesktopServices
 {
     public static class PDFExtraTools
     {
+        public static Bitmap GetQRImage(this string QrString, int size = 250)
+        {
+            QrCodeEncodingOptions options = new QrCodeEncodingOptions();
+            options = new QrCodeEncodingOptions
+            {
+                DisableECI = true,
+                CharacterSet = "UTF-8",
+                ErrorCorrection = ZXing.QrCode.Internal.ErrorCorrectionLevel.H,
+                Width = size,
+                Height = size,
+            };
+            var writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
+            var result = new Bitmap(writer.Write(QrString));
+            return result;
+        }
+
+
+        public static PdfStamper AddFormFieldToExistingPDF(this PdfStamper stamper, string fieldType, float x1, float y1, float x2, float y2, string fieldName, string value, bool CenterText = false)
+        {
+
+            switch (fieldType)
+            {
+                case "TextField":
+                    TextField field = new TextField(stamper.Writer, new iTextSharp.text.Rectangle(x1, y1, x2, y2), fieldName);
+                    field.Visibility = TextField.VISIBLE;
+                    field.Text = value;
+                    if (CenterText)
+                    {
+                        field.Alignment = Element.ALIGN_CENTER;
+                    }
+                    // add the field here, the second param is the page you want it on         
+                    stamper.AddAnnotation(field.GetTextField(), 1);
+
+                    break;
+                case "Signature":
+
+                    PdfFormField sigField = PdfFormField.CreateSignature(stamper.Writer);
+                    sigField.SetWidget(new iTextSharp.text.Rectangle(x1, y1, x2, y2), PdfAnnotation.HIGHLIGHT_INVERT);
+                    sigField.FieldName = fieldName;
+                    sigField.SetFieldFlags(PdfAnnotation.FLAGS_PRINT);
+                    sigField.SetFieldFlags(PdfFormField.FLAGS_PRINT);
+                    sigField.Flags = PdfAnnotation.FLAGS_PRINT;
+                    // add the field here, the second param is the page you want it on
+                    stamper.AddAnnotation(sigField, 1);
+
+                    break;
+                case "MultiLineTextField":
+                    TextField multilineField = new TextField(stamper.Writer, new iTextSharp.text.Rectangle(x1, y1, x2, y2), fieldName);
+                    multilineField.Options = TextField.MULTILINE;
+                    multilineField.Text = value;
+                    if (CenterText)
+                    {
+                        multilineField.Alignment = Element.ALIGN_CENTER & Element.ALIGN_MIDDLE;
+                    }
+                    // add the field here, the second param is the page you want it on         
+                    stamper.AddAnnotation(multilineField.GetTextField(), 1);
+                    break;
+                case "Box":
+                    iTextSharp.text.Rectangle rectangle = new iTextSharp.text.Rectangle(x1, y1, x2, y2, 0);
+                    rectangle.BackgroundColor = BaseColor.GREEN;
+                    rectangle.BorderWidth = 1;
+                    rectangle.BorderColor = BaseColor.BLACK;
+                    PdfAnnotation annotation = PdfAnnotation.CreateLink(
+                        stamper.Writer, rectangle, PdfAnnotation.HIGHLIGHT_INVERT,
+                        new PdfAction("http://itextpdf.com/"));
+                    stamper.AddAnnotation(annotation, 1);
+                    break;
+
+
+            }
+            return stamper;
+        } 
         public static int GetPageCount(string filePath)
         {
             using (var reader = new PdfReader(filePath))
@@ -68,7 +145,7 @@ namespace WildfireICSDesktopServices
                 pic.SetAbsolutePosition(x, y);
 
 
-                Font font = new Font();
+                iTextSharp.text.Font font = new iTextSharp.text.Font();
                 font.Size = 10;
                 float textx = 40 + 75 + 10; //((250 - pic.ScaledWidth) / 2) + 315;
                 float texty = 30;
@@ -154,6 +231,17 @@ namespace WildfireICSDesktopServices
                     // add the field here, the second param is the page you want it on         
                     stamper.AddAnnotation(multilineField.GetTextField(), 1);
                     break;
+                case "Box":
+                    iTextSharp.text.Rectangle rectangle = new iTextSharp.text.Rectangle(x, y, x + width, y + height, 0);
+                    rectangle.BackgroundColor = BaseColor.GREEN;
+                    rectangle.BorderWidth = 1;
+                    rectangle.BorderColor = BaseColor.BLACK;
+                    PdfAnnotation annotation = PdfAnnotation.CreateLink(
+                        stamper.Writer, rectangle, PdfAnnotation.HIGHLIGHT_INVERT,
+                        new PdfAction("http://itextpdf.com/"));
+                    stamper.AddAnnotation(annotation, 1);
+                    break;
+
             }
             return stamper;
         }

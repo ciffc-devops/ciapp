@@ -360,6 +360,9 @@ namespace WildfireICSDesktopServices
                     break;
                 case "OrganizationLogo":
                     _options.OrganizationLogo = (byte[])newValue; break;
+                case "IncludeLogoOnTitlePageByDefault":
+                    _options.IncludeLogoOnTitlePageByDefault = Convert.ToBoolean(newValue);
+                    break;
 
             }
             SaveGeneralOptions();
@@ -579,6 +582,8 @@ namespace WildfireICSDesktopServices
                     return _options.DefaultToServer;
                 case "ShowTestButton":
                     return _options.ShowTestButton;
+                case "IncludeLogoOnTitlePageByDefault":
+                    return _options.IncludeLogoOnTitlePageByDefault;
                 default:
                     return false;
             }

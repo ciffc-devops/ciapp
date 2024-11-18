@@ -244,6 +244,7 @@
     <Compile Include="Utilities\RandomGenerators.cs" />
     <Compile Include="Utilities\StringExt.cs" />
     <Compile Include="Utilities\TestTools.cs" />
+    <Compile Include="Utilities\TitlePageOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

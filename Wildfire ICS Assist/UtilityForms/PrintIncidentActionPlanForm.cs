@@ -22,6 +22,11 @@ namespace Wildfire_ICS_Assist
         private int CurrentOpPeriod { get => Program.CurrentOpPeriod; }
         public bool PrintIncidentToDate { get; set; } = false;
         public bool PrintIAPByDefault { get; set; } = false;
+
+        private TitlePageOptions TitlePageOptions { get; set; } = new TitlePageOptions();
+
+
+
         public PrintIncidentForm()
         {
             InitializeComponent(); SetControlColors(this.Controls);
@@ -35,7 +40,7 @@ namespace Wildfire_ICS_Assist
 
         private void PrintIncidentForm_Load(object sender, EventArgs e)
         {
-            if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
+            //if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
             if (PrintIncidentToDate)
             {
                 this.Text = "Print Incident " + CurrentIncident.IncidentIdentifier;
@@ -43,11 +48,7 @@ namespace Wildfire_ICS_Assist
 
                 if (PrintIAPByDefault) { setCheckboxStatusIncidentIAP(); }
                 else { setCheckboxStatusIncident(); }
-                if (!string.IsNullOrEmpty(CurrentIncident.IncidentTitleImageBytes))
-                {
-                    Image img = CurrentIncident.IncidentTitleImageBytes.getImageFromBytes();
-                    if (img != null) { picTitleImage.Image = img; }
-                }
+               
             }
             else
             {
@@ -58,12 +59,22 @@ namespace Wildfire_ICS_Assist
                 if (PrintIAPByDefault) { setCheckboxeStatusIAP(); }
                 else { setCheckboxStatusOpPeriod(); }
                 txtCriticalMessage.Text = period.CriticalMessage;
-                if (!string.IsNullOrEmpty(period.TitleImageBytes))
-                {
-                    Image img = period.TitleImageBytes.getImageFromBytes();
-                    if (img != null) { picTitleImage.Image = img; }
-                }
+              
             }
+            SetTitlePageOptionVisibility();
+
+            var logo = Program.generalOptionsService.GetOptionsValue("OrganizationLogo");
+            if (logo != null && logo.GetType() == typeof(byte[]))
+            {
+                Image img =( logo as byte[]).getImageFromBytes();
+                picReportLogo.Image = img;
+            }
+            else
+            {
+                Image img = Properties.Resources.CIAPP_LOGO_v3;
+                picReportLogo.Image = img;
+            }
+            chkIncludeLogo.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeLogoOnTitlePageByDefault");
         }
 
         private void setCheckboxeStatusIAP()
@@ -105,6 +116,9 @@ namespace Wildfire_ICS_Assist
 
             chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps(CurrentOpPeriod);
             chkAirOps.Checked = chkAirOps.Enabled;
+
+            chkIncidentStatusSummary.Enabled = CurrentIncident.AllIncidentStatusSummaries.Any(o => o.Active && o.OpPeriod == CurrentOpPeriod);
+            chkIncidentStatusSummary.Checked = chkIncidentStatusSummary.Enabled;
         }
         private void setCheckboxStatusOpPeriod()
         {
@@ -149,6 +163,8 @@ namespace Wildfire_ICS_Assist
             chkCheckInLists.Enabled = CurrentIncident.AllCheckInRecords.Any(o => o.OpPeriod <= Program.CurrentOpPeriod);
             chkCheckInLists.Checked = chkCheckInLists.Enabled;
 
+            chkIncidentStatusSummary.Enabled = CurrentIncident.AllIncidentStatusSummaries.Any(o => o.Active && o.OpPeriod == CurrentOpPeriod);
+            chkIncidentStatusSummary.Checked = chkIncidentStatusSummary.Enabled;
         }
 
         private void setCheckboxStatusIncident()
@@ -194,6 +210,9 @@ namespace Wildfire_ICS_Assist
 
             chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps();
             chkAirOps.Checked = chkAirOps.Enabled;
+
+            chkIncidentStatusSummary.Enabled = CurrentIncident.AllIncidentStatusSummaries.Any(o => o.Active);
+            chkIncidentStatusSummary.Checked = chkIncidentStatusSummary.Enabled;
         }
         private void setCheckboxStatusIncidentIAP()
         {
@@ -233,6 +252,9 @@ namespace Wildfire_ICS_Assist
             chkAirOps.Enabled = CurrentIncident.hasMeaningfulAirOps();
             chkAirOps.Checked = chkAirOps.Enabled;
 
+            chkIncidentStatusSummary.Enabled = CurrentIncident.AllIncidentStatusSummaries.Any(o => o.Active);
+            chkIncidentStatusSummary.Checked = chkIncidentStatusSummary.Enabled;
+
         }
 
         List<BrowseFileControl> browseControls
@@ -244,6 +266,9 @@ namespace Wildfire_ICS_Assist
                 controls.Add(browseFileControl2);
                 controls.Add(browseFileControl3);
                 controls.Add(browseFileControl4);
+                controls.Add(browseFileControl5);
+                controls.Add(browseFileControl6);
+                controls.Add(browseFileControl7);
                 return controls;
             }
         }
@@ -266,6 +291,10 @@ namespace Wildfire_ICS_Assist
         private string generatePDF()
         {
             List<byte[]> allPDFs = new List<byte[]>();
+            List<Tuple<string, int>> TOCEntries = new List<Tuple<string, int>>();
+
+
+            int CurrentPage = 0;
 
 
             string fullFilepath = "";
@@ -278,10 +307,26 @@ namespace Wildfire_ICS_Assist
 
             fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
 
-            if (chkTitlePage.Checked)
+            if (rbDefaultTitlePage.Checked)
             {
-                allPDFs.AddRange(buildContentsList());
+                PDFCreationResults results = Program.pdfExportService.GetCustomTitlePageBytes(Program.CurrentIncident, TitlePageOptions, Program.CurrentOpPeriod, chkFlattenPDF.Checked);
+                allPDFs.AddRange(results.bytes); 
+                //allPDFs.AddRange(buildContentsList());
+                CurrentPage++;
             }
+            else if (rbCustomPDFTitlePage.Checked)
+            {
+
+                if (!string.IsNullOrEmpty(brcCustomTitlePagePDF.FileName) && File.Exists(brcCustomTitlePagePDF.FileName))
+                {
+                    byte[] bytes = System.IO.File.ReadAllBytes(brcCustomTitlePagePDF.FileName);
+                    allPDFs.Add(bytes);
+                }
+            }
+
+
+
+
             List<int> OpsToPrint = new List<int>();
             if (!PrintIncidentToDate) { OpsToPrint.Add(CurrentOpPeriod); }
             else
@@ -365,7 +410,10 @@ namespace Wildfire_ICS_Assist
                 //general msg
                 if (chkGeneralMessages.Checked)
                 {
-                    allPDFs.AddRange(Program.pdfExportService.exportGeneralMessagesToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked));
+                    PDFCreationResults results = Program.pdfExportService.ExportGeneralMessagesToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked);
+                    allPDFs.AddRange(results.bytes);
+                    TOCEntries.Add(new Tuple<string, int>("General Message(s)", CurrentPage));
+                    CurrentPage += results.TotalPages;
 
                 }
 
@@ -538,18 +586,19 @@ namespace Wildfire_ICS_Assist
             {
                 if (PrintIncidentToDate)
                 {
-                    CurrentIncident.IncidentTitleImageBytes = string.Empty;
-                    TaskBasics basics = new TaskBasics(CurrentIncident);
-                    Program.incidentDataService.UpdateTaskBasics(basics, "local");
+                    TitlePageOptions.TitleImage = null;
                     picTitleImage.Image = null;
                 }
                 else
                 {
+                    TitlePageOptions.TitleImage = null;
+                    picTitleImage.Image = null;
+                    /*
                     OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
                     period.TitleImageBytes = string.Empty;
                     Program.incidentDataService.UpsertOperationalPeriod(period);
                     picTitleImage.Image = null;
-
+                    */
                 }
             }
         }
@@ -561,7 +610,19 @@ namespace Wildfire_ICS_Assist
 
             if (!string.IsNullOrEmpty(openFileDialog1.FileName))
             {
+                if (File.Exists(openFileDialog1.FileName))
+                {
+                    
+                    System.Drawing.Image image = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+                    TitlePageOptions.TitleImage = image.BytesFromImage();
+                    picTitleImage.Image = image;
+                }
+            
+                /*
                 //they've chosen a file, try to open it.
+
+
+
                 try
                 {
                     FileInfo file = new FileInfo(openFileDialog1.FileName);
@@ -622,12 +683,12 @@ namespace Wildfire_ICS_Assist
                         Program.incidentDataService.UpsertOperationalPeriod(period);
                     }
                     picTitleImage.Image = newImage;
-
+               
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
-                }
+                } */
             }
         }
 
@@ -687,18 +748,186 @@ namespace Wildfire_ICS_Assist
 
         private void chkTitlePage_CheckedChanged(object sender, EventArgs e)
         {
-            pnlTitlePageContent.Enabled =  chkTitlePage.Checked;
+            
         }
 
         private void txtCriticalMessage_Leave_1(object sender, EventArgs e)
         {
+            /*
             OperationalPeriod period = Program.CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod);
             if (period.CriticalMessage == null || !period.CriticalMessage.Equals(txtCriticalMessage.Text))
             {
                 period.CriticalMessage = txtCriticalMessage.Text;
                 Program.incidentDataService.UpsertOperationalPeriod(period);
 
+            }*/
+            TitlePageOptions.Message = txtCriticalMessage.Text;
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+        }
+
+        private void rbCustomPDFTitlePage_CheckedChanged(object sender, EventArgs e)
+        {
+            SetTitlePageOptionVisibility();
+        }
+
+        private void SetTitlePageOptionVisibility()
+        {
+            if (rbCustomPDFTitlePage.Checked)
+            {
+                pnlTitleCustomPDF.Visible = true;
+                pnlTitleCustomPDF.Location = new Point(rbDefaultTitlePage.Left + rbDefaultTitlePage.Width + 10, rbDefaultTitlePage.Top);
+                pnlTitleDefaultOptions.Visible = false;
+
+            } else if (rbDefaultTitlePage.Checked)
+            {
+                pnlTitleCustomPDF.Visible = false;
+                pnlTitleDefaultOptions.Location = new Point(rbDefaultTitlePage.Left + rbDefaultTitlePage.Width + 10, rbDefaultTitlePage.Top);
+                pnlTitleDefaultOptions.Visible = true;
+
             }
+            else
+            {
+                pnlTitleCustomPDF.Visible = false;
+                pnlTitleDefaultOptions.Visible = false;
+
+            }
+        }
+
+        private void rbDefaultTitlePage_CheckedChanged(object sender, EventArgs e)
+        {
+            SetTitlePageOptionVisibility();
+        }
+
+        private void rbNoTitlePage_CheckedChanged(object sender, EventArgs e)
+        {
+            SetTitlePageOptionVisibility();
+        }
+
+        private void tabControlTitlePageSettings_DrawItem(object sender, DrawItemEventArgs e)
+        {
+        }
+
+        private void chkQRAccessInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            txtDigitalAccessInstructions.Enabled = chkQRAccessInfo.Checked;
+            txtDigitalAccessQRText.Enabled = chkQRAccessInfo.Checked;
+            if (chkQRAccessInfo.Checked)
+            {
+                TitlePageOptions.QRText = txtDigitalAccessQRText.Text;
+                TitlePageOptions.QRInstructions = txtDigitalAccessInstructions.Text;
+            } else
+            {
+                TitlePageOptions.QRText = string.Empty;
+                TitlePageOptions.QRInstructions = string.Empty;
+
+            }
+        }
+
+     
+        private void btnChangeLogo_Click(object sender, EventArgs e)
+        {
+            SelectOrganizationLogo();
+        }
+
+        private void SelectOrganizationLogo()
+        {
+            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(openFileDialog1.FileName))
+            {
+                //they've chosen a file, try to open it.
+                try
+                {
+                    FileInfo file = new FileInfo(openFileDialog1.FileName);
+
+
+
+                    System.Drawing.Image image = System.Drawing.Image.FromFile(file.FullName);
+                    Bitmap newImage = new Bitmap(image);
+                    long maxFileSize = 200000;
+                    if (file.Length > maxFileSize)
+                    {
+                        long factor = (file.Length + (maxFileSize - 1)) / maxFileSize;
+
+                        int newh = image.Height / (int)factor;
+                        int neww = image.Width / (int)factor;
+                        newImage = image.ResizeImage(neww, newh);
+
+                    }
+
+
+
+                    image.Dispose();
+                    // NewOrgLogo = newImage.BytesFromImage();
+                    Program.generalOptionsService.UpsertOptionValue(newImage.BytesFromImage(), "OrganizationLogo");
+                    picReportLogo.Image = newImage;
+                    TitlePageOptions.LogoImage = newImage.BytesFromImage();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
+                }
+            }
+        }
+
+        private void btnRemoveLogo_Click(object sender, EventArgs e)
+        {
+            System.Drawing.Image img = Properties.Resources.CIAPP_LOGO_v3;
+            Program.generalOptionsService.UpsertOptionValue(img.BytesFromImage(), "OrganizationLogo");
+            picReportLogo.Image = img;
+            TitlePageOptions.LogoImage = img.BytesFromImage();
+        }
+
+        private void chkIncludeLogo_CheckedChanged(object sender, EventArgs e)
+        {
+            picReportLogo.Enabled = chkIncludeLogo.Checked;
+            btnRemoveLogo.Enabled = chkIncludeLogo.Checked;
+            btnChangeLogo.Enabled = chkIncludeLogo.Checked;
+            if (chkIncludeLogo.Checked) { TitlePageOptions.LogoImage = picReportLogo.Image.BytesFromImage(); }
+            else { TitlePageOptions.LogoImage = null; }
+            Program.generalOptionsService.UpsertOptionValue(chkIncludeLogo.Checked, "IncludeLogoOnTitlePageByDefault");
+        }
+
+        private void chkIncludeTitleImage_CheckedChanged(object sender, EventArgs e)
+        {
+            btnSelectImage.Enabled = chkIncludeTitleImage.Checked;
+            btnRemoveImage.Enabled = chkIncludeTitleImage.Checked;
+            if (chkIncludeTitleImage.Checked)
+            {
+                TitlePageOptions.TitleImage = picTitleImage.Image.BytesFromImage();
+            }
+            else { TitlePageOptions.TitleImage = null; }
+        }
+
+        private void chkIncludeTitleMessage_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCriticalMessage.Enabled = chkIncludeTitleMessage.Checked;
+            if (chkIncludeTitleMessage.Checked) { TitlePageOptions.Message = txtCriticalMessage.Text; }
+            else { TitlePageOptions.Message = string.Empty; }
+        }
+
+        private void btnPreviewTitlePage_Click(object sender, EventArgs e)
+        {
+            PDFCreationResults results = Program.pdfExportService.CreateCustomTitlePagePDF(Program.CurrentIncident, TitlePageOptions, Program.CurrentOpPeriod, true, true);
+            if (!string.IsNullOrEmpty(results.path))
+            {
+                System.Diagnostics.Process.Start(results.path);
+            }
+        }
+
+        private void txtDigitalAccessQRText_TextChanged(object sender, EventArgs e)
+        {
+            TitlePageOptions.QRText = txtDigitalAccessQRText.Text;
+        }
+
+        private void txtDigitalAccessInstructions_TextChanged(object sender, EventArgs e)
+        {
+            TitlePageOptions.QRInstructions = txtDigitalAccessInstructions.Text;
         }
     }
 }

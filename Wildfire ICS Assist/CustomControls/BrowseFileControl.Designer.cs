@@ -33,8 +33,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtFileTitle = new SpellBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtFilePath = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -49,7 +49,8 @@
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(6, 3);
+            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrowse.Location = new System.Drawing.Point(6, 0);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(6);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(99, 42);
@@ -61,8 +62,9 @@
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemove.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnRemove.Location = new System.Drawing.Point(117, 3);
+            this.btnRemove.Location = new System.Drawing.Point(117, 0);
             this.btnRemove.Margin = new System.Windows.Forms.Padding(6);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(51, 42);
@@ -85,23 +87,32 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.txtFileTitle);
-            this.splitContainer1.Panel1Collapsed = true;
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1157, 48);
+            this.splitContainer1.Size = new System.Drawing.Size(1157, 44);
             this.splitContainer1.SplitterDistance = 385;
             this.splitContainer1.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 12);
+            this.label1.Location = new System.Drawing.Point(3, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 24);
             this.label1.TabIndex = 4;
             this.label1.Text = "Title";
+            // 
+            // txtFileTitle
+            // 
+            this.txtFileTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFileTitle.Location = new System.Drawing.Point(54, 7);
+            this.txtFileTitle.Name = "txtFileTitle";
+            this.txtFileTitle.Size = new System.Drawing.Size(328, 29);
+            this.txtFileTitle.TabIndex = 3;
+            this.txtFileTitle.Child = new System.Windows.Controls.TextBox();
             // 
             // splitContainer2
             // 
@@ -119,28 +130,18 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.btnBrowse);
             this.splitContainer2.Panel2.Controls.Add(this.btnRemove);
-            this.splitContainer2.Size = new System.Drawing.Size(1157, 48);
-            this.splitContainer2.SplitterDistance = 979;
+            this.splitContainer2.Size = new System.Drawing.Size(768, 44);
+            this.splitContainer2.SplitterDistance = 590;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // txtFileTitle
-            // 
-            this.txtFileTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFileTitle.Location = new System.Drawing.Point(54, 10);
-            this.txtFileTitle.Name = "txtFileTitle";
-            this.txtFileTitle.Size = new System.Drawing.Size(328, 29);
-            this.txtFileTitle.TabIndex = 3;
-            this.txtFileTitle.Child = new System.Windows.Controls.TextBox();
             // 
             // txtFilePath
             // 
             this.txtFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilePath.Enabled = false;
-            this.txtFilePath.Location = new System.Drawing.Point(3, 10);
+            this.txtFilePath.Location = new System.Drawing.Point(3, 7);
             this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new System.Drawing.Size(973, 29);
+            this.txtFilePath.Size = new System.Drawing.Size(584, 29);
             this.txtFilePath.TabIndex = 1;
             this.txtFilePath.Child = new System.Windows.Controls.TextBox();
             // 
@@ -153,7 +154,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(0, 44);
             this.Name = "BrowseFileControl";
-            this.Size = new System.Drawing.Size(1157, 48);
+            this.Size = new System.Drawing.Size(1157, 42);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

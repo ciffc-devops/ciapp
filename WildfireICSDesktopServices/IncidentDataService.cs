@@ -372,6 +372,7 @@ namespace WildfireICSDesktopServices
                     {
                         update.Data = TaskUpdateTools.DecryptTaskUpdateData(update, CurrentIncident.TaskEncryptionKey);
                     }
+                    update.UploadedSuccessfully = true;
                     decryptCount++;
                     progress.Report(new Tuple<int, int, int>(3, decryptCount, totalUpdates));
                 }

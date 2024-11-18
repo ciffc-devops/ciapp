@@ -209,74 +209,63 @@ namespace WildfireICSDesktopServices
         #endregion
 
         #region General Message
-        public List<byte[]> exportGeneralMessagesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        public PDFCreationResults ExportGeneralMessagesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
         {
-            List<byte[]> allPDFs = new List<byte[]>();
-
             List<GeneralMessage> items = task.ActiveGeneralMessages.Where(o => o.OpPeriod == OpPeriodToExport).ToList();
+            return ExportGeneralMessagesToPDF(task, items, flattenPDF);
+          
+        }
+
+        public PDFCreationResults ExportGeneralMessagesToPDF(Incident task, List<GeneralMessage> items, bool flattenPDF)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+
+            results.bytes = new List<byte[]>();
+
             foreach (GeneralMessage sp in items)
             {
-                string path = createGeneralMessagePDF(task, sp,  true, flattenPDF);
-                if (path != null)
+                var creationResults = CreateGeneralMessagePDF(task, sp,  true, flattenPDF);
+                results.errors.AddRange(creationResults.errors);
+                results.TotalPages += creationResults.TotalPages;
+                if (creationResults.path != null)
                 {
-                    using (FileStream stream = File.OpenRead(path))
+                    using (FileStream stream = File.OpenRead(creationResults.path))
                     {
                         byte[] fileBytes = new byte[stream.Length];
 
                         stream.Read(fileBytes, 0, fileBytes.Length);
                         stream.Close();
-                        allPDFs.Add(fileBytes);
+                        results.bytes.Add(fileBytes);
                     }
                 }
             }
-            return allPDFs;
+            return results;
         }
 
-        public List<byte[]> exportGeneralMessagesToPDF(Incident task, List<GeneralMessage> items, bool flattenPDF)
+        public PDFCreationResults CreateGeneralMessagePDF(Incident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false)
         {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-            foreach (GeneralMessage sp in items)
-            {
-                string path = createGeneralMessagePDF(task, sp,  true, flattenPDF);
-                if (path != null)
-                {
-                    using (FileStream stream = File.OpenRead(path))
-                    {
-                        byte[] fileBytes = new byte[stream.Length];
-
-                        stream.Read(fileBytes, 0, fileBytes.Length);
-                        stream.Close();
-                        allPDFs.Add(fileBytes);
-                    }
-                }
-            }
-            return allPDFs;
-        }
-
-        public string createGeneralMessagePDF(Incident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false)
-        {
-            string path = FileAccessClasses.getWritablePath(task);
+            PDFCreationResults results = new PDFCreationResults();
+            results.path = FileAccessClasses.getWritablePath(task);
             if (task != null && item != null)
             {
                 if (!tempFileName)
                 {
 
 
-                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+                    if (task.DocumentPath == null && results.path != null) { task.DocumentPath = results.path; }
                     string filename = "ICS 213 - " + task.IncidentNameAndNumberForPath + " - " + item.Subject.Sanitize() + ".pdf";
                     if (filename.Length > 100)
                     {
                         filename = "ICS 213 - " + task.IncidentNameAndNumberForPath + " - " + item.Subject.Sanitize().Substring(0, 20) + ".pdf";
                     }
-                    path = FileAccessClasses.getUniqueFileName(filename, path);
+                    results.path = FileAccessClasses.getUniqueFileName(filename, results.path);
 
                     //path = System.IO.Path.Combine(path, filename);
 
                 }
                 else
                 {
-                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+                    results.path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
 
                 }
 
@@ -290,7 +279,7 @@ namespace WildfireICSDesktopServices
                     fileToUse = getPDFFilePath(fileToUse);
                     PdfReader rdr = new PdfReader(fileToUse);
 
-                    using (FileStream stream = new System.IO.FileStream(path, System.IO.FileMode.Create))
+                    using (FileStream stream = new System.IO.FileStream(results.path, System.IO.FileMode.Create))
                     {
                         PdfStamper stamper = new PdfStamper(rdr, stream);
                         stamper.AcroFields.SetField("1A INCIDENT NAME Optional", task.TaskName);
@@ -336,7 +325,7 @@ namespace WildfireICSDesktopServices
                             stamper.AcroFields.RenameField(s, s + item.MessageID.ToString());
                         }
 
-
+                        results.TotalPages = 1;
 
 
                         stamper.Close();//Close a PDFStamper Object
@@ -349,13 +338,14 @@ namespace WildfireICSDesktopServices
                 }
                 catch (IOException ex)
                 {
+                    results.errors.Add(ex);
                 }
-                catch (System.UnauthorizedAccessException)
+                catch (System.UnauthorizedAccessException uaex)
                 {
-
+                    results.errors.Add(uaex);
                 }
             }
-            return path;
+            return results;
         }
 
         #endregion
@@ -2985,6 +2975,300 @@ namespace WildfireICSDesktopServices
 
         #region Title Page
 
+        public PDFCreationResults GetCustomTitlePageBytes(Incident incident, TitlePageOptions options, int OperationalPeriodNumber, bool flattenPDF = false)
+        {
+            PDFCreationResults results = CreateCustomTitlePagePDF(incident, options, OperationalPeriodNumber, true, flattenPDF);
+            if (!string.IsNullOrEmpty(results.path))
+            {
+                using (FileStream stream = File.OpenRead(results.path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    results.bytes = new List<byte[]>();
+                    results.bytes.Add(fileBytes);
+                }
+                return results;
+            }
+            return null;
+        }
+
+        public PDFCreationResults CreateCustomTitlePagePDF(Incident incident, TitlePageOptions options, int OperationalPeriodNumber, bool useTempPath, bool flattenPDF = false)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+            results.path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                results.path = FileAccessClasses.getWritablePath(incident);
+            }
+
+            string outputFileName = incident.IncidentNameAndNumberForPath + " - Title Page - OP " + OperationalPeriodNumber.ToString() + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            results.path = FileAccessClasses.getUniqueFileName(outputFileName, results.path);
+
+
+            string fileToUse = getPDFFilePath("ICS-000 Title Page.pdf");
+            fileToUse = getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(results.path, FileMode.Create));
+
+
+                    if (OperationalPeriodNumber > 0)
+                    {
+                        OperationalPeriod currentPeriod = incident.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == OperationalPeriodNumber);
+                        if (currentPeriod != null)
+                        {
+                            stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                            stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                            stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                            stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                            stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "OPERATIONAL PERIOD");
+                        }
+                    }
+                    else
+                    {
+                        DateTime incidentStart = incident.GetIncidentStart();
+                        DateTime incidentEnd = incident.GetIncidentEnd();
+                        if (incidentEnd > DateTime.Now) { incidentEnd = DateTime.Now; }
+
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", incidentStart));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", incidentStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", incidentEnd));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", incidentEnd));
+                        stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "INCIDENT TO DATE");
+                    }
+
+
+                    stamper.AcroFields.SetField("INCIDENT NAMERow1", incident.TaskName);
+                    stamper.AcroFields.SetField("Incident NumberRow1", incident.TaskNumber);
+
+
+
+
+                    /******************************
+                     * Believe it or not, this whole next big section is just for laying out the four optional elements of the title page
+                     ******************************/
+
+                    //Bounds of the big open area
+                    Point topLeft = new Point(38,680);
+                    Point topRight = new Point(574, 680);
+                    Point lowerLeft = new Point(38, 188);
+                    Point lowerRight = new Point(574, 188);
+
+                    int fullHeight = topLeft.Y - lowerLeft.Y;
+                    int fullWidth = topRight.X - topLeft.X;
+                    
+                    Point bottomThirdLeft = new Point(38, Convert.ToInt32(Convert.ToDecimal(fullHeight) * (2m / 3m)));
+                    Point bottomThirdRight = new Point(lowerRight.X, bottomThirdLeft.Y);
+                    Point lowerCentre = new Point((lowerRight.X - lowerLeft.X) / 2 + lowerLeft.X, lowerLeft.Y);
+                    Point lowerCentreRight = new Point((lowerRight.X - lowerCentre.X) / 2 + lowerCentre.X, lowerLeft.Y);
+
+                    Rectangle mediabox = rdr.GetPageSize(1);
+
+
+                    int padding = 10;
+
+                    //fill the big open area
+                    if (options.IncludeTitleImage)
+                    {
+                        iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(options.TitleImage.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                        pic.ScaleToFit(fullWidth, topLeft.Y - bottomThirdLeft.Y);
+                        float x = (mediabox.Width / 2) - (pic.ScaledWidth / 2);
+                        float y = bottomThirdLeft.Y +  ((topLeft.Y - bottomThirdLeft.Y - pic.ScaledHeight) / 2);
+                        pic.SetAbsolutePosition(x, y);
+                        stamper.GetOverContent(1).AddImage(pic);
+                    }
+
+
+                    if (options.IncludeMessage)
+                    {
+                        if (!options.IncludeTitleImage) { stamper.AddFormFieldToExistingPDF("MultiLineTextField", bottomThirdLeft.X + padding, bottomThirdLeft.Y + padding, topRight.X - padding, topRight.Y - padding, "Message", options.Message, true); }
+                        else
+                        {
+
+                            if (options.NumberOfItemsIncluded == 2) { stamper.AddFormFieldToExistingPDF("MultiLineTextField", lowerLeft.X + padding, lowerLeft.Y + padding, lowerRight.X - padding, bottomThirdLeft.Y - padding, "Message", options.Message, true); }
+                            else { stamper.AddFormFieldToExistingPDF("MultiLineTextField", lowerLeft.X + padding, lowerLeft.Y + padding, lowerCentre.X - padding, bottomThirdLeft.Y - padding, "Message", options.Message, true); }
+                        }
+
+                    }
+
+                    if (options.IncludeOrganizationLogo)
+                    {
+
+
+                        Point logoBottomRight = new Point(0, 0);
+                        Point logoBottomLeft = new Point(0, 0);
+                        Point logoTopRight = new Point(0, 0);
+
+                        if (options.NumberOfItemsIncluded == 1)
+                        {
+                            //just the logo, use the whole top 2/3rds
+                            logoBottomRight = bottomThirdRight;
+                            logoBottomLeft = bottomThirdLeft;
+                            logoTopRight = topRight;
+                        }
+                        else if (options.NumberOfItemsIncluded == 2)
+                        {
+                            if (options.IncludeQRCode)
+                            {
+                                logoBottomRight = bottomThirdRight;
+                                logoBottomLeft = bottomThirdLeft;
+                                logoTopRight = topRight;
+                            }
+                            else
+                            {
+                                logoBottomRight = lowerRight;
+                                logoBottomLeft = lowerLeft;
+                                logoTopRight = bottomThirdRight;
+                            }
+                        }
+                        else if (options.NumberOfItemsIncluded == 3)
+                        {
+                            if (options.IncludeMessage && options.IncludeTitleImage)
+                            {                           
+                                logoBottomRight = lowerRight;
+                                logoBottomLeft = lowerCentre;
+                                logoTopRight = bottomThirdRight;
+                            }
+                            else
+                            {                           
+                                logoBottomRight = lowerCentre;
+                                logoBottomLeft =lowerLeft;
+                                logoTopRight = new Point(lowerCentre.X, bottomThirdLeft.Y);
+                            }
+                        }
+                        else if(options.NumberOfItemsIncluded == 4)
+                        {
+                            logoBottomRight = lowerCentreRight;
+                            logoBottomLeft = lowerCentre;
+                            logoTopRight = new Point(lowerCentre.X, bottomThirdRight.Y);
+                        }
+
+
+                        iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(options.LogoImage.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+                        
+                        pic.ScaleToFit(logoBottomRight.X - logoBottomLeft.X - padding * 2, logoTopRight.Y - logoBottomRight.Y - padding * 2);
+                        //pic.SetAbsolutePosition(qrBottomLeft.X + (widthOfQRSpace / 2) - (QR.Width / 2) + padding , qrBottomLeft.Y + padding + textBoxHeight); 
+                        int widthOfLogoSpace = logoBottomRight.X - logoBottomLeft.X - (padding * 2);
+                        int heightOfLogoSpace = logoTopRight.Y - logoBottomRight.Y - (padding * 2);
+                        float x = logoBottomLeft.X + (widthOfLogoSpace / 2) - (pic.ScaledWidth / 2) + padding;
+                        float y = logoBottomLeft.Y + (heightOfLogoSpace / 2) - (pic.ScaledHeight / 2) + padding;
+                        pic.SetAbsolutePosition(x, y);
+                        stamper.GetOverContent(1).AddImage(pic);
+                    }
+
+                    if (options.IncludeQRCode)
+                    {
+                        Point qrBottomRight =new Point(0,0);
+                        Point qrBottomLeft =new Point(0, 0);
+                        Point qrTopRight = new Point(0, 0);
+
+                        int textBoxHeight = 30;
+                        if (string.IsNullOrEmpty(options.QRInstructions)) { textBoxHeight = 0; }
+
+                        if (options.NumberOfItemsIncluded == 3)
+                        {
+                            //QR can take the bottom half
+                            qrBottomRight = lowerRight;
+                            qrBottomLeft = lowerCentre;
+                            qrTopRight = bottomThirdRight;
+
+                        }
+                        else if (options.NumberOfItemsIncluded == 1 || options.NumberOfItemsIncluded == 2)
+                        {
+                            //qr can take the whole bottom third
+                            qrBottomRight = lowerRight;
+                            qrBottomLeft = lowerLeft;
+                            qrTopRight = bottomThirdRight;
+                        }
+                        else
+                        {
+                            //qr is tucked into the lower right corner
+                             qrBottomRight = lowerRight;
+                             qrBottomLeft = lowerCentreRight;
+                             qrTopRight = bottomThirdRight;
+                        }
+
+                        int QRSize = Math.Min(qrBottomRight.X - qrBottomLeft.X - (padding * 2), qrTopRight.Y - qrBottomRight.Y - (padding * 2) - textBoxHeight);
+                        Bitmap QR = options.QRText.GetQRImage(QRSize);
+                        iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(QR, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        int widthOfQRSpace = qrBottomRight.X - qrBottomLeft.X - (padding * 2);
+                        pic.SetAbsolutePosition(qrBottomLeft.X + (widthOfQRSpace / 2) - (QR.Width / 2) + padding , qrBottomLeft.Y + padding + textBoxHeight); 
+                        stamper.GetOverContent(1).AddImage(pic);
+
+                        if (!string.IsNullOrEmpty(options.QRInstructions))
+                        {
+                            stamper.AddFormFieldToExistingPDF("MultiLineTextField", qrBottomLeft.X + padding, qrBottomLeft.Y + padding, qrBottomRight.X - padding, qrBottomRight.Y + padding + textBoxHeight, "QRInstructions", options.QRInstructions, true);
+                        }
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + "-titlepage");
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+
+                        //re-add the signature field if we flattened it away
+                        int[] instancesOfInterest = { 0, 1, 2 };
+                        stamper = stamper.AddPDFField(fileToUse, "Signature", "Signature", 38, 222, "ReportSignature", instancesOfInterest);
+                        stamper = stamper.AddPDFField(fileToUse, "Print Name", "TextField", 38, 200, "PrintName", instancesOfInterest);
+
+
+
+                    }
+
+                    results.TotalPages = 1;
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception ex)
+            {
+                results.errors.Add(ex);
+                results.path = string.Empty;
+            }
+            return results;
+        }
+
+
+
+
+
+
         public List<byte[]> createFreeformOpPeriodContentsList(Incident task, List<string> items, int OpPeriod)
         {
             List<byte[]> allPDFs = new List<byte[]>();
@@ -3933,7 +4217,7 @@ namespace WildfireICSDesktopServices
 
             foreach (CheckInRecordWithResource item in list)
             {
-                if (!counts.Any(o => o.KindName.Equals(item.Resource.Kind) && (o.TypeName == null || o.TypeName.Equals(item.Resource.Type))))
+                if (!counts.Any(o => o.KindName != null && o.KindName.Equals(item.Resource.Kind) && (o.TypeName == null || o.TypeName.Equals(item.Resource.Type))))
                 {
                     if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")))
                     {
