@@ -1216,16 +1216,6 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap glyphicons_filetypes_9_file_spreadsheet {
-            get {
-                object obj = ResourceManager.GetObject("glyphicons_filetypes_9_file_spreadsheet", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap HECrew {
             get {
                 object obj = ResourceManager.GetObject("HECrew", resourceCulture);

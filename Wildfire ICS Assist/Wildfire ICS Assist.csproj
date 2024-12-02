@@ -914,6 +914,12 @@
     <Compile Include="UtilityForms\SelectTimeRangeForm.Designer.cs">
       <DependentUpon>SelectTimeRangeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\SetPreparedAndApprovedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\SetPreparedAndApprovedForm.Designer.cs">
+      <DependentUpon>SetPreparedAndApprovedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1270,6 +1276,9 @@
     <EmbeddedResource Include="UtilityForms\SelectTimeRangeForm.resx">
       <DependentUpon>SelectTimeRangeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\SetPreparedAndApprovedForm.resx">
+      <DependentUpon>SetPreparedAndApprovedForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1387,6 +1396,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-filetypes-9-file-spreadsheet1.png" />
     <None Include="Resources\glyphicons-basic-841-square-plus.png" />
     <None Include="Resources\glyphicons-basic-809-drop-plus.png" />
     <None Include="Resources\RedExclaimSq.png" />

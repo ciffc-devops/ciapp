@@ -15,7 +15,6 @@ using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using WildfireICSDesktopServices;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Wildfire_ICS_Assist
 {
@@ -312,6 +311,13 @@ namespace Wildfire_ICS_Assist
         {
 
 
+
+        }
+
+        private void Print207()
+        {
+
+
             if (chkIncludeContacts.Checked)
             {
                 string orgChart = Program.pdfExportService.createOrgChartPDF(CurrentIncident, CurrentOpPeriod, false, true, false);
@@ -367,8 +373,6 @@ namespace Wildfire_ICS_Assist
                 try { System.Diagnostics.Process.Start(path); }
                 catch { }
             }
-
-
         }
 
         private void rbIncidentCommander_CheckedChanged(object sender, EventArgs e)
@@ -420,38 +424,19 @@ namespace Wildfire_ICS_Assist
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "OrgChart-" + Program.CurrentIncident.IncidentNameAndNumberForPath + "-OP-" + Program.CurrentOpPeriod + ".csv";
-            DialogResult result = svdExport.ShowDialog();
-            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
-            {
-                string exportPath = svdExport.FileName;
-                string delimiter = ",";
-
-
-
-
-
-
-                string csv = OrganizationalChartTools.OrgChartToCSV(CurrentOrgChart.ActiveRoles, delimiter);
-                try
-                {
-                    System.IO.File.WriteAllText(exportPath, csv);
-
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
-                    if (openNow == DialogResult.Yes)
-                    {
-                        System.Diagnostics.Process.Start(exportPath);
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
-                }
-            }
+            
         }
 
         private void btnPrint203_Click(object sender, EventArgs e)
+        {
+            Button btnSender = (Button)sender;
+            System.Drawing.Point ptLowerLeft = new System.Drawing.Point(0, btnSender.Height);
+            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+            cmsOutput.Show(ptLowerLeft);
+
+        }
+
+        private void Print203()
         {
             if (chkIncludeContacts.Checked)
             {
@@ -572,6 +557,60 @@ namespace Wildfire_ICS_Assist
         {
             ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
             DeleteRole(role);
+        }
+
+        private void exportToSpreadsheetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            svdExport.FileName = "OrgChart-" + Program.CurrentIncident.IncidentNameAndNumberForPath + "-OP-" + Program.CurrentOpPeriod + ".csv";
+            DialogResult result = svdExport.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
+            {
+                string exportPath = svdExport.FileName;
+                string delimiter = ",";
+
+
+
+
+
+
+                string csv = OrganizationalChartTools.OrgChartToCSV(CurrentOrgChart.ActiveRoles, delimiter);
+                try
+                {
+                    System.IO.File.WriteAllText(exportPath, csv);
+
+                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    if (openNow == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(exportPath);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                }
+            }
+        }
+
+        private void viewICS207OrganizationalChartPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Print207();
+        }
+
+        private void viewICS203AssignmentsPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Print203();
+        }
+
+        private void viewICS203AssignmentsPDFToolStripMenuItem_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+           
         }
     }
 }
