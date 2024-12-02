@@ -37,7 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cboSupervisor = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblGroupLeaderTitle = new System.Windows.Forms.Label();
             this.cboReportsTo = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,9 +48,9 @@
             this.cboComms1 = new System.Windows.Forms.ComboBox();
             this.cboComms3 = new System.Windows.Forms.ComboBox();
             this.cboComms2 = new System.Windows.Forms.ComboBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtTactical = new SpellBox();
             this.txtSpecial = new SpellBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -161,14 +161,14 @@
             this.cboSupervisor.SelectedIndexChanged += new System.EventHandler(this.cboSupervisor_SelectedIndexChanged);
             this.cboSupervisor.Leave += new System.EventHandler(this.cboSupervisor_Leave);
             // 
-            // label4
+            // lblGroupLeaderTitle
             // 
-            this.label4.Location = new System.Drawing.Point(3, 156);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(185, 29);
-            this.label4.TabIndex = 105;
-            this.label4.Text = "Director/Supervisor:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblGroupLeaderTitle.Location = new System.Drawing.Point(3, 156);
+            this.lblGroupLeaderTitle.Name = "lblGroupLeaderTitle";
+            this.lblGroupLeaderTitle.Size = new System.Drawing.Size(185, 29);
+            this.lblGroupLeaderTitle.TabIndex = 105;
+            this.lblGroupLeaderTitle.Text = "Director/Supervisor:";
+            this.lblGroupLeaderTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cboReportsTo
             // 
@@ -176,14 +176,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboReportsTo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboReportsTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboReportsTo.DisplayMember = "RoleNameForDropdown";
             this.cboReportsTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboReportsTo.FormattingEnabled = true;
             this.cboReportsTo.Location = new System.Drawing.Point(194, 75);
             this.cboReportsTo.Name = "cboReportsTo";
             this.cboReportsTo.Size = new System.Drawing.Size(231, 32);
             this.cboReportsTo.TabIndex = 100;
-            this.cboReportsTo.ValueMember = "RoleID";
             this.cboReportsTo.SelectedIndexChanged += new System.EventHandler(this.cboReportsTo_SelectedIndexChanged);
             // 
             // label8
@@ -298,6 +296,29 @@
             this.cboComms2.TabIndex = 35;
             this.cboComms2.ValueMember = "ItemID";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 263);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtTactical);
+            this.splitContainer1.Panel1.Controls.Add(this.label7);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtSpecial);
+            this.splitContainer1.Panel2.Controls.Add(this.label8);
+            this.splitContainer1.Size = new System.Drawing.Size(806, 309);
+            this.splitContainer1.SplitterDistance = 154;
+            this.splitContainer1.TabIndex = 111;
+            // 
             // txtTactical
             // 
             this.txtTactical.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -324,29 +345,6 @@
             this.txtSpecial.TextChanged += new System.EventHandler(this.txtSpecial_TextChanged);
             this.txtSpecial.Child = new System.Windows.Controls.TextBox();
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 263);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.txtTactical);
-            this.splitContainer1.Panel1.Controls.Add(this.label7);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.txtSpecial);
-            this.splitContainer1.Panel2.Controls.Add(this.label8);
-            this.splitContainer1.Size = new System.Drawing.Size(806, 309);
-            this.splitContainer1.SplitterDistance = 154;
-            this.splitContainer1.TabIndex = 111;
-            // 
             // EditBranchControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -361,7 +359,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboSupervisor);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblGroupLeaderTitle);
             this.Controls.Add(this.cboReportsTo);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -390,7 +388,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboSupervisor;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblGroupLeaderTitle;
         private System.Windows.Forms.ComboBox cboReportsTo;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;

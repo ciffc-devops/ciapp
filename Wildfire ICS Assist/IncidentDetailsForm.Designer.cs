@@ -136,6 +136,9 @@
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutCIAPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frenchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.btnGeneralMessage = new System.Windows.Forms.Button();
             this.btnReplacementResources = new System.Windows.Forms.Button();
@@ -170,10 +173,18 @@
             this.imglTabIcons.Images.SetKeyName(1, "glyphicons-basic-849-computer-network.png");
             this.imglTabIcons.Images.SetKeyName(2, "glyphicons-basic-876-palette-package.png");
             // 
+            // svdTaskFile
+            // 
+            resources.ApplyResources(this.svdTaskFile, "svdTaskFile");
+            // 
             // ofdOpenTaskFile
             // 
             this.ofdOpenTaskFile.DefaultExt = "xml";
             resources.ApplyResources(this.ofdOpenTaskFile, "ofdOpenTaskFile");
+            // 
+            // fbdSaveLocation
+            // 
+            resources.ApplyResources(this.fbdSaveLocation, "fbdSaveLocation");
             // 
             // tmrAutoSave
             // 
@@ -215,6 +226,7 @@
             this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
             this.picOrgLogo.Name = "picOrgLogo";
             this.picOrgLogo.TabStop = false;
+            this.toolTip1.SetToolTip(this.picOrgLogo, resources.GetString("picOrgLogo.ToolTip"));
             this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pnlInternetSyncStart
@@ -226,11 +238,13 @@
             this.pnlInternetSyncStart.Controls.Add(this.label21);
             this.pnlInternetSyncStart.Controls.Add(this.progressBar1);
             this.pnlInternetSyncStart.Name = "pnlInternetSyncStart";
+            this.toolTip1.SetToolTip(this.pnlInternetSyncStart, resources.GetString("pnlInternetSyncStart.ToolTip"));
             // 
             // btnCancelInternetSync
             // 
             resources.ApplyResources(this.btnCancelInternetSync, "btnCancelInternetSync");
             this.btnCancelInternetSync.Name = "btnCancelInternetSync";
+            this.toolTip1.SetToolTip(this.btnCancelInternetSync, resources.GetString("btnCancelInternetSync.ToolTip"));
             this.btnCancelInternetSync.UseVisualStyleBackColor = true;
             // 
             // label22
@@ -238,18 +252,21 @@
             resources.ApplyResources(this.label22, "label22");
             this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label22.Name = "label22";
+            this.toolTip1.SetToolTip(this.label22, resources.GetString("label22.ToolTip"));
             // 
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
             this.label21.ForeColor = System.Drawing.Color.White;
             this.label21.Name = "label21";
+            this.toolTip1.SetToolTip(this.label21, resources.GetString("label21.ToolTip"));
             // 
             // progressBar1
             // 
             resources.ApplyResources(this.progressBar1, "progressBar1");
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.toolTip1.SetToolTip(this.progressBar1, resources.GetString("progressBar1.ToolTip"));
             // 
             // pnlNetworkSyncInProgress
             // 
@@ -261,17 +278,20 @@
             this.pnlNetworkSyncInProgress.Controls.Add(this.btnCloseNetworkSyncInProgress);
             this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkSyncStatus);
             this.pnlNetworkSyncInProgress.Name = "pnlNetworkSyncInProgress";
+            this.toolTip1.SetToolTip(this.pnlNetworkSyncInProgress, resources.GetString("pnlNetworkSyncInProgress.ToolTip"));
             // 
             // lblNetworkShareMoreInfoMsg
             // 
             resources.ApplyResources(this.lblNetworkShareMoreInfoMsg, "lblNetworkShareMoreInfoMsg");
             this.lblNetworkShareMoreInfoMsg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.lblNetworkShareMoreInfoMsg.Name = "lblNetworkShareMoreInfoMsg";
+            this.toolTip1.SetToolTip(this.lblNetworkShareMoreInfoMsg, resources.GetString("lblNetworkShareMoreInfoMsg.ToolTip"));
             // 
             // btnNetworkSyncDone
             // 
             resources.ApplyResources(this.btnNetworkSyncDone, "btnNetworkSyncDone");
             this.btnNetworkSyncDone.Name = "btnNetworkSyncDone";
+            this.toolTip1.SetToolTip(this.btnNetworkSyncDone, resources.GetString("btnNetworkSyncDone.ToolTip"));
             this.btnNetworkSyncDone.UseVisualStyleBackColor = true;
             this.btnNetworkSyncDone.Click += new System.EventHandler(this.btnNetworkSyncDone_Click);
             // 
@@ -281,11 +301,13 @@
             this.pbNetworkSyncInProgress.Maximum = 4;
             this.pbNetworkSyncInProgress.Name = "pbNetworkSyncInProgress";
             this.pbNetworkSyncInProgress.Step = 1;
+            this.toolTip1.SetToolTip(this.pbNetworkSyncInProgress, resources.GetString("pbNetworkSyncInProgress.ToolTip"));
             // 
             // btnCloseNetworkSyncInProgress
             // 
             resources.ApplyResources(this.btnCloseNetworkSyncInProgress, "btnCloseNetworkSyncInProgress");
             this.btnCloseNetworkSyncInProgress.Name = "btnCloseNetworkSyncInProgress";
+            this.toolTip1.SetToolTip(this.btnCloseNetworkSyncInProgress, resources.GetString("btnCloseNetworkSyncInProgress.ToolTip"));
             this.btnCloseNetworkSyncInProgress.UseVisualStyleBackColor = true;
             this.btnCloseNetworkSyncInProgress.Click += new System.EventHandler(this.btnCloseNetworkSyncInProgress_Click);
             // 
@@ -294,6 +316,7 @@
             resources.ApplyResources(this.lblNetworkSyncStatus, "lblNetworkSyncStatus");
             this.lblNetworkSyncStatus.ForeColor = System.Drawing.Color.White;
             this.lblNetworkSyncStatus.Name = "lblNetworkSyncStatus";
+            this.toolTip1.SetToolTip(this.lblNetworkSyncStatus, resources.GetString("lblNetworkSyncStatus.ToolTip"));
             // 
             // pnlOpsPeriod
             // 
@@ -307,6 +330,7 @@
             this.pnlOpsPeriod.Controls.Add(this.cboCurrentOperationalPeriod);
             this.pnlOpsPeriod.Controls.Add(this.label1);
             this.pnlOpsPeriod.Name = "pnlOpsPeriod";
+            this.toolTip1.SetToolTip(this.pnlOpsPeriod, resources.GetString("pnlOpsPeriod.ToolTip"));
             // 
             // btnReviewOpPeriod
             // 
@@ -314,6 +338,7 @@
             this.btnReviewOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_41_stats;
             this.btnReviewOpPeriod.Name = "btnReviewOpPeriod";
             this.btnReviewOpPeriod.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnReviewOpPeriod, resources.GetString("btnReviewOpPeriod.ToolTip"));
             this.btnReviewOpPeriod.UseVisualStyleBackColor = true;
             this.btnReviewOpPeriod.Click += new System.EventHandler(this.btnReviewOpPeriod_Click);
             // 
@@ -323,6 +348,7 @@
             this.btnEditOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditOpPeriod.Name = "btnEditOpPeriod";
             this.btnEditOpPeriod.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnEditOpPeriod, resources.GetString("btnEditOpPeriod.ToolTip"));
             this.btnEditOpPeriod.UseVisualStyleBackColor = true;
             this.btnEditOpPeriod.Click += new System.EventHandler(this.btnEditOpPeriod_Click);
             // 
@@ -331,6 +357,7 @@
             resources.ApplyResources(this.btnNewOpPeriod, "btnNewOpPeriod");
             this.btnNewOpPeriod.Name = "btnNewOpPeriod";
             this.btnNewOpPeriod.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnNewOpPeriod, resources.GetString("btnNewOpPeriod.ToolTip"));
             this.btnNewOpPeriod.UseVisualStyleBackColor = true;
             this.btnNewOpPeriod.Click += new System.EventHandler(this.btnNewOpPeriod_Click);
             // 
@@ -340,12 +367,14 @@
             this.cboCurrentOperationalPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCurrentOperationalPeriod.FormattingEnabled = true;
             this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
+            this.toolTip1.SetToolTip(this.cboCurrentOperationalPeriod, resources.GetString("cboCurrentOperationalPeriod.ToolTip"));
             this.cboCurrentOperationalPeriod.SelectedIndexChanged += new System.EventHandler(this.cboCurrentOperationalPeriod_SelectedIndexChanged);
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // pnlTaskInfo
             // 
@@ -367,12 +396,14 @@
             this.pnlTaskInfo.Controls.Add(this.lblTaskName);
             this.pnlTaskInfo.Controls.Add(this.lblTaskNumber);
             this.pnlTaskInfo.Name = "pnlTaskInfo";
+            this.toolTip1.SetToolTip(this.pnlTaskInfo, resources.GetString("pnlTaskInfo.ToolTip"));
             this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
             // 
             // btnLockTaskInfo
             // 
             resources.ApplyResources(this.btnLockTaskInfo, "btnLockTaskInfo");
             this.btnLockTaskInfo.Name = "btnLockTaskInfo";
+            this.toolTip1.SetToolTip(this.btnLockTaskInfo, resources.GetString("btnLockTaskInfo.ToolTip"));
             this.btnLockTaskInfo.UseVisualStyleBackColor = true;
             this.btnLockTaskInfo.Click += new System.EventHandler(this.btnLockTaskInfo_Click);
             // 
@@ -380,6 +411,7 @@
             // 
             resources.ApplyResources(this.txtTaskName, "txtTaskName");
             this.txtTaskName.Name = "txtTaskName";
+            this.toolTip1.SetToolTip(this.txtTaskName, resources.GetString("txtTaskName.ToolTip"));
             this.txtTaskName.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskName_Validating);
             this.txtTaskName.Child = new System.Windows.Controls.TextBox();
             // 
@@ -388,12 +420,14 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.DimGray;
             this.panel1.Name = "panel1";
+            this.toolTip1.SetToolTip(this.panel1, resources.GetString("panel1.ToolTip"));
             // 
             // btnOutstandingLogItems
             // 
             resources.ApplyResources(this.btnOutstandingLogItems, "btnOutstandingLogItems");
             this.btnOutstandingLogItems.Name = "btnOutstandingLogItems";
             this.btnOutstandingLogItems.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnOutstandingLogItems, resources.GetString("btnOutstandingLogItems.ToolTip"));
             this.btnOutstandingLogItems.UseVisualStyleBackColor = true;
             this.btnOutstandingLogItems.Click += new System.EventHandler(this.btnOutstandingLogItems_Click);
             // 
@@ -401,12 +435,14 @@
             // 
             resources.ApplyResources(this.label19, "label19");
             this.label19.Name = "label19";
+            this.toolTip1.SetToolTip(this.label19, resources.GetString("label19.ToolTip"));
             // 
             // btnViewPositionLog
             // 
             resources.ApplyResources(this.btnViewPositionLog, "btnViewPositionLog");
             this.btnViewPositionLog.Name = "btnViewPositionLog";
             this.btnViewPositionLog.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnViewPositionLog, resources.GetString("btnViewPositionLog.ToolTip"));
             this.btnViewPositionLog.UseVisualStyleBackColor = true;
             this.btnViewPositionLog.Click += new System.EventHandler(this.btnViewPositionLog_Click);
             // 
@@ -415,6 +451,7 @@
             resources.ApplyResources(this.btnAddToPositionLog, "btnAddToPositionLog");
             this.btnAddToPositionLog.Name = "btnAddToPositionLog";
             this.btnAddToPositionLog.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnAddToPositionLog, resources.GetString("btnAddToPositionLog.ToolTip"));
             this.btnAddToPositionLog.UseVisualStyleBackColor = true;
             this.btnAddToPositionLog.Click += new System.EventHandler(this.btnAddToPositionLog_Click);
             // 
@@ -422,6 +459,7 @@
             // 
             resources.ApplyResources(this.txtTaskNumber, "txtTaskNumber");
             this.txtTaskNumber.Name = "txtTaskNumber";
+            this.toolTip1.SetToolTip(this.txtTaskNumber, resources.GetString("txtTaskNumber.ToolTip"));
             this.txtTaskNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTaskNumber_KeyPress);
             this.txtTaskNumber.Leave += new System.EventHandler(this.txtTaskNumber_Leave);
             this.txtTaskNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskNumber_Validating);
@@ -432,6 +470,7 @@
             this.btnICSRoleHelp.Name = "btnICSRoleHelp";
             this.btnICSRoleHelp.TabStop = false;
             this.btnICSRoleHelp.Tag = "Help";
+            this.toolTip1.SetToolTip(this.btnICSRoleHelp, resources.GetString("btnICSRoleHelp.ToolTip"));
             this.btnICSRoleHelp.UseVisualStyleBackColor = true;
             this.btnICSRoleHelp.Click += new System.EventHandler(this.btnICSRoleHelp_Click);
             // 
@@ -442,6 +481,7 @@
             this.cboICSRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboICSRole.FormattingEnabled = true;
             this.cboICSRole.Name = "cboICSRole";
+            this.toolTip1.SetToolTip(this.cboICSRole, resources.GetString("cboICSRole.ToolTip"));
             this.cboICSRole.ValueMember = "RoleID";
             this.cboICSRole.SelectedIndexChanged += new System.EventHandler(this.cboICSRole_SelectedIndexChanged);
             this.cboICSRole.Leave += new System.EventHandler(this.cboICSRole_Leave);
@@ -450,48 +490,57 @@
             // 
             resources.ApplyResources(this.label17, "label17");
             this.label17.Name = "label17";
+            this.toolTip1.SetToolTip(this.label17, resources.GetString("label17.ToolTip"));
             // 
             // label16
             // 
             resources.ApplyResources(this.label16, "label16");
             this.label16.Name = "label16";
+            this.toolTip1.SetToolTip(this.label16, resources.GetString("label16.ToolTip"));
             // 
             // lblTaskName
             // 
             resources.ApplyResources(this.lblTaskName, "lblTaskName");
             this.lblTaskName.Name = "lblTaskName";
+            this.toolTip1.SetToolTip(this.lblTaskName, resources.GetString("lblTaskName.ToolTip"));
             // 
             // lblTaskNumber
             // 
             resources.ApplyResources(this.lblTaskNumber, "lblTaskNumber");
             this.lblTaskNumber.Name = "lblTaskNumber";
+            this.toolTip1.SetToolTip(this.lblTaskNumber, resources.GetString("lblTaskNumber.ToolTip"));
             // 
             // lblServerStatus
             // 
             resources.ApplyResources(this.lblServerStatus, "lblServerStatus");
             this.lblServerStatus.Name = "lblServerStatus";
+            this.toolTip1.SetToolTip(this.lblServerStatus, resources.GetString("lblServerStatus.ToolTip"));
             // 
             // lblVersionNumber
             // 
             resources.ApplyResources(this.lblVersionNumber, "lblVersionNumber");
             this.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblVersionNumber.Name = "lblVersionNumber";
+            this.toolTip1.SetToolTip(this.lblVersionNumber, resources.GetString("lblVersionNumber.ToolTip"));
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.iAPToolStripMenuItem,
             this.networkInternetToolStripMenuItem,
             this.helpToolStripMenuItem,
-            this.TestToolStripMenuItem});
+            this.TestToolStripMenuItem,
+            this.languageToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
+            this.toolTip1.SetToolTip(this.menuStrip1, resources.GetString("menuStrip1.ToolTip"));
             // 
             // fileToolStripMenuItem
             // 
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newIncidentToolStripMenuItem,
             this.openToolStripMenuItem,
@@ -504,42 +553,41 @@
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
             // newIncidentToolStripMenuItem
             // 
-            this.newIncidentToolStripMenuItem.Name = "newIncidentToolStripMenuItem";
             resources.ApplyResources(this.newIncidentToolStripMenuItem, "newIncidentToolStripMenuItem");
+            this.newIncidentToolStripMenuItem.Name = "newIncidentToolStripMenuItem";
             this.newIncidentToolStripMenuItem.Click += new System.EventHandler(this.newIncidentToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             resources.ApplyResources(this.openToolStripMenuItem, "openToolStripMenuItem");
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // recentIncidentsToolStripMenuItem
             // 
-            this.recentIncidentsToolStripMenuItem.Name = "recentIncidentsToolStripMenuItem";
             resources.ApplyResources(this.recentIncidentsToolStripMenuItem, "recentIncidentsToolStripMenuItem");
+            this.recentIncidentsToolStripMenuItem.Name = "recentIncidentsToolStripMenuItem";
             this.recentIncidentsToolStripMenuItem.Click += new System.EventHandler(this.recentIncidentsToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             resources.ApplyResources(this.saveToolStripMenuItem, "saveToolStripMenuItem");
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             resources.ApplyResources(this.saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
             // 
             // browseToIncidentFolderToolStripMenuItem
             // 
@@ -549,23 +597,24 @@
             // 
             // restoreDeletedItemsToolStripMenuItem
             // 
-            this.restoreDeletedItemsToolStripMenuItem.Name = "restoreDeletedItemsToolStripMenuItem";
             resources.ApplyResources(this.restoreDeletedItemsToolStripMenuItem, "restoreDeletedItemsToolStripMenuItem");
+            this.restoreDeletedItemsToolStripMenuItem.Name = "restoreDeletedItemsToolStripMenuItem";
             this.restoreDeletedItemsToolStripMenuItem.Click += new System.EventHandler(this.restoreDeletedItemsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
+            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
             this.toolStripSeparator3,
@@ -582,72 +631,71 @@
             this.incidentObjectivesToolStripMenuItem,
             this.safetyNotesToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
             // 
             // optionsToolStripMenuItem
             // 
+            resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_137_cogwheel;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
             // 
             // savedValuesToolStripMenuItem
             // 
-            this.savedValuesToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.savedValuesToolStripMenuItem, "savedValuesToolStripMenuItem");
+            this.savedValuesToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.savedValuesToolStripMenuItem.Name = "savedValuesToolStripMenuItem";
             // 
             // aircraftToolStripMenuItem
             // 
-            this.aircraftToolStripMenuItem.Name = "aircraftToolStripMenuItem";
             resources.ApplyResources(this.aircraftToolStripMenuItem, "aircraftToolStripMenuItem");
+            this.aircraftToolStripMenuItem.Name = "aircraftToolStripMenuItem";
             this.aircraftToolStripMenuItem.Click += new System.EventHandler(this.aircraftToolStripMenuItem_Click);
             // 
             // communicationsSystemsToolStripMenuItem
             // 
-            this.communicationsSystemsToolStripMenuItem.Name = "communicationsSystemsToolStripMenuItem";
             resources.ApplyResources(this.communicationsSystemsToolStripMenuItem, "communicationsSystemsToolStripMenuItem");
+            this.communicationsSystemsToolStripMenuItem.Name = "communicationsSystemsToolStripMenuItem";
             this.communicationsSystemsToolStripMenuItem.Click += new System.EventHandler(this.communicationsSystemsToolStripMenuItem_Click);
             // 
             // contactsToolStripMenuItem
             // 
-            this.contactsToolStripMenuItem.Name = "contactsToolStripMenuItem";
             resources.ApplyResources(this.contactsToolStripMenuItem, "contactsToolStripMenuItem");
+            this.contactsToolStripMenuItem.Name = "contactsToolStripMenuItem";
             this.contactsToolStripMenuItem.Click += new System.EventHandler(this.contactsToolStripMenuItem_Click);
             // 
             // hospitalsToolStripMenuItem
             // 
-            this.hospitalsToolStripMenuItem.Name = "hospitalsToolStripMenuItem";
             resources.ApplyResources(this.hospitalsToolStripMenuItem, "hospitalsToolStripMenuItem");
+            this.hospitalsToolStripMenuItem.Name = "hospitalsToolStripMenuItem";
             this.hospitalsToolStripMenuItem.Click += new System.EventHandler(this.hospitalsToolStripMenuItem_Click);
             // 
             // medivacServicesToolStripMenuItem
             // 
-            this.medivacServicesToolStripMenuItem.Name = "medivacServicesToolStripMenuItem";
             resources.ApplyResources(this.medivacServicesToolStripMenuItem, "medivacServicesToolStripMenuItem");
+            this.medivacServicesToolStripMenuItem.Name = "medivacServicesToolStripMenuItem";
             this.medivacServicesToolStripMenuItem.Click += new System.EventHandler(this.medivacServicesToolStripMenuItem_Click);
             // 
             // teamMembersToolStripMenuItem
             // 
-            this.teamMembersToolStripMenuItem.Name = "teamMembersToolStripMenuItem";
             resources.ApplyResources(this.teamMembersToolStripMenuItem, "teamMembersToolStripMenuItem");
+            this.teamMembersToolStripMenuItem.Name = "teamMembersToolStripMenuItem";
             this.teamMembersToolStripMenuItem.Click += new System.EventHandler(this.teamMembersToolStripMenuItem_Click);
             // 
             // vehiclesToolStripMenuItem
             // 
-            this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
             resources.ApplyResources(this.vehiclesToolStripMenuItem, "vehiclesToolStripMenuItem");
+            this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
             this.vehiclesToolStripMenuItem.Click += new System.EventHandler(this.vehiclesToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
             // 
             // templatesToolStripMenuItem
             // 
@@ -656,18 +704,19 @@
             // 
             // incidentObjectivesToolStripMenuItem
             // 
-            this.incidentObjectivesToolStripMenuItem.Name = "incidentObjectivesToolStripMenuItem";
             resources.ApplyResources(this.incidentObjectivesToolStripMenuItem, "incidentObjectivesToolStripMenuItem");
+            this.incidentObjectivesToolStripMenuItem.Name = "incidentObjectivesToolStripMenuItem";
             this.incidentObjectivesToolStripMenuItem.Click += new System.EventHandler(this.incidentObjectivesToolStripMenuItem_Click);
             // 
             // safetyNotesToolStripMenuItem
             // 
-            this.safetyNotesToolStripMenuItem.Name = "safetyNotesToolStripMenuItem";
             resources.ApplyResources(this.safetyNotesToolStripMenuItem, "safetyNotesToolStripMenuItem");
+            this.safetyNotesToolStripMenuItem.Name = "safetyNotesToolStripMenuItem";
             this.safetyNotesToolStripMenuItem.Click += new System.EventHandler(this.safetyNotesToolStripMenuItem_Click);
             // 
             // iAPToolStripMenuItem
             // 
+            resources.ApplyResources(this.iAPToolStripMenuItem, "iAPToolStripMenuItem");
             this.iAPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.incidentActionPlanToolStripMenuItem,
             this.incidentObjectivesICS202ToolStripMenuItem,
@@ -687,7 +736,6 @@
             this.printThisOperationalPeriodToolStripMenuItem,
             this.printThisIncidentToDateToolStripMenuItem});
             this.iAPToolStripMenuItem.Name = "iAPToolStripMenuItem";
-            resources.ApplyResources(this.iAPToolStripMenuItem, "iAPToolStripMenuItem");
             // 
             // incidentActionPlanToolStripMenuItem
             // 
@@ -696,55 +744,55 @@
             // 
             // incidentObjectivesICS202ToolStripMenuItem
             // 
-            this.incidentObjectivesICS202ToolStripMenuItem.Name = "incidentObjectivesICS202ToolStripMenuItem";
             resources.ApplyResources(this.incidentObjectivesICS202ToolStripMenuItem, "incidentObjectivesICS202ToolStripMenuItem");
+            this.incidentObjectivesICS202ToolStripMenuItem.Name = "incidentObjectivesICS202ToolStripMenuItem";
             this.incidentObjectivesICS202ToolStripMenuItem.Click += new System.EventHandler(this.incidentObjectivesICS202ToolStripMenuItem_Click);
             // 
             // organizationChartICS207ToolStripMenuItem
             // 
-            this.organizationChartICS207ToolStripMenuItem.Name = "organizationChartICS207ToolStripMenuItem";
             resources.ApplyResources(this.organizationChartICS207ToolStripMenuItem, "organizationChartICS207ToolStripMenuItem");
+            this.organizationChartICS207ToolStripMenuItem.Name = "organizationChartICS207ToolStripMenuItem";
             this.organizationChartICS207ToolStripMenuItem.Click += new System.EventHandler(this.organizationChartICS207ToolStripMenuItem_Click);
             // 
             // teamAssignmentsICS204ToolStripMenuItem
             // 
-            this.teamAssignmentsICS204ToolStripMenuItem.Name = "teamAssignmentsICS204ToolStripMenuItem";
             resources.ApplyResources(this.teamAssignmentsICS204ToolStripMenuItem, "teamAssignmentsICS204ToolStripMenuItem");
+            this.teamAssignmentsICS204ToolStripMenuItem.Name = "teamAssignmentsICS204ToolStripMenuItem";
             this.teamAssignmentsICS204ToolStripMenuItem.Click += new System.EventHandler(this.teamAssignmentsICS204ToolStripMenuItem_Click);
             // 
             // communicationsPlanICS205ToolStripMenuItem
             // 
-            this.communicationsPlanICS205ToolStripMenuItem.Name = "communicationsPlanICS205ToolStripMenuItem";
             resources.ApplyResources(this.communicationsPlanICS205ToolStripMenuItem, "communicationsPlanICS205ToolStripMenuItem");
+            this.communicationsPlanICS205ToolStripMenuItem.Name = "communicationsPlanICS205ToolStripMenuItem";
             this.communicationsPlanICS205ToolStripMenuItem.Click += new System.EventHandler(this.communicationsPlanICS205ToolStripMenuItem_Click);
             // 
             // medicalPlanICS206ToolStripMenuItem
             // 
-            this.medicalPlanICS206ToolStripMenuItem.Name = "medicalPlanICS206ToolStripMenuItem";
             resources.ApplyResources(this.medicalPlanICS206ToolStripMenuItem, "medicalPlanICS206ToolStripMenuItem");
+            this.medicalPlanICS206ToolStripMenuItem.Name = "medicalPlanICS206ToolStripMenuItem";
             this.medicalPlanICS206ToolStripMenuItem.Click += new System.EventHandler(this.medicalPlanICS206ToolStripMenuItem_Click);
             // 
             // safetyMessageICS208ToolStripMenuItem
             // 
-            this.safetyMessageICS208ToolStripMenuItem.Name = "safetyMessageICS208ToolStripMenuItem";
             resources.ApplyResources(this.safetyMessageICS208ToolStripMenuItem, "safetyMessageICS208ToolStripMenuItem");
+            this.safetyMessageICS208ToolStripMenuItem.Name = "safetyMessageICS208ToolStripMenuItem";
             this.safetyMessageICS208ToolStripMenuItem.Click += new System.EventHandler(this.safetyMessageICS208ToolStripMenuItem_Click);
             // 
             // incidentStatusSummaryICS209ToolStripMenuItem
             // 
-            this.incidentStatusSummaryICS209ToolStripMenuItem.Name = "incidentStatusSummaryICS209ToolStripMenuItem";
             resources.ApplyResources(this.incidentStatusSummaryICS209ToolStripMenuItem, "incidentStatusSummaryICS209ToolStripMenuItem");
+            this.incidentStatusSummaryICS209ToolStripMenuItem.Name = "incidentStatusSummaryICS209ToolStripMenuItem";
             // 
             // airOperationsSummaryICS220ToolStripMenuItem
             // 
-            this.airOperationsSummaryICS220ToolStripMenuItem.Name = "airOperationsSummaryICS220ToolStripMenuItem";
             resources.ApplyResources(this.airOperationsSummaryICS220ToolStripMenuItem, "airOperationsSummaryICS220ToolStripMenuItem");
+            this.airOperationsSummaryICS220ToolStripMenuItem.Name = "airOperationsSummaryICS220ToolStripMenuItem";
             this.airOperationsSummaryICS220ToolStripMenuItem.Click += new System.EventHandler(this.airOperationsSummaryICS220ToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
             resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
             // 
             // additionalDocumentsToolStripMenuItem
             // 
@@ -753,20 +801,20 @@
             // 
             // communicationsListICS205AToolStripMenuItem
             // 
-            this.communicationsListICS205AToolStripMenuItem.Name = "communicationsListICS205AToolStripMenuItem";
             resources.ApplyResources(this.communicationsListICS205AToolStripMenuItem, "communicationsListICS205AToolStripMenuItem");
+            this.communicationsListICS205AToolStripMenuItem.Name = "communicationsListICS205AToolStripMenuItem";
             this.communicationsListICS205AToolStripMenuItem.Click += new System.EventHandler(this.communicationsListICS205AToolStripMenuItem_Click);
             // 
             // generalMessageICS213ToolStripMenuItem
             // 
-            this.generalMessageICS213ToolStripMenuItem.Name = "generalMessageICS213ToolStripMenuItem";
             resources.ApplyResources(this.generalMessageICS213ToolStripMenuItem, "generalMessageICS213ToolStripMenuItem");
+            this.generalMessageICS213ToolStripMenuItem.Name = "generalMessageICS213ToolStripMenuItem";
             this.generalMessageICS213ToolStripMenuItem.Click += new System.EventHandler(this.generalMessageICS213ToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
             resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
             // 
             // printingToolStripMenuItem
             // 
@@ -775,20 +823,21 @@
             // 
             // printThisOperationalPeriodToolStripMenuItem
             // 
+            resources.ApplyResources(this.printThisOperationalPeriodToolStripMenuItem, "printThisOperationalPeriodToolStripMenuItem");
             this.printThisOperationalPeriodToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.printThisOperationalPeriodToolStripMenuItem.Name = "printThisOperationalPeriodToolStripMenuItem";
-            resources.ApplyResources(this.printThisOperationalPeriodToolStripMenuItem, "printThisOperationalPeriodToolStripMenuItem");
             this.printThisOperationalPeriodToolStripMenuItem.Click += new System.EventHandler(this.printThisOperationalPeriodToolStripMenuItem_Click);
             // 
             // printThisIncidentToDateToolStripMenuItem
             // 
+            resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
             this.printThisIncidentToDateToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
-            resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
             this.printThisIncidentToDateToolStripMenuItem.Click += new System.EventHandler(this.printThisIncidentToDateToolStripMenuItem_Click);
             // 
             // networkInternetToolStripMenuItem
             // 
+            resources.ApplyResources(this.networkInternetToolStripMenuItem, "networkInternetToolStripMenuItem");
             this.networkInternetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.localNetworkSharingSyncToolStripMenuItem,
             this.requestIncidentFromServerToolStripMenuItem,
@@ -798,50 +847,50 @@
             this.requestOptionsFromServerToolStripMenuItem,
             this.networkTestToolStripMenuItem});
             this.networkInternetToolStripMenuItem.Name = "networkInternetToolStripMenuItem";
-            resources.ApplyResources(this.networkInternetToolStripMenuItem, "networkInternetToolStripMenuItem");
             // 
             // localNetworkSharingSyncToolStripMenuItem
             // 
-            this.localNetworkSharingSyncToolStripMenuItem.Name = "localNetworkSharingSyncToolStripMenuItem";
             resources.ApplyResources(this.localNetworkSharingSyncToolStripMenuItem, "localNetworkSharingSyncToolStripMenuItem");
+            this.localNetworkSharingSyncToolStripMenuItem.Name = "localNetworkSharingSyncToolStripMenuItem";
             this.localNetworkSharingSyncToolStripMenuItem.Click += new System.EventHandler(this.localNetworkSharingSyncToolStripMenuItem_Click);
             // 
             // requestIncidentFromServerToolStripMenuItem
             // 
-            this.requestIncidentFromServerToolStripMenuItem.Name = "requestIncidentFromServerToolStripMenuItem";
             resources.ApplyResources(this.requestIncidentFromServerToolStripMenuItem, "requestIncidentFromServerToolStripMenuItem");
+            this.requestIncidentFromServerToolStripMenuItem.Name = "requestIncidentFromServerToolStripMenuItem";
             this.requestIncidentFromServerToolStripMenuItem.Click += new System.EventHandler(this.requestIncidentFromServerToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
             resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
             // 
             // internetSyncToolStripMenuItem
             // 
-            this.internetSyncToolStripMenuItem.Name = "internetSyncToolStripMenuItem";
             resources.ApplyResources(this.internetSyncToolStripMenuItem, "internetSyncToolStripMenuItem");
+            this.internetSyncToolStripMenuItem.Name = "internetSyncToolStripMenuItem";
             this.internetSyncToolStripMenuItem.Click += new System.EventHandler(this.internetSyncToolStripMenuItem_Click);
             // 
             // toolStripSeparator12
             // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
             resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
             // 
             // requestOptionsFromServerToolStripMenuItem
             // 
-            this.requestOptionsFromServerToolStripMenuItem.Name = "requestOptionsFromServerToolStripMenuItem";
             resources.ApplyResources(this.requestOptionsFromServerToolStripMenuItem, "requestOptionsFromServerToolStripMenuItem");
+            this.requestOptionsFromServerToolStripMenuItem.Name = "requestOptionsFromServerToolStripMenuItem";
             this.requestOptionsFromServerToolStripMenuItem.Click += new System.EventHandler(this.requestOptionsFromServerToolStripMenuItem_Click);
             // 
             // networkTestToolStripMenuItem
             // 
-            this.networkTestToolStripMenuItem.Name = "networkTestToolStripMenuItem";
             resources.ApplyResources(this.networkTestToolStripMenuItem, "networkTestToolStripMenuItem");
+            this.networkTestToolStripMenuItem.Name = "networkTestToolStripMenuItem";
             this.networkTestToolStripMenuItem.Click += new System.EventHandler(this.networkTestToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newsToolStripMenuItem,
             this.viewLogFileToolStripMenuItem,
@@ -850,47 +899,67 @@
             this.aboutCIAPPToolStripMenuItem});
             this.helpToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.RedExclaimSq;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
             // newsToolStripMenuItem
             // 
+            resources.ApplyResources(this.newsToolStripMenuItem, "newsToolStripMenuItem");
             this.newsToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.RedExclaimSq;
             this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
-            resources.ApplyResources(this.newsToolStripMenuItem, "newsToolStripMenuItem");
             this.newsToolStripMenuItem.Click += new System.EventHandler(this.newsToolStripMenuItem_Click);
             // 
             // viewLogFileToolStripMenuItem
             // 
-            this.viewLogFileToolStripMenuItem.Name = "viewLogFileToolStripMenuItem";
             resources.ApplyResources(this.viewLogFileToolStripMenuItem, "viewLogFileToolStripMenuItem");
+            this.viewLogFileToolStripMenuItem.Name = "viewLogFileToolStripMenuItem";
             this.viewLogFileToolStripMenuItem.Click += new System.EventHandler(this.viewLogFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
             resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
             // 
             // supportToolStripMenuItem
             // 
-            this.supportToolStripMenuItem.Name = "supportToolStripMenuItem";
             resources.ApplyResources(this.supportToolStripMenuItem, "supportToolStripMenuItem");
+            this.supportToolStripMenuItem.Name = "supportToolStripMenuItem";
             this.supportToolStripMenuItem.Click += new System.EventHandler(this.supportToolStripMenuItem_Click);
             // 
             // aboutCIAPPToolStripMenuItem
             // 
-            this.aboutCIAPPToolStripMenuItem.Name = "aboutCIAPPToolStripMenuItem";
             resources.ApplyResources(this.aboutCIAPPToolStripMenuItem, "aboutCIAPPToolStripMenuItem");
+            this.aboutCIAPPToolStripMenuItem.Name = "aboutCIAPPToolStripMenuItem";
             this.aboutCIAPPToolStripMenuItem.Click += new System.EventHandler(this.aboutCIAPPToolStripMenuItem_Click);
             // 
             // TestToolStripMenuItem
             // 
+            resources.ApplyResources(this.TestToolStripMenuItem, "TestToolStripMenuItem");
             this.TestToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
             this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
-            resources.ApplyResources(this.TestToolStripMenuItem, "TestToolStripMenuItem");
             this.TestToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
+            // 
+            // languageToolStripMenuItem
+            // 
+            resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
+            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem,
+            this.frenchToolStripMenuItem});
+            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            // 
+            // englishToolStripMenuItem
+            // 
+            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
+            // 
+            // frenchToolStripMenuItem
+            // 
+            resources.ApplyResources(this.frenchToolStripMenuItem, "frenchToolStripMenuItem");
+            this.frenchToolStripMenuItem.Name = "frenchToolStripMenuItem";
+            this.frenchToolStripMenuItem.Click += new System.EventHandler(this.frenchToolStripMenuItem_Click);
             // 
             // cpOtherTools
             // 
+            resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
             this.cpOtherTools.BackColor = System.Drawing.Color.White;
             this.cpOtherTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpOtherTools.Collapsed = false;
@@ -903,11 +972,11 @@
             this.cpOtherTools.EnableExpandCollapse = false;
             this.cpOtherTools.ExpandsRight = true;
             this.cpOtherTools.ExpandsUpward = false;
-            resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
             this.cpOtherTools.Name = "cpOtherTools";
             this.cpOtherTools.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
             this.cpOtherTools.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpOtherTools.TitleText = "Other Tools";
+            this.toolTip1.SetToolTip(this.cpOtherTools, resources.GetString("cpOtherTools.ToolTip"));
             // 
             // btnGeneralMessage
             // 
@@ -915,6 +984,7 @@
             this.btnGeneralMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnGeneralMessage.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_11_envelope;
             this.btnGeneralMessage.Name = "btnGeneralMessage";
+            this.toolTip1.SetToolTip(this.btnGeneralMessage, resources.GetString("btnGeneralMessage.ToolTip"));
             this.btnGeneralMessage.UseVisualStyleBackColor = true;
             this.btnGeneralMessage.Click += new System.EventHandler(this.btnGeneralMessage_Click);
             // 
@@ -924,6 +994,7 @@
             this.btnReplacementResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnReplacementResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_46_calendar;
             this.btnReplacementResources.Name = "btnReplacementResources";
+            this.toolTip1.SetToolTip(this.btnReplacementResources, resources.GetString("btnReplacementResources.ToolTip"));
             this.btnReplacementResources.UseVisualStyleBackColor = true;
             this.btnReplacementResources.Click += new System.EventHandler(this.btnReplacementResources_Click);
             // 
@@ -932,6 +1003,7 @@
             resources.ApplyResources(this.btnAdditionalContacts, "btnAdditionalContacts");
             this.btnAdditionalContacts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAdditionalContacts.Name = "btnAdditionalContacts";
+            this.toolTip1.SetToolTip(this.btnAdditionalContacts, resources.GetString("btnAdditionalContacts.ToolTip"));
             this.btnAdditionalContacts.UseVisualStyleBackColor = true;
             this.btnAdditionalContacts.Click += new System.EventHandler(this.btnAdditionalContacts_Click);
             // 
@@ -940,6 +1012,7 @@
             resources.ApplyResources(this.btnNotes, "btnNotes");
             this.btnNotes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnNotes.Name = "btnNotes";
+            this.toolTip1.SetToolTip(this.btnNotes, resources.GetString("btnNotes.ToolTip"));
             this.btnNotes.UseVisualStyleBackColor = true;
             this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
             // 
@@ -949,11 +1022,13 @@
             this.btnShowResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnShowResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
             this.btnShowResources.Name = "btnShowResources";
+            this.toolTip1.SetToolTip(this.btnShowResources, resources.GetString("btnShowResources.ToolTip"));
             this.btnShowResources.UseVisualStyleBackColor = true;
             this.btnShowResources.Click += new System.EventHandler(this.btnShowResources_Click);
             // 
             // cpIncidentActionPlan
             // 
+            resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
             this.cpIncidentActionPlan.BackColor = System.Drawing.Color.White;
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpIncidentActionPlan.Collapsed = false;
@@ -970,17 +1045,18 @@
             this.cpIncidentActionPlan.EnableExpandCollapse = false;
             this.cpIncidentActionPlan.ExpandsRight = true;
             this.cpIncidentActionPlan.ExpandsUpward = false;
-            resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
             this.cpIncidentActionPlan.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
             this.cpIncidentActionPlan.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
+            this.toolTip1.SetToolTip(this.cpIncidentActionPlan, resources.GetString("cpIncidentActionPlan.ToolTip"));
             // 
             // btnIncidentStatusSummary
             // 
             resources.ApplyResources(this.btnIncidentStatusSummary, "btnIncidentStatusSummary");
             this.btnIncidentStatusSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnIncidentStatusSummary.Name = "btnIncidentStatusSummary";
+            this.toolTip1.SetToolTip(this.btnIncidentStatusSummary, resources.GetString("btnIncidentStatusSummary.ToolTip"));
             this.btnIncidentStatusSummary.UseVisualStyleBackColor = true;
             this.btnIncidentStatusSummary.Click += new System.EventHandler(this.btnIncidentStatusSummary_Click);
             // 
@@ -989,6 +1065,7 @@
             resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
             this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAssignmentList.Name = "btnAssignmentList";
+            this.toolTip1.SetToolTip(this.btnAssignmentList, resources.GetString("btnAssignmentList.ToolTip"));
             this.btnAssignmentList.UseVisualStyleBackColor = true;
             this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
             // 
@@ -997,6 +1074,7 @@
             resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
             this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnAirOpsSummary.Name = "btnAirOpsSummary";
+            this.toolTip1.SetToolTip(this.btnAirOpsSummary, resources.GetString("btnAirOpsSummary.ToolTip"));
             this.btnAirOpsSummary.UseVisualStyleBackColor = true;
             this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
             // 
@@ -1005,6 +1083,7 @@
             resources.ApplyResources(this.btnSafetyPlans, "btnSafetyPlans");
             this.btnSafetyPlans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnSafetyPlans.Name = "btnSafetyPlans";
+            this.toolTip1.SetToolTip(this.btnSafetyPlans, resources.GetString("btnSafetyPlans.ToolTip"));
             this.btnSafetyPlans.UseVisualStyleBackColor = true;
             this.btnSafetyPlans.Click += new System.EventHandler(this.btnSafetyPlans_Click);
             // 
@@ -1013,6 +1092,7 @@
             resources.ApplyResources(this.btnIncidentObjectives, "btnIncidentObjectives");
             this.btnIncidentObjectives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnIncidentObjectives.Name = "btnIncidentObjectives";
+            this.toolTip1.SetToolTip(this.btnIncidentObjectives, resources.GetString("btnIncidentObjectives.ToolTip"));
             this.btnIncidentObjectives.UseVisualStyleBackColor = true;
             this.btnIncidentObjectives.Click += new System.EventHandler(this.btnIncidentObjectives_Click);
             // 
@@ -1021,6 +1101,7 @@
             resources.ApplyResources(this.btnMedicalPlan, "btnMedicalPlan");
             this.btnMedicalPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnMedicalPlan.Name = "btnMedicalPlan";
+            this.toolTip1.SetToolTip(this.btnMedicalPlan, resources.GetString("btnMedicalPlan.ToolTip"));
             this.btnMedicalPlan.UseVisualStyleBackColor = true;
             this.btnMedicalPlan.Click += new System.EventHandler(this.btnMedicalPlan_Click);
             // 
@@ -1031,6 +1112,7 @@
             this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
             this.btnPrintIAP.Name = "btnPrintIAP";
             this.btnPrintIAP.Tag = "ViewPDF";
+            this.toolTip1.SetToolTip(this.btnPrintIAP, resources.GetString("btnPrintIAP.ToolTip"));
             this.btnPrintIAP.UseVisualStyleBackColor = true;
             this.btnPrintIAP.Click += new System.EventHandler(this.btnPrintIAP_Click);
             // 
@@ -1039,6 +1121,7 @@
             resources.ApplyResources(this.btnPrintOrgChart, "btnPrintOrgChart");
             this.btnPrintOrgChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnPrintOrgChart.Name = "btnPrintOrgChart";
+            this.toolTip1.SetToolTip(this.btnPrintOrgChart, resources.GetString("btnPrintOrgChart.ToolTip"));
             this.btnPrintOrgChart.UseVisualStyleBackColor = true;
             this.btnPrintOrgChart.Click += new System.EventHandler(this.btnPrintOrgChart_Click);
             // 
@@ -1047,6 +1130,7 @@
             resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
             this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnCommsPlan.Name = "btnCommsPlan";
+            this.toolTip1.SetToolTip(this.btnCommsPlan, resources.GetString("btnCommsPlan.ToolTip"));
             this.btnCommsPlan.UseVisualStyleBackColor = true;
             this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
             // 
@@ -1066,6 +1150,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IncidentDetailsForm_FormClosed);
             this.Load += new System.EventHandler(this.IncidentDetailsForm_Load);
@@ -1208,6 +1293,9 @@
         private System.Windows.Forms.ToolStripMenuItem viewLogFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem frenchToolStripMenuItem;
     }
 }
 

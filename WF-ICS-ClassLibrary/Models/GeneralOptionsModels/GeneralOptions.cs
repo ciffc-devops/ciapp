@@ -209,7 +209,7 @@ namespace WF_ICS_ClassLibrary.Models
             AutoBackupIntervalMinutes = 120;
             IncludeOtherContactsWithIAP = true;
             AddIMTToContacts = true;
-            DefaultICSRole = OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID);
+            DefaultICSRole = new ICSRole(OrganizationalChartTools.GetGenericRoleByID(Globals.IncidentCommanderGenericID));
             AutomaticSubFolders.Add("GPS Track Backup");
             AutomaticSubFolders.Add("Maps");
             AutomaticSubFolders.Add("Other Images");

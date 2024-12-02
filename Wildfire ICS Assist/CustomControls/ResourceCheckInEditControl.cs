@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Models.OrganizationalChartModels;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Wildfire_ICS_Assist.CustomControls
@@ -50,20 +51,18 @@ namespace Wildfire_ICS_Assist.CustomControls
             
         }
 
-        private List<ICSRole> GetICSRolesForDropdown()
+        private List<GenericICSRole> GetICSRolesForDropdown()
         {
-            List<ICSRole> roles = OrgChartTools.GetAllRoles();
+            List<GenericICSRole> roles = OrganizationalChartTools.GetGenericICSRoles();
             roles = roles.
-                OrderByDescending(o => o.Mnemonic.Contains("ICT")).ThenByDescending(o => o.SectionID == Globals.IncidentCommanderID)
-                .ThenByDescending(o => o.Mnemonic.Contains("OSC")).ThenByDescending(o => o.SectionID == Globals.OpsChiefID)
-                .ThenByDescending(o => o.Mnemonic.Contains("PSC")).ThenByDescending(o => o.SectionID == Globals.PlanningChiefID)
-                .ThenByDescending(o => o.Mnemonic.Contains("LSC")).ThenByDescending(o => o.SectionID == Globals.LogisticsChiefID)
-                .ThenByDescending(o => o.Mnemonic.Contains("FSC")).ThenByDescending(o => o.SectionID == Globals.FinanceChiefID)
+                OrderByDescending(o => o.MnemonicAbrv.Contains("ICT")).ThenByDescending(o => o.SectionID == Globals.IncidentCommanderGenericID)
+                .ThenByDescending(o => o.MnemonicAbrv.Contains("OSC")).ThenByDescending(o => o.SectionID == Globals.OpsChiefGenericID)
+                .ThenByDescending(o => o.MnemonicAbrv.Contains("PSC")).ThenByDescending(o => o.SectionID == Globals.PlanningChiefGenericID)
+                .ThenByDescending(o => o.MnemonicAbrv.Contains("LSC")).ThenByDescending(o => o.SectionID == Globals.LogisticsChiefGenericID)
+                .ThenByDescending(o => o.MnemonicAbrv.Contains("FSC")).ThenByDescending(o => o.SectionID == Globals.FinanceChiefGenericID)
                 .ThenBy(o => o.RoleName).ToList();
 
-            ICSRole blank = new ICSRole();
-            blank.RoleID = Guid.Empty;
-            blank.RoleName = string.Empty;
+            GenericICSRole blank = new GenericICSRole() { GenericRoleID = Guid.Empty, RoleName = string.Empty, ReportsToGenericRoleID = Guid.Empty, SectionID = Guid.Empty, MnemonicAbrv = string.Empty, RoleDescription = string.Empty };
             roles.Insert(0, blank);
 
             return roles;
@@ -176,9 +175,11 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
 if (cboICSRole.SelectedItem != null)
                 {
-                    ICSRole role = (ICSRole)cboICSRole.SelectedItem;
-                    checkInRecord.InitialRoleName = role.RoleName;
-                    checkInRecord.InitialRoleAcronym = role.Mnemonic;
+                    GenericICSRole genericRole = (GenericICSRole)cboICSRole.SelectedItem;
+
+
+                    checkInRecord.InitialRoleName = genericRole.RoleName;
+                    checkInRecord.InitialRoleAcronym = genericRole.MnemonicAbrv;
                 }
                 else { checkInRecord.InitialRoleAcronym = string.Empty; checkInRecord.InitialRoleName = string.Empty; }
             }
@@ -223,12 +224,12 @@ if (cboICSRole.SelectedItem != null)
                 if (checkInRecord.IsPerson)
                 {
                     chkAutoAssign.Enabled = true;
-                    List<ICSRole> roles = GetICSRolesForDropdown();
+                    List<GenericICSRole> roles = GetICSRolesForDropdown();
                     cboICSRole.DataSource = roles;
 
-                    if (!string.IsNullOrEmpty(checkInRecord.InitialRoleAcronym) && roles.Any(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)))
+                    if (!string.IsNullOrEmpty(checkInRecord.InitialRoleAcronym) && roles.Any(o => !string.IsNullOrEmpty(o.MnemonicAbrv) && o.MnemonicAbrv.Equals(checkInRecord.InitialRoleAcronym)))
                     {
-                        cboICSRole.SelectedValue = roles.First(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(checkInRecord.InitialRoleAcronym)).RoleID;
+                        cboICSRole.SelectedValue = roles.First(o => !string.IsNullOrEmpty(o.MnemonicAbrv) && o.MnemonicAbrv.Equals(checkInRecord.InitialRoleAcronym)).GenericRoleID;
                     }
                 }
                 pnlOtherResourceDetails.Visible = false;

@@ -36,6 +36,14 @@
             this.rbUnifiedCommand = new System.Windows.Forms.RadioButton();
             this.rbIncidentCommander = new System.Windows.Forms.RadioButton();
             this.treeOrgChart = new System.Windows.Forms.TreeView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.assignSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.removeSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPrint203 = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnDeleteRole = new System.Windows.Forms.Button();
@@ -44,14 +52,6 @@
             this.btnAssignRole = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.assignSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -170,110 +170,6 @@
             this.treeOrgChart.TabIndex = 0;
             this.treeOrgChart.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeOrgChart_AfterSelect);
             // 
-            // btnPrint203
-            // 
-            this.btnPrint203.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint203.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnPrint203.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint203.Location = new System.Drawing.Point(882, 3);
-            this.btnPrint203.Name = "btnPrint203";
-            this.btnPrint203.Size = new System.Drawing.Size(160, 42);
-            this.btnPrint203.TabIndex = 53;
-            this.btnPrint203.Text = "Print ICS-203";
-            this.btnPrint203.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint203.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint203.UseVisualStyleBackColor = true;
-            this.btnPrint203.Click += new System.EventHandler(this.btnPrint203_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
-            this.btnExport.Location = new System.Drawing.Point(751, 3);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(125, 42);
-            this.btnExport.TabIndex = 49;
-            this.btnExport.Text = "Export";
-            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // btnDeleteRole
-            // 
-            this.btnDeleteRole.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteRole.Location = new System.Drawing.Point(493, 3);
-            this.btnDeleteRole.Name = "btnDeleteRole";
-            this.btnDeleteRole.Size = new System.Drawing.Size(177, 42);
-            this.btnDeleteRole.TabIndex = 52;
-            this.btnDeleteRole.Text = "Remove Role";
-            this.btnDeleteRole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDeleteRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDeleteRole.UseVisualStyleBackColor = true;
-            this.btnDeleteRole.Click += new System.EventHandler(this.btnDeleteRole_Click);
-            // 
-            // btnEditRole
-            // 
-            this.btnEditRole.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnEditRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditRole.Location = new System.Drawing.Point(340, 3);
-            this.btnEditRole.Name = "btnEditRole";
-            this.btnEditRole.Size = new System.Drawing.Size(147, 42);
-            this.btnEditRole.TabIndex = 51;
-            this.btnEditRole.Text = "Edit Role";
-            this.btnEditRole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEditRole.UseVisualStyleBackColor = true;
-            this.btnEditRole.Click += new System.EventHandler(this.btnEditRole_Click);
-            // 
-            // btnPrint207
-            // 
-            this.btnPrint207.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint207.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnPrint207.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint207.Location = new System.Drawing.Point(1048, 3);
-            this.btnPrint207.Name = "btnPrint207";
-            this.btnPrint207.Size = new System.Drawing.Size(166, 42);
-            this.btnPrint207.TabIndex = 50;
-            this.btnPrint207.Text = "Print ICS-207";
-            this.btnPrint207.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint207.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint207.UseVisualStyleBackColor = true;
-            this.btnPrint207.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnAssignRole
-            // 
-            this.btnAssignRole.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnAssignRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
-            this.btnAssignRole.Location = new System.Drawing.Point(167, 3);
-            this.btnAssignRole.Name = "btnAssignRole";
-            this.btnAssignRole.Size = new System.Drawing.Size(167, 42);
-            this.btnAssignRole.TabIndex = 49;
-            this.btnAssignRole.Text = "Assign Role";
-            this.btnAssignRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAssignRole.UseVisualStyleBackColor = true;
-            this.btnAssignRole.Click += new System.EventHandler(this.btnAssignRole_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAdd.Location = new System.Drawing.Point(12, 3);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(149, 42);
-            this.btnAdd.TabIndex = 48;
-            this.btnAdd.Text = "Add Role";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // svdExport
-            // 
-            this.svdExport.DefaultExt = "csv";
-            this.svdExport.Filter = "Comma-separated values|*.csv";
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 14F);
@@ -286,7 +182,7 @@
             this.toolStripSeparator2,
             this.removeSelectedRoleToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(285, 188);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(285, 166);
             // 
             // addRoleToolStripMenuItem
             // 
@@ -317,19 +213,6 @@
             this.editSelectedRoleToolStripMenuItem.Text = "Edit Selected Role";
             this.editSelectedRoleToolStripMenuItem.Click += new System.EventHandler(this.editSelectedRoleToolStripMenuItem_Click);
             // 
-            // removeSelectedRoleToolStripMenuItem
-            // 
-            this.removeSelectedRoleToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.removeSelectedRoleToolStripMenuItem.Name = "removeSelectedRoleToolStripMenuItem";
-            this.removeSelectedRoleToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
-            this.removeSelectedRoleToolStripMenuItem.Text = "Remove Selected Role";
-            this.removeSelectedRoleToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedRoleToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(281, 6);
-            // 
             // printLogisticsOverviewToolStripMenuItem
             // 
             this.printLogisticsOverviewToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
@@ -338,18 +221,124 @@
             this.printLogisticsOverviewToolStripMenuItem.Text = "Print Logistics Overview";
             this.printLogisticsOverviewToolStripMenuItem.Click += new System.EventHandler(this.printLogisticsOverviewToolStripMenuItem_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(281, 6);
+            // 
+            // removeSelectedRoleToolStripMenuItem
+            // 
+            this.removeSelectedRoleToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
+            this.removeSelectedRoleToolStripMenuItem.Name = "removeSelectedRoleToolStripMenuItem";
+            this.removeSelectedRoleToolStripMenuItem.Size = new System.Drawing.Size(284, 30);
+            this.removeSelectedRoleToolStripMenuItem.Text = "Remove Selected Role";
+            this.removeSelectedRoleToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedRoleToolStripMenuItem_Click);
+            // 
+            // btnPrint203
+            // 
+            this.btnPrint203.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint203.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrint203.Location = new System.Drawing.Point(882, 3);
+            this.btnPrint203.Name = "btnPrint203";
+            this.btnPrint203.Size = new System.Drawing.Size(160, 42);
+            this.btnPrint203.TabIndex = 53;
+            this.btnPrint203.Text = "Print ICS-203";
+            this.btnPrint203.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint203.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint203.UseVisualStyleBackColor = true;
+            this.btnPrint203.Click += new System.EventHandler(this.btnPrint203_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
+            this.btnExport.Location = new System.Drawing.Point(751, 3);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(125, 42);
+            this.btnExport.TabIndex = 49;
+            this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnDeleteRole
+            // 
+            this.btnDeleteRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
+            this.btnDeleteRole.Location = new System.Drawing.Point(493, 3);
+            this.btnDeleteRole.Name = "btnDeleteRole";
+            this.btnDeleteRole.Size = new System.Drawing.Size(177, 42);
+            this.btnDeleteRole.TabIndex = 52;
+            this.btnDeleteRole.Text = "Remove Role";
+            this.btnDeleteRole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDeleteRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDeleteRole.UseVisualStyleBackColor = true;
+            this.btnDeleteRole.Click += new System.EventHandler(this.btnDeleteRole_Click);
+            // 
+            // btnEditRole
+            // 
+            this.btnEditRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEditRole.Location = new System.Drawing.Point(340, 3);
+            this.btnEditRole.Name = "btnEditRole";
+            this.btnEditRole.Size = new System.Drawing.Size(147, 42);
+            this.btnEditRole.TabIndex = 51;
+            this.btnEditRole.Text = "Edit Role";
+            this.btnEditRole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEditRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEditRole.UseVisualStyleBackColor = true;
+            this.btnEditRole.Click += new System.EventHandler(this.btnEditRole_Click);
+            // 
+            // btnPrint207
+            // 
+            this.btnPrint207.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint207.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
+            this.btnPrint207.Location = new System.Drawing.Point(1048, 3);
+            this.btnPrint207.Name = "btnPrint207";
+            this.btnPrint207.Size = new System.Drawing.Size(166, 42);
+            this.btnPrint207.TabIndex = 50;
+            this.btnPrint207.Text = "Print ICS-207";
+            this.btnPrint207.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint207.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint207.UseVisualStyleBackColor = true;
+            this.btnPrint207.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnAssignRole
+            // 
+            this.btnAssignRole.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_4_user;
+            this.btnAssignRole.Location = new System.Drawing.Point(167, 3);
+            this.btnAssignRole.Name = "btnAssignRole";
+            this.btnAssignRole.Size = new System.Drawing.Size(167, 42);
+            this.btnAssignRole.TabIndex = 49;
+            this.btnAssignRole.Text = "Assign Role";
+            this.btnAssignRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAssignRole.UseVisualStyleBackColor = true;
+            this.btnAssignRole.Click += new System.EventHandler(this.btnAssignRole_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
+            this.btnAdd.Location = new System.Drawing.Point(12, 3);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(149, 42);
+            this.btnAdd.TabIndex = 48;
+            this.btnAdd.Text = "Add Role";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // svdExport
+            // 
+            this.svdExport.DefaultExt = "csv";
+            this.svdExport.Filter = "Comma-separated values|*.csv";
+            // 
             // OrganizationalChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
             this.ClientSize = new System.Drawing.Size(1226, 594);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(1168, 498);
             this.Name = "OrganizationalChartForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Organization Chart";
             this.Load += new System.EventHandler(this.OrganizationalChartForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

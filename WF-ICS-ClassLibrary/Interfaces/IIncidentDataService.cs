@@ -6,14 +6,13 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace WildfireICSDesktopServices
 {
-    public interface IWFIncidentService
+    public interface IIncidentDataService
     {
         List<TaskUpdate> allTaskUpdates { get; set; }
         Incident CurrentIncident { get; set; }
         ICSRole CurrentRole { get; set; }
         Guid MachineID { get; set; }
 
-        string TestWrite(string path);
 
         event AmbulanceServiceEventHandler AmbulanceServiceChanged;
         event BriefingEventHandler BriefingChanged;
@@ -47,7 +46,7 @@ namespace WildfireICSDesktopServices
         event GeneralMessageEventHandler GeneralMessageChanged;
         event AircraftEventHandler AircraftChanged;
         event AircraftsOperationsSummaryEventHandler AircraftsOperationsSummaryChanged;
-        event DemobEventHandler DemobChanged;
+        event DemobEventHandler DemobilizatoinRecordChanged;
 
         event IncidenOpPeriodChangedEventHandler CurrentOpPeriodChanged;
         event OperationalGroupEventHandler OperationalGroupChanged;
@@ -56,18 +55,6 @@ namespace WildfireICSDesktopServices
         event IncidentSummaryEventHandler IncidentSummaryChanged;
 
         void ApplyTaskUpdate(TaskUpdate update, bool applyAllSubsequent = false);
-        void DeleteCommsLogEntry(CommsLogEntry toDelete, string source = "local");
-        void DeleteCommsLogEntry(Guid EntryID, string source = "local");
-        void DeleteContact(Contact contact, string source = "local");
-        void DeleteContact(Guid contactID, string source = "local");
-        void DeleteIncidentObjective(Guid IncidentObjectiveID, string source = "local");
-        void DeleteIncidentObjective(IncidentObjective record, string source = "local");
-        void DeleteObject(object obj, string source);
-        void DeleteTaskEquipment(IncidentGear te, string source = "local");
-        void DeleteTimelineEvent(Guid RecordID, string source = "local");
-        void DeleteTimelineEvent(TimelineEvent record, string source = "local");
-        void DeleteVehicle(Guid RecordID, string source = "local");
-        void DeleteVehicle(Vehicle record, string source = "local");
         List<CommsPlanItem> GetCommsPlanItems(bool includeBlank, bool ActiveOnly = true);
         TaskUpdate InsertIfUniqueTaskUpdate(TaskUpdate update);
         void ProcessTaskUpdate(TaskUpdate update);
@@ -114,9 +101,9 @@ namespace WildfireICSDesktopServices
 
         void UpsertAircraft(Aircraft record, string source = "local");
         void UpsertAirOperationsSummary(AirOperationsSummary record, string source = "local");
-        void OnOpPeriodChanged(IncidentOpPeriodChangedEventArgs e);
+        void OnCurrentOpPeriodChanged(IncidentOpPeriodChangedEventArgs e);
         void UpsertOperationalGroup(OperationalGroup record, string source = "local");
-        void UpsertOperationalSubGroup(Crew record, string source = "local");
+        void UpsertCrew(Crew record, string source = "local");
         void UpsertDemobRecord(DemobilizationRecord record, string source = "local");
         void UpsertIncidentResource(IncidentResource record, string source = "local");
         void UpsertResourceReplacementPlan(ResourceReplacementPlan record, string source = "local");

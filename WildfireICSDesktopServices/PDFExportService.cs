@@ -1043,12 +1043,12 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
-                    ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                    ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefGenericID, true);
                     if (null != PreparedBy)
                     {
                         stamper.AcroFields.SetField("9 PREPARED BY Planning Section Chief", PreparedBy.IndividualName);
                     }
-                    ICSRole IC = currentChart.GetRoleByID(Globals.IncidentCommanderID, true);
+                    ICSRole IC = currentChart.GetRoleByID(Globals.IncidentCommanderGenericID, true);
                     if (null != IC)
                     {
                         stamper.AcroFields.SetField("10 APPROVED BY Incident Commander", IC.IndividualName);
@@ -1193,11 +1193,11 @@ namespace WildfireICSDesktopServices
                                 {
                                    
                                     PreparedBy.IndividualName = currentChart.PreparedByResourceName;
-                                    PreparedBy.RoleName = currentChart.PreparedByRoleName;
+                                    PreparedBy.BaseRoleName = currentChart.PreparedByRoleName;
                                 }
                                 else
                                 {
-                                    PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                                    PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefGenericID, true);
                                 }
 
                                 if (null != PreparedBy)
@@ -1209,16 +1209,16 @@ namespace WildfireICSDesktopServices
                                 currentChart.SortRoles();
 
                                 //Incident Command
-                                List<ICSRole> icRoles = currentChart.GetRolesForAssignmentList(Globals.IncidentCommanderID, 10, 7);
+                                List<ICSRole> icRoles = currentChart.GetRolesForAssignmentList(Globals.IncidentCommanderGenericID, 10, 7);
                                 for (int x = 0; x < 7 && x < icRoles.Count; x++)
                                 {
-                                    if (icRoles[x].ReportsTo == Globals.IncidentCommanderID || icRoles[x].RoleID == Globals.IncidentCommanderID) { stamper.SetFieldFontBold("4 INCIDENT AND COMMAND STAFFRow" + (x + 1)); }
+                                    if (icRoles[x].ReportsTo == Globals.IncidentCommanderGenericID || icRoles[x].RoleID == Globals.IncidentCommanderGenericID) { stamper.SetFieldFontBold("4 INCIDENT AND COMMAND STAFFRow" + (x + 1)); }
 
                                     stamper.AcroFields.SetField("4 INCIDENT AND COMMAND STAFFRow" + (x + 1), icRoles[x].RoleName);
                                     stamper.AcroFields.SetField("4 INCIDENT AND COMMAND STAFFRow" + (x + 1) + "_2", icRoles[x].IndividualName);
                                 }
                                 //agency reps
-                                List<ICSRole> repRoles = currentChart.ActiveRoles.Where(o => o.SectionID == Globals.IncidentCommanderID && o.RoleName.Equals("Agency Representative")).OrderBy(o => o.Depth).ThenBy(o => o.ManualSortOrder).ThenBy(o => o.RoleName).ToList();
+                                List<ICSRole> repRoles = currentChart.ActiveRoles.Where(o => o.SectionID == Globals.IncidentCommanderGenericID && o.RoleName.Equals("Agency Representative")).OrderBy(o => o.Depth).ThenBy(o => o.ManualSortOrder).ThenBy(o => o.RoleName).ToList();
                                 for (int x = 0; x < 8 && x < repRoles.Count; x++)
                                 {
 
@@ -1232,37 +1232,37 @@ namespace WildfireICSDesktopServices
                                 }
 
                                 //Planning
-                                List<ICSRole> planRoles = currentChart.GetRolesForAssignmentList(Globals.PlanningChiefID, 0, 10);
+                                List<ICSRole> planRoles = currentChart.GetRolesForAssignmentList(Globals.PlanningChiefGenericID, 0, 10);
                                 for (int x = 0; x < 10 && x < planRoles.Count; x++)
                                 {
-                                    if (planRoles[x].ReportsTo == Globals.PlanningChiefID || planRoles[x].RoleID == Globals.PlanningChiefID) { stamper.SetFieldFontBold("6 PLANNING SECTIONRow" + (x + 1)); }
+                                    if (planRoles[x].ReportsTo == Globals.PlanningChiefGenericID || planRoles[x].RoleID == Globals.PlanningChiefGenericID) { stamper.SetFieldFontBold("6 PLANNING SECTIONRow" + (x + 1)); }
 
                                     stamper.AcroFields.SetField("6 PLANNING SECTIONRow" + (x + 1), planRoles[x].RoleName);
                                     stamper.AcroFields.SetField("6 PLANNING SECTIONRow" + (x + 1) + "_2", planRoles[x].IndividualName);
                                 }
 
                                 //Ops
-                                List<ICSRole> opsRoles = currentChart.GetRolesForAssignmentList(Globals.OpsChiefID, 0, 35);
+                                List<ICSRole> opsRoles = currentChart.GetRolesForAssignmentList(Globals.OpsChiefGenericID, 0, 35);
                                 for (int x = 0; x < 35 && x < opsRoles.Count; x++)
                                 {
-                                    if (opsRoles[x].ReportsTo == Globals.OpsChiefID || opsRoles[x].RoleID == Globals.OpsChiefID) { stamper.SetFieldFontBold("8 OPERATIONS SECTIONRow" + (x + 1)); }
+                                    if (opsRoles[x].ReportsTo == Globals.OpsChiefGenericID || opsRoles[x].RoleID == Globals.OpsChiefGenericID) { stamper.SetFieldFontBold("8 OPERATIONS SECTIONRow" + (x + 1)); }
                                     stamper.AcroFields.SetField("8 OPERATIONS SECTIONRow" + (x + 1), opsRoles[x].RoleName);
                                     stamper.AcroFields.SetField("8 OPERATIONS SECTIONRow" + (x + 1) + "_2", opsRoles[x].IndividualName);
                                 }
                                 //Logistics
-                                List<ICSRole> logRoles = currentChart.GetRolesForAssignmentList(Globals.LogisticsChiefID, 0, 13);
+                                List<ICSRole> logRoles = currentChart.GetRolesForAssignmentList(Globals.LogisticsChiefGenericID, 0, 13);
                                 for (int x = 0; x < 13 && x < logRoles.Count; x++)
                                 {
-                                    if (logRoles[x].ReportsTo == Globals.LogisticsChiefID || logRoles[x].RoleID == Globals.LogisticsChiefID) { stamper.SetFieldFontBold("7 LOGISTICS SECTIONRow" + (x + 1)); }
+                                    if (logRoles[x].ReportsTo == Globals.LogisticsChiefGenericID || logRoles[x].RoleID == Globals.LogisticsChiefGenericID) { stamper.SetFieldFontBold("7 LOGISTICS SECTIONRow" + (x + 1)); }
 
                                     stamper.AcroFields.SetField("7 LOGISTICS SECTIONRow" + (x + 1), logRoles[x].RoleName);
                                     stamper.AcroFields.SetField("7 LOGISTICS SECTIONRow" + (x + 1) + "_2", logRoles[x].IndividualName);
                                 }
                                 //Finance
-                                List<ICSRole> financeRoles = currentChart.GetRolesForAssignmentList(Globals.FinanceChiefID, 0, 6);
+                                List<ICSRole> financeRoles = currentChart.GetRolesForAssignmentList(Globals.FinanceChiefGenericID, 0, 6);
                                 for (int x = 0; x < 6 && x < financeRoles.Count; x++)
                                 {
-                                    if (financeRoles[x].ReportsTo == Globals.FinanceChiefID || financeRoles[x].RoleID == Globals.FinanceChiefID) { stamper.SetFieldFontBold("9 FINANCIALADMINISTRATION SECTIONRow" + (x + 1)); }
+                                    if (financeRoles[x].ReportsTo == Globals.FinanceChiefGenericID || financeRoles[x].RoleID == Globals.FinanceChiefGenericID) { stamper.SetFieldFontBold("9 FINANCIALADMINISTRATION SECTIONRow" + (x + 1)); }
 
                                     stamper.AcroFields.SetField("9 FINANCIALADMINISTRATION SECTIONRow" + (x + 1), financeRoles[x].RoleName);
                                     stamper.AcroFields.SetField("9 FINANCIALADMINISTRATION SECTIONRow" + (x + 1) + "_2", financeRoles[x].IndividualName);
@@ -1425,11 +1425,11 @@ namespace WildfireICSDesktopServices
                             {
                                 //PreparedBy.teamMember = new Personnel(currentChart.PreparedByUserID);
                                 PreparedBy.IndividualName = currentChart.PreparedByResourceName;
-                                PreparedBy.RoleName = currentChart.PreparedByRoleName;
+                                PreparedBy.BaseRoleName = currentChart.PreparedByRoleName;
                             }
                             else
                             {
-                                PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                                PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefGenericID, true);
                             }
                             
                             if (null != PreparedBy)
@@ -1615,7 +1615,7 @@ namespace WildfireICSDesktopServices
                             stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                             stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
-                            ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefID, true);
+                            ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefGenericID, true);
                             if (null != PreparedBy)
                             {
                                 stamper.AcroFields.SetField("PreparedByPosition", PreparedBy.RoleName);
@@ -1801,9 +1801,9 @@ namespace WildfireICSDesktopServices
                             PdfWriter writer = PdfWriter.GetInstance(document, fs);
 
 
-                            if (chart.GetRoleByID(Globals.IncidentCommanderID).IndividualID != Guid.Empty)
+                            if (chart.GetRoleByID(Globals.IncidentCommanderGenericID).IndividualID != Guid.Empty)
                             {
-                                document.AddAuthor(chart.GetRoleByID(Globals.IncidentCommanderID).IndividualName);
+                                document.AddAuthor(chart.GetRoleByID(Globals.IncidentCommanderGenericID).IndividualName);
                             }
                             TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
                             writer.PageEvent = PageEventHandler;
@@ -2281,7 +2281,7 @@ namespace WildfireICSDesktopServices
                     }
 
 
-                    ICSRole PreparedBy = currentOrgChart.GetRoleByID(Globals.LogisticsChiefID, true);
+                    ICSRole PreparedBy = currentOrgChart.GetRoleByID(Globals.LogisticsChiefGenericID, true);
 
 
                     stamper.AcroFields.SetField("18 REMARKSRow1", "");
@@ -3891,8 +3891,8 @@ namespace WildfireICSDesktopServices
 
             List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).ActiveAirCommsItems;
             List<ICSRole> roles = new List<ICSRole>();
-            roles.Add(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
-            roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).GetChildRoles(Globals.AirOpsDirector, true));
+            roles.Add(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirectorGenericID));
+            roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).GetChildRoles(Globals.AirOpsDirectorGenericID, true));
 
 
 
@@ -3922,8 +3922,8 @@ namespace WildfireICSDesktopServices
 
             List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).ActiveAirCommsItems;
             List<ICSRole> roles = new List<ICSRole>();
-            roles.Add(incident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == sum.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
-            roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).GetChildRoles(Globals.AirOpsDirector, true));
+            roles.Add(incident.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == sum.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirectorGenericID));
+            roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).GetChildRoles(Globals.AirOpsDirectorGenericID, true));
 
 
             int totalPages = 0;
@@ -4504,7 +4504,7 @@ namespace WildfireICSDesktopServices
                 OrganizationChart org = task.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
                 foreach( ICSRole role in org.AllRoles.Where(o => o.IsOpGroupSup && !o.IsTFST && o.Active))
                 {
-                    if (role.RoleID != Globals.AirOpsDirector && role.ReportsTo != Globals.AirOpsDirector)
+                    if (role.RoleID != Globals.AirOpsDirectorGenericID && role.ReportsTo != Globals.AirOpsDirectorGenericID)
                     {
                         if (task.AllOperationalGroups.Any(o => !o.IsBranchOrDiv && o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
                         else if (!task.AllOperationalGroups.Any(o => o.ParentID == role.RoleID)) { rolesToExport.Add(role); }
@@ -4579,7 +4579,7 @@ namespace WildfireICSDesktopServices
 
                     ICSRole branch = new ICSRole();
 
-                    if(div.RoleID != Globals.OpsChiefID && div.ReportsTo != Globals.OpsChiefID) { branch = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriod).GetRoleByID(div.ReportsTo, false); }
+                    if(div.RoleID != Globals.OpsChiefGenericID && div.ReportsTo != Globals.OpsChiefGenericID) { branch = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriod).GetRoleByID(div.ReportsTo, false); }
                     else { branch = div; }
 
                     if (task.AllOperationalGroups.Any(o => o.ID == branch.OperationalGroupID))
@@ -4609,7 +4609,7 @@ namespace WildfireICSDesktopServices
                     operationalpersonnel.Insert(0, div);
                     if (div.RoleID != branch.RoleID) { operationalpersonnel.Insert(0, branch); }
                     Guid reportsTo = branch.ReportsTo;
-                    while (reportsTo != Globals.IncidentCommanderID)
+                    while (reportsTo != Globals.IncidentCommanderGenericID)
                     {
                         ICSRole role = branch = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriod).GetRoleByID(reportsTo, false);
                         operationalpersonnel.Insert(0, role);

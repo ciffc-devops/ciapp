@@ -107,7 +107,7 @@ namespace Wildfire_ICS_Assist
             //ConfirmResourceNumberAvailability();
         }
 
-        private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        private void Program_OperationalSubGroupChanged(CrewEventArgs e)
         {
             LoadResourcesList();
             //ConfirmResourceNumberAvailability();
@@ -271,7 +271,7 @@ namespace Wildfire_ICS_Assist
                                 {
                                     Crew sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
                                     sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
-                                    Program.incidentDataService.UpsertOperationalSubGroup(sub);
+                                    Program.incidentDataService.UpsertCrew(sub);
                                 }
 
 
@@ -286,7 +286,7 @@ namespace Wildfire_ICS_Assist
                             }
 
 
-                            Program.incidentDataService.UpsertOperationalSubGroup(group);
+                            Program.incidentDataService.UpsertCrew(group);
                             foreach (IncidentResource subres in signInForm.SubResources)
                             {
                                 if (subres.GetType().Name.Equals("Personnel"))
@@ -334,9 +334,9 @@ namespace Wildfire_ICS_Assist
 
                     if (signInForm.AssignIfPossible && !string.IsNullOrEmpty(record.InitialRoleAcronym))
                     {
-                        if (Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
+                        if (Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.MnemonicAbrv) && o.MnemonicAbrv.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
                         {
-                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty);
+                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.MnemonicAbrv) && o.MnemonicAbrv.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty);
                             Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == record.ResourceID);
                             role.IndividualID = p.ID;
                             role.IndividualName = p.Name;
@@ -1288,7 +1288,7 @@ namespace Wildfire_ICS_Assist
                     {
                         Crew sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
                         sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
-                        Program.incidentDataService.UpsertOperationalSubGroup(sub);
+                        Program.incidentDataService.UpsertCrew(sub);
                     }
 
 
@@ -1303,7 +1303,7 @@ namespace Wildfire_ICS_Assist
                 }
 
 
-                Program.incidentDataService.UpsertOperationalSubGroup(group);
+                Program.incidentDataService.UpsertCrew(group);
                 foreach (IncidentResource subres in crewForm.subResources)
                 {
                     if (subres.GetType().Name.Equals("Personnel"))

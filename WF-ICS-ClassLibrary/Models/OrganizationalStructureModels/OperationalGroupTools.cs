@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using WF_ICS_ClassLibrary.Utilities;
 
@@ -49,72 +50,7 @@ namespace WF_ICS_ClassLibrary.Models
             return csv.ToString();
         }
 
-        public static string GetRoleNameFromGroup(this OperationalGroup record)
-        {
-            ICSRole NewRole = new ICSRole();
-
-
-
-            if (record.GroupType.Equals("Branch"))
-            {
-                if (!string.IsNullOrEmpty(record.Name) && record.Name.Equals("Heavy Equipment"))
-                {
-                    NewRole = OrgChartTools.getGenericRoleByName("Heavy Equipment Branch Director");
-                }
-                else
-                {
-                    NewRole = OrgChartTools.getGenericRoleByName("Operations Branch Director");
-                }
-            }
-            else if (record.GroupType.Equals("Division"))
-            {
-                NewRole = OrgChartTools.getGenericRoleByName("Division Supervisor");
-            }
-            else if (record.GroupType.Equals("Strike Team"))
-            {
-                NewRole = OrgChartTools.getGenericRoleByName("Strike Team Leader");
-            }
-            else if (record.GroupType.Equals("Task Force"))
-            {
-                NewRole = OrgChartTools.getGenericRoleByName("Task Force Leader");
-            }
-            else
-            {
-                NewRole.BaseRoleName = "Group Supervisor";
-                NewRole.RoleName = "Group Supervisor";
-                NewRole.SectionID = Globals.OpsChiefID;
-                NewRole.IsOpGroupSup = true;
-            }
-
-
-            NewRole.OperationalGroupID = record.ID;
-
-            switch (record.GroupType)
-            {
-                case "Branch":
-                    
-                        NewRole.RoleName = NewRole.BaseRoleName.Replace("Branch", record.ResourceName);
-                    
-                    NewRole.IsOpGroupSup = true;
-                    break;
-                case "Division":
-                    NewRole.RoleName = NewRole.BaseRoleName.Replace("Division", record.ResourceName);
-                    NewRole.IsOpGroupSup = true;
-                    break;
-                case "Task Force":
-                    NewRole.RoleName = NewRole.BaseRoleName.Replace("Task Force", record.ResourceName);
-                    NewRole.IsOpGroupSup = true;
-                    break;
-                case "Strike Team":
-                    NewRole.RoleName = NewRole.BaseRoleName.Replace("Strike Team", record.ResourceName);
-                    NewRole.IsOpGroupSup = true;
-                    break;
-                default:
-                    NewRole.RoleName = record.ResourceName + " Supervisor";
-                    break;
-            }
-            return NewRole.RoleName;
-        }
+      
 
 
         public static List<IncidentResource> GetUncommittedResources(this Incident incident, int OpPeriod)
@@ -214,6 +150,163 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
+
+
+        /// <summary>
+        /// This method will create all operational groups as needed for the given OpPeriod based on the ICS roles that exist in the org chart for that period.
+        /// </summary>
+        /// <param name="incident"></param>
+        /// <param name="OpPeriodNumber"></param>
+        public static void CreateAllOperationalGroupsAsNeeded(this Incident incident, int OpPeriodNumber)
+        {
+            if (incident.activeOrgCharts.Any(o => o.OpPeriod == OpPeriodNumber))
+            {
+                ICSRole OSC = incident.activeOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriodNumber).ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Globals.OpsChiefGenericID);
+
+                if (OSC != null && !incident.ActiveOperationalGroups.Any(o => o.OpPeriod == OpPeriodNumber && o.LeaderICSRoleID == OSC.ID))
+                {
+                    OperationalGroup ops = OSC.CreateOpGroupFromRole("Operations Section");
+                    OSC.OperationalGroupID = ops.ID;
+                    ops.LeaderICSRoleID = OSC.ID;
+                    ops.ParentID = Guid.Empty;   
+                    Globals.incidentService.UpsertOperationalGroup(ops);
+
+                    CreateAllOperationalGroupsAsNeeded(incident, OpPeriodNumber, OSC);
+
+                }
+
+            }
+        }
+        public static void CreateAllOperationalGroupsAsNeeded(this Incident incident, int OpPeriodNumber, ICSRole parentRole)
+        {
+            OperationalGroup parentGroup = incident.ActiveOperationalGroups.FirstOrDefault(o => o.ID == parentRole.OperationalGroupID);
+            foreach (ICSRole role in incident.activeOrgCharts.FirstOrDefault(o => o.OpPeriod == OpPeriodNumber).ActiveRoles.Where(o => o.RequiresOperationalGroup && o.ReportsTo == parentRole.ID))
+            {
+                if (!incident.ActiveOperationalGroups.Any(o => o.OpPeriod == OpPeriodNumber && o.LeaderICSRoleID == role.ID))
+                {
+                    OperationalGroup grp = CreateOpGroupFromRole(role, string.Empty);
+                    grp.ParentID = parentGroup.ID;
+                    grp.ParentName = parentGroup.ResourceName;
+                    Globals.incidentService.UpsertOperationalGroup(grp);
+
+                    CreateAllOperationalGroupsAsNeeded(incident, OpPeriodNumber, role);
+                }
+            }
+
+        }
+
+
+        /// <summary>
+        /// This function takes an ICS role and makes the corresponding operational group.  Note it doesn't currently set the op group ID that the new group will report to
+        /// </summary>
+        /// <param name="role"></param>
+        /// <param name="OperationalGroupName"></param>
+        /// <returns></returns>
+        public static OperationalGroup CreateOpGroupFromRole(this ICSRole role, string OperationalGroupName)
+        {
+            OperationalGroup operationalGroup = new OperationalGroup();
+            operationalGroup.OpPeriod = role.OpPeriod;
+            operationalGroup.Active = true;
+            operationalGroup.GroupType = role.GetOperationalGroupTypeFromICSRole();
+            if (operationalGroup.GroupType.Equals("Section")) { operationalGroup.Name = "Operations Section"; }
+            else if (string.IsNullOrEmpty(OperationalGroupName))
+            {
+                operationalGroup.Name = role.RoleName.RemoveGenericRoleTitle();
+            }
+            else { operationalGroup.Name = OperationalGroupName; }
+            operationalGroup.LeaderICSRoleID = role.RoleID;
+            operationalGroup.LeaderID = role.IndividualID;
+            operationalGroup.LeaderICSRoleName = role.RoleName;
+            operationalGroup.LeaderName = role.IndividualName;
+           
+            return operationalGroup;
+        }
+
+        private static string RemoveGenericRoleTitle(this string roleName)
+        {
+            if(roleName != null)
+            {
+                roleName = roleName.Replace("Branch Director", "");
+                roleName = roleName.Replace("Group Supervisor", "");
+                roleName = roleName.Replace("Division Supervisor", "");
+                return roleName;
+            }
+            return string.Empty;
+        }
+
+        public static string GetOperationalGroupTypeFromICSRole(this ICSRole role)
+        {
+            if(role.GenericRoleID == Globals.OpsChiefGenericID) { return "Section"; }
+            if (role.GenericRoleID == Globals.BranchDirectorGenericID || role.GenericRoleID == Globals.AirOpsDirectorGenericID) { return "Branch"; }
+            if (role.GenericRoleID == Globals.DivisionSupervisorGenericID) { return "Division"; }
+            if (role.GenericRoleID == Globals.GroupSupervisorGenericID) { return "Group"; }
+            if (role.GenericRoleID == Globals.StrikeTeamLeaderGenericID) { return "Strike Team"; }
+            if (role.GenericRoleID == Globals.TaskForceLeaderGenericID) { return "Task Force"; }
+
+            if(role.RoleName.Contains("Branch")) { return "Branch"; }
+            if (role.RoleName.Contains("Division")) { return "Division"; }
+            if (role.RoleName.Contains("Group")) { return "Group"; }
+            if (role.RoleName.Contains("Strike Team")) { return "Strike Team"; }
+            if (role.RoleName.Contains("Task Force")) { return "Task Force"; }
+
+            return null;
+        }
+
+        public static Guid GetOpGroupParentIDThroughOrgChart(this Incident incident, OperationalGroup opGroup)
+        {
+
+            if (opGroup != null && opGroup.LeaderICSRoleID != Guid.Empty)
+            {
+                OrganizationChart orgChart = incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == opGroup.OpPeriod && o.Active);
+                if (orgChart != null)
+                {
+                    ICSRole leader = orgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == opGroup.LeaderICSRoleID);
+                    if (leader != null && leader.ReportsTo != Guid.Empty)
+                    {
+                        OperationalGroup parentGroup = incident.ActiveOperationalGroups.FirstOrDefault(o => o.LeaderICSRoleID == leader.ReportsTo);
+                        if (parentGroup != null)
+                        {
+                            return parentGroup.ID;
+                        }
+                    }
+                }
+            }
+            return Guid.Empty;
+        }
+        public static Guid GetICSReportsToThroughOpGroup(this Incident incident, ICSRole role)
+        {
+            if(role != null && role.OperationalGroupID != Guid.Empty)
+            {
+                OperationalGroup opGroup = incident.ActiveOperationalGroups.FirstOrDefault(o => o.ID == role.OperationalGroupID);
+                if (opGroup != null)
+                {
+                    OperationalGroup ParentGroup = incident.ActiveOperationalGroups.FirstOrDefault(o => o.ID == opGroup.ParentID);
+                    if (ParentGroup != null)
+                    {
+                        return ParentGroup.LeaderICSRoleID;
+                    }
+                }
+            }
+            /*
+            if (opGroup != null && opGroup.LeaderICSRoleID != Guid.Empty)
+            {
+                OrganizationChart orgChart = incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == opGroup.OpPeriod && o.Active);
+                if (orgChart != null)
+                {
+                    ICSRole leader = orgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == opGroup.LeaderICSRoleID);
+                    if (leader != null && leader.ReportsTo != Guid.Empty)
+                    {
+                        OperationalGroup parentGroup = incident.ActiveOperationalGroups.FirstOrDefault(o => o.LeaderICSRoleID == leader.ReportsTo);
+                        if (parentGroup != null)
+                        {
+                            return parentGroup.ID;
+                        }
+                    }
+                }
+            }*/
+            return Guid.Empty;
+        }
+
         public static ICSRole GetICSRoleByOpGroupID(this Incident incident, Guid OpGroupID)
         {
             if (incident.ActiveOperationalGroups.Any(o => o.ID == OpGroupID))
@@ -246,15 +339,15 @@ namespace WF_ICS_ClassLibrary.Models
         public static int GetOpGroupDepth(this OperationalGroup group, Incident incident)
         {
             int depth = 1;
-            if (group.ParentID == Globals.OpsChiefID) { depth = 1; }
-            else if (incident.AllOperationalGroups.Any(o => o.LeaderICSRoleID == group.ParentID))
+            if (group.GroupType == "Section") { depth = 1; }
+            else if (incident.AllOperationalGroups.Any(o => o.ID == group.ParentID))
             {
-                OperationalGroup parent = incident.AllOperationalGroups.First(o => o.LeaderICSRoleID == group.ParentID);
+                OperationalGroup parent = incident.AllOperationalGroups.First(o => o.ID == group.ParentID);
                 depth += 1;
-                while (parent.ParentID != Globals.OpsChiefID && incident.AllOperationalGroups.Any(o => o.LeaderICSRoleID == parent.ParentID))
+                while (parent.ParentID != Globals.OpsChiefGenericID && incident.AllOperationalGroups.Any(o => o.ID == parent.ParentID))
                 {
                     depth += 1;
-                    parent = incident.AllOperationalGroups.First(o => o.LeaderICSRoleID == parent.ParentID);
+                    parent = incident.AllOperationalGroups.First(o => o.ID == parent.ParentID);
 
                 }
 

@@ -17,7 +17,8 @@ namespace Wildfire_ICS_Assist.CustomControls
         private OperationalGroup _SelectedGroup = new OperationalGroup(Guid.Empty);
         public OperationalGroup SelectedGroup { get => _SelectedGroup; set { _SelectedGroup = value; } }
         private List<CommsPlanItem> _AvailableCommsPlanItems = new List<CommsPlanItem>();
-        private List<ICSRole> OpsRoles = new List<ICSRole>();
+        //private List<ICSRole> OpsRoles = new List<ICSRole>();
+
         public bool UnsavedChanges = false;
 
         public EditBranchControl()
@@ -64,15 +65,14 @@ namespace Wildfire_ICS_Assist.CustomControls
         }
         private void PopulateReportsTo()
         {
-            OpsRoles.Clear();
+            
             if (Program.CurrentOrgChart != null)
             {
-                OpsRoles.Add(Program.CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.OpsChiefID && !o.IsPlaceholder));
-                OpsRoles.AddRange(Program.CurrentOrgChart.GetChildRoles(Globals.OpsChiefID, true, true));
-                OpsRoles = OpsRoles.Where(o => o.RoleID == Globals.OpsChiefID || o.IsBranch).OrderByDescending(o=>o.RoleID == Globals.OpsChiefID).ThenBy(o=>o.RoleName).ToList();
-                cboReportsTo.DataSource = OpsRoles;
-                cboReportsTo.DisplayMember = "RoleNameForDropdown";
-                cboReportsTo.ValueMember = "RoleID";
+                List<OperationalGroup> opGroups = new List<OperationalGroup>(Program.CurrentIncident.ActiveOperationalGroups);
+                opGroups = opGroups.Where(o => o.IsBranchOrDiv || o.ParentID == Guid.Empty).ToList();
+                cboReportsTo.DataSource = opGroups;
+                cboReportsTo.DisplayMember = "ResourceName";
+                cboReportsTo.ValueMember = "ID";
             }
         }
 
@@ -100,8 +100,11 @@ namespace Wildfire_ICS_Assist.CustomControls
             if (SelectedGroup.LeaderICSRoleID != Guid.Empty)
             {
                 ICSRole role = Program.CurrentIncident.GetICSRoleByOpGroupID(SelectedGroup.ID);
-                txtName.Enabled = role.AllowEditName;
-                cboName.Enabled = role.AllowEditName;
+                if (role != null)
+                {
+                    txtName.Enabled = role.AllowEditName;
+                    cboName.Enabled = role.AllowEditName;
+                }
             }
 
             if (Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.ID == SelectedGroup.ID))
@@ -213,6 +216,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                     cboName.Visible = true;
                     buildBranchNames();
                     cboName.SelectedIndex = 0;
+                    lblGroupLeaderTitle.Text = "Director";
                     if (!string.IsNullOrEmpty(SelectedGroup.Name) && SelectedGroup.GroupType.Equals("Branch"))
                     {
                         cboName.SelectedIndex = cboName.FindStringExact(SelectedGroup.Name);
@@ -222,25 +226,29 @@ namespace Wildfire_ICS_Assist.CustomControls
                     {
                         cboReportsTo.SelectedIndex = 0;
                     }
-                    cboReportsTo.Enabled = false;
+                    //cboReportsTo.Enabled = false;
                     break;
                 case 1: //division
                     BuildDivisionNames();
                     txtName.Visible = false;
                     cboName.Visible = true;
                     cboName.SelectedIndex = 0;
+                    lblGroupLeaderTitle.Text = "Supervisor";
+
                     if (!string.IsNullOrEmpty(SelectedGroup.Name) && SelectedGroup.GroupType.Equals("Division"))
                     {
                         cboName.SelectedIndex = cboName.FindStringExact(SelectedGroup.Name);
                     }
                     else { cboName.SelectedIndex = 0; }
-                    cboReportsTo.Enabled = true;
+                    //cboReportsTo.Enabled = true;
 
                     break;
                 default:
+                    lblGroupLeaderTitle.Text = "Supervisor";
+
                     txtName.Visible = true;
                     cboName.Visible = false;
-                    cboReportsTo.Enabled = true;
+                    //cboReportsTo.Enabled = true;
                     if (!string.IsNullOrEmpty(SelectedGroup.GroupType) && SelectedGroup.GroupType.Equals("Group")) { txtName.Text = SelectedGroup.Name; }
                     break;
             }
@@ -276,22 +284,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 
             if (cboReportsTo.SelectedItem != null)
             {
-                ICSRole reportsTo = (ICSRole)cboReportsTo.SelectedItem;
-
-                SelectedGroup.ParentID = reportsTo.RoleID;
-                if (reportsTo.OperationalGroupID != Guid.Empty && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.ID == reportsTo.OperationalGroupID))
-                {
-                    OperationalGroup gr = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.ID == reportsTo.OperationalGroupID);
-                    SelectedGroup.ParentName = gr.ResourceName;
-                }
-
-                else
-                {
-                    SelectedGroup.ParentName = reportsTo.RoleName;
-                }
-
-
-
+                OperationalGroup reportsTo = (OperationalGroup)cboReportsTo.SelectedItem;
+                SelectedGroup.ParentID = reportsTo.ID;
+                SelectedGroup.ParentName = reportsTo.ResourceName;
             }
 
             if (SelectedGroup.GroupType.Equals("Branch")) { SelectedGroup.Name = cboName.Text; }

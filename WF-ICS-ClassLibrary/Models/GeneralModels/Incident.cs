@@ -59,7 +59,6 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public Incident()
         {
             ID = System.Guid.NewGuid();
-
             //allObjectives = new List<IncidentObjective>();
             AllIncidentObjectiveSheets = new List<IncidentObjectivesSheet>();
 
@@ -85,7 +84,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
             // allLogisticalNeeds = new List<LogisticalNeed>();
             // allLogisticalNeedsLists = new List<LogisticalNeedsList>();
             //allVehicles = new List<Vehicle>();
-            allTaskUpdates = new List<TaskUpdate>();
+            
             allSafetyMessages = new List<SafetyMessage>();
             allAirOperationsSummaries = new List<AirOperationsSummary>();
             //AllAssignments = new List<TeamAssignment>();
@@ -252,7 +251,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public int[] SoftwareVersion { get => _SoftwareVersion; set => _SoftwareVersion = value; }
 
 
-        public string IncidentCommander(int Ops) { return this.getNameByRoleID(Ops, Globals.IncidentCommanderID); }
+        public string IncidentCommander(int Ops) { return this.getNameByRoleID(Ops, Globals.IncidentCommanderGenericID); }
         public string PlansChief(int Ops) { return this.getNameByRoleName(Ops, "Planning Section Chief"); }
         public string OpsChief(int Ops) { return this.getNameByRoleName(Ops, "Operations Section Chief"); }
         public string LogisticsChief(int Ops) { return this.getNameByRoleName(Ops, "Logistics Section Chief"); }

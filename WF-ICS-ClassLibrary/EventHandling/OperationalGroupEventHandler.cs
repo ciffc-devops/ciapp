@@ -18,13 +18,13 @@ namespace WF_ICS_ClassLibrary.EventHandling
 
 
 
-    public delegate void OperationalSubGroupEventHandler(OperationalSubGroupEventArgs e);
+    public delegate void OperationalSubGroupEventHandler(CrewEventArgs e);
 
-    public class OperationalSubGroupEventArgs
+    public class CrewEventArgs
     {
         public Crew item { get; set; }
 
-        public OperationalSubGroupEventArgs(Crew _item) { item = _item; }
+        public CrewEventArgs(Crew _item) { item = _item; }
     }
 
 

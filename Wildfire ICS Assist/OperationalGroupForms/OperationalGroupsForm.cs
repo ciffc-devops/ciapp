@@ -27,7 +27,12 @@ namespace Wildfire_ICS_Assist
 
         private void OperationalGroupsForm_Load(object sender, EventArgs e)
         {
-            if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
+            if(Program.CurrentIncident.ActiveOperationalGroups.Count == 0)
+            {
+                Globals.incidentService.CurrentIncident.CreateAllOperationalGroupsAsNeeded(Program.CurrentOpPeriod);
+            }
+
+            //if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
             PopulateTree();
             Program.incidentDataService.OperationalGroupChanged += Program_OperationalGroupChanged;
             Program.incidentDataService.OrganizationalChartChanged += Program_OrgChartChangedChanged;
@@ -48,12 +53,12 @@ namespace Wildfire_ICS_Assist
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
-                ICSRole selected = null;
+                OperationalGroup selected = null;
                 if (treeOpsChart.SelectedNode != null)
                 {
 
 
-                    selected = (ICSRole)treeOpsChart.SelectedNode.Tag;
+                    selected = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
                 }
                 PopulateTree();
                 if(selected != null) { SetSelectedNode(selected); }
@@ -64,19 +69,23 @@ namespace Wildfire_ICS_Assist
             if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
                 PopulateTree();
-                SetSelectedNode(e.item);
+                OperationalGroup selected = Program.CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o=>o.LeaderICSRoleID == e.item.ID && o.OpPeriod == Program.CurrentOpPeriod);
+                if (selected != null)
+                {
+                    SetSelectedNode(selected);
+                }
             }
         }
         private void Program_OrgChartChangedChanged(OrganizationChartEventArgs e)
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod)
             {
-                ICSRole selected = null;
+                OperationalGroup selected = null;
                 if (treeOpsChart.SelectedNode != null)
                 {
 
 
-                    selected = (ICSRole)treeOpsChart.SelectedNode.Tag;
+                    selected = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
                 }
                 PopulateTree();
 
@@ -85,7 +94,7 @@ namespace Wildfire_ICS_Assist
         }
 
 
-        private void SetSelectedNode(ICSRole selectedRole)
+        private void SetSelectedNode(OperationalGroup selectedRole)
         {
             if (selectedRole == null)
             {
@@ -93,35 +102,45 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
-                TreeNode selectedNode = GetSelectedByRoleID(selectedRole.RoleID);
-                if (selectedNode != null)
+                if (treeOpsChart.Nodes.Count > 0)
                 {
-                    treeOpsChart.SelectedNode = selectedNode;
+                    TreeNode selectedNode = GetSelectedByRoleID(selectedRole.ID);
+                    if (selectedNode != null)
+                    {
+                        treeOpsChart.SelectedNode = selectedNode;
+                    }
+                    else { treeOpsChart.SelectedNode = treeOpsChart.Nodes[0]; }
                 }
-                else { treeOpsChart.SelectedNode = treeOpsChart.Nodes[0]; }
             }
             if (treeOpsChart.SelectedNode != null) treeOpsChart.SelectedNode.EnsureVisible();
         }
 
 
-        private void PopulateTree(ICSRole selectedRole = null)
+        private void PopulateTree(OperationalGroup selectedGroup = null)
         {
            
 
             treeOpsChart.Nodes.Clear();
-            // call recursive function
-            AddCurrentChild(Globals.IncidentCommanderID, treeOpsChart.Nodes);
 
+
+
+            OperationalGroup FirstOpGroup = Program.CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o=>o.ParentID == Guid.Empty && o.OpPeriod == Program.CurrentOpPeriod);
+
+            // call recursive function starting with the operations section
+            AddCurrentChild(Guid.Empty, treeOpsChart.Nodes);
+
+
+            //Set the currently selected node
             if (treeOpsChart.Nodes.Count > 0)
             {
                 treeOpsChart.Nodes[0].ExpandAll();
-                if (selectedRole == null)
+                if (selectedGroup == null)
                 {
                     treeOpsChart.SelectedNode = treeOpsChart.Nodes[0];
                 }
                 else
                 {
-                    TreeNode selectedNode = GetSelectedByRoleID(selectedRole.RoleID);
+                    TreeNode selectedNode = GetSelectedByRoleID(selectedGroup.ID);
                     if (selectedNode != null)
                     {
                         treeOpsChart.SelectedNode = selectedNode;
@@ -137,12 +156,12 @@ namespace Wildfire_ICS_Assist
             btnPrint204A.Enabled = Program.CurrentIncident.ActiveOperationalGroups.Any(o => !o.IsBranchOrDiv && o.OpPeriod == Program.CurrentOpPeriod);
         }
 
-        private TreeNode GetSelectedByRoleID(Guid roleid)
+        private TreeNode GetSelectedByRoleID(Guid groupId)
         {
             TreeNode itemNode = null;
             foreach (TreeNode node in treeOpsChart.Nodes)
             {
-                itemNode = FromID(roleid, node);
+                itemNode = FromID(groupId, node);
                 if (itemNode != null) break;
             }
 
@@ -153,7 +172,7 @@ namespace Wildfire_ICS_Assist
         {
             foreach (TreeNode node in rootNode.Nodes)
             {
-                if (((ICSRole)node.Tag).RoleID == itemId) return node;
+                if (((OperationalGroup)node.Tag).ID == itemId) return node;
                 TreeNode next = FromID(itemId, node);
                 if (next != null) return next;
             }
@@ -162,25 +181,24 @@ namespace Wildfire_ICS_Assist
 
         private void AddCurrentChild(Guid parentId, TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == parentId && o.SectionID == Globals.OpsChiefID && o.IsOpGroupSup).OrderBy(o=>o.RoleName).ToList();
+            //var rows = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == parentId && o.SectionID == Globals.OpsChiefGenericID && o.IsOpGroupSup).OrderBy(o=>o.RoleName).ToList();
+            var rows = Program.CurrentIncident.ActiveOperationalGroups.Where(o=>o.ParentID == parentId && o.OpPeriod == Program.CurrentOpPeriod).OrderBy(o => o.ResourceName).ToList();
 
             foreach (var row in rows)
             {
                 
 
-                var roleID = row.RoleID;
-                string name = row.RoleNameWithIndividualAssigned;
+                var ID = row.ID;
+                string name = row.ResourceName;
 
-                if (!row.IsPlaceholder)
-                {
-
-                    var node = nodes.Add(roleID.ToString(), name);
-                    if (row.IndividualID == Guid.Empty || string.IsNullOrEmpty(row.IndividualName)) { node.NodeFont = GetNodeFont(true); }
+               
+                    var node = nodes.Add(ID.ToString(), name);
+                    if (row.LeaderID == Guid.Empty || string.IsNullOrEmpty(row.LeaderName)) { node.NodeFont = GetNodeFont(true); }
                     else { node.NodeFont = GetNodeFont(false); }
                     node.Tag = row; // if you need to keep a row reference on the node
                     ShouldAutoExpand(node);
-                    AddCurrentChild(row.RoleID, node.Nodes);
-                }
+                    AddCurrentChild(row.ID, node.Nodes);
+                
             }
         }
 
@@ -211,7 +229,7 @@ namespace Wildfire_ICS_Assist
             {
                 strikeTeamTaskForceDetailsControl1.ChangesMade = false;
 
-                Program.incidentDataService.UpsertOperationalGroup(strikeTeamTaskForceDetailsControl1.selectedGroup);
+                Program.incidentDataService.UpsertOperationalGroup(strikeTeamTaskForceDetailsControl1.SelectedOpGroup);
             }
         }
 
@@ -223,32 +241,38 @@ namespace Wildfire_ICS_Assist
                
                 Program.CurrentIncident.UpdateOperationalGroupCounts(Program.CurrentOpPeriod);
 
-                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                btnDelete.Enabled = role.AllowDelete;
+                OperationalGroup selectedGroup = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
+                
+                ICSRole LeaderICSRole = Program.CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == selectedGroup.LeaderICSRoleID);
 
-                SaveSTTFChanges();
-
-                OperationalGroup selectedGroup = new OperationalGroup();
-                if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
+                //TODO Fix this to avoid deleting hard-coded op groups
+                if (LeaderICSRole != null)
                 {
-                    selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
+                    btnDelete.Enabled = LeaderICSRole.AllowDelete;
                 }
 
+                SaveSTTFChanges();
+                lblSelectedGroupName.Text = selectedGroup.ResourceName;
+                lblSelectedGroupLeader.Text = selectedGroup.LeaderICSRoleName + " " + selectedGroup.LeaderName;
 
                 if (selectedGroup != null && (selectedGroup.GroupType.EqualsWithNull("Strike Team") || selectedGroup.GroupType.EqualsWithNull("Task Force")))
                 {
                     operationalGroupReportingResourcesControl1.Visible = false;
                     strikeTeamTaskForceDetailsControl1.Visible = true;
                     strikeTeamTaskForceDetailsControl1.Dock = DockStyle.Fill;
-                    strikeTeamTaskForceDetailsControl1.SetRole(role);
+                    strikeTeamTaskForceDetailsControl1.SetSelectedGroup(selectedGroup);
+                    //strikeTeamTaskForceDetailsControl1.SetRole(role);
                 }
                 else
                 {
                     operationalGroupReportingResourcesControl1.Visible = true;
                     operationalGroupReportingResourcesControl1.Dock = DockStyle.Fill;
-                    operationalGroupReportingResourcesControl1.role = role;
+                    operationalGroupReportingResourcesControl1.SelectedOpGroup = selectedGroup;
                     strikeTeamTaskForceDetailsControl1.Visible = false;
+
                 }
+
+
                 
             }
             else
@@ -265,13 +289,42 @@ namespace Wildfire_ICS_Assist
             {
                 using (OperationalGroupBranchEditForm form = new OperationalGroupBranchEditForm())
                 {
-                    form.SelectedGroup = group;
+                    form.SelectedGroup = group.Clone();
 
                     DialogResult dr = form.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        OperationalGroup grp = form.SelectedGroup;
-                        Program.incidentDataService.UpsertOperationalGroup(grp);
+                        OperationalGroup updatedGroup = form.SelectedGroup;
+                        Program.incidentDataService.UpsertOperationalGroup(updatedGroup);
+                        if (updatedGroup.LeaderICSRoleID == Guid.Empty)
+                        {
+                            ICSRole role = updatedGroup.CreateRoleFromOperationalGroup(Globals.incidentService.CurrentIncident.activeOrgCharts.First(o => o.OpPeriod == updatedGroup.OpPeriod).ID);
+                            role.OperationalGroupName = updatedGroup.ResourceName;
+                            Guid ReportsToRoleID = Program.CurrentIncident.GetICSReportsToThroughOpGroup(role);
+                            if(ReportsToRoleID != Guid.Empty)
+                            {
+                                ICSRole reportsToRole = Program.CurrentIncident.activeOrgCharts.First(o => o.OpPeriod == updatedGroup.OpPeriod).AllRoles.FirstOrDefault(o => o.RoleID == ReportsToRoleID);
+                                role.ReportsTo = reportsToRole.RoleID;
+                                role.ReportsToGenericRoleID = reportsToRole.GenericRoleID;
+                                role.ReportsToRoleName = reportsToRole.RoleName;
+                            }
+                            Program.incidentDataService.UpsertICSRole(role);
+                            updatedGroup.LeaderICSRoleID = role.RoleID;
+                            updatedGroup.LeaderICSRoleName = role.RoleName;
+
+                            Program.incidentDataService.UpsertOperationalGroup(updatedGroup);
+                        }
+                        else if (!updatedGroup.Name.Equals(group.Name))
+                        {
+                            ICSRole role = Program.CurrentIncident.activeOrgCharts.First(o => o.OpPeriod == Program.CurrentOpPeriod).AllRoles.FirstOrDefault(o => o.RoleID == updatedGroup.LeaderICSRoleID);
+                            if (role != null)
+                            {
+                                role.OperationalGroupName = updatedGroup.ResourceName;
+                                Program.incidentDataService.UpsertICSRole(role);
+                            }
+
+                            //TODO need code here to switch to/from the specifically codified roles like heavy group branch 
+                        }
                     }
                 }
             }
@@ -301,13 +354,13 @@ namespace Wildfire_ICS_Assist
                 btnEditBranch.Enabled = true;
                 btnDelete.Enabled = true;
 
-                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+                OperationalGroup selectedGroup = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
 
-                if (role.RoleID == Globals.OpsChiefID)
+                if (selectedGroup.ParentID == Guid.Empty)
                 {
                     using (OrganizationChartAssignRoleForm assignRoleForm = new OrganizationChartAssignRoleForm())
                     {
-                        assignRoleForm.selectedRole = role.Clone();
+                        assignRoleForm.selectedRole = CurrentOrgChart.AllRoles.FirstOrDefault(o => o.RoleID == selectedGroup.LeaderICSRoleID);
 
                         DialogResult dr = assignRoleForm.ShowDialog();
                         if (dr == DialogResult.OK)
@@ -328,29 +381,29 @@ namespace Wildfire_ICS_Assist
                 }
                 else
                 {
-                    OperationalGroup selectedGroup = new OperationalGroup();
-                    if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID && o.OpPeriod == role.OpPeriod))
-                    {
-                        selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID && o.OpPeriod == role.OpPeriod);
 
-                        if (selectedGroup.GroupType.EqualsWithNull("Task Force") || selectedGroup.GroupType.EqualsWithNull("Strike Team") || selectedGroup.GroupType.EqualsWithNull("Single Resource"))
-                        {
-                            OpenTFSTForEdit(selectedGroup);
-                        }
-                        else
-                        {
-                            OpenBrachDivForEdit(selectedGroup);
-                        }
+
+                    if (selectedGroup.GroupType.EqualsWithNull("Task Force") || selectedGroup.GroupType.EqualsWithNull("Strike Team") || selectedGroup.GroupType.EqualsWithNull("Single Resource"))
+                    {
+                        OpenTFSTForEdit(selectedGroup);
+                    }
+                    else
+                    {
+                        OpenBrachDivForEdit(selectedGroup);
                     }
                 }
             }
+
         }
 
         private void addNewBranchDivisionGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OperationalGroup group = new OperationalGroup();
             group.OpPeriod = Program.CurrentOpPeriod;
-            group.ParentID = Globals.OpsChiefID;
+            OperationalGroup OpSection = Program.CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o => o.ParentID == Guid.Empty && o.OpPeriod == Program.CurrentOpPeriod);
+
+            group.ParentID = OpSection.ID;
+            group.ParentName = OpSection.ResourceName; 
             group.GroupType = "Branch";
             OpenBrachDivForEdit(group);
         }
@@ -366,21 +419,25 @@ namespace Wildfire_ICS_Assist
             group.OpPeriod = Program.CurrentOpPeriod;
             if (treeOpsChart.SelectedNode != null)
             {
-                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                if (role.ReportsTo == Globals.OpsChiefID || role.RoleID == Globals.OpsChiefID)
+                OperationalGroup selectedNodeGroup = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
+                if(selectedNodeGroup.GroupType.Equals("Branch") || selectedNodeGroup.GroupType.Equals("Section"))
                 {
-                    group.ParentID = role.RoleID;
-                    group.ParentName = role.RoleName;
+                    group.ParentID = selectedNodeGroup.ID;
+                    group.ParentName = selectedNodeGroup.ResourceName;
                 }
                 else
                 {
-                    group.ParentID = role.ReportsTo;
-                    group.ParentName = role.ReportsToRoleName;
+                    group.ParentID = selectedNodeGroup.ParentID;
+                    group.ParentName = selectedNodeGroup.ParentName;
+
+
                 }
+
+            
             }
             else
             {
-                group.ParentID = Globals.OpsChiefID;
+                group.ParentID = Globals.OpsChiefGenericID;
             }
             group.GroupType = "Division";
             OpenBrachDivForEdit(group);
@@ -393,7 +450,7 @@ namespace Wildfire_ICS_Assist
             if (treeOpsChart.SelectedNode != null)
             {
                 ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                if (role.ReportsTo == Globals.OpsChiefID || role.RoleID == Globals.OpsChiefID)
+                if (role.ReportsTo == Globals.OpsChiefGenericID || role.RoleID == Globals.OpsChiefGenericID)
                 {
                     group.ParentID = role.RoleID;
                     group.ParentName = role.RoleName;
@@ -406,7 +463,7 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
-                group.ParentID = Globals.OpsChiefID;
+                group.ParentID = Globals.OpsChiefGenericID;
             }
             group.GroupType = "Group";
             OpenBrachDivForEdit(group);
@@ -423,21 +480,21 @@ namespace Wildfire_ICS_Assist
             group.OpPeriod = Program.CurrentOpPeriod;
             if (treeOpsChart.SelectedNode != null)
             {
-                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                if (!role.IsTFST)
+                OperationalGroup selectedGroup = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
+                if (selectedGroup.IsBranchOrDiv)
                 {
-                    group.ParentID = role.RoleID;
-                    group.ParentName = role.RoleName;
+                    group.ParentID = selectedGroup.ID;
+                    group.ParentName = selectedGroup.ResourceName;
                 }
                 else
                 {
-                    group.ParentID = role.ReportsTo;
-                    group.ParentName = role.ReportsToRoleName;
+                    group.ParentID = selectedGroup.ParentID;
+                    group.ParentName = selectedGroup.ParentName;
                 }
             }
             else
             {
-                group.ParentID = Globals.OpsChiefID;
+                group.ParentID = Globals.OpsChiefGenericID;
             }
             group.GroupType = type;
 
@@ -482,11 +539,12 @@ namespace Wildfire_ICS_Assist
         {
             if (treeOpsChart.SelectedNode != null)
             {
-                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+                OperationalGroup SelectedOpGroup = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
+                ICSRole OpGroupLeaderRole = Program.CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == SelectedOpGroup.LeaderICSRoleID);
 
-                if (role.AllowDelete)
+                if (OpGroupLeaderRole != null && OpGroupLeaderRole.AllowDelete)
                 {
-                    List<ICSRole> reportingRoles = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == role.RoleID).ToList();
+                    List<ICSRole> reportingRoles = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == OpGroupLeaderRole.RoleID).ToList();
                     if (reportingRoles.Count > 0)
                     {
                         MessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
@@ -496,7 +554,9 @@ namespace Wildfire_ICS_Assist
                         DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                         if (dr == DialogResult.Yes)
                         {
-                            Program.incidentDataService.DeleteICSRole(role, Program.CurrentOpPeriod);
+                            Program.incidentDataService.DeleteICSRole(OpGroupLeaderRole, Program.CurrentOpPeriod);
+                            SelectedOpGroup.Active = false;
+                            Program.incidentDataService.UpsertOperationalGroup(SelectedOpGroup);
                         }
 
 
@@ -573,9 +633,9 @@ namespace Wildfire_ICS_Assist
 
 
                 List<ICSRole> roles = new List<ICSRole>();
-                foreach(ICSRole role in Program.CurrentOrgChart.ActiveRoles.Where(o=>o.IsOpGroupSup || o.RoleID == Globals.OpsChiefID))
+                foreach(ICSRole role in Program.CurrentOrgChart.ActiveRoles.Where(o=>o.IsOpGroupSup || o.RoleID == Globals.OpsChiefGenericID))
                 {
-                    if (role.RoleID == Globals.OpsChiefID) { roles.Add(role); }
+                    if (role.RoleID == Globals.OpsChiefGenericID) { roles.Add(role); }
                    else if (role.IsOpGroupSup) { roles.Add(role); }
                 }
                 List<OperationalGroup> groups = Program.CurrentIncident.ActiveOperationalGroups.Where(o=>o.OpPeriod == Program.CurrentOpPeriod).ToList();

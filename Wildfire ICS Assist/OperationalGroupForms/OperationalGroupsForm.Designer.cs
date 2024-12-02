@@ -40,8 +40,11 @@
             this.addTaskForceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addStrikeTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSingleResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.lblSelectedGroupLeader = new System.Windows.Forms.Label();
+            this.lblSelectedGroupName = new System.Windows.Forms.Label();
             this.operationalGroupReportingResourcesControl1 = new Wildfire_ICS_Assist.CustomControls.OperationalGroupReportingResourcesControl();
+            this.strikeTeamTaskForceDetailsControl1 = new Wildfire_ICS_Assist.CustomControls.StrikeTeamTaskForceDetailsControl();
             this.btnPrintLogistics = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnPrint204 = new System.Windows.Forms.Button();
@@ -67,6 +70,10 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.cmsSelectedItem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.cmsAddButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,8 +117,7 @@
             // 
             this.splitContainer2.Panel2.AutoScroll = true;
             this.splitContainer2.Panel2.AutoScrollMinSize = new System.Drawing.Size(425, 0);
-            this.splitContainer2.Panel2.Controls.Add(this.strikeTeamTaskForceDetailsControl1);
-            this.splitContainer2.Panel2.Controls.Add(this.operationalGroupReportingResourcesControl1);
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Size = new System.Drawing.Size(1057, 592);
             this.splitContainer2.SplitterDistance = 440;
             this.splitContainer2.TabIndex = 2;
@@ -188,29 +194,70 @@
             this.addSingleResourceToolStripMenuItem.Text = "Add Single Resource";
             this.addSingleResourceToolStripMenuItem.Click += new System.EventHandler(this.addSingleResourceToolStripMenuItem_Click);
             // 
-            // strikeTeamTaskForceDetailsControl1
+            // splitContainer3
             // 
-            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
-            this.strikeTeamTaskForceDetailsControl1.ChangesMade = false;
-            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(18, 236);
-            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
-            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(396, 330);
-            this.strikeTeamTaskForceDetailsControl1.TabIndex = 1;
-            this.strikeTeamTaskForceDetailsControl1.Visible = false;
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer3.IsSplitterFixed = true;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.lblSelectedGroupLeader);
+            this.splitContainer3.Panel1.Controls.Add(this.lblSelectedGroupName);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.operationalGroupReportingResourcesControl1);
+            this.splitContainer3.Panel2.Controls.Add(this.strikeTeamTaskForceDetailsControl1);
+            this.splitContainer3.Size = new System.Drawing.Size(613, 592);
+            this.splitContainer3.SplitterDistance = 68;
+            this.splitContainer3.TabIndex = 2;
+            // 
+            // lblSelectedGroupLeader
+            // 
+            this.lblSelectedGroupLeader.AutoSize = true;
+            this.lblSelectedGroupLeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedGroupLeader.Location = new System.Drawing.Point(39, 40);
+            this.lblSelectedGroupLeader.Name = "lblSelectedGroupLeader";
+            this.lblSelectedGroupLeader.Size = new System.Drawing.Size(278, 29);
+            this.lblSelectedGroupLeader.TabIndex = 1;
+            this.lblSelectedGroupLeader.Text = "lblSelectedGroupLeader";
+            // 
+            // lblSelectedGroupName
+            // 
+            this.lblSelectedGroupName.AutoSize = true;
+            this.lblSelectedGroupName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedGroupName.Location = new System.Drawing.Point(3, 9);
+            this.lblSelectedGroupName.Name = "lblSelectedGroupName";
+            this.lblSelectedGroupName.Size = new System.Drawing.Size(314, 31);
+            this.lblSelectedGroupName.TabIndex = 0;
+            this.lblSelectedGroupName.Text = "lblSelectedGroupName";
             // 
             // operationalGroupReportingResourcesControl1
             // 
             this.operationalGroupReportingResourcesControl1.BackColor = System.Drawing.Color.Transparent;
             this.operationalGroupReportingResourcesControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operationalGroupReportingResourcesControl1.Location = new System.Drawing.Point(31, 15);
+            this.operationalGroupReportingResourcesControl1.Location = new System.Drawing.Point(309, 33);
             this.operationalGroupReportingResourcesControl1.Margin = new System.Windows.Forms.Padding(6);
             this.operationalGroupReportingResourcesControl1.Name = "operationalGroupReportingResourcesControl1";
-            this.operationalGroupReportingResourcesControl1.role = null;
             this.operationalGroupReportingResourcesControl1.Size = new System.Drawing.Size(558, 209);
             this.operationalGroupReportingResourcesControl1.TabIndex = 0;
             this.operationalGroupReportingResourcesControl1.Visible = false;
+            // 
+            // strikeTeamTaskForceDetailsControl1
+            // 
+            this.strikeTeamTaskForceDetailsControl1.BackColor = System.Drawing.Color.Transparent;
+            this.strikeTeamTaskForceDetailsControl1.ChangesMade = false;
+            this.strikeTeamTaskForceDetailsControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(0, 6);
+            this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
+            this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(396, 330);
+            this.strikeTeamTaskForceDetailsControl1.TabIndex = 1;
+            this.strikeTeamTaskForceDetailsControl1.Visible = false;
             // 
             // btnPrintLogistics
             // 
@@ -378,10 +425,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 669);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "OperationalGroupsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Assignments List";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OperationalGroupsForm_FormClosing);
             this.Load += new System.EventHandler(this.OperationalGroupsForm_Load);
@@ -394,6 +438,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.cmsSelectedItem.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.cmsAddButton.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -430,5 +479,8 @@
         private System.Windows.Forms.ToolStripMenuItem addSingleResourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printLogisticsOverviewToolStripMenuItem;
         private System.Windows.Forms.Button btnPrintLogistics;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.Label lblSelectedGroupLeader;
+        private System.Windows.Forms.Label lblSelectedGroupName;
     }
 }

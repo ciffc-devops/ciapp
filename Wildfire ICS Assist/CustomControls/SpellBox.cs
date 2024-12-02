@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +30,7 @@ class SpellBox : ElementHost
         box.TextChanged += new System.Windows.Controls.TextChangedEventHandler(SpellBox_TextChanged);
         box.KeyUp += new KeyEventHandler(WPF_KeyUp);
         box.LostFocus += Box_LostFocus;
-
+        //box.Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Globalization.CultureInfo.CurrentCulture.IetfLanguageTag);
         this.Size = new System.Drawing.Size(100, 20);
 
 
@@ -74,6 +75,7 @@ class SpellBox : ElementHost
         }
         return IntPtr.Zero;
     }
+
 
 
     private void OnNewKeyUp(object sender, KeyEventArgs e)
@@ -140,7 +142,21 @@ class SpellBox : ElementHost
 
         }
     }
-  
+    /*
+    public CultureInfo Language
+    {
+        get { return new CultureInfo(box.Language.IetfLanguageTag); }
+        set
+        {
+            var lang = System.Windows.Markup.XmlLanguage.GetLanguage(value.IetfLanguageTag);
+            FrameworkContentElement.LanguageProperty.OverrideMetadata(
+  typeof(System.Windows.Documents.TextElement),
+  new FrameworkPropertyMetadata(lang)
+);
+
+        }
+    }*/
+
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public new System.Windows.UIElement Child
     {

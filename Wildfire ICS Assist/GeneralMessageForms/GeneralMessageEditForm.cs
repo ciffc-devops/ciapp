@@ -67,7 +67,7 @@ namespace Wildfire_ICS_Assist
             List<ICSRole> roles = CurrentOrgChart.Clone().ActiveRoles;
             ICSRole blank = new ICSRole();
             blank.RoleID = Guid.Empty;
-            blank.RoleName = "-None-";
+            blank.BaseRoleName = "-None-";
             roles.Insert(0, blank);
             cbo.DataSource = roles;
             cbo.DisplayMember = "RoleNameWithIndividualAndDepth";

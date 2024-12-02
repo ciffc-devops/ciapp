@@ -15,12 +15,12 @@ namespace WF_ICS_ClassLibrary.Models
     {
 
         [ProtoMember(2)] private string _Name;
-        [ProtoMember(3)] private Guid _ParentID;
+        [ProtoMember(3)] private Guid _ParentID; //Refers to the ID of the operational group this reports to
         [ProtoMember(4)] private string _ParentName;
         [ProtoMember(5)] private string _GroupType; //could be: Branch, Division, Task Force, Strike Team, Group, Single Resource    
         [ProtoMember(7)] private Guid _LeaderICSRoleID;
         [ProtoMember(8)] private string _LeaderICSRoleName;
-        [ProtoMember(9)] private Guid _LeaderID;
+        [ProtoMember(9)] private Guid _LeaderID; //Individual ID
 
 
         [ProtoMember(13)] private string _PreparedByName;
@@ -61,6 +61,17 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return Name; }
             }
         }
+        public string ResourceNameWithDepth
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int x = 0; x < Depth - 1; x++) { sb.Append(" .. "); }
+                sb.Append(ResourceName);
+                return sb.ToString();
+            }
+        }
+
 
         public Guid ParentID { get => _ParentID; set => _ParentID = value; }
         public string ParentName { get => _ParentName; set => _ParentName = value; }

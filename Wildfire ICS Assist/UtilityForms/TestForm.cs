@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -115,8 +116,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         if (!string.IsNullOrEmpty(testCheckInPersonnel.Record.InitialRoleAcronym)
-                            && Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.Mnemonic)
-                            && o.Mnemonic.Equals(testCheckInPersonnel.Record.InitialRoleAcronym)))
+                            && Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.MnemonicAbrv)
+                            && o.MnemonicAbrv.Equals(testCheckInPersonnel.Record.InitialRoleAcronym)))
                         {
                             ICSRole role = Program.CurrentOrgChart.ActiveRoles.OrderBy(o => Guid.NewGuid()).Where(o => o.IndividualID == Guid.Empty).First();
                             testCheckInPersonnel.Record.InitialRoleName = role.RoleName;
@@ -126,6 +127,11 @@ namespace Wildfire_ICS_Assist.UtilityForms
                             role.IndividualID = p.ID;
                             role.IndividualName = p.Name;
                             //role.teamMember = p.Clone();
+                            if(role.GenericRoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirectorGenericID)
+                            {
+                                ;
+                            }
+
                             Program.incidentDataService.UpsertICSRole(role);
                         }
 
@@ -205,7 +211,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Crew"); log.Append(Environment.NewLine);
-                        Program.incidentDataService.UpsertOperationalSubGroup(testCheckin.Resource as Crew);
+                        Program.incidentDataService.UpsertCrew(testCheckin.Resource as Crew);
                         Program.incidentDataService.UpsertCheckInRecord(testCheckin.Record);
                         log.Append("Saved Check in for Crew"); log.Append(Environment.NewLine);
 
@@ -259,7 +265,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Crew"); log.Append(Environment.NewLine);
-                        Program.incidentDataService.UpsertOperationalSubGroup(testCheckin.Resource as Crew);
+                        Program.incidentDataService.UpsertCrew(testCheckin.Resource as Crew);
                         Program.incidentDataService.UpsertCheckInRecord(testCheckin.Record);
                         log.Append("Saved Check in for Crew"); log.Append(Environment.NewLine);
 

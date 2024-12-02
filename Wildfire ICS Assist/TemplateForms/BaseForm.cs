@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,15 @@ namespace Wildfire_ICS_Assist
 
         }
 
-
+        public void applyResources(ComponentResourceManager resources, Control.ControlCollection ctls)
+        {
+            foreach (Control ctl in ctls)
+            {
+                resources.ApplyResources(ctl, ctl.Name);
+                //if (ctl.GetType() == typeof(SpellBox))                {                    ((SpellBox)ctl).Language = CultureInfo.CurrentCulture;                }
+                applyResources(resources, ctl.Controls);
+            }
+        }
         public void SetControlColors(System.Windows.Forms.Control.ControlCollection controls)
         {
             IterateControls(controls, control =>

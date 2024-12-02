@@ -463,7 +463,7 @@ namespace WildfireICSDesktopServices
                     return _options.PositionFormat;
                 case "DefaultICSRole":
                     if (_options.DefaultICSRole != null) { return _options.DefaultICSRole; }
-                    else { return OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID); }
+                    else { return new ICSRole(OrganizationalChartTools.GetGenericRoleByID(Globals.IncidentCommanderGenericID)); }
                 case "DefaultPort":
                     return _options.DefaultPortNumber;
                 case "DefaultSaveLocation":

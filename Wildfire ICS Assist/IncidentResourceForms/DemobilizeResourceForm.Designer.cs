@@ -58,8 +58,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(470, 747);
-            this.splitContainer1.SplitterDistance = 680;
+            this.splitContainer1.Size = new System.Drawing.Size(981, 497);
+            this.splitContainer1.SplitterDistance = 430;
             this.splitContainer1.TabIndex = 0;
             // 
             // btnPrintDemob
@@ -67,7 +67,7 @@
             this.btnPrintDemob.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnPrintDemob.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.btnPrintDemob.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrintDemob.Location = new System.Drawing.Point(108, 15);
+            this.btnPrintDemob.Location = new System.Drawing.Point(363, 15);
             this.btnPrintDemob.Margin = new System.Windows.Forms.Padding(6);
             this.btnPrintDemob.Name = "btnPrintDemob";
             this.btnPrintDemob.Size = new System.Drawing.Size(260, 51);
@@ -83,18 +83,17 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.demobilizationEditControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.demobilizationEditControl1.Location = new System.Drawing.Point(0, 78);
+            this.demobilizationEditControl1.Location = new System.Drawing.Point(0, 67);
             this.demobilizationEditControl1.Margin = new System.Windows.Forms.Padding(6);
-            this.demobilizationEditControl1.MinimumSize = new System.Drawing.Size(476, 558);
             this.demobilizationEditControl1.Name = "demobilizationEditControl1";
-            this.demobilizationEditControl1.Size = new System.Drawing.Size(476, 596);
+            this.demobilizationEditControl1.Size = new System.Drawing.Size(987, 361);
             this.demobilizationEditControl1.TabIndex = 0;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(333, 6);
+            this.btnSave.Location = new System.Drawing.Point(844, 6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 51);
             this.btnSave.TabIndex = 24;
@@ -122,16 +121,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
-            this.ClientSize = new System.Drawing.Size(470, 747);
+            this.ClientSize = new System.Drawing.Size(981, 497);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(486, 693);
             this.Name = "DemobilizeResourceForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Demobilize Resource";
             this.Load += new System.EventHandler(this.DemobilizeResourceForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

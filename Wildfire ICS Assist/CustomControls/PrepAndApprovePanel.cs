@@ -164,7 +164,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 Guid currentApproveByID = Guid.Empty; if (cboApproveBy.SelectedItem != null) { currentApproveByID = ((ICSRole)cboApproveBy.SelectedItem).ID; }
 
                 List<ICSRole> prepRoles = new List<ICSRole>(Program.CurrentOrgChart.ActiveRoles);
-                ICSRole blank = new ICSRole(); blank.RoleName = string.Empty; blank.RoleID = Guid.Empty; prepRoles.Insert(0, blank);
+                ICSRole blank = new ICSRole(); blank.BaseRoleName = string.Empty; blank.RoleID = Guid.Empty; prepRoles.Insert(0, blank);
 
                 List<ICSRole> approveRoles = new List<ICSRole>(Program.CurrentOrgChart.ActiveRoles);
                 approveRoles.Insert(0, blank);

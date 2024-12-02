@@ -54,7 +54,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.MedivacAircraftText = "Medivac Test" + seed;
             test.notam = CreateNOTAMTest(seed);
             //test.aircrafts.Add(CreateAircraftTest(seed));
-            test.PreparedByRoleID = Globals.PlanningChiefID;
+            test.PreparedByRoleID = Globals.PlanningChiefGenericID;
             test.PreparedByResourceName = "Name" + seed;
             return test;
         }
@@ -128,9 +128,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
             test.EmergencyProcedures = "EmergencyProcedures" + seed;
             test.PreparedByRoleName = "Operations Section Chief";
-            test.PreparedByRoleID = Globals.OpsChiefID;
+            test.PreparedByRoleID = Globals.OpsChiefGenericID;
             test.PreparedByResourceName = "Tim " + seed;
-            test.ApprovedByRoleID = Globals.IncidentCommanderID;
+            test.ApprovedByRoleID = Globals.IncidentCommanderGenericID;
             test.OpPeriod = seed;
             return test;
         }
@@ -151,7 +151,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static PositionLogEntry createTestPositionLogEntry(int seed)
         {
             PositionLogEntry test = new PositionLogEntry();
-            test.Role = OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID);
+            test.Role = new ICSRole(OrganizationalChartTools.GetGenericRoleByID(Globals.IncidentCommanderGenericID));
             test.DateCreated = DateTime.Now;
             test.DateUpdated = DateTime.Now.AddHours(seed);
             test.IsComplete = RandomBooleanGenerator.GetRandomBoolean();
@@ -171,7 +171,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.SitePlanLocation = "Location" + seed;
             test.ApprovedByResourceName = "Tim " + seed;
             test.ApprovedByRoleName = "Planning Section Chief";
-            test.ApprovedByRoleID = Globals.PlanningChiefID;
+            test.ApprovedByRoleID = Globals.PlanningChiefGenericID;
             test.SummaryLine = "Hazard " + seed;
             return test;
         }
@@ -296,9 +296,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.LastDayOfRest = DateTime.Now.AddDays(-1);
 
             
-            List<ICSRole> roles = OrgChartTools.GetBlankPrimaryRoles().OrderBy(o=>Guid.NewGuid()).ToList();
+            List<ICSRole> roles = OrganizationalChartTools.GetBlankPrimaryRoles().OrderBy(o=>Guid.NewGuid()).ToList();
             test.InitialRoleName = roles.First().RoleName;
-            test.InitialRoleAcronym = roles.First().Mnemonic;
+            test.InitialRoleAcronym = roles.First().MnemonicAbrv;
             int rnd = random.Next(4);
             test.ReplacementRequired = rnd < 3;
              test.DateReplacementRequired = test.LastDayOnIncident.AddDays(-1); 
@@ -459,8 +459,8 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.Reply = StringExt.LoremIpsum(5, 100, 5, 10, 2);
             test.Active = true;
             test.ReplyDate = DateTime.Now.AddHours(seed * 2);
-            test.FromRoleID = Globals.OpsChiefID;
-            test.ApprovedByRoleID = Globals.UnifiedCommand1ID;
+            test.FromRoleID = Globals.OpsChiefGenericID;
+            test.ApprovedByRoleID = Globals.UnifiedCommand1GenericID;
 
             return test;
         }

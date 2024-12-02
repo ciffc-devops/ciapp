@@ -78,8 +78,8 @@ namespace Wildfire_ICS_Assist
 
             WireWFIncidentServiceEvents();
 
-            ICSRole defaultRole = (ICSRole)Program.generalOptionsService.GetOptionsValue("DefaultICSRole");
-            if (defaultRole != null && defaultRole.RoleID != Guid.Empty) { cboICSRole.SelectedValue = defaultRole.RoleID; }
+            //ICSRole defaultRole = (ICSRole)Program.generalOptionsService.GetOptionsValue("DefaultICSRole");
+            //if (defaultRole != null && defaultRole.RoleID != Guid.Empty) { cboICSRole.SelectedValue = defaultRole.RoleID; }
 
             Program.networkService.CurrentIncidentID = Program.CurrentIncident.ID;
             //Default status for networking
@@ -228,7 +228,7 @@ namespace Wildfire_ICS_Assist
         OperationalGroupsForm _operationalGroupsForm = null;
         PositionLogReminderForm _positionLogReminderForm = null;
         CheckedInResourcesForm _checkedInresourcesForm = null;
-        CloseOpPeriodForm _closeOpPeriodForm = null;
+        OperationalPeriodReviewForm _opReviewForm = null;
         ResourceReplacementPlanningForm _resourceReplacementPlanningForm = null;
         IncidentStatusSummaryForm _incidentStatusSummaryForm = null;
         NewsListForm _newsListForm = null;
@@ -698,7 +698,8 @@ namespace Wildfire_ICS_Assist
             txtTaskNumber.Text = CurrentIncident.TaskNumber;
             if (CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == Program.CurrentRole.RoleID))
             {
-                cboICSRole.SelectedValue = Program.CurrentRole.RoleID; DisplayCurrentICSRole();
+                cboICSRole.SelectedValue = Program.CurrentRole.RoleID; 
+                DisplayCurrentICSRole();
             }
             else { cboICSRole.SelectedIndex = 0; }
 
@@ -724,12 +725,12 @@ namespace Wildfire_ICS_Assist
             if (Program.CurrentRole != null)
             {
                 List<Guid> ChiefIDs = new List<Guid>();
-                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID); ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
+                ChiefIDs.Add(Globals.OpsChiefGenericID); ChiefIDs.Add(Globals.PlanningChiefGenericID); ChiefIDs.Add(Globals.LogisticsChiefGenericID); ChiefIDs.Add(Globals.FinanceChiefGenericID); ChiefIDs.Add(Globals.DeputyIncidentCommanderGenericID);
                 List<Guid> ICRoles = new List<Guid>();
-                ICRoles.Add(Globals.IncidentCommanderID); ICRoles.Add(Globals.DeputyIncidentCommanderID); ICRoles.Add(Globals.UnifiedCommand1ID); ICRoles.Add(Globals.UnifiedCommand2ID); ICRoles.Add(Globals.UnifiedCommand3ID);
+                ICRoles.Add(Globals.IncidentCommanderGenericID); ICRoles.Add(Globals.DeputyIncidentCommanderGenericID); ICRoles.Add(Globals.UnifiedCommand1GenericID); ICRoles.Add(Globals.UnifiedCommand2GenericID); ICRoles.Add(Globals.UnifiedCommand3GenericID);
 
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))
+                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderGenericID && !ChiefIDs.Contains(o.RoleID)))
                 {
                     CommandStaffRoles.Add(role.RoleID);
                 }
@@ -745,12 +746,12 @@ namespace Wildfire_ICS_Assist
                 {
                     pnlTaskInfo.BackColor = Color.IndianRed;
                 }
-                else if (Program.CurrentRole.SectionID == Globals.OpsChiefID)
+                else if (Program.CurrentRole.SectionID == Globals.OpsChiefGenericID)
                 {
                     pnlTaskInfo.BackColor = Color.Orange;
                     //resizeGroup("Ops", false, true);
                 }
-                else if (Program.CurrentRole.SectionID == Globals.PlanningChiefID)
+                else if (Program.CurrentRole.SectionID == Globals.PlanningChiefGenericID)
                 {
                     pnlTaskInfo.BackColor = Color.CornflowerBlue;
                     /*
@@ -761,7 +762,7 @@ namespace Wildfire_ICS_Assist
                                         resizeGroup("Planning", false, true);*/
 
                 }
-                else if (Program.CurrentRole.SectionID == Globals.LogisticsChiefID)
+                else if (Program.CurrentRole.SectionID == Globals.LogisticsChiefGenericID)
                 {
                     pnlTaskInfo.BackColor = Color.Khaki;
                     /*
@@ -772,7 +773,7 @@ namespace Wildfire_ICS_Assist
                     resizeGroup("Logistics", false, true);
                     */
                 }
-                else if (Program.CurrentRole.SectionID == Globals.FinanceChiefID)
+                else if (Program.CurrentRole.SectionID == Globals.FinanceChiefGenericID)
                 {
                     pnlTaskInfo.BackColor = Color.LightGray;
                 }
@@ -814,7 +815,7 @@ namespace Wildfire_ICS_Assist
             TriggerAutoSave();
 
         }
-        private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        private void Program_OperationalSubGroupChanged(CrewEventArgs e)
         {
             if (e.item.OpPeriod == Program.CurrentOpPeriod) { setButtonCheckboxes(); }
             TriggerAutoSave();
@@ -1026,6 +1027,8 @@ namespace Wildfire_ICS_Assist
 
             CurrentIncident.createOrgChartAsNeeded(period.PeriodNumber);
 
+            Program.CurrentRole = CurrentIncident.allOrgCharts.First().ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Program.CurrentRole.GenericRoleID);
+            if(Program.CurrentRole == null) { Program.CurrentRole = CurrentIncident.allOrgCharts.First().ActiveRoles.FirstOrDefault(); }
 
             if (Program.generalOptionsService.GetGuidOptionValue("OrganizationID") != Guid.Empty) { CurrentIncident.OrganizationID = Program.generalOptionsService.GetGuidOptionValue("OrganizationID"); }
           //  CurrentIncident.ICPCallSign = txtICPCallsign.Text;
@@ -2908,25 +2911,25 @@ namespace Wildfire_ICS_Assist
         }
 
 
-        private void OpenCloseOpPeriodForm()
+        private void OpenReviewOpPeriodForm()
         {
             if (initialDetailsSet())
             {
-                if (_closeOpPeriodForm == null)
+                if (_opReviewForm == null)
                 {
-                    _closeOpPeriodForm = new CloseOpPeriodForm();
-                    _closeOpPeriodForm.FormClosed += new FormClosedEventHandler(CloseOpPeriodForm_Closed);
-                    ActiveForms.Add(_closeOpPeriodForm);
-                    _closeOpPeriodForm.Show(this);
+                    _opReviewForm = new OperationalPeriodReviewForm();
+                    _opReviewForm.FormClosed += new FormClosedEventHandler(CloseOpPeriodForm_Closed);
+                    ActiveForms.Add(_opReviewForm);
+                    _opReviewForm.Show(this);
                 }
 
-                _closeOpPeriodForm.BringToFront();
+                _opReviewForm.BringToFront();
             }
         }
         void CloseOpPeriodForm_Closed(object sender, FormClosedEventArgs e)
         {
-            RemoveActiveForm(_closeOpPeriodForm);
-            _closeOpPeriodForm = null;
+            RemoveActiveForm(_opReviewForm);
+            _opReviewForm = null;
 
 
         }
@@ -2981,7 +2984,7 @@ namespace Wildfire_ICS_Assist
                             break;
                         case "Crew":
                             Crew group = resource as Crew;
-                            Program.incidentDataService.UpsertOperationalSubGroup(group);
+                            Program.incidentDataService.UpsertCrew(group);
                             foreach(IncidentResource subres in signInForm.SubResources)
                             {
                                 if(subres.GetType().Name.Equals("Personnel"))
@@ -3149,7 +3152,7 @@ namespace Wildfire_ICS_Assist
         private void btnCloseOpPeriod_Click(object sender, EventArgs e)
         {
             
-                OpenCloseOpPeriodForm();
+                OpenReviewOpPeriodForm();
             
         }
 
@@ -3319,7 +3322,7 @@ namespace Wildfire_ICS_Assist
 
                 }*/
                 Program.CurrentOpPeriod = newOpNumber;
-                Program.incidentDataService.OnOpPeriodChanged(args);
+                Program.incidentDataService.OnCurrentOpPeriodChanged(args);
 
             }
         }
@@ -3358,7 +3361,7 @@ namespace Wildfire_ICS_Assist
                         args.NewOpPeriod = createForm.operationalPeriod.PeriodNumber;
 
                         Program.CurrentOpPeriod = createForm.operationalPeriod.PeriodNumber;
-                        Program.incidentDataService.OnOpPeriodChanged(args);
+                        Program.incidentDataService.OnCurrentOpPeriodChanged(args);
                     }
                 }
             }
@@ -3366,7 +3369,13 @@ namespace Wildfire_ICS_Assist
 
         private void btnEditOpPeriod_Click(object sender, EventArgs e)
         {
+            using (CreateOperationalPeriodForm createForm = new CreateOperationalPeriodForm())
+            {
+                
+                createForm.operationalPeriod = Program.CurrentOpPeriodDetails;
 
+                createForm.ShowDialog();
+            }
         }
 
         private void btnMoveToOpNow_Click(object sender, EventArgs e)
@@ -3377,7 +3386,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnReviewOpPeriod_Click(object sender, EventArgs e)
         {
-            OpenCloseOpPeriodForm();
+            OpenReviewOpPeriodForm();
         }
 
         private void viewLogFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3471,6 +3480,31 @@ namespace Wildfire_ICS_Assist
             });
         }
 
+        #endregion
+
+
+        #region Language Switcher
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CultureInfo newCulture = new CultureInfo("en-CA"); // Spanish culture
+            Thread.CurrentThread.CurrentCulture = newCulture;
+            Thread.CurrentThread.CurrentUICulture = newCulture;
+            ComponentResourceManager resources = new ComponentResourceManager(this.GetType());
+            resources.ApplyResources(this, "$this");
+            applyResources(resources, this.Controls);
+            setButtonCheckboxes();
+        }
+
+        private void frenchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CultureInfo newCulture = new CultureInfo("fr-FR"); // Spanish culture
+            Thread.CurrentThread.CurrentCulture = newCulture;
+            Thread.CurrentThread.CurrentUICulture = newCulture;
+            ComponentResourceManager resources = new ComponentResourceManager(this.GetType());
+            resources.ApplyResources(this, "$this");
+            applyResources(resources, this.Controls);
+            setButtonCheckboxes();
+        }
         #endregion
 
     }

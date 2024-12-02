@@ -213,7 +213,7 @@ namespace Wildfire_ICS_Assist
                 if (Program.CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
                 {
                     OrganizationChart currentChart = Program.CurrentIncident.allOrgCharts.First(o => o.OpPeriod == Program.CurrentOpPeriod);
-                    ICSRole prepBy = currentChart.GetRoleByID(Globals.LogisticsChiefID, true);
+                    ICSRole prepBy = currentChart.GetRoleByID(Globals.LogisticsChiefGenericID, true);
                     if (prepBy != null)
                     {
                         plan.PreparedByResourceName = prepBy.IndividualName; plan.PreparedByRoleName = prepBy.RoleName;

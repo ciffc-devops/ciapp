@@ -47,6 +47,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,6 +56,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // cboType
@@ -67,7 +69,7 @@
             "Strike Team",
             "Task Force",
             "Group",
-            "SIngle Resource"});
+            "Single Resource"});
             this.cboType.Location = new System.Drawing.Point(136, 10);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(267, 32);
@@ -90,6 +92,7 @@
             this.txtIdentifier.Name = "txtIdentifier";
             this.txtIdentifier.Size = new System.Drawing.Size(267, 29);
             this.txtIdentifier.TabIndex = 2;
+            this.txtIdentifier.TextChanged += new System.EventHandler(this.txtIdentifier_TextChanged);
             // 
             // label2
             // 
@@ -119,7 +122,7 @@
             this.cboSupervisor.FormattingEnabled = true;
             this.cboSupervisor.Location = new System.Drawing.Point(620, 46);
             this.cboSupervisor.Name = "cboSupervisor";
-            this.cboSupervisor.Size = new System.Drawing.Size(414, 32);
+            this.cboSupervisor.Size = new System.Drawing.Size(398, 32);
             this.cboSupervisor.TabIndex = 5;
             this.toolTip1.SetToolTip(this.cboSupervisor, "Use the Check-In feature to add additional personnel");
             this.cboSupervisor.ValueMember = "PersonID";
@@ -139,14 +142,14 @@
             this.cboReportsTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboReportsTo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboReportsTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboReportsTo.DisplayMember = "RoleNameForDropdown";
+            this.cboReportsTo.DisplayMember = "ResourceName";
             this.cboReportsTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboReportsTo.FormattingEnabled = true;
             this.cboReportsTo.Location = new System.Drawing.Point(620, 8);
             this.cboReportsTo.Name = "cboReportsTo";
-            this.cboReportsTo.Size = new System.Drawing.Size(414, 32);
+            this.cboReportsTo.Size = new System.Drawing.Size(398, 32);
             this.cboReportsTo.TabIndex = 4;
-            this.cboReportsTo.ValueMember = "RoleID";
+            this.cboReportsTo.ValueMember = "ID";
             this.cboReportsTo.Leave += new System.EventHandler(this.cboReportsTo_Leave);
             // 
             // label5
@@ -247,6 +250,7 @@
             this.strikeTeamTaskForceDetailsControl1.Location = new System.Drawing.Point(0, 0);
             this.strikeTeamTaskForceDetailsControl1.Margin = new System.Windows.Forms.Padding(6);
             this.strikeTeamTaskForceDetailsControl1.Name = "strikeTeamTaskForceDetailsControl1";
+            this.strikeTeamTaskForceDetailsControl1.SelectedOpGroup = null;
             this.strikeTeamTaskForceDetailsControl1.Size = new System.Drawing.Size(1046, 390);
             this.strikeTeamTaskForceDetailsControl1.TabIndex = 7;
             // 
@@ -277,17 +281,18 @@
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // OperationalGroupSTTFEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1046, 650);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(1043, 537);
             this.Name = "OperationalGroupSTTFEditForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Strike Team / Task Force / Group";
             this.Load += new System.EventHandler(this.OperationalGroupSTTFEditForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -299,6 +304,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -322,5 +328,6 @@
         private System.Windows.Forms.TextBox txtContact;
         private System.Windows.Forms.Label label6;
         private CustomControls.StrikeTeamTaskForceDetailsControl strikeTeamTaskForceDetailsControl1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

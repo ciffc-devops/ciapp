@@ -30,7 +30,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void LoadICSRoles()
         {
-            List<ICSRole> roles = OrgChartTools.GetBlankPrimaryRoles();
+            List<ICSRole> roles = OrganizationalChartTools.GetBlankPrimaryRoles();
             cboDefaultICSRole.DataSource = roles;
             cboDefaultICSRole.DisplayMember = "RoleNameForDropdown";
             cboDefaultICSRole.ValueMember = "RoleID";

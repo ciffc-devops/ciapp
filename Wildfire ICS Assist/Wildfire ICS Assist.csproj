@@ -305,11 +305,41 @@
     <Compile Include="NewsForms\NewsViewForm.Designer.cs">
       <DependentUpon>NewsViewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperationalGroupForms\OperationalGroupAddExistingResoruce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupForms\OperationalGroupAddExistingResoruce.Designer.cs">
+      <DependentUpon>OperationalGroupAddExistingResoruce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupForms\OperationalGroupBranchEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupForms\OperationalGroupBranchEditForm.Designer.cs">
+      <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupForms\OperationalGroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupForms\OperationalGroupsForm.Designer.cs">
+      <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalGroupForms\OperationalGroupSTTFEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalGroupForms\OperationalGroupSTTFEditForm.Designer.cs">
+      <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperationalPeriodForms\CreateOperationalPeriodForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OperationalPeriodForms\CreateOperationalPeriodForm.Designer.cs">
       <DependentUpon>CreateOperationalPeriodForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalPeriodForms\OperationalPeriodReviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationalPeriodForms\OperationalPeriodReviewForm.Designer.cs">
+      <DependentUpon>OperationalPeriodReviewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SafetyMessageForms\CreateNewSafetyMessageForm.cs">
       <SubType>Form</SubType>
@@ -342,12 +372,6 @@
       <DependentUpon>CheckInInfoEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\GeneralTools.cs" />
-    <Compile Include="OperationalPeriodForms\CloseOpPeriodForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperationalPeriodForms\CloseOpPeriodForm.Designer.cs">
-      <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ContactsForms\CommunicationsListEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -564,30 +588,6 @@
     </Compile>
     <Compile Include="MedicalPlanForms\MedicalPlanMedivacEntryForm.Designer.cs">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperationalGroupAddExistingResoruce.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperationalGroupAddExistingResoruce.Designer.cs">
-      <DependentUpon>OperationalGroupAddExistingResoruce.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperationalGroupBranchEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperationalGroupBranchEditForm.Designer.cs">
-      <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperationalGroupsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperationalGroupsForm.Designer.cs">
-      <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperationalGroupSTTFEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperationalGroupSTTFEditForm.Designer.cs">
-      <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionsForms\EditVisitorForm.cs">
       <SubType>Form</SubType>
@@ -944,6 +944,9 @@
     <EmbeddedResource Include="CustomControls\PrepAndApprovePanel.resx">
       <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IncidentDetailsForm.fr-FR.resx">
+      <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.resx">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -953,8 +956,26 @@
     <EmbeddedResource Include="NewsForms\NewsViewForm.resx">
       <DependentUpon>NewsViewForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupForms\OperationalGroupAddExistingResoruce.resx">
+      <DependentUpon>OperationalGroupAddExistingResoruce.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupForms\OperationalGroupBranchEditForm.resx">
+      <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupForms\OperationalGroupsForm.resx">
+      <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalGroupForms\OperationalGroupSTTFEditForm.resx">
+      <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalPeriodForms\CreateOperationalPeriodForm.fr.resx">
+      <DependentUpon>CreateOperationalPeriodForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperationalPeriodForms\CreateOperationalPeriodForm.resx">
       <DependentUpon>CreateOperationalPeriodForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalPeriodForms\OperationalPeriodReviewForm.resx">
+      <DependentUpon>OperationalPeriodReviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SafetyMessageForms\CreateNewSafetyMessageForm.resx">
       <DependentUpon>CreateNewSafetyMessageForm.cs</DependentUpon>
@@ -970,9 +991,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentResourceForms\CheckInInfoEditForm.resx">
       <DependentUpon>CheckInInfoEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperationalPeriodForms\CloseOpPeriodForm.resx">
-      <DependentUpon>CloseOpPeriodForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContactsForms\CommunicationsListEntryForm.resx">
       <DependentUpon>CommunicationsListEntryForm.cs</DependentUpon>
@@ -1085,19 +1103,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MedicalPlanForms\MedicalPlanMedivacEntryForm.resx">
       <DependentUpon>MedicalPlanMedivacEntryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperationalGroupAddExistingResoruce.resx">
-      <DependentUpon>OperationalGroupAddExistingResoruce.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperationalGroupBranchEditForm.resx">
-      <DependentUpon>OperationalGroupBranchEditForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperationalGroupsForm.resx">
-      <DependentUpon>OperationalGroupsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperationalGroupSTTFEditForm.resx">
-      <DependentUpon>OperationalGroupSTTFEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForms\EditVisitorForm.resx">
       <DependentUpon>EditVisitorForm.cs</DependentUpon>

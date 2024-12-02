@@ -25,7 +25,7 @@ namespace Wildfire_ICS_Assist
             InitializeComponent();
         }
 
-        private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        private void Program_OperationalSubGroupChanged(CrewEventArgs e)
         {
             if(e.item.OperationalGroupID == SelectedGroup.ID)
             {
@@ -61,33 +61,27 @@ namespace Wildfire_ICS_Assist
 
         private void PopulateReportingResources()
         {
-            ICSRole role = new ICSRole();
-            if(Program.CurrentOrgChart.ActiveRoles.Any(o=>o.RoleID == SelectedGroup.LeaderICSRoleID))
-            {
-                role = Program.CurrentOrgChart.ActiveRoles.First(o => o.RoleID == SelectedGroup.LeaderICSRoleID);
-                strikeTeamTaskForceDetailsControl1.SetRole(role);
-            }
-            
-            
+            strikeTeamTaskForceDetailsControl1.SetSelectedGroup(SelectedGroup);
+
+
         }
 
         private void PopulateReportsTo()
         {
-            List<ICSRole> OpsRoles = new List<ICSRole>();
-
-            OpsRoles.Clear();
-
-            OpsRoles.Add(Program.CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == WF_ICS_ClassLibrary.Globals.OpsChiefID && o.IsOpGroupSup));
-            OpsRoles.AddRange(Program.CurrentOrgChart.GetChildRoles(Globals.OpsChiefID, true, true));
-            OpsRoles = OpsRoles.Where(o=>o.IsOpGroupSup && !o.IsTFST).ToList();
-            cboReportsTo.DataSource = OpsRoles;
-            cboReportsTo.DisplayMember = "RoleNameForDropdown";
-            cboReportsTo.ValueMember = "RoleID";
+            List<OperationalGroup> OpGroups = new List<OperationalGroup>(Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.OpPeriod == Program.CurrentOpPeriod));
+            OpGroups = OpGroups.Where(o=>o.GroupType != "Task Force" && o.GroupType != "Strike Team").ToList();
+            cboReportsTo.DataSource = OpGroups;
+            cboReportsTo.ValueMember = "ID";
+            cboReportsTo.DisplayMember = "ResourceNameWithDepth";
         }
 
         private void PopulateLeader()
         {
-            List<Personnel> members = Program.CurrentIncident.IncidentPersonnel.OrderBy(o => o.Name).ToList();
+List<string> LeaderRoleAcronyms = new List<string> { "STLD", "TFLD", "DIVS" };
+            List<Personnel> members = Program.CurrentIncident.IncidentPersonnel.OrderByDescending(o=>LeaderRoleAcronyms.Contains(o.InitialRoleAcronym)).ThenBy(o => o.Name).ToList();
+
+
+
             Personnel blank = new Personnel(); blank.PersonID = Guid.Empty; members.Insert(0, blank);
 
             List<Personnel> mems = new List<Personnel>();
@@ -100,6 +94,15 @@ namespace Wildfire_ICS_Assist
         private void cboReportsTo_Leave(object sender, EventArgs e)
         {
             if(cboReportsTo.SelectedItem == null) { cboReportsTo.Text = ""; }
+            if (cboReportsTo.SelectedItem == null)
+            {
+                errorProvider1.SetError(cboReportsTo, "You must select who this team reports to");
+                cboReportsTo.BackColor = Program.ErrorColor; 
+            } else
+            {
+                errorProvider1.SetError(cboReportsTo, "");
+                cboReportsTo.BackColor = Program.GoodColor;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -120,7 +123,7 @@ namespace Wildfire_ICS_Assist
             SelectedGroup.GroupType = cboType.Text;
             SelectedGroup.Comments = txtComments.Text;
 
-            SelectedGroup.ResourceListing = strikeTeamTaskForceDetailsControl1.selectedGroup.ResourceListing;
+            SelectedGroup.ResourceListing = strikeTeamTaskForceDetailsControl1.SelectedOpGroup.ResourceListing;
 
             if (string.IsNullOrEmpty(SelectedGroup.PreparedByName)) { SelectedGroup.PreparedByName = Program.CurrentRole.IndividualName; }
             if (string.IsNullOrEmpty(SelectedGroup.PreparedByPosition)) { SelectedGroup.PreparedByPosition = Program.CurrentRole.RoleName; }
@@ -142,30 +145,36 @@ namespace Wildfire_ICS_Assist
 
             if (cboReportsTo.SelectedItem != null)
             {
-                ICSRole reportsTo = (ICSRole)cboReportsTo.SelectedItem;
-
-                SelectedGroup.ParentID = reportsTo.RoleID;
-                if (reportsTo.OperationalGroupID != Guid.Empty && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.ID == reportsTo.OperationalGroupID))
-                {
-                    OperationalGroup gr = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.ID == reportsTo.OperationalGroupID);
-                    SelectedGroup.ParentName = gr.ResourceName;
-                }
-                else { SelectedGroup.ParentName = reportsTo.RoleName; }
-
+                OperationalGroup ParentGroup = (OperationalGroup)cboReportsTo.SelectedItem;
+                SelectedGroup.ParentID = ParentGroup.ID;
+                SelectedGroup.ParentName = ParentGroup.ResourceName;
             }
         }
 
         private bool IsComplete()
         {
-            if (string.IsNullOrEmpty(txtIdentifier.Text.Trim())) { txtIdentifier.BackColor = Program.ErrorColor; return false; }
+            if (string.IsNullOrEmpty(txtIdentifier.Text.Trim())) {
+                errorProvider1.SetError(txtIdentifier, "You must enter a name for this team");
+                txtIdentifier.BackColor = Program.ErrorColor; return false; }
             else { txtIdentifier.BackColor = Program.GoodColor; }
+
+            if (cboReportsTo.SelectedItem == null)
+            {
+                errorProvider1.SetError(cboReportsTo, "You must select who this team reports to");
+                cboReportsTo.BackColor = Program.ErrorColor; return false;
+            } 
             return true;
         }
 
+        private void txtIdentifier_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtIdentifier.Text.Trim()))
+            {
+                errorProvider1.SetError(txtIdentifier, "You must enter a name for this team");
+                txtIdentifier.BackColor = Program.ErrorColor; 
+            }
+            else { txtIdentifier.BackColor = Program.GoodColor; }
 
-      
-
-       
-
+        }
     }
 }

@@ -75,10 +75,12 @@ namespace Wildfire_ICS_Assist
             treeOrgChart.Nodes.Clear();
             // call recursive function
             AddCurrentChild(Guid.Empty, treeOrgChart.Nodes);
+           
 
             if (treeOrgChart.Nodes.Count > 0)
             {
-                treeOrgChart.Nodes[0].ExpandAll();
+
+                treeOrgChart.Nodes[treeOrgChart.Nodes.Count-1].ExpandAll();
                 if (selectedRole == null)
                 {
                     treeOrgChart.SelectedNode = treeOrgChart.Nodes[0];
@@ -139,6 +141,8 @@ namespace Wildfire_ICS_Assist
         }
 
 
+     
+
         private Font GetNodeFont(bool italic)
         {
             if (italic)
@@ -158,7 +162,7 @@ namespace Wildfire_ICS_Assist
             if (treeOrgChart.SelectedNode != null)
             {
                 ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
-                if (role.RoleID == WF_ICS_ClassLibrary.Globals.IncidentCommanderID && CurrentOrgChart.IsUnifiedCommand) { btnAssignRole.Enabled = false; }
+                if (role.RoleID == WF_ICS_ClassLibrary.Globals.IncidentCommanderGenericID && CurrentOrgChart.IsUnifiedCommand) { btnAssignRole.Enabled = false; }
                 else { btnAssignRole.Enabled = true; }
             }
             else
@@ -191,7 +195,34 @@ namespace Wildfire_ICS_Assist
                     DialogResult dr = addRoleForm.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
+                        addRoleForm.selectedRole.OrganizationalChartID = CurrentOrgChart.ID;
+                        addRoleForm.selectedRole.OpPeriod = CurrentOrgChart.OpPeriod;
+                        if (addRoleForm.selectedRole.RequiresOperationalGroup)
+                        {
+                            addRoleForm.selectedRole.OperationalGroupName = addRoleForm.OperationalGroupName;
+                        }
                         Program.incidentDataService.UpsertICSRole(addRoleForm.selectedRole);
+
+
+                        if (addRoleForm.selectedRole.RequiresOperationalGroup && !CurrentIncident.ActiveOperationalGroups.Any(o=>o.ID == addRoleForm.selectedRole.OperationalGroupID))
+                        {
+                            OperationalGroup group = addRoleForm.selectedRole.CreateOpGroupFromRole(addRoleForm.OperationalGroupName);
+                            group.ParentID = Program.CurrentIncident.GetOpGroupParentIDThroughOrgChart(group);
+                            group.ParentName = Program.CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o=>o.ID == group.ParentID)?.Name;
+                            Program.incidentDataService.UpsertOperationalGroup(group);
+                            addRoleForm.selectedRole.OperationalGroupID = group.ID; 
+                            Program.incidentDataService.UpsertICSRole(addRoleForm.selectedRole);
+                        }
+                        else if (addRoleForm.selectedRole.RequiresOperationalGroup && CurrentIncident.ActiveOperationalGroups.Any(o => o.ID == addRoleForm.selectedRole.OperationalGroupID))
+                        {
+                            OperationalGroup opGroup = CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o => o.ID == addRoleForm.selectedRole.OperationalGroupID);
+                            if(opGroup.Name != addRoleForm.OperationalGroupName)
+                            {
+                                opGroup.Name = addRoleForm.OperationalGroupName;
+                                Program.incidentDataService.UpsertOperationalGroup(opGroup);
+                            }
+                        }
+
                     }
                 }
             }
@@ -349,13 +380,13 @@ namespace Wildfire_ICS_Assist
                     DialogResult dr = MessageBox.Show(Properties.Resources.NoSwitchToICWithUCRolesFilled, Properties.Resources.ClearUnifiedCommandRolesTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
-                        ICSRole uc2 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2ID);
+                        ICSRole uc2 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2GenericID);
                         if (uc2 != null)
                         {
                             CurrentOrgChart.UnassignThisAndSubordinateRoles(uc2);
                         }
 
-                        ICSRole uc3 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand3ID);
+                        ICSRole uc3 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand3GenericID);
                         if (uc3 != null)
                         {
                             CurrentOrgChart.UnassignThisAndSubordinateRoles(uc2);
@@ -401,7 +432,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-                string csv = OrgChartTools.OrgChartToCSV(CurrentOrgChart.ActiveRoles, delimiter);
+                string csv = OrganizationalChartTools.OrgChartToCSV(CurrentOrgChart.ActiveRoles, delimiter);
                 try
                 {
                     System.IO.File.WriteAllText(exportPath, csv);

@@ -12,25 +12,28 @@ using WF_ICS_ClassLibrary;
 using System.CodeDom;
 using System.Globalization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+using WF_ICS_ClassLibrary.Models.OrganizationalChartModels;
 
 namespace Wildfire_ICS_Assist
 {
     public partial class OrganizationChartAddRoleForm : BaseForm
     {
         private ICSRole _selectedRole = null;
-        public ICSRole selectedRole { get => _selectedRole; set { _selectedRole = value;  } }
+        public ICSRole selectedRole { get => _selectedRole; set { _selectedRole = value; } }
         private OrganizationChart CurrentOrgChart { get => Program.CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod); }
         public bool RestrictToAirOps { get; set; } = false;
-
+        bool LoadingDone = false;
+        public string OperationalGroupName { get => txtOperationalGroupName.Text; }
         public OrganizationChartAddRoleForm()
         {
             InitializeComponent();
-
+            SetControlColors(this.Controls);
 
         }
         private void OrganizationChartAddRole_Load(object sender, EventArgs e)
         {
-            
+            this.Size = new Size(464, 240);
+
             DisplayRole();
             cboNewRoleName.Focus();
         }
@@ -40,20 +43,20 @@ namespace Wildfire_ICS_Assist
             cboReportsTo.Items.Clear();
             CurrentOrgChart.SortRoles();
 
-            
+
 
             List<ICSRole> reportsToRoles = new List<ICSRole>();
             if (RestrictToAirOps)
             {
-                reportsToRoles.Add(CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirector));
-                reportsToRoles.AddRange(CurrentOrgChart.GetChildRoles(Globals.AirOpsDirector, true));
+                reportsToRoles.Add(CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirectorGenericID));
+                reportsToRoles.AddRange(CurrentOrgChart.GetChildRoles(Globals.AirOpsDirectorGenericID, true));
             }
             else { reportsToRoles.AddRange(CurrentOrgChart.ActiveRoles); }
             cboReportsTo.DataSource = reportsToRoles;
 
 
 
-            
+
             if (selectedRole.ReportsTo != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == selectedRole.ReportsTo))
             {
                 cboReportsTo.SelectedValue = selectedRole.ReportsTo;
@@ -69,15 +72,19 @@ namespace Wildfire_ICS_Assist
 
             if (!string.IsNullOrEmpty(selectedRole.RoleName))
             {
-                ICSRole reportsTo = (ICSRole)cboReportsTo.SelectedItem; if (reportsTo != null)
+                ICSRole reportsTo = (ICSRole)cboReportsTo.SelectedItem;
+                if (reportsTo != null)
                 {
-                    List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o => o.SectionID == reportsTo.SectionID || o.SectionID == Guid.Empty).OrderBy(o => o.RoleName).ToList();
-                    if(branchRoles.Any(o=>o.RoleName.Equals(selectedRole.RoleName, StringComparison.OrdinalIgnoreCase)))
+                    List<GenericICSRole> branchRoles = OrganizationalChartTools.GetGenericICSRoles(reportsTo.SectionID).OrderBy(o => o.RoleName).ToList();
+                    if (branchRoles.Any(o => o.GenericRoleID == selectedRole.GenericRoleID))
                     {
-                        cboNewRoleName.SelectedValue = branchRoles.First(o => o.RoleName.Equals(selectedRole.RoleName, StringComparison.OrdinalIgnoreCase)).RoleID;
+                        cboNewRoleName.SelectedValue = selectedRole.GenericRoleID;
                     }
                 }
             }
+
+            ToggleOpGroupName();
+            LoadingDone = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -89,26 +96,25 @@ namespace Wildfire_ICS_Assist
         {
             if (ValidateForm())
             {
-                ICSRole selectedName = (ICSRole)cboNewRoleName.SelectedItem;
-
-                selectedRole.RoleName = selectedName.RoleName;
-                selectedRole.BaseRoleName= selectedName.BaseRoleName;
-                selectedRole.IncludeReportsToInName= selectedName.IncludeReportsToInName;
-                selectedRole.Mnemonic = selectedName.Mnemonic;
-                selectedRole.RoleDescription = selectedName.RoleDescription;
+                GenericICSRole selectedName = (GenericICSRole)cboNewRoleName.SelectedItem;
                 ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;
                 selectedRole.ReportsTo = rep.RoleID;
                 selectedRole.ReportsToRoleName = rep.RoleName;
                 selectedRole.SectionID = rep.SectionID;
-
-                if (selectedRole.Mnemonic.Equals("DIVS")) { selectedRole.IsOpGroupSup = true; }
-               else if (selectedRole.Mnemonic.Equals("OPBD")) { selectedRole.IsOpGroupSup = true; }
-                else if (selectedRole.Mnemonic.Equals("STLD")) { selectedRole.IsOpGroupSup = true; }
-                else if (selectedRole.Mnemonic.Equals("TFLD")) { selectedRole.IsOpGroupSup = true; }
+                selectedRole.Depth = rep.Depth + 1;
+                /*
+                selectedRole.BaseRoleName = selectedName.RoleName;
+                selectedRole.RoleNameWithPlaceholder = selectedName.RoleNameWithPlaceholder;
+                selectedRole.MnemonicAbrv = selectedName.MnemonicAbrv;
+                selectedRole.RoleDescription = selectedName.RoleDescription;
+                
+                selectedRole.RequiresOperationalGroup = selectedName.RequiresOperationalGroup;
+                selectedRole.GenericRoleID = selectedName.GenericRoleID;
+                */
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            } 
+            }
 
         }
 
@@ -116,18 +122,24 @@ namespace Wildfire_ICS_Assist
         {
             //if (cboNewRoleName.SelectedItem == null) { cboNewRoleName.BackColor = Program.ErrorColor; return false; } else { cboNewRoleName.BackColor = Program.GoodColor; }
             //if (cboReportsTo.SelectedItem == null) { cboReportsTo.BackColor = Program.ErrorColor; return false; } else { cboReportsTo.BackColor = Program.GoodColor; }
-            if(((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor; MessageBox.Show(Properties.Resources.CantReportToSelf); return false; }
+            if (((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor; MessageBox.Show(Properties.Resources.CantReportToSelf); return false; }
 
             //When editing an existing role, don't let it make its own subordinate its parent
-            if (CurrentOrgChart.ActiveRoles.Any(o=>o.RoleID == selectedRole.RoleID)) {
+            if (CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == selectedRole.RoleID))
+            {
                 List<ICSRole> childRoles = CurrentOrgChart.GetChildRoles(selectedRole.RoleID, true);
                 ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;
-                if(childRoles.Any(o=>o.RoleID == rep.RoleID))
+                if (childRoles.Any(o => o.RoleID == rep.RoleID))
                 {
                     MessageBox.Show(Properties.Resources.InvalidReportsToRole);
                     cboReportsTo.BackColor = Program.ErrorColor;
                     return false;
                 }
+            }
+
+            if(selectedRole.RequiresOperationalGroup && !txtOperationalGroupName.IsValid && selectedRole.OperationalGroupID == Guid.Empty)
+            {
+                return false;
             }
             return true;
         }
@@ -140,33 +152,31 @@ namespace Wildfire_ICS_Assist
             {
                 //update the list of role names based on the currently selected branch.
                 Guid BranchID = parentRole.SectionID;
-                List<ICSRole> branchRoles = OrgChartTools.staticRoles.Where(o=>!o.IsOpGroupSup && ( o.SectionID == BranchID || o.SectionID == Guid.Empty)).OrderBy(o=>o.RoleName).ToList();
+                List<GenericICSRole> branchRoles = OrganizationalChartTools.GenericRolesCache.Where(o => o.SectionID == BranchID || o.SectionID == Guid.Empty).OrderBy(o => o.RoleName).ToList();
                 cboNewRoleName.DataSource = null;
                 cboNewRoleName.DataSource = branchRoles;
                 cboNewRoleName.DisplayMember = "RoleName";
-                cboNewRoleName.ValueMember = "RoleID";
+                cboNewRoleName.ValueMember = "GenericRoleID";
 
                 /* beleive it or not, this is all for colouring */
                 List<Guid> ChiefIDs = new List<Guid>();
-                ChiefIDs.Add(Globals.OpsChiefID); ChiefIDs.Add(Globals.PlanningChiefID); ChiefIDs.Add(Globals.LogisticsChiefID); ChiefIDs.Add(Globals.FinanceChiefID); ChiefIDs.Add(Globals.DeputyIncidentCommanderID);
+                ChiefIDs.Add(Globals.OpsChiefGenericID); ChiefIDs.Add(Globals.PlanningChiefGenericID); ChiefIDs.Add(Globals.LogisticsChiefGenericID); ChiefIDs.Add(Globals.FinanceChiefGenericID); ChiefIDs.Add(Globals.DeputyIncidentCommanderGenericID);
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderID && !ChiefIDs.Contains(o.RoleID)))                {                    CommandStaffRoles.Add(role.RoleID);                }
+                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderGenericID && !ChiefIDs.Contains(o.RoleID))) { CommandStaffRoles.Add(role.RoleID); }
                 splitContainer1.Panel1.BackColor = Color.White;
                 if (CommandStaffRoles.Contains(parentRole.RoleID)) { splitContainer1.Panel1.BackColor = Color.IndianRed; }
-                else if (parentRole.SectionID == Globals.IncidentCommanderID) { splitContainer1.Panel1.BackColor = Color.LimeGreen; }
-                else if (parentRole.SectionID == Globals.OpsChiefID) { splitContainer1.Panel1.BackColor = Color.Orange; }
-                else if (parentRole.SectionID == Globals.PlanningChiefID) { splitContainer1.Panel1.BackColor = Color.CornflowerBlue; }
-                else if (parentRole.SectionID == Globals.LogisticsChiefID) { splitContainer1.Panel1.BackColor = Color.Khaki; }
-                else if (parentRole.SectionID == Globals.FinanceChiefID) { splitContainer1.Panel1.BackColor = Color.LightGray; }
+                else if (parentRole.SectionID == Globals.IncidentCommanderGenericID) { splitContainer1.Panel1.BackColor = Color.LimeGreen; }
+                else if (parentRole.SectionID == Globals.OpsChiefGenericID) { splitContainer1.Panel1.BackColor = Color.Orange; }
+                else if (parentRole.SectionID == Globals.PlanningChiefGenericID) { splitContainer1.Panel1.BackColor = Color.CornflowerBlue; }
+                else if (parentRole.SectionID == Globals.LogisticsChiefGenericID) { splitContainer1.Panel1.BackColor = Color.Khaki; }
+                else if (parentRole.SectionID == Globals.FinanceChiefGenericID) { splitContainer1.Panel1.BackColor = Color.LightGray; }
                 else { splitContainer1.Panel1.BackColor = Color.White; }
-
-                lblOperationalGroupsNote.Visible = parentRole.SectionID == Globals.OpsChiefID;
             }
         }
 
         private void cboReportsTo_Leave(object sender, EventArgs e)
         {
-           
+
         }
 
         private void cboNewRoleName_Leave(object sender, EventArgs e)
@@ -179,6 +189,69 @@ namespace Wildfire_ICS_Assist
                 System.Media.SystemSounds.Exclamation.Play();
 
             }
+            else { selectedRole.FillFromGenericRole((GenericICSRole)cboNewRoleName.SelectedItem); }
+            ToggleOpGroupName();
+
+        }
+
+        private void ToggleOpGroupName()
+        {
+            if (selectedRole.RequiresOperationalGroup )
+            {
+                this.Size = new Size(464, 302);
+                splitContainer2.Panel2Collapsed = false;
+                splitContainer2.SplitterDistance = 119;
+                txtOperationalGroupName.Width = this.Size.Width - 30;
+                if (selectedRole.OperationalGroupID != Guid.Empty && Program.CurrentIncident.AllOperationalGroups.Any(o => o.ID == selectedRole.OperationalGroupID))
+                {
+
+                    txtOperationalGroupName.SetText(Program.CurrentIncident.AllOperationalGroups.FirstOrDefault(o => o.ID == selectedRole.OperationalGroupID).Name);
+                    txtOperationalGroupName.Enabled = selectedRole.AllowEditName;
+
+                }
+                else
+                {
+                    switch (selectedRole.MnemonicAbrv)
+                    {
+                        case "AOBD": lblOperationalGroupTypeName.Text = "Branch Name"; txtOperationalGroupName.SetText("Air Operations"); txtOperationalGroupName.Enabled = false; break;
+                        case "ASGS": lblOperationalGroupTypeName.Text = "Group Name"; txtOperationalGroupName.SetText("Air Support"); txtOperationalGroupName.Enabled = false; break;
+                        case "ATGS": lblOperationalGroupTypeName.Text = "Group Name"; txtOperationalGroupName.SetText("Air Tactical"); txtOperationalGroupName.Enabled = false; break;
+                        case "DIVS": lblOperationalGroupTypeName.Text = "Division Name"; txtOperationalGroupName.SetText(""); txtOperationalGroupName.Enabled = true; break;
+                        case "HEBD": lblOperationalGroupTypeName.Text = "Branch Name"; txtOperationalGroupName.SetText("Heavy Equipment"); txtOperationalGroupName.Enabled = false; break;
+                        case "HEGS": lblOperationalGroupTypeName.Text = "Group Name"; txtOperationalGroupName.SetText("Heavy Equipment"); txtOperationalGroupName.Enabled = false; break;
+                        case "OPBD": lblOperationalGroupTypeName.Text = "Branch Name"; txtOperationalGroupName.SetText(""); txtOperationalGroupName.Enabled = true; break;
+                        case "STLD": lblOperationalGroupTypeName.Text = "Strike Team Name"; txtOperationalGroupName.SetText(""); txtOperationalGroupName.Enabled = true; break;
+                        case "TFLD": lblOperationalGroupTypeName.Text = "Task Force Name"; txtOperationalGroupName.SetText(""); txtOperationalGroupName.Enabled = true; break;
+                        case "":
+                            lblOperationalGroupTypeName.Text = "Group Name"; txtOperationalGroupName.Enabled = true;
+
+                            break;
+
+                    }
+                }
+            }
+
+            else
+            {
+                this.Size = new Size(464, 240);
+                splitContainer2.Panel2Collapsed = true;
+
+
+            }
+        }
+
+        private void cboNewRoleName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LoadingDone && cboNewRoleName.SelectedItem != null)
+            {
+                selectedRole.FillFromGenericRole((GenericICSRole)cboNewRoleName.SelectedItem);
+            }
+            ToggleOpGroupName();
+        }
+
+        private void txtOperationalGroupName_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
