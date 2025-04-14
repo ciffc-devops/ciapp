@@ -48,6 +48,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnSetPreparedAndApproved = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -168,7 +169,7 @@
             this.txtComments.Location = new System.Drawing.Point(136, 118);
             this.txtComments.Multiline = true;
             this.txtComments.Name = "txtComments";
-            this.txtComments.Size = new System.Drawing.Size(898, 62);
+            this.txtComments.Size = new System.Drawing.Size(611, 62);
             this.txtComments.TabIndex = 6;
             // 
             // splitContainer1
@@ -203,6 +204,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.btnSetPreparedAndApproved);
             this.splitContainer2.Panel1.Controls.Add(this.txtContact);
             this.splitContainer2.Panel1.Controls.Add(this.label6);
             this.splitContainer2.Panel1.Controls.Add(this.cboType);
@@ -285,6 +287,18 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnSetPreparedAndApproved
+            // 
+            this.btnSetPreparedAndApproved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_151_square_edit;
+            this.btnSetPreparedAndApproved.Location = new System.Drawing.Point(753, 118);
+            this.btnSetPreparedAndApproved.Name = "btnSetPreparedAndApproved";
+            this.btnSetPreparedAndApproved.Size = new System.Drawing.Size(265, 42);
+            this.btnSetPreparedAndApproved.TabIndex = 105;
+            this.btnSetPreparedAndApproved.Text = "Prepared and Approved";
+            this.btnSetPreparedAndApproved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSetPreparedAndApproved.UseVisualStyleBackColor = true;
+            this.btnSetPreparedAndApproved.Click += new System.EventHandler(this.btnSetPreparedAndApproved_Click);
+            // 
             // OperationalGroupSTTFEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -329,5 +343,6 @@
         private System.Windows.Forms.Label label6;
         private CustomControls.StrikeTeamTaskForceDetailsControl strikeTeamTaskForceDetailsControl1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btnSetPreparedAndApproved;
     }
 }

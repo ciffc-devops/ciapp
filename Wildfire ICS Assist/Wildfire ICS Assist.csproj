@@ -905,6 +905,18 @@
     <Compile Include="UtilityForms\SetPreparedAndApprovedForm.Designer.cs">
       <DependentUpon>SetPreparedAndApprovedForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\TaskUpdateDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\TaskUpdateDetailsForm.Designer.cs">
+      <DependentUpon>TaskUpdateDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\TaskUpdateListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\TaskUpdateListForm.Designer.cs">
+      <DependentUpon>TaskUpdateListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1264,6 +1276,12 @@
     <EmbeddedResource Include="UtilityForms\SetPreparedAndApprovedForm.resx">
       <DependentUpon>SetPreparedAndApprovedForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\TaskUpdateDetailsForm.resx">
+      <DependentUpon>TaskUpdateDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\TaskUpdateListForm.resx">
+      <DependentUpon>TaskUpdateListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1283,6 +1301,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-202-WF-Incident-Objectives.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\ICS-203 Organization Assignment List Blanked.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS-203-WF Organization Assignment List Blanked.pdf">

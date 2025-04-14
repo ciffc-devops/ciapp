@@ -349,7 +349,11 @@ namespace Wildfire_ICS_Assist
                 }
                 if (chkAssignments.Checked)
                 {
-                    allPDFs.AddRange(Program.pdfExportService.exportAllAssignmentSummariesToPDF(CurrentIncident, op, chkFlattenPDF.Checked));
+                    PDFCreationResults results = Program.pdfExportService.exportAllAssignmentSummariesToPDF(CurrentIncident, op, chkFlattenPDF.Checked);
+                    if (results.Successful)
+                    {
+                        allPDFs.AddRange(results.bytes);
+                    }
 
                 }
                 if (chkAssignmentDetails.Checked)

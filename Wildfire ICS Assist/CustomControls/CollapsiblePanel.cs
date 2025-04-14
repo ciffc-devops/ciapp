@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private bool _CollapseLeft = true;
         private bool _ExpandUp = false;
-        private bool _IsCurrentlyCollapsed = false;
+        private bool _IsCurrentlyCollapsed = true;
         private Color _BackgroundColorCollapsed = Program.AccentColor;
         private bool _ExpandAndCollapseEnabled = true;
 
@@ -85,6 +85,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             InitializeComponent();
             lblTitle.Size = new Size(this.Width - lblTitle.Location.X, lblTitle.Height);
+           
         }
 
         private void ToggleExpandCapability(bool ExpandCollapseEnabled)
@@ -136,7 +137,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 int newY = 0;
 
                 this.BackColor = CollapsedBackgroundColor;// Color.FromArgb(219, 218, 204);
-                btnExpandCollapse.BackColor = Color.White;
+                btnExpandCollapse.BackColor = CollapsedBackgroundColor;
 
                 if (!Collapsed)
                 {

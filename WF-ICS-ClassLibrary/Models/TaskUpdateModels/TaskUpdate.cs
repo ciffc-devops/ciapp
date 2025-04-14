@@ -145,6 +145,7 @@ namespace WF_ICS_ClassLibrary.Models
         public int SoftwareVersionMajor { get => _SoftwareVersionMajor; set => _SoftwareVersionMajor = value; }
         public int SoftwareVersionMinor { get => _SoftwareVersionMinor; set => _SoftwareVersionMinor = value; }
         public int SoftwareVersionBuild { get => _SoftwareVersionBuild; set => _SoftwareVersionBuild = value; }
+        public string SoftwareVersionText { get => SoftwareVersionMajor.ToString() + "." + SoftwareVersionMinor.ToString() + "." + SoftwareVersionBuild.ToString(); }
 
         public TaskUpdate Clone()
         {

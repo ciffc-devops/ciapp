@@ -43,8 +43,30 @@ namespace Wildfire_ICS_Assist.CustomControls
                 BuildCommsComboboxList();
                 PopulateCommsPlanItems();
                 LoadGroup();
+                prepAndApprovePanel1.SetPreparedBy(SelectedGroup.PreparedByRoleID, SelectedGroup.DatePrepared);
+                prepAndApprovePanel1.SetApprovedBy(SelectedGroup.ApprovedByRoleID, SelectedGroup.DateApproved);
+
                 UnsavedChanges = false;
             }
+
+            prepAndApprovePanel1.ApprovedByChanged += PrepAndApprovePanel1_ApprovedByChanged; ;
+            prepAndApprovePanel1.PreparedByChanged += PrepAndApprovePanel1_PreparedByChanged; ; ;
+
+
+        }
+
+        private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
+        {
+            SelectedGroup.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+            SelectedGroup.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+
+
+        }
+
+        private void PrepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
+        {
+            SelectedGroup.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+            SelectedGroup.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
         }
 
         private void PopulateLeader()
@@ -261,12 +283,7 @@ namespace Wildfire_ICS_Assist.CustomControls
         public void SaveFormValuesToSelected()
         {
             SelectedGroup.GroupType = cboType.SelectedItem.ToString();
-            if (SelectedGroup.PreparedByPositionID == Guid.Empty)
-            {
-                SelectedGroup.PreparedByName = Program.CurrentRole.IndividualName;
-                SelectedGroup.PreparedByPositionID = Program.CurrentRole.RoleID;
-                SelectedGroup.PreparedByPosition = Program.CurrentRole.RoleName;
-            }
+            
             SelectedGroup.TacticalAssignment = txtTactical.Text;
             SelectedGroup.SpecialInstructions = txtSpecial.Text;
 

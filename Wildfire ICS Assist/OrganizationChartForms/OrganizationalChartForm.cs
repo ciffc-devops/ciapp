@@ -14,6 +14,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -27,22 +28,29 @@ namespace Wildfire_ICS_Assist
         public OrganizationalChartForm()
         {
            
-            InitializeComponent(); 
+            InitializeComponent();
+            SetControlColors(this.Controls);
+
         }
 
 
         private void OrganizationalChartForm_Load(object sender, EventArgs e)
         {
-            if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
+            //if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
             PopulateTree();
             rbUnifiedCommand.Checked = CurrentOrgChart.IsUnifiedCommand;
+            if (Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP"))
+            {
+                tscboIncludeContacts.SelectedIndex = 1;
+            }
+            else { tscboIncludeContacts.SelectedIndex = 0; }
 
             Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.incidentDataService.OrganizationalChartChanged += Program_OrgChartChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
-
             //chkIncludeContacts.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
+
         }
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
@@ -318,10 +326,10 @@ namespace Wildfire_ICS_Assist
         {
 
 
-            if (false)
+            if (tscboIncludeContacts.SelectedIndex == 1)
             {
                 string orgChart = Program.pdfExportService.createOrgChartPDF(CurrentIncident, CurrentOpPeriod, false, true, false);
-                string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
+                PDFCreationResults contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
 
                 List<byte[]> allPDFs = new List<byte[]>();
 
@@ -334,9 +342,9 @@ namespace Wildfire_ICS_Assist
                     stream.Close();
                     allPDFs.Add(fileBytes);
                 }
-                if (!string.IsNullOrEmpty(contactList))
+                if (!string.IsNullOrEmpty(contactList.path))
                 {
-                    using (FileStream stream = File.OpenRead(contactList))
+                    using (FileStream stream = File.OpenRead(contactList.path))
                     {
                         byte[] fileBytes = new byte[stream.Length];
 
@@ -438,7 +446,8 @@ namespace Wildfire_ICS_Assist
 
         private void Print203()
         {
-            if (false)
+
+            if (tscboIncludeContacts.SelectedIndex == 1)
             {
                 string fullFilepath = "";
                 fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
@@ -446,7 +455,7 @@ namespace Wildfire_ICS_Assist
                 PDFCreationResults orgChartResults = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, true, false);
                 string orgChart = orgChartResults.path;
 
-                string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
+                PDFCreationResults contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
 
                 if (orgChartResults.Successful)
                 {
@@ -461,9 +470,9 @@ namespace Wildfire_ICS_Assist
                         stream.Close();
                         allPDFs.Add(fileBytes);
                     }
-                    if (!string.IsNullOrEmpty(contactList))
+                    if (!string.IsNullOrEmpty(contactList.path))
                     {
-                        using (FileStream stream = File.OpenRead(contactList))
+                        using (FileStream stream = File.OpenRead(contactList.path))
                         {
                             byte[] fileBytes = new byte[stream.Length];
 
@@ -611,6 +620,19 @@ namespace Wildfire_ICS_Assist
         {
             
            
+        }
+
+        private void btnSetPreparedAndApproved_Click(object sender, EventArgs e)
+        {
+            SetPreparedAndApprovedForm form = new SetPreparedAndApprovedForm();
+            form.SetPreparedBy(CurrentOrgChart.PreparedByRoleID, CurrentOrgChart.DatePrepared);
+            form.SetApprovedBy(CurrentOrgChart.ApprovedByRoleID, CurrentOrgChart.DateApproved);
+            DialogResult dr = form.ShowDialog();
+            if(dr == DialogResult.OK)
+            {
+                CurrentOrgChart.SetPreparedBy(form.PreparedBy); CurrentOrgChart.DatePrepared = form.DatePrepared;
+                CurrentOrgChart.SetApprovedBy(form.ApprovedBy);CurrentOrgChart.DateApproved = form.DateApproved;
+            }
         }
     }
 }

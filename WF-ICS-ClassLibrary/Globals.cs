@@ -46,6 +46,8 @@ namespace WF_ICS_ClassLibrary
         public static Guid LogisticsChiefGenericID { get; } = new Guid("B641C5D6-91FE-41DA-962E-9FEB7A7300A2");
         public static Guid FinanceChiefGenericID { get; } = new Guid("33805F34-CD3A-49AF-94FA-DA4058577B9B");
         public static Guid SafetyOfficerGenericID { get; } = new Guid("CE7166AF-9432-4F7A-B942-1250AF0B7C31");
+        public static Guid InformationOfficerGenericID { get; } = new Guid("ad9ff46e-b1f1-4327-8303-2cbdd22322a5");
+        public static Guid LiaisonOfficerGenericID { get; } = new Guid("9ba31b81-84c0-49f5-bf19-49973ff0e972");
 
 
         //Operations
@@ -56,6 +58,9 @@ namespace WF_ICS_ClassLibrary
         public static Guid GroupSupervisorGenericID { get; } = new Guid("504b6131-411b-451d-a92a-2ed59d27b492");
         public static Guid DivisionSupervisorGenericID { get; } = new Guid("738957c1-1214-43aa-aa63-d74639397aad");
 
+        //logistics
+        public static Guid SupportBranchGenericID { get; } = new Guid("33f9d378-f400-4eb6-b445-c7da824073c9");
+        public static Guid ServiceBranchGenericID { get; } = new Guid("18e7d7fe-ba83-429b-99fe-074259b0a8ee");
 
 
 

@@ -94,7 +94,7 @@ namespace Wildfire_ICS_Assist
                 c.Location = new Point(0, c.Location.Y);
                 foreach (CollapsiblePanel cp in panels)
                 {
-                    if (!cp.Name.Equals(c.Name))
+                    if (!cp.Name.Equals(c.Name) && !cp.Collapsed)
                     {
                         cp.Collapse();
                         cp.Location = new Point(10, cp.Location.Y);
