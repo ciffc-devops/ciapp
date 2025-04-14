@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
@@ -13,10 +12,8 @@ using WildfireICSDesktopServices;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Utilities;
 using System.Runtime.InteropServices;
-using Microsoft.VisualStudio.Utilities;
-using Microsoft.VisualStudio.PlatformUI;
 using WildfireICSDesktopServices.NewsServices;
-using System.Diagnostics.Eventing.Reader;
+using Microsoft.VisualStudio.Utilities;
 
 namespace Wildfire_ICS_Assist
 {

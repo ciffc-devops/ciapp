@@ -49,8 +49,8 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.OrganizationalChartChanged += Program_OrgChartChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
+            //chkIncludeContacts.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
 
-            
         }
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
@@ -446,6 +446,7 @@ namespace Wildfire_ICS_Assist
 
         private void Print203()
         {
+
             if (tscboIncludeContacts.SelectedIndex == 1)
             {
                 string fullFilepath = "";

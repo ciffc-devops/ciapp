@@ -15,6 +15,7 @@
       <param name="options">Options to control the behavior during serialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync(System.Net.Http.HttpClient,System.String,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)">
@@ -25,6 +26,7 @@
       <param name="context">The JsonSerializerContext used to control the deserialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync(System.Net.Http.HttpClient,System.String,System.Type,System.Threading.CancellationToken)">
@@ -34,6 +36,7 @@
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync(System.Net.Http.HttpClient,System.Uri,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -44,6 +47,7 @@
       <param name="options">Options to control the behavior during serialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync(System.Net.Http.HttpClient,System.Uri,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)">
@@ -54,6 +58,7 @@
       <param name="context">The JsonSerializerContext used to control the deserialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync(System.Net.Http.HttpClient,System.Uri,System.Type,System.Threading.CancellationToken)">
@@ -63,6 +68,7 @@
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync``1(System.Net.Http.HttpClient,System.String,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -73,6 +79,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync``1(System.Net.Http.HttpClient,System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -83,6 +90,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync``1(System.Net.Http.HttpClient,System.String,System.Threading.CancellationToken)">
@@ -92,6 +100,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync``1(System.Net.Http.HttpClient,System.Uri,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -102,6 +111,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync``1(System.Net.Http.HttpClient,System.Uri,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -112,6 +122,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.DeleteFromJsonAsync``1(System.Net.Http.HttpClient,System.Uri,System.Threading.CancellationToken)">
@@ -121,6 +132,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsAsyncEnumerable``1(System.Net.Http.HttpClient,System.String,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -131,6 +143,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsAsyncEnumerable``1(System.Net.Http.HttpClient,System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -141,6 +154,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsAsyncEnumerable``1(System.Net.Http.HttpClient,System.String,System.Threading.CancellationToken)">
@@ -150,6 +164,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsAsyncEnumerable``1(System.Net.Http.HttpClient,System.Uri,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -160,6 +175,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsAsyncEnumerable``1(System.Net.Http.HttpClient,System.Uri,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -170,6 +186,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsAsyncEnumerable``1(System.Net.Http.HttpClient,System.Uri,System.Threading.CancellationToken)">
@@ -179,6 +196,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync(System.Net.Http.HttpClient,System.String,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -188,6 +206,7 @@
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="options">Options to control the behavior during deserialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync(System.Net.Http.HttpClient,System.String,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)">
@@ -197,6 +216,7 @@
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="context">The JsonSerializerContext used to control the deserialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync(System.Net.Http.HttpClient,System.String,System.Type,System.Threading.CancellationToken)">
@@ -205,6 +225,7 @@
       <param name="requestUri">The Uri the request is sent to.</param>
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync(System.Net.Http.HttpClient,System.Uri,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -214,6 +235,7 @@
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="options">Options to control the behavior during deserialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync(System.Net.Http.HttpClient,System.Uri,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)">
@@ -223,6 +245,7 @@
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="context">The JsonSerializerContext used to control the deserialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync(System.Net.Http.HttpClient,System.Uri,System.Type,System.Threading.CancellationToken)">
@@ -231,6 +254,7 @@
       <param name="requestUri">The Uri the request is sent to.</param>
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync``1(System.Net.Http.HttpClient,System.String,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -240,6 +264,7 @@
       <param name="options">Options to control the behavior during deserialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync``1(System.Net.Http.HttpClient,System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -249,6 +274,7 @@
       <param name="jsonTypeInfo">The JsonTypeInfo used to control the deserialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync``1(System.Net.Http.HttpClient,System.String,System.Threading.CancellationToken)">
@@ -257,6 +283,7 @@
       <param name="requestUri">The Uri the request is sent to.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync``1(System.Net.Http.HttpClient,System.Uri,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -266,6 +293,7 @@
       <param name="options">Options to control the behavior during deserialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync``1(System.Net.Http.HttpClient,System.Uri,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -275,6 +303,7 @@
       <param name="jsonTypeInfo">The JsonTypeInfo used to control the deserialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync``1(System.Net.Http.HttpClient,System.Uri,System.Threading.CancellationToken)">
@@ -283,6 +312,7 @@
       <param name="requestUri">The Uri the request is sent to.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PatchAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -294,6 +324,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PatchAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -305,6 +336,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PatchAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Threading.CancellationToken)">
@@ -315,6 +347,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PatchAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -326,6 +359,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PatchAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -337,6 +371,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PatchAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Threading.CancellationToken)">
@@ -347,6 +382,7 @@
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="client" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -357,6 +393,7 @@
       <param name="options">Options to control the behavior during serialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -367,6 +404,7 @@
       <param name="jsonTypeInfo">The JsonTypeInfo used to control the serialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Threading.CancellationToken)">
@@ -376,6 +414,7 @@
       <param name="value">The value to serialize.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -386,6 +425,7 @@
       <param name="options">Options to control the behavior during serialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -396,6 +436,7 @@
       <param name="jsonTypeInfo">The JsonTypeInfo used to control the serialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Threading.CancellationToken)">
@@ -405,6 +446,7 @@
       <param name="value">The value to serialize.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -415,6 +457,7 @@
       <param name="options">Options to control the behavior during serialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -425,6 +468,7 @@
       <param name="jsonTypeInfo">The JsonTypeInfo used to control the serialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync``1(System.Net.Http.HttpClient,System.String,``0,System.Threading.CancellationToken)">
@@ -434,6 +478,7 @@
       <param name="value">The value to serialize.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -444,6 +489,7 @@
       <param name="options">Options to control the behavior during serialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -454,6 +500,7 @@
       <param name="jsonTypeInfo">The JsonTypeInfo used to control the serialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync``1(System.Net.Http.HttpClient,System.Uri,``0,System.Threading.CancellationToken)">
@@ -463,6 +510,7 @@
       <param name="value">The value to serialize.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="TValue">The type of the value to serialize.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="T:System.Net.Http.Json.HttpContentJsonExtensions">
@@ -476,6 +524,7 @@
       <param name="cancellationToken" />
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="content" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsAsyncEnumerable``1(System.Net.Http.HttpContent,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -485,6 +534,7 @@
       <param name="cancellationToken" />
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="content" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsAsyncEnumerable``1(System.Net.Http.HttpContent,System.Threading.CancellationToken)">
@@ -493,6 +543,7 @@
       <param name="cancellationToken" />
       <typeparam name="TValue">The target type to deserialize to.</typeparam>
       <exception cref="T:System.ArgumentNullException">The <paramref name="content" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>An <see cref="T:System.Collections.Generic.IAsyncEnumerable`1" /> that represents the deserialized response body.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync(System.Net.Http.HttpContent,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -501,6 +552,7 @@
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="options">Options to control the behavior during deserialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync(System.Net.Http.HttpContent,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)">
@@ -509,6 +561,7 @@
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="context">The JsonSerializerContext used to control the deserialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync(System.Net.Http.HttpContent,System.Type,System.Threading.CancellationToken)">
@@ -516,6 +569,7 @@
       <param name="content">The content to read from.</param>
       <param name="type">The type of the object to deserialize to and return.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync``1(System.Net.Http.HttpContent,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)">
@@ -524,6 +578,7 @@
       <param name="options">Options to control the behavior during deserialization. The default options are those specified by <see cref="F:System.Text.Json.JsonSerializerDefaults.Web" />.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="T">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync``1(System.Net.Http.HttpContent,System.Text.Json.Serialization.Metadata.JsonTypeInfo{``0},System.Threading.CancellationToken)">
@@ -532,6 +587,7 @@
       <param name="jsonTypeInfo">The JsonTypeInfo used to control the deserialization behavior.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="T">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="M:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync``1(System.Net.Http.HttpContent,System.Threading.CancellationToken)">
@@ -539,6 +595,7 @@
       <param name="content">The content to read from.</param>
       <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
       <typeparam name="T">The target type to deserialize to.</typeparam>
+      <exception cref="T:System.OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
       <returns>The task object representing the asynchronous operation.</returns>
     </member>
     <member name="T:System.Net.Http.Json.JsonContent">
