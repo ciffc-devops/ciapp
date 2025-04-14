@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.ComponentModel.Design;
 using System.Security.Policy;
 using WF_ICS_ClassLibrary.EventHandling;
-using Microsoft.VisualStudio.PlatformUI;
+//using Microsoft.VisualStudio.PlatformUI;
 using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist.CustomControls

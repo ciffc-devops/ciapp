@@ -818,14 +818,6 @@
             </summary>
             <remarks>Contains dawn, dusk and twilight times.</remarks>
         </member>
-        <member name="P:CoordinateSharp.Celestial.AstrologicalSigns">
-            <summary>
-            Astrological signs based on the provided date.
-            </summary>
-            <remarks>
-            Contains zodiac, moon sign and moon name during full moon events.
-            </remarks>       
-        </member>
         <member name="P:CoordinateSharp.Celestial.AlmanacMoonName">
             <summary>
             Farmers Almanac moon names
@@ -1724,134 +1716,6 @@
             </code>
             </example>
         </member>
-        <member name="M:CoordinateSharp.Celestial.Celestial_LocalTime(CoordinateSharp.Coordinate,System.Double)">
-            <summary>
-            Converts all Celestial values to local time.
-            </summary>
-            <param name="coord">Coordinate</param>
-            <param name="offset">UTC offset</param>
-            <returns>Celestial</returns>
-            <example>
-            The following example demonstrates how to get Celestial values in Local time.
-            DateTime offsets are done manually for readability purposes of this example. 
-            <code>
-            //Local time 
-             DateTime d = new DateTime(2018, 3, 19, 6, 56, 0, 0, DateTimeKind.Local);
-            
-            //EST Time is -4 hours from UTC
-            double offset = -4;
-            
-            //Convert the date to UTC time
-            d = d.AddHours(offset*-1);
-            
-            //Create a Coordinate with the UTC time		
-            Coordinate c = new Coordinate(39.0000, -72.0000, d);
-            //Create a new Celestial object by converting the existing one to Local
-            Celestial celestial = Celestial.Celestial_LocalTime(c, offset);
-            
-            Console.WriteLine(celestial.IsSunUp); //True
-            Console.WriteLine(celestial.SunRise); //3/19/2018 6:54:25 AM
-            </code>
-            </example>        
-        </member>
-        <member name="M:CoordinateSharp.Celestial.Solar_LocalTime(CoordinateSharp.Coordinate,System.Double)">
-            <summary>
-            Converts solar time values to local time. 
-            </summary>
-            <param name="coord">Coordinate</param>
-            <param name="offset">UTC offset</param>
-            <returns>Celestial</returns>
-            <example>
-            The following example demonstrates how to get Celestial, solar time only values in Local time.
-            DateTime offsets are done manually for readability purposes of this example. 
-            <code>
-            //Local time 
-             DateTime d = new DateTime(2018, 3, 19, 6, 56, 0, 0, DateTimeKind.Local);
-            
-            //EST Time is -4 hours from UTC
-            double offset = -4;
-            
-            //Convert the date to UTC time
-            d = d.AddHours(offset*-1);
-            
-            //Create a Coordinate with the UTC time		
-            Coordinate c = new Coordinate(39.0000, -72.0000, d);
-            //Create a new Celestial object by converting the existing one to Local
-            Celestial celestial = Celestial.Solar_LocalTime(c, offset);
-            
-            Console.WriteLine(celestial.IsSunUp); //True
-            Console.WriteLine(celestial.SunRise); //3/19/2018 6:54:25 AM
-            </code>
-            </example>  
-        </member>
-        <member name="M:CoordinateSharp.Celestial.Lunar_LocalTime(CoordinateSharp.Coordinate,System.Double)">
-            <summary>
-            Converts lunar time values to local time. 
-            </summary>
-            <param name="coord">Coordinate</param>
-            <param name="offset">UTC offset</param>
-            <returns>Celestial</returns>
-            <example>
-            The following example demonstrates how to get Celestial, lunar time only values in Local time.
-            DateTime offsets are done manually for readability purposes of this example. 
-            <code>
-            //Local time 
-             DateTime d = new DateTime(2018, 3, 19, 6, 56, 0, 0, DateTimeKind.Local);
-            
-            //EST Time is -4 hours from UTC
-            double offset = -4;
-            
-            //Convert the date to UTC time
-            d = d.AddHours(offset*-1);
-            
-            //Create a Coordinate with the UTC time		
-            Coordinate c = new Coordinate(39.0000, -72.0000, d);
-            //Create a new Celestial object by converting the existing one to Local
-            Celestial celestial = Celestial.Lunar_LocalTime(c, offset);
-            
-            Console.WriteLine(celestial.IsMoonUp); //False
-            Console.WriteLine(celestial.SunRise); //3/19/2018 08:17 AM
-            </code>
-            </example>     
-        </member>
-        <member name="M:CoordinateSharp.Celestial.CalculateSunData(System.Double,System.Double,System.DateTime)">
-            <summary>
-            Calculate sun data based on latitude, longitude and UTC date at the location.
-            </summary>
-            <param name="lat">latitude</param>
-            <param name="longi">longitude</param>
-            <param name="date">DateTime</param>
-            <returns>Celestial (Partially Populated)</returns>
-            <example>
-            The following example demonstrates how to create a partially populated Celestial object 
-            that only calculates solar data using static functions. 
-            <code>
-            //Get Celestial data at N 39, W 72 on 19-Mar-2019 10:10:12 UTC
-            Celestial cel = Celestial.CalculateSunData(39, -72, new DateTime(2019, 3, 19, 10, 10, 12));
-            
-            Console.WriteLine(cel.SunRise); //3/19/2019 10:54:50 AM
-            </code>
-            </example>
-        </member>
-        <member name="M:CoordinateSharp.Celestial.CalculateMoonData(System.Double,System.Double,System.DateTime)">
-            <summary>
-            Calculate moon data based on latitude, longitude and UTC date at the location.
-            </summary>
-            <param name="lat">latitude</param>
-            <param name="longi">longitude</param>
-            <param name="date">DateTime</param>
-            <returns>Celestial (Partially Populated)</returns>
-            <example>
-            The following example demonstrates how to create a partially populated Celestial object 
-            that only calculates lunar data using static functions. 
-            <code>
-            //Get Celestial data at N 39, W 72 on 19-Mar-2019 10:10:12 UTC
-            Celestial cel = Celestial.CalculateMoonData(39, -72, new DateTime(2019, 3, 19, 10, 10, 12));
-            
-            Console.WriteLine(cel.MoonRise); //3/19/2019 9:27:27 PM
-            </code>
-            </example>
-        </member>
         <member name="M:CoordinateSharp.MeeusTables.Moon_Periodic_Er(System.Double,System.Double,System.Double,System.Double,System.Double)">
             <summary>
             Returns Moon Periodic Value Er
@@ -1937,6 +1801,11 @@
         <member name="T:CoordinateSharp.MoonIllum">
             <summary>
             Class for storing moon illumination Information.
+            </summary>
+        </member>
+        <member name="P:CoordinateSharp.MoonIllum.Age">
+            <summary>
+            Moon age or number of days since last new moon
             </summary>
         </member>
         <member name="P:CoordinateSharp.MoonIllum.Fraction">
@@ -2054,41 +1923,6 @@
         <member name="P:CoordinateSharp.LunarEclipse.NextEclipse">
             <summary>
             Details about the next lunar eclipse at the specified DateTime and Coordinate.
-            </summary>
-        </member>
-        <member name="T:CoordinateSharp.AstrologicalSigns">
-            <summary>
-            Class for storing astrological naming and sign information.
-            </summary>
-        </member>
-        <member name="P:CoordinateSharp.AstrologicalSigns.MoonName">
-            <summary>
-            Astrological Moon Name String.
-            </summary>
-        </member>
-        <member name="P:CoordinateSharp.AstrologicalSigns.MoonSign">
-            <summary>
-            Astrological Moon Sign String.
-            </summary>       
-        </member>
-        <member name="P:CoordinateSharp.AstrologicalSigns.ZodiacSign">
-            <summary>
-            Astrological Zodiac Sign String.
-            </summary>
-        </member>
-        <member name="P:CoordinateSharp.AstrologicalSigns.EMoonName">
-            <summary>
-            Astrological Moon Name.
-            </summary>
-        </member>
-        <member name="P:CoordinateSharp.AstrologicalSigns.EMoonSign">
-            <summary>
-            Astrological Moon Sign.
-            </summary>
-        </member>
-        <member name="P:CoordinateSharp.AstrologicalSigns.EZodiacSign">
-            <summary>
-            Astrological Zodiac Sign.
             </summary>
         </member>
         <member name="T:CoordinateSharp.AlmanacMoonName">
@@ -2418,11 +2252,6 @@
             DateTime when the Annular or Total eclipse ends (if applicable).
             </summary>
             <remarks>returns 0001/01/01 if event did not occur</remarks>
-        </member>
-        <member name="P:CoordinateSharp.SolarEclipseDetails.PartialEclispeEnd">
-            <summary>
-            DateTime when the partial eclipse ends.
-            </summary>
         </member>
         <member name="P:CoordinateSharp.SolarEclipseDetails.PartialEclipseEnd">
             <summary>
@@ -4592,11 +4421,6 @@
             Eager load lunar eclipse data.
             </summary>
         </member>
-        <member name="P:CoordinateSharp.EagerLoad_Extensions.Zodiac">
-            <summary>
-            Eager load zodiac data.
-            </summary>
-        </member>
         <member name="P:CoordinateSharp.EagerLoad_Extensions.MGRS">
             <summary>
             Eager load MGRS data.
@@ -4817,11 +4641,6 @@
         <member name="F:CoordinateSharp.EagerLoad_ExtensionsType.Lunar_Eclipse">
             <summary>
             Eager load lunar eclipse data.
-            </summary>
-        </member>
-        <member name="F:CoordinateSharp.EagerLoad_ExtensionsType.Zodiac">
-            <summary>
-            Eager load zodiac data.
             </summary>
         </member>
         <member name="F:CoordinateSharp.EagerLoad_ExtensionsType.MGRS">
@@ -5525,6 +5344,169 @@
              gf.Densify(new Distance(10, DistanceType.Kilometers), Earth_Ellipsoid.Get_Ellipsoid(Earth_Ellipsoid_Spec.GRS67_1967));
              
              //The gf.Points list now contains additional points at intervals of approximately 10 kilometers.
+             </code>
+             </example>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.OrderPoints_RightHanded">
+             <summary>
+             Orders the points of the GeoFence to be right-handed (counterclockwise).
+             This method is typically used for the outer boundary of a polygon,
+             following the GeoJSON specification, where the outer boundary is represented with right-handed (counterclockwise) orientation.
+             </summary>
+             <remarks>
+             A polygon is considered right-handed if its points are ordered in a counterclockwise direction.
+             This method rearranges the points in the GeoFence to ensure a counterclockwise orientation.
+             </remarks>
+             <returns>Returns the GeoFence instance with points ordered in a right-handed (counterclockwise) direction.</returns>
+             <example>
+             Example usage:
+             <code>
+             // Create a GeoFence with points in arbitrary order
+             List&lt;Coordinate&gt; points = new List&lt;Coordinate&gt;()
+             {
+                 new Coordinate(47.6062, -122.3321),  // Seattle
+                 new Coordinate(48.7519, -122.4787),  // Bellingham
+                 new Coordinate(47.2529, -122.4443),  // Tacoma
+                 new Coordinate(48.0419, -122.9025),  // Port Townsend
+             };
+             GeoFence outerFence = new GeoFence(points);
+            
+             // Order the points to be right-handed (counterclockwise)
+             outerFence.OrderPoints_RightHanded();
+            
+             // Verify the points are ordered correctly and close the polygon
+             outerFence.ClosePolygon();
+            
+             // The GeoFence is now ready to be used as an outer boundary in a GeoJSON polygon
+             </code>
+             </example>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.OrderPoints_LeftHanded">
+             <summary>
+             Orders the points of the GeoFence to be left-handed (clockwise).
+             This method is typically used for inner boundaries (holes) in a polygon,
+             following the GeoJSON specification, where holes are represented with left-handed (clockwise) orientation.
+             </summary>
+             <remarks>
+             A polygon is considered left-handed if its points are ordered in a clockwise direction.
+             This method rearranges the points in the GeoFence to ensure a clockwise orientation.
+             </remarks>
+             <returns>Returns the GeoFence instance with points ordered in a left-handed (clockwise) direction.</returns>
+             <example>
+             Example usage:
+             <code>
+             // Create a GeoFence with points in arbitrary order
+             List&lt;Coordinate&gt; points = new List&lt;Coordinate&gt;()
+             {
+                   new Coordinate(46.8523, -121.7603),  // Mount Rainier (center point)
+                   new Coordinate(46.8625, -121.7401),  // Slightly north-east
+                   new Coordinate(46.8421, -121.7805),  // Slightly south-west
+                   new Coordinate(46.8650, -121.7850),  // North-west
+                   new Coordinate(46.8400, -121.7500)   // South-east
+             };
+             GeoFence innerFence = new GeoFence(points);
+            
+             // Order the points to be left-handed (clockwise)
+             innerFence.OrderPoints_LeftHanded();
+            
+             // Verify the points are ordered correctly and close the polygon
+             innerFence.ClosePolygon();
+            
+             // The GeoFence is now ready to be used as an inner boundary (hole) in a GeoJSON polygon
+             </code>
+             </example>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.GetCentroid">
+            <summary>
+            Returns the central point of the polygon.
+            </summary>
+            <returns>Point</returns>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.ClosePolygon">
+            <summary>
+            Closes and Completes the polygon shape ensure the first and last points are identical.
+            </summary>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.GeoJsonPolygonBuilder(CoordinateSharp.GeoFence)">
+             <summary>
+             Builds a GeoJSON representation of a polygon with a single outer boundary (fence).
+             This method is a simplified version that creates GeoJSON without any inner fences (holes).
+             </summary>
+             <param name="geoFence">The outer boundary of the polygon, which should be right-handed (counterclockwise).</param>
+             <returns>Returns a string representing the GeoJSON format of the polygon with the specified outer boundary.</returns>
+             <example>
+             The example method ensures that the outer fence is right-handed (counterclockwise), 
+             following GeoJSON conventions for outer boundaries.
+             <code>
+             // Create the outer fence (right-handed, closed polygon)
+             List&lt;Coordinate&gt; outerPoints = new List&lt;Coordinate&gt;()
+             {
+                 new Coordinate(47.6062, -122.3321),  // Seattle
+                 new Coordinate(48.7519, -122.4787),  // Bellingham
+                 new Coordinate(47.2529, -122.4443),  // Tacoma
+                 new Coordinate(48.0419, -122.9025),  // Port Townsend
+                 new Coordinate(47.6062, -122.3321)   // Closing the loop
+             };
+             GeoFence outerFence = new GeoFence(outerPoints);
+             
+             //Points should be right hand ordered and polygon closed if not previously done so.
+             outerFence.OrderPoints_RightHanded();
+             outerFence.ClosePolygon();
+            
+             // Build the GeoJSON string for the outer fence only
+             string geoJson = GeoFence.GeoJsonPolygonBuilder(outerFence);
+             Console.WriteLine(geoJson);
+             </code>
+             </example>
+        </member>
+        <member name="M:CoordinateSharp.GeoFence.GeoJsonPolygonBuilder(CoordinateSharp.GeoFence,System.Collections.Generic.List{CoordinateSharp.GeoFence})">
+             <summary>
+             Builds a GeoJSON representation of a polygon with an outer boundary (fence) and optional inner boundaries (fences).
+             The method ensures that the outer fence is right-handed (counterclockwise) and inner fences are left-handed (clockwise), 
+             following GeoJSON conventions for polygons and holes.
+             </summary>
+             <param name="outerFence">The outer boundary of the polygon, which should be right-handed (counterclockwise).</param>
+             <param name="innerFences">A list of inner boundaries (holes), each of which should be left-handed (clockwise).</param>
+             <returns>Returns a string representing the GeoJSON format of the polygon with the specified boundaries.</returns>
+             <example>
+             Example usage:
+             <code>
+             // Create the outer fence (right-handed, closed polygon)
+             List&lt;Coordinate&gt; outerPoints = new List&lt;Coordinate&gt;()
+             {
+                 new Coordinate(47.6062, -122.3321),  // Seattle
+                 new Coordinate(48.7519, -122.4787),  // Bellingham
+                 new Coordinate(47.2529, -122.4443),  // Tacoma
+                 new Coordinate(48.0419, -122.9025),  // Port Townsend
+             };
+             GeoFence outerFence = new GeoFence(outerPoints);
+             outerFence.OrderPoints_RightHanded();
+             outerFence.ClosePolygon();
+            
+             // Create inner fences (left-handed, closed polygons)
+             List&lt;Coordinate&gt; innerPoints1 = new List&lt;Coordinate&gt;()
+             {
+                 new Coordinate(46.8523, -121.7603),  // Mount Rainier
+                 new Coordinate(46.8625, -121.7401),
+                 new Coordinate(46.8421, -121.7805),
+             };
+             GeoFence innerFence1 = new GeoFence(innerPoints1);
+             innerFence1.OrderPoints_LeftHanded();
+             innerFence1.ClosePolygon();
+            
+             List&lt;Coordinate&gt; innerPoints2 = new List&lt;Coordinate&gt;()
+             {
+                 new Coordinate(47.2331, -119.8529),  // Quincy
+                 new Coordinate(47.2400, -119.8700),
+                 new Coordinate(47.2280, -119.8350),
+             };
+             GeoFence innerFence2 = new GeoFence(innerPoints2);
+             innerFence2.OrderPoints_LeftHanded();
+             innerFence2.ClosePolygon();
+            
+             // Build the GeoJSON string
+             string geoJson = GeoFence.GeoJsonPolygonBuilder(outerFence, new List&lt;GeoFence&gt; { innerFence1, innerFence2 });
+             Console.WriteLine(geoJson);
              </code>
              </example>
         </member>
@@ -6625,12 +6607,6 @@
             </summary>
             <returns>MGRS Formatted Coordinate String</returns>
         </member>
-        <member name="M:CoordinateSharp.MilitaryGridReferenceSystem.ToCentimeterString">
-            <summary>
-            Centimeter formatted MGRS string.
-            </summary>
-            <returns>MGRS Formatted Coordinate String</returns>
-        </member>
         <member name="M:CoordinateSharp.MilitaryGridReferenceSystem.ToRoundedString">
             <summary>
             Rounded MGRS string
@@ -6883,12 +6859,6 @@
         <member name="M:CoordinateSharp.UniversalTransverseMercator.ToString">
             <summary>
             Default formatted UTM string
-            </summary>
-            <returns>UTM Formatted Coordinate String</returns>
-        </member>
-        <member name="M:CoordinateSharp.UniversalTransverseMercator.ToCentimeterString">
-            <summary>
-            Centimeter formatted UTM string (to the 5th decimal)
             </summary>
             <returns>UTM Formatted Coordinate String</returns>
         </member>

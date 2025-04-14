@@ -42,7 +42,7 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
 
-            chkIncludeContacts.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
+            //chkIncludeContacts.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
         }
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
@@ -318,7 +318,7 @@ namespace Wildfire_ICS_Assist
         {
 
 
-            if (chkIncludeContacts.Checked)
+            if (false)
             {
                 string orgChart = Program.pdfExportService.createOrgChartPDF(CurrentIncident, CurrentOpPeriod, false, true, false);
                 string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
@@ -438,7 +438,7 @@ namespace Wildfire_ICS_Assist
 
         private void Print203()
         {
-            if (chkIncludeContacts.Checked)
+            if (false)
             {
                 string fullFilepath = "";
                 fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);

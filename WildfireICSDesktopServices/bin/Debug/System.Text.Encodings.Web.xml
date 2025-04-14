@@ -78,11 +78,6 @@
       <exception cref="T:System.ArgumentOutOfRangeException">
         <paramref name="characterCount" /> is out of range.</exception>
     </member>
-    <member name="M:System.Text.Encodings.Web.TextEncoder.Encode(System.IO.TextWriter,System.String)">
-      <summary>Encodes the specified string to a <see cref="T:System.IO.TextWriter" /> object.</summary>
-      <param name="output">The stream to which to write the encoded text.</param>
-      <param name="value">The string to encode.</param>
-    </member>
     <member name="M:System.Text.Encodings.Web.TextEncoder.Encode(System.IO.TextWriter,System.String,System.Int32,System.Int32)">
       <summary>Encodes a substring and writes it to a <see cref="T:System.IO.TextWriter" /> object.</summary>
       <param name="output">The stream to which to write the encoded text.</param>
@@ -98,6 +93,11 @@
         <paramref name="startIndex" /> is out of range.</exception>
       <exception cref="T:System.ArgumentOutOfRangeException">
         <paramref name="characterCount" /> is out of range.</exception>
+    </member>
+    <member name="M:System.Text.Encodings.Web.TextEncoder.Encode(System.IO.TextWriter,System.String)">
+      <summary>Encodes the specified string to a <see cref="T:System.IO.TextWriter" /> object.</summary>
+      <param name="output">The stream to which to write the encoded text.</param>
+      <param name="value">The string to encode.</param>
     </member>
     <member name="M:System.Text.Encodings.Web.TextEncoder.Encode(System.ReadOnlySpan{System.Char},System.Span{System.Char},System.Int32@,System.Int32@,System.Boolean)">
       <summary>Encodes the supplied characters.</summary>
