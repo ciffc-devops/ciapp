@@ -14,6 +14,7 @@ using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using WildfireICSDesktopServices;
+using WildfireICSDesktopServices.Logging;
 
 namespace Wildfire_ICS_Assist
 {
@@ -22,7 +23,8 @@ namespace Wildfire_ICS_Assist
         OrganizationChart CurrentOrgChart { get => Program.CurrentOrgChart; }
         public OperationalGroupsForm()
         {
-            InitializeComponent(); 
+            InitializeComponent(); SetControlColors(this.Controls);
+
         }
 
         private void OperationalGroupsForm_Load(object sender, EventArgs e)
@@ -122,7 +124,7 @@ namespace Wildfire_ICS_Assist
 
             treeOpsChart.Nodes.Clear();
 
-
+            Program.CurrentIncident.UpdateOperationalGroupCounts(Program.CurrentOpPeriod);
 
             OperationalGroup FirstOpGroup = Program.CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o=>o.ParentID == Guid.Empty && o.OpPeriod == Program.CurrentOpPeriod);
 
@@ -153,7 +155,6 @@ namespace Wildfire_ICS_Assist
             }
             treeOpsChart.Focus();
 
-            btnPrint204A.Enabled = Program.CurrentIncident.ActiveOperationalGroups.Any(o => !o.IsBranchOrDiv && o.OpPeriod == Program.CurrentOpPeriod);
         }
 
         private TreeNode GetSelectedByRoleID(Guid groupId)
@@ -449,16 +450,18 @@ namespace Wildfire_ICS_Assist
             group.OpPeriod = Program.CurrentOpPeriod;
             if (treeOpsChart.SelectedNode != null)
             {
-                ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-                if (role.ReportsTo == Globals.OpsChiefGenericID || role.RoleID == Globals.OpsChiefGenericID)
+                OperationalGroup selectedNodeGroup = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
+                if (selectedNodeGroup.GroupType.Equals("Branch") || selectedNodeGroup.GroupType.Equals("Section"))
                 {
-                    group.ParentID = role.RoleID;
-                    group.ParentName = role.RoleName;
+                    group.ParentID = selectedNodeGroup.ID;
+                    group.ParentName = selectedNodeGroup.ResourceName;
                 }
                 else
                 {
-                    group.ParentID = role.ReportsTo;
-                    group.ParentName = role.ReportsToRoleName;
+                    group.ParentID = selectedNodeGroup.ParentID;
+                    group.ParentName = selectedNodeGroup.ParentName;
+
+
                 }
             }
             else
@@ -568,59 +571,24 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrint204_Click(object sender, EventArgs e)
         {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-
-            string fullFilepath = "";
-            //int end = CurrentIncident.FileName.LastIndexOf("\\");
-            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
-
-            string fullOutputFilename = "ICS 204 - " + Program.CurrentIncident.IncidentNameAndNumberForPath + " Op " + Program.CurrentOpPeriod;    // + ".pdf";
-
-            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
-
-            allPDFs.AddRange(Program.pdfExportService.exportAllAssignmentSummariesToPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false));
-
-            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-            try
-            {
-                File.WriteAllBytes(fullFilepath, fullFile);
-                System.Diagnostics.Process.Start(fullFilepath);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
-            }
+            Button btnSender = (Button)sender;
+            System.Drawing.Point ptLowerLeft = new System.Drawing.Point(0, btnSender.Height);
+            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+            cmsOutput.Show(ptLowerLeft);
         }
 
         private void btnPrint204A_Click(object sender, EventArgs e)
         {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-
-            string fullFilepath = "";
-            //int end = CurrentIncident.FileName.LastIndexOf("\\");
-            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
-
-            string fullOutputFilename = "ICS 204A - " + Program.CurrentIncident.IncidentNameAndNumberForPath + " Op " + Program.CurrentOpPeriod;    // + ".pdf";
-
-            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
-
-            allPDFs.AddRange(Program.pdfExportService.exportAllAssignmentDetailsToPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false));
-
-            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-            try
-            {
-                File.WriteAllBytes(fullFilepath, fullFile);
-                System.Diagnostics.Process.Start(fullFilepath);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
-            }
+            
         }
 
         private void btnExportSignInToCSV_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        private void ExportToCSV()
         {
             svdExport.FileName = "AssignmentList-" + Program.CurrentIncident.IncidentNameAndNumberForPath + "-OP-" + Program.CurrentOpPeriod + ".csv";
             DialogResult result = svdExport.ShowDialog();
@@ -631,16 +599,10 @@ namespace Wildfire_ICS_Assist
 
 
 
+                Program.CurrentIncident.UpdateOperationalGroupCounts(Program.CurrentOpPeriod);
+                List<OperationalGroup> groups = Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.OpPeriod == Program.CurrentOpPeriod).OrderBy(o=>o.Depth).ThenBy(o=>o.Name).ToList();
 
-                List<ICSRole> roles = new List<ICSRole>();
-                foreach(ICSRole role in Program.CurrentOrgChart.ActiveRoles.Where(o=>o.IsOpGroupSup || o.RoleID == Globals.OpsChiefGenericID))
-                {
-                    if (role.RoleID == Globals.OpsChiefGenericID) { roles.Add(role); }
-                   else if (role.IsOpGroupSup) { roles.Add(role); }
-                }
-                List<OperationalGroup> groups = Program.CurrentIncident.ActiveOperationalGroups.Where(o=>o.OpPeriod == Program.CurrentOpPeriod).ToList();
-
-                string csv = OperationalGroupTools.OperationalGroupsToCSV(roles, groups, delimiter);
+                string csv = OperationalGroupTools.OperationalGroupsToCSV(groups, delimiter);
                 try
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
@@ -658,7 +620,6 @@ namespace Wildfire_ICS_Assist
                 }
             }
         }
-
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditSelectedNode();
@@ -689,22 +650,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrintLogistics_Click(object sender, EventArgs e)
         {
-            ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
-
-            string fullFilepath = "";
-            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
-
-            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentNameAndNumberForPath;
-            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
-
-            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-            try
-            {
-                File.WriteAllBytes(fullFilepath, fullFile);
-                System.Diagnostics.Process.Start(fullFilepath);
-            }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            
         }
 
         private void printLogisticsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -730,6 +676,103 @@ namespace Wildfire_ICS_Assist
         private void OperationalGroupsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveSTTFChanges();
+        }
+
+        private void exportToSpreadsheetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportToCSV();
+        }
+
+        private void viewICS204PDFsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            string fullFilepath = "";
+            //int end = CurrentIncident.FileName.LastIndexOf("\\");
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "ICS 204 - " + Program.CurrentIncident.IncidentNameAndNumberForPath + " Op " + Program.CurrentOpPeriod;    // + ".pdf";
+
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            PDFCreationResults results = Program.pdfExportService.exportAllAssignmentSummariesToPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false);
+            if (results.errors.Any())
+            {
+                LogService log = new LogService();
+                foreach (Exception ex in results.errors)
+                {
+                    log.Log("Exported ICS 204 PDF error: " + ex.ToString());
+                }
+
+            }
+            if (results.Successful)
+            {
+                allPDFs.AddRange(results.bytes);
+
+
+                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+                try
+                {
+                    File.WriteAllBytes(fullFilepath, fullFile);
+                    System.Diagnostics.Process.Start(fullFilepath);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("There was an error trying to export the ICS 204 PDFs.  Please check the log for details.");
+            }
+        }
+
+        private void viewICS204APDFsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            string fullFilepath = "";
+            //int end = CurrentIncident.FileName.LastIndexOf("\\");
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "ICS 204A - " + Program.CurrentIncident.IncidentNameAndNumberForPath + " Op " + Program.CurrentOpPeriod;    // + ".pdf";
+
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            allPDFs.AddRange(Program.pdfExportService.exportAllAssignmentDetailsToPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false));
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+            }
+        }
+
+        private void viewLogisticsOverviewPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
+
+            string fullFilepath = "";
+            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+            string fullOutputFilename = "Logistics Overview " + Program.CurrentIncident.IncidentNameAndNumberForPath;
+            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(fullFilepath, fullFile);
+                System.Diagnostics.Process.Start(fullFilepath);
+            }
+            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
     }
 }

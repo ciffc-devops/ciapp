@@ -106,7 +106,7 @@ namespace Wildfire_ICS_Assist
                     selectedResource = Program.CurrentIncident.ActiveOperationalSubGroups.First(o => o.ID == rec.ResourceID);
                     SubResources.AddRange(Program.CurrentIncident.GetReportingResources(selectedResource.ID));
 
-                    crewEditControl1.SetSubGroup(selectedResource as Crew, SubResources);
+                    crewEditControl1.SetCrew(selectedResource as Crew, SubResources);
                     btnDoneCrewEdit.Visible = true;
                     wizardPages1.SelectedIndex = 2;
                 }
@@ -324,7 +324,7 @@ namespace Wildfire_ICS_Assist
         {
             CheckInMode = "Crew";
             Crew sub = new Crew();
-            crewEditControl1.SetSubGroup(sub, SubResources);
+            crewEditControl1.SetCrew(sub, SubResources);
             wizardPages1.SelectedIndex = 2;
         }
 
@@ -435,7 +435,7 @@ namespace Wildfire_ICS_Assist
 
 
 
-                selectedResource = crewEditControl1.subGroup.Clone();
+                selectedResource = crewEditControl1.selectedCrew.Clone();
                 checkInRecord.ResourceType = "Crew";
                 //  SubResources.Clear();
                 //  SubResources.AddRange(crewEditControl1.resources);
@@ -458,7 +458,7 @@ namespace Wildfire_ICS_Assist
             CheckInMode = "Heavy Equipment Crew";
             Crew sub = new Crew();
             sub.IsEquipmentCrew = true;
-            crewEditControl1.SetSubGroup(sub, SubResources);
+            crewEditControl1.SetCrew(sub, SubResources);
             wizardPages1.SelectedIndex = 2;
 
         }

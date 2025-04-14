@@ -15,7 +15,6 @@ namespace WF_ICS_ClassLibrary.Models
 
         public OperationalGroupResourceListing() { Active = true; ResourceID = Guid.NewGuid(); }
 
-        public Guid SubGroupID { get => ID; set => ID = value; }
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid ResourceID { get => _ResourceID; set => _ResourceID = value; }
      /*

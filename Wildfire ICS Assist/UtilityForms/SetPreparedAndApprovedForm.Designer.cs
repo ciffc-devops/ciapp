@@ -79,7 +79,7 @@
             this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
             this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(485, 204);
             this.prepAndApprovePanel1.TabIndex = 0;
-            this.prepAndApprovePanel1.TitleText = "Panel Title Here";
+            this.prepAndApprovePanel1.TitleText = "Prepared and Approved";
             // 
             // btnCancel
             // 

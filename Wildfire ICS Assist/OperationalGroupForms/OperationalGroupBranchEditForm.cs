@@ -26,8 +26,15 @@ namespace Wildfire_ICS_Assist
 
         private void OperationalGroupBranchEditForm_Load(object sender, EventArgs e)
         {
-           
 
+            if (SelectedGroup != null && SelectedGroup.PreparedByRoleID == Guid.Empty)
+            {
+                if (Program.CurrentRole != null)
+                {
+                    SelectedGroup.SetPreparedBy(Program.CurrentRole);
+                }
+                SelectedGroup.DatePrepared = DateTime.Now;
+            }
 
         }
 

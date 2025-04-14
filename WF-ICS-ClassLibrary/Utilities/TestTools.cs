@@ -249,8 +249,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                     test.Kind = "Heavy Equipment Crew";
                 }
                 OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                listing.SubGroupID = test.ID;
-                listing.OperationalGroupID = test.OperationalGroupID;
+                listing.OperationalGroupID = test.ID;
                 listing.Kind = resource.Kind;
                 listing.Type = resource.Type;
                 listing.ResourceIdentifier = "Crew " + seed;

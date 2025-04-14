@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist
     {
        public  Crew selectedCrew
         {
-            get { return crewEditControl1.subGroup; }
+            get { return crewEditControl1.selectedCrew; }
             set { SetCrew(value); }
         }
 
@@ -39,7 +39,7 @@ namespace Wildfire_ICS_Assist
                 List<IncidentResource> SubResources = new List<IncidentResource>();
                 SubResources.AddRange(Program.CurrentIncident.GetReportingResources(crew.ID));
 
-                crewEditControl1.SetSubGroup(crew, SubResources);
+                crewEditControl1.SetCrew(crew, SubResources);
                 
             }
 

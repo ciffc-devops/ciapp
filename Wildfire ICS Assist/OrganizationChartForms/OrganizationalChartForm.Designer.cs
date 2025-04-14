@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrganizationalChartForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnSetPreparedAndApproved = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.rbUnifiedCommand = new System.Windows.Forms.RadioButton();
             this.rbIncidentCommander = new System.Windows.Forms.RadioButton();
@@ -46,6 +47,7 @@
             this.removeSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPrint203 = new System.Windows.Forms.Button();
             this.cmsOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tscboIncludeContacts = new System.Windows.Forms.ToolStripComboBox();
             this.viewICS203AssignmentsPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewICS207OrganizationalChartPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -55,7 +57,6 @@
             this.btnAssignRole = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -104,6 +105,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.btnSetPreparedAndApproved);
             this.splitContainer2.Panel1.Controls.Add(this.label1);
             this.splitContainer2.Panel1.Controls.Add(this.rbUnifiedCommand);
             this.splitContainer2.Panel1.Controls.Add(this.rbIncidentCommander);
@@ -112,13 +114,25 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeOrgChart);
             this.splitContainer2.Size = new System.Drawing.Size(1226, 539);
-            this.splitContainer2.SplitterDistance = 40;
+            this.splitContainer2.SplitterDistance = 49;
             this.splitContainer2.TabIndex = 1;
+            // 
+            // btnSetPreparedAndApproved
+            // 
+            this.btnSetPreparedAndApproved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_151_square_edit;
+            this.btnSetPreparedAndApproved.Location = new System.Drawing.Point(958, 5);
+            this.btnSetPreparedAndApproved.Name = "btnSetPreparedAndApproved";
+            this.btnSetPreparedAndApproved.Size = new System.Drawing.Size(265, 42);
+            this.btnSetPreparedAndApproved.TabIndex = 54;
+            this.btnSetPreparedAndApproved.Text = "Prepared and Approved";
+            this.btnSetPreparedAndApproved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSetPreparedAndApproved.UseVisualStyleBackColor = true;
+            this.btnSetPreparedAndApproved.Click += new System.EventHandler(this.btnSetPreparedAndApproved_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 7);
+            this.label1.Location = new System.Drawing.Point(3, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(183, 24);
             this.label1.TabIndex = 2;
@@ -127,7 +141,7 @@
             // rbUnifiedCommand
             // 
             this.rbUnifiedCommand.AutoSize = true;
-            this.rbUnifiedCommand.Location = new System.Drawing.Point(430, 5);
+            this.rbUnifiedCommand.Location = new System.Drawing.Point(430, 12);
             this.rbUnifiedCommand.Name = "rbUnifiedCommand";
             this.rbUnifiedCommand.Size = new System.Drawing.Size(179, 28);
             this.rbUnifiedCommand.TabIndex = 1;
@@ -141,7 +155,7 @@
             // 
             this.rbIncidentCommander.AutoSize = true;
             this.rbIncidentCommander.Checked = true;
-            this.rbIncidentCommander.Location = new System.Drawing.Point(220, 5);
+            this.rbIncidentCommander.Location = new System.Drawing.Point(220, 12);
             this.rbIncidentCommander.Name = "rbIncidentCommander";
             this.rbIncidentCommander.Size = new System.Drawing.Size(204, 28);
             this.rbIncidentCommander.TabIndex = 0;
@@ -158,7 +172,7 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(0, 0);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(1226, 495);
+            this.treeOrgChart.Size = new System.Drawing.Size(1226, 486);
             this.treeOrgChart.TabIndex = 0;
             this.treeOrgChart.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeOrgChart_AfterSelect);
             // 
@@ -246,13 +260,25 @@
             // 
             this.cmsOutput.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.cmsOutput.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox1,
+            this.tscboIncludeContacts,
             this.viewICS203AssignmentsPDFToolStripMenuItem,
             this.viewICS207OrganizationalChartPDFToolStripMenuItem,
             this.toolStripSeparator3,
             this.exportToSpreadsheetToolStripMenuItem});
             this.cmsOutput.Name = "cmsOutput";
-            this.cmsOutput.Size = new System.Drawing.Size(415, 137);
+            this.cmsOutput.Size = new System.Drawing.Size(415, 159);
+            // 
+            // tscboIncludeContacts
+            // 
+            this.tscboIncludeContacts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tscboIncludeContacts.DropDownWidth = 350;
+            this.tscboIncludeContacts.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.tscboIncludeContacts.Items.AddRange(new object[] {
+            "Do not include a contact list when printing",
+            "Include a contact list when printing"});
+            this.tscboIncludeContacts.Name = "tscboIncludeContacts";
+            this.tscboIncludeContacts.Size = new System.Drawing.Size(350, 33);
+            this.tscboIncludeContacts.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             // 
             // viewICS203AssignmentsPDFToolStripMenuItem
             // 
@@ -338,19 +364,6 @@
             this.svdExport.DefaultExt = "csv";
             this.svdExport.Filter = "Comma-separated values|*.csv";
             // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBox1.DropDownWidth = 350;
-            this.toolStripComboBox1.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.toolStripComboBox1.Items.AddRange(new object[] {
-            "Include a contact list when printing",
-            "Do not include a contact list when printing"});
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(350, 33);
-            this.toolStripComboBox1.Text = "Include a contact list when printing";
-            this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -410,7 +423,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem exportToSpreadsheetToolStripMenuItem;
         private System.Windows.Forms.Button btnPrint203;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripComboBox tscboIncludeContacts;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button btnSetPreparedAndApproved;
     }
 }

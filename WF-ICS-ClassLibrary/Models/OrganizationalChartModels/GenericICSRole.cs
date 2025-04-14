@@ -25,6 +25,8 @@ namespace WF_ICS_ClassLibrary.Models.OrganizationalChartModels
         [ProtoMember(9)] private bool _RequiresOperationalGroup;
         [ProtoMember(10)] private int _Depth;
         [ProtoMember(11)] private int _ManualSortOrder;
+        [ProtoMember(12)] private string _PDFFieldName;
+
         public Guid GenericRoleID { get => _GenericRoleID; set => _GenericRoleID = value; }
         public string RoleName { get => _RoleName; set => _RoleName = value; }
         public string RoleNameWithPlaceholder { get => _RoleNameWithPlaceholder; set => _RoleNameWithPlaceholder = value; }
@@ -36,5 +38,6 @@ namespace WF_ICS_ClassLibrary.Models.OrganizationalChartModels
         public bool RequiresOperationalGroup { get => _RequiresOperationalGroup; set => _RequiresOperationalGroup = value; }
         public int Depth { get => _Depth; set => _Depth = value; }
         public int ManualSortOrder { get => _ManualSortOrder; set => _ManualSortOrder = value; }
+        public string PDFFieldName { get => _PDFFieldName; set => _PDFFieldName = value; }
     }
 }

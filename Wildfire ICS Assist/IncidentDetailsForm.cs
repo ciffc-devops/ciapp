@@ -729,20 +729,22 @@ namespace Wildfire_ICS_Assist
                 List<Guid> ICRoles = new List<Guid>();
                 ICRoles.Add(Globals.IncidentCommanderGenericID); ICRoles.Add(Globals.DeputyIncidentCommanderGenericID); ICRoles.Add(Globals.UnifiedCommand1GenericID); ICRoles.Add(Globals.UnifiedCommand2GenericID); ICRoles.Add(Globals.UnifiedCommand3GenericID);
 
+                ICSRole IC = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Globals.IncidentCommanderGenericID);
+
                 List<Guid> CommandStaffRoles = new List<Guid>();
-                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == Globals.IncidentCommanderGenericID && !ChiefIDs.Contains(o.RoleID)))
+                foreach (ICSRole role in CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == IC.RoleID && !ChiefIDs.Contains(o.GenericRoleID)))
                 {
-                    CommandStaffRoles.Add(role.RoleID);
+                    CommandStaffRoles.Add(role.GenericRoleID);
                 }
 
                 foreach (CollapsiblePanel panel in collapsiblePanels) { panel.BackColor = Color.White; }
                 //resizeGroup("Assignments", false, true);
-                if (ICRoles.Contains(Program.CurrentRole.RoleID))
+                if (ICRoles.Contains(Program.CurrentRole.GenericRoleID))
                 {
                     pnlTaskInfo.BackColor = Color.LimeGreen;
                     //    pnlCommandTeam.BackColor = Color.LimeGreen;
                 }
-                else if (CommandStaffRoles.Contains(Program.CurrentRole.RoleID))
+                else if (CommandStaffRoles.Contains(Program.CurrentRole.GenericRoleID))
                 {
                     pnlTaskInfo.BackColor = Color.IndianRed;
                 }
@@ -783,6 +785,10 @@ namespace Wildfire_ICS_Assist
                 {
                     pnlTaskInfo.BackColor = Color.White;
                 }
+
+                splitContainer1.Panel1.BackColor = pnlTaskInfo.BackColor;
+                splitContainer1.Panel2.BackColor = pnlTaskInfo.BackColor;
+
                 CheckForPositionLogReminders();
             }
         }
@@ -3507,6 +3513,11 @@ namespace Wildfire_ICS_Assist
         }
         #endregion
 
+        private void viewIncidentUpdateListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TaskUpdateListForm form = new TaskUpdateListForm();
+            form.Show();
+        }
     }
 
 

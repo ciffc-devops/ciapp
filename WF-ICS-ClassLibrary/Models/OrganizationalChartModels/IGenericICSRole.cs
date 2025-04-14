@@ -13,5 +13,6 @@ namespace WF_ICS_ClassLibrary.Models.OrganizationalChartModels
         bool OnInitialOrgChart { get; set; }
         bool RequiresOperationalGroup { get; set; }
         int ManualSortOrder { get; set; }
+        string PDFFieldName { get; set; }
     }
 }

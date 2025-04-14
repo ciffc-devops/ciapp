@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -98,6 +99,44 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     Program.incidentDataService.UpsertSafetyMessage(testSafetyMessage);
                     log.Append("Saved SafetyMessage"); log.Append(Environment.NewLine);
                 }
+
+                if (checkboxes[16].Checked)
+                {
+                    OperationalGroup FirstOpGroup = Program.CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o => o.ParentID == Guid.Empty && o.OpPeriod == Program.CurrentOpPeriod);
+
+                    //add some branches
+                    for (int x = 0; x < 2; x++)
+                    {
+                        CreateTestOpGroup("Branch", FirstOpGroup, x);   
+                    }
+                    foreach(OperationalGroup branch in Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.GroupType.Equals("Branch")))
+                    {
+                        for (int x = 0; x < 2; x++)
+                        {
+                            CreateTestOpGroup("Division", branch, x);
+                        }
+                    }
+
+                    foreach (OperationalGroup divis in Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.GroupType.Equals("Division")))
+                    {
+                        for (int x = 0; x < 5; x++)
+                        {
+                            bool isST = RandomBooleanGenerator.GetRandomBoolean();
+                            if (isST) { CreateTestOpGroup("Strike Team", divis, x); }
+                            else { CreateTestOpGroup("Task Force", divis, x); }
+                            
+                        }
+                    }
+
+
+                    log.Append("Saved Operational Groups"); log.Append(Environment.NewLine);
+
+
+                }
+
+
+
+
                 if (checkboxes[6].Checked)
                 {
                     //check in
@@ -119,20 +158,23 @@ namespace Wildfire_ICS_Assist.UtilityForms
                             && Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.MnemonicAbrv)
                             && o.MnemonicAbrv.Equals(testCheckInPersonnel.Record.InitialRoleAcronym)))
                         {
-                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.OrderBy(o => Guid.NewGuid()).Where(o => o.IndividualID == Guid.Empty).First();
-                            testCheckInPersonnel.Record.InitialRoleName = role.RoleName;
-
-                            //Assign them
-                            Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == testCheckInPersonnel.Record.ResourceID);
-                            role.IndividualID = p.ID;
-                            role.IndividualName = p.Name;
-                            //role.teamMember = p.Clone();
-                            if(role.GenericRoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirectorGenericID)
+                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.OrderBy(o => Guid.NewGuid()).FirstOrDefault(o => o.IndividualID == Guid.Empty);
+                            if (role != null)
                             {
-                                ;
-                            }
+                                testCheckInPersonnel.Record.InitialRoleName = role.RoleName;
 
-                            Program.incidentDataService.UpsertICSRole(role);
+                                //Assign them
+                                Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == testCheckInPersonnel.Record.ResourceID);
+                                role.IndividualID = p.ID;
+                                role.IndividualName = p.Name;
+                                //role.teamMember = p.Clone();
+                                if (role.GenericRoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirectorGenericID)
+                                {
+                                    ;
+                                }
+
+                                Program.incidentDataService.UpsertICSRole(role);
+                            }
                         }
 
                     }
@@ -383,6 +425,42 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
         }
 
+        private void CreateTestOpGroup(string GroupType, OperationalGroup parentGroup, int index = 0)
+        {
+            OperationalGroup op = new OperationalGroup();
+            op.GroupType = GroupType;
+            if (op.GroupType.Equals("Branch")) { op.Name = (index + 1).ToString(); }
+            else if (op.GroupType.Equals("Division")) {
+                int branchNumber = 0;
+                int.TryParse(parentGroup.Name, out branchNumber);
+                
+                op.Name = ((char)(65 + index + (branchNumber * 2))).ToString(); }
+            else { op.Name = StringExt.LoremIpsum(1, 3, 1, 1, 1); }
+            op.OpPeriod = Program.CurrentOpPeriod;
+            op.ParentID = parentGroup.ID;
+            op.ParentName = parentGroup.ResourceName;
+
+            Program.incidentDataService.UpsertOperationalGroup(op);
+            if (op.LeaderICSRoleID == Guid.Empty)
+            {
+                ICSRole role = op.CreateRoleFromOperationalGroup(Program.incidentDataService.CurrentIncident.activeOrgCharts.First(o => o.OpPeriod == op.OpPeriod).ID);
+                role.OperationalGroupName = op.ResourceName;
+                Guid ReportsToRoleID = Program.CurrentIncident.GetICSReportsToThroughOpGroup(role);
+                if (ReportsToRoleID != Guid.Empty)
+                {
+                    ICSRole reportsToRole = Program.CurrentIncident.activeOrgCharts.First(o => o.OpPeriod == op.OpPeriod).AllRoles.FirstOrDefault(o => o.RoleID == ReportsToRoleID);
+                    role.ReportsTo = reportsToRole.RoleID;
+                    role.ReportsToGenericRoleID = reportsToRole.GenericRoleID;
+                    role.ReportsToRoleName = reportsToRole.RoleName;
+                }
+                Program.incidentDataService.UpsertICSRole(role);
+                op.LeaderICSRoleID = role.RoleID;
+                op.LeaderICSRoleName = role.RoleName;
+
+                Program.incidentDataService.UpsertOperationalGroup(op);
+            }
+        }
+
         private void btnCheckAll_Click(object sender, EventArgs e)
         {
             foreach (CheckBox chk in checkboxes) { chk.Checked = true; }
@@ -471,6 +549,11 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Aircraft Check In";
+
+            checkboxes.Add(new CheckBox());
+            checkboxes.Last().Text = "Operational Groups";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
+
 
             for (int x = 0; x < checkboxes.Count; x++)
             {

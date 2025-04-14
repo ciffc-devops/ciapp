@@ -12,6 +12,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using Wildfire_ICS_Assist.Properties;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -56,14 +57,18 @@ namespace Wildfire_ICS_Assist
                 try { cboSupervisor.SelectedValue = SelectedGroup.LeaderID; }
                 catch { }
                 PopulateReportingResources();
+
+                if(SelectedGroup.PreparedByRoleID == Guid.Empty)
+                {
+                    SelectedGroup.SetPreparedBy(Program.CurrentRole);
+                    SelectedGroup.DatePrepared = DateTime.Now;
+                }
             }
         }
 
         private void PopulateReportingResources()
         {
             strikeTeamTaskForceDetailsControl1.SetSelectedGroup(SelectedGroup);
-
-
         }
 
         private void PopulateReportsTo()
@@ -125,12 +130,6 @@ List<string> LeaderRoleAcronyms = new List<string> { "STLD", "TFLD", "DIVS" };
 
             SelectedGroup.ResourceListing = strikeTeamTaskForceDetailsControl1.SelectedOpGroup.ResourceListing;
 
-            if (string.IsNullOrEmpty(SelectedGroup.PreparedByName)) { SelectedGroup.PreparedByName = Program.CurrentRole.IndividualName; }
-            if (string.IsNullOrEmpty(SelectedGroup.PreparedByPosition)) { SelectedGroup.PreparedByPosition = Program.CurrentRole.RoleName; }
-            if (SelectedGroup.PreparedByPositionID == Guid.Empty) { SelectedGroup.PreparedByPositionID = Program.CurrentRole.RoleID; }
-            
-
-
             if (cboSupervisor.SelectedItem != null)
             {
                 Personnel sup = (Personnel)cboSupervisor.SelectedItem;
@@ -175,6 +174,19 @@ List<string> LeaderRoleAcronyms = new List<string> { "STLD", "TFLD", "DIVS" };
             }
             else { txtIdentifier.BackColor = Program.GoodColor; }
 
+        }
+
+        private void btnSetPreparedAndApproved_Click(object sender, EventArgs e)
+        {
+            SetPreparedAndApprovedForm form = new SetPreparedAndApprovedForm();
+            form.SetPreparedBy(SelectedGroup.PreparedByRoleID, SelectedGroup.DatePrepared);
+            form.SetApprovedBy(SelectedGroup.ApprovedByRoleID, SelectedGroup.DateApproved);
+            DialogResult dr = form.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                SelectedGroup.SetPreparedBy(form.PreparedBy); SelectedGroup.DatePrepared = form.DatePrepared;
+                SelectedGroup.SetApprovedBy(form.ApprovedBy); SelectedGroup.DateApproved = form.DateApproved;
+            }
         }
     }
 }
