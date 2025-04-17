@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 
@@ -165,7 +166,7 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
             }
             else
             {
-                MessageBox.Show(result.Item2, "Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LgMessageBox.Show(result.Item2, "Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

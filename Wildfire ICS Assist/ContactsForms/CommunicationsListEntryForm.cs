@@ -75,7 +75,7 @@ namespace Wildfire_ICS_Assist
             } else
             {
                 txtContactName.BackColor = Program.ErrorColor;
-                //MessageBox.Show(Properties.Resources.EditContactValidationError);
+                //LgMessageBox.Show(Properties.Resources.EditContactValidationError);
             }
         }
 

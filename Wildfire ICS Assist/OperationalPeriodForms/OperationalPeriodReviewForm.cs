@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist.OperationalPeriodForms
@@ -197,7 +198,7 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
                     File.WriteAllBytes(fullFilepath, fullFile);
                     System.Diagnostics.Process.Start(fullFilepath);
                 }
-                catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+                catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
             }
 
         }
@@ -272,7 +273,7 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
             if (e.RowIndex >= 0 && e.ColumnIndex == colindex)
             {
                 SummaryStat stat = (SummaryStat)dgvSummaryStats.Rows[e.RowIndex].DataBoundItem;
-                if (!string.IsNullOrEmpty(stat.MoreInfo)) { MessageBox.Show(stat.MoreInfo); }
+                if (!string.IsNullOrEmpty(stat.MoreInfo)) { LgMessageBox.Show(stat.MoreInfo); }
             }
         }
     }

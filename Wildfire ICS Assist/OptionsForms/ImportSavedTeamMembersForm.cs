@@ -158,13 +158,13 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 {
                     string importMessage = Properties.Resources.MembersImported;
                     importMessage = importMessage.Replace("[IMPORT]", ImportedCount.ToString()).Replace("[UPDATE]", UpdatedCount.ToString());
-                    MessageBox.Show(importMessage);
+                    LgMessageBox.Show(importMessage);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show(Properties.Resources.NoMembersImported);
+                    LgMessageBox.Show(Properties.Resources.NoMembersImported);
                     
                 }
 

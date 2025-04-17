@@ -645,6 +645,12 @@
     <Compile Include="UtilityForms\ICSFormHelpForm.Designer.cs">
       <DependentUpon>ICSFormHelpForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\LgMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\LgMessageBox.Designer.cs">
+      <DependentUpon>LgMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\NetworkSelectIPForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1141,6 +1147,9 @@
     <EmbeddedResource Include="UtilityForms\ICSFormHelpForm.resx">
       <DependentUpon>ICSFormHelpForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\LgMessageBox.resx">
+      <DependentUpon>LgMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\NetworkSelectIPForm.resx">
       <DependentUpon>NetworkSelectIPForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1292,6 +1301,9 @@
       <DependentUpon>UpdateHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="BlankForms\Dietary and Allergy Details.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Form-209.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf">

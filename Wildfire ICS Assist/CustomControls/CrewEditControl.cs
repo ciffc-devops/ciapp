@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using Wildfire_ICS_Assist.OptionsForms;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
@@ -113,7 +114,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                     if (resources.Any(o => o.ID == p.ID))
                     {
-                        MessageBox.Show("Sorry, this resource is already in the list.");
+                        LgMessageBox.Show("Sorry, this resource is already in the list.");
                     }
                     else
                     {
@@ -159,7 +160,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                     if (resources.Any(o => o.ID == r.ID))
                     {
-                        MessageBox.Show("Sorry, this resource is already in the list.");
+                        LgMessageBox.Show("Sorry, this resource is already in the list.");
                     }
                     else
                     {
@@ -242,7 +243,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void btnDeleteResource_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 List<OperationalGroupResourceListing> toDelete = new List<OperationalGroupResourceListing>();
                 foreach (DataGridViewRow row in dgvGroup.SelectedRows)
@@ -326,7 +327,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void btnRemoveFromCrew_Click(object sender, EventArgs e)
         {
-            if (dgvGroup.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureRemoveFromCrew, Properties.Resources.AreYouSureTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dgvGroup.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureRemoveFromCrew, Properties.Resources.AreYouSureTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 List<OperationalGroupResourceListing> toRemove = new List<OperationalGroupResourceListing>();
                 foreach (DataGridViewRow row in dgvGroup.SelectedRows)

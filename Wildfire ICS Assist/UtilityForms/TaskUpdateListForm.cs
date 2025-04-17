@@ -74,7 +74,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
         private void deleteTaskUpdateLocallyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Are you sure you want to delete the local copy of this update? it will not impact internet sync or network sync users.  This should only be done to resolve issues with saving a file locally.  Proceed?", "Delete?", MessageBoxButtons.YesNo);
+            DialogResult dr = LgMessageBox.Show("Are you sure you want to delete the local copy of this update? it will not impact internet sync or network sync users.  This should only be done to resolve issues with saving a file locally.  Proceed?", "Delete?", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
             {
                 List<TaskUpdate> updatesToDelete = new List<TaskUpdate>();
@@ -84,7 +84,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     updatesToDelete.Add(update);
                 }
                 Program.CurrentTask.allTaskUpdates = Program.CurrentTask.allTaskUpdates.Except(updatesToDelete).ToList();
-                MessageBox.Show("Task Update Deleted Locally");
+                LgMessageBox.Show("Task Update Deleted Locally");
                 Program_TaskUpdateChanged(null);
 
             }

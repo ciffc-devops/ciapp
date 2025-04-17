@@ -106,7 +106,7 @@ namespace WildfireICSDesktopServices
             }
             catch (Exception)
             {
-                //MessageBox.Show(ex.Message);
+                //LgMessageBox.Show(ex.Message);
                 _options = new GeneralOptions();
                 _options.addDefaultOptions();
                 _options.OptionsLoadedSuccessfully = false;
@@ -154,7 +154,7 @@ namespace WildfireICSDesktopServices
                 catch (Exception)
                 {
                     saveSuccessful = false;
-                    //MessageBox.Show(ex.Message);
+                    //LgMessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -195,7 +195,7 @@ namespace WildfireICSDesktopServices
                 catch (Exception)
                 {
                     saveSuccessful = false;
-                    //MessageBox.Show(ex.Message);
+                    //LgMessageBox.Show(ex.Message);
                 }
                 finally
                 {

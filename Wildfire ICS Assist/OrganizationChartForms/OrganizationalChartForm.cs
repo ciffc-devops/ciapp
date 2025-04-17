@@ -235,10 +235,10 @@ namespace Wildfire_ICS_Assist
             }
             else if (role.IsOpGroupSup)
             {
-                MessageBox.Show(Properties.Resources.EditInAssignmnetList);
+                LgMessageBox.Show(Properties.Resources.EditInAssignmnetList);
             }
 
-            else { MessageBox.Show(Properties.Resources.ProtectedRole); }
+            else { LgMessageBox.Show(Properties.Resources.ProtectedRole); }
         }
 
         private void btnEditRole_Click(object sender, EventArgs e)
@@ -293,11 +293,11 @@ namespace Wildfire_ICS_Assist
                 //check if there are subordinate roles
                 if (Program.CurrentOrgChart.ActiveRoles.Any(o => o.ReportsTo == role.RoleID))
                 {
-                    MessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
+                    LgMessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
                 }
                 else
                 {
-                    DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                    DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                     if (dr == DialogResult.Yes)
                     {
                         Program.incidentDataService.DeleteICSRole(role, Program.CurrentOpPeriod);
@@ -306,13 +306,13 @@ namespace Wildfire_ICS_Assist
             }
             else if (role.AllowEditName)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.RenameInsteadOfDeleteRole, Properties.Resources.RenameTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.RenameInsteadOfDeleteRole, Properties.Resources.RenameTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     openRoleForEdit(role);
                 }
             }
-            else { MessageBox.Show(Properties.Resources.ProtectedRole); }
+            else { LgMessageBox.Show(Properties.Resources.ProtectedRole); }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -371,7 +371,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                    LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
                 }
 
             }
@@ -389,7 +389,7 @@ namespace Wildfire_ICS_Assist
             {
                 if (CurrentOrgChart.HasFilledUnifiedCommandRoles)
                 {
-                    DialogResult dr = MessageBox.Show(Properties.Resources.NoSwitchToICWithUCRolesFilled, Properties.Resources.ClearUnifiedCommandRolesTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dr = LgMessageBox.Show(Properties.Resources.NoSwitchToICWithUCRolesFilled, Properties.Resources.ClearUnifiedCommandRolesTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
                         ICSRole uc2 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2GenericID);
@@ -497,12 +497,12 @@ namespace Wildfire_ICS_Assist
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                        LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
                     }
                 }
                 else
                 {
-                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                    LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
                 }
             }
             else
@@ -512,7 +512,7 @@ namespace Wildfire_ICS_Assist
                 try { System.Diagnostics.Process.Start(path); }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                    LgMessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
                 }
             }
         }
@@ -559,7 +559,7 @@ namespace Wildfire_ICS_Assist
                 File.WriteAllBytes(fullFilepath, fullFile);
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
 
         private void removeSelectedRoleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -587,7 +587,7 @@ namespace Wildfire_ICS_Assist
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
 
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -596,7 +596,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }

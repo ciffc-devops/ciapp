@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Models.OrganizationalChartModels;
+using Wildfire_ICS_Assist.UtilityForms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Wildfire_ICS_Assist.CustomControls
@@ -111,7 +112,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                 if (datCheckInTime.Value > Program.CurrentOpPeriodDetails.PeriodEnd || datLDW.Value < Program.CurrentOpPeriodDetails.PeriodStart)
                 {
-                    DialogResult proceed = MessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult proceed = LgMessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (proceed == DialogResult.No) { IsValid = false; }
                 }
             }
@@ -119,7 +120,7 @@ namespace Wildfire_ICS_Assist.CustomControls
             {
                 if (datCheckInTimeOtherResource.Value > Program.CurrentOpPeriodDetails.PeriodEnd || (datLDWOtherResource.Checked && datLDWOtherResource.Value < Program.CurrentOpPeriodDetails.PeriodStart))
                 {
-                    DialogResult proceed = MessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult proceed = LgMessageBox.Show("This check in falls outside the current operational period date/time.  They will not be shown on the resource list by default without adjusting filters. Do you want to proceed anyway?", "Outside current op period", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (proceed == DialogResult.No) { IsValid = false; }
                 }
 

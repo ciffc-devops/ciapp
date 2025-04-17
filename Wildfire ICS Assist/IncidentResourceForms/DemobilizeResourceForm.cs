@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -48,11 +49,11 @@ namespace Wildfire_ICS_Assist
             if (!string.IsNullOrEmpty(path))
             {
                 try { System.Diagnostics.Process.Start(path); }
-                catch { MessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
+                catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
             }
             else
             {
-                MessageBox.Show("Sorry, there was an error generating the contact list.");
+                LgMessageBox.Show("Sorry, there was an error generating the contact list.");
             }
         }
     }

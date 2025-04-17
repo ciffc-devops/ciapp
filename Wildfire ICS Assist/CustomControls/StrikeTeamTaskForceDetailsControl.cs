@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
@@ -138,7 +139,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void btnDeleteResource_Click(object sender, EventArgs e)
         {
-            if (dgvSubGroups.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dgvSubGroups.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ChangesMade = true;
                 List<OperationalGroupResourceListing> toDelete = new List<OperationalGroupResourceListing>();

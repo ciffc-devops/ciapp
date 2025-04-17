@@ -13,6 +13,7 @@ using System.CodeDom;
 using System.Globalization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 using WF_ICS_ClassLibrary.Models.OrganizationalChartModels;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -122,7 +123,7 @@ namespace Wildfire_ICS_Assist
         {
             //if (cboNewRoleName.SelectedItem == null) { cboNewRoleName.BackColor = Program.ErrorColor; return false; } else { cboNewRoleName.BackColor = Program.GoodColor; }
             //if (cboReportsTo.SelectedItem == null) { cboReportsTo.BackColor = Program.ErrorColor; return false; } else { cboReportsTo.BackColor = Program.GoodColor; }
-            if (((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor; MessageBox.Show(Properties.Resources.CantReportToSelf); return false; }
+            if (((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor; LgMessageBox.Show(Properties.Resources.CantReportToSelf); return false; }
 
             //When editing an existing role, don't let it make its own subordinate its parent
             if (CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == selectedRole.RoleID))
@@ -131,7 +132,7 @@ namespace Wildfire_ICS_Assist
                 ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;
                 if (childRoles.Any(o => o.RoleID == rep.RoleID))
                 {
-                    MessageBox.Show(Properties.Resources.InvalidReportsToRole);
+                    LgMessageBox.Show(Properties.Resources.InvalidReportsToRole);
                     cboReportsTo.BackColor = Program.ErrorColor;
                     return false;
                 }

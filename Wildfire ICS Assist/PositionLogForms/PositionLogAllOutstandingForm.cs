@@ -11,6 +11,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -70,7 +71,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Are you sure you want to mark the selected log entry(ies) as deleted?", "Are you sure?", MessageBoxButtons.YesNo);
+            DialogResult dr = LgMessageBox.Show("Are you sure you want to mark the selected log entry(ies) as deleted?", "Are you sure?", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
             {
                 foreach (DataGridViewRow row in dgvLog.SelectedRows)

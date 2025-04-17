@@ -421,7 +421,7 @@ namespace WildfireICSDesktopServices
             /*
             this.BeginInvoke((Action)delegate ()
             {
-                MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+                LgMessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
 
             });*/
             return log;
@@ -500,7 +500,7 @@ namespace WildfireICSDesktopServices
                     catch (Exception)
                     {
                         results.Errors.Add(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " Error - Failed to parse the server IP and port. Please ensure it is correct and try again\r\n\r\n");
-                        //MessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
+                        //LgMessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
                     }
                 }
 
@@ -873,7 +873,7 @@ namespace WildfireICSDesktopServices
                 try { serverConnectionInfo = new ConnectionInfo(ServerIP, ServerPort); }
                 catch (Exception)
                 {
-                    //MessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
+                    //LgMessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
                     return;
                 }
             }
@@ -890,7 +890,7 @@ namespace WildfireICSDesktopServices
                 }
                 catch (CommsException) 
                 { 
-                    //MessageBox.Show("A Network CommsException occurred while trying to send a task request (001) to " + serverConnectionInfo, "CommsException", MessageBoxButtons.OK);
+                    //LgMessageBox.Show("A Network CommsException occurred while trying to send a task request (001) to " + serverConnectionInfo, "CommsException", MessageBoxButtons.OK);
                     }
             }
 
@@ -912,7 +912,7 @@ namespace WildfireICSDesktopServices
             /*
             this.BeginInvoke((Action)delegate ()
             {
-                MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+                LgMessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
 
             });*/
         }

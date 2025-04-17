@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.CustomControls;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -472,7 +473,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                    LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
                 }
             }
 
@@ -586,7 +587,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnRemoveImage_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.SureRemoveImage, Properties.Resources.SureRemoveImageTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (LgMessageBox.Show(Properties.Resources.SureRemoveImage, Properties.Resources.SureRemoveImageTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (PrintIncidentToDate)
                 {
@@ -691,7 +692,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
+                    LgMessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
                 } */
             }
         }
@@ -724,7 +725,7 @@ namespace Wildfire_ICS_Assist
         {
             List<Personnel> activePersonnel = Program.CurrentIncident.GetCurrentlySignedInPersonnel(Program.CurrentOpPeriod);
             activePersonnel = activePersonnel.Where(o => !string.IsNullOrEmpty(o.Email) && o.Email.isValidEmail()).ToList();
-            if (DialogResult.Yes == MessageBox.Show("The PDF will be emailed to " + activePersonnel.Count + " people. You can add additional receipients in your email client. Do you want to proceed?", "Proceed with email", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes == LgMessageBox.Show("The PDF will be emailed to " + activePersonnel.Count + " people. You can add additional receipients in your email client. Do you want to proceed?", "Proceed with email", MessageBoxButtons.YesNo))
             {
 
                 MAPI mapi = new MAPI();
@@ -743,10 +744,10 @@ namespace Wildfire_ICS_Assist
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.ToString());
-                        MessageBox.Show("Sorry, there was an error trying to send the PDF.  You may need to save the pdf and email it manually.");
+                        LgMessageBox.Show(ex.ToString());
+                        LgMessageBox.Show("Sorry, there was an error trying to send the PDF.  You may need to save the pdf and email it manually.");
                     }
-                } else { MessageBox.Show("There was an error generating the pdf."); }
+                } else { LgMessageBox.Show("There was an error generating the pdf."); }
             }
         }
 
@@ -874,7 +875,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
+                    LgMessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
                 }
             }
         }

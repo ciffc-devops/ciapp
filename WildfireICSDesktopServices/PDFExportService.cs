@@ -2788,22 +2788,22 @@ namespace WildfireICSDesktopServices
                 }
                 catch (Exception)
                 {
-                    //MessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.");
+                    //LgMessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.");
                 }
 
 
-                //MessageBox.Show("PDF Generated Successfully....!!!");
+                //LgMessageBox.Show("PDF Generated Successfully....!!!");
 
 
             }
             catch (IOException ex)
             {
-                //MessageBox.Show("It appears a previous version of the PDF is still open.  Please close it before trying to generate a new copy.\r\n\r\nDetailed error message:" + ex.ToString());
+                //LgMessageBox.Show("It appears a previous version of the PDF is still open.  Please close it before trying to generate a new copy.\r\n\r\nDetailed error message:" + ex.ToString());
             }
             catch (System.UnauthorizedAccessException ex)
             {
                 /*
-                MessageBox.Show("A program on your system, typically a virus scanner, is prevening files from being saved to " + path + ". Please select a different folder to save to.");
+                LgMessageBox.Show("A program on your system, typically a virus scanner, is prevening files from being saved to " + path + ". Please select a different folder to save to.");
                 saveAsPromptShown = true;
                 DialogResult dr = fbdSaveLocation.ShowDialog();
                 saveAsPromptShown = false;
@@ -2812,7 +2812,7 @@ namespace WildfireICSDesktopServices
                     path = fbdSaveLocation.SelectedPath;
                     if (FileAccessClasses.checkWriteAccess(path))
                     {
-                        //MessageBox.Show("Thank you, you have selected " + path + " please try to save again.");
+                        //LgMessageBox.Show("Thank you, you have selected " + path + " please try to save again.");
                         CurrentTask.DocumentPath = path;
                         createSignInPDF(opsPeriod, automaticallyOpen);
                     }
@@ -2862,22 +2862,22 @@ namespace WildfireICSDesktopServices
                 }
                 catch (Exception)
                 {
-                    //MessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.");
+                    //LgMessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.");
                 }
 
 
-                //MessageBox.Show("PDF Generated Successfully....!!!");
+                //LgMessageBox.Show("PDF Generated Successfully....!!!");
 
 
             }
             catch (IOException ex)
             {
-                // MessageBox.Show("It appears a previous version of the PDF is still open.  Please close it before trying to generate a new copy.\r\n\r\nDetailed error message:" + ex.ToString());
+                // LgMessageBox.Show("It appears a previous version of the PDF is still open.  Please close it before trying to generate a new copy.\r\n\r\nDetailed error message:" + ex.ToString());
             }
             catch (System.UnauthorizedAccessException ex)
             {
                 /*
-                MessageBox.Show("A program on your system, typically a virus scanner, is prevening files from being saved to " + path + ". Please select a different folder to save to.");
+                LgMessageBox.Show("A program on your system, typically a virus scanner, is prevening files from being saved to " + path + ". Please select a different folder to save to.");
                 saveAsPromptShown = true;
                 DialogResult dr = fbdSaveLocation.ShowDialog();
                 saveAsPromptShown = false;
@@ -2886,7 +2886,7 @@ namespace WildfireICSDesktopServices
                     path = fbdSaveLocation.SelectedPath;
                     if (FileAccessClasses.checkWriteAccess(path))
                     {
-                        //MessageBox.Show("Thank you, you have selected " + path + " please try to save again.");
+                        //LgMessageBox.Show("Thank you, you have selected " + path + " please try to save again.");
                         CurrentTask.DocumentPath = path;
                         createSignInPDF(opsPeriod, automaticallyOpen);
                     }

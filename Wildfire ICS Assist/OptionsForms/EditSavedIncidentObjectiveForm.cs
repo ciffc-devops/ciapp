@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
@@ -44,7 +45,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 this.Close();
             } else
             {
-                MessageBox.Show("You must include text for the objective.");
+                LgMessageBox.Show("You must include text for the objective.");
             }
         }
 

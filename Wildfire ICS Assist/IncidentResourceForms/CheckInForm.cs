@@ -12,6 +12,7 @@ using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.CustomControls;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -236,7 +237,7 @@ namespace Wildfire_ICS_Assist
         {
             if (wizardPages1.SelectedIndex > 0)
             {
-                if (MessageBox.Show(Properties.Resources.SureCancel, Properties.Resources.AreYouSureTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (LgMessageBox.Show(Properties.Resources.SureCancel, Properties.Resources.AreYouSureTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();

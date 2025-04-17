@@ -13,6 +13,7 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 using WildfireICSDesktopServices.Logging;
 
@@ -550,11 +551,11 @@ namespace Wildfire_ICS_Assist
                     List<ICSRole> reportingRoles = CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == OpGroupLeaderRole.RoleID).ToList();
                     if (reportingRoles.Count > 0)
                     {
-                        MessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
+                        LgMessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
                     }
                     else
                     {
-                        DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                        DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                         if (dr == DialogResult.Yes)
                         {
                             Program.incidentDataService.DeleteICSRole(OpGroupLeaderRole, Program.CurrentOpPeriod);
@@ -607,7 +608,7 @@ namespace Wildfire_ICS_Assist
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
 
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -616,7 +617,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }
@@ -670,7 +671,7 @@ namespace Wildfire_ICS_Assist
                 File.WriteAllBytes(fullFilepath, fullFile);
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
 
         private void OperationalGroupsForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -719,12 +720,12 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                    LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
                 }
             }
             else
             {
-                MessageBox.Show("There was an error trying to export the ICS 204 PDFs.  Please check the log for details.");
+                LgMessageBox.Show("There was an error trying to export the ICS 204 PDFs.  Please check the log for details.");
             }
         }
 
@@ -751,7 +752,7 @@ namespace Wildfire_ICS_Assist
             }
             catch (Exception)
             {
-                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
             }
         }
 
@@ -772,7 +773,7 @@ namespace Wildfire_ICS_Assist
                 File.WriteAllBytes(fullFilepath, fullFile);
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
     }
 }
