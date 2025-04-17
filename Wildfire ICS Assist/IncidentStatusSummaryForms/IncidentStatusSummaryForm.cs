@@ -59,23 +59,23 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
                         try
                         {
                             Uri mapUri = new Uri(mapURL.ToString());
-                            webView21.Source = mapUri;
-                            webView21.Visible = true;
-                            //MessageBox.Show(mapURL.ToString());
+                            webView22.Source = mapUri;
+                            webView22.Visible = true;
+                            //LgMessageBox.Show(mapURL.ToString());
                         }
                         catch
                         {
-                            webView21.Visible = false;
+                            webView22.Visible = false;
                         }
 
                     }
-                    else { webView21.Visible = false; }
+                    else { webView22.Visible = false; }
                 }
-                else { webView21.Visible = false; }
+                else { webView22.Visible = false; }
             }
             else
             {
-                webView21.Visible = false;
+                webView22.Visible = false;
             }
         }
         private Coordinate CheckCoordinates(TextBox txtCoordinates, Label lblResultMessage)
@@ -114,6 +114,48 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
         {
             cboDefinition.Visible = PageInWildfireMode;
             txtDefinition.Visible = !PageInWildfireMode;
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {
+            if(tabControl1.SelectedIndex > 0)
+            {
+                tabControl1.SelectedIndex--;
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if(tabControl1.SelectedIndex < tabControl1.TabCount - 1)
+            {
+                tabControl1.SelectedIndex++;
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(tabControl1.SelectedIndex > 0)
+            {
+                btnPrev.Visible = true;
+            }
+            else
+            {
+                btnPrev.Visible = false;
+            }
+
+            if(tabControl1.SelectedIndex == tabControl1.TabCount - 1)
+            {
+                btnNext.Visible = false;
+            }
+            else
+            {
+                btnNext.Visible = true;
+            }
+        }
+
+        private void label43_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
