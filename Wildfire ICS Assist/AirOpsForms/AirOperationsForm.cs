@@ -308,7 +308,7 @@ namespace Wildfire_ICS_Assist
         }
         private void AddFirstChild(TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.RoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirectorGenericID).ToList();
+            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.GenericRoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirectorGenericID).ToList();
 
             foreach (var row in rows)
             {

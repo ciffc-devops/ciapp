@@ -2237,7 +2237,7 @@ namespace WildfireICSDesktopServices
             foreach (string checkInLocation in CheckInLocations)
             {
 
-                List<CheckInRecordWithResource> checkInThisLocation = allCheckInRecords.Where(o => o.CheckInLocation.Equals(checkInLocation, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                List<CheckInRecordWithResource> checkInThisLocation = allCheckInRecords.Where(o => !string.IsNullOrEmpty(o.CheckInLocation) && o.CheckInLocation.Equals(checkInLocation, StringComparison.InvariantCultureIgnoreCase)).ToList();
                 int totalPages = 1;
                 int rowsOnPage = 18;
 
@@ -4323,10 +4323,10 @@ namespace WildfireICSDesktopServices
                 }
 
                 KindTypeWithCounts thisone = null;
-                if (!string.IsNullOrEmpty(item.Resource.Kind) && !string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)); }
-                else if (string.IsNullOrEmpty(item.Resource.Kind) && string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")); }
-                else if (string.IsNullOrEmpty(item.Resource.Kind)) { thisone = counts.First(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals(item.Resource.Type)); }
-                else if (string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals("No Type Given")); }
+                if (!string.IsNullOrEmpty(item.Resource.Kind) && !string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => !string.IsNullOrEmpty(o.KindName) && o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)); }
+                else if (string.IsNullOrEmpty(item.Resource.Kind) && string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.EqualsWithNull("No Kind Given") && o.TypeName.EqualsWithNull("No Type Given")); }
+                else if (string.IsNullOrEmpty(item.Resource.Kind)) { thisone = counts.First(o => o.KindName.EqualsWithNull("No Kind Given") && o.TypeName.EqualsWithNull(item.Resource.Type)); }
+                else if (string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.EqualsWithNull(item.Resource.Kind) && o.TypeName.EqualsWithNull("No Type Given")); }
 
                 if (thisone != null)
                 {

@@ -21,6 +21,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private int _UniqueIDNum;
         [ProtoMember(14)] private string _ResourceType;
         [ProtoMember(15)] private Guid _ParentResourceID;
+        [ProtoMember(16)] private string _AgencyName;
 
         public string ResourceName { get => _ResourceName; set => _ResourceName = value; }
         public string Kind { get => _Kind; set => _Kind = value; }
@@ -68,6 +69,8 @@ namespace WF_ICS_ClassLibrary.Models
                 return sb.ToString();
             }
         }
+
+        public string AgencyName { get => _AgencyName; set => _AgencyName = value; }
 
         public IncidentResource()
         {

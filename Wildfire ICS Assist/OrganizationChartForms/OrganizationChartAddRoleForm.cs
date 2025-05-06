@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist
             List<ICSRole> reportsToRoles = new List<ICSRole>();
             if (RestrictToAirOps)
             {
-                reportsToRoles.Add(CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirectorGenericID));
+                reportsToRoles.Add(CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Globals.AirOpsDirectorGenericID));
                 reportsToRoles.AddRange(CurrentOrgChart.GetChildRoles(Globals.AirOpsDirectorGenericID, true));
             }
             else { reportsToRoles.AddRange(CurrentOrgChart.ActiveRoles); }

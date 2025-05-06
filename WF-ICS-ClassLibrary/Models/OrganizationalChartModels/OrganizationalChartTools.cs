@@ -690,12 +690,16 @@ namespace WF_ICS_ClassLibrary.Models
 
         public static ICSRole GetRoleByID(this OrganizationChart orgChart, Guid id, bool defaultUpChain = true)
         {
-            if (orgChart.ActiveRoles.Any(o => o.RoleID == id))
+            if (orgChart.ActiveRoles.Any(o => o.RoleID == id || o.GenericRoleID == id))
             {
-                ICSRole role = orgChart.GetAllRoles().First(o => o.RoleID == id);
+                ICSRole role = orgChart.GetAllRoles().First(o => o.RoleID == id || o.GenericRoleID == id);
                 if(defaultUpChain && (role.IndividualID == Guid.Empty) && role.ReportsTo != Guid.Empty)
                 {
                     role = orgChart.GetRoleByID(role.ReportsTo, true);
+                }
+                if(role.ReportsTo == Guid.Empty && defaultUpChain &&  (role.IndividualID == Guid.Empty))
+                {
+                    role = orgChart.GetRoleByID(Globals.IncidentCommanderGenericID, false);
                 }
                 return role;
             }

@@ -157,7 +157,9 @@ namespace Wildfire_ICS_Assist.CustomControls
                             {
                                 if (!string.IsNullOrEmpty(cboListValue.Items[x].ToString()))
                                 {
-                                    cboListValue.SelectedIndex = x; break;
+                                    cboListValue.SelectedIndex = x;
+                                    infoField.StringValue = cboListValue.Items[x].ToString();
+                                    break;
                                 }
                             }
                         }
