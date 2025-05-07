@@ -374,6 +374,7 @@
             // splitContainer1
             // 
             this.splitContainer1.BackColor = System.Drawing.Color.Black;
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.Name = "splitContainer1";
             // 
