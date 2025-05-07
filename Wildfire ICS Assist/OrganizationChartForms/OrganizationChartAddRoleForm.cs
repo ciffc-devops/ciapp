@@ -119,11 +119,14 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        private bool ValidateForm()
+        private bool ValidateForm(bool alertToErrors = true)
         {
             //if (cboNewRoleName.SelectedItem == null) { cboNewRoleName.BackColor = Program.ErrorColor; return false; } else { cboNewRoleName.BackColor = Program.GoodColor; }
             //if (cboReportsTo.SelectedItem == null) { cboReportsTo.BackColor = Program.ErrorColor; return false; } else { cboReportsTo.BackColor = Program.GoodColor; }
-            if (((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor; LgMessageBox.Show(Properties.Resources.CantReportToSelf); return false; }
+            if (((ICSRole)cboReportsTo.SelectedItem).RoleID == selectedRole.RoleID) { cboReportsTo.BackColor = Program.ErrorColor;
+                if (alertToErrors) { LgMessageBox.Show(Properties.Resources.CantReportToSelf); } return false; }
+            if(selectedRole == null || selectedRole.GenericRoleID == Guid.Empty) { cboNewRoleName.BackColor = Program.ErrorColor; if (alertToErrors) { LgMessageBox.Show(Properties.Resources.EmptyRoleError); } return false; } else { cboNewRoleName.BackColor = Program.GoodColor; }
+
 
             //When editing an existing role, don't let it make its own subordinate its parent
             if (CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == selectedRole.RoleID))
@@ -132,7 +135,10 @@ namespace Wildfire_ICS_Assist
                 ICSRole rep = (ICSRole)cboReportsTo.SelectedItem;
                 if (childRoles.Any(o => o.RoleID == rep.RoleID))
                 {
-                    LgMessageBox.Show(Properties.Resources.InvalidReportsToRole);
+                    if (alertToErrors)
+                    {
+                        LgMessageBox.Show(Properties.Resources.InvalidReportsToRole);
+                    }
                     cboReportsTo.BackColor = Program.ErrorColor;
                     return false;
                 }
@@ -154,6 +160,7 @@ namespace Wildfire_ICS_Assist
                 //update the list of role names based on the currently selected branch.
                 Guid BranchID = parentRole.SectionID;
                 List<GenericICSRole> branchRoles = OrganizationalChartTools.GenericRolesCache.Where(o => o.SectionID == BranchID || o.SectionID == Guid.Empty).OrderBy(o => o.RoleName).ToList();
+                branchRoles.Insert(0, new GenericICSRole() { GenericRoleID = Guid.Empty, RoleName = "" });
                 cboNewRoleName.DataSource = null;
                 cboNewRoleName.DataSource = branchRoles;
                 cboNewRoleName.DisplayMember = "RoleName";
@@ -247,6 +254,7 @@ namespace Wildfire_ICS_Assist
             {
                 selectedRole.FillFromGenericRole((GenericICSRole)cboNewRoleName.SelectedItem);
             }
+            ValidateForm(false);
             ToggleOpGroupName();
         }
 

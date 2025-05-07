@@ -69,8 +69,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(448, 263);
-            this.splitContainer1.SplitterDistance = 191;
+            this.splitContainer1.Size = new System.Drawing.Size(660, 263);
+            this.splitContainer1.SplitterDistance = 188;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -95,7 +95,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.txtOperationalGroupName);
             this.splitContainer2.Panel2.Controls.Add(this.lblOperationalGroupTypeName);
-            this.splitContainer2.Size = new System.Drawing.Size(448, 191);
+            this.splitContainer2.Size = new System.Drawing.Size(660, 188);
             this.splitContainer2.SplitterDistance = 119;
             this.splitContainer2.TabIndex = 6;
             // 
@@ -118,7 +118,7 @@
             this.cboNewRoleName.FormattingEnabled = true;
             this.cboNewRoleName.Location = new System.Drawing.Point(117, 80);
             this.cboNewRoleName.Name = "cboNewRoleName";
-            this.cboNewRoleName.Size = new System.Drawing.Size(310, 32);
+            this.cboNewRoleName.Size = new System.Drawing.Size(522, 32);
             this.cboNewRoleName.TabIndex = 5;
             this.cboNewRoleName.SelectedIndexChanged += new System.EventHandler(this.cboNewRoleName_SelectedIndexChanged);
             this.cboNewRoleName.Leave += new System.EventHandler(this.cboNewRoleName_Leave);
@@ -143,7 +143,7 @@
             this.cboReportsTo.FormattingEnabled = true;
             this.cboReportsTo.Location = new System.Drawing.Point(116, 41);
             this.cboReportsTo.Name = "cboReportsTo";
-            this.cboReportsTo.Size = new System.Drawing.Size(311, 32);
+            this.cboReportsTo.Size = new System.Drawing.Size(523, 32);
             this.cboReportsTo.TabIndex = 4;
             this.cboReportsTo.ValueMember = "ID";
             this.cboReportsTo.SelectedIndexChanged += new System.EventHandler(this.cboReportsTo_SelectedIndexChanged);
@@ -168,7 +168,7 @@
             this.txtOperationalGroupName.Margin = new System.Windows.Forms.Padding(6);
             this.txtOperationalGroupName.Multiline = false;
             this.txtOperationalGroupName.Name = "txtOperationalGroupName";
-            this.txtOperationalGroupName.Size = new System.Drawing.Size(434, 31);
+            this.txtOperationalGroupName.Size = new System.Drawing.Size(646, 31);
             this.txtOperationalGroupName.TabIndex = 7;
             this.txtOperationalGroupName.Load += new System.EventHandler(this.txtOperationalGroupName_Load);
             // 
@@ -178,7 +178,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOperationalGroupTypeName.Location = new System.Drawing.Point(4, 0);
             this.lblOperationalGroupTypeName.Name = "lblOperationalGroupTypeName";
-            this.lblOperationalGroupTypeName.Size = new System.Drawing.Size(423, 29);
+            this.lblOperationalGroupTypeName.Size = new System.Drawing.Size(635, 29);
             this.lblOperationalGroupTypeName.TabIndex = 6;
             this.lblOperationalGroupTypeName.Text = "Role name:";
             this.lblOperationalGroupTypeName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -187,7 +187,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(311, 6);
+            this.btnSave.Location = new System.Drawing.Point(523, 6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 51);
             this.btnSave.TabIndex = 18;
@@ -217,7 +217,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(448, 263);
+            this.ClientSize = new System.Drawing.Size(660, 263);
             this.Controls.Add(this.splitContainer1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
