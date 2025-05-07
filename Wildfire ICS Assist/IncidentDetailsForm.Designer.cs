@@ -140,21 +140,23 @@
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frenchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnGeneralMessage = new System.Windows.Forms.Button();
-            this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnNotes = new System.Windows.Forms.Button();
+            this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnReplacementResources = new System.Windows.Forms.Button();
             this.btnShowResources = new System.Windows.Forms.Button();
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.btnIncidentStatusSummary = new System.Windows.Forms.Button();
-            this.btnAssignmentList = new System.Windows.Forms.Button();
-            this.btnAirOpsSummary = new System.Windows.Forms.Button();
-            this.btnSafetyPlans = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnIncidentObjectives = new System.Windows.Forms.Button();
-            this.btnMedicalPlan = new System.Windows.Forms.Button();
-            this.btnPrintIAP = new System.Windows.Forms.Button();
-            this.btnPrintOrgChart = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
+            this.btnPrintOrgChart = new System.Windows.Forms.Button();
+            this.btnMedicalPlan = new System.Windows.Forms.Button();
+            this.btnSafetyPlans = new System.Windows.Forms.Button();
+            this.btnAirOpsSummary = new System.Windows.Forms.Button();
+            this.btnAssignmentList = new System.Windows.Forms.Button();
+            this.btnIncidentStatusSummary = new System.Windows.Forms.Button();
+            this.btnPrintIAP = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -169,7 +171,9 @@
             this.splitContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.cpOtherTools.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.cpIncidentActionPlan.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -942,9 +946,7 @@
             this.cpOtherTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpOtherTools.Collapsed = false;
             this.cpOtherTools.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpOtherTools.Controls.Add(this.btnGeneralMessage);
-            this.cpOtherTools.Controls.Add(this.btnAdditionalContacts);
-            this.cpOtherTools.Controls.Add(this.btnNotes);
+            this.cpOtherTools.Controls.Add(this.flowLayoutPanel2);
             this.cpOtherTools.EnableExpandCollapse = false;
             this.cpOtherTools.ExpandsRight = true;
             this.cpOtherTools.ExpandsUpward = false;
@@ -953,6 +955,14 @@
             this.cpOtherTools.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
             this.cpOtherTools.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpOtherTools.TitleText = "Other Tools";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.btnGeneralMessage);
+            this.flowLayoutPanel2.Controls.Add(this.btnNotes);
+            this.flowLayoutPanel2.Controls.Add(this.btnAdditionalContacts);
+            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             // 
             // btnGeneralMessage
             // 
@@ -963,14 +973,6 @@
             this.btnGeneralMessage.UseVisualStyleBackColor = true;
             this.btnGeneralMessage.Click += new System.EventHandler(this.btnGeneralMessage_Click);
             // 
-            // btnAdditionalContacts
-            // 
-            resources.ApplyResources(this.btnAdditionalContacts, "btnAdditionalContacts");
-            this.btnAdditionalContacts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnAdditionalContacts.Name = "btnAdditionalContacts";
-            this.btnAdditionalContacts.UseVisualStyleBackColor = true;
-            this.btnAdditionalContacts.Click += new System.EventHandler(this.btnAdditionalContacts_Click);
-            // 
             // btnNotes
             // 
             resources.ApplyResources(this.btnNotes, "btnNotes");
@@ -978,6 +980,14 @@
             this.btnNotes.Name = "btnNotes";
             this.btnNotes.UseVisualStyleBackColor = true;
             this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
+            // 
+            // btnAdditionalContacts
+            // 
+            resources.ApplyResources(this.btnAdditionalContacts, "btnAdditionalContacts");
+            this.btnAdditionalContacts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnAdditionalContacts.Name = "btnAdditionalContacts";
+            this.btnAdditionalContacts.UseVisualStyleBackColor = true;
+            this.btnAdditionalContacts.Click += new System.EventHandler(this.btnAdditionalContacts_Click);
             // 
             // btnReplacementResources
             // 
@@ -1003,15 +1013,7 @@
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cpIncidentActionPlan.Collapsed = false;
             this.cpIncidentActionPlan.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpIncidentActionPlan.Controls.Add(this.btnIncidentStatusSummary);
-            this.cpIncidentActionPlan.Controls.Add(this.btnAssignmentList);
-            this.cpIncidentActionPlan.Controls.Add(this.btnAirOpsSummary);
-            this.cpIncidentActionPlan.Controls.Add(this.btnSafetyPlans);
-            this.cpIncidentActionPlan.Controls.Add(this.btnIncidentObjectives);
-            this.cpIncidentActionPlan.Controls.Add(this.btnMedicalPlan);
-            this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
-            this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
-            this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
+            this.cpIncidentActionPlan.Controls.Add(this.flowLayoutPanel1);
             this.cpIncidentActionPlan.EnableExpandCollapse = false;
             this.cpIncidentActionPlan.ExpandsRight = true;
             this.cpIncidentActionPlan.ExpandsUpward = false;
@@ -1021,37 +1023,19 @@
             this.cpIncidentActionPlan.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
             // 
-            // btnIncidentStatusSummary
+            // flowLayoutPanel1
             // 
-            resources.ApplyResources(this.btnIncidentStatusSummary, "btnIncidentStatusSummary");
-            this.btnIncidentStatusSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnIncidentStatusSummary.Name = "btnIncidentStatusSummary";
-            this.btnIncidentStatusSummary.UseVisualStyleBackColor = true;
-            this.btnIncidentStatusSummary.Click += new System.EventHandler(this.btnIncidentStatusSummary_Click);
-            // 
-            // btnAssignmentList
-            // 
-            resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
-            this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnAssignmentList.Name = "btnAssignmentList";
-            this.btnAssignmentList.UseVisualStyleBackColor = true;
-            this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
-            // 
-            // btnAirOpsSummary
-            // 
-            resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
-            this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnAirOpsSummary.Name = "btnAirOpsSummary";
-            this.btnAirOpsSummary.UseVisualStyleBackColor = true;
-            this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
-            // 
-            // btnSafetyPlans
-            // 
-            resources.ApplyResources(this.btnSafetyPlans, "btnSafetyPlans");
-            this.btnSafetyPlans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnSafetyPlans.Name = "btnSafetyPlans";
-            this.btnSafetyPlans.UseVisualStyleBackColor = true;
-            this.btnSafetyPlans.Click += new System.EventHandler(this.btnSafetyPlans_Click);
+            this.flowLayoutPanel1.Controls.Add(this.btnIncidentObjectives);
+            this.flowLayoutPanel1.Controls.Add(this.btnCommsPlan);
+            this.flowLayoutPanel1.Controls.Add(this.btnPrintOrgChart);
+            this.flowLayoutPanel1.Controls.Add(this.btnMedicalPlan);
+            this.flowLayoutPanel1.Controls.Add(this.btnSafetyPlans);
+            this.flowLayoutPanel1.Controls.Add(this.btnAirOpsSummary);
+            this.flowLayoutPanel1.Controls.Add(this.btnAssignmentList);
+            this.flowLayoutPanel1.Controls.Add(this.btnIncidentStatusSummary);
+            this.flowLayoutPanel1.Controls.Add(this.btnPrintIAP);
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
             // btnIncidentObjectives
             // 
@@ -1061,6 +1045,22 @@
             this.btnIncidentObjectives.UseVisualStyleBackColor = true;
             this.btnIncidentObjectives.Click += new System.EventHandler(this.btnIncidentObjectives_Click);
             // 
+            // btnCommsPlan
+            // 
+            resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
+            this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnCommsPlan.Name = "btnCommsPlan";
+            this.btnCommsPlan.UseVisualStyleBackColor = true;
+            this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
+            // 
+            // btnPrintOrgChart
+            // 
+            resources.ApplyResources(this.btnPrintOrgChart, "btnPrintOrgChart");
+            this.btnPrintOrgChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnPrintOrgChart.Name = "btnPrintOrgChart";
+            this.btnPrintOrgChart.UseVisualStyleBackColor = true;
+            this.btnPrintOrgChart.Click += new System.EventHandler(this.btnPrintOrgChart_Click);
+            // 
             // btnMedicalPlan
             // 
             resources.ApplyResources(this.btnMedicalPlan, "btnMedicalPlan");
@@ -1068,6 +1068,38 @@
             this.btnMedicalPlan.Name = "btnMedicalPlan";
             this.btnMedicalPlan.UseVisualStyleBackColor = true;
             this.btnMedicalPlan.Click += new System.EventHandler(this.btnMedicalPlan_Click);
+            // 
+            // btnSafetyPlans
+            // 
+            resources.ApplyResources(this.btnSafetyPlans, "btnSafetyPlans");
+            this.btnSafetyPlans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnSafetyPlans.Name = "btnSafetyPlans";
+            this.btnSafetyPlans.UseVisualStyleBackColor = true;
+            this.btnSafetyPlans.Click += new System.EventHandler(this.btnSafetyPlans_Click);
+            // 
+            // btnAirOpsSummary
+            // 
+            resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
+            this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnAirOpsSummary.Name = "btnAirOpsSummary";
+            this.btnAirOpsSummary.UseVisualStyleBackColor = true;
+            this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
+            // 
+            // btnAssignmentList
+            // 
+            resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
+            this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnAssignmentList.Name = "btnAssignmentList";
+            this.btnAssignmentList.UseVisualStyleBackColor = true;
+            this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
+            // 
+            // btnIncidentStatusSummary
+            // 
+            resources.ApplyResources(this.btnIncidentStatusSummary, "btnIncidentStatusSummary");
+            this.btnIncidentStatusSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnIncidentStatusSummary.Name = "btnIncidentStatusSummary";
+            this.btnIncidentStatusSummary.UseVisualStyleBackColor = true;
+            this.btnIncidentStatusSummary.Click += new System.EventHandler(this.btnIncidentStatusSummary_Click);
             // 
             // btnPrintIAP
             // 
@@ -1078,22 +1110,6 @@
             this.btnPrintIAP.Tag = "ViewPDF";
             this.btnPrintIAP.UseVisualStyleBackColor = true;
             this.btnPrintIAP.Click += new System.EventHandler(this.btnPrintIAP_Click);
-            // 
-            // btnPrintOrgChart
-            // 
-            resources.ApplyResources(this.btnPrintOrgChart, "btnPrintOrgChart");
-            this.btnPrintOrgChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnPrintOrgChart.Name = "btnPrintOrgChart";
-            this.btnPrintOrgChart.UseVisualStyleBackColor = true;
-            this.btnPrintOrgChart.Click += new System.EventHandler(this.btnPrintOrgChart_Click);
-            // 
-            // btnCommsPlan
-            // 
-            resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
-            this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnCommsPlan.Name = "btnCommsPlan";
-            this.btnCommsPlan.UseVisualStyleBackColor = true;
-            this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
             // 
             // splitContainer2
             // 
@@ -1178,7 +1194,9 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.cpOtherTools.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.cpIncidentActionPlan.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -1325,6 +1343,8 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private CustomControls.CollapsiblePanel collapsiblePanel1;
         private System.Windows.Forms.ToolStripMenuItem viewIncidentUpdateListToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 

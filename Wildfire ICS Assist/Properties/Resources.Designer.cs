@@ -154,6 +154,15 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select a name for the role you are adding to the organization chart.
+        /// </summary>
+        internal static string EmptyRoleError {
+            get {
+                return ResourceManager.GetString("EmptyRoleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap EquipOp {

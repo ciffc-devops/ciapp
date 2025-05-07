@@ -1655,12 +1655,7 @@ namespace Wildfire_ICS_Assist
                 if(result == DialogResult.OK)
                 {
                     tmrAutoSave.Enabled = true;
-                    if (Program.generalOptionsService.GetOptionsValue("OrganizationLogo") != null)
-                    {
-                        Image img = ((byte[])Program.generalOptionsService.GetOptionsValue("OrganizationLogo")).getImageFromBytes();
-                        picOrgLogo.Image = img;
-                    }
-
+                   
                     TestToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
 
