@@ -45,6 +45,7 @@
             this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.removeSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnPrint203 = new System.Windows.Forms.Button();
             this.cmsOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tscboIncludeContacts = new System.Windows.Forms.ToolStripComboBox();
@@ -85,13 +86,14 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint203);
             this.splitContainer1.Panel2.Controls.Add(this.btnDeleteRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnEditRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnAssignRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
-            this.splitContainer1.Size = new System.Drawing.Size(1226, 594);
-            this.splitContainer1.SplitterDistance = 539;
+            this.splitContainer1.Size = new System.Drawing.Size(1152, 459);
+            this.splitContainer1.SplitterDistance = 404;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -113,14 +115,15 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeOrgChart);
-            this.splitContainer2.Size = new System.Drawing.Size(1226, 539);
+            this.splitContainer2.Size = new System.Drawing.Size(1152, 404);
             this.splitContainer2.SplitterDistance = 49;
             this.splitContainer2.TabIndex = 1;
             // 
             // btnSetPreparedAndApproved
             // 
+            this.btnSetPreparedAndApproved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSetPreparedAndApproved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_151_square_edit;
-            this.btnSetPreparedAndApproved.Location = new System.Drawing.Point(958, 5);
+            this.btnSetPreparedAndApproved.Location = new System.Drawing.Point(884, 5);
             this.btnSetPreparedAndApproved.Name = "btnSetPreparedAndApproved";
             this.btnSetPreparedAndApproved.Size = new System.Drawing.Size(265, 42);
             this.btnSetPreparedAndApproved.TabIndex = 54;
@@ -172,7 +175,7 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(0, 0);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(1226, 486);
+            this.treeOrgChart.Size = new System.Drawing.Size(1152, 351);
             this.treeOrgChart.TabIndex = 0;
             this.treeOrgChart.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeOrgChart_AfterSelect);
             // 
@@ -240,12 +243,22 @@
             this.removeSelectedRoleToolStripMenuItem.Text = "Remove Selected Role";
             this.removeSelectedRoleToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedRoleToolStripMenuItem_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(843, 8);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 37);
+            this.button1.TabIndex = 54;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnPrint203
             // 
             this.btnPrint203.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint203.ContextMenuStrip = this.cmsOutput;
             this.btnPrint203.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrint203.Location = new System.Drawing.Point(1054, 2);
+            this.btnPrint203.Location = new System.Drawing.Point(980, 2);
             this.btnPrint203.Name = "btnPrint203";
             this.btnPrint203.Size = new System.Drawing.Size(160, 42);
             this.btnPrint203.TabIndex = 53;
@@ -266,7 +279,7 @@
             this.toolStripSeparator3,
             this.exportToSpreadsheetToolStripMenuItem});
             this.cmsOutput.Name = "cmsOutput";
-            this.cmsOutput.Size = new System.Drawing.Size(415, 159);
+            this.cmsOutput.Size = new System.Drawing.Size(415, 137);
             // 
             // tscboIncludeContacts
             // 
@@ -375,7 +388,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1226, 594);
+            this.ClientSize = new System.Drawing.Size(1152, 459);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(1168, 498);
             this.Name = "OrganizationalChartForm";
@@ -426,5 +439,6 @@
         private System.Windows.Forms.ToolStripComboBox tscboIncludeContacts;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button btnSetPreparedAndApproved;
+        private System.Windows.Forms.Button button1;
     }
 }

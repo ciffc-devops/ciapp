@@ -45,10 +45,12 @@ namespace WF_ICS_ClassLibrary
         public static Guid OpsChiefGenericID { get; } = new Guid("CFE4C7DE-BD61-421C-8167-1B55E4151CFC");
         public static Guid LogisticsChiefGenericID { get; } = new Guid("B641C5D6-91FE-41DA-962E-9FEB7A7300A2");
         public static Guid FinanceChiefGenericID { get; } = new Guid("33805F34-CD3A-49AF-94FA-DA4058577B9B");
+        public static List<Guid> SectionChiefGenericIDs { get { return new List<Guid> { PlanningChiefGenericID, OpsChiefGenericID, LogisticsChiefGenericID, FinanceChiefGenericID }; } }
+
         public static Guid SafetyOfficerGenericID { get; } = new Guid("CE7166AF-9432-4F7A-B942-1250AF0B7C31");
         public static Guid InformationOfficerGenericID { get; } = new Guid("ad9ff46e-b1f1-4327-8303-2cbdd22322a5");
         public static Guid LiaisonOfficerGenericID { get; } = new Guid("9ba31b81-84c0-49f5-bf19-49973ff0e972");
-
+        public static List<Guid> OfficerGenericIDs { get { return new List<Guid> { SafetyOfficerGenericID, InformationOfficerGenericID, LiaisonOfficerGenericID }; } }  
 
         //Operations
         public static Guid AirOpsDirectorGenericID { get; } = new Guid("b97d020e-608e-4ea0-9df7-63b2b7680f0e");
