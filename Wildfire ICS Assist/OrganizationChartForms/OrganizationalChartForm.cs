@@ -17,6 +17,7 @@ using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 using WildfireICSDesktopServices.OrgChartExport;
+using WildfireICSDesktopServices.PDFExportServiceClasses.ContactsExport;
 
 namespace Wildfire_ICS_Assist
 {
@@ -334,6 +335,9 @@ namespace Wildfire_ICS_Assist
 
             if (tscboIncludeContacts.SelectedIndex == 1)
             {
+                List<byte[]> contacts = ContactExportTools.ExportOrgChartContactListToByteArray(CurrentIncident, CurrentOpPeriod, false);
+                allPDFs.AddRange(contacts);
+                /*
                 PDFCreationResults contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
                 if (!string.IsNullOrEmpty(contactList.path))
                 {
@@ -345,7 +349,7 @@ namespace Wildfire_ICS_Assist
                         stream.Close();
                         allPDFs.Add(fileBytes);
                     }
-                }
+                }*/
             }
 
             string fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
@@ -439,7 +443,6 @@ namespace Wildfire_ICS_Assist
                 PDFCreationResults orgChartResults = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, true, false);
                 string orgChart = orgChartResults.path;
 
-                PDFCreationResults contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
 
                 if (orgChartResults.Successful)
                 {
@@ -454,18 +457,13 @@ namespace Wildfire_ICS_Assist
                         stream.Close();
                         allPDFs.Add(fileBytes);
                     }
-                    if (!string.IsNullOrEmpty(contactList.path))
+                    if (tscboIncludeContacts.SelectedIndex == 1)
                     {
-                        using (FileStream stream = File.OpenRead(contactList.path))
-                        {
-                            byte[] fileBytes = new byte[stream.Length];
-
-                            stream.Read(fileBytes, 0, fileBytes.Length);
-                            stream.Close();
-                            allPDFs.Add(fileBytes);
-                        }
+                        List<byte[]> contacts = ContactExportTools.ExportOrgChartContactListToByteArray(CurrentIncident, CurrentOpPeriod, false);
+                        allPDFs.AddRange(contacts);
                     }
 
+                  
 
 
                     string fullOutputFilename = "ICS 203 - Incident " + CurrentIncident.IncidentNameAndNumberForPath + " - Op " + CurrentOpPeriod + " - Org Assignments List";

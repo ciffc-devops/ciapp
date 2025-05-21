@@ -45,7 +45,6 @@
             this.printLogisticsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.removeSelectedRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnPrint203 = new System.Windows.Forms.Button();
             this.cmsOutput = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tscboIncludeContacts = new System.Windows.Forms.ToolStripComboBox();
@@ -86,7 +85,6 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint203);
             this.splitContainer1.Panel2.Controls.Add(this.btnDeleteRole);
             this.splitContainer1.Panel2.Controls.Add(this.btnEditRole);
@@ -243,16 +241,6 @@
             this.removeSelectedRoleToolStripMenuItem.Text = "Remove Selected Role";
             this.removeSelectedRoleToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedRoleToolStripMenuItem_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(843, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 37);
-            this.button1.TabIndex = 54;
-            this.button1.Text = "test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btnPrint203
             // 
             this.btnPrint203.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -279,7 +267,7 @@
             this.toolStripSeparator3,
             this.exportToSpreadsheetToolStripMenuItem});
             this.cmsOutput.Name = "cmsOutput";
-            this.cmsOutput.Size = new System.Drawing.Size(415, 137);
+            this.cmsOutput.Size = new System.Drawing.Size(415, 159);
             // 
             // tscboIncludeContacts
             // 
@@ -439,6 +427,5 @@
         private System.Windows.Forms.ToolStripComboBox tscboIncludeContacts;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button btnSetPreparedAndApproved;
-        private System.Windows.Forms.Button button1;
     }
 }

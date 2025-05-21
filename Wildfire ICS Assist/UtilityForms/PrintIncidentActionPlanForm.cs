@@ -380,7 +380,7 @@ namespace Wildfire_ICS_Assist
                     allPDFs.AddRange(Program.pdfExportService.exportOrgChartToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked));
                     if (IncludeContacts)
                     {
-                        allPDFs.AddRange(Program.pdfExportService.exportOrgChartContactsToPDF(CurrentIncident, CurrentOpPeriod));
+                        allPDFs.AddRange(Program.pdfExportService.exportOrgChartContactsToPDF(CurrentIncident, CurrentOpPeriod, chkFlattenPDF.Checked));
 
                     }
 

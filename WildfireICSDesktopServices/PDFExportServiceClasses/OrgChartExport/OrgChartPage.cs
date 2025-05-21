@@ -12,7 +12,7 @@ namespace WildfireICSDesktopServices.OrgChartExport
         private DateTime _StartDate;
         private DateTime _EndDate;
 
-        private OrgChartEntry[][] _Entries = new OrgChartEntry[4][];
+        private OrgChartEntry[][] _Entries = new OrgChartEntry[OrgChartExportTools.ChildrenPerExtensionPage][];
 
         public Guid ID { get => _ID; set => _ID = value; }
         public string IncidentName { get => _IncidentName; set => _IncidentName = value; }

@@ -16,8 +16,8 @@ namespace WildfireICSDesktopServices.OrgChartExport
 {
     public static class OrgChartExportTools
     {
-        private static int _ChildrenPerExtensionPage = 4;
-        private static int _GrandchildrenPerExtensionPage = 7;
+        public static int ChildrenPerExtensionPage = 4;
+        public static int GrandchildrenPerExtensionPage = 7;
 
         private static string DateFormat { get; set; } = "MMM-dd-yyyy";
 
@@ -105,11 +105,11 @@ namespace WildfireICSDesktopServices.OrgChartExport
                 //determine which roles will be added to the next page
                 List<ICSRole> rolesToAdd = new List<ICSRole>();
                 List<ICSRole> childRoles = unPrintedRoles.Where(o => o.ReportsTo == startingRole.RoleID).ToList();
-                for(int x= 0; x < _ChildrenPerExtensionPage && x < childRoles.Count; x++)
+                for(int x= 0; x < ChildrenPerExtensionPage && x < childRoles.Count; x++)
                 {
                     rolesToAdd.Add(childRoles[x]);
                     List<ICSRole> grandChildren = unPrintedRoles.Where(o => o.ReportsTo == childRoles[x].RoleID).ToList();
-                    for (int y = 0; y < _GrandchildrenPerExtensionPage && y < grandChildren.Count; y++)
+                    for (int y = 0; y < GrandchildrenPerExtensionPage && y < grandChildren.Count; y++)
                     {
                         rolesToAdd.Add(grandChildren[y]);
                     }
@@ -193,12 +193,12 @@ namespace WildfireICSDesktopServices.OrgChartExport
 
             page.ReportsToEntry = new OrgChartEntry(StartingRole);
             List<ICSRole> reportingRoles = roles.Where(o => o.ReportsTo == page.ReportsToEntry.RoleID).ToList();
-            for (int x = 0; x < 4 && x < reportingRoles.Count; x++)
+            for (int x = 0; x < ChildrenPerExtensionPage && x < reportingRoles.Count; x++)
             {
                 page.Entries[x] = new OrgChartEntry[8];
                 page.Entries[x][0] = new OrgChartEntry(reportingRoles[x]);
                 List<ICSRole> grandChildRoles = roles.Where(o => o.ReportsTo == reportingRoles[x].RoleID).ToList();
-                for (int y = 0; y < 7 && y < grandChildRoles.Count; y++)
+                for (int y = 0; y < GrandchildrenPerExtensionPage && y < grandChildRoles.Count; y++)
                 {
                     page.Entries[x][y + 1] = new OrgChartEntry(grandChildRoles[y]);
                 }
