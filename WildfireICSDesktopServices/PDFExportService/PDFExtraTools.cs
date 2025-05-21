@@ -17,6 +17,23 @@ namespace WildfireICSDesktopServices
 {
     public static class PDFExtraTools
     {
+        public static string getBlankFormsFolder()
+        {
+            string dir = AppContext.BaseDirectory;
+            return System.IO.Path.Combine(dir, "BlankForms");
+        }
+
+        public static string getPDFFilePath(string fileToUse)
+        {
+            if (fileToUse.Contains("BlankForms/"))
+            {
+                fileToUse = fileToUse.Replace("BlankForms/", "");
+            }
+            string dir = getBlankFormsFolder();
+            return System.IO.Path.Combine(dir, fileToUse);
+        }
+
+
         public static Bitmap GetQRImage(this string QrString, int size = 250)
         {
             QrCodeEncodingOptions options = new QrCodeEncodingOptions();

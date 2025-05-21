@@ -33,22 +33,7 @@ namespace WildfireICSDesktopServices
             else { DateFormat = "MMM-dd-yyyy"; }
         }
 
-        private string getBlankFormsFolder()
-        {
-            string dir = AppContext.BaseDirectory;
-            return System.IO.Path.Combine(dir, "BlankForms");
-        }
-
-        private string getPDFFilePath(string fileToUse)
-        {
-            if (fileToUse.Contains("BlankForms/"))
-            {
-                fileToUse = fileToUse.Replace("BlankForms/", "");
-            }
-            string dir = getBlankFormsFolder();
-            return System.IO.Path.Combine(dir, fileToUse);
-        }
-
+       
         #region Dietary and Allergy Details
 
         public List<byte[]> exportDietaryAndAllergyToPDF(Incident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
@@ -108,8 +93,8 @@ namespace WildfireICSDesktopServices
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
-            string fileToUse = getPDFFilePath("Dietary and Allergy Details.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("Dietary and Allergy Details.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -277,8 +262,8 @@ namespace WildfireICSDesktopServices
 
 
 
-                    string fileToUse = getPDFFilePath("ICS-213-WF-General-Message.pdf");
-                    fileToUse = getPDFFilePath(fileToUse);
+                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-213-WF-General-Message.pdf");
+                    fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
                     PdfReader rdr = new PdfReader(fileToUse);
 
                     using (FileStream stream = new System.IO.FileStream(results.path, System.IO.FileMode.Create))
@@ -434,12 +419,12 @@ namespace WildfireICSDesktopServices
 
 
 
-                    string fileToUse = getPDFFilePath("ICS-208-WF-Safety-Message.pdf");
+                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-208-WF-Safety-Message.pdf");
                     if(!string.IsNullOrEmpty(plan.ImageBytes))
                     {
-                        fileToUse = getPDFFilePath("ICS-208-WF-Safety-Message-with-image.pdf");
+                        fileToUse = PDFExtraTools.getPDFFilePath("ICS-208-WF-Safety-Message-with-image.pdf");
                     }
-                    fileToUse = getPDFFilePath(fileToUse);
+                    fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
                     PdfReader rdr = new PdfReader(fileToUse);
 
                     using (FileStream stream = new System.IO.FileStream(path, System.IO.FileMode.Create))
@@ -587,8 +572,8 @@ namespace WildfireICSDesktopServices
             try
             {
 
-                string fileToUse = getPDFFilePath("ICS-221-WF Demobilization Checkout.pdf");
-                fileToUse = getPDFFilePath(fileToUse);
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-221-WF Demobilization Checkout.pdf");
+                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
 
 
                 PdfReader rdr = new PdfReader(fileToUse);
@@ -713,8 +698,8 @@ namespace WildfireICSDesktopServices
             try
             {
 
-                string fileToUse = getPDFFilePath("ICS-206-WF-Medical-Plan.pdf");
-                fileToUse = getPDFFilePath(fileToUse);
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-206-WF-Medical-Plan.pdf");
+                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
 
 
                 PdfReader rdr = new PdfReader(fileToUse);
@@ -913,8 +898,8 @@ namespace WildfireICSDesktopServices
             try
             {
 
-                string fileToUse = getPDFFilePath("ICS205WF-Communications-Plan.pdf");
-                fileToUse = getPDFFilePath(fileToUse);
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS205WF-Communications-Plan.pdf");
+                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
                 PdfReader rdr = new PdfReader(fileToUse);
                 PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
 
@@ -1020,8 +1005,8 @@ namespace WildfireICSDesktopServices
 
                 try
                 {
-                    string fileToUse = getPDFFilePath("ICS-202-WF-Incident-Objectives.pdf");
-                    fileToUse = getPDFFilePath(fileToUse);
+                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-202-WF-Incident-Objectives.pdf");
+                    fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
 
                     if (!File.Exists(fileToUse)) { return "err Blank PDF Not found"; }
 
@@ -1165,7 +1150,7 @@ namespace WildfireICSDesktopServices
 
                 OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
 
-                string fileToUse = getPDFFilePath("ICS-203 Organization Assignment List Blanked.pdf");
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-203 Organization Assignment List Blanked.pdf");
 
                 if (File.Exists(fileToUse))
                 {
@@ -1400,9 +1385,9 @@ namespace WildfireICSDesktopServices
 
                 OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
 
-                string fileToUse = getPDFFilePath("ICS-207-WF Incident Organization Chart.pdf");
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-207-WF Incident Organization Chart.pdf");
                 if (currentChart.IsUnifiedCommand) { fileToUse = ("ICS-207-WF Incident Organization Chart Unified.pdf"); }
-                fileToUse = getPDFFilePath(fileToUse);
+                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
                 using (PdfReader rdr = new PdfReader(fileToUse))
                 {
                     using (FileStream stream = new System.IO.FileStream(path, FileMode.Create))
@@ -1673,8 +1658,8 @@ namespace WildfireICSDesktopServices
 
             try
             {
-                string fileToUse = getPDFFilePath("ICS-207-WF-Organization-Chart-Extension.pdf");
-                fileToUse = getPDFFilePath(fileToUse);
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-207-WF-Organization-Chart-Extension.pdf");
+                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
 
                 using (PdfReader rdr = new PdfReader(fileToUse))
                 {
@@ -2069,8 +2054,8 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = getPDFFilePath("ICS205A-CommunicationsList.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS205A-CommunicationsList.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -2154,8 +2139,8 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = getPDFFilePath("ICS 218 - Support Vehicle Equipment Inventory.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS 218 - Support Vehicle Equipment Inventory.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -2282,8 +2267,8 @@ namespace WildfireICSDesktopServices
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
-            string fileToUse = getPDFFilePath("ICS-211-WF Check In.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-211-WF Check In.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -2421,7 +2406,7 @@ namespace WildfireICSDesktopServices
             string path = System.IO.Path.GetTempFileName();
 
             string fileToUse = "ICSForms/ICS 211 - Check In List.pdf";
-            fileToUse = getPDFFilePath(fileToUse);
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             //string outputFileName = "ICS 215 - Task #" + CurrentTask.TaskNumber + " - Operations Plan.pdf";
             //path = System.IO.Path.Combine(path, outputFileName);
 
@@ -2520,7 +2505,7 @@ namespace WildfireICSDesktopServices
             string path = System.IO.Path.GetTempFileName();
 
             string fileToUse = "ICSForms/ICS 211 - Check In List.pdf";
-            fileToUse = getPDFFilePath(fileToUse);
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             //string outputFileName = "ICS 215 - Task #" + CurrentTask.TaskNumber + " - Operations Plan.pdf";
             //path = System.IO.Path.Combine(path, outputFileName);
 
@@ -2635,7 +2620,7 @@ namespace WildfireICSDesktopServices
             string path = System.IO.Path.GetTempFileName();
 
             string fileToUse = "ICSForms/ICS 211 - Check In List.pdf";
-            fileToUse = getPDFFilePath(fileToUse);
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             //string outputFileName = "ICS 215 - Task #" + task.TaskNumber + " - Operations Plan.pdf";
             //path = System.IO.Path.Combine(path, outputFileName);
 
@@ -3081,8 +3066,8 @@ namespace WildfireICSDesktopServices
             results.path = FileAccessClasses.getUniqueFileName(outputFileName, results.path);
 
 
-            string fileToUse = getPDFFilePath("ICS-000 Title Page.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-000 Title Page.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -3501,8 +3486,8 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = getPDFFilePath ("ICS-000 Title Page.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath ("ICS-000 Title Page.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -3634,7 +3619,7 @@ namespace WildfireICSDesktopServices
             string path = System.IO.Path.GetTempFileName();
 
             string fileToUse = "ICSForms/ICS 309 - Radio Log.pdf";
-            fileToUse = getPDFFilePath(fileToUse);
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             PdfReader rdr = new PdfReader(fileToUse);
             PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
 
@@ -4032,14 +4017,14 @@ namespace WildfireICSDesktopServices
         private List<byte[]> buildSingleAirOpsSummaryPage(Incident task, int OpsPeriod, List<Aircraft> aircraft, List<ICSRole> roles, List<CommsPlanItem> comms, int pageNumber, int pageCount, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempFileName();
-            string fileToUse = getPDFFilePath("ICS-220-WF Air Operations Summary.pdf");
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-220-WF Air Operations Summary.pdf");
             
 
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
             AirOperationsSummary summary = task.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
-            if (summary.notam.UseRadius) { fileToUse = getPDFFilePath("ICS-220-WF Air Operations Summary.pdf"); }
-            else { fileToUse = getPDFFilePath("ICS-220-WF Air Operations Summary Polygon.pdf"); }
-            fileToUse = getPDFFilePath(fileToUse);
+            if (summary.notam.UseRadius) { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220-WF Air Operations Summary.pdf"); }
+            else { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220-WF Air Operations Summary Polygon.pdf"); }
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             using (PdfReader rdr = new PdfReader(fileToUse))
             {
                 using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
@@ -4354,8 +4339,8 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = getPDFFilePath("Logistics Overview.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("Logistics Overview.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -4480,8 +4465,8 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = getPDFFilePath("Logistics Overview Subsequent Page.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("Logistics Overview Subsequent Page.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -4665,8 +4650,8 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = getPDFFilePath("ICS-204-WF Assignment List.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-204-WF Assignment List.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
@@ -4876,8 +4861,8 @@ namespace WildfireICSDesktopServices
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = getPDFFilePath("ICS-204A-WF Assignment Details.pdf");
-            fileToUse = getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-204A-WF Assignment Details.pdf");
+            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
 
