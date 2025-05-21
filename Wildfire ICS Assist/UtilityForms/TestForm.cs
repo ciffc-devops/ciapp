@@ -111,7 +111,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     }
                     foreach(OperationalGroup branch in Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.GroupType.Equals("Branch")))
                     {
-                        for (int x = 0; x < 2; x++)
+                        for (int x = 0; x < 4; x++)
                         {
                             CreateTestOpGroup("Division", branch, x);
                         }
@@ -119,7 +119,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
                     foreach (OperationalGroup divis in Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.GroupType.Equals("Division")))
                     {
-                        for (int x = 0; x < 5; x++)
+                        int strikeTeamsToMake = RandomIntGenerator.GetRandomInt(1, 9);
+                        for (int x = 0; x < strikeTeamsToMake; x++)
                         {
                             bool isST = RandomBooleanGenerator.GetRandomBoolean();
                             if (isST) { CreateTestOpGroup("Strike Team", divis, x); }
@@ -140,7 +141,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 if (checkboxes[6].Checked)
                 {
                     //check in
-                    for (int x = 0; x < 30; x++)
+                    for (int x = 0; x < 45; x++)
                     {
                         CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + x, "Personnel");
                         testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
@@ -435,7 +436,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 int.TryParse(parentGroup.Name, out branchNumber);
                 
                 op.Name = ((char)(65 + index + (branchNumber * 2))).ToString(); }
-            else { op.Name = StringExt.LoremIpsum(1, 3, 1, 1, 1); }
+            else { op.Name = StringExt.LoremIpsum(1, 1, 1, 1, 1); }
             op.OpPeriod = Program.CurrentOpPeriod;
             op.ParentID = parentGroup.ID;
             op.ParentName = parentGroup.ResourceName;
