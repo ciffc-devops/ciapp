@@ -95,14 +95,28 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                ICSRole uc2 = ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2GenericID);
+                ICSRole uc2 = ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Globals.UnifiedCommand2GenericID);
                 if (uc2 != null && this.FilledOrHasFilledChildRoles(uc2)) { return true; }
-                ICSRole uc3 = ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand3GenericID);
+                ICSRole uc3 = ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Globals.UnifiedCommand3GenericID);
                 if (uc3 != null && this.FilledOrHasFilledChildRoles(uc3)) { return true; }
                 return false;
             }
         }
 
+        public List<ICSRole> IncidentCommanders
+        {
+            get
+            {
+                if (IsUnifiedCommand)
+                {
+                    return ActiveRoles.Where(o => o.GenericRoleID == Globals.IncidentCommanderGenericID || o.GenericRoleID == Globals.UnifiedCommand1GenericID || o.GenericRoleID == Globals.UnifiedCommand2GenericID || o.GenericRoleID == Globals.UnifiedCommand3GenericID).ToList();
+                }
+                else
+                {
+                    return ActiveRoles.Where(o => o.GenericRoleID == Globals.IncidentCommanderGenericID).ToList();
+                }
+            }
+        }
 
         public OrganizationChart Clone()
         {
