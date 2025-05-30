@@ -230,7 +230,7 @@ namespace Wildfire_ICS_Assist
         CheckedInResourcesForm _checkedInresourcesForm = null;
         OperationalPeriodReviewForm _opReviewForm = null;
         ResourceReplacementPlanningForm _resourceReplacementPlanningForm = null;
-        IncidentStatusSummaryForm _incidentStatusSummaryForm = null;
+        IncidentStatusSummaryListForm _incidentStatusSummaryForm = null;
         NewsListForm _newsListForm = null;
         public event ShortcutEventHandler ShortcutButtonClicked;
 
@@ -2069,7 +2069,7 @@ namespace Wildfire_ICS_Assist
             {
                 if (_incidentStatusSummaryForm == null)
                 {
-                    _incidentStatusSummaryForm = new IncidentStatusSummaryForm();
+                    _incidentStatusSummaryForm = new IncidentStatusSummaryListForm();
                     _incidentStatusSummaryForm.FormClosed += new FormClosedEventHandler(IncidentStatusSummaryForm_Closed);
                     ActiveForms.Add(_incidentStatusSummaryForm);
                     _incidentStatusSummaryForm.Show(this);
@@ -3512,6 +3512,16 @@ namespace Wildfire_ICS_Assist
         {
             TaskUpdateListForm form = new TaskUpdateListForm();
             form.Show();
+        }
+
+        private void printOperationalPeriodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPrintIAPForm(false, false);
+        }
+
+        private void printIncidentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPrintIAPForm(true, false);
         }
     }
 

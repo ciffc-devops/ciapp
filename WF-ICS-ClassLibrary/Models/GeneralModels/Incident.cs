@@ -298,7 +298,7 @@ ProtoInclude(127, typeof(SubjectProfile)),
         public List<ResourceReplacementPlan> AllResourceReplacementPlans { get => _ResourceReplacementPlans; set => _ResourceReplacementPlans = value; }
         public List<ResourceReplacementPlan> ActiveResourceReplacementPlans { get => _ResourceReplacementPlans.Where(o => o.Active).ToList(); }
         public List<IncidentStatusSummary> AllIncidentStatusSummaries { get => _AllIncidentStatusSummaries; set => _AllIncidentStatusSummaries = value; }
-
+        public List<IncidentStatusSummary> ActiveIncidentStatusSummaries { get => _AllIncidentStatusSummaries.Where(o => o.Active).ToList(); }
 
         //for network reasons
 

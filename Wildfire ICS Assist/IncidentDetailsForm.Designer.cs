@@ -82,6 +82,9 @@
             this.recentIncidentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printOperationalPeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printIncidentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.browseToIncidentFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreDeletedItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,10 +138,10 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutCIAPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frenchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnGeneralMessage = new System.Windows.Forms.Button();
@@ -511,8 +514,8 @@
             this.iAPToolStripMenuItem,
             this.networkInternetToolStripMenuItem,
             this.helpToolStripMenuItem,
-            this.TestToolStripMenuItem,
-            this.languageToolStripMenuItem});
+            this.languageToolStripMenuItem,
+            this.TestToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -523,6 +526,7 @@
             this.recentIncidentsToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.printToolStripMenuItem,
             this.toolStripSeparator2,
             this.browseToIncidentFolderToolStripMenuItem,
             this.restoreDeletedItemsToolStripMenuItem,
@@ -560,6 +564,26 @@
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             resources.ApplyResources(this.saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printOperationalPeriodToolStripMenuItem,
+            this.printIncidentToolStripMenuItem});
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            resources.ApplyResources(this.printToolStripMenuItem, "printToolStripMenuItem");
+            // 
+            // printOperationalPeriodToolStripMenuItem
+            // 
+            this.printOperationalPeriodToolStripMenuItem.Name = "printOperationalPeriodToolStripMenuItem";
+            resources.ApplyResources(this.printOperationalPeriodToolStripMenuItem, "printOperationalPeriodToolStripMenuItem");
+            this.printOperationalPeriodToolStripMenuItem.Click += new System.EventHandler(this.printOperationalPeriodToolStripMenuItem_Click);
+            // 
+            // printIncidentToolStripMenuItem
+            // 
+            this.printIncidentToolStripMenuItem.Name = "printIncidentToolStripMenuItem";
+            resources.ApplyResources(this.printIncidentToolStripMenuItem, "printIncidentToolStripMenuItem");
+            this.printIncidentToolStripMenuItem.Click += new System.EventHandler(this.printIncidentToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -914,13 +938,6 @@
             resources.ApplyResources(this.aboutCIAPPToolStripMenuItem, "aboutCIAPPToolStripMenuItem");
             this.aboutCIAPPToolStripMenuItem.Click += new System.EventHandler(this.aboutCIAPPToolStripMenuItem_Click);
             // 
-            // TestToolStripMenuItem
-            // 
-            this.TestToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
-            this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
-            resources.ApplyResources(this.TestToolStripMenuItem, "TestToolStripMenuItem");
-            this.TestToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
-            // 
             // languageToolStripMenuItem
             // 
             this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -940,6 +957,13 @@
             this.frenchToolStripMenuItem.Name = "frenchToolStripMenuItem";
             resources.ApplyResources(this.frenchToolStripMenuItem, "frenchToolStripMenuItem");
             this.frenchToolStripMenuItem.Click += new System.EventHandler(this.frenchToolStripMenuItem_Click);
+            // 
+            // TestToolStripMenuItem
+            // 
+            this.TestToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
+            this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
+            resources.ApplyResources(this.TestToolStripMenuItem, "TestToolStripMenuItem");
+            this.TestToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
             // 
             // cpOtherTools
             // 
@@ -1346,6 +1370,9 @@
         private System.Windows.Forms.ToolStripMenuItem viewIncidentUpdateListToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printOperationalPeriodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printIncidentToolStripMenuItem;
     }
 }
 

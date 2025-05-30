@@ -9,6 +9,14 @@ using WF_ICS_ClassLibrary.Models.GeneralModels;
 
 namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
 {
+ /*
+       case "Personnel": return "P" + UniqueIDNum;
+                    case "Vehicle": return "V" + UniqueIDNum;
+                    case "Equipment": return "E" + UniqueIDNum;
+                    case "Crew": return "C" + UniqueIDNum;
+                    case "Heavy Equipment Crew": return "C" + UniqueIDNum;
+                    case "Aircraft": return "A" + UniqueIDNum;
+ */
     public class IncidentStatusSummary : ICSFormData, ICloneable
     {
         //Fields for the standard form
@@ -24,7 +32,8 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
         [ProtoMember(8)] private double _PercentCompleted;
         [ProtoMember(9)] private string _IncidentDefinition;
         [ProtoMember(10)] private string _ComplexityLevel;
-        [ProtoMember(11)] private DateTime _ReportForTimePeriod;
+        [ProtoMember(11)] private DateTime _ReportFromTimePeriod;
+        [ProtoMember(56)] private DateTime _ReportToTimePeriod;
         [ProtoMember(12)] private DateTime _DateSubmitted;
         [ProtoMember(13)] private string _PrimarySendTo;
         [ProtoMember(14)] private int _ProvinceID;
@@ -52,11 +61,15 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
         //Page 2
         [ProtoMember(35)] private int[] _CiviliansImpactedThisPeriod = new int[11];
         [ProtoMember(36)] private int[] _CiviliansImpactedToDate = new int[11];
+        [ProtoMember(57)] private bool[] _CiviliansImpactedEstimate = new bool[12];
+
         [ProtoMember(37)] private int[] _RespondersImpactedThisPeriod = new int[11];
         [ProtoMember(38)] private int[] _RespondersImpactedToDate = new int[11];
+        [ProtoMember(58)] private bool[] _RespondersImpactedEstimate = new bool[12];
+
         [ProtoMember(39)] private string _LifeSafetyHealthRemarks;
         [ProtoMember(40)] private bool[] _HealthThreatManagementActive = new bool[18];
-        [ProtoMember(41)] private string[] _HealthThreatManagementOtherLabels;
+        [ProtoMember(41)] private string[] _HealthThreatManagementOtherLabels = new string[4];
         [ProtoMember(42)] private string _WeatherConcerns;
         [ProtoMember(43)] private string[] _ProjectedEscalation = new string[5];
         [ProtoMember(44)] private string _Objectives;
@@ -75,10 +88,32 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
 
         //Page 4
         [ProtoMember(55)] private string _AdditionalAssistingOrganizations;
-
+        [ProtoMember(59)] private DateTime _ResourceCaptureDateTime;
+        [ProtoMember(60)] private List<SummaryAgencyEntry> _SummaryAgencyEntries = new List<SummaryAgencyEntry>();
 
         public int ReportVersion { get => _ReportVersion; set => _ReportVersion = value; }
+        public string ReportVersionName
+        {
+            get
+            {
+                switch (ReportVersion)
+                {
+                    case 0: return "Initial";
+                    case 1: return "Update";
+                    case 2: return "Final";
+                    default: return "Update";
+                }
+            }
+        }
         public int ReportNumber { get => _ReportNumber; set => _ReportNumber = value; }
+        public string ReportVersionFull
+        {
+            get
+            {
+                if (ReportNumber > 0) { return $"{ReportNumber} - {ReportVersionName}"; }
+                else { return $"{ReportVersionName}"; }
+            }
+        }
         public string ICAndOrganization { get => _ICAndOrganization; set => _ICAndOrganization = value; }
         public string IMOrganization { get => _IMOrganization; set => _IMOrganization = value; }
         public DateTime IncidentStart { get => _IncidentStart; set => _IncidentStart = value; }
@@ -87,7 +122,8 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
         public double PercentCompleted { get => _PercentCompleted; set => _PercentCompleted = value; }
         public string IncidentDefinition { get => _IncidentDefinition; set => _IncidentDefinition = value; }
         public string ComplexityLevel { get => _ComplexityLevel; set => _ComplexityLevel = value; }
-        public DateTime ReportForTimePeriod { get => _ReportForTimePeriod; set => _ReportForTimePeriod = value; }
+        public DateTime ReportFromTimePeriod { get => _ReportFromTimePeriod; set => _ReportFromTimePeriod = value; }
+        public DateTime ReportToTimePeriod { get => _ReportToTimePeriod; set => _ReportToTimePeriod = value; }
         public DateTime DateSubmitted { get => _DateSubmitted; set => _DateSubmitted = value; }
         public string PrimarySendTo { get => _PrimarySendTo; set => _PrimarySendTo = value; }
         public int ProvinceID { get => _ProvinceID; set => _ProvinceID = value; }
@@ -132,6 +168,43 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
         public double ProjectedFinalCost { get => _ProjectedFinalCost; set => _ProjectedFinalCost = value; }
         public string Remarks { get => _Remarks; set => _Remarks = value; }
         public string AdditionalAssistingOrganizations { get => _AdditionalAssistingOrganizations; set => _AdditionalAssistingOrganizations = value; }
+        public bool[] CiviliansImpactedEstimate { get => _CiviliansImpactedEstimate; set => _CiviliansImpactedEstimate = value; }
+        public bool[] RespondersImpactedEstimate { get => _RespondersImpactedEstimate; set => _RespondersImpactedEstimate = value; }
+        public DateTime ResourceCaptureDateTime { get => _ResourceCaptureDateTime; set => _ResourceCaptureDateTime = value; }
+        public List<SummaryAgencyEntry> SummaryAgencyEntries { get => _SummaryAgencyEntries; set => _SummaryAgencyEntries = value; }
 
+        public List<SummaryResourceTotal> GetResourceTotals()
+        {
+            List<SummaryResourceTotal> totals = new List<SummaryResourceTotal>();
+            foreach (var agency in SummaryAgencyEntries)
+            {
+                foreach (var resource in agency.Resources)
+                {
+                    var existing = totals.FirstOrDefault(t => t.ResourceKindTypeName == resource.ResourceDisplayName);
+                    if (existing == null)
+                    {
+                        existing = new SummaryResourceTotal
+                        {
+                            ResourceKindTypeName = resource.ResourceDisplayName,
+                            ResourceCount = 0,
+                            PersonnelCount = 0
+                        };
+                        totals.Add(existing);
+                    }
+                    existing.ResourceCount += resource.ResourceCount;
+                    existing.PersonnelCount += resource.PersonnelCount;
+                }
+            }
+            return totals;
+        }
+
+        public new IncidentStatusSummary Clone()
+        {
+            return this.MemberwiseClone() as IncidentStatusSummary;
+        }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
     }
 }

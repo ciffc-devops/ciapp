@@ -17,8 +17,11 @@ namespace WF_ICS_ClassLibrary.Utilities
             Aircraft a = new Aircraft();
             a.MakeModel = "MakeModel" + seed;
             a.CompanyName = "Company Name " + seed;
+            a.AgencyName = a.CompanyName;
             List<string> models = AircraftTools.GetHelicopterTypes();
             a.MakeModel = models[random.Next(models.Count)];
+            a.Type = a.MakeModel;
+            a.Kind = "Helicopter";
             a.Registration = "Reg " + seed;
             a.Base = "Base" + seed;
             a.StartTime = DateTime.Now;
@@ -207,6 +210,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             Vehicle test = new Vehicle();
             test.IncidentIDNo = "Name " + seed;
+            test.AgencyName = "Agency " + seed;
             test.OrderRequestNo = "OrderRequestNo" + seed;
             test.Classification = "Classification" + seed;
             test.Make = "Make" + seed;
@@ -232,6 +236,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             Crew test = new Crew();
             test.Active = true;
+            test.AgencyName = "Agency " + seed;
             test.ResourceName = "Crew " + seed;
             test.Transport = "Transport " + seed;
             test.Email = "email" + seed + "@test.com";

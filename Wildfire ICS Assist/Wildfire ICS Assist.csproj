@@ -278,6 +278,12 @@
     <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.Designer.cs">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryListForm.Designer.cs">
+      <DependentUpon>IncidentStatusSummaryListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewsForms\NewsListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -958,6 +964,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.resx">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncidentStatusSummaryForms\IncidentStatusSummaryListForm.resx">
+      <DependentUpon>IncidentStatusSummaryListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewsForms\NewsListForm.resx">
       <DependentUpon>NewsListForm.cs</DependentUpon>

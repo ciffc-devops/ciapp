@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels;
 
 namespace WildfireICSDesktopServices
 {
@@ -108,5 +109,6 @@ namespace WildfireICSDesktopServices
         void UpsertIncidentResource(IncidentResource record, string source = "local");
         void UpsertResourceReplacementPlan(ResourceReplacementPlan record, string source = "local");
         TaskUpdate CreateTaskUpdateForItem(SyncableItem obj, string command);
+        void UpsertIncidentSummary(IncidentStatusSummary record, string source = "local");
     }
 }

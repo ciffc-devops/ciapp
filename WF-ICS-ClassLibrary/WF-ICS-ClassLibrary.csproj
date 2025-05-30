@@ -183,6 +183,10 @@
     <Compile Include="Models\IncidentResourcesModels\PersonnelTools.cs" />
     <Compile Include="Models\IncidentResourcesModels\TeamTotal.cs" />
     <Compile Include="Models\IncidentStatusSummaryModels\IncidentStatusSummary.cs" />
+    <Compile Include="Models\IncidentStatusSummaryModels\IncidentSummaryTools.cs" />
+    <Compile Include="Models\IncidentStatusSummaryModels\SummaryAgencyEntry.cs" />
+    <Compile Include="Models\IncidentStatusSummaryModels\SummaryResourceEntry.cs" />
+    <Compile Include="Models\IncidentStatusSummaryModels\SummaryResourceTotal.cs" />
     <Compile Include="Models\MedicalPlanModels\Hospital.cs" />
     <Compile Include="Models\IncidentObjectiveModels\IncidentObjective.cs" />
     <Compile Include="Models\IncidentResourcesModels\IncidentResource.cs" />

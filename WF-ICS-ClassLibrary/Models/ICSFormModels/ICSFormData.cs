@@ -52,6 +52,7 @@ namespace WF_ICS_ClassLibrary.Models.GeneralModels
             }
         }
 
+
         public Guid ApprovedByRoleID { get => _ApprovedByRoleID; set => _ApprovedByRoleID = value; }
         public Guid ApprovedByResourceID { get => _ApprovedByResourceID; set => _ApprovedByResourceID = value; }
         public string ApprovedByResourceName { get => _ApprovedByResourceName; set => _ApprovedByResourceName = value; }

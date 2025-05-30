@@ -133,7 +133,6 @@
     <Compile Include="NetworkService.cs" />
     <Compile Include="NewsServices\NewsService.cs" />
     <Compile Include="NewsServices\NewsWebTools.cs" />
-    <Compile Include="PDFExportServiceClasses\Class1.cs" />
     <Compile Include="PDFExportServiceClasses\ContactsExport\ContactExportEntry.cs" />
     <Compile Include="PDFExportServiceClasses\ContactsExport\ContactExportHeader.cs" />
     <Compile Include="PDFExportServiceClasses\ContactsExport\ContactExportTools.cs" />
