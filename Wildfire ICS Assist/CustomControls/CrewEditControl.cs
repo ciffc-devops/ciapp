@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.OptionsForms;
 using Wildfire_ICS_Assist.UtilityForms;
 
@@ -35,6 +37,9 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void CrewEditControl_Load(object sender, EventArgs e)
         {
             txtName.TextChanged += TxtName_TextChanged;
+
+            cboAgency.DataSource = AgencyTools.GetFixedAgencies(true);
+            cboAgency.DropDownWidth = cboAgency.GetDropDownWidth();
         }
 
         private void TxtName_TextChanged(object sender, EventArgs e)
@@ -441,6 +446,11 @@ namespace Wildfire_ICS_Assist.CustomControls
                 OperationalGroupResourceListing rec = (OperationalGroupResourceListing)dgvGroup.SelectedRows[0].DataBoundItem;
                 UpdateUniqueID(rec);
             }
+        }
+
+        private void cboAgency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedCrew.AgencyName = cboAgency.Text;
         }
     }
 }
