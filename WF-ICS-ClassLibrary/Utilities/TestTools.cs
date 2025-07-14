@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Models;
@@ -17,7 +18,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             Aircraft a = new Aircraft();
             a.MakeModel = "MakeModel" + seed;
             a.CompanyName = "Company Name " + seed;
-            a.AgencyName = a.CompanyName;
+            a.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, 10); 
             List<string> models = AircraftTools.GetHelicopterTypes();
             a.MakeModel = models[random.Next(models.Count)];
             a.Type = a.MakeModel;
@@ -195,7 +196,8 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.HomeProvinceID = ProvinceTools.GetProvinces().First().ProvinceGUID;
             test.HomeCountry = "HomeCountry" + seed;
             test.EmergencyContact = "EmergencyContact" + seed;
-            test.Agency = "Agency" + seed;
+
+            test.Agency = "Agency " + RandomIntGenerator.GetRandomInt(1,10);
             test.IsContractor = RandomBooleanGenerator.GetRandomBoolean();
             test.CallSign = "CallSign" + seed;
             test.Pronouns = "Pronouns" + seed;
@@ -210,7 +212,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             Vehicle test = new Vehicle();
             test.IncidentIDNo = "Name " + seed;
-            test.AgencyName = "Agency " + seed;
+            test.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, 10);
             test.OrderRequestNo = "OrderRequestNo" + seed;
             test.Classification = "Classification" + seed;
             test.Make = "Make" + seed;
@@ -236,7 +238,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             Crew test = new Crew();
             test.Active = true;
-            test.AgencyName = "Agency " + seed;
+            test.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, 10);
             test.ResourceName = "Crew " + seed;
             test.Transport = "Transport " + seed;
             test.Email = "email" + seed + "@test.com";
