@@ -133,9 +133,11 @@
     <Compile Include="NetworkService.cs" />
     <Compile Include="NewsServices\NewsService.cs" />
     <Compile Include="NewsServices\NewsWebTools.cs" />
+    <Compile Include="PDFExportServiceClasses\BlankFormExportService.cs" />
     <Compile Include="PDFExportServiceClasses\ContactsExport\ContactExportEntry.cs" />
     <Compile Include="PDFExportServiceClasses\ContactsExport\ContactExportHeader.cs" />
     <Compile Include="PDFExportServiceClasses\ContactsExport\ContactExportTools.cs" />
+    <Compile Include="PDFExportServiceClasses\IncidientSummaryExport\IncidentSummaryExportTools.cs" />
     <Compile Include="PDFExportServiceClasses\OrgChartExport\OrgChartEntry.cs" />
     <Compile Include="PDFExportServiceClasses\OrgChartExport\OrgChartExportTools.cs" />
     <Compile Include="PDFExportServiceClasses\OrgChartExport\OrgChartExtensionPage.cs" />
@@ -222,6 +224,7 @@
   <ItemGroup>
     <None Include="Web References\ca.icscanada.ciapp\ciapp_webservice.disco" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

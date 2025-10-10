@@ -1018,30 +1018,36 @@ namespace WildfireICSDesktopServices
 
                     task.createObjectivesSheetAsNeeded(OpsPeriod);
 
-                    IncidentObjectivesSheet currentSheet = task.AllIncidentObjectiveSheets.First(o=>o.OpPeriod== OpsPeriod);
+                    IncidentObjectivesSheet currentSheet = task.AllIncidentObjectiveSheets.FirstOrDefault(o=>o.OpPeriod== OpsPeriod);
 
                     //Op Plan
-                    OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
-                    OrganizationChart currentChart = task.allOrgCharts.First(o=>o.OpPeriod == OpsPeriod);   
+                    OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == OpsPeriod);
+                    OrganizationChart currentChart = task.allOrgCharts.FirstOrDefault(o=>o.OpPeriod == OpsPeriod);   
 
                     //Top Section
                     stamper.AcroFields.SetField("1A INCIDENT NAME", task.TaskName);
                     stamper.AcroFields.SetField("1B INCIDENT NUMBER", task.TaskNumber);
                     stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + DateFormat + " HH:mm}", currentSheet.DatePrepared));
-                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
-                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
-                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
-                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
-
-                    ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefGenericID, true);
-                    if (null != PreparedBy)
+                    if (currentOp != null)
                     {
-                        stamper.AcroFields.SetField("9 PREPARED BY Planning Section Chief", PreparedBy.IndividualName);
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
                     }
-                    ICSRole IC = currentChart.GetRoleByID(Globals.IncidentCommanderGenericID, true);
-                    if (null != IC)
+
+                    if (currentChart != null)
                     {
-                        stamper.AcroFields.SetField("10 APPROVED BY Incident Commander", IC.IndividualName);
+                        ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefGenericID, true);
+                        if (null != PreparedBy)
+                        {
+                            stamper.AcroFields.SetField("9 PREPARED BY Planning Section Chief", PreparedBy.IndividualName);
+                        }
+                        ICSRole IC = currentChart.GetRoleByID(Globals.IncidentCommanderGenericID, true);
+                        if (null != IC)
+                        {
+                            stamper.AcroFields.SetField("10 APPROVED BY Incident Commander", IC.IndividualName);
+                        }
                     }
 
                     stamper.AcroFields.SetField("3A FIRE SIZE", currentSheet.FireSize);
@@ -1071,6 +1077,7 @@ namespace WildfireICSDesktopServices
 
                     }
 
+                    stamper.RenameAllFields();
 
                     if (flattenPDF)
                     {
@@ -1174,11 +1181,13 @@ namespace WildfireICSDesktopServices
                                 stamper.AcroFields.SetField("1 INCIDENT NAMERow1", task.IncidentNameOrNumber);
                                 stamper.AcroFields.SetField("2 DATERow1", string.Format("{0:" + DateFormat + "}", currentChart.DatePrepared));
                                 stamper.AcroFields.SetField("3 TIMERow1", string.Format("{0:HH:mm}", currentChart.DatePrepared));
-                                stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
-                                stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
-                                stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
-                                stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
-
+                                if (currentOp != null)
+                                {
+                                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
+                                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+                                }
                                 ICSRole PreparedBy = new ICSRole();
                                 if (currentChart.PreparedByRoleID != Guid.Empty)
                                 {
@@ -1276,7 +1285,7 @@ namespace WildfireICSDesktopServices
 
                                 results.LastStepReached = 4;
 
-
+                                stamper.RenameAllFields();
                                 stamper.Close();//Close a PDFStamper Object
                                 stamper.Dispose();
                                 //rdr.Close();    //Close a PDFReader Object
@@ -4043,9 +4052,12 @@ namespace WildfireICSDesktopServices
                     stamper.AcroFields.SetField("Position", opGroup.PreparedByRoleName);
 
                     List<ICSRole> operationalPersonnel = new List<ICSRole>();
-                    ICSRole thisLeader = task.activeOrgCharts.FirstOrDefault(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.FirstOrDefault(o => o.ID == opGroup.LeaderICSRoleID);
-                    if (thisLeader != null) { operationalPersonnel.Insert(0, thisLeader); }
-                    if (BranchGroup != null && task.activeOrgCharts.First(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.Any(o => o.RoleID == BranchGroup.LeaderICSRoleID))
+                    if (task.activeOrgCharts.Any(o => o.OpPeriod == opGroup.OpPeriod))
+                    {
+                        ICSRole thisLeader = task.activeOrgCharts.FirstOrDefault(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.FirstOrDefault(o => o.ID == opGroup.LeaderICSRoleID);
+                        if (thisLeader != null) { operationalPersonnel.Insert(0, thisLeader); }
+                    }
+                    if (BranchGroup != null && task.activeOrgCharts.Any(o => o.OpPeriod == opGroup.OpPeriod) && task.activeOrgCharts.First(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.Any(o => o.RoleID == BranchGroup.LeaderICSRoleID))
                     {
                         operationalPersonnel.Insert(0, task.activeOrgCharts.First(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.First(o => o.RoleID == BranchGroup.LeaderICSRoleID));
 
@@ -4153,6 +4165,21 @@ namespace WildfireICSDesktopServices
             }
 
             results.path = path;
+
+            if (results.path != null && results.Successful)
+            {
+                results.bytes = new List<byte[]>();
+                using (FileStream stream = File.OpenRead(results.path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    results.bytes.Add(fileBytes);
+                }
+            }
+
+
             return results;
         }
 

@@ -117,6 +117,29 @@ namespace WildfireICSDesktopServices
             }
             return 0;
         }
+        public static void SetFieldStringValue(this PdfStamper stamper, string fieldName, string value)
+        {
+            if (stamper.AcroFields.Fields.ContainsKey(fieldName))
+            {
+                stamper.AcroFields.SetField(fieldName, value);
+            }
+            else
+            {
+                throw new ArgumentException($"Field '{fieldName}' does not exist in the PDF form.");
+            }
+        }
+
+        public static PdfStamper SetPDFCheckbox(this PdfStamper stamper, string fieldname)
+        {
+            string[] checkboxstates = stamper.AcroFields.GetAppearanceStates(fieldname);
+            if (checkboxstates.Count() > 0)
+            {
+                stamper.AcroFields.SetField(fieldname, checkboxstates[checkboxstates.Count() - 1]);
+            }
+            return stamper;
+        }
+
+
         public static void SetFieldFontBold(this PdfStamper stamper, string fieldName)
         {
             BaseFont family = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, false);
@@ -331,15 +354,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-        public static PdfStamper SetPDFCheckbox(this PdfStamper stamper, string fieldname)
-        {
-            string[] checkboxstates = stamper.AcroFields.GetAppearanceStates(fieldname);
-            if (checkboxstates.Count() > 0)
-            {
-                stamper.AcroFields.SetField(fieldname, checkboxstates[checkboxstates.Count() - 1]);
-            }
-            return stamper;
-        }
+      
 
         public static bool MergePDFs(IEnumerable<string> fileNames, string targetPdf, bool flattenPDF = false)
         {
