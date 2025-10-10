@@ -2,43 +2,91 @@
 using System;
 using System.Linq;
 using System.Text;
+using WF_ICS_ClassLibrary.Models.OrganizationalChartModels;
 
 namespace WF_ICS_ClassLibrary.Models
 {
     [ProtoContract]
     [Serializable]
-    public class ICSRole : SyncableItem, ICloneable
+    public class ICSRole : SyncableItem, ICloneable, IGenericICSRole
     {
-        [ProtoMember(1)] private Guid _RoleID;
-        [ProtoMember(2)] private string _RoleName;
-        [ProtoMember(3)] private Guid _ReportsTo;
+        
+        public ICSRole() { _ManualSortOrder = 99; Depth = 0; Active = true; }
+       
+        public ICSRole(Guid genericId, string name, Guid reports, Guid Section_ID, string pdfname, string pdftitle, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
+        {
+            GenericRoleID = genericId; ReportsTo = reports; PDFFieldName = pdfname; IndividualID = member.ID; IndividualName = member.Name; SectionID = Section_ID;  ID = Guid.NewGuid();
+            PDFTitleName = pdftitle; Active = true;
+            BaseRoleName = name; 
+            ManualSortOrder = maualSortOrder; Depth = initial_depth;
+
+            FillInfoFromStaticRole();
+
+        }
+        public ICSRole(GenericICSRole fromGeneric)
+        {
+            Active = true;
+            ID = Guid.NewGuid();
+            this.FillFromGenericRole(fromGeneric);
+        }
+
+
+        //ID uniquely identifies this role
+        [ProtoMember(27)] private Guid _IndividualID; //reference to the personnel table showing the person filling this role
+        [ProtoMember(10)] private Guid _SectionID; //tracks which section (ops planning, etc.) that this role is within
+        [ProtoMember(5)] private Guid _OrganizationalChartID; //Points to the organization chart this role pertains to. This is used so that roles sent individual can be correctly organized
+        [ProtoMember(6)] private Guid _GenericRoleID; //This identifies the role generically. e.g. Planning Section Chief will always have the same OrgChartRoleID
+        [ProtoMember(3)] private Guid _ReportsTo; //The unique role id that this role reports to on the org chart
+        [ProtoMember(22)] private Guid _OperationalGroupID;
+
+
+
+
         [ProtoMember(4)] private string _PDFFieldName;
-        [ProtoMember(5)] private Guid _OrganizationalChartID;
-        [ProtoMember(6)] private Guid _OrgChartRoleID;
         //[ProtoMember(7)] private Personnel _teamMember;
-        [ProtoMember(10)] private Guid _SectionID;
         [ProtoMember(11)] private string _ReportsToRoleName;
         [ProtoMember(12)] private int _ManualSortOrder;
         [ProtoMember(13)] private string _PDFTitleName;
         [ProtoMember(14)] private int _Depth;
         [ProtoMember(15)] private string _RoleDescription;
-        [ProtoMember(16)] private string _Mnemonic;
-        [ProtoMember(17)] private bool _IncludeReportsToInName;
+        [ProtoMember(16)] private string _MnemonicAbrv;
+        //[ProtoMember(17)] private bool _IncludeReportsToInName;
         [ProtoMember(18)] private string _BaseRoleName;
 
 
-        [ProtoMember(22)] private Guid _OperationalGroupID;
        // [ProtoMember(23)] private Guid _DivisionID;
         [ProtoMember(24)] private string _SectionName;
-        [ProtoMember(25)] private bool _IsOpGroupSup;
+        
         [ProtoMember(26)] private bool _IsPlaceholder;
-        [ProtoMember(27)] private Guid _IndividualID;
 
         [ProtoMember(28)] private string _IndividualName;
+        [ProtoMember(29)] private Guid _ReportsToGenericRoleID;
+        [ProtoMember(30)] private string _RoleNameWithPlaceholder;
+        [ProtoMember(31)] private bool _OnInitialOrgChart;
+        [ProtoMember(32)] private bool _RequiresOperationalGroup;
+        [ProtoMember(33)] private string _OperationalGroupName;
+
+        public Guid RoleID { get => ID; set => ID = value; }
+        public string RoleName
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(RoleNameWithPlaceholder))
+                {
+                    if (RequiresOperationalGroup && !string.IsNullOrEmpty(OperationalGroupName))
+                    {
+                        return RoleNameWithPlaceholder.Replace("[OpGroupName]", OperationalGroupName);
+                    }
+                    else if (!RequiresOperationalGroup && !string.IsNullOrEmpty(ReportsToRoleName))
+                    {
+                        return RoleNameWithPlaceholder.Replace("[ReportsToName]", ReportsToRoleName);
+                    }
+                }
+                return BaseRoleName;
+            }
+        }
 
 
-        public Guid RoleID { get => _RoleID; set => _RoleID = value; }
-        public string RoleName { get => _RoleName; set => _RoleName = value; }
         public string RoleNameForDropdown
         {
             get
@@ -57,7 +105,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get { if (!string.IsNullOrEmpty(SectionName)) { return SectionName + " > " + RoleName; } else { return "General > " + RoleName; } }
         }
-        public Guid SectionID { get => _SectionID; set { _SectionID = value; _SectionName = OrgChartTools.GetSectionName(value); } }
+        public Guid SectionID { get => _SectionID; set { _SectionID = value; _SectionName = OrganizationalChartTools.GetSectionName(value); } }
         public string SectionName { get => _SectionName;}
 
 
@@ -70,7 +118,7 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 if (!string.IsNullOrEmpty(IndividualName)) { return RoleName + " - " + IndividualName; }
-                else if (RoleID == Globals.IncidentCommanderID && !RoleName.Equals("Incident Commander")) { return RoleName; }
+                else if (RoleID == Globals.IncidentCommanderGenericID && !RoleName.Equals("Incident Commander")) { return RoleName; }
                 else { return RoleName + " - unassigned"; }
             }
         }
@@ -79,7 +127,7 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 if (!string.IsNullOrEmpty(IndividualName)) { return RoleName + " - " + IndividualName; }
-                else if (RoleID == Globals.IncidentCommanderID && !RoleName.Equals("Incident Commander")) { return RoleName; }
+                else if (RoleID == Globals.IncidentCommanderGenericID && !RoleName.Equals("Incident Commander")) { return RoleName; }
                 else { return RoleName; }
             }
         }
@@ -89,7 +137,7 @@ namespace WF_ICS_ClassLibrary.Models
             {
                 if (!string.IsNullOrEmpty(IndividualName)) { return RoleNameForDropdown + " - " + IndividualName; }
                 if (string.IsNullOrEmpty(IndividualName) && string.IsNullOrEmpty(RoleName)) { return string.Empty; }
-                else if (RoleID == Globals.IncidentCommanderID && !RoleName.Equals("Incident Commander")) { return RoleNameForDropdown; }
+                else if (RoleID == Globals.IncidentCommanderGenericID && !RoleName.Equals("Incident Commander")) { return RoleNameForDropdown; }
                 else { return RoleNameForDropdown + " - unassigned"; }
             }
         }
@@ -100,18 +148,18 @@ namespace WF_ICS_ClassLibrary.Models
 
         public Guid OrganizationalChartID { get => _OrganizationalChartID; set => _OrganizationalChartID = value; }
 
-        public Guid OrgChartRoleID { get => _OrgChartRoleID; set => _OrgChartRoleID = value; }
+        public Guid GenericRoleID { get => _GenericRoleID; set => _GenericRoleID = value; }
         public string ReportsToRoleName { get => _ReportsToRoleName; set => _ReportsToRoleName = value; }
         public int ManualSortOrder { get => _ManualSortOrder; set => _ManualSortOrder = value; }
-        public bool IncludeReportsToInName { get => _IncludeReportsToInName; set => _IncludeReportsToInName = value; }
+        //public bool IncludeReportsToInName { get => _IncludeReportsToInName; set => _IncludeReportsToInName = value; }
         public string BaseRoleName { get => _BaseRoleName; set => _BaseRoleName = value; }
         public bool IsPlaceholder { get => _IsPlaceholder; set => _IsPlaceholder = value; }
         public bool IsTFST
         {
             get
             {
-                if (string.IsNullOrEmpty(Mnemonic)) { return false; }
-                else if (Mnemonic.Equals("STLD") || Mnemonic.Equals("TFLD")) { return true; }
+                if (string.IsNullOrEmpty(MnemonicAbrv)) { return false; }
+                else if (MnemonicAbrv.Equals("STLD") || MnemonicAbrv.Equals("TFLD")) { return true; }
                 return false;
             }
         }
@@ -119,7 +167,7 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                if (string.IsNullOrEmpty(Mnemonic) || !IsOpGroupSup || string.IsNullOrEmpty(RoleName)) { return false; }
+                if (string.IsNullOrEmpty(MnemonicAbrv) || !IsOpGroupSup || string.IsNullOrEmpty(RoleName)) { return false; }
                 else if (RoleName.Contains("Branch")) { return true; }
                 return false;
 
@@ -127,60 +175,35 @@ namespace WF_ICS_ClassLibrary.Models
         }
 
 
-        public ICSRole() {  OrgChartRoleID = System.Guid.NewGuid(); RoleID = System.Guid.NewGuid(); _ManualSortOrder = 99; Depth = 0; Active = true; }
-        /*
-        public ICSRole(Guid id, string name, Guid reports, string pdfname, string person_name = "", Guid person_id = new Guid())
-        {
-            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; IndividualName = person_name; IndividualID = person_id;
-        }*/
-        public ICSRole(Guid id, string name, Guid reports, Guid Section_ID, string pdfname, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
-        {
-            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; IndividualID = member.ID; IndividualName = member.Name; SectionID = Section_ID; _OrgChartRoleID = System.Guid.NewGuid();
-            ManualSortOrder = maualSortOrder; Depth = initial_depth; Active = true;
-            _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
-            FillInfoFromStaticRole();
-        }
-        public ICSRole(Guid id, string name, Guid reports, Guid Section_ID, string pdfname, string pdftitle, Personnel member, int maualSortOrder = 99, int initial_depth = 0, bool includeReportsToInName = false)
-        {
-            RoleID = id; RoleName = name; ReportsTo = reports; PDFFieldName = pdfname; IndividualID = member.ID; IndividualName = member.Name; SectionID = Section_ID; _OrgChartRoleID = System.Guid.NewGuid();
-            PDFTitleName = pdftitle; Active = true;
-            _BaseRoleName = name; _IncludeReportsToInName = includeReportsToInName;
-            ManualSortOrder = maualSortOrder; Depth = initial_depth;
-
-            FillInfoFromStaticRole();
-            
-        }
-
         private void FillInfoFromStaticRole()
         {
-            if (OrgChartTools.staticRoles.Any(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase) || o.BaseRoleName.Equals(BaseRoleName, StringComparison.InvariantCultureIgnoreCase)))
+            if (OrganizationalChartTools.GenericRolesCache.Any(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase) ))
             {
-                ICSRole staticRole = OrgChartTools.staticRoles.FirstOrDefault(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase) || o.BaseRoleName.Equals(BaseRoleName, StringComparison.InvariantCultureIgnoreCase));
-                Mnemonic = staticRole.Mnemonic;
+                GenericICSRole staticRole = OrganizationalChartTools.GenericRolesCache.FirstOrDefault(o => o.RoleName.Equals(RoleName, StringComparison.InvariantCultureIgnoreCase) );
+                MnemonicAbrv = staticRole.MnemonicAbrv;
                 RoleDescription = staticRole.RoleDescription;
-                _IncludeReportsToInName = staticRole.IncludeReportsToInName;
+                if (SectionID == Guid.Empty) { SectionID = staticRole.SectionID; }
+                GenericRoleID = staticRole.GenericRoleID;
+                ReportsTo = staticRole.ReportsToGenericRoleID;
+                RoleDescription = staticRole.RoleDescription;
+                MnemonicAbrv = staticRole.MnemonicAbrv;
+                RoleNameWithPlaceholder = staticRole.RoleNameWithPlaceholder;
+                OnInitialOrgChart = staticRole.OnInitialOrgChart;
+                RequiresOperationalGroup = staticRole.RequiresOperationalGroup;
+                ManualSortOrder = staticRole.ManualSortOrder;
+                BaseRoleName = staticRole.RoleName;
             }
         }
 
-        public ICSRole(string name, Guid Section, string mnemonic, string description, bool includeReportsToInName = false)
-        {
-            RoleID = Guid.NewGuid();
-            RoleName = name;
-            _BaseRoleName = name;
-            SectionID = Section;
-            RoleDescription = description;
-            Mnemonic = mnemonic;
-            _IncludeReportsToInName = includeReportsToInName;
-            IndividualName = string.Empty;
-            IndividualID = Guid.Empty;
-        }
+      
+        
 
 
 
         public int Depth { get => _Depth; set => _Depth = value; }
 
         public string RoleDescription { get => _RoleDescription; set => _RoleDescription = value; }
-        public string Mnemonic { get => _Mnemonic; set => _Mnemonic = value; }
+        public string MnemonicAbrv { get => _MnemonicAbrv; set => _MnemonicAbrv = value; }
 
 
         public bool AllowEditName
@@ -195,9 +218,15 @@ namespace WF_ICS_ClassLibrary.Models
         public bool AllowEditReportsTo { get { if (IsOpGroupSup || !string.IsNullOrEmpty(PDFFieldName)) { return false; } else { return true; } } }
         public bool AllowDelete { get => string.IsNullOrEmpty(PDFFieldName); }
 
-        public bool IsOpGroupSup { get => _IsOpGroupSup; set => _IsOpGroupSup = value; }
+        public bool IsOpGroupSup { get => RequiresOperationalGroup; set => RequiresOperationalGroup = value; }
 
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
+        public string RoleNameWithPlaceholder { get => _RoleNameWithPlaceholder; set => _RoleNameWithPlaceholder = value; }
+        public Guid ReportsToGenericRoleID { get => _ReportsToGenericRoleID; set => _ReportsToGenericRoleID = value; }
+        public bool OnInitialOrgChart { get => _OnInitialOrgChart; set => _OnInitialOrgChart = value; }
+        public bool RequiresOperationalGroup { get => _RequiresOperationalGroup; set => _RequiresOperationalGroup = value; }
+        public string OperationalGroupName { get => _OperationalGroupName; set => _OperationalGroupName = value; }
+
         //public Guid DivisionID { get => _DivisionID; set => _DivisionID = value; }
 
 

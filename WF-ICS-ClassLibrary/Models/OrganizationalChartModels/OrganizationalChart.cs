@@ -33,17 +33,19 @@ namespace WF_ICS_ClassLibrary.Models
         public List<ICSRole> FilledRoles { get { return AllRoles.Where(o => o.IndividualID != Guid.Empty).ToList(); } }
         public List<ICSRole> FilledActiveRoles { get { return ActiveRoles.Where(o =>o.IndividualID != Guid.Empty).ToList(); } }
         public bool IsUnifiedCommand { get => _IsUnifiedCommand; set => _IsUnifiedCommand = value; }
-
         public string getNameByRoleName(string rolename, bool defaultUpChain = true)
         {
             ICSRole role = this.GetRoleByName(rolename);
-            string name = role.IndividualName;
-            if (defaultUpChain && (name == null || name == ""))
+            if (role != null)
             {
-                name = getNameByRoleID(role.ReportsTo);
+                string name = role.IndividualName;
+                if (defaultUpChain && (name == null || name == ""))
+                {
+                    name = getNameByRoleID(role.ReportsTo);
+                }
+                return name;
             }
-
-            return name;
+            return string.Empty;
         }
       
         public Guid getPersonnelIDByRoleName(string rolename, bool defaultUpChain = true)
@@ -93,14 +95,28 @@ namespace WF_ICS_ClassLibrary.Models
         {
             get
             {
-                ICSRole uc2 = ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2ID);
+                ICSRole uc2 = ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Globals.UnifiedCommand2GenericID);
                 if (uc2 != null && this.FilledOrHasFilledChildRoles(uc2)) { return true; }
-                ICSRole uc3 = ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand3ID);
+                ICSRole uc3 = ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Globals.UnifiedCommand3GenericID);
                 if (uc3 != null && this.FilledOrHasFilledChildRoles(uc3)) { return true; }
                 return false;
             }
         }
 
+        public List<ICSRole> IncidentCommanders
+        {
+            get
+            {
+                if (IsUnifiedCommand)
+                {
+                    return ActiveRoles.Where(o => o.GenericRoleID == Globals.IncidentCommanderGenericID || o.GenericRoleID == Globals.UnifiedCommand1GenericID || o.GenericRoleID == Globals.UnifiedCommand2GenericID || o.GenericRoleID == Globals.UnifiedCommand3GenericID).ToList();
+                }
+                else
+                {
+                    return ActiveRoles.Where(o => o.GenericRoleID == Globals.IncidentCommanderGenericID).ToList();
+                }
+            }
+        }
 
         public OrganizationChart Clone()
         {

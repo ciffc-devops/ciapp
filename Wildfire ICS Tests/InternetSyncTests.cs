@@ -68,7 +68,7 @@ namespace Wildfire_ICS_Tests
             IncidentDataService dataService = new IncidentDataService(currentIncident);
             Globals.incidentService = dataService;
             Globals.incidentService.MachineID = Guid.NewGuid();
-            dataService.CurrentRole = OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID);
+            dataService.CurrentRole = new ICSRole(OrganizationalChartTools.GetGenericRoleByID(Globals.IncidentCommanderGenericID));
 
             currentIncident.createOrgChartAsNeeded(1);
 

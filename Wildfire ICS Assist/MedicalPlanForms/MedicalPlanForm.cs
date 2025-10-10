@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
-            ICSFormInformation form = ICSFormTools.GetFormByNumber(206);
+            ICSFormInformation form = ICSFormTools.GetFormByNumber("206");
             if (form.Fields.Any(o => o.FieldNumber == 4)) { toolTip1.SetToolTip(btnFieldHelp4, form.Fields.First(o => o.FieldNumber == 4).InstructionsWithLineFeed); }
             if (form.Fields.Any(o => o.FieldNumber == 5)) { toolTip1.SetToolTip(btnFieldHelp5, form.Fields.First(o => o.FieldNumber == 5).InstructionsWithLineFeed); }
             if (form.Fields.Any(o => o.FieldNumber == 6)) { toolTip1.SetToolTip(btnFieldHelp6, form.Fields.First(o => o.FieldNumber == 6).InstructionsWithLineFeed); }
@@ -165,7 +165,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnDeleteAidStation_Click(object sender, EventArgs e)
         {
-            if (dgvAidStations.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dgvAidStations.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 List<MedicalAidStation> toDelete = new List<MedicalAidStation>();
 
@@ -250,7 +250,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnDeleteTransport_Click(object sender, EventArgs e)
         {
-            if (dgvTransport.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dgvTransport.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 List<AmbulanceService> toDelete = new List<AmbulanceService>();
 
@@ -285,11 +285,11 @@ namespace Wildfire_ICS_Assist
             if (!string.IsNullOrEmpty(path))
             {
                 try { System.Diagnostics.Process.Start(path); }
-                catch { MessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
+                catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
             }
             else
             {
-                MessageBox.Show("Sorry, there was an error generating the contact list.");
+                LgMessageBox.Show("Sorry, there was an error generating the contact list.");
             }
         }
 
@@ -297,7 +297,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnDeleteHospital_Click(object sender, EventArgs e)
         {
-            if (dgvHospitals.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dgvHospitals.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 List<Hospital> toDelete = new List<Hospital>();
 
@@ -400,7 +400,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnFormVideo_Click(object sender, EventArgs e)
         {
-            ICSFormInformation form = ICSFormTools.GetFormByNumber(206);
+            ICSFormInformation form = ICSFormTools.GetFormByNumber("206");
             if (form != null && !string.IsNullOrEmpty(form.VideoURL))
             {
                 System.Diagnostics.Process.Start(form.VideoURL);
@@ -410,7 +410,7 @@ namespace Wildfire_ICS_Assist
         private void btnFormHelp_Click(object sender, EventArgs e)
         {
             ICSFormHelpForm helpForm = new ICSFormHelpForm();
-            helpForm.SelectedForm = ICSFormTools.GetFormByNumber(206);
+            helpForm.SelectedForm = ICSFormTools.GetFormByNumber("206");
             helpForm.Show();
         }
 

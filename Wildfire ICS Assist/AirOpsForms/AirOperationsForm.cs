@@ -308,7 +308,7 @@ namespace Wildfire_ICS_Assist
         }
         private void AddFirstChild(TreeNodeCollection nodes)
         {
-            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.RoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirector).ToList();
+            var rows = CurrentOrgChart.ActiveRoles.Where(o => o.GenericRoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirectorGenericID).ToList();
 
             foreach (var row in rows)
             {
@@ -387,13 +387,13 @@ namespace Wildfire_ICS_Assist
             ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
             if (role.AllowDelete)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     Program.incidentDataService.DeleteICSRole(role, Program.CurrentOpPeriod);
                 }
             }
-            else { MessageBox.Show(Properties.Resources.ProtectedRole); }
+            else { LgMessageBox.Show(Properties.Resources.ProtectedRole); }
         }
 
         private void openRoleForEdit(ICSRole role)
@@ -411,7 +411,7 @@ namespace Wildfire_ICS_Assist
                     }
                 }
             }
-            else { MessageBox.Show(Properties.Resources.ProtectedRole); }
+            else { LgMessageBox.Show(Properties.Resources.ProtectedRole); }
         }
 
         private void btnAddComms_Click(object sender, EventArgs e)
@@ -461,7 +461,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnDeleteComms_Click(object sender, EventArgs e)
         {
-            if (dgvCommsItems.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dgvCommsItems.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 List<CommsPlanItem> toDelete = new List<CommsPlanItem>();
 
@@ -546,7 +546,7 @@ namespace Wildfire_ICS_Assist
         {
             if (dgvAircraft.SelectedRows.Count > 0)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     List<Aircraft> toDelete = new List<Aircraft>();
@@ -638,11 +638,11 @@ namespace Wildfire_ICS_Assist
             if (!string.IsNullOrEmpty(path))
             {
                 try { System.Diagnostics.Process.Start(path); }
-                catch { MessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
+                catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
             }
             else
             {
-                MessageBox.Show("Sorry, there was an error generating the contact list.");
+                LgMessageBox.Show("Sorry, there was an error generating the contact list.");
             }
 
 
@@ -652,7 +652,7 @@ namespace Wildfire_ICS_Assist
         {
             if (!coordinatesAreGoodOrBlank)
             {
-                MessageBox.Show(Properties.Resources.ValidCoordinatesRequired);
+                LgMessageBox.Show(Properties.Resources.ValidCoordinatesRequired);
             }
             else
             {

@@ -6,6 +6,22 @@ using System.Threading.Tasks;
 
 namespace WF_ICS_ClassLibrary.Utilities
 {
+    public static class RandomIntGenerator
+    {
+        private static readonly Random random = new Random();
+
+        public static int GetRandomInt(int lower, int upper)
+        {
+            return random.Next(lower, upper);
+        }
+
+        public static void Main()
+        {
+            
+        }
+
+    }
+
     public static class RandomBooleanGenerator
     {
         private static readonly Random random = new Random();

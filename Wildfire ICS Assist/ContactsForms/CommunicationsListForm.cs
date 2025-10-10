@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using Wildfire_ICS_Assist.OptionsForms;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -79,7 +80,7 @@ namespace Wildfire_ICS_Assist
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
 
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -88,7 +89,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }
@@ -162,11 +163,11 @@ namespace Wildfire_ICS_Assist
             if (!string.IsNullOrEmpty(path))
             {
                 try { System.Diagnostics.Process.Start(path); }
-                catch { MessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
+                catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
             }
             else
             {
-                MessageBox.Show("Sorry, there was an error generating the contact list.");
+                LgMessageBox.Show("Sorry, there was an error generating the contact list.");
             }
         }
 
@@ -181,7 +182,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvContacts.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dgvContacts.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 List<Contact> toDelete = new List<Contact>();
 

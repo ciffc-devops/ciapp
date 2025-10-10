@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -127,13 +128,13 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
-                MessageBox.Show("Sorry, you can only edit one note at a time, please select just one to conitnue.");
+                LgMessageBox.Show("Sorry, you can only edit one note at a time, please select just one to conitnue.");
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Are you sure you want to delete the selected note(s)?", "Are you sure?", MessageBoxButtons.YesNo);
+            DialogResult dr = LgMessageBox.Show("Are you sure you want to delete the selected note(s)?", "Are you sure?", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
             {
                 List<Note> notesToDelete = new List<Note>();
@@ -176,7 +177,7 @@ namespace Wildfire_ICS_Assist
             }
             catch (Exception)
             {
-                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
             }
         }
 

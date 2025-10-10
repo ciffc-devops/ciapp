@@ -175,7 +175,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
             }
             catch (Exception)
             {
-                MessageBox.Show("There was an error copying to the clipboard.");
+                LgMessageBox.Show("There was an error copying to the clipboard.");
             }
         }
 
@@ -195,7 +195,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
             }
             catch (Exception)
             {
-                MessageBox.Show("There was an error copying to the clipboard.");
+                LgMessageBox.Show("There was an error copying to the clipboard.");
             }
         }
 
@@ -244,7 +244,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
                 if (!internet)
                 {
-                    MessageBox.Show("You must be connected to the internet in order to initiate a new task sync.");
+                    LgMessageBox.Show("You must be connected to the internet in order to initiate a new task sync.");
                 }
                 else
                 {
@@ -258,7 +258,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
                         if (initialEntryExists)
                         {
-                            MessageBox.Show("It looks like this task has already been synced to the server.  Please use the 'Join an Ongoing Sync' option and provide the correct encryption key.");
+                            LgMessageBox.Show("It looks like this task has already been synced to the server.  Please use the 'Join an Ongoing Sync' option and provide the correct encryption key.");
                         }
                         else
                         {
@@ -269,7 +269,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("There was an error checking the server for this task id.  Please verify your internet connection and try agian.");
+                        LgMessageBox.Show("There was an error checking the server for this task id.  Please verify your internet connection and try agian.");
 
                     }
 
@@ -287,7 +287,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     {
 
                         bool internet = PingTool.TestPing();
-                        if (!internet) { MessageBox.Show("You must be connected to the internet to join an internet sync task."); }
+                        if (!internet) { LgMessageBox.Show("You must be connected to the internet to join an internet sync task."); }
                         else
                         {
                             UpdateSyncStatus("Internet available, checking task availability...", 70);
@@ -302,17 +302,17 @@ namespace Wildfire_ICS_Assist.UtilityForms
                             }
                             else
                             {
-                                MessageBox.Show("The task either hasn't been posted to the server yet, or your encryption key was incorrect.");
+                                LgMessageBox.Show("The task either hasn't been posted to the server yet, or your encryption key was incorrect.");
                             }
                         }
 
 
                     }
-                    else { MessageBox.Show("There is an error in your encryption key, please confirm it has been entered correctly with no extra characters or spaces."); }
+                    else { LgMessageBox.Show("There is an error in your encryption key, please confirm it has been entered correctly with no extra characters or spaces."); }
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("There was an error connecting to this task.  Please verify your encryption key was correct, and that others are using the same version of SAR Assist.");
+                    LgMessageBox.Show("There was an error connecting to this task.  Please verify your encryption key was correct, and that others are using the same version of SAR Assist.");
                     testOK = false;
                 }
             }
@@ -406,7 +406,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
             }
             catch (Exception)
             {
-                MessageBox.Show("There was an error copying to the clipboard.");
+                LgMessageBox.Show("There was an error copying to the clipboard.");
             }
         }
 
@@ -421,7 +421,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
             }
             catch (Exception)
             {
-                MessageBox.Show("There was an error copying to the clipboard.");
+                LgMessageBox.Show("There was an error copying to the clipboard.");
             }
         }
 

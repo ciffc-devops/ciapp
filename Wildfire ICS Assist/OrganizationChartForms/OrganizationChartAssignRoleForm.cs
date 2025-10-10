@@ -122,7 +122,7 @@ namespace Wildfire_ICS_Assist
                 this.Close();
             } else
             {
-                MessageBox.Show(Properties.Resources.MissingInformationValidationError);
+                LgMessageBox.Show(Properties.Resources.MissingInformationValidationError);
             }
         }*/
 

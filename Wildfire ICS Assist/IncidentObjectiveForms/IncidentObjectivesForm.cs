@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
+﻿//using Microsoft.VisualStudio.PlatformUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +15,7 @@ using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.CustomControls;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -94,7 +95,7 @@ namespace Wildfire_ICS_Assist
                 c.Location = new Point(0, c.Location.Y);
                 foreach (CollapsiblePanel cp in panels)
                 {
-                    if (!cp.Name.Equals(c.Name))
+                    if (!cp.Name.Equals(c.Name) && !cp.Collapsed)
                     {
                         cp.Collapse();
                         cp.Location = new Point(10, cp.Location.Y);
@@ -233,7 +234,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 List<IncidentObjective> objectivesToDelete = new List<IncidentObjective>();
                 foreach (DataGridViewRow row in dgvObjectives.SelectedRows)
@@ -260,12 +261,12 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error opening " + filename + Environment.NewLine + Environment.NewLine + ex.ToString());
+                    LgMessageBox.Show("There was an error opening " + filename + Environment.NewLine + Environment.NewLine + ex.ToString());
                 }
             }
             else
             {
-                MessageBox.Show("Sorry, there was an issue creating the PDF.");
+                LgMessageBox.Show("Sorry, there was an issue creating the PDF.");
             }
         }
 

@@ -37,7 +37,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
             if (dgvUpdates.SelectedRows.Count == 1 && dgvUpdates.SelectedRows[0].DataBoundItem != null)
             {
                 string warning = "Are you sure you want to revert to this previous version of the item?";
-                if (MessageBox.Show(warning, "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (LgMessageBox.Show(warning, "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     TaskUpdate update = ((TaskUpdate)dgvUpdates.SelectedRows[0].DataBoundItem).Clone();
 
@@ -83,7 +83,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
             if (dgvUpdates.SelectedRows.Count == 1 && dgvUpdates.SelectedRows[0].DataBoundItem != null)
             {
                 string warning = "Are you sure you want to revert to this previous version of the item?";
-                if (MessageBox.Show(warning, "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (LgMessageBox.Show(warning, "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     TaskUpdate update = ((TaskUpdate)dgvUpdates.SelectedRows[0].DataBoundItem).Clone();
 

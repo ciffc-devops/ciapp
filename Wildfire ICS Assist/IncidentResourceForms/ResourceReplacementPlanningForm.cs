@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualBasic;
-using Microsoft.VisualStudio.Experimentation;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.CustomControls;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -455,7 +456,7 @@ namespace Wildfire_ICS_Assist
                     }
 
                     System.IO.File.WriteAllText(exportPath, sb.ToString());
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -464,7 +465,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }
@@ -543,7 +544,7 @@ namespace Wildfire_ICS_Assist
                     }
 
                     System.IO.File.WriteAllText(exportPath, sb.ToString());
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -552,7 +553,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }

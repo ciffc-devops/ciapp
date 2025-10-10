@@ -13,30 +13,37 @@ namespace Wildfire_ICS_Assist.CustomControls
 {
     public partial class OperationalGroupReportingResourcesControl : UserControl
     {
-        private ICSRole _role = null;
-        public ICSRole role { get => _role; set { _role = value; LoadOpGroup(); } }
+        private OperationalGroup _selectedOpGroup = null;
+        public OperationalGroup SelectedOpGroup { get => _selectedOpGroup; set { _selectedOpGroup = value; LoadOpGroup(); } }
 
         public OperationalGroupReportingResourcesControl()
         {
             InitializeComponent();
             dgvResources.AutoGenerateColumns = false;
             dgvResources.BackgroundColor = Program.AccentColor;
+            if (Program.incidentDataService != null)
+            {
+                Program.incidentDataService.OperationalGroupChanged += IncidentDataService_OperationalGroupChanged;
+            }
+            
+        }
 
+        private void IncidentDataService_OperationalGroupChanged(WF_ICS_ClassLibrary.EventHandling.OperationalGroupEventArgs e)
+        {
+            if (e.item.ID == SelectedOpGroup.ID) { LoadOpGroup(); }
+            if (e.item.ParentID == SelectedOpGroup.ID) { LoadOpGroup(); }
         }
 
         private void LoadOpGroup()
         {
-            if (role != null)
+            if (SelectedOpGroup != null)
             {
-                lblResourcesTitle.Text = role.RoleName + " Resources";
+                lblResourcesTitle.Text = "Assigned Resources";
 
-                OperationalGroup selectedGroup = new OperationalGroup();
-                if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
+                if (Program.CurrentIncident != null)
                 {
-                    selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
-                    lblResourcesTitle.Text = selectedGroup.ResourceName + " Resources";
+                    dgvResources.DataSource = Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.ParentID == SelectedOpGroup.ID && o.OpPeriod == Program.CurrentOpPeriod).ToList();
                 }
-                if (Program.CurrentIncident != null) { dgvResources.DataSource = Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.ParentID == role.RoleID && o.OpPeriod == Program.CurrentOpPeriod).ToList(); }
             }
         }
 

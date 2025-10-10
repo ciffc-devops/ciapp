@@ -7,7 +7,6 @@ namespace WF_ICS_ClassLibrary.Models
     [Serializable]
     public class OperationalGroupResourceListing : IncidentResource, ICloneable
     {
-        [ProtoMember(1)] private Guid _SubGroupID;
         [ProtoMember(2)] private Guid _OperationalGroupID;
         [ProtoMember(3)] private Guid _ResourceID; //References a person or equipment/vehicle
         [ProtoMember(4)] private string _ResourceType; //Personnel or Vehicle/Equipment
@@ -16,7 +15,6 @@ namespace WF_ICS_ClassLibrary.Models
 
         public OperationalGroupResourceListing() { Active = true; ResourceID = Guid.NewGuid(); }
 
-        public Guid SubGroupID { get => _SubGroupID; set => _SubGroupID = value; }
         public Guid OperationalGroupID { get => _OperationalGroupID; set => _OperationalGroupID = value; }
         public Guid ResourceID { get => _ResourceID; set => _ResourceID = value; }
      /*

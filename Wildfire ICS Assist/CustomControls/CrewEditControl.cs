@@ -8,15 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.OptionsForms;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
     public partial class CrewEditControl : UserControl
     {
-        private Crew _subGroup = new Crew();
-        public Crew subGroup { get { return _subGroup; } }
-        public void SetSubGroup(Crew sub, List<IncidentResource> res) { _subGroup = sub; resources = res; loadSubGroup(); }
+        private Crew _SelectedCrew = new Crew();
+        public Crew selectedCrew { get { return _SelectedCrew; } }
+        public void SetCrew(Crew crew, List<IncidentResource> res) { _SelectedCrew = crew; resources = res; loadCrewDetails(); }
 
         private List<IncidentResource> _resources = new List<IncidentResource>();
         public List<IncidentResource> resources { get => _resources; private set => _resources = value; }
@@ -34,29 +37,40 @@ namespace Wildfire_ICS_Assist.CustomControls
         private void CrewEditControl_Load(object sender, EventArgs e)
         {
             txtName.TextChanged += TxtName_TextChanged;
+
+            cboAgency.DataSource = AgencyTools.GetFixedAgencies(true);
+            cboAgency.DropDownWidth = cboAgency.GetDropDownWidth();
         }
 
         private void TxtName_TextChanged(object sender, EventArgs e)
         {
-            subGroup.ResourceName = txtName.Text;
+            selectedCrew.ResourceName = txtName.Text;
 
         }
 
-        private void loadSubGroup()
+        private void loadCrewDetails()
         {
-            if (subGroup != null)
+            if (selectedCrew != null)
             {
-                txtEmail.Text = subGroup.Email;
-                txtPhone.Text = subGroup.Phone;
-                txtName.SetText( subGroup.ResourceName);
-                txtTransport.Text = subGroup.Transport;
-                rbCrew.Checked = !subGroup.IsEquipmentCrew;
-                rbHECrew.Checked = subGroup.IsEquipmentCrew;
-                if (!string.IsNullOrEmpty(subGroup.Type)) { cboCrewType.Text = subGroup.Type; }
+                txtEmail.Text = selectedCrew.Email;
+                txtPhone.Text = selectedCrew.Phone;
+                txtName.SetText( selectedCrew.ResourceName);
+                txtTransport.Text = selectedCrew.Transport;
+                rbCrew.Checked = !selectedCrew.IsEquipmentCrew;
+                rbHECrew.Checked = selectedCrew.IsEquipmentCrew;
+                if (!string.IsNullOrEmpty(selectedCrew.Type)) { cboCrewType.Text = selectedCrew.Type; }
                 else { cboCrewType.SelectedIndex = 0; }
 
                 btnAddVehicle.Enabled = !rbCrew.Checked;
-                subGroup.IsEquipmentCrew = !rbCrew.Checked;
+                selectedCrew.IsEquipmentCrew = !rbCrew.Checked;
+
+                foreach(OperationalGroupResourceListing listing in selectedCrew.ActiveResourceListing)
+                {
+                    if (!resources.Any(o => o.ID == listing.ResourceID) && Program.CurrentIncident.AllIncidentResources.Any(o=>o.ID == listing.ResourceID))
+                    {
+                        resources.Add(Program.CurrentIncident.AllIncidentResources.First(o => o.ID == listing.ResourceID).Clone());
+                    }
+                }
 
 
                 loadResourceList();
@@ -69,11 +83,14 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void loadResourceList()
         {
-            if (_subGroup != null)
+            if (_SelectedCrew != null)
             {
+                
+
+
                 dgvGroup.DataSource = null;
                 dgvGroup.AutoGenerateColumns = false;
-                List<OperationalGroupResourceListing> listings = _subGroup.ActiveResourceListing;
+                List<OperationalGroupResourceListing> listings = _SelectedCrew.ActiveResourceListing;
                 dgvGroup.DataSource = listings.OrderByDescending(o => o.IsLeader).ThenBy(o => o.ResourceName).ToList();
             }
 
@@ -102,15 +119,15 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                     if (resources.Any(o => o.ID == p.ID))
                     {
-                        MessageBox.Show("Sorry, this resource is already in the list.");
+                        LgMessageBox.Show("Sorry, this resource is already in the list.");
                     }
                     else
                     {
                         resources.Add(p);
 
                         OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                        listing.SubGroupID = subGroup.ID;
-                        listing.OperationalGroupID = subGroup.OperationalGroupID;
+                      
+                        listing.OperationalGroupID = selectedCrew.ID;
                         listing.Kind = entryForm.selectedPerson.Kind;
                         listing.Type = entryForm.selectedPerson.Type;
 
@@ -119,7 +136,10 @@ namespace Wildfire_ICS_Assist.CustomControls
                         listing.ResourceName = entryForm.selectedPerson.Name;
                         listing.UniqueIDNum = p.UniqueIDNum;
                         listing.Role = "Crew Member";
-                        subGroup.UpsertResourceListing(listing);
+
+                        int count = selectedCrew.ActiveResourceListing.Count(o => o.ID == listing.ID);
+
+                        selectedCrew.UpsertResourceListing(listing);
 
                         loadResourceList();
                     }
@@ -145,15 +165,15 @@ namespace Wildfire_ICS_Assist.CustomControls
 
                     if (resources.Any(o => o.ID == r.ID))
                     {
-                        MessageBox.Show("Sorry, this resource is already in the list.");
+                        LgMessageBox.Show("Sorry, this resource is already in the list.");
                     }
                     else
                     {
                         resources.Add(r);
 
                         OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                        listing.SubGroupID = subGroup.ID;
-                        listing.OperationalGroupID = subGroup.OperationalGroupID;
+                        
+                        listing.OperationalGroupID = selectedCrew.ID;
                         listing.Kind = entryForm.CurrentVehicle.Kind;
                         listing.Type = entryForm.CurrentVehicle.Type;
                         listing.UniqueIDNum = r.UniqueIDNum;
@@ -163,7 +183,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                         else { listing.ResourceType = "Vehicle"; }
                         listing.ResourceName = entryForm.CurrentVehicle.ResourceName;
                         //subGroup.ResourceListing.Add(listing);
-                        subGroup.UpsertResourceListing(listing);
+                        selectedCrew.UpsertResourceListing(listing);
                         loadResourceList();
                     }
                 }
@@ -182,16 +202,15 @@ namespace Wildfire_ICS_Assist.CustomControls
                     resources.Add(entryForm.selectedMember.Clone());
 
                     OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                    if (subGroup.ResourceListing.Any(o => o.ResourceID == entryForm.selectedMember.ID)) { listing = subGroup.ResourceListing.First(o => o.ResourceID == entryForm.selectedMember.ID); }
-                    listing.SubGroupID = subGroup.ID;
-                    listing.OperationalGroupID = subGroup.OperationalGroupID;
+                    if (selectedCrew.ResourceListing.Any(o => o.ResourceID == entryForm.selectedMember.ID)) { listing = selectedCrew.ResourceListing.First(o => o.ResourceID == entryForm.selectedMember.ID); }
+                    listing.OperationalGroupID = selectedCrew.ID;
                     listing.Kind = entryForm.selectedMember.Kind;
                     listing.Type = entryForm.selectedMember.Type;
 
                     listing.ResourceID = entryForm.selectedMember.PersonID;
                     listing.ResourceType = "Personnel";
                     listing.ResourceName = entryForm.selectedMember.Name;
-                    subGroup.UpsertResourceListing(listing);
+                    selectedCrew.UpsertResourceListing(listing);
 
                     loadResourceList();
                 }
@@ -210,9 +229,9 @@ namespace Wildfire_ICS_Assist.CustomControls
                     resources.Add(entryForm.vehicle.Clone());
 
                     OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                    if (subGroup.ResourceListing.Any(o => o.ResourceID == entryForm.vehicle.ID)) { listing = subGroup.ResourceListing.First(o => o.ResourceID == entryForm.vehicle.ID); }
-                    listing.SubGroupID = subGroup.ID;
-                    listing.OperationalGroupID = subGroup.OperationalGroupID;
+                    if (selectedCrew.ResourceListing.Any(o => o.ResourceID == entryForm.vehicle.ID)) { listing = selectedCrew.ResourceListing.First(o => o.ResourceID == entryForm.vehicle.ID); }
+                    
+                    listing.OperationalGroupID = selectedCrew.ID;
                     listing.Kind = entryForm.vehicle.Kind;
                     listing.Type = entryForm.vehicle.Type;
 
@@ -220,7 +239,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                     if (entryForm.vehicle.IsEquipment) { listing.ResourceType = "Equipment"; }
                     else { listing.ResourceType = "Vehicle"; }
                     listing.ResourceName = entryForm.vehicle.ResourceName;
-                    subGroup.UpsertResourceListing(listing);
+                    selectedCrew.UpsertResourceListing(listing);
 
                     loadResourceList();
                 }
@@ -229,7 +248,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void btnDeleteResource_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 List<OperationalGroupResourceListing> toDelete = new List<OperationalGroupResourceListing>();
                 foreach (DataGridViewRow row in dgvGroup.SelectedRows)
@@ -264,17 +283,17 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void txtEmail_TextChanged(object sender, EventArgs e)
         {
-            subGroup.Email = txtEmail.Text;
+            selectedCrew.Email = txtEmail.Text;
         }
 
         private void txtTransport_TextChanged(object sender, EventArgs e)
         {
-            subGroup.Transport = txtTransport.Text;
+            selectedCrew.Transport = txtTransport.Text;
         }
 
         private void txtPhone_Leave(object sender, EventArgs e)
         {
-            subGroup.Phone = txtPhone.Text;
+            selectedCrew.Phone = txtPhone.Text;
         }
 
         private void btnEditSelected_Click(object sender, EventArgs e)
@@ -313,7 +332,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void btnRemoveFromCrew_Click(object sender, EventArgs e)
         {
-            if (dgvGroup.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureRemoveFromCrew, Properties.Resources.AreYouSureTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dgvGroup.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureRemoveFromCrew, Properties.Resources.AreYouSureTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 List<OperationalGroupResourceListing> toRemove = new List<OperationalGroupResourceListing>();
                 foreach (DataGridViewRow row in dgvGroup.SelectedRows)
@@ -321,7 +340,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                     toRemove.Add(row.DataBoundItem as OperationalGroupResourceListing);
                 }
                 resourcesToRemoveFromCrew.AddRange(toRemove);
-                subGroup.ResourceListing = subGroup.ResourceListing.Where(o => !toRemove.Any(r => r.ID == o.ID)).ToList();
+                selectedCrew.ResourceListing = selectedCrew.ResourceListing.Where(o => !toRemove.Any(r => r.ID == o.ID)).ToList();
                 loadResourceList();
 
 
@@ -331,18 +350,18 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboCrewType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            subGroup.Type = cboCrewType.Text;
+            selectedCrew.Type = cboCrewType.Text;
         }
 
         private void rbCrew_CheckedChanged(object sender, EventArgs e)
         {
             btnAddVehicle.Enabled = !rbCrew.Checked;
-            subGroup.IsEquipmentCrew = !rbCrew.Checked;
+            selectedCrew.IsEquipmentCrew = !rbCrew.Checked;
         }
 
         private void rbHECrew_CheckedChanged(object sender, EventArgs e)
         {
-            if (!rbHECrew.Checked && subGroup.ActiveResourceListing.Any(o => o.ResourceType.Equals("Equipment") || o.ResourceType.Equals("Vehicle")))
+            if (!rbHECrew.Checked && selectedCrew.ActiveResourceListing.Any(o => o.ResourceType.Equals("Equipment") || o.ResourceType.Equals("Vehicle")))
             {
                 rbHECrew.Checked = true;
             }
@@ -427,6 +446,11 @@ namespace Wildfire_ICS_Assist.CustomControls
                 OperationalGroupResourceListing rec = (OperationalGroupResourceListing)dgvGroup.SelectedRows[0].DataBoundItem;
                 UpdateUniqueID(rec);
             }
+        }
+
+        private void cboAgency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedCrew.AgencyName = cboAgency.Text;
         }
     }
 }

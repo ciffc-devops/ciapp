@@ -171,7 +171,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+            DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
             {
                 foreach (DataGridViewRow row in dgvLog.SelectedRows)
@@ -189,7 +189,7 @@ namespace Wildfire_ICS_Assist
         {
             string path = Program.positionLogService.CreateICSPDF(Program.CurrentTask, Program.CurrentRole, Program.CurrentOpPeriod, null, false, false);
             try { System.Diagnostics.Process.Start(path); }
-            catch { MessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
+            catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
 
         }
 
@@ -197,7 +197,7 @@ namespace Wildfire_ICS_Assist
         {
             string path = Program.positionLogService.CreateVerbosePDF(Program.CurrentTask, Program.CurrentRole, Program.CurrentOpPeriod, null, false, false);
             try { System.Diagnostics.Process.Start(path); }
-            catch { MessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
+            catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
 
         }
 
@@ -284,7 +284,7 @@ namespace Wildfire_ICS_Assist
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
 
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -293,7 +293,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }

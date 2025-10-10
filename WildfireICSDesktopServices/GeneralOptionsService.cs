@@ -106,7 +106,7 @@ namespace WildfireICSDesktopServices
             }
             catch (Exception)
             {
-                //MessageBox.Show(ex.Message);
+                //LgMessageBox.Show(ex.Message);
                 _options = new GeneralOptions();
                 _options.addDefaultOptions();
                 _options.OptionsLoadedSuccessfully = false;
@@ -154,7 +154,7 @@ namespace WildfireICSDesktopServices
                 catch (Exception)
                 {
                     saveSuccessful = false;
-                    //MessageBox.Show(ex.Message);
+                    //LgMessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -195,7 +195,7 @@ namespace WildfireICSDesktopServices
                 catch (Exception)
                 {
                     saveSuccessful = false;
-                    //MessageBox.Show(ex.Message);
+                    //LgMessageBox.Show(ex.Message);
                 }
                 finally
                 {
@@ -463,7 +463,7 @@ namespace WildfireICSDesktopServices
                     return _options.PositionFormat;
                 case "DefaultICSRole":
                     if (_options.DefaultICSRole != null) { return _options.DefaultICSRole; }
-                    else { return OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID); }
+                    else { return new ICSRole(OrganizationalChartTools.GetGenericRoleByID(Globals.IncidentCommanderGenericID)); }
                 case "DefaultPort":
                     return _options.DefaultPortNumber;
                 case "DefaultSaveLocation":

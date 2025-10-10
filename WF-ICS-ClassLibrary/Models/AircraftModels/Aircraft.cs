@@ -24,7 +24,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(15)] private string _PointOfHire;
         [ProtoMember(21)] private decimal _FuelBurnRate;
 
-        public Aircraft() { ID = Guid.NewGuid(); Active = true; IsHeli = true; ResourceType = "Aircraft"; }
+        public Aircraft() { ID = Guid.NewGuid(); Active = true; IsHeli = true; ResourceType = "Aircraft"; NumberOfVehicles = 1; }
         public string CompanyName { get => _CompanyName; set => _CompanyName = value; }
         public string Registration { get => ResourceName; set => ResourceName = value; }
         public string MakeModel { get => _MakeModel; set => _MakeModel = value; }

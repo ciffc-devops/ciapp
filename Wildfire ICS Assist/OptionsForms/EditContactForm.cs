@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
@@ -72,7 +73,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             }
             else
             {
-                MessageBox.Show(Properties.Resources.EditContactValidationError);
+                LgMessageBox.Show(Properties.Resources.EditContactValidationError);
             }
         }
 

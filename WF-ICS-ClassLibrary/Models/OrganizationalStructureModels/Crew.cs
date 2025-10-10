@@ -32,7 +32,7 @@ namespace WF_ICS_ClassLibrary.Models
         public void UpsertResourceListing(OperationalGroupResourceListing listing)
         {
             ResourceListing = ResourceListing.Where(o => o.ID != listing.ID).ToList();
-            ResourceListing.Add(listing);
+            ResourceListing.Add(listing.Clone());
             NumberOfPeople = ResourceListing.Count(o => o.Active && (o.ResourceType.Equals("Personnel") || o.ResourceType.Equals("Operator")));
             NumberOfVehicles = ResourceListing.Count(o => o.Active && (o.ResourceType.Equals("Vehicle") || o.ResourceType.Equals("Equipment")));
             if (listing.IsLeader) { LeaderName = listing.LeaderName; LeaderID = listing.ResourceID; }

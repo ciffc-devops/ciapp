@@ -30,7 +30,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void LoadICSRoles()
         {
-            List<ICSRole> roles = OrgChartTools.GetBlankPrimaryRoles();
+            List<ICSRole> roles = OrganizationalChartTools.GetBlankPrimaryRoles();
             cboDefaultICSRole.DataSource = roles;
             cboDefaultICSRole.DisplayMember = "RoleNameForDropdown";
             cboDefaultICSRole.ValueMember = "RoleID";
@@ -377,7 +377,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
+                    LgMessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
                 }
             }
         }

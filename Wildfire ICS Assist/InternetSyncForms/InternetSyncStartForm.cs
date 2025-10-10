@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 using WildfireICSDesktopServices.Logging;
 
@@ -31,7 +32,7 @@ namespace Wildfire_ICS_Assist.InternetSyncForms
         {
             if (!SyncDone)
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to close this while it is in progress? This will disable the internet sync for the task.", "Close Sync ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = LgMessageBox.Show("Are you sure you want to close this while it is in progress? This will disable the internet sync for the task.", "Close Sync ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;

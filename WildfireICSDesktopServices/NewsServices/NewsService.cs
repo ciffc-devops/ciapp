@@ -125,7 +125,7 @@ namespace WildfireICSDesktopServices.NewsServices
                 catch (Exception)
                 {
                     saveSuccessful = false;
-                    //MessageBox.Show(ex.Message);
+                    //LgMessageBox.Show(ex.Message);
                 }
                 finally
                 {

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 
@@ -31,7 +32,7 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
         {
             InitializeComponent(); SetControlColors(this.Controls);
 
-            
+
 
         }
         private void CreateOperationalPeriodForm_Load(object sender, EventArgs e)
@@ -46,6 +47,12 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
 
             BuildOpPeriodComboBox();
 
+            if (Program.CurrentIncident.AllOperationalPeriods.Any(o => o.Active && o.ID == operationalPeriod.ID))
+            {
+                numOpPeriod.Enabled = false;
+                chkSwitchNow.Visible = false;
+                btnCreateOpPeriod.Text = "Save Changes";
+            }
 
             LoadingInProgress = false;
             //numOpPeriod.Minimum = lowestUnusedOpNumber;
@@ -70,11 +77,11 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
             if (cboCurrentOperationalPeriod.SelectedItem != null)
             {
                 OperationalPeriod copyFrom = cboCurrentOperationalPeriod.SelectedItem as OperationalPeriod;
-                
+
                 if (Program.CurrentIncident.hasMeaningfulObjectives(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Incident Objectives", ID = ItemsAvailableForCopy.Count + 1 }); }
                 if (Program.CurrentIncident.hasMeangfulCommsPlan(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Communications Plan", ID = ItemsAvailableForCopy.Count + 1 }); }
                 if (Program.CurrentIncident.hasMeaningfulMedicalPlan(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Medical Plan", ID = ItemsAvailableForCopy.Count + 1 }); }
-                if (Program.CurrentIncident.hasMeaningfulOrgChart(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Organization Chart", ID = ItemsAvailableForCopy.Count + 1 }); }
+                 ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Organization Chart", ID = ItemsAvailableForCopy.Count + 1 }); 
                 if (Program.CurrentIncident.allSafetyMessages.Any(o => o.OpPeriod == copyFrom.PeriodNumber && o.Active)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Safety Message(s)", ID = ItemsAvailableForCopy.Count + 1 }); }
                 if (Program.CurrentIncident.hasMeaningfulAirOps(copyFrom.PeriodNumber)) { ItemsAvailableForCopy.Add(new IncidentDataItem() { DisplayName = "Air Operations Plans", ID = ItemsAvailableForCopy.Count + 1 }); }
                 //if (Program.CurrentIncident.hasMeaningfulObjectives(copyFrom.PeriodNumber)) { items.Add(new IncidentDataItem() { DisplayName = "Incident Objectives", ID = 1 }); }
@@ -103,57 +110,68 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
             {
 
                 Program.incidentDataService.UpsertOperationalPeriod(operationalPeriod);
-
-                int copyFromPeriodNumber = (cboCurrentOperationalPeriod.SelectedItem as OperationalPeriod).PeriodNumber;
-                int copyToPeriodNumber = operationalPeriod.PeriodNumber;
-
-                //copy stuff over
-                foreach (Control c in flowCopyableItems.Controls)
+                if (cboCurrentOperationalPeriod.SelectedItem != null)
                 {
-                    if (c is CheckBox)
+                    int copyFromPeriodNumber = (cboCurrentOperationalPeriod.SelectedItem as OperationalPeriod).PeriodNumber;
+                    int copyToPeriodNumber = operationalPeriod.PeriodNumber;
+
+                    //copy stuff over
+                    foreach (Control c in flowCopyableItems.Controls)
                     {
-                        CheckBox chk = c as CheckBox;
-                        if (chk.Checked)
+                        if (c is CheckBox)
                         {
-                            switch (chk.Text)
+                            CheckBox chk = c as CheckBox;
+                            if (chk.Checked)
                             {
-                                case "Communications Plan":
-                                    List<CommsPlanItem> commsItems = Program.CurrentIncident.CopyCommunicationsPlan(copyFromPeriodNumber, copyToPeriodNumber);
+                                switch (chk.Text)
+                                {
+                                    case "Organization Chart":
+                                       OrganizationChart newChart =  Program.CurrentIncident.CreateOrganizationalChartFromPreviousOP(copyFromPeriodNumber, copyToPeriodNumber, true);
+                                        Program.incidentDataService.UpsertOrganizationalChart(newChart);
+                                        Program.CurrentIncident.CreateAllOperationalGroupsAsNeeded(copyToPeriodNumber);
 
-                                    break;
-                                case "Medical Plan":
-                                    var newMedPlan = Program.CurrentIncident.CopyMedicalPlan(copyFromPeriodNumber, copyToPeriodNumber);
-                                    break;
-                                case "Incident Objectives":
-                                    IncidentObjectivesSheet newSheet = Program.CurrentIncident.CopyIncidentObjectivesSheet(copyFromPeriodNumber, copyToPeriodNumber);
-                                    break;
-                                case "Safety Message(s)":
-                                    List<SafetyMessage> newMessages = Program.CurrentIncident.CopySafetyMessages(copyFromPeriodNumber, copyToPeriodNumber);
-                                    break;
-                                case "Air Operations Plans":
-                                    AirOperationsSummary airOperationsSummary = Program.CurrentIncident.CopyAirOperationsSummary(copyFromPeriodNumber, copyToPeriodNumber);
-                                    break;
+                                      
+
+
+                                        break;
+                                    case "Communications Plan":
+                                        List<CommsPlanItem> commsItems = Program.CurrentIncident.CopyCommunicationsPlan(copyFromPeriodNumber, copyToPeriodNumber);
+
+                                        break;
+                                    case "Medical Plan":
+                                        var newMedPlan = Program.CurrentIncident.CopyMedicalPlan(copyFromPeriodNumber, copyToPeriodNumber);
+                                        break;
+                                    case "Incident Objectives":
+                                        IncidentObjectivesSheet newSheet = Program.CurrentIncident.CopyIncidentObjectivesSheet(copyFromPeriodNumber, copyToPeriodNumber);
+                                        break;
+                                    case "Safety Message(s)":
+                                        List<SafetyMessage> newMessages = Program.CurrentIncident.CopySafetyMessages(copyFromPeriodNumber, copyToPeriodNumber);
+                                        break;
+                                    case "Air Operations Plans":
+                                        AirOperationsSummary airOperationsSummary = Program.CurrentIncident.CopyAirOperationsSummary(copyFromPeriodNumber, copyToPeriodNumber);
+                                        break;
+                                }
                             }
+
                         }
-
                     }
+
                 }
-
-
 
 
 
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            } else
+            }
+            else
             {
-                MessageBox.Show(result.Item2, "Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LgMessageBox.Show(result.Item2, "Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-       
-        
+
+
 
         private Tuple<bool, string> ValidateNewOP()
         {
@@ -162,12 +180,13 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
             StringBuilder errs = new StringBuilder();
 
             //period number must be unique
-            if(Program.CurrentIncident.AllOperationalPeriods.Any(o => o.Active && o.PeriodNumber == numOpPeriod.Value))
+            if (Program.CurrentIncident.AllOperationalPeriods.Any(o => o.Active && o.PeriodNumber == numOpPeriod.Value && o.ID != operationalPeriod.ID))
             {
                 errs.AppendLine("Operational Period Number already in use.");
                 opGood = false;
                 errorProvider1.SetError(numOpPeriod, "Operational Period Number already in use.");
-            } else {  errorProvider1.SetError(numOpPeriod, ""); }
+            }
+            else { errorProvider1.SetError(numOpPeriod, ""); }
 
 
             //date and time covered must be unique
@@ -184,11 +203,11 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
                 {
                     errorProvider1.SetError(datEndTime, "This time range overlaps with another operational period");
                 }
-                
+
             }
             else { errorProvider1.SetError(datStartTime, ""); errorProvider1.SetError(datEndTime, ""); }
 
-            return new Tuple<bool, string> (opGood, errs.ToString());
+            return new Tuple<bool, string>(opGood, errs.ToString());
         }
 
         private void numOpPeriod_ValueChanged(object sender, EventArgs e)
@@ -255,7 +274,7 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
 
         private void btnCheckAll_Click(object sender, EventArgs e)
         {
-            foreach(Control c in flowCopyableItems.Controls)
+            foreach (Control c in flowCopyableItems.Controls)
             {
                 if (c is CheckBox)
                 {
@@ -278,5 +297,5 @@ namespace Wildfire_ICS_Assist.OperationalPeriodForms
         }
     }
 
- 
+
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateOperationalPeriodForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -73,78 +74,93 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
+            this.errorProvider1.SetError(this.splitContainer1, resources.GetString("splitContainer1.Error"));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.errorProvider1.SetIconAlignment(this.splitContainer1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer1, ((int)(resources.GetObject("splitContainer1.IconPadding"))));
             this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            this.errorProvider1.SetError(this.splitContainer1.Panel1, resources.GetString("splitContainer1.Panel1.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer1.Panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel1.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer1.Panel1, ((int)(resources.GetObject("splitContainer1.Panel1.IconPadding"))));
             // 
             // splitContainer1.Panel2
             // 
+            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             this.splitContainer1.Panel2.Controls.Add(this.chkSwitchNow);
             this.splitContainer1.Panel2.Controls.Add(this.btnCreateOpPeriod);
-            this.splitContainer1.Size = new System.Drawing.Size(759, 355);
-            this.splitContainer1.SplitterDistance = 292;
-            this.splitContainer1.TabIndex = 0;
+            this.errorProvider1.SetError(this.splitContainer1.Panel2, resources.GetString("splitContainer1.Panel2.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer1.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel2.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer1.Panel2, ((int)(resources.GetObject("splitContainer1.Panel2.IconPadding"))));
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.splitContainer2, "splitContainer2");
+            this.errorProvider1.SetError(this.splitContainer2, resources.GetString("splitContainer2.Error"));
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.errorProvider1.SetIconAlignment(this.splitContainer2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer2.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer2, ((int)(resources.GetObject("splitContainer2.IconPadding"))));
             this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer2.Panel1
             // 
+            resources.ApplyResources(this.splitContainer2.Panel1, "splitContainer2.Panel1");
             this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
             this.splitContainer2.Panel1.Controls.Add(this.label2);
+            this.errorProvider1.SetError(this.splitContainer2.Panel1, resources.GetString("splitContainer2.Panel1.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer2.Panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer2.Panel1.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer2.Panel1, ((int)(resources.GetObject("splitContainer2.Panel1.IconPadding"))));
             // 
             // splitContainer2.Panel2
             // 
+            resources.ApplyResources(this.splitContainer2.Panel2, "splitContainer2.Panel2");
             this.splitContainer2.Panel2.Controls.Add(this.flowCopyableItems);
             this.splitContainer2.Panel2.Controls.Add(this.btnCheckNone);
             this.splitContainer2.Panel2.Controls.Add(this.btnCheckAll);
             this.splitContainer2.Panel2.Controls.Add(this.cboCurrentOperationalPeriod);
             this.splitContainer2.Panel2.Controls.Add(this.label4);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(759, 292);
-            this.splitContainer2.SplitterDistance = 80;
-            this.splitContainer2.TabIndex = 99;
+            this.errorProvider1.SetError(this.splitContainer2.Panel2, resources.GetString("splitContainer2.Panel2.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer2.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer2.Panel2.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer2.Panel2, ((int)(resources.GetObject("splitContainer2.Panel2.IconPadding"))));
             // 
             // splitContainer3
             // 
-            this.splitContainer3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.splitContainer3, "splitContainer3");
+            this.errorProvider1.SetError(this.splitContainer3, resources.GetString("splitContainer3.Error"));
             this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer3.IsSplitterFixed = true;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 37);
+            this.errorProvider1.SetIconAlignment(this.splitContainer3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer3.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer3, ((int)(resources.GetObject("splitContainer3.IconPadding"))));
             this.splitContainer3.Name = "splitContainer3";
             // 
             // splitContainer3.Panel1
             // 
+            resources.ApplyResources(this.splitContainer3.Panel1, "splitContainer3.Panel1");
             this.splitContainer3.Panel1.Controls.Add(this.numOpPeriod);
             this.splitContainer3.Panel1.Controls.Add(this.label1);
+            this.errorProvider1.SetError(this.splitContainer3.Panel1, resources.GetString("splitContainer3.Panel1.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer3.Panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer3.Panel1.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer3.Panel1, ((int)(resources.GetObject("splitContainer3.Panel1.IconPadding"))));
             // 
             // splitContainer3.Panel2
             // 
+            resources.ApplyResources(this.splitContainer3.Panel2, "splitContainer3.Panel2");
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer3.Size = new System.Drawing.Size(759, 42);
-            this.splitContainer3.SplitterDistance = 125;
-            this.splitContainer3.TabIndex = 102;
+            this.errorProvider1.SetError(this.splitContainer3.Panel2, resources.GetString("splitContainer3.Panel2.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer3.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer3.Panel2.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer3.Panel2, ((int)(resources.GetObject("splitContainer3.Panel2.IconPadding"))));
             // 
             // numOpPeriod
             // 
-            this.numOpPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numOpPeriod.Location = new System.Drawing.Point(45, 8);
-            this.numOpPeriod.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+            resources.ApplyResources(this.numOpPeriod, "numOpPeriod");
+            this.errorProvider1.SetError(this.numOpPeriod, resources.GetString("numOpPeriod.Error"));
+            this.errorProvider1.SetIconAlignment(this.numOpPeriod, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("numOpPeriod.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.numOpPeriod, ((int)(resources.GetObject("numOpPeriod.IconPadding"))));
             this.numOpPeriod.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -156,8 +172,6 @@
             0,
             0});
             this.numOpPeriod.Name = "numOpPeriod";
-            this.numOpPeriod.Size = new System.Drawing.Size(72, 29);
-            this.numOpPeriod.TabIndex = 93;
             this.numOpPeriod.Value = new decimal(new int[] {
             9999,
             0,
@@ -167,233 +181,199 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(13, 10);
-            this.label1.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            resources.ApplyResources(this.label1, "label1");
+            this.errorProvider1.SetError(this.label1, resources.GetString("label1.Error"));
+            this.errorProvider1.SetIconAlignment(this.label1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label1.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.label1, ((int)(resources.GetObject("label1.IconPadding"))));
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(20, 24);
-            this.label1.TabIndex = 98;
-            this.label1.Text = "#";
             // 
             // splitContainer4
             // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.IsSplitterFixed = true;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.splitContainer4, "splitContainer4");
+            this.errorProvider1.SetError(this.splitContainer4, resources.GetString("splitContainer4.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer4.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer4, ((int)(resources.GetObject("splitContainer4.IconPadding"))));
             this.splitContainer4.Name = "splitContainer4";
             // 
             // splitContainer4.Panel1
             // 
+            resources.ApplyResources(this.splitContainer4.Panel1, "splitContainer4.Panel1");
             this.splitContainer4.Panel1.Controls.Add(this.datOpsStart);
             this.splitContainer4.Panel1.Controls.Add(this.datStartTime);
             this.splitContainer4.Panel1.Controls.Add(this.label15);
+            this.errorProvider1.SetError(this.splitContainer4.Panel1, resources.GetString("splitContainer4.Panel1.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer4.Panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer4.Panel1.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer4.Panel1, ((int)(resources.GetObject("splitContainer4.Panel1.IconPadding"))));
             // 
             // splitContainer4.Panel2
             // 
+            resources.ApplyResources(this.splitContainer4.Panel2, "splitContainer4.Panel2");
             this.splitContainer4.Panel2.Controls.Add(this.datOpsEnd);
             this.splitContainer4.Panel2.Controls.Add(this.datEndTime);
             this.splitContainer4.Panel2.Controls.Add(this.label18);
-            this.splitContainer4.Size = new System.Drawing.Size(630, 42);
-            this.splitContainer4.SplitterDistance = 319;
-            this.splitContainer4.TabIndex = 0;
+            this.errorProvider1.SetError(this.splitContainer4.Panel2, resources.GetString("splitContainer4.Panel2.Error"));
+            this.errorProvider1.SetIconAlignment(this.splitContainer4.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer4.Panel2.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.splitContainer4.Panel2, ((int)(resources.GetObject("splitContainer4.Panel2.IconPadding"))));
             // 
             // datOpsStart
             // 
-            this.datOpsStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datOpsStart.CustomFormat = "yyyy-MMM-dd";
+            resources.ApplyResources(this.datOpsStart, "datOpsStart");
+            this.errorProvider1.SetError(this.datOpsStart, resources.GetString("datOpsStart.Error"));
             this.datOpsStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datOpsStart.Location = new System.Drawing.Point(70, 8);
+            this.errorProvider1.SetIconAlignment(this.datOpsStart, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("datOpsStart.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.datOpsStart, ((int)(resources.GetObject("datOpsStart.IconPadding"))));
             this.datOpsStart.Name = "datOpsStart";
-            this.datOpsStart.Size = new System.Drawing.Size(145, 29);
-            this.datOpsStart.TabIndex = 94;
             this.datOpsStart.ValueChanged += new System.EventHandler(this.datOpsStart_ValueChanged);
             // 
             // datStartTime
             // 
-            this.datStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.datStartTime.CustomFormat = "HH:mm";
+            resources.ApplyResources(this.datStartTime, "datStartTime");
+            this.errorProvider1.SetError(this.datStartTime, resources.GetString("datStartTime.Error"));
             this.datStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datStartTime.Location = new System.Drawing.Point(219, 8);
+            this.errorProvider1.SetIconAlignment(this.datStartTime, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("datStartTime.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.datStartTime, ((int)(resources.GetObject("datStartTime.IconPadding"))));
             this.datStartTime.Name = "datStartTime";
             this.datStartTime.ShowUpDown = true;
-            this.datStartTime.Size = new System.Drawing.Size(77, 29);
-            this.datStartTime.TabIndex = 100;
             this.datStartTime.ValueChanged += new System.EventHandler(this.datStartTime_ValueChanged);
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label15.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label15.Location = new System.Drawing.Point(3, 10);
-            this.label15.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            resources.ApplyResources(this.label15, "label15");
+            this.errorProvider1.SetError(this.label15, resources.GetString("label15.Error"));
+            this.errorProvider1.SetIconAlignment(this.label15, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label15.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.label15, ((int)(resources.GetObject("label15.IconPadding"))));
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(55, 24);
-            this.label15.TabIndex = 96;
-            this.label15.Text = "From";
             // 
             // datOpsEnd
             // 
-            this.datOpsEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datOpsEnd.CustomFormat = "yyyy-MMM-dd";
+            resources.ApplyResources(this.datOpsEnd, "datOpsEnd");
+            this.errorProvider1.SetError(this.datOpsEnd, resources.GetString("datOpsEnd.Error"));
             this.datOpsEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datOpsEnd.Location = new System.Drawing.Point(54, 8);
+            this.errorProvider1.SetIconAlignment(this.datOpsEnd, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("datOpsEnd.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.datOpsEnd, ((int)(resources.GetObject("datOpsEnd.IconPadding"))));
             this.datOpsEnd.Name = "datOpsEnd";
-            this.datOpsEnd.Size = new System.Drawing.Size(152, 29);
-            this.datOpsEnd.TabIndex = 95;
             this.datOpsEnd.ValueChanged += new System.EventHandler(this.datOpsEnd_ValueChanged);
             // 
             // datEndTime
             // 
-            this.datEndTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.datEndTime.CustomFormat = "HH:mm";
+            resources.ApplyResources(this.datEndTime, "datEndTime");
+            this.errorProvider1.SetError(this.datEndTime, resources.GetString("datEndTime.Error"));
             this.datEndTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datEndTime.Location = new System.Drawing.Point(212, 8);
+            this.errorProvider1.SetIconAlignment(this.datEndTime, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("datEndTime.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.datEndTime, ((int)(resources.GetObject("datEndTime.IconPadding"))));
             this.datEndTime.Name = "datEndTime";
             this.datEndTime.ShowUpDown = true;
-            this.datEndTime.Size = new System.Drawing.Size(73, 29);
-            this.datEndTime.TabIndex = 101;
             this.datEndTime.ValueChanged += new System.EventHandler(this.datEndTime_ValueChanged);
             // 
             // label18
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label18.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label18.Location = new System.Drawing.Point(9, 10);
-            this.label18.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            resources.ApplyResources(this.label18, "label18");
+            this.errorProvider1.SetError(this.label18, resources.GetString("label18.Error"));
+            this.errorProvider1.SetIconAlignment(this.label18, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label18.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.label18, ((int)(resources.GetObject("label18.IconPadding"))));
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(33, 24);
-            this.label18.TabIndex = 97;
-            this.label18.Text = "To";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 5);
+            resources.ApplyResources(this.label2, "label2");
+            this.errorProvider1.SetError(this.label2, resources.GetString("label2.Error"));
+            this.errorProvider1.SetIconAlignment(this.label2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label2.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.label2, ((int)(resources.GetObject("label2.IconPadding"))));
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(320, 29);
-            this.label2.TabIndex = 99;
-            this.label2.Text = "Create Operational Period";
             // 
             // flowCopyableItems
             // 
-            this.flowCopyableItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowCopyableItems.AutoScroll = true;
+            resources.ApplyResources(this.flowCopyableItems, "flowCopyableItems");
             this.flowCopyableItems.BackColor = System.Drawing.Color.White;
             this.flowCopyableItems.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowCopyableItems.Location = new System.Drawing.Point(12, 132);
+            this.errorProvider1.SetError(this.flowCopyableItems, resources.GetString("flowCopyableItems.Error"));
+            this.errorProvider1.SetIconAlignment(this.flowCopyableItems, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("flowCopyableItems.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.flowCopyableItems, ((int)(resources.GetObject("flowCopyableItems.IconPadding"))));
             this.flowCopyableItems.Name = "flowCopyableItems";
-            this.flowCopyableItems.Size = new System.Drawing.Size(735, 73);
-            this.flowCopyableItems.TabIndex = 108;
             // 
             // btnCheckNone
             // 
+            resources.ApplyResources(this.btnCheckNone, "btnCheckNone");
+            this.errorProvider1.SetError(this.btnCheckNone, resources.GetString("btnCheckNone.Error"));
+            this.errorProvider1.SetIconAlignment(this.btnCheckNone, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("btnCheckNone.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.btnCheckNone, ((int)(resources.GetObject("btnCheckNone.IconPadding"))));
             this.btnCheckNone.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_292_square_empty_minus;
-            this.btnCheckNone.Location = new System.Drawing.Point(94, 85);
             this.btnCheckNone.Name = "btnCheckNone";
-            this.btnCheckNone.Size = new System.Drawing.Size(103, 41);
-            this.btnCheckNone.TabIndex = 107;
-            this.btnCheckNone.Text = "None";
-            this.btnCheckNone.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCheckNone.UseVisualStyleBackColor = true;
             this.btnCheckNone.Click += new System.EventHandler(this.btnCheckNone_Click);
             // 
             // btnCheckAll
             // 
+            resources.ApplyResources(this.btnCheckAll, "btnCheckAll");
+            this.errorProvider1.SetError(this.btnCheckAll, resources.GetString("btnCheckAll.Error"));
+            this.errorProvider1.SetIconAlignment(this.btnCheckAll, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("btnCheckAll.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.btnCheckAll, ((int)(resources.GetObject("btnCheckAll.IconPadding"))));
             this.btnCheckAll.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_294_square_empty_check;
-            this.btnCheckAll.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCheckAll.Location = new System.Drawing.Point(12, 85);
             this.btnCheckAll.Name = "btnCheckAll";
-            this.btnCheckAll.Size = new System.Drawing.Size(76, 41);
-            this.btnCheckAll.TabIndex = 106;
-            this.btnCheckAll.Text = "All";
-            this.btnCheckAll.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCheckAll.UseVisualStyleBackColor = true;
             this.btnCheckAll.Click += new System.EventHandler(this.btnCheckAll_Click);
             // 
             // cboCurrentOperationalPeriod
             // 
-            this.cboCurrentOperationalPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.cboCurrentOperationalPeriod, "cboCurrentOperationalPeriod");
             this.cboCurrentOperationalPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCurrentOperationalPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.errorProvider1.SetError(this.cboCurrentOperationalPeriod, resources.GetString("cboCurrentOperationalPeriod.Error"));
             this.cboCurrentOperationalPeriod.FormattingEnabled = true;
-            this.cboCurrentOperationalPeriod.Location = new System.Drawing.Point(370, 48);
+            this.errorProvider1.SetIconAlignment(this.cboCurrentOperationalPeriod, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("cboCurrentOperationalPeriod.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.cboCurrentOperationalPeriod, ((int)(resources.GetObject("cboCurrentOperationalPeriod.IconPadding"))));
             this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
-            this.cboCurrentOperationalPeriod.Size = new System.Drawing.Size(376, 37);
-            this.cboCurrentOperationalPeriod.TabIndex = 105;
             this.cboCurrentOperationalPeriod.SelectedIndexChanged += new System.EventHandler(this.cboCurrentOperationalPeriod_SelectedIndexChanged);
             // 
             // label4
             // 
-            this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label4.Location = new System.Drawing.Point(12, 48);
-            this.label4.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            resources.ApplyResources(this.label4, "label4");
+            this.errorProvider1.SetError(this.label4, resources.GetString("label4.Error"));
+            this.errorProvider1.SetIconAlignment(this.label4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label4.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.label4, ((int)(resources.GetObject("label4.IconPadding"))));
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(352, 34);
-            this.label4.TabIndex = 104;
-            this.label4.Text = "Transfer from this Operational Period:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(8, 9);
+            resources.ApplyResources(this.label3, "label3");
+            this.errorProvider1.SetError(this.label3, resources.GetString("label3.Error"));
+            this.errorProvider1.SetIconAlignment(this.label3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label3.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.label3, ((int)(resources.GetObject("label3.IconPadding"))));
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(403, 24);
-            this.label3.TabIndex = 102;
-            this.label3.Text = "Copy data from another operational period";
             // 
             // chkSwitchNow
             // 
-            this.chkSwitchNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSwitchNow.AutoSize = true;
+            resources.ApplyResources(this.chkSwitchNow, "chkSwitchNow");
             this.chkSwitchNow.Checked = true;
             this.chkSwitchNow.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSwitchNow.Location = new System.Drawing.Point(305, 17);
+            this.errorProvider1.SetError(this.chkSwitchNow, resources.GetString("chkSwitchNow.Error"));
+            this.errorProvider1.SetIconAlignment(this.chkSwitchNow, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("chkSwitchNow.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.chkSwitchNow, ((int)(resources.GetObject("chkSwitchNow.IconPadding"))));
             this.chkSwitchNow.Name = "chkSwitchNow";
-            this.chkSwitchNow.Size = new System.Drawing.Size(210, 28);
-            this.chkSwitchNow.TabIndex = 56;
-            this.chkSwitchNow.Text = "Switch to this OP now";
             this.chkSwitchNow.UseVisualStyleBackColor = true;
             // 
             // btnCreateOpPeriod
             // 
-            this.btnCreateOpPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.btnCreateOpPeriod, "btnCreateOpPeriod");
+            this.errorProvider1.SetError(this.btnCreateOpPeriod, resources.GetString("btnCreateOpPeriod.Error"));
+            this.errorProvider1.SetIconAlignment(this.btnCreateOpPeriod, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("btnCreateOpPeriod.IconAlignment"))));
+            this.errorProvider1.SetIconPadding(this.btnCreateOpPeriod, ((int)(resources.GetObject("btnCreateOpPeriod.IconPadding"))));
             this.btnCreateOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnCreateOpPeriod.Location = new System.Drawing.Point(521, 5);
             this.btnCreateOpPeriod.Name = "btnCreateOpPeriod";
-            this.btnCreateOpPeriod.Size = new System.Drawing.Size(226, 51);
-            this.btnCreateOpPeriod.TabIndex = 55;
             this.btnCreateOpPeriod.Tag = "Save";
-            this.btnCreateOpPeriod.Text = "Create Op Period";
-            this.btnCreateOpPeriod.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCreateOpPeriod.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCreateOpPeriod.UseVisualStyleBackColor = true;
             this.btnCreateOpPeriod.Click += new System.EventHandler(this.btnCreateOpPeriod_Click);
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            resources.ApplyResources(this.errorProvider1, "errorProvider1");
             // 
             // CreateOperationalPeriodForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 355);
             this.Controls.Add(this.splitContainer1);
-            this.MinimumSize = new System.Drawing.Size(775, 394);
             this.Name = "CreateOperationalPeriodForm";
-            this.Text = "Create Operational Period";
             this.Load += new System.EventHandler(this.CreateOperationalPeriodForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

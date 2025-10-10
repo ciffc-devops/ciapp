@@ -85,8 +85,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnDelete);
             this.splitContainer1.Panel2.Controls.Add(this.btnEdit);
             this.splitContainer1.Panel2.Controls.Add(this.btnNew);
-            this.splitContainer1.Size = new System.Drawing.Size(878, 548);
-            this.splitContainer1.SplitterDistance = 483;
+            this.splitContainer1.Size = new System.Drawing.Size(878, 481);
+            this.splitContainer1.SplitterDistance = 416;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -105,10 +105,10 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.prepAndApprovePanel1);
             this.splitContainer2.Panel2.Controls.Add(this.cpFireStatus);
-            this.splitContainer2.Panel2.Controls.Add(this.cpGeneralSafety);
             this.splitContainer2.Panel2.Controls.Add(this.cpWeather);
-            this.splitContainer2.Size = new System.Drawing.Size(878, 483);
-            this.splitContainer2.SplitterDistance = 376;
+            this.splitContainer2.Panel2.Controls.Add(this.cpGeneralSafety);
+            this.splitContainer2.Size = new System.Drawing.Size(878, 416);
+            this.splitContainer2.SplitterDistance = 458;
             this.splitContainer2.TabIndex = 2;
             // 
             // dgvObjectives
@@ -132,7 +132,7 @@
             this.dgvObjectives.RowHeadersVisible = false;
             this.dgvObjectives.RowTemplate.Height = 30;
             this.dgvObjectives.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvObjectives.Size = new System.Drawing.Size(376, 483);
+            this.dgvObjectives.Size = new System.Drawing.Size(458, 416);
             this.dgvObjectives.TabIndex = 0;
             this.dgvObjectives.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvObjectives_CellContentClick);
             this.dgvObjectives.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvObjectives_CellContentDoubleClick);
@@ -168,9 +168,9 @@
             // prepAndApprovePanel1
             // 
             this.prepAndApprovePanel1.ApprovedByDateTime = new System.DateTime(((long)(0)));
-            this.prepAndApprovePanel1.BackColor = System.Drawing.Color.White;
+            this.prepAndApprovePanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.prepAndApprovePanel1.Collapsed = false;
+            this.prepAndApprovePanel1.Collapsed = true;
             this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.prepAndApprovePanel1.EnableExpandCollapse = true;
             this.prepAndApprovePanel1.ExpandsRight = true;
@@ -180,9 +180,9 @@
             this.prepAndApprovePanel1.Margin = new System.Windows.Forms.Padding(6);
             this.prepAndApprovePanel1.Name = "prepAndApprovePanel1";
             this.prepAndApprovePanel1.PreparedByDateTime = new System.DateTime(2024, 10, 29, 14, 7, 6, 690);
-            this.prepAndApprovePanel1.Size = new System.Drawing.Size(485, 228);
-            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
-            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(485, 228);
+            this.prepAndApprovePanel1.Size = new System.Drawing.Size(387, 40);
+            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(387, 40);
+            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(387, 228);
             this.prepAndApprovePanel1.TabIndex = 61;
             this.prepAndApprovePanel1.TitleText = "Prepared and Approved by";
             // 
@@ -203,14 +203,16 @@
             this.cpFireStatus.Location = new System.Drawing.Point(10, 110);
             this.cpFireStatus.Margin = new System.Windows.Forms.Padding(6);
             this.cpFireStatus.Name = "cpFireStatus";
-            this.cpFireStatus.Size = new System.Drawing.Size(485, 40);
-            this.cpFireStatus.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
-            this.cpFireStatus.SizeWhenExpanded = new System.Drawing.Size(485, 129);
+            this.cpFireStatus.Size = new System.Drawing.Size(387, 40);
+            this.cpFireStatus.SizeWhenCollapsed = new System.Drawing.Size(387, 40);
+            this.cpFireStatus.SizeWhenExpanded = new System.Drawing.Size(387, 129);
             this.cpFireStatus.TabIndex = 60;
             this.cpFireStatus.TitleText = "Fire Size / Status";
             // 
             // cboFireStatus
             // 
+            this.cboFireStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboFireStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboFireStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboFireStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
@@ -222,16 +224,18 @@
             "UC"});
             this.cboFireStatus.Location = new System.Drawing.Point(120, 83);
             this.cboFireStatus.Name = "cboFireStatus";
-            this.cboFireStatus.Size = new System.Drawing.Size(183, 32);
+            this.cboFireStatus.Size = new System.Drawing.Size(260, 32);
             this.cboFireStatus.TabIndex = 38;
             this.cboFireStatus.Leave += new System.EventHandler(this.cboFireStatus_Leave);
             // 
             // txtFireSize
             // 
+            this.txtFireSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFireSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.txtFireSize.Location = new System.Drawing.Point(120, 48);
             this.txtFireSize.Name = "txtFireSize";
-            this.txtFireSize.Size = new System.Drawing.Size(183, 29);
+            this.txtFireSize.Size = new System.Drawing.Size(260, 29);
             this.txtFireSize.TabIndex = 37;
             this.txtFireSize.Leave += new System.EventHandler(this.txtFireSize_Leave);
             // 
@@ -271,31 +275,35 @@
             this.cpGeneralSafety.Location = new System.Drawing.Point(10, 58);
             this.cpGeneralSafety.Margin = new System.Windows.Forms.Padding(6);
             this.cpGeneralSafety.Name = "cpGeneralSafety";
-            this.cpGeneralSafety.Size = new System.Drawing.Size(485, 40);
-            this.cpGeneralSafety.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
-            this.cpGeneralSafety.SizeWhenExpanded = new System.Drawing.Size(485, 300);
+            this.cpGeneralSafety.Size = new System.Drawing.Size(387, 40);
+            this.cpGeneralSafety.SizeWhenCollapsed = new System.Drawing.Size(387, 40);
+            this.cpGeneralSafety.SizeWhenExpanded = new System.Drawing.Size(387, 367);
             this.cpGeneralSafety.TabIndex = 59;
             this.cpGeneralSafety.TitleText = "General Safety Message";
             // 
             // txtGeneralSafetyMessage
             // 
+            this.txtGeneralSafetyMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtGeneralSafetyMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.txtGeneralSafetyMessage.Location = new System.Drawing.Point(7, 51);
             this.txtGeneralSafetyMessage.Multiline = true;
             this.txtGeneralSafetyMessage.Name = "txtGeneralSafetyMessage";
-            this.txtGeneralSafetyMessage.Size = new System.Drawing.Size(471, 192);
+            this.txtGeneralSafetyMessage.Size = new System.Drawing.Size(367, 244);
             this.txtGeneralSafetyMessage.TabIndex = 36;
             this.txtGeneralSafetyMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // cboSafetyMessages
             // 
+            this.cboSafetyMessages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSafetyMessages.DisplayMember = "SummaryLine";
             this.cboSafetyMessages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSafetyMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.cboSafetyMessages.FormattingEnabled = true;
-            this.cboSafetyMessages.Location = new System.Drawing.Point(176, 257);
+            this.cboSafetyMessages.Location = new System.Drawing.Point(176, 309);
             this.cboSafetyMessages.Name = "cboSafetyMessages";
-            this.cboSafetyMessages.Size = new System.Drawing.Size(302, 32);
+            this.cboSafetyMessages.Size = new System.Drawing.Size(198, 32);
             this.cboSafetyMessages.TabIndex = 35;
             this.cboSafetyMessages.ValueMember = "ID";
             // 
@@ -304,7 +312,7 @@
             this.btnFillSafetyFrom208.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.btnFillSafetyFrom208.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_302_square_download;
             this.btnFillSafetyFrom208.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFillSafetyFrom208.Location = new System.Drawing.Point(7, 249);
+            this.btnFillSafetyFrom208.Location = new System.Drawing.Point(7, 301);
             this.btnFillSafetyFrom208.Name = "btnFillSafetyFrom208";
             this.btnFillSafetyFrom208.Size = new System.Drawing.Size(163, 46);
             this.btnFillSafetyFrom208.TabIndex = 34;
@@ -327,19 +335,21 @@
             this.cpWeather.Location = new System.Drawing.Point(10, 6);
             this.cpWeather.Margin = new System.Windows.Forms.Padding(6);
             this.cpWeather.Name = "cpWeather";
-            this.cpWeather.Size = new System.Drawing.Size(485, 40);
-            this.cpWeather.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
-            this.cpWeather.SizeWhenExpanded = new System.Drawing.Size(485, 300);
+            this.cpWeather.Size = new System.Drawing.Size(387, 40);
+            this.cpWeather.SizeWhenCollapsed = new System.Drawing.Size(387, 40);
+            this.cpWeather.SizeWhenExpanded = new System.Drawing.Size(387, 392);
             this.cpWeather.TabIndex = 58;
             this.cpWeather.TitleText = "Weather Forecast";
             // 
             // txtWeatherForcast
             // 
+            this.txtWeatherForcast.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWeatherForcast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.txtWeatherForcast.Location = new System.Drawing.Point(7, 51);
             this.txtWeatherForcast.Multiline = true;
             this.txtWeatherForcast.Name = "txtWeatherForcast";
-            this.txtWeatherForcast.Size = new System.Drawing.Size(471, 244);
+            this.txtWeatherForcast.Size = new System.Drawing.Size(373, 319);
             this.txtWeatherForcast.TabIndex = 34;
             this.txtWeatherForcast.Child = new System.Windows.Controls.TextBox();
             // 
@@ -417,9 +427,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 548);
+            this.ClientSize = new System.Drawing.Size(878, 481);
             this.Controls.Add(this.splitContainer1);
-            this.MinimumSize = new System.Drawing.Size(894, 479);
+            this.MinimumSize = new System.Drawing.Size(894, 520);
             this.Name = "IncidentObjectivesForm";
             this.Text = "Incident Objectives";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentObjectivesForm_FormClosing);

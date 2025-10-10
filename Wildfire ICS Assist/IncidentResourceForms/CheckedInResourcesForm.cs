@@ -107,7 +107,7 @@ namespace Wildfire_ICS_Assist
             //ConfirmResourceNumberAvailability();
         }
 
-        private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        private void Program_OperationalSubGroupChanged(CrewEventArgs e)
         {
             LoadResourcesList();
             //ConfirmResourceNumberAvailability();
@@ -144,7 +144,7 @@ namespace Wildfire_ICS_Assist
 
             if (note.Length > 0)
             {
-                MessageBox.Show(note.ToString());
+                LgMessageBox.Show(note.ToString());
                 btnStartCheckIn.Enabled = false;
             }
             else
@@ -271,7 +271,7 @@ namespace Wildfire_ICS_Assist
                                 {
                                     Crew sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
                                     sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
-                                    Program.incidentDataService.UpsertOperationalSubGroup(sub);
+                                    Program.incidentDataService.UpsertCrew(sub);
                                 }
 
 
@@ -286,7 +286,7 @@ namespace Wildfire_ICS_Assist
                             }
 
 
-                            Program.incidentDataService.UpsertOperationalSubGroup(group);
+                            Program.incidentDataService.UpsertCrew(group);
                             foreach (IncidentResource subres in signInForm.SubResources)
                             {
                                 if (subres.GetType().Name.Equals("Personnel"))
@@ -334,9 +334,9 @@ namespace Wildfire_ICS_Assist
 
                     if (signInForm.AssignIfPossible && !string.IsNullOrEmpty(record.InitialRoleAcronym))
                     {
-                        if (Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
+                        if (Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.MnemonicAbrv) && o.MnemonicAbrv.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty) && Program.CurrentIncident.IncidentPersonnel.Any(o => o.ID == record.ResourceID))
                         {
-                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.Mnemonic) && o.Mnemonic.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty);
+                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.First(o => !string.IsNullOrEmpty(o.MnemonicAbrv) && o.MnemonicAbrv.Equals(record.InitialRoleAcronym) && o.IndividualID == Guid.Empty);
                             Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == record.ResourceID);
                             role.IndividualID = p.ID;
                             role.IndividualName = p.Name;
@@ -891,7 +891,7 @@ namespace Wildfire_ICS_Assist
                 File.WriteAllBytes(fullFilepath, fullFile);
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
 
         private void btnExportSignInToCSV_Click(object sender, EventArgs e)
@@ -918,7 +918,7 @@ namespace Wildfire_ICS_Assist
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
 
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -927,7 +927,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  It is likely the file was already open elsewhere.  Please check for open copies and try again.");
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  It is likely the file was already open elsewhere.  Please check for open copies and try again.");
                 }
             }
         }
@@ -960,7 +960,7 @@ namespace Wildfire_ICS_Assist
                 File.WriteAllBytes(fullFilepath, fullFile);
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
 
         private void PrintAll211s()
@@ -979,7 +979,7 @@ namespace Wildfire_ICS_Assist
                 File.WriteAllBytes(fullFilepath, fullFile);
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
 
         }
 
@@ -1063,7 +1063,7 @@ namespace Wildfire_ICS_Assist
                 File.WriteAllBytes(fullFilepath, fullFile);
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
 
         private void btnEditResource_Click(object sender, EventArgs e)
@@ -1288,7 +1288,7 @@ namespace Wildfire_ICS_Assist
                     {
                         Crew sub = Program.CurrentIncident.AllOperationalSubGroups.First(o => o.ResourceListing.Any(r => r.ResourceID == l.ResourceID) && o.OpPeriod == Program.CurrentOpPeriod);
                         sub.ResourceListing = sub.ResourceListing.Where(o => o.ResourceID != l.ResourceID).ToList();
-                        Program.incidentDataService.UpsertOperationalSubGroup(sub);
+                        Program.incidentDataService.UpsertCrew(sub);
                     }
 
 
@@ -1303,7 +1303,7 @@ namespace Wildfire_ICS_Assist
                 }
 
 
-                Program.incidentDataService.UpsertOperationalSubGroup(group);
+                Program.incidentDataService.UpsertCrew(group);
                 foreach (IncidentResource subres in crewForm.subResources)
                 {
                     if (subres.GetType().Name.Equals("Personnel"))
@@ -1414,7 +1414,7 @@ namespace Wildfire_ICS_Assist
             {
 
                 DialogResult dr = savedTeamMembersForm.ShowDialog(this);
-                MessageBox.Show("The resources you have added/edited will now be available for check in.");
+                LgMessageBox.Show("The resources you have added/edited will now be available for check in.");
             }
 
         }
@@ -1426,7 +1426,7 @@ namespace Wildfire_ICS_Assist
                 DialogResult dr = importForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    MessageBox.Show("The resources you have added/edited will now be available for check in.");
+                    LgMessageBox.Show("The resources you have added/edited will now be available for check in.");
                 }
             }
         }
@@ -1442,7 +1442,7 @@ namespace Wildfire_ICS_Assist
             {
 
                 DialogResult dr = savedTeamMembersForm.ShowDialog(this);
-                MessageBox.Show("The resources you have added/edited will now be available for check in.");
+                LgMessageBox.Show("The resources you have added/edited will now be available for check in.");
             }
 
 

@@ -46,7 +46,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(11)] private Guid _HomeProvince;
         [ProtoMember(12)] private string _HomeCountry;
         [ProtoMember(13)] private string _EmergencyContact;
-        [ProtoMember(14)] private string _Agency;
+        //[ProtoMember(14)] private string _Agency;
         [ProtoMember(15)] private bool _IsContractor;
         [ProtoMember(16)] private string _CallSign;
         [ProtoMember(17)] private string _Pronouns; 
@@ -81,7 +81,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid HomeProvinceID { get => _HomeProvince; set => _HomeProvince = value; }
         public string HomeCountry { get => _HomeCountry; set => _HomeCountry = value; }
         public string EmergencyContact { get => _EmergencyContact; set => _EmergencyContact = value; }
-        public string Agency { get => _Agency; set => _Agency = value; }
+        public string Agency { get => AgencyName; set => AgencyName = value; }
         public bool IsContractor { get => _IsContractor; set => _IsContractor = value; }
         public string CallSign { get => _CallSign; set => _CallSign = value; }
         public string Pronouns { get => _Pronouns; set => _Pronouns = value; }

@@ -77,7 +77,7 @@ namespace Wildfire_ICS_Assist
 
                 if (firewallEnabled && !portAvailable)
                 {
-                    MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
+                    LgMessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
                 }
 
                 NetworkComms.Shutdown();

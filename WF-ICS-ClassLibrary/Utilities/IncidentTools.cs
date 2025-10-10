@@ -195,7 +195,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                             opsub.ResourceListing.First(o => o.ResourceID == member.ID).ResourceName = member.Name;
                             opsub.ResourceListing.First(o => o.ResourceID == member.ID).Type = member.Type;
                             opsub.ResourceListing.First(o => o.ResourceID == member.ID).Kind = member.Kind;
-                            Globals.incidentService.UpsertOperationalSubGroup(opsub);
+                            Globals.incidentService.UpsertCrew(opsub);
                         }
                     }
                 }
@@ -488,19 +488,34 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             if (!task.allOrgCharts.Any(o => o.OpPeriod == ops))
             {
-               OrganizationChart chart = task.createOrgChartFromPrevious(0, ops);
+                OrganizationChart chart = task.CreateOrganizationalChartFromPreviousOP(0, ops, false);
                 if (chart != null)
                 {
-                    chart.CreateOpGroupsForOrgRoles(task);
+                    //chart.CreateOpGroupsForOrgRoles(task);
                     if (Globals.incidentService != null)
                     {
                         Globals.incidentService.UpsertOrganizationalChart(chart);
+                        Globals.incidentService.CurrentIncident.CreateAllOperationalGroupsAsNeeded(chart.OpPeriod);
+
+                        foreach (ICSRole role in chart.AllRoles.Where(o => o.RequiresOperationalGroup))
+                        {
+                            if (Globals.incidentService.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
+                            {
+                                OperationalGroup group = Globals.incidentService.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
+                                if (role.OperationalGroupID != group.ID)
+                                {
+                                    role.OperationalGroupID = group.ID;
+                                    role.OperationalGroupName = group.Name;
+                                    Globals.incidentService.UpsertICSRole(role);
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
 
-        public static OrganizationChart createOrgChartFromPrevious(this Incident incident, int oldOps, int newOps)
+        public static OrganizationChart CreateOrganizationalChartFromPreviousOP(this Incident incident, int oldOps, int newOps, bool CopyAssignmentsWherePossible )
         {
             OrganizationChart chart = new OrganizationChart();
             chart.OpPeriod = newOps;
@@ -509,21 +524,22 @@ namespace WF_ICS_ClassLibrary.Utilities
             if (incident.allOrgCharts.Any(o=>o.OpPeriod == oldOps))
             {
                 OrganizationChart lastOrg = incident.allOrgCharts.First(o=>o.OpPeriod == oldOps);
-                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.ID);
+                chart.AllRoles = OrganizationalChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.ID, CopyAssignmentsWherePossible);
             } else if (oldOps == 0 && incident.allOrgCharts.Any(o=>o.OpPeriod != newOps))
             {
                 OrganizationChart lastOrg = incident.allOrgCharts.OrderByDescending(o => o.OpPeriod).First();
-                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.ID);
+                chart.AllRoles = OrganizationalChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.ID, CopyAssignmentsWherePossible);
             }
             else
             {
-                chart.AllRoles = OrgChartTools.GetBlankPrimaryRoles();
+                chart.AllRoles = OrganizationalChartTools.GetBlankPrimaryRoles();
                 foreach (ICSRole role in chart.AllRoles) { role.OpPeriod = newOps; role.OrganizationalChartID = chart.ID; }
 
 
             }
 
-          
+
+            
 
 
             //chart.DatePrepared = DateTime.Now;
@@ -538,27 +554,29 @@ namespace WF_ICS_ClassLibrary.Utilities
                 chart.DatePrepared = newDate;
             }
 
+            if (CopyAssignmentsWherePossible)
+            {
+                foreach(ICSRole role in chart.AllRoles.Where(o=>o.IndividualID != Guid.Empty))
+                {
+                    CheckInRecord CheckIn = incident.AllCheckInRecords.FirstOrDefault(o => o.ResourceID == role.IndividualID);
+                    if(CheckIn.LastDayOnIncident < chart.DatePrepared)
+                    {
+                        role.IndividualID = Guid.Empty;
+                        role.IndividualName = string.Empty;
+                    }
+                }
+            }
+
+
+
+            chart.SortRoles();
 
             //task.allOrgCharts.Add(chart);
             //Globals.incidentService.UpsertOrganizationalChart(chart);
             return chart;
         }
 
-        public static void CreateOpGroupsForOrgRoles(this OrganizationChart chart, Incident incident)
-        {
-            foreach (ICSRole role in chart.ActiveRoles.Where(o => o.IsOpGroupSup && !o.IsPlaceholder))
-            {
-                if (role.OperationalGroupID == Guid.Empty)
-                {
-                    OperationalGroup group = incident.createOperationalGroupFromRole(role);
-                    role.OperationalGroupID = group.ID;
-                    if (Globals.incidentService != null)
-                    {
-                        Globals.incidentService.UpsertOperationalGroup(group);
-                    }
-                }
-            }
-        }
+      
 
         public static OperationalGroup createOperationalGroupFromRole(this Incident incident, ICSRole role)
         {
@@ -568,23 +586,23 @@ namespace WF_ICS_ClassLibrary.Utilities
             group.ParentName = role.ReportsToRoleName;
             group.LeaderICSRoleID = role.RoleID;
             group.LeaderICSRoleName = role.RoleName;
-            if (role.IsOpGroupSup)
+            if (role.RequiresOperationalGroup)
             {
-                if (role.Mnemonic.Equals("OPBD") || role.RoleID == Globals.AirOpsDirector || role.Mnemonic.Equals("HEBD")) { 
+                if (role.MnemonicAbrv.Equals("OPBD") || role.RoleID == Globals.AirOpsDirectorGenericID || role.MnemonicAbrv.Equals("HEBD")) { 
                     group.GroupType = "Branch";
                     group.Name = role.RoleName.Replace(" Director", "");
                 }
-                else if (role.Mnemonic.Equals("DIVS"))
+                else if (role.MnemonicAbrv.Equals("DIVS"))
                 {
                     group.GroupType = "Division";
                     group.Name = role.RoleName.Replace(" Supervisor", "");
                 }
-                else if (role.Mnemonic.Equals("STLD"))
+                else if (role.MnemonicAbrv.Equals("STLD"))
                 {
                     group.GroupType = "Strike Team";
                     group.Name = role.RoleName.Replace(" Leader", "");
                 }
-                else if (role.Mnemonic.Equals("TFLD"))
+                else if (role.MnemonicAbrv.Equals("TFLD"))
                 {
                     group.GroupType = "Task Force";
                     group.Name = role.RoleName.Replace(" Leader", "");

@@ -54,13 +54,13 @@
             this.datFirstDayOnIncident = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.pnlOtherResourceDetails = new System.Windows.Forms.Panel();
+            this.datFirstDayOnIncidentOtherResource = new System.Windows.Forms.DateTimePicker();
+            this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.datLDWOtherResource = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.datCheckInTimeOtherResource = new System.Windows.Forms.DateTimePicker();
             this.pnlRoleOnTask = new System.Windows.Forms.Panel();
-            this.datFirstDayOnIncidentOtherResource = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numUniqueIDNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlPersonnelDetails.SuspendLayout();
@@ -222,7 +222,7 @@
             this.cboICSRole.Name = "cboICSRole";
             this.cboICSRole.Size = new System.Drawing.Size(362, 32);
             this.cboICSRole.TabIndex = 2;
-            this.cboICSRole.ValueMember = "RoleID";
+            this.cboICSRole.ValueMember = "GenericRoleID";
             this.cboICSRole.SelectedIndexChanged += new System.EventHandler(this.cboICSRole_SelectedIndexChanged);
             this.cboICSRole.Leave += new System.EventHandler(this.cboICSRole_Leave);
             // 
@@ -362,6 +362,25 @@
             this.pnlOtherResourceDetails.Size = new System.Drawing.Size(719, 107);
             this.pnlOtherResourceDetails.TabIndex = 141;
             // 
+            // datFirstDayOnIncidentOtherResource
+            // 
+            this.datFirstDayOnIncidentOtherResource.CustomFormat = "yyyy-MMMM-dd";
+            this.datFirstDayOnIncidentOtherResource.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datFirstDayOnIncidentOtherResource.Location = new System.Drawing.Point(202, 3);
+            this.datFirstDayOnIncidentOtherResource.Name = "datFirstDayOnIncidentOtherResource";
+            this.datFirstDayOnIncidentOtherResource.Size = new System.Drawing.Size(254, 29);
+            this.datFirstDayOnIncidentOtherResource.TabIndex = 135;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(6, 4);
+            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(187, 29);
+            this.label8.TabIndex = 136;
+            this.label8.Text = "First day on incident";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label6
             // 
             this.label6.Location = new System.Drawing.Point(6, 74);
@@ -411,25 +430,6 @@
             this.pnlRoleOnTask.Name = "pnlRoleOnTask";
             this.pnlRoleOnTask.Size = new System.Drawing.Size(722, 40);
             this.pnlRoleOnTask.TabIndex = 142;
-            // 
-            // datFirstDayOnIncidentOtherResource
-            // 
-            this.datFirstDayOnIncidentOtherResource.CustomFormat = "yyyy-MMMM-dd";
-            this.datFirstDayOnIncidentOtherResource.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datFirstDayOnIncidentOtherResource.Location = new System.Drawing.Point(202, 3);
-            this.datFirstDayOnIncidentOtherResource.Name = "datFirstDayOnIncidentOtherResource";
-            this.datFirstDayOnIncidentOtherResource.Size = new System.Drawing.Size(254, 29);
-            this.datFirstDayOnIncidentOtherResource.TabIndex = 135;
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(6, 4);
-            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(187, 29);
-            this.label8.TabIndex = 136;
-            this.label8.Text = "First day on incident";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ResourceCheckInEditControl
             // 

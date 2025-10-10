@@ -66,13 +66,13 @@ namespace WF_ICS_ClassLibrary.Models
 
             OrganizationChart currentOrg = incident.allOrgCharts.First(o=>o.OpPeriod == OpPeriod);
 
-            stats[0].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.IncidentCommanderID);
-            stats[1].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.OpsChiefID);
+            stats[0].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.IncidentCommanderGenericID);
+            stats[1].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.OpsChiefGenericID);
             List<OperationalGroup> opsGroups = incident.ActiveOperationalGroups.Where(o => o.ActiveResourceListing.Any()).ToList();
             foreach (OperationalGroup op in opsGroups) { stats[1].OpTotal += op.ActiveResourceListing.Sum(o => o.NumberOfPeople); }
-            stats[2].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.PlanningChiefID);
-            stats[3].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.LogisticsChiefID);
-            stats[4].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.FinanceChiefID);
+            stats[2].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.PlanningChiefGenericID);
+            stats[3].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.LogisticsChiefGenericID);
+            stats[4].OpTotal = currentOrg.ActiveRoles.Count(o => o.IndividualID != Guid.Empty && o.SectionID == Globals.FinanceChiefGenericID);
 
             stats[0].IncidentToDate = -1;
             stats[1].IncidentToDate = -1;

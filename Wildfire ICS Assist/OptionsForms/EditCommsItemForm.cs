@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
@@ -32,7 +33,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (editCommsChannelControl1.IsComplete) { this.DialogResult = DialogResult.OK; this.Close(); }
-            else { MessageBox.Show("You must enter a name for this channel"); }
+            else { LgMessageBox.Show("You must enter a name for this channel"); }
         }
 
         private void btnCancel_Click_1(object sender, EventArgs e)

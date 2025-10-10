@@ -14,8 +14,10 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using WildfireICSDesktopServices.OrgChartExport;
+using WildfireICSDesktopServices.PDFExportServiceClasses.ContactsExport;
 
 namespace Wildfire_ICS_Assist
 {
@@ -27,23 +29,30 @@ namespace Wildfire_ICS_Assist
 
         public OrganizationalChartForm()
         {
-           
-            InitializeComponent(); 
+
+            InitializeComponent();
+            SetControlColors(this.Controls);
+
         }
 
 
         private void OrganizationalChartForm_Load(object sender, EventArgs e)
         {
-            if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
+            //if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
             PopulateTree();
             rbUnifiedCommand.Checked = CurrentOrgChart.IsUnifiedCommand;
+            if (Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP"))
+            {
+                tscboIncludeContacts.SelectedIndex = 1;
+            }
+            else { tscboIncludeContacts.SelectedIndex = 0; }
 
             Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.incidentDataService.OrganizationalChartChanged += Program_OrgChartChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
+            //chkIncludeContacts.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
 
-            chkIncludeContacts.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeOrgContactsInIAP");
         }
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
@@ -76,9 +85,11 @@ namespace Wildfire_ICS_Assist
             // call recursive function
             AddCurrentChild(Guid.Empty, treeOrgChart.Nodes);
 
+
             if (treeOrgChart.Nodes.Count > 0)
             {
-                treeOrgChart.Nodes[0].ExpandAll();
+
+                treeOrgChart.Nodes[treeOrgChart.Nodes.Count - 1].ExpandAll();
                 if (selectedRole == null)
                 {
                     treeOrgChart.SelectedNode = treeOrgChart.Nodes[0];
@@ -139,6 +150,8 @@ namespace Wildfire_ICS_Assist
         }
 
 
+
+
         private Font GetNodeFont(bool italic)
         {
             if (italic)
@@ -158,7 +171,7 @@ namespace Wildfire_ICS_Assist
             if (treeOrgChart.SelectedNode != null)
             {
                 ICSRole role = (ICSRole)treeOrgChart.SelectedNode.Tag;
-                if (role.RoleID == WF_ICS_ClassLibrary.Globals.IncidentCommanderID && CurrentOrgChart.IsUnifiedCommand) { btnAssignRole.Enabled = false; }
+                if (role.RoleID == WF_ICS_ClassLibrary.Globals.IncidentCommanderGenericID && CurrentOrgChart.IsUnifiedCommand) { btnAssignRole.Enabled = false; }
                 else { btnAssignRole.Enabled = true; }
             }
             else
@@ -191,16 +204,43 @@ namespace Wildfire_ICS_Assist
                     DialogResult dr = addRoleForm.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
+                        addRoleForm.selectedRole.OrganizationalChartID = CurrentOrgChart.ID;
+                        addRoleForm.selectedRole.OpPeriod = CurrentOrgChart.OpPeriod;
+                        if (addRoleForm.selectedRole.RequiresOperationalGroup)
+                        {
+                            addRoleForm.selectedRole.OperationalGroupName = addRoleForm.OperationalGroupName;
+                        }
                         Program.incidentDataService.UpsertICSRole(addRoleForm.selectedRole);
+
+
+                        if (addRoleForm.selectedRole.RequiresOperationalGroup && !CurrentIncident.ActiveOperationalGroups.Any(o => o.ID == addRoleForm.selectedRole.OperationalGroupID))
+                        {
+                            OperationalGroup group = addRoleForm.selectedRole.CreateOpGroupFromRole(addRoleForm.OperationalGroupName);
+                            group.ParentID = Program.CurrentIncident.GetOpGroupParentIDThroughOrgChart(group);
+                            group.ParentName = Program.CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o => o.ID == group.ParentID)?.Name;
+                            Program.incidentDataService.UpsertOperationalGroup(group);
+                            addRoleForm.selectedRole.OperationalGroupID = group.ID;
+                            Program.incidentDataService.UpsertICSRole(addRoleForm.selectedRole);
+                        }
+                        else if (addRoleForm.selectedRole.RequiresOperationalGroup && CurrentIncident.ActiveOperationalGroups.Any(o => o.ID == addRoleForm.selectedRole.OperationalGroupID))
+                        {
+                            OperationalGroup opGroup = CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o => o.ID == addRoleForm.selectedRole.OperationalGroupID);
+                            if (opGroup.Name != addRoleForm.OperationalGroupName)
+                            {
+                                opGroup.Name = addRoleForm.OperationalGroupName;
+                                Program.incidentDataService.UpsertOperationalGroup(opGroup);
+                            }
+                        }
+
                     }
                 }
             }
             else if (role.IsOpGroupSup)
             {
-                MessageBox.Show(Properties.Resources.EditInAssignmnetList);
+                LgMessageBox.Show(Properties.Resources.EditInAssignmnetList);
             }
 
-            else { MessageBox.Show(Properties.Resources.ProtectedRole); }
+            else { LgMessageBox.Show(Properties.Resources.ProtectedRole); }
         }
 
         private void btnEditRole_Click(object sender, EventArgs e)
@@ -255,11 +295,11 @@ namespace Wildfire_ICS_Assist
                 //check if there are subordinate roles
                 if (Program.CurrentOrgChart.ActiveRoles.Any(o => o.ReportsTo == role.RoleID))
                 {
-                    MessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
+                    LgMessageBox.Show(Properties.Resources.DeleteSubordinateRoles);
                 }
                 else
                 {
-                    DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                    DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                     if (dr == DialogResult.Yes)
                     {
                         Program.incidentDataService.DeleteICSRole(role, Program.CurrentOpPeriod);
@@ -268,38 +308,40 @@ namespace Wildfire_ICS_Assist
             }
             else if (role.AllowEditName)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.RenameInsteadOfDeleteRole, Properties.Resources.RenameTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.RenameInsteadOfDeleteRole, Properties.Resources.RenameTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     openRoleForEdit(role);
                 }
             }
-            else { MessageBox.Show(Properties.Resources.ProtectedRole); }
+            else { LgMessageBox.Show(Properties.Resources.ProtectedRole); }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
 
 
-            if (chkIncludeContacts.Checked)
+
+        }
+
+        private void Print207()
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            List<byte[]> orgChartBytes = CurrentIncident.exportOrgChartToByteArray(CurrentOpPeriod, false);
+
+            allPDFs.AddRange(orgChartBytes);
+
+
+            if (tscboIncludeContacts.SelectedIndex == 1)
             {
-                string orgChart = Program.pdfExportService.createOrgChartPDF(CurrentIncident, CurrentOpPeriod, false, true, false);
-                string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
-
-                List<byte[]> allPDFs = new List<byte[]>();
-
-
-                using (FileStream stream = File.OpenRead(orgChart))
+                List<byte[]> contacts = ContactExportTools.ExportOrgChartContactListToByteArray(CurrentIncident, CurrentOpPeriod, false);
+                allPDFs.AddRange(contacts);
+                /*
+                PDFCreationResults contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
+                if (!string.IsNullOrEmpty(contactList.path))
                 {
-                    byte[] fileBytes = new byte[stream.Length];
-
-                    stream.Read(fileBytes, 0, fileBytes.Length);
-                    stream.Close();
-                    allPDFs.Add(fileBytes);
-                }
-                if (!string.IsNullOrEmpty(contactList))
-                {
-                    using (FileStream stream = File.OpenRead(contactList))
+                    using (FileStream stream = File.OpenRead(contactList.path))
                     {
                         byte[] fileBytes = new byte[stream.Length];
 
@@ -307,37 +349,26 @@ namespace Wildfire_ICS_Assist
                         stream.Close();
                         allPDFs.Add(fileBytes);
                     }
-                }
-
-                string fullFilepath = "";
-                //int end = CurrentTask.FileName.LastIndexOf("\\");
-                fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
-
-                string fullOutputFilename = "ICS 207 - Task " + CurrentIncident.IncidentNameAndNumberForPath + " - Op " + CurrentOpPeriod + " - Org Chart";
-                //fullFilepath = System.IO.Path.Combine(fullFilepath, outputFileName);
-                fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
-
-                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-                try
-                {
-                    File.WriteAllBytes(fullFilepath, fullFile);
-
-                    System.Diagnostics.Process.Start(fullFilepath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
-                }
-
+                }*/
             }
-            else
+
+            string fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
+            string fullOutputFilename = "ICS 207 - " + CurrentIncident.IncidentNameAndNumberForPath + " - Op " + CurrentOpPeriod + " - Org Chart";
+
+            string uniqueName = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath, "pdf");
+            fullFilepath = Path.Combine(fullFilepath, uniqueName);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
             {
-                string path = Program.pdfExportService.createOrgChartPDF(CurrentIncident, CurrentOpPeriod, true);
-                try { System.Diagnostics.Process.Start(path); }
-                catch { }
+                File.WriteAllBytes(fullFilepath, fullFile);
+
+                System.Diagnostics.Process.Start(fullFilepath);
             }
-
-
+            catch (Exception ex)
+            {
+                LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+            }
         }
 
         private void rbIncidentCommander_CheckedChanged(object sender, EventArgs e)
@@ -346,16 +377,16 @@ namespace Wildfire_ICS_Assist
             {
                 if (CurrentOrgChart.HasFilledUnifiedCommandRoles)
                 {
-                    DialogResult dr = MessageBox.Show(Properties.Resources.NoSwitchToICWithUCRolesFilled, Properties.Resources.ClearUnifiedCommandRolesTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dr = LgMessageBox.Show(Properties.Resources.NoSwitchToICWithUCRolesFilled, Properties.Resources.ClearUnifiedCommandRolesTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
-                        ICSRole uc2 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2ID);
+                        ICSRole uc2 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand2GenericID);
                         if (uc2 != null)
                         {
                             CurrentOrgChart.UnassignThisAndSubordinateRoles(uc2);
                         }
 
-                        ICSRole uc3 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand3ID);
+                        ICSRole uc3 = CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.UnifiedCommand3GenericID);
                         if (uc3 != null)
                         {
                             CurrentOrgChart.UnassignThisAndSubordinateRoles(uc2);
@@ -389,40 +420,22 @@ namespace Wildfire_ICS_Assist
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            svdExport.FileName = "OrgChart-" + Program.CurrentIncident.IncidentNameAndNumberForPath + "-OP-" + Program.CurrentOpPeriod + ".csv";
-            DialogResult result = svdExport.ShowDialog();
-            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
-            {
-                string exportPath = svdExport.FileName;
-                string delimiter = ",";
 
-
-
-
-
-
-                string csv = OrgChartTools.OrgChartToCSV(CurrentOrgChart.ActiveRoles, delimiter);
-                try
-                {
-                    System.IO.File.WriteAllText(exportPath, csv);
-
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
-                    if (openNow == DialogResult.Yes)
-                    {
-                        System.Diagnostics.Process.Start(exportPath);
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
-                }
-            }
         }
 
         private void btnPrint203_Click(object sender, EventArgs e)
         {
-            if (chkIncludeContacts.Checked)
+            Button btnSender = (Button)sender;
+            System.Drawing.Point ptLowerLeft = new System.Drawing.Point(0, btnSender.Height);
+            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+            cmsOutput.Show(ptLowerLeft);
+
+        }
+
+        private void Print203()
+        {
+
+            if (tscboIncludeContacts.SelectedIndex == 1)
             {
                 string fullFilepath = "";
                 fullFilepath = FileAccessClasses.getWritablePath(CurrentIncident);
@@ -430,7 +443,6 @@ namespace Wildfire_ICS_Assist
                 PDFCreationResults orgChartResults = Program.pdfExportService.createOrgAssignmentListPDF(CurrentIncident, CurrentOpPeriod, true, false);
                 string orgChart = orgChartResults.path;
 
-                string contactList = Program.pdfExportService.createOrgChartContactList(CurrentIncident, CurrentOpPeriod, false, true);
 
                 if (orgChartResults.Successful)
                 {
@@ -445,18 +457,13 @@ namespace Wildfire_ICS_Assist
                         stream.Close();
                         allPDFs.Add(fileBytes);
                     }
-                    if (!string.IsNullOrEmpty(contactList))
+                    if (tscboIncludeContacts.SelectedIndex == 1)
                     {
-                        using (FileStream stream = File.OpenRead(contactList))
-                        {
-                            byte[] fileBytes = new byte[stream.Length];
-
-                            stream.Read(fileBytes, 0, fileBytes.Length);
-                            stream.Close();
-                            allPDFs.Add(fileBytes);
-                        }
+                        List<byte[]> contacts = ContactExportTools.ExportOrgChartContactListToByteArray(CurrentIncident, CurrentOpPeriod, false);
+                        allPDFs.AddRange(contacts);
                     }
 
+                  
 
 
                     string fullOutputFilename = "ICS 203 - Incident " + CurrentIncident.IncidentNameAndNumberForPath + " - Op " + CurrentOpPeriod + " - Org Assignments List";
@@ -472,12 +479,12 @@ namespace Wildfire_ICS_Assist
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                        LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
                     }
                 }
                 else
                 {
-                    MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                    LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
                 }
             }
             else
@@ -487,7 +494,7 @@ namespace Wildfire_ICS_Assist
                 try { System.Diagnostics.Process.Start(path); }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                    LgMessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
                 }
             }
         }
@@ -534,7 +541,7 @@ namespace Wildfire_ICS_Assist
                 File.WriteAllBytes(fullFilepath, fullFile);
                 System.Diagnostics.Process.Start(fullFilepath);
             }
-            catch (Exception ex) { MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
+            catch (Exception ex) { LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString()); }
         }
 
         private void removeSelectedRoleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -542,5 +549,162 @@ namespace Wildfire_ICS_Assist
             ICSRole role = (ICSRole)(treeOrgChart.SelectedNode.Tag);
             DeleteRole(role);
         }
+
+        private void exportToSpreadsheetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            svdExport.FileName = "OrgChart-" + Program.CurrentIncident.IncidentNameAndNumberForPath + "-OP-" + Program.CurrentOpPeriod + ".csv";
+            DialogResult result = svdExport.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(svdExport.FileName))
+            {
+                string exportPath = svdExport.FileName;
+                string delimiter = ",";
+
+
+
+
+
+
+                string csv = OrganizationalChartTools.OrgChartToCSV(CurrentOrgChart.ActiveRoles, delimiter);
+                try
+                {
+                    System.IO.File.WriteAllText(exportPath, csv);
+
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    if (openNow == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(exportPath);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                }
+            }
+        }
+
+        private void viewICS207OrganizationalChartPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Print207();
+        }
+
+        private void viewICS203AssignmentsPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Print203();
+        }
+
+        private void viewICS203AssignmentsPDFToolStripMenuItem_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void btnSetPreparedAndApproved_Click(object sender, EventArgs e)
+        {
+            SetPreparedAndApprovedForm form = new SetPreparedAndApprovedForm();
+            form.SetPreparedBy(CurrentOrgChart.PreparedByRoleID, CurrentOrgChart.DatePrepared);
+            form.SetApprovedBy(CurrentOrgChart.ApprovedByRoleID, CurrentOrgChart.DateApproved);
+            DialogResult dr = form.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                CurrentOrgChart.SetPreparedBy(form.PreparedBy); CurrentOrgChart.DatePrepared = form.DatePrepared;
+                CurrentOrgChart.SetApprovedBy(form.ApprovedBy); CurrentOrgChart.DateApproved = form.DateApproved;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string path = CurrentIncident.exportOrgChartToPDF(CurrentOpPeriod, false);
+            try
+            {
+              
+
+                System.Diagnostics.Process.Start(path);
+            }
+            catch (Exception ex)
+            {
+                LgMessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+            }
+
+        }
+
+        private void Test207Page1()
+        {
+            OrgChartPageOne page = new OrgChartPageOne();
+            page.StartDate = Program.CurrentOpPeriodDetails.PeriodStart;
+            page.EndDate = Program.CurrentOpPeriodDetails.PeriodEnd;
+            page.IncidentName = Program.CurrentIncident.IncidentIdentifier;
+            page.PreparedByRoleName = Program.CurrentOrgChart.PreparedByRoleName;
+            page.PreparedByIndividualName = Program.CurrentOrgChart.PreparedByResourceName;
+
+
+            for (int x = 0; x < 3 && x < Program.CurrentOrgChart.IncidentCommanders.Count; x++)
+            {
+                page.IncidentCommanders[x] = new OrgChartEntry(Program.CurrentOrgChart.IncidentCommanders[x], 0);
+                if (page.IncidentCommanders[x] != null)
+                {
+                    Personnel p = Program.CurrentIncident.IncidentPersonnel.FirstOrDefault(o => o.ID == Program.CurrentOrgChart.IncidentCommanders[x].IndividualID);
+                    if (p != null) { page.IncidentCommanders[x].AgencyName = p.AgencyName; }
+                }
+            }
+            
+
+            page.LiaisonOfficer = new OrgChartEntry(Program.CurrentOrgChart.GetRoleByID(Globals.LiaisonOfficerGenericID, false), 0);
+            page.SafetyOfficer = new OrgChartEntry(Program.CurrentOrgChart.GetRoleByID(Globals.SafetyOfficerGenericID, false), 0);
+            page.PublicInformationOfficer = new OrgChartEntry(Program.CurrentOrgChart.GetRoleByID(Globals.InformationOfficerGenericID, false), 0);
+
+            List<ICSRole> reportingRoles = Program.CurrentOrgChart.ActiveRoles.Where(o => Globals.SectionChiefGenericIDs.Contains(o.GenericRoleID) ).ToList();
+            
+            for (int x = 0; x < 4 && x < reportingRoles.Count; x++)
+            {
+                
+                page.Entries[x] = new OrgChartEntry[8];
+                page.Entries[x][0] = new OrgChartEntry(reportingRoles[x], 0);
+                List<ICSRole> grandChildRoles = Program.CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == reportingRoles[x].RoleID).ToList();
+                for (int y = 0; y < 7 && y < grandChildRoles.Count; y++)
+                {
+                    page.Entries[x][y + 1] = new OrgChartEntry(grandChildRoles[y], x + 1);
+                }
+
+            }
+
+
+
+        }
+
+        private void TestExtensionPage(Guid PrimaryRoleID)
+        {
+
+            OrgChartExtensionPage ext = new OrgChartExtensionPage();
+            ext.StartDate = Program.CurrentOpPeriodDetails.PeriodStart;
+            ext.EndDate = Program.CurrentOpPeriodDetails.PeriodEnd;
+            ext.IncidentName = Program.CurrentIncident.IncidentIdentifier;
+            ext.PreparedByRoleName = Program.CurrentOrgChart.PreparedByRoleName;
+            ext.PreparedByIndividualName = Program.CurrentOrgChart.PreparedByResourceName;
+            ext.ReportsToEntry = new OrgChartEntry(Program.CurrentOrgChart.GetRoleByID(PrimaryRoleID, false), 0);
+            List<ICSRole> reportingRoles = Program.CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == ext.ReportsToEntry.RoleID).ToList();
+            for (int x = 0; x < 4 && x < reportingRoles.Count; x++)
+            {
+                ext.Entries[x] = new OrgChartEntry[8];
+                ext.Entries[x][0] = new OrgChartEntry(reportingRoles[x], 0);
+                List<ICSRole> grandChildRoles = Program.CurrentOrgChart.ActiveRoles.Where(o => o.ReportsTo == reportingRoles[x].RoleID).ToList();
+                for (int y = 0; y < 7 && y < grandChildRoles.Count; y++)
+                {
+                    ext.Entries[x][y + 1] = new OrgChartEntry(grandChildRoles[y], x + 1);
+                }
+
+            }
+
+           
+        }
+
+
     }
+
+
 }

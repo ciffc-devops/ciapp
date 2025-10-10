@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
@@ -69,7 +70,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             string msg = Properties.Resources.SureDelete;
 
-            DialogResult conf = MessageBox.Show(msg, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+            DialogResult conf = LgMessageBox.Show(msg, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
             if (conf == DialogResult.Yes)
             {
                 foreach (DataGridViewRow row in dgvContacts.SelectedRows)
@@ -127,7 +128,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
 
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -136,7 +137,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
@@ -85,7 +86,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (dgvTeamMembers.SelectedRows.Count > 0)
                 {
@@ -140,7 +141,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     {
                         System.IO.File.WriteAllText(exportPath, csv);
 
-                        DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                        DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                         if (openNow == DialogResult.Yes)
                         {
                             System.Diagnostics.Process.Start(exportPath);
@@ -149,7 +150,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                        LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                     }
                 }
             }

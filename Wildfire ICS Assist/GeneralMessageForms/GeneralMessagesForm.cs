@@ -136,7 +136,7 @@ namespace Wildfire_ICS_Assist
         {
             if (dgvLog.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     List<GeneralMessage> toDelete = new List<GeneralMessage>();
                     foreach (DataGridViewRow row in dgvLog.SelectedRows)
@@ -181,7 +181,7 @@ namespace Wildfire_ICS_Assist
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
+                LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.\r\n\r\nDetailed error details:\r\n" + ex.ToString());
             }
 
         }

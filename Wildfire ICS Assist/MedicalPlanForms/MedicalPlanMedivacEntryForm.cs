@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -90,7 +91,7 @@ namespace Wildfire_ICS_Assist
             if (string.IsNullOrEmpty(txtOrganization.Text.Trim())) { txtOrganization.BackColor = Program.ErrorColor; isValid = false; err.Append("You must include the name of the medivac service."); }
             else { txtOrganization.BackColor = Program.GoodColor; }
 
-            if (!isValid) { MessageBox.Show(err.ToString()); }
+            if (!isValid) { LgMessageBox.Show(err.ToString()); }
             return isValid;
         }
 

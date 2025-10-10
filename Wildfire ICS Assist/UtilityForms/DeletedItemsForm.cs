@@ -65,7 +65,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 records.Add((DeletedItemRecord)row.DataBoundItem);
             }
 
-            DialogResult dr = MessageBox.Show("Are you sure you want to restore " + records.Count + " items?", "Restore Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dr = LgMessageBox.Show("Are you sure you want to restore " + records.Count + " items?", "Restore Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 foreach (DeletedItemRecord record in records)
@@ -83,7 +83,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     }
                 }
 
-                MessageBox.Show("Done!");
+                LgMessageBox.Show("Done!");
             }
 
 

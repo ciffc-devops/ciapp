@@ -9,22 +9,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.CustomControls
 {
     public partial class StrikeTeamTaskForceDetailsControl : UserControl
     {
-        private ICSRole _role = null;
-        public ICSRole role { get => _role; private set { _role = value;  } }
+        private OperationalGroup _selectedOpGroup = null;
+        public OperationalGroup SelectedOpGroup { get => _selectedOpGroup; set { _selectedOpGroup = value; LoadOpGroup(); } }
 
         public bool ChangesMade { get; set; } = false;
 
-        public void SetRole(ICSRole role_to_set)
+        public void SetSelectedGroup(OperationalGroup selected_group)
         {
-            _role = role_to_set; LoadOpGroup();
+            SelectedOpGroup = selected_group; 
         }
-        OperationalGroup _selectedGroup = new OperationalGroup();
-        public OperationalGroup selectedGroup { get => _selectedGroup; private set => _selectedGroup = value; }
 
 
         private int ReportingPersonnelCount = 0;
@@ -33,21 +32,26 @@ namespace Wildfire_ICS_Assist.CustomControls
         {
             InitializeComponent();
             dgvSubGroups.AutoGenerateColumns = false; dgvSubGroups.BackgroundColor = Program.AccentColor;
+            if(Program.incidentDataService != null)
+            {
+                Program.incidentDataService.OperationalGroupChanged += IncidentDataService_OperationalGroupChanged;
+            }
 
+        }
+
+        private void IncidentDataService_OperationalGroupChanged(OperationalGroupEventArgs e)
+        {
+            if (SelectedOpGroup != null)
+            {
+                if (e.item.ID == SelectedOpGroup.ID || e.item.ParentID == SelectedOpGroup.ID) { LoadOpGroup(); }
+            } 
         }
 
         private void LoadOpGroup()
         {
-            if (role != null)
+            if (SelectedOpGroup != null)
             {
-                lblResourcesTitle.Text = role.RoleName + " Resources";
-
-                
-                if (Program.CurrentIncident != null && Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
-                {
-                    selectedGroup = Program.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
-                    lblResourcesTitle.Text = selectedGroup.ResourceName + " Resources";
-                }
+                lblResourcesTitle.Text = "Assigned Resources";
                 PopulateReportingResources();
             }
         }
@@ -58,8 +62,8 @@ namespace Wildfire_ICS_Assist.CustomControls
             dgvSubGroups.DataSource = null;
             dgvSubGroups.AutoGenerateColumns = false;
             List<IncidentResource> resources = new List<IncidentResource>();
-            resources.AddRange(selectedGroup.ActiveResourceListing);
-            foreach (IncidentResource resource in Program.CurrentIncident.GetReportingResources(selectedGroup.ID).Where(o => o.Active))
+            resources.AddRange(SelectedOpGroup.ActiveResourceListing);
+            foreach (IncidentResource resource in Program.CurrentIncident.GetReportingResources(SelectedOpGroup.ID).Where(o => o.Active))
             {
                 if (!resources.Any(o => o.ID == resource.ID)) { resources.Add(resource); }
             }
@@ -77,9 +81,9 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         }
 
-        private void Program_OperationalSubGroupChanged(OperationalSubGroupEventArgs e)
+        private void Program_OperationalSubGroupChanged(CrewEventArgs e)
         {
-            if (e.item.OperationalGroupID == selectedGroup.ID)
+            if (e.item.OperationalGroupID == SelectedOpGroup.ID)
             {
                 PopulateReportingResources();
             }
@@ -100,7 +104,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                         
                         
                         OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                        listing.OperationalGroupID = selectedGroup.ID;
+                        listing.OperationalGroupID = SelectedOpGroup.ID;
                         listing.Kind = resource.Kind;
                         listing.Type = resource.Type;
                         listing.ResourceID = resource.ID;
@@ -117,7 +121,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                         else if (resource.GetType().Name.Equals(new Crew().GetType().Name)) { listing.ResourceType = "Crew"; }
 
 
-                        selectedGroup.ResourceListing.Add(listing);
+                        SelectedOpGroup.ResourceListing.Add(listing);
                        
                         
                     }
@@ -135,7 +139,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void btnDeleteResource_Click(object sender, EventArgs e)
         {
-            if (dgvSubGroups.SelectedRows.Count > 0 && MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dgvSubGroups.SelectedRows.Count > 0 && LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ChangesMade = true;
                 List<OperationalGroupResourceListing> toDelete = new List<OperationalGroupResourceListing>();
@@ -145,13 +149,13 @@ namespace Wildfire_ICS_Assist.CustomControls
                 }
                 foreach (OperationalGroupResourceListing sub in toDelete)
                 {
-                    if (selectedGroup.ResourceListing.Any(o => o.ID == sub.ID))
+                    if (SelectedOpGroup.ResourceListing.Any(o => o.ID == sub.ID))
                     {
-                        selectedGroup.ResourceListing.First(o => o.ID == sub.ID).Active = false;
+                        SelectedOpGroup.ResourceListing.First(o => o.ID == sub.ID).Active = false;
                         
                     }
                 }
-                Program.incidentDataService.UpsertOperationalGroup(selectedGroup);
+                Program.incidentDataService.UpsertOperationalGroup(SelectedOpGroup);
             }
         }
 

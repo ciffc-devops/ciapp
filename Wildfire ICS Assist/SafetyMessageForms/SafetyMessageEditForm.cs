@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.CustomControls;
+using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist
@@ -149,7 +150,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnRemoveImage_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.SureRemoveImage, Properties.Resources.SureRemoveImageTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (LgMessageBox.Show(Properties.Resources.SureRemoveImage, Properties.Resources.SureRemoveImageTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
 
                 selectedMessage.ImageBytes = string.Empty;
@@ -216,7 +217,7 @@ namespace Wildfire_ICS_Assist
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
+                    LgMessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
                 }
             }
         }

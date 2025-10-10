@@ -18,8 +18,7 @@ namespace WildfireICSDesktopServices
         string createObjectivesPDF(Incident task, int OpsPeriod, bool IncludeAttachments = true, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportIncidentObjectivesToPDF(Incident task, int OpPeriodToExport, bool IncludeObjectives, bool flattenPDF);
         List<byte[]> createFreeformOpPeriodContentsList(Incident task, List<string> items, int OpPeriod);
-        string createOrgChartContactList(Incident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
-        List<byte[]> exportOrgChartContactsToPDF(Incident task, int OpPeriodToExport);
+        List<byte[]> exportOrgChartContactsToPDF(Incident task, int OpPeriodToExport, bool FlattenPDF = false);
         string createOrgChartPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportOrgChartToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
         string createRadioLogPDF(Incident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
@@ -51,9 +50,9 @@ namespace WildfireICSDesktopServices
         List<byte[]> exportOpTitlePageToPDF(Incident task, int OpPeriod, string contentsText, string titleImageBytes, bool flattenPDF);
         PDFCreationResults createOrgAssignmentListPDF(Incident task, int OpsPeriod, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportOrgAssignmentListToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
-        List<byte[]> exportAssignmentListToPDF(Incident task, int OpPeriodToExport, Guid DivisionID, bool flattenPDF);
-        string createAssignmentSummaryPDF(Incident task, int OpPeriod, Guid OpGroupICSRoleID, bool useTempPath, bool flattenPDF);
-        List<byte[]> exportAllAssignmentSummariesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
+        PDFCreationResults exportAssignmentListToPDF(Incident task, Guid DivisionID, bool flattenPDF);
+        PDFCreationResults createAssignmentSummaryPDF(Incident task, Guid OperationalGroupID, bool useTempPath, bool flattenPDF);
+        PDFCreationResults exportAllAssignmentSummariesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
         List<byte[]> exportAllAssignmentDetailsToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
         string createAssignmentDetailsPDF(Incident task, int OpPeriod, Guid OpGroupID, bool useTempPath, bool flattenPDF);
 

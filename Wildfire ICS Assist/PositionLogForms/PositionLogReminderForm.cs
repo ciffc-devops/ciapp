@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist
 {
@@ -38,7 +39,7 @@ namespace Wildfire_ICS_Assist
             {
 
                 Program.CurrentTask.allPositionLogEntries.Where(o => o.LogID == Entry.LogID).First().updateIsComplete(true, currentUser);
-                MessageBox.Show("Marked as complete");
+                LgMessageBox.Show("Marked as complete");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -50,7 +51,7 @@ namespace Wildfire_ICS_Assist
             if (Program.CurrentTask.allPositionLogEntries.Any(o => o.LogID == Entry.LogID))
             {
                 Program.CurrentTask.allPositionLogEntries.Where(o => o.LogID == Entry.LogID).First().ReminderTime = datNewReminderTime.Value;
-                MessageBox.Show("New reminder set.");
+                LgMessageBox.Show("New reminder set.");
                 this.DialogResult = DialogResult.No;
                 this.Close();
             }
