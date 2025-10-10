@@ -13,24 +13,32 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <PublishUrl>ftps://waws-prod-yt1-043.ftp.azurewebsites.windows.net/site/wwwroot/</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <InstallUrl>https://ciapp.icscanada.ca/publish/</InstallUrl>
+    <SupportUrl>https://ciapp.icscanada.ca/Support</SupportUrl>
+    <ProductName>Canadian Incident Action Plan Program</ProductName>
+    <PublisherName>Canadian Interagency Forest Fire Centre Inc. %28CIFFC%29</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.2.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,13 +66,22 @@
     <ApplicationIcon>Resources\P-icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetZone>LocalIntranet</TargetZone>
+    <TargetZone>Internet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>107451E4914D11031AC0CC6880E6D7B935270B8A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -855,6 +872,12 @@
     <Compile Include="PositionLogForms\PositionLogViewDetailsForm.Designer.cs">
       <DependentUpon>PositionLogViewDetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\PrintBlanksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\PrintBlanksForm.Designer.cs">
+      <DependentUpon>PrintBlanksForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\PrintIncidentActionPlanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1259,6 +1282,9 @@
     <EmbeddedResource Include="PositionLogForms\PositionLogViewDetailsForm.resx">
       <DependentUpon>PositionLogViewDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\PrintBlanksForm.resx">
+      <DependentUpon>PrintBlanksForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\PrintIncidentActionPlanForm.resx">
       <DependentUpon>PrintIncidentActionPlanForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1310,6 +1336,9 @@
       <DependentUpon>UpdateHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="BlankForms\Dietary and Allergy Details.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Form-209-page4.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\Form-209.pdf">

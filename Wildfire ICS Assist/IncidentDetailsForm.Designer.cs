@@ -133,6 +133,7 @@
             this.networkTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printBlankFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewIncidentUpdateListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
@@ -893,6 +894,7 @@
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newsToolStripMenuItem,
+            this.printBlankFormsToolStripMenuItem,
             this.viewIncidentUpdateListToolStripMenuItem,
             this.viewLogFileToolStripMenuItem,
             this.toolStripSeparator6,
@@ -908,6 +910,12 @@
             this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
             resources.ApplyResources(this.newsToolStripMenuItem, "newsToolStripMenuItem");
             this.newsToolStripMenuItem.Click += new System.EventHandler(this.newsToolStripMenuItem_Click);
+            // 
+            // printBlankFormsToolStripMenuItem
+            // 
+            this.printBlankFormsToolStripMenuItem.Name = "printBlankFormsToolStripMenuItem";
+            resources.ApplyResources(this.printBlankFormsToolStripMenuItem, "printBlankFormsToolStripMenuItem");
+            this.printBlankFormsToolStripMenuItem.Click += new System.EventHandler(this.printBlankFormsToolStripMenuItem_Click);
             // 
             // viewIncidentUpdateListToolStripMenuItem
             // 
@@ -1373,6 +1381,7 @@
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printOperationalPeriodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printIncidentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printBlankFormsToolStripMenuItem;
     }
 }
 

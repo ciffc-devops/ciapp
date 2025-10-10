@@ -167,7 +167,8 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
             txt7.Text = incidentStatusSummary.IncidentSize ?? "";
 
             // 8
-            num7.Value = (decimal)incidentStatusSummary.PercentContained;
+            num8Contained.Value = (decimal)incidentStatusSummary.PercentContained;
+            num8Complete.Value = (decimal)incidentStatusSummary.PercentCompleted;
 
             // 9
             if (PageInWildfireMode)
@@ -200,6 +201,10 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
                 prepAndApprovePanel1.SetApprovedBy(incidentStatusSummary.ApprovedByRoleID, incidentStatusSummary.DateApproved);
             else
                 prepAndApprovePanel1.SetApprovedBy(Guid.Empty, DateTime.MinValue);
+
+            //13
+            datDateSubmitted.Value = incidentStatusSummary.DateSubmitted.Date;
+            datTimeSubmitted.Value = incidentStatusSummary.DateSubmitted;
 
             // 15
             txt15.Text = incidentStatusSummary.PrimarySendTo ?? "";
@@ -238,7 +243,10 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
 
             // 26
             if (incidentStatusSummary.Latitude != 0 || incidentStatusSummary.Longitude != 0)
+            {
                 _coordinate = new Coordinate(incidentStatusSummary.Latitude, incidentStatusSummary.Longitude);
+                txtCoordinates.Text = _coordinate.CoordinateOutput("Decimal Degrees");
+            }
             else
                 _coordinate = null;
 
@@ -304,7 +312,8 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
             incidentStatusSummary.IncidentSize = txt7.Text.Trim();
 
             //8
-            incidentStatusSummary.PercentContained = Convert.ToDouble(num7.Value);
+            incidentStatusSummary.PercentContained = Convert.ToDouble(num8Contained.Value);
+            incidentStatusSummary.PercentCompleted = Convert.ToDouble(num8Complete.Value);
 
             //9
             if (PageInWildfireMode) { incidentStatusSummary.IncidentDefinition = cboDefinition.Text.Trim(); }
@@ -331,17 +340,22 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
                 incidentStatusSummary.PreparedByRoleName = string.Empty;
                 incidentStatusSummary.PreparedByResourceName = string.Empty;
             }
-            if (prepAndApprovePanel1.ApprovedByRole != null)
+            incidentStatusSummary.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+            incidentStatusSummary.DateSubmitted = datDateSubmitted.Value.Date.AddHours(datTimeSubmitted.Value.Hour).AddMinutes(datTimeSubmitted.Value.Minute).AddSeconds(datTimeSubmitted.Value.Second);
+
+            if (prepAndApprovePanel1.ApprovedByDateTime > DateTime.MinValue && prepAndApprovePanel1.ApprovedByRole != null)
             {
                 incidentStatusSummary.ApprovedByRoleID = prepAndApprovePanel1.ApprovedByRole.RoleID;
                 incidentStatusSummary.ApprovedByRoleName = prepAndApprovePanel1.ApprovedByRole.RoleName;
                 incidentStatusSummary.ApprovedByResourceName = prepAndApprovePanel1.ApprovedByRole.IndividualName;
+                incidentStatusSummary.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
             }
             else
             {
                 incidentStatusSummary.ApprovedByRoleID = Guid.Empty;
                 incidentStatusSummary.ApprovedByRoleName = string.Empty;
                 incidentStatusSummary.ApprovedByResourceName = string.Empty;
+                incidentStatusSummary.DateApproved = DateTime.MinValue;
 
             }
 
@@ -381,12 +395,14 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
             {
                 incidentStatusSummary.Latitude = 0;
                 incidentStatusSummary.Longitude = 0;
+                incidentStatusSummary.UTM = string.Empty;
 
             }
             else
             {
                 incidentStatusSummary.Latitude = _coordinate.Latitude;
                 incidentStatusSummary.Longitude = _coordinate.Longitude;
+                incidentStatusSummary.UTM = _coordinate.UTM;
             }
 
             //27
@@ -424,45 +440,46 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
 
         private void numPercentContained_ValueChanged(object sender, EventArgs e)
         {
-            progPercentContained.Value = (int)num7.Value;
+            progPercentContained.Value = (int)num8Contained.Value;
         }
 
         private void txtRadiusCoordinates_TextChanged(object sender, EventArgs e)
         {
             Coordinate c = new Coordinate();
+            _coordinate = null;
             if (!string.IsNullOrEmpty(txtCoordinates.Text))
             {
-                if (c.TryParseCoordinate(txtCoordinates.Text, out c))
-                {
-                    //Coordinate c  = CheckCoordinates(txtRadiusCoordinates, lblCoordinateStatus);
-                    if (c != null)
-                    {
-                        StringBuilder mapURL = new StringBuilder();
-                        //?mlat=49.52112&mlon=-125.52069#map=12/49.5211/-125.5207
-                        mapURL.Append("https://www.openstreetmap.org/?mlat=");
-                        mapURL.Append(c.Latitude);
-                        mapURL.Append("&mlon=");
-                        mapURL.Append(c.Longitude);
-                        mapURL.Append("#map=12/");
-                        mapURL.Append(c.Latitude);
-                        mapURL.Append("/");
-                        mapURL.Append(c.Longitude);
-                        try
-                        {
-                            Uri mapUri = new Uri(mapURL.ToString());
-                            webView22.Source = mapUri;
-                            webView22.Visible = true;
-                            //LgMessageBox.Show(mapURL.ToString());
-                        }
-                        catch
-                        {
-                            webView22.Visible = false;
-                        }
+                c = CheckCoordinates(txtCoordinates, lblCoordinateResultMessage);
 
+                //Coordinate c  = CheckCoordinates(txtRadiusCoordinates, lblCoordinateStatus);
+                if (c != null)
+                {
+                    _coordinate = c;
+                    StringBuilder mapURL = new StringBuilder();
+                    //?mlat=49.52112&mlon=-125.52069#map=12/49.5211/-125.5207
+                    mapURL.Append("https://www.openstreetmap.org/?mlat=");
+                    mapURL.Append(c.Latitude);
+                    mapURL.Append("&mlon=");
+                    mapURL.Append(c.Longitude);
+                    mapURL.Append("#map=12/");
+                    mapURL.Append(c.Latitude);
+                    mapURL.Append("/");
+                    mapURL.Append(c.Longitude);
+                    try
+                    {
+                        Uri mapUri = new Uri(mapURL.ToString());
+                        webView22.Source = mapUri;
+                        webView22.Visible = true;
+                        //LgMessageBox.Show(mapURL.ToString());
                     }
-                    else { webView22.Visible = false; }
+                    catch
+                    {
+                        webView22.Visible = false;
+                    }
+
                 }
                 else { webView22.Visible = false; }
+
             }
             else
             {
@@ -511,6 +528,10 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
                 incidentStatusSummary.CiviliansImpactedThisPeriod[x] = (int)Field31ColumnA[x].Value;
                 incidentStatusSummary.CiviliansImpactedToDate[x] = (int)Field31ColumnB[x].Value;
             }
+            incidentStatusSummary.CiviliansImpactedThisPeriod[incidentStatusSummary.CiviliansImpactedThisPeriod.Length - 1] = (int)numTotalCivilizansThisReport.Value;
+            incidentStatusSummary.CiviliansImpactedToDate[incidentStatusSummary.CiviliansImpactedToDate.Length - 1] = (int)numTotalCiviliansToDate.Value;
+
+
             //32
             for (int x = 0; x < Field32ColumnA.Count; x++)
             {
@@ -518,6 +539,9 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
                 incidentStatusSummary.RespondersImpactedThisPeriod[x] = (int)Field32ColumnA[x].Value;
                 incidentStatusSummary.RespondersImpactedToDate[x] = (int)Field32ColumnB[x].Value;
             }
+            incidentStatusSummary.RespondersImpactedThisPeriod[incidentStatusSummary.RespondersImpactedThisPeriod.Length - 1] = (int)num32an.Value;
+            incidentStatusSummary.RespondersImpactedToDate[incidentStatusSummary.RespondersImpactedToDate.Length - 1] = (int)num32bn.Value;
+
 
             //33
             incidentStatusSummary.LifeSafetyHealthRemarks = txt33.Text.Trim();
@@ -845,6 +869,7 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
                 if (incidentStatusSummary.CurrentThreatSummary != null && x < incidentStatusSummary.CurrentThreatSummary.Length)
                     Field38[x].Text = incidentStatusSummary.CurrentThreatSummary[x] ?? "";
             }
+          
 
             // 39
             for (int x = 0; x < Field39.Count; x++)
@@ -940,6 +965,11 @@ namespace Wildfire_ICS_Assist.IncidentStatusSummaryForms
             SaveFormToObject();
             LgMessageBox.Show("Incident Status Summary saved successfully.", "Save Successful", MessageBoxButtons.OK);
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void num8Complete_ValueChanged(object sender, EventArgs e)
+        {
+            progPercentComplete.Value = (int)num8Complete.Value;
         }
     }
 }

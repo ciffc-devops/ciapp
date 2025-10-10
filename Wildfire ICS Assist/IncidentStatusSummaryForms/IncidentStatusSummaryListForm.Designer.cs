@@ -85,6 +85,7 @@
             this.dgvSummaries.Name = "dgvSummaries";
             this.dgvSummaries.ReadOnly = true;
             this.dgvSummaries.RowHeadersVisible = false;
+            this.dgvSummaries.RowTemplate.Height = 30;
             this.dgvSummaries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSummaries.Size = new System.Drawing.Size(800, 394);
             this.dgvSummaries.TabIndex = 0;

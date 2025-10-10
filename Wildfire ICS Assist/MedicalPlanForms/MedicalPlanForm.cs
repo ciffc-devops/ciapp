@@ -49,7 +49,7 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.ICSRoleChanged += Program_ICSRoleChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
-            ICSFormInformation form = ICSFormTools.GetFormByNumber(206);
+            ICSFormInformation form = ICSFormTools.GetFormByNumber("206");
             if (form.Fields.Any(o => o.FieldNumber == 4)) { toolTip1.SetToolTip(btnFieldHelp4, form.Fields.First(o => o.FieldNumber == 4).InstructionsWithLineFeed); }
             if (form.Fields.Any(o => o.FieldNumber == 5)) { toolTip1.SetToolTip(btnFieldHelp5, form.Fields.First(o => o.FieldNumber == 5).InstructionsWithLineFeed); }
             if (form.Fields.Any(o => o.FieldNumber == 6)) { toolTip1.SetToolTip(btnFieldHelp6, form.Fields.First(o => o.FieldNumber == 6).InstructionsWithLineFeed); }
@@ -400,7 +400,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnFormVideo_Click(object sender, EventArgs e)
         {
-            ICSFormInformation form = ICSFormTools.GetFormByNumber(206);
+            ICSFormInformation form = ICSFormTools.GetFormByNumber("206");
             if (form != null && !string.IsNullOrEmpty(form.VideoURL))
             {
                 System.Diagnostics.Process.Start(form.VideoURL);
@@ -410,7 +410,7 @@ namespace Wildfire_ICS_Assist
         private void btnFormHelp_Click(object sender, EventArgs e)
         {
             ICSFormHelpForm helpForm = new ICSFormHelpForm();
-            helpForm.SelectedForm = ICSFormTools.GetFormByNumber(206);
+            helpForm.SelectedForm = ICSFormTools.GetFormByNumber("206");
             helpForm.Show();
         }
 

@@ -62,8 +62,13 @@ namespace Wildfire_ICS_Assist
         }
         private  async void IncidentDetailsForm_Load(object sender, EventArgs e)
         {
-            
-            
+#if DEBUG
+            printBlankFormsToolStripMenuItem.Visible = true;
+            languageToolStripMenuItem.Visible = true;
+#else
+    printBlankFormsToolStripMenuItem.Visible = false;
+    languageToolStripMenuItem.Visible = false;
+#endif
             SetVersionNumber();
             setRecentFiles();
             cpIncidentActionPlan.Expand();
@@ -223,6 +228,7 @@ namespace Wildfire_ICS_Assist
         NotesForm _notesForm = null;
         SafetyMessagesForm _safetyMessagesForm = null;
         PrintIncidentForm _printIAPForm = null;
+        PrintBlanksForm _printBlanksForm = null;
         AirOperationsForm _airOperationsForm = null;
         //TeamAssignmentsForm _teamAssignmentsForm = null;
         OperationalGroupsForm _operationalGroupsForm = null;
@@ -1976,6 +1982,30 @@ namespace Wildfire_ICS_Assist
         }
 
 
+        private void OpenPrintBlankFormsForm()
+        {
+            if (initialDetailsSet())
+            {
+                if (_printBlanksForm == null)
+                {
+                    _printBlanksForm = new PrintBlanksForm();
+
+                    _printBlanksForm.FormClosed += new FormClosedEventHandler(PrintBlankFormsForm_Closed);
+                    ActiveForms.Add(_printBlanksForm);
+                    _printBlanksForm.Show(this);
+                }
+
+                _printBlanksForm.BringToFront();
+            }
+        }
+        void PrintBlankFormsForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RemoveActiveForm(_printBlanksForm);
+            _printBlanksForm = null;
+
+
+        }
+
         private void OpenSavedAircraftForm()
         {
 
@@ -3523,6 +3553,13 @@ namespace Wildfire_ICS_Assist
         {
             OpenPrintIAPForm(true, false);
         }
+
+        private void printBlankFormsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPrintBlankFormsForm();
+        }
+
+
     }
 
 
