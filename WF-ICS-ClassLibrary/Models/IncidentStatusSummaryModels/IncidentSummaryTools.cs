@@ -26,9 +26,15 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
 
                 if (resource != null && resource.ParentResourceID == Guid.Empty)
                 {
+                    string rType = resource.ResourceType;
                     checkInRecords.Add(new CheckInRecordWithResource(rec, resource, opPeriod.PeriodEnd));
+
                 }
+
             }
+
+
+
 
 
             List<SummaryAgencyEntry> agencyEntries = new List<SummaryAgencyEntry>();
@@ -58,6 +64,7 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
                     if (resourceEntries.Any(o => o.ResourceKindName.EqualsWithNull(record.Resource.Kind) && o.ResourceTypeName.EqualsWithNull(record.Resource.Type) && o.AgencyName.EqualsWithNull(record.Resource.AgencyName)))
                     {
                         SummaryResourceEntry existingEntry = resourceEntries.First(o => o.ResourceKindName.EqualsWithNull(record.Resource.Kind) && o.ResourceTypeName.EqualsWithNull(record.Resource.Type) && o.AgencyName.EqualsWithNull(record.Resource.AgencyName));
+                        existingEntry.ResourceCount += 1; //for the resource itself
                         existingEntry.ResourceCount += record.Resource.NumberOfVehicles;
                         existingEntry.PersonnelCount += record.Resource.NumberOfPeople;
                     }
@@ -68,7 +75,7 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
                             ResourceKindName = record.Resource.Kind,
                             ResourceTypeName = record.Resource.Type,
                             AgencyName = record.Resource.AgencyName,
-                            ResourceCount = record.Resource.NumberOfVehicles,
+                            ResourceCount = record.Resource.NumberOfVehicles + 1,
                             PersonnelCount = record.Resource.NumberOfPeople
                         };
                         resourceEntries.Add(resourceEntry);
@@ -80,42 +87,45 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
 
             //Okay, now we have a list of all the agencies, and all teh resources by agency, kind, and type
             //how many unique kind and type combinations do we have?
-            
+
             int totalTypes = resourceEntries.GroupBy(x => new { x.ResourceKindName, x.ResourceTypeName }).Count();
             int totalKinds = resourceEntries.GroupBy(o => o.ResourceKindName).Count();
 
-            bool useTypes = totalTypes <= TotalResourceColumnsPerPage;
 
-            if (useTypes)
+
+
+            foreach (SummaryAgencyEntry agency in agencyEntries)
             {
-                foreach (SummaryAgencyEntry agency in agencyEntries)
+                agency.Resources.AddRange(resourceEntries.Where(o => o.AgencyName.Equals(agency.AgencyName)));
+                foreach (SummaryResourceEntry resource in agency.Resources)
                 {
-                    agency.Resources.AddRange(resourceEntries.Where(o => o.AgencyName.Equals(agency.AgencyName)));
-                    foreach(SummaryResourceEntry resource in agency.Resources)
-                    {
-                        resource.ResourceDisplayName = $"{resource.ResourceKindName} {resource.ResourceTypeName}";
-                    }
-                }
-            } else
-            {
-                foreach (SummaryAgencyEntry agency in agencyEntries)
-                {
-                    agency.Resources = resourceEntries
-                        .Where(o => o.AgencyName.Equals(agency.AgencyName))
-                        .GroupBy(o => o.ResourceTypeName)
-                        .Select(g => new SummaryResourceEntry
-                        {
-                            ResourceKindName = g.Key,
-                            ResourceTypeName = string.Join(", ", g.Select(r => r.ResourceTypeName).Distinct()),
-                            AgencyName = agency.AgencyName,
-                            ResourceDisplayName = g.Key,
-                            ResourceCount = g.Sum(r => r.ResourceCount),
-                            PersonnelCount = g.Sum(r => r.PersonnelCount)
-                        }).ToList();
+                    resource.ResourceDisplayName = $"{resource.ResourceKindName} {resource.ResourceTypeName}";
                 }
             }
 
+
             return agencyEntries;
+        }
+
+
+        public static IncidentStatusSummary CreateStatusSummaryFromPrevious(IncidentStatusSummary prev)
+        {
+            IncidentStatusSummary newSummary = prev.Clone();
+            newSummary.ID = Guid.NewGuid();
+            if(newSummary.ReportVersion == 0)
+            {
+                newSummary.ReportVersion = 1;
+            }
+            newSummary.ReportNumber ++;
+            newSummary.DateSubmitted = DateTime.Now;
+            newSummary.Remarks = string.Empty;
+            newSummary.ResourceCaptureDateTime = DateTime.MinValue;
+            newSummary.SummaryAgencyEntries = new List<SummaryAgencyEntry>();
+
+
+
+
+            return newSummary;
         }
     }
 }

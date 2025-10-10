@@ -13,14 +13,16 @@ namespace WF_ICS_ClassLibrary.Utilities
     public static class TestTools
     {
         private static readonly Random random = new Random();
+        private static readonly int maxAgencyNumber = 10; // Maximum number of agencies to choose from
+        private static readonly int maxTypeNumber = 40;
         public static Aircraft CreateAircraftTest(int seed)
         {
             Aircraft a = new Aircraft();
             a.MakeModel = "MakeModel" + seed;
             a.CompanyName = "Company Name " + seed;
-            a.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, 10); 
+            a.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, maxAgencyNumber); 
             List<string> models = AircraftTools.GetHelicopterTypes();
-            a.MakeModel = models[random.Next(models.Count)];
+            a.MakeModel = models[random.Next(maxTypeNumber)];
             a.Type = a.MakeModel;
             a.Kind = "Helicopter";
             a.Registration = "Reg " + seed;
@@ -197,7 +199,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.HomeCountry = "HomeCountry" + seed;
             test.EmergencyContact = "EmergencyContact" + seed;
 
-            test.Agency = "Agency " + RandomIntGenerator.GetRandomInt(1,10);
+            test.Agency = "Agency " + RandomIntGenerator.GetRandomInt(1, maxAgencyNumber);
             test.IsContractor = RandomBooleanGenerator.GetRandomBoolean();
             test.CallSign = "CallSign" + seed;
             test.Pronouns = "Pronouns" + seed;
@@ -205,14 +207,14 @@ namespace WF_ICS_ClassLibrary.Utilities
             List<string> kinds = PersonnelTools.GetPersonnelKinds();
 
             test.Kind = kinds[random.Next(kinds.Count)];
-            test.Type = "Type" + random.Next(1, 8);
+            test.Type = "Type" + random.Next(1, maxTypeNumber);
             return test;
         }
         public static Vehicle createTestVehicle(int seed)
         {
             Vehicle test = new Vehicle();
             test.IncidentIDNo = "Name " + seed;
-            test.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, 10);
+            test.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, maxAgencyNumber);
             test.OrderRequestNo = "OrderRequestNo" + seed;
             test.Classification = "Classification" + seed;
             test.Make = "Make" + seed;
@@ -228,7 +230,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.OperatorID = Guid.Empty;
             test.ASE = "ASE" + seed;
             test.Kind = "Kind" + seed;
-            test.Type = "Type" + random.Next(1, 4);
+            test.Type = "Type" + random.Next(1, maxTypeNumber);
             test.IsEquipment = RandomBooleanGenerator.GetRandomBoolean();
             return test;
 
@@ -238,7 +240,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             Crew test = new Crew();
             test.Active = true;
-            test.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, 10);
+            test.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, maxAgencyNumber);
             test.ResourceName = "Crew " + seed;
             test.Transport = "Transport " + seed;
             test.Email = "email" + seed + "@test.com";
@@ -246,7 +248,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.IsEquipmentCrew = false;
             test.UniqueIDNum = seed;
             test.Kind = "Crew";
-            test.Type = "Type " + random.Next(1, 4);
+            test.Type = "Type " + random.Next(1, maxTypeNumber);
             
             foreach(IncidentResource resource in childResources)
             {

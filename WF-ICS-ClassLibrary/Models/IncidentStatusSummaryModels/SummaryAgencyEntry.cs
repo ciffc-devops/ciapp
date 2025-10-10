@@ -10,6 +10,18 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
 
         public string AgencyName { get => _AgencyName; set => _AgencyName = value; }
         public int AdditionalPersonnel { get => _AdditionalPersonnel; set => _AdditionalPersonnel = value; }
+        public int TotalPersonnel
+        {
+            get
+            {
+                int total = AdditionalPersonnel;
+                foreach (var resource in Resources)
+                {
+                    total += resource.PersonnelCount;
+                }
+                return total;
+            }
+        }
         public List<SummaryResourceEntry> Resources { get => _Resources; set => _Resources = value; }
     }
 }

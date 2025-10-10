@@ -9,14 +9,7 @@ using WF_ICS_ClassLibrary.Models.GeneralModels;
 
 namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
 {
- /*
-       case "Personnel": return "P" + UniqueIDNum;
-                    case "Vehicle": return "V" + UniqueIDNum;
-                    case "Equipment": return "E" + UniqueIDNum;
-                    case "Crew": return "C" + UniqueIDNum;
-                    case "Heavy Equipment Crew": return "C" + UniqueIDNum;
-                    case "Aircraft": return "A" + UniqueIDNum;
- */
+ 
     public class IncidentStatusSummary : ICSFormData, ICloneable
     {
         //Fields for the standard form
@@ -172,6 +165,28 @@ namespace WF_ICS_ClassLibrary.Models.IncidentStatusSummaryModels
         public bool[] RespondersImpactedEstimate { get => _RespondersImpactedEstimate; set => _RespondersImpactedEstimate = value; }
         public DateTime ResourceCaptureDateTime { get => _ResourceCaptureDateTime; set => _ResourceCaptureDateTime = value; }
         public List<SummaryAgencyEntry> SummaryAgencyEntries { get => _SummaryAgencyEntries; set => _SummaryAgencyEntries = value; }
+
+        public List<string> GetAllTypes()
+        {
+            List<string> types = new List<string>();
+            foreach (var agency in SummaryAgencyEntries)
+            {
+                foreach (var resource in agency.Resources)
+                {
+                    if (!types.Contains(resource.ResourceTypeName))
+                    {
+                        types.Add(resource.ResourceTypeName);
+                    }
+                }
+            }
+            return types.OrderBy(o=>o).ToList();
+        }
+
+        public int GetTotalTypes()
+        {
+            List<string> types = GetAllTypes();
+            return types.Count;
+        }
 
         public List<SummaryResourceTotal> GetResourceTotals()
         {
