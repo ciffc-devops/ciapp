@@ -111,89 +111,98 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses.ContactsExport
 
         public static string ExportContactListToPDF(string SavePath, ContactExportHeader header, List<ContactExportEntry> entries,  bool flattenPDF = false)
         {
-            string path = SavePath;
-
-            string outputFileName = "ICS 205A - " + header.IncidentName + " - Communications List " + header.StartDate.ToString("yyyy-MMM-dd");
-            outputFileName = outputFileName.ReplaceInvalidPathChars();
-
-            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
-            List<ContactExportEntry> entriesToExport = new List<ContactExportEntry>(entries);
-
-            entries = entries.OrderBy(o => o.Name).ToList();
-
-            List<string> paths = new List<string>();
-
-            while (entriesToExport.Any())
+            if (entries.Any())
             {
-                List<ContactExportEntry> pageEntries = entriesToExport.Take(MaxContactsPerPage).ToList();
-                string pagePath = GenerateContactPageForExport(header, pageEntries, flattenPDF);
-                if (string.IsNullOrEmpty(pagePath)) { continue; }
-                paths.Add(pagePath);
-                entriesToExport.RemoveRange(0, pageEntries.Count);
+                string path = SavePath;
+
+                string outputFileName = "ICS 205A - " + header.IncidentName + " - Communications List " + header.StartDate.ToString("yyyy-MMM-dd");
+                outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+                List<ContactExportEntry> entriesToExport = new List<ContactExportEntry>(entries);
+
+                entries = entries.OrderBy(o => o.Name).ToList();
+
+                List<string> paths = new List<string>();
+
+                while (entriesToExport.Any())
+                {
+                    List<ContactExportEntry> pageEntries = entriesToExport.Take(MaxContactsPerPage).ToList();
+                    string pagePath = GenerateContactPageForExport(header, pageEntries, flattenPDF);
+                    if (string.IsNullOrEmpty(pagePath)) { continue; }
+                    paths.Add(pagePath);
+                    entriesToExport.RemoveRange(0, pageEntries.Count);
+                }
+
+                _ = PDFExtraTools.MergePDFs(paths, path, flattenPDF);
+                return path;
+            } else
+            {
+                return null;
             }
-           
-            _ = PDFExtraTools.MergePDFs(paths, path, flattenPDF);
-            return path;
         }
 
         private static string GenerateContactPageForExport(ContactExportHeader header, List<ContactExportEntry> entries, bool flattenPDF = false)
         {
-            string path = System.IO.Path.GetTempPath();
-
-
-            path = Path.Combine(path, Guid.NewGuid().ToString() + ".pdf");
-
-
-            string fileToUse = PDFExtraTools.getPDFFilePath("ICS205A-CommunicationsList.pdf");
-            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
-            try
+            if (entries != null)
             {
+                string path = System.IO.Path.GetTempPath();
 
-                using (PdfReader rdr = new PdfReader(fileToUse))
+
+                path = Path.Combine(path, Guid.NewGuid().ToString() + ".pdf");
+
+
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS205A-CommunicationsList.pdf");
+                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+                try
                 {
-                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
 
-
-
-
-
-                    stamper.AcroFields.SetField("1 Incident Name", header.IncidentName);
-
-
-                    stamper.AcroFields.SetField("Text44", string.Format("{0:" + DateFormat + " HH:mm}", header.StartDate));
-                    stamper.AcroFields.SetField("Text45", string.Format("{0:" + DateFormat + " HH:mm}", header.EndDate));
-                    stamper.AcroFields.SetField("Text48", string.Format("{0:" + DateFormat + " HH:mm}", header.PreparedDate));
-                    stamper.AcroFields.SetField("Name", header.PreparedByIndividualName);
-                    stamper.AcroFields.SetField("Text46", header.PreparedByRoleName);
-
-                    for (int x = 0; x < entries.Count && x < MaxContactsPerPage; x++)
+                    using (PdfReader rdr = new PdfReader(fileToUse))
                     {
-                        //
-                        stamper.AcroFields.SetField("Incident Assigned PositionRow" + (x + 1), entries[x].Position);
-                        stamper.AcroFields.SetField("ContactName" + (x + 1), entries[x].Name);
-                        stamper.AcroFields.SetField("Methods of Contact phone pager cell etcRow" + (x + 1), entries[x].ContactMethodsFullString);
+                        PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+
+
+
+
+                        stamper.AcroFields.SetField("1 Incident Name", header.IncidentName);
+
+
+                        stamper.AcroFields.SetField("Text44", string.Format("{0:" + DateFormat + " HH:mm}", header.StartDate));
+                        stamper.AcroFields.SetField("Text45", string.Format("{0:" + DateFormat + " HH:mm}", header.EndDate));
+                        stamper.AcroFields.SetField("Text48", string.Format("{0:" + DateFormat + " HH:mm}", header.PreparedDate));
+                        stamper.AcroFields.SetField("Name", header.PreparedByIndividualName);
+                        stamper.AcroFields.SetField("Text46", header.PreparedByRoleName);
+
+                        for (int x = 0; x < entries.Count && x < MaxContactsPerPage; x++)
+                        {
+                            //
+                            stamper.AcroFields.SetField("Incident Assigned PositionRow" + (x + 1), entries[x].Position);
+                            stamper.AcroFields.SetField("ContactName" + (x + 1), entries[x].Name);
+                            stamper.AcroFields.SetField("Methods of Contact phone pager cell etcRow" + (x + 1), entries[x].ContactMethodsFullString);
+                        }
+
+                        stamper.RenameAllFields();
+
+                        if (flattenPDF)
+                        {
+                            stamper.FormFlattening = true;
+                        }
+
+
+
+                        stamper.Close();//Close a PDFStamper Object
+                        stamper.Dispose();
+                        //rdr.Close();    //Close a PDFReader Object
                     }
-
-                    stamper.RenameAllFields();
-
-                    if (flattenPDF)
-                    {
-                        stamper.FormFlattening = true;
-                    }
-
-
-
-                    stamper.Close();//Close a PDFStamper Object
-                    stamper.Dispose();
-                    //rdr.Close();    //Close a PDFReader Object
                 }
+                catch (Exception)
+                {
+                    path = null;
+                }
+                return path;
             }
-            catch (Exception)
-            {
-                path = null;
-            }
-            return path;
-
+            return null;
         }
 
         private static List<ContactExportEntry> GetEntriesFromOrgChart(OrganizationChart orgChart, List<Personnel> personnel)

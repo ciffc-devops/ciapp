@@ -460,7 +460,9 @@ namespace Wildfire_ICS_Assist
                     if (tscboIncludeContacts.SelectedIndex == 1)
                     {
                         List<byte[]> contacts = ContactExportTools.ExportOrgChartContactListToByteArray(CurrentIncident, CurrentOpPeriod, false);
-                        allPDFs.AddRange(contacts);
+                        if (contacts != null) { 
+                            allPDFs.AddRange(contacts); }
+
                     }
 
                   
