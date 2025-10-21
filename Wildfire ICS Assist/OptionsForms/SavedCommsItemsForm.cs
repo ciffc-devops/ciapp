@@ -8,15 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedCommsItemsForm : Form
+    public partial class SavedCommsItemsForm : BaseForm
     {
         public SavedCommsItemsForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void SavedCommsItems_Load(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editCommsItem.commsPlanItem, "CommsItem");
+                    Program.generalOptionsService.UpsertOptionValue(editCommsItem.commsPlanItem, "CommsItem");
                     buildCommsItemList();
 
 
@@ -72,14 +73,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             if (dgvCommsItems.SelectedRows.Count > 0)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dgvCommsItems.SelectedRows)
                     {
                         CommsPlanItem h = (CommsPlanItem)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "CommsItem");
+                        Program.generalOptionsService.UpsertOptionValue(h, "CommsItem");
                     }
                     buildCommsItemList();
                 }

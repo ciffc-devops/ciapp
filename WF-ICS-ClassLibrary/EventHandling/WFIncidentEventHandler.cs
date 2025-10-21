@@ -9,13 +9,13 @@ namespace WF_ICS_ClassLibrary.EventHandling
 {
    
 
-    public delegate void WFIncidentEventHandler(WFIncidentEventArgs e);
+    public delegate void WFIncidentEventHandler(IncidentEventArgs e);
 
-    public class WFIncidentEventArgs
+    public class IncidentEventArgs
     {
-        public WFIncident item { get; set; }
+        public Incident item { get; set; }
 
-        public WFIncidentEventArgs(WFIncident _item) { item = _item; }
+        public IncidentEventArgs(Incident _item) { item = _item; }
     }
 
 }

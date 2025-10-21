@@ -12,7 +12,7 @@ using WF_ICS_ClassLibrary.Utilities;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditHosptalForm : Form
+    public partial class EditHosptalForm : BaseForm
     {
         private Hospital _selectedHospital = null;
 
@@ -21,8 +21,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public EditHosptalForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void EditHosptalForm_Load(object sender, EventArgs e)

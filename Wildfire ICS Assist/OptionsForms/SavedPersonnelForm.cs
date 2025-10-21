@@ -8,14 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedPersonnelForm : Form
+    public partial class SavedPersonnelForm : BaseForm
     {
         public SavedPersonnelForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void SavedTeamMembersForm_Load(object sender, EventArgs e)
@@ -43,13 +44,13 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = editForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editForm.selectedMember, "TeamMember");
+                    Program.generalOptionsService.UpsertOptionValue(editForm.selectedMember, "TeamMember");
                     LoadData();
 
                     if(Program.CurrentIncident.IncidentPersonnel.Any(o=>o.ID == editForm.selectedMember.ID))
                     {
                         editForm.selectedMember.UniqueIDNum = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == editForm.selectedMember.ID).UniqueIDNum;
-                        Program.wfIncidentService.UpsertPersonnel(editForm.selectedMember.Clone());
+                        Program.incidentDataService.UpsertPersonnel(editForm.selectedMember.Clone());
 
                     }
 
@@ -85,7 +86,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (dgvTeamMembers.SelectedRows.Count > 0)
                 {
@@ -97,7 +98,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     foreach (Personnel mem in toDelete)
                     {
                         mem.MemberActive = false;
-                        Program.generalOptionsService.UpserOptionValue(mem, "TeamMember");
+                        Program.generalOptionsService.UpsertOptionValue(mem, "TeamMember");
 
                     }
                     LoadData();
@@ -140,7 +141,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     {
                         System.IO.File.WriteAllText(exportPath, csv);
 
-                        DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                        DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                         if (openNow == DialogResult.Yes)
                         {
                             System.Diagnostics.Process.Start(exportPath);
@@ -149,7 +150,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                        LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                     }
                 }
             }

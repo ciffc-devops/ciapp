@@ -46,7 +46,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 txtFirstName.SetText(teamMember.FirstName);
                 txtMiddleName.Text = teamMember.MiddleInitial;
                 txtLastName.SetText(teamMember.LastName);
-                cboAccomodationPreference.Text = teamMember.AccomodationPreference;
+                cboAccomodationPreference.Text = teamMember.AccommodationPreference;
                 if (teamMember.HomeProvinceID != Guid.Empty) { cboProvince.SelectedValue = teamMember.HomeProvinceID; }
                 else if (Program.generalOptionsService != null && Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID") != Guid.Empty) { cboProvince.SelectedValue = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); _teamMember.HomeProvinceID = Program.generalOptionsService.GetGuidOptionValue("DefaultProvinceID"); ; }
                 cboCountry.Text = teamMember.HomeCountry;
@@ -109,7 +109,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         public PersonnelEditControl()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; cboAccomodationPreference.SelectedIndex = 0;
+            InitializeComponent(); this.BackColor = Program.FormBackgroundColor; cboAccomodationPreference.SelectedIndex = 0;
             List<Province> provinces = ProvinceTools.GetProvinces();
             Province other = new Province(); other.ProvinceGUID = Guid.Empty; other.ProvinceName = "Other / NA"; provinces.Add(other);
             cboKind.DataSource = PersonnelTools.GetPersonnelKinds();
@@ -164,7 +164,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (teamMember == null) { return false; }
                 if (!txtFirstName.IsValid) { return false; }
                 if (!txtLastName.IsValid) { return false; }
-                if (string.IsNullOrEmpty(teamMember.AccomodationPreference) || string.IsNullOrEmpty(teamMember.AccomodationPreference.Trim())) { return false; }
+                if (string.IsNullOrEmpty(teamMember.AccommodationPreference) || string.IsNullOrEmpty(teamMember.AccommodationPreference.Trim())) { return false; }
                 
                 if (string.IsNullOrEmpty(teamMember.Agency)) { return false; };
                 //if (string.IsNullOrEmpty(teamMember.EmergencyContact)) { return false; };
@@ -309,7 +309,7 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void cboAccomodationPreference_SelectedIndexChanged(object sender, EventArgs e)
         {
-            teamMember.AccomodationPreference = ((ComboBox)sender).Text; SetColours();
+            teamMember.AccommodationPreference = ((ComboBox)sender).Text; SetColours();
         }
 
         private void cboOtherAgency_Leave(object sender, EventArgs e)

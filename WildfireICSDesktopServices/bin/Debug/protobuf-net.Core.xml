@@ -1291,6 +1291,11 @@
             Record the sub-type relationship formally in schemas
             </summary>
         </member>
+        <member name="F:ProtoBuf.Meta.SchemaGenerationFlags.IncludeEnumNamePrefix">
+            <summary>
+            Provides support for adding Prefix to names of Enum members in schemas
+            </summary>
+        </member>
         <member name="T:ProtoBuf.Meta.Service">
             <summary>
             Describes a service.
@@ -4092,6 +4097,9 @@
         <member name="M:ProtoBuf.Serializers.RepeatedSerializer.CreateStack``2">
             <summary>Create a serializer that operates on lists</summary>
         </member>
+        <member name="M:ProtoBuf.Serializers.RepeatedSerializer.CreateSet``2">
+            <summary>Create a serializer that operates on sets</summary>
+        </member>
         <member name="M:ProtoBuf.Serializers.RepeatedSerializer.ReverseInPlace``1(System.ArraySegment{``0}@)">
             <summary>Reverses a range of values</summary>
         </member>
@@ -4349,6 +4357,12 @@
         </member>
         <member name="M:ProtoBuf.WellKnownTypes.Timestamp.AsDateTime">
             <summary>Converts a Timestamp to a DateTime</summary>
+        </member>
+        <member name="M:ProtoBuf.WellKnownTypes.Timestamp.CompareTo(ProtoBuf.WellKnownTypes.Timestamp)">
+            <inheritdoc cref="M:System.IComparable`1.CompareTo(`0)" />
+        </member>
+        <member name="M:ProtoBuf.WellKnownTypes.Timestamp.Equals(ProtoBuf.WellKnownTypes.Timestamp)">
+            <inheritdoc cref="M:System.IEquatable`1.Equals(`0)" />
         </member>
         <member name="M:ProtoBuf.WellKnownTypes.Timestamp.op_Implicit(ProtoBuf.WellKnownTypes.Timestamp)~System.DateTime">
             <summary>Converts a Timestamp to a DateTime</summary>

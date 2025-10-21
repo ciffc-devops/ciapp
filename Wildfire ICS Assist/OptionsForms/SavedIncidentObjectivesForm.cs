@@ -8,15 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedIncidentObjectivesForm : Form
+    public partial class SavedIncidentObjectivesForm : BaseForm
     {
         public SavedIncidentObjectivesForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
         private void SavedIncidentObjectivesForm_Load(object sender, EventArgs e)
         {
@@ -43,7 +44,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editItem.objective, "Objective");
+                    Program.generalOptionsService.UpsertOptionValue(editItem.objective, "Objective");
                     buildList();
 
 
@@ -73,14 +74,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             if (dgvObjectives.SelectedRows.Count > 0)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dgvObjectives.SelectedRows)
                     {
                         IncidentObjective h = (IncidentObjective)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Objective");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Objective");
                     }
                     buildList();
                 }

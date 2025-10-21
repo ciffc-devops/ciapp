@@ -17,7 +17,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
         public SelectTimeRangeForm()
         {
-            InitializeComponent();
+            InitializeComponent(); SetControlColors(this.Controls);
         }
     }
 }

@@ -8,17 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditSavedIncidentObjectiveForm : Form
+    public partial class EditSavedIncidentObjectiveForm : BaseForm
     {
 
         private IncidentObjective _objective = null;
         public IncidentObjective objective { get => _objective; set { _objective = value; displayObjective(); } }
         public EditSavedIncidentObjectiveForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void displayObjective()
@@ -44,7 +45,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 this.Close();
             } else
             {
-                MessageBox.Show("You must include text for the objective.");
+                LgMessageBox.Show("You must include text for the objective.");
             }
         }
 

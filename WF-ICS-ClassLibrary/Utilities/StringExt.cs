@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -10,6 +11,13 @@ namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class StringExt
     {
+        public static string ReplaceInvalidPathChars(this string filename, string replaceChar = "-")
+        {
+            if (string.IsNullOrEmpty(filename)){ return null; }
+            string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
+            return r.Replace(filename, replaceChar);
+        }
         public static bool Contains(this List<string> source, string toCheck, StringComparison comp)
         {
             return source.Any(o => o.Contains(toCheck, comp));

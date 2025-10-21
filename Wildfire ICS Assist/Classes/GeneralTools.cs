@@ -16,7 +16,7 @@ namespace Wildfire_ICS_Assist.Classes
             try
             {
                 int w = myCombo.Items.Cast<object>().Max(o => TextRenderer.MeasureText(myCombo.GetItemText(o), myCombo.Font).Width);
-                if(w > 0) { return w; } else { return 100; }
+                if (w > 0) { return w + 30; } else { return 100; }
             }
             catch
             {

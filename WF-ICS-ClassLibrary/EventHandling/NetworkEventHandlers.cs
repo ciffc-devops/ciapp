@@ -25,7 +25,7 @@ namespace WF_ICS_ClassLibrary.EventHandling
 
     public delegate void LocalNetworkIncidentRequestHandler(NetworkSARTaskRequest e);
 
-    public delegate void LocalNetworkIncomingIncidentEventHandler(WFIncident incident);
+    public delegate void LocalNetworkIncomingIncidentEventHandler(Incident incident);
 
     public delegate void LocalNetworkIncomingSendObjectEventHandler(NetworkSendObject obj);
 

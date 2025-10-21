@@ -13,7 +13,7 @@ using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class ImportSavedTeamMembersForm : Form
+    public partial class ImportSavedTeamMembersForm : BaseForm
     {
         private int _ImportedCount = 0;
         public int ImportedCount { get => _ImportedCount; set => _ImportedCount = value; }
@@ -22,7 +22,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public ImportSavedTeamMembersForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void ImportSavedTeamMembersForm_Load(object sender, EventArgs e)
@@ -158,13 +158,13 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 {
                     string importMessage = Properties.Resources.MembersImported;
                     importMessage = importMessage.Replace("[IMPORT]", ImportedCount.ToString()).Replace("[UPDATE]", UpdatedCount.ToString());
-                    MessageBox.Show(importMessage);
+                    LgMessageBox.Show(importMessage);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show(Properties.Resources.NoMembersImported);
+                    LgMessageBox.Show(Properties.Resources.NoMembersImported);
                     
                 }
 
@@ -237,9 +237,9 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     if (accomCol >= 0 && accomCol < fields.Length)
                     {
                         string xlAccom = fields[accomCol];
-                        if (xlAccom != null && (xlAccom.Contains("female") || xlAccom.Contains("woman"))) { p.AccomodationPreference = "Female-Only"; }
-                        else if (xlAccom != null && (xlAccom.Contains("male") || xlAccom.Contains("man"))) { p.AccomodationPreference = "Male-Only"; }
-                        else { p.AccomodationPreference = "Not Gender-Restricted"; }
+                        if (xlAccom != null && (xlAccom.Contains("female") || xlAccom.Contains("woman"))) { p.AccommodationPreference = "Female-Only"; }
+                        else if (xlAccom != null && (xlAccom.Contains("male") || xlAccom.Contains("man"))) { p.AccommodationPreference = "Male-Only"; }
+                        else { p.AccommodationPreference = "Not Gender-Restricted"; }
                     }
 
                     if (provCol >= 0 && provCol < fields.Length)
@@ -329,7 +329,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         dup.FirstName = member.FirstName;
                         dup.MiddleInitial = member.MiddleInitial;
                         dup.Pronouns = member.Pronouns;
-                        dup.AccomodationPreference = member.AccomodationPreference;
+                        dup.AccommodationPreference = member.AccommodationPreference;
                         dup.HomeCountry = member.HomeCountry;
                         dup.HomeProvinceID = member.HomeProvinceID;
                         dup.Agency = member.Agency;
@@ -343,20 +343,20 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         dup.HasAllergies    = member.HasAllergies;
                         dup.EmergencyContact = member.EmergencyContact;
                         dup.HomeUnit = member.HomeUnit;
-                        Program.generalOptionsService.UpserOptionValue(dup, "TeamMember");
+                        Program.generalOptionsService.UpsertOptionValue(dup, "TeamMember");
                         UpdatedCount++;
 
                     }
                     else
                     {
-                        Program.generalOptionsService.UpserOptionValue(member, "TeamMember");
+                        Program.generalOptionsService.UpsertOptionValue(member, "TeamMember");
                         ImportedCount += 1;
 
                     }
                 }
                 else
                 {
-                    Program.generalOptionsService.UpserOptionValue(member, "TeamMember");
+                    Program.generalOptionsService.UpsertOptionValue(member, "TeamMember");
                     ImportedCount += 1;
                 }
             }

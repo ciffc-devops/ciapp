@@ -27,10 +27,10 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ciapp_webserviceSoap", Namespace="http://microsoft.com/webservices/")]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TaskBasics))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Equipment))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(WFIncident))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Task))]
     public partial class ciapp_webservice : System.Web.Services.Protocols.SoapHttpClientProtocol {
+        
+        private System.Threading.SendOrPostCallback GetAllNewsItemsOperationCompleted;
         
         private System.Threading.SendOrPostCallback SubmitTaskUpdateOperationCompleted;
         
@@ -83,6 +83,9 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
+        public event GetAllNewsItemsCompletedEventHandler GetAllNewsItemsCompleted;
+        
+        /// <remarks/>
         public event SubmitTaskUpdateCompletedEventHandler SubmitTaskUpdateCompleted;
         
         /// <remarks/>
@@ -99,6 +102,33 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         
         /// <remarks/>
         public event GetAllTaskUpdateDetailsCompletedEventHandler GetAllTaskUpdateDetailsCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetAllNewsItems", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public TaskOfListOfNewsItem GetAllNewsItems() {
+            object[] results = this.Invoke("GetAllNewsItems", new object[0]);
+            return ((TaskOfListOfNewsItem)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllNewsItemsAsync() {
+            this.GetAllNewsItemsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllNewsItemsAsync(object userState) {
+            if ((this.GetAllNewsItemsOperationCompleted == null)) {
+                this.GetAllNewsItemsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllNewsItemsOperationCompleted);
+            }
+            this.InvokeAsync("GetAllNewsItems", new object[0], this.GetAllNewsItemsOperationCompleted, userState);
+        }
+        
+        private void OnGetAllNewsItemsOperationCompleted(object arg) {
+            if ((this.GetAllNewsItemsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllNewsItemsCompleted(this, new GetAllNewsItemsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/SubmitTaskUpdate", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -303,137 +333,17 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class TaskUpdate {
+    public partial class TaskOfListOfNewsItem : Task {
         
-        private System.Guid updateIDField;
-        
-        private System.Guid taskIDField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private string commandNameField;
-        
-        private object dataField;
-        
-        private bool processedLocallyField;
-        
-        private bool uploadedSuccessfullyField;
-        
-        private System.Guid machineIDField;
-        
-        private string objectTypeField;
-        
-        private string dataEncField;
-        
-        private string sourceField;
+        private NewsItem[] resultField;
         
         /// <remarks/>
-        public System.Guid UpdateID {
+        public NewsItem[] Result {
             get {
-                return this.updateIDField;
+                return this.resultField;
             }
             set {
-                this.updateIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CommandName {
-            get {
-                return this.commandNameField;
-            }
-            set {
-                this.commandNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public object Data {
-            get {
-                return this.dataField;
-            }
-            set {
-                this.dataField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool ProcessedLocally {
-            get {
-                return this.processedLocallyField;
-            }
-            set {
-                this.processedLocallyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool UploadedSuccessfully {
-            get {
-                return this.uploadedSuccessfullyField;
-            }
-            set {
-                this.uploadedSuccessfullyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid MachineID {
-            get {
-                return this.machineIDField;
-            }
-            set {
-                this.machineIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ObjectType {
-            get {
-                return this.objectTypeField;
-            }
-            set {
-                this.objectTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string DataEnc {
-            get {
-                return this.dataEncField;
-            }
-            set {
-                this.dataEncField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Source {
-            get {
-                return this.sourceField;
-            }
-            set {
-                this.sourceField = value;
+                this.resultField = value;
             }
         }
     }
@@ -444,105 +354,41 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class TaskBasics {
+    public partial class NewsItem {
         
-        private System.Guid taskIDField;
+        private System.Guid idField;
         
-        private string taskNameField;
-        
-        private string taskNumberField;
-        
-        private string agencyFileNumberField;
-        
-        private string iCPCallSignField;
-        
-        private string subjectCategoryField;
-        
-        private double subjectVisibilityField;
-        
-        private double generalRangeOfDetectionField;
+        private System.DateTime newsDateField;
         
         private System.DateTime lastUpdatedUTCField;
         
-        private string incidentTitleImageBytesField;
+        private string newsTitleField;
+        
+        private string newsTextField;
+        
+        private string newsUrlField;
+        
+        private bool readLocallyField;
+        
+        private bool activeField;
         
         /// <remarks/>
-        public System.Guid TaskID {
+        public System.Guid ID {
             get {
-                return this.taskIDField;
+                return this.idField;
             }
             set {
-                this.taskIDField = value;
+                this.idField = value;
             }
         }
         
         /// <remarks/>
-        public string TaskName {
+        public System.DateTime NewsDate {
             get {
-                return this.taskNameField;
+                return this.newsDateField;
             }
             set {
-                this.taskNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TaskNumber {
-            get {
-                return this.taskNumberField;
-            }
-            set {
-                this.taskNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string AgencyFileNumber {
-            get {
-                return this.agencyFileNumberField;
-            }
-            set {
-                this.agencyFileNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ICPCallSign {
-            get {
-                return this.iCPCallSignField;
-            }
-            set {
-                this.iCPCallSignField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SubjectCategory {
-            get {
-                return this.subjectCategoryField;
-            }
-            set {
-                this.subjectCategoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double SubjectVisibility {
-            get {
-                return this.subjectVisibilityField;
-            }
-            set {
-                this.subjectVisibilityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double GeneralRangeOfDetection {
-            get {
-                return this.generalRangeOfDetectionField;
-            }
-            set {
-                this.generalRangeOfDetectionField = value;
+                this.newsDateField = value;
             }
         }
         
@@ -557,12 +403,52 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public string IncidentTitleImageBytes {
+        public string NewsTitle {
             get {
-                return this.incidentTitleImageBytesField;
+                return this.newsTitleField;
             }
             set {
-                this.incidentTitleImageBytesField = value;
+                this.newsTitleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string NewsText {
+            get {
+                return this.newsTextField;
+            }
+            set {
+                this.newsTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string NewsUrl {
+            get {
+                return this.newsUrlField;
+            }
+            set {
+                this.newsUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool ReadLocally {
+            get {
+                return this.readLocallyField;
+            }
+            set {
+                this.readLocallyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Active {
+            get {
+                return this.activeField;
+            }
+            set {
+                this.activeField = value;
             }
         }
     }
@@ -684,6 +570,8 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         
         private int intValueField;
         
+        private decimal decimalValueField;
+        
         private bool useForVisitorField;
         
         private bool useForPersonnelField;
@@ -701,6 +589,8 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         private bool useForEquipmentField;
         
         private bool useForOperatorField;
+        
+        private bool useForAircraftField;
         
         /// <remarks/>
         public System.Guid ID {
@@ -779,6 +669,16 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
             }
             set {
                 this.intValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal DecimalValue {
+            get {
+                return this.decimalValueField;
+            }
+            set {
+                this.decimalValueField = value;
             }
         }
         
@@ -871,310 +771,14 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
                 this.useForOperatorField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class CheckInRecord {
-        
-        private System.DateTime checkInDateField;
-        
-        private System.DateTime checkOutDateField;
-        
-        private System.Guid signInRecordIDField;
-        
-        private System.Guid parentRecordIDField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private System.DateTime lastDayOnIncidentField;
-        
-        private int personalIncidentNumberField;
-        
-        private System.Guid resourceIDField;
-        
-        private string resourceNameField;
-        
-        private CheckInInfoField[] infoFieldsField;
-        
-        private bool activeField;
-        
-        private int opPeriodField;
-        
-        private string resourceTypeField;
-        
-        private System.DateTime lastDayOfRestField;
-        
-        private string initialRoleNameField;
-        
-        private string initialRoleAcronymField;
         
         /// <remarks/>
-        public System.DateTime CheckInDate {
+        public bool UseForAircraft {
             get {
-                return this.checkInDateField;
+                return this.useForAircraftField;
             }
             set {
-                this.checkInDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime CheckOutDate {
-            get {
-                return this.checkOutDateField;
-            }
-            set {
-                this.checkOutDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid SignInRecordID {
-            get {
-                return this.signInRecordIDField;
-            }
-            set {
-                this.signInRecordIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ParentRecordID {
-            get {
-                return this.parentRecordIDField;
-            }
-            set {
-                this.parentRecordIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastDayOnIncident {
-            get {
-                return this.lastDayOnIncidentField;
-            }
-            set {
-                this.lastDayOnIncidentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int PersonalIncidentNumber {
-            get {
-                return this.personalIncidentNumberField;
-            }
-            set {
-                this.personalIncidentNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ResourceID {
-            get {
-                return this.resourceIDField;
-            }
-            set {
-                this.resourceIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ResourceName {
-            get {
-                return this.resourceNameField;
-            }
-            set {
-                this.resourceNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public CheckInInfoField[] InfoFields {
-            get {
-                return this.infoFieldsField;
-            }
-            set {
-                this.infoFieldsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ResourceType {
-            get {
-                return this.resourceTypeField;
-            }
-            set {
-                this.resourceTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastDayOfRest {
-            get {
-                return this.lastDayOfRestField;
-            }
-            set {
-                this.lastDayOfRestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string InitialRoleName {
-            get {
-                return this.initialRoleNameField;
-            }
-            set {
-                this.initialRoleNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string InitialRoleAcronym {
-            get {
-                return this.initialRoleAcronymField;
-            }
-            set {
-                this.initialRoleAcronymField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class OperationalPeriod {
-        
-        private int periodNumberField;
-        
-        private System.DateTime periodStartField;
-        
-        private System.DateTime periodEndField;
-        
-        private System.Guid taskIDField;
-        
-        private System.Guid operationalPeriodIDField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private string titleImageBytesField;
-        
-        private string criticalMessageField;
-        
-        /// <remarks/>
-        public int PeriodNumber {
-            get {
-                return this.periodNumberField;
-            }
-            set {
-                this.periodNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime PeriodStart {
-            get {
-                return this.periodStartField;
-            }
-            set {
-                this.periodStartField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime PeriodEnd {
-            get {
-                return this.periodEndField;
-            }
-            set {
-                this.periodEndField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OperationalPeriodID {
-            get {
-                return this.operationalPeriodIDField;
-            }
-            set {
-                this.operationalPeriodIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TitleImageBytes {
-            get {
-                return this.titleImageBytesField;
-            }
-            set {
-                this.titleImageBytesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CriticalMessage {
-            get {
-                return this.criticalMessageField;
-            }
-            set {
-                this.criticalMessageField = value;
+                this.useForAircraftField = value;
             }
         }
     }
@@ -1208,564 +812,6 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
             }
             set {
                 this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class DemobilizationRecord {
-        
-        private System.Guid idField;
-        
-        private System.Guid signInRecordIDField;
-        
-        private System.Guid resourceIDField;
-        
-        private System.DateTime demobDateField;
-        
-        private string demobLocationField;
-        
-        private System.DateTime debriefDateField;
-        
-        private string debriefLocationField;
-        
-        private bool inventoryReconciledField;
-        
-        private bool discrepanciesWithSupplyField;
-        
-        private bool discrepanciesWithFacilitiesField;
-        
-        private bool discrepanciesWithFinanceField;
-        
-        private bool iCS211CompletedField;
-        
-        private string travelTimeToHomeUnitField;
-        
-        private bool activeField;
-        
-        private int opPeriodField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private bool performanceRatingCompletedField;
-        
-        /// <remarks/>
-        public System.Guid ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid SignInRecordID {
-            get {
-                return this.signInRecordIDField;
-            }
-            set {
-                this.signInRecordIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ResourceID {
-            get {
-                return this.resourceIDField;
-            }
-            set {
-                this.resourceIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DemobDate {
-            get {
-                return this.demobDateField;
-            }
-            set {
-                this.demobDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string DemobLocation {
-            get {
-                return this.demobLocationField;
-            }
-            set {
-                this.demobLocationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DebriefDate {
-            get {
-                return this.debriefDateField;
-            }
-            set {
-                this.debriefDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string DebriefLocation {
-            get {
-                return this.debriefLocationField;
-            }
-            set {
-                this.debriefLocationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool InventoryReconciled {
-            get {
-                return this.inventoryReconciledField;
-            }
-            set {
-                this.inventoryReconciledField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool DiscrepanciesWithSupply {
-            get {
-                return this.discrepanciesWithSupplyField;
-            }
-            set {
-                this.discrepanciesWithSupplyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool DiscrepanciesWithFacilities {
-            get {
-                return this.discrepanciesWithFacilitiesField;
-            }
-            set {
-                this.discrepanciesWithFacilitiesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool DiscrepanciesWithFinance {
-            get {
-                return this.discrepanciesWithFinanceField;
-            }
-            set {
-                this.discrepanciesWithFinanceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool ICS211Completed {
-            get {
-                return this.iCS211CompletedField;
-            }
-            set {
-                this.iCS211CompletedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TravelTimeToHomeUnit {
-            get {
-                return this.travelTimeToHomeUnitField;
-            }
-            set {
-                this.travelTimeToHomeUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool PerformanceRatingCompleted {
-            get {
-                return this.performanceRatingCompletedField;
-            }
-            set {
-                this.performanceRatingCompletedField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class TeamAssignment {
-        
-        private System.Guid idField;
-        
-        private string resourceNameField;
-        
-        private string leaderNameField;
-        
-        private System.Guid leaderPersonIDField;
-        
-        private int numberOfPersonsField;
-        
-        private System.Guid[] assignedMemberIDsField;
-        
-        private string contactField;
-        
-        private string reportingLocationField;
-        
-        private string specialEquipmentField;
-        
-        private string remarksField;
-        
-        private string tacticalAssignmentField;
-        
-        private string specialInstructionsField;
-        
-        private System.Guid reportsToRoleIDField;
-        
-        private int resourceIDNumberField;
-        
-        private System.Guid[] commsPlanItemIDsField;
-        
-        private TeamStatus currentStatusField;
-        
-        private System.Guid[] assignedToolIDsField;
-        
-        private string assignmentTypeField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private int opPeriodField;
-        
-        private string briefSummaryField;
-        
-        private bool activeField;
-        
-        private System.Guid incidentIDField;
-        
-        private System.Guid preparedByRoleIDField;
-        
-        private string preparedByRoleNameField;
-        
-        private string preparedByIndividualNameField;
-        
-        private string branchNameField;
-        
-        private string divisionNameField;
-        
-        /// <remarks/>
-        public System.Guid ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ResourceName {
-            get {
-                return this.resourceNameField;
-            }
-            set {
-                this.resourceNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LeaderName {
-            get {
-                return this.leaderNameField;
-            }
-            set {
-                this.leaderNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid LeaderPersonID {
-            get {
-                return this.leaderPersonIDField;
-            }
-            set {
-                this.leaderPersonIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int NumberOfPersons {
-            get {
-                return this.numberOfPersonsField;
-            }
-            set {
-                this.numberOfPersonsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid[] AssignedMemberIDs {
-            get {
-                return this.assignedMemberIDsField;
-            }
-            set {
-                this.assignedMemberIDsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Contact {
-            get {
-                return this.contactField;
-            }
-            set {
-                this.contactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ReportingLocation {
-            get {
-                return this.reportingLocationField;
-            }
-            set {
-                this.reportingLocationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SpecialEquipment {
-            get {
-                return this.specialEquipmentField;
-            }
-            set {
-                this.specialEquipmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Remarks {
-            get {
-                return this.remarksField;
-            }
-            set {
-                this.remarksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TacticalAssignment {
-            get {
-                return this.tacticalAssignmentField;
-            }
-            set {
-                this.tacticalAssignmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SpecialInstructions {
-            get {
-                return this.specialInstructionsField;
-            }
-            set {
-                this.specialInstructionsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ReportsToRoleID {
-            get {
-                return this.reportsToRoleIDField;
-            }
-            set {
-                this.reportsToRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int ResourceIDNumber {
-            get {
-                return this.resourceIDNumberField;
-            }
-            set {
-                this.resourceIDNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid[] CommsPlanItemIDs {
-            get {
-                return this.commsPlanItemIDsField;
-            }
-            set {
-                this.commsPlanItemIDsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public TeamStatus currentStatus {
-            get {
-                return this.currentStatusField;
-            }
-            set {
-                this.currentStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid[] AssignedToolIDs {
-            get {
-                return this.assignedToolIDsField;
-            }
-            set {
-                this.assignedToolIDsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string AssignmentType {
-            get {
-                return this.assignmentTypeField;
-            }
-            set {
-                this.assignmentTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string BriefSummary {
-            get {
-                return this.briefSummaryField;
-            }
-            set {
-                this.briefSummaryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid IncidentID {
-            get {
-                return this.incidentIDField;
-            }
-            set {
-                this.incidentIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid PreparedByRoleID {
-            get {
-                return this.preparedByRoleIDField;
-            }
-            set {
-                this.preparedByRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByRoleName {
-            get {
-                return this.preparedByRoleNameField;
-            }
-            set {
-                this.preparedByRoleNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByIndividualName {
-            get {
-                return this.preparedByIndividualNameField;
-            }
-            set {
-                this.preparedByIndividualNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string BranchName {
-            get {
-                return this.branchNameField;
-            }
-            set {
-                this.branchNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string DivisionName {
-            get {
-                return this.divisionNameField;
-            }
-            set {
-                this.divisionNameField = value;
             }
         }
     }
@@ -1811,978 +857,6 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
             }
             set {
                 this.activeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Coordinate {
-        
-        private string labelField;
-        
-        private string cardinalLabelField;
-        
-        private double latitudeField;
-        
-        private double longitudeField;
-        
-        /// <remarks/>
-        public string Label {
-            get {
-                return this.labelField;
-            }
-            set {
-                this.labelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CardinalLabel {
-            get {
-                return this.cardinalLabelField;
-            }
-            set {
-                this.cardinalLabelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double Latitude {
-            get {
-                return this.latitudeField;
-            }
-            set {
-                this.latitudeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double Longitude {
-            get {
-                return this.longitudeField;
-            }
-            set {
-                this.longitudeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class NOTAM {
-        
-        private System.Guid idField;
-        
-        private bool useRadiusField;
-        
-        private decimal radiusNMField;
-        
-        private decimal altitudeASLField;
-        
-        private string centerPointField;
-        
-        private Coordinate radiusCentreField;
-        
-        private Coordinate polygonNEField;
-        
-        private Coordinate polygonNWField;
-        
-        private Coordinate polygonSEField;
-        
-        private Coordinate polygonSWField;
-        
-        /// <remarks/>
-        public System.Guid ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool UseRadius {
-            get {
-                return this.useRadiusField;
-            }
-            set {
-                this.useRadiusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal RadiusNM {
-            get {
-                return this.radiusNMField;
-            }
-            set {
-                this.radiusNMField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal AltitudeASL {
-            get {
-                return this.altitudeASLField;
-            }
-            set {
-                this.altitudeASLField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CenterPoint {
-            get {
-                return this.centerPointField;
-            }
-            set {
-                this.centerPointField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Coordinate RadiusCentre {
-            get {
-                return this.radiusCentreField;
-            }
-            set {
-                this.radiusCentreField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Coordinate PolygonNE {
-            get {
-                return this.polygonNEField;
-            }
-            set {
-                this.polygonNEField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Coordinate PolygonNW {
-            get {
-                return this.polygonNWField;
-            }
-            set {
-                this.polygonNWField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Coordinate PolygonSE {
-            get {
-                return this.polygonSEField;
-            }
-            set {
-                this.polygonSEField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Coordinate PolygonSW {
-            get {
-                return this.polygonSWField;
-            }
-            set {
-                this.polygonSWField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class AirOperationsSummary {
-        
-        private System.Guid idField;
-        
-        private string remarksField;
-        
-        private System.DateTime sunriseField;
-        
-        private System.DateTime sunsetField;
-        
-        private string medivacAircraftTextField;
-        
-        private NOTAM notamField;
-        
-        private Aircraft[] aircraftsField;
-        
-        private Aircraft[] activeAircraftField;
-        
-        private Aircraft[] medivacAircraftListField;
-        
-        private string preparedByNameField;
-        
-        private string preparedByPositionField;
-        
-        private System.Guid preparedByPositionIDField;
-        
-        private bool activeField;
-        
-        private int opPeriodField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        /// <remarks/>
-        public System.Guid ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Remarks {
-            get {
-                return this.remarksField;
-            }
-            set {
-                this.remarksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime Sunrise {
-            get {
-                return this.sunriseField;
-            }
-            set {
-                this.sunriseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime Sunset {
-            get {
-                return this.sunsetField;
-            }
-            set {
-                this.sunsetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string MedivacAircraftText {
-            get {
-                return this.medivacAircraftTextField;
-            }
-            set {
-                this.medivacAircraftTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public NOTAM notam {
-            get {
-                return this.notamField;
-            }
-            set {
-                this.notamField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Aircraft[] aircrafts {
-            get {
-                return this.aircraftsField;
-            }
-            set {
-                this.aircraftsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Aircraft[] activeAircraft {
-            get {
-                return this.activeAircraftField;
-            }
-            set {
-                this.activeAircraftField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Aircraft[] medivacAircraftList {
-            get {
-                return this.medivacAircraftListField;
-            }
-            set {
-                this.medivacAircraftListField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByName {
-            get {
-                return this.preparedByNameField;
-            }
-            set {
-                this.preparedByNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByPosition {
-            get {
-                return this.preparedByPositionField;
-            }
-            set {
-                this.preparedByPositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid PreparedByPositionID {
-            get {
-                return this.preparedByPositionIDField;
-            }
-            set {
-                this.preparedByPositionIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Aircraft : IncidentResource {
-        
-        private string registrationField;
-        
-        private string makeModelField;
-        
-        private string baseField;
-        
-        private System.DateTime startTimeField;
-        
-        private System.DateTime endTimeField;
-        
-        private string remarksField;
-        
-        private string pilotField;
-        
-        private string contactNumberField;
-        
-        private bool isMedivacField;
-        
-        /// <remarks/>
-        public string Registration {
-            get {
-                return this.registrationField;
-            }
-            set {
-                this.registrationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string MakeModel {
-            get {
-                return this.makeModelField;
-            }
-            set {
-                this.makeModelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Base {
-            get {
-                return this.baseField;
-            }
-            set {
-                this.baseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime StartTime {
-            get {
-                return this.startTimeField;
-            }
-            set {
-                this.startTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime EndTime {
-            get {
-                return this.endTimeField;
-            }
-            set {
-                this.endTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Remarks {
-            get {
-                return this.remarksField;
-            }
-            set {
-                this.remarksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Pilot {
-            get {
-                return this.pilotField;
-            }
-            set {
-                this.pilotField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ContactNumber {
-            get {
-                return this.contactNumberField;
-            }
-            set {
-                this.contactNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsMedivac {
-            get {
-                return this.isMedivacField;
-            }
-            set {
-                this.isMedivacField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Personnel))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Vehicle))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Aircraft))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OperationalGroup))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OperationalGroupResourceListing))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OperationalSubGroup))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class IncidentResource {
-        
-        private System.Guid idField;
-        
-        private bool activeField;
-        
-        private int opPeriodField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private string resourceNameField;
-        
-        private string kindField;
-        
-        private string typeField;
-        
-        private string resourceIdentifierField;
-        
-        private int numberOfPeopleField;
-        
-        private int numberOfVehiclesField;
-        
-        private string leaderNameField;
-        
-        private string contactField;
-        
-        private int uniqueIDNumField;
-        
-        private string resourceTypeField;
-        
-        private System.Guid parentResourceIDField;
-        
-        /// <remarks/>
-        public System.Guid ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ResourceName {
-            get {
-                return this.resourceNameField;
-            }
-            set {
-                this.resourceNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Kind {
-            get {
-                return this.kindField;
-            }
-            set {
-                this.kindField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ResourceIdentifier {
-            get {
-                return this.resourceIdentifierField;
-            }
-            set {
-                this.resourceIdentifierField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int NumberOfPeople {
-            get {
-                return this.numberOfPeopleField;
-            }
-            set {
-                this.numberOfPeopleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int NumberOfVehicles {
-            get {
-                return this.numberOfVehiclesField;
-            }
-            set {
-                this.numberOfVehiclesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LeaderName {
-            get {
-                return this.leaderNameField;
-            }
-            set {
-                this.leaderNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Contact {
-            get {
-                return this.contactField;
-            }
-            set {
-                this.contactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int UniqueIDNum {
-            get {
-                return this.uniqueIDNumField;
-            }
-            set {
-                this.uniqueIDNumField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ResourceType {
-            get {
-                return this.resourceTypeField;
-            }
-            set {
-                this.resourceTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ParentResourceID {
-            get {
-                return this.parentResourceIDField;
-            }
-            set {
-                this.parentResourceIDField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Personnel : IncidentResource {
-        
-        private string firstNameField;
-        
-        private string lastNameField;
-        
-        private string middleInitialField;
-        
-        private string genderField;
-        
-        private bool hasDietaryRestrictionsField;
-        
-        private bool hasAllergiesField;
-        
-        private string weightField;
-        
-        private string cellphoneNumberField;
-        
-        private string emailField;
-        
-        private string homeUnitField;
-        
-        private System.Guid homeProvinceIDField;
-        
-        private string homeCountryField;
-        
-        private string emergencyContactField;
-        
-        private string agencyField;
-        
-        private bool isContractorField;
-        
-        private string callSignField;
-        
-        private string pronounsField;
-        
-        private string accomodationPreferenceField;
-        
-        private int pNumField;
-        
-        private System.Guid personIDField;
-        
-        private string nameField;
-        
-        private bool memberActiveField;
-        
-        private MemberStatus currentStatusField;
-        
-        /// <remarks/>
-        public string FirstName {
-            get {
-                return this.firstNameField;
-            }
-            set {
-                this.firstNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LastName {
-            get {
-                return this.lastNameField;
-            }
-            set {
-                this.lastNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string MiddleInitial {
-            get {
-                return this.middleInitialField;
-            }
-            set {
-                this.middleInitialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Gender {
-            get {
-                return this.genderField;
-            }
-            set {
-                this.genderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool HasDietaryRestrictions {
-            get {
-                return this.hasDietaryRestrictionsField;
-            }
-            set {
-                this.hasDietaryRestrictionsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool HasAllergies {
-            get {
-                return this.hasAllergiesField;
-            }
-            set {
-                this.hasAllergiesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Weight {
-            get {
-                return this.weightField;
-            }
-            set {
-                this.weightField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CellphoneNumber {
-            get {
-                return this.cellphoneNumberField;
-            }
-            set {
-                this.cellphoneNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string HomeUnit {
-            get {
-                return this.homeUnitField;
-            }
-            set {
-                this.homeUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid HomeProvinceID {
-            get {
-                return this.homeProvinceIDField;
-            }
-            set {
-                this.homeProvinceIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string HomeCountry {
-            get {
-                return this.homeCountryField;
-            }
-            set {
-                this.homeCountryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string EmergencyContact {
-            get {
-                return this.emergencyContactField;
-            }
-            set {
-                this.emergencyContactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Agency {
-            get {
-                return this.agencyField;
-            }
-            set {
-                this.agencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsContractor {
-            get {
-                return this.isContractorField;
-            }
-            set {
-                this.isContractorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CallSign {
-            get {
-                return this.callSignField;
-            }
-            set {
-                this.callSignField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Pronouns {
-            get {
-                return this.pronounsField;
-            }
-            set {
-                this.pronounsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string AccomodationPreference {
-            get {
-                return this.accomodationPreferenceField;
-            }
-            set {
-                this.accomodationPreferenceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int PNum {
-            get {
-                return this.pNumField;
-            }
-            set {
-                this.pNumField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid PersonID {
-            get {
-                return this.personIDField;
-            }
-            set {
-                this.personIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool MemberActive {
-            get {
-                return this.memberActiveField;
-            }
-            set {
-                this.memberActiveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public MemberStatus CurrentStatus {
-            get {
-                return this.currentStatusField;
-            }
-            set {
-                this.currentStatusField = value;
             }
         }
     }
@@ -3018,2802 +1092,33 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Vehicle : IncidentResource {
+    public partial class Coordinate {
         
-        private System.Guid taskIDField;
+        private string labelField;
         
-        private string orderRequestNoField;
-        
-        private string incidentIDNoField;
-        
-        private string classificationField;
-        
-        private string makeField;
-        
-        private string categoryKindCapacityField;
-        
-        private string featuresField;
-        
-        private string agencyOrOwnerField;
-        
-        private string operatorNameField;
-        
-        private System.Guid operatorIDField;
-        
-        private string licenseOrIDField;
-        
-        private string incidentAssignmentField;
-        
-        private System.DateTime startTimeField;
-        
-        private System.DateTime mustBeOutTimeField;
-        
-        private string notesField;
-        
-        private string aSEField;
-        
-        private bool isEquipmentField;
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string OrderRequestNo {
-            get {
-                return this.orderRequestNoField;
-            }
-            set {
-                this.orderRequestNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IncidentIDNo {
-            get {
-                return this.incidentIDNoField;
-            }
-            set {
-                this.incidentIDNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Classification {
-            get {
-                return this.classificationField;
-            }
-            set {
-                this.classificationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Make {
-            get {
-                return this.makeField;
-            }
-            set {
-                this.makeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CategoryKindCapacity {
-            get {
-                return this.categoryKindCapacityField;
-            }
-            set {
-                this.categoryKindCapacityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Features {
-            get {
-                return this.featuresField;
-            }
-            set {
-                this.featuresField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string AgencyOrOwner {
-            get {
-                return this.agencyOrOwnerField;
-            }
-            set {
-                this.agencyOrOwnerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string OperatorName {
-            get {
-                return this.operatorNameField;
-            }
-            set {
-                this.operatorNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OperatorID {
-            get {
-                return this.operatorIDField;
-            }
-            set {
-                this.operatorIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LicenseOrID {
-            get {
-                return this.licenseOrIDField;
-            }
-            set {
-                this.licenseOrIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IncidentAssignment {
-            get {
-                return this.incidentAssignmentField;
-            }
-            set {
-                this.incidentAssignmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime StartTime {
-            get {
-                return this.startTimeField;
-            }
-            set {
-                this.startTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime MustBeOutTime {
-            get {
-                return this.mustBeOutTimeField;
-            }
-            set {
-                this.mustBeOutTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Notes {
-            get {
-                return this.notesField;
-            }
-            set {
-                this.notesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ASE {
-            get {
-                return this.aSEField;
-            }
-            set {
-                this.aSEField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsEquipment {
-            get {
-                return this.isEquipmentField;
-            }
-            set {
-                this.isEquipmentField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class OperationalGroup : IncidentResource {
-        
-        private string resourceIDField;
-        
-        private string nameField;
-        
-        private System.Guid parentIDField;
-        
-        private string parentNameField;
-        
-        private string groupTypeField;
-        
-        private System.Guid leaderICSRoleIDField;
-        
-        private string leaderICSRoleNameField;
-        
-        private System.Guid leaderIDField;
-        
-        private string preparedByNameField;
-        
-        private string preparedByPositionField;
-        
-        private System.Guid preparedByPositionIDField;
-        
-        private System.Guid[] commsPlanItemIDsField;
-        
-        private string shortRemarksField;
-        
-        private string tacticalAssignmentField;
-        
-        private string specialInstructionsField;
-        
-        private string commentsField;
-        
-        private int depthField;
-        
-        private int spanOfControlField;
-        
-        private OperationalGroupResourceListing[] resourceListingField;
-        
-        private OperationalGroupResourceListing[] activeResourceListingField;
-        
-        /// <remarks/>
-        public string ResourceID {
-            get {
-                return this.resourceIDField;
-            }
-            set {
-                this.resourceIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ParentID {
-            get {
-                return this.parentIDField;
-            }
-            set {
-                this.parentIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ParentName {
-            get {
-                return this.parentNameField;
-            }
-            set {
-                this.parentNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string GroupType {
-            get {
-                return this.groupTypeField;
-            }
-            set {
-                this.groupTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid LeaderICSRoleID {
-            get {
-                return this.leaderICSRoleIDField;
-            }
-            set {
-                this.leaderICSRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LeaderICSRoleName {
-            get {
-                return this.leaderICSRoleNameField;
-            }
-            set {
-                this.leaderICSRoleNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid LeaderID {
-            get {
-                return this.leaderIDField;
-            }
-            set {
-                this.leaderIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByName {
-            get {
-                return this.preparedByNameField;
-            }
-            set {
-                this.preparedByNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByPosition {
-            get {
-                return this.preparedByPositionField;
-            }
-            set {
-                this.preparedByPositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid PreparedByPositionID {
-            get {
-                return this.preparedByPositionIDField;
-            }
-            set {
-                this.preparedByPositionIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid[] CommsPlanItemIDs {
-            get {
-                return this.commsPlanItemIDsField;
-            }
-            set {
-                this.commsPlanItemIDsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShortRemarks {
-            get {
-                return this.shortRemarksField;
-            }
-            set {
-                this.shortRemarksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TacticalAssignment {
-            get {
-                return this.tacticalAssignmentField;
-            }
-            set {
-                this.tacticalAssignmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SpecialInstructions {
-            get {
-                return this.specialInstructionsField;
-            }
-            set {
-                this.specialInstructionsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Comments {
-            get {
-                return this.commentsField;
-            }
-            set {
-                this.commentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int Depth {
-            get {
-                return this.depthField;
-            }
-            set {
-                this.depthField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int SpanOfControl {
-            get {
-                return this.spanOfControlField;
-            }
-            set {
-                this.spanOfControlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public OperationalGroupResourceListing[] ResourceListing {
-            get {
-                return this.resourceListingField;
-            }
-            set {
-                this.resourceListingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public OperationalGroupResourceListing[] ActiveResourceListing {
-            get {
-                return this.activeResourceListingField;
-            }
-            set {
-                this.activeResourceListingField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class OperationalGroupResourceListing : IncidentResource {
-        
-        private System.Guid subGroupIDField;
-        
-        private System.Guid operationalGroupIDField;
-        
-        private System.Guid resourceIDField;
-        
-        private string roleField;
-        
-        /// <remarks/>
-        public System.Guid SubGroupID {
-            get {
-                return this.subGroupIDField;
-            }
-            set {
-                this.subGroupIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OperationalGroupID {
-            get {
-                return this.operationalGroupIDField;
-            }
-            set {
-                this.operationalGroupIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ResourceID {
-            get {
-                return this.resourceIDField;
-            }
-            set {
-                this.resourceIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Role {
-            get {
-                return this.roleField;
-            }
-            set {
-                this.roleField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class OperationalSubGroup : IncidentResource {
-        
-        private System.Guid operationalGroupIDField;
-        
-        private System.Guid leaderIDField;
-        
-        private string transportField;
-        
-        private string emailField;
-        
-        private string phoneField;
-        
-        private OperationalGroupResourceListing[] resourceListingField;
-        
-        private OperationalGroupResourceListing[] activeResourceListingField;
-        
-        private bool isEquipmentCrewField;
-        
-        /// <remarks/>
-        public System.Guid OperationalGroupID {
-            get {
-                return this.operationalGroupIDField;
-            }
-            set {
-                this.operationalGroupIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid LeaderID {
-            get {
-                return this.leaderIDField;
-            }
-            set {
-                this.leaderIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Transport {
-            get {
-                return this.transportField;
-            }
-            set {
-                this.transportField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Phone {
-            get {
-                return this.phoneField;
-            }
-            set {
-                this.phoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public OperationalGroupResourceListing[] ResourceListing {
-            get {
-                return this.resourceListingField;
-            }
-            set {
-                this.resourceListingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public OperationalGroupResourceListing[] ActiveResourceListing {
-            get {
-                return this.activeResourceListingField;
-            }
-            set {
-                this.activeResourceListingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsEquipmentCrew {
-            get {
-                return this.isEquipmentCrewField;
-            }
-            set {
-                this.isEquipmentCrewField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class PositionLogEntry {
-        
-        private System.Guid logIDField;
-        
-        private int opPeriodField;
-        
-        private ICSRole roleField;
-        
-        private System.DateTime dateCreatedField;
-        
-        private System.DateTime dateUpdatedField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private bool isCompleteField;
-        
-        private System.DateTime reminderTimeField;
-        
-        private System.DateTime timeDueField;
-        
-        private string logTextField;
-        
-        private bool isInfoOnlyField;
-        
-        private string[] logHistoryField;
-        
-        private string copyNextOpTextField;
-        
-        /// <remarks/>
-        public System.Guid LogID {
-            get {
-                return this.logIDField;
-            }
-            set {
-                this.logIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public ICSRole Role {
-            get {
-                return this.roleField;
-            }
-            set {
-                this.roleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateCreated {
-            get {
-                return this.dateCreatedField;
-            }
-            set {
-                this.dateCreatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateUpdated {
-            get {
-                return this.dateUpdatedField;
-            }
-            set {
-                this.dateUpdatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsComplete {
-            get {
-                return this.isCompleteField;
-            }
-            set {
-                this.isCompleteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime ReminderTime {
-            get {
-                return this.reminderTimeField;
-            }
-            set {
-                this.reminderTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime TimeDue {
-            get {
-                return this.timeDueField;
-            }
-            set {
-                this.timeDueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LogText {
-            get {
-                return this.logTextField;
-            }
-            set {
-                this.logTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsInfoOnly {
-            get {
-                return this.isInfoOnlyField;
-            }
-            set {
-                this.isInfoOnlyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] LogHistory {
-            get {
-                return this.logHistoryField;
-            }
-            set {
-                this.logHistoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CopyNextOpText {
-            get {
-                return this.copyNextOpTextField;
-            }
-            set {
-                this.copyNextOpTextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class ICSRole {
-        
-        private System.Guid roleIDField;
-        
-        private string roleNameField;
-        
-        private System.Guid sectionIDField;
-        
-        private System.Guid reportsToField;
-        
-        private string pDFFieldNameField;
-        
-        private string pDFTitleNameField;
-        
-        private string individualNameField;
-        
-        private System.Guid individualIDField;
-        
-        private System.Guid organizationalChartIDField;
-        
-        private System.Guid orgChartRoleIDField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private string reportsToRoleNameField;
-        
-        private int manualSortOrderField;
-        
-        private bool includeReportsToInNameField;
-        
-        private string baseRoleNameField;
-        
-        private bool activeField;
-        
-        private bool isPlaceholderField;
-        
-        private Personnel teamMemberField;
-        
-        private int opPeriodField;
-        
-        private int depthField;
-        
-        private string roleDescriptionField;
-        
-        private string mnemonicField;
-        
-        private bool isOpGroupSupField;
-        
-        private System.Guid operationalGroupIDField;
-        
-        /// <remarks/>
-        public System.Guid RoleID {
-            get {
-                return this.roleIDField;
-            }
-            set {
-                this.roleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RoleName {
-            get {
-                return this.roleNameField;
-            }
-            set {
-                this.roleNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid SectionID {
-            get {
-                return this.sectionIDField;
-            }
-            set {
-                this.sectionIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ReportsTo {
-            get {
-                return this.reportsToField;
-            }
-            set {
-                this.reportsToField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PDFFieldName {
-            get {
-                return this.pDFFieldNameField;
-            }
-            set {
-                this.pDFFieldNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PDFTitleName {
-            get {
-                return this.pDFTitleNameField;
-            }
-            set {
-                this.pDFTitleNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IndividualName {
-            get {
-                return this.individualNameField;
-            }
-            set {
-                this.individualNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid IndividualID {
-            get {
-                return this.individualIDField;
-            }
-            set {
-                this.individualIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OrganizationalChartID {
-            get {
-                return this.organizationalChartIDField;
-            }
-            set {
-                this.organizationalChartIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OrgChartRoleID {
-            get {
-                return this.orgChartRoleIDField;
-            }
-            set {
-                this.orgChartRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ReportsToRoleName {
-            get {
-                return this.reportsToRoleNameField;
-            }
-            set {
-                this.reportsToRoleNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int ManualSortOrder {
-            get {
-                return this.manualSortOrderField;
-            }
-            set {
-                this.manualSortOrderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IncludeReportsToInName {
-            get {
-                return this.includeReportsToInNameField;
-            }
-            set {
-                this.includeReportsToInNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string BaseRoleName {
-            get {
-                return this.baseRoleNameField;
-            }
-            set {
-                this.baseRoleNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsPlaceholder {
-            get {
-                return this.isPlaceholderField;
-            }
-            set {
-                this.isPlaceholderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Personnel teamMember {
-            get {
-                return this.teamMemberField;
-            }
-            set {
-                this.teamMemberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int Depth {
-            get {
-                return this.depthField;
-            }
-            set {
-                this.depthField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RoleDescription {
-            get {
-                return this.roleDescriptionField;
-            }
-            set {
-                this.roleDescriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Mnemonic {
-            get {
-                return this.mnemonicField;
-            }
-            set {
-                this.mnemonicField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsOpGroupSup {
-            get {
-                return this.isOpGroupSupField;
-            }
-            set {
-                this.isOpGroupSupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OperationalGroupID {
-            get {
-                return this.operationalGroupIDField;
-            }
-            set {
-                this.operationalGroupIDField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Note {
-        
-        private System.Guid noteIDField;
-        
-        private System.Guid categoryIDField;
-        
-        private string categoryNameField;
-        
-        private string noteTitleField;
-        
-        private string noteTextField;
-        
-        private System.DateTime dateCreatedField;
-        
-        private System.DateTime dateUpdatedField;
-        
-        private bool activeField;
-        
-        private System.Guid taskIDField;
-        
-        private int opPeriodField;
-        
-        private System.DateTime dateUpdatedUTCField;
-        
-        /// <remarks/>
-        public System.Guid NoteID {
-            get {
-                return this.noteIDField;
-            }
-            set {
-                this.noteIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid CategoryID {
-            get {
-                return this.categoryIDField;
-            }
-            set {
-                this.categoryIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CategoryName {
-            get {
-                return this.categoryNameField;
-            }
-            set {
-                this.categoryNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string NoteTitle {
-            get {
-                return this.noteTitleField;
-            }
-            set {
-                this.noteTitleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string NoteText {
-            get {
-                return this.noteTextField;
-            }
-            set {
-                this.noteTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateCreated {
-            get {
-                return this.dateCreatedField;
-            }
-            set {
-                this.dateCreatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateUpdated {
-            get {
-                return this.dateUpdatedField;
-            }
-            set {
-                this.dateUpdatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateUpdatedUTC {
-            get {
-                return this.dateUpdatedUTCField;
-            }
-            set {
-                this.dateUpdatedUTCField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class TimelineEvent {
-        
-        private System.Guid timelineEventIDField;
-        
-        private System.Guid timelineIDField;
-        
-        private string eventNameField;
-        
-        private string eventTextField;
-        
-        private System.DateTime eventDateTimeField;
-        
-        private bool timeUnsureField;
-        
-        private bool dateUnsureField;
-        
-        private bool subjectEventField;
-        
-        private bool sAREventField;
-        
-        private string eventTypeField;
-        
-        private System.Guid externalIDField;
-        
-        private bool activeField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private bool isAutoField;
-        
-        /// <remarks/>
-        public System.Guid TimelineEventID {
-            get {
-                return this.timelineEventIDField;
-            }
-            set {
-                this.timelineEventIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TimelineID {
-            get {
-                return this.timelineIDField;
-            }
-            set {
-                this.timelineIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string EventName {
-            get {
-                return this.eventNameField;
-            }
-            set {
-                this.eventNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string EventText {
-            get {
-                return this.eventTextField;
-            }
-            set {
-                this.eventTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime EventDateTime {
-            get {
-                return this.eventDateTimeField;
-            }
-            set {
-                this.eventDateTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool TimeUnsure {
-            get {
-                return this.timeUnsureField;
-            }
-            set {
-                this.timeUnsureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool DateUnsure {
-            get {
-                return this.dateUnsureField;
-            }
-            set {
-                this.dateUnsureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool SubjectEvent {
-            get {
-                return this.subjectEventField;
-            }
-            set {
-                this.subjectEventField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool SAREvent {
-            get {
-                return this.sAREventField;
-            }
-            set {
-                this.sAREventField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string EventType {
-            get {
-                return this.eventTypeField;
-            }
-            set {
-                this.eventTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ExternalID {
-            get {
-                return this.externalIDField;
-            }
-            set {
-                this.externalIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsAuto {
-            get {
-                return this.isAutoField;
-            }
-            set {
-                this.isAutoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Timeline {
-        
-        private System.Guid timeLineIDField;
-        
-        private string timelineNameField;
-        
-        private string relatedToSubjectField;
-        
-        private System.DateTime dateCreatedField;
-        
-        private System.DateTime dateUpdatedField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private TimelineEvent[] allTimelineEventsField;
-        
-        /// <remarks/>
-        public System.Guid TimeLineID {
-            get {
-                return this.timeLineIDField;
-            }
-            set {
-                this.timeLineIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TimelineName {
-            get {
-                return this.timelineNameField;
-            }
-            set {
-                this.timelineNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RelatedToSubject {
-            get {
-                return this.relatedToSubjectField;
-            }
-            set {
-                this.relatedToSubjectField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateCreated {
-            get {
-                return this.dateCreatedField;
-            }
-            set {
-                this.dateCreatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateUpdated {
-            get {
-                return this.dateUpdatedField;
-            }
-            set {
-                this.dateUpdatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public TimelineEvent[] AllTimelineEvents {
-            get {
-                return this.allTimelineEventsField;
-            }
-            set {
-                this.allTimelineEventsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class GeneralMessage {
-        
-        private System.Guid messageIDField;
-        
-        private System.Guid taskIDField;
-        
-        private int opPeriodField;
-        
-        private string toNameField;
-        
-        private string toPositionField;
-        
-        private string fromNameField;
-        
-        private string fromPositionField;
-        
-        private System.DateTime dateSentField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private string approvedByNameField;
-        
-        private string approvedByPositionField;
-        
-        private string replyByPositionField;
-        
-        private string replyByNameField;
-        
-        private string subjectField;
-        
-        private string messageField;
-        
-        private string replyField;
-        
-        private bool activeField;
-        
-        private System.DateTime replyDateField;
-        
-        private System.Guid fromRoleIDField;
-        
-        private System.Guid approvedByRoleIDField;
-        
-        /// <remarks/>
-        public System.Guid MessageID {
-            get {
-                return this.messageIDField;
-            }
-            set {
-                this.messageIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ToName {
-            get {
-                return this.toNameField;
-            }
-            set {
-                this.toNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ToPosition {
-            get {
-                return this.toPositionField;
-            }
-            set {
-                this.toPositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FromName {
-            get {
-                return this.fromNameField;
-            }
-            set {
-                this.fromNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FromPosition {
-            get {
-                return this.fromPositionField;
-            }
-            set {
-                this.fromPositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateSent {
-            get {
-                return this.dateSentField;
-            }
-            set {
-                this.dateSentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedByName {
-            get {
-                return this.approvedByNameField;
-            }
-            set {
-                this.approvedByNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedByPosition {
-            get {
-                return this.approvedByPositionField;
-            }
-            set {
-                this.approvedByPositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ReplyByPosition {
-            get {
-                return this.replyByPositionField;
-            }
-            set {
-                this.replyByPositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ReplyByName {
-            get {
-                return this.replyByNameField;
-            }
-            set {
-                this.replyByNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Subject {
-            get {
-                return this.subjectField;
-            }
-            set {
-                this.subjectField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Reply {
-            get {
-                return this.replyField;
-            }
-            set {
-                this.replyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime ReplyDate {
-            get {
-                return this.replyDateField;
-            }
-            set {
-                this.replyDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid FromRoleID {
-            get {
-                return this.fromRoleIDField;
-            }
-            set {
-                this.fromRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ApprovedByRoleID {
-            get {
-                return this.approvedByRoleIDField;
-            }
-            set {
-                this.approvedByRoleIDField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Contact {
-        
-        private System.Guid contactIDField;
-        
-        private string contactNameField;
-        
-        private string titleField;
-        
-        private string organizationField;
-        
-        private string phoneField;
-        
-        private string emailField;
-        
-        private string callsignField;
-        
-        private string radioChannelField;
-        
-        private string notesField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private bool activeField;
-        
-        /// <remarks/>
-        public System.Guid ContactID {
-            get {
-                return this.contactIDField;
-            }
-            set {
-                this.contactIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ContactName {
-            get {
-                return this.contactNameField;
-            }
-            set {
-                this.contactNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Title {
-            get {
-                return this.titleField;
-            }
-            set {
-                this.titleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Organization {
-            get {
-                return this.organizationField;
-            }
-            set {
-                this.organizationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Phone {
-            get {
-                return this.phoneField;
-            }
-            set {
-                this.phoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Callsign {
-            get {
-                return this.callsignField;
-            }
-            set {
-                this.callsignField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RadioChannel {
-            get {
-                return this.radioChannelField;
-            }
-            set {
-                this.radioChannelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Notes {
-            get {
-                return this.notesField;
-            }
-            set {
-                this.notesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class SafetyMessage {
-        
-        private System.Guid idField;
-        
-        private System.Guid taskIDField;
-        
-        private int opPeriodField;
-        
-        private string messageField;
-        
-        private bool sitePlanRequiredField;
-        
-        private string sitePlanLocationField;
-        
-        private string approvedByNameField;
-        
-        private string approvedByRoleNameField;
-        
-        private System.Guid approvedByRoleIDField;
-        
-        private System.Guid safetyTemplateIDField;
-        
-        private string summaryLineField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private bool activeField;
-        
-        private string imageBytesField;
-        
-        private string copyNextOpTextField;
-        
-        /// <remarks/>
-        public System.Guid ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool SitePlanRequired {
-            get {
-                return this.sitePlanRequiredField;
-            }
-            set {
-                this.sitePlanRequiredField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SitePlanLocation {
-            get {
-                return this.sitePlanLocationField;
-            }
-            set {
-                this.sitePlanLocationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedByName {
-            get {
-                return this.approvedByNameField;
-            }
-            set {
-                this.approvedByNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedByRoleName {
-            get {
-                return this.approvedByRoleNameField;
-            }
-            set {
-                this.approvedByRoleNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ApprovedByRoleID {
-            get {
-                return this.approvedByRoleIDField;
-            }
-            set {
-                this.approvedByRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid SafetyTemplateID {
-            get {
-                return this.safetyTemplateIDField;
-            }
-            set {
-                this.safetyTemplateIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SummaryLine {
-            get {
-                return this.summaryLineField;
-            }
-            set {
-                this.summaryLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ImageBytes {
-            get {
-                return this.imageBytesField;
-            }
-            set {
-                this.imageBytesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CopyNextOpText {
-            get {
-                return this.copyNextOpTextField;
-            }
-            set {
-                this.copyNextOpTextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class CommsLogEntry {
-        
-        private System.Guid entryIDField;
-        
-        private int opPeriodField;
-        
-        private string logKeeperField;
-        
-        private System.DateTime logDateField;
-        
-        private System.DateTime createdField;
-        
-        private System.DateTime lastUpdatedField;
-        
-        private System.Guid fromTeamIDField;
-        
-        private System.Guid toTeamIDField;
-        
-        private string fromNameField;
-        
-        private string toNameField;
-        
-        private string messageField;
-        
-        private bool starredField;
-        
-        private TeamStatus statusField;
-        
-        private int operationalPeriodField;
-        
-        private bool activeField;
-        
-        private System.Guid taskIDField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        /// <remarks/>
-        public System.Guid EntryID {
-            get {
-                return this.entryIDField;
-            }
-            set {
-                this.entryIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LogKeeper {
-            get {
-                return this.logKeeperField;
-            }
-            set {
-                this.logKeeperField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LogDate {
-            get {
-                return this.logDateField;
-            }
-            set {
-                this.logDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime Created {
-            get {
-                return this.createdField;
-            }
-            set {
-                this.createdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdated {
-            get {
-                return this.lastUpdatedField;
-            }
-            set {
-                this.lastUpdatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid FromTeamID {
-            get {
-                return this.fromTeamIDField;
-            }
-            set {
-                this.fromTeamIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ToTeamID {
-            get {
-                return this.toTeamIDField;
-            }
-            set {
-                this.toTeamIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FromName {
-            get {
-                return this.fromNameField;
-            }
-            set {
-                this.fromNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ToName {
-            get {
-                return this.toNameField;
-            }
-            set {
-                this.toNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Starred {
-            get {
-                return this.starredField;
-            }
-            set {
-                this.starredField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public TeamStatus status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OperationalPeriod {
-            get {
-                return this.operationalPeriodField;
-            }
-            set {
-                this.operationalPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class CommsPlanItem {
-        
-        private System.Guid itemIDField;
-        
-        private string commsSystemField;
-        
-        private string callSignField;
-        
-        private string commsFunctionField;
-        
-        private string channelIDField;
-        
-        private string channelNumberField;
-        
-        private string rxFrequencyField;
-        
-        private string txFrequencyField;
-        
-        private string commentsField;
-        
-        private bool isRepeaterField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private bool isUniversalField;
-        
-        private bool activeField;
-        
-        private System.Guid organizationIDField;
-        
-        private int opsPeriodField;
-        
-        private string rxToneField;
-        
-        private string txToneField;
-        
-        private string assignmentField;
-        
-        private bool usedForAircraftField;
-        
-        private System.Guid templateItemIDField;
-        
-        /// <remarks/>
-        public System.Guid ItemID {
-            get {
-                return this.itemIDField;
-            }
-            set {
-                this.itemIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CommsSystem {
-            get {
-                return this.commsSystemField;
-            }
-            set {
-                this.commsSystemField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CallSign {
-            get {
-                return this.callSignField;
-            }
-            set {
-                this.callSignField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CommsFunction {
-            get {
-                return this.commsFunctionField;
-            }
-            set {
-                this.commsFunctionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ChannelID {
-            get {
-                return this.channelIDField;
-            }
-            set {
-                this.channelIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ChannelNumber {
-            get {
-                return this.channelNumberField;
-            }
-            set {
-                this.channelNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RxFrequency {
-            get {
-                return this.rxFrequencyField;
-            }
-            set {
-                this.rxFrequencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TxFrequency {
-            get {
-                return this.txFrequencyField;
-            }
-            set {
-                this.txFrequencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Comments {
-            get {
-                return this.commentsField;
-            }
-            set {
-                this.commentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsRepeater {
-            get {
-                return this.isRepeaterField;
-            }
-            set {
-                this.isRepeaterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isUniversal {
-            get {
-                return this.isUniversalField;
-            }
-            set {
-                this.isUniversalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OrganizationID {
-            get {
-                return this.organizationIDField;
-            }
-            set {
-                this.organizationIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpsPeriod {
-            get {
-                return this.opsPeriodField;
-            }
-            set {
-                this.opsPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RxTone {
-            get {
-                return this.rxToneField;
-            }
-            set {
-                this.rxToneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TxTone {
-            get {
-                return this.txToneField;
-            }
-            set {
-                this.txToneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Assignment {
-            get {
-                return this.assignmentField;
-            }
-            set {
-                this.assignmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool UsedForAircraft {
-            get {
-                return this.usedForAircraftField;
-            }
-            set {
-                this.usedForAircraftField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TemplateItemID {
-            get {
-                return this.templateItemIDField;
-            }
-            set {
-                this.templateItemIDField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class CommsPlan {
-        
-        private int opsPeriodField;
-        
-        private int taskNumberField;
-        
-        private System.DateTime datePreparedField;
-        
-        private string preparedByField;
-        
-        private CommsPlanItem[] allCommsItemsField;
-        
-        private CommsPlanItem[] activeCommsItemsField;
-        
-        private CommsPlanItem[] activeAirCommsItemsField;
-        
-        private System.Guid idField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private string preparedByPositionField;
-        
-        /// <remarks/>
-        public int OpsPeriod {
-            get {
-                return this.opsPeriodField;
-            }
-            set {
-                this.opsPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int TaskNumber {
-            get {
-                return this.taskNumberField;
-            }
-            set {
-                this.taskNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DatePrepared {
-            get {
-                return this.datePreparedField;
-            }
-            set {
-                this.datePreparedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedBy {
-            get {
-                return this.preparedByField;
-            }
-            set {
-                this.preparedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public CommsPlanItem[] allCommsItems {
-            get {
-                return this.allCommsItemsField;
-            }
-            set {
-                this.allCommsItemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public CommsPlanItem[] ActiveCommsItems {
-            get {
-                return this.activeCommsItemsField;
-            }
-            set {
-                this.activeCommsItemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public CommsPlanItem[] ActiveAirCommsItems {
-            get {
-                return this.activeAirCommsItemsField;
-            }
-            set {
-                this.activeAirCommsItemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByPosition {
-            get {
-                return this.preparedByPositionField;
-            }
-            set {
-                this.preparedByPositionField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class MedicalAidStation {
-        
-        private System.Guid aidStationIDField;
-        
-        private string nameField;
-        
-        private string locationField;
-        
-        private string contactNumberField;
-        
-        private bool paramedicsAvailableField;
-        
-        private bool oFA1Field;
-        
-        private bool oFA2Field;
-        
-        private bool oFA3Field;
-        
-        private bool aLSField;
-        
-        private bool firstResponderField;
+        private string cardinalLabelField;
         
         private double latitudeField;
         
         private double longitudeField;
         
-        private int opPeriodField;
-        
-        private bool activeField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
         /// <remarks/>
-        public System.Guid AidStationID {
+        public string Label {
             get {
-                return this.aidStationIDField;
+                return this.labelField;
             }
             set {
-                this.aidStationIDField = value;
+                this.labelField = value;
             }
         }
         
         /// <remarks/>
-        public string Name {
+        public string CardinalLabel {
             get {
-                return this.nameField;
+                return this.cardinalLabelField;
             }
             set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Location {
-            get {
-                return this.locationField;
-            }
-            set {
-                this.locationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ContactNumber {
-            get {
-                return this.contactNumberField;
-            }
-            set {
-                this.contactNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool ParamedicsAvailable {
-            get {
-                return this.paramedicsAvailableField;
-            }
-            set {
-                this.paramedicsAvailableField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool OFA1 {
-            get {
-                return this.oFA1Field;
-            }
-            set {
-                this.oFA1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool OFA2 {
-            get {
-                return this.oFA2Field;
-            }
-            set {
-                this.oFA2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool OFA3 {
-            get {
-                return this.oFA3Field;
-            }
-            set {
-                this.oFA3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool ALS {
-            get {
-                return this.aLSField;
-            }
-            set {
-                this.aLSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool FirstResponder {
-            get {
-                return this.firstResponderField;
-            }
-            set {
-                this.firstResponderField = value;
+                this.cardinalLabelField = value;
             }
         }
         
@@ -5834,1218 +1139,6 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
             }
             set {
                 this.longitudeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Hospital {
-        
-        private System.Guid hospitalIDField;
-        
-        private string nameField;
-        
-        private string locationField;
-        
-        private decimal travelTimeAirField;
-        
-        private decimal travelTimeGroundField;
-        
-        private string phoneField;
-        
-        private bool traumaUnitField;
-        
-        private bool burnUnitField;
-        
-        private bool hypothermiaField;
-        
-        private bool helipadField;
-        
-        private bool isUniversalField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private double latitudeField;
-        
-        private double longitudeField;
-        
-        private bool activeField;
-        
-        private System.Guid organizationIDField;
-        
-        private int opPeriodField;
-        
-        /// <remarks/>
-        public System.Guid HospitalID {
-            get {
-                return this.hospitalIDField;
-            }
-            set {
-                this.hospitalIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string location {
-            get {
-                return this.locationField;
-            }
-            set {
-                this.locationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal travelTimeAir {
-            get {
-                return this.travelTimeAirField;
-            }
-            set {
-                this.travelTimeAirField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal travelTimeGround {
-            get {
-                return this.travelTimeGroundField;
-            }
-            set {
-                this.travelTimeGroundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string phone {
-            get {
-                return this.phoneField;
-            }
-            set {
-                this.phoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool traumaUnit {
-            get {
-                return this.traumaUnitField;
-            }
-            set {
-                this.traumaUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool burnUnit {
-            get {
-                return this.burnUnitField;
-            }
-            set {
-                this.burnUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool hypothermia {
-            get {
-                return this.hypothermiaField;
-            }
-            set {
-                this.hypothermiaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool helipad {
-            get {
-                return this.helipadField;
-            }
-            set {
-                this.helipadField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isUniversal {
-            get {
-                return this.isUniversalField;
-            }
-            set {
-                this.isUniversalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double Latitude {
-            get {
-                return this.latitudeField;
-            }
-            set {
-                this.latitudeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double Longitude {
-            get {
-                return this.longitudeField;
-            }
-            set {
-                this.longitudeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OrganizationID {
-            get {
-                return this.organizationIDField;
-            }
-            set {
-                this.organizationIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class AmbulanceService {
-        
-        private System.Guid ambulanceIDField;
-        
-        private string organizationField;
-        
-        private string contactField;
-        
-        private string phoneField;
-        
-        private string radioFrequencyField;
-        
-        private System.Guid organizationIDField;
-        
-        private bool activeField;
-        
-        private bool isUniversalField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private bool isALSField;
-        
-        private bool isBLSField;
-        
-        private string locationField;
-        
-        private double latitudeField;
-        
-        private double longitudeField;
-        
-        private int opPeriodField;
-        
-        /// <remarks/>
-        public System.Guid AmbulanceID {
-            get {
-                return this.ambulanceIDField;
-            }
-            set {
-                this.ambulanceIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Organization {
-            get {
-                return this.organizationField;
-            }
-            set {
-                this.organizationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Contact {
-            get {
-                return this.contactField;
-            }
-            set {
-                this.contactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Phone {
-            get {
-                return this.phoneField;
-            }
-            set {
-                this.phoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RadioFrequency {
-            get {
-                return this.radioFrequencyField;
-            }
-            set {
-                this.radioFrequencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OrganizationID {
-            get {
-                return this.organizationIDField;
-            }
-            set {
-                this.organizationIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsUniversal {
-            get {
-                return this.isUniversalField;
-            }
-            set {
-                this.isUniversalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsALS {
-            get {
-                return this.isALSField;
-            }
-            set {
-                this.isALSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsBLS {
-            get {
-                return this.isBLSField;
-            }
-            set {
-                this.isBLSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Location {
-            get {
-                return this.locationField;
-            }
-            set {
-                this.locationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double Latitude {
-            get {
-                return this.latitudeField;
-            }
-            set {
-                this.latitudeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public double Longitude {
-            get {
-                return this.longitudeField;
-            }
-            set {
-                this.longitudeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class MedicalPlan {
-        
-        private int opPeriodField;
-        
-        private string preparedByField;
-        
-        private System.DateTime datePreparedField;
-        
-        private AmbulanceService[] ambulancesField;
-        
-        private AmbulanceService[] activeAmbulancesField;
-        
-        private Hospital[] hospitalsField;
-        
-        private Hospital[] activeHospitalsField;
-        
-        private System.Guid idField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private string emergencyProceduresField;
-        
-        private string preparedByPositionField;
-        
-        private string approvedByPositionField;
-        
-        private string approvedByField;
-        
-        private System.Guid preparedByRoleIDField;
-        
-        private System.Guid approvedByRoleIDField;
-        
-        private MedicalAidStation[] medicalAidStationsField;
-        
-        private MedicalAidStation[] activeAidStationsField;
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedBy {
-            get {
-                return this.preparedByField;
-            }
-            set {
-                this.preparedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DatePrepared {
-            get {
-                return this.datePreparedField;
-            }
-            set {
-                this.datePreparedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public AmbulanceService[] Ambulances {
-            get {
-                return this.ambulancesField;
-            }
-            set {
-                this.ambulancesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public AmbulanceService[] ActiveAmbulances {
-            get {
-                return this.activeAmbulancesField;
-            }
-            set {
-                this.activeAmbulancesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Hospital[] Hospitals {
-            get {
-                return this.hospitalsField;
-            }
-            set {
-                this.hospitalsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Hospital[] ActiveHospitals {
-            get {
-                return this.activeHospitalsField;
-            }
-            set {
-                this.activeHospitalsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string EmergencyProcedures {
-            get {
-                return this.emergencyProceduresField;
-            }
-            set {
-                this.emergencyProceduresField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByPosition {
-            get {
-                return this.preparedByPositionField;
-            }
-            set {
-                this.preparedByPositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedByPosition {
-            get {
-                return this.approvedByPositionField;
-            }
-            set {
-                this.approvedByPositionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedBy {
-            get {
-                return this.approvedByField;
-            }
-            set {
-                this.approvedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid PreparedByRoleID {
-            get {
-                return this.preparedByRoleIDField;
-            }
-            set {
-                this.preparedByRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ApprovedByRoleID {
-            get {
-                return this.approvedByRoleIDField;
-            }
-            set {
-                this.approvedByRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public MedicalAidStation[] MedicalAidStations {
-            get {
-                return this.medicalAidStationsField;
-            }
-            set {
-                this.medicalAidStationsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public MedicalAidStation[] ActiveAidStations {
-            get {
-                return this.activeAidStationsField;
-            }
-            set {
-                this.activeAidStationsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class OrganizationChart {
-        
-        private int opPeriodField;
-        
-        private string preparedByField;
-        
-        private System.Guid taskIDField;
-        
-        private bool activeField;
-        
-        private System.Guid preparedByUserIDField;
-        
-        private System.Guid preparedByRoleIDField;
-        
-        private string preparedByRoleField;
-        
-        private System.Guid organizationalChartIDField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        private System.DateTime datePreparedField;
-        
-        private System.DateTime datePreparedUTCField;
-        
-        private ICSRole[] allRolesField;
-        
-        private ICSRole[] activeRolesField;
-        
-        private ICSRole[] filledRolesField;
-        
-        private ICSRole[] filledActiveRolesField;
-        
-        private bool isUnifiedCommandField;
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedBy {
-            get {
-                return this.preparedByField;
-            }
-            set {
-                this.preparedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid PreparedByUserID {
-            get {
-                return this.preparedByUserIDField;
-            }
-            set {
-                this.preparedByUserIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid PreparedByRoleID {
-            get {
-                return this.preparedByRoleIDField;
-            }
-            set {
-                this.preparedByRoleIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByRole {
-            get {
-                return this.preparedByRoleField;
-            }
-            set {
-                this.preparedByRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OrganizationalChartID {
-            get {
-                return this.organizationalChartIDField;
-            }
-            set {
-                this.organizationalChartIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DatePrepared {
-            get {
-                return this.datePreparedField;
-            }
-            set {
-                this.datePreparedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DatePreparedUTC {
-            get {
-                return this.datePreparedUTCField;
-            }
-            set {
-                this.datePreparedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public ICSRole[] AllRoles {
-            get {
-                return this.allRolesField;
-            }
-            set {
-                this.allRolesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public ICSRole[] ActiveRoles {
-            get {
-                return this.activeRolesField;
-            }
-            set {
-                this.activeRolesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public ICSRole[] FilledRoles {
-            get {
-                return this.filledRolesField;
-            }
-            set {
-                this.filledRolesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public ICSRole[] FilledActiveRoles {
-            get {
-                return this.filledActiveRolesField;
-            }
-            set {
-                this.filledActiveRolesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsUnifiedCommand {
-            get {
-                return this.isUnifiedCommandField;
-            }
-            set {
-                this.isUnifiedCommandField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class IncidentObjective {
-        
-        private System.Guid objectiveIDField;
-        
-        private string objectiveField;
-        
-        private int priorityField;
-        
-        private int opPeriodField;
-        
-        private bool isUniversalField;
-        
-        private System.DateTime presetLastUpdatedUTCField;
-        
-        private IncidentObjective[] childObjectivesField;
-        
-        private bool activeField;
-        
-        private System.Guid taskIDField;
-        
-        private System.Guid incidentObjectiveIDField;
-        
-        private System.DateTime objectiveLastUpdatedUTCField;
-        
-        private System.Guid organizationIDField;
-        
-        private bool completedField;
-        
-        private string copyNextOpTextField;
-        
-        /// <remarks/>
-        public System.Guid ObjectiveID {
-            get {
-                return this.objectiveIDField;
-            }
-            set {
-                this.objectiveIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Objective {
-            get {
-                return this.objectiveField;
-            }
-            set {
-                this.objectiveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int Priority {
-            get {
-                return this.priorityField;
-            }
-            set {
-                this.priorityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isUniversal {
-            get {
-                return this.isUniversalField;
-            }
-            set {
-                this.isUniversalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime PresetLastUpdatedUTC {
-            get {
-                return this.presetLastUpdatedUTCField;
-            }
-            set {
-                this.presetLastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public IncidentObjective[] ChildObjectives {
-            get {
-                return this.childObjectivesField;
-            }
-            set {
-                this.childObjectivesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid IncidentObjectiveID {
-            get {
-                return this.incidentObjectiveIDField;
-            }
-            set {
-                this.incidentObjectiveIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime ObjectiveLastUpdatedUTC {
-            get {
-                return this.objectiveLastUpdatedUTCField;
-            }
-            set {
-                this.objectiveLastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid OrganizationID {
-            get {
-                return this.organizationIDField;
-            }
-            set {
-                this.organizationIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool Completed {
-            get {
-                return this.completedField;
-            }
-            set {
-                this.completedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CopyNextOpText {
-            get {
-                return this.copyNextOpTextField;
-            }
-            set {
-                this.copyNextOpTextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class IncidentObjectivesSheet {
-        
-        private System.Guid sheetIDField;
-        
-        private System.DateTime datePreparedField;
-        
-        private int opPeriodField;
-        
-        private string fireSizeField;
-        
-        private string fireStatusField;
-        
-        private string weatherForcastField;
-        
-        private string generalSafetyField;
-        
-        private string preparedByField;
-        
-        private string preparedByRoleField;
-        
-        private string approvedByField;
-        
-        private string approvedByRoleField;
-        
-        private IncidentObjective[] objectivesField;
-        
-        private IncidentObjective[] activeObjectivesField;
-        
-        private System.Guid taskIDField;
-        
-        private System.DateTime lastUpdatedUTCField;
-        
-        /// <remarks/>
-        public System.Guid SheetID {
-            get {
-                return this.sheetIDField;
-            }
-            set {
-                this.sheetIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DatePrepared {
-            get {
-                return this.datePreparedField;
-            }
-            set {
-                this.datePreparedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FireSize {
-            get {
-                return this.fireSizeField;
-            }
-            set {
-                this.fireSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FireStatus {
-            get {
-                return this.fireStatusField;
-            }
-            set {
-                this.fireStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string WeatherForcast {
-            get {
-                return this.weatherForcastField;
-            }
-            set {
-                this.weatherForcastField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string GeneralSafety {
-            get {
-                return this.generalSafetyField;
-            }
-            set {
-                this.generalSafetyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedBy {
-            get {
-                return this.preparedByField;
-            }
-            set {
-                this.preparedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PreparedByRole {
-            get {
-                return this.preparedByRoleField;
-            }
-            set {
-                this.preparedByRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedBy {
-            get {
-                return this.approvedByField;
-            }
-            set {
-                this.approvedByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedByRole {
-            get {
-                return this.approvedByRoleField;
-            }
-            set {
-                this.approvedByRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public IncidentObjective[] Objectives {
-            get {
-                return this.objectivesField;
-            }
-            set {
-                this.objectivesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public IncidentObjective[] ActiveObjectives {
-            get {
-                return this.activeObjectivesField;
-            }
-            set {
-                this.activeObjectivesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
             }
         }
     }
@@ -7218,31 +1311,185 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Briefing {
+    public partial class GearStatus {
         
-        private string taskNumberField;
+        private System.Guid statusIDField;
+        
+        private string statusNameField;
+        
+        private bool isActiveField;
+        
+        private int[] statusColorRGBField;
+        
+        /// <remarks/>
+        public System.Guid StatusID {
+            get {
+                return this.statusIDField;
+            }
+            set {
+                this.statusIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StatusName {
+            get {
+                return this.statusNameField;
+            }
+            set {
+                this.statusNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsActive {
+            get {
+                return this.isActiveField;
+            }
+            set {
+                this.isActiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int[] StatusColorRGB {
+            get {
+                return this.statusColorRGBField;
+            }
+            set {
+                this.statusColorRGBField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class GearCategory {
+        
+        private System.Guid categoryIDField;
+        
+        private string categoryNameField;
+        
+        private System.Guid parentCategoryIDField;
+        
+        private string categoryNotesField;
+        
+        /// <remarks/>
+        public System.Guid CategoryID {
+            get {
+                return this.categoryIDField;
+            }
+            set {
+                this.categoryIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CategoryName {
+            get {
+                return this.categoryNameField;
+            }
+            set {
+                this.categoryNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ParentCategoryID {
+            get {
+                return this.parentCategoryIDField;
+            }
+            set {
+                this.parentCategoryIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CategoryNotes {
+            get {
+                return this.categoryNotesField;
+            }
+            set {
+                this.categoryNotesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TaskBasics))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CheckInRecord))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OperationalPeriod))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PositionLogEntry))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Note))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TimelineEvent))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Timeline))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Contact))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommsLogEntry))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(IncidentResource))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Personnel))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Vehicle))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Aircraft))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OperationalGroup))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OperationalGroupResourceListing))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Crew))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommsPlanItem))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MedicalAidStation))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Hospital))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AmbulanceService))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ICSRole))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NOTAM))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(IncidentObjective))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ICSFormData))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommsPlan))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MedicalPlan))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OrganizationChart))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AirOperationsSummary))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(GeneralMessage))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SafetyMessage))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(IncidentObjectivesSheet))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Briefing))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(GearIssue))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Gear))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(IncidentGear))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Incident))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DemobilizationRecord))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ResourceReplacementPlan))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class SyncableItem {
+        
+        private System.Guid idField;
+        
+        private bool activeField;
         
         private int opPeriodField;
         
-        private int operationalPeriodField;
-        
-        private BriefingSection[] allSectionsField;
-        
-        private System.Guid taskIDField;
-        
-        private System.Guid briefingIDField;
-        
-        private System.DateTime dateCreatedUTCField;
-        
-        private System.DateTime dateUpdatedUTCField;
+        private System.DateTime lastUpdatedUTCField;
         
         /// <remarks/>
-        public string TaskNumber {
+        public System.Guid ID {
             get {
-                return this.taskNumberField;
+                return this.idField;
             }
             set {
-                this.taskNumberField = value;
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Active {
+            get {
+                return this.activeField;
+            }
+            set {
+                this.activeField = value;
             }
         }
         
@@ -7255,6 +1502,4419 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
                 this.opPeriodField = value;
             }
         }
+        
+        /// <remarks/>
+        public System.DateTime LastUpdatedUTC {
+            get {
+                return this.lastUpdatedUTCField;
+            }
+            set {
+                this.lastUpdatedUTCField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class TaskBasics : SyncableItem {
+        
+        private string taskNameField;
+        
+        private string taskNumberField;
+        
+        private string agencyFileNumberField;
+        
+        private string iCPCallSignField;
+        
+        private string subjectCategoryField;
+        
+        private double subjectVisibilityField;
+        
+        private double generalRangeOfDetectionField;
+        
+        private string incidentTitleImageBytesField;
+        
+        /// <remarks/>
+        public string TaskName {
+            get {
+                return this.taskNameField;
+            }
+            set {
+                this.taskNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TaskNumber {
+            get {
+                return this.taskNumberField;
+            }
+            set {
+                this.taskNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string AgencyFileNumber {
+            get {
+                return this.agencyFileNumberField;
+            }
+            set {
+                this.agencyFileNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ICPCallSign {
+            get {
+                return this.iCPCallSignField;
+            }
+            set {
+                this.iCPCallSignField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SubjectCategory {
+            get {
+                return this.subjectCategoryField;
+            }
+            set {
+                this.subjectCategoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double SubjectVisibility {
+            get {
+                return this.subjectVisibilityField;
+            }
+            set {
+                this.subjectVisibilityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double GeneralRangeOfDetection {
+            get {
+                return this.generalRangeOfDetectionField;
+            }
+            set {
+                this.generalRangeOfDetectionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IncidentTitleImageBytes {
+            get {
+                return this.incidentTitleImageBytesField;
+            }
+            set {
+                this.incidentTitleImageBytesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class CheckInRecord : SyncableItem {
+        
+        private System.DateTime lastDayOfRestField;
+        
+        private System.DateTime firstDayOnIncidentField;
+        
+        private System.DateTime checkInDateField;
+        
+        private System.DateTime checkOutDateField;
+        
+        private System.DateTime lastDayOnIncidentField;
+        
+        private System.Guid signInRecordIDField;
+        
+        private System.Guid parentRecordIDField;
+        
+        private int personalIncidentNumberField;
+        
+        private System.Guid resourceIDField;
+        
+        private string resourceNameField;
+        
+        private CheckInInfoField[] infoFieldsField;
+        
+        private string resourceTypeField;
+        
+        private string initialRoleNameField;
+        
+        private string initialRoleAcronymField;
+        
+        private bool replacementRequiredField;
+        
+        private System.DateTime dateReplacementRequiredField;
+        
+        private System.Guid replacementRecordIDField;
+        
+        private string replacementCommentField;
+        
+        /// <remarks/>
+        public System.DateTime LastDayOfRest {
+            get {
+                return this.lastDayOfRestField;
+            }
+            set {
+                this.lastDayOfRestField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime FirstDayOnIncident {
+            get {
+                return this.firstDayOnIncidentField;
+            }
+            set {
+                this.firstDayOnIncidentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime CheckInDate {
+            get {
+                return this.checkInDateField;
+            }
+            set {
+                this.checkInDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime CheckOutDate {
+            get {
+                return this.checkOutDateField;
+            }
+            set {
+                this.checkOutDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime LastDayOnIncident {
+            get {
+                return this.lastDayOnIncidentField;
+            }
+            set {
+                this.lastDayOnIncidentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid SignInRecordID {
+            get {
+                return this.signInRecordIDField;
+            }
+            set {
+                this.signInRecordIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ParentRecordID {
+            get {
+                return this.parentRecordIDField;
+            }
+            set {
+                this.parentRecordIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int PersonalIncidentNumber {
+            get {
+                return this.personalIncidentNumberField;
+            }
+            set {
+                this.personalIncidentNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ResourceID {
+            get {
+                return this.resourceIDField;
+            }
+            set {
+                this.resourceIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ResourceName {
+            get {
+                return this.resourceNameField;
+            }
+            set {
+                this.resourceNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public CheckInInfoField[] InfoFields {
+            get {
+                return this.infoFieldsField;
+            }
+            set {
+                this.infoFieldsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ResourceType {
+            get {
+                return this.resourceTypeField;
+            }
+            set {
+                this.resourceTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string InitialRoleName {
+            get {
+                return this.initialRoleNameField;
+            }
+            set {
+                this.initialRoleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string InitialRoleAcronym {
+            get {
+                return this.initialRoleAcronymField;
+            }
+            set {
+                this.initialRoleAcronymField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool ReplacementRequired {
+            get {
+                return this.replacementRequiredField;
+            }
+            set {
+                this.replacementRequiredField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateReplacementRequired {
+            get {
+                return this.dateReplacementRequiredField;
+            }
+            set {
+                this.dateReplacementRequiredField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ReplacementRecordID {
+            get {
+                return this.replacementRecordIDField;
+            }
+            set {
+                this.replacementRecordIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReplacementComment {
+            get {
+                return this.replacementCommentField;
+            }
+            set {
+                this.replacementCommentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class OperationalPeriod : SyncableItem {
+        
+        private int periodNumberField;
+        
+        private System.DateTime periodStartField;
+        
+        private System.DateTime periodEndField;
+        
+        private System.Guid operationalPeriodIDField;
+        
+        private string titleImageBytesField;
+        
+        private string criticalMessageField;
+        
+        /// <remarks/>
+        public int PeriodNumber {
+            get {
+                return this.periodNumberField;
+            }
+            set {
+                this.periodNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime PeriodStart {
+            get {
+                return this.periodStartField;
+            }
+            set {
+                this.periodStartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime PeriodEnd {
+            get {
+                return this.periodEndField;
+            }
+            set {
+                this.periodEndField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OperationalPeriodID {
+            get {
+                return this.operationalPeriodIDField;
+            }
+            set {
+                this.operationalPeriodIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TitleImageBytes {
+            get {
+                return this.titleImageBytesField;
+            }
+            set {
+                this.titleImageBytesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CriticalMessage {
+            get {
+                return this.criticalMessageField;
+            }
+            set {
+                this.criticalMessageField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class PositionLogEntry : SyncableItem {
+        
+        private System.Guid logIDField;
+        
+        private ICSRole roleField;
+        
+        private System.DateTime dateCreatedField;
+        
+        private System.DateTime dateUpdatedField;
+        
+        private bool isCompleteField;
+        
+        private System.DateTime reminderTimeField;
+        
+        private System.DateTime timeDueField;
+        
+        private string logTextField;
+        
+        private bool isInfoOnlyField;
+        
+        private string[] logHistoryField;
+        
+        private string copyNextOpTextField;
+        
+        /// <remarks/>
+        public System.Guid LogID {
+            get {
+                return this.logIDField;
+            }
+            set {
+                this.logIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ICSRole Role {
+            get {
+                return this.roleField;
+            }
+            set {
+                this.roleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateUpdated {
+            get {
+                return this.dateUpdatedField;
+            }
+            set {
+                this.dateUpdatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsComplete {
+            get {
+                return this.isCompleteField;
+            }
+            set {
+                this.isCompleteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime ReminderTime {
+            get {
+                return this.reminderTimeField;
+            }
+            set {
+                this.reminderTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime TimeDue {
+            get {
+                return this.timeDueField;
+            }
+            set {
+                this.timeDueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LogText {
+            get {
+                return this.logTextField;
+            }
+            set {
+                this.logTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsInfoOnly {
+            get {
+                return this.isInfoOnlyField;
+            }
+            set {
+                this.isInfoOnlyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] LogHistory {
+            get {
+                return this.logHistoryField;
+            }
+            set {
+                this.logHistoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CopyNextOpText {
+            get {
+                return this.copyNextOpTextField;
+            }
+            set {
+                this.copyNextOpTextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class ICSRole : SyncableItem {
+        
+        private System.Guid roleIDField;
+        
+        private string roleNameField;
+        
+        private System.Guid sectionIDField;
+        
+        private System.Guid reportsToField;
+        
+        private string pDFFieldNameField;
+        
+        private string pDFTitleNameField;
+        
+        private string individualNameField;
+        
+        private System.Guid individualIDField;
+        
+        private System.Guid organizationalChartIDField;
+        
+        private System.Guid orgChartRoleIDField;
+        
+        private string reportsToRoleNameField;
+        
+        private int manualSortOrderField;
+        
+        private bool includeReportsToInNameField;
+        
+        private string baseRoleNameField;
+        
+        private bool isPlaceholderField;
+        
+        private int depthField;
+        
+        private string roleDescriptionField;
+        
+        private string mnemonicField;
+        
+        private bool isOpGroupSupField;
+        
+        private System.Guid operationalGroupIDField;
+        
+        /// <remarks/>
+        public System.Guid RoleID {
+            get {
+                return this.roleIDField;
+            }
+            set {
+                this.roleIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RoleName {
+            get {
+                return this.roleNameField;
+            }
+            set {
+                this.roleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid SectionID {
+            get {
+                return this.sectionIDField;
+            }
+            set {
+                this.sectionIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ReportsTo {
+            get {
+                return this.reportsToField;
+            }
+            set {
+                this.reportsToField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PDFFieldName {
+            get {
+                return this.pDFFieldNameField;
+            }
+            set {
+                this.pDFFieldNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PDFTitleName {
+            get {
+                return this.pDFTitleNameField;
+            }
+            set {
+                this.pDFTitleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IndividualName {
+            get {
+                return this.individualNameField;
+            }
+            set {
+                this.individualNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid IndividualID {
+            get {
+                return this.individualIDField;
+            }
+            set {
+                this.individualIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OrganizationalChartID {
+            get {
+                return this.organizationalChartIDField;
+            }
+            set {
+                this.organizationalChartIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OrgChartRoleID {
+            get {
+                return this.orgChartRoleIDField;
+            }
+            set {
+                this.orgChartRoleIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReportsToRoleName {
+            get {
+                return this.reportsToRoleNameField;
+            }
+            set {
+                this.reportsToRoleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ManualSortOrder {
+            get {
+                return this.manualSortOrderField;
+            }
+            set {
+                this.manualSortOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IncludeReportsToInName {
+            get {
+                return this.includeReportsToInNameField;
+            }
+            set {
+                this.includeReportsToInNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string BaseRoleName {
+            get {
+                return this.baseRoleNameField;
+            }
+            set {
+                this.baseRoleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsPlaceholder {
+            get {
+                return this.isPlaceholderField;
+            }
+            set {
+                this.isPlaceholderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int Depth {
+            get {
+                return this.depthField;
+            }
+            set {
+                this.depthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RoleDescription {
+            get {
+                return this.roleDescriptionField;
+            }
+            set {
+                this.roleDescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Mnemonic {
+            get {
+                return this.mnemonicField;
+            }
+            set {
+                this.mnemonicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsOpGroupSup {
+            get {
+                return this.isOpGroupSupField;
+            }
+            set {
+                this.isOpGroupSupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OperationalGroupID {
+            get {
+                return this.operationalGroupIDField;
+            }
+            set {
+                this.operationalGroupIDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Note : SyncableItem {
+        
+        private System.Guid noteIDField;
+        
+        private System.Guid categoryIDField;
+        
+        private string categoryNameField;
+        
+        private string noteTitleField;
+        
+        private string noteTextField;
+        
+        private System.DateTime dateCreatedField;
+        
+        private System.DateTime dateUpdatedField;
+        
+        private System.DateTime dateUpdatedUTCField;
+        
+        /// <remarks/>
+        public System.Guid NoteID {
+            get {
+                return this.noteIDField;
+            }
+            set {
+                this.noteIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid CategoryID {
+            get {
+                return this.categoryIDField;
+            }
+            set {
+                this.categoryIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CategoryName {
+            get {
+                return this.categoryNameField;
+            }
+            set {
+                this.categoryNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string NoteTitle {
+            get {
+                return this.noteTitleField;
+            }
+            set {
+                this.noteTitleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string NoteText {
+            get {
+                return this.noteTextField;
+            }
+            set {
+                this.noteTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateUpdated {
+            get {
+                return this.dateUpdatedField;
+            }
+            set {
+                this.dateUpdatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateUpdatedUTC {
+            get {
+                return this.dateUpdatedUTCField;
+            }
+            set {
+                this.dateUpdatedUTCField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class TimelineEvent : SyncableItem {
+        
+        private System.Guid timelineIDField;
+        
+        private string eventNameField;
+        
+        private string eventTextField;
+        
+        private System.DateTime eventDateTimeField;
+        
+        private bool timeUnsureField;
+        
+        private bool dateUnsureField;
+        
+        private bool subjectEventField;
+        
+        private bool sAREventField;
+        
+        private string eventTypeField;
+        
+        private System.Guid externalIDField;
+        
+        private bool isAutoField;
+        
+        /// <remarks/>
+        public System.Guid TimelineID {
+            get {
+                return this.timelineIDField;
+            }
+            set {
+                this.timelineIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EventName {
+            get {
+                return this.eventNameField;
+            }
+            set {
+                this.eventNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EventText {
+            get {
+                return this.eventTextField;
+            }
+            set {
+                this.eventTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime EventDateTime {
+            get {
+                return this.eventDateTimeField;
+            }
+            set {
+                this.eventDateTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool TimeUnsure {
+            get {
+                return this.timeUnsureField;
+            }
+            set {
+                this.timeUnsureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool DateUnsure {
+            get {
+                return this.dateUnsureField;
+            }
+            set {
+                this.dateUnsureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool SubjectEvent {
+            get {
+                return this.subjectEventField;
+            }
+            set {
+                this.subjectEventField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool SAREvent {
+            get {
+                return this.sAREventField;
+            }
+            set {
+                this.sAREventField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EventType {
+            get {
+                return this.eventTypeField;
+            }
+            set {
+                this.eventTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ExternalID {
+            get {
+                return this.externalIDField;
+            }
+            set {
+                this.externalIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsAuto {
+            get {
+                return this.isAutoField;
+            }
+            set {
+                this.isAutoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Timeline : SyncableItem {
+        
+        private string timelineNameField;
+        
+        private string relatedToSubjectField;
+        
+        private System.DateTime dateCreatedField;
+        
+        private System.DateTime dateUpdatedField;
+        
+        private TimelineEvent[] allTimelineEventsField;
+        
+        /// <remarks/>
+        public string TimelineName {
+            get {
+                return this.timelineNameField;
+            }
+            set {
+                this.timelineNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RelatedToSubject {
+            get {
+                return this.relatedToSubjectField;
+            }
+            set {
+                this.relatedToSubjectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateUpdated {
+            get {
+                return this.dateUpdatedField;
+            }
+            set {
+                this.dateUpdatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public TimelineEvent[] AllTimelineEvents {
+            get {
+                return this.allTimelineEventsField;
+            }
+            set {
+                this.allTimelineEventsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Contact : SyncableItem {
+        
+        private System.Guid contactIDField;
+        
+        private string contactNameField;
+        
+        private string titleField;
+        
+        private string organizationField;
+        
+        private string phoneField;
+        
+        private string emailField;
+        
+        private string callsignField;
+        
+        private string radioChannelField;
+        
+        private string notesField;
+        
+        /// <remarks/>
+        public System.Guid ContactID {
+            get {
+                return this.contactIDField;
+            }
+            set {
+                this.contactIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ContactName {
+            get {
+                return this.contactNameField;
+            }
+            set {
+                this.contactNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Organization {
+            get {
+                return this.organizationField;
+            }
+            set {
+                this.organizationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Callsign {
+            get {
+                return this.callsignField;
+            }
+            set {
+                this.callsignField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RadioChannel {
+            get {
+                return this.radioChannelField;
+            }
+            set {
+                this.radioChannelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Notes {
+            get {
+                return this.notesField;
+            }
+            set {
+                this.notesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class CommsLogEntry : SyncableItem {
+        
+        private System.Guid entryIDField;
+        
+        private string logKeeperField;
+        
+        private System.DateTime logDateField;
+        
+        private System.DateTime createdField;
+        
+        private System.DateTime lastUpdatedField;
+        
+        private System.Guid fromTeamIDField;
+        
+        private System.Guid toTeamIDField;
+        
+        private string fromNameField;
+        
+        private string toNameField;
+        
+        private string messageField;
+        
+        private bool starredField;
+        
+        private TeamStatus statusField;
+        
+        /// <remarks/>
+        public System.Guid EntryID {
+            get {
+                return this.entryIDField;
+            }
+            set {
+                this.entryIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LogKeeper {
+            get {
+                return this.logKeeperField;
+            }
+            set {
+                this.logKeeperField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime LogDate {
+            get {
+                return this.logDateField;
+            }
+            set {
+                this.logDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Created {
+            get {
+                return this.createdField;
+            }
+            set {
+                this.createdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime LastUpdated {
+            get {
+                return this.lastUpdatedField;
+            }
+            set {
+                this.lastUpdatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid FromTeamID {
+            get {
+                return this.fromTeamIDField;
+            }
+            set {
+                this.fromTeamIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ToTeamID {
+            get {
+                return this.toTeamIDField;
+            }
+            set {
+                this.toTeamIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FromName {
+            get {
+                return this.fromNameField;
+            }
+            set {
+                this.fromNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ToName {
+            get {
+                return this.toNameField;
+            }
+            set {
+                this.toNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Starred {
+            get {
+                return this.starredField;
+            }
+            set {
+                this.starredField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public TeamStatus status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Personnel))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Vehicle))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Aircraft))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OperationalGroup))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OperationalGroupResourceListing))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Crew))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class IncidentResource : SyncableItem {
+        
+        private string resourceNameField;
+        
+        private string kindField;
+        
+        private string typeField;
+        
+        private string resourceIdentifierField;
+        
+        private int numberOfPeopleField;
+        
+        private int numberOfVehiclesField;
+        
+        private string leaderNameField;
+        
+        private string contactField;
+        
+        private int uniqueIDNumField;
+        
+        private string resourceTypeField;
+        
+        private System.Guid parentResourceIDField;
+        
+        /// <remarks/>
+        public string ResourceName {
+            get {
+                return this.resourceNameField;
+            }
+            set {
+                this.resourceNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Kind {
+            get {
+                return this.kindField;
+            }
+            set {
+                this.kindField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ResourceIdentifier {
+            get {
+                return this.resourceIdentifierField;
+            }
+            set {
+                this.resourceIdentifierField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int NumberOfPeople {
+            get {
+                return this.numberOfPeopleField;
+            }
+            set {
+                this.numberOfPeopleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int NumberOfVehicles {
+            get {
+                return this.numberOfVehiclesField;
+            }
+            set {
+                this.numberOfVehiclesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LeaderName {
+            get {
+                return this.leaderNameField;
+            }
+            set {
+                this.leaderNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Contact {
+            get {
+                return this.contactField;
+            }
+            set {
+                this.contactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int UniqueIDNum {
+            get {
+                return this.uniqueIDNumField;
+            }
+            set {
+                this.uniqueIDNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ResourceType {
+            get {
+                return this.resourceTypeField;
+            }
+            set {
+                this.resourceTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ParentResourceID {
+            get {
+                return this.parentResourceIDField;
+            }
+            set {
+                this.parentResourceIDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Personnel : IncidentResource {
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        private string middleInitialField;
+        
+        private string genderField;
+        
+        private bool hasDietaryRestrictionsField;
+        
+        private bool hasAllergiesField;
+        
+        private string weightField;
+        
+        private string cellphoneNumberField;
+        
+        private string emailField;
+        
+        private string homeUnitField;
+        
+        private System.Guid homeProvinceIDField;
+        
+        private string homeCountryField;
+        
+        private string emergencyContactField;
+        
+        private string agencyField;
+        
+        private bool isContractorField;
+        
+        private string callSignField;
+        
+        private string pronounsField;
+        
+        private string accommodationPreferenceField;
+        
+        private int pNumField;
+        
+        private string initialRoleNameField;
+        
+        private string initialRoleAcronymField;
+        
+        private System.Guid personIDField;
+        
+        private string nameField;
+        
+        private bool memberActiveField;
+        
+        private MemberStatus currentStatusField;
+        
+        /// <remarks/>
+        public string FirstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MiddleInitial {
+            get {
+                return this.middleInitialField;
+            }
+            set {
+                this.middleInitialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Gender {
+            get {
+                return this.genderField;
+            }
+            set {
+                this.genderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool HasDietaryRestrictions {
+            get {
+                return this.hasDietaryRestrictionsField;
+            }
+            set {
+                this.hasDietaryRestrictionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool HasAllergies {
+            get {
+                return this.hasAllergiesField;
+            }
+            set {
+                this.hasAllergiesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Weight {
+            get {
+                return this.weightField;
+            }
+            set {
+                this.weightField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CellphoneNumber {
+            get {
+                return this.cellphoneNumberField;
+            }
+            set {
+                this.cellphoneNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string HomeUnit {
+            get {
+                return this.homeUnitField;
+            }
+            set {
+                this.homeUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid HomeProvinceID {
+            get {
+                return this.homeProvinceIDField;
+            }
+            set {
+                this.homeProvinceIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string HomeCountry {
+            get {
+                return this.homeCountryField;
+            }
+            set {
+                this.homeCountryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EmergencyContact {
+            get {
+                return this.emergencyContactField;
+            }
+            set {
+                this.emergencyContactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Agency {
+            get {
+                return this.agencyField;
+            }
+            set {
+                this.agencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsContractor {
+            get {
+                return this.isContractorField;
+            }
+            set {
+                this.isContractorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CallSign {
+            get {
+                return this.callSignField;
+            }
+            set {
+                this.callSignField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Pronouns {
+            get {
+                return this.pronounsField;
+            }
+            set {
+                this.pronounsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string AccommodationPreference {
+            get {
+                return this.accommodationPreferenceField;
+            }
+            set {
+                this.accommodationPreferenceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int PNum {
+            get {
+                return this.pNumField;
+            }
+            set {
+                this.pNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string InitialRoleName {
+            get {
+                return this.initialRoleNameField;
+            }
+            set {
+                this.initialRoleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string InitialRoleAcronym {
+            get {
+                return this.initialRoleAcronymField;
+            }
+            set {
+                this.initialRoleAcronymField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid PersonID {
+            get {
+                return this.personIDField;
+            }
+            set {
+                this.personIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool MemberActive {
+            get {
+                return this.memberActiveField;
+            }
+            set {
+                this.memberActiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public MemberStatus CurrentStatus {
+            get {
+                return this.currentStatusField;
+            }
+            set {
+                this.currentStatusField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Vehicle : IncidentResource {
+        
+        private System.Guid taskIDField;
+        
+        private string orderRequestNoField;
+        
+        private string incidentIDNoField;
+        
+        private string classificationField;
+        
+        private string makeField;
+        
+        private string categoryKindCapacityField;
+        
+        private string featuresField;
+        
+        private string agencyOrOwnerField;
+        
+        private string operatorNameField;
+        
+        private System.Guid operatorIDField;
+        
+        private string licenseOrIDField;
+        
+        private string incidentAssignmentField;
+        
+        private System.DateTime startTimeField;
+        
+        private System.DateTime mustBeOutTimeField;
+        
+        private string notesField;
+        
+        private string aSEField;
+        
+        private bool isEquipmentField;
+        
+        private string unitNumberField;
+        
+        private string serialNumberField;
+        
+        /// <remarks/>
+        public System.Guid TaskID {
+            get {
+                return this.taskIDField;
+            }
+            set {
+                this.taskIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OrderRequestNo {
+            get {
+                return this.orderRequestNoField;
+            }
+            set {
+                this.orderRequestNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IncidentIDNo {
+            get {
+                return this.incidentIDNoField;
+            }
+            set {
+                this.incidentIDNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Classification {
+            get {
+                return this.classificationField;
+            }
+            set {
+                this.classificationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Make {
+            get {
+                return this.makeField;
+            }
+            set {
+                this.makeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CategoryKindCapacity {
+            get {
+                return this.categoryKindCapacityField;
+            }
+            set {
+                this.categoryKindCapacityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Features {
+            get {
+                return this.featuresField;
+            }
+            set {
+                this.featuresField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string AgencyOrOwner {
+            get {
+                return this.agencyOrOwnerField;
+            }
+            set {
+                this.agencyOrOwnerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OperatorName {
+            get {
+                return this.operatorNameField;
+            }
+            set {
+                this.operatorNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OperatorID {
+            get {
+                return this.operatorIDField;
+            }
+            set {
+                this.operatorIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LicenseOrID {
+            get {
+                return this.licenseOrIDField;
+            }
+            set {
+                this.licenseOrIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IncidentAssignment {
+            get {
+                return this.incidentAssignmentField;
+            }
+            set {
+                this.incidentAssignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime StartTime {
+            get {
+                return this.startTimeField;
+            }
+            set {
+                this.startTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime MustBeOutTime {
+            get {
+                return this.mustBeOutTimeField;
+            }
+            set {
+                this.mustBeOutTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Notes {
+            get {
+                return this.notesField;
+            }
+            set {
+                this.notesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ASE {
+            get {
+                return this.aSEField;
+            }
+            set {
+                this.aSEField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsEquipment {
+            get {
+                return this.isEquipmentField;
+            }
+            set {
+                this.isEquipmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UnitNumber {
+            get {
+                return this.unitNumberField;
+            }
+            set {
+                this.unitNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SerialNumber {
+            get {
+                return this.serialNumberField;
+            }
+            set {
+                this.serialNumberField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Aircraft : IncidentResource {
+        
+        private string companyNameField;
+        
+        private string registrationField;
+        
+        private string makeModelField;
+        
+        private string baseField;
+        
+        private System.DateTime startTimeField;
+        
+        private System.DateTime endTimeField;
+        
+        private string remarksField;
+        
+        private string pilotField;
+        
+        private string contactNumberField;
+        
+        private bool isMedivacField;
+        
+        private bool isHeliField;
+        
+        private string pointOfHireField;
+        
+        private decimal fuelBurnRateField;
+        
+        /// <remarks/>
+        public string CompanyName {
+            get {
+                return this.companyNameField;
+            }
+            set {
+                this.companyNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Registration {
+            get {
+                return this.registrationField;
+            }
+            set {
+                this.registrationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MakeModel {
+            get {
+                return this.makeModelField;
+            }
+            set {
+                this.makeModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Base {
+            get {
+                return this.baseField;
+            }
+            set {
+                this.baseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime StartTime {
+            get {
+                return this.startTimeField;
+            }
+            set {
+                this.startTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime EndTime {
+            get {
+                return this.endTimeField;
+            }
+            set {
+                this.endTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Remarks {
+            get {
+                return this.remarksField;
+            }
+            set {
+                this.remarksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Pilot {
+            get {
+                return this.pilotField;
+            }
+            set {
+                this.pilotField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ContactNumber {
+            get {
+                return this.contactNumberField;
+            }
+            set {
+                this.contactNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsMedivac {
+            get {
+                return this.isMedivacField;
+            }
+            set {
+                this.isMedivacField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsHeli {
+            get {
+                return this.isHeliField;
+            }
+            set {
+                this.isHeliField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PointOfHire {
+            get {
+                return this.pointOfHireField;
+            }
+            set {
+                this.pointOfHireField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal FuelBurnRate {
+            get {
+                return this.fuelBurnRateField;
+            }
+            set {
+                this.fuelBurnRateField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class OperationalGroup : IncidentResource {
+        
+        private string resourceIDField;
+        
+        private string nameField;
+        
+        private System.Guid parentIDField;
+        
+        private string parentNameField;
+        
+        private string groupTypeField;
+        
+        private System.Guid leaderICSRoleIDField;
+        
+        private string leaderICSRoleNameField;
+        
+        private System.Guid leaderIDField;
+        
+        private string preparedByNameField;
+        
+        private string preparedByPositionField;
+        
+        private System.Guid preparedByPositionIDField;
+        
+        private System.Guid[] commsPlanItemIDsField;
+        
+        private string shortRemarksField;
+        
+        private string tacticalAssignmentField;
+        
+        private string specialInstructionsField;
+        
+        private string commentsField;
+        
+        private string boxTextField;
+        
+        private int depthField;
+        
+        private int spanOfControlField;
+        
+        private OperationalGroupResourceListing[] resourceListingField;
+        
+        private OperationalGroupResourceListing[] activeResourceListingField;
+        
+        /// <remarks/>
+        public string ResourceID {
+            get {
+                return this.resourceIDField;
+            }
+            set {
+                this.resourceIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ParentID {
+            get {
+                return this.parentIDField;
+            }
+            set {
+                this.parentIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ParentName {
+            get {
+                return this.parentNameField;
+            }
+            set {
+                this.parentNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string GroupType {
+            get {
+                return this.groupTypeField;
+            }
+            set {
+                this.groupTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid LeaderICSRoleID {
+            get {
+                return this.leaderICSRoleIDField;
+            }
+            set {
+                this.leaderICSRoleIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LeaderICSRoleName {
+            get {
+                return this.leaderICSRoleNameField;
+            }
+            set {
+                this.leaderICSRoleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid LeaderID {
+            get {
+                return this.leaderIDField;
+            }
+            set {
+                this.leaderIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PreparedByName {
+            get {
+                return this.preparedByNameField;
+            }
+            set {
+                this.preparedByNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PreparedByPosition {
+            get {
+                return this.preparedByPositionField;
+            }
+            set {
+                this.preparedByPositionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid PreparedByPositionID {
+            get {
+                return this.preparedByPositionIDField;
+            }
+            set {
+                this.preparedByPositionIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid[] CommsPlanItemIDs {
+            get {
+                return this.commsPlanItemIDsField;
+            }
+            set {
+                this.commsPlanItemIDsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShortRemarks {
+            get {
+                return this.shortRemarksField;
+            }
+            set {
+                this.shortRemarksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TacticalAssignment {
+            get {
+                return this.tacticalAssignmentField;
+            }
+            set {
+                this.tacticalAssignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SpecialInstructions {
+            get {
+                return this.specialInstructionsField;
+            }
+            set {
+                this.specialInstructionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Comments {
+            get {
+                return this.commentsField;
+            }
+            set {
+                this.commentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string BoxText {
+            get {
+                return this.boxTextField;
+            }
+            set {
+                this.boxTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int Depth {
+            get {
+                return this.depthField;
+            }
+            set {
+                this.depthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SpanOfControl {
+            get {
+                return this.spanOfControlField;
+            }
+            set {
+                this.spanOfControlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public OperationalGroupResourceListing[] ResourceListing {
+            get {
+                return this.resourceListingField;
+            }
+            set {
+                this.resourceListingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public OperationalGroupResourceListing[] ActiveResourceListing {
+            get {
+                return this.activeResourceListingField;
+            }
+            set {
+                this.activeResourceListingField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class OperationalGroupResourceListing : IncidentResource {
+        
+        private System.Guid subGroupIDField;
+        
+        private System.Guid operationalGroupIDField;
+        
+        private System.Guid resourceIDField;
+        
+        private string roleField;
+        
+        /// <remarks/>
+        public System.Guid SubGroupID {
+            get {
+                return this.subGroupIDField;
+            }
+            set {
+                this.subGroupIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OperationalGroupID {
+            get {
+                return this.operationalGroupIDField;
+            }
+            set {
+                this.operationalGroupIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ResourceID {
+            get {
+                return this.resourceIDField;
+            }
+            set {
+                this.resourceIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Role {
+            get {
+                return this.roleField;
+            }
+            set {
+                this.roleField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Crew : IncidentResource {
+        
+        private System.Guid operationalGroupIDField;
+        
+        private System.Guid leaderIDField;
+        
+        private string transportField;
+        
+        private string emailField;
+        
+        private string phoneField;
+        
+        private OperationalGroupResourceListing[] resourceListingField;
+        
+        private OperationalGroupResourceListing[] activeResourceListingField;
+        
+        private bool isEquipmentCrewField;
+        
+        /// <remarks/>
+        public System.Guid OperationalGroupID {
+            get {
+                return this.operationalGroupIDField;
+            }
+            set {
+                this.operationalGroupIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid LeaderID {
+            get {
+                return this.leaderIDField;
+            }
+            set {
+                this.leaderIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Transport {
+            get {
+                return this.transportField;
+            }
+            set {
+                this.transportField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public OperationalGroupResourceListing[] ResourceListing {
+            get {
+                return this.resourceListingField;
+            }
+            set {
+                this.resourceListingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public OperationalGroupResourceListing[] ActiveResourceListing {
+            get {
+                return this.activeResourceListingField;
+            }
+            set {
+                this.activeResourceListingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsEquipmentCrew {
+            get {
+                return this.isEquipmentCrewField;
+            }
+            set {
+                this.isEquipmentCrewField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class CommsPlanItem : SyncableItem {
+        
+        private System.Guid itemIDField;
+        
+        private string commsSystemField;
+        
+        private string callSignField;
+        
+        private string commsFunctionField;
+        
+        private string channelIDField;
+        
+        private string channelNumberField;
+        
+        private string rxFrequencyField;
+        
+        private string txFrequencyField;
+        
+        private string commentsField;
+        
+        private bool isRepeaterField;
+        
+        private bool isUniversalField;
+        
+        private System.Guid organizationIDField;
+        
+        private string rxToneField;
+        
+        private string txToneField;
+        
+        private string assignmentField;
+        
+        private bool usedForAircraftField;
+        
+        private System.Guid templateItemIDField;
+        
+        /// <remarks/>
+        public System.Guid ItemID {
+            get {
+                return this.itemIDField;
+            }
+            set {
+                this.itemIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CommsSystem {
+            get {
+                return this.commsSystemField;
+            }
+            set {
+                this.commsSystemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CallSign {
+            get {
+                return this.callSignField;
+            }
+            set {
+                this.callSignField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CommsFunction {
+            get {
+                return this.commsFunctionField;
+            }
+            set {
+                this.commsFunctionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ChannelID {
+            get {
+                return this.channelIDField;
+            }
+            set {
+                this.channelIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ChannelNumber {
+            get {
+                return this.channelNumberField;
+            }
+            set {
+                this.channelNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RxFrequency {
+            get {
+                return this.rxFrequencyField;
+            }
+            set {
+                this.rxFrequencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TxFrequency {
+            get {
+                return this.txFrequencyField;
+            }
+            set {
+                this.txFrequencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Comments {
+            get {
+                return this.commentsField;
+            }
+            set {
+                this.commentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsRepeater {
+            get {
+                return this.isRepeaterField;
+            }
+            set {
+                this.isRepeaterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUniversal {
+            get {
+                return this.isUniversalField;
+            }
+            set {
+                this.isUniversalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OrganizationID {
+            get {
+                return this.organizationIDField;
+            }
+            set {
+                this.organizationIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RxTone {
+            get {
+                return this.rxToneField;
+            }
+            set {
+                this.rxToneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TxTone {
+            get {
+                return this.txToneField;
+            }
+            set {
+                this.txToneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Assignment {
+            get {
+                return this.assignmentField;
+            }
+            set {
+                this.assignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool UsedForAircraft {
+            get {
+                return this.usedForAircraftField;
+            }
+            set {
+                this.usedForAircraftField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid TemplateItemID {
+            get {
+                return this.templateItemIDField;
+            }
+            set {
+                this.templateItemIDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class MedicalAidStation : SyncableItem {
+        
+        private System.Guid aidStationIDField;
+        
+        private string nameField;
+        
+        private string locationField;
+        
+        private string contactNumberField;
+        
+        private bool paramedicsAvailableField;
+        
+        private bool oFA1Field;
+        
+        private bool oFA2Field;
+        
+        private bool oFA3Field;
+        
+        private bool aLSField;
+        
+        private bool firstResponderField;
+        
+        private double latitudeField;
+        
+        private double longitudeField;
+        
+        /// <remarks/>
+        public System.Guid AidStationID {
+            get {
+                return this.aidStationIDField;
+            }
+            set {
+                this.aidStationIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Location {
+            get {
+                return this.locationField;
+            }
+            set {
+                this.locationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ContactNumber {
+            get {
+                return this.contactNumberField;
+            }
+            set {
+                this.contactNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool ParamedicsAvailable {
+            get {
+                return this.paramedicsAvailableField;
+            }
+            set {
+                this.paramedicsAvailableField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool OFA1 {
+            get {
+                return this.oFA1Field;
+            }
+            set {
+                this.oFA1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool OFA2 {
+            get {
+                return this.oFA2Field;
+            }
+            set {
+                this.oFA2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool OFA3 {
+            get {
+                return this.oFA3Field;
+            }
+            set {
+                this.oFA3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool ALS {
+            get {
+                return this.aLSField;
+            }
+            set {
+                this.aLSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool FirstResponder {
+            get {
+                return this.firstResponderField;
+            }
+            set {
+                this.firstResponderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Latitude {
+            get {
+                return this.latitudeField;
+            }
+            set {
+                this.latitudeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Longitude {
+            get {
+                return this.longitudeField;
+            }
+            set {
+                this.longitudeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Hospital : SyncableItem {
+        
+        private System.Guid hospitalIDField;
+        
+        private string nameField;
+        
+        private string locationField;
+        
+        private decimal travelTimeAirField;
+        
+        private decimal travelTimeGroundField;
+        
+        private string phoneField;
+        
+        private bool traumaUnitField;
+        
+        private bool burnUnitField;
+        
+        private bool hypothermiaField;
+        
+        private bool helipadField;
+        
+        private bool isUniversalField;
+        
+        private double latitudeField;
+        
+        private double longitudeField;
+        
+        private System.Guid organizationIDField;
+        
+        /// <remarks/>
+        public System.Guid HospitalID {
+            get {
+                return this.hospitalIDField;
+            }
+            set {
+                this.hospitalIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string location {
+            get {
+                return this.locationField;
+            }
+            set {
+                this.locationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal travelTimeAir {
+            get {
+                return this.travelTimeAirField;
+            }
+            set {
+                this.travelTimeAirField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal travelTimeGround {
+            get {
+                return this.travelTimeGroundField;
+            }
+            set {
+                this.travelTimeGroundField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool traumaUnit {
+            get {
+                return this.traumaUnitField;
+            }
+            set {
+                this.traumaUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool burnUnit {
+            get {
+                return this.burnUnitField;
+            }
+            set {
+                this.burnUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool hypothermia {
+            get {
+                return this.hypothermiaField;
+            }
+            set {
+                this.hypothermiaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool helipad {
+            get {
+                return this.helipadField;
+            }
+            set {
+                this.helipadField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUniversal {
+            get {
+                return this.isUniversalField;
+            }
+            set {
+                this.isUniversalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Latitude {
+            get {
+                return this.latitudeField;
+            }
+            set {
+                this.latitudeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Longitude {
+            get {
+                return this.longitudeField;
+            }
+            set {
+                this.longitudeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OrganizationID {
+            get {
+                return this.organizationIDField;
+            }
+            set {
+                this.organizationIDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class AmbulanceService : SyncableItem {
+        
+        private System.Guid ambulanceIDField;
+        
+        private string organizationField;
+        
+        private string contactField;
+        
+        private string phoneField;
+        
+        private string radioFrequencyField;
+        
+        private System.Guid organizationIDField;
+        
+        private bool isUniversalField;
+        
+        private bool isALSField;
+        
+        private bool isBLSField;
+        
+        private string locationField;
+        
+        private double latitudeField;
+        
+        private double longitudeField;
+        
+        /// <remarks/>
+        public System.Guid AmbulanceID {
+            get {
+                return this.ambulanceIDField;
+            }
+            set {
+                this.ambulanceIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Organization {
+            get {
+                return this.organizationField;
+            }
+            set {
+                this.organizationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Contact {
+            get {
+                return this.contactField;
+            }
+            set {
+                this.contactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RadioFrequency {
+            get {
+                return this.radioFrequencyField;
+            }
+            set {
+                this.radioFrequencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OrganizationID {
+            get {
+                return this.organizationIDField;
+            }
+            set {
+                this.organizationIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsUniversal {
+            get {
+                return this.isUniversalField;
+            }
+            set {
+                this.isUniversalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsALS {
+            get {
+                return this.isALSField;
+            }
+            set {
+                this.isALSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsBLS {
+            get {
+                return this.isBLSField;
+            }
+            set {
+                this.isBLSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Location {
+            get {
+                return this.locationField;
+            }
+            set {
+                this.locationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Latitude {
+            get {
+                return this.latitudeField;
+            }
+            set {
+                this.latitudeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Longitude {
+            get {
+                return this.longitudeField;
+            }
+            set {
+                this.longitudeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class NOTAM : SyncableItem {
+        
+        private bool useRadiusField;
+        
+        private decimal radiusNMField;
+        
+        private decimal altitudeASLField;
+        
+        private string centerPointField;
+        
+        private Coordinate radiusCentreField;
+        
+        private Coordinate polygonNEField;
+        
+        private Coordinate polygonNWField;
+        
+        private Coordinate polygonSEField;
+        
+        private Coordinate polygonSWField;
+        
+        /// <remarks/>
+        public bool UseRadius {
+            get {
+                return this.useRadiusField;
+            }
+            set {
+                this.useRadiusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal RadiusNM {
+            get {
+                return this.radiusNMField;
+            }
+            set {
+                this.radiusNMField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal AltitudeASL {
+            get {
+                return this.altitudeASLField;
+            }
+            set {
+                this.altitudeASLField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CenterPoint {
+            get {
+                return this.centerPointField;
+            }
+            set {
+                this.centerPointField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Coordinate RadiusCentre {
+            get {
+                return this.radiusCentreField;
+            }
+            set {
+                this.radiusCentreField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Coordinate PolygonNE {
+            get {
+                return this.polygonNEField;
+            }
+            set {
+                this.polygonNEField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Coordinate PolygonNW {
+            get {
+                return this.polygonNWField;
+            }
+            set {
+                this.polygonNWField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Coordinate PolygonSE {
+            get {
+                return this.polygonSEField;
+            }
+            set {
+                this.polygonSEField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Coordinate PolygonSW {
+            get {
+                return this.polygonSWField;
+            }
+            set {
+                this.polygonSWField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class IncidentObjective : SyncableItem {
+        
+        private System.Guid objectiveIDField;
+        
+        private string objectiveField;
+        
+        private int priorityField;
+        
+        private bool isUniversalField;
+        
+        private System.DateTime presetLastUpdatedUTCField;
+        
+        private IncidentObjective[] childObjectivesField;
+        
+        private System.Guid incidentObjectiveIDField;
+        
+        private System.DateTime objectiveLastUpdatedUTCField;
+        
+        private System.Guid organizationIDField;
+        
+        private bool completedField;
+        
+        private string copyNextOpTextField;
+        
+        /// <remarks/>
+        public System.Guid ObjectiveID {
+            get {
+                return this.objectiveIDField;
+            }
+            set {
+                this.objectiveIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Objective {
+            get {
+                return this.objectiveField;
+            }
+            set {
+                this.objectiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int Priority {
+            get {
+                return this.priorityField;
+            }
+            set {
+                this.priorityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUniversal {
+            get {
+                return this.isUniversalField;
+            }
+            set {
+                this.isUniversalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime PresetLastUpdatedUTC {
+            get {
+                return this.presetLastUpdatedUTCField;
+            }
+            set {
+                this.presetLastUpdatedUTCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public IncidentObjective[] ChildObjectives {
+            get {
+                return this.childObjectivesField;
+            }
+            set {
+                this.childObjectivesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid IncidentObjectiveID {
+            get {
+                return this.incidentObjectiveIDField;
+            }
+            set {
+                this.incidentObjectiveIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime ObjectiveLastUpdatedUTC {
+            get {
+                return this.objectiveLastUpdatedUTCField;
+            }
+            set {
+                this.objectiveLastUpdatedUTCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid OrganizationID {
+            get {
+                return this.organizationIDField;
+            }
+            set {
+                this.organizationIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Completed {
+            get {
+                return this.completedField;
+            }
+            set {
+                this.completedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CopyNextOpText {
+            get {
+                return this.copyNextOpTextField;
+            }
+            set {
+                this.copyNextOpTextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CommsPlan))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MedicalPlan))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(OrganizationChart))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AirOperationsSummary))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(GeneralMessage))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SafetyMessage))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(IncidentObjectivesSheet))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class ICSFormData : SyncableItem {
+        
+        private System.Guid preparedByRoleIDField;
+        
+        private System.Guid preparedByResourceIDField;
+        
+        private string preparedByResourceNameField;
+        
+        private string preparedByRoleNameField;
+        
+        private System.Guid approvedByRoleIDField;
+        
+        private System.Guid approvedByResourceIDField;
+        
+        private string approvedByResourceNameField;
+        
+        private string approvedByRoleNameField;
+        
+        private System.DateTime datePreparedField;
+        
+        private System.DateTime dateApprovedField;
+        
+        /// <remarks/>
+        public System.Guid PreparedByRoleID {
+            get {
+                return this.preparedByRoleIDField;
+            }
+            set {
+                this.preparedByRoleIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid PreparedByResourceID {
+            get {
+                return this.preparedByResourceIDField;
+            }
+            set {
+                this.preparedByResourceIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PreparedByResourceName {
+            get {
+                return this.preparedByResourceNameField;
+            }
+            set {
+                this.preparedByResourceNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PreparedByRoleName {
+            get {
+                return this.preparedByRoleNameField;
+            }
+            set {
+                this.preparedByRoleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ApprovedByRoleID {
+            get {
+                return this.approvedByRoleIDField;
+            }
+            set {
+                this.approvedByRoleIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ApprovedByResourceID {
+            get {
+                return this.approvedByResourceIDField;
+            }
+            set {
+                this.approvedByResourceIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ApprovedByResourceName {
+            get {
+                return this.approvedByResourceNameField;
+            }
+            set {
+                this.approvedByResourceNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ApprovedByRoleName {
+            get {
+                return this.approvedByRoleNameField;
+            }
+            set {
+                this.approvedByRoleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DatePrepared {
+            get {
+                return this.datePreparedField;
+            }
+            set {
+                this.datePreparedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateApproved {
+            get {
+                return this.dateApprovedField;
+            }
+            set {
+                this.dateApprovedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class CommsPlan : ICSFormData {
+        
+        private CommsPlanItem[] allCommsItemsField;
+        
+        private CommsPlanItem[] activeCommsItemsField;
+        
+        private CommsPlanItem[] activeAirCommsItemsField;
+        
+        /// <remarks/>
+        public CommsPlanItem[] allCommsItems {
+            get {
+                return this.allCommsItemsField;
+            }
+            set {
+                this.allCommsItemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public CommsPlanItem[] ActiveCommsItems {
+            get {
+                return this.activeCommsItemsField;
+            }
+            set {
+                this.activeCommsItemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public CommsPlanItem[] ActiveAirCommsItems {
+            get {
+                return this.activeAirCommsItemsField;
+            }
+            set {
+                this.activeAirCommsItemsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class MedicalPlan : ICSFormData {
+        
+        private AmbulanceService[] ambulancesField;
+        
+        private AmbulanceService[] activeAmbulancesField;
+        
+        private Hospital[] hospitalsField;
+        
+        private Hospital[] activeHospitalsField;
+        
+        private string emergencyProceduresField;
+        
+        private MedicalAidStation[] medicalAidStationsField;
+        
+        private MedicalAidStation[] activeAidStationsField;
+        
+        /// <remarks/>
+        public AmbulanceService[] Ambulances {
+            get {
+                return this.ambulancesField;
+            }
+            set {
+                this.ambulancesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public AmbulanceService[] ActiveAmbulances {
+            get {
+                return this.activeAmbulancesField;
+            }
+            set {
+                this.activeAmbulancesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Hospital[] Hospitals {
+            get {
+                return this.hospitalsField;
+            }
+            set {
+                this.hospitalsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Hospital[] ActiveHospitals {
+            get {
+                return this.activeHospitalsField;
+            }
+            set {
+                this.activeHospitalsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EmergencyProcedures {
+            get {
+                return this.emergencyProceduresField;
+            }
+            set {
+                this.emergencyProceduresField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public MedicalAidStation[] MedicalAidStations {
+            get {
+                return this.medicalAidStationsField;
+            }
+            set {
+                this.medicalAidStationsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public MedicalAidStation[] ActiveAidStations {
+            get {
+                return this.activeAidStationsField;
+            }
+            set {
+                this.activeAidStationsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class OrganizationChart : ICSFormData {
+        
+        private ICSRole[] allRolesField;
+        
+        private ICSRole[] activeRolesField;
+        
+        private ICSRole[] filledRolesField;
+        
+        private ICSRole[] filledActiveRolesField;
+        
+        private bool isUnifiedCommandField;
+        
+        /// <remarks/>
+        public ICSRole[] AllRoles {
+            get {
+                return this.allRolesField;
+            }
+            set {
+                this.allRolesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ICSRole[] ActiveRoles {
+            get {
+                return this.activeRolesField;
+            }
+            set {
+                this.activeRolesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ICSRole[] FilledRoles {
+            get {
+                return this.filledRolesField;
+            }
+            set {
+                this.filledRolesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ICSRole[] FilledActiveRoles {
+            get {
+                return this.filledActiveRolesField;
+            }
+            set {
+                this.filledActiveRolesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsUnifiedCommand {
+            get {
+                return this.isUnifiedCommandField;
+            }
+            set {
+                this.isUnifiedCommandField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class AirOperationsSummary : ICSFormData {
+        
+        private string remarksField;
+        
+        private System.DateTime sunriseField;
+        
+        private System.DateTime sunsetField;
+        
+        private string medivacAircraftTextField;
+        
+        private NOTAM notamField;
+        
+        /// <remarks/>
+        public string Remarks {
+            get {
+                return this.remarksField;
+            }
+            set {
+                this.remarksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Sunrise {
+            get {
+                return this.sunriseField;
+            }
+            set {
+                this.sunriseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Sunset {
+            get {
+                return this.sunsetField;
+            }
+            set {
+                this.sunsetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MedivacAircraftText {
+            get {
+                return this.medivacAircraftTextField;
+            }
+            set {
+                this.medivacAircraftTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public NOTAM notam {
+            get {
+                return this.notamField;
+            }
+            set {
+                this.notamField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class GeneralMessage : ICSFormData {
+        
+        private System.Guid messageIDField;
+        
+        private string toNameField;
+        
+        private string toPositionField;
+        
+        private string fromNameField;
+        
+        private string fromPositionField;
+        
+        private System.DateTime dateSentField;
+        
+        private string replyByPositionField;
+        
+        private string replyByNameField;
+        
+        private string subjectField;
+        
+        private string messageField;
+        
+        private string replyField;
+        
+        private System.DateTime replyDateField;
+        
+        private System.Guid fromRoleIDField;
+        
+        /// <remarks/>
+        public System.Guid MessageID {
+            get {
+                return this.messageIDField;
+            }
+            set {
+                this.messageIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ToName {
+            get {
+                return this.toNameField;
+            }
+            set {
+                this.toNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ToPosition {
+            get {
+                return this.toPositionField;
+            }
+            set {
+                this.toPositionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FromName {
+            get {
+                return this.fromNameField;
+            }
+            set {
+                this.fromNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FromPosition {
+            get {
+                return this.fromPositionField;
+            }
+            set {
+                this.fromPositionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateSent {
+            get {
+                return this.dateSentField;
+            }
+            set {
+                this.dateSentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReplyByPosition {
+            get {
+                return this.replyByPositionField;
+            }
+            set {
+                this.replyByPositionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReplyByName {
+            get {
+                return this.replyByNameField;
+            }
+            set {
+                this.replyByNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Subject {
+            get {
+                return this.subjectField;
+            }
+            set {
+                this.subjectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Reply {
+            get {
+                return this.replyField;
+            }
+            set {
+                this.replyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime ReplyDate {
+            get {
+                return this.replyDateField;
+            }
+            set {
+                this.replyDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid FromRoleID {
+            get {
+                return this.fromRoleIDField;
+            }
+            set {
+                this.fromRoleIDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class SafetyMessage : ICSFormData {
+        
+        private string messageField;
+        
+        private bool sitePlanRequiredField;
+        
+        private string sitePlanLocationField;
+        
+        private System.Guid safetyTemplateIDField;
+        
+        private string summaryLineField;
+        
+        private string imageBytesField;
+        
+        private string copyNextOpTextField;
+        
+        /// <remarks/>
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool SitePlanRequired {
+            get {
+                return this.sitePlanRequiredField;
+            }
+            set {
+                this.sitePlanRequiredField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SitePlanLocation {
+            get {
+                return this.sitePlanLocationField;
+            }
+            set {
+                this.sitePlanLocationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid SafetyTemplateID {
+            get {
+                return this.safetyTemplateIDField;
+            }
+            set {
+                this.safetyTemplateIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SummaryLine {
+            get {
+                return this.summaryLineField;
+            }
+            set {
+                this.summaryLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ImageBytes {
+            get {
+                return this.imageBytesField;
+            }
+            set {
+                this.imageBytesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CopyNextOpText {
+            get {
+                return this.copyNextOpTextField;
+            }
+            set {
+                this.copyNextOpTextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class IncidentObjectivesSheet : ICSFormData {
+        
+        private System.Guid sheetIDField;
+        
+        private string fireSizeField;
+        
+        private string fireStatusField;
+        
+        private string weatherForecastField;
+        
+        private string generalSafetyField;
+        
+        private IncidentObjective[] objectivesField;
+        
+        private IncidentObjective[] activeObjectivesField;
+        
+        /// <remarks/>
+        public System.Guid SheetID {
+            get {
+                return this.sheetIDField;
+            }
+            set {
+                this.sheetIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FireSize {
+            get {
+                return this.fireSizeField;
+            }
+            set {
+                this.fireSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FireStatus {
+            get {
+                return this.fireStatusField;
+            }
+            set {
+                this.fireStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string WeatherForecast {
+            get {
+                return this.weatherForecastField;
+            }
+            set {
+                this.weatherForecastField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string GeneralSafety {
+            get {
+                return this.generalSafetyField;
+            }
+            set {
+                this.generalSafetyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public IncidentObjective[] Objectives {
+            get {
+                return this.objectivesField;
+            }
+            set {
+                this.objectivesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public IncidentObjective[] ActiveObjectives {
+            get {
+                return this.activeObjectivesField;
+            }
+            set {
+                this.activeObjectivesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Briefing : SyncableItem {
+        
+        private int operationalPeriodField;
+        
+        private BriefingSection[] allSectionsField;
+        
+        private System.Guid briefingIDField;
+        
+        private System.DateTime dateCreatedUTCField;
+        
+        private System.DateTime dateUpdatedUTCField;
         
         /// <remarks/>
         public int OperationalPeriod {
@@ -7273,16 +5933,6 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
             }
             set {
                 this.allSectionsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
             }
         }
         
@@ -7323,7 +5973,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class EquipmentIssue {
+    public partial class GearIssue : SyncableItem {
         
         private System.Guid issueIDField;
         
@@ -7337,11 +5987,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         
         private System.DateTime returnDateField;
         
-        private System.DateTime lastUpdatedUTCField;
-        
         private string assigneeNameField;
-        
-        private int opPeriodField;
         
         /// <remarks/>
         public System.Guid IssueID {
@@ -7404,16 +6050,6 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
-        
-        /// <remarks/>
         public string AssigneeName {
             get {
                 return this.assigneeNameField;
@@ -7422,144 +6058,20 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
                 this.assigneeNameField = value;
             }
         }
-        
-        /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(IncidentGear))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class EquipmentStatus {
-        
-        private System.Guid statusIDField;
-        
-        private string statusNameField;
-        
-        private bool isActiveField;
-        
-        private int[] statusColorRGBField;
-        
-        /// <remarks/>
-        public System.Guid StatusID {
-            get {
-                return this.statusIDField;
-            }
-            set {
-                this.statusIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StatusName {
-            get {
-                return this.statusNameField;
-            }
-            set {
-                this.statusNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsActive {
-            get {
-                return this.isActiveField;
-            }
-            set {
-                this.isActiveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int[] StatusColorRGB {
-            get {
-                return this.statusColorRGBField;
-            }
-            set {
-                this.statusColorRGBField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class EquipmentCategory {
-        
-        private System.Guid categoryIDField;
-        
-        private string categoryNameField;
-        
-        private System.Guid parentCategoryIDField;
-        
-        private string categoryNotesField;
-        
-        /// <remarks/>
-        public System.Guid CategoryID {
-            get {
-                return this.categoryIDField;
-            }
-            set {
-                this.categoryIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CategoryName {
-            get {
-                return this.categoryNameField;
-            }
-            set {
-                this.categoryNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.Guid ParentCategoryID {
-            get {
-                return this.parentCategoryIDField;
-            }
-            set {
-                this.parentCategoryIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CategoryNotes {
-            get {
-                return this.categoryNotesField;
-            }
-            set {
-                this.categoryNotesField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TaskEquipment))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class Equipment {
+    public partial class Gear : SyncableItem {
         
         private System.Guid equipmentIDField;
         
-        private EquipmentCategory categoryField;
+        private GearCategory categoryField;
         
         private string equipmentNameField;
         
@@ -7586,7 +6098,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public EquipmentCategory Category {
+        public GearCategory Category {
             get {
                 return this.categoryField;
             }
@@ -7672,13 +6184,11 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class TaskEquipment : Equipment {
+    public partial class IncidentGear : Gear {
         
-        private int opPeriodField;
+        private GearStatus currentStatusField;
         
-        private EquipmentStatus currentStatusField;
-        
-        private EquipmentIssue currentIssueField;
+        private GearIssue currentIssueField;
         
         private System.Guid taskIDField;
         
@@ -7686,20 +6196,8 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         
         private System.Guid taskEquipmentIDField;
         
-        private System.DateTime lastUpdatedUTCField;
-        
         /// <remarks/>
-        public int OpPeriod {
-            get {
-                return this.opPeriodField;
-            }
-            set {
-                this.opPeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public EquipmentStatus CurrentStatus {
+        public GearStatus CurrentStatus {
             get {
                 return this.currentStatusField;
             }
@@ -7709,7 +6207,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public EquipmentIssue CurrentIssue {
+        public GearIssue CurrentIssue {
             get {
                 return this.currentIssueField;
             }
@@ -7747,16 +6245,6 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
                 this.taskEquipmentIDField = value;
             }
         }
-        
-        /// <remarks/>
-        public System.DateTime LastUpdatedUTC {
-            get {
-                return this.lastUpdatedUTCField;
-            }
-            set {
-                this.lastUpdatedUTCField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -7765,9 +6253,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
-    public partial class WFIncident {
-        
-        private System.Guid taskIDField;
+    public partial class Incident : SyncableItem {
         
         private string taskNameField;
         
@@ -7781,9 +6267,9 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         
         private string incidentTitleImageBytesField;
         
-        private TaskEquipment[] allEquipmentField;
+        private IncidentGear[] allEquipmentField;
         
-        private EquipmentIssue[] allEquipmentIssuesField;
+        private GearIssue[] allEquipmentIssuesField;
         
         private string currentFilePathField;
         
@@ -7823,6 +6309,8 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         
         private Vehicle[] allVehiclesField;
         
+        private Aircraft[] allAircraftField;
+        
         private Vehicle[] activeIncidentVehiclesField;
         
         private PositionLogEntry[] allPositionLogEntriesField;
@@ -7831,21 +6319,21 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         
         private AirOperationsSummary[] allAirOperationsSummariesField;
         
-        private TeamAssignment[] allAssignmentsField;
-        
-        private TeamAssignment[] activeAssignmentsField;
-        
         private OperationalGroup[] allOperationalGroupsField;
         
         private OperationalGroup[] activeOperationalGroupsField;
         
-        private OperationalSubGroup[] allOperationalSubGroupsField;
+        private Crew[] allOperationalSubGroupsField;
         
-        private OperationalSubGroup[] activeOperationalSubGroupsField;
+        private Crew[] activeOperationalSubGroupsField;
         
         private DemobilizationRecord[] allDemobilizationRecordsField;
         
         private DemobilizationRecord[] activeDemobilizationRecordsField;
+        
+        private ResourceReplacementPlan[] allResourceReplacementPlansField;
+        
+        private ResourceReplacementPlan[] activeResourceReplacementPlansField;
         
         private ShortGuid sourceIdentifierField;
         
@@ -7878,16 +6366,6 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         private string taskEncryptionKeyField;
         
         private int savedHighestOpsPeriodField;
-        
-        /// <remarks/>
-        public System.Guid TaskID {
-            get {
-                return this.taskIDField;
-            }
-            set {
-                this.taskIDField = value;
-            }
-        }
         
         /// <remarks/>
         public string TaskName {
@@ -7950,7 +6428,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public TaskEquipment[] allEquipment {
+        public IncidentGear[] allEquipment {
             get {
                 return this.allEquipmentField;
             }
@@ -7960,7 +6438,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public EquipmentIssue[] allEquipmentIssues {
+        public GearIssue[] allEquipmentIssues {
             get {
                 return this.allEquipmentIssuesField;
             }
@@ -8160,6 +6638,16 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
+        public Aircraft[] AllAircraft {
+            get {
+                return this.allAircraftField;
+            }
+            set {
+                this.allAircraftField = value;
+            }
+        }
+        
+        /// <remarks/>
         public Vehicle[] ActiveIncidentVehicles {
             get {
                 return this.activeIncidentVehiclesField;
@@ -8200,26 +6688,6 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public TeamAssignment[] AllAssignments {
-            get {
-                return this.allAssignmentsField;
-            }
-            set {
-                this.allAssignmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public TeamAssignment[] ActiveAssignments {
-            get {
-                return this.activeAssignmentsField;
-            }
-            set {
-                this.activeAssignmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
         public OperationalGroup[] AllOperationalGroups {
             get {
                 return this.allOperationalGroupsField;
@@ -8240,7 +6708,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public OperationalSubGroup[] AllOperationalSubGroups {
+        public Crew[] AllOperationalSubGroups {
             get {
                 return this.allOperationalSubGroupsField;
             }
@@ -8250,7 +6718,7 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
         }
         
         /// <remarks/>
-        public OperationalSubGroup[] ActiveOperationalSubGroups {
+        public Crew[] ActiveOperationalSubGroups {
             get {
                 return this.activeOperationalSubGroupsField;
             }
@@ -8276,6 +6744,26 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
             }
             set {
                 this.activeDemobilizationRecordsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ResourceReplacementPlan[] AllResourceReplacementPlans {
+            get {
+                return this.allResourceReplacementPlansField;
+            }
+            set {
+                this.allResourceReplacementPlansField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ResourceReplacementPlan[] ActiveResourceReplacementPlans {
+            get {
+                return this.activeResourceReplacementPlansField;
+            }
+            set {
+                this.activeResourceReplacementPlansField = value;
             }
         }
         
@@ -8436,6 +6924,573 @@ namespace WildfireICSDesktopServices.ca.icscanada.ciapp {
             }
             set {
                 this.savedHighestOpsPeriodField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class TaskUpdate {
+        
+        private System.Guid updateIDField;
+        
+        private System.Guid taskIDField;
+        
+        private System.DateTime lastUpdatedUTCField;
+        
+        private string commandNameField;
+        
+        private SyncableItem dataField;
+        
+        private string dataAsJSONField;
+        
+        private bool processedLocallyField;
+        
+        private bool uploadedSuccessfullyField;
+        
+        private System.Guid machineIDField;
+        
+        private string objectTypeField;
+        
+        private string dataEncField;
+        
+        private string sourceField;
+        
+        private string createdByRoleNameField;
+        
+        private System.Guid itemIDField;
+        
+        private int softwareVersionMajorField;
+        
+        private int softwareVersionMinorField;
+        
+        private int softwareVersionBuildField;
+        
+        /// <remarks/>
+        public System.Guid UpdateID {
+            get {
+                return this.updateIDField;
+            }
+            set {
+                this.updateIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid TaskID {
+            get {
+                return this.taskIDField;
+            }
+            set {
+                this.taskIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime LastUpdatedUTC {
+            get {
+                return this.lastUpdatedUTCField;
+            }
+            set {
+                this.lastUpdatedUTCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CommandName {
+            get {
+                return this.commandNameField;
+            }
+            set {
+                this.commandNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SyncableItem Data {
+            get {
+                return this.dataField;
+            }
+            set {
+                this.dataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DataAsJSON {
+            get {
+                return this.dataAsJSONField;
+            }
+            set {
+                this.dataAsJSONField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool ProcessedLocally {
+            get {
+                return this.processedLocallyField;
+            }
+            set {
+                this.processedLocallyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool UploadedSuccessfully {
+            get {
+                return this.uploadedSuccessfullyField;
+            }
+            set {
+                this.uploadedSuccessfullyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid MachineID {
+            get {
+                return this.machineIDField;
+            }
+            set {
+                this.machineIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ObjectType {
+            get {
+                return this.objectTypeField;
+            }
+            set {
+                this.objectTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DataEnc {
+            get {
+                return this.dataEncField;
+            }
+            set {
+                this.dataEncField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Source {
+            get {
+                return this.sourceField;
+            }
+            set {
+                this.sourceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatedByRoleName {
+            get {
+                return this.createdByRoleNameField;
+            }
+            set {
+                this.createdByRoleNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ItemID {
+            get {
+                return this.itemIDField;
+            }
+            set {
+                this.itemIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SoftwareVersionMajor {
+            get {
+                return this.softwareVersionMajorField;
+            }
+            set {
+                this.softwareVersionMajorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SoftwareVersionMinor {
+            get {
+                return this.softwareVersionMinorField;
+            }
+            set {
+                this.softwareVersionMinorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SoftwareVersionBuild {
+            get {
+                return this.softwareVersionBuildField;
+            }
+            set {
+                this.softwareVersionBuildField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class DemobilizationRecord : SyncableItem {
+        
+        private System.Guid signInRecordIDField;
+        
+        private System.Guid resourceIDField;
+        
+        private System.DateTime demobDateField;
+        
+        private string demobLocationField;
+        
+        private System.DateTime debriefDateField;
+        
+        private string debriefLocationField;
+        
+        private bool inventoryReconciledField;
+        
+        private bool discrepanciesWithSupplyField;
+        
+        private bool discrepanciesWithFacilitiesField;
+        
+        private bool discrepanciesWithFinanceField;
+        
+        private bool iCS211CompletedField;
+        
+        private string travelTimeToHomeUnitField;
+        
+        private bool performanceRatingCompletedField;
+        
+        /// <remarks/>
+        public System.Guid SignInRecordID {
+            get {
+                return this.signInRecordIDField;
+            }
+            set {
+                this.signInRecordIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ResourceID {
+            get {
+                return this.resourceIDField;
+            }
+            set {
+                this.resourceIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DemobDate {
+            get {
+                return this.demobDateField;
+            }
+            set {
+                this.demobDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DemobLocation {
+            get {
+                return this.demobLocationField;
+            }
+            set {
+                this.demobLocationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DebriefDate {
+            get {
+                return this.debriefDateField;
+            }
+            set {
+                this.debriefDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DebriefLocation {
+            get {
+                return this.debriefLocationField;
+            }
+            set {
+                this.debriefLocationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool InventoryReconciled {
+            get {
+                return this.inventoryReconciledField;
+            }
+            set {
+                this.inventoryReconciledField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool DiscrepanciesWithSupply {
+            get {
+                return this.discrepanciesWithSupplyField;
+            }
+            set {
+                this.discrepanciesWithSupplyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool DiscrepanciesWithFacilities {
+            get {
+                return this.discrepanciesWithFacilitiesField;
+            }
+            set {
+                this.discrepanciesWithFacilitiesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool DiscrepanciesWithFinance {
+            get {
+                return this.discrepanciesWithFinanceField;
+            }
+            set {
+                this.discrepanciesWithFinanceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool ICS211Completed {
+            get {
+                return this.iCS211CompletedField;
+            }
+            set {
+                this.iCS211CompletedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TravelTimeToHomeUnit {
+            get {
+                return this.travelTimeToHomeUnitField;
+            }
+            set {
+                this.travelTimeToHomeUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool PerformanceRatingCompleted {
+            get {
+                return this.performanceRatingCompletedField;
+            }
+            set {
+                this.performanceRatingCompletedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class ResourceReplacementPlan : SyncableItem {
+        
+        private string resourceNameField;
+        
+        private string kindField;
+        
+        private string assignmentField;
+        
+        private System.DateTime estimatedArrivalField;
+        
+        private string homeAreaField;
+        
+        private string transportationField;
+        
+        private string orderNumberField;
+        
+        private string checkInLocationField;
+        
+        private string commentsField;
+        
+        private System.Guid replacementForCheckInIDField;
+        
+        private string replacedResourceNameField;
+        
+        private string resourceVarietyField;
+        
+        /// <remarks/>
+        public string ResourceName {
+            get {
+                return this.resourceNameField;
+            }
+            set {
+                this.resourceNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Kind {
+            get {
+                return this.kindField;
+            }
+            set {
+                this.kindField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Assignment {
+            get {
+                return this.assignmentField;
+            }
+            set {
+                this.assignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime EstimatedArrival {
+            get {
+                return this.estimatedArrivalField;
+            }
+            set {
+                this.estimatedArrivalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string HomeArea {
+            get {
+                return this.homeAreaField;
+            }
+            set {
+                this.homeAreaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Transportation {
+            get {
+                return this.transportationField;
+            }
+            set {
+                this.transportationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OrderNumber {
+            get {
+                return this.orderNumberField;
+            }
+            set {
+                this.orderNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CheckInLocation {
+            get {
+                return this.checkInLocationField;
+            }
+            set {
+                this.checkInLocationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Comments {
+            get {
+                return this.commentsField;
+            }
+            set {
+                this.commentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid ReplacementForCheckInID {
+            get {
+                return this.replacementForCheckInIDField;
+            }
+            set {
+                this.replacementForCheckInIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReplacedResourceName {
+            get {
+                return this.replacedResourceNameField;
+            }
+            set {
+                this.replacedResourceNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ResourceVariety {
+            get {
+                return this.resourceVarietyField;
+            }
+            set {
+                this.resourceVarietyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TaskOfListOfNewsItem))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
+    public partial class Task {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    public delegate void GetAllNewsItemsCompletedEventHandler(object sender, GetAllNewsItemsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllNewsItemsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllNewsItemsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public TaskOfListOfNewsItem Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((TaskOfListOfNewsItem)(this.results[0]));
             }
         }
     }

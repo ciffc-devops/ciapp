@@ -9,15 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class HospitalsForm : Form
+    public partial class HospitalsForm : BaseForm
     {
         public HospitalsForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
 
         }
 
@@ -45,7 +46,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             editHosptalForm.ShowTravelTimes = false;
             if (editHosptalForm.ShowDialog() == DialogResult.OK)
             {
-                Program.generalOptionsService.UpserOptionValue(editHosptalForm.selectedHospital, "Hospital");
+                Program.generalOptionsService.UpsertOptionValue(editHosptalForm.selectedHospital, "Hospital");
                 buildDataList();
             }
         }
@@ -66,7 +67,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 editHosptalForm.ShowTravelTimes = false;
                 if (editHosptalForm.ShowDialog() == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editHosptalForm.selectedHospital, "Hospital");
+                    Program.generalOptionsService.UpsertOptionValue(editHosptalForm.selectedHospital, "Hospital");
                     buildDataList();
                 }
 
@@ -78,14 +79,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
             if (dgvHospitals.SelectedRows.Count > 0)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dgvHospitals.SelectedRows)
                     {
                         Hospital h = (Hospital)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Hospiatl");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Hospiatl");
                     }
                     buildDataList();
                 }
@@ -103,7 +104,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 editHosptalForm.ShowTravelTimes = false;
                 if (editHosptalForm.ShowDialog() == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editHosptalForm.selectedHospital, "Hospital");
+                    Program.generalOptionsService.UpsertOptionValue(editHosptalForm.selectedHospital, "Hospital");
                     buildDataList();
                 }
 

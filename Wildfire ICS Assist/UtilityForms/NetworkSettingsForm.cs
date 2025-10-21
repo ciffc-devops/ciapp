@@ -17,14 +17,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Wildfire_ICS_Assist
 {
-    public partial class NetworkSettingsForm : Form
+    public partial class NetworkSettingsForm : BaseForm
     {
         private string tempServerIP = null; private string tempPort = null;
         int preferredPort = 42999;
 
         public NetworkSettingsForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void NetworkSettingsForm_Load(object sender, EventArgs e)
@@ -77,14 +77,14 @@ namespace Wildfire_ICS_Assist
 
                 if (firewallEnabled && !portAvailable)
                 {
-                    MessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
+                    LgMessageBox.Show("A firewall may be blocking this application. Please try an alternate port, or make an exception in your firewall to allow this program to operate over a network.");
                 }
 
                 NetworkComms.Shutdown();
                 Program.networkService.ServerIP = txtServerIP.Text;
                 Program.networkService.ServerPortStr = txtServerPort.Text;
-                Program.generalOptionsService.UpserOptionValue(Program.networkService.ServerIP, "LastServerIP");
-                Program.generalOptionsService.UpserOptionValue(Program.networkService.ServerPortStr, "LastPort");
+                Program.generalOptionsService.UpsertOptionValue(Program.networkService.ServerIP, "LastServerIP");
+                Program.generalOptionsService.UpsertOptionValue(Program.networkService.ServerPortStr, "LastPort");
 
                 DateTime today = DateTime.Now;
                 //parent.addToNetworkLog(string.Format("{0:HH:mm:ss}", today) + " - Attempting to connect to server " + Program.networkService.ServerIP + "\r\n");
@@ -211,7 +211,7 @@ namespace Wildfire_ICS_Assist
                         selectIPForm.ipAddresses = allIPs;
                         DialogResult dr = selectIPForm.ShowDialog();
                         tempServerIP = selectIPForm.SelectedAddress;
-                        Program.generalOptionsService.UpserOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
+                        Program.generalOptionsService.UpsertOptionValue(tempServerIP, "LastIpUsedWhenMachineIsServer");
                     }
                 }
             }

@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditContactForm : Form
+    public partial class EditContactForm : BaseForm
     {
         private Contact _contact = new Contact();
         public Contact contact { get => _contact; private set => _contact = value; }
@@ -20,8 +21,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public EditContactForm(Contact contactToEdit)
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
             contact = contactToEdit;
 
         }
@@ -72,7 +73,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             }
             else
             {
-                MessageBox.Show(Properties.Resources.EditContactValidationError);
+                LgMessageBox.Show(Properties.Resources.EditContactValidationError);
             }
         }
 

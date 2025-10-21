@@ -12,7 +12,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditSavedSafetyNoteForm : Form
+    public partial class EditSavedSafetyNoteForm : BaseForm
     {
         private SafetyMessage _selectedMessage = null;
         public SafetyMessage selectedMessage { get => _selectedMessage; set { _selectedMessage = value; LoadMessage(); } }
@@ -25,7 +25,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         }
         public EditSavedSafetyNoteForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

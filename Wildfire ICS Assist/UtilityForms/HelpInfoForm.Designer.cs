@@ -41,11 +41,10 @@
             // 
             // btnMoreInfo
             // 
-            this.btnMoreInfo.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.btnMoreInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnMoreInfo.Location = new System.Drawing.Point(8, 3);
             this.btnMoreInfo.Name = "btnMoreInfo";
-            this.btnMoreInfo.Size = new System.Drawing.Size(288, 51);
+            this.btnMoreInfo.Size = new System.Drawing.Size(179, 51);
             this.btnMoreInfo.TabIndex = 0;
             this.btnMoreInfo.Text = "More Info";
             this.btnMoreInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -86,10 +85,9 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.btnOK.Location = new System.Drawing.Point(306, 3);
+            this.btnOK.Location = new System.Drawing.Point(385, 3);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(197, 51);
+            this.btnOK.Size = new System.Drawing.Size(118, 51);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -122,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            
             this.ClientSize = new System.Drawing.Size(515, 489);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

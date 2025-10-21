@@ -71,7 +71,6 @@
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(570, 113);
             this.txtRemarks.TabIndex = 3;
-            this.txtRemarks.WordWrap = true;
             this.txtRemarks.Child = new System.Windows.Controls.TextBox();
             // 
             // lblQuestion

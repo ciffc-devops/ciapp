@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using WF_ICS_ClassLibrary.Models;
@@ -12,13 +13,18 @@ namespace WF_ICS_ClassLibrary.Utilities
     public static class TestTools
     {
         private static readonly Random random = new Random();
+        private static readonly int maxAgencyNumber = 10; // Maximum number of agencies to choose from
+        private static readonly int maxTypeNumber = 40;
         public static Aircraft CreateAircraftTest(int seed)
         {
             Aircraft a = new Aircraft();
             a.MakeModel = "MakeModel" + seed;
             a.CompanyName = "Company Name " + seed;
+            a.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, maxAgencyNumber); 
             List<string> models = AircraftTools.GetHelicopterTypes();
-            a.MakeModel = models[random.Next(models.Count)];
+            a.MakeModel = models[random.Next(maxTypeNumber)];
+            a.Type = a.MakeModel;
+            a.Kind = "Helicopter";
             a.Registration = "Reg " + seed;
             a.Base = "Base" + seed;
             a.StartTime = DateTime.Now;
@@ -54,9 +60,8 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.MedivacAircraftText = "Medivac Test" + seed;
             test.notam = CreateNOTAMTest(seed);
             //test.aircrafts.Add(CreateAircraftTest(seed));
-            test.PreparedByPositionID = Globals.PlanningChiefID;
-            test.PreparedByPosition = "Planning Section Chief";
-            test.PreparedByName = "Name" + seed;
+            test.PreparedByRoleID = Globals.PlanningChiefGenericID;
+            test.PreparedByResourceName = "Name" + seed;
             return test;
         }
         public static Contact createContactTest(int seed)
@@ -119,16 +124,20 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static MedicalPlan createTestMedicalPlan(int seed)
         {
             MedicalPlan test = new MedicalPlan();
-            test.PreparedBy = "PrepBy" + seed;
+            test.PreparedByResourceName = "PrepBy" + seed;
             test.DatePrepared = DateTime.Now.AddHours(seed);
-            test.Ambulances.Add(createTestAmbulanceService(seed));
-            test.Hospitals.Add(createTestHospital(seed));
-            test.MedicalAidStations.Add(createTestMedicalAidStation(seed));
+            for (int x = 0; x < 3; x++)
+            {
+                test.Ambulances.Add(createTestAmbulanceService(x));
+                test.Hospitals.Add(createTestHospital(x));
+                test.MedicalAidStations.Add(createTestMedicalAidStation(x));
+            }
             test.EmergencyProcedures = "EmergencyProcedures" + seed;
-            test.PreparedByPosition = "Operations Section Chief";
-            test.PreparedByRoleID = Globals.OpsChiefID;
-            test.PreparedBy = "Tim " + seed;
-            test.ApprovedByRoleID = Globals.IncidentCommanderID;
+            test.PreparedByRoleName = "Operations Section Chief";
+            test.PreparedByRoleID = Globals.OpsChiefGenericID;
+            test.PreparedByResourceName = "Tim " + seed;
+            test.ApprovedByRoleID = Globals.IncidentCommanderGenericID;
+            test.OpPeriod = seed;
             return test;
         }
 
@@ -148,7 +157,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static PositionLogEntry createTestPositionLogEntry(int seed)
         {
             PositionLogEntry test = new PositionLogEntry();
-            test.Role = OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID);
+            test.Role = new ICSRole(OrganizationalChartTools.GetGenericRoleByID(Globals.IncidentCommanderGenericID));
             test.DateCreated = DateTime.Now;
             test.DateUpdated = DateTime.Now.AddHours(seed);
             test.IsComplete = RandomBooleanGenerator.GetRandomBoolean();
@@ -166,9 +175,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.Message = "Message" + seed;
             test.SitePlanRequired = RandomBooleanGenerator.GetRandomBoolean();
             test.SitePlanLocation = "Location" + seed;
-            test.ApprovedByName = "Tim " + seed;
+            test.ApprovedByResourceName = "Tim " + seed;
             test.ApprovedByRoleName = "Planning Section Chief";
-            test.ApprovedByRoleID = Globals.PlanningChiefID;
+            test.ApprovedByRoleID = Globals.PlanningChiefGenericID;
             test.SummaryLine = "Hazard " + seed;
             return test;
         }
@@ -189,21 +198,23 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.HomeProvinceID = ProvinceTools.GetProvinces().First().ProvinceGUID;
             test.HomeCountry = "HomeCountry" + seed;
             test.EmergencyContact = "EmergencyContact" + seed;
-            test.Agency = "Agency" + seed;
+
+            test.Agency = "Agency " + RandomIntGenerator.GetRandomInt(1, maxAgencyNumber);
             test.IsContractor = RandomBooleanGenerator.GetRandomBoolean();
             test.CallSign = "CallSign" + seed;
             test.Pronouns = "Pronouns" + seed;
-            test.AccomodationPreference = "AccommodationPreference" + seed;
+            test.AccommodationPreference = "AccommodationPreference" + seed;
             List<string> kinds = PersonnelTools.GetPersonnelKinds();
 
             test.Kind = kinds[random.Next(kinds.Count)];
-            test.Type = "Type" + random.Next(1, 8);
+            test.Type = "Type" + random.Next(1, maxTypeNumber);
             return test;
         }
         public static Vehicle createTestVehicle(int seed)
         {
             Vehicle test = new Vehicle();
             test.IncidentIDNo = "Name " + seed;
+            test.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, maxAgencyNumber);
             test.OrderRequestNo = "OrderRequestNo" + seed;
             test.Classification = "Classification" + seed;
             test.Make = "Make" + seed;
@@ -219,16 +230,17 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.OperatorID = Guid.Empty;
             test.ASE = "ASE" + seed;
             test.Kind = "Kind" + seed;
-            test.Type = "Type" + random.Next(1, 4);
+            test.Type = "Type" + random.Next(1, maxTypeNumber);
             test.IsEquipment = RandomBooleanGenerator.GetRandomBoolean();
             return test;
 
         }
 
-        public static OperationalSubGroup createTestCrew(int seed, List<IncidentResource> childResources)
+        public static Crew createTestCrew(int seed, List<IncidentResource> childResources)
         {
-            OperationalSubGroup test = new OperationalSubGroup();
+            Crew test = new Crew();
             test.Active = true;
+            test.AgencyName = "Agency " + RandomIntGenerator.GetRandomInt(1, maxAgencyNumber);
             test.ResourceName = "Crew " + seed;
             test.Transport = "Transport " + seed;
             test.Email = "email" + seed + "@test.com";
@@ -236,7 +248,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.IsEquipmentCrew = false;
             test.UniqueIDNum = seed;
             test.Kind = "Crew";
-            test.Type = "Type " + random.Next(1, 4);
+            test.Type = "Type " + random.Next(1, maxTypeNumber);
             
             foreach(IncidentResource resource in childResources)
             {
@@ -246,8 +258,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                     test.Kind = "Heavy Equipment Crew";
                 }
                 OperationalGroupResourceListing listing = new OperationalGroupResourceListing();
-                listing.SubGroupID = test.ID;
-                listing.OperationalGroupID = test.OperationalGroupID;
+                listing.OperationalGroupID = test.ID;
                 listing.Kind = resource.Kind;
                 listing.Type = resource.Type;
                 listing.ResourceIdentifier = "Crew " + seed;
@@ -293,9 +304,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.LastDayOfRest = DateTime.Now.AddDays(-1);
 
             
-            List<ICSRole> roles = OrgChartTools.GetBlankPrimaryRoles().OrderBy(o=>Guid.NewGuid()).ToList();
+            List<ICSRole> roles = OrganizationalChartTools.GetBlankPrimaryRoles().OrderBy(o=>Guid.NewGuid()).ToList();
             test.InitialRoleName = roles.First().RoleName;
-            test.InitialRoleAcronym = roles.First().Mnemonic;
+            test.InitialRoleAcronym = roles.First().MnemonicAbrv;
             int rnd = random.Next(4);
             test.ReplacementRequired = rnd < 3;
              test.DateReplacementRequired = test.LastDayOnIncident.AddDays(-1); 
@@ -343,13 +354,13 @@ namespace WF_ICS_ClassLibrary.Utilities
                     break;
                 case "Crew":
                     resource = createTestCrew(seed, childResources);
-                    (resource as OperationalSubGroup).IsEquipmentCrew = false;
+                    (resource as Crew).IsEquipmentCrew = false;
                     record.InitialRoleAcronym = string.Empty;
                     record.InitialRoleName = string.Empty;
                     break;
                 case "Heavy Equipment Crew":
                     resource = createTestCrew(seed, childResources);
-                    (resource as OperationalSubGroup).IsEquipmentCrew = true;
+                    (resource as Crew).IsEquipmentCrew = true;
                     record.InitialRoleAcronym = string.Empty;
                     record.InitialRoleName = string.Empty;
                     break;
@@ -406,7 +417,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.LastUpdatedUTC = DateTime.Now;
             test.Active = true;
             test.OrganizationID = Guid.Empty;
-            test.OpsPeriod = 1;
+            test.OpPeriod = 1;
             test.RxTone = "RxTone" + seed;
             test.Assignment = "Aassignment" + seed;
             test.TemplateItemID = Guid.Empty;
@@ -420,9 +431,9 @@ namespace WF_ICS_ClassLibrary.Utilities
         {
             CommsPlan test = new CommsPlan();
 
-            test.OpsPeriod = 1;
+            test.OpPeriod = seed;
             test.DatePrepared = DateTime.Now.AddHours(seed);
-            test.PreparedBy = "PreparedBy" + seed;
+            test.PreparedByResourceName = RandomNameGenerator.FirstName + " " + RandomNameGenerator.LastName;
             test.allCommsItems = new List<CommsPlanItem>();
             for (int x = 0; x < 5; x++)
             {
@@ -432,9 +443,10 @@ namespace WF_ICS_ClassLibrary.Utilities
 
 
             test.LastUpdatedUTC = DateTime.Now;
-            test.PreparedByPosition = "PreparedByPosition" + seed;
             return test;
         }
+
+      
 
         public static GeneralMessage createTestGeneralMessage(int seed)
         {
@@ -447,8 +459,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.FromPosition = "FromPosition" + seed;
             test.DateSent = DateTime.Now.AddHours(seed);
             test.LastUpdatedUTC = DateTime.UtcNow;
-            test.ApprovedByName = "ApprovedByName" + seed;
-            test.ApprovedByPosition = "ApprovedByPosition" + seed;
+            test.ApprovedByResourceName = "ApprovedByName" + seed;
             test.ReplyByPosition = "ReplyByPosition" + seed;
             test.ReplyByName = "ReplyByName" + seed;
             test.Subject = "Subject" + seed;
@@ -456,17 +467,18 @@ namespace WF_ICS_ClassLibrary.Utilities
             test.Reply = StringExt.LoremIpsum(5, 100, 5, 10, 2);
             test.Active = true;
             test.ReplyDate = DateTime.Now.AddHours(seed * 2);
-            test.FromRoleID = Globals.OpsChiefID;
-            test.ApprovedByRoleID = Globals.UnifiedCommand1ID;
+            test.FromRoleID = Globals.OpsChiefGenericID;
+            test.ApprovedByRoleID = Globals.UnifiedCommand1GenericID;
 
             return test;
         }
 
-        public static IncidentObjective createTestIncidentObjective(int seed)
+        public static IncidentObjective createTestIncidentObjective(int seed, int opPeriod = 0)
         {
             IncidentObjective test = new IncidentObjective();
             test.Objective = "Objective " + seed;
             test.Priority = seed;
+            test.OpPeriod = opPeriod;
             test.Completed = RandomBooleanGenerator.GetRandomBoolean();
            
 
@@ -476,18 +488,19 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static IncidentObjectivesSheet createTestObjectiveSheet(int seed)
         {
             IncidentObjectivesSheet sheet = new IncidentObjectivesSheet();
+            sheet.OpPeriod = seed;
             sheet.DatePrepared = DateTime.Now;
-            sheet.WeatherForcast = "WeatherForcast " + seed;
+            sheet.WeatherForecast = "WeatherForcast " + seed;
             sheet.GeneralSafety = "General Safety" + seed;
             sheet.FireSize = random.Next(100).ToString();
             sheet.FireStatus = "Status" + seed;
-            sheet.PreparedBy = "Tim " + seed;
-            sheet.PreparedByRole = "Planning Section Chief";
-            sheet.ApprovedBy = "Jim " + seed;
-            sheet.ApprovedByRole = "EOC Director";
+            sheet.PreparedByResourceName = "Tim " + seed;
+            sheet.PreparedByRoleName = "Planning Section Chief";
+            sheet.ApprovedByResourceName = "Jim " + seed;
+            sheet.ApprovedByRoleName = "EOC Director";
             for (int x = 0; x < 5; x++)
             {
-                sheet.Objectives.Add(createTestIncidentObjective(x));
+                sheet.Objectives.Add(createTestIncidentObjective(x, sheet.OpPeriod));
             }
             
 

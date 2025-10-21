@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
@@ -13,6 +12,7 @@ using WildfireICSDesktopServices;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Utilities;
 using System.Runtime.InteropServices;
+using WildfireICSDesktopServices.NewsServices;
 using Microsoft.VisualStudio.Utilities;
 
 namespace Wildfire_ICS_Assist
@@ -27,23 +27,23 @@ namespace Wildfire_ICS_Assist
         {
             if (Environment.OSVersion.Version.Major >= 6) SetProcessDpiAwarenessContext(DpiAwarenessContext.Unaware);
 
-       
-
             generalOptionsService = new GeneralOptionsService(true);
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
-            
+
             pdfExportService = new PDFExportService();
             pdfExportService.SetDateFormat(generalOptionsService.GetStringOptionValue("DateFormat"));
             WF_ICS_ClassLibrary.Globals.DateFormat = generalOptionsService.GetStringOptionValue("DateFormat");
-            wfIncidentService = new WFIncidentService();
-            WF_ICS_ClassLibrary.Globals.incidentService = wfIncidentService;
+            incidentDataService = new IncidentDataService();
+            WF_ICS_ClassLibrary.Globals.incidentService = incidentDataService;
             positionLogService = new PositionLogService();
             networkService = new NetworkService();
+            newsService = new NewsService();
 
-            CurrentTask = new WFIncident();
+            CurrentTask = new Incident();
             CurrentOpPeriod = 1;
-            CurrentRole = OrgChartTools.GetGenericRoleByID(Globals.IncidentCommanderID);
-           
+            ICSRole defaultRole = (ICSRole)generalOptionsService.GetOptionsValue("DefaultICSRole");
+            if (defaultRole != null) { CurrentRole = defaultRole; }
+            else { CurrentRole = new ICSRole(OrganizationalChartTools.GetGenericRoleByID(Globals.IncidentCommanderGenericID)); }
 
             MachineID = Properties.Settings.Default.MachineID;
             if (MachineID == Guid.Empty)
@@ -52,6 +52,8 @@ namespace Wildfire_ICS_Assist
                 Properties.Settings.Default.MachineID = _MachineID;
                 Properties.Settings.Default.Save();
             }
+
+            LoadColors(3);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -70,10 +72,10 @@ namespace Wildfire_ICS_Assist
         */
         private static IGeneralOptionsService _generalOptionsService = null;
         private static IPDFExportService _pdfExportService = null;
-        private static IWFIncidentService _wfIncidentService = null;
+        private static NewsService _newsService = null;
+        private static IIncidentDataService _incidentDataService = null;
         private static IPositionLogService _positionLogService= null;
         private static Icon _programIcon = Properties.Resources.P_icon;
-        private static ICSRole _CurrentRole;
         private static int _CurrentOpPeriod;
         private static NetworkSendLog _networkSendLog;
         private static bool _InternetSyncEnabled;
@@ -81,36 +83,31 @@ namespace Wildfire_ICS_Assist
         private static CultureInfo _cultureInfo;
         private static NetworkService _networkService = null;
 
-        private static int _PNumMin = 1;
-        private static int _PNumMax = 10000;
-        private static int _VNumMin = 1;
-        private static int _VNumMax = 10000;
-        private static int _ENumMin = 1;
-        private static int _ENumMax = 10000;
-        private static int _CNumMin = 1;
-        private static int _CNumMax = 10000;
 
 
         public static IGeneralOptionsService generalOptionsService { get => _generalOptionsService; private set => _generalOptionsService = value; }
 
         public static IPDFExportService pdfExportService { get => _pdfExportService; private set => _pdfExportService = value; }
-        public static IWFIncidentService wfIncidentService { get => _wfIncidentService; private set => _wfIncidentService = value; }
+        public static IIncidentDataService incidentDataService { get => _incidentDataService; private set => _incidentDataService = value; }
+        public static NewsService newsService { get => _newsService; private set => _newsService = value; }
 
 
-        public static WFIncident CurrentIncident
+        public static Incident CurrentIncident
         {
-            get { if (wfIncidentService != null && wfIncidentService.CurrentIncident != null) { return wfIncidentService.CurrentIncident; } else { return new WFIncident(); } }
-            set { wfIncidentService.CurrentIncident = value; networkService.CurrentIncidentID = value.TaskID; }
+            get { if (incidentDataService != null && incidentDataService.CurrentIncident != null) { return incidentDataService.CurrentIncident; } else { return new Incident(); } }
+            set { incidentDataService.CurrentIncident = value; networkService.CurrentIncidentID = value.ID; }
         }
         public static OrganizationChart CurrentOrgChart
         {
             get
             {
+                if (CurrentIncident == null) { return null; }
                 if(CurrentIncident != null)
                 {
                     CurrentIncident.createOrgChartAsNeeded(CurrentOpPeriod);
                 }
-                return CurrentIncident.allOrgCharts.First(o=>o.OpPeriod== CurrentOpPeriod);
+                if (CurrentIncident != null && CurrentIncident.allOrgCharts != null) { return CurrentIncident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == CurrentOpPeriod); }
+                return null;
             }
         }
         /*
@@ -120,12 +117,12 @@ namespace Wildfire_ICS_Assist
         */
         public static IPositionLogService positionLogService { get => _positionLogService; private set => _positionLogService = value; }
         public static Icon programIcon { get => _programIcon; private set => _programIcon = value; }
-        public static WFIncident CurrentTask { get => wfIncidentService.CurrentIncident; set { wfIncidentService.CurrentIncident = value; } }
-        public static ICSRole CurrentRole { get => _CurrentRole; set => _CurrentRole = value; }
+        public static Incident CurrentTask { get => incidentDataService.CurrentIncident; set { incidentDataService.CurrentIncident = value; } }
+        public static ICSRole CurrentRole { get => incidentDataService.CurrentRole; set { incidentDataService.CurrentRole = value; } }
         public static int CurrentOpPeriod { get => _CurrentOpPeriod; set => _CurrentOpPeriod = value; }
         public static OperationalPeriod CurrentOpPeriodDetails { get { if (CurrentIncident != null && CurrentIncident.AllOperationalPeriods.Any(o => o.PeriodNumber == CurrentOpPeriod)) { return CurrentIncident.AllOperationalPeriods.First(o => o.PeriodNumber == CurrentOpPeriod); } else { return null; } } }
         public static bool InternetSyncEnabled { get => _InternetSyncEnabled; set => _InternetSyncEnabled = value; }
-        public static Guid MachineID { get => _MachineID; set { _MachineID = value; wfIncidentService.MachineID = value; } }
+        public static Guid MachineID { get => _MachineID; set { _MachineID = value; incidentDataService.MachineID = value; } }
         public static NetworkService networkService { get => _networkService; private set => _networkService = value; }
         public static string DateFormat { get { return generalOptionsService.GetStringOptionValue("DateFormat"); } }
         public static CultureInfo cultureInfo
@@ -143,11 +140,51 @@ namespace Wildfire_ICS_Assist
 
 
         //Colours used throughout the program
-        public static Color FormBackground { get => Color.FromArgb(246, 245, 229); }
-        public static Color FormAccent { get => Color.FromArgb(219, 218, 204); }
-        public static Color ErrorColor { get => Color.LightCoral; }
-        public static Color GoodColor { get => Color.LightSkyBlue; }
+        private static void LoadColors(int colorPalletId)
+        {
+            List<ProgramColor> colors = ColourUtilities.GetColourSetById(colorPalletId);
+            FormBackgroundColor = colors.FirstOrDefault(o => o.Name.Equals("Background")).Color;
+            AccentColor = colors.FirstOrDefault(o => o.Name.Equals("Accent")).Color;
+            DarkAccentColor = colors.FirstOrDefault(o => o.Name.Equals("DarkAccent")).Color;
+            HelpColor = colors.FirstOrDefault(o => o.Name.Equals("Help")).Color;
+            PrimaryColor = colors.FirstOrDefault(o => o.Name.Equals("Primary")).Color;
+            ErrorColor = colors.FirstOrDefault(o => o.Name.Equals("BadInput")).Color;
+            GoodColor = colors.FirstOrDefault(o => o.Name.Equals("GoodInput")).Color;
+            SaveColor = colors.FirstOrDefault(o => o.Name.Equals("Save")).Color;
+
+        }
+
+
+
+        private static Color _FormBackgroundColor = Color.FromArgb(255, 248, 222);
+        private static Color _AccentColor = Color.FromArgb(219, 218, 204);
+        private static Color _DarkAccentColor = Color.FromArgb(35, 31, 32);
+        private static Color _PrimaryColor = Color.FromArgb(168, 118, 62);
+        private static Color _HelpColor = Color.FromArgb(122, 139, 153);
+        private static Color _GoodInputColor = Color.LightSkyBlue;
+        private static Color _BadInputColor = Color.LightCoral;
+        private static Color _SaveColor = Color.LightSkyBlue;
+
+        public static Color FormBackgroundColor { get => _FormBackgroundColor; set => _FormBackgroundColor = value; }
+        public static Color AccentColor { get => _AccentColor; set => _AccentColor = value; }
         public static Color StandardTextboxColor { get => System.Drawing.SystemColors.Window; }
+        public static Color DarkAccentColor { get => _DarkAccentColor; set => _DarkAccentColor = value; }
+        public static Color HelpColor { get => _HelpColor; set => _HelpColor = value; }
+        public static Color PrimaryColor { get => _PrimaryColor; set => _PrimaryColor = value; }
+        public static Color ErrorColor { get => _GoodInputColor; set => _GoodInputColor = value; }
+        public static Color GoodColor { get => _BadInputColor; set => _BadInputColor = value; }
+        public static Color SaveColor { get => _SaveColor; set => _SaveColor = value; }
+
+
+        //P-num controls, are these still needed?
+        private static int _PNumMin = 1;
+        private static int _PNumMax = 10000;
+        private static int _VNumMin = 1;
+        private static int _VNumMax = 10000;
+        private static int _ENumMin = 1;
+        private static int _ENumMax = 10000;
+        private static int _CNumMin = 1;
+        private static int _CNumMax = 10000;
 
         public static int PNumMin { get => _PNumMin; set => _PNumMin = value; }
         public static int PNumMax { get => _PNumMax; set => _PNumMax = value; }
@@ -158,8 +195,6 @@ namespace Wildfire_ICS_Assist
         public static int CNumMin { get => _CNumMin; set => _CNumMin = value; }
         public static int CNumMax { get => _CNumMax; set => _CNumMax = value; }
 
-
-     
 
     }
 }

@@ -8,14 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedSafetyNotesForm : Form
+    public partial class SavedSafetyNotesForm : BaseForm
     {
         public SavedSafetyNotesForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -42,7 +43,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = editForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editForm.selectedMessage, "SafetyMessage");
+                    Program.generalOptionsService.UpsertOptionValue(editForm.selectedMessage, "SafetyMessage");
                     BuildDataList();
                 }
             }
@@ -59,14 +60,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 List<SafetyMessage> messages = new List<SafetyMessage>();
                 foreach (DataGridViewRow row in dgvSafetyNotes.SelectedRows)
                 {
                     messages.Add((SafetyMessage)row.DataBoundItem);
                 }
-                foreach (SafetyMessage sm in messages) { sm.Active = false; Program.generalOptionsService.UpserOptionValue(sm, "SafetyMessage"); }
+                foreach (SafetyMessage sm in messages) { sm.Active = false; Program.generalOptionsService.UpsertOptionValue(sm, "SafetyMessage"); }
                 BuildDataList();
             }
         }

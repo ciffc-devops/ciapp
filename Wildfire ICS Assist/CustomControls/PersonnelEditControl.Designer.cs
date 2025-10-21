@@ -73,10 +73,10 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.txtCellphone = new SpellBox();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.txtNOKName = new SpellBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtCellphone = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsProvAndTerr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -849,6 +849,17 @@
             this.splitContainer4.SplitterDistance = 387;
             this.splitContainer4.TabIndex = 14;
             // 
+            // txtCellphone
+            // 
+            this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCellphone.Location = new System.Drawing.Point(220, 3);
+            this.txtCellphone.Name = "txtCellphone";
+            this.txtCellphone.Size = new System.Drawing.Size(160, 29);
+            this.txtCellphone.TabIndex = 10;
+            this.txtCellphone.TextChanged += new System.EventHandler(this.txtCellphone_TextChanged_1);
+            this.txtCellphone.Child = new System.Windows.Controls.TextBox();
+            // 
             // splitContainer5
             // 
             this.splitContainer5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -880,7 +891,6 @@
             this.txtNOKName.Name = "txtNOKName";
             this.txtNOKName.Size = new System.Drawing.Size(474, 57);
             this.txtNOKName.TabIndex = 137;
-            this.txtNOKName.WordWrap = true;
             this.txtNOKName.TextChanged += new System.EventHandler(this.txtNOKName_TextChanged_1);
             this.txtNOKName.Child = new System.Windows.Controls.TextBox();
             // 
@@ -888,17 +898,6 @@
             // 
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
-            // 
-            // txtCellphone
-            // 
-            this.txtCellphone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCellphone.Location = new System.Drawing.Point(220, 3);
-            this.txtCellphone.Name = "txtCellphone";
-            this.txtCellphone.Size = new System.Drawing.Size(160, 29);
-            this.txtCellphone.TabIndex = 10;
-            this.txtCellphone.TextChanged += new System.EventHandler(this.txtCellphone_TextChanged_1);
-            this.txtCellphone.Child = new System.Windows.Controls.TextBox();
             // 
             // PersonnelEditControl
             // 

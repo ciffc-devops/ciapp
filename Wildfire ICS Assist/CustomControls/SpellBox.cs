@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +30,7 @@ class SpellBox : ElementHost
         box.TextChanged += new System.Windows.Controls.TextChangedEventHandler(SpellBox_TextChanged);
         box.KeyUp += new KeyEventHandler(WPF_KeyUp);
         box.LostFocus += Box_LostFocus;
-
+        //box.Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Globalization.CultureInfo.CurrentCulture.IetfLanguageTag);
         this.Size = new System.Drawing.Size(100, 20);
 
 
@@ -76,6 +77,7 @@ class SpellBox : ElementHost
     }
 
 
+
     private void OnNewKeyUp(object sender, KeyEventArgs e)
     {
         if (this.KeyUp != null)
@@ -114,6 +116,7 @@ class SpellBox : ElementHost
 
 
 
+
     public override string Text
     {
         get { return box.Text; }
@@ -126,6 +129,7 @@ class SpellBox : ElementHost
         set
         {
             box.AcceptsReturn = value;
+            box.TextWrapping = value ? TextWrapping.Wrap : TextWrapping.NoWrap;
             if (value)
             {
                 box.VerticalContentAlignment = VerticalAlignment.Top;
@@ -138,12 +142,21 @@ class SpellBox : ElementHost
 
         }
     }
-    [DefaultValue(false)]
-    public bool WordWrap
+    /*
+    public CultureInfo Language
     {
-        get { return box.TextWrapping != TextWrapping.NoWrap; }
-        set { box.TextWrapping = value ? TextWrapping.Wrap : TextWrapping.NoWrap; }
-    }
+        get { return new CultureInfo(box.Language.IetfLanguageTag); }
+        set
+        {
+            var lang = System.Windows.Markup.XmlLanguage.GetLanguage(value.IetfLanguageTag);
+            FrameworkContentElement.LanguageProperty.OverrideMetadata(
+  typeof(System.Windows.Documents.TextElement),
+  new FrameworkPropertyMetadata(lang)
+);
+
+        }
+    }*/
+
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public new System.Windows.UIElement Child
     {

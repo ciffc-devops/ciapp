@@ -8,14 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedAircraftsForm : Form
+    public partial class SavedAircraftsForm : BaseForm
     {
         public SavedAircraftsForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground; dgvAircraft.BackgroundColor = Program.FormAccent;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void SavedAircraftsForm_Load(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = editForm.ShowDialog();
                 if(dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editForm.SelectedAircraft, "Aircraft");
+                    Program.generalOptionsService.UpsertOptionValue(editForm.SelectedAircraft, "Aircraft");
                     LoadAircraft();
                 }
             }
@@ -66,14 +67,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             if (dgvAircraft.SelectedRows.Count > 0)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dgvAircraft.SelectedRows)
                     {
                         Aircraft h = (Aircraft)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Aircraft");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Aircraft");
                     }
                     LoadAircraft();
                 }

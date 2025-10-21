@@ -18,19 +18,19 @@ using WildfireICSDesktopServices;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class OptionsForm : Form
+    public partial class OptionsForm : BaseForm
     {
         private List<DeviceInformation> allDevices = new List<DeviceInformation>();
         byte[] NewOrgLogo = null;
 
         public OptionsForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground; this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void LoadICSRoles()
         {
-            List<ICSRole> roles = OrgChartTools.GetBlankPrimaryRoles();
+            List<ICSRole> roles = OrganizationalChartTools.GetBlankPrimaryRoles();
             cboDefaultICSRole.DataSource = roles;
             cboDefaultICSRole.DisplayMember = "RoleNameForDropdown";
             cboDefaultICSRole.ValueMember = "RoleID";
@@ -159,7 +159,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     Globals.DateFormat = options.DateFormat;
                     options.YellowResourceTimeoutDays = Convert.ToInt32( numYellowResourceTimeoutDays.Value);
                     options.RedResourceTimeoutDays = Convert.ToInt32(numRedResourceTimeoutDays.Value);
-                    if (NewOrgLogo != null) { Program.generalOptionsService.UpserOptionValue(NewOrgLogo, "OrganizationLogo"); }
+                    if (NewOrgLogo != null) { Program.generalOptionsService.UpsertOptionValue(NewOrgLogo, "OrganizationLogo"); }
                     options.OrganizationName = txtOrganizationName.Text;
                     options.ShowTestButton = chkShowTest.Checked;
 
@@ -331,17 +331,16 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            TabControlExt.tabControlCustomColor_DrawItem(sender, e);
 
         }
 
         private void btnChangeLogo_Click(object sender, EventArgs e)
         {
-            selectPhoto();
+            SelectOrganizationLogo();
 
         }
 
-        private void selectPhoto()
+        private void SelectOrganizationLogo()
         {
             openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             
@@ -378,7 +377,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
+                    LgMessageBox.Show("There was an error selecting that image, please report the following to technical support: " + ex.ToString());
                 }
             }
         }

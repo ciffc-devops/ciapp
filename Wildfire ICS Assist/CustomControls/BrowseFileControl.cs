@@ -14,12 +14,20 @@ namespace Wildfire_ICS_Assist.CustomControls
     public partial class BrowseFileControl : UserControl
     {
         private string _FileName;
-        public string FileName { get => _FileName; set { _FileName = value; textBox1.Text = _FileName; } }
+        public string FileName { get => _FileName; set { _FileName = value; txtFilePath.Text = _FileName; } }
+        public string FileTitle { get; set; }
 
         [Browsable(true)]
         [Category("Behavior")]
         [Description("The file filters to display in the dialog box")]
         public string Filter { get => openFileDialog1.Filter; set => openFileDialog1.Filter = value; }
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        [Description("The file filters to display in the dialog box")]
+        public bool ShowFileTitle { get => !splitContainer1.Panel1Collapsed; set => splitContainer1.Panel1Collapsed = !value; }
+
+
         public BrowseFileControl()
         {
             InitializeComponent();
@@ -32,7 +40,7 @@ namespace Wildfire_ICS_Assist.CustomControls
                 if (!string.IsNullOrEmpty(openFileDialog1.FileName) && File.Exists(openFileDialog1.FileName))
                 {
                     FileName = openFileDialog1.FileName;
-                    textBox1.Text = FileName;
+                    txtFilePath.Text = FileName;
                 }
             }
         }

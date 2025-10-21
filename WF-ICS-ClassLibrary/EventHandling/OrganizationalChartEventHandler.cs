@@ -17,6 +17,7 @@ namespace WF_ICS_ClassLibrary.EventHandling
     }
 
     public delegate void ICSRoleEventHandler(ICSRoleEventArgs e);
+    public delegate void CurrentICSRoleEventHandler(ICSRoleEventArgs e);
 
     public class ICSRoleEventArgs
     {

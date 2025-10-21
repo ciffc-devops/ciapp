@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditMedivacForm : Form
+    public partial class EditMedivacForm : BaseForm
     {
         private AmbulanceService _selectedAmbulance = null;
 
@@ -20,8 +21,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         public EditMedivacForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
 
@@ -109,7 +110,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
             if (string.IsNullOrEmpty(selectedAmbulance.Organization)) { isValid = false; err.Append("You must include the name of the medivac service."); }
 
-            if (!isValid) { MessageBox.Show(err.ToString()); }
+            if (!isValid) { LgMessageBox.Show(err.ToString()); }
             return isValid;
         }
     }

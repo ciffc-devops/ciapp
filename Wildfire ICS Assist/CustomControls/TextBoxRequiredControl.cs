@@ -19,7 +19,6 @@ namespace Wildfire_ICS_Assist.CustomControls
             get => textBox1.Multiline; set
             {
                 textBox1.Multiline = value;
-                textBox1.WordWrap = value;
             }
         }
 

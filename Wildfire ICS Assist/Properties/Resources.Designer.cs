@@ -154,6 +154,15 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select a name for the role you are adding to the organization chart.
+        /// </summary>
+        internal static string EmptyRoleError {
+            get {
+                return ResourceManager.GetString("EmptyRoleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap EquipOp {
@@ -259,6 +268,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_193_circle_empty_remove {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_193_circle_empty_remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_196_circle_empty_info {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-196-circle-empty-info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -456,6 +475,26 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_292_square_empty_minus {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-292-square-empty-minus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_294_square_empty_check {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-294-square-empty-check", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_30_clipboard {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_30_clipboard", resourceCulture);
@@ -606,6 +645,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_41_stats {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-41-stats", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_424_blackboard {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_424_blackboard", resourceCulture);
@@ -659,6 +708,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_477_sort_attributes_alt {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_477_sort_attributes_alt", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_487_exchange {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-487-exchange", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -956,9 +1015,29 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_809_drop_plus {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-809-drop-plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_82_refresh {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_82_refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_841_square_plus {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-841-square-plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -979,6 +1058,16 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap glyphicons_basic_876_palette_package {
             get {
                 object obj = ResourceManager.GetObject("glyphicons_basic_876_palette_package", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_888_redo {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-888-redo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1116,9 +1205,19 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap glyphicons_filetypes_9_file_spreadsheet {
+        internal static System.Drawing.Bitmap glyphicons_filetypes_2_file_rich_text {
             get {
-                object obj = ResourceManager.GetObject("glyphicons_filetypes_9_file_spreadsheet", resourceCulture);
+                object obj = ResourceManager.GetObject("glyphicons-filetypes-2-file-rich-text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_filetypes_52_folder_video {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-filetypes-52-folder-video", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1223,6 +1322,47 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static string ProtectedRole {
             get {
                 return ResourceManager.GetString("ProtectedRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alberta
+        ///British Columbia
+        ///Manitoba
+        ///New Brunswick
+        ///Newfoundland and Labrador
+        ///Northwest Territories
+        ///Nova Scotia
+        ///Nunavut
+        ///Ontario
+        ///Prince Edward Island
+        ///Quebec
+        ///Saskatchewan
+        ///Yukon.
+        /// </summary>
+        internal static string ProvincesAndTerritoriesEN {
+            get {
+                return ResourceManager.GetString("ProvincesAndTerritoriesEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RedExclaim {
+            get {
+                object obj = ResourceManager.GetObject("RedExclaim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RedExclaimSq {
+            get {
+                object obj = ResourceManager.GetObject("RedExclaimSq", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

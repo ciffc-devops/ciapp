@@ -66,7 +66,7 @@ namespace WildfireICSDesktopServices
 
         public Dictionary<ShortGuid, NetworkSendObject> lastPeerSendObjectDict = new Dictionary<ShortGuid, NetworkSendObject>();
         public Dictionary<ShortGuid, CommsLogEntry> lastPeerCommsMessageDict = new Dictionary<ShortGuid, CommsLogEntry>();
-        Dictionary<ShortGuid, WFIncident> lastPeerSarTaskDict = new Dictionary<ShortGuid, WFIncident>();
+        Dictionary<ShortGuid, Incident> lastPeerSarTaskDict = new Dictionary<ShortGuid, Incident>();
         Dictionary<ShortGuid, NetworkSARTaskRequest> lastPeerNetworkSarTaskRequestDict = new Dictionary<ShortGuid, NetworkSARTaskRequest>();
         Dictionary<ShortGuid, NetworkOptionsRequest> lastPeerNetworkOptionsRequestDict = new Dictionary<ShortGuid, NetworkOptionsRequest>();
         //Dictionary<ShortGuid, NetworkMemberRequest> lastPeerNetworkMemberRequestDict = new Dictionary<ShortGuid, NetworkMemberRequest>();
@@ -77,7 +77,7 @@ namespace WildfireICSDesktopServices
             NetworkComms.AppendGlobalConnectionCloseHandler(HandleConnectionClosed);
             NetworkComms.AppendGlobalIncomingPacketHandler<NetworkSARTaskRequest>("NetworkSARTaskRequest", HandleIncomingNetworkSarTaskRequest);
             NetworkComms.AppendGlobalIncomingPacketHandler<NetworkOptionsRequest>("NetworkOptionsRequest", HandleIncomingNetworkOptionsRequest);
-            NetworkComms.AppendGlobalIncomingPacketHandler<WFIncident>("WFIncident", HandleIncomingIncident);
+            NetworkComms.AppendGlobalIncomingPacketHandler<Incident>("WFIncident", HandleIncomingIncident);
             NetworkComms.AppendGlobalIncomingPacketHandler<NetworkSendObject>("NetworkSendObject", HandleIncomingInformation);
             //NetworkComms.AppendGlobalIncomingPacketHandler<NetworkDeleteOrder>("NetworkDeleteOrder", HandleIncomingNetworkDeleteorder);
 
@@ -155,7 +155,7 @@ namespace WildfireICSDesktopServices
         /// <param name="header">The PacketHeader corresponding with the received object</param>
         /// <param name="connection">The Connection from which this object was received</param>
         /// <param name="incomingMessage">The incoming ChatMessage we are after</param>
-        public void HandleIncomingIncident(PacketHeader header, Connection connection, WFIncident incomingMessage)
+        public void HandleIncomingIncident(PacketHeader header, Connection connection, Incident incomingMessage)
         {
 
             lock (lastPeerSarTaskDict)
@@ -213,7 +213,7 @@ namespace WildfireICSDesktopServices
             }
         }
 
-        protected virtual void OnLocalNetworkIncomingIncident(WFIncident incident)
+        protected virtual void OnLocalNetworkIncomingIncident(Incident incident)
         {
             LocalNetworkIncomingIncidentEventHandler handler = localNetworkIncomingIncidentEvent;
             if (handler != null)
@@ -421,7 +421,7 @@ namespace WildfireICSDesktopServices
             /*
             this.BeginInvoke((Action)delegate ()
             {
-                MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+                LgMessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
 
             });*/
             return log;
@@ -500,7 +500,7 @@ namespace WildfireICSDesktopServices
                     catch (Exception)
                     {
                         results.Errors.Add(string.Format(Globals.cultureInfo, "{0:HH:mm:ss}", today) + " Error - Failed to parse the server IP and port. Please ensure it is correct and try again\r\n\r\n");
-                        //MessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
+                        //LgMessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
                     }
                 }
 
@@ -813,7 +813,7 @@ namespace WildfireICSDesktopServices
         }
 
 
-        public LocalNetworkEventArgs SendTaskData(WFIncident task)
+        public LocalNetworkEventArgs SendTaskData(Incident task)
         {
             LocalNetworkEventArgs args = new LocalNetworkEventArgs();
             //We may or may not have entered some server connection information
@@ -839,7 +839,7 @@ namespace WildfireICSDesktopServices
                 //We perform the send within a try catch to ensure the application continues to run if there is a problem.
                 try
                 {
-                    WFIncident compressed = task.CompressTaskUpdates();
+                    Incident compressed = task.CompressTaskUpdates();
 
 
                     TCPConnection.GetConnection(serverConnectionInfo).SendObject("WFIncident", compressed);
@@ -873,7 +873,7 @@ namespace WildfireICSDesktopServices
                 try { serverConnectionInfo = new ConnectionInfo(ServerIP, ServerPort); }
                 catch (Exception)
                 {
-                    //MessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
+                    //LgMessageBox.Show("Failed to parse the server IP and port. Please ensure it is correct and try again", "Server IP & Port Parse Error", MessageBoxButtons.OK);
                     return;
                 }
             }
@@ -890,7 +890,7 @@ namespace WildfireICSDesktopServices
                 }
                 catch (CommsException) 
                 { 
-                    //MessageBox.Show("A Network CommsException occurred while trying to send a task request (001) to " + serverConnectionInfo, "CommsException", MessageBoxButtons.OK);
+                    //LgMessageBox.Show("A Network CommsException occurred while trying to send a task request (001) to " + serverConnectionInfo, "CommsException", MessageBoxButtons.OK);
                     }
             }
 
@@ -912,7 +912,7 @@ namespace WildfireICSDesktopServices
             /*
             this.BeginInvoke((Action)delegate ()
             {
-                MessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
+                LgMessageBox.Show("Your request has been sent to the server computer.  A user there will need to confirm it.  In the interim, please do not attempt any work - it will be overwritten.");
 
             });*/
         }

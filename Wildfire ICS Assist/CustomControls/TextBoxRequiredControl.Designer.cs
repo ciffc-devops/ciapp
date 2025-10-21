@@ -51,7 +51,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(257, 277);
             this.textBox1.TabIndex = 2;
-            this.textBox1.WordWrap = true;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.Child = new System.Windows.Controls.TextBox();
             // 

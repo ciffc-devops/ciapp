@@ -30,58 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.dgvMembersOnTask = new System.Windows.Forms.DataGridView();
-            this.colMemberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemberSARGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSignInTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemberAssignmentStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAddAMember = new System.Windows.Forms.Button();
-            this.btnBulkSignIn = new System.Windows.Forms.Button();
-            this.btnMembersOnTaskNewWindow = new System.Windows.Forms.Button();
-            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.dgvTaskEquipment = new System.Windows.Forms.DataGridView();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReferenceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEquipmentStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAssignEquipment = new System.Windows.Forms.Button();
-            this.btnViewEquipment = new System.Windows.Forms.Button();
-            this.btnReturnEquipment = new System.Windows.Forms.Button();
-            this.pnlOpsPeriod = new System.Windows.Forms.Panel();
-            this.btnCloseOpPeriod = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.datOpsEnd = new System.Windows.Forms.DateTimePicker();
-            this.datOpsStart = new System.Windows.Forms.DateTimePicker();
-            this.numOpPeriod = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pnlTaskInfo = new System.Windows.Forms.Panel();
-            this.txtTaskName = new SpellBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnOutstandingLogItems = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.btnViewPositionLog = new System.Windows.Forms.Button();
-            this.btnAddToPositionLog = new System.Windows.Forms.Button();
-            this.txtTaskNumber = new System.Windows.Forms.TextBox();
-            this.btnICSRoleHelp = new System.Windows.Forms.Button();
-            this.cboICSRole = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lblTaskName = new System.Windows.Forms.Label();
-            this.lblTaskNumber = new System.Windows.Forms.Label();
-            this.lblServerStatus = new System.Windows.Forms.Label();
-            this.lblVersionNumber = new System.Windows.Forms.Label();
-            this.tcStatus = new System.Windows.Forms.TabControl();
-            this.tpMembersOnTask = new System.Windows.Forms.TabPage();
-            this.tpEquipment = new System.Windows.Forms.TabPage();
-            this.tpNetworkLog = new System.Windows.Forms.TabPage();
-            this.txtNetworkLog = new System.Windows.Forms.TextBox();
             this.imglTabIcons = new System.Windows.Forms.ImageList(this.components);
+            this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
+            this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
+            this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
+            this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
+            this.tmrPositionLogReminders = new System.Windows.Forms.Timer(this.components);
+            this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
+            this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
+            this.tmrLock = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnMoveToOpNow = new System.Windows.Forms.Button();
+            this.picOrgLogo = new System.Windows.Forms.PictureBox();
             this.pnlInternetSyncStart = new System.Windows.Forms.Panel();
             this.btnCancelInternetSync = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
@@ -93,6 +53,28 @@
             this.pbNetworkSyncInProgress = new System.Windows.Forms.ProgressBar();
             this.btnCloseNetworkSyncInProgress = new System.Windows.Forms.Button();
             this.lblNetworkSyncStatus = new System.Windows.Forms.Label();
+            this.pnlOpsPeriod = new System.Windows.Forms.Panel();
+            this.btnReviewOpPeriod = new System.Windows.Forms.Button();
+            this.btnEditOpPeriod = new System.Windows.Forms.Button();
+            this.btnNewOpPeriod = new System.Windows.Forms.Button();
+            this.cboCurrentOperationalPeriod = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnLockTaskInfo = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtTaskName = new SpellBox();
+            this.lblTaskNumber = new System.Windows.Forms.Label();
+            this.lblTaskName = new System.Windows.Forms.Label();
+            this.txtTaskNumber = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.btnOutstandingLogItems = new System.Windows.Forms.Button();
+            this.cboICSRole = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.btnICSRoleHelp = new System.Windows.Forms.Button();
+            this.btnViewPositionLog = new System.Windows.Forms.Button();
+            this.btnAddToPositionLog = new System.Windows.Forms.Button();
+            this.lblServerStatus = new System.Windows.Forms.Label();
+            this.lblVersionNumber = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newIncidentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,7 +82,12 @@
             this.recentIncidentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printOperationalPeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printIncidentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.browseToIncidentFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreDeletedItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,8 +113,8 @@
             this.communicationsPlanICS205ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicalPlanICS206ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.safetyMessageICS208ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.incidentStatusSummaryICS209ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.airOperationsSummaryICS220ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printTheIncidentActionPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.additionalDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationsListICS205AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,21 +123,6 @@
             this.printingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printThisOperationalPeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printThisIncidentToDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.teamAssignmentsICS204ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.logisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.memberStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.additionalContactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.planningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.notesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminFinanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.positionLogToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.networkInternetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localNetworkSharingSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.requestIncidentFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -160,484 +132,63 @@
             this.requestOptionsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.networkTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printBlankFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewIncidentUpdateListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutCIAPPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tESTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.picOrgLogo = new System.Windows.Forms.PictureBox();
-            this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
-            this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
-            this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
-            this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
-            this.tmrPositionLogReminders = new System.Windows.Forms.Timer(this.components);
-            this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
-            this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
+            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frenchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cpOtherTools = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnGeneralMessage = new System.Windows.Forms.Button();
-            this.btnReplacementResources = new System.Windows.Forms.Button();
-            this.btnAdditionalContacts = new System.Windows.Forms.Button();
             this.btnNotes = new System.Windows.Forms.Button();
+            this.btnAdditionalContacts = new System.Windows.Forms.Button();
+            this.btnReplacementResources = new System.Windows.Forms.Button();
             this.btnShowResources = new System.Windows.Forms.Button();
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.btnAssignmentList = new System.Windows.Forms.Button();
-            this.btnAirOpsSummary = new System.Windows.Forms.Button();
-            this.btnSafetyPlans = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnIncidentObjectives = new System.Windows.Forms.Button();
-            this.btnMedicalPlan = new System.Windows.Forms.Button();
-            this.btnPrintIAP = new System.Windows.Forms.Button();
-            this.btnPrintOrgChart = new System.Windows.Forms.Button();
             this.btnCommsPlan = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel1.SuspendLayout();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMembersOnTask)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
-            this.splitContainer5.Panel1.SuspendLayout();
-            this.splitContainer5.Panel2.SuspendLayout();
-            this.splitContainer5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTaskEquipment)).BeginInit();
-            this.pnlOpsPeriod.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).BeginInit();
-            this.pnlTaskInfo.SuspendLayout();
-            this.tcStatus.SuspendLayout();
-            this.tpMembersOnTask.SuspendLayout();
-            this.tpEquipment.SuspendLayout();
-            this.tpNetworkLog.SuspendLayout();
+            this.btnPrintOrgChart = new System.Windows.Forms.Button();
+            this.btnMedicalPlan = new System.Windows.Forms.Button();
+            this.btnSafetyPlans = new System.Windows.Forms.Button();
+            this.btnAirOpsSummary = new System.Windows.Forms.Button();
+            this.btnAssignmentList = new System.Windows.Forms.Button();
+            this.btnIncidentStatusSummary = new System.Windows.Forms.Button();
+            this.btnPrintIAP = new System.Windows.Forms.Button();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.pnlTaskInfo = new System.Windows.Forms.Panel();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
             this.pnlInternetSyncStart.SuspendLayout();
             this.pnlNetworkSyncInProgress.SuspendLayout();
+            this.pnlOpsPeriod.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
             this.cpOtherTools.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.cpIncidentActionPlan.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.pnlTaskInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            this.collapsiblePanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // splitContainer4
-            // 
-            resources.ApplyResources(this.splitContainer4, "splitContainer4");
-            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer4.Name = "splitContainer4";
-            // 
-            // splitContainer4.Panel1
-            // 
-            this.splitContainer4.Panel1.Controls.Add(this.dgvMembersOnTask);
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.btnAddAMember);
-            this.splitContainer4.Panel2.Controls.Add(this.btnBulkSignIn);
-            this.splitContainer4.Panel2.Controls.Add(this.btnMembersOnTaskNewWindow);
-            // 
-            // dgvMembersOnTask
-            // 
-            this.dgvMembersOnTask.AllowUserToAddRows = false;
-            this.dgvMembersOnTask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMembersOnTask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colMemberName,
-            this.colMemberSARGroup,
-            this.colSignInTime,
-            this.colAssignmentNumber,
-            this.colMemberAssignmentStatus});
-            resources.ApplyResources(this.dgvMembersOnTask, "dgvMembersOnTask");
-            this.dgvMembersOnTask.MultiSelect = false;
-            this.dgvMembersOnTask.Name = "dgvMembersOnTask";
-            this.dgvMembersOnTask.ReadOnly = true;
-            this.dgvMembersOnTask.RowHeadersVisible = false;
-            this.dgvMembersOnTask.RowTemplate.Height = 30;
-            this.dgvMembersOnTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // colMemberName
-            // 
-            this.colMemberName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemberName.DataPropertyName = "MemberName";
-            resources.ApplyResources(this.colMemberName, "colMemberName");
-            this.colMemberName.Name = "colMemberName";
-            this.colMemberName.ReadOnly = true;
-            // 
-            // colMemberSARGroup
-            // 
-            this.colMemberSARGroup.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colMemberSARGroup.DataPropertyName = "OrganizationName";
-            resources.ApplyResources(this.colMemberSARGroup, "colMemberSARGroup");
-            this.colMemberSARGroup.Name = "colMemberSARGroup";
-            this.colMemberSARGroup.ReadOnly = true;
-            // 
-            // colSignInTime
-            // 
-            this.colSignInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSignInTime.DataPropertyName = "SignInTimeAsText";
-            dataGridViewCellStyle1.Format = "HH:mm yyyy-MMM-dd";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSignInTime.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.colSignInTime, "colSignInTime");
-            this.colSignInTime.Name = "colSignInTime";
-            this.colSignInTime.ReadOnly = true;
-            // 
-            // colAssignmentNumber
-            // 
-            this.colAssignmentNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colAssignmentNumber.DataPropertyName = "getCurrentActivityName";
-            resources.ApplyResources(this.colAssignmentNumber, "colAssignmentNumber");
-            this.colAssignmentNumber.Name = "colAssignmentNumber";
-            this.colAssignmentNumber.ReadOnly = true;
-            // 
-            // colMemberAssignmentStatus
-            // 
-            this.colMemberAssignmentStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colMemberAssignmentStatus.DataPropertyName = "AssignmentStatus";
-            resources.ApplyResources(this.colMemberAssignmentStatus, "colMemberAssignmentStatus");
-            this.colMemberAssignmentStatus.Name = "colMemberAssignmentStatus";
-            this.colMemberAssignmentStatus.ReadOnly = true;
-            // 
-            // btnAddAMember
-            // 
-            resources.ApplyResources(this.btnAddAMember, "btnAddAMember");
-            this.btnAddAMember.Name = "btnAddAMember";
-            this.btnAddAMember.UseVisualStyleBackColor = true;
-            // 
-            // btnBulkSignIn
-            // 
-            resources.ApplyResources(this.btnBulkSignIn, "btnBulkSignIn");
-            this.btnBulkSignIn.Name = "btnBulkSignIn";
-            this.btnBulkSignIn.UseVisualStyleBackColor = true;
-            // 
-            // btnMembersOnTaskNewWindow
-            // 
-            resources.ApplyResources(this.btnMembersOnTaskNewWindow, "btnMembersOnTaskNewWindow");
-            this.btnMembersOnTaskNewWindow.Name = "btnMembersOnTaskNewWindow";
-            this.btnMembersOnTaskNewWindow.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer5
-            // 
-            resources.ApplyResources(this.splitContainer5, "splitContainer5");
-            this.splitContainer5.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer5.Name = "splitContainer5";
-            // 
-            // splitContainer5.Panel1
-            // 
-            this.splitContainer5.Panel1.Controls.Add(this.dgvTaskEquipment);
-            // 
-            // splitContainer5.Panel2
-            // 
-            this.splitContainer5.Panel2.Controls.Add(this.btnAssignEquipment);
-            this.splitContainer5.Panel2.Controls.Add(this.btnViewEquipment);
-            this.splitContainer5.Panel2.Controls.Add(this.btnReturnEquipment);
-            // 
-            // dgvTaskEquipment
-            // 
-            this.dgvTaskEquipment.AllowUserToAddRows = false;
-            this.dgvTaskEquipment.AllowUserToDeleteRows = false;
-            this.dgvTaskEquipment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTaskEquipment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCategory,
-            this.colSubCategory,
-            this.colName,
-            this.colReferenceID,
-            this.colEquipmentStatus,
-            this.colAssignee});
-            resources.ApplyResources(this.dgvTaskEquipment, "dgvTaskEquipment");
-            this.dgvTaskEquipment.Name = "dgvTaskEquipment";
-            this.dgvTaskEquipment.ReadOnly = true;
-            this.dgvTaskEquipment.RowHeadersVisible = false;
-            this.dgvTaskEquipment.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTaskEquipment.RowTemplate.Height = 30;
-            this.dgvTaskEquipment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCategory.DataPropertyName = "ParentCategoryName";
-            resources.ApplyResources(this.colCategory, "colCategory");
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colSubCategory
-            // 
-            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSubCategory.DataPropertyName = "CategoryName";
-            resources.ApplyResources(this.colSubCategory, "colSubCategory");
-            this.colSubCategory.Name = "colSubCategory";
-            this.colSubCategory.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.DataPropertyName = "EquipmentName";
-            resources.ApplyResources(this.colName, "colName");
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colReferenceID
-            // 
-            this.colReferenceID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colReferenceID.DataPropertyName = "ReferenceID";
-            resources.ApplyResources(this.colReferenceID, "colReferenceID");
-            this.colReferenceID.Name = "colReferenceID";
-            this.colReferenceID.ReadOnly = true;
-            // 
-            // colEquipmentStatus
-            // 
-            this.colEquipmentStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colEquipmentStatus.DataPropertyName = "StatusName";
-            resources.ApplyResources(this.colEquipmentStatus, "colEquipmentStatus");
-            this.colEquipmentStatus.Name = "colEquipmentStatus";
-            this.colEquipmentStatus.ReadOnly = true;
-            // 
-            // colAssignee
-            // 
-            this.colAssignee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAssignee.DataPropertyName = "AssigneeName";
-            resources.ApplyResources(this.colAssignee, "colAssignee");
-            this.colAssignee.Name = "colAssignee";
-            this.colAssignee.ReadOnly = true;
-            // 
-            // btnAssignEquipment
-            // 
-            resources.ApplyResources(this.btnAssignEquipment, "btnAssignEquipment");
-            this.btnAssignEquipment.Name = "btnAssignEquipment";
-            this.btnAssignEquipment.UseVisualStyleBackColor = true;
-            // 
-            // btnViewEquipment
-            // 
-            resources.ApplyResources(this.btnViewEquipment, "btnViewEquipment");
-            this.btnViewEquipment.Name = "btnViewEquipment";
-            this.btnViewEquipment.UseVisualStyleBackColor = true;
-            // 
-            // btnReturnEquipment
-            // 
-            resources.ApplyResources(this.btnReturnEquipment, "btnReturnEquipment");
-            this.btnReturnEquipment.Name = "btnReturnEquipment";
-            this.btnReturnEquipment.UseVisualStyleBackColor = true;
-            // 
-            // pnlOpsPeriod
-            // 
-            resources.ApplyResources(this.pnlOpsPeriod, "pnlOpsPeriod");
-            this.pnlOpsPeriod.BackColor = System.Drawing.Color.White;
-            this.pnlOpsPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOpsPeriod.Controls.Add(this.btnCloseOpPeriod);
-            this.pnlOpsPeriod.Controls.Add(this.label18);
-            this.pnlOpsPeriod.Controls.Add(this.label15);
-            this.pnlOpsPeriod.Controls.Add(this.datOpsEnd);
-            this.pnlOpsPeriod.Controls.Add(this.datOpsStart);
-            this.pnlOpsPeriod.Controls.Add(this.numOpPeriod);
-            this.pnlOpsPeriod.Controls.Add(this.label1);
-            this.pnlOpsPeriod.Name = "pnlOpsPeriod";
-            // 
-            // btnCloseOpPeriod
-            // 
-            resources.ApplyResources(this.btnCloseOpPeriod, "btnCloseOpPeriod");
-            this.btnCloseOpPeriod.Name = "btnCloseOpPeriod";
-            this.btnCloseOpPeriod.TabStop = false;
-            this.btnCloseOpPeriod.UseVisualStyleBackColor = true;
-            this.btnCloseOpPeriod.Click += new System.EventHandler(this.btnCloseOpPeriod_Click);
-            // 
-            // label18
-            // 
-            resources.ApplyResources(this.label18, "label18");
-            this.label18.Name = "label18";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
-            // datOpsEnd
-            // 
-            resources.ApplyResources(this.datOpsEnd, "datOpsEnd");
-            this.datOpsEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datOpsEnd.Name = "datOpsEnd";
-            this.datOpsEnd.Leave += new System.EventHandler(this.datOpsEnd_Leave);
-            // 
-            // datOpsStart
-            // 
-            resources.ApplyResources(this.datOpsStart, "datOpsStart");
-            this.datOpsStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datOpsStart.Name = "datOpsStart";
-            this.datOpsStart.Leave += new System.EventHandler(this.datOpsStart_Leave);
-            // 
-            // numOpPeriod
-            // 
-            resources.ApplyResources(this.numOpPeriod, "numOpPeriod");
-            this.numOpPeriod.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numOpPeriod.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numOpPeriod.Name = "numOpPeriod";
-            this.numOpPeriod.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numOpPeriod.ValueChanged += new System.EventHandler(this.numOpPeriod_ValueChanged);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // pnlTaskInfo
-            // 
-            resources.ApplyResources(this.pnlTaskInfo, "pnlTaskInfo");
-            this.pnlTaskInfo.BackColor = System.Drawing.Color.White;
-            this.pnlTaskInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlTaskInfo.Controls.Add(this.txtTaskName);
-            this.pnlTaskInfo.Controls.Add(this.panel1);
-            this.pnlTaskInfo.Controls.Add(this.btnOutstandingLogItems);
-            this.pnlTaskInfo.Controls.Add(this.label19);
-            this.pnlTaskInfo.Controls.Add(this.btnViewPositionLog);
-            this.pnlTaskInfo.Controls.Add(this.btnAddToPositionLog);
-            this.pnlTaskInfo.Controls.Add(this.txtTaskNumber);
-            this.pnlTaskInfo.Controls.Add(this.btnICSRoleHelp);
-            this.pnlTaskInfo.Controls.Add(this.cboICSRole);
-            this.pnlTaskInfo.Controls.Add(this.label17);
-            this.pnlTaskInfo.Controls.Add(this.label16);
-            this.pnlTaskInfo.Controls.Add(this.lblTaskName);
-            this.pnlTaskInfo.Controls.Add(this.lblTaskNumber);
-            this.pnlTaskInfo.Name = "pnlTaskInfo";
-            this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
-            // 
-            // txtTaskName
-            // 
-            resources.ApplyResources(this.txtTaskName, "txtTaskName");
-            this.txtTaskName.Name = "txtTaskName";
-            this.txtTaskName.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskName_Validating);
-            this.txtTaskName.Child = new System.Windows.Controls.TextBox();
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.BackColor = System.Drawing.Color.DimGray;
-            this.panel1.Name = "panel1";
-            // 
-            // btnOutstandingLogItems
-            // 
-            resources.ApplyResources(this.btnOutstandingLogItems, "btnOutstandingLogItems");
-            this.btnOutstandingLogItems.Name = "btnOutstandingLogItems";
-            this.btnOutstandingLogItems.TabStop = false;
-            this.btnOutstandingLogItems.UseVisualStyleBackColor = true;
-            this.btnOutstandingLogItems.Click += new System.EventHandler(this.btnOutstandingLogItems_Click);
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // btnViewPositionLog
-            // 
-            resources.ApplyResources(this.btnViewPositionLog, "btnViewPositionLog");
-            this.btnViewPositionLog.Name = "btnViewPositionLog";
-            this.btnViewPositionLog.TabStop = false;
-            this.btnViewPositionLog.UseVisualStyleBackColor = true;
-            this.btnViewPositionLog.Click += new System.EventHandler(this.btnViewPositionLog_Click);
-            // 
-            // btnAddToPositionLog
-            // 
-            resources.ApplyResources(this.btnAddToPositionLog, "btnAddToPositionLog");
-            this.btnAddToPositionLog.Name = "btnAddToPositionLog";
-            this.btnAddToPositionLog.TabStop = false;
-            this.btnAddToPositionLog.UseVisualStyleBackColor = true;
-            this.btnAddToPositionLog.Click += new System.EventHandler(this.btnAddToPositionLog_Click);
-            // 
-            // txtTaskNumber
-            // 
-            resources.ApplyResources(this.txtTaskNumber, "txtTaskNumber");
-            this.txtTaskNumber.Name = "txtTaskNumber";
-            this.txtTaskNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTaskNumber_KeyPress);
-            this.txtTaskNumber.Leave += new System.EventHandler(this.txtTaskNumber_Leave);
-            this.txtTaskNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskNumber_Validating);
-            // 
-            // btnICSRoleHelp
-            // 
-            resources.ApplyResources(this.btnICSRoleHelp, "btnICSRoleHelp");
-            this.btnICSRoleHelp.Name = "btnICSRoleHelp";
-            this.btnICSRoleHelp.TabStop = false;
-            this.btnICSRoleHelp.UseVisualStyleBackColor = true;
-            this.btnICSRoleHelp.Click += new System.EventHandler(this.btnICSRoleHelp_Click);
-            // 
-            // cboICSRole
-            // 
-            resources.ApplyResources(this.cboICSRole, "cboICSRole");
-            this.cboICSRole.DisplayMember = "RoleNameForDropdown";
-            this.cboICSRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboICSRole.FormattingEnabled = true;
-            this.cboICSRole.Name = "cboICSRole";
-            this.cboICSRole.ValueMember = "RoleID";
-            this.cboICSRole.SelectedIndexChanged += new System.EventHandler(this.cboICSRole_SelectedIndexChanged);
-            this.cboICSRole.Leave += new System.EventHandler(this.cboICSRole_Leave);
-            // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
-            // lblTaskName
-            // 
-            resources.ApplyResources(this.lblTaskName, "lblTaskName");
-            this.lblTaskName.Name = "lblTaskName";
-            // 
-            // lblTaskNumber
-            // 
-            resources.ApplyResources(this.lblTaskNumber, "lblTaskNumber");
-            this.lblTaskNumber.Name = "lblTaskNumber";
-            // 
-            // lblServerStatus
-            // 
-            resources.ApplyResources(this.lblServerStatus, "lblServerStatus");
-            this.lblServerStatus.Name = "lblServerStatus";
-            // 
-            // lblVersionNumber
-            // 
-            resources.ApplyResources(this.lblVersionNumber, "lblVersionNumber");
-            this.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblVersionNumber.Name = "lblVersionNumber";
-            // 
-            // tcStatus
-            // 
-            resources.ApplyResources(this.tcStatus, "tcStatus");
-            this.tcStatus.Controls.Add(this.tpMembersOnTask);
-            this.tcStatus.Controls.Add(this.tpEquipment);
-            this.tcStatus.Controls.Add(this.tpNetworkLog);
-            this.tcStatus.ImageList = this.imglTabIcons;
-            this.tcStatus.Multiline = true;
-            this.tcStatus.Name = "tcStatus";
-            this.tcStatus.SelectedIndex = 0;
-            // 
-            // tpMembersOnTask
-            // 
-            resources.ApplyResources(this.tpMembersOnTask, "tpMembersOnTask");
-            this.tpMembersOnTask.Controls.Add(this.splitContainer4);
-            this.tpMembersOnTask.Name = "tpMembersOnTask";
-            this.tpMembersOnTask.UseVisualStyleBackColor = true;
-            // 
-            // tpEquipment
-            // 
-            this.tpEquipment.Controls.Add(this.splitContainer5);
-            resources.ApplyResources(this.tpEquipment, "tpEquipment");
-            this.tpEquipment.Name = "tpEquipment";
-            this.tpEquipment.UseVisualStyleBackColor = true;
-            // 
-            // tpNetworkLog
-            // 
-            this.tpNetworkLog.Controls.Add(this.txtNetworkLog);
-            resources.ApplyResources(this.tpNetworkLog, "tpNetworkLog");
-            this.tpNetworkLog.Name = "tpNetworkLog";
-            this.tpNetworkLog.UseVisualStyleBackColor = true;
-            // 
-            // txtNetworkLog
-            // 
-            resources.ApplyResources(this.txtNetworkLog, "txtNetworkLog");
-            this.txtNetworkLog.Name = "txtNetworkLog";
-            this.txtNetworkLog.ReadOnly = true;
             // 
             // imglTabIcons
             // 
@@ -646,6 +197,53 @@
             this.imglTabIcons.Images.SetKeyName(0, "glyphicons-basic-532-user-family.png");
             this.imglTabIcons.Images.SetKeyName(1, "glyphicons-basic-849-computer-network.png");
             this.imglTabIcons.Images.SetKeyName(2, "glyphicons-basic-876-palette-package.png");
+            // 
+            // ofdOpenTaskFile
+            // 
+            this.ofdOpenTaskFile.DefaultExt = "xml";
+            resources.ApplyResources(this.ofdOpenTaskFile, "ofdOpenTaskFile");
+            // 
+            // tmrAutoSave
+            // 
+            this.tmrAutoSave.Interval = 10000;
+            this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
+            // 
+            // tmrPositionLogReminders
+            // 
+            this.tmrPositionLogReminders.Interval = 60000;
+            this.tmrPositionLogReminders.Tick += new System.EventHandler(this.tmrPositionLogReminders_Tick);
+            // 
+            // tmrInternetSync
+            // 
+            this.tmrInternetSync.Interval = 2000;
+            this.tmrInternetSync.Tick += new System.EventHandler(this.tmrInternetSync_Tick);
+            // 
+            // tmrNetwork
+            // 
+            this.tmrNetwork.Interval = 10000;
+            this.tmrNetwork.Tick += new System.EventHandler(this.tmrNetwork_Tick);
+            // 
+            // tmrLock
+            // 
+            this.tmrLock.Interval = 30000;
+            this.tmrLock.Tick += new System.EventHandler(this.tmrLock_Tick);
+            // 
+            // btnMoveToOpNow
+            // 
+            resources.ApplyResources(this.btnMoveToOpNow, "btnMoveToOpNow");
+            this.btnMoveToOpNow.Name = "btnMoveToOpNow";
+            this.btnMoveToOpNow.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnMoveToOpNow, resources.GetString("btnMoveToOpNow.ToolTip"));
+            this.btnMoveToOpNow.UseVisualStyleBackColor = true;
+            this.btnMoveToOpNow.Click += new System.EventHandler(this.btnMoveToOpNow_Click);
+            // 
+            // picOrgLogo
+            // 
+            resources.ApplyResources(this.picOrgLogo, "picOrgLogo");
+            this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
+            this.picOrgLogo.Name = "picOrgLogo";
+            this.picOrgLogo.TabStop = false;
+            this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pnlInternetSyncStart
             // 
@@ -725,6 +323,188 @@
             this.lblNetworkSyncStatus.ForeColor = System.Drawing.Color.White;
             this.lblNetworkSyncStatus.Name = "lblNetworkSyncStatus";
             // 
+            // pnlOpsPeriod
+            // 
+            this.pnlOpsPeriod.BackColor = System.Drawing.Color.White;
+            this.pnlOpsPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOpsPeriod.Controls.Add(this.btnMoveToOpNow);
+            this.pnlOpsPeriod.Controls.Add(this.btnReviewOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.btnEditOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.btnNewOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.cboCurrentOperationalPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.label1);
+            resources.ApplyResources(this.pnlOpsPeriod, "pnlOpsPeriod");
+            this.pnlOpsPeriod.Name = "pnlOpsPeriod";
+            // 
+            // btnReviewOpPeriod
+            // 
+            resources.ApplyResources(this.btnReviewOpPeriod, "btnReviewOpPeriod");
+            this.btnReviewOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_41_stats;
+            this.btnReviewOpPeriod.Name = "btnReviewOpPeriod";
+            this.btnReviewOpPeriod.TabStop = false;
+            this.btnReviewOpPeriod.UseVisualStyleBackColor = true;
+            this.btnReviewOpPeriod.Click += new System.EventHandler(this.btnReviewOpPeriod_Click);
+            // 
+            // btnEditOpPeriod
+            // 
+            resources.ApplyResources(this.btnEditOpPeriod, "btnEditOpPeriod");
+            this.btnEditOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
+            this.btnEditOpPeriod.Name = "btnEditOpPeriod";
+            this.btnEditOpPeriod.TabStop = false;
+            this.btnEditOpPeriod.UseVisualStyleBackColor = true;
+            this.btnEditOpPeriod.Click += new System.EventHandler(this.btnEditOpPeriod_Click);
+            // 
+            // btnNewOpPeriod
+            // 
+            resources.ApplyResources(this.btnNewOpPeriod, "btnNewOpPeriod");
+            this.btnNewOpPeriod.Name = "btnNewOpPeriod";
+            this.btnNewOpPeriod.TabStop = false;
+            this.btnNewOpPeriod.UseVisualStyleBackColor = true;
+            this.btnNewOpPeriod.Click += new System.EventHandler(this.btnNewOpPeriod_Click);
+            // 
+            // cboCurrentOperationalPeriod
+            // 
+            resources.ApplyResources(this.cboCurrentOperationalPeriod, "cboCurrentOperationalPeriod");
+            this.cboCurrentOperationalPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCurrentOperationalPeriod.FormattingEnabled = true;
+            this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
+            this.cboCurrentOperationalPeriod.SelectedIndexChanged += new System.EventHandler(this.cboCurrentOperationalPeriod_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BackColor = System.Drawing.Color.Black;
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainer1.Panel1.Controls.Add(this.btnLockTaskInfo);
+            this.splitContainer1.Panel1.Controls.Add(this.label16);
+            this.splitContainer1.Panel1.Controls.Add(this.txtTaskName);
+            this.splitContainer1.Panel1.Controls.Add(this.lblTaskNumber);
+            this.splitContainer1.Panel1.Controls.Add(this.lblTaskName);
+            this.splitContainer1.Panel1.Controls.Add(this.txtTaskNumber);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainer1.Panel2.Controls.Add(this.label17);
+            this.splitContainer1.Panel2.Controls.Add(this.btnOutstandingLogItems);
+            this.splitContainer1.Panel2.Controls.Add(this.cboICSRole);
+            this.splitContainer1.Panel2.Controls.Add(this.label19);
+            this.splitContainer1.Panel2.Controls.Add(this.btnICSRoleHelp);
+            this.splitContainer1.Panel2.Controls.Add(this.btnViewPositionLog);
+            this.splitContainer1.Panel2.Controls.Add(this.btnAddToPositionLog);
+            // 
+            // btnLockTaskInfo
+            // 
+            resources.ApplyResources(this.btnLockTaskInfo, "btnLockTaskInfo");
+            this.btnLockTaskInfo.Name = "btnLockTaskInfo";
+            this.btnLockTaskInfo.UseVisualStyleBackColor = true;
+            this.btnLockTaskInfo.Click += new System.EventHandler(this.btnLockTaskInfo_Click);
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // txtTaskName
+            // 
+            resources.ApplyResources(this.txtTaskName, "txtTaskName");
+            this.txtTaskName.Name = "txtTaskName";
+            this.txtTaskName.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskName_Validating);
+            this.txtTaskName.Child = new System.Windows.Controls.TextBox();
+            // 
+            // lblTaskNumber
+            // 
+            resources.ApplyResources(this.lblTaskNumber, "lblTaskNumber");
+            this.lblTaskNumber.Name = "lblTaskNumber";
+            // 
+            // lblTaskName
+            // 
+            resources.ApplyResources(this.lblTaskName, "lblTaskName");
+            this.lblTaskName.Name = "lblTaskName";
+            // 
+            // txtTaskNumber
+            // 
+            resources.ApplyResources(this.txtTaskNumber, "txtTaskNumber");
+            this.txtTaskNumber.Name = "txtTaskNumber";
+            this.txtTaskNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTaskNumber_KeyPress);
+            this.txtTaskNumber.Leave += new System.EventHandler(this.txtTaskNumber_Leave);
+            this.txtTaskNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaskNumber_Validating);
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
+            // btnOutstandingLogItems
+            // 
+            resources.ApplyResources(this.btnOutstandingLogItems, "btnOutstandingLogItems");
+            this.btnOutstandingLogItems.Name = "btnOutstandingLogItems";
+            this.btnOutstandingLogItems.TabStop = false;
+            this.btnOutstandingLogItems.UseVisualStyleBackColor = true;
+            this.btnOutstandingLogItems.Click += new System.EventHandler(this.btnOutstandingLogItems_Click);
+            // 
+            // cboICSRole
+            // 
+            resources.ApplyResources(this.cboICSRole, "cboICSRole");
+            this.cboICSRole.DisplayMember = "RoleNameForDropdown";
+            this.cboICSRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboICSRole.FormattingEnabled = true;
+            this.cboICSRole.Name = "cboICSRole";
+            this.cboICSRole.ValueMember = "RoleID";
+            this.cboICSRole.SelectedIndexChanged += new System.EventHandler(this.cboICSRole_SelectedIndexChanged);
+            this.cboICSRole.Leave += new System.EventHandler(this.cboICSRole_Leave);
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // btnICSRoleHelp
+            // 
+            resources.ApplyResources(this.btnICSRoleHelp, "btnICSRoleHelp");
+            this.btnICSRoleHelp.Name = "btnICSRoleHelp";
+            this.btnICSRoleHelp.TabStop = false;
+            this.btnICSRoleHelp.Tag = "Help";
+            this.btnICSRoleHelp.UseVisualStyleBackColor = true;
+            this.btnICSRoleHelp.Click += new System.EventHandler(this.btnICSRoleHelp_Click);
+            // 
+            // btnViewPositionLog
+            // 
+            resources.ApplyResources(this.btnViewPositionLog, "btnViewPositionLog");
+            this.btnViewPositionLog.Name = "btnViewPositionLog";
+            this.btnViewPositionLog.TabStop = false;
+            this.btnViewPositionLog.UseVisualStyleBackColor = true;
+            this.btnViewPositionLog.Click += new System.EventHandler(this.btnViewPositionLog_Click);
+            // 
+            // btnAddToPositionLog
+            // 
+            resources.ApplyResources(this.btnAddToPositionLog, "btnAddToPositionLog");
+            this.btnAddToPositionLog.Name = "btnAddToPositionLog";
+            this.btnAddToPositionLog.TabStop = false;
+            this.btnAddToPositionLog.UseVisualStyleBackColor = true;
+            this.btnAddToPositionLog.Click += new System.EventHandler(this.btnAddToPositionLog_Click);
+            // 
+            // lblServerStatus
+            // 
+            resources.ApplyResources(this.lblServerStatus, "lblServerStatus");
+            this.lblServerStatus.Name = "lblServerStatus";
+            // 
+            // lblVersionNumber
+            // 
+            resources.ApplyResources(this.lblVersionNumber, "lblVersionNumber");
+            this.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblVersionNumber.Name = "lblVersionNumber";
+            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
@@ -733,13 +513,10 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.iAPToolStripMenuItem,
-            this.operationsToolStripMenuItem,
-            this.logisticsToolStripMenuItem,
-            this.planningToolStripMenuItem,
-            this.adminFinanceToolStripMenuItem,
             this.networkInternetToolStripMenuItem,
             this.helpToolStripMenuItem,
-            this.tESTToolStripMenuItem});
+            this.languageToolStripMenuItem,
+            this.TestToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -750,7 +527,10 @@
             this.recentIncidentsToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.printToolStripMenuItem,
+            this.toolStripSeparator2,
             this.browseToIncidentFolderToolStripMenuItem,
+            this.restoreDeletedItemsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -786,11 +566,42 @@
             resources.ApplyResources(this.saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printOperationalPeriodToolStripMenuItem,
+            this.printIncidentToolStripMenuItem});
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            resources.ApplyResources(this.printToolStripMenuItem, "printToolStripMenuItem");
+            // 
+            // printOperationalPeriodToolStripMenuItem
+            // 
+            this.printOperationalPeriodToolStripMenuItem.Name = "printOperationalPeriodToolStripMenuItem";
+            resources.ApplyResources(this.printOperationalPeriodToolStripMenuItem, "printOperationalPeriodToolStripMenuItem");
+            this.printOperationalPeriodToolStripMenuItem.Click += new System.EventHandler(this.printOperationalPeriodToolStripMenuItem_Click);
+            // 
+            // printIncidentToolStripMenuItem
+            // 
+            this.printIncidentToolStripMenuItem.Name = "printIncidentToolStripMenuItem";
+            resources.ApplyResources(this.printIncidentToolStripMenuItem, "printIncidentToolStripMenuItem");
+            this.printIncidentToolStripMenuItem.Click += new System.EventHandler(this.printIncidentToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
             // browseToIncidentFolderToolStripMenuItem
             // 
             resources.ApplyResources(this.browseToIncidentFolderToolStripMenuItem, "browseToIncidentFolderToolStripMenuItem");
             this.browseToIncidentFolderToolStripMenuItem.Name = "browseToIncidentFolderToolStripMenuItem";
             this.browseToIncidentFolderToolStripMenuItem.Click += new System.EventHandler(this.browseToIncidentFolderToolStripMenuItem_Click);
+            // 
+            // restoreDeletedItemsToolStripMenuItem
+            // 
+            this.restoreDeletedItemsToolStripMenuItem.Name = "restoreDeletedItemsToolStripMenuItem";
+            resources.ApplyResources(this.restoreDeletedItemsToolStripMenuItem, "restoreDeletedItemsToolStripMenuItem");
+            this.restoreDeletedItemsToolStripMenuItem.Click += new System.EventHandler(this.restoreDeletedItemsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -915,8 +726,8 @@
             this.communicationsPlanICS205ToolStripMenuItem,
             this.medicalPlanICS206ToolStripMenuItem,
             this.safetyMessageICS208ToolStripMenuItem,
+            this.incidentStatusSummaryICS209ToolStripMenuItem,
             this.airOperationsSummaryICS220ToolStripMenuItem,
-            this.printTheIncidentActionPlanToolStripMenuItem,
             this.toolStripSeparator5,
             this.additionalDocumentsToolStripMenuItem,
             this.communicationsListICS205AToolStripMenuItem,
@@ -969,17 +780,16 @@
             resources.ApplyResources(this.safetyMessageICS208ToolStripMenuItem, "safetyMessageICS208ToolStripMenuItem");
             this.safetyMessageICS208ToolStripMenuItem.Click += new System.EventHandler(this.safetyMessageICS208ToolStripMenuItem_Click);
             // 
+            // incidentStatusSummaryICS209ToolStripMenuItem
+            // 
+            this.incidentStatusSummaryICS209ToolStripMenuItem.Name = "incidentStatusSummaryICS209ToolStripMenuItem";
+            resources.ApplyResources(this.incidentStatusSummaryICS209ToolStripMenuItem, "incidentStatusSummaryICS209ToolStripMenuItem");
+            // 
             // airOperationsSummaryICS220ToolStripMenuItem
             // 
             this.airOperationsSummaryICS220ToolStripMenuItem.Name = "airOperationsSummaryICS220ToolStripMenuItem";
             resources.ApplyResources(this.airOperationsSummaryICS220ToolStripMenuItem, "airOperationsSummaryICS220ToolStripMenuItem");
             this.airOperationsSummaryICS220ToolStripMenuItem.Click += new System.EventHandler(this.airOperationsSummaryICS220ToolStripMenuItem_Click);
-            // 
-            // printTheIncidentActionPlanToolStripMenuItem
-            // 
-            this.printTheIncidentActionPlanToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.printTheIncidentActionPlanToolStripMenuItem.Name = "printTheIncidentActionPlanToolStripMenuItem";
-            resources.ApplyResources(this.printTheIncidentActionPlanToolStripMenuItem, "printTheIncidentActionPlanToolStripMenuItem");
             // 
             // toolStripSeparator5
             // 
@@ -1026,104 +836,6 @@
             this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
             resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
             this.printThisIncidentToDateToolStripMenuItem.Click += new System.EventHandler(this.printThisIncidentToDateToolStripMenuItem_Click);
-            // 
-            // operationsToolStripMenuItem
-            // 
-            this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem,
-            this.toolStripSeparator8,
-            this.teamAssignmentsICS204ToolStripMenuItem1});
-            this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
-            resources.ApplyResources(this.operationsToolStripMenuItem, "operationsToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem
-            // 
-            this.positionLogToolStripMenuItem.Name = "positionLogToolStripMenuItem";
-            resources.ApplyResources(this.positionLogToolStripMenuItem, "positionLogToolStripMenuItem");
-            this.positionLogToolStripMenuItem.Click += new System.EventHandler(this.positionLogToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
-            // 
-            // teamAssignmentsICS204ToolStripMenuItem1
-            // 
-            this.teamAssignmentsICS204ToolStripMenuItem1.Name = "teamAssignmentsICS204ToolStripMenuItem1";
-            resources.ApplyResources(this.teamAssignmentsICS204ToolStripMenuItem1, "teamAssignmentsICS204ToolStripMenuItem1");
-            this.teamAssignmentsICS204ToolStripMenuItem1.Click += new System.EventHandler(this.teamAssignmentsICS204ToolStripMenuItem1_Click);
-            // 
-            // logisticsToolStripMenuItem
-            // 
-            this.logisticsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem1,
-            this.toolStripSeparator7,
-            this.memberStatusToolStripMenuItem,
-            this.additionalContactsToolStripMenuItem});
-            this.logisticsToolStripMenuItem.Name = "logisticsToolStripMenuItem";
-            resources.ApplyResources(this.logisticsToolStripMenuItem, "logisticsToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem1
-            // 
-            this.positionLogToolStripMenuItem1.Name = "positionLogToolStripMenuItem1";
-            resources.ApplyResources(this.positionLogToolStripMenuItem1, "positionLogToolStripMenuItem1");
-            this.positionLogToolStripMenuItem1.Click += new System.EventHandler(this.positionLogToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
-            // 
-            // memberStatusToolStripMenuItem
-            // 
-            this.memberStatusToolStripMenuItem.Name = "memberStatusToolStripMenuItem";
-            resources.ApplyResources(this.memberStatusToolStripMenuItem, "memberStatusToolStripMenuItem");
-            this.memberStatusToolStripMenuItem.Click += new System.EventHandler(this.memberStatusToolStripMenuItem_Click);
-            // 
-            // additionalContactsToolStripMenuItem
-            // 
-            this.additionalContactsToolStripMenuItem.Name = "additionalContactsToolStripMenuItem";
-            resources.ApplyResources(this.additionalContactsToolStripMenuItem, "additionalContactsToolStripMenuItem");
-            this.additionalContactsToolStripMenuItem.Click += new System.EventHandler(this.additionalContactsToolStripMenuItem_Click);
-            // 
-            // planningToolStripMenuItem
-            // 
-            this.planningToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem2,
-            this.toolStripSeparator6,
-            this.notesToolStripMenuItem});
-            this.planningToolStripMenuItem.Name = "planningToolStripMenuItem";
-            resources.ApplyResources(this.planningToolStripMenuItem, "planningToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem2
-            // 
-            this.positionLogToolStripMenuItem2.Name = "positionLogToolStripMenuItem2";
-            resources.ApplyResources(this.positionLogToolStripMenuItem2, "positionLogToolStripMenuItem2");
-            this.positionLogToolStripMenuItem2.Click += new System.EventHandler(this.positionLogToolStripMenuItem2_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            // 
-            // notesToolStripMenuItem
-            // 
-            this.notesToolStripMenuItem.Name = "notesToolStripMenuItem";
-            resources.ApplyResources(this.notesToolStripMenuItem, "notesToolStripMenuItem");
-            this.notesToolStripMenuItem.Click += new System.EventHandler(this.notesToolStripMenuItem_Click);
-            // 
-            // adminFinanceToolStripMenuItem
-            // 
-            this.adminFinanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.positionLogToolStripMenuItem3});
-            this.adminFinanceToolStripMenuItem.Name = "adminFinanceToolStripMenuItem";
-            resources.ApplyResources(this.adminFinanceToolStripMenuItem, "adminFinanceToolStripMenuItem");
-            // 
-            // positionLogToolStripMenuItem3
-            // 
-            this.positionLogToolStripMenuItem3.Name = "positionLogToolStripMenuItem3";
-            resources.ApplyResources(this.positionLogToolStripMenuItem3, "positionLogToolStripMenuItem3");
-            this.positionLogToolStripMenuItem3.Click += new System.EventHandler(this.positionLogToolStripMenuItem3_Click);
             // 
             // networkInternetToolStripMenuItem
             // 
@@ -1181,10 +893,46 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newsToolStripMenuItem,
+            this.printBlankFormsToolStripMenuItem,
+            this.viewIncidentUpdateListToolStripMenuItem,
+            this.viewLogFileToolStripMenuItem,
+            this.toolStripSeparator6,
             this.supportToolStripMenuItem,
             this.aboutCIAPPToolStripMenuItem});
+            this.helpToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.RedExclaimSq;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // newsToolStripMenuItem
+            // 
+            this.newsToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.RedExclaimSq;
+            this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
+            resources.ApplyResources(this.newsToolStripMenuItem, "newsToolStripMenuItem");
+            this.newsToolStripMenuItem.Click += new System.EventHandler(this.newsToolStripMenuItem_Click);
+            // 
+            // printBlankFormsToolStripMenuItem
+            // 
+            this.printBlankFormsToolStripMenuItem.Name = "printBlankFormsToolStripMenuItem";
+            resources.ApplyResources(this.printBlankFormsToolStripMenuItem, "printBlankFormsToolStripMenuItem");
+            this.printBlankFormsToolStripMenuItem.Click += new System.EventHandler(this.printBlankFormsToolStripMenuItem_Click);
+            // 
+            // viewIncidentUpdateListToolStripMenuItem
+            // 
+            this.viewIncidentUpdateListToolStripMenuItem.Name = "viewIncidentUpdateListToolStripMenuItem";
+            resources.ApplyResources(this.viewIncidentUpdateListToolStripMenuItem, "viewIncidentUpdateListToolStripMenuItem");
+            this.viewIncidentUpdateListToolStripMenuItem.Click += new System.EventHandler(this.viewIncidentUpdateListToolStripMenuItem_Click);
+            // 
+            // viewLogFileToolStripMenuItem
+            // 
+            this.viewLogFileToolStripMenuItem.Name = "viewLogFileToolStripMenuItem";
+            resources.ApplyResources(this.viewLogFileToolStripMenuItem, "viewLogFileToolStripMenuItem");
+            this.viewLogFileToolStripMenuItem.Click += new System.EventHandler(this.viewLogFileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             // 
             // supportToolStripMenuItem
             // 
@@ -1198,66 +946,56 @@
             resources.ApplyResources(this.aboutCIAPPToolStripMenuItem, "aboutCIAPPToolStripMenuItem");
             this.aboutCIAPPToolStripMenuItem.Click += new System.EventHandler(this.aboutCIAPPToolStripMenuItem_Click);
             // 
-            // tESTToolStripMenuItem
+            // languageToolStripMenuItem
             // 
-            this.tESTToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
-            this.tESTToolStripMenuItem.Name = "tESTToolStripMenuItem";
-            resources.ApplyResources(this.tESTToolStripMenuItem, "tESTToolStripMenuItem");
-            this.tESTToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
+            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem,
+            this.frenchToolStripMenuItem});
+            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
             // 
-            // picOrgLogo
+            // englishToolStripMenuItem
             // 
-            this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
-            resources.ApplyResources(this.picOrgLogo, "picOrgLogo");
-            this.picOrgLogo.Name = "picOrgLogo";
-            this.picOrgLogo.TabStop = false;
-            this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 
-            // ofdOpenTaskFile
+            // frenchToolStripMenuItem
             // 
-            this.ofdOpenTaskFile.DefaultExt = "xml";
-            resources.ApplyResources(this.ofdOpenTaskFile, "ofdOpenTaskFile");
+            this.frenchToolStripMenuItem.Name = "frenchToolStripMenuItem";
+            resources.ApplyResources(this.frenchToolStripMenuItem, "frenchToolStripMenuItem");
+            this.frenchToolStripMenuItem.Click += new System.EventHandler(this.frenchToolStripMenuItem_Click);
             // 
-            // tmrAutoSave
+            // TestToolStripMenuItem
             // 
-            this.tmrAutoSave.Interval = 10000;
-            this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
-            // 
-            // tmrPositionLogReminders
-            // 
-            this.tmrPositionLogReminders.Interval = 60000;
-            this.tmrPositionLogReminders.Tick += new System.EventHandler(this.tmrPositionLogReminders_Tick);
-            // 
-            // tmrInternetSync
-            // 
-            this.tmrInternetSync.Interval = 2000;
-            this.tmrInternetSync.Tick += new System.EventHandler(this.tmrInternetSync_Tick);
-            // 
-            // tmrNetwork
-            // 
-            this.tmrNetwork.Interval = 10000;
-            this.tmrNetwork.Tick += new System.EventHandler(this.tmrNetwork_Tick);
+            this.TestToolStripMenuItem.BackColor = System.Drawing.Color.Fuchsia;
+            this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
+            resources.ApplyResources(this.TestToolStripMenuItem, "TestToolStripMenuItem");
+            this.TestToolStripMenuItem.Click += new System.EventHandler(this.tESTToolStripMenuItem_Click);
             // 
             // cpOtherTools
             // 
             this.cpOtherTools.BackColor = System.Drawing.Color.White;
-            this.cpOtherTools.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpOtherTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpOtherTools.CollapsedHeight = 40;
-            this.cpOtherTools.CollapsedWidth = 349;
-            this.cpOtherTools.CollapseLeft = true;
-            this.cpOtherTools.Controls.Add(this.btnGeneralMessage);
-            this.cpOtherTools.Controls.Add(this.btnReplacementResources);
-            this.cpOtherTools.Controls.Add(this.btnAdditionalContacts);
-            this.cpOtherTools.Controls.Add(this.btnNotes);
-            this.cpOtherTools.Controls.Add(this.btnShowResources);
-            this.cpOtherTools.CurrentlyCollapsed = false;
-            this.cpOtherTools.ExpandedHeight = 180;
-            this.cpOtherTools.ExpandedWidth = 349;
-            this.cpOtherTools.ExpandUp = false;
+            this.cpOtherTools.Collapsed = false;
+            this.cpOtherTools.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpOtherTools.Controls.Add(this.flowLayoutPanel2);
+            this.cpOtherTools.EnableExpandCollapse = false;
+            this.cpOtherTools.ExpandsRight = true;
+            this.cpOtherTools.ExpandsUpward = false;
             resources.ApplyResources(this.cpOtherTools, "cpOtherTools");
             this.cpOtherTools.Name = "cpOtherTools";
+            this.cpOtherTools.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.cpOtherTools.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpOtherTools.TitleText = "Other Tools";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.btnGeneralMessage);
+            this.flowLayoutPanel2.Controls.Add(this.btnNotes);
+            this.flowLayoutPanel2.Controls.Add(this.btnAdditionalContacts);
+            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             // 
             // btnGeneralMessage
             // 
@@ -1268,14 +1006,13 @@
             this.btnGeneralMessage.UseVisualStyleBackColor = true;
             this.btnGeneralMessage.Click += new System.EventHandler(this.btnGeneralMessage_Click);
             // 
-            // btnReplacementResources
+            // btnNotes
             // 
-            resources.ApplyResources(this.btnReplacementResources, "btnReplacementResources");
-            this.btnReplacementResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnReplacementResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_46_calendar;
-            this.btnReplacementResources.Name = "btnReplacementResources";
-            this.btnReplacementResources.UseVisualStyleBackColor = true;
-            this.btnReplacementResources.Click += new System.EventHandler(this.btnReplacementResources_Click);
+            resources.ApplyResources(this.btnNotes, "btnNotes");
+            this.btnNotes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnNotes.Name = "btnNotes";
+            this.btnNotes.UseVisualStyleBackColor = true;
+            this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
             // 
             // btnAdditionalContacts
             // 
@@ -1285,13 +1022,14 @@
             this.btnAdditionalContacts.UseVisualStyleBackColor = true;
             this.btnAdditionalContacts.Click += new System.EventHandler(this.btnAdditionalContacts_Click);
             // 
-            // btnNotes
+            // btnReplacementResources
             // 
-            resources.ApplyResources(this.btnNotes, "btnNotes");
-            this.btnNotes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnNotes.Name = "btnNotes";
-            this.btnNotes.UseVisualStyleBackColor = true;
-            this.btnNotes.Click += new System.EventHandler(this.btnNotes_Click);
+            resources.ApplyResources(this.btnReplacementResources, "btnReplacementResources");
+            this.btnReplacementResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnReplacementResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_46_calendar;
+            this.btnReplacementResources.Name = "btnReplacementResources";
+            this.btnReplacementResources.UseVisualStyleBackColor = true;
+            this.btnReplacementResources.Click += new System.EventHandler(this.btnReplacementResources_Click);
             // 
             // btnShowResources
             // 
@@ -1305,50 +1043,32 @@
             // cpIncidentActionPlan
             // 
             this.cpIncidentActionPlan.BackColor = System.Drawing.Color.White;
-            this.cpIncidentActionPlan.BackgroundColorCollapsed = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
             this.cpIncidentActionPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpIncidentActionPlan.CollapsedHeight = 40;
-            this.cpIncidentActionPlan.CollapsedWidth = 485;
-            this.cpIncidentActionPlan.CollapseLeft = true;
-            this.cpIncidentActionPlan.Controls.Add(this.btnAssignmentList);
-            this.cpIncidentActionPlan.Controls.Add(this.btnAirOpsSummary);
-            this.cpIncidentActionPlan.Controls.Add(this.btnSafetyPlans);
-            this.cpIncidentActionPlan.Controls.Add(this.btnIncidentObjectives);
-            this.cpIncidentActionPlan.Controls.Add(this.btnMedicalPlan);
-            this.cpIncidentActionPlan.Controls.Add(this.btnPrintIAP);
-            this.cpIncidentActionPlan.Controls.Add(this.btnPrintOrgChart);
-            this.cpIncidentActionPlan.Controls.Add(this.btnCommsPlan);
-            this.cpIncidentActionPlan.CurrentlyCollapsed = false;
-            this.cpIncidentActionPlan.ExpandedHeight = 331;
-            this.cpIncidentActionPlan.ExpandedWidth = 722;
-            this.cpIncidentActionPlan.ExpandUp = false;
+            this.cpIncidentActionPlan.Collapsed = false;
+            this.cpIncidentActionPlan.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpIncidentActionPlan.Controls.Add(this.flowLayoutPanel1);
+            this.cpIncidentActionPlan.EnableExpandCollapse = false;
+            this.cpIncidentActionPlan.ExpandsRight = true;
+            this.cpIncidentActionPlan.ExpandsUpward = false;
             resources.ApplyResources(this.cpIncidentActionPlan, "cpIncidentActionPlan");
             this.cpIncidentActionPlan.Name = "cpIncidentActionPlan";
+            this.cpIncidentActionPlan.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.cpIncidentActionPlan.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.cpIncidentActionPlan.TitleText = "Incident Action Plan";
             // 
-            // btnAssignmentList
+            // flowLayoutPanel1
             // 
-            resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
-            this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnAssignmentList.Name = "btnAssignmentList";
-            this.btnAssignmentList.UseVisualStyleBackColor = true;
-            this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
-            // 
-            // btnAirOpsSummary
-            // 
-            resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
-            this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnAirOpsSummary.Name = "btnAirOpsSummary";
-            this.btnAirOpsSummary.UseVisualStyleBackColor = true;
-            this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
-            // 
-            // btnSafetyPlans
-            // 
-            resources.ApplyResources(this.btnSafetyPlans, "btnSafetyPlans");
-            this.btnSafetyPlans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnSafetyPlans.Name = "btnSafetyPlans";
-            this.btnSafetyPlans.UseVisualStyleBackColor = true;
-            this.btnSafetyPlans.Click += new System.EventHandler(this.btnSafetyPlans_Click);
+            this.flowLayoutPanel1.Controls.Add(this.btnIncidentObjectives);
+            this.flowLayoutPanel1.Controls.Add(this.btnCommsPlan);
+            this.flowLayoutPanel1.Controls.Add(this.btnPrintOrgChart);
+            this.flowLayoutPanel1.Controls.Add(this.btnMedicalPlan);
+            this.flowLayoutPanel1.Controls.Add(this.btnSafetyPlans);
+            this.flowLayoutPanel1.Controls.Add(this.btnAirOpsSummary);
+            this.flowLayoutPanel1.Controls.Add(this.btnAssignmentList);
+            this.flowLayoutPanel1.Controls.Add(this.btnIncidentStatusSummary);
+            this.flowLayoutPanel1.Controls.Add(this.btnPrintIAP);
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
             // btnIncidentObjectives
             // 
@@ -1358,22 +1078,13 @@
             this.btnIncidentObjectives.UseVisualStyleBackColor = true;
             this.btnIncidentObjectives.Click += new System.EventHandler(this.btnIncidentObjectives_Click);
             // 
-            // btnMedicalPlan
+            // btnCommsPlan
             // 
-            resources.ApplyResources(this.btnMedicalPlan, "btnMedicalPlan");
-            this.btnMedicalPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnMedicalPlan.Name = "btnMedicalPlan";
-            this.btnMedicalPlan.UseVisualStyleBackColor = true;
-            this.btnMedicalPlan.Click += new System.EventHandler(this.btnMedicalPlan_Click);
-            // 
-            // btnPrintIAP
-            // 
-            resources.ApplyResources(this.btnPrintIAP, "btnPrintIAP");
-            this.btnPrintIAP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
-            this.btnPrintIAP.Name = "btnPrintIAP";
-            this.btnPrintIAP.UseVisualStyleBackColor = true;
-            this.btnPrintIAP.Click += new System.EventHandler(this.btnPrintIAP_Click);
+            resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
+            this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnCommsPlan.Name = "btnCommsPlan";
+            this.btnCommsPlan.UseVisualStyleBackColor = true;
+            this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
             // 
             // btnPrintOrgChart
             // 
@@ -1383,62 +1094,152 @@
             this.btnPrintOrgChart.UseVisualStyleBackColor = true;
             this.btnPrintOrgChart.Click += new System.EventHandler(this.btnPrintOrgChart_Click);
             // 
-            // btnCommsPlan
+            // btnMedicalPlan
             // 
-            resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
-            this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnCommsPlan.Name = "btnCommsPlan";
-            this.btnCommsPlan.UseVisualStyleBackColor = true;
-            this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
+            resources.ApplyResources(this.btnMedicalPlan, "btnMedicalPlan");
+            this.btnMedicalPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnMedicalPlan.Name = "btnMedicalPlan";
+            this.btnMedicalPlan.UseVisualStyleBackColor = true;
+            this.btnMedicalPlan.Click += new System.EventHandler(this.btnMedicalPlan_Click);
+            // 
+            // btnSafetyPlans
+            // 
+            resources.ApplyResources(this.btnSafetyPlans, "btnSafetyPlans");
+            this.btnSafetyPlans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnSafetyPlans.Name = "btnSafetyPlans";
+            this.btnSafetyPlans.UseVisualStyleBackColor = true;
+            this.btnSafetyPlans.Click += new System.EventHandler(this.btnSafetyPlans_Click);
+            // 
+            // btnAirOpsSummary
+            // 
+            resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
+            this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnAirOpsSummary.Name = "btnAirOpsSummary";
+            this.btnAirOpsSummary.UseVisualStyleBackColor = true;
+            this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
+            // 
+            // btnAssignmentList
+            // 
+            resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
+            this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnAssignmentList.Name = "btnAssignmentList";
+            this.btnAssignmentList.UseVisualStyleBackColor = true;
+            this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
+            // 
+            // btnIncidentStatusSummary
+            // 
+            resources.ApplyResources(this.btnIncidentStatusSummary, "btnIncidentStatusSummary");
+            this.btnIncidentStatusSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnIncidentStatusSummary.Name = "btnIncidentStatusSummary";
+            this.btnIncidentStatusSummary.UseVisualStyleBackColor = true;
+            this.btnIncidentStatusSummary.Click += new System.EventHandler(this.btnIncidentStatusSummary_Click);
+            // 
+            // btnPrintIAP
+            // 
+            resources.ApplyResources(this.btnPrintIAP, "btnPrintIAP");
+            this.btnPrintIAP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
+            this.btnPrintIAP.Name = "btnPrintIAP";
+            this.btnPrintIAP.Tag = "ViewPDF";
+            this.btnPrintIAP.UseVisualStyleBackColor = true;
+            this.btnPrintIAP.Click += new System.EventHandler(this.btnPrintIAP_Click);
+            // 
+            // splitContainer2
+            // 
+            resources.ApplyResources(this.splitContainer2, "splitContainer2");
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.pnlTaskInfo);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
+            // 
+            // pnlTaskInfo
+            // 
+            this.pnlTaskInfo.BackColor = System.Drawing.Color.White;
+            this.pnlTaskInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTaskInfo.Controls.Add(this.splitContainer1);
+            resources.ApplyResources(this.pnlTaskInfo, "pnlTaskInfo");
+            this.pnlTaskInfo.Name = "pnlTaskInfo";
+            this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
+            // 
+            // splitContainer3
+            // 
+            resources.ApplyResources(this.splitContainer3, "splitContainer3");
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.picOrgLogo);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.pnlOpsPeriod);
+            // 
+            // collapsiblePanel1
+            // 
+            this.collapsiblePanel1.BackColor = System.Drawing.Color.White;
+            this.collapsiblePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.collapsiblePanel1.Collapsed = false;
+            this.collapsiblePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.collapsiblePanel1.Controls.Add(this.btnShowResources);
+            this.collapsiblePanel1.Controls.Add(this.btnReplacementResources);
+            this.collapsiblePanel1.EnableExpandCollapse = false;
+            this.collapsiblePanel1.ExpandsRight = true;
+            this.collapsiblePanel1.ExpandsUpward = false;
+            resources.ApplyResources(this.collapsiblePanel1, "collapsiblePanel1");
+            this.collapsiblePanel1.Name = "collapsiblePanel1";
+            this.collapsiblePanel1.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.collapsiblePanel1.SizeWhenExpanded = new System.Drawing.Size(485, 300);
+            this.collapsiblePanel1.TitleText = "Resources";
             // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
+            this.Controls.Add(this.collapsiblePanel1);
+            this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.cpOtherTools);
             this.Controls.Add(this.cpIncidentActionPlan);
-            this.Controls.Add(this.picOrgLogo);
             this.Controls.Add(this.pnlInternetSyncStart);
             this.Controls.Add(this.pnlNetworkSyncInProgress);
-            this.Controls.Add(this.pnlOpsPeriod);
-            this.Controls.Add(this.pnlTaskInfo);
             this.Controls.Add(this.lblServerStatus);
             this.Controls.Add(this.lblVersionNumber);
-            this.Controls.Add(this.tcStatus);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IncidentDetailsForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IncidentDetailsForm_FormClosed);
             this.Load += new System.EventHandler(this.IncidentDetailsForm_Load);
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMembersOnTask)).EndInit();
-            this.splitContainer5.Panel1.ResumeLayout(false);
-            this.splitContainer5.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
-            this.splitContainer5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTaskEquipment)).EndInit();
-            this.pnlOpsPeriod.ResumeLayout(false);
-            this.pnlOpsPeriod.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOpPeriod)).EndInit();
-            this.pnlTaskInfo.ResumeLayout(false);
-            this.pnlTaskInfo.PerformLayout();
-            this.tcStatus.ResumeLayout(false);
-            this.tpMembersOnTask.ResumeLayout(false);
-            this.tpEquipment.ResumeLayout(false);
-            this.tpNetworkLog.ResumeLayout(false);
-            this.tpNetworkLog.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).EndInit();
             this.pnlInternetSyncStart.ResumeLayout(false);
             this.pnlNetworkSyncInProgress.ResumeLayout(false);
+            this.pnlOpsPeriod.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).EndInit();
             this.cpOtherTools.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.cpIncidentActionPlan.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.pnlTaskInfo.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            this.collapsiblePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1447,14 +1248,7 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlOpsPeriod;
-        private System.Windows.Forms.Button btnCloseOpPeriod;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.DateTimePicker datOpsEnd;
-        private System.Windows.Forms.DateTimePicker datOpsStart;
-        private System.Windows.Forms.NumericUpDown numOpPeriod;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel pnlTaskInfo;
         private System.Windows.Forms.Button btnOutstandingLogItems;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button btnViewPositionLog;
@@ -1468,32 +1262,6 @@
         private System.Windows.Forms.Label lblTaskNumber;
         private System.Windows.Forms.Label lblServerStatus;
         private System.Windows.Forms.Label lblVersionNumber;
-        private System.Windows.Forms.TabControl tcStatus;
-        private System.Windows.Forms.TabPage tpMembersOnTask;
-        private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.DataGridView dgvMembersOnTask;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemberName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemberSARGroup;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSignInTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignmentNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemberAssignmentStatus;
-        private System.Windows.Forms.Button btnAddAMember;
-        private System.Windows.Forms.Button btnBulkSignIn;
-        private System.Windows.Forms.Button btnMembersOnTaskNewWindow;
-        private System.Windows.Forms.TabPage tpEquipment;
-        private System.Windows.Forms.SplitContainer splitContainer5;
-        private System.Windows.Forms.DataGridView dgvTaskEquipment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReferenceID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEquipmentStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignee;
-        private System.Windows.Forms.Button btnAssignEquipment;
-        private System.Windows.Forms.Button btnViewEquipment;
-        private System.Windows.Forms.Button btnReturnEquipment;
-        private System.Windows.Forms.TabPage tpNetworkLog;
-        private System.Windows.Forms.TextBox txtNetworkLog;
         private System.Windows.Forms.Panel pnlInternetSyncStart;
         private System.Windows.Forms.Button btnCancelInternetSync;
         private System.Windows.Forms.Label label22;
@@ -1516,9 +1284,6 @@
         private System.Windows.Forms.Button btnAdditionalContacts;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iAPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem operationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logisticsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem planningToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem networkInternetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.PictureBox picOrgLogo;
@@ -1547,7 +1312,6 @@
         private System.Windows.Forms.ImageList imglTabIcons;
         private System.Windows.Forms.ToolStripMenuItem medivacServicesToolStripMenuItem;
         private CustomControls.CollapsiblePanel cpIncidentActionPlan;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SaveFileDialog svdTaskFile;
         private System.Windows.Forms.OpenFileDialog ofdOpenTaskFile;
         private System.Windows.Forms.FolderBrowserDialog fbdSaveLocation;
@@ -1565,21 +1329,11 @@
         private CustomControls.CollapsiblePanel cpOtherTools;
         private System.Windows.Forms.ToolStripMenuItem organizationChartICS207ToolStripMenuItem;
         private System.Windows.Forms.Button btnNotes;
-        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem safetyMessageICS208ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generalMessageICS213ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem printThisOperationalPeriodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printThisIncidentToDateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem memberStatusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem additionalContactsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem notesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem adminFinanceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem positionLogToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem localNetworkSharingSyncToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem requestIncidentFromServerToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
@@ -1593,14 +1347,41 @@
         private System.Windows.Forms.ToolStripMenuItem printingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem networkTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamAssignmentsICS204ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem teamAssignmentsICS204ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem printTheIncidentActionPlanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.Button btnShowResources;
         private SpellBox txtTaskName;
-        private System.Windows.Forms.ToolStripMenuItem tESTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TestToolStripMenuItem;
         private System.Windows.Forms.Button btnGeneralMessage;
         private System.Windows.Forms.Button btnReplacementResources;
+        private System.Windows.Forms.Button btnIncidentStatusSummary;
+        private System.Windows.Forms.ToolStripMenuItem incidentStatusSummaryICS209ToolStripMenuItem;
+        private System.Windows.Forms.Button btnLockTaskInfo;
+        private System.Windows.Forms.Timer tmrLock;
+        private System.Windows.Forms.ComboBox cboCurrentOperationalPeriod;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem restoreDeletedItemsToolStripMenuItem;
+        private System.Windows.Forms.Button btnReviewOpPeriod;
+        private System.Windows.Forms.Button btnEditOpPeriod;
+        private System.Windows.Forms.Button btnNewOpPeriod;
+        private System.Windows.Forms.Button btnMoveToOpNow;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripMenuItem viewLogFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem frenchToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Panel pnlTaskInfo;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private CustomControls.CollapsiblePanel collapsiblePanel1;
+        private System.Windows.Forms.ToolStripMenuItem viewIncidentUpdateListToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printOperationalPeriodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printIncidentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printBlankFormsToolStripMenuItem;
     }
 }
 

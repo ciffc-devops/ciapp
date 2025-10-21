@@ -14,7 +14,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
     {
         public EnterTextForm()
         {
-            InitializeComponent();
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         public string Question { get => lblQuestion.Text; set => lblQuestion.Text = value; }    

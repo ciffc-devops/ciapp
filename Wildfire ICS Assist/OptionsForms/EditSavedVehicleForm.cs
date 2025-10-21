@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class EditSavedVehicleForm : Form
+    public partial class EditSavedVehicleForm : BaseForm
     {
 
         public Vehicle vehicle { get => vehicleEquipmentEditControl1.CurrentVehicle; set {  displayVehicle(value); } }
@@ -22,7 +23,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         }
         public EditSavedVehicleForm()
         {
-            InitializeComponent(); this.Icon = Program.programIcon; this.BackColor = Program.FormBackground;
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void displayVehicle(Vehicle veh)
@@ -48,7 +49,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             }
             else
             {
-                MessageBox.Show("You must include the Resource Name so this vehicle or equipment can be identified later.");
+                LgMessageBox.Show("You must include the Resource Name so this vehicle or equipment can be identified later.");
             }
         }
 

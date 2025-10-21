@@ -9,8 +9,8 @@ namespace Wildfire_ICS_Tests
     [TestClass]
     public class AddObjectTets
     {
-        static WFIncident incident = new WFIncident();
-        static WFIncidentService wFIncidentService = new WFIncidentService(incident);
+        static Incident incident = new Incident();
+        static IncidentDataService wFIncidentService = new IncidentDataService(incident);
 
         [TestMethod]
         public void TestMedicalPlan()
@@ -84,7 +84,7 @@ namespace Wildfire_ICS_Tests
             int seed = 1;
             int countBefore = wFIncidentService.CurrentIncident.allCommsPlans.Count;
             CommsPlan item = TestTools.createTestCommsPlan(seed);
-            item.OpsPeriod = seed;
+            item.OpPeriod = seed;
             wFIncidentService.UpsertCommsPlan(item);
             Assert.AreEqual(item.allCommsItems.Count, 5, "Comms plan items not added correctly");
             Assert.AreNotEqual(wFIncidentService.CurrentIncident.allCommsPlans.Count, countBefore, 0, "Comms Plan not added");
@@ -105,13 +105,13 @@ namespace Wildfire_ICS_Tests
         public void TestIncidentObjectives()
         {
             int seed = 1;
-            int countBefore = wFIncidentService.CurrentIncident.allIncidentObjectives.Count;
+            int countBefore = wFIncidentService.CurrentIncident.AllIncidentObjectiveSheets.Count;
             IncidentObjectivesSheet item = TestTools.createTestObjectiveSheet(seed);
             item.OpPeriod = seed;
             wFIncidentService.UpsertIncidentObjectivesSheet(item);
             Assert.AreEqual(item.Objectives.Count, 5, "Objectives not added correctly");
 
-            Assert.AreNotEqual(wFIncidentService.CurrentIncident.allIncidentObjectives.Count, countBefore, 0, "Incident Objectives Sheet not added");
+            Assert.AreNotEqual(wFIncidentService.CurrentIncident.AllIncidentObjectiveSheets.Count, countBefore, 0, "Incident Objectives Sheet not added");
         }
     }
 }

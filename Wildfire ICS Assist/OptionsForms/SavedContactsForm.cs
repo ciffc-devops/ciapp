@@ -10,15 +10,16 @@ using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedContactsForm : Form
+    public partial class SavedContactsForm : BaseForm
     {
         public SavedContactsForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+            
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void SavedContactsForm_Load(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = contactListEditContact.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(contactListEditContact.contact, "Contact");
+                    Program.generalOptionsService.UpsertOptionValue(contactListEditContact.contact, "Contact");
                     buildDataList();
 
                 }
@@ -59,7 +60,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 DialogResult dr = contactListEditContact.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(contactListEditContact.contact, "Contact");
+                    Program.generalOptionsService.UpsertOptionValue(contactListEditContact.contact, "Contact");
                     buildDataList();
                 }
             }
@@ -69,14 +70,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             string msg = Properties.Resources.SureDelete;
 
-            DialogResult conf = MessageBox.Show(msg, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+            DialogResult conf = LgMessageBox.Show(msg, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
             if (conf == DialogResult.Yes)
             {
                 foreach (DataGridViewRow row in dgvContacts.SelectedRows)
                 {
                     Contact c = (Contact)row.DataBoundItem;
                     c.Active = false;
-                    Program.generalOptionsService.UpserOptionValue(c, "Contact");
+                    Program.generalOptionsService.UpsertOptionValue(c, "Contact");
 
                 }
                 buildDataList();
@@ -99,7 +100,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                     DialogResult dr = contactListEditContact.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        Program.generalOptionsService.UpserOptionValue(contactListEditContact.contact, "Contact");
+                        Program.generalOptionsService.UpsertOptionValue(contactListEditContact.contact, "Contact");
                         buildDataList();
                     }
                 }
@@ -127,7 +128,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 {
                     System.IO.File.WriteAllText(exportPath, csv);
 
-                    DialogResult openNow = MessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
+                    DialogResult openNow = LgMessageBox.Show("The file was saved successfully. Would you like to open it now?", "Save successful!", MessageBoxButtons.YesNo);
                     if (openNow == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(exportPath);
@@ -136,7 +137,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
+                    LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
             }
         }

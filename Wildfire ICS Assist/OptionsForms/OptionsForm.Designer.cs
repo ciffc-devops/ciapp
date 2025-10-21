@@ -31,6 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbGeneral = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.chkShowTest = new System.Windows.Forms.CheckBox();
             this.txtOrganizationName = new Wildfire_ICS_Assist.CustomControls.TextBoxRequiredControl();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -89,8 +93,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.fbdDefaultSave = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label13 = new System.Windows.Forms.Label();
-            this.chkShowTest = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tbGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReportLogo)).BeginInit();
@@ -116,7 +118,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(746, 574);
+            this.tabControl1.Size = new System.Drawing.Size(746, 590);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 0;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
@@ -124,6 +126,8 @@
             // tbGeneral
             // 
             this.tbGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.tbGeneral.Controls.Add(this.label14);
+            this.tbGeneral.Controls.Add(this.comboBox1);
             this.tbGeneral.Controls.Add(this.label13);
             this.tbGeneral.Controls.Add(this.chkShowTest);
             this.tbGeneral.Controls.Add(this.txtOrganizationName);
@@ -151,16 +155,60 @@
             this.tbGeneral.Location = new System.Drawing.Point(4, 33);
             this.tbGeneral.Name = "tbGeneral";
             this.tbGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tbGeneral.Size = new System.Drawing.Size(738, 537);
+            this.tbGeneral.Size = new System.Drawing.Size(738, 553);
             this.tbGeneral.TabIndex = 0;
             this.tbGeneral.Text = "General";
             this.tbGeneral.Click += new System.EventHandler(this.tbGeneral_Click);
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(19, 6);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(242, 32);
+            this.label14.TabIndex = 146;
+            this.label14.Text = "ICS Form Selection";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "All Hazards",
+            "Wildfire"});
+            this.comboBox1.Location = new System.Drawing.Point(267, 6);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(463, 32);
+            this.comboBox1.TabIndex = 147;
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(58, 500);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(215, 24);
+            this.label13.TabIndex = 144;
+            this.label13.Text = "Testing";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkShowTest
+            // 
+            this.chkShowTest.AutoSize = true;
+            this.chkShowTest.Location = new System.Drawing.Point(279, 498);
+            this.chkShowTest.Name = "chkShowTest";
+            this.chkShowTest.Size = new System.Drawing.Size(245, 28);
+            this.chkShowTest.TabIndex = 145;
+            this.chkShowTest.Text = "Yes, show the Test button";
+            this.chkShowTest.UseVisualStyleBackColor = true;
             // 
             // txtOrganizationName
             // 
             this.txtOrganizationName.BackColor = System.Drawing.Color.Transparent;
             this.txtOrganizationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrganizationName.Location = new System.Drawing.Point(267, 334);
+            this.txtOrganizationName.Location = new System.Drawing.Point(267, 353);
             this.txtOrganizationName.Margin = new System.Windows.Forms.Padding(6);
             this.txtOrganizationName.Multiline = false;
             this.txtOrganizationName.Name = "txtOrganizationName";
@@ -170,7 +218,7 @@
             // label12
             // 
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(3, 334);
+            this.label12.Location = new System.Drawing.Point(3, 353);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(258, 32);
             this.label12.TabIndex = 137;
@@ -180,7 +228,7 @@
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(19, 375);
+            this.label11.Location = new System.Drawing.Point(19, 394);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(242, 32);
             this.label11.TabIndex = 136;
@@ -189,7 +237,7 @@
             // 
             // btnRemoveLogo
             // 
-            this.btnRemoveLogo.Location = new System.Drawing.Point(447, 416);
+            this.btnRemoveLogo.Location = new System.Drawing.Point(447, 435);
             this.btnRemoveLogo.Name = "btnRemoveLogo";
             this.btnRemoveLogo.Size = new System.Drawing.Size(100, 34);
             this.btnRemoveLogo.TabIndex = 135;
@@ -199,7 +247,7 @@
             // 
             // btnChangeLogo
             // 
-            this.btnChangeLogo.Location = new System.Drawing.Point(447, 375);
+            this.btnChangeLogo.Location = new System.Drawing.Point(447, 394);
             this.btnChangeLogo.Name = "btnChangeLogo";
             this.btnChangeLogo.Size = new System.Drawing.Size(100, 34);
             this.btnChangeLogo.TabIndex = 134;
@@ -209,7 +257,7 @@
             // 
             // picReportLogo
             // 
-            this.picReportLogo.Location = new System.Drawing.Point(267, 375);
+            this.picReportLogo.Location = new System.Drawing.Point(267, 394);
             this.picReportLogo.Name = "picReportLogo";
             this.picReportLogo.Size = new System.Drawing.Size(174, 99);
             this.picReportLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -218,14 +266,14 @@
             // 
             // numRedResourceTimeoutDays
             // 
-            this.numRedResourceTimeoutDays.Location = new System.Drawing.Point(267, 296);
+            this.numRedResourceTimeoutDays.Location = new System.Drawing.Point(267, 315);
             this.numRedResourceTimeoutDays.Name = "numRedResourceTimeoutDays";
             this.numRedResourceTimeoutDays.Size = new System.Drawing.Size(120, 29);
             this.numRedResourceTimeoutDays.TabIndex = 126;
             // 
             // numYellowResourceTimeoutDays
             // 
-            this.numYellowResourceTimeoutDays.Location = new System.Drawing.Point(267, 261);
+            this.numYellowResourceTimeoutDays.Location = new System.Drawing.Point(267, 280);
             this.numYellowResourceTimeoutDays.Name = "numYellowResourceTimeoutDays";
             this.numYellowResourceTimeoutDays.Size = new System.Drawing.Size(120, 29);
             this.numYellowResourceTimeoutDays.TabIndex = 125;
@@ -233,7 +281,7 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(19, 296);
+            this.label10.Location = new System.Drawing.Point(19, 315);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(242, 32);
             this.label10.TabIndex = 124;
@@ -243,7 +291,7 @@
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(19, 261);
+            this.label9.Location = new System.Drawing.Point(19, 280);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(242, 32);
             this.label9.TabIndex = 123;
@@ -253,7 +301,7 @@
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(19, 226);
+            this.label8.Location = new System.Drawing.Point(19, 245);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(528, 32);
             this.label8.TabIndex = 122;
@@ -263,7 +311,7 @@
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(19, 180);
+            this.label7.Location = new System.Drawing.Point(19, 199);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(242, 32);
             this.label7.TabIndex = 120;
@@ -276,7 +324,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboDateFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDateFormat.FormattingEnabled = true;
-            this.cboDateFormat.Location = new System.Drawing.Point(267, 180);
+            this.cboDateFormat.Location = new System.Drawing.Point(267, 199);
             this.cboDateFormat.Name = "cboDateFormat";
             this.cboDateFormat.Size = new System.Drawing.Size(463, 32);
             this.cboDateFormat.TabIndex = 121;
@@ -284,7 +332,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(19, 142);
+            this.label1.Location = new System.Drawing.Point(19, 161);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(242, 32);
             this.label1.TabIndex = 118;
@@ -304,7 +352,7 @@
             "Degrees Decimal Minutes",
             "Degrees Minutes Seconds",
             "MGRS"});
-            this.cboDefaultProvince.Location = new System.Drawing.Point(267, 142);
+            this.cboDefaultProvince.Location = new System.Drawing.Point(267, 161);
             this.cboDefaultProvince.Name = "cboDefaultProvince";
             this.cboDefaultProvince.Size = new System.Drawing.Size(463, 32);
             this.cboDefaultProvince.TabIndex = 119;
@@ -312,7 +360,7 @@
             // rbNumbersOrLetters
             // 
             this.rbNumbersOrLetters.AutoSize = true;
-            this.rbNumbersOrLetters.Location = new System.Drawing.Point(468, 108);
+            this.rbNumbersOrLetters.Location = new System.Drawing.Point(468, 127);
             this.rbNumbersOrLetters.Name = "rbNumbersOrLetters";
             this.rbNumbersOrLetters.Size = new System.Drawing.Size(195, 28);
             this.rbNumbersOrLetters.TabIndex = 117;
@@ -323,7 +371,7 @@
             // 
             this.rbNumbersOnly.AutoSize = true;
             this.rbNumbersOnly.Checked = true;
-            this.rbNumbersOnly.Location = new System.Drawing.Point(267, 108);
+            this.rbNumbersOnly.Location = new System.Drawing.Point(267, 127);
             this.rbNumbersOnly.Name = "rbNumbersOnly";
             this.rbNumbersOnly.Size = new System.Drawing.Size(195, 28);
             this.rbNumbersOnly.TabIndex = 116;
@@ -334,7 +382,7 @@
             // label19
             // 
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(19, 104);
+            this.label19.Location = new System.Drawing.Point(19, 123);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(242, 32);
             this.label19.TabIndex = 115;
@@ -344,7 +392,7 @@
             // label28
             // 
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(19, 63);
+            this.label28.Location = new System.Drawing.Point(19, 82);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(242, 32);
             this.label28.TabIndex = 113;
@@ -364,7 +412,7 @@
             "Degrees Decimal Minutes",
             "Degrees Minutes Seconds",
             "MGRS"});
-            this.cboDefaultICSRole.Location = new System.Drawing.Point(267, 63);
+            this.cboDefaultICSRole.Location = new System.Drawing.Point(267, 82);
             this.cboDefaultICSRole.Name = "cboDefaultICSRole";
             this.cboDefaultICSRole.Size = new System.Drawing.Size(463, 32);
             this.cboDefaultICSRole.TabIndex = 114;
@@ -372,7 +420,7 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(19, 25);
+            this.label3.Location = new System.Drawing.Point(19, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(242, 32);
             this.label3.TabIndex = 99;
@@ -391,7 +439,7 @@
             "Degrees Decimal Minutes",
             "Degrees Minutes Seconds",
             "MGRS"});
-            this.cboPositionFormat.Location = new System.Drawing.Point(267, 25);
+            this.cboPositionFormat.Location = new System.Drawing.Point(267, 44);
             this.cboPositionFormat.Name = "cboPositionFormat";
             this.cboPositionFormat.Size = new System.Drawing.Size(463, 32);
             this.cboPositionFormat.TabIndex = 100;
@@ -419,7 +467,7 @@
             this.tbFileManagement.Controls.Add(this.chkAutoSave);
             this.tbFileManagement.Location = new System.Drawing.Point(4, 33);
             this.tbFileManagement.Name = "tbFileManagement";
-            this.tbFileManagement.Size = new System.Drawing.Size(738, 537);
+            this.tbFileManagement.Size = new System.Drawing.Size(738, 553);
             this.tbFileManagement.TabIndex = 3;
             this.tbFileManagement.Text = "File Management";
             this.tbFileManagement.UseVisualStyleBackColor = true;
@@ -639,7 +687,7 @@
             this.tbNetworking.Controls.Add(this.lbTrustedDevices);
             this.tbNetworking.Location = new System.Drawing.Point(4, 33);
             this.tbNetworking.Name = "tbNetworking";
-            this.tbNetworking.Size = new System.Drawing.Size(738, 537);
+            this.tbNetworking.Size = new System.Drawing.Size(738, 553);
             this.tbNetworking.TabIndex = 2;
             this.tbNetworking.Text = "Networking";
             this.tbNetworking.UseVisualStyleBackColor = true;
@@ -744,7 +792,7 @@
             // 
             this.btnRemoveTrustedDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveTrustedDevice.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_193_circle_empty_remove;
-            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 479);
+            this.btnRemoveTrustedDevice.Location = new System.Drawing.Point(440, 517);
             this.btnRemoveTrustedDevice.Name = "btnRemoveTrustedDevice";
             this.btnRemoveTrustedDevice.Size = new System.Drawing.Size(290, 42);
             this.btnRemoveTrustedDevice.TabIndex = 115;
@@ -765,7 +813,7 @@
             this.lbTrustedDevices.Name = "lbTrustedDevices";
             this.lbTrustedDevices.ScrollAlwaysVisible = true;
             this.lbTrustedDevices.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 196);
+            this.lbTrustedDevices.Size = new System.Drawing.Size(724, 220);
             this.lbTrustedDevices.TabIndex = 114;
             this.lbTrustedDevices.ValueMember = "DeviceID";
             // 
@@ -786,8 +834,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(746, 644);
-            this.splitContainer1.SplitterDistance = 574;
+            this.splitContainer1.Size = new System.Drawing.Size(746, 660);
+            this.splitContainer1.SplitterDistance = 590;
             this.splitContainer1.TabIndex = 1;
             // 
             // btnCancel
@@ -823,35 +871,12 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Images|*.jpg;*.jpeg;*.png;,*.gif,*.bmp";
             // 
-            // label13
-            // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(46, 482);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(215, 24);
-            this.label13.TabIndex = 144;
-            this.label13.Text = "Testing";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // chkShowTest
-            // 
-            this.chkShowTest.AutoSize = true;
-            this.chkShowTest.Location = new System.Drawing.Point(267, 480);
-            this.chkShowTest.Name = "chkShowTest";
-            this.chkShowTest.Size = new System.Drawing.Size(245, 28);
-            this.chkShowTest.TabIndex = 145;
-            this.chkShowTest.Text = "Yes, show the Test button";
-            this.chkShowTest.UseVisualStyleBackColor = true;
-            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(245)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(746, 644);
+            this.ClientSize = new System.Drawing.Size(746, 660);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "OptionsForm";
             this.Text = "Options";
             this.Load += new System.EventHandler(this.OptionsForm_Load);
@@ -938,5 +963,7 @@
         private CustomControls.TextBoxRequiredControl txtOrganizationName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox chkShowTest;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

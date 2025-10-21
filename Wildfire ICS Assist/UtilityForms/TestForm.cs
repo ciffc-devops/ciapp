@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +21,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
         {
             InitializeComponent();
             this.Icon = Program.programIcon;
-            this.BackColor = Program.FormBackground;
+            this.BackColor = Program.FormBackgroundColor;
         }
 
         List<CheckBox> checkboxes = new List<CheckBox>();
@@ -29,6 +31,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
             buildCheckboxList();
 
         }
+
+        List<int> nonResourceCheckboxIndexes = new List<int>();
 
         private void btnTest_Click(object sender, EventArgs e)
         {
@@ -47,14 +51,14 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     AirOperationsSummary airOps = TestTools.CreateAirOpsTest(seed);
                     airOps.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created air ops summary"); log.Append(Environment.NewLine);
-                    Program.wfIncidentService.UpsertAirOperationsSummary(airOps);
+                    Program.incidentDataService.UpsertAirOperationsSummary(airOps);
                     log.Append("Saved air ops summary"); log.Append(Environment.NewLine);
                 }
                 if (checkboxes[1].Checked)
                 {
                     Contact contact = TestTools.createContactTest(seed);
                     log.Append("Created contact"); log.Append(Environment.NewLine);
-                    Program.wfIncidentService.UpsertContact(contact);
+                    Program.incidentDataService.UpsertContact(contact);
                     log.Append("Saved contact"); log.Append(Environment.NewLine);
                 }
 
@@ -63,10 +67,10 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     MedicalPlan medplan = TestTools.createTestMedicalPlan(seed);
                     medplan.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created MedicalPlan"); log.Append(Environment.NewLine);
-                    foreach (MedicalAidStation aidStation in medplan.MedicalAidStations) { Program.wfIncidentService.UpsertMedicalAidStation(aidStation); }
-                    foreach (AmbulanceService item in medplan.Ambulances) { Program.wfIncidentService.UpsertAmbulance(item); }
-                    foreach (Hospital item in medplan.Hospitals) { Program.wfIncidentService.UpsertHospital(item); }
-                    Program.wfIncidentService.UpsertMedicalPlan(medplan);
+                    foreach (MedicalAidStation aidStation in medplan.MedicalAidStations) { aidStation.OpPeriod = Program.CurrentOpPeriod; Program.incidentDataService.UpsertMedicalAidStation(aidStation); }
+                    foreach (AmbulanceService item in medplan.Ambulances) { item.OpPeriod = Program.CurrentOpPeriod; Program.incidentDataService.UpsertAmbulance(item); }
+                    foreach (Hospital item in medplan.Hospitals) { item.OpPeriod = Program.CurrentOpPeriod; Program.incidentDataService.UpsertHospital(item); }
+                    Program.incidentDataService.UpsertMedicalPlan(medplan);
                     log.Append("Saved MedicalPlan"); log.Append(Environment.NewLine);
                 }
                 if (checkboxes[3].Checked)
@@ -74,7 +78,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     Note testnote = TestTools.createTestNote(seed);
                     testnote.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created Note"); log.Append(Environment.NewLine);
-                    Program.wfIncidentService.UpsertNote(testnote);
+                    Program.incidentDataService.UpsertNote(testnote);
                     log.Append("Saved Note"); log.Append(Environment.NewLine);
                 }
                 if (checkboxes[4].Checked)
@@ -83,7 +87,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     PositionLogEntry testPositionLogEntry = TestTools.createTestPositionLogEntry(seed);
                     testPositionLogEntry.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created PositionLogEntry"); log.Append(Environment.NewLine);
-                    Program.wfIncidentService.UpsertPositionLogEntry(testPositionLogEntry);
+                    Program.incidentDataService.UpsertPositionLogEntry(testPositionLogEntry);
                     log.Append("Saved PositionLogEntry"); log.Append(Environment.NewLine);
                 }
                 if (checkboxes[5].Checked)
@@ -92,13 +96,52 @@ namespace Wildfire_ICS_Assist.UtilityForms
                     SafetyMessage testSafetyMessage = TestTools.createTestSafetyMessage(seed);
                     testSafetyMessage.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created SafetyMessage"); log.Append(Environment.NewLine);
-                    Program.wfIncidentService.UpsertSafetyMessage(testSafetyMessage);
+                    Program.incidentDataService.UpsertSafetyMessage(testSafetyMessage);
                     log.Append("Saved SafetyMessage"); log.Append(Environment.NewLine);
                 }
+
+                if (checkboxes[16].Checked)
+                {
+                    OperationalGroup FirstOpGroup = Program.CurrentIncident.ActiveOperationalGroups.FirstOrDefault(o => o.ParentID == Guid.Empty && o.OpPeriod == Program.CurrentOpPeriod);
+
+                    //add some branches
+                    for (int x = 0; x < 2; x++)
+                    {
+                        CreateTestOpGroup("Branch", FirstOpGroup, x);   
+                    }
+                    foreach(OperationalGroup branch in Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.GroupType.Equals("Branch")))
+                    {
+                        for (int x = 0; x < 4; x++)
+                        {
+                            CreateTestOpGroup("Division", branch, x);
+                        }
+                    }
+
+                    foreach (OperationalGroup divis in Program.CurrentIncident.ActiveOperationalGroups.Where(o => o.GroupType.Equals("Division")))
+                    {
+                        int strikeTeamsToMake = RandomIntGenerator.GetRandomInt(1, 9);
+                        for (int x = 0; x < strikeTeamsToMake; x++)
+                        {
+                            bool isST = RandomBooleanGenerator.GetRandomBoolean();
+                            if (isST) { CreateTestOpGroup("Strike Team", divis, x); }
+                            else { CreateTestOpGroup("Task Force", divis, x); }
+                            
+                        }
+                    }
+
+
+                    log.Append("Saved Operational Groups"); log.Append(Environment.NewLine);
+
+
+                }
+
+
+
+
                 if (checkboxes[6].Checked)
                 {
                     //check in
-                    for (int x = 0; x < 30; x++)
+                    for (int x = 0; x < 45; x++)
                     {
                         CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + x, "Personnel");
                         testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
@@ -107,24 +150,32 @@ namespace Wildfire_ICS_Assist.UtilityForms
                         
 
                         log.Append("Created Check in for Personnel"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
-                        Program.wfIncidentService.UpsertCheckInRecord(testCheckInPersonnel.Record);
+                        Program.incidentDataService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
+                        Program.incidentDataService.UpsertCheckInRecord(testCheckInPersonnel.Record);
                         log.Append("Saved Check in for Personnel"); log.Append(Environment.NewLine);
 
 
                         if (!string.IsNullOrEmpty(testCheckInPersonnel.Record.InitialRoleAcronym)
-                            && Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.Mnemonic)
-                            && o.Mnemonic.Equals(testCheckInPersonnel.Record.InitialRoleAcronym)))
+                            && Program.CurrentOrgChart.ActiveRoles.Any(o => !string.IsNullOrEmpty(o.MnemonicAbrv)
+                            && o.MnemonicAbrv.Equals(testCheckInPersonnel.Record.InitialRoleAcronym)))
                         {
-                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.OrderBy(o => Guid.NewGuid()).Where(o => o.IndividualID == Guid.Empty).First();
-                            testCheckInPersonnel.Record.InitialRoleName = role.RoleName;
+                            ICSRole role = Program.CurrentOrgChart.ActiveRoles.OrderBy(o => Guid.NewGuid()).FirstOrDefault(o => o.IndividualID == Guid.Empty);
+                            if (role != null)
+                            {
+                                testCheckInPersonnel.Record.InitialRoleName = role.RoleName;
 
-                            //Assign them
-                            Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == testCheckInPersonnel.Record.ResourceID);
-                            role.IndividualID = p.ID;
-                            role.IndividualName = p.Name;
-                            //role.teamMember = p.Clone();
-                            Program.wfIncidentService.UpsertICSRole(role);
+                                //Assign them
+                                Personnel p = Program.CurrentIncident.IncidentPersonnel.First(o => o.ID == testCheckInPersonnel.Record.ResourceID);
+                                role.IndividualID = p.ID;
+                                role.IndividualName = p.Name;
+                                //role.teamMember = p.Clone();
+                                if (role.GenericRoleID == WF_ICS_ClassLibrary.Globals.AirOpsDirectorGenericID)
+                                {
+                                    ;
+                                }
+
+                                Program.incidentDataService.UpsertICSRole(role);
+                            }
                         }
 
                     }
@@ -140,8 +191,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Visitor"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
-                        Program.wfIncidentService.UpsertCheckInRecord(testCheckInPersonnel.Record);
+                        Program.incidentDataService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
+                        Program.incidentDataService.UpsertCheckInRecord(testCheckInPersonnel.Record);
                         log.Append("Saved Check in for Visitor"); log.Append(Environment.NewLine);
 
                     }
@@ -157,8 +208,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Vehicle"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertVehicle(testCheckIn.Resource as Vehicle);
-                        Program.wfIncidentService.UpsertCheckInRecord(testCheckIn.Record);
+                        Program.incidentDataService.UpsertVehicle(testCheckIn.Resource as Vehicle);
+                        Program.incidentDataService.UpsertCheckInRecord(testCheckIn.Record);
                         log.Append("Saved Check in for Vehicle"); log.Append(Environment.NewLine);
 
                     }
@@ -173,8 +224,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Equipment"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertVehicle(testCheckIn.Resource as Vehicle);
-                        Program.wfIncidentService.UpsertCheckInRecord(testCheckIn.Record);
+                        Program.incidentDataService.UpsertVehicle(testCheckIn.Resource as Vehicle);
+                        Program.incidentDataService.UpsertCheckInRecord(testCheckIn.Record);
                         log.Append("Saved Check in for Equipment"); log.Append(Environment.NewLine);
 
                     }
@@ -191,7 +242,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                             CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + i, "Personnel");
                             testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
                             testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 10000);
-                            Program.wfIncidentService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
+                            Program.incidentDataService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
                             crewResources.Add(testCheckInPersonnel.Resource);
                             resources.Add(testCheckInPersonnel);
                         }
@@ -203,8 +254,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Crew"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertOperationalSubGroup(testCheckin.Resource as OperationalSubGroup);
-                        Program.wfIncidentService.UpsertCheckInRecord(testCheckin.Record);
+                        Program.incidentDataService.UpsertCrew(testCheckin.Resource as Crew);
+                        Program.incidentDataService.UpsertCheckInRecord(testCheckin.Record);
                         log.Append("Saved Check in for Crew"); log.Append(Environment.NewLine);
 
                       
@@ -212,8 +263,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
                         {
                             resource.Record.ParentRecordID = testCheckin.Record.SignInRecordID;
                             resource.Resource.ParentResourceID = testCheckin.Resource.ID;
-                            Program.wfIncidentService.UpsertPersonnel(resource.Resource as Personnel);
-                            Program.wfIncidentService.UpsertCheckInRecord(resource.Record);
+                            Program.incidentDataService.UpsertPersonnel(resource.Resource as Personnel);
+                            Program.incidentDataService.UpsertCheckInRecord(resource.Record);
 
                         }
 
@@ -235,7 +286,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                             CheckInRecordWithResource testCheckInPersonnel = TestTools.createTestCheckIn(seed + i, "Personnel");
                             testCheckInPersonnel.Record.OpPeriod = Program.CurrentOpPeriod;
                             testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 10000);
-                            Program.wfIncidentService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
+                            Program.incidentDataService.UpsertPersonnel(testCheckInPersonnel.Resource as Personnel);
                             crewResources.Add(testCheckInPersonnel.Resource);
                             resources.Add(testCheckInPersonnel);
                         }
@@ -246,7 +297,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
                             testCheckInPersonnel.Resource.UniqueIDNum = Program.CurrentIncident.GetNextUniqueNum(testCheckInPersonnel.Record.ResourceType, 1, 10000);
 
                             (testCheckInPersonnel.Resource as Vehicle).IsEquipment = true;
-                            Program.wfIncidentService.UpsertVehicle(testCheckInPersonnel.Resource as Vehicle);
+                            Program.incidentDataService.UpsertVehicle(testCheckInPersonnel.Resource as Vehicle);
                             crewResources.Add(testCheckInPersonnel.Resource);
                             resources.Add(testCheckInPersonnel);
                         }
@@ -257,8 +308,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Crew"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertOperationalSubGroup(testCheckin.Resource as OperationalSubGroup);
-                        Program.wfIncidentService.UpsertCheckInRecord(testCheckin.Record);
+                        Program.incidentDataService.UpsertCrew(testCheckin.Resource as Crew);
+                        Program.incidentDataService.UpsertCheckInRecord(testCheckin.Record);
                         log.Append("Saved Check in for Crew"); log.Append(Environment.NewLine);
 
 
@@ -266,8 +317,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
                         {
                             resource.Record.ParentRecordID = testCheckin.Record.SignInRecordID;
                             resource.Resource.ParentResourceID = testCheckin.Resource.ID;
-                            Program.wfIncidentService.UpsertPersonnel(resource.Resource as Personnel);
-                            Program.wfIncidentService.UpsertCheckInRecord(resource.Record);
+                            Program.incidentDataService.UpsertPersonnel(resource.Resource as Personnel);
+                            Program.incidentDataService.UpsertCheckInRecord(resource.Record);
 
                         }
 
@@ -282,32 +333,64 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
                 if (checkboxes[12].Checked)
                 {
+
                     //comms plan
-                    CommsPlan commsPlan = TestTools.createTestCommsPlan(seed);
-                    commsPlan.OpsPeriod = Program.CurrentOpPeriod;
-                    log.Append("Created CommsPlan"); log.Append(Environment.NewLine);
-                    Program.wfIncidentService.UpsertCommsPlan(commsPlan);
+                    CommsPlan commsPlan = null;
+                    if(Program.CurrentIncident.allCommsPlans.Any(o=>o.OpPeriod == Program.CurrentOpPeriod && o.Active))
+                    {
+                        commsPlan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod && o.Active);
+                        for(int x = 0; x < 6; x++)
+                        {
+                            CommsPlanItem item = TestTools.createTestCommsPlanItem(x);
+                            commsPlan.allCommsItems.Add(item);
+                        }
+                    }
+                    if (commsPlan == null)
+                    {
+                        commsPlan = TestTools.createTestCommsPlan(seed);
+                        commsPlan.OpPeriod = Program.CurrentOpPeriod;
+                        log.Append("Created CommsPlan"); log.Append(Environment.NewLine);
+
+                    }
+                    Program.incidentDataService.UpsertCommsPlan(commsPlan);
+
                     log.Append("Saved CommsPlan"); log.Append(Environment.NewLine);
 
 
                 }
                 if (checkboxes[13].Checked)
                 {
-                    //comms plan
+                    //general messages
                     GeneralMessage test = TestTools.createTestGeneralMessage(seed);
                     test.OpPeriod = Program.CurrentOpPeriod;
                     log.Append("Created GeneralMessage"); log.Append(Environment.NewLine);
-                    Program.wfIncidentService.UpsertGeneralMessage(test);
+                    Program.incidentDataService.UpsertGeneralMessage(test);
                     log.Append("Saved GeneralMessage"); log.Append(Environment.NewLine);
 
 
                 }
                 if (checkboxes[14].Checked)
                 {
-                    IncidentObjectivesSheet tesIncidentObjectivesSheet = TestTools.createTestObjectiveSheet(seed);
-                    tesIncidentObjectivesSheet.OpPeriod = Program.CurrentOpPeriod;
-                    log.Append("Created IncidentObjectivesSheet"); log.Append(Environment.NewLine);
-                    Program.wfIncidentService.UpsertIncidentObjectivesSheet(tesIncidentObjectivesSheet);
+                    IncidentObjectivesSheet testIncidentObjectivesSheet = null;
+                    if (Program.CurrentIncident.ActiveIncidentObjectiveSheets.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
+                    {
+                        testIncidentObjectivesSheet = Program.CurrentIncident.ActiveIncidentObjectiveSheets.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
+                        for (int x = 0; x < 5; x++)
+                        {
+                            testIncidentObjectivesSheet.Objectives.Add(TestTools.createTestIncidentObjective(x));
+                            testIncidentObjectivesSheet.Objectives[x].OpPeriod = Program.CurrentOpPeriod;
+                        }
+                    }
+                    else
+                    {
+                        testIncidentObjectivesSheet  = TestTools.createTestObjectiveSheet(seed);
+                        testIncidentObjectivesSheet.OpPeriod = Program.CurrentOpPeriod;
+                        log.Append("Created IncidentObjectivesSheet"); log.Append(Environment.NewLine);
+                    }
+                    Program.incidentDataService.UpsertIncidentObjectivesSheet(testIncidentObjectivesSheet);
+
+
+
                     log.Append("Saved IncidentObjectivesSheet"); log.Append(Environment.NewLine);
 
 
@@ -326,8 +409,8 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
 
                         log.Append("Created Check in for Aircraft"); log.Append(Environment.NewLine);
-                        Program.wfIncidentService.UpsertAircraft(testCheckInPersonnel.Resource as Aircraft);
-                        Program.wfIncidentService.UpsertCheckInRecord(testCheckInPersonnel.Record);
+                        Program.incidentDataService.UpsertAircraft(testCheckInPersonnel.Resource as Aircraft);
+                        Program.incidentDataService.UpsertCheckInRecord(testCheckInPersonnel.Record);
                         log.Append("Saved Check in for Aircraft"); log.Append(Environment.NewLine);
 
                     }
@@ -341,6 +424,42 @@ namespace Wildfire_ICS_Assist.UtilityForms
             }
             txtLog.Text = log.ToString();
 
+        }
+
+        private void CreateTestOpGroup(string GroupType, OperationalGroup parentGroup, int index = 0)
+        {
+            OperationalGroup op = new OperationalGroup();
+            op.GroupType = GroupType;
+            if (op.GroupType.Equals("Branch")) { op.Name = (index + 1).ToString(); }
+            else if (op.GroupType.Equals("Division")) {
+                int branchNumber = 0;
+                int.TryParse(parentGroup.Name, out branchNumber);
+                
+                op.Name = ((char)(65 + index + (branchNumber * 2))).ToString(); }
+            else { op.Name = StringExt.LoremIpsum(1, 1, 1, 1, 1); }
+            op.OpPeriod = Program.CurrentOpPeriod;
+            op.ParentID = parentGroup.ID;
+            op.ParentName = parentGroup.ResourceName;
+
+            Program.incidentDataService.UpsertOperationalGroup(op);
+            if (op.LeaderICSRoleID == Guid.Empty)
+            {
+                ICSRole role = op.CreateRoleFromOperationalGroup(Program.incidentDataService.CurrentIncident.activeOrgCharts.First(o => o.OpPeriod == op.OpPeriod).ID);
+                role.OperationalGroupName = op.ResourceName;
+                Guid ReportsToRoleID = Program.CurrentIncident.GetICSReportsToThroughOpGroup(role);
+                if (ReportsToRoleID != Guid.Empty)
+                {
+                    ICSRole reportsToRole = Program.CurrentIncident.activeOrgCharts.First(o => o.OpPeriod == op.OpPeriod).AllRoles.FirstOrDefault(o => o.RoleID == ReportsToRoleID);
+                    role.ReportsTo = reportsToRole.RoleID;
+                    role.ReportsToGenericRoleID = reportsToRole.GenericRoleID;
+                    role.ReportsToRoleName = reportsToRole.RoleName;
+                }
+                Program.incidentDataService.UpsertICSRole(role);
+                op.LeaderICSRoleID = role.RoleID;
+                op.LeaderICSRoleName = role.RoleName;
+
+                Program.incidentDataService.UpsertOperationalGroup(op);
+            }
         }
 
         private void btnCheckAll_Click(object sender, EventArgs e)
@@ -361,28 +480,35 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Air Ops Summary";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count-1);
 
 
             CheckBox chkContact = new CheckBox();
             checkboxes.Add(chkContact);
             checkboxes.Last().Text = "Contact";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
+
 
             CheckBox chkMedPlan = new CheckBox();
             checkboxes.Add(chkMedPlan);
             checkboxes.Last().Text = "Medical Plan";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
             CheckBox chkNote = new CheckBox();
             checkboxes.Add(chkNote);
             checkboxes.Last().Text = "Note";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
             CheckBox chkPositionLog = new CheckBox();
             checkboxes.Add(chkPositionLog);
             checkboxes.Last().Text = "Position Log";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
 
             CheckBox chkSafetyMessage = new CheckBox();
             checkboxes.Add(chkSafetyMessage);
             checkboxes.Last().Text = "Safety Message";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
 
             CheckBox chkCheckInPersonnel = new CheckBox();
@@ -405,21 +531,30 @@ namespace Wildfire_ICS_Assist.UtilityForms
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Crew Check In";
 
+
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "HE Crew Check In";
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Comms Plan";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "General Message";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Objectives";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
 
 
             checkboxes.Add(new CheckBox());
             checkboxes.Last().Text = "Aircraft Check In";
+
+            checkboxes.Add(new CheckBox());
+            checkboxes.Last().Text = "Operational Groups";
+            nonResourceCheckboxIndexes.Add(checkboxes.Count - 1);
+
 
             for (int x = 0; x < checkboxes.Count; x++)
             {
@@ -428,6 +563,16 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 checkboxes[x].Height = 30;
                 panel1.Controls.Add(checkboxes[x]);
             }
+
+        }
+
+        private void btnAllNonResource_Click(object sender, EventArgs e)
+        {
+            for(int x = 0; x < checkboxes.Count; x++)
+            {
+                if (nonResourceCheckboxIndexes.Contains(x)) { checkboxes[x].Checked = true; }
+            }
+
 
         }
     }

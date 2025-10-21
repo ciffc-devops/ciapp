@@ -11,7 +11,7 @@ using WF_ICS_ClassLibrary.Models;
 
 namespace Wildfire_ICS_Assist.UtilityForms
 {
-    public partial class HelpInfoForm : Form
+    public partial class HelpInfoForm : BaseForm
     {
         public string Title { get { return lblTitle.Text; } set { lblTitle.Text = value; this.Text = value; } }
         public string Body { get { return txtHelpText.Text; } set { txtHelpText.Text = value; } }
@@ -38,8 +38,7 @@ namespace Wildfire_ICS_Assist.UtilityForms
 
         public HelpInfoForm()
         {
-            InitializeComponent(); this.BackColor = Program.FormBackground;
-            this.Icon = Program.programIcon;
+            InitializeComponent(); SetControlColors(this.Controls);
 
         }
 

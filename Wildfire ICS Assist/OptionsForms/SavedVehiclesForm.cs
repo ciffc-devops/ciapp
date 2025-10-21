@@ -8,15 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
 {
-    public partial class SavedVehiclesForm : Form
+    public partial class SavedVehiclesForm : BaseForm
     {
         public SavedVehiclesForm()
         {
-            this.Icon = Program.programIcon;
-            InitializeComponent(); this.BackColor = Program.FormBackground;
+           
+            InitializeComponent(); SetControlColors(this.Controls);
         }
 
         private void SavedVehiclesForm_Load(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
                 if (dr == DialogResult.OK)
                 {
-                    Program.generalOptionsService.UpserOptionValue(editItem.vehicle, "Vehicle");
+                    Program.generalOptionsService.UpsertOptionValue(editItem.vehicle, "Vehicle");
                     buildList();
 
 
@@ -74,14 +75,14 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             if (dgvVehicles.SelectedRows.Count > 0)
             {
-                DialogResult dr = MessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
+                DialogResult dr = LgMessageBox.Show(Properties.Resources.SureDelete, Properties.Resources.SureDeleteTitle, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dgvVehicles.SelectedRows)
                     {
                         Vehicle h = (Vehicle)((DataGridViewRow)row).DataBoundItem;
                         h.Active = false;
-                        Program.generalOptionsService.UpserOptionValue(h, "Vehicle");
+                        Program.generalOptionsService.UpsertOptionValue(h, "Vehicle");
                     }
                     buildList();
                 }

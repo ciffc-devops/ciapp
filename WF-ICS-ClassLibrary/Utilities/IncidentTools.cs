@@ -8,13 +8,56 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Models.GeneralModels;
 
 namespace WF_ICS_ClassLibrary.Utilities
 {
     public static class IncidentTools
     {
 
-        public static List<Aircraft> GetActiveAircraft(this WFIncident incident, DateTime Date)
+        public static OperationalPeriod GetCurrentOpPeriod(this Incident incident, DateTime currentTime)
+        {
+            return incident.ActiveOperationalPeriods.FirstOrDefault(o=>o.PeriodStart.Date <= currentTime.Date && o.PeriodEnd.Date >= currentTime.Date);
+        }
+
+        //validate operational period details
+        public static Tuple<bool, bool, bool> GetDoesThisOperationalPeriodOverlap(this Incident incident, OperationalPeriod operationalPeriod)
+        {
+            
+            //does the start point of the new op fall between the start and end points of another OP?
+            bool overlapStart = incident.ActiveOperationalPeriods.Any(o => o.PeriodStart < operationalPeriod.PeriodStart && o.PeriodEnd > operationalPeriod.PeriodStart);
+
+            bool overlapEnd = incident.ActiveOperationalPeriods.Any(o => o.PeriodStart < operationalPeriod.PeriodEnd && o.PeriodEnd > operationalPeriod.PeriodEnd);
+            bool within = incident.ActiveOperationalPeriods.Any(o => o.PeriodStart > operationalPeriod.PeriodStart && o.PeriodEnd < operationalPeriod.PeriodEnd);
+
+            Tuple<bool, bool, bool> results = new Tuple<bool, bool, bool>(overlapStart, overlapEnd, within);
+            return results;
+        }
+
+
+
+        public static TaskUpdate GetLastUpdateByItemID(this Incident task, Guid ItemID)
+        {
+            if (task.allTaskUpdates.Any(o => o.ItemID == ItemID))
+            {
+                return task.allTaskUpdates.Where(o => o.ItemID == ItemID).OrderByDescending(o => o.LastUpdatedUTC).First();
+            }
+            return null;
+        }
+        public static List<DeletedItemRecord> GetDeletedItemRecords(this Incident task, int OpPeriod)
+        {
+            List<DeletedItemRecord> records = new List<DeletedItemRecord>();
+
+            List<TaskUpdate> recentUpdates = task.MostRecentTaskUpdates(false);
+            recentUpdates = recentUpdates.Where(o => !o.Data.Active && o.Data.OpPeriod == OpPeriod).ToList();
+            foreach (TaskUpdate update in recentUpdates)
+            {
+                records.Add(new DeletedItemRecord(update));
+            }
+
+            return records;
+        }
+        public static List<Aircraft> GetActiveAircraft(this Incident incident, DateTime Date)
         {
             List<Aircraft> aircraft = new List<Aircraft>();
 
@@ -22,7 +65,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             aircraft = aircraft.OrderBy(o => o.CompanyName).ThenBy(o => o.Registration).ToList();
             return aircraft;
         }
-        public static List<Aircraft> GetActiveAircraft(this WFIncident incident, int OpPeriodNumber)
+        public static List<Aircraft> GetActiveAircraft(this Incident incident, int OpPeriodNumber)
         {
             OperationalPeriod op = new OperationalPeriod();
             if (incident.AllOperationalPeriods.Any(o => o.PeriodNumber == OpPeriodNumber)) { op = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodNumber); }
@@ -32,7 +75,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         }
 
 
-        public static List<TaskUpdate> MostRecentTaskUpdates(this WFIncident task, bool localOnly = false)
+        public static List<TaskUpdate> MostRecentTaskUpdates(this Incident task, bool localOnly = false)
         {
             List<TaskUpdate> updatesToKeep = new List<TaskUpdate>();
 
@@ -44,7 +87,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return updatesToKeep;
         }
 
-        public static DateTime LastNetworkTaskUpdate(this WFIncident task)
+        public static DateTime LastNetworkTaskUpdate(this Incident task)
         {
             if (task.allTaskUpdates != null && task.allTaskUpdates.Any(o => !string.IsNullOrEmpty(o.Source) && o.Source.Equals("network")))
             {
@@ -56,9 +99,9 @@ namespace WF_ICS_ClassLibrary.Utilities
 
         }
 
-        public static WFIncident CompressTaskUpdates(this WFIncident task)
+        public static Incident CompressTaskUpdates(this Incident task)
         {
-            WFIncident compressed = task.Clone();
+            Incident compressed = task.Clone();
 
             List<TaskUpdate> updatesToKeep = new List<TaskUpdate>();
             List<TaskUpdate> updatesToRemove = new List<TaskUpdate>();
@@ -71,35 +114,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             return compressed;
         }
 
-        public static int GetNextAssignmentNumber(this WFIncident incident, int Ops)
-        {
-            if (incident.AllAssignments.Any(o => o.OpPeriod == Ops))
-            {
-                int next = 1000 * Ops + 1;
-                while(incident.AllAssignments.Any(o=>o.ResourceIDNumber == next))
-                {
-                    next++;
-                }
-                return next;
-                //return incident.AllAssignments.Where(o => o.OpPeriod == Ops).Max(o => o.ResourceIDNumber) + 1;
-            }
-            else
-            {
-                return 1000 * Ops + 1;
-            }
-        }
+      
 
-        public static bool AssignmentNumberUniqueAndValid(this WFIncident incident, int Ops, int ProposedNumber, Guid AssignmentID)
-        {
-            if(incident.AllAssignments.Any(o=>o.ResourceIDNumber == ProposedNumber && o.ID != AssignmentID)) { return false; } //duplicate number, different ID
-            int incidentMin = 1000 * Ops + 1;
-            int incidentMax = 1000 * (Ops + 1) - 1;
-            if(ProposedNumber > incidentMax) { return false; }
-            if(ProposedNumber < incidentMin) { return false; }
-            return true;
-        }
-
-        public static string getNameByRoleName(this WFIncident task, int Ops, string roleName, bool defaultUpChain = true)
+        public static string getNameByRoleName(this Incident task, int Ops, string roleName, bool defaultUpChain = true)
         {
             string name = null;
             OrganizationChart chart = new OrganizationChart();
@@ -111,7 +128,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return name;
         }
 
-        public static string getNameByRoleID(this WFIncident task, int Ops, Guid RoleID, bool defaultUpChain = true)
+        public static string getNameByRoleID(this Incident task, int Ops, Guid RoleID, bool defaultUpChain = true)
         {
             string name = null;
             OrganizationChart chart = new OrganizationChart();
@@ -122,7 +139,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             name = chart.getNameByRoleID(RoleID, defaultUpChain);
             return name;
         }
-        public static Personnel getMemberByRoleName(this WFIncident task, int Ops, string roleName, bool defaultUpChain = true)
+        public static Personnel getMemberByRoleName(this Incident task, int Ops, string roleName, bool defaultUpChain = true)
         {
             Personnel member = new Personnel();
             OrganizationChart chart = new OrganizationChart();
@@ -157,7 +174,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static void UpsertTaskTeamMember(this WFIncident task, Personnel member)
+        public static void UpsertTaskTeamMember(this Incident task, Personnel member)
         {
             if (member != null && member.PersonID != Guid.Empty && !string.IsNullOrEmpty(member.Name))
             {
@@ -172,13 +189,13 @@ namespace WF_ICS_ClassLibrary.Utilities
                     IncidentResource parent = task.AllIncidentResources.First(o => o.ID == member.ParentResourceID);
                     if (parent.GetType().Name.Equals("OperationalSubGroup"))
                     {
-                        OperationalSubGroup opsub = parent as OperationalSubGroup;
+                        Crew opsub = parent as Crew;
                         if(opsub.ResourceListing.Any(o=>o.ResourceID == member.ID))
                         {
                             opsub.ResourceListing.First(o => o.ResourceID == member.ID).ResourceName = member.Name;
                             opsub.ResourceListing.First(o => o.ResourceID == member.ID).Type = member.Type;
                             opsub.ResourceListing.First(o => o.ResourceID == member.ID).Kind = member.Kind;
-                            Globals.incidentService.UpsertOperationalSubGroup(opsub);
+                            Globals.incidentService.UpsertCrew(opsub);
                         }
                     }
                 }
@@ -186,12 +203,12 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static List<Personnel> MembersSignedIn(this WFIncident task, int opPeriod)
+        public static List<Personnel> MembersSignedIn(this Incident task, int opPeriod)
         {
             return task.GetCurrentlySignedInPersonnel(opPeriod);
         }
 
-        public static List<MemberStatus> getAllMemberStatus(this WFIncident task, int opPeriod, DateTime date = new DateTime(), bool getMultipleLinesAsNeeded = false)
+        public static List<MemberStatus> getAllMemberStatus(this Incident task, int opPeriod, DateTime date = new DateTime(), bool getMultipleLinesAsNeeded = false)
         {
             List<MemberStatus> statuses = new List<MemberStatus>();
             List<Personnel> members = task.MembersSignedIn(opPeriod);
@@ -241,7 +258,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             return statuses;
         }
 
-        public static MemberStatus getMemberStatus(this WFIncident task, Personnel member, int opPeriod, DateTime end_date = new DateTime(), CheckInRecord signIn = null)
+        public static MemberStatus getMemberStatus(this Incident task, Personnel member, int opPeriod, DateTime end_date = new DateTime(), CheckInRecord signIn = null)
         {
             MemberStatus status = new MemberStatus();
             status.setTeamMember(member);
@@ -287,23 +304,17 @@ namespace WF_ICS_ClassLibrary.Utilities
                     }
                 }
             }
-            if(task.AllAssignments.Any(o=>o.OpPeriod == opPeriod && o.AssignedMemberIDs.Contains(member.PersonID)))
-            {
-                TeamAssignment assignment = task.AllAssignments.OrderByDescending(o=>o.currentStatus.Active).First(o => o.OpPeriod == opPeriod && o.AssignedMemberIDs.Contains(member.PersonID));
-                status.AssignmentID = assignment.ID;
-                status.AssignmentName = assignment.FullResourceID;
-                status.AssignmentStatus = assignment.currentStatusName;
-            }
+           
             return status;
         }
 
-        public static List<PositionLogEntry> GetPositionLog(this WFIncident task, ICSRole role, int opPeriod)
+        public static List<PositionLogEntry> GetPositionLog(this Incident task, ICSRole role, int opPeriod)
         {
             return task.allPositionLogEntries.Where(o => o.Role.RoleID == role.RoleID && o.OpPeriod == opPeriod).ToList();
         }
 
 
-        public static void UpsertPositionLogEntry(this WFIncident task, PositionLogEntry entry)
+        public static void UpsertPositionLogEntry(this Incident task, PositionLogEntry entry)
         {
             task.allPositionLogEntries = task.allPositionLogEntries.Where(o => o.LogID != entry.LogID).ToList();
             task.allPositionLogEntries.Add(entry);
@@ -311,7 +322,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         }
 
 
-        public static List<string> GetPositionNamesWithLogs(this WFIncident task, int opPeriod)
+        public static List<string> GetPositionNamesWithLogs(this Incident task, int opPeriod)
         {
             List<string> names = new List<string>();
             foreach (PositionLogEntry entry in task.allPositionLogEntries.Where(o => o.OpPeriod == opPeriod))
@@ -324,10 +335,10 @@ namespace WF_ICS_ClassLibrary.Utilities
 
 
 
-        public static void renumberObjectives(this WFIncident task, int currentOpPeriod)
+        public static void renumberObjectives(this Incident task, int currentOpPeriod)
         {
             int priority = 1;
-            IncidentObjectivesSheet incidentObjectives = task.allIncidentObjectives.First(o => o.OpPeriod == currentOpPeriod);
+            IncidentObjectivesSheet incidentObjectives = task.AllIncidentObjectiveSheets.First(o => o.OpPeriod == currentOpPeriod);
 
             foreach (IncidentObjective objective in incidentObjectives.Objectives.OrderBy(o => o.Priority))
             {
@@ -357,12 +368,12 @@ namespace WF_ICS_ClassLibrary.Utilities
          
 
     }  */
-        public static void createCommsPlanAsNeeded(this WFIncident task, int Ops)
+        public static void createCommsPlanAsNeeded(this Incident task, int Ops)
         {
-            if (task.allCommsPlans.Where(o => o.OpsPeriod == Ops).Count() <= 0)
+            if (!task.allCommsPlans.Any(o => o.OpPeriod == Ops))
             {
                 CommsPlan cp = new CommsPlan();
-                cp.OpsPeriod = Ops;
+                cp.OpPeriod = Ops;
 
 
                 DateTime today = DateTime.Now;
@@ -380,7 +391,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static void createMedicalPlanAsNeeded(this WFIncident task, int ops)
+        public static void createMedicalPlanAsNeeded(this Incident task, int ops)
         {
             if (!task.allMedicalPlans.Any(o => o.OpPeriod == ops))
             {
@@ -389,7 +400,7 @@ namespace WF_ICS_ClassLibrary.Utilities
                 if (task.allOrgCharts.Any(o => o.OpPeriod == ops))
                 {
                     OrganizationChart currentChart = task.allOrgCharts.First(o => o.OpPeriod == ops);
-                    plan.PreparedBy = currentChart.getNameByRoleName("Logistics Section Chief");
+                    plan.PreparedByResourceName = currentChart.getNameByRoleName("Logistics Section Chief");
                 }
 
                 /*
@@ -416,7 +427,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static OperationalPeriod createOpPeriodAsNeeded(this WFIncident incident, int newOpNumber)
+        public static OperationalPeriod createOpPeriodAsNeeded(this Incident incident, int newOpNumber)
         {
             if (!incident.AllOperationalPeriods.Any(o => o.PeriodNumber == newOpNumber))
             {
@@ -428,7 +439,6 @@ namespace WF_ICS_ClassLibrary.Utilities
 
                 }
                 OperationalPeriod period = new OperationalPeriod();
-                period.TaskID = incident.TaskID;
                 period.PeriodNumber = newOpNumber;
                 period.PeriodStart = prevOp.PeriodEnd.AddMinutes(1);
                 period.PeriodEnd = period.PeriodStart.AddHours(12);
@@ -440,13 +450,12 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static void createObjectivesSheetAsNeeded(this WFIncident incident, int ops)
+        public static void createObjectivesSheetAsNeeded(this Incident incident, int ops)
         {
-            if (!incident.allIncidentObjectives.Any(o => o.OpPeriod == ops))
+            if (!incident.AllIncidentObjectiveSheets.Any(o => o.OpPeriod == ops))
             {
                 IncidentObjectivesSheet sheet = new IncidentObjectivesSheet();
                 sheet.OpPeriod = ops;
-                sheet.TaskID = incident.TaskID;
                 DateTime today = DateTime.Now;
                 sheet.DatePrepared = today;
                 if (incident.getOpPeriodStart(ops).DayOfYear != today.DayOfYear)
@@ -460,7 +469,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
         }
 
-        public static void createAirOpsSummaryAsNeeded(this WFIncident incident, int ops)
+        public static void createAirOpsSummaryAsNeeded(this Incident incident, int ops, ICSRole preparedBy = null)
         {
             if(!incident.allAirOperationsSummaries.Any(o=>o.OpPeriod == ops))
             {
@@ -468,28 +477,45 @@ namespace WF_ICS_ClassLibrary.Utilities
                 summary.OpPeriod = ops;
                 DateTime opMid = DateTime.Now;
                 if(incident.AllOperationalPeriods.Any(o=>o.PeriodNumber == ops)) { opMid = incident.AllOperationalPeriods.First(o=>o.PeriodNumber ==ops).PeriodMid; }
-
+                if (preparedBy != null) { summary.SetPreparedBy(preparedBy); }
               
 
                 Globals.incidentService.UpsertAirOperationsSummary(summary);
             }
         }
 
-        public static void createOrgChartAsNeeded(this WFIncident task, int ops, bool addRolesFromLastOps = true)
+        public static void createOrgChartAsNeeded(this Incident task, int ops, bool addRolesFromLastOps = true)
         {
             if (!task.allOrgCharts.Any(o => o.OpPeriod == ops))
             {
-               OrganizationChart chart = task.createOrgChartFromPrevious(0, ops);
-                if(chart != null)
+                OrganizationChart chart = task.CreateOrganizationalChartFromPreviousOP(0, ops, false);
+                if (chart != null)
                 {
-                    chart.CreateOpGroupsForOrgRoles(task);
+                    //chart.CreateOpGroupsForOrgRoles(task);
+                    if (Globals.incidentService != null)
+                    {
+                        Globals.incidentService.UpsertOrganizationalChart(chart);
+                        Globals.incidentService.CurrentIncident.CreateAllOperationalGroupsAsNeeded(chart.OpPeriod);
 
-                    Globals.incidentService.UpsertOrganizationalChart(chart);
+                        foreach (ICSRole role in chart.AllRoles.Where(o => o.RequiresOperationalGroup))
+                        {
+                            if (Globals.incidentService.CurrentIncident.ActiveOperationalGroups.Any(o => o.LeaderICSRoleID == role.RoleID))
+                            {
+                                OperationalGroup group = Globals.incidentService.CurrentIncident.ActiveOperationalGroups.First(o => o.LeaderICSRoleID == role.RoleID);
+                                if (role.OperationalGroupID != group.ID)
+                                {
+                                    role.OperationalGroupID = group.ID;
+                                    role.OperationalGroupName = group.Name;
+                                    Globals.incidentService.UpsertICSRole(role);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        public static OrganizationChart createOrgChartFromPrevious(this WFIncident incident, int oldOps, int newOps)
+        public static OrganizationChart CreateOrganizationalChartFromPreviousOP(this Incident incident, int oldOps, int newOps, bool CopyAssignmentsWherePossible )
         {
             OrganizationChart chart = new OrganizationChart();
             chart.OpPeriod = newOps;
@@ -498,21 +524,22 @@ namespace WF_ICS_ClassLibrary.Utilities
             if (incident.allOrgCharts.Any(o=>o.OpPeriod == oldOps))
             {
                 OrganizationChart lastOrg = incident.allOrgCharts.First(o=>o.OpPeriod == oldOps);
-                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.OrganizationalChartID);
+                chart.AllRoles = OrganizationalChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.ID, CopyAssignmentsWherePossible);
             } else if (oldOps == 0 && incident.allOrgCharts.Any(o=>o.OpPeriod != newOps))
             {
                 OrganizationChart lastOrg = incident.allOrgCharts.OrderByDescending(o => o.OpPeriod).First();
-                chart.AllRoles = OrgChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.OrganizationalChartID);
+                chart.AllRoles = OrganizationalChartTools.GetBlankRolesBasedOnThisChart(lastOrg, newOps, chart.ID, CopyAssignmentsWherePossible);
             }
             else
             {
-                chart.AllRoles = OrgChartTools.GetBlankPrimaryRoles();
-                foreach (ICSRole role in chart.AllRoles) { role.OpPeriod = newOps; role.OrganizationalChartID = chart.OrganizationalChartID; }
+                chart.AllRoles = OrganizationalChartTools.GetBlankPrimaryRoles();
+                foreach (ICSRole role in chart.AllRoles) { role.OpPeriod = newOps; role.OrganizationalChartID = chart.ID; }
 
 
             }
 
-          
+
+            
 
 
             //chart.DatePrepared = DateTime.Now;
@@ -527,6 +554,22 @@ namespace WF_ICS_ClassLibrary.Utilities
                 chart.DatePrepared = newDate;
             }
 
+            if (CopyAssignmentsWherePossible)
+            {
+                foreach(ICSRole role in chart.AllRoles.Where(o=>o.IndividualID != Guid.Empty))
+                {
+                    CheckInRecord CheckIn = incident.AllCheckInRecords.FirstOrDefault(o => o.ResourceID == role.IndividualID);
+                    if(CheckIn.LastDayOnIncident < chart.DatePrepared)
+                    {
+                        role.IndividualID = Guid.Empty;
+                        role.IndividualName = string.Empty;
+                    }
+                }
+            }
+
+
+
+            chart.SortRoles();
 
             //task.allOrgCharts.Add(chart);
             //Globals.incidentService.UpsertOrganizationalChart(chart);
@@ -535,20 +578,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 
       
 
-
-        public static void CreateOpGroupsForOrgRoles(this OrganizationChart chart, WFIncident incident)
-        {
-            foreach (ICSRole role in chart.ActiveRoles.Where(o =>o.OperationalGroupID != Guid.Empty))
-            {
-                
-                    OperationalGroup group = incident.createOperationalGroupFromRole(role);
-                    role.OperationalGroupID = group.ID;
-                    Globals.incidentService.UpsertOperationalGroup(group);
-                
-            }
-        }
-
-        public static OperationalGroup createOperationalGroupFromRole(this WFIncident incident, ICSRole role)
+        public static OperationalGroup createOperationalGroupFromRole(this Incident incident, ICSRole role)
         {
             OperationalGroup group = new OperationalGroup();
             group.OpPeriod = role.OpPeriod;
@@ -556,23 +586,23 @@ namespace WF_ICS_ClassLibrary.Utilities
             group.ParentName = role.ReportsToRoleName;
             group.LeaderICSRoleID = role.RoleID;
             group.LeaderICSRoleName = role.RoleName;
-            if (role.IsOpGroupSup)
+            if (role.RequiresOperationalGroup)
             {
-                if (role.Mnemonic.Equals("OPBD") || role.RoleID == Globals.AirOpsDirector || role.Mnemonic.Equals("HEBD")) { 
+                if (role.MnemonicAbrv.Equals("OPBD") || role.RoleID == Globals.AirOpsDirectorGenericID || role.MnemonicAbrv.Equals("HEBD")) { 
                     group.GroupType = "Branch";
                     group.Name = role.RoleName.Replace(" Director", "");
                 }
-                else if (role.Mnemonic.Equals("DIVS"))
+                else if (role.MnemonicAbrv.Equals("DIVS"))
                 {
                     group.GroupType = "Division";
                     group.Name = role.RoleName.Replace(" Supervisor", "");
                 }
-                else if (role.Mnemonic.Equals("STLD"))
+                else if (role.MnemonicAbrv.Equals("STLD"))
                 {
                     group.GroupType = "Strike Team";
                     group.Name = role.RoleName.Replace(" Leader", "");
                 }
-                else if (role.Mnemonic.Equals("TFLD"))
+                else if (role.MnemonicAbrv.Equals("TFLD"))
                 {
                     group.GroupType = "Task Force";
                     group.Name = role.RoleName.Replace(" Leader", "");
@@ -588,13 +618,13 @@ namespace WF_ICS_ClassLibrary.Utilities
         }
 
 
-        public static int getNextObjectivePriority(this WFIncident task, int thisOpPeriod)
+        public static int getNextObjectivePriority(this Incident task, int thisOpPeriod)
         {
             task.createObjectivesSheetAsNeeded(thisOpPeriod);
 
-            if (task.allIncidentObjectives.First(o=>o.OpPeriod == thisOpPeriod).Objectives.Any())
+            if (task.AllIncidentObjectiveSheets.First(o=>o.OpPeriod == thisOpPeriod).Objectives.Any())
             {
-                return task.allIncidentObjectives.First(o => o.OpPeriod == thisOpPeriod).Objectives.Max(o => o.Priority) + 1;
+                return task.AllIncidentObjectiveSheets.First(o => o.OpPeriod == thisOpPeriod).Objectives.Max(o => o.Priority) + 1;
             }
             return 1;
         }
@@ -623,13 +653,13 @@ namespace WF_ICS_ClassLibrary.Utilities
 
 
 
-        public static List<CommsRecipient> GetCommsRecipients(this WFIncident task, int ops)
+        public static List<CommsRecipient> GetCommsRecipients(this Incident task, int ops)
         {
 
 
             List<CommsRecipient> commsRecipients = new List<CommsRecipient>();
 
-            Guid ICPID = task.TaskID;
+            Guid ICPID = task.ID;
             Guid ECCID = new Guid("8e8ade8d-eb79-4280-8cf8-1a926d6a8200");
             Guid TaskingID = new Guid("9ababbb3-1f29-400c-a2c0-d9963c565dcb");
 
@@ -701,9 +731,9 @@ namespace WF_ICS_ClassLibrary.Utilities
             return commsRecipients;
         }
 
-        private static bool CheckAddCommsRecipient(this WFIncident task, CommsRecipient com, List<CommsRecipient> commsRecipients)
+        private static bool CheckAddCommsRecipient(this Incident task, CommsRecipient com, List<CommsRecipient> commsRecipients)
         {
-            Guid ICPID = task.TaskID;
+            Guid ICPID = task.ID;
             Guid ECCID = new Guid("8e8ade8d-eb79-4280-8cf8-1a926d6a8200");
             Guid TaskingID = new Guid("9ababbb3-1f29-400c-a2c0-d9963c565dcb");
 
@@ -723,7 +753,7 @@ namespace WF_ICS_ClassLibrary.Utilities
    
        
         //Exports the communications log for the selected op period into a CSV format with tab delimiters
-        public static string exportCommsLogToCSV(this WFIncident task, int op_period, string delimiter = ",")
+        public static string exportCommsLogToCSV(this Incident task, int op_period, string delimiter = ",")
         {
             StringBuilder csv = new StringBuilder();
             //header row
@@ -734,7 +764,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             csv.Append("SUBJECT"); csv.Append(delimiter);
             csv.Append("STATUS");
             csv.Append(Environment.NewLine);
-            foreach (CommsLogEntry entry in task.allCommsLogEntries.Where(o => o.Active && o.OperationalPeriod == op_period))
+            foreach (CommsLogEntry entry in task.allCommsLogEntries.Where(o => o.Active && o.OpPeriod == op_period))
             {
                 if (entry.Starred) { csv.Append("TRUE"); } else { csv.Append("FALSE"); }
                 csv.Append(delimiter);
@@ -750,12 +780,11 @@ namespace WF_ICS_ClassLibrary.Utilities
         }
 
 
-        public static OperationalPeriod GenerateFirstOpPeriod(this WFIncident task)
+        public static OperationalPeriod GenerateFirstOpPeriod(this Incident task)
         {
             if (!task.AllOperationalPeriods.Any())
             {
                 OperationalPeriod period = new OperationalPeriod();
-                period.TaskID = task.TaskID;
                 period.PeriodNumber = 1;
                 period.PeriodStart = DateTime.Now;
                 period.PeriodEnd = period.PeriodStart.AddHours(12);
@@ -767,7 +796,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 
 
         //RefreshAutomatedTimelineEvents
-        public static List<TimelineEvent> GetAutomatedTimelineEvents(this WFIncident task)
+        public static List<TimelineEvent> GetAutomatedTimelineEvents(this Incident task)
         {
             DateTime today = DateTime.Now;
             List<TimelineEvent> events = new List<TimelineEvent>();
