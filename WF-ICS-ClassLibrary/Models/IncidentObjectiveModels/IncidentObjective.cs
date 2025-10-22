@@ -18,6 +18,8 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(7)] private List<IncidentObjective> _ChildObjectives = new List<IncidentObjective>();
         [ProtoMember(12)] private Guid _OrganizationID;
         [ProtoMember(13)] private bool _Completed;
+        [ProtoMember(14)] private Guid _ParentObjectiveID;
+        [ProtoMember(15)] private List<string> _TemplateStrategies;
 
 
 
@@ -32,8 +34,16 @@ namespace WF_ICS_ClassLibrary.Models
         public Guid OrganizationID { get => _OrganizationID; set => _OrganizationID = value; }
         public bool Completed { get => _Completed; set => _Completed = value; }
         public string CopyNextOpText { get; set; } = "Copy to selected op";
+        public Guid ParentObjectiveID { get => _ParentObjectiveID; set => _ParentObjectiveID = value; }
+        public List<string> TemplateStrategies
+        {
+            get { if (_TemplateStrategies == null) { _TemplateStrategies = new List<string>(); } return _TemplateStrategies; }
+            set => _TemplateStrategies = value;
+        }
+        public int TemplateStrategyCount { get => TemplateStrategies.Count; }
 
-        public IncidentObjective() { ObjectiveID = System.Guid.NewGuid(); Active = true; IncidentObjectiveID = Guid.NewGuid(); }
+
+        public IncidentObjective() { ObjectiveID = System.Guid.NewGuid(); Active = true; IncidentObjectiveID = Guid.NewGuid(); TemplateStrategies = new List<string>(); }
         private IncidentObjective DeepCopy()
         {
             IncidentObjective newObj = new IncidentObjective();
