@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WF_ICS_ClassLibrary.Models.GeneralModels;
+using WF_ICS_ClassLibrary.Utilities;
 
 namespace WF_ICS_ClassLibrary.Models
 {
@@ -47,19 +48,40 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 StringBuilder sb = new StringBuilder();
+                sb.Append(GetObjectivesAsString(Guid.Empty, 0));
 
-                
-                foreach (IncidentObjective obj in ActiveObjectives.OrderBy(o=>o.Priority))
-                {
-                    sb.Append(obj.Priority); sb.Append(") ");
-                    sb.Append(obj.Objective);
-                    sb.Append(Environment.NewLine);
-                }
 
                 return sb.ToString();
             }
         }
+        private StringBuilder GetObjectivesAsString(Guid ParentId, int depth)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (IncidentObjective obj in ActiveObjectives.Where(o => o.ParentObjectiveID == ParentId).OrderBy(o => o.Priority))
+            {
+                for(int x = 0; x < depth; x++) { sb.Append("      "); }
 
+                switch (depth) {                     case 0:
+                        sb.Append(obj.Priority);
+                        break;
+                    case 1:
+                        sb.Append((char)(96 + obj.Priority));
+                        break;
+                    case 2:
+                        sb.Append(obj.Priority.ToRoman());
+                        break;
+                    default:
+                        sb.Append(obj.Priority);
+                        break;
+                }
+                sb.Append(") "); 
+                
+                    sb.Append(obj.Objective);
+                sb.Append(Environment.NewLine);
+                sb.Append(GetObjectivesAsString(obj.ID, depth + 1));
+            }
+            return sb;
+        }
 
         object ICloneable.Clone()
         {
