@@ -14,6 +14,7 @@ using WF_ICS_ClassLibrary.Utilities;
 using System.Runtime.InteropServices;
 using WildfireICSDesktopServices.NewsServices;
 using Microsoft.VisualStudio.Utilities;
+using WildfireICSDesktopServices.PDFExportServiceClasses;
 
 namespace Wildfire_ICS_Assist
 {
@@ -30,11 +31,12 @@ namespace Wildfire_ICS_Assist
             generalOptionsService = new GeneralOptionsService(true);
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
 
-            pdfExportService = new PDFExportService();
-            pdfExportService.SetDateFormat(generalOptionsService.GetStringOptionValue("DateFormat"));
-            WF_ICS_ClassLibrary.Globals.DateFormat = generalOptionsService.GetStringOptionValue("DateFormat");
+            int FormSet = generalOptionsService.GetIntOptionsValue("FormSet");
+            ChangeFormSet(FormSet);
+            
+            Globals.DateFormat = generalOptionsService.GetStringOptionValue("DateFormat");
             incidentDataService = new IncidentDataService();
-            WF_ICS_ClassLibrary.Globals.incidentService = incidentDataService;
+            Globals.incidentService = incidentDataService;
             positionLogService = new PositionLogService();
             networkService = new NetworkService();
             newsService = new NewsService();
@@ -137,6 +139,12 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        public static void ChangeFormSet(int newFormSet)
+        {
+            if (newFormSet == 1) { pdfExportService = new WildfirePDFExportService(); }
+            else { pdfExportService = new AllHazardsPDFExportService(); }
+            pdfExportService.SetDateFormat(generalOptionsService.GetStringOptionValue("DateFormat"));
+        }
 
 
         //Colours used throughout the program

@@ -15,7 +15,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
         {
 
             List<byte[]> allPDFs = new List<byte[]>();
-            PDFExportService pDFExportService = new PDFExportService();
+            WildfirePDFExportService pDFExportService = new WildfirePDFExportService();
             Incident incident = new Incident();
             incident.TaskName = incidentName;
             incident.TaskNumber = incidentNumber;

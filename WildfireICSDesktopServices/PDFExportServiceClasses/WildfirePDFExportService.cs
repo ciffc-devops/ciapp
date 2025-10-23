@@ -1,20 +1,11 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Numerics;
-using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
@@ -26,7 +17,7 @@ using Rectangle = iTextSharp.text.Rectangle;
 
 namespace WildfireICSDesktopServices
 {
-    public class PDFExportService : IPDFExportService
+    public class WildfirePDFExportService : IPDFExportService
     {
         private static string DateFormat { get; set; } = "MMM-dd-yyyy";
 
