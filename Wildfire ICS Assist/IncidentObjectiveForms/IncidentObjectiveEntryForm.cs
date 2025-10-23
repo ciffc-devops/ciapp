@@ -21,6 +21,30 @@ namespace Wildfire_ICS_Assist
             InitializeComponent(); SetControlColors(this.Controls);
         }
         public bool SaveForLater { get => chkSaveForLater.Checked; }
+        private bool _EditMode = false;
+        public bool EditMode
+        {
+            get { return _EditMode; }
+            set
+            {
+                _EditMode = value;
+                if (_EditMode)
+                {
+                    splitContainer1.Panel1Collapsed = true;
+                    splitContainer1.Panel1.Hide();
+                    chkSaveForLater.Visible = false;
+                    btnAddNew.Visible = false;
+                    btnSaveChanges.Visible = true;
+                    lblNewTitle.Text = "Edit";
+
+                }
+                else
+                {
+                    btnSaveChanges.Visible = false;
+                }
+            }
+        }
+
 
         private void loadSavedObjectives()
         {
@@ -115,6 +139,14 @@ namespace Wildfire_ICS_Assist
         private void IncidentObjectiveEntryForm_Load(object sender, EventArgs e)
         {
             loadSavedObjectives();
+        }
+
+        private void btnSaveChanges_Click(object sender, EventArgs e)
+        {
+            Objective.Objective = txtNewObjective.Text;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+
         }
     }
 }
