@@ -89,6 +89,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(69)] private string _OrganizationName;
         [ProtoMember(70)] private bool _ShowTestButton;
         [ProtoMember(71)] private bool _IncludeLogoOnTestPageByDefault;
+        [ProtoMember(72)] private int _FormSet;
 
 
         public void setAppSettingsChanged() { appSettingsChanged = true; }
@@ -184,6 +185,7 @@ namespace WF_ICS_ClassLibrary.Models
         public string OrganizationName { get => _OrganizationName; set => _OrganizationName = value; }
         public bool ShowTestButton { get => _ShowTestButton; set => _ShowTestButton = value; }
         public bool IncludeLogoOnTitlePageByDefault { get => _IncludeLogoOnTestPageByDefault; set => _IncludeLogoOnTestPageByDefault = value; }
+        public int FormSet { get => _FormSet; set => _FormSet = value; }
 
         public void addDefaultOptions()
         {
@@ -225,6 +227,8 @@ namespace WF_ICS_ClassLibrary.Models
 
 
         }
+
+      
     }
 
 
