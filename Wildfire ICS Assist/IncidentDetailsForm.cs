@@ -1,5 +1,7 @@
-﻿using NetworkCommsDotNet.Tools;
-using NetworkCommsDotNet;
+﻿using NetworkCommsDotNet;
+using NetworkCommsDotNet.Connections;
+using NetworkCommsDotNet.DPSBase;
+using NetworkCommsDotNet.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,22 +22,22 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Models.NewsModels;
 using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.CustomControls;
+using Wildfire_ICS_Assist.IncidentObjectiveForms;
+using Wildfire_ICS_Assist.IncidentStatusSummaryForms;
+using Wildfire_ICS_Assist.NewsForms;
+using Wildfire_ICS_Assist.OperationalPeriodForms;
 using Wildfire_ICS_Assist.OptionsForms;
+using Wildfire_ICS_Assist.Properties;
 using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
-using NetworkCommsDotNet.Connections;
-using NetworkCommsDotNet.DPSBase;
-using Wildfire_ICS_Assist.Properties;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Wildfire_ICS_Assist.IncidentStatusSummaryForms;
-using Wildfire_ICS_Assist.Classes;
-using Wildfire_ICS_Assist.OperationalPeriodForms;
 using WildfireICSDesktopServices.Logging;
-using Wildfire_ICS_Assist.NewsForms;
-using WF_ICS_ClassLibrary.Models.NewsModels;
+using WildfireICSDesktopServices.PDFExportServiceClasses;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Wildfire_ICS_Assist
@@ -222,7 +224,7 @@ namespace Wildfire_ICS_Assist
         OrganizationalChartForm _orgChartForm = null;
         PositionLogForm _positionLogForm = null;
         PositionLogAllOutstandingForm _positionLogAllOutstandingForm = null;
-        IncidentObjectivesForm _objectivesForm = null;
+        IncidentObjectivesListForm _objectivesForm = null;
         GeneralMessagesForm _generalMessagesForm = null;
         MedicalPlanForm _medicalPlanForm = null;
         NotesForm _notesForm = null;
@@ -1092,7 +1094,7 @@ namespace Wildfire_ICS_Assist
                             CurrentIncident = testTaskDeserialize;
                             CurrentOpPeriod = testTaskDeserialize.highestOpsPeriod;
 
-                            List<string> recentFilePaths = (List<string>)OptionValue("RecentFiles");
+                            List<string> recentFilePaths = (List<string>)OptionValue("RecentFilePaths");
                             Program.generalOptionsService.UpsertOptionValue(filename, "RecentFileName");
                             setRecentFiles();
                         }
@@ -1338,7 +1340,7 @@ namespace Wildfire_ICS_Assist
         private void setRecentFiles()
         {
             recentIncidentsToolStripMenuItem.DropDownItems.Clear();
-            List<string> recentFilePaths = (List<string>)OptionValue("RecentFiles");
+            List<string> recentFilePaths = (List<string>)OptionValue("RecentFilePaths");
             if (recentFilePaths.Any())
             {
                 foreach (string s in recentFilePaths)
@@ -1664,6 +1666,8 @@ namespace Wildfire_ICS_Assist
                    
                     TestToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
+                    int FormSet = Program.generalOptionsService.GetIntOptionsValue("FormSet");
+                    Program.ChangeFormSet(FormSet);
 
 
                 }
@@ -1691,7 +1695,7 @@ namespace Wildfire_ICS_Assist
             {
                 if (_objectivesForm == null)
                 {
-                    _objectivesForm = new IncidentObjectivesForm();
+                    _objectivesForm = new IncidentObjectivesListForm();
                     _objectivesForm.FormClosed += new FormClosedEventHandler(IncidentObjectivesForm_Closed);
                     ActiveForms.Add(_objectivesForm);
                     _objectivesForm.Show(this);

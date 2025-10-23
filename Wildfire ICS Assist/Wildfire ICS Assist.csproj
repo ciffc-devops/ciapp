@@ -289,6 +289,12 @@
     <Compile Include="CustomControls\PrepAndApprovePanel.Designer.cs">
       <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="IncidentObjectiveForms\IncidentObjectivesListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentObjectiveForms\IncidentObjectivesListForm.Designer.cs">
+      <DependentUpon>IncidentObjectivesListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -560,12 +566,6 @@
     </Compile>
     <Compile Include="IncidentObjectiveForms\IncidentObjectiveEntryForm.Designer.cs">
       <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IncidentObjectiveForms\IncidentObjectivesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="IncidentObjectiveForms\IncidentObjectivesForm.Designer.cs">
-      <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="InternetSyncForms\InternetSyncStartForm.cs">
       <SubType>Form</SubType>
@@ -985,6 +985,9 @@
     <EmbeddedResource Include="IncidentDetailsForm.fr-FR.resx">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IncidentObjectiveForms\IncidentObjectivesListForm.resx">
+      <DependentUpon>IncidentObjectivesListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.resx">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1126,9 +1129,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentObjectiveForms\IncidentObjectiveEntryForm.resx">
       <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IncidentObjectiveForms\IncidentObjectivesForm.resx">
-      <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InternetSyncForms\InternetSyncStartForm.resx">
       <DependentUpon>InternetSyncStartForm.cs</DependentUpon>
