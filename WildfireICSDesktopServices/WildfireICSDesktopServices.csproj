@@ -127,12 +127,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileManagementService.cs" />
+    <Compile Include="GeneralFunctions\GetPropertyFunction.cs" />
+    <Compile Include="GeneralFunctions\HasMethodFunction.cs" />
+    <Compile Include="GeneralFunctions\HasPropertyFunction.cs" />
+    <Compile Include="GeneralFunctions\IsListFunction.cs" />
+    <Compile Include="GeneralOptionsFunctions\GetOptionsValueAsBooleanHandler.cs" />
+    <Compile Include="GeneralOptionsFunctions\GetOptionsValueAsGuidHandler.cs" />
+    <Compile Include="GeneralOptionsFunctions\GetOptionsValueAsIntHandler.cs" />
+    <Compile Include="GeneralOptionsFunctions\GetOptionsValueAsObject.cs" />
+    <Compile Include="GeneralOptionsFunctions\GetOptionsValueAsStringHandler.cs" />
     <Compile Include="GeneralOptionsService.cs" />
     <Compile Include="Logging\LogService.cs" />
     <Compile Include="MAPI.cs" />
     <Compile Include="NetworkService.cs" />
     <Compile Include="NewsServices\NewsService.cs" />
     <Compile Include="NewsServices\NewsWebTools.cs" />
+    <Compile Include="PDFExportServiceClasses\AllHazardsPDFExportService.cs" />
     <Compile Include="PDFExportServiceClasses\BlankFormExportService.cs" />
     <Compile Include="PDFExportServiceClasses\ContactsExport\ContactExportEntry.cs" />
     <Compile Include="PDFExportServiceClasses\ContactsExport\ContactExportHeader.cs" />
@@ -144,7 +154,7 @@
     <Compile Include="PDFExportServiceClasses\OrgChartExport\OrgChartForExport.cs" />
     <Compile Include="PDFExportServiceClasses\OrgChartExport\OrgChartPage.cs" />
     <Compile Include="PDFExportServiceClasses\OrgChartExport\OrgChartPageOne.cs" />
-    <Compile Include="PDFExportServiceClasses\PDFExportService.cs" />
+    <Compile Include="PDFExportServiceClasses\WildfirePDFExportService.cs" />
     <Compile Include="PDFExportServiceClasses\PDFExtraTools.cs" />
     <Compile Include="PositionLogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
