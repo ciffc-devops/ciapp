@@ -335,18 +335,7 @@ namespace WF_ICS_ClassLibrary.Utilities
 
 
 
-        public static void renumberObjectives(this Incident task, int currentOpPeriod)
-        {
-            int priority = 1;
-            IncidentObjectivesSheet incidentObjectives = task.AllIncidentObjectiveSheets.First(o => o.OpPeriod == currentOpPeriod);
-
-            foreach (IncidentObjective objective in incidentObjectives.Objectives.OrderBy(o => o.Priority))
-            {
-                objective.Priority = priority;
-                priority += 1;
-            }
-        }
-
+     
 
         /*
         public static void saveOrgRole(this WFIncident task, string roleName, int opsPeriod, TeamMember member)
@@ -618,16 +607,6 @@ namespace WF_ICS_ClassLibrary.Utilities
         }
 
 
-        public static int getNextObjectivePriority(this Incident task, int thisOpPeriod)
-        {
-            task.createObjectivesSheetAsNeeded(thisOpPeriod);
-
-            if (task.AllIncidentObjectiveSheets.First(o=>o.OpPeriod == thisOpPeriod).Objectives.Any())
-            {
-                return task.AllIncidentObjectiveSheets.First(o => o.OpPeriod == thisOpPeriod).Objectives.Max(o => o.Priority) + 1;
-            }
-            return 1;
-        }
 
         /*
         public static void saveCommsPlanItem(this WFIncident task, CommsPlanItem item, string function, int OpsPeriod)
