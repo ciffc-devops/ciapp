@@ -152,7 +152,7 @@ namespace Wildfire_ICS_Assist
             blankVehicle.IncidentIDNo = "-Select a saved vehicle-";
             blankVehicle.ID = Guid.Empty;
             List<Vehicle> savedVehicles = new List<Vehicle>();
-            savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("Vehicles"));
+            savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("AllVehicles"));
             savedVehicles = savedVehicles.Where(o => o.Active).ToList(); 
             blankVehicle.IncidentIDNo = "-Select saved equipment/vehicle-";
             /*
@@ -171,7 +171,7 @@ namespace Wildfire_ICS_Assist
             blankAircraft.Registration = "-Select a saved aircraft-";
             blankAircraft.ID = Guid.Empty;
             List<Aircraft> savedAircraft = new List<Aircraft>();
-            savedAircraft.AddRange((List<Aircraft>)Program.generalOptionsService.GetOptionsValue("Aircrafts"));
+            savedAircraft.AddRange((List<Aircraft>)Program.generalOptionsService.GetOptionsValue("AircraftList"));
 
             savedAircraft.Insert(0, blankAircraft);
 
@@ -194,7 +194,7 @@ namespace Wildfire_ICS_Assist
             cboSavedPersonnel.DataSource = null;
             List<MemberStatus> statuses = Program.CurrentIncident.getAllMemberStatus(Program.CurrentOpPeriod);
 
-            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("AllTeamMembers");
             members = members.Where(o => o.MemberActive).OrderBy(o => o.ProvinceName).ThenBy(o => o.Agency).ThenBy(o => o.Name).ToList();
             members = members.Where(o => !statuses.Any(s => s.MemberID == o.PersonID)).ToList();
             Personnel blankPerson = new Personnel();

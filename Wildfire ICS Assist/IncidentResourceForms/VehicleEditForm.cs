@@ -57,7 +57,7 @@ namespace Wildfire_ICS_Assist
             blankVehicle.IncidentIDNo = "-Select a saved vehicle-";
             blankVehicle.ID = Guid.Empty;
             List<Vehicle> savedVehicles = new List<Vehicle>(); 
-            savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("Vehicles"));
+            savedVehicles.AddRange((List<Vehicle>)Program.generalOptionsService.GetOptionsValue("AllVehicles"));
             savedVehicles.Insert(0, blankVehicle);
 
             cboSavedVehicles.DataSource = savedVehicles;

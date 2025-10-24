@@ -312,7 +312,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             }//end of parser
 
 
-            List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> savedMembers = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("AllTeamMembers");
 
             foreach (Personnel member in importedMembers)
             {

@@ -31,7 +31,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         {
             dgvTeamMembers.AutoGenerateColumns = false;
             dgvTeamMembers.DataSource = null;
-            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("AllTeamMembers");
             members = members.Where(o=>o.MemberActive).OrderBy(o=>o.ProvinceName).ThenBy(o=>o.Agency).ThenBy(o=>o.Name).ToList();
             dgvTeamMembers.DataSource = members;
         }
@@ -131,7 +131,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
 
 
-                List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+                List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("AllTeamMembers");
                 members = members.Where(o => o.MemberActive).OrderBy(o => o.Agency).ThenBy(o => o.Name).ToList();
 
                 string csv = members.ToCSV(delimiter);

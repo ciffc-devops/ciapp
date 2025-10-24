@@ -32,7 +32,7 @@ namespace Wildfire_ICS_Assist
             cboSavedPersonnel.DataSource = null;
             List<MemberStatus> statuses = Program.CurrentIncident.getAllMemberStatus(Program.CurrentOpPeriod);
 
-            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("TeamMembers");
+            List<Personnel> members = (List<Personnel>)Program.generalOptionsService.GetOptionsValue("AllTeamMembers");
             members = members.Where(o => o.MemberActive).OrderBy(o => o.ProvinceName).ThenBy(o => o.Agency).ThenBy(o => o.Name).ToList();
             members = members.Where(o => !statuses.Any(s => s.MemberID == o.PersonID)).ToList();
 
