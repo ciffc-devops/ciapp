@@ -97,7 +97,7 @@ namespace Wildfire_ICS_Assist
 
             }
             setServerStatusDisplay();
-
+            ChangeFormSet();
 
             NetworkComms.AppendGlobalIncomingPacketHandler<Incident>("WFIncident", Program.networkService.HandleIncomingIncident);
 
@@ -1657,20 +1657,42 @@ namespace Wildfire_ICS_Assist
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenOptionsMenu();
+        }
+
+        private void OpenOptionsMenu()
+        {
             using (OptionsForm editOptions = new OptionsForm())
             {
                 DialogResult result = editOptions.ShowDialog();
-                if(result == DialogResult.OK)
+                if (result == DialogResult.OK)
                 {
                     tmrAutoSave.Enabled = true;
-                   
+
                     TestToolStripMenuItem.Visible = Program.generalOptionsService.GetOptionsBoolValue("ShowTestButton");
 
                     int FormSet = Program.generalOptionsService.GetIntOptionsValue("FormSet");
                     Program.ChangeFormSet(FormSet);
+                    ChangeFormSet(FormSet);
 
 
                 }
+            }
+        }
+
+        private void ChangeFormSet(int FormSet = -1)
+        {
+           if(FormSet < 0) { FormSet = Program.generalOptionsService.GetIntOptionsValue("FormSet"); }
+
+            switch (FormSet) {                 
+                case 1:
+                    // Wildfire
+                    picFormSet.Image = Properties.Resources.CIAPPFormSet_02;
+                    break;
+                default:
+                    // All Hazards
+                    picFormSet.Image = Properties.Resources.CIAPPFormSet_01;
+                    break;
             }
         }
 
@@ -3563,7 +3585,10 @@ namespace Wildfire_ICS_Assist
             OpenPrintBlankFormsForm();
         }
 
-
+        private void picFormSet_Click(object sender, EventArgs e)
+        {
+            OpenOptionsMenu();
+        }
     }
 
 

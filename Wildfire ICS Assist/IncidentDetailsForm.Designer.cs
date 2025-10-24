@@ -164,6 +164,8 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pnlTaskInfo = new System.Windows.Forms.Panel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.picFormSet = new System.Windows.Forms.PictureBox();
             this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
             this.pnlInternetSyncStart.SuspendLayout();
@@ -187,6 +189,11 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picFormSet)).BeginInit();
             this.collapsiblePanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -339,7 +346,6 @@
             // btnReviewOpPeriod
             // 
             resources.ApplyResources(this.btnReviewOpPeriod, "btnReviewOpPeriod");
-            this.btnReviewOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_41_stats;
             this.btnReviewOpPeriod.Name = "btnReviewOpPeriod";
             this.btnReviewOpPeriod.TabStop = false;
             this.btnReviewOpPeriod.UseVisualStyleBackColor = true;
@@ -348,7 +354,6 @@
             // btnEditOpPeriod
             // 
             resources.ApplyResources(this.btnEditOpPeriod, "btnEditOpPeriod");
-            this.btnEditOpPeriod.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
             this.btnEditOpPeriod.Name = "btnEditOpPeriod";
             this.btnEditOpPeriod.TabStop = false;
             this.btnEditOpPeriod.UseVisualStyleBackColor = true;
@@ -636,7 +641,6 @@
             // 
             // optionsToolStripMenuItem
             // 
-            this.optionsToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_137_cogwheel;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
@@ -825,14 +829,12 @@
             // 
             // printThisOperationalPeriodToolStripMenuItem
             // 
-            this.printThisOperationalPeriodToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.printThisOperationalPeriodToolStripMenuItem.Name = "printThisOperationalPeriodToolStripMenuItem";
             resources.ApplyResources(this.printThisOperationalPeriodToolStripMenuItem, "printThisOperationalPeriodToolStripMenuItem");
             this.printThisOperationalPeriodToolStripMenuItem.Click += new System.EventHandler(this.printThisOperationalPeriodToolStripMenuItem_Click);
             // 
             // printThisIncidentToDateToolStripMenuItem
             // 
-            this.printThisIncidentToDateToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_16_print;
             this.printThisIncidentToDateToolStripMenuItem.Name = "printThisIncidentToDateToolStripMenuItem";
             resources.ApplyResources(this.printThisIncidentToDateToolStripMenuItem, "printThisIncidentToDateToolStripMenuItem");
             this.printThisIncidentToDateToolStripMenuItem.Click += new System.EventHandler(this.printThisIncidentToDateToolStripMenuItem_Click);
@@ -900,13 +902,11 @@
             this.toolStripSeparator6,
             this.supportToolStripMenuItem,
             this.aboutCIAPPToolStripMenuItem});
-            this.helpToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.RedExclaimSq;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
             // newsToolStripMenuItem
             // 
-            this.newsToolStripMenuItem.Image = global::Wildfire_ICS_Assist.Properties.Resources.RedExclaimSq;
             this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
             resources.ApplyResources(this.newsToolStripMenuItem, "newsToolStripMenuItem");
             this.newsToolStripMenuItem.Click += new System.EventHandler(this.newsToolStripMenuItem_Click);
@@ -1001,7 +1001,6 @@
             // 
             resources.ApplyResources(this.btnGeneralMessage, "btnGeneralMessage");
             this.btnGeneralMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnGeneralMessage.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_11_envelope;
             this.btnGeneralMessage.Name = "btnGeneralMessage";
             this.btnGeneralMessage.UseVisualStyleBackColor = true;
             this.btnGeneralMessage.Click += new System.EventHandler(this.btnGeneralMessage_Click);
@@ -1026,7 +1025,6 @@
             // 
             resources.ApplyResources(this.btnReplacementResources, "btnReplacementResources");
             this.btnReplacementResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnReplacementResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_46_calendar;
             this.btnReplacementResources.Name = "btnReplacementResources";
             this.btnReplacementResources.UseVisualStyleBackColor = true;
             this.btnReplacementResources.Click += new System.EventHandler(this.btnReplacementResources_Click);
@@ -1035,7 +1033,6 @@
             // 
             resources.ApplyResources(this.btnShowResources, "btnShowResources");
             this.btnShowResources.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnShowResources.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
             this.btnShowResources.Name = "btnShowResources";
             this.btnShowResources.UseVisualStyleBackColor = true;
             this.btnShowResources.Click += new System.EventHandler(this.btnShowResources_Click);
@@ -1138,7 +1135,6 @@
             // 
             resources.ApplyResources(this.btnPrintIAP, "btnPrintIAP");
             this.btnPrintIAP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnPrintIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_filetypes_2_file_rich_text;
             this.btnPrintIAP.Name = "btnPrintIAP";
             this.btnPrintIAP.Tag = "ViewPDF";
             this.btnPrintIAP.UseVisualStyleBackColor = true;
@@ -1174,11 +1170,34 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.picOrgLogo);
+            this.splitContainer3.Panel1.Controls.Add(this.splitContainer4);
             // 
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.pnlOpsPeriod);
+            // 
+            // splitContainer4
+            // 
+            resources.ApplyResources(this.splitContainer4, "splitContainer4");
+            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.picOrgLogo);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.picFormSet);
+            // 
+            // picFormSet
+            // 
+            this.picFormSet.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.picFormSet, "picFormSet");
+            this.picFormSet.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPPFormSet_01;
+            this.picFormSet.Name = "picFormSet";
+            this.picFormSet.TabStop = false;
+            this.picFormSet.Click += new System.EventHandler(this.picFormSet_Click);
             // 
             // collapsiblePanel1
             // 
@@ -1239,6 +1258,11 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picFormSet)).EndInit();
             this.collapsiblePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1382,6 +1406,8 @@
         private System.Windows.Forms.ToolStripMenuItem printOperationalPeriodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printIncidentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printBlankFormsToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.PictureBox picFormSet;
     }
 }
 
