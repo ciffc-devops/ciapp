@@ -76,9 +76,9 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
         private void ConfigureUXForFormSet()
         {
-            allHazardsCollapsiblePanels.Add(cpSituationalAwareness);
             allHazardsCollapsiblePanels.Add(cpCommandEmphasis);
-            allHazardsCollapsiblePanels.Add(cpSafetyPlanRequired);
+            allHazardsCollapsiblePanels.Add(cpSituationalAwareness);
+                        allHazardsCollapsiblePanels.Add(cpSafetyPlanRequired);
 
             wfCollapsiblePanels.Add(cpWeather);
             wfCollapsiblePanels.Add(cpGeneralSafety);
@@ -435,8 +435,21 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
 
 
+
         #endregion
 
-      
+        private void prepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
+        {
+            objectivesSheet.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+            objectivesSheet.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
+
+        }
+
+        private void prepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
+        {
+            objectivesSheet.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+            objectivesSheet.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+
+        }
     }
 }
