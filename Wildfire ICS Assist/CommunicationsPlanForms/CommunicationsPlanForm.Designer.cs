@@ -215,6 +215,7 @@
             // prepAndApprovePanel1
             // 
             this.prepAndApprovePanel1.ApprovedByDateTime = new System.DateTime(((long)(0)));
+            this.prepAndApprovePanel1.BackColor = System.Drawing.Color.White;
             this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.prepAndApprovePanel1.Collapsed = false;
             this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
@@ -231,6 +232,8 @@
             this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(619, 197);
             this.prepAndApprovePanel1.TabIndex = 71;
             this.prepAndApprovePanel1.TitleText = "Prepared and Approved Info";
+            this.prepAndApprovePanel1.PreparedByChanged += new System.EventHandler(this.prepAndApprovePanel1_PreparedByChanged_1);
+            this.prepAndApprovePanel1.ApprovedByChanged += new System.EventHandler(this.prepAndApprovePanel1_ApprovedByChanged_1);
             // 
             // btnView
             // 
@@ -312,7 +315,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
             this.ClientSize = new System.Drawing.Size(1003, 366);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(792, 405);

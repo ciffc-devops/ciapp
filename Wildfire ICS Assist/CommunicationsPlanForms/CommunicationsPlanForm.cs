@@ -39,30 +39,9 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.CommsPlanItemChanged += Program_OnCommsPlanItemChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
-            prepAndApprovePanel1.ApprovedByChanged += PrepAndApprovePanel1_ApprovedByChanged;
-            prepAndApprovePanel1.PreparedByChanged += PrepAndApprovePanel1_PreparedByChanged; ;
         }
 
-        private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
-        {
-            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
-            if (plan != null)
-            {
-                plan.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
-                plan.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
-            }
-        }
-
-        private void PrepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
-        {
-            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
-            if (plan != null)
-            {
-                plan.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
-                plan.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
-            }
-        }
-
+    
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
             BuildDataList();
@@ -206,24 +185,8 @@ namespace Wildfire_ICS_Assist
         private void btnPrint_Click(object sender, EventArgs e)
         {
             CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
-            if (string.IsNullOrEmpty(plan.PreparedByResourceName) || string.IsNullOrEmpty(plan.PreparedByRoleName))
-            {
-
-
-
-                if (Program.CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
-                {
-                    OrganizationChart currentChart = Program.CurrentIncident.allOrgCharts.First(o => o.OpPeriod == Program.CurrentOpPeriod);
-                    ICSRole prepBy = currentChart.GetRoleByID(Globals.LogisticsChiefGenericID, true);
-                    if (prepBy != null)
-                    {
-                        plan.PreparedByResourceName = prepBy.IndividualName; plan.PreparedByRoleName = prepBy.RoleName;
-                        Program.incidentDataService.UpsertCommsPlan(plan);
-                    }
-                }
-
-            }
-            if (string.IsNullOrEmpty(plan.PreparedByResourceName) || string.IsNullOrEmpty(plan.PreparedByRoleName))
+           
+            if ( string.IsNullOrEmpty(plan.PreparedByRoleName))
             {
                 plan.PreparedByResourceName = Program.CurrentRole.IndividualName;
                 plan.PreparedByRoleName = Program.CurrentRole.RoleName;
@@ -305,6 +268,27 @@ namespace Wildfire_ICS_Assist
             // Sort the selected column
             dgvCommsItems.Sort(column, direction);
            
+        }
+
+        private void prepAndApprovePanel1_PreparedByChanged_1(object sender, EventArgs e)
+        {
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
+            if (plan != null)
+            {
+                plan.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+                plan.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+            }
+
+        }
+
+        private void prepAndApprovePanel1_ApprovedByChanged_1(object sender, EventArgs e)
+        {
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
+            if (plan != null)
+            {
+                plan.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+                plan.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
+            }
         }
     }
 }
