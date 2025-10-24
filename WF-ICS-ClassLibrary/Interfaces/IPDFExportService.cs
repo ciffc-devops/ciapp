@@ -65,7 +65,13 @@ namespace WildfireICSDesktopServices
         List<byte[]> createSinglePageDietaryAndAllergyPDF(Incident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF);
         List<byte[]> exportDietaryAndAllergyToPDF(Incident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF);
 
+        string createPositionLogPDF(Incident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF);
+        string CreateVerbosePDF(Incident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF);
+        List<byte[]> exportPositionLogToPDF(Incident task, int OpPeriodToExport, ICSRole role, bool flattenPDF = false);
+        List<byte[]> exportVerbosePositionLogToPDF(Incident task, int OpPeriodToExport, ICSRole role, bool flattenPDF = false);
+
         PDFCreationResults CreateCustomTitlePagePDF(Incident incident, TitlePageOptions options, int OperationalPeriodNumber, bool useTempPath, bool flattenPDF = false);
         PDFCreationResults GetCustomTitlePageBytes(Incident incident, TitlePageOptions options, int OperationalPeriodNumber, bool flattenPDF = false);
+
     }
 }

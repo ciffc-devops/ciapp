@@ -81,6 +81,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Artboard_1 {
+            get {
+                object obj = ResourceManager.GetObject("Artboard 1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Artboard_1_2x {
             get {
                 object obj = ResourceManager.GetObject("Artboard 1@2x", resourceCulture);
@@ -113,6 +123,26 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static System.Drawing.Bitmap CIAPP_LOGO_v3_transparent {
             get {
                 object obj = ResourceManager.GetObject("CIAPP-LOGO-v3-transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CIAPPFormSet_01 {
+            get {
+                object obj = ResourceManager.GetObject("CIAPPFormSet-01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CIAPPFormSet_02 {
+            get {
+                object obj = ResourceManager.GetObject("CIAPPFormSet-02", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

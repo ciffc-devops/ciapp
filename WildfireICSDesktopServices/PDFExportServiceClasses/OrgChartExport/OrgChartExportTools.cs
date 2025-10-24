@@ -235,8 +235,10 @@ namespace WildfireICSDesktopServices.OrgChartExport
             string outputPath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
             try
             {
-                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-207-WF Incident Organization Chart Unified.pdf");
-                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+                int FormSet = Globals._generalOptionsService.GetIntOptionsValue("FormSet");
+
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-207-WF Incident Organization Chart Unified.pdf", FormSet);
+                
 
                 using (PdfReader rdr = new PdfReader(fileToUse))
                 {
@@ -348,8 +350,9 @@ namespace WildfireICSDesktopServices.OrgChartExport
             string outputPath =  System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
             try
             {
-                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-207-WF Incident Organization Chart Extension.pdf");
-                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+                int FormSet = Globals._generalOptionsService.GetIntOptionsValue("FormSet");
+
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-207-WF Incident Organization Chart Extension.pdf", FormSet);
 
                 using (PdfReader rdr = new PdfReader(fileToUse))
                 {

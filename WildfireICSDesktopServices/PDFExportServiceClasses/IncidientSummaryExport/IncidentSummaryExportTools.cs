@@ -61,10 +61,11 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses.IncidentSummaryExpo
 
             try
             {
+                int FormSet = Globals._generalOptionsService.GetIntOptionsValue("FormSet");
 
                 string pageOnetoThreePath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
-                string fileToUse = PDFExtraTools.getPDFFilePath("Form-209.pdf");
-                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+                string fileToUse = PDFExtraTools.getPDFFilePath("Form-209.pdf", FormSet);
+                
 
                 using (PdfReader rdr = new PdfReader(fileToUse))
                 {
@@ -318,9 +319,10 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses.IncidentSummaryExpo
 
             path = Path.Combine(path, Guid.NewGuid().ToString() + ".pdf");
 
+            int FormSet = Globals._generalOptionsService.GetIntOptionsValue("FormSet");
 
-            string fileToUse = PDFExtraTools.getPDFFilePath("Form-209-page4.pdf");
-            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+            string fileToUse = PDFExtraTools.getPDFFilePath("Form-209-page4.pdf", FormSet);
+            
             try
             {
 

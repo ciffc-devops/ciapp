@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 
@@ -151,9 +152,9 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses.ContactsExport
 
                 path = Path.Combine(path, Guid.NewGuid().ToString() + ".pdf");
 
-
-                string fileToUse = PDFExtraTools.getPDFFilePath("ICS205A-CommunicationsList.pdf");
-                fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+                int FormSet = Globals._generalOptionsService.GetIntOptionsValue("FormSet");
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS205A-CommunicationsList.pdf", FormSet);
+                
                 try
                 {
 

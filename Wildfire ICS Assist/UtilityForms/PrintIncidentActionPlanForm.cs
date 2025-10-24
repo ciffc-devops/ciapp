@@ -429,7 +429,7 @@ namespace Wildfire_ICS_Assist
                     {
                         if (CurrentIncident.allPositionLogEntries.Any(o => o.Role.RoleID == role.RoleID && o.OpPeriod == op))
                         {
-                            allPDFs.AddRange(Program.positionLogService.exportPositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
+                            allPDFs.AddRange(Program.pdfExportService.exportPositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
                         }
                     }
                 }
@@ -439,7 +439,7 @@ namespace Wildfire_ICS_Assist
                     {
                         if (CurrentIncident.allPositionLogEntries.Any(o => o.Role.RoleID == role.RoleID && o.OpPeriod == op))
                         {
-                            allPDFs.AddRange(Program.positionLogService.exportVerbosePositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
+                            allPDFs.AddRange(Program.pdfExportService.exportVerbosePositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
                         }
                     }
                 }

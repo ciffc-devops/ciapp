@@ -57,6 +57,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddToPositionLog = new System.Windows.Forms.Button();
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
+            this.btnAddTestEntries = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -202,6 +203,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnAddTestEntries);
             this.splitContainer2.Panel2.Controls.Add(this.btnExport);
             this.splitContainer2.Panel2.Controls.Add(this.btnPrintVerbose);
             this.splitContainer2.Panel2.Controls.Add(this.btnPrint);
@@ -344,11 +346,18 @@
             this.svdExport.DefaultExt = "csv";
             resources.ApplyResources(this.svdExport, "svdExport");
             // 
+            // btnAddTestEntries
+            // 
+            resources.ApplyResources(this.btnAddTestEntries, "btnAddTestEntries");
+            this.btnAddTestEntries.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_400_export;
+            this.btnAddTestEntries.Name = "btnAddTestEntries";
+            this.btnAddTestEntries.UseVisualStyleBackColor = true;
+            this.btnAddTestEntries.Click += new System.EventHandler(this.btnAddTestEntries_Click);
+            // 
             // PositionLogForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
             this.Controls.Add(this.splitContainer1);
             this.Name = "PositionLogForm";
             this.Load += new System.EventHandler(this.PositionLogForm_Load);
@@ -404,5 +413,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.SaveFileDialog svdExport;
+        private System.Windows.Forms.Button btnAddTestEntries;
     }
 }

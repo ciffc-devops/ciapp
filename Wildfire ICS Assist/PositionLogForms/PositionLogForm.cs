@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -54,7 +55,12 @@ namespace Wildfire_ICS_Assist
 
         private void PositionLogForm_Load(object sender, EventArgs e)
         {
-            if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
+#if DEBUG
+            btnAddTestEntries.Visible = true;
+#else
+btnAddTestEntries.Visible = false;
+#endif
+
             Program.incidentDataService.PositionLogChanged += Program_PositionLogChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
@@ -187,7 +193,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            string path = Program.positionLogService.CreateICSPDF(Program.CurrentTask, Program.CurrentRole, Program.CurrentOpPeriod, null, false, false);
+            string path = Program.pdfExportService.createPositionLogPDF(Program.CurrentTask, Program.CurrentRole, Program.CurrentOpPeriod, null, false, false);
             try { System.Diagnostics.Process.Start(path); }
             catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
 
@@ -195,7 +201,7 @@ namespace Wildfire_ICS_Assist
 
         private void btnPrintVerbose_Click(object sender, EventArgs e)
         {
-            string path = Program.positionLogService.CreateVerbosePDF(Program.CurrentTask, Program.CurrentRole, Program.CurrentOpPeriod, null, false, false);
+            string path = Program.pdfExportService.CreateVerbosePDF(Program.CurrentTask, Program.CurrentRole, Program.CurrentOpPeriod, null, false, false);
             try { System.Diagnostics.Process.Start(path); }
             catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
 
@@ -295,6 +301,28 @@ namespace Wildfire_ICS_Assist
                 {
                     LgMessageBox.Show("Sorry, there was a problem writing to the file.  Please report this error: " + ex.ToString());
                 }
+            }
+        }
+
+        private void btnAddTestEntries_Click(object sender, EventArgs e)
+        {
+            int toCreate = 25;
+            DateTime startDate = DateTime.Now.Date;
+
+            //do this for a number of test entries
+            for (int x = 0; x < toCreate; x++)
+            {
+
+                PositionLogEntry entry = new PositionLogEntry();
+                entry.DateCreated = startDate.AddMinutes(x);
+                entry.TimeDue = CurrentTask.getOpPeriodEnd(CurrentOpPeriod);
+                entry.ReminderTime = entry.TimeDue;
+                entry.IsInfoOnly = true;
+                entry.Role = Program.CurrentRole;
+                entry.OpPeriod = CurrentOpPeriod;
+                entry.LogText = StringExt.LoremIpsum(3, 10, 1, 2, 1);
+
+                Program.incidentDataService.UpsertPositionLogEntry(entry);// .CurrentTask.UpsertPositionLogEntry(_positionLogAddForm.thisEntry);
             }
         }
     }

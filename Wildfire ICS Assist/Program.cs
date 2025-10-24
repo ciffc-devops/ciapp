@@ -37,7 +37,6 @@ namespace Wildfire_ICS_Assist
             Globals.DateFormat = generalOptionsService.GetStringOptionValue("DateFormat");
             incidentDataService = new IncidentDataService();
             Globals.incidentService = incidentDataService;
-            positionLogService = new PositionLogService();
             networkService = new NetworkService();
             newsService = new NewsService();
 
@@ -76,7 +75,6 @@ namespace Wildfire_ICS_Assist
         private static IPDFExportService _pdfExportService = null;
         private static NewsService _newsService = null;
         private static IIncidentDataService _incidentDataService = null;
-        private static IPositionLogService _positionLogService= null;
         private static Icon _programIcon = Properties.Resources.P_icon;
         private static int _CurrentOpPeriod;
         private static NetworkSendLog _networkSendLog;
@@ -117,7 +115,6 @@ namespace Wildfire_ICS_Assist
         
         public static NetworkSendLog networkSendLog { get => _networkSendLog; set => _networkSendLog = value; }
         */
-        public static IPositionLogService positionLogService { get => _positionLogService; private set => _positionLogService = value; }
         public static Icon programIcon { get => _programIcon; private set => _programIcon = value; }
         public static Incident CurrentTask { get => incidentDataService.CurrentIncident; set { incidentDataService.CurrentIncident = value; } }
         public static ICSRole CurrentRole { get => incidentDataService.CurrentRole; set { incidentDataService.CurrentRole = value; } }
