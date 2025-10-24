@@ -690,7 +690,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
             try
             {
 
-                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-206-WF-Medical-Plan.pdf", FormSet);
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-206 Medical Plan.pdf", FormSet);
 
 
 
@@ -702,13 +702,15 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                 //Op Plan
                 DateTime today = DateTime.Now;
                 //Top Section
-                stamper.AcroFields.SetField("1B INCIDENT NUMBER", task.TaskNumber);
-                stamper.AcroFields.SetField("1A INCIDENT NAME", task.TaskName);
+                stamper.AcroFields.SetField("1 INCIDENT NAMERow1", task.TaskName);
+
+                stamper.AcroFields.SetField("Date", string.Format("{0:" + DateFormat + "}", plan.DatePrepared));
+                stamper.AcroFields.SetField("Time", string.Format("{0:HH:mm}", plan.DatePrepared));
 
 
-                stamper.AcroFields.SetField("1B INCIDENT NUMBERDate From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("2 DATETIME PREPAREDDate From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
                 stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
-                stamper.AcroFields.SetField("1B INCIDENT NUMBERTime From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("2 DATETIME PREPAREDTime From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                 stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
 
@@ -732,7 +734,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                 stamper.AcroFields.SetField("Name_2", plan.ApprovedByResourceName);
                 stamper.AcroFields.SetField("Position_2", plan.ApprovedByRoleName);
 
-                stamper.AcroFields.SetField("6 MEDICAL EMERGENCY PROCEDURESRow1", plan.EmergencyProcedures);
+                stamper.AcroFields.SetField("7 MEDICAL EMERGENCY PROCEDURESRow1", plan.EmergencyProcedures);
 
 
                 for (int aid = 0; aid < plan.ActiveAidStations.Count && aid < 5; aid++)
@@ -754,7 +756,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                 for (int a = 0; a < plan.ActiveAmbulances.Count && a < 5; a++)
                 {
                     AmbulanceService ambulance = plan.ActiveAmbulances[a];
-                    stamper.AcroFields.SetField("Medivac ServicesRow" + (a + 1), ambulance.Organization);
+                    stamper.AcroFields.SetField("Ambulance ServiceRow" + (a + 1), ambulance.Organization);
                     stamper.AcroFields.SetField("LocationRow" + (a + 1) + "_2", ambulance.Location);
                     stamper.AcroFields.SetField("Contact number or frequencyRow" + (a + 1) + "_2", ambulance.Contact);
 
@@ -775,11 +777,11 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                         coord.Latitude = hospital.Latitude;
                         coord.Longitude = hospital.Longitude;
                         GeneralOptionsService service = new GeneralOptionsService();
-                        stamper.AcroFields.SetField("Address Lat And Long if HelipadRow" + (a + 1), coord.CoordinateOutput(service.GetOptionsValue("CoordinateFormat").ToString()));
+                        stamper.AcroFields.SetField("Address Lat Long if HelipadRow" + (a + 1), coord.CoordinateOutput(service.GetOptionsValue("CoordinateFormat").ToString()));
                     }
                     else
                     {
-                        stamper.AcroFields.SetField("Address Lat And Long if HelipadRow" + (a + 1), hospital.location);
+                        stamper.AcroFields.SetField("Address Lat Long if HelipadRow1" + (a + 1), hospital.location);
                     }
                     stamper.AcroFields.SetField("AirRow" + (a + 1), hospital.travelTimeAir.ToString());
                     stamper.AcroFields.SetField("GrndRow" + (a + 1), hospital.travelTimeGround.ToString());
@@ -795,19 +797,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
                 //Rename all fields
-                AcroFields af = stamper.AcroFields;
-
-                List<string> fieldNames = new List<string>();
-                foreach (var field in af.Fields)
-                {
-                    fieldNames.Add(field.Key);
-                }
-                Guid randomID = Guid.NewGuid();
-                foreach (string s in fieldNames)
-                {
-                    stamper.AcroFields.RenameField(s, s + randomID.ToString());
-                }
-
+                stamper.RenameAllFields();
 
                 if (flattenPDF)
                 {
