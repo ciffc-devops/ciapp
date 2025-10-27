@@ -1359,6 +1359,9 @@
     <None Include="BlankForms\AllHazard\ICS-206 Medical Plan.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\AllHazard\ICS-213 General Message.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\AllHazard\ICS-214 Activity Log Supplemental.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

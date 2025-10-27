@@ -254,31 +254,30 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
 
-                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-213-WF-General-Message.pdf", FormSet);
+                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-213 General Message.pdf", FormSet);
 
                     PdfReader rdr = new PdfReader(fileToUse);
 
                     using (FileStream stream = new System.IO.FileStream(results.path, System.IO.FileMode.Create))
                     {
                         PdfStamper stamper = new PdfStamper(rdr, stream);
-                        stamper.AcroFields.SetField("1A INCIDENT NAME Optional", task.TaskName);
-                        stamper.AcroFields.SetField("1B INCIDENT NUMBER", task.TaskNumber);
+                        stamper.AcroFields.SetField("1 INCIDENT NAME Optional", task.TaskName);
+                        stamper.AcroFields.SetField("2 TO Name and Position", item.To);
+                        stamper.AcroFields.SetField("3 FROM Name and Position", item.From);
                         stamper.AcroFields.SetField("4 SUBJECT", item.Subject);
-                        stamper.AcroFields.SetField("7 MESSAGE", item.Message);
                         string date = string.Format("{0:" + DateFormat + "}", item.DateSent);
                         stamper.AcroFields.SetField("5 DATE", string.Format("{0:" + DateFormat + "}", item.DateSent));
                         stamper.AcroFields.SetField("6 TIME", string.Format("{0:HH:mm}", item.DateSent));
-                        stamper.AcroFields.SetField("2 TO Name and Position", item.To);
-                        stamper.AcroFields.SetField("3 FROM Name and Position", item.From);
+                        stamper.AcroFields.SetField("7 MESSAGE", item.Message);
 
                         //approved by
                         if (!string.IsNullOrEmpty(item.ApprovedByRoleName)) { stamper.AcroFields.SetField("Position", item.ApprovedByRoleName); }
                         if (!string.IsNullOrEmpty(item.ApprovedByResourceName)) { stamper.AcroFields.SetField("Name", item.ApprovedByResourceName); }
                         //reply
                         if (!string.IsNullOrEmpty(item.Reply)) { stamper.AcroFields.SetField("9 REPLY", item.Reply); }
-                        if (!string.IsNullOrEmpty(item.ReplyByPosition)) { stamper.AcroFields.SetField("ReplyPosition", item.ReplyByPosition); }
-                        if (!string.IsNullOrEmpty(item.ReplyByName)) { stamper.AcroFields.SetField("ReplyName", item.ReplyByName); }
-                        if (item.ReplyDate > DateTime.MinValue) { stamper.AcroFields.SetField("ReplyDate", string.Format("{0:" + DateFormat + " HH:mm}", item.ReplyDate)); }
+                        if (!string.IsNullOrEmpty(item.ReplyByPosition)) { stamper.AcroFields.SetField("Position_2", item.ReplyByPosition); }
+                        if (!string.IsNullOrEmpty(item.ReplyByName)) { stamper.AcroFields.SetField("Name_2", item.ReplyByName); }
+                        if (item.ReplyDate > DateTime.MinValue) { stamper.AcroFields.SetField("DateTimeSignature", string.Format("{0:" + DateFormat + " HH:mm}", item.ReplyDate)); }
 
 
 
