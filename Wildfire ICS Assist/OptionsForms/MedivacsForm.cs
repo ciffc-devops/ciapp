@@ -30,7 +30,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void buildDataList()
         {
             dgvMedivac.DataSource = null;
-            List<AmbulanceService> items = (List<AmbulanceService>)Program.generalOptionsService.GetOptionsValue("Ambulances");
+            List<AmbulanceService> items = (List<AmbulanceService>)Program.generalOptionsService.GetOptionsValue("AllAmbulanceServices");
             items = items.Where(o => o.Active).OrderBy(o=>o.Organization).ToList();
             dgvMedivac.DataSource = items;
         }

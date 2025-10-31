@@ -48,7 +48,7 @@ namespace Wildfire_ICS_Assist
 
         private void MedicalPlanHospitalEntryForm_Load(object sender, EventArgs e)
         {
-            List<Hospital> hospitals = (List<Hospital>)Program.generalOptionsService.GetOptionsValue("Hospitals");
+            List<Hospital> hospitals = (List<Hospital>)Program.generalOptionsService.GetOptionsValue("AllHospitals");
             hospitals = hospitals.Where(o => o.Active).OrderBy(o => o.name).ToList();
             cboSaved.DataSource = hospitals;
             pnlSavedHospital.Enabled = hospitals.Any();

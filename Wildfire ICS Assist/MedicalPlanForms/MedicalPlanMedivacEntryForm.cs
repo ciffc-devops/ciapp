@@ -53,7 +53,7 @@ namespace Wildfire_ICS_Assist
         private void buildDataList()
         {
             cboSaved.DataSource = null;
-            List<AmbulanceService> items = (List<AmbulanceService>)Program.generalOptionsService.GetOptionsValue("Ambulances");
+            List<AmbulanceService> items = (List<AmbulanceService>)Program.generalOptionsService.GetOptionsValue("AllAmbulanceServices");
             items = items.Where(o => o.Active).OrderBy(o => o.Organization).ToList();
             cboSaved.DataSource = items;
             pnlSavedMedivac.Enabled = items.Count > 0;

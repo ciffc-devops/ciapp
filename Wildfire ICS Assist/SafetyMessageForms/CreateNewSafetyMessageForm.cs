@@ -60,8 +60,14 @@ namespace Wildfire_ICS_Assist.SafetyMessageForms
         private void BuildDataList()
         {
             cboSaved.DataSource = null;
-            List<SafetyMessage> list = (List<SafetyMessage>)Program.generalOptionsService.GetOptionsValue("SafetyMessages");
-            list = list.Where(o => o.Active && !Program.CurrentIncident.allSafetyMessages.Any(m => m.OpPeriod == Program.CurrentOpPeriod && m.SafetyTemplateID == o.SafetyTemplateID && m.Active)).OrderBy(o => o.SummaryLine).ToList();
+            List<SafetyMessage> list = (List<SafetyMessage>)Program.generalOptionsService.GetOptionsValue("safetyMessages");
+            list = list.Where(o => o.Active).ToList();
+            if(Program.CurrentTask.allSafetyMessages.Any(o=>o.Active && o.OpPeriod == Program.CurrentOpPeriod))
+            {
+                list = list.Where(o => !Program.CurrentIncident.allSafetyMessages.Any(m => m.OpPeriod == Program.CurrentOpPeriod && m.SafetyTemplateID == o.SafetyTemplateID && m.Active)).ToList();
+            }
+
+            list = list.OrderBy(o => o.SummaryLine).ToList();
             cboSaved.DataSource = list;
             cboSaved.DropDownWidth = cboSaved.GetDropDownWidth();
 
