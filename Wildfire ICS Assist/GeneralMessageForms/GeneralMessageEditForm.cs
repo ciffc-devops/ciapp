@@ -52,8 +52,8 @@ namespace Wildfire_ICS_Assist
             txtReplyPosition.Text = generalMessage.ReplyByPosition;
             if (generalMessage.DateSent != DateTime.MinValue) { datMessageSent.Value = generalMessage.DateSent; }
             else { datMessageSent.Value = DateTime.Now; }
-            if (generalMessage.ReplyDate != DateTime.MinValue) { datReplyReceived.Value = generalMessage.ReplyDate; }
-            else { datMessageSent.Value = DateTime.Now; }
+            if (generalMessage.ReplyDate != DateTime.MinValue) { datReplyReceived.Value = generalMessage.ReplyDate; datReplyReceived.Checked = true; }
+            else { datMessageSent.Value = DateTime.Now; datReplyReceived.Checked = false; }
             if (generalMessage.FromRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == generalMessage.FromRoleID)) { cboFrom.SelectedValue = generalMessage.FromRoleID; }
 
             prepAndApprovePanel1.SetPreparedBy(generalMessage.PreparedByRoleID, generalMessage.DatePrepared);
@@ -110,19 +110,20 @@ namespace Wildfire_ICS_Assist
         private void txtReply_TextChanged(object sender, EventArgs e)
         {
             generalMessage.Reply = ((SpellBox)sender).Text.Trim(); _ = ValidateNew();
+            datReplyReceived.Checked = !string.IsNullOrEmpty(generalMessage.Reply);
 
         }
 
         private void txtReplyName_TextChanged(object sender, EventArgs e)
         {
             generalMessage.ReplyByName = ((TextBox)sender).Text.Trim(); _ = ValidateNew();
-
+            datReplyReceived.Checked = !string.IsNullOrEmpty(generalMessage.Reply);
         }
 
         private void txtReplyPosition_TextChanged(object sender, EventArgs e)
         {
             generalMessage.ReplyByPosition = ((TextBox)sender).Text.Trim(); _ = ValidateNew();
-
+            datReplyReceived.Checked = !string.IsNullOrEmpty(generalMessage.Reply);
         }
 
         private void datReplyReceived_ValueChanged(object sender, EventArgs e)
@@ -167,7 +168,15 @@ namespace Wildfire_ICS_Assist
             if (ValidateNew())
             {
                 DateTime dat = generalMessage.DatePrepared;
-                
+
+                if (datReplyReceived.Checked)
+                {
+                    generalMessage.ReplyDate = datReplyReceived.Value;
+                }
+                else
+                {
+                    generalMessage.ReplyDate = DateTime.MinValue;
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

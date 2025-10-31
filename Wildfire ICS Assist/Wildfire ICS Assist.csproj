@@ -1353,10 +1353,31 @@
     <None Include="BlankForms\AllHazard\ICS-202 Incident Objectives.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\AllHazard\ICS-203 Organization Assignment List.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-204 Assignment List.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\AllHazard\ICS-205 Communications Plan.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\AllHazard\ICS-206 Medical Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-207 Incident Organization Chart Extension.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-207 Incident Organization Chart.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-208 Safety Message With Image.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-208 Safety Message.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-211 Check In.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\AllHazard\ICS-213 General Message.pdf">
@@ -1366,6 +1387,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\AllHazard\ICS-214 Activity Log.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-220 Air Operations Summary Polygon.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-220 Air Operations Summary.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS-221 Demobilization Checkout.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\Wildfire\Dietary and Allergy Details.pdf">

@@ -261,7 +261,8 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                     using (FileStream stream = new System.IO.FileStream(results.path, System.IO.FileMode.Create))
                     {
                         PdfStamper stamper = new PdfStamper(rdr, stream);
-                        stamper.AcroFields.SetField("1 INCIDENT NAME Optional", task.TaskName);
+                        stamper.AcroFields.SetField("Name", task.TaskName);
+                        stamper.AcroFields.SetField("Number", task.TaskNumber);
                         stamper.AcroFields.SetField("2 TO Name and Position", item.To);
                         stamper.AcroFields.SetField("3 FROM Name and Position", item.From);
                         stamper.AcroFields.SetField("4 SUBJECT", item.Subject);
@@ -272,15 +273,17 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
                         //approved by
                         if (!string.IsNullOrEmpty(item.ApprovedByRoleName)) { stamper.AcroFields.SetField("Position", item.ApprovedByRoleName); }
-                        if (!string.IsNullOrEmpty(item.ApprovedByResourceName)) { stamper.AcroFields.SetField("Name", item.ApprovedByResourceName); }
+                        if (!string.IsNullOrEmpty(item.ApprovedByResourceName)) { stamper.AcroFields.SetField("Name_2", item.ApprovedByResourceName); }
                         //reply
                         if (!string.IsNullOrEmpty(item.Reply)) { stamper.AcroFields.SetField("9 REPLY", item.Reply); }
                         if (!string.IsNullOrEmpty(item.ReplyByPosition)) { stamper.AcroFields.SetField("Position_2", item.ReplyByPosition); }
-                        if (!string.IsNullOrEmpty(item.ReplyByName)) { stamper.AcroFields.SetField("Name_2", item.ReplyByName); }
+                        if (!string.IsNullOrEmpty(item.ReplyByName)) { stamper.AcroFields.SetField("Name_3", item.ReplyByName); }
                         if (item.ReplyDate > DateTime.MinValue) { stamper.AcroFields.SetField("DateTimeSignature", string.Format("{0:" + DateFormat + " HH:mm}", item.ReplyDate)); }
 
-
-
+                        if (item.ReplyDate > DateTime.MinValue)
+                        {
+                            stamper.AcroFields.SetField("DateTimeSignature", string.Format("{0:" + DateFormat + " HH:mm}", item.ReplyDate));
+                        }
 
 
 
@@ -292,16 +295,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
                         //Rename the fields
-                        AcroFields af = stamper.AcroFields;
-                        List<string> fieldNames = new List<string>();
-                        foreach (var field in af.Fields)
-                        {
-                            fieldNames.Add(field.Key);
-                        }
-                        foreach (string s in fieldNames)
-                        {
-                            stamper.AcroFields.RenameField(s, s + item.MessageID.ToString());
-                        }
+                        stamper.RenameAllFields();
 
                         results.TotalPages = 1;
 
@@ -410,10 +404,10 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
 
-                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-208-WF-Safety-Message.pdf", FormSet);
+                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-208 Safety Message.pdf", FormSet);
                     if (!string.IsNullOrEmpty(plan.ImageBytes))
                     {
-                        fileToUse = PDFExtraTools.getPDFFilePath("ICS-208-WF-Safety-Message-with-image.pdf", FormSet);
+                        fileToUse = PDFExtraTools.getPDFFilePath("ICS-208 Safety Message With Image.pdf", FormSet);
                     }
 
                     PdfReader rdr = new PdfReader(fileToUse);
@@ -421,13 +415,17 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                     using (FileStream stream = new System.IO.FileStream(path, System.IO.FileMode.Create))
                     {
                         PdfStamper stamper = new PdfStamper(rdr, stream);
-                        stamper.AcroFields.SetField("1 INCIDENT NAME OR NUMBER 2 OPERATIONAL Date From Date To", task.IncidentIdentifier);
+                        stamper.AcroFields.SetField("IncidentName", task.TaskName);
+                        stamper.AcroFields.SetField("IncidentNumber", task.TaskNumber);
 
-                        stamper.AcroFields.SetField("SafetyMessage", plan.Message);
-                        stamper.AcroFields.SetField("Approved Site Safety Plans Located at I", plan.SitePlanLocation);
+                        stamper.AcroFields.SetField("Safety Message", plan.Message);
+                        stamper.AcroFields.SetField("Approved Site Safety Plans Located at", plan.SitePlanLocation);
 
-                        stamper.AcroFields.SetField("PreparedByPosition", plan.PreparedByRoleName);
-                        stamper.AcroFields.SetField("5 PREPARED BY I Position I Name I", plan.PreparedByResourceName);
+                        stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
+                        stamper.AcroFields.SetField("Name", plan.PreparedByResourceName);
+
+                        stamper.AcroFields.SetField("Date Prepared", plan.DatePrepared.ToString(DateFormat));
+                        stamper.AcroFields.SetField("Time Prepared", plan.DatePrepared.ToString("HH:mm"));
 
 
                         if (plan.SitePlanRequired) { PDFExtraTools.SetPDFCheckbox(stamper, "SitePlanRequiredYes"); }
@@ -437,16 +435,16 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                         stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
                         stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                         stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
-                        stamper.AcroFields.SetField("Text1", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
 
                         if (!string.IsNullOrEmpty(plan.ImageBytes))
                         {
                             iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(plan.ImageBytes.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                            pic.ScaleToFit(530, 220);
+                            pic.ScaleToFit(530, 200);
                             float x = 50; //((250 - pic.ScaledWidth) / 2) + 315;
-                            float y = 100;
+                            float y = 145;
                             pic.SetAbsolutePosition(x, y);
 
                             stamper.GetOverContent(1).AddImage(pic);
@@ -455,18 +453,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
                         //Rename the fields
-                        AcroFields af = stamper.AcroFields;
-                        List<string> fieldNames = new List<string>();
-                        foreach (var field in af.Fields)
-                        {
-                            fieldNames.Add(field.Key);
-                        }
-
-                        foreach (string s in fieldNames)
-                        {
-                            stamper.AcroFields.RenameField(s, s + "-208-" + plan.ID.ToString());
-                        }
-
+                        stamper.RenameAllFields();
 
                         if (flattenPDF)
                         {
@@ -563,7 +550,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
             try
             {
 
-                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-221-WF Demobilization Checkout.pdf", FormSet);
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-221 Demobilization Checkout.pdf", FormSet);
 
 
 
@@ -575,8 +562,10 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                 //Op Plan
                 DateTime today = DateTime.Now;
                 //Top Section
-                stamper.AcroFields.SetField("1 INCIDENT NAMENUMBER", task.IncidentNameOrNumber);
-                stamper.AcroFields.SetField("2 DATETIME", DateTime.Now.ToString(Globals.DateFormat));
+                stamper.AcroFields.SetField("Name", task.TaskName);
+                stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                stamper.AcroFields.SetField("2 DATETIME", DateTime.Now.ToString(Globals.DateFormat + " HH:mm"));
 
 
                 stamper.AcroFields.SetField("4 UNITPERSONNEL RELEASED", Resource.ResourceName);
@@ -589,20 +578,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
 
-                //Rename all fields
-                AcroFields af = stamper.AcroFields;
-
-                List<string> fieldNames = new List<string>();
-                foreach (var field in af.Fields)
-                {
-                    fieldNames.Add(field.Key);
-                }
-                Guid randomID = Guid.NewGuid();
-                foreach (string s in fieldNames)
-                {
-                    stamper.AcroFields.RenameField(s, s + randomID.ToString());
-                }
-
+                stamper.RenameAllFields();
 
                 if (flattenPDF)
                 {
@@ -701,7 +677,8 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                 //Op Plan
                 DateTime today = DateTime.Now;
                 //Top Section
-                stamper.AcroFields.SetField("1 INCIDENT NAMERow1", task.TaskName);
+                stamper.AcroFields.SetField("Name", task.TaskName);
+                stamper.AcroFields.SetField("Number", task.TaskNumber);
 
                 stamper.AcroFields.SetField("Date", string.Format("{0:" + DateFormat + "}", plan.DatePrepared));
                 stamper.AcroFields.SetField("Time", string.Format("{0:HH:mm}", plan.DatePrepared));
@@ -721,7 +698,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                     ICSRole role = currentChart.ActiveRoles.First(o => o.RoleID == plan.PreparedByRoleID);
                     plan.PreparedByResourceName = role.IndividualName;
                 }
-                stamper.AcroFields.SetField("Name", plan.PreparedByResourceName);
+                stamper.AcroFields.SetField("Name_2", plan.PreparedByResourceName);
                 stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
 
                 //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
@@ -730,7 +707,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                     ICSRole role = currentChart.ActiveRoles.First(o => o.RoleID == plan.ApprovedByRoleID);
                     plan.ApprovedByResourceName = role.IndividualName;
                 }
-                stamper.AcroFields.SetField("Name_2", plan.ApprovedByResourceName);
+                stamper.AcroFields.SetField("Name_3", plan.ApprovedByResourceName);
                 stamper.AcroFields.SetField("Position_2", plan.ApprovedByRoleName);
 
                 stamper.AcroFields.SetField("7 MEDICAL EMERGENCY PROCEDURESRow1", plan.EmergencyProcedures);

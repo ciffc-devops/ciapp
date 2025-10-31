@@ -80,8 +80,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(969, 561);
-            this.splitContainer1.SplitterDistance = 491;
+            this.splitContainer1.Size = new System.Drawing.Size(803, 532);
+            this.splitContainer1.SplitterDistance = 462;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -120,8 +120,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.txtReplyName);
             this.splitContainer2.Panel2.Controls.Add(this.label10);
             this.splitContainer2.Panel2.Controls.Add(this.datReplyReceived);
-            this.splitContainer2.Size = new System.Drawing.Size(969, 491);
-            this.splitContainer2.SplitterDistance = 279;
+            this.splitContainer2.Size = new System.Drawing.Size(803, 462);
+            this.splitContainer2.SplitterDistance = 262;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 49;
             // 
@@ -131,7 +131,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtToName.Location = new System.Drawing.Point(205, 3);
             this.txtToName.Name = "txtToName";
-            this.txtToName.Size = new System.Drawing.Size(371, 29);
+            this.txtToName.Size = new System.Drawing.Size(205, 29);
             this.txtToName.TabIndex = 19;
             this.txtToName.TextChanged += new System.EventHandler(this.txtToName_TextChanged);
             // 
@@ -153,7 +153,7 @@
             this.txtMessage.Location = new System.Drawing.Point(205, 181);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(752, 84);
+            this.txtMessage.Size = new System.Drawing.Size(586, 67);
             this.txtMessage.TabIndex = 46;
             this.txtMessage.TextChanged += new System.EventHandler(this.txtMessage_TextChanged);
             this.txtMessage.Child = new System.Windows.Controls.TextBox();
@@ -164,7 +164,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSubject.Location = new System.Drawing.Point(205, 111);
             this.txtSubject.Name = "txtSubject";
-            this.txtSubject.Size = new System.Drawing.Size(752, 29);
+            this.txtSubject.Size = new System.Drawing.Size(586, 29);
             this.txtSubject.TabIndex = 22;
             this.txtSubject.TextChanged += new System.EventHandler(this.txtSubject_TextChanged);
             // 
@@ -176,7 +176,7 @@
             this.cboFrom.FormattingEnabled = true;
             this.cboFrom.Location = new System.Drawing.Point(205, 73);
             this.cboFrom.Name = "cboFrom";
-            this.cboFrom.Size = new System.Drawing.Size(752, 32);
+            this.cboFrom.Size = new System.Drawing.Size(586, 32);
             this.cboFrom.TabIndex = 21;
             this.cboFrom.Leave += new System.EventHandler(this.cboFrom_Leave);
             // 
@@ -186,7 +186,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtToPosition.Location = new System.Drawing.Point(206, 37);
             this.txtToPosition.Name = "txtToPosition";
-            this.txtToPosition.Size = new System.Drawing.Size(370, 29);
+            this.txtToPosition.Size = new System.Drawing.Size(204, 29);
             this.txtToPosition.TabIndex = 20;
             this.txtToPosition.TextChanged += new System.EventHandler(this.txtToPosition_TextChanged);
             // 
@@ -256,7 +256,7 @@
             this.prepAndApprovePanel1.ExpandsRight = false;
             this.prepAndApprovePanel1.ExpandsUpward = false;
             this.prepAndApprovePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prepAndApprovePanel1.Location = new System.Drawing.Point(585, 6);
+            this.prepAndApprovePanel1.Location = new System.Drawing.Point(419, 6);
             this.prepAndApprovePanel1.Margin = new System.Windows.Forms.Padding(6);
             this.prepAndApprovePanel1.Name = "prepAndApprovePanel1";
             this.prepAndApprovePanel1.PreparedByDateTime = new System.DateTime(2024, 10, 31, 9, 52, 19, 867);
@@ -285,7 +285,7 @@
             this.txtReply.Location = new System.Drawing.Point(205, 12);
             this.txtReply.Multiline = true;
             this.txtReply.Name = "txtReply";
-            this.txtReply.Size = new System.Drawing.Size(752, 91);
+            this.txtReply.Size = new System.Drawing.Size(586, 74);
             this.txtReply.TabIndex = 47;
             this.txtReply.TextChanged += new System.EventHandler(this.txtReply_TextChanged);
             this.txtReply.Child = new System.Windows.Controls.TextBox();
@@ -293,7 +293,7 @@
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label9.Location = new System.Drawing.Point(-11, 145);
+            this.label9.Location = new System.Drawing.Point(-11, 128);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(210, 29);
             this.label9.TabIndex = 43;
@@ -303,7 +303,7 @@
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label11.Location = new System.Drawing.Point(6, 179);
+            this.label11.Location = new System.Drawing.Point(6, 162);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(193, 29);
             this.label11.TabIndex = 44;
@@ -313,7 +313,7 @@
             // txtReplyPosition
             // 
             this.txtReplyPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtReplyPosition.Location = new System.Drawing.Point(206, 144);
+            this.txtReplyPosition.Location = new System.Drawing.Point(206, 127);
             this.txtReplyPosition.Name = "txtReplyPosition";
             this.txtReplyPosition.Size = new System.Drawing.Size(403, 29);
             this.txtReplyPosition.TabIndex = 28;
@@ -322,7 +322,7 @@
             // txtReplyName
             // 
             this.txtReplyName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtReplyName.Location = new System.Drawing.Point(206, 109);
+            this.txtReplyName.Location = new System.Drawing.Point(206, 92);
             this.txtReplyName.Name = "txtReplyName";
             this.txtReplyName.Size = new System.Drawing.Size(403, 29);
             this.txtReplyName.TabIndex = 27;
@@ -331,7 +331,7 @@
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.Location = new System.Drawing.Point(6, 109);
+            this.label10.Location = new System.Drawing.Point(6, 92);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(193, 29);
             this.label10.TabIndex = 42;
@@ -341,11 +341,13 @@
             // datReplyReceived
             // 
             this.datReplyReceived.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.datReplyReceived.Checked = false;
             this.datReplyReceived.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datReplyReceived.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datReplyReceived.Location = new System.Drawing.Point(206, 179);
+            this.datReplyReceived.Location = new System.Drawing.Point(206, 162);
             this.datReplyReceived.Name = "datReplyReceived";
-            this.datReplyReceived.Size = new System.Drawing.Size(213, 29);
+            this.datReplyReceived.ShowCheckBox = true;
+            this.datReplyReceived.Size = new System.Drawing.Size(403, 29);
             this.datReplyReceived.TabIndex = 29;
             this.datReplyReceived.ValueChanged += new System.EventHandler(this.datReplyReceived_ValueChanged);
             // 
@@ -368,7 +370,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
-            this.btnSave.Location = new System.Drawing.Point(832, 6);
+            this.btnSave.Location = new System.Drawing.Point(666, 6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 51);
             this.btnSave.TabIndex = 18;
@@ -383,7 +385,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 561);
+            this.ClientSize = new System.Drawing.Size(803, 532);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(819, 571);
             this.Name = "GeneralMessageEditForm";
