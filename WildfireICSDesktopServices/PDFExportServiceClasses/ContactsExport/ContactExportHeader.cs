@@ -6,6 +6,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses.ContactsExport
     public class ContactExportHeader
     {
         private string _IncidentName;
+        private string _IncidentNumber;
         private string _BasicLocalCommsInformation;
         private DateTime _StartDate;
         private DateTime _EndDate;
@@ -20,6 +21,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses.ContactsExport
         public string PreparedByRoleName { get => _PreparedByRoleName; set => _PreparedByRoleName = value; }
         public string PreparedByIndividualName { get => _PreparedByIndividualName; set => _PreparedByIndividualName = value; }
         public DateTime PreparedDate { get => _PreparedDate; set => _PreparedDate = value; }
+        public string IncidentNumber { get => _IncidentNumber; set => _IncidentNumber = value; }
 
         public ContactExportHeader() { }
         public ContactExportHeader(OrganizationChart chart)

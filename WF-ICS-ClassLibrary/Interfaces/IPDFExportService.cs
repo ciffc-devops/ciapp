@@ -8,7 +8,6 @@ namespace WildfireICSDesktopServices
     public interface IPDFExportService
     {
         void SetDateFormat(string str);
-        string createBlankSignInPDF(Incident task, List<GroupSignInPrintRequest> groups, int opsPeriod, bool tempFileName = false, bool flattenPDF = false);
         string createBriefingPDF(Incident task, Briefing briefing, bool automaticallyOpen = true, bool tempFileName = false);
         string createCommsPlanPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportCommsPlanToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
@@ -21,24 +20,12 @@ namespace WildfireICSDesktopServices
         List<byte[]> exportOrgChartContactsToPDF(Incident task, int OpPeriodToExport, bool FlattenPDF = false);
         string createOrgChartPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportOrgChartToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
-        string createRadioLogPDF(Incident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false);
         string createSafetyMessagePDF(Incident task, SafetyMessage plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
-        string createSignInPDF(Incident task, int opsPeriod, bool tempFileName = false, bool flattenPDF = false);
-        List<byte[]> createSinglePageBlankSignInSheetAsBytes(Incident task, GroupSignInPrintRequest group, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false);
-        List<byte[]> createSinglePageSignInSheetAsBytes(Incident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false);
-        string createTimelinePDF(Incident task, bool IncludeSAR, bool IncludeSubject, bool automaticallyOpen = true, bool tempFileName = false);
-        List<byte[]> exportBriefingToBytes(int OpPeriodToExport, Incident task);
-        string exportBriefingToPDF(Briefing briefing, Incident task, bool includeExecution, bool includeMapQRImage = false);
         List<byte[]> exportNotesToPDF(Incident task, int CurrentOpPeriod);
-        List<byte[]> exportRadioLogToPDF(Incident task, int OpPeriodToExport, bool flattenPDF = false);
         List<byte[]> exportSafetyMessagesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
         List<byte[]> exportSafetyMessagesToPDF(Incident task, List<SafetyMessage> messagesToPrint, bool flattenPDF);
         string createVehiclePDF(Incident task, int OpPeriod, string PreparedByName, string PreparedByRoleName, bool useTempPath, bool flattenPDF);
         List<byte[]> exportVehiclesToPDF(Incident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName, bool flattenPDF);
-        string exportSinglePageSignInSheetAsPDF(Incident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod);
-        List<byte[]> exportTimelineToPDF(Incident task);
-        List<byte[]> getBlankSignInSheetPDFs(Incident task, List<GroupSignInPrintRequest> groups, int OpsPeriod, bool flattenPDF);
-        List<byte[]> getSignInSheetPDFs(Incident task, int OpsPeriod, bool flattenPDF);
         PDFCreationResults ExportGeneralMessagesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
         PDFCreationResults ExportGeneralMessagesToPDF(Incident task, List<GeneralMessage> items, bool flattenPDF);
         PDFCreationResults CreateGeneralMessagePDF(Incident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false);

@@ -866,8 +866,10 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                 //Op Plan
                 DateTime today = DateTime.Now;
                 //Top Section
-                stamper.AcroFields.SetField("1 INCIDENT NAMERow1", task.IncidentIdentifier);
-                stamper.AcroFields.SetField("2 DATETIME PREPAREDRow1", plan.DatePrepared.ToString(Globals.DateFormat) + " " + plan.DatePrepared.ToString("HH:"));
+                stamper.AcroFields.SetField("Name", task.TaskName);
+                stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                stamper.AcroFields.SetField("2 DATETIME PREPARED", plan.DatePrepared.ToString(Globals.DateFormat) + " " + plan.DatePrepared.ToString("HH:"));
 
                 stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
                 stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
@@ -875,7 +877,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                 stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
 
-                stamper.AcroFields.SetField("Name", plan.PreparedByResourceName);
+                stamper.AcroFields.SetField("Name_2", plan.PreparedByResourceName);
                 stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
 
                 for (int row = 0; row < plan.ActiveCommsItems.Count && row < 26; row++)
@@ -981,9 +983,10 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                     OrganizationChart currentChart = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
 
                     //Top Section
-                    stamper.AcroFields.SetField("1 INCIDENT NAME", task.TaskName);
-                    
-                    
+                    stamper.AcroFields.SetField("Name", task.TaskName);
+                    stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+
                     if (currentOp != null)
                     {
                         stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
@@ -1013,13 +1016,13 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                         ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefGenericID, true);
                         if (Guid.Empty != currentSheet.PreparedByRoleID)
                         {
-                            stamper.AcroFields.SetField("Name", currentSheet.PreparedByResourceName);
+                            stamper.AcroFields.SetField("Name_2", currentSheet.PreparedByResourceName);
                             stamper.AcroFields.SetField("PositionTitle", currentSheet.PreparedByRoleName);
                         }
 
                         if (Guid.Empty != currentSheet.ApprovedByRoleID)
                         {
-                            stamper.AcroFields.SetField("Name_2", currentSheet.ApprovedByResourceName);
+                            stamper.AcroFields.SetField("Name_3", currentSheet.ApprovedByResourceName);
                             stamper.AcroFields.SetField("Date", currentSheet.DateApproved.ToString(DateFormat));
                         }
                     }
@@ -1591,7 +1594,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
-            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-211-WF Check In.pdf", FormSet);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-211 Check In.pdf", FormSet);
             //fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
             try
             {
@@ -1676,19 +1679,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
                     //Rename all fields
-                    AcroFields af = stamper.AcroFields;
-
-                    List<string> fieldNames = new List<string>();
-                    foreach (var field in af.Fields)
-                    {
-                        fieldNames.Add(field.Key);
-                    }
-                    Guid randomID = Guid.NewGuid();
-                    foreach (string s in fieldNames)
-                    {
-                        stamper.AcroFields.RenameField(s, s + randomID.ToString());
-                    }
-
+                    stamper.RenameAllFields();
 
                     if (flattenPDF)
                     {
@@ -1723,636 +1714,6 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
         #endregion
 
-
-        #region Sign In Sheets (SAR)
-        public string exportSinglePageSignInSheetAsPDF(Incident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod)
-        {
-            string path = System.IO.Path.GetTempFileName();
-
-            string fileToUse = "ICSForms/ICS 211 - Check In List.pdf";
-            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse, FormSet);
-            //string outputFileName = "ICS 215 - Task #" + CurrentTask.TaskNumber + " - Operations Plan.pdf";
-            //path = System.IO.Path.Combine(path, outputFileName);
-
-            PdfReader rdr = new PdfReader(fileToUse);
-            PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
-
-
-            //Op Plan
-
-            //Top Section
-            stamper.AcroFields.SetField("TASK", task.TaskNumber);
-            stamper.AcroFields.SetField("TASK NAME", task.TaskName);
-
-            stamper.AcroFields.SetField("FOR OP PERIOD", OpsPeriod.ToString());
-            if (statuses.Count > 0)
-            {
-                stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:" + DateFormat + " HH:mm}", statuses.OrderBy(o => o.SignInTime).First().SignInTime));
-                if (statuses.Any(o => o.SignOutTime < DateTime.MaxValue))
-                {
-                    stamper.AcroFields.SetField("PeriodTo", string.Format("{0:" + DateFormat + " HH:mm}", statuses.Where(o => o.SignOutTime < DateTime.MaxValue).OrderByDescending(o => o.SignOutTime).First().SignOutTime));
-                }
-                stamper.AcroFields.SetField("GROUP NAME", statuses[0].OrganizationName);
-            }
-
-
-
-            stamper.AcroFields.SetField("PAGE", pageNumber.ToString());
-
-            double totalHours = 0;
-            decimal totalKMs = 0;
-
-            for (int x = 0; x < statuses.Count; x++)
-            {
-                MemberStatus status = statuses[x];
-                Personnel member = new Personnel();
-                if (status.MemberID != Guid.Empty && task.IncidentPersonnel.Any(o => o.PersonID == status.MemberID)) { member = task.IncidentPersonnel.First(o => o.PersonID == status.MemberID); }
-
-                stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
-
-
-
-                string timein = string.Format("{0:HH:mm}", status.SignInTime);
-                stamper.AcroFields.SetField("TimeIn" + (x + 1).ToString(), timein);
-                if (statuses[x].SignOutTime < DateTime.MaxValue)
-                {
-                    stamper.AcroFields.SetField("TimeOut" + (x + 1).ToString(), string.Format("{0:HH:mm}", status.SignOutTime));
-                }
-                else
-                {
-                    stamper.AcroFields.SetField("TimeOut" + (x + 1).ToString(), "");
-                }
-                if (status.SignInTime > DateTime.MinValue && status.SignOutTime < DateTime.MaxValue)
-                {
-                    TimeSpan ts = status.SignOutTime - status.SignInTime;
-                    totalHours += ts.TotalHours;
-                    stamper.AcroFields.SetField("Hours" + (x + 1).ToString(), string.Format("{0:#,##0.0}", ts.TotalHours));
-                }
-                if (status.KMs > 0)
-                {
-                    stamper.AcroFields.SetField("KM" + (x + 1).ToString(), string.Format("{0:#,##0.0}", status.KMs));
-                    totalKMs += status.KMs;
-                }
-
-            }
-            stamper.AcroFields.SetField("OF", totalPages.ToString());
-            stamper.AcroFields.SetField("HoursTotal", string.Format("{0:#,##0.0}", totalHours));
-            stamper.AcroFields.SetField("KMTotal", string.Format("{0:#,##0.0}", totalKMs));
-            Guid page = Guid.NewGuid();
-            /* Rename all the fields in case there is more than 1 page */
-            stamper.AcroFields.RenameField("TASK", "211TASK" + page.ToString());
-            stamper.AcroFields.RenameField("TASK NAME", "211TASK NAME" + page.ToString());
-            stamper.AcroFields.RenameField("GROUP NAME", "211GROUP NAME" + page.ToString());
-            stamper.AcroFields.RenameField("PeriodTo", "211PeriodTo" + page.ToString());
-            stamper.AcroFields.RenameField("PeriodFrom", "211PeriodFrom" + page.ToString());
-            stamper.AcroFields.RenameField("PAGE", "211PageNumber" + page.ToString());
-            stamper.AcroFields.RenameField("OF", "211PageCount" + page.ToString());
-            stamper.AcroFields.RenameField("CHECKIN LOCATION", "211CHECKIN LOCATION" + page.ToString());
-            stamper.AcroFields.RenameField("FOR OP PERIOD", "211FOR OP PERIOD" + page.ToString());
-            stamper.AcroFields.RenameField("KMTotal", "211KMTotal" + page.ToString());
-            for (int x = 1; x < 7; x++)
-            {
-                stamper.AcroFields.RenameField("Name" + x.ToString(), "211Name" + x.ToString() + "-" + page.ToString());
-                stamper.AcroFields.RenameField("TimeIn" + x.ToString(), "211TimeIn" + x.ToString() + "-" + page.ToString());
-                stamper.AcroFields.RenameField("TimeOut" + x.ToString(), "211TimeOut" + x.ToString() + "-" + page.ToString());
-            }
-
-
-            stamper.Close();//Close a PDFStamper Object
-            rdr.Close();    //Close a PDFReader Object
-
-            return path;
-        }
-
-        public List<byte[]> createSinglePageSignInSheetAsBytes(Incident task, List<MemberStatus> statuses, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
-        {
-            string path = System.IO.Path.GetTempFileName();
-
-            string fileToUse = "ICSForms/ICS 211 - Check In List.pdf";
-            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse, FormSet);
-            //string outputFileName = "ICS 215 - Task #" + CurrentTask.TaskNumber + " - Operations Plan.pdf";
-            //path = System.IO.Path.Combine(path, outputFileName);
-
-            using (PdfReader rdr = new PdfReader(fileToUse))
-            {
-                using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
-                {
-
-
-                    //Op Plan
-
-                    //Top Section
-                    stamper.AcroFields.SetField("TASK", task.TaskNumber);
-                    stamper.AcroFields.SetField("TASK NAME", task.TaskName);
-
-                    stamper.AcroFields.SetField("FOR OP PERIOD", OpsPeriod.ToString());
-                    if (statuses.Count > 0)
-                    {
-                        stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:" + DateFormat + " HH:mm}", statuses.OrderBy(o => o.SignInTime).First().SignInTime));
-                        if (statuses.Any(o => o.SignOutTime < DateTime.MaxValue))
-                        {
-                            stamper.AcroFields.SetField("PeriodTo", string.Format("{0:" + DateFormat + " HH:mm}", statuses.Where(o => o.SignOutTime < DateTime.MaxValue).OrderByDescending(o => o.SignOutTime).First().SignOutTime));
-                        }
-                        stamper.AcroFields.SetField("GROUP NAME", statuses[0].OrganizationName);
-                    }
-
-
-
-                    stamper.AcroFields.SetField("PAGE", pageNumber.ToString());
-
-                    double totalHours = 0;
-                    decimal totalKMs = 0;
-                    GeneralOptions options = new GeneralOptionsService().GetGeneralOptions();
-
-                    for (int x = 0; x < statuses.Count; x++)
-                    {
-                        MemberStatus status = statuses[x];
-                        Personnel member = new Personnel();
-                        if (status.MemberID != Guid.Empty && task.IncidentPersonnel.Where(o => o.PersonID == status.MemberID).Any()) { member = task.IncidentPersonnel.Where(o => o.PersonID == status.MemberID).First(); }
-
-                        stamper.AcroFields.SetField("Name" + (x + 1).ToString(), status.MemberName);
-
-
-
-                        string timein = string.Format("{0:HH:mm}", status.SignInTime);
-                        stamper.AcroFields.SetField("TimeIn" + (x + 1).ToString(), timein);
-                        if (statuses[x].SignOutTime < DateTime.MaxValue)
-                        {
-                            stamper.AcroFields.SetField("TimeOut" + (x + 1).ToString(), string.Format("{0:HH:mm}", status.SignOutTime));
-                        }
-                        else
-                        {
-                            stamper.AcroFields.SetField("TimeOut" + (x + 1).ToString(), "");
-                        }
-                        if (status.SignInTime > DateTime.MinValue && status.SignOutTime < DateTime.MaxValue)
-                        {
-                            TimeSpan ts = status.SignOutTime - status.SignInTime;
-                            totalHours += ts.TotalHours;
-                            stamper.AcroFields.SetField("Hours" + (x + 1).ToString(), string.Format("{0:#,##0.0}", ts.TotalHours));
-                        }
-                        if (status.KMs > 0)
-                        {
-                            stamper.AcroFields.SetField("KM" + (x + 1).ToString(), string.Format("{0:#,##0.0}", status.KMs));
-                            totalKMs += status.KMs;
-                        }
-
-                    }
-                    stamper.AcroFields.SetField("OF", totalPages.ToString());
-                    stamper.AcroFields.SetField("HoursTotal", string.Format("{0:#,##0.0}", totalHours));
-                    stamper.AcroFields.SetField("KMTotal", string.Format("{0:#,##0.0}", totalKMs));
-                    Guid page = Guid.NewGuid();
-
-
-                    /* Rename all the fields in case there is more than 1 page */
-                    AcroFields af = stamper.AcroFields;
-
-                    List<string> fieldNames = new List<string>();
-                    foreach (var field in af.Fields)
-                    {
-                        fieldNames.Add(field.Key);
-                    }
-                    foreach (string s in fieldNames)
-                    {
-                        stamper.AcroFields.RenameField(s, s + "-" + page.ToString());
-                    }
-
-                    if (flattenPDF)
-                    {
-                        stamper.FormFlattening = true;
-                    }
-                }
-            }
-
-            List<byte[]> allPDFs = new List<byte[]>();
-
-
-            using (FileStream stream = File.OpenRead(path))
-            {
-                byte[] fileBytes = new byte[stream.Length];
-
-                stream.Read(fileBytes, 0, fileBytes.Length);
-                stream.Close();
-                allPDFs.Add(fileBytes);
-            }
-
-            return allPDFs;
-        }
-
-
-        public List<byte[]> createSinglePageBlankSignInSheetAsBytes(Incident task, GroupSignInPrintRequest group, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
-        {
-            string path = System.IO.Path.GetTempFileName();
-
-            string fileToUse = "ICSForms/ICS 211 - Check In List.pdf";
-            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse, FormSet);
-            //string outputFileName = "ICS 215 - Task #" + task.TaskNumber + " - Operations Plan.pdf";
-            //path = System.IO.Path.Combine(path, outputFileName);
-
-            using (PdfReader rdr = new PdfReader(fileToUse))
-            {
-                using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
-                {
-
-
-                    //Op Plan
-
-                    //Top Section
-                    stamper.AcroFields.SetField("TASK", task.TaskNumber);
-                    stamper.AcroFields.SetField("TASK NAME", task.TaskName);
-
-                    stamper.AcroFields.SetField("FOR OP PERIOD", OpsPeriod.ToString());
-                    stamper.AcroFields.SetField("GROUP NAME", group.OrganizationName);
-
-
-
-
-                    stamper.AcroFields.SetField("PAGE", pageNumber.ToString());
-                    stamper.AcroFields.SetField("OF", totalPages.ToString());
-
-                    Guid page = Guid.NewGuid();
-
-
-                    /* Rename all the fields in case there is more than 1 page */
-                    AcroFields af = stamper.AcroFields;
-
-                    List<string> fieldNames = new List<string>();
-                    foreach (var field in af.Fields)
-                    {
-                        fieldNames.Add(field.Key);
-                    }
-                    foreach (string s in fieldNames)
-                    {
-                        stamper.AcroFields.RenameField(s, s + "-" + page.ToString());
-                    }
-
-                    if (flattenPDF)
-                    {
-                        stamper.FormFlattening = true;
-                    }
-                }
-            }
-
-            List<byte[]> allPDFs = new List<byte[]>();
-
-
-            using (FileStream stream = File.OpenRead(path))
-            {
-                byte[] fileBytes = new byte[stream.Length];
-
-                stream.Read(fileBytes, 0, fileBytes.Length);
-                stream.Close();
-                allPDFs.Add(fileBytes);
-            }
-
-            return allPDFs;
-        }
-
-
-        public List<byte[]> getSignInSheetPDFs(Incident task, int OpsPeriod, bool flattenPDF)
-        {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-            List<MemberStatus> Statuses = task.getAllMemberStatus(OpsPeriod, DateTime.MinValue, true);
-            List<GroupSignInRecords> groupSignInRecords = new List<GroupSignInRecords>();
-            foreach (MemberStatus status in Statuses)
-            {
-                if (!groupSignInRecords.Where(o => o.GroupName == status.OrganizationName).Any())
-                {
-                    groupSignInRecords.Add(new GroupSignInRecords(status.OrganizationName));
-                }
-                groupSignInRecords.Where(o => o.GroupName == status.OrganizationName).First().MemberStatuses.Add(status);
-            }
-
-
-            for (int gr = 0; gr < groupSignInRecords.Count; gr++)
-            {
-                for (int x = 1; x <= groupSignInRecords[gr].totalPages; x++)
-                {
-                    List<MemberStatus> nextStatuses = groupSignInRecords[gr].MemberStatuses.Skip(6 * (x - 1)).Take(6).ToList();
-
-                    allPDFs.AddRange(createSinglePageSignInSheetAsBytes(task, nextStatuses, x, groupSignInRecords[gr].totalPages, OpsPeriod, flattenPDF));
-                }
-            }
-
-            return allPDFs;
-        }
-
-        public List<byte[]> getBlankSignInSheetPDFs(Incident task, List<GroupSignInPrintRequest> groups, int OpsPeriod, bool flattenPDF)
-        {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-
-
-            for (int gr = 0; gr < groups.Count; gr++)
-            {
-                for (int x = 1; x <= groups[gr].PrintCount; x++)
-                {
-                    allPDFs.AddRange(createSinglePageBlankSignInSheetAsBytes(task, groups[gr], x, groups[gr].PrintCount, OpsPeriod, flattenPDF));
-                }
-            }
-
-            return allPDFs;
-        }
-
-
-
-        public string createSignInPDF(Incident task, int opsPeriod, bool tempFileName = false, bool flattenPDF = false)
-        {
-            string path = FileAccessClasses.getWritablePath(task);
-
-            if (!tempFileName)
-            {
-
-
-                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-
-
-            }
-            else
-            {
-                path = System.IO.Path.GetTempPath();
-            }
-            try
-            {
-                //List<Assignment> OpAssignments = CurrentTask.allAssignments.Where(o => o.OpPeriod == CurrentOpPeriod).OrderBy(o => o.AssignmentNumber).ToList();
-                List<byte[]> allPDFs = getSignInSheetPDFs(task, opsPeriod, flattenPDF);
-
-
-                string outputFileName = "ICS 211 - Task " + task.TaskNumber + " - Sign In Sheets " + opsPeriod.ToString();
-                outputFileName = outputFileName.ReplaceInvalidPathChars();
-
-                //path = System.IO.Path.Combine(path, outputFileName);
-                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
-
-                /*
-                bool successful = MergePDFs(pdfFileNames, path);
-                */
-
-                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-                try
-                {
-                    File.WriteAllBytes(path, fullFile);
-                    //if (automaticallyOpen) { System.Diagnostics.Process.Start(path); }
-
-                }
-                catch (Exception)
-                {
-                    //LgMessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.");
-                }
-
-
-                //LgMessageBox.Show("PDF Generated Successfully....!!!");
-
-
-            }
-            catch (IOException ex)
-            {
-                //LgMessageBox.Show("It appears a previous version of the PDF is still open.  Please close it before trying to generate a new copy.\r\n\r\nDetailed error message:" + ex.ToString());
-            }
-            catch (System.UnauthorizedAccessException ex)
-            {
-                /*
-                LgMessageBox.Show("A program on your system, typically a virus scanner, is prevening files from being saved to " + path + ". Please select a different folder to save to.");
-                saveAsPromptShown = true;
-                DialogResult dr = fbdSaveLocation.ShowDialog();
-                saveAsPromptShown = false;
-                if (dr == DialogResult.OK)
-                {
-                    path = fbdSaveLocation.SelectedPath;
-                    if (FileAccessClasses.checkWriteAccess(path))
-                    {
-                        //LgMessageBox.Show("Thank you, you have selected " + path + " please try to save again.");
-                        CurrentTask.DocumentPath = path;
-                        createSignInPDF(opsPeriod, automaticallyOpen);
-                    }
-                }*/
-            }
-            return path;
-        }
-
-        public string createBlankSignInPDF(Incident task, List<GroupSignInPrintRequest> groups, int opsPeriod, bool tempFileName = false, bool flattenPDF = false)
-        {
-            string path = FileAccessClasses.getWritablePath(task);
-
-            if (!tempFileName)
-            {
-
-
-                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-
-
-            }
-            else
-            {
-                path = System.IO.Path.GetTempPath();
-            }
-            try
-            {
-                //List<Assignment> OpAssignments = CurrentTask.allAssignments.Where(o => o.OpPeriod == CurrentOpPeriod).OrderBy(o => o.AssignmentNumber).ToList();
-                List<byte[]> allPDFs = getBlankSignInSheetPDFs(task, groups, opsPeriod, flattenPDF);
-
-
-                string outputFileName = "ICS 211 - Task " + task.TaskNumber + " - Blank Sign In Sheets " + opsPeriod.ToString();
-                outputFileName = outputFileName.ReplaceInvalidPathChars();
-
-                //path = System.IO.Path.Combine(path, outputFileName);
-                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
-
-                /*
-                bool successful = MergePDFs(pdfFileNames, path);
-                */
-
-                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-                try
-                {
-                    File.WriteAllBytes(path, fullFile);
-                    //if (automaticallyOpen) { System.Diagnostics.Process.Start(path); }
-
-                }
-                catch (Exception)
-                {
-                    //LgMessageBox.Show("There was an error trying to save " + path + " please verify the path is accessible.");
-                }
-
-
-                //LgMessageBox.Show("PDF Generated Successfully....!!!");
-
-
-            }
-            catch (IOException ex)
-            {
-                // LgMessageBox.Show("It appears a previous version of the PDF is still open.  Please close it before trying to generate a new copy.\r\n\r\nDetailed error message:" + ex.ToString());
-            }
-            catch (System.UnauthorizedAccessException ex)
-            {
-                /*
-                LgMessageBox.Show("A program on your system, typically a virus scanner, is prevening files from being saved to " + path + ". Please select a different folder to save to.");
-                saveAsPromptShown = true;
-                DialogResult dr = fbdSaveLocation.ShowDialog();
-                saveAsPromptShown = false;
-                if (dr == DialogResult.OK)
-                {
-                    path = fbdSaveLocation.SelectedPath;
-                    if (FileAccessClasses.checkWriteAccess(path))
-                    {
-                        //LgMessageBox.Show("Thank you, you have selected " + path + " please try to save again.");
-                        CurrentTask.DocumentPath = path;
-                        createSignInPDF(opsPeriod, automaticallyOpen);
-                    }
-                }*/
-            }
-            return path;
-        }
-
-        #endregion
-
-        #region Timeline
-
-        public List<byte[]> exportTimelineToPDF(Incident task)
-        {
-            List<byte[]> allPDFs = new List<byte[]>();
-            string path = createTimelinePDF(task, true, true, false, true);
-            using (FileStream stream = File.OpenRead(path))
-            {
-                byte[] fileBytes = new byte[stream.Length];
-
-                stream.Read(fileBytes, 0, fileBytes.Length);
-                stream.Close();
-                allPDFs.Add(fileBytes);
-            }
-            return allPDFs;
-        }
-        public string createTimelinePDF(Incident task, bool IncludeSAR, bool IncludeSubject, bool automaticallyOpen = true, bool tempFileName = false)
-        {
-            string path = null;
-            if (task != null && task.taskTimeline != null)
-            {
-                path = FileAccessClasses.getWritablePath(task);
-                if (!tempFileName)
-                {
-
-
-
-                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-                    string outputFileName = "Task " + task.TaskNumber + " Timeline";
-                    outputFileName = outputFileName.ReplaceInvalidPathChars();
-
-                    path = FileAccessClasses.getUniqueFileName(outputFileName, path);
-                    //path = System.IO.Path.Combine(path, outputFileName);
-
-                }
-                else
-                {
-                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
-
-                }
-                try
-                {
-
-                    using (System.IO.FileStream fs = new FileStream(path, FileMode.Create))
-                    {
-
-
-                        // Create an instance of the document class which represents the PDF document itself.
-                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
-
-                        // Create an instance to the PDF file by creating an instance of the PDF 
-                        // Writer class using the document and the filestrem in the constructor.
-
-                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
-
-
-
-                        TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
-                        writer.PageEvent = PageEventHandler;
-                        // Define the page header
-                        PageEventHandler.Title = "";
-                        //PageEventHandler.Title = "Task Number " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName + " Op Period " + selectedBriefing.OpPeriod.ToString();
-                        PageEventHandler.HeaderFont = FontFactory.GetFont(BaseFont.COURIER_BOLD, 10, iTextSharp.text.Font.BOLD);
-
-
-                        document.AddTitle("Task Number " + task.TaskNumber + " - " + task.TaskName + " Timeline");
-
-                        // Open the document to enable you to write to the document
-
-                        document.Open();
-                        BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
-                        iTextSharp.text.Font titlefont = new iTextSharp.text.Font(bfTimes, 22, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font sectionfont = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font subsectionfont = new iTextSharp.text.Font(bfTimes, 18, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
-                        iTextSharp.text.Font normalfont = new iTextSharp.text.Font(bfTimes, 14, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
-
-                        // Add a simple and wellknown phrase to the document in a flow layout manner
-                        //Chapter chapter1 = new Chapter(new Paragraph("Briefing"), FormSet);
-                        string title = "Timeline for Task Number " + task.TaskNumber;
-                        if (IncludeSAR && !IncludeSubject)
-                        {
-                            title = "Timeline for Task Number " + task.TaskNumber + " SAR Events Only";
-                        }
-                        else if (IncludeSubject && !IncludeSAR)
-                        {
-                            title = "Timeline for Task Number " + task.TaskNumber + " Subject Events Only";
-                        }
-
-
-                        Anchor briefingTarget = new Anchor(title, titlefont);
-                        briefingTarget.Name = "Timeline";
-                        Paragraph tp = new Paragraph();
-                        tp.Add(briefingTarget);
-                        tp.Font = titlefont;
-
-
-                        document.Add(tp);
-
-                        List<TimelineEvent> eventsIncluded = task.taskTimeline.AllTimelineEvents.Where(o => (IncludeSAR && o.SAREvent) || (IncludeSubject && o.SubjectEvent)).ToList();
-                        DateTime earliestDate = eventsIncluded.Min(o => o.EventDateTime);
-                        DateTime latestDate = eventsIncluded.Max(o => o.EventDateTime);
-                        TimeSpan timespan = latestDate - earliestDate;
-                        double totalDays = timespan.TotalDays;
-                        totalDays = Math.Ceiling(totalDays);
-                        for (int x = 0; x <= totalDays; x++)
-                        {
-                            DateTime date = earliestDate.AddDays(x);
-
-                            if (eventsIncluded.Any(o => o.EventDateTime.Year == date.Year && o.EventDateTime.Month == date.Month && o.EventDateTime.Day == date.Day))
-                            {
-                                document.Add(new Paragraph(date.ToString(DateFormat, Globals.cultureInfo), subsectionfont));
-
-                                foreach (TimelineEvent ev in eventsIncluded.Where(o => o.EventDateTime.Year == date.Year && o.EventDateTime.Month == date.Month && o.EventDateTime.Day == date.Day))
-                                {
-                                    Paragraph p1 = new Paragraph(ev.EventDateTime.ToString("HH:mm", Globals.cultureInfo) + " -- " + ev.EventName + " - " + ev.EventText, normalfont);
-                                    p1.IndentationLeft = 10;
-                                    document.Add(p1);
-                                }
-                            }
-                            else if (x < totalDays)
-                            {
-                                document.Add(new Paragraph(date.ToString(DateFormat, Globals.cultureInfo), subsectionfont));
-                                Paragraph p1 = new Paragraph("No events for this day", normalfont);
-                                p1.IndentationLeft = 10;
-                                document.Add(p1);
-                            }
-                        }
-
-
-
-                        // Close the document
-                        document.Close();
-                        // Close the writer instance
-                        writer.Close();
-
-                        // Always close open filehandles explicity
-
-                    }
-
-                }
-                catch (Exception)
-                {
-                }
-            }
-            return path;
-        }
-        #endregion
 
         #region Title Page
 
@@ -2908,192 +2269,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
         #endregion
 
-        #region Radio Log (SAR)
-        private int getRadioLogPageCount(Incident task, int OpPeriodToExport)
-        {
-            List<CommsLogEntry> entries = task.allCommsLogEntries.Where(o => o.OpPeriod == OpPeriodToExport).OrderBy(o => o.LogDate).ToList();
 
-            int totalPages = Convert.ToInt32(Math.Floor(Convert.ToDecimal(entries.Count) / 26m));
-            if (entries.Count % 26 > 0) { totalPages += 1; }
-            if (totalPages == 0) { totalPages = 1; }
-            return totalPages;
-        }
-
-        public List<byte[]> exportRadioLogToPDF(Incident task, int OpPeriodToExport, bool flattenPDF = false)
-        {
-            List<byte[]> allPDFs = new List<byte[]>();
-
-            List<CommsLogEntry> entries = task.allCommsLogEntries.Where(o => o.OpPeriod == OpPeriodToExport).OrderBy(o => o.LogDate).ToList();
-
-            int totalPages = getRadioLogPageCount(task, OpPeriodToExport);
-
-            List<string> pdfFileNames = new List<string>();
-            for (int x = 1; x <= totalPages; x++)
-            {
-                List<CommsLogEntry> nextEntries = entries.Skip(26 * (x - 1)).Take(26).ToList();
-
-                allPDFs.AddRange(createSinglePageRadioLogAsBytes(task, nextEntries, x, totalPages, OpPeriodToExport, flattenPDF));
-            }
-            return allPDFs;
-
-        }
-
-        private string createSinglePageRadioLog(Incident task, List<CommsLogEntry> entries, int pageNumber, int totalPages, int OpsPeriod)
-        {
-            string path = System.IO.Path.GetTempFileName();
-
-            string fileToUse = "ICSForms/ICS 309 - Radio Log.pdf";
-            fileToUse = PDFExtraTools.getPDFFilePath(fileToUse, FormSet);
-            PdfReader rdr = new PdfReader(fileToUse);
-            PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
-
-
-            //Top Section
-            stamper.AcroFields.SetField("TASK", task.TaskNumber);
-            stamper.AcroFields.SetField("TASK NAME", task.TaskName);
-
-            stamper.AcroFields.SetField("FOR OP PERIOD", OpsPeriod.ToString());
-            stamper.AcroFields.SetField("STATION CALLSIGN", task.ICPCallSign);
-
-            if (entries.Count > 0)
-            {
-                stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:HH:mm}", entries[0].LogDate));
-                stamper.AcroFields.SetField("PeriodTo", string.Format("{0:HH:mm}", entries[entries.Count - 1].LogDate));
-            }
-
-
-            for (int x = 0; x < entries.Count; x++)
-            {
-                stamper.AcroFields.SetField("TIMERow" + (x + 1).ToString(), string.Format("{0:HH:mm}", entries[x].LogDate));
-                stamper.AcroFields.SetField("STN CALLEDRow" + (x + 1).ToString(), entries[x].ToName);
-                stamper.AcroFields.SetField("THIS ISRow" + (x + 1).ToString(), entries[x].FromName);
-                stamper.AcroFields.SetField("SUBJECTRow" + (x + 1).ToString(), entries[x].Message);
-
-            }
-
-            stamper.AcroFields.SetField("Text1", pageNumber.ToString());
-            stamper.AcroFields.SetField("Text2", totalPages.ToString());
-
-            //Rename all fields
-            AcroFields af = stamper.AcroFields;
-
-            List<string> fieldNames = new List<string>();
-            foreach (var field in af.Fields)
-            {
-                fieldNames.Add(field.Key);
-            }
-            foreach (string s in fieldNames)
-            {
-                stamper.AcroFields.RenameField(s, s + "-309-" + pageNumber.ToString());
-            }
-
-            stamper.Close();//Close a PDFStamper Object
-            rdr.Close();    //Close a PDFReader Object
-
-            return path;
-        }
-
-
-        public string createRadioLogPDF(Incident task, int opsPeriod, bool automaticallyOpen = true, bool tempFileName = false)
-        {
-            string path = FileAccessClasses.getWritablePath(task);
-
-            if (!tempFileName)
-            {
-
-                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
-            }
-            else { path = System.IO.Path.GetTempPath(); }
-
-            List<byte[]> allPDFs = exportRadioLogToPDF(task, opsPeriod);
-
-            string outputFileName = "ICS 309 - Task " + task.TaskNumber + " - Radio Log Op " + opsPeriod.ToString() + ".pdf";
-            outputFileName = outputFileName.ReplaceInvalidPathChars();
-
-            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
-
-            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-            try
-            {
-                File.WriteAllBytes(path, fullFile);
-
-            }
-            catch (Exception)
-            {
-            }
-
-            return path;
-        }
-
-        private List<byte[]> createSinglePageRadioLogAsBytes(Incident task, List<CommsLogEntry> entries, int pageNumber, int totalPages, int OpsPeriod, bool flattenPDF = false)
-        {
-            string path = System.IO.Path.GetTempFileName();
-            string fileToUse = "ICSForms/ICS 309 - Radio Log.pdf";
-            using (PdfReader rdr = new PdfReader(fileToUse))
-            {
-                using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
-                {
-                    //Top Section
-                    stamper.AcroFields.SetField("TASK", task.TaskNumber);
-                    stamper.AcroFields.SetField("TASK NAME", task.TaskName);
-
-                    stamper.AcroFields.SetField("FOR OP PERIOD", OpsPeriod.ToString());
-                    stamper.AcroFields.SetField("STATION CALLSIGN", task.ICPCallSign);
-
-                    if (entries.Count > 0)
-                    {
-                        stamper.AcroFields.SetField("PeriodFrom", string.Format("{0:HH:mm}", entries[0].LogDate));
-                        stamper.AcroFields.SetField("PeriodTo", string.Format("{0:HH:mm}", entries[entries.Count - 1].LogDate));
-                    }
-
-
-                    for (int x = 0; x < entries.Count; x++)
-                    {
-                        stamper.AcroFields.SetField("TIMERow" + (x + 1).ToString(), string.Format("{0:HH:mm}", entries[x].LogDate));
-                        stamper.AcroFields.SetField("STN CALLEDRow" + (x + 1).ToString(), entries[x].ToName);
-                        stamper.AcroFields.SetField("THIS ISRow" + (x + 1).ToString(), entries[x].FromName);
-                        stamper.AcroFields.SetField("SUBJECTRow" + (x + 1).ToString(), entries[x].Message);
-
-                    }
-
-                    stamper.AcroFields.SetField("Text1", pageNumber.ToString());
-                    stamper.AcroFields.SetField("Text2", totalPages.ToString());
-
-                    //Rename all fields
-                    AcroFields af = stamper.AcroFields;
-
-                    List<string> fieldNames = new List<string>();
-                    foreach (var field in af.Fields)
-                    {
-                        fieldNames.Add(field.Key);
-                    }
-                    foreach (string s in fieldNames)
-                    {
-                        stamper.AcroFields.RenameField(s, s + "-309-" + pageNumber.ToString());
-                    }
-
-                    if (flattenPDF)
-                    {
-                        stamper.FormFlattening = true;
-                    }
-                }
-            }
-
-            List<byte[]> allPDFs = new List<byte[]>();
-
-
-            using (FileStream stream = File.OpenRead(path))
-            {
-                byte[] fileBytes = new byte[stream.Length];
-
-                stream.Read(fileBytes, 0, fileBytes.Length);
-                stream.Close();
-                allPDFs.Add(fileBytes);
-            }
-
-            return allPDFs;
-        }
-        #endregion
 
         #region Note
 
@@ -3258,6 +2434,11 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
         public List<byte[]> exportAirOpsSummaryToPDF(Incident incident, int OpPeriodToExport, bool flattenPDF = false)
         {
+            int fixedWingPerPage = 8;
+            int rotorWingPerPage = 20;
+            int commsPerPage = 9;
+            int rolesPerPage = 9;
+
             List<byte[]> allPDFs = new List<byte[]>();
 
             AirOperationsSummary summary = incident.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpPeriodToExport);
@@ -3282,16 +2463,18 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
             for (int x = 0; x < totalPages; x++)
             {
-                List<Aircraft> pageair = new List<Aircraft>();
+                List<Aircraft> pageairFixed = new List<Aircraft>();
+                List<Aircraft> pageairRotor = new List<Aircraft>();
                 List<CommsPlanItem> pagecomms = new List<CommsPlanItem>();
                 List<ICSRole> pageroles = new List<ICSRole>();
 
-                pageair = aircraftList.Skip(15 * (x)).Take(15).ToList();
-                pagecomms = comms.Skip(10 * (x)).Take(10).ToList();
-                pageroles = roles.Skip(10 * (x)).Take(10).ToList();
+                pageairFixed = aircraftList.Where(o=>o.Type.Equals("Fixed-Wing")).Skip(fixedWingPerPage * (x)).Take(fixedWingPerPage).ToList();
+                pageairRotor = aircraftList.Where(o => !o.Type.Equals("Fixed-Wing")).Skip(rotorWingPerPage * (x)).Take(rotorWingPerPage).ToList();
+                pagecomms = comms.Skip(commsPerPage * (x)).Take(commsPerPage).ToList();
+                pageroles = roles.Skip(rolesPerPage * (x)).Take(rolesPerPage).ToList();
 
 
-                allPDFs.AddRange(buildSingleAirOpsSummaryPage(incident, OpPeriodToExport, pageair, pageroles, pagecomms, x + 1, totalPages, flattenPDF));
+                allPDFs.AddRange(buildSingleAirOpsSummaryPage(incident, OpPeriodToExport, pageairFixed, pageairRotor, pageroles, pagecomms, x + 1, totalPages, flattenPDF));
             }
             return allPDFs;
 
@@ -3299,10 +2482,12 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
         private int getAirOpsSummaryPageCount(Incident incident, AirOperationsSummary sum)
         {
-            int AirPP = 15;
+            int fixedAirPP = 8;
+            int rotorAirPP = 20;
             int RolePP = 10;
             int CommsPP = 10;
-            List<Aircraft> aircraftList = incident.GetActiveAircraft(sum.OpPeriod);
+            List<Aircraft> FixedAircraftList = incident.GetActiveAircraft(sum.OpPeriod).Where(o=>o.Type.Equals("Fixed-Wing")).ToList();
+            List<Aircraft> RotorAircraftList = incident.GetActiveAircraft(sum.OpPeriod).Where(o=>!o.Type.Equals("Fixed-Wing")).ToList();
 
             List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).ActiveAirCommsItems;
             List<ICSRole> roles = new List<ICSRole>();
@@ -3311,15 +2496,20 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
             int totalPages = 0;
-            if (aircraftList.Count < AirPP && comms.Count < CommsPP && roles.Count < RolePP)
+            if (FixedAircraftList.Count < fixedAirPP && RotorAircraftList.Count < rotorAirPP && comms.Count < CommsPP && roles.Count < RolePP)
             {
                 return 1;
             }
             else
             {
-                int pagesAir = Convert.ToInt32(Math.Floor(Convert.ToDecimal(aircraftList.Count) / 15m));
-                if ((aircraftList.Count) % 15 > 0) { pagesAir += 1; }
-                totalPages = pagesAir;
+                int pagesAirFixed = Convert.ToInt32(Math.Floor(Convert.ToDecimal(FixedAircraftList.Count) / fixedAirPP));
+                if ((FixedAircraftList.Count) % fixedAirPP > 0) { pagesAirFixed += 1; }
+                totalPages = pagesAirFixed;
+
+                int pagesAirRotor = Convert.ToInt32(Math.Floor(Convert.ToDecimal(RotorAircraftList.Count) / rotorAirPP));
+                if ((RotorAircraftList.Count) % rotorAirPP > 0) { pagesAirRotor += 1; }
+                totalPages = Math.Max(totalPages, pagesAirRotor);
+
 
                 int pagesComms = Convert.ToInt32(Math.Floor(Convert.ToDecimal(comms.Count) / 10m));
                 if ((comms.Count) % 10 > 0) { pagesComms += 1; }
@@ -3338,7 +2528,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
         }
 
 
-        private List<byte[]> buildSingleAirOpsSummaryPage(Incident task, int OpsPeriod, List<Aircraft> aircraft, List<ICSRole> roles, List<CommsPlanItem> comms, int pageNumber, int pageCount, bool flattenPDF)
+        private List<byte[]> buildSingleAirOpsSummaryPage(Incident task, int OpsPeriod, List<Aircraft> fixedAircraft, List<Aircraft> rotorAircraft, List<ICSRole> roles, List<CommsPlanItem> comms, int pageNumber, int pageCount, bool flattenPDF)
         {
             string path = System.IO.Path.GetTempFileName();
             string fileToUse = PDFExtraTools.getPDFFilePath("ICS-220-WF Air Operations Summary.pdf", FormSet);
@@ -3346,35 +2536,34 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
             AirOperationsSummary summary = task.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
-            if (summary.notam.UseRadius) { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220-WF Air Operations Summary.pdf", FormSet); }
+            if (summary.notam.UseRadius) { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220 Air Operations Summary.pdf", FormSet); }
             else { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220-WF Air Operations Summary Polygon.pdf", FormSet); }
 
             using (PdfReader rdr = new PdfReader(fileToUse))
             {
                 using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
                 {
-                    stamper.AcroFields.SetField("1 INCIDENT NAME OR NUMBERRow1", task.IncidentNameOrNumber);
-
-                    stamper.AcroFields.SetField("Contact Name", summary.PreparedByResourceName);
-                    stamper.AcroFields.SetField("Position", summary.PreparedByRoleName);
+                    stamper.AcroFields.SetField("Name", task.TaskName);
+                    stamper.AcroFields.SetField("Number", task.TaskNumber);
 
                     stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
                     stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
 
-                    stamper.AcroFields.SetField("3 REMARKS safety notes hazards etcRow1", summary.Remarks);
+                    stamper.AcroFields.SetField("3 REMARKSRow1", summary.Remarks);
+                    stamper.AcroFields.SetField("Sunrise", string.Format("{0:HH:mm}", summary.Sunrise));
+                    stamper.AcroFields.SetField("Sunset", string.Format("{0:HH:mm}", summary.Sunset));
+
                     List<Aircraft> MedvacAircraft = task.GetActiveAircraft(currentOp.PeriodMid).Where(o => o.IsMedivac).ToList();
 
 
                     stamper.AcroFields.SetField("4 MEDIVAC AIRCRAFTRow1", summary.MedivacTextBlock(MedvacAircraft));
-                    stamper.AcroFields.SetField("Sunrise", string.Format("{0:HH:mm}", summary.Sunrise));
-                    stamper.AcroFields.SetField("Sunset", string.Format("{0:HH:mm}", summary.Sunset));
 
 
 
                     stamper.AcroFields.SetField("Altitude ASL", summary.notam.AltitudeASL.ToString());
-                    stamper.AcroFields.SetField("Center Point", summary.notam.CenterPoint);
+                    stamper.AcroFields.SetField("Centre Point", summary.notam.CenterPoint);
 
                     if (summary.notam.UseRadius)
                     {
@@ -3421,16 +2610,22 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                    
                     */
 
+                    stamper.AcroFields.SetField("Position",summary.PreparedByRoleName);
+                    stamper.AcroFields.SetField("Name_2", summary.PreparedByResourceName);
+                    stamper.AcroFields.SetField("Date  TimeName", summary.DatePrepared.ToString(DateFormat));
 
-                    stamper.AcroFields.SetField("9 PAGE", pageNumber.ToString());
+
+                    stamper.AcroFields.SetField("PAGE", pageNumber.ToString());
                     stamper.AcroFields.SetField("OF", pageCount.ToString());
 
-                    for (int x = 0; x < roles.Count && x < 10; x++)
+
+                    //6. Perosnnel
+                    for (int x = 0; x < roles.Count && x < 9; x++)
                     {
                         if (roles[x] != null)
                         {
                             stamper.AcroFields.SetField("NameRow" + (x + 1), roles[x].IndividualName);
-                            stamper.AcroFields.SetField("PositionRow" + (x + 1), roles[x].RoleName);
+                            stamper.AcroFields.SetField("6 PERSONNELRow" + (x + 1), roles[x].RoleName);
                             if (roles[x].IndividualID != Guid.Empty && task.IncidentPersonnel.Any(o => o.ID == roles[x].IndividualID))
                             {
                                 Personnel p = task.IncidentPersonnel.First(o => o.ID == roles[x].IndividualID);
@@ -3443,39 +2638,37 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                         }
                     }
 
-
-                    for (int x = 0; x < aircraft.Count && x < 15; x++)
-                    {
-                        stamper.AcroFields.SetField("RegRow" + (x + 1), aircraft[x].Registration);
-                        stamper.AcroFields.SetField("MakeModelRow" + (x + 1), aircraft[x].MakeModel);
-                        stamper.AcroFields.SetField("BaseRow" + (x + 1), aircraft[x].Base);
-                        stamper.AcroFields.SetField("StartRow" + (x + 1), string.Format("{0:HH:mm}", aircraft[x].StartTime));
-                        stamper.AcroFields.SetField("RemarksRow" + (x + 1), aircraft[x].Remarks);
-                        stamper.AcroFields.SetField("PilotRow" + (x + 1), aircraft[x].Pilot);
-                        stamper.AcroFields.SetField("Contact Row" + (x + 1), aircraft[x].ContactNumber);
-                    }
+                    //7. Comms
 
                     for (int x = 0; x < comms.Count && x < 10; x++)
                     {
-                        stamper.AcroFields.SetField("FrequencyRow" + (x + 1), comms[x].ChannelID);
-                        stamper.AcroFields.SetField("RxRow" + (x + 1), comms[x].RxFrequency);
-                        stamper.AcroFields.SetField("TxRow" + (x + 1), comms[x].TxFrequency);
+                        stamper.AcroFields.SetField("7 FREQUENCIESRow" + (x + 1), comms[x].ChannelID);
+                        //stamper.AcroFields.SetField("RxRow" + (x + 1), comms[x].RxFrequency);
+                        //stamper.AcroFields.SetField("TxRow" + (x + 1), comms[x].TxFrequency);
                     }
 
+
+                    //8 fixed wing
+                    for (int x = 0; x < fixedAircraft.Count && x < 9; x++)
+                    {
+                        stamper.AcroFields.SetField("RegRow" + (x + 1), fixedAircraft[x].Registration);
+                        stamper.AcroFields.SetField("ModelRow" + (x + 1), fixedAircraft[x].MakeModel);
+                        stamper.AcroFields.SetField("RemarksRow" + (x + 1), fixedAircraft[x].Base);
+                    }
+
+                    //8 rotar wing
+                    for (int x = 0; x < rotorAircraft.Count && x < 21; x++)
+                    {
+                        stamper.AcroFields.SetField("HeliRegRow" + (x + 1), rotorAircraft[x].Registration);
+                        stamper.AcroFields.SetField("MakeModelRow" + (x + 1), rotorAircraft[x].MakeModel);
+                        stamper.AcroFields.SetField("BaseRow" + (x + 1), rotorAircraft[x].Base);
+                        stamper.AcroFields.SetField("StartRow" + (x + 1), string.Format("{0:HH:mm}", rotorAircraft[x].StartTime));
+                        stamper.AcroFields.SetField("HeliRemarksRow" + (x + 1), rotorAircraft[x].Remarks);
+                    }
 
 
                     //Rename all fields
-                    AcroFields af = stamper.AcroFields;
-
-                    List<string> fieldNames = new List<string>();
-                    foreach (var field in af.Fields)
-                    {
-                        fieldNames.Add(field.Key);
-                    }
-                    foreach (string s in fieldNames)
-                    {
-                        stamper.AcroFields.RenameField(s, s + "-220-" + pageNumber.ToString());
-                    }
+                    stamper.RenameAllFields();
 
                     if (flattenPDF)
                     {
@@ -4430,14 +3623,15 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
             {
                 using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
                 {
-                    stamper.AcroFields.SetField("1 INCIDENT NAME", task.TaskName);
+                    stamper.AcroFields.SetField("Name", task.TaskName);
+                    stamper.AcroFields.SetField("Number", task.TaskNumber);
 
                     stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + Globals.DateFormat + "}", DateTime.Now));
                     stamper.AcroFields.SetField("3 TIME PREPARED", string.Format("{0:HH:mm}", DateTime.Now));
                     //
                     stamper.AcroFields.SetField("4 NAME", RoleWithName.IndividualName);
                     stamper.AcroFields.SetField("5 ICS POSITION", role.RoleName);
-                    stamper.AcroFields.SetField("Name", RoleWithName.IndividualName);
+                    stamper.AcroFields.SetField("Name_2", RoleWithName.IndividualName);
                     stamper.AcroFields.SetField("Position", role.RoleName);
                     stamper.AcroFields.SetField("Date To", string.Format("{0:" + Globals.DateFormat + "}", DateTime.Now));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", DateTime.Now));
@@ -4457,7 +3651,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                     {
                         UnitRoles = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(o => o.SectionID == branchRole.GenericRoleID).ToList();
                         UnitRoles = UnitRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).ToList();
-                        for (int x = 0; x < UnitRoles.Count && x < 16; x++)
+                        for (int x = 0; x < UnitRoles.Count && x < 14; x++)
                         {
                             stamper.AcroFields.SetField("NameRow" + (x + 1), UnitRoles[x].IndividualName);
                             stamper.AcroFields.SetField("ICS PositionRow" + (x + 1), UnitRoles[x].RoleName);
@@ -4532,14 +3726,15 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
             {
                 using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
                 {
-                    stamper.AcroFields.SetField("1 INCIDENT NAME", task.TaskName);
+                    stamper.AcroFields.SetField("NAME", task.TaskName);
+                    stamper.AcroFields.SetField("Number", task.TaskName);
 
                     stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + Globals.DateFormat + "}", DateTime.Now));
                     stamper.AcroFields.SetField("3 TIME PREPARED", string.Format("{0:HH:mm}", DateTime.Now));
 
                     stamper.AcroFields.SetField("4 NAME", RoleWithName.IndividualName);
                     stamper.AcroFields.SetField("5 ICS POSITION", role.RoleName);
-                    stamper.AcroFields.SetField("Name", RoleWithName.IndividualName);
+                    stamper.AcroFields.SetField("Name_2", RoleWithName.IndividualName);
                     stamper.AcroFields.SetField("Position", role.RoleName);
                     stamper.AcroFields.SetField("Date To", string.Format("{0:" + Globals.DateFormat + "}", DateTime.Now));
                     stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", DateTime.Now));
