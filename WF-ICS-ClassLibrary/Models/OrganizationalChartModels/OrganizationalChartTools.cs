@@ -101,9 +101,11 @@ namespace WF_ICS_ClassLibrary.Models
         {
 
             List<ICSRole> roles = new List<ICSRole>();
-            roles.Add(org.ActiveRoles.FirstOrDefault(o => o.GenericRoleID == SectionID));
+            ICSRole sectionChief = org.ActiveRoles.FirstOrDefault(o => o.GenericRoleID == SectionID);
+            roles.Add(sectionChief);
+            
 
-            foreach (ICSRole role in org.ActiveRoles.Where(o => o.SectionID == SectionID))
+            foreach (ICSRole role in org.ActiveRoles.Where(o => o.ReportsTo == sectionChief.RoleID && o.SectionID == SectionID))
             {
                 if (!roles.Any(o => o.RoleID == role.RoleID))
                 {

@@ -7,6 +7,7 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WF_ICS_ClassLibrary.Models;
 
 namespace WF_ICS_ClassLibrary.Utilities
 {
@@ -183,8 +184,26 @@ namespace WF_ICS_ClassLibrary.Utilities
     
     }
 
+    public static class ClockwiseSorter
+    {
+        public static List<Coordinate> SortClockwise(List<Coordinate> points)
+        {
+            // Step 1: Compute centroid
+            double centerX = points.Average(p => p.Longitude);
+            double centerY = points.Average(p => p.Latitude);
+
+            // Step 2: Sort by angle from centroid
+            return points.OrderByDescending(p =>
+            {
+                double angle = Math.Atan2(p.Latitude - centerY, p.Longitude - centerX);
+                return angle;
+            }).ToList();
+        }
+    }
+
+
     [ProtoContract]
-    public class Coordinate
+    public class Coordinate : ICloneable
     {
         [ProtoIgnore] private int decimalPlaces = 6;
 
@@ -193,20 +212,16 @@ namespace WF_ICS_ClassLibrary.Utilities
         [ProtoMember(2)] public string CardinalLabel { get; set; }
         [ProtoMember(3)] public double Latitude { get; set; }
         [ProtoMember(4)] public double Longitude { get; set; }
+        [ProtoMember(5)] public Guid Id { get; set; } 
+
 
         public Coordinate(double lat, double lng)
         {
             Latitude = lat;
             Longitude = lng;
+            Id = Guid.NewGuid();
         }
-        public Coordinate(double lat, double lng, string lbl)
-        {
-            Latitude = lat;
-            Longitude = lng;
-            Label = lbl;
-        }
-
-        public Coordinate() { }
+        public Coordinate() { Id = Guid.NewGuid(); }
 
         public bool coordinateOnLine(Coordinate l1, Coordinate l2, int maxDistanceInMeters)
         {
@@ -233,7 +248,7 @@ namespace WF_ICS_ClassLibrary.Utilities
             switch (format)
             {
                 case "Decimal Degrees":
-                    coordText.Append(Math.Round(Latitude, decimalPlaces)); coordText.Append(", "); coordText.Append(Math.Round(Longitude, decimalPlaces));
+                    coordText.Append(DecimalDegrees);
                     break;
                 case "Degrees Decimal Minutes":
                     coordText.Append(DegreesDecimalMinutes);
@@ -244,11 +259,31 @@ namespace WF_ICS_ClassLibrary.Utilities
                 case "MGRS":
                     coordText.Append(MGRS);
                     break;
+                case "NAVCAN":
+                    CoordinateSharp.Coordinate coordinate = new CoordinateSharp.Coordinate();
+                    coordinate.Latitude = new CoordinatePart(Latitude, CoordinateType.Lat);
+                    coordinate.Longitude = new CoordinatePart(Longitude, CoordinateType.Long);
+
+                    coordText.Append(coordinate.Latitude.Degrees + "" + coordinate.Latitude.Minutes.ToString("00") + "00" + coordinate.Latitude.Position);
+                    coordText.Append(coordinate.Longitude.Degrees + "" + coordinate.Longitude.Minutes.ToString("00") + "00" + coordinate.Longitude.Position);
+
+
+                    break;
                 default: //utm
                     coordText.Append(UTM);
                     break;
             }
             return coordText.ToString();
+        }
+
+        public string DecimalDegrees {             get
+            {
+                string latPrefix = "";
+                string lonPrefix = "";
+                if (Latitude < 0) { latPrefix = "-"; }
+                if (Longitude < 0) { lonPrefix = "-"; }
+                return latPrefix + Math.Round(Math.Abs(Latitude), decimalPlaces).ToString() + ", " + lonPrefix + Math.Round(Math.Abs(Longitude), decimalPlaces).ToString();
+            }
         }
         public string DegreesMinutesSeconds
         {
@@ -360,7 +395,14 @@ namespace WF_ICS_ClassLibrary.Utilities
             }
             return success;
         }
+        public Coordinate Clone()
+        {
+            return this.MemberwiseClone() as Coordinate;
+        }
 
-
+        object ICloneable.Clone()
+        {
+            return Clone();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using Microsoft.VisualStudio.RpcContracts.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace Wildfire_ICS_Assist
         public NOTAM selectedNOTAM { get => CurrentAirOpsSummary.notam; set { CurrentAirOpsSummary.notam = value; } }
         private Coordinate[] enteredPolygonCoordinates = new Coordinate[4]; //NW, NE, SE, SW
         private Coordinate enteredRadiusCoordinate = null;
-
+        BindingList<Coordinate> polygonCoordinatesBindingList = new BindingList<Coordinate>();
 
         public AirOperationsForm()
         {
@@ -37,10 +38,13 @@ namespace Wildfire_ICS_Assist
             if (Owner != null) { Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2); }
 
             Program.CurrentIncident.createAirOpsSummaryAsNeeded(Program.CurrentOpPeriod, Program.CurrentRole);
+            addNotamCoordinateColumn();
+
             LoadMainData();
             PopulateAircraft();
             PopulateTree();
             PopulateCommsItems();
+
 
             loadNOTAM();
 
@@ -58,6 +62,75 @@ namespace Wildfire_ICS_Assist
             prepAndApprovePanel1.ApprovedByChanged += PrepAndApprovePanel1_ApprovedByChanged;
             prepAndApprovePanel1.PreparedByChanged += PrepAndApprovePanel1_PreparedByChanged;
 
+        }
+
+        private void addNotamCoordinateColumn()
+        {
+            dgvCoordinates.AutoGenerateColumns = false;
+            dgvCoordinates.DataSource = polygonCoordinatesBindingList;
+            string positionFormat = Program.generalOptionsService.GetStringOptionValue("PositionFormat");
+            switch (positionFormat)
+            {
+                case "Degrees Minutes Seconds":
+                    dgvCoordinates.Columns.Insert(0, new DataGridViewTextBoxColumn()
+                    {
+                        Name = "colCoordinate",
+                        DataPropertyName = "DegreesMinutesSeconds",
+                        HeaderText = "Coordinate (D° M' S\")",
+                        ReadOnly = true,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                    });
+
+                    break;
+                case "Degrees Decimal Minutes":
+                    dgvCoordinates.Columns.Insert(0, new DataGridViewTextBoxColumn()
+                    {
+                        Name = "colCoordinate",
+                        DataPropertyName = "DegreesDecimalMinutes",
+                        HeaderText = "Coordinate (D° M')",
+                        ReadOnly = true,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                    });
+
+                    break;
+                case "Decimal Degrees":
+                    dgvCoordinates.Columns.Insert(0, new DataGridViewTextBoxColumn()
+                    {
+                        Name = "colCoordinate",
+                        DataPropertyName = "DecimalDegrees",
+                        HeaderText = "Coordinate (D°)",
+                        ReadOnly = true,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                    });
+
+                    break;
+                case "UTM":
+                    dgvCoordinates.Columns.Insert(0, new DataGridViewTextBoxColumn()
+                    {
+                        Name = "colCoordinate",
+                        DataPropertyName = "UTM",
+                        HeaderText = "Coordinate (UTM)",
+                        ReadOnly = true,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                    });
+
+                    break;
+                case "MGRS":
+                    dgvCoordinates.Columns.Insert(0, new DataGridViewTextBoxColumn()
+                    {
+                        Name = "colCoordinate",
+                        DataPropertyName = "MGRS",
+                        HeaderText = "Coordinate (MGRS)",
+                        ReadOnly = true,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                    });
+
+
+                    break;
+                default:
+
+                    break;
+            }
         }
 
         private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
@@ -83,7 +156,6 @@ namespace Wildfire_ICS_Assist
 
         private void loadNOTAM()
         {
-            lblNWCoordinateOK.Text = ""; lblNECoordinateOK.Text = ""; lblSECoordinateOK.Text = ""; lblSWCoordinateOK.Text = "";
             lblCoordinateStatus.Text = "";
 
             numAltitude.Value = selectedNOTAM.AltitudeASL;
@@ -102,7 +174,7 @@ namespace Wildfire_ICS_Assist
                     {
                         txtRadiusCoordinates.Text = coord.CoordinateOutput("Degrees Decimal Minutes");
                         lblCoordinateStatus.Text = "Coordinate OK";
-                        lblCoordinateStatus.ForeColor = label1.ForeColor;
+                        lblCoordinateStatus.ForeColor = DefaultForeColor;
                         enteredRadiusCoordinate = coord;
                     }
                     else { txtRadiusCoordinates.Text = string.Empty; lblCoordinateStatus.Text = ""; }
@@ -111,39 +183,16 @@ namespace Wildfire_ICS_Assist
             }
             else
             {
+
                 rbPoygon.Checked = true;
-
-                if (selectedNOTAM.PolygonNW != null)
+                foreach (Coordinate c in selectedNOTAM.PolygonCoordinates)
                 {
-                    txtPolygonNW.Text = selectedNOTAM.PolygonNW.CoordinateOutput("Degrees Decimal Minutes");
-                    lblNWCoordinateOK.Text = "Coordinate OK";
-                    lblNWCoordinateOK.ForeColor = label1.ForeColor;
+                    if (!polygonCoordinatesBindingList.Any(o => o.Latitude == c.Latitude && o.Longitude == c.Longitude))
+                    {
+                        polygonCoordinatesBindingList.Add(c);
+                    }
                 }
-                else { txtPolygonNW.Text = string.Empty; lblNWCoordinateOK.Text = ""; }
 
-                if (selectedNOTAM.PolygonNE != null)
-                {
-                    txtPolygonNE.Text = selectedNOTAM.PolygonNE.CoordinateOutput("Degrees Decimal Minutes");
-                    lblNECoordinateOK.Text = "Coordinate OK";
-                    lblNECoordinateOK.ForeColor = label1.ForeColor;
-                }
-                else { txtPolygonNE.Text = string.Empty; lblNECoordinateOK.Text = ""; }
-
-                if (selectedNOTAM.PolygonSE != null)
-                {
-                    txtPolygonSE.Text = selectedNOTAM.PolygonSE.CoordinateOutput("Degrees Decimal Minutes");
-                    lblSECoordinateOK.Text = "Coordinate OK";
-                    lblSECoordinateOK.ForeColor = label1.ForeColor;
-                }
-                else { txtPolygonSE.Text = string.Empty; lblSECoordinateOK.Text = ""; }
-
-                if (selectedNOTAM.PolygonSW != null)
-                {
-                    txtPolygonSW.Text = selectedNOTAM.PolygonSW.CoordinateOutput("Degrees Decimal Minutes");
-                    lblSWCoordinateOK.Text = "Coordinate OK";
-                    lblSWCoordinateOK.ForeColor = label1.ForeColor;
-                }
-                else { txtPolygonSW.Text = string.Empty; lblSWCoordinateOK.Text = ""; }
 
             }
 
@@ -159,7 +208,7 @@ namespace Wildfire_ICS_Assist
             loadNOTAM();
         }
 
-     
+
 
         private void LoadMainData()
         {
@@ -191,7 +240,7 @@ namespace Wildfire_ICS_Assist
         }
         private void Program_ICSRoleChanged(ICSRoleEventArgs e)
         {
-            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree();  }
+            if (e.item.OpPeriod == Program.CurrentOpPeriod) { PopulateTree(); }
         }
 
 
@@ -574,7 +623,7 @@ namespace Wildfire_ICS_Assist
 
         }
 
-     
+
         private void btnNOTAM_Click(object sender, EventArgs e)
         {
             using (AirNOTAMEditForm editForm = new AirNOTAMEditForm())
@@ -724,7 +773,7 @@ namespace Wildfire_ICS_Assist
                 if (temp.TryParseCoordinate(txtCoordinates.Text, out temp))
                 {
                     lblResultMessage.Text = "Coordinate OK";
-                    lblResultMessage.ForeColor = label1.ForeColor;
+                    lblResultMessage.ForeColor = BaseForm.DefaultForeColor;
                     txtCoordinates.BackColor = SystemColors.Window;
                 }
                 else
@@ -755,11 +804,7 @@ namespace Wildfire_ICS_Assist
                 }
                 else
                 {
-                    Coordinate temp = new Coordinate();
-                    if (!string.IsNullOrEmpty(txtPolygonNW.Text) && !temp.TryParseCoordinate(txtPolygonNW.Text, out temp)) { return false; }
-                    if (!string.IsNullOrEmpty(txtPolygonNE.Text) && !temp.TryParseCoordinate(txtPolygonNE.Text, out temp)) { return false; }
-                    if (!string.IsNullOrEmpty(txtPolygonSE.Text) && !temp.TryParseCoordinate(txtPolygonSE.Text, out temp)) { return false; }
-                    if (!string.IsNullOrEmpty(txtPolygonSW.Text) && !temp.TryParseCoordinate(txtPolygonSW.Text, out temp)) { return false; }
+                    if (selectedNOTAM.PolygonCoordinates.Count < 3) { return false; }
 
                     return true;
                 }
@@ -827,47 +872,6 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        //NW, NE, SE, SW
-
-        private void txtPolygonNW_Leave(object sender, EventArgs e)
-        {
-            Coordinate temp = CheckCoordinates((TextBox)sender, lblNWCoordinateOK);
-            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
-            {
-                enteredPolygonCoordinates[0] = temp;
-            }
-            else { enteredPolygonCoordinates[0] = null; }
-        }
-
-        private void txtPolygonNE_Leave(object sender, EventArgs e)
-        {
-            Coordinate temp = CheckCoordinates((TextBox)sender, lblNECoordinateOK);
-            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
-            {
-                enteredPolygonCoordinates[1] = temp;
-            }
-            else { enteredPolygonCoordinates[1] = null; }
-        }
-
-        private void txtPolygonSW_Leave(object sender, EventArgs e)
-        {
-            Coordinate temp = CheckCoordinates((TextBox)sender, lblSWCoordinateOK);
-            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
-            {
-                enteredPolygonCoordinates[3] = temp;
-            }
-            else { enteredPolygonCoordinates[3] = null; }
-        }
-
-        private void txtPolygonSE_Leave(object sender, EventArgs e)
-        {
-            Coordinate temp = CheckCoordinates((TextBox)sender, lblSECoordinateOK);
-            if (temp != null && temp.Latitude != 0 && temp.Longitude != 0)
-            {
-                enteredPolygonCoordinates[2] = temp;
-            }
-            else { enteredPolygonCoordinates[2] = null; }
-        }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -986,6 +990,55 @@ namespace Wildfire_ICS_Assist
 
 
 
+            }
+        }
+
+        private void btnAddCoordinate_Click(object sender, EventArgs e)
+        {
+            using (EditCoordinateForm editForm = new EditCoordinateForm())
+            {
+                DialogResult dr = editForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    rbPoygon.Checked = true;
+                    selectedNOTAM.PolygonCoordinates.Add(editForm.enteredCoordinate);
+                    polygonCoordinatesBindingList.Add(editForm.enteredCoordinate);
+                }
+            }
+        }
+
+        private void dgvCoordinates_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvCoordinates.Columns[e.ColumnIndex].Name == "colDeleteCoordinate" && e.RowIndex >= 0)
+            {
+                Coordinate coord = (Coordinate)dgvCoordinates.Rows[e.RowIndex].DataBoundItem;
+                selectedNOTAM.PolygonCoordinates.Remove(coord);
+                polygonCoordinatesBindingList.Remove(coord);
+                dgvCoordinates.Refresh();
+
+            }
+            else if (dgvCoordinates.Columns[e.ColumnIndex].Name == "colEditCoordinate" && e.RowIndex >= 0)
+            {
+                Coordinate coord = (Coordinate)dgvCoordinates.Rows[e.RowIndex].DataBoundItem;
+                Coordinate cloned = coord.Clone();
+                using (EditCoordinateForm editForm = new EditCoordinateForm(coord.Clone()))
+                {
+                    DialogResult dr = editForm.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+
+                        selectedNOTAM.PolygonCoordinates = selectedNOTAM.PolygonCoordinates.Where(c => c.Id != editForm.enteredCoordinate.Id).ToList();
+                        selectedNOTAM.PolygonCoordinates.Add(editForm.enteredCoordinate);
+                        selectedNOTAM.PolygonCoordinates = ClockwiseSorter.SortClockwise(selectedNOTAM.PolygonCoordinates);
+                        polygonCoordinatesBindingList.Clear();
+                        foreach (Coordinate c in selectedNOTAM.PolygonCoordinates)
+                        {
+                            polygonCoordinatesBindingList.Add(c);
+                        }
+                        //refresh grid
+                        dgvCoordinates.Refresh();
+                    }
+                }
             }
         }
     }

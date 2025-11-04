@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
@@ -1133,7 +1134,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
                 OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
 
-                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-203 Organization Assignment List Blanked.pdf", FormSet);
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-203 Organization Assignment List.pdf", FormSet);
 
                 if (File.Exists(fileToUse))
                 {
@@ -1151,9 +1152,11 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                                 results.LastStepReached = 3;
 
 
-                                stamper.AcroFields.SetField("1 INCIDENT NAMERow1", task.IncidentNameOrNumber);
-                                stamper.AcroFields.SetField("2 DATERow1", string.Format("{0:" + DateFormat + "}", currentChart.DatePrepared));
-                                stamper.AcroFields.SetField("3 TIMERow1", string.Format("{0:HH:mm}", currentChart.DatePrepared));
+                                stamper.AcroFields.SetField("Name", task.TaskName);
+                                stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                                stamper.AcroFields.SetField("2 DATE", string.Format("{0:" + DateFormat + "}", currentChart.DatePrepared));
+                                stamper.AcroFields.SetField("3 TIME", string.Format("{0:HH:mm}", currentChart.DatePrepared));
                                 if (currentOp != null)
                                 {
                                     stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
@@ -1172,32 +1175,32 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
                                 if (null != PreparedBy)
                                 {
-                                    stamper.AcroFields.SetField("11 PREPARED BY", PreparedBy.RoleName);
-                                    stamper.AcroFields.SetField("11 PREPARED BY_2", PreparedBy.IndividualName);
+                                    stamper.AcroFields.SetField("Position", PreparedBy.RoleName);
+                                    stamper.AcroFields.SetField("Name_2", PreparedBy.IndividualName);
                                 }
                                 //stamper.AcroFields.SetField("PAGE", "1");
                                 currentChart.SortRoles();
 
                                 //Incident Command
-                                List<ICSRole> icRoles = currentChart.GetRolesForAssignmentList(Globals.IncidentCommanderGenericID, 10, 7);
+                                List<ICSRole> icRoles = currentChart.GetRolesForAssignmentList(Globals.IncidentCommanderGenericID, 10, 7).Where(o=> ! o.RoleName.Equals("Agency Representative")).ToList();
                                 for (int x = 0; x < 7 && x < icRoles.Count; x++)
                                 {
                                     if (icRoles[x].ReportsTo == Globals.IncidentCommanderGenericID || icRoles[x].RoleID == Globals.IncidentCommanderGenericID) { stamper.SetFieldFontBold("5 INCIDENT AND COMMAND STAFFRow" + (x + 1)); }
 
-                                    stamper.AcroFields.SetField("5 INCIDENT AND COMMAND STAFFRow" + (x + 1), icRoles[x].RoleName);
+                                    stamper.AcroFields.SetField("5 INCIDENT AND COMMAND STAFFRow" + (x + 1), icRoles[x].RoleNameForDropdown);
                                     stamper.AcroFields.SetField("5 INCIDENT AND COMMAND STAFFRow" + (x + 1) + "_2", icRoles[x].IndividualName);
                                 }
                                 //agency reps
                                 List<ICSRole> repRoles = currentChart.ActiveRoles.Where(o => o.SectionID == Globals.IncidentCommanderGenericID && o.RoleName.Equals("Agency Representative")).OrderBy(o => o.Depth).ThenBy(o => o.ManualSortOrder).ThenBy(o => o.RoleName).ToList();
                                 for (int x = 0; x < 7 && x < repRoles.Count; x++)
                                 {
-
+                                    if (repRoles[x].Depth > 0) { repRoles[x].Depth -= 1; } //adjust for IC level
                                     if (repRoles[x].IndividualID != Guid.Empty && task.IncidentPersonnel.Any(o => o.ID == repRoles[x].IndividualID))
                                     {
                                         Personnel p = task.IncidentPersonnel.First(o => o.ID == repRoles[x].IndividualID);
                                         stamper.AcroFields.SetField("Agency  OrganizationRow" + (x + 1), p.Agency);
                                     }
-                                    else { stamper.AcroFields.SetField("Agency  OrganizationRow" + (x + 1), repRoles[x].RoleName); }
+                                    else { stamper.AcroFields.SetField("Agency  OrganizationRow" + (x + 1), repRoles[x].RoleNameForDropdown); }
                                     stamper.AcroFields.SetField("RepresentativeRow" + (x + 1), repRoles[x].IndividualName);
                                 }
 
@@ -1205,9 +1208,11 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                                 List<ICSRole> planRoles = currentChart.GetRolesForAssignmentList(Globals.PlanningChiefGenericID, 0, 10);
                                 for (int x = 0; x < 10 && x < planRoles.Count; x++)
                                 {
+                                    if (planRoles[x].Depth > 0) { planRoles[x].Depth -= 1; } //adjust for IC level
+
                                     if (planRoles[x].ReportsTo == Globals.PlanningChiefGenericID || planRoles[x].RoleID == Globals.PlanningChiefGenericID) { stamper.SetFieldFontBold("7 PLANNING SECTIONRow" + (x + 1)); }
 
-                                    stamper.AcroFields.SetField("7 PLANNING SECTIONRow" + (x + 1), planRoles[x].RoleName);
+                                    stamper.AcroFields.SetField("7 PLANNING SECTIONRow" + (x + 1), planRoles[x].RoleNameForDropdown);
                                     stamper.AcroFields.SetField("7 PLANNING SECTIONRow" + (x + 1) + "_2", planRoles[x].IndividualName);
                                 }
 
@@ -1215,26 +1220,32 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                                 List<ICSRole> opsRoles = currentChart.GetRolesForAssignmentList(Globals.OpsChiefGenericID, 0, 35);
                                 for (int x = 0; x < 34 && x < opsRoles.Count; x++)
                                 {
+                                    if (opsRoles[x].Depth > 0) { opsRoles[x].Depth -= 1; } //adjust for IC level
+
                                     if (opsRoles[x].ReportsTo == Globals.OpsChiefGenericID || opsRoles[x].RoleID == Globals.OpsChiefGenericID) { stamper.SetFieldFontBold("9 OPERATIONS SECTIONRow" + (x + 1)); }
-                                    stamper.AcroFields.SetField("9 OPERATIONS SECTIONRow" + (x + 1), opsRoles[x].RoleName);
+                                    stamper.AcroFields.SetField("9 OPERATIONS SECTIONRow" + (x + 1), opsRoles[x].RoleNameForDropdown);
                                     stamper.AcroFields.SetField("9 OPERATIONS SECTIONRow" + (x + 1) + "_2", opsRoles[x].IndividualName);
                                 }
                                 //Logistics
                                 List<ICSRole> logRoles = currentChart.GetRolesForAssignmentList(Globals.LogisticsChiefGenericID, 0, 13);
                                 for (int x = 0; x < 13 && x < logRoles.Count; x++)
                                 {
+                                    if (logRoles[x].Depth > 0) { logRoles[x].Depth -= 1; } //adjust for IC level
+
                                     if (logRoles[x].ReportsTo == Globals.LogisticsChiefGenericID || logRoles[x].RoleID == Globals.LogisticsChiefGenericID) { stamper.SetFieldFontBold("8 LOGISTICS SECTIONRow" + (x + 1)); }
 
-                                    stamper.AcroFields.SetField("8 LOGISTICS SECTIONRow" + (x + 1), logRoles[x].RoleName);
+                                    stamper.AcroFields.SetField("8 LOGISTICS SECTIONRow" + (x + 1), logRoles[x].RoleNameForDropdown);
                                     stamper.AcroFields.SetField("8 LOGISTICS SECTIONRow" + (x + 1) + "_2", logRoles[x].IndividualName);
                                 }
                                 //Finance
                                 List<ICSRole> financeRoles = currentChart.GetRolesForAssignmentList(Globals.FinanceChiefGenericID, 0, 6);
                                 for (int x = 0; x < 6 && x < financeRoles.Count; x++)
                                 {
+                                    if (financeRoles[x].Depth > 0) { financeRoles[x].Depth -= 1; } //adjust for IC level
+
                                     if (financeRoles[x].ReportsTo == Globals.FinanceChiefGenericID || financeRoles[x].RoleID == Globals.FinanceChiefGenericID) { stamper.SetFieldFontBold("10 FINANCIALADMINISTRATION SECTIONRow" + (x + 1)); }
 
-                                    stamper.AcroFields.SetField("10 FINANCIALADMINISTRATION SECTIONRow" + (x + 1), financeRoles[x].RoleName);
+                                    stamper.AcroFields.SetField("10 FINANCIALADMINISTRATION SECTIONRow" + (x + 1), financeRoles[x].RoleNameForDropdown);
                                     stamper.AcroFields.SetField("10 FINANCIALADMINISTRATION SECTIONRow" + (x + 1) + "_2", financeRoles[x].IndividualName);
                                 }
 
@@ -2537,7 +2548,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
             OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
             AirOperationsSummary summary = task.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
             if (summary.notam.UseRadius) { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220 Air Operations Summary.pdf", FormSet); }
-            else { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220-WF Air Operations Summary Polygon.pdf", FormSet); }
+            else { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220 Air Operations Summary Polygon.pdf", FormSet); }
 
             using (PdfReader rdr = new PdfReader(fileToUse))
             {
@@ -2577,33 +2588,22 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                     }
                     else
                     {
-                        if (summary.notam.PolygonNW != null)
-                        {
-                            string[] parts = summary.notam.PolygonNW.DegreesDecimalMinutesSep;
-                            stamper.AcroFields.SetField("Northwest", parts[0].ToString());
-                            stamper.AcroFields.SetField("Northwest_2", parts[1].ToString());
-                        }
 
-                        if (summary.notam.PolygonNE != null)
-                        {
-                            string[] parts = summary.notam.PolygonNE.DegreesDecimalMinutesSep;
-                            stamper.AcroFields.SetField("Northeast", parts[0].ToString());
-                            stamper.AcroFields.SetField("Northeast_2", parts[1].ToString());
-                        }
+                        StringBuilder coordString = new StringBuilder();
+                        string firstCoord = string.Empty;
+                        string lastCoord = string.Empty;
 
-                        if (summary.notam.PolygonSW != null)
+                        foreach(Coordinate c in summary.notam.PolygonCoordinates)
                         {
-                            string[] parts = summary.notam.PolygonSW.DegreesDecimalMinutesSep;
-                            stamper.AcroFields.SetField("Southwest", parts[0].ToString());
-                            stamper.AcroFields.SetField("Southwest_2", parts[1].ToString());
+                            if (coordString.Length > 0) { coordString.Append("-"); } else { firstCoord = c.CoordinateOutput("NAVCAN"); }
+                            coordString.Append(c.CoordinateOutput("NAVCAN"));
+                            lastCoord = c.CoordinateOutput("NAVCAN");
                         }
-
-                        if (summary.notam.PolygonSE != null)
+                        if (!lastCoord.Equals(firstCoord))
                         {
-                            string[] parts = summary.notam.PolygonSE.DegreesDecimalMinutesSep;
-                            stamper.AcroFields.SetField("Southeast", parts[0].ToString());
-                            stamper.AcroFields.SetField("Southeast_2", parts[1].ToString());
+                            coordString.Append("-" + firstCoord);
                         }
+                        stamper.AcroFields.SetField("Coordinates", "Area bounded by: " + coordString.ToString());
                     }
 
                     /* TODO Replace this with code to fill the radius or polygon values
@@ -3909,20 +3909,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
         #endregion
 
-        public string createBriefingPDF(Incident task, Briefing briefing, bool automaticallyOpen = true, bool tempFileName = false)
-        {
-            throw new NotImplementedException();
-        }
 
-        public List<byte[]> exportBriefingToBytes(int OpPeriodToExport, Incident task)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string exportBriefingToPDF(Briefing briefing, Incident task, bool includeExecution, bool includeMapQRImage = false)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

@@ -650,6 +650,12 @@
     <Compile Include="UtilityForms\DeletedItemsForm.Designer.cs">
       <DependentUpon>DeletedItemsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityForms\EditCoordinateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\EditCoordinateForm.Designer.cs">
+      <DependentUpon>EditCoordinateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilityForms\EnterTextForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1170,6 +1176,9 @@
     <EmbeddedResource Include="UtilityForms\DeletedItemsForm.resx">
       <DependentUpon>DeletedItemsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\EditCoordinateForm.resx">
+      <DependentUpon>EditCoordinateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\EnterTextForm.resx">
       <DependentUpon>EnterTextForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1417,9 +1426,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\Wildfire\ICS-202-WF-Incident-Objectives.pdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="BlankForms\AllHazard\ICS-203 Organization Assignment List Blanked.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\Wildfire\ICS-203 Organization Assignment List Blanked.pdf">

@@ -72,22 +72,10 @@
             this.tpNOTAM = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pnlPolygon = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtPolygonSE = new System.Windows.Forms.TextBox();
-            this.lblSECoordinateOK = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txtPolygonSW = new System.Windows.Forms.TextBox();
-            this.lblSWCoordinateOK = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtPolygonNE = new System.Windows.Forms.TextBox();
-            this.lblNECoordinateOK = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtPolygonNW = new System.Windows.Forms.TextBox();
-            this.lblNWCoordinateOK = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.dgvCoordinates = new System.Windows.Forms.DataGridView();
+            this.colEditCoordinate = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colDeleteCoordinate = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnAddCoordinate = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.rbPoygon = new System.Windows.Forms.RadioButton();
             this.pnlRadius = new System.Windows.Forms.Panel();
@@ -107,9 +95,9 @@
             this.label25 = new System.Windows.Forms.Label();
             this.txtCenterPoint = new System.Windows.Forms.TextBox();
             this.toOther = new System.Windows.Forms.TabPage();
-            this.prepAndApprovePanel1 = new Wildfire_ICS_Assist.CustomControls.PrepAndApprovePanel();
             this.txtMedivacText = new SpellBox();
             this.txtRemarks = new SpellBox();
+            this.prepAndApprovePanel1 = new Wildfire_ICS_Assist.CustomControls.PrepAndApprovePanel();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -160,6 +148,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.pnlPolygon.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCoordinates)).BeginInit();
             this.pnlRadius.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAltitude)).BeginInit();
@@ -183,8 +172,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
-            this.splitContainer1.Size = new System.Drawing.Size(1008, 533);
-            this.splitContainer1.SplitterDistance = 460;
+            this.splitContainer1.Size = new System.Drawing.Size(1008, 600);
+            this.splitContainer1.SplitterDistance = 515;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -201,7 +190,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(10, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1008, 460);
+            this.tabControl1.Size = new System.Drawing.Size(1008, 515);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
@@ -211,7 +200,7 @@
             this.tpAircraft.Location = new System.Drawing.Point(4, 33);
             this.tpAircraft.Name = "tpAircraft";
             this.tpAircraft.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAircraft.Size = new System.Drawing.Size(1000, 423);
+            this.tpAircraft.Size = new System.Drawing.Size(1000, 411);
             this.tpAircraft.TabIndex = 0;
             this.tpAircraft.Text = "Aircraft";
             this.tpAircraft.UseVisualStyleBackColor = true;
@@ -235,8 +224,8 @@
             this.splitContainer5.Panel2.Controls.Add(this.btnToggleMedicvac);
             this.splitContainer5.Panel2.Controls.Add(this.btnSetStartEndTimes);
             this.splitContainer5.Panel2.Controls.Add(this.label10);
-            this.splitContainer5.Size = new System.Drawing.Size(994, 417);
-            this.splitContainer5.SplitterDistance = 326;
+            this.splitContainer5.Size = new System.Drawing.Size(994, 405);
+            this.splitContainer5.SplitterDistance = 314;
             this.splitContainer5.TabIndex = 70;
             // 
             // dgvAircraft
@@ -263,7 +252,7 @@
             this.dgvAircraft.RowHeadersVisible = false;
             this.dgvAircraft.RowTemplate.Height = 35;
             this.dgvAircraft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAircraft.Size = new System.Drawing.Size(994, 326);
+            this.dgvAircraft.Size = new System.Drawing.Size(994, 314);
             this.dgvAircraft.TabIndex = 1;
             this.dgvAircraft.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAircraft_CellDoubleClick);
             this.dgvAircraft.SelectionChanged += new System.EventHandler(this.dgvAircraft_SelectionChanged);
@@ -408,7 +397,7 @@
             this.tpPersonnel.Location = new System.Drawing.Point(4, 33);
             this.tpPersonnel.Name = "tpPersonnel";
             this.tpPersonnel.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPersonnel.Size = new System.Drawing.Size(1000, 423);
+            this.tpPersonnel.Size = new System.Drawing.Size(1000, 414);
             this.tpPersonnel.TabIndex = 1;
             this.tpPersonnel.Text = "Personnel";
             this.tpPersonnel.UseVisualStyleBackColor = true;
@@ -432,8 +421,8 @@
             this.splitContainer3.Panel2.Controls.Add(this.btnDeleteRole);
             this.splitContainer3.Panel2.Controls.Add(this.btnAssignRole);
             this.splitContainer3.Panel2.Controls.Add(this.btnEditRole);
-            this.splitContainer3.Size = new System.Drawing.Size(994, 417);
-            this.splitContainer3.SplitterDistance = 350;
+            this.splitContainer3.Size = new System.Drawing.Size(994, 408);
+            this.splitContainer3.SplitterDistance = 341;
             this.splitContainer3.TabIndex = 61;
             // 
             // treeOrgChart
@@ -442,7 +431,7 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(0, 0);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(994, 350);
+            this.treeOrgChart.Size = new System.Drawing.Size(994, 341);
             this.treeOrgChart.TabIndex = 56;
             // 
             // btnAdd
@@ -500,7 +489,7 @@
             this.tpFrequencies.Controls.Add(this.splitContainer4);
             this.tpFrequencies.Location = new System.Drawing.Point(4, 33);
             this.tpFrequencies.Name = "tpFrequencies";
-            this.tpFrequencies.Size = new System.Drawing.Size(1000, 426);
+            this.tpFrequencies.Size = new System.Drawing.Size(1000, 414);
             this.tpFrequencies.TabIndex = 2;
             this.tpFrequencies.Text = "Frequencies";
             this.tpFrequencies.UseVisualStyleBackColor = true;
@@ -523,8 +512,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.btnAddComms);
             this.splitContainer4.Panel2.Controls.Add(this.btnEditComms);
             this.splitContainer4.Panel2.Controls.Add(this.btnDeleteComms);
-            this.splitContainer4.Size = new System.Drawing.Size(1000, 426);
-            this.splitContainer4.SplitterDistance = 361;
+            this.splitContainer4.Size = new System.Drawing.Size(1000, 414);
+            this.splitContainer4.SplitterDistance = 349;
             this.splitContainer4.TabIndex = 60;
             // 
             // dgvCommsItems
@@ -548,7 +537,7 @@
             this.dgvCommsItems.RowHeadersVisible = false;
             this.dgvCommsItems.RowTemplate.Height = 30;
             this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommsItems.Size = new System.Drawing.Size(1000, 361);
+            this.dgvCommsItems.Size = new System.Drawing.Size(1000, 349);
             this.dgvCommsItems.TabIndex = 59;
             // 
             // colCommsSystem
@@ -650,14 +639,15 @@
             this.tpNOTAM.Controls.Add(this.txtCenterPoint);
             this.tpNOTAM.Location = new System.Drawing.Point(4, 33);
             this.tpNOTAM.Name = "tpNOTAM";
-            this.tpNOTAM.Size = new System.Drawing.Size(1000, 426);
+            this.tpNOTAM.Size = new System.Drawing.Size(1000, 478);
             this.tpNOTAM.TabIndex = 3;
             this.tpNOTAM.Text = "NOTAM";
             this.tpNOTAM.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer2.Location = new System.Drawing.Point(3, 127);
             this.splitContainer2.Name = "splitContainer2";
@@ -669,198 +659,78 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.pnlRadius);
-            this.splitContainer2.Size = new System.Drawing.Size(994, 264);
+            this.splitContainer2.Size = new System.Drawing.Size(994, 370);
             this.splitContainer2.SplitterDistance = 497;
             this.splitContainer2.TabIndex = 143;
             // 
             // pnlPolygon
             // 
-            this.pnlPolygon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlPolygon.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPolygon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlPolygon.Controls.Add(this.label17);
-            this.pnlPolygon.Controls.Add(this.txtPolygonSE);
-            this.pnlPolygon.Controls.Add(this.lblSECoordinateOK);
-            this.pnlPolygon.Controls.Add(this.label19);
-            this.pnlPolygon.Controls.Add(this.label20);
-            this.pnlPolygon.Controls.Add(this.txtPolygonSW);
-            this.pnlPolygon.Controls.Add(this.lblSWCoordinateOK);
-            this.pnlPolygon.Controls.Add(this.label22);
-            this.pnlPolygon.Controls.Add(this.label14);
-            this.pnlPolygon.Controls.Add(this.txtPolygonNE);
-            this.pnlPolygon.Controls.Add(this.lblNECoordinateOK);
-            this.pnlPolygon.Controls.Add(this.label16);
-            this.pnlPolygon.Controls.Add(this.label1);
-            this.pnlPolygon.Controls.Add(this.txtPolygonNW);
-            this.pnlPolygon.Controls.Add(this.lblNWCoordinateOK);
-            this.pnlPolygon.Controls.Add(this.label13);
+            this.pnlPolygon.Controls.Add(this.dgvCoordinates);
+            this.pnlPolygon.Controls.Add(this.btnAddCoordinate);
             this.pnlPolygon.Controls.Add(this.label2);
             this.pnlPolygon.Controls.Add(this.rbPoygon);
             this.pnlPolygon.Location = new System.Drawing.Point(5, 3);
             this.pnlPolygon.Name = "pnlPolygon";
-            this.pnlPolygon.Size = new System.Drawing.Size(482, 252);
+            this.pnlPolygon.Size = new System.Drawing.Size(482, 345);
             this.pnlPolygon.TabIndex = 136;
             this.pnlPolygon.Enter += new System.EventHandler(this.pnlPolygon_Enter);
             // 
-            // label17
+            // dgvCoordinates
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(6, 217);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(124, 15);
-            this.label17.TabIndex = 155;
-            this.label17.Text = "Lat/Lng, UTM, MGRS";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtPolygonSE
-            // 
-            this.txtPolygonSE.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvCoordinates.AllowUserToAddRows = false;
+            this.dgvCoordinates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPolygonSE.Location = new System.Drawing.Point(136, 187);
-            this.txtPolygonSE.Name = "txtPolygonSE";
-            this.txtPolygonSE.Size = new System.Drawing.Size(337, 29);
-            this.txtPolygonSE.TabIndex = 5;
-            this.txtPolygonSE.Leave += new System.EventHandler(this.txtPolygonSE_Leave);
+            this.dgvCoordinates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCoordinates.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colEditCoordinate,
+            this.colDeleteCoordinate});
+            this.dgvCoordinates.Location = new System.Drawing.Point(8, 42);
+            this.dgvCoordinates.Name = "dgvCoordinates";
+            this.dgvCoordinates.ReadOnly = true;
+            this.dgvCoordinates.RowHeadersVisible = false;
+            this.dgvCoordinates.RowTemplate.Height = 32;
+            this.dgvCoordinates.Size = new System.Drawing.Size(465, 244);
+            this.dgvCoordinates.TabIndex = 141;
+            this.dgvCoordinates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCoordinates_CellContentClick);
             // 
-            // lblSECoordinateOK
+            // colEditCoordinate
             // 
-            this.lblSECoordinateOK.AutoSize = true;
-            this.lblSECoordinateOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSECoordinateOK.Location = new System.Drawing.Point(136, 219);
-            this.lblSECoordinateOK.Name = "lblSECoordinateOK";
-            this.lblSECoordinateOK.Size = new System.Drawing.Size(101, 15);
-            this.lblSECoordinateOK.TabIndex = 154;
-            this.lblSECoordinateOK.Text = "Coordinates okay";
+            this.colEditCoordinate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colEditCoordinate.HeaderText = "Edit";
+            this.colEditCoordinate.Name = "colEditCoordinate";
+            this.colEditCoordinate.ReadOnly = true;
+            this.colEditCoordinate.Text = "Edit";
+            this.colEditCoordinate.UseColumnTextForButtonValue = true;
+            this.colEditCoordinate.Width = 48;
             // 
-            // label19
+            // colDeleteCoordinate
             // 
-            this.label19.Location = new System.Drawing.Point(4, 188);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(126, 29);
-            this.label19.TabIndex = 153;
-            this.label19.Text = "South East";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.colDeleteCoordinate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colDeleteCoordinate.HeaderText = "Delete";
+            this.colDeleteCoordinate.Name = "colDeleteCoordinate";
+            this.colDeleteCoordinate.ReadOnly = true;
+            this.colDeleteCoordinate.Text = "Delete";
+            this.colDeleteCoordinate.UseColumnTextForButtonValue = true;
+            this.colDeleteCoordinate.Width = 70;
             // 
-            // label20
+            // btnAddCoordinate
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(6, 167);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(124, 15);
-            this.label20.TabIndex = 151;
-            this.label20.Text = "Lat/Lng, UTM, MGRS";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtPolygonSW
-            // 
-            this.txtPolygonSW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPolygonSW.Location = new System.Drawing.Point(136, 137);
-            this.txtPolygonSW.Name = "txtPolygonSW";
-            this.txtPolygonSW.Size = new System.Drawing.Size(337, 29);
-            this.txtPolygonSW.TabIndex = 4;
-            this.txtPolygonSW.Leave += new System.EventHandler(this.txtPolygonSW_Leave);
-            // 
-            // lblSWCoordinateOK
-            // 
-            this.lblSWCoordinateOK.AutoSize = true;
-            this.lblSWCoordinateOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSWCoordinateOK.Location = new System.Drawing.Point(136, 169);
-            this.lblSWCoordinateOK.Name = "lblSWCoordinateOK";
-            this.lblSWCoordinateOK.Size = new System.Drawing.Size(101, 15);
-            this.lblSWCoordinateOK.TabIndex = 150;
-            this.lblSWCoordinateOK.Text = "Coordinates okay";
-            // 
-            // label22
-            // 
-            this.label22.Location = new System.Drawing.Point(4, 138);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(126, 29);
-            this.label22.TabIndex = 149;
-            this.label22.Text = "South West";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(6, 117);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(124, 15);
-            this.label14.TabIndex = 147;
-            this.label14.Text = "Lat/Lng, UTM, MGRS";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtPolygonNE
-            // 
-            this.txtPolygonNE.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPolygonNE.Location = new System.Drawing.Point(136, 87);
-            this.txtPolygonNE.Name = "txtPolygonNE";
-            this.txtPolygonNE.Size = new System.Drawing.Size(337, 29);
-            this.txtPolygonNE.TabIndex = 3;
-            this.txtPolygonNE.Leave += new System.EventHandler(this.txtPolygonNE_Leave);
-            // 
-            // lblNECoordinateOK
-            // 
-            this.lblNECoordinateOK.AutoSize = true;
-            this.lblNECoordinateOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNECoordinateOK.Location = new System.Drawing.Point(136, 119);
-            this.lblNECoordinateOK.Name = "lblNECoordinateOK";
-            this.lblNECoordinateOK.Size = new System.Drawing.Size(101, 15);
-            this.lblNECoordinateOK.TabIndex = 146;
-            this.lblNECoordinateOK.Text = "Coordinates okay";
-            // 
-            // label16
-            // 
-            this.label16.Location = new System.Drawing.Point(4, 88);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(126, 29);
-            this.label16.TabIndex = 145;
-            this.label16.Text = "North East";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 15);
-            this.label1.TabIndex = 143;
-            this.label1.Text = "Lat/Lng, UTM, MGRS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtPolygonNW
-            // 
-            this.txtPolygonNW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPolygonNW.Location = new System.Drawing.Point(136, 37);
-            this.txtPolygonNW.Name = "txtPolygonNW";
-            this.txtPolygonNW.Size = new System.Drawing.Size(337, 29);
-            this.txtPolygonNW.TabIndex = 2;
-            this.txtPolygonNW.Leave += new System.EventHandler(this.txtPolygonNW_Leave);
-            // 
-            // lblNWCoordinateOK
-            // 
-            this.lblNWCoordinateOK.AutoSize = true;
-            this.lblNWCoordinateOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNWCoordinateOK.Location = new System.Drawing.Point(136, 69);
-            this.lblNWCoordinateOK.Name = "lblNWCoordinateOK";
-            this.lblNWCoordinateOK.Size = new System.Drawing.Size(101, 15);
-            this.lblNWCoordinateOK.TabIndex = 142;
-            this.lblNWCoordinateOK.Text = "Coordinates okay";
-            // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(4, 38);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(126, 29);
-            this.label13.TabIndex = 141;
-            this.label13.Text = "North West";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAddCoordinate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddCoordinate.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_592_map;
+            this.btnAddCoordinate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAddCoordinate.Location = new System.Drawing.Point(363, 292);
+            this.btnAddCoordinate.Name = "btnAddCoordinate";
+            this.btnAddCoordinate.Size = new System.Drawing.Size(110, 44);
+            this.btnAddCoordinate.TabIndex = 140;
+            this.btnAddCoordinate.Text = "Add";
+            this.btnAddCoordinate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddCoordinate.UseVisualStyleBackColor = true;
+            this.btnAddCoordinate.Click += new System.EventHandler(this.btnAddCoordinate_Click);
             // 
             // label2
             // 
@@ -1064,9 +934,9 @@
             // 
             // toOther
             // 
-            this.toOther.Controls.Add(this.prepAndApprovePanel1);
             this.toOther.Controls.Add(this.txtMedivacText);
             this.toOther.Controls.Add(this.txtRemarks);
+            this.toOther.Controls.Add(this.prepAndApprovePanel1);
             this.toOther.Controls.Add(this.label9);
             this.toOther.Controls.Add(this.label6);
             this.toOther.Controls.Add(this.label8);
@@ -1076,31 +946,10 @@
             this.toOther.Controls.Add(this.datSunrise);
             this.toOther.Location = new System.Drawing.Point(4, 33);
             this.toOther.Name = "toOther";
-            this.toOther.Size = new System.Drawing.Size(1000, 426);
+            this.toOther.Size = new System.Drawing.Size(1000, 414);
             this.toOther.TabIndex = 4;
             this.toOther.Text = "Other";
             this.toOther.UseVisualStyleBackColor = true;
-            // 
-            // prepAndApprovePanel1
-            // 
-            this.prepAndApprovePanel1.ApprovedByDateTime = new System.DateTime(((long)(0)));
-            this.prepAndApprovePanel1.BackColor = System.Drawing.Color.White;
-            this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.prepAndApprovePanel1.Collapsed = false;
-            this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.prepAndApprovePanel1.EnableExpandCollapse = false;
-            this.prepAndApprovePanel1.ExpandsRight = true;
-            this.prepAndApprovePanel1.ExpandsUpward = false;
-            this.prepAndApprovePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prepAndApprovePanel1.Location = new System.Drawing.Point(528, 16);
-            this.prepAndApprovePanel1.Margin = new System.Windows.Forms.Padding(6);
-            this.prepAndApprovePanel1.Name = "prepAndApprovePanel1";
-            this.prepAndApprovePanel1.PreparedByDateTime = new System.DateTime(2024, 10, 30, 11, 49, 49, 204);
-            this.prepAndApprovePanel1.Size = new System.Drawing.Size(461, 197);
-            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
-            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(619, 197);
-            this.prepAndApprovePanel1.TabIndex = 71;
-            this.prepAndApprovePanel1.TitleText = "Prepared and Approved Info";
             // 
             // txtMedivacText
             // 
@@ -1125,6 +974,27 @@
             this.txtRemarks.TabIndex = 69;
             this.txtRemarks.TextChanged += new System.EventHandler(this.txtRemarks_TextChanged);
             this.txtRemarks.Child = new System.Windows.Controls.TextBox();
+            // 
+            // prepAndApprovePanel1
+            // 
+            this.prepAndApprovePanel1.ApprovedByDateTime = new System.DateTime(((long)(0)));
+            this.prepAndApprovePanel1.BackColor = System.Drawing.Color.White;
+            this.prepAndApprovePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.prepAndApprovePanel1.Collapsed = false;
+            this.prepAndApprovePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.prepAndApprovePanel1.EnableExpandCollapse = false;
+            this.prepAndApprovePanel1.ExpandsRight = true;
+            this.prepAndApprovePanel1.ExpandsUpward = false;
+            this.prepAndApprovePanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prepAndApprovePanel1.Location = new System.Drawing.Point(528, 16);
+            this.prepAndApprovePanel1.Margin = new System.Windows.Forms.Padding(6);
+            this.prepAndApprovePanel1.Name = "prepAndApprovePanel1";
+            this.prepAndApprovePanel1.PreparedByDateTime = new System.DateTime(2024, 10, 30, 11, 49, 49, 204);
+            this.prepAndApprovePanel1.Size = new System.Drawing.Size(461, 197);
+            this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(485, 40);
+            this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(619, 197);
+            this.prepAndApprovePanel1.TabIndex = 71;
+            this.prepAndApprovePanel1.TitleText = "Prepared and Approved Info";
             // 
             // label9
             // 
@@ -1336,7 +1206,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 533);
+            this.ClientSize = new System.Drawing.Size(1008, 600);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(1024, 572);
             this.Name = "AirOperationsForm";
@@ -1373,6 +1243,7 @@
             this.splitContainer2.ResumeLayout(false);
             this.pnlPolygon.ResumeLayout(false);
             this.pnlPolygon.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCoordinates)).EndInit();
             this.pnlRadius.ResumeLayout(false);
             this.pnlRadius.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRadius)).EndInit();
@@ -1431,22 +1302,6 @@
         private System.Windows.Forms.TabPage tpFrequencies;
         private System.Windows.Forms.TabPage tpNOTAM;
         private System.Windows.Forms.Panel pnlPolygon;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtPolygonSE;
-        private System.Windows.Forms.Label lblSECoordinateOK;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox txtPolygonSW;
-        private System.Windows.Forms.Label lblSWCoordinateOK;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtPolygonNE;
-        private System.Windows.Forms.Label lblNECoordinateOK;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPolygonNW;
-        private System.Windows.Forms.Label lblNWCoordinateOK;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton rbPoygon;
         private System.Windows.Forms.Panel pnlRadius;
@@ -1485,5 +1340,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEndTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemarks;
         private CustomControls.PrepAndApprovePanel prepAndApprovePanel1;
+        private System.Windows.Forms.Button btnAddCoordinate;
+        private System.Windows.Forms.DataGridView dgvCoordinates;
+        private System.Windows.Forms.DataGridViewButtonColumn colEditCoordinate;
+        private System.Windows.Forms.DataGridViewButtonColumn colDeleteCoordinate;
     }
 }

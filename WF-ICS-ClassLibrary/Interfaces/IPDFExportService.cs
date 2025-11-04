@@ -8,7 +8,6 @@ namespace WildfireICSDesktopServices
     public interface IPDFExportService
     {
         void SetDateFormat(string str);
-        string createBriefingPDF(Incident task, Briefing briefing, bool automaticallyOpen = true, bool tempFileName = false);
         string createCommsPlanPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);
         List<byte[]> exportCommsPlanToPDF(Incident task, int OpPeriodToExport, bool flattenPDF);
         string createMedicalPlanPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false);

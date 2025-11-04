@@ -85,7 +85,8 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses.ContactsExport
             OrganizationChart orgChart = incident.allOrgCharts.FirstOrDefault(o => o.Active && o.OpPeriod == OperationalPeriodToExport);
             OperationalPeriod period = incident.AllOperationalPeriods.FirstOrDefault(o=>o.Active && o.PeriodNumber == OperationalPeriodToExport);
             ContactExportHeader header = new ContactExportHeader(orgChart);
-            header.IncidentName = incident.IncidentNameOrNumber;
+            header.IncidentName = incident.TaskName;
+            header.IncidentNumber = incident.TaskNumber;
             header.StartDate = period.PeriodStart;
             header.EndDate = period.PeriodEnd;
 
