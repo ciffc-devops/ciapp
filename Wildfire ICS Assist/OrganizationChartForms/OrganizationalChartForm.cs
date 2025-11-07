@@ -640,7 +640,8 @@ namespace Wildfire_ICS_Assist
             OrgChartPageOne page = new OrgChartPageOne();
             page.StartDate = Program.CurrentOpPeriodDetails.PeriodStart;
             page.EndDate = Program.CurrentOpPeriodDetails.PeriodEnd;
-            page.IncidentName = Program.CurrentIncident.IncidentIdentifier;
+            page.IncidentName = Program.CurrentIncident.TaskName;
+            page.IncidentNumber = Program.CurrentIncident.TaskNumber;
             page.PreparedByRoleName = Program.CurrentOrgChart.PreparedByRoleName;
             page.PreparedByIndividualName = Program.CurrentOrgChart.PreparedByResourceName;
 

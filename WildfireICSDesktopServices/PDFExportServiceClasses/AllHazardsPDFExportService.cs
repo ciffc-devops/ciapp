@@ -1349,54 +1349,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
 
 
-        private string getOrgChartPositionFieldName(int childNumber, int grandChildNumber)
-        {
-            string positionFieldName = "";
-
-            switch (childNumber)
-            {
-                case 0:
-                    positionFieldName = "PositionA";
-                    break;
-                case 1:
-                    positionFieldName = "PositionB";
-                    break;
-                case 2:
-                    positionFieldName = "PositionC";
-                    break;
-                case 3:
-                    positionFieldName = "PositionD";
-                    break;
-
-            }
-
-            positionFieldName = positionFieldName + (grandChildNumber + 1);
-            return positionFieldName;
-        }
-        private string getOrgChartNameFieldName(int childNumber, int grandChildNumber)
-        {
-            string nameFieldName = "";
-
-            switch (childNumber)
-            {
-                case 0:
-                    nameFieldName = "NameA";
-                    break;
-                case 1:
-                    nameFieldName = "NameB";
-                    break;
-                case 2:
-                    nameFieldName = "NameC";
-                    break;
-                case 3:
-                    nameFieldName = "NameD";
-                    break;
-
-            }
-
-            nameFieldName = nameFieldName + (grandChildNumber + 1);
-            return nameFieldName;
-        }
+     
 
 
 

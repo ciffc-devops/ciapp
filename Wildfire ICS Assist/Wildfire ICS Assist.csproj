@@ -1440,7 +1440,16 @@
     <None Include="BlankForms\Wildfire\ICS-204A-WF Assignment Details.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BlankForms\Wildfire\ICS-205A Communications List.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="BlankForms\Wildfire\ICS-206-WF-Medical-Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-207 Incident Organization Chart Extension.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-207 Incident Organization Chart.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\Wildfire\ICS-207-WF Incident Organization Chart Extension.pdf">
@@ -1465,6 +1474,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\Wildfire\ICS-213-WF-General-Message.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-214 Activity Log Supplemental.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-214 Activity Log.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BlankForms\Wildfire\ICS-214-WF-Activity-Log-Supplemental.pdf">

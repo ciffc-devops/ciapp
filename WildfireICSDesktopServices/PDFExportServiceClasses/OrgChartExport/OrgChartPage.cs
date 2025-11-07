@@ -7,10 +7,12 @@ namespace WildfireICSDesktopServices.OrgChartExport
         private Guid _ID;
         private int _PageNumber;
         private string _IncidentName;
+        private string _IncidentNumber;
         private string _PreparedByRoleName;
         private string _PreparedByIndividualName;
         private DateTime _StartDate;
         private DateTime _EndDate;
+        private DateTime _DatePrepared;
 
         private OrgChartEntry[][] _Entries = new OrgChartEntry[OrgChartExportTools.ChildrenPerExtensionPage][];
 
@@ -23,6 +25,8 @@ namespace WildfireICSDesktopServices.OrgChartExport
 
         public OrgChartEntry[][] Entries { get => _Entries; set => _Entries = value; }
         public int PageNumber { get => _PageNumber; set => _PageNumber = value; }
+        public string IncidentNumber { get => _IncidentNumber; set => _IncidentNumber = value; }
+        public DateTime DatePrepared { get => _DatePrepared; set => _DatePrepared = value; }
 
         public OrgChartEntry GetEntryByRoleID(Guid id)
         {
