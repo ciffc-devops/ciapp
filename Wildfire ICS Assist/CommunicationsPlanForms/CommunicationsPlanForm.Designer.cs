@@ -31,7 +31,7 @@
             this.svdExport = new System.Windows.Forms.SaveFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tpAircraft = new System.Windows.Forms.TabPage();
+            this.tpRadio = new System.Windows.Forms.TabPage();
             this.dgvCommsItems = new System.Windows.Forms.DataGridView();
             this.colCommsSystem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChannelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,6 +40,8 @@
             this.colTone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tpNonRadio = new System.Windows.Forms.TabPage();
+            this.dgvNonRadio = new System.Windows.Forms.DataGridView();
             this.toOther = new System.Windows.Forms.TabPage();
             this.prepAndApprovePanel1 = new Wildfire_ICS_Assist.CustomControls.PrepAndApprovePanel();
             this.btnView = new System.Windows.Forms.Button();
@@ -48,13 +50,21 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tpAircraft.SuspendLayout();
+            this.tpRadio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCommsItems)).BeginInit();
+            this.tpNonRadio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNonRadio)).BeginInit();
             this.toOther.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +100,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tpAircraft);
+            this.tabControl1.Controls.Add(this.tpRadio);
+            this.tabControl1.Controls.Add(this.tpNonRadio);
             this.tabControl1.Controls.Add(this.toOther);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
@@ -102,16 +113,16 @@
             this.tabControl1.TabIndex = 4;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
-            // tpAircraft
+            // tpRadio
             // 
-            this.tpAircraft.Controls.Add(this.dgvCommsItems);
-            this.tpAircraft.Location = new System.Drawing.Point(4, 33);
-            this.tpAircraft.Name = "tpAircraft";
-            this.tpAircraft.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAircraft.Size = new System.Drawing.Size(995, 275);
-            this.tpAircraft.TabIndex = 0;
-            this.tpAircraft.Text = "Comms Systems";
-            this.tpAircraft.UseVisualStyleBackColor = true;
+            this.tpRadio.Controls.Add(this.dgvCommsItems);
+            this.tpRadio.Location = new System.Drawing.Point(4, 33);
+            this.tpRadio.Name = "tpRadio";
+            this.tpRadio.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRadio.Size = new System.Drawing.Size(995, 275);
+            this.tpRadio.TabIndex = 0;
+            this.tpRadio.Text = "Radio Channels";
+            this.tpRadio.UseVisualStyleBackColor = true;
             // 
             // dgvCommsItems
             // 
@@ -201,6 +212,42 @@
             this.colComments.MinimumWidth = 100;
             this.colComments.Name = "colComments";
             this.colComments.ReadOnly = true;
+            // 
+            // tpNonRadio
+            // 
+            this.tpNonRadio.Controls.Add(this.dgvNonRadio);
+            this.tpNonRadio.Location = new System.Drawing.Point(4, 33);
+            this.tpNonRadio.Name = "tpNonRadio";
+            this.tpNonRadio.Padding = new System.Windows.Forms.Padding(3);
+            this.tpNonRadio.Size = new System.Drawing.Size(995, 275);
+            this.tpNonRadio.TabIndex = 5;
+            this.tpNonRadio.Text = "Non-Radio";
+            this.tpNonRadio.UseVisualStyleBackColor = true;
+            // 
+            // dgvNonRadio
+            // 
+            this.dgvNonRadio.AllowUserToAddRows = false;
+            this.dgvNonRadio.AllowUserToDeleteRows = false;
+            this.dgvNonRadio.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvNonRadio.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.dgvNonRadio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNonRadio.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.colName,
+            this.dataGridViewTextBoxColumn3,
+            this.colNumber,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            this.dgvNonRadio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvNonRadio.Location = new System.Drawing.Point(3, 3);
+            this.dgvNonRadio.Name = "dgvNonRadio";
+            this.dgvNonRadio.ReadOnly = true;
+            this.dgvNonRadio.RowHeadersVisible = false;
+            this.dgvNonRadio.RowTemplate.Height = 30;
+            this.dgvNonRadio.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvNonRadio.Size = new System.Drawing.Size(989, 269);
+            this.dgvNonRadio.TabIndex = 4;
+            this.dgvNonRadio.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNonRadio_CellDoubleClick);
             // 
             // toOther
             // 
@@ -311,6 +358,56 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CommsSystem";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Comms System";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 166;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "ChannelID";
+            this.colName.HeaderText = "Name";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 86;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "CommsFunction";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Function";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 109;
+            // 
+            // colNumber
+            // 
+            this.colNumber.DataPropertyName = "PhoneNumber";
+            this.colNumber.HeaderText = "Phone Number";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.Width = 165;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Assignment";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Assignment";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 134;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "Comments";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Remarks";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 100;
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
             // CommunicationsPlanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -326,8 +423,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tpAircraft.ResumeLayout(false);
+            this.tpRadio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCommsItems)).EndInit();
+            this.tpNonRadio.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNonRadio)).EndInit();
             this.toOther.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -345,7 +444,7 @@
         private System.Windows.Forms.DataGridView dgvCommsItems;
         private System.Windows.Forms.SaveFileDialog svdExport;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tpAircraft;
+        private System.Windows.Forms.TabPage tpRadio;
         private System.Windows.Forms.TabPage toOther;
         private CustomControls.PrepAndApprovePanel prepAndApprovePanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommsSystem;
@@ -355,5 +454,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComments;
+        private System.Windows.Forms.TabPage tpNonRadio;
+        private System.Windows.Forms.DataGridView dgvNonRadio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }

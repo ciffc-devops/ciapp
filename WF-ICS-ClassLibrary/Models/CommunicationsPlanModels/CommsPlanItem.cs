@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
 using System;
 using System.Text;
+using System.Xml.Serialization;
 using WF_ICS_ClassLibrary.Utilities;
 
 namespace WF_ICS_ClassLibrary.Models
@@ -9,7 +10,7 @@ namespace WF_ICS_ClassLibrary.Models
     [Serializable]
     public class CommsPlanItem : SyncableItem, ICloneable, IEquatable<CommsPlanItem>
     {
-        public CommsPlanItem() { ItemID = System.Guid.NewGuid(); TemplateItemID = Guid.NewGuid(); Active = true; SortOrder = 0; }
+        public CommsPlanItem() { ItemID = System.Guid.NewGuid(); TemplateItemID = Guid.NewGuid(); Active = true; SortOrder = 0; IsRadio = true; }
         public CommsPlanItem(string function, Guid id = new Guid())
         {
             if (id == Guid.Empty) { ItemID = System.Guid.NewGuid(); } else { ItemID = id; }
@@ -17,6 +18,7 @@ namespace WF_ICS_ClassLibrary.Models
             TemplateItemID = Guid.NewGuid();
             SortOrder = 0;
             Active = true;
+            IsRadio = true;
         }
 
 
@@ -37,6 +39,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(19)] private string _TxFrequency;
         [ProtoMember(20)] private string _TxTone;
         [ProtoMember(21)] private int _SortOrder;
+        [ProtoMember(22)] private bool _IsRadio;
+        [ProtoMember(23)] private string _PhoneNumber;
+        [ProtoMember(24)] private string _URL;
 
         public Guid ItemID { get => ID; set => ID = value; }
         public string CommsSystem { get => _CommsSystem; set => _CommsSystem = value; }
@@ -54,6 +59,17 @@ namespace WF_ICS_ClassLibrary.Models
                 else { return RxFrequency; }
             }
         }
+        [XmlIgnore]
+        public string OutputFrequencyNumber
+        {
+            get
+            {
+                if (IsRadio) { return FullFrequency; }
+                else { return PhoneNumber; }
+            }
+        }
+
+
         public string Comments { get => _Comments; set => _Comments = value; }
         public bool IsRepeater { get => _IsRepeater; set => _IsRepeater = value; }
         public bool isUniversal { get => _isUniversal; set => _isUniversal = value; }
@@ -127,6 +143,9 @@ namespace WF_ICS_ClassLibrary.Models
 
         public Guid TemplateItemID { get => _TemplateItemID; set => _TemplateItemID = value; }
         public int SortOrder { get => _SortOrder; set => _SortOrder = value; }
+        public bool IsRadio { get => _IsRadio; set => _IsRadio = value; }
+        public string PhoneNumber { get => _PhoneNumber; set => _PhoneNumber = value; }
+        public string URL { get => _URL; set => _URL = value; }
 
         public CommsPlanItem Clone()
         {

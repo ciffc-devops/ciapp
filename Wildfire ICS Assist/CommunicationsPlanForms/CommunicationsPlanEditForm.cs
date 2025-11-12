@@ -24,7 +24,7 @@ namespace Wildfire_ICS_Assist
 
         private void loadSelectedCommsPlanItem()
         {
-            txtFunction.Text = SelectedItem.CommsFunction;
+            cboNewFunction.Text = SelectedItem.CommsFunction;
             txtAssignment.Text = SelectedItem.Assignment;
             chkUsedForAir.Checked = SelectedItem.UsedForAircraft;
         }
@@ -38,7 +38,7 @@ namespace Wildfire_ICS_Assist
         private bool ValidateNew()
         {
             if (!editCommsChannelControl1.IsComplete) {  return false; } 
-            if (string.IsNullOrEmpty(txtFunction.Text)) { txtFunction.BackColor = Program.ErrorColor; return false; } else { txtFunction.BackColor = Program.GoodColor; }
+            if (string.IsNullOrEmpty(cboNewFunction.Text)) { errorProvider1.SetError(cboNewFunction, "This is required"); return false; } else { errorProvider1.SetError(cboNewFunction, ""); }
 
             return true;
         }
@@ -48,7 +48,7 @@ namespace Wildfire_ICS_Assist
             if (ValidateNew())
             {
                 //_SelectedItem = new CommsPlanItem();
-                editCommsChannelControl1.selectedItem.CommsFunction = txtFunction.Text;
+                editCommsChannelControl1.selectedItem.CommsFunction = cboNewFunction.Text;
                 editCommsChannelControl1.selectedItem.Assignment = txtAssignment.Text;
                 editCommsChannelControl1.selectedItem.UsedForAircraft = chkUsedForAir.Checked;
                 this.DialogResult = DialogResult.OK;
@@ -66,6 +66,13 @@ namespace Wildfire_ICS_Assist
             Button btn = (Button)sender;
             int durationMilliseconds = 10000;
             toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
+
+        }
+
+        private void cboNewFunction_TextUpdate(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cboNewFunction.Text)) { errorProvider1.SetError(cboNewFunction, "This is required");  } else { errorProvider1.SetError(cboNewFunction, ""); }
+
 
         }
     }

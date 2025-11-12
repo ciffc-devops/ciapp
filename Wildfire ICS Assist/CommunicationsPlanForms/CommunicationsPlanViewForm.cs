@@ -64,7 +64,10 @@ namespace Wildfire_ICS_Assist
 
         private void Program_OnCommsPlanItemChanged(CommsPlanItemEventArgs e)
         {
-            if (e.item.ItemID == SelectedItem.ItemID) { loadSelectedCommsPlanItem(); }
+            if (e.item.ItemID == SelectedItem.ItemID)
+            {
+                SelectedItem = e.item.Clone();
+                loadSelectedCommsPlanItem(); }
         }
     }
 }

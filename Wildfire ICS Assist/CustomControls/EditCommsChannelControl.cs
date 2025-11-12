@@ -90,5 +90,10 @@ namespace Wildfire_ICS_Assist.CustomControls
             toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
 
         }
+
+        private void cboIsRadio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

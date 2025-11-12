@@ -37,7 +37,6 @@
             this.chkSavedUsedForAir = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtSavedAssignment = new System.Windows.Forms.TextBox();
-            this.txtSavedFunction = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnAddSaved = new System.Windows.Forms.Button();
             this.cboSavedComms = new System.Windows.Forms.ComboBox();
@@ -50,18 +49,21 @@
             this.chkUsedForAir = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtAssignment = new System.Windows.Forms.TextBox();
-            this.txtFunction = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cboSavedFunction = new System.Windows.Forms.ComboBox();
+            this.cboNewFunction = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.pnlSavedComms.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -93,12 +95,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSavedComms.BackColor = System.Drawing.Color.White;
             this.pnlSavedComms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSavedComms.Controls.Add(this.cboSavedFunction);
             this.pnlSavedComms.Controls.Add(this.label13);
             this.pnlSavedComms.Controls.Add(this.btnSavedUsedForAir);
             this.pnlSavedComms.Controls.Add(this.chkSavedUsedForAir);
             this.pnlSavedComms.Controls.Add(this.label11);
             this.pnlSavedComms.Controls.Add(this.txtSavedAssignment);
-            this.pnlSavedComms.Controls.Add(this.txtSavedFunction);
             this.pnlSavedComms.Controls.Add(this.label9);
             this.pnlSavedComms.Controls.Add(this.btnAddSaved);
             this.pnlSavedComms.Controls.Add(this.cboSavedComms);
@@ -165,16 +167,6 @@
             this.txtSavedAssignment.Name = "txtSavedAssignment";
             this.txtSavedAssignment.Size = new System.Drawing.Size(145, 29);
             this.txtSavedAssignment.TabIndex = 3;
-            // 
-            // txtSavedFunction
-            // 
-            this.txtSavedFunction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSavedFunction.Location = new System.Drawing.Point(154, 77);
-            this.txtSavedFunction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtSavedFunction.Name = "txtSavedFunction";
-            this.txtSavedFunction.Size = new System.Drawing.Size(182, 29);
-            this.txtSavedFunction.TabIndex = 2;
             // 
             // label9
             // 
@@ -248,13 +240,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.cboNewFunction);
             this.panel2.Controls.Add(this.editCommsChannelControl1);
             this.panel2.Controls.Add(this.btnAirHelp);
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.chkUsedForAir);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.txtAssignment);
-            this.panel2.Controls.Add(this.txtFunction);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.chkSaveForLater);
             this.panel2.Controls.Add(this.label10);
@@ -338,17 +330,6 @@
             this.txtAssignment.Size = new System.Drawing.Size(572, 29);
             this.txtAssignment.TabIndex = 28;
             // 
-            // txtFunction
-            // 
-            this.txtFunction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFunction.Location = new System.Drawing.Point(169, 346);
-            this.txtFunction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtFunction.Name = "txtFunction";
-            this.txtFunction.Size = new System.Drawing.Size(572, 29);
-            this.txtFunction.TabIndex = 27;
-            this.txtFunction.Leave += new System.EventHandler(this.txtFunction_Leave);
-            // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -395,6 +376,41 @@
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
+            // cboSavedFunction
+            // 
+            this.cboSavedFunction.FormattingEnabled = true;
+            this.cboSavedFunction.Items.AddRange(new object[] {
+            "Command",
+            "Tactical",
+            "Air to Ground",
+            "Air to Air",
+            "Logistics"});
+            this.cboSavedFunction.Location = new System.Drawing.Point(153, 75);
+            this.cboSavedFunction.Name = "cboSavedFunction";
+            this.cboSavedFunction.Size = new System.Drawing.Size(163, 32);
+            this.cboSavedFunction.TabIndex = 135;
+            this.cboSavedFunction.SelectedIndexChanged += new System.EventHandler(this.cboSavedFunction_SelectedIndexChanged);
+            this.cboSavedFunction.TextUpdate += new System.EventHandler(this.cboSavedFunction_TextUpdate);
+            // 
+            // cboNewFunction
+            // 
+            this.cboNewFunction.FormattingEnabled = true;
+            this.cboNewFunction.Items.AddRange(new object[] {
+            "Command",
+            "Tactical",
+            "Air to Ground",
+            "Air to Air",
+            "Logistics"});
+            this.cboNewFunction.Location = new System.Drawing.Point(169, 342);
+            this.cboNewFunction.Name = "cboNewFunction";
+            this.cboNewFunction.Size = new System.Drawing.Size(537, 32);
+            this.cboNewFunction.TabIndex = 136;
+            this.cboNewFunction.TextUpdate += new System.EventHandler(this.cboNewFunction_TextUpdate);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // CommunicationsPlanEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -414,6 +430,7 @@
             this.pnlSavedComms.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -432,11 +449,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtSavedAssignment;
-        private System.Windows.Forms.TextBox txtSavedFunction;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtAssignment;
-        private System.Windows.Forms.TextBox txtFunction;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox chkUsedForAir;
@@ -446,5 +461,8 @@
         private System.Windows.Forms.CheckBox chkSavedUsedForAir;
         private CustomControls.EditCommsChannelControl editCommsChannelControl1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ComboBox cboSavedFunction;
+        private System.Windows.Forms.ComboBox cboNewFunction;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

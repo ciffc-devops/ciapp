@@ -54,12 +54,12 @@ namespace Wildfire_ICS_Assist
             if (ValidateSaved())
             {
                 _SelectedItem = ((CommsPlanItem)cboSavedComms.SelectedItem).Clone();
-                _SelectedItem.CommsFunction = txtSavedFunction.Text;
+                _SelectedItem.CommsFunction = cboSavedFunction.Text;
                 _SelectedItem.Assignment = txtSavedAssignment.Text;
                 _SelectedItem.OpPeriod = Program.CurrentOpPeriod;
                 _SelectedItem.Active = true;
                 _SelectedItem.UsedForAircraft = chkSavedUsedForAir.Checked;
-                
+                _SelectedItem.IsRadio = true;
                 _SelectedItem.ItemID = Guid.NewGuid();
                 this.DialogResult = DialogResult.OK; this.Close();
             }
@@ -71,9 +71,10 @@ namespace Wildfire_ICS_Assist
             {
                 _SelectedItem = editCommsChannelControl1.selectedItem;
                 _SelectedItem.OpPeriod = Program.CurrentOpPeriod;
-                _SelectedItem.CommsFunction = txtFunction.Text;
+                _SelectedItem.CommsFunction = cboNewFunction.Text;
                 _SelectedItem.Assignment = txtAssignment.Text;
                 _SelectedItem.UsedForAircraft = chkUsedForAir.Checked;
+                _SelectedItem.IsRadio = true;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -83,15 +84,20 @@ namespace Wildfire_ICS_Assist
         {
 
 
-            if (string.IsNullOrEmpty(txtSavedFunction.Text)) { txtSavedFunction.BackColor = Program.ErrorColor; return false; } else { txtSavedFunction.BackColor = Program.GoodColor; }
-            if(cboSavedComms.SelectedItem == null) { cboSavedComms.BackColor = Program.ErrorColor;  return false; } else { cboSavedComms.BackColor = Program.GoodColor; }
+            if (string.IsNullOrEmpty(cboSavedFunction.Text)) { errorProvider1.SetError(cboSavedFunction, "This is required"); return false; } else {  errorProvider1.SetError(cboSavedFunction, ""); }
+            if (cboSavedComms.SelectedItem == null) { errorProvider1.SetError(cboSavedComms, "This is required"); return false; } else { errorProvider1.SetError(cboSavedComms, ""); }
             return true;
         }
 
         private bool ValidateNew()
         {
-            if (!editCommsChannelControl1.IsComplete) {  return false; } 
-            if (string.IsNullOrEmpty(txtFunction.Text)) { txtFunction.BackColor = Program.ErrorColor; return false; } else { txtFunction.BackColor = Program.GoodColor; }
+            if (!editCommsChannelControl1.IsComplete) { return false; }
+            if (string.IsNullOrEmpty(cboNewFunction.Text))
+            {
+                errorProvider1.SetError(cboNewFunction, "This is required"); return false;
+            }
+            else { errorProvider1.SetError(cboNewFunction, ""); }
+        
 
             return true;
         }
@@ -150,7 +156,7 @@ namespace Wildfire_ICS_Assist
         {
 
             SavedCommsPlanItems = (List<CommsPlanItem>)Program.generalOptionsService.GetOptionsValue("allCommsPlanItems");
-            cboSavedComms.DataSource = SavedCommsPlanItems;
+            cboSavedComms.DataSource = SavedCommsPlanItems.Where(o=>o.IsRadio).ToList();
             if (SavedCommsPlanItems.Count <= 0) { pnlSavedComms.Enabled = false; }
             chkUsedForAir.Checked = DefaultAircraft;
             chkSavedUsedForAir.Checked = DefaultAircraft;
@@ -167,6 +173,27 @@ namespace Wildfire_ICS_Assist
             Button btn = (Button)sender;
             int durationMilliseconds = 10000;
             toolTip1.Show(toolTip1.GetToolTip(btn), btn, durationMilliseconds);
+        }
+
+        private void cboSavedFunction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboSavedFunction_TextUpdate(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(cboSavedFunction.Text))
+            {
+                errorProvider1.SetError(cboSavedFunction, "");
+            }
+        }
+
+        private void cboNewFunction_TextUpdate(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cboNewFunction.Text))
+            {
+                errorProvider1.SetError(cboNewFunction, "");
+            }
         }
     }
 }
