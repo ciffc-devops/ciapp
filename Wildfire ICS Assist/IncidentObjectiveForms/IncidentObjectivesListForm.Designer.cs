@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tvObjectives = new System.Windows.Forms.TreeView();
@@ -38,8 +39,6 @@
             this.txtFireSize = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cpSituationalAwareness = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            this.txtSituationalAwareness = new SpellBox();
             this.cpCommandEmphasis = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.txtCommandEmphasis = new SpellBox();
             this.prepAndApprovePanel1 = new Wildfire_ICS_Assist.CustomControls.PrepAndApprovePanel();
@@ -52,11 +51,21 @@
             this.txtGeneralSafetyMessage = new SpellBox();
             this.cboSafetyMessages = new System.Windows.Forms.ComboBox();
             this.btnFillSafetyFrom208 = new System.Windows.Forms.Button();
+            this.cpSituationalAwareness = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
+            this.txtSituationalAwareness = new SpellBox();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnAddStrategy = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newObjectiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newStrategyTacticToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.increasePriorityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.decreasePriorityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteObjectiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -67,10 +76,11 @@
             this.splitContainer2.SuspendLayout();
             this.cpWeather.SuspendLayout();
             this.cpFireStatus.SuspendLayout();
-            this.cpSituationalAwareness.SuspendLayout();
             this.cpCommandEmphasis.SuspendLayout();
             this.cpSafetyPlanRequired.SuspendLayout();
             this.cpGeneralSafety.SuspendLayout();
+            this.cpSituationalAwareness.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -124,6 +134,7 @@
             // 
             // tvObjectives
             // 
+            this.tvObjectives.ContextMenuStrip = this.contextMenuStrip1;
             this.tvObjectives.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvObjectives.Location = new System.Drawing.Point(0, 0);
             this.tvObjectives.Name = "tvObjectives";
@@ -232,38 +243,6 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Fire Size ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cpSituationalAwareness
-            // 
-            this.cpSituationalAwareness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpSituationalAwareness.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cpSituationalAwareness.Collapsed = true;
-            this.cpSituationalAwareness.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.cpSituationalAwareness.Controls.Add(this.txtSituationalAwareness);
-            this.cpSituationalAwareness.EnableExpandCollapse = true;
-            this.cpSituationalAwareness.ExpandsRight = true;
-            this.cpSituationalAwareness.ExpandsUpward = false;
-            this.cpSituationalAwareness.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.cpSituationalAwareness.Location = new System.Drawing.Point(9, 275);
-            this.cpSituationalAwareness.Margin = new System.Windows.Forms.Padding(6);
-            this.cpSituationalAwareness.Name = "cpSituationalAwareness";
-            this.cpSituationalAwareness.Size = new System.Drawing.Size(387, 40);
-            this.cpSituationalAwareness.SizeWhenCollapsed = new System.Drawing.Size(387, 40);
-            this.cpSituationalAwareness.SizeWhenExpanded = new System.Drawing.Size(387, 377);
-            this.cpSituationalAwareness.TabIndex = 63;
-            this.cpSituationalAwareness.TitleText = "Situational Awareness";
-            // 
-            // txtSituationalAwareness
-            // 
-            this.txtSituationalAwareness.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSituationalAwareness.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.txtSituationalAwareness.Location = new System.Drawing.Point(7, 51);
-            this.txtSituationalAwareness.Multiline = true;
-            this.txtSituationalAwareness.Name = "txtSituationalAwareness";
-            this.txtSituationalAwareness.Size = new System.Drawing.Size(373, 319);
-            this.txtSituationalAwareness.TabIndex = 34;
-            this.txtSituationalAwareness.Child = new System.Windows.Controls.TextBox();
             // 
             // cpCommandEmphasis
             // 
@@ -444,6 +423,38 @@
             this.btnFillSafetyFrom208.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFillSafetyFrom208.UseVisualStyleBackColor = true;
             // 
+            // cpSituationalAwareness
+            // 
+            this.cpSituationalAwareness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpSituationalAwareness.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cpSituationalAwareness.Collapsed = true;
+            this.cpSituationalAwareness.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
+            this.cpSituationalAwareness.Controls.Add(this.txtSituationalAwareness);
+            this.cpSituationalAwareness.EnableExpandCollapse = true;
+            this.cpSituationalAwareness.ExpandsRight = true;
+            this.cpSituationalAwareness.ExpandsUpward = false;
+            this.cpSituationalAwareness.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.cpSituationalAwareness.Location = new System.Drawing.Point(9, 275);
+            this.cpSituationalAwareness.Margin = new System.Windows.Forms.Padding(6);
+            this.cpSituationalAwareness.Name = "cpSituationalAwareness";
+            this.cpSituationalAwareness.Size = new System.Drawing.Size(387, 40);
+            this.cpSituationalAwareness.SizeWhenCollapsed = new System.Drawing.Size(387, 40);
+            this.cpSituationalAwareness.SizeWhenExpanded = new System.Drawing.Size(387, 377);
+            this.cpSituationalAwareness.TabIndex = 63;
+            this.cpSituationalAwareness.TitleText = "Situational Awareness";
+            // 
+            // txtSituationalAwareness
+            // 
+            this.txtSituationalAwareness.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSituationalAwareness.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.txtSituationalAwareness.Location = new System.Drawing.Point(7, 51);
+            this.txtSituationalAwareness.Multiline = true;
+            this.txtSituationalAwareness.Name = "txtSituationalAwareness";
+            this.txtSituationalAwareness.Size = new System.Drawing.Size(373, 319);
+            this.txtSituationalAwareness.TabIndex = 34;
+            this.txtSituationalAwareness.Child = new System.Windows.Controls.TextBox();
+            // 
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -511,6 +522,65 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newObjectiveToolStripMenuItem,
+            this.newStrategyTacticToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.increasePriorityToolStripMenuItem,
+            this.decreasePriorityToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.deleteObjectiveToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(260, 188);
+            // 
+            // newObjectiveToolStripMenuItem
+            // 
+            this.newObjectiveToolStripMenuItem.Name = "newObjectiveToolStripMenuItem";
+            this.newObjectiveToolStripMenuItem.Size = new System.Drawing.Size(259, 30);
+            this.newObjectiveToolStripMenuItem.Text = "New Objective";
+            this.newObjectiveToolStripMenuItem.Click += new System.EventHandler(this.newObjectiveToolStripMenuItem_Click);
+            // 
+            // newStrategyTacticToolStripMenuItem
+            // 
+            this.newStrategyTacticToolStripMenuItem.Name = "newStrategyTacticToolStripMenuItem";
+            this.newStrategyTacticToolStripMenuItem.Size = new System.Drawing.Size(259, 30);
+            this.newStrategyTacticToolStripMenuItem.Text = "New Strategy / Tactic";
+            this.newStrategyTacticToolStripMenuItem.Click += new System.EventHandler(this.newStrategyTacticToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(256, 6);
+            // 
+            // increasePriorityToolStripMenuItem
+            // 
+            this.increasePriorityToolStripMenuItem.Name = "increasePriorityToolStripMenuItem";
+            this.increasePriorityToolStripMenuItem.Size = new System.Drawing.Size(259, 30);
+            this.increasePriorityToolStripMenuItem.Text = "Increase Priority";
+            this.increasePriorityToolStripMenuItem.Click += new System.EventHandler(this.increasePriorityToolStripMenuItem_Click);
+            // 
+            // decreasePriorityToolStripMenuItem
+            // 
+            this.decreasePriorityToolStripMenuItem.Name = "decreasePriorityToolStripMenuItem";
+            this.decreasePriorityToolStripMenuItem.Size = new System.Drawing.Size(259, 30);
+            this.decreasePriorityToolStripMenuItem.Text = "Decrease Priority";
+            this.decreasePriorityToolStripMenuItem.Click += new System.EventHandler(this.decreasePriorityToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(256, 6);
+            // 
+            // deleteObjectiveToolStripMenuItem
+            // 
+            this.deleteObjectiveToolStripMenuItem.Name = "deleteObjectiveToolStripMenuItem";
+            this.deleteObjectiveToolStripMenuItem.Size = new System.Drawing.Size(259, 30);
+            this.deleteObjectiveToolStripMenuItem.Text = "Delete Objective";
+            this.deleteObjectiveToolStripMenuItem.Click += new System.EventHandler(this.deleteObjectiveToolStripMenuItem_Click);
+            // 
             // IncidentObjectivesListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -533,11 +603,12 @@
             this.cpWeather.ResumeLayout(false);
             this.cpFireStatus.ResumeLayout(false);
             this.cpFireStatus.PerformLayout();
-            this.cpSituationalAwareness.ResumeLayout(false);
             this.cpCommandEmphasis.ResumeLayout(false);
             this.cpSafetyPlanRequired.ResumeLayout(false);
             this.cpSafetyPlanRequired.PerformLayout();
             this.cpGeneralSafety.ResumeLayout(false);
+            this.cpSituationalAwareness.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -573,5 +644,13 @@
         private System.Windows.Forms.Label label4;
         private SpellBox txtSafetyPlanLocation;
         private System.Windows.Forms.CheckBox chkSafetyPlanRequired;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem newObjectiveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newStrategyTacticToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem increasePriorityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem decreasePriorityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem deleteObjectiveToolStripMenuItem;
     }
 }

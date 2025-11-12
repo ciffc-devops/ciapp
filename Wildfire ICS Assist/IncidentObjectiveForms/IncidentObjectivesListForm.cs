@@ -231,7 +231,7 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
         {
             using (IncidentObjectiveEntryForm editForm = new IncidentObjectiveEntryForm())
             {
-                editForm.Objective = objective;
+                editForm.Objective = objective.Clone();
                 editForm.EditMode = !IsNew;
                 var result = editForm.ShowDialog();
                 if (result == DialogResult.OK)
@@ -449,6 +449,103 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
         {
             objectivesSheet.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
             objectivesSheet.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+
+        }
+
+        private void newObjectiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IncidentObjective objective = new IncidentObjective();
+            objective.Active = true;
+            objective.OpPeriod = Program.CurrentOpPeriod;
+            objective.Priority = objectivesSheet.GetNextPriorityNumber();
+            objective.ParentObjectiveID = Guid.Empty;
+            EditObjective(objective, true);
+        }
+
+        private void newStrategyTacticToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tvObjectives.SelectedNode.Tag != null)
+            {
+                IncidentObjective parent = (IncidentObjective)tvObjectives.SelectedNode.Tag;
+
+                IncidentObjective objective = new IncidentObjective();
+                objective.Active = true;
+                objective.OpPeriod = Program.CurrentOpPeriod;
+                objective.Priority = objectivesSheet.GetNextPriorityNumber();
+                objective.ParentObjectiveID = parent.ID;
+                EditObjective(objective, true);
+            }
+        }
+
+        private void increasePriorityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tvObjectives.SelectedNode != null)
+            {
+                IncidentObjective objective = (IncidentObjective)tvObjectives.SelectedNode.Tag;
+                IncreasePriority(objective.Clone());
+
+
+
+            }
+        }
+
+        private void decreasePriorityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tvObjectives.SelectedNode != null)
+            {
+                IncidentObjective objective = (IncidentObjective)tvObjectives.SelectedNode.Tag;
+                DecreasePriority(objective.Clone());
+
+
+
+            }
+        }
+
+        private void deleteObjectiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (LgMessageBox.Show("Are you sure you want to delete this objective?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                IncidentObjective objective = (IncidentObjective)tvObjectives.SelectedNode.Tag;
+                deleteObjective(objective);
+            }
+        }
+
+        private void IncreasePriority(IncidentObjective objective)
+        {
+            if (objective.Priority > 1)
+            {
+                //move this item up the priority sequence
+                objective.Priority = objective.Priority - 1;
+                Program.incidentDataService.UpsertIncidentObjective(objective);
+
+                IncidentObjective objectiveToMove = objectivesSheet.ActiveObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod && o.ParentObjectiveID == objective.ParentObjectiveID && o.Priority == objective.Priority && o.ID != objective.ID);
+                objectiveToMove.Priority += 1;
+                Program.incidentDataService.UpsertIncidentObjective(objectiveToMove);
+
+
+                //setObjectiveList();
+                PopulateTree(objective);
+            }
+
+        }
+
+        private void DecreasePriority(IncidentObjective objective)
+        {
+
+            if (objectivesSheet.ActiveObjectives.Any(o => o.OpPeriod == Program.CurrentOpPeriod && o.Priority == (objective.Priority + 1) && o.ID != objective.ID))
+            {
+                //move this item up the priority sequence
+                objective.Priority = objective.Priority + 1;
+                Program.incidentDataService.UpsertIncidentObjective(objective);
+
+                IncidentObjective objectiveToMove = objectivesSheet.ActiveObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod && o.ParentObjectiveID == objective.ParentObjectiveID && o.Priority == objective.Priority && o.ID != objective.ID);
+                objectiveToMove.Priority -= 1;
+                Program.incidentDataService.UpsertIncidentObjective(objectiveToMove);
+
+
+                //setObjectiveList();
+                PopulateTree(objective);
+            }
 
         }
     }

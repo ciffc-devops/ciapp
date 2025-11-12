@@ -82,7 +82,6 @@ namespace Wildfire_ICS_Assist
         {
             if (ValidateNew())
             {
-                Objective = new IncidentObjective();
                 Objective.Objective = txtNewObjective.Text;
                 Objective.ObjectiveLastUpdatedUTC = DateTime.UtcNow;
                 this.DialogResult = DialogResult.OK;
@@ -139,6 +138,7 @@ namespace Wildfire_ICS_Assist
         private void IncidentObjectiveEntryForm_Load(object sender, EventArgs e)
         {
             loadSavedObjectives();
+            txtNewObjective.Text = _objective.Objective;
         }
 
         private void btnSaveChanges_Click(object sender, EventArgs e)
