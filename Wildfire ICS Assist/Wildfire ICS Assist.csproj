@@ -283,6 +283,18 @@
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SortedBindingList.cs" />
+    <Compile Include="CommunicationsPlanForms\CommunicationsPlanNonRadioViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanForms\CommunicationsPlanNonRadioViewForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanNonRadioViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanForms\CommunicationsPlanPhoneEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanForms\CommunicationsPlanPhoneEditForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanPhoneEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\PrepAndApprovePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -984,6 +996,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AirOpsForms\AirOpsAddAircraftForm.resx">
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanForms\CommunicationsPlanNonRadioViewForm.resx">
+      <DependentUpon>CommunicationsPlanNonRadioViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanForms\CommunicationsPlanPhoneEditForm.resx">
+      <DependentUpon>CommunicationsPlanPhoneEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\PrepAndApprovePanel.resx">
       <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>

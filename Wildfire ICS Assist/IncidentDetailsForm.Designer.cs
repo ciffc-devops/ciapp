@@ -30,35 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncidentDetailsForm));
-            this.imglTabIcons = new System.Windows.Forms.ImageList(this.components);
-            this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
-            this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
-            this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
-            this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
-            this.tmrPositionLogReminders = new System.Windows.Forms.Timer(this.components);
-            this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
-            this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
-            this.tmrLock = new System.Windows.Forms.Timer(this.components);
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnMoveToOpNow = new System.Windows.Forms.Button();
-            this.picOrgLogo = new System.Windows.Forms.PictureBox();
-            this.pnlInternetSyncStart = new System.Windows.Forms.Panel();
-            this.btnCancelInternetSync = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.pnlNetworkSyncInProgress = new System.Windows.Forms.Panel();
-            this.lblNetworkShareMoreInfoMsg = new System.Windows.Forms.Label();
-            this.btnNetworkSyncDone = new System.Windows.Forms.Button();
-            this.pbNetworkSyncInProgress = new System.Windows.Forms.ProgressBar();
-            this.btnCloseNetworkSyncInProgress = new System.Windows.Forms.Button();
-            this.lblNetworkSyncStatus = new System.Windows.Forms.Label();
-            this.pnlOpsPeriod = new System.Windows.Forms.Panel();
-            this.btnReviewOpPeriod = new System.Windows.Forms.Button();
-            this.btnEditOpPeriod = new System.Windows.Forms.Button();
-            this.btnNewOpPeriod = new System.Windows.Forms.Button();
-            this.cboCurrentOperationalPeriod = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnLockTaskInfo = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
@@ -73,6 +44,40 @@
             this.btnICSRoleHelp = new System.Windows.Forms.Button();
             this.btnViewPositionLog = new System.Windows.Forms.Button();
             this.btnAddToPositionLog = new System.Windows.Forms.Button();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.pnlTaskInfo = new System.Windows.Forms.Panel();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.picOrgLogo = new System.Windows.Forms.PictureBox();
+            this.picFormSet = new System.Windows.Forms.PictureBox();
+            this.pnlOpsPeriod = new System.Windows.Forms.Panel();
+            this.btnMoveToOpNow = new System.Windows.Forms.Button();
+            this.btnReviewOpPeriod = new System.Windows.Forms.Button();
+            this.btnEditOpPeriod = new System.Windows.Forms.Button();
+            this.btnNewOpPeriod = new System.Windows.Forms.Button();
+            this.cboCurrentOperationalPeriod = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.imglTabIcons = new System.Windows.Forms.ImageList(this.components);
+            this.svdTaskFile = new System.Windows.Forms.SaveFileDialog();
+            this.ofdOpenTaskFile = new System.Windows.Forms.OpenFileDialog();
+            this.fbdSaveLocation = new System.Windows.Forms.FolderBrowserDialog();
+            this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
+            this.tmrPositionLogReminders = new System.Windows.Forms.Timer(this.components);
+            this.tmrInternetSync = new System.Windows.Forms.Timer(this.components);
+            this.tmrNetwork = new System.Windows.Forms.Timer(this.components);
+            this.tmrLock = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pnlInternetSyncStart = new System.Windows.Forms.Panel();
+            this.btnCancelInternetSync = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.pnlNetworkSyncInProgress = new System.Windows.Forms.Panel();
+            this.lblNetworkShareMoreInfoMsg = new System.Windows.Forms.Label();
+            this.btnNetworkSyncDone = new System.Windows.Forms.Button();
+            this.pbNetworkSyncInProgress = new System.Windows.Forms.ProgressBar();
+            this.btnCloseNetworkSyncInProgress = new System.Windows.Forms.Button();
+            this.lblNetworkSyncStatus = new System.Windows.Forms.Label();
             this.lblServerStatus = new System.Windows.Forms.Label();
             this.lblVersionNumber = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -153,33 +158,20 @@
             this.cpIncidentActionPlan = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnIncidentObjectives = new System.Windows.Forms.Button();
-            this.btnCommsPlan = new System.Windows.Forms.Button();
             this.btnPrintOrgChart = new System.Windows.Forms.Button();
+            this.btnAssignmentList = new System.Windows.Forms.Button();
+            this.btnCommsPlan = new System.Windows.Forms.Button();
             this.btnMedicalPlan = new System.Windows.Forms.Button();
             this.btnSafetyPlans = new System.Windows.Forms.Button();
-            this.btnAirOpsSummary = new System.Windows.Forms.Button();
-            this.btnAssignmentList = new System.Windows.Forms.Button();
             this.btnIncidentStatusSummary = new System.Windows.Forms.Button();
+            this.btnAirOpsSummary = new System.Windows.Forms.Button();
             this.btnPrintIAP = new System.Windows.Forms.Button();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.pnlTaskInfo = new System.Windows.Forms.Panel();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.picFormSet = new System.Windows.Forms.PictureBox();
             this.collapsiblePanel1 = new Wildfire_ICS_Assist.CustomControls.CollapsiblePanel();
-            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
-            this.pnlInternetSyncStart.SuspendLayout();
-            this.pnlNetworkSyncInProgress.SuspendLayout();
-            this.pnlOpsPeriod.SuspendLayout();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.cpOtherTools.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.cpIncidentActionPlan.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -193,192 +185,19 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFormSet)).BeginInit();
+            this.pnlOpsPeriod.SuspendLayout();
+            this.pnlInternetSyncStart.SuspendLayout();
+            this.pnlNetworkSyncInProgress.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.cpOtherTools.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.cpIncidentActionPlan.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.collapsiblePanel1.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // imglTabIcons
-            // 
-            this.imglTabIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglTabIcons.ImageStream")));
-            this.imglTabIcons.TransparentColor = System.Drawing.Color.Transparent;
-            this.imglTabIcons.Images.SetKeyName(0, "glyphicons-basic-532-user-family.png");
-            this.imglTabIcons.Images.SetKeyName(1, "glyphicons-basic-849-computer-network.png");
-            this.imglTabIcons.Images.SetKeyName(2, "glyphicons-basic-876-palette-package.png");
-            // 
-            // ofdOpenTaskFile
-            // 
-            this.ofdOpenTaskFile.DefaultExt = "xml";
-            resources.ApplyResources(this.ofdOpenTaskFile, "ofdOpenTaskFile");
-            // 
-            // tmrAutoSave
-            // 
-            this.tmrAutoSave.Interval = 10000;
-            this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
-            // 
-            // tmrPositionLogReminders
-            // 
-            this.tmrPositionLogReminders.Interval = 60000;
-            this.tmrPositionLogReminders.Tick += new System.EventHandler(this.tmrPositionLogReminders_Tick);
-            // 
-            // tmrInternetSync
-            // 
-            this.tmrInternetSync.Interval = 2000;
-            this.tmrInternetSync.Tick += new System.EventHandler(this.tmrInternetSync_Tick);
-            // 
-            // tmrNetwork
-            // 
-            this.tmrNetwork.Interval = 10000;
-            this.tmrNetwork.Tick += new System.EventHandler(this.tmrNetwork_Tick);
-            // 
-            // tmrLock
-            // 
-            this.tmrLock.Interval = 30000;
-            this.tmrLock.Tick += new System.EventHandler(this.tmrLock_Tick);
-            // 
-            // btnMoveToOpNow
-            // 
-            resources.ApplyResources(this.btnMoveToOpNow, "btnMoveToOpNow");
-            this.btnMoveToOpNow.Name = "btnMoveToOpNow";
-            this.btnMoveToOpNow.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnMoveToOpNow, resources.GetString("btnMoveToOpNow.ToolTip"));
-            this.btnMoveToOpNow.UseVisualStyleBackColor = true;
-            this.btnMoveToOpNow.Click += new System.EventHandler(this.btnMoveToOpNow_Click);
-            // 
-            // picOrgLogo
-            // 
-            resources.ApplyResources(this.picOrgLogo, "picOrgLogo");
-            this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
-            this.picOrgLogo.Name = "picOrgLogo";
-            this.picOrgLogo.TabStop = false;
-            this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // pnlInternetSyncStart
-            // 
-            resources.ApplyResources(this.pnlInternetSyncStart, "pnlInternetSyncStart");
-            this.pnlInternetSyncStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
-            this.pnlInternetSyncStart.Controls.Add(this.btnCancelInternetSync);
-            this.pnlInternetSyncStart.Controls.Add(this.label22);
-            this.pnlInternetSyncStart.Controls.Add(this.label21);
-            this.pnlInternetSyncStart.Controls.Add(this.progressBar1);
-            this.pnlInternetSyncStart.Name = "pnlInternetSyncStart";
-            // 
-            // btnCancelInternetSync
-            // 
-            resources.ApplyResources(this.btnCancelInternetSync, "btnCancelInternetSync");
-            this.btnCancelInternetSync.Name = "btnCancelInternetSync";
-            this.btnCancelInternetSync.UseVisualStyleBackColor = true;
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label22.Name = "label22";
-            // 
-            // label21
-            // 
-            resources.ApplyResources(this.label21, "label21");
-            this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Name = "label21";
-            // 
-            // progressBar1
-            // 
-            resources.ApplyResources(this.progressBar1, "progressBar1");
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            // 
-            // pnlNetworkSyncInProgress
-            // 
-            resources.ApplyResources(this.pnlNetworkSyncInProgress, "pnlNetworkSyncInProgress");
-            this.pnlNetworkSyncInProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
-            this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkShareMoreInfoMsg);
-            this.pnlNetworkSyncInProgress.Controls.Add(this.btnNetworkSyncDone);
-            this.pnlNetworkSyncInProgress.Controls.Add(this.pbNetworkSyncInProgress);
-            this.pnlNetworkSyncInProgress.Controls.Add(this.btnCloseNetworkSyncInProgress);
-            this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkSyncStatus);
-            this.pnlNetworkSyncInProgress.Name = "pnlNetworkSyncInProgress";
-            // 
-            // lblNetworkShareMoreInfoMsg
-            // 
-            resources.ApplyResources(this.lblNetworkShareMoreInfoMsg, "lblNetworkShareMoreInfoMsg");
-            this.lblNetworkShareMoreInfoMsg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lblNetworkShareMoreInfoMsg.Name = "lblNetworkShareMoreInfoMsg";
-            // 
-            // btnNetworkSyncDone
-            // 
-            resources.ApplyResources(this.btnNetworkSyncDone, "btnNetworkSyncDone");
-            this.btnNetworkSyncDone.Name = "btnNetworkSyncDone";
-            this.btnNetworkSyncDone.UseVisualStyleBackColor = true;
-            this.btnNetworkSyncDone.Click += new System.EventHandler(this.btnNetworkSyncDone_Click);
-            // 
-            // pbNetworkSyncInProgress
-            // 
-            resources.ApplyResources(this.pbNetworkSyncInProgress, "pbNetworkSyncInProgress");
-            this.pbNetworkSyncInProgress.Maximum = 4;
-            this.pbNetworkSyncInProgress.Name = "pbNetworkSyncInProgress";
-            this.pbNetworkSyncInProgress.Step = 1;
-            // 
-            // btnCloseNetworkSyncInProgress
-            // 
-            resources.ApplyResources(this.btnCloseNetworkSyncInProgress, "btnCloseNetworkSyncInProgress");
-            this.btnCloseNetworkSyncInProgress.Name = "btnCloseNetworkSyncInProgress";
-            this.btnCloseNetworkSyncInProgress.UseVisualStyleBackColor = true;
-            this.btnCloseNetworkSyncInProgress.Click += new System.EventHandler(this.btnCloseNetworkSyncInProgress_Click);
-            // 
-            // lblNetworkSyncStatus
-            // 
-            resources.ApplyResources(this.lblNetworkSyncStatus, "lblNetworkSyncStatus");
-            this.lblNetworkSyncStatus.ForeColor = System.Drawing.Color.White;
-            this.lblNetworkSyncStatus.Name = "lblNetworkSyncStatus";
-            // 
-            // pnlOpsPeriod
-            // 
-            this.pnlOpsPeriod.BackColor = System.Drawing.Color.White;
-            this.pnlOpsPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOpsPeriod.Controls.Add(this.btnMoveToOpNow);
-            this.pnlOpsPeriod.Controls.Add(this.btnReviewOpPeriod);
-            this.pnlOpsPeriod.Controls.Add(this.btnEditOpPeriod);
-            this.pnlOpsPeriod.Controls.Add(this.btnNewOpPeriod);
-            this.pnlOpsPeriod.Controls.Add(this.cboCurrentOperationalPeriod);
-            this.pnlOpsPeriod.Controls.Add(this.label1);
-            resources.ApplyResources(this.pnlOpsPeriod, "pnlOpsPeriod");
-            this.pnlOpsPeriod.Name = "pnlOpsPeriod";
-            // 
-            // btnReviewOpPeriod
-            // 
-            resources.ApplyResources(this.btnReviewOpPeriod, "btnReviewOpPeriod");
-            this.btnReviewOpPeriod.Name = "btnReviewOpPeriod";
-            this.btnReviewOpPeriod.TabStop = false;
-            this.btnReviewOpPeriod.UseVisualStyleBackColor = true;
-            this.btnReviewOpPeriod.Click += new System.EventHandler(this.btnReviewOpPeriod_Click);
-            // 
-            // btnEditOpPeriod
-            // 
-            resources.ApplyResources(this.btnEditOpPeriod, "btnEditOpPeriod");
-            this.btnEditOpPeriod.Name = "btnEditOpPeriod";
-            this.btnEditOpPeriod.TabStop = false;
-            this.btnEditOpPeriod.UseVisualStyleBackColor = true;
-            this.btnEditOpPeriod.Click += new System.EventHandler(this.btnEditOpPeriod_Click);
-            // 
-            // btnNewOpPeriod
-            // 
-            resources.ApplyResources(this.btnNewOpPeriod, "btnNewOpPeriod");
-            this.btnNewOpPeriod.Name = "btnNewOpPeriod";
-            this.btnNewOpPeriod.TabStop = false;
-            this.btnNewOpPeriod.UseVisualStyleBackColor = true;
-            this.btnNewOpPeriod.Click += new System.EventHandler(this.btnNewOpPeriod_Click);
-            // 
-            // cboCurrentOperationalPeriod
-            // 
-            resources.ApplyResources(this.cboCurrentOperationalPeriod, "cboCurrentOperationalPeriod");
-            this.cboCurrentOperationalPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCurrentOperationalPeriod.FormattingEnabled = true;
-            this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
-            this.cboCurrentOperationalPeriod.SelectedIndexChanged += new System.EventHandler(this.cboCurrentOperationalPeriod_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
             // 
             // splitContainer1
             // 
@@ -498,6 +317,248 @@
             this.btnAddToPositionLog.TabStop = false;
             this.btnAddToPositionLog.UseVisualStyleBackColor = true;
             this.btnAddToPositionLog.Click += new System.EventHandler(this.btnAddToPositionLog_Click);
+            // 
+            // splitContainer2
+            // 
+            resources.ApplyResources(this.splitContainer2, "splitContainer2");
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.pnlTaskInfo);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
+            // 
+            // pnlTaskInfo
+            // 
+            this.pnlTaskInfo.BackColor = System.Drawing.Color.White;
+            this.pnlTaskInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTaskInfo.Controls.Add(this.splitContainer1);
+            resources.ApplyResources(this.pnlTaskInfo, "pnlTaskInfo");
+            this.pnlTaskInfo.Name = "pnlTaskInfo";
+            this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
+            // 
+            // splitContainer3
+            // 
+            resources.ApplyResources(this.splitContainer3, "splitContainer3");
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.splitContainer4);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.pnlOpsPeriod);
+            // 
+            // splitContainer4
+            // 
+            resources.ApplyResources(this.splitContainer4, "splitContainer4");
+            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.picOrgLogo);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.picFormSet);
+            // 
+            // picOrgLogo
+            // 
+            resources.ApplyResources(this.picOrgLogo, "picOrgLogo");
+            this.picOrgLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3_transparent;
+            this.picOrgLogo.Name = "picOrgLogo";
+            this.picOrgLogo.TabStop = false;
+            this.picOrgLogo.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // picFormSet
+            // 
+            this.picFormSet.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.picFormSet, "picFormSet");
+            this.picFormSet.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPPFormSet_01;
+            this.picFormSet.Name = "picFormSet";
+            this.picFormSet.TabStop = false;
+            this.picFormSet.Click += new System.EventHandler(this.picFormSet_Click);
+            // 
+            // pnlOpsPeriod
+            // 
+            this.pnlOpsPeriod.BackColor = System.Drawing.Color.White;
+            this.pnlOpsPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOpsPeriod.Controls.Add(this.btnMoveToOpNow);
+            this.pnlOpsPeriod.Controls.Add(this.btnReviewOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.btnEditOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.btnNewOpPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.cboCurrentOperationalPeriod);
+            this.pnlOpsPeriod.Controls.Add(this.label1);
+            resources.ApplyResources(this.pnlOpsPeriod, "pnlOpsPeriod");
+            this.pnlOpsPeriod.Name = "pnlOpsPeriod";
+            // 
+            // btnMoveToOpNow
+            // 
+            resources.ApplyResources(this.btnMoveToOpNow, "btnMoveToOpNow");
+            this.btnMoveToOpNow.Name = "btnMoveToOpNow";
+            this.btnMoveToOpNow.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnMoveToOpNow, resources.GetString("btnMoveToOpNow.ToolTip"));
+            this.btnMoveToOpNow.UseVisualStyleBackColor = true;
+            this.btnMoveToOpNow.Click += new System.EventHandler(this.btnMoveToOpNow_Click);
+            // 
+            // btnReviewOpPeriod
+            // 
+            resources.ApplyResources(this.btnReviewOpPeriod, "btnReviewOpPeriod");
+            this.btnReviewOpPeriod.Name = "btnReviewOpPeriod";
+            this.btnReviewOpPeriod.TabStop = false;
+            this.btnReviewOpPeriod.UseVisualStyleBackColor = true;
+            this.btnReviewOpPeriod.Click += new System.EventHandler(this.btnReviewOpPeriod_Click);
+            // 
+            // btnEditOpPeriod
+            // 
+            resources.ApplyResources(this.btnEditOpPeriod, "btnEditOpPeriod");
+            this.btnEditOpPeriod.Name = "btnEditOpPeriod";
+            this.btnEditOpPeriod.TabStop = false;
+            this.btnEditOpPeriod.UseVisualStyleBackColor = true;
+            this.btnEditOpPeriod.Click += new System.EventHandler(this.btnEditOpPeriod_Click);
+            // 
+            // btnNewOpPeriod
+            // 
+            resources.ApplyResources(this.btnNewOpPeriod, "btnNewOpPeriod");
+            this.btnNewOpPeriod.Name = "btnNewOpPeriod";
+            this.btnNewOpPeriod.TabStop = false;
+            this.btnNewOpPeriod.UseVisualStyleBackColor = true;
+            this.btnNewOpPeriod.Click += new System.EventHandler(this.btnNewOpPeriod_Click);
+            // 
+            // cboCurrentOperationalPeriod
+            // 
+            resources.ApplyResources(this.cboCurrentOperationalPeriod, "cboCurrentOperationalPeriod");
+            this.cboCurrentOperationalPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCurrentOperationalPeriod.FormattingEnabled = true;
+            this.cboCurrentOperationalPeriod.Name = "cboCurrentOperationalPeriod";
+            this.cboCurrentOperationalPeriod.SelectedIndexChanged += new System.EventHandler(this.cboCurrentOperationalPeriod_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // imglTabIcons
+            // 
+            this.imglTabIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglTabIcons.ImageStream")));
+            this.imglTabIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imglTabIcons.Images.SetKeyName(0, "glyphicons-basic-532-user-family.png");
+            this.imglTabIcons.Images.SetKeyName(1, "glyphicons-basic-849-computer-network.png");
+            this.imglTabIcons.Images.SetKeyName(2, "glyphicons-basic-876-palette-package.png");
+            // 
+            // ofdOpenTaskFile
+            // 
+            this.ofdOpenTaskFile.DefaultExt = "xml";
+            resources.ApplyResources(this.ofdOpenTaskFile, "ofdOpenTaskFile");
+            // 
+            // tmrAutoSave
+            // 
+            this.tmrAutoSave.Interval = 10000;
+            this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
+            // 
+            // tmrPositionLogReminders
+            // 
+            this.tmrPositionLogReminders.Interval = 60000;
+            this.tmrPositionLogReminders.Tick += new System.EventHandler(this.tmrPositionLogReminders_Tick);
+            // 
+            // tmrInternetSync
+            // 
+            this.tmrInternetSync.Interval = 2000;
+            this.tmrInternetSync.Tick += new System.EventHandler(this.tmrInternetSync_Tick);
+            // 
+            // tmrNetwork
+            // 
+            this.tmrNetwork.Interval = 10000;
+            this.tmrNetwork.Tick += new System.EventHandler(this.tmrNetwork_Tick);
+            // 
+            // tmrLock
+            // 
+            this.tmrLock.Interval = 30000;
+            this.tmrLock.Tick += new System.EventHandler(this.tmrLock_Tick);
+            // 
+            // pnlInternetSyncStart
+            // 
+            resources.ApplyResources(this.pnlInternetSyncStart, "pnlInternetSyncStart");
+            this.pnlInternetSyncStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
+            this.pnlInternetSyncStart.Controls.Add(this.btnCancelInternetSync);
+            this.pnlInternetSyncStart.Controls.Add(this.label22);
+            this.pnlInternetSyncStart.Controls.Add(this.label21);
+            this.pnlInternetSyncStart.Controls.Add(this.progressBar1);
+            this.pnlInternetSyncStart.Name = "pnlInternetSyncStart";
+            // 
+            // btnCancelInternetSync
+            // 
+            resources.ApplyResources(this.btnCancelInternetSync, "btnCancelInternetSync");
+            this.btnCancelInternetSync.Name = "btnCancelInternetSync";
+            this.btnCancelInternetSync.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label22.Name = "label22";
+            // 
+            // label21
+            // 
+            resources.ApplyResources(this.label21, "label21");
+            this.label21.ForeColor = System.Drawing.Color.White;
+            this.label21.Name = "label21";
+            // 
+            // progressBar1
+            // 
+            resources.ApplyResources(this.progressBar1, "progressBar1");
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // pnlNetworkSyncInProgress
+            // 
+            resources.ApplyResources(this.pnlNetworkSyncInProgress, "pnlNetworkSyncInProgress");
+            this.pnlNetworkSyncInProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(130)))), ((int)(((byte)(236)))));
+            this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkShareMoreInfoMsg);
+            this.pnlNetworkSyncInProgress.Controls.Add(this.btnNetworkSyncDone);
+            this.pnlNetworkSyncInProgress.Controls.Add(this.pbNetworkSyncInProgress);
+            this.pnlNetworkSyncInProgress.Controls.Add(this.btnCloseNetworkSyncInProgress);
+            this.pnlNetworkSyncInProgress.Controls.Add(this.lblNetworkSyncStatus);
+            this.pnlNetworkSyncInProgress.Name = "pnlNetworkSyncInProgress";
+            // 
+            // lblNetworkShareMoreInfoMsg
+            // 
+            resources.ApplyResources(this.lblNetworkShareMoreInfoMsg, "lblNetworkShareMoreInfoMsg");
+            this.lblNetworkShareMoreInfoMsg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lblNetworkShareMoreInfoMsg.Name = "lblNetworkShareMoreInfoMsg";
+            // 
+            // btnNetworkSyncDone
+            // 
+            resources.ApplyResources(this.btnNetworkSyncDone, "btnNetworkSyncDone");
+            this.btnNetworkSyncDone.Name = "btnNetworkSyncDone";
+            this.btnNetworkSyncDone.UseVisualStyleBackColor = true;
+            this.btnNetworkSyncDone.Click += new System.EventHandler(this.btnNetworkSyncDone_Click);
+            // 
+            // pbNetworkSyncInProgress
+            // 
+            resources.ApplyResources(this.pbNetworkSyncInProgress, "pbNetworkSyncInProgress");
+            this.pbNetworkSyncInProgress.Maximum = 4;
+            this.pbNetworkSyncInProgress.Name = "pbNetworkSyncInProgress";
+            this.pbNetworkSyncInProgress.Step = 1;
+            // 
+            // btnCloseNetworkSyncInProgress
+            // 
+            resources.ApplyResources(this.btnCloseNetworkSyncInProgress, "btnCloseNetworkSyncInProgress");
+            this.btnCloseNetworkSyncInProgress.Name = "btnCloseNetworkSyncInProgress";
+            this.btnCloseNetworkSyncInProgress.UseVisualStyleBackColor = true;
+            this.btnCloseNetworkSyncInProgress.Click += new System.EventHandler(this.btnCloseNetworkSyncInProgress_Click);
+            // 
+            // lblNetworkSyncStatus
+            // 
+            resources.ApplyResources(this.lblNetworkSyncStatus, "lblNetworkSyncStatus");
+            this.lblNetworkSyncStatus.ForeColor = System.Drawing.Color.White;
+            this.lblNetworkSyncStatus.Name = "lblNetworkSyncStatus";
             // 
             // lblServerStatus
             // 
@@ -1056,14 +1117,15 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnIncidentObjectives);
-            this.flowLayoutPanel1.Controls.Add(this.btnCommsPlan);
             this.flowLayoutPanel1.Controls.Add(this.btnPrintOrgChart);
+            this.flowLayoutPanel1.Controls.Add(this.btnAssignmentList);
+            this.flowLayoutPanel1.Controls.Add(this.btnCommsPlan);
             this.flowLayoutPanel1.Controls.Add(this.btnMedicalPlan);
             this.flowLayoutPanel1.Controls.Add(this.btnSafetyPlans);
-            this.flowLayoutPanel1.Controls.Add(this.btnAirOpsSummary);
-            this.flowLayoutPanel1.Controls.Add(this.btnAssignmentList);
             this.flowLayoutPanel1.Controls.Add(this.btnIncidentStatusSummary);
+            this.flowLayoutPanel1.Controls.Add(this.btnAirOpsSummary);
             this.flowLayoutPanel1.Controls.Add(this.btnPrintIAP);
+            this.flowLayoutPanel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -1075,14 +1137,6 @@
             this.btnIncidentObjectives.UseVisualStyleBackColor = true;
             this.btnIncidentObjectives.Click += new System.EventHandler(this.btnIncidentObjectives_Click);
             // 
-            // btnCommsPlan
-            // 
-            resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
-            this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnCommsPlan.Name = "btnCommsPlan";
-            this.btnCommsPlan.UseVisualStyleBackColor = true;
-            this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
-            // 
             // btnPrintOrgChart
             // 
             resources.ApplyResources(this.btnPrintOrgChart, "btnPrintOrgChart");
@@ -1090,6 +1144,22 @@
             this.btnPrintOrgChart.Name = "btnPrintOrgChart";
             this.btnPrintOrgChart.UseVisualStyleBackColor = true;
             this.btnPrintOrgChart.Click += new System.EventHandler(this.btnPrintOrgChart_Click);
+            // 
+            // btnAssignmentList
+            // 
+            resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
+            this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnAssignmentList.Name = "btnAssignmentList";
+            this.btnAssignmentList.UseVisualStyleBackColor = true;
+            this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
+            // 
+            // btnCommsPlan
+            // 
+            resources.ApplyResources(this.btnCommsPlan, "btnCommsPlan");
+            this.btnCommsPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnCommsPlan.Name = "btnCommsPlan";
+            this.btnCommsPlan.UseVisualStyleBackColor = true;
+            this.btnCommsPlan.Click += new System.EventHandler(this.btnCommsPlan_Click);
             // 
             // btnMedicalPlan
             // 
@@ -1107,22 +1177,6 @@
             this.btnSafetyPlans.UseVisualStyleBackColor = true;
             this.btnSafetyPlans.Click += new System.EventHandler(this.btnSafetyPlans_Click);
             // 
-            // btnAirOpsSummary
-            // 
-            resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
-            this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnAirOpsSummary.Name = "btnAirOpsSummary";
-            this.btnAirOpsSummary.UseVisualStyleBackColor = true;
-            this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
-            // 
-            // btnAssignmentList
-            // 
-            resources.ApplyResources(this.btnAssignmentList, "btnAssignmentList");
-            this.btnAssignmentList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.btnAssignmentList.Name = "btnAssignmentList";
-            this.btnAssignmentList.UseVisualStyleBackColor = true;
-            this.btnAssignmentList.Click += new System.EventHandler(this.btnAssignmentList_Click);
-            // 
             // btnIncidentStatusSummary
             // 
             resources.ApplyResources(this.btnIncidentStatusSummary, "btnIncidentStatusSummary");
@@ -1130,6 +1184,14 @@
             this.btnIncidentStatusSummary.Name = "btnIncidentStatusSummary";
             this.btnIncidentStatusSummary.UseVisualStyleBackColor = true;
             this.btnIncidentStatusSummary.Click += new System.EventHandler(this.btnIncidentStatusSummary_Click);
+            // 
+            // btnAirOpsSummary
+            // 
+            resources.ApplyResources(this.btnAirOpsSummary, "btnAirOpsSummary");
+            this.btnAirOpsSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.btnAirOpsSummary.Name = "btnAirOpsSummary";
+            this.btnAirOpsSummary.UseVisualStyleBackColor = true;
+            this.btnAirOpsSummary.Click += new System.EventHandler(this.btnAirOpsSummary_Click);
             // 
             // btnPrintIAP
             // 
@@ -1140,73 +1202,13 @@
             this.btnPrintIAP.UseVisualStyleBackColor = true;
             this.btnPrintIAP.Click += new System.EventHandler(this.btnPrintIAP_Click);
             // 
-            // splitContainer2
-            // 
-            resources.ApplyResources(this.splitContainer2, "splitContainer2");
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.pnlTaskInfo);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            // 
-            // pnlTaskInfo
-            // 
-            this.pnlTaskInfo.BackColor = System.Drawing.Color.White;
-            this.pnlTaskInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlTaskInfo.Controls.Add(this.splitContainer1);
-            resources.ApplyResources(this.pnlTaskInfo, "pnlTaskInfo");
-            this.pnlTaskInfo.Name = "pnlTaskInfo";
-            this.pnlTaskInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskInfo_Paint);
-            // 
-            // splitContainer3
-            // 
-            resources.ApplyResources(this.splitContainer3, "splitContainer3");
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.splitContainer4);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.pnlOpsPeriod);
-            // 
-            // splitContainer4
-            // 
-            resources.ApplyResources(this.splitContainer4, "splitContainer4");
-            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer4.Name = "splitContainer4";
-            // 
-            // splitContainer4.Panel1
-            // 
-            this.splitContainer4.Panel1.Controls.Add(this.picOrgLogo);
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.picFormSet);
-            // 
-            // picFormSet
-            // 
-            this.picFormSet.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.picFormSet, "picFormSet");
-            this.picFormSet.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPPFormSet_01;
-            this.picFormSet.Name = "picFormSet";
-            this.picFormSet.TabStop = false;
-            this.picFormSet.Click += new System.EventHandler(this.picFormSet_Click);
-            // 
             // collapsiblePanel1
             // 
             this.collapsiblePanel1.BackColor = System.Drawing.Color.White;
             this.collapsiblePanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.collapsiblePanel1.Collapsed = false;
             this.collapsiblePanel1.CollapsedBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(218)))), ((int)(((byte)(204)))));
-            this.collapsiblePanel1.Controls.Add(this.btnShowResources);
-            this.collapsiblePanel1.Controls.Add(this.btnReplacementResources);
+            this.collapsiblePanel1.Controls.Add(this.flowLayoutPanel3);
             this.collapsiblePanel1.EnableExpandCollapse = false;
             this.collapsiblePanel1.ExpandsRight = true;
             this.collapsiblePanel1.ExpandsUpward = false;
@@ -1216,14 +1218,21 @@
             this.collapsiblePanel1.SizeWhenExpanded = new System.Drawing.Size(485, 300);
             this.collapsiblePanel1.TitleText = "Resources";
             // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.btnShowResources);
+            this.flowLayoutPanel3.Controls.Add(this.btnReplacementResources);
+            resources.ApplyResources(this.flowLayoutPanel3, "flowLayoutPanel3");
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            // 
             // IncidentDetailsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.collapsiblePanel1);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.cpOtherTools);
-            this.Controls.Add(this.cpIncidentActionPlan);
             this.Controls.Add(this.pnlInternetSyncStart);
             this.Controls.Add(this.pnlNetworkSyncInProgress);
             this.Controls.Add(this.lblServerStatus);
@@ -1234,21 +1243,11 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IncidentDetailsForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IncidentDetailsForm_FormClosed);
             this.Load += new System.EventHandler(this.IncidentDetailsForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).EndInit();
-            this.pnlInternetSyncStart.ResumeLayout(false);
-            this.pnlNetworkSyncInProgress.ResumeLayout(false);
-            this.pnlOpsPeriod.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.cpOtherTools.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.cpIncidentActionPlan.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -1262,8 +1261,19 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picOrgLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFormSet)).EndInit();
+            this.pnlOpsPeriod.ResumeLayout(false);
+            this.pnlInternetSyncStart.ResumeLayout(false);
+            this.pnlNetworkSyncInProgress.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.cpOtherTools.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.cpIncidentActionPlan.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.collapsiblePanel1.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1408,6 +1418,7 @@
         private System.Windows.Forms.ToolStripMenuItem printBlankFormsToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.PictureBox picFormSet;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
     }
 }
 

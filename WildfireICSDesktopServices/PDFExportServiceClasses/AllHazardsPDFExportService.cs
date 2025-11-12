@@ -880,10 +880,11 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
                 stamper.AcroFields.SetField("Name_2", plan.PreparedByResourceName);
                 stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
+                List<CommsPlanItem> radioItems = plan.ActiveCommsItems.Where(o => o.IsRadio).ToList();
 
-                for (int row = 0; row < plan.ActiveCommsItems.Count && row < 26; row++)
+                for (int row = 0; row < radioItems.Count && row < 26; row++)
                 {
-                    CommsPlanItem item = plan.ActiveCommsItems[row];
+                    CommsPlanItem item = radioItems[row];
                     stamper.AcroFields.SetField("System  TypeRow" + (row + 1), item.CommsSystem);
                     stamper.AcroFields.SetField("ChannelRow" + (row + 1), item.ChannelID);
                     stamper.AcroFields.SetField("FunctionRow" + (row + 1), item.CommsFunction);
@@ -3121,7 +3122,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-204-WF Assignment List.pdf", FormSet);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-204 Assignment List.pdf", FormSet);
 
             try
             {
@@ -3135,7 +3136,6 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                     else
                     {
                         OperationalGroup parent = opGroup;
-
                         while (BranchGroup == null)
                         {
                             parent = task.AllOperationalGroups.FirstOrDefault(o => o.ID == parent.ParentID);
@@ -3143,16 +3143,12 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                         }
                     }
 
-                    if (BranchGroup != null) { stamper.AcroFields.SetField("1 BRANCH", BranchGroup.ResourceName); }
+                    //1
+                    stamper.AcroFields.SetField("NameRow1", task.TaskName);
+                    stamper.AcroFields.SetField("NumberRow1", task.TaskNumber);
 
-
-                    stamper.AcroFields.SetField("2 DIVISIONGROUPSTAGING", opGroup.ResourceName);
-
-
+                    //2
                     OperationalPeriod currentPeriod = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == opGroup.OpPeriod);
-
-                    stamper.AcroFields.SetField("3 INCIDENT NAME OR NUMBERRow1", task.IncidentNameOrNumber);
-
                     if (currentPeriod != null)
                     {
                         stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
@@ -3161,70 +3157,80 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                         stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
                     }
 
-                    if (opGroup.PreparedByResourceID != Guid.Empty)
-                    {
-                        ICSRole role = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.FirstOrDefault(o => o.ID == opGroup.PreparedByRoleID);
-                        stamper.AcroFields.SetField("Name", role.IndividualName);
-                    }
-                    stamper.AcroFields.SetField("Position", opGroup.PreparedByRoleName);
 
-                    List<ICSRole> operationalPersonnel = new List<ICSRole>();
-                    if (task.activeOrgCharts.Any(o => o.OpPeriod == opGroup.OpPeriod))
-                    {
-                        ICSRole thisLeader = task.activeOrgCharts.FirstOrDefault(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.FirstOrDefault(o => o.ID == opGroup.LeaderICSRoleID);
-                        if (thisLeader != null) { operationalPersonnel.Insert(0, thisLeader); }
-                    }
-                    if (BranchGroup != null && task.activeOrgCharts.Any(o => o.OpPeriod == opGroup.OpPeriod) && task.activeOrgCharts.First(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.Any(o => o.RoleID == BranchGroup.LeaderICSRoleID))
-                    {
-                        operationalPersonnel.Insert(0, task.activeOrgCharts.First(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.First(o => o.RoleID == BranchGroup.LeaderICSRoleID));
+                    //3
+                    stamper.AcroFields.SetField("Branch", BranchGroup.Name);
+                    if (opGroup.IsDivision) { stamper.AcroFields.SetField("Division", opGroup.Name); }
+                    if (opGroup.IsGroup) { stamper.AcroFields.SetField("Group",opGroup.Name); }
+                    stamper.AcroFields.SetField("Staging Area", "");
 
-                        Guid reportsTo = BranchGroup.ParentID;
-                        while (reportsTo != Guid.Empty)
+
+
+                    //4
+                    OrganizationChart org = task.activeOrgCharts.FirstOrDefault(o=>o.OpPeriod == opGroup.OpPeriod);
+                    if (org != null)
+                    {
+                        ICSRole osc = org.GetRoleByID(Globals.OpsChiefGenericID, false);
+                        if (osc != null)
                         {
-                            OperationalGroup branchParent = task.ActiveOperationalGroups.FirstOrDefault(o => o.ID == reportsTo);
-                            if (branchParent != null)
+                            stamper.AcroFields.SetField("NameOperations Section Chief", osc.IndividualName);
+                            Personnel p = task.AllIncidentResources.FirstOrDefault(o => o.ID == osc.IndividualID) as Personnel;
+                            if (p != null) { stamper.AcroFields.SetField("Contact sOperations Section Chief", p.CellphoneNumber); }
+                        }
+
+                        ICSRole bd = org.GetRoleByID(BranchGroup.LeaderICSRoleID, false);
+                        if (bd != null)
+                        {
+                            stamper.AcroFields.SetField("NameBranch Director", bd.IndividualName);
+                            Personnel p = task.AllIncidentResources.FirstOrDefault(o => o.ID == bd.IndividualID) as Personnel;
+                            if (p != null) { stamper.AcroFields.SetField("Contact sBranch Director", p.CellphoneNumber); }
+                        }
+
+                        if (opGroup.IsDivision)
+                        {
+                            ICSRole divs = org.GetRoleByID(opGroup.LeaderICSRoleID, false);
+                            if (divs != null)
                             {
-                                ICSRole role = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.FirstOrDefault(o => o.ID == branchParent.LeaderICSRoleID);
-                                operationalPersonnel.Insert(0, role);
-                                reportsTo = branchParent.ParentID;
+                                stamper.AcroFields.SetField("NameDivisionGroup Supervisor", divs.IndividualName);
+                                Personnel p = task.AllIncidentResources.FirstOrDefault(o => o.ID == divs.IndividualID) as Personnel;
+                                if (p != null) { stamper.AcroFields.SetField("Contact sDivisionGroup Supervisor", p.CellphoneNumber); }
                             }
                         }
+
+                        stamper.AcroFields.SetField("NameStaging Area Manager", "");
+                        stamper.AcroFields.SetField("Contact sStaging Area Manager", "");
                     }
 
-
-                    for (int x = 0; x < 4 && x < operationalPersonnel.Count; x++)
-                    {
-                        stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 1), operationalPersonnel[x].RoleName);
-                        if (operationalPersonnel[x].IndividualID != Guid.Empty) { stamper.AcroFields.SetField("5 OPERATIONAL PERSONNEL" + (x + 5), operationalPersonnel[x].IndividualName); }
-                    }
-
+                  
+                    //5
                     List<IncidentResource> reportingResources = task.GetReportingResources(opGroup.ID);
                     reportingResources.AddRange(task.ActiveOperationalGroups.Where(o => o.ParentID == opGroup.ID && !o.IsBranchOrDiv));
-                    List<CommsPlanItem> comms = new List<CommsPlanItem>();
-
-
                     int assignmentRow = 1;
                     foreach (IncidentResource ta in reportingResources)
                     {
                         if (ta.GetType().Name.Equals("OperationalGroup")) { stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ((OperationalGroup)ta).ResourceName); }
                         else { stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ta.ResourceName); }
                         stamper.AcroFields.SetField("LeaderRow" + assignmentRow, ta.LeaderName);
-                        stamper.AcroFields.SetField("No of PersonsRow" + assignmentRow, ta.NumberOfPeople.ToString());
+                        stamper.AcroFields.SetField(" of PersonsRow" + assignmentRow, ta.NumberOfPeople.ToString());
                         stamper.AcroFields.SetField("Contact cell radio frequency etcRow" + assignmentRow, ta.Contact);
                         if (ta.GetType().Name.Equals("OperationalGroup"))
                         {
-                            stamper.AcroFields.SetField("Reporting Location Special Equipment and Supplies RemarksRow" + assignmentRow, (ta as OperationalGroup).Comments);
+                            stamper.AcroFields.SetField("Reporting Location Special Equipment and Supplies Remarks Notes InformationRow" + assignmentRow, (ta as OperationalGroup).Comments);
                         }
                         assignmentRow++;
                     }
 
 
-                    stamper.AcroFields.SetField("7 TACTICAL ASSIGNMENTSRow1", opGroup.TacticalAssignment);
+                    //6
+                    stamper.AcroFields.SetField("6 WORK ASSIGNMENTSRow1", opGroup.TacticalAssignment);
 
 
+                    //7
+                    stamper.AcroFields.SetField("7 SPECIAL INSTRUCTIONSRow1", opGroup.SpecialInstructions);
 
-                    stamper.AcroFields.SetField("8 SPECIAL INSTRUCTIONSRow1", opGroup.SpecialInstructions);
 
+                    //8
+                    List<CommsPlanItem> comms = new List<CommsPlanItem>();
                     foreach (Guid g in opGroup.CommsPlanItemIDs)
                     {
                         if (task.allCommsPlans.Any(o => o.OpPeriod == opGroup.OpPeriod) && task.allCommsPlans.First(o => o.OpPeriod == opGroup.OpPeriod).allCommsItems.Any(o => o.ItemID == g))
@@ -3235,32 +3241,23 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
 
                     for (int x = 0; x < comms.Count && x < 4; x++)
                     {
-                        stamper.AcroFields.SetField("NameRow" + (x + 1), comms[x].SystemWithID);
-                        stamper.AcroFields.SetField("ChannelRow" + (x + 1), comms[x].ChannelNumber);
+                        stamper.AcroFields.SetField("CommsName" + (x + 1), comms[x].SystemWithID);
                         stamper.AcroFields.SetField("FunctionRow" + (x + 1), comms[x].CommsFunction);
-                        stamper.AcroFields.SetField("Rx FrequencyRow" + (x + 1), comms[x].RxFrequency);
-                        stamper.AcroFields.SetField("Rx ToneRow" + (x + 1), comms[x].RxTone);
-                        stamper.AcroFields.SetField("Tx FrequencyRow" + (x + 1), comms[x].TxFrequency);
-                        stamper.AcroFields.SetField("Tx ToneRow" + (x + 1), comms[x].TxTone);
+                        stamper.AcroFields.SetField("Frequency  NumberRow" + (x + 1), comms[x].OutputFrequencyNumber);
                         stamper.AcroFields.SetField("RemarksRow1" + (x + 1), comms[x].Comments);
 
 
                     }
 
 
-                    //Rename all fields
-                    AcroFields af = stamper.AcroFields;
+                    //9
+                    stamper.AcroFields.SetField("Position", opGroup.PreparedByRoleName);
+                    stamper.AcroFields.SetField("Date", opGroup.DatePrepared.ToString(Globals.DateFormat));
+                    stamper.AcroFields.SetField("Name", opGroup.PreparedByResourceName);
+                    stamper.AcroFields.SetField("Time", opGroup.DatePrepared.ToString("HH:mm"));
 
-                    List<string> fieldNames = new List<string>();
-                    foreach (var field in af.Fields)
-                    {
-                        fieldNames.Add(field.Key);
-                    }
-                    Guid randomID = Guid.NewGuid();
-                    foreach (string s in fieldNames)
-                    {
-                        stamper.AcroFields.RenameField(s, s + "-204-" + randomID.ToString());
-                    }
+                    //Rename all fields
+                    stamper.RenameAllFields();
 
 
                     if (flattenPDF)
