@@ -531,16 +531,17 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
         private void DecreasePriority(IncidentObjective objective)
         {
+            IncidentObjective objToIncrease = objectivesSheet.ActiveObjectives.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod && o.ParentObjectiveID == objective.ParentObjectiveID && o.Priority == (objective.Priority + 1) && o.ID != objective.ID);
 
-            if (objectivesSheet.ActiveObjectives.Any(o => o.OpPeriod == Program.CurrentOpPeriod && o.Priority == (objective.Priority + 1) && o.ID != objective.ID))
+            if (objToIncrease != null)
             {
                 //move this item up the priority sequence
                 objective.Priority = objective.Priority + 1;
                 Program.incidentDataService.UpsertIncidentObjective(objective);
 
-                IncidentObjective objectiveToMove = objectivesSheet.ActiveObjectives.First(o => o.OpPeriod == Program.CurrentOpPeriod && o.ParentObjectiveID == objective.ParentObjectiveID && o.Priority == objective.Priority && o.ID != objective.ID);
-                objectiveToMove.Priority -= 1;
-                Program.incidentDataService.UpsertIncidentObjective(objectiveToMove);
+
+                objToIncrease.Priority -= 1;
+                Program.incidentDataService.UpsertIncidentObjective(objToIncrease);
 
 
                 //setObjectiveList();

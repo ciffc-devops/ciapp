@@ -84,8 +84,8 @@ namespace Wildfire_ICS_Assist
         {
 
 
-            if (string.IsNullOrEmpty(cboSavedFunction.Text)) { errorProvider1.SetError(cboSavedFunction, "This is required"); return false; } else {  errorProvider1.SetError(cboSavedFunction, ""); }
-            if (cboSavedComms.SelectedItem == null) { errorProvider1.SetError(cboSavedComms, "This is required"); return false; } else { errorProvider1.SetError(cboSavedComms, ""); }
+            if (string.IsNullOrEmpty(cboSavedFunction.Text)) { errorProvider1.SetError(cboSavedFunction, Properties.Resources.RequiredNote); return false; } else {  errorProvider1.SetError(cboSavedFunction, ""); }
+            if (cboSavedComms.SelectedItem == null) { errorProvider1.SetError(cboSavedComms, Properties.Resources.RequiredNote); return false; } else { errorProvider1.SetError(cboSavedComms, ""); }
             return true;
         }
 
@@ -94,7 +94,7 @@ namespace Wildfire_ICS_Assist
             if (!editCommsChannelControl1.IsComplete) { return false; }
             if (string.IsNullOrEmpty(cboNewFunction.Text))
             {
-                errorProvider1.SetError(cboNewFunction, "This is required"); return false;
+                errorProvider1.SetError(cboNewFunction, Properties.Resources.RequiredNote); return false;
             }
             else { errorProvider1.SetError(cboNewFunction, ""); }
         

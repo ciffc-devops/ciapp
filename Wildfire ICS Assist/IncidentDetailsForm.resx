@@ -221,10 +221,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtTaskName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 49</value>
+    <value>197, 49</value>
   </data>
   <data name="txtTaskName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 29</value>
+    <value>471, 29</value>
   </data>
   <data name="txtTaskName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -248,7 +248,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTaskNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 94</value>
+    <value>20, 94</value>
   </data>
   <data name="lblTaskNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 0, 9, 0</value>
@@ -284,7 +284,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTaskName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 54</value>
+    <value>20, 54</value>
   </data>
   <data name="lblTaskName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 0, 9, 0</value>
@@ -317,10 +317,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtTaskNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 92</value>
+    <value>197, 92</value>
   </data>
   <data name="txtTaskNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 29</value>
+    <value>471, 29</value>
   </data>
   <data name="txtTaskNumber.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -353,7 +353,7 @@
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 16</value>
+    <value>41, 16</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 24</value>
@@ -402,7 +402,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnOutstandingLogItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 50</value>
+    <value>404, 50</value>
   </data>
   <data name="btnOutstandingLogItems.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 37</value>
@@ -432,10 +432,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cboICSRole.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 12</value>
+    <value>197, 12</value>
   </data>
   <data name="cboICSRole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 32</value>
+    <value>370, 32</value>
   </data>
   <data name="cboICSRole.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -456,16 +456,16 @@
     <value>NoControl</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 56</value>
+    <value>5, 56</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 24</value>
+    <value>186, 24</value>
   </data>
   <data name="label19.TabIndex" type="System.Int32, mscorlib">
     <value>90</value>
   </data>
   <data name="label19.Text" xml:space="preserve">
-    <value>Activity Log</value>
+    <value>Activity Log (ICS-214)</value>
   </data>
   <data name="label19.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -600,7 +600,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnViewPositionLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 50</value>
+    <value>300, 50</value>
   </data>
   <data name="btnViewPositionLog.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 37</value>
@@ -641,7 +641,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnAddToPositionLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 50</value>
+    <value>197, 50</value>
   </data>
   <data name="btnAddToPositionLog.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 37</value>
@@ -1214,7 +1214,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAe
-        CAAAAk1TRnQBSQFMAgEBAwEAATABCAEwAQgBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAATgBCAE4AQgBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2092,13 +2092,13 @@
     <value>Help</value>
   </data>
   <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 30</value>
+    <value>145, 30</value>
   </data>
   <data name="englishToolStripMenuItem.Text" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="frenchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 30</value>
+    <value>145, 30</value>
   </data>
   <data name="frenchToolStripMenuItem.Text" xml:space="preserve">
     <value>French</value>

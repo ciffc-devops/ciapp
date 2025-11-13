@@ -148,10 +148,10 @@ namespace Wildfire_ICS_Assist.CustomControls
 
         private void SetColours()
         {
-            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; errorProvider1.SetError(cboAccomodationPreference, "This field is required"); }
+            if (string.IsNullOrEmpty(cboAccomodationPreference.Text.Trim())) { cboAccomodationPreference.BackColor = Program.ErrorColor; errorProvider1.SetError(cboAccomodationPreference, Properties.Resources.RequiredNote); }
             else { cboAccomodationPreference.BackColor = Program.GoodColor; errorProvider1.SetError(cboAccomodationPreference, ""); }
             
-            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; errorProvider1.SetError(cboAgency, "This field is required"); } 
+            if (cboAgency.SelectedItem == null || cboAgency.SelectedIndex == 0) { cboAgency.BackColor = Program.ErrorColor; errorProvider1.SetError(cboAgency, Properties.Resources.RequiredNote); } 
             else {  cboAgency.BackColor= Program.GoodColor; errorProvider1.SetError(cboAgency, ""); }
         }
 

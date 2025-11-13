@@ -38,7 +38,7 @@ namespace Wildfire_ICS_Assist
         private bool ValidateNew()
         {
             if (!editCommsChannelControl1.IsComplete) {  return false; } 
-            if (string.IsNullOrEmpty(cboNewFunction.Text)) { errorProvider1.SetError(cboNewFunction, "This is required"); return false; } else { errorProvider1.SetError(cboNewFunction, ""); }
+            if (string.IsNullOrEmpty(cboNewFunction.Text)) { errorProvider1.SetError(cboNewFunction, Properties.Resources.RequiredNote); return false; } else { errorProvider1.SetError(cboNewFunction, ""); }
 
             return true;
         }
@@ -71,7 +71,7 @@ namespace Wildfire_ICS_Assist
 
         private void cboNewFunction_TextUpdate(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cboNewFunction.Text)) { errorProvider1.SetError(cboNewFunction, "This is required");  } else { errorProvider1.SetError(cboNewFunction, ""); }
+            if (string.IsNullOrEmpty(cboNewFunction.Text)) { errorProvider1.SetError(cboNewFunction, Properties.Resources.RequiredNote);  } else { errorProvider1.SetError(cboNewFunction, ""); }
 
 
         }

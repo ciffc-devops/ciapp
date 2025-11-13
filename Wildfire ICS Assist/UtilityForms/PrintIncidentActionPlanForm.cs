@@ -983,7 +983,8 @@ namespace Wildfire_ICS_Assist
             {
                 if (iapCheckboxes.Contains(c)) { c.BackColor = Program.GoodColor; }
                 else { c.BackColor = Color.Transparent; }
-                if (c.Enabled) { c.Checked = true; }
+
+                if (c.Enabled && iapCheckboxes.Contains(c)) { c.Checked = true; }
                 else { c.Checked = false;  }
             }
         }

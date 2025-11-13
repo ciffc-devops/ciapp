@@ -81,6 +81,8 @@ namespace Wildfire_ICS_Assist
                 selectedHospital.location = txtAddress.Text.Trim();
                 selectedHospital.burnUnit = chkBurnUnit.Checked;
                 selectedHospital.helipad = chkHelipad.Checked;
+                selectedHospital.travelTimeGround = numTravelGround.Value;
+                selectedHospital.travelTimeAir = numTravelAir.Value;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

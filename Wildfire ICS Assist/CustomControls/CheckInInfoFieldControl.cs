@@ -53,22 +53,22 @@ namespace Wildfire_ICS_Assist.CustomControls
                         case "Bool":
                             return true;
                         case "DateTime":
-                            if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, "This field is required"); }
+                            if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, Properties.Resources.RequiredNote); }
                             return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
                         case "Time":
-                            if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, "This field is required"); }
+                            if (datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue) { errorProvider1.SetError(datDateValue, ""); } else { errorProvider1.SetError(datDateValue, Properties.Resources.RequiredNote); }
                             return datDateValue.Value > DateTime.MinValue && datDateValue.Value < DateTime.MaxValue;
                         case "List":
-                            if (string.IsNullOrEmpty(cboListValue.Text)) { errorProvider1.SetError(cboListValue, "This field is required"); } else { errorProvider1.SetError(cboListValue, ""); }
+                            if (string.IsNullOrEmpty(cboListValue.Text)) { errorProvider1.SetError(cboListValue, Properties.Resources.RequiredNote); } else { errorProvider1.SetError(cboListValue, ""); }
                             return !string.IsNullOrEmpty(cboListValue.Text);
 
                         case "Weight":
-                            if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, "This field is required"); } else { errorProvider1.SetError(txtStringValue, ""); }
+                            if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, Properties.Resources.RequiredNote); } else { errorProvider1.SetError(txtStringValue, ""); }
                             return WeightInKG > 0;
                         case "Int":
                             return numNumberValue.Value > 0;
                         default:
-                            if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, "This field is required"); } else { errorProvider1.SetError(txtStringValue, ""); }
+                            if (string.IsNullOrEmpty(txtStringValue.Text)) { errorProvider1.SetError(txtStringValue, Properties.Resources.RequiredNote); } else { errorProvider1.SetError(txtStringValue, ""); }
                             return !string.IsNullOrEmpty(txtStringValue.Text);
                     }
                 }

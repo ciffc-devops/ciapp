@@ -625,6 +625,16 @@ namespace Wildfire_ICS_Assist.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glyphicons_basic_395_filter {
+            get {
+                object obj = ResourceManager.GetObject("glyphicons-basic-395-filter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glyphicons_basic_399_import {
             get {
                 object obj = ResourceManager.GetObject("glyphicons-basic-399-import", resourceCulture);
@@ -1433,6 +1443,24 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This field is required.
+        /// </summary>
+        internal static string RequiredNote {
+            get {
+                return ResourceManager.GetString("RequiredNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed required fields.
+        /// </summary>
+        internal static string RequiredTitle {
+            get {
+                return ResourceManager.GetString("RequiredTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -Select a saved contact-.
         /// </summary>
         internal static string SelectSavedContact {
@@ -1501,6 +1529,15 @@ namespace Wildfire_ICS_Assist.Properties {
         internal static string ValidCoordinatesRequired {
             get {
                 return ResourceManager.GetString("ValidCoordinatesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For a NOTAM defined by a polygon, you must enter at least 3 valid coordinates..
+        /// </summary>
+        internal static string ValidPolygonCoordinatesRequired {
+            get {
+                return ResourceManager.GetString("ValidPolygonCoordinatesRequired", resourceCulture);
             }
         }
     }

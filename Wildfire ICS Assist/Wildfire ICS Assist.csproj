@@ -1572,6 +1572,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-395-filter.png" />
     <None Include="Resources\CIAPPFormSet-02.png" />
     <None Include="Resources\CIAPPFormSet-01.png" />
     <None Include="Resources\glyphicons-filetypes-9-file-spreadsheet1.png" />

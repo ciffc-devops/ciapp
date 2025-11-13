@@ -89,17 +89,17 @@ namespace Wildfire_ICS_Assist.CommunicationsPlanForms
 
         private void txtEditName_Validating(object sender, CancelEventArgs e)
         {
-            if(string.IsNullOrEmpty(txtEditName.Text)){ errorProvider1.SetError(txtEditName, "This is required"); } else { errorProvider1.SetError(txtEditName, ""); }
+            if(string.IsNullOrEmpty(txtEditName.Text)){ errorProvider1.SetError(txtEditName, Properties.Resources.RequiredNote); } else { errorProvider1.SetError(txtEditName, ""); }
         }
 
         private void cboEditFunction_Validating(object sender, CancelEventArgs e)
         {
-            if(string.IsNullOrEmpty(cboEditFunction.Text)){ errorProvider1.SetError(cboEditFunction, "This is required"); } else { errorProvider1.SetError(cboEditFunction, ""); }
+            if(string.IsNullOrEmpty(cboEditFunction.Text)){ errorProvider1.SetError(cboEditFunction, Properties.Resources.RequiredNote); } else { errorProvider1.SetError(cboEditFunction, ""); }
         }
 
         private void cboSavedFunction_Validating(object sender, CancelEventArgs e)
         {
-            if(string.IsNullOrEmpty(cboSavedFunction.Text)){ errorProvider1.SetError(cboSavedFunction, "This is required"); } else { errorProvider1.SetError(cboSavedFunction, ""); }
+            if(string.IsNullOrEmpty(cboSavedFunction.Text)){ errorProvider1.SetError(cboSavedFunction, Properties.Resources.RequiredNote); } else { errorProvider1.SetError(cboSavedFunction, ""); }
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
@@ -125,8 +125,8 @@ namespace Wildfire_ICS_Assist.CommunicationsPlanForms
 
         private bool ValidateEditForm()
         {
-                        if (string.IsNullOrEmpty(cboEditFunction.Text)) { errorProvider1.SetError(cboEditFunction, "This is required"); return false; }
-                        if (string.IsNullOrEmpty(txtEditName.Text)) { errorProvider1.SetError(txtEditName, "This is required"); return false; }
+                        if (string.IsNullOrEmpty(cboEditFunction.Text)) { errorProvider1.SetError(cboEditFunction, Properties.Resources.RequiredNote); return false; }
+                        if (string.IsNullOrEmpty(txtEditName.Text)) { errorProvider1.SetError(txtEditName, Properties.Resources.RequiredNote); return false; }
 
 
             return true;
@@ -134,8 +134,8 @@ namespace Wildfire_ICS_Assist.CommunicationsPlanForms
 
         private bool ValidateSelectSavedForm()
         {
-            if(string.IsNullOrEmpty(cboSavedFunction.Text)) { errorProvider1.SetError(cboSavedFunction, "This is required"); return false; } 
-            if(cboSavedComms.SelectedItem == null) { errorProvider1.SetError(cboSavedComms, "This is required"); return false; }
+            if(string.IsNullOrEmpty(cboSavedFunction.Text)) { errorProvider1.SetError(cboSavedFunction, Properties.Resources.RequiredNote); return false; } 
+            if(cboSavedComms.SelectedItem == null) { errorProvider1.SetError(cboSavedComms, Properties.Resources.RequiredNote); return false; }
             return true;
         }
 
