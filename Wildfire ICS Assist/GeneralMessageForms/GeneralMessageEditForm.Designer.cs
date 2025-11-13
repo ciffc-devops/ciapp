@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtToName = new System.Windows.Forms.TextBox();
@@ -53,6 +54,7 @@
             this.datReplyReceived = new System.Windows.Forms.DateTimePicker();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,6 +63,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -80,8 +83,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.splitContainer1.Size = new System.Drawing.Size(803, 532);
-            this.splitContainer1.SplitterDistance = 462;
+            this.splitContainer1.Size = new System.Drawing.Size(803, 590);
+            this.splitContainer1.SplitterDistance = 520;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -120,8 +123,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.txtReplyName);
             this.splitContainer2.Panel2.Controls.Add(this.label10);
             this.splitContainer2.Panel2.Controls.Add(this.datReplyReceived);
-            this.splitContainer2.Size = new System.Drawing.Size(803, 462);
-            this.splitContainer2.SplitterDistance = 262;
+            this.splitContainer2.Size = new System.Drawing.Size(803, 520);
+            this.splitContainer2.SplitterDistance = 294;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 49;
             // 
@@ -131,9 +134,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtToName.Location = new System.Drawing.Point(205, 3);
             this.txtToName.Name = "txtToName";
-            this.txtToName.Size = new System.Drawing.Size(205, 29);
-            this.txtToName.TabIndex = 19;
+            this.txtToName.Size = new System.Drawing.Size(191, 29);
+            this.txtToName.TabIndex = 1;
             this.txtToName.TextChanged += new System.EventHandler(this.txtToName_TextChanged);
+            this.txtToName.Validating += new System.ComponentModel.CancelEventHandler(this.txtToName_Validating);
             // 
             // datMessageSent
             // 
@@ -141,8 +145,8 @@
             this.datMessageSent.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datMessageSent.Location = new System.Drawing.Point(205, 146);
             this.datMessageSent.Name = "datMessageSent";
-            this.datMessageSent.Size = new System.Drawing.Size(213, 29);
-            this.datMessageSent.TabIndex = 23;
+            this.datMessageSent.Size = new System.Drawing.Size(286, 29);
+            this.datMessageSent.TabIndex = 5;
             this.datMessageSent.ValueChanged += new System.EventHandler(this.datMessageSent_ValueChanged);
             // 
             // txtMessage
@@ -153,9 +157,10 @@
             this.txtMessage.Location = new System.Drawing.Point(205, 181);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(586, 67);
-            this.txtMessage.TabIndex = 46;
+            this.txtMessage.Size = new System.Drawing.Size(575, 99);
+            this.txtMessage.TabIndex = 6;
             this.txtMessage.TextChanged += new System.EventHandler(this.txtMessage_TextChanged);
+            this.txtMessage.Validating += new System.ComponentModel.CancelEventHandler(this.txtMessage_Validating);
             this.txtMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // txtSubject
@@ -164,9 +169,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSubject.Location = new System.Drawing.Point(205, 111);
             this.txtSubject.Name = "txtSubject";
-            this.txtSubject.Size = new System.Drawing.Size(586, 29);
-            this.txtSubject.TabIndex = 22;
+            this.txtSubject.Size = new System.Drawing.Size(575, 29);
+            this.txtSubject.TabIndex = 4;
             this.txtSubject.TextChanged += new System.EventHandler(this.txtSubject_TextChanged);
+            this.txtSubject.Validating += new System.ComponentModel.CancelEventHandler(this.txtSubject_Validating);
             // 
             // cboFrom
             // 
@@ -176,8 +182,8 @@
             this.cboFrom.FormattingEnabled = true;
             this.cboFrom.Location = new System.Drawing.Point(205, 73);
             this.cboFrom.Name = "cboFrom";
-            this.cboFrom.Size = new System.Drawing.Size(586, 32);
-            this.cboFrom.TabIndex = 21;
+            this.cboFrom.Size = new System.Drawing.Size(575, 32);
+            this.cboFrom.TabIndex = 3;
             this.cboFrom.Leave += new System.EventHandler(this.cboFrom_Leave);
             // 
             // txtToPosition
@@ -186,8 +192,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtToPosition.Location = new System.Drawing.Point(206, 37);
             this.txtToPosition.Name = "txtToPosition";
-            this.txtToPosition.Size = new System.Drawing.Size(204, 29);
-            this.txtToPosition.TabIndex = 20;
+            this.txtToPosition.Size = new System.Drawing.Size(190, 29);
+            this.txtToPosition.TabIndex = 2;
             this.txtToPosition.TextChanged += new System.EventHandler(this.txtToPosition_TextChanged);
             // 
             // label5
@@ -196,7 +202,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(193, 29);
             this.label5.TabIndex = 34;
-            this.label5.Text = "TO (Name)";
+            this.label5.Text = "To (Name)*";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
@@ -205,7 +211,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 29);
             this.label1.TabIndex = 35;
-            this.label1.Text = "TO (Position)";
+            this.label1.Text = "To (Position)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -214,7 +220,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(193, 29);
             this.label2.TabIndex = 36;
-            this.label2.Text = "FROM";
+            this.label2.Text = "From";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
@@ -223,7 +229,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(193, 29);
             this.label6.TabIndex = 39;
-            this.label6.Text = "MESSAGE";
+            this.label6.Text = "Message*";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
@@ -232,7 +238,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(193, 29);
             this.label3.TabIndex = 37;
-            this.label3.Text = "SUBJECT";
+            this.label3.Text = "Subject";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
@@ -241,7 +247,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(193, 29);
             this.label4.TabIndex = 38;
-            this.label4.Text = "DATE/TIME SENT";
+            this.label4.Text = "Date/Time Sent";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // prepAndApprovePanel1
@@ -263,18 +269,18 @@
             this.prepAndApprovePanel1.Size = new System.Drawing.Size(372, 40);
             this.prepAndApprovePanel1.SizeWhenCollapsed = new System.Drawing.Size(372, 40);
             this.prepAndApprovePanel1.SizeWhenExpanded = new System.Drawing.Size(731, 143);
-            this.prepAndApprovePanel1.TabIndex = 48;
+            this.prepAndApprovePanel1.TabIndex = 12;
             this.prepAndApprovePanel1.TitleText = "Prepared and Approved By";
             this.prepAndApprovePanel1.PreparedByChanged += new System.EventHandler(this.prepAndApprovePanel1_PreparedByChanged);
             this.prepAndApprovePanel1.ApprovedByChanged += new System.EventHandler(this.prepAndApprovePanel1_ApprovedByChanged);
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(6, 12);
+            this.label8.Location = new System.Drawing.Point(6, 43);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(193, 29);
             this.label8.TabIndex = 41;
-            this.label8.Text = "REPLY";
+            this.label8.Text = "Reply";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtReply
@@ -282,60 +288,60 @@
             this.txtReply.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtReply.Location = new System.Drawing.Point(205, 12);
+            this.txtReply.Location = new System.Drawing.Point(205, 43);
             this.txtReply.Multiline = true;
             this.txtReply.Name = "txtReply";
-            this.txtReply.Size = new System.Drawing.Size(586, 74);
-            this.txtReply.TabIndex = 47;
+            this.txtReply.Size = new System.Drawing.Size(575, 103);
+            this.txtReply.TabIndex = 8;
             this.txtReply.TextChanged += new System.EventHandler(this.txtReply_TextChanged);
             this.txtReply.Child = new System.Windows.Controls.TextBox();
             // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label9.Location = new System.Drawing.Point(-11, 128);
+            this.label9.Location = new System.Drawing.Point(-11, 188);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(210, 29);
             this.label9.TabIndex = 43;
-            this.label9.Text = "REPLIED BY (Position)";
+            this.label9.Text = "Replied by (Position)";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label11.Location = new System.Drawing.Point(6, 162);
+            this.label11.Location = new System.Drawing.Point(5, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(193, 29);
             this.label11.TabIndex = 44;
-            this.label11.Text = "REPLY RECEIVED";
+            this.label11.Text = "Reply received";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtReplyPosition
             // 
             this.txtReplyPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtReplyPosition.Location = new System.Drawing.Point(206, 127);
+            this.txtReplyPosition.Location = new System.Drawing.Point(206, 187);
             this.txtReplyPosition.Name = "txtReplyPosition";
-            this.txtReplyPosition.Size = new System.Drawing.Size(403, 29);
-            this.txtReplyPosition.TabIndex = 28;
+            this.txtReplyPosition.Size = new System.Drawing.Size(574, 29);
+            this.txtReplyPosition.TabIndex = 10;
             this.txtReplyPosition.TextChanged += new System.EventHandler(this.txtReplyPosition_TextChanged);
             // 
             // txtReplyName
             // 
             this.txtReplyName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtReplyName.Location = new System.Drawing.Point(206, 92);
+            this.txtReplyName.Location = new System.Drawing.Point(206, 152);
             this.txtReplyName.Name = "txtReplyName";
-            this.txtReplyName.Size = new System.Drawing.Size(403, 29);
-            this.txtReplyName.TabIndex = 27;
+            this.txtReplyName.Size = new System.Drawing.Size(574, 29);
+            this.txtReplyName.TabIndex = 9;
             this.txtReplyName.TextChanged += new System.EventHandler(this.txtReplyName_TextChanged);
             // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.Location = new System.Drawing.Point(6, 92);
+            this.label10.Location = new System.Drawing.Point(6, 152);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(193, 29);
             this.label10.TabIndex = 42;
-            this.label10.Text = "REPLIED BY (Name)";
+            this.label10.Text = "Replied by (Name)";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // datReplyReceived
@@ -344,11 +350,11 @@
             this.datReplyReceived.Checked = false;
             this.datReplyReceived.CustomFormat = "yyyy-MMM-dd HH:mm";
             this.datReplyReceived.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datReplyReceived.Location = new System.Drawing.Point(206, 162);
+            this.datReplyReceived.Location = new System.Drawing.Point(205, 8);
             this.datReplyReceived.Name = "datReplyReceived";
             this.datReplyReceived.ShowCheckBox = true;
-            this.datReplyReceived.Size = new System.Drawing.Size(403, 29);
-            this.datReplyReceived.TabIndex = 29;
+            this.datReplyReceived.Size = new System.Drawing.Size(286, 29);
+            this.datReplyReceived.TabIndex = 7;
             this.datReplyReceived.ValueChanged += new System.EventHandler(this.datReplyReceived_ValueChanged);
             // 
             // btnCancel
@@ -360,7 +366,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 17;
+            this.btnCancel.TabIndex = 99;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -373,7 +379,7 @@
             this.btnSave.Location = new System.Drawing.Point(666, 6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 51);
-            this.btnSave.TabIndex = 18;
+            this.btnSave.TabIndex = 11;
             this.btnSave.Tag = "Save";
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -381,11 +387,15 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // GeneralMessageEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 532);
+            this.ClientSize = new System.Drawing.Size(803, 590);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(819, 571);
             this.Name = "GeneralMessageEditForm";
@@ -401,6 +411,7 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -432,5 +443,6 @@
         private SpellBox txtMessage;
         private CustomControls.PrepAndApprovePanel prepAndApprovePanel1;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
