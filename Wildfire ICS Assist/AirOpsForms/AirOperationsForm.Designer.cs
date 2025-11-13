@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpAircraft = new System.Windows.Forms.TabPage();
@@ -173,7 +173,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnPrint);
             this.splitContainer1.Size = new System.Drawing.Size(1008, 600);
-            this.splitContainer1.SplitterDistance = 515;
+            this.splitContainer1.SplitterDistance = 509;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -190,7 +190,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(10, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1008, 515);
+            this.tabControl1.Size = new System.Drawing.Size(1008, 509);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
@@ -200,7 +200,7 @@
             this.tpAircraft.Location = new System.Drawing.Point(4, 33);
             this.tpAircraft.Name = "tpAircraft";
             this.tpAircraft.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAircraft.Size = new System.Drawing.Size(1000, 411);
+            this.tpAircraft.Size = new System.Drawing.Size(1000, 472);
             this.tpAircraft.TabIndex = 0;
             this.tpAircraft.Text = "Aircraft";
             this.tpAircraft.UseVisualStyleBackColor = true;
@@ -224,8 +224,8 @@
             this.splitContainer5.Panel2.Controls.Add(this.btnToggleMedicvac);
             this.splitContainer5.Panel2.Controls.Add(this.btnSetStartEndTimes);
             this.splitContainer5.Panel2.Controls.Add(this.label10);
-            this.splitContainer5.Size = new System.Drawing.Size(994, 405);
-            this.splitContainer5.SplitterDistance = 314;
+            this.splitContainer5.Size = new System.Drawing.Size(994, 466);
+            this.splitContainer5.SplitterDistance = 375;
             this.splitContainer5.TabIndex = 70;
             // 
             // dgvAircraft
@@ -252,7 +252,7 @@
             this.dgvAircraft.RowHeadersVisible = false;
             this.dgvAircraft.RowTemplate.Height = 35;
             this.dgvAircraft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAircraft.Size = new System.Drawing.Size(994, 314);
+            this.dgvAircraft.Size = new System.Drawing.Size(994, 375);
             this.dgvAircraft.TabIndex = 1;
             this.dgvAircraft.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAircraft_CellDoubleClick);
             this.dgvAircraft.SelectionChanged += new System.EventHandler(this.dgvAircraft_SelectionChanged);
@@ -313,8 +313,8 @@
             // 
             this.colStart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colStart.DataPropertyName = "StartTime";
-            dataGridViewCellStyle1.Format = "HH:mm";
-            this.colStart.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle25.Format = "HH:mm";
+            this.colStart.DefaultCellStyle = dataGridViewCellStyle25;
             this.colStart.HeaderText = "Start Time";
             this.colStart.Name = "colStart";
             this.colStart.ReadOnly = true;
@@ -324,8 +324,8 @@
             // 
             this.colEndTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colEndTime.DataPropertyName = "EndTime";
-            dataGridViewCellStyle2.Format = "HH:mm";
-            this.colEndTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle26.Format = "HH:mm";
+            this.colEndTime.DefaultCellStyle = dataGridViewCellStyle26;
             this.colEndTime.HeaderText = "End Time";
             this.colEndTime.Name = "colEndTime";
             this.colEndTime.ReadOnly = true;
@@ -397,7 +397,7 @@
             this.tpPersonnel.Location = new System.Drawing.Point(4, 33);
             this.tpPersonnel.Name = "tpPersonnel";
             this.tpPersonnel.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPersonnel.Size = new System.Drawing.Size(1000, 414);
+            this.tpPersonnel.Size = new System.Drawing.Size(1000, 475);
             this.tpPersonnel.TabIndex = 1;
             this.tpPersonnel.Text = "Personnel";
             this.tpPersonnel.UseVisualStyleBackColor = true;
@@ -421,8 +421,8 @@
             this.splitContainer3.Panel2.Controls.Add(this.btnDeleteRole);
             this.splitContainer3.Panel2.Controls.Add(this.btnAssignRole);
             this.splitContainer3.Panel2.Controls.Add(this.btnEditRole);
-            this.splitContainer3.Size = new System.Drawing.Size(994, 408);
-            this.splitContainer3.SplitterDistance = 341;
+            this.splitContainer3.Size = new System.Drawing.Size(994, 469);
+            this.splitContainer3.SplitterDistance = 402;
             this.splitContainer3.TabIndex = 61;
             // 
             // treeOrgChart
@@ -431,7 +431,7 @@
             this.treeOrgChart.HideSelection = false;
             this.treeOrgChart.Location = new System.Drawing.Point(0, 0);
             this.treeOrgChart.Name = "treeOrgChart";
-            this.treeOrgChart.Size = new System.Drawing.Size(994, 341);
+            this.treeOrgChart.Size = new System.Drawing.Size(994, 402);
             this.treeOrgChart.TabIndex = 56;
             // 
             // btnAdd
@@ -489,7 +489,7 @@
             this.tpFrequencies.Controls.Add(this.splitContainer4);
             this.tpFrequencies.Location = new System.Drawing.Point(4, 33);
             this.tpFrequencies.Name = "tpFrequencies";
-            this.tpFrequencies.Size = new System.Drawing.Size(1000, 414);
+            this.tpFrequencies.Size = new System.Drawing.Size(1000, 475);
             this.tpFrequencies.TabIndex = 2;
             this.tpFrequencies.Text = "Frequencies";
             this.tpFrequencies.UseVisualStyleBackColor = true;
@@ -512,8 +512,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.btnAddComms);
             this.splitContainer4.Panel2.Controls.Add(this.btnEditComms);
             this.splitContainer4.Panel2.Controls.Add(this.btnDeleteComms);
-            this.splitContainer4.Size = new System.Drawing.Size(1000, 414);
-            this.splitContainer4.SplitterDistance = 349;
+            this.splitContainer4.Size = new System.Drawing.Size(1000, 475);
+            this.splitContainer4.SplitterDistance = 410;
             this.splitContainer4.TabIndex = 60;
             // 
             // dgvCommsItems
@@ -537,7 +537,7 @@
             this.dgvCommsItems.RowHeadersVisible = false;
             this.dgvCommsItems.RowTemplate.Height = 30;
             this.dgvCommsItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommsItems.Size = new System.Drawing.Size(1000, 349);
+            this.dgvCommsItems.Size = new System.Drawing.Size(1000, 410);
             this.dgvCommsItems.TabIndex = 59;
             // 
             // colCommsSystem
@@ -639,7 +639,7 @@
             this.tpNOTAM.Controls.Add(this.txtCenterPoint);
             this.tpNOTAM.Location = new System.Drawing.Point(4, 33);
             this.tpNOTAM.Name = "tpNOTAM";
-            this.tpNOTAM.Size = new System.Drawing.Size(1000, 478);
+            this.tpNOTAM.Size = new System.Drawing.Size(1000, 472);
             this.tpNOTAM.TabIndex = 3;
             this.tpNOTAM.Text = "NOTAM";
             this.tpNOTAM.UseVisualStyleBackColor = true;
@@ -659,24 +659,23 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.pnlRadius);
-            this.splitContainer2.Size = new System.Drawing.Size(994, 370);
+            this.splitContainer2.Size = new System.Drawing.Size(994, 346);
             this.splitContainer2.SplitterDistance = 497;
             this.splitContainer2.TabIndex = 143;
             // 
             // pnlPolygon
             // 
-            this.pnlPolygon.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPolygon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPolygon.Controls.Add(this.dgvCoordinates);
             this.pnlPolygon.Controls.Add(this.btnAddCoordinate);
             this.pnlPolygon.Controls.Add(this.label2);
             this.pnlPolygon.Controls.Add(this.rbPoygon);
-            this.pnlPolygon.Location = new System.Drawing.Point(5, 3);
+            this.pnlPolygon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPolygon.Location = new System.Drawing.Point(0, 0);
             this.pnlPolygon.Name = "pnlPolygon";
-            this.pnlPolygon.Size = new System.Drawing.Size(482, 345);
+            this.pnlPolygon.Size = new System.Drawing.Size(497, 346);
             this.pnlPolygon.TabIndex = 136;
+            this.pnlPolygon.Click += new System.EventHandler(this.pnlPolygon_Click);
             this.pnlPolygon.Enter += new System.EventHandler(this.pnlPolygon_Enter);
             // 
             // dgvCoordinates
@@ -694,7 +693,7 @@
             this.dgvCoordinates.ReadOnly = true;
             this.dgvCoordinates.RowHeadersVisible = false;
             this.dgvCoordinates.RowTemplate.Height = 32;
-            this.dgvCoordinates.Size = new System.Drawing.Size(465, 244);
+            this.dgvCoordinates.Size = new System.Drawing.Size(480, 245);
             this.dgvCoordinates.TabIndex = 141;
             this.dgvCoordinates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCoordinates_CellContentClick);
             // 
@@ -723,7 +722,7 @@
             this.btnAddCoordinate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddCoordinate.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_592_map;
             this.btnAddCoordinate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddCoordinate.Location = new System.Drawing.Point(363, 292);
+            this.btnAddCoordinate.Location = new System.Drawing.Point(378, 293);
             this.btnAddCoordinate.Name = "btnAddCoordinate";
             this.btnAddCoordinate.Size = new System.Drawing.Size(110, 44);
             this.btnAddCoordinate.TabIndex = 140;
@@ -734,19 +733,21 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 29);
+            this.label2.Size = new System.Drawing.Size(489, 36);
             this.label2.TabIndex = 139;
             this.label2.Text = "Polygon";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // rbPoygon
             // 
             this.rbPoygon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rbPoygon.AutoSize = true;
-            this.rbPoygon.Location = new System.Drawing.Point(376, 3);
+            this.rbPoygon.Location = new System.Drawing.Point(226, 293);
             this.rbPoygon.Name = "rbPoygon";
             this.rbPoygon.Size = new System.Drawing.Size(97, 28);
             this.rbPoygon.TabIndex = 137;
@@ -774,17 +775,20 @@
             this.pnlRadius.Name = "pnlRadius";
             this.pnlRadius.Size = new System.Drawing.Size(482, 133);
             this.pnlRadius.TabIndex = 137;
+            this.pnlRadius.Click += new System.EventHandler(this.pnlRadius_Click);
             this.pnlRadius.Enter += new System.EventHandler(this.pnlRadius_Enter);
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 29);
+            this.label4.Size = new System.Drawing.Size(479, 29);
             this.label4.TabIndex = 138;
             this.label4.Text = "Radius";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label11
             // 
@@ -801,7 +805,7 @@
             // 
             this.rbRadius.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rbRadius.AutoSize = true;
-            this.rbRadius.Location = new System.Drawing.Point(391, 3);
+            this.rbRadius.Location = new System.Drawing.Point(391, 40);
             this.rbRadius.Name = "rbRadius";
             this.rbRadius.Size = new System.Drawing.Size(86, 28);
             this.rbRadius.TabIndex = 136;
@@ -946,7 +950,7 @@
             this.toOther.Controls.Add(this.datSunrise);
             this.toOther.Location = new System.Drawing.Point(4, 33);
             this.toOther.Name = "toOther";
-            this.toOther.Size = new System.Drawing.Size(1000, 414);
+            this.toOther.Size = new System.Drawing.Size(1000, 475);
             this.toOther.TabIndex = 4;
             this.toOther.Text = "Other";
             this.toOther.UseVisualStyleBackColor = true;
@@ -1125,8 +1129,8 @@
             // 
             this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dataGridViewTextBoxColumn6.DataPropertyName = "StartTime";
-            dataGridViewCellStyle3.Format = "MMM-dd HH:mm";
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle27.Format = "MMM-dd HH:mm";
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle27;
             this.dataGridViewTextBoxColumn6.HeaderText = "Start";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -1135,9 +1139,9 @@
             // 
             this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn7.DataPropertyName = "EndTime";
-            dataGridViewCellStyle4.Format = "MMM-dd HH:mm";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle28.Format = "MMM-dd HH:mm";
+            dataGridViewCellStyle28.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle28;
             this.dataGridViewTextBoxColumn7.HeaderText = "End";
             this.dataGridViewTextBoxColumn7.MinimumWidth = 150;
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";

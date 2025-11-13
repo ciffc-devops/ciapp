@@ -671,37 +671,51 @@ namespace Wildfire_ICS_Assist
 
         private void AirOperationsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveNOTAM();
+           if(!SaveNOTAM())
+            {
+                DialogResult dr = LgMessageBox.Show("There are errors with the NOTAM coordinates.  Do you still want to close without a valid NOTAM?", "Close without saving?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if( dr == DialogResult.No)
+                    e.Cancel = true;
+            }
             Program.incidentDataService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
 
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            SaveNOTAM();
-            //catch any changes that have been made and make sure they're saved.
-            Program.incidentDataService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
-
-
-            string path = Program.pdfExportService.CreateAirOpsSummaryPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false, false);
-            if (!string.IsNullOrEmpty(path))
+            if (SaveNOTAM())
             {
-                try { System.Diagnostics.Process.Start(path); }
-                catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
-            }
-            else
-            {
-                LgMessageBox.Show("Sorry, there was an error generating the contact list.");
-            }
+                //catch any changes that have been made and make sure they're saved.
+                Program.incidentDataService.UpsertAirOperationsSummary(CurrentAirOpsSummary);
 
+
+                string path = Program.pdfExportService.CreateAirOpsSummaryPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false, false);
+                if (!string.IsNullOrEmpty(path))
+                {
+                    try { System.Diagnostics.Process.Start(path); }
+                    catch { LgMessageBox.Show("Sorry, there seems to be a problem opening your PDF viewer automatically.  Please check for a popup from your anti-virus program."); }
+                }
+                else
+                {
+                    LgMessageBox.Show("Sorry, there was an error generating the contact list.");
+                }
+            }
 
         }
 
-        private void SaveNOTAM()
+        private bool SaveNOTAM()
         {
             if (!coordinatesAreGoodOrBlank)
             {
-                LgMessageBox.Show(Properties.Resources.ValidCoordinatesRequired);
+                if (rbRadius.Checked)
+                {
+                    LgMessageBox.Show(Properties.Resources.ValidCoordinatesRequired, Properties.Resources.RequiredTitle);
+                }
+                else
+                {
+                    LgMessageBox.Show(Properties.Resources.ValidPolygonCoordinatesRequired, Properties.Resources.RequiredTitle);
+                }
+                return false;
             }
             else
             {
@@ -742,6 +756,7 @@ namespace Wildfire_ICS_Assist
                     }
                 }
             }
+            return true;
         }
 
         private void dgvAircraft_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -804,6 +819,7 @@ namespace Wildfire_ICS_Assist
                 }
                 else
                 {
+                    if(selectedNOTAM.PolygonCoordinates.Count == 0) { return true; }    
                     if (selectedNOTAM.PolygonCoordinates.Count < 3) { return false; }
 
                     return true;
@@ -1040,6 +1056,26 @@ namespace Wildfire_ICS_Assist
                     }
                 }
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            rbRadius.Checked = true;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            rbPoygon.Checked = true;
+        }
+
+        private void pnlRadius_Click(object sender, EventArgs e)
+        {
+            rbRadius.Checked = true;
+        }
+
+        private void pnlPolygon_Click(object sender, EventArgs e)
+        {
+            rbPoygon.Checked = true;
         }
     }
 }
