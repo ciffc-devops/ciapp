@@ -37,15 +37,17 @@
             this.chkUsedForAir = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtAssignment = new System.Windows.Forms.TextBox();
-            this.txtFunction = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cboNewFunction = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -59,21 +61,21 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.cboNewFunction);
             this.splitContainer1.Panel1.Controls.Add(this.btnAirHelp);
             this.splitContainer1.Panel1.Controls.Add(this.editCommsChannelControl1);
             this.splitContainer1.Panel1.Controls.Add(this.label12);
             this.splitContainer1.Panel1.Controls.Add(this.chkUsedForAir);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.txtAssignment);
-            this.splitContainer1.Panel1.Controls.Add(this.txtFunction);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnSave);
             this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Size = new System.Drawing.Size(504, 503);
-            this.splitContainer1.SplitterDistance = 440;
+            this.splitContainer1.Size = new System.Drawing.Size(504, 541);
+            this.splitContainer1.SplitterDistance = 478;
             this.splitContainer1.TabIndex = 0;
             // 
             // btnAirHelp
@@ -84,7 +86,7 @@
             this.btnAirHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAirHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.btnAirHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAirHelp.Location = new System.Drawing.Point(437, 394);
+            this.btnAirHelp.Location = new System.Drawing.Point(437, 432);
             this.btnAirHelp.Name = "btnAirHelp";
             this.btnAirHelp.Size = new System.Drawing.Size(25, 25);
             this.btnAirHelp.TabIndex = 148;
@@ -105,13 +107,13 @@
             this.editCommsChannelControl1.Margin = new System.Windows.Forms.Padding(6);
             this.editCommsChannelControl1.Name = "editCommsChannelControl1";
             this.editCommsChannelControl1.selectedItem = null;
-            this.editCommsChannelControl1.Size = new System.Drawing.Size(492, 310);
+            this.editCommsChannelControl1.Size = new System.Drawing.Size(492, 348);
             this.editCommsChannelControl1.TabIndex = 147;
             // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label12.Location = new System.Drawing.Point(15, 394);
+            this.label12.Location = new System.Drawing.Point(15, 432);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(143, 29);
             this.label12.TabIndex = 146;
@@ -122,7 +124,7 @@
             // 
             this.chkUsedForAir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkUsedForAir.AutoSize = true;
-            this.chkUsedForAir.Location = new System.Drawing.Point(165, 394);
+            this.chkUsedForAir.Location = new System.Drawing.Point(165, 432);
             this.chkUsedForAir.Name = "chkUsedForAir";
             this.chkUsedForAir.Size = new System.Drawing.Size(255, 28);
             this.chkUsedForAir.TabIndex = 145;
@@ -132,7 +134,7 @@
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label8.Location = new System.Drawing.Point(15, 356);
+            this.label8.Location = new System.Drawing.Point(15, 394);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(143, 29);
             this.label8.TabIndex = 143;
@@ -143,26 +145,16 @@
             // 
             this.txtAssignment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAssignment.Location = new System.Drawing.Point(165, 357);
+            this.txtAssignment.Location = new System.Drawing.Point(165, 395);
             this.txtAssignment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAssignment.Name = "txtAssignment";
             this.txtAssignment.Size = new System.Drawing.Size(297, 29);
             this.txtAssignment.TabIndex = 135;
             // 
-            // txtFunction
-            // 
-            this.txtFunction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFunction.Location = new System.Drawing.Point(165, 318);
-            this.txtFunction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtFunction.Name = "txtFunction";
-            this.txtFunction.Size = new System.Drawing.Size(297, 29);
-            this.txtFunction.TabIndex = 132;
-            // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label7.Location = new System.Drawing.Point(15, 317);
+            this.label7.Location = new System.Drawing.Point(15, 355);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(143, 29);
             this.label7.TabIndex = 142;
@@ -199,11 +191,30 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // cboNewFunction
+            // 
+            this.cboNewFunction.FormattingEnabled = true;
+            this.cboNewFunction.Items.AddRange(new object[] {
+            "Command",
+            "Tactical",
+            "Air to Ground",
+            "Air to Air",
+            "Logistics"});
+            this.cboNewFunction.Location = new System.Drawing.Point(165, 355);
+            this.cboNewFunction.Name = "cboNewFunction";
+            this.cboNewFunction.Size = new System.Drawing.Size(297, 32);
+            this.cboNewFunction.TabIndex = 149;
+            this.cboNewFunction.TextUpdate += new System.EventHandler(this.cboNewFunction_TextUpdate);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // CommunicationsPlanEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 503);
+            this.ClientSize = new System.Drawing.Size(504, 541);
             this.Controls.Add(this.splitContainer1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -215,6 +226,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,7 +236,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtAssignment;
-        private System.Windows.Forms.TextBox txtFunction;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
@@ -233,5 +244,7 @@
         private CustomControls.EditCommsChannelControl editCommsChannelControl1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnAirHelp;
+        private System.Windows.Forms.ComboBox cboNewFunction;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

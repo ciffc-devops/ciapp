@@ -14,6 +14,7 @@ using WF_ICS_ClassLibrary.Utilities;
 using System.Runtime.InteropServices;
 using WildfireICSDesktopServices.NewsServices;
 using Microsoft.VisualStudio.Utilities;
+using WildfireICSDesktopServices.PDFExportServiceClasses;
 
 namespace Wildfire_ICS_Assist
 {
@@ -30,12 +31,12 @@ namespace Wildfire_ICS_Assist
             generalOptionsService = new GeneralOptionsService(true);
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
 
-            pdfExportService = new PDFExportService();
-            pdfExportService.SetDateFormat(generalOptionsService.GetStringOptionValue("DateFormat"));
-            WF_ICS_ClassLibrary.Globals.DateFormat = generalOptionsService.GetStringOptionValue("DateFormat");
+            int FormSet = generalOptionsService.GetIntOptionsValue("FormSet");
+            ChangeFormSet(FormSet);
+            
+            Globals.DateFormat = generalOptionsService.GetStringOptionValue("DateFormat");
             incidentDataService = new IncidentDataService();
-            WF_ICS_ClassLibrary.Globals.incidentService = incidentDataService;
-            positionLogService = new PositionLogService();
+            Globals.incidentService = incidentDataService;
             networkService = new NetworkService();
             newsService = new NewsService();
 
@@ -74,7 +75,6 @@ namespace Wildfire_ICS_Assist
         private static IPDFExportService _pdfExportService = null;
         private static NewsService _newsService = null;
         private static IIncidentDataService _incidentDataService = null;
-        private static IPositionLogService _positionLogService= null;
         private static Icon _programIcon = Properties.Resources.P_icon;
         private static int _CurrentOpPeriod;
         private static NetworkSendLog _networkSendLog;
@@ -115,7 +115,6 @@ namespace Wildfire_ICS_Assist
         
         public static NetworkSendLog networkSendLog { get => _networkSendLog; set => _networkSendLog = value; }
         */
-        public static IPositionLogService positionLogService { get => _positionLogService; private set => _positionLogService = value; }
         public static Icon programIcon { get => _programIcon; private set => _programIcon = value; }
         public static Incident CurrentTask { get => incidentDataService.CurrentIncident; set { incidentDataService.CurrentIncident = value; } }
         public static ICSRole CurrentRole { get => incidentDataService.CurrentRole; set { incidentDataService.CurrentRole = value; } }
@@ -137,6 +136,12 @@ namespace Wildfire_ICS_Assist
             }
         }
 
+        public static void ChangeFormSet(int newFormSet)
+        {
+            if (newFormSet == 1) { pdfExportService = new WildfirePDFExportService(); }
+            else { pdfExportService = new AllHazardsPDFExportService(); }
+            pdfExportService.SetDateFormat(generalOptionsService.GetStringOptionValue("DateFormat"));
+        }
 
 
         //Colours used throughout the program

@@ -31,7 +31,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
         private void buildCommsItemList()
         {
             dgvCommsItems.DataSource = null;
-            List<CommsPlanItem> items = (List<CommsPlanItem>) Program.generalOptionsService.GetOptionsValue("CommsItems");
+            List<CommsPlanItem> items = (List<CommsPlanItem>) Program.generalOptionsService.GetOptionsValue("allCommsPlanItems");
             items = items.Where(o=>o.Active).OrderBy(o=>o.ChannelID).ToList();
             dgvCommsItems.DataSource = items;
 

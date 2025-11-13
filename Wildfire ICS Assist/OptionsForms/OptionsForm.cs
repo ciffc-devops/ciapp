@@ -33,7 +33,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
             List<ICSRole> roles = OrganizationalChartTools.GetBlankPrimaryRoles();
             cboDefaultICSRole.DataSource = roles;
             cboDefaultICSRole.DisplayMember = "RoleNameForDropdown";
-            cboDefaultICSRole.ValueMember = "RoleID";
+            cboDefaultICSRole.ValueMember = "GenericRoleID";
 
         }
 
@@ -60,10 +60,11 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
 
             //general
+            cboFormSet.SelectedIndex = options.FormSet;
             cboPositionFormat.SelectedItem = options.PositionFormat;
-            if (options.DefaultICSRole != null && options.DefaultICSRole.RoleID != Guid.Empty)
+            if (options.DefaultICSRole != null && options.DefaultICSRole.GenericRoleID != Guid.Empty)
             {
-                cboDefaultICSRole.SelectedValue = options.DefaultICSRole.RoleID;
+                cboDefaultICSRole.SelectedValue = options.DefaultICSRole.GenericRoleID;
             }
             else { cboDefaultICSRole.SelectedIndex = 0; }
             rbNumbersOnly.Checked = !options.AllowStringTaskNumber; rbNumbersOrLetters.Checked = !rbNumbersOnly.Checked;
@@ -150,6 +151,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 if (options != null)
                 {
                     //general
+                    if (cboFormSet.SelectedItem != null) { options.FormSet = cboFormSet.SelectedIndex; } else { options.FormSet = 0; }
                     if (cboPositionFormat.SelectedItem != null) { options.PositionFormat = cboPositionFormat.SelectedItem.ToString(); }
                     options.DefaultICSRole = (ICSRole)cboDefaultICSRole.SelectedItem;
                     options.AllowStringTaskNumber = !rbNumbersOnly.Checked;

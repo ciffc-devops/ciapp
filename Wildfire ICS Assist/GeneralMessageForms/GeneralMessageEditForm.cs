@@ -52,8 +52,8 @@ namespace Wildfire_ICS_Assist
             txtReplyPosition.Text = generalMessage.ReplyByPosition;
             if (generalMessage.DateSent != DateTime.MinValue) { datMessageSent.Value = generalMessage.DateSent; }
             else { datMessageSent.Value = DateTime.Now; }
-            if (generalMessage.ReplyDate != DateTime.MinValue) { datReplyReceived.Value = generalMessage.ReplyDate; }
-            else { datMessageSent.Value = DateTime.Now; }
+            if (generalMessage.ReplyDate != DateTime.MinValue) { datReplyReceived.Value = generalMessage.ReplyDate; datReplyReceived.Checked = true; }
+            else { datMessageSent.Value = DateTime.Now; datReplyReceived.Checked = false; }
             if (generalMessage.FromRoleID != Guid.Empty && CurrentOrgChart.ActiveRoles.Any(o => o.RoleID == generalMessage.FromRoleID)) { cboFrom.SelectedValue = generalMessage.FromRoleID; }
 
             prepAndApprovePanel1.SetPreparedBy(generalMessage.PreparedByRoleID, generalMessage.DatePrepared);
@@ -110,24 +110,26 @@ namespace Wildfire_ICS_Assist
         private void txtReply_TextChanged(object sender, EventArgs e)
         {
             generalMessage.Reply = ((SpellBox)sender).Text.Trim(); _ = ValidateNew();
+            datReplyReceived.Checked = !string.IsNullOrEmpty(generalMessage.Reply);
 
         }
 
         private void txtReplyName_TextChanged(object sender, EventArgs e)
         {
             generalMessage.ReplyByName = ((TextBox)sender).Text.Trim(); _ = ValidateNew();
-
+            datReplyReceived.Checked = !string.IsNullOrEmpty(generalMessage.Reply);
         }
 
         private void txtReplyPosition_TextChanged(object sender, EventArgs e)
         {
             generalMessage.ReplyByPosition = ((TextBox)sender).Text.Trim(); _ = ValidateNew();
-
+            datReplyReceived.Checked = !string.IsNullOrEmpty(generalMessage.Reply);
         }
 
         private void datReplyReceived_ValueChanged(object sender, EventArgs e)
         {
             generalMessage.ReplyDate = datReplyReceived.Value;
+            
         }
 
         private void cboFrom_Leave(object sender, EventArgs e)
@@ -167,7 +169,15 @@ namespace Wildfire_ICS_Assist
             if (ValidateNew())
             {
                 DateTime dat = generalMessage.DatePrepared;
-                
+
+                if (datReplyReceived.Checked)
+                {
+                    generalMessage.ReplyDate = datReplyReceived.Value;
+                }
+                else
+                {
+                    generalMessage.ReplyDate = DateTime.MinValue;
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -178,33 +188,27 @@ namespace Wildfire_ICS_Assist
             bool isValid = true;
             foreach (Control ctrl in requiredFields)
             {
-                if (string.IsNullOrEmpty(ctrl.Text)) { ctrl.BackColor = Program.ErrorColor; isValid = false; }
-                else { ctrl.BackColor = Program.GoodColor; }
+                if (string.IsNullOrEmpty(ctrl.Text)) { errorProvider1.SetError(ctrl, Properties.Resources.RequiredNote); isValid = false; }
+                else { errorProvider1.SetError(ctrl, ""); }
             }
 
-            //require one or the other of these items
-            if(string.IsNullOrEmpty(txtToName.Text) && string.IsNullOrEmpty(txtToPosition.Text))
-            {
-                txtToName.BackColor = Program.ErrorColor; txtToPosition.BackColor = Program.ErrorColor;
-                isValid = false;
-            } else
-            {
-                txtToName.BackColor = Program.GoodColor; txtToPosition.BackColor = Program.GoodColor;
-            }
+           
 
             if (!string.IsNullOrEmpty(txtReply.Text))
             {
                 //require one or the other of these items
                 if (string.IsNullOrEmpty(txtReplyName.Text) && string.IsNullOrEmpty(txtReplyPosition.Text))
                 {
-                    txtReplyName.BackColor = Program.ErrorColor; txtReplyPosition.BackColor = Program.ErrorColor;
+                    errorProvider1.SetError(txtReplyName, Properties.Resources.RequiredNote);
+                    errorProvider1.SetError(txtReplyPosition, Properties.Resources.RequiredNote);
                     isValid = false;
                 }
                 else
                 {
-                    txtReplyName.BackColor = Program.GoodColor; txtReplyPosition.BackColor = Program.GoodColor;
+                    errorProvider1.SetError(txtReplyName, "");
+                    errorProvider1.SetError(txtReplyPosition, "");
                 }
-            } else { txtReply.BackColor = System.Drawing.SystemColors.Window;  }
+            }
 
             return isValid;
         }
@@ -223,6 +227,23 @@ namespace Wildfire_ICS_Assist
 
         }
 
-        
+        private void txtMessage_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMessage.Text)) { errorProvider1.SetError(txtMessage, Properties.Resources.RequiredNote); }
+            else { errorProvider1.SetError(txtMessage, ""); }
+        }
+
+        private void txtToName_Validating(object sender, CancelEventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtToName.Text)) { errorProvider1.SetError(txtToName, Properties.Resources.RequiredNote); }
+            else { errorProvider1.SetError(txtToName, ""); }
+        }
+
+        private void txtSubject_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSubject.Text)) { errorProvider1.SetError(txtSubject, Properties.Resources.RequiredNote); }
+            else { errorProvider1.SetError(txtSubject, ""); }
+
+        }
     }
 }

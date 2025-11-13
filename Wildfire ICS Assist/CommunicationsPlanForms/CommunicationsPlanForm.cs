@@ -12,6 +12,7 @@ using WF_ICS_ClassLibrary.EventHandling;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Utilities;
 using Wildfire_ICS_Assist.Classes;
+using Wildfire_ICS_Assist.CommunicationsPlanForms;
 using Wildfire_ICS_Assist.CustomControls;
 using Wildfire_ICS_Assist.UtilityForms;
 using WildfireICSDesktopServices;
@@ -21,13 +22,15 @@ namespace Wildfire_ICS_Assist
     public partial class CommunicationsPlanForm : BaseForm
     {
         private const int RowsPerSheet = 27;
-        SortableBindingList<CommsPlanItem> items = null;
+        SortableBindingList<CommsPlanItem> radioItems = null;
+        SortableBindingList<CommsPlanItem> nonRadioItems = null;
 
         public CommunicationsPlanForm()
         {
            
             InitializeComponent();
             dgvCommsItems.AutoGenerateColumns = false;
+            dgvNonRadio.AutoGenerateColumns = false;
             SetControlColors(this.Controls);
         }
         private void CommunicationsPlanForm_Load(object sender, EventArgs e)
@@ -39,30 +42,9 @@ namespace Wildfire_ICS_Assist
             Program.incidentDataService.CommsPlanItemChanged += Program_OnCommsPlanItemChanged;
             Program.incidentDataService.CurrentOpPeriodChanged += Program_OpPeriodChanged;
 
-            prepAndApprovePanel1.ApprovedByChanged += PrepAndApprovePanel1_ApprovedByChanged;
-            prepAndApprovePanel1.PreparedByChanged += PrepAndApprovePanel1_PreparedByChanged; ;
         }
 
-        private void PrepAndApprovePanel1_PreparedByChanged(object sender, EventArgs e)
-        {
-            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
-            if (plan != null)
-            {
-                plan.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
-                plan.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
-            }
-        }
-
-        private void PrepAndApprovePanel1_ApprovedByChanged(object sender, EventArgs e)
-        {
-            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
-            if (plan != null)
-            {
-                plan.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
-                plan.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
-            }
-        }
-
+    
         private void Program_OpPeriodChanged(IncidentOpPeriodChangedEventArgs e)
         {
             BuildDataList();
@@ -86,9 +68,15 @@ namespace Wildfire_ICS_Assist
                 Program.CurrentIncident.createCommsPlanAsNeeded(Program.CurrentOpPeriod);
             }
             CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
-            items = new SortableBindingList<CommsPlanItem>(plan.ActiveCommsItems);
-            dgvCommsItems.DataSource = items;
-            btnAdd.Enabled = plan.ActiveCommsItems.Count < RowsPerSheet;
+            //radio
+            radioItems = new SortableBindingList<CommsPlanItem>(plan.ActiveCommsItems.Where(o=>o.IsRadio).ToList());
+            dgvCommsItems.DataSource = radioItems;
+
+            nonRadioItems = new SortableBindingList<CommsPlanItem>(plan.ActiveCommsItems.Where(o => !o.IsRadio).ToList());
+            dgvNonRadio.DataSource = nonRadioItems;
+
+
+            //btnAdd.Enabled = plan.ActiveCommsItems.Count < RowsPerSheet;
 
             prepAndApprovePanel1.SetPreparedBy(plan.PreparedByRoleID, plan.DatePrepared);
             prepAndApprovePanel1.SetApprovedBy(plan.ApprovedByRoleID, plan.DateApproved);
@@ -96,34 +84,50 @@ namespace Wildfire_ICS_Assist
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using (CommunicationsPlanEntryForm entryForm = new CommunicationsPlanEntryForm())
+            if (tabControl1.SelectedIndex != 1)
             {
-               DialogResult dr = entryForm.ShowDialog();
-                if (dr == DialogResult.OK)
+                using (CommunicationsPlanEntryForm entryForm = new CommunicationsPlanEntryForm())
                 {
-                    entryForm.SelectedItem.OpPeriod = Program.CurrentOpPeriod;
-                    
-                    Program.incidentDataService.UpsertCommsPlanItem(entryForm.SelectedItem, null, "local");
-
-
-                    if (entryForm.SaveForLater)
+                    DialogResult dr = entryForm.ShowDialog();
+                    if (dr == DialogResult.OK)
                     {
-                        Program.generalOptionsService.UpsertOptionValue(entryForm.SelectedItem, "CommsItem");
+                        entryForm.SelectedItem.OpPeriod = Program.CurrentOpPeriod;
+
+                        Program.incidentDataService.UpsertCommsPlanItem(entryForm.SelectedItem, null, "local");
+
+
+                        if (entryForm.SaveForLater)
+                        {
+                            Program.generalOptionsService.UpsertOptionValue(entryForm.SelectedItem, "CommsItem");
+                        }
                     }
                 }
+            }
+            else
+            {
+                CommsPlanItem item = new CommsPlanItem();
+                item.IsRadio = false;
+                item.OpPeriod = Program.CurrentOpPeriod;
+                OpenNonRadioChannelForEdit(item, true);
             }
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            if (dgvCommsItems.SelectedRows.Count == 1)
+            if (tabControl1.SelectedIndex == 1 && dgvNonRadio.SelectedRows.Count == 1)
+            {
+                CommsPlanItem item = (CommsPlanItem)dgvNonRadio.SelectedRows[0].DataBoundItem;
+                OpenNonRadioForView(item);
+
+            }
+            else if (dgvCommsItems.SelectedRows.Count == 1)
             {
                 CommsPlanItem item = (CommsPlanItem)dgvCommsItems.SelectedRows[0].DataBoundItem;
-                OpenForView(item);
+                OpenRadioForView(item);
             }
         }
 
-        private void OpenForView(CommsPlanItem item)
+        private void OpenRadioForView(CommsPlanItem item)
         {
             using (CommunicationsPlanViewForm viewForm = new CommunicationsPlanViewForm())
             {
@@ -132,16 +136,35 @@ namespace Wildfire_ICS_Assist
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void OpenNonRadioForView(CommsPlanItem item)
         {
-            if(dgvCommsItems.SelectedRows.Count == 1)
+            using (CommunicationsPlanNonRadioViewForm viewForm = new CommunicationsPlanNonRadioViewForm())
             {
-                CommsPlanItem item = (CommsPlanItem)dgvCommsItems.SelectedRows[0].DataBoundItem;
-                OpenForEdit(item);
+                viewForm.SelectedItem = item;
+                viewForm.ShowDialog();
             }
         }
 
-        private void OpenForEdit(CommsPlanItem item)
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 1)
+            {
+                if (dgvNonRadio.SelectedRows.Count == 1)
+                {
+                    CommsPlanItem item = (CommsPlanItem)dgvNonRadio.SelectedRows[0].DataBoundItem;
+                    OpenNonRadioChannelForEdit(item, false);
+                }
+            }
+            else if (dgvCommsItems.SelectedRows.Count == 1)
+            {
+                CommsPlanItem item = (CommsPlanItem)dgvCommsItems.SelectedRows[0].DataBoundItem;
+                OpenRadioChannelForEdit(item);
+
+            }
+        }
+
+        private void OpenRadioChannelForEdit(CommsPlanItem item)
         {
             using (CommunicationsPlanEditForm editForm = new CommunicationsPlanEditForm())
             {
@@ -151,6 +174,25 @@ namespace Wildfire_ICS_Assist
                 {
                     Program.incidentDataService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
 
+                }
+            }
+        }
+
+        private void OpenNonRadioChannelForEdit(CommsPlanItem item, bool isNew)
+        {
+            using (CommunicationsPlanPhoneEditForm editForm = new CommunicationsPlanPhoneEditForm())
+            {
+                editForm.SelectedItem = item;
+                editForm.ShowSelectSaved = isNew;
+                DialogResult dr = editForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Program.incidentDataService.UpsertCommsPlanItem(editForm.SelectedItem.Clone(), null, "local");
+
+                    if (editForm.SaveForLater)
+                    {
+                        Program.generalOptionsService.UpsertOptionValue(editForm.SelectedItem, "CommsItem");
+                    }
                 }
             }
         }
@@ -206,24 +248,8 @@ namespace Wildfire_ICS_Assist
         private void btnPrint_Click(object sender, EventArgs e)
         {
             CommsPlan plan = Program.CurrentIncident.allCommsPlans.First(o => o.OpPeriod == Program.CurrentOpPeriod);
-            if (string.IsNullOrEmpty(plan.PreparedByResourceName) || string.IsNullOrEmpty(plan.PreparedByRoleName))
-            {
-
-
-
-                if (Program.CurrentIncident.allOrgCharts.Any(o => o.OpPeriod == Program.CurrentOpPeriod))
-                {
-                    OrganizationChart currentChart = Program.CurrentIncident.allOrgCharts.First(o => o.OpPeriod == Program.CurrentOpPeriod);
-                    ICSRole prepBy = currentChart.GetRoleByID(Globals.LogisticsChiefGenericID, true);
-                    if (prepBy != null)
-                    {
-                        plan.PreparedByResourceName = prepBy.IndividualName; plan.PreparedByRoleName = prepBy.RoleName;
-                        Program.incidentDataService.UpsertCommsPlan(plan);
-                    }
-                }
-
-            }
-            if (string.IsNullOrEmpty(plan.PreparedByResourceName) || string.IsNullOrEmpty(plan.PreparedByRoleName))
+           
+            if ( string.IsNullOrEmpty(plan.PreparedByRoleName))
             {
                 plan.PreparedByResourceName = Program.CurrentRole.IndividualName;
                 plan.PreparedByRoleName = Program.CurrentRole.RoleName;
@@ -244,10 +270,10 @@ namespace Wildfire_ICS_Assist
 
         private void dgvCommsItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0 && e.ColumnIndex != dgvCommsItems.Columns["colDown"].Index && e.ColumnIndex != dgvCommsItems.Columns["colUp"].Index)
+            if(e.RowIndex >= 0)
             {
                 CommsPlanItem item = (CommsPlanItem) dgvCommsItems.Rows[e.RowIndex].DataBoundItem;
-                OpenForView(item);
+                OpenRadioForView(item);
             }
         }
 
@@ -305,6 +331,36 @@ namespace Wildfire_ICS_Assist
             // Sort the selected column
             dgvCommsItems.Sort(column, direction);
            
+        }
+
+        private void prepAndApprovePanel1_PreparedByChanged_1(object sender, EventArgs e)
+        {
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
+            if (plan != null)
+            {
+                plan.SetPreparedBy(prepAndApprovePanel1.PreparedByRole);
+                plan.DatePrepared = prepAndApprovePanel1.PreparedByDateTime;
+            }
+
+        }
+
+        private void prepAndApprovePanel1_ApprovedByChanged_1(object sender, EventArgs e)
+        {
+            CommsPlan plan = Program.CurrentIncident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == Program.CurrentOpPeriod);
+            if (plan != null)
+            {
+                plan.SetApprovedBy(prepAndApprovePanel1.ApprovedByRole);
+                plan.DateApproved = prepAndApprovePanel1.ApprovedByDateTime;
+            }
+        }
+
+        private void dgvNonRadio_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                CommsPlanItem item = (CommsPlanItem)dgvNonRadio.Rows[e.RowIndex].DataBoundItem;
+                OpenNonRadioForView(item);
+            }
         }
     }
 }

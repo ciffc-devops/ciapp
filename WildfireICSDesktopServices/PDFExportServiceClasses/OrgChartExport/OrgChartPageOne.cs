@@ -45,7 +45,7 @@ namespace WildfireICSDesktopServices.OrgChartExport
                 else
                 {
                     StringBuilder sb = new StringBuilder(0);
-                    sb.Append("Unified Command - ");
+                   
                     for (int x = 0; x < _IncidentCommanders.Length; x++)
                     {
                         if (_IncidentCommanders[x] != null)
@@ -53,12 +53,13 @@ namespace WildfireICSDesktopServices.OrgChartExport
 
                             if (!string.IsNullOrEmpty(_IncidentCommanders[x].AgencyName))
                             {
-                                if (x > 0) { sb.Append(" & "); }
+                                if (sb.Length > 0) { sb.Append(" & "); }
 
                                 sb.Append(_IncidentCommanders[x].AgencyName);
                             }
                         }
                     }
+                    sb.Insert(0, "Incident Commanders - ");
                     return sb.ToString();
                 }
             }

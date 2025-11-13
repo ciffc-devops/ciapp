@@ -283,11 +283,29 @@
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SortedBindingList.cs" />
+    <Compile Include="CommunicationsPlanForms\CommunicationsPlanNonRadioViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanForms\CommunicationsPlanNonRadioViewForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanNonRadioViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationsPlanForms\CommunicationsPlanPhoneEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommunicationsPlanForms\CommunicationsPlanPhoneEditForm.Designer.cs">
+      <DependentUpon>CommunicationsPlanPhoneEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\PrepAndApprovePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomControls\PrepAndApprovePanel.Designer.cs">
       <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IncidentObjectiveForms\IncidentObjectivesListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncidentObjectiveForms\IncidentObjectivesListForm.Designer.cs">
+      <DependentUpon>IncidentObjectivesListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.cs">
       <SubType>Form</SubType>
@@ -348,6 +366,11 @@
     </Compile>
     <Compile Include="OperationalPeriodForms\OperationalPeriodReviewForm.Designer.cs">
       <DependentUpon>OperationalPeriodReviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SafetyMessageForms\CreateNewSafetyMessageForm.cs">
       <SubType>Form</SubType>
@@ -561,12 +584,6 @@
     <Compile Include="IncidentObjectiveForms\IncidentObjectiveEntryForm.Designer.cs">
       <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IncidentObjectiveForms\IncidentObjectivesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="IncidentObjectiveForms\IncidentObjectivesForm.Designer.cs">
-      <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="InternetSyncForms\InternetSyncStartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -621,11 +638,6 @@
     <Compile Include="IncidentResourceForms\CheckInForm.Designer.cs">
       <DependentUpon>CheckInForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="IncidentResourceForms\ResourceReplacementEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -649,6 +661,12 @@
     </Compile>
     <Compile Include="UtilityForms\DeletedItemsForm.Designer.cs">
       <DependentUpon>DeletedItemsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UtilityForms\EditCoordinateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityForms\EditCoordinateForm.Designer.cs">
+      <DependentUpon>EditCoordinateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityForms\EnterTextForm.cs">
       <SubType>Form</SubType>
@@ -979,11 +997,20 @@
     <EmbeddedResource Include="AirOpsForms\AirOpsAddAircraftForm.resx">
       <DependentUpon>AirOpsAddAircraftForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanForms\CommunicationsPlanNonRadioViewForm.resx">
+      <DependentUpon>CommunicationsPlanNonRadioViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommunicationsPlanForms\CommunicationsPlanPhoneEditForm.resx">
+      <DependentUpon>CommunicationsPlanPhoneEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\PrepAndApprovePanel.resx">
       <DependentUpon>PrepAndApprovePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentDetailsForm.fr-FR.resx">
       <DependentUpon>IncidentDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncidentObjectiveForms\IncidentObjectivesListForm.resx">
+      <DependentUpon>IncidentObjectivesListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IncidentStatusSummaryForms\IncidentStatusSummaryForm.resx">
       <DependentUpon>IncidentStatusSummaryForm.cs</DependentUpon>
@@ -1127,9 +1154,6 @@
     <EmbeddedResource Include="IncidentObjectiveForms\IncidentObjectiveEntryForm.resx">
       <DependentUpon>IncidentObjectiveEntryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IncidentObjectiveForms\IncidentObjectivesForm.resx">
-      <DependentUpon>IncidentObjectivesForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="InternetSyncForms\InternetSyncStartForm.resx">
       <DependentUpon>InternetSyncStartForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1169,6 +1193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\DeletedItemsForm.resx">
       <DependentUpon>DeletedItemsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityForms\EditCoordinateForm.resx">
+      <DependentUpon>EditCoordinateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UtilityForms\EnterTextForm.resx">
       <DependentUpon>EnterTextForm.cs</DependentUpon>
@@ -1335,88 +1362,178 @@
     <EmbeddedResource Include="UtilityForms\UpdateHistoryForm.resx">
       <DependentUpon>UpdateHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="BlankForms\Dietary and Allergy Details.pdf">
+    <None Include="BlankForms\AllHazard\Dietary and Allergy Details.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\Form-209-page4.pdf">
+    <None Include="BlankForms\AllHazard\Form-209-page4.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\Form-209.pdf">
+    <None Include="BlankForms\AllHazard\Form-209.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS 218 - Support Vehicle Equipment Inventory.pdf">
+    <None Include="BlankForms\AllHazard\ICS 218 - Support Vehicle Equipment Inventory.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-000 Title Page.pdf">
+    <None Include="BlankForms\AllHazard\ICS-000 Title Page.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-202-WF-Incident-Objectives.pdf">
+    <None Include="BlankForms\AllHazard\ICS-202 Incident Objectives.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-203 Organization Assignment List Blanked.pdf">
+    <None Include="BlankForms\AllHazard\ICS-203 Organization Assignment List.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-203-WF Organization Assignment List Blanked.pdf">
+    <None Include="BlankForms\AllHazard\ICS-204 Assignment List.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-204-WF Assignment List.pdf">
+    <None Include="BlankForms\AllHazard\ICS-205 Communications Plan.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-204A-WF Assignment Details.pdf">
+    <None Include="BlankForms\AllHazard\ICS-205A Communications List.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-206-WF-Medical-Plan.pdf">
+    <None Include="BlankForms\AllHazard\ICS-206 Medical Plan.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-207-WF Incident Organization Chart Extension.pdf">
+    <None Include="BlankForms\AllHazard\ICS-207 Incident Organization Chart Extension.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-207-WF Incident Organization Chart Unified.pdf">
+    <None Include="BlankForms\AllHazard\ICS-207 Incident Organization Chart.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-207-WF Incident Organization Chart.pdf">
+    <None Include="BlankForms\AllHazard\ICS-208 Safety Message With Image.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-207-WF-Organization-Chart-Extension.pdf">
+    <None Include="BlankForms\AllHazard\ICS-208 Safety Message.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-208-WF-Safety-Message-with-image.pdf">
+    <None Include="BlankForms\AllHazard\ICS-211 Check In.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-208-WF-Safety-Message.pdf">
+    <None Include="BlankForms\AllHazard\ICS-213 General Message.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-211-WF Check In.pdf">
+    <None Include="BlankForms\AllHazard\ICS-214 Activity Log Supplemental.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-213-WF-General-Message.pdf">
+    <None Include="BlankForms\AllHazard\ICS-214 Activity Log.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-214-WF-Activity-Log-Supplemental.pdf">
+    <None Include="BlankForms\AllHazard\ICS-220 Air Operations Summary Polygon.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-214-WF-Activity-Log.pdf">
+    <None Include="BlankForms\AllHazard\ICS-220 Air Operations Summary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-220-WF Air Operations Summary Polygon.pdf">
+    <None Include="BlankForms\AllHazard\ICS-221 Demobilization Checkout.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-220-WF Air Operations Summary.pdf">
+    <None Include="BlankForms\Wildfire\Dietary and Allergy Details.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS-221-WF Demobilization Checkout.pdf">
+    <None Include="BlankForms\Wildfire\Form-209-page4.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS205A-CommunicationsList.pdf">
+    <None Include="BlankForms\Wildfire\Form-209.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\ICS205WF-Communications-Plan.pdf">
+    <None Include="BlankForms\Wildfire\ICS 218 - Support Vehicle Equipment Inventory.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\Logistics Overview Subsequent Page.pdf">
+    <None Include="BlankForms\Wildfire\ICS-000 Title Page.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BlankForms\Logistics Overview.pdf">
+    <None Include="BlankForms\Wildfire\ICS-202-WF-Incident-Objectives.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-203 Organization Assignment List Blanked.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-203-WF Organization Assignment List Blanked.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-204-WF Assignment List.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-204A-WF Assignment Details.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-205A Communications List.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-206-WF-Medical-Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-207 Incident Organization Chart Extension.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-207 Incident Organization Chart.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-207-WF Incident Organization Chart Extension.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-207-WF Incident Organization Chart Unified.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-207-WF Incident Organization Chart.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-207-WF-Organization-Chart-Extension.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-208-WF-Safety-Message-with-image.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-208-WF-Safety-Message.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-211-WF Check In.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-213-WF-General-Message.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-214 Activity Log Supplemental.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-214 Activity Log.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-214-WF-Activity-Log-Supplemental.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-214-WF-Activity-Log.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-220-WF Air Operations Summary Polygon.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-220-WF Air Operations Summary.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS-221-WF Demobilization Checkout.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\ICS205A-CommunicationsList.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS205A-CommunicationsList.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\ICS205WF-Communications-Plan.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\Logistics Overview Subsequent Page.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\AllHazard\Logistics Overview.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\Logistics Overview Subsequent Page.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BlankForms\Wildfire\Logistics Overview.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -1455,6 +1572,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ics-ca-sq-white.ico" />
+    <None Include="Resources\glyphicons-basic-395-filter.png" />
+    <None Include="Resources\CIAPPFormSet-02.png" />
+    <None Include="Resources\CIAPPFormSet-01.png" />
     <None Include="Resources\glyphicons-filetypes-9-file-spreadsheet1.png" />
     <None Include="Resources\glyphicons-basic-841-square-plus.png" />
     <None Include="Resources\glyphicons-basic-809-drop-plus.png" />
@@ -1473,6 +1593,7 @@
     <None Include="Resources\glyphicons-basic-730-ambulance.png" />
     <None Include="Resources\glyphicons-basic-39-airplane.png" />
     <None Include="Resources\Artboard 1%402x.png" />
+    <None Include="Resources\Artboard 1.png" />
     <Content Include="Resources\check-box-checked.png" />
     <Content Include="Resources\check-box-unchecked.png" />
     <None Include="Resources\glyphicons-basic-46-calendar.png" />

@@ -42,10 +42,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tabControlTitlePageSettings = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnRemoveLogo = new System.Windows.Forms.Button();
-            this.btnChangeLogo = new System.Windows.Forms.Button();
-            this.picReportLogo = new System.Windows.Forms.PictureBox();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.chkIncludeLogo = new System.Windows.Forms.CheckBox();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.picReportLogo = new System.Windows.Forms.PictureBox();
+            this.btnChangeLogo = new System.Windows.Forms.Button();
+            this.btnRemoveLogo = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.chkIncludeTitleImage = new System.Windows.Forms.CheckBox();
@@ -66,7 +68,6 @@
             this.brcCustomTitlePagePDF = new Wildfire_ICS_Assist.CustomControls.BrowseFileControl();
             this.tpContents = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.chkTableOfContents = new System.Windows.Forms.CheckBox();
             this.chkIncidentObjectives = new System.Windows.Forms.CheckBox();
             this.chkOrgAssignments = new System.Windows.Forms.CheckBox();
             this.chkAssignments = new System.Windows.Forms.CheckBox();
@@ -100,8 +101,11 @@
             this.btnSaveAsPDF = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.btnIAP = new System.Windows.Forms.Button();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnEverything = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -111,6 +115,14 @@
             this.pnlTitleDefaultOptions.SuspendLayout();
             this.tabControlTitlePageSettings.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReportLogo)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -123,14 +135,11 @@
             this.tpContents.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tpAdditional.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel1.SuspendLayout();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -247,14 +256,14 @@
             this.pnlTitleDefaultOptions.Location = new System.Drawing.Point(186, 41);
             this.pnlTitleDefaultOptions.Name = "pnlTitleDefaultOptions";
             this.pnlTitleDefaultOptions.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlTitleDefaultOptions.Size = new System.Drawing.Size(780, 422);
+            this.pnlTitleDefaultOptions.Size = new System.Drawing.Size(780, 433);
             this.pnlTitleDefaultOptions.TabIndex = 38;
             // 
             // btnPreviewTitlePage
             // 
             this.btnPreviewTitlePage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPreviewTitlePage.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_52_eye;
-            this.btnPreviewTitlePage.Location = new System.Drawing.Point(557, 369);
+            this.btnPreviewTitlePage.Location = new System.Drawing.Point(557, 380);
             this.btnPreviewTitlePage.Name = "btnPreviewTitlePage";
             this.btnPreviewTitlePage.Size = new System.Drawing.Size(215, 44);
             this.btnPreviewTitlePage.TabIndex = 46;
@@ -287,7 +296,7 @@
             this.tabControlTitlePageSettings.Name = "tabControlTitlePageSettings";
             this.tabControlTitlePageSettings.Padding = new System.Drawing.Point(15, 8);
             this.tabControlTitlePageSettings.SelectedIndex = 0;
-            this.tabControlTitlePageSettings.Size = new System.Drawing.Size(766, 330);
+            this.tabControlTitlePageSettings.Size = new System.Drawing.Size(766, 341);
             this.tabControlTitlePageSettings.TabIndex = 44;
             this.tabControlTitlePageSettings.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlTitlePageSettings_DrawItem);
             // 
@@ -297,23 +306,73 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 43);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(758, 283);
+            this.tabPage1.Size = new System.Drawing.Size(758, 294);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Organization Logo";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // btnRemoveLogo
+            // splitContainer3
             // 
-            this.btnRemoveLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnRemoveLogo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRemoveLogo.Location = new System.Drawing.Point(3, 53);
-            this.btnRemoveLogo.Name = "btnRemoveLogo";
-            this.btnRemoveLogo.Size = new System.Drawing.Size(134, 44);
-            this.btnRemoveLogo.TabIndex = 138;
-            this.btnRemoveLogo.Text = "Clear";
-            this.btnRemoveLogo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRemoveLogo.UseVisualStyleBackColor = true;
-            this.btnRemoveLogo.Click += new System.EventHandler(this.btnRemoveLogo_Click);
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer3.IsSplitterFixed = true;
+            this.splitContainer3.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.chkIncludeLogo);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
+            this.splitContainer3.Size = new System.Drawing.Size(752, 288);
+            this.splitContainer3.SplitterDistance = 34;
+            this.splitContainer3.TabIndex = 139;
+            // 
+            // chkIncludeLogo
+            // 
+            this.chkIncludeLogo.AutoSize = true;
+            this.chkIncludeLogo.Location = new System.Drawing.Point(3, 5);
+            this.chkIncludeLogo.Name = "chkIncludeLogo";
+            this.chkIncludeLogo.Size = new System.Drawing.Size(240, 28);
+            this.chkIncludeLogo.TabIndex = 38;
+            this.chkIncludeLogo.Text = "Include organization logo";
+            this.chkIncludeLogo.UseVisualStyleBackColor = true;
+            this.chkIncludeLogo.CheckedChanged += new System.EventHandler(this.chkIncludeLogo_CheckedChanged);
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer4.IsSplitterFixed = true;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.picReportLogo);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.btnChangeLogo);
+            this.splitContainer4.Panel2.Controls.Add(this.btnRemoveLogo);
+            this.splitContainer4.Size = new System.Drawing.Size(752, 250);
+            this.splitContainer4.SplitterDistance = 605;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // picReportLogo
+            // 
+            this.picReportLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picReportLogo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picReportLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3;
+            this.picReportLogo.Location = new System.Drawing.Point(0, 0);
+            this.picReportLogo.Name = "picReportLogo";
+            this.picReportLogo.Size = new System.Drawing.Size(605, 250);
+            this.picReportLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picReportLogo.TabIndex = 136;
+            this.picReportLogo.TabStop = false;
             // 
             // btnChangeLogo
             // 
@@ -328,28 +387,18 @@
             this.btnChangeLogo.UseVisualStyleBackColor = true;
             this.btnChangeLogo.Click += new System.EventHandler(this.btnChangeLogo_Click);
             // 
-            // picReportLogo
+            // btnRemoveLogo
             // 
-            this.picReportLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picReportLogo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picReportLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.CIAPP_LOGO_v3;
-            this.picReportLogo.Location = new System.Drawing.Point(0, 0);
-            this.picReportLogo.Name = "picReportLogo";
-            this.picReportLogo.Size = new System.Drawing.Size(605, 239);
-            this.picReportLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picReportLogo.TabIndex = 136;
-            this.picReportLogo.TabStop = false;
-            // 
-            // chkIncludeLogo
-            // 
-            this.chkIncludeLogo.AutoSize = true;
-            this.chkIncludeLogo.Location = new System.Drawing.Point(3, 5);
-            this.chkIncludeLogo.Name = "chkIncludeLogo";
-            this.chkIncludeLogo.Size = new System.Drawing.Size(240, 28);
-            this.chkIncludeLogo.TabIndex = 38;
-            this.chkIncludeLogo.Text = "Include organization logo";
-            this.chkIncludeLogo.UseVisualStyleBackColor = true;
-            this.chkIncludeLogo.CheckedChanged += new System.EventHandler(this.chkIncludeLogo_CheckedChanged);
+            this.btnRemoveLogo.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
+            this.btnRemoveLogo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRemoveLogo.Location = new System.Drawing.Point(3, 53);
+            this.btnRemoveLogo.Name = "btnRemoveLogo";
+            this.btnRemoveLogo.Size = new System.Drawing.Size(134, 44);
+            this.btnRemoveLogo.TabIndex = 138;
+            this.btnRemoveLogo.Text = "Clear";
+            this.btnRemoveLogo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRemoveLogo.UseVisualStyleBackColor = true;
+            this.btnRemoveLogo.Click += new System.EventHandler(this.btnRemoveLogo_Click);
             // 
             // tabPage2
             // 
@@ -357,7 +406,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 43);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(758, 277);
+            this.tabPage2.Size = new System.Drawing.Size(758, 294);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Title image and message";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -381,7 +430,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.chkIncludeTitleMessage);
             this.splitContainer2.Panel2.Controls.Add(this.txtCriticalMessage);
-            this.splitContainer2.Size = new System.Drawing.Size(752, 271);
+            this.splitContainer2.Size = new System.Drawing.Size(752, 288);
             this.splitContainer2.SplitterDistance = 426;
             this.splitContainer2.TabIndex = 41;
             // 
@@ -432,7 +481,7 @@
             this.picTitleImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picTitleImage.Location = new System.Drawing.Point(13, 37);
             this.picTitleImage.Name = "picTitleImage";
-            this.picTitleImage.Size = new System.Drawing.Size(251, 229);
+            this.picTitleImage.Size = new System.Drawing.Size(251, 246);
             this.picTitleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picTitleImage.TabIndex = 3;
             this.picTitleImage.TabStop = false;
@@ -457,7 +506,7 @@
             this.txtCriticalMessage.Location = new System.Drawing.Point(3, 37);
             this.txtCriticalMessage.Multiline = true;
             this.txtCriticalMessage.Name = "txtCriticalMessage";
-            this.txtCriticalMessage.Size = new System.Drawing.Size(316, 231);
+            this.txtCriticalMessage.Size = new System.Drawing.Size(316, 248);
             this.txtCriticalMessage.TabIndex = 37;
             this.txtCriticalMessage.Leave += new System.EventHandler(this.txtCriticalMessage_Leave_1);
             this.txtCriticalMessage.Child = new System.Windows.Controls.TextBox();
@@ -472,7 +521,7 @@
             this.tabPage4.Controls.Add(this.chkQRAccessInfo);
             this.tabPage4.Location = new System.Drawing.Point(4, 43);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(758, 277);
+            this.tabPage4.Size = new System.Drawing.Size(758, 294);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Digital Access";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -588,7 +637,7 @@
             // tpContents
             // 
             this.tpContents.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tpContents.Controls.Add(this.flowLayoutPanel1);
+            this.tpContents.Controls.Add(this.splitContainer5);
             this.tpContents.Location = new System.Drawing.Point(4, 33);
             this.tpContents.Name = "tpContents";
             this.tpContents.Padding = new System.Windows.Forms.Padding(3);
@@ -599,7 +648,6 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.chkTableOfContents);
             this.flowLayoutPanel1.Controls.Add(this.chkIncidentObjectives);
             this.flowLayoutPanel1.Controls.Add(this.chkOrgAssignments);
             this.flowLayoutPanel1.Controls.Add(this.chkAssignments);
@@ -618,55 +666,48 @@
             this.flowLayoutPanel1.Controls.Add(this.chkNotes);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(963, 457);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(727, 457);
             this.flowLayoutPanel1.TabIndex = 45;
-            // 
-            // chkTableOfContents
-            // 
-            this.chkTableOfContents.AutoSize = true;
-            this.chkTableOfContents.Location = new System.Drawing.Point(3, 3);
-            this.chkTableOfContents.Name = "chkTableOfContents";
-            this.chkTableOfContents.Size = new System.Drawing.Size(176, 28);
-            this.chkTableOfContents.TabIndex = 39;
-            this.chkTableOfContents.Text = "Table of Contents";
-            this.chkTableOfContents.UseVisualStyleBackColor = true;
             // 
             // chkIncidentObjectives
             // 
             this.chkIncidentObjectives.AutoSize = true;
-            this.chkIncidentObjectives.Location = new System.Drawing.Point(3, 37);
+            this.chkIncidentObjectives.Location = new System.Drawing.Point(3, 3);
             this.chkIncidentObjectives.Name = "chkIncidentObjectives";
             this.chkIncidentObjectives.Size = new System.Drawing.Size(234, 28);
             this.chkIncidentObjectives.TabIndex = 14;
+            this.chkIncidentObjectives.Tag = "IAP";
             this.chkIncidentObjectives.Text = "202 - Incident Objectives";
             this.chkIncidentObjectives.UseVisualStyleBackColor = true;
             // 
             // chkOrgAssignments
             // 
             this.chkOrgAssignments.AutoSize = true;
-            this.chkOrgAssignments.Location = new System.Drawing.Point(3, 71);
+            this.chkOrgAssignments.Location = new System.Drawing.Point(3, 37);
             this.chkOrgAssignments.Name = "chkOrgAssignments";
             this.chkOrgAssignments.Size = new System.Drawing.Size(243, 28);
             this.chkOrgAssignments.TabIndex = 19;
+            this.chkOrgAssignments.Tag = "IAP";
             this.chkOrgAssignments.Text = "203 - Org Assignment List";
             this.chkOrgAssignments.UseVisualStyleBackColor = true;
             // 
             // chkAssignments
             // 
             this.chkAssignments.AutoSize = true;
-            this.chkAssignments.Location = new System.Drawing.Point(3, 105);
+            this.chkAssignments.Location = new System.Drawing.Point(3, 71);
             this.chkAssignments.Name = "chkAssignments";
             this.chkAssignments.Size = new System.Drawing.Size(206, 28);
             this.chkAssignments.TabIndex = 20;
+            this.chkAssignments.Tag = "IAP";
             this.chkAssignments.Text = "204 - Assignment List";
             this.chkAssignments.UseVisualStyleBackColor = true;
             // 
             // chkAssignmentDetails
             // 
             this.chkAssignmentDetails.AutoSize = true;
-            this.chkAssignmentDetails.Location = new System.Drawing.Point(3, 139);
+            this.chkAssignmentDetails.Location = new System.Drawing.Point(3, 105);
             this.chkAssignmentDetails.Name = "chkAssignmentDetails";
             this.chkAssignmentDetails.Size = new System.Drawing.Size(237, 28);
             this.chkAssignmentDetails.TabIndex = 33;
@@ -676,17 +717,18 @@
             // chkCommsPlan
             // 
             this.chkCommsPlan.AutoSize = true;
-            this.chkCommsPlan.Location = new System.Drawing.Point(3, 173);
+            this.chkCommsPlan.Location = new System.Drawing.Point(3, 139);
             this.chkCommsPlan.Name = "chkCommsPlan";
-            this.chkCommsPlan.Size = new System.Drawing.Size(258, 28);
+            this.chkCommsPlan.Size = new System.Drawing.Size(312, 28);
             this.chkCommsPlan.TabIndex = 21;
-            this.chkCommsPlan.Text = "205 - Communications Plan";
+            this.chkCommsPlan.Tag = "IAP";
+            this.chkCommsPlan.Text = "205 - Radio Communications Plan";
             this.chkCommsPlan.UseVisualStyleBackColor = true;
             // 
             // chkContacts
             // 
             this.chkContacts.AutoSize = true;
-            this.chkContacts.Location = new System.Drawing.Point(3, 207);
+            this.chkContacts.Location = new System.Drawing.Point(3, 173);
             this.chkContacts.Name = "chkContacts";
             this.chkContacts.Size = new System.Drawing.Size(261, 28);
             this.chkContacts.TabIndex = 32;
@@ -696,17 +738,18 @@
             // chkMedPlan
             // 
             this.chkMedPlan.AutoSize = true;
-            this.chkMedPlan.Location = new System.Drawing.Point(3, 241);
+            this.chkMedPlan.Location = new System.Drawing.Point(3, 207);
             this.chkMedPlan.Name = "chkMedPlan";
             this.chkMedPlan.Size = new System.Drawing.Size(183, 28);
             this.chkMedPlan.TabIndex = 22;
+            this.chkMedPlan.Tag = "IAP";
             this.chkMedPlan.Text = "206 - Medical Plan";
             this.chkMedPlan.UseVisualStyleBackColor = true;
             // 
             // chkOrgChart
             // 
             this.chkOrgChart.AutoSize = true;
-            this.chkOrgChart.Location = new System.Drawing.Point(3, 275);
+            this.chkOrgChart.Location = new System.Drawing.Point(3, 241);
             this.chkOrgChart.Name = "chkOrgChart";
             this.chkOrgChart.Size = new System.Drawing.Size(230, 28);
             this.chkOrgChart.TabIndex = 23;
@@ -716,17 +759,18 @@
             // chkSafetyMessage
             // 
             this.chkSafetyMessage.AutoSize = true;
-            this.chkSafetyMessage.Location = new System.Drawing.Point(3, 309);
+            this.chkSafetyMessage.Location = new System.Drawing.Point(3, 275);
             this.chkSafetyMessage.Name = "chkSafetyMessage";
             this.chkSafetyMessage.Size = new System.Drawing.Size(270, 28);
             this.chkSafetyMessage.TabIndex = 24;
+            this.chkSafetyMessage.Tag = "IAP";
             this.chkSafetyMessage.Text = "208 - Safety Message/Plan(s)";
             this.chkSafetyMessage.UseVisualStyleBackColor = true;
             // 
             // chkIncidentStatusSummary
             // 
             this.chkIncidentStatusSummary.AutoSize = true;
-            this.chkIncidentStatusSummary.Location = new System.Drawing.Point(3, 343);
+            this.chkIncidentStatusSummary.Location = new System.Drawing.Point(3, 309);
             this.chkIncidentStatusSummary.Name = "chkIncidentStatusSummary";
             this.chkIncidentStatusSummary.Size = new System.Drawing.Size(210, 28);
             this.chkIncidentStatusSummary.TabIndex = 38;
@@ -736,7 +780,7 @@
             // chkCheckInLists
             // 
             this.chkCheckInLists.AutoSize = true;
-            this.chkCheckInLists.Location = new System.Drawing.Point(3, 377);
+            this.chkCheckInLists.Location = new System.Drawing.Point(3, 343);
             this.chkCheckInLists.Name = "chkCheckInLists";
             this.chkCheckInLists.Size = new System.Drawing.Size(190, 28);
             this.chkCheckInLists.TabIndex = 37;
@@ -746,7 +790,7 @@
             // chkGeneralMessages
             // 
             this.chkGeneralMessages.AutoSize = true;
-            this.chkGeneralMessages.Location = new System.Drawing.Point(3, 411);
+            this.chkGeneralMessages.Location = new System.Drawing.Point(3, 377);
             this.chkGeneralMessages.Name = "chkGeneralMessages";
             this.chkGeneralMessages.Size = new System.Drawing.Size(245, 28);
             this.chkGeneralMessages.TabIndex = 27;
@@ -756,17 +800,18 @@
             // chkActivityLog
             // 
             this.chkActivityLog.AutoSize = true;
-            this.chkActivityLog.Location = new System.Drawing.Point(279, 3);
+            this.chkActivityLog.Location = new System.Drawing.Point(3, 411);
             this.chkActivityLog.Name = "chkActivityLog";
             this.chkActivityLog.Size = new System.Drawing.Size(190, 28);
             this.chkActivityLog.TabIndex = 28;
+            this.chkActivityLog.Tag = "";
             this.chkActivityLog.Text = "214 - Activity Log(s)";
             this.chkActivityLog.UseVisualStyleBackColor = true;
             // 
             // chkVerboseActivityLog
             // 
             this.chkVerboseActivityLog.AutoSize = true;
-            this.chkVerboseActivityLog.Location = new System.Drawing.Point(279, 37);
+            this.chkVerboseActivityLog.Location = new System.Drawing.Point(321, 3);
             this.chkVerboseActivityLog.Name = "chkVerboseActivityLog";
             this.chkVerboseActivityLog.Size = new System.Drawing.Size(209, 28);
             this.chkVerboseActivityLog.TabIndex = 29;
@@ -776,17 +821,18 @@
             // chkAirOps
             // 
             this.chkAirOps.AutoSize = true;
-            this.chkAirOps.Location = new System.Drawing.Point(279, 71);
+            this.chkAirOps.Location = new System.Drawing.Point(321, 37);
             this.chkAirOps.Name = "chkAirOps";
             this.chkAirOps.Size = new System.Drawing.Size(223, 28);
             this.chkAirOps.TabIndex = 26;
+            this.chkAirOps.Tag = "IAP";
             this.chkAirOps.Text = "220 - Air Ops Summary";
             this.chkAirOps.UseVisualStyleBackColor = true;
             // 
             // chkNotes
             // 
             this.chkNotes.AutoSize = true;
-            this.chkNotes.Location = new System.Drawing.Point(279, 105);
+            this.chkNotes.Location = new System.Drawing.Point(321, 71);
             this.chkNotes.Name = "chkNotes";
             this.chkNotes.Size = new System.Drawing.Size(166, 28);
             this.chkNotes.TabIndex = 30;
@@ -1023,45 +1069,71 @@
             this.toolTip1.InitialDelay = 1;
             this.toolTip1.ReshowDelay = 1000;
             // 
-            // splitContainer3
+            // btnIAP
             // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer3.IsSplitterFixed = true;
-            this.splitContainer3.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.btnIAP.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_159_thumbnails_list;
+            this.btnIAP.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnIAP.Location = new System.Drawing.Point(3, 27);
+            this.btnIAP.Name = "btnIAP";
+            this.btnIAP.Size = new System.Drawing.Size(224, 48);
+            this.btnIAP.TabIndex = 40;
+            this.btnIAP.Text = "Incident Action Plan";
+            this.btnIAP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnIAP.UseVisualStyleBackColor = true;
+            this.btnIAP.Click += new System.EventHandler(this.btnIAP_Click);
             // 
-            // splitContainer3.Panel1
+            // splitContainer5
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.chkIncludeLogo);
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer5.IsSplitterFixed = true;
+            this.splitContainer5.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer5.Name = "splitContainer5";
             // 
-            // splitContainer3.Panel2
+            // splitContainer5.Panel1
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer3.Size = new System.Drawing.Size(752, 277);
-            this.splitContainer3.SplitterDistance = 34;
-            this.splitContainer3.TabIndex = 139;
+            this.splitContainer5.Panel1.Controls.Add(this.flowLayoutPanel1);
             // 
-            // splitContainer4
+            // splitContainer5.Panel2
             // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer4.IsSplitterFixed = true;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer5.Panel2.Controls.Add(this.flowLayoutPanel2);
+            this.splitContainer5.Size = new System.Drawing.Size(963, 457);
+            this.splitContainer5.SplitterDistance = 727;
+            this.splitContainer5.TabIndex = 46;
             // 
-            // splitContainer4.Panel1
+            // flowLayoutPanel2
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.picReportLogo);
+            this.flowLayoutPanel2.Controls.Add(this.label1);
+            this.flowLayoutPanel2.Controls.Add(this.btnIAP);
+            this.flowLayoutPanel2.Controls.Add(this.btnEverything);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(232, 457);
+            this.flowLayoutPanel2.TabIndex = 41;
             // 
-            // splitContainer4.Panel2
+            // label1
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.btnChangeLogo);
-            this.splitContainer4.Panel2.Controls.Add(this.btnRemoveLogo);
-            this.splitContainer4.Size = new System.Drawing.Size(752, 239);
-            this.splitContainer4.SplitterDistance = 605;
-            this.splitContainer4.TabIndex = 0;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(197, 24);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Pre-set print options";
+            // 
+            // btnEverything
+            // 
+            this.btnEverything.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_224_chevron_right_double;
+            this.btnEverything.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEverything.Location = new System.Drawing.Point(3, 81);
+            this.btnEverything.Name = "btnEverything";
+            this.btnEverything.Size = new System.Drawing.Size(224, 48);
+            this.btnEverything.TabIndex = 42;
+            this.btnEverything.Text = "Everything";
+            this.btnEverything.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEverything.UseVisualStyleBackColor = true;
+            this.btnEverything.Click += new System.EventHandler(this.btnEverything_Click);
             // 
             // PrintIncidentForm
             // 
@@ -1086,6 +1158,15 @@
             this.pnlTitleDefaultOptions.PerformLayout();
             this.tabControlTitlePageSettings.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picReportLogo)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -1104,15 +1185,12 @@
             this.flowLayoutPanel1.PerformLayout();
             this.tpAdditional.ResumeLayout(false);
             this.tpAdditional.PerformLayout();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.PerformLayout();
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
+            this.splitContainer5.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1188,8 +1266,12 @@
         private System.Windows.Forms.PictureBox picReportLogo;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private CustomControls.BrowseFileControl browseFileControl2;
-        private System.Windows.Forms.CheckBox chkTableOfContents;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnIAP;
+        private System.Windows.Forms.Button btnEverything;
     }
 }

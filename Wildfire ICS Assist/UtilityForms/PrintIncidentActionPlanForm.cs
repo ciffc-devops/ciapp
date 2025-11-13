@@ -78,6 +78,39 @@ namespace Wildfire_ICS_Assist
             chkIncludeLogo.Checked = Program.generalOptionsService.GetOptionsBoolValue("IncludeLogoOnTitlePageByDefault");
         }
 
+        private List<CheckBox> allContentsCheckboxes
+        {
+            get
+            {
+                List<CheckBox> checkBoxes = new List<CheckBox>();
+                foreach (Control c in flowLayoutPanel1.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    {
+                        checkBoxes.Add(c as CheckBox);
+                    }
+                }
+                return checkBoxes;
+            }
+        }
+        private List<CheckBox> iapCheckboxes
+        {
+            get
+            {
+                List<CheckBox> checkBoxes = new List<CheckBox>();
+                foreach (Control c in flowLayoutPanel1.Controls)
+                {
+                    if (c.GetType() == typeof(CheckBox))
+                    {
+                        if (c.Tag != null && c.Tag.Equals("IAP")) { checkBoxes.Add(c as CheckBox); }
+                    }
+                }
+
+                return checkBoxes;
+            }
+        }
+
+
         private void setCheckboxeStatusIAP()
         {
             chkIncidentObjectives.Enabled = CurrentIncident.hasMeaningfulObjectives(CurrentOpPeriod);
@@ -429,7 +462,7 @@ namespace Wildfire_ICS_Assist
                     {
                         if (CurrentIncident.allPositionLogEntries.Any(o => o.Role.RoleID == role.RoleID && o.OpPeriod == op))
                         {
-                            allPDFs.AddRange(Program.positionLogService.exportPositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
+                            allPDFs.AddRange(Program.pdfExportService.exportPositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
                         }
                     }
                 }
@@ -439,7 +472,7 @@ namespace Wildfire_ICS_Assist
                     {
                         if (CurrentIncident.allPositionLogEntries.Any(o => o.Role.RoleID == role.RoleID && o.OpPeriod == op))
                         {
-                            allPDFs.AddRange(Program.positionLogService.exportVerbosePositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
+                            allPDFs.AddRange(Program.pdfExportService.exportVerbosePositionLogToPDF(CurrentIncident, op, role, chkFlattenPDF.Checked));
                         }
                     }
                 }
@@ -933,6 +966,27 @@ namespace Wildfire_ICS_Assist
         private void txtDigitalAccessInstructions_TextChanged(object sender, EventArgs e)
         {
             TitlePageOptions.QRInstructions = txtDigitalAccessInstructions.Text;
+        }
+
+        private void btnEverything_Click(object sender, EventArgs e)
+        {
+            foreach (CheckBox c in allContentsCheckboxes)
+            {
+                if (c.Enabled) { c.Checked = true; }
+                c.BackColor = Color.Transparent;
+            }
+        }
+
+        private void btnIAP_Click(object sender, EventArgs e)
+        {
+            foreach (CheckBox c in allContentsCheckboxes)
+            {
+                if (iapCheckboxes.Contains(c)) { c.BackColor = Program.GoodColor; }
+                else { c.BackColor = Color.Transparent; }
+
+                if (c.Enabled && iapCheckboxes.Contains(c)) { c.Checked = true; }
+                else { c.Checked = false;  }
+            }
         }
     }
 }

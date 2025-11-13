@@ -34,18 +34,24 @@
             this.btnAddSaved = new System.Windows.Forms.Button();
             this.cboSavedObjectives = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtNewObjective = new SpellBox();
             this.btnHelp = new System.Windows.Forms.Button();
             this.chkSaveForLater = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblNewTitle = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.btnSaveChanges = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.pnlSaved.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,10 +69,9 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(588, 452);
+            this.splitContainer1.Size = new System.Drawing.Size(1007, 609);
             this.splitContainer1.SplitterDistance = 137;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -82,14 +87,14 @@
             this.pnlSaved.Controls.Add(this.label1);
             this.pnlSaved.Location = new System.Drawing.Point(6, 7);
             this.pnlSaved.Name = "pnlSaved";
-            this.pnlSaved.Size = new System.Drawing.Size(570, 124);
+            this.pnlSaved.Size = new System.Drawing.Size(989, 124);
             this.pnlSaved.TabIndex = 1;
             // 
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddSaved.Location = new System.Drawing.Point(439, 26);
+            this.btnAddSaved.Location = new System.Drawing.Point(858, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddSaved.Name = "btnAddSaved";
             this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
@@ -110,7 +115,7 @@
             this.cboSavedObjectives.FormattingEnabled = true;
             this.cboSavedObjectives.Location = new System.Drawing.Point(8, 51);
             this.cboSavedObjectives.Name = "cboSavedObjectives";
-            this.cboSavedObjectives.Size = new System.Drawing.Size(422, 32);
+            this.cboSavedObjectives.Size = new System.Drawing.Size(841, 32);
             this.cboSavedObjectives.TabIndex = 1;
             this.cboSavedObjectives.ValueMember = "ItemID";
             this.cboSavedObjectives.Leave += new System.EventHandler(this.cboSavedObjectives_Leave);
@@ -125,36 +130,40 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Saved Incident Objective Templates";
             // 
-            // btnCancel
+            // splitContainer2
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
-            this.btnCancel.Location = new System.Drawing.Point(6, 254);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(124, 51);
-            this.btnCancel.TabIndex = 14;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer2.IsSplitterFixed = true;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.panel2);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnSaveChanges);
+            this.splitContainer2.Panel2.Controls.Add(this.btnCancel);
+            this.splitContainer2.Size = new System.Drawing.Size(1007, 468);
+            this.splitContainer2.SplitterDistance = 402;
+            this.splitContainer2.TabIndex = 99;
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.txtNewObjective);
             this.panel2.Controls.Add(this.btnHelp);
             this.panel2.Controls.Add(this.chkSaveForLater);
-            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.lblNewTitle);
             this.panel2.Controls.Add(this.btnAddNew);
-            this.panel2.Location = new System.Drawing.Point(6, 3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(570, 242);
+            this.panel2.Size = new System.Drawing.Size(1007, 402);
             this.panel2.TabIndex = 98;
             // 
             // txtNewObjective
@@ -165,7 +174,7 @@
             this.txtNewObjective.Location = new System.Drawing.Point(8, 51);
             this.txtNewObjective.Multiline = true;
             this.txtNewObjective.Name = "txtNewObjective";
-            this.txtNewObjective.Size = new System.Drawing.Size(554, 126);
+            this.txtNewObjective.Size = new System.Drawing.Size(991, 286);
             this.txtNewObjective.TabIndex = 101;
             this.txtNewObjective.Child = new System.Windows.Controls.TextBox();
             // 
@@ -175,7 +184,7 @@
             this.btnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
             this.btnHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHelp.Location = new System.Drawing.Point(521, 8);
+            this.btnHelp.Location = new System.Drawing.Point(958, 8);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(39, 37);
             this.btnHelp.TabIndex = 100;
@@ -188,28 +197,28 @@
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(120, 197);
+            this.chkSaveForLater.Location = new System.Drawing.Point(557, 357);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSaveForLater.TabIndex = 12;
             this.chkSaveForLater.Text = "Save for future incidents";
             this.chkSaveForLater.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // lblNewTitle
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 10);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(283, 29);
-            this.label10.TabIndex = 99;
-            this.label10.Text = "New Incident Objective";
+            this.lblNewTitle.AutoSize = true;
+            this.lblNewTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNewTitle.Location = new System.Drawing.Point(3, 10);
+            this.lblNewTitle.Name = "lblNewTitle";
+            this.lblNewTitle.Size = new System.Drawing.Size(283, 29);
+            this.lblNewTitle.TabIndex = 99;
+            this.lblNewTitle.Text = "New Incident Objective";
             // 
             // btnAddNew
             // 
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(358, 186);
+            this.btnAddNew.Location = new System.Drawing.Point(795, 346);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(204, 48);
@@ -220,11 +229,41 @@
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
+            // btnSaveChanges
+            // 
+            this.btnSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveChanges.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
+            this.btnSaveChanges.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSaveChanges.Location = new System.Drawing.Point(898, 6);
+            this.btnSaveChanges.Margin = new System.Windows.Forms.Padding(6);
+            this.btnSaveChanges.Name = "btnSaveChanges";
+            this.btnSaveChanges.Size = new System.Drawing.Size(103, 48);
+            this.btnSaveChanges.TabIndex = 102;
+            this.btnSaveChanges.Tag = "AddToIncident";
+            this.btnSaveChanges.Text = "Save";
+            this.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSaveChanges.UseVisualStyleBackColor = true;
+            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_223_chevron_left;
+            this.btnCancel.Location = new System.Drawing.Point(6, 6);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(124, 51);
+            this.btnCancel.TabIndex = 14;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // IncidentObjectiveEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 452);
+            this.ClientSize = new System.Drawing.Size(1007, 609);
             this.Controls.Add(this.splitContainer1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -238,6 +277,10 @@
             this.splitContainer1.ResumeLayout(false);
             this.pnlSaved.ResumeLayout(false);
             this.pnlSaved.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -254,9 +297,11 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox chkSaveForLater;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblNewTitle;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnHelp;
         private SpellBox txtNewObjective;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Button btnSaveChanges;
     }
 }

@@ -134,7 +134,6 @@
     <Compile Include="Interfaces\IGeneralOptionsService.cs" />
     <Compile Include="Interfaces\ILogService.cs" />
     <Compile Include="Interfaces\IPDFExportService.cs" />
-    <Compile Include="Interfaces\IPositionLogService.cs" />
     <Compile Include="Interfaces\ITaskUpdateService.cs" />
     <Compile Include="Interfaces\IIncidentDataService.cs" />
     <Compile Include="Models\AircraftModels\Aircraft.cs" />

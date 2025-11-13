@@ -1,4 +1,5 @@
 ﻿using Org.BouncyCastle.Asn1.Crmf;
+using SARAssistDesktopServices.GeneralOptionsFunctions.Queries;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,7 @@ using WF_ICS_ClassLibrary.Interfaces;
 using WF_ICS_ClassLibrary.Models;
 using WF_ICS_ClassLibrary.Networking;
 using WF_ICS_ClassLibrary.Utilities;
+using WildfireICSDesktopServices.GeneralOptionsFunctions.Queries;
 
 namespace WildfireICSDesktopServices
 {
@@ -423,199 +425,36 @@ namespace WildfireICSDesktopServices
 
         #region Retrieve Values
 
-        public object GetOptionsValue(string ValueName)
-        {
-            switch (ValueName)
-            {
-                case "Agencies":
-                    List<string> agencies = new List<string>();
-                    if (_options.AllTeamMembers != null)
-                    {
-                        agencies.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList());
-                    }
-                    return agencies.Distinct().ToList();
-                case "HomeBases":
-                    List<string> bases = new List<string>();
-                    if (_options.AllTeamMembers != null)
-                    {
-                        
-                        bases.AddRange(_options.AllTeamMembers.Where(o => !string.IsNullOrEmpty(o.HomeUnit)).GroupBy(o => o.HomeUnit).Select(o => o.First().HomeUnit).ToList());
-                    }
-                    return bases.Distinct().ToList();
-
-                case "Aircrafts":
-                    return _options.AircraftList;
-                case "AllowStringTaskNumber":
-                    return _options.AllowStringTaskNumber;
-                case "Ambulances":
-                    return _options.AllAmbulanceServices;
-                case "AutoBackupInterval":
-                    return _options.AutoBackupIntervalMinutes;
-                case "AutomaticSubFolders":
-                    return _options.AutomaticSubFolders;
-                case "CannedCommsItems":
-                    return _options.AllCannedCommsLogEntries;
-                case "CommsItems":
-                    return _options.allCommsPlanItems.Where(o=>o.Active).OrderBy(o => o.ChannelID).ToList();
-                case "Contacts":
-                    return _options.AllContacts;
-                case "CoordinateFormat":
-                    return _options.PositionFormat;
-                case "DefaultICSRole":
-                    if (_options.DefaultICSRole != null) { return _options.DefaultICSRole; }
-                    else { return new ICSRole(OrganizationalChartTools.GetGenericRoleByID(Globals.IncidentCommanderGenericID)); }
-                case "DefaultPort":
-                    return _options.DefaultPortNumber;
-                case "DefaultSaveLocation":
-                    return _options.DefaultSaveLocation;
-                case "Equipment":
-                    return _options.AllEquipment.OrderBy(o => o.Category.CategoryName).ThenBy(o => o.EquipmentName).ToList();
-                case "EquipmentCategories":
-                    return _options.AllEquipmentCategories.OrderBy(o => o.CategoryName).ToList();
-                case "EquipmentCategoriesHierarchy":
-                    List<GearCategory> categories = new List<GearCategory>();
-
-                    foreach (GearCategory parent in _options.AllEquipmentCategories.Where(o => o.ParentCategoryID == Guid.Empty).OrderBy(o => o.CategoryName).ToList())
-                    {
-                        categories.Add(parent);
-                        categories.AddRange(_options.AllEquipmentCategories.Where(o => o.ParentCategoryID == parent.CategoryID).OrderBy(o => o.CategoryName).ToList());
-                    }
-                    return categories;
-
-                case "EquipmentSets":
-                    return _options.AllEquipmentSets;
-
-                case "EquipmentWithBarcodes":
-                    return _options.AllEquipment.Where(o => !string.IsNullOrEmpty(o.EquipmentBarcodeID)).OrderBy(o => o.Category.CategoryName).ThenBy(o => o.EquipmentName).ToList();
-                case "Hospitals":
-                    return _options.AllHospitals;
-                case "LastIpUsedWhenMachineIsServer":
-                    return _options.LastIpUsedWhenMachineIsServer;
-
-                case "LastPort":
-                    return _options.LastPort;
-                case "LastServerIP":
-                    return _options.LastServerIP;
-
-                case "Objectives":
-                    return _options.allPresetObjectives;
-                case "Province":
-                    return _options.DefaultProvince;
-                case "Position Format":
-                    return _options.PositionFormat;
-                case "RecentFiles":
-                    return _options.RecentFilePaths;
-                case "SafetyMessages":
-                    return _options.safetyMessages;
-                case "SARGroup":
-                    if (_options.OrganizationID != Guid.Empty)
-                    {
-                        Organization org = OrganizationTools.GetOrganization(_options.OrganizationID);
-                        if (org != null)
-                        {
-                            return org;
-                        }
-                        else { return new Organization(); }
-                        /*
-                        List<Organization> orgs = new Organization().getStaticOrganizationList(false, true);
-                        if(orgs.Any(o=>o.OrganizationID == _options.OrganizationID))
-                        {
-                            return orgs.Where(o => o.OrganizationID == _options.OrganizationID).First();
-                        } 
-                        */
-                    }
-                    return new Organization();
-                case "SavedNetworkDeviceList":
-                    return _options.SavedNetworkDeviceList;
-                case "ShortcutButtons":
-                    return _options.ShortcutButtons;
-                case "TeamMembers":
-                    return _options.AllTeamMembers;
-                case "Vehicles":
-                    return _options.AllVehicles;
-                case "YellowResourceTimeoutDays":
-                    return _options.YellowResourceTimeoutDays;
-                case "RedResourceTimeoutDays":
-                    return _options.RedResourceTimeoutDays;
-                case "OrganizationLogo":
-                    return _options.OrganizationLogo;
-                case "OrganizationName":
-                    return _options.OrganizationName;
-                default:
-                    return null;
-            }
-        }
-
         public Guid GetGuidOptionValue(string ValueName)
         {
-            switch (ValueName)
-            {
-                case "ParentOrganizationID":
-                    return _options.ParentOrganizationID;
-                case "OrganizationID":
-                    return _options.OrganizationID;
-                case "DefaultProvinceID":
-                    if (_options.DefaultProvince != null) { return _options.DefaultProvince.ProvinceGUID; }
-                    else { return ProvinceTools.GetProvinces(false).First().ProvinceGUID; }
-            }
-            return Guid.Empty;
+            return _options.GetOptionsValueAsGuid(ValueName);
         }
 
+        public string GetStringOptionValue(string ValueName)
+        {
+            return _options.GetOptionsValueAsString(ValueName);
+        }
+        public int GetIntOptionValue(string ValueName)
+        {
+            return _options.GetOptionsValueAsInt(ValueName);
+        }
+        public object GetOptionsValue(string ValueName)
+        {
+            return _options.GetOptionsValueAsObject(ValueName);
+        }
 
         public bool GetOptionsBoolValue(string ValueName)
         {
-            switch (ValueName)
-            {
-                case "AllowStringTaskNumber":
-                    return _options.AllowStringTaskNumber;
-                case "AutoSave":
-                    return _options.AutoSave;
-                case "AutoBackup":
-                    return _options.AutomaticBackups;
-                case "AddIMTToContacts":
-                    return _options.AddIMTToContacts;
-                case "PromptForInitialSave":
-                    return _options.PromptForInitialSave;
-                case "IncludeOrgContactsInIAP":
-                    return _options.IncludeOrgContactsInIAP;
-                case "DefaultToNetworkServer":
-                    return _options.DefaultToServer;
-                case "ShowTestButton":
-                    return _options.ShowTestButton;
-                case "IncludeLogoOnTitlePageByDefault":
-                    return _options.IncludeLogoOnTitlePageByDefault;
-                default:
-                    return false;
-            }
+            return _options.GetOptionsValueAsBoolean(ValueName);
         }
 
-     
-        public string GetStringOptionValue(string ValueName)
+        public int GetIntOptionsValue(string ValueName)
         {
-            switch (ValueName)
-            {
-                case "DefaultSaveLocation":
-                    return _options.DefaultSaveLocation;
-                case "DefaultBackupLocation":
-                    return _options.DefaultBackupLocation;
-                case "LastIpUsedWhenMachineIsServer":
-                    return _options.LastIpUsedWhenMachineIsServer;
-                case "LastServerIP":
-                    return _options.LastServerIP;
-                case "LastPort":
-                    return _options.LastPort;
-                case "DateFormat":
-                    return _options.DateFormat;
-                case "OrganizationName":
-                    return _options.OrganizationName;
-
-                default:
-                    return null;
-            }
+            return _options.GetOptionsValueAsInt(ValueName);
         }
         #endregion
 
 
-        
+
     }
 }

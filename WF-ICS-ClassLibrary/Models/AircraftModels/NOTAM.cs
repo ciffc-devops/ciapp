@@ -1,5 +1,7 @@
 ﻿using ProtoBuf;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using WF_ICS_ClassLibrary.Utilities;
 
 namespace WF_ICS_ClassLibrary.Models
@@ -19,9 +21,9 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(9)] private Coordinate _PolygonNW;
         [ProtoMember(10)] private Coordinate _PolygonSE;
         [ProtoMember(11)] private Coordinate _PolygonSW;
+        [ProtoMember(12)] private List<Coordinate> _PolygonCoordinates;
 
-
-        public NOTAM() { ID = Guid.NewGuid(); }
+        public NOTAM() { ID = Guid.NewGuid(); PolygonCoordinates = new List<Coordinate>();  }
 
         public bool UseRadius { get => _UseRadius; set => _UseRadius = value; }
         // public double Latitude { get => _Latitude; set => _Latitude = value; }
@@ -35,7 +37,7 @@ namespace WF_ICS_ClassLibrary.Models
         public Coordinate PolygonNW { get => _PolygonNW; set => _PolygonNW = value; }
         public Coordinate PolygonSE { get => _PolygonSE; set => _PolygonSE = value; }
         public Coordinate PolygonSW { get => _PolygonSW; set => _PolygonSW = value; }
-
+        public List<Coordinate> PolygonCoordinates { get => _PolygonCoordinates; set => _PolygonCoordinates = value; }
 
         public bool AnyContent
         {
@@ -55,11 +57,7 @@ namespace WF_ICS_ClassLibrary.Models
             get
             {
                 if (RadiusCentre != null) { return true; }
-                if (PolygonNE != null) { return true; }
-                if (PolygonNW != null) { return true; }
-                if (PolygonSE != null) { return true; }
-                if (PolygonSW != null) { return true; }
-                return false;
+                return PolygonCoordinates.Any();
             }
 
         }

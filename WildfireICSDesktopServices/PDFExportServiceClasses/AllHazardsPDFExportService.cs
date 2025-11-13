@@ -1,0 +1,3865 @@
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using WF_ICS_ClassLibrary;
+using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Utilities;
+using WildfireICSDesktopServices.OrgChartExport;
+using WildfireICSDesktopServices.PDFExportServiceClasses.ContactsExport;
+
+namespace WildfireICSDesktopServices.PDFExportServiceClasses
+{
+    public class AllHazardsPDFExportService : IPDFExportService
+    {
+        int FormSet = 0;
+        private static string DateFormat { get; set; } = "MMM-dd-yyyy";
+
+        public void SetDateFormat(string str)
+        {
+            if (!string.IsNullOrEmpty(str)) { DateFormat = str; }
+            else { DateFormat = "MMM-dd-yyyy"; }
+        }
+
+
+        #region Dietary and Allergy Details
+
+        public List<byte[]> exportDietaryAndAllergyToPDF(Incident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodToExport);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
+            List<CheckInRecordWithResource> allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport);
+
+            allCheckInRecords = allCheckInRecords.Where(o => o.Record.ParentRecordID == Guid.Empty && o.Resource.GetType().Equals(typeof(Personnel))).OrderBy(o => o.Record.CheckInLocation).ToList(); //remove non-personnel
+            allCheckInRecords = allCheckInRecords.Where(o => (o.Resource as Personnel).HasAllergies || (o.Resource as Personnel).HasDietaryRestrictions).ToList();
+            //if (thisOpOnly) { allCheckInRecords = allCheckInRecords.Where(o => o.Record.DailyCheckInRecords.Any(d => d.OpPeriod == OpPeriodToExport)).ToList(); }
+
+
+            int totalPages = 1;
+            int rowsOnPage = 40;
+
+
+            if (allCheckInRecords.Count > rowsOnPage)
+            {
+                totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(allCheckInRecords.Count - rowsOnPage) / Convert.ToDecimal(rowsOnPage)));
+                if ((allCheckInRecords.Count - rowsOnPage) % rowsOnPage > 0) { totalPages += 1; }
+                if (totalPages == 0) { totalPages = 1; }
+            }
+
+            List<string> pdfFileNames = new List<string>();
+
+            for (int x = 1; x <= totalPages; x++)
+            {
+                List<CheckInRecordWithResource> resourcesThisPage = allCheckInRecords.Skip((x - 1) * rowsOnPage).Take(rowsOnPage).ToList();
+                allPDFs.AddRange(createSinglePageDietaryAndAllergyPDF(incident, OpPeriodToExport, resourcesThisPage, x, totalPages, flattenPDF));
+
+            }
+
+            /*
+            List<PositionLogEntry> extraPageEntries = entries.Skip(19).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(31 * (x - 1)).Take(37).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            */
+
+
+            return allPDFs;
+        }
+
+        public List<byte[]> createSinglePageDietaryAndAllergyPDF(Incident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "Dietary and Allergy Details - " + incident.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
+            outputFileName += ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("Dietary and Allergy Details.pdf", FormSet);
+
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+                    string checkInLocation = null;
+                    if (allCheckInRecords.Any(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)))
+                    {
+                        checkInLocation = allCheckInRecords.First(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)).Record.CheckInLocation;
+                    }
+
+                    stamper.AcroFields.SetField("1 Event", incident.TaskName);
+                    stamper.AcroFields.SetField("2 Task No", incident.TaskNumber);
+                    stamper.AcroFields.SetField("3 Operational Period", OpPeriod.ToString());
+
+
+
+                    stamper.AcroFields.SetField("From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("From_2", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("To_2", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                    //stamper.AcroFields.SetField("TIME", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+
+
+                    for (int x = 0; x < allCheckInRecords.Count && x < 40; x++)
+                    {
+                        CheckInRecordWithResource record = allCheckInRecords[x];
+
+                        Personnel p = null; if (record.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)record.Resource; }
+
+                        if (p != null)
+                        {
+                            stamper.AcroFields.SetField("PersonRow" + (x + 1), p.Name);
+                            stamper.AcroFields.SetField("AgencyRow" + (x + 1), p.Agency);
+
+                            if (p.HasDietaryRestrictions) { stamper.AcroFields.SetField("DietaryRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("DietaryRow" + (x + 1), "NO"); }
+                            if (p.HasAllergies) { stamper.AcroFields.SetField("AllergiesRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("AllergiesRow" + (x + 1), "N/A"); }
+
+                            bool[] mealRequirements = record.GetMealRequirements();
+
+
+
+                            if (mealRequirements[0]) { stamper.AcroFields.SetField("BrkRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("BrkRow" + (x + 1), "NO"); }
+                            if (mealRequirements[1]) { stamper.AcroFields.SetField("LnchRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("LnchRow" + (x + 1), "NO"); }
+                            if (mealRequirements[2]) { stamper.AcroFields.SetField("DinRow" + (x + 1), "YES"); } else { stamper.AcroFields.SetField("DinRow" + (x + 1), "NO"); }
+
+
+
+                        }
+
+                    }
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("Of", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    //stamper = stamper.AddOrgLogoToForm();
+                    stamper = stamper.RenameAllFields();
+
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+        #endregion
+
+        #region General Message
+        public PDFCreationResults ExportGeneralMessagesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<GeneralMessage> items = task.ActiveGeneralMessages.Where(o => o.OpPeriod == OpPeriodToExport).ToList();
+            return ExportGeneralMessagesToPDF(task, items, flattenPDF);
+
+        }
+
+        public PDFCreationResults ExportGeneralMessagesToPDF(Incident task, List<GeneralMessage> items, bool flattenPDF)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+
+            results.bytes = new List<byte[]>();
+
+            foreach (GeneralMessage sp in items)
+            {
+                var creationResults = CreateGeneralMessagePDF(task, sp, true, flattenPDF);
+                results.errors.AddRange(creationResults.errors);
+                results.TotalPages += creationResults.TotalPages;
+                if (creationResults.path != null)
+                {
+                    using (FileStream stream = File.OpenRead(creationResults.path))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        results.bytes.Add(fileBytes);
+                    }
+                }
+            }
+            return results;
+        }
+
+        public PDFCreationResults CreateGeneralMessagePDF(Incident task, GeneralMessage item, bool tempFileName = false, bool flattenPDF = false)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+            results.path = FileAccessClasses.getWritablePath(task);
+            if (task != null && item != null)
+            {
+                if (!tempFileName)
+                {
+
+
+                    if (task.DocumentPath == null && results.path != null) { task.DocumentPath = results.path; }
+                    string filename = "ICS 213 - " + task.IncidentNameAndNumberForPath + " - " + item.Subject.Sanitize() + ".pdf";
+                    if (filename.Length > 100)
+                    {
+                        filename = "ICS 213 - " + task.IncidentNameAndNumberForPath + " - " + item.Subject.Sanitize().Substring(0, 20) + ".pdf";
+                    }
+                    results.path = FileAccessClasses.getUniqueFileName(filename, results.path);
+
+                    //path = System.IO.Path.Combine(path, filename);
+
+                }
+                else
+                {
+                    results.path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+                }
+
+                try
+                {
+
+
+
+
+                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-213 General Message.pdf", FormSet);
+
+                    PdfReader rdr = new PdfReader(fileToUse);
+
+                    using (FileStream stream = new System.IO.FileStream(results.path, System.IO.FileMode.Create))
+                    {
+                        PdfStamper stamper = new PdfStamper(rdr, stream);
+                        stamper.AcroFields.SetField("Name", task.TaskName);
+                        stamper.AcroFields.SetField("Number", task.TaskNumber);
+                        stamper.AcroFields.SetField("2 TO Name and Position", item.To);
+                        stamper.AcroFields.SetField("3 FROM Name and Position", item.From);
+                        stamper.AcroFields.SetField("4 SUBJECT", item.Subject);
+                        string date = string.Format("{0:" + DateFormat + "}", item.DateSent);
+                        stamper.AcroFields.SetField("5 DATE", string.Format("{0:" + DateFormat + "}", item.DateSent));
+                        stamper.AcroFields.SetField("6 TIME", string.Format("{0:HH:mm}", item.DateSent));
+                        stamper.AcroFields.SetField("7 MESSAGE", item.Message);
+
+                        //approved by
+                        if (!string.IsNullOrEmpty(item.ApprovedByRoleName)) { stamper.AcroFields.SetField("Position", item.ApprovedByRoleName); }
+                        if (!string.IsNullOrEmpty(item.ApprovedByResourceName)) { stamper.AcroFields.SetField("Name_2", item.ApprovedByResourceName); }
+                        //reply
+                        if (!string.IsNullOrEmpty(item.Reply)) { stamper.AcroFields.SetField("9 REPLY", item.Reply); }
+                        if (!string.IsNullOrEmpty(item.ReplyByPosition)) { stamper.AcroFields.SetField("Position_2", item.ReplyByPosition); }
+                        if (!string.IsNullOrEmpty(item.ReplyByName)) { stamper.AcroFields.SetField("Name_3", item.ReplyByName); }
+                        if (item.ReplyDate > DateTime.MinValue) { stamper.AcroFields.SetField("DateTimeSignature", string.Format("{0:" + DateFormat + " HH:mm}", item.ReplyDate)); }
+
+                        if (item.ReplyDate > DateTime.MinValue)
+                        {
+                            stamper.AcroFields.SetField("DateTimeSignature", string.Format("{0:" + DateFormat + " HH:mm}", item.ReplyDate));
+                        }
+
+
+
+
+                        if (flattenPDF)
+                        {
+                            stamper.FormFlattening = true;
+                        }
+
+
+                        //Rename the fields
+                        stamper.RenameAllFields();
+
+                        results.TotalPages = 1;
+
+
+                        stamper.Close();//Close a PDFStamper Object
+                        stamper.Dispose();
+                        rdr.Close();    //Close a PDFReader Object
+
+
+                    }
+
+                }
+                catch (IOException ex)
+                {
+                    results.errors.Add(ex);
+                }
+                catch (System.UnauthorizedAccessException uaex)
+                {
+                    results.errors.Add(uaex);
+                }
+            }
+            return results;
+        }
+
+        #endregion
+
+        #region Safety Messages
+
+        public List<byte[]> exportSafetyMessagesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            List<SafetyMessage> safetyPlans = task.allSafetyMessages.Where(o => o.OpPeriod == OpPeriodToExport).ToList();
+            foreach (SafetyMessage sp in safetyPlans)
+            {
+                string path = createSafetyMessagePDF(task, sp, false, true, flattenPDF);
+                if (path != null)
+                {
+                    using (FileStream stream = File.OpenRead(path))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        allPDFs.Add(fileBytes);
+                    }
+                }
+            }
+            return allPDFs;
+        }
+
+        public List<byte[]> exportSafetyMessagesToPDF(Incident task, List<SafetyMessage> messagesToPrint, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            foreach (SafetyMessage sp in messagesToPrint)
+            {
+                string path = createSafetyMessagePDF(task, sp, false, true, flattenPDF);
+                if (path != null)
+                {
+                    using (FileStream stream = File.OpenRead(path))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        allPDFs.Add(fileBytes);
+                    }
+                }
+            }
+            return allPDFs;
+        }
+
+
+
+        public string createSafetyMessagePDF(Incident task, SafetyMessage plan, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        {
+            string path = FileAccessClasses.getWritablePath(task);
+            if (task != null && plan != null)
+            {
+                if (!tempFileName)
+                {
+
+
+                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+                    string filename = "ICS 208 - Task " + task.IncidentNameAndNumberForPath + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " + plan.SummaryLine.Sanitize() + ".pdf";
+                    if (filename.Length > 100)
+                    {
+                        filename = "ICS 208 - Task " + task.IncidentNameAndNumberForPath + " - Op " + plan.OpPeriod.ToString(Globals.cultureInfo) + " - Hazard " + plan.SummaryLine.Sanitize().Substring(0, 20) + ".pdf";
+                    }
+                    path = FileAccessClasses.getUniqueFileName(filename, path);
+
+                    //path = System.IO.Path.Combine(path, filename);
+
+                }
+                else
+                {
+                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+                }
+
+                try
+                {
+
+                    OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == plan.OpPeriod);
+
+
+
+                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-208 Safety Message.pdf", FormSet);
+                    if (!string.IsNullOrEmpty(plan.ImageBytes))
+                    {
+                        fileToUse = PDFExtraTools.getPDFFilePath("ICS-208 Safety Message With Image.pdf", FormSet);
+                    }
+
+                    PdfReader rdr = new PdfReader(fileToUse);
+
+                    using (FileStream stream = new System.IO.FileStream(path, System.IO.FileMode.Create))
+                    {
+                        PdfStamper stamper = new PdfStamper(rdr, stream);
+                        stamper.AcroFields.SetField("IncidentName", task.TaskName);
+                        stamper.AcroFields.SetField("IncidentNumber", task.TaskNumber);
+
+                        stamper.AcroFields.SetField("Safety Message", plan.Message);
+                        stamper.AcroFields.SetField("Approved Site Safety Plans Located at", plan.SitePlanLocation);
+
+                        stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
+                        stamper.AcroFields.SetField("Name", plan.PreparedByResourceName);
+
+                        stamper.AcroFields.SetField("Date Prepared", plan.DatePrepared.ToString(DateFormat));
+                        stamper.AcroFields.SetField("Time Prepared", plan.DatePrepared.ToString("HH:mm"));
+
+
+                        if (plan.SitePlanRequired) { PDFExtraTools.SetPDFCheckbox(stamper, "SitePlanRequiredYes"); }
+                        else { PDFExtraTools.SetPDFCheckbox(stamper, "SitePlanRequiredNo"); }
+
+
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+
+                        if (!string.IsNullOrEmpty(plan.ImageBytes))
+                        {
+                            iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(plan.ImageBytes.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                            pic.ScaleToFit(530, 200);
+                            float x = 50; //((250 - pic.ScaledWidth) / 2) + 315;
+                            float y = 145;
+                            pic.SetAbsolutePosition(x, y);
+
+                            stamper.GetOverContent(1).AddImage(pic);
+                        }
+
+
+
+                        //Rename the fields
+                        stamper.RenameAllFields();
+
+                        if (flattenPDF)
+                        {
+                            stamper.FormFlattening = true;
+                        }
+
+
+
+
+
+                        stamper.Close();//Close a PDFStamper Object
+                        stamper.Dispose();
+                        rdr.Close();    //Close a PDFReader Object
+                    }
+
+                }
+                catch (IOException ex)
+                {
+                }
+                catch (System.UnauthorizedAccessException)
+                {
+
+                }
+            }
+            return path;
+        }
+        #endregion
+
+        #region Demob Checklist
+
+        public List<byte[]> exportDemobChecklistToPDF(Incident task, List<IncidentResource> Resources, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            string outputFileName = "ICS-211 " + DateTime.Now.ToString(Globals.DateFormat) + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            foreach (IncidentResource res in Resources)
+            {
+                allPDFs.AddRange(exportDemobChecklistToPDF(task, res, flattenPDF));
+            }
+            return allPDFs;
+        }
+
+
+        public List<byte[]> exportDemobChecklistToPDF(Incident task, IncidentResource Resource, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createDemobChecklistPDF(task, Resource, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
+        public string createDemobChecklistPDF(Incident task, IncidentResource Resource, bool tempFileName = false, bool flattenPDF = false)
+        {
+
+            string path = FileAccessClasses.getWritablePath(task);
+
+            if (!tempFileName)
+            {
+
+
+                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+
+                string outputFileName = "ICS 221 - " + Resource.UniqueIDNumWithPrefix;
+
+                //path = System.IO.Path.Combine(path, outputFileName);
+                outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            }
+            else
+            {
+                path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+            }
+            try
+            {
+
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-221 Demobilization Checkout.pdf", FormSet);
+
+
+
+                PdfReader rdr = new PdfReader(fileToUse);
+                PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
+
+
+
+                //Op Plan
+                DateTime today = DateTime.Now;
+                //Top Section
+                stamper.AcroFields.SetField("Name", task.TaskName);
+                stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                stamper.AcroFields.SetField("2 DATETIME", DateTime.Now.ToString(Globals.DateFormat + " HH:mm"));
+
+
+                stamper.AcroFields.SetField("4 UNITPERSONNEL RELEASED", Resource.ResourceName);
+                stamper.AcroFields.SetField("10 UNIT LEADER RESPONSIBLE FOR COLLECTING PERFORMANCE RATING", Resource.LeaderName);
+
+
+                stamper.AcroFields.SetField("PAGE", "1");
+                stamper.AcroFields.SetField("OF", "1");
+
+
+
+
+                stamper.RenameAllFields();
+
+                if (flattenPDF)
+                {
+                    stamper.FormFlattening = true;
+                }
+
+                stamper.Close();//Close a PDFStamper Object
+                rdr.Close();    //Close a PDFReader Object
+
+
+
+            }
+            catch (IOException ex)
+            {
+            }
+            catch (System.UnauthorizedAccessException ex)
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return path;
+        }
+
+
+        #endregion
+
+        #region Medical Plan
+        public List<byte[]> exportMedicalPlanToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createMedicalPlanPDF(task, OpPeriodToExport, false, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
+        public string createMedicalPlanPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        {
+            if (!task.allMedicalPlans.Any(o => o.OpPeriod == OpsPeriod)) { task.createMedicalPlanAsNeeded(OpsPeriod); }
+            MedicalPlan plan = task.allMedicalPlans.Where(o => o.OpPeriod == OpsPeriod).First();
+
+            if (!task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod)) { task.createOrgChartAsNeeded(OpsPeriod); }
+            OrganizationChart currentChart = task.allOrgCharts.First(o => o.OpPeriod == OpsPeriod);
+
+            OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
+
+
+            string path = FileAccessClasses.getWritablePath(task);
+
+            if (!tempFileName)
+            {
+
+
+                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+
+                string outputFileName = "ICS 206 - Task " + task.TaskNumber + " - Op Period " + OpsPeriod.ToString(Globals.cultureInfo);
+                //path = System.IO.Path.Combine(path, outputFileName);
+                outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            }
+            else
+            {
+                path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+            }
+            try
+            {
+
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-206 Medical Plan.pdf", FormSet);
+
+
+
+                PdfReader rdr = new PdfReader(fileToUse);
+                PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
+
+
+
+                //Op Plan
+                DateTime today = DateTime.Now;
+                //Top Section
+                stamper.AcroFields.SetField("Name", task.TaskName);
+                stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                stamper.AcroFields.SetField("Date", string.Format("{0:" + DateFormat + "}", plan.DatePrepared));
+                stamper.AcroFields.SetField("Time", string.Format("{0:HH:mm}", plan.DatePrepared));
+
+
+                stamper.AcroFields.SetField("2 DATETIME PREPAREDDate From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
+                stamper.AcroFields.SetField("2 DATETIME PREPAREDTime From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+
+
+
+                //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
+                if (plan.PreparedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.PreparedByResourceName) && currentChart.ActiveRoles.Any(o => o.RoleID == plan.PreparedByRoleID))
+                {
+                    ICSRole role = currentChart.ActiveRoles.First(o => o.RoleID == plan.PreparedByRoleID);
+                    plan.PreparedByResourceName = role.IndividualName;
+                }
+                stamper.AcroFields.SetField("Name_2", plan.PreparedByResourceName);
+                stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
+
+                //This will check with the org chart to see if an individual has been assigned, assuming the name is vacant right now
+                if (plan.ApprovedByRoleID != Guid.Empty && string.IsNullOrEmpty(plan.ApprovedByResourceName) && currentChart.ActiveRoles.Any(o => o.RoleID == plan.ApprovedByRoleID))
+                {
+                    ICSRole role = currentChart.ActiveRoles.First(o => o.RoleID == plan.ApprovedByRoleID);
+                    plan.ApprovedByResourceName = role.IndividualName;
+                }
+                stamper.AcroFields.SetField("Name_3", plan.ApprovedByResourceName);
+                stamper.AcroFields.SetField("Position_2", plan.ApprovedByRoleName);
+
+                stamper.AcroFields.SetField("7 MEDICAL EMERGENCY PROCEDURESRow1", plan.EmergencyProcedures);
+
+
+                for (int aid = 0; aid < plan.ActiveAidStations.Count && aid < 5; aid++)
+                {
+                    MedicalAidStation aidStation = plan.ActiveAidStations[aid];
+                    stamper.AcroFields.SetField("Medical Aid StationsRow" + (aid + 1), aidStation.Name);
+                    stamper.AcroFields.SetField("LocationRow" + (aid + 1), aidStation.Location);
+                    stamper.AcroFields.SetField("Contact number or frequencyRow" + (aid + 1), aidStation.ContactNumber);
+
+
+                    if (aidStation.ParamedicsAvailable) { PDFExtraTools.SetPDFCheckbox(stamper, "AidParamedicY" + (aid + 1)); }
+                    else { PDFExtraTools.SetPDFCheckbox(stamper, "AidParamedicN" + (aid + 1)); }
+
+
+                }
+
+
+
+                for (int a = 0; a < plan.ActiveAmbulances.Count && a < 5; a++)
+                {
+                    AmbulanceService ambulance = plan.ActiveAmbulances[a];
+                    stamper.AcroFields.SetField("Ambulance ServiceRow" + (a + 1), ambulance.Organization);
+                    stamper.AcroFields.SetField("LocationRow" + (a + 1) + "_2", ambulance.Location);
+                    stamper.AcroFields.SetField("Contact number or frequencyRow" + (a + 1) + "_2", ambulance.Contact);
+
+
+                    if (ambulance.IsALS) { PDFExtraTools.SetPDFCheckbox(stamper, "MedivacALS" + (a + 1)); }
+                    else { PDFExtraTools.SetPDFCheckbox(stamper, "MedivacBLS" + (a + 1)); }
+
+                }
+
+
+                for (int a = 0; a < plan.ActiveHospitals.Count && a < 5; a++)
+                {
+                    Hospital hospital = plan.ActiveHospitals[a];
+                    stamper.AcroFields.SetField("Hospital NameRow" + (a + 1), hospital.name);
+                    if (hospital.Latitude != 0 && hospital.Longitude != 0 && hospital.helipad)
+                    {
+                        Coordinate coord = new Coordinate();
+                        coord.Latitude = hospital.Latitude;
+                        coord.Longitude = hospital.Longitude;
+                        GeneralOptionsService service = new GeneralOptionsService();
+                        stamper.AcroFields.SetField("Address Lat Long if HelipadRow" + (a + 1), coord.CoordinateOutput(service.GetOptionsValue("CoordinateFormat").ToString()));
+                    }
+                    else
+                    {
+                        stamper.AcroFields.SetField("Address Lat Long if HelipadRow1" + (a + 1), hospital.location);
+                    }
+                    stamper.AcroFields.SetField("AirRow" + (a + 1), hospital.travelTimeAir.ToString());
+                    stamper.AcroFields.SetField("GrndRow" + (a + 1), hospital.travelTimeGround.ToString());
+                    stamper.AcroFields.SetField("Contact number or frequencyRow" + (a + 1) + "_3", hospital.phone);
+
+
+                    if (hospital.helipad) { PDFExtraTools.SetPDFCheckbox(stamper, "HelipadY" + (a + 1)); }
+                    else { PDFExtraTools.SetPDFCheckbox(stamper, "HelipadN" + (a + 1)); }
+
+                    if (hospital.burnUnit) { PDFExtraTools.SetPDFCheckbox(stamper, "BurnY" + (a + 1)); }
+                    else { PDFExtraTools.SetPDFCheckbox(stamper, "BurnN" + (a + 1)); }
+                }
+
+
+                //Rename all fields
+                stamper.RenameAllFields();
+
+                if (flattenPDF)
+                {
+                    stamper.FormFlattening = true;
+                }
+
+                stamper.Close();//Close a PDFStamper Object
+                rdr.Close();    //Close a PDFReader Object
+
+
+
+            }
+            catch (IOException ex)
+            {
+            }
+            catch (System.UnauthorizedAccessException ex)
+            {
+
+            }
+
+            return path;
+        }
+        #endregion
+
+        #region Comms Plan
+        public List<byte[]> exportCommsPlanToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createCommsPlanPDF(task, OpPeriodToExport, false, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
+        public string createCommsPlanPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        {
+            string path = FileAccessClasses.getWritablePath(task);
+            if (!tempFileName)
+            {
+
+
+
+                if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+                string outputFileName = "ICS 205 - Task " + task.TaskNumber + " - Op Period " + OpsPeriod.ToString();
+                //path = System.IO.Path.Combine(path, outputFileName);
+                outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+                path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            }
+            else
+            {
+                path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+            }
+
+
+            if (!task.allCommsPlans.Any(o => o.OpPeriod == OpsPeriod))
+            {
+                task.createCommsPlanAsNeeded(OpsPeriod);
+            }
+
+            CommsPlan plan = task.allCommsPlans.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
+
+
+
+            try
+            {
+
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-205 Communications Plan.pdf", FormSet);
+
+                PdfReader rdr = new PdfReader(fileToUse);
+                PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create));
+
+                OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == plan.OpPeriod);
+
+                //Op Plan
+                DateTime today = DateTime.Now;
+                //Top Section
+                stamper.AcroFields.SetField("Name", task.TaskName);
+                stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                stamper.AcroFields.SetField("2 DATETIME PREPARED", plan.DatePrepared.ToString(Globals.DateFormat) + " " + plan.DatePrepared.ToString("HH:"));
+
+                stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
+                stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+
+                stamper.AcroFields.SetField("Name_2", plan.PreparedByResourceName);
+                stamper.AcroFields.SetField("Position", plan.PreparedByRoleName);
+                List<CommsPlanItem> radioItems = plan.ActiveCommsItems.Where(o => o.IsRadio).ToList();
+
+                for (int row = 0; row < radioItems.Count && row < 26; row++)
+                {
+                    CommsPlanItem item = radioItems[row];
+                    stamper.AcroFields.SetField("System  TypeRow" + (row + 1), item.CommsSystem);
+                    stamper.AcroFields.SetField("ChannelRow" + (row + 1), item.ChannelID);
+                    stamper.AcroFields.SetField("FunctionRow" + (row + 1), item.CommsFunction);
+                    stamper.AcroFields.SetField("Frequency  ToneRow" + (row + 1), item.FullFrequency);
+                    stamper.AcroFields.SetField("AssignmentRow" + (row + 1), item.Assignment);
+                    stamper.AcroFields.SetField("RemarksRow" + (row + 1), item.Comments);
+
+                }
+
+
+
+
+
+
+                if (flattenPDF)
+                {
+                    stamper.FormFlattening = true;
+                }
+
+
+                stamper.Close();//Close a PDFStamper Object
+                rdr.Close();    //Close a PDFReader Object
+
+
+
+            }
+            catch (IOException ex)
+            {
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+
+            }
+            return path;
+        }
+        #endregion
+
+        #region Objectives
+        public List<byte[]> exportIncidentObjectivesToPDF(Incident task, int OpPeriodToExport, bool IncludeAttachments, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createObjectivesPDF(task, OpPeriodToExport, IncludeAttachments, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+        public string createObjectivesPDF(Incident task, int OpsPeriod, bool includeAttachments = false, bool tempFileName = false, bool flattenPDF = false)
+        {
+            if (task != null)
+            {
+                string path = FileAccessClasses.getWritablePath(task);
+
+                if (!tempFileName)
+                {
+
+
+                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+                    string outputFileName = "ICS 202 - Task " + task.IncidentNameAndNumberForPath + " - Op Period " + OpsPeriod.ToString();
+                    //path = System.IO.Path.Combine(path, outputFileName);
+                    outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+                    path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+                }
+                else
+                {
+                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+                }
+
+                try
+                {
+                    string fileToUse = PDFExtraTools.getPDFFilePath("ICS-202 Incident Objectives.pdf", FormSet);
+                    //fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+
+                    if (!File.Exists(fileToUse)) { return "err Blank PDF Not found"; }
+
+                    PdfReader rdr = new PdfReader(fileToUse);
+                    PdfStamper stamper = new PdfStamper(rdr, new FileStream(path, FileMode.Create));
+
+                    task.createObjectivesSheetAsNeeded(OpsPeriod);
+
+                    IncidentObjectivesSheet currentSheet = task.AllIncidentObjectiveSheets.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
+
+                    //Op Plan
+                    OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == OpsPeriod);
+                    OrganizationChart currentChart = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
+
+                    //Top Section
+                    stamper.AcroFields.SetField("Name", task.TaskName);
+                    stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+
+                    if (currentOp != null)
+                    {
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+                    }
+
+
+                    stamper.AcroFields.SetField("3 OBJECTIVESRow1", currentSheet.ActiveObjectivesAsString);
+
+                    stamper.AcroFields.SetField("4 OPERATIONAL PERIOD COMMAND EMPHASISRow1", currentSheet.CommandEmphasis);
+                    stamper.AcroFields.SetField("General situational awarenessRow1", currentSheet.SituationalAwareness);
+                    stamper.AcroFields.SetField("Approved site safety plans located atYes No", currentSheet.SafetyPlanLocation);
+                    if (currentSheet.SiteSafetyPlanRequired)
+                    {
+                        PDFExtraTools.SetPDFCheckbox(stamper, "chkSiteSafetyYes");
+                    }
+                    else
+                    {
+                        PDFExtraTools.SetPDFCheckbox(stamper, "chkSiteSafetyNo");
+                    }
+
+
+                    if (currentChart != null)
+                    {
+                        ICSRole PreparedBy = currentChart.GetRoleByID(Globals.PlanningChiefGenericID, true);
+                        if (Guid.Empty != currentSheet.PreparedByRoleID)
+                        {
+                            stamper.AcroFields.SetField("Name_2", currentSheet.PreparedByResourceName);
+                            stamper.AcroFields.SetField("PositionTitle", currentSheet.PreparedByRoleName);
+                        }
+
+                        if (Guid.Empty != currentSheet.ApprovedByRoleID)
+                        {
+                            stamper.AcroFields.SetField("Name_3", currentSheet.ApprovedByResourceName);
+                            stamper.AcroFields.SetField("Date", currentSheet.DateApproved.ToString(DateFormat));
+                        }
+                    }
+
+                    stamper.AcroFields.SetField("7 GENERAL SAFETY MESSAGERow1", currentSheet.GeneralSafety);
+
+
+                    if (includeAttachments)
+                    {
+                        //checkboxes
+                        bool Has203 = task.hasMeaningfulOrgChart(currentSheet.OpPeriod);
+                        bool Has204 = task.hasMeaningfulTeamAssignments(currentSheet.OpPeriod);
+                        bool Has205 = task.hasMeangfulCommsPlan(currentSheet.OpPeriod);
+                        bool Has205a = task.hasMeangfulCommsPlan(currentSheet.OpPeriod);
+                        bool Has206 = task.hasMeaningfulMedicalPlan(currentSheet.OpPeriod);
+                        bool Has208 = task.hasAnySafetyMessages(currentSheet.OpPeriod);
+                        bool Has220 = task.hasMeaningfulAirOps(currentSheet.OpPeriod);
+
+                        if (Has203) { PDFExtraTools.SetPDFCheckbox(stamper, "chkAttach203"); }
+                        if (Has204) { PDFExtraTools.SetPDFCheckbox(stamper, "chkAttach204"); }
+                        if (Has205) { PDFExtraTools.SetPDFCheckbox(stamper, "chkAttach205"); }
+                        if (Has206) { PDFExtraTools.SetPDFCheckbox(stamper, "chkAttach206"); }
+                        if (Has208) { PDFExtraTools.SetPDFCheckbox(stamper, "chkAttach208"); }
+                        
+
+                    }
+
+                    stamper.RenameAllFields();
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+
+
+                    stamper.Close();//Close a PDFStamper Object
+                    rdr.Close();    //Close a PDFReader Object
+
+                }
+                catch (IOException ex)
+                {
+                    path = null;
+                }
+                catch (System.UnauthorizedAccessException ex)
+                {
+                    path = null;
+
+                }
+                return path;
+            }
+            else { return null; }
+        }
+        #endregion
+
+        #region Organization Assignments / Chart
+        public List<byte[]> exportOrgAssignmentListToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+            PDFCreationResults results = createOrgAssignmentListPDF(task, OpPeriodToExport, true, flattenPDF);
+            string path = results.path;
+            if (path != null && results.Successful)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
+
+
+        public PDFCreationResults createOrgAssignmentListPDF(Incident task, int OpsPeriod, bool tempFileName = false, bool flattenPDF = false)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+
+
+
+            List<string> paths = new List<string>();
+            string finalPath = FileAccessClasses.getWritablePath(task);
+            string path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+
+            OperationalPeriod currentOp = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == OpsPeriod);
+
+            int ThisPageNumber = 1;
+
+
+            paths.Add(path);
+            results.TempPath = path;
+
+
+            try
+            {
+
+                results.LastStepReached = -1;
+                if (!task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod))
+                {
+                    task.createOrgChartAsNeeded(OpsPeriod);
+                }
+
+                OrganizationChart currentChart = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First();
+
+                string fileToUse = PDFExtraTools.getPDFFilePath("ICS-203 Organization Assignment List.pdf", FormSet);
+
+                if (File.Exists(fileToUse))
+                {
+                    results.LastStepReached = 0;
+
+
+                    using (PdfReader rdr = new PdfReader(fileToUse))
+                    {
+                        results.LastStepReached = 1;
+                        using (FileStream stream = new System.IO.FileStream(path, FileMode.Create))
+                        {
+                            results.LastStepReached = 2;
+                            using (PdfStamper stamper = new PdfStamper(rdr, stream))
+                            {
+                                results.LastStepReached = 3;
+
+
+                                stamper.AcroFields.SetField("Name", task.TaskName);
+                                stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                                stamper.AcroFields.SetField("2 DATE", string.Format("{0:" + DateFormat + "}", currentChart.DatePrepared));
+                                stamper.AcroFields.SetField("3 TIME", string.Format("{0:HH:mm}", currentChart.DatePrepared));
+                                if (currentOp != null)
+                                {
+                                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
+                                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+                                }
+                                ICSRole PreparedBy = new ICSRole();
+                                if (currentChart.PreparedByRoleID != Guid.Empty)
+                                {
+
+                                    PreparedBy.IndividualName = currentChart.PreparedByResourceName;
+                                    PreparedBy.BaseRoleName = currentChart.PreparedByRoleName;
+                                }
+
+
+                                if (null != PreparedBy)
+                                {
+                                    stamper.AcroFields.SetField("Position", PreparedBy.RoleName);
+                                    stamper.AcroFields.SetField("Name_2", PreparedBy.IndividualName);
+                                }
+                                //stamper.AcroFields.SetField("PAGE", "1");
+                                currentChart.SortRoles();
+
+                                //Incident Command
+                                List<ICSRole> icRoles = currentChart.GetRolesForAssignmentList(Globals.IncidentCommanderGenericID, 10, 7).Where(o=> ! o.RoleName.Equals("Agency Representative")).ToList();
+                                for (int x = 0; x < 7 && x < icRoles.Count; x++)
+                                {
+                                    if (icRoles[x].ReportsTo == Globals.IncidentCommanderGenericID || icRoles[x].RoleID == Globals.IncidentCommanderGenericID) { stamper.SetFieldFontBold("5 INCIDENT AND COMMAND STAFFRow" + (x + 1)); }
+
+                                    stamper.AcroFields.SetField("5 INCIDENT AND COMMAND STAFFRow" + (x + 1), icRoles[x].RoleNameForDropdown);
+                                    stamper.AcroFields.SetField("5 INCIDENT AND COMMAND STAFFRow" + (x + 1) + "_2", icRoles[x].IndividualName);
+                                }
+                                //agency reps
+                                List<ICSRole> repRoles = currentChart.ActiveRoles.Where(o => o.SectionID == Globals.IncidentCommanderGenericID && o.RoleName.Equals("Agency Representative")).OrderBy(o => o.Depth).ThenBy(o => o.ManualSortOrder).ThenBy(o => o.RoleName).ToList();
+                                for (int x = 0; x < 7 && x < repRoles.Count; x++)
+                                {
+                                    if (repRoles[x].Depth > 0) { repRoles[x].Depth -= 1; } //adjust for IC level
+                                    if (repRoles[x].IndividualID != Guid.Empty && task.IncidentPersonnel.Any(o => o.ID == repRoles[x].IndividualID))
+                                    {
+                                        Personnel p = task.IncidentPersonnel.First(o => o.ID == repRoles[x].IndividualID);
+                                        stamper.AcroFields.SetField("Agency  OrganizationRow" + (x + 1), p.Agency);
+                                    }
+                                    else { stamper.AcroFields.SetField("Agency  OrganizationRow" + (x + 1), repRoles[x].RoleNameForDropdown); }
+                                    stamper.AcroFields.SetField("RepresentativeRow" + (x + 1), repRoles[x].IndividualName);
+                                }
+
+                                //Planning
+                                List<ICSRole> planRoles = currentChart.GetRolesForAssignmentList(Globals.PlanningChiefGenericID, 0, 10);
+                                for (int x = 0; x < 10 && x < planRoles.Count; x++)
+                                {
+                                    if (planRoles[x].Depth > 0) { planRoles[x].Depth -= 1; } //adjust for IC level
+
+                                    if (planRoles[x].ReportsTo == Globals.PlanningChiefGenericID || planRoles[x].RoleID == Globals.PlanningChiefGenericID) { stamper.SetFieldFontBold("7 PLANNING SECTIONRow" + (x + 1)); }
+
+                                    stamper.AcroFields.SetField("7 PLANNING SECTIONRow" + (x + 1), planRoles[x].RoleNameForDropdown);
+                                    stamper.AcroFields.SetField("7 PLANNING SECTIONRow" + (x + 1) + "_2", planRoles[x].IndividualName);
+                                }
+
+                                //Ops
+                                List<ICSRole> opsRoles = currentChart.GetRolesForAssignmentList(Globals.OpsChiefGenericID, 0, 35);
+                                for (int x = 0; x < 34 && x < opsRoles.Count; x++)
+                                {
+                                    if (opsRoles[x].Depth > 0) { opsRoles[x].Depth -= 1; } //adjust for IC level
+
+                                    if (opsRoles[x].ReportsTo == Globals.OpsChiefGenericID || opsRoles[x].RoleID == Globals.OpsChiefGenericID) { stamper.SetFieldFontBold("9 OPERATIONS SECTIONRow" + (x + 1)); }
+                                    stamper.AcroFields.SetField("9 OPERATIONS SECTIONRow" + (x + 1), opsRoles[x].RoleNameForDropdown);
+                                    stamper.AcroFields.SetField("9 OPERATIONS SECTIONRow" + (x + 1) + "_2", opsRoles[x].IndividualName);
+                                }
+                                //Logistics
+                                List<ICSRole> logRoles = currentChart.GetRolesForAssignmentList(Globals.LogisticsChiefGenericID, 0, 13);
+                                for (int x = 0; x < 13 && x < logRoles.Count; x++)
+                                {
+                                    if (logRoles[x].Depth > 0) { logRoles[x].Depth -= 1; } //adjust for IC level
+
+                                    if (logRoles[x].ReportsTo == Globals.LogisticsChiefGenericID || logRoles[x].RoleID == Globals.LogisticsChiefGenericID) { stamper.SetFieldFontBold("8 LOGISTICS SECTIONRow" + (x + 1)); }
+
+                                    stamper.AcroFields.SetField("8 LOGISTICS SECTIONRow" + (x + 1), logRoles[x].RoleNameForDropdown);
+                                    stamper.AcroFields.SetField("8 LOGISTICS SECTIONRow" + (x + 1) + "_2", logRoles[x].IndividualName);
+                                }
+                                //Finance
+                                List<ICSRole> financeRoles = currentChart.GetRolesForAssignmentList(Globals.FinanceChiefGenericID, 0, 6);
+                                for (int x = 0; x < 6 && x < financeRoles.Count; x++)
+                                {
+                                    if (financeRoles[x].Depth > 0) { financeRoles[x].Depth -= 1; } //adjust for IC level
+
+                                    if (financeRoles[x].ReportsTo == Globals.FinanceChiefGenericID || financeRoles[x].RoleID == Globals.FinanceChiefGenericID) { stamper.SetFieldFontBold("10 FINANCIALADMINISTRATION SECTIONRow" + (x + 1)); }
+
+                                    stamper.AcroFields.SetField("10 FINANCIALADMINISTRATION SECTIONRow" + (x + 1), financeRoles[x].RoleNameForDropdown);
+                                    stamper.AcroFields.SetField("10 FINANCIALADMINISTRATION SECTIONRow" + (x + 1) + "_2", financeRoles[x].IndividualName);
+                                }
+
+
+
+
+
+
+                                //Rename the fields
+                                AcroFields af = stamper.AcroFields;
+                                List<string> fieldNames = new List<string>();
+                                foreach (var field in af.Fields)
+                                {
+                                    fieldNames.Add(field.Key);
+                                }
+                                foreach (string s in fieldNames)
+                                {
+                                    stamper.AcroFields.RenameField(s, s + "-203-" + ThisPageNumber);
+                                }
+
+
+                                results.LastStepReached = 4;
+
+                                stamper.RenameAllFields();
+                                stamper.Close();//Close a PDFStamper Object
+                                stamper.Dispose();
+                                //rdr.Close();    //Close a PDFReader Object
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    results.Successful = false;
+                    Exception ex = new Exception(fileToUse + " -- File did not exist");
+                    results.errors.Add(ex);
+                    return results;
+                }
+                //Final file
+
+                if (!tempFileName)
+                {
+                    if (task.DocumentPath == null && finalPath != null) { task.DocumentPath = finalPath; }
+                    string outputFileName = "ICS 207 - Incident " + task.IncidentNameAndNumberForPath + " - Op " + OpsPeriod + " - Org Chart";
+                    finalPath = FileAccessClasses.getUniqueFileName(outputFileName, finalPath);
+
+                }
+                else { finalPath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf"; }
+
+                results.LastStepReached = 5;
+
+
+                _ = PDFExtraTools.MergePDFs(paths, finalPath, flattenPDF);
+                results.LastStepReached = 6;
+                results.Successful = true;
+
+            }
+            catch (IOException ex)
+            {
+                results.errors.Add(ex);
+                results.Successful = false;
+            }
+            catch (System.UnauthorizedAccessException ex)
+            {
+                results.errors.Add(ex);
+                results.Successful = false;
+            }
+            results.path = finalPath;
+
+
+            return results;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public List<byte[]> exportOrgChartToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            return OrgChartExportTools.exportOrgChartToByteArray(task, OpPeriodToExport, flattenPDF);
+        }
+
+
+        public string createOrgChartPDF(Incident task, int OpsPeriod, bool automaticallyOpen = true, bool tempFileName = false, bool flattenPDF = false)
+        {
+            return OrgChartExportTools.exportOrgChartToPDF(task, OpsPeriod, flattenPDF);
+        }
+
+
+
+
+     
+
+
+
+
+
+
+
+        public List<byte[]> exportOrgChartContactsToPDF(Incident task, int OpPeriodToExport, bool FlattenPDF = false)
+        {
+            return ContactExportTools.ExportOrgChartContactListToByteArray(task, OpPeriodToExport, FlattenPDF);
+        }
+
+
+
+        #endregion
+
+        #region Contacts
+
+        public List<byte[]> exportContactsToPDF(Incident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createContactsPDF(task, OpPeriodToExport, PreparedByName, PreparedByRoleName, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+        public string createContactsPDF(Incident task, int OpPeriod, string createdBy, string createdByTitle, bool useTempPath, bool flattenPDF)
+        {
+            return ContactExportTools.ExportExtraContactListToPDF(task, OpPeriod, useTempPath, flattenPDF);
+        }
+        #endregion
+
+        #region Vehicles
+        public List<byte[]> exportVehiclesToPDF(Incident task, int OpPeriodToExport, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createVehiclePDF(task, OpPeriodToExport, PreparedByName, PreparedByRoleName, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
+        public string createVehiclePDF(Incident task, int OpPeriod, string PreparedByName, string PreparedByRoleName, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+            string outputFileName = "ICS 218 - Task " + task.TaskNumber + " - Support Vehicle Equipment Inventory " + OpPeriod.ToString() + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS 218 - Support Vehicle Equipment Inventory.pdf", FormSet);
+            //fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+
+
+                    stamper = buildVehiclePDFContents(stamper, task, OpPeriod, PreparedByName, PreparedByRoleName, flattenPDF);
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+            return path;
+        }
+
+        private PdfStamper buildVehiclePDFContents(PdfStamper stamper, Incident task, int OpsPeriod, string PreparedByName, string PreparedByRoleName, bool flattenPDF)
+        {
+            OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpsPeriod).First();
+
+            stamper.AcroFields.SetField("1 INCIDENT NAME", task.TaskName);
+            stamper.AcroFields.SetField("2 INCIDENT NUMBER", task.TaskNumber);
+
+
+            stamper.AcroFields.SetField("3. DATE/TIME PREPARED Date", string.Format("{0:" + DateFormat + "}", DateTime.Now));
+            stamper.AcroFields.SetField("3. DATE/TIME PREPARED Time", string.Format("{0:HH:mm}", DateTime.Now));
+            stamper.AcroFields.SetField("6. PREPARED BY Name", PreparedByName + " - " + PreparedByRoleName);
+
+
+            for (int x = 0; x < task.allVehicles.Where(o => o.OpPeriod == OpsPeriod).Count() && x < 13; x++)
+            {
+                //
+                stamper.AcroFields.SetField("Order Request NoRow" + (x + 1), task.allVehicles[x].OrderRequestNo);
+                stamper.AcroFields.SetField("Incident ID NoRow" + (x + 1), task.allVehicles[x].IncidentIDNo);
+                stamper.AcroFields.SetField("Vehicle or Equipment ClassificationRow" + (x + 1), task.allVehicles[x].Classification);
+                stamper.AcroFields.SetField("Vehicle or Equipment MakeRow" + (x + 1), task.allVehicles[x].Make);
+                stamper.AcroFields.SetField("Category KindType Capacity or SizeRow" + (x + 1), task.allVehicles[x].CategoryKindCapacity);
+                stamper.AcroFields.SetField("Vehicle or Equipment Features Row" + (x + 1), task.allVehicles[x].Features);
+                stamper.AcroFields.SetField("Agency or OwnerRow" + (x + 1), task.allVehicles[x].AgencyOrOwner);
+                stamper.AcroFields.SetField("Operator Name or ContactRow" + (x + 1), task.allVehicles[x].OperatorName);
+                stamper.AcroFields.SetField("Vehicle License or ID NoRow" + (x + 1), task.allVehicles[x].LicenseOrID);
+                stamper.AcroFields.SetField("Incident AssignmentRow" + (x + 1), task.allVehicles[x].IncidentAssignment);
+                stamper.AcroFields.SetField("Incident Start Date and TimeRow" + (x + 1), task.allVehicles[x].StartTime.ToString(DateFormat + " HH:mm"));
+                stamper.AcroFields.SetField("Incident Release Date and TimeRow" + (x + 1), task.allVehicles[x].MustBeOutTime.ToString(DateFormat + " HH:mm"));
+
+            }
+
+
+            if (flattenPDF)
+            {
+                stamper.FormFlattening = true;
+            }
+
+            return stamper;
+        }
+        #endregion
+
+        #region Check In Sheet (211)
+
+        public List<byte[]> exportCheckInSheetsToPDF(Incident incident, int OpPeriodToExport, bool thisOpOnly, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodToExport);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
+            List<CheckInRecordWithResource> allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport);
+            allCheckInRecords = allCheckInRecords.Where(o => o.Record.ParentRecordID == Guid.Empty).OrderBy(o => o.Record.CheckInLocation).ToList(); //remove contents of crews
+            if (thisOpOnly) { allCheckInRecords = allCheckInRecords.Where(o => o.Record.OpPeriod == OpPeriodToExport).ToList(); }
+
+            List<string> CheckInLocations = allCheckInRecords.Select(o => o.CheckInLocation).Distinct().ToList();
+
+            foreach (string checkInLocation in CheckInLocations)
+            {
+
+                List<CheckInRecordWithResource> checkInThisLocation = allCheckInRecords.Where(o => !string.IsNullOrEmpty(o.CheckInLocation) && o.CheckInLocation.Equals(checkInLocation, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                int totalPages = 1;
+                int rowsOnPage = 18;
+
+
+                if (checkInThisLocation.Count > rowsOnPage)
+                {
+                    totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(checkInThisLocation.Count - rowsOnPage) / Convert.ToDecimal(rowsOnPage)));
+                    if ((checkInThisLocation.Count - rowsOnPage) % rowsOnPage > 0) { totalPages += 1; }
+                    if (totalPages == 0) { totalPages = 1; }
+                }
+
+                List<string> pdfFileNames = new List<string>();
+
+                for (int x = 1; x <= totalPages; x++)
+                {
+                    List<CheckInRecordWithResource> resourcesThisPage = checkInThisLocation.Skip((x - 1) * rowsOnPage).Take(rowsOnPage).ToList();
+                    allPDFs.AddRange(createSinglePageCheckInSheetPDF(incident, OpPeriodToExport, resourcesThisPage, x, totalPages, flattenPDF));
+
+                }
+            }
+            /*
+            List<PositionLogEntry> extraPageEntries = entries.Skip(19).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(31 * (x - 1)).Take(37).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            */
+
+
+            return allPDFs;
+        }
+
+        private List<byte[]> createSinglePageCheckInSheetPDF(Incident incident, int OpPeriod, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "ICS-211 - " + incident.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString() + " page " + thisPageNum;
+            outputFileName += ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-211 Check In.pdf", FormSet);
+            //fileToUse = PDFExtraTools.getPDFFilePath(fileToUse);
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+                    string checkInLocation = null;
+                    if (allCheckInRecords.Any(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)))
+                    {
+                        checkInLocation = allCheckInRecords.First(o => !string.IsNullOrEmpty(o.Record.CheckInLocation)).Record.CheckInLocation;
+                    }
+
+                    stamper.AcroFields.SetField("1 INCIDENT NAMERow1", incident.TaskName);
+                    stamper.AcroFields.SetField("2 INCIDENT NUMBERRow1", incident.TaskNumber);
+                    stamper.AcroFields.SetField("3 CHECKIN LOCATIONRow1", checkInLocation);
+
+
+
+                    stamper.AcroFields.SetField("DATE", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("TIME", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+
+
+                    for (int x = 0; x < allCheckInRecords.Count && x < 18; x++)
+                    {
+                        CheckInRecordWithResource record = allCheckInRecords[x];
+
+                        Personnel p = null; if (record.Resource.GetType().Name.Equals("Personnel")) { p = (Personnel)record.Resource; }
+                        Vehicle v = null; if (record.Resource.GetType().Name.Equals("Vehicle")) { v = (Vehicle)record.Resource; }
+                        Crew c = null; if (record.Resource.GetType().Name.Equals("OperationalSubGroup")) { c = (Crew)record.Resource; }
+
+
+
+                        //Field 5
+                        if (p != null) { stamper.AcroFields.SetField("PTRow" + (x + 1), p.ProvinceNameShort); }
+                        if (p != null) { stamper.AcroFields.SetField("AGENCYRow" + (x + 1), p.Agency); }
+                        stamper.AcroFields.SetField("CATRow" + (x + 1), record.ResourceType);
+                        stamper.AcroFields.SetField("KINDRow" + (x + 1), record.Resource.Kind);
+                        stamper.AcroFields.SetField("TYPERow" + (x + 1), record.Resource.Type);
+                        stamper.AcroFields.SetField("STTFRow" + (x + 1), "");
+                        stamper.AcroFields.SetField("RESOURCE NAME OR IDRow" + (x + 1), record.Resource.UniqueIDNumWithPrefix + " " + record.Resource.ResourceName);
+
+
+                        stamper.AcroFields.SetField("6 LDWRow" + (x + 1), record.Record.LastDayOnIncident.ToString(Globals.DateFormat));
+                        if (record.Record.InfoFields.Any(o => o.ID == new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d")))
+                        {
+                            CheckInInfoField field = record.Record.InfoFields.First(o => o.ID == new Guid("cdc5b7ef-4e82-4611-9ceb-39fdb52a2c5d"));
+                            stamper.AcroFields.SetField("7 ORDER REQUEST NUMBERRow" + (x + 1), field.StringValue);
+                        }
+                        stamper.AcroFields.SetField("8 DATETIME CHECKINRow" + (x + 1), record.CheckInDate.ToString(Globals.DateFormat));
+                        stamper.AcroFields.SetField("9 LEADERS NAMERow" + (x + 1), record.Resource.LeaderName);
+                        stamper.AcroFields.SetField("10 TOTAL NUMBER PERSONNELRow" + (x + 1), record.Resource.NumberOfPeople.ToString());
+                        stamper.AcroFields.SetField("11 CONTACT INFORMATIONRow" + (x + 1), record.Resource.Contact);
+                        if (p != null) { stamper.AcroFields.SetField("12 HOME UNITBASERow" + (x + 1), p.HomeUnit); }
+                        stamper.AcroFields.SetField("13 DEPARTURE POINTRow" + (x + 1), "");
+                        if (record.Record.InfoFields.Any(o => o.ID == new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89")))
+                        {
+                            CheckInInfoField field = record.Record.InfoFields.First(o => o.ID == new Guid("a4f1cb0e-9774-4bdc-aeac-96976aceba89"));
+                            stamper.AcroFields.SetField("14 METHOD OF TRAVELRow" + (x + 1), field.StringValue);
+                        }
+                        stamper.AcroFields.SetField("15 INCIDENT ASSINGMENTRow" + (x + 1), record.Record.InitialRoleAcronym);
+                        stamper.AcroFields.SetField("16 OTHER QUALIFICATIONSRow" + (x + 1), "");
+                        stamper.AcroFields.SetField("17 SENT TO RESOURCE UNITRow" + (x + 1), "");
+                    }
+
+
+                    ICSRole PreparedBy = currentOrgChart.GetRoleByID(Globals.LogisticsChiefGenericID, true);
+
+
+                    stamper.AcroFields.SetField("18 REMARKSRow1", "");
+                    stamper.AcroFields.SetField("Position", PreparedBy.RoleName);
+                    stamper.AcroFields.SetField("Name", PreparedBy.IndividualName);
+
+
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("OF", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    stamper.RenameAllFields();
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+        #endregion
+
+
+        #region Title Page
+
+        public PDFCreationResults GetCustomTitlePageBytes(Incident incident, TitlePageOptions options, int OperationalPeriodNumber, bool flattenPDF = false)
+        {
+            PDFCreationResults results = CreateCustomTitlePagePDF(incident, options, OperationalPeriodNumber, true, flattenPDF);
+            if (!string.IsNullOrEmpty(results.path))
+            {
+                using (FileStream stream = File.OpenRead(results.path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    results.bytes = new List<byte[]>();
+                    results.bytes.Add(fileBytes);
+                }
+                return results;
+            }
+            return null;
+        }
+
+        public PDFCreationResults CreateCustomTitlePagePDF(Incident incident, TitlePageOptions options, int OperationalPeriodNumber, bool useTempPath, bool flattenPDF = false)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+            results.path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                results.path = FileAccessClasses.getWritablePath(incident);
+            }
+
+            string outputFileName = incident.IncidentNameAndNumberForPath + " - Title Page - OP " + OperationalPeriodNumber.ToString() + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            results.path = FileAccessClasses.getUniqueFileName(outputFileName, results.path);
+
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-000 Title Page.pdf", FormSet);
+
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(results.path, FileMode.Create));
+
+
+                    if (OperationalPeriodNumber > 0)
+                    {
+                        OperationalPeriod currentPeriod = incident.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == OperationalPeriodNumber);
+                        if (currentPeriod != null)
+                        {
+                            stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                            stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                            stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                            stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                            stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "OPERATIONAL PERIOD");
+                        }
+                    }
+                    else
+                    {
+                        DateTime incidentStart = incident.GetIncidentStart();
+                        DateTime incidentEnd = incident.GetIncidentEnd();
+                        if (incidentEnd > DateTime.Now) { incidentEnd = DateTime.Now; }
+
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", incidentStart));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", incidentStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", incidentEnd));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", incidentEnd));
+                        stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "INCIDENT TO DATE");
+                    }
+
+
+                    stamper.AcroFields.SetField("INCIDENT NAMERow1", incident.TaskName);
+                    stamper.AcroFields.SetField("Incident NumberRow1", incident.TaskNumber);
+
+
+
+
+                    /******************************
+                     * Believe it or not, this whole next big section is just for laying out the four optional elements of the title page
+                     ******************************/
+
+                    //Bounds of the big open area
+                    Point topLeft = new Point(38, 680);
+                    Point topRight = new Point(574, 680);
+                    Point lowerLeft = new Point(38, 188);
+                    Point lowerRight = new Point(574, 188);
+
+                    int fullHeight = topLeft.Y - lowerLeft.Y;
+                    int fullWidth = topRight.X - topLeft.X;
+
+                    Point bottomThirdLeft = new Point(38, Convert.ToInt32(Convert.ToDecimal(fullHeight) * (2m / 3m)));
+                    Point bottomThirdRight = new Point(lowerRight.X, bottomThirdLeft.Y);
+                    Point lowerCentre = new Point((lowerRight.X - lowerLeft.X) / 2 + lowerLeft.X, lowerLeft.Y);
+                    Point lowerCentreRight = new Point((lowerRight.X - lowerCentre.X) / 2 + lowerCentre.X, lowerLeft.Y);
+
+                    iTextSharp.text.Rectangle mediabox = rdr.GetPageSize(1);
+
+
+                    int padding = 10;
+
+                    //fill the big open area
+                    if (options.IncludeTitleImage)
+                    {
+                        iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(options.TitleImage.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                        pic.ScaleToFit(fullWidth, topLeft.Y - bottomThirdLeft.Y);
+                        float x = (mediabox.Width / 2) - (pic.ScaledWidth / 2);
+                        float y = bottomThirdLeft.Y + ((topLeft.Y - bottomThirdLeft.Y - pic.ScaledHeight) / 2);
+                        pic.SetAbsolutePosition(x, y);
+                        stamper.GetOverContent(1).AddImage(pic);
+                    }
+
+
+                    if (options.IncludeMessage)
+                    {
+                        if (!options.IncludeTitleImage) { stamper.AddFormFieldToExistingPDF("MultiLineTextField", bottomThirdLeft.X + padding, bottomThirdLeft.Y + padding, topRight.X - padding, topRight.Y - padding, "Message", options.Message, true); }
+                        else
+                        {
+
+                            if (options.NumberOfItemsIncluded == 2) { stamper.AddFormFieldToExistingPDF("MultiLineTextField", lowerLeft.X + padding, lowerLeft.Y + padding, lowerRight.X - padding, bottomThirdLeft.Y - padding, "Message", options.Message, true); }
+                            else { stamper.AddFormFieldToExistingPDF("MultiLineTextField", lowerLeft.X + padding, lowerLeft.Y + padding, lowerCentre.X - padding, bottomThirdLeft.Y - padding, "Message", options.Message, true); }
+                        }
+
+                    }
+
+                    if (options.IncludeOrganizationLogo)
+                    {
+
+
+                        Point logoBottomRight = new Point(0, 0);
+                        Point logoBottomLeft = new Point(0, 0);
+                        Point logoTopRight = new Point(0, 0);
+
+                        if (options.NumberOfItemsIncluded == 1)
+                        {
+                            //just the logo, use the whole top 2/3rds
+                            logoBottomRight = bottomThirdRight;
+                            logoBottomLeft = bottomThirdLeft;
+                            logoTopRight = topRight;
+                        }
+                        else if (options.NumberOfItemsIncluded == 2)
+                        {
+                            if (options.IncludeQRCode)
+                            {
+                                logoBottomRight = bottomThirdRight;
+                                logoBottomLeft = bottomThirdLeft;
+                                logoTopRight = topRight;
+                            }
+                            else
+                            {
+                                logoBottomRight = lowerRight;
+                                logoBottomLeft = lowerLeft;
+                                logoTopRight = bottomThirdRight;
+                            }
+                        }
+                        else if (options.NumberOfItemsIncluded == 3)
+                        {
+                            if (options.IncludeMessage && options.IncludeTitleImage)
+                            {
+                                logoBottomRight = lowerRight;
+                                logoBottomLeft = lowerCentre;
+                                logoTopRight = bottomThirdRight;
+                            }
+                            else
+                            {
+                                logoBottomRight = lowerCentre;
+                                logoBottomLeft = lowerLeft;
+                                logoTopRight = new Point(lowerCentre.X, bottomThirdLeft.Y);
+                            }
+                        }
+                        else if (options.NumberOfItemsIncluded == 4)
+                        {
+                            logoBottomRight = lowerCentreRight;
+                            logoBottomLeft = lowerCentre;
+                            logoTopRight = new Point(lowerCentre.X, bottomThirdRight.Y);
+                        }
+
+
+                        iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(options.LogoImage.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                        pic.ScaleToFit(logoBottomRight.X - logoBottomLeft.X - padding * 2, logoTopRight.Y - logoBottomRight.Y - padding * 2);
+                        //pic.SetAbsolutePosition(qrBottomLeft.X + (widthOfQRSpace / 2) - (QR.Width / 2) + padding , qrBottomLeft.Y + padding + textBoxHeight); 
+                        int widthOfLogoSpace = logoBottomRight.X - logoBottomLeft.X - (padding * 2);
+                        int heightOfLogoSpace = logoTopRight.Y - logoBottomRight.Y - (padding * 2);
+                        float x = logoBottomLeft.X + (widthOfLogoSpace / 2) - (pic.ScaledWidth / 2) + padding;
+                        float y = logoBottomLeft.Y + (heightOfLogoSpace / 2) - (pic.ScaledHeight / 2) + padding;
+                        pic.SetAbsolutePosition(x, y);
+                        stamper.GetOverContent(1).AddImage(pic);
+                    }
+
+                    if (options.IncludeQRCode)
+                    {
+                        Point qrBottomRight = new Point(0, 0);
+                        Point qrBottomLeft = new Point(0, 0);
+                        Point qrTopRight = new Point(0, 0);
+
+                        int textBoxHeight = 30;
+                        if (string.IsNullOrEmpty(options.QRInstructions)) { textBoxHeight = 0; }
+
+                        if (options.NumberOfItemsIncluded == 3)
+                        {
+                            //QR can take the bottom half
+                            qrBottomRight = lowerRight;
+                            qrBottomLeft = lowerCentre;
+                            qrTopRight = bottomThirdRight;
+
+                        }
+                        else if (options.NumberOfItemsIncluded == 1 || options.NumberOfItemsIncluded == 2)
+                        {
+                            //qr can take the whole bottom third
+                            qrBottomRight = lowerRight;
+                            qrBottomLeft = lowerLeft;
+                            qrTopRight = bottomThirdRight;
+                        }
+                        else
+                        {
+                            //qr is tucked into the lower right corner
+                            qrBottomRight = lowerRight;
+                            qrBottomLeft = lowerCentreRight;
+                            qrTopRight = bottomThirdRight;
+                        }
+
+                        int QRSize = Math.Min(qrBottomRight.X - qrBottomLeft.X - (padding * 2), qrTopRight.Y - qrBottomRight.Y - (padding * 2) - textBoxHeight);
+                        Bitmap QR = options.QRText.GetQRImage(QRSize);
+                        iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(QR, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        int widthOfQRSpace = qrBottomRight.X - qrBottomLeft.X - (padding * 2);
+                        pic.SetAbsolutePosition(qrBottomLeft.X + (widthOfQRSpace / 2) - (QR.Width / 2) + padding, qrBottomLeft.Y + padding + textBoxHeight);
+                        stamper.GetOverContent(1).AddImage(pic);
+
+                        if (!string.IsNullOrEmpty(options.QRInstructions))
+                        {
+                            stamper.AddFormFieldToExistingPDF("MultiLineTextField", qrBottomLeft.X + padding, qrBottomLeft.Y + padding, qrBottomRight.X - padding, qrBottomRight.Y + padding + textBoxHeight, "QRInstructions", options.QRInstructions, true);
+                        }
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + "-titlepage");
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+
+                        //re-add the signature field if we flattened it away
+                        int[] instancesOfInterest = { 0, 1, 2 };
+                        stamper = stamper.AddPDFField(fileToUse, "Signature", "Signature", 38, 222, "ReportSignature", instancesOfInterest);
+                        stamper = stamper.AddPDFField(fileToUse, "Print Name", "TextField", 38, 200, "PrintName", instancesOfInterest);
+
+
+
+                    }
+
+                    results.TotalPages = 1;
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception ex)
+            {
+                results.errors.Add(ex);
+                results.path = string.Empty;
+            }
+            return results;
+        }
+
+
+
+
+
+
+        public List<byte[]> createFreeformOpPeriodContentsList(Incident task, List<string> items, int OpPeriod)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+            string path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+            using (System.IO.FileStream fs = new FileStream(path, FileMode.Create))
+            {
+
+
+                // Create an instance of the document class which represents the PDF document itself.
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+
+                // Create an instance to the PDF file by creating an instance of the PDF 
+                // Writer class using the document and the filestrem in the constructor.
+
+                PdfWriter writer = PdfWriter.GetInstance(document, fs);
+
+
+
+                TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
+                writer.PageEvent = PageEventHandler;
+                // Define the page header
+                PageEventHandler.Title = "";
+                //PageEventHandler.Title = "Task Number " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName + " Op Period " + selectedBriefing.OpPeriod.ToString();
+                PageEventHandler.HeaderFont = FontFactory.GetFont(BaseFont.COURIER_BOLD, 10, iTextSharp.text.Font.BOLD);
+
+                if (OpPeriod > 0)
+                {
+                    document.AddTitle("Incident:  " + task.IncidentIdentifier + " Op Period " + OpPeriod.ToString(Globals.cultureInfo));
+                }
+                else { document.AddTitle("Incident: " + task.IncidentIdentifier); }
+                // Open the document to enable you to write to the document
+
+                document.Open();
+                BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
+                iTextSharp.text.Font titlefont = new iTextSharp.text.Font(bfTimes, 22, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                iTextSharp.text.Font sectionfont = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                iTextSharp.text.Font subsectionfont = new iTextSharp.text.Font(bfTimes, 16, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                iTextSharp.text.Font normalfont = new iTextSharp.text.Font(bfTimes, 14, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
+
+                // Add a simple and wellknown phrase to the document in a flow layout manner
+                //Chapter chapter1 = new Chapter(new Paragraph("Briefing"), FormSet);
+                Anchor briefingTarget = new Anchor("Incident: " + task.IncidentIdentifier, titlefont);
+                briefingTarget.Name = "Index";
+                Paragraph tp = new Paragraph();
+                tp.Add(briefingTarget);
+                tp.Font = titlefont;
+
+                document.Add(tp);
+
+                if (OpPeriod > 0)
+                {
+                    document.Add(new Paragraph("Operational Period #" + OpPeriod.ToString(Globals.cultureInfo), subsectionfont));
+                }
+                else
+                {
+                    document.Add(new Paragraph("As of " + DateTime.Now.ToString(DateFormat), subsectionfont));
+                }
+                document.Add(new Paragraph(" "));
+
+                string logoPath = "Resources/ics-canada-logo.png";
+
+
+                //Picture
+                if (!string.IsNullOrEmpty(logoPath))
+                {
+                    //iTextSharp.text.Document doc = new iTextSharp.text.Document();
+                    try
+                    {
+                        if (File.Exists(logoPath))
+                        {
+                            iTextSharp.text.Image tif = iTextSharp.text.Image.GetInstance(logoPath);
+
+                            tif.ScaleToFit(200, 200);
+                            float x = ((200 - tif.ScaledWidth) / 2) + 350;
+                            tif.SetAbsolutePosition(x, 450);
+
+                            document.Add(tif);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        //Log error;
+
+                    }
+                }
+                document.Add(new Paragraph(" "));
+
+
+
+
+                document.Add(new Paragraph("Contents:", sectionfont));
+
+                foreach (string s in items)
+                {
+                    document.Add(new Paragraph(s, subsectionfont));
+                }
+
+                /*
+                Anchor click = new Anchor("Click to go to Target");
+                click.Reference = "#Briefing";
+                Paragraph pe = new Paragraph();
+                pe.Add(click);
+                document.Add(pe);*/
+                // Close the document
+                document.Close();
+                // Close the writer instance
+                writer.Close();
+
+                // Always close open filehandles explicity
+
+            }
+
+            using (FileStream stream = File.OpenRead(path))
+            {
+                byte[] fileBytes = new byte[stream.Length];
+
+                stream.Read(fileBytes, 0, fileBytes.Length);
+                stream.Close();
+                allPDFs.Add(fileBytes);
+            }
+
+
+            return allPDFs;
+        }
+
+        public List<byte[]> exportOpTitlePageToPDF(Incident task, int OpPeriod, string contentsText, string titleImageBytes, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            string path = createOpTitlePagePDF(task, OpPeriod, contentsText, titleImageBytes, true, flattenPDF);
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+        public string createOpTitlePagePDF(Incident task, int OpPeriod, string contentsText, string titleImageBytes, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+            string outputFileName = task.IncidentNameAndNumberForPath + " - Title Page - OP " + OpPeriod.ToString() + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-000 Title Page.pdf", FormSet);
+
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+
+                    if (OpPeriod > 0)
+                    {
+                        OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                        stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "OPERATIONAL PERIOD");
+                        if (!string.IsNullOrEmpty(currentPeriod.CriticalMessage)) { stamper.AcroFields.SetField("CriticalMessage", "Message for this Operational Period: " + Environment.NewLine + currentPeriod.CriticalMessage); }
+                    }
+                    else
+                    {
+                        DateTime incidentStart = task.GetIncidentStart();
+                        DateTime incidentEnd = task.GetIncidentEnd();
+                        if (incidentEnd > DateTime.Now) { incidentEnd = DateTime.Now; }
+
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", incidentStart));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", incidentStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", incidentEnd));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", incidentEnd));
+                        stamper.AcroFields.SetField("OpPeriodOrFullIncidentTitle", "INCIDENT TO DATE");
+                    }
+
+
+                    stamper.AcroFields.SetField("INCIDENT NAMERow1", task.TaskName);
+                    stamper.AcroFields.SetField("Incident NumberRow1", task.TaskNumber);
+
+
+
+
+
+                    //stamper.AcroFields.SetField("ContentsList", contentsText);
+
+                    if (!string.IsNullOrEmpty(titleImageBytes))
+                    {
+                        iTextSharp.text.Image pic = iTextSharp.text.Image.GetInstance(titleImageBytes.getImageFromBytes(), System.Drawing.Imaging.ImageFormat.Jpeg);
+                        iTextSharp.text.Rectangle mediabox = rdr.GetPageSize(1);
+
+                        pic.ScaleToFit(536, 340);
+                        float x = (mediabox.Width / 2) - (pic.ScaledWidth / 2);
+                        float y = 325;
+                        pic.SetAbsolutePosition(x, y);
+
+                        stamper.GetOverContent(1).AddImage(pic);
+                    }
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + "-titlepage");
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+
+                        //re-add the signature field if we flattened it away
+                        int[] instancesOfInterest = { 0, 1, 2 };
+                        stamper = stamper.AddPDFField(fileToUse, "Signature", "Signature", 38, 222, "ReportSignature", instancesOfInterest);
+                        stamper = stamper.AddPDFField(fileToUse, "Print Name", "TextField", 38, 200, "PrintName", instancesOfInterest);
+
+
+
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+            return path;
+        }
+
+        #endregion
+
+
+
+        #region Note
+
+        public List<byte[]> exportNotesToPDF(Incident task, int CurrentOpPeriod)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            foreach (Note note in task.allNotes.Where(o => o.Active && o.OpPeriod == CurrentOpPeriod))
+            {
+                string path = createNotePDF(task, note, false, true);
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+
+            return allPDFs;
+        }
+
+
+
+        public string createNotePDF(Incident task, Note note, bool automaticallyOpen = true, bool tempFileName = false)
+        {
+            string path = null;
+            if (task != null && task.taskTimeline != null)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+                if (!tempFileName)
+                {
+
+
+
+                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+                    string outputFileName = note.NoteTitle;
+                    outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+                    path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+                    //path = System.IO.Path.Combine(path, outputFileName);
+
+                }
+                else
+                {
+                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+                }
+                try
+                {
+
+                    using (System.IO.FileStream fs = new FileStream(path, FileMode.Create))
+                    {
+
+
+                        // Create an instance of the document class which represents the PDF document itself.
+                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+
+                        // Create an instance to the PDF file by creating an instance of the PDF 
+                        // Writer class using the document and the filestrem in the constructor.
+
+                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
+
+
+
+                        TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
+                        writer.PageEvent = PageEventHandler;
+                        // Define the page header
+                        PageEventHandler.Title = "";
+                        //PageEventHandler.Title = "Task Number " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName + " Op Period " + selectedBriefing.OpPeriod.ToString();
+                        PageEventHandler.HeaderFont = FontFactory.GetFont(BaseFont.COURIER_BOLD, 10, iTextSharp.text.Font.BOLD);
+
+
+                        document.AddTitle("Task Number " + task.TaskNumber + " - " + note.NoteTitle);
+
+                        // Open the document to enable you to write to the document
+
+                        document.Open();
+                        BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
+                        iTextSharp.text.Font titlefont = new iTextSharp.text.Font(bfTimes, 22, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                        iTextSharp.text.Font sectionfont = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                        iTextSharp.text.Font subsectionfont = new iTextSharp.text.Font(bfTimes, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.GRAY);
+                        iTextSharp.text.Font normalfont = new iTextSharp.text.Font(bfTimes, 14, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
+
+                        // Add a simple and wellknown phrase to the document in a flow layout manner
+                        //Chapter chapter1 = new Chapter(new Paragraph("Briefing"), FormSet);
+                        string title = note.NoteTitle;
+                        Anchor briefingTarget = new Anchor(title, titlefont);
+                        briefingTarget.Name = "Notetitle";
+                        Paragraph tp = new Paragraph();
+                        tp.Add(briefingTarget);
+                        tp.Font = titlefont;
+
+
+                        document.Add(tp);
+
+
+
+                        document.Add(new Paragraph("Created: " + note.DateCreated.ToString(DateFormat + " HH:mm", Globals.cultureInfo), subsectionfont));
+                        document.Add(new Paragraph("Updated: " + note.DateUpdated.ToString(DateFormat + " HH:mm", Globals.cultureInfo), subsectionfont));
+
+                        document.Add(new Paragraph(" ", normalfont));
+                        document.Add(new Paragraph(note.NoteText, normalfont));
+
+                        // Close the document
+                        document.Close();
+                        // Close the writer instance
+                        writer.Close();
+
+                        // Always close open filehandles explicity
+
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return path;
+        }
+        #endregion
+
+        #region Air Ops Summary
+
+        public string CreateAirOpsSummaryPDF(Incident task, int OpPeriod, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+
+
+            string outputFileName = "ICS 220 - " + task.IncidentNameAndNumberForPath + " - OP " + OpPeriod.ToString() + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+
+
+            List<byte[]> allPDFs = exportAirOpsSummaryToPDF(task, OpPeriod, flattenPDF);
+
+            //path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(path, fullFile);
+
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+
+            return path;
+        }
+
+
+        public List<byte[]> exportAirOpsSummaryToPDF(Incident incident, int OpPeriodToExport, bool flattenPDF = false)
+        {
+            int fixedWingPerPage = 8;
+            int rotorWingPerPage = 20;
+            int commsPerPage = 9;
+            int rolesPerPage = 9;
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            AirOperationsSummary summary = incident.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpPeriodToExport);
+            List<Aircraft> aircraftList = incident.GetActiveAircraft(OpPeriodToExport);
+
+
+            int totalPages = getAirOpsSummaryPageCount(incident, summary);
+
+
+            List<string> pdfFileNames = new List<string>();
+
+
+            List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).ActiveAirCommsItems;
+            List<ICSRole> roles = new List<ICSRole>();
+            ICSRole airOpsDirector = incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).ActiveRoles.FirstOrDefault(o => o.GenericRoleID == Globals.AirOpsDirectorGenericID);
+            if (airOpsDirector != null)
+            {
+                roles.Add(airOpsDirector);
+                roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == summary.OpPeriod).GetChildRoles(airOpsDirector.ID, true));
+            }
+
+
+            for (int x = 0; x < totalPages; x++)
+            {
+                List<Aircraft> pageairFixed = new List<Aircraft>();
+                List<Aircraft> pageairRotor = new List<Aircraft>();
+                List<CommsPlanItem> pagecomms = new List<CommsPlanItem>();
+                List<ICSRole> pageroles = new List<ICSRole>();
+
+                pageairFixed = aircraftList.Where(o=>o.Type.Equals("Fixed-Wing")).Skip(fixedWingPerPage * (x)).Take(fixedWingPerPage).ToList();
+                pageairRotor = aircraftList.Where(o => !o.Type.Equals("Fixed-Wing")).Skip(rotorWingPerPage * (x)).Take(rotorWingPerPage).ToList();
+                pagecomms = comms.Skip(commsPerPage * (x)).Take(commsPerPage).ToList();
+                pageroles = roles.Skip(rolesPerPage * (x)).Take(rolesPerPage).ToList();
+
+
+                allPDFs.AddRange(buildSingleAirOpsSummaryPage(incident, OpPeriodToExport, pageairFixed, pageairRotor, pageroles, pagecomms, x + 1, totalPages, flattenPDF));
+            }
+            return allPDFs;
+
+        }
+
+        private int getAirOpsSummaryPageCount(Incident incident, AirOperationsSummary sum)
+        {
+            int fixedAirPP = 8;
+            int rotorAirPP = 20;
+            int RolePP = 10;
+            int CommsPP = 10;
+            List<Aircraft> FixedAircraftList = incident.GetActiveAircraft(sum.OpPeriod).Where(o=>o.Type.Equals("Fixed-Wing")).ToList();
+            List<Aircraft> RotorAircraftList = incident.GetActiveAircraft(sum.OpPeriod).Where(o=>!o.Type.Equals("Fixed-Wing")).ToList();
+
+            List<CommsPlanItem> comms = incident.allCommsPlans.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).ActiveAirCommsItems;
+            List<ICSRole> roles = new List<ICSRole>();
+            roles.Add(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).ActiveRoles.FirstOrDefault(o => o.RoleID == Globals.AirOpsDirectorGenericID));
+            roles.AddRange(incident.allOrgCharts.FirstOrDefault(o => o.OpPeriod == sum.OpPeriod).GetChildRoles(Globals.AirOpsDirectorGenericID, true));
+
+
+            int totalPages = 0;
+            if (FixedAircraftList.Count < fixedAirPP && RotorAircraftList.Count < rotorAirPP && comms.Count < CommsPP && roles.Count < RolePP)
+            {
+                return 1;
+            }
+            else
+            {
+                int pagesAirFixed = Convert.ToInt32(Math.Floor(Convert.ToDecimal(FixedAircraftList.Count) / fixedAirPP));
+                if ((FixedAircraftList.Count) % fixedAirPP > 0) { pagesAirFixed += 1; }
+                totalPages = pagesAirFixed;
+
+                int pagesAirRotor = Convert.ToInt32(Math.Floor(Convert.ToDecimal(RotorAircraftList.Count) / rotorAirPP));
+                if ((RotorAircraftList.Count) % rotorAirPP > 0) { pagesAirRotor += 1; }
+                totalPages = Math.Max(totalPages, pagesAirRotor);
+
+
+                int pagesComms = Convert.ToInt32(Math.Floor(Convert.ToDecimal(comms.Count) / 10m));
+                if ((comms.Count) % 10 > 0) { pagesComms += 1; }
+                totalPages = Math.Max(totalPages, pagesComms);
+
+                int pagesRoles = Convert.ToInt32(Math.Floor(Convert.ToDecimal(roles.Count) / 10m));
+                if ((roles.Count) % 10 > 0) { pagesRoles += 1; }
+                totalPages = Math.Max(totalPages, pagesRoles);
+
+
+            }
+
+
+            if (totalPages == 0) { totalPages = 1; }
+            return totalPages;
+        }
+
+
+        private List<byte[]> buildSingleAirOpsSummaryPage(Incident task, int OpsPeriod, List<Aircraft> fixedAircraft, List<Aircraft> rotorAircraft, List<ICSRole> roles, List<CommsPlanItem> comms, int pageNumber, int pageCount, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempFileName();
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-220-WF Air Operations Summary.pdf", FormSet);
+
+
+            OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
+            AirOperationsSummary summary = task.allAirOperationsSummaries.FirstOrDefault(o => o.OpPeriod == OpsPeriod);
+            if (summary.notam.UseRadius) { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220 Air Operations Summary.pdf", FormSet); }
+            else { fileToUse = PDFExtraTools.getPDFFilePath("ICS-220 Air Operations Summary Polygon.pdf", FormSet); }
+
+            using (PdfReader rdr = new PdfReader(fileToUse))
+            {
+                using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
+                {
+                    stamper.AcroFields.SetField("Name", task.TaskName);
+                    stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+                    stamper.AcroFields.SetField("3 REMARKSRow1", summary.Remarks);
+                    stamper.AcroFields.SetField("Sunrise", string.Format("{0:HH:mm}", summary.Sunrise));
+                    stamper.AcroFields.SetField("Sunset", string.Format("{0:HH:mm}", summary.Sunset));
+
+                    List<Aircraft> MedvacAircraft = task.GetActiveAircraft(currentOp.PeriodMid).Where(o => o.IsMedivac).ToList();
+
+
+                    stamper.AcroFields.SetField("4 MEDIVAC AIRCRAFTRow1", summary.MedivacTextBlock(MedvacAircraft));
+
+
+
+                    stamper.AcroFields.SetField("Altitude ASL", summary.notam.AltitudeASL.ToString());
+                    stamper.AcroFields.SetField("Centre Point", summary.notam.CenterPoint);
+
+                    if (summary.notam.UseRadius)
+                    {
+                        stamper.AcroFields.SetField("Radius nm", summary.notam.RadiusNM.ToString());
+                        if (summary.notam.RadiusCentre != null)
+                        {
+                            string[] parts = summary.notam.RadiusCentre.DegreesDecimalMinutesSep;
+                            stamper.AcroFields.SetField("Latitude", parts[0].ToString());
+                            stamper.AcroFields.SetField("Longitude", parts[1].ToString());
+                        }
+                    }
+                    else
+                    {
+
+                        StringBuilder coordString = new StringBuilder();
+                        string firstCoord = string.Empty;
+                        string lastCoord = string.Empty;
+
+                        foreach(Coordinate c in summary.notam.PolygonCoordinates)
+                        {
+                            if (coordString.Length > 0) { coordString.Append("-"); } else { firstCoord = c.CoordinateOutput("NAVCAN"); }
+                            coordString.Append(c.CoordinateOutput("NAVCAN"));
+                            lastCoord = c.CoordinateOutput("NAVCAN");
+                        }
+                        if (!lastCoord.Equals(firstCoord))
+                        {
+                            coordString.Append("-" + firstCoord);
+                        }
+                        stamper.AcroFields.SetField("Coordinates", "Area bounded by: " + coordString.ToString());
+                    }
+
+                    /* TODO Replace this with code to fill the radius or polygon values
+                   
+                    */
+
+                    stamper.AcroFields.SetField("Position",summary.PreparedByRoleName);
+                    stamper.AcroFields.SetField("Name_2", summary.PreparedByResourceName);
+                    stamper.AcroFields.SetField("Date  TimeName", summary.DatePrepared.ToString(DateFormat));
+
+
+                    stamper.AcroFields.SetField("PAGE", pageNumber.ToString());
+                    stamper.AcroFields.SetField("OF", pageCount.ToString());
+
+
+                    //6. Perosnnel
+                    for (int x = 0; x < roles.Count && x < 9; x++)
+                    {
+                        if (roles[x] != null)
+                        {
+                            stamper.AcroFields.SetField("NameRow" + (x + 1), roles[x].IndividualName);
+                            stamper.AcroFields.SetField("6 PERSONNELRow" + (x + 1), roles[x].RoleName);
+                            if (roles[x].IndividualID != Guid.Empty && task.IncidentPersonnel.Any(o => o.ID == roles[x].IndividualID))
+                            {
+                                Personnel p = task.IncidentPersonnel.First(o => o.ID == roles[x].IndividualID);
+                                stamper.AcroFields.SetField("Phone Row" + (x + 1), p.CellphoneNumber);
+                            }
+                        }
+                        else
+                        {
+                            ;
+                        }
+                    }
+
+                    //7. Comms
+
+                    for (int x = 0; x < comms.Count && x < 10; x++)
+                    {
+                        stamper.AcroFields.SetField("7 FREQUENCIESRow" + (x + 1), comms[x].ChannelID);
+                        //stamper.AcroFields.SetField("RxRow" + (x + 1), comms[x].RxFrequency);
+                        //stamper.AcroFields.SetField("TxRow" + (x + 1), comms[x].TxFrequency);
+                    }
+
+
+                    //8 fixed wing
+                    for (int x = 0; x < fixedAircraft.Count && x < 9; x++)
+                    {
+                        stamper.AcroFields.SetField("RegRow" + (x + 1), fixedAircraft[x].Registration);
+                        stamper.AcroFields.SetField("ModelRow" + (x + 1), fixedAircraft[x].MakeModel);
+                        stamper.AcroFields.SetField("RemarksRow" + (x + 1), fixedAircraft[x].Base);
+                    }
+
+                    //8 rotar wing
+                    for (int x = 0; x < rotorAircraft.Count && x < 21; x++)
+                    {
+                        stamper.AcroFields.SetField("HeliRegRow" + (x + 1), rotorAircraft[x].Registration);
+                        stamper.AcroFields.SetField("MakeModelRow" + (x + 1), rotorAircraft[x].MakeModel);
+                        stamper.AcroFields.SetField("BaseRow" + (x + 1), rotorAircraft[x].Base);
+                        stamper.AcroFields.SetField("StartRow" + (x + 1), string.Format("{0:HH:mm}", rotorAircraft[x].StartTime));
+                        stamper.AcroFields.SetField("HeliRemarksRow" + (x + 1), rotorAircraft[x].Remarks);
+                    }
+
+
+                    //Rename all fields
+                    stamper.RenameAllFields();
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+                }
+            }
+
+
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            using (FileStream stream = File.OpenRead(path))
+            {
+                byte[] fileBytes = new byte[stream.Length];
+
+                stream.Read(fileBytes, 0, fileBytes.Length);
+                stream.Close();
+                allPDFs.Add(fileBytes);
+            }
+
+            return allPDFs;
+        }
+        #endregion
+
+        #region Logistics Summary
+
+        public string createLogisticsSummaryPDF(Incident task, int OpPeriod, ICSRole ParentRole, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + task.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString() + " " + ParentRole.RoleName + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+
+
+            List<byte[]> allPDFs = exportLogisticsSummaryToPDF(task, OpPeriod, ParentRole, flattenPDF);
+
+            //path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(path, fullFile);
+
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+
+            return path;
+        }
+
+        public List<byte[]> exportLogisticsSummaryToPDF(Incident incident, int OpPeriodToExport, ICSRole ParentRole, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriodToExport);
+            OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriodToExport);
+            List<CheckInRecordWithResource> allCheckInRecords = new List<CheckInRecordWithResource>();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport, ParentRole); }
+            else { allCheckInRecords = incident.GetCheckInWithResources(OpPeriodToExport); }
+
+            List<KindTypeWithCounts> typesWithCount = getTypesWithCounts(allCheckInRecords, currentPeriod.PeriodEnd);
+
+            int totalPages = 1;
+            int rowsOnPage1 = 28;
+            int rowsOnPage2Plus = 38;
+
+            if (typesWithCount.Count > rowsOnPage1)
+            {
+
+                totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(typesWithCount.Count - rowsOnPage1) / Convert.ToDecimal(rowsOnPage2Plus)));
+                if ((typesWithCount.Count - rowsOnPage1) % rowsOnPage2Plus > 0) { totalPages += 1; }
+
+
+
+                if (totalPages == 0) { totalPages = 1; }
+            }
+
+            List<string> pdfFileNames = new List<string>();
+            allPDFs.AddRange(createLogisticsSummaryPage1PDF(incident, OpPeriodToExport, ParentRole, allCheckInRecords, 1, totalPages, flattenPDF));
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<KindTypeWithCounts> pageCounts = typesWithCount.Skip(rowsOnPage1).Skip(rowsOnPage2Plus * (x - 1)).Take(rowsOnPage2Plus).ToList();
+                allPDFs.AddRange(createLogisticsSummarySubsequentPDF(incident, OpPeriodToExport, ParentRole, pageCounts, (x + 1), totalPages, flattenPDF));
+
+            }
+
+            /*
+            List<PositionLogEntry> extraPageEntries = entries.Skip(19).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(31 * (x - 1)).Take(37).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            */
+
+
+            return allPDFs;
+        }
+
+
+        private class KindTypeWithCounts
+        {
+            public string KindName { get; set; }
+            public string TypeName { get; set; }
+            public int[] Counts { get; set; } = new int[2];
+            public KindTypeWithCounts() { }
+            public KindTypeWithCounts(string knd, string ty) { KindName = knd; TypeName = ty; }
+        }
+
+        private List<KindTypeWithCounts> getTypesWithCounts(List<CheckInRecordWithResource> list, DateTime opEndDate)
+        {
+            List<KindTypeWithCounts> counts = new List<KindTypeWithCounts>();
+
+            foreach (CheckInRecordWithResource item in list)
+            {
+                if (!counts.Any(o => o.KindName != null && o.KindName.Equals(item.Resource.Kind) && (o.TypeName == null || o.TypeName.Equals(item.Resource.Type))))
+                {
+                    if (string.IsNullOrEmpty(item.Resource.Type) && string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals("No Type Given")))
+                    {
+
+                        counts.Add(new KindTypeWithCounts("No Kind Given", "No Type Given"));
+
+                    }
+                    else if (item.Resource != null && string.IsNullOrEmpty(item.Resource.Kind) && !string.IsNullOrEmpty(item.Resource.Type) && !counts.Any(o => o.KindName.Equals("No Kind Given") && o.TypeName.Equals(item.Resource.Type)))
+                    {
+                        counts.Add(new KindTypeWithCounts("No Kind Given", item.Resource.Type));
+
+                    }
+                    else if (string.IsNullOrEmpty(item.Resource.Type) && !string.IsNullOrEmpty(item.Resource.Kind) && !counts.Any(o => o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals("No Type Given")))
+                    {
+                        counts.Add(new KindTypeWithCounts(item.Resource.Kind, "No Type Given"));
+                    }
+                    else
+                    {
+                        counts.Add(new KindTypeWithCounts(item.Resource.Kind, item.Resource.Type));
+                    }
+
+
+                }
+
+                KindTypeWithCounts thisone = null;
+                if (!string.IsNullOrEmpty(item.Resource.Kind) && !string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => !string.IsNullOrEmpty(o.KindName) && o.KindName.Equals(item.Resource.Kind) && o.TypeName.Equals(item.Resource.Type)); }
+                else if (string.IsNullOrEmpty(item.Resource.Kind) && string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.EqualsWithNull("No Kind Given") && o.TypeName.EqualsWithNull("No Type Given")); }
+                else if (string.IsNullOrEmpty(item.Resource.Kind)) { thisone = counts.First(o => o.KindName.EqualsWithNull("No Kind Given") && o.TypeName.EqualsWithNull(item.Resource.Type)); }
+                else if (string.IsNullOrEmpty(item.Resource.Type)) { thisone = counts.First(o => o.KindName.EqualsWithNull(item.Resource.Kind) && o.TypeName.EqualsWithNull("No Type Given")); }
+
+                if (thisone != null)
+                {
+                    thisone.Counts[0]++;
+                    if (item.CheckOutDate.Date <= opEndDate.Date || item.LastDayOnIncident.Date <= opEndDate.Date)
+                    {
+                        thisone.Counts[1]++;
+                    }
+                }
+            }
+
+            counts = counts.OrderBy(o => o.KindName).ThenBy(o => o.TypeName).ToList();
+            return counts;
+        }
+
+        private List<byte[]> createLogisticsSummaryPage1PDF(Incident incident, int OpPeriod, ICSRole ParentRole, List<CheckInRecordWithResource> allCheckInRecords, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { outputFileName += " " + ParentRole.RoleName; }
+            outputFileName += ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("Logistics Overview.pdf", FormSet);
+
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+
+
+                    stamper.AcroFields.SetField("INCIDENT NAME OR NUMBERRow1", incident.IncidentNameOrNumber);
+                    if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { stamper.AcroFields.SetField("BRANCH  DIVISION  OVERHEAD", ParentRole.RoleName); }
+                    else { stamper.AcroFields.SetField("BRANCH  DIVISION  OVERHEAD", "Full Incident"); }
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+
+                    int[] accomodations = allCheckInRecords.GetAccommodationPreferences();
+
+                    stamper.AcroFields.SetField("Not Incident CampRow1", accomodations[0].ToString());
+                    stamper.AcroFields.SetField("MaleOnlyRow1", accomodations[1].ToString());
+                    stamper.AcroFields.SetField("FemaleOnlyRow1", accomodations[2].ToString());
+                    stamper.AcroFields.SetField("Not GenderRestrictedRow1", accomodations[3].ToString());
+
+
+                    int[,] food = allCheckInRecords.GetMealRequirements();
+
+                    stamper.AcroFields.SetField("BreakfastUnrestricted", food[0, 0].ToString());
+                    stamper.AcroFields.SetField("BreakfastDietary Restrictions", food[0, 1].ToString());
+                    stamper.AcroFields.SetField("LunchUnrestricted", food[1, 0].ToString());
+                    stamper.AcroFields.SetField("LunchDietary Restrictions", food[1, 1].ToString());
+                    stamper.AcroFields.SetField("DinnerUnrestricted", food[2, 0].ToString());
+                    stamper.AcroFields.SetField("DinnerDietary Restrictions", food[2, 1].ToString());
+
+                    int[] vehicleTypes = allCheckInRecords.GetVehicleTypes();
+                    stamper.AcroFields.SetField("AgencyOwnedRow1", vehicleTypes[0].ToString());
+                    stamper.AcroFields.SetField("RentalRow1", vehicleTypes[1].ToString());
+                    stamper.AcroFields.SetField("ContractorRow1", vehicleTypes[2].ToString());
+                    stamper.AcroFields.SetField("PrivateRow1", vehicleTypes[3].ToString());
+
+                    //need resources by type
+                    List<KindTypeWithCounts> typesWithCount = getTypesWithCounts(allCheckInRecords, currentPeriod.PeriodEnd);
+
+
+                    for (int x = 0; x < typesWithCount.Count && x < 28; x++)
+                    {
+                        stamper.AcroFields.SetField("KindRow" + (x + 1).ToString(), typesWithCount[x].KindName);
+                        stamper.AcroFields.SetField("TypeRow" + (x + 1).ToString(), typesWithCount[x].TypeName);
+                        stamper.AcroFields.SetField("Total this Op PeriodRow" + (x + 1).ToString(), typesWithCount[x].Counts[0].ToString());
+                        stamper.AcroFields.SetField("Departing End of Op PeriodRow" + (x + 1).ToString(), typesWithCount[x].Counts[1].ToString());
+                    }
+
+
+
+
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("OF", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    Guid randomID = Guid.NewGuid();
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+
+
+        private List<byte[]> createLogisticsSummarySubsequentPDF(Incident incident, int OpPeriod, ICSRole ParentRole, List<KindTypeWithCounts> counts, int thisPageNum, int totalPageNum, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+
+            string outputFileName = "LOGISTICS OVERVIEW - " + incident.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString();
+            if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { outputFileName += " " + ParentRole.RoleName; }
+            outputFileName += ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("Logistics Overview Subsequent Page.pdf", FormSet);
+
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalPeriod currentPeriod = incident.AllOperationalPeriods.First(o => o.PeriodNumber == OpPeriod);
+                    OrganizationChart currentOrgChart = incident.allOrgCharts.First(o => o.OpPeriod == OpPeriod);
+
+
+
+                    stamper.AcroFields.SetField("INCIDENT NAME OR NUMBERRow1", incident.IncidentNameOrNumber);
+                    if (ParentRole != null && ParentRole.RoleID != Guid.Empty) { stamper.AcroFields.SetField("SCOPE", ParentRole.RoleName); }
+                    else { stamper.AcroFields.SetField("SCOPE", "Full Incident"); }
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+
+
+
+                    for (int x = 0; x < counts.Count && x < 28; x++)
+                    {
+                        stamper.AcroFields.SetField("KindRow" + (x + 1).ToString(), counts[x].KindName);
+                        stamper.AcroFields.SetField("TypeRow" + (x + 1).ToString(), counts[x].TypeName);
+                        stamper.AcroFields.SetField("Total this Op PeriodRow" + (x + 1).ToString(), counts[x].Counts[0].ToString());
+                        stamper.AcroFields.SetField("Departing End of Op PeriodRow" + (x + 1).ToString(), counts[x].Counts[1].ToString());
+                    }
+
+
+
+
+                    stamper.AcroFields.SetField("PAGE", thisPageNum.ToString());
+                    stamper.AcroFields.SetField("OF", totalPageNum.ToString());
+
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    Guid randomID = Guid.NewGuid();
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + randomID.ToString());
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            if (path != null)
+            {
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    allPDFs.Add(fileBytes);
+                }
+            }
+            return allPDFs;
+        }
+
+
+
+
+        #endregion
+
+        #region Assignment Summaries and Details
+        public PDFCreationResults exportAllAssignmentSummariesToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+            results.bytes = new List<byte[]>();
+
+
+            List<OperationalGroup> GroupsToPrint = new List<OperationalGroup>();
+            //All divisions
+            GroupsToPrint.AddRange(task.ActiveOperationalGroups.Where(o => o.OpPeriod == OpPeriodToExport && o.IsDivision));
+            //All groups not within a division
+            foreach (OperationalGroup group in task.ActiveOperationalGroups.Where(o => o.OpPeriod == OpPeriodToExport && o.IsGroup))
+            {
+                if (!GroupsToPrint.Any(o => o.ID == group.ID) && task.ActiveOperationalGroups.Any(o => o.ID == group.ParentID) && !task.ActiveOperationalGroups.First(o => o.ID == group.ParentID).IsDivision)
+                {
+                    GroupsToPrint.Add(group);
+                }
+            }
+
+            //All branches that contain strike teams or task forces directly
+            foreach (OperationalGroup group in task.ActiveOperationalGroups.Where(o => o.OpPeriod == OpPeriodToExport && o.IsBranch))
+            {
+                if (!GroupsToPrint.Any(o => o.ID == group.ID) && task.ActiveOperationalGroups.Any(o => o.ParentID == group.ID && (o.IsStrikeTeam || o.IsTaskForce)))
+                {
+                    GroupsToPrint.Add(group);
+                }
+            }
+
+
+
+            foreach (OperationalGroup group in GroupsToPrint)
+            {
+                PDFCreationResults groupResults = createAssignmentSummaryPDF(task, group.ID, true, flattenPDF);
+                results.errors.AddRange(groupResults.errors);
+                if (groupResults.path != null && groupResults.Successful)
+                {
+                    results.Successful = true;
+                    using (FileStream stream = File.OpenRead(groupResults.path))
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+
+                        stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        results.bytes.Add(fileBytes);
+                    }
+                }
+            }
+
+            return results;
+        }
+
+        public PDFCreationResults exportAssignmentListToPDF(Incident task, Guid DivisionID, bool flattenPDF)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+
+            results.bytes = new List<byte[]>();
+
+            PDFCreationResults pdfResults = createAssignmentSummaryPDF(task, DivisionID, true, flattenPDF);
+            results.errors.AddRange(pdfResults.errors);
+            results.Successful = pdfResults.Successful;
+            if (pdfResults.path != null && pdfResults.Successful)
+            {
+                using (FileStream stream = File.OpenRead(pdfResults.path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    results.bytes.Add(fileBytes);
+                }
+            }
+
+            return results;
+        }
+
+        public PDFCreationResults createAssignmentSummaryPDF(Incident task, Guid OperationalGroupID, bool useTempPath, bool flattenPDF)
+        {
+            PDFCreationResults results = new PDFCreationResults();
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+
+            OperationalGroup opGroup = task.AllOperationalGroups.FirstOrDefault(o => o.ID == OperationalGroupID);
+
+            string outputFileName = "ICS 204 - " + task.IncidentNameAndNumberForPath + " OP " + opGroup.OpPeriod.ToString() + " " + opGroup.ResourceName + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-204 Assignment List.pdf", FormSet);
+
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalGroup BranchGroup = null;
+                    if (opGroup.GroupType.Equals("Branch") || opGroup.GroupType.Equals("Section")) { BranchGroup = opGroup; }
+                    else
+                    {
+                        OperationalGroup parent = opGroup;
+                        while (BranchGroup == null)
+                        {
+                            parent = task.AllOperationalGroups.FirstOrDefault(o => o.ID == parent.ParentID);
+                            if (parent.GroupType.Equals("Branch") || parent.GroupType.Equals("Section")) { BranchGroup = parent; }
+                        }
+                    }
+
+                    //1
+                    stamper.AcroFields.SetField("NameRow1", task.TaskName);
+                    stamper.AcroFields.SetField("NumberRow1", task.TaskNumber);
+
+                    //2
+                    OperationalPeriod currentPeriod = task.AllOperationalPeriods.FirstOrDefault(o => o.PeriodNumber == opGroup.OpPeriod);
+                    if (currentPeriod != null)
+                    {
+                        stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                        stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                        stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                        stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                    }
+
+
+                    //3
+                    stamper.AcroFields.SetField("Branch", BranchGroup.Name);
+                    if (opGroup.IsDivision) { stamper.AcroFields.SetField("Division", opGroup.Name); }
+                    if (opGroup.IsGroup) { stamper.AcroFields.SetField("Group",opGroup.Name); }
+                    stamper.AcroFields.SetField("Staging Area", "");
+
+
+
+                    //4
+                    OrganizationChart org = task.activeOrgCharts.FirstOrDefault(o=>o.OpPeriod == opGroup.OpPeriod);
+                    if (org != null)
+                    {
+                        ICSRole osc = org.GetRoleByID(Globals.OpsChiefGenericID, false);
+                        if (osc != null)
+                        {
+                            stamper.AcroFields.SetField("NameOperations Section Chief", osc.IndividualName);
+                            Personnel p = task.AllIncidentResources.FirstOrDefault(o => o.ID == osc.IndividualID) as Personnel;
+                            if (p != null) { stamper.AcroFields.SetField("Contact sOperations Section Chief", p.CellphoneNumber); }
+                        }
+
+                        ICSRole bd = org.GetRoleByID(BranchGroup.LeaderICSRoleID, false);
+                        if (bd != null)
+                        {
+                            stamper.AcroFields.SetField("NameBranch Director", bd.IndividualName);
+                            Personnel p = task.AllIncidentResources.FirstOrDefault(o => o.ID == bd.IndividualID) as Personnel;
+                            if (p != null) { stamper.AcroFields.SetField("Contact sBranch Director", p.CellphoneNumber); }
+                        }
+
+                        if (opGroup.IsDivision)
+                        {
+                            ICSRole divs = org.GetRoleByID(opGroup.LeaderICSRoleID, false);
+                            if (divs != null)
+                            {
+                                stamper.AcroFields.SetField("NameDivisionGroup Supervisor", divs.IndividualName);
+                                Personnel p = task.AllIncidentResources.FirstOrDefault(o => o.ID == divs.IndividualID) as Personnel;
+                                if (p != null) { stamper.AcroFields.SetField("Contact sDivisionGroup Supervisor", p.CellphoneNumber); }
+                            }
+                        }
+
+                        stamper.AcroFields.SetField("NameStaging Area Manager", "");
+                        stamper.AcroFields.SetField("Contact sStaging Area Manager", "");
+                    }
+
+                  
+                    //5
+                    List<IncidentResource> reportingResources = task.GetReportingResources(opGroup.ID);
+                    reportingResources.AddRange(task.ActiveOperationalGroups.Where(o => o.ParentID == opGroup.ID && !o.IsBranchOrDiv));
+                    int assignmentRow = 1;
+                    foreach (IncidentResource ta in reportingResources)
+                    {
+                        if (ta.GetType().Name.Equals("OperationalGroup")) { stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ((OperationalGroup)ta).ResourceName); }
+                        else { stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ta.ResourceName); }
+                        stamper.AcroFields.SetField("LeaderRow" + assignmentRow, ta.LeaderName);
+                        stamper.AcroFields.SetField(" of PersonsRow" + assignmentRow, ta.NumberOfPeople.ToString());
+                        stamper.AcroFields.SetField("Contact cell radio frequency etcRow" + assignmentRow, ta.Contact);
+                        if (ta.GetType().Name.Equals("OperationalGroup"))
+                        {
+                            stamper.AcroFields.SetField("Reporting Location Special Equipment and Supplies Remarks Notes InformationRow" + assignmentRow, (ta as OperationalGroup).Comments);
+                        }
+                        assignmentRow++;
+                    }
+
+
+                    //6
+                    stamper.AcroFields.SetField("6 WORK ASSIGNMENTSRow1", opGroup.TacticalAssignment);
+
+
+                    //7
+                    stamper.AcroFields.SetField("7 SPECIAL INSTRUCTIONSRow1", opGroup.SpecialInstructions);
+
+
+                    //8
+                    List<CommsPlanItem> comms = new List<CommsPlanItem>();
+                    foreach (Guid g in opGroup.CommsPlanItemIDs)
+                    {
+                        if (task.allCommsPlans.Any(o => o.OpPeriod == opGroup.OpPeriod) && task.allCommsPlans.First(o => o.OpPeriod == opGroup.OpPeriod).allCommsItems.Any(o => o.ItemID == g))
+                        {
+                            comms.Add(task.allCommsPlans.First(o => o.OpPeriod == opGroup.OpPeriod).allCommsItems.First(o => o.ItemID == g));
+                        }
+                    }
+
+                    for (int x = 0; x < comms.Count && x < 4; x++)
+                    {
+                        stamper.AcroFields.SetField("CommsName" + (x + 1), comms[x].SystemWithID);
+                        stamper.AcroFields.SetField("FunctionRow" + (x + 1), comms[x].CommsFunction);
+                        stamper.AcroFields.SetField("Frequency  NumberRow" + (x + 1), comms[x].OutputFrequencyNumber);
+                        stamper.AcroFields.SetField("RemarksRow1" + (x + 1), comms[x].Comments);
+
+
+                    }
+
+
+                    //9
+                    stamper.AcroFields.SetField("Position", opGroup.PreparedByRoleName);
+                    stamper.AcroFields.SetField("Date", opGroup.DatePrepared.ToString(Globals.DateFormat));
+                    stamper.AcroFields.SetField("Name", opGroup.PreparedByResourceName);
+                    stamper.AcroFields.SetField("Time", opGroup.DatePrepared.ToString("HH:mm"));
+
+                    //Rename all fields
+                    stamper.RenameAllFields();
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+
+                    results.Successful = true;
+
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception ex)
+            {
+                results.errors.Add(ex);
+            }
+
+            results.path = path;
+
+            if (results.path != null && results.Successful)
+            {
+                results.bytes = new List<byte[]>();
+                using (FileStream stream = File.OpenRead(results.path))
+                {
+                    byte[] fileBytes = new byte[stream.Length];
+
+                    stream.Read(fileBytes, 0, fileBytes.Length);
+                    stream.Close();
+                    results.bytes.Add(fileBytes);
+                }
+            }
+
+
+            return results;
+        }
+
+
+
+
+
+
+        public List<byte[]> exportAllAssignmentDetailsToPDF(Incident task, int OpPeriodToExport, bool flattenPDF)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+            List<OperationalGroup> groupsToExport = new List<OperationalGroup>();
+
+            if (task.ActiveOperationalGroups.Any(o => o.OpPeriod == OpPeriodToExport))
+            {
+                groupsToExport.AddRange(task.ActiveOperationalGroups.Where(o => !o.GroupType.Equals("Section") && !o.IsBranchOrDiv && o.OpPeriod == OpPeriodToExport));
+
+
+                foreach (OperationalGroup op in groupsToExport)
+                {
+                    string path = createAssignmentDetailsPDF(task, OpPeriodToExport, op.ID, true, flattenPDF);
+                    if (path != null)
+                    {
+                        using (FileStream stream = File.OpenRead(path))
+                        {
+                            byte[] fileBytes = new byte[stream.Length];
+
+                            stream.Read(fileBytes, 0, fileBytes.Length);
+                            stream.Close();
+                            allPDFs.Add(fileBytes);
+                        }
+                    }
+                }
+            }
+            return allPDFs;
+        }
+        public string createAssignmentDetailsPDF(Incident task, int OpPeriod, Guid OpGroupID, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+            OperationalGroup opGroup = task.AllOperationalGroups.FirstOrDefault(o => o.ID == OpGroupID);
+
+            string outputFileName = "ICS 204A - " + task.IncidentNameAndNumberForPath + " OP " + OpPeriod.ToString() + " " + opGroup.ResourceName + ".pdf";
+            outputFileName = outputFileName.ReplaceInvalidPathChars();
+
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-204A-WF Assignment Details.pdf", FormSet);
+
+            try
+            {
+
+                using (PdfReader rdr = new PdfReader(fileToUse))
+                {
+                    PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, FileMode.Create));
+
+                    OperationalGroup opGroupDiv = task.ActiveOperationalGroups.FirstOrDefault(o => o.ID == opGroup.ParentID);
+                    if (opGroupDiv != null)
+                    {
+                        stamper.AcroFields.SetField("2 DIVISIONGROUPSTAGING", opGroupDiv.ResourceName);
+
+                        if (opGroupDiv.ParentID != null)
+                        {
+                            OperationalGroup opGroupBranch = task.ActiveOperationalGroups.FirstOrDefault(o => o.ID == opGroupDiv.ParentID);
+                            if (opGroupBranch != null)
+                            {
+                                stamper.AcroFields.SetField("1 BRANCH", opGroupBranch.ResourceName);
+
+                            }
+                        }
+                        else
+                        {
+                            stamper.AcroFields.SetField("1 BRANCH", opGroupDiv.ResourceName);
+                        }
+                    }
+
+
+
+
+
+
+                    OperationalPeriod currentPeriod = task.AllOperationalPeriods.Where(o => o.PeriodNumber == OpPeriod).First();
+
+                    stamper.AcroFields.SetField("3 INCIDENT NAME OR NUMBERRow1", task.IncidentNameOrNumber);
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentPeriod.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + DateFormat + "}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentPeriod.PeriodEnd));
+                    stamper.AcroFields.SetField("5 Identifier of Strike Team or Task Force or GroupRow1", opGroup.ResourceName);
+                    stamper.AcroFields.SetField("6 Name of STLD  TFLD or Group SupervisorRow1", opGroup.LeaderName);
+
+                    if (opGroup.PreparedByResourceID != Guid.Empty)
+                    {
+                        ICSRole role = task.allOrgCharts.FirstOrDefault(o => o.OpPeriod == opGroup.OpPeriod).ActiveRoles.FirstOrDefault(o => o.ID == opGroup.PreparedByRoleID);
+                        stamper.AcroFields.SetField("Name", role.IndividualName);
+                    }
+                    stamper.AcroFields.SetField("Position", opGroup.PreparedByRoleName);
+
+
+
+
+                    List<IncidentResource> reportingResources = task.GetReportingResources(opGroup.ID);
+                    reportingResources.AddRange(task.ActiveOperationalSubGroups.Where(o => o.OperationalGroupID == opGroup.ID));
+                    List<CommsPlanItem> comms = new List<CommsPlanItem>();
+
+
+                    int assignmentRow = 1;
+                    foreach (IncidentResource ta in reportingResources)
+                    {
+                        stamper.AcroFields.SetField("Resource IdentifierRow" + assignmentRow, ta.ResourceName);
+                        stamper.AcroFields.SetField("KindRow" + assignmentRow, ta.Kind);
+                        stamper.AcroFields.SetField("TypeRow" + assignmentRow, ta.Type);
+                        if (ta.NumberOfPeople <= 1)
+                        {
+                            stamper.AcroFields.SetField("Name  Leader QtyRow" + assignmentRow, ta.LeaderName);
+                        }
+                        else { stamper.AcroFields.SetField("Name  Leader QtyRow" + assignmentRow, ta.LeaderName + " (" + ta.NumberOfPeople + ")"); }
+                        if (ta.GetType().Name.Equals(new OperationalGroupResourceListing().GetType().Name))
+                        {
+                            stamper.AcroFields.SetField("RoleRow" + assignmentRow, (ta as OperationalGroupResourceListing).Role);
+                        }
+                        if (ta.NumberOfPeople > 1)
+                        {
+                            ;
+                        }
+                        if (ta.GetType().Name.Equals(new OperationalGroupResourceListing().GetType().Name) && task.AllOperationalSubGroups.Any(o => o.ID == (ta as OperationalGroupResourceListing).ResourceID))
+                        {
+                            stamper.AcroFields.SetField("TransportationRow" + assignmentRow, task.AllOperationalSubGroups.First(o => o.ID == (ta as OperationalGroupResourceListing).ResourceID).Transport);
+                        }
+
+                        assignmentRow++;
+                    }
+
+
+                    stamper.AcroFields.SetField("8 COMMENTS", opGroup.Comments);
+
+
+                    //Rename all fields
+                    AcroFields af = stamper.AcroFields;
+
+                    List<string> fieldNames = new List<string>();
+                    foreach (var field in af.Fields)
+                    {
+                        fieldNames.Add(field.Key);
+                    }
+                    Guid randomID = Guid.NewGuid();
+                    foreach (string s in fieldNames)
+                    {
+                        stamper.AcroFields.RenameField(s, s + "-204-" + randomID.ToString());
+                    }
+
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+
+                    stamper.Close();//Close a PDFStamper Object
+                    stamper.Dispose();
+                    //rdr.Close();    //Close a PDFReader Object
+                }
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+            return path;
+        }
+        #endregion
+
+
+        #region Position Log
+
+        public string createPositionLogPDF(Incident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempPath();
+            if (!useTempPath)
+            {
+                path = FileAccessClasses.getWritablePath(task);
+            }
+
+
+
+            string outputFileName = "ICS 214 - " + task.IncidentNameAndNumberForPath + " - " + role.RoleName + " - OP " + OpPeriod.ToString() + ".pdf";
+            path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+
+
+
+            List<byte[]> allPDFs = exportPositionLogToPDF(task, OpPeriod, role, flattenPDF);
+
+            //path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+
+            byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+            try
+            {
+                File.WriteAllBytes(path, fullFile);
+
+            }
+            catch (Exception)
+            {
+                path = null;
+            }
+
+
+            return path;
+        }
+        public List<byte[]> exportPositionLogToPDF(Incident task, int OpPeriodToExport, ICSRole role, bool flattenPDF = false)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+
+            List<PositionLogEntry> entries = task.allPositionLogEntries.Where(o => o.OpPeriod == OpPeriodToExport && o.Role.RoleID == role.RoleID).ToList();
+            int totalPages = getPositionLogPageCount(entries);
+
+
+            List<string> pdfFileNames = new List<string>();
+            List<PositionLogEntry> firstPageEntries = entries.Take(20).ToList();
+            allPDFs.AddRange(buildFirstPDFPage(firstPageEntries, task, OpPeriodToExport, role, 1, totalPages, flattenPDF));
+
+            List<PositionLogEntry> extraPageEntries = entries.Skip(20).ToList();
+            for (int x = 1; x < totalPages; x++)
+            {
+                List<PositionLogEntry> nextEntries = extraPageEntries.Skip(35 * (x - 1)).Take(35).ToList();
+
+                allPDFs.AddRange(buildPDFPage(nextEntries, task, OpPeriodToExport, role, x + 1, totalPages, flattenPDF));
+            }
+            return allPDFs;
+
+        }
+        private int getPositionLogPageCount(List<PositionLogEntry> entries)
+        {
+
+            int totalPages = 0;
+            int pageOneMaxEntries = 20;
+            int pageTwoMaxEntries = 35;
+            if (entries.Any()) { totalPages = 1; }
+            if (entries.Count > pageOneMaxEntries)
+            {
+                totalPages += Convert.ToInt32(Math.Floor(Convert.ToDecimal(entries.Count - pageOneMaxEntries) / pageTwoMaxEntries));
+                if ((entries.Count - pageOneMaxEntries) % pageTwoMaxEntries > 0) { totalPages += 1; }
+
+            }
+
+            if (totalPages == 0) { totalPages = 1; }
+            return totalPages;
+        }
+        private List<byte[]> buildFirstPDFPage(List<PositionLogEntry> entries, Incident task, int OpsPeriod, ICSRole role, int pageNumber, int pageCount, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempFileName();
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-214 Activity Log.pdf", FormSet);
+
+            OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
+
+            ICSRole RoleWithName = null;
+            if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.RoleID)))
+            {
+                RoleWithName = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(o => o.RoleID == role.RoleID).First();
+            }
+            else { RoleWithName = role; }
+
+            ICSRole branchRole = null;
+            if (role.SectionID == role.GenericRoleID) { branchRole = RoleWithName; }
+            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.GenericRoleID == role.SectionID)))
+            {
+                branchRole = task.allOrgCharts.First(o => o.OpPeriod == OpsPeriod).ActiveRoles.Where(r => r.GenericRoleID == role.SectionID).First();
+            }
+
+            using (PdfReader rdr = new PdfReader(fileToUse))
+            {
+                using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
+                {
+                    stamper.AcroFields.SetField("Name", task.TaskName);
+                    stamper.AcroFields.SetField("Number", task.TaskNumber);
+
+                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + Globals.DateFormat + "}", DateTime.Now));
+                    stamper.AcroFields.SetField("3 TIME PREPARED", string.Format("{0:HH:mm}", DateTime.Now));
+                    //
+                    stamper.AcroFields.SetField("4 NAME", RoleWithName.IndividualName);
+                    stamper.AcroFields.SetField("5 ICS POSITION", role.RoleName);
+                    stamper.AcroFields.SetField("Name_2", RoleWithName.IndividualName);
+                    stamper.AcroFields.SetField("Position", role.RoleName);
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + Globals.DateFormat + "}", DateTime.Now));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", DateTime.Now));
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+
+
+                    stamper.AcroFields.SetField("PAGE", pageNumber.ToString());
+                    stamper.AcroFields.SetField("OF", pageCount.ToString());
+
+                    List<ICSRole> UnitRoles = new List<ICSRole>();
+                    if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod))
+                    {
+                        UnitRoles = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(o => o.SectionID == branchRole.GenericRoleID).ToList();
+                        UnitRoles = UnitRoles.Where(o => !string.IsNullOrEmpty(o.IndividualName)).ToList();
+                        for (int x = 0; x < UnitRoles.Count && x < 14; x++)
+                        {
+                            stamper.AcroFields.SetField("NameRow" + (x + 1), UnitRoles[x].IndividualName);
+                            stamper.AcroFields.SetField("ICS PositionRow" + (x + 1), UnitRoles[x].RoleName);
+                            stamper.AcroFields.SetField("Home BaseRow" + (x + 1), "");
+
+                        }
+
+                    }
+
+
+
+
+                    for (int x = 0; x < entries.Count; x++)
+                    {
+                        PositionLogEntry entry = entries[x];
+                        stamper.AcroFields.SetField("TimeRow" + (x + 1), entry.DateCreated.ToString("HH:mm"));
+                        string IsIncomplete = null; if (!entries[x].IsInfoOnly && !entries[x].IsComplete) { IsIncomplete = "INCOMPLETE -- "; }
+                        stamper.AcroFields.SetField("Major EventsRow" + (x + 1), IsIncomplete + entry.LogText);
+
+
+
+                    }
+
+
+                    //Rename all fields
+                    stamper.RenameAllFields();
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+                }
+            }
+
+
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            using (FileStream stream = File.OpenRead(path))
+            {
+                byte[] fileBytes = new byte[stream.Length];
+
+                stream.Read(fileBytes, 0, fileBytes.Length);
+                stream.Close();
+                allPDFs.Add(fileBytes);
+            }
+
+            return allPDFs;
+        }
+        private List<byte[]> buildPDFPage(List<PositionLogEntry> entries, Incident task, int OpsPeriod, ICSRole role, int pageNumber, int pageCount, bool flattenPDF)
+        {
+            string path = System.IO.Path.GetTempFileName();
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-214 Activity Log Supplemental.pdf", FormSet);
+
+            OperationalPeriod currentOp = task.AllOperationalPeriods.First(o => o.PeriodNumber == OpsPeriod);
+            ICSRole RoleWithName = null;
+            if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.RoleID == role.RoleID)))
+            {
+                RoleWithName = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(o => o.RoleID == role.RoleID).First();
+            }
+            else { RoleWithName = role; }
+
+            ICSRole branchRole = null;
+            if (role.SectionID == role.GenericRoleID) { branchRole = role; }
+            else if (task.allOrgCharts.Any(o => o.OpPeriod == OpsPeriod && o.ActiveRoles.Any(r => r.GenericRoleID == role.SectionID)))
+            {
+                branchRole = task.allOrgCharts.Where(o => o.OpPeriod == OpsPeriod).First().ActiveRoles.Where(r => r.GenericRoleID == role.SectionID).First();
+            }
+
+            using (PdfReader rdr = new PdfReader(fileToUse))
+            {
+                using (PdfStamper stamper = new PdfStamper(rdr, new System.IO.FileStream(path, System.IO.FileMode.Create)))
+                {
+                    stamper.AcroFields.SetField("NAME", task.TaskName);
+                    stamper.AcroFields.SetField("Number", task.TaskName);
+
+                    stamper.AcroFields.SetField("2 DATE PREPARED", string.Format("{0:" + Globals.DateFormat + "}", DateTime.Now));
+                    stamper.AcroFields.SetField("3 TIME PREPARED", string.Format("{0:HH:mm}", DateTime.Now));
+
+                    stamper.AcroFields.SetField("4 NAME", RoleWithName.IndividualName);
+                    stamper.AcroFields.SetField("5 ICS POSITION", role.RoleName);
+                    stamper.AcroFields.SetField("Name_2", RoleWithName.IndividualName);
+                    stamper.AcroFields.SetField("Position", role.RoleName);
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + Globals.DateFormat + "}", DateTime.Now));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", DateTime.Now));
+
+                    stamper.AcroFields.SetField("Date From", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Date To", string.Format("{0:" + Globals.DateFormat + "}", currentOp.PeriodEnd));
+                    stamper.AcroFields.SetField("Time From", string.Format("{0:HH:mm}", currentOp.PeriodStart));
+                    stamper.AcroFields.SetField("Time To", string.Format("{0:HH:mm}", currentOp.PeriodEnd));
+
+
+
+                    stamper.AcroFields.SetField("PAGE", pageNumber.ToString());
+                    stamper.AcroFields.SetField("OF", pageCount.ToString());
+
+                    for (int x = 0; x < entries.Count; x++)
+                    {
+                        PositionLogEntry entry = entries[x];
+                        string IsIncomplete = null; if (!entries[x].IsInfoOnly && !entries[x].IsComplete) { IsIncomplete = "INCOMPLETE -- "; }
+
+                        stamper.AcroFields.SetField("TimeRow" + (x + 1), entry.DateCreated.ToString("HH:mm"));
+                        stamper.AcroFields.SetField("Major EventsRow" + (x + 1), IsIncomplete + entry.LogText);
+
+
+
+                    }
+
+
+                    //Rename all fields
+                    stamper.RenameAllFields();
+
+                    if (flattenPDF)
+                    {
+                        stamper.FormFlattening = true;
+                    }
+                }
+            }
+
+
+
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            using (FileStream stream = File.OpenRead(path))
+            {
+                byte[] fileBytes = new byte[stream.Length];
+
+                stream.Read(fileBytes, 0, fileBytes.Length);
+                stream.Close();
+                allPDFs.Add(fileBytes);
+            }
+
+            return allPDFs;
+        }
+        public List<byte[]> exportVerbosePositionLogToPDF(Incident task, int OpPeriodToExport, ICSRole role, bool flattenPDF = false)
+        {
+            List<byte[]> allPDFs = new List<byte[]>();
+
+
+            string briefingPath = CreateVerbosePDF(task, role, OpPeriodToExport, null, true, flattenPDF);
+            using (FileStream stream = File.OpenRead(briefingPath))
+            {
+                byte[] fileBytes = new byte[stream.Length];
+
+                stream.Read(fileBytes, 0, fileBytes.Length);
+                stream.Close();
+                allPDFs.Add(fileBytes);
+            }
+
+            return allPDFs;
+
+        }
+        public string CreateVerbosePDF(Incident task, ICSRole role, int OpPeriod, string pathToUse, bool useTempPath, bool flattenPDF)
+        {
+            string path = pathToUse;
+            if (task != null)
+            {
+
+                if (!useTempPath)
+                {
+                    if (string.IsNullOrEmpty(path)) { path = FileAccessClasses.getWritablePath(task); }
+
+                    if (task.DocumentPath == null && path != null) { task.DocumentPath = path; }
+                    string outputFileName = "Incident " + task.IncidentNameAndNumberForPath + " Op # " + OpPeriod + " - " + role.RoleName;
+                    path = FileAccessClasses.getUniqueFileName(outputFileName, path);
+                    //path = System.IO.Path.Combine(path, outputFileName);
+
+                }
+                else
+                {
+                    path = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+                }
+                try
+                {
+
+                    using (System.IO.FileStream fs = new FileStream(path, FileMode.Create))
+                    {
+
+
+                        // Create an instance of the document class which represents the PDF document itself.
+                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+
+                        // Create an instance to the PDF file by creating an instance of the PDF 
+                        // Writer class using the document and the filestrem in the constructor.
+
+                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
+
+
+
+                        TwoColumnHeaderFooter PageEventHandler = new TwoColumnHeaderFooter();
+                        writer.PageEvent = PageEventHandler;
+                        // Define the page header
+                        PageEventHandler.Title = "";
+                        //PageEventHandler.Title = "Task Number " + CurrentTask.TaskNumber + " - " + CurrentTask.TaskName + " Op Period " + selectedBriefing.OpPeriod.ToString();
+                        PageEventHandler.HeaderFont = FontFactory.GetFont(BaseFont.COURIER_BOLD, 10, iTextSharp.text.Font.BOLD);
+
+
+                        document.AddTitle(role.RoleName + " Position Log - Task Number " + task.TaskNumber + " - " + task.TaskName + " Op " + OpPeriod);
+
+                        // Open the document to enable you to write to the document
+
+                        document.Open();
+                        BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
+                        iTextSharp.text.Font titlefont = new iTextSharp.text.Font(bfTimes, 22, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                        iTextSharp.text.Font sectionfont = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK);
+                        iTextSharp.text.Font subsectionfont = new iTextSharp.text.Font(bfTimes, 16, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
+                        iTextSharp.text.Font normalfont = new iTextSharp.text.Font(bfTimes, 12, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
+
+                        // Add a simple and wellknown phrase to the document in a flow layout manner
+                        //Chapter chapter1 = new Chapter(new Paragraph("Briefing"), 1);
+                        string title = role.RoleName + " Position Log";
+
+
+
+                        Anchor briefingTarget = new Anchor(title, titlefont);
+                        briefingTarget.Name = "Timeline";
+                        Paragraph tp = new Paragraph();
+                        tp.Add(briefingTarget);
+                        tp.Font = titlefont;
+                        Paragraph stp = new Paragraph("Task Number " + task.TaskNumber + " - " + task.TaskName + " Op " + OpPeriod, sectionfont);
+                        document.Add(tp);
+                        document.Add(stp);
+
+
+                        foreach (PositionLogEntry entry in task.allPositionLogEntries.Where(o => o.OpPeriod == OpPeriod && o.Role.RoleID == role.RoleID).OrderBy(o => o.DateCreated))
+                        {
+                            document.Add(new Paragraph(entry.LogText, subsectionfont));
+                            Paragraph p1 = new Paragraph(entry.LogHistoryString, normalfont);
+                            p1.IndentationLeft = 30;
+                            document.Add(p1);
+
+                        }
+
+
+
+                        // Close the document
+                        document.Close();
+                        // Close the writer instance
+                        writer.Close();
+
+                        // Always close open filehandles explicity
+
+                    }
+                }
+                catch (Exception)
+                {
+                    path = null;
+                }
+            }
+            return path;
+        }
+
+        #endregion
+
+
+
+    }
+}

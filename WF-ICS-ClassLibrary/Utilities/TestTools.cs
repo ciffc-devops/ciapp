@@ -67,7 +67,7 @@ namespace WF_ICS_ClassLibrary.Utilities
         public static Contact createContactTest(int seed)
         {
             Contact test = new Contact();
-            test.ContactName = "ContactName" + seed;
+            test.ContactName = RandomNameGenerator.FirstName + " " + RandomNameGenerator.LastName;
             test.Title = "Title" + seed;
             test.Organization = "Organization" + seed;
             test.Phone = "(" + seed.ToString() + seed.ToString() + seed.ToString() + ") " + seed.ToString() + seed.ToString() + seed.ToString() + "-" + seed.ToString() + seed.ToString() + seed.ToString() + seed.ToString();

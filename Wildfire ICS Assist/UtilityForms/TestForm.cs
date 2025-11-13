@@ -56,10 +56,13 @@ namespace Wildfire_ICS_Assist.UtilityForms
                 }
                 if (checkboxes[1].Checked)
                 {
-                    Contact contact = TestTools.createContactTest(seed);
-                    log.Append("Created contact"); log.Append(Environment.NewLine);
-                    Program.incidentDataService.UpsertContact(contact);
-                    log.Append("Saved contact"); log.Append(Environment.NewLine);
+                    int contactsToCreate = 40;
+                    for (int x = 0; x < contactsToCreate; x++)
+                    {
+                        Contact contact = TestTools.createContactTest(seed+x);
+                        Program.incidentDataService.UpsertContact(contact);
+                    }
+                    log.Append("Created " + contactsToCreate + " contacts"); log.Append(Environment.NewLine);
                 }
 
                 if (checkboxes[2].Checked)

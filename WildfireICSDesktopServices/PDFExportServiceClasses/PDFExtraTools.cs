@@ -17,19 +17,23 @@ namespace WildfireICSDesktopServices
 {
     public static class PDFExtraTools
     {
-        public static string getBlankFormsFolder()
+        public static string getBlankFormsFolder(int FormSet)
         {
             string dir = AppContext.BaseDirectory;
-            return System.IO.Path.Combine(dir, "BlankForms");
+            
+            dir = System.IO.Path.Combine(dir, "BlankForms");
+            if (FormSet == 1) { dir = System.IO.Path.Combine(dir, "Wildfire"); }
+            else { dir = System.IO.Path.Combine(dir, "AllHazard"); }
+            return dir;
         }
 
-        public static string getPDFFilePath(string fileToUse)
+        public static string getPDFFilePath(string fileToUse, int FormSet)
         {
             if (fileToUse.Contains("BlankForms/"))
             {
                 fileToUse = fileToUse.Replace("BlankForms/", "");
             }
-            string dir = getBlankFormsFolder();
+            string dir = getBlankFormsFolder(FormSet);
             return System.IO.Path.Combine(dir, fileToUse);
         }
 
