@@ -221,6 +221,7 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
         {
             IncidentObjective obj = new IncidentObjective();
             obj.OpPeriod = CurrentOpPeriod;
+            obj.SheetId = objectivesSheet.ID;
             obj.Active = true;
             obj.Priority = objectivesSheet.GetNextPriorityNumber();
             obj.ParentObjectiveID = Guid.Empty;
@@ -291,6 +292,7 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
                 IncidentObjective objective = new IncidentObjective();
                 objective.Active = true;
+                objective.SheetId = objectivesSheet.ID;
                 objective.OpPeriod = Program.CurrentOpPeriod;
                 objective.Priority = objectivesSheet.GetNextPriorityNumber(parent.ID);
                 objective.ParentObjectiveID = parent.ID;

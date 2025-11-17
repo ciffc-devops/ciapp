@@ -35,7 +35,17 @@ namespace Wildfire_ICS_Assist
                     chkSaveForLater.Visible = false;
                     btnAddNew.Visible = false;
                     btnSaveChanges.Visible = true;
-                    lblNewTitle.Text = "Edit";
+                    txtNewObjective.Width = panel2.Width - 16;
+                    int depth = Objective.GetObjectiveDepth();
+                    if (string.IsNullOrEmpty(Objective.Objective))
+                    {
+                        lblNewTitle.Text = "Create new " + IncidentObjectiveTools.ObjectiveTypeNameByDepth(depth);
+                       
+                    } else
+                    {
+                        lblNewTitle.Text = "Edit " + IncidentObjectiveTools.ObjectiveTypeNameByDepth(depth);
+                    }
+                    this.Text = lblNewTitle.Text;
 
                 }
                 else
