@@ -20,7 +20,7 @@ namespace WF_ICS_ClassLibrary.Models
         [ProtoMember(13)] private bool _Completed;
         [ProtoMember(14)] private Guid _ParentObjectiveID;
         [ProtoMember(15)] private List<string> _TemplateStrategies;
-
+        [ProtoMember(16)] private Guid _SheetId;
 
 
         public Guid ObjectiveID { get => _ObjectiveID; set => _ObjectiveID = value; } //used for present incident objectives
@@ -43,7 +43,7 @@ namespace WF_ICS_ClassLibrary.Models
             set => _TemplateStrategies = value;
         }
         public int TemplateStrategyCount { get => TemplateStrategies.Count; }
-
+        public Guid SheetId { get => _SheetId; set => _SheetId = value; }
 
         public IncidentObjective() { ObjectiveID = System.Guid.NewGuid(); Active = true; IncidentObjectiveID = Guid.NewGuid(); TemplateStrategies = new List<string>(); }
         private IncidentObjective DeepCopy()

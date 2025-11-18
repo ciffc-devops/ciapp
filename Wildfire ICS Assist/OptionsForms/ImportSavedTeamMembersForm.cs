@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic.FileIO;
+using Microsoft.VisualStudio.PlatformUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WF_ICS_ClassLibrary.Models;
+using WF_ICS_ClassLibrary.Utilities;
+using Wildfire_ICS_Assist.Classes;
 using Wildfire_ICS_Assist.UtilityForms;
 
 namespace Wildfire_ICS_Assist.OptionsForms
@@ -19,7 +22,8 @@ namespace Wildfire_ICS_Assist.OptionsForms
         public int ImportedCount { get => _ImportedCount; set => _ImportedCount = value; }
         private int _UpdatedCount = 0;
         public int UpdatedCount { get => _UpdatedCount; set => _UpdatedCount = value; }
-
+        public List<ComboBoxDataItem> columns { get; set; }
+        public int[] bestGuessColumns { get; set; } = new int[18];
         public ImportSavedTeamMembersForm()
         {
             InitializeComponent(); SetControlColors(this.Controls);
@@ -44,38 +48,62 @@ namespace Wildfire_ICS_Assist.OptionsForms
 
         private void PopulateDefaultAgency()
         {
-            List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
+            List<string> agencies = new List<string>();
+            if (Program.generalOptionsService.GetOptionsValue("Agencies") != null) { agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies"); }
             List<string> incidentAgencies = Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.Agency)).GroupBy(o => o.Agency).Select(o => o.First().Agency).ToList();
             incidentAgencies.AddRange(Program.CurrentIncident.IncidentPersonnel.Where(o => !string.IsNullOrEmpty(o.HomeUnit)).GroupBy(o => o.HomeUnit).Select(o => o.First().HomeUnit));
-            agencies.AddRange(incidentAgencies.Distinct());
-            agencies = agencies.OrderBy(o => o).ToList();
+            if (incidentAgencies.Any()) { agencies.AddRange(incidentAgencies.Distinct()); }
+            if (agencies.Any()) { agencies = agencies.OrderBy(o => o).ToList(); }
             agencies.Insert(0, string.Empty);
 
             cboDefaultAgency.DataSource = agencies;
 
         }
 
+        public List<ComboBox> AllComboBoxes
+        {
+            get
+            {
+                List<ComboBox> boxes = new List<ComboBox>();
+                boxes.Add(cboFirst);
+                boxes.Add(cboMiddle);
+                boxes.Add(cboLast);
+                boxes.Add(cboAccom);
+                boxes.Add(cboPronoun);
+                boxes.Add(cboCountry);
+                boxes.Add(cboProvince);
+                boxes.Add(cboAgency);
+                boxes.Add(cboContractor);
+                boxes.Add(cboHomeUnit);
+                boxes.Add(cboKind);
+                boxes.Add(cboType);
+                boxes.Add(cboCell);
+                boxes.Add(cboEmail);
+                boxes.Add(cboCallsign);
+                boxes.Add(cboDietary);
+                boxes.Add(cboAllergies);
+                boxes.Add(cboEmergerncy);
+                return boxes;
+            }
+        }
         private void setExcelColumnNames()
         {
-            List<string> columns = WF_ICS_ClassLibrary.Utilities.ExcelColumns.getExcelColumns(true);
-            cboFirst.DataSource = new List<string>(columns);
-            cboMiddle.DataSource = new List<string>(columns);
-            cboLast.DataSource = new List<string>(columns);
-            cboAccom.DataSource = new List<string>(columns);
-            cboPronoun.DataSource = new List<string>(columns);
-            cboCountry.DataSource = new List<string>(columns);
-            cboProvince.DataSource = new List<string>(columns);
-            cboAgency.DataSource = new List<string>(columns);
-            cboContractor.DataSource = new List<string>(columns);
-            cboHomeUnit.DataSource = new List<string>(columns);
-            cboKind.DataSource = new List<string>(columns);
-            cboType.DataSource = new List<string>(columns);
-            cboCell.DataSource = new List<string>(columns);
-            cboEmail.DataSource = new List<string>(columns);
-            cboCallsign.DataSource = new List<string>(columns);
-            cboDietary.DataSource = new List<string>(columns);
-            cboAllergies.DataSource = new List<string>(columns);
-            cboEmergerncy.DataSource = new List<string>(columns);
+            if (columns == null)
+            {
+                columns = ExcelColumns.getExcelDataColumns(true);
+                for (int x = 0; x < AllComboBoxes.Count; x++) { bestGuessColumns[x] = -1; }
+            }
+
+            for (int x = 0; x < AllComboBoxes.Count; x++)
+            {
+                ComboBox cb = AllComboBoxes[x];
+                cb.DataSource = new List<ComboBoxDataItem>(columns);
+                cb.SelectedIndex = bestGuessColumns[x] + 1;
+                cb.DisplayMember = "DisplayText";
+                cb.ValueMember = "ValueText";
+                cb.DropDownWidth = cb.GetDropDownWidth();
+
+            }
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -86,6 +114,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 txtFilePath.Text = openFileDialog1.FileName;
                 guessAtColumns(openFileDialog1.FileName);
                 btnSave.Enabled = true;
+                
             }
         }
 
@@ -103,38 +132,31 @@ namespace Wildfire_ICS_Assist.OptionsForms
                         for (int x = 0; x < fields.Length; x++)
                         {
                             string lower = fields[x].ToLower();
-
-                            if (lower.Equals("First Name", StringComparison.InvariantCultureIgnoreCase)) { cboFirst.SelectedIndex = x; }
-                            else if (lower.Equals("First", StringComparison.InvariantCultureIgnoreCase)) { cboFirst.SelectedIndex = x; }
-                            else if (lower.Contains("middle")) { cboMiddle.SelectedIndex = x; }
-                            else if (lower.Equals("Last Name", StringComparison.InvariantCultureIgnoreCase)) { cboLast.SelectedIndex = x; }
-                            else if (lower.Equals("Last", StringComparison.InvariantCultureIgnoreCase)) { cboLast.SelectedIndex = x; }
-                            else if (lower.Contains("pronoun")) { cboPronoun.SelectedIndex = x; }
-                            else if (lower.Equals("Agency", StringComparison.InvariantCultureIgnoreCase)) { cboAgency.SelectedIndex = x; }
-                            else if (lower.Equals("Organization", StringComparison.InvariantCultureIgnoreCase)) { cboAgency.SelectedIndex = x; }
-
-                            else if (lower.Contains("email")) { cboEmail.SelectedIndex = x; }
-
-                            else if (lower.Contains("phone")) { cboCell.SelectedIndex = x; }
-                            else if (lower.Contains("cell")) { cboCell.SelectedIndex = x; }
-
-                            else if (lower.Contains("country")) { cboCountry.SelectedIndex = x; }
-                            else if (lower.Contains("province")) { cboProvince.SelectedIndex = x; }
-                            else if (lower.Contains("territory")) { cboProvince.SelectedIndex = x; }
-
-                            else if (lower.Contains("kind")) { cboKind.SelectedIndex = x; }
-                            else if (lower.Contains("type")) { cboType.SelectedIndex = x; }
-
-                            else if (lower.Equals("home unit", StringComparison.InvariantCultureIgnoreCase)) { cboHomeUnit.SelectedIndex = x; }
-                            else if (lower.Contains("home unit")) { cboHomeUnit.SelectedIndex = x; }
-                            else if (lower.Equals("home agency", StringComparison.InvariantCultureIgnoreCase)) { cboHomeUnit.SelectedIndex = x; }
-
-                            else if (lower.Contains("call sign")) { cboCallsign.SelectedIndex = x; }
-                            else if (lower.Contains("callsign")) { cboCallsign.SelectedIndex = x; }
-
-                            else if (lower.Contains("allergies")) { cboAllergies.SelectedIndex = x; }
-                            else if (lower.Contains("dietary")) { cboDietary.SelectedIndex = x; }
-                            else if (lower.Contains("emergency")) { cboEmergerncy.SelectedIndex = x; }
+                            columns[x + 1].DisplayText = columns[x + 1].ValueText + " \"" + fields[x] + "\"";
+                            if (lower.Equals("First Name", StringComparison.InvariantCultureIgnoreCase)) { bestGuessColumns[0] = x; }
+                            else if (lower.Equals("First", StringComparison.InvariantCultureIgnoreCase)) { bestGuessColumns[0] = x; }
+                            else if (lower.Contains("middle")) { bestGuessColumns[1] = x; }
+                            else if (lower.Equals("Last Name", StringComparison.InvariantCultureIgnoreCase)) { bestGuessColumns[2] = x; }
+                            else if (lower.Equals("Last", StringComparison.InvariantCultureIgnoreCase)) { bestGuessColumns[2] = x; }
+                            else if (lower.Contains("pronoun")) { bestGuessColumns[4] = x; }
+                            else if (lower.Equals("Agency", StringComparison.InvariantCultureIgnoreCase)) { bestGuessColumns[7] = x; }
+                            else if (lower.Equals("Organization", StringComparison.InvariantCultureIgnoreCase)) { bestGuessColumns[7] = x; }
+                            else if (lower.Contains("email")) { bestGuessColumns[13] = x; }
+                            else if (lower.Contains("phone")) { bestGuessColumns[12] = x; }
+                            else if (lower.Contains("cell")) { bestGuessColumns[12] = x; }
+                            else if (lower.Contains("country")) { bestGuessColumns[5] = x; }
+                            else if (lower.Contains("province")) { bestGuessColumns[6] = x; }
+                            else if (lower.Contains("territory")) { bestGuessColumns[6] = x; }
+                            else if (lower.Contains("kind")) { bestGuessColumns[10] = x; }
+                            else if (lower.Contains("type")) { bestGuessColumns[11] = x; }
+                            else if (lower.Equals("home unit", StringComparison.InvariantCultureIgnoreCase)) { bestGuessColumns[9] = x; }
+                            else if (lower.Contains("home unit")) { bestGuessColumns[9] = x; }
+                            else if (lower.Equals("home agency", StringComparison.InvariantCultureIgnoreCase)) { bestGuessColumns[9] = x; }
+                            else if (lower.Contains("call sign")) { bestGuessColumns[14] = x; }
+                            else if (lower.Contains("callsign")) { bestGuessColumns[14] = x; }
+                            else if (lower.Contains("allergies")) { bestGuessColumns[16] = x; }
+                            else if (lower.Contains("dietary")) { bestGuessColumns[15] = x; }
+                            else if (lower.Contains("emergency")) { bestGuessColumns[17] = x; }
                         }
 
                     }
@@ -142,6 +164,7 @@ namespace Wildfire_ICS_Assist.OptionsForms
                 }
             }
             catch (Exception) { }
+            setExcelColumnNames();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -193,9 +216,15 @@ namespace Wildfire_ICS_Assist.OptionsForms
             int allergyCol = cboAllergies.SelectedIndex > 0 ? cboAllergies.SelectedIndex - 1 : -1;
             int emergCol = cboEmergerncy.SelectedIndex > 0 ? cboEmergerncy.SelectedIndex - 1 : -1;
 
-            List<string> agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
-            agencies = agencies.OrderBy(o => o).ToList();
-
+            List<string> agencies = new List<string>();
+            if((List<string>)Program.generalOptionsService.GetOptionsValue("Agencies") != null)
+            {
+                agencies = (List<string>)Program.generalOptionsService.GetOptionsValue("Agencies");
+            }
+            if (agencies != null)
+            {
+                agencies = agencies.OrderBy(o => o).ToList();
+            }
 
             using (TextFieldParser parser = new TextFieldParser(path))
             {

@@ -31,5 +31,29 @@ namespace WF_ICS_ClassLibrary.Utilities
             return columns;
 
         }
+
+        public static List<ComboBoxDataItem> getExcelDataColumns(bool includeBlank = false)
+        {
+            List<ComboBoxDataItem> columns = new List<ComboBoxDataItem>();
+            if (includeBlank)
+            {
+                columns.Add(new ComboBoxDataItem("-"));
+            }
+            for (int x = 0; x < 26; x++)
+            {
+                columns.Add(new ComboBoxDataItem(char.ConvertFromUtf32(65 + x)));
+            }
+            for (int x = 0; x < 26; x++)
+            {
+                columns.Add(new ComboBoxDataItem("A" + char.ConvertFromUtf32(65 + x)));
+            }
+            for (int x = 0; x < 26; x++)
+            {
+                columns.Add(new ComboBoxDataItem("B" + char.ConvertFromUtf32(65 + x)));
+            }
+
+            return columns;
+
+        }
     }
 }

@@ -93,8 +93,8 @@ namespace WF_ICS_ClassLibrary.Models
                     Body = bt.ToString();
                     return true;
                 case "UpdateExisting":
-                    Title = "Update Existing Members";
-                    bt.Append("If you select “Update existing members”, the system will try to update someone already in your list rather than adding a new person.  If an individual in your spreadsheet has the same name as someone already in your system, and their phone number, email address, or agency match, the system will assume they’re the same individual.");
+                    Title = "Update Existing Personnel";
+                    bt.Append("If you select “Update existing personnel”, the system will try to update someone already in your list rather than adding a new person.  If an individual in your spreadsheet has the same name as someone already in your system, and their phone number, email address, or agency match, the system will assume they’re the same individual.");
                     Body= bt.ToString();
                     return true;
                 case "DefaultProvAgency":

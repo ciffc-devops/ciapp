@@ -59,6 +59,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -66,35 +67,35 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.pnlSaved);
+            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(1007, 609);
-            this.splitContainer1.SplitterDistance = 137;
+            this.splitContainer1.Size = new System.Drawing.Size(588, 343);
+            this.splitContainer1.SplitterDistance = 121;
             this.splitContainer1.TabIndex = 1;
             // 
             // pnlSaved
             // 
-            this.pnlSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSaved.BackColor = System.Drawing.Color.White;
             this.pnlSaved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSaved.Controls.Add(this.btnAddSaved);
             this.pnlSaved.Controls.Add(this.cboSavedObjectives);
             this.pnlSaved.Controls.Add(this.label1);
-            this.pnlSaved.Location = new System.Drawing.Point(6, 7);
+            this.pnlSaved.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSaved.Location = new System.Drawing.Point(4, 4);
             this.pnlSaved.Name = "pnlSaved";
-            this.pnlSaved.Size = new System.Drawing.Size(989, 124);
+            this.pnlSaved.Size = new System.Drawing.Size(580, 113);
             this.pnlSaved.TabIndex = 1;
             // 
             // btnAddSaved
             // 
             this.btnAddSaved.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddSaved.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddSaved.Location = new System.Drawing.Point(858, 26);
+            this.btnAddSaved.Location = new System.Drawing.Point(450, 26);
             this.btnAddSaved.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddSaved.Name = "btnAddSaved";
             this.btnAddSaved.Size = new System.Drawing.Size(123, 80);
@@ -115,7 +116,7 @@
             this.cboSavedObjectives.FormattingEnabled = true;
             this.cboSavedObjectives.Location = new System.Drawing.Point(8, 51);
             this.cboSavedObjectives.Name = "cboSavedObjectives";
-            this.cboSavedObjectives.Size = new System.Drawing.Size(841, 32);
+            this.cboSavedObjectives.Size = new System.Drawing.Size(433, 32);
             this.cboSavedObjectives.TabIndex = 1;
             this.cboSavedObjectives.ValueMember = "ItemID";
             this.cboSavedObjectives.Leave += new System.EventHandler(this.cboSavedObjectives_Leave);
@@ -135,7 +136,7 @@
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Location = new System.Drawing.Point(4, 4);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -147,8 +148,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.btnSaveChanges);
             this.splitContainer2.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer2.Size = new System.Drawing.Size(1007, 468);
-            this.splitContainer2.SplitterDistance = 402;
+            this.splitContainer2.Size = new System.Drawing.Size(580, 210);
+            this.splitContainer2.SplitterDistance = 145;
             this.splitContainer2.TabIndex = 99;
             // 
             // panel2
@@ -163,7 +164,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1007, 402);
+            this.panel2.Size = new System.Drawing.Size(580, 145);
             this.panel2.TabIndex = 98;
             // 
             // txtNewObjective
@@ -171,10 +172,10 @@
             this.txtNewObjective.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewObjective.Location = new System.Drawing.Point(8, 51);
+            this.txtNewObjective.Location = new System.Drawing.Point(8, 55);
             this.txtNewObjective.Multiline = true;
             this.txtNewObjective.Name = "txtNewObjective";
-            this.txtNewObjective.Size = new System.Drawing.Size(991, 286);
+            this.txtNewObjective.Size = new System.Drawing.Size(429, 80);
             this.txtNewObjective.TabIndex = 101;
             this.txtNewObjective.Child = new System.Windows.Controls.TextBox();
             // 
@@ -184,11 +185,12 @@
             this.btnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
             this.btnHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHelp.Location = new System.Drawing.Point(958, 8);
+            this.btnHelp.Location = new System.Drawing.Point(531, 8);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(39, 37);
             this.btnHelp.TabIndex = 100;
             this.btnHelp.TabStop = false;
+            this.btnHelp.Tag = "Help";
             this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -197,7 +199,7 @@
             // 
             this.chkSaveForLater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSaveForLater.AutoSize = true;
-            this.chkSaveForLater.Location = new System.Drawing.Point(557, 357);
+            this.chkSaveForLater.Location = new System.Drawing.Point(130, 270);
             this.chkSaveForLater.Name = "chkSaveForLater";
             this.chkSaveForLater.Size = new System.Drawing.Size(229, 28);
             this.chkSaveForLater.TabIndex = 12;
@@ -208,7 +210,7 @@
             // 
             this.lblNewTitle.AutoSize = true;
             this.lblNewTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewTitle.Location = new System.Drawing.Point(3, 10);
+            this.lblNewTitle.Location = new System.Drawing.Point(9, 8);
             this.lblNewTitle.Name = "lblNewTitle";
             this.lblNewTitle.Size = new System.Drawing.Size(283, 29);
             this.lblNewTitle.TabIndex = 99;
@@ -216,12 +218,12 @@
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddNew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_371_plus;
-            this.btnAddNew.Location = new System.Drawing.Point(795, 346);
+            this.btnAddNew.Location = new System.Drawing.Point(446, 55);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(6);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(204, 48);
+            this.btnAddNew.Size = new System.Drawing.Size(123, 80);
             this.btnAddNew.TabIndex = 13;
             this.btnAddNew.Tag = "AddToIncident";
             this.btnAddNew.Text = "Add to Incident";
@@ -234,7 +236,7 @@
             this.btnSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChanges.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_199_save;
             this.btnSaveChanges.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSaveChanges.Location = new System.Drawing.Point(898, 6);
+            this.btnSaveChanges.Location = new System.Drawing.Point(471, 6);
             this.btnSaveChanges.Margin = new System.Windows.Forms.Padding(6);
             this.btnSaveChanges.Name = "btnSaveChanges";
             this.btnSaveChanges.Size = new System.Drawing.Size(103, 48);
@@ -263,11 +265,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 609);
+            this.ClientSize = new System.Drawing.Size(588, 343);
             this.Controls.Add(this.splitContainer1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(604, 429);
+            this.MinimumSize = new System.Drawing.Size(604, 382);
             this.Name = "IncidentObjectiveEntryForm";
             this.Text = "Add Incident Objective";
             this.Load += new System.EventHandler(this.IncidentObjectiveEntryForm_Load);

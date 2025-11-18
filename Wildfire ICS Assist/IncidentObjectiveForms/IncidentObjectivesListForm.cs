@@ -221,6 +221,7 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
         {
             IncidentObjective obj = new IncidentObjective();
             obj.OpPeriod = CurrentOpPeriod;
+            obj.SheetId = objectivesSheet.ID;
             obj.Active = true;
             obj.Priority = objectivesSheet.GetNextPriorityNumber();
             obj.ParentObjectiveID = Guid.Empty;
@@ -276,7 +277,7 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (tvObjectives.SelectedNode.Tag != null)
+            if (tvObjectives.SelectedNode != null && tvObjectives.SelectedNode.Tag != null)
             {
                 IncidentObjective obj = (IncidentObjective)tvObjectives.SelectedNode.Tag;
                 EditObjective(obj, false);
@@ -291,6 +292,7 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
                 IncidentObjective objective = new IncidentObjective();
                 objective.Active = true;
+                objective.SheetId = objectivesSheet.ID;
                 objective.OpPeriod = Program.CurrentOpPeriod;
                 objective.Priority = objectivesSheet.GetNextPriorityNumber(parent.ID);
                 objective.ParentObjectiveID = parent.ID;
@@ -300,10 +302,13 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (LgMessageBox.Show("Are you sure you want to delete this objective?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (tvObjectives.SelectedNode != null)
             {
-                IncidentObjective objective = (IncidentObjective)tvObjectives.SelectedNode.Tag;
-                deleteObjective(objective);
+                if (LgMessageBox.Show("Are you sure you want to delete this objective?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    IncidentObjective objective = (IncidentObjective)tvObjectives.SelectedNode.Tag;
+                    deleteObjective(objective);
+                }
             }
         }
 
