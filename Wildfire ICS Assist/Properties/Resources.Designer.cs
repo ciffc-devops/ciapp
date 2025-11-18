@@ -1302,7 +1302,7 @@ namespace Wildfire_ICS_Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have successfully imported [IMPORT] new members, and updated [UPDATE] existing members..
+        ///   Looks up a localized string similar to You have successfully imported [IMPORT] new personnel, and updated [UPDATE] existing personnel..
         /// </summary>
         internal static string MembersImported {
             get {

@@ -302,7 +302,7 @@
     <value>..\Resources\glyphicons-basic-89-book-address1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MembersImported" xml:space="preserve">
-    <value>You have successfully imported [IMPORT] new members, and updated [UPDATE] existing members.</value>
+    <value>You have successfully imported [IMPORT] new personnel, and updated [UPDATE] existing personnel.</value>
   </data>
   <data name="glyphicons_basic_539_barcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphicons-basic-539-barcode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -239,6 +239,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AgencyTools.cs" />
     <Compile Include="Utilities\ColourUtilities.cs" />
+    <Compile Include="Utilities\ComboBoxDataItem.cs" />
     <Compile Include="Utilities\CompressionTools.cs" />
     <Compile Include="Utilities\DateTools.cs" />
     <Compile Include="Utilities\EncryptionTools.cs" />

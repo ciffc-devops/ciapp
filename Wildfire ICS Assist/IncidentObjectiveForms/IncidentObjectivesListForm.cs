@@ -277,7 +277,7 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (tvObjectives.SelectedNode.Tag != null)
+            if (tvObjectives.SelectedNode != null && tvObjectives.SelectedNode.Tag != null)
             {
                 IncidentObjective obj = (IncidentObjective)tvObjectives.SelectedNode.Tag;
                 EditObjective(obj, false);
@@ -302,10 +302,13 @@ namespace Wildfire_ICS_Assist.IncidentObjectiveForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (LgMessageBox.Show("Are you sure you want to delete this objective?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (tvObjectives.SelectedNode != null)
             {
-                IncidentObjective objective = (IncidentObjective)tvObjectives.SelectedNode.Tag;
-                deleteObjective(objective);
+                if (LgMessageBox.Show("Are you sure you want to delete this objective?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    IncidentObjective objective = (IncidentObjective)tvObjectives.SelectedNode.Tag;
+                    deleteObjective(objective);
+                }
             }
         }
 
