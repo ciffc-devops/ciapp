@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 using WildfireICSDesktopServices.NewsServices;
 using Microsoft.VisualStudio.Utilities;
 using WildfireICSDesktopServices.PDFExportServiceClasses;
+using Sentry;
 
 namespace Wildfire_ICS_Assist
 {
@@ -55,6 +56,18 @@ namespace Wildfire_ICS_Assist
             }
 
             LoadColors(3);
+
+            // Init the Sentry SDK
+            SentrySdk.Init(o =>
+            {
+                // Tells which project in Sentry to send events to:
+                o.Dsn = "https://d43f7b97c283b79d930c6a9478aca494@o4511293765976064.ingest.de.sentry.io/4511293948428368";
+                // When configuring for the first time, to see what the SDK is doing:
+                o.Debug = true;
+            });
+            // Configure WinForms to throw exceptions so Sentry can capture them.
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
+
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
