@@ -509,5 +509,10 @@ namespace Wildfire_ICS_Assist
                 MoveToCheckInDetailsPage();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Height is " + personnelEditControl1.Size.Height.ToString() + " and width is " + personnelEditControl1.Size.Width.ToString());
+        }
     }
 }

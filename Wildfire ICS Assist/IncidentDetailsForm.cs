@@ -2,6 +2,7 @@
 using NetworkCommsDotNet.Connections;
 using NetworkCommsDotNet.DPSBase;
 using NetworkCommsDotNet.Tools;
+using Sentry;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,9 +53,9 @@ namespace Wildfire_ICS_Assist
             Thread.CurrentThread.CurrentCulture = new CultureInfo("fr");
             */
             
-            InitializeComponent(); 
+            InitializeComponent();
 
-            
+
             menuStrip1.BackColor = Program.AccentColor;
             System.Windows.Forms.Application.EnableVisualStyles();
             LastAutoBackup = DateTime.Now;

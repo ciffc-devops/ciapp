@@ -30,6 +30,14 @@ namespace Wildfire_ICS_Assist
 
         private void OperationalGroupsForm_Load(object sender, EventArgs e)
         {
+            if (Program.generalOptionsService.GetIntOptionsValue("FormSet") == 1)
+            {
+                viewICS204APDFsToolStripMenuItem.Visible = true;
+            } else
+            {
+                viewICS204APDFsToolStripMenuItem.Visible = false;
+            }
+            
             if(Program.CurrentIncident.ActiveOperationalGroups.Count == 0)
             {
                 Globals.incidentService.CurrentIncident.CreateAllOperationalGroupsAsNeeded(Program.CurrentOpPeriod);
@@ -656,8 +664,11 @@ namespace Wildfire_ICS_Assist
 
         private void printLogisticsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
+            //ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
+            OperationalGroup SelectedOpGroup = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
+            ICSRole OpGroupLeaderRole = Program.CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == SelectedOpGroup.LeaderICSRoleID);
+
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, OpGroupLeaderRole, false);
 
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
@@ -758,8 +769,9 @@ namespace Wildfire_ICS_Assist
 
         private void viewLogisticsOverviewPDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ICSRole role = (ICSRole)treeOpsChart.SelectedNode.Tag;
-            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, role, false);
+            OperationalGroup SelectedOpGroup = (OperationalGroup)treeOpsChart.SelectedNode.Tag;
+            ICSRole OpGroupLeaderRole = Program.CurrentOrgChart.ActiveRoles.FirstOrDefault(o => o.RoleID == SelectedOpGroup.LeaderICSRoleID);
+            List<byte[]> allPDFs = Program.pdfExportService.exportLogisticsSummaryToPDF(Program.CurrentTask, Program.CurrentOpPeriod, OpGroupLeaderRole, false);
 
             string fullFilepath = "";
             fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);

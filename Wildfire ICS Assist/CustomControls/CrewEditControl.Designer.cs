@@ -66,6 +66,7 @@
             this.cboAgency = new System.Windows.Forms.ComboBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroup)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -80,6 +81,7 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label11
@@ -175,13 +177,13 @@
             // 
             this.btnDeleteResource.Enabled = false;
             this.btnDeleteResource.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_17_bin;
-            this.btnDeleteResource.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnDeleteResource.Location = new System.Drawing.Point(2, 392);
+            this.btnDeleteResource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDeleteResource.Location = new System.Drawing.Point(3, 238);
             this.btnDeleteResource.Name = "btnDeleteResource";
-            this.btnDeleteResource.Size = new System.Drawing.Size(157, 67);
+            this.btnDeleteResource.Size = new System.Drawing.Size(181, 41);
             this.btnDeleteResource.TabIndex = 10;
             this.btnDeleteResource.Text = "Delete";
-            this.btnDeleteResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDeleteResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDeleteResource.UseVisualStyleBackColor = true;
             this.btnDeleteResource.Click += new System.EventHandler(this.btnDeleteResource_Click);
             // 
@@ -206,7 +208,7 @@
             this.dgvGroup.RowHeadersVisible = false;
             this.dgvGroup.RowTemplate.Height = 30;
             this.dgvGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGroup.Size = new System.Drawing.Size(577, 482);
+            this.dgvGroup.Size = new System.Drawing.Size(554, 291);
             this.dgvGroup.TabIndex = 8;
             this.dgvGroup.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvGroup_CellFormatting);
             this.dgvGroup.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvGroup_EditingControlShowing);
@@ -291,13 +293,13 @@
             // btnAddPerson
             // 
             this.btnAddPerson.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_893_user_worker;
-            this.btnAddPerson.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAddPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddPerson.Location = new System.Drawing.Point(3, 3);
             this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(157, 67);
+            this.btnAddPerson.Size = new System.Drawing.Size(181, 41);
             this.btnAddPerson.TabIndex = 6;
             this.btnAddPerson.Text = "Add Person";
-            this.btnAddPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAddPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddPerson.UseVisualStyleBackColor = true;
             this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
             // 
@@ -305,13 +307,13 @@
             // 
             this.btnAddVehicle.Enabled = false;
             this.btnAddVehicle.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_29_cars;
-            this.btnAddVehicle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAddVehicle.Location = new System.Drawing.Point(2, 76);
+            this.btnAddVehicle.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAddVehicle.Location = new System.Drawing.Point(3, 50);
             this.btnAddVehicle.Name = "btnAddVehicle";
-            this.btnAddVehicle.Size = new System.Drawing.Size(157, 67);
+            this.btnAddVehicle.Size = new System.Drawing.Size(181, 41);
             this.btnAddVehicle.TabIndex = 7;
             this.btnAddVehicle.Text = "Add Veh/Equip";
-            this.btnAddVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAddVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddVehicle.UseVisualStyleBackColor = true;
             this.btnAddVehicle.Click += new System.EventHandler(this.btnAddVehicle_Click);
             // 
@@ -319,13 +321,13 @@
             // 
             this.btnEditSelected.Enabled = false;
             this.btnEditSelected.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_31_pencil;
-            this.btnEditSelected.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEditSelected.Location = new System.Drawing.Point(2, 149);
+            this.btnEditSelected.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEditSelected.Location = new System.Drawing.Point(3, 97);
             this.btnEditSelected.Name = "btnEditSelected";
-            this.btnEditSelected.Size = new System.Drawing.Size(157, 67);
+            this.btnEditSelected.Size = new System.Drawing.Size(181, 41);
             this.btnEditSelected.TabIndex = 8;
             this.btnEditSelected.Text = "Edit Selected";
-            this.btnEditSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEditSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEditSelected.UseVisualStyleBackColor = true;
             this.btnEditSelected.Click += new System.EventHandler(this.btnEditSelected_Click);
             // 
@@ -333,13 +335,13 @@
             // 
             this.btnRemoveFromCrew.Enabled = false;
             this.btnRemoveFromCrew.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_372_minus;
-            this.btnRemoveFromCrew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRemoveFromCrew.Location = new System.Drawing.Point(2, 295);
+            this.btnRemoveFromCrew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRemoveFromCrew.Location = new System.Drawing.Point(3, 191);
             this.btnRemoveFromCrew.Name = "btnRemoveFromCrew";
-            this.btnRemoveFromCrew.Size = new System.Drawing.Size(157, 91);
+            this.btnRemoveFromCrew.Size = new System.Drawing.Size(181, 41);
             this.btnRemoveFromCrew.TabIndex = 9;
-            this.btnRemoveFromCrew.Text = "Remove from Crew";
-            this.btnRemoveFromCrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRemoveFromCrew.Text = "Remove";
+            this.btnRemoveFromCrew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRemoveFromCrew.UseVisualStyleBackColor = true;
             this.btnRemoveFromCrew.Click += new System.EventHandler(this.btnRemoveFromCrew_Click);
             // 
@@ -376,7 +378,7 @@
             // 
             this.rbCrew.AutoSize = true;
             this.rbCrew.Checked = true;
-            this.rbCrew.Location = new System.Drawing.Point(3, 465);
+            this.rbCrew.Location = new System.Drawing.Point(3, 285);
             this.rbCrew.Name = "rbCrew";
             this.rbCrew.Size = new System.Drawing.Size(72, 28);
             this.rbCrew.TabIndex = 128;
@@ -389,7 +391,7 @@
             // rbHECrew
             // 
             this.rbHECrew.AutoSize = true;
-            this.rbHECrew.Location = new System.Drawing.Point(0, 489);
+            this.rbHECrew.Location = new System.Drawing.Point(3, 319);
             this.rbHECrew.Name = "rbHECrew";
             this.rbHECrew.Size = new System.Drawing.Size(227, 28);
             this.rbHECrew.TabIndex = 129;
@@ -437,13 +439,13 @@
             // 
             this.btnChangeID.Enabled = false;
             this.btnChangeID.Image = global::Wildfire_ICS_Assist.Properties.Resources.glyphicons_basic_740_hash;
-            this.btnChangeID.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnChangeID.Location = new System.Drawing.Point(3, 222);
+            this.btnChangeID.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnChangeID.Location = new System.Drawing.Point(3, 144);
             this.btnChangeID.Name = "btnChangeID";
-            this.btnChangeID.Size = new System.Drawing.Size(157, 67);
+            this.btnChangeID.Size = new System.Drawing.Size(181, 41);
             this.btnChangeID.TabIndex = 133;
             this.btnChangeID.Text = "Change ID #";
-            this.btnChangeID.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnChangeID.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnChangeID.UseVisualStyleBackColor = true;
             this.btnChangeID.Click += new System.EventHandler(this.btnChangeID_Click);
             // 
@@ -513,7 +515,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(745, 722);
+            this.splitContainer2.Size = new System.Drawing.Size(745, 531);
             this.splitContainer2.SplitterDistance = 236;
             this.splitContainer2.TabIndex = 137;
             // 
@@ -527,21 +529,30 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.btnAddPerson);
-            this.splitContainer3.Panel1.Controls.Add(this.btnDeleteResource);
-            this.splitContainer3.Panel1.Controls.Add(this.rbHECrew);
-            this.splitContainer3.Panel1.Controls.Add(this.btnChangeID);
-            this.splitContainer3.Panel1.Controls.Add(this.btnAddVehicle);
-            this.splitContainer3.Panel1.Controls.Add(this.rbCrew);
-            this.splitContainer3.Panel1.Controls.Add(this.btnEditSelected);
-            this.splitContainer3.Panel1.Controls.Add(this.btnRemoveFromCrew);
+            this.splitContainer3.Panel1.Controls.Add(this.flowLayoutPanel1);
             // 
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dgvGroup);
-            this.splitContainer3.Size = new System.Drawing.Size(745, 482);
-            this.splitContainer3.SplitterDistance = 164;
+            this.splitContainer3.Size = new System.Drawing.Size(745, 291);
+            this.splitContainer3.SplitterDistance = 187;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnAddPerson);
+            this.flowLayoutPanel1.Controls.Add(this.btnAddVehicle);
+            this.flowLayoutPanel1.Controls.Add(this.btnEditSelected);
+            this.flowLayoutPanel1.Controls.Add(this.btnChangeID);
+            this.flowLayoutPanel1.Controls.Add(this.btnRemoveFromCrew);
+            this.flowLayoutPanel1.Controls.Add(this.btnDeleteResource);
+            this.flowLayoutPanel1.Controls.Add(this.rbCrew);
+            this.flowLayoutPanel1.Controls.Add(this.rbHECrew);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(187, 291);
+            this.flowLayoutPanel1.TabIndex = 134;
             // 
             // CrewEditControl
             // 
@@ -550,9 +561,8 @@
             this.Controls.Add(this.splitContainer2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.MinimumSize = new System.Drawing.Size(625, 705);
             this.Name = "CrewEditControl";
-            this.Size = new System.Drawing.Size(745, 722);
+            this.Size = new System.Drawing.Size(745, 531);
             this.Load += new System.EventHandler(this.CrewEditControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroup)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -568,10 +578,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -614,5 +625,6 @@
         private System.Windows.Forms.ComboBox cboAgency;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
