@@ -3347,7 +3347,7 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
             path = FileAccessClasses.getUniqueFileName(outputFileName, path);
 
 
-            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-204A-WF Assignment Details.pdf", FormSet);
+            string fileToUse = PDFExtraTools.getPDFFilePath("ICS-204A Assignment Details.pdf", FormSet);
 
             try
             {
