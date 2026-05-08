@@ -107,8 +107,8 @@ namespace Wildfire_ICS_Assist
             DownloadNewsOperationCompleted += IncidentDetailsForm_DownloadNewsOperationCompleted;
            DownloadNewsAsync();
 
-           
 
+            
 
 #if DEBUG
             txtTaskName.Text = "test " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
