@@ -778,7 +778,7 @@ namespace WildfireICSDesktopServices
                         coord.Latitude = hospital.Latitude;
                         coord.Longitude = hospital.Longitude;
                         string format = Globals._generalOptionsService.GetOptionsValue("CoordinateFormat").ToString();
-                        stamper.AcroFields.SetField("Address Lat Long if HelipadRow" + (a + 1), coord.CoordinateOutput(format));
+                        stamper.AcroFields.SetField("Address Lat And Long if HelipadRow" + (a + 1), coord.CoordinateOutput(format));
                     }
                     else
                     {
