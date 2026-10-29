@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualBasic;
-using Microsoft.VisualStudio.RpcContracts.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
