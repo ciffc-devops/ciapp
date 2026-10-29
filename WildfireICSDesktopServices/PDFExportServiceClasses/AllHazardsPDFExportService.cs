@@ -753,8 +753,8 @@ namespace WildfireICSDesktopServices.PDFExportServiceClasses
                         Coordinate coord = new Coordinate();
                         coord.Latitude = hospital.Latitude;
                         coord.Longitude = hospital.Longitude;
-                        GeneralOptionsService service = new GeneralOptionsService();
-                        stamper.AcroFields.SetField("Address Lat Long if HelipadRow" + (a + 1), coord.CoordinateOutput(service.GetOptionsValue("CoordinateFormat").ToString()));
+                        string format = Globals._generalOptionsService.GetOptionsValue("CoordinateFormat").ToString();
+                        stamper.AcroFields.SetField("Address Lat Long if HelipadRow" + (a + 1), coord.CoordinateOutput(format));
                     }
                     else
                     {

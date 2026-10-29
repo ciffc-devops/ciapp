@@ -43,7 +43,12 @@ namespace Wildfire_ICS_Assist.OptionsForms
             Coordinate coord = new Coordinate();
             coord.Latitude = selectedHospital.Latitude;
             coord.Longitude = selectedHospital.Longitude;
-            if (coord.Latitude != 0 || coord.Longitude != 0) { txtLatitude.Text = coord.CoordinateOutput(Program.generalOptionsService.GetOptionsValue("CoordinateFormat").ToString()); } 
+            if (coord.Latitude != 0 || coord.Longitude != 0)
+            {
+
+                string coordinateFormat = Program.generalOptionsService.GetOptionsValue("PositionFormat").ToString();
+                txtLatitude.Text = coord.CoordinateOutput(coordinateFormat);
+            }
             else { txtLatitude.Text = string.Empty; }
 
             numTravelAir.Value = selectedHospital.travelTimeAir;
