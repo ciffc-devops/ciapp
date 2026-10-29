@@ -13,7 +13,6 @@ using WF_ICS_ClassLibrary;
 using WF_ICS_ClassLibrary.Utilities;
 using System.Runtime.InteropServices;
 using WildfireICSDesktopServices.NewsServices;
-using Microsoft.VisualStudio.Utilities;
 using WildfireICSDesktopServices.PDFExportServiceClasses;
 using Sentry;
 
@@ -27,7 +26,10 @@ namespace Wildfire_ICS_Assist
         [STAThread]
         static void Main()
         {
-            if (Environment.OSVersion.Version.Major >= 6) SetProcessDpiAwarenessContext(DpiAwarenessContext.Unaware);
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                SetProcessDpiAwarenessContext(new IntPtr(-1));
+            }
 
             generalOptionsService = new GeneralOptionsService(true);
             WF_ICS_ClassLibrary.Globals._generalOptionsService = generalOptionsService;
@@ -76,7 +78,7 @@ namespace Wildfire_ICS_Assist
         }
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern int SetProcessDpiAwarenessContext(DpiAwarenessContext value);
+        static extern bool SetProcessDpiAwarenessContext(IntPtr dpiContext);
 
 
         /*

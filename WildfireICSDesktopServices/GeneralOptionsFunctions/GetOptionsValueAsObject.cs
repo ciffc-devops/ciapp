@@ -83,6 +83,8 @@ namespace SARAssistDesktopServices.GeneralOptionsFunctions.Queries
                     return _options.AllHospitals;
                 case "SavedAmbulances":
                     return _options.AllAmbulanceServices;
+                case "CoordinateFormat":
+                    return _options.PositionFormat;
                 default:
                     return null;
             }

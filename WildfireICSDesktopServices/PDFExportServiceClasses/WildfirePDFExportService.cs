@@ -777,8 +777,8 @@ namespace WildfireICSDesktopServices
                         Coordinate coord = new Coordinate();
                         coord.Latitude = hospital.Latitude;
                         coord.Longitude = hospital.Longitude;
-                        GeneralOptionsService service = new GeneralOptionsService();
-                        stamper.AcroFields.SetField("Address Lat And Long if HelipadRow" + (a + 1), coord.CoordinateOutput(service.GetOptionsValue("CoordinateFormat").ToString()));
+                        string format = Globals._generalOptionsService.GetOptionsValue("CoordinateFormat").ToString();
+                        stamper.AcroFields.SetField("Address Lat And Long if HelipadRow" + (a + 1), coord.CoordinateOutput(format));
                     }
                     else
                     {
@@ -1884,7 +1884,6 @@ namespace WildfireICSDesktopServices
 
                     double totalHours = 0;
                     decimal totalKMs = 0;
-                    GeneralOptions options = new GeneralOptionsService().GetGeneralOptions();
 
                     for (int x = 0; x < statuses.Count; x++)
                     {
