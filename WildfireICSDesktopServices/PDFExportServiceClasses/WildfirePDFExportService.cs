@@ -3930,6 +3930,13 @@ namespace WildfireICSDesktopServices
                 }
             }
 
+            //Are there any strike teams or task forces reporting directly to the OSC?
+            OperationalGroup osc = task.ActiveOperationalGroups.FirstOrDefault(o => o.OpPeriod == OpPeriodToExport && o.ParentID == Guid.Empty);
+            List<OperationalGroup> oscChildren = task.ActiveOperationalGroups.Where(o => o.OpPeriod == OpPeriodToExport && o.ParentID == osc.ID && (o.IsStrikeTeam || o.IsTaskForce)).ToList();
+            if (oscChildren.Count > 0)
+            {
+                GroupsToPrint.Insert(0, osc);
+            }
 
 
             foreach (OperationalGroup group in GroupsToPrint)

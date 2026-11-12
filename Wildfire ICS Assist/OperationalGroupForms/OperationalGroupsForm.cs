@@ -697,46 +697,60 @@ namespace Wildfire_ICS_Assist
 
         private void viewICS204PDFsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<byte[]> allPDFs = new List<byte[]>();
+            bool any204sToMake = false;
+            any204sToMake = Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.OpPeriod == Program.CurrentOpPeriod && (o.GroupType.EqualsWithNull("Division") || o.GroupType.EqualsWithNull("Task Force") || o.GroupType.EqualsWithNull("Strike Team") || o.GroupType.EqualsWithNull("Group")));
+
+            //TODO
+            //This isn't printing 204s when a strike team or task force is just reporting directly to the ops section chief
 
 
-            string fullFilepath = "";
-            //int end = CurrentIncident.FileName.LastIndexOf("\\");
-            fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
 
-            string fullOutputFilename = "ICS 204 - " + Program.CurrentIncident.IncidentNameAndNumberForPath + " Op " + Program.CurrentOpPeriod;    // + ".pdf";
-
-            fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
-
-            PDFCreationResults results = Program.pdfExportService.exportAllAssignmentSummariesToPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false);
-            if (results.errors.Any())
+            if (any204sToMake)
             {
-                LogService log = new LogService();
-                foreach (Exception ex in results.errors)
-                {
-                    log.Log("Exported ICS 204 PDF error: " + ex.ToString());
-                }
+                List<byte[]> allPDFs = new List<byte[]>();
 
-            }
-            if (results.Successful)
+
+                string fullFilepath = "";
+                //int end = CurrentIncident.FileName.LastIndexOf("\\");
+                fullFilepath = FileAccessClasses.getWritablePath(Program.CurrentIncident);
+
+                string fullOutputFilename = "ICS 204 - " + Program.CurrentIncident.IncidentNameAndNumberForPath + " Op " + Program.CurrentOpPeriod;    // + ".pdf";
+
+                fullFilepath = FileAccessClasses.getUniqueFileName(fullOutputFilename, fullFilepath);
+
+                PDFCreationResults results = Program.pdfExportService.exportAllAssignmentSummariesToPDF(Program.CurrentIncident, Program.CurrentOpPeriod, false);
+                if (results.errors.Any())
+                {
+                    LogService log = new LogService();
+                    foreach (Exception ex in results.errors)
+                    {
+                        log.Log("Exported ICS 204 PDF error: " + ex.ToString());
+                    }
+
+                }
+                if (results.Successful)
+                {
+                    allPDFs.AddRange(results.bytes);
+
+
+                    byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
+                    try
+                    {
+                        File.WriteAllBytes(fullFilepath, fullFile);
+                        System.Diagnostics.Process.Start(fullFilepath);
+                    }
+                    catch (Exception)
+                    {
+                        LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
+                    }
+                }
+                else
+                {
+                    LgMessageBox.Show("There was an error trying to export the ICS 204 PDFs.  Please check the log for details.");
+                }
+            } else
             {
-                allPDFs.AddRange(results.bytes);
-
-
-                byte[] fullFile = FileAccessClasses.concatAndAddContent(allPDFs);
-                try
-                {
-                    File.WriteAllBytes(fullFilepath, fullFile);
-                    System.Diagnostics.Process.Start(fullFilepath);
-                }
-                catch (Exception)
-                {
-                    LgMessageBox.Show("There was an error trying to save " + fullFilepath + " please verify the path is accessible.");
-                }
-            }
-            else
-            {
-                LgMessageBox.Show("There was an error trying to export the ICS 204 PDFs.  Please check the log for details.");
+                LgMessageBox.Show("There are no Task Forces, Strike Teams, or Groups.  Please add some before exporting ICS 204 PDFs.");
             }
         }
 
