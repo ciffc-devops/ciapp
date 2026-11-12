@@ -301,7 +301,7 @@
             this.toolStripSeparator3,
             this.exportToSpreadsheetToolStripMenuItem});
             this.cmsOutput.Name = "cmsOutput";
-            this.cmsOutput.Size = new System.Drawing.Size(324, 152);
+            this.cmsOutput.Size = new System.Drawing.Size(324, 130);
             // 
             // viewICS204PDFsToolStripMenuItem
             // 
