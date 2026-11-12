@@ -698,7 +698,7 @@ namespace Wildfire_ICS_Assist
         private void viewICS204PDFsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool any204sToMake = false;
-            any204sToMake = Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.OpPeriod == Program.CurrentOpPeriod && (o.GroupType.EqualsWithNull("Task Force") || o.GroupType.EqualsWithNull("Strike Team") || o.GroupType.EqualsWithNull("Group")));
+            any204sToMake = Program.CurrentIncident.ActiveOperationalGroups.Any(o => o.OpPeriod == Program.CurrentOpPeriod && (o.GroupType.EqualsWithNull("Division") || o.GroupType.EqualsWithNull("Task Force") || o.GroupType.EqualsWithNull("Strike Team") || o.GroupType.EqualsWithNull("Group")));
 
             //TODO
             //This isn't printing 204s when a strike team or task force is just reporting directly to the ops section chief
